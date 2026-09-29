@@ -98,39 +98,32 @@ class _CopyWithStubImpl_Variables_Mutation_createJob<TRes>
 }
 
 class Mutation_createJob {
-  Mutation_createJob({this.insertJobsOne, this.$__typename = 'mutation_root'});
+  Mutation_createJob({this.insertJobsOne});
 
   factory Mutation_createJob.fromJson(Map<String, dynamic> json) {
     final l$insertJobsOne = json['insertJobsOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_createJob(
       insertJobsOne: l$insertJobsOne == null
           ? null
           : Mutation_createJob_insertJobsOne.fromJson(
               (l$insertJobsOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_createJob_insertJobsOne? insertJobsOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertJobsOne = insertJobsOne;
     _resultData['insertJobsOne'] = l$insertJobsOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertJobsOne = insertJobsOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertJobsOne, l$$__typename]);
+    return Object.hashAll([l$insertJobsOne]);
   }
 
   @override
@@ -144,11 +137,6 @@ class Mutation_createJob {
     final l$insertJobsOne = insertJobsOne;
     final lOther$insertJobsOne = other.insertJobsOne;
     if (l$insertJobsOne != lOther$insertJobsOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -169,10 +157,7 @@ abstract class CopyWith_Mutation_createJob<TRes> {
   factory CopyWith_Mutation_createJob.stub(TRes res) =
       _CopyWithStubImpl_Mutation_createJob;
 
-  TRes call({
-    Mutation_createJob_insertJobsOne? insertJobsOne,
-    String? $__typename,
-  });
+  TRes call({Mutation_createJob_insertJobsOne? insertJobsOne});
   CopyWith_Mutation_createJob_insertJobsOne<TRes> get insertJobsOne;
 }
 
@@ -186,17 +171,11 @@ class _CopyWithImpl_Mutation_createJob<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertJobsOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertJobsOne = _undefined}) => _then(
     Mutation_createJob(
       insertJobsOne: insertJobsOne == _undefined
           ? _instance.insertJobsOne
           : (insertJobsOne as Mutation_createJob_insertJobsOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -217,10 +196,7 @@ class _CopyWithStubImpl_Mutation_createJob<TRes>
 
   TRes _res;
 
-  call({
-    Mutation_createJob_insertJobsOne? insertJobsOne,
-    String? $__typename,
-  }) => _res;
+  call({Mutation_createJob_insertJobsOne? insertJobsOne}) => _res;
 
   CopyWith_Mutation_createJob_insertJobsOne<TRes> get insertJobsOne =>
       CopyWith_Mutation_createJob_insertJobsOne.stub(_res);
@@ -297,13 +273,6 @@ const documentNodeMutationcreateJob = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

@@ -36,16 +36,9 @@ mutation updatePerson(
   $insertHistoryCallHistoryOne: Boolean! = true
   $insertHistoryVisitHistoryOne: Boolean! = true
 ) {
-  updatePersonsByPk(pkColumns: { id: $personId }, _set: $newPerson)
-    @include(if: $updatePersonsByPk) {
-    ...Person
-  }
-
-  updateAddressesByPk(pkColumns: { id: $addressId }, _set: $newAddress)
-    @include(if: $updateAddressByPk) {
-    ...Address
-  }
-
+  # Root fields run in order, and edit permission on a person comes from its
+  # services, groups, study year and gender together. Linking first, updating,
+  # then unlinking keeps every intermediate row inside the old or new scope.
   insertPersonsServices(objects: $newServices)
     @include(if: $insertPersonsServices) {
     affectedRows
@@ -59,6 +52,16 @@ mutation updatePerson(
   }
   insertPersonsTags(objects: $newTags) @include(if: $insertPersonsTags) {
     affectedRows
+  }
+
+  updatePersonsByPk(pkColumns: { id: $personId }, _set: $newPerson)
+    @include(if: $updatePersonsByPk) {
+    ...Person
+  }
+
+  updateAddressesByPk(pkColumns: { id: $addressId }, _set: $newAddress)
+    @include(if: $updateAddressByPk) {
+    ...Address
   }
 
   deletePersonsTags(
@@ -176,5 +179,4 @@ mutation updatePersonSpiritData(
     }
     __typename
   }
-  __typename
 }

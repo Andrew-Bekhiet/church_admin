@@ -369,7 +369,6 @@ class Mutation_updateUserPermissions {
     this.insertAuthUsersPermissions,
     this.deleteAuthUsersAdminOn,
     this.insertAuthUsersAdminOn,
-    this.$__typename = 'mutation_root',
   });
 
   factory Mutation_updateUserPermissions.fromJson(Map<String, dynamic> json) {
@@ -377,7 +376,6 @@ class Mutation_updateUserPermissions {
     final l$insertAuthUsersPermissions = json['insertAuthUsersPermissions'];
     final l$deleteAuthUsersAdminOn = json['deleteAuthUsersAdminOn'];
     final l$insertAuthUsersAdminOn = json['insertAuthUsersAdminOn'];
-    final l$$__typename = json['__typename'];
     return Mutation_updateUserPermissions(
       deleteAuthUsersPermissions: l$deleteAuthUsersPermissions == null
           ? null
@@ -399,7 +397,6 @@ class Mutation_updateUserPermissions {
           : Mutation_updateUserPermissions_insertAuthUsersAdminOn.fromJson(
               (l$insertAuthUsersAdminOn as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
@@ -415,8 +412,6 @@ class Mutation_updateUserPermissions {
   final Mutation_updateUserPermissions_insertAuthUsersAdminOn?
   insertAuthUsersAdminOn;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$deleteAuthUsersPermissions = deleteAuthUsersPermissions;
@@ -429,8 +424,6 @@ class Mutation_updateUserPermissions {
     _resultData['deleteAuthUsersAdminOn'] = l$deleteAuthUsersAdminOn?.toJson();
     final l$insertAuthUsersAdminOn = insertAuthUsersAdminOn;
     _resultData['insertAuthUsersAdminOn'] = l$insertAuthUsersAdminOn?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
@@ -440,13 +433,11 @@ class Mutation_updateUserPermissions {
     final l$insertAuthUsersPermissions = insertAuthUsersPermissions;
     final l$deleteAuthUsersAdminOn = deleteAuthUsersAdminOn;
     final l$insertAuthUsersAdminOn = insertAuthUsersAdminOn;
-    final l$$__typename = $__typename;
     return Object.hashAll([
       l$deleteAuthUsersPermissions,
       l$insertAuthUsersPermissions,
       l$deleteAuthUsersAdminOn,
       l$insertAuthUsersAdminOn,
-      l$$__typename,
     ]);
   }
 
@@ -479,11 +470,6 @@ class Mutation_updateUserPermissions {
     if (l$insertAuthUsersAdminOn != lOther$insertAuthUsersAdminOn) {
       return false;
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -512,7 +498,6 @@ abstract class CopyWith_Mutation_updateUserPermissions<TRes> {
     deleteAuthUsersAdminOn,
     Mutation_updateUserPermissions_insertAuthUsersAdminOn?
     insertAuthUsersAdminOn,
-    String? $__typename,
   });
   CopyWith_Mutation_updateUserPermissions_deleteAuthUsersPermissions<TRes>
   get deleteAuthUsersPermissions;
@@ -539,7 +524,6 @@ class _CopyWithImpl_Mutation_updateUserPermissions<TRes>
     Object? insertAuthUsersPermissions = _undefined,
     Object? deleteAuthUsersAdminOn = _undefined,
     Object? insertAuthUsersAdminOn = _undefined,
-    Object? $__typename = _undefined,
   }) => _then(
     Mutation_updateUserPermissions(
       deleteAuthUsersPermissions: deleteAuthUsersPermissions == _undefined
@@ -558,9 +542,6 @@ class _CopyWithImpl_Mutation_updateUserPermissions<TRes>
           ? _instance.insertAuthUsersAdminOn
           : (insertAuthUsersAdminOn
                 as Mutation_updateUserPermissions_insertAuthUsersAdminOn?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -634,7 +615,6 @@ class _CopyWithStubImpl_Mutation_updateUserPermissions<TRes>
     deleteAuthUsersAdminOn,
     Mutation_updateUserPermissions_insertAuthUsersAdminOn?
     insertAuthUsersAdminOn,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_updateUserPermissions_deleteAuthUsersPermissions<TRes>
@@ -978,13 +958,6 @@ const documentNodeMutationupdateUserPermissions = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

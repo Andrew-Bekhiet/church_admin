@@ -100,42 +100,32 @@ class _CopyWithStubImpl_Variables_Mutation_createDistrict<TRes>
 }
 
 class Mutation_createDistrict {
-  Mutation_createDistrict({
-    this.insertDistrictsOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_createDistrict({this.insertDistrictsOne});
 
   factory Mutation_createDistrict.fromJson(Map<String, dynamic> json) {
     final l$insertDistrictsOne = json['insertDistrictsOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_createDistrict(
       insertDistrictsOne: l$insertDistrictsOne == null
           ? null
           : Mutation_createDistrict_insertDistrictsOne.fromJson(
               (l$insertDistrictsOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_createDistrict_insertDistrictsOne? insertDistrictsOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertDistrictsOne = insertDistrictsOne;
     _resultData['insertDistrictsOne'] = l$insertDistrictsOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertDistrictsOne = insertDistrictsOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertDistrictsOne, l$$__typename]);
+    return Object.hashAll([l$insertDistrictsOne]);
   }
 
   @override
@@ -149,11 +139,6 @@ class Mutation_createDistrict {
     final l$insertDistrictsOne = insertDistrictsOne;
     final lOther$insertDistrictsOne = other.insertDistrictsOne;
     if (l$insertDistrictsOne != lOther$insertDistrictsOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -174,10 +159,7 @@ abstract class CopyWith_Mutation_createDistrict<TRes> {
   factory CopyWith_Mutation_createDistrict.stub(TRes res) =
       _CopyWithStubImpl_Mutation_createDistrict;
 
-  TRes call({
-    Mutation_createDistrict_insertDistrictsOne? insertDistrictsOne,
-    String? $__typename,
-  });
+  TRes call({Mutation_createDistrict_insertDistrictsOne? insertDistrictsOne});
   CopyWith_Mutation_createDistrict_insertDistrictsOne<TRes>
   get insertDistrictsOne;
 }
@@ -192,17 +174,11 @@ class _CopyWithImpl_Mutation_createDistrict<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertDistrictsOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertDistrictsOne = _undefined}) => _then(
     Mutation_createDistrict(
       insertDistrictsOne: insertDistrictsOne == _undefined
           ? _instance.insertDistrictsOne
           : (insertDistrictsOne as Mutation_createDistrict_insertDistrictsOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -226,10 +202,8 @@ class _CopyWithStubImpl_Mutation_createDistrict<TRes>
 
   TRes _res;
 
-  call({
-    Mutation_createDistrict_insertDistrictsOne? insertDistrictsOne,
-    String? $__typename,
-  }) => _res;
+  call({Mutation_createDistrict_insertDistrictsOne? insertDistrictsOne}) =>
+      _res;
 
   CopyWith_Mutation_createDistrict_insertDistrictsOne<TRes>
   get insertDistrictsOne =>
@@ -307,13 +281,6 @@ const documentNodeMutationcreateDistrict = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

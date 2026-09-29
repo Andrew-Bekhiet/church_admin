@@ -212,11 +212,10 @@ class _CopyWithStubImpl_Variables_Query_personsNames<TRes>
 }
 
 class Query_personsNames {
-  Query_personsNames({required this.persons, this.$__typename = 'query_root'});
+  Query_personsNames({required this.persons});
 
   factory Query_personsNames.fromJson(Map<String, dynamic> json) {
     final l$persons = json['persons'];
-    final l$$__typename = json['__typename'];
     return Query_personsNames(
       persons: (l$persons as List<dynamic>)
           .map(
@@ -225,31 +224,22 @@ class Query_personsNames {
             ),
           )
           .toList(),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final List<Query_personsNames_persons> persons;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$persons = persons;
     _resultData['persons'] = l$persons.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$persons = persons;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      Object.hashAll(l$persons.map((v) => v)),
-      l$$__typename,
-    ]);
+    return Object.hashAll([Object.hashAll(l$persons.map((v) => v))]);
   }
 
   @override
@@ -272,11 +262,6 @@ class Query_personsNames {
         return false;
       }
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -295,7 +280,7 @@ abstract class CopyWith_Query_personsNames<TRes> {
   factory CopyWith_Query_personsNames.stub(TRes res) =
       _CopyWithStubImpl_Query_personsNames;
 
-  TRes call({List<Query_personsNames_persons>? persons, String? $__typename});
+  TRes call({List<Query_personsNames_persons>? persons});
   TRes persons(
     Iterable<Query_personsNames_persons> Function(
       Iterable<CopyWith_Query_personsNames_persons<Query_personsNames_persons>>,
@@ -314,17 +299,13 @@ class _CopyWithImpl_Query_personsNames<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? persons = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_personsNames(
-          persons: persons == _undefined || persons == null
-              ? _instance.persons
-              : (persons as List<Query_personsNames_persons>),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
+  TRes call({Object? persons = _undefined}) => _then(
+    Query_personsNames(
+      persons: persons == _undefined || persons == null
+          ? _instance.persons
+          : (persons as List<Query_personsNames_persons>),
+    ),
+  );
 
   TRes persons(
     Iterable<Query_personsNames_persons> Function(
@@ -346,8 +327,7 @@ class _CopyWithStubImpl_Query_personsNames<TRes>
 
   TRes _res;
 
-  call({List<Query_personsNames_persons>? persons, String? $__typename}) =>
-      _res;
+  call({List<Query_personsNames_persons>? persons}) => _res;
 
   persons(_fn) => _res;
 }
@@ -451,13 +431,6 @@ const documentNodeQuerypersonsNames = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -1060,7 +1033,6 @@ class Query_personsGeolocations {
     this.families,
     this.stores,
     this.persons,
-    this.$__typename = 'query_root',
   });
 
   factory Query_personsGeolocations.fromJson(Map<String, dynamic> json) {
@@ -1069,7 +1041,6 @@ class Query_personsGeolocations {
     final l$families = json['families'];
     final l$stores = json['stores'];
     final l$persons = json['persons'];
-    final l$$__typename = json['__typename'];
     return Query_personsGeolocations(
       areas: (l$areas as List<dynamic>?)
           ?.map(
@@ -1106,7 +1077,6 @@ class Query_personsGeolocations {
             ),
           )
           .toList(),
-      $__typename: (l$$__typename as String),
     );
   }
 
@@ -1120,8 +1090,6 @@ class Query_personsGeolocations {
 
   final List<Query_personsGeolocations_persons>? persons;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$areas = areas;
@@ -1134,8 +1102,6 @@ class Query_personsGeolocations {
     _resultData['stores'] = l$stores?.map((e) => e.toJson()).toList();
     final l$persons = persons;
     _resultData['persons'] = l$persons?.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
@@ -1146,14 +1112,12 @@ class Query_personsGeolocations {
     final l$families = families;
     final l$stores = stores;
     final l$persons = persons;
-    final l$$__typename = $__typename;
     return Object.hashAll([
       l$areas == null ? null : Object.hashAll(l$areas.map((v) => v)),
       l$streets == null ? null : Object.hashAll(l$streets.map((v) => v)),
       l$families == null ? null : Object.hashAll(l$families.map((v) => v)),
       l$stores == null ? null : Object.hashAll(l$stores.map((v) => v)),
       l$persons == null ? null : Object.hashAll(l$persons.map((v) => v)),
-      l$$__typename,
     ]);
   }
 
@@ -1246,11 +1210,6 @@ class Query_personsGeolocations {
     } else if (l$persons != lOther$persons) {
       return false;
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -1276,7 +1235,6 @@ abstract class CopyWith_Query_personsGeolocations<TRes> {
     List<Query_personsGeolocations_families>? families,
     List<Query_personsGeolocations_stores>? stores,
     List<Query_personsGeolocations_persons>? persons,
-    String? $__typename,
   });
   TRes areas(
     Iterable<Query_personsGeolocations_areas>? Function(
@@ -1346,7 +1304,6 @@ class _CopyWithImpl_Query_personsGeolocations<TRes>
     Object? families = _undefined,
     Object? stores = _undefined,
     Object? persons = _undefined,
-    Object? $__typename = _undefined,
   }) => _then(
     Query_personsGeolocations(
       areas: areas == _undefined
@@ -1364,9 +1321,6 @@ class _CopyWithImpl_Query_personsGeolocations<TRes>
       persons: persons == _undefined
           ? _instance.persons
           : (persons as List<Query_personsGeolocations_persons>?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -1468,7 +1422,6 @@ class _CopyWithStubImpl_Query_personsGeolocations<TRes>
     List<Query_personsGeolocations_families>? families,
     List<Query_personsGeolocations_stores>? stores,
     List<Query_personsGeolocations_persons>? persons,
-    String? $__typename,
   }) => _res;
 
   areas(_fn) => _res;
@@ -2470,13 +2423,6 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -4286,42 +4232,32 @@ class _CopyWithStubImpl_Variables_Query_personHistoryAnalysis<TRes>
 }
 
 class Query_personHistoryAnalysis {
-  Query_personHistoryAnalysis({
-    this.personsByPk,
-    this.$__typename = 'query_root',
-  });
+  Query_personHistoryAnalysis({this.personsByPk});
 
   factory Query_personHistoryAnalysis.fromJson(Map<String, dynamic> json) {
     final l$personsByPk = json['personsByPk'];
-    final l$$__typename = json['__typename'];
     return Query_personHistoryAnalysis(
       personsByPk: l$personsByPk == null
           ? null
           : Query_personHistoryAnalysis_personsByPk.fromJson(
               (l$personsByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Query_personHistoryAnalysis_personsByPk? personsByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$personsByPk = personsByPk;
     _resultData['personsByPk'] = l$personsByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$personsByPk = personsByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$personsByPk, l$$__typename]);
+    return Object.hashAll([l$personsByPk]);
   }
 
   @override
@@ -4336,11 +4272,6 @@ class Query_personHistoryAnalysis {
     final l$personsByPk = personsByPk;
     final lOther$personsByPk = other.personsByPk;
     if (l$personsByPk != lOther$personsByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -4362,10 +4293,7 @@ abstract class CopyWith_Query_personHistoryAnalysis<TRes> {
   factory CopyWith_Query_personHistoryAnalysis.stub(TRes res) =
       _CopyWithStubImpl_Query_personHistoryAnalysis;
 
-  TRes call({
-    Query_personHistoryAnalysis_personsByPk? personsByPk,
-    String? $__typename,
-  });
+  TRes call({Query_personHistoryAnalysis_personsByPk? personsByPk});
   CopyWith_Query_personHistoryAnalysis_personsByPk<TRes> get personsByPk;
 }
 
@@ -4379,17 +4307,11 @@ class _CopyWithImpl_Query_personHistoryAnalysis<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? personsByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? personsByPk = _undefined}) => _then(
     Query_personHistoryAnalysis(
       personsByPk: personsByPk == _undefined
           ? _instance.personsByPk
           : (personsByPk as Query_personHistoryAnalysis_personsByPk?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -4412,10 +4334,7 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis<TRes>
 
   TRes _res;
 
-  call({
-    Query_personHistoryAnalysis_personsByPk? personsByPk,
-    String? $__typename,
-  }) => _res;
+  call({Query_personHistoryAnalysis_personsByPk? personsByPk}) => _res;
 
   CopyWith_Query_personHistoryAnalysis_personsByPk<TRes> get personsByPk =>
       CopyWith_Query_personHistoryAnalysis_personsByPk.stub(_res);
@@ -5201,13 +5120,6 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -9522,44 +9434,34 @@ class _CopyWithStubImpl_Variables_Query_personServicesClassesGroups<TRes>
 }
 
 class Query_personServicesClassesGroups {
-  Query_personServicesClassesGroups({
-    this.personsByPk,
-    this.$__typename = 'query_root',
-  });
+  Query_personServicesClassesGroups({this.personsByPk});
 
   factory Query_personServicesClassesGroups.fromJson(
     Map<String, dynamic> json,
   ) {
     final l$personsByPk = json['personsByPk'];
-    final l$$__typename = json['__typename'];
     return Query_personServicesClassesGroups(
       personsByPk: l$personsByPk == null
           ? null
           : Query_personServicesClassesGroups_personsByPk.fromJson(
               (l$personsByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Query_personServicesClassesGroups_personsByPk? personsByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$personsByPk = personsByPk;
     _resultData['personsByPk'] = l$personsByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$personsByPk = personsByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$personsByPk, l$$__typename]);
+    return Object.hashAll([l$personsByPk]);
   }
 
   @override
@@ -9574,11 +9476,6 @@ class Query_personServicesClassesGroups {
     final l$personsByPk = personsByPk;
     final lOther$personsByPk = other.personsByPk;
     if (l$personsByPk != lOther$personsByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -9600,10 +9497,7 @@ abstract class CopyWith_Query_personServicesClassesGroups<TRes> {
   factory CopyWith_Query_personServicesClassesGroups.stub(TRes res) =
       _CopyWithStubImpl_Query_personServicesClassesGroups;
 
-  TRes call({
-    Query_personServicesClassesGroups_personsByPk? personsByPk,
-    String? $__typename,
-  });
+  TRes call({Query_personServicesClassesGroups_personsByPk? personsByPk});
   CopyWith_Query_personServicesClassesGroups_personsByPk<TRes> get personsByPk;
 }
 
@@ -9617,17 +9511,11 @@ class _CopyWithImpl_Query_personServicesClassesGroups<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? personsByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? personsByPk = _undefined}) => _then(
     Query_personServicesClassesGroups(
       personsByPk: personsByPk == _undefined
           ? _instance.personsByPk
           : (personsByPk as Query_personServicesClassesGroups_personsByPk?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -9650,10 +9538,7 @@ class _CopyWithStubImpl_Query_personServicesClassesGroups<TRes>
 
   TRes _res;
 
-  call({
-    Query_personServicesClassesGroups_personsByPk? personsByPk,
-    String? $__typename,
-  }) => _res;
+  call({Query_personServicesClassesGroups_personsByPk? personsByPk}) => _res;
 
   CopyWith_Query_personServicesClassesGroups_personsByPk<TRes>
   get personsByPk =>
@@ -9934,13 +9819,6 @@ const documentNodeQuerypersonServicesClassesGroups = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

@@ -108,7 +108,6 @@ class Query_homeSearch {
     required this.streets,
     required this.stores,
     required this.areas,
-    this.$__typename = 'query_root',
   });
 
   factory Query_homeSearch.fromJson(Map<String, dynamic> json) {
@@ -120,7 +119,6 @@ class Query_homeSearch {
     final l$streets = json['streets'];
     final l$stores = json['stores'];
     final l$areas = json['areas'];
-    final l$$__typename = json['__typename'];
     return Query_homeSearch(
       persons: (l$persons as List<dynamic>)
           .map((e) => Fragment_Person.fromJson((e as Map<String, dynamic>)))
@@ -146,7 +144,6 @@ class Query_homeSearch {
       areas: (l$areas as List<dynamic>)
           .map((e) => Fragment_Area.fromJson((e as Map<String, dynamic>)))
           .toList(),
-      $__typename: (l$$__typename as String),
     );
   }
 
@@ -166,8 +163,6 @@ class Query_homeSearch {
 
   final List<Fragment_Area> areas;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$persons = persons;
@@ -186,8 +181,6 @@ class Query_homeSearch {
     _resultData['stores'] = l$stores.map((e) => e.toJson()).toList();
     final l$areas = areas;
     _resultData['areas'] = l$areas.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
@@ -201,7 +194,6 @@ class Query_homeSearch {
     final l$streets = streets;
     final l$stores = stores;
     final l$areas = areas;
-    final l$$__typename = $__typename;
     return Object.hashAll([
       Object.hashAll(l$persons.map((v) => v)),
       Object.hashAll(l$classes.map((v) => v)),
@@ -211,7 +203,6 @@ class Query_homeSearch {
       Object.hashAll(l$streets.map((v) => v)),
       Object.hashAll(l$stores.map((v) => v)),
       Object.hashAll(l$areas.map((v) => v)),
-      l$$__typename,
     ]);
   }
 
@@ -319,11 +310,6 @@ class Query_homeSearch {
         return false;
       }
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -351,7 +337,6 @@ abstract class CopyWith_Query_homeSearch<TRes> {
     List<Fragment_Street>? streets,
     List<Fragment_Store>? stores,
     List<Fragment_Area>? areas,
-    String? $__typename,
   });
   TRes persons(
     Iterable<Fragment_Person> Function(
@@ -422,7 +407,6 @@ class _CopyWithImpl_Query_homeSearch<TRes>
     Object? streets = _undefined,
     Object? stores = _undefined,
     Object? areas = _undefined,
-    Object? $__typename = _undefined,
   }) => _then(
     Query_homeSearch(
       persons: persons == _undefined || persons == null
@@ -449,9 +433,6 @@ class _CopyWithImpl_Query_homeSearch<TRes>
       areas: areas == _undefined || areas == null
           ? _instance.areas
           : (areas as List<Fragment_Area>),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -559,7 +540,6 @@ class _CopyWithStubImpl_Query_homeSearch<TRes>
     List<Fragment_Street>? streets,
     List<Fragment_Store>? stores,
     List<Fragment_Area>? areas,
-    String? $__typename,
   }) => _res;
 
   persons(_fn) => _res;
@@ -946,13 +926,6 @@ const documentNodeQueryhomeSearch = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

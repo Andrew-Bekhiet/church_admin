@@ -102,42 +102,32 @@ class _CopyWithStubImpl_Variables_Mutation_createPersonType<TRes>
 }
 
 class Mutation_createPersonType {
-  Mutation_createPersonType({
-    this.insertPersonTypesOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_createPersonType({this.insertPersonTypesOne});
 
   factory Mutation_createPersonType.fromJson(Map<String, dynamic> json) {
     final l$insertPersonTypesOne = json['insertPersonTypesOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_createPersonType(
       insertPersonTypesOne: l$insertPersonTypesOne == null
           ? null
           : Mutation_createPersonType_insertPersonTypesOne.fromJson(
               (l$insertPersonTypesOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_createPersonType_insertPersonTypesOne? insertPersonTypesOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertPersonTypesOne = insertPersonTypesOne;
     _resultData['insertPersonTypesOne'] = l$insertPersonTypesOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertPersonTypesOne = insertPersonTypesOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertPersonTypesOne, l$$__typename]);
+    return Object.hashAll([l$insertPersonTypesOne]);
   }
 
   @override
@@ -152,11 +142,6 @@ class Mutation_createPersonType {
     final l$insertPersonTypesOne = insertPersonTypesOne;
     final lOther$insertPersonTypesOne = other.insertPersonTypesOne;
     if (l$insertPersonTypesOne != lOther$insertPersonTypesOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -180,7 +165,6 @@ abstract class CopyWith_Mutation_createPersonType<TRes> {
 
   TRes call({
     Mutation_createPersonType_insertPersonTypesOne? insertPersonTypesOne,
-    String? $__typename,
   });
   CopyWith_Mutation_createPersonType_insertPersonTypesOne<TRes>
   get insertPersonTypesOne;
@@ -196,18 +180,12 @@ class _CopyWithImpl_Mutation_createPersonType<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertPersonTypesOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertPersonTypesOne = _undefined}) => _then(
     Mutation_createPersonType(
       insertPersonTypesOne: insertPersonTypesOne == _undefined
           ? _instance.insertPersonTypesOne
           : (insertPersonTypesOne
                 as Mutation_createPersonType_insertPersonTypesOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -233,7 +211,6 @@ class _CopyWithStubImpl_Mutation_createPersonType<TRes>
 
   call({
     Mutation_createPersonType_insertPersonTypesOne? insertPersonTypesOne,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_createPersonType_insertPersonTypesOne<TRes>
@@ -333,13 +310,6 @@ const documentNodeMutationcreatePersonType = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

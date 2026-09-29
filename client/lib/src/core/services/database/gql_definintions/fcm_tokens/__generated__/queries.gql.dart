@@ -108,42 +108,32 @@ class _CopyWithStubImpl_Variables_Query_fcmTokenByPk<TRes>
 }
 
 class Query_fcmTokenByPk {
-  Query_fcmTokenByPk({
-    this.usersFcmTokensByPk,
-    this.$__typename = 'query_root',
-  });
+  Query_fcmTokenByPk({this.usersFcmTokensByPk});
 
   factory Query_fcmTokenByPk.fromJson(Map<String, dynamic> json) {
     final l$usersFcmTokensByPk = json['usersFcmTokensByPk'];
-    final l$$__typename = json['__typename'];
     return Query_fcmTokenByPk(
       usersFcmTokensByPk: l$usersFcmTokensByPk == null
           ? null
           : Fragment_FcmToken.fromJson(
               (l$usersFcmTokensByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_FcmToken? usersFcmTokensByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$usersFcmTokensByPk = usersFcmTokensByPk;
     _resultData['usersFcmTokensByPk'] = l$usersFcmTokensByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$usersFcmTokensByPk = usersFcmTokensByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$usersFcmTokensByPk, l$$__typename]);
+    return Object.hashAll([l$usersFcmTokensByPk]);
   }
 
   @override
@@ -157,11 +147,6 @@ class Query_fcmTokenByPk {
     final l$usersFcmTokensByPk = usersFcmTokensByPk;
     final lOther$usersFcmTokensByPk = other.usersFcmTokensByPk;
     if (l$usersFcmTokensByPk != lOther$usersFcmTokensByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -182,7 +167,7 @@ abstract class CopyWith_Query_fcmTokenByPk<TRes> {
   factory CopyWith_Query_fcmTokenByPk.stub(TRes res) =
       _CopyWithStubImpl_Query_fcmTokenByPk;
 
-  TRes call({Fragment_FcmToken? usersFcmTokensByPk, String? $__typename});
+  TRes call({Fragment_FcmToken? usersFcmTokensByPk});
   CopyWith_Fragment_FcmToken<TRes> get usersFcmTokensByPk;
 }
 
@@ -196,17 +181,11 @@ class _CopyWithImpl_Query_fcmTokenByPk<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? usersFcmTokensByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? usersFcmTokensByPk = _undefined}) => _then(
     Query_fcmTokenByPk(
       usersFcmTokensByPk: usersFcmTokensByPk == _undefined
           ? _instance.usersFcmTokensByPk
           : (usersFcmTokensByPk as Fragment_FcmToken?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -227,7 +206,7 @@ class _CopyWithStubImpl_Query_fcmTokenByPk<TRes>
 
   TRes _res;
 
-  call({Fragment_FcmToken? usersFcmTokensByPk, String? $__typename}) => _res;
+  call({Fragment_FcmToken? usersFcmTokensByPk}) => _res;
 
   CopyWith_Fragment_FcmToken<TRes> get usersFcmTokensByPk =>
       CopyWith_Fragment_FcmToken.stub(_res);
@@ -284,13 +263,6 @@ const documentNodeQueryfcmTokenByPk = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

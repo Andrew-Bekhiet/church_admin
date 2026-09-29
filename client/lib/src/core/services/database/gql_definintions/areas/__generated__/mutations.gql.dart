@@ -97,40 +97,30 @@ class _CopyWithStubImpl_Variables_Mutation_deleteArea<TRes>
 }
 
 class Mutation_deleteArea {
-  Mutation_deleteArea({
-    this.deleteAreasByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_deleteArea({this.deleteAreasByPk});
 
   factory Mutation_deleteArea.fromJson(Map<String, dynamic> json) {
     final l$deleteAreasByPk = json['deleteAreasByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_deleteArea(
       deleteAreasByPk: l$deleteAreasByPk == null
           ? null
           : Fragment_Area.fromJson((l$deleteAreasByPk as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Area? deleteAreasByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$deleteAreasByPk = deleteAreasByPk;
     _resultData['deleteAreasByPk'] = l$deleteAreasByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$deleteAreasByPk = deleteAreasByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$deleteAreasByPk, l$$__typename]);
+    return Object.hashAll([l$deleteAreasByPk]);
   }
 
   @override
@@ -144,11 +134,6 @@ class Mutation_deleteArea {
     final l$deleteAreasByPk = deleteAreasByPk;
     final lOther$deleteAreasByPk = other.deleteAreasByPk;
     if (l$deleteAreasByPk != lOther$deleteAreasByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -169,7 +154,7 @@ abstract class CopyWith_Mutation_deleteArea<TRes> {
   factory CopyWith_Mutation_deleteArea.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteArea;
 
-  TRes call({Fragment_Area? deleteAreasByPk, String? $__typename});
+  TRes call({Fragment_Area? deleteAreasByPk});
   CopyWith_Fragment_Area<TRes> get deleteAreasByPk;
 }
 
@@ -183,17 +168,11 @@ class _CopyWithImpl_Mutation_deleteArea<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? deleteAreasByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? deleteAreasByPk = _undefined}) => _then(
     Mutation_deleteArea(
       deleteAreasByPk: deleteAreasByPk == _undefined
           ? _instance.deleteAreasByPk
           : (deleteAreasByPk as Fragment_Area?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -214,7 +193,7 @@ class _CopyWithStubImpl_Mutation_deleteArea<TRes>
 
   TRes _res;
 
-  call({Fragment_Area? deleteAreasByPk, String? $__typename}) => _res;
+  call({Fragment_Area? deleteAreasByPk}) => _res;
 
   CopyWith_Fragment_Area<TRes> get deleteAreasByPk =>
       CopyWith_Fragment_Area.stub(_res);
@@ -261,13 +240,6 @@ const documentNodeMutationdeleteArea = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -373,40 +345,30 @@ class _CopyWithStubImpl_Variables_Mutation_insertArea<TRes>
 }
 
 class Mutation_insertArea {
-  Mutation_insertArea({
-    this.insertAreasOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertArea({this.insertAreasOne});
 
   factory Mutation_insertArea.fromJson(Map<String, dynamic> json) {
     final l$insertAreasOne = json['insertAreasOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertArea(
       insertAreasOne: l$insertAreasOne == null
           ? null
           : Fragment_Area.fromJson((l$insertAreasOne as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Area? insertAreasOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertAreasOne = insertAreasOne;
     _resultData['insertAreasOne'] = l$insertAreasOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertAreasOne = insertAreasOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertAreasOne, l$$__typename]);
+    return Object.hashAll([l$insertAreasOne]);
   }
 
   @override
@@ -420,11 +382,6 @@ class Mutation_insertArea {
     final l$insertAreasOne = insertAreasOne;
     final lOther$insertAreasOne = other.insertAreasOne;
     if (l$insertAreasOne != lOther$insertAreasOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -445,7 +402,7 @@ abstract class CopyWith_Mutation_insertArea<TRes> {
   factory CopyWith_Mutation_insertArea.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertArea;
 
-  TRes call({Fragment_Area? insertAreasOne, String? $__typename});
+  TRes call({Fragment_Area? insertAreasOne});
   CopyWith_Fragment_Area<TRes> get insertAreasOne;
 }
 
@@ -459,17 +416,11 @@ class _CopyWithImpl_Mutation_insertArea<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertAreasOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertAreasOne = _undefined}) => _then(
     Mutation_insertArea(
       insertAreasOne: insertAreasOne == _undefined
           ? _instance.insertAreasOne
           : (insertAreasOne as Fragment_Area?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -490,7 +441,7 @@ class _CopyWithStubImpl_Mutation_insertArea<TRes>
 
   TRes _res;
 
-  call({Fragment_Area? insertAreasOne, String? $__typename}) => _res;
+  call({Fragment_Area? insertAreasOne}) => _res;
 
   CopyWith_Fragment_Area<TRes> get insertAreasOne =>
       CopyWith_Fragment_Area.stub(_res);
@@ -540,13 +491,6 @@ const documentNodeMutationinsertArea = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -735,13 +679,11 @@ class Mutation_updateArea {
   Mutation_updateArea({
     this.updateAreasByPk,
     this.insertHistoryVisitHistoryOne,
-    this.$__typename = 'mutation_root',
   });
 
   factory Mutation_updateArea.fromJson(Map<String, dynamic> json) {
     final l$updateAreasByPk = json['updateAreasByPk'];
     final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_updateArea(
       updateAreasByPk: l$updateAreasByPk == null
           ? null
@@ -751,15 +693,12 @@ class Mutation_updateArea {
           : Fragment_VisitHistory.fromJson(
               (l$insertHistoryVisitHistoryOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Area? updateAreasByPk;
 
   final Fragment_VisitHistory? insertHistoryVisitHistoryOne;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -768,8 +707,6 @@ class Mutation_updateArea {
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     _resultData['insertHistoryVisitHistoryOne'] = l$insertHistoryVisitHistoryOne
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
@@ -777,12 +714,7 @@ class Mutation_updateArea {
   int get hashCode {
     final l$updateAreasByPk = updateAreasByPk;
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$updateAreasByPk,
-      l$insertHistoryVisitHistoryOne,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$updateAreasByPk, l$insertHistoryVisitHistoryOne]);
   }
 
   @override
@@ -802,11 +734,6 @@ class Mutation_updateArea {
     final lOther$insertHistoryVisitHistoryOne =
         other.insertHistoryVisitHistoryOne;
     if (l$insertHistoryVisitHistoryOne != lOther$insertHistoryVisitHistoryOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -830,7 +757,6 @@ abstract class CopyWith_Mutation_updateArea<TRes> {
   TRes call({
     Fragment_Area? updateAreasByPk,
     Fragment_VisitHistory? insertHistoryVisitHistoryOne,
-    String? $__typename,
   });
   CopyWith_Fragment_Area<TRes> get updateAreasByPk;
   CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne;
@@ -849,7 +775,6 @@ class _CopyWithImpl_Mutation_updateArea<TRes>
   TRes call({
     Object? updateAreasByPk = _undefined,
     Object? insertHistoryVisitHistoryOne = _undefined,
-    Object? $__typename = _undefined,
   }) => _then(
     Mutation_updateArea(
       updateAreasByPk: updateAreasByPk == _undefined
@@ -858,9 +783,6 @@ class _CopyWithImpl_Mutation_updateArea<TRes>
       insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
           ? _instance.insertHistoryVisitHistoryOne
           : (insertHistoryVisitHistoryOne as Fragment_VisitHistory?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -895,7 +817,6 @@ class _CopyWithStubImpl_Mutation_updateArea<TRes>
   call({
     Fragment_Area? updateAreasByPk,
     Fragment_VisitHistory? insertHistoryVisitHistoryOne,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Fragment_Area<TRes> get updateAreasByPk =>
@@ -1037,13 +958,6 @@ const documentNodeMutationupdateArea = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

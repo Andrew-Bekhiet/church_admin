@@ -239,14 +239,10 @@ class _CopyWithStubImpl_Variables_Query_historyMeetingRoster<TRes>
 }
 
 class Query_historyMeetingRoster {
-  Query_historyMeetingRoster({
-    required this.historyMeetingRoster,
-    this.$__typename = 'query_root',
-  });
+  Query_historyMeetingRoster({required this.historyMeetingRoster});
 
   factory Query_historyMeetingRoster.fromJson(Map<String, dynamic> json) {
     final l$historyMeetingRoster = json['historyMeetingRoster'];
-    final l$$__typename = json['__typename'];
     return Query_historyMeetingRoster(
       historyMeetingRoster: (l$historyMeetingRoster as List<dynamic>)
           .map(
@@ -255,14 +251,11 @@ class Query_historyMeetingRoster {
             ),
           )
           .toList(),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final List<Query_historyMeetingRoster_historyMeetingRoster>
   historyMeetingRoster;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -270,18 +263,14 @@ class Query_historyMeetingRoster {
     _resultData['historyMeetingRoster'] = l$historyMeetingRoster
         .map((e) => e.toJson())
         .toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$historyMeetingRoster = historyMeetingRoster;
-    final l$$__typename = $__typename;
     return Object.hashAll([
       Object.hashAll(l$historyMeetingRoster.map((v) => v)),
-      l$$__typename,
     ]);
   }
 
@@ -306,11 +295,6 @@ class Query_historyMeetingRoster {
         return false;
       }
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -332,7 +316,6 @@ abstract class CopyWith_Query_historyMeetingRoster<TRes> {
 
   TRes call({
     List<Query_historyMeetingRoster_historyMeetingRoster>? historyMeetingRoster,
-    String? $__typename,
   });
   TRes historyMeetingRoster(
     Iterable<Query_historyMeetingRoster_historyMeetingRoster> Function(
@@ -356,19 +339,13 @@ class _CopyWithImpl_Query_historyMeetingRoster<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? historyMeetingRoster = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? historyMeetingRoster = _undefined}) => _then(
     Query_historyMeetingRoster(
       historyMeetingRoster:
           historyMeetingRoster == _undefined || historyMeetingRoster == null
           ? _instance.historyMeetingRoster
           : (historyMeetingRoster
                 as List<Query_historyMeetingRoster_historyMeetingRoster>),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -401,7 +378,6 @@ class _CopyWithStubImpl_Query_historyMeetingRoster<TRes>
 
   call({
     List<Query_historyMeetingRoster_historyMeetingRoster>? historyMeetingRoster,
-    String? $__typename,
   }) => _res;
 
   historyMeetingRoster(_fn) => _res;
@@ -600,13 +576,6 @@ const documentNodeQueryhistoryMeetingRoster = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -1153,13 +1122,11 @@ class Query_attendanceAnalysis {
   Query_attendanceAnalysis({
     required this.historyMeetings,
     required this.historyMeetingRoster,
-    this.$__typename = 'query_root',
   });
 
   factory Query_attendanceAnalysis.fromJson(Map<String, dynamic> json) {
     final l$historyMeetings = json['historyMeetings'];
     final l$historyMeetingRoster = json['historyMeetingRoster'];
-    final l$$__typename = json['__typename'];
     return Query_attendanceAnalysis(
       historyMeetings: (l$historyMeetings as List<dynamic>)
           .map(
@@ -1175,7 +1142,6 @@ class Query_attendanceAnalysis {
             ),
           )
           .toList(),
-      $__typename: (l$$__typename as String),
     );
   }
 
@@ -1183,8 +1149,6 @@ class Query_attendanceAnalysis {
 
   final List<Query_attendanceAnalysis_historyMeetingRoster>
   historyMeetingRoster;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -1196,8 +1160,6 @@ class Query_attendanceAnalysis {
     _resultData['historyMeetingRoster'] = l$historyMeetingRoster
         .map((e) => e.toJson())
         .toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
@@ -1205,11 +1167,9 @@ class Query_attendanceAnalysis {
   int get hashCode {
     final l$historyMeetings = historyMeetings;
     final l$historyMeetingRoster = historyMeetingRoster;
-    final l$$__typename = $__typename;
     return Object.hashAll([
       Object.hashAll(l$historyMeetings.map((v) => v)),
       Object.hashAll(l$historyMeetingRoster.map((v) => v)),
-      l$$__typename,
     ]);
   }
 
@@ -1246,11 +1206,6 @@ class Query_attendanceAnalysis {
         return false;
       }
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -1273,7 +1228,6 @@ abstract class CopyWith_Query_attendanceAnalysis<TRes> {
   TRes call({
     List<Query_attendanceAnalysis_historyMeetings>? historyMeetings,
     List<Query_attendanceAnalysis_historyMeetingRoster>? historyMeetingRoster,
-    String? $__typename,
   });
   TRes historyMeetings(
     Iterable<Query_attendanceAnalysis_historyMeetings> Function(
@@ -1310,7 +1264,6 @@ class _CopyWithImpl_Query_attendanceAnalysis<TRes>
   TRes call({
     Object? historyMeetings = _undefined,
     Object? historyMeetingRoster = _undefined,
-    Object? $__typename = _undefined,
   }) => _then(
     Query_attendanceAnalysis(
       historyMeetings: historyMeetings == _undefined || historyMeetings == null
@@ -1321,9 +1274,6 @@ class _CopyWithImpl_Query_attendanceAnalysis<TRes>
           ? _instance.historyMeetingRoster
           : (historyMeetingRoster
                 as List<Query_attendanceAnalysis_historyMeetingRoster>),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -1372,7 +1322,6 @@ class _CopyWithStubImpl_Query_attendanceAnalysis<TRes>
   call({
     List<Query_attendanceAnalysis_historyMeetings>? historyMeetings,
     List<Query_attendanceAnalysis_historyMeetingRoster>? historyMeetingRoster,
-    String? $__typename,
   }) => _res;
 
   historyMeetings(_fn) => _res;
@@ -1725,13 +1674,6 @@ const documentNodeQueryattendanceAnalysis = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -2681,14 +2623,10 @@ class _CopyWithStubImpl_Variables_Query_meetingsAttendanceAnalysis<TRes>
 }
 
 class Query_meetingsAttendanceAnalysis {
-  Query_meetingsAttendanceAnalysis({
-    required this.historyMeetings,
-    this.$__typename = 'query_root',
-  });
+  Query_meetingsAttendanceAnalysis({required this.historyMeetings});
 
   factory Query_meetingsAttendanceAnalysis.fromJson(Map<String, dynamic> json) {
     final l$historyMeetings = json['historyMeetings'];
-    final l$$__typename = json['__typename'];
     return Query_meetingsAttendanceAnalysis(
       historyMeetings: (l$historyMeetings as List<dynamic>)
           .map(
@@ -2697,13 +2635,10 @@ class Query_meetingsAttendanceAnalysis {
             ),
           )
           .toList(),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final List<Query_meetingsAttendanceAnalysis_historyMeetings> historyMeetings;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -2711,19 +2646,13 @@ class Query_meetingsAttendanceAnalysis {
     _resultData['historyMeetings'] = l$historyMeetings
         .map((e) => e.toJson())
         .toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$historyMeetings = historyMeetings;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      Object.hashAll(l$historyMeetings.map((v) => v)),
-      l$$__typename,
-    ]);
+    return Object.hashAll([Object.hashAll(l$historyMeetings.map((v) => v))]);
   }
 
   @override
@@ -2747,11 +2676,6 @@ class Query_meetingsAttendanceAnalysis {
         return false;
       }
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -2773,7 +2697,6 @@ abstract class CopyWith_Query_meetingsAttendanceAnalysis<TRes> {
 
   TRes call({
     List<Query_meetingsAttendanceAnalysis_historyMeetings>? historyMeetings,
-    String? $__typename,
   });
   TRes historyMeetings(
     Iterable<Query_meetingsAttendanceAnalysis_historyMeetings> Function(
@@ -2797,18 +2720,12 @@ class _CopyWithImpl_Query_meetingsAttendanceAnalysis<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? historyMeetings = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? historyMeetings = _undefined}) => _then(
     Query_meetingsAttendanceAnalysis(
       historyMeetings: historyMeetings == _undefined || historyMeetings == null
           ? _instance.historyMeetings
           : (historyMeetings
                 as List<Query_meetingsAttendanceAnalysis_historyMeetings>),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -2841,7 +2758,6 @@ class _CopyWithStubImpl_Query_meetingsAttendanceAnalysis<TRes>
 
   call({
     List<Query_meetingsAttendanceAnalysis_historyMeetings>? historyMeetings,
-    String? $__typename,
   }) => _res;
 
   historyMeetings(_fn) => _res;
@@ -3074,13 +2990,6 @@ const documentNodeQuerymeetingsAttendanceAnalysis = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -4397,14 +4306,10 @@ class _CopyWithStubImpl_Variables_Query_meetingsRosterDemographics<TRes>
 }
 
 class Query_meetingsRosterDemographics {
-  Query_meetingsRosterDemographics({
-    required this.historyMeetingRoster,
-    this.$__typename = 'query_root',
-  });
+  Query_meetingsRosterDemographics({required this.historyMeetingRoster});
 
   factory Query_meetingsRosterDemographics.fromJson(Map<String, dynamic> json) {
     final l$historyMeetingRoster = json['historyMeetingRoster'];
-    final l$$__typename = json['__typename'];
     return Query_meetingsRosterDemographics(
       historyMeetingRoster: (l$historyMeetingRoster as List<dynamic>)
           .map(
@@ -4414,14 +4319,11 @@ class Query_meetingsRosterDemographics {
                 ),
           )
           .toList(),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final List<Query_meetingsRosterDemographics_historyMeetingRoster>
   historyMeetingRoster;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -4429,18 +4331,14 @@ class Query_meetingsRosterDemographics {
     _resultData['historyMeetingRoster'] = l$historyMeetingRoster
         .map((e) => e.toJson())
         .toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$historyMeetingRoster = historyMeetingRoster;
-    final l$$__typename = $__typename;
     return Object.hashAll([
       Object.hashAll(l$historyMeetingRoster.map((v) => v)),
-      l$$__typename,
     ]);
   }
 
@@ -4465,11 +4363,6 @@ class Query_meetingsRosterDemographics {
         return false;
       }
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -4492,7 +4385,6 @@ abstract class CopyWith_Query_meetingsRosterDemographics<TRes> {
   TRes call({
     List<Query_meetingsRosterDemographics_historyMeetingRoster>?
     historyMeetingRoster,
-    String? $__typename,
   });
   TRes historyMeetingRoster(
     Iterable<Query_meetingsRosterDemographics_historyMeetingRoster> Function(
@@ -4516,19 +4408,13 @@ class _CopyWithImpl_Query_meetingsRosterDemographics<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? historyMeetingRoster = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? historyMeetingRoster = _undefined}) => _then(
     Query_meetingsRosterDemographics(
       historyMeetingRoster:
           historyMeetingRoster == _undefined || historyMeetingRoster == null
           ? _instance.historyMeetingRoster
           : (historyMeetingRoster
                 as List<Query_meetingsRosterDemographics_historyMeetingRoster>),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -4562,7 +4448,6 @@ class _CopyWithStubImpl_Query_meetingsRosterDemographics<TRes>
   call({
     List<Query_meetingsRosterDemographics_historyMeetingRoster>?
     historyMeetingRoster,
-    String? $__typename,
   }) => _res;
 
   historyMeetingRoster(_fn) => _res;
@@ -4782,13 +4667,6 @@ const documentNodeQuerymeetingsRosterDemographics = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -5432,14 +5310,10 @@ class _CopyWithStubImpl_Variables_Query_personMeetings<TRes>
 }
 
 class Query_personMeetings {
-  Query_personMeetings({
-    required this.historyMeetingRoster,
-    this.$__typename = 'query_root',
-  });
+  Query_personMeetings({required this.historyMeetingRoster});
 
   factory Query_personMeetings.fromJson(Map<String, dynamic> json) {
     final l$historyMeetingRoster = json['historyMeetingRoster'];
-    final l$$__typename = json['__typename'];
     return Query_personMeetings(
       historyMeetingRoster: (l$historyMeetingRoster as List<dynamic>)
           .map(
@@ -5448,13 +5322,10 @@ class Query_personMeetings {
             ),
           )
           .toList(),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final List<Query_personMeetings_historyMeetingRoster> historyMeetingRoster;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -5462,18 +5333,14 @@ class Query_personMeetings {
     _resultData['historyMeetingRoster'] = l$historyMeetingRoster
         .map((e) => e.toJson())
         .toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$historyMeetingRoster = historyMeetingRoster;
-    final l$$__typename = $__typename;
     return Object.hashAll([
       Object.hashAll(l$historyMeetingRoster.map((v) => v)),
-      l$$__typename,
     ]);
   }
 
@@ -5497,11 +5364,6 @@ class Query_personMeetings {
         return false;
       }
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -5522,7 +5384,6 @@ abstract class CopyWith_Query_personMeetings<TRes> {
 
   TRes call({
     List<Query_personMeetings_historyMeetingRoster>? historyMeetingRoster,
-    String? $__typename,
   });
   TRes historyMeetingRoster(
     Iterable<Query_personMeetings_historyMeetingRoster> Function(
@@ -5546,19 +5407,13 @@ class _CopyWithImpl_Query_personMeetings<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? historyMeetingRoster = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? historyMeetingRoster = _undefined}) => _then(
     Query_personMeetings(
       historyMeetingRoster:
           historyMeetingRoster == _undefined || historyMeetingRoster == null
           ? _instance.historyMeetingRoster
           : (historyMeetingRoster
                 as List<Query_personMeetings_historyMeetingRoster>),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -5588,7 +5443,6 @@ class _CopyWithStubImpl_Query_personMeetings<TRes>
 
   call({
     List<Query_personMeetings_historyMeetingRoster>? historyMeetingRoster,
-    String? $__typename,
   }) => _res;
 
   historyMeetingRoster(_fn) => _res;
@@ -5737,13 +5591,6 @@ const documentNodeQuerypersonMeetings = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

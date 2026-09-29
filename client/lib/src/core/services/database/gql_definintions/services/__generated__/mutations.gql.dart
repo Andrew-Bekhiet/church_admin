@@ -95,42 +95,32 @@ class _CopyWithStubImpl_Variables_Mutation_deleteService<TRes>
 }
 
 class Mutation_deleteService {
-  Mutation_deleteService({
-    this.deleteServicesByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_deleteService({this.deleteServicesByPk});
 
   factory Mutation_deleteService.fromJson(Map<String, dynamic> json) {
     final l$deleteServicesByPk = json['deleteServicesByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_deleteService(
       deleteServicesByPk: l$deleteServicesByPk == null
           ? null
           : Fragment_Service.fromJson(
               (l$deleteServicesByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Service? deleteServicesByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$deleteServicesByPk = deleteServicesByPk;
     _resultData['deleteServicesByPk'] = l$deleteServicesByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$deleteServicesByPk = deleteServicesByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$deleteServicesByPk, l$$__typename]);
+    return Object.hashAll([l$deleteServicesByPk]);
   }
 
   @override
@@ -144,11 +134,6 @@ class Mutation_deleteService {
     final l$deleteServicesByPk = deleteServicesByPk;
     final lOther$deleteServicesByPk = other.deleteServicesByPk;
     if (l$deleteServicesByPk != lOther$deleteServicesByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -169,7 +154,7 @@ abstract class CopyWith_Mutation_deleteService<TRes> {
   factory CopyWith_Mutation_deleteService.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteService;
 
-  TRes call({Fragment_Service? deleteServicesByPk, String? $__typename});
+  TRes call({Fragment_Service? deleteServicesByPk});
   CopyWith_Fragment_Service<TRes> get deleteServicesByPk;
 }
 
@@ -183,17 +168,11 @@ class _CopyWithImpl_Mutation_deleteService<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? deleteServicesByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? deleteServicesByPk = _undefined}) => _then(
     Mutation_deleteService(
       deleteServicesByPk: deleteServicesByPk == _undefined
           ? _instance.deleteServicesByPk
           : (deleteServicesByPk as Fragment_Service?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -214,7 +193,7 @@ class _CopyWithStubImpl_Mutation_deleteService<TRes>
 
   TRes _res;
 
-  call({Fragment_Service? deleteServicesByPk, String? $__typename}) => _res;
+  call({Fragment_Service? deleteServicesByPk}) => _res;
 
   CopyWith_Fragment_Service<TRes> get deleteServicesByPk =>
       CopyWith_Fragment_Service.stub(_res);
@@ -261,13 +240,6 @@ const documentNodeMutationdeleteService = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -373,42 +345,32 @@ class _CopyWithStubImpl_Variables_Mutation_insertService<TRes>
 }
 
 class Mutation_insertService {
-  Mutation_insertService({
-    this.insertServicesOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertService({this.insertServicesOne});
 
   factory Mutation_insertService.fromJson(Map<String, dynamic> json) {
     final l$insertServicesOne = json['insertServicesOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertService(
       insertServicesOne: l$insertServicesOne == null
           ? null
           : Fragment_Service.fromJson(
               (l$insertServicesOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Service? insertServicesOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertServicesOne = insertServicesOne;
     _resultData['insertServicesOne'] = l$insertServicesOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertServicesOne = insertServicesOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertServicesOne, l$$__typename]);
+    return Object.hashAll([l$insertServicesOne]);
   }
 
   @override
@@ -422,11 +384,6 @@ class Mutation_insertService {
     final l$insertServicesOne = insertServicesOne;
     final lOther$insertServicesOne = other.insertServicesOne;
     if (l$insertServicesOne != lOther$insertServicesOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -447,7 +404,7 @@ abstract class CopyWith_Mutation_insertService<TRes> {
   factory CopyWith_Mutation_insertService.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertService;
 
-  TRes call({Fragment_Service? insertServicesOne, String? $__typename});
+  TRes call({Fragment_Service? insertServicesOne});
   CopyWith_Fragment_Service<TRes> get insertServicesOne;
 }
 
@@ -461,17 +418,11 @@ class _CopyWithImpl_Mutation_insertService<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertServicesOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertServicesOne = _undefined}) => _then(
     Mutation_insertService(
       insertServicesOne: insertServicesOne == _undefined
           ? _instance.insertServicesOne
           : (insertServicesOne as Fragment_Service?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -492,7 +443,7 @@ class _CopyWithStubImpl_Mutation_insertService<TRes>
 
   TRes _res;
 
-  call({Fragment_Service? insertServicesOne, String? $__typename}) => _res;
+  call({Fragment_Service? insertServicesOne}) => _res;
 
   CopyWith_Fragment_Service<TRes> get insertServicesOne =>
       CopyWith_Fragment_Service.stub(_res);
@@ -542,13 +493,6 @@ const documentNodeMutationinsertService = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -675,42 +619,32 @@ class _CopyWithStubImpl_Variables_Mutation_updateService<TRes>
 }
 
 class Mutation_updateService {
-  Mutation_updateService({
-    this.updateServicesByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_updateService({this.updateServicesByPk});
 
   factory Mutation_updateService.fromJson(Map<String, dynamic> json) {
     final l$updateServicesByPk = json['updateServicesByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_updateService(
       updateServicesByPk: l$updateServicesByPk == null
           ? null
           : Fragment_Service.fromJson(
               (l$updateServicesByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Service? updateServicesByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$updateServicesByPk = updateServicesByPk;
     _resultData['updateServicesByPk'] = l$updateServicesByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$updateServicesByPk = updateServicesByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$updateServicesByPk, l$$__typename]);
+    return Object.hashAll([l$updateServicesByPk]);
   }
 
   @override
@@ -724,11 +658,6 @@ class Mutation_updateService {
     final l$updateServicesByPk = updateServicesByPk;
     final lOther$updateServicesByPk = other.updateServicesByPk;
     if (l$updateServicesByPk != lOther$updateServicesByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -749,7 +678,7 @@ abstract class CopyWith_Mutation_updateService<TRes> {
   factory CopyWith_Mutation_updateService.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updateService;
 
-  TRes call({Fragment_Service? updateServicesByPk, String? $__typename});
+  TRes call({Fragment_Service? updateServicesByPk});
   CopyWith_Fragment_Service<TRes> get updateServicesByPk;
 }
 
@@ -763,17 +692,11 @@ class _CopyWithImpl_Mutation_updateService<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? updateServicesByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? updateServicesByPk = _undefined}) => _then(
     Mutation_updateService(
       updateServicesByPk: updateServicesByPk == _undefined
           ? _instance.updateServicesByPk
           : (updateServicesByPk as Fragment_Service?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -794,7 +717,7 @@ class _CopyWithStubImpl_Mutation_updateService<TRes>
 
   TRes _res;
 
-  call({Fragment_Service? updateServicesByPk, String? $__typename}) => _res;
+  call({Fragment_Service? updateServicesByPk}) => _res;
 
   CopyWith_Fragment_Service<TRes> get updateServicesByPk =>
       CopyWith_Fragment_Service.stub(_res);
@@ -861,13 +784,6 @@ const documentNodeMutationupdateService = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

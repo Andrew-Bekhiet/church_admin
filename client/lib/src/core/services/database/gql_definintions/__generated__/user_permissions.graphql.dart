@@ -92,45 +92,35 @@ class _CopyWithStubImpl_Variables_Mutation_approveUser<TRes>
 }
 
 class Mutation_approveUser {
-  Mutation_approveUser({
-    this.insertAuthUsersPermissionsOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_approveUser({this.insertAuthUsersPermissionsOne});
 
   factory Mutation_approveUser.fromJson(Map<String, dynamic> json) {
     final l$insertAuthUsersPermissionsOne =
         json['insertAuthUsersPermissionsOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_approveUser(
       insertAuthUsersPermissionsOne: l$insertAuthUsersPermissionsOne == null
           ? null
           : Mutation_approveUser_insertAuthUsersPermissionsOne.fromJson(
               (l$insertAuthUsersPermissionsOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_approveUser_insertAuthUsersPermissionsOne?
   insertAuthUsersPermissionsOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertAuthUsersPermissionsOne = insertAuthUsersPermissionsOne;
     _resultData['insertAuthUsersPermissionsOne'] =
         l$insertAuthUsersPermissionsOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertAuthUsersPermissionsOne = insertAuthUsersPermissionsOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertAuthUsersPermissionsOne, l$$__typename]);
+    return Object.hashAll([l$insertAuthUsersPermissionsOne]);
   }
 
   @override
@@ -146,11 +136,6 @@ class Mutation_approveUser {
         other.insertAuthUsersPermissionsOne;
     if (l$insertAuthUsersPermissionsOne !=
         lOther$insertAuthUsersPermissionsOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -174,7 +159,6 @@ abstract class CopyWith_Mutation_approveUser<TRes> {
   TRes call({
     Mutation_approveUser_insertAuthUsersPermissionsOne?
     insertAuthUsersPermissionsOne,
-    String? $__typename,
   });
   CopyWith_Mutation_approveUser_insertAuthUsersPermissionsOne<TRes>
   get insertAuthUsersPermissionsOne;
@@ -190,18 +174,12 @@ class _CopyWithImpl_Mutation_approveUser<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertAuthUsersPermissionsOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertAuthUsersPermissionsOne = _undefined}) => _then(
     Mutation_approveUser(
       insertAuthUsersPermissionsOne: insertAuthUsersPermissionsOne == _undefined
           ? _instance.insertAuthUsersPermissionsOne
           : (insertAuthUsersPermissionsOne
                 as Mutation_approveUser_insertAuthUsersPermissionsOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -229,7 +207,6 @@ class _CopyWithStubImpl_Mutation_approveUser<TRes>
   call({
     Mutation_approveUser_insertAuthUsersPermissionsOne?
     insertAuthUsersPermissionsOne,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_approveUser_insertAuthUsersPermissionsOne<TRes>
@@ -316,13 +293,6 @@ const documentNodeMutationapproveUser = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -565,44 +535,34 @@ class _CopyWithStubImpl_Variables_Mutation_unapproveUser<TRes>
 }
 
 class Mutation_unapproveUser {
-  Mutation_unapproveUser({
-    this.deleteAuthUsersPermissions,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_unapproveUser({this.deleteAuthUsersPermissions});
 
   factory Mutation_unapproveUser.fromJson(Map<String, dynamic> json) {
     final l$deleteAuthUsersPermissions = json['deleteAuthUsersPermissions'];
-    final l$$__typename = json['__typename'];
     return Mutation_unapproveUser(
       deleteAuthUsersPermissions: l$deleteAuthUsersPermissions == null
           ? null
           : Mutation_unapproveUser_deleteAuthUsersPermissions.fromJson(
               (l$deleteAuthUsersPermissions as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_unapproveUser_deleteAuthUsersPermissions?
   deleteAuthUsersPermissions;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$deleteAuthUsersPermissions = deleteAuthUsersPermissions;
     _resultData['deleteAuthUsersPermissions'] = l$deleteAuthUsersPermissions
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$deleteAuthUsersPermissions = deleteAuthUsersPermissions;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$deleteAuthUsersPermissions, l$$__typename]);
+    return Object.hashAll([l$deleteAuthUsersPermissions]);
   }
 
   @override
@@ -616,11 +576,6 @@ class Mutation_unapproveUser {
     final l$deleteAuthUsersPermissions = deleteAuthUsersPermissions;
     final lOther$deleteAuthUsersPermissions = other.deleteAuthUsersPermissions;
     if (l$deleteAuthUsersPermissions != lOther$deleteAuthUsersPermissions) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -644,7 +599,6 @@ abstract class CopyWith_Mutation_unapproveUser<TRes> {
   TRes call({
     Mutation_unapproveUser_deleteAuthUsersPermissions?
     deleteAuthUsersPermissions,
-    String? $__typename,
   });
   CopyWith_Mutation_unapproveUser_deleteAuthUsersPermissions<TRes>
   get deleteAuthUsersPermissions;
@@ -660,18 +614,12 @@ class _CopyWithImpl_Mutation_unapproveUser<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? deleteAuthUsersPermissions = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? deleteAuthUsersPermissions = _undefined}) => _then(
     Mutation_unapproveUser(
       deleteAuthUsersPermissions: deleteAuthUsersPermissions == _undefined
           ? _instance.deleteAuthUsersPermissions
           : (deleteAuthUsersPermissions
                 as Mutation_unapproveUser_deleteAuthUsersPermissions?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -699,7 +647,6 @@ class _CopyWithStubImpl_Mutation_unapproveUser<TRes>
   call({
     Mutation_unapproveUser_deleteAuthUsersPermissions?
     deleteAuthUsersPermissions,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_unapproveUser_deleteAuthUsersPermissions<TRes>
@@ -796,13 +743,6 @@ const documentNodeMutationunapproveUser = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

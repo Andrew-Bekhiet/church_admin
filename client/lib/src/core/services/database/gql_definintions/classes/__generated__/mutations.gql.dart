@@ -95,42 +95,32 @@ class _CopyWithStubImpl_Variables_Mutation_deleteClass<TRes>
 }
 
 class Mutation_deleteClass {
-  Mutation_deleteClass({
-    this.deleteClassesByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_deleteClass({this.deleteClassesByPk});
 
   factory Mutation_deleteClass.fromJson(Map<String, dynamic> json) {
     final l$deleteClassesByPk = json['deleteClassesByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_deleteClass(
       deleteClassesByPk: l$deleteClassesByPk == null
           ? null
           : Fragment_Class.fromJson(
               (l$deleteClassesByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Class? deleteClassesByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$deleteClassesByPk = deleteClassesByPk;
     _resultData['deleteClassesByPk'] = l$deleteClassesByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$deleteClassesByPk = deleteClassesByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$deleteClassesByPk, l$$__typename]);
+    return Object.hashAll([l$deleteClassesByPk]);
   }
 
   @override
@@ -144,11 +134,6 @@ class Mutation_deleteClass {
     final l$deleteClassesByPk = deleteClassesByPk;
     final lOther$deleteClassesByPk = other.deleteClassesByPk;
     if (l$deleteClassesByPk != lOther$deleteClassesByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -169,7 +154,7 @@ abstract class CopyWith_Mutation_deleteClass<TRes> {
   factory CopyWith_Mutation_deleteClass.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteClass;
 
-  TRes call({Fragment_Class? deleteClassesByPk, String? $__typename});
+  TRes call({Fragment_Class? deleteClassesByPk});
   CopyWith_Fragment_Class<TRes> get deleteClassesByPk;
 }
 
@@ -183,17 +168,11 @@ class _CopyWithImpl_Mutation_deleteClass<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? deleteClassesByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? deleteClassesByPk = _undefined}) => _then(
     Mutation_deleteClass(
       deleteClassesByPk: deleteClassesByPk == _undefined
           ? _instance.deleteClassesByPk
           : (deleteClassesByPk as Fragment_Class?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -214,7 +193,7 @@ class _CopyWithStubImpl_Mutation_deleteClass<TRes>
 
   TRes _res;
 
-  call({Fragment_Class? deleteClassesByPk, String? $__typename}) => _res;
+  call({Fragment_Class? deleteClassesByPk}) => _res;
 
   CopyWith_Fragment_Class<TRes> get deleteClassesByPk =>
       CopyWith_Fragment_Class.stub(_res);
@@ -261,13 +240,6 @@ const documentNodeMutationdeleteClass = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -373,42 +345,32 @@ class _CopyWithStubImpl_Variables_Mutation_insertClass<TRes>
 }
 
 class Mutation_insertClass {
-  Mutation_insertClass({
-    this.insertClassesOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertClass({this.insertClassesOne});
 
   factory Mutation_insertClass.fromJson(Map<String, dynamic> json) {
     final l$insertClassesOne = json['insertClassesOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertClass(
       insertClassesOne: l$insertClassesOne == null
           ? null
           : Fragment_Class.fromJson(
               (l$insertClassesOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Class? insertClassesOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertClassesOne = insertClassesOne;
     _resultData['insertClassesOne'] = l$insertClassesOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertClassesOne = insertClassesOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertClassesOne, l$$__typename]);
+    return Object.hashAll([l$insertClassesOne]);
   }
 
   @override
@@ -422,11 +384,6 @@ class Mutation_insertClass {
     final l$insertClassesOne = insertClassesOne;
     final lOther$insertClassesOne = other.insertClassesOne;
     if (l$insertClassesOne != lOther$insertClassesOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -447,7 +404,7 @@ abstract class CopyWith_Mutation_insertClass<TRes> {
   factory CopyWith_Mutation_insertClass.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertClass;
 
-  TRes call({Fragment_Class? insertClassesOne, String? $__typename});
+  TRes call({Fragment_Class? insertClassesOne});
   CopyWith_Fragment_Class<TRes> get insertClassesOne;
 }
 
@@ -461,17 +418,11 @@ class _CopyWithImpl_Mutation_insertClass<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertClassesOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertClassesOne = _undefined}) => _then(
     Mutation_insertClass(
       insertClassesOne: insertClassesOne == _undefined
           ? _instance.insertClassesOne
           : (insertClassesOne as Fragment_Class?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -492,7 +443,7 @@ class _CopyWithStubImpl_Mutation_insertClass<TRes>
 
   TRes _res;
 
-  call({Fragment_Class? insertClassesOne, String? $__typename}) => _res;
+  call({Fragment_Class? insertClassesOne}) => _res;
 
   CopyWith_Fragment_Class<TRes> get insertClassesOne =>
       CopyWith_Fragment_Class.stub(_res);
@@ -542,13 +493,6 @@ const documentNodeMutationinsertClass = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -673,42 +617,32 @@ class _CopyWithStubImpl_Variables_Mutation_updateClass<TRes>
 }
 
 class Mutation_updateClass {
-  Mutation_updateClass({
-    this.updateClassesByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_updateClass({this.updateClassesByPk});
 
   factory Mutation_updateClass.fromJson(Map<String, dynamic> json) {
     final l$updateClassesByPk = json['updateClassesByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_updateClass(
       updateClassesByPk: l$updateClassesByPk == null
           ? null
           : Fragment_Class.fromJson(
               (l$updateClassesByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Class? updateClassesByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$updateClassesByPk = updateClassesByPk;
     _resultData['updateClassesByPk'] = l$updateClassesByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$updateClassesByPk = updateClassesByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$updateClassesByPk, l$$__typename]);
+    return Object.hashAll([l$updateClassesByPk]);
   }
 
   @override
@@ -722,11 +656,6 @@ class Mutation_updateClass {
     final l$updateClassesByPk = updateClassesByPk;
     final lOther$updateClassesByPk = other.updateClassesByPk;
     if (l$updateClassesByPk != lOther$updateClassesByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -747,7 +676,7 @@ abstract class CopyWith_Mutation_updateClass<TRes> {
   factory CopyWith_Mutation_updateClass.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updateClass;
 
-  TRes call({Fragment_Class? updateClassesByPk, String? $__typename});
+  TRes call({Fragment_Class? updateClassesByPk});
   CopyWith_Fragment_Class<TRes> get updateClassesByPk;
 }
 
@@ -761,17 +690,11 @@ class _CopyWithImpl_Mutation_updateClass<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? updateClassesByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? updateClassesByPk = _undefined}) => _then(
     Mutation_updateClass(
       updateClassesByPk: updateClassesByPk == _undefined
           ? _instance.updateClassesByPk
           : (updateClassesByPk as Fragment_Class?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -792,7 +715,7 @@ class _CopyWithStubImpl_Mutation_updateClass<TRes>
 
   TRes _res;
 
-  call({Fragment_Class? updateClassesByPk, String? $__typename}) => _res;
+  call({Fragment_Class? updateClassesByPk}) => _res;
 
   CopyWith_Fragment_Class<TRes> get updateClassesByPk =>
       CopyWith_Fragment_Class.stub(_res);
@@ -859,13 +782,6 @@ const documentNodeMutationupdateClass = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

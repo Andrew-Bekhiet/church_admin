@@ -106,44 +106,34 @@ class _CopyWithStubImpl_Variables_Mutation_createQualification<TRes>
 }
 
 class Mutation_createQualification {
-  Mutation_createQualification({
-    this.insertQualificationsOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_createQualification({this.insertQualificationsOne});
 
   factory Mutation_createQualification.fromJson(Map<String, dynamic> json) {
     final l$insertQualificationsOne = json['insertQualificationsOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_createQualification(
       insertQualificationsOne: l$insertQualificationsOne == null
           ? null
           : Mutation_createQualification_insertQualificationsOne.fromJson(
               (l$insertQualificationsOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_createQualification_insertQualificationsOne?
   insertQualificationsOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertQualificationsOne = insertQualificationsOne;
     _resultData['insertQualificationsOne'] = l$insertQualificationsOne
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertQualificationsOne = insertQualificationsOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertQualificationsOne, l$$__typename]);
+    return Object.hashAll([l$insertQualificationsOne]);
   }
 
   @override
@@ -158,11 +148,6 @@ class Mutation_createQualification {
     final l$insertQualificationsOne = insertQualificationsOne;
     final lOther$insertQualificationsOne = other.insertQualificationsOne;
     if (l$insertQualificationsOne != lOther$insertQualificationsOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -187,7 +172,6 @@ abstract class CopyWith_Mutation_createQualification<TRes> {
   TRes call({
     Mutation_createQualification_insertQualificationsOne?
     insertQualificationsOne,
-    String? $__typename,
   });
   CopyWith_Mutation_createQualification_insertQualificationsOne<TRes>
   get insertQualificationsOne;
@@ -203,18 +187,12 @@ class _CopyWithImpl_Mutation_createQualification<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertQualificationsOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertQualificationsOne = _undefined}) => _then(
     Mutation_createQualification(
       insertQualificationsOne: insertQualificationsOne == _undefined
           ? _instance.insertQualificationsOne
           : (insertQualificationsOne
                 as Mutation_createQualification_insertQualificationsOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -241,7 +219,6 @@ class _CopyWithStubImpl_Mutation_createQualification<TRes>
   call({
     Mutation_createQualification_insertQualificationsOne?
     insertQualificationsOne,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_createQualification_insertQualificationsOne<TRes>
@@ -320,13 +297,6 @@ const documentNodeMutationcreateQualification = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

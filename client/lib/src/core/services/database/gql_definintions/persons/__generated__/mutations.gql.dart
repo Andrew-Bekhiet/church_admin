@@ -98,42 +98,32 @@ class _CopyWithStubImpl_Variables_Mutation_deletePerson<TRes>
 }
 
 class Mutation_deletePerson {
-  Mutation_deletePerson({
-    this.deletePersonsByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_deletePerson({this.deletePersonsByPk});
 
   factory Mutation_deletePerson.fromJson(Map<String, dynamic> json) {
     final l$deletePersonsByPk = json['deletePersonsByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_deletePerson(
       deletePersonsByPk: l$deletePersonsByPk == null
           ? null
           : Fragment_Person.fromJson(
               (l$deletePersonsByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Person? deletePersonsByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$deletePersonsByPk = deletePersonsByPk;
     _resultData['deletePersonsByPk'] = l$deletePersonsByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$deletePersonsByPk = deletePersonsByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$deletePersonsByPk, l$$__typename]);
+    return Object.hashAll([l$deletePersonsByPk]);
   }
 
   @override
@@ -147,11 +137,6 @@ class Mutation_deletePerson {
     final l$deletePersonsByPk = deletePersonsByPk;
     final lOther$deletePersonsByPk = other.deletePersonsByPk;
     if (l$deletePersonsByPk != lOther$deletePersonsByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -172,7 +157,7 @@ abstract class CopyWith_Mutation_deletePerson<TRes> {
   factory CopyWith_Mutation_deletePerson.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deletePerson;
 
-  TRes call({Fragment_Person? deletePersonsByPk, String? $__typename});
+  TRes call({Fragment_Person? deletePersonsByPk});
   CopyWith_Fragment_Person<TRes> get deletePersonsByPk;
 }
 
@@ -186,17 +171,11 @@ class _CopyWithImpl_Mutation_deletePerson<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? deletePersonsByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? deletePersonsByPk = _undefined}) => _then(
     Mutation_deletePerson(
       deletePersonsByPk: deletePersonsByPk == _undefined
           ? _instance.deletePersonsByPk
           : (deletePersonsByPk as Fragment_Person?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -217,7 +196,7 @@ class _CopyWithStubImpl_Mutation_deletePerson<TRes>
 
   TRes _res;
 
-  call({Fragment_Person? deletePersonsByPk, String? $__typename}) => _res;
+  call({Fragment_Person? deletePersonsByPk}) => _res;
 
   CopyWith_Fragment_Person<TRes> get deletePersonsByPk =>
       CopyWith_Fragment_Person.stub(_res);
@@ -264,13 +243,6 @@ const documentNodeMutationdeletePerson = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -1436,12 +1408,12 @@ class _CopyWithStubImpl_Variables_Mutation_updatePerson<TRes>
 
 class Mutation_updatePerson {
   Mutation_updatePerson({
-    this.updatePersonsByPk,
-    this.updateAddressesByPk,
     this.insertPersonsServices,
     this.insertPersonsGroups,
     this.insertPersonsHobbies,
     this.insertPersonsTags,
+    this.updatePersonsByPk,
+    this.updateAddressesByPk,
     this.deletePersonsTags,
     this.deletePersonsHobbies,
     this.deletePersonsGroups,
@@ -1450,16 +1422,15 @@ class Mutation_updatePerson {
     this.insertHistoryKodasHistoryOne,
     this.insertHistoryCallHistoryOne,
     this.insertHistoryVisitHistoryOne,
-    this.$__typename = 'mutation_root',
   });
 
   factory Mutation_updatePerson.fromJson(Map<String, dynamic> json) {
-    final l$updatePersonsByPk = json['updatePersonsByPk'];
-    final l$updateAddressesByPk = json['updateAddressesByPk'];
     final l$insertPersonsServices = json['insertPersonsServices'];
     final l$insertPersonsGroups = json['insertPersonsGroups'];
     final l$insertPersonsHobbies = json['insertPersonsHobbies'];
     final l$insertPersonsTags = json['insertPersonsTags'];
+    final l$updatePersonsByPk = json['updatePersonsByPk'];
+    final l$updateAddressesByPk = json['updateAddressesByPk'];
     final l$deletePersonsTags = json['deletePersonsTags'];
     final l$deletePersonsHobbies = json['deletePersonsHobbies'];
     final l$deletePersonsGroups = json['deletePersonsGroups'];
@@ -1469,18 +1440,7 @@ class Mutation_updatePerson {
     final l$insertHistoryKodasHistoryOne = json['insertHistoryKodasHistoryOne'];
     final l$insertHistoryCallHistoryOne = json['insertHistoryCallHistoryOne'];
     final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_updatePerson(
-      updatePersonsByPk: l$updatePersonsByPk == null
-          ? null
-          : Fragment_Person.fromJson(
-              (l$updatePersonsByPk as Map<String, dynamic>),
-            ),
-      updateAddressesByPk: l$updateAddressesByPk == null
-          ? null
-          : Fragment_Address.fromJson(
-              (l$updateAddressesByPk as Map<String, dynamic>),
-            ),
       insertPersonsServices: l$insertPersonsServices == null
           ? null
           : Mutation_updatePerson_insertPersonsServices.fromJson(
@@ -1500,6 +1460,16 @@ class Mutation_updatePerson {
           ? null
           : Mutation_updatePerson_insertPersonsTags.fromJson(
               (l$insertPersonsTags as Map<String, dynamic>),
+            ),
+      updatePersonsByPk: l$updatePersonsByPk == null
+          ? null
+          : Fragment_Person.fromJson(
+              (l$updatePersonsByPk as Map<String, dynamic>),
+            ),
+      updateAddressesByPk: l$updateAddressesByPk == null
+          ? null
+          : Fragment_Address.fromJson(
+              (l$updateAddressesByPk as Map<String, dynamic>),
             ),
       deletePersonsTags: l$deletePersonsTags == null
           ? null
@@ -1542,13 +1512,8 @@ class Mutation_updatePerson {
           : Mutation_updatePerson_insertHistoryVisitHistoryOne.fromJson(
               (l$insertHistoryVisitHistoryOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
-
-  final Fragment_Person? updatePersonsByPk;
-
-  final Fragment_Address? updateAddressesByPk;
 
   final Mutation_updatePerson_insertPersonsServices? insertPersonsServices;
 
@@ -1557,6 +1522,10 @@ class Mutation_updatePerson {
   final Mutation_updatePerson_insertPersonsHobbies? insertPersonsHobbies;
 
   final Mutation_updatePerson_insertPersonsTags? insertPersonsTags;
+
+  final Fragment_Person? updatePersonsByPk;
+
+  final Fragment_Address? updateAddressesByPk;
 
   final Mutation_updatePerson_deletePersonsTags? deletePersonsTags;
 
@@ -1578,14 +1547,8 @@ class Mutation_updatePerson {
   final Mutation_updatePerson_insertHistoryVisitHistoryOne?
   insertHistoryVisitHistoryOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$updatePersonsByPk = updatePersonsByPk;
-    _resultData['updatePersonsByPk'] = l$updatePersonsByPk?.toJson();
-    final l$updateAddressesByPk = updateAddressesByPk;
-    _resultData['updateAddressesByPk'] = l$updateAddressesByPk?.toJson();
     final l$insertPersonsServices = insertPersonsServices;
     _resultData['insertPersonsServices'] = l$insertPersonsServices?.toJson();
     final l$insertPersonsGroups = insertPersonsGroups;
@@ -1594,6 +1557,10 @@ class Mutation_updatePerson {
     _resultData['insertPersonsHobbies'] = l$insertPersonsHobbies?.toJson();
     final l$insertPersonsTags = insertPersonsTags;
     _resultData['insertPersonsTags'] = l$insertPersonsTags?.toJson();
+    final l$updatePersonsByPk = updatePersonsByPk;
+    _resultData['updatePersonsByPk'] = l$updatePersonsByPk?.toJson();
+    final l$updateAddressesByPk = updateAddressesByPk;
+    _resultData['updateAddressesByPk'] = l$updateAddressesByPk?.toJson();
     final l$deletePersonsTags = deletePersonsTags;
     _resultData['deletePersonsTags'] = l$deletePersonsTags?.toJson();
     final l$deletePersonsHobbies = deletePersonsHobbies;
@@ -1615,19 +1582,17 @@ class Mutation_updatePerson {
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     _resultData['insertHistoryVisitHistoryOne'] = l$insertHistoryVisitHistoryOne
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
-    final l$updatePersonsByPk = updatePersonsByPk;
-    final l$updateAddressesByPk = updateAddressesByPk;
     final l$insertPersonsServices = insertPersonsServices;
     final l$insertPersonsGroups = insertPersonsGroups;
     final l$insertPersonsHobbies = insertPersonsHobbies;
     final l$insertPersonsTags = insertPersonsTags;
+    final l$updatePersonsByPk = updatePersonsByPk;
+    final l$updateAddressesByPk = updateAddressesByPk;
     final l$deletePersonsTags = deletePersonsTags;
     final l$deletePersonsHobbies = deletePersonsHobbies;
     final l$deletePersonsGroups = deletePersonsGroups;
@@ -1637,14 +1602,13 @@ class Mutation_updatePerson {
     final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
     final l$insertHistoryCallHistoryOne = insertHistoryCallHistoryOne;
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
-    final l$$__typename = $__typename;
     return Object.hashAll([
-      l$updatePersonsByPk,
-      l$updateAddressesByPk,
       l$insertPersonsServices,
       l$insertPersonsGroups,
       l$insertPersonsHobbies,
       l$insertPersonsTags,
+      l$updatePersonsByPk,
+      l$updateAddressesByPk,
       l$deletePersonsTags,
       l$deletePersonsHobbies,
       l$deletePersonsGroups,
@@ -1653,7 +1617,6 @@ class Mutation_updatePerson {
       l$insertHistoryKodasHistoryOne,
       l$insertHistoryCallHistoryOne,
       l$insertHistoryVisitHistoryOne,
-      l$$__typename,
     ]);
   }
 
@@ -1663,16 +1626,6 @@ class Mutation_updatePerson {
       return true;
     }
     if (other is! Mutation_updatePerson || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$updatePersonsByPk = updatePersonsByPk;
-    final lOther$updatePersonsByPk = other.updatePersonsByPk;
-    if (l$updatePersonsByPk != lOther$updatePersonsByPk) {
-      return false;
-    }
-    final l$updateAddressesByPk = updateAddressesByPk;
-    final lOther$updateAddressesByPk = other.updateAddressesByPk;
-    if (l$updateAddressesByPk != lOther$updateAddressesByPk) {
       return false;
     }
     final l$insertPersonsServices = insertPersonsServices;
@@ -1693,6 +1646,16 @@ class Mutation_updatePerson {
     final l$insertPersonsTags = insertPersonsTags;
     final lOther$insertPersonsTags = other.insertPersonsTags;
     if (l$insertPersonsTags != lOther$insertPersonsTags) {
+      return false;
+    }
+    final l$updatePersonsByPk = updatePersonsByPk;
+    final lOther$updatePersonsByPk = other.updatePersonsByPk;
+    if (l$updatePersonsByPk != lOther$updatePersonsByPk) {
+      return false;
+    }
+    final l$updateAddressesByPk = updateAddressesByPk;
+    final lOther$updateAddressesByPk = other.updateAddressesByPk;
+    if (l$updateAddressesByPk != lOther$updateAddressesByPk) {
       return false;
     }
     final l$deletePersonsTags = deletePersonsTags;
@@ -1741,11 +1704,6 @@ class Mutation_updatePerson {
     if (l$insertHistoryVisitHistoryOne != lOther$insertHistoryVisitHistoryOne) {
       return false;
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -1765,12 +1723,12 @@ abstract class CopyWith_Mutation_updatePerson<TRes> {
       _CopyWithStubImpl_Mutation_updatePerson;
 
   TRes call({
-    Fragment_Person? updatePersonsByPk,
-    Fragment_Address? updateAddressesByPk,
     Mutation_updatePerson_insertPersonsServices? insertPersonsServices,
     Mutation_updatePerson_insertPersonsGroups? insertPersonsGroups,
     Mutation_updatePerson_insertPersonsHobbies? insertPersonsHobbies,
     Mutation_updatePerson_insertPersonsTags? insertPersonsTags,
+    Fragment_Person? updatePersonsByPk,
+    Fragment_Address? updateAddressesByPk,
     Mutation_updatePerson_deletePersonsTags? deletePersonsTags,
     Mutation_updatePerson_deletePersonsHobbies? deletePersonsHobbies,
     Mutation_updatePerson_deletePersonsGroups? deletePersonsGroups,
@@ -1783,10 +1741,7 @@ abstract class CopyWith_Mutation_updatePerson<TRes> {
     insertHistoryCallHistoryOne,
     Mutation_updatePerson_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
-    String? $__typename,
   });
-  CopyWith_Fragment_Person<TRes> get updatePersonsByPk;
-  CopyWith_Fragment_Address<TRes> get updateAddressesByPk;
   CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
   get insertPersonsServices;
   CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes>
@@ -1794,6 +1749,8 @@ abstract class CopyWith_Mutation_updatePerson<TRes> {
   CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes>
   get insertPersonsHobbies;
   CopyWith_Mutation_updatePerson_insertPersonsTags<TRes> get insertPersonsTags;
+  CopyWith_Fragment_Person<TRes> get updatePersonsByPk;
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk;
   CopyWith_Mutation_updatePerson_deletePersonsTags<TRes> get deletePersonsTags;
   CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes>
   get deletePersonsHobbies;
@@ -1822,12 +1779,12 @@ class _CopyWithImpl_Mutation_updatePerson<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? updatePersonsByPk = _undefined,
-    Object? updateAddressesByPk = _undefined,
     Object? insertPersonsServices = _undefined,
     Object? insertPersonsGroups = _undefined,
     Object? insertPersonsHobbies = _undefined,
     Object? insertPersonsTags = _undefined,
+    Object? updatePersonsByPk = _undefined,
+    Object? updateAddressesByPk = _undefined,
     Object? deletePersonsTags = _undefined,
     Object? deletePersonsHobbies = _undefined,
     Object? deletePersonsGroups = _undefined,
@@ -1836,15 +1793,8 @@ class _CopyWithImpl_Mutation_updatePerson<TRes>
     Object? insertHistoryKodasHistoryOne = _undefined,
     Object? insertHistoryCallHistoryOne = _undefined,
     Object? insertHistoryVisitHistoryOne = _undefined,
-    Object? $__typename = _undefined,
   }) => _then(
     Mutation_updatePerson(
-      updatePersonsByPk: updatePersonsByPk == _undefined
-          ? _instance.updatePersonsByPk
-          : (updatePersonsByPk as Fragment_Person?),
-      updateAddressesByPk: updateAddressesByPk == _undefined
-          ? _instance.updateAddressesByPk
-          : (updateAddressesByPk as Fragment_Address?),
       insertPersonsServices: insertPersonsServices == _undefined
           ? _instance.insertPersonsServices
           : (insertPersonsServices
@@ -1859,6 +1809,12 @@ class _CopyWithImpl_Mutation_updatePerson<TRes>
       insertPersonsTags: insertPersonsTags == _undefined
           ? _instance.insertPersonsTags
           : (insertPersonsTags as Mutation_updatePerson_insertPersonsTags?),
+      updatePersonsByPk: updatePersonsByPk == _undefined
+          ? _instance.updatePersonsByPk
+          : (updatePersonsByPk as Fragment_Person?),
+      updateAddressesByPk: updateAddressesByPk == _undefined
+          ? _instance.updateAddressesByPk
+          : (updateAddressesByPk as Fragment_Address?),
       deletePersonsTags: deletePersonsTags == _undefined
           ? _instance.deletePersonsTags
           : (deletePersonsTags as Mutation_updatePerson_deletePersonsTags?),
@@ -1890,31 +1846,8 @@ class _CopyWithImpl_Mutation_updatePerson<TRes>
           ? _instance.insertHistoryVisitHistoryOne
           : (insertHistoryVisitHistoryOne
                 as Mutation_updatePerson_insertHistoryVisitHistoryOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
-
-  CopyWith_Fragment_Person<TRes> get updatePersonsByPk {
-    final local$updatePersonsByPk = _instance.updatePersonsByPk;
-    return local$updatePersonsByPk == null
-        ? CopyWith_Fragment_Person.stub(_then(_instance))
-        : CopyWith_Fragment_Person(
-            local$updatePersonsByPk,
-            (e) => call(updatePersonsByPk: e),
-          );
-  }
-
-  CopyWith_Fragment_Address<TRes> get updateAddressesByPk {
-    final local$updateAddressesByPk = _instance.updateAddressesByPk;
-    return local$updateAddressesByPk == null
-        ? CopyWith_Fragment_Address.stub(_then(_instance))
-        : CopyWith_Fragment_Address(
-            local$updateAddressesByPk,
-            (e) => call(updateAddressesByPk: e),
-          );
-  }
 
   CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
   get insertPersonsServices {
@@ -1964,6 +1897,26 @@ class _CopyWithImpl_Mutation_updatePerson<TRes>
         : CopyWith_Mutation_updatePerson_insertPersonsTags(
             local$insertPersonsTags,
             (e) => call(insertPersonsTags: e),
+          );
+  }
+
+  CopyWith_Fragment_Person<TRes> get updatePersonsByPk {
+    final local$updatePersonsByPk = _instance.updatePersonsByPk;
+    return local$updatePersonsByPk == null
+        ? CopyWith_Fragment_Person.stub(_then(_instance))
+        : CopyWith_Fragment_Person(
+            local$updatePersonsByPk,
+            (e) => call(updatePersonsByPk: e),
+          );
+  }
+
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk {
+    final local$updateAddressesByPk = _instance.updateAddressesByPk;
+    return local$updateAddressesByPk == null
+        ? CopyWith_Fragment_Address.stub(_then(_instance))
+        : CopyWith_Fragment_Address(
+            local$updateAddressesByPk,
+            (e) => call(updateAddressesByPk: e),
           );
   }
 
@@ -2082,12 +2035,12 @@ class _CopyWithStubImpl_Mutation_updatePerson<TRes>
   TRes _res;
 
   call({
-    Fragment_Person? updatePersonsByPk,
-    Fragment_Address? updateAddressesByPk,
     Mutation_updatePerson_insertPersonsServices? insertPersonsServices,
     Mutation_updatePerson_insertPersonsGroups? insertPersonsGroups,
     Mutation_updatePerson_insertPersonsHobbies? insertPersonsHobbies,
     Mutation_updatePerson_insertPersonsTags? insertPersonsTags,
+    Fragment_Person? updatePersonsByPk,
+    Fragment_Address? updateAddressesByPk,
     Mutation_updatePerson_deletePersonsTags? deletePersonsTags,
     Mutation_updatePerson_deletePersonsHobbies? deletePersonsHobbies,
     Mutation_updatePerson_deletePersonsGroups? deletePersonsGroups,
@@ -2100,14 +2053,7 @@ class _CopyWithStubImpl_Mutation_updatePerson<TRes>
     insertHistoryCallHistoryOne,
     Mutation_updatePerson_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
-    String? $__typename,
   }) => _res;
-
-  CopyWith_Fragment_Person<TRes> get updatePersonsByPk =>
-      CopyWith_Fragment_Person.stub(_res);
-
-  CopyWith_Fragment_Address<TRes> get updateAddressesByPk =>
-      CopyWith_Fragment_Address.stub(_res);
 
   CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
   get insertPersonsServices =>
@@ -2124,6 +2070,12 @@ class _CopyWithStubImpl_Mutation_updatePerson<TRes>
   CopyWith_Mutation_updatePerson_insertPersonsTags<TRes>
   get insertPersonsTags =>
       CopyWith_Mutation_updatePerson_insertPersonsTags.stub(_res);
+
+  CopyWith_Fragment_Person<TRes> get updatePersonsByPk =>
+      CopyWith_Fragment_Person.stub(_res);
+
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk =>
+      CopyWith_Fragment_Address.stub(_res);
 
   CopyWith_Mutation_updatePerson_deletePersonsTags<TRes>
   get deletePersonsTags =>
@@ -2453,104 +2405,6 @@ const documentNodeMutationupdatePerson = DocumentNode(
       selectionSet: SelectionSetNode(
         selections: [
           FieldNode(
-            name: NameNode(value: 'updatePersonsByPk'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'pkColumns'),
-                value: ObjectValueNode(
-                  fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'id'),
-                      value: VariableNode(name: NameNode(value: 'personId')),
-                    ),
-                  ],
-                ),
-              ),
-              ArgumentNode(
-                name: NameNode(value: '_set'),
-                value: VariableNode(name: NameNode(value: 'newPerson')),
-              ),
-            ],
-            directives: [
-              DirectiveNode(
-                name: NameNode(value: 'include'),
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'if'),
-                    value: VariableNode(
-                      name: NameNode(value: 'updatePersonsByPk'),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-            selectionSet: SelectionSetNode(
-              selections: [
-                FragmentSpreadNode(
-                  name: NameNode(value: 'Person'),
-                  directives: [],
-                ),
-                FieldNode(
-                  name: NameNode(value: '__typename'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-              ],
-            ),
-          ),
-          FieldNode(
-            name: NameNode(value: 'updateAddressesByPk'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'pkColumns'),
-                value: ObjectValueNode(
-                  fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'id'),
-                      value: VariableNode(name: NameNode(value: 'addressId')),
-                    ),
-                  ],
-                ),
-              ),
-              ArgumentNode(
-                name: NameNode(value: '_set'),
-                value: VariableNode(name: NameNode(value: 'newAddress')),
-              ),
-            ],
-            directives: [
-              DirectiveNode(
-                name: NameNode(value: 'include'),
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'if'),
-                    value: VariableNode(
-                      name: NameNode(value: 'updateAddressByPk'),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-            selectionSet: SelectionSetNode(
-              selections: [
-                FragmentSpreadNode(
-                  name: NameNode(value: 'Address'),
-                  directives: [],
-                ),
-                FieldNode(
-                  name: NameNode(value: '__typename'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-              ],
-            ),
-          ),
-          FieldNode(
             name: NameNode(value: 'insertPersonsServices'),
             alias: null,
             arguments: [
@@ -2703,6 +2557,104 @@ const documentNodeMutationupdatePerson = DocumentNode(
                   arguments: [],
                   directives: [],
                   selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'updatePersonsByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'personId')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: VariableNode(name: NameNode(value: 'newPerson')),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'updatePersonsByPk'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Person'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'updateAddressesByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'addressId')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: VariableNode(name: NameNode(value: 'newAddress')),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'updateAddressByPk'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Address'),
+                  directives: [],
                 ),
                 FieldNode(
                   name: NameNode(value: '__typename'),
@@ -3397,13 +3349,6 @@ const documentNodeMutationupdatePerson = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -5549,42 +5494,32 @@ class _CopyWithStubImpl_Variables_Mutation_insertPerson<TRes>
 }
 
 class Mutation_insertPerson {
-  Mutation_insertPerson({
-    this.insertPersonsOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertPerson({this.insertPersonsOne});
 
   factory Mutation_insertPerson.fromJson(Map<String, dynamic> json) {
     final l$insertPersonsOne = json['insertPersonsOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertPerson(
       insertPersonsOne: l$insertPersonsOne == null
           ? null
           : Fragment_Person.fromJson(
               (l$insertPersonsOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Person? insertPersonsOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertPersonsOne = insertPersonsOne;
     _resultData['insertPersonsOne'] = l$insertPersonsOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertPersonsOne = insertPersonsOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertPersonsOne, l$$__typename]);
+    return Object.hashAll([l$insertPersonsOne]);
   }
 
   @override
@@ -5598,11 +5533,6 @@ class Mutation_insertPerson {
     final l$insertPersonsOne = insertPersonsOne;
     final lOther$insertPersonsOne = other.insertPersonsOne;
     if (l$insertPersonsOne != lOther$insertPersonsOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -5623,7 +5553,7 @@ abstract class CopyWith_Mutation_insertPerson<TRes> {
   factory CopyWith_Mutation_insertPerson.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertPerson;
 
-  TRes call({Fragment_Person? insertPersonsOne, String? $__typename});
+  TRes call({Fragment_Person? insertPersonsOne});
   CopyWith_Fragment_Person<TRes> get insertPersonsOne;
 }
 
@@ -5637,17 +5567,11 @@ class _CopyWithImpl_Mutation_insertPerson<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertPersonsOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertPersonsOne = _undefined}) => _then(
     Mutation_insertPerson(
       insertPersonsOne: insertPersonsOne == _undefined
           ? _instance.insertPersonsOne
           : (insertPersonsOne as Fragment_Person?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -5668,7 +5592,7 @@ class _CopyWithStubImpl_Mutation_insertPerson<TRes>
 
   TRes _res;
 
-  call({Fragment_Person? insertPersonsOne, String? $__typename}) => _res;
+  call({Fragment_Person? insertPersonsOne}) => _res;
 
   CopyWith_Fragment_Person<TRes> get insertPersonsOne =>
       CopyWith_Fragment_Person.stub(_res);
@@ -5718,13 +5642,6 @@ const documentNodeMutationinsertPerson = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -5883,7 +5800,6 @@ class Mutation_updatePersonSpiritData {
     this.$_k,
     this.insertHistoryConfessionHistoryOne,
     this.insertHistoryKodasHistoryOne,
-    this.$__typename = 'mutation_root',
   });
 
   factory Mutation_updatePersonSpiritData.fromJson(Map<String, dynamic> json) {
@@ -5892,7 +5808,6 @@ class Mutation_updatePersonSpiritData {
     final l$insertHistoryConfessionHistoryOne =
         json['insertHistoryConfessionHistoryOne'];
     final l$insertHistoryKodasHistoryOne = json['insertHistoryKodasHistoryOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_updatePersonSpiritData(
       $_c: l$$_c == null
           ? null
@@ -5915,7 +5830,6 @@ class Mutation_updatePersonSpiritData {
           : Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne.fromJson(
               (l$insertHistoryKodasHistoryOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
@@ -5928,8 +5842,6 @@ class Mutation_updatePersonSpiritData {
 
   final Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
   insertHistoryKodasHistoryOne;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -5944,8 +5856,6 @@ class Mutation_updatePersonSpiritData {
     final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
     _resultData['insertHistoryKodasHistoryOne'] = l$insertHistoryKodasHistoryOne
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
@@ -5956,13 +5866,11 @@ class Mutation_updatePersonSpiritData {
     final l$insertHistoryConfessionHistoryOne =
         insertHistoryConfessionHistoryOne;
     final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
-    final l$$__typename = $__typename;
     return Object.hashAll([
       l$$_c,
       l$$_k,
       l$insertHistoryConfessionHistoryOne,
       l$insertHistoryKodasHistoryOne,
-      l$$__typename,
     ]);
   }
 
@@ -5999,11 +5907,6 @@ class Mutation_updatePersonSpiritData {
     if (l$insertHistoryKodasHistoryOne != lOther$insertHistoryKodasHistoryOne) {
       return false;
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -6030,7 +5933,6 @@ abstract class CopyWith_Mutation_updatePersonSpiritData<TRes> {
     insertHistoryConfessionHistoryOne,
     Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
     insertHistoryKodasHistoryOne,
-    String? $__typename,
   });
   CopyWith_Mutation_updatePersonSpiritData__c<TRes> get $_c;
   CopyWith_Mutation_updatePersonSpiritData__k<TRes> get $_k;
@@ -6057,7 +5959,6 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData<TRes>
     Object? $_k = _undefined,
     Object? insertHistoryConfessionHistoryOne = _undefined,
     Object? insertHistoryKodasHistoryOne = _undefined,
-    Object? $__typename = _undefined,
   }) => _then(
     Mutation_updatePersonSpiritData(
       $_c: $_c == _undefined
@@ -6075,9 +5976,6 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData<TRes>
           ? _instance.insertHistoryKodasHistoryOne
           : (insertHistoryKodasHistoryOne
                 as Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -6145,7 +6043,6 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData<TRes>
     insertHistoryConfessionHistoryOne,
     Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
     insertHistoryKodasHistoryOne,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_updatePersonSpiritData__c<TRes> get $_c =>
@@ -6458,13 +6355,6 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

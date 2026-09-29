@@ -127,17 +127,13 @@ class _CopyWithStubImpl_Variables_Mutation_insertPersonLastConfession<TRes>
 }
 
 class Mutation_insertPersonLastConfession {
-  Mutation_insertPersonLastConfession({
-    this.insertHistoryConfessionHistoryOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertPersonLastConfession({this.insertHistoryConfessionHistoryOne});
 
   factory Mutation_insertPersonLastConfession.fromJson(
     Map<String, dynamic> json,
   ) {
     final l$insertHistoryConfessionHistoryOne =
         json['insertHistoryConfessionHistoryOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertPersonLastConfession(
       insertHistoryConfessionHistoryOne:
           l$insertHistoryConfessionHistoryOne == null
@@ -145,14 +141,11 @@ class Mutation_insertPersonLastConfession {
           : Mutation_insertPersonLastConfession_insertHistoryConfessionHistoryOne.fromJson(
               (l$insertHistoryConfessionHistoryOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_insertPersonLastConfession_insertHistoryConfessionHistoryOne?
   insertHistoryConfessionHistoryOne;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -160,8 +153,6 @@ class Mutation_insertPersonLastConfession {
         insertHistoryConfessionHistoryOne;
     _resultData['insertHistoryConfessionHistoryOne'] =
         l$insertHistoryConfessionHistoryOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
@@ -169,8 +160,7 @@ class Mutation_insertPersonLastConfession {
   int get hashCode {
     final l$insertHistoryConfessionHistoryOne =
         insertHistoryConfessionHistoryOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertHistoryConfessionHistoryOne, l$$__typename]);
+    return Object.hashAll([l$insertHistoryConfessionHistoryOne]);
   }
 
   @override
@@ -188,11 +178,6 @@ class Mutation_insertPersonLastConfession {
         other.insertHistoryConfessionHistoryOne;
     if (l$insertHistoryConfessionHistoryOne !=
         lOther$insertHistoryConfessionHistoryOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -219,7 +204,6 @@ abstract class CopyWith_Mutation_insertPersonLastConfession<TRes> {
   TRes call({
     Mutation_insertPersonLastConfession_insertHistoryConfessionHistoryOne?
     insertHistoryConfessionHistoryOne,
-    String? $__typename,
   });
   CopyWith_Mutation_insertPersonLastConfession_insertHistoryConfessionHistoryOne<
     TRes
@@ -237,19 +221,13 @@ class _CopyWithImpl_Mutation_insertPersonLastConfession<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertHistoryConfessionHistoryOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertHistoryConfessionHistoryOne = _undefined}) => _then(
     Mutation_insertPersonLastConfession(
       insertHistoryConfessionHistoryOne:
           insertHistoryConfessionHistoryOne == _undefined
           ? _instance.insertHistoryConfessionHistoryOne
           : (insertHistoryConfessionHistoryOne
                 as Mutation_insertPersonLastConfession_insertHistoryConfessionHistoryOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -279,7 +257,6 @@ class _CopyWithStubImpl_Mutation_insertPersonLastConfession<TRes>
   call({
     Mutation_insertPersonLastConfession_insertHistoryConfessionHistoryOne?
     insertHistoryConfessionHistoryOne,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_insertPersonLastConfession_insertHistoryConfessionHistoryOne<
@@ -425,13 +402,6 @@ const documentNodeMutationinsertPersonLastConfession = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -730,44 +700,34 @@ class _CopyWithStubImpl_Variables_Mutation_insertPersonLastCall<TRes>
 }
 
 class Mutation_insertPersonLastCall {
-  Mutation_insertPersonLastCall({
-    this.insertHistoryCallHistoryOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertPersonLastCall({this.insertHistoryCallHistoryOne});
 
   factory Mutation_insertPersonLastCall.fromJson(Map<String, dynamic> json) {
     final l$insertHistoryCallHistoryOne = json['insertHistoryCallHistoryOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertPersonLastCall(
       insertHistoryCallHistoryOne: l$insertHistoryCallHistoryOne == null
           ? null
           : Mutation_insertPersonLastCall_insertHistoryCallHistoryOne.fromJson(
               (l$insertHistoryCallHistoryOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_insertPersonLastCall_insertHistoryCallHistoryOne?
   insertHistoryCallHistoryOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertHistoryCallHistoryOne = insertHistoryCallHistoryOne;
     _resultData['insertHistoryCallHistoryOne'] = l$insertHistoryCallHistoryOne
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertHistoryCallHistoryOne = insertHistoryCallHistoryOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertHistoryCallHistoryOne, l$$__typename]);
+    return Object.hashAll([l$insertHistoryCallHistoryOne]);
   }
 
   @override
@@ -783,11 +743,6 @@ class Mutation_insertPersonLastCall {
     final lOther$insertHistoryCallHistoryOne =
         other.insertHistoryCallHistoryOne;
     if (l$insertHistoryCallHistoryOne != lOther$insertHistoryCallHistoryOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -812,7 +767,6 @@ abstract class CopyWith_Mutation_insertPersonLastCall<TRes> {
   TRes call({
     Mutation_insertPersonLastCall_insertHistoryCallHistoryOne?
     insertHistoryCallHistoryOne,
-    String? $__typename,
   });
   CopyWith_Mutation_insertPersonLastCall_insertHistoryCallHistoryOne<TRes>
   get insertHistoryCallHistoryOne;
@@ -828,18 +782,12 @@ class _CopyWithImpl_Mutation_insertPersonLastCall<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertHistoryCallHistoryOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertHistoryCallHistoryOne = _undefined}) => _then(
     Mutation_insertPersonLastCall(
       insertHistoryCallHistoryOne: insertHistoryCallHistoryOne == _undefined
           ? _instance.insertHistoryCallHistoryOne
           : (insertHistoryCallHistoryOne
                 as Mutation_insertPersonLastCall_insertHistoryCallHistoryOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -867,7 +815,6 @@ class _CopyWithStubImpl_Mutation_insertPersonLastCall<TRes>
   call({
     Mutation_insertPersonLastCall_insertHistoryCallHistoryOne?
     insertHistoryCallHistoryOne,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_insertPersonLastCall_insertHistoryCallHistoryOne<TRes>
@@ -955,13 +902,6 @@ const documentNodeMutationinsertPersonLastCall = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -1236,44 +1176,34 @@ class _CopyWithStubImpl_Variables_Mutation_insertPersonLastVisit<TRes>
 }
 
 class Mutation_insertPersonLastVisit {
-  Mutation_insertPersonLastVisit({
-    this.insertHistoryVisitHistoryOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertPersonLastVisit({this.insertHistoryVisitHistoryOne});
 
   factory Mutation_insertPersonLastVisit.fromJson(Map<String, dynamic> json) {
     final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertPersonLastVisit(
       insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
           ? null
           : Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne.fromJson(
               (l$insertHistoryVisitHistoryOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne?
   insertHistoryVisitHistoryOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     _resultData['insertHistoryVisitHistoryOne'] = l$insertHistoryVisitHistoryOne
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertHistoryVisitHistoryOne, l$$__typename]);
+    return Object.hashAll([l$insertHistoryVisitHistoryOne]);
   }
 
   @override
@@ -1289,11 +1219,6 @@ class Mutation_insertPersonLastVisit {
     final lOther$insertHistoryVisitHistoryOne =
         other.insertHistoryVisitHistoryOne;
     if (l$insertHistoryVisitHistoryOne != lOther$insertHistoryVisitHistoryOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -1318,7 +1243,6 @@ abstract class CopyWith_Mutation_insertPersonLastVisit<TRes> {
   TRes call({
     Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
-    String? $__typename,
   });
   CopyWith_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne<TRes>
   get insertHistoryVisitHistoryOne;
@@ -1334,18 +1258,12 @@ class _CopyWithImpl_Mutation_insertPersonLastVisit<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertHistoryVisitHistoryOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertHistoryVisitHistoryOne = _undefined}) => _then(
     Mutation_insertPersonLastVisit(
       insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
           ? _instance.insertHistoryVisitHistoryOne
           : (insertHistoryVisitHistoryOne
                 as Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -1373,7 +1291,6 @@ class _CopyWithStubImpl_Mutation_insertPersonLastVisit<TRes>
   call({
     Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne<TRes>
@@ -1472,13 +1389,6 @@ const documentNodeMutationinsertPersonLastVisit = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -1794,44 +1704,34 @@ class _CopyWithStubImpl_Variables_Mutation_insertFamilyLastVisit<TRes>
 }
 
 class Mutation_insertFamilyLastVisit {
-  Mutation_insertFamilyLastVisit({
-    this.insertHistoryVisitHistoryOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertFamilyLastVisit({this.insertHistoryVisitHistoryOne});
 
   factory Mutation_insertFamilyLastVisit.fromJson(Map<String, dynamic> json) {
     final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertFamilyLastVisit(
       insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
           ? null
           : Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne.fromJson(
               (l$insertHistoryVisitHistoryOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne?
   insertHistoryVisitHistoryOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     _resultData['insertHistoryVisitHistoryOne'] = l$insertHistoryVisitHistoryOne
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertHistoryVisitHistoryOne, l$$__typename]);
+    return Object.hashAll([l$insertHistoryVisitHistoryOne]);
   }
 
   @override
@@ -1847,11 +1747,6 @@ class Mutation_insertFamilyLastVisit {
     final lOther$insertHistoryVisitHistoryOne =
         other.insertHistoryVisitHistoryOne;
     if (l$insertHistoryVisitHistoryOne != lOther$insertHistoryVisitHistoryOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -1876,7 +1771,6 @@ abstract class CopyWith_Mutation_insertFamilyLastVisit<TRes> {
   TRes call({
     Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
-    String? $__typename,
   });
   CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne<TRes>
   get insertHistoryVisitHistoryOne;
@@ -1892,18 +1786,12 @@ class _CopyWithImpl_Mutation_insertFamilyLastVisit<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertHistoryVisitHistoryOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertHistoryVisitHistoryOne = _undefined}) => _then(
     Mutation_insertFamilyLastVisit(
       insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
           ? _instance.insertHistoryVisitHistoryOne
           : (insertHistoryVisitHistoryOne
                 as Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -1931,7 +1819,6 @@ class _CopyWithStubImpl_Mutation_insertFamilyLastVisit<TRes>
   call({
     Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne<TRes>
@@ -2045,13 +1932,6 @@ const documentNodeMutationinsertFamilyLastVisit = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -2348,44 +2228,34 @@ class _CopyWithStubImpl_Variables_Mutation_insertStreetLastVisit<TRes>
 }
 
 class Mutation_insertStreetLastVisit {
-  Mutation_insertStreetLastVisit({
-    this.insertHistoryVisitHistoryOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertStreetLastVisit({this.insertHistoryVisitHistoryOne});
 
   factory Mutation_insertStreetLastVisit.fromJson(Map<String, dynamic> json) {
     final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertStreetLastVisit(
       insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
           ? null
           : Mutation_insertStreetLastVisit_insertHistoryVisitHistoryOne.fromJson(
               (l$insertHistoryVisitHistoryOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_insertStreetLastVisit_insertHistoryVisitHistoryOne?
   insertHistoryVisitHistoryOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     _resultData['insertHistoryVisitHistoryOne'] = l$insertHistoryVisitHistoryOne
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertHistoryVisitHistoryOne, l$$__typename]);
+    return Object.hashAll([l$insertHistoryVisitHistoryOne]);
   }
 
   @override
@@ -2401,11 +2271,6 @@ class Mutation_insertStreetLastVisit {
     final lOther$insertHistoryVisitHistoryOne =
         other.insertHistoryVisitHistoryOne;
     if (l$insertHistoryVisitHistoryOne != lOther$insertHistoryVisitHistoryOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -2430,7 +2295,6 @@ abstract class CopyWith_Mutation_insertStreetLastVisit<TRes> {
   TRes call({
     Mutation_insertStreetLastVisit_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
-    String? $__typename,
   });
   CopyWith_Mutation_insertStreetLastVisit_insertHistoryVisitHistoryOne<TRes>
   get insertHistoryVisitHistoryOne;
@@ -2446,18 +2310,12 @@ class _CopyWithImpl_Mutation_insertStreetLastVisit<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertHistoryVisitHistoryOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertHistoryVisitHistoryOne = _undefined}) => _then(
     Mutation_insertStreetLastVisit(
       insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
           ? _instance.insertHistoryVisitHistoryOne
           : (insertHistoryVisitHistoryOne
                 as Mutation_insertStreetLastVisit_insertHistoryVisitHistoryOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -2485,7 +2343,6 @@ class _CopyWithStubImpl_Mutation_insertStreetLastVisit<TRes>
   call({
     Mutation_insertStreetLastVisit_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_insertStreetLastVisit_insertHistoryVisitHistoryOne<TRes>
@@ -2584,13 +2441,6 @@ const documentNodeMutationinsertStreetLastVisit = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -2874,43 +2724,33 @@ class _CopyWithStubImpl_Variables_Mutation_recordKodas<TRes>
 }
 
 class Mutation_recordKodas {
-  Mutation_recordKodas({
-    this.insertHistoryKodasHistoryOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_recordKodas({this.insertHistoryKodasHistoryOne});
 
   factory Mutation_recordKodas.fromJson(Map<String, dynamic> json) {
     final l$insertHistoryKodasHistoryOne = json['insertHistoryKodasHistoryOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_recordKodas(
       insertHistoryKodasHistoryOne: l$insertHistoryKodasHistoryOne == null
           ? null
           : Fragment_KodasDayRecord.fromJson(
               (l$insertHistoryKodasHistoryOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_KodasDayRecord? insertHistoryKodasHistoryOne;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
     _resultData['insertHistoryKodasHistoryOne'] = l$insertHistoryKodasHistoryOne
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertHistoryKodasHistoryOne, l$$__typename]);
+    return Object.hashAll([l$insertHistoryKodasHistoryOne]);
   }
 
   @override
@@ -2925,11 +2765,6 @@ class Mutation_recordKodas {
     final lOther$insertHistoryKodasHistoryOne =
         other.insertHistoryKodasHistoryOne;
     if (l$insertHistoryKodasHistoryOne != lOther$insertHistoryKodasHistoryOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -2950,10 +2785,7 @@ abstract class CopyWith_Mutation_recordKodas<TRes> {
   factory CopyWith_Mutation_recordKodas.stub(TRes res) =
       _CopyWithStubImpl_Mutation_recordKodas;
 
-  TRes call({
-    Fragment_KodasDayRecord? insertHistoryKodasHistoryOne,
-    String? $__typename,
-  });
+  TRes call({Fragment_KodasDayRecord? insertHistoryKodasHistoryOne});
   CopyWith_Fragment_KodasDayRecord<TRes> get insertHistoryKodasHistoryOne;
 }
 
@@ -2967,17 +2799,11 @@ class _CopyWithImpl_Mutation_recordKodas<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertHistoryKodasHistoryOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertHistoryKodasHistoryOne = _undefined}) => _then(
     Mutation_recordKodas(
       insertHistoryKodasHistoryOne: insertHistoryKodasHistoryOne == _undefined
           ? _instance.insertHistoryKodasHistoryOne
           : (insertHistoryKodasHistoryOne as Fragment_KodasDayRecord?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -2999,10 +2825,7 @@ class _CopyWithStubImpl_Mutation_recordKodas<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_KodasDayRecord? insertHistoryKodasHistoryOne,
-    String? $__typename,
-  }) => _res;
+  call({Fragment_KodasDayRecord? insertHistoryKodasHistoryOne}) => _res;
 
   CopyWith_Fragment_KodasDayRecord<TRes> get insertHistoryKodasHistoryOne =>
       CopyWith_Fragment_KodasDayRecord.stub(_res);
@@ -3119,13 +2942,6 @@ const documentNodeMutationrecordKodas = DocumentNode(
               ],
             ),
           ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
         ],
       ),
     ),
@@ -3224,44 +3040,34 @@ class _CopyWithStubImpl_Variables_Mutation_deleteKodas<TRes>
 }
 
 class Mutation_deleteKodas {
-  Mutation_deleteKodas({
-    this.deleteHistoryKodasHistoryByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_deleteKodas({this.deleteHistoryKodasHistoryByPk});
 
   factory Mutation_deleteKodas.fromJson(Map<String, dynamic> json) {
     final l$deleteHistoryKodasHistoryByPk =
         json['deleteHistoryKodasHistoryByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_deleteKodas(
       deleteHistoryKodasHistoryByPk: l$deleteHistoryKodasHistoryByPk == null
           ? null
           : Fragment_KodasDayRecord.fromJson(
               (l$deleteHistoryKodasHistoryByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_KodasDayRecord? deleteHistoryKodasHistoryByPk;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$deleteHistoryKodasHistoryByPk = deleteHistoryKodasHistoryByPk;
     _resultData['deleteHistoryKodasHistoryByPk'] =
         l$deleteHistoryKodasHistoryByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$deleteHistoryKodasHistoryByPk = deleteHistoryKodasHistoryByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$deleteHistoryKodasHistoryByPk, l$$__typename]);
+    return Object.hashAll([l$deleteHistoryKodasHistoryByPk]);
   }
 
   @override
@@ -3277,11 +3083,6 @@ class Mutation_deleteKodas {
         other.deleteHistoryKodasHistoryByPk;
     if (l$deleteHistoryKodasHistoryByPk !=
         lOther$deleteHistoryKodasHistoryByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -3302,10 +3103,7 @@ abstract class CopyWith_Mutation_deleteKodas<TRes> {
   factory CopyWith_Mutation_deleteKodas.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteKodas;
 
-  TRes call({
-    Fragment_KodasDayRecord? deleteHistoryKodasHistoryByPk,
-    String? $__typename,
-  });
+  TRes call({Fragment_KodasDayRecord? deleteHistoryKodasHistoryByPk});
   CopyWith_Fragment_KodasDayRecord<TRes> get deleteHistoryKodasHistoryByPk;
 }
 
@@ -3319,17 +3117,11 @@ class _CopyWithImpl_Mutation_deleteKodas<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? deleteHistoryKodasHistoryByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? deleteHistoryKodasHistoryByPk = _undefined}) => _then(
     Mutation_deleteKodas(
       deleteHistoryKodasHistoryByPk: deleteHistoryKodasHistoryByPk == _undefined
           ? _instance.deleteHistoryKodasHistoryByPk
           : (deleteHistoryKodasHistoryByPk as Fragment_KodasDayRecord?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -3351,10 +3143,7 @@ class _CopyWithStubImpl_Mutation_deleteKodas<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_KodasDayRecord? deleteHistoryKodasHistoryByPk,
-    String? $__typename,
-  }) => _res;
+  call({Fragment_KodasDayRecord? deleteHistoryKodasHistoryByPk}) => _res;
 
   CopyWith_Fragment_KodasDayRecord<TRes> get deleteHistoryKodasHistoryByPk =>
       CopyWith_Fragment_KodasDayRecord.stub(_res);
@@ -3401,13 +3190,6 @@ const documentNodeMutationdeleteKodas = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
