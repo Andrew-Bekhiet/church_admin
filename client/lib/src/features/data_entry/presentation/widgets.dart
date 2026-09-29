@@ -28,6 +28,7 @@ export 'widgets/person_services_and_groups_field.dart';
 export 'widgets/person_tags_section.dart';
 export 'widgets/person_work_and_education_fields.dart';
 export 'widgets/person_work_and_study_section.dart';
+export 'widgets/phone_contacts_section.dart';
 export 'widgets/phone_field_name_dialog.dart';
 export 'widgets/phone_number_property_widget.dart';
 export 'widgets/show_more_list.dart';

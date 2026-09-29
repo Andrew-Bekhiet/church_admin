@@ -7,6 +7,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class PhoneNumberPropertyWidget extends StatelessWidget {
   final bool showErrorIfEmpty;
+  final bool isMain;
   final String propName;
   final String value;
   final void Function(String) phoneCall;
@@ -15,6 +16,7 @@ class PhoneNumberPropertyWidget extends StatelessWidget {
     this.value,
     this.phoneCall, {
     this.showErrorIfEmpty = true,
+    this.isMain = false,
     this.addToContacts,
     super.key,
   });
@@ -82,8 +84,19 @@ class PhoneNumberPropertyWidget extends StatelessWidget {
     }
 
     return ListTile(
-      title: Text(propName),
-      subtitle: Text(value),
+      title: isMain
+          ? Row(
+              spacing: 8,
+              children: [
+                Flexible(child: Text(propName)),
+                const Chip(
+                  label: Text('أساسي'),
+                  visualDensity: VisualDensity.compact,
+                ),
+              ],
+            )
+          : Text(propName),
+      subtitle: Text(PhoneNumberService.I.display(value)),
       trailing: trailing,
     );
   }

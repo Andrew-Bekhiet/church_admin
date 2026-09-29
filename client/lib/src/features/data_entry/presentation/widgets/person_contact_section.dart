@@ -13,6 +13,9 @@ class PersonContactSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labelSmall = Theme.of(context).textTheme.labelSmall!;
+    final familyContacts = (person.family?.contacts ?? const [])
+        .where((c) => c.personId != person.id)
+        .toList();
 
     return Column(
       children: [
@@ -21,20 +24,24 @@ class PersonContactSection extends StatelessWidget {
             title: const Text('الرقم القومي'),
             subtitle: Text(person.nationalId?.toString() ?? ''),
           ),
-        PhoneNumberPropertyWidget(
-          'رقم الهاتف',
-          person.mainPhone ?? '',
-          (n) => _phoneCall(context, n),
+        PhoneContactsSection(
+          key: PersonContactSectionKeys.ownNumbers,
+          title: 'أرقام الهاتف',
+          contacts: person.contacts,
+          showErrorIfEmpty: true,
+          phoneCall: (n) => _phoneCall(context, n),
           addToContacts: (n) => _contactAdd(context, n, person),
         ),
-        ...person.otherPhones.entries.map(
-          (e) => PhoneNumberPropertyWidget(
-            e.key,
-            e.value,
-            (n) => _phoneCall(context, n),
+        if (familyContacts.isNotEmpty)
+          PhoneContactsSection(
+            key: PersonContactSectionKeys.familyNumbers,
+            title: 'أرقام الأسرة',
+            contacts: familyContacts,
+            phoneCall: (n) => LauncherService.I.launchCall(
+              PhoneNumberService.I.formatInternational(n),
+            ),
             addToContacts: (n) => _contactAdd(context, n, person),
           ),
-        ),
         CopiablePropertyWidget(
           'العنوان والموقع',
           person.address?.toString(),
@@ -184,4 +191,11 @@ class PersonContactSection extends StatelessWidget {
       ),
     );
   }
+}
+
+abstract final class PersonContactSectionKeys {
+  static const Key ownNumbers = ValueKey('personContactSection-ownNumbers');
+  static const Key familyNumbers = ValueKey(
+    'personContactSection-familyNumbers',
+  );
 }

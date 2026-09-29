@@ -12,12 +12,11 @@ class FamilyDetailsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverList(
       delegate: SliverChildListDelegate([
-        for (final MapEntry(key: personType, value: phone)
-            in family.familyAdminsPhones?.entries ?? {})
-          PhoneNumberPropertyWidget(
-            'رقم هاتف ال$personType',
-            phone,
-            (n) => LauncherService.I.launchCall(
+        if (family.contacts.isNotEmpty)
+          PhoneContactsSection(
+            title: 'أرقام الهاتف',
+            contacts: family.contacts,
+            phoneCall: (n) => LauncherService.I.launchCall(
               PhoneNumberService.I.formatInternational(n),
             ),
           ),
