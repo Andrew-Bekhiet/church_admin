@@ -71,6 +71,15 @@ object_relationships:
         remote_table:
           name: latest_visits
           schema: history
+  - name: mainContact
+    using:
+      manual_configuration:
+        column_mapping:
+          id: person_id
+        insertion_order: null
+        remote_table:
+          name: main_contacts
+          schema: public
   - name: personType
     using:
       foreign_key_constraint_on: person_type_id
@@ -129,6 +138,13 @@ array_relationships:
         table:
           name: confession_history
           schema: history
+  - name: contacts
+    using:
+      foreign_key_constraint_on:
+        column: person_id
+        table:
+          name: contacts
+          schema: public
   - name: editHistory
     using:
       manual_configuration:

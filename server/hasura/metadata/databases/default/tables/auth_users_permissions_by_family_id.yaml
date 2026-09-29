@@ -1,0 +1,13 @@
+table:
+  name: users_permissions_by_family_id
+  schema: auth
+array_relationships:
+  - name: members
+    using:
+      manual_configuration:
+        column_mapping:
+          family_id: family_id
+        insertion_order: null
+        remote_table:
+          name: persons
+          schema: public

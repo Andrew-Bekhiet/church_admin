@@ -1,0 +1,167 @@
+table:
+  name: contacts
+  schema: public
+object_relationships:
+  - name: family
+    using:
+      foreign_key_constraint_on: family_id
+  - name: person
+    using:
+      foreign_key_constraint_on: person_id
+  - name: personType
+    using:
+      foreign_key_constraint_on: person_type_id
+insert_permissions:
+  - role: user
+    permission:
+      check: &can_write_contact
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: person
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - person_id
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
+          - _and:
+              - _or:
+                  - person_id:
+                      _is_null: true
+                  - person:
+                      personType:
+                        is_family_admin:
+                          _eq: true
+              - _exists:
+                  _table:
+                    name: users_permissions_by_family_id
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - allow_edit:
+                          _eq: true
+                      - _or:
+                          - family_id:
+                              _ceq:
+                                - $
+                                - family_id
+                          - members:
+                              _and:
+                                - deleted_at:
+                                    _is_null: true
+                                - id:
+                                    _ceq:
+                                      - $
+                                      - person_id
+      columns: &contact_writable_columns
+        - family_id
+        - id
+        - is_main_phone
+        - label
+        - person_id
+        - person_type_id
+        - phone
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - family_id
+        - id
+        - is_main_phone
+        - label
+        - person_id
+        - person_type_id
+        - phone
+        - updated_at
+      filter:
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: person
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - person_id
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
+          - _and:
+              - _or:
+                  - person_id:
+                      _is_null: true
+                  - person:
+                      personType:
+                        is_family_admin:
+                          _eq: true
+              - _exists:
+                  _table:
+                    name: users_permissions_by_family_id
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - _or:
+                          - family_id:
+                              _ceq:
+                                - $
+                                - family_id
+                          - members:
+                              _and:
+                                - deleted_at:
+                                    _is_null: true
+                                - id:
+                                    _ceq:
+                                      - $
+                                      - person_id
+update_permissions:
+  - role: user
+    permission:
+      columns: *contact_writable_columns
+      filter: *can_write_contact
+      check: *can_write_contact
+delete_permissions:
+  - role: user
+    permission:
+      filter: *can_write_contact

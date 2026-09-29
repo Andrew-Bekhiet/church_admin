@@ -1,0 +1,69 @@
+table:
+  name: main_contacts
+  schema: public
+object_relationships:
+  - name: person
+    using:
+      manual_configuration:
+        column_mapping:
+          person_id: id
+        insertion_order: null
+        remote_table:
+          name: persons
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - person_id
+        - phone
+      filter:
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: person
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - person_id
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
+          - _and:
+              - person:
+                  personType:
+                    is_family_admin:
+                      _eq: true
+              - _exists:
+                  _table:
+                    name: users_permissions_by_family_id
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - members:
+                          _and:
+                            - deleted_at:
+                                _is_null: true
+                            - id:
+                                _ceq:
+                                  - $
+                                  - person_id
