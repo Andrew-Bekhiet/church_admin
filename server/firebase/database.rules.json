@@ -4,20 +4,10 @@
     ".write": "false",
     "Users": {
       "$uid": {
-        "forceRefresh": {
-          ".read": "$uid === auth.uid",
-          ".write": "$uid === auth.uid"
-        },
         "lastSeen": {
           ".read": "auth.uid != null",
-          ".write": "$uid === auth.uid"
+          ".write": "$uid === auth.token['x-hasura-user-id']"
         }
-      }
-    },
-    "config": {
-      "updates": {
-        ".read": "auth.uid != null",
-        ".write": "false"
       }
     }
   }
