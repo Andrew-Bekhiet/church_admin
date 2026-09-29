@@ -19,6 +19,7 @@ class PersonUpdateHelper {
       .where(
         (k) =>
             k != 'address' &&
+            k != 'contacts' &&
             k != 'services' &&
             k != 'groups' &&
             k != 'hobbies' &&

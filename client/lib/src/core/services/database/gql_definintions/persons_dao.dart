@@ -1,4 +1,6 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/contacts/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/contacts/contacts_update_helper.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart';
@@ -73,6 +75,63 @@ class PersonsDAO extends FullCRUDDAO<Person> {
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deletePerson(personId: id).toJson();
+
+  @override
+  Future<Person> createObject({required Person newObject}) async {
+    final created = await super.createObject(newObject: newObject);
+    await saveContacts(
+      personId: created.id,
+      newContacts: newObject.contacts,
+      oldContacts: const [],
+    );
+
+    return created;
+  }
+
+  @override
+  Future<Person?> updateObject({
+    required Person newObject,
+    required Person oldObject,
+  }) async {
+    final personChanged =
+        newObject.copyWith(contacts: oldObject.contacts) != oldObject;
+    final updated = personChanged
+        ? await super.updateObject(newObject: newObject, oldObject: oldObject)
+        : newObject;
+    await saveContacts(
+      personId: newObject.id,
+      newContacts: newObject.contacts,
+      oldContacts: oldObject.contacts,
+    );
+
+    return updated;
+  }
+
+  Future<void> saveContacts({
+    required String personId,
+    required List<PhoneContact> newContacts,
+    required List<PhoneContact> oldContacts,
+  }) async {
+    final helper = ContactsUpdateHelper(
+      personId: personId,
+      newContacts: newContacts,
+      oldContacts: oldContacts,
+    );
+    if (!helper.hasChanges) return;
+
+    try {
+      await graphQLClient.mutateAndReturnParsed(
+        MutationOptions(
+          document: documentNodeMutationsaveContacts,
+          operationName: 'saveContacts',
+          variables: helper.variables.toJson(),
+          parserFn: (data) => data,
+        ),
+      );
+    } on OperationException catch (e) {
+      throw ContactsSaveException(ContactsErrorCode.saveFailed, cause: e);
+    }
+  }
 
   @override
   Stream<Person?> streamSingleById({

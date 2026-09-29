@@ -1336,6 +1336,57 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
           as _i2.DeletableDAOProxy<_i2.Person>);
 
   @override
+  _i4.Future<_i2.Person> createObject({required _i2.Person? newObject}) =>
+      (super.noSuchMethod(
+            Invocation.method(#createObject, [], {#newObject: newObject}),
+            returnValue: _i4.Future<_i2.Person>.value(
+              _FakePerson_37(
+                this,
+                Invocation.method(#createObject, [], {#newObject: newObject}),
+              ),
+            ),
+            returnValueForMissingStub: _i4.Future<_i2.Person>.value(
+              _FakePerson_37(
+                this,
+                Invocation.method(#createObject, [], {#newObject: newObject}),
+              ),
+            ),
+          )
+          as _i4.Future<_i2.Person>);
+
+  @override
+  _i4.Future<_i2.Person?> updateObject({
+    required _i2.Person? newObject,
+    required _i2.Person? oldObject,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#updateObject, [], {
+              #newObject: newObject,
+              #oldObject: oldObject,
+            }),
+            returnValue: _i4.Future<_i2.Person?>.value(),
+            returnValueForMissingStub: _i4.Future<_i2.Person?>.value(),
+          )
+          as _i4.Future<_i2.Person?>);
+
+  @override
+  _i4.Future<void> saveContacts({
+    required String? personId,
+    required List<_i2.PhoneContact>? newContacts,
+    required List<_i2.PhoneContact>? oldContacts,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#saveContacts, [], {
+              #personId: personId,
+              #newContacts: newContacts,
+              #oldContacts: oldContacts,
+            }),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
   _i4.Stream<_i2.Person?> streamSingleById({
     required String? id,
     int? servicesLimit = 6,
@@ -1468,40 +1519,6 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
                 ),
           )
           as _i2.PaginatableStreamBase<_i2.Person>);
-
-  @override
-  _i4.Future<_i2.Person> createObject({required _i2.Person? newObject}) =>
-      (super.noSuchMethod(
-            Invocation.method(#createObject, [], {#newObject: newObject}),
-            returnValue: _i4.Future<_i2.Person>.value(
-              _FakePerson_37(
-                this,
-                Invocation.method(#createObject, [], {#newObject: newObject}),
-              ),
-            ),
-            returnValueForMissingStub: _i4.Future<_i2.Person>.value(
-              _FakePerson_37(
-                this,
-                Invocation.method(#createObject, [], {#newObject: newObject}),
-              ),
-            ),
-          )
-          as _i4.Future<_i2.Person>);
-
-  @override
-  _i4.Future<_i2.Person?> updateObject({
-    required _i2.Person? newObject,
-    required _i2.Person? oldObject,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#updateObject, [], {
-              #newObject: newObject,
-              #oldObject: oldObject,
-            }),
-            returnValue: _i4.Future<_i2.Person?>.value(),
-            returnValueForMissingStub: _i4.Future<_i2.Person?>.value(),
-          )
-          as _i4.Future<_i2.Person?>);
 
   @override
   _i4.Future<_i2.Person?> deleteById({required String? id}) =>
