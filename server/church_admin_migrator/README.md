@@ -2,6 +2,8 @@
 
 Migrates data from Church Data and Meeting Helper into Church Admin
 
+> **Frozen.** This tool still reads and writes `persons.main_phone` and `persons.other_phones`, which no longer exist. The last compatible commit is `7aff0652` (tip of `eng-234/contacts-search`); check it out to run the migrator.
+
 ## Script Steps
 
 * Migrate and merge independent data first then dependent data:
