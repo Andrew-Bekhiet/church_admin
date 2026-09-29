@@ -12,7 +12,7 @@ array_relationships:
 insert_permissions:
   - role: user
     permission:
-      check:
+      check: &approved_user
         _exists:
           _table:
             name: users_permissions
@@ -40,29 +40,9 @@ update_permissions:
       columns:
         - color
         - name
-      filter:
-        _exists:
-          _table:
-            name: users_permissions
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - permission:
-                  _eq: approved
+      filter: *approved_user
       check: null
 delete_permissions:
   - role: user
     permission:
-      filter:
-        _exists:
-          _table:
-            name: users_permissions
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - permission:
-                  _eq: approved
+      filter: *approved_user

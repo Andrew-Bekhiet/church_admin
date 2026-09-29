@@ -33,7 +33,8 @@ insert_permissions:
     permission:
       check: &meeting_write_permission
         _and:
-          - _exists:
+          - &approved_user
+            _exists:
               _table:
                 name: users_permissions
                 schema: auth
@@ -141,16 +142,7 @@ select_permissions:
         - show_kodas_checkbox
       filter:
         _and:
-          - _exists:
-              _table:
-                name: users_permissions
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - permission:
-                      _eq: approved
+          - *approved_user
           - _or:
               - _exists:
                   _table:

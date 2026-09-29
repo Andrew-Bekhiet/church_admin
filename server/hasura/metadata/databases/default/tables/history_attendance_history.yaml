@@ -126,7 +126,8 @@ select_permissions:
                                   _ceq:
                                     - $
                                     - person_id
-                  - _exists:
+                  - &admin_on_meeting
+                    _exists:
                       _table:
                         name: users_admin_on_meetings
                         schema: auth
@@ -141,18 +142,7 @@ select_permissions:
               - _and:
                   - as_servant:
                       _eq: true
-                  - _exists:
-                      _table:
-                        name: users_admin_on_meetings
-                        schema: auth
-                      _where:
-                        _and:
-                          - uid:
-                              _eq: X-Hasura-User-Id
-                          - meeting_id:
-                              _ceq:
-                                - $
-                                - meeting_id
+                  - *admin_on_meeting
       allow_aggregations: true
 update_permissions:
   - role: user
