@@ -8,12 +8,20 @@ class PhoneSearchFieldMetadata extends FieldMetadata<String> {
     },
   };
 
+  static const Json _anyRow = {
+    'id': {'_isNull': false},
+  };
+
   PhoneSearchFieldMetadata({
     required super.parentType,
     required super.name,
     required super.label,
   }) : super(
-         operators: {StringOperator.contains, StringOperator.eq},
+         operators: {
+           ...StringOperator.values,
+           PrimitiveOperator.isNull,
+           PrimitiveOperator.isNotNull,
+         },
          getValue: (obj) => obj is Person
              ? obj.contacts
                    .firstWhereOrNull((c) => c.isMainPhone && c.isOwn)
@@ -22,41 +30,54 @@ class PhoneSearchFieldMetadata extends FieldMetadata<String> {
        );
 
   @override
-  Json queryToJson(Json serializedValue) {
-    final phone = _storedPhoneComparison(serializedValue);
-
-    return {
-      '_or': [
-        {
-          'contacts': {'phone': phone},
-        },
-        {
-          'family': {
-            'contacts': {
-              '_and': [
-                _familyAdminType,
-                {'phone': phone},
-              ],
-            },
-          },
-        },
-      ],
-    };
-  }
+  Json queryToJson(Json serializedValue) => switch (serializedValue) {
+    {'_isNull': true} || {'_eq': ''} => {'_not': _matching(_anyRow)},
+    {'_isNull': false} || {'_neq': ''} => _matching(_anyRow),
+    {'_neq': final String typed} => {
+      '_not': _matchingPhone({'_eq': _e164(typed)}),
+    },
+    {'_nilike': final String pattern} => {
+      '_not': _matchingPhone({'_ilike': _storedPattern(pattern)}),
+    },
+    {'_ilike': final String pattern} => _matchingPhone({
+      '_ilike': _storedPattern(pattern),
+    }),
+    {'_eq': final String typed} => _matchingPhone({'_eq': _e164(typed)}),
+    _ => _matchingPhone(serializedValue),
+  };
 
   @override
   Json serializeOrderBy(Object serializedValue) => {
     'mainContact': {'phone': serializedValue},
   };
 
-  Json _storedPhoneComparison(Json comparison) => {
-    for (final MapEntry(:key, :value) in comparison.entries)
-      key: switch ((key, value)) {
-        ('_ilike', final String pattern) =>
-          '%${PhoneNumberService.searchFragment(pattern.replaceAll('%', ''))}%',
-        ('_eq', final String typed) =>
-          const PhoneNumberService().toE164(typed) ?? typed,
-        _ => value,
+  Json _matchingPhone(Json comparison) => _matching({'phone': comparison});
+
+  Json _matching(Json rowFilter) => {
+    '_or': [
+      {'contacts': rowFilter},
+      {
+        'family': {
+          'contacts': {
+            '_and': [_familyAdminType, rowFilter],
+          },
+        },
       },
+    ],
   };
+
+  String _e164(String typed) =>
+      const PhoneNumberService().toE164(typed) ?? typed;
+
+  String _storedPattern(String pattern) {
+    final fragment = PhoneNumberService.searchFragment(
+      pattern.replaceAll('%', ''),
+    );
+    final anchoredAtStart = !pattern.startsWith('%');
+    final stored = anchoredAtStart && !fragment.startsWith('+')
+        ? '+20$fragment'
+        : fragment;
+
+    return '${anchoredAtStart ? '' : '%'}$stored${pattern.endsWith('%') ? '%' : ''}';
+  }
 }

@@ -80,5 +80,111 @@ void main() {
 
       expect(restored.queryToJson(), filter.queryToJson());
     });
+
+    group('a saved query written before contacts existed still loads', () {
+      Json matching(Json rowFilter) => {
+        '_or': [
+          {'contacts': rowFilter},
+          {
+            'family': {
+              'contacts': {
+                '_and': [
+                  {
+                    'personType': {
+                      'isFamilyAdmin': {'_eq': true},
+                    },
+                  },
+                  rowFilter,
+                ],
+              },
+            },
+          },
+        ],
+      };
+
+      Json phoneRow(Json comparison) => {'phone': comparison};
+
+      const anyContact = {
+        'id': {'_isNull': false},
+      };
+
+      final cases = <({String operator, String? value, Json clause})>[
+        (
+          operator: 'StringOperator.contains',
+          value: '0100',
+          clause: matching(phoneRow({'_ilike': '%100%'})),
+        ),
+        (
+          operator: 'StringOperator.startsWith',
+          value: '0100',
+          clause: matching(phoneRow({'_ilike': '+20100%'})),
+        ),
+        (
+          operator: 'StringOperator.endsWith',
+          value: '4567',
+          clause: matching(phoneRow({'_ilike': '%4567'})),
+        ),
+        (
+          operator: 'StringOperator.eq',
+          value: '01001234567',
+          clause: matching(phoneRow({'_eq': '+201001234567'})),
+        ),
+        (
+          operator: 'StringOperator.neq',
+          value: '01001234567',
+          clause: {
+            '_not': matching(phoneRow({'_eq': '+201001234567'})),
+          },
+        ),
+        (
+          operator: 'StringOperator.doesNotContain',
+          value: '0100',
+          clause: {
+            '_not': matching(phoneRow({'_ilike': '%100%'})),
+          },
+        ),
+        (
+          operator: 'StringOperator.isEmpty',
+          value: null,
+          clause: {
+            '_or': [
+              {'_not': matching(anyContact)},
+              {'_not': matching(anyContact)},
+            ],
+          },
+        ),
+        (
+          operator: 'StringOperator.isNotEmpty',
+          value: null,
+          clause: {
+            '_and': [matching(anyContact), matching(anyContact)],
+          },
+        ),
+        (
+          operator: 'PrimitiveOperator.isNull',
+          value: null,
+          clause: {'_not': matching(anyContact)},
+        ),
+        (
+          operator: 'PrimitiveOperator.isNotNull',
+          value: null,
+          clause: matching(anyContact),
+        ),
+      ];
+
+      for (final c in cases) {
+        test('${c.operator} filters over own and family admin contacts', () {
+          final saved = <String, Object?>{
+            'field': PersonFields().mainPhone.toJson(),
+            'operator': c.operator,
+            'value': c.value,
+          };
+
+          final filter = Filter.fromJson(saved);
+
+          expect(filter.queryToJson(), c.clause);
+        });
+      }
+    });
   });
 }
