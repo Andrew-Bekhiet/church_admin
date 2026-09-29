@@ -11,7 +11,30 @@ object_relationships:
 insert_permissions:
   - role: user
     permission:
-      check: {}
+      check: &can_edit_person
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - person_id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
       columns:
         - person_id
         - tag_id
@@ -48,32 +71,9 @@ update_permissions:
   - role: user
     permission:
       columns: []
-      filter: {}
-      check: {}
+      filter: *can_edit_person
+      check: *can_edit_person
 delete_permissions:
   - role: user
     permission:
-      filter:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: person
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - person_id
-                  - _and:
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+      filter: *can_edit_person

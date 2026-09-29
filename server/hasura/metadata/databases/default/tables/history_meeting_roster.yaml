@@ -48,7 +48,7 @@ select_permissions:
         - photo_updated_at
         - blurhash
       filter:
-        _or:
+        _and:
           - _exists:
               _table:
                 name: users_permissions
@@ -58,58 +58,69 @@ select_permissions:
                   - uid:
                       _eq: X-Hasura-User-Id
                   - permission:
-                      _eq: readAllData
-          - _and:
+                      _eq: approved
+          - _or:
               - _exists:
                   _table:
-                    name: users_admin_on_meetings
+                    name: users_permissions
                     schema: auth
                   _where:
                     _and:
                       - uid:
                           _eq: X-Hasura-User-Id
-                      - meeting_id:
-                          _ceq:
-                            - $
-                            - meeting_id
-              - _or:
-                  - as_servant:
-                      _eq: true
+                      - permission:
+                          _eq: readAllData
+              - _and:
                   - _exists:
                       _table:
-                        name: users_admin_on
+                        name: users_admin_on_meetings
                         schema: auth
                       _where:
                         _and:
                           - uid:
                               _eq: X-Hasura-User-Id
-                          - _or:
-                              - _and:
-                                  - admin_on_group:
-                                      _is_null: false
-                                  - admin_on_group:
-                                      _ceq:
-                                        - $
-                                        - group_id
-                              - _and:
-                                  - admin_on_service:
-                                      _is_null: false
-                                  - admin_on_service:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
+                          - meeting_id:
+                              _ceq:
+                                - $
+                                - meeting_id
+                  - _or:
+                      - as_servant:
+                          _eq: true
+                      - _exists:
+                          _table:
+                            name: users_admin_on
+                            schema: auth
+                          _where:
+                            _and:
+                              - uid:
+                                  _eq: X-Hasura-User-Id
+                              - _or:
+                                  - _and:
+                                      - admin_on_group:
+                                          _is_null: false
+                                      - admin_on_group:
                                           _ceq:
                                             - $
-                                            - study_year_id
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
+                                            - group_id
+                                  - _and:
+                                      - admin_on_service:
+                                          _is_null: false
+                                      - admin_on_service:
                                           _ceq:
                                             - $
-                                            - gender
+                                            - service_id
+                                      - _or:
+                                          - service_study_year:
+                                              _is_null: true
+                                          - service_study_year:
+                                              _ceq:
+                                                - $
+                                                - study_year_id
+                                      - _or:
+                                          - service_gender:
+                                              _is_null: true
+                                          - service_gender:
+                                              _ceq:
+                                                - $
+                                                - gender
       allow_aggregations: true

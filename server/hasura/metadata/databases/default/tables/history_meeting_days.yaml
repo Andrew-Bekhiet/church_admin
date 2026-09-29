@@ -32,7 +32,7 @@ select_permissions:
         - servants_count
         - total_count
       filter:
-        _or:
+        _and:
           - _exists:
               _table:
                 name: users_permissions
@@ -42,17 +42,28 @@ select_permissions:
                   - uid:
                       _eq: X-Hasura-User-Id
                   - permission:
-                      _eq: readAllData
-          - _exists:
-              _table:
-                name: users_admin_on_meetings
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - meeting_id:
-                      _ceq:
-                        - $
-                        - meeting_id
+                      _eq: approved
+          - _or:
+              - _exists:
+                  _table:
+                    name: users_permissions
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - permission:
+                          _eq: readAllData
+              - _exists:
+                  _table:
+                    name: users_admin_on_meetings
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - meeting_id:
+                          _ceq:
+                            - $
+                            - meeting_id
       allow_aggregations: true
