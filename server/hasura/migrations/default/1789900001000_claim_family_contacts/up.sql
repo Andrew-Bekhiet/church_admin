@@ -57,28 +57,60 @@ returns trigger
 language plpgsql
 as $$
 declare
-    v_person_id uuid := public.sole_live_person_of_family_type(new.family_id, new.person_type_id);
+    v_person_id uuid := coalesce(new.person_id, public.sole_live_person_of_family_type(new.family_id, new.person_type_id));
+    v_existing_id uuid;
 begin
-    if v_person_id is null then
-        return new;
-    end if;
+    select c.id
+    into v_existing_id
+    from public.contacts as c
+    where c.id <> new.id
+        and c.phone = new.phone
+        and (
+            (v_person_id is not null and c.person_id = v_person_id)
+            or (
+                v_person_id is null
+                and c.person_id is null
+                and c.family_id = new.family_id
+                and c.person_type_id = new.person_type_id
+            )
+        );
 
-    if exists (
-        select 1
-        from public.contacts as owned
-        where owned.person_id = v_person_id and owned.phone = new.phone
-    ) then
+    if v_existing_id is not null then
+        if new.is_main_phone then
+            update public.contacts as c
+            set is_main_phone = false
+            where c.is_main_phone
+                and c.id <> v_existing_id
+                and (
+                    (v_person_id is not null and c.person_id = v_person_id)
+                    or (
+                        v_person_id is null
+                        and c.person_id is null
+                        and c.family_id = new.family_id
+                        and c.person_type_id = new.person_type_id
+                    )
+                );
+        end if;
+
+        update public.contacts as c
+        set
+            label = coalesce(c.label, new.label),
+            is_main_phone = c.is_main_phone or new.is_main_phone
+        where c.id = v_existing_id;
+
         return null;
     end if;
 
-    new.is_main_phone := new.is_main_phone and not exists (
-        select 1
-        from public.contacts as owned
-        where owned.person_id = v_person_id and owned.is_main_phone
-    );
-    new.person_id := v_person_id;
-    new.family_id := null;
-    new.person_type_id := null;
+    if new.person_id is null and v_person_id is not null then
+        new.is_main_phone := new.is_main_phone and not exists (
+            select 1
+            from public.contacts as owned
+            where owned.person_id = v_person_id and owned.is_main_phone
+        );
+        new.person_id := v_person_id;
+        new.family_id := null;
+        new.person_type_id := null;
+    end if;
 
     return new;
 end;
@@ -87,7 +119,6 @@ $$;
 create or replace trigger contacts_claim_before_insert
 before insert on public.contacts
 for each row
-when (new.person_id is null)
 execute function public.claim_contact_on_insert();
 
 create or replace function public.claim_family_contacts_on_person_change()

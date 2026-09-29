@@ -18,10 +18,11 @@ select pg_temp.add_contact((select person_id from ctx), null, null, '+2010012345
 select pg_temp.add_contact(null, (select family_id from ctx), (select person_type_id from ctx), '+201001234567', true);
 
 select throws_ok(
-    $$select pg_temp.add_contact((select person_id from ctx), null, null, '+201001234567')$$,
+    $$select pg_temp.add_contact((select person_id from ctx), null, null, '+201001234500');
+    update public.contacts set phone = '+201001234567' where phone = '+201001234500'$$,
     '23505',
     null,
-    'a person cannot have the same phone twice'
+    'a person cannot end up with the same phone twice'
 );
 
 select lives_ok(
@@ -30,10 +31,11 @@ select lives_ok(
 );
 
 select throws_ok(
-    $$select pg_temp.add_contact(null, (select family_id from ctx), (select person_type_id from ctx), '+201001234567')$$,
+    $$select pg_temp.add_contact(null, (select family_id from ctx), (select person_type_id from ctx), '+201001234500');
+    update public.contacts set phone = '+201001234567' where phone = '+201001234500'$$,
     '23505',
     null,
-    'an unclaimed family and person type cannot have the same phone twice'
+    'an unclaimed family and person type cannot end up with the same phone twice'
 );
 
 select lives_ok(
