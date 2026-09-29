@@ -6,6 +6,7 @@ void main() {
   const personId = '00000000-0000-4000-8000-000000000001';
   const familyId = '00000000-0000-4000-8000-000000000002';
   const fatherTypeId = '00000000-0000-4000-8000-000000000003';
+  const dadId = '00000000-0000-4000-8000-0000000000d1';
   const idA = '00000000-0000-4000-8000-00000000000a';
   const idB = '00000000-0000-4000-8000-00000000000b';
 
@@ -141,5 +142,88 @@ void main() {
         ),
       ),
     );
+  });
+
+  const fatherType = PersonType(id: fatherTypeId, name: 'أب');
+  const dadsNumber = PhoneContact(
+    id: idB,
+    phone: '+201112223334',
+    personId: dadId,
+    personType: fatherType,
+    personTypeId: fatherTypeId,
+  );
+
+  test('a form left as it was has nothing to send', () {
+    final person = Person(
+      id: personId,
+      name: 'مينا',
+      contacts: const [first],
+      family: const Family(id: familyId, name: 'عائلة', contacts: [dadsNumber]),
+    );
+
+    final unchanged = helper(
+      from: person.contactsWithFamilyAdmins,
+      to: person.contactsWithFamilyAdmins,
+    );
+
+    expect(unchanged.hasChanges, isFalse);
+  });
+
+  test('editing a father number shown on a child updates that row', () {
+    final edited = helper(
+      from: [first, dadsNumber],
+      to: [
+        first,
+        dadsNumber.copyWith(phone: '+201009998887'),
+      ],
+    ).variables;
+
+    expect(ids(edited.deleteIds), isEmpty);
+    expect(edited.upserts?.single.id?.uuid, idB);
+    expect(edited.upserts?.single.personId?.uuid, dadId);
+    expect(edited.upserts?.single.phone, '+201009998887');
+  });
+
+  test('a role number for a family created by the save uses its id', () {
+    final asFather = second.withRole(fatherType, null);
+    final created = ContactsUpdateHelper(
+      personId: personId,
+      familyId: familyId,
+      oldContacts: const [],
+      newContacts: [asFather],
+    ).variables;
+
+    expect(created.upserts?.single.familyId?.uuid, familyId);
+    expect(created.upserts?.single.personId, isNull);
+  });
+
+  test('a role number with no family to attach to is refused', () {
+    final orphan = helper(
+      from: const [],
+      to: [second.withRole(fatherType, null)],
+    );
+
+    expect(
+      () => orphan.variables,
+      throwsA(
+        isA<ContactsSaveException>().having(
+          (e) => e.errorCode,
+          'errorCode',
+          ContactsErrorCode.familyRequired,
+        ),
+      ),
+    );
+  });
+
+  test('a family admin sees only their own numbers when editing', () {
+    final dad = Person(
+      id: personId,
+      name: 'الأب',
+      contacts: const [first],
+      personType: const PersonType(id: 'x', name: 'أب', isFamilyAdmin: true),
+      family: const Family(id: familyId, name: 'عائلة', contacts: [dadsNumber]),
+    );
+
+    expect(dad.contactsWithFamilyAdmins, [first]);
   });
 }
