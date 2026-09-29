@@ -1,7 +1,7 @@
 begin;
 create extension if not exists pgtap;
 \ir fixtures/base.psql
-\ir fixtures/legacy_phones.psql
+\ir fixtures/household.psql
 \ir fixtures/contacts.psql
 
 select plan(4);
