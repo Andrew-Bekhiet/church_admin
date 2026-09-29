@@ -17,6 +17,7 @@ part 'person.g.dart';
     'otherPhones',
     'contacts',
     'contactsWithFamilyAdmins',
+    'familyAdminContacts',
     'userCanEdit',
     'maxSpiritDataAge',
     'uid',
@@ -265,10 +266,14 @@ class Person extends ViewableWithIDAndImage
 
   Point? get geolocation => address?.geolocation;
 
+  List<PhoneContact> get familyAdminContacts =>
+      (personType?.isFamilyAdmin ?? false)
+      ? const []
+      : (family?.contacts ?? const []).where((c) => c.personId != id).toList();
+
   List<PhoneContact> get contactsWithFamilyAdmins => [
     ...contacts,
-    if (personType?.isFamilyAdmin != true)
-      ...(family?.contacts ?? const []).where((c) => c.personId != id),
+    ...familyAdminContacts,
   ];
 
   bool get isStudent => workStatus == WorkStatus.student;

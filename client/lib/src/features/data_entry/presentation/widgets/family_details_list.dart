@@ -16,9 +16,6 @@ class FamilyDetailsList extends StatelessWidget {
           PhoneContactsSection(
             title: 'أرقام الهاتف',
             contacts: family.contacts,
-            phoneCall: (n) => LauncherService.I.launchCall(
-              PhoneNumberService.I.formatInternational(n),
-            ),
           ),
         CopiablePropertyWidget(
           'العنوان والموقع',

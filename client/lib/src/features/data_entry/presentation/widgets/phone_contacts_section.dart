@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 class PhoneContactsSection extends StatelessWidget {
   final String title;
   final List<PhoneContact> contacts;
-  final void Function(String) phoneCall;
+  final void Function(String)? phoneCall;
   final void Function(String)? addToContacts;
   final bool showErrorIfEmpty;
 
   const PhoneContactsSection({
     required this.title,
     required this.contacts,
-    required this.phoneCall,
     this.showErrorIfEmpty = false,
+    this.phoneCall,
     this.addToContacts,
     super.key,
   });
@@ -28,14 +28,18 @@ class PhoneContactsSection extends StatelessWidget {
           child: Text(title, style: TextTheme.of(context).titleSmall),
         ),
         if (contacts.isEmpty && showErrorIfEmpty)
-          PhoneNumberPropertyWidget(PhoneContact.defaultLabel, '', phoneCall),
+          PhoneNumberPropertyWidget(
+            PhoneContact.defaultLabel,
+            '',
+            phoneCall: phoneCall,
+          ),
         for (final contact in contacts.sortedBy<num>(
           (c) => c.isMainPhone ? 0 : 1,
         ))
           PhoneNumberPropertyWidget(
             contact.displayLabel,
             contact.phone,
-            phoneCall,
+            phoneCall: phoneCall,
             isMain: contact.isMainPhone,
             addToContacts: addToContacts,
             key: PhoneContactsSectionKeys.contact(contact.id),

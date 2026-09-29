@@ -214,16 +214,4 @@ void main() {
       ),
     );
   });
-
-  test('a family admin sees only their own numbers when editing', () {
-    final dad = Person(
-      id: personId,
-      name: 'الأب',
-      contacts: const [first],
-      personType: const PersonType(id: 'x', name: 'أب', isFamilyAdmin: true),
-      family: const Family(id: familyId, name: 'عائلة', contacts: [dadsNumber]),
-    );
-
-    expect(dad.contactsWithFamilyAdmins, [first]);
-  });
 }

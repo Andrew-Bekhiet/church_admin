@@ -13,9 +13,7 @@ class PersonContactSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labelSmall = Theme.of(context).textTheme.labelSmall!;
-    final familyContacts = (person.family?.contacts ?? const [])
-        .where((c) => c.personId != person.id)
-        .toList();
+    final familyContacts = person.familyAdminContacts;
 
     return Column(
       children: [
@@ -37,9 +35,6 @@ class PersonContactSection extends StatelessWidget {
             key: PersonContactSectionKeys.familyNumbers,
             title: 'أرقام الأسرة',
             contacts: familyContacts,
-            phoneCall: (n) => LauncherService.I.launchCall(
-              PhoneNumberService.I.formatInternational(n),
-            ),
             addToContacts: (n) => _contactAdd(context, n, person),
           ),
         CopiablePropertyWidget(
@@ -109,9 +104,7 @@ class PersonContactSection extends StatelessWidget {
     if (doMakeCallResult == null) return;
 
     if (doMakeCallResult) await Permission.phone.request();
-    await LauncherService.I.launchCall(
-      PhoneNumberService.I.formatInternational(number!),
-    );
+    await PhoneNumberPropertyWidget.launchCall(number!);
 
     if (!doMakeCallResult || !context.mounted) return;
 

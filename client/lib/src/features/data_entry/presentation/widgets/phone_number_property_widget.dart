@@ -10,13 +10,18 @@ class PhoneNumberPropertyWidget extends StatelessWidget {
   final bool isMain;
   final String propName;
   final String value;
-  final void Function(String) phoneCall;
+  final void Function(String)? phoneCall;
+
+  static Future<bool> launchCall(String phone) => LauncherService.I.launchCall(
+    PhoneNumberService.I.formatInternational(phone),
+  );
+
   const PhoneNumberPropertyWidget(
     this.propName,
-    this.value,
-    this.phoneCall, {
+    this.value, {
     this.showErrorIfEmpty = true,
     this.isMain = false,
+    this.phoneCall,
     this.addToContacts,
     super.key,
   });
@@ -32,7 +37,7 @@ class PhoneNumberPropertyWidget extends StatelessWidget {
           IconButton(
             icon: const Icon(Symbols.phone),
             tooltip: 'اجراء مكالمة',
-            onPressed: () => phoneCall(value),
+            onPressed: () => (phoneCall ?? launchCall)(value),
           ),
           if (addToContacts != null)
             IconButton(
@@ -45,9 +50,7 @@ class PhoneNumberPropertyWidget extends StatelessWidget {
               AssetImage('assets/whatsapp.png'),
             ),
             tooltip: 'ارسال رسالة (واتساب)',
-            onPressed: () => LauncherService.I.launchWhatsappChat(
-              PhoneNumberService.I.formatInternational(value),
-            ),
+            onPressed: () => LauncherService.I.launchWhatsappChat(value),
           ),
           PopupMenuButton(
             itemBuilder: (context) => const [
