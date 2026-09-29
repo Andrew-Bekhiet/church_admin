@@ -106,9 +106,18 @@ begin
 end;
 $$;
 
-create or replace trigger persons_claim_family_contacts
-after insert or update of family_id, person_type_id, deleted_at on public.persons
+create or replace trigger persons_claim_family_contacts_on_insert
+after insert on public.persons
 for each row
+execute function public.claim_family_contacts_on_person_change();
+
+create or replace trigger persons_claim_family_contacts_on_update
+after update of family_id, person_type_id, deleted_at on public.persons
+for each row
+when (
+    (old.family_id, old.person_type_id, old.deleted_at)
+    is distinct from (new.family_id, new.person_type_id, new.deleted_at)
+)
 execute function public.claim_family_contacts_on_person_change();
 
 create or replace view public.resolved_contacts as
