@@ -5800,7 +5800,6 @@ class Mutation_updatePersonSpiritData {
     this.$_k,
     this.insertHistoryConfessionHistoryOne,
     this.insertHistoryKodasHistoryOne,
-    this.$__typename = 'mutation_root',
   });
 
   factory Mutation_updatePersonSpiritData.fromJson(Map<String, dynamic> json) {
@@ -5809,7 +5808,6 @@ class Mutation_updatePersonSpiritData {
     final l$insertHistoryConfessionHistoryOne =
         json['insertHistoryConfessionHistoryOne'];
     final l$insertHistoryKodasHistoryOne = json['insertHistoryKodasHistoryOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_updatePersonSpiritData(
       $_c: l$$_c == null
           ? null
@@ -5832,7 +5830,6 @@ class Mutation_updatePersonSpiritData {
           : Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne.fromJson(
               (l$insertHistoryKodasHistoryOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
@@ -5845,8 +5842,6 @@ class Mutation_updatePersonSpiritData {
 
   final Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
   insertHistoryKodasHistoryOne;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -5861,8 +5856,6 @@ class Mutation_updatePersonSpiritData {
     final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
     _resultData['insertHistoryKodasHistoryOne'] = l$insertHistoryKodasHistoryOne
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
@@ -5873,13 +5866,11 @@ class Mutation_updatePersonSpiritData {
     final l$insertHistoryConfessionHistoryOne =
         insertHistoryConfessionHistoryOne;
     final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
-    final l$$__typename = $__typename;
     return Object.hashAll([
       l$$_c,
       l$$_k,
       l$insertHistoryConfessionHistoryOne,
       l$insertHistoryKodasHistoryOne,
-      l$$__typename,
     ]);
   }
 
@@ -5916,11 +5907,6 @@ class Mutation_updatePersonSpiritData {
     if (l$insertHistoryKodasHistoryOne != lOther$insertHistoryKodasHistoryOne) {
       return false;
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -5947,7 +5933,6 @@ abstract class CopyWith_Mutation_updatePersonSpiritData<TRes> {
     insertHistoryConfessionHistoryOne,
     Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
     insertHistoryKodasHistoryOne,
-    String? $__typename,
   });
   CopyWith_Mutation_updatePersonSpiritData__c<TRes> get $_c;
   CopyWith_Mutation_updatePersonSpiritData__k<TRes> get $_k;
@@ -5974,7 +5959,6 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData<TRes>
     Object? $_k = _undefined,
     Object? insertHistoryConfessionHistoryOne = _undefined,
     Object? insertHistoryKodasHistoryOne = _undefined,
-    Object? $__typename = _undefined,
   }) => _then(
     Mutation_updatePersonSpiritData(
       $_c: $_c == _undefined
@@ -5992,9 +5976,6 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData<TRes>
           ? _instance.insertHistoryKodasHistoryOne
           : (insertHistoryKodasHistoryOne
                 as Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -6062,7 +6043,6 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData<TRes>
     insertHistoryConfessionHistoryOne,
     Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
     insertHistoryKodasHistoryOne,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_updatePersonSpiritData__c<TRes> get $_c =>
@@ -6375,13 +6355,6 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

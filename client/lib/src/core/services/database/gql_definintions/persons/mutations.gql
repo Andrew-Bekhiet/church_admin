@@ -179,5 +179,4 @@ mutation updatePersonSpiritData(
     }
     __typename
   }
-  __typename
 }

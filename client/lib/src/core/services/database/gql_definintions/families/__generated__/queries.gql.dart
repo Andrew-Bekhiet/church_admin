@@ -103,42 +103,32 @@ class _CopyWithStubImpl_Variables_Query_getFamilyRelatedFamilies<TRes>
 }
 
 class Query_getFamilyRelatedFamilies {
-  Query_getFamilyRelatedFamilies({
-    this.familiesByPk,
-    this.$__typename = 'query_root',
-  });
+  Query_getFamilyRelatedFamilies({this.familiesByPk});
 
   factory Query_getFamilyRelatedFamilies.fromJson(Map<String, dynamic> json) {
     final l$familiesByPk = json['familiesByPk'];
-    final l$$__typename = json['__typename'];
     return Query_getFamilyRelatedFamilies(
       familiesByPk: l$familiesByPk == null
           ? null
           : Query_getFamilyRelatedFamilies_familiesByPk.fromJson(
               (l$familiesByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Query_getFamilyRelatedFamilies_familiesByPk? familiesByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$familiesByPk = familiesByPk;
     _resultData['familiesByPk'] = l$familiesByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$familiesByPk = familiesByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$familiesByPk, l$$__typename]);
+    return Object.hashAll([l$familiesByPk]);
   }
 
   @override
@@ -153,11 +143,6 @@ class Query_getFamilyRelatedFamilies {
     final l$familiesByPk = familiesByPk;
     final lOther$familiesByPk = other.familiesByPk;
     if (l$familiesByPk != lOther$familiesByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -179,10 +164,7 @@ abstract class CopyWith_Query_getFamilyRelatedFamilies<TRes> {
   factory CopyWith_Query_getFamilyRelatedFamilies.stub(TRes res) =
       _CopyWithStubImpl_Query_getFamilyRelatedFamilies;
 
-  TRes call({
-    Query_getFamilyRelatedFamilies_familiesByPk? familiesByPk,
-    String? $__typename,
-  });
+  TRes call({Query_getFamilyRelatedFamilies_familiesByPk? familiesByPk});
   CopyWith_Query_getFamilyRelatedFamilies_familiesByPk<TRes> get familiesByPk;
 }
 
@@ -196,17 +178,11 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? familiesByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? familiesByPk = _undefined}) => _then(
     Query_getFamilyRelatedFamilies(
       familiesByPk: familiesByPk == _undefined
           ? _instance.familiesByPk
           : (familiesByPk as Query_getFamilyRelatedFamilies_familiesByPk?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -229,10 +205,7 @@ class _CopyWithStubImpl_Query_getFamilyRelatedFamilies<TRes>
 
   TRes _res;
 
-  call({
-    Query_getFamilyRelatedFamilies_familiesByPk? familiesByPk,
-    String? $__typename,
-  }) => _res;
+  call({Query_getFamilyRelatedFamilies_familiesByPk? familiesByPk}) => _res;
 
   CopyWith_Query_getFamilyRelatedFamilies_familiesByPk<TRes> get familiesByPk =>
       CopyWith_Query_getFamilyRelatedFamilies_familiesByPk.stub(_res);
@@ -397,13 +370,6 @@ const documentNodeQuerygetFamilyRelatedFamilies = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

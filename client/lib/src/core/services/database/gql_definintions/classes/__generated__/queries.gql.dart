@@ -95,14 +95,10 @@ class _CopyWithStubImpl_Variables_Query_classesForService<TRes>
 }
 
 class Query_classesForService {
-  Query_classesForService({
-    required this.classes,
-    this.$__typename = 'query_root',
-  });
+  Query_classesForService({required this.classes});
 
   factory Query_classesForService.fromJson(Map<String, dynamic> json) {
     final l$classes = json['classes'];
-    final l$$__typename = json['__typename'];
     return Query_classesForService(
       classes: (l$classes as List<dynamic>)
           .map(
@@ -111,31 +107,22 @@ class Query_classesForService {
             ),
           )
           .toList(),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final List<Query_classesForService_classes> classes;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$classes = classes;
     _resultData['classes'] = l$classes.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$classes = classes;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      Object.hashAll(l$classes.map((v) => v)),
-      l$$__typename,
-    ]);
+    return Object.hashAll([Object.hashAll(l$classes.map((v) => v))]);
   }
 
   @override
@@ -158,11 +145,6 @@ class Query_classesForService {
         return false;
       }
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -181,10 +163,7 @@ abstract class CopyWith_Query_classesForService<TRes> {
   factory CopyWith_Query_classesForService.stub(TRes res) =
       _CopyWithStubImpl_Query_classesForService;
 
-  TRes call({
-    List<Query_classesForService_classes>? classes,
-    String? $__typename,
-  });
+  TRes call({List<Query_classesForService_classes>? classes});
   TRes classes(
     Iterable<Query_classesForService_classes> Function(
       Iterable<
@@ -207,17 +186,13 @@ class _CopyWithImpl_Query_classesForService<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? classes = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_classesForService(
-          classes: classes == _undefined || classes == null
-              ? _instance.classes
-              : (classes as List<Query_classesForService_classes>),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
+  TRes call({Object? classes = _undefined}) => _then(
+    Query_classesForService(
+      classes: classes == _undefined || classes == null
+          ? _instance.classes
+          : (classes as List<Query_classesForService_classes>),
+    ),
+  );
 
   TRes classes(
     Iterable<Query_classesForService_classes> Function(
@@ -243,8 +218,7 @@ class _CopyWithStubImpl_Query_classesForService<TRes>
 
   TRes _res;
 
-  call({List<Query_classesForService_classes>? classes, String? $__typename}) =>
-      _res;
+  call({List<Query_classesForService_classes>? classes}) => _res;
 
   classes(_fn) => _res;
 }
@@ -383,13 +357,6 @@ const documentNodeQueryclassesForService = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
