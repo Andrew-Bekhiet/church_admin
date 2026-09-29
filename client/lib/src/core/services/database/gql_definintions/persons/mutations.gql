@@ -134,6 +134,7 @@ mutation updatePerson(
 mutation insertPerson($newPerson: PersonsInsertInput!) {
   insertPersonsOne(object: $newPerson) {
     ...Person
+    familyId
   }
 }
 

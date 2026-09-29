@@ -16,6 +16,7 @@ part 'person.g.dart';
     'isStudent',
     'otherPhones',
     'contacts',
+    'contactsWithFamilyAdmins',
     'userCanEdit',
     'maxSpiritDataAge',
     'uid',
@@ -263,6 +264,12 @@ class Person extends ViewableWithIDAndImage
   final bool userCanEdit;
 
   Point? get geolocation => address?.geolocation;
+
+  List<PhoneContact> get contactsWithFamilyAdmins => [
+    ...contacts,
+    if (personType?.isFamilyAdmin != true)
+      ...(family?.contacts ?? const []).where((c) => c.personId != id),
+  ];
 
   bool get isStudent => workStatus == WorkStatus.student;
 

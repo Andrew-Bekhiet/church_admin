@@ -6,14 +6,26 @@ class ContactsUpdateHelper {
   static final RegExp _e164 = RegExp(r'^\+[1-9][0-9]{6,14}$');
 
   final String personId;
+  final String? familyId;
   final List<PhoneContact> newContacts;
   final List<PhoneContact> oldContacts;
 
-  late final Set<String> _newIds = newContacts.map((c) => c.id).toSet();
+  late final List<PhoneContact> _resolvedNew = [
+    for (final c in newContacts)
+      switch (c.owner) {
+        FamilyRoleContactOwner(familyId: null) => c.copyWith(
+          familyId: familyId,
+        ),
+        PersonContactOwner(personId: null) => c.copyWith(personId: personId),
+        _ => c,
+      },
+  ];
+
+  late final Set<String> _newIds = _resolvedNew.map((c) => c.id).toSet();
   late final Set<String> _oldIds = oldContacts.map((c) => c.id).toSet();
 
   late final List<ContactChange> _matched = [
-    for (final updated in newContacts)
+    for (final updated in _resolvedNew)
       for (final old in oldContacts)
         if (old.id == updated.id) ContactChange(old: old, updated: updated),
   ];
@@ -38,7 +50,7 @@ class ContactsUpdateHelper {
       .toList();
 
   late final List<PhoneContact> _upserts = [
-    ...newContacts.where((c) => !_oldIds.contains(c.id)),
+    ..._resolvedNew.where((c) => !_oldIds.contains(c.id)),
     ..._ownerChanged,
     ..._kept.where((m) => m.changesBeyondLosingMain).map((m) => m.updated),
   ];
@@ -49,6 +61,9 @@ class ContactsUpdateHelper {
   Variables_Mutation_saveContacts get variables {
     if (_upserts.any((c) => !_e164.hasMatch(c.phone))) {
       throw const ContactsSaveException(ContactsErrorCode.invalidPhone);
+    }
+    if (_upserts.any((c) => c.isFamilyRole && c.familyId == null)) {
+      throw const ContactsSaveException(ContactsErrorCode.familyRequired);
     }
 
     return Variables_Mutation_saveContacts(
@@ -65,13 +80,14 @@ class ContactsUpdateHelper {
     required this.personId,
     required this.newContacts,
     required this.oldContacts,
+    this.familyId,
   });
 
   Input_ContactsInsertInput _toInsertInput(PhoneContact contact) =>
       switch (contact.owner) {
-        PersonContactOwner() => Input_ContactsInsertInput(
+        PersonContactOwner(:final personId) => Input_ContactsInsertInput(
           id: contact.id.toUuid(),
-          personId: personId.toUuid(),
+          personId: personId?.toUuid(),
           label: contact.ownLabel,
           phone: contact.phone,
           isMainPhone: contact.isMainPhone,
@@ -79,7 +95,7 @@ class ContactsUpdateHelper {
         FamilyRoleContactOwner(:final familyId, :final personTypeId) =>
           Input_ContactsInsertInput(
             id: contact.id.toUuid(),
-            familyId: familyId.toUuid(),
+            familyId: familyId?.toUuid(),
             personTypeId: personTypeId?.toUuid(),
             label: contact.ownLabel,
             phone: contact.phone,

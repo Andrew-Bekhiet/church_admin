@@ -81,6 +81,7 @@ class PersonsDAO extends FullCRUDDAO<Person> {
     final created = await super.createObject(newObject: newObject);
     await saveContacts(
       personId: created.id,
+      familyId: created.familyId,
       newContacts: newObject.contacts,
       oldContacts: const [],
     );
@@ -100,6 +101,7 @@ class PersonsDAO extends FullCRUDDAO<Person> {
         : newObject;
     await saveContacts(
       personId: newObject.id,
+      familyId: newObject.familyId ?? newObject.family?.id,
       newContacts: newObject.contacts,
       oldContacts: oldObject.contacts,
     );
@@ -109,11 +111,13 @@ class PersonsDAO extends FullCRUDDAO<Person> {
 
   Future<void> saveContacts({
     required String personId,
+    required String? familyId,
     required List<PhoneContact> newContacts,
     required List<PhoneContact> oldContacts,
   }) async {
     final helper = ContactsUpdateHelper(
       personId: personId,
+      familyId: familyId,
       newContacts: newContacts,
       oldContacts: oldContacts,
     );

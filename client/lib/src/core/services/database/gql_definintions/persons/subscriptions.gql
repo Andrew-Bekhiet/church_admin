@@ -107,6 +107,7 @@ subscription watchPerson(
     personType {
       id
       name
+      isFamilyAdmin
     }
     qualification {
       id

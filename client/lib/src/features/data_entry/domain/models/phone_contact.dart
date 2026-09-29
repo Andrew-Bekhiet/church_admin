@@ -10,6 +10,9 @@ part 'phone_contact.g.dart';
 class PhoneContact with _$PhoneContact {
   static const String defaultLabel = 'رقم الهاتف';
 
+  static String roleLabel(String roleName) =>
+      roleName.startsWith('ال') ? roleName : 'ال$roleName';
+
   @override
   @JsonKey(defaultValue: '')
   final String id;
@@ -36,15 +39,13 @@ class PhoneContact with _$PhoneContact {
   @override
   final bool isMainPhone;
 
-  bool get isFamilyRole => familyId != null;
+  bool get isFamilyRole => personId == null && personTypeId != null;
 
-  ContactOwner get owner => switch (familyId) {
-    final familyId? => FamilyRoleContactOwner(
-      familyId: familyId,
-      personTypeId: personTypeId,
-    ),
-    null => const PersonContactOwner(),
-  };
+  bool get isOwn => personTypeId == null;
+
+  ContactOwner get owner => isFamilyRole
+      ? FamilyRoleContactOwner(familyId: familyId, personTypeId: personTypeId)
+      : PersonContactOwner(personId: personId);
 
   String? get ownLabel {
     final trimmed = label?.trim();
@@ -55,7 +56,7 @@ class PhoneContact with _$PhoneContact {
   String get displayLabel {
     if (ownLabel case final ownLabel?) return ownLabel;
     if (personType?.name case final roleName? when roleName.isNotEmpty) {
-      return roleName.startsWith('ال') ? roleName : 'ال$roleName';
+      return roleLabel(roleName);
     }
 
     return defaultLabel;
@@ -91,4 +92,20 @@ class PhoneContact with _$PhoneContact {
       _$PhoneContactFromJson(json);
 
   Json toJson() => _$PhoneContactToJson(this);
+
+  PhoneContact withRole(PersonType role, String? familyId) => copyWith(
+    personId: null,
+    familyId: familyId,
+    personTypeId: role.id,
+    personType: role,
+    label: null,
+    isMainPhone: false,
+  );
+
+  PhoneContact ownedBy(String personId) => copyWith(
+    personId: personId,
+    familyId: null,
+    personTypeId: null,
+    personType: null,
+  );
 }

@@ -37,6 +37,7 @@ void main() {
 
       final save = dao.saveContacts(
         personId: personId,
+        familyId: null,
         oldContacts: const [],
         newContacts: const [
           PhoneContact(
