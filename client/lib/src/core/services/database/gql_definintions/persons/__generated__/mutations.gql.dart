@@ -5560,14 +5560,14 @@ class Mutation_insertPerson {
     return Mutation_insertPerson(
       insertPersonsOne: l$insertPersonsOne == null
           ? null
-          : Fragment_Person.fromJson(
+          : Mutation_insertPerson_insertPersonsOne.fromJson(
               (l$insertPersonsOne as Map<String, dynamic>),
             ),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment_Person? insertPersonsOne;
+  final Mutation_insertPerson_insertPersonsOne? insertPersonsOne;
 
   final String $__typename;
 
@@ -5623,8 +5623,11 @@ abstract class CopyWith_Mutation_insertPerson<TRes> {
   factory CopyWith_Mutation_insertPerson.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertPerson;
 
-  TRes call({Fragment_Person? insertPersonsOne, String? $__typename});
-  CopyWith_Fragment_Person<TRes> get insertPersonsOne;
+  TRes call({
+    Mutation_insertPerson_insertPersonsOne? insertPersonsOne,
+    String? $__typename,
+  });
+  CopyWith_Mutation_insertPerson_insertPersonsOne<TRes> get insertPersonsOne;
 }
 
 class _CopyWithImpl_Mutation_insertPerson<TRes>
@@ -5644,18 +5647,18 @@ class _CopyWithImpl_Mutation_insertPerson<TRes>
     Mutation_insertPerson(
       insertPersonsOne: insertPersonsOne == _undefined
           ? _instance.insertPersonsOne
-          : (insertPersonsOne as Fragment_Person?),
+          : (insertPersonsOne as Mutation_insertPerson_insertPersonsOne?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
     ),
   );
 
-  CopyWith_Fragment_Person<TRes> get insertPersonsOne {
+  CopyWith_Mutation_insertPerson_insertPersonsOne<TRes> get insertPersonsOne {
     final local$insertPersonsOne = _instance.insertPersonsOne;
     return local$insertPersonsOne == null
-        ? CopyWith_Fragment_Person.stub(_then(_instance))
-        : CopyWith_Fragment_Person(
+        ? CopyWith_Mutation_insertPerson_insertPersonsOne.stub(_then(_instance))
+        : CopyWith_Mutation_insertPerson_insertPersonsOne(
             local$insertPersonsOne,
             (e) => call(insertPersonsOne: e),
           );
@@ -5668,10 +5671,13 @@ class _CopyWithStubImpl_Mutation_insertPerson<TRes>
 
   TRes _res;
 
-  call({Fragment_Person? insertPersonsOne, String? $__typename}) => _res;
+  call({
+    Mutation_insertPerson_insertPersonsOne? insertPersonsOne,
+    String? $__typename,
+  }) => _res;
 
-  CopyWith_Fragment_Person<TRes> get insertPersonsOne =>
-      CopyWith_Fragment_Person.stub(_res);
+  CopyWith_Mutation_insertPerson_insertPersonsOne<TRes> get insertPersonsOne =>
+      CopyWith_Mutation_insertPerson_insertPersonsOne.stub(_res);
 }
 
 const documentNodeMutationinsertPerson = DocumentNode(
@@ -5710,6 +5716,13 @@ const documentNodeMutationinsertPerson = DocumentNode(
                   directives: [],
                 ),
                 FieldNode(
+                  name: NameNode(value: 'familyId'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
                   name: NameNode(value: '__typename'),
                   alias: null,
                   arguments: [],
@@ -5733,6 +5746,256 @@ const documentNodeMutationinsertPerson = DocumentNode(
     fragmentDefinitionPersonNoPhoto,
   ],
 );
+
+class Mutation_insertPerson_insertPersonsOne
+    implements Fragment_Person, Fragment_PersonNoPhoto {
+  Mutation_insertPerson_insertPersonsOne({
+    required this.id,
+    required this.name,
+    this.color,
+    this.userCanEdit,
+    this.$__typename = 'Persons',
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.familyId,
+  });
+
+  factory Mutation_insertPerson_insertPersonsOne.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$$__typename = json['__typename'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$familyId = json['familyId'];
+    return Mutation_insertPerson_insertPersonsOne(
+      id: stringToUuid(l$id),
+      name: (l$name as String),
+      color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
+      $__typename: (l$$__typename as String),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      familyId: l$familyId == null ? null : stringToUuid(l$familyId),
+    );
+  }
+
+  final UuidValue id;
+
+  final String name;
+
+  final int? color;
+
+  final bool? userCanEdit;
+
+  final String $__typename;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final UuidValue? familyId;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$familyId = familyId;
+    _resultData['familyId'] = l$familyId == null
+        ? null
+        : uuidToString(l$familyId);
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$userCanEdit = userCanEdit;
+    final l$$__typename = $__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$familyId = familyId;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$$__typename,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$familyId,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_insertPerson_insertPersonsOne ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$familyId = familyId;
+    final lOther$familyId = other.familyId;
+    if (l$familyId != lOther$familyId) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_insertPerson_insertPersonsOne
+    on Mutation_insertPerson_insertPersonsOne {
+  CopyWith_Mutation_insertPerson_insertPersonsOne<
+    Mutation_insertPerson_insertPersonsOne
+  >
+  get copyWith =>
+      CopyWith_Mutation_insertPerson_insertPersonsOne(this, (i) => i);
+}
+
+abstract class CopyWith_Mutation_insertPerson_insertPersonsOne<TRes> {
+  factory CopyWith_Mutation_insertPerson_insertPersonsOne(
+    Mutation_insertPerson_insertPersonsOne instance,
+    TRes Function(Mutation_insertPerson_insertPersonsOne) then,
+  ) = _CopyWithImpl_Mutation_insertPerson_insertPersonsOne;
+
+  factory CopyWith_Mutation_insertPerson_insertPersonsOne.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_insertPerson_insertPersonsOne;
+
+  TRes call({
+    UuidValue? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    UuidValue? familyId,
+  });
+}
+
+class _CopyWithImpl_Mutation_insertPerson_insertPersonsOne<TRes>
+    implements CopyWith_Mutation_insertPerson_insertPersonsOne<TRes> {
+  _CopyWithImpl_Mutation_insertPerson_insertPersonsOne(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_insertPerson_insertPersonsOne _instance;
+
+  final TRes Function(Mutation_insertPerson_insertPersonsOne) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? $__typename = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? familyId = _undefined,
+  }) => _then(
+    Mutation_insertPerson_insertPersonsOne(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      familyId: familyId == _undefined
+          ? _instance.familyId
+          : (familyId as UuidValue?),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Mutation_insertPerson_insertPersonsOne<TRes>
+    implements CopyWith_Mutation_insertPerson_insertPersonsOne<TRes> {
+  _CopyWithStubImpl_Mutation_insertPerson_insertPersonsOne(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    UuidValue? familyId,
+  }) => _res;
+}
 
 class Variables_Mutation_updatePersonSpiritData {
   factory Variables_Mutation_updatePersonSpiritData({

@@ -2131,6 +2131,13 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(
                         selectionSet: null,
                       ),
                       FieldNode(
+                        name: NameNode(value: 'isFamilyAdmin'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: '__typename'),
                         alias: null,
                         arguments: [],
@@ -5617,6 +5624,7 @@ class Subscription_watchPerson_personsByPk_personType {
   Subscription_watchPerson_personsByPk_personType({
     required this.id,
     required this.name,
+    required this.isFamilyAdmin,
     this.$__typename = 'PersonTypes',
   });
 
@@ -5625,10 +5633,12 @@ class Subscription_watchPerson_personsByPk_personType {
   ) {
     final l$id = json['id'];
     final l$name = json['name'];
+    final l$isFamilyAdmin = json['isFamilyAdmin'];
     final l$$__typename = json['__typename'];
     return Subscription_watchPerson_personsByPk_personType(
       id: stringToUuid(l$id),
       name: (l$name as String),
+      isFamilyAdmin: (l$isFamilyAdmin as bool),
       $__typename: (l$$__typename as String),
     );
   }
@@ -5636,6 +5646,8 @@ class Subscription_watchPerson_personsByPk_personType {
   final UuidValue id;
 
   final String name;
+
+  final bool isFamilyAdmin;
 
   final String $__typename;
 
@@ -5645,6 +5657,8 @@ class Subscription_watchPerson_personsByPk_personType {
     _resultData['id'] = uuidToString(l$id);
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$isFamilyAdmin = isFamilyAdmin;
+    _resultData['isFamilyAdmin'] = l$isFamilyAdmin;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5654,8 +5668,9 @@ class Subscription_watchPerson_personsByPk_personType {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$isFamilyAdmin = isFamilyAdmin;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$name, l$$__typename]);
+    return Object.hashAll([l$id, l$name, l$isFamilyAdmin, l$$__typename]);
   }
 
   @override
@@ -5675,6 +5690,11 @@ class Subscription_watchPerson_personsByPk_personType {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$isFamilyAdmin = isFamilyAdmin;
+    final lOther$isFamilyAdmin = other.isFamilyAdmin;
+    if (l$isFamilyAdmin != lOther$isFamilyAdmin) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -5705,7 +5725,12 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_personType<TRes> {
     TRes res,
   ) = _CopyWithStubImpl_Subscription_watchPerson_personsByPk_personType;
 
-  TRes call({UuidValue? id, String? name, String? $__typename});
+  TRes call({
+    UuidValue? id,
+    String? name,
+    bool? isFamilyAdmin,
+    String? $__typename,
+  });
 }
 
 class _CopyWithImpl_Subscription_watchPerson_personsByPk_personType<TRes>
@@ -5724,6 +5749,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_personType<TRes>
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? isFamilyAdmin = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Subscription_watchPerson_personsByPk_personType(
@@ -5731,6 +5757,9 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_personType<TRes>
       name: name == _undefined || name == null
           ? _instance.name
           : (name as String),
+      isFamilyAdmin: isFamilyAdmin == _undefined || isFamilyAdmin == null
+          ? _instance.isFamilyAdmin
+          : (isFamilyAdmin as bool),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -5744,7 +5773,12 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_personType<TRes>
 
   TRes _res;
 
-  call({UuidValue? id, String? name, String? $__typename}) => _res;
+  call({
+    UuidValue? id,
+    String? name,
+    bool? isFamilyAdmin,
+    String? $__typename,
+  }) => _res;
 }
 
 class Subscription_watchPerson_personsByPk_qualification {

@@ -1329,12 +1329,14 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
   @override
   _i8.Future<void> saveContacts({
     required String? personId,
+    required String? familyId,
     required List<_i4.PhoneContact>? newContacts,
     required List<_i4.PhoneContact>? oldContacts,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#saveContacts, [], {
               #personId: personId,
+              #familyId: familyId,
               #newContacts: newContacts,
               #oldContacts: oldContacts,
             }),
