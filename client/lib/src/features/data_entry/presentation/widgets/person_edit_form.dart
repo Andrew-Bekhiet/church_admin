@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +20,22 @@ class PersonEditForm extends StatefulWidget {
 }
 
 class _PersonEditFormState extends State<PersonEditForm> {
-  void _update(Person Function(Person) change) {
-    widget.controller.newObject = change(widget.controller.newObject);
-  }
+  final PaginatableStreamBase<PersonType> _personTypes = DatabaseService
+      .I
+      .metadata
+      .personTypes
+      .streamAll();
+  StreamSubscription<List<PersonType>>? _personTypesSubscription;
+  List<PersonType> _familyAdminTypes = const [];
 
-  void _updateAndRebuild(Person Function(Person) change) {
-    setState(() => _update(change));
+  @override
+  void initState() {
+    super.initState();
+    _personTypesSubscription = _personTypes.listen(
+      (types) => setState(
+        () => _familyAdminTypes = types.where((t) => t.isFamilyAdmin).toList(),
+      ),
+    );
   }
 
   @override
@@ -40,26 +52,9 @@ class _PersonEditFormState extends State<PersonEditForm> {
           onNationalIdChanged: (value) =>
               _update((p) => p.copyWith(nationalId: int.tryParse(value))),
           onImportFromContacts: _importFromContacts,
-          onMainPhoneChanged: (value) => _update(
-            (p) => p.copyWith(
-              mainPhone: PhoneNumberService.I
-                  .formatInternational(value)
-                  .replaceAll('+20', '0'),
-            ),
-          ),
-          validatePhone: _validatePhoneField,
-          onEditPhoneName: _onEditPhoneFieldName,
-          onOtherPhoneChanged: (key, value) => _update(
-            (p) => p.copyWith(
-              otherPhones: {
-                ...p.otherPhones,
-                key: PhoneNumberService.I
-                    .formatInternational(value)
-                    .replaceAll('+20', '0'),
-              },
-            ),
-          ),
-          onAddOtherPhone: _addOtherPhone,
+          familyAdminTypes: _familyAdminTypes,
+          onContactsChanged: (value) =>
+              _updateAndRebuild((p) => p.copyWith(contacts: value)),
           onBirthdateChanged: (value) =>
               _update((p) => p.copyWith(birthdate: value)),
         ),
@@ -164,49 +159,20 @@ class _PersonEditFormState extends State<PersonEditForm> {
     );
   }
 
-  void Function() _onEditPhoneFieldName(MapEntry<String, dynamic> phone) =>
-      () async {
-        final name = await _renamePhoneFieldName(true, phone.key);
-        if (name == true && mounted) {
-          _updateAndRebuild(
-            (p) => p.copyWith(
-              otherPhones: {
-                for (final entry in p.otherPhones.entries)
-                  if (entry.key != phone.key) entry.key: entry.value,
-              },
-            ),
-          );
-        } else if (name is String && mounted) {
-          _updateAndRebuild(
-            (p) => p.copyWith(
-              otherPhones: {
-                for (final entry in p.otherPhones.entries)
-                  if (entry.key != phone.key) entry.key: entry.value,
-                name: phone.value,
-              },
-            ),
-          );
-        }
-      };
-  Future<void> _addOtherPhone() async {
-    final name = await _renamePhoneFieldName();
-    if (name is String && mounted) {
-      _updateAndRebuild(
-        (p) => p.copyWith(otherPhones: {...p.otherPhones, name: ''}),
-      );
-    }
+  @override
+  void dispose() {
+    unawaited(_personTypesSubscription?.cancel());
+    unawaited(_personTypes.dispose());
+    super.dispose();
   }
 
-  Future<Object?> _renamePhoneFieldName([
-    bool canDelete = false,
-    String? initialName,
-  ]) => showDialog(
-    context: context,
-    builder: (context) => PhoneFieldNameDialog(
-      canDelete: canDelete,
-      initialName: initialName,
-    ),
-  );
+  void _update(Person Function(Person) change) {
+    widget.controller.newObject = change(widget.controller.newObject);
+  }
+
+  void _updateAndRebuild(Person Function(Person) change) {
+    setState(() => _update(change));
+  }
 
   Future<void> _importFromContacts() async {
     FocusScope.of(context).requestFocus();
@@ -229,10 +195,15 @@ class _PersonEditFormState extends State<PersonEditForm> {
       _updateAndRebuild(
         (p) => p.copyWith(
           name: result.useContactName ? (contact.displayName ?? '') : p.name,
-          otherPhones: {
-            ...p.otherPhones,
-            for (final number in result.numbers) number.label: number.number,
-          },
+          contacts: [
+            ...p.contacts,
+            for (final number in result.numbers)
+              PhoneContact.create(
+                phone:
+                    PhoneNumberService.I.toE164(number.number) ?? number.number,
+                label: number.label,
+              ),
+          ],
         ),
       );
     }
@@ -354,9 +325,4 @@ class _PersonEditFormState extends State<PersonEditForm> {
         time: time,
         recordedBy: AuthBloc.I.currentUser?.uid,
       );
-
-  String? _validatePhoneField(String? value) =>
-      value != null && !PhoneNumberService.I.validate(value)
-      ? 'برجاء ادخال رقم هاتف صالح'
-      : null;
 }

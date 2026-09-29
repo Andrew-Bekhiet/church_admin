@@ -48,6 +48,7 @@ class _EditPersonState extends State<EditPerson> {
       stateId: widget.person?.state?.id,
       storeId: widget.person?.store?.id,
       studyYearId: widget.person?.studyYear?.order,
+      contacts: widget.person?.contactsWithFamilyAdmins ?? const [],
     );
     _controller = EditObjectController(
       afterCreate: (object) => ViewPersonRoute(
