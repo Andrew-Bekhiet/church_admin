@@ -98,42 +98,32 @@ class _CopyWithStubImpl_Variables_Mutation_deleteStore<TRes>
 }
 
 class Mutation_deleteStore {
-  Mutation_deleteStore({
-    this.deleteStoresByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_deleteStore({this.deleteStoresByPk});
 
   factory Mutation_deleteStore.fromJson(Map<String, dynamic> json) {
     final l$deleteStoresByPk = json['deleteStoresByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_deleteStore(
       deleteStoresByPk: l$deleteStoresByPk == null
           ? null
           : Fragment_Store.fromJson(
               (l$deleteStoresByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Store? deleteStoresByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$deleteStoresByPk = deleteStoresByPk;
     _resultData['deleteStoresByPk'] = l$deleteStoresByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$deleteStoresByPk = deleteStoresByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$deleteStoresByPk, l$$__typename]);
+    return Object.hashAll([l$deleteStoresByPk]);
   }
 
   @override
@@ -147,11 +137,6 @@ class Mutation_deleteStore {
     final l$deleteStoresByPk = deleteStoresByPk;
     final lOther$deleteStoresByPk = other.deleteStoresByPk;
     if (l$deleteStoresByPk != lOther$deleteStoresByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -172,7 +157,7 @@ abstract class CopyWith_Mutation_deleteStore<TRes> {
   factory CopyWith_Mutation_deleteStore.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteStore;
 
-  TRes call({Fragment_Store? deleteStoresByPk, String? $__typename});
+  TRes call({Fragment_Store? deleteStoresByPk});
   CopyWith_Fragment_Store<TRes> get deleteStoresByPk;
 }
 
@@ -186,17 +171,11 @@ class _CopyWithImpl_Mutation_deleteStore<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? deleteStoresByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? deleteStoresByPk = _undefined}) => _then(
     Mutation_deleteStore(
       deleteStoresByPk: deleteStoresByPk == _undefined
           ? _instance.deleteStoresByPk
           : (deleteStoresByPk as Fragment_Store?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -217,7 +196,7 @@ class _CopyWithStubImpl_Mutation_deleteStore<TRes>
 
   TRes _res;
 
-  call({Fragment_Store? deleteStoresByPk, String? $__typename}) => _res;
+  call({Fragment_Store? deleteStoresByPk}) => _res;
 
   CopyWith_Fragment_Store<TRes> get deleteStoresByPk =>
       CopyWith_Fragment_Store.stub(_res);
@@ -264,13 +243,6 @@ const documentNodeMutationdeleteStore = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -376,42 +348,32 @@ class _CopyWithStubImpl_Variables_Mutation_insertStore<TRes>
 }
 
 class Mutation_insertStore {
-  Mutation_insertStore({
-    this.insertStoresOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertStore({this.insertStoresOne});
 
   factory Mutation_insertStore.fromJson(Map<String, dynamic> json) {
     final l$insertStoresOne = json['insertStoresOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertStore(
       insertStoresOne: l$insertStoresOne == null
           ? null
           : Fragment_Store.fromJson(
               (l$insertStoresOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Store? insertStoresOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertStoresOne = insertStoresOne;
     _resultData['insertStoresOne'] = l$insertStoresOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertStoresOne = insertStoresOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertStoresOne, l$$__typename]);
+    return Object.hashAll([l$insertStoresOne]);
   }
 
   @override
@@ -425,11 +387,6 @@ class Mutation_insertStore {
     final l$insertStoresOne = insertStoresOne;
     final lOther$insertStoresOne = other.insertStoresOne;
     if (l$insertStoresOne != lOther$insertStoresOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -450,7 +407,7 @@ abstract class CopyWith_Mutation_insertStore<TRes> {
   factory CopyWith_Mutation_insertStore.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertStore;
 
-  TRes call({Fragment_Store? insertStoresOne, String? $__typename});
+  TRes call({Fragment_Store? insertStoresOne});
   CopyWith_Fragment_Store<TRes> get insertStoresOne;
 }
 
@@ -464,17 +421,11 @@ class _CopyWithImpl_Mutation_insertStore<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertStoresOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertStoresOne = _undefined}) => _then(
     Mutation_insertStore(
       insertStoresOne: insertStoresOne == _undefined
           ? _instance.insertStoresOne
           : (insertStoresOne as Fragment_Store?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -495,7 +446,7 @@ class _CopyWithStubImpl_Mutation_insertStore<TRes>
 
   TRes _res;
 
-  call({Fragment_Store? insertStoresOne, String? $__typename}) => _res;
+  call({Fragment_Store? insertStoresOne}) => _res;
 
   CopyWith_Fragment_Store<TRes> get insertStoresOne =>
       CopyWith_Fragment_Store.stub(_res);
@@ -545,13 +496,6 @@ const documentNodeMutationinsertStore = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -780,16 +724,11 @@ class _CopyWithStubImpl_Variables_Mutation_updateStore<TRes>
 }
 
 class Mutation_updateStore {
-  Mutation_updateStore({
-    this.updateStoresByPk,
-    this.updateAddressesByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_updateStore({this.updateStoresByPk, this.updateAddressesByPk});
 
   factory Mutation_updateStore.fromJson(Map<String, dynamic> json) {
     final l$updateStoresByPk = json['updateStoresByPk'];
     final l$updateAddressesByPk = json['updateAddressesByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_updateStore(
       updateStoresByPk: l$updateStoresByPk == null
           ? null
@@ -801,7 +740,6 @@ class Mutation_updateStore {
           : Fragment_Address.fromJson(
               (l$updateAddressesByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
@@ -809,16 +747,12 @@ class Mutation_updateStore {
 
   final Fragment_Address? updateAddressesByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$updateStoresByPk = updateStoresByPk;
     _resultData['updateStoresByPk'] = l$updateStoresByPk?.toJson();
     final l$updateAddressesByPk = updateAddressesByPk;
     _resultData['updateAddressesByPk'] = l$updateAddressesByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
@@ -826,12 +760,7 @@ class Mutation_updateStore {
   int get hashCode {
     final l$updateStoresByPk = updateStoresByPk;
     final l$updateAddressesByPk = updateAddressesByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$updateStoresByPk,
-      l$updateAddressesByPk,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$updateStoresByPk, l$updateAddressesByPk]);
   }
 
   @override
@@ -850,11 +779,6 @@ class Mutation_updateStore {
     final l$updateAddressesByPk = updateAddressesByPk;
     final lOther$updateAddressesByPk = other.updateAddressesByPk;
     if (l$updateAddressesByPk != lOther$updateAddressesByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -878,7 +802,6 @@ abstract class CopyWith_Mutation_updateStore<TRes> {
   TRes call({
     Fragment_Store? updateStoresByPk,
     Fragment_Address? updateAddressesByPk,
-    String? $__typename,
   });
   CopyWith_Fragment_Store<TRes> get updateStoresByPk;
   CopyWith_Fragment_Address<TRes> get updateAddressesByPk;
@@ -897,7 +820,6 @@ class _CopyWithImpl_Mutation_updateStore<TRes>
   TRes call({
     Object? updateStoresByPk = _undefined,
     Object? updateAddressesByPk = _undefined,
-    Object? $__typename = _undefined,
   }) => _then(
     Mutation_updateStore(
       updateStoresByPk: updateStoresByPk == _undefined
@@ -906,9 +828,6 @@ class _CopyWithImpl_Mutation_updateStore<TRes>
       updateAddressesByPk: updateAddressesByPk == _undefined
           ? _instance.updateAddressesByPk
           : (updateAddressesByPk as Fragment_Address?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -942,7 +861,6 @@ class _CopyWithStubImpl_Mutation_updateStore<TRes>
   call({
     Fragment_Store? updateStoresByPk,
     Fragment_Address? updateAddressesByPk,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Fragment_Store<TRes> get updateStoresByPk =>
@@ -1103,13 +1021,6 @@ const documentNodeMutationupdateStore = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

@@ -98,42 +98,32 @@ class _CopyWithStubImpl_Variables_Mutation_deleteFamily<TRes>
 }
 
 class Mutation_deleteFamily {
-  Mutation_deleteFamily({
-    this.deleteFamiliesByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_deleteFamily({this.deleteFamiliesByPk});
 
   factory Mutation_deleteFamily.fromJson(Map<String, dynamic> json) {
     final l$deleteFamiliesByPk = json['deleteFamiliesByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_deleteFamily(
       deleteFamiliesByPk: l$deleteFamiliesByPk == null
           ? null
           : Fragment_Family.fromJson(
               (l$deleteFamiliesByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Family? deleteFamiliesByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$deleteFamiliesByPk = deleteFamiliesByPk;
     _resultData['deleteFamiliesByPk'] = l$deleteFamiliesByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$deleteFamiliesByPk = deleteFamiliesByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$deleteFamiliesByPk, l$$__typename]);
+    return Object.hashAll([l$deleteFamiliesByPk]);
   }
 
   @override
@@ -147,11 +137,6 @@ class Mutation_deleteFamily {
     final l$deleteFamiliesByPk = deleteFamiliesByPk;
     final lOther$deleteFamiliesByPk = other.deleteFamiliesByPk;
     if (l$deleteFamiliesByPk != lOther$deleteFamiliesByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -172,7 +157,7 @@ abstract class CopyWith_Mutation_deleteFamily<TRes> {
   factory CopyWith_Mutation_deleteFamily.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteFamily;
 
-  TRes call({Fragment_Family? deleteFamiliesByPk, String? $__typename});
+  TRes call({Fragment_Family? deleteFamiliesByPk});
   CopyWith_Fragment_Family<TRes> get deleteFamiliesByPk;
 }
 
@@ -186,17 +171,11 @@ class _CopyWithImpl_Mutation_deleteFamily<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? deleteFamiliesByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? deleteFamiliesByPk = _undefined}) => _then(
     Mutation_deleteFamily(
       deleteFamiliesByPk: deleteFamiliesByPk == _undefined
           ? _instance.deleteFamiliesByPk
           : (deleteFamiliesByPk as Fragment_Family?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -217,7 +196,7 @@ class _CopyWithStubImpl_Mutation_deleteFamily<TRes>
 
   TRes _res;
 
-  call({Fragment_Family? deleteFamiliesByPk, String? $__typename}) => _res;
+  call({Fragment_Family? deleteFamiliesByPk}) => _res;
 
   CopyWith_Fragment_Family<TRes> get deleteFamiliesByPk =>
       CopyWith_Fragment_Family.stub(_res);
@@ -264,13 +243,6 @@ const documentNodeMutationdeleteFamily = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -376,42 +348,32 @@ class _CopyWithStubImpl_Variables_Mutation_insertFamily<TRes>
 }
 
 class Mutation_insertFamily {
-  Mutation_insertFamily({
-    this.insertFamiliesOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertFamily({this.insertFamiliesOne});
 
   factory Mutation_insertFamily.fromJson(Map<String, dynamic> json) {
     final l$insertFamiliesOne = json['insertFamiliesOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertFamily(
       insertFamiliesOne: l$insertFamiliesOne == null
           ? null
           : Fragment_Family.fromJson(
               (l$insertFamiliesOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Family? insertFamiliesOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertFamiliesOne = insertFamiliesOne;
     _resultData['insertFamiliesOne'] = l$insertFamiliesOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertFamiliesOne = insertFamiliesOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertFamiliesOne, l$$__typename]);
+    return Object.hashAll([l$insertFamiliesOne]);
   }
 
   @override
@@ -425,11 +387,6 @@ class Mutation_insertFamily {
     final l$insertFamiliesOne = insertFamiliesOne;
     final lOther$insertFamiliesOne = other.insertFamiliesOne;
     if (l$insertFamiliesOne != lOther$insertFamiliesOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -450,7 +407,7 @@ abstract class CopyWith_Mutation_insertFamily<TRes> {
   factory CopyWith_Mutation_insertFamily.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertFamily;
 
-  TRes call({Fragment_Family? insertFamiliesOne, String? $__typename});
+  TRes call({Fragment_Family? insertFamiliesOne});
   CopyWith_Fragment_Family<TRes> get insertFamiliesOne;
 }
 
@@ -464,17 +421,11 @@ class _CopyWithImpl_Mutation_insertFamily<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertFamiliesOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertFamiliesOne = _undefined}) => _then(
     Mutation_insertFamily(
       insertFamiliesOne: insertFamiliesOne == _undefined
           ? _instance.insertFamiliesOne
           : (insertFamiliesOne as Fragment_Family?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -495,7 +446,7 @@ class _CopyWithStubImpl_Mutation_insertFamily<TRes>
 
   TRes _res;
 
-  call({Fragment_Family? insertFamiliesOne, String? $__typename}) => _res;
+  call({Fragment_Family? insertFamiliesOne}) => _res;
 
   CopyWith_Fragment_Family<TRes> get insertFamiliesOne =>
       CopyWith_Fragment_Family.stub(_res);
@@ -545,13 +496,6 @@ const documentNodeMutationinsertFamily = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -1034,7 +978,6 @@ class Mutation_updateFamily {
     this.insertFamiliesFamilies,
     this.insertHistoryVisitHistoryOne,
     this.$_fatherVisitHistory,
-    this.$__typename = 'mutation_root',
   });
 
   factory Mutation_updateFamily.fromJson(Map<String, dynamic> json) {
@@ -1044,7 +987,6 @@ class Mutation_updateFamily {
     final l$insertFamiliesFamilies = json['insertFamiliesFamilies'];
     final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
     final l$$_fatherVisitHistory = json['_fatherVisitHistory'];
-    final l$$__typename = json['__typename'];
     return Mutation_updateFamily(
       updateFamiliesByPk: l$updateFamiliesByPk == null
           ? null
@@ -1076,7 +1018,6 @@ class Mutation_updateFamily {
           : Mutation_updateFamily__fatherVisitHistory.fromJson(
               (l$$_fatherVisitHistory as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
@@ -1093,8 +1034,6 @@ class Mutation_updateFamily {
 
   final Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$updateFamiliesByPk = updateFamiliesByPk;
@@ -1110,8 +1049,6 @@ class Mutation_updateFamily {
         ?.toJson();
     final l$$_fatherVisitHistory = $_fatherVisitHistory;
     _resultData['_fatherVisitHistory'] = l$$_fatherVisitHistory?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
@@ -1123,7 +1060,6 @@ class Mutation_updateFamily {
     final l$insertFamiliesFamilies = insertFamiliesFamilies;
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     final l$$_fatherVisitHistory = $_fatherVisitHistory;
-    final l$$__typename = $__typename;
     return Object.hashAll([
       l$updateFamiliesByPk,
       l$updateAddressesByPk,
@@ -1131,7 +1067,6 @@ class Mutation_updateFamily {
       l$insertFamiliesFamilies,
       l$insertHistoryVisitHistoryOne,
       l$$_fatherVisitHistory,
-      l$$__typename,
     ]);
   }
 
@@ -1174,11 +1109,6 @@ class Mutation_updateFamily {
     if (l$$_fatherVisitHistory != lOther$$_fatherVisitHistory) {
       return false;
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -1205,7 +1135,6 @@ abstract class CopyWith_Mutation_updateFamily<TRes> {
     Mutation_updateFamily_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
     Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory,
-    String? $__typename,
   });
   CopyWith_Fragment_Family<TRes> get updateFamiliesByPk;
   CopyWith_Fragment_Address<TRes> get updateAddressesByPk;
@@ -1236,7 +1165,6 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
     Object? insertFamiliesFamilies = _undefined,
     Object? insertHistoryVisitHistoryOne = _undefined,
     Object? $_fatherVisitHistory = _undefined,
-    Object? $__typename = _undefined,
   }) => _then(
     Mutation_updateFamily(
       updateFamiliesByPk: updateFamiliesByPk == _undefined
@@ -1261,9 +1189,6 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
           ? _instance.$_fatherVisitHistory
           : ($_fatherVisitHistory
                 as Mutation_updateFamily__fatherVisitHistory?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -1355,7 +1280,6 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
     Mutation_updateFamily_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
     Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Fragment_Family<TRes> get updateFamiliesByPk =>
@@ -1898,13 +1822,6 @@ const documentNodeMutationupdateFamily = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

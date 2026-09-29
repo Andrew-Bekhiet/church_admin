@@ -98,42 +98,32 @@ class _CopyWithStubImpl_Variables_Mutation_createChurch<TRes>
 }
 
 class Mutation_createChurch {
-  Mutation_createChurch({
-    this.insertChurchesOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_createChurch({this.insertChurchesOne});
 
   factory Mutation_createChurch.fromJson(Map<String, dynamic> json) {
     final l$insertChurchesOne = json['insertChurchesOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_createChurch(
       insertChurchesOne: l$insertChurchesOne == null
           ? null
           : Mutation_createChurch_insertChurchesOne.fromJson(
               (l$insertChurchesOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_createChurch_insertChurchesOne? insertChurchesOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertChurchesOne = insertChurchesOne;
     _resultData['insertChurchesOne'] = l$insertChurchesOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertChurchesOne = insertChurchesOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertChurchesOne, l$$__typename]);
+    return Object.hashAll([l$insertChurchesOne]);
   }
 
   @override
@@ -147,11 +137,6 @@ class Mutation_createChurch {
     final l$insertChurchesOne = insertChurchesOne;
     final lOther$insertChurchesOne = other.insertChurchesOne;
     if (l$insertChurchesOne != lOther$insertChurchesOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -172,10 +157,7 @@ abstract class CopyWith_Mutation_createChurch<TRes> {
   factory CopyWith_Mutation_createChurch.stub(TRes res) =
       _CopyWithStubImpl_Mutation_createChurch;
 
-  TRes call({
-    Mutation_createChurch_insertChurchesOne? insertChurchesOne,
-    String? $__typename,
-  });
+  TRes call({Mutation_createChurch_insertChurchesOne? insertChurchesOne});
   CopyWith_Mutation_createChurch_insertChurchesOne<TRes> get insertChurchesOne;
 }
 
@@ -189,17 +171,11 @@ class _CopyWithImpl_Mutation_createChurch<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertChurchesOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertChurchesOne = _undefined}) => _then(
     Mutation_createChurch(
       insertChurchesOne: insertChurchesOne == _undefined
           ? _instance.insertChurchesOne
           : (insertChurchesOne as Mutation_createChurch_insertChurchesOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -222,10 +198,7 @@ class _CopyWithStubImpl_Mutation_createChurch<TRes>
 
   TRes _res;
 
-  call({
-    Mutation_createChurch_insertChurchesOne? insertChurchesOne,
-    String? $__typename,
-  }) => _res;
+  call({Mutation_createChurch_insertChurchesOne? insertChurchesOne}) => _res;
 
   CopyWith_Mutation_createChurch_insertChurchesOne<TRes>
   get insertChurchesOne =>
@@ -303,13 +276,6 @@ const documentNodeMutationcreateChurch = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

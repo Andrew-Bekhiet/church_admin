@@ -98,42 +98,32 @@ class _CopyWithStubImpl_Variables_Mutation_createFather<TRes>
 }
 
 class Mutation_createFather {
-  Mutation_createFather({
-    this.insertFathersOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_createFather({this.insertFathersOne});
 
   factory Mutation_createFather.fromJson(Map<String, dynamic> json) {
     final l$insertFathersOne = json['insertFathersOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_createFather(
       insertFathersOne: l$insertFathersOne == null
           ? null
           : Mutation_createFather_insertFathersOne.fromJson(
               (l$insertFathersOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_createFather_insertFathersOne? insertFathersOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertFathersOne = insertFathersOne;
     _resultData['insertFathersOne'] = l$insertFathersOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertFathersOne = insertFathersOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertFathersOne, l$$__typename]);
+    return Object.hashAll([l$insertFathersOne]);
   }
 
   @override
@@ -147,11 +137,6 @@ class Mutation_createFather {
     final l$insertFathersOne = insertFathersOne;
     final lOther$insertFathersOne = other.insertFathersOne;
     if (l$insertFathersOne != lOther$insertFathersOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -172,10 +157,7 @@ abstract class CopyWith_Mutation_createFather<TRes> {
   factory CopyWith_Mutation_createFather.stub(TRes res) =
       _CopyWithStubImpl_Mutation_createFather;
 
-  TRes call({
-    Mutation_createFather_insertFathersOne? insertFathersOne,
-    String? $__typename,
-  });
+  TRes call({Mutation_createFather_insertFathersOne? insertFathersOne});
   CopyWith_Mutation_createFather_insertFathersOne<TRes> get insertFathersOne;
 }
 
@@ -189,17 +171,11 @@ class _CopyWithImpl_Mutation_createFather<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertFathersOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertFathersOne = _undefined}) => _then(
     Mutation_createFather(
       insertFathersOne: insertFathersOne == _undefined
           ? _instance.insertFathersOne
           : (insertFathersOne as Mutation_createFather_insertFathersOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -220,10 +196,7 @@ class _CopyWithStubImpl_Mutation_createFather<TRes>
 
   TRes _res;
 
-  call({
-    Mutation_createFather_insertFathersOne? insertFathersOne,
-    String? $__typename,
-  }) => _res;
+  call({Mutation_createFather_insertFathersOne? insertFathersOne}) => _res;
 
   CopyWith_Mutation_createFather_insertFathersOne<TRes> get insertFathersOne =>
       CopyWith_Mutation_createFather_insertFathersOne.stub(_res);
@@ -300,13 +273,6 @@ const documentNodeMutationcreateFather = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

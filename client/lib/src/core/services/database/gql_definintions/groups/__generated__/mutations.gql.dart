@@ -95,42 +95,32 @@ class _CopyWithStubImpl_Variables_Mutation_deleteGroup<TRes>
 }
 
 class Mutation_deleteGroup {
-  Mutation_deleteGroup({
-    this.deleteGroupsByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_deleteGroup({this.deleteGroupsByPk});
 
   factory Mutation_deleteGroup.fromJson(Map<String, dynamic> json) {
     final l$deleteGroupsByPk = json['deleteGroupsByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_deleteGroup(
       deleteGroupsByPk: l$deleteGroupsByPk == null
           ? null
           : Fragment_Group.fromJson(
               (l$deleteGroupsByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Group? deleteGroupsByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$deleteGroupsByPk = deleteGroupsByPk;
     _resultData['deleteGroupsByPk'] = l$deleteGroupsByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$deleteGroupsByPk = deleteGroupsByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$deleteGroupsByPk, l$$__typename]);
+    return Object.hashAll([l$deleteGroupsByPk]);
   }
 
   @override
@@ -144,11 +134,6 @@ class Mutation_deleteGroup {
     final l$deleteGroupsByPk = deleteGroupsByPk;
     final lOther$deleteGroupsByPk = other.deleteGroupsByPk;
     if (l$deleteGroupsByPk != lOther$deleteGroupsByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -169,7 +154,7 @@ abstract class CopyWith_Mutation_deleteGroup<TRes> {
   factory CopyWith_Mutation_deleteGroup.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteGroup;
 
-  TRes call({Fragment_Group? deleteGroupsByPk, String? $__typename});
+  TRes call({Fragment_Group? deleteGroupsByPk});
   CopyWith_Fragment_Group<TRes> get deleteGroupsByPk;
 }
 
@@ -183,17 +168,11 @@ class _CopyWithImpl_Mutation_deleteGroup<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? deleteGroupsByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? deleteGroupsByPk = _undefined}) => _then(
     Mutation_deleteGroup(
       deleteGroupsByPk: deleteGroupsByPk == _undefined
           ? _instance.deleteGroupsByPk
           : (deleteGroupsByPk as Fragment_Group?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -214,7 +193,7 @@ class _CopyWithStubImpl_Mutation_deleteGroup<TRes>
 
   TRes _res;
 
-  call({Fragment_Group? deleteGroupsByPk, String? $__typename}) => _res;
+  call({Fragment_Group? deleteGroupsByPk}) => _res;
 
   CopyWith_Fragment_Group<TRes> get deleteGroupsByPk =>
       CopyWith_Fragment_Group.stub(_res);
@@ -261,13 +240,6 @@ const documentNodeMutationdeleteGroup = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -373,42 +345,32 @@ class _CopyWithStubImpl_Variables_Mutation_insertGroup<TRes>
 }
 
 class Mutation_insertGroup {
-  Mutation_insertGroup({
-    this.insertGroupsOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertGroup({this.insertGroupsOne});
 
   factory Mutation_insertGroup.fromJson(Map<String, dynamic> json) {
     final l$insertGroupsOne = json['insertGroupsOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertGroup(
       insertGroupsOne: l$insertGroupsOne == null
           ? null
           : Fragment_Group.fromJson(
               (l$insertGroupsOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Group? insertGroupsOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertGroupsOne = insertGroupsOne;
     _resultData['insertGroupsOne'] = l$insertGroupsOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertGroupsOne = insertGroupsOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertGroupsOne, l$$__typename]);
+    return Object.hashAll([l$insertGroupsOne]);
   }
 
   @override
@@ -422,11 +384,6 @@ class Mutation_insertGroup {
     final l$insertGroupsOne = insertGroupsOne;
     final lOther$insertGroupsOne = other.insertGroupsOne;
     if (l$insertGroupsOne != lOther$insertGroupsOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -447,7 +404,7 @@ abstract class CopyWith_Mutation_insertGroup<TRes> {
   factory CopyWith_Mutation_insertGroup.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertGroup;
 
-  TRes call({Fragment_Group? insertGroupsOne, String? $__typename});
+  TRes call({Fragment_Group? insertGroupsOne});
   CopyWith_Fragment_Group<TRes> get insertGroupsOne;
 }
 
@@ -461,17 +418,11 @@ class _CopyWithImpl_Mutation_insertGroup<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertGroupsOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertGroupsOne = _undefined}) => _then(
     Mutation_insertGroup(
       insertGroupsOne: insertGroupsOne == _undefined
           ? _instance.insertGroupsOne
           : (insertGroupsOne as Fragment_Group?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -492,7 +443,7 @@ class _CopyWithStubImpl_Mutation_insertGroup<TRes>
 
   TRes _res;
 
-  call({Fragment_Group? insertGroupsOne, String? $__typename}) => _res;
+  call({Fragment_Group? insertGroupsOne}) => _res;
 
   CopyWith_Fragment_Group<TRes> get insertGroupsOne =>
       CopyWith_Fragment_Group.stub(_res);
@@ -542,13 +493,6 @@ const documentNodeMutationinsertGroup = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -673,42 +617,32 @@ class _CopyWithStubImpl_Variables_Mutation_updateGroup<TRes>
 }
 
 class Mutation_updateGroup {
-  Mutation_updateGroup({
-    this.updateGroupsByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_updateGroup({this.updateGroupsByPk});
 
   factory Mutation_updateGroup.fromJson(Map<String, dynamic> json) {
     final l$updateGroupsByPk = json['updateGroupsByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_updateGroup(
       updateGroupsByPk: l$updateGroupsByPk == null
           ? null
           : Fragment_Group.fromJson(
               (l$updateGroupsByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Group? updateGroupsByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$updateGroupsByPk = updateGroupsByPk;
     _resultData['updateGroupsByPk'] = l$updateGroupsByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$updateGroupsByPk = updateGroupsByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$updateGroupsByPk, l$$__typename]);
+    return Object.hashAll([l$updateGroupsByPk]);
   }
 
   @override
@@ -722,11 +656,6 @@ class Mutation_updateGroup {
     final l$updateGroupsByPk = updateGroupsByPk;
     final lOther$updateGroupsByPk = other.updateGroupsByPk;
     if (l$updateGroupsByPk != lOther$updateGroupsByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -747,7 +676,7 @@ abstract class CopyWith_Mutation_updateGroup<TRes> {
   factory CopyWith_Mutation_updateGroup.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updateGroup;
 
-  TRes call({Fragment_Group? updateGroupsByPk, String? $__typename});
+  TRes call({Fragment_Group? updateGroupsByPk});
   CopyWith_Fragment_Group<TRes> get updateGroupsByPk;
 }
 
@@ -761,17 +690,11 @@ class _CopyWithImpl_Mutation_updateGroup<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? updateGroupsByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? updateGroupsByPk = _undefined}) => _then(
     Mutation_updateGroup(
       updateGroupsByPk: updateGroupsByPk == _undefined
           ? _instance.updateGroupsByPk
           : (updateGroupsByPk as Fragment_Group?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -792,7 +715,7 @@ class _CopyWithStubImpl_Mutation_updateGroup<TRes>
 
   TRes _res;
 
-  call({Fragment_Group? updateGroupsByPk, String? $__typename}) => _res;
+  call({Fragment_Group? updateGroupsByPk}) => _res;
 
   CopyWith_Fragment_Group<TRes> get updateGroupsByPk =>
       CopyWith_Fragment_Group.stub(_res);
@@ -859,13 +782,6 @@ const documentNodeMutationupdateGroup = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

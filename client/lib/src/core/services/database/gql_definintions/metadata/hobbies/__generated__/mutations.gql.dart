@@ -98,42 +98,32 @@ class _CopyWithStubImpl_Variables_Mutation_createHobby<TRes>
 }
 
 class Mutation_createHobby {
-  Mutation_createHobby({
-    this.insertHobbiesOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_createHobby({this.insertHobbiesOne});
 
   factory Mutation_createHobby.fromJson(Map<String, dynamic> json) {
     final l$insertHobbiesOne = json['insertHobbiesOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_createHobby(
       insertHobbiesOne: l$insertHobbiesOne == null
           ? null
           : Mutation_createHobby_insertHobbiesOne.fromJson(
               (l$insertHobbiesOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_createHobby_insertHobbiesOne? insertHobbiesOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertHobbiesOne = insertHobbiesOne;
     _resultData['insertHobbiesOne'] = l$insertHobbiesOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertHobbiesOne = insertHobbiesOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertHobbiesOne, l$$__typename]);
+    return Object.hashAll([l$insertHobbiesOne]);
   }
 
   @override
@@ -147,11 +137,6 @@ class Mutation_createHobby {
     final l$insertHobbiesOne = insertHobbiesOne;
     final lOther$insertHobbiesOne = other.insertHobbiesOne;
     if (l$insertHobbiesOne != lOther$insertHobbiesOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -172,10 +157,7 @@ abstract class CopyWith_Mutation_createHobby<TRes> {
   factory CopyWith_Mutation_createHobby.stub(TRes res) =
       _CopyWithStubImpl_Mutation_createHobby;
 
-  TRes call({
-    Mutation_createHobby_insertHobbiesOne? insertHobbiesOne,
-    String? $__typename,
-  });
+  TRes call({Mutation_createHobby_insertHobbiesOne? insertHobbiesOne});
   CopyWith_Mutation_createHobby_insertHobbiesOne<TRes> get insertHobbiesOne;
 }
 
@@ -189,17 +171,11 @@ class _CopyWithImpl_Mutation_createHobby<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertHobbiesOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertHobbiesOne = _undefined}) => _then(
     Mutation_createHobby(
       insertHobbiesOne: insertHobbiesOne == _undefined
           ? _instance.insertHobbiesOne
           : (insertHobbiesOne as Mutation_createHobby_insertHobbiesOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -220,10 +196,7 @@ class _CopyWithStubImpl_Mutation_createHobby<TRes>
 
   TRes _res;
 
-  call({
-    Mutation_createHobby_insertHobbiesOne? insertHobbiesOne,
-    String? $__typename,
-  }) => _res;
+  call({Mutation_createHobby_insertHobbiesOne? insertHobbiesOne}) => _res;
 
   CopyWith_Mutation_createHobby_insertHobbiesOne<TRes> get insertHobbiesOne =>
       CopyWith_Mutation_createHobby_insertHobbiesOne.stub(_res);
@@ -300,13 +273,6 @@ const documentNodeMutationcreateHobby = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

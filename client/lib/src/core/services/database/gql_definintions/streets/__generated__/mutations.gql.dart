@@ -97,42 +97,32 @@ class _CopyWithStubImpl_Variables_Mutation_deleteStreet<TRes>
 }
 
 class Mutation_deleteStreet {
-  Mutation_deleteStreet({
-    this.deleteStreetsByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_deleteStreet({this.deleteStreetsByPk});
 
   factory Mutation_deleteStreet.fromJson(Map<String, dynamic> json) {
     final l$deleteStreetsByPk = json['deleteStreetsByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_deleteStreet(
       deleteStreetsByPk: l$deleteStreetsByPk == null
           ? null
           : Fragment_Street.fromJson(
               (l$deleteStreetsByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Street? deleteStreetsByPk;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$deleteStreetsByPk = deleteStreetsByPk;
     _resultData['deleteStreetsByPk'] = l$deleteStreetsByPk?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$deleteStreetsByPk = deleteStreetsByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$deleteStreetsByPk, l$$__typename]);
+    return Object.hashAll([l$deleteStreetsByPk]);
   }
 
   @override
@@ -146,11 +136,6 @@ class Mutation_deleteStreet {
     final l$deleteStreetsByPk = deleteStreetsByPk;
     final lOther$deleteStreetsByPk = other.deleteStreetsByPk;
     if (l$deleteStreetsByPk != lOther$deleteStreetsByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -171,7 +156,7 @@ abstract class CopyWith_Mutation_deleteStreet<TRes> {
   factory CopyWith_Mutation_deleteStreet.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteStreet;
 
-  TRes call({Fragment_Street? deleteStreetsByPk, String? $__typename});
+  TRes call({Fragment_Street? deleteStreetsByPk});
   CopyWith_Fragment_Street<TRes> get deleteStreetsByPk;
 }
 
@@ -185,17 +170,11 @@ class _CopyWithImpl_Mutation_deleteStreet<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? deleteStreetsByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? deleteStreetsByPk = _undefined}) => _then(
     Mutation_deleteStreet(
       deleteStreetsByPk: deleteStreetsByPk == _undefined
           ? _instance.deleteStreetsByPk
           : (deleteStreetsByPk as Fragment_Street?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -216,7 +195,7 @@ class _CopyWithStubImpl_Mutation_deleteStreet<TRes>
 
   TRes _res;
 
-  call({Fragment_Street? deleteStreetsByPk, String? $__typename}) => _res;
+  call({Fragment_Street? deleteStreetsByPk}) => _res;
 
   CopyWith_Fragment_Street<TRes> get deleteStreetsByPk =>
       CopyWith_Fragment_Street.stub(_res);
@@ -263,13 +242,6 @@ const documentNodeMutationdeleteStreet = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -375,42 +347,32 @@ class _CopyWithStubImpl_Variables_Mutation_insertStreet<TRes>
 }
 
 class Mutation_insertStreet {
-  Mutation_insertStreet({
-    this.insertStreetsOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertStreet({this.insertStreetsOne});
 
   factory Mutation_insertStreet.fromJson(Map<String, dynamic> json) {
     final l$insertStreetsOne = json['insertStreetsOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertStreet(
       insertStreetsOne: l$insertStreetsOne == null
           ? null
           : Fragment_Street.fromJson(
               (l$insertStreetsOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Street? insertStreetsOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertStreetsOne = insertStreetsOne;
     _resultData['insertStreetsOne'] = l$insertStreetsOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertStreetsOne = insertStreetsOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertStreetsOne, l$$__typename]);
+    return Object.hashAll([l$insertStreetsOne]);
   }
 
   @override
@@ -424,11 +386,6 @@ class Mutation_insertStreet {
     final l$insertStreetsOne = insertStreetsOne;
     final lOther$insertStreetsOne = other.insertStreetsOne;
     if (l$insertStreetsOne != lOther$insertStreetsOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -449,7 +406,7 @@ abstract class CopyWith_Mutation_insertStreet<TRes> {
   factory CopyWith_Mutation_insertStreet.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertStreet;
 
-  TRes call({Fragment_Street? insertStreetsOne, String? $__typename});
+  TRes call({Fragment_Street? insertStreetsOne});
   CopyWith_Fragment_Street<TRes> get insertStreetsOne;
 }
 
@@ -463,17 +420,11 @@ class _CopyWithImpl_Mutation_insertStreet<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertStreetsOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertStreetsOne = _undefined}) => _then(
     Mutation_insertStreet(
       insertStreetsOne: insertStreetsOne == _undefined
           ? _instance.insertStreetsOne
           : (insertStreetsOne as Fragment_Street?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -494,7 +445,7 @@ class _CopyWithStubImpl_Mutation_insertStreet<TRes>
 
   TRes _res;
 
-  call({Fragment_Street? insertStreetsOne, String? $__typename}) => _res;
+  call({Fragment_Street? insertStreetsOne}) => _res;
 
   CopyWith_Fragment_Street<TRes> get insertStreetsOne =>
       CopyWith_Fragment_Street.stub(_res);
@@ -544,13 +495,6 @@ const documentNodeMutationinsertStreet = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -847,7 +791,6 @@ class Mutation_updateStreet {
     this.insertHistoryVisitHistoryOne,
     this.insertAreasStreets,
     this.deleteAreasStreets,
-    this.$__typename = 'mutation_root',
   });
 
   factory Mutation_updateStreet.fromJson(Map<String, dynamic> json) {
@@ -855,7 +798,6 @@ class Mutation_updateStreet {
     final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
     final l$insertAreasStreets = json['insertAreasStreets'];
     final l$deleteAreasStreets = json['deleteAreasStreets'];
-    final l$$__typename = json['__typename'];
     return Mutation_updateStreet(
       updateStreetsByPk: l$updateStreetsByPk == null
           ? null
@@ -877,7 +819,6 @@ class Mutation_updateStreet {
           : Mutation_updateStreet_deleteAreasStreets.fromJson(
               (l$deleteAreasStreets as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
@@ -888,8 +829,6 @@ class Mutation_updateStreet {
   final Mutation_updateStreet_insertAreasStreets? insertAreasStreets;
 
   final Mutation_updateStreet_deleteAreasStreets? deleteAreasStreets;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -902,8 +841,6 @@ class Mutation_updateStreet {
     _resultData['insertAreasStreets'] = l$insertAreasStreets?.toJson();
     final l$deleteAreasStreets = deleteAreasStreets;
     _resultData['deleteAreasStreets'] = l$deleteAreasStreets?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
@@ -913,13 +850,11 @@ class Mutation_updateStreet {
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     final l$insertAreasStreets = insertAreasStreets;
     final l$deleteAreasStreets = deleteAreasStreets;
-    final l$$__typename = $__typename;
     return Object.hashAll([
       l$updateStreetsByPk,
       l$insertHistoryVisitHistoryOne,
       l$insertAreasStreets,
       l$deleteAreasStreets,
-      l$$__typename,
     ]);
   }
 
@@ -952,11 +887,6 @@ class Mutation_updateStreet {
     if (l$deleteAreasStreets != lOther$deleteAreasStreets) {
       return false;
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -980,7 +910,6 @@ abstract class CopyWith_Mutation_updateStreet<TRes> {
     Fragment_VisitHistory? insertHistoryVisitHistoryOne,
     Mutation_updateStreet_insertAreasStreets? insertAreasStreets,
     Mutation_updateStreet_deleteAreasStreets? deleteAreasStreets,
-    String? $__typename,
   });
   CopyWith_Fragment_Street<TRes> get updateStreetsByPk;
   CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne;
@@ -1005,7 +934,6 @@ class _CopyWithImpl_Mutation_updateStreet<TRes>
     Object? insertHistoryVisitHistoryOne = _undefined,
     Object? insertAreasStreets = _undefined,
     Object? deleteAreasStreets = _undefined,
-    Object? $__typename = _undefined,
   }) => _then(
     Mutation_updateStreet(
       updateStreetsByPk: updateStreetsByPk == _undefined
@@ -1020,9 +948,6 @@ class _CopyWithImpl_Mutation_updateStreet<TRes>
       deleteAreasStreets: deleteAreasStreets == _undefined
           ? _instance.deleteAreasStreets
           : (deleteAreasStreets as Mutation_updateStreet_deleteAreasStreets?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -1085,7 +1010,6 @@ class _CopyWithStubImpl_Mutation_updateStreet<TRes>
     Fragment_VisitHistory? insertHistoryVisitHistoryOne,
     Mutation_updateStreet_insertAreasStreets? insertAreasStreets,
     Mutation_updateStreet_deleteAreasStreets? deleteAreasStreets,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Fragment_Street<TRes> get updateStreetsByPk =>
@@ -1385,13 +1309,6 @@ const documentNodeMutationupdateStreet = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

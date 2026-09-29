@@ -118,43 +118,33 @@ class _CopyWithStubImpl_Variables_Mutation_insertInvitation<TRes>
 }
 
 class Mutation_insertInvitation {
-  Mutation_insertInvitation({
-    this.insertAuthInvitationsOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_insertInvitation({this.insertAuthInvitationsOne});
 
   factory Mutation_insertInvitation.fromJson(Map<String, dynamic> json) {
     final l$insertAuthInvitationsOne = json['insertAuthInvitationsOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_insertInvitation(
       insertAuthInvitationsOne: l$insertAuthInvitationsOne == null
           ? null
           : Fragment_Invitation.fromJson(
               (l$insertAuthInvitationsOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Invitation? insertAuthInvitationsOne;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertAuthInvitationsOne = insertAuthInvitationsOne;
     _resultData['insertAuthInvitationsOne'] = l$insertAuthInvitationsOne
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertAuthInvitationsOne = insertAuthInvitationsOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertAuthInvitationsOne, l$$__typename]);
+    return Object.hashAll([l$insertAuthInvitationsOne]);
   }
 
   @override
@@ -169,11 +159,6 @@ class Mutation_insertInvitation {
     final l$insertAuthInvitationsOne = insertAuthInvitationsOne;
     final lOther$insertAuthInvitationsOne = other.insertAuthInvitationsOne;
     if (l$insertAuthInvitationsOne != lOther$insertAuthInvitationsOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -195,10 +180,7 @@ abstract class CopyWith_Mutation_insertInvitation<TRes> {
   factory CopyWith_Mutation_insertInvitation.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertInvitation;
 
-  TRes call({
-    Fragment_Invitation? insertAuthInvitationsOne,
-    String? $__typename,
-  });
+  TRes call({Fragment_Invitation? insertAuthInvitationsOne});
   CopyWith_Fragment_Invitation<TRes> get insertAuthInvitationsOne;
 }
 
@@ -212,17 +194,11 @@ class _CopyWithImpl_Mutation_insertInvitation<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertAuthInvitationsOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertAuthInvitationsOne = _undefined}) => _then(
     Mutation_insertInvitation(
       insertAuthInvitationsOne: insertAuthInvitationsOne == _undefined
           ? _instance.insertAuthInvitationsOne
           : (insertAuthInvitationsOne as Fragment_Invitation?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -243,8 +219,7 @@ class _CopyWithStubImpl_Mutation_insertInvitation<TRes>
 
   TRes _res;
 
-  call({Fragment_Invitation? insertAuthInvitationsOne, String? $__typename}) =>
-      _res;
+  call({Fragment_Invitation? insertAuthInvitationsOne}) => _res;
 
   CopyWith_Fragment_Invitation<TRes> get insertAuthInvitationsOne =>
       CopyWith_Fragment_Invitation.stub(_res);
@@ -311,13 +286,6 @@ const documentNodeMutationinsertInvitation = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
@@ -444,43 +412,33 @@ class _CopyWithStubImpl_Variables_Mutation_updateInvitationExpiry<TRes>
 }
 
 class Mutation_updateInvitationExpiry {
-  Mutation_updateInvitationExpiry({
-    this.updateAuthInvitationsByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_updateInvitationExpiry({this.updateAuthInvitationsByPk});
 
   factory Mutation_updateInvitationExpiry.fromJson(Map<String, dynamic> json) {
     final l$updateAuthInvitationsByPk = json['updateAuthInvitationsByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_updateInvitationExpiry(
       updateAuthInvitationsByPk: l$updateAuthInvitationsByPk == null
           ? null
           : Fragment_Invitation.fromJson(
               (l$updateAuthInvitationsByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Invitation? updateAuthInvitationsByPk;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$updateAuthInvitationsByPk = updateAuthInvitationsByPk;
     _resultData['updateAuthInvitationsByPk'] = l$updateAuthInvitationsByPk
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$updateAuthInvitationsByPk = updateAuthInvitationsByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$updateAuthInvitationsByPk, l$$__typename]);
+    return Object.hashAll([l$updateAuthInvitationsByPk]);
   }
 
   @override
@@ -495,11 +453,6 @@ class Mutation_updateInvitationExpiry {
     final l$updateAuthInvitationsByPk = updateAuthInvitationsByPk;
     final lOther$updateAuthInvitationsByPk = other.updateAuthInvitationsByPk;
     if (l$updateAuthInvitationsByPk != lOther$updateAuthInvitationsByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -521,10 +474,7 @@ abstract class CopyWith_Mutation_updateInvitationExpiry<TRes> {
   factory CopyWith_Mutation_updateInvitationExpiry.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updateInvitationExpiry;
 
-  TRes call({
-    Fragment_Invitation? updateAuthInvitationsByPk,
-    String? $__typename,
-  });
+  TRes call({Fragment_Invitation? updateAuthInvitationsByPk});
   CopyWith_Fragment_Invitation<TRes> get updateAuthInvitationsByPk;
 }
 
@@ -538,17 +488,11 @@ class _CopyWithImpl_Mutation_updateInvitationExpiry<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? updateAuthInvitationsByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? updateAuthInvitationsByPk = _undefined}) => _then(
     Mutation_updateInvitationExpiry(
       updateAuthInvitationsByPk: updateAuthInvitationsByPk == _undefined
           ? _instance.updateAuthInvitationsByPk
           : (updateAuthInvitationsByPk as Fragment_Invitation?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -569,8 +513,7 @@ class _CopyWithStubImpl_Mutation_updateInvitationExpiry<TRes>
 
   TRes _res;
 
-  call({Fragment_Invitation? updateAuthInvitationsByPk, String? $__typename}) =>
-      _res;
+  call({Fragment_Invitation? updateAuthInvitationsByPk}) => _res;
 
   CopyWith_Fragment_Invitation<TRes> get updateAuthInvitationsByPk =>
       CopyWith_Fragment_Invitation.stub(_res);
@@ -644,13 +587,6 @@ const documentNodeMutationupdateInvitationExpiry = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

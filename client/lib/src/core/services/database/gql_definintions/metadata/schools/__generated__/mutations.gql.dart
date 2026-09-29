@@ -98,42 +98,32 @@ class _CopyWithStubImpl_Variables_Mutation_createSchool<TRes>
 }
 
 class Mutation_createSchool {
-  Mutation_createSchool({
-    this.insertSchoolsOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_createSchool({this.insertSchoolsOne});
 
   factory Mutation_createSchool.fromJson(Map<String, dynamic> json) {
     final l$insertSchoolsOne = json['insertSchoolsOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_createSchool(
       insertSchoolsOne: l$insertSchoolsOne == null
           ? null
           : Mutation_createSchool_insertSchoolsOne.fromJson(
               (l$insertSchoolsOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_createSchool_insertSchoolsOne? insertSchoolsOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertSchoolsOne = insertSchoolsOne;
     _resultData['insertSchoolsOne'] = l$insertSchoolsOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertSchoolsOne = insertSchoolsOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertSchoolsOne, l$$__typename]);
+    return Object.hashAll([l$insertSchoolsOne]);
   }
 
   @override
@@ -147,11 +137,6 @@ class Mutation_createSchool {
     final l$insertSchoolsOne = insertSchoolsOne;
     final lOther$insertSchoolsOne = other.insertSchoolsOne;
     if (l$insertSchoolsOne != lOther$insertSchoolsOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -172,10 +157,7 @@ abstract class CopyWith_Mutation_createSchool<TRes> {
   factory CopyWith_Mutation_createSchool.stub(TRes res) =
       _CopyWithStubImpl_Mutation_createSchool;
 
-  TRes call({
-    Mutation_createSchool_insertSchoolsOne? insertSchoolsOne,
-    String? $__typename,
-  });
+  TRes call({Mutation_createSchool_insertSchoolsOne? insertSchoolsOne});
   CopyWith_Mutation_createSchool_insertSchoolsOne<TRes> get insertSchoolsOne;
 }
 
@@ -189,17 +171,11 @@ class _CopyWithImpl_Mutation_createSchool<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertSchoolsOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertSchoolsOne = _undefined}) => _then(
     Mutation_createSchool(
       insertSchoolsOne: insertSchoolsOne == _undefined
           ? _instance.insertSchoolsOne
           : (insertSchoolsOne as Mutation_createSchool_insertSchoolsOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -220,10 +196,7 @@ class _CopyWithStubImpl_Mutation_createSchool<TRes>
 
   TRes _res;
 
-  call({
-    Mutation_createSchool_insertSchoolsOne? insertSchoolsOne,
-    String? $__typename,
-  }) => _res;
+  call({Mutation_createSchool_insertSchoolsOne? insertSchoolsOne}) => _res;
 
   CopyWith_Mutation_createSchool_insertSchoolsOne<TRes> get insertSchoolsOne =>
       CopyWith_Mutation_createSchool_insertSchoolsOne.stub(_res);
@@ -300,13 +273,6 @@ const documentNodeMutationcreateSchool = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

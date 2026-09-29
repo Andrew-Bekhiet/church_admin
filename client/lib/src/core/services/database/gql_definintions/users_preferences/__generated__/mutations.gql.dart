@@ -176,43 +176,33 @@ class _CopyWithStubImpl_Variables_Mutation_updateUserPreferences<TRes>
 }
 
 class Mutation_updateUserPreferences {
-  Mutation_updateUserPreferences({
-    this.updateUsersPreferencesByPk,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_updateUserPreferences({this.updateUsersPreferencesByPk});
 
   factory Mutation_updateUserPreferences.fromJson(Map<String, dynamic> json) {
     final l$updateUsersPreferencesByPk = json['updateUsersPreferencesByPk'];
-    final l$$__typename = json['__typename'];
     return Mutation_updateUserPreferences(
       updateUsersPreferencesByPk: l$updateUsersPreferencesByPk == null
           ? null
           : Fragment_UserPreferences.fromJson(
               (l$updateUsersPreferencesByPk as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_UserPreferences? updateUsersPreferencesByPk;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$updateUsersPreferencesByPk = updateUsersPreferencesByPk;
     _resultData['updateUsersPreferencesByPk'] = l$updateUsersPreferencesByPk
         ?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$updateUsersPreferencesByPk = updateUsersPreferencesByPk;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$updateUsersPreferencesByPk, l$$__typename]);
+    return Object.hashAll([l$updateUsersPreferencesByPk]);
   }
 
   @override
@@ -227,11 +217,6 @@ class Mutation_updateUserPreferences {
     final l$updateUsersPreferencesByPk = updateUsersPreferencesByPk;
     final lOther$updateUsersPreferencesByPk = other.updateUsersPreferencesByPk;
     if (l$updateUsersPreferencesByPk != lOther$updateUsersPreferencesByPk) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -253,10 +238,7 @@ abstract class CopyWith_Mutation_updateUserPreferences<TRes> {
   factory CopyWith_Mutation_updateUserPreferences.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updateUserPreferences;
 
-  TRes call({
-    Fragment_UserPreferences? updateUsersPreferencesByPk,
-    String? $__typename,
-  });
+  TRes call({Fragment_UserPreferences? updateUsersPreferencesByPk});
   CopyWith_Fragment_UserPreferences<TRes> get updateUsersPreferencesByPk;
 }
 
@@ -270,17 +252,11 @@ class _CopyWithImpl_Mutation_updateUserPreferences<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? updateUsersPreferencesByPk = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? updateUsersPreferencesByPk = _undefined}) => _then(
     Mutation_updateUserPreferences(
       updateUsersPreferencesByPk: updateUsersPreferencesByPk == _undefined
           ? _instance.updateUsersPreferencesByPk
           : (updateUsersPreferencesByPk as Fragment_UserPreferences?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -302,10 +278,7 @@ class _CopyWithStubImpl_Mutation_updateUserPreferences<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_UserPreferences? updateUsersPreferencesByPk,
-    String? $__typename,
-  }) => _res;
+  call({Fragment_UserPreferences? updateUsersPreferencesByPk}) => _res;
 
   CopyWith_Fragment_UserPreferences<TRes> get updateUsersPreferencesByPk =>
       CopyWith_Fragment_UserPreferences.stub(_res);
@@ -385,13 +358,6 @@ const documentNodeMutationupdateUserPreferences = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

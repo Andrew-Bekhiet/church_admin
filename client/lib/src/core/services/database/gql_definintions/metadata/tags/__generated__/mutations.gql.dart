@@ -98,39 +98,32 @@ class _CopyWithStubImpl_Variables_Mutation_createTag<TRes>
 }
 
 class Mutation_createTag {
-  Mutation_createTag({this.insertTagsOne, this.$__typename = 'mutation_root'});
+  Mutation_createTag({this.insertTagsOne});
 
   factory Mutation_createTag.fromJson(Map<String, dynamic> json) {
     final l$insertTagsOne = json['insertTagsOne'];
-    final l$$__typename = json['__typename'];
     return Mutation_createTag(
       insertTagsOne: l$insertTagsOne == null
           ? null
           : Mutation_createTag_insertTagsOne.fromJson(
               (l$insertTagsOne as Map<String, dynamic>),
             ),
-      $__typename: (l$$__typename as String),
     );
   }
 
   final Mutation_createTag_insertTagsOne? insertTagsOne;
 
-  final String $__typename;
-
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$insertTagsOne = insertTagsOne;
     _resultData['insertTagsOne'] = l$insertTagsOne?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$insertTagsOne = insertTagsOne;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$insertTagsOne, l$$__typename]);
+    return Object.hashAll([l$insertTagsOne]);
   }
 
   @override
@@ -144,11 +137,6 @@ class Mutation_createTag {
     final l$insertTagsOne = insertTagsOne;
     final lOther$insertTagsOne = other.insertTagsOne;
     if (l$insertTagsOne != lOther$insertTagsOne) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -169,10 +157,7 @@ abstract class CopyWith_Mutation_createTag<TRes> {
   factory CopyWith_Mutation_createTag.stub(TRes res) =
       _CopyWithStubImpl_Mutation_createTag;
 
-  TRes call({
-    Mutation_createTag_insertTagsOne? insertTagsOne,
-    String? $__typename,
-  });
+  TRes call({Mutation_createTag_insertTagsOne? insertTagsOne});
   CopyWith_Mutation_createTag_insertTagsOne<TRes> get insertTagsOne;
 }
 
@@ -186,17 +171,11 @@ class _CopyWithImpl_Mutation_createTag<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? insertTagsOne = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
+  TRes call({Object? insertTagsOne = _undefined}) => _then(
     Mutation_createTag(
       insertTagsOne: insertTagsOne == _undefined
           ? _instance.insertTagsOne
           : (insertTagsOne as Mutation_createTag_insertTagsOne?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -217,10 +196,7 @@ class _CopyWithStubImpl_Mutation_createTag<TRes>
 
   TRes _res;
 
-  call({
-    Mutation_createTag_insertTagsOne? insertTagsOne,
-    String? $__typename,
-  }) => _res;
+  call({Mutation_createTag_insertTagsOne? insertTagsOne}) => _res;
 
   CopyWith_Mutation_createTag_insertTagsOne<TRes> get insertTagsOne =>
       CopyWith_Mutation_createTag_insertTagsOne.stub(_res);
@@ -297,13 +273,6 @@ const documentNodeMutationcreateTag = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),

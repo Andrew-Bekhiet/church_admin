@@ -251,18 +251,12 @@ class _CopyWithStubImpl_Variables_Mutation_updateUser<TRes>
 }
 
 class Mutation_updateUser {
-  Mutation_updateUser({
-    this.updateAuthUsersDataByPk,
-    this.unlink,
-    this.link,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_updateUser({this.updateAuthUsersDataByPk, this.unlink, this.link});
 
   factory Mutation_updateUser.fromJson(Map<String, dynamic> json) {
     final l$updateAuthUsersDataByPk = json['updateAuthUsersDataByPk'];
     final l$unlink = json['unlink'];
     final l$link = json['link'];
-    final l$$__typename = json['__typename'];
     return Mutation_updateUser(
       updateAuthUsersDataByPk: l$updateAuthUsersDataByPk == null
           ? null
@@ -277,7 +271,6 @@ class Mutation_updateUser {
       link: l$link == null
           ? null
           : Mutation_updateUser_link.fromJson((l$link as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
     );
   }
 
@@ -286,8 +279,6 @@ class Mutation_updateUser {
   final Mutation_updateUser_unlink? unlink;
 
   final Mutation_updateUser_link? link;
-
-  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -298,8 +289,6 @@ class Mutation_updateUser {
     _resultData['unlink'] = l$unlink?.toJson();
     final l$link = link;
     _resultData['link'] = l$link?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
@@ -308,13 +297,7 @@ class Mutation_updateUser {
     final l$updateAuthUsersDataByPk = updateAuthUsersDataByPk;
     final l$unlink = unlink;
     final l$link = link;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$updateAuthUsersDataByPk,
-      l$unlink,
-      l$link,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$updateAuthUsersDataByPk, l$unlink, l$link]);
   }
 
   @override
@@ -340,11 +323,6 @@ class Mutation_updateUser {
     if (l$link != lOther$link) {
       return false;
     }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
     return true;
   }
 }
@@ -367,7 +345,6 @@ abstract class CopyWith_Mutation_updateUser<TRes> {
     Mutation_updateUser_updateAuthUsersDataByPk? updateAuthUsersDataByPk,
     Mutation_updateUser_unlink? unlink,
     Mutation_updateUser_link? link,
-    String? $__typename,
   });
   CopyWith_Mutation_updateUser_updateAuthUsersDataByPk<TRes>
   get updateAuthUsersDataByPk;
@@ -389,7 +366,6 @@ class _CopyWithImpl_Mutation_updateUser<TRes>
     Object? updateAuthUsersDataByPk = _undefined,
     Object? unlink = _undefined,
     Object? link = _undefined,
-    Object? $__typename = _undefined,
   }) => _then(
     Mutation_updateUser(
       updateAuthUsersDataByPk: updateAuthUsersDataByPk == _undefined
@@ -402,9 +378,6 @@ class _CopyWithImpl_Mutation_updateUser<TRes>
       link: link == _undefined
           ? _instance.link
           : (link as Mutation_updateUser_link?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
     ),
   );
 
@@ -449,7 +422,6 @@ class _CopyWithStubImpl_Mutation_updateUser<TRes>
     Mutation_updateUser_updateAuthUsersDataByPk? updateAuthUsersDataByPk,
     Mutation_updateUser_unlink? unlink,
     Mutation_updateUser_link? link,
-    String? $__typename,
   }) => _res;
 
   CopyWith_Mutation_updateUser_updateAuthUsersDataByPk<TRes>
@@ -762,13 +734,6 @@ const documentNodeMutationupdateUser = DocumentNode(
                 ),
               ],
             ),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
         ],
       ),
