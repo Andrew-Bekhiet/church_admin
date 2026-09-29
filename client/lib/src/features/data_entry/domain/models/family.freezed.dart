@@ -27,6 +27,7 @@ mixin _$Family {
   List<Family>? get children;
   List<Family>? get parents;
   Json? get familyAdminsPhones;
+  List<PhoneContact> get contacts;
   LastRecordedByInfo? get lastEdit;
   LastRecordedByInfo? get lastVisit;
   LastRecordedByInfo? get lastFatherVisit;
@@ -65,6 +66,7 @@ mixin _$Family {
               other.familyAdminsPhones,
               familyAdminsPhones,
             ) &&
+            const DeepCollectionEquality().equals(other.contacts, contacts) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             (identical(other.lastVisit, lastVisit) ||
@@ -77,7 +79,7 @@ mixin _$Family {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     id,
     name,
@@ -93,15 +95,16 @@ mixin _$Family {
     const DeepCollectionEquality().hash(children),
     const DeepCollectionEquality().hash(parents),
     const DeepCollectionEquality().hash(familyAdminsPhones),
+    const DeepCollectionEquality().hash(contacts),
     lastEdit,
     lastVisit,
     lastFatherVisit,
     userCanEdit,
-  );
+  ]);
 
   @override
   String toString() {
-    return 'Family(id: $id, name: $name, address: $address, status: $status, marriageDate: $marriageDate, deceasedSpouseName: $deceasedSpouseName, church: $church, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, familyAdminsPhones: $familyAdminsPhones, lastEdit: $lastEdit, lastVisit: $lastVisit, lastFatherVisit: $lastFatherVisit, userCanEdit: $userCanEdit)';
+    return 'Family(id: $id, name: $name, address: $address, status: $status, marriageDate: $marriageDate, deceasedSpouseName: $deceasedSpouseName, church: $church, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, familyAdminsPhones: $familyAdminsPhones, contacts: $contacts, lastEdit: $lastEdit, lastVisit: $lastVisit, lastFatherVisit: $lastFatherVisit, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -115,6 +118,7 @@ abstract mixin class $FamilyCopyWith<$Res> {
     String name,
     MartialStatus status,
     bool userCanEdit,
+    List<PhoneContact> contacts,
     Address? address,
     DateTime? marriageDate,
     String? deceasedSpouseName,
@@ -148,6 +152,7 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
     Object? name = null,
     Object? status = null,
     Object? userCanEdit = null,
+    Object? contacts = null,
     Object? address = freezed,
     Object? marriageDate = freezed,
     Object? deceasedSpouseName = freezed,
@@ -181,6 +186,10 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
             ? _self.userCanEdit
             : userCanEdit // ignore: cast_nullable_to_non_nullable
                   as bool,
+        contacts: null == contacts
+            ? _self.contacts
+            : contacts // ignore: cast_nullable_to_non_nullable
+                  as List<PhoneContact>,
         address: freezed == address
             ? _self.address
             : address // ignore: cast_nullable_to_non_nullable

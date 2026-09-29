@@ -1,909 +1,14 @@
 // Part 29 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_HistoryKodasHistoryArrRelInsertInput<TRes> {
-  factory CopyWith_Input_HistoryKodasHistoryArrRelInsertInput(
-    Input_HistoryKodasHistoryArrRelInsertInput instance,
-    TRes Function(Input_HistoryKodasHistoryArrRelInsertInput) then,
-  ) = _CopyWithImpl_Input_HistoryKodasHistoryArrRelInsertInput;
-
-  factory CopyWith_Input_HistoryKodasHistoryArrRelInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryKodasHistoryArrRelInsertInput;
-
-  TRes call({
-    List<Input_HistoryKodasHistoryInsertInput>? data,
-    Input_HistoryKodasHistoryOnConflict? onConflict,
-  });
-  TRes data(
-    Iterable<Input_HistoryKodasHistoryInsertInput> Function(
-      Iterable<
-        CopyWith_Input_HistoryKodasHistoryInsertInput<
-          Input_HistoryKodasHistoryInsertInput
-        >
-      >,
-    )
-    _fn,
-  );
-  CopyWith_Input_HistoryKodasHistoryOnConflict<TRes> get onConflict;
-}
-
-class _CopyWithImpl_Input_HistoryKodasHistoryArrRelInsertInput<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryArrRelInsertInput<TRes> {
-  _CopyWithImpl_Input_HistoryKodasHistoryArrRelInsertInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_HistoryKodasHistoryArrRelInsertInput _instance;
-
-  final TRes Function(Input_HistoryKodasHistoryArrRelInsertInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
-      _then(
-        Input_HistoryKodasHistoryArrRelInsertInput._({
-          ..._instance._$data,
-          if (data != _undefined && data != null)
-            'data': (data as List<Input_HistoryKodasHistoryInsertInput>),
-          if (onConflict != _undefined)
-            'onConflict': (onConflict as Input_HistoryKodasHistoryOnConflict?),
-        }),
-      );
-
-  TRes data(
-    Iterable<Input_HistoryKodasHistoryInsertInput> Function(
-      Iterable<
-        CopyWith_Input_HistoryKodasHistoryInsertInput<
-          Input_HistoryKodasHistoryInsertInput
-        >
-      >,
-    )
-    _fn,
-  ) => call(
-    data: _fn(
-      _instance.data.map(
-        (e) => CopyWith_Input_HistoryKodasHistoryInsertInput(e, (i) => i),
-      ),
-    ).toList(),
-  );
-
-  CopyWith_Input_HistoryKodasHistoryOnConflict<TRes> get onConflict {
-    final local$onConflict = _instance.onConflict;
-    return local$onConflict == null
-        ? CopyWith_Input_HistoryKodasHistoryOnConflict.stub(_then(_instance))
-        : CopyWith_Input_HistoryKodasHistoryOnConflict(
-            local$onConflict,
-            (e) => call(onConflict: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_HistoryKodasHistoryArrRelInsertInput<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryArrRelInsertInput<TRes> {
-  _CopyWithStubImpl_Input_HistoryKodasHistoryArrRelInsertInput(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_HistoryKodasHistoryInsertInput>? data,
-    Input_HistoryKodasHistoryOnConflict? onConflict,
-  }) => _res;
-
-  data(_fn) => _res;
-
-  CopyWith_Input_HistoryKodasHistoryOnConflict<TRes> get onConflict =>
-      CopyWith_Input_HistoryKodasHistoryOnConflict.stub(_res);
-}
-
-class Input_HistoryKodasHistoryBoolExp {
-  factory Input_HistoryKodasHistoryBoolExp({
-    List<Input_HistoryKodasHistoryBoolExp>? $_and,
-    Input_HistoryKodasHistoryBoolExp? $_not,
-    List<Input_HistoryKodasHistoryBoolExp>? $_or,
-    Input_HistoryAttendanceDaysBoolExp? day,
-    Input_DateComparisonExp? dayId,
-    Input_UuidComparisonExp? id,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
-    Input_UuidComparisonExp? recordedBy,
-    Input_DateComparisonExp? time,
-    Input_AuthUsersDataBoolExp? user,
-  }) => Input_HistoryKodasHistoryBoolExp._({
-    if ($_and != null) r'_and': $_and,
-    if ($_not != null) r'_not': $_not,
-    if ($_or != null) r'_or': $_or,
-    if (day != null) r'day': day,
-    if (dayId != null) r'dayId': dayId,
-    if (id != null) r'id': id,
-    if (person != null) r'person': person,
-    if (personId != null) r'personId': personId,
-    if (recordedBy != null) r'recordedBy': recordedBy,
-    if (time != null) r'time': time,
-    if (user != null) r'user': user,
-  });
-
-  Input_HistoryKodasHistoryBoolExp._(this._$data);
-
-  factory Input_HistoryKodasHistoryBoolExp.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_and')) {
-      final l$$_and = data['_and'];
-      result$data['_and'] = (l$$_and as List<dynamic>?)
-          ?.map(
-            (e) => Input_HistoryKodasHistoryBoolExp.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList();
-    }
-    if (data.containsKey('_not')) {
-      final l$$_not = data['_not'];
-      result$data['_not'] = l$$_not == null
-          ? null
-          : Input_HistoryKodasHistoryBoolExp.fromJson(
-              (l$$_not as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('_or')) {
-      final l$$_or = data['_or'];
-      result$data['_or'] = (l$$_or as List<dynamic>?)
-          ?.map(
-            (e) => Input_HistoryKodasHistoryBoolExp.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList();
-    }
-    if (data.containsKey('day')) {
-      final l$day = data['day'];
-      result$data['day'] = l$day == null
-          ? null
-          : Input_HistoryAttendanceDaysBoolExp.fromJson(
-              (l$day as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('dayId')) {
-      final l$dayId = data['dayId'];
-      result$data['dayId'] = l$dayId == null
-          ? null
-          : Input_DateComparisonExp.fromJson((l$dayId as Map<String, dynamic>));
-    }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null
-          ? null
-          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
-    }
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
-          ? null
-          : Input_PersonsBoolExp.fromJson((l$person as Map<String, dynamic>));
-    }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$personId as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('recordedBy')) {
-      final l$recordedBy = data['recordedBy'];
-      result$data['recordedBy'] = l$recordedBy == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$recordedBy as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('time')) {
-      final l$time = data['time'];
-      result$data['time'] = l$time == null
-          ? null
-          : Input_DateComparisonExp.fromJson((l$time as Map<String, dynamic>));
-    }
-    if (data.containsKey('user')) {
-      final l$user = data['user'];
-      result$data['user'] = l$user == null
-          ? null
-          : Input_AuthUsersDataBoolExp.fromJson(
-              (l$user as Map<String, dynamic>),
-            );
-    }
-    return Input_HistoryKodasHistoryBoolExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  List<Input_HistoryKodasHistoryBoolExp>? get $_and =>
-      (_$data['_and'] as List<Input_HistoryKodasHistoryBoolExp>?);
-
-  Input_HistoryKodasHistoryBoolExp? get $_not =>
-      (_$data['_not'] as Input_HistoryKodasHistoryBoolExp?);
-
-  List<Input_HistoryKodasHistoryBoolExp>? get $_or =>
-      (_$data['_or'] as List<Input_HistoryKodasHistoryBoolExp>?);
-
-  Input_HistoryAttendanceDaysBoolExp? get day =>
-      (_$data['day'] as Input_HistoryAttendanceDaysBoolExp?);
-
-  Input_DateComparisonExp? get dayId =>
-      (_$data['dayId'] as Input_DateComparisonExp?);
-
-  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
-
-  Input_PersonsBoolExp? get person =>
-      (_$data['person'] as Input_PersonsBoolExp?);
-
-  Input_UuidComparisonExp? get personId =>
-      (_$data['personId'] as Input_UuidComparisonExp?);
-
-  Input_UuidComparisonExp? get recordedBy =>
-      (_$data['recordedBy'] as Input_UuidComparisonExp?);
-
-  Input_DateComparisonExp? get time =>
-      (_$data['time'] as Input_DateComparisonExp?);
-
-  Input_AuthUsersDataBoolExp? get user =>
-      (_$data['user'] as Input_AuthUsersDataBoolExp?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_and')) {
-      final l$$_and = $_and;
-      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('_not')) {
-      final l$$_not = $_not;
-      result$data['_not'] = l$$_not?.toJson();
-    }
-    if (_$data.containsKey('_or')) {
-      final l$$_or = $_or;
-      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('day')) {
-      final l$day = day;
-      result$data['day'] = l$day?.toJson();
-    }
-    if (_$data.containsKey('dayId')) {
-      final l$dayId = dayId;
-      result$data['dayId'] = l$dayId?.toJson();
-    }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id?.toJson();
-    }
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
-    }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] = l$personId?.toJson();
-    }
-    if (_$data.containsKey('recordedBy')) {
-      final l$recordedBy = recordedBy;
-      result$data['recordedBy'] = l$recordedBy?.toJson();
-    }
-    if (_$data.containsKey('time')) {
-      final l$time = time;
-      result$data['time'] = l$time?.toJson();
-    }
-    if (_$data.containsKey('user')) {
-      final l$user = user;
-      result$data['user'] = l$user?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryKodasHistoryBoolExp<Input_HistoryKodasHistoryBoolExp>
-  get copyWith => CopyWith_Input_HistoryKodasHistoryBoolExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryKodasHistoryBoolExp ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_and = $_and;
-    final lOther$$_and = other.$_and;
-    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
-      return false;
-    }
-    if (l$$_and != null && lOther$$_and != null) {
-      if (l$$_and.length != lOther$$_and.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_and.length; i++) {
-        final l$$_and$entry = l$$_and[i];
-        final lOther$$_and$entry = lOther$$_and[i];
-        if (l$$_and$entry != lOther$$_and$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_and != lOther$$_and) {
-      return false;
-    }
-    final l$$_not = $_not;
-    final lOther$$_not = other.$_not;
-    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
-      return false;
-    }
-    if (l$$_not != lOther$$_not) {
-      return false;
-    }
-    final l$$_or = $_or;
-    final lOther$$_or = other.$_or;
-    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
-      return false;
-    }
-    if (l$$_or != null && lOther$$_or != null) {
-      if (l$$_or.length != lOther$$_or.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_or.length; i++) {
-        final l$$_or$entry = l$$_or[i];
-        final lOther$$_or$entry = lOther$$_or[i];
-        if (l$$_or$entry != lOther$$_or$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_or != lOther$$_or) {
-      return false;
-    }
-    final l$day = day;
-    final lOther$day = other.day;
-    if (_$data.containsKey('day') != other._$data.containsKey('day')) {
-      return false;
-    }
-    if (l$day != lOther$day) {
-      return false;
-    }
-    final l$dayId = dayId;
-    final lOther$dayId = other.dayId;
-    if (_$data.containsKey('dayId') != other._$data.containsKey('dayId')) {
-      return false;
-    }
-    if (l$dayId != lOther$dayId) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
-      return false;
-    }
-    if (l$person != lOther$person) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
-      return false;
-    }
-    if (l$personId != lOther$personId) {
-      return false;
-    }
-    final l$recordedBy = recordedBy;
-    final lOther$recordedBy = other.recordedBy;
-    if (_$data.containsKey('recordedBy') !=
-        other._$data.containsKey('recordedBy')) {
-      return false;
-    }
-    if (l$recordedBy != lOther$recordedBy) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
-      return false;
-    }
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
-      return false;
-    }
-    if (l$user != lOther$user) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_and = $_and;
-    final l$$_not = $_not;
-    final l$$_or = $_or;
-    final l$day = day;
-    final l$dayId = dayId;
-    final l$id = id;
-    final l$person = person;
-    final l$personId = personId;
-    final l$recordedBy = recordedBy;
-    final l$time = time;
-    final l$user = user;
-    return Object.hashAll([
-      _$data.containsKey('_and')
-          ? l$$_and == null
-                ? null
-                : Object.hashAll(l$$_and.map((v) => v))
-          : const {},
-      _$data.containsKey('_not') ? l$$_not : const {},
-      _$data.containsKey('_or')
-          ? l$$_or == null
-                ? null
-                : Object.hashAll(l$$_or.map((v) => v))
-          : const {},
-      _$data.containsKey('day') ? l$day : const {},
-      _$data.containsKey('dayId') ? l$dayId : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
-      _$data.containsKey('recordedBy') ? l$recordedBy : const {},
-      _$data.containsKey('time') ? l$time : const {},
-      _$data.containsKey('user') ? l$user : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> {
-  factory CopyWith_Input_HistoryKodasHistoryBoolExp(
-    Input_HistoryKodasHistoryBoolExp instance,
-    TRes Function(Input_HistoryKodasHistoryBoolExp) then,
-  ) = _CopyWithImpl_Input_HistoryKodasHistoryBoolExp;
-
-  factory CopyWith_Input_HistoryKodasHistoryBoolExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryKodasHistoryBoolExp;
-
-  TRes call({
-    List<Input_HistoryKodasHistoryBoolExp>? $_and,
-    Input_HistoryKodasHistoryBoolExp? $_not,
-    List<Input_HistoryKodasHistoryBoolExp>? $_or,
-    Input_HistoryAttendanceDaysBoolExp? day,
-    Input_DateComparisonExp? dayId,
-    Input_UuidComparisonExp? id,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
-    Input_UuidComparisonExp? recordedBy,
-    Input_DateComparisonExp? time,
-    Input_AuthUsersDataBoolExp? user,
-  });
-  TRes $_and(
-    Iterable<Input_HistoryKodasHistoryBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_HistoryKodasHistoryBoolExp<
-          Input_HistoryKodasHistoryBoolExp
-        >
-      >?,
-    )
-    _fn,
-  );
-  CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get $_not;
-  TRes $_or(
-    Iterable<Input_HistoryKodasHistoryBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_HistoryKodasHistoryBoolExp<
-          Input_HistoryKodasHistoryBoolExp
-        >
-      >?,
-    )
-    _fn,
-  );
-  CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get day;
-  CopyWith_Input_DateComparisonExp<TRes> get dayId;
-  CopyWith_Input_UuidComparisonExp<TRes> get id;
-  CopyWith_Input_PersonsBoolExp<TRes> get person;
-  CopyWith_Input_UuidComparisonExp<TRes> get personId;
-  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy;
-  CopyWith_Input_DateComparisonExp<TRes> get time;
-  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user;
-}
-
-class _CopyWithImpl_Input_HistoryKodasHistoryBoolExp<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> {
-  _CopyWithImpl_Input_HistoryKodasHistoryBoolExp(this._instance, this._then);
-
-  final Input_HistoryKodasHistoryBoolExp _instance;
-
-  final TRes Function(Input_HistoryKodasHistoryBoolExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_and = _undefined,
-    Object? $_not = _undefined,
-    Object? $_or = _undefined,
-    Object? day = _undefined,
-    Object? dayId = _undefined,
-    Object? id = _undefined,
-    Object? person = _undefined,
-    Object? personId = _undefined,
-    Object? recordedBy = _undefined,
-    Object? time = _undefined,
-    Object? user = _undefined,
-  }) => _then(
-    Input_HistoryKodasHistoryBoolExp._({
-      ..._instance._$data,
-      if ($_and != _undefined)
-        '_and': ($_and as List<Input_HistoryKodasHistoryBoolExp>?),
-      if ($_not != _undefined)
-        '_not': ($_not as Input_HistoryKodasHistoryBoolExp?),
-      if ($_or != _undefined)
-        '_or': ($_or as List<Input_HistoryKodasHistoryBoolExp>?),
-      if (day != _undefined)
-        'day': (day as Input_HistoryAttendanceDaysBoolExp?),
-      if (dayId != _undefined) 'dayId': (dayId as Input_DateComparisonExp?),
-      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
-      if (person != _undefined) 'person': (person as Input_PersonsBoolExp?),
-      if (personId != _undefined)
-        'personId': (personId as Input_UuidComparisonExp?),
-      if (recordedBy != _undefined)
-        'recordedBy': (recordedBy as Input_UuidComparisonExp?),
-      if (time != _undefined) 'time': (time as Input_DateComparisonExp?),
-      if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
-    }),
-  );
-
-  TRes $_and(
-    Iterable<Input_HistoryKodasHistoryBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_HistoryKodasHistoryBoolExp<
-          Input_HistoryKodasHistoryBoolExp
-        >
-      >?,
-    )
-    _fn,
-  ) => call(
-    $_and: _fn(
-      _instance.$_and?.map(
-        (e) => CopyWith_Input_HistoryKodasHistoryBoolExp(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-
-  CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get $_not {
-    final local$$_not = _instance.$_not;
-    return local$$_not == null
-        ? CopyWith_Input_HistoryKodasHistoryBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryKodasHistoryBoolExp(
-            local$$_not,
-            (e) => call($_not: e),
-          );
-  }
-
-  TRes $_or(
-    Iterable<Input_HistoryKodasHistoryBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_HistoryKodasHistoryBoolExp<
-          Input_HistoryKodasHistoryBoolExp
-        >
-      >?,
-    )
-    _fn,
-  ) => call(
-    $_or: _fn(
-      _instance.$_or?.map(
-        (e) => CopyWith_Input_HistoryKodasHistoryBoolExp(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-
-  CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get day {
-    final local$day = _instance.day;
-    return local$day == null
-        ? CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryAttendanceDaysBoolExp(
-            local$day,
-            (e) => call(day: e),
-          );
-  }
-
-  CopyWith_Input_DateComparisonExp<TRes> get dayId {
-    final local$dayId = _instance.dayId;
-    return local$dayId == null
-        ? CopyWith_Input_DateComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_DateComparisonExp(local$dayId, (e) => call(dayId: e));
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get id {
-    final local$id = _instance.id;
-    return local$id == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
-  }
-
-  CopyWith_Input_PersonsBoolExp<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_PersonsBoolExp(local$person, (e) => call(person: e));
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get personId {
-    final local$personId = _instance.personId;
-    return local$personId == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$personId,
-            (e) => call(personId: e),
-          );
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy {
-    final local$recordedBy = _instance.recordedBy;
-    return local$recordedBy == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$recordedBy,
-            (e) => call(recordedBy: e),
-          );
-  }
-
-  CopyWith_Input_DateComparisonExp<TRes> get time {
-    final local$time = _instance.time;
-    return local$time == null
-        ? CopyWith_Input_DateComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_DateComparisonExp(local$time, (e) => call(time: e));
-  }
-
-  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Input_AuthUsersDataBoolExp.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersDataBoolExp(local$user, (e) => call(user: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_HistoryKodasHistoryBoolExp<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> {
-  _CopyWithStubImpl_Input_HistoryKodasHistoryBoolExp(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_HistoryKodasHistoryBoolExp>? $_and,
-    Input_HistoryKodasHistoryBoolExp? $_not,
-    List<Input_HistoryKodasHistoryBoolExp>? $_or,
-    Input_HistoryAttendanceDaysBoolExp? day,
-    Input_DateComparisonExp? dayId,
-    Input_UuidComparisonExp? id,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
-    Input_UuidComparisonExp? recordedBy,
-    Input_DateComparisonExp? time,
-    Input_AuthUsersDataBoolExp? user,
-  }) => _res;
-
-  $_and(_fn) => _res;
-
-  CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get $_not =>
-      CopyWith_Input_HistoryKodasHistoryBoolExp.stub(_res);
-
-  $_or(_fn) => _res;
-
-  CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get day =>
-      CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_res);
-
-  CopyWith_Input_DateComparisonExp<TRes> get dayId =>
-      CopyWith_Input_DateComparisonExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get id =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_PersonsBoolExp<TRes> get person =>
-      CopyWith_Input_PersonsBoolExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get personId =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_DateComparisonExp<TRes> get time =>
-      CopyWith_Input_DateComparisonExp.stub(_res);
-
-  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
-      CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
-}
-
-class Input_HistoryKodasHistoryInsertInput {
-  factory Input_HistoryKodasHistoryInsertInput({
-    Input_HistoryAttendanceDaysObjRelInsertInput? day,
-    DateTime? dayId,
-    Input_PersonsObjRelInsertInput? person,
-    UuidValue? personId,
-    Input_AuthUsersDataObjRelInsertInput? user,
-  }) => Input_HistoryKodasHistoryInsertInput._({
-    if (day != null) r'day': day,
-    if (dayId != null) r'dayId': dayId,
-    if (person != null) r'person': person,
-    if (personId != null) r'personId': personId,
-    if (user != null) r'user': user,
-  });
-
-  Input_HistoryKodasHistoryInsertInput._(this._$data);
-
-  factory Input_HistoryKodasHistoryInsertInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('day')) {
-      final l$day = data['day'];
-      result$data['day'] = l$day == null
-          ? null
-          : Input_HistoryAttendanceDaysObjRelInsertInput.fromJson(
-              (l$day as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('dayId')) {
-      final l$dayId = data['dayId'];
-      result$data['dayId'] = l$dayId == null ? null : dateFromString(l$dayId);
-    }
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
-          ? null
-          : Input_PersonsObjRelInsertInput.fromJson(
-              (l$person as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
-          ? null
-          : stringToUuid(l$personId);
-    }
-    if (data.containsKey('user')) {
-      final l$user = data['user'];
-      result$data['user'] = l$user == null
-          ? null
-          : Input_AuthUsersDataObjRelInsertInput.fromJson(
-              (l$user as Map<String, dynamic>),
-            );
-    }
-    return Input_HistoryKodasHistoryInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_HistoryAttendanceDaysObjRelInsertInput? get day =>
-      (_$data['day'] as Input_HistoryAttendanceDaysObjRelInsertInput?);
-
-  DateTime? get dayId => (_$data['dayId'] as DateTime?);
-
-  Input_PersonsObjRelInsertInput? get person =>
-      (_$data['person'] as Input_PersonsObjRelInsertInput?);
-
-  UuidValue? get personId => (_$data['personId'] as UuidValue?);
-
-  Input_AuthUsersDataObjRelInsertInput? get user =>
-      (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('day')) {
-      final l$day = day;
-      result$data['day'] = l$day?.toJson();
-    }
-    if (_$data.containsKey('dayId')) {
-      final l$dayId = dayId;
-      result$data['dayId'] = l$dayId == null ? null : dateToString(l$dayId);
-    }
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
-    }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] = l$personId == null
-          ? null
-          : uuidToString(l$personId);
-    }
-    if (_$data.containsKey('user')) {
-      final l$user = user;
-      result$data['user'] = l$user?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryKodasHistoryInsertInput<
-    Input_HistoryKodasHistoryInsertInput
-  >
-  get copyWith => CopyWith_Input_HistoryKodasHistoryInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryKodasHistoryInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$day = day;
-    final lOther$day = other.day;
-    if (_$data.containsKey('day') != other._$data.containsKey('day')) {
-      return false;
-    }
-    if (l$day != lOther$day) {
-      return false;
-    }
-    final l$dayId = dayId;
-    final lOther$dayId = other.dayId;
-    if (_$data.containsKey('dayId') != other._$data.containsKey('dayId')) {
-      return false;
-    }
-    if (l$dayId != lOther$dayId) {
-      return false;
-    }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
-      return false;
-    }
-    if (l$person != lOther$person) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
-      return false;
-    }
-    if (l$personId != lOther$personId) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
-      return false;
-    }
-    if (l$user != lOther$user) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$day = day;
-    final l$dayId = dayId;
-    final l$person = person;
-    final l$personId = personId;
-    final l$user = user;
-    return Object.hashAll([
-      _$data.containsKey('day') ? l$day : const {},
-      _$data.containsKey('dayId') ? l$dayId : const {},
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
-      _$data.containsKey('user') ? l$user : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryKodasHistoryInsertInput<TRes> {
-  factory CopyWith_Input_HistoryKodasHistoryInsertInput(
-    Input_HistoryKodasHistoryInsertInput instance,
-    TRes Function(Input_HistoryKodasHistoryInsertInput) then,
-  ) = _CopyWithImpl_Input_HistoryKodasHistoryInsertInput;
-
-  factory CopyWith_Input_HistoryKodasHistoryInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryKodasHistoryInsertInput;
+abstract class CopyWith_Input_HistoryConfessionHistoryInsertInput<TRes> {
+  factory CopyWith_Input_HistoryConfessionHistoryInsertInput(
+    Input_HistoryConfessionHistoryInsertInput instance,
+    TRes Function(Input_HistoryConfessionHistoryInsertInput) then,
+  ) = _CopyWithImpl_Input_HistoryConfessionHistoryInsertInput;
+
+  factory CopyWith_Input_HistoryConfessionHistoryInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryConfessionHistoryInsertInput;
 
   TRes call({
     Input_HistoryAttendanceDaysObjRelInsertInput? day,
@@ -917,16 +22,16 @@ abstract class CopyWith_Input_HistoryKodasHistoryInsertInput<TRes> {
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user;
 }
 
-class _CopyWithImpl_Input_HistoryKodasHistoryInsertInput<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryInsertInput<TRes> {
-  _CopyWithImpl_Input_HistoryKodasHistoryInsertInput(
+class _CopyWithImpl_Input_HistoryConfessionHistoryInsertInput<TRes>
+    implements CopyWith_Input_HistoryConfessionHistoryInsertInput<TRes> {
+  _CopyWithImpl_Input_HistoryConfessionHistoryInsertInput(
     this._instance,
     this._then,
   );
 
-  final Input_HistoryKodasHistoryInsertInput _instance;
+  final Input_HistoryConfessionHistoryInsertInput _instance;
 
-  final TRes Function(Input_HistoryKodasHistoryInsertInput) _then;
+  final TRes Function(Input_HistoryConfessionHistoryInsertInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -937,7 +42,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryInsertInput<TRes>
     Object? personId = _undefined,
     Object? user = _undefined,
   }) => _then(
-    Input_HistoryKodasHistoryInsertInput._({
+    Input_HistoryConfessionHistoryInsertInput._({
       ..._instance._$data,
       if (day != _undefined)
         'day': (day as Input_HistoryAttendanceDaysObjRelInsertInput?),
@@ -983,9 +88,9 @@ class _CopyWithImpl_Input_HistoryKodasHistoryInsertInput<TRes>
   }
 }
 
-class _CopyWithStubImpl_Input_HistoryKodasHistoryInsertInput<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryInsertInput<TRes> {
-  _CopyWithStubImpl_Input_HistoryKodasHistoryInsertInput(this._res);
+class _CopyWithStubImpl_Input_HistoryConfessionHistoryInsertInput<TRes>
+    implements CopyWith_Input_HistoryConfessionHistoryInsertInput<TRes> {
+  _CopyWithStubImpl_Input_HistoryConfessionHistoryInsertInput(this._res);
 
   TRes _res;
 
@@ -1007,14 +112,14 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryInsertInput<TRes>
       CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
 }
 
-class Input_HistoryKodasHistoryMaxOrderBy {
-  factory Input_HistoryKodasHistoryMaxOrderBy({
+class Input_HistoryConfessionHistoryMaxOrderBy {
+  factory Input_HistoryConfessionHistoryMaxOrderBy({
     Enum_OrderBy? dayId,
     Enum_OrderBy? id,
     Enum_OrderBy? personId,
     Enum_OrderBy? recordedBy,
     Enum_OrderBy? time,
-  }) => Input_HistoryKodasHistoryMaxOrderBy._({
+  }) => Input_HistoryConfessionHistoryMaxOrderBy._({
     if (dayId != null) r'dayId': dayId,
     if (id != null) r'id': id,
     if (personId != null) r'personId': personId,
@@ -1022,9 +127,9 @@ class Input_HistoryKodasHistoryMaxOrderBy {
     if (time != null) r'time': time,
   });
 
-  Input_HistoryKodasHistoryMaxOrderBy._(this._$data);
+  Input_HistoryConfessionHistoryMaxOrderBy._(this._$data);
 
-  factory Input_HistoryKodasHistoryMaxOrderBy.fromJson(
+  factory Input_HistoryConfessionHistoryMaxOrderBy.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
@@ -1058,7 +163,7 @@ class Input_HistoryKodasHistoryMaxOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$time as String));
     }
-    return Input_HistoryKodasHistoryMaxOrderBy._(result$data);
+    return Input_HistoryConfessionHistoryMaxOrderBy._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -1104,17 +209,18 @@ class Input_HistoryKodasHistoryMaxOrderBy {
     return result$data;
   }
 
-  CopyWith_Input_HistoryKodasHistoryMaxOrderBy<
-    Input_HistoryKodasHistoryMaxOrderBy
+  CopyWith_Input_HistoryConfessionHistoryMaxOrderBy<
+    Input_HistoryConfessionHistoryMaxOrderBy
   >
-  get copyWith => CopyWith_Input_HistoryKodasHistoryMaxOrderBy(this, (i) => i);
+  get copyWith =>
+      CopyWith_Input_HistoryConfessionHistoryMaxOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_HistoryKodasHistoryMaxOrderBy ||
+    if (other is! Input_HistoryConfessionHistoryMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1180,14 +286,14 @@ class Input_HistoryKodasHistoryMaxOrderBy {
   }
 }
 
-abstract class CopyWith_Input_HistoryKodasHistoryMaxOrderBy<TRes> {
-  factory CopyWith_Input_HistoryKodasHistoryMaxOrderBy(
-    Input_HistoryKodasHistoryMaxOrderBy instance,
-    TRes Function(Input_HistoryKodasHistoryMaxOrderBy) then,
-  ) = _CopyWithImpl_Input_HistoryKodasHistoryMaxOrderBy;
+abstract class CopyWith_Input_HistoryConfessionHistoryMaxOrderBy<TRes> {
+  factory CopyWith_Input_HistoryConfessionHistoryMaxOrderBy(
+    Input_HistoryConfessionHistoryMaxOrderBy instance,
+    TRes Function(Input_HistoryConfessionHistoryMaxOrderBy) then,
+  ) = _CopyWithImpl_Input_HistoryConfessionHistoryMaxOrderBy;
 
-  factory CopyWith_Input_HistoryKodasHistoryMaxOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryKodasHistoryMaxOrderBy;
+  factory CopyWith_Input_HistoryConfessionHistoryMaxOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryConfessionHistoryMaxOrderBy;
 
   TRes call({
     Enum_OrderBy? dayId,
@@ -1198,13 +304,16 @@ abstract class CopyWith_Input_HistoryKodasHistoryMaxOrderBy<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_HistoryKodasHistoryMaxOrderBy<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryMaxOrderBy<TRes> {
-  _CopyWithImpl_Input_HistoryKodasHistoryMaxOrderBy(this._instance, this._then);
+class _CopyWithImpl_Input_HistoryConfessionHistoryMaxOrderBy<TRes>
+    implements CopyWith_Input_HistoryConfessionHistoryMaxOrderBy<TRes> {
+  _CopyWithImpl_Input_HistoryConfessionHistoryMaxOrderBy(
+    this._instance,
+    this._then,
+  );
 
-  final Input_HistoryKodasHistoryMaxOrderBy _instance;
+  final Input_HistoryConfessionHistoryMaxOrderBy _instance;
 
-  final TRes Function(Input_HistoryKodasHistoryMaxOrderBy) _then;
+  final TRes Function(Input_HistoryConfessionHistoryMaxOrderBy) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1215,7 +324,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryMaxOrderBy<TRes>
     Object? recordedBy = _undefined,
     Object? time = _undefined,
   }) => _then(
-    Input_HistoryKodasHistoryMaxOrderBy._({
+    Input_HistoryConfessionHistoryMaxOrderBy._({
       ..._instance._$data,
       if (dayId != _undefined) 'dayId': (dayId as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
@@ -1226,9 +335,9 @@ class _CopyWithImpl_Input_HistoryKodasHistoryMaxOrderBy<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_HistoryKodasHistoryMaxOrderBy<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryMaxOrderBy<TRes> {
-  _CopyWithStubImpl_Input_HistoryKodasHistoryMaxOrderBy(this._res);
+class _CopyWithStubImpl_Input_HistoryConfessionHistoryMaxOrderBy<TRes>
+    implements CopyWith_Input_HistoryConfessionHistoryMaxOrderBy<TRes> {
+  _CopyWithStubImpl_Input_HistoryConfessionHistoryMaxOrderBy(this._res);
 
   TRes _res;
 
@@ -1241,14 +350,14 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryMaxOrderBy<TRes>
   }) => _res;
 }
 
-class Input_HistoryKodasHistoryMinOrderBy {
-  factory Input_HistoryKodasHistoryMinOrderBy({
+class Input_HistoryConfessionHistoryMinOrderBy {
+  factory Input_HistoryConfessionHistoryMinOrderBy({
     Enum_OrderBy? dayId,
     Enum_OrderBy? id,
     Enum_OrderBy? personId,
     Enum_OrderBy? recordedBy,
     Enum_OrderBy? time,
-  }) => Input_HistoryKodasHistoryMinOrderBy._({
+  }) => Input_HistoryConfessionHistoryMinOrderBy._({
     if (dayId != null) r'dayId': dayId,
     if (id != null) r'id': id,
     if (personId != null) r'personId': personId,
@@ -1256,9 +365,9 @@ class Input_HistoryKodasHistoryMinOrderBy {
     if (time != null) r'time': time,
   });
 
-  Input_HistoryKodasHistoryMinOrderBy._(this._$data);
+  Input_HistoryConfessionHistoryMinOrderBy._(this._$data);
 
-  factory Input_HistoryKodasHistoryMinOrderBy.fromJson(
+  factory Input_HistoryConfessionHistoryMinOrderBy.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
@@ -1292,7 +401,7 @@ class Input_HistoryKodasHistoryMinOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$time as String));
     }
-    return Input_HistoryKodasHistoryMinOrderBy._(result$data);
+    return Input_HistoryConfessionHistoryMinOrderBy._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -1338,17 +447,18 @@ class Input_HistoryKodasHistoryMinOrderBy {
     return result$data;
   }
 
-  CopyWith_Input_HistoryKodasHistoryMinOrderBy<
-    Input_HistoryKodasHistoryMinOrderBy
+  CopyWith_Input_HistoryConfessionHistoryMinOrderBy<
+    Input_HistoryConfessionHistoryMinOrderBy
   >
-  get copyWith => CopyWith_Input_HistoryKodasHistoryMinOrderBy(this, (i) => i);
+  get copyWith =>
+      CopyWith_Input_HistoryConfessionHistoryMinOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_HistoryKodasHistoryMinOrderBy ||
+    if (other is! Input_HistoryConfessionHistoryMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1414,14 +524,14 @@ class Input_HistoryKodasHistoryMinOrderBy {
   }
 }
 
-abstract class CopyWith_Input_HistoryKodasHistoryMinOrderBy<TRes> {
-  factory CopyWith_Input_HistoryKodasHistoryMinOrderBy(
-    Input_HistoryKodasHistoryMinOrderBy instance,
-    TRes Function(Input_HistoryKodasHistoryMinOrderBy) then,
-  ) = _CopyWithImpl_Input_HistoryKodasHistoryMinOrderBy;
+abstract class CopyWith_Input_HistoryConfessionHistoryMinOrderBy<TRes> {
+  factory CopyWith_Input_HistoryConfessionHistoryMinOrderBy(
+    Input_HistoryConfessionHistoryMinOrderBy instance,
+    TRes Function(Input_HistoryConfessionHistoryMinOrderBy) then,
+  ) = _CopyWithImpl_Input_HistoryConfessionHistoryMinOrderBy;
 
-  factory CopyWith_Input_HistoryKodasHistoryMinOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryKodasHistoryMinOrderBy;
+  factory CopyWith_Input_HistoryConfessionHistoryMinOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryConfessionHistoryMinOrderBy;
 
   TRes call({
     Enum_OrderBy? dayId,
@@ -1432,13 +542,16 @@ abstract class CopyWith_Input_HistoryKodasHistoryMinOrderBy<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_HistoryKodasHistoryMinOrderBy<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryMinOrderBy<TRes> {
-  _CopyWithImpl_Input_HistoryKodasHistoryMinOrderBy(this._instance, this._then);
+class _CopyWithImpl_Input_HistoryConfessionHistoryMinOrderBy<TRes>
+    implements CopyWith_Input_HistoryConfessionHistoryMinOrderBy<TRes> {
+  _CopyWithImpl_Input_HistoryConfessionHistoryMinOrderBy(
+    this._instance,
+    this._then,
+  );
 
-  final Input_HistoryKodasHistoryMinOrderBy _instance;
+  final Input_HistoryConfessionHistoryMinOrderBy _instance;
 
-  final TRes Function(Input_HistoryKodasHistoryMinOrderBy) _then;
+  final TRes Function(Input_HistoryConfessionHistoryMinOrderBy) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1449,7 +562,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryMinOrderBy<TRes>
     Object? recordedBy = _undefined,
     Object? time = _undefined,
   }) => _then(
-    Input_HistoryKodasHistoryMinOrderBy._({
+    Input_HistoryConfessionHistoryMinOrderBy._({
       ..._instance._$data,
       if (dayId != _undefined) 'dayId': (dayId as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
@@ -1460,9 +573,9 @@ class _CopyWithImpl_Input_HistoryKodasHistoryMinOrderBy<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_HistoryKodasHistoryMinOrderBy<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryMinOrderBy<TRes> {
-  _CopyWithStubImpl_Input_HistoryKodasHistoryMinOrderBy(this._res);
+class _CopyWithStubImpl_Input_HistoryConfessionHistoryMinOrderBy<TRes>
+    implements CopyWith_Input_HistoryConfessionHistoryMinOrderBy<TRes> {
+  _CopyWithStubImpl_Input_HistoryConfessionHistoryMinOrderBy(this._res);
 
   TRes _res;
 
@@ -1475,32 +588,35 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryMinOrderBy<TRes>
   }) => _res;
 }
 
-class Input_HistoryKodasHistoryOnConflict {
-  factory Input_HistoryKodasHistoryOnConflict({
-    required Enum_HistoryKodasHistoryConstraint constraint,
-    List<Enum_HistoryKodasHistoryUpdateColumn>? updateColumns,
-    Input_HistoryKodasHistoryBoolExp? where,
-  }) => Input_HistoryKodasHistoryOnConflict._({
+class Input_HistoryConfessionHistoryOnConflict {
+  factory Input_HistoryConfessionHistoryOnConflict({
+    required Enum_HistoryConfessionHistoryConstraint constraint,
+    List<Enum_HistoryConfessionHistoryUpdateColumn>? updateColumns,
+    Input_HistoryConfessionHistoryBoolExp? where,
+  }) => Input_HistoryConfessionHistoryOnConflict._({
     r'constraint': constraint,
     if (updateColumns != null) r'updateColumns': updateColumns,
     if (where != null) r'where': where,
   });
 
-  Input_HistoryKodasHistoryOnConflict._(this._$data);
+  Input_HistoryConfessionHistoryOnConflict._(this._$data);
 
-  factory Input_HistoryKodasHistoryOnConflict.fromJson(
+  factory Input_HistoryConfessionHistoryOnConflict.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
     final l$constraint = data['constraint'];
-    result$data['constraint'] = fromJson_Enum_HistoryKodasHistoryConstraint(
-      (l$constraint as String),
-    );
+    result$data['constraint'] =
+        fromJson_Enum_HistoryConfessionHistoryConstraint(
+          (l$constraint as String),
+        );
     if (data.containsKey('updateColumns')) {
       final l$updateColumns = data['updateColumns'];
       result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
           .map(
-            (e) => fromJson_Enum_HistoryKodasHistoryUpdateColumn((e as String)),
+            (e) => fromJson_Enum_HistoryConfessionHistoryUpdateColumn(
+              (e as String),
+            ),
           )
           .toList();
     }
@@ -1508,35 +624,36 @@ class Input_HistoryKodasHistoryOnConflict {
       final l$where = data['where'];
       result$data['where'] = l$where == null
           ? null
-          : Input_HistoryKodasHistoryBoolExp.fromJson(
+          : Input_HistoryConfessionHistoryBoolExp.fromJson(
               (l$where as Map<String, dynamic>),
             );
     }
-    return Input_HistoryKodasHistoryOnConflict._(result$data);
+    return Input_HistoryConfessionHistoryOnConflict._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Enum_HistoryKodasHistoryConstraint get constraint =>
-      (_$data['constraint'] as Enum_HistoryKodasHistoryConstraint);
+  Enum_HistoryConfessionHistoryConstraint get constraint =>
+      (_$data['constraint'] as Enum_HistoryConfessionHistoryConstraint);
 
-  List<Enum_HistoryKodasHistoryUpdateColumn>? get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_HistoryKodasHistoryUpdateColumn>?);
+  List<Enum_HistoryConfessionHistoryUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns']
+          as List<Enum_HistoryConfessionHistoryUpdateColumn>?);
 
-  Input_HistoryKodasHistoryBoolExp? get where =>
-      (_$data['where'] as Input_HistoryKodasHistoryBoolExp?);
+  Input_HistoryConfessionHistoryBoolExp? get where =>
+      (_$data['where'] as Input_HistoryConfessionHistoryBoolExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
-    result$data['constraint'] = toJson_Enum_HistoryKodasHistoryConstraint(
+    result$data['constraint'] = toJson_Enum_HistoryConfessionHistoryConstraint(
       l$constraint,
     );
     if (_$data.containsKey('updateColumns')) {
       final l$updateColumns = updateColumns;
       result$data['updateColumns'] =
-          (l$updateColumns as List<Enum_HistoryKodasHistoryUpdateColumn>)
-              .map((e) => toJson_Enum_HistoryKodasHistoryUpdateColumn(e))
+          (l$updateColumns as List<Enum_HistoryConfessionHistoryUpdateColumn>)
+              .map((e) => toJson_Enum_HistoryConfessionHistoryUpdateColumn(e))
               .toList();
     }
     if (_$data.containsKey('where')) {
@@ -1546,17 +663,18 @@ class Input_HistoryKodasHistoryOnConflict {
     return result$data;
   }
 
-  CopyWith_Input_HistoryKodasHistoryOnConflict<
-    Input_HistoryKodasHistoryOnConflict
+  CopyWith_Input_HistoryConfessionHistoryOnConflict<
+    Input_HistoryConfessionHistoryOnConflict
   >
-  get copyWith => CopyWith_Input_HistoryKodasHistoryOnConflict(this, (i) => i);
+  get copyWith =>
+      CopyWith_Input_HistoryConfessionHistoryOnConflict(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_HistoryKodasHistoryOnConflict ||
+    if (other is! Input_HistoryConfessionHistoryOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1613,30 +731,33 @@ class Input_HistoryKodasHistoryOnConflict {
   }
 }
 
-abstract class CopyWith_Input_HistoryKodasHistoryOnConflict<TRes> {
-  factory CopyWith_Input_HistoryKodasHistoryOnConflict(
-    Input_HistoryKodasHistoryOnConflict instance,
-    TRes Function(Input_HistoryKodasHistoryOnConflict) then,
-  ) = _CopyWithImpl_Input_HistoryKodasHistoryOnConflict;
+abstract class CopyWith_Input_HistoryConfessionHistoryOnConflict<TRes> {
+  factory CopyWith_Input_HistoryConfessionHistoryOnConflict(
+    Input_HistoryConfessionHistoryOnConflict instance,
+    TRes Function(Input_HistoryConfessionHistoryOnConflict) then,
+  ) = _CopyWithImpl_Input_HistoryConfessionHistoryOnConflict;
 
-  factory CopyWith_Input_HistoryKodasHistoryOnConflict.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryKodasHistoryOnConflict;
+  factory CopyWith_Input_HistoryConfessionHistoryOnConflict.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryConfessionHistoryOnConflict;
 
   TRes call({
-    Enum_HistoryKodasHistoryConstraint? constraint,
-    List<Enum_HistoryKodasHistoryUpdateColumn>? updateColumns,
-    Input_HistoryKodasHistoryBoolExp? where,
+    Enum_HistoryConfessionHistoryConstraint? constraint,
+    List<Enum_HistoryConfessionHistoryUpdateColumn>? updateColumns,
+    Input_HistoryConfessionHistoryBoolExp? where,
   });
-  CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get where;
+  CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get where;
 }
 
-class _CopyWithImpl_Input_HistoryKodasHistoryOnConflict<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryOnConflict<TRes> {
-  _CopyWithImpl_Input_HistoryKodasHistoryOnConflict(this._instance, this._then);
+class _CopyWithImpl_Input_HistoryConfessionHistoryOnConflict<TRes>
+    implements CopyWith_Input_HistoryConfessionHistoryOnConflict<TRes> {
+  _CopyWithImpl_Input_HistoryConfessionHistoryOnConflict(
+    this._instance,
+    this._then,
+  );
 
-  final Input_HistoryKodasHistoryOnConflict _instance;
+  final Input_HistoryConfessionHistoryOnConflict _instance;
 
-  final TRes Function(Input_HistoryKodasHistoryOnConflict) _then;
+  final TRes Function(Input_HistoryConfessionHistoryOnConflict) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1645,47 +766,47 @@ class _CopyWithImpl_Input_HistoryKodasHistoryOnConflict<TRes>
     Object? updateColumns = _undefined,
     Object? where = _undefined,
   }) => _then(
-    Input_HistoryKodasHistoryOnConflict._({
+    Input_HistoryConfessionHistoryOnConflict._({
       ..._instance._$data,
       if (constraint != _undefined && constraint != null)
-        'constraint': (constraint as Enum_HistoryKodasHistoryConstraint),
+        'constraint': (constraint as Enum_HistoryConfessionHistoryConstraint),
       if (updateColumns != _undefined && updateColumns != null)
         'updateColumns':
-            (updateColumns as List<Enum_HistoryKodasHistoryUpdateColumn>),
+            (updateColumns as List<Enum_HistoryConfessionHistoryUpdateColumn>),
       if (where != _undefined)
-        'where': (where as Input_HistoryKodasHistoryBoolExp?),
+        'where': (where as Input_HistoryConfessionHistoryBoolExp?),
     }),
   );
 
-  CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get where {
+  CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
-        ? CopyWith_Input_HistoryKodasHistoryBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryKodasHistoryBoolExp(
+        ? CopyWith_Input_HistoryConfessionHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryConfessionHistoryBoolExp(
             local$where,
             (e) => call(where: e),
           );
   }
 }
 
-class _CopyWithStubImpl_Input_HistoryKodasHistoryOnConflict<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryOnConflict<TRes> {
-  _CopyWithStubImpl_Input_HistoryKodasHistoryOnConflict(this._res);
+class _CopyWithStubImpl_Input_HistoryConfessionHistoryOnConflict<TRes>
+    implements CopyWith_Input_HistoryConfessionHistoryOnConflict<TRes> {
+  _CopyWithStubImpl_Input_HistoryConfessionHistoryOnConflict(this._res);
 
   TRes _res;
 
   call({
-    Enum_HistoryKodasHistoryConstraint? constraint,
-    List<Enum_HistoryKodasHistoryUpdateColumn>? updateColumns,
-    Input_HistoryKodasHistoryBoolExp? where,
+    Enum_HistoryConfessionHistoryConstraint? constraint,
+    List<Enum_HistoryConfessionHistoryUpdateColumn>? updateColumns,
+    Input_HistoryConfessionHistoryBoolExp? where,
   }) => _res;
 
-  CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get where =>
-      CopyWith_Input_HistoryKodasHistoryBoolExp.stub(_res);
+  CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get where =>
+      CopyWith_Input_HistoryConfessionHistoryBoolExp.stub(_res);
 }
 
-class Input_HistoryKodasHistoryOrderBy {
-  factory Input_HistoryKodasHistoryOrderBy({
+class Input_HistoryConfessionHistoryOrderBy {
+  factory Input_HistoryConfessionHistoryOrderBy({
     Input_HistoryAttendanceDaysOrderBy? day,
     Enum_OrderBy? dayId,
     Enum_OrderBy? id,
@@ -1694,7 +815,7 @@ class Input_HistoryKodasHistoryOrderBy {
     Enum_OrderBy? recordedBy,
     Enum_OrderBy? time,
     Input_AuthUsersDataOrderBy? user,
-  }) => Input_HistoryKodasHistoryOrderBy._({
+  }) => Input_HistoryConfessionHistoryOrderBy._({
     if (day != null) r'day': day,
     if (dayId != null) r'dayId': dayId,
     if (id != null) r'id': id,
@@ -1705,9 +826,11 @@ class Input_HistoryKodasHistoryOrderBy {
     if (user != null) r'user': user,
   });
 
-  Input_HistoryKodasHistoryOrderBy._(this._$data);
+  Input_HistoryConfessionHistoryOrderBy._(this._$data);
 
-  factory Input_HistoryKodasHistoryOrderBy.fromJson(Map<String, dynamic> data) {
+  factory Input_HistoryConfessionHistoryOrderBy.fromJson(
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('day')) {
       final l$day = data['day'];
@@ -1761,7 +884,7 @@ class Input_HistoryKodasHistoryOrderBy {
               (l$user as Map<String, dynamic>),
             );
     }
-    return Input_HistoryKodasHistoryOrderBy._(result$data);
+    return Input_HistoryConfessionHistoryOrderBy._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -1828,15 +951,18 @@ class Input_HistoryKodasHistoryOrderBy {
     return result$data;
   }
 
-  CopyWith_Input_HistoryKodasHistoryOrderBy<Input_HistoryKodasHistoryOrderBy>
-  get copyWith => CopyWith_Input_HistoryKodasHistoryOrderBy(this, (i) => i);
+  CopyWith_Input_HistoryConfessionHistoryOrderBy<
+    Input_HistoryConfessionHistoryOrderBy
+  >
+  get copyWith =>
+      CopyWith_Input_HistoryConfessionHistoryOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_HistoryKodasHistoryOrderBy ||
+    if (other is! Input_HistoryConfessionHistoryOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1932,14 +1058,14 @@ class Input_HistoryKodasHistoryOrderBy {
   }
 }
 
-abstract class CopyWith_Input_HistoryKodasHistoryOrderBy<TRes> {
-  factory CopyWith_Input_HistoryKodasHistoryOrderBy(
-    Input_HistoryKodasHistoryOrderBy instance,
-    TRes Function(Input_HistoryKodasHistoryOrderBy) then,
-  ) = _CopyWithImpl_Input_HistoryKodasHistoryOrderBy;
+abstract class CopyWith_Input_HistoryConfessionHistoryOrderBy<TRes> {
+  factory CopyWith_Input_HistoryConfessionHistoryOrderBy(
+    Input_HistoryConfessionHistoryOrderBy instance,
+    TRes Function(Input_HistoryConfessionHistoryOrderBy) then,
+  ) = _CopyWithImpl_Input_HistoryConfessionHistoryOrderBy;
 
-  factory CopyWith_Input_HistoryKodasHistoryOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryKodasHistoryOrderBy;
+  factory CopyWith_Input_HistoryConfessionHistoryOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryConfessionHistoryOrderBy;
 
   TRes call({
     Input_HistoryAttendanceDaysOrderBy? day,
@@ -1956,13 +1082,16 @@ abstract class CopyWith_Input_HistoryKodasHistoryOrderBy<TRes> {
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user;
 }
 
-class _CopyWithImpl_Input_HistoryKodasHistoryOrderBy<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryOrderBy<TRes> {
-  _CopyWithImpl_Input_HistoryKodasHistoryOrderBy(this._instance, this._then);
+class _CopyWithImpl_Input_HistoryConfessionHistoryOrderBy<TRes>
+    implements CopyWith_Input_HistoryConfessionHistoryOrderBy<TRes> {
+  _CopyWithImpl_Input_HistoryConfessionHistoryOrderBy(
+    this._instance,
+    this._then,
+  );
 
-  final Input_HistoryKodasHistoryOrderBy _instance;
+  final Input_HistoryConfessionHistoryOrderBy _instance;
 
-  final TRes Function(Input_HistoryKodasHistoryOrderBy) _then;
+  final TRes Function(Input_HistoryConfessionHistoryOrderBy) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1976,7 +1105,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryOrderBy<TRes>
     Object? time = _undefined,
     Object? user = _undefined,
   }) => _then(
-    Input_HistoryKodasHistoryOrderBy._({
+    Input_HistoryConfessionHistoryOrderBy._({
       ..._instance._$data,
       if (day != _undefined)
         'day': (day as Input_HistoryAttendanceDaysOrderBy?),
@@ -2015,9 +1144,9 @@ class _CopyWithImpl_Input_HistoryKodasHistoryOrderBy<TRes>
   }
 }
 
-class _CopyWithStubImpl_Input_HistoryKodasHistoryOrderBy<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryOrderBy<TRes> {
-  _CopyWithStubImpl_Input_HistoryKodasHistoryOrderBy(this._res);
+class _CopyWithStubImpl_Input_HistoryConfessionHistoryOrderBy<TRes>
+    implements CopyWith_Input_HistoryConfessionHistoryOrderBy<TRes> {
+  _CopyWithStubImpl_Input_HistoryConfessionHistoryOrderBy(this._res);
 
   TRes _res;
 
@@ -2042,24 +1171,24 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryOrderBy<TRes>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
 }
 
-class Input_HistoryKodasHistoryStreamCursorInput {
-  factory Input_HistoryKodasHistoryStreamCursorInput({
-    required Input_HistoryKodasHistoryStreamCursorValueInput initialValue,
+class Input_HistoryConfessionHistoryStreamCursorInput {
+  factory Input_HistoryConfessionHistoryStreamCursorInput({
+    required Input_HistoryConfessionHistoryStreamCursorValueInput initialValue,
     Enum_CursorOrdering? ordering,
-  }) => Input_HistoryKodasHistoryStreamCursorInput._({
+  }) => Input_HistoryConfessionHistoryStreamCursorInput._({
     r'initialValue': initialValue,
     if (ordering != null) r'ordering': ordering,
   });
 
-  Input_HistoryKodasHistoryStreamCursorInput._(this._$data);
+  Input_HistoryConfessionHistoryStreamCursorInput._(this._$data);
 
-  factory Input_HistoryKodasHistoryStreamCursorInput.fromJson(
+  factory Input_HistoryConfessionHistoryStreamCursorInput.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
     final l$initialValue = data['initialValue'];
     result$data['initialValue'] =
-        Input_HistoryKodasHistoryStreamCursorValueInput.fromJson(
+        Input_HistoryConfessionHistoryStreamCursorValueInput.fromJson(
           (l$initialValue as Map<String, dynamic>),
         );
     if (data.containsKey('ordering')) {
@@ -2068,14 +1197,14 @@ class Input_HistoryKodasHistoryStreamCursorInput {
           ? null
           : fromJson_Enum_CursorOrdering((l$ordering as String));
     }
-    return Input_HistoryKodasHistoryStreamCursorInput._(result$data);
+    return Input_HistoryConfessionHistoryStreamCursorInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input_HistoryKodasHistoryStreamCursorValueInput get initialValue =>
+  Input_HistoryConfessionHistoryStreamCursorValueInput get initialValue =>
       (_$data['initialValue']
-          as Input_HistoryKodasHistoryStreamCursorValueInput);
+          as Input_HistoryConfessionHistoryStreamCursorValueInput);
 
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
@@ -2093,18 +1222,18 @@ class Input_HistoryKodasHistoryStreamCursorInput {
     return result$data;
   }
 
-  CopyWith_Input_HistoryKodasHistoryStreamCursorInput<
-    Input_HistoryKodasHistoryStreamCursorInput
+  CopyWith_Input_HistoryConfessionHistoryStreamCursorInput<
+    Input_HistoryConfessionHistoryStreamCursorInput
   >
   get copyWith =>
-      CopyWith_Input_HistoryKodasHistoryStreamCursorInput(this, (i) => i);
+      CopyWith_Input_HistoryConfessionHistoryStreamCursorInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_HistoryKodasHistoryStreamCursorInput ||
+    if (other is! Input_HistoryConfessionHistoryStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2136,33 +1265,34 @@ class Input_HistoryKodasHistoryStreamCursorInput {
   }
 }
 
-abstract class CopyWith_Input_HistoryKodasHistoryStreamCursorInput<TRes> {
-  factory CopyWith_Input_HistoryKodasHistoryStreamCursorInput(
-    Input_HistoryKodasHistoryStreamCursorInput instance,
-    TRes Function(Input_HistoryKodasHistoryStreamCursorInput) then,
-  ) = _CopyWithImpl_Input_HistoryKodasHistoryStreamCursorInput;
+abstract class CopyWith_Input_HistoryConfessionHistoryStreamCursorInput<TRes> {
+  factory CopyWith_Input_HistoryConfessionHistoryStreamCursorInput(
+    Input_HistoryConfessionHistoryStreamCursorInput instance,
+    TRes Function(Input_HistoryConfessionHistoryStreamCursorInput) then,
+  ) = _CopyWithImpl_Input_HistoryConfessionHistoryStreamCursorInput;
 
-  factory CopyWith_Input_HistoryKodasHistoryStreamCursorInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryKodasHistoryStreamCursorInput;
+  factory CopyWith_Input_HistoryConfessionHistoryStreamCursorInput.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Input_HistoryConfessionHistoryStreamCursorInput;
 
   TRes call({
-    Input_HistoryKodasHistoryStreamCursorValueInput? initialValue,
+    Input_HistoryConfessionHistoryStreamCursorValueInput? initialValue,
     Enum_CursorOrdering? ordering,
   });
-  CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput<TRes>
+  CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput<TRes>
   get initialValue;
 }
 
-class _CopyWithImpl_Input_HistoryKodasHistoryStreamCursorInput<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryStreamCursorInput<TRes> {
-  _CopyWithImpl_Input_HistoryKodasHistoryStreamCursorInput(
+class _CopyWithImpl_Input_HistoryConfessionHistoryStreamCursorInput<TRes>
+    implements CopyWith_Input_HistoryConfessionHistoryStreamCursorInput<TRes> {
+  _CopyWithImpl_Input_HistoryConfessionHistoryStreamCursorInput(
     this._instance,
     this._then,
   );
 
-  final Input_HistoryKodasHistoryStreamCursorInput _instance;
+  final Input_HistoryConfessionHistoryStreamCursorInput _instance;
 
-  final TRes Function(Input_HistoryKodasHistoryStreamCursorInput) _then;
+  final TRes Function(Input_HistoryConfessionHistoryStreamCursorInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2170,50 +1300,51 @@ class _CopyWithImpl_Input_HistoryKodasHistoryStreamCursorInput<TRes>
     Object? initialValue = _undefined,
     Object? ordering = _undefined,
   }) => _then(
-    Input_HistoryKodasHistoryStreamCursorInput._({
+    Input_HistoryConfessionHistoryStreamCursorInput._({
       ..._instance._$data,
       if (initialValue != _undefined && initialValue != null)
         'initialValue':
-            (initialValue as Input_HistoryKodasHistoryStreamCursorValueInput),
+            (initialValue
+                as Input_HistoryConfessionHistoryStreamCursorValueInput),
       if (ordering != _undefined)
         'ordering': (ordering as Enum_CursorOrdering?),
     }),
   );
 
-  CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput<TRes>
+  CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput<TRes>
   get initialValue {
     final local$initialValue = _instance.initialValue;
-    return CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput(
+    return CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput(
       local$initialValue,
       (e) => call(initialValue: e),
     );
   }
 }
 
-class _CopyWithStubImpl_Input_HistoryKodasHistoryStreamCursorInput<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryStreamCursorInput<TRes> {
-  _CopyWithStubImpl_Input_HistoryKodasHistoryStreamCursorInput(this._res);
+class _CopyWithStubImpl_Input_HistoryConfessionHistoryStreamCursorInput<TRes>
+    implements CopyWith_Input_HistoryConfessionHistoryStreamCursorInput<TRes> {
+  _CopyWithStubImpl_Input_HistoryConfessionHistoryStreamCursorInput(this._res);
 
   TRes _res;
 
   call({
-    Input_HistoryKodasHistoryStreamCursorValueInput? initialValue,
+    Input_HistoryConfessionHistoryStreamCursorValueInput? initialValue,
     Enum_CursorOrdering? ordering,
   }) => _res;
 
-  CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput<TRes>
+  CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput<TRes>
   get initialValue =>
-      CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput.stub(_res);
+      CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput.stub(_res);
 }
 
-class Input_HistoryKodasHistoryStreamCursorValueInput {
-  factory Input_HistoryKodasHistoryStreamCursorValueInput({
+class Input_HistoryConfessionHistoryStreamCursorValueInput {
+  factory Input_HistoryConfessionHistoryStreamCursorValueInput({
     DateTime? dayId,
     UuidValue? id,
     UuidValue? personId,
     UuidValue? recordedBy,
     DateTime? time,
-  }) => Input_HistoryKodasHistoryStreamCursorValueInput._({
+  }) => Input_HistoryConfessionHistoryStreamCursorValueInput._({
     if (dayId != null) r'dayId': dayId,
     if (id != null) r'id': id,
     if (personId != null) r'personId': personId,
@@ -2221,9 +1352,9 @@ class Input_HistoryKodasHistoryStreamCursorValueInput {
     if (time != null) r'time': time,
   });
 
-  Input_HistoryKodasHistoryStreamCursorValueInput._(this._$data);
+  Input_HistoryConfessionHistoryStreamCursorValueInput._(this._$data);
 
-  factory Input_HistoryKodasHistoryStreamCursorValueInput.fromJson(
+  factory Input_HistoryConfessionHistoryStreamCursorValueInput.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
@@ -2251,7 +1382,7 @@ class Input_HistoryKodasHistoryStreamCursorValueInput {
       final l$time = data['time'];
       result$data['time'] = l$time == null ? null : dateFromString(l$time);
     }
-    return Input_HistoryKodasHistoryStreamCursorValueInput._(result$data);
+    return Input_HistoryConfessionHistoryStreamCursorValueInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -2295,18 +1426,20 @@ class Input_HistoryKodasHistoryStreamCursorValueInput {
     return result$data;
   }
 
-  CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput<
-    Input_HistoryKodasHistoryStreamCursorValueInput
+  CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput<
+    Input_HistoryConfessionHistoryStreamCursorValueInput
   >
-  get copyWith =>
-      CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput(this, (i) => i);
+  get copyWith => CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput(
+    this,
+    (i) => i,
+  );
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_HistoryKodasHistoryStreamCursorValueInput ||
+    if (other is! Input_HistoryConfessionHistoryStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2372,15 +1505,17 @@ class Input_HistoryKodasHistoryStreamCursorValueInput {
   }
 }
 
-abstract class CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput<TRes> {
-  factory CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput(
-    Input_HistoryKodasHistoryStreamCursorValueInput instance,
-    TRes Function(Input_HistoryKodasHistoryStreamCursorValueInput) then,
-  ) = _CopyWithImpl_Input_HistoryKodasHistoryStreamCursorValueInput;
+abstract class CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput<
+  TRes
+> {
+  factory CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput(
+    Input_HistoryConfessionHistoryStreamCursorValueInput instance,
+    TRes Function(Input_HistoryConfessionHistoryStreamCursorValueInput) then,
+  ) = _CopyWithImpl_Input_HistoryConfessionHistoryStreamCursorValueInput;
 
-  factory CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput.stub(
+  factory CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput.stub(
     TRes res,
-  ) = _CopyWithStubImpl_Input_HistoryKodasHistoryStreamCursorValueInput;
+  ) = _CopyWithStubImpl_Input_HistoryConfessionHistoryStreamCursorValueInput;
 
   TRes call({
     DateTime? dayId,
@@ -2391,16 +1526,18 @@ abstract class CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_HistoryKodasHistoryStreamCursorValueInput<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput<TRes> {
-  _CopyWithImpl_Input_HistoryKodasHistoryStreamCursorValueInput(
+class _CopyWithImpl_Input_HistoryConfessionHistoryStreamCursorValueInput<TRes>
+    implements
+        CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput<TRes> {
+  _CopyWithImpl_Input_HistoryConfessionHistoryStreamCursorValueInput(
     this._instance,
     this._then,
   );
 
-  final Input_HistoryKodasHistoryStreamCursorValueInput _instance;
+  final Input_HistoryConfessionHistoryStreamCursorValueInput _instance;
 
-  final TRes Function(Input_HistoryKodasHistoryStreamCursorValueInput) _then;
+  final TRes Function(Input_HistoryConfessionHistoryStreamCursorValueInput)
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2411,7 +1548,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryStreamCursorValueInput<TRes>
     Object? recordedBy = _undefined,
     Object? time = _undefined,
   }) => _then(
-    Input_HistoryKodasHistoryStreamCursorValueInput._({
+    Input_HistoryConfessionHistoryStreamCursorValueInput._({
       ..._instance._$data,
       if (dayId != _undefined) 'dayId': (dayId as DateTime?),
       if (id != _undefined) 'id': (id as UuidValue?),
@@ -2422,9 +1559,14 @@ class _CopyWithImpl_Input_HistoryKodasHistoryStreamCursorValueInput<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_HistoryKodasHistoryStreamCursorValueInput<TRes>
-    implements CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput<TRes> {
-  _CopyWithStubImpl_Input_HistoryKodasHistoryStreamCursorValueInput(this._res);
+class _CopyWithStubImpl_Input_HistoryConfessionHistoryStreamCursorValueInput<
+  TRes
+>
+    implements
+        CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput<TRes> {
+  _CopyWithStubImpl_Input_HistoryConfessionHistoryStreamCursorValueInput(
+    this._res,
+  );
 
   TRes _res;
 
@@ -2437,36 +1579,378 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryStreamCursorValueInput<TRes>
   }) => _res;
 }
 
-class Input_HistoryLatestCallsBoolExp {
-  factory Input_HistoryLatestCallsBoolExp({
-    List<Input_HistoryLatestCallsBoolExp>? $_and,
-    Input_HistoryLatestCallsBoolExp? $_not,
-    List<Input_HistoryLatestCallsBoolExp>? $_or,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
+class Input_HistoryEditHistoryAggregateBoolExp {
+  factory Input_HistoryEditHistoryAggregateBoolExp({
+    Input_historyEditHistoryAggregateBoolExpCount? count,
+  }) => Input_HistoryEditHistoryAggregateBoolExp._({
+    if (count != null) r'count': count,
+  });
+
+  Input_HistoryEditHistoryAggregateBoolExp._(this._$data);
+
+  factory Input_HistoryEditHistoryAggregateBoolExp.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('count')) {
+      final l$count = data['count'];
+      result$data['count'] = l$count == null
+          ? null
+          : Input_historyEditHistoryAggregateBoolExpCount.fromJson(
+              (l$count as Map<String, dynamic>),
+            );
+    }
+    return Input_HistoryEditHistoryAggregateBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_historyEditHistoryAggregateBoolExpCount? get count =>
+      (_$data['count'] as Input_historyEditHistoryAggregateBoolExpCount?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('count')) {
+      final l$count = count;
+      result$data['count'] = l$count?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryEditHistoryAggregateBoolExp<
+    Input_HistoryEditHistoryAggregateBoolExp
+  >
+  get copyWith =>
+      CopyWith_Input_HistoryEditHistoryAggregateBoolExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryEditHistoryAggregateBoolExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
+      return false;
+    }
+    if (l$count != lOther$count) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    return Object.hashAll([_$data.containsKey('count') ? l$count : const {}]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes> {
+  factory CopyWith_Input_HistoryEditHistoryAggregateBoolExp(
+    Input_HistoryEditHistoryAggregateBoolExp instance,
+    TRes Function(Input_HistoryEditHistoryAggregateBoolExp) then,
+  ) = _CopyWithImpl_Input_HistoryEditHistoryAggregateBoolExp;
+
+  factory CopyWith_Input_HistoryEditHistoryAggregateBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryEditHistoryAggregateBoolExp;
+
+  TRes call({Input_historyEditHistoryAggregateBoolExpCount? count});
+  CopyWith_Input_historyEditHistoryAggregateBoolExpCount<TRes> get count;
+}
+
+class _CopyWithImpl_Input_HistoryEditHistoryAggregateBoolExp<TRes>
+    implements CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes> {
+  _CopyWithImpl_Input_HistoryEditHistoryAggregateBoolExp(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryEditHistoryAggregateBoolExp _instance;
+
+  final TRes Function(Input_HistoryEditHistoryAggregateBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? count = _undefined}) => _then(
+    Input_HistoryEditHistoryAggregateBoolExp._({
+      ..._instance._$data,
+      if (count != _undefined)
+        'count': (count as Input_historyEditHistoryAggregateBoolExpCount?),
+    }),
+  );
+
+  CopyWith_Input_historyEditHistoryAggregateBoolExpCount<TRes> get count {
+    final local$count = _instance.count;
+    return local$count == null
+        ? CopyWith_Input_historyEditHistoryAggregateBoolExpCount.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_historyEditHistoryAggregateBoolExpCount(
+            local$count,
+            (e) => call(count: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_HistoryEditHistoryAggregateBoolExp<TRes>
+    implements CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes> {
+  _CopyWithStubImpl_Input_HistoryEditHistoryAggregateBoolExp(this._res);
+
+  TRes _res;
+
+  call({Input_historyEditHistoryAggregateBoolExpCount? count}) => _res;
+
+  CopyWith_Input_historyEditHistoryAggregateBoolExpCount<TRes> get count =>
+      CopyWith_Input_historyEditHistoryAggregateBoolExpCount.stub(_res);
+}
+
+class Input_HistoryEditHistoryAggregateOrderBy {
+  factory Input_HistoryEditHistoryAggregateOrderBy({
+    Enum_OrderBy? count,
+    Input_HistoryEditHistoryMaxOrderBy? max,
+    Input_HistoryEditHistoryMinOrderBy? min,
+  }) => Input_HistoryEditHistoryAggregateOrderBy._({
+    if (count != null) r'count': count,
+    if (max != null) r'max': max,
+    if (min != null) r'min': min,
+  });
+
+  Input_HistoryEditHistoryAggregateOrderBy._(this._$data);
+
+  factory Input_HistoryEditHistoryAggregateOrderBy.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('count')) {
+      final l$count = data['count'];
+      result$data['count'] = l$count == null
+          ? null
+          : fromJson_Enum_OrderBy((l$count as String));
+    }
+    if (data.containsKey('max')) {
+      final l$max = data['max'];
+      result$data['max'] = l$max == null
+          ? null
+          : Input_HistoryEditHistoryMaxOrderBy.fromJson(
+              (l$max as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('min')) {
+      final l$min = data['min'];
+      result$data['min'] = l$min == null
+          ? null
+          : Input_HistoryEditHistoryMinOrderBy.fromJson(
+              (l$min as Map<String, dynamic>),
+            );
+    }
+    return Input_HistoryEditHistoryAggregateOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
+  Input_HistoryEditHistoryMaxOrderBy? get max =>
+      (_$data['max'] as Input_HistoryEditHistoryMaxOrderBy?);
+
+  Input_HistoryEditHistoryMinOrderBy? get min =>
+      (_$data['min'] as Input_HistoryEditHistoryMinOrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('count')) {
+      final l$count = count;
+      result$data['count'] = l$count == null
+          ? null
+          : toJson_Enum_OrderBy(l$count);
+    }
+    if (_$data.containsKey('max')) {
+      final l$max = max;
+      result$data['max'] = l$max?.toJson();
+    }
+    if (_$data.containsKey('min')) {
+      final l$min = min;
+      result$data['min'] = l$min?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryEditHistoryAggregateOrderBy<
+    Input_HistoryEditHistoryAggregateOrderBy
+  >
+  get copyWith =>
+      CopyWith_Input_HistoryEditHistoryAggregateOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryEditHistoryAggregateOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
+      return false;
+    }
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$max = max;
+    final lOther$max = other.max;
+    if (_$data.containsKey('max') != other._$data.containsKey('max')) {
+      return false;
+    }
+    if (l$max != lOther$max) {
+      return false;
+    }
+    final l$min = min;
+    final lOther$min = other.min;
+    if (_$data.containsKey('min') != other._$data.containsKey('min')) {
+      return false;
+    }
+    if (l$min != lOther$min) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    final l$max = max;
+    final l$min = min;
+    return Object.hashAll([
+      _$data.containsKey('count') ? l$count : const {},
+      _$data.containsKey('max') ? l$max : const {},
+      _$data.containsKey('min') ? l$min : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes> {
+  factory CopyWith_Input_HistoryEditHistoryAggregateOrderBy(
+    Input_HistoryEditHistoryAggregateOrderBy instance,
+    TRes Function(Input_HistoryEditHistoryAggregateOrderBy) then,
+  ) = _CopyWithImpl_Input_HistoryEditHistoryAggregateOrderBy;
+
+  factory CopyWith_Input_HistoryEditHistoryAggregateOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryEditHistoryAggregateOrderBy;
+
+  TRes call({
+    Enum_OrderBy? count,
+    Input_HistoryEditHistoryMaxOrderBy? max,
+    Input_HistoryEditHistoryMinOrderBy? min,
+  });
+  CopyWith_Input_HistoryEditHistoryMaxOrderBy<TRes> get max;
+  CopyWith_Input_HistoryEditHistoryMinOrderBy<TRes> get min;
+}
+
+class _CopyWithImpl_Input_HistoryEditHistoryAggregateOrderBy<TRes>
+    implements CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes> {
+  _CopyWithImpl_Input_HistoryEditHistoryAggregateOrderBy(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryEditHistoryAggregateOrderBy _instance;
+
+  final TRes Function(Input_HistoryEditHistoryAggregateOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? max = _undefined,
+    Object? min = _undefined,
+  }) => _then(
+    Input_HistoryEditHistoryAggregateOrderBy._({
+      ..._instance._$data,
+      if (count != _undefined) 'count': (count as Enum_OrderBy?),
+      if (max != _undefined)
+        'max': (max as Input_HistoryEditHistoryMaxOrderBy?),
+      if (min != _undefined)
+        'min': (min as Input_HistoryEditHistoryMinOrderBy?),
+    }),
+  );
+
+  CopyWith_Input_HistoryEditHistoryMaxOrderBy<TRes> get max {
+    final local$max = _instance.max;
+    return local$max == null
+        ? CopyWith_Input_HistoryEditHistoryMaxOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryEditHistoryMaxOrderBy(
+            local$max,
+            (e) => call(max: e),
+          );
+  }
+
+  CopyWith_Input_HistoryEditHistoryMinOrderBy<TRes> get min {
+    final local$min = _instance.min;
+    return local$min == null
+        ? CopyWith_Input_HistoryEditHistoryMinOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryEditHistoryMinOrderBy(
+            local$min,
+            (e) => call(min: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_HistoryEditHistoryAggregateOrderBy<TRes>
+    implements CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes> {
+  _CopyWithStubImpl_Input_HistoryEditHistoryAggregateOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? count,
+    Input_HistoryEditHistoryMaxOrderBy? max,
+    Input_HistoryEditHistoryMinOrderBy? min,
+  }) => _res;
+
+  CopyWith_Input_HistoryEditHistoryMaxOrderBy<TRes> get max =>
+      CopyWith_Input_HistoryEditHistoryMaxOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryEditHistoryMinOrderBy<TRes> get min =>
+      CopyWith_Input_HistoryEditHistoryMinOrderBy.stub(_res);
+}
+
+class Input_HistoryEditHistoryBoolExp {
+  factory Input_HistoryEditHistoryBoolExp({
+    List<Input_HistoryEditHistoryBoolExp>? $_and,
+    Input_HistoryEditHistoryBoolExp? $_not,
+    List<Input_HistoryEditHistoryBoolExp>? $_or,
+    Input_UuidComparisonExp? recordId,
     Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
     Input_TimestamptzComparisonExp? time,
     Input_AuthUsersDataBoolExp? user,
-  }) => Input_HistoryLatestCallsBoolExp._({
+  }) => Input_HistoryEditHistoryBoolExp._({
     if ($_and != null) r'_and': $_and,
     if ($_not != null) r'_not': $_not,
     if ($_or != null) r'_or': $_or,
-    if (person != null) r'person': person,
-    if (personId != null) r'personId': personId,
+    if (recordId != null) r'recordId': recordId,
     if (recordedBy != null) r'recordedBy': recordedBy,
+    if (table != null) r'table': table,
     if (time != null) r'time': time,
     if (user != null) r'user': user,
   });
 
-  Input_HistoryLatestCallsBoolExp._(this._$data);
+  Input_HistoryEditHistoryBoolExp._(this._$data);
 
-  factory Input_HistoryLatestCallsBoolExp.fromJson(Map<String, dynamic> data) {
+  factory Input_HistoryEditHistoryBoolExp.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('_and')) {
       final l$$_and = data['_and'];
       result$data['_and'] = (l$$_and as List<dynamic>?)
           ?.map(
-            (e) => Input_HistoryLatestCallsBoolExp.fromJson(
+            (e) => Input_HistoryEditHistoryBoolExp.fromJson(
               (e as Map<String, dynamic>),
             ),
           )
@@ -2476,7 +1960,7 @@ class Input_HistoryLatestCallsBoolExp {
       final l$$_not = data['_not'];
       result$data['_not'] = l$$_not == null
           ? null
-          : Input_HistoryLatestCallsBoolExp.fromJson(
+          : Input_HistoryEditHistoryBoolExp.fromJson(
               (l$$_not as Map<String, dynamic>),
             );
     }
@@ -2484,24 +1968,18 @@ class Input_HistoryLatestCallsBoolExp {
       final l$$_or = data['_or'];
       result$data['_or'] = (l$$_or as List<dynamic>?)
           ?.map(
-            (e) => Input_HistoryLatestCallsBoolExp.fromJson(
+            (e) => Input_HistoryEditHistoryBoolExp.fromJson(
               (e as Map<String, dynamic>),
             ),
           )
           .toList();
     }
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
-          ? null
-          : Input_PersonsBoolExp.fromJson((l$person as Map<String, dynamic>));
-    }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] = l$recordId == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$personId as Map<String, dynamic>),
+              (l$recordId as Map<String, dynamic>),
             );
     }
     if (data.containsKey('recordedBy')) {
@@ -2511,6 +1989,12 @@ class Input_HistoryLatestCallsBoolExp {
           : Input_UuidComparisonExp.fromJson(
               (l$recordedBy as Map<String, dynamic>),
             );
+    }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] = l$table == null
+          ? null
+          : Input_NameComparisonExp.fromJson((l$table as Map<String, dynamic>));
     }
     if (data.containsKey('time')) {
       final l$time = data['time'];
@@ -2528,28 +2012,28 @@ class Input_HistoryLatestCallsBoolExp {
               (l$user as Map<String, dynamic>),
             );
     }
-    return Input_HistoryLatestCallsBoolExp._(result$data);
+    return Input_HistoryEditHistoryBoolExp._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input_HistoryLatestCallsBoolExp>? get $_and =>
-      (_$data['_and'] as List<Input_HistoryLatestCallsBoolExp>?);
+  List<Input_HistoryEditHistoryBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_HistoryEditHistoryBoolExp>?);
 
-  Input_HistoryLatestCallsBoolExp? get $_not =>
-      (_$data['_not'] as Input_HistoryLatestCallsBoolExp?);
+  Input_HistoryEditHistoryBoolExp? get $_not =>
+      (_$data['_not'] as Input_HistoryEditHistoryBoolExp?);
 
-  List<Input_HistoryLatestCallsBoolExp>? get $_or =>
-      (_$data['_or'] as List<Input_HistoryLatestCallsBoolExp>?);
+  List<Input_HistoryEditHistoryBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_HistoryEditHistoryBoolExp>?);
 
-  Input_PersonsBoolExp? get person =>
-      (_$data['person'] as Input_PersonsBoolExp?);
-
-  Input_UuidComparisonExp? get personId =>
-      (_$data['personId'] as Input_UuidComparisonExp?);
+  Input_UuidComparisonExp? get recordId =>
+      (_$data['recordId'] as Input_UuidComparisonExp?);
 
   Input_UuidComparisonExp? get recordedBy =>
       (_$data['recordedBy'] as Input_UuidComparisonExp?);
+
+  Input_NameComparisonExp? get table =>
+      (_$data['table'] as Input_NameComparisonExp?);
 
   Input_TimestamptzComparisonExp? get time =>
       (_$data['time'] as Input_TimestamptzComparisonExp?);
@@ -2571,17 +2055,17 @@ class Input_HistoryLatestCallsBoolExp {
       final l$$_or = $_or;
       result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
-    }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] = l$personId?.toJson();
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] = l$recordId?.toJson();
     }
     if (_$data.containsKey('recordedBy')) {
       final l$recordedBy = recordedBy;
       result$data['recordedBy'] = l$recordedBy?.toJson();
+    }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] = l$table?.toJson();
     }
     if (_$data.containsKey('time')) {
       final l$time = time;
@@ -2594,15 +2078,15 @@ class Input_HistoryLatestCallsBoolExp {
     return result$data;
   }
 
-  CopyWith_Input_HistoryLatestCallsBoolExp<Input_HistoryLatestCallsBoolExp>
-  get copyWith => CopyWith_Input_HistoryLatestCallsBoolExp(this, (i) => i);
+  CopyWith_Input_HistoryEditHistoryBoolExp<Input_HistoryEditHistoryBoolExp>
+  get copyWith => CopyWith_Input_HistoryEditHistoryBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_HistoryLatestCallsBoolExp ||
+    if (other is! Input_HistoryEditHistoryBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2652,21 +2136,13 @@ class Input_HistoryLatestCallsBoolExp {
     } else if (l$$_or != lOther$$_or) {
       return false;
     }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
       return false;
     }
-    if (l$person != lOther$person) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
-      return false;
-    }
-    if (l$personId != lOther$personId) {
+    if (l$recordId != lOther$recordId) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -2676,6 +2152,14 @@ class Input_HistoryLatestCallsBoolExp {
       return false;
     }
     if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
       return false;
     }
     final l$time = time;
@@ -2702,9 +2186,9 @@ class Input_HistoryLatestCallsBoolExp {
     final l$$_and = $_and;
     final l$$_not = $_not;
     final l$$_or = $_or;
-    final l$person = person;
-    final l$personId = personId;
+    final l$recordId = recordId;
     final l$recordedBy = recordedBy;
+    final l$table = table;
     final l$time = time;
     final l$user = user;
     return Object.hashAll([
@@ -2719,11 +2203,348 @@ class Input_HistoryLatestCallsBoolExp {
                 ? null
                 : Object.hashAll(l$$_or.map((v) => v))
           : const {},
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
       _$data.containsKey('time') ? l$time : const {},
       _$data.containsKey('user') ? l$user : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryEditHistoryBoolExp<TRes> {
+  factory CopyWith_Input_HistoryEditHistoryBoolExp(
+    Input_HistoryEditHistoryBoolExp instance,
+    TRes Function(Input_HistoryEditHistoryBoolExp) then,
+  ) = _CopyWithImpl_Input_HistoryEditHistoryBoolExp;
+
+  factory CopyWith_Input_HistoryEditHistoryBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryEditHistoryBoolExp;
+
+  TRes call({
+    List<Input_HistoryEditHistoryBoolExp>? $_and,
+    Input_HistoryEditHistoryBoolExp? $_not,
+    List<Input_HistoryEditHistoryBoolExp>? $_or,
+    Input_UuidComparisonExp? recordId,
+    Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
+    Input_TimestamptzComparisonExp? time,
+    Input_AuthUsersDataBoolExp? user,
+  });
+  TRes $_and(
+    Iterable<Input_HistoryEditHistoryBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_HistoryEditHistoryBoolExp<
+          Input_HistoryEditHistoryBoolExp
+        >
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get $_not;
+  TRes $_or(
+    Iterable<Input_HistoryEditHistoryBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_HistoryEditHistoryBoolExp<
+          Input_HistoryEditHistoryBoolExp
+        >
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId;
+  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy;
+  CopyWith_Input_NameComparisonExp<TRes> get table;
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get time;
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user;
+}
+
+class _CopyWithImpl_Input_HistoryEditHistoryBoolExp<TRes>
+    implements CopyWith_Input_HistoryEditHistoryBoolExp<TRes> {
+  _CopyWithImpl_Input_HistoryEditHistoryBoolExp(this._instance, this._then);
+
+  final Input_HistoryEditHistoryBoolExp _instance;
+
+  final TRes Function(Input_HistoryEditHistoryBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? recordId = _undefined,
+    Object? recordedBy = _undefined,
+    Object? table = _undefined,
+    Object? time = _undefined,
+    Object? user = _undefined,
+  }) => _then(
+    Input_HistoryEditHistoryBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined)
+        '_and': ($_and as List<Input_HistoryEditHistoryBoolExp>?),
+      if ($_not != _undefined)
+        '_not': ($_not as Input_HistoryEditHistoryBoolExp?),
+      if ($_or != _undefined)
+        '_or': ($_or as List<Input_HistoryEditHistoryBoolExp>?),
+      if (recordId != _undefined)
+        'recordId': (recordId as Input_UuidComparisonExp?),
+      if (recordedBy != _undefined)
+        'recordedBy': (recordedBy as Input_UuidComparisonExp?),
+      if (table != _undefined) 'table': (table as Input_NameComparisonExp?),
+      if (time != _undefined) 'time': (time as Input_TimestamptzComparisonExp?),
+      if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
+    }),
+  );
+
+  TRes $_and(
+    Iterable<Input_HistoryEditHistoryBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_HistoryEditHistoryBoolExp<
+          Input_HistoryEditHistoryBoolExp
+        >
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map(
+        (e) => CopyWith_Input_HistoryEditHistoryBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_HistoryEditHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryEditHistoryBoolExp(
+            local$$_not,
+            (e) => call($_not: e),
+          );
+  }
+
+  TRes $_or(
+    Iterable<Input_HistoryEditHistoryBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_HistoryEditHistoryBoolExp<
+          Input_HistoryEditHistoryBoolExp
+        >
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map(
+        (e) => CopyWith_Input_HistoryEditHistoryBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId {
+    final local$recordId = _instance.recordId;
+    return local$recordId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$recordId,
+            (e) => call(recordId: e),
+          );
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy {
+    final local$recordedBy = _instance.recordedBy;
+    return local$recordedBy == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$recordedBy,
+            (e) => call(recordedBy: e),
+          );
+  }
+
+  CopyWith_Input_NameComparisonExp<TRes> get table {
+    final local$table = _instance.table;
+    return local$table == null
+        ? CopyWith_Input_NameComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_NameComparisonExp(local$table, (e) => call(table: e));
+  }
+
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get time {
+    final local$time = _instance.time;
+    return local$time == null
+        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimestamptzComparisonExp(
+            local$time,
+            (e) => call(time: e),
+          );
+  }
+
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_AuthUsersDataBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataBoolExp(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_HistoryEditHistoryBoolExp<TRes>
+    implements CopyWith_Input_HistoryEditHistoryBoolExp<TRes> {
+  _CopyWithStubImpl_Input_HistoryEditHistoryBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_HistoryEditHistoryBoolExp>? $_and,
+    Input_HistoryEditHistoryBoolExp? $_not,
+    List<Input_HistoryEditHistoryBoolExp>? $_or,
+    Input_UuidComparisonExp? recordId,
+    Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
+    Input_TimestamptzComparisonExp? time,
+    Input_AuthUsersDataBoolExp? user,
+  }) => _res;
+
+  $_and(_fn) => _res;
+
+  CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get $_not =>
+      CopyWith_Input_HistoryEditHistoryBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_NameComparisonExp<TRes> get table =>
+      CopyWith_Input_NameComparisonExp.stub(_res);
+
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get time =>
+      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
+      CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
+}
+
+class Input_HistoryEditHistoryMaxOrderBy {
+  factory Input_HistoryEditHistoryMaxOrderBy({
+    Enum_OrderBy? recordId,
+    Enum_OrderBy? recordedBy,
+    Enum_OrderBy? time,
+  }) => Input_HistoryEditHistoryMaxOrderBy._({
+    if (recordId != null) r'recordId': recordId,
+    if (recordedBy != null) r'recordedBy': recordedBy,
+    if (time != null) r'time': time,
+  });
+
+  Input_HistoryEditHistoryMaxOrderBy._(this._$data);
+
+  factory Input_HistoryEditHistoryMaxOrderBy.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] = l$recordId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$recordId as String));
+    }
+    if (data.containsKey('recordedBy')) {
+      final l$recordedBy = data['recordedBy'];
+      result$data['recordedBy'] = l$recordedBy == null
+          ? null
+          : fromJson_Enum_OrderBy((l$recordedBy as String));
+    }
+    if (data.containsKey('time')) {
+      final l$time = data['time'];
+      result$data['time'] = l$time == null
+          ? null
+          : fromJson_Enum_OrderBy((l$time as String));
+    }
+    return Input_HistoryEditHistoryMaxOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get recordId => (_$data['recordId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] = l$recordId == null
+          ? null
+          : toJson_Enum_OrderBy(l$recordId);
+    }
+    if (_$data.containsKey('recordedBy')) {
+      final l$recordedBy = recordedBy;
+      result$data['recordedBy'] = l$recordedBy == null
+          ? null
+          : toJson_Enum_OrderBy(l$recordedBy);
+    }
+    if (_$data.containsKey('time')) {
+      final l$time = time;
+      result$data['time'] = l$time == null ? null : toJson_Enum_OrderBy(l$time);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryEditHistoryMaxOrderBy<
+    Input_HistoryEditHistoryMaxOrderBy
+  >
+  get copyWith => CopyWith_Input_HistoryEditHistoryMaxOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryEditHistoryMaxOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
+      return false;
+    }
+    if (l$recordId != lOther$recordId) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (_$data.containsKey('recordedBy') !=
+        other._$data.containsKey('recordedBy')) {
+      return false;
+    }
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
+      return false;
+    }
+    if (l$time != lOther$time) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$recordId = recordId;
+    final l$recordedBy = recordedBy;
+    final l$time = time;
+    return Object.hashAll([
+      _$data.containsKey('recordId') ? l$recordId : const {},
+      _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('time') ? l$time : const {},
     ]);
   }
 }

@@ -1,5 +1,6 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.gql.dart';
+import '../../contacts/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
@@ -2265,6 +2266,97 @@ const documentNodeSubscriptionwatchFamily = DocumentNode(
                   ),
                 ),
                 FieldNode(
+                  name: NameNode(value: 'contacts'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                      name: NameNode(value: 'where'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'personType'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'isFamilyAdmin'),
+                                  value: ObjectValueNode(
+                                    fields: [
+                                      ObjectFieldNode(
+                                        name: NameNode(value: '_eq'),
+                                        value: BooleanValueNode(value: true),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ArgumentNode(
+                      name: NameNode(value: 'orderBy'),
+                      value: ListValueNode(
+                        values: [
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'personType'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'order'),
+                                      value: EnumValueNode(
+                                        name: NameNode(value: 'ASC'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'isMainPhone'),
+                                value: EnumValueNode(
+                                  name: NameNode(value: 'DESC'),
+                                ),
+                              ),
+                            ],
+                          ),
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'createdAt'),
+                                value: EnumValueNode(
+                                  name: NameNode(value: 'ASC'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'ResolvedContact'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
                   name: NameNode(value: 'notes'),
                   alias: null,
                   arguments: [],
@@ -2354,6 +2446,7 @@ const documentNodeSubscriptionwatchFamily = DocumentNode(
     fragmentDefinitionAreaNoPhoto,
     fragmentDefinitionStreet,
     fragmentDefinitionStreetNoPhoto,
+    fragmentDefinitionResolvedContact,
     fragmentDefinitionLatestEditHistory,
     fragmentDefinitionUser,
     fragmentDefinitionUserNoPhoto,
@@ -2378,6 +2471,7 @@ class Subscription_watchFamily_familiesByPk
     this.deceasedSpouseName,
     this.marriageDate,
     this.familyAdminsPhones,
+    required this.contacts,
     this.notes,
     this.lastEdit,
     this.lastVisit,
@@ -2400,6 +2494,7 @@ class Subscription_watchFamily_familiesByPk
     final l$deceasedSpouseName = json['deceasedSpouseName'];
     final l$marriageDate = json['marriageDate'];
     final l$familyAdminsPhones = json['familyAdminsPhones'];
+    final l$contacts = json['contacts'];
     final l$notes = json['notes'];
     final l$lastEdit = json['lastEdit'];
     final l$lastVisit = json['lastVisit'];
@@ -2432,6 +2527,12 @@ class Subscription_watchFamily_familiesByPk
           : Subscription_watchFamily_familiesByPk_familyAdminsPhones.fromJson(
               (l$familyAdminsPhones as Map<String, dynamic>),
             ),
+      contacts: (l$contacts as List<dynamic>)
+          .map(
+            (e) =>
+                Fragment_ResolvedContact.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
       notes: (l$notes as String?),
       lastEdit: l$lastEdit == null
           ? null
@@ -2478,6 +2579,8 @@ class Subscription_watchFamily_familiesByPk
   final Subscription_watchFamily_familiesByPk_familyAdminsPhones?
   familyAdminsPhones;
 
+  final List<Fragment_ResolvedContact> contacts;
+
   final String? notes;
 
   final Fragment_LatestEditHistory? lastEdit;
@@ -2518,6 +2621,8 @@ class Subscription_watchFamily_familiesByPk
         : dateToString(l$marriageDate);
     final l$familyAdminsPhones = familyAdminsPhones;
     _resultData['familyAdminsPhones'] = l$familyAdminsPhones?.toJson();
+    final l$contacts = contacts;
+    _resultData['contacts'] = l$contacts.map((e) => e.toJson()).toList();
     final l$notes = notes;
     _resultData['notes'] = l$notes;
     final l$lastEdit = lastEdit;
@@ -2544,6 +2649,7 @@ class Subscription_watchFamily_familiesByPk
     final l$deceasedSpouseName = deceasedSpouseName;
     final l$marriageDate = marriageDate;
     final l$familyAdminsPhones = familyAdminsPhones;
+    final l$contacts = contacts;
     final l$notes = notes;
     final l$lastEdit = lastEdit;
     final l$lastVisit = lastVisit;
@@ -2562,6 +2668,7 @@ class Subscription_watchFamily_familiesByPk
       l$deceasedSpouseName,
       l$marriageDate,
       l$familyAdminsPhones,
+      Object.hashAll(l$contacts.map((v) => v)),
       l$notes,
       l$lastEdit,
       l$lastVisit,
@@ -2643,6 +2750,18 @@ class Subscription_watchFamily_familiesByPk
     if (l$familyAdminsPhones != lOther$familyAdminsPhones) {
       return false;
     }
+    final l$contacts = contacts;
+    final lOther$contacts = other.contacts;
+    if (l$contacts.length != lOther$contacts.length) {
+      return false;
+    }
+    for (int i = 0; i < l$contacts.length; i++) {
+      final l$contacts$entry = l$contacts[i];
+      final lOther$contacts$entry = lOther$contacts[i];
+      if (l$contacts$entry != lOther$contacts$entry) {
+        return false;
+      }
+    }
     final l$notes = notes;
     final lOther$notes = other.notes;
     if (l$notes != lOther$notes) {
@@ -2700,6 +2819,7 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
     DateTime? marriageDate,
     Subscription_watchFamily_familiesByPk_familyAdminsPhones?
     familyAdminsPhones,
+    List<Fragment_ResolvedContact>? contacts,
     String? notes,
     Fragment_LatestEditHistory? lastEdit,
     Fragment_LatestVisitHistory? lastVisit,
@@ -2709,6 +2829,12 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
   CopyWith_Subscription_watchFamily_familiesByPk_church<TRes> get church;
   CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones<TRes>
   get familyAdminsPhones;
+  TRes contacts(
+    Iterable<Fragment_ResolvedContact> Function(
+      Iterable<CopyWith_Fragment_ResolvedContact<Fragment_ResolvedContact>>,
+    )
+    _fn,
+  );
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
   CopyWith_Fragment_LatestVisitHistory<TRes> get lastVisit;
   CopyWith_Fragment_LatestFatherVisitHistory<TRes> get lastFatherVisit;
@@ -2741,6 +2867,7 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
     Object? deceasedSpouseName = _undefined,
     Object? marriageDate = _undefined,
     Object? familyAdminsPhones = _undefined,
+    Object? contacts = _undefined,
     Object? notes = _undefined,
     Object? lastEdit = _undefined,
     Object? lastVisit = _undefined,
@@ -2783,6 +2910,9 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
           ? _instance.familyAdminsPhones
           : (familyAdminsPhones
                 as Subscription_watchFamily_familiesByPk_familyAdminsPhones?),
+      contacts: contacts == _undefined || contacts == null
+          ? _instance.contacts
+          : (contacts as List<Fragment_ResolvedContact>),
       notes: notes == _undefined ? _instance.notes : (notes as String?),
       lastEdit: lastEdit == _undefined
           ? _instance.lastEdit
@@ -2827,6 +2957,19 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
             (e) => call(familyAdminsPhones: e),
           );
   }
+
+  TRes contacts(
+    Iterable<Fragment_ResolvedContact> Function(
+      Iterable<CopyWith_Fragment_ResolvedContact<Fragment_ResolvedContact>>,
+    )
+    _fn,
+  ) => call(
+    contacts: _fn(
+      _instance.contacts.map(
+        (e) => CopyWith_Fragment_ResolvedContact(e, (i) => i),
+      ),
+    ).toList(),
+  );
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit {
     final local$lastEdit = _instance.lastEdit;
@@ -2880,6 +3023,7 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
     DateTime? marriageDate,
     Subscription_watchFamily_familiesByPk_familyAdminsPhones?
     familyAdminsPhones,
+    List<Fragment_ResolvedContact>? contacts,
     String? notes,
     Fragment_LatestEditHistory? lastEdit,
     Fragment_LatestVisitHistory? lastVisit,
@@ -2897,6 +3041,8 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
       CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones.stub(
         _res,
       );
+
+  contacts(_fn) => _res;
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit =>
       CopyWith_Fragment_LatestEditHistory.stub(_res);
