@@ -36,19 +36,6 @@ class _PersonFields {
     isCodeOnly: false,
   );
 
-  final FieldMetadata<String> mainPhone = FieldMetadata<String>(
-    getValue: (obj) => obj is Person ? obj.mainPhone : null,
-    parentType: Person,
-    name: 'mainPhone',
-    label: 'رقم الهاتف',
-    isCodeOnly: false,
-    operators: {
-      ...StringOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull,
-    },
-  );
-
   final FieldMetadata<DateTime> birthdate = FieldMetadata<DateTime>(
     getValue: (obj) => obj is Person ? obj.birthdate : null,
     parentType: Person,
@@ -680,7 +667,6 @@ class _PersonFields {
     id,
     name,
     address,
-    mainPhone,
     birthdate,
     birthday,
     gender,
@@ -736,7 +722,6 @@ class _PersonFields {
     'id': id,
     'name': name,
     'address': address,
-    'mainPhone': mainPhone,
     'birthdate': birthdate,
     'birthday': birthday,
     'gender': gender,
@@ -799,9 +784,6 @@ class _PersonFields {
 Person _$PersonFromJson(Map json) => Person(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
-  otherPhones:
-      (json['otherPhones'] as Map?)?.map((k, e) => MapEntry(k as String, e)) ??
-      const {},
   contacts:
       (json['contacts'] as List<dynamic>?)
           ?.map(
@@ -823,7 +805,6 @@ Person _$PersonFromJson(Map json) => Person(
   address: json['address'] == null
       ? null
       : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
-  mainPhone: json['mainPhone'] as String?,
   birthdate: _$JsonConverterFromJson<String, DateTime>(
     json['birthdate'],
     const LocalDateTimeConverter().fromJson,
@@ -1003,8 +984,6 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
   'nationalId': instance.nationalId,
   'name': instance.name,
   'address': instance.address?.toJson(),
-  'mainPhone': instance.mainPhone,
-  'otherPhones': instance.otherPhones,
   'contacts': instance.contacts.map((e) => e.toJson()).toList(),
   'birthdate': _$JsonConverterToJson<String, DateTime>(
     instance.birthdate,

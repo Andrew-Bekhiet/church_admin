@@ -1,174 +1,6 @@
 // Part 20 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_FamiliesFamiliesStreamCursorInput<TRes> {
-  factory CopyWith_Input_FamiliesFamiliesStreamCursorInput(
-    Input_FamiliesFamiliesStreamCursorInput instance,
-    TRes Function(Input_FamiliesFamiliesStreamCursorInput) then,
-  ) = _CopyWithImpl_Input_FamiliesFamiliesStreamCursorInput;
-
-  factory CopyWith_Input_FamiliesFamiliesStreamCursorInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_FamiliesFamiliesStreamCursorInput;
-
-  TRes call({
-    Input_FamiliesFamiliesStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  });
-  CopyWith_Input_FamiliesFamiliesStreamCursorValueInput<TRes> get initialValue;
-}
-
-class _CopyWithImpl_Input_FamiliesFamiliesStreamCursorInput<TRes>
-    implements CopyWith_Input_FamiliesFamiliesStreamCursorInput<TRes> {
-  _CopyWithImpl_Input_FamiliesFamiliesStreamCursorInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_FamiliesFamiliesStreamCursorInput _instance;
-
-  final TRes Function(Input_FamiliesFamiliesStreamCursorInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? initialValue = _undefined,
-    Object? ordering = _undefined,
-  }) => _then(
-    Input_FamiliesFamiliesStreamCursorInput._({
-      ..._instance._$data,
-      if (initialValue != _undefined && initialValue != null)
-        'initialValue':
-            (initialValue as Input_FamiliesFamiliesStreamCursorValueInput),
-      if (ordering != _undefined)
-        'ordering': (ordering as Enum_CursorOrdering?),
-    }),
-  );
-
-  CopyWith_Input_FamiliesFamiliesStreamCursorValueInput<TRes> get initialValue {
-    final local$initialValue = _instance.initialValue;
-    return CopyWith_Input_FamiliesFamiliesStreamCursorValueInput(
-      local$initialValue,
-      (e) => call(initialValue: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_FamiliesFamiliesStreamCursorInput<TRes>
-    implements CopyWith_Input_FamiliesFamiliesStreamCursorInput<TRes> {
-  _CopyWithStubImpl_Input_FamiliesFamiliesStreamCursorInput(this._res);
-
-  TRes _res;
-
-  call({
-    Input_FamiliesFamiliesStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => _res;
-
-  CopyWith_Input_FamiliesFamiliesStreamCursorValueInput<TRes>
-  get initialValue =>
-      CopyWith_Input_FamiliesFamiliesStreamCursorValueInput.stub(_res);
-}
-
-class Input_FamiliesFamiliesStreamCursorValueInput {
-  factory Input_FamiliesFamiliesStreamCursorValueInput({
-    UuidValue? childFamilyId,
-    UuidValue? parentFamilyId,
-  }) => Input_FamiliesFamiliesStreamCursorValueInput._({
-    if (childFamilyId != null) r'childFamilyId': childFamilyId,
-    if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
-  });
-
-  Input_FamiliesFamiliesStreamCursorValueInput._(this._$data);
-
-  factory Input_FamiliesFamiliesStreamCursorValueInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('childFamilyId')) {
-      final l$childFamilyId = data['childFamilyId'];
-      result$data['childFamilyId'] = l$childFamilyId == null
-          ? null
-          : stringToUuid(l$childFamilyId);
-    }
-    if (data.containsKey('parentFamilyId')) {
-      final l$parentFamilyId = data['parentFamilyId'];
-      result$data['parentFamilyId'] = l$parentFamilyId == null
-          ? null
-          : stringToUuid(l$parentFamilyId);
-    }
-    return Input_FamiliesFamiliesStreamCursorValueInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  UuidValue? get childFamilyId => (_$data['childFamilyId'] as UuidValue?);
-
-  UuidValue? get parentFamilyId => (_$data['parentFamilyId'] as UuidValue?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('childFamilyId')) {
-      final l$childFamilyId = childFamilyId;
-      result$data['childFamilyId'] = l$childFamilyId == null
-          ? null
-          : uuidToString(l$childFamilyId);
-    }
-    if (_$data.containsKey('parentFamilyId')) {
-      final l$parentFamilyId = parentFamilyId;
-      result$data['parentFamilyId'] = l$parentFamilyId == null
-          ? null
-          : uuidToString(l$parentFamilyId);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_FamiliesFamiliesStreamCursorValueInput<
-    Input_FamiliesFamiliesStreamCursorValueInput
-  >
-  get copyWith =>
-      CopyWith_Input_FamiliesFamiliesStreamCursorValueInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_FamiliesFamiliesStreamCursorValueInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$childFamilyId = childFamilyId;
-    final lOther$childFamilyId = other.childFamilyId;
-    if (_$data.containsKey('childFamilyId') !=
-        other._$data.containsKey('childFamilyId')) {
-      return false;
-    }
-    if (l$childFamilyId != lOther$childFamilyId) {
-      return false;
-    }
-    final l$parentFamilyId = parentFamilyId;
-    final lOther$parentFamilyId = other.parentFamilyId;
-    if (_$data.containsKey('parentFamilyId') !=
-        other._$data.containsKey('parentFamilyId')) {
-      return false;
-    }
-    if (l$parentFamilyId != lOther$parentFamilyId) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$childFamilyId = childFamilyId;
-    final l$parentFamilyId = parentFamilyId;
-    return Object.hashAll([
-      _$data.containsKey('childFamilyId') ? l$childFamilyId : const {},
-      _$data.containsKey('parentFamilyId') ? l$parentFamilyId : const {},
-    ]);
-  }
-}
-
 abstract class CopyWith_Input_FamiliesFamiliesStreamCursorValueInput<TRes> {
   factory CopyWith_Input_FamiliesFamiliesStreamCursorValueInput(
     Input_FamiliesFamiliesStreamCursorValueInput instance,
@@ -1287,7 +1119,6 @@ class Input_FamiliesOrderBy {
     Input_ResolvedContactsAggregateOrderBy? contactsAggregate,
     Enum_OrderBy? deceasedSpouseName,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
-    Input_FamiliesAdminsPhonesOrderBy? familyAdminsPhones,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
     Input_HistoryLatestFatherVisitsOrderBy? lastFatherVisit,
@@ -1313,7 +1144,6 @@ class Input_FamiliesOrderBy {
     if (deceasedSpouseName != null) r'deceasedSpouseName': deceasedSpouseName,
     if (editHistoryAggregate != null)
       r'editHistoryAggregate': editHistoryAggregate,
-    if (familyAdminsPhones != null) r'familyAdminsPhones': familyAdminsPhones,
     if (id != null) r'id': id,
     if (lastEdit != null) r'lastEdit': lastEdit,
     if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
@@ -1395,14 +1225,6 @@ class Input_FamiliesOrderBy {
           ? null
           : Input_HistoryEditHistoryAggregateOrderBy.fromJson(
               (l$editHistoryAggregate as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('familyAdminsPhones')) {
-      final l$familyAdminsPhones = data['familyAdminsPhones'];
-      result$data['familyAdminsPhones'] = l$familyAdminsPhones == null
-          ? null
-          : Input_FamiliesAdminsPhonesOrderBy.fromJson(
-              (l$familyAdminsPhones as Map<String, dynamic>),
             );
     }
     if (data.containsKey('id')) {
@@ -1533,9 +1355,6 @@ class Input_FamiliesOrderBy {
       (_$data['editHistoryAggregate']
           as Input_HistoryEditHistoryAggregateOrderBy?);
 
-  Input_FamiliesAdminsPhonesOrderBy? get familyAdminsPhones =>
-      (_$data['familyAdminsPhones'] as Input_FamiliesAdminsPhonesOrderBy?);
-
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
 
   Input_HistoryLatestEditsOrderBy? get lastEdit =>
@@ -1618,10 +1437,6 @@ class Input_FamiliesOrderBy {
     if (_$data.containsKey('editHistoryAggregate')) {
       final l$editHistoryAggregate = editHistoryAggregate;
       result$data['editHistoryAggregate'] = l$editHistoryAggregate?.toJson();
-    }
-    if (_$data.containsKey('familyAdminsPhones')) {
-      final l$familyAdminsPhones = familyAdminsPhones;
-      result$data['familyAdminsPhones'] = l$familyAdminsPhones?.toJson();
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -1781,15 +1596,6 @@ class Input_FamiliesOrderBy {
     if (l$editHistoryAggregate != lOther$editHistoryAggregate) {
       return false;
     }
-    final l$familyAdminsPhones = familyAdminsPhones;
-    final lOther$familyAdminsPhones = other.familyAdminsPhones;
-    if (_$data.containsKey('familyAdminsPhones') !=
-        other._$data.containsKey('familyAdminsPhones')) {
-      return false;
-    }
-    if (l$familyAdminsPhones != lOther$familyAdminsPhones) {
-      return false;
-    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -1926,7 +1732,6 @@ class Input_FamiliesOrderBy {
     final l$contactsAggregate = contactsAggregate;
     final l$deceasedSpouseName = deceasedSpouseName;
     final l$editHistoryAggregate = editHistoryAggregate;
-    final l$familyAdminsPhones = familyAdminsPhones;
     final l$id = id;
     final l$lastEdit = lastEdit;
     final l$lastFatherVisit = lastFatherVisit;
@@ -1954,9 +1759,6 @@ class Input_FamiliesOrderBy {
           : const {},
       _$data.containsKey('editHistoryAggregate')
           ? l$editHistoryAggregate
-          : const {},
-      _$data.containsKey('familyAdminsPhones')
-          ? l$familyAdminsPhones
           : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
@@ -1997,7 +1799,6 @@ abstract class CopyWith_Input_FamiliesOrderBy<TRes> {
     Input_ResolvedContactsAggregateOrderBy? contactsAggregate,
     Enum_OrderBy? deceasedSpouseName,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
-    Input_FamiliesAdminsPhonesOrderBy? familyAdminsPhones,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
     Input_HistoryLatestFatherVisitsOrderBy? lastFatherVisit,
@@ -2019,7 +1820,6 @@ abstract class CopyWith_Input_FamiliesOrderBy<TRes> {
   CopyWith_Input_ResolvedContactsAggregateOrderBy<TRes> get contactsAggregate;
   CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
   get editHistoryAggregate;
-  CopyWith_Input_FamiliesAdminsPhonesOrderBy<TRes> get familyAdminsPhones;
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit;
   CopyWith_Input_HistoryLatestFatherVisitsOrderBy<TRes> get lastFatherVisit;
   CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit;
@@ -2050,7 +1850,6 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
     Object? contactsAggregate = _undefined,
     Object? deceasedSpouseName = _undefined,
     Object? editHistoryAggregate = _undefined,
-    Object? familyAdminsPhones = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
     Object? lastFatherVisit = _undefined,
@@ -2085,9 +1884,6 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
       if (editHistoryAggregate != _undefined)
         'editHistoryAggregate':
             (editHistoryAggregate as Input_HistoryEditHistoryAggregateOrderBy?),
-      if (familyAdminsPhones != _undefined)
-        'familyAdminsPhones':
-            (familyAdminsPhones as Input_FamiliesAdminsPhonesOrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
       if (lastEdit != _undefined)
         'lastEdit': (lastEdit as Input_HistoryLatestEditsOrderBy?),
@@ -2167,16 +1963,6 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
         : CopyWith_Input_HistoryEditHistoryAggregateOrderBy(
             local$editHistoryAggregate,
             (e) => call(editHistoryAggregate: e),
-          );
-  }
-
-  CopyWith_Input_FamiliesAdminsPhonesOrderBy<TRes> get familyAdminsPhones {
-    final local$familyAdminsPhones = _instance.familyAdminsPhones;
-    return local$familyAdminsPhones == null
-        ? CopyWith_Input_FamiliesAdminsPhonesOrderBy.stub(_then(_instance))
-        : CopyWith_Input_FamiliesAdminsPhonesOrderBy(
-            local$familyAdminsPhones,
-            (e) => call(familyAdminsPhones: e),
           );
   }
 
@@ -2270,7 +2056,6 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
     Input_ResolvedContactsAggregateOrderBy? contactsAggregate,
     Enum_OrderBy? deceasedSpouseName,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
-    Input_FamiliesAdminsPhonesOrderBy? familyAdminsPhones,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
     Input_HistoryLatestFatherVisitsOrderBy? lastFatherVisit,
@@ -2302,9 +2087,6 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
   CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
   get editHistoryAggregate =>
       CopyWith_Input_HistoryEditHistoryAggregateOrderBy.stub(_res);
-
-  CopyWith_Input_FamiliesAdminsPhonesOrderBy<TRes> get familyAdminsPhones =>
-      CopyWith_Input_FamiliesAdminsPhonesOrderBy.stub(_res);
 
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit =>
       CopyWith_Input_HistoryLatestEditsOrderBy.stub(_res);
@@ -2622,6 +2404,164 @@ class Input_FamiliesSetInput {
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('notes') ? l$notes : const {},
       _$data.containsKey('status') ? l$status : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_FamiliesSetInput<TRes> {
+  factory CopyWith_Input_FamiliesSetInput(
+    Input_FamiliesSetInput instance,
+    TRes Function(Input_FamiliesSetInput) then,
+  ) = _CopyWithImpl_Input_FamiliesSetInput;
+
+  factory CopyWith_Input_FamiliesSetInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_FamiliesSetInput;
+
+  TRes call({
+    UuidValue? churchId,
+    int? color,
+    String? deceasedSpouseName,
+    DateTime? marriageDate,
+    String? name,
+    String? notes,
+    String? status,
+  });
+}
+
+class _CopyWithImpl_Input_FamiliesSetInput<TRes>
+    implements CopyWith_Input_FamiliesSetInput<TRes> {
+  _CopyWithImpl_Input_FamiliesSetInput(this._instance, this._then);
+
+  final Input_FamiliesSetInput _instance;
+
+  final TRes Function(Input_FamiliesSetInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? churchId = _undefined,
+    Object? color = _undefined,
+    Object? deceasedSpouseName = _undefined,
+    Object? marriageDate = _undefined,
+    Object? name = _undefined,
+    Object? notes = _undefined,
+    Object? status = _undefined,
+  }) => _then(
+    Input_FamiliesSetInput._({
+      ..._instance._$data,
+      if (churchId != _undefined) 'churchId': (churchId as UuidValue?),
+      if (color != _undefined) 'color': (color as int?),
+      if (deceasedSpouseName != _undefined)
+        'deceasedSpouseName': (deceasedSpouseName as String?),
+      if (marriageDate != _undefined)
+        'marriageDate': (marriageDate as DateTime?),
+      if (name != _undefined) 'name': (name as String?),
+      if (notes != _undefined) 'notes': (notes as String?),
+      if (status != _undefined) 'status': (status as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_FamiliesSetInput<TRes>
+    implements CopyWith_Input_FamiliesSetInput<TRes> {
+  _CopyWithStubImpl_Input_FamiliesSetInput(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? churchId,
+    int? color,
+    String? deceasedSpouseName,
+    DateTime? marriageDate,
+    String? name,
+    String? notes,
+    String? status,
+  }) => _res;
+}
+
+class Input_FamiliesStreamCursorInput {
+  factory Input_FamiliesStreamCursorInput({
+    required Input_FamiliesStreamCursorValueInput initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => Input_FamiliesStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
+
+  Input_FamiliesStreamCursorInput._(this._$data);
+
+  factory Input_FamiliesStreamCursorInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = data['initialValue'];
+    result$data['initialValue'] = Input_FamiliesStreamCursorValueInput.fromJson(
+      (l$initialValue as Map<String, dynamic>),
+    );
+    if (data.containsKey('ordering')) {
+      final l$ordering = data['ordering'];
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : fromJson_Enum_CursorOrdering((l$ordering as String));
+    }
+    return Input_FamiliesStreamCursorInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_FamiliesStreamCursorValueInput get initialValue =>
+      (_$data['initialValue'] as Input_FamiliesStreamCursorValueInput);
+
+  Enum_CursorOrdering? get ordering =>
+      (_$data['ordering'] as Enum_CursorOrdering?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = initialValue;
+    result$data['initialValue'] = l$initialValue.toJson();
+    if (_$data.containsKey('ordering')) {
+      final l$ordering = ordering;
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FamiliesStreamCursorInput<Input_FamiliesStreamCursorInput>
+  get copyWith => CopyWith_Input_FamiliesStreamCursorInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FamiliesStreamCursorInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$initialValue = initialValue;
+    final lOther$initialValue = other.initialValue;
+    if (l$initialValue != lOther$initialValue) {
+      return false;
+    }
+    final l$ordering = ordering;
+    final lOther$ordering = other.ordering;
+    if (_$data.containsKey('ordering') !=
+        other._$data.containsKey('ordering')) {
+      return false;
+    }
+    if (l$ordering != lOther$ordering) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$initialValue = initialValue;
+    final l$ordering = ordering;
+    return Object.hashAll([
+      l$initialValue,
+      _$data.containsKey('ordering') ? l$ordering : const {},
     ]);
   }
 }

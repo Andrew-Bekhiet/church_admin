@@ -26,7 +26,6 @@ mixin _$Family {
   String? get blurhash;
   List<Family>? get children;
   List<Family>? get parents;
-  Json? get familyAdminsPhones;
   List<PhoneContact> get contacts;
   LastRecordedByInfo? get lastEdit;
   LastRecordedByInfo? get lastVisit;
@@ -62,10 +61,6 @@ mixin _$Family {
                 other.blurhash == blurhash) &&
             const DeepCollectionEquality().equals(other.children, children) &&
             const DeepCollectionEquality().equals(other.parents, parents) &&
-            const DeepCollectionEquality().equals(
-              other.familyAdminsPhones,
-              familyAdminsPhones,
-            ) &&
             const DeepCollectionEquality().equals(other.contacts, contacts) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
@@ -79,7 +74,7 @@ mixin _$Family {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hashAll([
+  int get hashCode => Object.hash(
     runtimeType,
     id,
     name,
@@ -94,17 +89,16 @@ mixin _$Family {
     blurhash,
     const DeepCollectionEquality().hash(children),
     const DeepCollectionEquality().hash(parents),
-    const DeepCollectionEquality().hash(familyAdminsPhones),
     const DeepCollectionEquality().hash(contacts),
     lastEdit,
     lastVisit,
     lastFatherVisit,
     userCanEdit,
-  ]);
+  );
 
   @override
   String toString() {
-    return 'Family(id: $id, name: $name, address: $address, status: $status, marriageDate: $marriageDate, deceasedSpouseName: $deceasedSpouseName, church: $church, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, familyAdminsPhones: $familyAdminsPhones, contacts: $contacts, lastEdit: $lastEdit, lastVisit: $lastVisit, lastFatherVisit: $lastFatherVisit, userCanEdit: $userCanEdit)';
+    return 'Family(id: $id, name: $name, address: $address, status: $status, marriageDate: $marriageDate, deceasedSpouseName: $deceasedSpouseName, church: $church, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, contacts: $contacts, lastEdit: $lastEdit, lastVisit: $lastVisit, lastFatherVisit: $lastFatherVisit, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -132,7 +126,6 @@ abstract mixin class $FamilyCopyWith<$Res> {
     LastRecordedByInfo? lastEdit,
     LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastFatherVisit,
-    Map<String, dynamic>? familyAdminsPhones,
   });
 }
 
@@ -166,7 +159,6 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
     Object? lastEdit = freezed,
     Object? lastVisit = freezed,
     Object? lastFatherVisit = freezed,
-    Object? familyAdminsPhones = freezed,
   }) {
     return _then(
       Family(
@@ -242,10 +234,6 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
             ? _self.lastFatherVisit
             : lastFatherVisit // ignore: cast_nullable_to_non_nullable
                   as LastRecordedByInfo?,
-        familyAdminsPhones: freezed == familyAdminsPhones
-            ? _self.familyAdminsPhones
-            : familyAdminsPhones // ignore: cast_nullable_to_non_nullable
-                  as Map<String, dynamic>?,
       ),
     );
   }

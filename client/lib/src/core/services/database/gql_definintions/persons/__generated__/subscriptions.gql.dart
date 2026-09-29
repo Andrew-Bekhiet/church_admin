@@ -2082,21 +2082,7 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(
                   ),
                 ),
                 FieldNode(
-                  name: NameNode(value: 'mainPhone'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-                FieldNode(
                   name: NameNode(value: 'notes'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-                FieldNode(
-                  name: NameNode(value: 'otherPhones'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -2651,9 +2637,7 @@ class Subscription_watchPerson_personsByPk
     this.lastEdit,
     this.lastKodas,
     this.lastVisit,
-    this.mainPhone,
     this.notes,
-    required this.otherPhones,
     required this.martialStatus,
     this.personType,
     this.qualification,
@@ -2701,9 +2685,7 @@ class Subscription_watchPerson_personsByPk
     final l$lastEdit = json['lastEdit'];
     final l$lastKodas = json['lastKodas'];
     final l$lastVisit = json['lastVisit'];
-    final l$mainPhone = json['mainPhone'];
     final l$notes = json['notes'];
-    final l$otherPhones = json['otherPhones'];
     final l$martialStatus = json['martialStatus'];
     final l$personType = json['personType'];
     final l$qualification = json['qualification'];
@@ -2809,9 +2791,7 @@ class Subscription_watchPerson_personsByPk
           : Fragment_LatestVisitHistory.fromJson(
               (l$lastVisit as Map<String, dynamic>),
             ),
-      mainPhone: (l$mainPhone as String?),
       notes: (l$notes as String?),
-      otherPhones: (l$otherPhones as Json),
       martialStatus: (l$martialStatus as String),
       personType: l$personType == null
           ? null
@@ -2933,11 +2913,7 @@ class Subscription_watchPerson_personsByPk
 
   final Fragment_LatestVisitHistory? lastVisit;
 
-  final String? mainPhone;
-
   final String? notes;
-
-  final Json otherPhones;
 
   final String martialStatus;
 
@@ -3029,12 +3005,8 @@ class Subscription_watchPerson_personsByPk
     _resultData['lastKodas'] = l$lastKodas?.toJson();
     final l$lastVisit = lastVisit;
     _resultData['lastVisit'] = l$lastVisit?.toJson();
-    final l$mainPhone = mainPhone;
-    _resultData['mainPhone'] = l$mainPhone;
     final l$notes = notes;
     _resultData['notes'] = l$notes;
-    final l$otherPhones = otherPhones;
-    _resultData['otherPhones'] = l$otherPhones;
     final l$martialStatus = martialStatus;
     _resultData['martialStatus'] = l$martialStatus;
     final l$personType = personType;
@@ -3094,9 +3066,7 @@ class Subscription_watchPerson_personsByPk
     final l$lastEdit = lastEdit;
     final l$lastKodas = lastKodas;
     final l$lastVisit = lastVisit;
-    final l$mainPhone = mainPhone;
     final l$notes = notes;
-    final l$otherPhones = otherPhones;
     final l$martialStatus = martialStatus;
     final l$personType = personType;
     final l$qualification = qualification;
@@ -3140,9 +3110,7 @@ class Subscription_watchPerson_personsByPk
       l$lastEdit,
       l$lastKodas,
       l$lastVisit,
-      l$mainPhone,
       l$notes,
-      l$otherPhones,
       l$martialStatus,
       l$personType,
       l$qualification,
@@ -3338,19 +3306,9 @@ class Subscription_watchPerson_personsByPk
     if (l$lastVisit != lOther$lastVisit) {
       return false;
     }
-    final l$mainPhone = mainPhone;
-    final lOther$mainPhone = other.mainPhone;
-    if (l$mainPhone != lOther$mainPhone) {
-      return false;
-    }
     final l$notes = notes;
     final lOther$notes = other.notes;
     if (l$notes != lOther$notes) {
-      return false;
-    }
-    final l$otherPhones = otherPhones;
-    final lOther$otherPhones = other.otherPhones;
-    if (l$otherPhones != lOther$otherPhones) {
       return false;
     }
     final l$martialStatus = martialStatus;
@@ -3486,9 +3444,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     Fragment_LatestEditHistory? lastEdit,
     Fragment_LatestKodasHistory? lastKodas,
     Fragment_LatestVisitHistory? lastVisit,
-    String? mainPhone,
     String? notes,
-    Json? otherPhones,
     String? martialStatus,
     Subscription_watchPerson_personsByPk_personType? personType,
     Subscription_watchPerson_personsByPk_qualification? qualification,
@@ -3626,9 +3582,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
     Object? lastEdit = _undefined,
     Object? lastKodas = _undefined,
     Object? lastVisit = _undefined,
-    Object? mainPhone = _undefined,
     Object? notes = _undefined,
-    Object? otherPhones = _undefined,
     Object? martialStatus = _undefined,
     Object? personType = _undefined,
     Object? qualification = _undefined,
@@ -3730,13 +3684,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
       lastVisit: lastVisit == _undefined
           ? _instance.lastVisit
           : (lastVisit as Fragment_LatestVisitHistory?),
-      mainPhone: mainPhone == _undefined
-          ? _instance.mainPhone
-          : (mainPhone as String?),
       notes: notes == _undefined ? _instance.notes : (notes as String?),
-      otherPhones: otherPhones == _undefined || otherPhones == null
-          ? _instance.otherPhones
-          : (otherPhones as Json),
       martialStatus: martialStatus == _undefined || martialStatus == null
           ? _instance.martialStatus
           : (martialStatus as String),
@@ -4131,9 +4079,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     Fragment_LatestEditHistory? lastEdit,
     Fragment_LatestKodasHistory? lastKodas,
     Fragment_LatestVisitHistory? lastVisit,
-    String? mainPhone,
     String? notes,
-    Json? otherPhones,
     String? martialStatus,
     Subscription_watchPerson_personsByPk_personType? personType,
     Subscription_watchPerson_personsByPk_qualification? qualification,

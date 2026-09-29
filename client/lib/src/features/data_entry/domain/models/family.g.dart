@@ -305,10 +305,6 @@ Family _$FamilyFromJson(Map json) => Family(
       : LastRecordedByInfo.fromJson(
           Map<String, Object?>.from(json['lastFatherVisit'] as Map),
         ),
-  familyAdminsPhones:
-      (_readFamilyAdminsPhones(json, 'familyAdminsPhones') as Map?)?.map(
-        (k, e) => MapEntry(k as String, e),
-      ),
 );
 
 Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
@@ -331,7 +327,6 @@ Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
   'blurhash': instance.blurhash,
   'children': familyChildrenToJson(instance.children),
   'parents': familyParentsToJson(instance.parents),
-  'familyAdminsPhones': instance.familyAdminsPhones,
   'contacts': instance.contacts.map((e) => e.toJson()).toList(),
   'lastEdit': instance.lastEdit?.toJson(),
   'lastVisit': instance.lastVisit?.toJson(),
