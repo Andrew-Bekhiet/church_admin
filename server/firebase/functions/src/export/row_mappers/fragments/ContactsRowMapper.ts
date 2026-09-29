@@ -11,7 +11,7 @@ type Contact = {
 
 type FamilyAdminContact = Omit<Contact, "label"> & {
   personId: string | null;
-  personType: { id: string; name: string };
+  personType: { id: string; name: string; order: number | null };
 };
 
 export class ContactsRowMapper extends RowMapper {
@@ -65,8 +65,14 @@ export class ContactsRowMapper extends RowMapper {
       byRole.set(roleId, [...(byRole.get(roleId) ?? []), contact]);
     }
 
+    const roles = [...byRole.values()].sort(
+      ([a], [b]) =>
+        (a.personType.order ?? Infinity) - (b.personType.order ?? Infinity) ||
+        a.personType.name.localeCompare(b.personType.name),
+    );
+
     return Object.fromEntries(
-      [...byRole.values()].map((roleContacts) => {
+      roles.map((roleContacts) => {
         const chosen =
           roleContacts.find((c) => c.isMainPhone) ??
           roleContacts.reduce((a, b) => (b.createdAt < a.createdAt ? b : a));

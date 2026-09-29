@@ -76,6 +76,7 @@ query exportData(
         personType {
           id
           name
+          order
         }
       }
     }
