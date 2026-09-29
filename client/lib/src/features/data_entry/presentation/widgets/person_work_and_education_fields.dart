@@ -45,7 +45,6 @@ class PersonWorkAndEducationFields extends StatelessWidget {
         ),
         if (person.isStudent) ...[
           ObjectSelectionField<StudyYear, StudyYear?>(
-            key: PersonWorkAndEducationFieldsKeys.studyYearField,
             initialValue: person.studyYear,
             listController: (s) => ViewableObjectListController(
               objectsPaginatableStream: DatabaseService.I.metadata.studyYears
@@ -153,8 +152,4 @@ class PersonWorkAndEducationFields extends StatelessWidget {
       ],
     );
   }
-}
-
-abstract final class PersonWorkAndEducationFieldsKeys {
-  static const Key studyYearField = ValueKey('Person Study Year Field Key');
 }

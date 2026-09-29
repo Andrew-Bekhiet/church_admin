@@ -105,7 +105,6 @@ class _EditObjectDataState<T extends ViewableWithID>
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
-          key: EditObjectDataKeys.saveButton,
           label: const Text('حفظ'),
           icon: const Icon(Icons.save),
           onPressed: () => _controller.save(context),
@@ -113,8 +112,4 @@ class _EditObjectDataState<T extends ViewableWithID>
       ),
     );
   }
-}
-
-abstract final class EditObjectDataKeys {
-  static const Key saveButton = ValueKey('Edit Object Data Save Button Key');
 }

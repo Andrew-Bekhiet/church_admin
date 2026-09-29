@@ -37,7 +37,6 @@ class _PersonServiceSelectionPageState extends State<PersonServiceSelectionPage>
         title: SearchField(searchSink: search, autofocus: false),
         actions: [
           IconButton(
-            key: PersonServiceSelectionPageKeys.confirmButton,
             onPressed: () =>
                 Navigator.of(context).pop(selected.value.values.toSet()),
             icon: const Icon(Symbols.check),
@@ -104,7 +103,6 @@ class _PersonServiceSelectionPageState extends State<PersonServiceSelectionPage>
                 (selection) => selection.containsKey(s.id),
               ),
               builder: (context, entryChecked) => Checkbox(
-                key: PersonServiceSelectionPageKeys.serviceCheckbox(s.id),
                 onChanged: (c) {
                   if (c ?? false) {
                     selected.add({
@@ -133,13 +131,4 @@ class _PersonServiceSelectionPageState extends State<PersonServiceSelectionPage>
     unawaited(selected.close());
     super.dispose();
   }
-}
-
-abstract final class PersonServiceSelectionPageKeys {
-  static const Key confirmButton = ValueKey(
-    'Person Service Selection Confirm Button Key',
-  );
-
-  static Key serviceCheckbox(String serviceId) =>
-      ValueKey(('Person Service Selection Checkbox', serviceId));
 }
