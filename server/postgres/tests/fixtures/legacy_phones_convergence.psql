@@ -1,0 +1,16 @@
+create or replace function pg_temp.legacy_phones_converged(p_family_id uuid)
+returns boolean
+language sql
+as $$
+    select coalesce(bool_and((p.main_phone, p.other_phones) is not distinct from (l.main_phone, l.other_phones)), true)
+    from public.persons as p
+    cross join lateral public.legacy_phones_of(p.id) as l
+    where p.family_id = p_family_id;
+$$;
+
+create or replace function pg_temp.edit_count(p_person_id uuid)
+returns bigint
+language sql
+as $$
+    select count(*) from history.edit_history where "table" = 'persons' and record_id = p_person_id;
+$$;
