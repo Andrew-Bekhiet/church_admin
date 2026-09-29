@@ -1,0 +1,24 @@
+create or replace function pg_temp.make_household()
+returns table (
+    father_type uuid,
+    mother_type uuid,
+    child_type uuid,
+    family uuid,
+    mother uuid,
+    child uuid,
+    sibling uuid
+)
+language plpgsql
+as $$
+begin
+    father_type := pg_temp.make_person_type('أب', true);
+    mother_type := pg_temp.make_person_type('أم', true);
+    child_type := pg_temp.make_person_type('ابن', false);
+    family := pg_temp.make_family();
+    mother := pg_temp.make_person(family, mother_type);
+    child := pg_temp.make_person(family, child_type);
+    sibling := pg_temp.make_person(family, child_type);
+
+    return next;
+end;
+$$;
