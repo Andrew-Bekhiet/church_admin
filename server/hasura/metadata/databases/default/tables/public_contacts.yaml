@@ -48,8 +48,12 @@ insert_permissions:
                       _is_null: true
           - _and:
               - _or:
-                  - person_id:
-                      _is_null: true
+                  - _and:
+                      - person_id:
+                          _is_null: true
+                      - personType:
+                          is_family_admin:
+                            _eq: true
                   - person:
                       personType:
                         is_family_admin:
@@ -128,8 +132,12 @@ select_permissions:
                       _is_null: true
           - _and:
               - _or:
-                  - person_id:
-                      _is_null: true
+                  - _and:
+                      - person_id:
+                          _is_null: true
+                      - personType:
+                          is_family_admin:
+                            _eq: true
                   - person:
                       personType:
                         is_family_admin:
