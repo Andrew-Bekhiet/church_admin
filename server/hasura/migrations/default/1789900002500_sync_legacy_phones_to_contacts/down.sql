@@ -31,5 +31,6 @@ end;
 $$;
 
 drop function if exists public.legacy_phones_reverse(public.persons, text, jsonb);
+drop function if exists public.legacy_phones_diff_entries(jsonb, boolean, jsonb);
 drop function if exists public.legacy_phones_to_e164_or_raise(text);
 drop function if exists public.legacy_phones_canonical(text);

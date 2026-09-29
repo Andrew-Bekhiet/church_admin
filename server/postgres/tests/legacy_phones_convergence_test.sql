@@ -44,8 +44,8 @@ update public.persons set main_phone = main_phone where id = :'mother';
 
 select is(
     pg_temp.edit_count(:'mother'),
-    :'mother_count'::bigint + 1,
-    'an old client write that matches the contacts writes the person only once'
+    :'mother_count'::bigint,
+    'an old client write that matches the contacts records no edit'
 );
 
 update public.persons set main_phone = '01000000005' where id = :'mother';
