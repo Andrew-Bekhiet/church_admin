@@ -398,6 +398,18 @@ class Person extends ViewableWithIDAndImage
         !lastConfession!.time.isBefore(earliestDate);
   }
 
+  Person withFamilyAdminContacts(List<PhoneContact> loaded) {
+    final inheritedIds = {for (final c in familyAdminContacts) c.id};
+    final withoutInherited = copyWith(
+      family: family?.copyWith(contacts: loaded),
+      contacts: contacts.where((c) => !inheritedIds.contains(c.id)).toList(),
+    );
+
+    return withoutInherited.copyWith(
+      contacts: withoutInherited.contactsWithFamilyAdmins,
+    );
+  }
+
   Input_PersonsInsertInput toInsertInput() => Input_PersonsInsertInput(
     nationalId: nationalId,
     name: name,

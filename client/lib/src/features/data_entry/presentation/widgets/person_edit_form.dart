@@ -7,10 +7,12 @@ import 'package:permission_handler/permission_handler.dart';
 
 class PersonEditForm extends StatefulWidget {
   final EditObjectController<Person> controller;
+  final PersonContactsController contactsController;
   final bool classesAndGroupsLoaded;
   final Family? withFamily;
   const PersonEditForm({
     required this.controller,
+    required this.contactsController,
     required this.classesAndGroupsLoaded,
     required this.withFamily,
     super.key,
@@ -20,22 +22,13 @@ class PersonEditForm extends StatefulWidget {
 }
 
 class _PersonEditFormState extends State<PersonEditForm> {
-  final PaginatableStreamBase<PersonType> _personTypes = DatabaseService
-      .I
-      .metadata
-      .personTypes
-      .streamAll();
-  StreamSubscription<List<PersonType>>? _personTypesSubscription;
-  List<PersonType> _familyAdminTypes = const [];
-
   @override
   void initState() {
     super.initState();
-    _personTypesSubscription = _personTypes.listen(
-      (types) => setState(
-        () => _familyAdminTypes = types.where((t) => t.isFamilyAdmin).toList(),
-      ),
-    );
+    final family = widget.controller.newObject.family;
+    if (widget.controller.isCreate && family != null) {
+      unawaited(_loadFamilyContacts(family));
+    }
   }
 
   @override
@@ -45,18 +38,21 @@ class _PersonEditFormState extends State<PersonEditForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        PersonContactFields(
-          person: person,
-          onNameChanged: (value) =>
-              _update((p) => p.copyWith(name: value.trim())),
-          onNationalIdChanged: (value) =>
-              _update((p) => p.copyWith(nationalId: int.tryParse(value))),
-          onImportFromContacts: _importFromContacts,
-          familyAdminTypes: _familyAdminTypes,
-          onContactsChanged: (value) =>
-              _updateAndRebuild((p) => p.copyWith(contacts: value)),
-          onBirthdateChanged: (value) =>
-              _update((p) => p.copyWith(birthdate: value)),
+        ListenableBuilder(
+          listenable: widget.contactsController,
+          builder: (context, _) => PersonContactFields(
+            person: person,
+            onNameChanged: (value) =>
+                _update((p) => p.copyWith(name: value.trim())),
+            onNationalIdChanged: (value) =>
+                _update((p) => p.copyWith(nationalId: int.tryParse(value))),
+            onImportFromContacts: _importFromContacts,
+            familyAdminTypes: widget.contactsController.familyAdminTypes,
+            onContactsChanged: (value) =>
+                _updateAndRebuild((p) => p.copyWith(contacts: value)),
+            onBirthdateChanged: (value) =>
+                _update((p) => p.copyWith(birthdate: value)),
+          ),
         ),
         PersonFamilyAndAddressFields(
           person: person,
@@ -159,13 +155,6 @@ class _PersonEditFormState extends State<PersonEditForm> {
     );
   }
 
-  @override
-  void dispose() {
-    unawaited(_personTypesSubscription?.cancel());
-    unawaited(_personTypes.dispose());
-    super.dispose();
-  }
-
   void _update(Person Function(Person) change) {
     widget.controller.newObject = change(widget.controller.newObject);
   }
@@ -214,6 +203,27 @@ class _PersonEditFormState extends State<PersonEditForm> {
     }
   }
 
+  Future<void> _loadFamilyContacts(Family? family) async {
+    final List<PhoneContact> loaded;
+    try {
+      loaded = switch (family) {
+        Family(:final id) =>
+          await widget.contactsController.familyAdminContacts(id),
+        null => const <PhoneContact>[],
+      };
+    } on Exception catch (e, stackTrace) {
+      await LoggingService.I.warning(
+        LogRecord(error: e, stackTrace: stackTrace),
+      );
+
+      return;
+    }
+    if (!mounted || widget.controller.newObject.family?.id != family?.id) {
+      return;
+    }
+    _updateAndRebuild((p) => p.withFamilyAdminContacts(loaded));
+  }
+
   void _changeFamily(Family? family) {
     final initialFamilyId =
         widget.controller.initialObject?.family?.id ?? widget.withFamily?.id;
@@ -238,6 +248,7 @@ class _PersonEditFormState extends State<PersonEditForm> {
         },
       ),
     );
+    if (widget.controller.isCreate) unawaited(_loadFamilyContacts(family));
   }
 
   Future<void> _selectServices(

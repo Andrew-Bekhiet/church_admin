@@ -28,6 +28,8 @@ class EditPerson extends StatefulWidget {
 
 class _EditPersonState extends State<EditPerson> {
   late EditObjectController<Person> _controller;
+  final PersonContactsController _contactsController =
+      PersonContactsController.fromDatabase();
   bool _classesAndGroupsLoaded = false;
 
   Person get initialPerson => _controller.initialObject!;
@@ -96,10 +98,17 @@ class _EditPersonState extends State<EditPerson> {
           widget.person != null && widget.person?.user?.email == null,
       builder: (context, controller) => PersonEditForm(
         controller: controller,
+        contactsController: _contactsController,
         classesAndGroupsLoaded: _classesAndGroupsLoaded,
         withFamily: widget.withFamily,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _contactsController.dispose();
+    super.dispose();
   }
 
   void _loadPersonServicesClassesGroups() {
