@@ -111,8 +111,8 @@ class FamiliesDAO extends FullCRUDDAO<Family> {
     return PaginatableStream(
       parametersStream: Rx.combineLatest3(
         searchQuery ?? Stream.value(null),
-        where ?? Stream.value(<Filter>[]),
-        orderBy ?? Stream.value(<OrderBy>[]),
+        where ?? Stream.value(null),
+        orderBy ?? Stream.value(null),
         (search, where, orderBy) => StreamableDAOParameters<Family>(
           search: search,
           where: where,
