@@ -243,22 +243,21 @@ void main() {
       });
 
       Future<int?> displayedPhotoWidth() async {
-        for (var frame = 0; frame < 20; frame++) {
-          await tester.runAsync(
-            () => Future<void>.delayed(const Duration(milliseconds: 10)),
-          );
-          await tester.pump();
+        await tester.pump();
 
-          final rawImages = find.descendant(
-            of: find.byType(ImageObjectWidget),
-            matching: find.byType(RawImage),
-          );
-          if (rawImages.evaluate().isNotEmpty) {
-            return tester.widget<RawImage>(rawImages.first).image?.width;
-          }
-        }
+        final photo = find.descendant(
+          of: find.byType(ImageObjectWidget),
+          matching: find.byType(Image),
+        );
+        await tester.runAsync(
+          () => precacheImage(
+            tester.widget<Image>(photo).image,
+            tester.element(photo),
+          ),
+        );
+        await tester.pump();
 
-        return null;
+        return tester.widget<RawImage>(find.byType(RawImage)).image?.width;
       }
 
       await tester.pumpWidgetBuilder(
