@@ -1,4 +1,5 @@
 export 'widgets/animated_fab.dart';
+export 'widgets/app_switcher_privacy_cover.dart';
 export 'widgets/ca_error_dialog.dart';
 export 'widgets/ca_error_widget.dart';
 export 'widgets/church_admin_splash_screen.dart';
@@ -9,5 +10,6 @@ export 'widgets/service_hierarchy_classes.dart';
 export 'widgets/service_hierarchy_groups.dart';
 export 'widgets/service_hierarchy_tile.dart';
 export 'widgets/services_hierarchy_list.dart';
+export 'widgets/splash_branding.dart';
 export 'widgets/switching_fab.dart';
 export 'widgets/title_search_field.dart';

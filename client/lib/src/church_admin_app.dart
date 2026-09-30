@@ -41,6 +41,8 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
           theme: themeData.requireData,
           scaffoldMessengerKey: scaffoldMessengerKey,
           routerConfig: $appRouter,
+          builder: (context, child) =>
+              AppSwitcherPrivacyCover(child: child ?? const SizedBox.shrink()),
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
