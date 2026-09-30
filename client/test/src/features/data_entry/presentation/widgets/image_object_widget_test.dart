@@ -11,18 +11,20 @@ import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:photo_view/photo_view.dart';
 
-import 'image_object_widget_test.mocks.dart';
+class MockImageUrlCacheService extends Mock implements ImageUrlCacheService {}
 
-@GenerateNiceMocks([
-  MockSpec<ImageUrlCacheService>(),
-  MockSpec<ViewableObjectService>(),
-  MockSpec<BaseCacheManager>(),
-])
+class MockViewableObjectService extends Mock implements ViewableObjectService {}
+
+class MockBaseCacheManager extends Mock implements BaseCacheManager {}
+
 void main() {
+  setUpAll(() {
+    registerFallbackValue(const FunctionsObjectImageInfo('table', 'id'));
+    registerFallbackValue(Person(id: 'id', name: 'name'));
+  });
   setUp(_setUp);
   tearDown(resetGlobalProviderContainer);
 
@@ -144,8 +146,10 @@ void main() {
       final imageUrlCacheService =
           globalProviderContainer.read(imageUrlCacheServiceProvider)
               as MockImageUrlCacheService;
-      when(imageUrlCacheService.getCachedImageUrl(any)).thenReturn(null);
-      when(imageUrlCacheService.getImageUrl(any)).thenAnswer(
+      when(
+        () => imageUrlCacheService.getCachedImageUrl(any()),
+      ).thenReturn(null);
+      when(() => imageUrlCacheService.getImageUrl(any())).thenAnswer(
         (i) => urlCompleters
             .putIfAbsent(
               (i.positionalArguments.first as ObjectImageInfo).cacheKey,
@@ -171,11 +175,11 @@ void main() {
           globalProviderContainer.read(baseCacheManagerProvider)
               as MockBaseCacheManager;
       verifyNever(
-        cacheManager.getFileStream(
+        () => cacheManager.getFileStream(
           'urlA',
           key: personB.imageInfo.cacheKey,
-          headers: anyNamed('headers'),
-          withProgress: anyNamed('withProgress'),
+          headers: any(named: 'headers'),
+          withProgress: any(named: 'withProgress'),
         ),
       );
 
@@ -359,11 +363,11 @@ Override _setUpCacheManager() {
   final mockBaseCacheManager = MockBaseCacheManager();
 
   when(
-    mockBaseCacheManager.getFileStream(
-      any,
-      key: anyNamed('key'),
-      headers: anyNamed('headers'),
-      withProgress: anyNamed('withProgress'),
+    () => mockBaseCacheManager.getFileStream(
+      any(),
+      key: any(named: 'key'),
+      headers: any(named: 'headers'),
+      withProgress: any(named: 'withProgress'),
     ),
   ).thenAnswer((i) async* {
     final url = i.positionalArguments.first;
@@ -387,25 +391,20 @@ Override _setUpCacheManager() {
 Override _setUpImageUrlCacheService() {
   final imageUrlCacheService = MockImageUrlCacheService();
   when(
-    imageUrlCacheService.getNonExpiredCachedImageUrl(any),
-  ).thenReturn('cachedImageUrl');
-  when(
-    imageUrlCacheService.getCachedImageUrl(any),
+    () => imageUrlCacheService.getCachedImageUrl(any()),
   ).thenReturn('maybeExpiredImageUrl');
   when(
-    imageUrlCacheService.getImageUrl(any),
+    () => imageUrlCacheService.getImageUrl(any()),
   ).thenAnswer((_) => Future.value('imageUrl'));
 
   return imageUrlCacheServiceProvider.overrideWithValue(imageUrlCacheService);
 }
 
 Override _setUpViewableObjectService() {
-  provideDummy<IconData>(Symbols.person);
-
   final viewableObjectService = MockViewableObjectService();
 
   when(
-    viewableObjectService.getDefaultIconFor<Person>(any),
+    () => viewableObjectService.getDefaultIconFor<IImage>(any()),
   ).thenReturn(Symbols.person);
 
   return viewableObjectServiceProvider.overrideWithValue(viewableObjectService);
