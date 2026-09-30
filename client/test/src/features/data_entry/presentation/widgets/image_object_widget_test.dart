@@ -71,7 +71,7 @@ void main() {
             if (imageProvider is! CachedNetworkImageProvider) return false;
 
             return imageProvider.url == 'imageUrl' &&
-                imageProvider.cacheKey == person.imageInfo.cacheKey &&
+                imageProvider.cacheKey == person.imageInfo.photoCacheKey &&
                 imageProvider.cacheManager ==
                     globalProviderContainer.read(baseCacheManagerProvider);
           },
@@ -89,7 +89,7 @@ void main() {
             if (imageProvider is! CachedNetworkImageProvider) return false;
 
             return imageProvider.url == 'maybeExpiredImageUrl' &&
-                imageProvider.cacheKey == person.imageInfo.cacheKey &&
+                imageProvider.cacheKey == person.imageInfo.photoCacheKey &&
                 imageProvider.cacheManager ==
                     globalProviderContainer.read(baseCacheManagerProvider);
           },
@@ -177,7 +177,7 @@ void main() {
       verifyNever(
         () => cacheManager.getFileStream(
           'urlA',
-          key: personB.imageInfo.cacheKey,
+          key: personB.imageInfo.photoCacheKey,
           headers: any(named: 'headers'),
           withProgress: any(named: 'withProgress'),
         ),
@@ -185,6 +185,94 @@ void main() {
 
       urlCompleters[personB.imageInfo.cacheKey]!.complete('urlB');
       await tester.pump();
+    },
+  );
+
+  testWidgets(
+    'a person whose photo was replaced shows the new photo',
+    (tester) async {
+      final personWithOldPhoto = Person(
+        id: 'id',
+        name: 'name',
+        photoUpdatedAt: DateTime(2024),
+      );
+      final personWithNewPhoto = personWithOldPhoto.copyWith(
+        photoUpdatedAt: DateTime(2025),
+      );
+      final photoUrls = {
+        personWithOldPhoto.photoUpdatedAt: 'oldPhotoUrl',
+        personWithNewPhoto.photoUpdatedAt: 'newPhotoUrl',
+      };
+      final photoBytesByUrl = {
+        'oldPhotoUrl': transparentImage,
+        'newPhotoUrl': twoPixelWideTransparentImage,
+      };
+
+      final imageUrlCacheService =
+          globalProviderContainer.read(imageUrlCacheServiceProvider)
+              as MockImageUrlCacheService;
+      when(() => imageUrlCacheService.getCachedImageUrl(any())).thenAnswer(
+        (i) =>
+            photoUrls[(i.positionalArguments.first as ObjectImageInfo)
+                .lastUpdatedTime],
+      );
+      when(() => imageUrlCacheService.getImageUrl(any())).thenAnswer(
+        (i) async =>
+            photoUrls[(i.positionalArguments.first as ObjectImageInfo)
+                .lastUpdatedTime]!,
+      );
+      final cacheManager =
+          globalProviderContainer.read(baseCacheManagerProvider)
+              as MockBaseCacheManager;
+      when(
+        () => cacheManager.getFileStream(
+          any(),
+          key: any(named: 'key'),
+          headers: any(named: 'headers'),
+          withProgress: any(named: 'withProgress'),
+        ),
+      ).thenAnswer((i) async* {
+        final url = i.positionalArguments.first as String;
+
+        yield FileInfo(
+          MockFile(photoBytesByUrl[url]),
+          FileSource.Cache,
+          DateTime(2050),
+          url,
+        );
+      });
+
+      Future<int?> displayedPhotoWidth() async {
+        for (var frame = 0; frame < 20; frame++) {
+          await tester.runAsync(
+            () => Future<void>.delayed(const Duration(milliseconds: 10)),
+          );
+          await tester.pump();
+
+          final rawImages = find.descendant(
+            of: find.byType(ImageObjectWidget),
+            matching: find.byType(RawImage),
+          );
+          if (rawImages.evaluate().isNotEmpty) {
+            return tester.widget<RawImage>(rawImages.first).image?.width;
+          }
+        }
+
+        return null;
+      }
+
+      await tester.pumpWidgetBuilder(
+        Scaffold(body: ImageObjectWidget(personWithOldPhoto)),
+        wrapper: materialAppWrapper(),
+      );
+      expect(await displayedPhotoWidth(), 1);
+
+      await tester.pumpWidgetBuilder(
+        Scaffold(body: ImageObjectWidget(personWithNewPhoto)),
+        wrapper: materialAppWrapper(),
+      );
+
+      expect(await displayedPhotoWidth(), 2);
     },
   );
 
@@ -411,9 +499,13 @@ Override _setUpViewableObjectService() {
 }
 
 class MockFile extends Fake implements File {
+  final Uint8List bytes;
+
+  MockFile([Uint8List? bytes]) : bytes = bytes ?? transparentImage;
+
   @override
   Uint8List readAsBytesSync() {
-    return transparentImage;
+    return bytes;
   }
 
   @override
@@ -426,4 +518,10 @@ final transparentImage = base64Decode(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAY'
   'AAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEh'
   'QGAhKmMIQAAAABJRU5ErkJggg==',
+);
+
+final twoPixelWideTransparentImage = base64Decode(
+  'iVBORw0KGgoAAAANSUhEUgAAAAIAAAABCAY'
+  'AAAD0In+KAAAAC0lEQVR4nGNggAIAAAkAA'
+  'ftSuKkAAAAASUVORK5CYII=',
 );

@@ -6,9 +6,14 @@ abstract class ObjectImageInfo with Equatable {
 
   DateTime? get lastUpdatedTime;
 
+  String get photoCacheKey => photoCacheKeyAt(lastUpdatedTime);
+
   @override
   List<Object?> get props => [cacheKey, lastUpdatedTime];
   const ObjectImageInfo();
+
+  String photoCacheKeyAt(DateTime? updatedTime) =>
+      '$cacheKey@${updatedTime?.toIso8601String()}';
 
   Future<String> getDownloadUrl();
 
