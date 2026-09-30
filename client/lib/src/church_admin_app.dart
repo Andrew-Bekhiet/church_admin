@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -41,8 +42,15 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
           theme: themeData.requireData,
           scaffoldMessengerKey: scaffoldMessengerKey,
           routerConfig: $appRouter,
-          builder: (context, child) =>
-              AppSwitcherPrivacyCover(child: child ?? const SizedBox.shrink()),
+          builder: (context, child) => AppSwitcherPrivacyCover(
+            child: kIsWeb
+                ? child ?? const SizedBox.shrink()
+                : LocalAuthLock(
+                    router: $appRouter,
+                    protectedLocation: const HomeScreenRoute().location,
+                    child: child ?? const SizedBox.shrink(),
+                  ),
+          ),
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

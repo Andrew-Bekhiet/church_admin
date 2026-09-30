@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rxdart/rxdart.dart';
@@ -124,18 +123,6 @@ void main() {
 
   tearDown(defaultTearDown);
 
-  testWidgets('unlocked home screen has no authentication overlay', (
-    tester,
-  ) async {
-    await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
-    await tester.pump();
-
-    expect(find.byType(BiometricsAuthScreen), findsNothing);
-    await tester.pumpWidget(const SizedBox.shrink());
-    resetGlobalProviderContainer();
-    await tester.pump();
-  });
-
   testWidgets('unmounting the home screen leaves the shared home bloc open', (
     tester,
   ) async {
@@ -156,47 +143,5 @@ void main() {
     await tester.pump();
 
     expect(homeBloc.isClosed, isTrue);
-  });
-
-  testWidgets('signing out from the lock screen leaves it for the login page', (
-    tester,
-  ) async {
-    when(() => LocalAuthService.I.shouldAuthenticate).thenReturn(true);
-
-    final signedIn = ValueNotifier(true);
-    addTearDown(signedIn.dispose);
-    final router = GoRouter(
-      refreshListenable: signedIn,
-      redirect: (_, state) =>
-          signedIn.value || state.matchedLocation == '/login' ? null : '/login',
-      routes: [
-        GoRoute(path: '/', builder: (_, _) => const HomeScreen()),
-        GoRoute(path: '/login', builder: (_, _) => const SizedBox.shrink()),
-      ],
-    );
-    addTearDown(router.dispose);
-
-    await tester.pumpWidget(MaterialApp.router(routerConfig: router));
-    await tester.pump();
-
-    expect(
-      find.byType(BiometricsAuthScreen, skipOffstage: false),
-      findsOneWidget,
-    );
-
-    when(() => authBloc.isSignedIn).thenReturn(false);
-    authStates.add(const AuthUnauthenticated());
-    signedIn.value = false;
-    await tester.pump(const Duration(seconds: 1));
-    await tester.pump();
-
-    expect(
-      find.byType(BiometricsAuthScreen, skipOffstage: false),
-      findsNothing,
-    );
-
-    await tester.pumpWidget(const SizedBox.shrink());
-    resetGlobalProviderContainer();
-    await tester.pump();
   });
 }

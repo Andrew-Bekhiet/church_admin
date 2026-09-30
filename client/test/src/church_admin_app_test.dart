@@ -120,9 +120,13 @@ Override _setUpAuthBloc() {
   return authBlocProvider.overrideWithValue(mock);
 }
 
-List<Override> _setUp({bool withAuthBloc = true}) {
+List<Override> _setUp({
+  bool withAuthBloc = true,
+  bool withLocalAuthService = true,
+}) {
   final overrides = [
     if (withAuthBloc) _setUpAuthBloc(),
+    if (withLocalAuthService) _setUpUnlockedLocalAuthService(),
     _setUpLoggingService(),
     userPreferencesServiceProvider.overrideWithValue(
       FakeUserPreferencesService(),
@@ -140,6 +144,15 @@ List<Override> _setUp({bool withAuthBloc = true}) {
   initGlobalProviderContainer(overrides);
 
   return overrides;
+}
+
+Override _setUpUnlockedLocalAuthService() {
+  final mock = MockLocalAuthService();
+
+  when(mock.shouldAuthenticate).thenReturn(false);
+  when(mock.refreshUIStream).thenAnswer((_) => const Stream.empty());
+
+  return localAuthServiceProvider.overrideWithValue(mock);
 }
 
 Override _setUpConnectivityService() {
@@ -253,11 +266,11 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
   Future<FirstScreenVariantEnum> setUp(FirstScreenVariantEnum value) async {
     await super.setUp(value);
 
-    final overrides = [..._setUp(withAuthBloc: false), _setUpAuthBloc(value)];
-
-    if (value != FirstScreenVariantEnum.login) {
-      overrides.add(_setUpLocalAuthService(value));
-    }
+    final overrides = [
+      ..._setUp(withAuthBloc: false, withLocalAuthService: false),
+      _setUpAuthBloc(value),
+      _setUpLocalAuthService(value),
+    ];
     if (value == FirstScreenVariantEnum.authenticate) {
       final authRepository = _AuthRepositoryMock();
       mocktail
@@ -277,6 +290,9 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     when(
       mockLocalAuthService.shouldAuthenticate,
     ).thenReturn(value == FirstScreenVariantEnum.authenticate);
+    when(
+      mockLocalAuthService.refreshUIStream,
+    ).thenAnswer((_) => const Stream.empty());
     when(
       mockLocalAuthService.canCheckBiometrics(),
     ).thenAnswer((_) async => false);
