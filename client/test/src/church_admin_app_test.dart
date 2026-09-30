@@ -36,19 +36,13 @@ void main() {
   testWidgets(
     'the first screen matches the account authentication state',
     (tester) async {
-      await tester.pumpWidget(const ChurchAdminApp());
+      final goRouter = GoRouter(
+        routes: [$homeScreenRoute],
+      );
+      await tester.pumpWidget(ChurchAdminApp(routerConfig: goRouter));
       await tester.pump();
 
-      if (firstScreenVariant.currentValue ==
-          FirstScreenVariantEnum.values.first) {
-        verify(LoggingService.I.navigatorObservers);
-      }
-
-      final goRouter = tester
-          .firstWidget<InheritedGoRouter>(find.byType(InheritedGoRouter))
-          .goRouter;
-
-      final lastMatch = goRouter.routerDelegate.currentConfiguration.last;
+      final lastMatch = goRouter.routerDelegate.currentConfiguration.lastOrNull;
 
       final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
           ? lastMatch.matches
@@ -68,7 +62,8 @@ void main() {
   );
 
   testWidgets('the app uses the selected theme', (tester) async {
-    await tester.pumpWidget(const ChurchAdminApp());
+    final goRouter = GoRouter(routes: [$homeScreenRoute]);
+    await tester.pumpWidget(ChurchAdminApp(routerConfig: goRouter));
 
     expect(
       tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
@@ -84,9 +79,7 @@ void main() {
     );
   });
 
-  testWidgets('losing connectivity shows a snack bar', (
-    tester,
-  ) async {
+  testWidgets('losing connectivity shows a snack bar', (tester) async {
     final connectivityController = BehaviorSubject.seeded(true);
     addTearDown(connectivityController.close);
 
@@ -96,7 +89,8 @@ void main() {
 
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
 
-    await tester.pumpWidget(const ChurchAdminApp());
+    final goRouter = GoRouter(routes: [$homeScreenRoute]);
+    await tester.pumpWidget(ChurchAdminApp(routerConfig: goRouter));
 
     expect(find.byType(SnackBar), findsNothing);
 

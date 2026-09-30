@@ -8,12 +8,12 @@ import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LocalAuthLock extends StatefulWidget {
-  final GoRouter router;
+  final RouterDelegate<RouteMatchList> routerDelegate;
   final String protectedLocation;
   final Widget child;
 
   const LocalAuthLock({
-    required this.router,
+    required this.routerDelegate,
     required this.protectedLocation,
     required this.child,
     super.key,
@@ -37,7 +37,7 @@ class _LocalAuthLockState extends State<LocalAuthLock>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    widget.router.routerDelegate.addListener(_updateLock);
+    widget.routerDelegate.addListener(_updateLock);
     _authChangesListener = Rx.merge<Object?>([
       AuthBloc.I.isSignedInStream,
       LocalAuthService.I.refreshUIStream,
@@ -47,9 +47,9 @@ class _LocalAuthLockState extends State<LocalAuthLock>
   @override
   void didUpdateWidget(LocalAuthLock oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.router != widget.router) {
-      oldWidget.router.routerDelegate.removeListener(_updateLock);
-      widget.router.routerDelegate.addListener(_updateLock);
+    if (oldWidget.routerDelegate != widget.routerDelegate) {
+      oldWidget.routerDelegate.removeListener(_updateLock);
+      widget.routerDelegate.addListener(_updateLock);
     }
 
     _isLocked = _mustLock();
@@ -89,7 +89,7 @@ class _LocalAuthLockState extends State<LocalAuthLock>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    widget.router.routerDelegate.removeListener(_updateLock);
+    widget.routerDelegate.removeListener(_updateLock);
     unawaited(_authChangesListener.cancel());
     super.dispose();
   }
@@ -113,10 +113,9 @@ class _LocalAuthLockState extends State<LocalAuthLock>
   bool _mustLock() {
     final isProtectedLocationOpen =
         widget
-            .router
             .routerDelegate
             .currentConfiguration
-            .matches
+            ?.matches
             .firstOrNull
             ?.matchedLocation ==
         widget.protectedLocation;

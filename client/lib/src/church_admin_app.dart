@@ -4,11 +4,14 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 
 class ChurchAdminApp extends StatefulWidget {
-  const ChurchAdminApp({super.key});
+  final RouterConfig<RouteMatchList> routerConfig;
+
+  const ChurchAdminApp({required this.routerConfig, super.key});
 
   @override
   State<ChurchAdminApp> createState() => _ChurchAdminAppState();
@@ -41,12 +44,12 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
           debugShowCheckedModeBanner: false,
           theme: themeData.requireData,
           scaffoldMessengerKey: scaffoldMessengerKey,
-          routerConfig: $appRouter,
+          routerConfig: widget.routerConfig,
           builder: (context, child) => AppSwitcherPrivacyCover(
             child: kIsWeb
                 ? child ?? const SizedBox.shrink()
                 : LocalAuthLock(
-                    router: $appRouter,
+                    routerDelegate: widget.routerConfig.routerDelegate,
                     protectedLocation: const HomeScreenRoute().location,
                     child: child ?? const SizedBox.shrink(),
                   ),

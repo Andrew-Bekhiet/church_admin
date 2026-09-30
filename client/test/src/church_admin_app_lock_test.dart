@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rxdart/rxdart.dart';
@@ -70,15 +71,22 @@ void main() {
     'a page opened from home is hidden behind the lock screen once '
     're-authentication is due',
     (tester) async {
+      final goRouter = GoRouter(
+        routes: [$homeScreenRoute, $settingsRoute],
+      );
       tester.view
         ..physicalSize = const Size(1170, 2532)
         ..devicePixelRatio = 3;
       addTearDown(tester.view.reset);
       tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
-      await tester.pumpWidget(const ChurchAdminApp());
+      await tester.pumpWidget(
+        ChurchAdminApp(
+          routerConfig: goRouter,
+        ),
+      );
       await tester.pump();
 
-      $appRouter.go(const SettingsRoute().location);
+      goRouter.go(const SettingsRoute().location);
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
 

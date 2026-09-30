@@ -96,7 +96,7 @@ void main() {
       MaterialApp.router(
         routerConfig: router,
         builder: (context, child) => LocalAuthLock(
-          router: router,
+          routerDelegate: router.routerDelegate,
           protectedLocation: '/',
           child: child ?? const SizedBox.shrink(),
         ),
