@@ -29,6 +29,9 @@ class LocalAuthService with WidgetsBindingObserver {
   final StreamController<void> _refreshUI = StreamController.broadcast()
     ..add(null);
 
+  bool get isAuthenticationInProgress =>
+      !(_localAuthCompleter?.isCompleted ?? true);
+
   bool get shouldAuthenticate {
     if (_shouldAuthenticate) return true;
     if (_lastActiveAt case final lastActiveAt?) {

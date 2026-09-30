@@ -34,7 +34,13 @@ Future<void> main() async {
   runApp(
     UncontrolledProviderScope(
       container: globalProviderContainer,
-      child: PostHogWidget(child: SentryWidget(child: const ChurchAdminApp())),
+      child: PostHogWidget(
+        child: SentryWidget(
+          child: ChurchAdminApp(
+            routerConfig: $appRouter,
+          ),
+        ),
+      ),
     ),
   );
 }

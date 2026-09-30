@@ -755,6 +755,15 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
           as _i2.AuthRepository);
 
   @override
+  bool get isAuthenticationInProgress =>
+      (super.noSuchMethod(
+            Invocation.getter(#isAuthenticationInProgress),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   bool get shouldAuthenticate =>
       (super.noSuchMethod(
             Invocation.getter(#shouldAuthenticate),

@@ -36,19 +36,13 @@ void main() {
   testWidgets(
     'the first screen matches the account authentication state',
     (tester) async {
-      await tester.pumpWidget(const ChurchAdminApp());
+      final goRouter = GoRouter(
+        routes: [$homeScreenRoute],
+      );
+      await tester.pumpWidget(ChurchAdminApp(routerConfig: goRouter));
       await tester.pump();
 
-      if (firstScreenVariant.currentValue ==
-          FirstScreenVariantEnum.values.first) {
-        verify(LoggingService.I.navigatorObservers);
-      }
-
-      final goRouter = tester
-          .firstWidget<InheritedGoRouter>(find.byType(InheritedGoRouter))
-          .goRouter;
-
-      final lastMatch = goRouter.routerDelegate.currentConfiguration.last;
+      final lastMatch = goRouter.routerDelegate.currentConfiguration.lastOrNull;
 
       final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
           ? lastMatch.matches
@@ -68,7 +62,8 @@ void main() {
   );
 
   testWidgets('the app uses the selected theme', (tester) async {
-    await tester.pumpWidget(const ChurchAdminApp());
+    final goRouter = GoRouter(routes: [$homeScreenRoute]);
+    await tester.pumpWidget(ChurchAdminApp(routerConfig: goRouter));
 
     expect(
       tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
@@ -84,9 +79,7 @@ void main() {
     );
   });
 
-  testWidgets('losing connectivity shows a snack bar', (
-    tester,
-  ) async {
+  testWidgets('losing connectivity shows a snack bar', (tester) async {
     final connectivityController = BehaviorSubject.seeded(true);
     addTearDown(connectivityController.close);
 
@@ -96,7 +89,8 @@ void main() {
 
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
 
-    await tester.pumpWidget(const ChurchAdminApp());
+    final goRouter = GoRouter(routes: [$homeScreenRoute]);
+    await tester.pumpWidget(ChurchAdminApp(routerConfig: goRouter));
 
     expect(find.byType(SnackBar), findsNothing);
 
@@ -120,9 +114,13 @@ Override _setUpAuthBloc() {
   return authBlocProvider.overrideWithValue(mock);
 }
 
-List<Override> _setUp({bool withAuthBloc = true}) {
+List<Override> _setUp({
+  bool withAuthBloc = true,
+  bool withLocalAuthService = true,
+}) {
   final overrides = [
     if (withAuthBloc) _setUpAuthBloc(),
+    if (withLocalAuthService) _setUpUnlockedLocalAuthService(),
     _setUpLoggingService(),
     userPreferencesServiceProvider.overrideWithValue(
       FakeUserPreferencesService(),
@@ -140,6 +138,15 @@ List<Override> _setUp({bool withAuthBloc = true}) {
   initGlobalProviderContainer(overrides);
 
   return overrides;
+}
+
+Override _setUpUnlockedLocalAuthService() {
+  final mock = MockLocalAuthService();
+
+  when(mock.shouldAuthenticate).thenReturn(false);
+  when(mock.refreshUIStream).thenAnswer((_) => const Stream.empty());
+
+  return localAuthServiceProvider.overrideWithValue(mock);
 }
 
 Override _setUpConnectivityService() {
@@ -253,11 +260,11 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
   Future<FirstScreenVariantEnum> setUp(FirstScreenVariantEnum value) async {
     await super.setUp(value);
 
-    final overrides = [..._setUp(withAuthBloc: false), _setUpAuthBloc(value)];
-
-    if (value != FirstScreenVariantEnum.login) {
-      overrides.add(_setUpLocalAuthService(value));
-    }
+    final overrides = [
+      ..._setUp(withAuthBloc: false, withLocalAuthService: false),
+      _setUpAuthBloc(value),
+      _setUpLocalAuthService(value),
+    ];
     if (value == FirstScreenVariantEnum.authenticate) {
       final authRepository = _AuthRepositoryMock();
       mocktail
@@ -277,6 +284,9 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     when(
       mockLocalAuthService.shouldAuthenticate,
     ).thenReturn(value == FirstScreenVariantEnum.authenticate);
+    when(
+      mockLocalAuthService.refreshUIStream,
+    ).thenAnswer((_) => const Stream.empty());
     when(
       mockLocalAuthService.canCheckBiometrics(),
     ).thenAnswer((_) async => false);

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,16 +13,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late final homeBloc = HomeBloc.I;
 
-  final _authOverlayController = OverlayPortalController();
-  late final StreamSubscription<bool> _localAuthListener;
-
   late final AppLifecycleListener _appLifecycleListener;
 
   @override
   void initState() {
     super.initState();
 
-    _listenToLocalAuth();
     _appLifecycleListener = AppLifecycleListener(
       onStateChange: _onAppLifecycleStateChanged,
     );
@@ -31,17 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return OverlayPortal(
-      controller: _authOverlayController,
-      overlayChildBuilder: (context) => const BiometricsAuthScreen(),
-      child: Scaffold(
-        drawer: HomeDrawer(homeBloc: homeBloc),
-        appBar: HomeAppBar(homeBloc: homeBloc),
-        body: HomeBody(homeBloc: homeBloc),
-        floatingActionButton: HomeFAB(homeBloc: homeBloc),
-        bottomNavigationBar: HomeBottomNavBar(homeBloc: homeBloc),
-        extendBody: true,
-      ),
+    return Scaffold(
+      drawer: HomeDrawer(homeBloc: homeBloc),
+      appBar: HomeAppBar(homeBloc: homeBloc),
+      body: HomeBody(homeBloc: homeBloc),
+      floatingActionButton: HomeFAB(homeBloc: homeBloc),
+      bottomNavigationBar: HomeBottomNavBar(homeBloc: homeBloc),
+      extendBody: true,
     );
   }
 
@@ -49,46 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _appLifecycleListener.dispose();
 
-    unawaited(_localAuthListener.cancel());
-
     super.dispose();
-  }
-
-  void _listenToLocalAuth() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        if (!mounted ||
-            !LocalAuthService.I.shouldAuthenticate ||
-            _authOverlayController.isShowing) {
-          return;
-        }
-
-        _authOverlayController.show();
-      },
-    );
-
-    _localAuthListener =
-        Rx.combineLatest2<bool, void, bool>(
-          AuthBloc.I.isSignedInStream,
-          LocalAuthService.I.refreshUIStream.startWith(null),
-          (isSignedIn, _) => isSignedIn,
-        ).listen(
-          (isSignedIn) {
-            final mustAuthenticate =
-                isSignedIn && LocalAuthService.I.shouldAuthenticate;
-
-            if (mustAuthenticate && !_authOverlayController.isShowing) {
-              _authOverlayController.show();
-            } else if (!mustAuthenticate && _authOverlayController.isShowing) {
-              _authOverlayController.hide();
-            }
-          },
-        );
   }
 
   void _onAppLifecycleStateChanged(AppLifecycleState state) {
     switch (state) {
-      case AppLifecycleState.resumed when !_authOverlayController.isShowing:
+      case AppLifecycleState.resumed
+          when !LocalAuthService.I.shouldAuthenticate:
         unawaited(UserPersistenceService.I.recordActive());
 
       case AppLifecycleState.resumed:
