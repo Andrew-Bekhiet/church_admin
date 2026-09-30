@@ -1,0 +1,37 @@
+query ownPhoneContacts($personId: uuid!) {
+  contacts(
+    where: { personId: { _eq: $personId } }
+    orderBy: [{ isMainPhone: DESC }, { createdAt: ASC }]
+  ) {
+    ...PhoneContact
+  }
+}
+
+query familyPhoneContacts($familyId: uuid!) {
+  resolvedContacts(
+    where: {
+      effectiveFamilyId: { _eq: $familyId }
+      personType: { isFamilyAdmin: { _eq: true } }
+    }
+    orderBy: [
+      { personType: { order: ASC } }
+      { isMainPhone: DESC }
+      { createdAt: ASC }
+    ]
+  ) {
+    ...FamilyPhoneContact
+  }
+}
+
+query familyRoles {
+  personTypes(
+    where: { isFamilyAdmin: { _eq: true } }
+    orderBy: { order: ASC }
+  ) {
+    id
+    name
+    order
+    isFamilyAdmin
+    isHidden
+  }
+}

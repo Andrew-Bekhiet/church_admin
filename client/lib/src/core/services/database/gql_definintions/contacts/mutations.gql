@@ -1,0 +1,15 @@
+mutation applyPhoneContactChanges(
+  $deletedIds: [uuid!]!
+  $updates: [ContactsUpdates!]!
+  $inserts: [ContactsInsertInput!]!
+) {
+  deleteContacts(where: { id: { _in: $deletedIds } }) {
+    affectedRows
+  }
+  updateContactsMany(updates: $updates) {
+    affectedRows
+  }
+  insertContacts(objects: $inserts) {
+    affectedRows
+  }
+}
