@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-class PersonPhoneBook with EquatableMixin {
+class PersonPhoneBook with Equatable {
   final List<PhoneContact> own;
   final List<FamilyPhoneContact> family;
 

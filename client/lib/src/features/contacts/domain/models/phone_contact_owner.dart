@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-sealed class PhoneContactOwner with EquatableMixin {
+sealed class PhoneContactOwner with Equatable {
   const PhoneContactOwner();
 }
 

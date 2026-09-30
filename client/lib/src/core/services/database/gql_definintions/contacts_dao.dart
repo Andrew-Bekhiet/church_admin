@@ -154,13 +154,11 @@ class ContactsDAO {
   ) => [
     for (final row in rows)
       if (row case Fragment_FamilyPhoneContact(
-            id: final id?,
-            phone: final phone?,
-            isMainPhone: final isMainPhone?,
-            personType: final role?,
-          )
-          when excludedPersonId == null ||
-              row.personId?.uuid != excludedPersonId)
+        id: final id?,
+        phone: final phone?,
+        isMainPhone: final isMainPhone?,
+        personType: final role?,
+      ) when excludedPersonId == null || row.personId?.uuid != excludedPersonId)
         FamilyPhoneContact(
           contact: PhoneContact.fromColumns(
             id: id.uuid,

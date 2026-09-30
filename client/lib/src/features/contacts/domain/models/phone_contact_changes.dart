@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 
-class PhoneContactChanges with EquatableMixin {
+class PhoneContactChanges with Equatable {
   final List<String> deletedIds;
   final List<PhoneContact> updates;
   final List<PhoneContact> inserts;

@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../utils.dart';
@@ -31,7 +30,10 @@ void main() {
 
   late _FakeContactsDAO dao;
 
-  setUp(() => dao = _FakeContactsDAO());
+  setUp(() {
+    dao = _FakeContactsDAO();
+    addTearDown(dao.close);
+  });
   tearDown(defaultTearDown);
 
   test("a person's phone book lists their main number first and their "
@@ -97,6 +99,11 @@ void main() {
 class _FakeContactsDAO extends Fake implements ContactsDAO {
   final own = BehaviorSubject<List<PhoneContact>>();
   final family = BehaviorSubject<List<FamilyPhoneContact>>();
+
+  Future<void> close() async {
+    await own.close();
+    await family.close();
+  }
 
   @override
   Stream<List<PhoneContact>> watchOwnContacts({required String personId}) =>

@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-class FamilyPhoneContact with EquatableMixin {
+class FamilyPhoneContact with Equatable {
   final PhoneContact contact;
   final PersonType role;
 

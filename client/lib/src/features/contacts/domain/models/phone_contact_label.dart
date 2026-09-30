@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class PhoneContactLabel with EquatableMixin {
+sealed class PhoneContactLabel with Equatable {
   const PhoneContactLabel();
 }
 

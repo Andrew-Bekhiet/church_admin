@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 import '../../../utils.dart';
 
@@ -191,7 +190,7 @@ void main() {
   );
 
   test(
-    'moving to another family does not delete the old family\'s numbers',
+    "moving to another family does not delete the old family's numbers",
     () async {
       await loadChild();
       dao.family['other-family'] = [];

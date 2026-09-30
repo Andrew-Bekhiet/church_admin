@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class PhoneBookState with EquatableMixin {
+sealed class PhoneBookState with Equatable {
   @override
   List<Object?> get props => [];
 

@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-class PhoneContactDraft with EquatableMixin {
+class PhoneContactDraft with Equatable {
   final String key;
   final String? contactId;
   final String input;
@@ -18,9 +18,9 @@ class PhoneContactDraft with EquatableMixin {
     required this.key,
     required this.input,
     required this.label,
+    this.isMainPhone = false,
     this.contactId,
     this.phone,
-    this.isMainPhone = false,
   });
 
   PhoneContactDraft copyWith({PhoneContactLabel? label, bool? isMainPhone}) =>

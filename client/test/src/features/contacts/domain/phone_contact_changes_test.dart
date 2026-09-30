@@ -106,7 +106,7 @@ void main() {
     expect(changes.deletedIds, ['father-number']);
   });
 
-  test('editing a relative\'s number keeps it on that relative', () {
+  test("editing a relative's number keeps it on that relative", () {
     final changes = changesTo([
       ...unchangedDrafts.sublist(0, 2),
       unchangedDrafts[2].withInput('01006666666', phone: '+201006666666'),

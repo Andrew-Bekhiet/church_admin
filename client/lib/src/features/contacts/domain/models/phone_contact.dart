@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-class PhoneContact with EquatableMixin {
+class PhoneContact with Equatable {
   final String id;
   final String phone;
   final String? label;
@@ -15,8 +15,8 @@ class PhoneContact with EquatableMixin {
     required this.id,
     required this.phone,
     required this.owner,
-    this.label,
     this.isMainPhone = false,
+    this.label,
   });
 
   factory PhoneContact.fromColumns({
