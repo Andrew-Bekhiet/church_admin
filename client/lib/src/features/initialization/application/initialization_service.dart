@@ -20,7 +20,6 @@ class InitializationService {
     PackageInfoInit(),
     DeviceInfoInit(),
     SembastInit(),
-    ImageUrlCacheMigrationInit(),
     FirebaseInit(
       kEmulatorsHost: String.fromEnvironment('FIREBASE_EMULATORS_HOST'),
     ),
@@ -31,6 +30,7 @@ class InitializationService {
     FlutterLocalNotificationsInit(),
     BlocObserverInit(),
     LoggingSyncInit(),
+    ImageUrlCacheMigrationInit(),
   };
 
   InitializationService();
