@@ -158,6 +158,38 @@ void main() {
     },
   );
 
+  test(
+    'an expired url stays in use while the displayed photo is on disk',
+    () async {
+      final person = Person(
+        id: 'id',
+        name: 'name',
+        photoUpdatedAt: DateTime(2024),
+      );
+      final expiredUrl = Uri(
+        host: 'example.com',
+        path: 'file.jpg',
+        queryParameters: {
+          'X-Goog-Date': DateTime(2024).toIso8601String(),
+          'X-Goog-Expires': const Duration(minutes: 5).inSeconds.toString(),
+        },
+      ).toString();
+      final box = FakeSyncKVStore<String>()
+        ..put(
+          person.imageInfo.cacheKey,
+          '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|$expiredUrl',
+        );
+      registerFunctionsService(getMockedFunctionsSrvc('id', 'freshUrl'));
+
+      final unit = ImageUrlCacheService(
+        box: box,
+        cacheManager: getMockedCacheManager(person.imageInfo.photoCacheKey),
+      );
+
+      expect(await unit.getImageUrl(person.imageInfo), expiredUrl);
+    },
+  );
+
   test('Image Url Cache Service: getImageFileFromCache', () async {
     final baseCacheManager = getMockedCacheManager('cachedUrl');
 

@@ -20,7 +20,7 @@ class ImageUrlCacheService {
   Future<File> getImageFile(ObjectImageInfo imageInfo) async {
     return cacheManager.getSingleFile(
       await getImageUrl(imageInfo),
-      key: imageInfo.cacheKey,
+      key: imageInfo.photoCacheKey,
     );
   }
 
@@ -31,7 +31,7 @@ class ImageUrlCacheService {
 
     if (cachedImageUrl != null &&
         (!isUrlExpired(cachedImageUrl) ||
-            await isUrlFileCachedAndValid(imageObject.cacheKey))) {
+            await isUrlFileCachedAndValid(imageObject.photoCacheKey))) {
       return SynchronousFuture(cachedImageUrl);
     }
 
@@ -104,20 +104,20 @@ class ImageUrlCacheService {
     String url,
   ) async {
     final cacheKey = imageInfo.cacheKey;
+    final updatedTime = imageInfo.lastUpdatedTime!.toIso8601String();
 
     final oldCache = box.get(cacheKey);
 
-    box.put(
-      cacheKey,
-      '${imageInfo.lastUpdatedTime!.toIso8601String()}|$url',
-    );
+    box.put(cacheKey, '$updatedTime|$url');
 
     if (oldCache == null) return;
 
     final [oldUpdatedTime, _] = oldCache.split('|');
 
-    if (oldUpdatedTime == imageInfo.lastUpdatedTime?.toIso8601String()) return;
+    if (oldUpdatedTime == updatedTime) return;
 
-    await cacheManager.removeFile(cacheKey);
+    await cacheManager.removeFile(
+      imageInfo.photoCacheKeyAt(DateTime.parse(oldUpdatedTime)),
+    );
   }
 }
