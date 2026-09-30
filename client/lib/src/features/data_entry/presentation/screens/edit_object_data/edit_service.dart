@@ -97,10 +97,14 @@ class _EditServiceState extends State<EditService> {
           ),
           StudyYearRangeField(
             label: 'السنوات الدراسية',
-            initialValue: StudyYearRange(
-              from: newService.studyYearFrom,
-              to: newService.studyYearTo,
-            ),
+            initialValue:
+                newService.studyYearFrom == null &&
+                    newService.studyYearTo == null
+                ? null
+                : StudyYearRange(
+                    from: newService.studyYearFrom,
+                    to: newService.studyYearTo,
+                  ),
             nullable: true,
             onChanged: (value) => newService = newService.copyWith(
               studyYearFrom: value?.from,
