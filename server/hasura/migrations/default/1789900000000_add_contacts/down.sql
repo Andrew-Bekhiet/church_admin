@@ -6,3 +6,5 @@ begin
 end $$;
 
 drop table if exists public.contacts;
+
+drop domain if exists public.e164_phone_number;
