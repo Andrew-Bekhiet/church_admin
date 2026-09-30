@@ -1,7 +1,0 @@
-services:
-  postgres:
-    build:
-      context: ./postgres
-      target: test
-    volumes:
-      - ./postgres/tests:/tests:ro
