@@ -109,7 +109,7 @@ AuthBloc _signedInAuthBloc() {
   final userData = User(
     uid: 'uid',
     name: 'name',
-    permissions: PermissionsSet.fromSet({UserPermission.approved}),
+    permissions: const PermissionsSet.fromSet({UserPermission.approved}),
     person: Person(
       id: 'id',
       name: 'name',
