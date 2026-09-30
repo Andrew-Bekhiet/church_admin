@@ -9,6 +9,9 @@ class ImageUrlCacheService {
   static ImageUrlCacheService get I =>
       globalProviderContainer.read(imageUrlCacheServiceProvider);
 
+  static const String storeName = 'ImageUrlsCacheV2';
+  static const String legacyStoreName = 'ImageUrlsCache';
+
   final SyncKVStore<String> box;
   final BaseCacheManager cacheManager;
 
@@ -117,7 +120,7 @@ class ImageUrlCacheService {
     if (oldUpdatedTime == updatedTime) return;
 
     await cacheManager.removeFile(
-      imageInfo.photoCacheKeyAt(DateTime.parse(oldUpdatedTime)),
+      ObjectImageInfo.photoCacheKeyOf(cacheKey, DateTime.parse(oldUpdatedTime)),
     );
   }
 }

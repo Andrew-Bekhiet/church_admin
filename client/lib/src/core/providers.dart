@@ -362,7 +362,7 @@ final baseCacheManagerProvider = Provider<BaseCacheManager>((ref) {
 final imageUrlCacheServiceProvider = Provider<ImageUrlCacheService>(
   (ref) => ImageUrlCacheService(
     cacheManager: ref.watch(baseCacheManagerProvider),
-    box: SyncKVStore.fromLoaded<String>('ImageUrlsCache'),
+    box: SyncKVStore.fromLoaded<String>(ImageUrlCacheService.storeName),
   ),
 );
 
