@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
 class EditPerson extends StatefulWidget {
@@ -28,6 +31,7 @@ class EditPerson extends StatefulWidget {
 
 class _EditPersonState extends State<EditPerson> {
   late EditObjectController<Person> _controller;
+  final PhoneContactsEditorCubit _phoneContacts = PhoneContactsEditorCubit();
   bool _classesAndGroupsLoaded = false;
 
   Person get initialPerson => _controller.initialObject!;
@@ -54,14 +58,29 @@ class _EditPersonState extends State<EditPerson> {
         id: object.id,
         $extra: object,
       ).pushReplacement(context),
-      onCreate: (object) => DatabaseService.I.persons.createObject(
-        newObject: object,
-      ),
-      onUpdate: (oldPerson, newPerson) =>
-          DatabaseService.I.persons.updateObject(
-            oldObject: oldPerson,
-            newObject: newPerson,
-          ),
+      onCreate: (object) async {
+        final created = await DatabaseService.I.persons.createObject(
+          newObject: object,
+        );
+        await _phoneContacts.save(
+          personId: created.id,
+          familyId: object.familyId,
+        );
+
+        return created;
+      },
+      onUpdate: (oldPerson, newPerson) async {
+        final updated = await DatabaseService.I.persons.updateObject(
+          oldObject: oldPerson,
+          newObject: newPerson,
+        );
+        await _phoneContacts.save(
+          personId: newPerson.id,
+          familyId: newPerson.familyId,
+        );
+
+        return updated;
+      },
       onDelete: (object) => DatabaseService.I.persons.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
       newObject:
@@ -84,21 +103,36 @@ class _EditPersonState extends State<EditPerson> {
       initialObject: oldPerson,
     );
     _loadPersonServicesClassesGroups();
+    unawaited(
+      _phoneContacts.load(
+        personId: oldPerson?.id,
+        familyId: oldPerson?.familyId ?? widget.withFamily?.id,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return EditObjectData(
-      objectData: widget.person,
-      getController: () => _controller,
-      canDelete: (_) =>
-          widget.person != null && widget.person?.user?.email == null,
-      builder: (context, controller) => PersonEditForm(
-        controller: controller,
-        classesAndGroupsLoaded: _classesAndGroupsLoaded,
-        withFamily: widget.withFamily,
+    return BlocProvider.value(
+      value: _phoneContacts,
+      child: EditObjectData(
+        objectData: widget.person,
+        getController: () => _controller,
+        canDelete: (_) =>
+            widget.person != null && widget.person?.user?.email == null,
+        builder: (context, controller) => PersonEditForm(
+          controller: controller,
+          classesAndGroupsLoaded: _classesAndGroupsLoaded,
+          withFamily: widget.withFamily,
+        ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    unawaited(_phoneContacts.close());
+    super.dispose();
   }
 
   void _loadPersonServicesClassesGroups() {
