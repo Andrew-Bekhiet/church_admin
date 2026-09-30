@@ -1,0 +1,33 @@
+table:
+  name: main_contacts
+  schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - label
+        - person_id
+        - phone
+      filter:
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - person_id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true

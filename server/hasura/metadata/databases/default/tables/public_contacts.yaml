@@ -1,0 +1,141 @@
+table:
+  name: contacts
+  schema: public
+object_relationships:
+  - name: family
+    using:
+      foreign_key_constraint_on: family_id
+  - name: person
+    using:
+      foreign_key_constraint_on: person_id
+  - name: personType
+    using:
+      foreign_key_constraint_on: person_type_id
+insert_permissions:
+  - role: user
+    permission:
+      check: &can_edit_contact
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: person
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - person_id
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
+          - _and:
+              - personType:
+                  is_family_admin:
+                    _eq: true
+              - family: &has_non_admin_member_editable_by_user
+                  persons:
+                    _and:
+                      - deleted_at:
+                          _is_null: true
+                      - personType:
+                          is_family_admin:
+                            _eq: false
+                      - permissionGrants:
+                          _and:
+                            - uid:
+                                _eq: X-Hasura-User-Id
+                            - allow_edit:
+                                _eq: true
+                            - entity_type:
+                                _eq: person
+          - person:
+              _and:
+                - personType:
+                    is_family_admin:
+                      _eq: true
+                - family: *has_non_admin_member_editable_by_user
+      columns:
+        - family_id
+        - id
+        - is_main_phone
+        - label
+        - person_id
+        - person_type_id
+        - phone
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - family_id
+        - id
+        - is_main_phone
+        - label
+        - person_id
+        - person_type_id
+        - phone
+        - updated_at
+      filter:
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: person
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - person_id
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
+          - _and:
+              - personType:
+                  is_family_admin:
+                    _eq: true
+              - family: &has_member_readable_by_user
+                  permissionGrants:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - entity_type:
+                          _eq: family
+          - person:
+              _and:
+                - personType:
+                    is_family_admin:
+                      _eq: true
+                - family: *has_member_readable_by_user
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - is_main_phone
+        - label
+        - phone
+      filter: *can_edit_contact
+      check: *can_edit_contact
+delete_permissions:
+  - role: user
+    permission:
+      filter: *can_edit_contact
