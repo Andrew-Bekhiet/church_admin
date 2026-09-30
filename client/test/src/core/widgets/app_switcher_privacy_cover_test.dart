@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 void main() {
   const appContent = 'Private member details';
@@ -10,11 +11,21 @@ void main() {
     AppLifecycleState.paused,
   });
 
-  Future<void> pumpAppOn(WidgetTester tester, PlatformValue platform) async {
+  Future<void> pumpAppOn(
+    WidgetTester tester,
+    PlatformValue platform, {
+    bool isAuthenticationInProgress = false,
+  }) async {
+    final mockLocalAuthService = _MockLocalAuthService();
+    when(
+      () => mockLocalAuthService.isAuthenticationInProgress,
+    ).thenReturn(isAuthenticationInProgress);
+
     initGlobalProviderContainer([
       currentPlatformServiceProvider.overrideWithValue(
         CurrentPlatformService(platform),
       ),
+      localAuthServiceProvider.overrideWithValue(mockLocalAuthService),
     ]);
     addTearDown(resetGlobalProviderContainer);
 
@@ -98,4 +109,26 @@ void main() {
     },
     variant: backgroundStates,
   );
+
+  testWidgets(
+    "Doesn't show if biometrics authentication is in progress",
+    (tester) async {
+      await pumpAppOn(
+        tester,
+        PlatformValue.ios,
+        isAuthenticationInProgress: true,
+      );
+
+      tester.binding.handleAppLifecycleStateChanged(
+        backgroundStates.currentValue ?? fail('Missing lifecycle state'),
+      );
+      await tester.pump();
+
+      expect(find.text(appContent).hitTestable(), findsOneWidget);
+      expect(find.byKey(AppSwitcherPrivacyCoverKeys.cover), findsNothing);
+    },
+    variant: backgroundStates,
+  );
 }
+
+class _MockLocalAuthService extends Mock implements LocalAuthService {}

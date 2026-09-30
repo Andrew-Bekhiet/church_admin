@@ -61,7 +61,10 @@ class _AppSwitcherPrivacyCoverState extends State<AppSwitcherPrivacyCover>
   }
 
   bool _mustCoverIn(AppLifecycleState? state) {
-    if (!CurrentPlatformService.I.isIOS) return false;
+    if (!CurrentPlatformService.I.isIOS ||
+        LocalAuthService.I.isAuthenticationInProgress) {
+      return false;
+    }
 
     return switch (state) {
       AppLifecycleState.inactive ||
