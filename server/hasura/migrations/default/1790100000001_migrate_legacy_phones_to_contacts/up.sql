@@ -20,6 +20,25 @@ as $$
     from digits
 $$;
 
+create or replace function public.legacy_phone_label_person_type_name(
+    label text
+)
+returns text
+language sql
+immutable
+as $$
+    select coalesce(
+        substring(label from '^رقم الهاتف \((.+)\)(?: [0-9]+)?$'),
+        case substring(
+            regexp_replace(translate(label, 'أإآ', 'ااا'), '[^ء-ي]+', ' ', 'g')
+            from '(?:^| )(?:ال|لل|للال)(اب|ام)(?: |$)'
+        )
+            when 'اب' then 'أب'
+            when 'ام' then 'أم'
+        end
+    )
+$$;
+
 create or replace function public.legacy_phone_entries(phones jsonb)
 returns table (label text, phone text, role_person_type_id uuid)
 language sql
@@ -30,7 +49,7 @@ as $$
         case when jsonb_typeof(phones) = 'object' then phones else '{}'::jsonb end
     ) as entry
     left join public.person_types as role
-        on role.name = substring(entry.key from '^رقم الهاتف \((.+)\)(?: [0-9]+)?$')
+        on role.name = public.legacy_phone_label_person_type_name(entry.key)
     where public.legacy_normalize_phone(entry.value) is not null
 $$;
 
