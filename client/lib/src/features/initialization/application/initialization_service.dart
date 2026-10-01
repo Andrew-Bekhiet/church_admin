@@ -30,6 +30,7 @@ class InitializationService {
     FlutterLocalNotificationsInit(),
     BlocObserverInit(),
     LoggingSyncInit(),
+    ImageUrlCacheMigrationInit(),
   };
 
   InitializationService();

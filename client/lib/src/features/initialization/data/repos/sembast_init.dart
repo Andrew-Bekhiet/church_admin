@@ -30,7 +30,7 @@ class SembastInit implements Initializer {
       );
 
       await SyncKVStore.load<String>(
-        sharedSembastInstance.kv('ImageUrlsCache'),
+        sharedSembastInstance.kv(ImageUrlCacheService.storeName),
       );
       await SyncKVStore.load<NotificationSetting>(
         mainSembastInstance.serializableKv(

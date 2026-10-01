@@ -82,7 +82,7 @@ class ImageObjectWidget extends StatelessWidget {
       imageObject,
     );
     final constraints = BoxConstraints.expand(width: size, height: size);
-    final String cacheKey = imageObject.imageInfo.cacheKey;
+    final String cacheKey = imageObject.imageInfo.photoCacheKey;
     final BorderRadius? borderRadius = circleCrop
         ? null
         : this.borderRadius ??

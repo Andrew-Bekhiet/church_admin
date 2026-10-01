@@ -2,18 +2,14 @@ import 'package:church_admin/church_admin.dart';
 import 'package:file/memory.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../../../fakes/fake_box.dart';
-import 'image_url_cache_service_test.mocks.dart';
 
-@GenerateNiceMocks(
-  [
-    MockSpec<BaseCacheManager>(),
-    MockSpec<FunctionsService>(),
-  ],
-)
+class MockBaseCacheManager extends Mock implements BaseCacheManager {}
+
+class MockFunctionsService extends Mock implements FunctionsService {}
+
 void main() {
   tearDown(resetGlobalProviderContainer);
 
@@ -55,10 +51,7 @@ void main() {
   test(
     'Image Url Cache Service: isUrlFileCached',
     () async {
-      final baseCacheManager = getMockedCacheManager(
-        'cachedUrl',
-        uncachedUrl: 'uncachedUrl',
-      );
+      final baseCacheManager = getMockedCacheManager('cachedUrl');
 
       final unit = ImageUrlCacheService(
         box: FakeSyncKVStore(),
@@ -100,10 +93,7 @@ void main() {
     'Image Url Cache Service: getImageUrl',
     () async {
       // Setup:
-      final baseCacheManager = getMockedCacheManager(
-        'cachedUrl',
-        uncachedUrl: 'uncachedUrl',
-      );
+      final baseCacheManager = getMockedCacheManager('cachedUrl');
 
       final testExpiredUrl = Uri(
         host: 'example.com',
@@ -168,11 +158,40 @@ void main() {
     },
   );
 
+  test(
+    'an expired url stays in use while the displayed photo is on disk',
+    () async {
+      final person = Person(
+        id: 'id',
+        name: 'name',
+        photoUpdatedAt: DateTime(2024),
+      );
+      final expiredUrl = Uri(
+        host: 'example.com',
+        path: 'file.jpg',
+        queryParameters: {
+          'X-Goog-Date': DateTime(2024).toIso8601String(),
+          'X-Goog-Expires': const Duration(minutes: 5).inSeconds.toString(),
+        },
+      ).toString();
+      final box = FakeSyncKVStore<String>()
+        ..put(
+          person.imageInfo.cacheKey,
+          '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|$expiredUrl',
+        );
+      registerFunctionsService(getMockedFunctionsSrvc('id', 'freshUrl'));
+
+      final unit = ImageUrlCacheService(
+        box: box,
+        cacheManager: getMockedCacheManager(person.imageInfo.photoCacheKey),
+      );
+
+      expect(await unit.getImageUrl(person.imageInfo), expiredUrl);
+    },
+  );
+
   test('Image Url Cache Service: getImageFileFromCache', () async {
-    final baseCacheManager = getMockedCacheManager(
-      'cachedUrl',
-      uncachedUrl: 'uncachedUrl',
-    );
+    final baseCacheManager = getMockedCacheManager('cachedUrl');
 
     final unit = ImageUrlCacheService(
       box: FakeSyncKVStore(),
@@ -181,7 +200,7 @@ void main() {
 
     final srvc = getMockedFunctionsSrvc('person1', 'cachedUrl');
     when(
-      srvc.getDownloadUrl('persons', 'person2'),
+      () => srvc.getDownloadUrl('persons', 'person2'),
     ).thenAnswer((_) async => 'uncachedUrl');
     registerFunctionsService(srvc);
 
@@ -207,33 +226,27 @@ void main() {
   });
 }
 
-MockBaseCacheManager getMockedCacheManager(
-  String cachedUrl, {
-  String? uncachedUrl,
-}) {
+MockBaseCacheManager getMockedCacheManager(String cachedUrl) {
   final baseCacheManager = MockBaseCacheManager();
 
-  when(baseCacheManager.getFileFromCache(cachedUrl)).thenAnswer(
-    (_) async => FileInfo(
-      MemoryFileSystem().file('path'),
-      FileSource.Cache,
-      DateTime.now().add(const Duration(days: 1)),
-      cachedUrl,
-    ),
+  when(() => baseCacheManager.getFileFromCache(any())).thenAnswer(
+    (i) async => i.positionalArguments.first == cachedUrl
+        ? FileInfo(
+            MemoryFileSystem().file('path'),
+            FileSource.Cache,
+            DateTime.now().add(const Duration(days: 1)),
+            cachedUrl,
+          )
+        : null,
   );
 
-  when(baseCacheManager.getSingleFile(cachedUrl)).thenAnswer(
-    (_) async => MemoryFileSystem().file(cachedUrl),
+  when(
+    () => baseCacheManager.getSingleFile(any(), key: any(named: 'key')),
+  ).thenAnswer(
+    (i) async => MemoryFileSystem().file(i.positionalArguments.first as String),
   );
-  if (uncachedUrl != null) {
-    when(baseCacheManager.getFileFromCache(uncachedUrl)).thenAnswer(
-      (_) async => null,
-    );
+  when(() => baseCacheManager.removeFile(any())).thenAnswer((_) async {});
 
-    when(baseCacheManager.getSingleFile(uncachedUrl)).thenAnswer(
-      (_) async => MemoryFileSystem().file(uncachedUrl),
-    );
-  }
   return baseCacheManager;
 }
 
@@ -250,7 +263,7 @@ MockFunctionsService getMockedFunctionsSrvc(
   final mockFunctionsService = MockFunctionsService();
 
   when(
-    mockFunctionsService.getDownloadUrl('persons', personId),
+    () => mockFunctionsService.getDownloadUrl('persons', personId),
   ).thenAnswer((_) async => urlFromNetwork);
   return mockFunctionsService;
 }

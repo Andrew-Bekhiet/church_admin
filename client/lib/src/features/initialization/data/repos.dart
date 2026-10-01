@@ -5,6 +5,7 @@ export 'repos/feature_flags_init.dart';
 export 'repos/firebase_init.dart';
 export 'repos/flutter_local_notifications_init.dart';
 export 'repos/fmtc_init.dart';
+export 'repos/image_url_cache_migration_init.dart';
 export 'repos/initializer.dart';
 export 'repos/intl_locale_messages_init.dart';
 export 'repos/logging_init.dart';
