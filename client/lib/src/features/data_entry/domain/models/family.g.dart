@@ -263,6 +263,15 @@ Family _$FamilyFromJson(Map json) => Family(
       $enumDecodeNullable(_$MartialStatusEnumMap, json['status']) ??
       MartialStatus.married,
   userCanEdit: json['userCanEdit'] as bool? ?? false,
+  contacts:
+      (json['contacts'] as List<dynamic>?)
+          ?.map(
+            (e) => FamilyPhoneContact.fromJson(
+              Map<String, dynamic>.from(e as Map),
+            ),
+          )
+          .toList() ??
+      [],
   address: json['address'] == null
       ? null
       : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
@@ -298,15 +307,6 @@ Family _$FamilyFromJson(Map json) => Family(
       : LastRecordedByInfo.fromJson(
           Map<String, Object?>.from(json['lastFatherVisit'] as Map),
         ),
-  contacts:
-      (json['contacts'] as List<dynamic>?)
-          ?.map(
-            (e) => FamilyPhoneContact.fromJson(
-              Map<String, dynamic>.from(e as Map),
-            ),
-          )
-          .toList() ??
-      [],
 );
 
 Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
