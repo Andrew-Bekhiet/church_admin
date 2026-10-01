@@ -802,6 +802,22 @@ Person _$PersonFromJson(Map json) => Person(
   otherPhones:
       (json['otherPhones'] as Map?)?.map((k, e) => MapEntry(k as String, e)) ??
       const {},
+  contacts:
+      (json['contacts'] as List<dynamic>?)
+          ?.map(
+            (e) => PhoneContact.fromJson(Map<String, dynamic>.from(e as Map)),
+          )
+          .toList() ??
+      [],
+  familyContacts:
+      (json['familyContacts'] as List<dynamic>?)
+          ?.map(
+            (e) => FamilyPhoneContact.fromJson(
+              Map<String, dynamic>.from(e as Map),
+            ),
+          )
+          .toList() ??
+      [],
   gender: json['gender'] as bool? ?? true,
   isShammas: json['isShammas'] as bool? ?? false,
   workStatus:
@@ -998,6 +1014,8 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
   'address': instance.address?.toJson(),
   'mainPhone': instance.mainPhone,
   'otherPhones': instance.otherPhones,
+  'contacts': instance.contacts.map((e) => e.toJson()).toList(),
+  'familyContacts': instance.familyContacts.map((e) => e.toJson()).toList(),
   'birthdate': _$JsonConverterToJson<String, DateTime>(
     instance.birthdate,
     const LocalDateTimeConverter().toJson,

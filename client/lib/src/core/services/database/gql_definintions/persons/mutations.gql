@@ -35,6 +35,12 @@ mutation updatePerson(
   $insertHistoryKodasHistoryOne: Boolean! = true
   $insertHistoryCallHistoryOne: Boolean! = true
   $insertHistoryVisitHistoryOne: Boolean! = true
+  $deletedContactIds: [uuid!]! = []
+  $contactUpdates: [ContactsUpdates!]! = []
+  $newContacts: [ContactsInsertInput!]! = []
+  $deleteContacts: Boolean! = false
+  $updateContactsMany: Boolean! = false
+  $insertContacts: Boolean! = false
 ) {
   # Root fields run in order, and edit permission on a person comes from its
   # services, groups, study year and gender together. Linking first, updating,
@@ -62,6 +68,18 @@ mutation updatePerson(
   updateAddressesByPk(pkColumns: { id: $addressId }, _set: $newAddress)
     @include(if: $updateAddressByPk) {
     ...Address
+  }
+
+  deleteContacts(where: { id: { _in: $deletedContactIds } })
+    @include(if: $deleteContacts) {
+    affectedRows
+  }
+  updateContactsMany(updates: $contactUpdates)
+    @include(if: $updateContactsMany) {
+    affectedRows
+  }
+  insertContacts(objects: $newContacts) @include(if: $insertContacts) {
+    affectedRows
   }
 
   deletePersonsTags(
@@ -134,9 +152,17 @@ mutation updatePerson(
   }
 }
 
-mutation insertPerson($newPerson: PersonsInsertInput!) {
+mutation insertPerson(
+  $newPerson: PersonsInsertInput!
+  $familyContacts: [ContactsInsertInput!]! = []
+  $insertFamilyContacts: Boolean! = false
+) {
   insertPersonsOne(object: $newPerson) {
     ...Person
+  }
+  insertContacts(objects: $familyContacts)
+    @include(if: $insertFamilyContacts) {
+    affectedRows
   }
 }
 

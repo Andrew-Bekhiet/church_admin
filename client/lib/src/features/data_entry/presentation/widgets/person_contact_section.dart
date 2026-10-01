@@ -21,11 +21,9 @@ class PersonContactSection extends StatelessWidget {
             title: const Text('الرقم القومي'),
             subtitle: Text(person.nationalId?.toString() ?? ''),
           ),
-        PhoneBookSection(
-          create: (_) => PhoneBookCubit.forPerson(
-            personId: person.id,
-            familyId: person.family?.id ?? person.familyId,
-          ),
+        PhoneBookCard(
+          own: person.contacts,
+          family: person.familyContacts,
           onCall: (n) => _phoneCall(context, n),
           onAddToContacts: (n) => _contactAdd(context, n, person),
         ),

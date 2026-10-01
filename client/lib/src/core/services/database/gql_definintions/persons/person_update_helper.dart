@@ -15,6 +15,15 @@ class PersonUpdateHelper {
   late final IterableDifferenceResult<ID> _hobbiesDiff;
   late final IterableDifferenceResult<ID> _tagsDiff;
 
+  late final PhoneContactChanges _contactChanges = PhoneContactChanges.between(
+    initialOwn: oldPerson.contacts,
+    desiredOwn: newPerson.contacts,
+    initialFamily: newPerson.family?.id == oldPerson.family?.id
+        ? oldPerson.familyContacts
+        : const [],
+    desiredFamily: newPerson.familyContacts,
+  );
+
   bool get _updatePersonsByPk => _personDelta.keys
       .where(
         (k) =>
@@ -22,7 +31,9 @@ class PersonUpdateHelper {
             k != 'services' &&
             k != 'groups' &&
             k != 'hobbies' &&
-            k != 'tags',
+            k != 'tags' &&
+            k != 'contacts' &&
+            k != 'familyContacts',
       )
       .isNotEmpty;
 
@@ -86,6 +97,15 @@ class PersonUpdateHelper {
       )
       .toList();
 
+  List<Input_ContactsInsertInput> get _newContacts => [
+    ..._contactChanges.ownInserts.map(
+      (c) => c.toInsertInput().copyWith(personId: newPerson.id.toUuid()),
+    ),
+    ..._contactChanges.familyInserts.map(
+      (f) => f.toInsertInput(familyId: newPerson.family?.id),
+    ),
+  ];
+
   bool get _updateAddressByPk =>
       _personDelta.containsKey('address') &&
       !_personDelta.containsKey('familyId');
@@ -124,6 +144,16 @@ class PersonUpdateHelper {
         insertHistoryKodasHistoryOne: _insertHistoryKodasHistoryOne,
         insertHistoryCallHistoryOne: _insertHistoryCallHistoryOne,
         insertHistoryVisitHistoryOne: _insertHistoryVisitHistoryOne,
+        deletedContactIds: _contactChanges.deletedIds
+            .map((id) => id.toUuid())
+            .toList(),
+        contactUpdates: _contactChanges.updates
+            .map((c) => c.toUpdates())
+            .toList(),
+        newContacts: _newContacts,
+        deleteContacts: _contactChanges.deletedIds.isNotEmpty,
+        updateContactsMany: _contactChanges.updates.isNotEmpty,
+        insertContacts: _newContacts.isNotEmpty,
       );
 
   PersonUpdateHelper({required this.newPerson, required this.oldPerson})

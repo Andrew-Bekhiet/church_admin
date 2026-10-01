@@ -5,86 +5,64 @@ import 'package:equatable/equatable.dart';
 class PhoneContactChanges with Equatable {
   final List<String> deletedIds;
   final List<PhoneContact> updates;
-  final List<PhoneContact> inserts;
+  final List<PhoneContact> ownInserts;
+  final List<FamilyPhoneContact> familyInserts;
 
-  bool get isEmpty => deletedIds.isEmpty && updates.isEmpty && inserts.isEmpty;
+  bool get isEmpty =>
+      deletedIds.isEmpty &&
+      updates.isEmpty &&
+      ownInserts.isEmpty &&
+      familyInserts.isEmpty;
 
   @override
-  List<Object?> get props => [deletedIds, updates, inserts];
+  List<Object?> get props => [deletedIds, updates, ownInserts, familyInserts];
 
   const PhoneContactChanges({
     this.deletedIds = const [],
     this.updates = const [],
-    this.inserts = const [],
+    this.ownInserts = const [],
+    this.familyInserts = const [],
   });
 
   factory PhoneContactChanges.between({
-    required PersonPhoneBook initial,
-    required List<PhoneContactDraft> drafts,
-    required String personId,
-    required String? familyId,
+    List<PhoneContact> initialOwn = const [],
+    List<PhoneContact> desiredOwn = const [],
+    List<FamilyPhoneContact> initialFamily = const [],
+    List<FamilyPhoneContact> desiredFamily = const [],
   }) {
-    final initialById = {
-      for (final contact in initial.own) contact.id: contact,
-      for (final relative in initial.family)
-        relative.contact.id: relative.contact,
-    };
-    final initialRoleById = {
-      for (final relative in initial.family) relative.contact.id: relative.role,
-    };
+    final initialOwnById = {for (final c in initialOwn) c.id: c};
+    final initialFamilyById = {for (final f in initialFamily) f.contact.id: f};
 
-    PhoneContact? desiredOf(PhoneContactDraft draft) {
-      final phone = draft.phone;
-      if (phone == null) return null;
+    bool keepsRole(FamilyPhoneContact relative) =>
+        initialFamilyById[relative.contact.id]?.role.id == relative.role.id;
 
-      final existing = initialById[draft.contactId];
-
-      return switch (draft.label) {
-        FreePhoneContactLabel(:final text) => PhoneContact(
-          id: draft.key,
-          phone: phone,
-          label: (text?.trim().isEmpty ?? true) ? null : text?.trim(),
-          isMainPhone: draft.isMainPhone,
-          owner: PersonPhoneOwner(personId),
-        ),
-        RolePhoneContactLabel(:final role)
-            when existing != null &&
-                initialRoleById[existing.id]?.id == role.id =>
-          existing.copyWith(phone: phone),
-        RolePhoneContactLabel(:final role) when familyId != null =>
-          PhoneContact(
-            id: draft.key,
-            phone: phone,
-            owner: FamilyRolePhoneOwner(
-              familyId: familyId,
-              personTypeId: role.id,
-            ),
-          ),
-        RolePhoneContactLabel() => null,
-      };
-    }
-
-    final desired = drafts.map(desiredOf).nonNulls.toList();
-    final desiredIds = desired.map((c) => c.id).toSet();
-
-    bool keepsOwner(PhoneContact contact) =>
-        initialById[contact.id]?.owner == contact.owner;
-    bool movesOwner(PhoneContact contact) =>
-        initialById.containsKey(contact.id) && !keepsOwner(contact);
-
-    final deletedIds = [
-      ...initialById.keys.whereNot(desiredIds.contains),
-      ...desired.where(movesOwner).map((c) => c.id),
-    ];
-    final updates = desired
-        .where((c) => keepsOwner(c) && initialById[c.id] != c)
-        .sortedBy<num>((c) => c.isMainPhone ? 1 : 0);
-    final inserts = desired.whereNot(keepsOwner).toList();
+    final keptOwnIds = desiredOwn.map((c) => c.id).toSet();
+    final keptFamilyIds = desiredFamily
+        .where(keepsRole)
+        .map((f) => f.contact.id)
+        .toSet();
 
     return PhoneContactChanges(
-      deletedIds: deletedIds,
-      updates: updates,
-      inserts: inserts,
+      deletedIds: [
+        ...initialOwnById.keys.whereNot(keptOwnIds.contains),
+        ...initialFamilyById.keys.whereNot(keptFamilyIds.contains),
+      ],
+      updates: [
+        ...desiredOwn.where(
+          (c) => initialOwnById.containsKey(c.id) && initialOwnById[c.id] != c,
+        ),
+        ...desiredFamily
+            .where(
+              (f) =>
+                  keepsRole(f) &&
+                  initialFamilyById[f.contact.id]?.contact != f.contact,
+            )
+            .map((f) => f.contact),
+      ],
+      ownInserts: desiredOwn
+          .whereNot((c) => initialOwnById.containsKey(c.id))
+          .toList(),
+      familyInserts: desiredFamily.whereNot(keepsRole).toList(),
     );
   }
 }

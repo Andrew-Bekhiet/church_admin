@@ -4,9 +4,6 @@ import 'package:gql/ast.dart';
 class Fragment_PhoneContact {
   Fragment_PhoneContact({
     required this.id,
-    this.personId,
-    this.familyId,
-    this.personTypeId,
     this.label,
     required this.phone,
     required this.isMainPhone,
@@ -15,20 +12,12 @@ class Fragment_PhoneContact {
 
   factory Fragment_PhoneContact.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
-    final l$personId = json['personId'];
-    final l$familyId = json['familyId'];
-    final l$personTypeId = json['personTypeId'];
     final l$label = json['label'];
     final l$phone = json['phone'];
     final l$isMainPhone = json['isMainPhone'];
     final l$$__typename = json['__typename'];
     return Fragment_PhoneContact(
       id: stringToUuid(l$id),
-      personId: l$personId == null ? null : stringToUuid(l$personId),
-      familyId: l$familyId == null ? null : stringToUuid(l$familyId),
-      personTypeId: l$personTypeId == null
-          ? null
-          : stringToUuid(l$personTypeId),
       label: (l$label as String?),
       phone: (l$phone as String),
       isMainPhone: (l$isMainPhone as bool),
@@ -37,12 +26,6 @@ class Fragment_PhoneContact {
   }
 
   final UuidValue id;
-
-  final UuidValue? personId;
-
-  final UuidValue? familyId;
-
-  final UuidValue? personTypeId;
 
   final String? label;
 
@@ -56,18 +39,6 @@ class Fragment_PhoneContact {
     final _resultData = <String, dynamic>{};
     final l$id = id;
     _resultData['id'] = uuidToString(l$id);
-    final l$personId = personId;
-    _resultData['personId'] = l$personId == null
-        ? null
-        : uuidToString(l$personId);
-    final l$familyId = familyId;
-    _resultData['familyId'] = l$familyId == null
-        ? null
-        : uuidToString(l$familyId);
-    final l$personTypeId = personTypeId;
-    _resultData['personTypeId'] = l$personTypeId == null
-        ? null
-        : uuidToString(l$personTypeId);
     final l$label = label;
     _resultData['label'] = l$label;
     final l$phone = phone;
@@ -82,18 +53,12 @@ class Fragment_PhoneContact {
   @override
   int get hashCode {
     final l$id = id;
-    final l$personId = personId;
-    final l$familyId = familyId;
-    final l$personTypeId = personTypeId;
     final l$label = label;
     final l$phone = phone;
     final l$isMainPhone = isMainPhone;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
-      l$personId,
-      l$familyId,
-      l$personTypeId,
       l$label,
       l$phone,
       l$isMainPhone,
@@ -112,21 +77,6 @@ class Fragment_PhoneContact {
     final l$id = id;
     final lOther$id = other.id;
     if (l$id != lOther$id) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (l$personId != lOther$personId) {
-      return false;
-    }
-    final l$familyId = familyId;
-    final lOther$familyId = other.familyId;
-    if (l$familyId != lOther$familyId) {
-      return false;
-    }
-    final l$personTypeId = personTypeId;
-    final lOther$personTypeId = other.personTypeId;
-    if (l$personTypeId != lOther$personTypeId) {
       return false;
     }
     final l$label = label;
@@ -169,9 +119,6 @@ abstract class CopyWith_Fragment_PhoneContact<TRes> {
 
   TRes call({
     UuidValue? id,
-    UuidValue? personId,
-    UuidValue? familyId,
-    UuidValue? personTypeId,
     String? label,
     String? phone,
     bool? isMainPhone,
@@ -191,9 +138,6 @@ class _CopyWithImpl_Fragment_PhoneContact<TRes>
 
   TRes call({
     Object? id = _undefined,
-    Object? personId = _undefined,
-    Object? familyId = _undefined,
-    Object? personTypeId = _undefined,
     Object? label = _undefined,
     Object? phone = _undefined,
     Object? isMainPhone = _undefined,
@@ -201,15 +145,6 @@ class _CopyWithImpl_Fragment_PhoneContact<TRes>
   }) => _then(
     Fragment_PhoneContact(
       id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-      personId: personId == _undefined
-          ? _instance.personId
-          : (personId as UuidValue?),
-      familyId: familyId == _undefined
-          ? _instance.familyId
-          : (familyId as UuidValue?),
-      personTypeId: personTypeId == _undefined
-          ? _instance.personTypeId
-          : (personTypeId as UuidValue?),
       label: label == _undefined ? _instance.label : (label as String?),
       phone: phone == _undefined || phone == null
           ? _instance.phone
@@ -232,9 +167,6 @@ class _CopyWithStubImpl_Fragment_PhoneContact<TRes>
 
   call({
     UuidValue? id,
-    UuidValue? personId,
-    UuidValue? familyId,
-    UuidValue? personTypeId,
     String? label,
     String? phone,
     bool? isMainPhone,
@@ -252,27 +184,6 @@ const fragmentDefinitionPhoneContact = FragmentDefinitionNode(
     selections: [
       FieldNode(
         name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'personId'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'familyId'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'personTypeId'),
         alias: null,
         arguments: [],
         directives: [],
@@ -317,8 +228,6 @@ class Fragment_FamilyPhoneContact {
   Fragment_FamilyPhoneContact({
     this.id,
     this.personId,
-    this.familyId,
-    this.personTypeId,
     this.label,
     this.phone,
     this.isMainPhone,
@@ -329,8 +238,6 @@ class Fragment_FamilyPhoneContact {
   factory Fragment_FamilyPhoneContact.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$personId = json['personId'];
-    final l$familyId = json['familyId'];
-    final l$personTypeId = json['personTypeId'];
     final l$label = json['label'];
     final l$phone = json['phone'];
     final l$isMainPhone = json['isMainPhone'];
@@ -339,10 +246,6 @@ class Fragment_FamilyPhoneContact {
     return Fragment_FamilyPhoneContact(
       id: l$id == null ? null : stringToUuid(l$id),
       personId: l$personId == null ? null : stringToUuid(l$personId),
-      familyId: l$familyId == null ? null : stringToUuid(l$familyId),
-      personTypeId: l$personTypeId == null
-          ? null
-          : stringToUuid(l$personTypeId),
       label: (l$label as String?),
       phone: (l$phone as String?),
       isMainPhone: (l$isMainPhone as bool?),
@@ -358,10 +261,6 @@ class Fragment_FamilyPhoneContact {
   final UuidValue? id;
 
   final UuidValue? personId;
-
-  final UuidValue? familyId;
-
-  final UuidValue? personTypeId;
 
   final String? label;
 
@@ -381,14 +280,6 @@ class Fragment_FamilyPhoneContact {
     _resultData['personId'] = l$personId == null
         ? null
         : uuidToString(l$personId);
-    final l$familyId = familyId;
-    _resultData['familyId'] = l$familyId == null
-        ? null
-        : uuidToString(l$familyId);
-    final l$personTypeId = personTypeId;
-    _resultData['personTypeId'] = l$personTypeId == null
-        ? null
-        : uuidToString(l$personTypeId);
     final l$label = label;
     _resultData['label'] = l$label;
     final l$phone = phone;
@@ -406,8 +297,6 @@ class Fragment_FamilyPhoneContact {
   int get hashCode {
     final l$id = id;
     final l$personId = personId;
-    final l$familyId = familyId;
-    final l$personTypeId = personTypeId;
     final l$label = label;
     final l$phone = phone;
     final l$isMainPhone = isMainPhone;
@@ -416,8 +305,6 @@ class Fragment_FamilyPhoneContact {
     return Object.hashAll([
       l$id,
       l$personId,
-      l$familyId,
-      l$personTypeId,
       l$label,
       l$phone,
       l$isMainPhone,
@@ -443,16 +330,6 @@ class Fragment_FamilyPhoneContact {
     final l$personId = personId;
     final lOther$personId = other.personId;
     if (l$personId != lOther$personId) {
-      return false;
-    }
-    final l$familyId = familyId;
-    final lOther$familyId = other.familyId;
-    if (l$familyId != lOther$familyId) {
-      return false;
-    }
-    final l$personTypeId = personTypeId;
-    final lOther$personTypeId = other.personTypeId;
-    if (l$personTypeId != lOther$personTypeId) {
       return false;
     }
     final l$label = label;
@@ -502,8 +379,6 @@ abstract class CopyWith_Fragment_FamilyPhoneContact<TRes> {
   TRes call({
     UuidValue? id,
     UuidValue? personId,
-    UuidValue? familyId,
-    UuidValue? personTypeId,
     String? label,
     String? phone,
     bool? isMainPhone,
@@ -526,8 +401,6 @@ class _CopyWithImpl_Fragment_FamilyPhoneContact<TRes>
   TRes call({
     Object? id = _undefined,
     Object? personId = _undefined,
-    Object? familyId = _undefined,
-    Object? personTypeId = _undefined,
     Object? label = _undefined,
     Object? phone = _undefined,
     Object? isMainPhone = _undefined,
@@ -539,12 +412,6 @@ class _CopyWithImpl_Fragment_FamilyPhoneContact<TRes>
       personId: personId == _undefined
           ? _instance.personId
           : (personId as UuidValue?),
-      familyId: familyId == _undefined
-          ? _instance.familyId
-          : (familyId as UuidValue?),
-      personTypeId: personTypeId == _undefined
-          ? _instance.personTypeId
-          : (personTypeId as UuidValue?),
       label: label == _undefined ? _instance.label : (label as String?),
       phone: phone == _undefined ? _instance.phone : (phone as String?),
       isMainPhone: isMainPhone == _undefined
@@ -579,8 +446,6 @@ class _CopyWithStubImpl_Fragment_FamilyPhoneContact<TRes>
   call({
     UuidValue? id,
     UuidValue? personId,
-    UuidValue? familyId,
-    UuidValue? personTypeId,
     String? label,
     String? phone,
     bool? isMainPhone,
@@ -612,20 +477,6 @@ const fragmentDefinitionFamilyPhoneContact = FragmentDefinitionNode(
       ),
       FieldNode(
         name: NameNode(value: 'personId'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'familyId'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'personTypeId'),
         alias: null,
         arguments: [],
         directives: [],

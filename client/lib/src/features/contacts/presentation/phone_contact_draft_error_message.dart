@@ -5,7 +5,7 @@ extension PhoneContactDraftErrorMessage on PhoneContactDraftError {
     PhoneContactDraftError.invalidPhone => 'برجاء ادخال رقم هاتف صالح',
     PhoneContactDraftError.duplicatePhone => 'هذا الرقم مضاف بالفعل',
     PhoneContactDraftError.roleNeedsFamily =>
-      'يجب اختيار العائلة أولاً لإضافة أرقام الأسرة',
+      'يجب تحديد العائلة أو عنوانها لحفظ أرقام الأسرة',
   };
 }
 

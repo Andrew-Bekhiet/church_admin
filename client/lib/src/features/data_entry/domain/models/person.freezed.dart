@@ -19,6 +19,8 @@ mixin _$Person {
   Address? get address;
   String? get mainPhone;
   Json get otherPhones;
+  List<PhoneContact> get contacts;
+  List<FamilyPhoneContact> get familyContacts;
   DateTime? get birthdate;
   String? get birthday;
   bool get gender;
@@ -106,6 +108,11 @@ mixin _$Person {
             const DeepCollectionEquality().equals(
               other.otherPhones,
               otherPhones,
+            ) &&
+            const DeepCollectionEquality().equals(other.contacts, contacts) &&
+            const DeepCollectionEquality().equals(
+              other.familyContacts,
+              familyContacts,
             ) &&
             (identical(other.birthdate, birthdate) ||
                 other.birthdate == birthdate) &&
@@ -246,6 +253,8 @@ mixin _$Person {
     address,
     mainPhone,
     const DeepCollectionEquality().hash(otherPhones),
+    const DeepCollectionEquality().hash(contacts),
+    const DeepCollectionEquality().hash(familyContacts),
     birthdate,
     birthday,
     gender,
@@ -314,7 +323,7 @@ mixin _$Person {
 
   @override
   String toString() {
-    return 'Person(id: $id, nationalId: $nationalId, name: $name, address: $address, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, workStatus: $workStatus, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, martialStatus: $martialStatus, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, servingChurch: $servingChurch, serviceType: $serviceType, notes: $notes, family: $family, familyId: $familyId, store: $store, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastAttendance: $lastAttendance, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, tags: $tags, hobbies: $hobbies, user: $user, uid: $uid, kodasHistory: $kodasHistory, attendanceHistory: $attendanceHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, attendanceHistoryAggregate: $attendanceHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate, userCanEdit: $userCanEdit)';
+    return 'Person(id: $id, nationalId: $nationalId, name: $name, address: $address, mainPhone: $mainPhone, otherPhones: $otherPhones, contacts: $contacts, familyContacts: $familyContacts, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, workStatus: $workStatus, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, martialStatus: $martialStatus, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, servingChurch: $servingChurch, serviceType: $serviceType, notes: $notes, family: $family, familyId: $familyId, store: $store, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastAttendance: $lastAttendance, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, tags: $tags, hobbies: $hobbies, user: $user, uid: $uid, kodasHistory: $kodasHistory, attendanceHistory: $attendanceHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, attendanceHistoryAggregate: $attendanceHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -327,6 +336,8 @@ abstract mixin class $PersonCopyWith<$Res> {
     String id,
     String name,
     Map<String, dynamic> otherPhones,
+    List<PhoneContact> contacts,
+    List<FamilyPhoneContact> familyContacts,
     bool gender,
     bool isShammas,
     WorkStatus? workStatus,
@@ -412,6 +423,8 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? id = null,
     Object? name = null,
     Object? otherPhones = null,
+    Object? contacts = null,
+    Object? familyContacts = null,
     Object? gender = null,
     Object? isShammas = null,
     Object? workStatus = freezed,
@@ -494,6 +507,14 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
             ? _self.otherPhones
             : otherPhones // ignore: cast_nullable_to_non_nullable
                   as Map<String, dynamic>,
+        contacts: null == contacts
+            ? _self.contacts
+            : contacts // ignore: cast_nullable_to_non_nullable
+                  as List<PhoneContact>,
+        familyContacts: null == familyContacts
+            ? _self.familyContacts
+            : familyContacts // ignore: cast_nullable_to_non_nullable
+                  as List<FamilyPhoneContact>,
         gender: null == gender
             ? _self.gender
             : gender // ignore: cast_nullable_to_non_nullable

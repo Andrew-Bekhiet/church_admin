@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -36,21 +34,36 @@ class _PersonEditFormState extends State<PersonEditForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        PersonContactFields(
-          person: person,
-          onNameChanged: (value) =>
-              _update((p) => p.copyWith(name: value.trim())),
-          onNationalIdChanged: (value) =>
-              _update((p) => p.copyWith(nationalId: int.tryParse(value))),
-          onImportFromContacts: _importFromContacts,
-          onBirthdateChanged: (value) =>
-              _update((p) => p.copyWith(birthdate: value)),
+        BlocListener<PhoneContactsEditorCubit, PhoneContactsEditorState>(
+          listenWhen: (previous, current) =>
+              previous.ownContacts != current.ownContacts ||
+              previous.familyContacts != current.familyContacts,
+          listener: (context, state) => _update(
+            (p) => p.copyWith(
+              contacts: state.ownContacts,
+              familyContacts: state.familyContacts,
+            ),
+          ),
+          child: PersonContactFields(
+            person: person,
+            onNameChanged: (value) =>
+                _update((p) => p.copyWith(name: value.trim())),
+            onNationalIdChanged: (value) =>
+                _update((p) => p.copyWith(nationalId: int.tryParse(value))),
+            onImportFromContacts: _importFromContacts,
+            onBirthdateChanged: (value) =>
+                _update((p) => p.copyWith(birthdate: value)),
+          ),
         ),
         PersonFamilyAndAddressFields(
           person: person,
           isCreate: widget.controller.isCreate,
-          onAddressChanged: (value) =>
-              _update((p) => p.copyWith(address: value)),
+          onAddressChanged: (value) {
+            _update((p) => p.copyWith(address: value));
+            context.read<PhoneContactsEditorCubit>().changeFamilyAvailability(
+              hasFamily: _canHaveFamilyNumbers,
+            );
+          },
           onEditLocation: _editGeoLocation,
           familyValidator: _familyValidator,
           onFamilyChanged: _changeFamily,
@@ -185,7 +198,9 @@ class _PersonEditFormState extends State<PersonEditForm> {
           address: widget.controller.initialObject?.address,
         ),
       );
-      _followFamilyPhoneNumbers();
+      _followFamilyPhoneNumbers(
+        saved: widget.controller.initialObject?.familyContacts ?? const [],
+      );
 
       return;
     }
@@ -199,14 +214,14 @@ class _PersonEditFormState extends State<PersonEditForm> {
         },
       ),
     );
-    _followFamilyPhoneNumbers();
+    _followFamilyPhoneNumbers(saved: const []);
   }
 
-  void _followFamilyPhoneNumbers() => unawaited(
-    context.read<PhoneContactsEditorCubit>().changeFamily(
-      widget.controller.newObject.familyId,
-    ),
-  );
+  void _followFamilyPhoneNumbers({required List<FamilyPhoneContact> saved}) =>
+      context.read<PhoneContactsEditorCubit>().changeFamily(
+        saved: saved,
+        hasFamily: _canHaveFamilyNumbers,
+      );
 
   Future<void> _selectServices(
     FormFieldState<(Set<Service>, Set<Group>)> state,
@@ -274,6 +289,13 @@ class _PersonEditFormState extends State<PersonEditForm> {
           .entries
           .map((entry) => entry.key.copyWith(groups: entry.value)),
     ).union(services.toSet()).toList();
+  }
+
+  bool get _canHaveFamilyNumbers {
+    final person = widget.controller.newObject;
+
+    return person.family != null ||
+        (widget.controller.isCreate && person.address != null);
   }
 
   String? _familyValidator(Family? family) =>

@@ -19,7 +19,7 @@ part 'family.g.dart';
     'children': 'عائلات الأبناء',
     'parents': 'عائلات الآباء',
   },
-  ignoreFields: ['blurhash', 'familyAdminsPhones', 'userCanEdit'],
+  ignoreFields: ['blurhash', 'contacts', 'userCanEdit'],
 )
 class Family extends ViewableWithIDAndImage
     with _$Family
@@ -80,8 +80,8 @@ class Family extends ViewableWithIDAndImage
   final List<Family>? parents;
 
   @override
-  @JsonKey(readValue: _readFamilyAdminsPhones)
-  final Json? familyAdminsPhones;
+  @JsonKey(defaultValue: <FamilyPhoneContact>[])
+  final List<FamilyPhoneContact> contacts;
 
   @override
   final LastRecordedByInfo? lastEdit;
@@ -110,6 +110,7 @@ class Family extends ViewableWithIDAndImage
     required this.name,
     this.status = MartialStatus.married,
     this.userCanEdit = false,
+    this.contacts = const [],
     this.address,
     this.marriageDate,
     this.deceasedSpouseName,
@@ -123,7 +124,6 @@ class Family extends ViewableWithIDAndImage
     this.lastEdit,
     this.lastVisit,
     this.lastFatherVisit,
-    this.familyAdminsPhones,
   });
 
   factory Family.fromJson(Map<String, Object?> json) => _$FamilyFromJson(json);
@@ -152,6 +152,9 @@ class Family extends ViewableWithIDAndImage
     churchId: church?.id.toUuid(),
     notes: notes,
     color: colorToInt(color),
+    unclaimedContacts: Input_ContactsArrRelInsertInput(
+      data: contacts.map((f) => f.toInsertInput()).toList(),
+    ),
     visitHistory: Input_HistoryVisitHistoryArrRelInsertInput(
       data: [
         if (lastVisit != null)
@@ -254,6 +257,3 @@ List<Family>? familyParentsFromJson(List? data) =>
     data?.map((e) => Family.fromJson(e['parent'])).toList();
 List<Json>? familyParentsToJson(List<Family>? hobbies) =>
     hobbies?.map((e) => {'parent': e.toJson()}).toList();
-
-Json? _readFamilyAdminsPhones(Map json, String key) =>
-    json[key]?['aggregatedPhones'];

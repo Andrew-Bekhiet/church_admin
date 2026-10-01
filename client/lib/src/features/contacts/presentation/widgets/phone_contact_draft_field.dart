@@ -12,53 +12,62 @@ class PhoneContactDraftField extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<PhoneContactsEditorCubit>();
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        spacing: 4,
-        children: [
-          Row(
-            spacing: 8,
-            children: [
-              Expanded(
-                child: PhoneContactLabelPicker(
-                  key: PhoneContactsEditorKeys.labelPicker(draft.key),
-                  label: draft.label,
-                  onChanged: (label) => cubit.changeLabel(draft.key, label),
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      spacing: 4,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          spacing: 8,
+          children: [
+            Flexible(
+              child: PhoneContactLabelPicker(
+                key: PhoneContactDraftFieldKeys.labelPicker(draft.key),
+                label: draft.label,
+                onChanged: (label) => cubit.changeLabel(draft.key, label),
               ),
-              if (draft.canBeMain)
-                ChoiceChip(
-                  key: PhoneContactsEditorKeys.mainChip(draft.key),
-                  label: const Text('أساسي'),
-                  selected: draft.isMainPhone,
-                  onSelected: (_) => cubit.toggleMain(draft.key),
-                ),
-              IconButton(
-                key: PhoneContactsEditorKeys.removeButton(draft.key),
-                tooltip: 'حذف الرقم',
-                icon: const Icon(Symbols.delete),
-                onPressed: () => cubit.remove(draft.key),
+            ),
+            if (draft.canBeMain)
+              FilterChip(
+                key: PhoneContactDraftFieldKeys.mainChip(draft.key),
+                avatar: draft.isMainPhone ? null : const Icon(Symbols.star),
+                label: const Text('أساسي'),
+                selected: draft.isMainPhone,
+                onSelected: (_) => cubit.toggleMain(draft.key),
               ),
-            ],
+          ],
+        ),
+        TextFormField(
+          key: PhoneContactDraftFieldKeys.phoneField(draft.key),
+          initialValue: draft.input,
+          decoration: InputDecoration(
+            hintText: 'مثال: 01234...',
+            prefixIcon: const Icon(Symbols.call),
+            suffixIcon: IconButton(
+              key: PhoneContactDraftFieldKeys.removeButton(draft.key),
+              tooltip: 'حذف الرقم',
+              icon: const Icon(Symbols.delete),
+              onPressed: () => cubit.remove(draft.key),
+            ),
           ),
-          TextFormField(
-            key: PhoneContactsEditorKeys.phoneField(draft.key),
-            initialValue: draft.input,
-            decoration: const InputDecoration(hintText: 'مثال: 01234...'),
-            keyboardType: TextInputType.phone,
-            autofillHints: const [AutofillHints.telephoneNumber],
-            textInputAction: TextInputAction.next,
-            onChanged: (value) => cubit.changeInput(draft.key, value),
-            validator: (_) => switch (cubit.state) {
-              PhoneContactsEditorReady(:final errors) =>
-                errors[draft.key]?.message,
-              PhoneContactsEditorLoading() => null,
-            },
-          ),
-        ],
-      ),
+          keyboardType: TextInputType.phone,
+          autofillHints: const [AutofillHints.telephoneNumber],
+          textInputAction: TextInputAction.next,
+          onChanged: (value) => cubit.changeInput(draft.key, value),
+          validator: (_) => cubit.state.errors[draft.key]?.message,
+        ),
+      ],
     );
   }
+}
+
+abstract final class PhoneContactDraftFieldKeys {
+  static Key phoneField(String draftKey) =>
+      Key('phone_contacts_editor_phone_$draftKey');
+  static Key labelPicker(String draftKey) =>
+      Key('phone_contacts_editor_label_$draftKey');
+  static Key mainChip(String draftKey) =>
+      Key('phone_contacts_editor_main_$draftKey');
+  static Key removeButton(String draftKey) =>
+      Key('phone_contacts_editor_remove_$draftKey');
 }
