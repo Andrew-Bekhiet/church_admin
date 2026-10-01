@@ -6,7 +6,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final HomeBloc homeBloc;
@@ -21,7 +20,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PostHogUnmaskWidget(
+    return SessionReplayUnmask(
       child: RepaintBoundary(
         child: AnimatedSize(
           duration: const Duration(milliseconds: 250),

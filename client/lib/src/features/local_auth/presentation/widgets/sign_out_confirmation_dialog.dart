@@ -1,12 +1,12 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class SignOutConfirmationDialog extends StatelessWidget {
   const SignOutConfirmationDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return PostHogUnmaskWidget(
+    return SessionReplayUnmask(
       child: AlertDialog(
         title: const Text('تسجيل الخروج؟'),
         content: const Text(

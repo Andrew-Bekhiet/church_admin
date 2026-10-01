@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_cache_inspector/graphql_cache_inspector.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class HomeDrawer extends StatelessWidget {
   final HomeBloc homeBloc;
@@ -108,14 +107,14 @@ class HomeDrawer extends StatelessWidget {
                 if (state case AuthAuthenticated(:final userData?))
                   ListTile(
                     leading: ImageObjectWidget(userData),
-                    title: const PostHogUnmaskWidget(child: Text('حسابي')),
+                    title: const SessionReplayUnmask(child: Text('حسابي')),
                     onTap: () {
                       Scaffold.of(context).openEndDrawer();
                       unawaited(const MyAccountRoute().push(context));
                     },
                   ),
                 Expanded(
-                  child: PostHogUnmaskWidget(
+                  child: SessionReplayUnmask(
                     child: NavigationDrawer(
                       onDestinationSelected: (i) {
                         Scaffold.of(context).openEndDrawer();
@@ -133,7 +132,7 @@ class HomeDrawer extends StatelessWidget {
                     ),
                   ),
                 ),
-                PostHogUnmaskWidget(
+                SessionReplayUnmask(
                   child: Column(
                     children: [
                       ListTile(

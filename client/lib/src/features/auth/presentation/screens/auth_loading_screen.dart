@@ -1,14 +1,13 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class AuthLoadingScreen extends StatelessWidget {
   const AuthLoadingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return PostHogUnmaskWidget(
+    return SessionReplayUnmask(
       child: BlocBuilder<AuthBloc, AuthState>(
         bloc: AuthBloc.I,
         builder: (context, state) {

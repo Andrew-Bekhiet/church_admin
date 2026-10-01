@@ -114,7 +114,7 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
                           ? constraints.biggest.width - kToolbarHeight * 3 - 16
                           : double.infinity,
                     ),
-                    child: OrganisationalUnmask(
+                    child: UnmaskUnlessParishData(
                       object: widget.viewable,
                       child: Text(
                         widget.viewable.name,

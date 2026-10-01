@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -20,7 +19,7 @@ class UpdateAvailableWidget extends StatelessWidget {
 
     final themeData = Theme.of(context);
 
-    return PostHogUnmaskWidget(
+    return SessionReplayUnmask(
       child: StreamBuilder(
         stream: featureFlagRepo.onConfigChanged
             .startWith(null)

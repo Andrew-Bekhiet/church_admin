@@ -79,7 +79,7 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
               : null),
       title:
           title ??
-          OrganisationalUnmask(
+          UnmaskUnlessParishData(
             object: object,
             child: Text(object.name, overflow: TextOverflow.ellipsis),
           ),

@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class OutdatedFeatureScreen extends StatelessWidget {
   const OutdatedFeatureScreen({super.key});
@@ -9,7 +8,7 @@ class OutdatedFeatureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final downloadUrl = FeatureFlagsRepository.I.downloadUrl;
 
-    return PostHogUnmaskWidget(
+    return SessionReplayUnmask(
       child: Scaffold(
         appBar: AppBar(),
         body: Padding(

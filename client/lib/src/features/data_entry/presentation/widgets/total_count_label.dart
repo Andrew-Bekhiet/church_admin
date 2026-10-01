@@ -1,5 +1,5 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class TotalCountLabel extends StatelessWidget {
   final Stream<String?> countStream;
@@ -10,7 +10,7 @@ class TotalCountLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<String?>(
       stream: countStream,
-      builder: (context, snapshot) => PostHogUnmaskWidget(
+      builder: (context, snapshot) => SessionReplayUnmask(
         child: Text(
           snapshot.data ?? '',
           style: Theme.of(context).textTheme.titleLarge,

@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class ForceUpdateScreen extends StatelessWidget {
   final FeatureFlagsRepository _featureFlagsRepo;
@@ -19,7 +18,7 @@ class ForceUpdateScreen extends StatelessWidget {
 
     final forceUpdateMessage = _featureFlagsRepo.forceUpdateMessage;
 
-    return PostHogUnmaskWidget(
+    return SessionReplayUnmask(
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),

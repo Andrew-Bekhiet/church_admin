@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class HomeScreenSummary extends StatelessWidget {
   final HomeBloc homeBloc;
@@ -21,7 +20,7 @@ class HomeScreenSummary extends StatelessWidget {
       builder: (context, dailyData) {
         return ListView(
           children: [
-            PostHogUnmaskWidget(
+            SessionReplayUnmask(
               child: Image.asset(
                 _getHomeImage(),
                 alignment: const Alignment(0, -0.7),
@@ -68,7 +67,7 @@ class HomeScreenSummary extends StatelessWidget {
                           textMaxLines: 2,
                         ),
                       ),
-                    PostHogUnmaskWidget(
+                    SessionReplayUnmask(
                       child: HomeModeSection(
                         key: HomeScreenSummaryKeys.verseButtonKey,
                         onTap: () => showMessageDialog(
@@ -80,7 +79,7 @@ class HomeScreenSummary extends StatelessWidget {
                         text: dailyData.verse,
                       ),
                     ),
-                    PostHogUnmaskWidget(
+                    SessionReplayUnmask(
                       child: HomeModeSection(
                         key: HomeScreenSummaryKeys.sneksarButtonKey,
                         onTap: () => showMessageDialog(
@@ -93,7 +92,7 @@ class HomeScreenSummary extends StatelessWidget {
                         text: dailyData.sneksar,
                       ),
                     ),
-                    PostHogUnmaskWidget(
+                    SessionReplayUnmask(
                       child: HomeModeSection(
                         key: HomeScreenSummaryKeys.sayingButtonKey,
                         onTap: () => showMessageDialog(
@@ -109,7 +108,7 @@ class HomeScreenSummary extends StatelessWidget {
                 ),
               },
             ),
-            PostHogUnmaskWidget(
+            SessionReplayUnmask(
               child: Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16, top: 25),
                 child: IntrinsicHeight(

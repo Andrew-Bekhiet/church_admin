@@ -4,7 +4,6 @@ import 'package:church_admin/src/features/auth/presentation/widgets/auth_mode_sw
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -102,8 +101,8 @@ class _LoginScreenState extends State<LoginScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  const PostHogUnmaskWidget(child: _LoginTitle()),
-                  PostHogUnmaskWidget(
+                  const SessionReplayUnmask(child: _LoginTitle()),
+                  SessionReplayUnmask(
                     child: SizedBox(
                       height: screenSize.shortestSide,
                       width: screenSize.shortestSide,
@@ -125,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     privacyPolicyRecognizer: _privacyPolicyRecognizer,
                     onSubmit: _submit,
                   ),
-                  PostHogUnmaskWidget(
+                  SessionReplayUnmask(
                     child: AuthModeSwitch(
                       isLogin: _isLogin,
                       onToggle: () => setState(() => _isLogin = !_isLogin),

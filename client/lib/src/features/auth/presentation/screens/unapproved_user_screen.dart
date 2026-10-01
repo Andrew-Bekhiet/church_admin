@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class UnapprovedUserScreen extends StatelessWidget {
   const UnapprovedUserScreen({super.key});
@@ -9,7 +8,7 @@ class UnapprovedUserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return PostHogUnmaskWidget(
+    return SessionReplayUnmask(
       child: Scaffold(
         appBar: AppBar(
           title: const Text('في انتظار الموافقة'),

@@ -1,6 +1,6 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class ChipTabBar extends StatelessWidget {
   const ChipTabBar({
@@ -22,7 +22,7 @@ class ChipTabBar extends StatelessWidget {
           : BorderSide.none,
     );
 
-    return PostHogUnmaskWidget(
+    return SessionReplayUnmask(
       child: AnimatedBuilder(
         animation: tabController.animation!,
         builder: (context, _) {

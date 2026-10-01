@@ -67,7 +67,7 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
                   ),
                 ),
                 title ??
-                    OrganisationalUnmask(
+                    UnmaskUnlessParishData(
                       object: object,
                       child: Text(
                         object.name,

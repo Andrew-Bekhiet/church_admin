@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class AboutAppService {
   static AboutAppService get I =>
@@ -31,7 +30,7 @@ class AboutAppService {
 
     return showDialog<void>(
       context: context,
-      builder: (context) => PostHogUnmaskWidget(
+      builder: (context) => SessionReplayUnmask(
         child: AboutDialog(
           applicationIcon: appIcon,
           applicationName: 'كنيسة السيدة العذراء مريم',

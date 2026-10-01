@@ -1,12 +1,11 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/widgets.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
-class OrganisationalUnmask extends StatelessWidget {
+class UnmaskUnlessParishData extends StatelessWidget {
   final Viewable object;
   final Widget child;
 
-  const OrganisationalUnmask({
+  const UnmaskUnlessParishData({
     required this.object,
     required this.child,
     super.key,
@@ -19,7 +18,7 @@ class OrganisationalUnmask extends StatelessWidget {
     Group() ||
     Area() ||
     StudyYear() ||
-    Meeting() => PostHogUnmaskWidget(child: child),
+    Meeting() => SessionReplayUnmask(child: child),
     _ => child,
   };
 }

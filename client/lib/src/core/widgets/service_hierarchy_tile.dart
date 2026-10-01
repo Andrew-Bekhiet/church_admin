@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class ServiceHierarchyTile extends StatelessWidget {
   final Service service;
@@ -82,7 +81,7 @@ class ServiceHierarchyTile extends StatelessWidget {
             onLongPress: config?.onLongPress != null
                 ? () => config!.onLongPress!(service)
                 : null,
-            child: PostHogUnmaskWidget(child: Text(service.name)),
+            child: SessionReplayUnmask(child: Text(service.name)),
           ),
           children: [
             if (showClasses)

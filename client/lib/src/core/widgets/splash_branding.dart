@@ -1,5 +1,5 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class SplashBranding extends StatelessWidget {
   final Widget? footer;
@@ -8,7 +8,7 @@ class SplashBranding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PostHogUnmaskWidget(
+    return SessionReplayUnmask(
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -1,14 +1,16 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 void main() {
-  Future<Finder> pumpNameOf(WidgetTester tester, Viewable object) async {
+  Future<Finder> pumpNameAndFindItsUnmask(
+    WidgetTester tester,
+    Viewable object,
+  ) async {
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.rtl,
-        child: OrganisationalUnmask(
+        child: UnmaskUnlessParishData(
           object: object,
           child: Text(object.name),
         ),
@@ -17,7 +19,7 @@ void main() {
 
     return find.ancestor(
       of: find.text(object.name),
-      matching: find.byType(PostHogUnmaskWidget),
+      matching: find.byType(SessionReplayUnmask),
     );
   }
 
@@ -25,7 +27,10 @@ void main() {
     tester,
   ) async {
     expect(
-      await pumpNameOf(tester, StudyYear(order: 1, name: 'أولى ابتدائي')),
+      await pumpNameAndFindItsUnmask(
+        tester,
+        StudyYear(order: 1, name: 'أولى ابتدائي'),
+      ),
       findsOneWidget,
     );
   });
@@ -34,7 +39,10 @@ void main() {
     tester,
   ) async {
     expect(
-      await pumpNameOf(tester, const Father(id: '1', name: 'أبونا يوحنا')),
+      await pumpNameAndFindItsUnmask(
+        tester,
+        const Father(id: '1', name: 'أبونا يوحنا'),
+      ),
       findsNothing,
     );
   });

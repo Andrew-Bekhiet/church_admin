@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -29,7 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return PostHogUnmaskWidget(
+    return SessionReplayUnmask(
       child: Scaffold(
         appBar: AppBar(title: const Text('الإعدادات')),
         body: Form(
