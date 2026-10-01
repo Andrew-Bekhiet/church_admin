@@ -123,6 +123,11 @@ array_relationships:
           name: visit_history
           schema: history
 computed_fields:
+  - name: insertedInCurrentTransaction
+    definition:
+      function:
+        name: family_inserted_in_current_transaction
+        schema: public
   - name: userCanEdit
     definition:
       function:

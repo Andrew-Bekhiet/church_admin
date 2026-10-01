@@ -67,15 +67,16 @@ insert_permissions:
                         is_family_admin:
                           _eq: true
                     - family: *has_non_admin_member_editable_by_user
+          - person:
+              insertedInCurrentTransaction:
+                _eq: true
           - _and:
               - personType:
                   is_family_admin:
                     _eq: true
               - family:
-                  _not:
-                    persons:
-                      deleted_at:
-                        _is_null: true
+                  insertedInCurrentTransaction:
+                    _eq: true
       columns:
         - family_id
         - id

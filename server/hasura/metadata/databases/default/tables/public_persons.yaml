@@ -228,6 +228,11 @@ computed_fields:
       function:
         name: get_person_birthday
         schema: public
+  - name: insertedInCurrentTransaction
+    definition:
+      function:
+        name: person_inserted_in_current_transaction
+        schema: public
   - name: userCanEdit
     definition:
       function:
