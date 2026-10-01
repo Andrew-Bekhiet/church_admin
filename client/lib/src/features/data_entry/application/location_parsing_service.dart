@@ -9,6 +9,19 @@ class LocationParsingService {
 
   const LocationParsingService();
 
+  bool isSupportedLocationUri(Uri uri) => switch (uri) {
+    Uri(scheme: 'geo') ||
+    Uri(
+      scheme: 'https',
+      host: 'www.google.com' || 'google.com',
+      pathSegments: ['maps', ...],
+    ) ||
+    Uri(scheme: 'https', host: 'maps.google.com') ||
+    Uri(scheme: 'https', host: 'maps.app.goo.gl', pathSegments: [_]) ||
+    Uri(scheme: 'https', host: 'goo.gl', pathSegments: ['maps', _]) => true,
+    _ => false,
+  };
+
   Future<Point?> maybeParseLocationUri(Uri uri) async {
     try {
       switch (uri) {

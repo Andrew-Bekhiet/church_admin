@@ -14,6 +14,49 @@ void main() {
     'LocationParsingService',
     () {
       test(
+        'Google Maps and geo links are recognised as location links',
+        () {
+          const unit = LocationParsingService();
+
+          for (final link in [
+            'geo:30.1,31.2',
+            'https://www.google.com/maps/search/30.1,+31.2',
+            'https://google.com/maps/place/Cairo',
+            'https://maps.google.com/?q=30.1,31.2',
+            'https://maps.app.goo.gl/jkBfnFhsrs4q9p5p7',
+            'https://goo.gl/maps/jkBfnFhsrs4q9p5p7',
+          ]) {
+            expect(
+              unit.isSupportedLocationUri(Uri.parse(link)),
+              isTrue,
+              reason: link,
+            );
+          }
+        },
+      );
+
+      test(
+        'links that are not maps links are not recognised as location links',
+        () {
+          const unit = LocationParsingService();
+
+          for (final link in [
+            'https://example.com/maps/search/30.1,31.2',
+            'https://www.google.com/search?q=cairo',
+            'https://goo.gl/abc',
+            'http://maps.google.com/?q=30.1,31.2',
+            'some copied text',
+          ]) {
+            expect(
+              unit.isSupportedLocationUri(Uri.parse(link)),
+              isFalse,
+              reason: link,
+            );
+          }
+        },
+      );
+
+      test(
         'geo URIs',
         () async {
           const unit = LocationParsingService();
