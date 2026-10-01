@@ -63,7 +63,7 @@ select
 from public.contacts as c
 left join public.persons as p on c.person_id = p.id and p.deleted_at is null;
 
-create or replace view public.main_contacts as
+create or replace view public.persons_main_contacts as
 select
     id,
     person_id,

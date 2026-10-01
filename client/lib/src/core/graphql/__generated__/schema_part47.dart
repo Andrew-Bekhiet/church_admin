@@ -640,6 +640,1022 @@ class _CopyWithStubImpl_Input_PersonsInsertInput<TRes>
       CopyWith_Input_HistoryVisitHistoryArrRelInsertInput.stub(_res);
 }
 
+class Input_PersonsMainContactsBoolExp {
+  factory Input_PersonsMainContactsBoolExp({
+    List<Input_PersonsMainContactsBoolExp>? $_and,
+    Input_PersonsMainContactsBoolExp? $_not,
+    List<Input_PersonsMainContactsBoolExp>? $_or,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? label,
+    Input_UuidComparisonExp? personId,
+    Input_StringComparisonExp? phone,
+  }) => Input_PersonsMainContactsBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (id != null) r'id': id,
+    if (label != null) r'label': label,
+    if (personId != null) r'personId': personId,
+    if (phone != null) r'phone': phone,
+  });
+
+  Input_PersonsMainContactsBoolExp._(this._$data);
+
+  factory Input_PersonsMainContactsBoolExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map(
+            (e) => Input_PersonsMainContactsBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
+          ? null
+          : Input_PersonsMainContactsBoolExp.fromJson(
+              (l$$_not as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map(
+            (e) => Input_PersonsMainContactsBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('label')) {
+      final l$label = data['label'];
+      result$data['label'] = l$label == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$label as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('personId')) {
+      final l$personId = data['personId'];
+      result$data['personId'] = l$personId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$personId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('phone')) {
+      final l$phone = data['phone'];
+      result$data['phone'] = l$phone == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$phone as Map<String, dynamic>),
+            );
+    }
+    return Input_PersonsMainContactsBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_PersonsMainContactsBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_PersonsMainContactsBoolExp>?);
+
+  Input_PersonsMainContactsBoolExp? get $_not =>
+      (_$data['_not'] as Input_PersonsMainContactsBoolExp?);
+
+  List<Input_PersonsMainContactsBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_PersonsMainContactsBoolExp>?);
+
+  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
+  Input_StringComparisonExp? get label =>
+      (_$data['label'] as Input_StringComparisonExp?);
+
+  Input_UuidComparisonExp? get personId =>
+      (_$data['personId'] as Input_UuidComparisonExp?);
+
+  Input_StringComparisonExp? get phone =>
+      (_$data['phone'] as Input_StringComparisonExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
+    }
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('label')) {
+      final l$label = label;
+      result$data['label'] = l$label?.toJson();
+    }
+    if (_$data.containsKey('personId')) {
+      final l$personId = personId;
+      result$data['personId'] = l$personId?.toJson();
+    }
+    if (_$data.containsKey('phone')) {
+      final l$phone = phone;
+      result$data['phone'] = l$phone?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_PersonsMainContactsBoolExp<Input_PersonsMainContactsBoolExp>
+  get copyWith => CopyWith_Input_PersonsMainContactsBoolExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonsMainContactsBoolExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
+      return false;
+    }
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
+      return false;
+    }
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
+      return false;
+    }
+    if (l$$_not != lOther$$_not) {
+      return false;
+    }
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
+      return false;
+    }
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$label = label;
+    final lOther$label = other.label;
+    if (_$data.containsKey('label') != other._$data.containsKey('label')) {
+      return false;
+    }
+    if (l$label != lOther$label) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (_$data.containsKey('personId') !=
+        other._$data.containsKey('personId')) {
+      return false;
+    }
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$phone = phone;
+    final lOther$phone = other.phone;
+    if (_$data.containsKey('phone') != other._$data.containsKey('phone')) {
+      return false;
+    }
+    if (l$phone != lOther$phone) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$id = id;
+    final l$label = label;
+    final l$personId = personId;
+    final l$phone = phone;
+    return Object.hashAll([
+      _$data.containsKey('_and')
+          ? l$$_and == null
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('label') ? l$label : const {},
+      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('phone') ? l$phone : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_PersonsMainContactsBoolExp<TRes> {
+  factory CopyWith_Input_PersonsMainContactsBoolExp(
+    Input_PersonsMainContactsBoolExp instance,
+    TRes Function(Input_PersonsMainContactsBoolExp) then,
+  ) = _CopyWithImpl_Input_PersonsMainContactsBoolExp;
+
+  factory CopyWith_Input_PersonsMainContactsBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonsMainContactsBoolExp;
+
+  TRes call({
+    List<Input_PersonsMainContactsBoolExp>? $_and,
+    Input_PersonsMainContactsBoolExp? $_not,
+    List<Input_PersonsMainContactsBoolExp>? $_or,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? label,
+    Input_UuidComparisonExp? personId,
+    Input_StringComparisonExp? phone,
+  });
+  TRes $_and(
+    Iterable<Input_PersonsMainContactsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_PersonsMainContactsBoolExp<
+          Input_PersonsMainContactsBoolExp
+        >
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_PersonsMainContactsBoolExp<TRes> get $_not;
+  TRes $_or(
+    Iterable<Input_PersonsMainContactsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_PersonsMainContactsBoolExp<
+          Input_PersonsMainContactsBoolExp
+        >
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_UuidComparisonExp<TRes> get id;
+  CopyWith_Input_StringComparisonExp<TRes> get label;
+  CopyWith_Input_UuidComparisonExp<TRes> get personId;
+  CopyWith_Input_StringComparisonExp<TRes> get phone;
+}
+
+class _CopyWithImpl_Input_PersonsMainContactsBoolExp<TRes>
+    implements CopyWith_Input_PersonsMainContactsBoolExp<TRes> {
+  _CopyWithImpl_Input_PersonsMainContactsBoolExp(this._instance, this._then);
+
+  final Input_PersonsMainContactsBoolExp _instance;
+
+  final TRes Function(Input_PersonsMainContactsBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? id = _undefined,
+    Object? label = _undefined,
+    Object? personId = _undefined,
+    Object? phone = _undefined,
+  }) => _then(
+    Input_PersonsMainContactsBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined)
+        '_and': ($_and as List<Input_PersonsMainContactsBoolExp>?),
+      if ($_not != _undefined)
+        '_not': ($_not as Input_PersonsMainContactsBoolExp?),
+      if ($_or != _undefined)
+        '_or': ($_or as List<Input_PersonsMainContactsBoolExp>?),
+      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
+      if (label != _undefined) 'label': (label as Input_StringComparisonExp?),
+      if (personId != _undefined)
+        'personId': (personId as Input_UuidComparisonExp?),
+      if (phone != _undefined) 'phone': (phone as Input_StringComparisonExp?),
+    }),
+  );
+
+  TRes $_and(
+    Iterable<Input_PersonsMainContactsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_PersonsMainContactsBoolExp<
+          Input_PersonsMainContactsBoolExp
+        >
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map(
+        (e) => CopyWith_Input_PersonsMainContactsBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_PersonsMainContactsBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_PersonsMainContactsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsMainContactsBoolExp(
+            local$$_not,
+            (e) => call($_not: e),
+          );
+  }
+
+  TRes $_or(
+    Iterable<Input_PersonsMainContactsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_PersonsMainContactsBoolExp<
+          Input_PersonsMainContactsBoolExp
+        >
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map(
+        (e) => CopyWith_Input_PersonsMainContactsBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get label {
+    final local$label = _instance.label;
+    return local$label == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$label,
+            (e) => call(label: e),
+          );
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get personId {
+    final local$personId = _instance.personId;
+    return local$personId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$personId,
+            (e) => call(personId: e),
+          );
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get phone {
+    final local$phone = _instance.phone;
+    return local$phone == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$phone,
+            (e) => call(phone: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_PersonsMainContactsBoolExp<TRes>
+    implements CopyWith_Input_PersonsMainContactsBoolExp<TRes> {
+  _CopyWithStubImpl_Input_PersonsMainContactsBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_PersonsMainContactsBoolExp>? $_and,
+    Input_PersonsMainContactsBoolExp? $_not,
+    List<Input_PersonsMainContactsBoolExp>? $_or,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? label,
+    Input_UuidComparisonExp? personId,
+    Input_StringComparisonExp? phone,
+  }) => _res;
+
+  $_and(_fn) => _res;
+
+  CopyWith_Input_PersonsMainContactsBoolExp<TRes> get $_not =>
+      CopyWith_Input_PersonsMainContactsBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get label =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get personId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get phone =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+}
+
+class Input_PersonsMainContactsOrderBy {
+  factory Input_PersonsMainContactsOrderBy({
+    Enum_OrderBy? id,
+    Enum_OrderBy? label,
+    Enum_OrderBy? personId,
+    Enum_OrderBy? phone,
+  }) => Input_PersonsMainContactsOrderBy._({
+    if (id != null) r'id': id,
+    if (label != null) r'label': label,
+    if (personId != null) r'personId': personId,
+    if (phone != null) r'phone': phone,
+  });
+
+  Input_PersonsMainContactsOrderBy._(this._$data);
+
+  factory Input_PersonsMainContactsOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
+    }
+    if (data.containsKey('label')) {
+      final l$label = data['label'];
+      result$data['label'] = l$label == null
+          ? null
+          : fromJson_Enum_OrderBy((l$label as String));
+    }
+    if (data.containsKey('personId')) {
+      final l$personId = data['personId'];
+      result$data['personId'] = l$personId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$personId as String));
+    }
+    if (data.containsKey('phone')) {
+      final l$phone = data['phone'];
+      result$data['phone'] = l$phone == null
+          ? null
+          : fromJson_Enum_OrderBy((l$phone as String));
+    }
+    return Input_PersonsMainContactsOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get label => (_$data['label'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get phone => (_$data['phone'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
+    }
+    if (_$data.containsKey('label')) {
+      final l$label = label;
+      result$data['label'] = l$label == null
+          ? null
+          : toJson_Enum_OrderBy(l$label);
+    }
+    if (_$data.containsKey('personId')) {
+      final l$personId = personId;
+      result$data['personId'] = l$personId == null
+          ? null
+          : toJson_Enum_OrderBy(l$personId);
+    }
+    if (_$data.containsKey('phone')) {
+      final l$phone = phone;
+      result$data['phone'] = l$phone == null
+          ? null
+          : toJson_Enum_OrderBy(l$phone);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_PersonsMainContactsOrderBy<Input_PersonsMainContactsOrderBy>
+  get copyWith => CopyWith_Input_PersonsMainContactsOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonsMainContactsOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$label = label;
+    final lOther$label = other.label;
+    if (_$data.containsKey('label') != other._$data.containsKey('label')) {
+      return false;
+    }
+    if (l$label != lOther$label) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (_$data.containsKey('personId') !=
+        other._$data.containsKey('personId')) {
+      return false;
+    }
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$phone = phone;
+    final lOther$phone = other.phone;
+    if (_$data.containsKey('phone') != other._$data.containsKey('phone')) {
+      return false;
+    }
+    if (l$phone != lOther$phone) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$label = label;
+    final l$personId = personId;
+    final l$phone = phone;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('label') ? l$label : const {},
+      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('phone') ? l$phone : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_PersonsMainContactsOrderBy<TRes> {
+  factory CopyWith_Input_PersonsMainContactsOrderBy(
+    Input_PersonsMainContactsOrderBy instance,
+    TRes Function(Input_PersonsMainContactsOrderBy) then,
+  ) = _CopyWithImpl_Input_PersonsMainContactsOrderBy;
+
+  factory CopyWith_Input_PersonsMainContactsOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonsMainContactsOrderBy;
+
+  TRes call({
+    Enum_OrderBy? id,
+    Enum_OrderBy? label,
+    Enum_OrderBy? personId,
+    Enum_OrderBy? phone,
+  });
+}
+
+class _CopyWithImpl_Input_PersonsMainContactsOrderBy<TRes>
+    implements CopyWith_Input_PersonsMainContactsOrderBy<TRes> {
+  _CopyWithImpl_Input_PersonsMainContactsOrderBy(this._instance, this._then);
+
+  final Input_PersonsMainContactsOrderBy _instance;
+
+  final TRes Function(Input_PersonsMainContactsOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? label = _undefined,
+    Object? personId = _undefined,
+    Object? phone = _undefined,
+  }) => _then(
+    Input_PersonsMainContactsOrderBy._({
+      ..._instance._$data,
+      if (id != _undefined) 'id': (id as Enum_OrderBy?),
+      if (label != _undefined) 'label': (label as Enum_OrderBy?),
+      if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
+      if (phone != _undefined) 'phone': (phone as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_PersonsMainContactsOrderBy<TRes>
+    implements CopyWith_Input_PersonsMainContactsOrderBy<TRes> {
+  _CopyWithStubImpl_Input_PersonsMainContactsOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? id,
+    Enum_OrderBy? label,
+    Enum_OrderBy? personId,
+    Enum_OrderBy? phone,
+  }) => _res;
+}
+
+class Input_PersonsMainContactsStreamCursorInput {
+  factory Input_PersonsMainContactsStreamCursorInput({
+    required Input_PersonsMainContactsStreamCursorValueInput initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => Input_PersonsMainContactsStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
+
+  Input_PersonsMainContactsStreamCursorInput._(this._$data);
+
+  factory Input_PersonsMainContactsStreamCursorInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = data['initialValue'];
+    result$data['initialValue'] =
+        Input_PersonsMainContactsStreamCursorValueInput.fromJson(
+          (l$initialValue as Map<String, dynamic>),
+        );
+    if (data.containsKey('ordering')) {
+      final l$ordering = data['ordering'];
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : fromJson_Enum_CursorOrdering((l$ordering as String));
+    }
+    return Input_PersonsMainContactsStreamCursorInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_PersonsMainContactsStreamCursorValueInput get initialValue =>
+      (_$data['initialValue']
+          as Input_PersonsMainContactsStreamCursorValueInput);
+
+  Enum_CursorOrdering? get ordering =>
+      (_$data['ordering'] as Enum_CursorOrdering?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = initialValue;
+    result$data['initialValue'] = l$initialValue.toJson();
+    if (_$data.containsKey('ordering')) {
+      final l$ordering = ordering;
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_PersonsMainContactsStreamCursorInput<
+    Input_PersonsMainContactsStreamCursorInput
+  >
+  get copyWith =>
+      CopyWith_Input_PersonsMainContactsStreamCursorInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonsMainContactsStreamCursorInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$initialValue = initialValue;
+    final lOther$initialValue = other.initialValue;
+    if (l$initialValue != lOther$initialValue) {
+      return false;
+    }
+    final l$ordering = ordering;
+    final lOther$ordering = other.ordering;
+    if (_$data.containsKey('ordering') !=
+        other._$data.containsKey('ordering')) {
+      return false;
+    }
+    if (l$ordering != lOther$ordering) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$initialValue = initialValue;
+    final l$ordering = ordering;
+    return Object.hashAll([
+      l$initialValue,
+      _$data.containsKey('ordering') ? l$ordering : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_PersonsMainContactsStreamCursorInput<TRes> {
+  factory CopyWith_Input_PersonsMainContactsStreamCursorInput(
+    Input_PersonsMainContactsStreamCursorInput instance,
+    TRes Function(Input_PersonsMainContactsStreamCursorInput) then,
+  ) = _CopyWithImpl_Input_PersonsMainContactsStreamCursorInput;
+
+  factory CopyWith_Input_PersonsMainContactsStreamCursorInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonsMainContactsStreamCursorInput;
+
+  TRes call({
+    Input_PersonsMainContactsStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  });
+  CopyWith_Input_PersonsMainContactsStreamCursorValueInput<TRes>
+  get initialValue;
+}
+
+class _CopyWithImpl_Input_PersonsMainContactsStreamCursorInput<TRes>
+    implements CopyWith_Input_PersonsMainContactsStreamCursorInput<TRes> {
+  _CopyWithImpl_Input_PersonsMainContactsStreamCursorInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_PersonsMainContactsStreamCursorInput _instance;
+
+  final TRes Function(Input_PersonsMainContactsStreamCursorInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? initialValue = _undefined,
+    Object? ordering = _undefined,
+  }) => _then(
+    Input_PersonsMainContactsStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue':
+            (initialValue as Input_PersonsMainContactsStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
+
+  CopyWith_Input_PersonsMainContactsStreamCursorValueInput<TRes>
+  get initialValue {
+    final local$initialValue = _instance.initialValue;
+    return CopyWith_Input_PersonsMainContactsStreamCursorValueInput(
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_PersonsMainContactsStreamCursorInput<TRes>
+    implements CopyWith_Input_PersonsMainContactsStreamCursorInput<TRes> {
+  _CopyWithStubImpl_Input_PersonsMainContactsStreamCursorInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_PersonsMainContactsStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => _res;
+
+  CopyWith_Input_PersonsMainContactsStreamCursorValueInput<TRes>
+  get initialValue =>
+      CopyWith_Input_PersonsMainContactsStreamCursorValueInput.stub(_res);
+}
+
+class Input_PersonsMainContactsStreamCursorValueInput {
+  factory Input_PersonsMainContactsStreamCursorValueInput({
+    UuidValue? id,
+    String? label,
+    UuidValue? personId,
+    String? phone,
+  }) => Input_PersonsMainContactsStreamCursorValueInput._({
+    if (id != null) r'id': id,
+    if (label != null) r'label': label,
+    if (personId != null) r'personId': personId,
+    if (phone != null) r'phone': phone,
+  });
+
+  Input_PersonsMainContactsStreamCursorValueInput._(this._$data);
+
+  factory Input_PersonsMainContactsStreamCursorValueInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null ? null : stringToUuid(l$id);
+    }
+    if (data.containsKey('label')) {
+      final l$label = data['label'];
+      result$data['label'] = (l$label as String?);
+    }
+    if (data.containsKey('personId')) {
+      final l$personId = data['personId'];
+      result$data['personId'] = l$personId == null
+          ? null
+          : stringToUuid(l$personId);
+    }
+    if (data.containsKey('phone')) {
+      final l$phone = data['phone'];
+      result$data['phone'] = (l$phone as String?);
+    }
+    return Input_PersonsMainContactsStreamCursorValueInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  UuidValue? get id => (_$data['id'] as UuidValue?);
+
+  String? get label => (_$data['label'] as String?);
+
+  UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
+  String? get phone => (_$data['phone'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : uuidToString(l$id);
+    }
+    if (_$data.containsKey('label')) {
+      final l$label = label;
+      result$data['label'] = l$label;
+    }
+    if (_$data.containsKey('personId')) {
+      final l$personId = personId;
+      result$data['personId'] = l$personId == null
+          ? null
+          : uuidToString(l$personId);
+    }
+    if (_$data.containsKey('phone')) {
+      final l$phone = phone;
+      result$data['phone'] = l$phone;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_PersonsMainContactsStreamCursorValueInput<
+    Input_PersonsMainContactsStreamCursorValueInput
+  >
+  get copyWith =>
+      CopyWith_Input_PersonsMainContactsStreamCursorValueInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonsMainContactsStreamCursorValueInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$label = label;
+    final lOther$label = other.label;
+    if (_$data.containsKey('label') != other._$data.containsKey('label')) {
+      return false;
+    }
+    if (l$label != lOther$label) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (_$data.containsKey('personId') !=
+        other._$data.containsKey('personId')) {
+      return false;
+    }
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$phone = phone;
+    final lOther$phone = other.phone;
+    if (_$data.containsKey('phone') != other._$data.containsKey('phone')) {
+      return false;
+    }
+    if (l$phone != lOther$phone) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$label = label;
+    final l$personId = personId;
+    final l$phone = phone;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('label') ? l$label : const {},
+      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('phone') ? l$phone : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_PersonsMainContactsStreamCursorValueInput<TRes> {
+  factory CopyWith_Input_PersonsMainContactsStreamCursorValueInput(
+    Input_PersonsMainContactsStreamCursorValueInput instance,
+    TRes Function(Input_PersonsMainContactsStreamCursorValueInput) then,
+  ) = _CopyWithImpl_Input_PersonsMainContactsStreamCursorValueInput;
+
+  factory CopyWith_Input_PersonsMainContactsStreamCursorValueInput.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Input_PersonsMainContactsStreamCursorValueInput;
+
+  TRes call({UuidValue? id, String? label, UuidValue? personId, String? phone});
+}
+
+class _CopyWithImpl_Input_PersonsMainContactsStreamCursorValueInput<TRes>
+    implements CopyWith_Input_PersonsMainContactsStreamCursorValueInput<TRes> {
+  _CopyWithImpl_Input_PersonsMainContactsStreamCursorValueInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_PersonsMainContactsStreamCursorValueInput _instance;
+
+  final TRes Function(Input_PersonsMainContactsStreamCursorValueInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? label = _undefined,
+    Object? personId = _undefined,
+    Object? phone = _undefined,
+  }) => _then(
+    Input_PersonsMainContactsStreamCursorValueInput._({
+      ..._instance._$data,
+      if (id != _undefined) 'id': (id as UuidValue?),
+      if (label != _undefined) 'label': (label as String?),
+      if (personId != _undefined) 'personId': (personId as UuidValue?),
+      if (phone != _undefined) 'phone': (phone as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_PersonsMainContactsStreamCursorValueInput<TRes>
+    implements CopyWith_Input_PersonsMainContactsStreamCursorValueInput<TRes> {
+  _CopyWithStubImpl_Input_PersonsMainContactsStreamCursorValueInput(this._res);
+
+  TRes _res;
+
+  call({UuidValue? id, String? label, UuidValue? personId, String? phone}) =>
+      _res;
+}
+
 class Input_PersonsMaxOrderBy {
   factory Input_PersonsMaxOrderBy({
     Enum_OrderBy? birthdate,
@@ -2314,251 +3330,6 @@ class Input_PersonsMinOrderBy {
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
       _$data.containsKey('uid') ? l$uid : const {},
       _$data.containsKey('workStatus') ? l$workStatus : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_PersonsMinOrderBy<TRes> {
-  factory CopyWith_Input_PersonsMinOrderBy(
-    Input_PersonsMinOrderBy instance,
-    TRes Function(Input_PersonsMinOrderBy) then,
-  ) = _CopyWithImpl_Input_PersonsMinOrderBy;
-
-  factory CopyWith_Input_PersonsMinOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonsMinOrderBy;
-
-  TRes call({
-    Enum_OrderBy? birthdate,
-    Enum_OrderBy? blurhash,
-    Enum_OrderBy? churchId,
-    Enum_OrderBy? collegeId,
-    Enum_OrderBy? color,
-    Enum_OrderBy? familyId,
-    Enum_OrderBy? fatherId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? jobDescription,
-    Enum_OrderBy? jobId,
-    Enum_OrderBy? mainPhone,
-    Enum_OrderBy? martialStatus,
-    Enum_OrderBy? name,
-    Enum_OrderBy? nationalId,
-    Enum_OrderBy? notes,
-    Enum_OrderBy? personTypeId,
-    Enum_OrderBy? photoUpdatedAt,
-    Enum_OrderBy? qualificationId,
-    Enum_OrderBy? schoolId,
-    Enum_OrderBy? serviceType,
-    Enum_OrderBy? servingChurchId,
-    Enum_OrderBy? shammasLevelId,
-    Enum_OrderBy? stateId,
-    Enum_OrderBy? storeId,
-    Enum_OrderBy? studyYearId,
-    Enum_OrderBy? uid,
-    Enum_OrderBy? workStatus,
-  });
-}
-
-class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
-    implements CopyWith_Input_PersonsMinOrderBy<TRes> {
-  _CopyWithImpl_Input_PersonsMinOrderBy(this._instance, this._then);
-
-  final Input_PersonsMinOrderBy _instance;
-
-  final TRes Function(Input_PersonsMinOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? birthdate = _undefined,
-    Object? blurhash = _undefined,
-    Object? churchId = _undefined,
-    Object? collegeId = _undefined,
-    Object? color = _undefined,
-    Object? familyId = _undefined,
-    Object? fatherId = _undefined,
-    Object? id = _undefined,
-    Object? jobDescription = _undefined,
-    Object? jobId = _undefined,
-    Object? mainPhone = _undefined,
-    Object? martialStatus = _undefined,
-    Object? name = _undefined,
-    Object? nationalId = _undefined,
-    Object? notes = _undefined,
-    Object? personTypeId = _undefined,
-    Object? photoUpdatedAt = _undefined,
-    Object? qualificationId = _undefined,
-    Object? schoolId = _undefined,
-    Object? serviceType = _undefined,
-    Object? servingChurchId = _undefined,
-    Object? shammasLevelId = _undefined,
-    Object? stateId = _undefined,
-    Object? storeId = _undefined,
-    Object? studyYearId = _undefined,
-    Object? uid = _undefined,
-    Object? workStatus = _undefined,
-  }) => _then(
-    Input_PersonsMinOrderBy._({
-      ..._instance._$data,
-      if (birthdate != _undefined) 'birthdate': (birthdate as Enum_OrderBy?),
-      if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
-      if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
-      if (collegeId != _undefined) 'collegeId': (collegeId as Enum_OrderBy?),
-      if (color != _undefined) 'color': (color as Enum_OrderBy?),
-      if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
-      if (fatherId != _undefined) 'fatherId': (fatherId as Enum_OrderBy?),
-      if (id != _undefined) 'id': (id as Enum_OrderBy?),
-      if (jobDescription != _undefined)
-        'jobDescription': (jobDescription as Enum_OrderBy?),
-      if (jobId != _undefined) 'jobId': (jobId as Enum_OrderBy?),
-      if (mainPhone != _undefined) 'mainPhone': (mainPhone as Enum_OrderBy?),
-      if (martialStatus != _undefined)
-        'martialStatus': (martialStatus as Enum_OrderBy?),
-      if (name != _undefined) 'name': (name as Enum_OrderBy?),
-      if (nationalId != _undefined) 'nationalId': (nationalId as Enum_OrderBy?),
-      if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
-      if (personTypeId != _undefined)
-        'personTypeId': (personTypeId as Enum_OrderBy?),
-      if (photoUpdatedAt != _undefined)
-        'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
-      if (qualificationId != _undefined)
-        'qualificationId': (qualificationId as Enum_OrderBy?),
-      if (schoolId != _undefined) 'schoolId': (schoolId as Enum_OrderBy?),
-      if (serviceType != _undefined)
-        'serviceType': (serviceType as Enum_OrderBy?),
-      if (servingChurchId != _undefined)
-        'servingChurchId': (servingChurchId as Enum_OrderBy?),
-      if (shammasLevelId != _undefined)
-        'shammasLevelId': (shammasLevelId as Enum_OrderBy?),
-      if (stateId != _undefined) 'stateId': (stateId as Enum_OrderBy?),
-      if (storeId != _undefined) 'storeId': (storeId as Enum_OrderBy?),
-      if (studyYearId != _undefined)
-        'studyYearId': (studyYearId as Enum_OrderBy?),
-      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
-      if (workStatus != _undefined) 'workStatus': (workStatus as Enum_OrderBy?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_PersonsMinOrderBy<TRes>
-    implements CopyWith_Input_PersonsMinOrderBy<TRes> {
-  _CopyWithStubImpl_Input_PersonsMinOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? birthdate,
-    Enum_OrderBy? blurhash,
-    Enum_OrderBy? churchId,
-    Enum_OrderBy? collegeId,
-    Enum_OrderBy? color,
-    Enum_OrderBy? familyId,
-    Enum_OrderBy? fatherId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? jobDescription,
-    Enum_OrderBy? jobId,
-    Enum_OrderBy? mainPhone,
-    Enum_OrderBy? martialStatus,
-    Enum_OrderBy? name,
-    Enum_OrderBy? nationalId,
-    Enum_OrderBy? notes,
-    Enum_OrderBy? personTypeId,
-    Enum_OrderBy? photoUpdatedAt,
-    Enum_OrderBy? qualificationId,
-    Enum_OrderBy? schoolId,
-    Enum_OrderBy? serviceType,
-    Enum_OrderBy? servingChurchId,
-    Enum_OrderBy? shammasLevelId,
-    Enum_OrderBy? stateId,
-    Enum_OrderBy? storeId,
-    Enum_OrderBy? studyYearId,
-    Enum_OrderBy? uid,
-    Enum_OrderBy? workStatus,
-  }) => _res;
-}
-
-class Input_PersonsObjRelInsertInput {
-  factory Input_PersonsObjRelInsertInput({
-    required Input_PersonsInsertInput data,
-    Input_PersonsOnConflict? onConflict,
-  }) => Input_PersonsObjRelInsertInput._({
-    r'data': data,
-    if (onConflict != null) r'onConflict': onConflict,
-  });
-
-  Input_PersonsObjRelInsertInput._(this._$data);
-
-  factory Input_PersonsObjRelInsertInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$data = data['data'];
-    result$data['data'] = Input_PersonsInsertInput.fromJson(
-      (l$data as Map<String, dynamic>),
-    );
-    if (data.containsKey('onConflict')) {
-      final l$onConflict = data['onConflict'];
-      result$data['onConflict'] = l$onConflict == null
-          ? null
-          : Input_PersonsOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>),
-            );
-    }
-    return Input_PersonsObjRelInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_PersonsInsertInput get data =>
-      (_$data['data'] as Input_PersonsInsertInput);
-
-  Input_PersonsOnConflict? get onConflict =>
-      (_$data['onConflict'] as Input_PersonsOnConflict?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$data = data;
-    result$data['data'] = l$data.toJson();
-    if (_$data.containsKey('onConflict')) {
-      final l$onConflict = onConflict;
-      result$data['onConflict'] = l$onConflict?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_PersonsObjRelInsertInput<Input_PersonsObjRelInsertInput>
-  get copyWith => CopyWith_Input_PersonsObjRelInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_PersonsObjRelInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$data = data;
-    final lOther$data = other.data;
-    if (l$data != lOther$data) {
-      return false;
-    }
-    final l$onConflict = onConflict;
-    final lOther$onConflict = other.onConflict;
-    if (_$data.containsKey('onConflict') !=
-        other._$data.containsKey('onConflict')) {
-      return false;
-    }
-    if (l$onConflict != lOther$onConflict) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$data = data;
-    final l$onConflict = onConflict;
-    return Object.hashAll([
-      l$data,
-      _$data.containsKey('onConflict') ? l$onConflict : const {},
     ]);
   }
 }

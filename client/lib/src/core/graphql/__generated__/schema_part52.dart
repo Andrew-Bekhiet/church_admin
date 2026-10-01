@@ -1,6 +1,971 @@
 // Part 52 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_PersonsUpdates<TRes> {
+  factory CopyWith_Input_PersonsUpdates(
+    Input_PersonsUpdates instance,
+    TRes Function(Input_PersonsUpdates) then,
+  ) = _CopyWithImpl_Input_PersonsUpdates;
+
+  factory CopyWith_Input_PersonsUpdates.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonsUpdates;
+
+  TRes call({
+    Input_PersonsAppendInput? $_append,
+    Input_PersonsDeleteAtPathInput? $_deleteAtPath,
+    Input_PersonsDeleteElemInput? $_deleteElem,
+    Input_PersonsDeleteKeyInput? $_deleteKey,
+    Input_PersonsIncInput? $_inc,
+    Input_PersonsPrependInput? $_prepend,
+    Input_PersonsSetInput? $_set,
+    Input_PersonsBoolExp? where,
+  });
+  CopyWith_Input_PersonsAppendInput<TRes> get $_append;
+  CopyWith_Input_PersonsDeleteAtPathInput<TRes> get $_deleteAtPath;
+  CopyWith_Input_PersonsDeleteElemInput<TRes> get $_deleteElem;
+  CopyWith_Input_PersonsDeleteKeyInput<TRes> get $_deleteKey;
+  CopyWith_Input_PersonsIncInput<TRes> get $_inc;
+  CopyWith_Input_PersonsPrependInput<TRes> get $_prepend;
+  CopyWith_Input_PersonsSetInput<TRes> get $_set;
+  CopyWith_Input_PersonsBoolExp<TRes> get where;
+}
+
+class _CopyWithImpl_Input_PersonsUpdates<TRes>
+    implements CopyWith_Input_PersonsUpdates<TRes> {
+  _CopyWithImpl_Input_PersonsUpdates(this._instance, this._then);
+
+  final Input_PersonsUpdates _instance;
+
+  final TRes Function(Input_PersonsUpdates) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_append = _undefined,
+    Object? $_deleteAtPath = _undefined,
+    Object? $_deleteElem = _undefined,
+    Object? $_deleteKey = _undefined,
+    Object? $_inc = _undefined,
+    Object? $_prepend = _undefined,
+    Object? $_set = _undefined,
+    Object? where = _undefined,
+  }) => _then(
+    Input_PersonsUpdates._({
+      ..._instance._$data,
+      if ($_append != _undefined)
+        '_append': ($_append as Input_PersonsAppendInput?),
+      if ($_deleteAtPath != _undefined)
+        '_deleteAtPath': ($_deleteAtPath as Input_PersonsDeleteAtPathInput?),
+      if ($_deleteElem != _undefined)
+        '_deleteElem': ($_deleteElem as Input_PersonsDeleteElemInput?),
+      if ($_deleteKey != _undefined)
+        '_deleteKey': ($_deleteKey as Input_PersonsDeleteKeyInput?),
+      if ($_inc != _undefined) '_inc': ($_inc as Input_PersonsIncInput?),
+      if ($_prepend != _undefined)
+        '_prepend': ($_prepend as Input_PersonsPrependInput?),
+      if ($_set != _undefined) '_set': ($_set as Input_PersonsSetInput?),
+      if (where != _undefined && where != null)
+        'where': (where as Input_PersonsBoolExp),
+    }),
+  );
+
+  CopyWith_Input_PersonsAppendInput<TRes> get $_append {
+    final local$$_append = _instance.$_append;
+    return local$$_append == null
+        ? CopyWith_Input_PersonsAppendInput.stub(_then(_instance))
+        : CopyWith_Input_PersonsAppendInput(
+            local$$_append,
+            (e) => call($_append: e),
+          );
+  }
+
+  CopyWith_Input_PersonsDeleteAtPathInput<TRes> get $_deleteAtPath {
+    final local$$_deleteAtPath = _instance.$_deleteAtPath;
+    return local$$_deleteAtPath == null
+        ? CopyWith_Input_PersonsDeleteAtPathInput.stub(_then(_instance))
+        : CopyWith_Input_PersonsDeleteAtPathInput(
+            local$$_deleteAtPath,
+            (e) => call($_deleteAtPath: e),
+          );
+  }
+
+  CopyWith_Input_PersonsDeleteElemInput<TRes> get $_deleteElem {
+    final local$$_deleteElem = _instance.$_deleteElem;
+    return local$$_deleteElem == null
+        ? CopyWith_Input_PersonsDeleteElemInput.stub(_then(_instance))
+        : CopyWith_Input_PersonsDeleteElemInput(
+            local$$_deleteElem,
+            (e) => call($_deleteElem: e),
+          );
+  }
+
+  CopyWith_Input_PersonsDeleteKeyInput<TRes> get $_deleteKey {
+    final local$$_deleteKey = _instance.$_deleteKey;
+    return local$$_deleteKey == null
+        ? CopyWith_Input_PersonsDeleteKeyInput.stub(_then(_instance))
+        : CopyWith_Input_PersonsDeleteKeyInput(
+            local$$_deleteKey,
+            (e) => call($_deleteKey: e),
+          );
+  }
+
+  CopyWith_Input_PersonsIncInput<TRes> get $_inc {
+    final local$$_inc = _instance.$_inc;
+    return local$$_inc == null
+        ? CopyWith_Input_PersonsIncInput.stub(_then(_instance))
+        : CopyWith_Input_PersonsIncInput(local$$_inc, (e) => call($_inc: e));
+  }
+
+  CopyWith_Input_PersonsPrependInput<TRes> get $_prepend {
+    final local$$_prepend = _instance.$_prepend;
+    return local$$_prepend == null
+        ? CopyWith_Input_PersonsPrependInput.stub(_then(_instance))
+        : CopyWith_Input_PersonsPrependInput(
+            local$$_prepend,
+            (e) => call($_prepend: e),
+          );
+  }
+
+  CopyWith_Input_PersonsSetInput<TRes> get $_set {
+    final local$$_set = _instance.$_set;
+    return local$$_set == null
+        ? CopyWith_Input_PersonsSetInput.stub(_then(_instance))
+        : CopyWith_Input_PersonsSetInput(local$$_set, (e) => call($_set: e));
+  }
+
+  CopyWith_Input_PersonsBoolExp<TRes> get where {
+    final local$where = _instance.where;
+    return CopyWith_Input_PersonsBoolExp(local$where, (e) => call(where: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_PersonsUpdates<TRes>
+    implements CopyWith_Input_PersonsUpdates<TRes> {
+  _CopyWithStubImpl_Input_PersonsUpdates(this._res);
+
+  TRes _res;
+
+  call({
+    Input_PersonsAppendInput? $_append,
+    Input_PersonsDeleteAtPathInput? $_deleteAtPath,
+    Input_PersonsDeleteElemInput? $_deleteElem,
+    Input_PersonsDeleteKeyInput? $_deleteKey,
+    Input_PersonsIncInput? $_inc,
+    Input_PersonsPrependInput? $_prepend,
+    Input_PersonsSetInput? $_set,
+    Input_PersonsBoolExp? where,
+  }) => _res;
+
+  CopyWith_Input_PersonsAppendInput<TRes> get $_append =>
+      CopyWith_Input_PersonsAppendInput.stub(_res);
+
+  CopyWith_Input_PersonsDeleteAtPathInput<TRes> get $_deleteAtPath =>
+      CopyWith_Input_PersonsDeleteAtPathInput.stub(_res);
+
+  CopyWith_Input_PersonsDeleteElemInput<TRes> get $_deleteElem =>
+      CopyWith_Input_PersonsDeleteElemInput.stub(_res);
+
+  CopyWith_Input_PersonsDeleteKeyInput<TRes> get $_deleteKey =>
+      CopyWith_Input_PersonsDeleteKeyInput.stub(_res);
+
+  CopyWith_Input_PersonsIncInput<TRes> get $_inc =>
+      CopyWith_Input_PersonsIncInput.stub(_res);
+
+  CopyWith_Input_PersonsPrependInput<TRes> get $_prepend =>
+      CopyWith_Input_PersonsPrependInput.stub(_res);
+
+  CopyWith_Input_PersonsSetInput<TRes> get $_set =>
+      CopyWith_Input_PersonsSetInput.stub(_res);
+
+  CopyWith_Input_PersonsBoolExp<TRes> get where =>
+      CopyWith_Input_PersonsBoolExp.stub(_res);
+}
+
+class Input_PersonsVarPopOrderBy {
+  factory Input_PersonsVarPopOrderBy({
+    Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
+    Enum_OrderBy? studyYearId,
+  }) => Input_PersonsVarPopOrderBy._({
+    if (color != null) r'color': color,
+    if (nationalId != null) r'nationalId': nationalId,
+    if (studyYearId != null) r'studyYearId': studyYearId,
+  });
+
+  Input_PersonsVarPopOrderBy._(this._$data);
+
+  factory Input_PersonsVarPopOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
+    }
+    if (data.containsKey('studyYearId')) {
+      final l$studyYearId = data['studyYearId'];
+      result$data['studyYearId'] = l$studyYearId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$studyYearId as String));
+    }
+    return Input_PersonsVarPopOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : toJson_Enum_OrderBy(l$nationalId);
+    }
+    if (_$data.containsKey('studyYearId')) {
+      final l$studyYearId = studyYearId;
+      result$data['studyYearId'] = l$studyYearId == null
+          ? null
+          : toJson_Enum_OrderBy(l$studyYearId);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_PersonsVarPopOrderBy<Input_PersonsVarPopOrderBy>
+  get copyWith => CopyWith_Input_PersonsVarPopOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonsVarPopOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
+    final l$studyYearId = studyYearId;
+    final lOther$studyYearId = other.studyYearId;
+    if (_$data.containsKey('studyYearId') !=
+        other._$data.containsKey('studyYearId')) {
+      return false;
+    }
+    if (l$studyYearId != lOther$studyYearId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$color = color;
+    final l$nationalId = nationalId;
+    final l$studyYearId = studyYearId;
+    return Object.hashAll([
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
+      _$data.containsKey('studyYearId') ? l$studyYearId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_PersonsVarPopOrderBy<TRes> {
+  factory CopyWith_Input_PersonsVarPopOrderBy(
+    Input_PersonsVarPopOrderBy instance,
+    TRes Function(Input_PersonsVarPopOrderBy) then,
+  ) = _CopyWithImpl_Input_PersonsVarPopOrderBy;
+
+  factory CopyWith_Input_PersonsVarPopOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonsVarPopOrderBy;
+
+  TRes call({
+    Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
+    Enum_OrderBy? studyYearId,
+  });
+}
+
+class _CopyWithImpl_Input_PersonsVarPopOrderBy<TRes>
+    implements CopyWith_Input_PersonsVarPopOrderBy<TRes> {
+  _CopyWithImpl_Input_PersonsVarPopOrderBy(this._instance, this._then);
+
+  final Input_PersonsVarPopOrderBy _instance;
+
+  final TRes Function(Input_PersonsVarPopOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? color = _undefined,
+    Object? nationalId = _undefined,
+    Object? studyYearId = _undefined,
+  }) => _then(
+    Input_PersonsVarPopOrderBy._({
+      ..._instance._$data,
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (nationalId != _undefined) 'nationalId': (nationalId as Enum_OrderBy?),
+      if (studyYearId != _undefined)
+        'studyYearId': (studyYearId as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_PersonsVarPopOrderBy<TRes>
+    implements CopyWith_Input_PersonsVarPopOrderBy<TRes> {
+  _CopyWithStubImpl_Input_PersonsVarPopOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
+    Enum_OrderBy? studyYearId,
+  }) => _res;
+}
+
+class Input_PersonsVarSampOrderBy {
+  factory Input_PersonsVarSampOrderBy({
+    Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
+    Enum_OrderBy? studyYearId,
+  }) => Input_PersonsVarSampOrderBy._({
+    if (color != null) r'color': color,
+    if (nationalId != null) r'nationalId': nationalId,
+    if (studyYearId != null) r'studyYearId': studyYearId,
+  });
+
+  Input_PersonsVarSampOrderBy._(this._$data);
+
+  factory Input_PersonsVarSampOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
+    }
+    if (data.containsKey('studyYearId')) {
+      final l$studyYearId = data['studyYearId'];
+      result$data['studyYearId'] = l$studyYearId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$studyYearId as String));
+    }
+    return Input_PersonsVarSampOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : toJson_Enum_OrderBy(l$nationalId);
+    }
+    if (_$data.containsKey('studyYearId')) {
+      final l$studyYearId = studyYearId;
+      result$data['studyYearId'] = l$studyYearId == null
+          ? null
+          : toJson_Enum_OrderBy(l$studyYearId);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_PersonsVarSampOrderBy<Input_PersonsVarSampOrderBy>
+  get copyWith => CopyWith_Input_PersonsVarSampOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonsVarSampOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
+    final l$studyYearId = studyYearId;
+    final lOther$studyYearId = other.studyYearId;
+    if (_$data.containsKey('studyYearId') !=
+        other._$data.containsKey('studyYearId')) {
+      return false;
+    }
+    if (l$studyYearId != lOther$studyYearId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$color = color;
+    final l$nationalId = nationalId;
+    final l$studyYearId = studyYearId;
+    return Object.hashAll([
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
+      _$data.containsKey('studyYearId') ? l$studyYearId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_PersonsVarSampOrderBy<TRes> {
+  factory CopyWith_Input_PersonsVarSampOrderBy(
+    Input_PersonsVarSampOrderBy instance,
+    TRes Function(Input_PersonsVarSampOrderBy) then,
+  ) = _CopyWithImpl_Input_PersonsVarSampOrderBy;
+
+  factory CopyWith_Input_PersonsVarSampOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonsVarSampOrderBy;
+
+  TRes call({
+    Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
+    Enum_OrderBy? studyYearId,
+  });
+}
+
+class _CopyWithImpl_Input_PersonsVarSampOrderBy<TRes>
+    implements CopyWith_Input_PersonsVarSampOrderBy<TRes> {
+  _CopyWithImpl_Input_PersonsVarSampOrderBy(this._instance, this._then);
+
+  final Input_PersonsVarSampOrderBy _instance;
+
+  final TRes Function(Input_PersonsVarSampOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? color = _undefined,
+    Object? nationalId = _undefined,
+    Object? studyYearId = _undefined,
+  }) => _then(
+    Input_PersonsVarSampOrderBy._({
+      ..._instance._$data,
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (nationalId != _undefined) 'nationalId': (nationalId as Enum_OrderBy?),
+      if (studyYearId != _undefined)
+        'studyYearId': (studyYearId as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_PersonsVarSampOrderBy<TRes>
+    implements CopyWith_Input_PersonsVarSampOrderBy<TRes> {
+  _CopyWithStubImpl_Input_PersonsVarSampOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
+    Enum_OrderBy? studyYearId,
+  }) => _res;
+}
+
+class Input_PersonsVarianceOrderBy {
+  factory Input_PersonsVarianceOrderBy({
+    Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
+    Enum_OrderBy? studyYearId,
+  }) => Input_PersonsVarianceOrderBy._({
+    if (color != null) r'color': color,
+    if (nationalId != null) r'nationalId': nationalId,
+    if (studyYearId != null) r'studyYearId': studyYearId,
+  });
+
+  Input_PersonsVarianceOrderBy._(this._$data);
+
+  factory Input_PersonsVarianceOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
+    }
+    if (data.containsKey('studyYearId')) {
+      final l$studyYearId = data['studyYearId'];
+      result$data['studyYearId'] = l$studyYearId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$studyYearId as String));
+    }
+    return Input_PersonsVarianceOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : toJson_Enum_OrderBy(l$nationalId);
+    }
+    if (_$data.containsKey('studyYearId')) {
+      final l$studyYearId = studyYearId;
+      result$data['studyYearId'] = l$studyYearId == null
+          ? null
+          : toJson_Enum_OrderBy(l$studyYearId);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_PersonsVarianceOrderBy<Input_PersonsVarianceOrderBy>
+  get copyWith => CopyWith_Input_PersonsVarianceOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonsVarianceOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
+    final l$studyYearId = studyYearId;
+    final lOther$studyYearId = other.studyYearId;
+    if (_$data.containsKey('studyYearId') !=
+        other._$data.containsKey('studyYearId')) {
+      return false;
+    }
+    if (l$studyYearId != lOther$studyYearId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$color = color;
+    final l$nationalId = nationalId;
+    final l$studyYearId = studyYearId;
+    return Object.hashAll([
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
+      _$data.containsKey('studyYearId') ? l$studyYearId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_PersonsVarianceOrderBy<TRes> {
+  factory CopyWith_Input_PersonsVarianceOrderBy(
+    Input_PersonsVarianceOrderBy instance,
+    TRes Function(Input_PersonsVarianceOrderBy) then,
+  ) = _CopyWithImpl_Input_PersonsVarianceOrderBy;
+
+  factory CopyWith_Input_PersonsVarianceOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonsVarianceOrderBy;
+
+  TRes call({
+    Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
+    Enum_OrderBy? studyYearId,
+  });
+}
+
+class _CopyWithImpl_Input_PersonsVarianceOrderBy<TRes>
+    implements CopyWith_Input_PersonsVarianceOrderBy<TRes> {
+  _CopyWithImpl_Input_PersonsVarianceOrderBy(this._instance, this._then);
+
+  final Input_PersonsVarianceOrderBy _instance;
+
+  final TRes Function(Input_PersonsVarianceOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? color = _undefined,
+    Object? nationalId = _undefined,
+    Object? studyYearId = _undefined,
+  }) => _then(
+    Input_PersonsVarianceOrderBy._({
+      ..._instance._$data,
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (nationalId != _undefined) 'nationalId': (nationalId as Enum_OrderBy?),
+      if (studyYearId != _undefined)
+        'studyYearId': (studyYearId as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_PersonsVarianceOrderBy<TRes>
+    implements CopyWith_Input_PersonsVarianceOrderBy<TRes> {
+  _CopyWithStubImpl_Input_PersonsVarianceOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
+    Enum_OrderBy? studyYearId,
+  }) => _res;
+}
+
+class Input_QualificationsBoolExp {
+  factory Input_QualificationsBoolExp({
+    List<Input_QualificationsBoolExp>? $_and,
+    Input_QualificationsBoolExp? $_not,
+    List<Input_QualificationsBoolExp>? $_or,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? name,
+    Input_PersonsBoolExp? persons,
+    Input_PersonsAggregateBoolExp? personsAggregate,
+  }) => Input_QualificationsBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (persons != null) r'persons': persons,
+    if (personsAggregate != null) r'personsAggregate': personsAggregate,
+  });
+
+  Input_QualificationsBoolExp._(this._$data);
+
+  factory Input_QualificationsBoolExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map(
+            (e) => Input_QualificationsBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
+          ? null
+          : Input_QualificationsBoolExp.fromJson(
+              (l$$_not as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map(
+            (e) => Input_QualificationsBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$name as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('persons')) {
+      final l$persons = data['persons'];
+      result$data['persons'] = l$persons == null
+          ? null
+          : Input_PersonsBoolExp.fromJson((l$persons as Map<String, dynamic>));
+    }
+    if (data.containsKey('personsAggregate')) {
+      final l$personsAggregate = data['personsAggregate'];
+      result$data['personsAggregate'] = l$personsAggregate == null
+          ? null
+          : Input_PersonsAggregateBoolExp.fromJson(
+              (l$personsAggregate as Map<String, dynamic>),
+            );
+    }
+    return Input_QualificationsBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_QualificationsBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_QualificationsBoolExp>?);
+
+  Input_QualificationsBoolExp? get $_not =>
+      (_$data['_not'] as Input_QualificationsBoolExp?);
+
+  List<Input_QualificationsBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_QualificationsBoolExp>?);
+
+  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
+  Input_StringComparisonExp? get name =>
+      (_$data['name'] as Input_StringComparisonExp?);
+
+  Input_PersonsBoolExp? get persons =>
+      (_$data['persons'] as Input_PersonsBoolExp?);
+
+  Input_PersonsAggregateBoolExp? get personsAggregate =>
+      (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
+    }
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name?.toJson();
+    }
+    if (_$data.containsKey('persons')) {
+      final l$persons = persons;
+      result$data['persons'] = l$persons?.toJson();
+    }
+    if (_$data.containsKey('personsAggregate')) {
+      final l$personsAggregate = personsAggregate;
+      result$data['personsAggregate'] = l$personsAggregate?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_QualificationsBoolExp<Input_QualificationsBoolExp>
+  get copyWith => CopyWith_Input_QualificationsBoolExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_QualificationsBoolExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
+      return false;
+    }
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
+      return false;
+    }
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
+      return false;
+    }
+    if (l$$_not != lOther$$_not) {
+      return false;
+    }
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
+      return false;
+    }
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
+      return false;
+    }
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    final l$personsAggregate = personsAggregate;
+    final lOther$personsAggregate = other.personsAggregate;
+    if (_$data.containsKey('personsAggregate') !=
+        other._$data.containsKey('personsAggregate')) {
+      return false;
+    }
+    if (l$personsAggregate != lOther$personsAggregate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$id = id;
+    final l$name = name;
+    final l$persons = persons;
+    final l$personsAggregate = personsAggregate;
+    return Object.hashAll([
+      _$data.containsKey('_and')
+          ? l$$_and == null
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('persons') ? l$persons : const {},
+      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_QualificationsBoolExp<TRes> {
   factory CopyWith_Input_QualificationsBoolExp(
     Input_QualificationsBoolExp instance,
@@ -1653,1273 +2618,6 @@ class Input_ResolvedContactsAggregateOrderBy {
       _$data.containsKey('count') ? l$count : const {},
       _$data.containsKey('max') ? l$max : const {},
       _$data.containsKey('min') ? l$min : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ResolvedContactsAggregateOrderBy<TRes> {
-  factory CopyWith_Input_ResolvedContactsAggregateOrderBy(
-    Input_ResolvedContactsAggregateOrderBy instance,
-    TRes Function(Input_ResolvedContactsAggregateOrderBy) then,
-  ) = _CopyWithImpl_Input_ResolvedContactsAggregateOrderBy;
-
-  factory CopyWith_Input_ResolvedContactsAggregateOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_ResolvedContactsAggregateOrderBy;
-
-  TRes call({
-    Enum_OrderBy? count,
-    Input_ResolvedContactsMaxOrderBy? max,
-    Input_ResolvedContactsMinOrderBy? min,
-  });
-  CopyWith_Input_ResolvedContactsMaxOrderBy<TRes> get max;
-  CopyWith_Input_ResolvedContactsMinOrderBy<TRes> get min;
-}
-
-class _CopyWithImpl_Input_ResolvedContactsAggregateOrderBy<TRes>
-    implements CopyWith_Input_ResolvedContactsAggregateOrderBy<TRes> {
-  _CopyWithImpl_Input_ResolvedContactsAggregateOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_ResolvedContactsAggregateOrderBy _instance;
-
-  final TRes Function(Input_ResolvedContactsAggregateOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? count = _undefined,
-    Object? max = _undefined,
-    Object? min = _undefined,
-  }) => _then(
-    Input_ResolvedContactsAggregateOrderBy._({
-      ..._instance._$data,
-      if (count != _undefined) 'count': (count as Enum_OrderBy?),
-      if (max != _undefined) 'max': (max as Input_ResolvedContactsMaxOrderBy?),
-      if (min != _undefined) 'min': (min as Input_ResolvedContactsMinOrderBy?),
-    }),
-  );
-
-  CopyWith_Input_ResolvedContactsMaxOrderBy<TRes> get max {
-    final local$max = _instance.max;
-    return local$max == null
-        ? CopyWith_Input_ResolvedContactsMaxOrderBy.stub(_then(_instance))
-        : CopyWith_Input_ResolvedContactsMaxOrderBy(
-            local$max,
-            (e) => call(max: e),
-          );
-  }
-
-  CopyWith_Input_ResolvedContactsMinOrderBy<TRes> get min {
-    final local$min = _instance.min;
-    return local$min == null
-        ? CopyWith_Input_ResolvedContactsMinOrderBy.stub(_then(_instance))
-        : CopyWith_Input_ResolvedContactsMinOrderBy(
-            local$min,
-            (e) => call(min: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_ResolvedContactsAggregateOrderBy<TRes>
-    implements CopyWith_Input_ResolvedContactsAggregateOrderBy<TRes> {
-  _CopyWithStubImpl_Input_ResolvedContactsAggregateOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? count,
-    Input_ResolvedContactsMaxOrderBy? max,
-    Input_ResolvedContactsMinOrderBy? min,
-  }) => _res;
-
-  CopyWith_Input_ResolvedContactsMaxOrderBy<TRes> get max =>
-      CopyWith_Input_ResolvedContactsMaxOrderBy.stub(_res);
-
-  CopyWith_Input_ResolvedContactsMinOrderBy<TRes> get min =>
-      CopyWith_Input_ResolvedContactsMinOrderBy.stub(_res);
-}
-
-class Input_ResolvedContactsBoolExp {
-  factory Input_ResolvedContactsBoolExp({
-    List<Input_ResolvedContactsBoolExp>? $_and,
-    Input_ResolvedContactsBoolExp? $_not,
-    List<Input_ResolvedContactsBoolExp>? $_or,
-    Input_TimestamptzComparisonExp? createdAt,
-    Input_UuidComparisonExp? effectiveFamilyId,
-    Input_UuidComparisonExp? effectivePersonTypeId,
-    Input_UuidComparisonExp? familyId,
-    Input_UuidComparisonExp? id,
-    Input_BooleanComparisonExp? isMainPhone,
-    Input_StringComparisonExp? label,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
-    Input_PersonTypesBoolExp? personType,
-    Input_UuidComparisonExp? personTypeId,
-    Input_StringComparisonExp? phone,
-    Input_TimestamptzComparisonExp? updatedAt,
-  }) => Input_ResolvedContactsBoolExp._({
-    if ($_and != null) r'_and': $_and,
-    if ($_not != null) r'_not': $_not,
-    if ($_or != null) r'_or': $_or,
-    if (createdAt != null) r'createdAt': createdAt,
-    if (effectiveFamilyId != null) r'effectiveFamilyId': effectiveFamilyId,
-    if (effectivePersonTypeId != null)
-      r'effectivePersonTypeId': effectivePersonTypeId,
-    if (familyId != null) r'familyId': familyId,
-    if (id != null) r'id': id,
-    if (isMainPhone != null) r'isMainPhone': isMainPhone,
-    if (label != null) r'label': label,
-    if (person != null) r'person': person,
-    if (personId != null) r'personId': personId,
-    if (personType != null) r'personType': personType,
-    if (personTypeId != null) r'personTypeId': personTypeId,
-    if (phone != null) r'phone': phone,
-    if (updatedAt != null) r'updatedAt': updatedAt,
-  });
-
-  Input_ResolvedContactsBoolExp._(this._$data);
-
-  factory Input_ResolvedContactsBoolExp.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_and')) {
-      final l$$_and = data['_and'];
-      result$data['_and'] = (l$$_and as List<dynamic>?)
-          ?.map(
-            (e) => Input_ResolvedContactsBoolExp.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList();
-    }
-    if (data.containsKey('_not')) {
-      final l$$_not = data['_not'];
-      result$data['_not'] = l$$_not == null
-          ? null
-          : Input_ResolvedContactsBoolExp.fromJson(
-              (l$$_not as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('_or')) {
-      final l$$_or = data['_or'];
-      result$data['_or'] = (l$$_or as List<dynamic>?)
-          ?.map(
-            (e) => Input_ResolvedContactsBoolExp.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList();
-    }
-    if (data.containsKey('createdAt')) {
-      final l$createdAt = data['createdAt'];
-      result$data['createdAt'] = l$createdAt == null
-          ? null
-          : Input_TimestamptzComparisonExp.fromJson(
-              (l$createdAt as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('effectiveFamilyId')) {
-      final l$effectiveFamilyId = data['effectiveFamilyId'];
-      result$data['effectiveFamilyId'] = l$effectiveFamilyId == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$effectiveFamilyId as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('effectivePersonTypeId')) {
-      final l$effectivePersonTypeId = data['effectivePersonTypeId'];
-      result$data['effectivePersonTypeId'] = l$effectivePersonTypeId == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$effectivePersonTypeId as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('familyId')) {
-      final l$familyId = data['familyId'];
-      result$data['familyId'] = l$familyId == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$familyId as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null
-          ? null
-          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
-    }
-    if (data.containsKey('isMainPhone')) {
-      final l$isMainPhone = data['isMainPhone'];
-      result$data['isMainPhone'] = l$isMainPhone == null
-          ? null
-          : Input_BooleanComparisonExp.fromJson(
-              (l$isMainPhone as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('label')) {
-      final l$label = data['label'];
-      result$data['label'] = l$label == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$label as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
-          ? null
-          : Input_PersonsBoolExp.fromJson((l$person as Map<String, dynamic>));
-    }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$personId as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('personType')) {
-      final l$personType = data['personType'];
-      result$data['personType'] = l$personType == null
-          ? null
-          : Input_PersonTypesBoolExp.fromJson(
-              (l$personType as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('personTypeId')) {
-      final l$personTypeId = data['personTypeId'];
-      result$data['personTypeId'] = l$personTypeId == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$personTypeId as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('phone')) {
-      final l$phone = data['phone'];
-      result$data['phone'] = l$phone == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$phone as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('updatedAt')) {
-      final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] = l$updatedAt == null
-          ? null
-          : Input_TimestamptzComparisonExp.fromJson(
-              (l$updatedAt as Map<String, dynamic>),
-            );
-    }
-    return Input_ResolvedContactsBoolExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  List<Input_ResolvedContactsBoolExp>? get $_and =>
-      (_$data['_and'] as List<Input_ResolvedContactsBoolExp>?);
-
-  Input_ResolvedContactsBoolExp? get $_not =>
-      (_$data['_not'] as Input_ResolvedContactsBoolExp?);
-
-  List<Input_ResolvedContactsBoolExp>? get $_or =>
-      (_$data['_or'] as List<Input_ResolvedContactsBoolExp>?);
-
-  Input_TimestamptzComparisonExp? get createdAt =>
-      (_$data['createdAt'] as Input_TimestamptzComparisonExp?);
-
-  Input_UuidComparisonExp? get effectiveFamilyId =>
-      (_$data['effectiveFamilyId'] as Input_UuidComparisonExp?);
-
-  Input_UuidComparisonExp? get effectivePersonTypeId =>
-      (_$data['effectivePersonTypeId'] as Input_UuidComparisonExp?);
-
-  Input_UuidComparisonExp? get familyId =>
-      (_$data['familyId'] as Input_UuidComparisonExp?);
-
-  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
-
-  Input_BooleanComparisonExp? get isMainPhone =>
-      (_$data['isMainPhone'] as Input_BooleanComparisonExp?);
-
-  Input_StringComparisonExp? get label =>
-      (_$data['label'] as Input_StringComparisonExp?);
-
-  Input_PersonsBoolExp? get person =>
-      (_$data['person'] as Input_PersonsBoolExp?);
-
-  Input_UuidComparisonExp? get personId =>
-      (_$data['personId'] as Input_UuidComparisonExp?);
-
-  Input_PersonTypesBoolExp? get personType =>
-      (_$data['personType'] as Input_PersonTypesBoolExp?);
-
-  Input_UuidComparisonExp? get personTypeId =>
-      (_$data['personTypeId'] as Input_UuidComparisonExp?);
-
-  Input_StringComparisonExp? get phone =>
-      (_$data['phone'] as Input_StringComparisonExp?);
-
-  Input_TimestamptzComparisonExp? get updatedAt =>
-      (_$data['updatedAt'] as Input_TimestamptzComparisonExp?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_and')) {
-      final l$$_and = $_and;
-      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('_not')) {
-      final l$$_not = $_not;
-      result$data['_not'] = l$$_not?.toJson();
-    }
-    if (_$data.containsKey('_or')) {
-      final l$$_or = $_or;
-      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('createdAt')) {
-      final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt?.toJson();
-    }
-    if (_$data.containsKey('effectiveFamilyId')) {
-      final l$effectiveFamilyId = effectiveFamilyId;
-      result$data['effectiveFamilyId'] = l$effectiveFamilyId?.toJson();
-    }
-    if (_$data.containsKey('effectivePersonTypeId')) {
-      final l$effectivePersonTypeId = effectivePersonTypeId;
-      result$data['effectivePersonTypeId'] = l$effectivePersonTypeId?.toJson();
-    }
-    if (_$data.containsKey('familyId')) {
-      final l$familyId = familyId;
-      result$data['familyId'] = l$familyId?.toJson();
-    }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id?.toJson();
-    }
-    if (_$data.containsKey('isMainPhone')) {
-      final l$isMainPhone = isMainPhone;
-      result$data['isMainPhone'] = l$isMainPhone?.toJson();
-    }
-    if (_$data.containsKey('label')) {
-      final l$label = label;
-      result$data['label'] = l$label?.toJson();
-    }
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
-    }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] = l$personId?.toJson();
-    }
-    if (_$data.containsKey('personType')) {
-      final l$personType = personType;
-      result$data['personType'] = l$personType?.toJson();
-    }
-    if (_$data.containsKey('personTypeId')) {
-      final l$personTypeId = personTypeId;
-      result$data['personTypeId'] = l$personTypeId?.toJson();
-    }
-    if (_$data.containsKey('phone')) {
-      final l$phone = phone;
-      result$data['phone'] = l$phone?.toJson();
-    }
-    if (_$data.containsKey('updatedAt')) {
-      final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ResolvedContactsBoolExp<Input_ResolvedContactsBoolExp>
-  get copyWith => CopyWith_Input_ResolvedContactsBoolExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ResolvedContactsBoolExp ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_and = $_and;
-    final lOther$$_and = other.$_and;
-    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
-      return false;
-    }
-    if (l$$_and != null && lOther$$_and != null) {
-      if (l$$_and.length != lOther$$_and.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_and.length; i++) {
-        final l$$_and$entry = l$$_and[i];
-        final lOther$$_and$entry = lOther$$_and[i];
-        if (l$$_and$entry != lOther$$_and$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_and != lOther$$_and) {
-      return false;
-    }
-    final l$$_not = $_not;
-    final lOther$$_not = other.$_not;
-    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
-      return false;
-    }
-    if (l$$_not != lOther$$_not) {
-      return false;
-    }
-    final l$$_or = $_or;
-    final lOther$$_or = other.$_or;
-    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
-      return false;
-    }
-    if (l$$_or != null && lOther$$_or != null) {
-      if (l$$_or.length != lOther$$_or.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_or.length; i++) {
-        final l$$_or$entry = l$$_or[i];
-        final lOther$$_or$entry = lOther$$_or[i];
-        if (l$$_or$entry != lOther$$_or$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_or != lOther$$_or) {
-      return false;
-    }
-    final l$createdAt = createdAt;
-    final lOther$createdAt = other.createdAt;
-    if (_$data.containsKey('createdAt') !=
-        other._$data.containsKey('createdAt')) {
-      return false;
-    }
-    if (l$createdAt != lOther$createdAt) {
-      return false;
-    }
-    final l$effectiveFamilyId = effectiveFamilyId;
-    final lOther$effectiveFamilyId = other.effectiveFamilyId;
-    if (_$data.containsKey('effectiveFamilyId') !=
-        other._$data.containsKey('effectiveFamilyId')) {
-      return false;
-    }
-    if (l$effectiveFamilyId != lOther$effectiveFamilyId) {
-      return false;
-    }
-    final l$effectivePersonTypeId = effectivePersonTypeId;
-    final lOther$effectivePersonTypeId = other.effectivePersonTypeId;
-    if (_$data.containsKey('effectivePersonTypeId') !=
-        other._$data.containsKey('effectivePersonTypeId')) {
-      return false;
-    }
-    if (l$effectivePersonTypeId != lOther$effectivePersonTypeId) {
-      return false;
-    }
-    final l$familyId = familyId;
-    final lOther$familyId = other.familyId;
-    if (_$data.containsKey('familyId') !=
-        other._$data.containsKey('familyId')) {
-      return false;
-    }
-    if (l$familyId != lOther$familyId) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$isMainPhone = isMainPhone;
-    final lOther$isMainPhone = other.isMainPhone;
-    if (_$data.containsKey('isMainPhone') !=
-        other._$data.containsKey('isMainPhone')) {
-      return false;
-    }
-    if (l$isMainPhone != lOther$isMainPhone) {
-      return false;
-    }
-    final l$label = label;
-    final lOther$label = other.label;
-    if (_$data.containsKey('label') != other._$data.containsKey('label')) {
-      return false;
-    }
-    if (l$label != lOther$label) {
-      return false;
-    }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
-      return false;
-    }
-    if (l$person != lOther$person) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
-      return false;
-    }
-    if (l$personId != lOther$personId) {
-      return false;
-    }
-    final l$personType = personType;
-    final lOther$personType = other.personType;
-    if (_$data.containsKey('personType') !=
-        other._$data.containsKey('personType')) {
-      return false;
-    }
-    if (l$personType != lOther$personType) {
-      return false;
-    }
-    final l$personTypeId = personTypeId;
-    final lOther$personTypeId = other.personTypeId;
-    if (_$data.containsKey('personTypeId') !=
-        other._$data.containsKey('personTypeId')) {
-      return false;
-    }
-    if (l$personTypeId != lOther$personTypeId) {
-      return false;
-    }
-    final l$phone = phone;
-    final lOther$phone = other.phone;
-    if (_$data.containsKey('phone') != other._$data.containsKey('phone')) {
-      return false;
-    }
-    if (l$phone != lOther$phone) {
-      return false;
-    }
-    final l$updatedAt = updatedAt;
-    final lOther$updatedAt = other.updatedAt;
-    if (_$data.containsKey('updatedAt') !=
-        other._$data.containsKey('updatedAt')) {
-      return false;
-    }
-    if (l$updatedAt != lOther$updatedAt) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_and = $_and;
-    final l$$_not = $_not;
-    final l$$_or = $_or;
-    final l$createdAt = createdAt;
-    final l$effectiveFamilyId = effectiveFamilyId;
-    final l$effectivePersonTypeId = effectivePersonTypeId;
-    final l$familyId = familyId;
-    final l$id = id;
-    final l$isMainPhone = isMainPhone;
-    final l$label = label;
-    final l$person = person;
-    final l$personId = personId;
-    final l$personType = personType;
-    final l$personTypeId = personTypeId;
-    final l$phone = phone;
-    final l$updatedAt = updatedAt;
-    return Object.hashAll([
-      _$data.containsKey('_and')
-          ? l$$_and == null
-                ? null
-                : Object.hashAll(l$$_and.map((v) => v))
-          : const {},
-      _$data.containsKey('_not') ? l$$_not : const {},
-      _$data.containsKey('_or')
-          ? l$$_or == null
-                ? null
-                : Object.hashAll(l$$_or.map((v) => v))
-          : const {},
-      _$data.containsKey('createdAt') ? l$createdAt : const {},
-      _$data.containsKey('effectiveFamilyId') ? l$effectiveFamilyId : const {},
-      _$data.containsKey('effectivePersonTypeId')
-          ? l$effectivePersonTypeId
-          : const {},
-      _$data.containsKey('familyId') ? l$familyId : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('isMainPhone') ? l$isMainPhone : const {},
-      _$data.containsKey('label') ? l$label : const {},
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
-      _$data.containsKey('personType') ? l$personType : const {},
-      _$data.containsKey('personTypeId') ? l$personTypeId : const {},
-      _$data.containsKey('phone') ? l$phone : const {},
-      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ResolvedContactsBoolExp<TRes> {
-  factory CopyWith_Input_ResolvedContactsBoolExp(
-    Input_ResolvedContactsBoolExp instance,
-    TRes Function(Input_ResolvedContactsBoolExp) then,
-  ) = _CopyWithImpl_Input_ResolvedContactsBoolExp;
-
-  factory CopyWith_Input_ResolvedContactsBoolExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_ResolvedContactsBoolExp;
-
-  TRes call({
-    List<Input_ResolvedContactsBoolExp>? $_and,
-    Input_ResolvedContactsBoolExp? $_not,
-    List<Input_ResolvedContactsBoolExp>? $_or,
-    Input_TimestamptzComparisonExp? createdAt,
-    Input_UuidComparisonExp? effectiveFamilyId,
-    Input_UuidComparisonExp? effectivePersonTypeId,
-    Input_UuidComparisonExp? familyId,
-    Input_UuidComparisonExp? id,
-    Input_BooleanComparisonExp? isMainPhone,
-    Input_StringComparisonExp? label,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
-    Input_PersonTypesBoolExp? personType,
-    Input_UuidComparisonExp? personTypeId,
-    Input_StringComparisonExp? phone,
-    Input_TimestamptzComparisonExp? updatedAt,
-  });
-  TRes $_and(
-    Iterable<Input_ResolvedContactsBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_ResolvedContactsBoolExp<Input_ResolvedContactsBoolExp>
-      >?,
-    )
-    _fn,
-  );
-  CopyWith_Input_ResolvedContactsBoolExp<TRes> get $_not;
-  TRes $_or(
-    Iterable<Input_ResolvedContactsBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_ResolvedContactsBoolExp<Input_ResolvedContactsBoolExp>
-      >?,
-    )
-    _fn,
-  );
-  CopyWith_Input_TimestamptzComparisonExp<TRes> get createdAt;
-  CopyWith_Input_UuidComparisonExp<TRes> get effectiveFamilyId;
-  CopyWith_Input_UuidComparisonExp<TRes> get effectivePersonTypeId;
-  CopyWith_Input_UuidComparisonExp<TRes> get familyId;
-  CopyWith_Input_UuidComparisonExp<TRes> get id;
-  CopyWith_Input_BooleanComparisonExp<TRes> get isMainPhone;
-  CopyWith_Input_StringComparisonExp<TRes> get label;
-  CopyWith_Input_PersonsBoolExp<TRes> get person;
-  CopyWith_Input_UuidComparisonExp<TRes> get personId;
-  CopyWith_Input_PersonTypesBoolExp<TRes> get personType;
-  CopyWith_Input_UuidComparisonExp<TRes> get personTypeId;
-  CopyWith_Input_StringComparisonExp<TRes> get phone;
-  CopyWith_Input_TimestamptzComparisonExp<TRes> get updatedAt;
-}
-
-class _CopyWithImpl_Input_ResolvedContactsBoolExp<TRes>
-    implements CopyWith_Input_ResolvedContactsBoolExp<TRes> {
-  _CopyWithImpl_Input_ResolvedContactsBoolExp(this._instance, this._then);
-
-  final Input_ResolvedContactsBoolExp _instance;
-
-  final TRes Function(Input_ResolvedContactsBoolExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_and = _undefined,
-    Object? $_not = _undefined,
-    Object? $_or = _undefined,
-    Object? createdAt = _undefined,
-    Object? effectiveFamilyId = _undefined,
-    Object? effectivePersonTypeId = _undefined,
-    Object? familyId = _undefined,
-    Object? id = _undefined,
-    Object? isMainPhone = _undefined,
-    Object? label = _undefined,
-    Object? person = _undefined,
-    Object? personId = _undefined,
-    Object? personType = _undefined,
-    Object? personTypeId = _undefined,
-    Object? phone = _undefined,
-    Object? updatedAt = _undefined,
-  }) => _then(
-    Input_ResolvedContactsBoolExp._({
-      ..._instance._$data,
-      if ($_and != _undefined)
-        '_and': ($_and as List<Input_ResolvedContactsBoolExp>?),
-      if ($_not != _undefined)
-        '_not': ($_not as Input_ResolvedContactsBoolExp?),
-      if ($_or != _undefined)
-        '_or': ($_or as List<Input_ResolvedContactsBoolExp>?),
-      if (createdAt != _undefined)
-        'createdAt': (createdAt as Input_TimestamptzComparisonExp?),
-      if (effectiveFamilyId != _undefined)
-        'effectiveFamilyId': (effectiveFamilyId as Input_UuidComparisonExp?),
-      if (effectivePersonTypeId != _undefined)
-        'effectivePersonTypeId':
-            (effectivePersonTypeId as Input_UuidComparisonExp?),
-      if (familyId != _undefined)
-        'familyId': (familyId as Input_UuidComparisonExp?),
-      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
-      if (isMainPhone != _undefined)
-        'isMainPhone': (isMainPhone as Input_BooleanComparisonExp?),
-      if (label != _undefined) 'label': (label as Input_StringComparisonExp?),
-      if (person != _undefined) 'person': (person as Input_PersonsBoolExp?),
-      if (personId != _undefined)
-        'personId': (personId as Input_UuidComparisonExp?),
-      if (personType != _undefined)
-        'personType': (personType as Input_PersonTypesBoolExp?),
-      if (personTypeId != _undefined)
-        'personTypeId': (personTypeId as Input_UuidComparisonExp?),
-      if (phone != _undefined) 'phone': (phone as Input_StringComparisonExp?),
-      if (updatedAt != _undefined)
-        'updatedAt': (updatedAt as Input_TimestamptzComparisonExp?),
-    }),
-  );
-
-  TRes $_and(
-    Iterable<Input_ResolvedContactsBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_ResolvedContactsBoolExp<Input_ResolvedContactsBoolExp>
-      >?,
-    )
-    _fn,
-  ) => call(
-    $_and: _fn(
-      _instance.$_and?.map(
-        (e) => CopyWith_Input_ResolvedContactsBoolExp(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-
-  CopyWith_Input_ResolvedContactsBoolExp<TRes> get $_not {
-    final local$$_not = _instance.$_not;
-    return local$$_not == null
-        ? CopyWith_Input_ResolvedContactsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_ResolvedContactsBoolExp(
-            local$$_not,
-            (e) => call($_not: e),
-          );
-  }
-
-  TRes $_or(
-    Iterable<Input_ResolvedContactsBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_ResolvedContactsBoolExp<Input_ResolvedContactsBoolExp>
-      >?,
-    )
-    _fn,
-  ) => call(
-    $_or: _fn(
-      _instance.$_or?.map(
-        (e) => CopyWith_Input_ResolvedContactsBoolExp(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-
-  CopyWith_Input_TimestamptzComparisonExp<TRes> get createdAt {
-    final local$createdAt = _instance.createdAt;
-    return local$createdAt == null
-        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_TimestamptzComparisonExp(
-            local$createdAt,
-            (e) => call(createdAt: e),
-          );
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get effectiveFamilyId {
-    final local$effectiveFamilyId = _instance.effectiveFamilyId;
-    return local$effectiveFamilyId == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$effectiveFamilyId,
-            (e) => call(effectiveFamilyId: e),
-          );
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get effectivePersonTypeId {
-    final local$effectivePersonTypeId = _instance.effectivePersonTypeId;
-    return local$effectivePersonTypeId == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$effectivePersonTypeId,
-            (e) => call(effectivePersonTypeId: e),
-          );
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get familyId {
-    final local$familyId = _instance.familyId;
-    return local$familyId == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$familyId,
-            (e) => call(familyId: e),
-          );
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get id {
-    final local$id = _instance.id;
-    return local$id == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
-  }
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get isMainPhone {
-    final local$isMainPhone = _instance.isMainPhone;
-    return local$isMainPhone == null
-        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_BooleanComparisonExp(
-            local$isMainPhone,
-            (e) => call(isMainPhone: e),
-          );
-  }
-
-  CopyWith_Input_StringComparisonExp<TRes> get label {
-    final local$label = _instance.label;
-    return local$label == null
-        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_StringComparisonExp(
-            local$label,
-            (e) => call(label: e),
-          );
-  }
-
-  CopyWith_Input_PersonsBoolExp<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_PersonsBoolExp(local$person, (e) => call(person: e));
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get personId {
-    final local$personId = _instance.personId;
-    return local$personId == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$personId,
-            (e) => call(personId: e),
-          );
-  }
-
-  CopyWith_Input_PersonTypesBoolExp<TRes> get personType {
-    final local$personType = _instance.personType;
-    return local$personType == null
-        ? CopyWith_Input_PersonTypesBoolExp.stub(_then(_instance))
-        : CopyWith_Input_PersonTypesBoolExp(
-            local$personType,
-            (e) => call(personType: e),
-          );
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get personTypeId {
-    final local$personTypeId = _instance.personTypeId;
-    return local$personTypeId == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$personTypeId,
-            (e) => call(personTypeId: e),
-          );
-  }
-
-  CopyWith_Input_StringComparisonExp<TRes> get phone {
-    final local$phone = _instance.phone;
-    return local$phone == null
-        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_StringComparisonExp(
-            local$phone,
-            (e) => call(phone: e),
-          );
-  }
-
-  CopyWith_Input_TimestamptzComparisonExp<TRes> get updatedAt {
-    final local$updatedAt = _instance.updatedAt;
-    return local$updatedAt == null
-        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_TimestamptzComparisonExp(
-            local$updatedAt,
-            (e) => call(updatedAt: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_ResolvedContactsBoolExp<TRes>
-    implements CopyWith_Input_ResolvedContactsBoolExp<TRes> {
-  _CopyWithStubImpl_Input_ResolvedContactsBoolExp(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_ResolvedContactsBoolExp>? $_and,
-    Input_ResolvedContactsBoolExp? $_not,
-    List<Input_ResolvedContactsBoolExp>? $_or,
-    Input_TimestamptzComparisonExp? createdAt,
-    Input_UuidComparisonExp? effectiveFamilyId,
-    Input_UuidComparisonExp? effectivePersonTypeId,
-    Input_UuidComparisonExp? familyId,
-    Input_UuidComparisonExp? id,
-    Input_BooleanComparisonExp? isMainPhone,
-    Input_StringComparisonExp? label,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
-    Input_PersonTypesBoolExp? personType,
-    Input_UuidComparisonExp? personTypeId,
-    Input_StringComparisonExp? phone,
-    Input_TimestamptzComparisonExp? updatedAt,
-  }) => _res;
-
-  $_and(_fn) => _res;
-
-  CopyWith_Input_ResolvedContactsBoolExp<TRes> get $_not =>
-      CopyWith_Input_ResolvedContactsBoolExp.stub(_res);
-
-  $_or(_fn) => _res;
-
-  CopyWith_Input_TimestamptzComparisonExp<TRes> get createdAt =>
-      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get effectiveFamilyId =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get effectivePersonTypeId =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get familyId =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get id =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get isMainPhone =>
-      CopyWith_Input_BooleanComparisonExp.stub(_res);
-
-  CopyWith_Input_StringComparisonExp<TRes> get label =>
-      CopyWith_Input_StringComparisonExp.stub(_res);
-
-  CopyWith_Input_PersonsBoolExp<TRes> get person =>
-      CopyWith_Input_PersonsBoolExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get personId =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_PersonTypesBoolExp<TRes> get personType =>
-      CopyWith_Input_PersonTypesBoolExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get personTypeId =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_StringComparisonExp<TRes> get phone =>
-      CopyWith_Input_StringComparisonExp.stub(_res);
-
-  CopyWith_Input_TimestamptzComparisonExp<TRes> get updatedAt =>
-      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
-}
-
-class Input_ResolvedContactsMaxOrderBy {
-  factory Input_ResolvedContactsMaxOrderBy({
-    Enum_OrderBy? createdAt,
-    Enum_OrderBy? effectiveFamilyId,
-    Enum_OrderBy? effectivePersonTypeId,
-    Enum_OrderBy? familyId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? label,
-    Enum_OrderBy? personId,
-    Enum_OrderBy? personTypeId,
-    Enum_OrderBy? phone,
-    Enum_OrderBy? updatedAt,
-  }) => Input_ResolvedContactsMaxOrderBy._({
-    if (createdAt != null) r'createdAt': createdAt,
-    if (effectiveFamilyId != null) r'effectiveFamilyId': effectiveFamilyId,
-    if (effectivePersonTypeId != null)
-      r'effectivePersonTypeId': effectivePersonTypeId,
-    if (familyId != null) r'familyId': familyId,
-    if (id != null) r'id': id,
-    if (label != null) r'label': label,
-    if (personId != null) r'personId': personId,
-    if (personTypeId != null) r'personTypeId': personTypeId,
-    if (phone != null) r'phone': phone,
-    if (updatedAt != null) r'updatedAt': updatedAt,
-  });
-
-  Input_ResolvedContactsMaxOrderBy._(this._$data);
-
-  factory Input_ResolvedContactsMaxOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('createdAt')) {
-      final l$createdAt = data['createdAt'];
-      result$data['createdAt'] = l$createdAt == null
-          ? null
-          : fromJson_Enum_OrderBy((l$createdAt as String));
-    }
-    if (data.containsKey('effectiveFamilyId')) {
-      final l$effectiveFamilyId = data['effectiveFamilyId'];
-      result$data['effectiveFamilyId'] = l$effectiveFamilyId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$effectiveFamilyId as String));
-    }
-    if (data.containsKey('effectivePersonTypeId')) {
-      final l$effectivePersonTypeId = data['effectivePersonTypeId'];
-      result$data['effectivePersonTypeId'] = l$effectivePersonTypeId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$effectivePersonTypeId as String));
-    }
-    if (data.containsKey('familyId')) {
-      final l$familyId = data['familyId'];
-      result$data['familyId'] = l$familyId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$familyId as String));
-    }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null
-          ? null
-          : fromJson_Enum_OrderBy((l$id as String));
-    }
-    if (data.containsKey('label')) {
-      final l$label = data['label'];
-      result$data['label'] = l$label == null
-          ? null
-          : fromJson_Enum_OrderBy((l$label as String));
-    }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$personId as String));
-    }
-    if (data.containsKey('personTypeId')) {
-      final l$personTypeId = data['personTypeId'];
-      result$data['personTypeId'] = l$personTypeId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$personTypeId as String));
-    }
-    if (data.containsKey('phone')) {
-      final l$phone = data['phone'];
-      result$data['phone'] = l$phone == null
-          ? null
-          : fromJson_Enum_OrderBy((l$phone as String));
-    }
-    if (data.containsKey('updatedAt')) {
-      final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] = l$updatedAt == null
-          ? null
-          : fromJson_Enum_OrderBy((l$updatedAt as String));
-    }
-    return Input_ResolvedContactsMaxOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get createdAt => (_$data['createdAt'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get effectiveFamilyId =>
-      (_$data['effectiveFamilyId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get effectivePersonTypeId =>
-      (_$data['effectivePersonTypeId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get familyId => (_$data['familyId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get label => (_$data['label'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get personTypeId => (_$data['personTypeId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get phone => (_$data['phone'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get updatedAt => (_$data['updatedAt'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('createdAt')) {
-      final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt == null
-          ? null
-          : toJson_Enum_OrderBy(l$createdAt);
-    }
-    if (_$data.containsKey('effectiveFamilyId')) {
-      final l$effectiveFamilyId = effectiveFamilyId;
-      result$data['effectiveFamilyId'] = l$effectiveFamilyId == null
-          ? null
-          : toJson_Enum_OrderBy(l$effectiveFamilyId);
-    }
-    if (_$data.containsKey('effectivePersonTypeId')) {
-      final l$effectivePersonTypeId = effectivePersonTypeId;
-      result$data['effectivePersonTypeId'] = l$effectivePersonTypeId == null
-          ? null
-          : toJson_Enum_OrderBy(l$effectivePersonTypeId);
-    }
-    if (_$data.containsKey('familyId')) {
-      final l$familyId = familyId;
-      result$data['familyId'] = l$familyId == null
-          ? null
-          : toJson_Enum_OrderBy(l$familyId);
-    }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
-    }
-    if (_$data.containsKey('label')) {
-      final l$label = label;
-      result$data['label'] = l$label == null
-          ? null
-          : toJson_Enum_OrderBy(l$label);
-    }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] = l$personId == null
-          ? null
-          : toJson_Enum_OrderBy(l$personId);
-    }
-    if (_$data.containsKey('personTypeId')) {
-      final l$personTypeId = personTypeId;
-      result$data['personTypeId'] = l$personTypeId == null
-          ? null
-          : toJson_Enum_OrderBy(l$personTypeId);
-    }
-    if (_$data.containsKey('phone')) {
-      final l$phone = phone;
-      result$data['phone'] = l$phone == null
-          ? null
-          : toJson_Enum_OrderBy(l$phone);
-    }
-    if (_$data.containsKey('updatedAt')) {
-      final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt == null
-          ? null
-          : toJson_Enum_OrderBy(l$updatedAt);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ResolvedContactsMaxOrderBy<Input_ResolvedContactsMaxOrderBy>
-  get copyWith => CopyWith_Input_ResolvedContactsMaxOrderBy(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ResolvedContactsMaxOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$createdAt = createdAt;
-    final lOther$createdAt = other.createdAt;
-    if (_$data.containsKey('createdAt') !=
-        other._$data.containsKey('createdAt')) {
-      return false;
-    }
-    if (l$createdAt != lOther$createdAt) {
-      return false;
-    }
-    final l$effectiveFamilyId = effectiveFamilyId;
-    final lOther$effectiveFamilyId = other.effectiveFamilyId;
-    if (_$data.containsKey('effectiveFamilyId') !=
-        other._$data.containsKey('effectiveFamilyId')) {
-      return false;
-    }
-    if (l$effectiveFamilyId != lOther$effectiveFamilyId) {
-      return false;
-    }
-    final l$effectivePersonTypeId = effectivePersonTypeId;
-    final lOther$effectivePersonTypeId = other.effectivePersonTypeId;
-    if (_$data.containsKey('effectivePersonTypeId') !=
-        other._$data.containsKey('effectivePersonTypeId')) {
-      return false;
-    }
-    if (l$effectivePersonTypeId != lOther$effectivePersonTypeId) {
-      return false;
-    }
-    final l$familyId = familyId;
-    final lOther$familyId = other.familyId;
-    if (_$data.containsKey('familyId') !=
-        other._$data.containsKey('familyId')) {
-      return false;
-    }
-    if (l$familyId != lOther$familyId) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$label = label;
-    final lOther$label = other.label;
-    if (_$data.containsKey('label') != other._$data.containsKey('label')) {
-      return false;
-    }
-    if (l$label != lOther$label) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
-      return false;
-    }
-    if (l$personId != lOther$personId) {
-      return false;
-    }
-    final l$personTypeId = personTypeId;
-    final lOther$personTypeId = other.personTypeId;
-    if (_$data.containsKey('personTypeId') !=
-        other._$data.containsKey('personTypeId')) {
-      return false;
-    }
-    if (l$personTypeId != lOther$personTypeId) {
-      return false;
-    }
-    final l$phone = phone;
-    final lOther$phone = other.phone;
-    if (_$data.containsKey('phone') != other._$data.containsKey('phone')) {
-      return false;
-    }
-    if (l$phone != lOther$phone) {
-      return false;
-    }
-    final l$updatedAt = updatedAt;
-    final lOther$updatedAt = other.updatedAt;
-    if (_$data.containsKey('updatedAt') !=
-        other._$data.containsKey('updatedAt')) {
-      return false;
-    }
-    if (l$updatedAt != lOther$updatedAt) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$createdAt = createdAt;
-    final l$effectiveFamilyId = effectiveFamilyId;
-    final l$effectivePersonTypeId = effectivePersonTypeId;
-    final l$familyId = familyId;
-    final l$id = id;
-    final l$label = label;
-    final l$personId = personId;
-    final l$personTypeId = personTypeId;
-    final l$phone = phone;
-    final l$updatedAt = updatedAt;
-    return Object.hashAll([
-      _$data.containsKey('createdAt') ? l$createdAt : const {},
-      _$data.containsKey('effectiveFamilyId') ? l$effectiveFamilyId : const {},
-      _$data.containsKey('effectivePersonTypeId')
-          ? l$effectivePersonTypeId
-          : const {},
-      _$data.containsKey('familyId') ? l$familyId : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('label') ? l$label : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
-      _$data.containsKey('personTypeId') ? l$personTypeId : const {},
-      _$data.containsKey('phone') ? l$phone : const {},
-      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
     ]);
   }
 }

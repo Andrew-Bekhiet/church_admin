@@ -4933,49 +4933,6 @@ input JsonbComparisonExp {
   _nin: [jsonb!]
 }
 
-type MainContacts {
-  id: uuid
-  label: String
-  personId: uuid
-  phone: String
-}
-
-input MainContactsBoolExp {
-  _and: [MainContactsBoolExp!]
-  _not: MainContactsBoolExp
-  _or: [MainContactsBoolExp!]
-  id: UuidComparisonExp
-  label: StringComparisonExp
-  personId: UuidComparisonExp
-  phone: StringComparisonExp
-}
-
-input MainContactsOrderBy {
-  id: OrderBy
-  label: OrderBy
-  personId: OrderBy
-  phone: OrderBy
-}
-
-enum MainContactsSelectColumn {
-  id
-  label
-  personId
-  phone
-}
-
-input MainContactsStreamCursorInput {
-  initialValue: MainContactsStreamCursorValueInput!
-  ordering: CursorOrdering
-}
-
-input MainContactsStreamCursorValueInput {
-  id: uuid
-  label: String
-  personId: uuid
-  phone: String
-}
-
 input MeetingAudienceComparisonExp {
   _eq: meeting_audience
   _gt: meeting_audience
@@ -5242,7 +5199,7 @@ type Persons {
   lastEdit: HistoryLatestEdits
   lastKodas: HistoryLatestKodases
   lastVisit: HistoryLatestVisits
-  mainContact: MainContacts
+  mainContact: PersonsMainContacts
   mainPhone: String
   martialStatus: String!
   name: String!
@@ -5381,7 +5338,7 @@ input PersonsBoolExp {
   lastEdit: HistoryLatestEditsBoolExp
   lastKodas: HistoryLatestKodasesBoolExp
   lastVisit: HistoryLatestVisitsBoolExp
-  mainContact: MainContactsBoolExp
+  mainContact: PersonsMainContactsBoolExp
   mainPhone: StringComparisonExp
   martialStatus: StringComparisonExp
   name: StringComparisonExp
@@ -5672,6 +5629,49 @@ input PersonsInsertInput {
   workStatus: String
 }
 
+type PersonsMainContacts {
+  id: uuid
+  label: String
+  personId: uuid
+  phone: String
+}
+
+input PersonsMainContactsBoolExp {
+  _and: [PersonsMainContactsBoolExp!]
+  _not: PersonsMainContactsBoolExp
+  _or: [PersonsMainContactsBoolExp!]
+  id: UuidComparisonExp
+  label: StringComparisonExp
+  personId: UuidComparisonExp
+  phone: StringComparisonExp
+}
+
+input PersonsMainContactsOrderBy {
+  id: OrderBy
+  label: OrderBy
+  personId: OrderBy
+  phone: OrderBy
+}
+
+enum PersonsMainContactsSelectColumn {
+  id
+  label
+  personId
+  phone
+}
+
+input PersonsMainContactsStreamCursorInput {
+  initialValue: PersonsMainContactsStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+
+input PersonsMainContactsStreamCursorValueInput {
+  id: uuid
+  label: String
+  personId: uuid
+  phone: String
+}
+
 type PersonsMaxFields {
   birthdate: date
   birthday: String
@@ -5846,7 +5846,7 @@ input PersonsOrderBy {
   lastEdit: HistoryLatestEditsOrderBy
   lastKodas: HistoryLatestKodasesOrderBy
   lastVisit: HistoryLatestVisitsOrderBy
-  mainContact: MainContactsOrderBy
+  mainContact: PersonsMainContactsOrderBy
   mainPhone: OrderBy
   martialStatus: OrderBy
   name: OrderBy
@@ -8382,7 +8382,6 @@ type query_root {
   hobbiesByPk(id: uuid!): Hobbies
   jobs(distinctOn: [JobsSelectColumn!], limit: Int, offset: Int, orderBy: [JobsOrderBy!], where: JobsBoolExp): [Jobs!]!
   jobsByPk(id: uuid!): Jobs
-  mainContacts(distinctOn: [MainContactsSelectColumn!], limit: Int, offset: Int, orderBy: [MainContactsOrderBy!], where: MainContactsBoolExp): [MainContacts!]!
   personStates(distinctOn: [PersonStatesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonStatesOrderBy!], where: PersonStatesBoolExp): [PersonStates!]!
   personStatesByPk(id: uuid!): PersonStates
   personTypes(distinctOn: [PersonTypesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonTypesOrderBy!], where: PersonTypesBoolExp): [PersonTypes!]!
@@ -8392,6 +8391,7 @@ type query_root {
   personsByPk(id: uuid!): Persons
   personsGroups(distinctOn: [PersonsGroupsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsGroupsOrderBy!], where: PersonsGroupsBoolExp): [PersonsGroups!]!
   personsHobbies(distinctOn: [PersonsHobbiesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsHobbiesOrderBy!], where: PersonsHobbiesBoolExp): [PersonsHobbies!]!
+  personsMainContacts(distinctOn: [PersonsMainContactsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsMainContactsOrderBy!], where: PersonsMainContactsBoolExp): [PersonsMainContacts!]!
   personsServices(distinctOn: [PersonsServicesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsServicesOrderBy!], where: PersonsServicesBoolExp): [PersonsServices!]!
   personsTags(distinctOn: [PersonsTagsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsTagsOrderBy!], where: PersonsTagsBoolExp): [PersonsTags!]!
   qualifications(distinctOn: [QualificationsSelectColumn!], limit: Int, offset: Int, orderBy: [QualificationsOrderBy!], where: QualificationsBoolExp): [Qualifications!]!
@@ -8540,8 +8540,6 @@ type subscription_root {
   jobs(distinctOn: [JobsSelectColumn!], limit: Int, offset: Int, orderBy: [JobsOrderBy!], where: JobsBoolExp): [Jobs!]!
   jobsByPk(id: uuid!): Jobs
   jobsStream(batchSize: Int!, cursor: [JobsStreamCursorInput]!, where: JobsBoolExp): [Jobs!]!
-  mainContacts(distinctOn: [MainContactsSelectColumn!], limit: Int, offset: Int, orderBy: [MainContactsOrderBy!], where: MainContactsBoolExp): [MainContacts!]!
-  mainContactsStream(batchSize: Int!, cursor: [MainContactsStreamCursorInput]!, where: MainContactsBoolExp): [MainContacts!]!
   personStates(distinctOn: [PersonStatesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonStatesOrderBy!], where: PersonStatesBoolExp): [PersonStates!]!
   personStatesByPk(id: uuid!): PersonStates
   personStatesStream(batchSize: Int!, cursor: [PersonStatesStreamCursorInput]!, where: PersonStatesBoolExp): [PersonStates!]!
@@ -8555,6 +8553,8 @@ type subscription_root {
   personsGroupsStream(batchSize: Int!, cursor: [PersonsGroupsStreamCursorInput]!, where: PersonsGroupsBoolExp): [PersonsGroups!]!
   personsHobbies(distinctOn: [PersonsHobbiesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsHobbiesOrderBy!], where: PersonsHobbiesBoolExp): [PersonsHobbies!]!
   personsHobbiesStream(batchSize: Int!, cursor: [PersonsHobbiesStreamCursorInput]!, where: PersonsHobbiesBoolExp): [PersonsHobbies!]!
+  personsMainContacts(distinctOn: [PersonsMainContactsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsMainContactsOrderBy!], where: PersonsMainContactsBoolExp): [PersonsMainContacts!]!
+  personsMainContactsStream(batchSize: Int!, cursor: [PersonsMainContactsStreamCursorInput]!, where: PersonsMainContactsBoolExp): [PersonsMainContacts!]!
   personsServices(distinctOn: [PersonsServicesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsServicesOrderBy!], where: PersonsServicesBoolExp): [PersonsServices!]!
   personsServicesStream(batchSize: Int!, cursor: [PersonsServicesStreamCursorInput]!, where: PersonsServicesBoolExp): [PersonsServices!]!
   personsStream(batchSize: Int!, cursor: [PersonsStreamCursorInput]!, where: PersonsBoolExp): [Persons!]!

@@ -1,5 +1,5 @@
 table:
-  name: main_contacts
+  name: persons_main_contacts
   schema: public
 select_permissions:
   - role: user

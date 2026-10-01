@@ -78,7 +78,7 @@ object_relationships:
           id: person_id
         insertion_order: null
         remote_table:
-          name: main_contacts
+          name: persons_main_contacts
           schema: public
   - name: personType
     using:

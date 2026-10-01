@@ -54,7 +54,7 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
     Input_HistoryLatestEditsBoolExp? lastEdit,
     Input_HistoryLatestKodasesBoolExp? lastKodas,
     Input_HistoryLatestVisitsBoolExp? lastVisit,
-    Input_MainContactsBoolExp? mainContact,
+    Input_PersonsMainContactsBoolExp? mainContact,
     Input_StringComparisonExp? mainPhone,
     Input_StringComparisonExp? martialStatus,
     Input_StringComparisonExp? name,
@@ -146,7 +146,7 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit;
   CopyWith_Input_HistoryLatestKodasesBoolExp<TRes> get lastKodas;
   CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit;
-  CopyWith_Input_MainContactsBoolExp<TRes> get mainContact;
+  CopyWith_Input_PersonsMainContactsBoolExp<TRes> get mainContact;
   CopyWith_Input_StringComparisonExp<TRes> get mainPhone;
   CopyWith_Input_StringComparisonExp<TRes> get martialStatus;
   CopyWith_Input_StringComparisonExp<TRes> get name;
@@ -359,7 +359,7 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
       if (lastVisit != _undefined)
         'lastVisit': (lastVisit as Input_HistoryLatestVisitsBoolExp?),
       if (mainContact != _undefined)
-        'mainContact': (mainContact as Input_MainContactsBoolExp?),
+        'mainContact': (mainContact as Input_PersonsMainContactsBoolExp?),
       if (mainPhone != _undefined)
         'mainPhone': (mainPhone as Input_StringComparisonExp?),
       if (martialStatus != _undefined)
@@ -849,11 +849,11 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
           );
   }
 
-  CopyWith_Input_MainContactsBoolExp<TRes> get mainContact {
+  CopyWith_Input_PersonsMainContactsBoolExp<TRes> get mainContact {
     final local$mainContact = _instance.mainContact;
     return local$mainContact == null
-        ? CopyWith_Input_MainContactsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_MainContactsBoolExp(
+        ? CopyWith_Input_PersonsMainContactsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsMainContactsBoolExp(
             local$mainContact,
             (e) => call(mainContact: e),
           );
@@ -1215,7 +1215,7 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
     Input_HistoryLatestEditsBoolExp? lastEdit,
     Input_HistoryLatestKodasesBoolExp? lastKodas,
     Input_HistoryLatestVisitsBoolExp? lastVisit,
-    Input_MainContactsBoolExp? mainContact,
+    Input_PersonsMainContactsBoolExp? mainContact,
     Input_StringComparisonExp? mainPhone,
     Input_StringComparisonExp? martialStatus,
     Input_StringComparisonExp? name,
@@ -1382,8 +1382,8 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
   CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit =>
       CopyWith_Input_HistoryLatestVisitsBoolExp.stub(_res);
 
-  CopyWith_Input_MainContactsBoolExp<TRes> get mainContact =>
-      CopyWith_Input_MainContactsBoolExp.stub(_res);
+  CopyWith_Input_PersonsMainContactsBoolExp<TRes> get mainContact =>
+      CopyWith_Input_PersonsMainContactsBoolExp.stub(_res);
 
   CopyWith_Input_StringComparisonExp<TRes> get mainPhone =>
       CopyWith_Input_StringComparisonExp.stub(_res);

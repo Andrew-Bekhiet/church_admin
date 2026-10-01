@@ -2266,232 +2266,245 @@ class _CopyWithStubImpl_Input_JsonbComparisonExp<TRes>
       CopyWith_Input_JsonbCastExp.stub(_res);
 }
 
-class Input_MainContactsBoolExp {
-  factory Input_MainContactsBoolExp({
-    List<Input_MainContactsBoolExp>? $_and,
-    Input_MainContactsBoolExp? $_not,
-    List<Input_MainContactsBoolExp>? $_or,
-    Input_UuidComparisonExp? id,
-    Input_StringComparisonExp? label,
-    Input_UuidComparisonExp? personId,
-    Input_StringComparisonExp? phone,
-  }) => Input_MainContactsBoolExp._({
-    if ($_and != null) r'_and': $_and,
-    if ($_not != null) r'_not': $_not,
-    if ($_or != null) r'_or': $_or,
-    if (id != null) r'id': id,
-    if (label != null) r'label': label,
-    if (personId != null) r'personId': personId,
-    if (phone != null) r'phone': phone,
+class Input_MeetingAudienceComparisonExp {
+  factory Input_MeetingAudienceComparisonExp({
+    String? $_eq,
+    String? $_gt,
+    String? $_gte,
+    List<String>? $_in,
+    bool? $_isNull,
+    String? $_lt,
+    String? $_lte,
+    String? $_neq,
+    List<String>? $_nin,
+  }) => Input_MeetingAudienceComparisonExp._({
+    if ($_eq != null) r'_eq': $_eq,
+    if ($_gt != null) r'_gt': $_gt,
+    if ($_gte != null) r'_gte': $_gte,
+    if ($_in != null) r'_in': $_in,
+    if ($_isNull != null) r'_isNull': $_isNull,
+    if ($_lt != null) r'_lt': $_lt,
+    if ($_lte != null) r'_lte': $_lte,
+    if ($_neq != null) r'_neq': $_neq,
+    if ($_nin != null) r'_nin': $_nin,
   });
 
-  Input_MainContactsBoolExp._(this._$data);
+  Input_MeetingAudienceComparisonExp._(this._$data);
 
-  factory Input_MainContactsBoolExp.fromJson(Map<String, dynamic> data) {
+  factory Input_MeetingAudienceComparisonExp.fromJson(
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('_and')) {
-      final l$$_and = data['_and'];
-      result$data['_and'] = (l$$_and as List<dynamic>?)
-          ?.map(
-            (e) =>
-                Input_MainContactsBoolExp.fromJson((e as Map<String, dynamic>)),
-          )
+    if (data.containsKey('_eq')) {
+      final l$$_eq = data['_eq'];
+      result$data['_eq'] = (l$$_eq as String?);
+    }
+    if (data.containsKey('_gt')) {
+      final l$$_gt = data['_gt'];
+      result$data['_gt'] = (l$$_gt as String?);
+    }
+    if (data.containsKey('_gte')) {
+      final l$$_gte = data['_gte'];
+      result$data['_gte'] = (l$$_gte as String?);
+    }
+    if (data.containsKey('_in')) {
+      final l$$_in = data['_in'];
+      result$data['_in'] = (l$$_in as List<dynamic>?)
+          ?.map((e) => (e as String))
           .toList();
     }
-    if (data.containsKey('_not')) {
-      final l$$_not = data['_not'];
-      result$data['_not'] = l$$_not == null
-          ? null
-          : Input_MainContactsBoolExp.fromJson(
-              (l$$_not as Map<String, dynamic>),
-            );
+    if (data.containsKey('_isNull')) {
+      final l$$_isNull = data['_isNull'];
+      result$data['_isNull'] = (l$$_isNull as bool?);
     }
-    if (data.containsKey('_or')) {
-      final l$$_or = data['_or'];
-      result$data['_or'] = (l$$_or as List<dynamic>?)
-          ?.map(
-            (e) =>
-                Input_MainContactsBoolExp.fromJson((e as Map<String, dynamic>)),
-          )
+    if (data.containsKey('_lt')) {
+      final l$$_lt = data['_lt'];
+      result$data['_lt'] = (l$$_lt as String?);
+    }
+    if (data.containsKey('_lte')) {
+      final l$$_lte = data['_lte'];
+      result$data['_lte'] = (l$$_lte as String?);
+    }
+    if (data.containsKey('_neq')) {
+      final l$$_neq = data['_neq'];
+      result$data['_neq'] = (l$$_neq as String?);
+    }
+    if (data.containsKey('_nin')) {
+      final l$$_nin = data['_nin'];
+      result$data['_nin'] = (l$$_nin as List<dynamic>?)
+          ?.map((e) => (e as String))
           .toList();
     }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null
-          ? null
-          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
-    }
-    if (data.containsKey('label')) {
-      final l$label = data['label'];
-      result$data['label'] = l$label == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$label as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$personId as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('phone')) {
-      final l$phone = data['phone'];
-      result$data['phone'] = l$phone == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$phone as Map<String, dynamic>),
-            );
-    }
-    return Input_MainContactsBoolExp._(result$data);
+    return Input_MeetingAudienceComparisonExp._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input_MainContactsBoolExp>? get $_and =>
-      (_$data['_and'] as List<Input_MainContactsBoolExp>?);
+  String? get $_eq => (_$data['_eq'] as String?);
 
-  Input_MainContactsBoolExp? get $_not =>
-      (_$data['_not'] as Input_MainContactsBoolExp?);
+  String? get $_gt => (_$data['_gt'] as String?);
 
-  List<Input_MainContactsBoolExp>? get $_or =>
-      (_$data['_or'] as List<Input_MainContactsBoolExp>?);
+  String? get $_gte => (_$data['_gte'] as String?);
 
-  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+  List<String>? get $_in => (_$data['_in'] as List<String>?);
 
-  Input_StringComparisonExp? get label =>
-      (_$data['label'] as Input_StringComparisonExp?);
+  bool? get $_isNull => (_$data['_isNull'] as bool?);
 
-  Input_UuidComparisonExp? get personId =>
-      (_$data['personId'] as Input_UuidComparisonExp?);
+  String? get $_lt => (_$data['_lt'] as String?);
 
-  Input_StringComparisonExp? get phone =>
-      (_$data['phone'] as Input_StringComparisonExp?);
+  String? get $_lte => (_$data['_lte'] as String?);
+
+  String? get $_neq => (_$data['_neq'] as String?);
+
+  List<String>? get $_nin => (_$data['_nin'] as List<String>?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_and')) {
-      final l$$_and = $_and;
-      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
+    if (_$data.containsKey('_eq')) {
+      final l$$_eq = $_eq;
+      result$data['_eq'] = l$$_eq;
     }
-    if (_$data.containsKey('_not')) {
-      final l$$_not = $_not;
-      result$data['_not'] = l$$_not?.toJson();
+    if (_$data.containsKey('_gt')) {
+      final l$$_gt = $_gt;
+      result$data['_gt'] = l$$_gt;
     }
-    if (_$data.containsKey('_or')) {
-      final l$$_or = $_or;
-      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    if (_$data.containsKey('_gte')) {
+      final l$$_gte = $_gte;
+      result$data['_gte'] = l$$_gte;
     }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id?.toJson();
+    if (_$data.containsKey('_in')) {
+      final l$$_in = $_in;
+      result$data['_in'] = l$$_in?.map((e) => e).toList();
     }
-    if (_$data.containsKey('label')) {
-      final l$label = label;
-      result$data['label'] = l$label?.toJson();
+    if (_$data.containsKey('_isNull')) {
+      final l$$_isNull = $_isNull;
+      result$data['_isNull'] = l$$_isNull;
     }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] = l$personId?.toJson();
+    if (_$data.containsKey('_lt')) {
+      final l$$_lt = $_lt;
+      result$data['_lt'] = l$$_lt;
     }
-    if (_$data.containsKey('phone')) {
-      final l$phone = phone;
-      result$data['phone'] = l$phone?.toJson();
+    if (_$data.containsKey('_lte')) {
+      final l$$_lte = $_lte;
+      result$data['_lte'] = l$$_lte;
+    }
+    if (_$data.containsKey('_neq')) {
+      final l$$_neq = $_neq;
+      result$data['_neq'] = l$$_neq;
+    }
+    if (_$data.containsKey('_nin')) {
+      final l$$_nin = $_nin;
+      result$data['_nin'] = l$$_nin?.map((e) => e).toList();
     }
     return result$data;
   }
 
-  CopyWith_Input_MainContactsBoolExp<Input_MainContactsBoolExp> get copyWith =>
-      CopyWith_Input_MainContactsBoolExp(this, (i) => i);
+  CopyWith_Input_MeetingAudienceComparisonExp<
+    Input_MeetingAudienceComparisonExp
+  >
+  get copyWith => CopyWith_Input_MeetingAudienceComparisonExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_MainContactsBoolExp ||
+    if (other is! Input_MeetingAudienceComparisonExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$$_and = $_and;
-    final lOther$$_and = other.$_and;
-    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
+    final l$$_eq = $_eq;
+    final lOther$$_eq = other.$_eq;
+    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
       return false;
     }
-    if (l$$_and != null && lOther$$_and != null) {
-      if (l$$_and.length != lOther$$_and.length) {
+    if (l$$_eq != lOther$$_eq) {
+      return false;
+    }
+    final l$$_gt = $_gt;
+    final lOther$$_gt = other.$_gt;
+    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
+      return false;
+    }
+    if (l$$_gt != lOther$$_gt) {
+      return false;
+    }
+    final l$$_gte = $_gte;
+    final lOther$$_gte = other.$_gte;
+    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
+      return false;
+    }
+    if (l$$_gte != lOther$$_gte) {
+      return false;
+    }
+    final l$$_in = $_in;
+    final lOther$$_in = other.$_in;
+    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
+      return false;
+    }
+    if (l$$_in != null && lOther$$_in != null) {
+      if (l$$_in.length != lOther$$_in.length) {
         return false;
       }
-      for (int i = 0; i < l$$_and.length; i++) {
-        final l$$_and$entry = l$$_and[i];
-        final lOther$$_and$entry = lOther$$_and[i];
-        if (l$$_and$entry != lOther$$_and$entry) {
+      for (int i = 0; i < l$$_in.length; i++) {
+        final l$$_in$entry = l$$_in[i];
+        final lOther$$_in$entry = lOther$$_in[i];
+        if (l$$_in$entry != lOther$$_in$entry) {
           return false;
         }
       }
-    } else if (l$$_and != lOther$$_and) {
+    } else if (l$$_in != lOther$$_in) {
       return false;
     }
-    final l$$_not = $_not;
-    final lOther$$_not = other.$_not;
-    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
+    final l$$_isNull = $_isNull;
+    final lOther$$_isNull = other.$_isNull;
+    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
       return false;
     }
-    if (l$$_not != lOther$$_not) {
+    if (l$$_isNull != lOther$$_isNull) {
       return false;
     }
-    final l$$_or = $_or;
-    final lOther$$_or = other.$_or;
-    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
+    final l$$_lt = $_lt;
+    final lOther$$_lt = other.$_lt;
+    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
       return false;
     }
-    if (l$$_or != null && lOther$$_or != null) {
-      if (l$$_or.length != lOther$$_or.length) {
+    if (l$$_lt != lOther$$_lt) {
+      return false;
+    }
+    final l$$_lte = $_lte;
+    final lOther$$_lte = other.$_lte;
+    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
+      return false;
+    }
+    if (l$$_lte != lOther$$_lte) {
+      return false;
+    }
+    final l$$_neq = $_neq;
+    final lOther$$_neq = other.$_neq;
+    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
+      return false;
+    }
+    if (l$$_neq != lOther$$_neq) {
+      return false;
+    }
+    final l$$_nin = $_nin;
+    final lOther$$_nin = other.$_nin;
+    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
+      return false;
+    }
+    if (l$$_nin != null && lOther$$_nin != null) {
+      if (l$$_nin.length != lOther$$_nin.length) {
         return false;
       }
-      for (int i = 0; i < l$$_or.length; i++) {
-        final l$$_or$entry = l$$_or[i];
-        final lOther$$_or$entry = lOther$$_or[i];
-        if (l$$_or$entry != lOther$$_or$entry) {
+      for (int i = 0; i < l$$_nin.length; i++) {
+        final l$$_nin$entry = l$$_nin[i];
+        final lOther$$_nin$entry = lOther$$_nin[i];
+        if (l$$_nin$entry != lOther$$_nin$entry) {
           return false;
         }
       }
-    } else if (l$$_or != lOther$$_or) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$label = label;
-    final lOther$label = other.label;
-    if (_$data.containsKey('label') != other._$data.containsKey('label')) {
-      return false;
-    }
-    if (l$label != lOther$label) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
-      return false;
-    }
-    if (l$personId != lOther$personId) {
-      return false;
-    }
-    final l$phone = phone;
-    final lOther$phone = other.phone;
-    if (_$data.containsKey('phone') != other._$data.containsKey('phone')) {
-      return false;
-    }
-    if (l$phone != lOther$phone) {
+    } else if (l$$_nin != lOther$$_nin) {
       return false;
     }
     return true;
@@ -2499,29 +2512,33 @@ class Input_MainContactsBoolExp {
 
   @override
   int get hashCode {
-    final l$$_and = $_and;
-    final l$$_not = $_not;
-    final l$$_or = $_or;
-    final l$id = id;
-    final l$label = label;
-    final l$personId = personId;
-    final l$phone = phone;
+    final l$$_eq = $_eq;
+    final l$$_gt = $_gt;
+    final l$$_gte = $_gte;
+    final l$$_in = $_in;
+    final l$$_isNull = $_isNull;
+    final l$$_lt = $_lt;
+    final l$$_lte = $_lte;
+    final l$$_neq = $_neq;
+    final l$$_nin = $_nin;
     return Object.hashAll([
-      _$data.containsKey('_and')
-          ? l$$_and == null
+      _$data.containsKey('_eq') ? l$$_eq : const {},
+      _$data.containsKey('_gt') ? l$$_gt : const {},
+      _$data.containsKey('_gte') ? l$$_gte : const {},
+      _$data.containsKey('_in')
+          ? l$$_in == null
                 ? null
-                : Object.hashAll(l$$_and.map((v) => v))
+                : Object.hashAll(l$$_in.map((v) => v))
           : const {},
-      _$data.containsKey('_not') ? l$$_not : const {},
-      _$data.containsKey('_or')
-          ? l$$_or == null
+      _$data.containsKey('_isNull') ? l$$_isNull : const {},
+      _$data.containsKey('_lt') ? l$$_lt : const {},
+      _$data.containsKey('_lte') ? l$$_lte : const {},
+      _$data.containsKey('_neq') ? l$$_neq : const {},
+      _$data.containsKey('_nin')
+          ? l$$_nin == null
                 ? null
-                : Object.hashAll(l$$_or.map((v) => v))
+                : Object.hashAll(l$$_nin.map((v) => v))
           : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('label') ? l$label : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
-      _$data.containsKey('phone') ? l$phone : const {},
     ]);
   }
 }

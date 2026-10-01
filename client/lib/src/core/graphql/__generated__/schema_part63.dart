@@ -1,6 +1,860 @@
 // Part 63 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_UsersFcmTokensMinOrderBy<TRes> {
+  factory CopyWith_Input_UsersFcmTokensMinOrderBy(
+    Input_UsersFcmTokensMinOrderBy instance,
+    TRes Function(Input_UsersFcmTokensMinOrderBy) then,
+  ) = _CopyWithImpl_Input_UsersFcmTokensMinOrderBy;
+
+  factory CopyWith_Input_UsersFcmTokensMinOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersFcmTokensMinOrderBy;
+
+  TRes call({Enum_OrderBy? createdAt, Enum_OrderBy? token, Enum_OrderBy? uid});
+}
+
+class _CopyWithImpl_Input_UsersFcmTokensMinOrderBy<TRes>
+    implements CopyWith_Input_UsersFcmTokensMinOrderBy<TRes> {
+  _CopyWithImpl_Input_UsersFcmTokensMinOrderBy(this._instance, this._then);
+
+  final Input_UsersFcmTokensMinOrderBy _instance;
+
+  final TRes Function(Input_UsersFcmTokensMinOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? createdAt = _undefined,
+    Object? token = _undefined,
+    Object? uid = _undefined,
+  }) => _then(
+    Input_UsersFcmTokensMinOrderBy._({
+      ..._instance._$data,
+      if (createdAt != _undefined) 'createdAt': (createdAt as Enum_OrderBy?),
+      if (token != _undefined) 'token': (token as Enum_OrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UsersFcmTokensMinOrderBy<TRes>
+    implements CopyWith_Input_UsersFcmTokensMinOrderBy<TRes> {
+  _CopyWithStubImpl_Input_UsersFcmTokensMinOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? createdAt, Enum_OrderBy? token, Enum_OrderBy? uid}) =>
+      _res;
+}
+
+class Input_UsersFcmTokensOnConflict {
+  factory Input_UsersFcmTokensOnConflict({
+    required Enum_UsersFcmTokensConstraint constraint,
+    List<Enum_UsersFcmTokensUpdateColumn>? updateColumns,
+    Input_UsersFcmTokensBoolExp? where,
+  }) => Input_UsersFcmTokensOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
+
+  Input_UsersFcmTokensOnConflict._(this._$data);
+
+  factory Input_UsersFcmTokensOnConflict.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$constraint = data['constraint'];
+    result$data['constraint'] = fromJson_Enum_UsersFcmTokensConstraint(
+      (l$constraint as String),
+    );
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_UsersFcmTokensUpdateColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = l$where == null
+          ? null
+          : Input_UsersFcmTokensBoolExp.fromJson(
+              (l$where as Map<String, dynamic>),
+            );
+    }
+    return Input_UsersFcmTokensOnConflict._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_UsersFcmTokensConstraint get constraint =>
+      (_$data['constraint'] as Enum_UsersFcmTokensConstraint);
+
+  List<Enum_UsersFcmTokensUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_UsersFcmTokensUpdateColumn>?);
+
+  Input_UsersFcmTokensBoolExp? get where =>
+      (_$data['where'] as Input_UsersFcmTokensBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$constraint = constraint;
+    result$data['constraint'] = toJson_Enum_UsersFcmTokensConstraint(
+      l$constraint,
+    );
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_UsersFcmTokensUpdateColumn>)
+              .map((e) => toJson_Enum_UsersFcmTokensUpdateColumn(e))
+              .toList();
+    }
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UsersFcmTokensOnConflict<Input_UsersFcmTokensOnConflict>
+  get copyWith => CopyWith_Input_UsersFcmTokensOnConflict(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UsersFcmTokensOnConflict ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$constraint = constraint;
+    final lOther$constraint = other.constraint;
+    if (l$constraint != lOther$constraint) {
+      return false;
+    }
+    final l$updateColumns = updateColumns;
+    final lOther$updateColumns = other.updateColumns;
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
+      return false;
+    }
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
+        return false;
+      }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$constraint = constraint;
+    final l$updateColumns = updateColumns;
+    final l$where = where;
+    return Object.hashAll([
+      l$constraint,
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
+      _$data.containsKey('where') ? l$where : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UsersFcmTokensOnConflict<TRes> {
+  factory CopyWith_Input_UsersFcmTokensOnConflict(
+    Input_UsersFcmTokensOnConflict instance,
+    TRes Function(Input_UsersFcmTokensOnConflict) then,
+  ) = _CopyWithImpl_Input_UsersFcmTokensOnConflict;
+
+  factory CopyWith_Input_UsersFcmTokensOnConflict.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersFcmTokensOnConflict;
+
+  TRes call({
+    Enum_UsersFcmTokensConstraint? constraint,
+    List<Enum_UsersFcmTokensUpdateColumn>? updateColumns,
+    Input_UsersFcmTokensBoolExp? where,
+  });
+  CopyWith_Input_UsersFcmTokensBoolExp<TRes> get where;
+}
+
+class _CopyWithImpl_Input_UsersFcmTokensOnConflict<TRes>
+    implements CopyWith_Input_UsersFcmTokensOnConflict<TRes> {
+  _CopyWithImpl_Input_UsersFcmTokensOnConflict(this._instance, this._then);
+
+  final Input_UsersFcmTokensOnConflict _instance;
+
+  final TRes Function(Input_UsersFcmTokensOnConflict) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? constraint = _undefined,
+    Object? updateColumns = _undefined,
+    Object? where = _undefined,
+  }) => _then(
+    Input_UsersFcmTokensOnConflict._({
+      ..._instance._$data,
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_UsersFcmTokensConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns':
+            (updateColumns as List<Enum_UsersFcmTokensUpdateColumn>),
+      if (where != _undefined) 'where': (where as Input_UsersFcmTokensBoolExp?),
+    }),
+  );
+
+  CopyWith_Input_UsersFcmTokensBoolExp<TRes> get where {
+    final local$where = _instance.where;
+    return local$where == null
+        ? CopyWith_Input_UsersFcmTokensBoolExp.stub(_then(_instance))
+        : CopyWith_Input_UsersFcmTokensBoolExp(
+            local$where,
+            (e) => call(where: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_UsersFcmTokensOnConflict<TRes>
+    implements CopyWith_Input_UsersFcmTokensOnConflict<TRes> {
+  _CopyWithStubImpl_Input_UsersFcmTokensOnConflict(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_UsersFcmTokensConstraint? constraint,
+    List<Enum_UsersFcmTokensUpdateColumn>? updateColumns,
+    Input_UsersFcmTokensBoolExp? where,
+  }) => _res;
+
+  CopyWith_Input_UsersFcmTokensBoolExp<TRes> get where =>
+      CopyWith_Input_UsersFcmTokensBoolExp.stub(_res);
+}
+
+class Input_UsersFcmTokensOrderBy {
+  factory Input_UsersFcmTokensOrderBy({
+    Enum_OrderBy? createdAt,
+    Enum_OrderBy? token,
+    Enum_OrderBy? uid,
+    Input_AuthUsersDataOrderBy? user,
+  }) => Input_UsersFcmTokensOrderBy._({
+    if (createdAt != null) r'createdAt': createdAt,
+    if (token != null) r'token': token,
+    if (uid != null) r'uid': uid,
+    if (user != null) r'user': user,
+  });
+
+  Input_UsersFcmTokensOrderBy._(this._$data);
+
+  factory Input_UsersFcmTokensOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = l$createdAt == null
+          ? null
+          : fromJson_Enum_OrderBy((l$createdAt as String));
+    }
+    if (data.containsKey('token')) {
+      final l$token = data['token'];
+      result$data['token'] = l$token == null
+          ? null
+          : fromJson_Enum_OrderBy((l$token as String));
+    }
+    if (data.containsKey('uid')) {
+      final l$uid = data['uid'];
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
+    }
+    if (data.containsKey('user')) {
+      final l$user = data['user'];
+      result$data['user'] = l$user == null
+          ? null
+          : Input_AuthUsersDataOrderBy.fromJson(
+              (l$user as Map<String, dynamic>),
+            );
+    }
+    return Input_UsersFcmTokensOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get createdAt => (_$data['createdAt'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get token => (_$data['token'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
+  Input_AuthUsersDataOrderBy? get user =>
+      (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt == null
+          ? null
+          : toJson_Enum_OrderBy(l$createdAt);
+    }
+    if (_$data.containsKey('token')) {
+      final l$token = token;
+      result$data['token'] = l$token == null
+          ? null
+          : toJson_Enum_OrderBy(l$token);
+    }
+    if (_$data.containsKey('uid')) {
+      final l$uid = uid;
+      result$data['uid'] = l$uid == null ? null : toJson_Enum_OrderBy(l$uid);
+    }
+    if (_$data.containsKey('user')) {
+      final l$user = user;
+      result$data['user'] = l$user?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UsersFcmTokensOrderBy<Input_UsersFcmTokensOrderBy>
+  get copyWith => CopyWith_Input_UsersFcmTokensOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UsersFcmTokensOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$token = token;
+    final lOther$token = other.token;
+    if (_$data.containsKey('token') != other._$data.containsKey('token')) {
+      return false;
+    }
+    if (l$token != lOther$token) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
+      return false;
+    }
+    if (l$uid != lOther$uid) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
+      return false;
+    }
+    if (l$user != lOther$user) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$createdAt = createdAt;
+    final l$token = token;
+    final l$uid = uid;
+    final l$user = user;
+    return Object.hashAll([
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('token') ? l$token : const {},
+      _$data.containsKey('uid') ? l$uid : const {},
+      _$data.containsKey('user') ? l$user : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UsersFcmTokensOrderBy<TRes> {
+  factory CopyWith_Input_UsersFcmTokensOrderBy(
+    Input_UsersFcmTokensOrderBy instance,
+    TRes Function(Input_UsersFcmTokensOrderBy) then,
+  ) = _CopyWithImpl_Input_UsersFcmTokensOrderBy;
+
+  factory CopyWith_Input_UsersFcmTokensOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersFcmTokensOrderBy;
+
+  TRes call({
+    Enum_OrderBy? createdAt,
+    Enum_OrderBy? token,
+    Enum_OrderBy? uid,
+    Input_AuthUsersDataOrderBy? user,
+  });
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user;
+}
+
+class _CopyWithImpl_Input_UsersFcmTokensOrderBy<TRes>
+    implements CopyWith_Input_UsersFcmTokensOrderBy<TRes> {
+  _CopyWithImpl_Input_UsersFcmTokensOrderBy(this._instance, this._then);
+
+  final Input_UsersFcmTokensOrderBy _instance;
+
+  final TRes Function(Input_UsersFcmTokensOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? createdAt = _undefined,
+    Object? token = _undefined,
+    Object? uid = _undefined,
+    Object? user = _undefined,
+  }) => _then(
+    Input_UsersFcmTokensOrderBy._({
+      ..._instance._$data,
+      if (createdAt != _undefined) 'createdAt': (createdAt as Enum_OrderBy?),
+      if (token != _undefined) 'token': (token as Enum_OrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+      if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
+    }),
+  );
+
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_AuthUsersDataOrderBy.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataOrderBy(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_UsersFcmTokensOrderBy<TRes>
+    implements CopyWith_Input_UsersFcmTokensOrderBy<TRes> {
+  _CopyWithStubImpl_Input_UsersFcmTokensOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? createdAt,
+    Enum_OrderBy? token,
+    Enum_OrderBy? uid,
+    Input_AuthUsersDataOrderBy? user,
+  }) => _res;
+
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
+      CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
+}
+
+class Input_UsersFcmTokensStreamCursorInput {
+  factory Input_UsersFcmTokensStreamCursorInput({
+    required Input_UsersFcmTokensStreamCursorValueInput initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => Input_UsersFcmTokensStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
+
+  Input_UsersFcmTokensStreamCursorInput._(this._$data);
+
+  factory Input_UsersFcmTokensStreamCursorInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = data['initialValue'];
+    result$data['initialValue'] =
+        Input_UsersFcmTokensStreamCursorValueInput.fromJson(
+          (l$initialValue as Map<String, dynamic>),
+        );
+    if (data.containsKey('ordering')) {
+      final l$ordering = data['ordering'];
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : fromJson_Enum_CursorOrdering((l$ordering as String));
+    }
+    return Input_UsersFcmTokensStreamCursorInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_UsersFcmTokensStreamCursorValueInput get initialValue =>
+      (_$data['initialValue'] as Input_UsersFcmTokensStreamCursorValueInput);
+
+  Enum_CursorOrdering? get ordering =>
+      (_$data['ordering'] as Enum_CursorOrdering?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = initialValue;
+    result$data['initialValue'] = l$initialValue.toJson();
+    if (_$data.containsKey('ordering')) {
+      final l$ordering = ordering;
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UsersFcmTokensStreamCursorInput<
+    Input_UsersFcmTokensStreamCursorInput
+  >
+  get copyWith =>
+      CopyWith_Input_UsersFcmTokensStreamCursorInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UsersFcmTokensStreamCursorInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$initialValue = initialValue;
+    final lOther$initialValue = other.initialValue;
+    if (l$initialValue != lOther$initialValue) {
+      return false;
+    }
+    final l$ordering = ordering;
+    final lOther$ordering = other.ordering;
+    if (_$data.containsKey('ordering') !=
+        other._$data.containsKey('ordering')) {
+      return false;
+    }
+    if (l$ordering != lOther$ordering) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$initialValue = initialValue;
+    final l$ordering = ordering;
+    return Object.hashAll([
+      l$initialValue,
+      _$data.containsKey('ordering') ? l$ordering : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UsersFcmTokensStreamCursorInput<TRes> {
+  factory CopyWith_Input_UsersFcmTokensStreamCursorInput(
+    Input_UsersFcmTokensStreamCursorInput instance,
+    TRes Function(Input_UsersFcmTokensStreamCursorInput) then,
+  ) = _CopyWithImpl_Input_UsersFcmTokensStreamCursorInput;
+
+  factory CopyWith_Input_UsersFcmTokensStreamCursorInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersFcmTokensStreamCursorInput;
+
+  TRes call({
+    Input_UsersFcmTokensStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  });
+  CopyWith_Input_UsersFcmTokensStreamCursorValueInput<TRes> get initialValue;
+}
+
+class _CopyWithImpl_Input_UsersFcmTokensStreamCursorInput<TRes>
+    implements CopyWith_Input_UsersFcmTokensStreamCursorInput<TRes> {
+  _CopyWithImpl_Input_UsersFcmTokensStreamCursorInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_UsersFcmTokensStreamCursorInput _instance;
+
+  final TRes Function(Input_UsersFcmTokensStreamCursorInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? initialValue = _undefined,
+    Object? ordering = _undefined,
+  }) => _then(
+    Input_UsersFcmTokensStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue':
+            (initialValue as Input_UsersFcmTokensStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
+
+  CopyWith_Input_UsersFcmTokensStreamCursorValueInput<TRes> get initialValue {
+    final local$initialValue = _instance.initialValue;
+    return CopyWith_Input_UsersFcmTokensStreamCursorValueInput(
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_UsersFcmTokensStreamCursorInput<TRes>
+    implements CopyWith_Input_UsersFcmTokensStreamCursorInput<TRes> {
+  _CopyWithStubImpl_Input_UsersFcmTokensStreamCursorInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_UsersFcmTokensStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => _res;
+
+  CopyWith_Input_UsersFcmTokensStreamCursorValueInput<TRes> get initialValue =>
+      CopyWith_Input_UsersFcmTokensStreamCursorValueInput.stub(_res);
+}
+
+class Input_UsersFcmTokensStreamCursorValueInput {
+  factory Input_UsersFcmTokensStreamCursorValueInput({
+    DateTime? createdAt,
+    String? token,
+    UuidValue? uid,
+  }) => Input_UsersFcmTokensStreamCursorValueInput._({
+    if (createdAt != null) r'createdAt': createdAt,
+    if (token != null) r'token': token,
+    if (uid != null) r'uid': uid,
+  });
+
+  Input_UsersFcmTokensStreamCursorValueInput._(this._$data);
+
+  factory Input_UsersFcmTokensStreamCursorValueInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = l$createdAt == null
+          ? null
+          : tstzFromString(l$createdAt);
+    }
+    if (data.containsKey('token')) {
+      final l$token = data['token'];
+      result$data['token'] = (l$token as String?);
+    }
+    if (data.containsKey('uid')) {
+      final l$uid = data['uid'];
+      result$data['uid'] = l$uid == null ? null : stringToUuid(l$uid);
+    }
+    return Input_UsersFcmTokensStreamCursorValueInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+
+  String? get token => (_$data['token'] as String?);
+
+  UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt == null
+          ? null
+          : tstzToString(l$createdAt);
+    }
+    if (_$data.containsKey('token')) {
+      final l$token = token;
+      result$data['token'] = l$token;
+    }
+    if (_$data.containsKey('uid')) {
+      final l$uid = uid;
+      result$data['uid'] = l$uid == null ? null : uuidToString(l$uid);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UsersFcmTokensStreamCursorValueInput<
+    Input_UsersFcmTokensStreamCursorValueInput
+  >
+  get copyWith =>
+      CopyWith_Input_UsersFcmTokensStreamCursorValueInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UsersFcmTokensStreamCursorValueInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$token = token;
+    final lOther$token = other.token;
+    if (_$data.containsKey('token') != other._$data.containsKey('token')) {
+      return false;
+    }
+    if (l$token != lOther$token) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
+      return false;
+    }
+    if (l$uid != lOther$uid) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$createdAt = createdAt;
+    final l$token = token;
+    final l$uid = uid;
+    return Object.hashAll([
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('token') ? l$token : const {},
+      _$data.containsKey('uid') ? l$uid : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UsersFcmTokensStreamCursorValueInput<TRes> {
+  factory CopyWith_Input_UsersFcmTokensStreamCursorValueInput(
+    Input_UsersFcmTokensStreamCursorValueInput instance,
+    TRes Function(Input_UsersFcmTokensStreamCursorValueInput) then,
+  ) = _CopyWithImpl_Input_UsersFcmTokensStreamCursorValueInput;
+
+  factory CopyWith_Input_UsersFcmTokensStreamCursorValueInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersFcmTokensStreamCursorValueInput;
+
+  TRes call({DateTime? createdAt, String? token, UuidValue? uid});
+}
+
+class _CopyWithImpl_Input_UsersFcmTokensStreamCursorValueInput<TRes>
+    implements CopyWith_Input_UsersFcmTokensStreamCursorValueInput<TRes> {
+  _CopyWithImpl_Input_UsersFcmTokensStreamCursorValueInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_UsersFcmTokensStreamCursorValueInput _instance;
+
+  final TRes Function(Input_UsersFcmTokensStreamCursorValueInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? createdAt = _undefined,
+    Object? token = _undefined,
+    Object? uid = _undefined,
+  }) => _then(
+    Input_UsersFcmTokensStreamCursorValueInput._({
+      ..._instance._$data,
+      if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+      if (token != _undefined) 'token': (token as String?),
+      if (uid != _undefined) 'uid': (uid as UuidValue?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UsersFcmTokensStreamCursorValueInput<TRes>
+    implements CopyWith_Input_UsersFcmTokensStreamCursorValueInput<TRes> {
+  _CopyWithStubImpl_Input_UsersFcmTokensStreamCursorValueInput(this._res);
+
+  TRes _res;
+
+  call({DateTime? createdAt, String? token, UuidValue? uid}) => _res;
+}
+
+class Input_UsersPreferencesAppendInput {
+  factory Input_UsersPreferencesAppendInput({Json? orderByPreferences}) =>
+      Input_UsersPreferencesAppendInput._({
+        if (orderByPreferences != null)
+          r'orderByPreferences': orderByPreferences,
+      });
+
+  Input_UsersPreferencesAppendInput._(this._$data);
+
+  factory Input_UsersPreferencesAppendInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('orderByPreferences')) {
+      final l$orderByPreferences = data['orderByPreferences'];
+      result$data['orderByPreferences'] = (l$orderByPreferences as Json?);
+    }
+    return Input_UsersPreferencesAppendInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('orderByPreferences')) {
+      final l$orderByPreferences = orderByPreferences;
+      result$data['orderByPreferences'] = l$orderByPreferences;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UsersPreferencesAppendInput<Input_UsersPreferencesAppendInput>
+  get copyWith => CopyWith_Input_UsersPreferencesAppendInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UsersPreferencesAppendInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$orderByPreferences = orderByPreferences;
+    final lOther$orderByPreferences = other.orderByPreferences;
+    if (_$data.containsKey('orderByPreferences') !=
+        other._$data.containsKey('orderByPreferences')) {
+      return false;
+    }
+    if (l$orderByPreferences != lOther$orderByPreferences) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$orderByPreferences = orderByPreferences;
+    return Object.hashAll([
+      _$data.containsKey('orderByPreferences')
+          ? l$orderByPreferences
+          : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_UsersPreferencesAppendInput<TRes> {
   factory CopyWith_Input_UsersPreferencesAppendInput(
     Input_UsersPreferencesAppendInput instance,
@@ -1647,1157 +2501,6 @@ class Input_UsersPreferencesSetInput {
       _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
-          : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_UsersPreferencesSetInput<TRes> {
-  factory CopyWith_Input_UsersPreferencesSetInput(
-    Input_UsersPreferencesSetInput instance,
-    TRes Function(Input_UsersPreferencesSetInput) then,
-  ) = _CopyWithImpl_Input_UsersPreferencesSetInput;
-
-  factory CopyWith_Input_UsersPreferencesSetInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_UsersPreferencesSetInput;
-
-  TRes call({
-    bool? darkTheme,
-    bool? greatFeastTheme,
-    String? lastHomeMode,
-    Json? orderByPreferences,
-  });
-}
-
-class _CopyWithImpl_Input_UsersPreferencesSetInput<TRes>
-    implements CopyWith_Input_UsersPreferencesSetInput<TRes> {
-  _CopyWithImpl_Input_UsersPreferencesSetInput(this._instance, this._then);
-
-  final Input_UsersPreferencesSetInput _instance;
-
-  final TRes Function(Input_UsersPreferencesSetInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? darkTheme = _undefined,
-    Object? greatFeastTheme = _undefined,
-    Object? lastHomeMode = _undefined,
-    Object? orderByPreferences = _undefined,
-  }) => _then(
-    Input_UsersPreferencesSetInput._({
-      ..._instance._$data,
-      if (darkTheme != _undefined) 'darkTheme': (darkTheme as bool?),
-      if (greatFeastTheme != _undefined)
-        'greatFeastTheme': (greatFeastTheme as bool?),
-      if (lastHomeMode != _undefined) 'lastHomeMode': (lastHomeMode as String?),
-      if (orderByPreferences != _undefined)
-        'orderByPreferences': (orderByPreferences as Json?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_UsersPreferencesSetInput<TRes>
-    implements CopyWith_Input_UsersPreferencesSetInput<TRes> {
-  _CopyWithStubImpl_Input_UsersPreferencesSetInput(this._res);
-
-  TRes _res;
-
-  call({
-    bool? darkTheme,
-    bool? greatFeastTheme,
-    String? lastHomeMode,
-    Json? orderByPreferences,
-  }) => _res;
-}
-
-class Input_UsersPreferencesStreamCursorInput {
-  factory Input_UsersPreferencesStreamCursorInput({
-    required Input_UsersPreferencesStreamCursorValueInput initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => Input_UsersPreferencesStreamCursorInput._({
-    r'initialValue': initialValue,
-    if (ordering != null) r'ordering': ordering,
-  });
-
-  Input_UsersPreferencesStreamCursorInput._(this._$data);
-
-  factory Input_UsersPreferencesStreamCursorInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$initialValue = data['initialValue'];
-    result$data['initialValue'] =
-        Input_UsersPreferencesStreamCursorValueInput.fromJson(
-          (l$initialValue as Map<String, dynamic>),
-        );
-    if (data.containsKey('ordering')) {
-      final l$ordering = data['ordering'];
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : fromJson_Enum_CursorOrdering((l$ordering as String));
-    }
-    return Input_UsersPreferencesStreamCursorInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_UsersPreferencesStreamCursorValueInput get initialValue =>
-      (_$data['initialValue'] as Input_UsersPreferencesStreamCursorValueInput);
-
-  Enum_CursorOrdering? get ordering =>
-      (_$data['ordering'] as Enum_CursorOrdering?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$initialValue = initialValue;
-    result$data['initialValue'] = l$initialValue.toJson();
-    if (_$data.containsKey('ordering')) {
-      final l$ordering = ordering;
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : toJson_Enum_CursorOrdering(l$ordering);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_UsersPreferencesStreamCursorInput<
-    Input_UsersPreferencesStreamCursorInput
-  >
-  get copyWith =>
-      CopyWith_Input_UsersPreferencesStreamCursorInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_UsersPreferencesStreamCursorInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$initialValue = initialValue;
-    final lOther$initialValue = other.initialValue;
-    if (l$initialValue != lOther$initialValue) {
-      return false;
-    }
-    final l$ordering = ordering;
-    final lOther$ordering = other.ordering;
-    if (_$data.containsKey('ordering') !=
-        other._$data.containsKey('ordering')) {
-      return false;
-    }
-    if (l$ordering != lOther$ordering) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$initialValue = initialValue;
-    final l$ordering = ordering;
-    return Object.hashAll([
-      l$initialValue,
-      _$data.containsKey('ordering') ? l$ordering : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_UsersPreferencesStreamCursorInput<TRes> {
-  factory CopyWith_Input_UsersPreferencesStreamCursorInput(
-    Input_UsersPreferencesStreamCursorInput instance,
-    TRes Function(Input_UsersPreferencesStreamCursorInput) then,
-  ) = _CopyWithImpl_Input_UsersPreferencesStreamCursorInput;
-
-  factory CopyWith_Input_UsersPreferencesStreamCursorInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_UsersPreferencesStreamCursorInput;
-
-  TRes call({
-    Input_UsersPreferencesStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  });
-  CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes> get initialValue;
-}
-
-class _CopyWithImpl_Input_UsersPreferencesStreamCursorInput<TRes>
-    implements CopyWith_Input_UsersPreferencesStreamCursorInput<TRes> {
-  _CopyWithImpl_Input_UsersPreferencesStreamCursorInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_UsersPreferencesStreamCursorInput _instance;
-
-  final TRes Function(Input_UsersPreferencesStreamCursorInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? initialValue = _undefined,
-    Object? ordering = _undefined,
-  }) => _then(
-    Input_UsersPreferencesStreamCursorInput._({
-      ..._instance._$data,
-      if (initialValue != _undefined && initialValue != null)
-        'initialValue':
-            (initialValue as Input_UsersPreferencesStreamCursorValueInput),
-      if (ordering != _undefined)
-        'ordering': (ordering as Enum_CursorOrdering?),
-    }),
-  );
-
-  CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes> get initialValue {
-    final local$initialValue = _instance.initialValue;
-    return CopyWith_Input_UsersPreferencesStreamCursorValueInput(
-      local$initialValue,
-      (e) => call(initialValue: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_UsersPreferencesStreamCursorInput<TRes>
-    implements CopyWith_Input_UsersPreferencesStreamCursorInput<TRes> {
-  _CopyWithStubImpl_Input_UsersPreferencesStreamCursorInput(this._res);
-
-  TRes _res;
-
-  call({
-    Input_UsersPreferencesStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => _res;
-
-  CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes>
-  get initialValue =>
-      CopyWith_Input_UsersPreferencesStreamCursorValueInput.stub(_res);
-}
-
-class Input_UsersPreferencesStreamCursorValueInput {
-  factory Input_UsersPreferencesStreamCursorValueInput({
-    bool? darkTheme,
-    bool? greatFeastTheme,
-    String? lastHomeMode,
-    Json? orderByPreferences,
-    UuidValue? uid,
-    DateTime? updatedAt,
-  }) => Input_UsersPreferencesStreamCursorValueInput._({
-    if (darkTheme != null) r'darkTheme': darkTheme,
-    if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
-    if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
-    if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
-    if (uid != null) r'uid': uid,
-    if (updatedAt != null) r'updatedAt': updatedAt,
-  });
-
-  Input_UsersPreferencesStreamCursorValueInput._(this._$data);
-
-  factory Input_UsersPreferencesStreamCursorValueInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('darkTheme')) {
-      final l$darkTheme = data['darkTheme'];
-      result$data['darkTheme'] = (l$darkTheme as bool?);
-    }
-    if (data.containsKey('greatFeastTheme')) {
-      final l$greatFeastTheme = data['greatFeastTheme'];
-      result$data['greatFeastTheme'] = (l$greatFeastTheme as bool?);
-    }
-    if (data.containsKey('lastHomeMode')) {
-      final l$lastHomeMode = data['lastHomeMode'];
-      result$data['lastHomeMode'] = (l$lastHomeMode as String?);
-    }
-    if (data.containsKey('orderByPreferences')) {
-      final l$orderByPreferences = data['orderByPreferences'];
-      result$data['orderByPreferences'] = (l$orderByPreferences as Json?);
-    }
-    if (data.containsKey('uid')) {
-      final l$uid = data['uid'];
-      result$data['uid'] = l$uid == null ? null : stringToUuid(l$uid);
-    }
-    if (data.containsKey('updatedAt')) {
-      final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] = l$updatedAt == null
-          ? null
-          : tstzFromString(l$updatedAt);
-    }
-    return Input_UsersPreferencesStreamCursorValueInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get darkTheme => (_$data['darkTheme'] as bool?);
-
-  bool? get greatFeastTheme => (_$data['greatFeastTheme'] as bool?);
-
-  String? get lastHomeMode => (_$data['lastHomeMode'] as String?);
-
-  Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
-
-  UuidValue? get uid => (_$data['uid'] as UuidValue?);
-
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('darkTheme')) {
-      final l$darkTheme = darkTheme;
-      result$data['darkTheme'] = l$darkTheme;
-    }
-    if (_$data.containsKey('greatFeastTheme')) {
-      final l$greatFeastTheme = greatFeastTheme;
-      result$data['greatFeastTheme'] = l$greatFeastTheme;
-    }
-    if (_$data.containsKey('lastHomeMode')) {
-      final l$lastHomeMode = lastHomeMode;
-      result$data['lastHomeMode'] = l$lastHomeMode;
-    }
-    if (_$data.containsKey('orderByPreferences')) {
-      final l$orderByPreferences = orderByPreferences;
-      result$data['orderByPreferences'] = l$orderByPreferences;
-    }
-    if (_$data.containsKey('uid')) {
-      final l$uid = uid;
-      result$data['uid'] = l$uid == null ? null : uuidToString(l$uid);
-    }
-    if (_$data.containsKey('updatedAt')) {
-      final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt == null
-          ? null
-          : tstzToString(l$updatedAt);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_UsersPreferencesStreamCursorValueInput<
-    Input_UsersPreferencesStreamCursorValueInput
-  >
-  get copyWith =>
-      CopyWith_Input_UsersPreferencesStreamCursorValueInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_UsersPreferencesStreamCursorValueInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$darkTheme = darkTheme;
-    final lOther$darkTheme = other.darkTheme;
-    if (_$data.containsKey('darkTheme') !=
-        other._$data.containsKey('darkTheme')) {
-      return false;
-    }
-    if (l$darkTheme != lOther$darkTheme) {
-      return false;
-    }
-    final l$greatFeastTheme = greatFeastTheme;
-    final lOther$greatFeastTheme = other.greatFeastTheme;
-    if (_$data.containsKey('greatFeastTheme') !=
-        other._$data.containsKey('greatFeastTheme')) {
-      return false;
-    }
-    if (l$greatFeastTheme != lOther$greatFeastTheme) {
-      return false;
-    }
-    final l$lastHomeMode = lastHomeMode;
-    final lOther$lastHomeMode = other.lastHomeMode;
-    if (_$data.containsKey('lastHomeMode') !=
-        other._$data.containsKey('lastHomeMode')) {
-      return false;
-    }
-    if (l$lastHomeMode != lOther$lastHomeMode) {
-      return false;
-    }
-    final l$orderByPreferences = orderByPreferences;
-    final lOther$orderByPreferences = other.orderByPreferences;
-    if (_$data.containsKey('orderByPreferences') !=
-        other._$data.containsKey('orderByPreferences')) {
-      return false;
-    }
-    if (l$orderByPreferences != lOther$orderByPreferences) {
-      return false;
-    }
-    final l$uid = uid;
-    final lOther$uid = other.uid;
-    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
-      return false;
-    }
-    if (l$uid != lOther$uid) {
-      return false;
-    }
-    final l$updatedAt = updatedAt;
-    final lOther$updatedAt = other.updatedAt;
-    if (_$data.containsKey('updatedAt') !=
-        other._$data.containsKey('updatedAt')) {
-      return false;
-    }
-    if (l$updatedAt != lOther$updatedAt) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$darkTheme = darkTheme;
-    final l$greatFeastTheme = greatFeastTheme;
-    final l$lastHomeMode = lastHomeMode;
-    final l$orderByPreferences = orderByPreferences;
-    final l$uid = uid;
-    final l$updatedAt = updatedAt;
-    return Object.hashAll([
-      _$data.containsKey('darkTheme') ? l$darkTheme : const {},
-      _$data.containsKey('greatFeastTheme') ? l$greatFeastTheme : const {},
-      _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
-      _$data.containsKey('orderByPreferences')
-          ? l$orderByPreferences
-          : const {},
-      _$data.containsKey('uid') ? l$uid : const {},
-      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes> {
-  factory CopyWith_Input_UsersPreferencesStreamCursorValueInput(
-    Input_UsersPreferencesStreamCursorValueInput instance,
-    TRes Function(Input_UsersPreferencesStreamCursorValueInput) then,
-  ) = _CopyWithImpl_Input_UsersPreferencesStreamCursorValueInput;
-
-  factory CopyWith_Input_UsersPreferencesStreamCursorValueInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_UsersPreferencesStreamCursorValueInput;
-
-  TRes call({
-    bool? darkTheme,
-    bool? greatFeastTheme,
-    String? lastHomeMode,
-    Json? orderByPreferences,
-    UuidValue? uid,
-    DateTime? updatedAt,
-  });
-}
-
-class _CopyWithImpl_Input_UsersPreferencesStreamCursorValueInput<TRes>
-    implements CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes> {
-  _CopyWithImpl_Input_UsersPreferencesStreamCursorValueInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_UsersPreferencesStreamCursorValueInput _instance;
-
-  final TRes Function(Input_UsersPreferencesStreamCursorValueInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? darkTheme = _undefined,
-    Object? greatFeastTheme = _undefined,
-    Object? lastHomeMode = _undefined,
-    Object? orderByPreferences = _undefined,
-    Object? uid = _undefined,
-    Object? updatedAt = _undefined,
-  }) => _then(
-    Input_UsersPreferencesStreamCursorValueInput._({
-      ..._instance._$data,
-      if (darkTheme != _undefined) 'darkTheme': (darkTheme as bool?),
-      if (greatFeastTheme != _undefined)
-        'greatFeastTheme': (greatFeastTheme as bool?),
-      if (lastHomeMode != _undefined) 'lastHomeMode': (lastHomeMode as String?),
-      if (orderByPreferences != _undefined)
-        'orderByPreferences': (orderByPreferences as Json?),
-      if (uid != _undefined) 'uid': (uid as UuidValue?),
-      if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_UsersPreferencesStreamCursorValueInput<TRes>
-    implements CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes> {
-  _CopyWithStubImpl_Input_UsersPreferencesStreamCursorValueInput(this._res);
-
-  TRes _res;
-
-  call({
-    bool? darkTheme,
-    bool? greatFeastTheme,
-    String? lastHomeMode,
-    Json? orderByPreferences,
-    UuidValue? uid,
-    DateTime? updatedAt,
-  }) => _res;
-}
-
-class Input_UsersPreferencesUpdates {
-  factory Input_UsersPreferencesUpdates({
-    Input_UsersPreferencesAppendInput? $_append,
-    Input_UsersPreferencesDeleteAtPathInput? $_deleteAtPath,
-    Input_UsersPreferencesDeleteElemInput? $_deleteElem,
-    Input_UsersPreferencesDeleteKeyInput? $_deleteKey,
-    Input_UsersPreferencesPrependInput? $_prepend,
-    Input_UsersPreferencesSetInput? $_set,
-    required Input_UsersPreferencesBoolExp where,
-  }) => Input_UsersPreferencesUpdates._({
-    if ($_append != null) r'_append': $_append,
-    if ($_deleteAtPath != null) r'_deleteAtPath': $_deleteAtPath,
-    if ($_deleteElem != null) r'_deleteElem': $_deleteElem,
-    if ($_deleteKey != null) r'_deleteKey': $_deleteKey,
-    if ($_prepend != null) r'_prepend': $_prepend,
-    if ($_set != null) r'_set': $_set,
-    r'where': where,
-  });
-
-  Input_UsersPreferencesUpdates._(this._$data);
-
-  factory Input_UsersPreferencesUpdates.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_append')) {
-      final l$$_append = data['_append'];
-      result$data['_append'] = l$$_append == null
-          ? null
-          : Input_UsersPreferencesAppendInput.fromJson(
-              (l$$_append as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('_deleteAtPath')) {
-      final l$$_deleteAtPath = data['_deleteAtPath'];
-      result$data['_deleteAtPath'] = l$$_deleteAtPath == null
-          ? null
-          : Input_UsersPreferencesDeleteAtPathInput.fromJson(
-              (l$$_deleteAtPath as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('_deleteElem')) {
-      final l$$_deleteElem = data['_deleteElem'];
-      result$data['_deleteElem'] = l$$_deleteElem == null
-          ? null
-          : Input_UsersPreferencesDeleteElemInput.fromJson(
-              (l$$_deleteElem as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('_deleteKey')) {
-      final l$$_deleteKey = data['_deleteKey'];
-      result$data['_deleteKey'] = l$$_deleteKey == null
-          ? null
-          : Input_UsersPreferencesDeleteKeyInput.fromJson(
-              (l$$_deleteKey as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('_prepend')) {
-      final l$$_prepend = data['_prepend'];
-      result$data['_prepend'] = l$$_prepend == null
-          ? null
-          : Input_UsersPreferencesPrependInput.fromJson(
-              (l$$_prepend as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('_set')) {
-      final l$$_set = data['_set'];
-      result$data['_set'] = l$$_set == null
-          ? null
-          : Input_UsersPreferencesSetInput.fromJson(
-              (l$$_set as Map<String, dynamic>),
-            );
-    }
-    final l$where = data['where'];
-    result$data['where'] = Input_UsersPreferencesBoolExp.fromJson(
-      (l$where as Map<String, dynamic>),
-    );
-    return Input_UsersPreferencesUpdates._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_UsersPreferencesAppendInput? get $_append =>
-      (_$data['_append'] as Input_UsersPreferencesAppendInput?);
-
-  Input_UsersPreferencesDeleteAtPathInput? get $_deleteAtPath =>
-      (_$data['_deleteAtPath'] as Input_UsersPreferencesDeleteAtPathInput?);
-
-  Input_UsersPreferencesDeleteElemInput? get $_deleteElem =>
-      (_$data['_deleteElem'] as Input_UsersPreferencesDeleteElemInput?);
-
-  Input_UsersPreferencesDeleteKeyInput? get $_deleteKey =>
-      (_$data['_deleteKey'] as Input_UsersPreferencesDeleteKeyInput?);
-
-  Input_UsersPreferencesPrependInput? get $_prepend =>
-      (_$data['_prepend'] as Input_UsersPreferencesPrependInput?);
-
-  Input_UsersPreferencesSetInput? get $_set =>
-      (_$data['_set'] as Input_UsersPreferencesSetInput?);
-
-  Input_UsersPreferencesBoolExp get where =>
-      (_$data['where'] as Input_UsersPreferencesBoolExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_append')) {
-      final l$$_append = $_append;
-      result$data['_append'] = l$$_append?.toJson();
-    }
-    if (_$data.containsKey('_deleteAtPath')) {
-      final l$$_deleteAtPath = $_deleteAtPath;
-      result$data['_deleteAtPath'] = l$$_deleteAtPath?.toJson();
-    }
-    if (_$data.containsKey('_deleteElem')) {
-      final l$$_deleteElem = $_deleteElem;
-      result$data['_deleteElem'] = l$$_deleteElem?.toJson();
-    }
-    if (_$data.containsKey('_deleteKey')) {
-      final l$$_deleteKey = $_deleteKey;
-      result$data['_deleteKey'] = l$$_deleteKey?.toJson();
-    }
-    if (_$data.containsKey('_prepend')) {
-      final l$$_prepend = $_prepend;
-      result$data['_prepend'] = l$$_prepend?.toJson();
-    }
-    if (_$data.containsKey('_set')) {
-      final l$$_set = $_set;
-      result$data['_set'] = l$$_set?.toJson();
-    }
-    final l$where = where;
-    result$data['where'] = l$where.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_UsersPreferencesUpdates<Input_UsersPreferencesUpdates>
-  get copyWith => CopyWith_Input_UsersPreferencesUpdates(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_UsersPreferencesUpdates ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_append = $_append;
-    final lOther$$_append = other.$_append;
-    if (_$data.containsKey('_append') != other._$data.containsKey('_append')) {
-      return false;
-    }
-    if (l$$_append != lOther$$_append) {
-      return false;
-    }
-    final l$$_deleteAtPath = $_deleteAtPath;
-    final lOther$$_deleteAtPath = other.$_deleteAtPath;
-    if (_$data.containsKey('_deleteAtPath') !=
-        other._$data.containsKey('_deleteAtPath')) {
-      return false;
-    }
-    if (l$$_deleteAtPath != lOther$$_deleteAtPath) {
-      return false;
-    }
-    final l$$_deleteElem = $_deleteElem;
-    final lOther$$_deleteElem = other.$_deleteElem;
-    if (_$data.containsKey('_deleteElem') !=
-        other._$data.containsKey('_deleteElem')) {
-      return false;
-    }
-    if (l$$_deleteElem != lOther$$_deleteElem) {
-      return false;
-    }
-    final l$$_deleteKey = $_deleteKey;
-    final lOther$$_deleteKey = other.$_deleteKey;
-    if (_$data.containsKey('_deleteKey') !=
-        other._$data.containsKey('_deleteKey')) {
-      return false;
-    }
-    if (l$$_deleteKey != lOther$$_deleteKey) {
-      return false;
-    }
-    final l$$_prepend = $_prepend;
-    final lOther$$_prepend = other.$_prepend;
-    if (_$data.containsKey('_prepend') !=
-        other._$data.containsKey('_prepend')) {
-      return false;
-    }
-    if (l$$_prepend != lOther$$_prepend) {
-      return false;
-    }
-    final l$$_set = $_set;
-    final lOther$$_set = other.$_set;
-    if (_$data.containsKey('_set') != other._$data.containsKey('_set')) {
-      return false;
-    }
-    if (l$$_set != lOther$$_set) {
-      return false;
-    }
-    final l$where = where;
-    final lOther$where = other.where;
-    if (l$where != lOther$where) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_append = $_append;
-    final l$$_deleteAtPath = $_deleteAtPath;
-    final l$$_deleteElem = $_deleteElem;
-    final l$$_deleteKey = $_deleteKey;
-    final l$$_prepend = $_prepend;
-    final l$$_set = $_set;
-    final l$where = where;
-    return Object.hashAll([
-      _$data.containsKey('_append') ? l$$_append : const {},
-      _$data.containsKey('_deleteAtPath') ? l$$_deleteAtPath : const {},
-      _$data.containsKey('_deleteElem') ? l$$_deleteElem : const {},
-      _$data.containsKey('_deleteKey') ? l$$_deleteKey : const {},
-      _$data.containsKey('_prepend') ? l$$_prepend : const {},
-      _$data.containsKey('_set') ? l$$_set : const {},
-      l$where,
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_UsersPreferencesUpdates<TRes> {
-  factory CopyWith_Input_UsersPreferencesUpdates(
-    Input_UsersPreferencesUpdates instance,
-    TRes Function(Input_UsersPreferencesUpdates) then,
-  ) = _CopyWithImpl_Input_UsersPreferencesUpdates;
-
-  factory CopyWith_Input_UsersPreferencesUpdates.stub(TRes res) =
-      _CopyWithStubImpl_Input_UsersPreferencesUpdates;
-
-  TRes call({
-    Input_UsersPreferencesAppendInput? $_append,
-    Input_UsersPreferencesDeleteAtPathInput? $_deleteAtPath,
-    Input_UsersPreferencesDeleteElemInput? $_deleteElem,
-    Input_UsersPreferencesDeleteKeyInput? $_deleteKey,
-    Input_UsersPreferencesPrependInput? $_prepend,
-    Input_UsersPreferencesSetInput? $_set,
-    Input_UsersPreferencesBoolExp? where,
-  });
-  CopyWith_Input_UsersPreferencesAppendInput<TRes> get $_append;
-  CopyWith_Input_UsersPreferencesDeleteAtPathInput<TRes> get $_deleteAtPath;
-  CopyWith_Input_UsersPreferencesDeleteElemInput<TRes> get $_deleteElem;
-  CopyWith_Input_UsersPreferencesDeleteKeyInput<TRes> get $_deleteKey;
-  CopyWith_Input_UsersPreferencesPrependInput<TRes> get $_prepend;
-  CopyWith_Input_UsersPreferencesSetInput<TRes> get $_set;
-  CopyWith_Input_UsersPreferencesBoolExp<TRes> get where;
-}
-
-class _CopyWithImpl_Input_UsersPreferencesUpdates<TRes>
-    implements CopyWith_Input_UsersPreferencesUpdates<TRes> {
-  _CopyWithImpl_Input_UsersPreferencesUpdates(this._instance, this._then);
-
-  final Input_UsersPreferencesUpdates _instance;
-
-  final TRes Function(Input_UsersPreferencesUpdates) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_append = _undefined,
-    Object? $_deleteAtPath = _undefined,
-    Object? $_deleteElem = _undefined,
-    Object? $_deleteKey = _undefined,
-    Object? $_prepend = _undefined,
-    Object? $_set = _undefined,
-    Object? where = _undefined,
-  }) => _then(
-    Input_UsersPreferencesUpdates._({
-      ..._instance._$data,
-      if ($_append != _undefined)
-        '_append': ($_append as Input_UsersPreferencesAppendInput?),
-      if ($_deleteAtPath != _undefined)
-        '_deleteAtPath':
-            ($_deleteAtPath as Input_UsersPreferencesDeleteAtPathInput?),
-      if ($_deleteElem != _undefined)
-        '_deleteElem': ($_deleteElem as Input_UsersPreferencesDeleteElemInput?),
-      if ($_deleteKey != _undefined)
-        '_deleteKey': ($_deleteKey as Input_UsersPreferencesDeleteKeyInput?),
-      if ($_prepend != _undefined)
-        '_prepend': ($_prepend as Input_UsersPreferencesPrependInput?),
-      if ($_set != _undefined)
-        '_set': ($_set as Input_UsersPreferencesSetInput?),
-      if (where != _undefined && where != null)
-        'where': (where as Input_UsersPreferencesBoolExp),
-    }),
-  );
-
-  CopyWith_Input_UsersPreferencesAppendInput<TRes> get $_append {
-    final local$$_append = _instance.$_append;
-    return local$$_append == null
-        ? CopyWith_Input_UsersPreferencesAppendInput.stub(_then(_instance))
-        : CopyWith_Input_UsersPreferencesAppendInput(
-            local$$_append,
-            (e) => call($_append: e),
-          );
-  }
-
-  CopyWith_Input_UsersPreferencesDeleteAtPathInput<TRes> get $_deleteAtPath {
-    final local$$_deleteAtPath = _instance.$_deleteAtPath;
-    return local$$_deleteAtPath == null
-        ? CopyWith_Input_UsersPreferencesDeleteAtPathInput.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_UsersPreferencesDeleteAtPathInput(
-            local$$_deleteAtPath,
-            (e) => call($_deleteAtPath: e),
-          );
-  }
-
-  CopyWith_Input_UsersPreferencesDeleteElemInput<TRes> get $_deleteElem {
-    final local$$_deleteElem = _instance.$_deleteElem;
-    return local$$_deleteElem == null
-        ? CopyWith_Input_UsersPreferencesDeleteElemInput.stub(_then(_instance))
-        : CopyWith_Input_UsersPreferencesDeleteElemInput(
-            local$$_deleteElem,
-            (e) => call($_deleteElem: e),
-          );
-  }
-
-  CopyWith_Input_UsersPreferencesDeleteKeyInput<TRes> get $_deleteKey {
-    final local$$_deleteKey = _instance.$_deleteKey;
-    return local$$_deleteKey == null
-        ? CopyWith_Input_UsersPreferencesDeleteKeyInput.stub(_then(_instance))
-        : CopyWith_Input_UsersPreferencesDeleteKeyInput(
-            local$$_deleteKey,
-            (e) => call($_deleteKey: e),
-          );
-  }
-
-  CopyWith_Input_UsersPreferencesPrependInput<TRes> get $_prepend {
-    final local$$_prepend = _instance.$_prepend;
-    return local$$_prepend == null
-        ? CopyWith_Input_UsersPreferencesPrependInput.stub(_then(_instance))
-        : CopyWith_Input_UsersPreferencesPrependInput(
-            local$$_prepend,
-            (e) => call($_prepend: e),
-          );
-  }
-
-  CopyWith_Input_UsersPreferencesSetInput<TRes> get $_set {
-    final local$$_set = _instance.$_set;
-    return local$$_set == null
-        ? CopyWith_Input_UsersPreferencesSetInput.stub(_then(_instance))
-        : CopyWith_Input_UsersPreferencesSetInput(
-            local$$_set,
-            (e) => call($_set: e),
-          );
-  }
-
-  CopyWith_Input_UsersPreferencesBoolExp<TRes> get where {
-    final local$where = _instance.where;
-    return CopyWith_Input_UsersPreferencesBoolExp(
-      local$where,
-      (e) => call(where: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_UsersPreferencesUpdates<TRes>
-    implements CopyWith_Input_UsersPreferencesUpdates<TRes> {
-  _CopyWithStubImpl_Input_UsersPreferencesUpdates(this._res);
-
-  TRes _res;
-
-  call({
-    Input_UsersPreferencesAppendInput? $_append,
-    Input_UsersPreferencesDeleteAtPathInput? $_deleteAtPath,
-    Input_UsersPreferencesDeleteElemInput? $_deleteElem,
-    Input_UsersPreferencesDeleteKeyInput? $_deleteKey,
-    Input_UsersPreferencesPrependInput? $_prepend,
-    Input_UsersPreferencesSetInput? $_set,
-    Input_UsersPreferencesBoolExp? where,
-  }) => _res;
-
-  CopyWith_Input_UsersPreferencesAppendInput<TRes> get $_append =>
-      CopyWith_Input_UsersPreferencesAppendInput.stub(_res);
-
-  CopyWith_Input_UsersPreferencesDeleteAtPathInput<TRes> get $_deleteAtPath =>
-      CopyWith_Input_UsersPreferencesDeleteAtPathInput.stub(_res);
-
-  CopyWith_Input_UsersPreferencesDeleteElemInput<TRes> get $_deleteElem =>
-      CopyWith_Input_UsersPreferencesDeleteElemInput.stub(_res);
-
-  CopyWith_Input_UsersPreferencesDeleteKeyInput<TRes> get $_deleteKey =>
-      CopyWith_Input_UsersPreferencesDeleteKeyInput.stub(_res);
-
-  CopyWith_Input_UsersPreferencesPrependInput<TRes> get $_prepend =>
-      CopyWith_Input_UsersPreferencesPrependInput.stub(_res);
-
-  CopyWith_Input_UsersPreferencesSetInput<TRes> get $_set =>
-      CopyWith_Input_UsersPreferencesSetInput.stub(_res);
-
-  CopyWith_Input_UsersPreferencesBoolExp<TRes> get where =>
-      CopyWith_Input_UsersPreferencesBoolExp.stub(_res);
-}
-
-class Input_UuidComparisonExp {
-  factory Input_UuidComparisonExp({
-    UuidValue? $_eq,
-    UuidValue? $_gt,
-    UuidValue? $_gte,
-    List<UuidValue>? $_in,
-    bool? $_isNull,
-    UuidValue? $_lt,
-    UuidValue? $_lte,
-    UuidValue? $_neq,
-    List<UuidValue>? $_nin,
-  }) => Input_UuidComparisonExp._({
-    if ($_eq != null) r'_eq': $_eq,
-    if ($_gt != null) r'_gt': $_gt,
-    if ($_gte != null) r'_gte': $_gte,
-    if ($_in != null) r'_in': $_in,
-    if ($_isNull != null) r'_isNull': $_isNull,
-    if ($_lt != null) r'_lt': $_lt,
-    if ($_lte != null) r'_lte': $_lte,
-    if ($_neq != null) r'_neq': $_neq,
-    if ($_nin != null) r'_nin': $_nin,
-  });
-
-  Input_UuidComparisonExp._(this._$data);
-
-  factory Input_UuidComparisonExp.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_eq')) {
-      final l$$_eq = data['_eq'];
-      result$data['_eq'] = l$$_eq == null ? null : stringToUuid(l$$_eq);
-    }
-    if (data.containsKey('_gt')) {
-      final l$$_gt = data['_gt'];
-      result$data['_gt'] = l$$_gt == null ? null : stringToUuid(l$$_gt);
-    }
-    if (data.containsKey('_gte')) {
-      final l$$_gte = data['_gte'];
-      result$data['_gte'] = l$$_gte == null ? null : stringToUuid(l$$_gte);
-    }
-    if (data.containsKey('_in')) {
-      final l$$_in = data['_in'];
-      result$data['_in'] = (l$$_in as List<dynamic>?)
-          ?.map((e) => stringToUuid(e))
-          .toList();
-    }
-    if (data.containsKey('_isNull')) {
-      final l$$_isNull = data['_isNull'];
-      result$data['_isNull'] = (l$$_isNull as bool?);
-    }
-    if (data.containsKey('_lt')) {
-      final l$$_lt = data['_lt'];
-      result$data['_lt'] = l$$_lt == null ? null : stringToUuid(l$$_lt);
-    }
-    if (data.containsKey('_lte')) {
-      final l$$_lte = data['_lte'];
-      result$data['_lte'] = l$$_lte == null ? null : stringToUuid(l$$_lte);
-    }
-    if (data.containsKey('_neq')) {
-      final l$$_neq = data['_neq'];
-      result$data['_neq'] = l$$_neq == null ? null : stringToUuid(l$$_neq);
-    }
-    if (data.containsKey('_nin')) {
-      final l$$_nin = data['_nin'];
-      result$data['_nin'] = (l$$_nin as List<dynamic>?)
-          ?.map((e) => stringToUuid(e))
-          .toList();
-    }
-    return Input_UuidComparisonExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  UuidValue? get $_eq => (_$data['_eq'] as UuidValue?);
-
-  UuidValue? get $_gt => (_$data['_gt'] as UuidValue?);
-
-  UuidValue? get $_gte => (_$data['_gte'] as UuidValue?);
-
-  List<UuidValue>? get $_in => (_$data['_in'] as List<UuidValue>?);
-
-  bool? get $_isNull => (_$data['_isNull'] as bool?);
-
-  UuidValue? get $_lt => (_$data['_lt'] as UuidValue?);
-
-  UuidValue? get $_lte => (_$data['_lte'] as UuidValue?);
-
-  UuidValue? get $_neq => (_$data['_neq'] as UuidValue?);
-
-  List<UuidValue>? get $_nin => (_$data['_nin'] as List<UuidValue>?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_eq')) {
-      final l$$_eq = $_eq;
-      result$data['_eq'] = l$$_eq == null ? null : uuidToString(l$$_eq);
-    }
-    if (_$data.containsKey('_gt')) {
-      final l$$_gt = $_gt;
-      result$data['_gt'] = l$$_gt == null ? null : uuidToString(l$$_gt);
-    }
-    if (_$data.containsKey('_gte')) {
-      final l$$_gte = $_gte;
-      result$data['_gte'] = l$$_gte == null ? null : uuidToString(l$$_gte);
-    }
-    if (_$data.containsKey('_in')) {
-      final l$$_in = $_in;
-      result$data['_in'] = l$$_in?.map((e) => uuidToString(e)).toList();
-    }
-    if (_$data.containsKey('_isNull')) {
-      final l$$_isNull = $_isNull;
-      result$data['_isNull'] = l$$_isNull;
-    }
-    if (_$data.containsKey('_lt')) {
-      final l$$_lt = $_lt;
-      result$data['_lt'] = l$$_lt == null ? null : uuidToString(l$$_lt);
-    }
-    if (_$data.containsKey('_lte')) {
-      final l$$_lte = $_lte;
-      result$data['_lte'] = l$$_lte == null ? null : uuidToString(l$$_lte);
-    }
-    if (_$data.containsKey('_neq')) {
-      final l$$_neq = $_neq;
-      result$data['_neq'] = l$$_neq == null ? null : uuidToString(l$$_neq);
-    }
-    if (_$data.containsKey('_nin')) {
-      final l$$_nin = $_nin;
-      result$data['_nin'] = l$$_nin?.map((e) => uuidToString(e)).toList();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_UuidComparisonExp<Input_UuidComparisonExp> get copyWith =>
-      CopyWith_Input_UuidComparisonExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_UuidComparisonExp || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_eq = $_eq;
-    final lOther$$_eq = other.$_eq;
-    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
-      return false;
-    }
-    if (l$$_eq != lOther$$_eq) {
-      return false;
-    }
-    final l$$_gt = $_gt;
-    final lOther$$_gt = other.$_gt;
-    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
-      return false;
-    }
-    if (l$$_gt != lOther$$_gt) {
-      return false;
-    }
-    final l$$_gte = $_gte;
-    final lOther$$_gte = other.$_gte;
-    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
-      return false;
-    }
-    if (l$$_gte != lOther$$_gte) {
-      return false;
-    }
-    final l$$_in = $_in;
-    final lOther$$_in = other.$_in;
-    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
-      return false;
-    }
-    if (l$$_in != null && lOther$$_in != null) {
-      if (l$$_in.length != lOther$$_in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_in.length; i++) {
-        final l$$_in$entry = l$$_in[i];
-        final lOther$$_in$entry = lOther$$_in[i];
-        if (l$$_in$entry != lOther$$_in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_in != lOther$$_in) {
-      return false;
-    }
-    final l$$_isNull = $_isNull;
-    final lOther$$_isNull = other.$_isNull;
-    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
-      return false;
-    }
-    if (l$$_isNull != lOther$$_isNull) {
-      return false;
-    }
-    final l$$_lt = $_lt;
-    final lOther$$_lt = other.$_lt;
-    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
-      return false;
-    }
-    if (l$$_lt != lOther$$_lt) {
-      return false;
-    }
-    final l$$_lte = $_lte;
-    final lOther$$_lte = other.$_lte;
-    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
-      return false;
-    }
-    if (l$$_lte != lOther$$_lte) {
-      return false;
-    }
-    final l$$_neq = $_neq;
-    final lOther$$_neq = other.$_neq;
-    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
-      return false;
-    }
-    if (l$$_neq != lOther$$_neq) {
-      return false;
-    }
-    final l$$_nin = $_nin;
-    final lOther$$_nin = other.$_nin;
-    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
-      return false;
-    }
-    if (l$$_nin != null && lOther$$_nin != null) {
-      if (l$$_nin.length != lOther$$_nin.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_nin.length; i++) {
-        final l$$_nin$entry = l$$_nin[i];
-        final lOther$$_nin$entry = lOther$$_nin[i];
-        if (l$$_nin$entry != lOther$$_nin$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_nin != lOther$$_nin) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_eq = $_eq;
-    final l$$_gt = $_gt;
-    final l$$_gte = $_gte;
-    final l$$_in = $_in;
-    final l$$_isNull = $_isNull;
-    final l$$_lt = $_lt;
-    final l$$_lte = $_lte;
-    final l$$_neq = $_neq;
-    final l$$_nin = $_nin;
-    return Object.hashAll([
-      _$data.containsKey('_eq') ? l$$_eq : const {},
-      _$data.containsKey('_gt') ? l$$_gt : const {},
-      _$data.containsKey('_gte') ? l$$_gte : const {},
-      _$data.containsKey('_in')
-          ? l$$_in == null
-                ? null
-                : Object.hashAll(l$$_in.map((v) => v))
-          : const {},
-      _$data.containsKey('_isNull') ? l$$_isNull : const {},
-      _$data.containsKey('_lt') ? l$$_lt : const {},
-      _$data.containsKey('_lte') ? l$$_lte : const {},
-      _$data.containsKey('_neq') ? l$$_neq : const {},
-      _$data.containsKey('_nin')
-          ? l$$_nin == null
-                ? null
-                : Object.hashAll(l$$_nin.map((v) => v))
           : const {},
     ]);
   }
