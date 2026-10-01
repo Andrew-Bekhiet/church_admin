@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -20,6 +21,10 @@ class EditLocationActionsBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final tonalButtonStyle = Theme.of(
+      context,
+    ).filledTonalButtonStyleWorkaround;
+
     return Padding(
       padding: const EdgeInsetsDirectional.only(start: 16, end: 16, bottom: 8),
       child: Row(
@@ -34,6 +39,7 @@ class EditLocationActionsBar extends StatelessWidget
 
                   return FilledButton.tonalIcon(
                     key: EditLocationActionsBarKeys.fromCurrentLocation,
+                    style: tonalButtonStyle,
                     onPressed: position == null
                         ? null
                         : () => onUseCurrentLocation(position),
@@ -46,6 +52,7 @@ class EditLocationActionsBar extends StatelessWidget
           Expanded(
             child: FilledButton.tonalIcon(
               key: EditLocationActionsBarKeys.fromMapsLink,
+              style: tonalButtonStyle,
               onPressed: onPickFromMapsLink,
               icon: const Icon(Symbols.link),
               label: const Text('من رابط خرائط'),
