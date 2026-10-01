@@ -114,11 +114,14 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
                           ? constraints.biggest.width - kToolbarHeight * 3 - 16
                           : double.infinity,
                     ),
-                    child: Text(
-                      widget.viewable.name,
-                      overflow: TextOverflow.clip,
-                      textAlign: TextAlign.center,
-                      style: _textStyleTween.transform(animationValue),
+                    child: OrganisationalUnmask(
+                      object: widget.viewable,
+                      child: Text(
+                        widget.viewable.name,
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.center,
+                        style: _textStyleTween.transform(animationValue),
+                      ),
                     ),
                   ),
                 ),

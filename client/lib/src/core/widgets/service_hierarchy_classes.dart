@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:posthog_flutter/posthog_flutter.dart';
 
 class ServiceHierarchyClasses extends StatelessWidget {
   final Service service;
@@ -37,7 +38,9 @@ class ServiceHierarchyClasses extends StatelessWidget {
                     color: ColorScheme.of(context).secondaryContainer,
                     child: ExpansionTile(
                       key: PageStorageKey(studyYear),
-                      title: Text(studyYear.name),
+                      title: PostHogUnmaskWidget(
+                        child: Text(studyYear.name),
+                      ),
                       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
                       maintainState: true,
                       children: [

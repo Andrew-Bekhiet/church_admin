@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:posthog_flutter/posthog_flutter.dart';
 
 class TotalCountLabel extends StatelessWidget {
   final Stream<String?> countStream;
@@ -9,10 +10,12 @@ class TotalCountLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<String?>(
       stream: countStream,
-      builder: (context, snapshot) => Text(
-        snapshot.data ?? '',
-        style: Theme.of(context).textTheme.titleLarge,
-        textAlign: TextAlign.center,
+      builder: (context, snapshot) => PostHogUnmaskWidget(
+        child: Text(
+          snapshot.data ?? '',
+          style: Theme.of(context).textTheme.titleLarge,
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

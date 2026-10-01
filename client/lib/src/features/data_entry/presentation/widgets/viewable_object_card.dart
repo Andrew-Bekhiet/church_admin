@@ -67,12 +67,15 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
                   ),
                 ),
                 title ??
-                    Text(
-                      object.name,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
+                    OrganisationalUnmask(
+                      object: object,
+                      child: Text(
+                        object.name,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
               ],
             ),

@@ -9,6 +9,7 @@ export 'widgets/image_object_widget.dart';
 export 'widgets/object_selection_preview.dart';
 export 'widgets/object_selection_preview_list.dart';
 export 'widgets/ordered_viewable_object_list.dart';
+export 'widgets/organisational_unmask.dart';
 export 'widgets/person_affiliations_section.dart';
 export 'widgets/person_church_and_spiritual_fields.dart';
 export 'widgets/person_church_section.dart';
