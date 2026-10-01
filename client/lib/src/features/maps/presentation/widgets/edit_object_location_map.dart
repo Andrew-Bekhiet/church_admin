@@ -54,6 +54,26 @@ class _EditObjectLocationMap<T extends ViewableWithID>
           ),
         ],
         title: Text('تعديل ${widget.initialObject.name}'),
+        bottom: EditLocationActionsBar(
+          userLocation: widget.showSetToCurrentLocation
+              ? _userLocationSubject
+              : null,
+          onUseCurrentLocation: (position) =>
+              resultObject.value = widget.copyWithNewLocation(
+                resultObject.value,
+                Point(position.latitude, position.longitude),
+              ),
+          onPickFromMapsLink: () async {
+            final location = await _getLocationFromGMapsLinkWithProgress();
+
+            if (location == null) return;
+
+            resultObject.value = widget.copyWithNewLocation(
+              resultObject.value,
+              location,
+            );
+          },
+        ),
       ),
       body: MapSnappingSheet(
         sheetBelow: SnappingSheetContent(
@@ -117,48 +137,6 @@ class _EditObjectLocationMap<T extends ViewableWithID>
           ),
         ),
       ),
-      floatingActionButton: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton.small(
-            onPressed: () async {
-              final location = await _getLocationFromGMapsLinkWithProgress();
-
-              if (location == null) return;
-
-              resultObject.value = widget.copyWithNewLocation(
-                resultObject.value,
-                location,
-              );
-            },
-            child: const Icon(Symbols.link),
-          ),
-          if (widget.showSetToCurrentLocation) const SizedBox(height: 10),
-          if (widget.showSetToCurrentLocation)
-            StreamBuilder<Position?>(
-              stream: _userLocationSubject,
-              builder: (context, locationSnapshot) {
-                if (locationSnapshot.hasData) {
-                  return FloatingActionButton.small(
-                    heroTag: null,
-                    onPressed: () {
-                      resultObject.value = widget.copyWithNewLocation(
-                        resultObject.value,
-                        Point(
-                          locationSnapshot.requireData!.latitude,
-                          locationSnapshot.requireData!.longitude,
-                        ),
-                      );
-                    },
-                    child: const Icon(Symbols.my_location),
-                  );
-                }
-
-                return const SizedBox();
-              },
-            ),
-        ],
-      ),
     );
   }
 
@@ -175,26 +153,9 @@ class _EditObjectLocationMap<T extends ViewableWithID>
   Future<Point?> _getLocationFromGMapsLinkWithProgress() async {
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
-    final controller = TextEditingController();
-
     final result = await showDialog<String?>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('تحديد الموقع من لينك Google Maps'),
-        content: TextField(
-          autofocus: true,
-          autofillHints: const [AutofillHints.url],
-          textInputAction: TextInputAction.done,
-          controller: controller,
-          onSubmitted: Navigator.of(context).pop,
-        ),
-        actions: [
-          OutlinedButton(
-            onPressed: () => Navigator.of(context).pop(controller.text),
-            child: const Text('تحديد الموقع'),
-          ),
-        ],
-      ),
+      builder: (context) => const MapsLinkDialog(),
     );
 
     if (result == null) return null;
