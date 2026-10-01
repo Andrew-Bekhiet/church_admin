@@ -1,16 +1,17 @@
 // ignore: unused_import
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('AttendanceDateChip', () {
-    final testTime = DateTime.now();
+    final realTestTime = DateTime.now();
     final testDate = DateUtils.dateOnly(
-      testTime.copyWith(
-        day: DateUtils.getDaysInMonth(testTime.year, testTime.month),
+      realTestTime.copyWith(
+        day: DateUtils.getDaysInMonth(realTestTime.year, realTestTime.month),
       ),
     );
     final recordedDates = [
@@ -38,6 +39,7 @@ void main() {
         home: Scaffold(
           body: Center(
             child: AttendanceDateChip(
+              clock: Clock.fixed(testDate),
               date: date,
               onDateSelected: onDateSelected,
               recordedDays: recordedDays,

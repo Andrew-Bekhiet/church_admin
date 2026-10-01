@@ -1,10 +1,12 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class AttendanceDateChip extends StatelessWidget {
+  final Clock? clock;
   final DateTime date;
   final ValueChanged<DateTime> onDateSelected;
   final Set<DateTime> recordedDays;
@@ -15,6 +17,7 @@ class AttendanceDateChip extends StatelessWidget {
     required this.onDateSelected,
     this.recordedDays = const {},
     this.indicatorColor,
+    this.clock,
     super.key,
   });
 
@@ -41,6 +44,7 @@ class AttendanceDateChip extends StatelessWidget {
   }
 
   Future<void> _pickDate(BuildContext context) async {
+    final now = clock?.now() ?? DateTime.now();
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
@@ -52,9 +56,9 @@ class AttendanceDateChip extends StatelessWidget {
       dialogSize: Size(MediaQuery.widthOf(context) - 16, 410),
       config: CalendarDatePicker2WithActionButtonsConfig(
         calendarType: CalendarDatePicker2Type.single,
-        firstDate: DateTime.now().subtract(const Duration(days: 365 * 10)),
-        lastDate: DateTime.now(),
-        currentDate: DateTime.now(),
+        firstDate: now.subtract(const Duration(days: 365 * 10)),
+        lastDate: now,
+        currentDate: now,
         selectedDayHighlightColor: colorScheme.primary,
         controlsHeight: 44,
         controlsTextStyle: textTheme.titleMedium?.copyWith(
