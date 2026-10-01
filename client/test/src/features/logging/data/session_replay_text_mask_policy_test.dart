@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
 
 void main() {
@@ -26,6 +27,13 @@ void main() {
   testWidgets('a material icon stays visible', (tester) async {
     expect(
       await maskOfRenderedIcon(tester, Icons.church),
+      isA<PostHogTextMaskNone>(),
+    );
+  });
+
+  testWidgets('a material symbol stays visible', (tester) async {
+    expect(
+      await maskOfRenderedIcon(tester, Symbols.church),
       isA<PostHogTextMaskNone>(),
     );
   });
