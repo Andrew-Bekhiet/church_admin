@@ -2140,6 +2140,7 @@ type Families {
   status: String!
   stores(distinctOn: [StoresSelectColumn!], limit: Int, offset: Int, orderBy: [StoresOrderBy!], where: StoresBoolExp): [Stores!]!
   storesAggregate(distinctOn: [StoresSelectColumn!], limit: Int, offset: Int, orderBy: [StoresOrderBy!], where: StoresBoolExp): StoresAggregate!
+  unclaimedContacts(distinctOn: [ContactsSelectColumn!], limit: Int, offset: Int, orderBy: [ContactsOrderBy!], where: ContactsBoolExp): [Contacts!]!
   userCanEdit: Boolean
   visitHistory(distinctOn: [HistoryVisitHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryVisitHistoryOrderBy!], where: HistoryVisitHistoryBoolExp): [HistoryVisitHistory!]!
   visitHistoryAggregate(distinctOn: [HistoryVisitHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryVisitHistoryOrderBy!], where: HistoryVisitHistoryBoolExp): HistoryVisitHistoryAggregate!
@@ -2230,6 +2231,7 @@ input FamiliesBoolExp {
   status: StringComparisonExp
   stores: StoresBoolExp
   storesAggregate: StoresAggregateBoolExp
+  unclaimedContacts: ContactsBoolExp
   userCanEdit: BooleanComparisonExp
   visitHistory: HistoryVisitHistoryBoolExp
   visitHistoryAggregate: HistoryVisitHistoryAggregateBoolExp
@@ -2344,6 +2346,7 @@ input FamiliesInsertInput {
   persons: PersonsArrRelInsertInput
   status: String
   stores: StoresArrRelInsertInput
+  unclaimedContacts: ContactsArrRelInsertInput
   visitHistory: HistoryVisitHistoryArrRelInsertInput
 }
 
@@ -2412,6 +2415,7 @@ input FamiliesOrderBy {
   photoUpdatedAt: OrderBy
   status: OrderBy
   storesAggregate: StoresAggregateOrderBy
+  unclaimedContactsAggregate: ContactsAggregateOrderBy
   userCanEdit: OrderBy
   visitHistoryAggregate: HistoryVisitHistoryAggregateOrderBy
 }
@@ -5179,6 +5183,7 @@ type Persons {
   editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
   editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
   family: Families
+  familyContacts(distinctOn: [ResolvedContactsSelectColumn!], limit: Int, offset: Int, orderBy: [ResolvedContactsOrderBy!], where: ResolvedContactsBoolExp): [ResolvedContacts!]!
   familyId: uuid
   father: Fathers
   fatherId: uuid
@@ -5318,6 +5323,7 @@ input PersonsBoolExp {
   editHistory: HistoryEditHistoryBoolExp
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
   family: FamiliesBoolExp
+  familyContacts: ResolvedContactsBoolExp
   familyId: UuidComparisonExp
   father: FathersBoolExp
   fatherId: UuidComparisonExp
@@ -5827,6 +5833,7 @@ input PersonsOrderBy {
   contactsAggregate: ContactsAggregateOrderBy
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
   family: FamiliesOrderBy
+  familyContactsAggregate: ResolvedContactsAggregateOrderBy
   familyId: OrderBy
   father: FathersOrderBy
   fatherId: OrderBy

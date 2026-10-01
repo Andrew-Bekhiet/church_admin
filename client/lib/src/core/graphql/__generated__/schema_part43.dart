@@ -417,6 +417,7 @@ class Input_PersonsBoolExp {
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_FamiliesBoolExp? family,
+    Input_ResolvedContactsBoolExp? familyContacts,
     Input_UuidComparisonExp? familyId,
     Input_FathersBoolExp? father,
     Input_UuidComparisonExp? fatherId,
@@ -498,6 +499,7 @@ class Input_PersonsBoolExp {
     if (editHistoryAggregate != null)
       r'editHistoryAggregate': editHistoryAggregate,
     if (family != null) r'family': family,
+    if (familyContacts != null) r'familyContacts': familyContacts,
     if (familyId != null) r'familyId': familyId,
     if (father != null) r'father': father,
     if (fatherId != null) r'fatherId': fatherId,
@@ -736,6 +738,14 @@ class Input_PersonsBoolExp {
       result$data['family'] = l$family == null
           ? null
           : Input_FamiliesBoolExp.fromJson((l$family as Map<String, dynamic>));
+    }
+    if (data.containsKey('familyContacts')) {
+      final l$familyContacts = data['familyContacts'];
+      result$data['familyContacts'] = l$familyContacts == null
+          ? null
+          : Input_ResolvedContactsBoolExp.fromJson(
+              (l$familyContacts as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('familyId')) {
       final l$familyId = data['familyId'];
@@ -1224,6 +1234,9 @@ class Input_PersonsBoolExp {
   Input_FamiliesBoolExp? get family =>
       (_$data['family'] as Input_FamiliesBoolExp?);
 
+  Input_ResolvedContactsBoolExp? get familyContacts =>
+      (_$data['familyContacts'] as Input_ResolvedContactsBoolExp?);
+
   Input_UuidComparisonExp? get familyId =>
       (_$data['familyId'] as Input_UuidComparisonExp?);
 
@@ -1477,6 +1490,10 @@ class Input_PersonsBoolExp {
     if (_$data.containsKey('family')) {
       final l$family = family;
       result$data['family'] = l$family?.toJson();
+    }
+    if (_$data.containsKey('familyContacts')) {
+      final l$familyContacts = familyContacts;
+      result$data['familyContacts'] = l$familyContacts?.toJson();
     }
     if (_$data.containsKey('familyId')) {
       final l$familyId = familyId;
@@ -1922,6 +1939,15 @@ class Input_PersonsBoolExp {
       return false;
     }
     if (l$family != lOther$family) {
+      return false;
+    }
+    final l$familyContacts = familyContacts;
+    final lOther$familyContacts = other.familyContacts;
+    if (_$data.containsKey('familyContacts') !=
+        other._$data.containsKey('familyContacts')) {
+      return false;
+    }
+    if (l$familyContacts != lOther$familyContacts) {
       return false;
     }
     final l$familyId = familyId;
@@ -2412,6 +2438,7 @@ class Input_PersonsBoolExp {
     final l$editHistory = editHistory;
     final l$editHistoryAggregate = editHistoryAggregate;
     final l$family = family;
+    final l$familyContacts = familyContacts;
     final l$familyId = familyId;
     final l$father = father;
     final l$fatherId = fatherId;
@@ -2505,6 +2532,7 @@ class Input_PersonsBoolExp {
           ? l$editHistoryAggregate
           : const {},
       _$data.containsKey('family') ? l$family : const {},
+      _$data.containsKey('familyContacts') ? l$familyContacts : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('father') ? l$father : const {},
       _$data.containsKey('fatherId') ? l$fatherId : const {},

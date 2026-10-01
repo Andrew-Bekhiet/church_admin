@@ -154,6 +154,15 @@ array_relationships:
         remote_table:
           name: edit_history
           schema: history
+  - name: familyContacts
+    using:
+      manual_configuration:
+        column_mapping:
+          family_id: effective_family_id
+        insertion_order: null
+        remote_table:
+          name: resolved_contacts
+          schema: public
   - name: groups
     using:
       manual_configuration:

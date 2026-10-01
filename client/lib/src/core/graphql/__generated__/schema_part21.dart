@@ -33,6 +33,7 @@ abstract class CopyWith_Input_FamiliesOrderBy<TRes> {
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? status,
     Input_StoresAggregateOrderBy? storesAggregate,
+    Input_ContactsAggregateOrderBy? unclaimedContactsAggregate,
     Enum_OrderBy? userCanEdit,
     Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
   });
@@ -49,6 +50,7 @@ abstract class CopyWith_Input_FamiliesOrderBy<TRes> {
   CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> get parentsAggregate;
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate;
   CopyWith_Input_StoresAggregateOrderBy<TRes> get storesAggregate;
+  CopyWith_Input_ContactsAggregateOrderBy<TRes> get unclaimedContactsAggregate;
   CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
   get visitHistoryAggregate;
 }
@@ -86,6 +88,7 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? status = _undefined,
     Object? storesAggregate = _undefined,
+    Object? unclaimedContactsAggregate = _undefined,
     Object? userCanEdit = _undefined,
     Object? visitHistoryAggregate = _undefined,
   }) => _then(
@@ -134,6 +137,9 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
       if (status != _undefined) 'status': (status as Enum_OrderBy?),
       if (storesAggregate != _undefined)
         'storesAggregate': (storesAggregate as Input_StoresAggregateOrderBy?),
+      if (unclaimedContactsAggregate != _undefined)
+        'unclaimedContactsAggregate':
+            (unclaimedContactsAggregate as Input_ContactsAggregateOrderBy?),
       if (userCanEdit != _undefined)
         'userCanEdit': (userCanEdit as Enum_OrderBy?),
       if (visitHistoryAggregate != _undefined)
@@ -263,6 +269,17 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
           );
   }
 
+  CopyWith_Input_ContactsAggregateOrderBy<TRes> get unclaimedContactsAggregate {
+    final local$unclaimedContactsAggregate =
+        _instance.unclaimedContactsAggregate;
+    return local$unclaimedContactsAggregate == null
+        ? CopyWith_Input_ContactsAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_ContactsAggregateOrderBy(
+            local$unclaimedContactsAggregate,
+            (e) => call(unclaimedContactsAggregate: e),
+          );
+  }
+
   CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
   get visitHistoryAggregate {
     final local$visitHistoryAggregate = _instance.visitHistoryAggregate;
@@ -306,6 +323,7 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? status,
     Input_StoresAggregateOrderBy? storesAggregate,
+    Input_ContactsAggregateOrderBy? unclaimedContactsAggregate,
     Enum_OrderBy? userCanEdit,
     Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
   }) => _res;
@@ -346,6 +364,10 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
 
   CopyWith_Input_StoresAggregateOrderBy<TRes> get storesAggregate =>
       CopyWith_Input_StoresAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_ContactsAggregateOrderBy<TRes>
+  get unclaimedContactsAggregate =>
+      CopyWith_Input_ContactsAggregateOrderBy.stub(_res);
 
   CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
   get visitHistoryAggregate =>
@@ -2498,23 +2520,4 @@ class Input_FathersInsertInput {
       _$data.containsKey('persons') ? l$persons : const {},
     ]);
   }
-}
-
-abstract class CopyWith_Input_FathersInsertInput<TRes> {
-  factory CopyWith_Input_FathersInsertInput(
-    Input_FathersInsertInput instance,
-    TRes Function(Input_FathersInsertInput) then,
-  ) = _CopyWithImpl_Input_FathersInsertInput;
-
-  factory CopyWith_Input_FathersInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_FathersInsertInput;
-
-  TRes call({
-    Input_ChurchesObjRelInsertInput? church,
-    UuidValue? churchId,
-    String? name,
-    Input_PersonsArrRelInsertInput? persons,
-  });
-  CopyWith_Input_ChurchesObjRelInsertInput<TRes> get church;
-  CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons;
 }

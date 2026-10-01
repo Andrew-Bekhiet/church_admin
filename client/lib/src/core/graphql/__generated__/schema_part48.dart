@@ -526,6 +526,7 @@ class Input_PersonsOrderBy {
     Input_ContactsAggregateOrderBy? contactsAggregate,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Input_FamiliesOrderBy? family,
+    Input_ResolvedContactsAggregateOrderBy? familyContactsAggregate,
     Enum_OrderBy? familyId,
     Input_FathersOrderBy? father,
     Enum_OrderBy? fatherId,
@@ -598,6 +599,8 @@ class Input_PersonsOrderBy {
     if (editHistoryAggregate != null)
       r'editHistoryAggregate': editHistoryAggregate,
     if (family != null) r'family': family,
+    if (familyContactsAggregate != null)
+      r'familyContactsAggregate': familyContactsAggregate,
     if (familyId != null) r'familyId': familyId,
     if (father != null) r'father': father,
     if (fatherId != null) r'fatherId': fatherId,
@@ -768,6 +771,14 @@ class Input_PersonsOrderBy {
       result$data['family'] = l$family == null
           ? null
           : Input_FamiliesOrderBy.fromJson((l$family as Map<String, dynamic>));
+    }
+    if (data.containsKey('familyContactsAggregate')) {
+      final l$familyContactsAggregate = data['familyContactsAggregate'];
+      result$data['familyContactsAggregate'] = l$familyContactsAggregate == null
+          ? null
+          : Input_ResolvedContactsAggregateOrderBy.fromJson(
+              (l$familyContactsAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('familyId')) {
       final l$familyId = data['familyId'];
@@ -1166,6 +1177,10 @@ class Input_PersonsOrderBy {
   Input_FamiliesOrderBy? get family =>
       (_$data['family'] as Input_FamiliesOrderBy?);
 
+  Input_ResolvedContactsAggregateOrderBy? get familyContactsAggregate =>
+      (_$data['familyContactsAggregate']
+          as Input_ResolvedContactsAggregateOrderBy?);
+
   Enum_OrderBy? get familyId => (_$data['familyId'] as Enum_OrderBy?);
 
   Input_FathersOrderBy? get father =>
@@ -1375,6 +1390,11 @@ class Input_PersonsOrderBy {
     if (_$data.containsKey('family')) {
       final l$family = family;
       result$data['family'] = l$family?.toJson();
+    }
+    if (_$data.containsKey('familyContactsAggregate')) {
+      final l$familyContactsAggregate = familyContactsAggregate;
+      result$data['familyContactsAggregate'] = l$familyContactsAggregate
+          ?.toJson();
     }
     if (_$data.containsKey('familyId')) {
       final l$familyId = familyId;
@@ -1781,6 +1801,15 @@ class Input_PersonsOrderBy {
       return false;
     }
     if (l$family != lOther$family) {
+      return false;
+    }
+    final l$familyContactsAggregate = familyContactsAggregate;
+    final lOther$familyContactsAggregate = other.familyContactsAggregate;
+    if (_$data.containsKey('familyContactsAggregate') !=
+        other._$data.containsKey('familyContactsAggregate')) {
+      return false;
+    }
+    if (l$familyContactsAggregate != lOther$familyContactsAggregate) {
       return false;
     }
     final l$familyId = familyId;
@@ -2249,6 +2278,7 @@ class Input_PersonsOrderBy {
     final l$contactsAggregate = contactsAggregate;
     final l$editHistoryAggregate = editHistoryAggregate;
     final l$family = family;
+    final l$familyContactsAggregate = familyContactsAggregate;
     final l$familyId = familyId;
     final l$father = father;
     final l$fatherId = fatherId;
@@ -2325,6 +2355,9 @@ class Input_PersonsOrderBy {
           ? l$editHistoryAggregate
           : const {},
       _$data.containsKey('family') ? l$family : const {},
+      _$data.containsKey('familyContactsAggregate')
+          ? l$familyContactsAggregate
+          : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('father') ? l$father : const {},
       _$data.containsKey('fatherId') ? l$fatherId : const {},
@@ -2410,6 +2443,7 @@ abstract class CopyWith_Input_PersonsOrderBy<TRes> {
     Input_ContactsAggregateOrderBy? contactsAggregate,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Input_FamiliesOrderBy? family,
+    Input_ResolvedContactsAggregateOrderBy? familyContactsAggregate,
     Enum_OrderBy? familyId,
     Input_FathersOrderBy? father,
     Enum_OrderBy? fatherId,
@@ -2476,6 +2510,8 @@ abstract class CopyWith_Input_PersonsOrderBy<TRes> {
   CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
   get editHistoryAggregate;
   CopyWith_Input_FamiliesOrderBy<TRes> get family;
+  CopyWith_Input_ResolvedContactsAggregateOrderBy<TRes>
+  get familyContactsAggregate;
   CopyWith_Input_FathersOrderBy<TRes> get father;
   CopyWith_Input_PersonsGroupsAggregateOrderBy<TRes> get groupsAggregate;
   CopyWith_Input_PersonsHobbiesAggregateOrderBy<TRes> get hobbiesAggregate;

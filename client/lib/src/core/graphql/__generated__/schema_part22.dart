@@ -1,6 +1,25 @@
 // Part 22 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_FathersInsertInput<TRes> {
+  factory CopyWith_Input_FathersInsertInput(
+    Input_FathersInsertInput instance,
+    TRes Function(Input_FathersInsertInput) then,
+  ) = _CopyWithImpl_Input_FathersInsertInput;
+
+  factory CopyWith_Input_FathersInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_FathersInsertInput;
+
+  TRes call({
+    Input_ChurchesObjRelInsertInput? church,
+    UuidValue? churchId,
+    String? name,
+    Input_PersonsArrRelInsertInput? persons,
+  });
+  CopyWith_Input_ChurchesObjRelInsertInput<TRes> get church;
+  CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons;
+}
+
 class _CopyWithImpl_Input_FathersInsertInput<TRes>
     implements CopyWith_Input_FathersInsertInput<TRes> {
   _CopyWithImpl_Input_FathersInsertInput(this._instance, this._then);
