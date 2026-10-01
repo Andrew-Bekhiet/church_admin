@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:posthog_flutter/posthog_flutter.dart';
 
 class CAErrorDialog extends StatelessWidget {
   // ignore: no-object-declaration
@@ -11,35 +12,37 @@ class CAErrorDialog extends StatelessWidget {
     try {
       final theme = Theme.of(context);
 
-      return AlertDialog(
-        actions: [
-          TextButton(
-            onPressed: Navigator.of(context).pop,
+      return PostHogUnmaskWidget(
+        child: AlertDialog(
+          actions: [
+            TextButton(
+              onPressed: Navigator.of(context).pop,
+              child: Text(
+                'حسنًا',
+                style: TextStyle(
+                  color: theme.colorScheme.onErrorContainer,
+                ),
+              ),
+            ),
+          ],
+          scrollable: true,
+          backgroundColor: theme.colorScheme.errorContainer,
+          title: Text(
+            'حدث خطأ',
+            style: TextStyle(
+              color: theme.colorScheme.onErrorContainer,
+            ),
+          ),
+          content: Directionality(
+            textDirection: TextDirection.ltr,
             child: Text(
-              'حسنًا',
+              switch (exception) {
+                final FlutterErrorDetails e => '${e.exceptionAsString()}\n$e',
+                _ => exception.toString(),
+              },
               style: TextStyle(
                 color: theme.colorScheme.onErrorContainer,
               ),
-            ),
-          ),
-        ],
-        scrollable: true,
-        backgroundColor: theme.colorScheme.errorContainer,
-        title: Text(
-          'حدث خطأ',
-          style: TextStyle(
-            color: theme.colorScheme.onErrorContainer,
-          ),
-        ),
-        content: Directionality(
-          textDirection: TextDirection.ltr,
-          child: Text(
-            switch (exception) {
-              final FlutterErrorDetails e => '${e.exceptionAsString()}\n$e',
-              _ => exception.toString(),
-            },
-            style: TextStyle(
-              color: theme.colorScheme.onErrorContainer,
             ),
           ),
         ),
