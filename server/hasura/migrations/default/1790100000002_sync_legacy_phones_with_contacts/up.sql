@@ -88,6 +88,10 @@ as $$
         is distinct from (projected.main_phone, projected.other_phones)
 $$;
 
+select public.legacy_refresh_persons_phones(
+    array(select p.id from public.persons as p), '{}'
+);
+
 create or replace function public.legacy_sync_persons_phones_from_contacts()
 returns trigger
 language plpgsql
