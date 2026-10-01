@@ -3,36 +3,39 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:posthog_flutter/posthog_flutter.dart';
 
 class DownloadAppScreen extends StatelessWidget {
   const DownloadAppScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('تنزيل التطبيق'),
-      ),
-      body: Center(
-        child: Flex(
-          direction: MediaQuery.orientationOf(context) == Orientation.portrait
-              ? Axis.vertical
-              : Axis.horizontal,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            FilledButton.tonalIcon(
-              style: Theme.of(context).filledTonalButtonStyleWorkaround,
-              onPressed: () => _downloadAndroidApp(context, 'android'),
-              icon: const Icon(Symbols.android),
-              label: const Text('تنزيل التطبيق لنظام Android'),
-            ),
-            FilledButton.tonalIcon(
-              style: Theme.of(context).filledTonalButtonStyleWorkaround,
-              onPressed: () => _downloadAndroidApp(context, 'ios'),
-              icon: const Icon(Symbols.ios),
-              label: const Text('تنزيل التطبيق لنظام iOS (.ipa)'),
-            ),
-          ],
+    return PostHogUnmaskWidget(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('تنزيل التطبيق'),
+        ),
+        body: Center(
+          child: Flex(
+            direction: MediaQuery.orientationOf(context) == Orientation.portrait
+                ? Axis.vertical
+                : Axis.horizontal,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              FilledButton.tonalIcon(
+                style: Theme.of(context).filledTonalButtonStyleWorkaround,
+                onPressed: () => _downloadAndroidApp(context, 'android'),
+                icon: const Icon(Symbols.android),
+                label: const Text('تنزيل التطبيق لنظام Android'),
+              ),
+              FilledButton.tonalIcon(
+                style: Theme.of(context).filledTonalButtonStyleWorkaround,
+                onPressed: () => _downloadAndroidApp(context, 'ios'),
+                icon: const Icon(Symbols.ios),
+                label: const Text('تنزيل التطبيق لنظام iOS (.ipa)'),
+              ),
+            ],
+          ),
         ),
       ),
     );

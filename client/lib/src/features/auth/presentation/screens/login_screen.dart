@@ -4,6 +4,7 @@ import 'package:church_admin/src/features/auth/presentation/widgets/auth_mode_sw
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:posthog_flutter/posthog_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -101,13 +102,15 @@ class _LoginScreenState extends State<LoginScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  const _LoginTitle(),
-                  SizedBox(
-                    height: screenSize.shortestSide,
-                    width: screenSize.shortestSide,
-                    child: Image.asset(
-                      'assets/images/login-signup.png',
-                      fit: BoxFit.scaleDown,
+                  const PostHogUnmaskWidget(child: _LoginTitle()),
+                  PostHogUnmaskWidget(
+                    child: SizedBox(
+                      height: screenSize.shortestSide,
+                      width: screenSize.shortestSide,
+                      child: Image.asset(
+                        'assets/images/login-signup.png',
+                        fit: BoxFit.scaleDown,
+                      ),
                     ),
                   ),
                   AuthForm(
@@ -122,9 +125,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     privacyPolicyRecognizer: _privacyPolicyRecognizer,
                     onSubmit: _submit,
                   ),
-                  AuthModeSwitch(
-                    isLogin: _isLogin,
-                    onToggle: () => setState(() => _isLogin = !_isLogin),
+                  PostHogUnmaskWidget(
+                    child: AuthModeSwitch(
+                      isLogin: _isLogin,
+                      onToggle: () => setState(() => _isLogin = !_isLogin),
+                    ),
                   ),
                   const SizedBox(height: 50),
                 ],
