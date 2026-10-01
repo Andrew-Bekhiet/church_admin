@@ -64,15 +64,19 @@ select_permissions:
                     _eq: true
               - _exists:
                   _table:
-                    name: users_permissions_by_entity_id
-                    schema: auth
+                    name: persons
+                    schema: public
                   _where:
                     _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - entity_type:
-                          _eq: family
-                      - entity_id:
+                      - family_id:
                           _ceq:
                             - $
                             - effective_family_id
+                      - deleted_at:
+                          _is_null: true
+                      - permissionGrants:
+                          _and:
+                            - uid:
+                                _eq: X-Hasura-User-Id
+                            - entity_type:
+                                _eq: person

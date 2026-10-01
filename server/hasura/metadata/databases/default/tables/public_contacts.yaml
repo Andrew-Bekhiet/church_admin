@@ -114,12 +114,16 @@ select_permissions:
                   is_family_admin:
                     _eq: true
               - family: &has_member_readable_by_user
-                  permissionGrants:
+                  persons:
                     _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - entity_type:
-                          _eq: family
+                      - deleted_at:
+                          _is_null: true
+                      - permissionGrants:
+                          _and:
+                            - uid:
+                                _eq: X-Hasura-User-Id
+                            - entity_type:
+                                _eq: person
           - person:
               _and:
                 - personType:
