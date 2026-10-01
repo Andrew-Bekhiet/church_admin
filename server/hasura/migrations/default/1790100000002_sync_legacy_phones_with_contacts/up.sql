@@ -7,16 +7,33 @@ from public.persons as p
 left join public.contacts as own_main
     on p.id = own_main.person_id and own_main.is_main_phone
 left join lateral (
-    select
-        jsonb_object_agg(
-            numbered.base_label
-            || case
-                when numbered.label_position = 1 then ''
-                else ' ' || numbered.label_position
-            end,
-            numbered.phone
-        ) as other_phones
-    from (
+    with unnumbered as (
+        select
+            coalesce(own.label, 'رقم الهاتف') as base_label,
+            own.phone::text as phone,
+            own.is_main_phone,
+            own.created_at,
+            own.id
+        from public.contacts as own
+        where own.person_id = p.id and not own.is_main_phone
+        union all
+        select
+            'رقم الهاتف (' || admin_type.name || ')' as base_label,
+            relative.phone::text,
+            relative.is_main_phone,
+            relative.created_at,
+            relative.id
+        from public.resolved_contacts as relative
+        inner join public.person_types as admin_type
+            on
+                relative.effective_person_type_id = admin_type.id
+                and admin_type.is_family_admin
+        where
+            relative.effective_family_id = p.family_id
+            and relative.person_id is distinct from p.id
+    ),
+
+    numbered as (
         select
             unnumbered.base_label,
             unnumbered.phone,
@@ -27,32 +44,31 @@ left join lateral (
                     unnumbered.created_at asc,
                     unnumbered.id asc
             ) as label_position
-        from (
-            select
-                coalesce(own.label, 'رقم الهاتف') as base_label,
-                own.phone::text as phone,
-                own.is_main_phone,
-                own.created_at,
-                own.id
-            from public.contacts as own
-            where own.person_id = p.id and not own.is_main_phone
-            union all
-            select
-                'رقم الهاتف (' || admin_type.name || ')' as base_label,
-                relative.phone::text,
-                relative.is_main_phone,
-                relative.created_at,
-                relative.id
-            from public.resolved_contacts as relative
-            inner join public.person_types as admin_type
-                on
-                    relative.effective_person_type_id = admin_type.id
-                    and admin_type.is_family_admin
-            where
-                relative.effective_family_id = p.family_id
-                and relative.person_id is distinct from p.id
-        ) as unnumbered
-    ) as numbered
+        from unnumbered
+    )
+
+    select
+        jsonb_object_agg(
+            case
+                when numbered.label_position = 1 then numbered.base_label
+                else (
+                    select numbered.base_label || ' ' || suffix
+                    from generate_series(
+                        2,
+                        numbered.label_position
+                        + (select count(*)::int from unnumbered)
+                    ) as suffix
+                    where numbered.base_label || ' ' || suffix not in (
+                        select taken.base_label from unnumbered as taken
+                    )
+                    order by suffix
+                    offset numbered.label_position - 2
+                    limit 1
+                )
+            end,
+            numbered.phone
+        ) as other_phones
+    from numbered
 ) as entries on true;
 
 create or replace function public.legacy_refresh_persons_phones(
