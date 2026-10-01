@@ -37,7 +37,9 @@ class ServiceHierarchyClasses extends StatelessWidget {
                     color: ColorScheme.of(context).secondaryContainer,
                     child: ExpansionTile(
                       key: PageStorageKey(studyYear),
-                      title: Text(studyYear.name),
+                      title: SessionReplayUnmask(
+                        child: Text(studyYear.name),
+                      ),
                       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
                       maintainState: true,
                       children: [

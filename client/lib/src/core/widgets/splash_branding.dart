@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class SplashBranding extends StatelessWidget {
@@ -7,14 +8,16 @@ class SplashBranding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(child: Image.asset('assets/logo.png')),
-          Image.asset('assets/branding.png', height: 80),
-          ?footer,
-        ],
+    return SessionReplayUnmask(
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(child: Image.asset('assets/logo.png')),
+            Image.asset('assets/branding.png', height: 80),
+            ?footer,
+          ],
+        ),
       ),
     );
   }

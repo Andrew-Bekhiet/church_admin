@@ -20,11 +20,13 @@ class HomeScreenSummary extends StatelessWidget {
       builder: (context, dailyData) {
         return ListView(
           children: [
-            Image.asset(
-              _getHomeImage(),
-              alignment: const Alignment(0, -0.7),
-              height: size.height * 0.24,
-              fit: BoxFit.fitWidth,
+            SessionReplayUnmask(
+              child: Image.asset(
+                _getHomeImage(),
+                alignment: const Alignment(0, -0.7),
+                height: size.height * 0.24,
+                fit: BoxFit.fitWidth,
+              ),
             ),
             const UpdateAvailableWidget(),
             Container(
@@ -65,66 +67,74 @@ class HomeScreenSummary extends StatelessWidget {
                           textMaxLines: 2,
                         ),
                       ),
-                    HomeModeSection(
-                      key: HomeScreenSummaryKeys.verseButtonKey,
-                      onTap: () => showMessageDialog(
-                        context,
-                        initialData: dailyData,
-                        type: HomeDailyDataType.verse,
+                    SessionReplayUnmask(
+                      child: HomeModeSection(
+                        key: HomeScreenSummaryKeys.verseButtonKey,
+                        onTap: () => showMessageDialog(
+                          context,
+                          initialData: dailyData,
+                          type: HomeDailyDataType.verse,
+                        ),
+                        title: 'الآيه',
+                        text: dailyData.verse,
                       ),
-                      title: 'الآيه',
-                      text: dailyData.verse,
                     ),
-                    HomeModeSection(
-                      key: HomeScreenSummaryKeys.sneksarButtonKey,
-                      onTap: () => showMessageDialog(
-                        context,
-                        initialData: dailyData,
-                        type: HomeDailyDataType.sneksar,
-                        canGetNew: false,
+                    SessionReplayUnmask(
+                      child: HomeModeSection(
+                        key: HomeScreenSummaryKeys.sneksarButtonKey,
+                        onTap: () => showMessageDialog(
+                          context,
+                          initialData: dailyData,
+                          type: HomeDailyDataType.sneksar,
+                          canGetNew: false,
+                        ),
+                        title: 'السنكسار',
+                        text: dailyData.sneksar,
                       ),
-                      title: 'السنكسار',
-                      text: dailyData.sneksar,
                     ),
-                    HomeModeSection(
-                      key: HomeScreenSummaryKeys.sayingButtonKey,
-                      onTap: () => showMessageDialog(
-                        context,
-                        initialData: dailyData,
-                        type: HomeDailyDataType.saying,
+                    SessionReplayUnmask(
+                      child: HomeModeSection(
+                        key: HomeScreenSummaryKeys.sayingButtonKey,
+                        onTap: () => showMessageDialog(
+                          context,
+                          initialData: dailyData,
+                          type: HomeDailyDataType.saying,
+                        ),
+                        title: 'أقوال أباء',
+                        text: dailyData.saying,
                       ),
-                      title: 'أقوال أباء',
-                      text: dailyData.saying,
                     ),
                   ],
                 ),
               },
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 25),
-              child: IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  spacing: 16,
-                  children: [
-                    HomeModeCard(
-                      key: HomeScreenSummaryKeys.churchDataButtonKey,
-                      onTap: () => homeBloc.add(
-                        const HomeChangeMode(HomeMode.churchData),
+            SessionReplayUnmask(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 25),
+                child: IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    spacing: 16,
+                    children: [
+                      HomeModeCard(
+                        key: HomeScreenSummaryKeys.churchDataButtonKey,
+                        onTap: () => homeBloc.add(
+                          const HomeChangeMode(HomeMode.churchData),
+                        ),
+                        assetName: 'assets/images/church_data.png',
+                        title: 'أسرة أبونا بيشوى كامل',
                       ),
-                      assetName: 'assets/images/church_data.png',
-                      title: 'أسرة أبونا بيشوى كامل',
-                    ),
-                    HomeModeCard(
-                      key: HomeScreenSummaryKeys.sundaySchoolButtonKey,
-                      onTap: () => homeBloc.add(
-                        const HomeChangeMode(HomeMode.sundaySchool),
+                      HomeModeCard(
+                        key: HomeScreenSummaryKeys.sundaySchoolButtonKey,
+                        onTap: () => homeBloc.add(
+                          const HomeChangeMode(HomeMode.sundaySchool),
+                        ),
+                        assetName:
+                            'assets/images/sunday_school_services_image.png',
+                        title: 'خدمات مدارس الأحد',
                       ),
-                      assetName:
-                          'assets/images/sunday_school_services_image.png',
-                      title: 'خدمات مدارس الأحد',
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

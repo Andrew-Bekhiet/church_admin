@@ -93,7 +93,7 @@ dependencies:
   phone_numbers_parser: ^9.0.0
   photo_view: ^0.15.0
   pointycastle: ^4.0.0
-  posthog_flutter: ^5.43.0
+  posthog_flutter: ^5.46.0
   pub_semver: ^2.2.0
   riverpod: ^3.0.3
   rxdart: ^0.28.0

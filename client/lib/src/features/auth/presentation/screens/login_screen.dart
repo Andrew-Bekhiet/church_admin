@@ -101,13 +101,15 @@ class _LoginScreenState extends State<LoginScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  const _LoginTitle(),
-                  SizedBox(
-                    height: screenSize.shortestSide,
-                    width: screenSize.shortestSide,
-                    child: Image.asset(
-                      'assets/images/login-signup.png',
-                      fit: BoxFit.scaleDown,
+                  const SessionReplayUnmask(child: _LoginTitle()),
+                  SessionReplayUnmask(
+                    child: SizedBox(
+                      height: screenSize.shortestSide,
+                      width: screenSize.shortestSide,
+                      child: Image.asset(
+                        'assets/images/login-signup.png',
+                        fit: BoxFit.scaleDown,
+                      ),
                     ),
                   ),
                   AuthForm(
@@ -122,9 +124,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     privacyPolicyRecognizer: _privacyPolicyRecognizer,
                     onSubmit: _submit,
                   ),
-                  AuthModeSwitch(
-                    isLogin: _isLogin,
-                    onToggle: () => setState(() => _isLogin = !_isLogin),
+                  SessionReplayUnmask(
+                    child: AuthModeSwitch(
+                      isLogin: _isLogin,
+                      onToggle: () => setState(() => _isLogin = !_isLogin),
+                    ),
                   ),
                   const SizedBox(height: 50),
                 ],

@@ -18,38 +18,40 @@ class ForceUpdateScreen extends StatelessWidget {
 
     final forceUpdateMessage = _featureFlagsRepo.forceUpdateMessage;
 
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: 20,
-          children: [
-            FittedBox(child: Image.asset('assets/images/update.png')),
-            Text(
-              'يوجد تحديث جديد متاح!',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headlineLarge,
-            ),
-            if (forceUpdateMessage != null)
+    return SessionReplayUnmask(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: 20,
+            children: [
+              FittedBox(child: Image.asset('assets/images/update.png')),
               Text(
-                forceUpdateMessage,
+                'يوجد تحديث جديد متاح!',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context).textTheme.headlineLarge,
               ),
-            FilledButton(
-              onPressed: () =>
-                  _launcherService.launchUrl(_featureFlagsRepo.downloadUrl),
-              child: const Text('تحديث الآن'),
-            ),
-            if (releaseNotesUrl != null)
-              FilledButton.tonal(
-                style: Theme.of(context).filledTonalButtonStyleWorkaround,
-                onPressed: () => _launcherService.launchUrl(releaseNotesUrl),
-                child: const Text('ما الجديد؟'),
+              if (forceUpdateMessage != null)
+                Text(
+                  forceUpdateMessage,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              FilledButton(
+                onPressed: () =>
+                    _launcherService.launchUrl(_featureFlagsRepo.downloadUrl),
+                child: const Text('تحديث الآن'),
               ),
-          ],
+              if (releaseNotesUrl != null)
+                FilledButton.tonal(
+                  style: Theme.of(context).filledTonalButtonStyleWorkaround,
+                  onPressed: () => _launcherService.launchUrl(releaseNotesUrl),
+                  child: const Text('ما الجديد؟'),
+                ),
+            ],
+          ),
         ),
       ),
     );

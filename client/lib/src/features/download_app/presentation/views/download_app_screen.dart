@@ -9,30 +9,32 @@ class DownloadAppScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('تنزيل التطبيق'),
-      ),
-      body: Center(
-        child: Flex(
-          direction: MediaQuery.orientationOf(context) == Orientation.portrait
-              ? Axis.vertical
-              : Axis.horizontal,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            FilledButton.tonalIcon(
-              style: Theme.of(context).filledTonalButtonStyleWorkaround,
-              onPressed: () => _downloadAndroidApp(context, 'android'),
-              icon: const Icon(Symbols.android),
-              label: const Text('تنزيل التطبيق لنظام Android'),
-            ),
-            FilledButton.tonalIcon(
-              style: Theme.of(context).filledTonalButtonStyleWorkaround,
-              onPressed: () => _downloadAndroidApp(context, 'ios'),
-              icon: const Icon(Symbols.ios),
-              label: const Text('تنزيل التطبيق لنظام iOS (.ipa)'),
-            ),
-          ],
+    return SessionReplayUnmask(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('تنزيل التطبيق'),
+        ),
+        body: Center(
+          child: Flex(
+            direction: MediaQuery.orientationOf(context) == Orientation.portrait
+                ? Axis.vertical
+                : Axis.horizontal,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              FilledButton.tonalIcon(
+                style: Theme.of(context).filledTonalButtonStyleWorkaround,
+                onPressed: () => _downloadAndroidApp(context, 'android'),
+                icon: const Icon(Symbols.android),
+                label: const Text('تنزيل التطبيق لنظام Android'),
+              ),
+              FilledButton.tonalIcon(
+                style: Theme.of(context).filledTonalButtonStyleWorkaround,
+                onPressed: () => _downloadAndroidApp(context, 'ios'),
+                icon: const Icon(Symbols.ios),
+                label: const Text('تنزيل التطبيق لنظام iOS (.ipa)'),
+              ),
+            ],
+          ),
         ),
       ),
     );

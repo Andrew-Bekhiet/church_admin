@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class TotalCountLabel extends StatelessWidget {
@@ -9,10 +10,12 @@ class TotalCountLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<String?>(
       stream: countStream,
-      builder: (context, snapshot) => Text(
-        snapshot.data ?? '',
-        style: Theme.of(context).textTheme.titleLarge,
-        textAlign: TextAlign.center,
+      builder: (context, snapshot) => SessionReplayUnmask(
+        child: Text(
+          snapshot.data ?? '',
+          style: Theme.of(context).textTheme.titleLarge,
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

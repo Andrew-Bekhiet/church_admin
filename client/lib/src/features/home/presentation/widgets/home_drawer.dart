@@ -107,47 +107,55 @@ class HomeDrawer extends StatelessWidget {
                 if (state case AuthAuthenticated(:final userData?))
                   ListTile(
                     leading: ImageObjectWidget(userData),
-                    title: const Text('حسابي'),
+                    title: const SessionReplayUnmask(child: Text('حسابي')),
                     onTap: () {
                       Scaffold.of(context).openEndDrawer();
                       unawaited(const MyAccountRoute().push(context));
                     },
                   ),
                 Expanded(
-                  child: NavigationDrawer(
-                    onDestinationSelected: (i) {
-                      Scaffold.of(context).openEndDrawer();
+                  child: SessionReplayUnmask(
+                    child: NavigationDrawer(
+                      onDestinationSelected: (i) {
+                        Scaffold.of(context).openEndDrawer();
 
-                      destinations[i].onTap();
-                    },
-                    children: destinations
-                        .map(
-                          (e) => NavigationDrawerDestination(
-                            icon: e.icon,
-                            label: e.label,
-                          ),
-                        )
-                        .toList(),
+                        destinations[i].onTap();
+                      },
+                      children: destinations
+                          .map(
+                            (e) => NavigationDrawerDestination(
+                              icon: e.icon,
+                              label: e.label,
+                            ),
+                          )
+                          .toList(),
+                    ),
                   ),
                 ),
-                ListTile(
-                  leading: const Icon(Symbols.info),
-                  title: const Text('حول'),
-                  onTap: () {
-                    Scaffold.of(context).openEndDrawer();
-                    unawaited(AboutAppService.I.showAboutDialog(context));
-                  },
-                ),
-                ListTile(
-                  key: HomeDrawerKeys.signOut,
-                  leading: const Icon(Symbols.logout),
-                  title: const Text('تسجيل الخروج'),
-                  onTap: () {
-                    Scaffold.of(context).openEndDrawer();
+                SessionReplayUnmask(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: const Icon(Symbols.info),
+                        title: const Text('حول'),
+                        onTap: () {
+                          Scaffold.of(context).openEndDrawer();
+                          unawaited(AboutAppService.I.showAboutDialog(context));
+                        },
+                      ),
+                      ListTile(
+                        key: HomeDrawerKeys.signOut,
+                        leading: const Icon(Symbols.logout),
+                        title: const Text('تسجيل الخروج'),
+                        onTap: () {
+                          Scaffold.of(context).openEndDrawer();
 
-                    LocalAuthService.I.scheduleReauth();
-                    authBloc.add(const SignOut());
-                  },
+                          LocalAuthService.I.scheduleReauth();
+                          authBloc.add(const SignOut());
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

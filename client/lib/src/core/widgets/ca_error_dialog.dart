@@ -1,5 +1,5 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:posthog_flutter/posthog_flutter.dart';
 
 class CAErrorDialog extends StatelessWidget {
   // ignore: no-object-declaration
@@ -12,7 +12,7 @@ class CAErrorDialog extends StatelessWidget {
     try {
       final theme = Theme.of(context);
 
-      return PostHogUnmaskWidget(
+      return SessionReplayUnmask(
         child: AlertDialog(
           actions: [
             TextButton(

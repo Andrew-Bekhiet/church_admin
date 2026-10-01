@@ -81,7 +81,7 @@ class ServiceHierarchyTile extends StatelessWidget {
             onLongPress: config?.onLongPress != null
                 ? () => config!.onLongPress!(service)
                 : null,
-            child: Text(service.name),
+            child: SessionReplayUnmask(child: Text(service.name)),
           ),
           children: [
             if (showClasses)

@@ -30,6 +30,8 @@ class PostHogLoggingProvider implements LoggingProvider {
       ..sessionReplayConfig.maskAllTexts = true
       ..sessionReplayConfig.maskAllImages = true
       ..sessionReplayConfig.maskAllPlatformViews = false
+      ..sessionReplayConfig.textMaskPolicy =
+          SessionReplayTextMaskPolicy.revealIconGlyphs
       ..surveys = true
       ..errorTrackingConfig.captureFlutterErrors = true
       ..errorTrackingConfig.capturePlatformDispatcherErrors = true

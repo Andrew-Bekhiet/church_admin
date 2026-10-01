@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
@@ -21,44 +22,46 @@ class ChipTabBar extends StatelessWidget {
           : BorderSide.none,
     );
 
-    return AnimatedBuilder(
-      animation: tabController.animation!,
-      builder: (context, _) {
-        final isScrollable = tabs.length > 2;
+    return SessionReplayUnmask(
+      child: AnimatedBuilder(
+        animation: tabController.animation!,
+        builder: (context, _) {
+          final isScrollable = tabs.length > 2;
 
-        final row = Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          spacing: 3,
-          children: [
-            if (isScrollable) const SizedBox(width: 4),
-            ...tabs.mapIndexed(
-              (i, tab) {
-                final selected = tabController.animation!.value.round() == i;
+          final row = Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            spacing: 3,
+            children: [
+              if (isScrollable) const SizedBox(width: 4),
+              ...tabs.mapIndexed(
+                (i, tab) {
+                  final selected = tabController.animation!.value.round() == i;
 
-                return ChoiceChip(
-                  selected: selected,
-                  onSelected: (_) => tabController.animateTo(i),
-                  showCheckmark: false,
-                  side: chipSide,
-                  label: Text(tab.label),
-                  avatar: Icon(
-                    tab.icon,
-                    color: selected ? theme.colorScheme.onPrimary : null,
-                  ),
-                );
-              },
-            ),
-            if (isScrollable) const SizedBox(width: 4),
-          ],
-        );
+                  return ChoiceChip(
+                    selected: selected,
+                    onSelected: (_) => tabController.animateTo(i),
+                    showCheckmark: false,
+                    side: chipSide,
+                    label: Text(tab.label),
+                    avatar: Icon(
+                      tab.icon,
+                      color: selected ? theme.colorScheme.onPrimary : null,
+                    ),
+                  );
+                },
+              ),
+              if (isScrollable) const SizedBox(width: 4),
+            ],
+          );
 
-        return isScrollable
-            ? SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: row,
-              )
-            : row;
-      },
+          return isScrollable
+              ? SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: row,
+                )
+              : row;
+        },
+      ),
     );
   }
 

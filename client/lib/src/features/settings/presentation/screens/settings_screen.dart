@@ -28,74 +28,76 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('الإعدادات')),
-      body: Form(
-        key: _formKey,
-        onChanged: () => setState(() => _needsSaving = true),
-        canPop: !_needsSaving,
-        onPopInvokedWithResult: _onPopWithResult,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                ExpansionTile(
-                  title: const Text('المظهر'),
-                  subtitle: const Text('المظهر العام للبرنامج'),
-                  expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Wrap(
-                      alignment: WrapAlignment.spaceAround,
-                      children: <Widget>[
-                        ChoiceChip(
-                          label: const Text('المظهر الداكن'),
-                          selected: darkTheme ?? false,
-                          onSelected: _onDarkThemeChanged(true),
-                        ),
-                        ChoiceChip(
-                          label: const Text('المظهر الفاتح'),
-                          selected: !(darkTheme ?? false),
-                          onSelected: _onDarkThemeChanged(false),
-                        ),
-                        ChoiceChip(
-                          label: const Text('حسب النظام'),
-                          selected: darkTheme == null,
-                          onSelected: _onDarkThemeChanged(null),
-                        ),
-                      ],
-                    ),
-                    SwitchListTile(
-                      value: greatFeastTheme,
-                      onChanged: (v) => setState(() {
-                        greatFeastTheme = v;
-                      }),
-                      title: const Text(
-                        'تغيير لون البرنامج حسب أسبوع الآلام وفترة الخمسين',
+    return SessionReplayUnmask(
+      child: Scaffold(
+        appBar: AppBar(title: const Text('الإعدادات')),
+        body: Form(
+          key: _formKey,
+          onChanged: () => setState(() => _needsSaving = true),
+          canPop: !_needsSaving,
+          onPopInvokedWithResult: _onPopWithResult,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  ExpansionTile(
+                    title: const Text('المظهر'),
+                    subtitle: const Text('المظهر العام للبرنامج'),
+                    expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Wrap(
+                        alignment: WrapAlignment.spaceAround,
+                        children: <Widget>[
+                          ChoiceChip(
+                            label: const Text('المظهر الداكن'),
+                            selected: darkTheme ?? false,
+                            onSelected: _onDarkThemeChanged(true),
+                          ),
+                          ChoiceChip(
+                            label: const Text('المظهر الفاتح'),
+                            selected: !(darkTheme ?? false),
+                            onSelected: _onDarkThemeChanged(false),
+                          ),
+                          ChoiceChip(
+                            label: const Text('حسب النظام'),
+                            selected: darkTheme == null,
+                            onSelected: _onDarkThemeChanged(null),
+                          ),
+                        ],
                       ),
-                    ),
-                    ElevatedButton.icon(
-                      onPressed: _applyThemeChange,
-                      icon: const Icon(Symbols.done),
-                      label: const Text('تغيير'),
-                    ),
-                  ],
-                ),
-                const ExpansionTile(
-                  title: Text('الاشعارات'),
-                  subtitle: Text('اعدادات الاشعارات'),
-                  // TODO: Implement notifications settings
-                ),
-              ],
+                      SwitchListTile(
+                        value: greatFeastTheme,
+                        onChanged: (v) => setState(() {
+                          greatFeastTheme = v;
+                        }),
+                        title: const Text(
+                          'تغيير لون البرنامج حسب أسبوع الآلام وفترة الخمسين',
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: _applyThemeChange,
+                        icon: const Icon(Symbols.done),
+                        label: const Text('تغيير'),
+                      ),
+                    ],
+                  ),
+                  const ExpansionTile(
+                    title: Text('الاشعارات'),
+                    subtitle: Text('اعدادات الاشعارات'),
+                    // TODO: Implement notifications settings
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'حفظ',
-        onPressed: _save,
-        child: const Icon(Symbols.save),
+        floatingActionButton: FloatingActionButton(
+          tooltip: 'حفظ',
+          onPressed: _save,
+          child: const Icon(Symbols.save),
+        ),
       ),
     );
   }
