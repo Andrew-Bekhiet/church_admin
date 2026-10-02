@@ -27,17 +27,11 @@ class _EditClassState extends State<EditClass> {
   void initState() {
     super.initState();
 
-    final Class? oldClass = switch (widget.class$) {
-      final class$? => class$.copyWith(
-        serviceId: widget.withService?.id,
-        serviceStudyYear: class$.studyYearFromOrder,
-        studyYearTo: class$.spansStudyYearRange ? class$.studyYearTo : null,
-        serviceStudyYearTo: class$.spansStudyYearRange
-            ? class$.studyYearToOrder
-            : null,
-      ),
-      null => null,
-    };
+    final Class? oldClass = widget.class$?.copyWith(
+      serviceId: widget.withService?.id,
+      serviceStudyYear: widget.class$?.studyYearFromOrder,
+      serviceStudyYearTo: widget.class$?.studyYearToOrder,
+    );
 
     _controller = EditObjectController(
       afterCreate: (object) => ViewClassRoute(
@@ -123,8 +117,11 @@ class _EditClassState extends State<EditClass> {
               serviceStudyYearTo: value?.to?.order,
             ),
             validator: (value) => switch ((value, newClass.service)) {
-              (null || StudyYearRange(from: null), _) =>
-                'يجب اختيار السنة الدراسية',
+              (
+                null || StudyYearRange(from: null) || StudyYearRange(to: null),
+                _,
+              ) =>
+                'برجاء ادخال السنتين الدراسيتين',
 
               (
                 StudyYearRange(
@@ -137,14 +134,14 @@ class _EditClassState extends State<EditClass> {
                 'السنة الدراسية الأولى لا يمكن أن تكون أكبر من الثانية',
 
               (
-                StudyYearRange(:final from?, :final to),
+                StudyYearRange(:final from?, :final to?),
                 Service(
                   studyYearFrom: final serviceFrom?,
                   studyYearTo: final serviceTo?,
                 ),
               )
                   when from.order < serviceFrom.order ||
-                      (to ?? from).order > serviceTo.order =>
+                      to.order > serviceTo.order =>
                 'السنة الدراسية يجب ان تكون بين '
                     '${serviceFrom.name} و${serviceTo.name}',
 

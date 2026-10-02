@@ -149,9 +149,7 @@ class Class extends ViewableWithIDAndImage
       result = result.copyWith(serviceStudyYear: serviceStudyYear);
     }
 
-    final serviceStudyYearTo = this.serviceStudyYearTo ?? serviceStudyYear;
-    if (serviceStudyYearTo !=
-        (oldObject.serviceStudyYearTo ?? oldObject.serviceStudyYear)) {
+    if (serviceStudyYearTo != oldObject.serviceStudyYearTo) {
       result = result.copyWith(serviceStudyYearTo: serviceStudyYearTo);
     }
 

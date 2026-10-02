@@ -32,22 +32,15 @@ void main() {
       expect(class$(from: third, to: third).studyYearRangeName, 'ثالثة');
     });
 
-    test('clearing the end year of a range class narrows it to its start', () {
-      final rangeClass = class$(from: third, to: fourth);
-
-      final input = class$(from: third).toUpdateInput(oldObject: rangeClass);
-
-      expect(input.serviceStudyYearTo, 3);
-    });
-
-    test('a single-year class edited without an end year keeps its range', () {
+    test('widening a single-year class saves its new end year', () {
       final singleYearClass = class$(from: third, to: third);
 
       final input = class$(
         from: third,
+        to: fourth,
       ).toUpdateInput(oldObject: singleYearClass);
 
-      expect(input.toJson(), isEmpty);
+      expect(input.serviceStudyYearTo, 4);
     });
   });
 }
