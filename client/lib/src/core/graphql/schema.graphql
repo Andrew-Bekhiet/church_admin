@@ -1332,7 +1332,9 @@ type Classes {
   serviceGender: Boolean
   serviceId: uuid!
   serviceStudyYear: Int!
+  serviceStudyYearTo: Int!
   studyYear: StudyYears!
+  studyYearTo: StudyYears!
   userCanEdit: Boolean
 }
 
@@ -1383,11 +1385,13 @@ input ClassesArrRelInsertInput {
 type ClassesAvgFields {
   color: Float
   serviceStudyYear: Float
+  serviceStudyYearTo: Float
 }
 
 input ClassesAvgOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
+  serviceStudyYearTo: OrderBy
 }
 
 input ClassesBoolExp {
@@ -1409,7 +1413,9 @@ input ClassesBoolExp {
   serviceGender: BooleanComparisonExp
   serviceId: UuidComparisonExp
   serviceStudyYear: IntComparisonExp
+  serviceStudyYearTo: IntComparisonExp
   studyYear: StudyYearsBoolExp
+  studyYearTo: StudyYearsBoolExp
   userCanEdit: BooleanComparisonExp
 }
 
@@ -1420,6 +1426,7 @@ enum ClassesConstraint {
 input ClassesIncInput {
   color: bigint
   serviceStudyYear: Int
+  serviceStudyYearTo: Int
 }
 
 input ClassesInsertInput {
@@ -1431,7 +1438,9 @@ input ClassesInsertInput {
   serviceGender: Boolean
   serviceId: uuid
   serviceStudyYear: Int
+  serviceStudyYearTo: Int
   studyYear: StudyYearsObjRelInsertInput
+  studyYearTo: StudyYearsObjRelInsertInput
 }
 
 type ClassesMaxFields {
@@ -1442,6 +1451,7 @@ type ClassesMaxFields {
   photoUpdatedAt: timestamptz
   serviceId: uuid
   serviceStudyYear: Int
+  serviceStudyYearTo: Int
 }
 
 input ClassesMaxOrderBy {
@@ -1452,6 +1462,7 @@ input ClassesMaxOrderBy {
   photoUpdatedAt: OrderBy
   serviceId: OrderBy
   serviceStudyYear: OrderBy
+  serviceStudyYearTo: OrderBy
 }
 
 type ClassesMinFields {
@@ -1462,6 +1473,7 @@ type ClassesMinFields {
   photoUpdatedAt: timestamptz
   serviceId: uuid
   serviceStudyYear: Int
+  serviceStudyYearTo: Int
 }
 
 input ClassesMinOrderBy {
@@ -1472,6 +1484,7 @@ input ClassesMinOrderBy {
   photoUpdatedAt: OrderBy
   serviceId: OrderBy
   serviceStudyYear: OrderBy
+  serviceStudyYearTo: OrderBy
 }
 
 type ClassesMutationResponse {
@@ -1500,7 +1513,9 @@ input ClassesOrderBy {
   serviceGender: OrderBy
   serviceId: OrderBy
   serviceStudyYear: OrderBy
+  serviceStudyYearTo: OrderBy
   studyYear: StudyYearsOrderBy
+  studyYearTo: StudyYearsOrderBy
   userCanEdit: OrderBy
 }
 
@@ -1572,6 +1587,7 @@ enum ClassesSelectColumn {
   serviceGender
   serviceId
   serviceStudyYear
+  serviceStudyYearTo
 }
 
 enum ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns {
@@ -1588,36 +1604,43 @@ input ClassesSetInput {
   serviceGender: Boolean
   serviceId: uuid
   serviceStudyYear: Int
+  serviceStudyYearTo: Int
 }
 
 type ClassesStddevFields {
   color: Float
   serviceStudyYear: Float
+  serviceStudyYearTo: Float
 }
 
 input ClassesStddevOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
+  serviceStudyYearTo: OrderBy
 }
 
 type ClassesStddevPopFields {
   color: Float
   serviceStudyYear: Float
+  serviceStudyYearTo: Float
 }
 
 input ClassesStddevPopOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
+  serviceStudyYearTo: OrderBy
 }
 
 type ClassesStddevSampFields {
   color: Float
   serviceStudyYear: Float
+  serviceStudyYearTo: Float
 }
 
 input ClassesStddevSampOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
+  serviceStudyYearTo: OrderBy
 }
 
 input ClassesStreamCursorInput {
@@ -1634,16 +1657,19 @@ input ClassesStreamCursorValueInput {
   serviceGender: Boolean
   serviceId: uuid
   serviceStudyYear: Int
+  serviceStudyYearTo: Int
 }
 
 type ClassesSumFields {
   color: bigint
   serviceStudyYear: Int
+  serviceStudyYearTo: Int
 }
 
 input ClassesSumOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
+  serviceStudyYearTo: OrderBy
 }
 
 enum ClassesUpdateColumn {
@@ -1652,6 +1678,7 @@ enum ClassesUpdateColumn {
   serviceGender
   serviceId
   serviceStudyYear
+  serviceStudyYearTo
 }
 
 input ClassesUpdates {
@@ -1663,31 +1690,37 @@ input ClassesUpdates {
 type ClassesVarPopFields {
   color: Float
   serviceStudyYear: Float
+  serviceStudyYearTo: Float
 }
 
 input ClassesVarPopOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
+  serviceStudyYearTo: OrderBy
 }
 
 type ClassesVarSampFields {
   color: Float
   serviceStudyYear: Float
+  serviceStudyYearTo: Float
 }
 
 input ClassesVarSampOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
+  serviceStudyYearTo: OrderBy
 }
 
 type ClassesVarianceFields {
   color: Float
   serviceStudyYear: Float
+  serviceStudyYearTo: Float
 }
 
 input ClassesVarianceOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
+  serviceStudyYearTo: OrderBy
 }
 
 type Colleges {

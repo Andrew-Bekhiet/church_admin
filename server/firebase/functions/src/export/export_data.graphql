@@ -321,7 +321,12 @@ query exportData(
       name
     }
     gender: serviceGender
-    studyYear {
+    studyYearFrom: studyYear {
+      id
+      name
+      order
+    }
+    studyYearTo {
       id
       name
       order

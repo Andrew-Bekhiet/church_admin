@@ -17,6 +17,9 @@ object_relationships:
   - name: studyYear
     using:
       foreign_key_constraint_on: service_study_year
+  - name: studyYearTo
+    using:
+      foreign_key_constraint_on: service_study_year_to
 array_relationships:
   - name: adminUsers
     using:
@@ -103,6 +106,7 @@ insert_permissions:
         - service_gender
         - service_id
         - service_study_year
+        - service_study_year_to
 select_permissions:
   - role: user
     permission:
@@ -114,6 +118,7 @@ select_permissions:
         - blurhash
         - service_id
         - service_study_year
+        - service_study_year_to
         - service_gender
       computed_fields:
         - userCanEdit
@@ -151,6 +156,7 @@ update_permissions:
         - name
         - service_id
         - service_study_year
+        - service_study_year_to
         - service_gender
       filter:
         _exists:

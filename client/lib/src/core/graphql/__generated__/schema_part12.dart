@@ -2124,9 +2124,11 @@ class Input_ClassesAvgOrderBy {
   factory Input_ClassesAvgOrderBy({
     Enum_OrderBy? color,
     Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? serviceStudyYearTo,
   }) => Input_ClassesAvgOrderBy._({
     if (color != null) r'color': color,
     if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceStudyYearTo != null) r'serviceStudyYearTo': serviceStudyYearTo,
   });
 
   Input_ClassesAvgOrderBy._(this._$data);
@@ -2145,6 +2147,12 @@ class Input_ClassesAvgOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
     }
+    if (data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = data['serviceStudyYearTo'];
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceStudyYearTo as String));
+    }
     return Input_ClassesAvgOrderBy._(result$data);
   }
 
@@ -2154,6 +2162,9 @@ class Input_ClassesAvgOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get serviceStudyYearTo =>
+      (_$data['serviceStudyYearTo'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -2168,6 +2179,12 @@ class Input_ClassesAvgOrderBy {
       result$data['serviceStudyYear'] = l$serviceStudyYear == null
           ? null
           : toJson_Enum_OrderBy(l$serviceStudyYear);
+    }
+    if (_$data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = serviceStudyYearTo;
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceStudyYearTo);
     }
     return result$data;
   }
@@ -2200,6 +2217,15 @@ class Input_ClassesAvgOrderBy {
     if (l$serviceStudyYear != lOther$serviceStudyYear) {
       return false;
     }
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    final lOther$serviceStudyYearTo = other.serviceStudyYearTo;
+    if (_$data.containsKey('serviceStudyYearTo') !=
+        other._$data.containsKey('serviceStudyYearTo')) {
+      return false;
+    }
+    if (l$serviceStudyYearTo != lOther$serviceStudyYearTo) {
+      return false;
+    }
     return true;
   }
 
@@ -2207,9 +2233,13 @@ class Input_ClassesAvgOrderBy {
   int get hashCode {
     final l$color = color;
     final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('serviceStudyYearTo')
+          ? l$serviceStudyYearTo
+          : const {},
     ]);
   }
 }
@@ -2223,7 +2253,11 @@ abstract class CopyWith_Input_ClassesAvgOrderBy<TRes> {
   factory CopyWith_Input_ClassesAvgOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_ClassesAvgOrderBy;
 
-  TRes call({Enum_OrderBy? color, Enum_OrderBy? serviceStudyYear});
+  TRes call({
+    Enum_OrderBy? color,
+    Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? serviceStudyYearTo,
+  });
 }
 
 class _CopyWithImpl_Input_ClassesAvgOrderBy<TRes>
@@ -2239,12 +2273,15 @@ class _CopyWithImpl_Input_ClassesAvgOrderBy<TRes>
   TRes call({
     Object? color = _undefined,
     Object? serviceStudyYear = _undefined,
+    Object? serviceStudyYearTo = _undefined,
   }) => _then(
     Input_ClassesAvgOrderBy._({
       ..._instance._$data,
       if (color != _undefined) 'color': (color as Enum_OrderBy?),
       if (serviceStudyYear != _undefined)
         'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+      if (serviceStudyYearTo != _undefined)
+        'serviceStudyYearTo': (serviceStudyYearTo as Enum_OrderBy?),
     }),
   );
 }
@@ -2255,7 +2292,11 @@ class _CopyWithStubImpl_Input_ClassesAvgOrderBy<TRes>
 
   TRes _res;
 
-  call({Enum_OrderBy? color, Enum_OrderBy? serviceStudyYear}) => _res;
+  call({
+    Enum_OrderBy? color,
+    Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? serviceStudyYearTo,
+  }) => _res;
 }
 
 class Input_ClassesBoolExp {
@@ -2278,7 +2319,9 @@ class Input_ClassesBoolExp {
     Input_BooleanComparisonExp? serviceGender,
     Input_UuidComparisonExp? serviceId,
     Input_IntComparisonExp? serviceStudyYear,
+    Input_IntComparisonExp? serviceStudyYearTo,
     Input_StudyYearsBoolExp? studyYear,
+    Input_StudyYearsBoolExp? studyYearTo,
     Input_BooleanComparisonExp? userCanEdit,
   }) => Input_ClassesBoolExp._({
     if ($_and != null) r'_and': $_and,
@@ -2300,7 +2343,9 @@ class Input_ClassesBoolExp {
     if (serviceGender != null) r'serviceGender': serviceGender,
     if (serviceId != null) r'serviceId': serviceId,
     if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceStudyYearTo != null) r'serviceStudyYearTo': serviceStudyYearTo,
     if (studyYear != null) r'studyYear': studyYear,
+    if (studyYearTo != null) r'studyYearTo': studyYearTo,
     if (userCanEdit != null) r'userCanEdit': userCanEdit,
   });
 
@@ -2446,12 +2491,28 @@ class Input_ClassesBoolExp {
               (l$serviceStudyYear as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = data['serviceStudyYearTo'];
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo == null
+          ? null
+          : Input_IntComparisonExp.fromJson(
+              (l$serviceStudyYearTo as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('studyYear')) {
       final l$studyYear = data['studyYear'];
       result$data['studyYear'] = l$studyYear == null
           ? null
           : Input_StudyYearsBoolExp.fromJson(
               (l$studyYear as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('studyYearTo')) {
+      final l$studyYearTo = data['studyYearTo'];
+      result$data['studyYearTo'] = l$studyYearTo == null
+          ? null
+          : Input_StudyYearsBoolExp.fromJson(
+              (l$studyYearTo as Map<String, dynamic>),
             );
     }
     if (data.containsKey('userCanEdit')) {
@@ -2520,8 +2581,14 @@ class Input_ClassesBoolExp {
   Input_IntComparisonExp? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Input_IntComparisonExp?);
 
+  Input_IntComparisonExp? get serviceStudyYearTo =>
+      (_$data['serviceStudyYearTo'] as Input_IntComparisonExp?);
+
   Input_StudyYearsBoolExp? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsBoolExp?);
+
+  Input_StudyYearsBoolExp? get studyYearTo =>
+      (_$data['studyYearTo'] as Input_StudyYearsBoolExp?);
 
   Input_BooleanComparisonExp? get userCanEdit =>
       (_$data['userCanEdit'] as Input_BooleanComparisonExp?);
@@ -2600,9 +2667,17 @@ class Input_ClassesBoolExp {
       final l$serviceStudyYear = serviceStudyYear;
       result$data['serviceStudyYear'] = l$serviceStudyYear?.toJson();
     }
+    if (_$data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = serviceStudyYearTo;
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo?.toJson();
+    }
     if (_$data.containsKey('studyYear')) {
       final l$studyYear = studyYear;
       result$data['studyYear'] = l$studyYear?.toJson();
+    }
+    if (_$data.containsKey('studyYearTo')) {
+      final l$studyYearTo = studyYearTo;
+      result$data['studyYearTo'] = l$studyYearTo?.toJson();
     }
     if (_$data.containsKey('userCanEdit')) {
       final l$userCanEdit = userCanEdit;
@@ -2798,6 +2873,15 @@ class Input_ClassesBoolExp {
     if (l$serviceStudyYear != lOther$serviceStudyYear) {
       return false;
     }
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    final lOther$serviceStudyYearTo = other.serviceStudyYearTo;
+    if (_$data.containsKey('serviceStudyYearTo') !=
+        other._$data.containsKey('serviceStudyYearTo')) {
+      return false;
+    }
+    if (l$serviceStudyYearTo != lOther$serviceStudyYearTo) {
+      return false;
+    }
     final l$studyYear = studyYear;
     final lOther$studyYear = other.studyYear;
     if (_$data.containsKey('studyYear') !=
@@ -2805,6 +2889,15 @@ class Input_ClassesBoolExp {
       return false;
     }
     if (l$studyYear != lOther$studyYear) {
+      return false;
+    }
+    final l$studyYearTo = studyYearTo;
+    final lOther$studyYearTo = other.studyYearTo;
+    if (_$data.containsKey('studyYearTo') !=
+        other._$data.containsKey('studyYearTo')) {
+      return false;
+    }
+    if (l$studyYearTo != lOther$studyYearTo) {
       return false;
     }
     final l$userCanEdit = userCanEdit;
@@ -2839,7 +2932,9 @@ class Input_ClassesBoolExp {
     final l$serviceGender = serviceGender;
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
     final l$studyYear = studyYear;
+    final l$studyYearTo = studyYearTo;
     final l$userCanEdit = userCanEdit;
     return Object.hashAll([
       _$data.containsKey('_and')
@@ -2870,7 +2965,11 @@ class Input_ClassesBoolExp {
       _$data.containsKey('serviceGender') ? l$serviceGender : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('serviceStudyYearTo')
+          ? l$serviceStudyYearTo
+          : const {},
       _$data.containsKey('studyYear') ? l$studyYear : const {},
+      _$data.containsKey('studyYearTo') ? l$studyYearTo : const {},
       _$data.containsKey('userCanEdit') ? l$userCanEdit : const {},
     ]);
   }

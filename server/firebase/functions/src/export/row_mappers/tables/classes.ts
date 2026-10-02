@@ -13,7 +13,8 @@ export class ClassRowMapper implements RowMapper {
     this.mapper = new LocalizationRowMapper(
       new MultiRowMapper([
         new ViewableRowMapper(),
-        new StudyYearRowMapper(),
+        new StudyYearRowMapper("studyYearFrom"),
+        new StudyYearRowMapper("studyYearTo"),
         new GenderRowMapper(),
         new ObjectRefRowMapper("service"),
         new AuditLogRowMapper("lastEdit"),
