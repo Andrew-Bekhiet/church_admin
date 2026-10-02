@@ -299,7 +299,7 @@ void main() {
       );
     });
 
-    test('a single-year class beats a range class covering its slice', () {
+    test('a slice covered by a single-year and a range class counts toward both', () {
       final subject = analysis(
         rosterMembers: [
           member('p1', studyYearId: 3, gender: true, attended: true),
@@ -313,7 +313,7 @@ void main() {
 
       expect(
         subject.classAttendanceRates.map((c) => (c.studyYearId, c.className)),
-        [(3, 'ثالثة'), (4, 'كشافة')],
+        [(3, 'ثالثة'), (3, 'كشافة'), (4, 'كشافة')],
       );
     });
 
