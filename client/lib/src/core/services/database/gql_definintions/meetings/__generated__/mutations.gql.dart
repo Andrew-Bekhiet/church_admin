@@ -1,5 +1,6 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
+import '../../metadata/study_years/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
@@ -257,6 +258,7 @@ const documentNodeMutationinsertMeeting = DocumentNode(
     ),
     fragmentDefinitionMeeting,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionStudyYear,
     fragmentDefinitionGroupNoPhoto,
   ],
 );
@@ -543,6 +545,7 @@ const documentNodeMutationupdateMeeting = DocumentNode(
     ),
     fragmentDefinitionMeeting,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionStudyYear,
     fragmentDefinitionGroupNoPhoto,
   ],
 );

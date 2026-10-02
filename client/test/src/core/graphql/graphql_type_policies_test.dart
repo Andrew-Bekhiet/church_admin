@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/fragments.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/subscriptions.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -133,7 +134,7 @@ void main() {
 
       final data = Subscription_watchAllStudyYears(
         studyYears: [
-          Subscription_watchAllStudyYears_studyYears(
+          Fragment_StudyYear(
             order: 3,
             name: 'Third year',
           ),

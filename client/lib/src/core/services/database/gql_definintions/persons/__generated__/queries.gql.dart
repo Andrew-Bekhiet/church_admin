@@ -3,6 +3,7 @@ import '../../areas/__generated__/fragments.gql.dart';
 import '../../classes/__generated__/fragments.gql.dart';
 import '../../families/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
+import '../../metadata/study_years/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
 import '../../stores/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';
@@ -9825,6 +9826,7 @@ const documentNodeQuerypersonServicesClassesGroups = DocumentNode(
     ),
     fragmentDefinitionServiceWithStudyYears,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionStudyYear,
     fragmentDefinitionClass,
     fragmentDefinitionClassNoPhoto,
     fragmentDefinitionGroup,

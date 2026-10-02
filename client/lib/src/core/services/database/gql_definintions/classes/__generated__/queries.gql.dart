@@ -1,3 +1,4 @@
+import '../../metadata/study_years/__generated__/fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
@@ -331,19 +332,9 @@ const documentNodeQueryclassesForService = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
-                      FieldNode(
-                        name: NameNode(value: 'order'),
-                        alias: null,
-                        arguments: [],
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'StudyYear'),
                         directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
                       ),
                       FieldNode(
                         name: NameNode(value: '__typename'),
@@ -362,19 +353,9 @@ const documentNodeQueryclassesForService = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
-                      FieldNode(
-                        name: NameNode(value: 'order'),
-                        alias: null,
-                        arguments: [],
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'StudyYear'),
                         directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
                       ),
                       FieldNode(
                         name: NameNode(value: '__typename'),
@@ -399,6 +380,7 @@ const documentNodeQueryclassesForService = DocumentNode(
         ],
       ),
     ),
+    fragmentDefinitionStudyYear,
   ],
 );
 
@@ -432,10 +414,10 @@ class Query_classesForService_classes {
       serviceStudyYear: (l$serviceStudyYear as int),
       serviceStudyYearTo: (l$serviceStudyYearTo as int),
       serviceGender: (l$serviceGender as bool?),
-      studyYear: Query_classesForService_classes_studyYear.fromJson(
+      studyYear: Fragment_StudyYear.fromJson(
         (l$studyYear as Map<String, dynamic>),
       ),
-      studyYearTo: Query_classesForService_classes_studyYearTo.fromJson(
+      studyYearTo: Fragment_StudyYear.fromJson(
         (l$studyYearTo as Map<String, dynamic>),
       ),
       $__typename: (l$$__typename as String),
@@ -454,9 +436,9 @@ class Query_classesForService_classes {
 
   final bool? serviceGender;
 
-  final Query_classesForService_classes_studyYear studyYear;
+  final Fragment_StudyYear studyYear;
 
-  final Query_classesForService_classes_studyYearTo studyYearTo;
+  final Fragment_StudyYear studyYearTo;
 
   final String $__typename;
 
@@ -587,12 +569,12 @@ abstract class CopyWith_Query_classesForService_classes<TRes> {
     int? serviceStudyYear,
     int? serviceStudyYearTo,
     bool? serviceGender,
-    Query_classesForService_classes_studyYear? studyYear,
-    Query_classesForService_classes_studyYearTo? studyYearTo,
+    Fragment_StudyYear? studyYear,
+    Fragment_StudyYear? studyYearTo,
     String? $__typename,
   });
-  CopyWith_Query_classesForService_classes_studyYear<TRes> get studyYear;
-  CopyWith_Query_classesForService_classes_studyYearTo<TRes> get studyYearTo;
+  CopyWith_Fragment_StudyYear<TRes> get studyYear;
+  CopyWith_Fragment_StudyYear<TRes> get studyYearTo;
 }
 
 class _CopyWithImpl_Query_classesForService_classes<TRes>
@@ -635,27 +617,27 @@ class _CopyWithImpl_Query_classesForService_classes<TRes>
           : (serviceGender as bool?),
       studyYear: studyYear == _undefined || studyYear == null
           ? _instance.studyYear
-          : (studyYear as Query_classesForService_classes_studyYear),
+          : (studyYear as Fragment_StudyYear),
       studyYearTo: studyYearTo == _undefined || studyYearTo == null
           ? _instance.studyYearTo
-          : (studyYearTo as Query_classesForService_classes_studyYearTo),
+          : (studyYearTo as Fragment_StudyYear),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
     ),
   );
 
-  CopyWith_Query_classesForService_classes_studyYear<TRes> get studyYear {
+  CopyWith_Fragment_StudyYear<TRes> get studyYear {
     final local$studyYear = _instance.studyYear;
-    return CopyWith_Query_classesForService_classes_studyYear(
+    return CopyWith_Fragment_StudyYear(
       local$studyYear,
       (e) => call(studyYear: e),
     );
   }
 
-  CopyWith_Query_classesForService_classes_studyYearTo<TRes> get studyYearTo {
+  CopyWith_Fragment_StudyYear<TRes> get studyYearTo {
     final local$studyYearTo = _instance.studyYearTo;
-    return CopyWith_Query_classesForService_classes_studyYearTo(
+    return CopyWith_Fragment_StudyYear(
       local$studyYearTo,
       (e) => call(studyYearTo: e),
     );
@@ -675,284 +657,14 @@ class _CopyWithStubImpl_Query_classesForService_classes<TRes>
     int? serviceStudyYear,
     int? serviceStudyYearTo,
     bool? serviceGender,
-    Query_classesForService_classes_studyYear? studyYear,
-    Query_classesForService_classes_studyYearTo? studyYearTo,
+    Fragment_StudyYear? studyYear,
+    Fragment_StudyYear? studyYearTo,
     String? $__typename,
   }) => _res;
 
-  CopyWith_Query_classesForService_classes_studyYear<TRes> get studyYear =>
-      CopyWith_Query_classesForService_classes_studyYear.stub(_res);
+  CopyWith_Fragment_StudyYear<TRes> get studyYear =>
+      CopyWith_Fragment_StudyYear.stub(_res);
 
-  CopyWith_Query_classesForService_classes_studyYearTo<TRes> get studyYearTo =>
-      CopyWith_Query_classesForService_classes_studyYearTo.stub(_res);
-}
-
-class Query_classesForService_classes_studyYear {
-  Query_classesForService_classes_studyYear({
-    required this.order,
-    required this.name,
-    this.$__typename = 'StudyYears',
-  });
-
-  factory Query_classesForService_classes_studyYear.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$order = json['order'];
-    final l$name = json['name'];
-    final l$$__typename = json['__typename'];
-    return Query_classesForService_classes_studyYear(
-      order: (l$order as int),
-      name: (l$name as String),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final int order;
-
-  final String name;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$order = order;
-    _resultData['order'] = l$order;
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$order = order;
-    final l$name = name;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$order, l$name, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_classesForService_classes_studyYear ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_classesForService_classes_studyYear
-    on Query_classesForService_classes_studyYear {
-  CopyWith_Query_classesForService_classes_studyYear<
-    Query_classesForService_classes_studyYear
-  >
-  get copyWith =>
-      CopyWith_Query_classesForService_classes_studyYear(this, (i) => i);
-}
-
-abstract class CopyWith_Query_classesForService_classes_studyYear<TRes> {
-  factory CopyWith_Query_classesForService_classes_studyYear(
-    Query_classesForService_classes_studyYear instance,
-    TRes Function(Query_classesForService_classes_studyYear) then,
-  ) = _CopyWithImpl_Query_classesForService_classes_studyYear;
-
-  factory CopyWith_Query_classesForService_classes_studyYear.stub(TRes res) =
-      _CopyWithStubImpl_Query_classesForService_classes_studyYear;
-
-  TRes call({int? order, String? name, String? $__typename});
-}
-
-class _CopyWithImpl_Query_classesForService_classes_studyYear<TRes>
-    implements CopyWith_Query_classesForService_classes_studyYear<TRes> {
-  _CopyWithImpl_Query_classesForService_classes_studyYear(
-    this._instance,
-    this._then,
-  );
-
-  final Query_classesForService_classes_studyYear _instance;
-
-  final TRes Function(Query_classesForService_classes_studyYear) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? order = _undefined,
-    Object? name = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Query_classesForService_classes_studyYear(
-      order: order == _undefined || order == null
-          ? _instance.order
-          : (order as int),
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Query_classesForService_classes_studyYear<TRes>
-    implements CopyWith_Query_classesForService_classes_studyYear<TRes> {
-  _CopyWithStubImpl_Query_classesForService_classes_studyYear(this._res);
-
-  TRes _res;
-
-  call({int? order, String? name, String? $__typename}) => _res;
-}
-
-class Query_classesForService_classes_studyYearTo {
-  Query_classesForService_classes_studyYearTo({
-    required this.order,
-    required this.name,
-    this.$__typename = 'StudyYears',
-  });
-
-  factory Query_classesForService_classes_studyYearTo.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$order = json['order'];
-    final l$name = json['name'];
-    final l$$__typename = json['__typename'];
-    return Query_classesForService_classes_studyYearTo(
-      order: (l$order as int),
-      name: (l$name as String),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final int order;
-
-  final String name;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$order = order;
-    _resultData['order'] = l$order;
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$order = order;
-    final l$name = name;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$order, l$name, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_classesForService_classes_studyYearTo ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_classesForService_classes_studyYearTo
-    on Query_classesForService_classes_studyYearTo {
-  CopyWith_Query_classesForService_classes_studyYearTo<
-    Query_classesForService_classes_studyYearTo
-  >
-  get copyWith =>
-      CopyWith_Query_classesForService_classes_studyYearTo(this, (i) => i);
-}
-
-abstract class CopyWith_Query_classesForService_classes_studyYearTo<TRes> {
-  factory CopyWith_Query_classesForService_classes_studyYearTo(
-    Query_classesForService_classes_studyYearTo instance,
-    TRes Function(Query_classesForService_classes_studyYearTo) then,
-  ) = _CopyWithImpl_Query_classesForService_classes_studyYearTo;
-
-  factory CopyWith_Query_classesForService_classes_studyYearTo.stub(TRes res) =
-      _CopyWithStubImpl_Query_classesForService_classes_studyYearTo;
-
-  TRes call({int? order, String? name, String? $__typename});
-}
-
-class _CopyWithImpl_Query_classesForService_classes_studyYearTo<TRes>
-    implements CopyWith_Query_classesForService_classes_studyYearTo<TRes> {
-  _CopyWithImpl_Query_classesForService_classes_studyYearTo(
-    this._instance,
-    this._then,
-  );
-
-  final Query_classesForService_classes_studyYearTo _instance;
-
-  final TRes Function(Query_classesForService_classes_studyYearTo) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? order = _undefined,
-    Object? name = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Query_classesForService_classes_studyYearTo(
-      order: order == _undefined || order == null
-          ? _instance.order
-          : (order as int),
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Query_classesForService_classes_studyYearTo<TRes>
-    implements CopyWith_Query_classesForService_classes_studyYearTo<TRes> {
-  _CopyWithStubImpl_Query_classesForService_classes_studyYearTo(this._res);
-
-  TRes _res;
-
-  call({int? order, String? name, String? $__typename}) => _res;
+  CopyWith_Fragment_StudyYear<TRes> get studyYearTo =>
+      CopyWith_Fragment_StudyYear.stub(_res);
 }

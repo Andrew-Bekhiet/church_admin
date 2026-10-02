@@ -4,6 +4,7 @@ import '../../classes/__generated__/fragments.gql.dart';
 import '../../families/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
+import '../../metadata/study_years/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
@@ -2207,19 +2208,9 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
-                      FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'StudyYear'),
                         directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'order'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
                       ),
                       FieldNode(
                         name: NameNode(value: '__typename'),
@@ -2463,6 +2454,7 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(
     fragmentDefinitionLatestVisitHistory,
     fragmentDefinitionServiceWithStudyYears,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionStudyYear,
   ],
 );
 
@@ -2688,9 +2680,7 @@ class Subscription_watchPerson_personsByPk
             ),
       studyYear: l$studyYear == null
           ? null
-          : Subscription_watchPerson_personsByPk_studyYear.fromJson(
-              (l$studyYear as Map<String, dynamic>),
-            ),
+          : Fragment_StudyYear.fromJson((l$studyYear as Map<String, dynamic>)),
       hobbies: (l$hobbies as List<dynamic>)
           .map(
             (e) => Subscription_watchPerson_personsByPk_hobbies.fromJson(
@@ -2792,7 +2782,7 @@ class Subscription_watchPerson_personsByPk
 
   final Subscription_watchPerson_personsByPk_state? state;
 
-  final Subscription_watchPerson_personsByPk_studyYear? studyYear;
+  final Fragment_StudyYear? studyYear;
 
   final List<Subscription_watchPerson_personsByPk_hobbies> hobbies;
 
@@ -3318,7 +3308,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     List<Subscription_watchPerson_personsByPk_services>? services,
     Subscription_watchPerson_personsByPk_shammasLevel? shammasLevel,
     Subscription_watchPerson_personsByPk_state? state,
-    Subscription_watchPerson_personsByPk_studyYear? studyYear,
+    Fragment_StudyYear? studyYear,
     List<Subscription_watchPerson_personsByPk_hobbies>? hobbies,
     List<Subscription_watchPerson_personsByPk_tags>? tags,
     UuidValue? uid,
@@ -3374,7 +3364,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
   CopyWith_Subscription_watchPerson_personsByPk_shammasLevel<TRes>
   get shammasLevel;
   CopyWith_Subscription_watchPerson_personsByPk_state<TRes> get state;
-  CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> get studyYear;
+  CopyWith_Fragment_StudyYear<TRes> get studyYear;
   TRes hobbies(
     Iterable<Subscription_watchPerson_personsByPk_hobbies> Function(
       Iterable<
@@ -3574,7 +3564,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
           : (state as Subscription_watchPerson_personsByPk_state?),
       studyYear: studyYear == _undefined
           ? _instance.studyYear
-          : (studyYear as Subscription_watchPerson_personsByPk_studyYear?),
+          : (studyYear as Fragment_StudyYear?),
       hobbies: hobbies == _undefined || hobbies == null
           ? _instance.hobbies
           : (hobbies as List<Subscription_watchPerson_personsByPk_hobbies>),
@@ -3830,13 +3820,11 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
           );
   }
 
-  CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> get studyYear {
+  CopyWith_Fragment_StudyYear<TRes> get studyYear {
     final local$studyYear = _instance.studyYear;
     return local$studyYear == null
-        ? CopyWith_Subscription_watchPerson_personsByPk_studyYear.stub(
-            _then(_instance),
-          )
-        : CopyWith_Subscription_watchPerson_personsByPk_studyYear(
+        ? CopyWith_Fragment_StudyYear.stub(_then(_instance))
+        : CopyWith_Fragment_StudyYear(
             local$studyYear,
             (e) => call(studyYear: e),
           );
@@ -3936,7 +3924,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     List<Subscription_watchPerson_personsByPk_services>? services,
     Subscription_watchPerson_personsByPk_shammasLevel? shammasLevel,
     Subscription_watchPerson_personsByPk_state? state,
-    Subscription_watchPerson_personsByPk_studyYear? studyYear,
+    Fragment_StudyYear? studyYear,
     List<Subscription_watchPerson_personsByPk_hobbies>? hobbies,
     List<Subscription_watchPerson_personsByPk_tags>? tags,
     UuidValue? uid,
@@ -4004,8 +3992,8 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
   CopyWith_Subscription_watchPerson_personsByPk_state<TRes> get state =>
       CopyWith_Subscription_watchPerson_personsByPk_state.stub(_res);
 
-  CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> get studyYear =>
-      CopyWith_Subscription_watchPerson_personsByPk_studyYear.stub(_res);
+  CopyWith_Fragment_StudyYear<TRes> get studyYear =>
+      CopyWith_Fragment_StudyYear.stub(_res);
 
   hobbies(_fn) => _res;
 
@@ -5979,142 +5967,6 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_state<TRes>
   TRes _res;
 
   call({UuidValue? id, int? color, String? name, String? $__typename}) => _res;
-}
-
-class Subscription_watchPerson_personsByPk_studyYear {
-  Subscription_watchPerson_personsByPk_studyYear({
-    required this.name,
-    required this.order,
-    this.$__typename = 'StudyYears',
-  });
-
-  factory Subscription_watchPerson_personsByPk_studyYear.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$name = json['name'];
-    final l$order = json['order'];
-    final l$$__typename = json['__typename'];
-    return Subscription_watchPerson_personsByPk_studyYear(
-      name: (l$name as String),
-      order: (l$order as int),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String name;
-
-  final int order;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$order = order;
-    _resultData['order'] = l$order;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$order = order;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$name, l$order, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Subscription_watchPerson_personsByPk_studyYear ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Subscription_watchPerson_personsByPk_studyYear
-    on Subscription_watchPerson_personsByPk_studyYear {
-  CopyWith_Subscription_watchPerson_personsByPk_studyYear<
-    Subscription_watchPerson_personsByPk_studyYear
-  >
-  get copyWith =>
-      CopyWith_Subscription_watchPerson_personsByPk_studyYear(this, (i) => i);
-}
-
-abstract class CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> {
-  factory CopyWith_Subscription_watchPerson_personsByPk_studyYear(
-    Subscription_watchPerson_personsByPk_studyYear instance,
-    TRes Function(Subscription_watchPerson_personsByPk_studyYear) then,
-  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_studyYear;
-
-  factory CopyWith_Subscription_watchPerson_personsByPk_studyYear.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Subscription_watchPerson_personsByPk_studyYear;
-
-  TRes call({String? name, int? order, String? $__typename});
-}
-
-class _CopyWithImpl_Subscription_watchPerson_personsByPk_studyYear<TRes>
-    implements CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> {
-  _CopyWithImpl_Subscription_watchPerson_personsByPk_studyYear(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription_watchPerson_personsByPk_studyYear _instance;
-
-  final TRes Function(Subscription_watchPerson_personsByPk_studyYear) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? name = _undefined,
-    Object? order = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Subscription_watchPerson_personsByPk_studyYear(
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      order: order == _undefined || order == null
-          ? _instance.order
-          : (order as int),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_studyYear<TRes>
-    implements CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> {
-  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_studyYear(this._res);
-
-  TRes _res;
-
-  call({String? name, int? order, String? $__typename}) => _res;
 }
 
 class Subscription_watchPerson_personsByPk_hobbies {
