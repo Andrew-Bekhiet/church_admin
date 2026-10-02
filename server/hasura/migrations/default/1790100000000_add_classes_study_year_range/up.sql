@@ -5,7 +5,7 @@ alter table public.classes disable trigger edit_history;
 
 update public.classes
 set service_study_year_to = service_study_year
-where service_study_year_to is null;
+where service_study_year_to is NULL;
 
 alter table public.classes enable trigger edit_history;
 
@@ -39,7 +39,7 @@ inner join persons as p
         ps.person_id = p.id
         and p.study_year_id
         between c.service_study_year and c.service_study_year_to
-        and (c.service_gender is null or c.service_gender = p.gender);
+        and (c.service_gender is NULL or c.service_gender = p.gender);
 
 create or replace view auth.users_permissions_by_entity_id (
     uid,
@@ -88,16 +88,16 @@ create or replace view auth.users_permissions_by_entity_id (
     users_global_permissions as (
         select
             permissions.uid,
-            bool_or(permissions.permission = 'readAllData') as read_all_data,
-            bool_or(permissions.permission = 'readAllData')
-            and bool_or(permissions.permission = 'writeAllData')
+            BOOL_OR(permissions.permission = 'readAllData') as read_all_data,
+            BOOL_OR(permissions.permission = 'readAllData')
+            and BOOL_OR(permissions.permission = 'writeAllData')
                 as write_all_data,
-            bool_or(permissions.permission = 'readAllData')
-            and bool_or(permissions.permission = 'exportAllData')
+            BOOL_OR(permissions.permission = 'readAllData')
+            and BOOL_OR(permissions.permission = 'exportAllData')
                 as export_all_data,
-            bool_or(permissions.permission = 'readAllData')
-            and bool_or(permissions.permission = 'writeAllData')
-            and bool_or(permissions.permission = 'manageAllUsers')
+            BOOL_OR(permissions.permission = 'readAllData')
+            and BOOL_OR(permissions.permission = 'writeAllData')
+            and BOOL_OR(permissions.permission = 'manageAllUsers')
                 as manage_all_users
         from approved_users
         inner join
@@ -114,18 +114,18 @@ create or replace view auth.users_permissions_by_entity_id (
         from approved_users_admin_on as admin_user
         inner join auth.users_admin_on as managed_user
             on
-                coalesce(admin_user.area_admin_on_users, false)
+                COALESCE(admin_user.area_admin_on_users, FALSE)
                 and admin_user.admin_on_area = managed_user.admin_on_area
-                or coalesce(admin_user.group_admin_on_users, false)
+                or COALESCE(admin_user.group_admin_on_users, FALSE)
                 and admin_user.admin_on_group = managed_user.admin_on_group
-                or coalesce(admin_user.service_admin_on_users, false)
+                or COALESCE(admin_user.service_admin_on_users, FALSE)
                 and admin_user.admin_on_service = managed_user.admin_on_service
         where
             admin_user.uid <> managed_user.uid
             and (
-                coalesce(admin_user.area_admin_on_users, false)
-                or coalesce(admin_user.group_admin_on_users, false)
-                or coalesce(admin_user.service_admin_on_users, false)
+                COALESCE(admin_user.area_admin_on_users, FALSE)
+                or COALESCE(admin_user.group_admin_on_users, FALSE)
+                or COALESCE(admin_user.service_admin_on_users, FALSE)
             )
     ),
 
@@ -140,41 +140,41 @@ create or replace view auth.users_permissions_by_entity_id (
             service_write_related_families,
             permission_id
         from approved_users_admin_on
-        where admin_on_service is not null
+        where admin_on_service is not NULL
     ),
 
     admin_on_classes as (
         select
             admin_on_services.uid,
             c.id as class_id,
+            admin_on_services.permission_id,
             admin_on_services.allow_edit
             and scope_covers_class.covers as allow_edit,
             admin_on_services.allow_export
-            and scope_covers_class.covers as allow_export,
-            admin_on_services.permission_id
+            and scope_covers_class.covers as allow_export
         from admin_on_services
         inner join classes as c
             on
                 admin_on_services.service_id = c.service_id
                 and (
-                    admin_on_services.service_gender is null
-                    or c.service_gender is null
+                    admin_on_services.service_gender is NULL
+                    or c.service_gender is NULL
                     or admin_on_services.service_gender = c.service_gender
                 )
                 and (
-                    admin_on_services.service_study_year is null
+                    admin_on_services.service_study_year is NULL
                     or admin_on_services.service_study_year
                     between c.service_study_year and c.service_study_year_to
                 )
         cross join lateral (
             select
                 (
-                    admin_on_services.service_gender is null
+                    admin_on_services.service_gender is NULL
                     or admin_on_services.service_gender
                     is not distinct from c.service_gender
                 )
                 and (
-                    admin_on_services.service_study_year is null
+                    admin_on_services.service_study_year is NULL
                     or (
                         c.service_study_year
                         = admin_on_services.service_study_year
@@ -194,7 +194,7 @@ create or replace view auth.users_permissions_by_entity_id (
             uao.group_write_related_families,
             uao.permission_id
         from approved_users_admin_on as uao
-        where uao.admin_on_group is not null
+        where uao.admin_on_group is not NULL
     ),
 
     admin_on_areas as (
@@ -205,7 +205,7 @@ create or replace view auth.users_permissions_by_entity_id (
             uao.area_allow_export as allow_export,
             uao.permission_id
         from approved_users_admin_on as uao
-        where uao.admin_on_area is not null
+        where uao.admin_on_area is not NULL
     ),
 
     admin_on_streets as (
@@ -228,7 +228,7 @@ create or replace view auth.users_permissions_by_entity_id (
             aoa.permission_id
         from admin_on_areas as aoa
         inner join addresses on aoa.area_id = addresses.area_id
-        where addresses.family_id is not null
+        where addresses.family_id is not NULL
     ),
 
     admin_on_stores as (
@@ -240,7 +240,7 @@ create or replace view auth.users_permissions_by_entity_id (
             aoa.permission_id
         from admin_on_areas as aoa
         inner join addresses on aoa.area_id = addresses.area_id
-        where addresses.store_id is not null
+        where addresses.store_id is not NULL
     ),
 
     admin_on_persons_through_services as (
@@ -260,11 +260,11 @@ create or replace view auth.users_permissions_by_entity_id (
             on
                 ps.person_id = p.id
         where (
-            aos.service_gender is null
+            aos.service_gender is NULL
             or aos.service_gender = p.gender
         )
         and (
-            aos.service_study_year is null
+            aos.service_study_year is NULL
             or aos.service_study_year = p.study_year_id
         )
     ),
@@ -286,7 +286,7 @@ create or replace view auth.users_permissions_by_entity_id (
             aof.uid,
             p.id as person_id,
             aof.allow_edit,
-            false as allow_export,
+            FALSE as allow_export,
             aof.permission_id,
             p.study_year_id,
             p.gender
@@ -299,7 +299,7 @@ create or replace view auth.users_permissions_by_entity_id (
             aos.uid,
             p.id as person_id,
             aos.allow_edit,
-            false as allow_export,
+            FALSE as allow_export,
             aos.permission_id,
             p.study_year_id,
             p.gender
@@ -314,7 +314,7 @@ create or replace view auth.users_permissions_by_entity_id (
             aop.permission_id,
             aop.service_write_related_families
         from admin_on_persons_through_services as aop
-        where aop.family_id is not null
+        where aop.family_id is not NULL
     ),
 
     admin_on_families_through_groups as (
@@ -325,7 +325,7 @@ create or replace view auth.users_permissions_by_entity_id (
             aop.group_write_related_families
         from admin_on_persons_through_groups as aop
         inner join persons as p on aop.person_id = p.id
-        where p.family_id is not null
+        where p.family_id is not NULL
     )
 
     -- manage all users
@@ -333,26 +333,26 @@ create or replace view auth.users_permissions_by_entity_id (
         uid,
         'any-user'::text as entity_type,
         'users'::name as "table",
-        null::uuid as entity_id,
-        true as allow_edit,
-        false as allow_export,
-        null as permission_id,
+        NULL::uuid as entity_id,
+        TRUE as allow_edit,
+        FALSE as allow_export,
+        NULL as permission_id,
         'User can manage all users' as hint
     from users_global_permissions
-    where manage_all_users is true
+    where manage_all_users is TRUE
     union all
     -- read/write all data
     select
         uid,
         'any'::text as entity_type,
-        null::name as "table",
-        null::uuid as entity_id,
+        NULL::name as "table",
+        NULL::uuid as entity_id,
         write_all_data as allow_edit,
         export_all_data as allow_export,
-        null::uuid as permission_id,
+        NULL::uuid as permission_id,
         'User can read/write all data' as hint
     from users_global_permissions
-    where read_all_data is true
+    where read_all_data is TRUE
     union all
     -- admin on users
     select
@@ -360,8 +360,8 @@ create or replace view auth.users_permissions_by_entity_id (
         'user'::text as entity_type,
         'users'::name as "table",
         managed_user_uid as entity_id,
-        true as allow_edit,
-        false as allow_export,
+        TRUE as allow_edit,
+        FALSE as allow_export,
         permission_id,
         'User can manage users on areas, groups, services' as hint
     from admin_on_users
@@ -371,10 +371,10 @@ create or replace view auth.users_permissions_by_entity_id (
         uid,
         'any-user'::text as entity_type,
         'users'::name as "table",
-        null::uuid as entity_id,
-        false as allow_edit,
-        false as allow_export,
-        null::uuid as permission_id,
+        NULL::uuid as entity_id,
+        FALSE as allow_edit,
+        FALSE as allow_export,
+        NULL::uuid as permission_id,
         'User can read all approved users' as hint
     from approved_users
     union all
@@ -384,13 +384,13 @@ create or replace view auth.users_permissions_by_entity_id (
         'user'::text as entity_type,
         'users'::name as "table",
         users_data.uid::uuid as entity_id,
-        false as allow_edit,
-        false as allow_export,
-        null::uuid as permission_id,
+        FALSE as allow_edit,
+        FALSE as allow_export,
+        NULL::uuid as permission_id,
         'Unapproved user can read own user data' as hint
     from auth.users_data
     left join approved_users on auth.users_data.uid = approved_users.uid
-    where approved_users.uid is null
+    where approved_users.uid is NULL
     union all
     -- user's own person
     select
@@ -398,9 +398,9 @@ create or replace view auth.users_permissions_by_entity_id (
         'person'::text as entity_type,
         'persons'::name as "table",
         persons.id as entity_id,
-        true as allow_edit,
-        false as allow_export,
-        null::uuid as permission_id,
+        TRUE as allow_edit,
+        FALSE as allow_export,
+        NULL::uuid as permission_id,
         'User can edit own person' as hint
     from persons
     inner join approved_users on persons.uid = approved_users.uid
@@ -414,7 +414,7 @@ create or replace view auth.users_permissions_by_entity_id (
         allow_edit,
         allow_export,
         permission_id,
-        null as hint
+        NULL as hint
     from admin_on_services
     union all
     -- admin on classes
@@ -426,7 +426,7 @@ create or replace view auth.users_permissions_by_entity_id (
         allow_edit,
         allow_export,
         permission_id,
-        null as hint
+        NULL as hint
     from admin_on_classes
     union all
     -- admin on groups
@@ -438,7 +438,7 @@ create or replace view auth.users_permissions_by_entity_id (
         allow_edit,
         allow_export,
         permission_id,
-        null as hint
+        NULL as hint
     from admin_on_groups
     union all
     -- admin on areas
@@ -450,7 +450,7 @@ create or replace view auth.users_permissions_by_entity_id (
         allow_edit,
         allow_export,
         permission_id,
-        null as hint
+        NULL as hint
     from admin_on_areas
     union all
     -- admin on streets
@@ -462,7 +462,7 @@ create or replace view auth.users_permissions_by_entity_id (
         allow_edit,
         allow_export,
         permission_id,
-        null as hint
+        NULL as hint
     from admin_on_streets
     union all
     -- admin on families
@@ -474,7 +474,7 @@ create or replace view auth.users_permissions_by_entity_id (
         allow_edit,
         allow_export,
         permission_id,
-        null as hint
+        NULL as hint
     from admin_on_families
     union all
     -- admin on stores
@@ -486,7 +486,7 @@ create or replace view auth.users_permissions_by_entity_id (
         allow_edit,
         allow_export,
         permission_id,
-        null as hint
+        NULL as hint
     from admin_on_stores
     union all
     -- admin on persons
@@ -518,7 +518,7 @@ create or replace view auth.users_permissions_by_entity_id (
         'persons'::name as "table",
         person_id as entity_id,
         allow_edit,
-        false as allow_export,
+        FALSE as allow_export,
         permission_id,
         'User is admin on parent family' as hint
     from admin_on_persons_through_families
@@ -529,7 +529,7 @@ create or replace view auth.users_permissions_by_entity_id (
         'persons'::name as "table",
         person_id as entity_id,
         allow_edit,
-        false as allow_export,
+        FALSE as allow_export,
         permission_id,
         'User is admin on parent store' as hint
     from admin_on_persons_through_stores
@@ -539,8 +539,8 @@ create or replace view auth.users_permissions_by_entity_id (
         'class'::text as entity_type,
         'classes'::name as "table",
         c.id as entity_id,
-        false as allow_edit,
-        false as allow_export,
+        FALSE as allow_edit,
+        FALSE as allow_export,
         aop.permission_id,
         'User can view classes of persons through admin on area -> families'
             as hint
@@ -549,15 +549,15 @@ create or replace view auth.users_permissions_by_entity_id (
         on
             aop.study_year_id
             between c.service_study_year and c.service_study_year_to
-            and (c.service_gender is null or aop.gender = c.service_gender)
+            and (c.service_gender is NULL or aop.gender = c.service_gender)
     union all
     select
         aos.uid,
         'class'::text as entity_type,
         'classes'::name as "table",
         c.id as entity_id,
-        false as allow_edit,
-        false as allow_export,
+        FALSE as allow_edit,
+        FALSE as allow_export,
         aos.permission_id,
         'User can view classes of persons through admin on area -> stores'
             as hint
@@ -566,15 +566,15 @@ create or replace view auth.users_permissions_by_entity_id (
         on
             aos.study_year_id
             between c.service_study_year and c.service_study_year_to
-            and (c.service_gender is null or aos.gender = c.service_gender)
+            and (c.service_gender is NULL or aos.gender = c.service_gender)
     union all
     select
         aop.uid,
         'group'::text as entity_type,
         'groups'::name as "table",
         pg.group_id as entity_id,
-        false as allow_edit,
-        false as allow_export,
+        FALSE as allow_edit,
+        FALSE as allow_export,
         aop.permission_id,
         'User can view groups of persons through admin on area -> families'
             as hint
@@ -586,8 +586,8 @@ create or replace view auth.users_permissions_by_entity_id (
         'group'::text as entity_type,
         'groups'::name as "table",
         pg.group_id as entity_id,
-        false as allow_edit,
-        false as allow_export,
+        FALSE as allow_edit,
+        FALSE as allow_export,
         aos.permission_id,
         'User can view groups of persons through admin on area -> stores'
             as hint
@@ -600,7 +600,7 @@ create or replace view auth.users_permissions_by_entity_id (
         'families'::name as "table",
         f.family_id as entity_id,
         f.service_write_related_families as allow_edit,
-        false as allow_export,
+        FALSE as allow_export,
         f.permission_id,
         'User can access the family of a person through admin on service'
             as hint
@@ -612,7 +612,7 @@ create or replace view auth.users_permissions_by_entity_id (
         'families'::name as "table",
         f.family_id as entity_id,
         f.group_write_related_families as allow_edit,
-        false as allow_export,
+        FALSE as allow_export,
         f.permission_id,
         'User can access the family of a person through admin on group' as hint
     from admin_on_families_through_groups as f
@@ -623,13 +623,13 @@ create or replace view auth.users_permissions_by_entity_id (
         'persons'::name as "table",
         p.id as entity_id,
         f.service_write_related_families as allow_edit,
-        false as allow_export,
+        FALSE as allow_export,
         f.permission_id,
         'User can access family members of a person through admin on service'
             as hint
     from admin_on_families_through_services as f
     inner join persons as p on f.family_id = p.family_id
-    where f.service_write_related_families is true
+    where f.service_write_related_families is TRUE
     union all
     select
         f.uid,
@@ -637,13 +637,13 @@ create or replace view auth.users_permissions_by_entity_id (
         'persons'::name as "table",
         p.id as entity_id,
         f.group_write_related_families as allow_edit,
-        false as allow_export,
+        FALSE as allow_export,
         f.permission_id,
         'User can access family members of a person through admin on group'
             as hint
     from admin_on_families_through_groups as f
     inner join persons as p on f.family_id = p.family_id
-    where f.group_write_related_families is true
+    where f.group_write_related_families is TRUE
     union all
     -- recorder can read a servant's person through a shared service admin scope
     select
@@ -651,8 +651,8 @@ create or replace view auth.users_permissions_by_entity_id (
         'person'::text as entity_type,
         'persons'::name as "table",
         attended_person.id as entity_id,
-        false as allow_edit,
-        false as allow_export,
+        FALSE as allow_edit,
+        FALSE as allow_export,
         recorder.permission_id,
         'Recorder can read servant person through shared service' as hint
     from approved_users_admin_on as recorder
@@ -662,16 +662,16 @@ create or replace view auth.users_permissions_by_entity_id (
             and recorder.uid <> attended.uid
     inner join persons as attended_person on attended.uid = attended_person.uid
     where
-        recorder.admin_on_service is not null
-        and coalesce(recorder.service_allow_record_servants_attendance, false)
+        recorder.admin_on_service is not NULL
+        and COALESCE(recorder.service_allow_record_servants_attendance, FALSE)
         and (
-            recorder.service_study_year is null
-            or attended.service_study_year is null
+            recorder.service_study_year is NULL
+            or attended.service_study_year is NULL
             or recorder.service_study_year = attended.service_study_year
         )
         and (
-            recorder.service_gender is null
-            or attended.service_gender is null
+            recorder.service_gender is NULL
+            or attended.service_gender is NULL
             or recorder.service_gender = attended.service_gender
         )
     union all
@@ -681,8 +681,8 @@ create or replace view auth.users_permissions_by_entity_id (
         'person'::text as entity_type,
         'persons'::name as "table",
         attended_person.id as entity_id,
-        false as allow_edit,
-        false as allow_export,
+        FALSE as allow_edit,
+        FALSE as allow_export,
         recorder.permission_id,
         'Recorder can read servant person through shared group' as hint
     from approved_users_admin_on as recorder
@@ -692,8 +692,8 @@ create or replace view auth.users_permissions_by_entity_id (
             and recorder.uid <> attended.uid
     inner join persons as attended_person on attended.uid = attended_person.uid
     where
-        recorder.admin_on_group is not null
-        and coalesce(recorder.group_allow_record_servants_attendance, false)
+        recorder.admin_on_group is not NULL
+        and COALESCE(recorder.group_allow_record_servants_attendance, FALSE)
 );
 
 
