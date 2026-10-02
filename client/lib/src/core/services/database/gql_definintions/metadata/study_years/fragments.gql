@@ -1,0 +1,4 @@
+fragment StudyYear on StudyYears {
+  order
+  name
+}

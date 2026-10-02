@@ -10,12 +10,10 @@ query classesForService($serviceId: uuid!) {
     serviceStudyYearTo
     serviceGender
     studyYear {
-      order
-      name
+      ...StudyYear
     }
     studyYearTo {
-      order
-      name
+      ...StudyYear
     }
   }
 }
