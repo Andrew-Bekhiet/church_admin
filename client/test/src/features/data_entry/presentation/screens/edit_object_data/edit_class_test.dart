@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years_dao.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -12,14 +13,56 @@ class MockAuthBloc extends Mock implements AuthBloc {}
 
 class MockDatabaseService extends Mock implements DatabaseService {}
 
-class MockImageUrlCacheService extends Mock implements ImageUrlCacheService {}
+class MockMetadataDAO extends Mock implements MetadataDAO {}
 
-class MockClassesDAO extends Mock implements ClassesDAO {}
+class MockImageUrlCacheService extends Mock implements ImageUrlCacheService {}
 
 class MockUserPreferencesService extends Mock
     implements UserPreferencesService {}
 
 class MockViewableObjectService extends Mock implements ViewableObjectService {}
+
+class InMemoryClassesDAO extends Fake implements ClassesDAO {
+  final savedClasses = <Class>[];
+
+  @override
+  Future<Class> createObject({required Class newObject}) async {
+    savedClasses.add(newObject);
+
+    return newObject;
+  }
+
+  @override
+  Future<Class?> updateObject({
+    required Class newObject,
+    required Class oldObject,
+  }) async {
+    savedClasses.add(newObject);
+
+    return newObject;
+  }
+}
+
+class InMemoryStudyYearsDAO extends Fake implements StudyYearsDAO {
+  final List<StudyYear> studyYears;
+
+  @override
+  PaginatableStreamBase<StudyYear> streamAll({
+    Stream<String?>? searchQuery,
+    Stream<List<Filter>>? where,
+    Stream<List<OrderBy>>? orderBy,
+    int? overrideTotalLimit,
+  }) => PaginatableStream.simple(
+    factory: (_) => Stream.value(
+      PaginatableStreamResponse(
+        data: studyYears,
+        totalCount: studyYears.length,
+      ),
+    ),
+  );
+
+  InMemoryStudyYearsDAO(this.studyYears);
+}
 
 void main() {
   final first = StudyYear(order: 1, name: 'أولى');
@@ -35,16 +78,21 @@ void main() {
     studyYearTo: sixth,
   );
 
-  Class class$({required StudyYear from, StudyYear? to}) => Class(
+  late InMemoryClassesDAO classes;
+
+  Class class$({required StudyYear from, required StudyYear? to}) => Class(
     id: 'class-id',
     name: 'فصل',
     service: primary,
     serviceId: primary.id,
     studyYear: from,
     serviceStudyYear: from.order,
-    studyYearTo: to ?? from,
-    serviceStudyYearTo: (to ?? from).order,
+    studyYearTo: to,
+    serviceStudyYearTo: to?.order,
   );
+
+  (int?, int?) studyYearsOf(Class class$) =>
+      (class$.studyYearFromOrder, class$.studyYearToOrder);
 
   Future<void> openEditor(WidgetTester tester, EditClass editor) async {
     await tester.pumpWidget(
@@ -66,6 +114,15 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  Future<void> closeSelectionDialog(WidgetTester tester) async {
+    for (var round = 0; round < 3; round++) {
+      await tester.runAsync(
+        () => Future<void>.delayed(const Duration(milliseconds: 10)),
+      );
+      await tester.pumpAndSettle();
+    }
+  }
+
   Future<void> save(WidgetTester tester) async {
     await tester.tap(find.text('حفظ'));
     await tester.pumpAndSettle();
@@ -81,19 +138,14 @@ void main() {
       ),
     );
 
-    final classesDAO = MockClassesDAO();
-    registerFallbackValue(const Class(id: 'fallback', name: 'fallback'));
-    when(
-      () => classesDAO.updateObject(
-        oldObject: any(named: 'oldObject'),
-        newObject: any(named: 'newObject'),
-      ),
-    ).thenAnswer(
-      (invocation) async => invocation.namedArguments[#newObject] as Class,
+    classes = InMemoryClassesDAO();
+    final metadata = MockMetadataDAO();
+    when(() => metadata.studyYears).thenReturn(
+      InMemoryStudyYearsDAO([first, third, fourth, sixth]),
     );
-
     final databaseService = MockDatabaseService();
-    when(() => databaseService.classes).thenReturn(classesDAO);
+    when(() => databaseService.classes).thenReturn(classes);
+    when(() => databaseService.metadata).thenReturn(metadata);
 
     registerFallbackValue(
       const FunctionsObjectImageInfo('services', 'fallback'),
@@ -126,15 +178,45 @@ void main() {
 
   tearDown(defaultTearDown);
 
-  testWidgets('a renamed single-year class saves and closes the editor', (
+  testWidgets('renaming a class that spans study years keeps its range', (
     tester,
   ) async {
-    await openEditor(tester, EditClass(class$: class$(from: third)));
+    await openEditor(
+      tester,
+      EditClass(
+        class$: class$(from: third, to: fourth),
+      ),
+    );
 
     await tester.enterText(find.byType(TextFormField).first, 'فصل جديد');
     await save(tester);
 
+    final saved = classes.savedClasses.single;
+    expect(saved.name, 'فصل جديد');
+    expect(studyYearsOf(saved), (3, 4));
     expect(find.byType(EditClass), findsNothing);
+  });
+
+  testWidgets('widening a single-year class saves its new study year range', (
+    tester,
+  ) async {
+    await openEditor(
+      tester,
+      EditClass(
+        class$: class$(from: third, to: third),
+      ),
+    );
+
+    final endYearField = find.text(third.name).last;
+    await tester.ensureVisible(endYearField);
+    await tester.pumpAndSettle();
+    await tester.tap(endYearField);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(fourth.name));
+    await closeSelectionDialog(tester);
+    await save(tester);
+
+    expect(studyYearsOf(classes.savedClasses.single), (3, 4));
   });
 
   testWidgets('a class whose study years run backwards is not saved', (
@@ -153,6 +235,7 @@ void main() {
       find.text('السنة الدراسية الأولى لا يمكن أن تكون أكبر من الثانية'),
       findsOneWidget,
     );
+    expect(classes.savedClasses, isEmpty);
   });
 
   testWidgets('a class reaching past its service study years is not saved', (
@@ -171,6 +254,7 @@ void main() {
       find.text('السنة الدراسية يجب ان تكون بين أولى وسادسة'),
       findsOneWidget,
     );
+    expect(classes.savedClasses, isEmpty);
   });
 
   testWidgets('a new class without its study years is not saved', (
@@ -184,5 +268,6 @@ void main() {
     await save(tester);
 
     expect(find.text('برجاء ادخال السنتين الدراسيتين'), findsOneWidget);
+    expect(classes.savedClasses, isEmpty);
   });
 }
