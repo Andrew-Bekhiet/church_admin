@@ -21,6 +21,10 @@ subscription watchAllServices(
         name
         order
       }
+      studyYearTo {
+        name
+        order
+      }
     }
     groups(where: { _and: $groupsWhere }, orderBy: $groupsOrderBy) {
       ...Group

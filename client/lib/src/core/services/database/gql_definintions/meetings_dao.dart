@@ -84,7 +84,8 @@ class MeetingsDAO extends DAOBase<Meeting>
   })
   _classFilters(Class class$) {
     final serviceId = class$.service?.id.toUuid() ?? class$.serviceId?.toUuid();
-    final serviceStudyYear = class$.studyYear?.order ?? class$.serviceStudyYear;
+    final studyYearFrom = class$.studyYearFromOrder;
+    final studyYearTo = class$.studyYearToOrder;
     final serviceGender = class$.serviceGender;
 
     return (
@@ -98,11 +99,12 @@ class MeetingsDAO extends DAOBase<Meeting>
       ],
       demographicsWhere: [
         Input_HistoryMeetingDaysBoolExp(
-          studyYearId: switch (serviceStudyYear) {
-            final serviceStudyYear? => Input_SmallintComparisonExp(
-              $_eq: serviceStudyYear,
+          studyYearId: switch ((studyYearFrom, studyYearTo)) {
+            (final from?, final to?) => Input_SmallintComparisonExp(
+              $_gte: from,
+              $_lte: to,
             ),
-            null => null,
+            _ => null,
           },
           gender: switch (serviceGender) {
             final serviceGender? => Input_BooleanComparisonExp(
@@ -114,11 +116,12 @@ class MeetingsDAO extends DAOBase<Meeting>
       ],
       rosterWhere: [
         Input_HistoryMeetingRosterBoolExp(
-          studyYearId: switch (serviceStudyYear) {
-            final serviceStudyYear? => Input_IntComparisonExp(
-              $_eq: serviceStudyYear,
+          studyYearId: switch ((studyYearFrom, studyYearTo)) {
+            (final from?, final to?) => Input_IntComparisonExp(
+              $_gte: from,
+              $_lte: to,
             ),
-            null => null,
+            _ => null,
           },
           gender: switch (serviceGender) {
             final serviceGender? => Input_BooleanComparisonExp(

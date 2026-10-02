@@ -21,9 +21,11 @@ class ServiceHierarchyClasses extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        for (final MapEntry(key: studyYear, value: classes)
-            in service.classes?.groupListsBy((c) => c.studyYear!).entries ??
-                <StudyYear, List<Class>>{}.entries)
+        for (final MapEntry(key: (studyYear, studyYearTo), value: classes)
+            in service.classes
+                    ?.groupListsBy((c) => (c.studyYear!, c.studyYearToOrder))
+                    .entries ??
+                <(StudyYear, int?), List<Class>>{}.entries)
           if (classes.length > 1)
             Padding(
               padding: EdgeInsets.only(right: animationValue * 20),
@@ -36,9 +38,11 @@ class ServiceHierarchyClasses extends StatelessWidget {
                   Card.outlined(
                     color: ColorScheme.of(context).secondaryContainer,
                     child: ExpansionTile(
-                      key: PageStorageKey(studyYear),
+                      key: PageStorageKey((studyYear, studyYearTo)),
                       title: SessionReplayUnmask(
-                        child: Text(studyYear.name),
+                        child: Text(
+                          classes.first.studyYearRangeName ?? studyYear.name,
+                        ),
                       ),
                       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
                       maintainState: true,
