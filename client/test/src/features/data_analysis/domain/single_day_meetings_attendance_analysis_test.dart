@@ -258,14 +258,10 @@ void main() {
         classes: [wildcard, exact],
       );
 
-      final gradedSlice = subject.classAttendanceRates.firstWhere(
-        (c) => c.studyYearId == 1,
+      expect(
+        subject.classAttendanceRates.map((c) => (c.studyYearId, c.className)),
+        [(1, 'أولى بنين'), (2, 'فصل عام')],
       );
-      final otherSlice = subject.classAttendanceRates.firstWhere(
-        (c) => c.studyYearId == 2,
-      );
-      expect(gradedSlice.className, 'أولى بنين');
-      expect(otherSlice.className, 'فصل عام');
     });
 
     test('a class with null gender matches either gender slice', () {
@@ -299,11 +295,32 @@ void main() {
       );
     });
 
-    test('a slice covered by a single-year and a range class counts toward both', () {
+    test(
+      'a slice covered by a single-year and a range class counts toward both',
+      () {
+        final subject = analysis(
+          rosterMembers: [
+            member('p1', studyYearId: 3, gender: true, attended: true),
+            member('p2', studyYearId: 4, gender: true, attended: true),
+          ],
+          classes: [
+            class$(name: 'كشافة', studyYearOrder: 3, studyYearToOrder: 4),
+            class$(name: 'ثالثة', studyYearOrder: 3),
+          ],
+        );
+
+        expect(
+          subject.classAttendanceRates.map((c) => (c.studyYearId, c.className)),
+          [(3, 'ثالثة'), (3, 'كشافة'), (4, 'كشافة')],
+        );
+      },
+    );
+
+    test("every class covering a slice shows that slice's attendance", () {
       final subject = analysis(
         rosterMembers: [
           member('p1', studyYearId: 3, gender: true, attended: true),
-          member('p2', studyYearId: 4, gender: true, attended: true),
+          member('p2', studyYearId: 3, gender: true),
         ],
         classes: [
           class$(name: 'كشافة', studyYearOrder: 3, studyYearToOrder: 4),
@@ -312,8 +329,70 @@ void main() {
       );
 
       expect(
+        subject.classAttendanceRates.map((c) => (c.className, c.rate)),
+        [('ثالثة', 0.5), ('كشافة', 0.5)],
+      );
+    });
+
+    test('a person in a slice two classes cover is counted once overall', () {
+      final subject = analysis(
+        rosterMembers: [
+          member('p1', studyYearId: 3, gender: true, attended: true),
+          member('p2', studyYearId: 3, gender: true),
+        ],
+        classes: [
+          class$(name: 'كشافة', studyYearOrder: 3, studyYearToOrder: 4),
+          class$(name: 'ثالثة', studyYearOrder: 3),
+        ],
+      );
+
+      expect(
+        (
+          subject.rosterSize,
+          subject.attendedPersonsCount,
+          subject.overallAttendanceRate,
+        ),
+        (2, 1, 0.5),
+      );
+    });
+
+    test('a boys range class leaves girls in its study years unnamed', () {
+      final subject = analysis(
+        rosterMembers: [
+          member('p1', studyYearId: 3, gender: true, attended: true),
+          member('p2', studyYearId: 4, gender: false, attended: true),
+        ],
+        classes: [
+          class$(
+            name: 'كشافة بنين',
+            studyYearOrder: 3,
+            studyYearToOrder: 4,
+            serviceGender: true,
+          ),
+        ],
+      );
+
+      expect(
         subject.classAttendanceRates.map((c) => (c.studyYearId, c.className)),
-        [(3, 'ثالثة'), (3, 'كشافة'), (4, 'كشافة')],
+        [(3, 'كشافة بنين'), (4, null)],
+      );
+    });
+
+    test('a graded range class keeps its slices from a general class', () {
+      final subject = analysis(
+        rosterMembers: [
+          member('p1', studyYearId: 3, gender: true, attended: true),
+          member('p2', studyYearId: 5, gender: true, attended: true),
+        ],
+        classes: [
+          class$(name: 'فصل عام'),
+          class$(name: 'كشافة', studyYearOrder: 3, studyYearToOrder: 4),
+        ],
+      );
+
+      expect(
+        subject.classAttendanceRates.map((c) => (c.studyYearId, c.className)),
+        [(3, 'كشافة'), (5, 'فصل عام')],
       );
     });
 
