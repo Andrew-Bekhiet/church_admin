@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -108,8 +110,8 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
                   );
                 },
               );
-              await search.close();
-              await controller.dispose();
+              unawaited(search.close());
+              unawaited(controller.dispose());
 
               if (rslt == _selectionNewFromSearch) {
                 final customObject = await onCreateCustom?.call(search.value!);
