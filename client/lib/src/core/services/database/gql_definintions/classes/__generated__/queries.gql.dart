@@ -311,6 +311,13 @@ const documentNodeQueryclassesForService = DocumentNode(
                   selectionSet: null,
                 ),
                 FieldNode(
+                  name: NameNode(value: 'serviceStudyYearTo'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
                   name: NameNode(value: 'serviceGender'),
                   alias: null,
                   arguments: [],
@@ -319,6 +326,37 @@ const documentNodeQueryclassesForService = DocumentNode(
                 ),
                 FieldNode(
                   name: NameNode(value: 'studyYear'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'order'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: 'studyYearTo'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -370,8 +408,10 @@ class Query_classesForService_classes {
     required this.name,
     this.color,
     required this.serviceStudyYear,
+    required this.serviceStudyYearTo,
     this.serviceGender,
     required this.studyYear,
+    required this.studyYearTo,
     this.$__typename = 'Classes',
   });
 
@@ -380,17 +420,23 @@ class Query_classesForService_classes {
     final l$name = json['name'];
     final l$color = json['color'];
     final l$serviceStudyYear = json['serviceStudyYear'];
+    final l$serviceStudyYearTo = json['serviceStudyYearTo'];
     final l$serviceGender = json['serviceGender'];
     final l$studyYear = json['studyYear'];
+    final l$studyYearTo = json['studyYearTo'];
     final l$$__typename = json['__typename'];
     return Query_classesForService_classes(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
       serviceStudyYear: (l$serviceStudyYear as int),
+      serviceStudyYearTo: (l$serviceStudyYearTo as int),
       serviceGender: (l$serviceGender as bool?),
       studyYear: Query_classesForService_classes_studyYear.fromJson(
         (l$studyYear as Map<String, dynamic>),
+      ),
+      studyYearTo: Query_classesForService_classes_studyYearTo.fromJson(
+        (l$studyYearTo as Map<String, dynamic>),
       ),
       $__typename: (l$$__typename as String),
     );
@@ -404,9 +450,13 @@ class Query_classesForService_classes {
 
   final int serviceStudyYear;
 
+  final int serviceStudyYearTo;
+
   final bool? serviceGender;
 
   final Query_classesForService_classes_studyYear studyYear;
+
+  final Query_classesForService_classes_studyYearTo studyYearTo;
 
   final String $__typename;
 
@@ -420,10 +470,14 @@ class Query_classesForService_classes {
     _resultData['color'] = l$color;
     final l$serviceStudyYear = serviceStudyYear;
     _resultData['serviceStudyYear'] = l$serviceStudyYear;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    _resultData['serviceStudyYearTo'] = l$serviceStudyYearTo;
     final l$serviceGender = serviceGender;
     _resultData['serviceGender'] = l$serviceGender;
     final l$studyYear = studyYear;
     _resultData['studyYear'] = l$studyYear.toJson();
+    final l$studyYearTo = studyYearTo;
+    _resultData['studyYearTo'] = l$studyYearTo.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -435,16 +489,20 @@ class Query_classesForService_classes {
     final l$name = name;
     final l$color = color;
     final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
     final l$serviceGender = serviceGender;
     final l$studyYear = studyYear;
+    final l$studyYearTo = studyYearTo;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
       l$color,
       l$serviceStudyYear,
+      l$serviceStudyYearTo,
       l$serviceGender,
       l$studyYear,
+      l$studyYearTo,
       l$$__typename,
     ]);
   }
@@ -478,6 +536,11 @@ class Query_classesForService_classes {
     if (l$serviceStudyYear != lOther$serviceStudyYear) {
       return false;
     }
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    final lOther$serviceStudyYearTo = other.serviceStudyYearTo;
+    if (l$serviceStudyYearTo != lOther$serviceStudyYearTo) {
+      return false;
+    }
     final l$serviceGender = serviceGender;
     final lOther$serviceGender = other.serviceGender;
     if (l$serviceGender != lOther$serviceGender) {
@@ -486,6 +549,11 @@ class Query_classesForService_classes {
     final l$studyYear = studyYear;
     final lOther$studyYear = other.studyYear;
     if (l$studyYear != lOther$studyYear) {
+      return false;
+    }
+    final l$studyYearTo = studyYearTo;
+    final lOther$studyYearTo = other.studyYearTo;
+    if (l$studyYearTo != lOther$studyYearTo) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -517,11 +585,14 @@ abstract class CopyWith_Query_classesForService_classes<TRes> {
     String? name,
     int? color,
     int? serviceStudyYear,
+    int? serviceStudyYearTo,
     bool? serviceGender,
     Query_classesForService_classes_studyYear? studyYear,
+    Query_classesForService_classes_studyYearTo? studyYearTo,
     String? $__typename,
   });
   CopyWith_Query_classesForService_classes_studyYear<TRes> get studyYear;
+  CopyWith_Query_classesForService_classes_studyYearTo<TRes> get studyYearTo;
 }
 
 class _CopyWithImpl_Query_classesForService_classes<TRes>
@@ -539,8 +610,10 @@ class _CopyWithImpl_Query_classesForService_classes<TRes>
     Object? name = _undefined,
     Object? color = _undefined,
     Object? serviceStudyYear = _undefined,
+    Object? serviceStudyYearTo = _undefined,
     Object? serviceGender = _undefined,
     Object? studyYear = _undefined,
+    Object? studyYearTo = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Query_classesForService_classes(
@@ -553,12 +626,19 @@ class _CopyWithImpl_Query_classesForService_classes<TRes>
           serviceStudyYear == _undefined || serviceStudyYear == null
           ? _instance.serviceStudyYear
           : (serviceStudyYear as int),
+      serviceStudyYearTo:
+          serviceStudyYearTo == _undefined || serviceStudyYearTo == null
+          ? _instance.serviceStudyYearTo
+          : (serviceStudyYearTo as int),
       serviceGender: serviceGender == _undefined
           ? _instance.serviceGender
           : (serviceGender as bool?),
       studyYear: studyYear == _undefined || studyYear == null
           ? _instance.studyYear
           : (studyYear as Query_classesForService_classes_studyYear),
+      studyYearTo: studyYearTo == _undefined || studyYearTo == null
+          ? _instance.studyYearTo
+          : (studyYearTo as Query_classesForService_classes_studyYearTo),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -570,6 +650,14 @@ class _CopyWithImpl_Query_classesForService_classes<TRes>
     return CopyWith_Query_classesForService_classes_studyYear(
       local$studyYear,
       (e) => call(studyYear: e),
+    );
+  }
+
+  CopyWith_Query_classesForService_classes_studyYearTo<TRes> get studyYearTo {
+    final local$studyYearTo = _instance.studyYearTo;
+    return CopyWith_Query_classesForService_classes_studyYearTo(
+      local$studyYearTo,
+      (e) => call(studyYearTo: e),
     );
   }
 }
@@ -585,13 +673,18 @@ class _CopyWithStubImpl_Query_classesForService_classes<TRes>
     String? name,
     int? color,
     int? serviceStudyYear,
+    int? serviceStudyYearTo,
     bool? serviceGender,
     Query_classesForService_classes_studyYear? studyYear,
+    Query_classesForService_classes_studyYearTo? studyYearTo,
     String? $__typename,
   }) => _res;
 
   CopyWith_Query_classesForService_classes_studyYear<TRes> get studyYear =>
       CopyWith_Query_classesForService_classes_studyYear.stub(_res);
+
+  CopyWith_Query_classesForService_classes_studyYearTo<TRes> get studyYearTo =>
+      CopyWith_Query_classesForService_classes_studyYearTo.stub(_res);
 }
 
 class Query_classesForService_classes_studyYear {
@@ -723,6 +816,141 @@ class _CopyWithImpl_Query_classesForService_classes_studyYear<TRes>
 class _CopyWithStubImpl_Query_classesForService_classes_studyYear<TRes>
     implements CopyWith_Query_classesForService_classes_studyYear<TRes> {
   _CopyWithStubImpl_Query_classesForService_classes_studyYear(this._res);
+
+  TRes _res;
+
+  call({int? order, String? name, String? $__typename}) => _res;
+}
+
+class Query_classesForService_classes_studyYearTo {
+  Query_classesForService_classes_studyYearTo({
+    required this.order,
+    required this.name,
+    this.$__typename = 'StudyYears',
+  });
+
+  factory Query_classesForService_classes_studyYearTo.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$order = json['order'];
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Query_classesForService_classes_studyYearTo(
+      order: (l$order as int),
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int order;
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$order = order;
+    _resultData['order'] = l$order;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$order = order;
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$order, l$name, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_classesForService_classes_studyYearTo ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_classesForService_classes_studyYearTo
+    on Query_classesForService_classes_studyYearTo {
+  CopyWith_Query_classesForService_classes_studyYearTo<
+    Query_classesForService_classes_studyYearTo
+  >
+  get copyWith =>
+      CopyWith_Query_classesForService_classes_studyYearTo(this, (i) => i);
+}
+
+abstract class CopyWith_Query_classesForService_classes_studyYearTo<TRes> {
+  factory CopyWith_Query_classesForService_classes_studyYearTo(
+    Query_classesForService_classes_studyYearTo instance,
+    TRes Function(Query_classesForService_classes_studyYearTo) then,
+  ) = _CopyWithImpl_Query_classesForService_classes_studyYearTo;
+
+  factory CopyWith_Query_classesForService_classes_studyYearTo.stub(TRes res) =
+      _CopyWithStubImpl_Query_classesForService_classes_studyYearTo;
+
+  TRes call({int? order, String? name, String? $__typename});
+}
+
+class _CopyWithImpl_Query_classesForService_classes_studyYearTo<TRes>
+    implements CopyWith_Query_classesForService_classes_studyYearTo<TRes> {
+  _CopyWithImpl_Query_classesForService_classes_studyYearTo(
+    this._instance,
+    this._then,
+  );
+
+  final Query_classesForService_classes_studyYearTo _instance;
+
+  final TRes Function(Query_classesForService_classes_studyYearTo) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? order = _undefined,
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_classesForService_classes_studyYearTo(
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_classesForService_classes_studyYearTo<TRes>
+    implements CopyWith_Query_classesForService_classes_studyYearTo<TRes> {
+  _CopyWithStubImpl_Query_classesForService_classes_studyYearTo(this._res);
 
   TRes _res;
 

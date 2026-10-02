@@ -81,6 +81,19 @@ class _ClassFields {
     },
   );
 
+  final FieldMetadata<StudyYear> studyYearTo = FieldMetadata<StudyYear>(
+    getValue: (obj) => obj is Class ? obj.studyYearTo : null,
+    parentType: Class,
+    name: 'studyYearTo',
+    label: 'السنة الدراسية: إلى',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
   final FieldMetadata<bool> serviceGender = FieldMetadata<bool>(
     getValue: (obj) => obj is Class ? obj.serviceGender : null,
     parentType: Class,
@@ -123,6 +136,54 @@ class _ClassFields {
     isOrderable: false,
   );
 
+  final FieldMetadata<int> studyYearFromOrder = FieldMetadata<int>(
+    getValue: (obj) => obj is Class ? obj.studyYearFromOrder : null,
+    parentType: Class,
+    name: 'studyYearFromOrder',
+    label: 'studyYearFromOrder',
+    isCodeOnly: false,
+    operators: {
+      ...PrimitiveOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
+  final FieldMetadata<int> studyYearToOrder = FieldMetadata<int>(
+    getValue: (obj) => obj is Class ? obj.studyYearToOrder : null,
+    parentType: Class,
+    name: 'studyYearToOrder',
+    label: 'studyYearToOrder',
+    isCodeOnly: false,
+    operators: {
+      ...PrimitiveOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
+  final FieldMetadata<bool> spansStudyYearRange = FieldMetadata<bool>(
+    getValue: (obj) => obj is Class ? obj.spansStudyYearRange : null,
+    parentType: Class,
+    name: 'spansStudyYearRange',
+    label: 'spansStudyYearRange',
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  final FieldMetadata<String> studyYearRangeName = FieldMetadata<String>(
+    getValue: (obj) => obj is Class ? obj.studyYearRangeName : null,
+    parentType: Class,
+    name: 'studyYearRangeName',
+    label: 'studyYearRangeName',
+    isCodeOnly: false,
+    operators: {
+      ...StringOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
   late final List<FieldMetadata<Object>> allFields = [
     id,
     name,
@@ -130,9 +191,14 @@ class _ClassFields {
     photoUpdatedAt,
     service,
     studyYear,
+    studyYearTo,
     serviceGender,
     lastEdit,
     adminUsers,
+    studyYearFromOrder,
+    studyYearToOrder,
+    spansStudyYearRange,
+    studyYearRangeName,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
@@ -141,9 +207,14 @@ class _ClassFields {
     'photoUpdatedAt': photoUpdatedAt,
     'service': service,
     'studyYear': studyYear,
+    'studyYearTo': studyYearTo,
     'serviceGender': serviceGender,
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
+    'studyYearFromOrder': studyYearFromOrder,
+    'studyYearToOrder': studyYearToOrder,
+    'spansStudyYearRange': spansStudyYearRange,
+    'studyYearRangeName': studyYearRangeName,
   };
 
   _ClassFields();
@@ -171,6 +242,12 @@ Class _$ClassFromJson(Map json) => Class(
       ? null
       : StudyYear.fromJson(Map<String, Object?>.from(json['studyYear'] as Map)),
   serviceStudyYear: (json['serviceStudyYear'] as num?)?.toInt(),
+  studyYearTo: json['studyYearTo'] == null
+      ? null
+      : StudyYear.fromJson(
+          Map<String, Object?>.from(json['studyYearTo'] as Map),
+        ),
+  serviceStudyYearTo: (json['serviceStudyYearTo'] as num?)?.toInt(),
   serviceGender: json['serviceGender'] as bool?,
   lastEdit: json['lastEdit'] == null
       ? null
@@ -193,6 +270,8 @@ Map<String, dynamic> _$ClassToJson(Class instance) => <String, dynamic>{
   'serviceId': instance.serviceId,
   'studyYear': instance.studyYear?.toJson(),
   'serviceStudyYear': instance.serviceStudyYear,
+  'studyYearTo': instance.studyYearTo?.toJson(),
+  'serviceStudyYearTo': instance.serviceStudyYearTo,
   'serviceGender': instance.serviceGender,
   'lastEdit': instance.lastEdit?.toJson(),
   'adminUsers': adminUsersToJson(instance.adminUsers),

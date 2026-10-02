@@ -785,6 +785,37 @@ const documentNodeSubscriptionwatchAllServices = DocumentNode(
                         ),
                       ),
                       FieldNode(
+                        name: NameNode(value: 'studyYearTo'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(
+                          selections: [
+                            FieldNode(
+                              name: NameNode(value: 'name'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                            FieldNode(
+                              name: NameNode(value: 'order'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                            FieldNode(
+                              name: NameNode(value: '__typename'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                          ],
+                        ),
+                      ),
+                      FieldNode(
                         name: NameNode(value: '__typename'),
                         alias: null,
                         arguments: [],
@@ -1590,6 +1621,7 @@ class Subscription_watchAllServices_services_classes
     this.photoUpdatedAt,
     this.blurhash,
     required this.studyYear,
+    required this.studyYearTo,
   });
 
   factory Subscription_watchAllServices_services_classes.fromJson(
@@ -1603,6 +1635,7 @@ class Subscription_watchAllServices_services_classes
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
     final l$studyYear = json['studyYear'];
+    final l$studyYearTo = json['studyYearTo'];
     return Subscription_watchAllServices_services_classes(
       id: stringToUuid(l$id),
       name: (l$name as String),
@@ -1616,6 +1649,10 @@ class Subscription_watchAllServices_services_classes
       studyYear:
           Subscription_watchAllServices_services_classes_studyYear.fromJson(
             (l$studyYear as Map<String, dynamic>),
+          ),
+      studyYearTo:
+          Subscription_watchAllServices_services_classes_studyYearTo.fromJson(
+            (l$studyYearTo as Map<String, dynamic>),
           ),
     );
   }
@@ -1635,6 +1672,8 @@ class Subscription_watchAllServices_services_classes
   final String? blurhash;
 
   final Subscription_watchAllServices_services_classes_studyYear studyYear;
+
+  final Subscription_watchAllServices_services_classes_studyYearTo studyYearTo;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -1656,6 +1695,8 @@ class Subscription_watchAllServices_services_classes
     _resultData['blurhash'] = l$blurhash;
     final l$studyYear = studyYear;
     _resultData['studyYear'] = l$studyYear.toJson();
+    final l$studyYearTo = studyYearTo;
+    _resultData['studyYearTo'] = l$studyYearTo.toJson();
     return _resultData;
   }
 
@@ -1669,6 +1710,7 @@ class Subscription_watchAllServices_services_classes
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
     final l$studyYear = studyYear;
+    final l$studyYearTo = studyYearTo;
     return Object.hashAll([
       l$id,
       l$name,
@@ -1678,6 +1720,7 @@ class Subscription_watchAllServices_services_classes
       l$photoUpdatedAt,
       l$blurhash,
       l$studyYear,
+      l$studyYearTo,
     ]);
   }
 
@@ -1730,6 +1773,11 @@ class Subscription_watchAllServices_services_classes
     if (l$studyYear != lOther$studyYear) {
       return false;
     }
+    final l$studyYearTo = studyYearTo;
+    final lOther$studyYearTo = other.studyYearTo;
+    if (l$studyYearTo != lOther$studyYearTo) {
+      return false;
+    }
     return true;
   }
 }
@@ -1762,9 +1810,12 @@ abstract class CopyWith_Subscription_watchAllServices_services_classes<TRes> {
     DateTime? photoUpdatedAt,
     String? blurhash,
     Subscription_watchAllServices_services_classes_studyYear? studyYear,
+    Subscription_watchAllServices_services_classes_studyYearTo? studyYearTo,
   });
   CopyWith_Subscription_watchAllServices_services_classes_studyYear<TRes>
   get studyYear;
+  CopyWith_Subscription_watchAllServices_services_classes_studyYearTo<TRes>
+  get studyYearTo;
 }
 
 class _CopyWithImpl_Subscription_watchAllServices_services_classes<TRes>
@@ -1789,6 +1840,7 @@ class _CopyWithImpl_Subscription_watchAllServices_services_classes<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
     Object? studyYear = _undefined,
+    Object? studyYearTo = _undefined,
   }) => _then(
     Subscription_watchAllServices_services_classes(
       id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
@@ -1812,6 +1864,10 @@ class _CopyWithImpl_Subscription_watchAllServices_services_classes<TRes>
           ? _instance.studyYear
           : (studyYear
                 as Subscription_watchAllServices_services_classes_studyYear),
+      studyYearTo: studyYearTo == _undefined || studyYearTo == null
+          ? _instance.studyYearTo
+          : (studyYearTo
+                as Subscription_watchAllServices_services_classes_studyYearTo),
     ),
   );
 
@@ -1821,6 +1877,15 @@ class _CopyWithImpl_Subscription_watchAllServices_services_classes<TRes>
     return CopyWith_Subscription_watchAllServices_services_classes_studyYear(
       local$studyYear,
       (e) => call(studyYear: e),
+    );
+  }
+
+  CopyWith_Subscription_watchAllServices_services_classes_studyYearTo<TRes>
+  get studyYearTo {
+    final local$studyYearTo = _instance.studyYearTo;
+    return CopyWith_Subscription_watchAllServices_services_classes_studyYearTo(
+      local$studyYearTo,
+      (e) => call(studyYearTo: e),
     );
   }
 }
@@ -1840,11 +1905,18 @@ class _CopyWithStubImpl_Subscription_watchAllServices_services_classes<TRes>
     DateTime? photoUpdatedAt,
     String? blurhash,
     Subscription_watchAllServices_services_classes_studyYear? studyYear,
+    Subscription_watchAllServices_services_classes_studyYearTo? studyYearTo,
   }) => _res;
 
   CopyWith_Subscription_watchAllServices_services_classes_studyYear<TRes>
   get studyYear =>
       CopyWith_Subscription_watchAllServices_services_classes_studyYear.stub(
+        _res,
+      );
+
+  CopyWith_Subscription_watchAllServices_services_classes_studyYearTo<TRes>
+  get studyYearTo =>
+      CopyWith_Subscription_watchAllServices_services_classes_studyYearTo.stub(
         _res,
       );
 }
@@ -1996,6 +2068,163 @@ class _CopyWithStubImpl_Subscription_watchAllServices_services_classes_studyYear
           TRes
         > {
   _CopyWithStubImpl_Subscription_watchAllServices_services_classes_studyYear(
+    this._res,
+  );
+
+  TRes _res;
+
+  call({String? name, int? order, String? $__typename}) => _res;
+}
+
+class Subscription_watchAllServices_services_classes_studyYearTo {
+  Subscription_watchAllServices_services_classes_studyYearTo({
+    required this.name,
+    required this.order,
+    this.$__typename = 'StudyYears',
+  });
+
+  factory Subscription_watchAllServices_services_classes_studyYearTo.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$name = json['name'];
+    final l$order = json['order'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchAllServices_services_classes_studyYearTo(
+      name: (l$name as String),
+      order: (l$order as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String name;
+
+  final int order;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$order = order;
+    _resultData['order'] = l$order;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$order = order;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$name, l$order, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchAllServices_services_classes_studyYearTo ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchAllServices_services_classes_studyYearTo
+    on Subscription_watchAllServices_services_classes_studyYearTo {
+  CopyWith_Subscription_watchAllServices_services_classes_studyYearTo<
+    Subscription_watchAllServices_services_classes_studyYearTo
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchAllServices_services_classes_studyYearTo(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith_Subscription_watchAllServices_services_classes_studyYearTo<
+  TRes
+> {
+  factory CopyWith_Subscription_watchAllServices_services_classes_studyYearTo(
+    Subscription_watchAllServices_services_classes_studyYearTo instance,
+    TRes Function(Subscription_watchAllServices_services_classes_studyYearTo)
+    then,
+  ) = _CopyWithImpl_Subscription_watchAllServices_services_classes_studyYearTo;
+
+  factory CopyWith_Subscription_watchAllServices_services_classes_studyYearTo.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchAllServices_services_classes_studyYearTo;
+
+  TRes call({String? name, int? order, String? $__typename});
+}
+
+class _CopyWithImpl_Subscription_watchAllServices_services_classes_studyYearTo<
+  TRes
+>
+    implements
+        CopyWith_Subscription_watchAllServices_services_classes_studyYearTo<
+          TRes
+        > {
+  _CopyWithImpl_Subscription_watchAllServices_services_classes_studyYearTo(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchAllServices_services_classes_studyYearTo _instance;
+
+  final TRes Function(
+    Subscription_watchAllServices_services_classes_studyYearTo,
+  )
+  _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? order = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Subscription_watchAllServices_services_classes_studyYearTo(
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Subscription_watchAllServices_services_classes_studyYearTo<
+  TRes
+>
+    implements
+        CopyWith_Subscription_watchAllServices_services_classes_studyYearTo<
+          TRes
+        > {
+  _CopyWithStubImpl_Subscription_watchAllServices_services_classes_studyYearTo(
     this._res,
   );
 

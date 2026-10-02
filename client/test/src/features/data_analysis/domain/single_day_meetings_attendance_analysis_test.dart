@@ -28,12 +28,14 @@ void main() {
     required String name,
     Color? color,
     int? studyYearOrder,
+    int? studyYearToOrder,
     bool? serviceGender,
   }) => Class(
     id: name,
     name: name,
     color: color,
     serviceStudyYear: studyYearOrder,
+    serviceStudyYearTo: studyYearToOrder,
     serviceGender: serviceGender,
     studyYear: studyYearOrder == null
         ? null
@@ -277,6 +279,42 @@ void main() {
       );
 
       expect(subject.classAttendanceRates.single.className, 'مختلط');
+    });
+
+    test('a range class names every slice its study years cover', () {
+      final subject = analysis(
+        rosterMembers: [
+          member('p1', studyYearId: 3, gender: true, attended: true),
+          member('p2', studyYearId: 4, gender: false, attended: true),
+          member('p3', studyYearId: 5, gender: true, attended: true),
+        ],
+        classes: [
+          class$(name: 'كشافة', studyYearOrder: 3, studyYearToOrder: 4),
+        ],
+      );
+
+      expect(
+        subject.classAttendanceRates.map((c) => (c.studyYearId, c.className)),
+        [(3, 'كشافة'), (4, 'كشافة'), (5, null)],
+      );
+    });
+
+    test('a single-year class beats a range class covering its slice', () {
+      final subject = analysis(
+        rosterMembers: [
+          member('p1', studyYearId: 3, gender: true, attended: true),
+          member('p2', studyYearId: 4, gender: true, attended: true),
+        ],
+        classes: [
+          class$(name: 'كشافة', studyYearOrder: 3, studyYearToOrder: 4),
+          class$(name: 'ثالثة', studyYearOrder: 3),
+        ],
+      );
+
+      expect(
+        subject.classAttendanceRates.map((c) => (c.studyYearId, c.className)),
+        [(3, 'ثالثة'), (4, 'كشافة')],
+      );
     });
 
     test('falls back to grade/gender label when no class matches', () {

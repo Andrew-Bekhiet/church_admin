@@ -27,10 +27,17 @@ class _EditClassState extends State<EditClass> {
   void initState() {
     super.initState();
 
-    final Class? oldClass = widget.class$?.copyWith(
-      serviceId: widget.withService?.id,
-      serviceStudyYear: widget.class$?.studyYear?.order,
-    );
+    final Class? oldClass = switch (widget.class$) {
+      final class$? => class$.copyWith(
+        serviceId: widget.withService?.id,
+        serviceStudyYear: class$.studyYearFromOrder,
+        studyYearTo: class$.spansStudyYearRange ? class$.studyYearTo : null,
+        serviceStudyYearTo: class$.spansStudyYearRange
+            ? class$.studyYearToOrder
+            : null,
+      ),
+      null => null,
+    };
 
     _controller = EditObjectController(
       afterCreate: (object) => ViewClassRoute(
@@ -103,32 +110,45 @@ class _EditClassState extends State<EditClass> {
               null => null,
             },
           ),
-          ObjectSelectionField<StudyYear, StudyYear?>(
-            initialValue: newClass.studyYear,
-            listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream: DatabaseService.I.metadata.studyYears
-                  .streamAll(searchQuery: s),
+          StudyYearRangeField(
+            label: 'السنوات الدراسية',
+            initialValue: StudyYearRange(
+              from: newClass.studyYear,
+              to: newClass.studyYearTo,
             ),
-            dialogFieldLabel: 'السنة الدراسية',
             onChanged: (value) => newClass = newClass.copyWith(
-              studyYear: value,
-              serviceStudyYear: value?.order,
+              studyYear: value?.from,
+              serviceStudyYear: value?.from?.order,
+              studyYearTo: value?.to,
+              serviceStudyYearTo: value?.to?.order,
             ),
-            builder: (context, state) => switch (state.value) {
-              final studyYear? => Text(studyYear.name),
-              null => null,
-            },
-            validator: (value) {
-              if (value == null) {
-                return 'يجب اختيار السنة الدراسية';
-              } else if (newClass.service != null &&
-                  (value.order < newClass.service!.studyYearFrom!.order ||
-                      value.order > newClass.service!.studyYearTo!.order)) {
-                return 'السنة الدراسية يجب ان تكون بين '
-                    '${newClass.service!.studyYearFrom!.name} و${newClass.service!.studyYearTo!.name}';
-              }
+            validator: (value) => switch ((value, newClass.service)) {
+              (null || StudyYearRange(from: null), _) =>
+                'يجب اختيار السنة الدراسية',
 
-              return null;
+              (
+                StudyYearRange(
+                  from: StudyYear(order: final from),
+                  to: StudyYear(order: final to),
+                ),
+                _,
+              )
+                  when from > to =>
+                'السنة الدراسية الأولى لا يمكن أن تكون أكبر من الثانية',
+
+              (
+                StudyYearRange(:final from?, :final to),
+                Service(
+                  studyYearFrom: final serviceFrom?,
+                  studyYearTo: final serviceTo?,
+                ),
+              )
+                  when from.order < serviceFrom.order ||
+                      (to ?? from).order > serviceTo.order =>
+                'السنة الدراسية يجب ان تكون بين '
+                    '${serviceFrom.name} و${serviceTo.name}',
+
+              _ => null,
             },
           ),
           ColorField(

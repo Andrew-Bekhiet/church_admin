@@ -30,6 +30,10 @@ subscription watchClass($id: uuid!) {
       order
       name
     }
+    studyYearTo {
+      order
+      name
+    }
     adminUsers(distinctOn: uid) {
       user {
         ...User

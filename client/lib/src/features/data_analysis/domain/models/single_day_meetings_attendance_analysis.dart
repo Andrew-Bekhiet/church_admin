@@ -10,18 +10,27 @@ import 'package:collection/collection.dart';
 /// Counting is person-grained: a person who attends two meetings, or as both
 /// servant and member, is a single attendee — so every rate stays `<= 100%`.
 class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
-  /// Null when [class$] doesn't match the slice at all; otherwise the number
-  /// of fields matched exactly rather than through a null wildcard.
+  /// Null when [class$] doesn't match the slice at all. Otherwise each field
+  /// scores 2 for an exact match, 1 for a study year range covering the slice
+  /// and 0 for a null wildcard.
   static int? _matchSpecificity(Class class$, int? studyYearId, bool? gender) {
-    final studyYearScore = switch (class$.studyYear?.order ??
-        class$.serviceStudyYear) {
-      null => 0,
-      final classStudyYear when classStudyYear == studyYearId => 1,
+    final studyYearScore = switch ((
+      class$.studyYearFromOrder,
+      class$.studyYearToOrder,
+    )) {
+      (null, _) || (_, null) => 0,
+      (final from?, final to?) when from == studyYearId && to == studyYearId =>
+        2,
+      (final from?, final to?)
+          when studyYearId != null &&
+              from <= studyYearId &&
+              studyYearId <= to =>
+        1,
       _ => null,
     };
     final genderScore = switch (class$.serviceGender) {
       null => 0,
-      final classGender when classGender == gender => 1,
+      final classGender when classGender == gender => 2,
       _ => null,
     };
 

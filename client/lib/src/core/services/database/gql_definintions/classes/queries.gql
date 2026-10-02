@@ -7,8 +7,13 @@ query classesForService($serviceId: uuid!) {
     name
     color
     serviceStudyYear
+    serviceStudyYearTo
     serviceGender
     studyYear {
+      order
+      name
+    }
+    studyYearTo {
       order
       name
     }
