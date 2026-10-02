@@ -65,3 +65,4 @@ part "schema_part61.dart";
 part "schema_part62.dart";
 part "schema_part63.dart";
 part "schema_part64.dart";
+part "schema_part65.dart";

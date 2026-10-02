@@ -1,6 +1,504 @@
 // Part 35 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
+  factory CopyWith_Input_HistoryMeetingsBoolExp(
+    Input_HistoryMeetingsBoolExp instance,
+    TRes Function(Input_HistoryMeetingsBoolExp) then,
+  ) = _CopyWithImpl_Input_HistoryMeetingsBoolExp;
+
+  factory CopyWith_Input_HistoryMeetingsBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryMeetingsBoolExp;
+
+  TRes call({
+    List<Input_HistoryMeetingsBoolExp>? $_and,
+    Input_HistoryMeetingsBoolExp? $_not,
+    List<Input_HistoryMeetingsBoolExp>? $_or,
+    Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
+    Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_MeetingAudienceComparisonExp? audience,
+    Input_BigintComparisonExp? color,
+    Input_HistoryMeetingDaysBoolExp? days,
+    Input_HistoryMeetingDaysAggregateBoolExp? daysAggregate,
+    Input_GroupsBoolExp? group,
+    Input_UuidComparisonExp? groupId,
+    Input_UuidComparisonExp? id,
+    Input_BooleanComparisonExp? isArchived,
+    Input_StringComparisonExp? name,
+    Input_ServicesBoolExp? service,
+    Input_BooleanComparisonExp? serviceGender,
+    Input_UuidComparisonExp? serviceId,
+    Input_IntComparisonExp? serviceStudyYear,
+    Input_BooleanComparisonExp? showKodasCheckbox,
+    Input_StudyYearsBoolExp? studyYear,
+  });
+  TRes $_and(
+    Iterable<Input_HistoryMeetingsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_HistoryMeetingsBoolExp<Input_HistoryMeetingsBoolExp>
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_HistoryMeetingsBoolExp<TRes> get $_not;
+  TRes $_or(
+    Iterable<Input_HistoryMeetingsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_HistoryMeetingsBoolExp<Input_HistoryMeetingsBoolExp>
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory;
+  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
+  get attendanceHistoryAggregate;
+  CopyWith_Input_MeetingAudienceComparisonExp<TRes> get audience;
+  CopyWith_Input_BigintComparisonExp<TRes> get color;
+  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get days;
+  CopyWith_Input_HistoryMeetingDaysAggregateBoolExp<TRes> get daysAggregate;
+  CopyWith_Input_GroupsBoolExp<TRes> get group;
+  CopyWith_Input_UuidComparisonExp<TRes> get groupId;
+  CopyWith_Input_UuidComparisonExp<TRes> get id;
+  CopyWith_Input_BooleanComparisonExp<TRes> get isArchived;
+  CopyWith_Input_StringComparisonExp<TRes> get name;
+  CopyWith_Input_ServicesBoolExp<TRes> get service;
+  CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender;
+  CopyWith_Input_UuidComparisonExp<TRes> get serviceId;
+  CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear;
+  CopyWith_Input_BooleanComparisonExp<TRes> get showKodasCheckbox;
+  CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear;
+}
+
+class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
+    implements CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
+  _CopyWithImpl_Input_HistoryMeetingsBoolExp(this._instance, this._then);
+
+  final Input_HistoryMeetingsBoolExp _instance;
+
+  final TRes Function(Input_HistoryMeetingsBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? attendanceHistory = _undefined,
+    Object? attendanceHistoryAggregate = _undefined,
+    Object? audience = _undefined,
+    Object? color = _undefined,
+    Object? days = _undefined,
+    Object? daysAggregate = _undefined,
+    Object? group = _undefined,
+    Object? groupId = _undefined,
+    Object? id = _undefined,
+    Object? isArchived = _undefined,
+    Object? name = _undefined,
+    Object? service = _undefined,
+    Object? serviceGender = _undefined,
+    Object? serviceId = _undefined,
+    Object? serviceStudyYear = _undefined,
+    Object? showKodasCheckbox = _undefined,
+    Object? studyYear = _undefined,
+  }) => _then(
+    Input_HistoryMeetingsBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined)
+        '_and': ($_and as List<Input_HistoryMeetingsBoolExp>?),
+      if ($_not != _undefined) '_not': ($_not as Input_HistoryMeetingsBoolExp?),
+      if ($_or != _undefined)
+        '_or': ($_or as List<Input_HistoryMeetingsBoolExp>?),
+      if (attendanceHistory != _undefined)
+        'attendanceHistory':
+            (attendanceHistory as Input_HistoryAttendanceHistoryBoolExp?),
+      if (attendanceHistoryAggregate != _undefined)
+        'attendanceHistoryAggregate':
+            (attendanceHistoryAggregate
+                as Input_HistoryAttendanceHistoryAggregateBoolExp?),
+      if (audience != _undefined)
+        'audience': (audience as Input_MeetingAudienceComparisonExp?),
+      if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
+      if (days != _undefined)
+        'days': (days as Input_HistoryMeetingDaysBoolExp?),
+      if (daysAggregate != _undefined)
+        'daysAggregate':
+            (daysAggregate as Input_HistoryMeetingDaysAggregateBoolExp?),
+      if (group != _undefined) 'group': (group as Input_GroupsBoolExp?),
+      if (groupId != _undefined)
+        'groupId': (groupId as Input_UuidComparisonExp?),
+      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
+      if (isArchived != _undefined)
+        'isArchived': (isArchived as Input_BooleanComparisonExp?),
+      if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
+      if (service != _undefined) 'service': (service as Input_ServicesBoolExp?),
+      if (serviceGender != _undefined)
+        'serviceGender': (serviceGender as Input_BooleanComparisonExp?),
+      if (serviceId != _undefined)
+        'serviceId': (serviceId as Input_UuidComparisonExp?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Input_IntComparisonExp?),
+      if (showKodasCheckbox != _undefined)
+        'showKodasCheckbox': (showKodasCheckbox as Input_BooleanComparisonExp?),
+      if (studyYear != _undefined)
+        'studyYear': (studyYear as Input_StudyYearsBoolExp?),
+    }),
+  );
+
+  TRes $_and(
+    Iterable<Input_HistoryMeetingsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_HistoryMeetingsBoolExp<Input_HistoryMeetingsBoolExp>
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map(
+        (e) => CopyWith_Input_HistoryMeetingsBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_HistoryMeetingsBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_HistoryMeetingsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingsBoolExp(
+            local$$_not,
+            (e) => call($_not: e),
+          );
+  }
+
+  TRes $_or(
+    Iterable<Input_HistoryMeetingsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_HistoryMeetingsBoolExp<Input_HistoryMeetingsBoolExp>
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map(
+        (e) => CopyWith_Input_HistoryMeetingsBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory {
+    final local$attendanceHistory = _instance.attendanceHistory;
+    return local$attendanceHistory == null
+        ? CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryAttendanceHistoryBoolExp(
+            local$attendanceHistory,
+            (e) => call(attendanceHistory: e),
+          );
+  }
+
+  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
+  get attendanceHistoryAggregate {
+    final local$attendanceHistoryAggregate =
+        _instance.attendanceHistoryAggregate;
+    return local$attendanceHistoryAggregate == null
+        ? CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp(
+            local$attendanceHistoryAggregate,
+            (e) => call(attendanceHistoryAggregate: e),
+          );
+  }
+
+  CopyWith_Input_MeetingAudienceComparisonExp<TRes> get audience {
+    final local$audience = _instance.audience;
+    return local$audience == null
+        ? CopyWith_Input_MeetingAudienceComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_MeetingAudienceComparisonExp(
+            local$audience,
+            (e) => call(audience: e),
+          );
+  }
+
+  CopyWith_Input_BigintComparisonExp<TRes> get color {
+    final local$color = _instance.color;
+    return local$color == null
+        ? CopyWith_Input_BigintComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BigintComparisonExp(
+            local$color,
+            (e) => call(color: e),
+          );
+  }
+
+  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get days {
+    final local$days = _instance.days;
+    return local$days == null
+        ? CopyWith_Input_HistoryMeetingDaysBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingDaysBoolExp(
+            local$days,
+            (e) => call(days: e),
+          );
+  }
+
+  CopyWith_Input_HistoryMeetingDaysAggregateBoolExp<TRes> get daysAggregate {
+    final local$daysAggregate = _instance.daysAggregate;
+    return local$daysAggregate == null
+        ? CopyWith_Input_HistoryMeetingDaysAggregateBoolExp.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_HistoryMeetingDaysAggregateBoolExp(
+            local$daysAggregate,
+            (e) => call(daysAggregate: e),
+          );
+  }
+
+  CopyWith_Input_GroupsBoolExp<TRes> get group {
+    final local$group = _instance.group;
+    return local$group == null
+        ? CopyWith_Input_GroupsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_GroupsBoolExp(local$group, (e) => call(group: e));
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get groupId {
+    final local$groupId = _instance.groupId;
+    return local$groupId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$groupId,
+            (e) => call(groupId: e),
+          );
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get isArchived {
+    final local$isArchived = _instance.isArchived;
+    return local$isArchived == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$isArchived,
+            (e) => call(isArchived: e),
+          );
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get name {
+    final local$name = _instance.name;
+    return local$name == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
+  }
+
+  CopyWith_Input_ServicesBoolExp<TRes> get service {
+    final local$service = _instance.service;
+    return local$service == null
+        ? CopyWith_Input_ServicesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ServicesBoolExp(
+            local$service,
+            (e) => call(service: e),
+          );
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender {
+    final local$serviceGender = _instance.serviceGender;
+    return local$serviceGender == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$serviceGender,
+            (e) => call(serviceGender: e),
+          );
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get serviceId {
+    final local$serviceId = _instance.serviceId;
+    return local$serviceId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$serviceId,
+            (e) => call(serviceId: e),
+          );
+  }
+
+  CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear {
+    final local$serviceStudyYear = _instance.serviceStudyYear;
+    return local$serviceStudyYear == null
+        ? CopyWith_Input_IntComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_IntComparisonExp(
+            local$serviceStudyYear,
+            (e) => call(serviceStudyYear: e),
+          );
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get showKodasCheckbox {
+    final local$showKodasCheckbox = _instance.showKodasCheckbox;
+    return local$showKodasCheckbox == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$showKodasCheckbox,
+            (e) => call(showKodasCheckbox: e),
+          );
+  }
+
+  CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear {
+    final local$studyYear = _instance.studyYear;
+    return local$studyYear == null
+        ? CopyWith_Input_StudyYearsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_StudyYearsBoolExp(
+            local$studyYear,
+            (e) => call(studyYear: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
+    implements CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
+  _CopyWithStubImpl_Input_HistoryMeetingsBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_HistoryMeetingsBoolExp>? $_and,
+    Input_HistoryMeetingsBoolExp? $_not,
+    List<Input_HistoryMeetingsBoolExp>? $_or,
+    Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
+    Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_MeetingAudienceComparisonExp? audience,
+    Input_BigintComparisonExp? color,
+    Input_HistoryMeetingDaysBoolExp? days,
+    Input_HistoryMeetingDaysAggregateBoolExp? daysAggregate,
+    Input_GroupsBoolExp? group,
+    Input_UuidComparisonExp? groupId,
+    Input_UuidComparisonExp? id,
+    Input_BooleanComparisonExp? isArchived,
+    Input_StringComparisonExp? name,
+    Input_ServicesBoolExp? service,
+    Input_BooleanComparisonExp? serviceGender,
+    Input_UuidComparisonExp? serviceId,
+    Input_IntComparisonExp? serviceStudyYear,
+    Input_BooleanComparisonExp? showKodasCheckbox,
+    Input_StudyYearsBoolExp? studyYear,
+  }) => _res;
+
+  $_and(_fn) => _res;
+
+  CopyWith_Input_HistoryMeetingsBoolExp<TRes> get $_not =>
+      CopyWith_Input_HistoryMeetingsBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory =>
+      CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
+  get attendanceHistoryAggregate =>
+      CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_MeetingAudienceComparisonExp<TRes> get audience =>
+      CopyWith_Input_MeetingAudienceComparisonExp.stub(_res);
+
+  CopyWith_Input_BigintComparisonExp<TRes> get color =>
+      CopyWith_Input_BigintComparisonExp.stub(_res);
+
+  CopyWith_Input_HistoryMeetingDaysBoolExp<TRes> get days =>
+      CopyWith_Input_HistoryMeetingDaysBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryMeetingDaysAggregateBoolExp<TRes> get daysAggregate =>
+      CopyWith_Input_HistoryMeetingDaysAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_GroupsBoolExp<TRes> get group =>
+      CopyWith_Input_GroupsBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get groupId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get isArchived =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get name =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_ServicesBoolExp<TRes> get service =>
+      CopyWith_Input_ServicesBoolExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get serviceId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear =>
+      CopyWith_Input_IntComparisonExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get showKodasCheckbox =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+
+  CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear =>
+      CopyWith_Input_StudyYearsBoolExp.stub(_res);
+}
+
+class Input_HistoryMeetingsIncInput {
+  factory Input_HistoryMeetingsIncInput({int? color}) =>
+      Input_HistoryMeetingsIncInput._({if (color != null) r'color': color});
+
+  Input_HistoryMeetingsIncInput._(this._$data);
+
+  factory Input_HistoryMeetingsIncInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    return Input_HistoryMeetingsIncInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  int? get color => (_$data['color'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryMeetingsIncInput<Input_HistoryMeetingsIncInput>
+  get copyWith => CopyWith_Input_HistoryMeetingsIncInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryMeetingsIncInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$color = color;
+    return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
+  }
+}
+
 abstract class CopyWith_Input_HistoryMeetingsIncInput<TRes> {
   factory CopyWith_Input_HistoryMeetingsIncInput(
     Input_HistoryMeetingsIncInput instance,
@@ -2003,564 +2501,4 @@ abstract class CopyWith_Input_HistoryMeetingsOrderBy<TRes> {
   CopyWith_Input_GroupsOrderBy<TRes> get group;
   CopyWith_Input_ServicesOrderBy<TRes> get service;
   CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear;
-}
-
-class _CopyWithImpl_Input_HistoryMeetingsOrderBy<TRes>
-    implements CopyWith_Input_HistoryMeetingsOrderBy<TRes> {
-  _CopyWithImpl_Input_HistoryMeetingsOrderBy(this._instance, this._then);
-
-  final Input_HistoryMeetingsOrderBy _instance;
-
-  final TRes Function(Input_HistoryMeetingsOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? attendanceHistoryAggregate = _undefined,
-    Object? audience = _undefined,
-    Object? color = _undefined,
-    Object? daysAggregate = _undefined,
-    Object? group = _undefined,
-    Object? groupId = _undefined,
-    Object? id = _undefined,
-    Object? isArchived = _undefined,
-    Object? name = _undefined,
-    Object? service = _undefined,
-    Object? serviceGender = _undefined,
-    Object? serviceId = _undefined,
-    Object? serviceStudyYear = _undefined,
-    Object? showKodasCheckbox = _undefined,
-    Object? studyYear = _undefined,
-  }) => _then(
-    Input_HistoryMeetingsOrderBy._({
-      ..._instance._$data,
-      if (attendanceHistoryAggregate != _undefined)
-        'attendanceHistoryAggregate':
-            (attendanceHistoryAggregate
-                as Input_HistoryAttendanceHistoryAggregateOrderBy?),
-      if (audience != _undefined) 'audience': (audience as Enum_OrderBy?),
-      if (color != _undefined) 'color': (color as Enum_OrderBy?),
-      if (daysAggregate != _undefined)
-        'daysAggregate':
-            (daysAggregate as Input_HistoryMeetingDaysAggregateOrderBy?),
-      if (group != _undefined) 'group': (group as Input_GroupsOrderBy?),
-      if (groupId != _undefined) 'groupId': (groupId as Enum_OrderBy?),
-      if (id != _undefined) 'id': (id as Enum_OrderBy?),
-      if (isArchived != _undefined) 'isArchived': (isArchived as Enum_OrderBy?),
-      if (name != _undefined) 'name': (name as Enum_OrderBy?),
-      if (service != _undefined) 'service': (service as Input_ServicesOrderBy?),
-      if (serviceGender != _undefined)
-        'serviceGender': (serviceGender as Enum_OrderBy?),
-      if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
-      if (serviceStudyYear != _undefined)
-        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-      if (showKodasCheckbox != _undefined)
-        'showKodasCheckbox': (showKodasCheckbox as Enum_OrderBy?),
-      if (studyYear != _undefined)
-        'studyYear': (studyYear as Input_StudyYearsOrderBy?),
-    }),
-  );
-
-  CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
-  get attendanceHistoryAggregate {
-    final local$attendanceHistoryAggregate =
-        _instance.attendanceHistoryAggregate;
-    return local$attendanceHistoryAggregate == null
-        ? CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy(
-            local$attendanceHistoryAggregate,
-            (e) => call(attendanceHistoryAggregate: e),
-          );
-  }
-
-  CopyWith_Input_HistoryMeetingDaysAggregateOrderBy<TRes> get daysAggregate {
-    final local$daysAggregate = _instance.daysAggregate;
-    return local$daysAggregate == null
-        ? CopyWith_Input_HistoryMeetingDaysAggregateOrderBy.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryMeetingDaysAggregateOrderBy(
-            local$daysAggregate,
-            (e) => call(daysAggregate: e),
-          );
-  }
-
-  CopyWith_Input_GroupsOrderBy<TRes> get group {
-    final local$group = _instance.group;
-    return local$group == null
-        ? CopyWith_Input_GroupsOrderBy.stub(_then(_instance))
-        : CopyWith_Input_GroupsOrderBy(local$group, (e) => call(group: e));
-  }
-
-  CopyWith_Input_ServicesOrderBy<TRes> get service {
-    final local$service = _instance.service;
-    return local$service == null
-        ? CopyWith_Input_ServicesOrderBy.stub(_then(_instance))
-        : CopyWith_Input_ServicesOrderBy(
-            local$service,
-            (e) => call(service: e),
-          );
-  }
-
-  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear {
-    final local$studyYear = _instance.studyYear;
-    return local$studyYear == null
-        ? CopyWith_Input_StudyYearsOrderBy.stub(_then(_instance))
-        : CopyWith_Input_StudyYearsOrderBy(
-            local$studyYear,
-            (e) => call(studyYear: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_HistoryMeetingsOrderBy<TRes>
-    implements CopyWith_Input_HistoryMeetingsOrderBy<TRes> {
-  _CopyWithStubImpl_Input_HistoryMeetingsOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
-    Enum_OrderBy? audience,
-    Enum_OrderBy? color,
-    Input_HistoryMeetingDaysAggregateOrderBy? daysAggregate,
-    Input_GroupsOrderBy? group,
-    Enum_OrderBy? groupId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? isArchived,
-    Enum_OrderBy? name,
-    Input_ServicesOrderBy? service,
-    Enum_OrderBy? serviceGender,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? serviceStudyYear,
-    Enum_OrderBy? showKodasCheckbox,
-    Input_StudyYearsOrderBy? studyYear,
-  }) => _res;
-
-  CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
-  get attendanceHistoryAggregate =>
-      CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryMeetingDaysAggregateOrderBy<TRes> get daysAggregate =>
-      CopyWith_Input_HistoryMeetingDaysAggregateOrderBy.stub(_res);
-
-  CopyWith_Input_GroupsOrderBy<TRes> get group =>
-      CopyWith_Input_GroupsOrderBy.stub(_res);
-
-  CopyWith_Input_ServicesOrderBy<TRes> get service =>
-      CopyWith_Input_ServicesOrderBy.stub(_res);
-
-  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear =>
-      CopyWith_Input_StudyYearsOrderBy.stub(_res);
-}
-
-class Input_HistoryMeetingsPkColumnsInput {
-  factory Input_HistoryMeetingsPkColumnsInput({required UuidValue id}) =>
-      Input_HistoryMeetingsPkColumnsInput._({r'id': id});
-
-  Input_HistoryMeetingsPkColumnsInput._(this._$data);
-
-  factory Input_HistoryMeetingsPkColumnsInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$id = data['id'];
-    result$data['id'] = stringToUuid(l$id);
-    return Input_HistoryMeetingsPkColumnsInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  UuidValue get id => (_$data['id'] as UuidValue);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$id = id;
-    result$data['id'] = uuidToString(l$id);
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryMeetingsPkColumnsInput<
-    Input_HistoryMeetingsPkColumnsInput
-  >
-  get copyWith => CopyWith_Input_HistoryMeetingsPkColumnsInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryMeetingsPkColumnsInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    return Object.hashAll([l$id]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryMeetingsPkColumnsInput<TRes> {
-  factory CopyWith_Input_HistoryMeetingsPkColumnsInput(
-    Input_HistoryMeetingsPkColumnsInput instance,
-    TRes Function(Input_HistoryMeetingsPkColumnsInput) then,
-  ) = _CopyWithImpl_Input_HistoryMeetingsPkColumnsInput;
-
-  factory CopyWith_Input_HistoryMeetingsPkColumnsInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryMeetingsPkColumnsInput;
-
-  TRes call({UuidValue? id});
-}
-
-class _CopyWithImpl_Input_HistoryMeetingsPkColumnsInput<TRes>
-    implements CopyWith_Input_HistoryMeetingsPkColumnsInput<TRes> {
-  _CopyWithImpl_Input_HistoryMeetingsPkColumnsInput(this._instance, this._then);
-
-  final Input_HistoryMeetingsPkColumnsInput _instance;
-
-  final TRes Function(Input_HistoryMeetingsPkColumnsInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? id = _undefined}) => _then(
-    Input_HistoryMeetingsPkColumnsInput._({
-      ..._instance._$data,
-      if (id != _undefined && id != null) 'id': (id as UuidValue),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_HistoryMeetingsPkColumnsInput<TRes>
-    implements CopyWith_Input_HistoryMeetingsPkColumnsInput<TRes> {
-  _CopyWithStubImpl_Input_HistoryMeetingsPkColumnsInput(this._res);
-
-  TRes _res;
-
-  call({UuidValue? id}) => _res;
-}
-
-class Input_HistoryMeetingsSetInput {
-  factory Input_HistoryMeetingsSetInput({
-    String? audience,
-    int? color,
-    bool? isArchived,
-    String? name,
-    bool? showKodasCheckbox,
-  }) => Input_HistoryMeetingsSetInput._({
-    if (audience != null) r'audience': audience,
-    if (color != null) r'color': color,
-    if (isArchived != null) r'isArchived': isArchived,
-    if (name != null) r'name': name,
-    if (showKodasCheckbox != null) r'showKodasCheckbox': showKodasCheckbox,
-  });
-
-  Input_HistoryMeetingsSetInput._(this._$data);
-
-  factory Input_HistoryMeetingsSetInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('audience')) {
-      final l$audience = data['audience'];
-      result$data['audience'] = (l$audience as String?);
-    }
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('isArchived')) {
-      final l$isArchived = data['isArchived'];
-      result$data['isArchived'] = (l$isArchived as bool?);
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    if (data.containsKey('showKodasCheckbox')) {
-      final l$showKodasCheckbox = data['showKodasCheckbox'];
-      result$data['showKodasCheckbox'] = (l$showKodasCheckbox as bool?);
-    }
-    return Input_HistoryMeetingsSetInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String? get audience => (_$data['audience'] as String?);
-
-  int? get color => (_$data['color'] as int?);
-
-  bool? get isArchived => (_$data['isArchived'] as bool?);
-
-  String? get name => (_$data['name'] as String?);
-
-  bool? get showKodasCheckbox => (_$data['showKodasCheckbox'] as bool?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('audience')) {
-      final l$audience = audience;
-      result$data['audience'] = l$audience;
-    }
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('isArchived')) {
-      final l$isArchived = isArchived;
-      result$data['isArchived'] = l$isArchived;
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('showKodasCheckbox')) {
-      final l$showKodasCheckbox = showKodasCheckbox;
-      result$data['showKodasCheckbox'] = l$showKodasCheckbox;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryMeetingsSetInput<Input_HistoryMeetingsSetInput>
-  get copyWith => CopyWith_Input_HistoryMeetingsSetInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryMeetingsSetInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$audience = audience;
-    final lOther$audience = other.audience;
-    if (_$data.containsKey('audience') !=
-        other._$data.containsKey('audience')) {
-      return false;
-    }
-    if (l$audience != lOther$audience) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$isArchived = isArchived;
-    final lOther$isArchived = other.isArchived;
-    if (_$data.containsKey('isArchived') !=
-        other._$data.containsKey('isArchived')) {
-      return false;
-    }
-    if (l$isArchived != lOther$isArchived) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$showKodasCheckbox = showKodasCheckbox;
-    final lOther$showKodasCheckbox = other.showKodasCheckbox;
-    if (_$data.containsKey('showKodasCheckbox') !=
-        other._$data.containsKey('showKodasCheckbox')) {
-      return false;
-    }
-    if (l$showKodasCheckbox != lOther$showKodasCheckbox) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$audience = audience;
-    final l$color = color;
-    final l$isArchived = isArchived;
-    final l$name = name;
-    final l$showKodasCheckbox = showKodasCheckbox;
-    return Object.hashAll([
-      _$data.containsKey('audience') ? l$audience : const {},
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('isArchived') ? l$isArchived : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('showKodasCheckbox') ? l$showKodasCheckbox : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryMeetingsSetInput<TRes> {
-  factory CopyWith_Input_HistoryMeetingsSetInput(
-    Input_HistoryMeetingsSetInput instance,
-    TRes Function(Input_HistoryMeetingsSetInput) then,
-  ) = _CopyWithImpl_Input_HistoryMeetingsSetInput;
-
-  factory CopyWith_Input_HistoryMeetingsSetInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryMeetingsSetInput;
-
-  TRes call({
-    String? audience,
-    int? color,
-    bool? isArchived,
-    String? name,
-    bool? showKodasCheckbox,
-  });
-}
-
-class _CopyWithImpl_Input_HistoryMeetingsSetInput<TRes>
-    implements CopyWith_Input_HistoryMeetingsSetInput<TRes> {
-  _CopyWithImpl_Input_HistoryMeetingsSetInput(this._instance, this._then);
-
-  final Input_HistoryMeetingsSetInput _instance;
-
-  final TRes Function(Input_HistoryMeetingsSetInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? audience = _undefined,
-    Object? color = _undefined,
-    Object? isArchived = _undefined,
-    Object? name = _undefined,
-    Object? showKodasCheckbox = _undefined,
-  }) => _then(
-    Input_HistoryMeetingsSetInput._({
-      ..._instance._$data,
-      if (audience != _undefined) 'audience': (audience as String?),
-      if (color != _undefined) 'color': (color as int?),
-      if (isArchived != _undefined) 'isArchived': (isArchived as bool?),
-      if (name != _undefined) 'name': (name as String?),
-      if (showKodasCheckbox != _undefined)
-        'showKodasCheckbox': (showKodasCheckbox as bool?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_HistoryMeetingsSetInput<TRes>
-    implements CopyWith_Input_HistoryMeetingsSetInput<TRes> {
-  _CopyWithStubImpl_Input_HistoryMeetingsSetInput(this._res);
-
-  TRes _res;
-
-  call({
-    String? audience,
-    int? color,
-    bool? isArchived,
-    String? name,
-    bool? showKodasCheckbox,
-  }) => _res;
-}
-
-class Input_HistoryMeetingsStddevOrderBy {
-  factory Input_HistoryMeetingsStddevOrderBy({
-    Enum_OrderBy? color,
-    Enum_OrderBy? serviceStudyYear,
-  }) => Input_HistoryMeetingsStddevOrderBy._({
-    if (color != null) r'color': color,
-    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-  });
-
-  Input_HistoryMeetingsStddevOrderBy._(this._$data);
-
-  factory Input_HistoryMeetingsStddevOrderBy.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = l$color == null
-          ? null
-          : fromJson_Enum_OrderBy((l$color as String));
-    }
-    if (data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = data['serviceStudyYear'];
-      result$data['serviceStudyYear'] = l$serviceStudyYear == null
-          ? null
-          : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
-    }
-    return Input_HistoryMeetingsStddevOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get serviceStudyYear =>
-      (_$data['serviceStudyYear'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color == null
-          ? null
-          : toJson_Enum_OrderBy(l$color);
-    }
-    if (_$data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = serviceStudyYear;
-      result$data['serviceStudyYear'] = l$serviceStudyYear == null
-          ? null
-          : toJson_Enum_OrderBy(l$serviceStudyYear);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryMeetingsStddevOrderBy<
-    Input_HistoryMeetingsStddevOrderBy
-  >
-  get copyWith => CopyWith_Input_HistoryMeetingsStddevOrderBy(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryMeetingsStddevOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$serviceStudyYear = serviceStudyYear;
-    final lOther$serviceStudyYear = other.serviceStudyYear;
-    if (_$data.containsKey('serviceStudyYear') !=
-        other._$data.containsKey('serviceStudyYear')) {
-      return false;
-    }
-    if (l$serviceStudyYear != lOther$serviceStudyYear) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$color = color;
-    final l$serviceStudyYear = serviceStudyYear;
-    return Object.hashAll([
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
-    ]);
-  }
 }
