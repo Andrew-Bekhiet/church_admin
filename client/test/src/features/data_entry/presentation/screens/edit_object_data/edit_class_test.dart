@@ -114,15 +114,6 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  Future<void> closeSelectionDialog(WidgetTester tester) async {
-    for (var round = 0; round < 3; round++) {
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 10)),
-      );
-      await tester.pumpAndSettle();
-    }
-  }
-
   Future<void> save(WidgetTester tester) async {
     await tester.tap(find.text('حفظ'));
     await tester.pumpAndSettle();
@@ -213,7 +204,7 @@ void main() {
     await tester.tap(endYearField);
     await tester.pumpAndSettle();
     await tester.tap(find.text(fourth.name));
-    await closeSelectionDialog(tester);
+    await tester.pumpAndSettle();
     await save(tester);
 
     expect(studyYearsOf(classes.savedClasses.single), (3, 4));
