@@ -2,6 +2,7 @@ import { encode } from "blurhash";
 import { getStorage } from "firebase-admin/storage";
 import { storageBucket } from "firebase-functions/params";
 import { storage as functions_storage } from "firebase-functions/v2";
+import { RESET_VALUE } from "firebase-functions/v2/options";
 import * as sharp from "sharp";
 import {
   PhotoTable,
@@ -11,7 +12,7 @@ import {
 } from "./hasura_interface";
 
 export const onPhotoUploaded = functions_storage.onObjectFinalized(
-  storageBucket,
+  { bucket: storageBucket, maxInstances: RESET_VALUE },
   async (event) => {
     const { data: object } = event;
 

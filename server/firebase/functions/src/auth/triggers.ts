@@ -9,7 +9,6 @@ import {
 
 export const beforeUserSignUp = beforeUserCreated(async (event) => {
     const users = (await getAuth().listUsers(2)).users;
-    console.dir(users, { depth: 4 });
 
     const isFirstUser = users.length === 0;
     if (!isFirstUser) return;
