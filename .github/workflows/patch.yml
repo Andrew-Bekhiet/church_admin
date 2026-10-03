@@ -106,7 +106,7 @@ jobs:
         run: xcode-project use-profiles
 
       - name: 🐦 Setup Shorebird
-        uses: shorebirdtech/setup-shorebird@ed2912738a676459612aad64c63707b57b9dab64 # v1.2.1
+        uses: shorebirdtech/setup-shorebird@1866dd9f55da8f25608b70bdde6e095c06f1dc01 # main
         with:
           cache: true
 
@@ -144,15 +144,15 @@ jobs:
         run: echo "$APP_PROD_ENV_FILE" | base64 -d > .env
 
       - name: 🚀 Shorebird Patch Android
-        uses: shorebirdtech/shorebird-patch@4437c3d4f9bf07ca32da005a13d95dd802ebcd22 # v1.0.0
+        uses: shorebirdtech/shorebird-patch@deb179c67708c6b0caf7582eac41361c8d51948a # main
         if: ${{ matrix.os == 'ubuntu-latest' }}
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
         with:
           platform: android
           working-directory: client
-          args: --release-version ${{ inputs.base_version }}
-            --allow-asset-diffs
+          release-version: ${{ inputs.base_version }}
+          args: --allow-asset-diffs
             --dart-define-from-file=.env
 
       - name: Run pod repo update
@@ -164,15 +164,15 @@ jobs:
         run: cd ios && pod install --repo-update
 
       - name: 🚀 Shorebird Patch iOS
-        uses: shorebirdtech/shorebird-patch@4437c3d4f9bf07ca32da005a13d95dd802ebcd22 # v1.0.0
+        uses: shorebirdtech/shorebird-patch@deb179c67708c6b0caf7582eac41361c8d51948a # main
         if: ${{ matrix.os == 'macos-latest' }}
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
         with:
           platform: ios
           working-directory: client
-          args: --release-version ${{ inputs.base_version }}
-            --export-options-plist="$HOME/export_options.plist"
+          release-version: ${{ inputs.base_version }}
+          args: --export-options-plist="$HOME/export_options.plist"
             --allow-asset-diffs
             --dart-define-from-file=.env
 

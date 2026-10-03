@@ -131,10 +131,10 @@ jobs:
         run: keychain add-certificates
       - name: Set up code signing settings on Xcode project
         if: ${{ matrix.os == 'macos-latest' }}
-        run: xcode-project use-profiles
+        run: xcode-project use-profiles --export-options-plist=${{ runner.temp }}/export_options.plist
 
       - name: 🐦 Setup Shorebird
-        uses: shorebirdtech/setup-shorebird@ed2912738a676459612aad64c63707b57b9dab64 # v1.2.1
+        uses: shorebirdtech/setup-shorebird@1866dd9f55da8f25608b70bdde6e095c06f1dc01 # main
         with:
           cache: true
 
@@ -174,14 +174,14 @@ jobs:
 
       - name: 🚀 Shorebird Release
         if: ${{ matrix.os == 'ubuntu-latest' }}
-        uses: shorebirdtech/shorebird-release@fb52cad53f4ed5ce39883d51a26916ead502b93d # v1.0.0
+        uses: shorebirdtech/shorebird-release@296fa218e6bcd85833bfdde57a13515a30638a0e # main
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
         with:
           working-directory: client
           platform: android
+          flutter-version: ${{ steps.flutter-action.outputs.VERSION }}
           args: --artifact=apk
-            --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
             --dart-define-from-file=.env
 
       - name: Run pod repo update
@@ -204,15 +204,15 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
       - name: 🚀 Shorebird Release
         if: ${{ matrix.os == 'macos-latest' }}
-        uses: shorebirdtech/shorebird-release@fb52cad53f4ed5ce39883d51a26916ead502b93d # v1.0.0
+        uses: shorebirdtech/shorebird-release@296fa218e6bcd85833bfdde57a13515a30638a0e # main
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
         with:
           working-directory: client
           platform: ios
+          flutter-version: ${{ steps.flutter-action.outputs.VERSION }}
           args: --build-name ${{ steps.version.outputs.version }}
-            --export-options-plist="$HOME/export_options.plist"
-            --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
+            --export-options-plist=${{ runner.temp }}/export_options.plist
             --dart-define-from-file=.env
 
       - name: Delete app production environment
