@@ -1,12 +1,115 @@
 version: 2
+
+multi-ecosystem-groups:
+  infrastructure:
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: build
+      include: scope
+
 updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 4
+      semver-major-days: 15
+    commit-message:
+      prefix: ci
+      include: scope
     groups:
       github-actions:
         patterns:
           - "*"
+        update-types:
+          - minor
+          - patch
     ignore:
       - dependency-name: "shorebirdtech/*"
+
+  - package-ecosystem: npm
+    directory: /server/firebase/functions
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 4
+      semver-major-days: 15
+    commit-message:
+      prefix: build
+      include: scope
+    groups:
+      npm:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+      npm-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  - package-ecosystem: pub
+    directories:
+      - /client
+      - /church_admin_generator
+      - /server/church_admin_migrator
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 4
+      semver-major-days: 15
+    commit-message:
+      prefix: build
+      include: scope
+    groups:
+      pub:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+      pub-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  - package-ecosystem: gradle
+    directory: /client/android
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 4
+      semver-major-days: 15
+    commit-message:
+      prefix: build
+      include: scope
+    groups:
+      gradle:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: docker
+    directories:
+      - /server/hasura
+      - /server/postgres
+      - /server/firebase
+    patterns:
+      - "*"
+    multi-ecosystem-group: infrastructure
+    ignore:
+      # A Postgres major (pg17 -> pg18) needs a dump/restore of production data, not a tag bump.
+      - dependency-name: timescale/timescaledb-ha
+        update-types:
+          - version-update:semver-major
+
+  - package-ecosystem: docker-compose
+    directory: /server
+    patterns:
+      - "*"
+    multi-ecosystem-group: infrastructure
