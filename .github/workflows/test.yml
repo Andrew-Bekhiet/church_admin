@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 2
 
@@ -51,7 +51,7 @@ jobs:
         run: dart format --output=none --set-exit-if-changed .
 
       - name: Restore analyzer cache
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.dartServer
           key: dart-server-${{ runner.os }}-${{ hashFiles('client/.fvmrc', 'client/pubspec.lock') }}-${{ github.sha }}
@@ -64,7 +64,7 @@ jobs:
 
       - name: Save analyzer cache
         if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.dartServer
           key: dart-server-${{ runner.os }}-${{ hashFiles('client/.fvmrc', 'client/pubspec.lock') }}-${{ github.sha }}
@@ -73,11 +73,11 @@ jobs:
         run: flutter test --coverage --reporter=expanded --file-reporter "json:test-results.json" --dart-define CI=true test/test_bundle.dart $(scripts/generate_test_bundle.sh)
 
       - name: Upload test results
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
-          name: test-results
           path: client/test-results.json
+          archive: false
 
       - name: Report test results
         uses: dorny/test-reporter@d61b558e8df85cb60d09ca3e5b09653b4477cea7 # v1
@@ -88,7 +88,7 @@ jobs:
           reporter: flutter-json
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           directory: client
           token: ${{ secrets.CODECOV_TOKEN }}
