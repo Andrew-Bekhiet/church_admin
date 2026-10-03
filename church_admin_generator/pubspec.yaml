@@ -10,7 +10,7 @@ dependency_overrides:
   js: ^0.7.1
 
 dependencies:
-  analyzer: ^8.0.0
+  analyzer: ^13.3.0
   build: ^4.0.0
   church_admin:
     path: ../client
