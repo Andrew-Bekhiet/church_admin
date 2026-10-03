@@ -15,7 +15,6 @@ updates:
       interval: weekly
     cooldown:
       default-days: 4
-      semver-major-days: 15
     commit-message:
       prefix: ci
       include: scope
