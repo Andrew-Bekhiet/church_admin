@@ -5,7 +5,7 @@
     "Users": {
       "$uid": {
         "lastSeen": {
-          ".read": "auth.uid != null",
+          ".read": "auth.token['x-hasura-user-id'] != null",
           ".write": "$uid === auth.token['x-hasura-user-id']"
         }
       }
