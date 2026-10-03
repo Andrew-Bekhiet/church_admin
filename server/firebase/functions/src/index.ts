@@ -6,6 +6,7 @@ admin.initializeApp();
 
 setGlobalOptions({
   region: "europe-west6",
+  maxInstances: 1,
   secrets: [hasuraAdminSecret],
 });
 
