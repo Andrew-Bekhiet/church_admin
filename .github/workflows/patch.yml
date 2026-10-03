@@ -143,6 +143,12 @@ jobs:
           APP_PROD_ENV_FILE: ${{ secrets.APP_PROD_ENV_FILE }}
         run: echo "$APP_PROD_ENV_FILE" | base64 -d > .env
 
+      - name: Resolve release version to patch
+        id: release-version
+        env:
+          BASE_VERSION: ${{ inputs.base_version }}
+        run: echo "version=${BASE_VERSION:-${GITHUB_REF_NAME#v}}" >> "$GITHUB_OUTPUT"
+
       - name: 🚀 Shorebird Patch Android
         uses: shorebirdtech/shorebird-patch@deb179c67708c6b0caf7582eac41361c8d51948a # main
         if: ${{ matrix.os == 'ubuntu-latest' }}
@@ -151,7 +157,7 @@ jobs:
         with:
           platform: android
           working-directory: client
-          release-version: ${{ inputs.base_version }}
+          release-version: ${{ steps.release-version.outputs.version }}
           args: --allow-asset-diffs
             --dart-define-from-file=.env
 
@@ -171,7 +177,7 @@ jobs:
         with:
           platform: ios
           working-directory: client
-          release-version: ${{ inputs.base_version }}
+          release-version: ${{ steps.release-version.outputs.version }}
           args: --export-options-plist="$HOME/export_options.plist"
             --allow-asset-diffs
             --dart-define-from-file=.env
