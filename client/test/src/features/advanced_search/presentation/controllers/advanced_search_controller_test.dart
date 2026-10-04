@@ -40,7 +40,7 @@ void main() {
           final newFilters = [
             Filter(
               PersonFields().mainPhone,
-              StringOperator.eq,
+              PhoneOperator.eq,
               '01234567890',
             ),
             Filter(
@@ -135,7 +135,7 @@ void main() {
           final newFilters = [
             Filter(
               PersonFields().mainPhone,
-              StringOperator.eq,
+              PhoneOperator.eq,
               '01234567890',
             ),
             Filter(

@@ -7,6 +7,7 @@ export 'operators/date_range_operator.dart';
 export 'operators/date_time_operator.dart';
 export 'operators/logical_operator.dart';
 export 'operators/multi_select_operator.dart';
+export 'operators/phone_operator.dart';
 export 'operators/primitive_operator.dart';
 export 'operators/spatial_operator.dart';
 export 'operators/string_operator.dart';
