@@ -16,7 +16,7 @@ mixin _$Address {
   String? get id;
   Area? get area;
   String get countryIsoCode;
-  int? get houseNumber;
+  String? get houseCode;
   Street? get street;
   String? get substreetName;
   District? get district;
@@ -44,8 +44,8 @@ mixin _$Address {
             (identical(other.area, area) || other.area == area) &&
             (identical(other.countryIsoCode, countryIsoCode) ||
                 other.countryIsoCode == countryIsoCode) &&
-            (identical(other.houseNumber, houseNumber) ||
-                other.houseNumber == houseNumber) &&
+            (identical(other.houseCode, houseCode) ||
+                other.houseCode == houseCode) &&
             (identical(other.street, street) || other.street == street) &&
             (identical(other.substreetName, substreetName) ||
                 other.substreetName == substreetName) &&
@@ -72,7 +72,7 @@ mixin _$Address {
     id,
     area,
     countryIsoCode,
-    houseNumber,
+    houseCode,
     street,
     substreetName,
     district,
@@ -95,7 +95,7 @@ abstract mixin class $AddressCopyWith<$Res> {
     String countryIsoCode,
     String? id,
     Area? area,
-    int? houseNumber,
+    String? houseCode,
     Street? street,
     String? substreetName,
     District? district,
@@ -124,7 +124,7 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
     Object? countryIsoCode = null,
     Object? id = freezed,
     Object? area = freezed,
-    Object? houseNumber = freezed,
+    Object? houseCode = freezed,
     Object? street = freezed,
     Object? substreetName = freezed,
     Object? district = freezed,
@@ -150,10 +150,10 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
             ? _self.area
             : area // ignore: cast_nullable_to_non_nullable
                   as Area?,
-        houseNumber: freezed == houseNumber
-            ? _self.houseNumber
-            : houseNumber // ignore: cast_nullable_to_non_nullable
-                  as int?,
+        houseCode: freezed == houseCode
+            ? _self.houseCode
+            : houseCode // ignore: cast_nullable_to_non_nullable
+                  as String?,
         street: freezed == street
             ? _self.street
             : street // ignore: cast_nullable_to_non_nullable

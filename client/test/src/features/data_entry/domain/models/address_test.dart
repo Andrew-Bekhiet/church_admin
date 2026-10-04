@@ -9,7 +9,7 @@ void main() {
         'joins all parts in reading order',
         () {
           const address = Address(
-            houseNumber: 45,
+            houseCode: '45',
             street: Street(id: 'street-id', name: 'شارع النصر'),
             substreetName: 'شارع التحرير',
             district: District(id: 'district-id', name: 'حي الزهور'),
@@ -42,11 +42,50 @@ void main() {
         'ignores the server full address text',
         () {
           const address = Address(
-            houseNumber: 12,
+            houseCode: '12',
             fullAddressText: 'عنوان قديم من الخادم',
           );
 
           expect(address.textComposedFromParts, '12');
+        },
+      );
+
+      test(
+        'shows the letters of a house code',
+        () {
+          const address = Address(
+            houseCode: '12أ',
+            street: Street(id: 'street-id', name: 'شارع النصر'),
+          );
+
+          expect(address.textComposedFromParts, '12أ ش النصر');
+        },
+      );
+    },
+  );
+
+  group(
+    'Address => fromNominatimResponse',
+    () {
+      test(
+        'keeps a lettered house number from the map',
+        () {
+          final address = Address.fromNominatimResponse({
+            'address': {'house_number': ' 7B '},
+          });
+
+          expect(address.houseCode, '7B');
+        },
+      );
+
+      test(
+        'drops a house number from the map that is longer than a house code',
+        () {
+          final address = Address.fromNominatimResponse({
+            'address': {'house_number': '12-14A'},
+          });
+
+          expect(address.houseCode, isNull);
         },
       );
     },

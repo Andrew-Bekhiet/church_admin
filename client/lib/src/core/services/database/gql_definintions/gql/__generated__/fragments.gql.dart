@@ -14,7 +14,7 @@ class Fragment_Address {
     this.substreetName,
     this.fullAddressText,
     this.geolocation,
-    this.houseNumber,
+    this.houseCode,
     this.storeyNumber,
     this.apartmentNumber,
     this.specialLandmark,
@@ -30,7 +30,7 @@ class Fragment_Address {
     final l$substreetName = json['substreetName'];
     final l$fullAddressText = json['fullAddressText'];
     final l$geolocation = json['geolocation'];
-    final l$houseNumber = json['houseNumber'];
+    final l$houseCode = json['houseCode'];
     final l$storeyNumber = json['storeyNumber'];
     final l$apartmentNumber = json['apartmentNumber'];
     final l$specialLandmark = json['specialLandmark'];
@@ -52,7 +52,7 @@ class Fragment_Address {
       substreetName: (l$substreetName as String?),
       fullAddressText: (l$fullAddressText as String?),
       geolocation: (l$geolocation as Map<String, dynamic>?),
-      houseNumber: (l$houseNumber as int?),
+      houseCode: (l$houseCode as String?),
       storeyNumber: (l$storeyNumber as int?),
       apartmentNumber: (l$apartmentNumber as int?),
       specialLandmark: (l$specialLandmark as String?),
@@ -76,7 +76,7 @@ class Fragment_Address {
 
   final Map<String, dynamic>? geolocation;
 
-  final int? houseNumber;
+  final String? houseCode;
 
   final int? storeyNumber;
 
@@ -104,8 +104,8 @@ class Fragment_Address {
     _resultData['fullAddressText'] = l$fullAddressText;
     final l$geolocation = geolocation;
     _resultData['geolocation'] = l$geolocation;
-    final l$houseNumber = houseNumber;
-    _resultData['houseNumber'] = l$houseNumber;
+    final l$houseCode = houseCode;
+    _resultData['houseCode'] = l$houseCode;
     final l$storeyNumber = storeyNumber;
     _resultData['storeyNumber'] = l$storeyNumber;
     final l$apartmentNumber = apartmentNumber;
@@ -127,7 +127,7 @@ class Fragment_Address {
     final l$substreetName = substreetName;
     final l$fullAddressText = fullAddressText;
     final l$geolocation = geolocation;
-    final l$houseNumber = houseNumber;
+    final l$houseCode = houseCode;
     final l$storeyNumber = storeyNumber;
     final l$apartmentNumber = apartmentNumber;
     final l$specialLandmark = specialLandmark;
@@ -141,7 +141,7 @@ class Fragment_Address {
       l$substreetName,
       l$fullAddressText,
       l$geolocation,
-      l$houseNumber,
+      l$houseCode,
       l$storeyNumber,
       l$apartmentNumber,
       l$specialLandmark,
@@ -197,9 +197,9 @@ class Fragment_Address {
     if (l$geolocation != lOther$geolocation) {
       return false;
     }
-    final l$houseNumber = houseNumber;
-    final lOther$houseNumber = other.houseNumber;
-    if (l$houseNumber != lOther$houseNumber) {
+    final l$houseCode = houseCode;
+    final lOther$houseCode = other.houseCode;
+    if (l$houseCode != lOther$houseCode) {
       return false;
     }
     final l$storeyNumber = storeyNumber;
@@ -249,7 +249,7 @@ abstract class CopyWith_Fragment_Address<TRes> {
     String? substreetName,
     String? fullAddressText,
     Map<String, dynamic>? geolocation,
-    int? houseNumber,
+    String? houseCode,
     int? storeyNumber,
     int? apartmentNumber,
     String? specialLandmark,
@@ -279,7 +279,7 @@ class _CopyWithImpl_Fragment_Address<TRes>
     Object? substreetName = _undefined,
     Object? fullAddressText = _undefined,
     Object? geolocation = _undefined,
-    Object? houseNumber = _undefined,
+    Object? houseCode = _undefined,
     Object? storeyNumber = _undefined,
     Object? apartmentNumber = _undefined,
     Object? specialLandmark = _undefined,
@@ -306,9 +306,9 @@ class _CopyWithImpl_Fragment_Address<TRes>
       geolocation: geolocation == _undefined
           ? _instance.geolocation
           : (geolocation as Map<String, dynamic>?),
-      houseNumber: houseNumber == _undefined
-          ? _instance.houseNumber
-          : (houseNumber as int?),
+      houseCode: houseCode == _undefined
+          ? _instance.houseCode
+          : (houseCode as String?),
       storeyNumber: storeyNumber == _undefined
           ? _instance.storeyNumber
           : (storeyNumber as int?),
@@ -364,7 +364,7 @@ class _CopyWithStubImpl_Fragment_Address<TRes>
     String? substreetName,
     String? fullAddressText,
     Map<String, dynamic>? geolocation,
-    int? houseNumber,
+    String? houseCode,
     int? storeyNumber,
     int? apartmentNumber,
     String? specialLandmark,
@@ -497,7 +497,7 @@ const fragmentDefinitionAddress = FragmentDefinitionNode(
         selectionSet: null,
       ),
       FieldNode(
-        name: NameNode(value: 'houseNumber'),
+        name: NameNode(value: 'houseCode'),
         alias: null,
         arguments: [],
         directives: [],

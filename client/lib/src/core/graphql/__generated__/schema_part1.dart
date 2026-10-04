@@ -927,6 +927,7 @@ class Input_AddressesBoolExp {
     Input_UuidComparisonExp? familyId,
     Input_StringComparisonExp? fullAddressText,
     Input_GeographyComparisonExp? geolocation,
+    Input_StringComparisonExp? houseCode,
     Input_SmallintComparisonExp? houseNumber,
     Input_UuidComparisonExp? id,
     Input_StringComparisonExp? specialLandmark,
@@ -950,6 +951,7 @@ class Input_AddressesBoolExp {
     if (familyId != null) r'familyId': familyId,
     if (fullAddressText != null) r'fullAddressText': fullAddressText,
     if (geolocation != null) r'geolocation': geolocation,
+    if (houseCode != null) r'houseCode': houseCode,
     if (houseNumber != null) r'houseNumber': houseNumber,
     if (id != null) r'id': id,
     if (specialLandmark != null) r'specialLandmark': specialLandmark,
@@ -1063,6 +1065,14 @@ class Input_AddressesBoolExp {
               (l$geolocation as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('houseCode')) {
+      final l$houseCode = data['houseCode'];
+      result$data['houseCode'] = l$houseCode == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$houseCode as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('houseNumber')) {
       final l$houseNumber = data['houseNumber'];
       result$data['houseNumber'] = l$houseNumber == null
@@ -1172,6 +1182,9 @@ class Input_AddressesBoolExp {
   Input_GeographyComparisonExp? get geolocation =>
       (_$data['geolocation'] as Input_GeographyComparisonExp?);
 
+  Input_StringComparisonExp? get houseCode =>
+      (_$data['houseCode'] as Input_StringComparisonExp?);
+
   Input_SmallintComparisonExp? get houseNumber =>
       (_$data['houseNumber'] as Input_SmallintComparisonExp?);
 
@@ -1250,6 +1263,10 @@ class Input_AddressesBoolExp {
     if (_$data.containsKey('geolocation')) {
       final l$geolocation = geolocation;
       result$data['geolocation'] = l$geolocation?.toJson();
+    }
+    if (_$data.containsKey('houseCode')) {
+      final l$houseCode = houseCode;
+      result$data['houseCode'] = l$houseCode?.toJson();
     }
     if (_$data.containsKey('houseNumber')) {
       final l$houseNumber = houseNumber;
@@ -1434,6 +1451,15 @@ class Input_AddressesBoolExp {
     if (l$geolocation != lOther$geolocation) {
       return false;
     }
+    final l$houseCode = houseCode;
+    final lOther$houseCode = other.houseCode;
+    if (_$data.containsKey('houseCode') !=
+        other._$data.containsKey('houseCode')) {
+      return false;
+    }
+    if (l$houseCode != lOther$houseCode) {
+      return false;
+    }
     final l$houseNumber = houseNumber;
     final lOther$houseNumber = other.houseNumber;
     if (_$data.containsKey('houseNumber') !=
@@ -1529,6 +1555,7 @@ class Input_AddressesBoolExp {
     final l$familyId = familyId;
     final l$fullAddressText = fullAddressText;
     final l$geolocation = geolocation;
+    final l$houseCode = houseCode;
     final l$houseNumber = houseNumber;
     final l$id = id;
     final l$specialLandmark = specialLandmark;
@@ -1560,6 +1587,7 @@ class Input_AddressesBoolExp {
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('fullAddressText') ? l$fullAddressText : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
+      _$data.containsKey('houseCode') ? l$houseCode : const {},
       _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('specialLandmark') ? l$specialLandmark : const {},
@@ -1596,6 +1624,7 @@ abstract class CopyWith_Input_AddressesBoolExp<TRes> {
     Input_UuidComparisonExp? familyId,
     Input_StringComparisonExp? fullAddressText,
     Input_GeographyComparisonExp? geolocation,
+    Input_StringComparisonExp? houseCode,
     Input_SmallintComparisonExp? houseNumber,
     Input_UuidComparisonExp? id,
     Input_StringComparisonExp? specialLandmark,
@@ -1629,6 +1658,7 @@ abstract class CopyWith_Input_AddressesBoolExp<TRes> {
   CopyWith_Input_UuidComparisonExp<TRes> get familyId;
   CopyWith_Input_StringComparisonExp<TRes> get fullAddressText;
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation;
+  CopyWith_Input_StringComparisonExp<TRes> get houseCode;
   CopyWith_Input_SmallintComparisonExp<TRes> get houseNumber;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_StringComparisonExp<TRes> get specialLandmark;
@@ -1664,6 +1694,7 @@ class _CopyWithImpl_Input_AddressesBoolExp<TRes>
     Object? familyId = _undefined,
     Object? fullAddressText = _undefined,
     Object? geolocation = _undefined,
+    Object? houseCode = _undefined,
     Object? houseNumber = _undefined,
     Object? id = _undefined,
     Object? specialLandmark = _undefined,
@@ -1696,6 +1727,8 @@ class _CopyWithImpl_Input_AddressesBoolExp<TRes>
         'fullAddressText': (fullAddressText as Input_StringComparisonExp?),
       if (geolocation != _undefined)
         'geolocation': (geolocation as Input_GeographyComparisonExp?),
+      if (houseCode != _undefined)
+        'houseCode': (houseCode as Input_StringComparisonExp?),
       if (houseNumber != _undefined)
         'houseNumber': (houseNumber as Input_SmallintComparisonExp?),
       if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
@@ -1837,6 +1870,16 @@ class _CopyWithImpl_Input_AddressesBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_StringComparisonExp<TRes> get houseCode {
+    final local$houseCode = _instance.houseCode;
+    return local$houseCode == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$houseCode,
+            (e) => call(houseCode: e),
+          );
+  }
+
   CopyWith_Input_SmallintComparisonExp<TRes> get houseNumber {
     final local$houseNumber = _instance.houseNumber;
     return local$houseNumber == null
@@ -1939,6 +1982,7 @@ class _CopyWithStubImpl_Input_AddressesBoolExp<TRes>
     Input_UuidComparisonExp? familyId,
     Input_StringComparisonExp? fullAddressText,
     Input_GeographyComparisonExp? geolocation,
+    Input_StringComparisonExp? houseCode,
     Input_SmallintComparisonExp? houseNumber,
     Input_UuidComparisonExp? id,
     Input_StringComparisonExp? specialLandmark,
@@ -1986,6 +2030,9 @@ class _CopyWithStubImpl_Input_AddressesBoolExp<TRes>
 
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation =>
       CopyWith_Input_GeographyComparisonExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get houseCode =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
 
   CopyWith_Input_SmallintComparisonExp<TRes> get houseNumber =>
       CopyWith_Input_SmallintComparisonExp.stub(_res);
@@ -2181,6 +2228,7 @@ class Input_AddressesInsertInput {
     Input_FamiliesObjRelInsertInput? family,
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
+    String? houseCode,
     int? houseNumber,
     String? specialLandmark,
     Input_StoresObjRelInsertInput? store,
@@ -2199,6 +2247,7 @@ class Input_AddressesInsertInput {
     if (family != null) r'family': family,
     if (familyId != null) r'familyId': familyId,
     if (geolocation != null) r'geolocation': geolocation,
+    if (houseCode != null) r'houseCode': houseCode,
     if (houseNumber != null) r'houseNumber': houseNumber,
     if (specialLandmark != null) r'specialLandmark': specialLandmark,
     if (store != null) r'store': store,
@@ -2264,6 +2313,10 @@ class Input_AddressesInsertInput {
     if (data.containsKey('geolocation')) {
       final l$geolocation = data['geolocation'];
       result$data['geolocation'] = (l$geolocation as Map<String, dynamic>?);
+    }
+    if (data.containsKey('houseCode')) {
+      final l$houseCode = data['houseCode'];
+      result$data['houseCode'] = (l$houseCode as String?);
     }
     if (data.containsKey('houseNumber')) {
       final l$houseNumber = data['houseNumber'];
@@ -2336,6 +2389,8 @@ class Input_AddressesInsertInput {
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
 
+  String? get houseCode => (_$data['houseCode'] as String?);
+
   int? get houseNumber => (_$data['houseNumber'] as int?);
 
   String? get specialLandmark => (_$data['specialLandmark'] as String?);
@@ -2395,6 +2450,10 @@ class Input_AddressesInsertInput {
     if (_$data.containsKey('geolocation')) {
       final l$geolocation = geolocation;
       result$data['geolocation'] = l$geolocation;
+    }
+    if (_$data.containsKey('houseCode')) {
+      final l$houseCode = houseCode;
+      result$data['houseCode'] = l$houseCode;
     }
     if (_$data.containsKey('houseNumber')) {
       final l$houseNumber = houseNumber;
@@ -2525,6 +2584,15 @@ class Input_AddressesInsertInput {
     if (l$geolocation != lOther$geolocation) {
       return false;
     }
+    final l$houseCode = houseCode;
+    final lOther$houseCode = other.houseCode;
+    if (_$data.containsKey('houseCode') !=
+        other._$data.containsKey('houseCode')) {
+      return false;
+    }
+    if (l$houseCode != lOther$houseCode) {
+      return false;
+    }
     final l$houseNumber = houseNumber;
     final lOther$houseNumber = other.houseNumber;
     if (_$data.containsKey('houseNumber') !=
@@ -2608,6 +2676,7 @@ class Input_AddressesInsertInput {
     final l$family = family;
     final l$familyId = familyId;
     final l$geolocation = geolocation;
+    final l$houseCode = houseCode;
     final l$houseNumber = houseNumber;
     final l$specialLandmark = specialLandmark;
     final l$store = store;
@@ -2626,6 +2695,7 @@ class Input_AddressesInsertInput {
       _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
+      _$data.containsKey('houseCode') ? l$houseCode : const {},
       _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('specialLandmark') ? l$specialLandmark : const {},
       _$data.containsKey('store') ? l$store : const {},

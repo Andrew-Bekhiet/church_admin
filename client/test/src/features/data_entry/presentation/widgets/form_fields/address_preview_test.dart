@@ -14,7 +14,7 @@ void main() {
             materialAppWithThemeAndLocale()(
               const AddressPreview(
                 address: Address(
-                  houseNumber: 12,
+                  houseCode: '12',
                   fullAddressText: 'عنوان قديم من الخادم',
                 ),
               ),

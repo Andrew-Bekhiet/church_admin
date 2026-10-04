@@ -10,10 +10,17 @@ part 'address.g.dart';
 @JsonSerializable()
 @Queryable(
   classLabel: 'العنوان',
-  ignoreFields: ['id', 'countryIsoCode', 'textComposedFromParts'],
+  ignoreFields: [
+    'id',
+    'countryIsoCode',
+    'textComposedFromParts',
+    'houseCodeMaxLength',
+  ],
   allowExtension: true,
 )
 class Address with _$Address {
+  static const int houseCodeMaxLength = 5;
+
   static String? _streetNameWithoutPrefix(String? name) =>
       _withoutPrefix(name, RegExp('شارع|الشارع'));
 
@@ -38,7 +45,7 @@ class Address with _$Address {
   final String countryIsoCode;
 
   @override
-  final int? houseNumber;
+  final String? houseCode;
 
   @override
   final Street? street;
@@ -72,7 +79,7 @@ class Address with _$Address {
   final Store? store;
 
   String get textComposedFromParts => [
-    if (houseNumber case final houseNumber?) houseNumber.toString(),
+    ?houseCode,
     if (_streetNameWithoutPrefix(street?.name) case final streetName?)
       'ش $streetName',
     if (_streetNameWithoutPrefix(substreetName) case final substreetName?)
@@ -91,7 +98,7 @@ class Address with _$Address {
     this.countryIsoCode = 'EG',
     this.id,
     this.area,
-    this.houseNumber,
+    this.houseCode,
     this.street,
     this.substreetName,
     this.district,
@@ -113,9 +120,14 @@ class Address with _$Address {
     final double? lat = double.tryParse(data['lat'] as String? ?? '');
     final double? lon = double.tryParse(data['lon'] as String? ?? '');
 
-    final int? houseNumber = int.tryParse(
-      addressData['house_number'] as String? ?? '',
-    );
+    final String? houseCode = switch ((addressData['house_number'] as String?)
+        ?.trim()) {
+      final houseNumber?
+          when houseNumber.isNotEmpty &&
+              houseNumber.length <= houseCodeMaxLength =>
+        houseNumber,
+      _ => null,
+    };
     final String? streetName = addressData['road'] as String?;
     final String? districtName =
         addressData['neighbourhood'] as String? ??
@@ -130,7 +142,7 @@ class Address with _$Address {
 
     return Address(
       geolocation: lat != null && lon != null ? Point(lat, lon) : null,
-      houseNumber: houseNumber,
+      houseCode: houseCode,
       street: streetName != null
           ? Street(id: Namespace.nil.value, name: streetName.trim())
           : null,
@@ -162,7 +174,7 @@ class Address with _$Address {
       substreetName: substreetName,
       geolocation: geolocation?.toPostGISJson(),
       storeyNumber: storeyNumber,
-      houseNumber: houseNumber,
+      houseCode: houseCode,
       apartmentNumber: apartmentNumber,
       specialLandmark: specialLandmark,
       familyId: family?.id.toUuid(),
@@ -201,8 +213,8 @@ class Address with _$Address {
       result = result.copyWith(storeyNumber: storeyNumber);
     }
 
-    if (old.houseNumber != houseNumber) {
-      result = result.copyWith(houseNumber: houseNumber);
+    if (old.houseCode != houseCode) {
+      result = result.copyWith(houseCode: houseCode);
     }
 
     if (old.apartmentNumber != apartmentNumber) {
