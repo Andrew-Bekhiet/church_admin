@@ -13,7 +13,7 @@ export class AddressRowMapper implements RowMapper {
     return {
       "address.area.name": address?.area?.name ?? "",
       "address.area.id": address?.area?.id ?? "",
-      "address.houseNumber": address?.houseNumber,
+      "address.houseCode": address?.houseCode,
       "address.street.name": address?.street?.name ?? "",
       "address.street.id": address?.street?.id ?? "",
       "address.substreetName": address?.substreetName,
