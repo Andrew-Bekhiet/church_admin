@@ -10,7 +10,16 @@ part 'class.g.dart';
 @JsonSerializable()
 @Queryable(
   classLabel: 'الفصول',
-  ignoreFields: ['blurhash', 'serviceStudyYear', 'userCanEdit'],
+  ignoreFields: [
+    'blurhash',
+    'serviceStudyYear',
+    'serviceStudyYearTo',
+    'spansStudyYearRange',
+    'studyYearFromOrder',
+    'studyYearRangeName',
+    'studyYearToOrder',
+    'userCanEdit',
+  ],
   allowExtension: true,
 )
 class Class extends ViewableWithIDAndImage
@@ -48,6 +57,12 @@ class Class extends ViewableWithIDAndImage
   final int? serviceStudyYear;
 
   @override
+  final StudyYear? studyYearTo;
+
+  @override
+  final int? serviceStudyYearTo;
+
+  @override
   final bool? serviceGender;
 
   @override
@@ -69,6 +84,20 @@ class Class extends ViewableWithIDAndImage
   @override
   String get typeName => AdvancedQueriesMetadata().$class.name;
 
+  int? get studyYearFromOrder => studyYear?.order ?? serviceStudyYear;
+
+  int? get studyYearToOrder =>
+      studyYearTo?.order ?? serviceStudyYearTo ?? studyYearFromOrder;
+
+  bool get spansStudyYearRange => studyYearFromOrder != studyYearToOrder;
+
+  String? get studyYearRangeName => switch ((studyYear, studyYearTo)) {
+    (final from?, final to?) when spansStudyYearRange =>
+      '${from.name} - ${to.name}',
+    (final from?, _) => from.name,
+    _ => null,
+  };
+
   const Class({
     required this.id,
     required this.name,
@@ -80,6 +109,8 @@ class Class extends ViewableWithIDAndImage
     this.serviceId,
     this.studyYear,
     this.serviceStudyYear,
+    this.studyYearTo,
+    this.serviceStudyYearTo,
     this.serviceGender,
     this.lastEdit,
     this.adminUsers,
@@ -96,6 +127,7 @@ class Class extends ViewableWithIDAndImage
       color: colorToInt(color),
       serviceId: service?.id.toUuid() ?? serviceId?.toUuid(),
       serviceStudyYear: serviceStudyYear,
+      serviceStudyYearTo: serviceStudyYearTo ?? serviceStudyYear,
       serviceGender: serviceGender,
     );
   }
@@ -119,6 +151,10 @@ class Class extends ViewableWithIDAndImage
 
     if (serviceStudyYear != oldObject.serviceStudyYear) {
       result = result.copyWith(serviceStudyYear: serviceStudyYear);
+    }
+
+    if (serviceStudyYearTo != oldObject.serviceStudyYearTo) {
+      result = result.copyWith(serviceStudyYearTo: serviceStudyYearTo);
     }
 
     if (serviceGender != oldObject.serviceGender) {

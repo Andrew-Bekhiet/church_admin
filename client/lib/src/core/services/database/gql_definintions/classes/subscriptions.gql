@@ -27,8 +27,10 @@ subscription watchClass($id: uuid!) {
     }
     serviceGender
     studyYear {
-      order
-      name
+      ...StudyYear
+    }
+    studyYearTo {
+      ...StudyYear
     }
     adminUsers(distinctOn: uid) {
       user {

@@ -7,12 +7,10 @@ fragment Service on Services {
 fragment ServiceWithStudyYears on Services {
   ...ServiceNoPhoto
   studyYearFrom {
-    order
-    name
+    ...StudyYear
   }
   studyYearTo {
-    order
-    name
+    ...StudyYear
   }
   photoUpdatedAt
   blurhash

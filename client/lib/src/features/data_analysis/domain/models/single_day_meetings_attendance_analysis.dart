@@ -11,12 +11,18 @@ import 'package:collection/collection.dart';
 /// servant and member, is a single attendee — so every rate stays `<= 100%`.
 class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
   /// Null when [class$] doesn't match the slice at all; otherwise the number
-  /// of fields matched exactly rather than through a null wildcard.
+  /// of fields the class covers itself rather than through a null wildcard.
   static int? _matchSpecificity(Class class$, int? studyYearId, bool? gender) {
-    final studyYearScore = switch (class$.studyYear?.order ??
-        class$.serviceStudyYear) {
-      null => 0,
-      final classStudyYear when classStudyYear == studyYearId => 1,
+    final studyYearScore = switch ((
+      class$.studyYearFromOrder,
+      class$.studyYearToOrder,
+    )) {
+      (null, _) || (_, null) => 0,
+      (final from?, final to?)
+          when studyYearId != null &&
+              from <= studyYearId &&
+              studyYearId <= to =>
+        1,
       _ => null,
     };
     final genderScore = switch (class$.serviceGender) {
@@ -104,38 +110,56 @@ class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
       }
     }
 
-    final byKey = SplayTreeMap<(int?, bool?), ClassAttendanceRate>(
+    final byKey = SplayTreeMap<(int?, bool?), List<ClassAttendanceRate>>(
       MeetingsAttendanceAnalysis.compareStudyYearGenderKeys,
     );
 
     for (final MapEntry(:key, value: rosterCount) in rosterCounts.entries) {
-      final matched = _matchClass(key.$1, key.$2);
+      final matched = _matchClasses(key.$1, key.$2);
 
-      byKey[key] = ClassAttendanceRate(
-        studyYearId: key.$1,
-        studyYearName: names[key],
-        gender: key.$2,
-        attendedCount: attendedCounts[key] ?? 0,
-        rosterCount: rosterCount,
-        className: matched?.name,
-        classColor: matched?.color,
-      );
+      byKey[key] = [
+        for (final class$ in matched.isEmpty ? const <Class?>[null] : matched)
+          ClassAttendanceRate(
+            studyYearId: key.$1,
+            studyYearName: names[key],
+            gender: key.$2,
+            attendedCount: attendedCounts[key] ?? 0,
+            rosterCount: rosterCount,
+            className: class$?.name,
+            classColor: class$?.color,
+          ),
+      ];
     }
 
-    return byKey.values.toList();
+    return byKey.values.flattened.toList();
   }
 
-  /// Picks the most specific matching class: an exact study-year or gender
-  /// match beats a null wildcard, so a service-wide "general" class can't
-  /// steal slices from properly graded classes.
-  Class? _matchClass(int? studyYearId, bool? gender) {
+  /// Every class matching the slice most specifically, narrowest study year
+  /// range first. Covering the study year or gender beats a null wildcard, so
+  /// a service-wide "general" class can't steal slices from graded classes,
+  /// while a single-year class and a range class covering the same year both
+  /// keep it.
+  List<Class> _matchClasses(int? studyYearId, bool? gender) {
     final candidates = [
       for (final class$ in classes)
         if (_matchSpecificity(class$, studyYearId, gender)
             case final specificity?)
           (class$, specificity),
     ];
+    final bestSpecificity = candidates
+        .map((candidate) => candidate.$2)
+        .maxOrNull;
+    int studyYearSpan(Class class$) =>
+        (class$.studyYearToOrder ?? 0) - (class$.studyYearFromOrder ?? 0);
 
-    return maxBy(candidates, (candidate) => candidate.$2)?.$1;
+    return [
+      for (final (class$, specificity) in candidates)
+        if (specificity == bestSpecificity) class$,
+    ].sorted(
+      (a, b) => switch (studyYearSpan(a).compareTo(studyYearSpan(b))) {
+        0 => a.name.compareTo(b.name),
+        final bySpan => bySpan,
+      },
+    );
   }
 }

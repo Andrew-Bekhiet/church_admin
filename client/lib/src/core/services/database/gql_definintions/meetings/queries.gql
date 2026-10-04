@@ -75,8 +75,7 @@ query meetingsAttendanceAnalysis(
       day
       studyYearId
       studyYear {
-        order
-        name
+        ...StudyYear
       }
       gender
       personsCount

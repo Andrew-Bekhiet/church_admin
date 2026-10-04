@@ -1,5 +1,6 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
+import '../../metadata/study_years/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
@@ -2919,19 +2920,9 @@ const documentNodeQuerymeetingsAttendanceAnalysis = DocumentNode(
                         directives: [],
                         selectionSet: SelectionSetNode(
                           selections: [
-                            FieldNode(
-                              name: NameNode(value: 'order'),
-                              alias: null,
-                              arguments: [],
+                            FragmentSpreadNode(
+                              name: NameNode(value: 'StudyYear'),
                               directives: [],
-                              selectionSet: null,
-                            ),
-                            FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null,
                             ),
                             FieldNode(
                               name: NameNode(value: '__typename'),
@@ -2996,6 +2987,7 @@ const documentNodeQuerymeetingsAttendanceAnalysis = DocumentNode(
     ),
     fragmentDefinitionMeeting,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionStudyYear,
     fragmentDefinitionGroupNoPhoto,
   ],
 );
@@ -3056,9 +3048,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
             ),
       studyYear: l$studyYear == null
           ? null
-          : Query_meetingsAttendanceAnalysis_historyMeetings_studyYear.fromJson(
-              (l$studyYear as Map<String, dynamic>),
-            ),
+          : Fragment_StudyYear.fromJson((l$studyYear as Map<String, dynamic>)),
       group: l$group == null
           ? null
           : Fragment_GroupNoPhoto.fromJson((l$group as Map<String, dynamic>)),
@@ -3096,7 +3086,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
 
   final Fragment_ServiceNoPhoto? service;
 
-  final Query_meetingsAttendanceAnalysis_historyMeetings_studyYear? studyYear;
+  final Fragment_StudyYear? studyYear;
 
   final Fragment_GroupNoPhoto? group;
 
@@ -3303,14 +3293,13 @@ abstract class CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings<TRes> {
     int? serviceStudyYear,
     UuidValue? groupId,
     Fragment_ServiceNoPhoto? service,
-    Query_meetingsAttendanceAnalysis_historyMeetings_studyYear? studyYear,
+    Fragment_StudyYear? studyYear,
     Fragment_GroupNoPhoto? group,
     String? $__typename,
     List<Query_meetingsAttendanceAnalysis_historyMeetings_days>? days,
   });
   CopyWith_Fragment_ServiceNoPhoto<TRes> get service;
-  CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear<TRes>
-  get studyYear;
+  CopyWith_Fragment_StudyYear<TRes> get studyYear;
   CopyWith_Fragment_GroupNoPhoto<TRes> get group;
   TRes days(
     Iterable<Query_meetingsAttendanceAnalysis_historyMeetings_days> Function(
@@ -3387,8 +3376,7 @@ class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings<TRes>
           : (service as Fragment_ServiceNoPhoto?),
       studyYear: studyYear == _undefined
           ? _instance.studyYear
-          : (studyYear
-                as Query_meetingsAttendanceAnalysis_historyMeetings_studyYear?),
+          : (studyYear as Fragment_StudyYear?),
       group: group == _undefined
           ? _instance.group
           : (group as Fragment_GroupNoPhoto?),
@@ -3412,14 +3400,11 @@ class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings<TRes>
           );
   }
 
-  CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear<TRes>
-  get studyYear {
+  CopyWith_Fragment_StudyYear<TRes> get studyYear {
     final local$studyYear = _instance.studyYear;
     return local$studyYear == null
-        ? CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear.stub(
-            _then(_instance),
-          )
-        : CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear(
+        ? CopyWith_Fragment_StudyYear.stub(_then(_instance))
+        : CopyWith_Fragment_StudyYear(
             local$studyYear,
             (e) => call(studyYear: e),
           );
@@ -3471,7 +3456,7 @@ class _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings<TRes>
     int? serviceStudyYear,
     UuidValue? groupId,
     Fragment_ServiceNoPhoto? service,
-    Query_meetingsAttendanceAnalysis_historyMeetings_studyYear? studyYear,
+    Fragment_StudyYear? studyYear,
     Fragment_GroupNoPhoto? group,
     String? $__typename,
     List<Query_meetingsAttendanceAnalysis_historyMeetings_days>? days,
@@ -3480,174 +3465,13 @@ class _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings<TRes>
   CopyWith_Fragment_ServiceNoPhoto<TRes> get service =>
       CopyWith_Fragment_ServiceNoPhoto.stub(_res);
 
-  CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear<TRes>
-  get studyYear =>
-      CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear.stub(
-        _res,
-      );
+  CopyWith_Fragment_StudyYear<TRes> get studyYear =>
+      CopyWith_Fragment_StudyYear.stub(_res);
 
   CopyWith_Fragment_GroupNoPhoto<TRes> get group =>
       CopyWith_Fragment_GroupNoPhoto.stub(_res);
 
   days(_fn) => _res;
-}
-
-class Query_meetingsAttendanceAnalysis_historyMeetings_studyYear
-    implements Fragment_Meeting_studyYear {
-  Query_meetingsAttendanceAnalysis_historyMeetings_studyYear({
-    required this.name,
-    required this.order,
-    this.$__typename = 'StudyYears',
-  });
-
-  factory Query_meetingsAttendanceAnalysis_historyMeetings_studyYear.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$name = json['name'];
-    final l$order = json['order'];
-    final l$$__typename = json['__typename'];
-    return Query_meetingsAttendanceAnalysis_historyMeetings_studyYear(
-      name: (l$name as String),
-      order: (l$order as int),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String name;
-
-  final int order;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$order = order;
-    _resultData['order'] = l$order;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$order = order;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$name, l$order, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_meetingsAttendanceAnalysis_historyMeetings_studyYear ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear
-    on Query_meetingsAttendanceAnalysis_historyMeetings_studyYear {
-  CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear<
-    Query_meetingsAttendanceAnalysis_historyMeetings_studyYear
-  >
-  get copyWith =>
-      CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear<
-  TRes
-> {
-  factory CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear(
-    Query_meetingsAttendanceAnalysis_historyMeetings_studyYear instance,
-    TRes Function(Query_meetingsAttendanceAnalysis_historyMeetings_studyYear)
-    then,
-  ) = _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear;
-
-  factory CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear;
-
-  TRes call({String? name, int? order, String? $__typename});
-}
-
-class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear<
-  TRes
->
-    implements
-        CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear<
-          TRes
-        > {
-  _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear(
-    this._instance,
-    this._then,
-  );
-
-  final Query_meetingsAttendanceAnalysis_historyMeetings_studyYear _instance;
-
-  final TRes Function(
-    Query_meetingsAttendanceAnalysis_historyMeetings_studyYear,
-  )
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? name = _undefined,
-    Object? order = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Query_meetingsAttendanceAnalysis_historyMeetings_studyYear(
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      order: order == _undefined || order == null
-          ? _instance.order
-          : (order as int),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear<
-  TRes
->
-    implements
-        CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear<
-          TRes
-        > {
-  _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings_studyYear(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({String? name, int? order, String? $__typename}) => _res;
 }
 
 class Query_meetingsAttendanceAnalysis_historyMeetings_days {
@@ -3678,9 +3502,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings_days {
       studyYearId: (l$studyYearId as int?),
       studyYear: l$studyYear == null
           ? null
-          : Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear.fromJson(
-              (l$studyYear as Map<String, dynamic>),
-            ),
+          : Fragment_StudyYear.fromJson((l$studyYear as Map<String, dynamic>)),
       gender: (l$gender as bool?),
       personsCount: (l$personsCount as int?),
       servantsCount: (l$servantsCount as int?),
@@ -3693,8 +3515,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings_days {
 
   final int? studyYearId;
 
-  final Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear?
-  studyYear;
+  final Fragment_StudyYear? studyYear;
 
   final bool? gender;
 
@@ -3829,15 +3650,14 @@ abstract class CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days<
   TRes call({
     DateTime? day,
     int? studyYearId,
-    Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear? studyYear,
+    Fragment_StudyYear? studyYear,
     bool? gender,
     int? personsCount,
     int? servantsCount,
     int? totalCount,
     String? $__typename,
   });
-  CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear<TRes>
-  get studyYear;
+  CopyWith_Fragment_StudyYear<TRes> get studyYear;
 }
 
 class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days<TRes>
@@ -3872,8 +3692,7 @@ class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days<TRes>
           : (studyYearId as int?),
       studyYear: studyYear == _undefined
           ? _instance.studyYear
-          : (studyYear
-                as Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear?),
+          : (studyYear as Fragment_StudyYear?),
       gender: gender == _undefined ? _instance.gender : (gender as bool?),
       personsCount: personsCount == _undefined
           ? _instance.personsCount
@@ -3890,14 +3709,11 @@ class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days<TRes>
     ),
   );
 
-  CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear<TRes>
-  get studyYear {
+  CopyWith_Fragment_StudyYear<TRes> get studyYear {
     final local$studyYear = _instance.studyYear;
     return local$studyYear == null
-        ? CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear.stub(
-            _then(_instance),
-          )
-        : CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear(
+        ? CopyWith_Fragment_StudyYear.stub(_then(_instance))
+        : CopyWith_Fragment_StudyYear(
             local$studyYear,
             (e) => call(studyYear: e),
           );
@@ -3918,7 +3734,7 @@ class _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days<
   call({
     DateTime? day,
     int? studyYearId,
-    Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear? studyYear,
+    Fragment_StudyYear? studyYear,
     bool? gender,
     int? personsCount,
     int? servantsCount,
@@ -3926,172 +3742,8 @@ class _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days<
     String? $__typename,
   }) => _res;
 
-  CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear<TRes>
-  get studyYear =>
-      CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear.stub(
-        _res,
-      );
-}
-
-class Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear {
-  Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear({
-    required this.order,
-    required this.name,
-    this.$__typename = 'StudyYears',
-  });
-
-  factory Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$order = json['order'];
-    final l$name = json['name'];
-    final l$$__typename = json['__typename'];
-    return Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear(
-      order: (l$order as int),
-      name: (l$name as String),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final int order;
-
-  final String name;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$order = order;
-    _resultData['order'] = l$order;
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$order = order;
-    final l$name = name;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$order, l$name, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other
-            is! Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear
-    on Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear {
-  CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear<
-    Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear
-  >
-  get copyWith =>
-      CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear<
-  TRes
-> {
-  factory CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear(
-    Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear instance,
-    TRes Function(
-      Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear,
-    )
-    then,
-  ) = _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear;
-
-  factory CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear;
-
-  TRes call({int? order, String? name, String? $__typename});
-}
-
-class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear<
-  TRes
->
-    implements
-        CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear<
-          TRes
-        > {
-  _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear(
-    this._instance,
-    this._then,
-  );
-
-  final Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear
-  _instance;
-
-  final TRes Function(
-    Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear,
-  )
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? order = _undefined,
-    Object? name = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear(
-      order: order == _undefined || order == null
-          ? _instance.order
-          : (order as int),
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear<
-  TRes
->
-    implements
-        CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear<
-          TRes
-        > {
-  _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({int? order, String? name, String? $__typename}) => _res;
+  CopyWith_Fragment_StudyYear<TRes> get studyYear =>
+      CopyWith_Fragment_StudyYear.stub(_res);
 }
 
 class Variables_Query_meetingsRosterDemographics {
@@ -5597,6 +5249,7 @@ const documentNodeQuerypersonMeetings = DocumentNode(
     ),
     fragmentDefinitionMeeting,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionStudyYear,
     fragmentDefinitionGroupNoPhoto,
   ],
 );

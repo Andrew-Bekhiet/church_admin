@@ -13,8 +13,7 @@ fragment Meeting on HistoryMeetings {
     ...ServiceNoPhoto
   }
   studyYear {
-    name
-    order
+    ...StudyYear
   }
   group {
     ...GroupNoPhoto

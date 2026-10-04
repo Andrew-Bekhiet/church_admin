@@ -29,7 +29,9 @@ abstract class CopyWith_Input_ClassesBoolExp<TRes> {
     Input_BooleanComparisonExp? serviceGender,
     Input_UuidComparisonExp? serviceId,
     Input_IntComparisonExp? serviceStudyYear,
+    Input_IntComparisonExp? serviceStudyYearTo,
     Input_StudyYearsBoolExp? studyYear,
+    Input_StudyYearsBoolExp? studyYearTo,
     Input_BooleanComparisonExp? userCanEdit,
   });
   TRes $_and(
@@ -61,7 +63,9 @@ abstract class CopyWith_Input_ClassesBoolExp<TRes> {
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender;
   CopyWith_Input_UuidComparisonExp<TRes> get serviceId;
   CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear;
+  CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYearTo;
   CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear;
+  CopyWith_Input_StudyYearsBoolExp<TRes> get studyYearTo;
   CopyWith_Input_BooleanComparisonExp<TRes> get userCanEdit;
 }
 
@@ -94,7 +98,9 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
     Object? serviceGender = _undefined,
     Object? serviceId = _undefined,
     Object? serviceStudyYear = _undefined,
+    Object? serviceStudyYearTo = _undefined,
     Object? studyYear = _undefined,
+    Object? studyYearTo = _undefined,
     Object? userCanEdit = _undefined,
   }) => _then(
     Input_ClassesBoolExp._({
@@ -129,8 +135,12 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
         'serviceId': (serviceId as Input_UuidComparisonExp?),
       if (serviceStudyYear != _undefined)
         'serviceStudyYear': (serviceStudyYear as Input_IntComparisonExp?),
+      if (serviceStudyYearTo != _undefined)
+        'serviceStudyYearTo': (serviceStudyYearTo as Input_IntComparisonExp?),
       if (studyYear != _undefined)
         'studyYear': (studyYear as Input_StudyYearsBoolExp?),
+      if (studyYearTo != _undefined)
+        'studyYearTo': (studyYearTo as Input_StudyYearsBoolExp?),
       if (userCanEdit != _undefined)
         'userCanEdit': (userCanEdit as Input_BooleanComparisonExp?),
     }),
@@ -312,6 +322,16 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYearTo {
+    final local$serviceStudyYearTo = _instance.serviceStudyYearTo;
+    return local$serviceStudyYearTo == null
+        ? CopyWith_Input_IntComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_IntComparisonExp(
+            local$serviceStudyYearTo,
+            (e) => call(serviceStudyYearTo: e),
+          );
+  }
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear {
     final local$studyYear = _instance.studyYear;
     return local$studyYear == null
@@ -319,6 +339,16 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
         : CopyWith_Input_StudyYearsBoolExp(
             local$studyYear,
             (e) => call(studyYear: e),
+          );
+  }
+
+  CopyWith_Input_StudyYearsBoolExp<TRes> get studyYearTo {
+    final local$studyYearTo = _instance.studyYearTo;
+    return local$studyYearTo == null
+        ? CopyWith_Input_StudyYearsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_StudyYearsBoolExp(
+            local$studyYearTo,
+            (e) => call(studyYearTo: e),
           );
   }
 
@@ -358,7 +388,9 @@ class _CopyWithStubImpl_Input_ClassesBoolExp<TRes>
     Input_BooleanComparisonExp? serviceGender,
     Input_UuidComparisonExp? serviceId,
     Input_IntComparisonExp? serviceStudyYear,
+    Input_IntComparisonExp? serviceStudyYearTo,
     Input_StudyYearsBoolExp? studyYear,
+    Input_StudyYearsBoolExp? studyYearTo,
     Input_BooleanComparisonExp? userCanEdit,
   }) => _res;
 
@@ -415,7 +447,13 @@ class _CopyWithStubImpl_Input_ClassesBoolExp<TRes>
   CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 
+  CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYearTo =>
+      CopyWith_Input_IntComparisonExp.stub(_res);
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear =>
+      CopyWith_Input_StudyYearsBoolExp.stub(_res);
+
+  CopyWith_Input_StudyYearsBoolExp<TRes> get studyYearTo =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
 
   CopyWith_Input_BooleanComparisonExp<TRes> get userCanEdit =>
@@ -423,11 +461,15 @@ class _CopyWithStubImpl_Input_ClassesBoolExp<TRes>
 }
 
 class Input_ClassesIncInput {
-  factory Input_ClassesIncInput({int? color, int? serviceStudyYear}) =>
-      Input_ClassesIncInput._({
-        if (color != null) r'color': color,
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-      });
+  factory Input_ClassesIncInput({
+    int? color,
+    int? serviceStudyYear,
+    int? serviceStudyYearTo,
+  }) => Input_ClassesIncInput._({
+    if (color != null) r'color': color,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceStudyYearTo != null) r'serviceStudyYearTo': serviceStudyYearTo,
+  });
 
   Input_ClassesIncInput._(this._$data);
 
@@ -441,6 +483,10 @@ class Input_ClassesIncInput {
       final l$serviceStudyYear = data['serviceStudyYear'];
       result$data['serviceStudyYear'] = (l$serviceStudyYear as int?);
     }
+    if (data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = data['serviceStudyYearTo'];
+      result$data['serviceStudyYearTo'] = (l$serviceStudyYearTo as int?);
+    }
     return Input_ClassesIncInput._(result$data);
   }
 
@@ -449,6 +495,8 @@ class Input_ClassesIncInput {
   int? get color => (_$data['color'] as int?);
 
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
+  int? get serviceStudyYearTo => (_$data['serviceStudyYearTo'] as int?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -459,6 +507,10 @@ class Input_ClassesIncInput {
     if (_$data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = serviceStudyYear;
       result$data['serviceStudyYear'] = l$serviceStudyYear;
+    }
+    if (_$data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = serviceStudyYearTo;
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo;
     }
     return result$data;
   }
@@ -491,6 +543,15 @@ class Input_ClassesIncInput {
     if (l$serviceStudyYear != lOther$serviceStudyYear) {
       return false;
     }
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    final lOther$serviceStudyYearTo = other.serviceStudyYearTo;
+    if (_$data.containsKey('serviceStudyYearTo') !=
+        other._$data.containsKey('serviceStudyYearTo')) {
+      return false;
+    }
+    if (l$serviceStudyYearTo != lOther$serviceStudyYearTo) {
+      return false;
+    }
     return true;
   }
 
@@ -498,9 +559,13 @@ class Input_ClassesIncInput {
   int get hashCode {
     final l$color = color;
     final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('serviceStudyYearTo')
+          ? l$serviceStudyYearTo
+          : const {},
     ]);
   }
 }
@@ -514,7 +579,7 @@ abstract class CopyWith_Input_ClassesIncInput<TRes> {
   factory CopyWith_Input_ClassesIncInput.stub(TRes res) =
       _CopyWithStubImpl_Input_ClassesIncInput;
 
-  TRes call({int? color, int? serviceStudyYear});
+  TRes call({int? color, int? serviceStudyYear, int? serviceStudyYearTo});
 }
 
 class _CopyWithImpl_Input_ClassesIncInput<TRes>
@@ -530,12 +595,15 @@ class _CopyWithImpl_Input_ClassesIncInput<TRes>
   TRes call({
     Object? color = _undefined,
     Object? serviceStudyYear = _undefined,
+    Object? serviceStudyYearTo = _undefined,
   }) => _then(
     Input_ClassesIncInput._({
       ..._instance._$data,
       if (color != _undefined) 'color': (color as int?),
       if (serviceStudyYear != _undefined)
         'serviceStudyYear': (serviceStudyYear as int?),
+      if (serviceStudyYearTo != _undefined)
+        'serviceStudyYearTo': (serviceStudyYearTo as int?),
     }),
   );
 }
@@ -546,7 +614,7 @@ class _CopyWithStubImpl_Input_ClassesIncInput<TRes>
 
   TRes _res;
 
-  call({int? color, int? serviceStudyYear}) => _res;
+  call({int? color, int? serviceStudyYear, int? serviceStudyYearTo}) => _res;
 }
 
 class Input_ClassesInsertInput {
@@ -559,7 +627,9 @@ class Input_ClassesInsertInput {
     bool? serviceGender,
     UuidValue? serviceId,
     int? serviceStudyYear,
+    int? serviceStudyYearTo,
     Input_StudyYearsObjRelInsertInput? studyYear,
+    Input_StudyYearsObjRelInsertInput? studyYearTo,
   }) => Input_ClassesInsertInput._({
     if (adminUsers != null) r'adminUsers': adminUsers,
     if (color != null) r'color': color,
@@ -569,7 +639,9 @@ class Input_ClassesInsertInput {
     if (serviceGender != null) r'serviceGender': serviceGender,
     if (serviceId != null) r'serviceId': serviceId,
     if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceStudyYearTo != null) r'serviceStudyYearTo': serviceStudyYearTo,
     if (studyYear != null) r'studyYear': studyYear,
+    if (studyYearTo != null) r'studyYearTo': studyYearTo,
   });
 
   Input_ClassesInsertInput._(this._$data);
@@ -622,12 +694,24 @@ class Input_ClassesInsertInput {
       final l$serviceStudyYear = data['serviceStudyYear'];
       result$data['serviceStudyYear'] = (l$serviceStudyYear as int?);
     }
+    if (data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = data['serviceStudyYearTo'];
+      result$data['serviceStudyYearTo'] = (l$serviceStudyYearTo as int?);
+    }
     if (data.containsKey('studyYear')) {
       final l$studyYear = data['studyYear'];
       result$data['studyYear'] = l$studyYear == null
           ? null
           : Input_StudyYearsObjRelInsertInput.fromJson(
               (l$studyYear as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('studyYearTo')) {
+      final l$studyYearTo = data['studyYearTo'];
+      result$data['studyYearTo'] = l$studyYearTo == null
+          ? null
+          : Input_StudyYearsObjRelInsertInput.fromJson(
+              (l$studyYearTo as Map<String, dynamic>),
             );
     }
     return Input_ClassesInsertInput._(result$data);
@@ -654,8 +738,13 @@ class Input_ClassesInsertInput {
 
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
 
+  int? get serviceStudyYearTo => (_$data['serviceStudyYearTo'] as int?);
+
   Input_StudyYearsObjRelInsertInput? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsObjRelInsertInput?);
+
+  Input_StudyYearsObjRelInsertInput? get studyYearTo =>
+      (_$data['studyYearTo'] as Input_StudyYearsObjRelInsertInput?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -693,9 +782,17 @@ class Input_ClassesInsertInput {
       final l$serviceStudyYear = serviceStudyYear;
       result$data['serviceStudyYear'] = l$serviceStudyYear;
     }
+    if (_$data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = serviceStudyYearTo;
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo;
+    }
     if (_$data.containsKey('studyYear')) {
       final l$studyYear = studyYear;
       result$data['studyYear'] = l$studyYear?.toJson();
+    }
+    if (_$data.containsKey('studyYearTo')) {
+      final l$studyYearTo = studyYearTo;
+      result$data['studyYearTo'] = l$studyYearTo?.toJson();
     }
     return result$data;
   }
@@ -781,6 +878,15 @@ class Input_ClassesInsertInput {
     if (l$serviceStudyYear != lOther$serviceStudyYear) {
       return false;
     }
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    final lOther$serviceStudyYearTo = other.serviceStudyYearTo;
+    if (_$data.containsKey('serviceStudyYearTo') !=
+        other._$data.containsKey('serviceStudyYearTo')) {
+      return false;
+    }
+    if (l$serviceStudyYearTo != lOther$serviceStudyYearTo) {
+      return false;
+    }
     final l$studyYear = studyYear;
     final lOther$studyYear = other.studyYear;
     if (_$data.containsKey('studyYear') !=
@@ -788,6 +894,15 @@ class Input_ClassesInsertInput {
       return false;
     }
     if (l$studyYear != lOther$studyYear) {
+      return false;
+    }
+    final l$studyYearTo = studyYearTo;
+    final lOther$studyYearTo = other.studyYearTo;
+    if (_$data.containsKey('studyYearTo') !=
+        other._$data.containsKey('studyYearTo')) {
+      return false;
+    }
+    if (l$studyYearTo != lOther$studyYearTo) {
       return false;
     }
     return true;
@@ -803,7 +918,9 @@ class Input_ClassesInsertInput {
     final l$serviceGender = serviceGender;
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
     final l$studyYear = studyYear;
+    final l$studyYearTo = studyYearTo;
     return Object.hashAll([
       _$data.containsKey('adminUsers') ? l$adminUsers : const {},
       _$data.containsKey('color') ? l$color : const {},
@@ -813,7 +930,11 @@ class Input_ClassesInsertInput {
       _$data.containsKey('serviceGender') ? l$serviceGender : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('serviceStudyYearTo')
+          ? l$serviceStudyYearTo
+          : const {},
       _$data.containsKey('studyYear') ? l$studyYear : const {},
+      _$data.containsKey('studyYearTo') ? l$studyYearTo : const {},
     ]);
   }
 }
@@ -836,12 +957,15 @@ abstract class CopyWith_Input_ClassesInsertInput<TRes> {
     bool? serviceGender,
     UuidValue? serviceId,
     int? serviceStudyYear,
+    int? serviceStudyYearTo,
     Input_StudyYearsObjRelInsertInput? studyYear,
+    Input_StudyYearsObjRelInsertInput? studyYearTo,
   });
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers;
   CopyWith_Input_HistoryMeetingsArrRelInsertInput<TRes> get meetings;
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service;
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYear;
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYearTo;
 }
 
 class _CopyWithImpl_Input_ClassesInsertInput<TRes>
@@ -863,7 +987,9 @@ class _CopyWithImpl_Input_ClassesInsertInput<TRes>
     Object? serviceGender = _undefined,
     Object? serviceId = _undefined,
     Object? serviceStudyYear = _undefined,
+    Object? serviceStudyYearTo = _undefined,
     Object? studyYear = _undefined,
+    Object? studyYearTo = _undefined,
   }) => _then(
     Input_ClassesInsertInput._({
       ..._instance._$data,
@@ -880,8 +1006,12 @@ class _CopyWithImpl_Input_ClassesInsertInput<TRes>
       if (serviceId != _undefined) 'serviceId': (serviceId as UuidValue?),
       if (serviceStudyYear != _undefined)
         'serviceStudyYear': (serviceStudyYear as int?),
+      if (serviceStudyYearTo != _undefined)
+        'serviceStudyYearTo': (serviceStudyYearTo as int?),
       if (studyYear != _undefined)
         'studyYear': (studyYear as Input_StudyYearsObjRelInsertInput?),
+      if (studyYearTo != _undefined)
+        'studyYearTo': (studyYearTo as Input_StudyYearsObjRelInsertInput?),
     }),
   );
 
@@ -926,6 +1056,16 @@ class _CopyWithImpl_Input_ClassesInsertInput<TRes>
             (e) => call(studyYear: e),
           );
   }
+
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYearTo {
+    final local$studyYearTo = _instance.studyYearTo;
+    return local$studyYearTo == null
+        ? CopyWith_Input_StudyYearsObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_StudyYearsObjRelInsertInput(
+            local$studyYearTo,
+            (e) => call(studyYearTo: e),
+          );
+  }
 }
 
 class _CopyWithStubImpl_Input_ClassesInsertInput<TRes>
@@ -943,7 +1083,9 @@ class _CopyWithStubImpl_Input_ClassesInsertInput<TRes>
     bool? serviceGender,
     UuidValue? serviceId,
     int? serviceStudyYear,
+    int? serviceStudyYearTo,
     Input_StudyYearsObjRelInsertInput? studyYear,
+    Input_StudyYearsObjRelInsertInput? studyYearTo,
   }) => _res;
 
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers =>
@@ -957,6 +1099,9 @@ class _CopyWithStubImpl_Input_ClassesInsertInput<TRes>
 
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYear =>
       CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
+
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYearTo =>
+      CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
 }
 
 class Input_ClassesMaxOrderBy {
@@ -968,6 +1113,7 @@ class Input_ClassesMaxOrderBy {
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? serviceId,
     Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? serviceStudyYearTo,
   }) => Input_ClassesMaxOrderBy._({
     if (blurhash != null) r'blurhash': blurhash,
     if (color != null) r'color': color,
@@ -976,6 +1122,7 @@ class Input_ClassesMaxOrderBy {
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
     if (serviceId != null) r'serviceId': serviceId,
     if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceStudyYearTo != null) r'serviceStudyYearTo': serviceStudyYearTo,
   });
 
   Input_ClassesMaxOrderBy._(this._$data);
@@ -1024,6 +1171,12 @@ class Input_ClassesMaxOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
     }
+    if (data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = data['serviceStudyYearTo'];
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceStudyYearTo as String));
+    }
     return Input_ClassesMaxOrderBy._(result$data);
   }
 
@@ -1044,6 +1197,9 @@ class Input_ClassesMaxOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get serviceStudyYearTo =>
+      (_$data['serviceStudyYearTo'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1084,6 +1240,12 @@ class Input_ClassesMaxOrderBy {
       result$data['serviceStudyYear'] = l$serviceStudyYear == null
           ? null
           : toJson_Enum_OrderBy(l$serviceStudyYear);
+    }
+    if (_$data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = serviceStudyYearTo;
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceStudyYearTo);
     }
     return result$data;
   }
@@ -1159,6 +1321,15 @@ class Input_ClassesMaxOrderBy {
     if (l$serviceStudyYear != lOther$serviceStudyYear) {
       return false;
     }
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    final lOther$serviceStudyYearTo = other.serviceStudyYearTo;
+    if (_$data.containsKey('serviceStudyYearTo') !=
+        other._$data.containsKey('serviceStudyYearTo')) {
+      return false;
+    }
+    if (l$serviceStudyYearTo != lOther$serviceStudyYearTo) {
+      return false;
+    }
     return true;
   }
 
@@ -1171,6 +1342,7 @@ class Input_ClassesMaxOrderBy {
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
     return Object.hashAll([
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
@@ -1179,6 +1351,9 @@ class Input_ClassesMaxOrderBy {
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('serviceStudyYearTo')
+          ? l$serviceStudyYearTo
+          : const {},
     ]);
   }
 }
@@ -1200,6 +1375,7 @@ abstract class CopyWith_Input_ClassesMaxOrderBy<TRes> {
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? serviceId,
     Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? serviceStudyYearTo,
   });
 }
 
@@ -1221,6 +1397,7 @@ class _CopyWithImpl_Input_ClassesMaxOrderBy<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? serviceId = _undefined,
     Object? serviceStudyYear = _undefined,
+    Object? serviceStudyYearTo = _undefined,
   }) => _then(
     Input_ClassesMaxOrderBy._({
       ..._instance._$data,
@@ -1233,6 +1410,8 @@ class _CopyWithImpl_Input_ClassesMaxOrderBy<TRes>
       if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
       if (serviceStudyYear != _undefined)
         'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+      if (serviceStudyYearTo != _undefined)
+        'serviceStudyYearTo': (serviceStudyYearTo as Enum_OrderBy?),
     }),
   );
 }
@@ -1251,6 +1430,7 @@ class _CopyWithStubImpl_Input_ClassesMaxOrderBy<TRes>
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? serviceId,
     Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? serviceStudyYearTo,
   }) => _res;
 }
 
@@ -1263,6 +1443,7 @@ class Input_ClassesMinOrderBy {
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? serviceId,
     Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? serviceStudyYearTo,
   }) => Input_ClassesMinOrderBy._({
     if (blurhash != null) r'blurhash': blurhash,
     if (color != null) r'color': color,
@@ -1271,6 +1452,7 @@ class Input_ClassesMinOrderBy {
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
     if (serviceId != null) r'serviceId': serviceId,
     if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceStudyYearTo != null) r'serviceStudyYearTo': serviceStudyYearTo,
   });
 
   Input_ClassesMinOrderBy._(this._$data);
@@ -1319,6 +1501,12 @@ class Input_ClassesMinOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
     }
+    if (data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = data['serviceStudyYearTo'];
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceStudyYearTo as String));
+    }
     return Input_ClassesMinOrderBy._(result$data);
   }
 
@@ -1339,6 +1527,9 @@ class Input_ClassesMinOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get serviceStudyYearTo =>
+      (_$data['serviceStudyYearTo'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1379,6 +1570,12 @@ class Input_ClassesMinOrderBy {
       result$data['serviceStudyYear'] = l$serviceStudyYear == null
           ? null
           : toJson_Enum_OrderBy(l$serviceStudyYear);
+    }
+    if (_$data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = serviceStudyYearTo;
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceStudyYearTo);
     }
     return result$data;
   }
@@ -1454,6 +1651,15 @@ class Input_ClassesMinOrderBy {
     if (l$serviceStudyYear != lOther$serviceStudyYear) {
       return false;
     }
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    final lOther$serviceStudyYearTo = other.serviceStudyYearTo;
+    if (_$data.containsKey('serviceStudyYearTo') !=
+        other._$data.containsKey('serviceStudyYearTo')) {
+      return false;
+    }
+    if (l$serviceStudyYearTo != lOther$serviceStudyYearTo) {
+      return false;
+    }
     return true;
   }
 
@@ -1466,6 +1672,7 @@ class Input_ClassesMinOrderBy {
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
     return Object.hashAll([
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
@@ -1474,6 +1681,9 @@ class Input_ClassesMinOrderBy {
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('serviceStudyYearTo')
+          ? l$serviceStudyYearTo
+          : const {},
     ]);
   }
 }
@@ -1495,6 +1705,7 @@ abstract class CopyWith_Input_ClassesMinOrderBy<TRes> {
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? serviceId,
     Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? serviceStudyYearTo,
   });
 }
 
@@ -1516,6 +1727,7 @@ class _CopyWithImpl_Input_ClassesMinOrderBy<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? serviceId = _undefined,
     Object? serviceStudyYear = _undefined,
+    Object? serviceStudyYearTo = _undefined,
   }) => _then(
     Input_ClassesMinOrderBy._({
       ..._instance._$data,
@@ -1528,6 +1740,8 @@ class _CopyWithImpl_Input_ClassesMinOrderBy<TRes>
       if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
       if (serviceStudyYear != _undefined)
         'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+      if (serviceStudyYearTo != _undefined)
+        'serviceStudyYearTo': (serviceStudyYearTo as Enum_OrderBy?),
     }),
   );
 }
@@ -1546,6 +1760,7 @@ class _CopyWithStubImpl_Input_ClassesMinOrderBy<TRes>
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? serviceId,
     Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? serviceStudyYearTo,
   }) => _res;
 }
 
@@ -1757,7 +1972,9 @@ class Input_ClassesOrderBy {
     Enum_OrderBy? serviceGender,
     Enum_OrderBy? serviceId,
     Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? serviceStudyYearTo,
     Input_StudyYearsOrderBy? studyYear,
+    Input_StudyYearsOrderBy? studyYearTo,
     Enum_OrderBy? userCanEdit,
   }) => Input_ClassesOrderBy._({
     if (adminUsersAggregate != null)
@@ -1776,7 +1993,9 @@ class Input_ClassesOrderBy {
     if (serviceGender != null) r'serviceGender': serviceGender,
     if (serviceId != null) r'serviceId': serviceId,
     if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceStudyYearTo != null) r'serviceStudyYearTo': serviceStudyYearTo,
     if (studyYear != null) r'studyYear': studyYear,
+    if (studyYearTo != null) r'studyYearTo': studyYearTo,
     if (userCanEdit != null) r'userCanEdit': userCanEdit,
   });
 
@@ -1878,12 +2097,26 @@ class Input_ClassesOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
     }
+    if (data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = data['serviceStudyYearTo'];
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceStudyYearTo as String));
+    }
     if (data.containsKey('studyYear')) {
       final l$studyYear = data['studyYear'];
       result$data['studyYear'] = l$studyYear == null
           ? null
           : Input_StudyYearsOrderBy.fromJson(
               (l$studyYear as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('studyYearTo')) {
+      final l$studyYearTo = data['studyYearTo'];
+      result$data['studyYearTo'] = l$studyYearTo == null
+          ? null
+          : Input_StudyYearsOrderBy.fromJson(
+              (l$studyYearTo as Map<String, dynamic>),
             );
     }
     if (data.containsKey('userCanEdit')) {
@@ -1935,8 +2168,14 @@ class Input_ClassesOrderBy {
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get serviceStudyYearTo =>
+      (_$data['serviceStudyYearTo'] as Enum_OrderBy?);
+
   Input_StudyYearsOrderBy? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsOrderBy?);
+
+  Input_StudyYearsOrderBy? get studyYearTo =>
+      (_$data['studyYearTo'] as Input_StudyYearsOrderBy?);
 
   Enum_OrderBy? get userCanEdit => (_$data['userCanEdit'] as Enum_OrderBy?);
 
@@ -2010,9 +2249,19 @@ class Input_ClassesOrderBy {
           ? null
           : toJson_Enum_OrderBy(l$serviceStudyYear);
     }
+    if (_$data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = serviceStudyYearTo;
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceStudyYearTo);
+    }
     if (_$data.containsKey('studyYear')) {
       final l$studyYear = studyYear;
       result$data['studyYear'] = l$studyYear?.toJson();
+    }
+    if (_$data.containsKey('studyYearTo')) {
+      final l$studyYearTo = studyYearTo;
+      result$data['studyYearTo'] = l$studyYearTo?.toJson();
     }
     if (_$data.containsKey('userCanEdit')) {
       final l$userCanEdit = userCanEdit;
@@ -2156,6 +2405,15 @@ class Input_ClassesOrderBy {
     if (l$serviceStudyYear != lOther$serviceStudyYear) {
       return false;
     }
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    final lOther$serviceStudyYearTo = other.serviceStudyYearTo;
+    if (_$data.containsKey('serviceStudyYearTo') !=
+        other._$data.containsKey('serviceStudyYearTo')) {
+      return false;
+    }
+    if (l$serviceStudyYearTo != lOther$serviceStudyYearTo) {
+      return false;
+    }
     final l$studyYear = studyYear;
     final lOther$studyYear = other.studyYear;
     if (_$data.containsKey('studyYear') !=
@@ -2163,6 +2421,15 @@ class Input_ClassesOrderBy {
       return false;
     }
     if (l$studyYear != lOther$studyYear) {
+      return false;
+    }
+    final l$studyYearTo = studyYearTo;
+    final lOther$studyYearTo = other.studyYearTo;
+    if (_$data.containsKey('studyYearTo') !=
+        other._$data.containsKey('studyYearTo')) {
+      return false;
+    }
+    if (l$studyYearTo != lOther$studyYearTo) {
       return false;
     }
     final l$userCanEdit = userCanEdit;
@@ -2193,7 +2460,9 @@ class Input_ClassesOrderBy {
     final l$serviceGender = serviceGender;
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
     final l$studyYear = studyYear;
+    final l$studyYearTo = studyYearTo;
     final l$userCanEdit = userCanEdit;
     return Object.hashAll([
       _$data.containsKey('adminUsersAggregate')
@@ -2214,7 +2483,11 @@ class Input_ClassesOrderBy {
       _$data.containsKey('serviceGender') ? l$serviceGender : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('serviceStudyYearTo')
+          ? l$serviceStudyYearTo
+          : const {},
       _$data.containsKey('studyYear') ? l$studyYear : const {},
+      _$data.containsKey('studyYearTo') ? l$studyYearTo : const {},
       _$data.containsKey('userCanEdit') ? l$userCanEdit : const {},
     ]);
   }
@@ -2244,7 +2517,9 @@ abstract class CopyWith_Input_ClassesOrderBy<TRes> {
     Enum_OrderBy? serviceGender,
     Enum_OrderBy? serviceId,
     Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? serviceStudyYearTo,
     Input_StudyYearsOrderBy? studyYear,
+    Input_StudyYearsOrderBy? studyYearTo,
     Enum_OrderBy? userCanEdit,
   });
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminUsersAggregate;
@@ -2255,316 +2530,5 @@ abstract class CopyWith_Input_ClassesOrderBy<TRes> {
   CopyWith_Input_ClassesPersonsAggregateOrderBy<TRes> get personsAggregate;
   CopyWith_Input_ServicesOrderBy<TRes> get service;
   CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear;
-}
-
-class _CopyWithImpl_Input_ClassesOrderBy<TRes>
-    implements CopyWith_Input_ClassesOrderBy<TRes> {
-  _CopyWithImpl_Input_ClassesOrderBy(this._instance, this._then);
-
-  final Input_ClassesOrderBy _instance;
-
-  final TRes Function(Input_ClassesOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? adminUsersAggregate = _undefined,
-    Object? blurhash = _undefined,
-    Object? color = _undefined,
-    Object? editHistoryAggregate = _undefined,
-    Object? id = _undefined,
-    Object? lastEdit = _undefined,
-    Object? meetingsAggregate = _undefined,
-    Object? name = _undefined,
-    Object? personsAggregate = _undefined,
-    Object? photoUpdatedAt = _undefined,
-    Object? service = _undefined,
-    Object? serviceGender = _undefined,
-    Object? serviceId = _undefined,
-    Object? serviceStudyYear = _undefined,
-    Object? studyYear = _undefined,
-    Object? userCanEdit = _undefined,
-  }) => _then(
-    Input_ClassesOrderBy._({
-      ..._instance._$data,
-      if (adminUsersAggregate != _undefined)
-        'adminUsersAggregate':
-            (adminUsersAggregate as Input_AuthUsersAdminOnAggregateOrderBy?),
-      if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
-      if (color != _undefined) 'color': (color as Enum_OrderBy?),
-      if (editHistoryAggregate != _undefined)
-        'editHistoryAggregate':
-            (editHistoryAggregate as Input_HistoryEditHistoryAggregateOrderBy?),
-      if (id != _undefined) 'id': (id as Enum_OrderBy?),
-      if (lastEdit != _undefined)
-        'lastEdit': (lastEdit as Input_HistoryLatestEditsOrderBy?),
-      if (meetingsAggregate != _undefined)
-        'meetingsAggregate':
-            (meetingsAggregate as Input_HistoryMeetingsAggregateOrderBy?),
-      if (name != _undefined) 'name': (name as Enum_OrderBy?),
-      if (personsAggregate != _undefined)
-        'personsAggregate':
-            (personsAggregate as Input_ClassesPersonsAggregateOrderBy?),
-      if (photoUpdatedAt != _undefined)
-        'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
-      if (service != _undefined) 'service': (service as Input_ServicesOrderBy?),
-      if (serviceGender != _undefined)
-        'serviceGender': (serviceGender as Enum_OrderBy?),
-      if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
-      if (serviceStudyYear != _undefined)
-        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-      if (studyYear != _undefined)
-        'studyYear': (studyYear as Input_StudyYearsOrderBy?),
-      if (userCanEdit != _undefined)
-        'userCanEdit': (userCanEdit as Enum_OrderBy?),
-    }),
-  );
-
-  CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
-  get adminUsersAggregate {
-    final local$adminUsersAggregate = _instance.adminUsersAggregate;
-    return local$adminUsersAggregate == null
-        ? CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersAdminOnAggregateOrderBy(
-            local$adminUsersAggregate,
-            (e) => call(adminUsersAggregate: e),
-          );
-  }
-
-  CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
-  get editHistoryAggregate {
-    final local$editHistoryAggregate = _instance.editHistoryAggregate;
-    return local$editHistoryAggregate == null
-        ? CopyWith_Input_HistoryEditHistoryAggregateOrderBy.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryEditHistoryAggregateOrderBy(
-            local$editHistoryAggregate,
-            (e) => call(editHistoryAggregate: e),
-          );
-  }
-
-  CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit {
-    final local$lastEdit = _instance.lastEdit;
-    return local$lastEdit == null
-        ? CopyWith_Input_HistoryLatestEditsOrderBy.stub(_then(_instance))
-        : CopyWith_Input_HistoryLatestEditsOrderBy(
-            local$lastEdit,
-            (e) => call(lastEdit: e),
-          );
-  }
-
-  CopyWith_Input_HistoryMeetingsAggregateOrderBy<TRes> get meetingsAggregate {
-    final local$meetingsAggregate = _instance.meetingsAggregate;
-    return local$meetingsAggregate == null
-        ? CopyWith_Input_HistoryMeetingsAggregateOrderBy.stub(_then(_instance))
-        : CopyWith_Input_HistoryMeetingsAggregateOrderBy(
-            local$meetingsAggregate,
-            (e) => call(meetingsAggregate: e),
-          );
-  }
-
-  CopyWith_Input_ClassesPersonsAggregateOrderBy<TRes> get personsAggregate {
-    final local$personsAggregate = _instance.personsAggregate;
-    return local$personsAggregate == null
-        ? CopyWith_Input_ClassesPersonsAggregateOrderBy.stub(_then(_instance))
-        : CopyWith_Input_ClassesPersonsAggregateOrderBy(
-            local$personsAggregate,
-            (e) => call(personsAggregate: e),
-          );
-  }
-
-  CopyWith_Input_ServicesOrderBy<TRes> get service {
-    final local$service = _instance.service;
-    return local$service == null
-        ? CopyWith_Input_ServicesOrderBy.stub(_then(_instance))
-        : CopyWith_Input_ServicesOrderBy(
-            local$service,
-            (e) => call(service: e),
-          );
-  }
-
-  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear {
-    final local$studyYear = _instance.studyYear;
-    return local$studyYear == null
-        ? CopyWith_Input_StudyYearsOrderBy.stub(_then(_instance))
-        : CopyWith_Input_StudyYearsOrderBy(
-            local$studyYear,
-            (e) => call(studyYear: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_ClassesOrderBy<TRes>
-    implements CopyWith_Input_ClassesOrderBy<TRes> {
-  _CopyWithStubImpl_Input_ClassesOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Input_AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
-    Enum_OrderBy? blurhash,
-    Enum_OrderBy? color,
-    Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
-    Enum_OrderBy? id,
-    Input_HistoryLatestEditsOrderBy? lastEdit,
-    Input_HistoryMeetingsAggregateOrderBy? meetingsAggregate,
-    Enum_OrderBy? name,
-    Input_ClassesPersonsAggregateOrderBy? personsAggregate,
-    Enum_OrderBy? photoUpdatedAt,
-    Input_ServicesOrderBy? service,
-    Enum_OrderBy? serviceGender,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? serviceStudyYear,
-    Input_StudyYearsOrderBy? studyYear,
-    Enum_OrderBy? userCanEdit,
-  }) => _res;
-
-  CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
-  get adminUsersAggregate =>
-      CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
-  get editHistoryAggregate =>
-      CopyWith_Input_HistoryEditHistoryAggregateOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit =>
-      CopyWith_Input_HistoryLatestEditsOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryMeetingsAggregateOrderBy<TRes> get meetingsAggregate =>
-      CopyWith_Input_HistoryMeetingsAggregateOrderBy.stub(_res);
-
-  CopyWith_Input_ClassesPersonsAggregateOrderBy<TRes> get personsAggregate =>
-      CopyWith_Input_ClassesPersonsAggregateOrderBy.stub(_res);
-
-  CopyWith_Input_ServicesOrderBy<TRes> get service =>
-      CopyWith_Input_ServicesOrderBy.stub(_res);
-
-  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear =>
-      CopyWith_Input_StudyYearsOrderBy.stub(_res);
-}
-
-class Input_ClassesPersonsAggregateOrderBy {
-  factory Input_ClassesPersonsAggregateOrderBy({
-    Enum_OrderBy? count,
-    Input_ClassesPersonsMaxOrderBy? max,
-    Input_ClassesPersonsMinOrderBy? min,
-  }) => Input_ClassesPersonsAggregateOrderBy._({
-    if (count != null) r'count': count,
-    if (max != null) r'max': max,
-    if (min != null) r'min': min,
-  });
-
-  Input_ClassesPersonsAggregateOrderBy._(this._$data);
-
-  factory Input_ClassesPersonsAggregateOrderBy.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('count')) {
-      final l$count = data['count'];
-      result$data['count'] = l$count == null
-          ? null
-          : fromJson_Enum_OrderBy((l$count as String));
-    }
-    if (data.containsKey('max')) {
-      final l$max = data['max'];
-      result$data['max'] = l$max == null
-          ? null
-          : Input_ClassesPersonsMaxOrderBy.fromJson(
-              (l$max as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('min')) {
-      final l$min = data['min'];
-      result$data['min'] = l$min == null
-          ? null
-          : Input_ClassesPersonsMinOrderBy.fromJson(
-              (l$min as Map<String, dynamic>),
-            );
-    }
-    return Input_ClassesPersonsAggregateOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
-
-  Input_ClassesPersonsMaxOrderBy? get max =>
-      (_$data['max'] as Input_ClassesPersonsMaxOrderBy?);
-
-  Input_ClassesPersonsMinOrderBy? get min =>
-      (_$data['min'] as Input_ClassesPersonsMinOrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('count')) {
-      final l$count = count;
-      result$data['count'] = l$count == null
-          ? null
-          : toJson_Enum_OrderBy(l$count);
-    }
-    if (_$data.containsKey('max')) {
-      final l$max = max;
-      result$data['max'] = l$max?.toJson();
-    }
-    if (_$data.containsKey('min')) {
-      final l$min = min;
-      result$data['min'] = l$min?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ClassesPersonsAggregateOrderBy<
-    Input_ClassesPersonsAggregateOrderBy
-  >
-  get copyWith => CopyWith_Input_ClassesPersonsAggregateOrderBy(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ClassesPersonsAggregateOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$count = count;
-    final lOther$count = other.count;
-    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
-      return false;
-    }
-    if (l$count != lOther$count) {
-      return false;
-    }
-    final l$max = max;
-    final lOther$max = other.max;
-    if (_$data.containsKey('max') != other._$data.containsKey('max')) {
-      return false;
-    }
-    if (l$max != lOther$max) {
-      return false;
-    }
-    final l$min = min;
-    final lOther$min = other.min;
-    if (_$data.containsKey('min') != other._$data.containsKey('min')) {
-      return false;
-    }
-    if (l$min != lOther$min) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$count = count;
-    final l$max = max;
-    final l$min = min;
-    return Object.hashAll([
-      _$data.containsKey('count') ? l$count : const {},
-      _$data.containsKey('max') ? l$max : const {},
-      _$data.containsKey('min') ? l$min : const {},
-    ]);
-  }
+  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYearTo;
 }

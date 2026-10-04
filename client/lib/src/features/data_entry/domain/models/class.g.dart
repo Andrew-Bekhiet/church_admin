@@ -81,6 +81,19 @@ class _ClassFields {
     },
   );
 
+  final FieldMetadata<StudyYear> studyYearTo = FieldMetadata<StudyYear>(
+    getValue: (obj) => obj is Class ? obj.studyYearTo : null,
+    parentType: Class,
+    name: 'studyYearTo',
+    label: 'السنة الدراسية: إلى',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
   final FieldMetadata<bool> serviceGender = FieldMetadata<bool>(
     getValue: (obj) => obj is Class ? obj.serviceGender : null,
     parentType: Class,
@@ -130,6 +143,7 @@ class _ClassFields {
     photoUpdatedAt,
     service,
     studyYear,
+    studyYearTo,
     serviceGender,
     lastEdit,
     adminUsers,
@@ -141,6 +155,7 @@ class _ClassFields {
     'photoUpdatedAt': photoUpdatedAt,
     'service': service,
     'studyYear': studyYear,
+    'studyYearTo': studyYearTo,
     'serviceGender': serviceGender,
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
@@ -171,6 +186,12 @@ Class _$ClassFromJson(Map json) => Class(
       ? null
       : StudyYear.fromJson(Map<String, Object?>.from(json['studyYear'] as Map)),
   serviceStudyYear: (json['serviceStudyYear'] as num?)?.toInt(),
+  studyYearTo: json['studyYearTo'] == null
+      ? null
+      : StudyYear.fromJson(
+          Map<String, Object?>.from(json['studyYearTo'] as Map),
+        ),
+  serviceStudyYearTo: (json['serviceStudyYearTo'] as num?)?.toInt(),
   serviceGender: json['serviceGender'] as bool?,
   lastEdit: json['lastEdit'] == null
       ? null
@@ -193,6 +214,8 @@ Map<String, dynamic> _$ClassToJson(Class instance) => <String, dynamic>{
   'serviceId': instance.serviceId,
   'studyYear': instance.studyYear?.toJson(),
   'serviceStudyYear': instance.serviceStudyYear,
+  'studyYearTo': instance.studyYearTo?.toJson(),
+  'serviceStudyYearTo': instance.serviceStudyYearTo,
   'serviceGender': instance.serviceGender,
   'lastEdit': instance.lastEdit?.toJson(),
   'adminUsers': adminUsersToJson(instance.adminUsers),

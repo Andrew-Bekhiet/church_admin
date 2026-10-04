@@ -119,8 +119,7 @@ subscription watchPerson(
       name
     }
     studyYear {
-      name
-      order
+      ...StudyYear
     }
     hobbies(orderBy: { hobby: { name: ASC } }) {
       hobby {

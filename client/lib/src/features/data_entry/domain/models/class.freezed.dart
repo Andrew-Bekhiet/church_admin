@@ -22,6 +22,8 @@ mixin _$Class {
   String? get serviceId;
   StudyYear? get studyYear;
   int? get serviceStudyYear;
+  StudyYear? get studyYearTo;
+  int? get serviceStudyYearTo;
   bool? get serviceGender;
   LastRecordedByInfo? get lastEdit;
   List<User>? get adminUsers;
@@ -53,6 +55,10 @@ mixin _$Class {
                 other.studyYear == studyYear) &&
             (identical(other.serviceStudyYear, serviceStudyYear) ||
                 other.serviceStudyYear == serviceStudyYear) &&
+            (identical(other.studyYearTo, studyYearTo) ||
+                other.studyYearTo == studyYearTo) &&
+            (identical(other.serviceStudyYearTo, serviceStudyYearTo) ||
+                other.serviceStudyYearTo == serviceStudyYearTo) &&
             (identical(other.serviceGender, serviceGender) ||
                 other.serviceGender == serviceGender) &&
             (identical(other.lastEdit, lastEdit) ||
@@ -78,6 +84,8 @@ mixin _$Class {
     serviceId,
     studyYear,
     serviceStudyYear,
+    studyYearTo,
+    serviceStudyYearTo,
     serviceGender,
     lastEdit,
     const DeepCollectionEquality().hash(adminUsers),
@@ -86,7 +94,7 @@ mixin _$Class {
 
   @override
   String toString() {
-    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, service: $service, serviceId: $serviceId, studyYear: $studyYear, serviceStudyYear: $serviceStudyYear, serviceGender: $serviceGender, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
+    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, service: $service, serviceId: $serviceId, studyYear: $studyYear, serviceStudyYear: $serviceStudyYear, studyYearTo: $studyYearTo, serviceStudyYearTo: $serviceStudyYearTo, serviceGender: $serviceGender, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -106,6 +114,8 @@ abstract mixin class $ClassCopyWith<$Res> {
     String? serviceId,
     StudyYear? studyYear,
     int? serviceStudyYear,
+    StudyYear? studyYearTo,
+    int? serviceStudyYearTo,
     bool? serviceGender,
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
@@ -134,6 +144,8 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
     Object? serviceId = freezed,
     Object? studyYear = freezed,
     Object? serviceStudyYear = freezed,
+    Object? studyYearTo = freezed,
+    Object? serviceStudyYearTo = freezed,
     Object? serviceGender = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
@@ -179,6 +191,14 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
         serviceStudyYear: freezed == serviceStudyYear
             ? _self.serviceStudyYear
             : serviceStudyYear // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        studyYearTo: freezed == studyYearTo
+            ? _self.studyYearTo
+            : studyYearTo // ignore: cast_nullable_to_non_nullable
+                  as StudyYear?,
+        serviceStudyYearTo: freezed == serviceStudyYearTo
+            ? _self.serviceStudyYearTo
+            : serviceStudyYearTo // ignore: cast_nullable_to_non_nullable
                   as int?,
         serviceGender: freezed == serviceGender
             ? _self.serviceGender

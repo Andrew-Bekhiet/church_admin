@@ -4,7 +4,6 @@ subscription watchAllStudyYears(
   $limit: Int = 25
 ) {
   studyYears(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
-    order
-    name
+    ...StudyYear
   }
 }

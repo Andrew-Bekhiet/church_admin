@@ -1,4 +1,5 @@
 import '../../groups/__generated__/fragments.gql.dart';
+import '../../metadata/study_years/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
@@ -54,9 +55,7 @@ class Fragment_Meeting {
             ),
       studyYear: l$studyYear == null
           ? null
-          : Fragment_Meeting_studyYear.fromJson(
-              (l$studyYear as Map<String, dynamic>),
-            ),
+          : Fragment_StudyYear.fromJson((l$studyYear as Map<String, dynamic>)),
       group: l$group == null
           ? null
           : Fragment_GroupNoPhoto.fromJson((l$group as Map<String, dynamic>)),
@@ -86,7 +85,7 @@ class Fragment_Meeting {
 
   final Fragment_ServiceNoPhoto? service;
 
-  final Fragment_Meeting_studyYear? studyYear;
+  final Fragment_StudyYear? studyYear;
 
   final Fragment_GroupNoPhoto? group;
 
@@ -269,12 +268,12 @@ abstract class CopyWith_Fragment_Meeting<TRes> {
     int? serviceStudyYear,
     UuidValue? groupId,
     Fragment_ServiceNoPhoto? service,
-    Fragment_Meeting_studyYear? studyYear,
+    Fragment_StudyYear? studyYear,
     Fragment_GroupNoPhoto? group,
     String? $__typename,
   });
   CopyWith_Fragment_ServiceNoPhoto<TRes> get service;
-  CopyWith_Fragment_Meeting_studyYear<TRes> get studyYear;
+  CopyWith_Fragment_StudyYear<TRes> get studyYear;
   CopyWith_Fragment_GroupNoPhoto<TRes> get group;
 }
 
@@ -337,7 +336,7 @@ class _CopyWithImpl_Fragment_Meeting<TRes>
           : (service as Fragment_ServiceNoPhoto?),
       studyYear: studyYear == _undefined
           ? _instance.studyYear
-          : (studyYear as Fragment_Meeting_studyYear?),
+          : (studyYear as Fragment_StudyYear?),
       group: group == _undefined
           ? _instance.group
           : (group as Fragment_GroupNoPhoto?),
@@ -357,11 +356,11 @@ class _CopyWithImpl_Fragment_Meeting<TRes>
           );
   }
 
-  CopyWith_Fragment_Meeting_studyYear<TRes> get studyYear {
+  CopyWith_Fragment_StudyYear<TRes> get studyYear {
     final local$studyYear = _instance.studyYear;
     return local$studyYear == null
-        ? CopyWith_Fragment_Meeting_studyYear.stub(_then(_instance))
-        : CopyWith_Fragment_Meeting_studyYear(
+        ? CopyWith_Fragment_StudyYear.stub(_then(_instance))
+        : CopyWith_Fragment_StudyYear(
             local$studyYear,
             (e) => call(studyYear: e),
           );
@@ -393,7 +392,7 @@ class _CopyWithStubImpl_Fragment_Meeting<TRes>
     int? serviceStudyYear,
     UuidValue? groupId,
     Fragment_ServiceNoPhoto? service,
-    Fragment_Meeting_studyYear? studyYear,
+    Fragment_StudyYear? studyYear,
     Fragment_GroupNoPhoto? group,
     String? $__typename,
   }) => _res;
@@ -401,8 +400,8 @@ class _CopyWithStubImpl_Fragment_Meeting<TRes>
   CopyWith_Fragment_ServiceNoPhoto<TRes> get service =>
       CopyWith_Fragment_ServiceNoPhoto.stub(_res);
 
-  CopyWith_Fragment_Meeting_studyYear<TRes> get studyYear =>
-      CopyWith_Fragment_Meeting_studyYear.stub(_res);
+  CopyWith_Fragment_StudyYear<TRes> get studyYear =>
+      CopyWith_Fragment_StudyYear.stub(_res);
 
   CopyWith_Fragment_GroupNoPhoto<TRes> get group =>
       CopyWith_Fragment_GroupNoPhoto.stub(_res);
@@ -517,19 +516,9 @@ const fragmentDefinitionMeeting = FragmentDefinitionNode(
         directives: [],
         selectionSet: SelectionSetNode(
           selections: [
-            FieldNode(
-              name: NameNode(value: 'name'),
-              alias: null,
-              arguments: [],
+            FragmentSpreadNode(
+              name: NameNode(value: 'StudyYear'),
               directives: [],
-              selectionSet: null,
-            ),
-            FieldNode(
-              name: NameNode(value: 'order'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
             ),
             FieldNode(
               name: NameNode(value: '__typename'),
@@ -576,133 +565,7 @@ const documentNodeFragmentMeeting = DocumentNode(
   definitions: [
     fragmentDefinitionMeeting,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionStudyYear,
     fragmentDefinitionGroupNoPhoto,
   ],
 );
-
-class Fragment_Meeting_studyYear {
-  Fragment_Meeting_studyYear({
-    required this.name,
-    required this.order,
-    this.$__typename = 'StudyYears',
-  });
-
-  factory Fragment_Meeting_studyYear.fromJson(Map<String, dynamic> json) {
-    final l$name = json['name'];
-    final l$order = json['order'];
-    final l$$__typename = json['__typename'];
-    return Fragment_Meeting_studyYear(
-      name: (l$name as String),
-      order: (l$order as int),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String name;
-
-  final int order;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$order = order;
-    _resultData['order'] = l$order;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$order = order;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$name, l$order, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_Meeting_studyYear ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_Meeting_studyYear
-    on Fragment_Meeting_studyYear {
-  CopyWith_Fragment_Meeting_studyYear<Fragment_Meeting_studyYear>
-  get copyWith => CopyWith_Fragment_Meeting_studyYear(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_Meeting_studyYear<TRes> {
-  factory CopyWith_Fragment_Meeting_studyYear(
-    Fragment_Meeting_studyYear instance,
-    TRes Function(Fragment_Meeting_studyYear) then,
-  ) = _CopyWithImpl_Fragment_Meeting_studyYear;
-
-  factory CopyWith_Fragment_Meeting_studyYear.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_Meeting_studyYear;
-
-  TRes call({String? name, int? order, String? $__typename});
-}
-
-class _CopyWithImpl_Fragment_Meeting_studyYear<TRes>
-    implements CopyWith_Fragment_Meeting_studyYear<TRes> {
-  _CopyWithImpl_Fragment_Meeting_studyYear(this._instance, this._then);
-
-  final Fragment_Meeting_studyYear _instance;
-
-  final TRes Function(Fragment_Meeting_studyYear) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? name = _undefined,
-    Object? order = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_Meeting_studyYear(
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      order: order == _undefined || order == null
-          ? _instance.order
-          : (order as int),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Fragment_Meeting_studyYear<TRes>
-    implements CopyWith_Fragment_Meeting_studyYear<TRes> {
-  _CopyWithStubImpl_Fragment_Meeting_studyYear(this._res);
-
-  TRes _res;
-
-  call({String? name, int? order, String? $__typename}) => _res;
-}

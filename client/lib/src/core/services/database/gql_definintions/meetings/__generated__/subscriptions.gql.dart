@@ -1,6 +1,7 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
+import '../../metadata/study_years/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
@@ -437,6 +438,7 @@ const documentNodeSubscriptionwatchAllMeetings = DocumentNode(
     ),
     fragmentDefinitionMeeting,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionStudyYear,
     fragmentDefinitionGroupNoPhoto,
   ],
 );
@@ -689,6 +691,7 @@ const documentNodeSubscriptionwatchMeeting = DocumentNode(
     ),
     fragmentDefinitionMeeting,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionStudyYear,
     fragmentDefinitionGroupNoPhoto,
   ],
 );

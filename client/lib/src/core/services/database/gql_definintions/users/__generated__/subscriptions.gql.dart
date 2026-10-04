@@ -5,6 +5,7 @@ import '../../fcm_tokens/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
 import '../../invitations/__generated__/fragments.gql.dart';
+import '../../metadata/study_years/__generated__/fragments.gql.dart';
 import '../../persons/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
 import '../../users_preferences/__generated__/fragments.gql.dart';
@@ -338,6 +339,7 @@ const documentNodeSubscriptionwatchUser = DocumentNode(
     fragmentDefinitionAreaNoPhoto,
     fragmentDefinitionService,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionStudyYear,
     fragmentDefinitionClass,
     fragmentDefinitionClassNoPhoto,
     fragmentDefinitionGroup,
@@ -1451,7 +1453,7 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
             ),
       serviceStudyYearData: l$serviceStudyYearData == null
           ? null
-          : Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData.fromJson(
+          : Fragment_StudyYear.fromJson(
               (l$serviceStudyYearData as Map<String, dynamic>),
             ),
       serviceGender: (l$serviceGender as bool?),
@@ -1491,8 +1493,7 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
 
   final Subscription_watchUser_authUsersDataByPk_adminOn_service? service;
 
-  final Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData?
-  serviceStudyYearData;
+  final Fragment_StudyYear? serviceStudyYearData;
 
   final bool? serviceGender;
 
@@ -1805,8 +1806,7 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn<TRes> {
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
     Subscription_watchUser_authUsersDataByPk_adminOn_service? service,
-    Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData?
-    serviceStudyYearData,
+    Fragment_StudyYear? serviceStudyYearData,
     bool? serviceGender,
     bool? serviceAllowExport,
     bool? serviceAllowEdit,
@@ -1827,10 +1827,7 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn<TRes> {
   CopyWith_Fragment_Area<TRes> get area;
   CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service<TRes>
   get service;
-  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
-    TRes
-  >
-  get serviceStudyYearData;
+  CopyWith_Fragment_StudyYear<TRes> get serviceStudyYearData;
   TRes classes(
     Iterable<Fragment_Class> Function(
       Iterable<CopyWith_Fragment_Class<Fragment_Class>>,
@@ -1898,8 +1895,7 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
                 as Subscription_watchUser_authUsersDataByPk_adminOn_service?),
       serviceStudyYearData: serviceStudyYearData == _undefined
           ? _instance.serviceStudyYearData
-          : (serviceStudyYearData
-                as Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData?),
+          : (serviceStudyYearData as Fragment_StudyYear?),
       serviceGender: serviceGender == _undefined
           ? _instance.serviceGender
           : (serviceGender as bool?),
@@ -1975,16 +1971,11 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
           );
   }
 
-  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
-    TRes
-  >
-  get serviceStudyYearData {
+  CopyWith_Fragment_StudyYear<TRes> get serviceStudyYearData {
     final local$serviceStudyYearData = _instance.serviceStudyYearData;
     return local$serviceStudyYearData == null
-        ? CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData.stub(
-            _then(_instance),
-          )
-        : CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
+        ? CopyWith_Fragment_StudyYear.stub(_then(_instance))
+        : CopyWith_Fragment_StudyYear(
             local$serviceStudyYearData,
             (e) => call(serviceStudyYearData: e),
           );
@@ -2022,8 +2013,7 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
     Subscription_watchUser_authUsersDataByPk_adminOn_service? service,
-    Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData?
-    serviceStudyYearData,
+    Fragment_StudyYear? serviceStudyYearData,
     bool? serviceGender,
     bool? serviceAllowExport,
     bool? serviceAllowEdit,
@@ -2050,13 +2040,8 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
         _res,
       );
 
-  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
-    TRes
-  >
-  get serviceStudyYearData =>
-      CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData.stub(
-        _res,
-      );
+  CopyWith_Fragment_StudyYear<TRes> get serviceStudyYearData =>
+      CopyWith_Fragment_StudyYear.stub(_res);
 
   classes(_fn) => _res;
 
@@ -2105,12 +2090,12 @@ class Subscription_watchUser_authUsersDataByPk_adminOn_service
       blurhash: (l$blurhash as String?),
       studyYearFrom: l$studyYearFrom == null
           ? null
-          : Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom.fromJson(
+          : Fragment_StudyYear.fromJson(
               (l$studyYearFrom as Map<String, dynamic>),
             ),
       studyYearTo: l$studyYearTo == null
           ? null
-          : Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo.fromJson(
+          : Fragment_StudyYear.fromJson(
               (l$studyYearTo as Map<String, dynamic>),
             ),
     );
@@ -2130,11 +2115,9 @@ class Subscription_watchUser_authUsersDataByPk_adminOn_service
 
   final String? blurhash;
 
-  final Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom?
-  studyYearFrom;
+  final Fragment_StudyYear? studyYearFrom;
 
-  final Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo?
-  studyYearTo;
+  final Fragment_StudyYear? studyYearTo;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -2276,19 +2259,11 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom?
-    studyYearFrom,
-    Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo?
-    studyYearTo,
+    Fragment_StudyYear? studyYearFrom,
+    Fragment_StudyYear? studyYearTo,
   });
-  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom<
-    TRes
-  >
-  get studyYearFrom;
-  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo<
-    TRes
-  >
-  get studyYearTo;
+  CopyWith_Fragment_StudyYear<TRes> get studyYearFrom;
+  CopyWith_Fragment_StudyYear<TRes> get studyYearTo;
 }
 
 class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service<
@@ -2341,40 +2316,28 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service<
           : (blurhash as String?),
       studyYearFrom: studyYearFrom == _undefined
           ? _instance.studyYearFrom
-          : (studyYearFrom
-                as Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom?),
+          : (studyYearFrom as Fragment_StudyYear?),
       studyYearTo: studyYearTo == _undefined
           ? _instance.studyYearTo
-          : (studyYearTo
-                as Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo?),
+          : (studyYearTo as Fragment_StudyYear?),
     ),
   );
 
-  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom<
-    TRes
-  >
-  get studyYearFrom {
+  CopyWith_Fragment_StudyYear<TRes> get studyYearFrom {
     final local$studyYearFrom = _instance.studyYearFrom;
     return local$studyYearFrom == null
-        ? CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom.stub(
-            _then(_instance),
-          )
-        : CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom(
+        ? CopyWith_Fragment_StudyYear.stub(_then(_instance))
+        : CopyWith_Fragment_StudyYear(
             local$studyYearFrom,
             (e) => call(studyYearFrom: e),
           );
   }
 
-  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo<
-    TRes
-  >
-  get studyYearTo {
+  CopyWith_Fragment_StudyYear<TRes> get studyYearTo {
     final local$studyYearTo = _instance.studyYearTo;
     return local$studyYearTo == null
-        ? CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo.stub(
-            _then(_instance),
-          )
-        : CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo(
+        ? CopyWith_Fragment_StudyYear.stub(_then(_instance))
+        : CopyWith_Fragment_StudyYear(
             local$studyYearTo,
             (e) => call(studyYearTo: e),
           );
@@ -2402,522 +2365,15 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom?
-    studyYearFrom,
-    Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo?
-    studyYearTo,
+    Fragment_StudyYear? studyYearFrom,
+    Fragment_StudyYear? studyYearTo,
   }) => _res;
 
-  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom<
-    TRes
-  >
-  get studyYearFrom =>
-      CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom.stub(
-        _res,
-      );
+  CopyWith_Fragment_StudyYear<TRes> get studyYearFrom =>
+      CopyWith_Fragment_StudyYear.stub(_res);
 
-  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo<
-    TRes
-  >
-  get studyYearTo =>
-      CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo.stub(
-        _res,
-      );
-}
-
-class Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom
-    implements
-        Fragment_UserDetails_adminOn_service_studyYearFrom,
-        Fragment_UserAdminOn_adminOn_service_studyYearFrom {
-  Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom({
-    required this.name,
-    required this.order,
-    this.$__typename = 'StudyYears',
-  });
-
-  factory Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$name = json['name'];
-    final l$order = json['order'];
-    final l$$__typename = json['__typename'];
-    return Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom(
-      name: (l$name as String),
-      order: (l$order as int),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String name;
-
-  final int order;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$order = order;
-    _resultData['order'] = l$order;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$order = order;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$name, l$order, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other
-            is! Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom
-    on Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom {
-  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom<
-    Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom
-  >
-  get copyWith =>
-      CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom<
-  TRes
-> {
-  factory CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom(
-    Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom
-    instance,
-    TRes Function(
-      Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom,
-    )
-    then,
-  ) = _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom;
-
-  factory CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom;
-
-  TRes call({String? name, int? order, String? $__typename});
-}
-
-class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom<
-  TRes
->
-    implements
-        CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom<
-          TRes
-        > {
-  _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom
-  _instance;
-
-  final TRes Function(
-    Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom,
-  )
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? name = _undefined,
-    Object? order = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom(
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      order: order == _undefined || order == null
-          ? _instance.order
-          : (order as int),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom<
-  TRes
->
-    implements
-        CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom<
-          TRes
-        > {
-  _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearFrom(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({String? name, int? order, String? $__typename}) => _res;
-}
-
-class Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo
-    implements
-        Fragment_UserDetails_adminOn_service_studyYearTo,
-        Fragment_UserAdminOn_adminOn_service_studyYearTo {
-  Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo({
-    required this.name,
-    required this.order,
-    this.$__typename = 'StudyYears',
-  });
-
-  factory Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$name = json['name'];
-    final l$order = json['order'];
-    final l$$__typename = json['__typename'];
-    return Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo(
-      name: (l$name as String),
-      order: (l$order as int),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String name;
-
-  final int order;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$order = order;
-    _resultData['order'] = l$order;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$order = order;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$name, l$order, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other
-            is! Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo
-    on Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo {
-  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo<
-    Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo
-  >
-  get copyWith =>
-      CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo<
-  TRes
-> {
-  factory CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo(
-    Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo
-    instance,
-    TRes Function(
-      Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo,
-    )
-    then,
-  ) = _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo;
-
-  factory CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo;
-
-  TRes call({String? name, int? order, String? $__typename});
-}
-
-class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo<
-  TRes
->
-    implements
-        CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo<
-          TRes
-        > {
-  _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo
-  _instance;
-
-  final TRes Function(
-    Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo,
-  )
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? name = _undefined,
-    Object? order = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo(
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      order: order == _undefined || order == null
-          ? _instance.order
-          : (order as int),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo<
-  TRes
->
-    implements
-        CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo<
-          TRes
-        > {
-  _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service_studyYearTo(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({String? name, int? order, String? $__typename}) => _res;
-}
-
-class Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
-    implements
-        Fragment_UserDetails_adminOn_serviceStudyYearData,
-        Fragment_UserAdminOn_adminOn_serviceStudyYearData {
-  Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData({
-    required this.name,
-    required this.order,
-    this.$__typename = 'StudyYears',
-  });
-
-  factory Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$name = json['name'];
-    final l$order = json['order'];
-    final l$$__typename = json['__typename'];
-    return Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
-      name: (l$name as String),
-      order: (l$order as int),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String name;
-
-  final int order;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$order = order;
-    _resultData['order'] = l$order;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$order = order;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$name, l$order, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other
-            is! Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
-    on Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData {
-  CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
-    Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
-  >
-  get copyWith =>
-      CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
-  TRes
-> {
-  factory CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
-    Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
-    instance,
-    TRes Function(
-      Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData,
-    )
-    then,
-  ) = _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData;
-
-  factory CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData;
-
-  TRes call({String? name, int? order, String? $__typename});
-}
-
-class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
-  TRes
->
-    implements
-        CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
-          TRes
-        > {
-  _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
-  _instance;
-
-  final TRes Function(
-    Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData,
-  )
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? name = _undefined,
-    Object? order = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      order: order == _undefined || order == null
-          ? _instance.order
-          : (order as int),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
-  TRes
->
-    implements
-        CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
-          TRes
-        > {
-  _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({String? name, int? order, String? $__typename}) => _res;
+  CopyWith_Fragment_StudyYear<TRes> get studyYearTo =>
+      CopyWith_Fragment_StudyYear.stub(_res);
 }
 
 class Variables_Subscription_watchAuthUsersDataCount {
@@ -4074,6 +3530,7 @@ const documentNodeSubscriptionwatchAllUsers = DocumentNode(
     fragmentDefinitionAreaNoPhoto,
     fragmentDefinitionService,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionStudyYear,
   ],
 );
 
@@ -5011,7 +4468,7 @@ class Subscription_watchAllUsers_authUsersData_adminOn
           : Fragment_Service.fromJson((l$service as Map<String, dynamic>)),
       serviceStudyYearData: l$serviceStudyYearData == null
           ? null
-          : Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData.fromJson(
+          : Fragment_StudyYear.fromJson(
               (l$serviceStudyYearData as Map<String, dynamic>),
             ),
       $__typename: (l$$__typename as String),
@@ -5024,8 +4481,7 @@ class Subscription_watchAllUsers_authUsersData_adminOn
 
   final Fragment_Service? service;
 
-  final Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData?
-  serviceStudyYearData;
+  final Fragment_StudyYear? serviceStudyYearData;
 
   final String $__typename;
 
@@ -5121,16 +4577,12 @@ abstract class CopyWith_Subscription_watchAllUsers_authUsersData_adminOn<TRes> {
     UuidValue? permissionId,
     Fragment_Area? area,
     Fragment_Service? service,
-    Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData?
-    serviceStudyYearData,
+    Fragment_StudyYear? serviceStudyYearData,
     String? $__typename,
   });
   CopyWith_Fragment_Area<TRes> get area;
   CopyWith_Fragment_Service<TRes> get service;
-  CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData<
-    TRes
-  >
-  get serviceStudyYearData;
+  CopyWith_Fragment_StudyYear<TRes> get serviceStudyYearData;
 }
 
 class _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
@@ -5163,8 +4615,7 @@ class _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
           : (service as Fragment_Service?),
       serviceStudyYearData: serviceStudyYearData == _undefined
           ? _instance.serviceStudyYearData
-          : (serviceStudyYearData
-                as Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData?),
+          : (serviceStudyYearData as Fragment_StudyYear?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -5185,16 +4636,11 @@ class _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
         : CopyWith_Fragment_Service(local$service, (e) => call(service: e));
   }
 
-  CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData<
-    TRes
-  >
-  get serviceStudyYearData {
+  CopyWith_Fragment_StudyYear<TRes> get serviceStudyYearData {
     final local$serviceStudyYearData = _instance.serviceStudyYearData;
     return local$serviceStudyYearData == null
-        ? CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData.stub(
-            _then(_instance),
-          )
-        : CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData(
+        ? CopyWith_Fragment_StudyYear.stub(_then(_instance))
+        : CopyWith_Fragment_StudyYear(
             local$serviceStudyYearData,
             (e) => call(serviceStudyYearData: e),
           );
@@ -5211,8 +4657,7 @@ class _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
     UuidValue? permissionId,
     Fragment_Area? area,
     Fragment_Service? service,
-    Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData?
-    serviceStudyYearData,
+    Fragment_StudyYear? serviceStudyYearData,
     String? $__typename,
   }) => _res;
 
@@ -5221,174 +4666,6 @@ class _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
   CopyWith_Fragment_Service<TRes> get service =>
       CopyWith_Fragment_Service.stub(_res);
 
-  CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData<
-    TRes
-  >
-  get serviceStudyYearData =>
-      CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData.stub(
-        _res,
-      );
-}
-
-class Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData
-    implements Fragment_UserAdminScopes_adminOn_serviceStudyYearData {
-  Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData({
-    required this.name,
-    required this.order,
-    this.$__typename = 'StudyYears',
-  });
-
-  factory Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$name = json['name'];
-    final l$order = json['order'];
-    final l$$__typename = json['__typename'];
-    return Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData(
-      name: (l$name as String),
-      order: (l$order as int),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String name;
-
-  final int order;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$order = order;
-    _resultData['order'] = l$order;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$order = order;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$name, l$order, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other
-            is! Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData
-    on Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData {
-  CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData<
-    Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData
-  >
-  get copyWith =>
-      CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData<
-  TRes
-> {
-  factory CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData(
-    Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData
-    instance,
-    TRes Function(
-      Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData,
-    )
-    then,
-  ) = _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData;
-
-  factory CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData;
-
-  TRes call({String? name, int? order, String? $__typename});
-}
-
-class _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData<
-  TRes
->
-    implements
-        CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData<
-          TRes
-        > {
-  _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData
-  _instance;
-
-  final TRes Function(
-    Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData,
-  )
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? name = _undefined,
-    Object? order = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData(
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      order: order == _undefined || order == null
-          ? _instance.order
-          : (order as int),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData<
-  TRes
->
-    implements
-        CopyWith_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData<
-          TRes
-        > {
-  _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_adminOn_serviceStudyYearData(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({String? name, int? order, String? $__typename}) => _res;
+  CopyWith_Fragment_StudyYear<TRes> get serviceStudyYearData =>
+      CopyWith_Fragment_StudyYear.stub(_res);
 }
