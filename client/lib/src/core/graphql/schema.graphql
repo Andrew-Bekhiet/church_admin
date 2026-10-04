@@ -17,6 +17,7 @@ type Addresses {
   familyId: uuid
   fullAddressText: String
   geolocation: geography
+  houseCode: String
   houseNumber: smallint
   id: uuid!
   specialLandmark: String
@@ -67,6 +68,7 @@ input AddressesBoolExp {
   familyId: UuidComparisonExp
   fullAddressText: StringComparisonExp
   geolocation: GeographyComparisonExp
+  houseCode: StringComparisonExp
   houseNumber: SmallintComparisonExp
   id: UuidComparisonExp
   specialLandmark: StringComparisonExp
@@ -100,6 +102,7 @@ input AddressesInsertInput {
   family: FamiliesObjRelInsertInput
   familyId: uuid
   geolocation: geography
+  houseCode: String
   houseNumber: smallint
   specialLandmark: String
   store: StoresObjRelInsertInput
@@ -116,6 +119,7 @@ input AddressesMaxOrderBy {
   countryIsoCode: OrderBy
   districtId: OrderBy
   familyId: OrderBy
+  houseCode: OrderBy
   houseNumber: OrderBy
   id: OrderBy
   specialLandmark: OrderBy
@@ -131,6 +135,7 @@ input AddressesMinOrderBy {
   countryIsoCode: OrderBy
   districtId: OrderBy
   familyId: OrderBy
+  houseCode: OrderBy
   houseNumber: OrderBy
   id: OrderBy
   specialLandmark: OrderBy
@@ -167,6 +172,7 @@ input AddressesOrderBy {
   familyId: OrderBy
   fullAddressText: OrderBy
   geolocation: OrderBy
+  houseCode: OrderBy
   houseNumber: OrderBy
   id: OrderBy
   specialLandmark: OrderBy
@@ -189,6 +195,7 @@ enum AddressesSelectColumn {
   districtId
   familyId
   geolocation
+  houseCode
   houseNumber
   id
   specialLandmark
@@ -205,6 +212,7 @@ input AddressesSetInput {
   districtId: uuid
   familyId: uuid
   geolocation: geography
+  houseCode: String
   houseNumber: smallint
   specialLandmark: String
   storeId: uuid
@@ -243,6 +251,7 @@ input AddressesStreamCursorValueInput {
   districtId: uuid
   familyId: uuid
   geolocation: geography
+  houseCode: String
   houseNumber: smallint
   id: uuid
   specialLandmark: String
@@ -265,6 +274,7 @@ enum AddressesUpdateColumn {
   districtId
   familyId
   geolocation
+  houseCode
   houseNumber
   specialLandmark
   storeId

@@ -1,21 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class AddressHouseNumberRow extends StatelessWidget {
   const AddressHouseNumberRow({
     required this.address,
     required this.enabled,
     required this.onSubstreetNameChanged,
-    required this.onHouseNumberChanged,
+    required this.onHouseCodeChanged,
     super.key,
   });
 
   final Address address;
   final bool enabled;
   final void Function(String?) onSubstreetNameChanged;
-  final void Function(int) onHouseNumberChanged;
+  final void Function(String?) onHouseCodeChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +38,8 @@ class AddressHouseNumberRow extends StatelessWidget {
           Expanded(
             flex: 2,
             child: TextFormField(
-              key: ValueKey(address.houseNumber),
-              initialValue: address.houseNumber?.toString(),
+              key: ValueKey(address.houseCode),
+              initialValue: address.houseCode,
               decoration: const InputDecoration(
                 label: AutoSizeText(
                   'رقم العمارة',
@@ -49,26 +48,19 @@ class AddressHouseNumberRow extends StatelessWidget {
                 ),
               ),
               enabled: enabled,
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                FilteringTextInputFormatter.singleLineFormatter,
-              ],
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) =>
-                  value != null &&
-                      value.isNotEmpty &&
-                      int.tryParse(value) == null
-                  ? 'برجاء ادخال رقم صحيح'
-                  : null,
-              onChanged: (value) {
-                final houseNumber = int.tryParse(value);
-                if (houseNumber == null) {
-                  return;
-                }
-
-                onHouseNumberChanged(houseNumber);
+              // Android has no keyboard that opens on digits and can still
+              // switch to letters; iOS's numbers-and-punctuation one can.
+              keyboardType: switch (Theme.of(context).platform) {
+                TargetPlatform.iOS => const TextInputType.numberWithOptions(
+                  signed: true,
+                ),
+                _ => TextInputType.text,
               },
+              maxLength: Address.houseCodeMaxLength,
+              onChanged: (value) => onHouseCodeChanged(switch (value.trim()) {
+                '' => null,
+                final houseCode => houseCode,
+              }),
             ),
           ),
         ],

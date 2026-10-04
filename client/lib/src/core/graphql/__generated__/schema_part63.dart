@@ -612,6 +612,7 @@ enum Enum_AddressesSelectColumn {
   districtId,
   familyId,
   geolocation,
+  houseCode,
   houseNumber,
   id,
   specialLandmark,
@@ -641,6 +642,8 @@ String toJson_Enum_AddressesSelectColumn(Enum_AddressesSelectColumn e) {
       return r'familyId';
     case Enum_AddressesSelectColumn.geolocation:
       return r'geolocation';
+    case Enum_AddressesSelectColumn.houseCode:
+      return r'houseCode';
     case Enum_AddressesSelectColumn.houseNumber:
       return r'houseNumber';
     case Enum_AddressesSelectColumn.id:
@@ -674,6 +677,8 @@ Enum_AddressesSelectColumn fromJson_Enum_AddressesSelectColumn(String value) {
       return Enum_AddressesSelectColumn.familyId;
     case r'geolocation':
       return Enum_AddressesSelectColumn.geolocation;
+    case r'houseCode':
+      return Enum_AddressesSelectColumn.houseCode;
     case r'houseNumber':
       return Enum_AddressesSelectColumn.houseNumber;
     case r'id':
@@ -700,6 +705,7 @@ enum Enum_AddressesUpdateColumn {
   districtId,
   familyId,
   geolocation,
+  houseCode,
   houseNumber,
   specialLandmark,
   storeId,
@@ -728,6 +734,8 @@ String toJson_Enum_AddressesUpdateColumn(Enum_AddressesUpdateColumn e) {
       return r'familyId';
     case Enum_AddressesUpdateColumn.geolocation:
       return r'geolocation';
+    case Enum_AddressesUpdateColumn.houseCode:
+      return r'houseCode';
     case Enum_AddressesUpdateColumn.houseNumber:
       return r'houseNumber';
     case Enum_AddressesUpdateColumn.specialLandmark:
@@ -759,6 +767,8 @@ Enum_AddressesUpdateColumn fromJson_Enum_AddressesUpdateColumn(String value) {
       return Enum_AddressesUpdateColumn.familyId;
     case r'geolocation':
       return Enum_AddressesUpdateColumn.geolocation;
+    case r'houseCode':
+      return Enum_AddressesUpdateColumn.houseCode;
     case r'houseNumber':
       return Enum_AddressesUpdateColumn.houseNumber;
     case r'specialLandmark':
@@ -2491,39 +2501,4 @@ enum Enum_FathersConstraint {
       fromJson_Enum_FathersConstraint(value);
 
   String toJson() => toJson_Enum_FathersConstraint(this);
-}
-
-String toJson_Enum_FathersConstraint(Enum_FathersConstraint e) {
-  switch (e) {
-    case Enum_FathersConstraint.fathers_name_key:
-      return r'fathers_name_key';
-    case Enum_FathersConstraint.fathers_pkey:
-      return r'fathers_pkey';
-    case Enum_FathersConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_FathersConstraint fromJson_Enum_FathersConstraint(String value) {
-  switch (value) {
-    case r'fathers_name_key':
-      return Enum_FathersConstraint.fathers_name_key;
-    case r'fathers_pkey':
-      return Enum_FathersConstraint.fathers_pkey;
-    default:
-      return Enum_FathersConstraint.$unknown;
-  }
-}
-
-enum Enum_FathersSelectColumn {
-  churchId,
-  id,
-  isHidden,
-  name,
-  $unknown;
-
-  factory Enum_FathersSelectColumn.fromJson(String value) =>
-      fromJson_Enum_FathersSelectColumn(value);
-
-  String toJson() => toJson_Enum_FathersSelectColumn(this);
 }

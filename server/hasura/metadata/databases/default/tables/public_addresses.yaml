@@ -35,6 +35,7 @@ insert_permissions:
         - district_id
         - family_id
         - geolocation
+        - house_code
         - house_number
         - special_landmark
         - store_id
@@ -52,6 +53,7 @@ select_permissions:
         - district_id
         - family_id
         - geolocation
+        - house_code
         - house_number
         - id
         - special_landmark
@@ -102,6 +104,7 @@ update_permissions:
         - district_id
         - family_id
         - geolocation
+        - house_code
         - house_number
         - special_landmark
         - store_id

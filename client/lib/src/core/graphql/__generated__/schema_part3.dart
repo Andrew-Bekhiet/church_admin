@@ -17,6 +17,7 @@ abstract class CopyWith_Input_AddressesSetInput<TRes> {
     UuidValue? districtId,
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
+    String? houseCode,
     int? houseNumber,
     String? specialLandmark,
     UuidValue? storeId,
@@ -43,6 +44,7 @@ class _CopyWithImpl_Input_AddressesSetInput<TRes>
     Object? districtId = _undefined,
     Object? familyId = _undefined,
     Object? geolocation = _undefined,
+    Object? houseCode = _undefined,
     Object? houseNumber = _undefined,
     Object? specialLandmark = _undefined,
     Object? storeId = _undefined,
@@ -61,6 +63,7 @@ class _CopyWithImpl_Input_AddressesSetInput<TRes>
       if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
       if (geolocation != _undefined)
         'geolocation': (geolocation as Map<String, dynamic>?),
+      if (houseCode != _undefined) 'houseCode': (houseCode as String?),
       if (houseNumber != _undefined) 'houseNumber': (houseNumber as int?),
       if (specialLandmark != _undefined)
         'specialLandmark': (specialLandmark as String?),
@@ -86,6 +89,7 @@ class _CopyWithStubImpl_Input_AddressesSetInput<TRes>
     UuidValue? districtId,
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
+    String? houseCode,
     int? houseNumber,
     String? specialLandmark,
     UuidValue? storeId,
@@ -791,6 +795,7 @@ class Input_AddressesStreamCursorValueInput {
     UuidValue? districtId,
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
+    String? houseCode,
     int? houseNumber,
     UuidValue? id,
     String? specialLandmark,
@@ -805,6 +810,7 @@ class Input_AddressesStreamCursorValueInput {
     if (districtId != null) r'districtId': districtId,
     if (familyId != null) r'familyId': familyId,
     if (geolocation != null) r'geolocation': geolocation,
+    if (houseCode != null) r'houseCode': houseCode,
     if (houseNumber != null) r'houseNumber': houseNumber,
     if (id != null) r'id': id,
     if (specialLandmark != null) r'specialLandmark': specialLandmark,
@@ -847,6 +853,10 @@ class Input_AddressesStreamCursorValueInput {
     if (data.containsKey('geolocation')) {
       final l$geolocation = data['geolocation'];
       result$data['geolocation'] = (l$geolocation as Map<String, dynamic>?);
+    }
+    if (data.containsKey('houseCode')) {
+      final l$houseCode = data['houseCode'];
+      result$data['houseCode'] = (l$houseCode as String?);
     }
     if (data.containsKey('houseNumber')) {
       final l$houseNumber = data['houseNumber'];
@@ -898,6 +908,8 @@ class Input_AddressesStreamCursorValueInput {
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
 
+  String? get houseCode => (_$data['houseCode'] as String?);
+
   int? get houseNumber => (_$data['houseNumber'] as int?);
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
@@ -941,6 +953,10 @@ class Input_AddressesStreamCursorValueInput {
     if (_$data.containsKey('geolocation')) {
       final l$geolocation = geolocation;
       result$data['geolocation'] = l$geolocation;
+    }
+    if (_$data.containsKey('houseCode')) {
+      final l$houseCode = houseCode;
+      result$data['houseCode'] = l$houseCode;
     }
     if (_$data.containsKey('houseNumber')) {
       final l$houseNumber = houseNumber;
@@ -1045,6 +1061,15 @@ class Input_AddressesStreamCursorValueInput {
     if (l$geolocation != lOther$geolocation) {
       return false;
     }
+    final l$houseCode = houseCode;
+    final lOther$houseCode = other.houseCode;
+    if (_$data.containsKey('houseCode') !=
+        other._$data.containsKey('houseCode')) {
+      return false;
+    }
+    if (l$houseCode != lOther$houseCode) {
+      return false;
+    }
     final l$houseNumber = houseNumber;
     final lOther$houseNumber = other.houseNumber;
     if (_$data.containsKey('houseNumber') !=
@@ -1117,6 +1142,7 @@ class Input_AddressesStreamCursorValueInput {
     final l$districtId = districtId;
     final l$familyId = familyId;
     final l$geolocation = geolocation;
+    final l$houseCode = houseCode;
     final l$houseNumber = houseNumber;
     final l$id = id;
     final l$specialLandmark = specialLandmark;
@@ -1131,6 +1157,7 @@ class Input_AddressesStreamCursorValueInput {
       _$data.containsKey('districtId') ? l$districtId : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
+      _$data.containsKey('houseCode') ? l$houseCode : const {},
       _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('specialLandmark') ? l$specialLandmark : const {},
@@ -1158,6 +1185,7 @@ abstract class CopyWith_Input_AddressesStreamCursorValueInput<TRes> {
     UuidValue? districtId,
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
+    String? houseCode,
     int? houseNumber,
     UuidValue? id,
     String? specialLandmark,
@@ -1188,6 +1216,7 @@ class _CopyWithImpl_Input_AddressesStreamCursorValueInput<TRes>
     Object? districtId = _undefined,
     Object? familyId = _undefined,
     Object? geolocation = _undefined,
+    Object? houseCode = _undefined,
     Object? houseNumber = _undefined,
     Object? id = _undefined,
     Object? specialLandmark = _undefined,
@@ -1207,6 +1236,7 @@ class _CopyWithImpl_Input_AddressesStreamCursorValueInput<TRes>
       if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
       if (geolocation != _undefined)
         'geolocation': (geolocation as Map<String, dynamic>?),
+      if (houseCode != _undefined) 'houseCode': (houseCode as String?),
       if (houseNumber != _undefined) 'houseNumber': (houseNumber as int?),
       if (id != _undefined) 'id': (id as UuidValue?),
       if (specialLandmark != _undefined)
@@ -1233,6 +1263,7 @@ class _CopyWithStubImpl_Input_AddressesStreamCursorValueInput<TRes>
     UuidValue? districtId,
     UuidValue? familyId,
     Map<String, dynamic>? geolocation,
+    String? houseCode,
     int? houseNumber,
     UuidValue? id,
     String? specialLandmark,

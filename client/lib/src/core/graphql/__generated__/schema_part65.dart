@@ -1,6 +1,63 @@
 // Part 65 of the schema
 part of "schema.graphql.dart";
 
+String
+toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
+  Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns e,
+) {
+  switch (e) {
+    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
+        .gender:
+      return r'gender';
+    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
+        .isServant:
+      return r'isServant';
+    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
+        .isShammas:
+      return r'isShammas';
+    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
+        .isStudent:
+      return r'isStudent';
+    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
+        .$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
+fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
+  String value,
+) {
+  switch (value) {
+    case r'gender':
+      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
+          .gender;
+    case r'isServant':
+      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
+          .isServant;
+    case r'isShammas':
+      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
+          .isShammas;
+    case r'isStudent':
+      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
+          .isStudent;
+    default:
+      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
+          .$unknown;
+  }
+}
+
+enum Enum_PersonsServicesConstraint {
+  persons_services_person_id_service_id_key,
+  persons_services_pkey,
+  $unknown;
+
+  factory Enum_PersonsServicesConstraint.fromJson(String value) =>
+      fromJson_Enum_PersonsServicesConstraint(value);
+
+  String toJson() => toJson_Enum_PersonsServicesConstraint(this);
+}
+
 String toJson_Enum_PersonsServicesConstraint(Enum_PersonsServicesConstraint e) {
   switch (e) {
     case Enum_PersonsServicesConstraint
