@@ -15,9 +15,11 @@ query historyMeetingRoster(
     person {
       id
       contacts {
+        id
         phone
       }
       familyContacts(where: { personType: { isFamilyAdmin: { _eq: true } } }) {
+        id
         phone
       }
     }
