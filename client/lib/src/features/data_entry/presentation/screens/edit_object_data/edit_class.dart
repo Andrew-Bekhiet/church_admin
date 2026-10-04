@@ -68,6 +68,7 @@ class _EditClassState extends State<EditClass> {
         spacing: 24,
         children: [
           NameField(
+            key: EditClassKeys.name,
             hintText: 'اسم الفصل',
             initialValue: newClass.name,
             onValueChanged: (value) => newClass = newClass.copyWith(
@@ -105,6 +106,7 @@ class _EditClassState extends State<EditClass> {
             },
           ),
           StudyYearRangeField(
+            key: EditClassKeys.studyYears,
             label: 'السنوات الدراسية',
             initialValue: StudyYearRange(
               from: newClass.studyYear,
@@ -158,4 +160,9 @@ class _EditClassState extends State<EditClass> {
       ),
     );
   }
+}
+
+abstract final class EditClassKeys {
+  static const Key name = ValueKey('Edit Class Name Key');
+  static const Key studyYears = ValueKey('Edit Class Study Years Key');
 }
