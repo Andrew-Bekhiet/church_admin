@@ -35,10 +35,12 @@ class PhoneSearchFieldMetadata extends FieldMetadata<String> {
       '_not': _matchingPhone({'_eq': _e164(typed)}),
     },
     {'_nilike': final String pattern} => {
-      '_not': _matchingPhone({'_ilike': _storedPattern(pattern)}),
+      '_not': _matchingPhone({
+        '_ilike': PhoneNumberFormat.storedLikePattern(pattern),
+      }),
     },
     {'_ilike': final String pattern} => _matchingPhone({
-      '_ilike': _storedPattern(pattern),
+      '_ilike': PhoneNumberFormat.storedLikePattern(pattern),
     }),
     {'_eq': final String typed} => _matchingPhone({'_eq': _e164(typed)}),
     _ => _matchingPhone(serializedValue),
@@ -64,16 +66,4 @@ class PhoneSearchFieldMetadata extends FieldMetadata<String> {
 
   String _e164(String typed) =>
       const PhoneNumberService().toE164(typed) ?? typed;
-
-  String _storedPattern(String pattern) {
-    final fragment = PhoneNumberService.searchFragment(
-      pattern.replaceAll('%', ''),
-    );
-    final anchoredAtStart = !pattern.startsWith('%');
-    final stored = anchoredAtStart && !fragment.startsWith('+')
-        ? '+20$fragment'
-        : fragment;
-
-    return '${anchoredAtStart ? '' : '%'}$stored${pattern.endsWith('%') ? '%' : ''}';
-  }
 }

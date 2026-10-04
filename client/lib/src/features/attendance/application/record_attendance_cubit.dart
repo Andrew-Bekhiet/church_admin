@@ -282,10 +282,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     try {
       final analysis = await _dao.getMeetingsAttendanceAnalysis(
         subject: MeetingAnalysisSubject(_meeting),
-        range: DateTimeRange(
-          start: DateTime(2019),
-          end: DateTime.now(),
-        ),
+        range: DateTimeRange(start: DateTime(2019), end: DateTime.now()),
       );
       if (isClosed) return;
 
@@ -294,10 +291,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
           .map((d) => DateUtils.dateOnly(d.day))
           .toSet();
 
-      final merged = {
-        ...days,
-        ..._recordedDays,
-      };
+      final merged = {...days, ..._recordedDays};
       if (const SetEquality<DateTime>().equals(merged, _recordedDays)) return;
 
       _recordedDays = merged;
@@ -478,9 +472,11 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     if (query.isEmpty) return true;
 
     final personName = entry.person.name.toLowerCase().trim();
+    final phoneFragment = PhoneNumberFormat.searchFragment(query);
 
     return personName.contains(query) ||
-        PhoneNumberService.matchesSearch(query, entry.phones);
+        phoneFragment.isNotEmpty &&
+            entry.phones.any((phone) => phone.contains(phoneFragment));
   }
 
   @override
