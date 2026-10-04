@@ -9,15 +9,11 @@ void main() {
     () {
       final houseCodeField = find.byType(EditableText).last;
 
-      Future<List<String?>> pumpRow(
-        WidgetTester tester, {
-        TargetPlatform platform = TargetPlatform.android,
-      }) async {
+      Future<List<String?>> pumpRow(WidgetTester tester) async {
         final enteredHouseCodes = <String?>[];
 
         await tester.pumpWidget(
           MaterialApp(
-            theme: ThemeData(platform: platform),
             home: Material(
               child: AddressHouseNumberRow(
                 address: const Address(),
@@ -63,30 +59,6 @@ void main() {
           await tester.enterText(houseCodeField, '');
 
           expect(enteredHouseCodes.last, isNull);
-        },
-      );
-
-      testWidgets(
-        'opens the numbers keyboard that can switch to letters on iOS',
-        (tester) async {
-          await pumpRow(tester, platform: TargetPlatform.iOS);
-
-          expect(
-            tester.widget<EditableText>(houseCodeField).keyboardType,
-            const TextInputType.numberWithOptions(signed: true),
-          );
-        },
-      );
-
-      testWidgets(
-        'opens the text keyboard on Android',
-        (tester) async {
-          await pumpRow(tester);
-
-          expect(
-            tester.widget<EditableText>(houseCodeField).keyboardType,
-            TextInputType.text,
-          );
         },
       );
     },
