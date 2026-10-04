@@ -1,6 +1,6 @@
 abstract final class PhoneNumberFormat {
-  static String searchFragment(String typed) {
-    final compact = typed.replaceAll(RegExp(r'[\s\-.()]'), '');
+  static String normalizeForSearch(String searchString) {
+    final compact = searchString.replaceAll(RegExp(r'[\s\-.()]'), '');
 
     return switch (compact) {
       final international when international.startsWith('+') => international,
@@ -12,7 +12,7 @@ abstract final class PhoneNumberFormat {
   }
 
   static String storedLikePattern(String likePattern) {
-    final fragment = searchFragment(likePattern.replaceAll('%', ''));
+    final fragment = normalizeForSearch(likePattern.replaceAll('%', ''));
     final anchoredAtStart = !likePattern.startsWith('%');
     final stored = anchoredAtStart && !fragment.startsWith('+')
         ? '+20$fragment'

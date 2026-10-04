@@ -472,7 +472,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     if (query.isEmpty) return true;
 
     final personName = entry.person.name.toLowerCase().trim();
-    final phoneFragment = PhoneNumberFormat.searchFragment(query);
+    final phoneFragment = PhoneNumberFormat.normalizeForSearch(query);
 
     return personName.contains(query) ||
         phoneFragment.isNotEmpty &&
