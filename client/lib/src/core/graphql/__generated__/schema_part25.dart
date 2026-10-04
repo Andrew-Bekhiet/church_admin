@@ -1,447 +1,6 @@
 // Part 25 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_GroupsStreamCursorInput<TRes> {
-  factory CopyWith_Input_GroupsStreamCursorInput(
-    Input_GroupsStreamCursorInput instance,
-    TRes Function(Input_GroupsStreamCursorInput) then,
-  ) = _CopyWithImpl_Input_GroupsStreamCursorInput;
-
-  factory CopyWith_Input_GroupsStreamCursorInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_GroupsStreamCursorInput;
-
-  TRes call({
-    Input_GroupsStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  });
-  CopyWith_Input_GroupsStreamCursorValueInput<TRes> get initialValue;
-}
-
-class _CopyWithImpl_Input_GroupsStreamCursorInput<TRes>
-    implements CopyWith_Input_GroupsStreamCursorInput<TRes> {
-  _CopyWithImpl_Input_GroupsStreamCursorInput(this._instance, this._then);
-
-  final Input_GroupsStreamCursorInput _instance;
-
-  final TRes Function(Input_GroupsStreamCursorInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? initialValue = _undefined,
-    Object? ordering = _undefined,
-  }) => _then(
-    Input_GroupsStreamCursorInput._({
-      ..._instance._$data,
-      if (initialValue != _undefined && initialValue != null)
-        'initialValue': (initialValue as Input_GroupsStreamCursorValueInput),
-      if (ordering != _undefined)
-        'ordering': (ordering as Enum_CursorOrdering?),
-    }),
-  );
-
-  CopyWith_Input_GroupsStreamCursorValueInput<TRes> get initialValue {
-    final local$initialValue = _instance.initialValue;
-    return CopyWith_Input_GroupsStreamCursorValueInput(
-      local$initialValue,
-      (e) => call(initialValue: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_GroupsStreamCursorInput<TRes>
-    implements CopyWith_Input_GroupsStreamCursorInput<TRes> {
-  _CopyWithStubImpl_Input_GroupsStreamCursorInput(this._res);
-
-  TRes _res;
-
-  call({
-    Input_GroupsStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => _res;
-
-  CopyWith_Input_GroupsStreamCursorValueInput<TRes> get initialValue =>
-      CopyWith_Input_GroupsStreamCursorValueInput.stub(_res);
-}
-
-class Input_GroupsStreamCursorValueInput {
-  factory Input_GroupsStreamCursorValueInput({
-    String? blurhash,
-    int? color,
-    UuidValue? defaultMeetingId,
-    UuidValue? id,
-    String? name,
-    DateTime? photoUpdatedAt,
-    UuidValue? serviceId,
-    DateTimeRange? validity,
-  }) => Input_GroupsStreamCursorValueInput._({
-    if (blurhash != null) r'blurhash': blurhash,
-    if (color != null) r'color': color,
-    if (defaultMeetingId != null) r'defaultMeetingId': defaultMeetingId,
-    if (id != null) r'id': id,
-    if (name != null) r'name': name,
-    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-    if (serviceId != null) r'serviceId': serviceId,
-    if (validity != null) r'validity': validity,
-  });
-
-  Input_GroupsStreamCursorValueInput._(this._$data);
-
-  factory Input_GroupsStreamCursorValueInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('blurhash')) {
-      final l$blurhash = data['blurhash'];
-      result$data['blurhash'] = (l$blurhash as String?);
-    }
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('defaultMeetingId')) {
-      final l$defaultMeetingId = data['defaultMeetingId'];
-      result$data['defaultMeetingId'] = l$defaultMeetingId == null
-          ? null
-          : stringToUuid(l$defaultMeetingId);
-    }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null ? null : stringToUuid(l$id);
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    if (data.containsKey('photoUpdatedAt')) {
-      final l$photoUpdatedAt = data['photoUpdatedAt'];
-      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
-          ? null
-          : tstzFromString(l$photoUpdatedAt);
-    }
-    if (data.containsKey('serviceId')) {
-      final l$serviceId = data['serviceId'];
-      result$data['serviceId'] = l$serviceId == null
-          ? null
-          : stringToUuid(l$serviceId);
-    }
-    if (data.containsKey('validity')) {
-      final l$validity = data['validity'];
-      result$data['validity'] = l$validity == null
-          ? null
-          : dateRangeFromString(l$validity);
-    }
-    return Input_GroupsStreamCursorValueInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String? get blurhash => (_$data['blurhash'] as String?);
-
-  int? get color => (_$data['color'] as int?);
-
-  UuidValue? get defaultMeetingId => (_$data['defaultMeetingId'] as UuidValue?);
-
-  UuidValue? get id => (_$data['id'] as UuidValue?);
-
-  String? get name => (_$data['name'] as String?);
-
-  DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
-
-  UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
-
-  DateTimeRange? get validity => (_$data['validity'] as DateTimeRange?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('blurhash')) {
-      final l$blurhash = blurhash;
-      result$data['blurhash'] = l$blurhash;
-    }
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('defaultMeetingId')) {
-      final l$defaultMeetingId = defaultMeetingId;
-      result$data['defaultMeetingId'] = l$defaultMeetingId == null
-          ? null
-          : uuidToString(l$defaultMeetingId);
-    }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id == null ? null : uuidToString(l$id);
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('photoUpdatedAt')) {
-      final l$photoUpdatedAt = photoUpdatedAt;
-      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
-          ? null
-          : tstzToString(l$photoUpdatedAt);
-    }
-    if (_$data.containsKey('serviceId')) {
-      final l$serviceId = serviceId;
-      result$data['serviceId'] = l$serviceId == null
-          ? null
-          : uuidToString(l$serviceId);
-    }
-    if (_$data.containsKey('validity')) {
-      final l$validity = validity;
-      result$data['validity'] = l$validity == null
-          ? null
-          : dateRangeToString(l$validity);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsStreamCursorValueInput<
-    Input_GroupsStreamCursorValueInput
-  >
-  get copyWith => CopyWith_Input_GroupsStreamCursorValueInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsStreamCursorValueInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$blurhash = blurhash;
-    final lOther$blurhash = other.blurhash;
-    if (_$data.containsKey('blurhash') !=
-        other._$data.containsKey('blurhash')) {
-      return false;
-    }
-    if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$defaultMeetingId = defaultMeetingId;
-    final lOther$defaultMeetingId = other.defaultMeetingId;
-    if (_$data.containsKey('defaultMeetingId') !=
-        other._$data.containsKey('defaultMeetingId')) {
-      return false;
-    }
-    if (l$defaultMeetingId != lOther$defaultMeetingId) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final lOther$photoUpdatedAt = other.photoUpdatedAt;
-    if (_$data.containsKey('photoUpdatedAt') !=
-        other._$data.containsKey('photoUpdatedAt')) {
-      return false;
-    }
-    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
-      return false;
-    }
-    final l$serviceId = serviceId;
-    final lOther$serviceId = other.serviceId;
-    if (_$data.containsKey('serviceId') !=
-        other._$data.containsKey('serviceId')) {
-      return false;
-    }
-    if (l$serviceId != lOther$serviceId) {
-      return false;
-    }
-    final l$validity = validity;
-    final lOther$validity = other.validity;
-    if (_$data.containsKey('validity') !=
-        other._$data.containsKey('validity')) {
-      return false;
-    }
-    if (l$validity != lOther$validity) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$blurhash = blurhash;
-    final l$color = color;
-    final l$defaultMeetingId = defaultMeetingId;
-    final l$id = id;
-    final l$name = name;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final l$serviceId = serviceId;
-    final l$validity = validity;
-    return Object.hashAll([
-      _$data.containsKey('blurhash') ? l$blurhash : const {},
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('defaultMeetingId') ? l$defaultMeetingId : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
-      _$data.containsKey('serviceId') ? l$serviceId : const {},
-      _$data.containsKey('validity') ? l$validity : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_GroupsStreamCursorValueInput<TRes> {
-  factory CopyWith_Input_GroupsStreamCursorValueInput(
-    Input_GroupsStreamCursorValueInput instance,
-    TRes Function(Input_GroupsStreamCursorValueInput) then,
-  ) = _CopyWithImpl_Input_GroupsStreamCursorValueInput;
-
-  factory CopyWith_Input_GroupsStreamCursorValueInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_GroupsStreamCursorValueInput;
-
-  TRes call({
-    String? blurhash,
-    int? color,
-    UuidValue? defaultMeetingId,
-    UuidValue? id,
-    String? name,
-    DateTime? photoUpdatedAt,
-    UuidValue? serviceId,
-    DateTimeRange? validity,
-  });
-}
-
-class _CopyWithImpl_Input_GroupsStreamCursorValueInput<TRes>
-    implements CopyWith_Input_GroupsStreamCursorValueInput<TRes> {
-  _CopyWithImpl_Input_GroupsStreamCursorValueInput(this._instance, this._then);
-
-  final Input_GroupsStreamCursorValueInput _instance;
-
-  final TRes Function(Input_GroupsStreamCursorValueInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? blurhash = _undefined,
-    Object? color = _undefined,
-    Object? defaultMeetingId = _undefined,
-    Object? id = _undefined,
-    Object? name = _undefined,
-    Object? photoUpdatedAt = _undefined,
-    Object? serviceId = _undefined,
-    Object? validity = _undefined,
-  }) => _then(
-    Input_GroupsStreamCursorValueInput._({
-      ..._instance._$data,
-      if (blurhash != _undefined) 'blurhash': (blurhash as String?),
-      if (color != _undefined) 'color': (color as int?),
-      if (defaultMeetingId != _undefined)
-        'defaultMeetingId': (defaultMeetingId as UuidValue?),
-      if (id != _undefined) 'id': (id as UuidValue?),
-      if (name != _undefined) 'name': (name as String?),
-      if (photoUpdatedAt != _undefined)
-        'photoUpdatedAt': (photoUpdatedAt as DateTime?),
-      if (serviceId != _undefined) 'serviceId': (serviceId as UuidValue?),
-      if (validity != _undefined) 'validity': (validity as DateTimeRange?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_GroupsStreamCursorValueInput<TRes>
-    implements CopyWith_Input_GroupsStreamCursorValueInput<TRes> {
-  _CopyWithStubImpl_Input_GroupsStreamCursorValueInput(this._res);
-
-  TRes _res;
-
-  call({
-    String? blurhash,
-    int? color,
-    UuidValue? defaultMeetingId,
-    UuidValue? id,
-    String? name,
-    DateTime? photoUpdatedAt,
-    UuidValue? serviceId,
-    DateTimeRange? validity,
-  }) => _res;
-}
-
-class Input_GroupsSumOrderBy {
-  factory Input_GroupsSumOrderBy({Enum_OrderBy? color}) =>
-      Input_GroupsSumOrderBy._({if (color != null) r'color': color});
-
-  Input_GroupsSumOrderBy._(this._$data);
-
-  factory Input_GroupsSumOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = l$color == null
-          ? null
-          : fromJson_Enum_OrderBy((l$color as String));
-    }
-    return Input_GroupsSumOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color == null
-          ? null
-          : toJson_Enum_OrderBy(l$color);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsSumOrderBy<Input_GroupsSumOrderBy> get copyWith =>
-      CopyWith_Input_GroupsSumOrderBy(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsSumOrderBy || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$color = color;
-    return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
-  }
-}
-
 abstract class CopyWith_Input_GroupsSumOrderBy<TRes> {
   factory CopyWith_Input_GroupsSumOrderBy(
     Input_GroupsSumOrderBy instance,
@@ -2516,4 +2075,430 @@ class Input_HistoryAttendanceDaysSetInput {
     final l$day = day;
     return Object.hashAll([_$data.containsKey('day') ? l$day : const {}]);
   }
+}
+
+abstract class CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> {
+  factory CopyWith_Input_HistoryAttendanceDaysSetInput(
+    Input_HistoryAttendanceDaysSetInput instance,
+    TRes Function(Input_HistoryAttendanceDaysSetInput) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceDaysSetInput;
+
+  factory CopyWith_Input_HistoryAttendanceDaysSetInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryAttendanceDaysSetInput;
+
+  TRes call({DateTime? day});
+}
+
+class _CopyWithImpl_Input_HistoryAttendanceDaysSetInput<TRes>
+    implements CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> {
+  _CopyWithImpl_Input_HistoryAttendanceDaysSetInput(this._instance, this._then);
+
+  final Input_HistoryAttendanceDaysSetInput _instance;
+
+  final TRes Function(Input_HistoryAttendanceDaysSetInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? day = _undefined}) => _then(
+    Input_HistoryAttendanceDaysSetInput._({
+      ..._instance._$data,
+      if (day != _undefined) 'day': (day as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_HistoryAttendanceDaysSetInput<TRes>
+    implements CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> {
+  _CopyWithStubImpl_Input_HistoryAttendanceDaysSetInput(this._res);
+
+  TRes _res;
+
+  call({DateTime? day}) => _res;
+}
+
+class Input_HistoryAttendanceDaysStreamCursorInput {
+  factory Input_HistoryAttendanceDaysStreamCursorInput({
+    required Input_HistoryAttendanceDaysStreamCursorValueInput initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => Input_HistoryAttendanceDaysStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
+
+  Input_HistoryAttendanceDaysStreamCursorInput._(this._$data);
+
+  factory Input_HistoryAttendanceDaysStreamCursorInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = data['initialValue'];
+    result$data['initialValue'] =
+        Input_HistoryAttendanceDaysStreamCursorValueInput.fromJson(
+          (l$initialValue as Map<String, dynamic>),
+        );
+    if (data.containsKey('ordering')) {
+      final l$ordering = data['ordering'];
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : fromJson_Enum_CursorOrdering((l$ordering as String));
+    }
+    return Input_HistoryAttendanceDaysStreamCursorInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_HistoryAttendanceDaysStreamCursorValueInput get initialValue =>
+      (_$data['initialValue']
+          as Input_HistoryAttendanceDaysStreamCursorValueInput);
+
+  Enum_CursorOrdering? get ordering =>
+      (_$data['ordering'] as Enum_CursorOrdering?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = initialValue;
+    result$data['initialValue'] = l$initialValue.toJson();
+    if (_$data.containsKey('ordering')) {
+      final l$ordering = ordering;
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryAttendanceDaysStreamCursorInput<
+    Input_HistoryAttendanceDaysStreamCursorInput
+  >
+  get copyWith =>
+      CopyWith_Input_HistoryAttendanceDaysStreamCursorInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryAttendanceDaysStreamCursorInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$initialValue = initialValue;
+    final lOther$initialValue = other.initialValue;
+    if (l$initialValue != lOther$initialValue) {
+      return false;
+    }
+    final l$ordering = ordering;
+    final lOther$ordering = other.ordering;
+    if (_$data.containsKey('ordering') !=
+        other._$data.containsKey('ordering')) {
+      return false;
+    }
+    if (l$ordering != lOther$ordering) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$initialValue = initialValue;
+    final l$ordering = ordering;
+    return Object.hashAll([
+      l$initialValue,
+      _$data.containsKey('ordering') ? l$ordering : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryAttendanceDaysStreamCursorInput<TRes> {
+  factory CopyWith_Input_HistoryAttendanceDaysStreamCursorInput(
+    Input_HistoryAttendanceDaysStreamCursorInput instance,
+    TRes Function(Input_HistoryAttendanceDaysStreamCursorInput) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceDaysStreamCursorInput;
+
+  factory CopyWith_Input_HistoryAttendanceDaysStreamCursorInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryAttendanceDaysStreamCursorInput;
+
+  TRes call({
+    Input_HistoryAttendanceDaysStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  });
+  CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput<TRes>
+  get initialValue;
+}
+
+class _CopyWithImpl_Input_HistoryAttendanceDaysStreamCursorInput<TRes>
+    implements CopyWith_Input_HistoryAttendanceDaysStreamCursorInput<TRes> {
+  _CopyWithImpl_Input_HistoryAttendanceDaysStreamCursorInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryAttendanceDaysStreamCursorInput _instance;
+
+  final TRes Function(Input_HistoryAttendanceDaysStreamCursorInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? initialValue = _undefined,
+    Object? ordering = _undefined,
+  }) => _then(
+    Input_HistoryAttendanceDaysStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue':
+            (initialValue as Input_HistoryAttendanceDaysStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
+
+  CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput<TRes>
+  get initialValue {
+    final local$initialValue = _instance.initialValue;
+    return CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput(
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_HistoryAttendanceDaysStreamCursorInput<TRes>
+    implements CopyWith_Input_HistoryAttendanceDaysStreamCursorInput<TRes> {
+  _CopyWithStubImpl_Input_HistoryAttendanceDaysStreamCursorInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_HistoryAttendanceDaysStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => _res;
+
+  CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput<TRes>
+  get initialValue =>
+      CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput.stub(_res);
+}
+
+class Input_HistoryAttendanceDaysStreamCursorValueInput {
+  factory Input_HistoryAttendanceDaysStreamCursorValueInput({DateTime? day}) =>
+      Input_HistoryAttendanceDaysStreamCursorValueInput._({
+        if (day != null) r'day': day,
+      });
+
+  Input_HistoryAttendanceDaysStreamCursorValueInput._(this._$data);
+
+  factory Input_HistoryAttendanceDaysStreamCursorValueInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('day')) {
+      final l$day = data['day'];
+      result$data['day'] = l$day == null ? null : dateFromString(l$day);
+    }
+    return Input_HistoryAttendanceDaysStreamCursorValueInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  DateTime? get day => (_$data['day'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('day')) {
+      final l$day = day;
+      result$data['day'] = l$day == null ? null : dateToString(l$day);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput<
+    Input_HistoryAttendanceDaysStreamCursorValueInput
+  >
+  get copyWith => CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput(
+    this,
+    (i) => i,
+  );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryAttendanceDaysStreamCursorValueInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (_$data.containsKey('day') != other._$data.containsKey('day')) {
+      return false;
+    }
+    if (l$day != lOther$day) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$day = day;
+    return Object.hashAll([_$data.containsKey('day') ? l$day : const {}]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput<
+  TRes
+> {
+  factory CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput(
+    Input_HistoryAttendanceDaysStreamCursorValueInput instance,
+    TRes Function(Input_HistoryAttendanceDaysStreamCursorValueInput) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceDaysStreamCursorValueInput;
+
+  factory CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Input_HistoryAttendanceDaysStreamCursorValueInput;
+
+  TRes call({DateTime? day});
+}
+
+class _CopyWithImpl_Input_HistoryAttendanceDaysStreamCursorValueInput<TRes>
+    implements
+        CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput<TRes> {
+  _CopyWithImpl_Input_HistoryAttendanceDaysStreamCursorValueInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryAttendanceDaysStreamCursorValueInput _instance;
+
+  final TRes Function(Input_HistoryAttendanceDaysStreamCursorValueInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? day = _undefined}) => _then(
+    Input_HistoryAttendanceDaysStreamCursorValueInput._({
+      ..._instance._$data,
+      if (day != _undefined) 'day': (day as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_HistoryAttendanceDaysStreamCursorValueInput<TRes>
+    implements
+        CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput<TRes> {
+  _CopyWithStubImpl_Input_HistoryAttendanceDaysStreamCursorValueInput(
+    this._res,
+  );
+
+  TRes _res;
+
+  call({DateTime? day}) => _res;
+}
+
+class Input_HistoryAttendanceDaysUpdates {
+  factory Input_HistoryAttendanceDaysUpdates({
+    Input_HistoryAttendanceDaysSetInput? $_set,
+    required Input_HistoryAttendanceDaysBoolExp where,
+  }) => Input_HistoryAttendanceDaysUpdates._({
+    if ($_set != null) r'_set': $_set,
+    r'where': where,
+  });
+
+  Input_HistoryAttendanceDaysUpdates._(this._$data);
+
+  factory Input_HistoryAttendanceDaysUpdates.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_set')) {
+      final l$$_set = data['_set'];
+      result$data['_set'] = l$$_set == null
+          ? null
+          : Input_HistoryAttendanceDaysSetInput.fromJson(
+              (l$$_set as Map<String, dynamic>),
+            );
+    }
+    final l$where = data['where'];
+    result$data['where'] = Input_HistoryAttendanceDaysBoolExp.fromJson(
+      (l$where as Map<String, dynamic>),
+    );
+    return Input_HistoryAttendanceDaysUpdates._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_HistoryAttendanceDaysSetInput? get $_set =>
+      (_$data['_set'] as Input_HistoryAttendanceDaysSetInput?);
+
+  Input_HistoryAttendanceDaysBoolExp get where =>
+      (_$data['where'] as Input_HistoryAttendanceDaysBoolExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_set')) {
+      final l$$_set = $_set;
+      result$data['_set'] = l$$_set?.toJson();
+    }
+    final l$where = where;
+    result$data['where'] = l$where.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryAttendanceDaysUpdates<
+    Input_HistoryAttendanceDaysUpdates
+  >
+  get copyWith => CopyWith_Input_HistoryAttendanceDaysUpdates(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryAttendanceDaysUpdates ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_set = $_set;
+    final lOther$$_set = other.$_set;
+    if (_$data.containsKey('_set') != other._$data.containsKey('_set')) {
+      return false;
+    }
+    if (l$$_set != lOther$$_set) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_set = $_set;
+    final l$where = where;
+    return Object.hashAll([
+      _$data.containsKey('_set') ? l$$_set : const {},
+      l$where,
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryAttendanceDaysUpdates<TRes> {
+  factory CopyWith_Input_HistoryAttendanceDaysUpdates(
+    Input_HistoryAttendanceDaysUpdates instance,
+    TRes Function(Input_HistoryAttendanceDaysUpdates) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceDaysUpdates;
+
+  factory CopyWith_Input_HistoryAttendanceDaysUpdates.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryAttendanceDaysUpdates;
+
+  TRes call({
+    Input_HistoryAttendanceDaysSetInput? $_set,
+    Input_HistoryAttendanceDaysBoolExp? where,
+  });
+  CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> get $_set;
+  CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get where;
 }
