@@ -1,7 +1,7 @@
-import { PhoneDisplayFormat } from "./PhoneDisplayFormat";
+import { NationalPhoneDisplayFormat } from "./PhoneDisplayFormat";
 
 export class PhoneColumns {
-  static join<T extends { phone: string }>(
+  static joinValuesIfKeysDuplicated<T extends { phone: string }>(
     contacts: T[],
     columnOf: (contact: T) => string,
   ): Record<string, string> {
@@ -9,10 +9,12 @@ export class PhoneColumns {
 
     for (const contact of contacts) {
       const column = columnOf(contact);
-      const phone = PhoneDisplayFormat.of(contact.phone);
+      const phone = NationalPhoneDisplayFormat.maybeFormat(contact.phone);
 
-      columns[column] =
-        column in columns ? `${columns[column]} - ${phone}` : phone;
+      const phoneExists = column in columns;
+      const existingPhone = columns[column];
+
+      columns[column] = phoneExists ? `${existingPhone} - ${phone}` : phone;
     }
 
     return columns;

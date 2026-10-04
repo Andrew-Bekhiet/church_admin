@@ -4,7 +4,7 @@ import { ContactsRowMapper } from "./ContactsRowMapper";
 import { PhoneColumns } from "./PhoneColumns";
 
 export class FamilyAdminContactsRowMapper extends RowMapper {
-  private static byRoleThenMainFirst(
+  private static byRoleThenMainPhoneThenCreationDate(
     a: FamilyContact,
     b: FamilyContact,
   ): number {
@@ -21,8 +21,10 @@ export class FamilyAdminContactsRowMapper extends RowMapper {
       (row["familyContacts"] as FamilyContact[] | null) ?? []
     ).filter((c) => c.personId !== row["id"]);
 
-    return PhoneColumns.join(
-      otherAdminsContacts.sort(FamilyAdminContactsRowMapper.byRoleThenMainFirst),
+    return PhoneColumns.joinValuesIfKeysDuplicated(
+      otherAdminsContacts.sort(
+        FamilyAdminContactsRowMapper.byRoleThenMainPhoneThenCreationDate,
+      ),
       (c) => `${ContactsRowMapper.labelPrefix} (${c.personType.name})`,
     );
   }
