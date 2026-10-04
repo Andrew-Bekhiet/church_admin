@@ -50,9 +50,10 @@ insert_permissions:
                         _and:
                           - deleted_at:
                               _is_null: true
-                          - personType:
-                              is_family_admin:
-                                _eq: false
+                          - _not:
+                              personType:
+                                is_family_admin:
+                                  _eq: true
                           - permissionGrants:
                               _and:
                                 - uid:
