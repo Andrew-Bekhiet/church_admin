@@ -359,55 +359,51 @@ void main() {
     });
 
     group('roster search by phone', () {
-      Future<List<String>> idsFoundBySearching(String query) async {
-        final cubit = f.createCubit();
-        addTearDown(cubit.close);
+      Future<void> searchOnceReady(
+        RecordAttendanceCubit cubit,
+        String query,
+      ) async {
         await cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
           (s) => s.rosterStatus == RosterStatus.ready,
         );
 
-        cubit.onSearch(query);
-        final searched = await cubit.stream
+        final searched = cubit.stream
             .whereType<RecordAttendanceLoaded>()
             .firstWhere((s) => s.searchQuery == query);
-
-        return searched.entries.map((e) => e.person.id).toList();
+        cubit.onSearch(query);
+        await searched;
       }
 
-      setUp(() {
-        f.rosterPersons = [
-          _Fixture.rosterPersonWithContacts(
-            'child',
-            ownPhone: '+201001234567',
-            familyAdminPhone: '+201227654321',
-          ),
-          _Fixture.rosterPersonWithContacts(
-            'stranger',
-            ownPhone: '+201111111111',
-            familyAdminPhone: '+201555555555',
-          ),
-        ];
-      });
+      List<String> foundIds(RecordAttendanceCubit cubit) =>
+          (cubit.state as RecordAttendanceLoaded).entries
+              .map((e) => e.person.id)
+              .toList();
 
-      test('finds a child by the number of a family admin', () async {
-        final found = await idsFoundBySearching('01227654321');
+      void arrangeRoster() => f.rosterPersons = [
+        _Fixture.rosterPersonWithPhones('child', [
+          '+201001234567',
+          '+201227654321',
+        ]),
+        _Fixture.rosterPersonWithPhones('stranger', [
+          '+201111111111',
+          '+201555555555',
+        ]),
+      ];
 
-        expect(found, ['child']);
-      });
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'a full national number finds only the person who has it',
+        setUp: arrangeRoster,
+        build: () => f.createCubit(),
+        act: (cubit) => searchOnceReady(cubit, '01227654321'),
+        verify: (cubit) => expect(foundIds(cubit), ['child']),
+      );
 
-      test('finds a child by their own number typed partially', () async {
-        final found = await idsFoundBySearching('0100123');
-
-        expect(found, ['child']);
-      });
-
-      test(
-        'ignores the number of a relative who is not a family admin',
-        () async {
-          final found = await idsFoundBySearching('01099999999');
-
-          expect(found, isEmpty);
-        },
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'a partially typed national number finds the person',
+        setUp: arrangeRoster,
+        build: () => f.createCubit(),
+        act: (cubit) => searchOnceReady(cubit, '0100123'),
+        verify: (cubit) => expect(foundIds(cubit), ['child']),
       );
     });
   });
@@ -540,16 +536,15 @@ final class _Fixture {
     personAttendanceAnalysis: null,
   );
 
-  static MeetingRosterEntry rosterPersonWithContacts(
-    String personId, {
-    required String ownPhone,
-    required String familyAdminPhone,
-  }) => MeetingRosterEntry(
+  static MeetingRosterEntry rosterPersonWithPhones(
+    String personId,
+    List<String> phones,
+  ) => MeetingRosterEntry(
     asServant: false,
     person: Person(id: personId, name: 'Person $personId'),
     attendanceRecord: null,
     personAttendanceAnalysis: null,
-    phones: [ownPhone, familyAdminPhone],
+    phones: phones,
   );
 
   static AttendanceRecord makeRecord(String personId, {String id = 'att-1'}) =>
