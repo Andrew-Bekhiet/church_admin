@@ -74,7 +74,10 @@ as $$
       'متفرع من ' || nullif(trim(regexp_replace(address.substreet_name, 'شارع|الشارع', '', 'g')), ''),
       'حي ' || nullif(trim(regexp_replace((select name from district), 'حي|الحي|حى|الحى', '', 'g')), ''),
       address.special_landmark,
-      'الدور ' || address.storey_number::text,
+      case
+        when address.storey_number = 0 then 'الدور الأرضي'
+        else 'الدور ' || address.storey_number::text
+      end,
       'شقة ' || address.apartment_number::text
     )
   )
