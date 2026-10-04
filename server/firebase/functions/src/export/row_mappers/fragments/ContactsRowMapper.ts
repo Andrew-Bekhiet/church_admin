@@ -1,42 +1,25 @@
 import { RowMapper } from "../row_mapper";
 import { Contact } from "../types";
+import { PhoneColumns } from "./PhoneColumns";
 import { PhoneDisplayFormat } from "./PhoneDisplayFormat";
-import { PhonesMapRowMapper } from "./PhonesMapRowMapper";
 
 export class ContactsRowMapper extends RowMapper {
   static readonly labelPrefix = "رقم الهاتف";
 
   map(row: Record<string, unknown>): Record<string, unknown> {
-    const own = [...((row["contacts"] as Contact[] | null) ?? [])].sort(
+    const contacts = [...((row["contacts"] as Contact[] | null) ?? [])].sort(
       (a, b) => a.createdAt.localeCompare(b.createdAt),
     );
-    const main = own.find((c) => c.isMainPhone);
+    const main = contacts.find((c) => c.isMainPhone);
+    const others = contacts.filter((c) => c !== main);
+
+    let unlabelledCount = 0;
+    const labelOf = (c: Contact) =>
+      c.label ?? `${ContactsRowMapper.labelPrefix} ${++unlabelledCount}`;
 
     return {
       mainPhone: main ? PhoneDisplayFormat.of(main.phone) : null,
-      ...new PhonesMapRowMapper("otherPhones").map({
-        otherPhones: this.otherPhonesByLabel(own.filter((c) => c !== main)),
-      }),
+      ...PhoneColumns.join(others, (c) => `otherPhones.${labelOf(c)}`),
     };
-  }
-
-  private otherPhonesByLabel(contacts: Contact[]): Record<string, string> {
-    let unlabelled = 0;
-
-    const byLabel = new Map<string, string[]>();
-
-    for (const contact of contacts) {
-      const label =
-        contact.label ?? `${ContactsRowMapper.labelPrefix} ${++unlabelled}`;
-
-      byLabel.set(label, [
-        ...(byLabel.get(label) ?? []),
-        PhoneDisplayFormat.of(contact.phone),
-      ]);
-    }
-
-    return Object.fromEntries(
-      [...byLabel].map(([label, phones]) => [label, phones.join(" - ")]),
-    );
   }
 }
