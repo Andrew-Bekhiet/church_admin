@@ -710,6 +710,13 @@ class PersonFields extends _PersonFields {
     getValue: (obj) => obj is Person ? obj.uid : null,
   );
 
+  @override
+  FieldMetadata<String> get mainPhone => PhoneSearchFieldMetadata(
+    parentType: Person,
+    name: 'mainPhone',
+    label: 'رقم الهاتف',
+  );
+
   FieldMetadata<Area> get area => address.redirectTo(
     AddressFields().area,
     isExpandable: false,
