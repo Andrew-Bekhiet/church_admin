@@ -1,0 +1,56 @@
+name: Check toolchain ceilings
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: server/firebase/functions
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ISSUE_TITLE: "Toolchain major held back by Dependabot can be lifted"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+
+      - name: Find liftable majors
+        id: check
+        run: |
+          {
+            echo "findings<<EOF"
+            ./scripts/check_toolchain_ceilings.sh
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Open or update the tracking issue
+        env:
+          FINDINGS: ${{ steps.check.outputs.findings }}
+        run: |
+          existing=$(gh issue list --state open --search "in:title \"$ISSUE_TITLE\"" --json number,title \
+            --jq "map(select(.title == env.ISSUE_TITLE)) | .[0].number // empty")
+
+          if [ -z "$FINDINGS" ]; then
+            [ -n "$existing" ] && gh issue close "$existing" --comment "Every ceiling holds again; nothing to lift."
+            exit 0
+          fi
+
+          body=$(printf '%s\n\n%s\n' \
+            "Dependabot ignores these majors in \`.github/dependabot.yml\` while the toolchain does not support them. They are supported now:" \
+            "$FINDINGS")
+
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --body "$body"
+          else
+            gh issue create --title "$ISSUE_TITLE" --body "$body" --label dependencies
+          fi
