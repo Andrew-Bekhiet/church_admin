@@ -88,9 +88,15 @@ as $$
         is distinct from (projected.main_phone, projected.other_phones)
 $$;
 
+alter table public.persons disable trigger edit_history;
+alter table public.persons disable trigger persons_container_check;
+
 select public.legacy_refresh_persons_phones(
     array(select p.id from public.persons as p), '{}'
 );
+
+alter table public.persons enable trigger persons_container_check;
+alter table public.persons enable trigger edit_history;
 
 create or replace function public.legacy_sync_persons_phones_from_contacts()
 returns trigger
