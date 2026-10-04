@@ -92,7 +92,7 @@ export class LocalizationRowMapper implements RowMapper {
         substreetName: "الشارع الفرعي",
         storeyNumber: "رقم الدور",
         apartmentNumber: "رقم الشقة",
-        houseNumber: "رقم العمارة",
+        houseCode: "رقم العمارة",
         specialLandmark: "علامة مميزة",
         area: "المنطقة",
         street: "الشارع",

@@ -19,7 +19,7 @@ query exportData(
     address {
       id
       apartmentNumber
-      houseNumber
+      houseCode
       storeyNumber
       substreetName
       district {
@@ -182,7 +182,7 @@ query exportData(
     address {
       id
       apartmentNumber
-      houseNumber
+      houseCode
       storeyNumber
       substreetName
       district {
@@ -241,7 +241,7 @@ query exportData(
     address {
       id
       apartmentNumber
-      houseNumber
+      houseCode
       storeyNumber
       substreetName
       district {
