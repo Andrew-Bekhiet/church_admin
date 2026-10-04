@@ -23,22 +23,27 @@ To stream a whole collection rather than the default page size, raise the limit 
 - Prefer clean, SOLID, DRY code; break large units into smaller ones; use design patterns where they fit.
 - **Branch from the right base.** A PR branch starts from `master`, or from the layer below it when it belongs to a stack. Create, rebase and merge stacks with `/gh-stack`.
 
+## Names
+
+These rules apply to every language and all code in the repo. A name tells the **whole truth** about its body: whenever you add or rename an identifier, read the body and make the name cover every branch it takes.
+
+- Work that happens only sometimes says when — `maybeFormat`, `_maybeClaimPendingInvitation`, `joinValuesIfKeysDuplicated`.
+- One function, one responsibility. A comparator compares a single key, and the sort composes them in order — `byRole(a, b) || byMainPhoneFirst(a, b) || byCreationDate(a, b)`.
+- A class names its specific variant — `NationalPhoneDisplayFormat`.
+- A function is a specific verb — `uploadUserPhotoToStorage`.
+- A return value explains itself — `tryClaimInvitation()` returns whether the claim succeeded.
+- A predicate's name _is_ the rule — `if (await mustVerifyEmailBeforeClaiming(authUser))`.
+- A condition inside an expression gets an explaining variable — `phoneExists`, `existingPhone`.
+
+**Keep names in sync across the client/server boundary.** A client wrapper, the callable it invokes, and the file exporting it share one name (`tryClaimInvitation` / `try_claim_invitation.ts`). Renaming a deployed callable is a deploy-order dependency — client and functions ship separately, so a mismatched pair fails with `NOT_FOUND`.
+
 ## Comments — write none
 
-Aim for **zero** comments. A comment you feel like writing is a signal to rename or extract instead. Comments are a maintenance cost and go stale.
-
-Instead of a comment:
-
-- Extract a predicate whose name _is_ the rule — `if (await mustVerifyEmailBeforeClaiming(authUser))`.
-- Rename so a return value explains itself — `tryClaimInvitation()` rather than `claimInvitation()` with a doc comment explaining the `bool`.
-- Use a specific verb — `uploadUserPhotoToStorage`, not `copyProviderPhoto`.
-- Prefix conditional work with `_maybe` — `_maybeClaimPendingInvitation`.
+Aim for **zero** comments. A comment you feel like writing is a name that is not yet telling the whole truth: rename or extract instead, following **Names**. Comments are a maintenance cost and go stale.
 
 Doc comments are allowed only when they add value a name cannot carry. Never restate the code.
 
 **Link the issue behind a workaround.** When code works around a bug that has a GitHub issue, the comment explaining the workaround links it as a markdown link — `[flutter/flutter#90225](https://github.com/flutter/flutter/issues/90225)`.
-
-**Keep names in sync across the client/server boundary.** A Dart wrapper, the callable it invokes, and the file exporting it should share one name (`tryClaimInvitation` / `try_claim_invitation.ts`). Renaming a deployed callable is a deploy-order dependency — client and functions ship separately, so a mismatched pair fails with `NOT_FOUND`.
 
 ## Dart & Flutter
 
