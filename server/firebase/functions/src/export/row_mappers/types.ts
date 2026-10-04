@@ -33,3 +33,15 @@ export type AuditLogObject = {
   user: { name: string; uid: string } | null;
   time: string;
 };
+
+export type Contact = {
+  phone: string;
+  label: string | null;
+  isMainPhone: boolean;
+  createdAt: string;
+};
+
+export type FamilyContact = Omit<Contact, "label"> & {
+  personId: string | null;
+  personType: { id: string; name: string; order: number };
+};

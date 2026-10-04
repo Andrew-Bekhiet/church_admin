@@ -16,6 +16,23 @@ query exportData(
   $includeServices: Boolean = true
 ) {
   persons(where: $personsWhere) {
+    contacts {
+      phone
+      label
+      isMainPhone
+      createdAt
+    }
+    familyContacts(where: { personType: { isFamilyAdmin: { _eq: true } } }) {
+      personId
+      phone
+      isMainPhone
+      createdAt
+      personType {
+        id
+        name
+        order
+      }
+    }
     address {
       id
       apartmentNumber
@@ -119,11 +136,9 @@ query exportData(
         name
       }
     }
-    mainPhone
     martialStatus
     name
     notes
-    otherPhones
     personType {
       id
       name
