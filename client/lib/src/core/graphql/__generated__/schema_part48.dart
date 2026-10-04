@@ -1,251 +1,6 @@
 // Part 48 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_PersonsMinOrderBy<TRes> {
-  factory CopyWith_Input_PersonsMinOrderBy(
-    Input_PersonsMinOrderBy instance,
-    TRes Function(Input_PersonsMinOrderBy) then,
-  ) = _CopyWithImpl_Input_PersonsMinOrderBy;
-
-  factory CopyWith_Input_PersonsMinOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonsMinOrderBy;
-
-  TRes call({
-    Enum_OrderBy? birthdate,
-    Enum_OrderBy? blurhash,
-    Enum_OrderBy? churchId,
-    Enum_OrderBy? collegeId,
-    Enum_OrderBy? color,
-    Enum_OrderBy? familyId,
-    Enum_OrderBy? fatherId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? jobDescription,
-    Enum_OrderBy? jobId,
-    Enum_OrderBy? mainPhone,
-    Enum_OrderBy? martialStatus,
-    Enum_OrderBy? name,
-    Enum_OrderBy? nationalId,
-    Enum_OrderBy? notes,
-    Enum_OrderBy? personTypeId,
-    Enum_OrderBy? photoUpdatedAt,
-    Enum_OrderBy? qualificationId,
-    Enum_OrderBy? schoolId,
-    Enum_OrderBy? serviceType,
-    Enum_OrderBy? servingChurchId,
-    Enum_OrderBy? shammasLevelId,
-    Enum_OrderBy? stateId,
-    Enum_OrderBy? storeId,
-    Enum_OrderBy? studyYearId,
-    Enum_OrderBy? uid,
-    Enum_OrderBy? workStatus,
-  });
-}
-
-class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
-    implements CopyWith_Input_PersonsMinOrderBy<TRes> {
-  _CopyWithImpl_Input_PersonsMinOrderBy(this._instance, this._then);
-
-  final Input_PersonsMinOrderBy _instance;
-
-  final TRes Function(Input_PersonsMinOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? birthdate = _undefined,
-    Object? blurhash = _undefined,
-    Object? churchId = _undefined,
-    Object? collegeId = _undefined,
-    Object? color = _undefined,
-    Object? familyId = _undefined,
-    Object? fatherId = _undefined,
-    Object? id = _undefined,
-    Object? jobDescription = _undefined,
-    Object? jobId = _undefined,
-    Object? mainPhone = _undefined,
-    Object? martialStatus = _undefined,
-    Object? name = _undefined,
-    Object? nationalId = _undefined,
-    Object? notes = _undefined,
-    Object? personTypeId = _undefined,
-    Object? photoUpdatedAt = _undefined,
-    Object? qualificationId = _undefined,
-    Object? schoolId = _undefined,
-    Object? serviceType = _undefined,
-    Object? servingChurchId = _undefined,
-    Object? shammasLevelId = _undefined,
-    Object? stateId = _undefined,
-    Object? storeId = _undefined,
-    Object? studyYearId = _undefined,
-    Object? uid = _undefined,
-    Object? workStatus = _undefined,
-  }) => _then(
-    Input_PersonsMinOrderBy._({
-      ..._instance._$data,
-      if (birthdate != _undefined) 'birthdate': (birthdate as Enum_OrderBy?),
-      if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
-      if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
-      if (collegeId != _undefined) 'collegeId': (collegeId as Enum_OrderBy?),
-      if (color != _undefined) 'color': (color as Enum_OrderBy?),
-      if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
-      if (fatherId != _undefined) 'fatherId': (fatherId as Enum_OrderBy?),
-      if (id != _undefined) 'id': (id as Enum_OrderBy?),
-      if (jobDescription != _undefined)
-        'jobDescription': (jobDescription as Enum_OrderBy?),
-      if (jobId != _undefined) 'jobId': (jobId as Enum_OrderBy?),
-      if (mainPhone != _undefined) 'mainPhone': (mainPhone as Enum_OrderBy?),
-      if (martialStatus != _undefined)
-        'martialStatus': (martialStatus as Enum_OrderBy?),
-      if (name != _undefined) 'name': (name as Enum_OrderBy?),
-      if (nationalId != _undefined) 'nationalId': (nationalId as Enum_OrderBy?),
-      if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
-      if (personTypeId != _undefined)
-        'personTypeId': (personTypeId as Enum_OrderBy?),
-      if (photoUpdatedAt != _undefined)
-        'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
-      if (qualificationId != _undefined)
-        'qualificationId': (qualificationId as Enum_OrderBy?),
-      if (schoolId != _undefined) 'schoolId': (schoolId as Enum_OrderBy?),
-      if (serviceType != _undefined)
-        'serviceType': (serviceType as Enum_OrderBy?),
-      if (servingChurchId != _undefined)
-        'servingChurchId': (servingChurchId as Enum_OrderBy?),
-      if (shammasLevelId != _undefined)
-        'shammasLevelId': (shammasLevelId as Enum_OrderBy?),
-      if (stateId != _undefined) 'stateId': (stateId as Enum_OrderBy?),
-      if (storeId != _undefined) 'storeId': (storeId as Enum_OrderBy?),
-      if (studyYearId != _undefined)
-        'studyYearId': (studyYearId as Enum_OrderBy?),
-      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
-      if (workStatus != _undefined) 'workStatus': (workStatus as Enum_OrderBy?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_PersonsMinOrderBy<TRes>
-    implements CopyWith_Input_PersonsMinOrderBy<TRes> {
-  _CopyWithStubImpl_Input_PersonsMinOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? birthdate,
-    Enum_OrderBy? blurhash,
-    Enum_OrderBy? churchId,
-    Enum_OrderBy? collegeId,
-    Enum_OrderBy? color,
-    Enum_OrderBy? familyId,
-    Enum_OrderBy? fatherId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? jobDescription,
-    Enum_OrderBy? jobId,
-    Enum_OrderBy? mainPhone,
-    Enum_OrderBy? martialStatus,
-    Enum_OrderBy? name,
-    Enum_OrderBy? nationalId,
-    Enum_OrderBy? notes,
-    Enum_OrderBy? personTypeId,
-    Enum_OrderBy? photoUpdatedAt,
-    Enum_OrderBy? qualificationId,
-    Enum_OrderBy? schoolId,
-    Enum_OrderBy? serviceType,
-    Enum_OrderBy? servingChurchId,
-    Enum_OrderBy? shammasLevelId,
-    Enum_OrderBy? stateId,
-    Enum_OrderBy? storeId,
-    Enum_OrderBy? studyYearId,
-    Enum_OrderBy? uid,
-    Enum_OrderBy? workStatus,
-  }) => _res;
-}
-
-class Input_PersonsObjRelInsertInput {
-  factory Input_PersonsObjRelInsertInput({
-    required Input_PersonsInsertInput data,
-    Input_PersonsOnConflict? onConflict,
-  }) => Input_PersonsObjRelInsertInput._({
-    r'data': data,
-    if (onConflict != null) r'onConflict': onConflict,
-  });
-
-  Input_PersonsObjRelInsertInput._(this._$data);
-
-  factory Input_PersonsObjRelInsertInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$data = data['data'];
-    result$data['data'] = Input_PersonsInsertInput.fromJson(
-      (l$data as Map<String, dynamic>),
-    );
-    if (data.containsKey('onConflict')) {
-      final l$onConflict = data['onConflict'];
-      result$data['onConflict'] = l$onConflict == null
-          ? null
-          : Input_PersonsOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>),
-            );
-    }
-    return Input_PersonsObjRelInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_PersonsInsertInput get data =>
-      (_$data['data'] as Input_PersonsInsertInput);
-
-  Input_PersonsOnConflict? get onConflict =>
-      (_$data['onConflict'] as Input_PersonsOnConflict?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$data = data;
-    result$data['data'] = l$data.toJson();
-    if (_$data.containsKey('onConflict')) {
-      final l$onConflict = onConflict;
-      result$data['onConflict'] = l$onConflict?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_PersonsObjRelInsertInput<Input_PersonsObjRelInsertInput>
-  get copyWith => CopyWith_Input_PersonsObjRelInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_PersonsObjRelInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$data = data;
-    final lOther$data = other.data;
-    if (l$data != lOther$data) {
-      return false;
-    }
-    final l$onConflict = onConflict;
-    final lOther$onConflict = other.onConflict;
-    if (_$data.containsKey('onConflict') !=
-        other._$data.containsKey('onConflict')) {
-      return false;
-    }
-    if (l$onConflict != lOther$onConflict) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$data = data;
-    final l$onConflict = onConflict;
-    return Object.hashAll([
-      l$data,
-      _$data.containsKey('onConflict') ? l$onConflict : const {},
-    ]);
-  }
-}
-
 abstract class CopyWith_Input_PersonsObjRelInsertInput<TRes> {
   factory CopyWith_Input_PersonsObjRelInsertInput(
     Input_PersonsObjRelInsertInput instance,
@@ -547,12 +302,10 @@ class Input_PersonsOrderBy {
     Input_HistoryLatestKodasesOrderBy? lastKodas,
     Input_HistoryLatestVisitsOrderBy? lastVisit,
     Input_PersonsMainContactsOrderBy? mainContact,
-    Enum_OrderBy? mainPhone,
     Enum_OrderBy? martialStatus,
     Enum_OrderBy? name,
     Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
-    Enum_OrderBy? otherPhones,
     Input_PersonTypesOrderBy? personType,
     Enum_OrderBy? personTypeId,
     Enum_OrderBy? photoUpdatedAt,
@@ -622,12 +375,10 @@ class Input_PersonsOrderBy {
     if (lastKodas != null) r'lastKodas': lastKodas,
     if (lastVisit != null) r'lastVisit': lastVisit,
     if (mainContact != null) r'mainContact': mainContact,
-    if (mainPhone != null) r'mainPhone': mainPhone,
     if (martialStatus != null) r'martialStatus': martialStatus,
     if (name != null) r'name': name,
     if (nationalId != null) r'nationalId': nationalId,
     if (notes != null) r'notes': notes,
-    if (otherPhones != null) r'otherPhones': otherPhones,
     if (personType != null) r'personType': personType,
     if (personTypeId != null) r'personTypeId': personTypeId,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -918,12 +669,6 @@ class Input_PersonsOrderBy {
               (l$mainContact as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('mainPhone')) {
-      final l$mainPhone = data['mainPhone'];
-      result$data['mainPhone'] = l$mainPhone == null
-          ? null
-          : fromJson_Enum_OrderBy((l$mainPhone as String));
-    }
     if (data.containsKey('martialStatus')) {
       final l$martialStatus = data['martialStatus'];
       result$data['martialStatus'] = l$martialStatus == null
@@ -947,12 +692,6 @@ class Input_PersonsOrderBy {
       result$data['notes'] = l$notes == null
           ? null
           : fromJson_Enum_OrderBy((l$notes as String));
-    }
-    if (data.containsKey('otherPhones')) {
-      final l$otherPhones = data['otherPhones'];
-      result$data['otherPhones'] = l$otherPhones == null
-          ? null
-          : fromJson_Enum_OrderBy((l$otherPhones as String));
     }
     if (data.containsKey('personType')) {
       final l$personType = data['personType'];
@@ -1233,8 +972,6 @@ class Input_PersonsOrderBy {
   Input_PersonsMainContactsOrderBy? get mainContact =>
       (_$data['mainContact'] as Input_PersonsMainContactsOrderBy?);
 
-  Enum_OrderBy? get mainPhone => (_$data['mainPhone'] as Enum_OrderBy?);
-
   Enum_OrderBy? get martialStatus => (_$data['martialStatus'] as Enum_OrderBy?);
 
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -1242,8 +979,6 @@ class Input_PersonsOrderBy {
   Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get notes => (_$data['notes'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get otherPhones => (_$data['otherPhones'] as Enum_OrderBy?);
 
   Input_PersonTypesOrderBy? get personType =>
       (_$data['personType'] as Input_PersonTypesOrderBy?);
@@ -1492,12 +1227,6 @@ class Input_PersonsOrderBy {
       final l$mainContact = mainContact;
       result$data['mainContact'] = l$mainContact?.toJson();
     }
-    if (_$data.containsKey('mainPhone')) {
-      final l$mainPhone = mainPhone;
-      result$data['mainPhone'] = l$mainPhone == null
-          ? null
-          : toJson_Enum_OrderBy(l$mainPhone);
-    }
     if (_$data.containsKey('martialStatus')) {
       final l$martialStatus = martialStatus;
       result$data['martialStatus'] = l$martialStatus == null
@@ -1519,12 +1248,6 @@ class Input_PersonsOrderBy {
       result$data['notes'] = l$notes == null
           ? null
           : toJson_Enum_OrderBy(l$notes);
-    }
-    if (_$data.containsKey('otherPhones')) {
-      final l$otherPhones = otherPhones;
-      result$data['otherPhones'] = l$otherPhones == null
-          ? null
-          : toJson_Enum_OrderBy(l$otherPhones);
     }
     if (_$data.containsKey('personType')) {
       final l$personType = personType;
@@ -1987,15 +1710,6 @@ class Input_PersonsOrderBy {
     if (l$mainContact != lOther$mainContact) {
       return false;
     }
-    final l$mainPhone = mainPhone;
-    final lOther$mainPhone = other.mainPhone;
-    if (_$data.containsKey('mainPhone') !=
-        other._$data.containsKey('mainPhone')) {
-      return false;
-    }
-    if (l$mainPhone != lOther$mainPhone) {
-      return false;
-    }
     final l$martialStatus = martialStatus;
     final lOther$martialStatus = other.martialStatus;
     if (_$data.containsKey('martialStatus') !=
@@ -2028,15 +1742,6 @@ class Input_PersonsOrderBy {
       return false;
     }
     if (l$notes != lOther$notes) {
-      return false;
-    }
-    final l$otherPhones = otherPhones;
-    final lOther$otherPhones = other.otherPhones;
-    if (_$data.containsKey('otherPhones') !=
-        other._$data.containsKey('otherPhones')) {
-      return false;
-    }
-    if (l$otherPhones != lOther$otherPhones) {
       return false;
     }
     final l$personType = personType;
@@ -2299,12 +2004,10 @@ class Input_PersonsOrderBy {
     final l$lastKodas = lastKodas;
     final l$lastVisit = lastVisit;
     final l$mainContact = mainContact;
-    final l$mainPhone = mainPhone;
     final l$martialStatus = martialStatus;
     final l$name = name;
     final l$nationalId = nationalId;
     final l$notes = notes;
-    final l$otherPhones = otherPhones;
     final l$personType = personType;
     final l$personTypeId = personTypeId;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -2380,12 +2083,10 @@ class Input_PersonsOrderBy {
       _$data.containsKey('lastKodas') ? l$lastKodas : const {},
       _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('mainContact') ? l$mainContact : const {},
-      _$data.containsKey('mainPhone') ? l$mainPhone : const {},
       _$data.containsKey('martialStatus') ? l$martialStatus : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},
-      _$data.containsKey('otherPhones') ? l$otherPhones : const {},
       _$data.containsKey('personType') ? l$personType : const {},
       _$data.containsKey('personTypeId') ? l$personTypeId : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -2464,12 +2165,10 @@ abstract class CopyWith_Input_PersonsOrderBy<TRes> {
     Input_HistoryLatestKodasesOrderBy? lastKodas,
     Input_HistoryLatestVisitsOrderBy? lastVisit,
     Input_PersonsMainContactsOrderBy? mainContact,
-    Enum_OrderBy? mainPhone,
     Enum_OrderBy? martialStatus,
     Enum_OrderBy? name,
     Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
-    Enum_OrderBy? otherPhones,
     Input_PersonTypesOrderBy? personType,
     Enum_OrderBy? personTypeId,
     Enum_OrderBy? photoUpdatedAt,
@@ -2537,4 +2236,783 @@ abstract class CopyWith_Input_PersonsOrderBy<TRes> {
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user;
   CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
   get visitHistoryAggregate;
+}
+
+class _CopyWithImpl_Input_PersonsOrderBy<TRes>
+    implements CopyWith_Input_PersonsOrderBy<TRes> {
+  _CopyWithImpl_Input_PersonsOrderBy(this._instance, this._then);
+
+  final Input_PersonsOrderBy _instance;
+
+  final TRes Function(Input_PersonsOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? address = _undefined,
+    Object? attendanceHistoryAggregate = _undefined,
+    Object? birthdate = _undefined,
+    Object? birthday = _undefined,
+    Object? blurhash = _undefined,
+    Object? callHistoryAggregate = _undefined,
+    Object? church = _undefined,
+    Object? churchId = _undefined,
+    Object? classesAggregate = _undefined,
+    Object? college = _undefined,
+    Object? collegeId = _undefined,
+    Object? color = _undefined,
+    Object? confessionHistoryAggregate = _undefined,
+    Object? contactsAggregate = _undefined,
+    Object? editHistoryAggregate = _undefined,
+    Object? family = _undefined,
+    Object? familyContactsAggregate = _undefined,
+    Object? familyId = _undefined,
+    Object? father = _undefined,
+    Object? fatherId = _undefined,
+    Object? gender = _undefined,
+    Object? groupsAggregate = _undefined,
+    Object? hobbiesAggregate = _undefined,
+    Object? id = _undefined,
+    Object? isServant = _undefined,
+    Object? isShammas = _undefined,
+    Object? isStudent = _undefined,
+    Object? job = _undefined,
+    Object? jobDescription = _undefined,
+    Object? jobId = _undefined,
+    Object? kodasHistoryAggregate = _undefined,
+    Object? lastCall = _undefined,
+    Object? lastConfession = _undefined,
+    Object? lastEdit = _undefined,
+    Object? lastKodas = _undefined,
+    Object? lastVisit = _undefined,
+    Object? mainContact = _undefined,
+    Object? martialStatus = _undefined,
+    Object? name = _undefined,
+    Object? nationalId = _undefined,
+    Object? notes = _undefined,
+    Object? personType = _undefined,
+    Object? personTypeId = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? qualification = _undefined,
+    Object? qualificationId = _undefined,
+    Object? school = _undefined,
+    Object? schoolId = _undefined,
+    Object? serviceType = _undefined,
+    Object? servicesAggregate = _undefined,
+    Object? servingChurch = _undefined,
+    Object? servingChurchId = _undefined,
+    Object? shammasLevel = _undefined,
+    Object? shammasLevelId = _undefined,
+    Object? state = _undefined,
+    Object? stateId = _undefined,
+    Object? store = _undefined,
+    Object? storeId = _undefined,
+    Object? studyYear = _undefined,
+    Object? studyYearId = _undefined,
+    Object? tagsAggregate = _undefined,
+    Object? uid = _undefined,
+    Object? user = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? visitHistoryAggregate = _undefined,
+    Object? workStatus = _undefined,
+  }) => _then(
+    Input_PersonsOrderBy._({
+      ..._instance._$data,
+      if (address != _undefined)
+        'address': (address as Input_AddressesOrderBy?),
+      if (attendanceHistoryAggregate != _undefined)
+        'attendanceHistoryAggregate':
+            (attendanceHistoryAggregate
+                as Input_HistoryAttendanceHistoryAggregateOrderBy?),
+      if (birthdate != _undefined) 'birthdate': (birthdate as Enum_OrderBy?),
+      if (birthday != _undefined) 'birthday': (birthday as Enum_OrderBy?),
+      if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
+      if (callHistoryAggregate != _undefined)
+        'callHistoryAggregate':
+            (callHistoryAggregate as Input_HistoryCallHistoryAggregateOrderBy?),
+      if (church != _undefined) 'church': (church as Input_ChurchesOrderBy?),
+      if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
+      if (classesAggregate != _undefined)
+        'classesAggregate':
+            (classesAggregate as Input_ClassesPersonsAggregateOrderBy?),
+      if (college != _undefined) 'college': (college as Input_CollegesOrderBy?),
+      if (collegeId != _undefined) 'collegeId': (collegeId as Enum_OrderBy?),
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (confessionHistoryAggregate != _undefined)
+        'confessionHistoryAggregate':
+            (confessionHistoryAggregate
+                as Input_HistoryConfessionHistoryAggregateOrderBy?),
+      if (contactsAggregate != _undefined)
+        'contactsAggregate':
+            (contactsAggregate as Input_ContactsAggregateOrderBy?),
+      if (editHistoryAggregate != _undefined)
+        'editHistoryAggregate':
+            (editHistoryAggregate as Input_HistoryEditHistoryAggregateOrderBy?),
+      if (family != _undefined) 'family': (family as Input_FamiliesOrderBy?),
+      if (familyContactsAggregate != _undefined)
+        'familyContactsAggregate':
+            (familyContactsAggregate
+                as Input_ResolvedContactsAggregateOrderBy?),
+      if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
+      if (father != _undefined) 'father': (father as Input_FathersOrderBy?),
+      if (fatherId != _undefined) 'fatherId': (fatherId as Enum_OrderBy?),
+      if (gender != _undefined) 'gender': (gender as Enum_OrderBy?),
+      if (groupsAggregate != _undefined)
+        'groupsAggregate':
+            (groupsAggregate as Input_PersonsGroupsAggregateOrderBy?),
+      if (hobbiesAggregate != _undefined)
+        'hobbiesAggregate':
+            (hobbiesAggregate as Input_PersonsHobbiesAggregateOrderBy?),
+      if (id != _undefined) 'id': (id as Enum_OrderBy?),
+      if (isServant != _undefined) 'isServant': (isServant as Enum_OrderBy?),
+      if (isShammas != _undefined) 'isShammas': (isShammas as Enum_OrderBy?),
+      if (isStudent != _undefined) 'isStudent': (isStudent as Enum_OrderBy?),
+      if (job != _undefined) 'job': (job as Input_JobsOrderBy?),
+      if (jobDescription != _undefined)
+        'jobDescription': (jobDescription as Enum_OrderBy?),
+      if (jobId != _undefined) 'jobId': (jobId as Enum_OrderBy?),
+      if (kodasHistoryAggregate != _undefined)
+        'kodasHistoryAggregate':
+            (kodasHistoryAggregate
+                as Input_HistoryKodasHistoryAggregateOrderBy?),
+      if (lastCall != _undefined)
+        'lastCall': (lastCall as Input_HistoryLatestCallsOrderBy?),
+      if (lastConfession != _undefined)
+        'lastConfession':
+            (lastConfession as Input_HistoryLatestConfessionsOrderBy?),
+      if (lastEdit != _undefined)
+        'lastEdit': (lastEdit as Input_HistoryLatestEditsOrderBy?),
+      if (lastKodas != _undefined)
+        'lastKodas': (lastKodas as Input_HistoryLatestKodasesOrderBy?),
+      if (lastVisit != _undefined)
+        'lastVisit': (lastVisit as Input_HistoryLatestVisitsOrderBy?),
+      if (mainContact != _undefined)
+        'mainContact': (mainContact as Input_PersonsMainContactsOrderBy?),
+      if (martialStatus != _undefined)
+        'martialStatus': (martialStatus as Enum_OrderBy?),
+      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+      if (nationalId != _undefined) 'nationalId': (nationalId as Enum_OrderBy?),
+      if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
+      if (personType != _undefined)
+        'personType': (personType as Input_PersonTypesOrderBy?),
+      if (personTypeId != _undefined)
+        'personTypeId': (personTypeId as Enum_OrderBy?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
+      if (qualification != _undefined)
+        'qualification': (qualification as Input_QualificationsOrderBy?),
+      if (qualificationId != _undefined)
+        'qualificationId': (qualificationId as Enum_OrderBy?),
+      if (school != _undefined) 'school': (school as Input_SchoolsOrderBy?),
+      if (schoolId != _undefined) 'schoolId': (schoolId as Enum_OrderBy?),
+      if (serviceType != _undefined)
+        'serviceType': (serviceType as Enum_OrderBy?),
+      if (servicesAggregate != _undefined)
+        'servicesAggregate':
+            (servicesAggregate as Input_PersonsServicesAggregateOrderBy?),
+      if (servingChurch != _undefined)
+        'servingChurch': (servingChurch as Input_ChurchesOrderBy?),
+      if (servingChurchId != _undefined)
+        'servingChurchId': (servingChurchId as Enum_OrderBy?),
+      if (shammasLevel != _undefined)
+        'shammasLevel': (shammasLevel as Input_ShammasLevelsOrderBy?),
+      if (shammasLevelId != _undefined)
+        'shammasLevelId': (shammasLevelId as Enum_OrderBy?),
+      if (state != _undefined) 'state': (state as Input_PersonStatesOrderBy?),
+      if (stateId != _undefined) 'stateId': (stateId as Enum_OrderBy?),
+      if (store != _undefined) 'store': (store as Input_StoresOrderBy?),
+      if (storeId != _undefined) 'storeId': (storeId as Enum_OrderBy?),
+      if (studyYear != _undefined)
+        'studyYear': (studyYear as Input_StudyYearsOrderBy?),
+      if (studyYearId != _undefined)
+        'studyYearId': (studyYearId as Enum_OrderBy?),
+      if (tagsAggregate != _undefined)
+        'tagsAggregate': (tagsAggregate as Input_PersonsTagsAggregateOrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+      if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
+      if (userCanEdit != _undefined)
+        'userCanEdit': (userCanEdit as Enum_OrderBy?),
+      if (visitHistoryAggregate != _undefined)
+        'visitHistoryAggregate':
+            (visitHistoryAggregate
+                as Input_HistoryVisitHistoryAggregateOrderBy?),
+      if (workStatus != _undefined) 'workStatus': (workStatus as Enum_OrderBy?),
+    }),
+  );
+
+  CopyWith_Input_AddressesOrderBy<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Input_AddressesOrderBy.stub(_then(_instance))
+        : CopyWith_Input_AddressesOrderBy(
+            local$address,
+            (e) => call(address: e),
+          );
+  }
+
+  CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
+  get attendanceHistoryAggregate {
+    final local$attendanceHistoryAggregate =
+        _instance.attendanceHistoryAggregate;
+    return local$attendanceHistoryAggregate == null
+        ? CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy(
+            local$attendanceHistoryAggregate,
+            (e) => call(attendanceHistoryAggregate: e),
+          );
+  }
+
+  CopyWith_Input_HistoryCallHistoryAggregateOrderBy<TRes>
+  get callHistoryAggregate {
+    final local$callHistoryAggregate = _instance.callHistoryAggregate;
+    return local$callHistoryAggregate == null
+        ? CopyWith_Input_HistoryCallHistoryAggregateOrderBy.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_HistoryCallHistoryAggregateOrderBy(
+            local$callHistoryAggregate,
+            (e) => call(callHistoryAggregate: e),
+          );
+  }
+
+  CopyWith_Input_ChurchesOrderBy<TRes> get church {
+    final local$church = _instance.church;
+    return local$church == null
+        ? CopyWith_Input_ChurchesOrderBy.stub(_then(_instance))
+        : CopyWith_Input_ChurchesOrderBy(local$church, (e) => call(church: e));
+  }
+
+  CopyWith_Input_ClassesPersonsAggregateOrderBy<TRes> get classesAggregate {
+    final local$classesAggregate = _instance.classesAggregate;
+    return local$classesAggregate == null
+        ? CopyWith_Input_ClassesPersonsAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_ClassesPersonsAggregateOrderBy(
+            local$classesAggregate,
+            (e) => call(classesAggregate: e),
+          );
+  }
+
+  CopyWith_Input_CollegesOrderBy<TRes> get college {
+    final local$college = _instance.college;
+    return local$college == null
+        ? CopyWith_Input_CollegesOrderBy.stub(_then(_instance))
+        : CopyWith_Input_CollegesOrderBy(
+            local$college,
+            (e) => call(college: e),
+          );
+  }
+
+  CopyWith_Input_HistoryConfessionHistoryAggregateOrderBy<TRes>
+  get confessionHistoryAggregate {
+    final local$confessionHistoryAggregate =
+        _instance.confessionHistoryAggregate;
+    return local$confessionHistoryAggregate == null
+        ? CopyWith_Input_HistoryConfessionHistoryAggregateOrderBy.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_HistoryConfessionHistoryAggregateOrderBy(
+            local$confessionHistoryAggregate,
+            (e) => call(confessionHistoryAggregate: e),
+          );
+  }
+
+  CopyWith_Input_ContactsAggregateOrderBy<TRes> get contactsAggregate {
+    final local$contactsAggregate = _instance.contactsAggregate;
+    return local$contactsAggregate == null
+        ? CopyWith_Input_ContactsAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_ContactsAggregateOrderBy(
+            local$contactsAggregate,
+            (e) => call(contactsAggregate: e),
+          );
+  }
+
+  CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
+  get editHistoryAggregate {
+    final local$editHistoryAggregate = _instance.editHistoryAggregate;
+    return local$editHistoryAggregate == null
+        ? CopyWith_Input_HistoryEditHistoryAggregateOrderBy.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_HistoryEditHistoryAggregateOrderBy(
+            local$editHistoryAggregate,
+            (e) => call(editHistoryAggregate: e),
+          );
+  }
+
+  CopyWith_Input_FamiliesOrderBy<TRes> get family {
+    final local$family = _instance.family;
+    return local$family == null
+        ? CopyWith_Input_FamiliesOrderBy.stub(_then(_instance))
+        : CopyWith_Input_FamiliesOrderBy(local$family, (e) => call(family: e));
+  }
+
+  CopyWith_Input_ResolvedContactsAggregateOrderBy<TRes>
+  get familyContactsAggregate {
+    final local$familyContactsAggregate = _instance.familyContactsAggregate;
+    return local$familyContactsAggregate == null
+        ? CopyWith_Input_ResolvedContactsAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_ResolvedContactsAggregateOrderBy(
+            local$familyContactsAggregate,
+            (e) => call(familyContactsAggregate: e),
+          );
+  }
+
+  CopyWith_Input_FathersOrderBy<TRes> get father {
+    final local$father = _instance.father;
+    return local$father == null
+        ? CopyWith_Input_FathersOrderBy.stub(_then(_instance))
+        : CopyWith_Input_FathersOrderBy(local$father, (e) => call(father: e));
+  }
+
+  CopyWith_Input_PersonsGroupsAggregateOrderBy<TRes> get groupsAggregate {
+    final local$groupsAggregate = _instance.groupsAggregate;
+    return local$groupsAggregate == null
+        ? CopyWith_Input_PersonsGroupsAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsGroupsAggregateOrderBy(
+            local$groupsAggregate,
+            (e) => call(groupsAggregate: e),
+          );
+  }
+
+  CopyWith_Input_PersonsHobbiesAggregateOrderBy<TRes> get hobbiesAggregate {
+    final local$hobbiesAggregate = _instance.hobbiesAggregate;
+    return local$hobbiesAggregate == null
+        ? CopyWith_Input_PersonsHobbiesAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsHobbiesAggregateOrderBy(
+            local$hobbiesAggregate,
+            (e) => call(hobbiesAggregate: e),
+          );
+  }
+
+  CopyWith_Input_JobsOrderBy<TRes> get job {
+    final local$job = _instance.job;
+    return local$job == null
+        ? CopyWith_Input_JobsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_JobsOrderBy(local$job, (e) => call(job: e));
+  }
+
+  CopyWith_Input_HistoryKodasHistoryAggregateOrderBy<TRes>
+  get kodasHistoryAggregate {
+    final local$kodasHistoryAggregate = _instance.kodasHistoryAggregate;
+    return local$kodasHistoryAggregate == null
+        ? CopyWith_Input_HistoryKodasHistoryAggregateOrderBy.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_HistoryKodasHistoryAggregateOrderBy(
+            local$kodasHistoryAggregate,
+            (e) => call(kodasHistoryAggregate: e),
+          );
+  }
+
+  CopyWith_Input_HistoryLatestCallsOrderBy<TRes> get lastCall {
+    final local$lastCall = _instance.lastCall;
+    return local$lastCall == null
+        ? CopyWith_Input_HistoryLatestCallsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestCallsOrderBy(
+            local$lastCall,
+            (e) => call(lastCall: e),
+          );
+  }
+
+  CopyWith_Input_HistoryLatestConfessionsOrderBy<TRes> get lastConfession {
+    final local$lastConfession = _instance.lastConfession;
+    return local$lastConfession == null
+        ? CopyWith_Input_HistoryLatestConfessionsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestConfessionsOrderBy(
+            local$lastConfession,
+            (e) => call(lastConfession: e),
+          );
+  }
+
+  CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit {
+    final local$lastEdit = _instance.lastEdit;
+    return local$lastEdit == null
+        ? CopyWith_Input_HistoryLatestEditsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestEditsOrderBy(
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
+  }
+
+  CopyWith_Input_HistoryLatestKodasesOrderBy<TRes> get lastKodas {
+    final local$lastKodas = _instance.lastKodas;
+    return local$lastKodas == null
+        ? CopyWith_Input_HistoryLatestKodasesOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestKodasesOrderBy(
+            local$lastKodas,
+            (e) => call(lastKodas: e),
+          );
+  }
+
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit {
+    final local$lastVisit = _instance.lastVisit;
+    return local$lastVisit == null
+        ? CopyWith_Input_HistoryLatestVisitsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestVisitsOrderBy(
+            local$lastVisit,
+            (e) => call(lastVisit: e),
+          );
+  }
+
+  CopyWith_Input_PersonsMainContactsOrderBy<TRes> get mainContact {
+    final local$mainContact = _instance.mainContact;
+    return local$mainContact == null
+        ? CopyWith_Input_PersonsMainContactsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsMainContactsOrderBy(
+            local$mainContact,
+            (e) => call(mainContact: e),
+          );
+  }
+
+  CopyWith_Input_PersonTypesOrderBy<TRes> get personType {
+    final local$personType = _instance.personType;
+    return local$personType == null
+        ? CopyWith_Input_PersonTypesOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonTypesOrderBy(
+            local$personType,
+            (e) => call(personType: e),
+          );
+  }
+
+  CopyWith_Input_QualificationsOrderBy<TRes> get qualification {
+    final local$qualification = _instance.qualification;
+    return local$qualification == null
+        ? CopyWith_Input_QualificationsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_QualificationsOrderBy(
+            local$qualification,
+            (e) => call(qualification: e),
+          );
+  }
+
+  CopyWith_Input_SchoolsOrderBy<TRes> get school {
+    final local$school = _instance.school;
+    return local$school == null
+        ? CopyWith_Input_SchoolsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_SchoolsOrderBy(local$school, (e) => call(school: e));
+  }
+
+  CopyWith_Input_PersonsServicesAggregateOrderBy<TRes> get servicesAggregate {
+    final local$servicesAggregate = _instance.servicesAggregate;
+    return local$servicesAggregate == null
+        ? CopyWith_Input_PersonsServicesAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsServicesAggregateOrderBy(
+            local$servicesAggregate,
+            (e) => call(servicesAggregate: e),
+          );
+  }
+
+  CopyWith_Input_ChurchesOrderBy<TRes> get servingChurch {
+    final local$servingChurch = _instance.servingChurch;
+    return local$servingChurch == null
+        ? CopyWith_Input_ChurchesOrderBy.stub(_then(_instance))
+        : CopyWith_Input_ChurchesOrderBy(
+            local$servingChurch,
+            (e) => call(servingChurch: e),
+          );
+  }
+
+  CopyWith_Input_ShammasLevelsOrderBy<TRes> get shammasLevel {
+    final local$shammasLevel = _instance.shammasLevel;
+    return local$shammasLevel == null
+        ? CopyWith_Input_ShammasLevelsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_ShammasLevelsOrderBy(
+            local$shammasLevel,
+            (e) => call(shammasLevel: e),
+          );
+  }
+
+  CopyWith_Input_PersonStatesOrderBy<TRes> get state {
+    final local$state = _instance.state;
+    return local$state == null
+        ? CopyWith_Input_PersonStatesOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonStatesOrderBy(
+            local$state,
+            (e) => call(state: e),
+          );
+  }
+
+  CopyWith_Input_StoresOrderBy<TRes> get store {
+    final local$store = _instance.store;
+    return local$store == null
+        ? CopyWith_Input_StoresOrderBy.stub(_then(_instance))
+        : CopyWith_Input_StoresOrderBy(local$store, (e) => call(store: e));
+  }
+
+  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear {
+    final local$studyYear = _instance.studyYear;
+    return local$studyYear == null
+        ? CopyWith_Input_StudyYearsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_StudyYearsOrderBy(
+            local$studyYear,
+            (e) => call(studyYear: e),
+          );
+  }
+
+  CopyWith_Input_PersonsTagsAggregateOrderBy<TRes> get tagsAggregate {
+    final local$tagsAggregate = _instance.tagsAggregate;
+    return local$tagsAggregate == null
+        ? CopyWith_Input_PersonsTagsAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsTagsAggregateOrderBy(
+            local$tagsAggregate,
+            (e) => call(tagsAggregate: e),
+          );
+  }
+
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_AuthUsersDataOrderBy.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataOrderBy(local$user, (e) => call(user: e));
+  }
+
+  CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
+  get visitHistoryAggregate {
+    final local$visitHistoryAggregate = _instance.visitHistoryAggregate;
+    return local$visitHistoryAggregate == null
+        ? CopyWith_Input_HistoryVisitHistoryAggregateOrderBy.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_HistoryVisitHistoryAggregateOrderBy(
+            local$visitHistoryAggregate,
+            (e) => call(visitHistoryAggregate: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_PersonsOrderBy<TRes>
+    implements CopyWith_Input_PersonsOrderBy<TRes> {
+  _CopyWithStubImpl_Input_PersonsOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Input_AddressesOrderBy? address,
+    Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
+    Enum_OrderBy? birthdate,
+    Enum_OrderBy? birthday,
+    Enum_OrderBy? blurhash,
+    Input_HistoryCallHistoryAggregateOrderBy? callHistoryAggregate,
+    Input_ChurchesOrderBy? church,
+    Enum_OrderBy? churchId,
+    Input_ClassesPersonsAggregateOrderBy? classesAggregate,
+    Input_CollegesOrderBy? college,
+    Enum_OrderBy? collegeId,
+    Enum_OrderBy? color,
+    Input_HistoryConfessionHistoryAggregateOrderBy? confessionHistoryAggregate,
+    Input_ContactsAggregateOrderBy? contactsAggregate,
+    Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
+    Input_FamiliesOrderBy? family,
+    Input_ResolvedContactsAggregateOrderBy? familyContactsAggregate,
+    Enum_OrderBy? familyId,
+    Input_FathersOrderBy? father,
+    Enum_OrderBy? fatherId,
+    Enum_OrderBy? gender,
+    Input_PersonsGroupsAggregateOrderBy? groupsAggregate,
+    Input_PersonsHobbiesAggregateOrderBy? hobbiesAggregate,
+    Enum_OrderBy? id,
+    Enum_OrderBy? isServant,
+    Enum_OrderBy? isShammas,
+    Enum_OrderBy? isStudent,
+    Input_JobsOrderBy? job,
+    Enum_OrderBy? jobDescription,
+    Enum_OrderBy? jobId,
+    Input_HistoryKodasHistoryAggregateOrderBy? kodasHistoryAggregate,
+    Input_HistoryLatestCallsOrderBy? lastCall,
+    Input_HistoryLatestConfessionsOrderBy? lastConfession,
+    Input_HistoryLatestEditsOrderBy? lastEdit,
+    Input_HistoryLatestKodasesOrderBy? lastKodas,
+    Input_HistoryLatestVisitsOrderBy? lastVisit,
+    Input_PersonsMainContactsOrderBy? mainContact,
+    Enum_OrderBy? martialStatus,
+    Enum_OrderBy? name,
+    Enum_OrderBy? nationalId,
+    Enum_OrderBy? notes,
+    Input_PersonTypesOrderBy? personType,
+    Enum_OrderBy? personTypeId,
+    Enum_OrderBy? photoUpdatedAt,
+    Input_QualificationsOrderBy? qualification,
+    Enum_OrderBy? qualificationId,
+    Input_SchoolsOrderBy? school,
+    Enum_OrderBy? schoolId,
+    Enum_OrderBy? serviceType,
+    Input_PersonsServicesAggregateOrderBy? servicesAggregate,
+    Input_ChurchesOrderBy? servingChurch,
+    Enum_OrderBy? servingChurchId,
+    Input_ShammasLevelsOrderBy? shammasLevel,
+    Enum_OrderBy? shammasLevelId,
+    Input_PersonStatesOrderBy? state,
+    Enum_OrderBy? stateId,
+    Input_StoresOrderBy? store,
+    Enum_OrderBy? storeId,
+    Input_StudyYearsOrderBy? studyYear,
+    Enum_OrderBy? studyYearId,
+    Input_PersonsTagsAggregateOrderBy? tagsAggregate,
+    Enum_OrderBy? uid,
+    Input_AuthUsersDataOrderBy? user,
+    Enum_OrderBy? userCanEdit,
+    Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
+    Enum_OrderBy? workStatus,
+  }) => _res;
+
+  CopyWith_Input_AddressesOrderBy<TRes> get address =>
+      CopyWith_Input_AddressesOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
+  get attendanceHistoryAggregate =>
+      CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryCallHistoryAggregateOrderBy<TRes>
+  get callHistoryAggregate =>
+      CopyWith_Input_HistoryCallHistoryAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_ChurchesOrderBy<TRes> get church =>
+      CopyWith_Input_ChurchesOrderBy.stub(_res);
+
+  CopyWith_Input_ClassesPersonsAggregateOrderBy<TRes> get classesAggregate =>
+      CopyWith_Input_ClassesPersonsAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_CollegesOrderBy<TRes> get college =>
+      CopyWith_Input_CollegesOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryConfessionHistoryAggregateOrderBy<TRes>
+  get confessionHistoryAggregate =>
+      CopyWith_Input_HistoryConfessionHistoryAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_ContactsAggregateOrderBy<TRes> get contactsAggregate =>
+      CopyWith_Input_ContactsAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
+  get editHistoryAggregate =>
+      CopyWith_Input_HistoryEditHistoryAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_FamiliesOrderBy<TRes> get family =>
+      CopyWith_Input_FamiliesOrderBy.stub(_res);
+
+  CopyWith_Input_ResolvedContactsAggregateOrderBy<TRes>
+  get familyContactsAggregate =>
+      CopyWith_Input_ResolvedContactsAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_FathersOrderBy<TRes> get father =>
+      CopyWith_Input_FathersOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsGroupsAggregateOrderBy<TRes> get groupsAggregate =>
+      CopyWith_Input_PersonsGroupsAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsHobbiesAggregateOrderBy<TRes> get hobbiesAggregate =>
+      CopyWith_Input_PersonsHobbiesAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_JobsOrderBy<TRes> get job =>
+      CopyWith_Input_JobsOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryKodasHistoryAggregateOrderBy<TRes>
+  get kodasHistoryAggregate =>
+      CopyWith_Input_HistoryKodasHistoryAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryLatestCallsOrderBy<TRes> get lastCall =>
+      CopyWith_Input_HistoryLatestCallsOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryLatestConfessionsOrderBy<TRes> get lastConfession =>
+      CopyWith_Input_HistoryLatestConfessionsOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit =>
+      CopyWith_Input_HistoryLatestEditsOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryLatestKodasesOrderBy<TRes> get lastKodas =>
+      CopyWith_Input_HistoryLatestKodasesOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit =>
+      CopyWith_Input_HistoryLatestVisitsOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsMainContactsOrderBy<TRes> get mainContact =>
+      CopyWith_Input_PersonsMainContactsOrderBy.stub(_res);
+
+  CopyWith_Input_PersonTypesOrderBy<TRes> get personType =>
+      CopyWith_Input_PersonTypesOrderBy.stub(_res);
+
+  CopyWith_Input_QualificationsOrderBy<TRes> get qualification =>
+      CopyWith_Input_QualificationsOrderBy.stub(_res);
+
+  CopyWith_Input_SchoolsOrderBy<TRes> get school =>
+      CopyWith_Input_SchoolsOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsServicesAggregateOrderBy<TRes> get servicesAggregate =>
+      CopyWith_Input_PersonsServicesAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_ChurchesOrderBy<TRes> get servingChurch =>
+      CopyWith_Input_ChurchesOrderBy.stub(_res);
+
+  CopyWith_Input_ShammasLevelsOrderBy<TRes> get shammasLevel =>
+      CopyWith_Input_ShammasLevelsOrderBy.stub(_res);
+
+  CopyWith_Input_PersonStatesOrderBy<TRes> get state =>
+      CopyWith_Input_PersonStatesOrderBy.stub(_res);
+
+  CopyWith_Input_StoresOrderBy<TRes> get store =>
+      CopyWith_Input_StoresOrderBy.stub(_res);
+
+  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear =>
+      CopyWith_Input_StudyYearsOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsTagsAggregateOrderBy<TRes> get tagsAggregate =>
+      CopyWith_Input_PersonsTagsAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
+      CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
+  get visitHistoryAggregate =>
+      CopyWith_Input_HistoryVisitHistoryAggregateOrderBy.stub(_res);
+}
+
+class Input_PersonsPkColumnsInput {
+  factory Input_PersonsPkColumnsInput({required UuidValue id}) =>
+      Input_PersonsPkColumnsInput._({r'id': id});
+
+  Input_PersonsPkColumnsInput._(this._$data);
+
+  factory Input_PersonsPkColumnsInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$id = data['id'];
+    result$data['id'] = stringToUuid(l$id);
+    return Input_PersonsPkColumnsInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  UuidValue get id => (_$data['id'] as UuidValue);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$id = id;
+    result$data['id'] = uuidToString(l$id);
+    return result$data;
+  }
+
+  CopyWith_Input_PersonsPkColumnsInput<Input_PersonsPkColumnsInput>
+  get copyWith => CopyWith_Input_PersonsPkColumnsInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonsPkColumnsInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    return Object.hashAll([l$id]);
+  }
 }

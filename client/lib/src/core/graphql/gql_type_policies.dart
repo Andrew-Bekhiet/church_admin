@@ -53,7 +53,6 @@ abstract final class GqlTypePolicies {
     'ClassesPersons': _embedded,
     'AreasStreets': _embedded,
     'FamiliesFamilies': _embedded,
-    'FamiliesAdminsPhones': _embedded,
     'AuthUsersAdminOn': _embedded,
     'AuthUsersPermissions': _embedded,
     'UsersFcmTokens': _embedded,

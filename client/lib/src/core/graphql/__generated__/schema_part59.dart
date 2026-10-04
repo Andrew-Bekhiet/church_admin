@@ -1,581 +1,6 @@
 // Part 59 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_StreetsIncInput<TRes> {
-  factory CopyWith_Input_StreetsIncInput(
-    Input_StreetsIncInput instance,
-    TRes Function(Input_StreetsIncInput) then,
-  ) = _CopyWithImpl_Input_StreetsIncInput;
-
-  factory CopyWith_Input_StreetsIncInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_StreetsIncInput;
-
-  TRes call({int? color});
-}
-
-class _CopyWithImpl_Input_StreetsIncInput<TRes>
-    implements CopyWith_Input_StreetsIncInput<TRes> {
-  _CopyWithImpl_Input_StreetsIncInput(this._instance, this._then);
-
-  final Input_StreetsIncInput _instance;
-
-  final TRes Function(Input_StreetsIncInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? color = _undefined}) => _then(
-    Input_StreetsIncInput._({
-      ..._instance._$data,
-      if (color != _undefined) 'color': (color as int?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_StreetsIncInput<TRes>
-    implements CopyWith_Input_StreetsIncInput<TRes> {
-  _CopyWithStubImpl_Input_StreetsIncInput(this._res);
-
-  TRes _res;
-
-  call({int? color}) => _res;
-}
-
-class Input_StreetsInsertInput {
-  factory Input_StreetsInsertInput({
-    Input_AddressesArrRelInsertInput? addresses,
-    Input_AreasStreetsArrRelInsertInput? areas,
-    int? color,
-    Map<String, dynamic>? line,
-    String? name,
-  }) => Input_StreetsInsertInput._({
-    if (addresses != null) r'addresses': addresses,
-    if (areas != null) r'areas': areas,
-    if (color != null) r'color': color,
-    if (line != null) r'line': line,
-    if (name != null) r'name': name,
-  });
-
-  Input_StreetsInsertInput._(this._$data);
-
-  factory Input_StreetsInsertInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('addresses')) {
-      final l$addresses = data['addresses'];
-      result$data['addresses'] = l$addresses == null
-          ? null
-          : Input_AddressesArrRelInsertInput.fromJson(
-              (l$addresses as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('areas')) {
-      final l$areas = data['areas'];
-      result$data['areas'] = l$areas == null
-          ? null
-          : Input_AreasStreetsArrRelInsertInput.fromJson(
-              (l$areas as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('line')) {
-      final l$line = data['line'];
-      result$data['line'] = (l$line as Map<String, dynamic>?);
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    return Input_StreetsInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_AddressesArrRelInsertInput? get addresses =>
-      (_$data['addresses'] as Input_AddressesArrRelInsertInput?);
-
-  Input_AreasStreetsArrRelInsertInput? get areas =>
-      (_$data['areas'] as Input_AreasStreetsArrRelInsertInput?);
-
-  int? get color => (_$data['color'] as int?);
-
-  Map<String, dynamic>? get line => (_$data['line'] as Map<String, dynamic>?);
-
-  String? get name => (_$data['name'] as String?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('addresses')) {
-      final l$addresses = addresses;
-      result$data['addresses'] = l$addresses?.toJson();
-    }
-    if (_$data.containsKey('areas')) {
-      final l$areas = areas;
-      result$data['areas'] = l$areas?.toJson();
-    }
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('line')) {
-      final l$line = line;
-      result$data['line'] = l$line;
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_StreetsInsertInput<Input_StreetsInsertInput> get copyWith =>
-      CopyWith_Input_StreetsInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_StreetsInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$addresses = addresses;
-    final lOther$addresses = other.addresses;
-    if (_$data.containsKey('addresses') !=
-        other._$data.containsKey('addresses')) {
-      return false;
-    }
-    if (l$addresses != lOther$addresses) {
-      return false;
-    }
-    final l$areas = areas;
-    final lOther$areas = other.areas;
-    if (_$data.containsKey('areas') != other._$data.containsKey('areas')) {
-      return false;
-    }
-    if (l$areas != lOther$areas) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$line = line;
-    final lOther$line = other.line;
-    if (_$data.containsKey('line') != other._$data.containsKey('line')) {
-      return false;
-    }
-    if (l$line != lOther$line) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$addresses = addresses;
-    final l$areas = areas;
-    final l$color = color;
-    final l$line = line;
-    final l$name = name;
-    return Object.hashAll([
-      _$data.containsKey('addresses') ? l$addresses : const {},
-      _$data.containsKey('areas') ? l$areas : const {},
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('line') ? l$line : const {},
-      _$data.containsKey('name') ? l$name : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_StreetsInsertInput<TRes> {
-  factory CopyWith_Input_StreetsInsertInput(
-    Input_StreetsInsertInput instance,
-    TRes Function(Input_StreetsInsertInput) then,
-  ) = _CopyWithImpl_Input_StreetsInsertInput;
-
-  factory CopyWith_Input_StreetsInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_StreetsInsertInput;
-
-  TRes call({
-    Input_AddressesArrRelInsertInput? addresses,
-    Input_AreasStreetsArrRelInsertInput? areas,
-    int? color,
-    Map<String, dynamic>? line,
-    String? name,
-  });
-  CopyWith_Input_AddressesArrRelInsertInput<TRes> get addresses;
-  CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> get areas;
-}
-
-class _CopyWithImpl_Input_StreetsInsertInput<TRes>
-    implements CopyWith_Input_StreetsInsertInput<TRes> {
-  _CopyWithImpl_Input_StreetsInsertInput(this._instance, this._then);
-
-  final Input_StreetsInsertInput _instance;
-
-  final TRes Function(Input_StreetsInsertInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? addresses = _undefined,
-    Object? areas = _undefined,
-    Object? color = _undefined,
-    Object? line = _undefined,
-    Object? name = _undefined,
-  }) => _then(
-    Input_StreetsInsertInput._({
-      ..._instance._$data,
-      if (addresses != _undefined)
-        'addresses': (addresses as Input_AddressesArrRelInsertInput?),
-      if (areas != _undefined)
-        'areas': (areas as Input_AreasStreetsArrRelInsertInput?),
-      if (color != _undefined) 'color': (color as int?),
-      if (line != _undefined) 'line': (line as Map<String, dynamic>?),
-      if (name != _undefined) 'name': (name as String?),
-    }),
-  );
-
-  CopyWith_Input_AddressesArrRelInsertInput<TRes> get addresses {
-    final local$addresses = _instance.addresses;
-    return local$addresses == null
-        ? CopyWith_Input_AddressesArrRelInsertInput.stub(_then(_instance))
-        : CopyWith_Input_AddressesArrRelInsertInput(
-            local$addresses,
-            (e) => call(addresses: e),
-          );
-  }
-
-  CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> get areas {
-    final local$areas = _instance.areas;
-    return local$areas == null
-        ? CopyWith_Input_AreasStreetsArrRelInsertInput.stub(_then(_instance))
-        : CopyWith_Input_AreasStreetsArrRelInsertInput(
-            local$areas,
-            (e) => call(areas: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_StreetsInsertInput<TRes>
-    implements CopyWith_Input_StreetsInsertInput<TRes> {
-  _CopyWithStubImpl_Input_StreetsInsertInput(this._res);
-
-  TRes _res;
-
-  call({
-    Input_AddressesArrRelInsertInput? addresses,
-    Input_AreasStreetsArrRelInsertInput? areas,
-    int? color,
-    Map<String, dynamic>? line,
-    String? name,
-  }) => _res;
-
-  CopyWith_Input_AddressesArrRelInsertInput<TRes> get addresses =>
-      CopyWith_Input_AddressesArrRelInsertInput.stub(_res);
-
-  CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> get areas =>
-      CopyWith_Input_AreasStreetsArrRelInsertInput.stub(_res);
-}
-
-class Input_StreetsObjRelInsertInput {
-  factory Input_StreetsObjRelInsertInput({
-    required Input_StreetsInsertInput data,
-    Input_StreetsOnConflict? onConflict,
-  }) => Input_StreetsObjRelInsertInput._({
-    r'data': data,
-    if (onConflict != null) r'onConflict': onConflict,
-  });
-
-  Input_StreetsObjRelInsertInput._(this._$data);
-
-  factory Input_StreetsObjRelInsertInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$data = data['data'];
-    result$data['data'] = Input_StreetsInsertInput.fromJson(
-      (l$data as Map<String, dynamic>),
-    );
-    if (data.containsKey('onConflict')) {
-      final l$onConflict = data['onConflict'];
-      result$data['onConflict'] = l$onConflict == null
-          ? null
-          : Input_StreetsOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>),
-            );
-    }
-    return Input_StreetsObjRelInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_StreetsInsertInput get data =>
-      (_$data['data'] as Input_StreetsInsertInput);
-
-  Input_StreetsOnConflict? get onConflict =>
-      (_$data['onConflict'] as Input_StreetsOnConflict?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$data = data;
-    result$data['data'] = l$data.toJson();
-    if (_$data.containsKey('onConflict')) {
-      final l$onConflict = onConflict;
-      result$data['onConflict'] = l$onConflict?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_StreetsObjRelInsertInput<Input_StreetsObjRelInsertInput>
-  get copyWith => CopyWith_Input_StreetsObjRelInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_StreetsObjRelInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$data = data;
-    final lOther$data = other.data;
-    if (l$data != lOther$data) {
-      return false;
-    }
-    final l$onConflict = onConflict;
-    final lOther$onConflict = other.onConflict;
-    if (_$data.containsKey('onConflict') !=
-        other._$data.containsKey('onConflict')) {
-      return false;
-    }
-    if (l$onConflict != lOther$onConflict) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$data = data;
-    final l$onConflict = onConflict;
-    return Object.hashAll([
-      l$data,
-      _$data.containsKey('onConflict') ? l$onConflict : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_StreetsObjRelInsertInput<TRes> {
-  factory CopyWith_Input_StreetsObjRelInsertInput(
-    Input_StreetsObjRelInsertInput instance,
-    TRes Function(Input_StreetsObjRelInsertInput) then,
-  ) = _CopyWithImpl_Input_StreetsObjRelInsertInput;
-
-  factory CopyWith_Input_StreetsObjRelInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_StreetsObjRelInsertInput;
-
-  TRes call({
-    Input_StreetsInsertInput? data,
-    Input_StreetsOnConflict? onConflict,
-  });
-  CopyWith_Input_StreetsInsertInput<TRes> get data;
-  CopyWith_Input_StreetsOnConflict<TRes> get onConflict;
-}
-
-class _CopyWithImpl_Input_StreetsObjRelInsertInput<TRes>
-    implements CopyWith_Input_StreetsObjRelInsertInput<TRes> {
-  _CopyWithImpl_Input_StreetsObjRelInsertInput(this._instance, this._then);
-
-  final Input_StreetsObjRelInsertInput _instance;
-
-  final TRes Function(Input_StreetsObjRelInsertInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
-      _then(
-        Input_StreetsObjRelInsertInput._({
-          ..._instance._$data,
-          if (data != _undefined && data != null)
-            'data': (data as Input_StreetsInsertInput),
-          if (onConflict != _undefined)
-            'onConflict': (onConflict as Input_StreetsOnConflict?),
-        }),
-      );
-
-  CopyWith_Input_StreetsInsertInput<TRes> get data {
-    final local$data = _instance.data;
-    return CopyWith_Input_StreetsInsertInput(local$data, (e) => call(data: e));
-  }
-
-  CopyWith_Input_StreetsOnConflict<TRes> get onConflict {
-    final local$onConflict = _instance.onConflict;
-    return local$onConflict == null
-        ? CopyWith_Input_StreetsOnConflict.stub(_then(_instance))
-        : CopyWith_Input_StreetsOnConflict(
-            local$onConflict,
-            (e) => call(onConflict: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_StreetsObjRelInsertInput<TRes>
-    implements CopyWith_Input_StreetsObjRelInsertInput<TRes> {
-  _CopyWithStubImpl_Input_StreetsObjRelInsertInput(this._res);
-
-  TRes _res;
-
-  call({Input_StreetsInsertInput? data, Input_StreetsOnConflict? onConflict}) =>
-      _res;
-
-  CopyWith_Input_StreetsInsertInput<TRes> get data =>
-      CopyWith_Input_StreetsInsertInput.stub(_res);
-
-  CopyWith_Input_StreetsOnConflict<TRes> get onConflict =>
-      CopyWith_Input_StreetsOnConflict.stub(_res);
-}
-
-class Input_StreetsOnConflict {
-  factory Input_StreetsOnConflict({
-    required Enum_StreetsConstraint constraint,
-    List<Enum_StreetsUpdateColumn>? updateColumns,
-    Input_StreetsBoolExp? where,
-  }) => Input_StreetsOnConflict._({
-    r'constraint': constraint,
-    if (updateColumns != null) r'updateColumns': updateColumns,
-    if (where != null) r'where': where,
-  });
-
-  Input_StreetsOnConflict._(this._$data);
-
-  factory Input_StreetsOnConflict.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$constraint = data['constraint'];
-    result$data['constraint'] = fromJson_Enum_StreetsConstraint(
-      (l$constraint as String),
-    );
-    if (data.containsKey('updateColumns')) {
-      final l$updateColumns = data['updateColumns'];
-      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-          .map((e) => fromJson_Enum_StreetsUpdateColumn((e as String)))
-          .toList();
-    }
-    if (data.containsKey('where')) {
-      final l$where = data['where'];
-      result$data['where'] = l$where == null
-          ? null
-          : Input_StreetsBoolExp.fromJson((l$where as Map<String, dynamic>));
-    }
-    return Input_StreetsOnConflict._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_StreetsConstraint get constraint =>
-      (_$data['constraint'] as Enum_StreetsConstraint);
-
-  List<Enum_StreetsUpdateColumn>? get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_StreetsUpdateColumn>?);
-
-  Input_StreetsBoolExp? get where => (_$data['where'] as Input_StreetsBoolExp?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$constraint = constraint;
-    result$data['constraint'] = toJson_Enum_StreetsConstraint(l$constraint);
-    if (_$data.containsKey('updateColumns')) {
-      final l$updateColumns = updateColumns;
-      result$data['updateColumns'] =
-          (l$updateColumns as List<Enum_StreetsUpdateColumn>)
-              .map((e) => toJson_Enum_StreetsUpdateColumn(e))
-              .toList();
-    }
-    if (_$data.containsKey('where')) {
-      final l$where = where;
-      result$data['where'] = l$where?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_StreetsOnConflict<Input_StreetsOnConflict> get copyWith =>
-      CopyWith_Input_StreetsOnConflict(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_StreetsOnConflict || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$constraint = constraint;
-    final lOther$constraint = other.constraint;
-    if (l$constraint != lOther$constraint) {
-      return false;
-    }
-    final l$updateColumns = updateColumns;
-    final lOther$updateColumns = other.updateColumns;
-    if (_$data.containsKey('updateColumns') !=
-        other._$data.containsKey('updateColumns')) {
-      return false;
-    }
-    if (l$updateColumns != null && lOther$updateColumns != null) {
-      if (l$updateColumns.length != lOther$updateColumns.length) {
-        return false;
-      }
-      for (int i = 0; i < l$updateColumns.length; i++) {
-        final l$updateColumns$entry = l$updateColumns[i];
-        final lOther$updateColumns$entry = lOther$updateColumns[i];
-        if (l$updateColumns$entry != lOther$updateColumns$entry) {
-          return false;
-        }
-      }
-    } else if (l$updateColumns != lOther$updateColumns) {
-      return false;
-    }
-    final l$where = where;
-    final lOther$where = other.where;
-    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
-      return false;
-    }
-    if (l$where != lOther$where) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$constraint = constraint;
-    final l$updateColumns = updateColumns;
-    final l$where = where;
-    return Object.hashAll([
-      l$constraint,
-      _$data.containsKey('updateColumns')
-          ? l$updateColumns == null
-                ? null
-                : Object.hashAll(l$updateColumns.map((v) => v))
-          : const {},
-      _$data.containsKey('where') ? l$where : const {},
-    ]);
-  }
-}
-
 abstract class CopyWith_Input_StreetsOnConflict<TRes> {
   factory CopyWith_Input_StreetsOnConflict(
     Input_StreetsOnConflict instance,
@@ -2512,5 +1937,595 @@ abstract class CopyWith_Input_StringArrayComparisonExp<TRes> {
     List<String>? $_lte,
     List<String>? $_neq,
     List<List<String>>? $_nin,
+  });
+}
+
+class _CopyWithImpl_Input_StringArrayComparisonExp<TRes>
+    implements CopyWith_Input_StringArrayComparisonExp<TRes> {
+  _CopyWithImpl_Input_StringArrayComparisonExp(this._instance, this._then);
+
+  final Input_StringArrayComparisonExp _instance;
+
+  final TRes Function(Input_StringArrayComparisonExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_containedIn = _undefined,
+    Object? $_contains = _undefined,
+    Object? $_eq = _undefined,
+    Object? $_gt = _undefined,
+    Object? $_gte = _undefined,
+    Object? $_in = _undefined,
+    Object? $_isNull = _undefined,
+    Object? $_lt = _undefined,
+    Object? $_lte = _undefined,
+    Object? $_neq = _undefined,
+    Object? $_nin = _undefined,
+  }) => _then(
+    Input_StringArrayComparisonExp._({
+      ..._instance._$data,
+      if ($_containedIn != _undefined)
+        '_containedIn': ($_containedIn as List<String>?),
+      if ($_contains != _undefined) '_contains': ($_contains as List<String>?),
+      if ($_eq != _undefined) '_eq': ($_eq as List<String>?),
+      if ($_gt != _undefined) '_gt': ($_gt as List<String>?),
+      if ($_gte != _undefined) '_gte': ($_gte as List<String>?),
+      if ($_in != _undefined) '_in': ($_in as List<List<String>>?),
+      if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
+      if ($_lt != _undefined) '_lt': ($_lt as List<String>?),
+      if ($_lte != _undefined) '_lte': ($_lte as List<String>?),
+      if ($_neq != _undefined) '_neq': ($_neq as List<String>?),
+      if ($_nin != _undefined) '_nin': ($_nin as List<List<String>>?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_StringArrayComparisonExp<TRes>
+    implements CopyWith_Input_StringArrayComparisonExp<TRes> {
+  _CopyWithStubImpl_Input_StringArrayComparisonExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<String>? $_containedIn,
+    List<String>? $_contains,
+    List<String>? $_eq,
+    List<String>? $_gt,
+    List<String>? $_gte,
+    List<List<String>>? $_in,
+    bool? $_isNull,
+    List<String>? $_lt,
+    List<String>? $_lte,
+    List<String>? $_neq,
+    List<List<String>>? $_nin,
+  }) => _res;
+}
+
+class Input_StringComparisonExp {
+  factory Input_StringComparisonExp({
+    String? $_eq,
+    String? $_gt,
+    String? $_gte,
+    String? $_ilike,
+    List<String>? $_in,
+    String? $_iregex,
+    bool? $_isNull,
+    String? $_like,
+    String? $_lt,
+    String? $_lte,
+    String? $_neq,
+    String? $_nilike,
+    List<String>? $_nin,
+    String? $_niregex,
+    String? $_nlike,
+    String? $_nregex,
+    String? $_nsimilar,
+    String? $_regex,
+    String? $_similar,
+  }) => Input_StringComparisonExp._({
+    if ($_eq != null) r'_eq': $_eq,
+    if ($_gt != null) r'_gt': $_gt,
+    if ($_gte != null) r'_gte': $_gte,
+    if ($_ilike != null) r'_ilike': $_ilike,
+    if ($_in != null) r'_in': $_in,
+    if ($_iregex != null) r'_iregex': $_iregex,
+    if ($_isNull != null) r'_isNull': $_isNull,
+    if ($_like != null) r'_like': $_like,
+    if ($_lt != null) r'_lt': $_lt,
+    if ($_lte != null) r'_lte': $_lte,
+    if ($_neq != null) r'_neq': $_neq,
+    if ($_nilike != null) r'_nilike': $_nilike,
+    if ($_nin != null) r'_nin': $_nin,
+    if ($_niregex != null) r'_niregex': $_niregex,
+    if ($_nlike != null) r'_nlike': $_nlike,
+    if ($_nregex != null) r'_nregex': $_nregex,
+    if ($_nsimilar != null) r'_nsimilar': $_nsimilar,
+    if ($_regex != null) r'_regex': $_regex,
+    if ($_similar != null) r'_similar': $_similar,
+  });
+
+  Input_StringComparisonExp._(this._$data);
+
+  factory Input_StringComparisonExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_eq')) {
+      final l$$_eq = data['_eq'];
+      result$data['_eq'] = (l$$_eq as String?);
+    }
+    if (data.containsKey('_gt')) {
+      final l$$_gt = data['_gt'];
+      result$data['_gt'] = (l$$_gt as String?);
+    }
+    if (data.containsKey('_gte')) {
+      final l$$_gte = data['_gte'];
+      result$data['_gte'] = (l$$_gte as String?);
+    }
+    if (data.containsKey('_ilike')) {
+      final l$$_ilike = data['_ilike'];
+      result$data['_ilike'] = (l$$_ilike as String?);
+    }
+    if (data.containsKey('_in')) {
+      final l$$_in = data['_in'];
+      result$data['_in'] = (l$$_in as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('_iregex')) {
+      final l$$_iregex = data['_iregex'];
+      result$data['_iregex'] = (l$$_iregex as String?);
+    }
+    if (data.containsKey('_isNull')) {
+      final l$$_isNull = data['_isNull'];
+      result$data['_isNull'] = (l$$_isNull as bool?);
+    }
+    if (data.containsKey('_like')) {
+      final l$$_like = data['_like'];
+      result$data['_like'] = (l$$_like as String?);
+    }
+    if (data.containsKey('_lt')) {
+      final l$$_lt = data['_lt'];
+      result$data['_lt'] = (l$$_lt as String?);
+    }
+    if (data.containsKey('_lte')) {
+      final l$$_lte = data['_lte'];
+      result$data['_lte'] = (l$$_lte as String?);
+    }
+    if (data.containsKey('_neq')) {
+      final l$$_neq = data['_neq'];
+      result$data['_neq'] = (l$$_neq as String?);
+    }
+    if (data.containsKey('_nilike')) {
+      final l$$_nilike = data['_nilike'];
+      result$data['_nilike'] = (l$$_nilike as String?);
+    }
+    if (data.containsKey('_nin')) {
+      final l$$_nin = data['_nin'];
+      result$data['_nin'] = (l$$_nin as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('_niregex')) {
+      final l$$_niregex = data['_niregex'];
+      result$data['_niregex'] = (l$$_niregex as String?);
+    }
+    if (data.containsKey('_nlike')) {
+      final l$$_nlike = data['_nlike'];
+      result$data['_nlike'] = (l$$_nlike as String?);
+    }
+    if (data.containsKey('_nregex')) {
+      final l$$_nregex = data['_nregex'];
+      result$data['_nregex'] = (l$$_nregex as String?);
+    }
+    if (data.containsKey('_nsimilar')) {
+      final l$$_nsimilar = data['_nsimilar'];
+      result$data['_nsimilar'] = (l$$_nsimilar as String?);
+    }
+    if (data.containsKey('_regex')) {
+      final l$$_regex = data['_regex'];
+      result$data['_regex'] = (l$$_regex as String?);
+    }
+    if (data.containsKey('_similar')) {
+      final l$$_similar = data['_similar'];
+      result$data['_similar'] = (l$$_similar as String?);
+    }
+    return Input_StringComparisonExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get $_eq => (_$data['_eq'] as String?);
+
+  String? get $_gt => (_$data['_gt'] as String?);
+
+  String? get $_gte => (_$data['_gte'] as String?);
+
+  String? get $_ilike => (_$data['_ilike'] as String?);
+
+  List<String>? get $_in => (_$data['_in'] as List<String>?);
+
+  String? get $_iregex => (_$data['_iregex'] as String?);
+
+  bool? get $_isNull => (_$data['_isNull'] as bool?);
+
+  String? get $_like => (_$data['_like'] as String?);
+
+  String? get $_lt => (_$data['_lt'] as String?);
+
+  String? get $_lte => (_$data['_lte'] as String?);
+
+  String? get $_neq => (_$data['_neq'] as String?);
+
+  String? get $_nilike => (_$data['_nilike'] as String?);
+
+  List<String>? get $_nin => (_$data['_nin'] as List<String>?);
+
+  String? get $_niregex => (_$data['_niregex'] as String?);
+
+  String? get $_nlike => (_$data['_nlike'] as String?);
+
+  String? get $_nregex => (_$data['_nregex'] as String?);
+
+  String? get $_nsimilar => (_$data['_nsimilar'] as String?);
+
+  String? get $_regex => (_$data['_regex'] as String?);
+
+  String? get $_similar => (_$data['_similar'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_eq')) {
+      final l$$_eq = $_eq;
+      result$data['_eq'] = l$$_eq;
+    }
+    if (_$data.containsKey('_gt')) {
+      final l$$_gt = $_gt;
+      result$data['_gt'] = l$$_gt;
+    }
+    if (_$data.containsKey('_gte')) {
+      final l$$_gte = $_gte;
+      result$data['_gte'] = l$$_gte;
+    }
+    if (_$data.containsKey('_ilike')) {
+      final l$$_ilike = $_ilike;
+      result$data['_ilike'] = l$$_ilike;
+    }
+    if (_$data.containsKey('_in')) {
+      final l$$_in = $_in;
+      result$data['_in'] = l$$_in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('_iregex')) {
+      final l$$_iregex = $_iregex;
+      result$data['_iregex'] = l$$_iregex;
+    }
+    if (_$data.containsKey('_isNull')) {
+      final l$$_isNull = $_isNull;
+      result$data['_isNull'] = l$$_isNull;
+    }
+    if (_$data.containsKey('_like')) {
+      final l$$_like = $_like;
+      result$data['_like'] = l$$_like;
+    }
+    if (_$data.containsKey('_lt')) {
+      final l$$_lt = $_lt;
+      result$data['_lt'] = l$$_lt;
+    }
+    if (_$data.containsKey('_lte')) {
+      final l$$_lte = $_lte;
+      result$data['_lte'] = l$$_lte;
+    }
+    if (_$data.containsKey('_neq')) {
+      final l$$_neq = $_neq;
+      result$data['_neq'] = l$$_neq;
+    }
+    if (_$data.containsKey('_nilike')) {
+      final l$$_nilike = $_nilike;
+      result$data['_nilike'] = l$$_nilike;
+    }
+    if (_$data.containsKey('_nin')) {
+      final l$$_nin = $_nin;
+      result$data['_nin'] = l$$_nin?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('_niregex')) {
+      final l$$_niregex = $_niregex;
+      result$data['_niregex'] = l$$_niregex;
+    }
+    if (_$data.containsKey('_nlike')) {
+      final l$$_nlike = $_nlike;
+      result$data['_nlike'] = l$$_nlike;
+    }
+    if (_$data.containsKey('_nregex')) {
+      final l$$_nregex = $_nregex;
+      result$data['_nregex'] = l$$_nregex;
+    }
+    if (_$data.containsKey('_nsimilar')) {
+      final l$$_nsimilar = $_nsimilar;
+      result$data['_nsimilar'] = l$$_nsimilar;
+    }
+    if (_$data.containsKey('_regex')) {
+      final l$$_regex = $_regex;
+      result$data['_regex'] = l$$_regex;
+    }
+    if (_$data.containsKey('_similar')) {
+      final l$$_similar = $_similar;
+      result$data['_similar'] = l$$_similar;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_StringComparisonExp<Input_StringComparisonExp> get copyWith =>
+      CopyWith_Input_StringComparisonExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_StringComparisonExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_eq = $_eq;
+    final lOther$$_eq = other.$_eq;
+    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
+      return false;
+    }
+    if (l$$_eq != lOther$$_eq) {
+      return false;
+    }
+    final l$$_gt = $_gt;
+    final lOther$$_gt = other.$_gt;
+    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
+      return false;
+    }
+    if (l$$_gt != lOther$$_gt) {
+      return false;
+    }
+    final l$$_gte = $_gte;
+    final lOther$$_gte = other.$_gte;
+    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
+      return false;
+    }
+    if (l$$_gte != lOther$$_gte) {
+      return false;
+    }
+    final l$$_ilike = $_ilike;
+    final lOther$$_ilike = other.$_ilike;
+    if (_$data.containsKey('_ilike') != other._$data.containsKey('_ilike')) {
+      return false;
+    }
+    if (l$$_ilike != lOther$$_ilike) {
+      return false;
+    }
+    final l$$_in = $_in;
+    final lOther$$_in = other.$_in;
+    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
+      return false;
+    }
+    if (l$$_in != null && lOther$$_in != null) {
+      if (l$$_in.length != lOther$$_in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_in.length; i++) {
+        final l$$_in$entry = l$$_in[i];
+        final lOther$$_in$entry = lOther$$_in[i];
+        if (l$$_in$entry != lOther$$_in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_in != lOther$$_in) {
+      return false;
+    }
+    final l$$_iregex = $_iregex;
+    final lOther$$_iregex = other.$_iregex;
+    if (_$data.containsKey('_iregex') != other._$data.containsKey('_iregex')) {
+      return false;
+    }
+    if (l$$_iregex != lOther$$_iregex) {
+      return false;
+    }
+    final l$$_isNull = $_isNull;
+    final lOther$$_isNull = other.$_isNull;
+    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
+      return false;
+    }
+    if (l$$_isNull != lOther$$_isNull) {
+      return false;
+    }
+    final l$$_like = $_like;
+    final lOther$$_like = other.$_like;
+    if (_$data.containsKey('_like') != other._$data.containsKey('_like')) {
+      return false;
+    }
+    if (l$$_like != lOther$$_like) {
+      return false;
+    }
+    final l$$_lt = $_lt;
+    final lOther$$_lt = other.$_lt;
+    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
+      return false;
+    }
+    if (l$$_lt != lOther$$_lt) {
+      return false;
+    }
+    final l$$_lte = $_lte;
+    final lOther$$_lte = other.$_lte;
+    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
+      return false;
+    }
+    if (l$$_lte != lOther$$_lte) {
+      return false;
+    }
+    final l$$_neq = $_neq;
+    final lOther$$_neq = other.$_neq;
+    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
+      return false;
+    }
+    if (l$$_neq != lOther$$_neq) {
+      return false;
+    }
+    final l$$_nilike = $_nilike;
+    final lOther$$_nilike = other.$_nilike;
+    if (_$data.containsKey('_nilike') != other._$data.containsKey('_nilike')) {
+      return false;
+    }
+    if (l$$_nilike != lOther$$_nilike) {
+      return false;
+    }
+    final l$$_nin = $_nin;
+    final lOther$$_nin = other.$_nin;
+    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
+      return false;
+    }
+    if (l$$_nin != null && lOther$$_nin != null) {
+      if (l$$_nin.length != lOther$$_nin.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_nin.length; i++) {
+        final l$$_nin$entry = l$$_nin[i];
+        final lOther$$_nin$entry = lOther$$_nin[i];
+        if (l$$_nin$entry != lOther$$_nin$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_nin != lOther$$_nin) {
+      return false;
+    }
+    final l$$_niregex = $_niregex;
+    final lOther$$_niregex = other.$_niregex;
+    if (_$data.containsKey('_niregex') !=
+        other._$data.containsKey('_niregex')) {
+      return false;
+    }
+    if (l$$_niregex != lOther$$_niregex) {
+      return false;
+    }
+    final l$$_nlike = $_nlike;
+    final lOther$$_nlike = other.$_nlike;
+    if (_$data.containsKey('_nlike') != other._$data.containsKey('_nlike')) {
+      return false;
+    }
+    if (l$$_nlike != lOther$$_nlike) {
+      return false;
+    }
+    final l$$_nregex = $_nregex;
+    final lOther$$_nregex = other.$_nregex;
+    if (_$data.containsKey('_nregex') != other._$data.containsKey('_nregex')) {
+      return false;
+    }
+    if (l$$_nregex != lOther$$_nregex) {
+      return false;
+    }
+    final l$$_nsimilar = $_nsimilar;
+    final lOther$$_nsimilar = other.$_nsimilar;
+    if (_$data.containsKey('_nsimilar') !=
+        other._$data.containsKey('_nsimilar')) {
+      return false;
+    }
+    if (l$$_nsimilar != lOther$$_nsimilar) {
+      return false;
+    }
+    final l$$_regex = $_regex;
+    final lOther$$_regex = other.$_regex;
+    if (_$data.containsKey('_regex') != other._$data.containsKey('_regex')) {
+      return false;
+    }
+    if (l$$_regex != lOther$$_regex) {
+      return false;
+    }
+    final l$$_similar = $_similar;
+    final lOther$$_similar = other.$_similar;
+    if (_$data.containsKey('_similar') !=
+        other._$data.containsKey('_similar')) {
+      return false;
+    }
+    if (l$$_similar != lOther$$_similar) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_eq = $_eq;
+    final l$$_gt = $_gt;
+    final l$$_gte = $_gte;
+    final l$$_ilike = $_ilike;
+    final l$$_in = $_in;
+    final l$$_iregex = $_iregex;
+    final l$$_isNull = $_isNull;
+    final l$$_like = $_like;
+    final l$$_lt = $_lt;
+    final l$$_lte = $_lte;
+    final l$$_neq = $_neq;
+    final l$$_nilike = $_nilike;
+    final l$$_nin = $_nin;
+    final l$$_niregex = $_niregex;
+    final l$$_nlike = $_nlike;
+    final l$$_nregex = $_nregex;
+    final l$$_nsimilar = $_nsimilar;
+    final l$$_regex = $_regex;
+    final l$$_similar = $_similar;
+    return Object.hashAll([
+      _$data.containsKey('_eq') ? l$$_eq : const {},
+      _$data.containsKey('_gt') ? l$$_gt : const {},
+      _$data.containsKey('_gte') ? l$$_gte : const {},
+      _$data.containsKey('_ilike') ? l$$_ilike : const {},
+      _$data.containsKey('_in')
+          ? l$$_in == null
+                ? null
+                : Object.hashAll(l$$_in.map((v) => v))
+          : const {},
+      _$data.containsKey('_iregex') ? l$$_iregex : const {},
+      _$data.containsKey('_isNull') ? l$$_isNull : const {},
+      _$data.containsKey('_like') ? l$$_like : const {},
+      _$data.containsKey('_lt') ? l$$_lt : const {},
+      _$data.containsKey('_lte') ? l$$_lte : const {},
+      _$data.containsKey('_neq') ? l$$_neq : const {},
+      _$data.containsKey('_nilike') ? l$$_nilike : const {},
+      _$data.containsKey('_nin')
+          ? l$$_nin == null
+                ? null
+                : Object.hashAll(l$$_nin.map((v) => v))
+          : const {},
+      _$data.containsKey('_niregex') ? l$$_niregex : const {},
+      _$data.containsKey('_nlike') ? l$$_nlike : const {},
+      _$data.containsKey('_nregex') ? l$$_nregex : const {},
+      _$data.containsKey('_nsimilar') ? l$$_nsimilar : const {},
+      _$data.containsKey('_regex') ? l$$_regex : const {},
+      _$data.containsKey('_similar') ? l$$_similar : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_StringComparisonExp<TRes> {
+  factory CopyWith_Input_StringComparisonExp(
+    Input_StringComparisonExp instance,
+    TRes Function(Input_StringComparisonExp) then,
+  ) = _CopyWithImpl_Input_StringComparisonExp;
+
+  factory CopyWith_Input_StringComparisonExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_StringComparisonExp;
+
+  TRes call({
+    String? $_eq,
+    String? $_gt,
+    String? $_gte,
+    String? $_ilike,
+    List<String>? $_in,
+    String? $_iregex,
+    bool? $_isNull,
+    String? $_like,
+    String? $_lt,
+    String? $_lte,
+    String? $_neq,
+    String? $_nilike,
+    List<String>? $_nin,
+    String? $_niregex,
+    String? $_nlike,
+    String? $_nregex,
+    String? $_nsimilar,
+    String? $_regex,
+    String? $_similar,
   });
 }
