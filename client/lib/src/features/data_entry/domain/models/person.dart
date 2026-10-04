@@ -14,7 +14,6 @@ part 'person.g.dart';
   ignoreFields: [
     'blurhash',
     'isStudent',
-    'otherPhones',
     'contacts',
     'familyContacts',
     'userCanEdit',
@@ -47,12 +46,6 @@ class Person extends ViewableWithIDAndImage
 
   @override
   final Address? address;
-
-  @override
-  final String? mainPhone;
-
-  @override
-  final Json otherPhones;
 
   @override
   @JsonKey(defaultValue: <PhoneContact>[])
@@ -281,7 +274,6 @@ class Person extends ViewableWithIDAndImage
   Person({
     required this.id,
     required this.name,
-    this.otherPhones = const {},
     this.contacts = const [],
     this.familyContacts = const [],
     this.gender = true,
@@ -292,7 +284,6 @@ class Person extends ViewableWithIDAndImage
     this.userCanEdit = false,
     this.nationalId,
     this.address,
-    this.mainPhone,
     this.birthdate,
     this.birthday,
     this.shammasLevelId,
@@ -396,8 +387,6 @@ class Person extends ViewableWithIDAndImage
   Input_PersonsInsertInput toInsertInput() => Input_PersonsInsertInput(
     nationalId: nationalId,
     name: name,
-    mainPhone: mainPhone,
-    otherPhones: otherPhones,
     birthdate: birthdate,
     gender: gender,
     isShammas: isShammas,
@@ -555,14 +544,6 @@ class Person extends ViewableWithIDAndImage
       result = result.copyWith(nationalId: nationalId);
     }
 
-    if (mainPhone != oldPerson.mainPhone) {
-      result = result.copyWith(mainPhone: mainPhone);
-    }
-
-    if (otherPhones != oldPerson.otherPhones) {
-      result = result.copyWith(otherPhones: otherPhones);
-    }
-
     if (birthdate != oldPerson.birthdate) {
       result = result.copyWith(birthdate: birthdate);
     }
@@ -710,7 +691,6 @@ class PersonFields extends _PersonFields {
     getValue: (obj) => obj is Person ? obj.uid : null,
   );
 
-  @override
   FieldMetadata<String> get mainPhone => PhoneSearchFieldMetadata(
     parentType: Person,
     name: 'mainPhone',
