@@ -23,14 +23,14 @@ class _AddressFields {
     },
   );
 
-  final FieldMetadata<int> houseNumber = FieldMetadata<int>(
-    getValue: (obj) => obj is Address ? obj.houseNumber : null,
+  final FieldMetadata<String> houseCode = FieldMetadata<String>(
+    getValue: (obj) => obj is Address ? obj.houseCode : null,
     parentType: Address,
-    name: 'houseNumber',
+    name: 'houseCode',
     label: 'رقم العمارة',
     isCodeOnly: false,
     operators: {
-      ...PrimitiveOperator.values,
+      ...StringOperator.values,
       PrimitiveOperator.isNull,
       PrimitiveOperator.isNotNull,
     },
@@ -168,7 +168,7 @@ class _AddressFields {
 
   late final List<FieldMetadata<Object>> allFields = [
     area,
-    houseNumber,
+    houseCode,
     street,
     substreetName,
     district,
@@ -182,7 +182,7 @@ class _AddressFields {
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'area': area,
-    'houseNumber': houseNumber,
+    'houseCode': houseCode,
     'street': street,
     'substreetName': substreetName,
     'district': district,
@@ -208,7 +208,7 @@ Address _$AddressFromJson(Map json) => Address(
   area: json['area'] == null
       ? null
       : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
-  houseNumber: (json['houseNumber'] as num?)?.toInt(),
+  houseCode: json['houseCode'] as String?,
   street: json['street'] == null
       ? null
       : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
@@ -233,7 +233,7 @@ Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
   'id': instance.id,
   'area': instance.area?.toJson(),
   'countryIsoCode': instance.countryIsoCode,
-  'houseNumber': instance.houseNumber,
+  'houseCode': instance.houseCode,
   'street': instance.street?.toJson(),
   'substreetName': instance.substreetName,
   'district': instance.district?.toJson(),

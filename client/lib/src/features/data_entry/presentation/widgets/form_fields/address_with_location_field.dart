@@ -82,8 +82,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
               _address.copyWith(substreetName: value),
               false,
             ),
-            onHouseNumberChanged: (houseNumber) => _setAddress(
-              _address.copyWith(houseNumber: houseNumber),
+            onHouseCodeChanged: (houseCode) => _setAddress(
+              _address.copyWith(houseCode: houseCode),
               false,
             ),
           ),
@@ -222,7 +222,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
       district: suggestedAddress.district ?? _address.district,
       apartmentNumber:
           suggestedAddress.apartmentNumber ?? _address.apartmentNumber,
-      houseNumber: suggestedAddress.houseNumber ?? _address.houseNumber,
+      houseCode: suggestedAddress.houseCode ?? _address.houseCode,
       geolocation: suggestedAddress.geolocation ?? _address.geolocation,
     );
   }

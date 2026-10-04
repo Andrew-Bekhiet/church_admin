@@ -1,6 +1,41 @@
 // Part 64 of the schema
 part of "schema.graphql.dart";
 
+String toJson_Enum_FathersConstraint(Enum_FathersConstraint e) {
+  switch (e) {
+    case Enum_FathersConstraint.fathers_name_key:
+      return r'fathers_name_key';
+    case Enum_FathersConstraint.fathers_pkey:
+      return r'fathers_pkey';
+    case Enum_FathersConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_FathersConstraint fromJson_Enum_FathersConstraint(String value) {
+  switch (value) {
+    case r'fathers_name_key':
+      return Enum_FathersConstraint.fathers_name_key;
+    case r'fathers_pkey':
+      return Enum_FathersConstraint.fathers_pkey;
+    default:
+      return Enum_FathersConstraint.$unknown;
+  }
+}
+
+enum Enum_FathersSelectColumn {
+  churchId,
+  id,
+  isHidden,
+  name,
+  $unknown;
+
+  factory Enum_FathersSelectColumn.fromJson(String value) =>
+      fromJson_Enum_FathersSelectColumn(value);
+
+  String toJson() => toJson_Enum_FathersSelectColumn(this);
+}
+
 String toJson_Enum_FathersSelectColumn(Enum_FathersSelectColumn e) {
   switch (e) {
     case Enum_FathersSelectColumn.churchId:
@@ -2492,61 +2527,4 @@ enum Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns {
       toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
         this,
       );
-}
-
-String
-toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
-  Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns e,
-) {
-  switch (e) {
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-        .gender:
-      return r'gender';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-        .isServant:
-      return r'isServant';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-        .isShammas:
-      return r'isShammas';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-        .isStudent:
-      return r'isStudent';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-        .$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
-  String value,
-) {
-  switch (value) {
-    case r'gender':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .gender;
-    case r'isServant':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .isServant;
-    case r'isShammas':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .isShammas;
-    case r'isStudent':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .isStudent;
-    default:
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .$unknown;
-  }
-}
-
-enum Enum_PersonsServicesConstraint {
-  persons_services_person_id_service_id_key,
-  persons_services_pkey,
-  $unknown;
-
-  factory Enum_PersonsServicesConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonsServicesConstraint(value);
-
-  String toJson() => toJson_Enum_PersonsServicesConstraint(this);
 }
