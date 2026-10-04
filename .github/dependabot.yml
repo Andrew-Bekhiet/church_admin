@@ -57,8 +57,8 @@ updates:
           - version-update:semver-major
       # typescript-eslint 8 accepts typescript <6.1.
       - dependency-name: typescript
-        update-types:
-          - version-update:semver-major
+        versions:
+          - ">= 6.1.0"
       # eslint-plugin-import supports eslint up to 9.
       - dependency-name: eslint
         update-types:
