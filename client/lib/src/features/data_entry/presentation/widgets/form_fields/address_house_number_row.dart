@@ -57,8 +57,10 @@ class AddressHouseNumberRow extends StatelessWidget {
                 _ => TextInputType.text,
               },
               maxLength: Address.houseCodeMaxLength,
-              onChanged: (value) =>
-                  onHouseCodeChanged(value.isEmpty ? null : value),
+              onChanged: (value) => onHouseCodeChanged(switch (value.trim()) {
+                '' => null,
+                final houseCode => houseCode,
+              }),
             ),
           ),
         ],
