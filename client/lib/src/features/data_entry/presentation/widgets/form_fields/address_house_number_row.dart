@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class AddressHouseNumberRow extends StatelessWidget {
   const AddressHouseNumberRow({
@@ -57,10 +56,7 @@ class AddressHouseNumberRow extends StatelessWidget {
                 ),
                 _ => TextInputType.text,
               },
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(Address.houseCodeMaxLength),
-                FilteringTextInputFormatter.singleLineFormatter,
-              ],
+              maxLength: Address.houseCodeMaxLength,
               onChanged: (value) =>
                   onHouseCodeChanged(value.isEmpty ? null : value),
             ),
