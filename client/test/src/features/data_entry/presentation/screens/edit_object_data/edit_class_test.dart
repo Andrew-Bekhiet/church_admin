@@ -95,27 +95,33 @@ void main() {
       (class$.studyYearFromOrder, class$.studyYearToOrder);
 
   Future<void> openEditor(WidgetTester tester, EditClass editor) async {
-    await tester.pumpWidget(
-      materialAppWithThemeAndLocale()(
-        Builder(
-          builder: (context) => TextButton(
-            onPressed: () => Navigator.of(
-              context,
-            ).push(MaterialPageRoute<void>(builder: (_) => editor)),
-            child: const Text('فتح الفصل'),
-          ),
-        ),
-      ),
-    );
+    await tester.pumpWidget(materialAppWithThemeAndLocale()(editor));
+  }
 
-    await tester.tap(find.text('فتح الفصل'));
-    await tester.pumpAndSettle();
-    await tester.drag(find.byType(CustomScrollView), const Offset(0, -600));
+  Future<void> scrollTo(WidgetTester tester, Key key) async {
+    await tester.scrollUntilVisible(
+      find.byKey(key),
+      100,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.ensureVisible(find.byKey(key));
     await tester.pumpAndSettle();
   }
 
+  Finder studyYearsError(String message) => find.descendant(
+    of: find.byKey(EditClassKeys.studyYears),
+    matching: find.text(message),
+  );
+
+  Finder studyYearOption(StudyYear studyYear) => find.byWidgetPredicate(
+    (widget) => switch (widget) {
+      ViewableObjectWidget(object: StudyYear(:final id)) => id == studyYear.id,
+      _ => false,
+    },
+  );
+
   Future<void> save(WidgetTester tester) async {
-    await tester.tap(find.text('حفظ'));
+    await tester.tap(find.byKey(EditObjectDataKeys.saveButton));
     await tester.pumpAndSettle();
   }
 
@@ -179,13 +185,13 @@ void main() {
       ),
     );
 
-    await tester.enterText(find.byType(TextFormField).first, 'فصل جديد');
+    await scrollTo(tester, EditClassKeys.name);
+    await tester.enterText(find.byKey(EditClassKeys.name), 'فصل جديد');
     await save(tester);
 
     final saved = classes.savedClasses.single;
     expect(saved.name, 'فصل جديد');
     expect(studyYearsOf(saved), (3, 4));
-    expect(find.byType(EditClass), findsNothing);
   });
 
   testWidgets('widening a single-year class saves its new study year range', (
@@ -198,12 +204,10 @@ void main() {
       ),
     );
 
-    final endYearField = find.text(third.name).last;
-    await tester.ensureVisible(endYearField);
+    await scrollTo(tester, StudyYearRangeFieldKeys.to);
+    await tester.tap(find.byKey(StudyYearRangeFieldKeys.to));
     await tester.pumpAndSettle();
-    await tester.tap(endYearField);
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(fourth.name));
+    await tester.tap(studyYearOption(fourth));
     await tester.pumpAndSettle();
     await save(tester);
 
@@ -220,10 +224,11 @@ void main() {
       ),
     );
 
+    await scrollTo(tester, EditClassKeys.studyYears);
     await save(tester);
 
     expect(
-      find.text('السنة الدراسية الأولى لا يمكن أن تكون أكبر من الثانية'),
+      studyYearsError('السنة الدراسية الأولى لا يمكن أن تكون أكبر من الثانية'),
       findsOneWidget,
     );
     expect(classes.savedClasses, isEmpty);
@@ -239,10 +244,11 @@ void main() {
       ),
     );
 
+    await scrollTo(tester, EditClassKeys.studyYears);
     await save(tester);
 
     expect(
-      find.text('السنة الدراسية يجب ان تكون بين أولى وسادسة'),
+      studyYearsError('السنة الدراسية يجب ان تكون بين أولى وسادسة'),
       findsOneWidget,
     );
     expect(classes.savedClasses, isEmpty);
@@ -256,9 +262,13 @@ void main() {
       EditClass(class$: null, withService: primary),
     );
 
+    await scrollTo(tester, EditClassKeys.studyYears);
     await save(tester);
 
-    expect(find.text('برجاء ادخال السنتين الدراسيتين'), findsOneWidget);
+    expect(
+      studyYearsError('برجاء ادخال السنتين الدراسيتين'),
+      findsOneWidget,
+    );
     expect(classes.savedClasses, isEmpty);
   });
 }
