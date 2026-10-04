@@ -29,11 +29,16 @@ class FamilyPhoneContact with Equatable {
     'personType': role.toJson(),
   };
 
-  Input_ContactsInsertInput toInsertInput({String? familyId}) =>
-      contact.toInsertInput().copyWith(
-        familyId: familyId?.toUuid(),
-        personTypeId: role.id.toUuid(),
-      );
+  Input_ContactsInsertInput toInsertInput({String? familyId}) {
+    final insert = contact.toInsertInput().copyWith(
+      personTypeId: role.id.toUuid(),
+    );
+
+    return switch (familyId) {
+      final familyId? => insert.copyWith(familyId: familyId.toUuid()),
+      null => insert,
+    };
+  }
 
   FamilyPhoneContact copyWith({PhoneContact? contact}) => FamilyPhoneContact(
     contact: contact ?? this.contact,
