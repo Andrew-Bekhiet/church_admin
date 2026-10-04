@@ -60,6 +60,7 @@ class StudyYearRangeField extends StatelessWidget {
                 ),
               ),
               Expanded(
+                key: StudyYearRangeFieldKeys.from,
                 child: ObjectSelectionField(
                   key: ValueKey(state.value?.from == null),
                   listController: (s) => ViewableObjectListController(
@@ -94,6 +95,7 @@ class StudyYearRangeField extends StatelessWidget {
                 ),
               ),
               Expanded(
+                key: StudyYearRangeFieldKeys.to,
                 child: ObjectSelectionField(
                   key: ValueKey(state.value?.to == null),
                   listController: (s) => ViewableObjectListController(
@@ -130,4 +132,9 @@ class StudyYearRangeField extends StatelessWidget {
   final void Function(StudyYearRange?)? onChanged;
   final void Function(StudyYearRange?)? onSaved;
   final String? Function(StudyYearRange?)? validator;
+}
+
+abstract final class StudyYearRangeFieldKeys {
+  static const Key from = ValueKey('Study Year Range Field From Key');
+  static const Key to = ValueKey('Study Year Range Field To Key');
 }
