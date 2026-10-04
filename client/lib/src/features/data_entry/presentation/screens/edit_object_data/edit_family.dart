@@ -59,6 +59,7 @@ class _EditFamilyState extends State<EditFamily> {
       onDelete: (object) =>
           DatabaseService.I.families.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
+      hasUnsavedInput: () => _phoneContacts.hasUnsavedInput,
       newObject:
           oldFamily ??
           Family(
