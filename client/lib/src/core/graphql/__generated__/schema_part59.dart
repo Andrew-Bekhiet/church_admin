@@ -2014,267 +2014,231 @@ class _CopyWithStubImpl_Input_StreetsUpdates<TRes>
       CopyWith_Input_StreetsBoolExp.stub(_res);
 }
 
-class Input_StringComparisonExp {
-  factory Input_StringComparisonExp({
-    String? $_eq,
-    String? $_gt,
-    String? $_gte,
-    String? $_ilike,
-    List<String>? $_in,
-    String? $_iregex,
+class Input_StringArrayComparisonExp {
+  factory Input_StringArrayComparisonExp({
+    List<String>? $_containedIn,
+    List<String>? $_contains,
+    List<String>? $_eq,
+    List<String>? $_gt,
+    List<String>? $_gte,
+    List<List<String>>? $_in,
     bool? $_isNull,
-    String? $_like,
-    String? $_lt,
-    String? $_lte,
-    String? $_neq,
-    String? $_nilike,
-    List<String>? $_nin,
-    String? $_niregex,
-    String? $_nlike,
-    String? $_nregex,
-    String? $_nsimilar,
-    String? $_regex,
-    String? $_similar,
-  }) => Input_StringComparisonExp._({
+    List<String>? $_lt,
+    List<String>? $_lte,
+    List<String>? $_neq,
+    List<List<String>>? $_nin,
+  }) => Input_StringArrayComparisonExp._({
+    if ($_containedIn != null) r'_containedIn': $_containedIn,
+    if ($_contains != null) r'_contains': $_contains,
     if ($_eq != null) r'_eq': $_eq,
     if ($_gt != null) r'_gt': $_gt,
     if ($_gte != null) r'_gte': $_gte,
-    if ($_ilike != null) r'_ilike': $_ilike,
     if ($_in != null) r'_in': $_in,
-    if ($_iregex != null) r'_iregex': $_iregex,
     if ($_isNull != null) r'_isNull': $_isNull,
-    if ($_like != null) r'_like': $_like,
     if ($_lt != null) r'_lt': $_lt,
     if ($_lte != null) r'_lte': $_lte,
     if ($_neq != null) r'_neq': $_neq,
-    if ($_nilike != null) r'_nilike': $_nilike,
     if ($_nin != null) r'_nin': $_nin,
-    if ($_niregex != null) r'_niregex': $_niregex,
-    if ($_nlike != null) r'_nlike': $_nlike,
-    if ($_nregex != null) r'_nregex': $_nregex,
-    if ($_nsimilar != null) r'_nsimilar': $_nsimilar,
-    if ($_regex != null) r'_regex': $_regex,
-    if ($_similar != null) r'_similar': $_similar,
   });
 
-  Input_StringComparisonExp._(this._$data);
+  Input_StringArrayComparisonExp._(this._$data);
 
-  factory Input_StringComparisonExp.fromJson(Map<String, dynamic> data) {
+  factory Input_StringArrayComparisonExp.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('_containedIn')) {
+      final l$$_containedIn = data['_containedIn'];
+      result$data['_containedIn'] = (l$$_containedIn as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('_contains')) {
+      final l$$_contains = data['_contains'];
+      result$data['_contains'] = (l$$_contains as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
     if (data.containsKey('_eq')) {
       final l$$_eq = data['_eq'];
-      result$data['_eq'] = (l$$_eq as String?);
+      result$data['_eq'] = (l$$_eq as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
     }
     if (data.containsKey('_gt')) {
       final l$$_gt = data['_gt'];
-      result$data['_gt'] = (l$$_gt as String?);
+      result$data['_gt'] = (l$$_gt as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
     }
     if (data.containsKey('_gte')) {
       final l$$_gte = data['_gte'];
-      result$data['_gte'] = (l$$_gte as String?);
-    }
-    if (data.containsKey('_ilike')) {
-      final l$$_ilike = data['_ilike'];
-      result$data['_ilike'] = (l$$_ilike as String?);
+      result$data['_gte'] = (l$$_gte as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
     }
     if (data.containsKey('_in')) {
       final l$$_in = data['_in'];
       result$data['_in'] = (l$$_in as List<dynamic>?)
-          ?.map((e) => (e as String))
+          ?.map((e) => (e as List<dynamic>).map((e) => (e as String)).toList())
           .toList();
-    }
-    if (data.containsKey('_iregex')) {
-      final l$$_iregex = data['_iregex'];
-      result$data['_iregex'] = (l$$_iregex as String?);
     }
     if (data.containsKey('_isNull')) {
       final l$$_isNull = data['_isNull'];
       result$data['_isNull'] = (l$$_isNull as bool?);
     }
-    if (data.containsKey('_like')) {
-      final l$$_like = data['_like'];
-      result$data['_like'] = (l$$_like as String?);
-    }
     if (data.containsKey('_lt')) {
       final l$$_lt = data['_lt'];
-      result$data['_lt'] = (l$$_lt as String?);
+      result$data['_lt'] = (l$$_lt as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
     }
     if (data.containsKey('_lte')) {
       final l$$_lte = data['_lte'];
-      result$data['_lte'] = (l$$_lte as String?);
+      result$data['_lte'] = (l$$_lte as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
     }
     if (data.containsKey('_neq')) {
       final l$$_neq = data['_neq'];
-      result$data['_neq'] = (l$$_neq as String?);
-    }
-    if (data.containsKey('_nilike')) {
-      final l$$_nilike = data['_nilike'];
-      result$data['_nilike'] = (l$$_nilike as String?);
+      result$data['_neq'] = (l$$_neq as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
     }
     if (data.containsKey('_nin')) {
       final l$$_nin = data['_nin'];
       result$data['_nin'] = (l$$_nin as List<dynamic>?)
-          ?.map((e) => (e as String))
+          ?.map((e) => (e as List<dynamic>).map((e) => (e as String)).toList())
           .toList();
     }
-    if (data.containsKey('_niregex')) {
-      final l$$_niregex = data['_niregex'];
-      result$data['_niregex'] = (l$$_niregex as String?);
-    }
-    if (data.containsKey('_nlike')) {
-      final l$$_nlike = data['_nlike'];
-      result$data['_nlike'] = (l$$_nlike as String?);
-    }
-    if (data.containsKey('_nregex')) {
-      final l$$_nregex = data['_nregex'];
-      result$data['_nregex'] = (l$$_nregex as String?);
-    }
-    if (data.containsKey('_nsimilar')) {
-      final l$$_nsimilar = data['_nsimilar'];
-      result$data['_nsimilar'] = (l$$_nsimilar as String?);
-    }
-    if (data.containsKey('_regex')) {
-      final l$$_regex = data['_regex'];
-      result$data['_regex'] = (l$$_regex as String?);
-    }
-    if (data.containsKey('_similar')) {
-      final l$$_similar = data['_similar'];
-      result$data['_similar'] = (l$$_similar as String?);
-    }
-    return Input_StringComparisonExp._(result$data);
+    return Input_StringArrayComparisonExp._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  String? get $_eq => (_$data['_eq'] as String?);
+  List<String>? get $_containedIn => (_$data['_containedIn'] as List<String>?);
 
-  String? get $_gt => (_$data['_gt'] as String?);
+  List<String>? get $_contains => (_$data['_contains'] as List<String>?);
 
-  String? get $_gte => (_$data['_gte'] as String?);
+  List<String>? get $_eq => (_$data['_eq'] as List<String>?);
 
-  String? get $_ilike => (_$data['_ilike'] as String?);
+  List<String>? get $_gt => (_$data['_gt'] as List<String>?);
 
-  List<String>? get $_in => (_$data['_in'] as List<String>?);
+  List<String>? get $_gte => (_$data['_gte'] as List<String>?);
 
-  String? get $_iregex => (_$data['_iregex'] as String?);
+  List<List<String>>? get $_in => (_$data['_in'] as List<List<String>>?);
 
   bool? get $_isNull => (_$data['_isNull'] as bool?);
 
-  String? get $_like => (_$data['_like'] as String?);
+  List<String>? get $_lt => (_$data['_lt'] as List<String>?);
 
-  String? get $_lt => (_$data['_lt'] as String?);
+  List<String>? get $_lte => (_$data['_lte'] as List<String>?);
 
-  String? get $_lte => (_$data['_lte'] as String?);
+  List<String>? get $_neq => (_$data['_neq'] as List<String>?);
 
-  String? get $_neq => (_$data['_neq'] as String?);
-
-  String? get $_nilike => (_$data['_nilike'] as String?);
-
-  List<String>? get $_nin => (_$data['_nin'] as List<String>?);
-
-  String? get $_niregex => (_$data['_niregex'] as String?);
-
-  String? get $_nlike => (_$data['_nlike'] as String?);
-
-  String? get $_nregex => (_$data['_nregex'] as String?);
-
-  String? get $_nsimilar => (_$data['_nsimilar'] as String?);
-
-  String? get $_regex => (_$data['_regex'] as String?);
-
-  String? get $_similar => (_$data['_similar'] as String?);
+  List<List<String>>? get $_nin => (_$data['_nin'] as List<List<String>>?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_containedIn')) {
+      final l$$_containedIn = $_containedIn;
+      result$data['_containedIn'] = l$$_containedIn?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('_contains')) {
+      final l$$_contains = $_contains;
+      result$data['_contains'] = l$$_contains?.map((e) => e).toList();
+    }
     if (_$data.containsKey('_eq')) {
       final l$$_eq = $_eq;
-      result$data['_eq'] = l$$_eq;
+      result$data['_eq'] = l$$_eq?.map((e) => e).toList();
     }
     if (_$data.containsKey('_gt')) {
       final l$$_gt = $_gt;
-      result$data['_gt'] = l$$_gt;
+      result$data['_gt'] = l$$_gt?.map((e) => e).toList();
     }
     if (_$data.containsKey('_gte')) {
       final l$$_gte = $_gte;
-      result$data['_gte'] = l$$_gte;
-    }
-    if (_$data.containsKey('_ilike')) {
-      final l$$_ilike = $_ilike;
-      result$data['_ilike'] = l$$_ilike;
+      result$data['_gte'] = l$$_gte?.map((e) => e).toList();
     }
     if (_$data.containsKey('_in')) {
       final l$$_in = $_in;
-      result$data['_in'] = l$$_in?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('_iregex')) {
-      final l$$_iregex = $_iregex;
-      result$data['_iregex'] = l$$_iregex;
+      result$data['_in'] = l$$_in
+          ?.map((e) => e.map((e) => e).toList())
+          .toList();
     }
     if (_$data.containsKey('_isNull')) {
       final l$$_isNull = $_isNull;
       result$data['_isNull'] = l$$_isNull;
     }
-    if (_$data.containsKey('_like')) {
-      final l$$_like = $_like;
-      result$data['_like'] = l$$_like;
-    }
     if (_$data.containsKey('_lt')) {
       final l$$_lt = $_lt;
-      result$data['_lt'] = l$$_lt;
+      result$data['_lt'] = l$$_lt?.map((e) => e).toList();
     }
     if (_$data.containsKey('_lte')) {
       final l$$_lte = $_lte;
-      result$data['_lte'] = l$$_lte;
+      result$data['_lte'] = l$$_lte?.map((e) => e).toList();
     }
     if (_$data.containsKey('_neq')) {
       final l$$_neq = $_neq;
-      result$data['_neq'] = l$$_neq;
-    }
-    if (_$data.containsKey('_nilike')) {
-      final l$$_nilike = $_nilike;
-      result$data['_nilike'] = l$$_nilike;
+      result$data['_neq'] = l$$_neq?.map((e) => e).toList();
     }
     if (_$data.containsKey('_nin')) {
       final l$$_nin = $_nin;
-      result$data['_nin'] = l$$_nin?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('_niregex')) {
-      final l$$_niregex = $_niregex;
-      result$data['_niregex'] = l$$_niregex;
-    }
-    if (_$data.containsKey('_nlike')) {
-      final l$$_nlike = $_nlike;
-      result$data['_nlike'] = l$$_nlike;
-    }
-    if (_$data.containsKey('_nregex')) {
-      final l$$_nregex = $_nregex;
-      result$data['_nregex'] = l$$_nregex;
-    }
-    if (_$data.containsKey('_nsimilar')) {
-      final l$$_nsimilar = $_nsimilar;
-      result$data['_nsimilar'] = l$$_nsimilar;
-    }
-    if (_$data.containsKey('_regex')) {
-      final l$$_regex = $_regex;
-      result$data['_regex'] = l$$_regex;
-    }
-    if (_$data.containsKey('_similar')) {
-      final l$$_similar = $_similar;
-      result$data['_similar'] = l$$_similar;
+      result$data['_nin'] = l$$_nin
+          ?.map((e) => e.map((e) => e).toList())
+          .toList();
     }
     return result$data;
   }
 
-  CopyWith_Input_StringComparisonExp<Input_StringComparisonExp> get copyWith =>
-      CopyWith_Input_StringComparisonExp(this, (i) => i);
+  CopyWith_Input_StringArrayComparisonExp<Input_StringArrayComparisonExp>
+  get copyWith => CopyWith_Input_StringArrayComparisonExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_StringComparisonExp ||
+    if (other is! Input_StringArrayComparisonExp ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_containedIn = $_containedIn;
+    final lOther$$_containedIn = other.$_containedIn;
+    if (_$data.containsKey('_containedIn') !=
+        other._$data.containsKey('_containedIn')) {
+      return false;
+    }
+    if (l$$_containedIn != null && lOther$$_containedIn != null) {
+      if (l$$_containedIn.length != lOther$$_containedIn.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_containedIn.length; i++) {
+        final l$$_containedIn$entry = l$$_containedIn[i];
+        final lOther$$_containedIn$entry = lOther$$_containedIn[i];
+        if (l$$_containedIn$entry != lOther$$_containedIn$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_containedIn != lOther$$_containedIn) {
+      return false;
+    }
+    final l$$_contains = $_contains;
+    final lOther$$_contains = other.$_contains;
+    if (_$data.containsKey('_contains') !=
+        other._$data.containsKey('_contains')) {
+      return false;
+    }
+    if (l$$_contains != null && lOther$$_contains != null) {
+      if (l$$_contains.length != lOther$$_contains.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_contains.length; i++) {
+        final l$$_contains$entry = l$$_contains[i];
+        final lOther$$_contains$entry = lOther$$_contains[i];
+        if (l$$_contains$entry != lOther$$_contains$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_contains != lOther$$_contains) {
       return false;
     }
     final l$$_eq = $_eq;
@@ -2282,7 +2246,18 @@ class Input_StringComparisonExp {
     if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
       return false;
     }
-    if (l$$_eq != lOther$$_eq) {
+    if (l$$_eq != null && lOther$$_eq != null) {
+      if (l$$_eq.length != lOther$$_eq.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_eq.length; i++) {
+        final l$$_eq$entry = l$$_eq[i];
+        final lOther$$_eq$entry = lOther$$_eq[i];
+        if (l$$_eq$entry != lOther$$_eq$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_eq != lOther$$_eq) {
       return false;
     }
     final l$$_gt = $_gt;
@@ -2290,7 +2265,18 @@ class Input_StringComparisonExp {
     if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
       return false;
     }
-    if (l$$_gt != lOther$$_gt) {
+    if (l$$_gt != null && lOther$$_gt != null) {
+      if (l$$_gt.length != lOther$$_gt.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_gt.length; i++) {
+        final l$$_gt$entry = l$$_gt[i];
+        final lOther$$_gt$entry = lOther$$_gt[i];
+        if (l$$_gt$entry != lOther$$_gt$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_gt != lOther$$_gt) {
       return false;
     }
     final l$$_gte = $_gte;
@@ -2298,15 +2284,18 @@ class Input_StringComparisonExp {
     if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
       return false;
     }
-    if (l$$_gte != lOther$$_gte) {
-      return false;
-    }
-    final l$$_ilike = $_ilike;
-    final lOther$$_ilike = other.$_ilike;
-    if (_$data.containsKey('_ilike') != other._$data.containsKey('_ilike')) {
-      return false;
-    }
-    if (l$$_ilike != lOther$$_ilike) {
+    if (l$$_gte != null && lOther$$_gte != null) {
+      if (l$$_gte.length != lOther$$_gte.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_gte.length; i++) {
+        final l$$_gte$entry = l$$_gte[i];
+        final lOther$$_gte$entry = lOther$$_gte[i];
+        if (l$$_gte$entry != lOther$$_gte$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_gte != lOther$$_gte) {
       return false;
     }
     final l$$_in = $_in;
@@ -2321,19 +2310,18 @@ class Input_StringComparisonExp {
       for (int i = 0; i < l$$_in.length; i++) {
         final l$$_in$entry = l$$_in[i];
         final lOther$$_in$entry = lOther$$_in[i];
-        if (l$$_in$entry != lOther$$_in$entry) {
+        if (l$$_in$entry.length != lOther$$_in$entry.length) {
           return false;
+        }
+        for (int i = 0; i < l$$_in$entry.length; i++) {
+          final l$$_in$entry$entry = l$$_in$entry[i];
+          final lOther$$_in$entry$entry = lOther$$_in$entry[i];
+          if (l$$_in$entry$entry != lOther$$_in$entry$entry) {
+            return false;
+          }
         }
       }
     } else if (l$$_in != lOther$$_in) {
-      return false;
-    }
-    final l$$_iregex = $_iregex;
-    final lOther$$_iregex = other.$_iregex;
-    if (_$data.containsKey('_iregex') != other._$data.containsKey('_iregex')) {
-      return false;
-    }
-    if (l$$_iregex != lOther$$_iregex) {
       return false;
     }
     final l$$_isNull = $_isNull;
@@ -2344,20 +2332,23 @@ class Input_StringComparisonExp {
     if (l$$_isNull != lOther$$_isNull) {
       return false;
     }
-    final l$$_like = $_like;
-    final lOther$$_like = other.$_like;
-    if (_$data.containsKey('_like') != other._$data.containsKey('_like')) {
-      return false;
-    }
-    if (l$$_like != lOther$$_like) {
-      return false;
-    }
     final l$$_lt = $_lt;
     final lOther$$_lt = other.$_lt;
     if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
       return false;
     }
-    if (l$$_lt != lOther$$_lt) {
+    if (l$$_lt != null && lOther$$_lt != null) {
+      if (l$$_lt.length != lOther$$_lt.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_lt.length; i++) {
+        final l$$_lt$entry = l$$_lt[i];
+        final lOther$$_lt$entry = lOther$$_lt[i];
+        if (l$$_lt$entry != lOther$$_lt$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_lt != lOther$$_lt) {
       return false;
     }
     final l$$_lte = $_lte;
@@ -2365,7 +2356,18 @@ class Input_StringComparisonExp {
     if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
       return false;
     }
-    if (l$$_lte != lOther$$_lte) {
+    if (l$$_lte != null && lOther$$_lte != null) {
+      if (l$$_lte.length != lOther$$_lte.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_lte.length; i++) {
+        final l$$_lte$entry = l$$_lte[i];
+        final lOther$$_lte$entry = lOther$$_lte[i];
+        if (l$$_lte$entry != lOther$$_lte$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_lte != lOther$$_lte) {
       return false;
     }
     final l$$_neq = $_neq;
@@ -2373,15 +2375,18 @@ class Input_StringComparisonExp {
     if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
       return false;
     }
-    if (l$$_neq != lOther$$_neq) {
-      return false;
-    }
-    final l$$_nilike = $_nilike;
-    final lOther$$_nilike = other.$_nilike;
-    if (_$data.containsKey('_nilike') != other._$data.containsKey('_nilike')) {
-      return false;
-    }
-    if (l$$_nilike != lOther$$_nilike) {
+    if (l$$_neq != null && lOther$$_neq != null) {
+      if (l$$_neq.length != lOther$$_neq.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_neq.length; i++) {
+        final l$$_neq$entry = l$$_neq[i];
+        final lOther$$_neq$entry = lOther$$_neq[i];
+        if (l$$_neq$entry != lOther$$_neq$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_neq != lOther$$_neq) {
       return false;
     }
     final l$$_nin = $_nin;
@@ -2396,62 +2401,18 @@ class Input_StringComparisonExp {
       for (int i = 0; i < l$$_nin.length; i++) {
         final l$$_nin$entry = l$$_nin[i];
         final lOther$$_nin$entry = lOther$$_nin[i];
-        if (l$$_nin$entry != lOther$$_nin$entry) {
+        if (l$$_nin$entry.length != lOther$$_nin$entry.length) {
           return false;
+        }
+        for (int i = 0; i < l$$_nin$entry.length; i++) {
+          final l$$_nin$entry$entry = l$$_nin$entry[i];
+          final lOther$$_nin$entry$entry = lOther$$_nin$entry[i];
+          if (l$$_nin$entry$entry != lOther$$_nin$entry$entry) {
+            return false;
+          }
         }
       }
     } else if (l$$_nin != lOther$$_nin) {
-      return false;
-    }
-    final l$$_niregex = $_niregex;
-    final lOther$$_niregex = other.$_niregex;
-    if (_$data.containsKey('_niregex') !=
-        other._$data.containsKey('_niregex')) {
-      return false;
-    }
-    if (l$$_niregex != lOther$$_niregex) {
-      return false;
-    }
-    final l$$_nlike = $_nlike;
-    final lOther$$_nlike = other.$_nlike;
-    if (_$data.containsKey('_nlike') != other._$data.containsKey('_nlike')) {
-      return false;
-    }
-    if (l$$_nlike != lOther$$_nlike) {
-      return false;
-    }
-    final l$$_nregex = $_nregex;
-    final lOther$$_nregex = other.$_nregex;
-    if (_$data.containsKey('_nregex') != other._$data.containsKey('_nregex')) {
-      return false;
-    }
-    if (l$$_nregex != lOther$$_nregex) {
-      return false;
-    }
-    final l$$_nsimilar = $_nsimilar;
-    final lOther$$_nsimilar = other.$_nsimilar;
-    if (_$data.containsKey('_nsimilar') !=
-        other._$data.containsKey('_nsimilar')) {
-      return false;
-    }
-    if (l$$_nsimilar != lOther$$_nsimilar) {
-      return false;
-    }
-    final l$$_regex = $_regex;
-    final lOther$$_regex = other.$_regex;
-    if (_$data.containsKey('_regex') != other._$data.containsKey('_regex')) {
-      return false;
-    }
-    if (l$$_regex != lOther$$_regex) {
-      return false;
-    }
-    final l$$_similar = $_similar;
-    final lOther$$_similar = other.$_similar;
-    if (_$data.containsKey('_similar') !=
-        other._$data.containsKey('_similar')) {
-      return false;
-    }
-    if (l$$_similar != lOther$$_similar) {
       return false;
     }
     return true;
@@ -2459,53 +2420,97 @@ class Input_StringComparisonExp {
 
   @override
   int get hashCode {
+    final l$$_containedIn = $_containedIn;
+    final l$$_contains = $_contains;
     final l$$_eq = $_eq;
     final l$$_gt = $_gt;
     final l$$_gte = $_gte;
-    final l$$_ilike = $_ilike;
     final l$$_in = $_in;
-    final l$$_iregex = $_iregex;
     final l$$_isNull = $_isNull;
-    final l$$_like = $_like;
     final l$$_lt = $_lt;
     final l$$_lte = $_lte;
     final l$$_neq = $_neq;
-    final l$$_nilike = $_nilike;
     final l$$_nin = $_nin;
-    final l$$_niregex = $_niregex;
-    final l$$_nlike = $_nlike;
-    final l$$_nregex = $_nregex;
-    final l$$_nsimilar = $_nsimilar;
-    final l$$_regex = $_regex;
-    final l$$_similar = $_similar;
     return Object.hashAll([
-      _$data.containsKey('_eq') ? l$$_eq : const {},
-      _$data.containsKey('_gt') ? l$$_gt : const {},
-      _$data.containsKey('_gte') ? l$$_gte : const {},
-      _$data.containsKey('_ilike') ? l$$_ilike : const {},
+      _$data.containsKey('_containedIn')
+          ? l$$_containedIn == null
+                ? null
+                : Object.hashAll(l$$_containedIn.map((v) => v))
+          : const {},
+      _$data.containsKey('_contains')
+          ? l$$_contains == null
+                ? null
+                : Object.hashAll(l$$_contains.map((v) => v))
+          : const {},
+      _$data.containsKey('_eq')
+          ? l$$_eq == null
+                ? null
+                : Object.hashAll(l$$_eq.map((v) => v))
+          : const {},
+      _$data.containsKey('_gt')
+          ? l$$_gt == null
+                ? null
+                : Object.hashAll(l$$_gt.map((v) => v))
+          : const {},
+      _$data.containsKey('_gte')
+          ? l$$_gte == null
+                ? null
+                : Object.hashAll(l$$_gte.map((v) => v))
+          : const {},
       _$data.containsKey('_in')
           ? l$$_in == null
                 ? null
-                : Object.hashAll(l$$_in.map((v) => v))
+                : Object.hashAll(
+                    l$$_in.map((v) => Object.hashAll(v.map((v) => v))),
+                  )
           : const {},
-      _$data.containsKey('_iregex') ? l$$_iregex : const {},
       _$data.containsKey('_isNull') ? l$$_isNull : const {},
-      _$data.containsKey('_like') ? l$$_like : const {},
-      _$data.containsKey('_lt') ? l$$_lt : const {},
-      _$data.containsKey('_lte') ? l$$_lte : const {},
-      _$data.containsKey('_neq') ? l$$_neq : const {},
-      _$data.containsKey('_nilike') ? l$$_nilike : const {},
+      _$data.containsKey('_lt')
+          ? l$$_lt == null
+                ? null
+                : Object.hashAll(l$$_lt.map((v) => v))
+          : const {},
+      _$data.containsKey('_lte')
+          ? l$$_lte == null
+                ? null
+                : Object.hashAll(l$$_lte.map((v) => v))
+          : const {},
+      _$data.containsKey('_neq')
+          ? l$$_neq == null
+                ? null
+                : Object.hashAll(l$$_neq.map((v) => v))
+          : const {},
       _$data.containsKey('_nin')
           ? l$$_nin == null
                 ? null
-                : Object.hashAll(l$$_nin.map((v) => v))
+                : Object.hashAll(
+                    l$$_nin.map((v) => Object.hashAll(v.map((v) => v))),
+                  )
           : const {},
-      _$data.containsKey('_niregex') ? l$$_niregex : const {},
-      _$data.containsKey('_nlike') ? l$$_nlike : const {},
-      _$data.containsKey('_nregex') ? l$$_nregex : const {},
-      _$data.containsKey('_nsimilar') ? l$$_nsimilar : const {},
-      _$data.containsKey('_regex') ? l$$_regex : const {},
-      _$data.containsKey('_similar') ? l$$_similar : const {},
     ]);
   }
+}
+
+abstract class CopyWith_Input_StringArrayComparisonExp<TRes> {
+  factory CopyWith_Input_StringArrayComparisonExp(
+    Input_StringArrayComparisonExp instance,
+    TRes Function(Input_StringArrayComparisonExp) then,
+  ) = _CopyWithImpl_Input_StringArrayComparisonExp;
+
+  factory CopyWith_Input_StringArrayComparisonExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_StringArrayComparisonExp;
+
+  TRes call({
+    List<String>? $_containedIn,
+    List<String>? $_contains,
+    List<String>? $_eq,
+    List<String>? $_gt,
+    List<String>? $_gte,
+    List<List<String>>? $_in,
+    bool? $_isNull,
+    List<String>? $_lt,
+    List<String>? $_lte,
+    List<String>? $_neq,
+    List<List<String>>? $_nin,
+  });
 }

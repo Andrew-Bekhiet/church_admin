@@ -2089,6 +2089,7 @@ class Input_HistoryMeetingRosterBoolExp {
     Input_StringComparisonExp? name,
     Input_PersonsBoolExp? person,
     Input_UuidComparisonExp? personId,
+    Input_StringArrayComparisonExp? phones,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
     Input_IntComparisonExp? studyYearId,
     Input_StringComparisonExp? studyYearName,
@@ -2109,6 +2110,7 @@ class Input_HistoryMeetingRosterBoolExp {
     if (name != null) r'name': name,
     if (person != null) r'person': person,
     if (personId != null) r'personId': personId,
+    if (phones != null) r'phones': phones,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
     if (studyYearId != null) r'studyYearId': studyYearId,
     if (studyYearName != null) r'studyYearName': studyYearName,
@@ -2243,6 +2245,14 @@ class Input_HistoryMeetingRosterBoolExp {
               (l$personId as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('phones')) {
+      final l$phones = data['phones'];
+      result$data['phones'] = l$phones == null
+          ? null
+          : Input_StringArrayComparisonExp.fromJson(
+              (l$phones as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = data['photoUpdatedAt'];
       result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
@@ -2319,6 +2329,9 @@ class Input_HistoryMeetingRosterBoolExp {
   Input_UuidComparisonExp? get personId =>
       (_$data['personId'] as Input_UuidComparisonExp?);
 
+  Input_StringArrayComparisonExp? get phones =>
+      (_$data['phones'] as Input_StringArrayComparisonExp?);
+
   Input_TimestamptzComparisonExp? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
 
@@ -2390,6 +2403,10 @@ class Input_HistoryMeetingRosterBoolExp {
     if (_$data.containsKey('personId')) {
       final l$personId = personId;
       result$data['personId'] = l$personId?.toJson();
+    }
+    if (_$data.containsKey('phones')) {
+      final l$phones = phones;
+      result$data['phones'] = l$phones?.toJson();
     }
     if (_$data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = photoUpdatedAt;
@@ -2567,6 +2584,14 @@ class Input_HistoryMeetingRosterBoolExp {
     if (l$personId != lOther$personId) {
       return false;
     }
+    final l$phones = phones;
+    final lOther$phones = other.phones;
+    if (_$data.containsKey('phones') != other._$data.containsKey('phones')) {
+      return false;
+    }
+    if (l$phones != lOther$phones) {
+      return false;
+    }
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (_$data.containsKey('photoUpdatedAt') !=
@@ -2614,6 +2639,7 @@ class Input_HistoryMeetingRosterBoolExp {
     final l$name = name;
     final l$person = person;
     final l$personId = personId;
+    final l$phones = phones;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$studyYearId = studyYearId;
     final l$studyYearName = studyYearName;
@@ -2643,6 +2669,7 @@ class Input_HistoryMeetingRosterBoolExp {
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('person') ? l$person : const {},
       _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('phones') ? l$phones : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
       _$data.containsKey('studyYearName') ? l$studyYearName : const {},

@@ -58,10 +58,7 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
       person: person,
       personAttendanceAnalysis: null,
       attendanceRecord: null,
-      phones: [
-        ...?row.person?.contacts.map((c) => c.phone),
-        ...?row.person?.familyContacts.map((c) => c.phone).nonNulls,
-      ],
+      phones: row.phones ?? const [],
     );
   }
 }

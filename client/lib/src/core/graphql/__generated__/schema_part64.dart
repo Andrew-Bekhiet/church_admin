@@ -1,6 +1,431 @@
 // Part 64 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_UsersPreferencesOrderBy<TRes> {
+  factory CopyWith_Input_UsersPreferencesOrderBy(
+    Input_UsersPreferencesOrderBy instance,
+    TRes Function(Input_UsersPreferencesOrderBy) then,
+  ) = _CopyWithImpl_Input_UsersPreferencesOrderBy;
+
+  factory CopyWith_Input_UsersPreferencesOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersPreferencesOrderBy;
+
+  TRes call({
+    Enum_OrderBy? darkTheme,
+    Enum_OrderBy? greatFeastTheme,
+    Enum_OrderBy? lastHomeMode,
+    Enum_OrderBy? orderByPreferences,
+    Enum_OrderBy? uid,
+    Enum_OrderBy? updatedAt,
+    Input_AuthUsersDataOrderBy? user,
+  });
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user;
+}
+
+class _CopyWithImpl_Input_UsersPreferencesOrderBy<TRes>
+    implements CopyWith_Input_UsersPreferencesOrderBy<TRes> {
+  _CopyWithImpl_Input_UsersPreferencesOrderBy(this._instance, this._then);
+
+  final Input_UsersPreferencesOrderBy _instance;
+
+  final TRes Function(Input_UsersPreferencesOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? darkTheme = _undefined,
+    Object? greatFeastTheme = _undefined,
+    Object? lastHomeMode = _undefined,
+    Object? orderByPreferences = _undefined,
+    Object? uid = _undefined,
+    Object? updatedAt = _undefined,
+    Object? user = _undefined,
+  }) => _then(
+    Input_UsersPreferencesOrderBy._({
+      ..._instance._$data,
+      if (darkTheme != _undefined) 'darkTheme': (darkTheme as Enum_OrderBy?),
+      if (greatFeastTheme != _undefined)
+        'greatFeastTheme': (greatFeastTheme as Enum_OrderBy?),
+      if (lastHomeMode != _undefined)
+        'lastHomeMode': (lastHomeMode as Enum_OrderBy?),
+      if (orderByPreferences != _undefined)
+        'orderByPreferences': (orderByPreferences as Enum_OrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+      if (updatedAt != _undefined) 'updatedAt': (updatedAt as Enum_OrderBy?),
+      if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
+    }),
+  );
+
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_AuthUsersDataOrderBy.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataOrderBy(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_UsersPreferencesOrderBy<TRes>
+    implements CopyWith_Input_UsersPreferencesOrderBy<TRes> {
+  _CopyWithStubImpl_Input_UsersPreferencesOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? darkTheme,
+    Enum_OrderBy? greatFeastTheme,
+    Enum_OrderBy? lastHomeMode,
+    Enum_OrderBy? orderByPreferences,
+    Enum_OrderBy? uid,
+    Enum_OrderBy? updatedAt,
+    Input_AuthUsersDataOrderBy? user,
+  }) => _res;
+
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
+      CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
+}
+
+class Input_UsersPreferencesPkColumnsInput {
+  factory Input_UsersPreferencesPkColumnsInput({required UuidValue uid}) =>
+      Input_UsersPreferencesPkColumnsInput._({r'uid': uid});
+
+  Input_UsersPreferencesPkColumnsInput._(this._$data);
+
+  factory Input_UsersPreferencesPkColumnsInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$uid = data['uid'];
+    result$data['uid'] = stringToUuid(l$uid);
+    return Input_UsersPreferencesPkColumnsInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  UuidValue get uid => (_$data['uid'] as UuidValue);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$uid = uid;
+    result$data['uid'] = uuidToString(l$uid);
+    return result$data;
+  }
+
+  CopyWith_Input_UsersPreferencesPkColumnsInput<
+    Input_UsersPreferencesPkColumnsInput
+  >
+  get copyWith => CopyWith_Input_UsersPreferencesPkColumnsInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UsersPreferencesPkColumnsInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (l$uid != lOther$uid) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$uid = uid;
+    return Object.hashAll([l$uid]);
+  }
+}
+
+abstract class CopyWith_Input_UsersPreferencesPkColumnsInput<TRes> {
+  factory CopyWith_Input_UsersPreferencesPkColumnsInput(
+    Input_UsersPreferencesPkColumnsInput instance,
+    TRes Function(Input_UsersPreferencesPkColumnsInput) then,
+  ) = _CopyWithImpl_Input_UsersPreferencesPkColumnsInput;
+
+  factory CopyWith_Input_UsersPreferencesPkColumnsInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersPreferencesPkColumnsInput;
+
+  TRes call({UuidValue? uid});
+}
+
+class _CopyWithImpl_Input_UsersPreferencesPkColumnsInput<TRes>
+    implements CopyWith_Input_UsersPreferencesPkColumnsInput<TRes> {
+  _CopyWithImpl_Input_UsersPreferencesPkColumnsInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_UsersPreferencesPkColumnsInput _instance;
+
+  final TRes Function(Input_UsersPreferencesPkColumnsInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? uid = _undefined}) => _then(
+    Input_UsersPreferencesPkColumnsInput._({
+      ..._instance._$data,
+      if (uid != _undefined && uid != null) 'uid': (uid as UuidValue),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UsersPreferencesPkColumnsInput<TRes>
+    implements CopyWith_Input_UsersPreferencesPkColumnsInput<TRes> {
+  _CopyWithStubImpl_Input_UsersPreferencesPkColumnsInput(this._res);
+
+  TRes _res;
+
+  call({UuidValue? uid}) => _res;
+}
+
+class Input_UsersPreferencesPrependInput {
+  factory Input_UsersPreferencesPrependInput({Json? orderByPreferences}) =>
+      Input_UsersPreferencesPrependInput._({
+        if (orderByPreferences != null)
+          r'orderByPreferences': orderByPreferences,
+      });
+
+  Input_UsersPreferencesPrependInput._(this._$data);
+
+  factory Input_UsersPreferencesPrependInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('orderByPreferences')) {
+      final l$orderByPreferences = data['orderByPreferences'];
+      result$data['orderByPreferences'] = (l$orderByPreferences as Json?);
+    }
+    return Input_UsersPreferencesPrependInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('orderByPreferences')) {
+      final l$orderByPreferences = orderByPreferences;
+      result$data['orderByPreferences'] = l$orderByPreferences;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UsersPreferencesPrependInput<
+    Input_UsersPreferencesPrependInput
+  >
+  get copyWith => CopyWith_Input_UsersPreferencesPrependInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UsersPreferencesPrependInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$orderByPreferences = orderByPreferences;
+    final lOther$orderByPreferences = other.orderByPreferences;
+    if (_$data.containsKey('orderByPreferences') !=
+        other._$data.containsKey('orderByPreferences')) {
+      return false;
+    }
+    if (l$orderByPreferences != lOther$orderByPreferences) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$orderByPreferences = orderByPreferences;
+    return Object.hashAll([
+      _$data.containsKey('orderByPreferences')
+          ? l$orderByPreferences
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UsersPreferencesPrependInput<TRes> {
+  factory CopyWith_Input_UsersPreferencesPrependInput(
+    Input_UsersPreferencesPrependInput instance,
+    TRes Function(Input_UsersPreferencesPrependInput) then,
+  ) = _CopyWithImpl_Input_UsersPreferencesPrependInput;
+
+  factory CopyWith_Input_UsersPreferencesPrependInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersPreferencesPrependInput;
+
+  TRes call({Json? orderByPreferences});
+}
+
+class _CopyWithImpl_Input_UsersPreferencesPrependInput<TRes>
+    implements CopyWith_Input_UsersPreferencesPrependInput<TRes> {
+  _CopyWithImpl_Input_UsersPreferencesPrependInput(this._instance, this._then);
+
+  final Input_UsersPreferencesPrependInput _instance;
+
+  final TRes Function(Input_UsersPreferencesPrependInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? orderByPreferences = _undefined}) => _then(
+    Input_UsersPreferencesPrependInput._({
+      ..._instance._$data,
+      if (orderByPreferences != _undefined)
+        'orderByPreferences': (orderByPreferences as Json?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UsersPreferencesPrependInput<TRes>
+    implements CopyWith_Input_UsersPreferencesPrependInput<TRes> {
+  _CopyWithStubImpl_Input_UsersPreferencesPrependInput(this._res);
+
+  TRes _res;
+
+  call({Json? orderByPreferences}) => _res;
+}
+
+class Input_UsersPreferencesSetInput {
+  factory Input_UsersPreferencesSetInput({
+    bool? darkTheme,
+    bool? greatFeastTheme,
+    String? lastHomeMode,
+    Json? orderByPreferences,
+  }) => Input_UsersPreferencesSetInput._({
+    if (darkTheme != null) r'darkTheme': darkTheme,
+    if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
+    if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
+    if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
+  });
+
+  Input_UsersPreferencesSetInput._(this._$data);
+
+  factory Input_UsersPreferencesSetInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('darkTheme')) {
+      final l$darkTheme = data['darkTheme'];
+      result$data['darkTheme'] = (l$darkTheme as bool?);
+    }
+    if (data.containsKey('greatFeastTheme')) {
+      final l$greatFeastTheme = data['greatFeastTheme'];
+      result$data['greatFeastTheme'] = (l$greatFeastTheme as bool?);
+    }
+    if (data.containsKey('lastHomeMode')) {
+      final l$lastHomeMode = data['lastHomeMode'];
+      result$data['lastHomeMode'] = (l$lastHomeMode as String?);
+    }
+    if (data.containsKey('orderByPreferences')) {
+      final l$orderByPreferences = data['orderByPreferences'];
+      result$data['orderByPreferences'] = (l$orderByPreferences as Json?);
+    }
+    return Input_UsersPreferencesSetInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get darkTheme => (_$data['darkTheme'] as bool?);
+
+  bool? get greatFeastTheme => (_$data['greatFeastTheme'] as bool?);
+
+  String? get lastHomeMode => (_$data['lastHomeMode'] as String?);
+
+  Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('darkTheme')) {
+      final l$darkTheme = darkTheme;
+      result$data['darkTheme'] = l$darkTheme;
+    }
+    if (_$data.containsKey('greatFeastTheme')) {
+      final l$greatFeastTheme = greatFeastTheme;
+      result$data['greatFeastTheme'] = l$greatFeastTheme;
+    }
+    if (_$data.containsKey('lastHomeMode')) {
+      final l$lastHomeMode = lastHomeMode;
+      result$data['lastHomeMode'] = l$lastHomeMode;
+    }
+    if (_$data.containsKey('orderByPreferences')) {
+      final l$orderByPreferences = orderByPreferences;
+      result$data['orderByPreferences'] = l$orderByPreferences;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UsersPreferencesSetInput<Input_UsersPreferencesSetInput>
+  get copyWith => CopyWith_Input_UsersPreferencesSetInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UsersPreferencesSetInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$darkTheme = darkTheme;
+    final lOther$darkTheme = other.darkTheme;
+    if (_$data.containsKey('darkTheme') !=
+        other._$data.containsKey('darkTheme')) {
+      return false;
+    }
+    if (l$darkTheme != lOther$darkTheme) {
+      return false;
+    }
+    final l$greatFeastTheme = greatFeastTheme;
+    final lOther$greatFeastTheme = other.greatFeastTheme;
+    if (_$data.containsKey('greatFeastTheme') !=
+        other._$data.containsKey('greatFeastTheme')) {
+      return false;
+    }
+    if (l$greatFeastTheme != lOther$greatFeastTheme) {
+      return false;
+    }
+    final l$lastHomeMode = lastHomeMode;
+    final lOther$lastHomeMode = other.lastHomeMode;
+    if (_$data.containsKey('lastHomeMode') !=
+        other._$data.containsKey('lastHomeMode')) {
+      return false;
+    }
+    if (l$lastHomeMode != lOther$lastHomeMode) {
+      return false;
+    }
+    final l$orderByPreferences = orderByPreferences;
+    final lOther$orderByPreferences = other.orderByPreferences;
+    if (_$data.containsKey('orderByPreferences') !=
+        other._$data.containsKey('orderByPreferences')) {
+      return false;
+    }
+    if (l$orderByPreferences != lOther$orderByPreferences) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$darkTheme = darkTheme;
+    final l$greatFeastTheme = greatFeastTheme;
+    final l$lastHomeMode = lastHomeMode;
+    final l$orderByPreferences = orderByPreferences;
+    return Object.hashAll([
+      _$data.containsKey('darkTheme') ? l$darkTheme : const {},
+      _$data.containsKey('greatFeastTheme') ? l$greatFeastTheme : const {},
+      _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
+      _$data.containsKey('orderByPreferences')
+          ? l$orderByPreferences
+          : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_UsersPreferencesSetInput<TRes> {
   factory CopyWith_Input_UsersPreferencesSetInput(
     Input_UsersPreferencesSetInput instance,
@@ -2084,456 +2509,4 @@ abstract class CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
   });
   CopyWith_Input_GroupsBoolExp<TRes> get filter;
   CopyWith_Input_IntComparisonExp<TRes> get predicate;
-}
-
-class _CopyWithImpl_Input_groupsAggregateBoolExpCount<TRes>
-    implements CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
-  _CopyWithImpl_Input_groupsAggregateBoolExpCount(this._instance, this._then);
-
-  final Input_groupsAggregateBoolExpCount _instance;
-
-  final TRes Function(Input_groupsAggregateBoolExpCount) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? arguments = _undefined,
-    Object? distinct = _undefined,
-    Object? filter = _undefined,
-    Object? predicate = _undefined,
-  }) => _then(
-    Input_groupsAggregateBoolExpCount._({
-      ..._instance._$data,
-      if (arguments != _undefined)
-        'arguments': (arguments as List<Enum_GroupsSelectColumn>?),
-      if (distinct != _undefined) 'distinct': (distinct as bool?),
-      if (filter != _undefined) 'filter': (filter as Input_GroupsBoolExp?),
-      if (predicate != _undefined && predicate != null)
-        'predicate': (predicate as Input_IntComparisonExp),
-    }),
-  );
-
-  CopyWith_Input_GroupsBoolExp<TRes> get filter {
-    final local$filter = _instance.filter;
-    return local$filter == null
-        ? CopyWith_Input_GroupsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_GroupsBoolExp(local$filter, (e) => call(filter: e));
-  }
-
-  CopyWith_Input_IntComparisonExp<TRes> get predicate {
-    final local$predicate = _instance.predicate;
-    return CopyWith_Input_IntComparisonExp(
-      local$predicate,
-      (e) => call(predicate: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_groupsAggregateBoolExpCount<TRes>
-    implements CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
-  _CopyWithStubImpl_Input_groupsAggregateBoolExpCount(this._res);
-
-  TRes _res;
-
-  call({
-    List<Enum_GroupsSelectColumn>? arguments,
-    bool? distinct,
-    Input_GroupsBoolExp? filter,
-    Input_IntComparisonExp? predicate,
-  }) => _res;
-
-  CopyWith_Input_GroupsBoolExp<TRes> get filter =>
-      CopyWith_Input_GroupsBoolExp.stub(_res);
-
-  CopyWith_Input_IntComparisonExp<TRes> get predicate =>
-      CopyWith_Input_IntComparisonExp.stub(_res);
-}
-
-class Input_historyAttendanceHistoryAggregateBoolExpBool_and {
-  factory Input_historyAttendanceHistoryAggregateBoolExpBool_and({
-    required Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
-    arguments,
-    bool? distinct,
-    Input_HistoryAttendanceHistoryBoolExp? filter,
-    required Input_BooleanComparisonExp predicate,
-  }) => Input_historyAttendanceHistoryAggregateBoolExpBool_and._({
-    r'arguments': arguments,
-    if (distinct != null) r'distinct': distinct,
-    if (filter != null) r'filter': filter,
-    r'predicate': predicate,
-  });
-
-  Input_historyAttendanceHistoryAggregateBoolExpBool_and._(this._$data);
-
-  factory Input_historyAttendanceHistoryAggregateBoolExpBool_and.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$arguments = data['arguments'];
-    result$data['arguments'] =
-        fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
-          (l$arguments as String),
-        );
-    if (data.containsKey('distinct')) {
-      final l$distinct = data['distinct'];
-      result$data['distinct'] = (l$distinct as bool?);
-    }
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
-          ? null
-          : Input_HistoryAttendanceHistoryBoolExp.fromJson(
-              (l$filter as Map<String, dynamic>),
-            );
-    }
-    final l$predicate = data['predicate'];
-    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
-      (l$predicate as Map<String, dynamic>),
-    );
-    return Input_historyAttendanceHistoryAggregateBoolExpBool_and._(
-      result$data,
-    );
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
-  get arguments =>
-      (_$data['arguments']
-          as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns);
-
-  bool? get distinct => (_$data['distinct'] as bool?);
-
-  Input_HistoryAttendanceHistoryBoolExp? get filter =>
-      (_$data['filter'] as Input_HistoryAttendanceHistoryBoolExp?);
-
-  Input_BooleanComparisonExp get predicate =>
-      (_$data['predicate'] as Input_BooleanComparisonExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$arguments = arguments;
-    result$data['arguments'] =
-        toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
-          l$arguments,
-        );
-    if (_$data.containsKey('distinct')) {
-      final l$distinct = distinct;
-      result$data['distinct'] = l$distinct;
-    }
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
-    }
-    final l$predicate = predicate;
-    result$data['predicate'] = l$predicate.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<
-    Input_historyAttendanceHistoryAggregateBoolExpBool_and
-  >
-  get copyWith =>
-      CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
-        this,
-        (i) => i,
-      );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_historyAttendanceHistoryAggregateBoolExpBool_and ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$arguments = arguments;
-    final lOther$arguments = other.arguments;
-    if (l$arguments != lOther$arguments) {
-      return false;
-    }
-    final l$distinct = distinct;
-    final lOther$distinct = other.distinct;
-    if (_$data.containsKey('distinct') !=
-        other._$data.containsKey('distinct')) {
-      return false;
-    }
-    if (l$distinct != lOther$distinct) {
-      return false;
-    }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
-      return false;
-    }
-    if (l$filter != lOther$filter) {
-      return false;
-    }
-    final l$predicate = predicate;
-    final lOther$predicate = other.predicate;
-    if (l$predicate != lOther$predicate) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$arguments = arguments;
-    final l$distinct = distinct;
-    final l$filter = filter;
-    final l$predicate = predicate;
-    return Object.hashAll([
-      l$arguments,
-      _$data.containsKey('distinct') ? l$distinct : const {},
-      _$data.containsKey('filter') ? l$filter : const {},
-      l$predicate,
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<
-  TRes
-> {
-  factory CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
-    Input_historyAttendanceHistoryAggregateBoolExpBool_and instance,
-    TRes Function(Input_historyAttendanceHistoryAggregateBoolExpBool_and) then,
-  ) = _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and;
-
-  factory CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and;
-
-  TRes call({
-    Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns?
-    arguments,
-    bool? distinct,
-    Input_HistoryAttendanceHistoryBoolExp? filter,
-    Input_BooleanComparisonExp? predicate,
-  });
-  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter;
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
-}
-
-class _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and<TRes>
-    implements
-        CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<TRes> {
-  _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
-    this._instance,
-    this._then,
-  );
-
-  final Input_historyAttendanceHistoryAggregateBoolExpBool_and _instance;
-
-  final TRes Function(Input_historyAttendanceHistoryAggregateBoolExpBool_and)
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? arguments = _undefined,
-    Object? distinct = _undefined,
-    Object? filter = _undefined,
-    Object? predicate = _undefined,
-  }) => _then(
-    Input_historyAttendanceHistoryAggregateBoolExpBool_and._({
-      ..._instance._$data,
-      if (arguments != _undefined && arguments != null)
-        'arguments':
-            (arguments
-                as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns),
-      if (distinct != _undefined) 'distinct': (distinct as bool?),
-      if (filter != _undefined)
-        'filter': (filter as Input_HistoryAttendanceHistoryBoolExp?),
-      if (predicate != _undefined && predicate != null)
-        'predicate': (predicate as Input_BooleanComparisonExp),
-    }),
-  );
-
-  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter {
-    final local$filter = _instance.filter;
-    return local$filter == null
-        ? CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryAttendanceHistoryBoolExp(
-            local$filter,
-            (e) => call(filter: e),
-          );
-  }
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
-    final local$predicate = _instance.predicate;
-    return CopyWith_Input_BooleanComparisonExp(
-      local$predicate,
-      (e) => call(predicate: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and<
-  TRes
->
-    implements
-        CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<TRes> {
-  _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({
-    Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns?
-    arguments,
-    bool? distinct,
-    Input_HistoryAttendanceHistoryBoolExp? filter,
-    Input_BooleanComparisonExp? predicate,
-  }) => _res;
-
-  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter =>
-      CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
-      CopyWith_Input_BooleanComparisonExp.stub(_res);
-}
-
-class Input_historyAttendanceHistoryAggregateBoolExpBool_or {
-  factory Input_historyAttendanceHistoryAggregateBoolExpBool_or({
-    required Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns
-    arguments,
-    bool? distinct,
-    Input_HistoryAttendanceHistoryBoolExp? filter,
-    required Input_BooleanComparisonExp predicate,
-  }) => Input_historyAttendanceHistoryAggregateBoolExpBool_or._({
-    r'arguments': arguments,
-    if (distinct != null) r'distinct': distinct,
-    if (filter != null) r'filter': filter,
-    r'predicate': predicate,
-  });
-
-  Input_historyAttendanceHistoryAggregateBoolExpBool_or._(this._$data);
-
-  factory Input_historyAttendanceHistoryAggregateBoolExpBool_or.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$arguments = data['arguments'];
-    result$data['arguments'] =
-        fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
-          (l$arguments as String),
-        );
-    if (data.containsKey('distinct')) {
-      final l$distinct = data['distinct'];
-      result$data['distinct'] = (l$distinct as bool?);
-    }
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
-          ? null
-          : Input_HistoryAttendanceHistoryBoolExp.fromJson(
-              (l$filter as Map<String, dynamic>),
-            );
-    }
-    final l$predicate = data['predicate'];
-    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
-      (l$predicate as Map<String, dynamic>),
-    );
-    return Input_historyAttendanceHistoryAggregateBoolExpBool_or._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns
-  get arguments =>
-      (_$data['arguments']
-          as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns);
-
-  bool? get distinct => (_$data['distinct'] as bool?);
-
-  Input_HistoryAttendanceHistoryBoolExp? get filter =>
-      (_$data['filter'] as Input_HistoryAttendanceHistoryBoolExp?);
-
-  Input_BooleanComparisonExp get predicate =>
-      (_$data['predicate'] as Input_BooleanComparisonExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$arguments = arguments;
-    result$data['arguments'] =
-        toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
-          l$arguments,
-        );
-    if (_$data.containsKey('distinct')) {
-      final l$distinct = distinct;
-      result$data['distinct'] = l$distinct;
-    }
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
-    }
-    final l$predicate = predicate;
-    result$data['predicate'] = l$predicate.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or<
-    Input_historyAttendanceHistoryAggregateBoolExpBool_or
-  >
-  get copyWith =>
-      CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or(
-        this,
-        (i) => i,
-      );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_historyAttendanceHistoryAggregateBoolExpBool_or ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$arguments = arguments;
-    final lOther$arguments = other.arguments;
-    if (l$arguments != lOther$arguments) {
-      return false;
-    }
-    final l$distinct = distinct;
-    final lOther$distinct = other.distinct;
-    if (_$data.containsKey('distinct') !=
-        other._$data.containsKey('distinct')) {
-      return false;
-    }
-    if (l$distinct != lOther$distinct) {
-      return false;
-    }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
-      return false;
-    }
-    if (l$filter != lOther$filter) {
-      return false;
-    }
-    final l$predicate = predicate;
-    final lOther$predicate = other.predicate;
-    if (l$predicate != lOther$predicate) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$arguments = arguments;
-    final l$distinct = distinct;
-    final l$filter = filter;
-    final l$predicate = predicate;
-    return Object.hashAll([
-      l$arguments,
-      _$data.containsKey('distinct') ? l$distinct : const {},
-      _$data.containsKey('filter') ? l$filter : const {},
-      l$predicate,
-    ]);
-  }
 }

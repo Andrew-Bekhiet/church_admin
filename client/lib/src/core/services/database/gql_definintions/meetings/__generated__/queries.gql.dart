@@ -513,118 +513,11 @@ const documentNodeQueryhistoryMeetingRoster = DocumentNode(
                   selectionSet: null,
                 ),
                 FieldNode(
-                  name: NameNode(value: 'person'),
+                  name: NameNode(value: 'phones'),
                   alias: null,
                   arguments: [],
                   directives: [],
-                  selectionSet: SelectionSetNode(
-                    selections: [
-                      FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'contacts'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(
-                          selections: [
-                            FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null,
-                            ),
-                            FieldNode(
-                              name: NameNode(value: 'phone'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null,
-                            ),
-                            FieldNode(
-                              name: NameNode(value: '__typename'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null,
-                            ),
-                          ],
-                        ),
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'familyContacts'),
-                        alias: null,
-                        arguments: [
-                          ArgumentNode(
-                            name: NameNode(value: 'where'),
-                            value: ObjectValueNode(
-                              fields: [
-                                ObjectFieldNode(
-                                  name: NameNode(value: 'personType'),
-                                  value: ObjectValueNode(
-                                    fields: [
-                                      ObjectFieldNode(
-                                        name: NameNode(value: 'isFamilyAdmin'),
-                                        value: ObjectValueNode(
-                                          fields: [
-                                            ObjectFieldNode(
-                                              name: NameNode(value: '_eq'),
-                                              value: BooleanValueNode(
-                                                value: true,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                        directives: [],
-                        selectionSet: SelectionSetNode(
-                          selections: [
-                            FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null,
-                            ),
-                            FieldNode(
-                              name: NameNode(value: 'phone'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null,
-                            ),
-                            FieldNode(
-                              name: NameNode(value: '__typename'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null,
-                            ),
-                          ],
-                        ),
-                      ),
-                      FieldNode(
-                        name: NameNode(value: '__typename'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                    ],
-                  ),
+                  selectionSet: null,
                 ),
                 FieldNode(
                   name: NameNode(value: 'gender'),
@@ -696,7 +589,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     this.personId,
     this.meetingId,
     this.name,
-    this.person,
+    this.phones,
     this.gender,
     this.color,
     this.studyYearId,
@@ -713,7 +606,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     final l$personId = json['personId'];
     final l$meetingId = json['meetingId'];
     final l$name = json['name'];
-    final l$person = json['person'];
+    final l$phones = json['phones'];
     final l$gender = json['gender'];
     final l$color = json['color'];
     final l$studyYearId = json['studyYearId'];
@@ -726,11 +619,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
       personId: l$personId == null ? null : stringToUuid(l$personId),
       meetingId: l$meetingId == null ? null : stringToUuid(l$meetingId),
       name: (l$name as String?),
-      person: l$person == null
-          ? null
-          : Query_historyMeetingRoster_historyMeetingRoster_person.fromJson(
-              (l$person as Map<String, dynamic>),
-            ),
+      phones: (l$phones as List<dynamic>?)?.map((e) => (e as String)).toList(),
       gender: (l$gender as bool?),
       color: (l$color as int?),
       studyYearId: (l$studyYearId as int?),
@@ -750,7 +639,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
 
   final String? name;
 
-  final Query_historyMeetingRoster_historyMeetingRoster_person? person;
+  final List<String>? phones;
 
   final bool? gender;
 
@@ -780,8 +669,8 @@ class Query_historyMeetingRoster_historyMeetingRoster {
         : uuidToString(l$meetingId);
     final l$name = name;
     _resultData['name'] = l$name;
-    final l$person = person;
-    _resultData['person'] = l$person?.toJson();
+    final l$phones = phones;
+    _resultData['phones'] = l$phones?.map((e) => e).toList();
     final l$gender = gender;
     _resultData['gender'] = l$gender;
     final l$color = color;
@@ -808,7 +697,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     final l$personId = personId;
     final l$meetingId = meetingId;
     final l$name = name;
-    final l$person = person;
+    final l$phones = phones;
     final l$gender = gender;
     final l$color = color;
     final l$studyYearId = studyYearId;
@@ -821,7 +710,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
       l$personId,
       l$meetingId,
       l$name,
-      l$person,
+      l$phones == null ? null : Object.hashAll(l$phones.map((v) => v)),
       l$gender,
       l$color,
       l$studyYearId,
@@ -857,9 +746,20 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (l$person != lOther$person) {
+    final l$phones = phones;
+    final lOther$phones = other.phones;
+    if (l$phones != null && lOther$phones != null) {
+      if (l$phones.length != lOther$phones.length) {
+        return false;
+      }
+      for (int i = 0; i < l$phones.length; i++) {
+        final l$phones$entry = l$phones[i];
+        final lOther$phones$entry = lOther$phones[i];
+        if (l$phones$entry != lOther$phones$entry) {
+          return false;
+        }
+      }
+    } else if (l$phones != lOther$phones) {
       return false;
     }
     final l$gender = gender;
@@ -929,7 +829,7 @@ abstract class CopyWith_Query_historyMeetingRoster_historyMeetingRoster<TRes> {
     UuidValue? personId,
     UuidValue? meetingId,
     String? name,
-    Query_historyMeetingRoster_historyMeetingRoster_person? person,
+    List<String>? phones,
     bool? gender,
     int? color,
     int? studyYearId,
@@ -939,8 +839,6 @@ abstract class CopyWith_Query_historyMeetingRoster_historyMeetingRoster<TRes> {
     bool? asServant,
     String? $__typename,
   });
-  CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person<TRes>
-  get person;
 }
 
 class _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
@@ -960,7 +858,7 @@ class _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
     Object? personId = _undefined,
     Object? meetingId = _undefined,
     Object? name = _undefined,
-    Object? person = _undefined,
+    Object? phones = _undefined,
     Object? gender = _undefined,
     Object? color = _undefined,
     Object? studyYearId = _undefined,
@@ -978,9 +876,9 @@ class _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
           ? _instance.meetingId
           : (meetingId as UuidValue?),
       name: name == _undefined ? _instance.name : (name as String?),
-      person: person == _undefined
-          ? _instance.person
-          : (person as Query_historyMeetingRoster_historyMeetingRoster_person?),
+      phones: phones == _undefined
+          ? _instance.phones
+          : (phones as List<String>?),
       gender: gender == _undefined ? _instance.gender : (gender as bool?),
       color: color == _undefined ? _instance.color : (color as int?),
       studyYearId: studyYearId == _undefined
@@ -1003,19 +901,6 @@ class _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
           : ($__typename as String),
     ),
   );
-
-  CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person<TRes>
-  get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person.stub(
-            _then(_instance),
-          )
-        : CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person(
-            local$person,
-            (e) => call(person: e),
-          );
-  }
 }
 
 class _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
@@ -1028,7 +913,7 @@ class _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
     UuidValue? personId,
     UuidValue? meetingId,
     String? name,
-    Query_historyMeetingRoster_historyMeetingRoster_person? person,
+    List<String>? phones,
     bool? gender,
     int? color,
     int? studyYearId,
@@ -1038,625 +923,6 @@ class _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
     bool? asServant,
     String? $__typename,
   }) => _res;
-
-  CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person<TRes>
-  get person =>
-      CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person.stub(
-        _res,
-      );
-}
-
-class Query_historyMeetingRoster_historyMeetingRoster_person {
-  Query_historyMeetingRoster_historyMeetingRoster_person({
-    required this.id,
-    required this.contacts,
-    required this.familyContacts,
-    this.$__typename = 'Persons',
-  });
-
-  factory Query_historyMeetingRoster_historyMeetingRoster_person.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$id = json['id'];
-    final l$contacts = json['contacts'];
-    final l$familyContacts = json['familyContacts'];
-    final l$$__typename = json['__typename'];
-    return Query_historyMeetingRoster_historyMeetingRoster_person(
-      id: stringToUuid(l$id),
-      contacts: (l$contacts as List<dynamic>)
-          .map(
-            (e) =>
-                Query_historyMeetingRoster_historyMeetingRoster_person_contacts.fromJson(
-                  (e as Map<String, dynamic>),
-                ),
-          )
-          .toList(),
-      familyContacts: (l$familyContacts as List<dynamic>)
-          .map(
-            (e) =>
-                Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts.fromJson(
-                  (e as Map<String, dynamic>),
-                ),
-          )
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final UuidValue id;
-
-  final List<Query_historyMeetingRoster_historyMeetingRoster_person_contacts>
-  contacts;
-
-  final List<
-    Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts
-  >
-  familyContacts;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = uuidToString(l$id);
-    final l$contacts = contacts;
-    _resultData['contacts'] = l$contacts.map((e) => e.toJson()).toList();
-    final l$familyContacts = familyContacts;
-    _resultData['familyContacts'] = l$familyContacts
-        .map((e) => e.toJson())
-        .toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$contacts = contacts;
-    final l$familyContacts = familyContacts;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      Object.hashAll(l$contacts.map((v) => v)),
-      Object.hashAll(l$familyContacts.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_historyMeetingRoster_historyMeetingRoster_person ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$contacts = contacts;
-    final lOther$contacts = other.contacts;
-    if (l$contacts.length != lOther$contacts.length) {
-      return false;
-    }
-    for (int i = 0; i < l$contacts.length; i++) {
-      final l$contacts$entry = l$contacts[i];
-      final lOther$contacts$entry = lOther$contacts[i];
-      if (l$contacts$entry != lOther$contacts$entry) {
-        return false;
-      }
-    }
-    final l$familyContacts = familyContacts;
-    final lOther$familyContacts = other.familyContacts;
-    if (l$familyContacts.length != lOther$familyContacts.length) {
-      return false;
-    }
-    for (int i = 0; i < l$familyContacts.length; i++) {
-      final l$familyContacts$entry = l$familyContacts[i];
-      final lOther$familyContacts$entry = lOther$familyContacts[i];
-      if (l$familyContacts$entry != lOther$familyContacts$entry) {
-        return false;
-      }
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_historyMeetingRoster_historyMeetingRoster_person
-    on Query_historyMeetingRoster_historyMeetingRoster_person {
-  CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person<
-    Query_historyMeetingRoster_historyMeetingRoster_person
-  >
-  get copyWith =>
-      CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person<
-  TRes
-> {
-  factory CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person(
-    Query_historyMeetingRoster_historyMeetingRoster_person instance,
-    TRes Function(Query_historyMeetingRoster_historyMeetingRoster_person) then,
-  ) = _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster_person;
-
-  factory CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster_person;
-
-  TRes call({
-    UuidValue? id,
-    List<Query_historyMeetingRoster_historyMeetingRoster_person_contacts>?
-    contacts,
-    List<Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts>?
-    familyContacts,
-    String? $__typename,
-  });
-  TRes contacts(
-    Iterable<Query_historyMeetingRoster_historyMeetingRoster_person_contacts>
-    Function(
-      Iterable<
-        CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_contacts<
-          Query_historyMeetingRoster_historyMeetingRoster_person_contacts
-        >
-      >,
-    )
-    _fn,
-  );
-  TRes familyContacts(
-    Iterable<
-      Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts
-    >
-    Function(
-      Iterable<
-        CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts<
-          Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts
-        >
-      >,
-    )
-    _fn,
-  );
-}
-
-class _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster_person<TRes>
-    implements
-        CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person<TRes> {
-  _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster_person(
-    this._instance,
-    this._then,
-  );
-
-  final Query_historyMeetingRoster_historyMeetingRoster_person _instance;
-
-  final TRes Function(Query_historyMeetingRoster_historyMeetingRoster_person)
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? contacts = _undefined,
-    Object? familyContacts = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Query_historyMeetingRoster_historyMeetingRoster_person(
-      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-      contacts: contacts == _undefined || contacts == null
-          ? _instance.contacts
-          : (contacts
-                as List<
-                  Query_historyMeetingRoster_historyMeetingRoster_person_contacts
-                >),
-      familyContacts: familyContacts == _undefined || familyContacts == null
-          ? _instance.familyContacts
-          : (familyContacts
-                as List<
-                  Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts
-                >),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  TRes contacts(
-    Iterable<Query_historyMeetingRoster_historyMeetingRoster_person_contacts>
-    Function(
-      Iterable<
-        CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_contacts<
-          Query_historyMeetingRoster_historyMeetingRoster_person_contacts
-        >
-      >,
-    )
-    _fn,
-  ) => call(
-    contacts: _fn(
-      _instance.contacts.map(
-        (e) =>
-            CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_contacts(
-              e,
-              (i) => i,
-            ),
-      ),
-    ).toList(),
-  );
-
-  TRes familyContacts(
-    Iterable<
-      Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts
-    >
-    Function(
-      Iterable<
-        CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts<
-          Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts
-        >
-      >,
-    )
-    _fn,
-  ) => call(
-    familyContacts: _fn(
-      _instance.familyContacts.map(
-        (e) =>
-            CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts(
-              e,
-              (i) => i,
-            ),
-      ),
-    ).toList(),
-  );
-}
-
-class _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster_person<
-  TRes
->
-    implements
-        CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person<TRes> {
-  _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster_person(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({
-    UuidValue? id,
-    List<Query_historyMeetingRoster_historyMeetingRoster_person_contacts>?
-    contacts,
-    List<Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts>?
-    familyContacts,
-    String? $__typename,
-  }) => _res;
-
-  contacts(_fn) => _res;
-
-  familyContacts(_fn) => _res;
-}
-
-class Query_historyMeetingRoster_historyMeetingRoster_person_contacts {
-  Query_historyMeetingRoster_historyMeetingRoster_person_contacts({
-    required this.id,
-    required this.phone,
-    this.$__typename = 'Contacts',
-  });
-
-  factory Query_historyMeetingRoster_historyMeetingRoster_person_contacts.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$id = json['id'];
-    final l$phone = json['phone'];
-    final l$$__typename = json['__typename'];
-    return Query_historyMeetingRoster_historyMeetingRoster_person_contacts(
-      id: stringToUuid(l$id),
-      phone: (l$phone as String),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final UuidValue id;
-
-  final String phone;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = uuidToString(l$id);
-    final l$phone = phone;
-    _resultData['phone'] = l$phone;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$phone = phone;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$phone, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other
-            is! Query_historyMeetingRoster_historyMeetingRoster_person_contacts ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$phone = phone;
-    final lOther$phone = other.phone;
-    if (l$phone != lOther$phone) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_historyMeetingRoster_historyMeetingRoster_person_contacts
-    on Query_historyMeetingRoster_historyMeetingRoster_person_contacts {
-  CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_contacts<
-    Query_historyMeetingRoster_historyMeetingRoster_person_contacts
-  >
-  get copyWith =>
-      CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_contacts(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_contacts<
-  TRes
-> {
-  factory CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_contacts(
-    Query_historyMeetingRoster_historyMeetingRoster_person_contacts instance,
-    TRes Function(
-      Query_historyMeetingRoster_historyMeetingRoster_person_contacts,
-    )
-    then,
-  ) = _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster_person_contacts;
-
-  factory CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_contacts.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster_person_contacts;
-
-  TRes call({UuidValue? id, String? phone, String? $__typename});
-}
-
-class _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster_person_contacts<
-  TRes
->
-    implements
-        CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_contacts<
-          TRes
-        > {
-  _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster_person_contacts(
-    this._instance,
-    this._then,
-  );
-
-  final Query_historyMeetingRoster_historyMeetingRoster_person_contacts
-  _instance;
-
-  final TRes Function(
-    Query_historyMeetingRoster_historyMeetingRoster_person_contacts,
-  )
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? phone = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Query_historyMeetingRoster_historyMeetingRoster_person_contacts(
-      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-      phone: phone == _undefined || phone == null
-          ? _instance.phone
-          : (phone as String),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster_person_contacts<
-  TRes
->
-    implements
-        CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_contacts<
-          TRes
-        > {
-  _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster_person_contacts(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({UuidValue? id, String? phone, String? $__typename}) => _res;
-}
-
-class Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts {
-  Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts({
-    this.id,
-    this.phone,
-    this.$__typename = 'ResolvedContacts',
-  });
-
-  factory Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$id = json['id'];
-    final l$phone = json['phone'];
-    final l$$__typename = json['__typename'];
-    return Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts(
-      id: l$id == null ? null : stringToUuid(l$id),
-      phone: (l$phone as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final UuidValue? id;
-
-  final String? phone;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id == null ? null : uuidToString(l$id);
-    final l$phone = phone;
-    _resultData['phone'] = l$phone;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$phone = phone;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$phone, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other
-            is! Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$phone = phone;
-    final lOther$phone = other.phone;
-    if (l$phone != lOther$phone) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts
-    on Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts {
-  CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts<
-    Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts
-  >
-  get copyWith =>
-      CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts<
-  TRes
-> {
-  factory CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts(
-    Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts
-    instance,
-    TRes Function(
-      Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts,
-    )
-    then,
-  ) = _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts;
-
-  factory CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts;
-
-  TRes call({UuidValue? id, String? phone, String? $__typename});
-}
-
-class _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts<
-  TRes
->
-    implements
-        CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts<
-          TRes
-        > {
-  _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts(
-    this._instance,
-    this._then,
-  );
-
-  final Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts
-  _instance;
-
-  final TRes Function(
-    Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts,
-  )
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? phone = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts(
-      id: id == _undefined ? _instance.id : (id as UuidValue?),
-      phone: phone == _undefined ? _instance.phone : (phone as String?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts<
-  TRes
->
-    implements
-        CopyWith_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts<
-          TRes
-        > {
-  _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster_person_familyContacts(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({UuidValue? id, String? phone, String? $__typename}) => _res;
 }
 
 class Variables_Query_attendanceAnalysis {
