@@ -49,6 +49,23 @@ updates:
         applies-to: security-updates
         patterns:
           - "*"
+    # Majors held back until the toolchain supports them; check-toolchain-ceilings.yml opens an issue when one can be lifted.
+    ignore:
+      # Cloud Functions' newest GA runtime is Node 24.
+      - dependency-name: "@types/node"
+        update-types:
+          - version-update:semver-major
+      # typescript-eslint 8 accepts typescript <6.1.
+      - dependency-name: typescript
+        versions:
+          - ">= 6.1.0"
+      # eslint-plugin-import supports eslint up to 9.
+      - dependency-name: eslint
+        update-types:
+          - version-update:semver-major
+      - dependency-name: "@eslint/js"
+        update-types:
+          - version-update:semver-major
 
   - package-ecosystem: pub
     directories:
@@ -104,6 +121,10 @@ updates:
     ignore:
       # A Postgres major (pg17 -> pg18) needs a dump/restore of production data, not a tag bump.
       - dependency-name: timescale/timescaledb-ha
+        update-types:
+          - version-update:semver-major
+      # The emulator image tracks the Cloud Functions runtime, whose newest GA is Node 24.
+      - dependency-name: node
         update-types:
           - version-update:semver-major
 
