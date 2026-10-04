@@ -80,7 +80,10 @@ class Address with _$Address {
     if (_districtNameWithoutPrefix(district?.name) case final districtName?)
       'حي $districtName',
     ?specialLandmark,
-    if (storeyNumber case final storeyNumber?) 'الدور $storeyNumber',
+    if (storeyNumber == 0)
+      'الدور الأرضي'
+    else if (storeyNumber case final storeyNumber?)
+      'الدور $storeyNumber',
     if (apartmentNumber case final apartmentNumber?) 'شقة $apartmentNumber',
   ].join(' ').trim();
 
