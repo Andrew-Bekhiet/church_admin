@@ -477,11 +477,10 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   bool _matchesSearch(MeetingRosterEntry entry, String query) {
     if (query.isEmpty) return true;
 
-    final person = entry.person;
-    final personName = person.name.toLowerCase().trim();
-    final mainPhone = person.mainPhone?.toLowerCase().trim() ?? '';
+    final personName = entry.person.name.toLowerCase().trim();
 
-    return personName.contains(query) || mainPhone.contains(query);
+    return personName.contains(query) ||
+        PhoneNumberService.matchesSearch(query, entry.phones);
   }
 
   @override

@@ -16,6 +16,9 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
   final AttendanceRecord? attendanceRecord;
 
   @override
+  final List<String> phones;
+
+  @override
   final PersonMeetingAttendanceAnalysis? personAttendanceAnalysis;
 
   bool get attended => attendanceRecord != null;
@@ -27,6 +30,7 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
     required this.person,
     required this.attendanceRecord,
     required this.personAttendanceAnalysis,
+    this.phones = const [],
   });
 
   factory MeetingRosterEntry.fromQueryResult(
@@ -35,7 +39,6 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
     final person = Person(
       id: row.personId?.uuid ?? '',
       name: row.name ?? '',
-      mainPhone: row.mainPhone,
       gender: row.gender ?? false,
       color: colorFromInt(row.color),
       studyYearId: row.studyYearId,
@@ -55,6 +58,10 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
       person: person,
       personAttendanceAnalysis: null,
       attendanceRecord: null,
+      phones: [
+        ...?row.person?.contacts.map((c) => c.phone),
+        ...?row.person?.familyContacts.map((c) => c.phone).nonNulls,
+      ],
     );
   }
 }
