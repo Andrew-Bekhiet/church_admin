@@ -55,5 +55,10 @@
     "activityBarTop.activeBorder": "#15202b"
   },
   "peacock.color": "#009688",
-  "peacock.affectStatusBar": false
+  "peacock.affectStatusBar": false,
+  "workbench.editor.customLabels.patterns": {
+    "*/**/migrations/**/*.sql": "${dirname}/${filename}",
+    "**/*.gql": "${dirname}/${filename}",
+    "**/*.gql.dart": "${dirname(1)}/${filename}"
+  }
 }
