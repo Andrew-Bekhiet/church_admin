@@ -47,6 +47,7 @@ begin
                                   from persons
                                   where persons.family_id = new.id
                                       and persons.deleted_at is null
+                                      and public.person_inserted_in_current_transaction(persons)
                               )
                           )
                       )
