@@ -48,4 +48,32 @@ void main() {
       expect(unit.formatInternational('+201234567890'), '+201234567890');
     },
   );
+
+  group('storing a typed number', () {
+    const unit = PhoneNumberService();
+
+    test('an Egyptian number typed locally is stored in E.164', () {
+      expect(unit.toE164('010 0123 4567'), '+201001234567');
+    });
+
+    test('an international number keeps its country code', () {
+      expect(unit.toE164('+966 50 123 4567'), '+966501234567');
+    });
+
+    test('an invalid number cannot be stored', () {
+      expect(unit.toE164('0100'), isNull);
+    });
+  });
+
+  group('showing a stored number', () {
+    const unit = PhoneNumberService();
+
+    test('an Egyptian number is shown the way it is dialled locally', () {
+      expect(unit.toDisplay('+201001234567'), '01001234567');
+    });
+
+    test('a foreign number is shown in international format', () {
+      expect(unit.toDisplay('+966501234567'), '+966501234567');
+    });
+  });
 }

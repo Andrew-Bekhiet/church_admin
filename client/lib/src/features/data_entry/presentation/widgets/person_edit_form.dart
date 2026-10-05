@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PersonEditForm extends StatefulWidget {
@@ -40,26 +43,6 @@ class _PersonEditFormState extends State<PersonEditForm> {
           onNationalIdChanged: (value) =>
               _update((p) => p.copyWith(nationalId: int.tryParse(value))),
           onImportFromContacts: _importFromContacts,
-          onMainPhoneChanged: (value) => _update(
-            (p) => p.copyWith(
-              mainPhone: PhoneNumberService.I
-                  .formatInternational(value)
-                  .replaceAll('+20', '0'),
-            ),
-          ),
-          validatePhone: _validatePhoneField,
-          onEditPhoneName: _onEditPhoneFieldName,
-          onOtherPhoneChanged: (key, value) => _update(
-            (p) => p.copyWith(
-              otherPhones: {
-                ...p.otherPhones,
-                key: PhoneNumberService.I
-                    .formatInternational(value)
-                    .replaceAll('+20', '0'),
-              },
-            ),
-          ),
-          onAddOtherPhone: _addOtherPhone,
           onBirthdateChanged: (value) =>
               _update((p) => p.copyWith(birthdate: value)),
         ),
@@ -164,50 +147,6 @@ class _PersonEditFormState extends State<PersonEditForm> {
     );
   }
 
-  void Function() _onEditPhoneFieldName(MapEntry<String, dynamic> phone) =>
-      () async {
-        final name = await _renamePhoneFieldName(true, phone.key);
-        if (name == true && mounted) {
-          _updateAndRebuild(
-            (p) => p.copyWith(
-              otherPhones: {
-                for (final entry in p.otherPhones.entries)
-                  if (entry.key != phone.key) entry.key: entry.value,
-              },
-            ),
-          );
-        } else if (name is String && mounted) {
-          _updateAndRebuild(
-            (p) => p.copyWith(
-              otherPhones: {
-                for (final entry in p.otherPhones.entries)
-                  if (entry.key != phone.key) entry.key: entry.value,
-                name: phone.value,
-              },
-            ),
-          );
-        }
-      };
-  Future<void> _addOtherPhone() async {
-    final name = await _renamePhoneFieldName();
-    if (name is String && mounted) {
-      _updateAndRebuild(
-        (p) => p.copyWith(otherPhones: {...p.otherPhones, name: ''}),
-      );
-    }
-  }
-
-  Future<Object?> _renamePhoneFieldName([
-    bool canDelete = false,
-    String? initialName,
-  ]) => showDialog(
-    context: context,
-    builder: (context) => PhoneFieldNameDialog(
-      canDelete: canDelete,
-      initialName: initialName,
-    ),
-  );
-
   Future<void> _importFromContacts() async {
     FocusScope.of(context).requestFocus();
     final permissionStatus = await Permission.contacts.request();
@@ -226,13 +165,10 @@ class _PersonEditFormState extends State<PersonEditForm> {
           builder: (context) => ContactImportDialog(contact: contact),
         );
     if (result != null && mounted) {
+      context.read<PhoneContactsEditorCubit>().importNumbers(result.numbers);
       _updateAndRebuild(
         (p) => p.copyWith(
           name: result.useContactName ? (contact.displayName ?? '') : p.name,
-          otherPhones: {
-            ...p.otherPhones,
-            for (final number in result.numbers) number.label: number.number,
-          },
         ),
       );
     }
@@ -249,6 +185,7 @@ class _PersonEditFormState extends State<PersonEditForm> {
           address: widget.controller.initialObject?.address,
         ),
       );
+      _followFamilyPhoneNumbers();
 
       return;
     }
@@ -262,7 +199,14 @@ class _PersonEditFormState extends State<PersonEditForm> {
         },
       ),
     );
+    _followFamilyPhoneNumbers();
   }
+
+  void _followFamilyPhoneNumbers() => unawaited(
+    context.read<PhoneContactsEditorCubit>().changeFamily(
+      widget.controller.newObject.familyId,
+    ),
+  );
 
   Future<void> _selectServices(
     FormFieldState<(Set<Service>, Set<Group>)> state,
@@ -354,9 +298,4 @@ class _PersonEditFormState extends State<PersonEditForm> {
         time: time,
         recordedBy: AuthBloc.I.currentUser?.uid,
       );
-
-  String? _validatePhoneField(String? value) =>
-      value != null && !PhoneNumberService.I.validate(value)
-      ? 'برجاء ادخال رقم هاتف صالح'
-      : null;
 }

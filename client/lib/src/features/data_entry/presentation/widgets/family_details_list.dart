@@ -12,15 +12,13 @@ class FamilyDetailsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverList(
       delegate: SliverChildListDelegate([
-        for (final MapEntry(key: personType, value: phone)
-            in family.familyAdminsPhones?.entries ?? {})
-          PhoneNumberPropertyWidget(
-            'رقم هاتف ال$personType',
-            phone,
-            (n) => LauncherService.I.launchCall(
-              PhoneNumberService.I.formatInternational(n),
-            ),
+        PhoneBookSection(
+          showOwnNumbers: false,
+          create: (_) => PhoneBookCubit.forFamily(familyId: family.id),
+          onCall: (n) => LauncherService.I.launchCall(
+            PhoneNumberService.I.formatInternational(n),
           ),
+        ),
         CopiablePropertyWidget(
           'العنوان والموقع',
           family.address?.toString(),

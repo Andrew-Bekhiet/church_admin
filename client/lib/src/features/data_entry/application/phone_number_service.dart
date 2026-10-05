@@ -31,4 +31,22 @@ class PhoneNumberService {
         ? IsoCode.EG
         : null,
   ).international;
+
+  String? toE164(String phone) => switch (_parse(phone)) {
+    final parsed when parsed.isValid() => parsed.international,
+    _ => null,
+  };
+
+  String toDisplay(String e164) => switch (PhoneNumber.parse(e164)) {
+    PhoneNumber(isoCode: IsoCode.EG, :final nsn) => '0$nsn',
+    final parsed => parsed.international,
+  };
+
+  PhoneNumber _parse(String phone) => PhoneNumber.parse(
+    phone,
+    destinationCountry:
+        PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
+        ? IsoCode.EG
+        : null,
+  );
 }

@@ -21,19 +21,13 @@ class PersonContactSection extends StatelessWidget {
             title: const Text('الرقم القومي'),
             subtitle: Text(person.nationalId?.toString() ?? ''),
           ),
-        PhoneNumberPropertyWidget(
-          'رقم الهاتف',
-          person.mainPhone ?? '',
-          (n) => _phoneCall(context, n),
-          addToContacts: (n) => _contactAdd(context, n, person),
-        ),
-        ...person.otherPhones.entries.map(
-          (e) => PhoneNumberPropertyWidget(
-            e.key,
-            e.value,
-            (n) => _phoneCall(context, n),
-            addToContacts: (n) => _contactAdd(context, n, person),
+        PhoneBookSection(
+          create: (_) => PhoneBookCubit.forPerson(
+            personId: person.id,
+            familyId: person.family?.id ?? person.familyId,
           ),
+          onCall: (n) => _phoneCall(context, n),
+          onAddToContacts: (n) => _contactAdd(context, n, person),
         ),
         CopiablePropertyWidget(
           'العنوان والموقع',

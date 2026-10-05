@@ -26,6 +26,7 @@ class DatabaseService {
   late final stores = StoresDAO(db: this);
 
   late final persons = PersonsDAO(db: this);
+  late final contacts = ContactsDAO(db: this);
 
   late final services = ServicesDAO(db: this);
   late final classes = ClassesDAO(db: this);

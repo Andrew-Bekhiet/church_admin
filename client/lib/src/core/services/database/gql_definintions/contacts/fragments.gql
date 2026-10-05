@@ -1,0 +1,26 @@
+fragment PhoneContact on Contacts {
+  id
+  personId
+  familyId
+  personTypeId
+  label
+  phone
+  isMainPhone
+}
+
+fragment FamilyPhoneContact on ResolvedContacts {
+  id
+  personId
+  familyId
+  personTypeId
+  label
+  phone
+  isMainPhone
+  personType {
+    id
+    name
+    order
+    isFamilyAdmin
+    isHidden
+  }
+}

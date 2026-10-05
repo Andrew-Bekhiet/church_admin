@@ -1,6 +1,7 @@
 export 'features/advanced_search.dart';
 export 'features/attendance.dart';
 export 'features/auth.dart';
+export 'features/contacts.dart';
 export 'features/data_analysis.dart';
 export 'features/data_entry.dart';
 export 'features/data_export.dart';
