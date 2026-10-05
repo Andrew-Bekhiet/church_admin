@@ -513,7 +513,7 @@ const documentNodeQueryhistoryMeetingRoster = DocumentNode(
                   selectionSet: null,
                 ),
                 FieldNode(
-                  name: NameNode(value: 'mainPhone'),
+                  name: NameNode(value: 'phones'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -589,7 +589,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     this.personId,
     this.meetingId,
     this.name,
-    this.mainPhone,
+    this.phones,
     this.gender,
     this.color,
     this.studyYearId,
@@ -606,7 +606,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     final l$personId = json['personId'];
     final l$meetingId = json['meetingId'];
     final l$name = json['name'];
-    final l$mainPhone = json['mainPhone'];
+    final l$phones = json['phones'];
     final l$gender = json['gender'];
     final l$color = json['color'];
     final l$studyYearId = json['studyYearId'];
@@ -619,7 +619,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
       personId: l$personId == null ? null : stringToUuid(l$personId),
       meetingId: l$meetingId == null ? null : stringToUuid(l$meetingId),
       name: (l$name as String?),
-      mainPhone: (l$mainPhone as String?),
+      phones: (l$phones as List<dynamic>?)?.map((e) => (e as String)).toList(),
       gender: (l$gender as bool?),
       color: (l$color as int?),
       studyYearId: (l$studyYearId as int?),
@@ -639,7 +639,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
 
   final String? name;
 
-  final String? mainPhone;
+  final List<String>? phones;
 
   final bool? gender;
 
@@ -669,8 +669,8 @@ class Query_historyMeetingRoster_historyMeetingRoster {
         : uuidToString(l$meetingId);
     final l$name = name;
     _resultData['name'] = l$name;
-    final l$mainPhone = mainPhone;
-    _resultData['mainPhone'] = l$mainPhone;
+    final l$phones = phones;
+    _resultData['phones'] = l$phones?.map((e) => e).toList();
     final l$gender = gender;
     _resultData['gender'] = l$gender;
     final l$color = color;
@@ -697,7 +697,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     final l$personId = personId;
     final l$meetingId = meetingId;
     final l$name = name;
-    final l$mainPhone = mainPhone;
+    final l$phones = phones;
     final l$gender = gender;
     final l$color = color;
     final l$studyYearId = studyYearId;
@@ -710,7 +710,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
       l$personId,
       l$meetingId,
       l$name,
-      l$mainPhone,
+      l$phones == null ? null : Object.hashAll(l$phones.map((v) => v)),
       l$gender,
       l$color,
       l$studyYearId,
@@ -746,9 +746,20 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$mainPhone = mainPhone;
-    final lOther$mainPhone = other.mainPhone;
-    if (l$mainPhone != lOther$mainPhone) {
+    final l$phones = phones;
+    final lOther$phones = other.phones;
+    if (l$phones != null && lOther$phones != null) {
+      if (l$phones.length != lOther$phones.length) {
+        return false;
+      }
+      for (int i = 0; i < l$phones.length; i++) {
+        final l$phones$entry = l$phones[i];
+        final lOther$phones$entry = lOther$phones[i];
+        if (l$phones$entry != lOther$phones$entry) {
+          return false;
+        }
+      }
+    } else if (l$phones != lOther$phones) {
       return false;
     }
     final l$gender = gender;
@@ -818,7 +829,7 @@ abstract class CopyWith_Query_historyMeetingRoster_historyMeetingRoster<TRes> {
     UuidValue? personId,
     UuidValue? meetingId,
     String? name,
-    String? mainPhone,
+    List<String>? phones,
     bool? gender,
     int? color,
     int? studyYearId,
@@ -847,7 +858,7 @@ class _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
     Object? personId = _undefined,
     Object? meetingId = _undefined,
     Object? name = _undefined,
-    Object? mainPhone = _undefined,
+    Object? phones = _undefined,
     Object? gender = _undefined,
     Object? color = _undefined,
     Object? studyYearId = _undefined,
@@ -865,9 +876,9 @@ class _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
           ? _instance.meetingId
           : (meetingId as UuidValue?),
       name: name == _undefined ? _instance.name : (name as String?),
-      mainPhone: mainPhone == _undefined
-          ? _instance.mainPhone
-          : (mainPhone as String?),
+      phones: phones == _undefined
+          ? _instance.phones
+          : (phones as List<String>?),
       gender: gender == _undefined ? _instance.gender : (gender as bool?),
       color: color == _undefined ? _instance.color : (color as int?),
       studyYearId: studyYearId == _undefined
@@ -902,7 +913,7 @@ class _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
     UuidValue? personId,
     UuidValue? meetingId,
     String? name,
-    String? mainPhone,
+    List<String>? phones,
     bool? gender,
     int? color,
     int? studyYearId,

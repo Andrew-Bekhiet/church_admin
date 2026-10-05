@@ -47,6 +47,7 @@ select_permissions:
         - color
         - photo_updated_at
         - blurhash
+        - phones
       filter:
         _and:
           - _exists:

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
@@ -73,6 +74,7 @@ class _EditPersonState extends State<EditPerson> {
           ),
       onDelete: (object) => DatabaseService.I.persons.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
+      hasUnsavedInput: () => _phoneContacts.hasUnsavedInput,
       newObject:
           oldPerson ??
           Person(
@@ -134,8 +136,24 @@ class _EditPersonState extends State<EditPerson> {
         classes: classesAndGroupsData?.classes ?? initialPerson.classes,
         groups: classesAndGroupsData?.groups ?? initialPerson.groups,
       );
+      final editedPerson = _controller.newObject;
+      bool isUntouched<V>(V? Function(Person) field) =>
+          const DeepCollectionEquality().equals(
+            field(editedPerson),
+            field(initialPerson),
+          );
       _controller = _controller.copyWith(
-        newObject: populatedInitialPerson,
+        newObject: editedPerson.copyWith(
+          services: isUntouched((p) => p.services)
+              ? populatedInitialPerson.services
+              : editedPerson.services,
+          classes: isUntouched((p) => p.classes)
+              ? populatedInitialPerson.classes
+              : editedPerson.classes,
+          groups: isUntouched((p) => p.groups)
+              ? populatedInitialPerson.groups
+              : editedPerson.groups,
+        ),
         initialObject: populatedInitialPerson,
       );
       _classesAndGroupsLoaded = true;

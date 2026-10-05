@@ -1,6 +1,674 @@
 // Part 36 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_HistoryMeetingsAvgOrderBy<TRes> {
+  factory CopyWith_Input_HistoryMeetingsAvgOrderBy(
+    Input_HistoryMeetingsAvgOrderBy instance,
+    TRes Function(Input_HistoryMeetingsAvgOrderBy) then,
+  ) = _CopyWithImpl_Input_HistoryMeetingsAvgOrderBy;
+
+  factory CopyWith_Input_HistoryMeetingsAvgOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryMeetingsAvgOrderBy;
+
+  TRes call({Enum_OrderBy? color, Enum_OrderBy? serviceStudyYear});
+}
+
+class _CopyWithImpl_Input_HistoryMeetingsAvgOrderBy<TRes>
+    implements CopyWith_Input_HistoryMeetingsAvgOrderBy<TRes> {
+  _CopyWithImpl_Input_HistoryMeetingsAvgOrderBy(this._instance, this._then);
+
+  final Input_HistoryMeetingsAvgOrderBy _instance;
+
+  final TRes Function(Input_HistoryMeetingsAvgOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? color = _undefined,
+    Object? serviceStudyYear = _undefined,
+  }) => _then(
+    Input_HistoryMeetingsAvgOrderBy._({
+      ..._instance._$data,
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_HistoryMeetingsAvgOrderBy<TRes>
+    implements CopyWith_Input_HistoryMeetingsAvgOrderBy<TRes> {
+  _CopyWithStubImpl_Input_HistoryMeetingsAvgOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? color, Enum_OrderBy? serviceStudyYear}) => _res;
+}
+
+class Input_HistoryMeetingsBoolExp {
+  factory Input_HistoryMeetingsBoolExp({
+    List<Input_HistoryMeetingsBoolExp>? $_and,
+    Input_HistoryMeetingsBoolExp? $_not,
+    List<Input_HistoryMeetingsBoolExp>? $_or,
+    Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
+    Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_MeetingAudienceComparisonExp? audience,
+    Input_BigintComparisonExp? color,
+    Input_HistoryMeetingDaysBoolExp? days,
+    Input_HistoryMeetingDaysAggregateBoolExp? daysAggregate,
+    Input_GroupsBoolExp? group,
+    Input_UuidComparisonExp? groupId,
+    Input_UuidComparisonExp? id,
+    Input_BooleanComparisonExp? isArchived,
+    Input_StringComparisonExp? name,
+    Input_ServicesBoolExp? service,
+    Input_BooleanComparisonExp? serviceGender,
+    Input_UuidComparisonExp? serviceId,
+    Input_IntComparisonExp? serviceStudyYear,
+    Input_BooleanComparisonExp? showKodasCheckbox,
+    Input_StudyYearsBoolExp? studyYear,
+  }) => Input_HistoryMeetingsBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
+    if (attendanceHistoryAggregate != null)
+      r'attendanceHistoryAggregate': attendanceHistoryAggregate,
+    if (audience != null) r'audience': audience,
+    if (color != null) r'color': color,
+    if (days != null) r'days': days,
+    if (daysAggregate != null) r'daysAggregate': daysAggregate,
+    if (group != null) r'group': group,
+    if (groupId != null) r'groupId': groupId,
+    if (id != null) r'id': id,
+    if (isArchived != null) r'isArchived': isArchived,
+    if (name != null) r'name': name,
+    if (service != null) r'service': service,
+    if (serviceGender != null) r'serviceGender': serviceGender,
+    if (serviceId != null) r'serviceId': serviceId,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (showKodasCheckbox != null) r'showKodasCheckbox': showKodasCheckbox,
+    if (studyYear != null) r'studyYear': studyYear,
+  });
+
+  Input_HistoryMeetingsBoolExp._(this._$data);
+
+  factory Input_HistoryMeetingsBoolExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map(
+            (e) => Input_HistoryMeetingsBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
+          ? null
+          : Input_HistoryMeetingsBoolExp.fromJson(
+              (l$$_not as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map(
+            (e) => Input_HistoryMeetingsBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('attendanceHistory')) {
+      final l$attendanceHistory = data['attendanceHistory'];
+      result$data['attendanceHistory'] = l$attendanceHistory == null
+          ? null
+          : Input_HistoryAttendanceHistoryBoolExp.fromJson(
+              (l$attendanceHistory as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('attendanceHistoryAggregate')) {
+      final l$attendanceHistoryAggregate = data['attendanceHistoryAggregate'];
+      result$data['attendanceHistoryAggregate'] =
+          l$attendanceHistoryAggregate == null
+          ? null
+          : Input_HistoryAttendanceHistoryAggregateBoolExp.fromJson(
+              (l$attendanceHistoryAggregate as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('audience')) {
+      final l$audience = data['audience'];
+      result$data['audience'] = l$audience == null
+          ? null
+          : Input_MeetingAudienceComparisonExp.fromJson(
+              (l$audience as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : Input_BigintComparisonExp.fromJson(
+              (l$color as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('days')) {
+      final l$days = data['days'];
+      result$data['days'] = l$days == null
+          ? null
+          : Input_HistoryMeetingDaysBoolExp.fromJson(
+              (l$days as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('daysAggregate')) {
+      final l$daysAggregate = data['daysAggregate'];
+      result$data['daysAggregate'] = l$daysAggregate == null
+          ? null
+          : Input_HistoryMeetingDaysAggregateBoolExp.fromJson(
+              (l$daysAggregate as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('group')) {
+      final l$group = data['group'];
+      result$data['group'] = l$group == null
+          ? null
+          : Input_GroupsBoolExp.fromJson((l$group as Map<String, dynamic>));
+    }
+    if (data.containsKey('groupId')) {
+      final l$groupId = data['groupId'];
+      result$data['groupId'] = l$groupId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$groupId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('isArchived')) {
+      final l$isArchived = data['isArchived'];
+      result$data['isArchived'] = l$isArchived == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$isArchived as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$name as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('service')) {
+      final l$service = data['service'];
+      result$data['service'] = l$service == null
+          ? null
+          : Input_ServicesBoolExp.fromJson((l$service as Map<String, dynamic>));
+    }
+    if (data.containsKey('serviceGender')) {
+      final l$serviceGender = data['serviceGender'];
+      result$data['serviceGender'] = l$serviceGender == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$serviceGender as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('serviceId')) {
+      final l$serviceId = data['serviceId'];
+      result$data['serviceId'] = l$serviceId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$serviceId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = data['serviceStudyYear'];
+      result$data['serviceStudyYear'] = l$serviceStudyYear == null
+          ? null
+          : Input_IntComparisonExp.fromJson(
+              (l$serviceStudyYear as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('showKodasCheckbox')) {
+      final l$showKodasCheckbox = data['showKodasCheckbox'];
+      result$data['showKodasCheckbox'] = l$showKodasCheckbox == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$showKodasCheckbox as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('studyYear')) {
+      final l$studyYear = data['studyYear'];
+      result$data['studyYear'] = l$studyYear == null
+          ? null
+          : Input_StudyYearsBoolExp.fromJson(
+              (l$studyYear as Map<String, dynamic>),
+            );
+    }
+    return Input_HistoryMeetingsBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_HistoryMeetingsBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_HistoryMeetingsBoolExp>?);
+
+  Input_HistoryMeetingsBoolExp? get $_not =>
+      (_$data['_not'] as Input_HistoryMeetingsBoolExp?);
+
+  List<Input_HistoryMeetingsBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_HistoryMeetingsBoolExp>?);
+
+  Input_HistoryAttendanceHistoryBoolExp? get attendanceHistory =>
+      (_$data['attendanceHistory'] as Input_HistoryAttendanceHistoryBoolExp?);
+
+  Input_HistoryAttendanceHistoryAggregateBoolExp?
+  get attendanceHistoryAggregate =>
+      (_$data['attendanceHistoryAggregate']
+          as Input_HistoryAttendanceHistoryAggregateBoolExp?);
+
+  Input_MeetingAudienceComparisonExp? get audience =>
+      (_$data['audience'] as Input_MeetingAudienceComparisonExp?);
+
+  Input_BigintComparisonExp? get color =>
+      (_$data['color'] as Input_BigintComparisonExp?);
+
+  Input_HistoryMeetingDaysBoolExp? get days =>
+      (_$data['days'] as Input_HistoryMeetingDaysBoolExp?);
+
+  Input_HistoryMeetingDaysAggregateBoolExp? get daysAggregate =>
+      (_$data['daysAggregate'] as Input_HistoryMeetingDaysAggregateBoolExp?);
+
+  Input_GroupsBoolExp? get group => (_$data['group'] as Input_GroupsBoolExp?);
+
+  Input_UuidComparisonExp? get groupId =>
+      (_$data['groupId'] as Input_UuidComparisonExp?);
+
+  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
+  Input_BooleanComparisonExp? get isArchived =>
+      (_$data['isArchived'] as Input_BooleanComparisonExp?);
+
+  Input_StringComparisonExp? get name =>
+      (_$data['name'] as Input_StringComparisonExp?);
+
+  Input_ServicesBoolExp? get service =>
+      (_$data['service'] as Input_ServicesBoolExp?);
+
+  Input_BooleanComparisonExp? get serviceGender =>
+      (_$data['serviceGender'] as Input_BooleanComparisonExp?);
+
+  Input_UuidComparisonExp? get serviceId =>
+      (_$data['serviceId'] as Input_UuidComparisonExp?);
+
+  Input_IntComparisonExp? get serviceStudyYear =>
+      (_$data['serviceStudyYear'] as Input_IntComparisonExp?);
+
+  Input_BooleanComparisonExp? get showKodasCheckbox =>
+      (_$data['showKodasCheckbox'] as Input_BooleanComparisonExp?);
+
+  Input_StudyYearsBoolExp? get studyYear =>
+      (_$data['studyYear'] as Input_StudyYearsBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
+    }
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('attendanceHistory')) {
+      final l$attendanceHistory = attendanceHistory;
+      result$data['attendanceHistory'] = l$attendanceHistory?.toJson();
+    }
+    if (_$data.containsKey('attendanceHistoryAggregate')) {
+      final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+      result$data['attendanceHistoryAggregate'] = l$attendanceHistoryAggregate
+          ?.toJson();
+    }
+    if (_$data.containsKey('audience')) {
+      final l$audience = audience;
+      result$data['audience'] = l$audience?.toJson();
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color?.toJson();
+    }
+    if (_$data.containsKey('days')) {
+      final l$days = days;
+      result$data['days'] = l$days?.toJson();
+    }
+    if (_$data.containsKey('daysAggregate')) {
+      final l$daysAggregate = daysAggregate;
+      result$data['daysAggregate'] = l$daysAggregate?.toJson();
+    }
+    if (_$data.containsKey('group')) {
+      final l$group = group;
+      result$data['group'] = l$group?.toJson();
+    }
+    if (_$data.containsKey('groupId')) {
+      final l$groupId = groupId;
+      result$data['groupId'] = l$groupId?.toJson();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('isArchived')) {
+      final l$isArchived = isArchived;
+      result$data['isArchived'] = l$isArchived?.toJson();
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name?.toJson();
+    }
+    if (_$data.containsKey('service')) {
+      final l$service = service;
+      result$data['service'] = l$service?.toJson();
+    }
+    if (_$data.containsKey('serviceGender')) {
+      final l$serviceGender = serviceGender;
+      result$data['serviceGender'] = l$serviceGender?.toJson();
+    }
+    if (_$data.containsKey('serviceId')) {
+      final l$serviceId = serviceId;
+      result$data['serviceId'] = l$serviceId?.toJson();
+    }
+    if (_$data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = serviceStudyYear;
+      result$data['serviceStudyYear'] = l$serviceStudyYear?.toJson();
+    }
+    if (_$data.containsKey('showKodasCheckbox')) {
+      final l$showKodasCheckbox = showKodasCheckbox;
+      result$data['showKodasCheckbox'] = l$showKodasCheckbox?.toJson();
+    }
+    if (_$data.containsKey('studyYear')) {
+      final l$studyYear = studyYear;
+      result$data['studyYear'] = l$studyYear?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryMeetingsBoolExp<Input_HistoryMeetingsBoolExp>
+  get copyWith => CopyWith_Input_HistoryMeetingsBoolExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryMeetingsBoolExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
+      return false;
+    }
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
+      return false;
+    }
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
+      return false;
+    }
+    if (l$$_not != lOther$$_not) {
+      return false;
+    }
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
+      return false;
+    }
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$attendanceHistory = attendanceHistory;
+    final lOther$attendanceHistory = other.attendanceHistory;
+    if (_$data.containsKey('attendanceHistory') !=
+        other._$data.containsKey('attendanceHistory')) {
+      return false;
+    }
+    if (l$attendanceHistory != lOther$attendanceHistory) {
+      return false;
+    }
+    final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+    final lOther$attendanceHistoryAggregate = other.attendanceHistoryAggregate;
+    if (_$data.containsKey('attendanceHistoryAggregate') !=
+        other._$data.containsKey('attendanceHistoryAggregate')) {
+      return false;
+    }
+    if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
+      return false;
+    }
+    final l$audience = audience;
+    final lOther$audience = other.audience;
+    if (_$data.containsKey('audience') !=
+        other._$data.containsKey('audience')) {
+      return false;
+    }
+    if (l$audience != lOther$audience) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$days = days;
+    final lOther$days = other.days;
+    if (_$data.containsKey('days') != other._$data.containsKey('days')) {
+      return false;
+    }
+    if (l$days != lOther$days) {
+      return false;
+    }
+    final l$daysAggregate = daysAggregate;
+    final lOther$daysAggregate = other.daysAggregate;
+    if (_$data.containsKey('daysAggregate') !=
+        other._$data.containsKey('daysAggregate')) {
+      return false;
+    }
+    if (l$daysAggregate != lOther$daysAggregate) {
+      return false;
+    }
+    final l$group = group;
+    final lOther$group = other.group;
+    if (_$data.containsKey('group') != other._$data.containsKey('group')) {
+      return false;
+    }
+    if (l$group != lOther$group) {
+      return false;
+    }
+    final l$groupId = groupId;
+    final lOther$groupId = other.groupId;
+    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
+      return false;
+    }
+    if (l$groupId != lOther$groupId) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$isArchived = isArchived;
+    final lOther$isArchived = other.isArchived;
+    if (_$data.containsKey('isArchived') !=
+        other._$data.containsKey('isArchived')) {
+      return false;
+    }
+    if (l$isArchived != lOther$isArchived) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$service = service;
+    final lOther$service = other.service;
+    if (_$data.containsKey('service') != other._$data.containsKey('service')) {
+      return false;
+    }
+    if (l$service != lOther$service) {
+      return false;
+    }
+    final l$serviceGender = serviceGender;
+    final lOther$serviceGender = other.serviceGender;
+    if (_$data.containsKey('serviceGender') !=
+        other._$data.containsKey('serviceGender')) {
+      return false;
+    }
+    if (l$serviceGender != lOther$serviceGender) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (_$data.containsKey('serviceId') !=
+        other._$data.containsKey('serviceId')) {
+      return false;
+    }
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (_$data.containsKey('serviceStudyYear') !=
+        other._$data.containsKey('serviceStudyYear')) {
+      return false;
+    }
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    final l$showKodasCheckbox = showKodasCheckbox;
+    final lOther$showKodasCheckbox = other.showKodasCheckbox;
+    if (_$data.containsKey('showKodasCheckbox') !=
+        other._$data.containsKey('showKodasCheckbox')) {
+      return false;
+    }
+    if (l$showKodasCheckbox != lOther$showKodasCheckbox) {
+      return false;
+    }
+    final l$studyYear = studyYear;
+    final lOther$studyYear = other.studyYear;
+    if (_$data.containsKey('studyYear') !=
+        other._$data.containsKey('studyYear')) {
+      return false;
+    }
+    if (l$studyYear != lOther$studyYear) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$attendanceHistory = attendanceHistory;
+    final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+    final l$audience = audience;
+    final l$color = color;
+    final l$days = days;
+    final l$daysAggregate = daysAggregate;
+    final l$group = group;
+    final l$groupId = groupId;
+    final l$id = id;
+    final l$isArchived = isArchived;
+    final l$name = name;
+    final l$service = service;
+    final l$serviceGender = serviceGender;
+    final l$serviceId = serviceId;
+    final l$serviceStudyYear = serviceStudyYear;
+    final l$showKodasCheckbox = showKodasCheckbox;
+    final l$studyYear = studyYear;
+    return Object.hashAll([
+      _$data.containsKey('_and')
+          ? l$$_and == null
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
+      _$data.containsKey('attendanceHistoryAggregate')
+          ? l$attendanceHistoryAggregate
+          : const {},
+      _$data.containsKey('audience') ? l$audience : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('days') ? l$days : const {},
+      _$data.containsKey('daysAggregate') ? l$daysAggregate : const {},
+      _$data.containsKey('group') ? l$group : const {},
+      _$data.containsKey('groupId') ? l$groupId : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('isArchived') ? l$isArchived : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('service') ? l$service : const {},
+      _$data.containsKey('serviceGender') ? l$serviceGender : const {},
+      _$data.containsKey('serviceId') ? l$serviceId : const {},
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('showKodasCheckbox') ? l$showKodasCheckbox : const {},
+      _$data.containsKey('studyYear') ? l$studyYear : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
   factory CopyWith_Input_HistoryMeetingsBoolExp(
     Input_HistoryMeetingsBoolExp instance,
@@ -1951,554 +2619,4 @@ class Input_HistoryMeetingsOnConflict {
       _$data.containsKey('where') ? l$where : const {},
     ]);
   }
-}
-
-abstract class CopyWith_Input_HistoryMeetingsOnConflict<TRes> {
-  factory CopyWith_Input_HistoryMeetingsOnConflict(
-    Input_HistoryMeetingsOnConflict instance,
-    TRes Function(Input_HistoryMeetingsOnConflict) then,
-  ) = _CopyWithImpl_Input_HistoryMeetingsOnConflict;
-
-  factory CopyWith_Input_HistoryMeetingsOnConflict.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryMeetingsOnConflict;
-
-  TRes call({
-    Enum_HistoryMeetingsConstraint? constraint,
-    List<Enum_HistoryMeetingsUpdateColumn>? updateColumns,
-    Input_HistoryMeetingsBoolExp? where,
-  });
-  CopyWith_Input_HistoryMeetingsBoolExp<TRes> get where;
-}
-
-class _CopyWithImpl_Input_HistoryMeetingsOnConflict<TRes>
-    implements CopyWith_Input_HistoryMeetingsOnConflict<TRes> {
-  _CopyWithImpl_Input_HistoryMeetingsOnConflict(this._instance, this._then);
-
-  final Input_HistoryMeetingsOnConflict _instance;
-
-  final TRes Function(Input_HistoryMeetingsOnConflict) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? constraint = _undefined,
-    Object? updateColumns = _undefined,
-    Object? where = _undefined,
-  }) => _then(
-    Input_HistoryMeetingsOnConflict._({
-      ..._instance._$data,
-      if (constraint != _undefined && constraint != null)
-        'constraint': (constraint as Enum_HistoryMeetingsConstraint),
-      if (updateColumns != _undefined && updateColumns != null)
-        'updateColumns':
-            (updateColumns as List<Enum_HistoryMeetingsUpdateColumn>),
-      if (where != _undefined)
-        'where': (where as Input_HistoryMeetingsBoolExp?),
-    }),
-  );
-
-  CopyWith_Input_HistoryMeetingsBoolExp<TRes> get where {
-    final local$where = _instance.where;
-    return local$where == null
-        ? CopyWith_Input_HistoryMeetingsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryMeetingsBoolExp(
-            local$where,
-            (e) => call(where: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_HistoryMeetingsOnConflict<TRes>
-    implements CopyWith_Input_HistoryMeetingsOnConflict<TRes> {
-  _CopyWithStubImpl_Input_HistoryMeetingsOnConflict(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_HistoryMeetingsConstraint? constraint,
-    List<Enum_HistoryMeetingsUpdateColumn>? updateColumns,
-    Input_HistoryMeetingsBoolExp? where,
-  }) => _res;
-
-  CopyWith_Input_HistoryMeetingsBoolExp<TRes> get where =>
-      CopyWith_Input_HistoryMeetingsBoolExp.stub(_res);
-}
-
-class Input_HistoryMeetingsOrderBy {
-  factory Input_HistoryMeetingsOrderBy({
-    Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
-    Enum_OrderBy? audience,
-    Enum_OrderBy? color,
-    Input_HistoryMeetingDaysAggregateOrderBy? daysAggregate,
-    Input_GroupsOrderBy? group,
-    Enum_OrderBy? groupId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? isArchived,
-    Enum_OrderBy? name,
-    Input_ServicesOrderBy? service,
-    Enum_OrderBy? serviceGender,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? serviceStudyYear,
-    Enum_OrderBy? showKodasCheckbox,
-    Input_StudyYearsOrderBy? studyYear,
-  }) => Input_HistoryMeetingsOrderBy._({
-    if (attendanceHistoryAggregate != null)
-      r'attendanceHistoryAggregate': attendanceHistoryAggregate,
-    if (audience != null) r'audience': audience,
-    if (color != null) r'color': color,
-    if (daysAggregate != null) r'daysAggregate': daysAggregate,
-    if (group != null) r'group': group,
-    if (groupId != null) r'groupId': groupId,
-    if (id != null) r'id': id,
-    if (isArchived != null) r'isArchived': isArchived,
-    if (name != null) r'name': name,
-    if (service != null) r'service': service,
-    if (serviceGender != null) r'serviceGender': serviceGender,
-    if (serviceId != null) r'serviceId': serviceId,
-    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-    if (showKodasCheckbox != null) r'showKodasCheckbox': showKodasCheckbox,
-    if (studyYear != null) r'studyYear': studyYear,
-  });
-
-  Input_HistoryMeetingsOrderBy._(this._$data);
-
-  factory Input_HistoryMeetingsOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('attendanceHistoryAggregate')) {
-      final l$attendanceHistoryAggregate = data['attendanceHistoryAggregate'];
-      result$data['attendanceHistoryAggregate'] =
-          l$attendanceHistoryAggregate == null
-          ? null
-          : Input_HistoryAttendanceHistoryAggregateOrderBy.fromJson(
-              (l$attendanceHistoryAggregate as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('audience')) {
-      final l$audience = data['audience'];
-      result$data['audience'] = l$audience == null
-          ? null
-          : fromJson_Enum_OrderBy((l$audience as String));
-    }
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = l$color == null
-          ? null
-          : fromJson_Enum_OrderBy((l$color as String));
-    }
-    if (data.containsKey('daysAggregate')) {
-      final l$daysAggregate = data['daysAggregate'];
-      result$data['daysAggregate'] = l$daysAggregate == null
-          ? null
-          : Input_HistoryMeetingDaysAggregateOrderBy.fromJson(
-              (l$daysAggregate as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('group')) {
-      final l$group = data['group'];
-      result$data['group'] = l$group == null
-          ? null
-          : Input_GroupsOrderBy.fromJson((l$group as Map<String, dynamic>));
-    }
-    if (data.containsKey('groupId')) {
-      final l$groupId = data['groupId'];
-      result$data['groupId'] = l$groupId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$groupId as String));
-    }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null
-          ? null
-          : fromJson_Enum_OrderBy((l$id as String));
-    }
-    if (data.containsKey('isArchived')) {
-      final l$isArchived = data['isArchived'];
-      result$data['isArchived'] = l$isArchived == null
-          ? null
-          : fromJson_Enum_OrderBy((l$isArchived as String));
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = l$name == null
-          ? null
-          : fromJson_Enum_OrderBy((l$name as String));
-    }
-    if (data.containsKey('service')) {
-      final l$service = data['service'];
-      result$data['service'] = l$service == null
-          ? null
-          : Input_ServicesOrderBy.fromJson((l$service as Map<String, dynamic>));
-    }
-    if (data.containsKey('serviceGender')) {
-      final l$serviceGender = data['serviceGender'];
-      result$data['serviceGender'] = l$serviceGender == null
-          ? null
-          : fromJson_Enum_OrderBy((l$serviceGender as String));
-    }
-    if (data.containsKey('serviceId')) {
-      final l$serviceId = data['serviceId'];
-      result$data['serviceId'] = l$serviceId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$serviceId as String));
-    }
-    if (data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = data['serviceStudyYear'];
-      result$data['serviceStudyYear'] = l$serviceStudyYear == null
-          ? null
-          : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
-    }
-    if (data.containsKey('showKodasCheckbox')) {
-      final l$showKodasCheckbox = data['showKodasCheckbox'];
-      result$data['showKodasCheckbox'] = l$showKodasCheckbox == null
-          ? null
-          : fromJson_Enum_OrderBy((l$showKodasCheckbox as String));
-    }
-    if (data.containsKey('studyYear')) {
-      final l$studyYear = data['studyYear'];
-      result$data['studyYear'] = l$studyYear == null
-          ? null
-          : Input_StudyYearsOrderBy.fromJson(
-              (l$studyYear as Map<String, dynamic>),
-            );
-    }
-    return Input_HistoryMeetingsOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_HistoryAttendanceHistoryAggregateOrderBy?
-  get attendanceHistoryAggregate =>
-      (_$data['attendanceHistoryAggregate']
-          as Input_HistoryAttendanceHistoryAggregateOrderBy?);
-
-  Enum_OrderBy? get audience => (_$data['audience'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-
-  Input_HistoryMeetingDaysAggregateOrderBy? get daysAggregate =>
-      (_$data['daysAggregate'] as Input_HistoryMeetingDaysAggregateOrderBy?);
-
-  Input_GroupsOrderBy? get group => (_$data['group'] as Input_GroupsOrderBy?);
-
-  Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get isArchived => (_$data['isArchived'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
-
-  Input_ServicesOrderBy? get service =>
-      (_$data['service'] as Input_ServicesOrderBy?);
-
-  Enum_OrderBy? get serviceGender => (_$data['serviceGender'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get serviceStudyYear =>
-      (_$data['serviceStudyYear'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get showKodasCheckbox =>
-      (_$data['showKodasCheckbox'] as Enum_OrderBy?);
-
-  Input_StudyYearsOrderBy? get studyYear =>
-      (_$data['studyYear'] as Input_StudyYearsOrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('attendanceHistoryAggregate')) {
-      final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-      result$data['attendanceHistoryAggregate'] = l$attendanceHistoryAggregate
-          ?.toJson();
-    }
-    if (_$data.containsKey('audience')) {
-      final l$audience = audience;
-      result$data['audience'] = l$audience == null
-          ? null
-          : toJson_Enum_OrderBy(l$audience);
-    }
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color == null
-          ? null
-          : toJson_Enum_OrderBy(l$color);
-    }
-    if (_$data.containsKey('daysAggregate')) {
-      final l$daysAggregate = daysAggregate;
-      result$data['daysAggregate'] = l$daysAggregate?.toJson();
-    }
-    if (_$data.containsKey('group')) {
-      final l$group = group;
-      result$data['group'] = l$group?.toJson();
-    }
-    if (_$data.containsKey('groupId')) {
-      final l$groupId = groupId;
-      result$data['groupId'] = l$groupId == null
-          ? null
-          : toJson_Enum_OrderBy(l$groupId);
-    }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
-    }
-    if (_$data.containsKey('isArchived')) {
-      final l$isArchived = isArchived;
-      result$data['isArchived'] = l$isArchived == null
-          ? null
-          : toJson_Enum_OrderBy(l$isArchived);
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
-    }
-    if (_$data.containsKey('service')) {
-      final l$service = service;
-      result$data['service'] = l$service?.toJson();
-    }
-    if (_$data.containsKey('serviceGender')) {
-      final l$serviceGender = serviceGender;
-      result$data['serviceGender'] = l$serviceGender == null
-          ? null
-          : toJson_Enum_OrderBy(l$serviceGender);
-    }
-    if (_$data.containsKey('serviceId')) {
-      final l$serviceId = serviceId;
-      result$data['serviceId'] = l$serviceId == null
-          ? null
-          : toJson_Enum_OrderBy(l$serviceId);
-    }
-    if (_$data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = serviceStudyYear;
-      result$data['serviceStudyYear'] = l$serviceStudyYear == null
-          ? null
-          : toJson_Enum_OrderBy(l$serviceStudyYear);
-    }
-    if (_$data.containsKey('showKodasCheckbox')) {
-      final l$showKodasCheckbox = showKodasCheckbox;
-      result$data['showKodasCheckbox'] = l$showKodasCheckbox == null
-          ? null
-          : toJson_Enum_OrderBy(l$showKodasCheckbox);
-    }
-    if (_$data.containsKey('studyYear')) {
-      final l$studyYear = studyYear;
-      result$data['studyYear'] = l$studyYear?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryMeetingsOrderBy<Input_HistoryMeetingsOrderBy>
-  get copyWith => CopyWith_Input_HistoryMeetingsOrderBy(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryMeetingsOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-    final lOther$attendanceHistoryAggregate = other.attendanceHistoryAggregate;
-    if (_$data.containsKey('attendanceHistoryAggregate') !=
-        other._$data.containsKey('attendanceHistoryAggregate')) {
-      return false;
-    }
-    if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
-      return false;
-    }
-    final l$audience = audience;
-    final lOther$audience = other.audience;
-    if (_$data.containsKey('audience') !=
-        other._$data.containsKey('audience')) {
-      return false;
-    }
-    if (l$audience != lOther$audience) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$daysAggregate = daysAggregate;
-    final lOther$daysAggregate = other.daysAggregate;
-    if (_$data.containsKey('daysAggregate') !=
-        other._$data.containsKey('daysAggregate')) {
-      return false;
-    }
-    if (l$daysAggregate != lOther$daysAggregate) {
-      return false;
-    }
-    final l$group = group;
-    final lOther$group = other.group;
-    if (_$data.containsKey('group') != other._$data.containsKey('group')) {
-      return false;
-    }
-    if (l$group != lOther$group) {
-      return false;
-    }
-    final l$groupId = groupId;
-    final lOther$groupId = other.groupId;
-    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
-      return false;
-    }
-    if (l$groupId != lOther$groupId) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$isArchived = isArchived;
-    final lOther$isArchived = other.isArchived;
-    if (_$data.containsKey('isArchived') !=
-        other._$data.containsKey('isArchived')) {
-      return false;
-    }
-    if (l$isArchived != lOther$isArchived) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$service = service;
-    final lOther$service = other.service;
-    if (_$data.containsKey('service') != other._$data.containsKey('service')) {
-      return false;
-    }
-    if (l$service != lOther$service) {
-      return false;
-    }
-    final l$serviceGender = serviceGender;
-    final lOther$serviceGender = other.serviceGender;
-    if (_$data.containsKey('serviceGender') !=
-        other._$data.containsKey('serviceGender')) {
-      return false;
-    }
-    if (l$serviceGender != lOther$serviceGender) {
-      return false;
-    }
-    final l$serviceId = serviceId;
-    final lOther$serviceId = other.serviceId;
-    if (_$data.containsKey('serviceId') !=
-        other._$data.containsKey('serviceId')) {
-      return false;
-    }
-    if (l$serviceId != lOther$serviceId) {
-      return false;
-    }
-    final l$serviceStudyYear = serviceStudyYear;
-    final lOther$serviceStudyYear = other.serviceStudyYear;
-    if (_$data.containsKey('serviceStudyYear') !=
-        other._$data.containsKey('serviceStudyYear')) {
-      return false;
-    }
-    if (l$serviceStudyYear != lOther$serviceStudyYear) {
-      return false;
-    }
-    final l$showKodasCheckbox = showKodasCheckbox;
-    final lOther$showKodasCheckbox = other.showKodasCheckbox;
-    if (_$data.containsKey('showKodasCheckbox') !=
-        other._$data.containsKey('showKodasCheckbox')) {
-      return false;
-    }
-    if (l$showKodasCheckbox != lOther$showKodasCheckbox) {
-      return false;
-    }
-    final l$studyYear = studyYear;
-    final lOther$studyYear = other.studyYear;
-    if (_$data.containsKey('studyYear') !=
-        other._$data.containsKey('studyYear')) {
-      return false;
-    }
-    if (l$studyYear != lOther$studyYear) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-    final l$audience = audience;
-    final l$color = color;
-    final l$daysAggregate = daysAggregate;
-    final l$group = group;
-    final l$groupId = groupId;
-    final l$id = id;
-    final l$isArchived = isArchived;
-    final l$name = name;
-    final l$service = service;
-    final l$serviceGender = serviceGender;
-    final l$serviceId = serviceId;
-    final l$serviceStudyYear = serviceStudyYear;
-    final l$showKodasCheckbox = showKodasCheckbox;
-    final l$studyYear = studyYear;
-    return Object.hashAll([
-      _$data.containsKey('attendanceHistoryAggregate')
-          ? l$attendanceHistoryAggregate
-          : const {},
-      _$data.containsKey('audience') ? l$audience : const {},
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('daysAggregate') ? l$daysAggregate : const {},
-      _$data.containsKey('group') ? l$group : const {},
-      _$data.containsKey('groupId') ? l$groupId : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('isArchived') ? l$isArchived : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('service') ? l$service : const {},
-      _$data.containsKey('serviceGender') ? l$serviceGender : const {},
-      _$data.containsKey('serviceId') ? l$serviceId : const {},
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
-      _$data.containsKey('showKodasCheckbox') ? l$showKodasCheckbox : const {},
-      _$data.containsKey('studyYear') ? l$studyYear : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryMeetingsOrderBy<TRes> {
-  factory CopyWith_Input_HistoryMeetingsOrderBy(
-    Input_HistoryMeetingsOrderBy instance,
-    TRes Function(Input_HistoryMeetingsOrderBy) then,
-  ) = _CopyWithImpl_Input_HistoryMeetingsOrderBy;
-
-  factory CopyWith_Input_HistoryMeetingsOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryMeetingsOrderBy;
-
-  TRes call({
-    Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
-    Enum_OrderBy? audience,
-    Enum_OrderBy? color,
-    Input_HistoryMeetingDaysAggregateOrderBy? daysAggregate,
-    Input_GroupsOrderBy? group,
-    Enum_OrderBy? groupId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? isArchived,
-    Enum_OrderBy? name,
-    Input_ServicesOrderBy? service,
-    Enum_OrderBy? serviceGender,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? serviceStudyYear,
-    Enum_OrderBy? showKodasCheckbox,
-    Input_StudyYearsOrderBy? studyYear,
-  });
-  CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
-  get attendanceHistoryAggregate;
-  CopyWith_Input_HistoryMeetingDaysAggregateOrderBy<TRes> get daysAggregate;
-  CopyWith_Input_GroupsOrderBy<TRes> get group;
-  CopyWith_Input_ServicesOrderBy<TRes> get service;
-  CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear;
 }

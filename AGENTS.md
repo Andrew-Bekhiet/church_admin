@@ -104,6 +104,7 @@ Unit tests are a **design tool**, not a bug-finding tool. Integration and manual
 - **One behaviour per test.** Don't bundle unrelated assertions.
 - **Name tests as behaviour sentences** — `'selecting an existing person makes the user take that person's name'`, not `existingPerson_selectPerson_nameFollowsThePerson`. Say what is observed, never which method ran.
 - **Mock all external services** (DB, network, filesystem). Tests must not depend on ordering or live infra.
+- **Test cubits and blocs with `blocTest`**, never a plain `test` that builds the cubit and closes it by hand. `blocTest` owns the lifecycle; drive the scenario in `act` and assert the resulting state in `expect` or `verify`.
 - **New mocks use `mocktail`.** Tests still on `mockito` migrate when touched: stub every member the mockito nice mock answered by default, and `registerFallbackValue` for custom argument types.
 - **Drive the path production takes.** Simulate app lifecycle through `WidgetsBindingObserver` under `fakeAsync` instead of calling internals such as `LocalAuthService.scheduleReauth()`.
 - **Verify red before trusting green.** Break the line under test, confirm a meaningful failure, restore. A bug fix's regression test must fail on the unfixed code.

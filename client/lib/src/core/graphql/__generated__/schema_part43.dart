@@ -1,6 +1,288 @@
 // Part 43 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_PersonsAggregateOrderBy<TRes> {
+  factory CopyWith_Input_PersonsAggregateOrderBy(
+    Input_PersonsAggregateOrderBy instance,
+    TRes Function(Input_PersonsAggregateOrderBy) then,
+  ) = _CopyWithImpl_Input_PersonsAggregateOrderBy;
+
+  factory CopyWith_Input_PersonsAggregateOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonsAggregateOrderBy;
+
+  TRes call({
+    Input_PersonsAvgOrderBy? avg,
+    Enum_OrderBy? count,
+    Input_PersonsMaxOrderBy? max,
+    Input_PersonsMinOrderBy? min,
+    Input_PersonsStddevOrderBy? stddev,
+    Input_PersonsStddevPopOrderBy? stddevPop,
+    Input_PersonsStddevSampOrderBy? stddevSamp,
+    Input_PersonsSumOrderBy? sum,
+    Input_PersonsVarPopOrderBy? varPop,
+    Input_PersonsVarSampOrderBy? varSamp,
+    Input_PersonsVarianceOrderBy? variance,
+  });
+  CopyWith_Input_PersonsAvgOrderBy<TRes> get avg;
+  CopyWith_Input_PersonsMaxOrderBy<TRes> get max;
+  CopyWith_Input_PersonsMinOrderBy<TRes> get min;
+  CopyWith_Input_PersonsStddevOrderBy<TRes> get stddev;
+  CopyWith_Input_PersonsStddevPopOrderBy<TRes> get stddevPop;
+  CopyWith_Input_PersonsStddevSampOrderBy<TRes> get stddevSamp;
+  CopyWith_Input_PersonsSumOrderBy<TRes> get sum;
+  CopyWith_Input_PersonsVarPopOrderBy<TRes> get varPop;
+  CopyWith_Input_PersonsVarSampOrderBy<TRes> get varSamp;
+  CopyWith_Input_PersonsVarianceOrderBy<TRes> get variance;
+}
+
+class _CopyWithImpl_Input_PersonsAggregateOrderBy<TRes>
+    implements CopyWith_Input_PersonsAggregateOrderBy<TRes> {
+  _CopyWithImpl_Input_PersonsAggregateOrderBy(this._instance, this._then);
+
+  final Input_PersonsAggregateOrderBy _instance;
+
+  final TRes Function(Input_PersonsAggregateOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? avg = _undefined,
+    Object? count = _undefined,
+    Object? max = _undefined,
+    Object? min = _undefined,
+    Object? stddev = _undefined,
+    Object? stddevPop = _undefined,
+    Object? stddevSamp = _undefined,
+    Object? sum = _undefined,
+    Object? varPop = _undefined,
+    Object? varSamp = _undefined,
+    Object? variance = _undefined,
+  }) => _then(
+    Input_PersonsAggregateOrderBy._({
+      ..._instance._$data,
+      if (avg != _undefined) 'avg': (avg as Input_PersonsAvgOrderBy?),
+      if (count != _undefined) 'count': (count as Enum_OrderBy?),
+      if (max != _undefined) 'max': (max as Input_PersonsMaxOrderBy?),
+      if (min != _undefined) 'min': (min as Input_PersonsMinOrderBy?),
+      if (stddev != _undefined)
+        'stddev': (stddev as Input_PersonsStddevOrderBy?),
+      if (stddevPop != _undefined)
+        'stddevPop': (stddevPop as Input_PersonsStddevPopOrderBy?),
+      if (stddevSamp != _undefined)
+        'stddevSamp': (stddevSamp as Input_PersonsStddevSampOrderBy?),
+      if (sum != _undefined) 'sum': (sum as Input_PersonsSumOrderBy?),
+      if (varPop != _undefined)
+        'varPop': (varPop as Input_PersonsVarPopOrderBy?),
+      if (varSamp != _undefined)
+        'varSamp': (varSamp as Input_PersonsVarSampOrderBy?),
+      if (variance != _undefined)
+        'variance': (variance as Input_PersonsVarianceOrderBy?),
+    }),
+  );
+
+  CopyWith_Input_PersonsAvgOrderBy<TRes> get avg {
+    final local$avg = _instance.avg;
+    return local$avg == null
+        ? CopyWith_Input_PersonsAvgOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsAvgOrderBy(local$avg, (e) => call(avg: e));
+  }
+
+  CopyWith_Input_PersonsMaxOrderBy<TRes> get max {
+    final local$max = _instance.max;
+    return local$max == null
+        ? CopyWith_Input_PersonsMaxOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsMaxOrderBy(local$max, (e) => call(max: e));
+  }
+
+  CopyWith_Input_PersonsMinOrderBy<TRes> get min {
+    final local$min = _instance.min;
+    return local$min == null
+        ? CopyWith_Input_PersonsMinOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsMinOrderBy(local$min, (e) => call(min: e));
+  }
+
+  CopyWith_Input_PersonsStddevOrderBy<TRes> get stddev {
+    final local$stddev = _instance.stddev;
+    return local$stddev == null
+        ? CopyWith_Input_PersonsStddevOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsStddevOrderBy(
+            local$stddev,
+            (e) => call(stddev: e),
+          );
+  }
+
+  CopyWith_Input_PersonsStddevPopOrderBy<TRes> get stddevPop {
+    final local$stddevPop = _instance.stddevPop;
+    return local$stddevPop == null
+        ? CopyWith_Input_PersonsStddevPopOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsStddevPopOrderBy(
+            local$stddevPop,
+            (e) => call(stddevPop: e),
+          );
+  }
+
+  CopyWith_Input_PersonsStddevSampOrderBy<TRes> get stddevSamp {
+    final local$stddevSamp = _instance.stddevSamp;
+    return local$stddevSamp == null
+        ? CopyWith_Input_PersonsStddevSampOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsStddevSampOrderBy(
+            local$stddevSamp,
+            (e) => call(stddevSamp: e),
+          );
+  }
+
+  CopyWith_Input_PersonsSumOrderBy<TRes> get sum {
+    final local$sum = _instance.sum;
+    return local$sum == null
+        ? CopyWith_Input_PersonsSumOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsSumOrderBy(local$sum, (e) => call(sum: e));
+  }
+
+  CopyWith_Input_PersonsVarPopOrderBy<TRes> get varPop {
+    final local$varPop = _instance.varPop;
+    return local$varPop == null
+        ? CopyWith_Input_PersonsVarPopOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsVarPopOrderBy(
+            local$varPop,
+            (e) => call(varPop: e),
+          );
+  }
+
+  CopyWith_Input_PersonsVarSampOrderBy<TRes> get varSamp {
+    final local$varSamp = _instance.varSamp;
+    return local$varSamp == null
+        ? CopyWith_Input_PersonsVarSampOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsVarSampOrderBy(
+            local$varSamp,
+            (e) => call(varSamp: e),
+          );
+  }
+
+  CopyWith_Input_PersonsVarianceOrderBy<TRes> get variance {
+    final local$variance = _instance.variance;
+    return local$variance == null
+        ? CopyWith_Input_PersonsVarianceOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsVarianceOrderBy(
+            local$variance,
+            (e) => call(variance: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_PersonsAggregateOrderBy<TRes>
+    implements CopyWith_Input_PersonsAggregateOrderBy<TRes> {
+  _CopyWithStubImpl_Input_PersonsAggregateOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Input_PersonsAvgOrderBy? avg,
+    Enum_OrderBy? count,
+    Input_PersonsMaxOrderBy? max,
+    Input_PersonsMinOrderBy? min,
+    Input_PersonsStddevOrderBy? stddev,
+    Input_PersonsStddevPopOrderBy? stddevPop,
+    Input_PersonsStddevSampOrderBy? stddevSamp,
+    Input_PersonsSumOrderBy? sum,
+    Input_PersonsVarPopOrderBy? varPop,
+    Input_PersonsVarSampOrderBy? varSamp,
+    Input_PersonsVarianceOrderBy? variance,
+  }) => _res;
+
+  CopyWith_Input_PersonsAvgOrderBy<TRes> get avg =>
+      CopyWith_Input_PersonsAvgOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsMaxOrderBy<TRes> get max =>
+      CopyWith_Input_PersonsMaxOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsMinOrderBy<TRes> get min =>
+      CopyWith_Input_PersonsMinOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsStddevOrderBy<TRes> get stddev =>
+      CopyWith_Input_PersonsStddevOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsStddevPopOrderBy<TRes> get stddevPop =>
+      CopyWith_Input_PersonsStddevPopOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsStddevSampOrderBy<TRes> get stddevSamp =>
+      CopyWith_Input_PersonsStddevSampOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsSumOrderBy<TRes> get sum =>
+      CopyWith_Input_PersonsSumOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsVarPopOrderBy<TRes> get varPop =>
+      CopyWith_Input_PersonsVarPopOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsVarSampOrderBy<TRes> get varSamp =>
+      CopyWith_Input_PersonsVarSampOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsVarianceOrderBy<TRes> get variance =>
+      CopyWith_Input_PersonsVarianceOrderBy.stub(_res);
+}
+
+class Input_PersonsAppendInput {
+  factory Input_PersonsAppendInput({Json? otherPhones}) =>
+      Input_PersonsAppendInput._({
+        if (otherPhones != null) r'otherPhones': otherPhones,
+      });
+
+  Input_PersonsAppendInput._(this._$data);
+
+  factory Input_PersonsAppendInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('otherPhones')) {
+      final l$otherPhones = data['otherPhones'];
+      result$data['otherPhones'] = (l$otherPhones as Json?);
+    }
+    return Input_PersonsAppendInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Json? get otherPhones => (_$data['otherPhones'] as Json?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('otherPhones')) {
+      final l$otherPhones = otherPhones;
+      result$data['otherPhones'] = l$otherPhones;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_PersonsAppendInput<Input_PersonsAppendInput> get copyWith =>
+      CopyWith_Input_PersonsAppendInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonsAppendInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$otherPhones = otherPhones;
+    final lOther$otherPhones = other.otherPhones;
+    if (_$data.containsKey('otherPhones') !=
+        other._$data.containsKey('otherPhones')) {
+      return false;
+    }
+    if (l$otherPhones != lOther$otherPhones) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$otherPhones = otherPhones;
+    return Object.hashAll([
+      _$data.containsKey('otherPhones') ? l$otherPhones : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_PersonsAppendInput<TRes> {
   factory CopyWith_Input_PersonsAppendInput(
     Input_PersonsAppendInput instance,

@@ -4173,6 +4173,7 @@ type HistoryMeetingRoster {
   name: String
   person: Persons
   personId: uuid
+  phones: [String!]
   photoUpdatedAt: timestamptz
   studyYearId: Int
   studyYearName: String
@@ -4218,6 +4219,7 @@ input HistoryMeetingRosterBoolExp {
   name: StringComparisonExp
   person: PersonsBoolExp
   personId: UuidComparisonExp
+  phones: StringArrayComparisonExp
   photoUpdatedAt: TimestamptzComparisonExp
   studyYearId: IntComparisonExp
   studyYearName: StringComparisonExp
@@ -4230,6 +4232,7 @@ type HistoryMeetingRosterMaxFields {
   meetingId: uuid
   name: String
   personId: uuid
+  phones: [String!]
   photoUpdatedAt: timestamptz
   studyYearId: Int
   studyYearName: String
@@ -4242,6 +4245,7 @@ type HistoryMeetingRosterMinFields {
   meetingId: uuid
   name: String
   personId: uuid
+  phones: [String!]
   photoUpdatedAt: timestamptz
   studyYearId: Int
   studyYearName: String
@@ -4259,6 +4263,7 @@ input HistoryMeetingRosterOrderBy {
   name: OrderBy
   person: PersonsOrderBy
   personId: OrderBy
+  phones: OrderBy
   photoUpdatedAt: OrderBy
   studyYearId: OrderBy
   studyYearName: OrderBy
@@ -4273,6 +4278,7 @@ enum HistoryMeetingRosterSelectColumn {
   meetingId
   name
   personId
+  phones
   photoUpdatedAt
   studyYearId
   studyYearName
@@ -4307,6 +4313,7 @@ input HistoryMeetingRosterStreamCursorValueInput {
   meetingId: uuid
   name: String
   personId: uuid
+  phones: [String!]
   photoUpdatedAt: timestamptz
   studyYearId: Int
   studyYearName: String
@@ -7405,6 +7412,20 @@ type StreetsVarSampFields {
 
 type StreetsVarianceFields {
   color: Float
+}
+
+input StringArrayComparisonExp {
+  _containedIn: [String!]
+  _contains: [String!]
+  _eq: [String!]
+  _gt: [String!]
+  _gte: [String!]
+  _in: [[String!]!]
+  _isNull: Boolean
+  _lt: [String!]
+  _lte: [String!]
+  _neq: [String!]
+  _nin: [[String!]!]
 }
 
 input StringComparisonExp {

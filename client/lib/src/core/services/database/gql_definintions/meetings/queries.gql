@@ -12,7 +12,7 @@ query historyMeetingRoster(
     personId
     meetingId
     name
-    mainPhone
+    phones
     gender
     color
     studyYearId

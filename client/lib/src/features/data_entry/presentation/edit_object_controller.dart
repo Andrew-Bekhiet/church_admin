@@ -24,6 +24,7 @@ class EditObjectController<T extends ViewableWithID> {
   final void Function(T object)? afterCreate;
   final Future<T> Function(T object)? onCreate;
   final Future<void> Function(T object)? onDelete;
+  final bool Function()? hasUnsavedInput;
 
   bool get hasChanged => initialObject != newObject;
   bool get isCreate => initialObject == null;
@@ -36,6 +37,7 @@ class EditObjectController<T extends ViewableWithID> {
     required Future<T> Function(T object) this.onCreate,
     this.onUpdate,
     this.onDelete,
+    this.hasUnsavedInput,
     this.initialObject,
   }) : assert(
          initialObject == null || (onUpdate != null && onDelete != null),
@@ -48,6 +50,7 @@ class EditObjectController<T extends ViewableWithID> {
     required this.newObject,
     required UpdateFunc<T> this.onUpdate,
     this.onDelete,
+    this.hasUnsavedInput,
   }) : onCreate = null,
        afterCreate = null;
 
@@ -58,6 +61,7 @@ class EditObjectController<T extends ViewableWithID> {
     this.onCreate,
     this.onUpdate,
     this.onDelete,
+    this.hasUnsavedInput,
     this.initialObject,
   });
 
@@ -232,7 +236,9 @@ class EditObjectController<T extends ViewableWithID> {
   Future<bool> confirmExit(BuildContext context) async {
     formKey.currentState!.save();
 
-    return newObject == initialObject && !photoFieldState.hasChanged ||
+    return newObject == initialObject &&
+            !photoFieldState.hasChanged &&
+            !(hasUnsavedInput?.call() ?? false) ||
         (await showDialog(
               context: context,
               builder: (context) => AlertDialog(
@@ -269,6 +275,7 @@ class EditObjectController<T extends ViewableWithID> {
       onDelete: onDelete ?? this.onDelete,
       toJson: toJson ?? this.toJson,
       afterCreate: afterCreate ?? this.afterCreate,
+      hasUnsavedInput: hasUnsavedInput,
     );
   }
 }

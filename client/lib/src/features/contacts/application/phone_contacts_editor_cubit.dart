@@ -10,6 +10,12 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
   final String Function() _newKey;
 
   Map<String, FamilyPhoneContact> _savedFamilyById;
+  late final List<PhoneContactDraft> _initialDrafts;
+
+  bool get hasUnsavedInput => !const ListEquality<PhoneContactDraft>().equals(
+    state.drafts,
+    _initialDrafts,
+  );
 
   PhoneContactsEditorCubit({
     required List<PhoneContact> own,
@@ -45,6 +51,7 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
       hasFamily: hasFamily,
       familyOnly: familyOnly,
     );
+    _initialDrafts = state.drafts;
     unawaited(
       (fetchFamilyRoles ??
               DatabaseService.I.metadata.personTypes.fetchFamilyRoles)()

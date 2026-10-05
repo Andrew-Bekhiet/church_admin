@@ -1,6 +1,587 @@
 // Part 40 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_IntComparisonExp<TRes> {
+  factory CopyWith_Input_IntComparisonExp(
+    Input_IntComparisonExp instance,
+    TRes Function(Input_IntComparisonExp) then,
+  ) = _CopyWithImpl_Input_IntComparisonExp;
+
+  factory CopyWith_Input_IntComparisonExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_IntComparisonExp;
+
+  TRes call({
+    int? $_eq,
+    int? $_gt,
+    int? $_gte,
+    List<int>? $_in,
+    bool? $_isNull,
+    int? $_lt,
+    int? $_lte,
+    int? $_neq,
+    List<int>? $_nin,
+  });
+}
+
+class _CopyWithImpl_Input_IntComparisonExp<TRes>
+    implements CopyWith_Input_IntComparisonExp<TRes> {
+  _CopyWithImpl_Input_IntComparisonExp(this._instance, this._then);
+
+  final Input_IntComparisonExp _instance;
+
+  final TRes Function(Input_IntComparisonExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_eq = _undefined,
+    Object? $_gt = _undefined,
+    Object? $_gte = _undefined,
+    Object? $_in = _undefined,
+    Object? $_isNull = _undefined,
+    Object? $_lt = _undefined,
+    Object? $_lte = _undefined,
+    Object? $_neq = _undefined,
+    Object? $_nin = _undefined,
+  }) => _then(
+    Input_IntComparisonExp._({
+      ..._instance._$data,
+      if ($_eq != _undefined) '_eq': ($_eq as int?),
+      if ($_gt != _undefined) '_gt': ($_gt as int?),
+      if ($_gte != _undefined) '_gte': ($_gte as int?),
+      if ($_in != _undefined) '_in': ($_in as List<int>?),
+      if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
+      if ($_lt != _undefined) '_lt': ($_lt as int?),
+      if ($_lte != _undefined) '_lte': ($_lte as int?),
+      if ($_neq != _undefined) '_neq': ($_neq as int?),
+      if ($_nin != _undefined) '_nin': ($_nin as List<int>?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_IntComparisonExp<TRes>
+    implements CopyWith_Input_IntComparisonExp<TRes> {
+  _CopyWithStubImpl_Input_IntComparisonExp(this._res);
+
+  TRes _res;
+
+  call({
+    int? $_eq,
+    int? $_gt,
+    int? $_gte,
+    List<int>? $_in,
+    bool? $_isNull,
+    int? $_lt,
+    int? $_lte,
+    int? $_neq,
+    List<int>? $_nin,
+  }) => _res;
+}
+
+class Input_JobsBoolExp {
+  factory Input_JobsBoolExp({
+    List<Input_JobsBoolExp>? $_and,
+    Input_JobsBoolExp? $_not,
+    List<Input_JobsBoolExp>? $_or,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? name,
+    Input_PersonsBoolExp? persons,
+    Input_PersonsAggregateBoolExp? personsAggregate,
+  }) => Input_JobsBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (persons != null) r'persons': persons,
+    if (personsAggregate != null) r'personsAggregate': personsAggregate,
+  });
+
+  Input_JobsBoolExp._(this._$data);
+
+  factory Input_JobsBoolExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map((e) => Input_JobsBoolExp.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
+          ? null
+          : Input_JobsBoolExp.fromJson((l$$_not as Map<String, dynamic>));
+    }
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map((e) => Input_JobsBoolExp.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$name as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('persons')) {
+      final l$persons = data['persons'];
+      result$data['persons'] = l$persons == null
+          ? null
+          : Input_PersonsBoolExp.fromJson((l$persons as Map<String, dynamic>));
+    }
+    if (data.containsKey('personsAggregate')) {
+      final l$personsAggregate = data['personsAggregate'];
+      result$data['personsAggregate'] = l$personsAggregate == null
+          ? null
+          : Input_PersonsAggregateBoolExp.fromJson(
+              (l$personsAggregate as Map<String, dynamic>),
+            );
+    }
+    return Input_JobsBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_JobsBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_JobsBoolExp>?);
+
+  Input_JobsBoolExp? get $_not => (_$data['_not'] as Input_JobsBoolExp?);
+
+  List<Input_JobsBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_JobsBoolExp>?);
+
+  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
+  Input_StringComparisonExp? get name =>
+      (_$data['name'] as Input_StringComparisonExp?);
+
+  Input_PersonsBoolExp? get persons =>
+      (_$data['persons'] as Input_PersonsBoolExp?);
+
+  Input_PersonsAggregateBoolExp? get personsAggregate =>
+      (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
+    }
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name?.toJson();
+    }
+    if (_$data.containsKey('persons')) {
+      final l$persons = persons;
+      result$data['persons'] = l$persons?.toJson();
+    }
+    if (_$data.containsKey('personsAggregate')) {
+      final l$personsAggregate = personsAggregate;
+      result$data['personsAggregate'] = l$personsAggregate?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_JobsBoolExp<Input_JobsBoolExp> get copyWith =>
+      CopyWith_Input_JobsBoolExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_JobsBoolExp || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
+      return false;
+    }
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
+      return false;
+    }
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
+      return false;
+    }
+    if (l$$_not != lOther$$_not) {
+      return false;
+    }
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
+      return false;
+    }
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
+      return false;
+    }
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    final l$personsAggregate = personsAggregate;
+    final lOther$personsAggregate = other.personsAggregate;
+    if (_$data.containsKey('personsAggregate') !=
+        other._$data.containsKey('personsAggregate')) {
+      return false;
+    }
+    if (l$personsAggregate != lOther$personsAggregate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$id = id;
+    final l$name = name;
+    final l$persons = persons;
+    final l$personsAggregate = personsAggregate;
+    return Object.hashAll([
+      _$data.containsKey('_and')
+          ? l$$_and == null
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('persons') ? l$persons : const {},
+      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_JobsBoolExp<TRes> {
+  factory CopyWith_Input_JobsBoolExp(
+    Input_JobsBoolExp instance,
+    TRes Function(Input_JobsBoolExp) then,
+  ) = _CopyWithImpl_Input_JobsBoolExp;
+
+  factory CopyWith_Input_JobsBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_JobsBoolExp;
+
+  TRes call({
+    List<Input_JobsBoolExp>? $_and,
+    Input_JobsBoolExp? $_not,
+    List<Input_JobsBoolExp>? $_or,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? name,
+    Input_PersonsBoolExp? persons,
+    Input_PersonsAggregateBoolExp? personsAggregate,
+  });
+  TRes $_and(
+    Iterable<Input_JobsBoolExp>? Function(
+      Iterable<CopyWith_Input_JobsBoolExp<Input_JobsBoolExp>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_JobsBoolExp<TRes> get $_not;
+  TRes $_or(
+    Iterable<Input_JobsBoolExp>? Function(
+      Iterable<CopyWith_Input_JobsBoolExp<Input_JobsBoolExp>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_UuidComparisonExp<TRes> get id;
+  CopyWith_Input_StringComparisonExp<TRes> get name;
+  CopyWith_Input_PersonsBoolExp<TRes> get persons;
+  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate;
+}
+
+class _CopyWithImpl_Input_JobsBoolExp<TRes>
+    implements CopyWith_Input_JobsBoolExp<TRes> {
+  _CopyWithImpl_Input_JobsBoolExp(this._instance, this._then);
+
+  final Input_JobsBoolExp _instance;
+
+  final TRes Function(Input_JobsBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? persons = _undefined,
+    Object? personsAggregate = _undefined,
+  }) => _then(
+    Input_JobsBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined) '_and': ($_and as List<Input_JobsBoolExp>?),
+      if ($_not != _undefined) '_not': ($_not as Input_JobsBoolExp?),
+      if ($_or != _undefined) '_or': ($_or as List<Input_JobsBoolExp>?),
+      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
+      if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
+      if (persons != _undefined) 'persons': (persons as Input_PersonsBoolExp?),
+      if (personsAggregate != _undefined)
+        'personsAggregate':
+            (personsAggregate as Input_PersonsAggregateBoolExp?),
+    }),
+  );
+
+  TRes $_and(
+    Iterable<Input_JobsBoolExp>? Function(
+      Iterable<CopyWith_Input_JobsBoolExp<Input_JobsBoolExp>>?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map((e) => CopyWith_Input_JobsBoolExp(e, (i) => i)),
+    )?.toList(),
+  );
+
+  CopyWith_Input_JobsBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_JobsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_JobsBoolExp(local$$_not, (e) => call($_not: e));
+  }
+
+  TRes $_or(
+    Iterable<Input_JobsBoolExp>? Function(
+      Iterable<CopyWith_Input_JobsBoolExp<Input_JobsBoolExp>>?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map((e) => CopyWith_Input_JobsBoolExp(e, (i) => i)),
+    )?.toList(),
+  );
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get name {
+    final local$name = _instance.name;
+    return local$name == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
+  }
+
+  CopyWith_Input_PersonsBoolExp<TRes> get persons {
+    final local$persons = _instance.persons;
+    return local$persons == null
+        ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsBoolExp(local$persons, (e) => call(persons: e));
+  }
+
+  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate {
+    final local$personsAggregate = _instance.personsAggregate;
+    return local$personsAggregate == null
+        ? CopyWith_Input_PersonsAggregateBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsAggregateBoolExp(
+            local$personsAggregate,
+            (e) => call(personsAggregate: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_JobsBoolExp<TRes>
+    implements CopyWith_Input_JobsBoolExp<TRes> {
+  _CopyWithStubImpl_Input_JobsBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_JobsBoolExp>? $_and,
+    Input_JobsBoolExp? $_not,
+    List<Input_JobsBoolExp>? $_or,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? name,
+    Input_PersonsBoolExp? persons,
+    Input_PersonsAggregateBoolExp? personsAggregate,
+  }) => _res;
+
+  $_and(_fn) => _res;
+
+  CopyWith_Input_JobsBoolExp<TRes> get $_not =>
+      CopyWith_Input_JobsBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get name =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_PersonsBoolExp<TRes> get persons =>
+      CopyWith_Input_PersonsBoolExp.stub(_res);
+
+  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
+      CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
+}
+
+class Input_JobsInsertInput {
+  factory Input_JobsInsertInput({
+    String? name,
+    Input_PersonsArrRelInsertInput? persons,
+  }) => Input_JobsInsertInput._({
+    if (name != null) r'name': name,
+    if (persons != null) r'persons': persons,
+  });
+
+  Input_JobsInsertInput._(this._$data);
+
+  factory Input_JobsInsertInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('persons')) {
+      final l$persons = data['persons'];
+      result$data['persons'] = l$persons == null
+          ? null
+          : Input_PersonsArrRelInsertInput.fromJson(
+              (l$persons as Map<String, dynamic>),
+            );
+    }
+    return Input_JobsInsertInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get name => (_$data['name'] as String?);
+
+  Input_PersonsArrRelInsertInput? get persons =>
+      (_$data['persons'] as Input_PersonsArrRelInsertInput?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('persons')) {
+      final l$persons = persons;
+      result$data['persons'] = l$persons?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_JobsInsertInput<Input_JobsInsertInput> get copyWith =>
+      CopyWith_Input_JobsInsertInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_JobsInsertInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
+      return false;
+    }
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$persons = persons;
+    return Object.hashAll([
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('persons') ? l$persons : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_JobsInsertInput<TRes> {
   factory CopyWith_Input_JobsInsertInput(
     Input_JobsInsertInput instance,
@@ -2130,407 +2711,6 @@ class Input_JsonbComparisonExp {
       _$data.containsKey('_isNull') ? l$$_isNull : const {},
       _$data.containsKey('_jsonbPathExists') ? l$$_jsonbPathExists : const {},
       _$data.containsKey('_jsonbPathMatch') ? l$$_jsonbPathMatch : const {},
-      _$data.containsKey('_lt') ? l$$_lt : const {},
-      _$data.containsKey('_lte') ? l$$_lte : const {},
-      _$data.containsKey('_neq') ? l$$_neq : const {},
-      _$data.containsKey('_nin')
-          ? l$$_nin == null
-                ? null
-                : Object.hashAll(l$$_nin.map((v) => v))
-          : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_JsonbComparisonExp<TRes> {
-  factory CopyWith_Input_JsonbComparisonExp(
-    Input_JsonbComparisonExp instance,
-    TRes Function(Input_JsonbComparisonExp) then,
-  ) = _CopyWithImpl_Input_JsonbComparisonExp;
-
-  factory CopyWith_Input_JsonbComparisonExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_JsonbComparisonExp;
-
-  TRes call({
-    Input_JsonbCastExp? $_cast,
-    Json? $_containedIn,
-    Json? $_contains,
-    Json? $_eq,
-    Json? $_gt,
-    Json? $_gte,
-    String? $_hasKey,
-    List<String>? $_hasKeysAll,
-    List<String>? $_hasKeysAny,
-    List<Json>? $_in,
-    bool? $_isNull,
-    String? $_jsonbPathExists,
-    String? $_jsonbPathMatch,
-    Json? $_lt,
-    Json? $_lte,
-    Json? $_neq,
-    List<Json>? $_nin,
-  });
-  CopyWith_Input_JsonbCastExp<TRes> get $_cast;
-}
-
-class _CopyWithImpl_Input_JsonbComparisonExp<TRes>
-    implements CopyWith_Input_JsonbComparisonExp<TRes> {
-  _CopyWithImpl_Input_JsonbComparisonExp(this._instance, this._then);
-
-  final Input_JsonbComparisonExp _instance;
-
-  final TRes Function(Input_JsonbComparisonExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_cast = _undefined,
-    Object? $_containedIn = _undefined,
-    Object? $_contains = _undefined,
-    Object? $_eq = _undefined,
-    Object? $_gt = _undefined,
-    Object? $_gte = _undefined,
-    Object? $_hasKey = _undefined,
-    Object? $_hasKeysAll = _undefined,
-    Object? $_hasKeysAny = _undefined,
-    Object? $_in = _undefined,
-    Object? $_isNull = _undefined,
-    Object? $_jsonbPathExists = _undefined,
-    Object? $_jsonbPathMatch = _undefined,
-    Object? $_lt = _undefined,
-    Object? $_lte = _undefined,
-    Object? $_neq = _undefined,
-    Object? $_nin = _undefined,
-  }) => _then(
-    Input_JsonbComparisonExp._({
-      ..._instance._$data,
-      if ($_cast != _undefined) '_cast': ($_cast as Input_JsonbCastExp?),
-      if ($_containedIn != _undefined) '_containedIn': ($_containedIn as Json?),
-      if ($_contains != _undefined) '_contains': ($_contains as Json?),
-      if ($_eq != _undefined) '_eq': ($_eq as Json?),
-      if ($_gt != _undefined) '_gt': ($_gt as Json?),
-      if ($_gte != _undefined) '_gte': ($_gte as Json?),
-      if ($_hasKey != _undefined) '_hasKey': ($_hasKey as String?),
-      if ($_hasKeysAll != _undefined)
-        '_hasKeysAll': ($_hasKeysAll as List<String>?),
-      if ($_hasKeysAny != _undefined)
-        '_hasKeysAny': ($_hasKeysAny as List<String>?),
-      if ($_in != _undefined) '_in': ($_in as List<Json>?),
-      if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
-      if ($_jsonbPathExists != _undefined)
-        '_jsonbPathExists': ($_jsonbPathExists as String?),
-      if ($_jsonbPathMatch != _undefined)
-        '_jsonbPathMatch': ($_jsonbPathMatch as String?),
-      if ($_lt != _undefined) '_lt': ($_lt as Json?),
-      if ($_lte != _undefined) '_lte': ($_lte as Json?),
-      if ($_neq != _undefined) '_neq': ($_neq as Json?),
-      if ($_nin != _undefined) '_nin': ($_nin as List<Json>?),
-    }),
-  );
-
-  CopyWith_Input_JsonbCastExp<TRes> get $_cast {
-    final local$$_cast = _instance.$_cast;
-    return local$$_cast == null
-        ? CopyWith_Input_JsonbCastExp.stub(_then(_instance))
-        : CopyWith_Input_JsonbCastExp(local$$_cast, (e) => call($_cast: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_JsonbComparisonExp<TRes>
-    implements CopyWith_Input_JsonbComparisonExp<TRes> {
-  _CopyWithStubImpl_Input_JsonbComparisonExp(this._res);
-
-  TRes _res;
-
-  call({
-    Input_JsonbCastExp? $_cast,
-    Json? $_containedIn,
-    Json? $_contains,
-    Json? $_eq,
-    Json? $_gt,
-    Json? $_gte,
-    String? $_hasKey,
-    List<String>? $_hasKeysAll,
-    List<String>? $_hasKeysAny,
-    List<Json>? $_in,
-    bool? $_isNull,
-    String? $_jsonbPathExists,
-    String? $_jsonbPathMatch,
-    Json? $_lt,
-    Json? $_lte,
-    Json? $_neq,
-    List<Json>? $_nin,
-  }) => _res;
-
-  CopyWith_Input_JsonbCastExp<TRes> get $_cast =>
-      CopyWith_Input_JsonbCastExp.stub(_res);
-}
-
-class Input_MeetingAudienceComparisonExp {
-  factory Input_MeetingAudienceComparisonExp({
-    String? $_eq,
-    String? $_gt,
-    String? $_gte,
-    List<String>? $_in,
-    bool? $_isNull,
-    String? $_lt,
-    String? $_lte,
-    String? $_neq,
-    List<String>? $_nin,
-  }) => Input_MeetingAudienceComparisonExp._({
-    if ($_eq != null) r'_eq': $_eq,
-    if ($_gt != null) r'_gt': $_gt,
-    if ($_gte != null) r'_gte': $_gte,
-    if ($_in != null) r'_in': $_in,
-    if ($_isNull != null) r'_isNull': $_isNull,
-    if ($_lt != null) r'_lt': $_lt,
-    if ($_lte != null) r'_lte': $_lte,
-    if ($_neq != null) r'_neq': $_neq,
-    if ($_nin != null) r'_nin': $_nin,
-  });
-
-  Input_MeetingAudienceComparisonExp._(this._$data);
-
-  factory Input_MeetingAudienceComparisonExp.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_eq')) {
-      final l$$_eq = data['_eq'];
-      result$data['_eq'] = (l$$_eq as String?);
-    }
-    if (data.containsKey('_gt')) {
-      final l$$_gt = data['_gt'];
-      result$data['_gt'] = (l$$_gt as String?);
-    }
-    if (data.containsKey('_gte')) {
-      final l$$_gte = data['_gte'];
-      result$data['_gte'] = (l$$_gte as String?);
-    }
-    if (data.containsKey('_in')) {
-      final l$$_in = data['_in'];
-      result$data['_in'] = (l$$_in as List<dynamic>?)
-          ?.map((e) => (e as String))
-          .toList();
-    }
-    if (data.containsKey('_isNull')) {
-      final l$$_isNull = data['_isNull'];
-      result$data['_isNull'] = (l$$_isNull as bool?);
-    }
-    if (data.containsKey('_lt')) {
-      final l$$_lt = data['_lt'];
-      result$data['_lt'] = (l$$_lt as String?);
-    }
-    if (data.containsKey('_lte')) {
-      final l$$_lte = data['_lte'];
-      result$data['_lte'] = (l$$_lte as String?);
-    }
-    if (data.containsKey('_neq')) {
-      final l$$_neq = data['_neq'];
-      result$data['_neq'] = (l$$_neq as String?);
-    }
-    if (data.containsKey('_nin')) {
-      final l$$_nin = data['_nin'];
-      result$data['_nin'] = (l$$_nin as List<dynamic>?)
-          ?.map((e) => (e as String))
-          .toList();
-    }
-    return Input_MeetingAudienceComparisonExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String? get $_eq => (_$data['_eq'] as String?);
-
-  String? get $_gt => (_$data['_gt'] as String?);
-
-  String? get $_gte => (_$data['_gte'] as String?);
-
-  List<String>? get $_in => (_$data['_in'] as List<String>?);
-
-  bool? get $_isNull => (_$data['_isNull'] as bool?);
-
-  String? get $_lt => (_$data['_lt'] as String?);
-
-  String? get $_lte => (_$data['_lte'] as String?);
-
-  String? get $_neq => (_$data['_neq'] as String?);
-
-  List<String>? get $_nin => (_$data['_nin'] as List<String>?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_eq')) {
-      final l$$_eq = $_eq;
-      result$data['_eq'] = l$$_eq;
-    }
-    if (_$data.containsKey('_gt')) {
-      final l$$_gt = $_gt;
-      result$data['_gt'] = l$$_gt;
-    }
-    if (_$data.containsKey('_gte')) {
-      final l$$_gte = $_gte;
-      result$data['_gte'] = l$$_gte;
-    }
-    if (_$data.containsKey('_in')) {
-      final l$$_in = $_in;
-      result$data['_in'] = l$$_in?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('_isNull')) {
-      final l$$_isNull = $_isNull;
-      result$data['_isNull'] = l$$_isNull;
-    }
-    if (_$data.containsKey('_lt')) {
-      final l$$_lt = $_lt;
-      result$data['_lt'] = l$$_lt;
-    }
-    if (_$data.containsKey('_lte')) {
-      final l$$_lte = $_lte;
-      result$data['_lte'] = l$$_lte;
-    }
-    if (_$data.containsKey('_neq')) {
-      final l$$_neq = $_neq;
-      result$data['_neq'] = l$$_neq;
-    }
-    if (_$data.containsKey('_nin')) {
-      final l$$_nin = $_nin;
-      result$data['_nin'] = l$$_nin?.map((e) => e).toList();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_MeetingAudienceComparisonExp<
-    Input_MeetingAudienceComparisonExp
-  >
-  get copyWith => CopyWith_Input_MeetingAudienceComparisonExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_MeetingAudienceComparisonExp ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_eq = $_eq;
-    final lOther$$_eq = other.$_eq;
-    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
-      return false;
-    }
-    if (l$$_eq != lOther$$_eq) {
-      return false;
-    }
-    final l$$_gt = $_gt;
-    final lOther$$_gt = other.$_gt;
-    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
-      return false;
-    }
-    if (l$$_gt != lOther$$_gt) {
-      return false;
-    }
-    final l$$_gte = $_gte;
-    final lOther$$_gte = other.$_gte;
-    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
-      return false;
-    }
-    if (l$$_gte != lOther$$_gte) {
-      return false;
-    }
-    final l$$_in = $_in;
-    final lOther$$_in = other.$_in;
-    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
-      return false;
-    }
-    if (l$$_in != null && lOther$$_in != null) {
-      if (l$$_in.length != lOther$$_in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_in.length; i++) {
-        final l$$_in$entry = l$$_in[i];
-        final lOther$$_in$entry = lOther$$_in[i];
-        if (l$$_in$entry != lOther$$_in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_in != lOther$$_in) {
-      return false;
-    }
-    final l$$_isNull = $_isNull;
-    final lOther$$_isNull = other.$_isNull;
-    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
-      return false;
-    }
-    if (l$$_isNull != lOther$$_isNull) {
-      return false;
-    }
-    final l$$_lt = $_lt;
-    final lOther$$_lt = other.$_lt;
-    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
-      return false;
-    }
-    if (l$$_lt != lOther$$_lt) {
-      return false;
-    }
-    final l$$_lte = $_lte;
-    final lOther$$_lte = other.$_lte;
-    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
-      return false;
-    }
-    if (l$$_lte != lOther$$_lte) {
-      return false;
-    }
-    final l$$_neq = $_neq;
-    final lOther$$_neq = other.$_neq;
-    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
-      return false;
-    }
-    if (l$$_neq != lOther$$_neq) {
-      return false;
-    }
-    final l$$_nin = $_nin;
-    final lOther$$_nin = other.$_nin;
-    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
-      return false;
-    }
-    if (l$$_nin != null && lOther$$_nin != null) {
-      if (l$$_nin.length != lOther$$_nin.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_nin.length; i++) {
-        final l$$_nin$entry = l$$_nin[i];
-        final lOther$$_nin$entry = lOther$$_nin[i];
-        if (l$$_nin$entry != lOther$$_nin$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_nin != lOther$$_nin) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_eq = $_eq;
-    final l$$_gt = $_gt;
-    final l$$_gte = $_gte;
-    final l$$_in = $_in;
-    final l$$_isNull = $_isNull;
-    final l$$_lt = $_lt;
-    final l$$_lte = $_lte;
-    final l$$_neq = $_neq;
-    final l$$_nin = $_nin;
-    return Object.hashAll([
-      _$data.containsKey('_eq') ? l$$_eq : const {},
-      _$data.containsKey('_gt') ? l$$_gt : const {},
-      _$data.containsKey('_gte') ? l$$_gte : const {},
-      _$data.containsKey('_in')
-          ? l$$_in == null
-                ? null
-                : Object.hashAll(l$$_in.map((v) => v))
-          : const {},
-      _$data.containsKey('_isNull') ? l$$_isNull : const {},
       _$data.containsKey('_lt') ? l$$_lt : const {},
       _$data.containsKey('_lte') ? l$$_lte : const {},
       _$data.containsKey('_neq') ? l$$_neq : const {},

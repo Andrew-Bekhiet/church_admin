@@ -5,5 +5,6 @@ export 'models/field_metadata_visitor.dart';
 export 'models/filter.dart';
 export 'models/operator.dart';
 export 'models/order_by.dart';
+export 'models/phone_search_field_metadata.dart';
 export 'models/queryable_type.dart';
 export 'models/redirecting_field_metadata.dart';

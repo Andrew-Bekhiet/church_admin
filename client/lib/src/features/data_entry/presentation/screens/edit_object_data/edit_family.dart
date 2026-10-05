@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
@@ -59,6 +60,7 @@ class _EditFamilyState extends State<EditFamily> {
       onDelete: (object) =>
           DatabaseService.I.families.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
+      hasUnsavedInput: () => _phoneContacts.hasUnsavedInput,
       newObject:
           oldFamily ??
           Family(
@@ -256,9 +258,22 @@ class _EditFamilyState extends State<EditFamily> {
             parents: relatedFamiliesData?.parents ?? initialFamily.parents,
           );
 
+          final editedFamily = _controller.newObject;
+          bool isUntouched<V>(V? Function(Family) field) =>
+              const DeepCollectionEquality().equals(
+                field(editedFamily),
+                field(initialFamily),
+              );
           _controller = _controller.copyWith(
             initialObject: populatedInitialFamily,
-            newObject: populatedInitialFamily,
+            newObject: editedFamily.copyWith(
+              children: isUntouched((f) => f.children)
+                  ? populatedInitialFamily.children
+                  : editedFamily.children,
+              parents: isUntouched((f) => f.parents)
+                  ? populatedInitialFamily.parents
+                  : editedFamily.parents,
+            ),
           );
 
           _relatedFamiliesLoaded = true;

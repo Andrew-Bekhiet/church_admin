@@ -357,6 +357,55 @@ void main() {
         },
       );
     });
+
+    group('roster search by phone', () {
+      Future<void> searchOnceReady(
+        RecordAttendanceCubit cubit,
+        String query,
+      ) async {
+        await cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
+          (s) => s.rosterStatus == RosterStatus.ready,
+        );
+
+        final searched = cubit.stream
+            .whereType<RecordAttendanceLoaded>()
+            .firstWhere((s) => s.searchQuery == query);
+        cubit.onSearch(query);
+        await searched;
+      }
+
+      List<String> foundIds(RecordAttendanceCubit cubit) =>
+          (cubit.state as RecordAttendanceLoaded).entries
+              .map((e) => e.person.id)
+              .toList();
+
+      void arrangeRoster() => f.rosterPersons = [
+        _Fixture.rosterPersonWithPhones('child', [
+          '+201001234567',
+          '+201227654321',
+        ]),
+        _Fixture.rosterPersonWithPhones('stranger', [
+          '+201111111111',
+          '+201555555555',
+        ]),
+      ];
+
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'a full national number finds only the person who has it',
+        setUp: arrangeRoster,
+        build: () => f.createCubit(),
+        act: (cubit) => searchOnceReady(cubit, '01227654321'),
+        verify: (cubit) => expect(foundIds(cubit), ['child']),
+      );
+
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'a partially typed national number finds the person',
+        setUp: arrangeRoster,
+        build: () => f.createCubit(),
+        act: (cubit) => searchOnceReady(cubit, '0100123'),
+        verify: (cubit) => expect(foundIds(cubit), ['child']),
+      );
+    });
   });
 }
 
@@ -485,6 +534,17 @@ final class _Fixture {
     person: Person(id: personId, name: 'Person $personId'),
     attendanceRecord: null,
     personAttendanceAnalysis: null,
+  );
+
+  static MeetingRosterEntry rosterPersonWithPhones(
+    String personId,
+    List<String> phones,
+  ) => MeetingRosterEntry(
+    asServant: false,
+    person: Person(id: personId, name: 'Person $personId'),
+    attendanceRecord: null,
+    personAttendanceAnalysis: null,
+    phones: phones,
   );
 
   static AttendanceRecord makeRecord(String personId, {String id = 'att-1'}) =>
