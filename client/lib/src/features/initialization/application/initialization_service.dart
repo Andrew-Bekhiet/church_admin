@@ -40,13 +40,13 @@ class InitializationService {
 
     _isInitialized = true;
 
-    final List<(Object, StackTrace)> exceptions = [];
+    final List<(Initializer, Object, StackTrace)> exceptions = [];
 
     for (final step in steps) {
       try {
         await step.initialize();
       } catch (e, stackTrace) {
-        exceptions.add((e, stackTrace));
+        exceptions.add((step, e, stackTrace));
       }
     }
 
@@ -56,16 +56,17 @@ class InitializationService {
   }
 
   Future<void> _reportInitExceptions(
-    List<(Object, StackTrace)> exceptions,
+    List<(Initializer, Object, StackTrace)> exceptions,
   ) async {
     await exceptions.map(
       (exception) async {
-        final (e, stackTrace) = exception;
+        final (step, e, stackTrace) = exception;
 
         await LoggingService.I.warning(
           LogRecord(
             message: 'Initialization step failed',
             moduleName: '$InitializationService',
+            data: {'step': step.runtimeType.toString()},
             error: e,
             stackTrace: stackTrace,
           ),

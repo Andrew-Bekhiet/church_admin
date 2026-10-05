@@ -124,7 +124,7 @@ class LoggingService {
       );
     }
 
-    if (level >= LoggingLevel.exception) {
+    if (level >= LoggingLevel.exception || record.error != null) {
       final contexts = {
         ...?record.data,
         'moduleName': record.moduleName,
@@ -148,16 +148,22 @@ class LoggingService {
   String _formatRecordMessage(LogRecord record) {
     final msgBuilder = StringBuffer();
 
-    if (record.moduleName != null) {
-      msgBuilder.write('[${record.moduleName}]: ');
+    if (record.moduleName case final moduleName?) {
+      msgBuilder.write('[$moduleName]');
+      if (record.eventName != null || record.message != null) {
+        msgBuilder.write(': ');
+      }
     }
 
-    if (record.eventName != null) {
-      msgBuilder.write('${record.eventName}: ');
+    if (record.eventName case final eventName?) {
+      msgBuilder.write(eventName);
+      if (record.message != null) {
+        msgBuilder.write(': ');
+      }
     }
 
-    if (record.message != null) {
-      msgBuilder.write(record.message);
+    if (record.message case final message?) {
+      msgBuilder.write(message);
     }
 
     return msgBuilder.toString();
