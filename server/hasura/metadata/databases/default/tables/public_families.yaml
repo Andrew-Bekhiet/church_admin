@@ -168,27 +168,33 @@ select_permissions:
           - deleted_at:
               _is_null: true
           - _or:
-              - _exists:
-                  _table:
-                    name: users_permissions_by_entity_id
-                    schema: auth
-                  _where:
-                    _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - _or:
-                          - _and:
-                              - entity_type:
-                                  _eq: family
-                              - entity_id:
-                                  _ceq:
-                                    - $
-                                    - id
-                          - _and:
-                              - entity_type:
-                                  _eq: any
-                              - entity_id:
-                                  _is_null: true
+              - _or:
+                  - _exists:
+                      _table:
+                        name: users_permissions_by_entity_id
+                        schema: auth
+                      _where:
+                        _and:
+                          - uid:
+                              _eq: X-Hasura-User-Id
+                          - entity_type:
+                              _eq: family
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - id
+                  - _exists:
+                      _table:
+                        name: users_permissions_by_entity_id
+                        schema: auth
+                      _where:
+                        _and:
+                          - uid:
+                              _eq: X-Hasura-User-Id
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
       allow_aggregations: true
 update_permissions:
   - role: user
@@ -202,53 +208,69 @@ update_permissions:
         - notes
         - status
       filter:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: family
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - id
-                  - _and:
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: family
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - id
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
       check:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: family
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - id
-                  - _and:
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: family
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - id
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
 delete_permissions:
   - role: user
     permission:

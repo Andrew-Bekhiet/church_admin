@@ -64,34 +64,47 @@ select_permissions:
       computed_fields:
         - fullAddressText
       filter:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: family
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - family_id
-                  - _and:
-                      - entity_type:
-                          _eq: store
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - store_id
-                  - _and:
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: family
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - family_id
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: store
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - store_id
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
       limit: 100
     comment: ""
 update_permissions:
@@ -113,36 +126,53 @@ update_permissions:
         - substreet_name
       filter: &can_edit_address
         _or:
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - allow_edit:
-                      _eq: true
-                  - _or:
-                      - _and:
-                          - entity_type:
-                              _eq: family
-                          - entity_id:
-                              _ceq:
-                                - $
-                                - family_id
-                      - _and:
-                          - entity_type:
-                              _eq: store
-                          - entity_id:
-                              _ceq:
-                                - $
-                                - store_id
-                      - _and:
-                          - entity_type:
-                              _eq: any
-                          - entity_id:
-                              _is_null: true
+          - _or:
+              - _exists:
+                  _table:
+                    name: users_permissions_by_entity_id
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - allow_edit:
+                          _eq: true
+                      - entity_type:
+                          _eq: family
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - family_id
+              - _exists:
+                  _table:
+                    name: users_permissions_by_entity_id
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - allow_edit:
+                          _eq: true
+                      - entity_type:
+                          _eq: store
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - store_id
+              - _exists:
+                  _table:
+                    name: users_permissions_by_entity_id
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - allow_edit:
+                          _eq: true
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
           - family:
               persons:
                 _and:
@@ -162,34 +192,51 @@ delete_permissions:
   - role: user
     permission:
       filter:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: family
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - family_id
-                  - _and:
-                      - entity_type:
-                          _eq: store
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - store_id
-                  - _and:
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: family
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - family_id
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: store
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - store_id
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
     comment: ""

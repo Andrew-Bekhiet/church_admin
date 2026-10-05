@@ -12,29 +12,37 @@ insert_permissions:
   - role: user
     permission:
       check:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: any-user
-                      - entity_id:
-                          _is_null: true
-                  - _and:
-                      - entity_type:
-                          _eq: user
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - user_uid
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: any-user
+                  - entity_id:
+                      _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: user
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - user_uid
       columns:
         - expires_at
         - user_uid
@@ -52,106 +60,138 @@ select_permissions:
         - id
         - user_uid
       filter:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: any-user
-                      - entity_id:
-                          _is_null: true
-                  - _and:
-                      - entity_type:
-                          _eq: user
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - user_uid
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: any-user
+                  - entity_id:
+                      _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: user
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - user_uid
 update_permissions:
   - role: user
     permission:
       columns:
         - expires_at
       filter:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: any-user
-                      - entity_id:
-                          _is_null: true
-                  - _and:
-                      - entity_type:
-                          _eq: user
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - user_uid
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: any-user
+                  - entity_id:
+                      _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: user
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - user_uid
       check:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: any-user
-                      - entity_id:
-                          _is_null: true
-                  - _and:
-                      - entity_type:
-                          _eq: user
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - user_uid
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: any-user
+                  - entity_id:
+                      _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: user
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - user_uid
 delete_permissions:
   - role: user
     permission:
       filter:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: any-user
-                      - entity_id:
-                          _is_null: true
-                  - _and:
-                      - entity_type:
-                          _eq: user
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - user_uid
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: any-user
+                  - entity_id:
+                      _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: user
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - user_uid
