@@ -4,13 +4,12 @@ Conventions for anyone (human or agent) writing code here. Rules are stated as r
 
 ## Layout
 
-| Path                            | What it is                                                                                          |
-| ------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `client/`                       | Flutter app. Riverpod providers + BLoC, GoRouter, `graphql_codegen` against Hasura.                 |
-| `server/hasura/`                | Hasura metadata + Postgres migrations (`migrations/default/<timestamp>_<name>/{up,down}.sql`).      |
-| `server/firebase/functions/`    | TypeScript Cloud Functions: auth blocking functions, callables, storage proxy, export.              |
-| `server/postgres/`              | Postgres image (`ghcr.io/railwayapp-templates/timescale-postgis-ssl:pg17-ts2.17`) and init scripts. |
-| `server/church_admin_migrator/` | One-off data import/export tooling.                                                                 |
+| Path                         | What it is                                                                                          |
+| ---------------------------- | --------------------------------------------------------------------------------------------------- |
+| `client/`                    | Flutter app. Riverpod providers + BLoC, GoRouter, `graphql_codegen` against Hasura.                 |
+| `server/hasura/`             | Hasura metadata + Postgres migrations (`migrations/default/<timestamp>_<name>/{up,down}.sql`).      |
+| `server/firebase/functions/` | TypeScript Cloud Functions: auth blocking functions, callables, storage proxy, export.              |
+| `server/postgres/`           | Postgres image (`ghcr.io/railwayapp-templates/timescale-postgis-ssl:pg17-ts2.17`) and init scripts. |
 
 Organise files by feature or domain, not by type. All backend access goes through the database service module (`client/lib/src/core/services/database/`) with `graphql_codegen`-generated operations — features never issue raw GraphQL themselves.
 
