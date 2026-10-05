@@ -71,6 +71,15 @@ object_relationships:
         remote_table:
           name: latest_visits
           schema: history
+  - name: mainContact
+    using:
+      manual_configuration:
+        column_mapping:
+          id: person_id
+        insertion_order: null
+        remote_table:
+          name: persons_main_contacts
+          schema: public
   - name: personType
     using:
       foreign_key_constraint_on: person_type_id
@@ -122,6 +131,13 @@ array_relationships:
         remote_table:
           name: classes_persons
           schema: public
+  - name: contacts
+    using:
+      foreign_key_constraint_on:
+        column: person_id
+        table:
+          name: contacts
+          schema: public
   - name: confessionHistory
     using:
       foreign_key_constraint_on:
@@ -161,6 +177,15 @@ array_relationships:
         table:
           name: kodas_history
           schema: history
+  - name: permissionGrants
+    using:
+      manual_configuration:
+        column_mapping:
+          id: entity_id
+        insertion_order: null
+        remote_table:
+          name: users_permissions_by_entity_id
+          schema: auth
   - name: services
     using:
       manual_configuration:

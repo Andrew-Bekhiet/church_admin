@@ -1,2530 +1,2539 @@
 // Part 64 of the schema
 part of "schema.graphql.dart";
 
-String toJson_Enum_FathersConstraint(Enum_FathersConstraint e) {
-  switch (e) {
-    case Enum_FathersConstraint.fathers_name_key:
-      return r'fathers_name_key';
-    case Enum_FathersConstraint.fathers_pkey:
-      return r'fathers_pkey';
-    case Enum_FathersConstraint.$unknown:
-      return r'$unknown';
+abstract class CopyWith_Input_UsersPreferencesSetInput<TRes> {
+  factory CopyWith_Input_UsersPreferencesSetInput(
+    Input_UsersPreferencesSetInput instance,
+    TRes Function(Input_UsersPreferencesSetInput) then,
+  ) = _CopyWithImpl_Input_UsersPreferencesSetInput;
+
+  factory CopyWith_Input_UsersPreferencesSetInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersPreferencesSetInput;
+
+  TRes call({
+    bool? darkTheme,
+    bool? greatFeastTheme,
+    String? lastHomeMode,
+    Json? orderByPreferences,
+  });
+}
+
+class _CopyWithImpl_Input_UsersPreferencesSetInput<TRes>
+    implements CopyWith_Input_UsersPreferencesSetInput<TRes> {
+  _CopyWithImpl_Input_UsersPreferencesSetInput(this._instance, this._then);
+
+  final Input_UsersPreferencesSetInput _instance;
+
+  final TRes Function(Input_UsersPreferencesSetInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? darkTheme = _undefined,
+    Object? greatFeastTheme = _undefined,
+    Object? lastHomeMode = _undefined,
+    Object? orderByPreferences = _undefined,
+  }) => _then(
+    Input_UsersPreferencesSetInput._({
+      ..._instance._$data,
+      if (darkTheme != _undefined) 'darkTheme': (darkTheme as bool?),
+      if (greatFeastTheme != _undefined)
+        'greatFeastTheme': (greatFeastTheme as bool?),
+      if (lastHomeMode != _undefined) 'lastHomeMode': (lastHomeMode as String?),
+      if (orderByPreferences != _undefined)
+        'orderByPreferences': (orderByPreferences as Json?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UsersPreferencesSetInput<TRes>
+    implements CopyWith_Input_UsersPreferencesSetInput<TRes> {
+  _CopyWithStubImpl_Input_UsersPreferencesSetInput(this._res);
+
+  TRes _res;
+
+  call({
+    bool? darkTheme,
+    bool? greatFeastTheme,
+    String? lastHomeMode,
+    Json? orderByPreferences,
+  }) => _res;
+}
+
+class Input_UsersPreferencesStreamCursorInput {
+  factory Input_UsersPreferencesStreamCursorInput({
+    required Input_UsersPreferencesStreamCursorValueInput initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => Input_UsersPreferencesStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
+
+  Input_UsersPreferencesStreamCursorInput._(this._$data);
+
+  factory Input_UsersPreferencesStreamCursorInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = data['initialValue'];
+    result$data['initialValue'] =
+        Input_UsersPreferencesStreamCursorValueInput.fromJson(
+          (l$initialValue as Map<String, dynamic>),
+        );
+    if (data.containsKey('ordering')) {
+      final l$ordering = data['ordering'];
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : fromJson_Enum_CursorOrdering((l$ordering as String));
+    }
+    return Input_UsersPreferencesStreamCursorInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_UsersPreferencesStreamCursorValueInput get initialValue =>
+      (_$data['initialValue'] as Input_UsersPreferencesStreamCursorValueInput);
+
+  Enum_CursorOrdering? get ordering =>
+      (_$data['ordering'] as Enum_CursorOrdering?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = initialValue;
+    result$data['initialValue'] = l$initialValue.toJson();
+    if (_$data.containsKey('ordering')) {
+      final l$ordering = ordering;
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UsersPreferencesStreamCursorInput<
+    Input_UsersPreferencesStreamCursorInput
+  >
+  get copyWith =>
+      CopyWith_Input_UsersPreferencesStreamCursorInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UsersPreferencesStreamCursorInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$initialValue = initialValue;
+    final lOther$initialValue = other.initialValue;
+    if (l$initialValue != lOther$initialValue) {
+      return false;
+    }
+    final l$ordering = ordering;
+    final lOther$ordering = other.ordering;
+    if (_$data.containsKey('ordering') !=
+        other._$data.containsKey('ordering')) {
+      return false;
+    }
+    if (l$ordering != lOther$ordering) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$initialValue = initialValue;
+    final l$ordering = ordering;
+    return Object.hashAll([
+      l$initialValue,
+      _$data.containsKey('ordering') ? l$ordering : const {},
+    ]);
   }
 }
 
-Enum_FathersConstraint fromJson_Enum_FathersConstraint(String value) {
-  switch (value) {
-    case r'fathers_name_key':
-      return Enum_FathersConstraint.fathers_name_key;
-    case r'fathers_pkey':
-      return Enum_FathersConstraint.fathers_pkey;
-    default:
-      return Enum_FathersConstraint.$unknown;
+abstract class CopyWith_Input_UsersPreferencesStreamCursorInput<TRes> {
+  factory CopyWith_Input_UsersPreferencesStreamCursorInput(
+    Input_UsersPreferencesStreamCursorInput instance,
+    TRes Function(Input_UsersPreferencesStreamCursorInput) then,
+  ) = _CopyWithImpl_Input_UsersPreferencesStreamCursorInput;
+
+  factory CopyWith_Input_UsersPreferencesStreamCursorInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersPreferencesStreamCursorInput;
+
+  TRes call({
+    Input_UsersPreferencesStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  });
+  CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes> get initialValue;
+}
+
+class _CopyWithImpl_Input_UsersPreferencesStreamCursorInput<TRes>
+    implements CopyWith_Input_UsersPreferencesStreamCursorInput<TRes> {
+  _CopyWithImpl_Input_UsersPreferencesStreamCursorInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_UsersPreferencesStreamCursorInput _instance;
+
+  final TRes Function(Input_UsersPreferencesStreamCursorInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? initialValue = _undefined,
+    Object? ordering = _undefined,
+  }) => _then(
+    Input_UsersPreferencesStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue':
+            (initialValue as Input_UsersPreferencesStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
+
+  CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes> get initialValue {
+    final local$initialValue = _instance.initialValue;
+    return CopyWith_Input_UsersPreferencesStreamCursorValueInput(
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
   }
 }
 
-enum Enum_FathersSelectColumn {
-  churchId,
-  id,
-  isHidden,
-  name,
-  $unknown;
+class _CopyWithStubImpl_Input_UsersPreferencesStreamCursorInput<TRes>
+    implements CopyWith_Input_UsersPreferencesStreamCursorInput<TRes> {
+  _CopyWithStubImpl_Input_UsersPreferencesStreamCursorInput(this._res);
 
-  factory Enum_FathersSelectColumn.fromJson(String value) =>
-      fromJson_Enum_FathersSelectColumn(value);
+  TRes _res;
 
-  String toJson() => toJson_Enum_FathersSelectColumn(this);
+  call({
+    Input_UsersPreferencesStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => _res;
+
+  CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes>
+  get initialValue =>
+      CopyWith_Input_UsersPreferencesStreamCursorValueInput.stub(_res);
 }
 
-String toJson_Enum_FathersSelectColumn(Enum_FathersSelectColumn e) {
-  switch (e) {
-    case Enum_FathersSelectColumn.churchId:
-      return r'churchId';
-    case Enum_FathersSelectColumn.id:
-      return r'id';
-    case Enum_FathersSelectColumn.isHidden:
-      return r'isHidden';
-    case Enum_FathersSelectColumn.name:
-      return r'name';
-    case Enum_FathersSelectColumn.$unknown:
-      return r'$unknown';
+class Input_UsersPreferencesStreamCursorValueInput {
+  factory Input_UsersPreferencesStreamCursorValueInput({
+    bool? darkTheme,
+    bool? greatFeastTheme,
+    String? lastHomeMode,
+    Json? orderByPreferences,
+    UuidValue? uid,
+    DateTime? updatedAt,
+  }) => Input_UsersPreferencesStreamCursorValueInput._({
+    if (darkTheme != null) r'darkTheme': darkTheme,
+    if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
+    if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
+    if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
+    if (uid != null) r'uid': uid,
+    if (updatedAt != null) r'updatedAt': updatedAt,
+  });
+
+  Input_UsersPreferencesStreamCursorValueInput._(this._$data);
+
+  factory Input_UsersPreferencesStreamCursorValueInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('darkTheme')) {
+      final l$darkTheme = data['darkTheme'];
+      result$data['darkTheme'] = (l$darkTheme as bool?);
+    }
+    if (data.containsKey('greatFeastTheme')) {
+      final l$greatFeastTheme = data['greatFeastTheme'];
+      result$data['greatFeastTheme'] = (l$greatFeastTheme as bool?);
+    }
+    if (data.containsKey('lastHomeMode')) {
+      final l$lastHomeMode = data['lastHomeMode'];
+      result$data['lastHomeMode'] = (l$lastHomeMode as String?);
+    }
+    if (data.containsKey('orderByPreferences')) {
+      final l$orderByPreferences = data['orderByPreferences'];
+      result$data['orderByPreferences'] = (l$orderByPreferences as Json?);
+    }
+    if (data.containsKey('uid')) {
+      final l$uid = data['uid'];
+      result$data['uid'] = l$uid == null ? null : stringToUuid(l$uid);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = l$updatedAt == null
+          ? null
+          : tstzFromString(l$updatedAt);
+    }
+    return Input_UsersPreferencesStreamCursorValueInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get darkTheme => (_$data['darkTheme'] as bool?);
+
+  bool? get greatFeastTheme => (_$data['greatFeastTheme'] as bool?);
+
+  String? get lastHomeMode => (_$data['lastHomeMode'] as String?);
+
+  Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
+
+  UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('darkTheme')) {
+      final l$darkTheme = darkTheme;
+      result$data['darkTheme'] = l$darkTheme;
+    }
+    if (_$data.containsKey('greatFeastTheme')) {
+      final l$greatFeastTheme = greatFeastTheme;
+      result$data['greatFeastTheme'] = l$greatFeastTheme;
+    }
+    if (_$data.containsKey('lastHomeMode')) {
+      final l$lastHomeMode = lastHomeMode;
+      result$data['lastHomeMode'] = l$lastHomeMode;
+    }
+    if (_$data.containsKey('orderByPreferences')) {
+      final l$orderByPreferences = orderByPreferences;
+      result$data['orderByPreferences'] = l$orderByPreferences;
+    }
+    if (_$data.containsKey('uid')) {
+      final l$uid = uid;
+      result$data['uid'] = l$uid == null ? null : uuidToString(l$uid);
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt == null
+          ? null
+          : tstzToString(l$updatedAt);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UsersPreferencesStreamCursorValueInput<
+    Input_UsersPreferencesStreamCursorValueInput
+  >
+  get copyWith =>
+      CopyWith_Input_UsersPreferencesStreamCursorValueInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UsersPreferencesStreamCursorValueInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$darkTheme = darkTheme;
+    final lOther$darkTheme = other.darkTheme;
+    if (_$data.containsKey('darkTheme') !=
+        other._$data.containsKey('darkTheme')) {
+      return false;
+    }
+    if (l$darkTheme != lOther$darkTheme) {
+      return false;
+    }
+    final l$greatFeastTheme = greatFeastTheme;
+    final lOther$greatFeastTheme = other.greatFeastTheme;
+    if (_$data.containsKey('greatFeastTheme') !=
+        other._$data.containsKey('greatFeastTheme')) {
+      return false;
+    }
+    if (l$greatFeastTheme != lOther$greatFeastTheme) {
+      return false;
+    }
+    final l$lastHomeMode = lastHomeMode;
+    final lOther$lastHomeMode = other.lastHomeMode;
+    if (_$data.containsKey('lastHomeMode') !=
+        other._$data.containsKey('lastHomeMode')) {
+      return false;
+    }
+    if (l$lastHomeMode != lOther$lastHomeMode) {
+      return false;
+    }
+    final l$orderByPreferences = orderByPreferences;
+    final lOther$orderByPreferences = other.orderByPreferences;
+    if (_$data.containsKey('orderByPreferences') !=
+        other._$data.containsKey('orderByPreferences')) {
+      return false;
+    }
+    if (l$orderByPreferences != lOther$orderByPreferences) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
+      return false;
+    }
+    if (l$uid != lOther$uid) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$darkTheme = darkTheme;
+    final l$greatFeastTheme = greatFeastTheme;
+    final l$lastHomeMode = lastHomeMode;
+    final l$orderByPreferences = orderByPreferences;
+    final l$uid = uid;
+    final l$updatedAt = updatedAt;
+    return Object.hashAll([
+      _$data.containsKey('darkTheme') ? l$darkTheme : const {},
+      _$data.containsKey('greatFeastTheme') ? l$greatFeastTheme : const {},
+      _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
+      _$data.containsKey('orderByPreferences')
+          ? l$orderByPreferences
+          : const {},
+      _$data.containsKey('uid') ? l$uid : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+    ]);
   }
 }
 
-Enum_FathersSelectColumn fromJson_Enum_FathersSelectColumn(String value) {
-  switch (value) {
-    case r'churchId':
-      return Enum_FathersSelectColumn.churchId;
-    case r'id':
-      return Enum_FathersSelectColumn.id;
-    case r'isHidden':
-      return Enum_FathersSelectColumn.isHidden;
-    case r'name':
-      return Enum_FathersSelectColumn.name;
-    default:
-      return Enum_FathersSelectColumn.$unknown;
+abstract class CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes> {
+  factory CopyWith_Input_UsersPreferencesStreamCursorValueInput(
+    Input_UsersPreferencesStreamCursorValueInput instance,
+    TRes Function(Input_UsersPreferencesStreamCursorValueInput) then,
+  ) = _CopyWithImpl_Input_UsersPreferencesStreamCursorValueInput;
+
+  factory CopyWith_Input_UsersPreferencesStreamCursorValueInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersPreferencesStreamCursorValueInput;
+
+  TRes call({
+    bool? darkTheme,
+    bool? greatFeastTheme,
+    String? lastHomeMode,
+    Json? orderByPreferences,
+    UuidValue? uid,
+    DateTime? updatedAt,
+  });
+}
+
+class _CopyWithImpl_Input_UsersPreferencesStreamCursorValueInput<TRes>
+    implements CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes> {
+  _CopyWithImpl_Input_UsersPreferencesStreamCursorValueInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_UsersPreferencesStreamCursorValueInput _instance;
+
+  final TRes Function(Input_UsersPreferencesStreamCursorValueInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? darkTheme = _undefined,
+    Object? greatFeastTheme = _undefined,
+    Object? lastHomeMode = _undefined,
+    Object? orderByPreferences = _undefined,
+    Object? uid = _undefined,
+    Object? updatedAt = _undefined,
+  }) => _then(
+    Input_UsersPreferencesStreamCursorValueInput._({
+      ..._instance._$data,
+      if (darkTheme != _undefined) 'darkTheme': (darkTheme as bool?),
+      if (greatFeastTheme != _undefined)
+        'greatFeastTheme': (greatFeastTheme as bool?),
+      if (lastHomeMode != _undefined) 'lastHomeMode': (lastHomeMode as String?),
+      if (orderByPreferences != _undefined)
+        'orderByPreferences': (orderByPreferences as Json?),
+      if (uid != _undefined) 'uid': (uid as UuidValue?),
+      if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UsersPreferencesStreamCursorValueInput<TRes>
+    implements CopyWith_Input_UsersPreferencesStreamCursorValueInput<TRes> {
+  _CopyWithStubImpl_Input_UsersPreferencesStreamCursorValueInput(this._res);
+
+  TRes _res;
+
+  call({
+    bool? darkTheme,
+    bool? greatFeastTheme,
+    String? lastHomeMode,
+    Json? orderByPreferences,
+    UuidValue? uid,
+    DateTime? updatedAt,
+  }) => _res;
+}
+
+class Input_UsersPreferencesUpdates {
+  factory Input_UsersPreferencesUpdates({
+    Input_UsersPreferencesAppendInput? $_append,
+    Input_UsersPreferencesDeleteAtPathInput? $_deleteAtPath,
+    Input_UsersPreferencesDeleteElemInput? $_deleteElem,
+    Input_UsersPreferencesDeleteKeyInput? $_deleteKey,
+    Input_UsersPreferencesPrependInput? $_prepend,
+    Input_UsersPreferencesSetInput? $_set,
+    required Input_UsersPreferencesBoolExp where,
+  }) => Input_UsersPreferencesUpdates._({
+    if ($_append != null) r'_append': $_append,
+    if ($_deleteAtPath != null) r'_deleteAtPath': $_deleteAtPath,
+    if ($_deleteElem != null) r'_deleteElem': $_deleteElem,
+    if ($_deleteKey != null) r'_deleteKey': $_deleteKey,
+    if ($_prepend != null) r'_prepend': $_prepend,
+    if ($_set != null) r'_set': $_set,
+    r'where': where,
+  });
+
+  Input_UsersPreferencesUpdates._(this._$data);
+
+  factory Input_UsersPreferencesUpdates.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_append')) {
+      final l$$_append = data['_append'];
+      result$data['_append'] = l$$_append == null
+          ? null
+          : Input_UsersPreferencesAppendInput.fromJson(
+              (l$$_append as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('_deleteAtPath')) {
+      final l$$_deleteAtPath = data['_deleteAtPath'];
+      result$data['_deleteAtPath'] = l$$_deleteAtPath == null
+          ? null
+          : Input_UsersPreferencesDeleteAtPathInput.fromJson(
+              (l$$_deleteAtPath as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('_deleteElem')) {
+      final l$$_deleteElem = data['_deleteElem'];
+      result$data['_deleteElem'] = l$$_deleteElem == null
+          ? null
+          : Input_UsersPreferencesDeleteElemInput.fromJson(
+              (l$$_deleteElem as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('_deleteKey')) {
+      final l$$_deleteKey = data['_deleteKey'];
+      result$data['_deleteKey'] = l$$_deleteKey == null
+          ? null
+          : Input_UsersPreferencesDeleteKeyInput.fromJson(
+              (l$$_deleteKey as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('_prepend')) {
+      final l$$_prepend = data['_prepend'];
+      result$data['_prepend'] = l$$_prepend == null
+          ? null
+          : Input_UsersPreferencesPrependInput.fromJson(
+              (l$$_prepend as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('_set')) {
+      final l$$_set = data['_set'];
+      result$data['_set'] = l$$_set == null
+          ? null
+          : Input_UsersPreferencesSetInput.fromJson(
+              (l$$_set as Map<String, dynamic>),
+            );
+    }
+    final l$where = data['where'];
+    result$data['where'] = Input_UsersPreferencesBoolExp.fromJson(
+      (l$where as Map<String, dynamic>),
+    );
+    return Input_UsersPreferencesUpdates._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_UsersPreferencesAppendInput? get $_append =>
+      (_$data['_append'] as Input_UsersPreferencesAppendInput?);
+
+  Input_UsersPreferencesDeleteAtPathInput? get $_deleteAtPath =>
+      (_$data['_deleteAtPath'] as Input_UsersPreferencesDeleteAtPathInput?);
+
+  Input_UsersPreferencesDeleteElemInput? get $_deleteElem =>
+      (_$data['_deleteElem'] as Input_UsersPreferencesDeleteElemInput?);
+
+  Input_UsersPreferencesDeleteKeyInput? get $_deleteKey =>
+      (_$data['_deleteKey'] as Input_UsersPreferencesDeleteKeyInput?);
+
+  Input_UsersPreferencesPrependInput? get $_prepend =>
+      (_$data['_prepend'] as Input_UsersPreferencesPrependInput?);
+
+  Input_UsersPreferencesSetInput? get $_set =>
+      (_$data['_set'] as Input_UsersPreferencesSetInput?);
+
+  Input_UsersPreferencesBoolExp get where =>
+      (_$data['where'] as Input_UsersPreferencesBoolExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_append')) {
+      final l$$_append = $_append;
+      result$data['_append'] = l$$_append?.toJson();
+    }
+    if (_$data.containsKey('_deleteAtPath')) {
+      final l$$_deleteAtPath = $_deleteAtPath;
+      result$data['_deleteAtPath'] = l$$_deleteAtPath?.toJson();
+    }
+    if (_$data.containsKey('_deleteElem')) {
+      final l$$_deleteElem = $_deleteElem;
+      result$data['_deleteElem'] = l$$_deleteElem?.toJson();
+    }
+    if (_$data.containsKey('_deleteKey')) {
+      final l$$_deleteKey = $_deleteKey;
+      result$data['_deleteKey'] = l$$_deleteKey?.toJson();
+    }
+    if (_$data.containsKey('_prepend')) {
+      final l$$_prepend = $_prepend;
+      result$data['_prepend'] = l$$_prepend?.toJson();
+    }
+    if (_$data.containsKey('_set')) {
+      final l$$_set = $_set;
+      result$data['_set'] = l$$_set?.toJson();
+    }
+    final l$where = where;
+    result$data['where'] = l$where.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_UsersPreferencesUpdates<Input_UsersPreferencesUpdates>
+  get copyWith => CopyWith_Input_UsersPreferencesUpdates(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UsersPreferencesUpdates ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_append = $_append;
+    final lOther$$_append = other.$_append;
+    if (_$data.containsKey('_append') != other._$data.containsKey('_append')) {
+      return false;
+    }
+    if (l$$_append != lOther$$_append) {
+      return false;
+    }
+    final l$$_deleteAtPath = $_deleteAtPath;
+    final lOther$$_deleteAtPath = other.$_deleteAtPath;
+    if (_$data.containsKey('_deleteAtPath') !=
+        other._$data.containsKey('_deleteAtPath')) {
+      return false;
+    }
+    if (l$$_deleteAtPath != lOther$$_deleteAtPath) {
+      return false;
+    }
+    final l$$_deleteElem = $_deleteElem;
+    final lOther$$_deleteElem = other.$_deleteElem;
+    if (_$data.containsKey('_deleteElem') !=
+        other._$data.containsKey('_deleteElem')) {
+      return false;
+    }
+    if (l$$_deleteElem != lOther$$_deleteElem) {
+      return false;
+    }
+    final l$$_deleteKey = $_deleteKey;
+    final lOther$$_deleteKey = other.$_deleteKey;
+    if (_$data.containsKey('_deleteKey') !=
+        other._$data.containsKey('_deleteKey')) {
+      return false;
+    }
+    if (l$$_deleteKey != lOther$$_deleteKey) {
+      return false;
+    }
+    final l$$_prepend = $_prepend;
+    final lOther$$_prepend = other.$_prepend;
+    if (_$data.containsKey('_prepend') !=
+        other._$data.containsKey('_prepend')) {
+      return false;
+    }
+    if (l$$_prepend != lOther$$_prepend) {
+      return false;
+    }
+    final l$$_set = $_set;
+    final lOther$$_set = other.$_set;
+    if (_$data.containsKey('_set') != other._$data.containsKey('_set')) {
+      return false;
+    }
+    if (l$$_set != lOther$$_set) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_append = $_append;
+    final l$$_deleteAtPath = $_deleteAtPath;
+    final l$$_deleteElem = $_deleteElem;
+    final l$$_deleteKey = $_deleteKey;
+    final l$$_prepend = $_prepend;
+    final l$$_set = $_set;
+    final l$where = where;
+    return Object.hashAll([
+      _$data.containsKey('_append') ? l$$_append : const {},
+      _$data.containsKey('_deleteAtPath') ? l$$_deleteAtPath : const {},
+      _$data.containsKey('_deleteElem') ? l$$_deleteElem : const {},
+      _$data.containsKey('_deleteKey') ? l$$_deleteKey : const {},
+      _$data.containsKey('_prepend') ? l$$_prepend : const {},
+      _$data.containsKey('_set') ? l$$_set : const {},
+      l$where,
+    ]);
   }
 }
 
-enum Enum_FathersUpdateColumn {
-  name,
-  $unknown;
+abstract class CopyWith_Input_UsersPreferencesUpdates<TRes> {
+  factory CopyWith_Input_UsersPreferencesUpdates(
+    Input_UsersPreferencesUpdates instance,
+    TRes Function(Input_UsersPreferencesUpdates) then,
+  ) = _CopyWithImpl_Input_UsersPreferencesUpdates;
 
-  factory Enum_FathersUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_FathersUpdateColumn(value);
+  factory CopyWith_Input_UsersPreferencesUpdates.stub(TRes res) =
+      _CopyWithStubImpl_Input_UsersPreferencesUpdates;
 
-  String toJson() => toJson_Enum_FathersUpdateColumn(this);
+  TRes call({
+    Input_UsersPreferencesAppendInput? $_append,
+    Input_UsersPreferencesDeleteAtPathInput? $_deleteAtPath,
+    Input_UsersPreferencesDeleteElemInput? $_deleteElem,
+    Input_UsersPreferencesDeleteKeyInput? $_deleteKey,
+    Input_UsersPreferencesPrependInput? $_prepend,
+    Input_UsersPreferencesSetInput? $_set,
+    Input_UsersPreferencesBoolExp? where,
+  });
+  CopyWith_Input_UsersPreferencesAppendInput<TRes> get $_append;
+  CopyWith_Input_UsersPreferencesDeleteAtPathInput<TRes> get $_deleteAtPath;
+  CopyWith_Input_UsersPreferencesDeleteElemInput<TRes> get $_deleteElem;
+  CopyWith_Input_UsersPreferencesDeleteKeyInput<TRes> get $_deleteKey;
+  CopyWith_Input_UsersPreferencesPrependInput<TRes> get $_prepend;
+  CopyWith_Input_UsersPreferencesSetInput<TRes> get $_set;
+  CopyWith_Input_UsersPreferencesBoolExp<TRes> get where;
 }
 
-String toJson_Enum_FathersUpdateColumn(Enum_FathersUpdateColumn e) {
-  switch (e) {
-    case Enum_FathersUpdateColumn.name:
-      return r'name';
-    case Enum_FathersUpdateColumn.$unknown:
-      return r'$unknown';
+class _CopyWithImpl_Input_UsersPreferencesUpdates<TRes>
+    implements CopyWith_Input_UsersPreferencesUpdates<TRes> {
+  _CopyWithImpl_Input_UsersPreferencesUpdates(this._instance, this._then);
+
+  final Input_UsersPreferencesUpdates _instance;
+
+  final TRes Function(Input_UsersPreferencesUpdates) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_append = _undefined,
+    Object? $_deleteAtPath = _undefined,
+    Object? $_deleteElem = _undefined,
+    Object? $_deleteKey = _undefined,
+    Object? $_prepend = _undefined,
+    Object? $_set = _undefined,
+    Object? where = _undefined,
+  }) => _then(
+    Input_UsersPreferencesUpdates._({
+      ..._instance._$data,
+      if ($_append != _undefined)
+        '_append': ($_append as Input_UsersPreferencesAppendInput?),
+      if ($_deleteAtPath != _undefined)
+        '_deleteAtPath':
+            ($_deleteAtPath as Input_UsersPreferencesDeleteAtPathInput?),
+      if ($_deleteElem != _undefined)
+        '_deleteElem': ($_deleteElem as Input_UsersPreferencesDeleteElemInput?),
+      if ($_deleteKey != _undefined)
+        '_deleteKey': ($_deleteKey as Input_UsersPreferencesDeleteKeyInput?),
+      if ($_prepend != _undefined)
+        '_prepend': ($_prepend as Input_UsersPreferencesPrependInput?),
+      if ($_set != _undefined)
+        '_set': ($_set as Input_UsersPreferencesSetInput?),
+      if (where != _undefined && where != null)
+        'where': (where as Input_UsersPreferencesBoolExp),
+    }),
+  );
+
+  CopyWith_Input_UsersPreferencesAppendInput<TRes> get $_append {
+    final local$$_append = _instance.$_append;
+    return local$$_append == null
+        ? CopyWith_Input_UsersPreferencesAppendInput.stub(_then(_instance))
+        : CopyWith_Input_UsersPreferencesAppendInput(
+            local$$_append,
+            (e) => call($_append: e),
+          );
+  }
+
+  CopyWith_Input_UsersPreferencesDeleteAtPathInput<TRes> get $_deleteAtPath {
+    final local$$_deleteAtPath = _instance.$_deleteAtPath;
+    return local$$_deleteAtPath == null
+        ? CopyWith_Input_UsersPreferencesDeleteAtPathInput.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_UsersPreferencesDeleteAtPathInput(
+            local$$_deleteAtPath,
+            (e) => call($_deleteAtPath: e),
+          );
+  }
+
+  CopyWith_Input_UsersPreferencesDeleteElemInput<TRes> get $_deleteElem {
+    final local$$_deleteElem = _instance.$_deleteElem;
+    return local$$_deleteElem == null
+        ? CopyWith_Input_UsersPreferencesDeleteElemInput.stub(_then(_instance))
+        : CopyWith_Input_UsersPreferencesDeleteElemInput(
+            local$$_deleteElem,
+            (e) => call($_deleteElem: e),
+          );
+  }
+
+  CopyWith_Input_UsersPreferencesDeleteKeyInput<TRes> get $_deleteKey {
+    final local$$_deleteKey = _instance.$_deleteKey;
+    return local$$_deleteKey == null
+        ? CopyWith_Input_UsersPreferencesDeleteKeyInput.stub(_then(_instance))
+        : CopyWith_Input_UsersPreferencesDeleteKeyInput(
+            local$$_deleteKey,
+            (e) => call($_deleteKey: e),
+          );
+  }
+
+  CopyWith_Input_UsersPreferencesPrependInput<TRes> get $_prepend {
+    final local$$_prepend = _instance.$_prepend;
+    return local$$_prepend == null
+        ? CopyWith_Input_UsersPreferencesPrependInput.stub(_then(_instance))
+        : CopyWith_Input_UsersPreferencesPrependInput(
+            local$$_prepend,
+            (e) => call($_prepend: e),
+          );
+  }
+
+  CopyWith_Input_UsersPreferencesSetInput<TRes> get $_set {
+    final local$$_set = _instance.$_set;
+    return local$$_set == null
+        ? CopyWith_Input_UsersPreferencesSetInput.stub(_then(_instance))
+        : CopyWith_Input_UsersPreferencesSetInput(
+            local$$_set,
+            (e) => call($_set: e),
+          );
+  }
+
+  CopyWith_Input_UsersPreferencesBoolExp<TRes> get where {
+    final local$where = _instance.where;
+    return CopyWith_Input_UsersPreferencesBoolExp(
+      local$where,
+      (e) => call(where: e),
+    );
   }
 }
 
-Enum_FathersUpdateColumn fromJson_Enum_FathersUpdateColumn(String value) {
-  switch (value) {
-    case r'name':
-      return Enum_FathersUpdateColumn.name;
-    default:
-      return Enum_FathersUpdateColumn.$unknown;
+class _CopyWithStubImpl_Input_UsersPreferencesUpdates<TRes>
+    implements CopyWith_Input_UsersPreferencesUpdates<TRes> {
+  _CopyWithStubImpl_Input_UsersPreferencesUpdates(this._res);
+
+  TRes _res;
+
+  call({
+    Input_UsersPreferencesAppendInput? $_append,
+    Input_UsersPreferencesDeleteAtPathInput? $_deleteAtPath,
+    Input_UsersPreferencesDeleteElemInput? $_deleteElem,
+    Input_UsersPreferencesDeleteKeyInput? $_deleteKey,
+    Input_UsersPreferencesPrependInput? $_prepend,
+    Input_UsersPreferencesSetInput? $_set,
+    Input_UsersPreferencesBoolExp? where,
+  }) => _res;
+
+  CopyWith_Input_UsersPreferencesAppendInput<TRes> get $_append =>
+      CopyWith_Input_UsersPreferencesAppendInput.stub(_res);
+
+  CopyWith_Input_UsersPreferencesDeleteAtPathInput<TRes> get $_deleteAtPath =>
+      CopyWith_Input_UsersPreferencesDeleteAtPathInput.stub(_res);
+
+  CopyWith_Input_UsersPreferencesDeleteElemInput<TRes> get $_deleteElem =>
+      CopyWith_Input_UsersPreferencesDeleteElemInput.stub(_res);
+
+  CopyWith_Input_UsersPreferencesDeleteKeyInput<TRes> get $_deleteKey =>
+      CopyWith_Input_UsersPreferencesDeleteKeyInput.stub(_res);
+
+  CopyWith_Input_UsersPreferencesPrependInput<TRes> get $_prepend =>
+      CopyWith_Input_UsersPreferencesPrependInput.stub(_res);
+
+  CopyWith_Input_UsersPreferencesSetInput<TRes> get $_set =>
+      CopyWith_Input_UsersPreferencesSetInput.stub(_res);
+
+  CopyWith_Input_UsersPreferencesBoolExp<TRes> get where =>
+      CopyWith_Input_UsersPreferencesBoolExp.stub(_res);
+}
+
+class Input_UuidComparisonExp {
+  factory Input_UuidComparisonExp({
+    UuidValue? $_eq,
+    UuidValue? $_gt,
+    UuidValue? $_gte,
+    List<UuidValue>? $_in,
+    bool? $_isNull,
+    UuidValue? $_lt,
+    UuidValue? $_lte,
+    UuidValue? $_neq,
+    List<UuidValue>? $_nin,
+  }) => Input_UuidComparisonExp._({
+    if ($_eq != null) r'_eq': $_eq,
+    if ($_gt != null) r'_gt': $_gt,
+    if ($_gte != null) r'_gte': $_gte,
+    if ($_in != null) r'_in': $_in,
+    if ($_isNull != null) r'_isNull': $_isNull,
+    if ($_lt != null) r'_lt': $_lt,
+    if ($_lte != null) r'_lte': $_lte,
+    if ($_neq != null) r'_neq': $_neq,
+    if ($_nin != null) r'_nin': $_nin,
+  });
+
+  Input_UuidComparisonExp._(this._$data);
+
+  factory Input_UuidComparisonExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_eq')) {
+      final l$$_eq = data['_eq'];
+      result$data['_eq'] = l$$_eq == null ? null : stringToUuid(l$$_eq);
+    }
+    if (data.containsKey('_gt')) {
+      final l$$_gt = data['_gt'];
+      result$data['_gt'] = l$$_gt == null ? null : stringToUuid(l$$_gt);
+    }
+    if (data.containsKey('_gte')) {
+      final l$$_gte = data['_gte'];
+      result$data['_gte'] = l$$_gte == null ? null : stringToUuid(l$$_gte);
+    }
+    if (data.containsKey('_in')) {
+      final l$$_in = data['_in'];
+      result$data['_in'] = (l$$_in as List<dynamic>?)
+          ?.map((e) => stringToUuid(e))
+          .toList();
+    }
+    if (data.containsKey('_isNull')) {
+      final l$$_isNull = data['_isNull'];
+      result$data['_isNull'] = (l$$_isNull as bool?);
+    }
+    if (data.containsKey('_lt')) {
+      final l$$_lt = data['_lt'];
+      result$data['_lt'] = l$$_lt == null ? null : stringToUuid(l$$_lt);
+    }
+    if (data.containsKey('_lte')) {
+      final l$$_lte = data['_lte'];
+      result$data['_lte'] = l$$_lte == null ? null : stringToUuid(l$$_lte);
+    }
+    if (data.containsKey('_neq')) {
+      final l$$_neq = data['_neq'];
+      result$data['_neq'] = l$$_neq == null ? null : stringToUuid(l$$_neq);
+    }
+    if (data.containsKey('_nin')) {
+      final l$$_nin = data['_nin'];
+      result$data['_nin'] = (l$$_nin as List<dynamic>?)
+          ?.map((e) => stringToUuid(e))
+          .toList();
+    }
+    return Input_UuidComparisonExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  UuidValue? get $_eq => (_$data['_eq'] as UuidValue?);
+
+  UuidValue? get $_gt => (_$data['_gt'] as UuidValue?);
+
+  UuidValue? get $_gte => (_$data['_gte'] as UuidValue?);
+
+  List<UuidValue>? get $_in => (_$data['_in'] as List<UuidValue>?);
+
+  bool? get $_isNull => (_$data['_isNull'] as bool?);
+
+  UuidValue? get $_lt => (_$data['_lt'] as UuidValue?);
+
+  UuidValue? get $_lte => (_$data['_lte'] as UuidValue?);
+
+  UuidValue? get $_neq => (_$data['_neq'] as UuidValue?);
+
+  List<UuidValue>? get $_nin => (_$data['_nin'] as List<UuidValue>?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_eq')) {
+      final l$$_eq = $_eq;
+      result$data['_eq'] = l$$_eq == null ? null : uuidToString(l$$_eq);
+    }
+    if (_$data.containsKey('_gt')) {
+      final l$$_gt = $_gt;
+      result$data['_gt'] = l$$_gt == null ? null : uuidToString(l$$_gt);
+    }
+    if (_$data.containsKey('_gte')) {
+      final l$$_gte = $_gte;
+      result$data['_gte'] = l$$_gte == null ? null : uuidToString(l$$_gte);
+    }
+    if (_$data.containsKey('_in')) {
+      final l$$_in = $_in;
+      result$data['_in'] = l$$_in?.map((e) => uuidToString(e)).toList();
+    }
+    if (_$data.containsKey('_isNull')) {
+      final l$$_isNull = $_isNull;
+      result$data['_isNull'] = l$$_isNull;
+    }
+    if (_$data.containsKey('_lt')) {
+      final l$$_lt = $_lt;
+      result$data['_lt'] = l$$_lt == null ? null : uuidToString(l$$_lt);
+    }
+    if (_$data.containsKey('_lte')) {
+      final l$$_lte = $_lte;
+      result$data['_lte'] = l$$_lte == null ? null : uuidToString(l$$_lte);
+    }
+    if (_$data.containsKey('_neq')) {
+      final l$$_neq = $_neq;
+      result$data['_neq'] = l$$_neq == null ? null : uuidToString(l$$_neq);
+    }
+    if (_$data.containsKey('_nin')) {
+      final l$$_nin = $_nin;
+      result$data['_nin'] = l$$_nin?.map((e) => uuidToString(e)).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UuidComparisonExp<Input_UuidComparisonExp> get copyWith =>
+      CopyWith_Input_UuidComparisonExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UuidComparisonExp || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_eq = $_eq;
+    final lOther$$_eq = other.$_eq;
+    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
+      return false;
+    }
+    if (l$$_eq != lOther$$_eq) {
+      return false;
+    }
+    final l$$_gt = $_gt;
+    final lOther$$_gt = other.$_gt;
+    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
+      return false;
+    }
+    if (l$$_gt != lOther$$_gt) {
+      return false;
+    }
+    final l$$_gte = $_gte;
+    final lOther$$_gte = other.$_gte;
+    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
+      return false;
+    }
+    if (l$$_gte != lOther$$_gte) {
+      return false;
+    }
+    final l$$_in = $_in;
+    final lOther$$_in = other.$_in;
+    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
+      return false;
+    }
+    if (l$$_in != null && lOther$$_in != null) {
+      if (l$$_in.length != lOther$$_in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_in.length; i++) {
+        final l$$_in$entry = l$$_in[i];
+        final lOther$$_in$entry = lOther$$_in[i];
+        if (l$$_in$entry != lOther$$_in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_in != lOther$$_in) {
+      return false;
+    }
+    final l$$_isNull = $_isNull;
+    final lOther$$_isNull = other.$_isNull;
+    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
+      return false;
+    }
+    if (l$$_isNull != lOther$$_isNull) {
+      return false;
+    }
+    final l$$_lt = $_lt;
+    final lOther$$_lt = other.$_lt;
+    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
+      return false;
+    }
+    if (l$$_lt != lOther$$_lt) {
+      return false;
+    }
+    final l$$_lte = $_lte;
+    final lOther$$_lte = other.$_lte;
+    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
+      return false;
+    }
+    if (l$$_lte != lOther$$_lte) {
+      return false;
+    }
+    final l$$_neq = $_neq;
+    final lOther$$_neq = other.$_neq;
+    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
+      return false;
+    }
+    if (l$$_neq != lOther$$_neq) {
+      return false;
+    }
+    final l$$_nin = $_nin;
+    final lOther$$_nin = other.$_nin;
+    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
+      return false;
+    }
+    if (l$$_nin != null && lOther$$_nin != null) {
+      if (l$$_nin.length != lOther$$_nin.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_nin.length; i++) {
+        final l$$_nin$entry = l$$_nin[i];
+        final lOther$$_nin$entry = lOther$$_nin[i];
+        if (l$$_nin$entry != lOther$$_nin$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_nin != lOther$$_nin) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_eq = $_eq;
+    final l$$_gt = $_gt;
+    final l$$_gte = $_gte;
+    final l$$_in = $_in;
+    final l$$_isNull = $_isNull;
+    final l$$_lt = $_lt;
+    final l$$_lte = $_lte;
+    final l$$_neq = $_neq;
+    final l$$_nin = $_nin;
+    return Object.hashAll([
+      _$data.containsKey('_eq') ? l$$_eq : const {},
+      _$data.containsKey('_gt') ? l$$_gt : const {},
+      _$data.containsKey('_gte') ? l$$_gte : const {},
+      _$data.containsKey('_in')
+          ? l$$_in == null
+                ? null
+                : Object.hashAll(l$$_in.map((v) => v))
+          : const {},
+      _$data.containsKey('_isNull') ? l$$_isNull : const {},
+      _$data.containsKey('_lt') ? l$$_lt : const {},
+      _$data.containsKey('_lte') ? l$$_lte : const {},
+      _$data.containsKey('_neq') ? l$$_neq : const {},
+      _$data.containsKey('_nin')
+          ? l$$_nin == null
+                ? null
+                : Object.hashAll(l$$_nin.map((v) => v))
+          : const {},
+    ]);
   }
 }
 
-enum Enum_GroupsConstraint {
-  groups_default_meeting_id_key,
-  groups_pkey,
-  $unknown;
+abstract class CopyWith_Input_UuidComparisonExp<TRes> {
+  factory CopyWith_Input_UuidComparisonExp(
+    Input_UuidComparisonExp instance,
+    TRes Function(Input_UuidComparisonExp) then,
+  ) = _CopyWithImpl_Input_UuidComparisonExp;
 
-  factory Enum_GroupsConstraint.fromJson(String value) =>
-      fromJson_Enum_GroupsConstraint(value);
+  factory CopyWith_Input_UuidComparisonExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_UuidComparisonExp;
 
-  String toJson() => toJson_Enum_GroupsConstraint(this);
+  TRes call({
+    UuidValue? $_eq,
+    UuidValue? $_gt,
+    UuidValue? $_gte,
+    List<UuidValue>? $_in,
+    bool? $_isNull,
+    UuidValue? $_lt,
+    UuidValue? $_lte,
+    UuidValue? $_neq,
+    List<UuidValue>? $_nin,
+  });
 }
 
-String toJson_Enum_GroupsConstraint(Enum_GroupsConstraint e) {
-  switch (e) {
-    case Enum_GroupsConstraint.groups_default_meeting_id_key:
-      return r'groups_default_meeting_id_key';
-    case Enum_GroupsConstraint.groups_pkey:
-      return r'groups_pkey';
-    case Enum_GroupsConstraint.$unknown:
-      return r'$unknown';
+class _CopyWithImpl_Input_UuidComparisonExp<TRes>
+    implements CopyWith_Input_UuidComparisonExp<TRes> {
+  _CopyWithImpl_Input_UuidComparisonExp(this._instance, this._then);
+
+  final Input_UuidComparisonExp _instance;
+
+  final TRes Function(Input_UuidComparisonExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_eq = _undefined,
+    Object? $_gt = _undefined,
+    Object? $_gte = _undefined,
+    Object? $_in = _undefined,
+    Object? $_isNull = _undefined,
+    Object? $_lt = _undefined,
+    Object? $_lte = _undefined,
+    Object? $_neq = _undefined,
+    Object? $_nin = _undefined,
+  }) => _then(
+    Input_UuidComparisonExp._({
+      ..._instance._$data,
+      if ($_eq != _undefined) '_eq': ($_eq as UuidValue?),
+      if ($_gt != _undefined) '_gt': ($_gt as UuidValue?),
+      if ($_gte != _undefined) '_gte': ($_gte as UuidValue?),
+      if ($_in != _undefined) '_in': ($_in as List<UuidValue>?),
+      if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
+      if ($_lt != _undefined) '_lt': ($_lt as UuidValue?),
+      if ($_lte != _undefined) '_lte': ($_lte as UuidValue?),
+      if ($_neq != _undefined) '_neq': ($_neq as UuidValue?),
+      if ($_nin != _undefined) '_nin': ($_nin as List<UuidValue>?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UuidComparisonExp<TRes>
+    implements CopyWith_Input_UuidComparisonExp<TRes> {
+  _CopyWithStubImpl_Input_UuidComparisonExp(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? $_eq,
+    UuidValue? $_gt,
+    UuidValue? $_gte,
+    List<UuidValue>? $_in,
+    bool? $_isNull,
+    UuidValue? $_lt,
+    UuidValue? $_lte,
+    UuidValue? $_neq,
+    List<UuidValue>? $_nin,
+  }) => _res;
+}
+
+class Input_classesAggregateBoolExpBool_and {
+  factory Input_classesAggregateBoolExpBool_and({
+    required Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns
+    arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    required Input_BooleanComparisonExp predicate,
+  }) => Input_classesAggregateBoolExpBool_and._({
+    r'arguments': arguments,
+    if (distinct != null) r'distinct': distinct,
+    if (filter != null) r'filter': filter,
+    r'predicate': predicate,
+  });
+
+  Input_classesAggregateBoolExpBool_and._(this._$data);
+
+  factory Input_classesAggregateBoolExpBool_and.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$arguments = data['arguments'];
+    result$data['arguments'] =
+        fromJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns(
+          (l$arguments as String),
+        );
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_ClassesBoolExp.fromJson((l$filter as Map<String, dynamic>));
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
+      (l$predicate as Map<String, dynamic>),
+    );
+    return Input_classesAggregateBoolExpBool_and._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns
+  get arguments =>
+      (_$data['arguments']
+          as Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_ClassesBoolExp? get filter =>
+      (_$data['filter'] as Input_ClassesBoolExp?);
+
+  Input_BooleanComparisonExp get predicate =>
+      (_$data['predicate'] as Input_BooleanComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$arguments = arguments;
+    result$data['arguments'] =
+        toJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns(
+          l$arguments,
+        );
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_classesAggregateBoolExpBool_and<
+    Input_classesAggregateBoolExpBool_and
+  >
+  get copyWith =>
+      CopyWith_Input_classesAggregateBoolExpBool_and(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_classesAggregateBoolExpBool_and ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      l$arguments,
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
   }
 }
 
-Enum_GroupsConstraint fromJson_Enum_GroupsConstraint(String value) {
-  switch (value) {
-    case r'groups_default_meeting_id_key':
-      return Enum_GroupsConstraint.groups_default_meeting_id_key;
-    case r'groups_pkey':
-      return Enum_GroupsConstraint.groups_pkey;
-    default:
-      return Enum_GroupsConstraint.$unknown;
+abstract class CopyWith_Input_classesAggregateBoolExpBool_and<TRes> {
+  factory CopyWith_Input_classesAggregateBoolExpBool_and(
+    Input_classesAggregateBoolExpBool_and instance,
+    TRes Function(Input_classesAggregateBoolExpBool_and) then,
+  ) = _CopyWithImpl_Input_classesAggregateBoolExpBool_and;
+
+  factory CopyWith_Input_classesAggregateBoolExpBool_and.stub(TRes res) =
+      _CopyWithStubImpl_Input_classesAggregateBoolExpBool_and;
+
+  TRes call({
+    Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns?
+    arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  });
+  CopyWith_Input_ClassesBoolExp<TRes> get filter;
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_classesAggregateBoolExpBool_and<TRes>
+    implements CopyWith_Input_classesAggregateBoolExpBool_and<TRes> {
+  _CopyWithImpl_Input_classesAggregateBoolExpBool_and(
+    this._instance,
+    this._then,
+  );
+
+  final Input_classesAggregateBoolExpBool_and _instance;
+
+  final TRes Function(Input_classesAggregateBoolExpBool_and) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) => _then(
+    Input_classesAggregateBoolExpBool_and._({
+      ..._instance._$data,
+      if (arguments != _undefined && arguments != null)
+        'arguments':
+            (arguments
+                as Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns),
+      if (distinct != _undefined) 'distinct': (distinct as bool?),
+      if (filter != _undefined) 'filter': (filter as Input_ClassesBoolExp?),
+      if (predicate != _undefined && predicate != null)
+        'predicate': (predicate as Input_BooleanComparisonExp),
+    }),
+  );
+
+  CopyWith_Input_ClassesBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_ClassesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ClassesBoolExp(local$filter, (e) => call(filter: e));
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_BooleanComparisonExp(
+      local$predicate,
+      (e) => call(predicate: e),
+    );
   }
 }
 
-enum Enum_GroupsSelectColumn {
-  blurhash,
-  color,
-  defaultMeetingId,
-  id,
-  name,
-  photoUpdatedAt,
-  serviceId,
-  validity,
-  $unknown;
+class _CopyWithStubImpl_Input_classesAggregateBoolExpBool_and<TRes>
+    implements CopyWith_Input_classesAggregateBoolExpBool_and<TRes> {
+  _CopyWithStubImpl_Input_classesAggregateBoolExpBool_and(this._res);
 
-  factory Enum_GroupsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_GroupsSelectColumn(value);
+  TRes _res;
 
-  String toJson() => toJson_Enum_GroupsSelectColumn(this);
+  call({
+    Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns?
+    arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  }) => _res;
+
+  CopyWith_Input_ClassesBoolExp<TRes> get filter =>
+      CopyWith_Input_ClassesBoolExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
 
-String toJson_Enum_GroupsSelectColumn(Enum_GroupsSelectColumn e) {
-  switch (e) {
-    case Enum_GroupsSelectColumn.blurhash:
-      return r'blurhash';
-    case Enum_GroupsSelectColumn.color:
-      return r'color';
-    case Enum_GroupsSelectColumn.defaultMeetingId:
-      return r'defaultMeetingId';
-    case Enum_GroupsSelectColumn.id:
-      return r'id';
-    case Enum_GroupsSelectColumn.name:
-      return r'name';
-    case Enum_GroupsSelectColumn.photoUpdatedAt:
-      return r'photoUpdatedAt';
-    case Enum_GroupsSelectColumn.serviceId:
-      return r'serviceId';
-    case Enum_GroupsSelectColumn.validity:
-      return r'validity';
-    case Enum_GroupsSelectColumn.$unknown:
-      return r'$unknown';
+class Input_classesAggregateBoolExpBool_or {
+  factory Input_classesAggregateBoolExpBool_or({
+    required Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns
+    arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    required Input_BooleanComparisonExp predicate,
+  }) => Input_classesAggregateBoolExpBool_or._({
+    r'arguments': arguments,
+    if (distinct != null) r'distinct': distinct,
+    if (filter != null) r'filter': filter,
+    r'predicate': predicate,
+  });
+
+  Input_classesAggregateBoolExpBool_or._(this._$data);
+
+  factory Input_classesAggregateBoolExpBool_or.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$arguments = data['arguments'];
+    result$data['arguments'] =
+        fromJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns(
+          (l$arguments as String),
+        );
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_ClassesBoolExp.fromJson((l$filter as Map<String, dynamic>));
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
+      (l$predicate as Map<String, dynamic>),
+    );
+    return Input_classesAggregateBoolExpBool_or._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns
+  get arguments =>
+      (_$data['arguments']
+          as Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_ClassesBoolExp? get filter =>
+      (_$data['filter'] as Input_ClassesBoolExp?);
+
+  Input_BooleanComparisonExp get predicate =>
+      (_$data['predicate'] as Input_BooleanComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$arguments = arguments;
+    result$data['arguments'] =
+        toJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns(
+          l$arguments,
+        );
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_classesAggregateBoolExpBool_or<
+    Input_classesAggregateBoolExpBool_or
+  >
+  get copyWith => CopyWith_Input_classesAggregateBoolExpBool_or(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_classesAggregateBoolExpBool_or ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      l$arguments,
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
   }
 }
 
-Enum_GroupsSelectColumn fromJson_Enum_GroupsSelectColumn(String value) {
-  switch (value) {
-    case r'blurhash':
-      return Enum_GroupsSelectColumn.blurhash;
-    case r'color':
-      return Enum_GroupsSelectColumn.color;
-    case r'defaultMeetingId':
-      return Enum_GroupsSelectColumn.defaultMeetingId;
-    case r'id':
-      return Enum_GroupsSelectColumn.id;
-    case r'name':
-      return Enum_GroupsSelectColumn.name;
-    case r'photoUpdatedAt':
-      return Enum_GroupsSelectColumn.photoUpdatedAt;
-    case r'serviceId':
-      return Enum_GroupsSelectColumn.serviceId;
-    case r'validity':
-      return Enum_GroupsSelectColumn.validity;
-    default:
-      return Enum_GroupsSelectColumn.$unknown;
+abstract class CopyWith_Input_classesAggregateBoolExpBool_or<TRes> {
+  factory CopyWith_Input_classesAggregateBoolExpBool_or(
+    Input_classesAggregateBoolExpBool_or instance,
+    TRes Function(Input_classesAggregateBoolExpBool_or) then,
+  ) = _CopyWithImpl_Input_classesAggregateBoolExpBool_or;
+
+  factory CopyWith_Input_classesAggregateBoolExpBool_or.stub(TRes res) =
+      _CopyWithStubImpl_Input_classesAggregateBoolExpBool_or;
+
+  TRes call({
+    Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns?
+    arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  });
+  CopyWith_Input_ClassesBoolExp<TRes> get filter;
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_classesAggregateBoolExpBool_or<TRes>
+    implements CopyWith_Input_classesAggregateBoolExpBool_or<TRes> {
+  _CopyWithImpl_Input_classesAggregateBoolExpBool_or(
+    this._instance,
+    this._then,
+  );
+
+  final Input_classesAggregateBoolExpBool_or _instance;
+
+  final TRes Function(Input_classesAggregateBoolExpBool_or) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) => _then(
+    Input_classesAggregateBoolExpBool_or._({
+      ..._instance._$data,
+      if (arguments != _undefined && arguments != null)
+        'arguments':
+            (arguments
+                as Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns),
+      if (distinct != _undefined) 'distinct': (distinct as bool?),
+      if (filter != _undefined) 'filter': (filter as Input_ClassesBoolExp?),
+      if (predicate != _undefined && predicate != null)
+        'predicate': (predicate as Input_BooleanComparisonExp),
+    }),
+  );
+
+  CopyWith_Input_ClassesBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_ClassesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ClassesBoolExp(local$filter, (e) => call(filter: e));
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_BooleanComparisonExp(
+      local$predicate,
+      (e) => call(predicate: e),
+    );
   }
 }
 
-enum Enum_GroupsUpdateColumn {
-  color,
-  defaultMeetingId,
-  name,
-  serviceId,
-  validity,
-  $unknown;
+class _CopyWithStubImpl_Input_classesAggregateBoolExpBool_or<TRes>
+    implements CopyWith_Input_classesAggregateBoolExpBool_or<TRes> {
+  _CopyWithStubImpl_Input_classesAggregateBoolExpBool_or(this._res);
 
-  factory Enum_GroupsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_GroupsUpdateColumn(value);
+  TRes _res;
 
-  String toJson() => toJson_Enum_GroupsUpdateColumn(this);
+  call({
+    Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns?
+    arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  }) => _res;
+
+  CopyWith_Input_ClassesBoolExp<TRes> get filter =>
+      CopyWith_Input_ClassesBoolExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
 
-String toJson_Enum_GroupsUpdateColumn(Enum_GroupsUpdateColumn e) {
-  switch (e) {
-    case Enum_GroupsUpdateColumn.color:
-      return r'color';
-    case Enum_GroupsUpdateColumn.defaultMeetingId:
-      return r'defaultMeetingId';
-    case Enum_GroupsUpdateColumn.name:
-      return r'name';
-    case Enum_GroupsUpdateColumn.serviceId:
-      return r'serviceId';
-    case Enum_GroupsUpdateColumn.validity:
-      return r'validity';
-    case Enum_GroupsUpdateColumn.$unknown:
-      return r'$unknown';
+class Input_classesAggregateBoolExpCount {
+  factory Input_classesAggregateBoolExpCount({
+    List<Enum_ClassesSelectColumn>? arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    required Input_IntComparisonExp predicate,
+  }) => Input_classesAggregateBoolExpCount._({
+    if (arguments != null) r'arguments': arguments,
+    if (distinct != null) r'distinct': distinct,
+    if (filter != null) r'filter': filter,
+    r'predicate': predicate,
+  });
+
+  Input_classesAggregateBoolExpCount._(this._$data);
+
+  factory Input_classesAggregateBoolExpCount.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('arguments')) {
+      final l$arguments = data['arguments'];
+      result$data['arguments'] = (l$arguments as List<dynamic>?)
+          ?.map((e) => fromJson_Enum_ClassesSelectColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_ClassesBoolExp.fromJson((l$filter as Map<String, dynamic>));
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_IntComparisonExp.fromJson(
+      (l$predicate as Map<String, dynamic>),
+    );
+    return Input_classesAggregateBoolExpCount._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Enum_ClassesSelectColumn>? get arguments =>
+      (_$data['arguments'] as List<Enum_ClassesSelectColumn>?);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_ClassesBoolExp? get filter =>
+      (_$data['filter'] as Input_ClassesBoolExp?);
+
+  Input_IntComparisonExp get predicate =>
+      (_$data['predicate'] as Input_IntComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('arguments')) {
+      final l$arguments = arguments;
+      result$data['arguments'] = l$arguments
+          ?.map((e) => toJson_Enum_ClassesSelectColumn(e))
+          .toList();
+    }
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_classesAggregateBoolExpCount<
+    Input_classesAggregateBoolExpCount
+  >
+  get copyWith => CopyWith_Input_classesAggregateBoolExpCount(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_classesAggregateBoolExpCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (_$data.containsKey('arguments') !=
+        other._$data.containsKey('arguments')) {
+      return false;
+    }
+    if (l$arguments != null && lOther$arguments != null) {
+      if (l$arguments.length != lOther$arguments.length) {
+        return false;
+      }
+      for (int i = 0; i < l$arguments.length; i++) {
+        final l$arguments$entry = l$arguments[i];
+        final lOther$arguments$entry = lOther$arguments[i];
+        if (l$arguments$entry != lOther$arguments$entry) {
+          return false;
+        }
+      }
+    } else if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      _$data.containsKey('arguments')
+          ? l$arguments == null
+                ? null
+                : Object.hashAll(l$arguments.map((v) => v))
+          : const {},
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
   }
 }
 
-Enum_GroupsUpdateColumn fromJson_Enum_GroupsUpdateColumn(String value) {
-  switch (value) {
-    case r'color':
-      return Enum_GroupsUpdateColumn.color;
-    case r'defaultMeetingId':
-      return Enum_GroupsUpdateColumn.defaultMeetingId;
-    case r'name':
-      return Enum_GroupsUpdateColumn.name;
-    case r'serviceId':
-      return Enum_GroupsUpdateColumn.serviceId;
-    case r'validity':
-      return Enum_GroupsUpdateColumn.validity;
-    default:
-      return Enum_GroupsUpdateColumn.$unknown;
+abstract class CopyWith_Input_classesAggregateBoolExpCount<TRes> {
+  factory CopyWith_Input_classesAggregateBoolExpCount(
+    Input_classesAggregateBoolExpCount instance,
+    TRes Function(Input_classesAggregateBoolExpCount) then,
+  ) = _CopyWithImpl_Input_classesAggregateBoolExpCount;
+
+  factory CopyWith_Input_classesAggregateBoolExpCount.stub(TRes res) =
+      _CopyWithStubImpl_Input_classesAggregateBoolExpCount;
+
+  TRes call({
+    List<Enum_ClassesSelectColumn>? arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    Input_IntComparisonExp? predicate,
+  });
+  CopyWith_Input_ClassesBoolExp<TRes> get filter;
+  CopyWith_Input_IntComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_classesAggregateBoolExpCount<TRes>
+    implements CopyWith_Input_classesAggregateBoolExpCount<TRes> {
+  _CopyWithImpl_Input_classesAggregateBoolExpCount(this._instance, this._then);
+
+  final Input_classesAggregateBoolExpCount _instance;
+
+  final TRes Function(Input_classesAggregateBoolExpCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) => _then(
+    Input_classesAggregateBoolExpCount._({
+      ..._instance._$data,
+      if (arguments != _undefined)
+        'arguments': (arguments as List<Enum_ClassesSelectColumn>?),
+      if (distinct != _undefined) 'distinct': (distinct as bool?),
+      if (filter != _undefined) 'filter': (filter as Input_ClassesBoolExp?),
+      if (predicate != _undefined && predicate != null)
+        'predicate': (predicate as Input_IntComparisonExp),
+    }),
+  );
+
+  CopyWith_Input_ClassesBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_ClassesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ClassesBoolExp(local$filter, (e) => call(filter: e));
+  }
+
+  CopyWith_Input_IntComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_IntComparisonExp(
+      local$predicate,
+      (e) => call(predicate: e),
+    );
   }
 }
 
-enum Enum_HistoryAttendanceDaysConstraint {
-  attendance_days_pkey,
-  $unknown;
+class _CopyWithStubImpl_Input_classesAggregateBoolExpCount<TRes>
+    implements CopyWith_Input_classesAggregateBoolExpCount<TRes> {
+  _CopyWithStubImpl_Input_classesAggregateBoolExpCount(this._res);
 
-  factory Enum_HistoryAttendanceDaysConstraint.fromJson(String value) =>
-      fromJson_Enum_HistoryAttendanceDaysConstraint(value);
+  TRes _res;
 
-  String toJson() => toJson_Enum_HistoryAttendanceDaysConstraint(this);
+  call({
+    List<Enum_ClassesSelectColumn>? arguments,
+    bool? distinct,
+    Input_ClassesBoolExp? filter,
+    Input_IntComparisonExp? predicate,
+  }) => _res;
+
+  CopyWith_Input_ClassesBoolExp<TRes> get filter =>
+      CopyWith_Input_ClassesBoolExp.stub(_res);
+
+  CopyWith_Input_IntComparisonExp<TRes> get predicate =>
+      CopyWith_Input_IntComparisonExp.stub(_res);
 }
 
-String toJson_Enum_HistoryAttendanceDaysConstraint(
-  Enum_HistoryAttendanceDaysConstraint e,
-) {
-  switch (e) {
-    case Enum_HistoryAttendanceDaysConstraint.attendance_days_pkey:
-      return r'attendance_days_pkey';
-    case Enum_HistoryAttendanceDaysConstraint.$unknown:
-      return r'$unknown';
+class Input_groupsAggregateBoolExpCount {
+  factory Input_groupsAggregateBoolExpCount({
+    List<Enum_GroupsSelectColumn>? arguments,
+    bool? distinct,
+    Input_GroupsBoolExp? filter,
+    required Input_IntComparisonExp predicate,
+  }) => Input_groupsAggregateBoolExpCount._({
+    if (arguments != null) r'arguments': arguments,
+    if (distinct != null) r'distinct': distinct,
+    if (filter != null) r'filter': filter,
+    r'predicate': predicate,
+  });
+
+  Input_groupsAggregateBoolExpCount._(this._$data);
+
+  factory Input_groupsAggregateBoolExpCount.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('arguments')) {
+      final l$arguments = data['arguments'];
+      result$data['arguments'] = (l$arguments as List<dynamic>?)
+          ?.map((e) => fromJson_Enum_GroupsSelectColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_GroupsBoolExp.fromJson((l$filter as Map<String, dynamic>));
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_IntComparisonExp.fromJson(
+      (l$predicate as Map<String, dynamic>),
+    );
+    return Input_groupsAggregateBoolExpCount._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Enum_GroupsSelectColumn>? get arguments =>
+      (_$data['arguments'] as List<Enum_GroupsSelectColumn>?);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_GroupsBoolExp? get filter => (_$data['filter'] as Input_GroupsBoolExp?);
+
+  Input_IntComparisonExp get predicate =>
+      (_$data['predicate'] as Input_IntComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('arguments')) {
+      final l$arguments = arguments;
+      result$data['arguments'] = l$arguments
+          ?.map((e) => toJson_Enum_GroupsSelectColumn(e))
+          .toList();
+    }
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_groupsAggregateBoolExpCount<Input_groupsAggregateBoolExpCount>
+  get copyWith => CopyWith_Input_groupsAggregateBoolExpCount(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_groupsAggregateBoolExpCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (_$data.containsKey('arguments') !=
+        other._$data.containsKey('arguments')) {
+      return false;
+    }
+    if (l$arguments != null && lOther$arguments != null) {
+      if (l$arguments.length != lOther$arguments.length) {
+        return false;
+      }
+      for (int i = 0; i < l$arguments.length; i++) {
+        final l$arguments$entry = l$arguments[i];
+        final lOther$arguments$entry = lOther$arguments[i];
+        if (l$arguments$entry != lOther$arguments$entry) {
+          return false;
+        }
+      }
+    } else if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      _$data.containsKey('arguments')
+          ? l$arguments == null
+                ? null
+                : Object.hashAll(l$arguments.map((v) => v))
+          : const {},
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
   }
 }
 
-Enum_HistoryAttendanceDaysConstraint
-fromJson_Enum_HistoryAttendanceDaysConstraint(String value) {
-  switch (value) {
-    case r'attendance_days_pkey':
-      return Enum_HistoryAttendanceDaysConstraint.attendance_days_pkey;
-    default:
-      return Enum_HistoryAttendanceDaysConstraint.$unknown;
+abstract class CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
+  factory CopyWith_Input_groupsAggregateBoolExpCount(
+    Input_groupsAggregateBoolExpCount instance,
+    TRes Function(Input_groupsAggregateBoolExpCount) then,
+  ) = _CopyWithImpl_Input_groupsAggregateBoolExpCount;
+
+  factory CopyWith_Input_groupsAggregateBoolExpCount.stub(TRes res) =
+      _CopyWithStubImpl_Input_groupsAggregateBoolExpCount;
+
+  TRes call({
+    List<Enum_GroupsSelectColumn>? arguments,
+    bool? distinct,
+    Input_GroupsBoolExp? filter,
+    Input_IntComparisonExp? predicate,
+  });
+  CopyWith_Input_GroupsBoolExp<TRes> get filter;
+  CopyWith_Input_IntComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_groupsAggregateBoolExpCount<TRes>
+    implements CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
+  _CopyWithImpl_Input_groupsAggregateBoolExpCount(this._instance, this._then);
+
+  final Input_groupsAggregateBoolExpCount _instance;
+
+  final TRes Function(Input_groupsAggregateBoolExpCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) => _then(
+    Input_groupsAggregateBoolExpCount._({
+      ..._instance._$data,
+      if (arguments != _undefined)
+        'arguments': (arguments as List<Enum_GroupsSelectColumn>?),
+      if (distinct != _undefined) 'distinct': (distinct as bool?),
+      if (filter != _undefined) 'filter': (filter as Input_GroupsBoolExp?),
+      if (predicate != _undefined && predicate != null)
+        'predicate': (predicate as Input_IntComparisonExp),
+    }),
+  );
+
+  CopyWith_Input_GroupsBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_GroupsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_GroupsBoolExp(local$filter, (e) => call(filter: e));
+  }
+
+  CopyWith_Input_IntComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_IntComparisonExp(
+      local$predicate,
+      (e) => call(predicate: e),
+    );
   }
 }
 
-enum Enum_HistoryAttendanceDaysSelectColumn {
-  day,
-  $unknown;
+class _CopyWithStubImpl_Input_groupsAggregateBoolExpCount<TRes>
+    implements CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
+  _CopyWithStubImpl_Input_groupsAggregateBoolExpCount(this._res);
 
-  factory Enum_HistoryAttendanceDaysSelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryAttendanceDaysSelectColumn(value);
+  TRes _res;
 
-  String toJson() => toJson_Enum_HistoryAttendanceDaysSelectColumn(this);
+  call({
+    List<Enum_GroupsSelectColumn>? arguments,
+    bool? distinct,
+    Input_GroupsBoolExp? filter,
+    Input_IntComparisonExp? predicate,
+  }) => _res;
+
+  CopyWith_Input_GroupsBoolExp<TRes> get filter =>
+      CopyWith_Input_GroupsBoolExp.stub(_res);
+
+  CopyWith_Input_IntComparisonExp<TRes> get predicate =>
+      CopyWith_Input_IntComparisonExp.stub(_res);
 }
 
-String toJson_Enum_HistoryAttendanceDaysSelectColumn(
-  Enum_HistoryAttendanceDaysSelectColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryAttendanceDaysSelectColumn.day:
-      return r'day';
-    case Enum_HistoryAttendanceDaysSelectColumn.$unknown:
-      return r'$unknown';
+class Input_historyAttendanceHistoryAggregateBoolExpBool_and {
+  factory Input_historyAttendanceHistoryAggregateBoolExpBool_and({
+    required Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
+    arguments,
+    bool? distinct,
+    Input_HistoryAttendanceHistoryBoolExp? filter,
+    required Input_BooleanComparisonExp predicate,
+  }) => Input_historyAttendanceHistoryAggregateBoolExpBool_and._({
+    r'arguments': arguments,
+    if (distinct != null) r'distinct': distinct,
+    if (filter != null) r'filter': filter,
+    r'predicate': predicate,
+  });
+
+  Input_historyAttendanceHistoryAggregateBoolExpBool_and._(this._$data);
+
+  factory Input_historyAttendanceHistoryAggregateBoolExpBool_and.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$arguments = data['arguments'];
+    result$data['arguments'] =
+        fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
+          (l$arguments as String),
+        );
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_HistoryAttendanceHistoryBoolExp.fromJson(
+              (l$filter as Map<String, dynamic>),
+            );
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
+      (l$predicate as Map<String, dynamic>),
+    );
+    return Input_historyAttendanceHistoryAggregateBoolExpBool_and._(
+      result$data,
+    );
   }
-}
 
-Enum_HistoryAttendanceDaysSelectColumn
-fromJson_Enum_HistoryAttendanceDaysSelectColumn(String value) {
-  switch (value) {
-    case r'day':
-      return Enum_HistoryAttendanceDaysSelectColumn.day;
-    default:
-      return Enum_HistoryAttendanceDaysSelectColumn.$unknown;
-  }
-}
+  Map<String, dynamic> _$data;
 
-enum Enum_HistoryAttendanceDaysUpdateColumn {
-  day,
-  $unknown;
-
-  factory Enum_HistoryAttendanceDaysUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryAttendanceDaysUpdateColumn(value);
-
-  String toJson() => toJson_Enum_HistoryAttendanceDaysUpdateColumn(this);
-}
-
-String toJson_Enum_HistoryAttendanceDaysUpdateColumn(
-  Enum_HistoryAttendanceDaysUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryAttendanceDaysUpdateColumn.day:
-      return r'day';
-    case Enum_HistoryAttendanceDaysUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryAttendanceDaysUpdateColumn
-fromJson_Enum_HistoryAttendanceDaysUpdateColumn(String value) {
-  switch (value) {
-    case r'day':
-      return Enum_HistoryAttendanceDaysUpdateColumn.day;
-    default:
-      return Enum_HistoryAttendanceDaysUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryAttendanceHistoryConstraint {
-  attendance_history_meeting_person_day_idx,
-  attendance_history_pkey,
-  $unknown;
-
-  factory Enum_HistoryAttendanceHistoryConstraint.fromJson(String value) =>
-      fromJson_Enum_HistoryAttendanceHistoryConstraint(value);
-
-  String toJson() => toJson_Enum_HistoryAttendanceHistoryConstraint(this);
-}
-
-String toJson_Enum_HistoryAttendanceHistoryConstraint(
-  Enum_HistoryAttendanceHistoryConstraint e,
-) {
-  switch (e) {
-    case Enum_HistoryAttendanceHistoryConstraint
-        .attendance_history_meeting_person_day_idx:
-      return r'attendance_history_meeting_person_day_idx';
-    case Enum_HistoryAttendanceHistoryConstraint.attendance_history_pkey:
-      return r'attendance_history_pkey';
-    case Enum_HistoryAttendanceHistoryConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryAttendanceHistoryConstraint
-fromJson_Enum_HistoryAttendanceHistoryConstraint(String value) {
-  switch (value) {
-    case r'attendance_history_meeting_person_day_idx':
-      return Enum_HistoryAttendanceHistoryConstraint
-          .attendance_history_meeting_person_day_idx;
-    case r'attendance_history_pkey':
-      return Enum_HistoryAttendanceHistoryConstraint.attendance_history_pkey;
-    default:
-      return Enum_HistoryAttendanceHistoryConstraint.$unknown;
-  }
-}
-
-enum Enum_HistoryAttendanceHistorySelectColumn {
-  asServant,
-  datetime,
-  day,
-  id,
-  meetingId,
-  personId,
-  recordedBy,
-  $unknown;
-
-  factory Enum_HistoryAttendanceHistorySelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryAttendanceHistorySelectColumn(value);
-
-  String toJson() => toJson_Enum_HistoryAttendanceHistorySelectColumn(this);
-}
-
-String toJson_Enum_HistoryAttendanceHistorySelectColumn(
-  Enum_HistoryAttendanceHistorySelectColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryAttendanceHistorySelectColumn.asServant:
-      return r'asServant';
-    case Enum_HistoryAttendanceHistorySelectColumn.datetime:
-      return r'datetime';
-    case Enum_HistoryAttendanceHistorySelectColumn.day:
-      return r'day';
-    case Enum_HistoryAttendanceHistorySelectColumn.id:
-      return r'id';
-    case Enum_HistoryAttendanceHistorySelectColumn.meetingId:
-      return r'meetingId';
-    case Enum_HistoryAttendanceHistorySelectColumn.personId:
-      return r'personId';
-    case Enum_HistoryAttendanceHistorySelectColumn.recordedBy:
-      return r'recordedBy';
-    case Enum_HistoryAttendanceHistorySelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryAttendanceHistorySelectColumn
-fromJson_Enum_HistoryAttendanceHistorySelectColumn(String value) {
-  switch (value) {
-    case r'asServant':
-      return Enum_HistoryAttendanceHistorySelectColumn.asServant;
-    case r'datetime':
-      return Enum_HistoryAttendanceHistorySelectColumn.datetime;
-    case r'day':
-      return Enum_HistoryAttendanceHistorySelectColumn.day;
-    case r'id':
-      return Enum_HistoryAttendanceHistorySelectColumn.id;
-    case r'meetingId':
-      return Enum_HistoryAttendanceHistorySelectColumn.meetingId;
-    case r'personId':
-      return Enum_HistoryAttendanceHistorySelectColumn.personId;
-    case r'recordedBy':
-      return Enum_HistoryAttendanceHistorySelectColumn.recordedBy;
-    default:
-      return Enum_HistoryAttendanceHistorySelectColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns {
-  asServant,
-  $unknown;
-
-  factory Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
-        value,
-      );
-
-  String toJson() =>
-      toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
-        this,
-      );
-}
-
-String
-toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
   Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
-  e,
-) {
-  switch (e) {
-    case Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
-        .asServant:
-      return r'asServant';
-    case Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
-        .$unknown:
-      return r'$unknown';
+  get arguments =>
+      (_$data['arguments']
+          as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_HistoryAttendanceHistoryBoolExp? get filter =>
+      (_$data['filter'] as Input_HistoryAttendanceHistoryBoolExp?);
+
+  Input_BooleanComparisonExp get predicate =>
+      (_$data['predicate'] as Input_BooleanComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$arguments = arguments;
+    result$data['arguments'] =
+        toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
+          l$arguments,
+        );
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
   }
-}
 
-Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
-fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
-  String value,
-) {
-  switch (value) {
-    case r'asServant':
-      return Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
-          .asServant;
-    default:
-      return Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
-          .$unknown;
-  }
-}
-
-enum Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns {
-  asServant,
-  $unknown;
-
-  factory Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
-        value,
-      );
-
-  String toJson() =>
-      toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
+  CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<
+    Input_historyAttendanceHistoryAggregateBoolExpBool_and
+  >
+  get copyWith =>
+      CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
         this,
+        (i) => i,
       );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_historyAttendanceHistoryAggregateBoolExpBool_and ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      l$arguments,
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
+  }
 }
 
-String
-toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
+abstract class CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<
+  TRes
+> {
+  factory CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
+    Input_historyAttendanceHistoryAggregateBoolExpBool_and instance,
+    TRes Function(Input_historyAttendanceHistoryAggregateBoolExpBool_and) then,
+  ) = _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and;
+
+  factory CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and;
+
+  TRes call({
+    Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns?
+    arguments,
+    bool? distinct,
+    Input_HistoryAttendanceHistoryBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  });
+  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter;
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and<TRes>
+    implements
+        CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<TRes> {
+  _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
+    this._instance,
+    this._then,
+  );
+
+  final Input_historyAttendanceHistoryAggregateBoolExpBool_and _instance;
+
+  final TRes Function(Input_historyAttendanceHistoryAggregateBoolExpBool_and)
+  _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) => _then(
+    Input_historyAttendanceHistoryAggregateBoolExpBool_and._({
+      ..._instance._$data,
+      if (arguments != _undefined && arguments != null)
+        'arguments':
+            (arguments
+                as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns),
+      if (distinct != _undefined) 'distinct': (distinct as bool?),
+      if (filter != _undefined)
+        'filter': (filter as Input_HistoryAttendanceHistoryBoolExp?),
+      if (predicate != _undefined && predicate != null)
+        'predicate': (predicate as Input_BooleanComparisonExp),
+    }),
+  );
+
+  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryAttendanceHistoryBoolExp(
+            local$filter,
+            (e) => call(filter: e),
+          );
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_BooleanComparisonExp(
+      local$predicate,
+      (e) => call(predicate: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and<
+  TRes
+>
+    implements
+        CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<TRes> {
+  _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
+    this._res,
+  );
+
+  TRes _res;
+
+  call({
+    Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns?
+    arguments,
+    bool? distinct,
+    Input_HistoryAttendanceHistoryBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  }) => _res;
+
+  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter =>
+      CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+}
+
+class Input_historyAttendanceHistoryAggregateBoolExpBool_or {
+  factory Input_historyAttendanceHistoryAggregateBoolExpBool_or({
+    required Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns
+    arguments,
+    bool? distinct,
+    Input_HistoryAttendanceHistoryBoolExp? filter,
+    required Input_BooleanComparisonExp predicate,
+  }) => Input_historyAttendanceHistoryAggregateBoolExpBool_or._({
+    r'arguments': arguments,
+    if (distinct != null) r'distinct': distinct,
+    if (filter != null) r'filter': filter,
+    r'predicate': predicate,
+  });
+
+  Input_historyAttendanceHistoryAggregateBoolExpBool_or._(this._$data);
+
+  factory Input_historyAttendanceHistoryAggregateBoolExpBool_or.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$arguments = data['arguments'];
+    result$data['arguments'] =
+        fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
+          (l$arguments as String),
+        );
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_HistoryAttendanceHistoryBoolExp.fromJson(
+              (l$filter as Map<String, dynamic>),
+            );
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
+      (l$predicate as Map<String, dynamic>),
+    );
+    return Input_historyAttendanceHistoryAggregateBoolExpBool_or._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
   Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns
-  e,
-) {
-  switch (e) {
-    case Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns
-        .asServant:
-      return r'asServant';
-    case Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns
-        .$unknown:
-      return r'$unknown';
+  get arguments =>
+      (_$data['arguments']
+          as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_HistoryAttendanceHistoryBoolExp? get filter =>
+      (_$data['filter'] as Input_HistoryAttendanceHistoryBoolExp?);
+
+  Input_BooleanComparisonExp get predicate =>
+      (_$data['predicate'] as Input_BooleanComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$arguments = arguments;
+    result$data['arguments'] =
+        toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
+          l$arguments,
+        );
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
   }
-}
 
-Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns
-fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
-  String value,
-) {
-  switch (value) {
-    case r'asServant':
-      return Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns
-          .asServant;
-    default:
-      return Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns
-          .$unknown;
-  }
-}
-
-enum Enum_HistoryAttendanceHistoryUpdateColumn {
-  datetime,
-  $unknown;
-
-  factory Enum_HistoryAttendanceHistoryUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryAttendanceHistoryUpdateColumn(value);
-
-  String toJson() => toJson_Enum_HistoryAttendanceHistoryUpdateColumn(this);
-}
-
-String toJson_Enum_HistoryAttendanceHistoryUpdateColumn(
-  Enum_HistoryAttendanceHistoryUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryAttendanceHistoryUpdateColumn.datetime:
-      return r'datetime';
-    case Enum_HistoryAttendanceHistoryUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryAttendanceHistoryUpdateColumn
-fromJson_Enum_HistoryAttendanceHistoryUpdateColumn(String value) {
-  switch (value) {
-    case r'datetime':
-      return Enum_HistoryAttendanceHistoryUpdateColumn.datetime;
-    default:
-      return Enum_HistoryAttendanceHistoryUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryCallHistoryConstraint {
-  call_history_pkey,
-  $unknown;
-
-  factory Enum_HistoryCallHistoryConstraint.fromJson(String value) =>
-      fromJson_Enum_HistoryCallHistoryConstraint(value);
-
-  String toJson() => toJson_Enum_HistoryCallHistoryConstraint(this);
-}
-
-String toJson_Enum_HistoryCallHistoryConstraint(
-  Enum_HistoryCallHistoryConstraint e,
-) {
-  switch (e) {
-    case Enum_HistoryCallHistoryConstraint.call_history_pkey:
-      return r'call_history_pkey';
-    case Enum_HistoryCallHistoryConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryCallHistoryConstraint fromJson_Enum_HistoryCallHistoryConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'call_history_pkey':
-      return Enum_HistoryCallHistoryConstraint.call_history_pkey;
-    default:
-      return Enum_HistoryCallHistoryConstraint.$unknown;
-  }
-}
-
-enum Enum_HistoryCallHistorySelectColumn {
-  personId,
-  recordedBy,
-  time,
-  $unknown;
-
-  factory Enum_HistoryCallHistorySelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryCallHistorySelectColumn(value);
-
-  String toJson() => toJson_Enum_HistoryCallHistorySelectColumn(this);
-}
-
-String toJson_Enum_HistoryCallHistorySelectColumn(
-  Enum_HistoryCallHistorySelectColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryCallHistorySelectColumn.personId:
-      return r'personId';
-    case Enum_HistoryCallHistorySelectColumn.recordedBy:
-      return r'recordedBy';
-    case Enum_HistoryCallHistorySelectColumn.time:
-      return r'time';
-    case Enum_HistoryCallHistorySelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryCallHistorySelectColumn
-fromJson_Enum_HistoryCallHistorySelectColumn(String value) {
-  switch (value) {
-    case r'personId':
-      return Enum_HistoryCallHistorySelectColumn.personId;
-    case r'recordedBy':
-      return Enum_HistoryCallHistorySelectColumn.recordedBy;
-    case r'time':
-      return Enum_HistoryCallHistorySelectColumn.time;
-    default:
-      return Enum_HistoryCallHistorySelectColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryCallHistoryUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_HistoryCallHistoryUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryCallHistoryUpdateColumn(value);
-
-  String toJson() => toJson_Enum_HistoryCallHistoryUpdateColumn(this);
-}
-
-String toJson_Enum_HistoryCallHistoryUpdateColumn(
-  Enum_HistoryCallHistoryUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryCallHistoryUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_HistoryCallHistoryUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryCallHistoryUpdateColumn
-fromJson_Enum_HistoryCallHistoryUpdateColumn(String value) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_HistoryCallHistoryUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_HistoryCallHistoryUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryConfessionHistoryConstraint {
-  confession_history_day_id_person_id_key,
-  confession_history_pkey,
-  $unknown;
-
-  factory Enum_HistoryConfessionHistoryConstraint.fromJson(String value) =>
-      fromJson_Enum_HistoryConfessionHistoryConstraint(value);
-
-  String toJson() => toJson_Enum_HistoryConfessionHistoryConstraint(this);
-}
-
-String toJson_Enum_HistoryConfessionHistoryConstraint(
-  Enum_HistoryConfessionHistoryConstraint e,
-) {
-  switch (e) {
-    case Enum_HistoryConfessionHistoryConstraint
-        .confession_history_day_id_person_id_key:
-      return r'confession_history_day_id_person_id_key';
-    case Enum_HistoryConfessionHistoryConstraint.confession_history_pkey:
-      return r'confession_history_pkey';
-    case Enum_HistoryConfessionHistoryConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryConfessionHistoryConstraint
-fromJson_Enum_HistoryConfessionHistoryConstraint(String value) {
-  switch (value) {
-    case r'confession_history_day_id_person_id_key':
-      return Enum_HistoryConfessionHistoryConstraint
-          .confession_history_day_id_person_id_key;
-    case r'confession_history_pkey':
-      return Enum_HistoryConfessionHistoryConstraint.confession_history_pkey;
-    default:
-      return Enum_HistoryConfessionHistoryConstraint.$unknown;
-  }
-}
-
-enum Enum_HistoryConfessionHistorySelectColumn {
-  dayId,
-  id,
-  personId,
-  recordedBy,
-  time,
-  $unknown;
-
-  factory Enum_HistoryConfessionHistorySelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryConfessionHistorySelectColumn(value);
-
-  String toJson() => toJson_Enum_HistoryConfessionHistorySelectColumn(this);
-}
-
-String toJson_Enum_HistoryConfessionHistorySelectColumn(
-  Enum_HistoryConfessionHistorySelectColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryConfessionHistorySelectColumn.dayId:
-      return r'dayId';
-    case Enum_HistoryConfessionHistorySelectColumn.id:
-      return r'id';
-    case Enum_HistoryConfessionHistorySelectColumn.personId:
-      return r'personId';
-    case Enum_HistoryConfessionHistorySelectColumn.recordedBy:
-      return r'recordedBy';
-    case Enum_HistoryConfessionHistorySelectColumn.time:
-      return r'time';
-    case Enum_HistoryConfessionHistorySelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryConfessionHistorySelectColumn
-fromJson_Enum_HistoryConfessionHistorySelectColumn(String value) {
-  switch (value) {
-    case r'dayId':
-      return Enum_HistoryConfessionHistorySelectColumn.dayId;
-    case r'id':
-      return Enum_HistoryConfessionHistorySelectColumn.id;
-    case r'personId':
-      return Enum_HistoryConfessionHistorySelectColumn.personId;
-    case r'recordedBy':
-      return Enum_HistoryConfessionHistorySelectColumn.recordedBy;
-    case r'time':
-      return Enum_HistoryConfessionHistorySelectColumn.time;
-    default:
-      return Enum_HistoryConfessionHistorySelectColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryConfessionHistoryUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_HistoryConfessionHistoryUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryConfessionHistoryUpdateColumn(value);
-
-  String toJson() => toJson_Enum_HistoryConfessionHistoryUpdateColumn(this);
-}
-
-String toJson_Enum_HistoryConfessionHistoryUpdateColumn(
-  Enum_HistoryConfessionHistoryUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryConfessionHistoryUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_HistoryConfessionHistoryUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryConfessionHistoryUpdateColumn
-fromJson_Enum_HistoryConfessionHistoryUpdateColumn(String value) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_HistoryConfessionHistoryUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_HistoryConfessionHistoryUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryEditHistorySelectColumn {
-  recordId,
-  recordedBy,
-  table,
-  time,
-  $unknown;
-
-  factory Enum_HistoryEditHistorySelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryEditHistorySelectColumn(value);
-
-  String toJson() => toJson_Enum_HistoryEditHistorySelectColumn(this);
-}
-
-String toJson_Enum_HistoryEditHistorySelectColumn(
-  Enum_HistoryEditHistorySelectColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryEditHistorySelectColumn.recordId:
-      return r'recordId';
-    case Enum_HistoryEditHistorySelectColumn.recordedBy:
-      return r'recordedBy';
-    case Enum_HistoryEditHistorySelectColumn.table:
-      return r'table';
-    case Enum_HistoryEditHistorySelectColumn.time:
-      return r'time';
-    case Enum_HistoryEditHistorySelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryEditHistorySelectColumn
-fromJson_Enum_HistoryEditHistorySelectColumn(String value) {
-  switch (value) {
-    case r'recordId':
-      return Enum_HistoryEditHistorySelectColumn.recordId;
-    case r'recordedBy':
-      return Enum_HistoryEditHistorySelectColumn.recordedBy;
-    case r'table':
-      return Enum_HistoryEditHistorySelectColumn.table;
-    case r'time':
-      return Enum_HistoryEditHistorySelectColumn.time;
-    default:
-      return Enum_HistoryEditHistorySelectColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryKodasHistoryConstraint {
-  kodas_history_day_id_person_id_key,
-  kodas_history_pkey,
-  $unknown;
-
-  factory Enum_HistoryKodasHistoryConstraint.fromJson(String value) =>
-      fromJson_Enum_HistoryKodasHistoryConstraint(value);
-
-  String toJson() => toJson_Enum_HistoryKodasHistoryConstraint(this);
-}
-
-String toJson_Enum_HistoryKodasHistoryConstraint(
-  Enum_HistoryKodasHistoryConstraint e,
-) {
-  switch (e) {
-    case Enum_HistoryKodasHistoryConstraint.kodas_history_day_id_person_id_key:
-      return r'kodas_history_day_id_person_id_key';
-    case Enum_HistoryKodasHistoryConstraint.kodas_history_pkey:
-      return r'kodas_history_pkey';
-    case Enum_HistoryKodasHistoryConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryKodasHistoryConstraint fromJson_Enum_HistoryKodasHistoryConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'kodas_history_day_id_person_id_key':
-      return Enum_HistoryKodasHistoryConstraint
-          .kodas_history_day_id_person_id_key;
-    case r'kodas_history_pkey':
-      return Enum_HistoryKodasHistoryConstraint.kodas_history_pkey;
-    default:
-      return Enum_HistoryKodasHistoryConstraint.$unknown;
-  }
-}
-
-enum Enum_HistoryKodasHistorySelectColumn {
-  dayId,
-  id,
-  personId,
-  recordedBy,
-  time,
-  $unknown;
-
-  factory Enum_HistoryKodasHistorySelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryKodasHistorySelectColumn(value);
-
-  String toJson() => toJson_Enum_HistoryKodasHistorySelectColumn(this);
-}
-
-String toJson_Enum_HistoryKodasHistorySelectColumn(
-  Enum_HistoryKodasHistorySelectColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryKodasHistorySelectColumn.dayId:
-      return r'dayId';
-    case Enum_HistoryKodasHistorySelectColumn.id:
-      return r'id';
-    case Enum_HistoryKodasHistorySelectColumn.personId:
-      return r'personId';
-    case Enum_HistoryKodasHistorySelectColumn.recordedBy:
-      return r'recordedBy';
-    case Enum_HistoryKodasHistorySelectColumn.time:
-      return r'time';
-    case Enum_HistoryKodasHistorySelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryKodasHistorySelectColumn
-fromJson_Enum_HistoryKodasHistorySelectColumn(String value) {
-  switch (value) {
-    case r'dayId':
-      return Enum_HistoryKodasHistorySelectColumn.dayId;
-    case r'id':
-      return Enum_HistoryKodasHistorySelectColumn.id;
-    case r'personId':
-      return Enum_HistoryKodasHistorySelectColumn.personId;
-    case r'recordedBy':
-      return Enum_HistoryKodasHistorySelectColumn.recordedBy;
-    case r'time':
-      return Enum_HistoryKodasHistorySelectColumn.time;
-    default:
-      return Enum_HistoryKodasHistorySelectColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryKodasHistoryUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_HistoryKodasHistoryUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryKodasHistoryUpdateColumn(value);
-
-  String toJson() => toJson_Enum_HistoryKodasHistoryUpdateColumn(this);
-}
-
-String toJson_Enum_HistoryKodasHistoryUpdateColumn(
-  Enum_HistoryKodasHistoryUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryKodasHistoryUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_HistoryKodasHistoryUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryKodasHistoryUpdateColumn
-fromJson_Enum_HistoryKodasHistoryUpdateColumn(String value) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_HistoryKodasHistoryUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_HistoryKodasHistoryUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryMeetingDaysSelectColumn {
-  day,
-  gender,
-  meetingId,
-  personsCount,
-  servantsCount,
-  studyYearId,
-  totalCount,
-  $unknown;
-
-  factory Enum_HistoryMeetingDaysSelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryMeetingDaysSelectColumn(value);
-
-  String toJson() => toJson_Enum_HistoryMeetingDaysSelectColumn(this);
-}
-
-String toJson_Enum_HistoryMeetingDaysSelectColumn(
-  Enum_HistoryMeetingDaysSelectColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryMeetingDaysSelectColumn.day:
-      return r'day';
-    case Enum_HistoryMeetingDaysSelectColumn.gender:
-      return r'gender';
-    case Enum_HistoryMeetingDaysSelectColumn.meetingId:
-      return r'meetingId';
-    case Enum_HistoryMeetingDaysSelectColumn.personsCount:
-      return r'personsCount';
-    case Enum_HistoryMeetingDaysSelectColumn.servantsCount:
-      return r'servantsCount';
-    case Enum_HistoryMeetingDaysSelectColumn.studyYearId:
-      return r'studyYearId';
-    case Enum_HistoryMeetingDaysSelectColumn.totalCount:
-      return r'totalCount';
-    case Enum_HistoryMeetingDaysSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryMeetingDaysSelectColumn
-fromJson_Enum_HistoryMeetingDaysSelectColumn(String value) {
-  switch (value) {
-    case r'day':
-      return Enum_HistoryMeetingDaysSelectColumn.day;
-    case r'gender':
-      return Enum_HistoryMeetingDaysSelectColumn.gender;
-    case r'meetingId':
-      return Enum_HistoryMeetingDaysSelectColumn.meetingId;
-    case r'personsCount':
-      return Enum_HistoryMeetingDaysSelectColumn.personsCount;
-    case r'servantsCount':
-      return Enum_HistoryMeetingDaysSelectColumn.servantsCount;
-    case r'studyYearId':
-      return Enum_HistoryMeetingDaysSelectColumn.studyYearId;
-    case r'totalCount':
-      return Enum_HistoryMeetingDaysSelectColumn.totalCount;
-    default:
-      return Enum_HistoryMeetingDaysSelectColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns {
-  gender,
-  $unknown;
-
-  factory Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns(
-        value,
-      );
-
-  String toJson() =>
-      toJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns(
+  CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or<
+    Input_historyAttendanceHistoryAggregateBoolExpBool_or
+  >
+  get copyWith =>
+      CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or(
         this,
-      );
-}
-
-String
-toJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns(
-  Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns
-  e,
-) {
-  switch (e) {
-    case Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns
-        .gender:
-      return r'gender';
-    case Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns
-        .$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns
-fromJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns(
-  String value,
-) {
-  switch (value) {
-    case r'gender':
-      return Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns
-          .gender;
-    default:
-      return Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns
-          .$unknown;
-  }
-}
-
-enum Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns {
-  gender,
-  $unknown;
-
-  factory Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns(
-        value,
+        (i) => i,
       );
 
-  String toJson() =>
-      toJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns(
-        this,
-      );
-}
-
-String
-toJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns(
-  Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns
-  e,
-) {
-  switch (e) {
-    case Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns
-        .gender:
-      return r'gender';
-    case Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns
-        .$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns
-fromJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns(
-  String value,
-) {
-  switch (value) {
-    case r'gender':
-      return Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns
-          .gender;
-    default:
-      return Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns
-          .$unknown;
-  }
-}
-
-enum Enum_HistoryMeetingRosterSelectColumn {
-  asServant,
-  blurhash,
-  color,
-  gender,
-  mainPhone,
-  meetingId,
-  name,
-  personId,
-  photoUpdatedAt,
-  studyYearId,
-  studyYearName,
-  $unknown;
-
-  factory Enum_HistoryMeetingRosterSelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryMeetingRosterSelectColumn(value);
-
-  String toJson() => toJson_Enum_HistoryMeetingRosterSelectColumn(this);
-}
-
-String toJson_Enum_HistoryMeetingRosterSelectColumn(
-  Enum_HistoryMeetingRosterSelectColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryMeetingRosterSelectColumn.asServant:
-      return r'asServant';
-    case Enum_HistoryMeetingRosterSelectColumn.blurhash:
-      return r'blurhash';
-    case Enum_HistoryMeetingRosterSelectColumn.color:
-      return r'color';
-    case Enum_HistoryMeetingRosterSelectColumn.gender:
-      return r'gender';
-    case Enum_HistoryMeetingRosterSelectColumn.mainPhone:
-      return r'mainPhone';
-    case Enum_HistoryMeetingRosterSelectColumn.meetingId:
-      return r'meetingId';
-    case Enum_HistoryMeetingRosterSelectColumn.name:
-      return r'name';
-    case Enum_HistoryMeetingRosterSelectColumn.personId:
-      return r'personId';
-    case Enum_HistoryMeetingRosterSelectColumn.photoUpdatedAt:
-      return r'photoUpdatedAt';
-    case Enum_HistoryMeetingRosterSelectColumn.studyYearId:
-      return r'studyYearId';
-    case Enum_HistoryMeetingRosterSelectColumn.studyYearName:
-      return r'studyYearName';
-    case Enum_HistoryMeetingRosterSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryMeetingRosterSelectColumn
-fromJson_Enum_HistoryMeetingRosterSelectColumn(String value) {
-  switch (value) {
-    case r'asServant':
-      return Enum_HistoryMeetingRosterSelectColumn.asServant;
-    case r'blurhash':
-      return Enum_HistoryMeetingRosterSelectColumn.blurhash;
-    case r'color':
-      return Enum_HistoryMeetingRosterSelectColumn.color;
-    case r'gender':
-      return Enum_HistoryMeetingRosterSelectColumn.gender;
-    case r'mainPhone':
-      return Enum_HistoryMeetingRosterSelectColumn.mainPhone;
-    case r'meetingId':
-      return Enum_HistoryMeetingRosterSelectColumn.meetingId;
-    case r'name':
-      return Enum_HistoryMeetingRosterSelectColumn.name;
-    case r'personId':
-      return Enum_HistoryMeetingRosterSelectColumn.personId;
-    case r'photoUpdatedAt':
-      return Enum_HistoryMeetingRosterSelectColumn.photoUpdatedAt;
-    case r'studyYearId':
-      return Enum_HistoryMeetingRosterSelectColumn.studyYearId;
-    case r'studyYearName':
-      return Enum_HistoryMeetingRosterSelectColumn.studyYearName;
-    default:
-      return Enum_HistoryMeetingRosterSelectColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryMeetingsConstraint {
-  meetings_pkey,
-  $unknown;
-
-  factory Enum_HistoryMeetingsConstraint.fromJson(String value) =>
-      fromJson_Enum_HistoryMeetingsConstraint(value);
-
-  String toJson() => toJson_Enum_HistoryMeetingsConstraint(this);
-}
-
-String toJson_Enum_HistoryMeetingsConstraint(Enum_HistoryMeetingsConstraint e) {
-  switch (e) {
-    case Enum_HistoryMeetingsConstraint.meetings_pkey:
-      return r'meetings_pkey';
-    case Enum_HistoryMeetingsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryMeetingsConstraint fromJson_Enum_HistoryMeetingsConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'meetings_pkey':
-      return Enum_HistoryMeetingsConstraint.meetings_pkey;
-    default:
-      return Enum_HistoryMeetingsConstraint.$unknown;
-  }
-}
-
-enum Enum_HistoryMeetingsSelectColumn {
-  audience,
-  color,
-  groupId,
-  id,
-  isArchived,
-  name,
-  serviceGender,
-  serviceId,
-  serviceStudyYear,
-  showKodasCheckbox,
-  $unknown;
-
-  factory Enum_HistoryMeetingsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryMeetingsSelectColumn(value);
-
-  String toJson() => toJson_Enum_HistoryMeetingsSelectColumn(this);
-}
-
-String toJson_Enum_HistoryMeetingsSelectColumn(
-  Enum_HistoryMeetingsSelectColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryMeetingsSelectColumn.audience:
-      return r'audience';
-    case Enum_HistoryMeetingsSelectColumn.color:
-      return r'color';
-    case Enum_HistoryMeetingsSelectColumn.groupId:
-      return r'groupId';
-    case Enum_HistoryMeetingsSelectColumn.id:
-      return r'id';
-    case Enum_HistoryMeetingsSelectColumn.isArchived:
-      return r'isArchived';
-    case Enum_HistoryMeetingsSelectColumn.name:
-      return r'name';
-    case Enum_HistoryMeetingsSelectColumn.serviceGender:
-      return r'serviceGender';
-    case Enum_HistoryMeetingsSelectColumn.serviceId:
-      return r'serviceId';
-    case Enum_HistoryMeetingsSelectColumn.serviceStudyYear:
-      return r'serviceStudyYear';
-    case Enum_HistoryMeetingsSelectColumn.showKodasCheckbox:
-      return r'showKodasCheckbox';
-    case Enum_HistoryMeetingsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryMeetingsSelectColumn fromJson_Enum_HistoryMeetingsSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'audience':
-      return Enum_HistoryMeetingsSelectColumn.audience;
-    case r'color':
-      return Enum_HistoryMeetingsSelectColumn.color;
-    case r'groupId':
-      return Enum_HistoryMeetingsSelectColumn.groupId;
-    case r'id':
-      return Enum_HistoryMeetingsSelectColumn.id;
-    case r'isArchived':
-      return Enum_HistoryMeetingsSelectColumn.isArchived;
-    case r'name':
-      return Enum_HistoryMeetingsSelectColumn.name;
-    case r'serviceGender':
-      return Enum_HistoryMeetingsSelectColumn.serviceGender;
-    case r'serviceId':
-      return Enum_HistoryMeetingsSelectColumn.serviceId;
-    case r'serviceStudyYear':
-      return Enum_HistoryMeetingsSelectColumn.serviceStudyYear;
-    case r'showKodasCheckbox':
-      return Enum_HistoryMeetingsSelectColumn.showKodasCheckbox;
-    default:
-      return Enum_HistoryMeetingsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryMeetingsUpdateColumn {
-  audience,
-  color,
-  isArchived,
-  name,
-  showKodasCheckbox,
-  $unknown;
-
-  factory Enum_HistoryMeetingsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryMeetingsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_HistoryMeetingsUpdateColumn(this);
-}
-
-String toJson_Enum_HistoryMeetingsUpdateColumn(
-  Enum_HistoryMeetingsUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryMeetingsUpdateColumn.audience:
-      return r'audience';
-    case Enum_HistoryMeetingsUpdateColumn.color:
-      return r'color';
-    case Enum_HistoryMeetingsUpdateColumn.isArchived:
-      return r'isArchived';
-    case Enum_HistoryMeetingsUpdateColumn.name:
-      return r'name';
-    case Enum_HistoryMeetingsUpdateColumn.showKodasCheckbox:
-      return r'showKodasCheckbox';
-    case Enum_HistoryMeetingsUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryMeetingsUpdateColumn fromJson_Enum_HistoryMeetingsUpdateColumn(
-  String value,
-) {
-  switch (value) {
-    case r'audience':
-      return Enum_HistoryMeetingsUpdateColumn.audience;
-    case r'color':
-      return Enum_HistoryMeetingsUpdateColumn.color;
-    case r'isArchived':
-      return Enum_HistoryMeetingsUpdateColumn.isArchived;
-    case r'name':
-      return Enum_HistoryMeetingsUpdateColumn.name;
-    case r'showKodasCheckbox':
-      return Enum_HistoryMeetingsUpdateColumn.showKodasCheckbox;
-    default:
-      return Enum_HistoryMeetingsUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryVisitHistoryConstraint {
-  visit_history_pkey,
-  $unknown;
-
-  factory Enum_HistoryVisitHistoryConstraint.fromJson(String value) =>
-      fromJson_Enum_HistoryVisitHistoryConstraint(value);
-
-  String toJson() => toJson_Enum_HistoryVisitHistoryConstraint(this);
-}
-
-String toJson_Enum_HistoryVisitHistoryConstraint(
-  Enum_HistoryVisitHistoryConstraint e,
-) {
-  switch (e) {
-    case Enum_HistoryVisitHistoryConstraint.visit_history_pkey:
-      return r'visit_history_pkey';
-    case Enum_HistoryVisitHistoryConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryVisitHistoryConstraint fromJson_Enum_HistoryVisitHistoryConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'visit_history_pkey':
-      return Enum_HistoryVisitHistoryConstraint.visit_history_pkey;
-    default:
-      return Enum_HistoryVisitHistoryConstraint.$unknown;
-  }
-}
-
-enum Enum_HistoryVisitHistorySelectColumn {
-  isFatherVisit,
-  recordId,
-  recordedBy,
-  table,
-  time,
-  visitId,
-  $unknown;
-
-  factory Enum_HistoryVisitHistorySelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryVisitHistorySelectColumn(value);
-
-  String toJson() => toJson_Enum_HistoryVisitHistorySelectColumn(this);
-}
-
-String toJson_Enum_HistoryVisitHistorySelectColumn(
-  Enum_HistoryVisitHistorySelectColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryVisitHistorySelectColumn.isFatherVisit:
-      return r'isFatherVisit';
-    case Enum_HistoryVisitHistorySelectColumn.recordId:
-      return r'recordId';
-    case Enum_HistoryVisitHistorySelectColumn.recordedBy:
-      return r'recordedBy';
-    case Enum_HistoryVisitHistorySelectColumn.table:
-      return r'table';
-    case Enum_HistoryVisitHistorySelectColumn.time:
-      return r'time';
-    case Enum_HistoryVisitHistorySelectColumn.visitId:
-      return r'visitId';
-    case Enum_HistoryVisitHistorySelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryVisitHistorySelectColumn
-fromJson_Enum_HistoryVisitHistorySelectColumn(String value) {
-  switch (value) {
-    case r'isFatherVisit':
-      return Enum_HistoryVisitHistorySelectColumn.isFatherVisit;
-    case r'recordId':
-      return Enum_HistoryVisitHistorySelectColumn.recordId;
-    case r'recordedBy':
-      return Enum_HistoryVisitHistorySelectColumn.recordedBy;
-    case r'table':
-      return Enum_HistoryVisitHistorySelectColumn.table;
-    case r'time':
-      return Enum_HistoryVisitHistorySelectColumn.time;
-    case r'visitId':
-      return Enum_HistoryVisitHistorySelectColumn.visitId;
-    default:
-      return Enum_HistoryVisitHistorySelectColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns {
-  isFatherVisit,
-  $unknown;
-
-  factory Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
-        value,
-      );
-
-  String toJson() =>
-      toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
-        this,
-      );
-}
-
-String
-toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
-  Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-  e,
-) {
-  switch (e) {
-    case Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-        .isFatherVisit:
-      return r'isFatherVisit';
-    case Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-        .$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
-  String value,
-) {
-  switch (value) {
-    case r'isFatherVisit':
-      return Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-          .isFatherVisit;
-    default:
-      return Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-          .$unknown;
-  }
-}
-
-enum Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns {
-  isFatherVisit,
-  $unknown;
-
-  factory Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
-        value,
-      );
-
-  String toJson() =>
-      toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
-        this,
-      );
-}
-
-String
-toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
-  Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
-  e,
-) {
-  switch (e) {
-    case Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
-        .isFatherVisit:
-      return r'isFatherVisit';
-    case Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
-        .$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
-fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
-  String value,
-) {
-  switch (value) {
-    case r'isFatherVisit':
-      return Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
-          .isFatherVisit;
-    default:
-      return Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
-          .$unknown;
-  }
-}
-
-enum Enum_HistoryVisitHistoryUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_HistoryVisitHistoryUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryVisitHistoryUpdateColumn(value);
-
-  String toJson() => toJson_Enum_HistoryVisitHistoryUpdateColumn(this);
-}
-
-String toJson_Enum_HistoryVisitHistoryUpdateColumn(
-  Enum_HistoryVisitHistoryUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryVisitHistoryUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_HistoryVisitHistoryUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryVisitHistoryUpdateColumn
-fromJson_Enum_HistoryVisitHistoryUpdateColumn(String value) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_HistoryVisitHistoryUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_HistoryVisitHistoryUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_HobbiesConstraint {
-  hobbies_name_key,
-  hobbies_pkey,
-  $unknown;
-
-  factory Enum_HobbiesConstraint.fromJson(String value) =>
-      fromJson_Enum_HobbiesConstraint(value);
-
-  String toJson() => toJson_Enum_HobbiesConstraint(this);
-}
-
-String toJson_Enum_HobbiesConstraint(Enum_HobbiesConstraint e) {
-  switch (e) {
-    case Enum_HobbiesConstraint.hobbies_name_key:
-      return r'hobbies_name_key';
-    case Enum_HobbiesConstraint.hobbies_pkey:
-      return r'hobbies_pkey';
-    case Enum_HobbiesConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HobbiesConstraint fromJson_Enum_HobbiesConstraint(String value) {
-  switch (value) {
-    case r'hobbies_name_key':
-      return Enum_HobbiesConstraint.hobbies_name_key;
-    case r'hobbies_pkey':
-      return Enum_HobbiesConstraint.hobbies_pkey;
-    default:
-      return Enum_HobbiesConstraint.$unknown;
-  }
-}
-
-enum Enum_HobbiesSelectColumn {
-  color,
-  id,
-  name,
-  $unknown;
-
-  factory Enum_HobbiesSelectColumn.fromJson(String value) =>
-      fromJson_Enum_HobbiesSelectColumn(value);
-
-  String toJson() => toJson_Enum_HobbiesSelectColumn(this);
-}
-
-String toJson_Enum_HobbiesSelectColumn(Enum_HobbiesSelectColumn e) {
-  switch (e) {
-    case Enum_HobbiesSelectColumn.color:
-      return r'color';
-    case Enum_HobbiesSelectColumn.id:
-      return r'id';
-    case Enum_HobbiesSelectColumn.name:
-      return r'name';
-    case Enum_HobbiesSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HobbiesSelectColumn fromJson_Enum_HobbiesSelectColumn(String value) {
-  switch (value) {
-    case r'color':
-      return Enum_HobbiesSelectColumn.color;
-    case r'id':
-      return Enum_HobbiesSelectColumn.id;
-    case r'name':
-      return Enum_HobbiesSelectColumn.name;
-    default:
-      return Enum_HobbiesSelectColumn.$unknown;
-  }
-}
-
-enum Enum_HobbiesUpdateColumn {
-  color,
-  name,
-  $unknown;
-
-  factory Enum_HobbiesUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HobbiesUpdateColumn(value);
-
-  String toJson() => toJson_Enum_HobbiesUpdateColumn(this);
-}
-
-String toJson_Enum_HobbiesUpdateColumn(Enum_HobbiesUpdateColumn e) {
-  switch (e) {
-    case Enum_HobbiesUpdateColumn.color:
-      return r'color';
-    case Enum_HobbiesUpdateColumn.name:
-      return r'name';
-    case Enum_HobbiesUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HobbiesUpdateColumn fromJson_Enum_HobbiesUpdateColumn(String value) {
-  switch (value) {
-    case r'color':
-      return Enum_HobbiesUpdateColumn.color;
-    case r'name':
-      return Enum_HobbiesUpdateColumn.name;
-    default:
-      return Enum_HobbiesUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_JobsConstraint {
-  jobs_name_key,
-  jobs_pkey,
-  $unknown;
-
-  factory Enum_JobsConstraint.fromJson(String value) =>
-      fromJson_Enum_JobsConstraint(value);
-
-  String toJson() => toJson_Enum_JobsConstraint(this);
-}
-
-String toJson_Enum_JobsConstraint(Enum_JobsConstraint e) {
-  switch (e) {
-    case Enum_JobsConstraint.jobs_name_key:
-      return r'jobs_name_key';
-    case Enum_JobsConstraint.jobs_pkey:
-      return r'jobs_pkey';
-    case Enum_JobsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_JobsConstraint fromJson_Enum_JobsConstraint(String value) {
-  switch (value) {
-    case r'jobs_name_key':
-      return Enum_JobsConstraint.jobs_name_key;
-    case r'jobs_pkey':
-      return Enum_JobsConstraint.jobs_pkey;
-    default:
-      return Enum_JobsConstraint.$unknown;
-  }
-}
-
-enum Enum_JobsSelectColumn {
-  id,
-  name,
-  $unknown;
-
-  factory Enum_JobsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_JobsSelectColumn(value);
-
-  String toJson() => toJson_Enum_JobsSelectColumn(this);
-}
-
-String toJson_Enum_JobsSelectColumn(Enum_JobsSelectColumn e) {
-  switch (e) {
-    case Enum_JobsSelectColumn.id:
-      return r'id';
-    case Enum_JobsSelectColumn.name:
-      return r'name';
-    case Enum_JobsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_JobsSelectColumn fromJson_Enum_JobsSelectColumn(String value) {
-  switch (value) {
-    case r'id':
-      return Enum_JobsSelectColumn.id;
-    case r'name':
-      return Enum_JobsSelectColumn.name;
-    default:
-      return Enum_JobsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_JobsUpdateColumn {
-  name,
-  $unknown;
-
-  factory Enum_JobsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_JobsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_JobsUpdateColumn(this);
-}
-
-String toJson_Enum_JobsUpdateColumn(Enum_JobsUpdateColumn e) {
-  switch (e) {
-    case Enum_JobsUpdateColumn.name:
-      return r'name';
-    case Enum_JobsUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_JobsUpdateColumn fromJson_Enum_JobsUpdateColumn(String value) {
-  switch (value) {
-    case r'name':
-      return Enum_JobsUpdateColumn.name;
-    default:
-      return Enum_JobsUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_OrderBy {
-  ASC,
-  ASC_NULLS_FIRST,
-  ASC_NULLS_LAST,
-  DESC,
-  DESC_NULLS_FIRST,
-  DESC_NULLS_LAST,
-  $unknown;
-
-  factory Enum_OrderBy.fromJson(String value) => fromJson_Enum_OrderBy(value);
-
-  String toJson() => toJson_Enum_OrderBy(this);
-}
-
-String toJson_Enum_OrderBy(Enum_OrderBy e) {
-  switch (e) {
-    case Enum_OrderBy.ASC:
-      return r'ASC';
-    case Enum_OrderBy.ASC_NULLS_FIRST:
-      return r'ASC_NULLS_FIRST';
-    case Enum_OrderBy.ASC_NULLS_LAST:
-      return r'ASC_NULLS_LAST';
-    case Enum_OrderBy.DESC:
-      return r'DESC';
-    case Enum_OrderBy.DESC_NULLS_FIRST:
-      return r'DESC_NULLS_FIRST';
-    case Enum_OrderBy.DESC_NULLS_LAST:
-      return r'DESC_NULLS_LAST';
-    case Enum_OrderBy.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_OrderBy fromJson_Enum_OrderBy(String value) {
-  switch (value) {
-    case r'ASC':
-      return Enum_OrderBy.ASC;
-    case r'ASC_NULLS_FIRST':
-      return Enum_OrderBy.ASC_NULLS_FIRST;
-    case r'ASC_NULLS_LAST':
-      return Enum_OrderBy.ASC_NULLS_LAST;
-    case r'DESC':
-      return Enum_OrderBy.DESC;
-    case r'DESC_NULLS_FIRST':
-      return Enum_OrderBy.DESC_NULLS_FIRST;
-    case r'DESC_NULLS_LAST':
-      return Enum_OrderBy.DESC_NULLS_LAST;
-    default:
-      return Enum_OrderBy.$unknown;
-  }
-}
-
-enum Enum_PersonStatesConstraint {
-  states_color_key,
-  states_name_key,
-  states_pkey,
-  $unknown;
-
-  factory Enum_PersonStatesConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonStatesConstraint(value);
-
-  String toJson() => toJson_Enum_PersonStatesConstraint(this);
-}
-
-String toJson_Enum_PersonStatesConstraint(Enum_PersonStatesConstraint e) {
-  switch (e) {
-    case Enum_PersonStatesConstraint.states_color_key:
-      return r'states_color_key';
-    case Enum_PersonStatesConstraint.states_name_key:
-      return r'states_name_key';
-    case Enum_PersonStatesConstraint.states_pkey:
-      return r'states_pkey';
-    case Enum_PersonStatesConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonStatesConstraint fromJson_Enum_PersonStatesConstraint(String value) {
-  switch (value) {
-    case r'states_color_key':
-      return Enum_PersonStatesConstraint.states_color_key;
-    case r'states_name_key':
-      return Enum_PersonStatesConstraint.states_name_key;
-    case r'states_pkey':
-      return Enum_PersonStatesConstraint.states_pkey;
-    default:
-      return Enum_PersonStatesConstraint.$unknown;
-  }
-}
-
-enum Enum_PersonStatesSelectColumn {
-  color,
-  id,
-  name,
-  $unknown;
-
-  factory Enum_PersonStatesSelectColumn.fromJson(String value) =>
-      fromJson_Enum_PersonStatesSelectColumn(value);
-
-  String toJson() => toJson_Enum_PersonStatesSelectColumn(this);
-}
-
-String toJson_Enum_PersonStatesSelectColumn(Enum_PersonStatesSelectColumn e) {
-  switch (e) {
-    case Enum_PersonStatesSelectColumn.color:
-      return r'color';
-    case Enum_PersonStatesSelectColumn.id:
-      return r'id';
-    case Enum_PersonStatesSelectColumn.name:
-      return r'name';
-    case Enum_PersonStatesSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonStatesSelectColumn fromJson_Enum_PersonStatesSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'color':
-      return Enum_PersonStatesSelectColumn.color;
-    case r'id':
-      return Enum_PersonStatesSelectColumn.id;
-    case r'name':
-      return Enum_PersonStatesSelectColumn.name;
-    default:
-      return Enum_PersonStatesSelectColumn.$unknown;
-  }
-}
-
-enum Enum_PersonStatesUpdateColumn {
-  color,
-  name,
-  $unknown;
-
-  factory Enum_PersonStatesUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_PersonStatesUpdateColumn(value);
-
-  String toJson() => toJson_Enum_PersonStatesUpdateColumn(this);
-}
-
-String toJson_Enum_PersonStatesUpdateColumn(Enum_PersonStatesUpdateColumn e) {
-  switch (e) {
-    case Enum_PersonStatesUpdateColumn.color:
-      return r'color';
-    case Enum_PersonStatesUpdateColumn.name:
-      return r'name';
-    case Enum_PersonStatesUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonStatesUpdateColumn fromJson_Enum_PersonStatesUpdateColumn(
-  String value,
-) {
-  switch (value) {
-    case r'color':
-      return Enum_PersonStatesUpdateColumn.color;
-    case r'name':
-      return Enum_PersonStatesUpdateColumn.name;
-    default:
-      return Enum_PersonStatesUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_PersonTypesConstraint {
-  person_types_name_key,
-  person_types_order_key,
-  person_types_pkey,
-  $unknown;
-
-  factory Enum_PersonTypesConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonTypesConstraint(value);
-
-  String toJson() => toJson_Enum_PersonTypesConstraint(this);
-}
-
-String toJson_Enum_PersonTypesConstraint(Enum_PersonTypesConstraint e) {
-  switch (e) {
-    case Enum_PersonTypesConstraint.person_types_name_key:
-      return r'person_types_name_key';
-    case Enum_PersonTypesConstraint.person_types_order_key:
-      return r'person_types_order_key';
-    case Enum_PersonTypesConstraint.person_types_pkey:
-      return r'person_types_pkey';
-    case Enum_PersonTypesConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonTypesConstraint fromJson_Enum_PersonTypesConstraint(String value) {
-  switch (value) {
-    case r'person_types_name_key':
-      return Enum_PersonTypesConstraint.person_types_name_key;
-    case r'person_types_order_key':
-      return Enum_PersonTypesConstraint.person_types_order_key;
-    case r'person_types_pkey':
-      return Enum_PersonTypesConstraint.person_types_pkey;
-    default:
-      return Enum_PersonTypesConstraint.$unknown;
-  }
-}
-
-enum Enum_PersonTypesSelectColumn {
-  id,
-  isFamilyAdmin,
-  isHidden,
-  name,
-  order,
-  $unknown;
-
-  factory Enum_PersonTypesSelectColumn.fromJson(String value) =>
-      fromJson_Enum_PersonTypesSelectColumn(value);
-
-  String toJson() => toJson_Enum_PersonTypesSelectColumn(this);
-}
-
-String toJson_Enum_PersonTypesSelectColumn(Enum_PersonTypesSelectColumn e) {
-  switch (e) {
-    case Enum_PersonTypesSelectColumn.id:
-      return r'id';
-    case Enum_PersonTypesSelectColumn.isFamilyAdmin:
-      return r'isFamilyAdmin';
-    case Enum_PersonTypesSelectColumn.isHidden:
-      return r'isHidden';
-    case Enum_PersonTypesSelectColumn.name:
-      return r'name';
-    case Enum_PersonTypesSelectColumn.order:
-      return r'order';
-    case Enum_PersonTypesSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonTypesSelectColumn fromJson_Enum_PersonTypesSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'id':
-      return Enum_PersonTypesSelectColumn.id;
-    case r'isFamilyAdmin':
-      return Enum_PersonTypesSelectColumn.isFamilyAdmin;
-    case r'isHidden':
-      return Enum_PersonTypesSelectColumn.isHidden;
-    case r'name':
-      return Enum_PersonTypesSelectColumn.name;
-    case r'order':
-      return Enum_PersonTypesSelectColumn.order;
-    default:
-      return Enum_PersonTypesSelectColumn.$unknown;
-  }
-}
-
-enum Enum_PersonTypesUpdateColumn {
-  name,
-  $unknown;
-
-  factory Enum_PersonTypesUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_PersonTypesUpdateColumn(value);
-
-  String toJson() => toJson_Enum_PersonTypesUpdateColumn(this);
-}
-
-String toJson_Enum_PersonTypesUpdateColumn(Enum_PersonTypesUpdateColumn e) {
-  switch (e) {
-    case Enum_PersonTypesUpdateColumn.name:
-      return r'name';
-    case Enum_PersonTypesUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonTypesUpdateColumn fromJson_Enum_PersonTypesUpdateColumn(
-  String value,
-) {
-  switch (value) {
-    case r'name':
-      return Enum_PersonTypesUpdateColumn.name;
-    default:
-      return Enum_PersonTypesUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsConstraint {
-  persons_pkey,
-  persons_uid_key,
-  $unknown;
-
-  factory Enum_PersonsConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonsConstraint(value);
-
-  String toJson() => toJson_Enum_PersonsConstraint(this);
-}
-
-String toJson_Enum_PersonsConstraint(Enum_PersonsConstraint e) {
-  switch (e) {
-    case Enum_PersonsConstraint.persons_pkey:
-      return r'persons_pkey';
-    case Enum_PersonsConstraint.persons_uid_key:
-      return r'persons_uid_key';
-    case Enum_PersonsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsConstraint fromJson_Enum_PersonsConstraint(String value) {
-  switch (value) {
-    case r'persons_pkey':
-      return Enum_PersonsConstraint.persons_pkey;
-    case r'persons_uid_key':
-      return Enum_PersonsConstraint.persons_uid_key;
-    default:
-      return Enum_PersonsConstraint.$unknown;
-  }
-}
-
-enum Enum_PersonsGroupsConstraint {
-  persons_groups_person_id_group_id_key,
-  persons_groups_pkey,
-  $unknown;
-
-  factory Enum_PersonsGroupsConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonsGroupsConstraint(value);
-
-  String toJson() => toJson_Enum_PersonsGroupsConstraint(this);
-}
-
-String toJson_Enum_PersonsGroupsConstraint(Enum_PersonsGroupsConstraint e) {
-  switch (e) {
-    case Enum_PersonsGroupsConstraint.persons_groups_person_id_group_id_key:
-      return r'persons_groups_person_id_group_id_key';
-    case Enum_PersonsGroupsConstraint.persons_groups_pkey:
-      return r'persons_groups_pkey';
-    case Enum_PersonsGroupsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsGroupsConstraint fromJson_Enum_PersonsGroupsConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'persons_groups_person_id_group_id_key':
-      return Enum_PersonsGroupsConstraint.persons_groups_person_id_group_id_key;
-    case r'persons_groups_pkey':
-      return Enum_PersonsGroupsConstraint.persons_groups_pkey;
-    default:
-      return Enum_PersonsGroupsConstraint.$unknown;
-  }
-}
-
-enum Enum_PersonsGroupsSelectColumn {
-  groupId,
-  personId,
-  $unknown;
-
-  factory Enum_PersonsGroupsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsGroupsSelectColumn(value);
-
-  String toJson() => toJson_Enum_PersonsGroupsSelectColumn(this);
-}
-
-String toJson_Enum_PersonsGroupsSelectColumn(Enum_PersonsGroupsSelectColumn e) {
-  switch (e) {
-    case Enum_PersonsGroupsSelectColumn.groupId:
-      return r'groupId';
-    case Enum_PersonsGroupsSelectColumn.personId:
-      return r'personId';
-    case Enum_PersonsGroupsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsGroupsSelectColumn fromJson_Enum_PersonsGroupsSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'groupId':
-      return Enum_PersonsGroupsSelectColumn.groupId;
-    case r'personId':
-      return Enum_PersonsGroupsSelectColumn.personId;
-    default:
-      return Enum_PersonsGroupsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsGroupsUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_PersonsGroupsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsGroupsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_PersonsGroupsUpdateColumn(this);
-}
-
-String toJson_Enum_PersonsGroupsUpdateColumn(Enum_PersonsGroupsUpdateColumn e) {
-  switch (e) {
-    case Enum_PersonsGroupsUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_PersonsGroupsUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsGroupsUpdateColumn fromJson_Enum_PersonsGroupsUpdateColumn(
-  String value,
-) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_PersonsGroupsUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_PersonsGroupsUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsHobbiesConstraint {
-  persons_hobbies_pkey,
-  $unknown;
-
-  factory Enum_PersonsHobbiesConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonsHobbiesConstraint(value);
-
-  String toJson() => toJson_Enum_PersonsHobbiesConstraint(this);
-}
-
-String toJson_Enum_PersonsHobbiesConstraint(Enum_PersonsHobbiesConstraint e) {
-  switch (e) {
-    case Enum_PersonsHobbiesConstraint.persons_hobbies_pkey:
-      return r'persons_hobbies_pkey';
-    case Enum_PersonsHobbiesConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsHobbiesConstraint fromJson_Enum_PersonsHobbiesConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'persons_hobbies_pkey':
-      return Enum_PersonsHobbiesConstraint.persons_hobbies_pkey;
-    default:
-      return Enum_PersonsHobbiesConstraint.$unknown;
-  }
-}
-
-enum Enum_PersonsHobbiesSelectColumn {
-  hobbyId,
-  personId,
-  $unknown;
-
-  factory Enum_PersonsHobbiesSelectColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsHobbiesSelectColumn(value);
-
-  String toJson() => toJson_Enum_PersonsHobbiesSelectColumn(this);
-}
-
-String toJson_Enum_PersonsHobbiesSelectColumn(
-  Enum_PersonsHobbiesSelectColumn e,
-) {
-  switch (e) {
-    case Enum_PersonsHobbiesSelectColumn.hobbyId:
-      return r'hobbyId';
-    case Enum_PersonsHobbiesSelectColumn.personId:
-      return r'personId';
-    case Enum_PersonsHobbiesSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsHobbiesSelectColumn fromJson_Enum_PersonsHobbiesSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'hobbyId':
-      return Enum_PersonsHobbiesSelectColumn.hobbyId;
-    case r'personId':
-      return Enum_PersonsHobbiesSelectColumn.personId;
-    default:
-      return Enum_PersonsHobbiesSelectColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsHobbiesUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_PersonsHobbiesUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsHobbiesUpdateColumn(value);
-
-  String toJson() => toJson_Enum_PersonsHobbiesUpdateColumn(this);
-}
-
-String toJson_Enum_PersonsHobbiesUpdateColumn(
-  Enum_PersonsHobbiesUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_PersonsHobbiesUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_PersonsHobbiesUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsHobbiesUpdateColumn fromJson_Enum_PersonsHobbiesUpdateColumn(
-  String value,
-) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_PersonsHobbiesUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_PersonsHobbiesUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsSelectColumn {
-  birthdate,
-  blurhash,
-  churchId,
-  collegeId,
-  color,
-  familyId,
-  fatherId,
-  gender,
-  id,
-  isServant,
-  isShammas,
-  isStudent,
-  jobDescription,
-  jobId,
-  mainPhone,
-  martialStatus,
-  name,
-  nationalId,
-  notes,
-  otherPhones,
-  personTypeId,
-  photoUpdatedAt,
-  qualificationId,
-  schoolId,
-  serviceType,
-  servingChurchId,
-  shammasLevelId,
-  stateId,
-  storeId,
-  studyYearId,
-  uid,
-  workStatus,
-  $unknown;
-
-  factory Enum_PersonsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsSelectColumn(value);
-
-  String toJson() => toJson_Enum_PersonsSelectColumn(this);
-}
-
-String toJson_Enum_PersonsSelectColumn(Enum_PersonsSelectColumn e) {
-  switch (e) {
-    case Enum_PersonsSelectColumn.birthdate:
-      return r'birthdate';
-    case Enum_PersonsSelectColumn.blurhash:
-      return r'blurhash';
-    case Enum_PersonsSelectColumn.churchId:
-      return r'churchId';
-    case Enum_PersonsSelectColumn.collegeId:
-      return r'collegeId';
-    case Enum_PersonsSelectColumn.color:
-      return r'color';
-    case Enum_PersonsSelectColumn.familyId:
-      return r'familyId';
-    case Enum_PersonsSelectColumn.fatherId:
-      return r'fatherId';
-    case Enum_PersonsSelectColumn.gender:
-      return r'gender';
-    case Enum_PersonsSelectColumn.id:
-      return r'id';
-    case Enum_PersonsSelectColumn.isServant:
-      return r'isServant';
-    case Enum_PersonsSelectColumn.isShammas:
-      return r'isShammas';
-    case Enum_PersonsSelectColumn.isStudent:
-      return r'isStudent';
-    case Enum_PersonsSelectColumn.jobDescription:
-      return r'jobDescription';
-    case Enum_PersonsSelectColumn.jobId:
-      return r'jobId';
-    case Enum_PersonsSelectColumn.mainPhone:
-      return r'mainPhone';
-    case Enum_PersonsSelectColumn.martialStatus:
-      return r'martialStatus';
-    case Enum_PersonsSelectColumn.name:
-      return r'name';
-    case Enum_PersonsSelectColumn.nationalId:
-      return r'nationalId';
-    case Enum_PersonsSelectColumn.notes:
-      return r'notes';
-    case Enum_PersonsSelectColumn.otherPhones:
-      return r'otherPhones';
-    case Enum_PersonsSelectColumn.personTypeId:
-      return r'personTypeId';
-    case Enum_PersonsSelectColumn.photoUpdatedAt:
-      return r'photoUpdatedAt';
-    case Enum_PersonsSelectColumn.qualificationId:
-      return r'qualificationId';
-    case Enum_PersonsSelectColumn.schoolId:
-      return r'schoolId';
-    case Enum_PersonsSelectColumn.serviceType:
-      return r'serviceType';
-    case Enum_PersonsSelectColumn.servingChurchId:
-      return r'servingChurchId';
-    case Enum_PersonsSelectColumn.shammasLevelId:
-      return r'shammasLevelId';
-    case Enum_PersonsSelectColumn.stateId:
-      return r'stateId';
-    case Enum_PersonsSelectColumn.storeId:
-      return r'storeId';
-    case Enum_PersonsSelectColumn.studyYearId:
-      return r'studyYearId';
-    case Enum_PersonsSelectColumn.uid:
-      return r'uid';
-    case Enum_PersonsSelectColumn.workStatus:
-      return r'workStatus';
-    case Enum_PersonsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsSelectColumn fromJson_Enum_PersonsSelectColumn(String value) {
-  switch (value) {
-    case r'birthdate':
-      return Enum_PersonsSelectColumn.birthdate;
-    case r'blurhash':
-      return Enum_PersonsSelectColumn.blurhash;
-    case r'churchId':
-      return Enum_PersonsSelectColumn.churchId;
-    case r'collegeId':
-      return Enum_PersonsSelectColumn.collegeId;
-    case r'color':
-      return Enum_PersonsSelectColumn.color;
-    case r'familyId':
-      return Enum_PersonsSelectColumn.familyId;
-    case r'fatherId':
-      return Enum_PersonsSelectColumn.fatherId;
-    case r'gender':
-      return Enum_PersonsSelectColumn.gender;
-    case r'id':
-      return Enum_PersonsSelectColumn.id;
-    case r'isServant':
-      return Enum_PersonsSelectColumn.isServant;
-    case r'isShammas':
-      return Enum_PersonsSelectColumn.isShammas;
-    case r'isStudent':
-      return Enum_PersonsSelectColumn.isStudent;
-    case r'jobDescription':
-      return Enum_PersonsSelectColumn.jobDescription;
-    case r'jobId':
-      return Enum_PersonsSelectColumn.jobId;
-    case r'mainPhone':
-      return Enum_PersonsSelectColumn.mainPhone;
-    case r'martialStatus':
-      return Enum_PersonsSelectColumn.martialStatus;
-    case r'name':
-      return Enum_PersonsSelectColumn.name;
-    case r'nationalId':
-      return Enum_PersonsSelectColumn.nationalId;
-    case r'notes':
-      return Enum_PersonsSelectColumn.notes;
-    case r'otherPhones':
-      return Enum_PersonsSelectColumn.otherPhones;
-    case r'personTypeId':
-      return Enum_PersonsSelectColumn.personTypeId;
-    case r'photoUpdatedAt':
-      return Enum_PersonsSelectColumn.photoUpdatedAt;
-    case r'qualificationId':
-      return Enum_PersonsSelectColumn.qualificationId;
-    case r'schoolId':
-      return Enum_PersonsSelectColumn.schoolId;
-    case r'serviceType':
-      return Enum_PersonsSelectColumn.serviceType;
-    case r'servingChurchId':
-      return Enum_PersonsSelectColumn.servingChurchId;
-    case r'shammasLevelId':
-      return Enum_PersonsSelectColumn.shammasLevelId;
-    case r'stateId':
-      return Enum_PersonsSelectColumn.stateId;
-    case r'storeId':
-      return Enum_PersonsSelectColumn.storeId;
-    case r'studyYearId':
-      return Enum_PersonsSelectColumn.studyYearId;
-    case r'uid':
-      return Enum_PersonsSelectColumn.uid;
-    case r'workStatus':
-      return Enum_PersonsSelectColumn.workStatus;
-    default:
-      return Enum_PersonsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns {
-  gender,
-  isServant,
-  isShammas,
-  isStudent,
-  $unknown;
-
-  factory Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-        value,
-      );
-
-  String toJson() =>
-      toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-        this,
-      );
-}
-
-String
-toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-  Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns e,
-) {
-  switch (e) {
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-        .gender:
-      return r'gender';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-        .isServant:
-      return r'isServant';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-        .isShammas:
-      return r'isShammas';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-        .isStudent:
-      return r'isStudent';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-        .$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-  String value,
-) {
-  switch (value) {
-    case r'gender':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .gender;
-    case r'isServant':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .isServant;
-    case r'isShammas':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .isShammas;
-    case r'isStudent':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .isStudent;
-    default:
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .$unknown;
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_historyAttendanceHistoryAggregateBoolExpBool_or ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      l$arguments,
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
   }
-}
-
-enum Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns {
-  gender,
-  isServant,
-  isShammas,
-  isStudent,
-  $unknown;
-
-  factory Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
-        value,
-      );
-
-  String toJson() =>
-      toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
-        this,
-      );
 }

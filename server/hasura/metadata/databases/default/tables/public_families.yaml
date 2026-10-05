@@ -56,6 +56,15 @@ array_relationships:
         table:
           name: families_families
           schema: public
+  - name: contacts
+    using:
+      manual_configuration:
+        column_mapping:
+          id: effective_family_id
+        insertion_order: null
+        remote_table:
+          name: resolved_contacts
+          schema: public
   - name: editHistory
     using:
       manual_configuration:
@@ -72,6 +81,15 @@ array_relationships:
         table:
           name: families_families
           schema: public
+  - name: permissionGrants
+    using:
+      manual_configuration:
+        column_mapping:
+          id: entity_id
+        insertion_order: null
+        remote_table:
+          name: users_permissions_by_entity_id
+          schema: auth
   - name: persons
     using:
       manual_configuration:
