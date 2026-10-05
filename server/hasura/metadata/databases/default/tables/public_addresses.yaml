@@ -111,68 +111,52 @@ update_permissions:
         - storey_number
         - street_id
         - substreet_name
-      filter:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: family
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - family_id
-                  - _and:
-                      - entity_type:
-                          _eq: store
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - store_id
-                  - _and:
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
-      check:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: family
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - family_id
-                  - _and:
-                      - entity_type:
-                          _eq: store
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - store_id
-                  - _and:
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+      filter: &can_edit_address
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: family
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - family_id
+                      - _and:
+                          - entity_type:
+                              _eq: store
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - store_id
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
+          - family:
+              persons:
+                _and:
+                  - deleted_at:
+                      _is_null: true
+                  - permissionGrants:
+                      _and:
+                        - uid:
+                            _eq: X-Hasura-User-Id
+                        - allow_edit:
+                            _eq: true
+                        - entity_type:
+                            _eq: person
+      check: *can_edit_address
     comment: ""
 delete_permissions:
   - role: user
