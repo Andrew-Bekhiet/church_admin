@@ -19,6 +19,13 @@ class PersonEditForm extends StatefulWidget {
 }
 
 class _PersonEditFormState extends State<PersonEditForm> {
+  bool get _canEditFamilyAddress => switch (widget.controller.newObject) {
+    Person(family: null) => widget.controller.isCreate,
+    Person(:final family?) =>
+      !widget.controller.isCreate &&
+          family.id == widget.controller.initialObject?.family?.id,
+  };
+
   void _update(Person Function(Person) change) {
     widget.controller.newObject = change(widget.controller.newObject);
   }
@@ -58,6 +65,7 @@ class _PersonEditFormState extends State<PersonEditForm> {
         PersonFamilyAndAddressFields(
           person: person,
           isCreate: widget.controller.isCreate,
+          canEditFamilyAddress: _canEditFamilyAddress,
           onAddressChanged: (value) {
             _update((p) => p.copyWith(address: value));
             context.read<PhoneContactsEditorCubit>().changeFamilyAvailability(
