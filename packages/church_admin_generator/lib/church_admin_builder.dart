@@ -4,7 +4,7 @@ import 'package:church_admin_generator/src/queryable_registery_generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 final class ChurchAdminBuilder {
-  static Builder builder(BuilderOptions options) {
+  static Builder builder(BuilderOptions _) {
     return SharedPartBuilder(
       [
         const QueryableFieldsGenerator(),

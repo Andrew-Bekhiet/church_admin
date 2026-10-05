@@ -8,3 +8,6 @@ environment:
 
 dependencies:
   meta: ^1.16.0
+
+dev_dependencies:
+  solid_lints: ^1.0.0
