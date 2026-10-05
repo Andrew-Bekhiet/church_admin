@@ -26,6 +26,12 @@ mutation updateFamily(
   $lastFatherVisit: timestamptz
   $insertVisitHistory: Boolean!
   $insertFatherVisitHistory: Boolean!
+  $deletedContactIds: [uuid!]! = []
+  $contactUpdates: [ContactsUpdates!]! = []
+  $newContacts: [ContactsInsertInput!]! = []
+  $deleteContacts: Boolean! = false
+  $updateContactsMany: Boolean! = false
+  $insertContacts: Boolean! = false
 ) {
   updateFamiliesByPk(pkColumns: { id: $familyId }, _set: $newFamily)
     @include(if: $updateFamily) {
@@ -55,6 +61,17 @@ mutation updateFamily(
   }
   insertFamiliesFamilies(objects: $addRelatedFamilies)
     @include(if: $insertRelatedFamilies) {
+    affectedRows
+  }
+  deleteContacts(where: { id: { _in: $deletedContactIds } })
+    @include(if: $deleteContacts) {
+    affectedRows
+  }
+  updateContactsMany(updates: $contactUpdates)
+    @include(if: $updateContactsMany) {
+    affectedRows
+  }
+  insertContacts(objects: $newContacts) @include(if: $insertContacts) {
     affectedRows
   }
   insertHistoryVisitHistoryOne(

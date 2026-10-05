@@ -38,6 +38,22 @@ subscription watchPerson(
       id
       name
     }
+    contacts(orderBy: [{ isMainPhone: DESC }, { createdAt: ASC }]) {
+      ...PhoneContact
+    }
+    familyContacts(
+      where: {
+        personType: { isFamilyAdmin: { _eq: true } }
+        _or: [{ personId: { _isNull: true } }, { personId: { _neq: $id } }]
+      }
+      orderBy: [
+        { personType: { order: ASC } }
+        { isMainPhone: DESC }
+        { createdAt: ASC }
+      ]
+    ) {
+      ...FamilyPhoneContact
+    }
     college {
       id
       name

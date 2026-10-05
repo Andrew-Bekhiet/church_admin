@@ -1,6 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types/__generated__/subscriptions.gql.dart';
+import 'package:graphql/client.dart';
 
 class PersonTypesDAO extends DAOBase<PersonType>
     with StreamableDAO<PersonType>, CreatableDAO<PersonType> {
@@ -54,6 +56,18 @@ class PersonTypesDAO extends DAOBase<PersonType>
               OrderBy(field: PersonTypeFields().isHidden),
             ],
           ),
+    );
+  }
+
+  Future<List<PersonType>> fetchFamilyRoles() {
+    return graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: documentNodeQueryfamilyRoles,
+        operationName: 'familyRoles',
+        parserFn: (data) => (data['personTypes'] as List)
+            .map((role) => PersonType.fromJson(Json.from(role as Map)))
+            .toList(),
+      ),
     );
   }
 

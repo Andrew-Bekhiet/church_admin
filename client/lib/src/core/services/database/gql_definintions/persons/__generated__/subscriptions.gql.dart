@@ -1,6 +1,7 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.gql.dart';
 import '../../classes/__generated__/fragments.gql.dart';
+import '../../contacts/__generated__/fragments.gql.dart';
 import '../../families/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
@@ -1554,6 +1555,187 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(
                   ),
                 ),
                 FieldNode(
+                  name: NameNode(value: 'contacts'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                      name: NameNode(value: 'orderBy'),
+                      value: ListValueNode(
+                        values: [
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'isMainPhone'),
+                                value: EnumValueNode(
+                                  name: NameNode(value: 'DESC'),
+                                ),
+                              ),
+                            ],
+                          ),
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'createdAt'),
+                                value: EnumValueNode(
+                                  name: NameNode(value: 'ASC'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'PhoneContact'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: 'familyContacts'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                      name: NameNode(value: 'where'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'personType'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'isFamilyAdmin'),
+                                  value: ObjectValueNode(
+                                    fields: [
+                                      ObjectFieldNode(
+                                        name: NameNode(value: '_eq'),
+                                        value: BooleanValueNode(value: true),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          ObjectFieldNode(
+                            name: NameNode(value: '_or'),
+                            value: ListValueNode(
+                              values: [
+                                ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'personId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                            name: NameNode(value: '_isNull'),
+                                            value: BooleanValueNode(
+                                              value: true,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'personId'),
+                                      value: ObjectValueNode(
+                                        fields: [
+                                          ObjectFieldNode(
+                                            name: NameNode(value: '_neq'),
+                                            value: VariableNode(
+                                              name: NameNode(value: 'id'),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ArgumentNode(
+                      name: NameNode(value: 'orderBy'),
+                      value: ListValueNode(
+                        values: [
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'personType'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: 'order'),
+                                      value: EnumValueNode(
+                                        name: NameNode(value: 'ASC'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'isMainPhone'),
+                                value: EnumValueNode(
+                                  name: NameNode(value: 'DESC'),
+                                ),
+                              ),
+                            ],
+                          ),
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'createdAt'),
+                                value: EnumValueNode(
+                                  name: NameNode(value: 'ASC'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'FamilyPhoneContact'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
                   name: NameNode(value: 'college'),
                   alias: null,
                   arguments: [],
@@ -2441,6 +2623,8 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(
     fragmentDefinitionStreetNoPhoto,
     fragmentDefinitionClass,
     fragmentDefinitionClassNoPhoto,
+    fragmentDefinitionPhoneContact,
+    fragmentDefinitionFamilyPhoneContact,
     fragmentDefinitionFamily,
     fragmentDefinitionFamilyNoPhoto,
     fragmentDefinitionGroup,
@@ -2473,6 +2657,8 @@ class Subscription_watchPerson_personsByPk
     this.birthdate,
     required this.classes,
     this.church,
+    required this.contacts,
+    required this.familyContacts,
     this.college,
     this.family,
     this.father,
@@ -2522,6 +2708,8 @@ class Subscription_watchPerson_personsByPk
     final l$birthdate = json['birthdate'];
     final l$classes = json['classes'];
     final l$church = json['church'];
+    final l$contacts = json['contacts'];
+    final l$familyContacts = json['familyContacts'];
     final l$college = json['college'];
     final l$family = json['family'];
     final l$father = json['father'];
@@ -2581,6 +2769,18 @@ class Subscription_watchPerson_personsByPk
           : Subscription_watchPerson_personsByPk_church.fromJson(
               (l$church as Map<String, dynamic>),
             ),
+      contacts: (l$contacts as List<dynamic>)
+          .map(
+            (e) => Fragment_PhoneContact.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+      familyContacts: (l$familyContacts as List<dynamic>)
+          .map(
+            (e) => Fragment_FamilyPhoneContact.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
       college: l$college == null
           ? null
           : Subscription_watchPerson_personsByPk_college.fromJson(
@@ -2728,6 +2928,10 @@ class Subscription_watchPerson_personsByPk
 
   final Subscription_watchPerson_personsByPk_church? church;
 
+  final List<Fragment_PhoneContact> contacts;
+
+  final List<Fragment_FamilyPhoneContact> familyContacts;
+
   final Subscription_watchPerson_personsByPk_college? college;
 
   final Fragment_Family? family;
@@ -2822,6 +3026,12 @@ class Subscription_watchPerson_personsByPk
     _resultData['classes'] = l$classes.map((e) => e.toJson()).toList();
     final l$church = church;
     _resultData['church'] = l$church?.toJson();
+    final l$contacts = contacts;
+    _resultData['contacts'] = l$contacts.map((e) => e.toJson()).toList();
+    final l$familyContacts = familyContacts;
+    _resultData['familyContacts'] = l$familyContacts
+        .map((e) => e.toJson())
+        .toList();
     final l$college = college;
     _resultData['college'] = l$college?.toJson();
     final l$family = family;
@@ -2903,6 +3113,8 @@ class Subscription_watchPerson_personsByPk
     final l$birthdate = birthdate;
     final l$classes = classes;
     final l$church = church;
+    final l$contacts = contacts;
+    final l$familyContacts = familyContacts;
     final l$college = college;
     final l$family = family;
     final l$father = father;
@@ -2948,6 +3160,8 @@ class Subscription_watchPerson_personsByPk
       l$birthdate,
       Object.hashAll(l$classes.map((v) => v)),
       l$church,
+      Object.hashAll(l$contacts.map((v) => v)),
+      Object.hashAll(l$familyContacts.map((v) => v)),
       l$college,
       l$family,
       l$father,
@@ -3058,6 +3272,30 @@ class Subscription_watchPerson_personsByPk
     final lOther$church = other.church;
     if (l$church != lOther$church) {
       return false;
+    }
+    final l$contacts = contacts;
+    final lOther$contacts = other.contacts;
+    if (l$contacts.length != lOther$contacts.length) {
+      return false;
+    }
+    for (int i = 0; i < l$contacts.length; i++) {
+      final l$contacts$entry = l$contacts[i];
+      final lOther$contacts$entry = lOther$contacts[i];
+      if (l$contacts$entry != lOther$contacts$entry) {
+        return false;
+      }
+    }
+    final l$familyContacts = familyContacts;
+    final lOther$familyContacts = other.familyContacts;
+    if (l$familyContacts.length != lOther$familyContacts.length) {
+      return false;
+    }
+    for (int i = 0; i < l$familyContacts.length; i++) {
+      final l$familyContacts$entry = l$familyContacts[i];
+      final lOther$familyContacts$entry = lOther$familyContacts[i];
+      if (l$familyContacts$entry != lOther$familyContacts$entry) {
+        return false;
+      }
     }
     final l$college = college;
     final lOther$college = other.college;
@@ -3281,6 +3519,8 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     DateTime? birthdate,
     List<Subscription_watchPerson_personsByPk_classes>? classes,
     Subscription_watchPerson_personsByPk_church? church,
+    List<Fragment_PhoneContact>? contacts,
+    List<Fragment_FamilyPhoneContact>? familyContacts,
     Subscription_watchPerson_personsByPk_college? college,
     Fragment_Family? family,
     Subscription_watchPerson_personsByPk_father? father,
@@ -3326,6 +3566,20 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     _fn,
   );
   CopyWith_Subscription_watchPerson_personsByPk_church<TRes> get church;
+  TRes contacts(
+    Iterable<Fragment_PhoneContact> Function(
+      Iterable<CopyWith_Fragment_PhoneContact<Fragment_PhoneContact>>,
+    )
+    _fn,
+  );
+  TRes familyContacts(
+    Iterable<Fragment_FamilyPhoneContact> Function(
+      Iterable<
+        CopyWith_Fragment_FamilyPhoneContact<Fragment_FamilyPhoneContact>
+      >,
+    )
+    _fn,
+  );
   CopyWith_Subscription_watchPerson_personsByPk_college<TRes> get college;
   CopyWith_Fragment_Family<TRes> get family;
   CopyWith_Subscription_watchPerson_personsByPk_father<TRes> get father;
@@ -3414,6 +3668,8 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
     Object? birthdate = _undefined,
     Object? classes = _undefined,
     Object? church = _undefined,
+    Object? contacts = _undefined,
+    Object? familyContacts = _undefined,
     Object? college = _undefined,
     Object? family = _undefined,
     Object? father = _undefined,
@@ -3480,6 +3736,12 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
       church: church == _undefined
           ? _instance.church
           : (church as Subscription_watchPerson_personsByPk_church?),
+      contacts: contacts == _undefined || contacts == null
+          ? _instance.contacts
+          : (contacts as List<Fragment_PhoneContact>),
+      familyContacts: familyContacts == _undefined || familyContacts == null
+          ? _instance.familyContacts
+          : (familyContacts as List<Fragment_FamilyPhoneContact>),
       college: college == _undefined
           ? _instance.college
           : (college as Subscription_watchPerson_personsByPk_college?),
@@ -3614,6 +3876,34 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
             (e) => call(church: e),
           );
   }
+
+  TRes contacts(
+    Iterable<Fragment_PhoneContact> Function(
+      Iterable<CopyWith_Fragment_PhoneContact<Fragment_PhoneContact>>,
+    )
+    _fn,
+  ) => call(
+    contacts: _fn(
+      _instance.contacts.map(
+        (e) => CopyWith_Fragment_PhoneContact(e, (i) => i),
+      ),
+    ).toList(),
+  );
+
+  TRes familyContacts(
+    Iterable<Fragment_FamilyPhoneContact> Function(
+      Iterable<
+        CopyWith_Fragment_FamilyPhoneContact<Fragment_FamilyPhoneContact>
+      >,
+    )
+    _fn,
+  ) => call(
+    familyContacts: _fn(
+      _instance.familyContacts.map(
+        (e) => CopyWith_Fragment_FamilyPhoneContact(e, (i) => i),
+      ),
+    ).toList(),
+  );
 
   CopyWith_Subscription_watchPerson_personsByPk_college<TRes> get college {
     final local$college = _instance.college;
@@ -3897,6 +4187,8 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     DateTime? birthdate,
     List<Subscription_watchPerson_personsByPk_classes>? classes,
     Subscription_watchPerson_personsByPk_church? church,
+    List<Fragment_PhoneContact>? contacts,
+    List<Fragment_FamilyPhoneContact>? familyContacts,
     Subscription_watchPerson_personsByPk_college? college,
     Fragment_Family? family,
     Subscription_watchPerson_personsByPk_father? father,
@@ -3938,6 +4230,10 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
 
   CopyWith_Subscription_watchPerson_personsByPk_church<TRes> get church =>
       CopyWith_Subscription_watchPerson_personsByPk_church.stub(_res);
+
+  contacts(_fn) => _res;
+
+  familyContacts(_fn) => _res;
 
   CopyWith_Subscription_watchPerson_personsByPk_college<TRes> get college =>
       CopyWith_Subscription_watchPerson_personsByPk_college.stub(_res);

@@ -522,6 +522,12 @@ class Variables_Mutation_updateFamily {
     DateTime? lastFatherVisit,
     required bool insertVisitHistory,
     required bool insertFatherVisitHistory,
+    List<UuidValue>? deletedContactIds,
+    List<Input_ContactsUpdates>? contactUpdates,
+    List<Input_ContactsInsertInput>? newContacts,
+    bool? deleteContacts,
+    bool? updateContactsMany,
+    bool? insertContacts,
   }) => Variables_Mutation_updateFamily._({
     r'familyId': familyId,
     r'newFamily': newFamily,
@@ -538,6 +544,12 @@ class Variables_Mutation_updateFamily {
     if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
     r'insertVisitHistory': insertVisitHistory,
     r'insertFatherVisitHistory': insertFatherVisitHistory,
+    if (deletedContactIds != null) r'deletedContactIds': deletedContactIds,
+    if (contactUpdates != null) r'contactUpdates': contactUpdates,
+    if (newContacts != null) r'newContacts': newContacts,
+    if (deleteContacts != null) r'deleteContacts': deleteContacts,
+    if (updateContactsMany != null) r'updateContactsMany': updateContactsMany,
+    if (insertContacts != null) r'insertContacts': insertContacts,
   });
 
   Variables_Mutation_updateFamily._(this._$data);
@@ -601,6 +613,41 @@ class Variables_Mutation_updateFamily {
     final l$insertFatherVisitHistory = data['insertFatherVisitHistory'];
     result$data['insertFatherVisitHistory'] =
         (l$insertFatherVisitHistory as bool);
+    if (data.containsKey('deletedContactIds')) {
+      final l$deletedContactIds = data['deletedContactIds'];
+      result$data['deletedContactIds'] = (l$deletedContactIds as List<dynamic>)
+          .map((e) => stringToUuid(e))
+          .toList();
+    }
+    if (data.containsKey('contactUpdates')) {
+      final l$contactUpdates = data['contactUpdates'];
+      result$data['contactUpdates'] = (l$contactUpdates as List<dynamic>)
+          .map(
+            (e) => Input_ContactsUpdates.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
+    }
+    if (data.containsKey('newContacts')) {
+      final l$newContacts = data['newContacts'];
+      result$data['newContacts'] = (l$newContacts as List<dynamic>)
+          .map(
+            (e) =>
+                Input_ContactsInsertInput.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
+    }
+    if (data.containsKey('deleteContacts')) {
+      final l$deleteContacts = data['deleteContacts'];
+      result$data['deleteContacts'] = (l$deleteContacts as bool);
+    }
+    if (data.containsKey('updateContactsMany')) {
+      final l$updateContactsMany = data['updateContactsMany'];
+      result$data['updateContactsMany'] = (l$updateContactsMany as bool);
+    }
+    if (data.containsKey('insertContacts')) {
+      final l$insertContacts = data['insertContacts'];
+      result$data['insertContacts'] = (l$insertContacts as bool);
+    }
     return Variables_Mutation_updateFamily._(result$data);
   }
 
@@ -641,6 +688,21 @@ class Variables_Mutation_updateFamily {
 
   bool get insertFatherVisitHistory =>
       (_$data['insertFatherVisitHistory'] as bool);
+
+  List<UuidValue>? get deletedContactIds =>
+      (_$data['deletedContactIds'] as List<UuidValue>?);
+
+  List<Input_ContactsUpdates>? get contactUpdates =>
+      (_$data['contactUpdates'] as List<Input_ContactsUpdates>?);
+
+  List<Input_ContactsInsertInput>? get newContacts =>
+      (_$data['newContacts'] as List<Input_ContactsInsertInput>?);
+
+  bool? get deleteContacts => (_$data['deleteContacts'] as bool?);
+
+  bool? get updateContactsMany => (_$data['updateContactsMany'] as bool?);
+
+  bool? get insertContacts => (_$data['insertContacts'] as bool?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -690,6 +752,39 @@ class Variables_Mutation_updateFamily {
     result$data['insertVisitHistory'] = l$insertVisitHistory;
     final l$insertFatherVisitHistory = insertFatherVisitHistory;
     result$data['insertFatherVisitHistory'] = l$insertFatherVisitHistory;
+    if (_$data.containsKey('deletedContactIds')) {
+      final l$deletedContactIds = deletedContactIds;
+      result$data['deletedContactIds'] =
+          (l$deletedContactIds as List<UuidValue>)
+              .map((e) => uuidToString(e))
+              .toList();
+    }
+    if (_$data.containsKey('contactUpdates')) {
+      final l$contactUpdates = contactUpdates;
+      result$data['contactUpdates'] =
+          (l$contactUpdates as List<Input_ContactsUpdates>)
+              .map((e) => e.toJson())
+              .toList();
+    }
+    if (_$data.containsKey('newContacts')) {
+      final l$newContacts = newContacts;
+      result$data['newContacts'] =
+          (l$newContacts as List<Input_ContactsInsertInput>)
+              .map((e) => e.toJson())
+              .toList();
+    }
+    if (_$data.containsKey('deleteContacts')) {
+      final l$deleteContacts = deleteContacts;
+      result$data['deleteContacts'] = (l$deleteContacts as bool);
+    }
+    if (_$data.containsKey('updateContactsMany')) {
+      final l$updateContactsMany = updateContactsMany;
+      result$data['updateContactsMany'] = (l$updateContactsMany as bool);
+    }
+    if (_$data.containsKey('insertContacts')) {
+      final l$insertContacts = insertContacts;
+      result$data['insertContacts'] = (l$insertContacts as bool);
+    }
     return result$data;
   }
 
@@ -813,6 +908,93 @@ class Variables_Mutation_updateFamily {
     if (l$insertFatherVisitHistory != lOther$insertFatherVisitHistory) {
       return false;
     }
+    final l$deletedContactIds = deletedContactIds;
+    final lOther$deletedContactIds = other.deletedContactIds;
+    if (_$data.containsKey('deletedContactIds') !=
+        other._$data.containsKey('deletedContactIds')) {
+      return false;
+    }
+    if (l$deletedContactIds != null && lOther$deletedContactIds != null) {
+      if (l$deletedContactIds.length != lOther$deletedContactIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$deletedContactIds.length; i++) {
+        final l$deletedContactIds$entry = l$deletedContactIds[i];
+        final lOther$deletedContactIds$entry = lOther$deletedContactIds[i];
+        if (l$deletedContactIds$entry != lOther$deletedContactIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$deletedContactIds != lOther$deletedContactIds) {
+      return false;
+    }
+    final l$contactUpdates = contactUpdates;
+    final lOther$contactUpdates = other.contactUpdates;
+    if (_$data.containsKey('contactUpdates') !=
+        other._$data.containsKey('contactUpdates')) {
+      return false;
+    }
+    if (l$contactUpdates != null && lOther$contactUpdates != null) {
+      if (l$contactUpdates.length != lOther$contactUpdates.length) {
+        return false;
+      }
+      for (int i = 0; i < l$contactUpdates.length; i++) {
+        final l$contactUpdates$entry = l$contactUpdates[i];
+        final lOther$contactUpdates$entry = lOther$contactUpdates[i];
+        if (l$contactUpdates$entry != lOther$contactUpdates$entry) {
+          return false;
+        }
+      }
+    } else if (l$contactUpdates != lOther$contactUpdates) {
+      return false;
+    }
+    final l$newContacts = newContacts;
+    final lOther$newContacts = other.newContacts;
+    if (_$data.containsKey('newContacts') !=
+        other._$data.containsKey('newContacts')) {
+      return false;
+    }
+    if (l$newContacts != null && lOther$newContacts != null) {
+      if (l$newContacts.length != lOther$newContacts.length) {
+        return false;
+      }
+      for (int i = 0; i < l$newContacts.length; i++) {
+        final l$newContacts$entry = l$newContacts[i];
+        final lOther$newContacts$entry = lOther$newContacts[i];
+        if (l$newContacts$entry != lOther$newContacts$entry) {
+          return false;
+        }
+      }
+    } else if (l$newContacts != lOther$newContacts) {
+      return false;
+    }
+    final l$deleteContacts = deleteContacts;
+    final lOther$deleteContacts = other.deleteContacts;
+    if (_$data.containsKey('deleteContacts') !=
+        other._$data.containsKey('deleteContacts')) {
+      return false;
+    }
+    if (l$deleteContacts != lOther$deleteContacts) {
+      return false;
+    }
+    final l$updateContactsMany = updateContactsMany;
+    final lOther$updateContactsMany = other.updateContactsMany;
+    if (_$data.containsKey('updateContactsMany') !=
+        other._$data.containsKey('updateContactsMany')) {
+      return false;
+    }
+    if (l$updateContactsMany != lOther$updateContactsMany) {
+      return false;
+    }
+    final l$insertContacts = insertContacts;
+    final lOther$insertContacts = other.insertContacts;
+    if (_$data.containsKey('insertContacts') !=
+        other._$data.containsKey('insertContacts')) {
+      return false;
+    }
+    if (l$insertContacts != lOther$insertContacts) {
+      return false;
+    }
     return true;
   }
 
@@ -833,6 +1015,12 @@ class Variables_Mutation_updateFamily {
     final l$lastFatherVisit = lastFatherVisit;
     final l$insertVisitHistory = insertVisitHistory;
     final l$insertFatherVisitHistory = insertFatherVisitHistory;
+    final l$deletedContactIds = deletedContactIds;
+    final l$contactUpdates = contactUpdates;
+    final l$newContacts = newContacts;
+    final l$deleteContacts = deleteContacts;
+    final l$updateContactsMany = updateContactsMany;
+    final l$insertContacts = insertContacts;
     return Object.hashAll([
       l$familyId,
       l$newFamily,
@@ -849,6 +1037,26 @@ class Variables_Mutation_updateFamily {
       _$data.containsKey('lastFatherVisit') ? l$lastFatherVisit : const {},
       l$insertVisitHistory,
       l$insertFatherVisitHistory,
+      _$data.containsKey('deletedContactIds')
+          ? l$deletedContactIds == null
+                ? null
+                : Object.hashAll(l$deletedContactIds.map((v) => v))
+          : const {},
+      _$data.containsKey('contactUpdates')
+          ? l$contactUpdates == null
+                ? null
+                : Object.hashAll(l$contactUpdates.map((v) => v))
+          : const {},
+      _$data.containsKey('newContacts')
+          ? l$newContacts == null
+                ? null
+                : Object.hashAll(l$newContacts.map((v) => v))
+          : const {},
+      _$data.containsKey('deleteContacts') ? l$deleteContacts : const {},
+      _$data.containsKey('updateContactsMany')
+          ? l$updateContactsMany
+          : const {},
+      _$data.containsKey('insertContacts') ? l$insertContacts : const {},
     ]);
   }
 }
@@ -878,6 +1086,12 @@ abstract class CopyWith_Variables_Mutation_updateFamily<TRes> {
     DateTime? lastFatherVisit,
     bool? insertVisitHistory,
     bool? insertFatherVisitHistory,
+    List<UuidValue>? deletedContactIds,
+    List<Input_ContactsUpdates>? contactUpdates,
+    List<Input_ContactsInsertInput>? newContacts,
+    bool? deleteContacts,
+    bool? updateContactsMany,
+    bool? insertContacts,
   });
 }
 
@@ -907,6 +1121,12 @@ class _CopyWithImpl_Variables_Mutation_updateFamily<TRes>
     Object? lastFatherVisit = _undefined,
     Object? insertVisitHistory = _undefined,
     Object? insertFatherVisitHistory = _undefined,
+    Object? deletedContactIds = _undefined,
+    Object? contactUpdates = _undefined,
+    Object? newContacts = _undefined,
+    Object? deleteContacts = _undefined,
+    Object? updateContactsMany = _undefined,
+    Object? insertContacts = _undefined,
   }) => _then(
     Variables_Mutation_updateFamily._({
       ..._instance._$data,
@@ -941,6 +1161,18 @@ class _CopyWithImpl_Variables_Mutation_updateFamily<TRes>
       if (insertFatherVisitHistory != _undefined &&
           insertFatherVisitHistory != null)
         'insertFatherVisitHistory': (insertFatherVisitHistory as bool),
+      if (deletedContactIds != _undefined && deletedContactIds != null)
+        'deletedContactIds': (deletedContactIds as List<UuidValue>),
+      if (contactUpdates != _undefined && contactUpdates != null)
+        'contactUpdates': (contactUpdates as List<Input_ContactsUpdates>),
+      if (newContacts != _undefined && newContacts != null)
+        'newContacts': (newContacts as List<Input_ContactsInsertInput>),
+      if (deleteContacts != _undefined && deleteContacts != null)
+        'deleteContacts': (deleteContacts as bool),
+      if (updateContactsMany != _undefined && updateContactsMany != null)
+        'updateContactsMany': (updateContactsMany as bool),
+      if (insertContacts != _undefined && insertContacts != null)
+        'insertContacts': (insertContacts as bool),
     }),
   );
 }
@@ -967,6 +1199,12 @@ class _CopyWithStubImpl_Variables_Mutation_updateFamily<TRes>
     DateTime? lastFatherVisit,
     bool? insertVisitHistory,
     bool? insertFatherVisitHistory,
+    List<UuidValue>? deletedContactIds,
+    List<Input_ContactsUpdates>? contactUpdates,
+    List<Input_ContactsInsertInput>? newContacts,
+    bool? deleteContacts,
+    bool? updateContactsMany,
+    bool? insertContacts,
   }) => _res;
 }
 
@@ -976,6 +1214,9 @@ class Mutation_updateFamily {
     this.updateAddressesByPk,
     this.deleteFamiliesFamilies,
     this.insertFamiliesFamilies,
+    this.deleteContacts,
+    this.updateContactsMany,
+    this.insertContacts,
     this.insertHistoryVisitHistoryOne,
     this.$_fatherVisitHistory,
   });
@@ -985,6 +1226,9 @@ class Mutation_updateFamily {
     final l$updateAddressesByPk = json['updateAddressesByPk'];
     final l$deleteFamiliesFamilies = json['deleteFamiliesFamilies'];
     final l$insertFamiliesFamilies = json['insertFamiliesFamilies'];
+    final l$deleteContacts = json['deleteContacts'];
+    final l$updateContactsMany = json['updateContactsMany'];
+    final l$insertContacts = json['insertContacts'];
     final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
     final l$$_fatherVisitHistory = json['_fatherVisitHistory'];
     return Mutation_updateFamily(
@@ -1008,6 +1252,25 @@ class Mutation_updateFamily {
           : Mutation_updateFamily_insertFamiliesFamilies.fromJson(
               (l$insertFamiliesFamilies as Map<String, dynamic>),
             ),
+      deleteContacts: l$deleteContacts == null
+          ? null
+          : Mutation_updateFamily_deleteContacts.fromJson(
+              (l$deleteContacts as Map<String, dynamic>),
+            ),
+      updateContactsMany: (l$updateContactsMany as List<dynamic>?)
+          ?.map(
+            (e) => e == null
+                ? null
+                : Mutation_updateFamily_updateContactsMany.fromJson(
+                    (e as Map<String, dynamic>),
+                  ),
+          )
+          .toList(),
+      insertContacts: l$insertContacts == null
+          ? null
+          : Mutation_updateFamily_insertContacts.fromJson(
+              (l$insertContacts as Map<String, dynamic>),
+            ),
       insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
           ? null
           : Mutation_updateFamily_insertHistoryVisitHistoryOne.fromJson(
@@ -1029,6 +1292,12 @@ class Mutation_updateFamily {
 
   final Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies;
 
+  final Mutation_updateFamily_deleteContacts? deleteContacts;
+
+  final List<Mutation_updateFamily_updateContactsMany?>? updateContactsMany;
+
+  final Mutation_updateFamily_insertContacts? insertContacts;
+
   final Mutation_updateFamily_insertHistoryVisitHistoryOne?
   insertHistoryVisitHistoryOne;
 
@@ -1044,6 +1313,14 @@ class Mutation_updateFamily {
     _resultData['deleteFamiliesFamilies'] = l$deleteFamiliesFamilies?.toJson();
     final l$insertFamiliesFamilies = insertFamiliesFamilies;
     _resultData['insertFamiliesFamilies'] = l$insertFamiliesFamilies?.toJson();
+    final l$deleteContacts = deleteContacts;
+    _resultData['deleteContacts'] = l$deleteContacts?.toJson();
+    final l$updateContactsMany = updateContactsMany;
+    _resultData['updateContactsMany'] = l$updateContactsMany
+        ?.map((e) => e?.toJson())
+        .toList();
+    final l$insertContacts = insertContacts;
+    _resultData['insertContacts'] = l$insertContacts?.toJson();
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     _resultData['insertHistoryVisitHistoryOne'] = l$insertHistoryVisitHistoryOne
         ?.toJson();
@@ -1058,6 +1335,9 @@ class Mutation_updateFamily {
     final l$updateAddressesByPk = updateAddressesByPk;
     final l$deleteFamiliesFamilies = deleteFamiliesFamilies;
     final l$insertFamiliesFamilies = insertFamiliesFamilies;
+    final l$deleteContacts = deleteContacts;
+    final l$updateContactsMany = updateContactsMany;
+    final l$insertContacts = insertContacts;
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     final l$$_fatherVisitHistory = $_fatherVisitHistory;
     return Object.hashAll([
@@ -1065,6 +1345,11 @@ class Mutation_updateFamily {
       l$updateAddressesByPk,
       l$deleteFamiliesFamilies,
       l$insertFamiliesFamilies,
+      l$deleteContacts,
+      l$updateContactsMany == null
+          ? null
+          : Object.hashAll(l$updateContactsMany.map((v) => v)),
+      l$insertContacts,
       l$insertHistoryVisitHistoryOne,
       l$$_fatherVisitHistory,
     ]);
@@ -1096,6 +1381,32 @@ class Mutation_updateFamily {
     final l$insertFamiliesFamilies = insertFamiliesFamilies;
     final lOther$insertFamiliesFamilies = other.insertFamiliesFamilies;
     if (l$insertFamiliesFamilies != lOther$insertFamiliesFamilies) {
+      return false;
+    }
+    final l$deleteContacts = deleteContacts;
+    final lOther$deleteContacts = other.deleteContacts;
+    if (l$deleteContacts != lOther$deleteContacts) {
+      return false;
+    }
+    final l$updateContactsMany = updateContactsMany;
+    final lOther$updateContactsMany = other.updateContactsMany;
+    if (l$updateContactsMany != null && lOther$updateContactsMany != null) {
+      if (l$updateContactsMany.length != lOther$updateContactsMany.length) {
+        return false;
+      }
+      for (int i = 0; i < l$updateContactsMany.length; i++) {
+        final l$updateContactsMany$entry = l$updateContactsMany[i];
+        final lOther$updateContactsMany$entry = lOther$updateContactsMany[i];
+        if (l$updateContactsMany$entry != lOther$updateContactsMany$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateContactsMany != lOther$updateContactsMany) {
+      return false;
+    }
+    final l$insertContacts = insertContacts;
+    final lOther$insertContacts = other.insertContacts;
+    if (l$insertContacts != lOther$insertContacts) {
       return false;
     }
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
@@ -1132,6 +1443,9 @@ abstract class CopyWith_Mutation_updateFamily<TRes> {
     Fragment_Address? updateAddressesByPk,
     Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies,
     Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies,
+    Mutation_updateFamily_deleteContacts? deleteContacts,
+    List<Mutation_updateFamily_updateContactsMany?>? updateContactsMany,
+    Mutation_updateFamily_insertContacts? insertContacts,
     Mutation_updateFamily_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
     Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory,
@@ -1142,6 +1456,18 @@ abstract class CopyWith_Mutation_updateFamily<TRes> {
   get deleteFamiliesFamilies;
   CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
   get insertFamiliesFamilies;
+  CopyWith_Mutation_updateFamily_deleteContacts<TRes> get deleteContacts;
+  TRes updateContactsMany(
+    Iterable<Mutation_updateFamily_updateContactsMany?>? Function(
+      Iterable<
+        CopyWith_Mutation_updateFamily_updateContactsMany<
+          Mutation_updateFamily_updateContactsMany
+        >?
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Mutation_updateFamily_insertContacts<TRes> get insertContacts;
   CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
   get insertHistoryVisitHistoryOne;
   CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes>
@@ -1163,6 +1489,9 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
     Object? updateAddressesByPk = _undefined,
     Object? deleteFamiliesFamilies = _undefined,
     Object? insertFamiliesFamilies = _undefined,
+    Object? deleteContacts = _undefined,
+    Object? updateContactsMany = _undefined,
+    Object? insertContacts = _undefined,
     Object? insertHistoryVisitHistoryOne = _undefined,
     Object? $_fatherVisitHistory = _undefined,
   }) => _then(
@@ -1181,6 +1510,16 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
           ? _instance.insertFamiliesFamilies
           : (insertFamiliesFamilies
                 as Mutation_updateFamily_insertFamiliesFamilies?),
+      deleteContacts: deleteContacts == _undefined
+          ? _instance.deleteContacts
+          : (deleteContacts as Mutation_updateFamily_deleteContacts?),
+      updateContactsMany: updateContactsMany == _undefined
+          ? _instance.updateContactsMany
+          : (updateContactsMany
+                as List<Mutation_updateFamily_updateContactsMany?>?),
+      insertContacts: insertContacts == _undefined
+          ? _instance.insertContacts
+          : (insertContacts as Mutation_updateFamily_insertContacts?),
       insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
           ? _instance.insertHistoryVisitHistoryOne
           : (insertHistoryVisitHistoryOne
@@ -1238,6 +1577,45 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
           );
   }
 
+  CopyWith_Mutation_updateFamily_deleteContacts<TRes> get deleteContacts {
+    final local$deleteContacts = _instance.deleteContacts;
+    return local$deleteContacts == null
+        ? CopyWith_Mutation_updateFamily_deleteContacts.stub(_then(_instance))
+        : CopyWith_Mutation_updateFamily_deleteContacts(
+            local$deleteContacts,
+            (e) => call(deleteContacts: e),
+          );
+  }
+
+  TRes updateContactsMany(
+    Iterable<Mutation_updateFamily_updateContactsMany?>? Function(
+      Iterable<
+        CopyWith_Mutation_updateFamily_updateContactsMany<
+          Mutation_updateFamily_updateContactsMany
+        >?
+      >?,
+    )
+    _fn,
+  ) => call(
+    updateContactsMany: _fn(
+      _instance.updateContactsMany?.map(
+        (e) => e == null
+            ? null
+            : CopyWith_Mutation_updateFamily_updateContactsMany(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Mutation_updateFamily_insertContacts<TRes> get insertContacts {
+    final local$insertContacts = _instance.insertContacts;
+    return local$insertContacts == null
+        ? CopyWith_Mutation_updateFamily_insertContacts.stub(_then(_instance))
+        : CopyWith_Mutation_updateFamily_insertContacts(
+            local$insertContacts,
+            (e) => call(insertContacts: e),
+          );
+  }
+
   CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
   get insertHistoryVisitHistoryOne {
     final local$insertHistoryVisitHistoryOne =
@@ -1277,6 +1655,9 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
     Fragment_Address? updateAddressesByPk,
     Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies,
     Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies,
+    Mutation_updateFamily_deleteContacts? deleteContacts,
+    List<Mutation_updateFamily_updateContactsMany?>? updateContactsMany,
+    Mutation_updateFamily_insertContacts? insertContacts,
     Mutation_updateFamily_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
     Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory,
@@ -1295,6 +1676,14 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
   CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
   get insertFamiliesFamilies =>
       CopyWith_Mutation_updateFamily_insertFamiliesFamilies.stub(_res);
+
+  CopyWith_Mutation_updateFamily_deleteContacts<TRes> get deleteContacts =>
+      CopyWith_Mutation_updateFamily_deleteContacts.stub(_res);
+
+  updateContactsMany(_fn) => _res;
+
+  CopyWith_Mutation_updateFamily_insertContacts<TRes> get insertContacts =>
+      CopyWith_Mutation_updateFamily_insertContacts.stub(_res);
 
   CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
   get insertHistoryVisitHistoryOne =>
@@ -1447,6 +1836,66 @@ const documentNodeMutationupdateFamily = DocumentNode(
             isNonNull: true,
           ),
           defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'deletedContactIds')),
+          type: ListTypeNode(
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'contactUpdates')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'ContactsUpdates'),
+              isNonNull: true,
+            ),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newContacts')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'ContactsInsertInput'),
+              isNonNull: true,
+            ),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'deleteContacts')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'updateContactsMany')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'insertContacts')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
           directives: [],
         ),
       ],
@@ -1677,6 +2126,145 @@ const documentNodeMutationupdateFamily = DocumentNode(
                     name: NameNode(value: 'if'),
                     value: VariableNode(
                       name: NameNode(value: 'insertRelatedFamilies'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'deleteContacts'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_in'),
+                            value: VariableNode(
+                              name: NameNode(value: 'deletedContactIds'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'deleteContacts'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'updateContactsMany'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'updates'),
+                value: VariableNode(name: NameNode(value: 'contactUpdates')),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'updateContactsMany'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertContacts'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'objects'),
+                value: VariableNode(name: NameNode(value: 'newContacts')),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'insertContacts'),
                     ),
                   ),
                 ],
@@ -2066,6 +2654,358 @@ class _CopyWithImpl_Mutation_updateFamily_insertFamiliesFamilies<TRes>
 class _CopyWithStubImpl_Mutation_updateFamily_insertFamiliesFamilies<TRes>
     implements CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes> {
   _CopyWithStubImpl_Mutation_updateFamily_insertFamiliesFamilies(this._res);
+
+  TRes _res;
+
+  call({int? affectedRows, String? $__typename}) => _res;
+}
+
+class Mutation_updateFamily_deleteContacts {
+  Mutation_updateFamily_deleteContacts({
+    required this.affectedRows,
+    this.$__typename = 'ContactsMutationResponse',
+  });
+
+  factory Mutation_updateFamily_deleteContacts.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$affectedRows = json['affectedRows'];
+    final l$$__typename = json['__typename'];
+    return Mutation_updateFamily_deleteContacts(
+      affectedRows: (l$affectedRows as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int affectedRows;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$affectedRows = affectedRows;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$affectedRows, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_updateFamily_deleteContacts ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_updateFamily_deleteContacts
+    on Mutation_updateFamily_deleteContacts {
+  CopyWith_Mutation_updateFamily_deleteContacts<
+    Mutation_updateFamily_deleteContacts
+  >
+  get copyWith => CopyWith_Mutation_updateFamily_deleteContacts(this, (i) => i);
+}
+
+abstract class CopyWith_Mutation_updateFamily_deleteContacts<TRes> {
+  factory CopyWith_Mutation_updateFamily_deleteContacts(
+    Mutation_updateFamily_deleteContacts instance,
+    TRes Function(Mutation_updateFamily_deleteContacts) then,
+  ) = _CopyWithImpl_Mutation_updateFamily_deleteContacts;
+
+  factory CopyWith_Mutation_updateFamily_deleteContacts.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updateFamily_deleteContacts;
+
+  TRes call({int? affectedRows, String? $__typename});
+}
+
+class _CopyWithImpl_Mutation_updateFamily_deleteContacts<TRes>
+    implements CopyWith_Mutation_updateFamily_deleteContacts<TRes> {
+  _CopyWithImpl_Mutation_updateFamily_deleteContacts(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_updateFamily_deleteContacts _instance;
+
+  final TRes Function(Mutation_updateFamily_deleteContacts) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? affectedRows = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation_updateFamily_deleteContacts(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Mutation_updateFamily_deleteContacts<TRes>
+    implements CopyWith_Mutation_updateFamily_deleteContacts<TRes> {
+  _CopyWithStubImpl_Mutation_updateFamily_deleteContacts(this._res);
+
+  TRes _res;
+
+  call({int? affectedRows, String? $__typename}) => _res;
+}
+
+class Mutation_updateFamily_updateContactsMany {
+  Mutation_updateFamily_updateContactsMany({
+    required this.affectedRows,
+    this.$__typename = 'ContactsMutationResponse',
+  });
+
+  factory Mutation_updateFamily_updateContactsMany.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$affectedRows = json['affectedRows'];
+    final l$$__typename = json['__typename'];
+    return Mutation_updateFamily_updateContactsMany(
+      affectedRows: (l$affectedRows as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int affectedRows;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$affectedRows = affectedRows;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$affectedRows, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_updateFamily_updateContactsMany ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_updateFamily_updateContactsMany
+    on Mutation_updateFamily_updateContactsMany {
+  CopyWith_Mutation_updateFamily_updateContactsMany<
+    Mutation_updateFamily_updateContactsMany
+  >
+  get copyWith =>
+      CopyWith_Mutation_updateFamily_updateContactsMany(this, (i) => i);
+}
+
+abstract class CopyWith_Mutation_updateFamily_updateContactsMany<TRes> {
+  factory CopyWith_Mutation_updateFamily_updateContactsMany(
+    Mutation_updateFamily_updateContactsMany instance,
+    TRes Function(Mutation_updateFamily_updateContactsMany) then,
+  ) = _CopyWithImpl_Mutation_updateFamily_updateContactsMany;
+
+  factory CopyWith_Mutation_updateFamily_updateContactsMany.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updateFamily_updateContactsMany;
+
+  TRes call({int? affectedRows, String? $__typename});
+}
+
+class _CopyWithImpl_Mutation_updateFamily_updateContactsMany<TRes>
+    implements CopyWith_Mutation_updateFamily_updateContactsMany<TRes> {
+  _CopyWithImpl_Mutation_updateFamily_updateContactsMany(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_updateFamily_updateContactsMany _instance;
+
+  final TRes Function(Mutation_updateFamily_updateContactsMany) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? affectedRows = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation_updateFamily_updateContactsMany(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Mutation_updateFamily_updateContactsMany<TRes>
+    implements CopyWith_Mutation_updateFamily_updateContactsMany<TRes> {
+  _CopyWithStubImpl_Mutation_updateFamily_updateContactsMany(this._res);
+
+  TRes _res;
+
+  call({int? affectedRows, String? $__typename}) => _res;
+}
+
+class Mutation_updateFamily_insertContacts {
+  Mutation_updateFamily_insertContacts({
+    required this.affectedRows,
+    this.$__typename = 'ContactsMutationResponse',
+  });
+
+  factory Mutation_updateFamily_insertContacts.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$affectedRows = json['affectedRows'];
+    final l$$__typename = json['__typename'];
+    return Mutation_updateFamily_insertContacts(
+      affectedRows: (l$affectedRows as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int affectedRows;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$affectedRows = affectedRows;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$affectedRows, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_updateFamily_insertContacts ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_updateFamily_insertContacts
+    on Mutation_updateFamily_insertContacts {
+  CopyWith_Mutation_updateFamily_insertContacts<
+    Mutation_updateFamily_insertContacts
+  >
+  get copyWith => CopyWith_Mutation_updateFamily_insertContacts(this, (i) => i);
+}
+
+abstract class CopyWith_Mutation_updateFamily_insertContacts<TRes> {
+  factory CopyWith_Mutation_updateFamily_insertContacts(
+    Mutation_updateFamily_insertContacts instance,
+    TRes Function(Mutation_updateFamily_insertContacts) then,
+  ) = _CopyWithImpl_Mutation_updateFamily_insertContacts;
+
+  factory CopyWith_Mutation_updateFamily_insertContacts.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updateFamily_insertContacts;
+
+  TRes call({int? affectedRows, String? $__typename});
+}
+
+class _CopyWithImpl_Mutation_updateFamily_insertContacts<TRes>
+    implements CopyWith_Mutation_updateFamily_insertContacts<TRes> {
+  _CopyWithImpl_Mutation_updateFamily_insertContacts(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_updateFamily_insertContacts _instance;
+
+  final TRes Function(Mutation_updateFamily_insertContacts) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? affectedRows = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation_updateFamily_insertContacts(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Mutation_updateFamily_insertContacts<TRes>
+    implements CopyWith_Mutation_updateFamily_insertContacts<TRes> {
+  _CopyWithStubImpl_Mutation_updateFamily_insertContacts(this._res);
 
   TRes _res;
 

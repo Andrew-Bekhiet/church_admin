@@ -106,6 +106,13 @@ array_relationships:
         table:
           name: stores
           schema: public
+  - name: unclaimedContacts
+    using:
+      foreign_key_constraint_on:
+        column: family_id
+        table:
+          name: contacts
+          schema: public
   - name: visitHistory
     using:
       manual_configuration:
@@ -116,6 +123,11 @@ array_relationships:
           name: visit_history
           schema: history
 computed_fields:
+  - name: insertedInCurrentTransaction
+    definition:
+      function:
+        name: family_inserted_in_current_transaction
+        schema: public
   - name: userCanEdit
     definition:
       function:

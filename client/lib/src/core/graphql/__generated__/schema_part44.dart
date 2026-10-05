@@ -34,6 +34,7 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_FamiliesBoolExp? family,
+    Input_ResolvedContactsBoolExp? familyContacts,
     Input_UuidComparisonExp? familyId,
     Input_FathersBoolExp? father,
     Input_UuidComparisonExp? fatherId,
@@ -125,6 +126,7 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
   CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
   get editHistoryAggregate;
   CopyWith_Input_FamiliesBoolExp<TRes> get family;
+  CopyWith_Input_ResolvedContactsBoolExp<TRes> get familyContacts;
   CopyWith_Input_UuidComparisonExp<TRes> get familyId;
   CopyWith_Input_FathersBoolExp<TRes> get father;
   CopyWith_Input_UuidComparisonExp<TRes> get fatherId;
@@ -216,6 +218,7 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
     Object? editHistory = _undefined,
     Object? editHistoryAggregate = _undefined,
     Object? family = _undefined,
+    Object? familyContacts = _undefined,
     Object? familyId = _undefined,
     Object? father = _undefined,
     Object? fatherId = _undefined,
@@ -319,6 +322,8 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
         'editHistoryAggregate':
             (editHistoryAggregate as Input_HistoryEditHistoryAggregateBoolExp?),
       if (family != _undefined) 'family': (family as Input_FamiliesBoolExp?),
+      if (familyContacts != _undefined)
+        'familyContacts': (familyContacts as Input_ResolvedContactsBoolExp?),
       if (familyId != _undefined)
         'familyId': (familyId as Input_UuidComparisonExp?),
       if (father != _undefined) 'father': (father as Input_FathersBoolExp?),
@@ -656,6 +661,16 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
     return local$family == null
         ? CopyWith_Input_FamiliesBoolExp.stub(_then(_instance))
         : CopyWith_Input_FamiliesBoolExp(local$family, (e) => call(family: e));
+  }
+
+  CopyWith_Input_ResolvedContactsBoolExp<TRes> get familyContacts {
+    final local$familyContacts = _instance.familyContacts;
+    return local$familyContacts == null
+        ? CopyWith_Input_ResolvedContactsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ResolvedContactsBoolExp(
+            local$familyContacts,
+            (e) => call(familyContacts: e),
+          );
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get familyId {
@@ -1195,6 +1210,7 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_FamiliesBoolExp? family,
+    Input_ResolvedContactsBoolExp? familyContacts,
     Input_UuidComparisonExp? familyId,
     Input_FathersBoolExp? father,
     Input_UuidComparisonExp? fatherId,
@@ -1320,6 +1336,9 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
 
   CopyWith_Input_FamiliesBoolExp<TRes> get family =>
       CopyWith_Input_FamiliesBoolExp.stub(_res);
+
+  CopyWith_Input_ResolvedContactsBoolExp<TRes> get familyContacts =>
+      CopyWith_Input_ResolvedContactsBoolExp.stub(_res);
 
   CopyWith_Input_UuidComparisonExp<TRes> get familyId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);

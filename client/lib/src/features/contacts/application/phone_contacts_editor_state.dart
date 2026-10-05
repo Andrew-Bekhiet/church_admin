@@ -1,30 +1,33 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class PhoneContactsEditorState with Equatable {
-  @override
-  List<Object?> get props => [];
-
-  const PhoneContactsEditorState();
-}
-
-final class PhoneContactsEditorLoading extends PhoneContactsEditorState {
-  const PhoneContactsEditorLoading();
-}
-
-final class PhoneContactsEditorReady extends PhoneContactsEditorState {
+final class PhoneContactsEditorState with Equatable {
   final List<PhoneContactDraft> drafts;
   final List<PersonType> familyRoles;
-  final String? familyId;
+  final bool hasFamily;
+  final bool familyOnly;
   final Map<String, PhoneContactDraftError> errors;
+  final List<PhoneContact> ownContacts;
+  final List<FamilyPhoneContact> familyContacts;
 
   @override
-  List<Object?> get props => [drafts, familyRoles, familyId, errors];
+  List<Object?> get props => [
+    drafts,
+    familyRoles,
+    hasFamily,
+    familyOnly,
+    errors,
+    ownContacts,
+    familyContacts,
+  ];
 
-  const PhoneContactsEditorReady({
+  const PhoneContactsEditorState({
     required this.drafts,
     required this.familyRoles,
-    required this.familyId,
+    required this.hasFamily,
+    required this.familyOnly,
     required this.errors,
+    required this.ownContacts,
+    required this.familyContacts,
   });
 }

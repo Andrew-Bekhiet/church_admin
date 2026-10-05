@@ -13,7 +13,17 @@ class FamilyUpdateHelper {
   late final IterableDifferenceResult<ID> _childrenDiff;
   late final IterableDifferenceResult<ID> _parentsDiff;
 
-  bool get _updateFamily => _familyDelta.isNotEmpty;
+  late final PhoneContactChanges _contactChanges = PhoneContactChanges.between(
+    initialFamily: oldFamily.contacts,
+    desiredFamily: newFamily.contacts,
+  );
+
+  bool get _updateFamily => _familyDelta.keys.any((k) => k != 'contacts');
+
+  List<Input_ContactsInsertInput> get _newContacts => _contactChanges
+      .familyInserts
+      .map((f) => f.toInsertInput(familyId: newFamily.id))
+      .toList();
 
   bool get _insertRelatedFamilies =>
       _childrenDiff.added.isNotEmpty || _parentsDiff.added.isNotEmpty;
@@ -58,6 +68,16 @@ class FamilyUpdateHelper {
         insertVisitHistory: newFamily.lastVisit != oldFamily.lastVisit,
         lastFatherVisit: newFamily.lastFatherVisit?.time,
         lastVisit: newFamily.lastVisit?.time,
+        deletedContactIds: _contactChanges.deletedIds
+            .map((id) => id.toUuid())
+            .toList(),
+        contactUpdates: _contactChanges.updates
+            .map((c) => c.toUpdates())
+            .toList(),
+        newContacts: _newContacts,
+        deleteContacts: _contactChanges.deletedIds.isNotEmpty,
+        updateContactsMany: _contactChanges.updates.isNotEmpty,
+        insertContacts: _newContacts.isNotEmpty,
       );
 
   FamilyUpdateHelper({required this.newFamily, required this.oldFamily})

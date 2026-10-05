@@ -1,8 +1,5 @@
 fragment PhoneContact on Contacts {
   id
-  personId
-  familyId
-  personTypeId
   label
   phone
   isMainPhone
@@ -11,8 +8,6 @@ fragment PhoneContact on Contacts {
 fragment FamilyPhoneContact on ResolvedContacts {
   id
   personId
-  familyId
-  personTypeId
   label
   phone
   isMainPhone

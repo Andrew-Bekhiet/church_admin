@@ -12,9 +12,8 @@ class FamilyDetailsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverList(
       delegate: SliverChildListDelegate([
-        PhoneBookSection(
-          showOwnNumbers: false,
-          create: (_) => PhoneBookCubit.forFamily(familyId: family.id),
+        PhoneBookCard(
+          family: family.contacts,
           onCall: (n) => LauncherService.I.launchCall(
             PhoneNumberService.I.formatInternational(n),
           ),

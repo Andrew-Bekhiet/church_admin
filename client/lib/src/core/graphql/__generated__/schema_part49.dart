@@ -28,6 +28,7 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
     Object? contactsAggregate = _undefined,
     Object? editHistoryAggregate = _undefined,
     Object? family = _undefined,
+    Object? familyContactsAggregate = _undefined,
     Object? familyId = _undefined,
     Object? father = _undefined,
     Object? fatherId = _undefined,
@@ -113,6 +114,10 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
         'editHistoryAggregate':
             (editHistoryAggregate as Input_HistoryEditHistoryAggregateOrderBy?),
       if (family != _undefined) 'family': (family as Input_FamiliesOrderBy?),
+      if (familyContactsAggregate != _undefined)
+        'familyContactsAggregate':
+            (familyContactsAggregate
+                as Input_ResolvedContactsAggregateOrderBy?),
       if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
       if (father != _undefined) 'father': (father as Input_FathersOrderBy?),
       if (fatherId != _undefined) 'fatherId': (fatherId as Enum_OrderBy?),
@@ -309,6 +314,17 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
     return local$family == null
         ? CopyWith_Input_FamiliesOrderBy.stub(_then(_instance))
         : CopyWith_Input_FamiliesOrderBy(local$family, (e) => call(family: e));
+  }
+
+  CopyWith_Input_ResolvedContactsAggregateOrderBy<TRes>
+  get familyContactsAggregate {
+    final local$familyContactsAggregate = _instance.familyContactsAggregate;
+    return local$familyContactsAggregate == null
+        ? CopyWith_Input_ResolvedContactsAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_ResolvedContactsAggregateOrderBy(
+            local$familyContactsAggregate,
+            (e) => call(familyContactsAggregate: e),
+          );
   }
 
   CopyWith_Input_FathersOrderBy<TRes> get father {
@@ -556,6 +572,7 @@ class _CopyWithStubImpl_Input_PersonsOrderBy<TRes>
     Input_ContactsAggregateOrderBy? contactsAggregate,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Input_FamiliesOrderBy? family,
+    Input_ResolvedContactsAggregateOrderBy? familyContactsAggregate,
     Enum_OrderBy? familyId,
     Input_FathersOrderBy? father,
     Enum_OrderBy? fatherId,
@@ -642,6 +659,10 @@ class _CopyWithStubImpl_Input_PersonsOrderBy<TRes>
 
   CopyWith_Input_FamiliesOrderBy<TRes> get family =>
       CopyWith_Input_FamiliesOrderBy.stub(_res);
+
+  CopyWith_Input_ResolvedContactsAggregateOrderBy<TRes>
+  get familyContactsAggregate =>
+      CopyWith_Input_ResolvedContactsAggregateOrderBy.stub(_res);
 
   CopyWith_Input_FathersOrderBy<TRes> get father =>
       CopyWith_Input_FathersOrderBy.stub(_res);

@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/person_insert_helper.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/person_update_helper.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_notifications_queries.dart';
 import 'package:graphql/client.dart';
@@ -42,6 +43,7 @@ class PersonsDAO extends FullCRUDDAO<Person> {
       CreateObjectConfig(
         document: documentNodeMutationinsertPerson,
         varsConstructor: _createPersonVarsConstructor,
+        parserFn: db.parser.singleParser(fromJson, 'insertPersonsOne'),
       );
 
   PersonsDAO({required super.db}) : super(fromJson: Person.fromJson);
@@ -59,9 +61,7 @@ class PersonsDAO extends FullCRUDDAO<Person> {
   ).toJson();
 
   Json _createPersonVarsConstructor({required Person newObject}) =>
-      Variables_Mutation_insertPerson(
-        newPerson: newObject.toInsertInput(),
-      ).toJson();
+      PersonInsertHelper(newPerson: newObject).variables.toJson();
 
   Json _updatePersonVarsConstructor({
     required Person newObject,

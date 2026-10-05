@@ -14,57 +14,70 @@ object_relationships:
 insert_permissions:
   - role: user
     permission:
-      check: &can_edit_contact
+      check:
         _or:
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - allow_edit:
-                      _eq: true
-                  - _or:
-                      - _and:
-                          - entity_type:
-                              _eq: person
-                          - entity_id:
-                              _ceq:
-                                - $
-                                - person_id
-                      - _and:
-                          - entity_type:
-                              _eq: any
-                          - entity_id:
+          - &can_edit_contact
+            _or:
+              - _exists:
+                  _table:
+                    name: users_permissions_by_entity_id
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - allow_edit:
+                          _eq: true
+                      - _or:
+                          - _and:
+                              - entity_type:
+                                  _eq: person
+                              - entity_id:
+                                  _ceq:
+                                    - $
+                                    - person_id
+                          - _and:
+                              - entity_type:
+                                  _eq: any
+                              - entity_id:
+                                  _is_null: true
+              - _and:
+                  - personType:
+                      is_family_admin:
+                        _eq: true
+                  - family: &has_non_admin_member_editable_by_user
+                      persons:
+                        _and:
+                          - deleted_at:
                               _is_null: true
+                          - _not:
+                              personType:
+                                is_family_admin:
+                                  _eq: true
+                          - permissionGrants:
+                              _and:
+                                - uid:
+                                    _eq: X-Hasura-User-Id
+                                - allow_edit:
+                                    _eq: true
+                                - entity_type:
+                                    _eq: person
+              - person:
+                  _and:
+                    - personType:
+                        is_family_admin:
+                          _eq: true
+                    - family: *has_non_admin_member_editable_by_user
+          - person:
+              insertedInCurrentTransaction:
+                _eq: true
           - _and:
               - personType:
                   is_family_admin:
                     _eq: true
-              - family: &has_non_admin_member_editable_by_user
-                  persons:
-                    _and:
-                      - deleted_at:
-                          _is_null: true
-                      - personType:
-                          is_family_admin:
-                            _eq: false
-                      - permissionGrants:
-                          _and:
-                            - uid:
-                                _eq: X-Hasura-User-Id
-                            - allow_edit:
-                                _eq: true
-                            - entity_type:
-                                _eq: person
-          - person:
-              _and:
-                - personType:
-                    is_family_admin:
-                      _eq: true
-                - family: *has_non_admin_member_editable_by_user
+              - family:
+                  insertedInCurrentTransaction:
+                    _eq: true
       columns:
         - family_id
         - id

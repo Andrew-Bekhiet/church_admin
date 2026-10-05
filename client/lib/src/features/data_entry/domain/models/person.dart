@@ -15,6 +15,8 @@ part 'person.g.dart';
     'blurhash',
     'isStudent',
     'otherPhones',
+    'contacts',
+    'familyContacts',
     'userCanEdit',
     'maxSpiritDataAge',
     'uid',
@@ -51,6 +53,14 @@ class Person extends ViewableWithIDAndImage
 
   @override
   final Json otherPhones;
+
+  @override
+  @JsonKey(defaultValue: <PhoneContact>[])
+  final List<PhoneContact> contacts;
+
+  @override
+  @JsonKey(defaultValue: <FamilyPhoneContact>[])
+  final List<FamilyPhoneContact> familyContacts;
 
   @override
   @LocalDateTimeConverter()
@@ -272,6 +282,8 @@ class Person extends ViewableWithIDAndImage
     required this.id,
     required this.name,
     this.otherPhones = const {},
+    this.contacts = const [],
+    this.familyContacts = const [],
     this.gender = true,
     this.isShammas = false,
     this.workStatus = WorkStatus.employed,
@@ -405,15 +417,20 @@ class Person extends ViewableWithIDAndImage
     servingChurchId: servingChurch?.id.toUuid(),
     serviceType: serviceType,
     notes: notes,
-    family: family == null && address != null
-        ? Input_FamiliesObjRelInsertInput(
-            data: Family(
-              id: family?.id ?? Namespace.nil.value,
-              name: name.split(' ').sublist(1).join(' '),
-              address: address!.copyWith(family: null),
-            ).toInsertInput(),
-          )
-        : null,
+    contacts: Input_ContactsArrRelInsertInput(
+      data: contacts.map((c) => c.toInsertInput()).toList(),
+    ),
+    family: switch ((family, address)) {
+      (null, final address?) => Input_FamiliesObjRelInsertInput(
+        data: Family(
+          id: Namespace.nil.value,
+          name: name.split(' ').sublist(1).join(' '),
+          address: address.copyWith(family: null),
+          contacts: familyContacts,
+        ).toInsertInput(),
+      ),
+      _ => null,
+    },
     familyId: family?.id.toUuid(),
     storeId: store?.id.toUuid(),
     studyYearId: studyYear?.order,

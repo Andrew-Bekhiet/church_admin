@@ -11,260 +11,211 @@ void main() {
     id: 'own-main',
     phone: '+201001111111',
     isMainPhone: true,
-    owner: PersonPhoneOwner('child'),
   );
   const ownWork = PhoneContact(
     id: 'own-work',
     phone: '+201002222222',
     label: 'عمل',
-    owner: PersonPhoneOwner('child'),
   );
   const fatherNumber = FamilyPhoneContact(
     contact: PhoneContact(
       id: 'father-number',
       phone: '+201003333333',
-      owner: FamilyRolePhoneOwner(familyId: 'family', personTypeId: 'father'),
+      isMainPhone: true,
     ),
     role: father,
-  );
-  const childAsFamilyAdmin = FamilyPhoneContact(
-    contact: ownMain,
-    role: father,
+    personId: 'the-father',
   );
 
-  late _FakeContactsDAO dao;
-  late PhoneContactsEditorCubit cubit;
   var nextKey = 0;
 
-  setUp(() {
-    nextKey = 0;
-    dao = _FakeContactsDAO(
-      own: {
-        'child': [ownMain, ownWork],
-      },
-      family: {
-        'family': [fatherNumber, childAsFamilyAdmin],
-      },
-      roles: [father, mother],
-    );
-    cubit = PhoneContactsEditorCubit(
-      dao: dao,
+  PhoneContactsEditorCubit cubitFor({
+    List<PhoneContact> own = const [ownMain, ownWork],
+    List<FamilyPhoneContact> family = const [fatherNumber],
+    bool hasFamily = true,
+  }) {
+    final cubit = PhoneContactsEditorCubit(
+      own: own,
+      family: family,
+      hasFamily: hasFamily,
+      fetchFamilyRoles: () async => [father, mother],
       newKey: () => 'new-${nextKey++}',
     );
     addTearDown(cubit.close);
-  });
+
+    return cubit;
+  }
+
+  setUp(() => nextKey = 0);
   tearDown(defaultTearDown);
 
-  PhoneContactsEditorReady ready() => cubit.state as PhoneContactsEditorReady;
-  PhoneContactDraft draft(String key) =>
-      ready().drafts.firstWhere((d) => d.key == key);
+  PhoneContactDraft draftOf(PhoneContactsEditorCubit cubit, String key) =>
+      cubit.state.drafts.firstWhere((d) => d.key == key);
 
-  Future<void> loadChild() => cubit.load(personId: 'child', familyId: 'family');
+  test("the person's own numbers are listed before their family's", () {
+    final cubit = cubitFor();
 
-  test(
-    "loading lists the person's own numbers then their family's numbers",
-    () async {
-      await loadChild();
-
-      expect(ready().drafts.map((d) => (d.key, d.label)), [
-        ('own-main', const FreePhoneContactLabel(null)),
-        ('own-work', const FreePhoneContactLabel('عمل')),
-        ('father-number', const RolePhoneContactLabel(father)),
-      ]);
-      expect(ready().familyRoles, [father, mother]);
-    },
-  );
-
-  test('a new person with no family starts with no numbers', () async {
-    await cubit.load(personId: null, familyId: null);
-
-    expect(ready().drafts, isEmpty);
+    expect(cubit.state.drafts.map((d) => (d.key, d.label)), [
+      ('own-main', const FreePhoneContactLabel(null)),
+      ('own-work', const FreePhoneContactLabel('عمل')),
+      ('father-number', const RolePhoneContactLabel(father)),
+    ]);
   });
 
-  test('the first own number added becomes the main number', () async {
-    await cubit.load(personId: null, familyId: 'family');
+  test('the family roles become available once fetched', () async {
+    final cubit = cubitFor();
+
+    await pumpEventQueue();
+
+    expect(cubit.state.familyRoles, [father, mother]);
+  });
+
+  test('untouched numbers are handed back unchanged', () {
+    final cubit = cubitFor();
+
+    expect(cubit.state.ownContacts, [ownMain, ownWork]);
+    expect(cubit.state.familyContacts, [fatherNumber]);
+  });
+
+  test('the first own number added becomes the main number', () {
+    final cubit = cubitFor(own: [], family: []);
 
     cubit.add(const FreePhoneContactLabel(null));
 
-    expect(ready().drafts.last.isMainPhone, isTrue);
+    expect(cubit.state.drafts.single.isMainPhone, isTrue);
   });
 
-  test('marking a number as main unmarks the previous main', () async {
-    await loadChild();
+  test('marking a number as main unmarks the previous main', () {
+    final cubit = cubitFor()..toggleMain('own-work');
 
-    cubit.toggleMain('own-work');
-
-    expect(draft('own-work').isMainPhone, isTrue);
-    expect(draft('own-main').isMainPhone, isFalse);
+    expect(cubit.state.ownContacts.map((c) => (c.id, c.isMainPhone)), [
+      ('own-main', false),
+      ('own-work', true),
+    ]);
   });
 
-  test(
-    'tapping the active main chip leaves the person without a main',
-    () async {
-      await loadChild();
+  test('a family number cannot be marked as main', () {
+    final cubit = cubitFor()..toggleMain('father-number');
 
-      cubit.toggleMain('own-main');
-
-      expect(ready().drafts.where((d) => d.isMainPhone), isEmpty);
-    },
-  );
-
-  test('a family number cannot be marked as main', () async {
-    await loadChild();
-
-    cubit.toggleMain('father-number');
-
-    expect(draft('father-number').isMainPhone, isFalse);
-    expect(draft('own-main').isMainPhone, isTrue);
+    expect(draftOf(cubit, 'father-number').isMainPhone, isFalse);
   });
 
-  test('labelling the main number with a role unmarks it', () async {
-    await loadChild();
+  test('labelling the main number with a role unmarks it', () {
+    final cubit = cubitFor()
+      ..changeLabel('own-main', const RolePhoneContactLabel(mother));
 
-    cubit.changeLabel('own-main', const RolePhoneContactLabel(mother));
-
-    expect(draft('own-main').isMainPhone, isFalse);
+    expect(draftOf(cubit, 'own-main').isMainPhone, isFalse);
   });
 
-  test('a typed number that is not a phone number is invalid', () async {
-    await loadChild();
+  test('a typed number that is not a phone number is invalid', () {
+    final cubit = cubitFor()..changeInput('own-work', '12');
 
-    cubit.changeInput('own-work', '0100');
-
-    expect(ready().errors, {'own-work': PhoneContactDraftError.invalidPhone});
+    expect(cubit.state.errors['own-work'], PhoneContactDraftError.invalidPhone);
   });
 
-  test('a typed local number is kept in E.164', () async {
-    await loadChild();
+  test('an empty new number is left out instead of being invalid', () {
+    final cubit = cubitFor()..add(const FreePhoneContactLabel(null));
 
-    cubit.changeInput('own-work', '0100 444 4444');
-
-    expect(draft('own-work').phone, '+201004444444');
-    expect(ready().errors, isEmpty);
+    expect(cubit.state.errors, isEmpty);
+    expect(cubit.state.ownContacts, [ownMain, ownWork]);
   });
 
-  test('the same number twice on the person is a duplicate', () async {
-    await loadChild();
+  test('a typed local number is handed back in E.164', () {
+    final cubit = cubitFor()..changeInput('own-work', '01004444444');
 
-    cubit.changeInput('own-work', '01001111111');
-
-    expect(ready().errors, {'own-work': PhoneContactDraftError.duplicatePhone});
+    expect(cubit.state.ownContacts.last.phone, '+201004444444');
   });
 
-  test('a role number needs the person to be in a family', () async {
-    await cubit.load(personId: null, familyId: null);
+  test('the same number twice on the person is a duplicate', () {
+    final cubit = cubitFor()
+      ..add(const FreePhoneContactLabel(null))
+      ..changeInput('new-0', '01001111111');
 
-    cubit.add(const RolePhoneContactLabel(father));
+    expect(cubit.state.errors['new-0'], PhoneContactDraftError.duplicatePhone);
+  });
+
+  test('a role number needs somewhere for the family to come from', () {
+    final cubit = cubitFor(own: [], family: [], hasFamily: false)
+      ..add(const RolePhoneContactLabel(father))
+      ..changeInput('new-0', '01003333333');
 
     expect(
-      ready().errors[ready().drafts.single.key],
+      cubit.state.errors['new-0'],
       PhoneContactDraftError.roleNeedsFamily,
     );
   });
 
+  test('choosing a family makes the role numbers valid', () {
+    final cubit = cubitFor(own: [], family: [], hasFamily: false)
+      ..add(const RolePhoneContactLabel(father))
+      ..changeInput('new-0', '01003333333')
+      ..changeFamilyAvailability(hasFamily: true);
+
+    expect(cubit.state.errors, isEmpty);
+  });
+
+  test('a new role number is handed back for that role', () {
+    final cubit = cubitFor(own: [], family: [])
+      ..add(const RolePhoneContactLabel(mother))
+      ..changeInput('new-0', '01005555555');
+
+    expect(cubit.state.familyContacts, const [
+      FamilyPhoneContact(
+        contact: PhoneContact(id: 'new-0', phone: '+201005555555'),
+        role: mother,
+      ),
+    ]);
+  });
+
   test(
-    "moving to another family shows that family's numbers instead",
-    () async {
-      await loadChild();
-      cubit.add(const RolePhoneContactLabel(mother));
-      dao.family['other-family'] = [
-        const FamilyPhoneContact(
-          contact: PhoneContact(
-            id: 'other-father',
-            phone: '+201009999999',
-            owner: PersonPhoneOwner('other-father-person'),
-          ),
-          role: father,
+    "editing a family number keeps the relative it belongs to and its main "
+    'flag',
+    () {
+      final cubit = cubitFor()..changeInput('father-number', '01007777777');
+
+      expect(cubit.state.familyContacts, [
+        fatherNumber.copyWith(
+          contact: fatherNumber.contact.copyWith(phone: '+201007777777'),
         ),
-      ];
-
-      await cubit.changeFamily('other-family');
-
-      expect(ready().drafts.map((d) => d.key), [
-        'own-main',
-        'own-work',
-        'new-0',
-        'other-father',
       ]);
     },
   );
 
   test(
-    "moving to another family does not delete the old family's numbers",
-    () async {
-      await loadChild();
-      dao.family['other-family'] = [];
+    "moving to another family hides the old family's numbers and keeps the "
+    'typed ones',
+    () {
+      final cubit = cubitFor()
+        ..add(const RolePhoneContactLabel(mother))
+        ..changeFamily(saved: const [], hasFamily: true);
 
-      await cubit.changeFamily('other-family');
-      await cubit.save(personId: 'child', familyId: 'other-family');
-
-      expect(dao.applied, isEmpty);
+      expect(cubit.state.drafts.map((d) => d.key), [
+        'own-main',
+        'own-work',
+        'new-0',
+      ]);
     },
   );
 
-  test('saving stores what was edited', () async {
-    await loadChild();
-    cubit.changeInput('own-work', '01004444444');
+  test("returning to the saved family brings its numbers back", () {
+    final cubit = cubitFor()
+      ..changeFamily(saved: const [], hasFamily: true)
+      ..changeFamily(saved: const [fatherNumber], hasFamily: true);
 
-    await cubit.save(personId: 'child', familyId: 'family');
-
-    expect(dao.applied, [
-      PhoneContactChanges(updates: [ownWork.copyWith(phone: '+201004444444')]),
-    ]);
+    expect(cubit.state.familyContacts, [fatherNumber]);
   });
 
-  test('saving without edits stores nothing', () async {
-    await loadChild();
+  test('numbers imported from a device contact keep their labels', () {
+    final cubit = cubitFor()
+      ..importNumbers([(label: 'موبايل', number: '01007777777')]);
 
-    await cubit.save(personId: 'child', familyId: 'family');
-
-    expect(dao.applied, isEmpty);
+    expect(
+      cubit.state.ownContacts.last,
+      const PhoneContact(
+        id: 'new-0',
+        phone: '+201007777777',
+        label: 'موبايل',
+      ),
+    );
   });
-
-  test(
-    'numbers imported from a device contact are added with their labels',
-    () async {
-      await loadChild();
-
-      cubit.importNumbers([(label: 'موبايل', number: '01007777777')]);
-
-      expect(ready().drafts.last.label, const FreePhoneContactLabel('موبايل'));
-      expect(ready().drafts.last.phone, '+201007777777');
-    },
-  );
-}
-
-class _FakeContactsDAO extends Fake implements ContactsDAO {
-  final Map<String, List<PhoneContact>> own;
-  final Map<String, List<FamilyPhoneContact>> family;
-  final List<PersonType> roles;
-  final List<PhoneContactChanges> applied = [];
-
-  _FakeContactsDAO({
-    required this.own,
-    required this.family,
-    required this.roles,
-  });
-
-  @override
-  Future<List<PhoneContact>> fetchOwnContacts({
-    required String personId,
-  }) async => own[personId] ?? [];
-
-  @override
-  Future<List<FamilyPhoneContact>> fetchFamilyContacts({
-    required String familyId,
-    String? excludedPersonId,
-  }) async => [
-    for (final relative in family[familyId] ?? <FamilyPhoneContact>[])
-      if (relative.contact.owner != PersonPhoneOwner(excludedPersonId ?? ''))
-        relative,
-  ];
-
-  @override
-  Future<List<PersonType>> fetchFamilyRoles() async => roles;
-
-  @override
-  Future<void> applyChanges(PhoneContactChanges changes) async =>
-      applied.add(changes);
 }

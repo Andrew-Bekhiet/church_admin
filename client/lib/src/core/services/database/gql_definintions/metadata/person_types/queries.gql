@@ -1,0 +1,12 @@
+query familyRoles {
+  personTypes(
+    where: { isFamilyAdmin: { _eq: true } }
+    orderBy: { order: ASC }
+  ) {
+    id
+    name
+    order
+    isFamilyAdmin
+    isHidden
+  }
+}

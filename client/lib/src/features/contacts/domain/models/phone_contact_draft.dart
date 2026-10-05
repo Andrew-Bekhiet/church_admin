@@ -23,6 +23,29 @@ class PhoneContactDraft with Equatable {
     this.phone,
   });
 
+  factory PhoneContactDraft.ofOwn(
+    PhoneContact contact, {
+    required String input,
+  }) => PhoneContactDraft(
+    key: contact.id,
+    contactId: contact.id,
+    input: input,
+    phone: contact.phone,
+    label: FreePhoneContactLabel(contact.label),
+    isMainPhone: contact.isMainPhone,
+  );
+
+  factory PhoneContactDraft.ofFamily(
+    FamilyPhoneContact relative, {
+    required String input,
+  }) => PhoneContactDraft(
+    key: relative.contact.id,
+    contactId: relative.contact.id,
+    input: input,
+    phone: relative.contact.phone,
+    label: RolePhoneContactLabel(relative.role),
+  );
+
   PhoneContactDraft copyWith({PhoneContactLabel? label, bool? isMainPhone}) =>
       PhoneContactDraft(
         key: key,

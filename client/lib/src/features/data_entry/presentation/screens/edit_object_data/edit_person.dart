@@ -31,7 +31,13 @@ class EditPerson extends StatefulWidget {
 
 class _EditPersonState extends State<EditPerson> {
   late EditObjectController<Person> _controller;
-  final PhoneContactsEditorCubit _phoneContacts = PhoneContactsEditorCubit();
+  late final PhoneContactsEditorCubit _phoneContacts = PhoneContactsEditorCubit(
+    own: widget.person?.contacts ?? const [],
+    family: widget.person?.familyContacts ?? const [],
+    hasFamily:
+        (widget.person?.family ?? widget.withFamily) != null ||
+        (widget.person == null && widget.withAddress != null),
+  );
   bool _classesAndGroupsLoaded = false;
 
   Person get initialPerson => _controller.initialObject!;
@@ -58,29 +64,13 @@ class _EditPersonState extends State<EditPerson> {
         id: object.id,
         $extra: object,
       ).pushReplacement(context),
-      onCreate: (object) async {
-        final created = await DatabaseService.I.persons.createObject(
-          newObject: object,
-        );
-        await _phoneContacts.save(
-          personId: created.id,
-          familyId: object.familyId,
-        );
-
-        return created;
-      },
-      onUpdate: (oldPerson, newPerson) async {
-        final updated = await DatabaseService.I.persons.updateObject(
-          oldObject: oldPerson,
-          newObject: newPerson,
-        );
-        await _phoneContacts.save(
-          personId: newPerson.id,
-          familyId: newPerson.familyId,
-        );
-
-        return updated;
-      },
+      onCreate: (object) =>
+          DatabaseService.I.persons.createObject(newObject: object),
+      onUpdate: (oldPerson, newPerson) =>
+          DatabaseService.I.persons.updateObject(
+            oldObject: oldPerson,
+            newObject: newPerson,
+          ),
       onDelete: (object) => DatabaseService.I.persons.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
       newObject:
@@ -103,12 +93,6 @@ class _EditPersonState extends State<EditPerson> {
       initialObject: oldPerson,
     );
     _loadPersonServicesClassesGroups();
-    unawaited(
-      _phoneContacts.load(
-        personId: oldPerson?.id,
-        familyId: oldPerson?.familyId ?? widget.withFamily?.id,
-      ),
-    );
   }
 
   @override
