@@ -1,0 +1,57 @@
+name: Analyze and test Dart packages
+
+on:
+  pull_request:
+    paths:
+      - "packages/**"
+      - "client/.fvmrc"
+      - ".github/workflows/packages.yml"
+
+  push:
+    branches: [master]
+    paths:
+      - "packages/**"
+      - "client/.fvmrc"
+      - ".github/workflows/packages.yml"
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [church_admin_annotations, church_admin_generator]
+
+    defaults:
+      run:
+        working-directory: packages/${{ matrix.package }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
+        with:
+          cache: true
+          flutter-version-file: client/.fvmrc
+          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
+          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+
+      - name: Install dependencies (standalone resolution, newest analyzer the constraints allow)
+        run: dart pub get
+
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze with solid_lints
+        run: dart analyze --fatal-infos
