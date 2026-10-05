@@ -9,16 +9,19 @@ part 'tag.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'الشارات')
+@Queryable(label: 'الشارات')
 class Tag extends ViewableWithID with _$Tag implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  @QueryableField(label: 'اللون')
   final Color? color;
 
   @override

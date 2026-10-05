@@ -8,38 +8,44 @@ part 'store.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'المتاجر', allowExtension: true)
+@Queryable(label: 'المتاجر', extensible: true)
 class Store extends ViewableWithIDAndImage
     with _$Store
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
+  @QueryableField(label: 'تفاصيل العنوان')
   final Address? address;
 
   @override
+  @QueryableField(label: 'العائلة')
   final Family? family;
 
   @override
   @JsonKey(name: 'adminFamily')
-  @QueryableField(renameTo: 'adminFamily')
   final String? familyId;
 
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  @QueryableField(label: 'اللون')
   final Color? color;
 
   @override
+  @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
   @override
   @LocalDateTimeConverter()
+  @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
 
   @override
@@ -49,6 +55,7 @@ class Store extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
+  @QueryableField(label: 'الموقع')
   Point? get geolocation => address?.geolocation;
 
   @override

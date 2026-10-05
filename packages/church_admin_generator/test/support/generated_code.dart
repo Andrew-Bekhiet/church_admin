@@ -4,12 +4,29 @@ import 'package:dart_style/dart_style.dart';
 
 final class GeneratedCode {
   static const _oneLineMaxWidth = 1_000_000;
+  static const _bookkeepingFields = {
+    '_instance',
+    'allFields',
+    'allFieldsByName',
+  };
+
+  static String _nameOf(FieldDeclaration field) =>
+      field.fields.variables.single.name.lexeme;
 
   final String _source;
   final List<ClassDeclaration> _classes;
 
   List<String> get classNames =>
       _classes.map((c) => c.namePart.typeName.lexeme).toList();
+
+  String get onlyQueryableField {
+    final [fieldsClass] = _classes;
+    final [queryableField] = _fieldsOf(
+      fieldsClass,
+    ).where((field) => !_bookkeepingFields.contains(_nameOf(field))).toList();
+
+    return _sourceOf(queryableField);
+  }
 
   factory GeneratedCode.parse(String generated) {
     final source = DartFormatter(
@@ -28,29 +45,34 @@ final class GeneratedCode {
   GeneratedCode._(this._source, this._classes);
 
   String? fieldSource(String className, String fieldName) =>
-      _sourceOf(_field(className, fieldName));
+      switch (_field(className, fieldName)) {
+        final field? => _sourceOf(field),
+        null => null,
+      };
 
-  String? initializerOf(String className, String fieldName) => _sourceOf(
-    _field(className, fieldName)?.fields.variables.single.initializer,
-  );
+  String? initializerOf(String className, String fieldName) => switch (_field(
+    className,
+    fieldName,
+  )?.fields.variables.single.initializer) {
+    final initializer? => _sourceOf(initializer),
+    null => null,
+  };
 
   FieldDeclaration? _field(String className, String fieldName) {
-    final classBody = _classes
+    final fieldsClass = _classes
         .where((c) => c.namePart.typeName.lexeme == className)
-        .single
-        .body;
-    final members = classBody is BlockClassBody
-        ? classBody.members
-        : const <ClassMember>[];
+        .single;
 
-    return members
-        .whereType<FieldDeclaration>()
-        .where(
-          (field) => field.fields.variables.single.name.lexeme == fieldName,
-        )
-        .singleOrNull;
+    return _fieldsOf(
+      fieldsClass,
+    ).where((field) => _nameOf(field) == fieldName).singleOrNull;
   }
 
-  String? _sourceOf(AstNode? node) =>
-      node == null ? null : _source.substring(node.offset, node.end);
+  Iterable<FieldDeclaration> _fieldsOf(ClassDeclaration declaration) =>
+      switch (declaration.body) {
+        BlockClassBody(:final members) => members.whereType(),
+        _ => const [],
+      };
+
+  String _sourceOf(AstNode node) => _source.substring(node.offset, node.end);
 }

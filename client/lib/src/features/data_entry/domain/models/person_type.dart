@@ -7,32 +7,30 @@ part 'person_type.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(
-  allowExtension: true,
-  classLabel: 'نوع الفرد في العائلة',
-  labelsOverrides: {
-    'isFamilyAdmin': 'مسؤول عن العائلة',
-    'isHidden': 'مخفي',
-  },
-)
+@Queryable(label: 'نوع الفرد في العائلة', extensible: true)
 class PersonType extends ViewableWithID
     with _$PersonType
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
+  @QueryableField(label: 'الترتيب')
   final int order;
 
   @override
+  @QueryableField(label: 'مسؤول عن العائلة')
   final bool isFamilyAdmin;
 
   @override
+  @QueryableField(label: 'مخفي')
   final bool isHidden;
 
   @override

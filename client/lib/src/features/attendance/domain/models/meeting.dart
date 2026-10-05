@@ -8,51 +8,62 @@ part 'meeting.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'اجتماع')
+@Queryable(label: 'اجتماع')
 class Meeting extends ViewableWithID
     with _$Meeting
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
+  @QueryableField(label: 'audience')
   final MeetingAudience audience;
 
   @override
+  @QueryableField(label: 'isArchived')
   final bool isArchived;
 
   @override
   @JsonKey(defaultValue: true)
+  @QueryableField(label: 'showKodasCheckbox')
   final bool showKodasCheckbox;
 
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  @QueryableField(label: 'اللون')
   final Color? color;
 
   @override
   final String? serviceId;
 
   @override
+  @QueryableField(label: 'الخدمة')
   final Service? service;
 
   @override
+  @QueryableField(label: 'serviceStudyYear')
   final int? serviceStudyYear;
 
   @override
+  @QueryableField(label: 'السنة الدراسية')
   final StudyYear? studyYear;
 
   @override
+  @QueryableField(label: 'نوع المخدومين المسؤول عنهم')
   final bool? serviceGender;
 
   @override
   final String? groupId;
 
   @override
+  @QueryableField(label: 'المجموعة')
   final Group? group;
 
   @override

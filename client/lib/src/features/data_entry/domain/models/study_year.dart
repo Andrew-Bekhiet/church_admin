@@ -7,19 +7,22 @@ part 'study_year.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'السنوات الدراسية', allowExtension: true)
+@Queryable(label: 'السنوات الدراسية', extensible: true)
 class StudyYear extends ViewableWithID
     with _$StudyYear
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: 0)
+  @QueryableField(label: 'الترتيب')
   final int order;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
+  @QueryableField.self()
   String get id => order.toString();
 
   @override

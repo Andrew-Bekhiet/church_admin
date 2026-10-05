@@ -4,11 +4,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'users_permissions_rel.g.dart';
 
-@Queryable(classLabel: 'صلاحيات المستخدم')
+@Queryable(label: 'صلاحيات المستخدم')
 @JsonSerializable()
 class UsersPermissionsRel {
+  @QueryableField(label: 'uid')
   final String uid;
+  @QueryableField(label: 'بيانات الخادم')
   final User user;
+  @QueryableField(label: 'الصلاحية')
   final UserPermission permission;
 
   const UsersPermissionsRel({

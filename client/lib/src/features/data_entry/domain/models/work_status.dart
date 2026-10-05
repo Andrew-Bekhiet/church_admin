@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_annotations/church_admin_annotations.dart';
 
-@Queryable(classLabel: 'حالات العمل')
+@Queryable(label: 'حالات العمل')
 enum WorkStatus implements LabeledEnum {
   student('طالب'),
   employed('يعمل'),

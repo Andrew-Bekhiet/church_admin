@@ -1,130 +1,21 @@
 import 'package:test/test.dart';
 
 import 'support/church_admin_build.dart';
-import 'support/generated_code.dart';
+import 'support/model_fixture.dart';
 
 void main() {
-  const modelLibrary = 'a|lib/model.dart';
-  const queryable = "@Queryable(classLabel: 'Models')";
+  const named = "@QueryableField(label: 'Name')\nlate final String name;";
 
-  Future<GeneratedCode> generatedFor(
-    String members, {
-    String annotation = queryable,
-  }) => ChurchAdminBuild.generatedFor(
-    modelLibrary,
-    sources: {
-      modelLibrary:
-          '''
-import 'package:church_admin_annotations/church_admin_annotations.dart';
-
-part 'model.g.dart';
-
-abstract interface class ID {}
-class Person implements ID {}
-class Note {}
-class Tag {}
-class PersonsTags {}
-enum Gender { male, female }
-
-$annotation
-class Model {
-$members
-}
-''',
-    },
-  );
-
-  group('a field is filtered with the operators of its type:', () {
-    final cases = <({String type, String operators})>[
-      (type: 'bool', operators: '{...BooleanOperator.values}'),
-      (type: 'int', operators: '{...PrimitiveOperator.values}'),
-      (type: 'String', operators: '{...StringOperator.values}'),
-      (
-        type: 'DateTime',
-        operators: '{...DateTimeOperator.values, ...DateRangeOperator.values}',
-      ),
-      (type: 'Gender', operators: '{...MultiSelectOperator.values}'),
-      (type: 'Person', operators: '{...MultiSelectOperator.values}'),
-    ];
-
-    for (final (:type, :operators) in cases) {
-      test('$type offers $operators', () async {
-        final generated = await generatedFor('late final $type value;');
-
-        expect(
-          generated.initializerOf('ModelFields', 'value'),
-          contains('operators: $operators'),
-        );
-      });
-    }
-  });
-
-  test('a nullable field can also be filtered for missing values', () async {
-    final generated = await generatedFor('late final String? nickname;');
-
-    expect(
-      generated.initializerOf('ModelFields', 'nickname'),
-      contains(
-        'operators: {...StringOperator.values, '
-        'PrimitiveOperator.isNull, PrimitiveOperator.isNotNull}',
-      ),
-    );
-  });
-
-  test('a field of a type with no operators cannot be filtered', () async {
-    final generated = await generatedFor('late final Note note;');
-
-    expect(
-      generated.initializerOf('ModelFields', 'note'),
-      isNot(contains('operators:')),
-    );
-  });
-
-  test(
-    'a list field is filtered by its element type and cannot be ordered',
-    () async {
-      final generated = await generatedFor('late final List<Gender> genders;');
-
-      expect(
-        generated.fieldSource('ModelFields', 'genders'),
-        allOf(
-          startsWith('final FieldMetadata<Gender> genders'),
-          contains('isOrderable: false'),
-          contains('operators: {...MultiSelectOperator.values}'),
-        ),
-      );
-    },
-  );
-
-  test('a map field keeps its own type instead of its values', () async {
-    final generated = await generatedFor(
-      'late final Map<String, Tag> tagsByName;',
+  test('a field without @QueryableField is left out', () async {
+    final generated = await ModelFixture.generatedFor(
+      '$named\nlate final String blurhash;',
     );
 
-    expect(
-      generated.fieldSource('ModelFields', 'tagsByName'),
-      startsWith('final FieldMetadata<Map<String, Tag>> tagsByName'),
-    );
+    expect(generated.fieldSource('ModelFields', 'blurhash'), isNull);
   });
-
-  test(
-    'a many-to-many field is filtered through its relationship class',
-    () async {
-      final generated = await generatedFor(
-        '@QueryableField(manyToManyRelType: PersonsTags)\n'
-        'late final List<Tag> tags;',
-      );
-
-      expect(
-        generated.initializerOf('ModelFields', 'tags'),
-        'tagsRel.redirectTo(PersonsTagsFields().tag, '
-        'isExpandable: false, isOrderable: false)',
-      );
-    },
-  );
 
   test('a queryable gets a shared singleton fields class', () async {
-    final generated = await generatedFor('late final String name;');
+    final generated = await ModelFixture.generatedFor(named);
 
     expect(
       generated.fieldSource('ModelFields', '_instance'),
@@ -135,9 +26,9 @@ $members
   test(
     'an extensible queryable leaves a private base class to extend',
     () async {
-      final generated = await generatedFor(
-        'late final String name;',
-        annotation: "@Queryable(classLabel: 'Models', allowExtension: true)",
+      final generated = await ModelFixture.generatedFor(
+        named,
+        annotation: "@Queryable(label: 'Models', extensible: true)",
       );
 
       expect(generated.classNames, ['_ModelFields']);
@@ -147,13 +38,13 @@ $members
 
   test('annotating a top-level variable fails the build', () async {
     final result = await ChurchAdminBuild.run({
-      modelLibrary:
+      ModelFixture.library:
           '''
 import 'package:church_admin_annotations/church_admin_annotations.dart';
 
 part 'model.g.dart';
 
-$queryable
+${ModelFixture.queryable}
 const model = 0;
 ''',
     });

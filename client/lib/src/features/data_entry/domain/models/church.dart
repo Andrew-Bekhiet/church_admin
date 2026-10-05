@@ -7,17 +7,20 @@ part 'church.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'الكنائس')
+@Queryable(label: 'الكنائس')
 class Church extends ViewableWithID with _$Church implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
+  @QueryableField(label: 'isHidden')
   final bool isHidden;
 
   @override

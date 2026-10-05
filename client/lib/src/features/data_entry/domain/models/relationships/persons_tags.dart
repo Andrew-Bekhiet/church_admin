@@ -4,12 +4,16 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'persons_tags.g.dart';
 
-@Queryable(classLabel: 'شارات المخدوم', regexIgnoreFields: [])
+@Queryable(label: 'شارات المخدوم')
 @JsonSerializable()
 class PersonsTags {
+  @QueryableField(label: 'بيانات المخدوم')
   final Person person;
+  @QueryableField(label: 'الشارة')
   final Tag tag;
+  @QueryableField(label: 'personId')
   final String personId;
+  @QueryableField(label: 'tagId')
   final String tagId;
 
   const PersonsTags({

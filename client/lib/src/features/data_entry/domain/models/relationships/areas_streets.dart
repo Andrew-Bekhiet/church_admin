@@ -7,12 +7,16 @@ part 'areas_streets.g.dart';
 /// Not intended to be used directly
 ///
 /// Used only for statically typed queries
-@Queryable(classLabel: 'المنطقة', regexIgnoreFields: [])
+@Queryable(label: 'المنطقة')
 @JsonSerializable()
 class AreasStreets {
+  @QueryableField(label: 'المنطقة')
   final Area area;
+  @QueryableField(label: 'الشارع')
   final Street street;
+  @QueryableField(label: 'areaId')
   final String areaId;
+  @QueryableField(label: 'streetId')
   final String streetId;
 
   const AreasStreets({

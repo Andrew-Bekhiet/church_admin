@@ -7,59 +7,50 @@ part 'user.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(
-  classLabel: 'الخدام',
-  ignoreFields: [
-    'authId',
-    'id',
-    'blurhash',
-    'canManageSomeUsers',
-    'preferences',
-    'fcmTokens',
-    'invitation',
-  ],
-  regexIgnoreFields: [r'.+History$'],
-  allowExtension: true,
-)
+@Queryable(label: 'الخدام', extensible: true)
 class User extends ViewableWithIDAndImage
     with _$User
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'uid')
   final String uid;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
+  @QueryableField(label: 'email')
   final String? email;
 
   @override
   @LocalDateTimeConverter()
+  @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
 
   @override
   final String? blurhash;
 
   @override
+  @QueryableField(label: 'مسؤول عن')
   final List<AdminOnData>? adminOn;
 
   @override
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-  @QueryableField(
-    manyToManyRelSelectField: 'permission',
-    manyToManyRelType: UsersPermissionsRel,
-  )
+  @QueryableField.manyToMany(through: UsersPermissionsRel, select: 'permission')
   final PermissionsSet permissions;
 
   @override
   final String? authId;
 
   @override
+  @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
   @override
+  @QueryableField(label: 'بيانات المخدوم')
   final Person? person;
 
   @override
@@ -83,6 +74,7 @@ class User extends ViewableWithIDAndImage
 
   @override
   @JsonKey(includeToJson: false)
+  @QueryableField(label: 'currentUserCanManageThisUser')
   final bool currentUserCanManageThisUser;
 
   @override

@@ -8,16 +8,7 @@ part 'address.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(
-  classLabel: 'العنوان',
-  ignoreFields: [
-    'id',
-    'countryIsoCode',
-    'textComposedFromParts',
-    'houseCodeMaxLength',
-  ],
-  allowExtension: true,
-)
+@Queryable(label: 'العنوان', extensible: true)
 class Address with _$Address {
   static const int houseCodeMaxLength = 5;
 
@@ -39,43 +30,55 @@ class Address with _$Address {
   final String? id;
 
   @override
+  @QueryableField(label: 'المنطقة')
   final Area? area;
 
   @override
   final String countryIsoCode;
 
   @override
+  @QueryableField(label: 'رقم العمارة')
   final String? houseCode;
 
   @override
+  @QueryableField(label: 'الشارع')
   final Street? street;
 
   @override
+  @QueryableField(label: 'الشارع الفرعي')
   final String? substreetName;
 
   @override
+  @QueryableField(label: 'الحي')
   final District? district;
 
   @override
+  @QueryableField(label: 'علامة مميزة')
   final String? specialLandmark;
 
   @override
+  @QueryableField(label: 'رقم الدور')
   final int? storeyNumber;
 
   @override
+  @QueryableField(label: 'رقم الشقة')
   final int? apartmentNumber;
 
   @override
+  @QueryableField(label: 'العنوان الكامل')
   final String? fullAddressText;
 
   @override
   @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+  @QueryableField(label: 'الموقع')
   final Point? geolocation;
 
   @override
+  @QueryableField(label: 'العائلة')
   final Family? family;
 
   @override
+  @QueryableField(label: 'المتجر')
   final Store? store;
 
   String get textComposedFromParts => [

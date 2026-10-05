@@ -3,7 +3,7 @@ import 'package:church_admin_annotations/church_admin_annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-@Queryable(classLabel: 'صلاحيات المستخدمين')
+@Queryable(label: 'صلاحيات المستخدمين')
 enum UserPermission implements LabeledEnum {
   approved(
     label: 'حساب مفعل',

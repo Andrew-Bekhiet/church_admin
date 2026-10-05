@@ -7,15 +7,17 @@ part 'district.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'الأحياء السكنية')
+@Queryable(label: 'الأحياء السكنية')
 class District extends ViewableWithID
     with _$District
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override

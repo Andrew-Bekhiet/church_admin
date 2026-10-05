@@ -4,12 +4,16 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'persons_hobbies.g.dart';
 
-@Queryable(classLabel: 'هوايات المخدوم', regexIgnoreFields: [])
+@Queryable(label: 'هوايات المخدوم')
 @JsonSerializable()
 class PersonsHobbies {
+  @QueryableField(label: 'بيانات المخدوم')
   final Person person;
+  @QueryableField(label: 'الهواية')
   final Hobby hobby;
+  @QueryableField(label: 'personId')
   final String personId;
+  @QueryableField(label: 'hobbyId')
   final String hobbyId;
 
   const PersonsHobbies({

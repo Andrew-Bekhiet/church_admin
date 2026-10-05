@@ -7,20 +7,23 @@ part 'shammas_level.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'رتب الشموسية')
+@Queryable(label: 'رتب الشموسية')
 class ShammasLevel extends ViewableWithID
     with _$ShammasLevel
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: 0)
+  @QueryableField(label: 'الترتيب')
   final int order;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
