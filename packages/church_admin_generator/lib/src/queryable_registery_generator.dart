@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
-import 'package:church_admin/annotations.dart';
+import 'package:church_admin_annotations/church_admin_annotations.dart';
 import 'package:source_gen/source_gen.dart';
 
 class QueryableRegisteryGenerator extends Generator {
@@ -12,7 +12,11 @@ class QueryableRegisteryGenerator extends Generator {
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) async {
     final registry = library
         .annotatedWith(
-          const TypeChecker.typeNamed(GenerateQueryablesRegistery),
+          const TypeChecker.typeNamed(
+            GenerateQueryablesRegistery,
+            inPackage: 'church_admin_annotations',
+            inSdk: false,
+          ),
         )
         .singleOrNull;
 
@@ -48,7 +52,13 @@ class QueryableRegisteryGenerator extends Generator {
         )
         .followedBy(
           LibraryReader(library)
-              .annotatedWith(const TypeChecker.typeNamed(Queryable)),
+              .annotatedWith(
+            const TypeChecker.typeNamed(
+              Queryable,
+              inPackage: 'church_admin_annotations',
+              inSdk: false,
+            ),
+          ),
         )
         .toList();
   }

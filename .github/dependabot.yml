@@ -70,7 +70,8 @@ updates:
   - package-ecosystem: pub
     directories:
       - /client
-      - /church_admin_generator
+      - /packages/church_admin_annotations
+      - /packages/church_admin_generator
     schedule:
       interval: weekly
     cooldown:

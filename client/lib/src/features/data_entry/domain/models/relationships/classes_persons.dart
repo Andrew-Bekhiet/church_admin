@@ -1,5 +1,5 @@
-import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin_annotations/church_admin_annotations.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'classes_persons.g.dart';

@@ -1,5 +1,5 @@
-import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin_annotations/church_admin_annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 

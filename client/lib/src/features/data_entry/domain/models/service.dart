@@ -1,6 +1,6 @@
-import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/mutations.gql.dart';
+import 'package:church_admin_annotations/church_admin_annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

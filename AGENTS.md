@@ -7,6 +7,7 @@ Conventions for anyone (human or agent) writing code here. Rules are stated as r
 | Path                         | What it is                                                                                          |
 | ---------------------------- | --------------------------------------------------------------------------------------------------- |
 | `client/`                    | Flutter app. Riverpod providers + BLoC, GoRouter, `graphql_codegen` against Hasura.                 |
+| `packages/`                  | Dart packages the client depends on by path, each with its own lockfile: `church_admin_annotations`, `church_admin_generator`. |
 | `server/hasura/`             | Hasura metadata + Postgres migrations (`migrations/default/<timestamp>_<name>/{up,down}.sql`).      |
 | `server/firebase/functions/` | TypeScript Cloud Functions: auth blocking functions, callables, storage proxy, export.              |
 | `server/postgres/`           | Postgres image (`ghcr.io/railwayapp-templates/timescale-postgis-ssl:pg17-ts2.17`) and init scripts. |

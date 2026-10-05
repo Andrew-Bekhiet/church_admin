@@ -2,12 +2,13 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
-import 'package:church_admin/annotations.dart';
+import 'package:church_admin_annotations/church_admin_annotations.dart';
 import 'package:church_admin_generator/src/models/synthetic_element.dart';
 import 'package:source_gen/source_gen.dart';
 
 class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
-  const QueryableFieldsGenerator();
+  const QueryableFieldsGenerator()
+      : super(inPackage: 'church_admin_annotations', inSdk: false);
 
   @override
   String generateForAnnotatedElement(
@@ -47,7 +48,11 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
     )
         .map(
       (g) {
-        final annotation = const TypeChecker.typeNamed(QueryableField)
+        final annotation = const TypeChecker.typeNamed(
+          QueryableField,
+          inPackage: 'church_admin_annotations',
+          inSdk: false,
+        )
             .annotationsOf(g)
             .singleOrNull;
         final renameTo = annotation?.getField('renameTo')?.toStringValue();
@@ -142,7 +147,11 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
         final type = iterableType.typeArguments.first;
 
         final annotation = f.element != null
-            ? const TypeChecker.typeNamed(QueryableField)
+            ? const TypeChecker.typeNamed(
+                QueryableField,
+                inPackage: 'church_admin_annotations',
+                inSdk: false,
+              )
                 .annotationsOf(f.element!)
                 .singleOrNull
             : null;

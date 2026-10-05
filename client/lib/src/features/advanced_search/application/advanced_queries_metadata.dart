@@ -1,6 +1,5 @@
-import 'package:church_admin/annotations.dart';
-import 'package:church_admin/annotations/generate_queryables_registery.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin_annotations/church_admin_annotations.dart';
 
 part 'advanced_queries_metadata.g.dart';
 

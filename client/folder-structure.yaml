@@ -24,7 +24,6 @@ lib
 │   ├── church_admin_app.dart
 │   ├── core.dart
 │   └── features.dart
-├── annotations.dart
 ├── church_admin.dart
 └── main.dart
 # Any other files should be in the shared or core folders

@@ -12,8 +12,8 @@ dependency_overrides:
 dependencies:
   analyzer: ^8.0.0
   build: ^4.0.0
-  church_admin:
-    path: ../client
+  church_admin_annotations:
+    path: ../church_admin_annotations
   code_builder: ^4.10.1
   dart_style: ^3.1.0
   glob: ^2.1.2
