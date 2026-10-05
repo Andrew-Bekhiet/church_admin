@@ -156,7 +156,7 @@ Before reusing a SQL permission function such as `auth.user_can_edit_user`, chec
 
 **GraphQL codegen** — the split is not a build_runner output. `graphql_codegen` always emits `schema.graphql.dart` as one ~166k-line file, and `client/scripts/split_schema_graphql_dart.sh` rewrites that file in place into a stub plus `schema_partN.dart`. Any build that regenerates it destroys the split.
 
-On the current toolchain (build*runner 2.15.2), `--build-filter` does not merely scope the build — from a cold cache (no `.dart_tool/build`, e.g. a fresh clone or CI runner) it deletes every generated output \_outside* the filter and still re-collapses `schema.graphql.dart`, because `graphql_codegen` runs lazily regardless of the filter. **Prefer a full `dart run build_runner build`** for hand-run builds, then restore the stub and clean up:
+On the current toolchain (build_runner 2.15.2), `--build-filter` does not merely scope the build — from a cold cache (no `.dart_tool/build`, e.g. a fresh clone or CI runner) it deletes every generated output _outside_ the filter and still re-collapses `schema.graphql.dart`, because `graphql_codegen` runs lazily regardless of the filter. **Prefer a full `dart run build_runner build`** for hand-run builds, then restore the stub and clean up:
 
 ```sh
 cd client
