@@ -10,6 +10,8 @@ part of 'address.dart';
 // **************************************************************************
 
 class _AddressFields {
+  _AddressFields();
+
   final FieldMetadata<Area> area = FieldMetadata<Area>(
     getValue: (obj) => obj is Address ? obj.area : null,
     parentType: Address,
@@ -180,6 +182,7 @@ class _AddressFields {
     family,
     store,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'area': area,
     'houseCode': houseCode,
@@ -194,8 +197,6 @@ class _AddressFields {
     'family': family,
     'store': store,
   };
-
-  _AddressFields();
 }
 
 // **************************************************************************

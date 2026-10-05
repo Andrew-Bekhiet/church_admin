@@ -10,7 +10,12 @@ part of 'person_state.dart';
 // **************************************************************************
 
 class PersonStateFields {
+  factory PersonStateFields() => _instance;
+
+  PersonStateFields._();
+
   static final PersonStateFields _instance = PersonStateFields._();
+
   final FieldMetadata<PersonState> id = FieldMetadata<PersonState>(
     getValue: (obj) => obj is PersonState ? obj.id : null,
     parentType: PersonState,
@@ -43,13 +48,12 @@ class PersonStateFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [id, name, color];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
     'color': color,
   };
-  factory PersonStateFields() => _instance;
-  PersonStateFields._();
 }
 
 // **************************************************************************

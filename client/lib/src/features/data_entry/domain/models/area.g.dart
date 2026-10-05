@@ -10,6 +10,8 @@ part of 'area.dart';
 // **************************************************************************
 
 class _AreaFields {
+  _AreaFields();
+
   final FieldMetadata<Area> id = FieldMetadata<Area>(
     getValue: (obj) => obj is Area ? obj.id : null,
     parentType: Area,
@@ -121,6 +123,7 @@ class _AreaFields {
     lastEdit,
     adminUsers,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
@@ -131,8 +134,6 @@ class _AreaFields {
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
   };
-
-  _AreaFields();
 }
 
 // **************************************************************************

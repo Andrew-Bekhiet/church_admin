@@ -10,7 +10,12 @@ part of 'persons_hobbies.dart';
 // **************************************************************************
 
 class PersonsHobbiesFields {
+  factory PersonsHobbiesFields() => _instance;
+
+  PersonsHobbiesFields._();
+
   static final PersonsHobbiesFields _instance = PersonsHobbiesFields._();
+
   final FieldMetadata<Person> person = FieldMetadata<Person>(
     getValue: (obj) => obj is PersonsHobbies ? obj.person : null,
     parentType: PersonsHobbies,
@@ -53,14 +58,13 @@ class PersonsHobbiesFields {
     personId,
     hobbyId,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'person': person,
     'hobby': hobby,
     'personId': personId,
     'hobbyId': hobbyId,
   };
-  factory PersonsHobbiesFields() => _instance;
-  PersonsHobbiesFields._();
 }
 
 // **************************************************************************

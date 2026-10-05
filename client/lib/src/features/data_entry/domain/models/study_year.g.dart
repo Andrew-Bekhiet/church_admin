@@ -10,6 +10,8 @@ part of 'study_year.dart';
 // **************************************************************************
 
 class _StudyYearFields {
+  _StudyYearFields();
+
   final FieldMetadata<int> order = FieldMetadata<int>(
     getValue: (obj) => obj is StudyYear ? obj.order : null,
     parentType: StudyYear,
@@ -38,13 +40,12 @@ class _StudyYearFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [order, name, id];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'order': order,
     'name': name,
     'id': id,
   };
-
-  _StudyYearFields();
 }
 
 // **************************************************************************

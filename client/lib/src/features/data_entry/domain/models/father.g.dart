@@ -10,7 +10,12 @@ part of 'father.dart';
 // **************************************************************************
 
 class FatherFields {
+  factory FatherFields() => _instance;
+
+  FatherFields._();
+
   static final FatherFields _instance = FatherFields._();
+
   final FieldMetadata<Father> id = FieldMetadata<Father>(
     getValue: (obj) => obj is Father ? obj.id : null,
     parentType: Father,
@@ -39,13 +44,12 @@ class FatherFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [id, name, isHidden];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
     'isHidden': isHidden,
   };
-  factory FatherFields() => _instance;
-  FatherFields._();
 }
 
 // **************************************************************************

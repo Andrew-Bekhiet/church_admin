@@ -10,8 +10,13 @@ part of 'users_permissions_rel.dart';
 // **************************************************************************
 
 class UsersPermissionsRelFields {
+  factory UsersPermissionsRelFields() => _instance;
+
+  UsersPermissionsRelFields._();
+
   static final UsersPermissionsRelFields _instance =
       UsersPermissionsRelFields._();
+
   final FieldMetadata<String> uid = FieldMetadata<String>(
     getValue: (obj) => obj is UsersPermissionsRel ? obj.uid : null,
     parentType: UsersPermissionsRel,
@@ -41,13 +46,12 @@ class UsersPermissionsRelFields {
       );
 
   late final List<FieldMetadata<Object>> allFields = [uid, user, permission];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'uid': uid,
     'user': user,
     'permission': permission,
   };
-  factory UsersPermissionsRelFields() => _instance;
-  UsersPermissionsRelFields._();
 }
 
 // **************************************************************************

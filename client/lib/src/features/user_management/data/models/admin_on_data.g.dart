@@ -10,7 +10,12 @@ part of 'admin_on_data.dart';
 // **************************************************************************
 
 class AdminOnDataFields {
+  factory AdminOnDataFields() => _instance;
+
+  AdminOnDataFields._();
+
   static final AdminOnDataFields _instance = AdminOnDataFields._();
+
   final FieldMetadata<Area> area = FieldMetadata<Area>(
     getValue: (obj) => obj is AdminOnData ? obj.area : null,
     parentType: AdminOnData,
@@ -328,6 +333,7 @@ class AdminOnDataFields {
     groupWriteRelatedFamilies,
     user,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'area': area,
     'areaAllowExport': areaAllowExport,
@@ -353,8 +359,6 @@ class AdminOnDataFields {
     'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
     'user': user,
   };
-  factory AdminOnDataFields() => _instance;
-  AdminOnDataFields._();
 }
 
 // **************************************************************************

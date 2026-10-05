@@ -10,7 +10,12 @@ part of 'aggregate_data.dart';
 // **************************************************************************
 
 class AggregateDataFields {
+  factory AggregateDataFields() => _instance;
+
+  AggregateDataFields._();
+
   static final AggregateDataFields _instance = AggregateDataFields._();
+
   final FieldMetadata<int> count = FieldMetadata<int>(
     getValue: (obj) => obj is AggregateData ? obj.count : null,
     parentType: AggregateData,
@@ -53,13 +58,12 @@ class AggregateDataFields {
       );
 
   late final List<FieldMetadata<Object>> allFields = [count, max, min];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'count': count,
     'max': max,
     'min': min,
   };
-  factory AggregateDataFields() => _instance;
-  AggregateDataFields._();
 }
 
 // **************************************************************************

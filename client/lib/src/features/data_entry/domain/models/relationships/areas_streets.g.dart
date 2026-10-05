@@ -10,7 +10,12 @@ part of 'areas_streets.dart';
 // **************************************************************************
 
 class AreasStreetsFields {
+  factory AreasStreetsFields() => _instance;
+
+  AreasStreetsFields._();
+
   static final AreasStreetsFields _instance = AreasStreetsFields._();
+
   final FieldMetadata<Area> area = FieldMetadata<Area>(
     getValue: (obj) => obj is AreasStreets ? obj.area : null,
     parentType: AreasStreets,
@@ -53,14 +58,13 @@ class AreasStreetsFields {
     areaId,
     streetId,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'area': area,
     'street': street,
     'areaId': areaId,
     'streetId': streetId,
   };
-  factory AreasStreetsFields() => _instance;
-  AreasStreetsFields._();
 }
 
 // **************************************************************************

@@ -10,8 +10,13 @@ part of 'history_aggregate_data.dart';
 // **************************************************************************
 
 class HistoryAggregateDataFields {
+  factory HistoryAggregateDataFields() => _instance;
+
+  HistoryAggregateDataFields._();
+
   static final HistoryAggregateDataFields _instance =
       HistoryAggregateDataFields._();
+
   final FieldMetadata<AggregateData> aggregate = FieldMetadata<AggregateData>(
     getValue: (obj) => obj is HistoryAggregateData ? obj.aggregate : null,
     parentType: HistoryAggregateData,
@@ -21,11 +26,10 @@ class HistoryAggregateDataFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [aggregate];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'aggregate': aggregate,
   };
-  factory HistoryAggregateDataFields() => _instance;
-  HistoryAggregateDataFields._();
 }
 
 // **************************************************************************

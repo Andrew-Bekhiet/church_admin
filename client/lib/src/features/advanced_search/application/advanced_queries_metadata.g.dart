@@ -6,10 +6,12 @@
 part of 'advanced_queries_metadata.dart';
 
 // **************************************************************************
-// QueryableRegisteryGenerator
+// QueryablesRegistryGenerator
 // **************************************************************************
 
 abstract final class _$AdvancedQueriesMetadata {
+  _$AdvancedQueriesMetadata();
+
   final attendanceRecord = QueryableType<AttendanceRecord>(
     name: 'AttendanceRecord',
     label: 'حضور الاجتماع',
@@ -369,6 +371,7 @@ abstract final class _$AdvancedQueriesMetadata {
     user,
     userPermission,
   ];
+
   late final allQueryablesByType = <Type, QueryableType<Object>>{
     AttendanceRecord: attendanceRecord,
     Meeting: meeting,
@@ -411,5 +414,4 @@ abstract final class _$AdvancedQueriesMetadata {
     User: user,
     UserPermission: userPermission,
   };
-  _$AdvancedQueriesMetadata();
 }

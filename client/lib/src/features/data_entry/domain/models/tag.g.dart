@@ -10,7 +10,12 @@ part of 'tag.dart';
 // **************************************************************************
 
 class TagFields {
+  factory TagFields() => _instance;
+
+  TagFields._();
+
   static final TagFields _instance = TagFields._();
+
   final FieldMetadata<Tag> id = FieldMetadata<Tag>(
     getValue: (obj) => obj is Tag ? obj.id : null,
     parentType: Tag,
@@ -43,13 +48,12 @@ class TagFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [id, name, color];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
     'color': color,
   };
-  factory TagFields() => _instance;
-  TagFields._();
 }
 
 // **************************************************************************

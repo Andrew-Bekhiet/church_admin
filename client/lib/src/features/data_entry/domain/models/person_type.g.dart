@@ -10,6 +10,8 @@ part of 'person_type.dart';
 // **************************************************************************
 
 class _PersonTypeFields {
+  _PersonTypeFields();
+
   final FieldMetadata<PersonType> id = FieldMetadata<PersonType>(
     getValue: (obj) => obj is PersonType ? obj.id : null,
     parentType: PersonType,
@@ -62,6 +64,7 @@ class _PersonTypeFields {
     isFamilyAdmin,
     isHidden,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
@@ -69,8 +72,6 @@ class _PersonTypeFields {
     'isFamilyAdmin': isFamilyAdmin,
     'isHidden': isHidden,
   };
-
-  _PersonTypeFields();
 }
 
 // **************************************************************************

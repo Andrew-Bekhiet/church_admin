@@ -10,7 +10,12 @@ part of 'district.dart';
 // **************************************************************************
 
 class DistrictFields {
+  factory DistrictFields() => _instance;
+
+  DistrictFields._();
+
   static final DistrictFields _instance = DistrictFields._();
+
   final FieldMetadata<District> id = FieldMetadata<District>(
     getValue: (obj) => obj is District ? obj.id : null,
     parentType: District,
@@ -30,12 +35,11 @@ class DistrictFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [id, name];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
   };
-  factory DistrictFields() => _instance;
-  DistrictFields._();
 }
 
 // **************************************************************************

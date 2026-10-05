@@ -10,7 +10,12 @@ part of 'shammas_level.dart';
 // **************************************************************************
 
 class ShammasLevelFields {
+  factory ShammasLevelFields() => _instance;
+
+  ShammasLevelFields._();
+
   static final ShammasLevelFields _instance = ShammasLevelFields._();
+
   final FieldMetadata<int> order = FieldMetadata<int>(
     getValue: (obj) => obj is ShammasLevel ? obj.order : null,
     parentType: ShammasLevel,
@@ -39,13 +44,12 @@ class ShammasLevelFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [order, id, name];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'order': order,
     'id': id,
     'name': name,
   };
-  factory ShammasLevelFields() => _instance;
-  ShammasLevelFields._();
 }
 
 // **************************************************************************

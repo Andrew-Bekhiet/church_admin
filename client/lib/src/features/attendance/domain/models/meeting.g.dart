@@ -10,7 +10,12 @@ part of 'meeting.dart';
 // **************************************************************************
 
 class MeetingFields {
+  factory MeetingFields() => _instance;
+
+  MeetingFields._();
+
   static final MeetingFields _instance = MeetingFields._();
+
   final FieldMetadata<Meeting> id = FieldMetadata<Meeting>(
     getValue: (obj) => obj is Meeting ? obj.id : null,
     parentType: Meeting,
@@ -148,6 +153,7 @@ class MeetingFields {
     serviceGender,
     group,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
@@ -161,8 +167,6 @@ class MeetingFields {
     'serviceGender': serviceGender,
     'group': group,
   };
-  factory MeetingFields() => _instance;
-  MeetingFields._();
 }
 
 // **************************************************************************
