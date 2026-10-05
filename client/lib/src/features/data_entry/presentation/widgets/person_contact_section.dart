@@ -23,7 +23,7 @@ class PersonContactSection extends StatelessWidget {
           ),
         PhoneBookCard(
           own: person.contacts,
-          family: person.familyContacts,
+          family: person.visibleFamilyContacts,
           onCall: (n) => _phoneCall(context, n),
           onAddToContacts: (n) => _contactAdd(context, n, person),
         ),

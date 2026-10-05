@@ -207,7 +207,8 @@ class _PersonEditFormState extends State<PersonEditForm> {
         ),
       );
       _followFamilyPhoneNumbers(
-        saved: widget.controller.initialObject?.familyContacts ?? const [],
+        saved:
+            widget.controller.initialObject?.visibleFamilyContacts ?? const [],
       );
 
       return;
