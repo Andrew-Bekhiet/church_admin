@@ -13,36 +13,32 @@ void main() {
 
   tearDown(defaultTearDown);
 
-  Future<void> pumpSection(WidgetTester tester, Person person) =>
-      tester.pumpWidget(
-        materialAppWithThemeAndLocale()(
-          Scaffold(
-            body: SingleChildScrollView(
-              child: PersonContactSection(person: person),
-            ),
-          ),
-        ),
-      );
-
   testWidgets("a family admin's info hides the family numbers", (
     tester,
   ) async {
-    await pumpSection(
-      tester,
-      Person(
-        id: 'the-father',
-        name: 'الأب',
-        personType: const PersonType(
-          id: 'father',
-          name: 'الأب',
-          isFamilyAdmin: true,
+    await tester.pumpWidget(
+      materialAppWithThemeAndLocale()(
+        Scaffold(
+          body: SingleChildScrollView(
+            child: PersonContactSection(
+              person: Person(
+                id: 'the-father',
+                name: 'الأب',
+                personType: const PersonType(
+                  id: 'father',
+                  name: 'الأب',
+                  isFamilyAdmin: true,
+                ),
+                familyContacts: const [motherNumber],
+              ),
+            ),
+          ),
         ),
-        familyContacts: const [motherNumber],
       ),
     );
 
     expect(
-      find.byKey(PhoneBookCardKeys.contact('mother-number')),
+      find.byKey(PhoneBookCardKeys.contact(motherNumber.contact.id)),
       findsNothing,
     );
   });
@@ -50,18 +46,25 @@ void main() {
   testWidgets("a child's info shows the family admins' numbers", (
     tester,
   ) async {
-    await pumpSection(
-      tester,
-      Person(
-        id: 'the-child',
-        name: 'الابن',
-        personType: const PersonType(id: 'son', name: 'ابن'),
-        familyContacts: const [motherNumber],
+    await tester.pumpWidget(
+      materialAppWithThemeAndLocale()(
+        Scaffold(
+          body: SingleChildScrollView(
+            child: PersonContactSection(
+              person: Person(
+                id: 'the-child',
+                name: 'الابن',
+                personType: const PersonType(id: 'son', name: 'ابن'),
+                familyContacts: const [motherNumber],
+              ),
+            ),
+          ),
+        ),
       ),
     );
 
     expect(
-      find.byKey(PhoneBookCardKeys.contact('mother-number')),
+      find.byKey(PhoneBookCardKeys.contact(motherNumber.contact.id)),
       findsOneWidget,
     );
   });

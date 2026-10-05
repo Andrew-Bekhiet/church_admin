@@ -95,9 +95,9 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  Future<void> openOwnNumberLabels(WidgetTester tester) async {
+  Future<void> openOwnNumberLabelPicker(WidgetTester tester) async {
     final labelPicker = find.byKey(
-      PhoneContactDraftFieldKeys.labelPicker('own'),
+      PhoneContactDraftFieldKeys.labelPicker(ownNumber.id),
     );
     await tester.ensureVisible(labelPicker);
     await tester.pumpAndSettle();
@@ -154,7 +154,9 @@ void main() {
     await openEditor(tester, personOfType(FakePersonTypesDAO.father));
 
     expect(
-      find.byKey(PhoneContactDraftFieldKeys.phoneField('mother-number')),
+      find.byKey(
+        PhoneContactDraftFieldKeys.phoneField(motherNumber.contact.id),
+      ),
       findsNothing,
     );
   });
@@ -164,7 +166,7 @@ void main() {
   ) async {
     await openEditor(tester, personOfType(FakePersonTypesDAO.father));
 
-    await openOwnNumberLabels(tester);
+    await openOwnNumberLabelPicker(tester);
 
     expect(
       find.byKey(
@@ -180,7 +182,9 @@ void main() {
     await openEditor(tester, personOfType(FakePersonTypesDAO.son));
 
     expect(
-      find.byKey(PhoneContactDraftFieldKeys.phoneField('mother-number')),
+      find.byKey(
+        PhoneContactDraftFieldKeys.phoneField(motherNumber.contact.id),
+      ),
       findsOneWidget,
     );
   });
@@ -190,7 +194,7 @@ void main() {
   ) async {
     await openEditor(tester, personOfType(FakePersonTypesDAO.son));
 
-    await openOwnNumberLabels(tester);
+    await openOwnNumberLabelPicker(tester);
 
     expect(
       find.byKey(
