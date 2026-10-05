@@ -48,6 +48,17 @@ void main() {
     expect(variables.deleteContacts, isFalse);
   });
 
+  test("saving a family admin keeps the family numbers hidden from them", () {
+    final familyAdmin = person.copyWith(personType: father);
+
+    final variables = PersonUpdateHelper(
+      oldPerson: familyAdmin,
+      newPerson: familyAdmin.copyWith(familyContacts: const []),
+    ).variables;
+
+    expect(variables.deleteContacts, isFalse);
+  });
+
   test('a number typed for the new family is added to that family', () {
     final variables = PersonUpdateHelper(
       oldPerson: person,

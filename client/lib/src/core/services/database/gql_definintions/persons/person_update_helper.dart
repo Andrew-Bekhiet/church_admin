@@ -19,7 +19,7 @@ class PersonUpdateHelper {
     initialOwn: oldPerson.contacts,
     desiredOwn: newPerson.contacts,
     initialFamily: newPerson.family?.id == oldPerson.family?.id
-        ? oldPerson.familyContacts
+        ? oldPerson.visibleFamilyContacts
         : const [],
     desiredFamily: newPerson.familyContacts,
   );

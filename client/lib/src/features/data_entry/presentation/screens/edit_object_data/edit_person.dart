@@ -34,10 +34,14 @@ class _EditPersonState extends State<EditPerson> {
   late EditObjectController<Person> _controller;
   late final PhoneContactsEditorCubit _phoneContacts = PhoneContactsEditorCubit(
     own: widget.person?.contacts ?? const [],
-    family: widget.person?.familyContacts ?? const [],
+    family: widget.person?.visibleFamilyContacts ?? const [],
     hasFamily:
         (widget.person?.family ?? widget.withFamily) != null ||
         (widget.person == null && widget.withAddress != null),
+    fetchFamilyRoles: switch (widget.person?.personType) {
+      PersonType(isFamilyAdmin: true) => () async => const [],
+      _ => null,
+    },
   );
   bool _classesAndGroupsLoaded = false;
 

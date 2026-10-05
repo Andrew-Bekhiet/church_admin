@@ -16,6 +16,7 @@ part 'person.g.dart';
     'isStudent',
     'contacts',
     'familyContacts',
+    'visibleFamilyContacts',
     'userCanEdit',
     'maxSpiritDataAge',
     'uid',
@@ -264,6 +265,11 @@ class Person extends ViewableWithIDAndImage
   Point? get geolocation => address?.geolocation;
 
   bool get isStudent => workStatus == WorkStatus.student;
+
+  List<FamilyPhoneContact> get visibleFamilyContacts => switch (personType) {
+    PersonType(isFamilyAdmin: true) => const [],
+    _ => familyContacts,
+  };
 
   @override
   String get typeName => AdvancedQueriesMetadata().person.name;
