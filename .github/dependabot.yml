@@ -71,7 +71,6 @@ updates:
     directories:
       - /client
       - /church_admin_generator
-      - /server/church_admin_migrator
     schedule:
       interval: weekly
     cooldown:
