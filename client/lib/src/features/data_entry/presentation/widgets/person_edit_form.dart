@@ -58,6 +58,7 @@ class _PersonEditFormState extends State<PersonEditForm> {
         PersonFamilyAndAddressFields(
           person: person,
           isCreate: widget.controller.isCreate,
+          canEditFamilyAddress: _canEditFamilyAddress,
           onAddressChanged: (value) {
             _update((p) => p.copyWith(address: value));
             context.read<PhoneContactsEditorCubit>().changeFamilyAvailability(
@@ -297,6 +298,13 @@ class _PersonEditFormState extends State<PersonEditForm> {
     return person.family != null ||
         (widget.controller.isCreate && person.address != null);
   }
+
+  bool get _canEditFamilyAddress => switch (widget.controller.newObject) {
+    Person(family: null) => widget.controller.isCreate,
+    Person(:final family?) =>
+      !widget.controller.isCreate &&
+          family.id == widget.controller.initialObject?.family?.id,
+  };
 
   String? _familyValidator(Family? family) =>
       family == null && widget.controller.newObject.address == null

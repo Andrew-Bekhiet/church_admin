@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class PersonFamilyAndAddressFields extends StatelessWidget {
   final Person person;
   final bool isCreate;
+  final bool canEditFamilyAddress;
   final ValueChanged<Address?> onAddressChanged;
   final Future<Point?> Function(BuildContext) onEditLocation;
   final String? Function(Family?) familyValidator;
@@ -12,6 +13,7 @@ class PersonFamilyAndAddressFields extends StatelessWidget {
   const PersonFamilyAndAddressFields({
     required this.person,
     required this.isCreate,
+    required this.canEditFamilyAddress,
     required this.onAddressChanged,
     required this.onEditLocation,
     required this.familyValidator,
@@ -21,19 +23,22 @@ class PersonFamilyAndAddressFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hasFamilyAddressToShow = isCreate || person.family != null;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (isCreate)
+        if (hasFamilyAddressToShow)
           AddressWithLocationField(
             label: 'عنوان وموقع العائلة',
-            enabled: person.family == null,
+            enabled: canEditFamilyAddress,
             required: person.family == null,
             initialAddress: person.family?.address ?? person.address,
             onAddressChanged: onAddressChanged,
             onEditLocation: onEditLocation,
           ),
         ObjectSelectionField<Family, Family?>(
+          key: PersonFamilyAndAddressFieldsKeys.family,
           validator: familyValidator,
           nullable: isCreate,
           decoration: const InputDecoration(errorMaxLines: 2),
@@ -52,4 +57,10 @@ class PersonFamilyAndAddressFields extends StatelessWidget {
       ],
     );
   }
+}
+
+abstract final class PersonFamilyAndAddressFieldsKeys {
+  static const Key family = ValueKey(
+    'Person Family And Address Fields Family Key',
+  );
 }

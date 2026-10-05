@@ -36,6 +36,7 @@ class AddressHouseNumberRow extends StatelessWidget {
           ),
           const SizedBox(width: 16),
           Expanded(
+            key: AddressHouseNumberRowKeys.houseCode,
             flex: 2,
             child: TextFormField(
               key: ValueKey(address.houseCode),
@@ -67,4 +68,10 @@ class AddressHouseNumberRow extends StatelessWidget {
       ),
     );
   }
+}
+
+abstract final class AddressHouseNumberRowKeys {
+  static const Key houseCode = ValueKey(
+    'Address House Number Row House Code Key',
+  );
 }
