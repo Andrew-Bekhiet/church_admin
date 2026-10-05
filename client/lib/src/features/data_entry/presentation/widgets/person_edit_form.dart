@@ -19,6 +19,13 @@ class PersonEditForm extends StatefulWidget {
 }
 
 class _PersonEditFormState extends State<PersonEditForm> {
+  bool get _canEditFamilyAddress => switch (widget.controller.newObject) {
+    Person(family: null) => widget.controller.isCreate,
+    Person(:final family?) =>
+      !widget.controller.isCreate &&
+          family.id == widget.controller.initialObject?.family?.id,
+  };
+
   void _update(Person Function(Person) change) {
     widget.controller.newObject = change(widget.controller.newObject);
   }
@@ -298,13 +305,6 @@ class _PersonEditFormState extends State<PersonEditForm> {
     return person.family != null ||
         (widget.controller.isCreate && person.address != null);
   }
-
-  bool get _canEditFamilyAddress => switch (widget.controller.newObject) {
-    Person(family: null) => widget.controller.isCreate,
-    Person(:final family?) =>
-      !widget.controller.isCreate &&
-          family.id == widget.controller.initialObject?.family?.id,
-  };
 
   String? _familyValidator(Family? family) =>
       family == null && widget.controller.newObject.address == null

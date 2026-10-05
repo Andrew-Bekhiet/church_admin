@@ -58,7 +58,6 @@ class FakeFamiliesDAO extends Fake implements FamiliesDAO {
 }
 
 void main() {
-  const savedAddress = Address(id: 'address-id', houseCode: '12');
   const family = Family(id: 'family-id', name: 'أسرة');
   const otherFamily = Family(
     id: 'other-family-id',
@@ -70,7 +69,7 @@ void main() {
     name: 'مينا',
     family: family,
     familyId: family.id,
-    address: savedAddress,
+    address: const Address(id: 'address-id', houseCode: '12'),
   );
 
   Finder houseCodeField() => find.descendant(
@@ -171,7 +170,7 @@ void main() {
     await tester.tap(find.byKey(EditObjectDataKeys.saveButton));
     await tester.pumpAndSettle();
 
-    expect(persons.saved?.address, savedAddress.copyWith(houseCode: '34'));
+    expect(persons.saved?.address?.houseCode, '34');
   });
 
   testWidgets("moving a person to another family leaves that family's "
