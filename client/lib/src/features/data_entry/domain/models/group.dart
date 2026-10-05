@@ -8,7 +8,7 @@ part 'group.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(label: 'المجموعات', extensible: true)
+@Queryable(label: 'المجموعات')
 class Group extends ViewableWithIDAndImage
     with _$Group
     implements SerializableExtra {
@@ -133,15 +133,4 @@ class Group extends ViewableWithIDAndImage
 
     return result;
   }
-}
-
-class GroupFields extends _GroupFields {
-  @override
-  FieldMetadata<User> get adminUsers => adminUsersRel.redirectTo(
-    AdminOnDataFields().user,
-    label: adminUsersRel.label,
-    isExpandable: false,
-    isOrderable: false,
-  );
-  GroupFields();
 }

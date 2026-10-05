@@ -9,8 +9,12 @@ part of 'group.dart';
 // QueryableFieldsGenerator
 // **************************************************************************
 
-class _GroupFields {
-  _GroupFields();
+class GroupFields {
+  factory GroupFields() => _instance;
+
+  GroupFields._();
+
+  static final GroupFields _instance = GroupFields._();
 
   final FieldMetadata<Group> id = FieldMetadata<Group>(
     getValue: (obj) => obj is Group ? obj.id : null,

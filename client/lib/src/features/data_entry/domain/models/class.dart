@@ -8,7 +8,7 @@ part 'class.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(label: 'الفصول', extensible: true)
+@Queryable(label: 'الفصول')
 class Class extends ViewableWithIDAndImage
     with _$Class
     implements SerializableExtra {
@@ -159,14 +159,4 @@ class Class extends ViewableWithIDAndImage
 
     return result;
   }
-}
-
-class ClassFields extends _ClassFields {
-  @override
-  FieldMetadata<User> get adminUsers => adminUsersRel.redirectTo(
-    AdminOnDataFields().user,
-    label: adminUsersRel.label,
-    isExpandable: false,
-  );
-  ClassFields();
 }

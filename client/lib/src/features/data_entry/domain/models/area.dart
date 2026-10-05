@@ -102,14 +102,6 @@ class AreaFields extends _AreaFields {
   );
 
   @override
-  FieldMetadata<User> get adminUsers => adminUsersRel.redirectTo(
-    AdminOnDataFields().user,
-    label: adminUsersRel.label,
-    isExpandable: false,
-    isOrderable: false,
-  );
-
-  @override
   List<FieldMetadata<Object>> get allFields => [...super.allFields, streets];
 
   @override

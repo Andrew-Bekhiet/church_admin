@@ -9,8 +9,12 @@ part of 'class.dart';
 // QueryableFieldsGenerator
 // **************************************************************************
 
-class _ClassFields {
-  _ClassFields();
+class ClassFields {
+  factory ClassFields() => _instance;
+
+  ClassFields._();
+
+  static final ClassFields _instance = ClassFields._();
 
   final FieldMetadata<Class> id = FieldMetadata<Class>(
     getValue: (obj) => obj is Class ? obj.id : null,
