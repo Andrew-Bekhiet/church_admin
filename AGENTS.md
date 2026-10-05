@@ -122,6 +122,7 @@ Unit tests are a **design tool**, not a bug-finding tool. Integration and manual
 ### Migrations
 
 - One directory per migration: `server/hasura/migrations/default/<timestamp>_<name>/{up,down}.sql`.
+- **`<timestamp>` is the full Unix time in milliseconds when the migration was created**, as `hasura migrate create` writes it (e.g. `1762641860280`). Never a rounded or hand-picked number such as `1790400000000`: those collide across branches and misstate the order the migrations were written in.
 - **Lowercase SQL keywords** and `if exists` / `if not exists` guards, matching recent siblings.
 - Write a real `down.sql`. Prefer **failing loudly** over destroying data:
 
