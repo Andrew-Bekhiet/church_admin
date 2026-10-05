@@ -9,8 +9,12 @@ part of 'person_type.dart';
 // QueryableFieldsGenerator
 // **************************************************************************
 
-class _PersonTypeFields {
-  _PersonTypeFields();
+class PersonTypeFields {
+  factory PersonTypeFields() => _instance;
+
+  PersonTypeFields._();
+
+  static final PersonTypeFields _instance = PersonTypeFields._();
 
   final FieldMetadata<PersonType> id = FieldMetadata<PersonType>(
     getValue: (obj) => obj is PersonType ? obj.id : null,
@@ -53,7 +57,7 @@ class _PersonTypeFields {
     parentType: PersonType,
     name: 'isHidden',
     label: 'مخفي',
-    isCodeOnly: false,
+    isCodeOnly: true,
     operators: {...BooleanOperator.values},
   );
 

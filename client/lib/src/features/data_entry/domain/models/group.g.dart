@@ -99,7 +99,7 @@ class _GroupFields {
         parentType: Group,
         name: 'validity',
         label: 'validity',
-        isCodeOnly: false,
+        isCodeOnly: true,
       );
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =

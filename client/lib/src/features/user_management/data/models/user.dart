@@ -13,7 +13,7 @@ class User extends ViewableWithIDAndImage
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
-  @QueryableField(label: 'uid')
+  @QueryableField(label: 'معرف المستخدم', codeOnly: true)
   final String uid;
 
   @override
@@ -22,7 +22,7 @@ class User extends ViewableWithIDAndImage
   final String name;
 
   @override
-  @QueryableField(label: 'email')
+  @QueryableField(label: 'البريد الإلكتروني', codeOnly: true)
   final String? email;
 
   @override
@@ -74,7 +74,7 @@ class User extends ViewableWithIDAndImage
 
   @override
   @JsonKey(includeToJson: false)
-  @QueryableField(label: 'currentUserCanManageThisUser')
+  @QueryableField(label: 'currentUserCanManageThisUser', codeOnly: true)
   final bool currentUserCanManageThisUser;
 
   @override
@@ -152,37 +152,6 @@ class UserFields extends _UserFields {
     operators: {...StringOperator.values},
     isCodeOnly: true,
     getValue: (obj) => obj is User ? obj.authId : null,
-  );
-
-  @override
-  FieldMetadata<String> get uid => FieldMetadata<String>(
-    parentType: User,
-    name: 'uid',
-    label: 'معرف المستخدم',
-    operators: {...StringOperator.values},
-    isCodeOnly: true,
-    getValue: (obj) => obj is User ? obj.uid : null,
-  );
-
-  @override
-  FieldMetadata<String> get email => FieldMetadata<String>(
-    parentType: User,
-    name: 'email',
-    label: 'البريد الإلكتروني',
-    operators: {...StringOperator.values},
-    isCodeOnly: true,
-    getValue: (obj) => obj is User ? obj.email : null,
-  );
-
-  @override
-  FieldMetadata<bool> get currentUserCanManageThisUser => FieldMetadata(
-    parentType: super.currentUserCanManageThisUser.parentType,
-    name: 'currentUserCanManageThisUser',
-    label: super.currentUserCanManageThisUser.label,
-    isOrderable: super.currentUserCanManageThisUser.isOrderable,
-    operators: super.currentUserCanManageThisUser.operators,
-    getValue: super.currentUserCanManageThisUser.getValue,
-    isCodeOnly: true,
   );
 
   FieldMetadata<AggregateData> get permissionsAggregate => FieldMetadata(

@@ -9,8 +9,13 @@ part of 'last_recorded_by_info.dart';
 // QueryableFieldsGenerator
 // **************************************************************************
 
-class _LastRecordedByInfoFields {
-  _LastRecordedByInfoFields();
+class LastRecordedByInfoFields {
+  factory LastRecordedByInfoFields() => _instance;
+
+  LastRecordedByInfoFields._();
+
+  static final LastRecordedByInfoFields _instance =
+      LastRecordedByInfoFields._();
 
   final FieldMetadata<DateTime> time = FieldMetadata<DateTime>(
     getValue: (obj) => obj is LastRecordedByInfo ? obj.time : null,
@@ -38,8 +43,9 @@ class _LastRecordedByInfoFields {
     getValue: (obj) => obj is LastRecordedByInfo ? obj.isFatherVisit : null,
     parentType: LastRecordedByInfo,
     name: 'isFatherVisit',
-    label: 'isFatherVisit',
+    label: 'زيارة أب كاهن',
     isCodeOnly: false,
+    isOrderable: false,
     operators: {...BooleanOperator.values},
   );
 
