@@ -16,8 +16,8 @@ insert_permissions:
           - _or:
               - &family_by_child_family_id_editable
                 _exists:
-                  _table: &permissions_view
-                    name: users_permissions_by_entity_id
+                  _table: &family_permissions_view
+                    name: users_permissions_on_family
                     schema: auth
                   _where:
                     _and:
@@ -34,7 +34,9 @@ insert_permissions:
                             - child_family_id
               - &all_data_editable
                 _exists:
-                  _table: *permissions_view
+                  _table: &any_permissions_view
+                    name: users_permissions_on_any
+                    schema: auth
                   _where:
                     _and:
                       - *requesting_user
@@ -47,7 +49,7 @@ insert_permissions:
           - _or:
               - &family_by_parent_family_id_editable
                 _exists:
-                  _table: *permissions_view
+                  _table: *family_permissions_view
                   _where:
                     _and:
                       - *requesting_user
@@ -73,7 +75,7 @@ select_permissions:
         _and:
           - _or:
               - _exists:
-                  _table: *permissions_view
+                  _table: *family_permissions_view
                   _where:
                     _and:
                       - *requesting_user
@@ -85,7 +87,7 @@ select_permissions:
                             - child_family_id
               - &all_data_readable
                 _exists:
-                  _table: *permissions_view
+                  _table: *any_permissions_view
                   _where:
                     _and:
                       - *requesting_user
@@ -95,7 +97,7 @@ select_permissions:
                           _is_null: true
           - _or:
               - _exists:
-                  _table: *permissions_view
+                  _table: *family_permissions_view
                   _where:
                     _and:
                       - *requesting_user

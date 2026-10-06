@@ -30,8 +30,8 @@ select_permissions:
       filter:
         _or:
           - _exists:
-              _table: &permissions_view
-                name: users_permissions_by_entity_id
+              _table:
+                name: users_permissions_on_person
                 schema: auth
               _where:
                 _and:
@@ -45,7 +45,9 @@ select_permissions:
                         - $
                         - person_id
           - _exists:
-              _table: *permissions_view
+              _table:
+                name: users_permissions_on_any
+                schema: auth
               _where:
                 _and:
                   - *requesting_user

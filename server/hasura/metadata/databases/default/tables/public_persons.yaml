@@ -324,8 +324,8 @@ select_permissions:
               _is_null: true
           - _or:
               - _exists:
-                  _table: &permissions_view
-                    name: users_permissions_by_entity_id
+                  _table: &person_permissions_view
+                    name: users_permissions_on_person
                     schema: auth
                   _where:
                     _and:
@@ -339,7 +339,9 @@ select_permissions:
                             - $
                             - id
               - _exists:
-                  _table: *permissions_view
+                  _table: &any_permissions_view
+                    name: users_permissions_on_any
+                    schema: auth
                   _where:
                     _and:
                       - *requesting_user
@@ -385,7 +387,7 @@ update_permissions:
         _or:
           - &person_by_id_editable
             _exists:
-              _table: *permissions_view
+              _table: *person_permissions_view
               _where:
                 _and:
                   - *requesting_user
@@ -399,7 +401,7 @@ update_permissions:
                         - id
           - &all_data_editable
             _exists:
-              _table: *permissions_view
+              _table: *any_permissions_view
               _where:
                 _and:
                   - *requesting_user

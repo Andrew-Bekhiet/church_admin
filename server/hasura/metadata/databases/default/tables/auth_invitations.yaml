@@ -15,8 +15,8 @@ insert_permissions:
         _or:
           - &any_user_editable
             _exists:
-              _table: &permissions_view
-                name: users_permissions_by_entity_id
+              _table:
+                name: users_permissions_on_any_user
                 schema: auth
               _where:
                 _and:
@@ -31,7 +31,9 @@ insert_permissions:
                       _is_null: true
           - &user_by_user_uid_editable
             _exists:
-              _table: *permissions_view
+              _table:
+                name: users_permissions_on_user
+                schema: auth
               _where:
                 _and:
                   - *requesting_user

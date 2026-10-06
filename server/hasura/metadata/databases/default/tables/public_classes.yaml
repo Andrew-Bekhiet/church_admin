@@ -86,8 +86,8 @@ insert_permissions:
                       _eq: writeAllData
           - &service_by_service_id_editable
             _exists:
-              _table: &permissions_view
-                name: users_permissions_by_entity_id
+              _table:
+                name: users_permissions_on_service
                 schema: auth
               _where:
                 _and:
@@ -130,7 +130,9 @@ select_permissions:
               _is_null: true
           - _or:
               - _exists:
-                  _table: *permissions_view
+                  _table: &class_permissions_view
+                    name: users_permissions_on_class
+                    schema: auth
                   _where:
                     _and:
                       - *requesting_user
@@ -141,7 +143,9 @@ select_permissions:
                             - $
                             - id
               - _exists:
-                  _table: *permissions_view
+                  _table: &any_permissions_view
+                    name: users_permissions_on_any
+                    schema: auth
                   _where:
                     _and:
                       - *requesting_user
@@ -164,7 +168,7 @@ update_permissions:
         _or:
           - &class_by_id_editable
             _exists:
-              _table: *permissions_view
+              _table: *class_permissions_view
               _where:
                 _and:
                   - *requesting_user
@@ -178,7 +182,7 @@ update_permissions:
                         - id
           - &all_data_editable
             _exists:
-              _table: *permissions_view
+              _table: *any_permissions_view
               _where:
                 _and:
                   - *requesting_user
