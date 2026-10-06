@@ -54,66 +54,66 @@ BEGIN
     INSERT INTO history.meetings (id, name, service_id, service_study_year, service_gender, group_id, audience, is_archived, color) VALUES
     (v_meeting_edad_khodam, 'اجتماع اعداد خدام', v_service_edad_khodam, null, null, null, 'personsAndServants', false, null);
     
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'Baby Class بنات', v_service_kg, -2, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'Baby Class ولاد', v_service_kg, -2, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'KG1 بنات', v_service_kg, -1, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'KG1 ولاد', v_service_kg, -1, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'KG2 بنات', v_service_kg, 0, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'KG2 ولاد ', v_service_kg, 0, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'سادسة بنات ', v_service_ebtedaey, 6, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'سادسة ولاد ', v_service_ebtedaey, 6, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'ثالثة إعدادي بنين', v_service_e3dady, 9, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'أولى ثانوي بنين', v_service_thanawy, 10, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'خامسة ولاد', v_service_ebtedaey, 5, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'رابعة بنات', v_service_ebtedaey, 4, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'ثالثة إعدادي بنات', v_service_e3dady, 9, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'ثالثة ثانوي بنين', v_service_thanawy, 12, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'ثانية بنات', v_service_ebtedaey, 2, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'ثالثه ثانوي بنات', v_service_thanawy, 12, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'خامسة  بنات', v_service_ebtedaey, 5, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'ثانية ثانوي بنات', v_service_thanawy, 11, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'رابعة ولاد', v_service_ebtedaey, 4, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'ثانية ولاد', v_service_ebtedaey, 2, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'أولى ثانوي بنات', v_service_thanawy, 10, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'ثالثة ولاد', v_service_ebtedaey, 3, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'أولى إعدادي بنين', v_service_e3dady, 7, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'أولى ولاد', v_service_ebtedaey, 1, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'ثانية ثانوي بنين ', v_service_thanawy, 11, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'ثانية إعدادي بنين', v_service_e3dady, 8, true, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'ثانية إعدادي بنات', v_service_e3dady, 8, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'أولى إعدادي بنات', v_service_e3dady, 7, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'ثالثة بنات', v_service_ebtedaey, 3, false, null, null, null, null, null);
-    INSERT INTO public.classes (id, name, service_id, service_study_year, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
-    (gen_random_uuid(), 'أولى بنات', v_service_ebtedaey, 1, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'Baby Class بنات', v_service_kg, -2, -2, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'Baby Class ولاد', v_service_kg, -2, -2, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'KG1 بنات', v_service_kg, -1, -1, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'KG1 ولاد', v_service_kg, -1, -1, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'KG2 بنات', v_service_kg, 0, 0, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'KG2 ولاد ', v_service_kg, 0, 0, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'سادسة بنات ', v_service_ebtedaey, 6, 6, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'سادسة ولاد ', v_service_ebtedaey, 6, 6, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'ثالثة إعدادي بنين', v_service_e3dady, 9, 9, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'أولى ثانوي بنين', v_service_thanawy, 10, 10, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'خامسة ولاد', v_service_ebtedaey, 5, 5, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'رابعة بنات', v_service_ebtedaey, 4, 4, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'ثالثة إعدادي بنات', v_service_e3dady, 9, 9, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'ثالثة ثانوي بنين', v_service_thanawy, 12, 12, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'ثانية بنات', v_service_ebtedaey, 2, 2, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'ثالثه ثانوي بنات', v_service_thanawy, 12, 12, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'خامسة  بنات', v_service_ebtedaey, 5, 5, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'ثانية ثانوي بنات', v_service_thanawy, 11, 11, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'رابعة ولاد', v_service_ebtedaey, 4, 4, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'ثانية ولاد', v_service_ebtedaey, 2, 2, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'أولى ثانوي بنات', v_service_thanawy, 10, 10, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'ثالثة ولاد', v_service_ebtedaey, 3, 3, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'أولى إعدادي بنين', v_service_e3dady, 7, 7, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'أولى ولاد', v_service_ebtedaey, 1, 1, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'ثانية ثانوي بنين ', v_service_thanawy, 11, 11, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'ثانية إعدادي بنين', v_service_e3dady, 8, 8, true, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'ثانية إعدادي بنات', v_service_e3dady, 8, 8, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'أولى إعدادي بنات', v_service_e3dady, 7, 7, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'ثالثة بنات', v_service_ebtedaey, 3, 3, false, null, null, null, null, null);
+    INSERT INTO public.classes (id, name, service_id, service_study_year, service_study_year_to, service_gender, color, photo_updated_at, blurhash, deleted_at, deleted_by) VALUES
+    (gen_random_uuid(), 'أولى بنات', v_service_ebtedaey, 1, 1, false, null, null, null, null, null);
 
     UPDATE public.services SET default_meeting_id = v_meeting_edad_khodam WHERE id = v_service_edad_khodam;
     UPDATE public.services SET default_meeting_id = v_meeting_shabab WHERE id = v_service_gam3a_wa_khrigeen;

@@ -94,53 +94,41 @@ update_permissions:
         - line
         - name
       filter:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: street
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - id
-                  - _and:
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+        _or:
+          - &street_by_id_editable
+            _exists:
+              _table: &permissions_view
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - &requesting_user
+                    uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: street
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - id
+          - &all_data_editable
+            _exists:
+              _table: *permissions_view
+              _where:
+                _and:
+                  - *requesting_user
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
       check:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: street
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - id
-                  - _and:
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+        _or:
+          - *street_by_id_editable
+          - *all_data_editable
 delete_permissions:
   - role: user
     permission:

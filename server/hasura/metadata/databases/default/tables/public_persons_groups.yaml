@@ -13,52 +13,53 @@ insert_permissions:
     permission:
       check:
         _and:
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - allow_edit:
-                      _eq: true
-                  - _or:
-                      - _and:
-                          - entity_type:
-                              _eq: person
-                          - entity_id:
-                              _ceq:
-                                - $
-                                - person_id
-                      - _and:
-                          - entity_type:
-                              _eq: any
-                          - entity_id:
-                              _is_null: true
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - allow_edit:
-                      _eq: true
-                  - _or:
-                      - _and:
-                          - entity_type:
-                              _eq: group
-                          - entity_id:
-                              _ceq:
-                                - $
-                                - group_id
-                      - _and:
-                          - entity_type:
-                              _eq: any
-                          - entity_id:
-                              _is_null: true
+          - _or:
+              - &person_by_person_id_editable
+                _exists:
+                  _table: &permissions_view
+                    name: users_permissions_by_entity_id
+                    schema: auth
+                  _where:
+                    _and:
+                      - &requesting_user
+                        uid:
+                          _eq: X-Hasura-User-Id
+                      - allow_edit:
+                          _eq: true
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - person_id
+              - &all_data_editable
+                _exists:
+                  _table: *permissions_view
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - allow_edit:
+                          _eq: true
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
+          - _or:
+              - &group_by_group_id_editable
+                _exists:
+                  _table: *permissions_view
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - allow_edit:
+                          _eq: true
+                      - entity_type:
+                          _eq: group
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - group_id
+              - *all_data_editable
       columns:
         - group_id
         - person_id
@@ -70,48 +71,41 @@ select_permissions:
         - person_id
       filter:
         _and:
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - _or:
-                      - _and:
-                          - entity_type:
-                              _eq: person
-                          - entity_id:
-                              _ceq:
-                                - $
-                                - person_id
-                      - _and:
-                          - entity_type:
-                              _eq: any
-                          - entity_id:
-                              _is_null: true
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - _or:
-                      - _and:
-                          - entity_type:
-                              _eq: group
-                          - entity_id:
-                              _ceq:
-                                - $
-                                - group_id
-                      - _and:
-                          - entity_type:
-                              _eq: any
-                          - entity_id:
-                              _is_null: true
+          - _or:
+              - _exists:
+                  _table: *permissions_view
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - person_id
+              - &all_data_readable
+                _exists:
+                  _table: *permissions_view
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
+          - _or:
+              - _exists:
+                  _table: *permissions_view
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - entity_type:
+                          _eq: group
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - group_id
+              - *all_data_readable
       limit: 100
 update_permissions:
   - role: user
@@ -125,49 +119,9 @@ delete_permissions:
     permission:
       filter:
         _and:
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - allow_edit:
-                      _eq: true
-                  - _or:
-                      - _and:
-                          - entity_type:
-                              _eq: person
-                          - entity_id:
-                              _ceq:
-                                - $
-                                - person_id
-                      - _and:
-                          - entity_type:
-                              _eq: any
-                          - entity_id:
-                              _is_null: true
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - allow_edit:
-                      _eq: true
-                  - _or:
-                      - _and:
-                          - entity_type:
-                              _eq: group
-                          - entity_id:
-                              _ceq:
-                                - $
-                                - group_id
-                      - _and:
-                          - entity_type:
-                              _eq: any
-                          - entity_id:
-                              _is_null: true
+          - _or:
+              - *person_by_person_id_editable
+              - *all_data_editable
+          - _or:
+              - *group_by_group_id_editable
+              - *all_data_editable
