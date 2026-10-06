@@ -170,12 +170,13 @@ select_permissions:
           - _or:
               - _or:
                   - _exists:
-                      _table:
+                      _table: &permissions_view
                         name: users_permissions_by_entity_id
                         schema: auth
                       _where:
                         _and:
-                          - uid:
+                          - &requesting_user
+                            uid:
                               _eq: X-Hasura-User-Id
                           - entity_type:
                               _eq: family
@@ -184,13 +185,10 @@ select_permissions:
                                 - $
                                 - id
                   - _exists:
-                      _table:
-                        name: users_permissions_by_entity_id
-                        schema: auth
+                      _table: *permissions_view
                       _where:
                         _and:
-                          - uid:
-                              _eq: X-Hasura-User-Id
+                          - *requesting_user
                           - entity_type:
                               _eq: any
                           - entity_id:
@@ -209,14 +207,12 @@ update_permissions:
         - status
       filter:
         _or:
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
+          - &family_by_id_editable
+            _exists:
+              _table: *permissions_view
               _where:
                 _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
+                  - *requesting_user
                   - allow_edit:
                       _eq: true
                   - entity_type:
@@ -225,14 +221,12 @@ update_permissions:
                       _ceq:
                         - $
                         - id
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
+          - &all_data_editable
+            _exists:
+              _table: *permissions_view
               _where:
                 _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
+                  - *requesting_user
                   - allow_edit:
                       _eq: true
                   - entity_type:
@@ -241,36 +235,8 @@ update_permissions:
                       _is_null: true
       check:
         _or:
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - allow_edit:
-                      _eq: true
-                  - entity_type:
-                      _eq: family
-                  - entity_id:
-                      _ceq:
-                        - $
-                        - id
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - allow_edit:
-                      _eq: true
-                  - entity_type:
-                      _eq: any
-                  - entity_id:
-                      _is_null: true
+          - *family_by_id_editable
+          - *all_data_editable
 delete_permissions:
   - role: user
     permission:

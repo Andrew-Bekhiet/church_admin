@@ -14,13 +14,15 @@ insert_permissions:
       check:
         _and:
           - _or:
-              - _exists:
-                  _table:
+              - &area_by_area_id_editable
+                _exists:
+                  _table: &permissions_view
                     name: users_permissions_by_entity_id
                     schema: auth
                   _where:
                     _and:
-                      - uid:
+                      - &requesting_user
+                        uid:
                           _eq: X-Hasura-User-Id
                       - allow_edit:
                           _eq: true
@@ -30,14 +32,12 @@ insert_permissions:
                           _ceq:
                             - $
                             - area_id
-              - _exists:
-                  _table:
-                    name: users_permissions_by_entity_id
-                    schema: auth
+              - &all_data_editable
+                _exists:
+                  _table: *permissions_view
                   _where:
                     _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
+                      - *requesting_user
                       - allow_edit:
                           _eq: true
                       - entity_type:
@@ -45,14 +45,12 @@ insert_permissions:
                       - entity_id:
                           _is_null: true
           - _or:
-              - _exists:
-                  _table:
-                    name: users_permissions_by_entity_id
-                    schema: auth
+              - &street_by_street_id_editable
+                _exists:
+                  _table: *permissions_view
                   _where:
                     _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
+                      - *requesting_user
                       - allow_edit:
                           _eq: true
                       - entity_type:
@@ -61,20 +59,7 @@ insert_permissions:
                           _ceq:
                             - $
                             - street_id
-              - _exists:
-                  _table:
-                    name: users_permissions_by_entity_id
-                    schema: auth
-                  _where:
-                    _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - allow_edit:
-                          _eq: true
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+              - *all_data_editable
       columns:
         - area_id
         - street_id
@@ -98,64 +83,8 @@ delete_permissions:
       filter:
         _and:
           - _or:
-              - _exists:
-                  _table:
-                    name: users_permissions_by_entity_id
-                    schema: auth
-                  _where:
-                    _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - allow_edit:
-                          _eq: true
-                      - entity_type:
-                          _eq: area
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - area_id
-              - _exists:
-                  _table:
-                    name: users_permissions_by_entity_id
-                    schema: auth
-                  _where:
-                    _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - allow_edit:
-                          _eq: true
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+              - *area_by_area_id_editable
+              - *all_data_editable
           - _or:
-              - _exists:
-                  _table:
-                    name: users_permissions_by_entity_id
-                    schema: auth
-                  _where:
-                    _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - allow_edit:
-                          _eq: true
-                      - entity_type:
-                          _eq: street
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - street_id
-              - _exists:
-                  _table:
-                    name: users_permissions_by_entity_id
-                    schema: auth
-                  _where:
-                    _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - allow_edit:
-                          _eq: true
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+              - *street_by_street_id_editable
+              - *all_data_editable

@@ -13,13 +13,15 @@ insert_permissions:
     permission:
       check: &can_edit_person
         _or:
-          - _exists:
-              _table:
+          - &person_by_person_id_editable
+            _exists:
+              _table: &permissions_view
                 name: users_permissions_by_entity_id
                 schema: auth
               _where:
                 _and:
-                  - uid:
+                  - &requesting_user
+                    uid:
                       _eq: X-Hasura-User-Id
                   - allow_edit:
                       _eq: true
@@ -29,14 +31,12 @@ insert_permissions:
                       _ceq:
                         - $
                         - person_id
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
+          - &all_data_editable
+            _exists:
+              _table: *permissions_view
               _where:
                 _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
+                  - *requesting_user
                   - allow_edit:
                       _eq: true
                   - entity_type:
@@ -55,13 +55,10 @@ select_permissions:
       filter:
         _or:
           - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
+              _table: *permissions_view
               _where:
                 _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
+                  - *requesting_user
                   - entity_type:
                       _eq: person
                   - entity_id:
@@ -69,13 +66,10 @@ select_permissions:
                         - $
                         - person_id
           - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
+              _table: *permissions_view
               _where:
                 _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
+                  - *requesting_user
                   - entity_type:
                       _eq: any
                   - entity_id:
