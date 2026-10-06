@@ -88,7 +88,7 @@ array_relationships:
           id: entity_id
         insertion_order: null
         remote_table:
-          name: users_permissions_by_entity_id
+          name: users_permissions_on_family
           schema: auth
   - name: persons
     using:
