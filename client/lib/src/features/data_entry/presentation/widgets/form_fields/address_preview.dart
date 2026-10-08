@@ -58,7 +58,6 @@ class AddressPreview extends StatelessWidget {
                     ? textTheme.bodyLarge
                     : textTheme.bodyMedium?.copyWith(
                         color: colors.onSurfaceVariant,
-                        fontStyle: FontStyle.italic,
                       ),
               ),
             ],
