@@ -58,8 +58,8 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
       );
 
   late final _textStyleTween = TextStyleTween(
-    begin: Theme.of(context).textTheme.headlineMedium!.copyWith(
-      color: Theme.of(context).textTheme.titleLarge!.color,
+    begin: Theme.of(context).textTheme.titleLarge!.copyWith(
+      fontSize: Theme.of(context).textTheme.headlineMedium!.fontSize,
     ),
     end: Theme.of(context).textTheme.titleLarge!.copyWith(
       color: widget.foregroundColor,

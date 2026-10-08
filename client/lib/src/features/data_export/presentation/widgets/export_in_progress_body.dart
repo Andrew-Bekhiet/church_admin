@@ -90,7 +90,6 @@ class _ExportInProgressBodyState extends State<ExportInProgressBody> {
                         color: colorScheme.onSurfaceVariant.withValues(
                           alpha: 0.8,
                         ),
-                        fontStyle: FontStyle.italic,
                       ),
                       textAlign: TextAlign.center,
                     ),

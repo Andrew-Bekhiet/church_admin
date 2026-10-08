@@ -185,7 +185,7 @@ class HomeScreenSummary extends StatelessWidget {
               scrollable: true,
               title: Text(title),
               content: Text(message, textAlign: TextAlign.center),
-              contentTextStyle: Theme.of(context).textTheme.titleLarge,
+              contentTextStyle: Theme.of(context).textTheme.displaySmall,
               actionsAlignment: MainAxisAlignment.center,
               actions: [
                 FilledButton(

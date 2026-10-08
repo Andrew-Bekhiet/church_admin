@@ -117,9 +117,13 @@ class DataGeomapState extends State<DataGeomap> {
           ),
           children: [
             TileLayer(
-              tileProvider: globalProviderContainer.read(
-                flutterMapTileCacheProvider,
+              tileProvider: NetworkTileProvider(
+                cachingProvider: BuiltInMapCachingProvider.getOrCreateInstance(
+                  overrideFreshAge: const Duration(days: 30),
+                ),
               ),
+              evictErrorTileStrategy:
+                  EvictErrorTileStrategy.notVisibleRespectMargin,
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName:
                   '${packageName.isEmpty ? 'com.AndroidQuartz.church_admin' : packageName}'

@@ -11,89 +11,6 @@ class ThemingService with WidgetsBindingObserver {
   static ThemingService get I =>
       globalProviderContainer.read(themingServiceProvider);
 
-  static TextTheme textThemeWith3Fonts(
-    TextTheme base, {
-    required String displayAndHeadline,
-    required String titles,
-    required String others,
-  }) {
-    return base.copyWith(
-      displayLarge: base.displayLarge?.copyWith(
-        fontFamily: displayAndHeadline,
-        fontWeight: FontWeight.w700,
-      ),
-      displayMedium: base.displayMedium?.copyWith(
-        fontFamily: displayAndHeadline,
-        fontWeight: FontWeight.w700,
-      ),
-      displaySmall: base.displaySmall?.copyWith(
-        fontFamily: displayAndHeadline,
-        fontWeight: FontWeight.w700,
-      ),
-      headlineLarge: base.headlineLarge?.copyWith(
-        fontFamily: displayAndHeadline,
-        fontWeight: FontWeight.w700,
-      ),
-      headlineMedium: base.headlineMedium?.copyWith(
-        fontFamily: displayAndHeadline,
-        fontWeight: FontWeight.w700,
-      ),
-      headlineSmall: base.headlineSmall?.copyWith(
-        fontFamily: displayAndHeadline,
-        fontWeight: FontWeight.w700,
-      ),
-      titleLarge: base.titleLarge?.copyWith(fontFamily: titles),
-      titleMedium: base.titleMedium?.copyWith(fontFamily: titles),
-      titleSmall: base.titleSmall?.copyWith(fontFamily: titles),
-      bodyLarge: base.bodyLarge?.copyWith(fontFamily: titles),
-      bodyMedium: base.bodyMedium?.copyWith(fontFamily: others),
-      bodySmall: base.bodySmall?.copyWith(fontFamily: others),
-      labelLarge: base.labelLarge?.copyWith(fontFamily: others),
-      labelMedium: base.labelMedium?.copyWith(fontFamily: others),
-      labelSmall: base.labelSmall?.copyWith(fontFamily: others),
-    );
-  }
-
-  static Typography typographyWith3Fonts(
-    Typography base, {
-    required String displayAndHeadline,
-    required String titles,
-    required String others,
-  }) {
-    return Typography(
-      englishLike: textThemeWith3Fonts(
-        base.englishLike,
-        displayAndHeadline: displayAndHeadline,
-        titles: titles,
-        others: others,
-      ),
-      dense: textThemeWith3Fonts(
-        base.dense,
-        displayAndHeadline: displayAndHeadline,
-        titles: titles,
-        others: others,
-      ),
-      tall: textThemeWith3Fonts(
-        base.tall,
-        displayAndHeadline: displayAndHeadline,
-        titles: titles,
-        others: others,
-      ),
-      white: textThemeWith3Fonts(
-        base.white,
-        displayAndHeadline: displayAndHeadline,
-        titles: titles,
-        others: others,
-      ),
-      black: textThemeWith3Fonts(
-        base.black,
-        displayAndHeadline: displayAndHeadline,
-        titles: titles,
-        others: others,
-      ),
-    );
-  }
-
   static ThemeData getDefault({
     Color? seedOverride,
     bool? isDarkOverride,
@@ -210,18 +127,14 @@ class ThemingService with WidgetsBindingObserver {
       variant: FlexSchemeVariant.fidelity,
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
       cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true),
+      textTheme: AppTypography.defaultRoles,
     );
 
     final colorScheme = rawThemeData.colorScheme;
 
-    final Typography typography = typographyWith3Fonts(
-      Typography.material2021(
-        platform: defaultTargetPlatform,
-        colorScheme: colorScheme,
-      ),
-      displayAndHeadline: 'Hacen Algeria',
-      titles: 'Cairo',
-      others: 'Inter',
+    final Typography typography = AppTypography.build(
+      platform: defaultTargetPlatform,
+      colorScheme: colorScheme,
     );
 
     final ThemeData themeData = ThemeData.localize(

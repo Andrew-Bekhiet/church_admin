@@ -195,8 +195,8 @@ class _LoginTitle extends StatelessWidget {
         child: Center(
           child: Text(
             'كنيسة السيدة العذراء مريم',
-            style: theme.textTheme.headlineMedium?.copyWith(
-              color: theme.textTheme.headlineMedium?.color?.withValues(
+            style: theme.textTheme.displayMedium?.copyWith(
+              color: theme.textTheme.displayMedium?.color?.withValues(
                 alpha: 1,
               ),
             ),
