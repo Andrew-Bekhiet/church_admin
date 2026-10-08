@@ -13,6 +13,7 @@ abstract final class AppTypography {
       height: 1.5,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     displayMedium: TextStyle(
       fontFamily: elMessiri,
@@ -21,6 +22,7 @@ abstract final class AppTypography {
       height: 1.5,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     displaySmall: TextStyle(
       fontFamily: amiri,
@@ -29,6 +31,7 @@ abstract final class AppTypography {
       height: 2,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     headlineLarge: TextStyle(
       fontFamily: elMessiri,
@@ -37,6 +40,7 @@ abstract final class AppTypography {
       height: 1.45,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     headlineMedium: TextStyle(
       fontFamily: elMessiri,
@@ -45,6 +49,7 @@ abstract final class AppTypography {
       height: 1.45,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     headlineSmall: TextStyle(
       fontFamily: cairo,
@@ -53,6 +58,7 @@ abstract final class AppTypography {
       height: 1.4,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     titleLarge: TextStyle(
       fontFamily: cairo,
@@ -61,6 +67,7 @@ abstract final class AppTypography {
       height: 1.4,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     titleMedium: TextStyle(
       fontFamily: cairo,
@@ -69,6 +76,7 @@ abstract final class AppTypography {
       height: 1.5,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     titleSmall: TextStyle(
       fontFamily: cairo,
@@ -77,6 +85,7 @@ abstract final class AppTypography {
       height: 1.45,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     bodyLarge: TextStyle(
       fontFamily: cairo,
@@ -85,6 +94,7 @@ abstract final class AppTypography {
       height: 1.5,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     bodyMedium: TextStyle(
       fontFamily: cairo,
@@ -93,6 +103,7 @@ abstract final class AppTypography {
       height: 1.5,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     bodySmall: TextStyle(
       fontFamily: cairo,
@@ -101,6 +112,7 @@ abstract final class AppTypography {
       height: 1.5,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     labelLarge: TextStyle(
       fontFamily: cairo,
@@ -109,6 +121,7 @@ abstract final class AppTypography {
       height: 1.4,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     labelMedium: TextStyle(
       fontFamily: cairo,
@@ -117,6 +130,7 @@ abstract final class AppTypography {
       height: 1.4,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
     labelSmall: TextStyle(
       fontFamily: cairo,
@@ -125,6 +139,7 @@ abstract final class AppTypography {
       height: 1.45,
       letterSpacing: 0,
       leadingDistribution: TextLeadingDistribution.even,
+      textBaseline: TextBaseline.alphabetic,
     ),
   );
 
@@ -157,6 +172,7 @@ abstract final class AppTypography {
             height: role.height,
             letterSpacing: role.letterSpacing,
             leadingDistribution: role.leadingDistribution,
+            textBaseline: role.textBaseline,
           );
 
     return TextTheme(
