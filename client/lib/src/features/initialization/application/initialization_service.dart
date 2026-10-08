@@ -24,7 +24,7 @@ class InitializationService {
       kEmulatorsHost: String.fromEnvironment('FIREBASE_EMULATORS_HOST'),
     ),
     FeatureFlagsInit(),
-    FMTCInit(),
+    LegacyTileCacheDeletionInit(),
     IntlLocaleMessagesInit(),
     AndroidAlarmManagerInit(),
     FlutterLocalNotificationsInit(),
