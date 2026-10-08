@@ -12,6 +12,7 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(
     widgetsBinding: WidgetsFlutterBinding.ensureInitialized(),
   );
+  FontLicenses.register();
 
   try {
     await InitializationService.I.initialize();

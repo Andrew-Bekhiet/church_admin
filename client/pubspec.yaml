@@ -161,20 +161,17 @@ patrol:
 flutter:
   uses-material-design: true
   fonts:
-    - family: Hacen Algeria
-      fonts:
-        - asset: assets/fonts/Hacen-Algeria-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Hacen-Algeria-Bd-Regular.ttf
-          weight: 500
-        - asset: assets/fonts/Hacen-Algeria-Hd-Regular.ttf
-          weight: 700
     - family: Cairo
       fonts:
         - asset: assets/fonts/Cairo-VariableFont.ttf
-    - family: Inter
+    - family: El Messiri
       fonts:
-        - asset: assets/fonts/Inter-VariableFont.ttf
+        - asset: assets/fonts/ElMessiri-VariableFont.ttf
+    - family: Amiri
+      fonts:
+        - asset: assets/fonts/Amiri-Regular.ttf
+        - asset: assets/fonts/Amiri-Bold.ttf
+          weight: 700
   assets:
     - assets/logo.png
     - assets/branding.png
@@ -184,6 +181,9 @@ flutter:
     - assets/whatsapp.png
     - assets/church-data.png
     - assets/images/
+    - assets/fonts/OFL-Cairo.txt
+    - assets/fonts/OFL-ElMessiri.txt
+    - assets/fonts/OFL-Amiri.txt
     - shorebird.yaml
 
 flutter_launcher_icons:

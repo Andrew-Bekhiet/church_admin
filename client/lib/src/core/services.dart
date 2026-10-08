@@ -1,10 +1,12 @@
 export 'services/about_app_service.dart';
+export 'services/app_typography.dart';
 export 'services/connectivity_service.dart';
 export 'services/current_platform_service.dart';
 export 'services/database.dart';
 export 'services/database_service.dart';
 export 'services/device_info_service.dart';
 export 'services/encryption.dart';
+export 'services/font_licenses.dart';
 export 'services/functions_service.dart';
 export 'services/launcher_service.dart';
 export 'services/router.dart';
