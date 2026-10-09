@@ -216,33 +216,71 @@ select
     r.color,
     r.photo_updated_at,
     r.blurhash,
-    array(
-        select own.phone::text
-        from public.contacts as own
-        where own.person_id = r.person_id
+    coalesce(
+        (
+            select
+                array_agg(
+                    best_source.phone
+                    order by
+                        best_source.source_rank asc,
+                        best_source.created_at asc,
+                        best_source.id asc
+                )
+            from (
+                select distinct on (candidate.phone)
+                    candidate.phone,
+                    candidate.source_rank,
+                    candidate.created_at,
+                    candidate.id
+                from (
+                    select
+                        own.phone::text as phone,
+                        case when own.is_main_phone then 0 else 1 end
+                            as source_rank,
+                        own.created_at,
+                        own.id
+                    from public.contacts as own
+                    where own.person_id = r.person_id
 
-        union
+                    union all
 
-        select unclaimed.phone::text
-        from public.contacts as unclaimed
-        inner join public.person_types as unclaimed_type
-            on unclaimed.person_type_id = unclaimed_type.id
-        where
-            unclaimed.family_id = roster_person.family_id
-            and unclaimed_type.is_family_admin
+                    select
+                        unclaimed.phone::text as phone,
+                        2 as source_rank,
+                        unclaimed.created_at,
+                        unclaimed.id
+                    from public.contacts as unclaimed
+                    inner join public.person_types as unclaimed_type
+                        on unclaimed.person_type_id = unclaimed_type.id
+                    where
+                        unclaimed.family_id = roster_person.family_id
+                        and unclaimed_type.is_family_admin
 
-        union
+                    union all
 
-        select claimed.phone::text
-        from public.persons as family_admin
-        inner join public.person_types as family_admin_type
-            on family_admin.person_type_id = family_admin_type.id
-        inner join public.contacts as claimed
-            on family_admin.id = claimed.person_id
-        where
-            family_admin.family_id = roster_person.family_id
-            and family_admin.deleted_at is null
-            and family_admin_type.is_family_admin
+                    select
+                        claimed.phone::text as phone,
+                        2 as source_rank,
+                        claimed.created_at,
+                        claimed.id
+                    from public.persons as family_admin
+                    inner join public.person_types as family_admin_type
+                        on family_admin.person_type_id = family_admin_type.id
+                    inner join public.contacts as claimed
+                        on family_admin.id = claimed.person_id
+                    where
+                        family_admin.family_id = roster_person.family_id
+                        and family_admin.deleted_at is null
+                        and family_admin_type.is_family_admin
+                ) as candidate
+                order by
+                    candidate.phone asc,
+                    candidate.source_rank asc,
+                    candidate.created_at asc,
+                    candidate.id asc
+            ) as best_source
+        ),
+        '{}'::text []
     ) as phones
 from roster as r
 left join public.study_years as sy on r.study_year_id = sy."order"
