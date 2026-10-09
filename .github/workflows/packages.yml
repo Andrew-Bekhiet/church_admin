@@ -21,7 +21,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  find-tested-packages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    outputs:
+      packages: ${{ steps.find.outputs.packages }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: packages
+
+      - name: List packages that have a test directory
+        id: find
+        run: |
+          packages=$(find packages -mindepth 2 -maxdepth 2 -type d -name test | cut -d/ -f2 | sort | jq -Rnc '[inputs]')
+          echo "packages=$packages" >> "$GITHUB_OUTPUT"
+
   test:
+    needs: find-tested-packages
+    if: needs.find-tested-packages.outputs.packages != '[]'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -29,7 +52,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package: [church_admin_annotations, church_admin_generator]
+        package: ${{ fromJSON(needs.find-tested-packages.outputs.packages) }}
 
     defaults:
       run:
@@ -53,5 +76,4 @@ jobs:
         run: dart pub get
 
       - name: Run tests
-        if: hashFiles(format('packages/{0}/test/**', matrix.package)) != ''
         run: dart test
