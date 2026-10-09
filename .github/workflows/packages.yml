@@ -39,6 +39,7 @@ jobs:
       - name: List packages that have a test directory
         id: find
         run: |
+          set -o pipefail
           packages=$(find packages -mindepth 2 -maxdepth 2 -type d -name test | cut -d/ -f2 | sort | jq -Rnc '[inputs]')
           echo "packages=$packages" >> "$GITHUB_OUTPUT"
 
