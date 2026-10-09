@@ -10,7 +10,12 @@ part of 'street.dart';
 // **************************************************************************
 
 class StreetFields {
+  factory StreetFields() => _instance;
+
+  StreetFields._();
+
   static final StreetFields _instance = StreetFields._();
+
   final FieldMetadata<Street> id = FieldMetadata<Street>(
     getValue: (obj) => obj is Street ? obj.id : null,
     parentType: Street,
@@ -122,6 +127,7 @@ class StreetFields {
     lastVisit,
     lastEdit,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
@@ -132,8 +138,6 @@ class StreetFields {
     'lastVisit': lastVisit,
     'lastEdit': lastEdit,
   };
-  factory StreetFields() => _instance;
-  StreetFields._();
 }
 
 // **************************************************************************

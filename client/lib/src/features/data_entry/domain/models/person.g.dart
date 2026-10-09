@@ -10,6 +10,8 @@ part of 'person.dart';
 // **************************************************************************
 
 class _PersonFields {
+  _PersonFields();
+
   final FieldMetadata<Person> id = FieldMetadata<Person>(
     getValue: (obj) => obj is Person ? obj.id : null,
     parentType: Person,
@@ -718,6 +720,7 @@ class _PersonFields {
     editHistoryAggregate,
     geolocation,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
@@ -773,8 +776,6 @@ class _PersonFields {
     'editHistoryAggregate': editHistoryAggregate,
     'geolocation': geolocation,
   };
-
-  _PersonFields();
 }
 
 // **************************************************************************

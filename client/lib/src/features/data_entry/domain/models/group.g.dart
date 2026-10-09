@@ -10,6 +10,8 @@ part of 'group.dart';
 // **************************************************************************
 
 class _GroupFields {
+  _GroupFields();
+
   final FieldMetadata<Group> id = FieldMetadata<Group>(
     getValue: (obj) => obj is Group ? obj.id : null,
     parentType: Group,
@@ -141,6 +143,7 @@ class _GroupFields {
     lastEdit,
     adminUsers,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
@@ -153,8 +156,6 @@ class _GroupFields {
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
   };
-
-  _GroupFields();
 }
 
 // **************************************************************************

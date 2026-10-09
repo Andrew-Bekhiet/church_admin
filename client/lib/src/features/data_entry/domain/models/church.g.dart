@@ -10,7 +10,12 @@ part of 'church.dart';
 // **************************************************************************
 
 class ChurchFields {
+  factory ChurchFields() => _instance;
+
+  ChurchFields._();
+
   static final ChurchFields _instance = ChurchFields._();
+
   final FieldMetadata<Church> id = FieldMetadata<Church>(
     getValue: (obj) => obj is Church ? obj.id : null,
     parentType: Church,
@@ -39,13 +44,12 @@ class ChurchFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [id, name, isHidden];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
     'isHidden': isHidden,
   };
-  factory ChurchFields() => _instance;
-  ChurchFields._();
 }
 
 // **************************************************************************

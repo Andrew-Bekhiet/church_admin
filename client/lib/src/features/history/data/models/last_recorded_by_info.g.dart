@@ -10,6 +10,8 @@ part of 'last_recorded_by_info.dart';
 // **************************************************************************
 
 class _LastRecordedByInfoFields {
+  _LastRecordedByInfoFields();
+
   final FieldMetadata<DateTime> time = FieldMetadata<DateTime>(
     getValue: (obj) => obj is LastRecordedByInfo ? obj.time : null,
     parentType: LastRecordedByInfo,
@@ -46,13 +48,12 @@ class _LastRecordedByInfoFields {
     user,
     isFatherVisit,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'time': time,
     'user': user,
     'isFatherVisit': isFatherVisit,
   };
-
-  _LastRecordedByInfoFields();
 }
 
 // **************************************************************************

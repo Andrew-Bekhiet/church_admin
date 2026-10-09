@@ -10,6 +10,8 @@ part of 'family.dart';
 // **************************************************************************
 
 class _FamilyFields {
+  _FamilyFields();
+
   final FieldMetadata<Family> id = FieldMetadata<Family>(
     getValue: (obj) => obj is Family ? obj.id : null,
     parentType: Family,
@@ -230,6 +232,7 @@ class _FamilyFields {
     lastFatherVisit,
     geolocation,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
@@ -248,8 +251,6 @@ class _FamilyFields {
     'lastFatherVisit': lastFatherVisit,
     'geolocation': geolocation,
   };
-
-  _FamilyFields();
 }
 
 // **************************************************************************

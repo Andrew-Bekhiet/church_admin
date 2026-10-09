@@ -10,7 +10,12 @@ part of 'qualification.dart';
 // **************************************************************************
 
 class QualificationFields {
+  factory QualificationFields() => _instance;
+
+  QualificationFields._();
+
   static final QualificationFields _instance = QualificationFields._();
+
   final FieldMetadata<Qualification> id = FieldMetadata<Qualification>(
     getValue: (obj) => obj is Qualification ? obj.id : null,
     parentType: Qualification,
@@ -30,12 +35,11 @@ class QualificationFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [id, name];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
   };
-  factory QualificationFields() => _instance;
-  QualificationFields._();
 }
 
 // **************************************************************************

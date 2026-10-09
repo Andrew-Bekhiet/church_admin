@@ -10,7 +10,12 @@ part of 'school.dart';
 // **************************************************************************
 
 class SchoolFields {
+  factory SchoolFields() => _instance;
+
+  SchoolFields._();
+
   static final SchoolFields _instance = SchoolFields._();
+
   final FieldMetadata<School> id = FieldMetadata<School>(
     getValue: (obj) => obj is School ? obj.id : null,
     parentType: School,
@@ -30,12 +35,11 @@ class SchoolFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [id, name];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
   };
-  factory SchoolFields() => _instance;
-  SchoolFields._();
 }
 
 // **************************************************************************

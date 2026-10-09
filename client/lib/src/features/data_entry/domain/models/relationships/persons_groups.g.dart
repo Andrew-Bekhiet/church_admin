@@ -10,7 +10,12 @@ part of 'persons_groups.dart';
 // **************************************************************************
 
 class PersonsGroupsFields {
+  factory PersonsGroupsFields() => _instance;
+
+  PersonsGroupsFields._();
+
   static final PersonsGroupsFields _instance = PersonsGroupsFields._();
+
   final FieldMetadata<Person> person = FieldMetadata<Person>(
     getValue: (obj) => obj is PersonsGroups ? obj.person : null,
     parentType: PersonsGroups,
@@ -53,14 +58,13 @@ class PersonsGroupsFields {
     personId,
     groupId,
   ];
+
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'person': person,
     'group': group,
     'personId': personId,
     'groupId': groupId,
   };
-  factory PersonsGroupsFields() => _instance;
-  PersonsGroupsFields._();
 }
 
 // **************************************************************************
