@@ -75,5 +75,9 @@ void main() {
     test('a foreign number is shown in international format', () {
       expect(unit.toDisplay('+966501234567'), '+966501234567');
     });
+
+    test('a number with an unknown country code is shown as stored', () {
+      expect(unit.toDisplay('+9991234567'), '+9991234567');
+    });
   });
 }
