@@ -32,7 +32,6 @@
 - "!include public_contacts.yaml"
 - "!include public_districts.yaml"
 - "!include public_families.yaml"
-- "!include public_families_admins_phones.yaml"
 - "!include public_families_families.yaml"
 - "!include public_fathers.yaml"
 - "!include public_groups.yaml"

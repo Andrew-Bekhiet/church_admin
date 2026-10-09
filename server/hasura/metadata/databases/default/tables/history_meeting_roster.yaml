@@ -40,7 +40,6 @@ select_permissions:
         - person_id
         - as_servant
         - name
-        - main_phone
         - gender
         - study_year_id
         - study_year_name

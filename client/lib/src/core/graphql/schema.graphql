@@ -2125,7 +2125,6 @@ type Families {
   deceasedSpouseName: String
   editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
   editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
-  familyAdminsPhones: FamiliesAdminsPhones
   id: uuid!
   lastEdit: HistoryLatestEdits
   lastFatherVisit: HistoryLatestFatherVisits
@@ -2144,39 +2143,6 @@ type Families {
   userCanEdit: Boolean
   visitHistory(distinctOn: [HistoryVisitHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryVisitHistoryOrderBy!], where: HistoryVisitHistoryBoolExp): [HistoryVisitHistory!]!
   visitHistoryAggregate(distinctOn: [HistoryVisitHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryVisitHistoryOrderBy!], where: HistoryVisitHistoryBoolExp): HistoryVisitHistoryAggregate!
-}
-
-type FamiliesAdminsPhones {
-  aggregatedPhones(path: String): json
-  familyId: uuid
-}
-
-input FamiliesAdminsPhonesBoolExp {
-  _and: [FamiliesAdminsPhonesBoolExp!]
-  _not: FamiliesAdminsPhonesBoolExp
-  _or: [FamiliesAdminsPhonesBoolExp!]
-  aggregatedPhones: JsonComparisonExp
-  familyId: UuidComparisonExp
-}
-
-input FamiliesAdminsPhonesOrderBy {
-  aggregatedPhones: OrderBy
-  familyId: OrderBy
-}
-
-enum FamiliesAdminsPhonesSelectColumn {
-  aggregatedPhones
-  familyId
-}
-
-input FamiliesAdminsPhonesStreamCursorInput {
-  initialValue: FamiliesAdminsPhonesStreamCursorValueInput!
-  ordering: CursorOrdering
-}
-
-input FamiliesAdminsPhonesStreamCursorValueInput {
-  aggregatedPhones: json
-  familyId: uuid
 }
 
 type FamiliesAggregate {
@@ -2216,7 +2182,6 @@ input FamiliesBoolExp {
   deceasedSpouseName: StringComparisonExp
   editHistory: HistoryEditHistoryBoolExp
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
-  familyAdminsPhones: FamiliesAdminsPhonesBoolExp
   id: UuidComparisonExp
   lastEdit: HistoryLatestEditsBoolExp
   lastFatherVisit: HistoryLatestFatherVisitsBoolExp
@@ -2402,7 +2367,6 @@ input FamiliesOrderBy {
   contactsAggregate: ResolvedContactsAggregateOrderBy
   deceasedSpouseName: OrderBy
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
-  familyAdminsPhones: FamiliesAdminsPhonesOrderBy
   id: OrderBy
   lastEdit: HistoryLatestEditsOrderBy
   lastFatherVisit: HistoryLatestFatherVisitsOrderBy
@@ -4167,7 +4131,6 @@ type HistoryMeetingRoster {
   blurhash: String
   color: bigint
   gender: Boolean
-  mainPhone: String
   meeting: HistoryMeetings
   meetingId: uuid
   name: String
@@ -4213,7 +4176,6 @@ input HistoryMeetingRosterBoolExp {
   blurhash: StringComparisonExp
   color: BigintComparisonExp
   gender: BooleanComparisonExp
-  mainPhone: StringComparisonExp
   meeting: HistoryMeetingsBoolExp
   meetingId: UuidComparisonExp
   name: StringComparisonExp
@@ -4228,7 +4190,6 @@ input HistoryMeetingRosterBoolExp {
 type HistoryMeetingRosterMaxFields {
   blurhash: String
   color: bigint
-  mainPhone: String
   meetingId: uuid
   name: String
   personId: uuid
@@ -4241,7 +4202,6 @@ type HistoryMeetingRosterMaxFields {
 type HistoryMeetingRosterMinFields {
   blurhash: String
   color: bigint
-  mainPhone: String
   meetingId: uuid
   name: String
   personId: uuid
@@ -4257,7 +4217,6 @@ input HistoryMeetingRosterOrderBy {
   blurhash: OrderBy
   color: OrderBy
   gender: OrderBy
-  mainPhone: OrderBy
   meeting: HistoryMeetingsOrderBy
   meetingId: OrderBy
   name: OrderBy
@@ -4274,7 +4233,6 @@ enum HistoryMeetingRosterSelectColumn {
   blurhash
   color
   gender
-  mainPhone
   meetingId
   name
   personId
@@ -4309,7 +4267,6 @@ input HistoryMeetingRosterStreamCursorValueInput {
   blurhash: String
   color: bigint
   gender: Boolean
-  mainPhone: String
   meetingId: uuid
   name: String
   personId: uuid
@@ -4908,18 +4865,6 @@ input JobsUpdates {
   where: JobsBoolExp!
 }
 
-input JsonComparisonExp {
-  _eq: json
-  _gt: json
-  _gte: json
-  _in: [json!]
-  _isNull: Boolean
-  _lt: json
-  _lte: json
-  _neq: json
-  _nin: [json!]
-}
-
 input JsonbCastExp {
   String: StringComparisonExp
 }
@@ -5212,12 +5157,10 @@ type Persons {
   lastKodas: HistoryLatestKodases
   lastVisit: HistoryLatestVisits
   mainContact: PersonsMainContacts
-  mainPhone: String
   martialStatus: String!
   name: String!
   nationalId: Int
   notes: String
-  otherPhones(path: String): jsonb!
   personType: PersonTypes
   personTypeId: uuid
   photoUpdatedAt: timestamptz
@@ -5285,10 +5228,6 @@ input PersonsAggregateOrderBy {
   variance: PersonsVarianceOrderBy
 }
 
-input PersonsAppendInput {
-  otherPhones: jsonb
-}
-
 input PersonsArrRelInsertInput {
   data: [PersonsInsertInput!]!
   onConflict: PersonsOnConflict
@@ -5352,12 +5291,10 @@ input PersonsBoolExp {
   lastKodas: HistoryLatestKodasesBoolExp
   lastVisit: HistoryLatestVisitsBoolExp
   mainContact: PersonsMainContactsBoolExp
-  mainPhone: StringComparisonExp
   martialStatus: StringComparisonExp
   name: StringComparisonExp
   nationalId: IntComparisonExp
   notes: StringComparisonExp
-  otherPhones: JsonbComparisonExp
   personType: PersonTypesBoolExp
   personTypeId: UuidComparisonExp
   photoUpdatedAt: TimestamptzComparisonExp
@@ -5389,18 +5326,6 @@ input PersonsBoolExp {
 enum PersonsConstraint {
   persons_pkey
   persons_uid_key
-}
-
-input PersonsDeleteAtPathInput {
-  otherPhones: [String!]
-}
-
-input PersonsDeleteElemInput {
-  otherPhones: Int
-}
-
-input PersonsDeleteKeyInput {
-  otherPhones: String
 }
 
 type PersonsGroups {
@@ -5612,12 +5537,10 @@ input PersonsInsertInput {
   jobDescription: String
   jobId: uuid
   kodasHistory: HistoryKodasHistoryArrRelInsertInput
-  mainPhone: String
   martialStatus: String
   name: String
   nationalId: Int
   notes: String
-  otherPhones: jsonb
   personType: PersonTypesObjRelInsertInput
   personTypeId: uuid
   qualification: QualificationsObjRelInsertInput
@@ -5697,7 +5620,6 @@ type PersonsMaxFields {
   id: uuid
   jobDescription: String
   jobId: uuid
-  mainPhone: String
   martialStatus: String
   name: String
   nationalId: Int
@@ -5727,7 +5649,6 @@ input PersonsMaxOrderBy {
   id: OrderBy
   jobDescription: OrderBy
   jobId: OrderBy
-  mainPhone: OrderBy
   martialStatus: OrderBy
   name: OrderBy
   nationalId: OrderBy
@@ -5758,7 +5679,6 @@ type PersonsMinFields {
   id: uuid
   jobDescription: String
   jobId: uuid
-  mainPhone: String
   martialStatus: String
   name: String
   nationalId: Int
@@ -5788,7 +5708,6 @@ input PersonsMinOrderBy {
   id: OrderBy
   jobDescription: OrderBy
   jobId: OrderBy
-  mainPhone: OrderBy
   martialStatus: OrderBy
   name: OrderBy
   nationalId: OrderBy
@@ -5861,12 +5780,10 @@ input PersonsOrderBy {
   lastKodas: HistoryLatestKodasesOrderBy
   lastVisit: HistoryLatestVisitsOrderBy
   mainContact: PersonsMainContactsOrderBy
-  mainPhone: OrderBy
   martialStatus: OrderBy
   name: OrderBy
   nationalId: OrderBy
   notes: OrderBy
-  otherPhones: OrderBy
   personType: PersonTypesOrderBy
   personTypeId: OrderBy
   photoUpdatedAt: OrderBy
@@ -5898,10 +5815,6 @@ input PersonsPkColumnsInput {
   id: uuid!
 }
 
-input PersonsPrependInput {
-  otherPhones: jsonb
-}
-
 enum PersonsSelectColumn {
   birthdate
   blurhash
@@ -5917,12 +5830,10 @@ enum PersonsSelectColumn {
   isStudent
   jobDescription
   jobId
-  mainPhone
   martialStatus
   name
   nationalId
   notes
-  otherPhones
   personTypeId
   photoUpdatedAt
   qualificationId
@@ -6062,12 +5973,10 @@ input PersonsSetInput {
   isStudent: Boolean
   jobDescription: String
   jobId: uuid
-  mainPhone: String
   martialStatus: String
   name: String
   nationalId: Int
   notes: String
-  otherPhones: jsonb
   personTypeId: uuid
   qualificationId: uuid
   schoolId: uuid
@@ -6137,12 +6046,10 @@ input PersonsStreamCursorValueInput {
   isStudent: Boolean
   jobDescription: String
   jobId: uuid
-  mainPhone: String
   martialStatus: String
   name: String
   nationalId: Int
   notes: String
-  otherPhones: jsonb
   personTypeId: uuid
   photoUpdatedAt: timestamptz
   qualificationId: uuid
@@ -6272,12 +6179,10 @@ enum PersonsUpdateColumn {
   isStudent
   jobDescription
   jobId
-  mainPhone
   martialStatus
   name
   nationalId
   notes
-  otherPhones
   personTypeId
   qualificationId
   schoolId
@@ -6292,12 +6197,7 @@ enum PersonsUpdateColumn {
 }
 
 input PersonsUpdates {
-  _append: PersonsAppendInput
-  _deleteAtPath: PersonsDeleteAtPathInput
-  _deleteElem: PersonsDeleteElemInput
-  _deleteKey: PersonsDeleteKeyInput
   _inc: PersonsIncInput
-  _prepend: PersonsPrependInput
   _set: PersonsSetInput
   where: PersonsBoolExp!
 }
@@ -8063,8 +7963,6 @@ input historyVisitHistoryAggregateBoolExpCount {
   predicate: IntComparisonExp!
 }
 
-scalar json
-
 scalar jsonb
 
 scalar meeting_audience
@@ -8278,8 +8176,8 @@ type mutation_root {
   updatePersonTypes(_set: PersonTypesSetInput, where: PersonTypesBoolExp!): PersonTypesMutationResponse
   updatePersonTypesByPk(_set: PersonTypesSetInput, pkColumns: PersonTypesPkColumnsInput!): PersonTypes
   updatePersonTypesMany(updates: [PersonTypesUpdates!]!): [PersonTypesMutationResponse]
-  updatePersons(_append: PersonsAppendInput, _deleteAtPath: PersonsDeleteAtPathInput, _deleteElem: PersonsDeleteElemInput, _deleteKey: PersonsDeleteKeyInput, _inc: PersonsIncInput, _prepend: PersonsPrependInput, _set: PersonsSetInput, where: PersonsBoolExp!): PersonsMutationResponse
-  updatePersonsByPk(_append: PersonsAppendInput, _deleteAtPath: PersonsDeleteAtPathInput, _deleteElem: PersonsDeleteElemInput, _deleteKey: PersonsDeleteKeyInput, _inc: PersonsIncInput, _prepend: PersonsPrependInput, _set: PersonsSetInput, pkColumns: PersonsPkColumnsInput!): Persons
+  updatePersons(_inc: PersonsIncInput, _set: PersonsSetInput, where: PersonsBoolExp!): PersonsMutationResponse
+  updatePersonsByPk(_inc: PersonsIncInput, _set: PersonsSetInput, pkColumns: PersonsPkColumnsInput!): Persons
   updatePersonsHobbies(where: PersonsHobbiesBoolExp!): PersonsHobbiesMutationResponse
   updatePersonsHobbiesMany(updates: [PersonsHobbiesUpdates!]!): [PersonsHobbiesMutationResponse]
   updatePersonsMany(updates: [PersonsUpdates!]!): [PersonsMutationResponse]
@@ -8372,7 +8270,6 @@ type query_root {
   districts(distinctOn: [DistrictsSelectColumn!], limit: Int, offset: Int, orderBy: [DistrictsOrderBy!], where: DistrictsBoolExp): [Districts!]!
   districtsByPk(id: uuid!): Districts
   families(distinctOn: [FamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesOrderBy!], where: FamiliesBoolExp): [Families!]!
-  familiesAdminsPhones(distinctOn: [FamiliesAdminsPhonesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesAdminsPhonesOrderBy!], where: FamiliesAdminsPhonesBoolExp): [FamiliesAdminsPhones!]!
   familiesAggregate(distinctOn: [FamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesOrderBy!], where: FamiliesBoolExp): FamiliesAggregate!
   familiesByPk(id: uuid!): Families
   familiesFamilies(distinctOn: [FamiliesFamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesFamiliesOrderBy!], where: FamiliesFamiliesBoolExp): [FamiliesFamilies!]!
@@ -8513,8 +8410,6 @@ type subscription_root {
   districtsByPk(id: uuid!): Districts
   districtsStream(batchSize: Int!, cursor: [DistrictsStreamCursorInput]!, where: DistrictsBoolExp): [Districts!]!
   families(distinctOn: [FamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesOrderBy!], where: FamiliesBoolExp): [Families!]!
-  familiesAdminsPhones(distinctOn: [FamiliesAdminsPhonesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesAdminsPhonesOrderBy!], where: FamiliesAdminsPhonesBoolExp): [FamiliesAdminsPhones!]!
-  familiesAdminsPhonesStream(batchSize: Int!, cursor: [FamiliesAdminsPhonesStreamCursorInput]!, where: FamiliesAdminsPhonesBoolExp): [FamiliesAdminsPhones!]!
   familiesAggregate(distinctOn: [FamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesOrderBy!], where: FamiliesBoolExp): FamiliesAggregate!
   familiesByPk(id: uuid!): Families
   familiesFamilies(distinctOn: [FamiliesFamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesFamiliesOrderBy!], where: FamiliesFamiliesBoolExp): [FamiliesFamilies!]!

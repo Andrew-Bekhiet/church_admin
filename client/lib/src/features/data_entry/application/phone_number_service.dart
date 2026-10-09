@@ -37,10 +37,16 @@ class PhoneNumberService {
     _ => null,
   };
 
-  String toDisplay(String e164) => switch (PhoneNumber.parse(e164)) {
-    PhoneNumber(isoCode: IsoCode.EG, :final nsn) => '0$nsn',
-    final parsed => parsed.international,
-  };
+  String toDisplay(String e164) {
+    try {
+      return switch (PhoneNumber.parse(e164)) {
+        PhoneNumber(isoCode: IsoCode.EG, :final nsn) => '0$nsn',
+        final parsed => parsed.international,
+      };
+    } on PhoneNumberException {
+      return e164;
+    }
+  }
 
   PhoneNumber _parse(String phone) => PhoneNumber.parse(
     phone,

@@ -1959,34 +1959,84 @@ class _CopyWithStubImpl_Input_DistrictsUpdates<TRes>
       CopyWith_Input_DistrictsBoolExp.stub(_res);
 }
 
-class Input_FamiliesAdminsPhonesBoolExp {
-  factory Input_FamiliesAdminsPhonesBoolExp({
-    List<Input_FamiliesAdminsPhonesBoolExp>? $_and,
-    Input_FamiliesAdminsPhonesBoolExp? $_not,
-    List<Input_FamiliesAdminsPhonesBoolExp>? $_or,
-    Input_JsonComparisonExp? aggregatedPhones,
-    Input_UuidComparisonExp? familyId,
-  }) => Input_FamiliesAdminsPhonesBoolExp._({
+class Input_FamiliesBoolExp {
+  factory Input_FamiliesBoolExp({
+    List<Input_FamiliesBoolExp>? $_and,
+    Input_FamiliesBoolExp? $_not,
+    List<Input_FamiliesBoolExp>? $_or,
+    Input_AddressesBoolExp? address,
+    Input_StringComparisonExp? blurhash,
+    Input_FamiliesFamiliesBoolExp? children,
+    Input_ChurchesBoolExp? church,
+    Input_UuidComparisonExp? churchId,
+    Input_BigintComparisonExp? color,
+    Input_ResolvedContactsBoolExp? contacts,
+    Input_StringComparisonExp? deceasedSpouseName,
+    Input_HistoryEditHistoryBoolExp? editHistory,
+    Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
+    Input_UuidComparisonExp? id,
+    Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryLatestFatherVisitsBoolExp? lastFatherVisit,
+    Input_HistoryLatestVisitsBoolExp? lastVisit,
+    Input_DateComparisonExp? marriageDate,
+    Input_StringComparisonExp? name,
+    Input_StringComparisonExp? notes,
+    Input_FamiliesFamiliesBoolExp? parents,
+    Input_PersonsBoolExp? persons,
+    Input_PersonsAggregateBoolExp? personsAggregate,
+    Input_TimestamptzComparisonExp? photoUpdatedAt,
+    Input_StringComparisonExp? status,
+    Input_StoresBoolExp? stores,
+    Input_StoresAggregateBoolExp? storesAggregate,
+    Input_ContactsBoolExp? unclaimedContacts,
+    Input_BooleanComparisonExp? userCanEdit,
+    Input_HistoryVisitHistoryBoolExp? visitHistory,
+    Input_HistoryVisitHistoryAggregateBoolExp? visitHistoryAggregate,
+  }) => Input_FamiliesBoolExp._({
     if ($_and != null) r'_and': $_and,
     if ($_not != null) r'_not': $_not,
     if ($_or != null) r'_or': $_or,
-    if (aggregatedPhones != null) r'aggregatedPhones': aggregatedPhones,
-    if (familyId != null) r'familyId': familyId,
+    if (address != null) r'address': address,
+    if (blurhash != null) r'blurhash': blurhash,
+    if (children != null) r'children': children,
+    if (church != null) r'church': church,
+    if (churchId != null) r'churchId': churchId,
+    if (color != null) r'color': color,
+    if (contacts != null) r'contacts': contacts,
+    if (deceasedSpouseName != null) r'deceasedSpouseName': deceasedSpouseName,
+    if (editHistory != null) r'editHistory': editHistory,
+    if (editHistoryAggregate != null)
+      r'editHistoryAggregate': editHistoryAggregate,
+    if (id != null) r'id': id,
+    if (lastEdit != null) r'lastEdit': lastEdit,
+    if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+    if (marriageDate != null) r'marriageDate': marriageDate,
+    if (name != null) r'name': name,
+    if (notes != null) r'notes': notes,
+    if (parents != null) r'parents': parents,
+    if (persons != null) r'persons': persons,
+    if (personsAggregate != null) r'personsAggregate': personsAggregate,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (status != null) r'status': status,
+    if (stores != null) r'stores': stores,
+    if (storesAggregate != null) r'storesAggregate': storesAggregate,
+    if (unclaimedContacts != null) r'unclaimedContacts': unclaimedContacts,
+    if (userCanEdit != null) r'userCanEdit': userCanEdit,
+    if (visitHistory != null) r'visitHistory': visitHistory,
+    if (visitHistoryAggregate != null)
+      r'visitHistoryAggregate': visitHistoryAggregate,
   });
 
-  Input_FamiliesAdminsPhonesBoolExp._(this._$data);
+  Input_FamiliesBoolExp._(this._$data);
 
-  factory Input_FamiliesAdminsPhonesBoolExp.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Input_FamiliesBoolExp.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('_and')) {
       final l$$_and = data['_and'];
       result$data['_and'] = (l$$_and as List<dynamic>?)
           ?.map(
-            (e) => Input_FamiliesAdminsPhonesBoolExp.fromJson(
-              (e as Map<String, dynamic>),
-            ),
+            (e) => Input_FamiliesBoolExp.fromJson((e as Map<String, dynamic>)),
           )
           .toList();
     }
@@ -1994,55 +2044,329 @@ class Input_FamiliesAdminsPhonesBoolExp {
       final l$$_not = data['_not'];
       result$data['_not'] = l$$_not == null
           ? null
-          : Input_FamiliesAdminsPhonesBoolExp.fromJson(
-              (l$$_not as Map<String, dynamic>),
-            );
+          : Input_FamiliesBoolExp.fromJson((l$$_not as Map<String, dynamic>));
     }
     if (data.containsKey('_or')) {
       final l$$_or = data['_or'];
       result$data['_or'] = (l$$_or as List<dynamic>?)
           ?.map(
-            (e) => Input_FamiliesAdminsPhonesBoolExp.fromJson(
-              (e as Map<String, dynamic>),
-            ),
+            (e) => Input_FamiliesBoolExp.fromJson((e as Map<String, dynamic>)),
           )
           .toList();
     }
-    if (data.containsKey('aggregatedPhones')) {
-      final l$aggregatedPhones = data['aggregatedPhones'];
-      result$data['aggregatedPhones'] = l$aggregatedPhones == null
+    if (data.containsKey('address')) {
+      final l$address = data['address'];
+      result$data['address'] = l$address == null
           ? null
-          : Input_JsonComparisonExp.fromJson(
-              (l$aggregatedPhones as Map<String, dynamic>),
+          : Input_AddressesBoolExp.fromJson(
+              (l$address as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('familyId')) {
-      final l$familyId = data['familyId'];
-      result$data['familyId'] = l$familyId == null
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$blurhash as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('children')) {
+      final l$children = data['children'];
+      result$data['children'] = l$children == null
+          ? null
+          : Input_FamiliesFamiliesBoolExp.fromJson(
+              (l$children as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('church')) {
+      final l$church = data['church'];
+      result$data['church'] = l$church == null
+          ? null
+          : Input_ChurchesBoolExp.fromJson((l$church as Map<String, dynamic>));
+    }
+    if (data.containsKey('churchId')) {
+      final l$churchId = data['churchId'];
+      result$data['churchId'] = l$churchId == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$familyId as Map<String, dynamic>),
+              (l$churchId as Map<String, dynamic>),
             );
     }
-    return Input_FamiliesAdminsPhonesBoolExp._(result$data);
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : Input_BigintComparisonExp.fromJson(
+              (l$color as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('contacts')) {
+      final l$contacts = data['contacts'];
+      result$data['contacts'] = l$contacts == null
+          ? null
+          : Input_ResolvedContactsBoolExp.fromJson(
+              (l$contacts as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('deceasedSpouseName')) {
+      final l$deceasedSpouseName = data['deceasedSpouseName'];
+      result$data['deceasedSpouseName'] = l$deceasedSpouseName == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$deceasedSpouseName as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('editHistory')) {
+      final l$editHistory = data['editHistory'];
+      result$data['editHistory'] = l$editHistory == null
+          ? null
+          : Input_HistoryEditHistoryBoolExp.fromJson(
+              (l$editHistory as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('editHistoryAggregate')) {
+      final l$editHistoryAggregate = data['editHistoryAggregate'];
+      result$data['editHistoryAggregate'] = l$editHistoryAggregate == null
+          ? null
+          : Input_HistoryEditHistoryAggregateBoolExp.fromJson(
+              (l$editHistoryAggregate as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('lastEdit')) {
+      final l$lastEdit = data['lastEdit'];
+      result$data['lastEdit'] = l$lastEdit == null
+          ? null
+          : Input_HistoryLatestEditsBoolExp.fromJson(
+              (l$lastEdit as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('lastFatherVisit')) {
+      final l$lastFatherVisit = data['lastFatherVisit'];
+      result$data['lastFatherVisit'] = l$lastFatherVisit == null
+          ? null
+          : Input_HistoryLatestFatherVisitsBoolExp.fromJson(
+              (l$lastFatherVisit as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : Input_HistoryLatestVisitsBoolExp.fromJson(
+              (l$lastVisit as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('marriageDate')) {
+      final l$marriageDate = data['marriageDate'];
+      result$data['marriageDate'] = l$marriageDate == null
+          ? null
+          : Input_DateComparisonExp.fromJson(
+              (l$marriageDate as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$name as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('notes')) {
+      final l$notes = data['notes'];
+      result$data['notes'] = l$notes == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$notes as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('parents')) {
+      final l$parents = data['parents'];
+      result$data['parents'] = l$parents == null
+          ? null
+          : Input_FamiliesFamiliesBoolExp.fromJson(
+              (l$parents as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('persons')) {
+      final l$persons = data['persons'];
+      result$data['persons'] = l$persons == null
+          ? null
+          : Input_PersonsBoolExp.fromJson((l$persons as Map<String, dynamic>));
+    }
+    if (data.containsKey('personsAggregate')) {
+      final l$personsAggregate = data['personsAggregate'];
+      result$data['personsAggregate'] = l$personsAggregate == null
+          ? null
+          : Input_PersonsAggregateBoolExp.fromJson(
+              (l$personsAggregate as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('photoUpdatedAt')) {
+      final l$photoUpdatedAt = data['photoUpdatedAt'];
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
+          ? null
+          : Input_TimestamptzComparisonExp.fromJson(
+              (l$photoUpdatedAt as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('status')) {
+      final l$status = data['status'];
+      result$data['status'] = l$status == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$status as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('stores')) {
+      final l$stores = data['stores'];
+      result$data['stores'] = l$stores == null
+          ? null
+          : Input_StoresBoolExp.fromJson((l$stores as Map<String, dynamic>));
+    }
+    if (data.containsKey('storesAggregate')) {
+      final l$storesAggregate = data['storesAggregate'];
+      result$data['storesAggregate'] = l$storesAggregate == null
+          ? null
+          : Input_StoresAggregateBoolExp.fromJson(
+              (l$storesAggregate as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('unclaimedContacts')) {
+      final l$unclaimedContacts = data['unclaimedContacts'];
+      result$data['unclaimedContacts'] = l$unclaimedContacts == null
+          ? null
+          : Input_ContactsBoolExp.fromJson(
+              (l$unclaimedContacts as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('userCanEdit')) {
+      final l$userCanEdit = data['userCanEdit'];
+      result$data['userCanEdit'] = l$userCanEdit == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$userCanEdit as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('visitHistory')) {
+      final l$visitHistory = data['visitHistory'];
+      result$data['visitHistory'] = l$visitHistory == null
+          ? null
+          : Input_HistoryVisitHistoryBoolExp.fromJson(
+              (l$visitHistory as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('visitHistoryAggregate')) {
+      final l$visitHistoryAggregate = data['visitHistoryAggregate'];
+      result$data['visitHistoryAggregate'] = l$visitHistoryAggregate == null
+          ? null
+          : Input_HistoryVisitHistoryAggregateBoolExp.fromJson(
+              (l$visitHistoryAggregate as Map<String, dynamic>),
+            );
+    }
+    return Input_FamiliesBoolExp._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input_FamiliesAdminsPhonesBoolExp>? get $_and =>
-      (_$data['_and'] as List<Input_FamiliesAdminsPhonesBoolExp>?);
+  List<Input_FamiliesBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_FamiliesBoolExp>?);
 
-  Input_FamiliesAdminsPhonesBoolExp? get $_not =>
-      (_$data['_not'] as Input_FamiliesAdminsPhonesBoolExp?);
+  Input_FamiliesBoolExp? get $_not =>
+      (_$data['_not'] as Input_FamiliesBoolExp?);
 
-  List<Input_FamiliesAdminsPhonesBoolExp>? get $_or =>
-      (_$data['_or'] as List<Input_FamiliesAdminsPhonesBoolExp>?);
+  List<Input_FamiliesBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_FamiliesBoolExp>?);
 
-  Input_JsonComparisonExp? get aggregatedPhones =>
-      (_$data['aggregatedPhones'] as Input_JsonComparisonExp?);
+  Input_AddressesBoolExp? get address =>
+      (_$data['address'] as Input_AddressesBoolExp?);
 
-  Input_UuidComparisonExp? get familyId =>
-      (_$data['familyId'] as Input_UuidComparisonExp?);
+  Input_StringComparisonExp? get blurhash =>
+      (_$data['blurhash'] as Input_StringComparisonExp?);
+
+  Input_FamiliesFamiliesBoolExp? get children =>
+      (_$data['children'] as Input_FamiliesFamiliesBoolExp?);
+
+  Input_ChurchesBoolExp? get church =>
+      (_$data['church'] as Input_ChurchesBoolExp?);
+
+  Input_UuidComparisonExp? get churchId =>
+      (_$data['churchId'] as Input_UuidComparisonExp?);
+
+  Input_BigintComparisonExp? get color =>
+      (_$data['color'] as Input_BigintComparisonExp?);
+
+  Input_ResolvedContactsBoolExp? get contacts =>
+      (_$data['contacts'] as Input_ResolvedContactsBoolExp?);
+
+  Input_StringComparisonExp? get deceasedSpouseName =>
+      (_$data['deceasedSpouseName'] as Input_StringComparisonExp?);
+
+  Input_HistoryEditHistoryBoolExp? get editHistory =>
+      (_$data['editHistory'] as Input_HistoryEditHistoryBoolExp?);
+
+  Input_HistoryEditHistoryAggregateBoolExp? get editHistoryAggregate =>
+      (_$data['editHistoryAggregate']
+          as Input_HistoryEditHistoryAggregateBoolExp?);
+
+  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
+  Input_HistoryLatestEditsBoolExp? get lastEdit =>
+      (_$data['lastEdit'] as Input_HistoryLatestEditsBoolExp?);
+
+  Input_HistoryLatestFatherVisitsBoolExp? get lastFatherVisit =>
+      (_$data['lastFatherVisit'] as Input_HistoryLatestFatherVisitsBoolExp?);
+
+  Input_HistoryLatestVisitsBoolExp? get lastVisit =>
+      (_$data['lastVisit'] as Input_HistoryLatestVisitsBoolExp?);
+
+  Input_DateComparisonExp? get marriageDate =>
+      (_$data['marriageDate'] as Input_DateComparisonExp?);
+
+  Input_StringComparisonExp? get name =>
+      (_$data['name'] as Input_StringComparisonExp?);
+
+  Input_StringComparisonExp? get notes =>
+      (_$data['notes'] as Input_StringComparisonExp?);
+
+  Input_FamiliesFamiliesBoolExp? get parents =>
+      (_$data['parents'] as Input_FamiliesFamiliesBoolExp?);
+
+  Input_PersonsBoolExp? get persons =>
+      (_$data['persons'] as Input_PersonsBoolExp?);
+
+  Input_PersonsAggregateBoolExp? get personsAggregate =>
+      (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
+  Input_TimestamptzComparisonExp? get photoUpdatedAt =>
+      (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
+
+  Input_StringComparisonExp? get status =>
+      (_$data['status'] as Input_StringComparisonExp?);
+
+  Input_StoresBoolExp? get stores => (_$data['stores'] as Input_StoresBoolExp?);
+
+  Input_StoresAggregateBoolExp? get storesAggregate =>
+      (_$data['storesAggregate'] as Input_StoresAggregateBoolExp?);
+
+  Input_ContactsBoolExp? get unclaimedContacts =>
+      (_$data['unclaimedContacts'] as Input_ContactsBoolExp?);
+
+  Input_BooleanComparisonExp? get userCanEdit =>
+      (_$data['userCanEdit'] as Input_BooleanComparisonExp?);
+
+  Input_HistoryVisitHistoryBoolExp? get visitHistory =>
+      (_$data['visitHistory'] as Input_HistoryVisitHistoryBoolExp?);
+
+  Input_HistoryVisitHistoryAggregateBoolExp? get visitHistoryAggregate =>
+      (_$data['visitHistoryAggregate']
+          as Input_HistoryVisitHistoryAggregateBoolExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -2058,27 +2382,130 @@ class Input_FamiliesAdminsPhonesBoolExp {
       final l$$_or = $_or;
       result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('aggregatedPhones')) {
-      final l$aggregatedPhones = aggregatedPhones;
-      result$data['aggregatedPhones'] = l$aggregatedPhones?.toJson();
+    if (_$data.containsKey('address')) {
+      final l$address = address;
+      result$data['address'] = l$address?.toJson();
     }
-    if (_$data.containsKey('familyId')) {
-      final l$familyId = familyId;
-      result$data['familyId'] = l$familyId?.toJson();
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash?.toJson();
+    }
+    if (_$data.containsKey('children')) {
+      final l$children = children;
+      result$data['children'] = l$children?.toJson();
+    }
+    if (_$data.containsKey('church')) {
+      final l$church = church;
+      result$data['church'] = l$church?.toJson();
+    }
+    if (_$data.containsKey('churchId')) {
+      final l$churchId = churchId;
+      result$data['churchId'] = l$churchId?.toJson();
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color?.toJson();
+    }
+    if (_$data.containsKey('contacts')) {
+      final l$contacts = contacts;
+      result$data['contacts'] = l$contacts?.toJson();
+    }
+    if (_$data.containsKey('deceasedSpouseName')) {
+      final l$deceasedSpouseName = deceasedSpouseName;
+      result$data['deceasedSpouseName'] = l$deceasedSpouseName?.toJson();
+    }
+    if (_$data.containsKey('editHistory')) {
+      final l$editHistory = editHistory;
+      result$data['editHistory'] = l$editHistory?.toJson();
+    }
+    if (_$data.containsKey('editHistoryAggregate')) {
+      final l$editHistoryAggregate = editHistoryAggregate;
+      result$data['editHistoryAggregate'] = l$editHistoryAggregate?.toJson();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('lastEdit')) {
+      final l$lastEdit = lastEdit;
+      result$data['lastEdit'] = l$lastEdit?.toJson();
+    }
+    if (_$data.containsKey('lastFatherVisit')) {
+      final l$lastFatherVisit = lastFatherVisit;
+      result$data['lastFatherVisit'] = l$lastFatherVisit?.toJson();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit?.toJson();
+    }
+    if (_$data.containsKey('marriageDate')) {
+      final l$marriageDate = marriageDate;
+      result$data['marriageDate'] = l$marriageDate?.toJson();
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name?.toJson();
+    }
+    if (_$data.containsKey('notes')) {
+      final l$notes = notes;
+      result$data['notes'] = l$notes?.toJson();
+    }
+    if (_$data.containsKey('parents')) {
+      final l$parents = parents;
+      result$data['parents'] = l$parents?.toJson();
+    }
+    if (_$data.containsKey('persons')) {
+      final l$persons = persons;
+      result$data['persons'] = l$persons?.toJson();
+    }
+    if (_$data.containsKey('personsAggregate')) {
+      final l$personsAggregate = personsAggregate;
+      result$data['personsAggregate'] = l$personsAggregate?.toJson();
+    }
+    if (_$data.containsKey('photoUpdatedAt')) {
+      final l$photoUpdatedAt = photoUpdatedAt;
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt?.toJson();
+    }
+    if (_$data.containsKey('status')) {
+      final l$status = status;
+      result$data['status'] = l$status?.toJson();
+    }
+    if (_$data.containsKey('stores')) {
+      final l$stores = stores;
+      result$data['stores'] = l$stores?.toJson();
+    }
+    if (_$data.containsKey('storesAggregate')) {
+      final l$storesAggregate = storesAggregate;
+      result$data['storesAggregate'] = l$storesAggregate?.toJson();
+    }
+    if (_$data.containsKey('unclaimedContacts')) {
+      final l$unclaimedContacts = unclaimedContacts;
+      result$data['unclaimedContacts'] = l$unclaimedContacts?.toJson();
+    }
+    if (_$data.containsKey('userCanEdit')) {
+      final l$userCanEdit = userCanEdit;
+      result$data['userCanEdit'] = l$userCanEdit?.toJson();
+    }
+    if (_$data.containsKey('visitHistory')) {
+      final l$visitHistory = visitHistory;
+      result$data['visitHistory'] = l$visitHistory?.toJson();
+    }
+    if (_$data.containsKey('visitHistoryAggregate')) {
+      final l$visitHistoryAggregate = visitHistoryAggregate;
+      result$data['visitHistoryAggregate'] = l$visitHistoryAggregate?.toJson();
     }
     return result$data;
   }
 
-  CopyWith_Input_FamiliesAdminsPhonesBoolExp<Input_FamiliesAdminsPhonesBoolExp>
-  get copyWith => CopyWith_Input_FamiliesAdminsPhonesBoolExp(this, (i) => i);
+  CopyWith_Input_FamiliesBoolExp<Input_FamiliesBoolExp> get copyWith =>
+      CopyWith_Input_FamiliesBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_FamiliesAdminsPhonesBoolExp ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_FamiliesBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -2127,22 +2554,246 @@ class Input_FamiliesAdminsPhonesBoolExp {
     } else if (l$$_or != lOther$$_or) {
       return false;
     }
-    final l$aggregatedPhones = aggregatedPhones;
-    final lOther$aggregatedPhones = other.aggregatedPhones;
-    if (_$data.containsKey('aggregatedPhones') !=
-        other._$data.containsKey('aggregatedPhones')) {
+    final l$address = address;
+    final lOther$address = other.address;
+    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
       return false;
     }
-    if (l$aggregatedPhones != lOther$aggregatedPhones) {
+    if (l$address != lOther$address) {
       return false;
     }
-    final l$familyId = familyId;
-    final lOther$familyId = other.familyId;
-    if (_$data.containsKey('familyId') !=
-        other._$data.containsKey('familyId')) {
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
       return false;
     }
-    if (l$familyId != lOther$familyId) {
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$children = children;
+    final lOther$children = other.children;
+    if (_$data.containsKey('children') !=
+        other._$data.containsKey('children')) {
+      return false;
+    }
+    if (l$children != lOther$children) {
+      return false;
+    }
+    final l$church = church;
+    final lOther$church = other.church;
+    if (_$data.containsKey('church') != other._$data.containsKey('church')) {
+      return false;
+    }
+    if (l$church != lOther$church) {
+      return false;
+    }
+    final l$churchId = churchId;
+    final lOther$churchId = other.churchId;
+    if (_$data.containsKey('churchId') !=
+        other._$data.containsKey('churchId')) {
+      return false;
+    }
+    if (l$churchId != lOther$churchId) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$contacts = contacts;
+    final lOther$contacts = other.contacts;
+    if (_$data.containsKey('contacts') !=
+        other._$data.containsKey('contacts')) {
+      return false;
+    }
+    if (l$contacts != lOther$contacts) {
+      return false;
+    }
+    final l$deceasedSpouseName = deceasedSpouseName;
+    final lOther$deceasedSpouseName = other.deceasedSpouseName;
+    if (_$data.containsKey('deceasedSpouseName') !=
+        other._$data.containsKey('deceasedSpouseName')) {
+      return false;
+    }
+    if (l$deceasedSpouseName != lOther$deceasedSpouseName) {
+      return false;
+    }
+    final l$editHistory = editHistory;
+    final lOther$editHistory = other.editHistory;
+    if (_$data.containsKey('editHistory') !=
+        other._$data.containsKey('editHistory')) {
+      return false;
+    }
+    if (l$editHistory != lOther$editHistory) {
+      return false;
+    }
+    final l$editHistoryAggregate = editHistoryAggregate;
+    final lOther$editHistoryAggregate = other.editHistoryAggregate;
+    if (_$data.containsKey('editHistoryAggregate') !=
+        other._$data.containsKey('editHistoryAggregate')) {
+      return false;
+    }
+    if (l$editHistoryAggregate != lOther$editHistoryAggregate) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$lastEdit = lastEdit;
+    final lOther$lastEdit = other.lastEdit;
+    if (_$data.containsKey('lastEdit') !=
+        other._$data.containsKey('lastEdit')) {
+      return false;
+    }
+    if (l$lastEdit != lOther$lastEdit) {
+      return false;
+    }
+    final l$lastFatherVisit = lastFatherVisit;
+    final lOther$lastFatherVisit = other.lastFatherVisit;
+    if (_$data.containsKey('lastFatherVisit') !=
+        other._$data.containsKey('lastFatherVisit')) {
+      return false;
+    }
+    if (l$lastFatherVisit != lOther$lastFatherVisit) {
+      return false;
+    }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    final l$marriageDate = marriageDate;
+    final lOther$marriageDate = other.marriageDate;
+    if (_$data.containsKey('marriageDate') !=
+        other._$data.containsKey('marriageDate')) {
+      return false;
+    }
+    if (l$marriageDate != lOther$marriageDate) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$notes = notes;
+    final lOther$notes = other.notes;
+    if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
+      return false;
+    }
+    if (l$notes != lOther$notes) {
+      return false;
+    }
+    final l$parents = parents;
+    final lOther$parents = other.parents;
+    if (_$data.containsKey('parents') != other._$data.containsKey('parents')) {
+      return false;
+    }
+    if (l$parents != lOther$parents) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
+      return false;
+    }
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    final l$personsAggregate = personsAggregate;
+    final lOther$personsAggregate = other.personsAggregate;
+    if (_$data.containsKey('personsAggregate') !=
+        other._$data.containsKey('personsAggregate')) {
+      return false;
+    }
+    if (l$personsAggregate != lOther$personsAggregate) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (_$data.containsKey('photoUpdatedAt') !=
+        other._$data.containsKey('photoUpdatedAt')) {
+      return false;
+    }
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (_$data.containsKey('status') != other._$data.containsKey('status')) {
+      return false;
+    }
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$stores = stores;
+    final lOther$stores = other.stores;
+    if (_$data.containsKey('stores') != other._$data.containsKey('stores')) {
+      return false;
+    }
+    if (l$stores != lOther$stores) {
+      return false;
+    }
+    final l$storesAggregate = storesAggregate;
+    final lOther$storesAggregate = other.storesAggregate;
+    if (_$data.containsKey('storesAggregate') !=
+        other._$data.containsKey('storesAggregate')) {
+      return false;
+    }
+    if (l$storesAggregate != lOther$storesAggregate) {
+      return false;
+    }
+    final l$unclaimedContacts = unclaimedContacts;
+    final lOther$unclaimedContacts = other.unclaimedContacts;
+    if (_$data.containsKey('unclaimedContacts') !=
+        other._$data.containsKey('unclaimedContacts')) {
+      return false;
+    }
+    if (l$unclaimedContacts != lOther$unclaimedContacts) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (_$data.containsKey('userCanEdit') !=
+        other._$data.containsKey('userCanEdit')) {
+      return false;
+    }
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$visitHistory = visitHistory;
+    final lOther$visitHistory = other.visitHistory;
+    if (_$data.containsKey('visitHistory') !=
+        other._$data.containsKey('visitHistory')) {
+      return false;
+    }
+    if (l$visitHistory != lOther$visitHistory) {
+      return false;
+    }
+    final l$visitHistoryAggregate = visitHistoryAggregate;
+    final lOther$visitHistoryAggregate = other.visitHistoryAggregate;
+    if (_$data.containsKey('visitHistoryAggregate') !=
+        other._$data.containsKey('visitHistoryAggregate')) {
+      return false;
+    }
+    if (l$visitHistoryAggregate != lOther$visitHistoryAggregate) {
       return false;
     }
     return true;
@@ -2153,8 +2804,34 @@ class Input_FamiliesAdminsPhonesBoolExp {
     final l$$_and = $_and;
     final l$$_not = $_not;
     final l$$_or = $_or;
-    final l$aggregatedPhones = aggregatedPhones;
-    final l$familyId = familyId;
+    final l$address = address;
+    final l$blurhash = blurhash;
+    final l$children = children;
+    final l$church = church;
+    final l$churchId = churchId;
+    final l$color = color;
+    final l$contacts = contacts;
+    final l$deceasedSpouseName = deceasedSpouseName;
+    final l$editHistory = editHistory;
+    final l$editHistoryAggregate = editHistoryAggregate;
+    final l$id = id;
+    final l$lastEdit = lastEdit;
+    final l$lastFatherVisit = lastFatherVisit;
+    final l$lastVisit = lastVisit;
+    final l$marriageDate = marriageDate;
+    final l$name = name;
+    final l$notes = notes;
+    final l$parents = parents;
+    final l$persons = persons;
+    final l$personsAggregate = personsAggregate;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$status = status;
+    final l$stores = stores;
+    final l$storesAggregate = storesAggregate;
+    final l$unclaimedContacts = unclaimedContacts;
+    final l$userCanEdit = userCanEdit;
+    final l$visitHistory = visitHistory;
+    final l$visitHistoryAggregate = visitHistoryAggregate;
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
@@ -2167,410 +2844,40 @@ class Input_FamiliesAdminsPhonesBoolExp {
                 ? null
                 : Object.hashAll(l$$_or.map((v) => v))
           : const {},
-      _$data.containsKey('aggregatedPhones') ? l$aggregatedPhones : const {},
-      _$data.containsKey('familyId') ? l$familyId : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> {
-  factory CopyWith_Input_FamiliesAdminsPhonesBoolExp(
-    Input_FamiliesAdminsPhonesBoolExp instance,
-    TRes Function(Input_FamiliesAdminsPhonesBoolExp) then,
-  ) = _CopyWithImpl_Input_FamiliesAdminsPhonesBoolExp;
-
-  factory CopyWith_Input_FamiliesAdminsPhonesBoolExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_FamiliesAdminsPhonesBoolExp;
-
-  TRes call({
-    List<Input_FamiliesAdminsPhonesBoolExp>? $_and,
-    Input_FamiliesAdminsPhonesBoolExp? $_not,
-    List<Input_FamiliesAdminsPhonesBoolExp>? $_or,
-    Input_JsonComparisonExp? aggregatedPhones,
-    Input_UuidComparisonExp? familyId,
-  });
-  TRes $_and(
-    Iterable<Input_FamiliesAdminsPhonesBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_FamiliesAdminsPhonesBoolExp<
-          Input_FamiliesAdminsPhonesBoolExp
-        >
-      >?,
-    )
-    _fn,
-  );
-  CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> get $_not;
-  TRes $_or(
-    Iterable<Input_FamiliesAdminsPhonesBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_FamiliesAdminsPhonesBoolExp<
-          Input_FamiliesAdminsPhonesBoolExp
-        >
-      >?,
-    )
-    _fn,
-  );
-  CopyWith_Input_JsonComparisonExp<TRes> get aggregatedPhones;
-  CopyWith_Input_UuidComparisonExp<TRes> get familyId;
-}
-
-class _CopyWithImpl_Input_FamiliesAdminsPhonesBoolExp<TRes>
-    implements CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> {
-  _CopyWithImpl_Input_FamiliesAdminsPhonesBoolExp(this._instance, this._then);
-
-  final Input_FamiliesAdminsPhonesBoolExp _instance;
-
-  final TRes Function(Input_FamiliesAdminsPhonesBoolExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_and = _undefined,
-    Object? $_not = _undefined,
-    Object? $_or = _undefined,
-    Object? aggregatedPhones = _undefined,
-    Object? familyId = _undefined,
-  }) => _then(
-    Input_FamiliesAdminsPhonesBoolExp._({
-      ..._instance._$data,
-      if ($_and != _undefined)
-        '_and': ($_and as List<Input_FamiliesAdminsPhonesBoolExp>?),
-      if ($_not != _undefined)
-        '_not': ($_not as Input_FamiliesAdminsPhonesBoolExp?),
-      if ($_or != _undefined)
-        '_or': ($_or as List<Input_FamiliesAdminsPhonesBoolExp>?),
-      if (aggregatedPhones != _undefined)
-        'aggregatedPhones': (aggregatedPhones as Input_JsonComparisonExp?),
-      if (familyId != _undefined)
-        'familyId': (familyId as Input_UuidComparisonExp?),
-    }),
-  );
-
-  TRes $_and(
-    Iterable<Input_FamiliesAdminsPhonesBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_FamiliesAdminsPhonesBoolExp<
-          Input_FamiliesAdminsPhonesBoolExp
-        >
-      >?,
-    )
-    _fn,
-  ) => call(
-    $_and: _fn(
-      _instance.$_and?.map(
-        (e) => CopyWith_Input_FamiliesAdminsPhonesBoolExp(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-
-  CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> get $_not {
-    final local$$_not = _instance.$_not;
-    return local$$_not == null
-        ? CopyWith_Input_FamiliesAdminsPhonesBoolExp.stub(_then(_instance))
-        : CopyWith_Input_FamiliesAdminsPhonesBoolExp(
-            local$$_not,
-            (e) => call($_not: e),
-          );
-  }
-
-  TRes $_or(
-    Iterable<Input_FamiliesAdminsPhonesBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_FamiliesAdminsPhonesBoolExp<
-          Input_FamiliesAdminsPhonesBoolExp
-        >
-      >?,
-    )
-    _fn,
-  ) => call(
-    $_or: _fn(
-      _instance.$_or?.map(
-        (e) => CopyWith_Input_FamiliesAdminsPhonesBoolExp(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-
-  CopyWith_Input_JsonComparisonExp<TRes> get aggregatedPhones {
-    final local$aggregatedPhones = _instance.aggregatedPhones;
-    return local$aggregatedPhones == null
-        ? CopyWith_Input_JsonComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_JsonComparisonExp(
-            local$aggregatedPhones,
-            (e) => call(aggregatedPhones: e),
-          );
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get familyId {
-    final local$familyId = _instance.familyId;
-    return local$familyId == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$familyId,
-            (e) => call(familyId: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_FamiliesAdminsPhonesBoolExp<TRes>
-    implements CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> {
-  _CopyWithStubImpl_Input_FamiliesAdminsPhonesBoolExp(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_FamiliesAdminsPhonesBoolExp>? $_and,
-    Input_FamiliesAdminsPhonesBoolExp? $_not,
-    List<Input_FamiliesAdminsPhonesBoolExp>? $_or,
-    Input_JsonComparisonExp? aggregatedPhones,
-    Input_UuidComparisonExp? familyId,
-  }) => _res;
-
-  $_and(_fn) => _res;
-
-  CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> get $_not =>
-      CopyWith_Input_FamiliesAdminsPhonesBoolExp.stub(_res);
-
-  $_or(_fn) => _res;
-
-  CopyWith_Input_JsonComparisonExp<TRes> get aggregatedPhones =>
-      CopyWith_Input_JsonComparisonExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get familyId =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-}
-
-class Input_FamiliesAdminsPhonesOrderBy {
-  factory Input_FamiliesAdminsPhonesOrderBy({
-    Enum_OrderBy? aggregatedPhones,
-    Enum_OrderBy? familyId,
-  }) => Input_FamiliesAdminsPhonesOrderBy._({
-    if (aggregatedPhones != null) r'aggregatedPhones': aggregatedPhones,
-    if (familyId != null) r'familyId': familyId,
-  });
-
-  Input_FamiliesAdminsPhonesOrderBy._(this._$data);
-
-  factory Input_FamiliesAdminsPhonesOrderBy.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('aggregatedPhones')) {
-      final l$aggregatedPhones = data['aggregatedPhones'];
-      result$data['aggregatedPhones'] = l$aggregatedPhones == null
-          ? null
-          : fromJson_Enum_OrderBy((l$aggregatedPhones as String));
-    }
-    if (data.containsKey('familyId')) {
-      final l$familyId = data['familyId'];
-      result$data['familyId'] = l$familyId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$familyId as String));
-    }
-    return Input_FamiliesAdminsPhonesOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get aggregatedPhones =>
-      (_$data['aggregatedPhones'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get familyId => (_$data['familyId'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('aggregatedPhones')) {
-      final l$aggregatedPhones = aggregatedPhones;
-      result$data['aggregatedPhones'] = l$aggregatedPhones == null
-          ? null
-          : toJson_Enum_OrderBy(l$aggregatedPhones);
-    }
-    if (_$data.containsKey('familyId')) {
-      final l$familyId = familyId;
-      result$data['familyId'] = l$familyId == null
-          ? null
-          : toJson_Enum_OrderBy(l$familyId);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_FamiliesAdminsPhonesOrderBy<Input_FamiliesAdminsPhonesOrderBy>
-  get copyWith => CopyWith_Input_FamiliesAdminsPhonesOrderBy(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_FamiliesAdminsPhonesOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$aggregatedPhones = aggregatedPhones;
-    final lOther$aggregatedPhones = other.aggregatedPhones;
-    if (_$data.containsKey('aggregatedPhones') !=
-        other._$data.containsKey('aggregatedPhones')) {
-      return false;
-    }
-    if (l$aggregatedPhones != lOther$aggregatedPhones) {
-      return false;
-    }
-    final l$familyId = familyId;
-    final lOther$familyId = other.familyId;
-    if (_$data.containsKey('familyId') !=
-        other._$data.containsKey('familyId')) {
-      return false;
-    }
-    if (l$familyId != lOther$familyId) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$aggregatedPhones = aggregatedPhones;
-    final l$familyId = familyId;
-    return Object.hashAll([
-      _$data.containsKey('aggregatedPhones') ? l$aggregatedPhones : const {},
-      _$data.containsKey('familyId') ? l$familyId : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_FamiliesAdminsPhonesOrderBy<TRes> {
-  factory CopyWith_Input_FamiliesAdminsPhonesOrderBy(
-    Input_FamiliesAdminsPhonesOrderBy instance,
-    TRes Function(Input_FamiliesAdminsPhonesOrderBy) then,
-  ) = _CopyWithImpl_Input_FamiliesAdminsPhonesOrderBy;
-
-  factory CopyWith_Input_FamiliesAdminsPhonesOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_FamiliesAdminsPhonesOrderBy;
-
-  TRes call({Enum_OrderBy? aggregatedPhones, Enum_OrderBy? familyId});
-}
-
-class _CopyWithImpl_Input_FamiliesAdminsPhonesOrderBy<TRes>
-    implements CopyWith_Input_FamiliesAdminsPhonesOrderBy<TRes> {
-  _CopyWithImpl_Input_FamiliesAdminsPhonesOrderBy(this._instance, this._then);
-
-  final Input_FamiliesAdminsPhonesOrderBy _instance;
-
-  final TRes Function(Input_FamiliesAdminsPhonesOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? aggregatedPhones = _undefined,
-    Object? familyId = _undefined,
-  }) => _then(
-    Input_FamiliesAdminsPhonesOrderBy._({
-      ..._instance._$data,
-      if (aggregatedPhones != _undefined)
-        'aggregatedPhones': (aggregatedPhones as Enum_OrderBy?),
-      if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_FamiliesAdminsPhonesOrderBy<TRes>
-    implements CopyWith_Input_FamiliesAdminsPhonesOrderBy<TRes> {
-  _CopyWithStubImpl_Input_FamiliesAdminsPhonesOrderBy(this._res);
-
-  TRes _res;
-
-  call({Enum_OrderBy? aggregatedPhones, Enum_OrderBy? familyId}) => _res;
-}
-
-class Input_FamiliesAdminsPhonesStreamCursorInput {
-  factory Input_FamiliesAdminsPhonesStreamCursorInput({
-    required Input_FamiliesAdminsPhonesStreamCursorValueInput initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => Input_FamiliesAdminsPhonesStreamCursorInput._({
-    r'initialValue': initialValue,
-    if (ordering != null) r'ordering': ordering,
-  });
-
-  Input_FamiliesAdminsPhonesStreamCursorInput._(this._$data);
-
-  factory Input_FamiliesAdminsPhonesStreamCursorInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$initialValue = data['initialValue'];
-    result$data['initialValue'] =
-        Input_FamiliesAdminsPhonesStreamCursorValueInput.fromJson(
-          (l$initialValue as Map<String, dynamic>),
-        );
-    if (data.containsKey('ordering')) {
-      final l$ordering = data['ordering'];
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : fromJson_Enum_CursorOrdering((l$ordering as String));
-    }
-    return Input_FamiliesAdminsPhonesStreamCursorInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_FamiliesAdminsPhonesStreamCursorValueInput get initialValue =>
-      (_$data['initialValue']
-          as Input_FamiliesAdminsPhonesStreamCursorValueInput);
-
-  Enum_CursorOrdering? get ordering =>
-      (_$data['ordering'] as Enum_CursorOrdering?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$initialValue = initialValue;
-    result$data['initialValue'] = l$initialValue.toJson();
-    if (_$data.containsKey('ordering')) {
-      final l$ordering = ordering;
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : toJson_Enum_CursorOrdering(l$ordering);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_FamiliesAdminsPhonesStreamCursorInput<
-    Input_FamiliesAdminsPhonesStreamCursorInput
-  >
-  get copyWith =>
-      CopyWith_Input_FamiliesAdminsPhonesStreamCursorInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_FamiliesAdminsPhonesStreamCursorInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$initialValue = initialValue;
-    final lOther$initialValue = other.initialValue;
-    if (l$initialValue != lOther$initialValue) {
-      return false;
-    }
-    final l$ordering = ordering;
-    final lOther$ordering = other.ordering;
-    if (_$data.containsKey('ordering') !=
-        other._$data.containsKey('ordering')) {
-      return false;
-    }
-    if (l$ordering != lOther$ordering) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$initialValue = initialValue;
-    final l$ordering = ordering;
-    return Object.hashAll([
-      l$initialValue,
-      _$data.containsKey('ordering') ? l$ordering : const {},
+      _$data.containsKey('address') ? l$address : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
+      _$data.containsKey('children') ? l$children : const {},
+      _$data.containsKey('church') ? l$church : const {},
+      _$data.containsKey('churchId') ? l$churchId : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('contacts') ? l$contacts : const {},
+      _$data.containsKey('deceasedSpouseName')
+          ? l$deceasedSpouseName
+          : const {},
+      _$data.containsKey('editHistory') ? l$editHistory : const {},
+      _$data.containsKey('editHistoryAggregate')
+          ? l$editHistoryAggregate
+          : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('lastFatherVisit') ? l$lastFatherVisit : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
+      _$data.containsKey('marriageDate') ? l$marriageDate : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('notes') ? l$notes : const {},
+      _$data.containsKey('parents') ? l$parents : const {},
+      _$data.containsKey('persons') ? l$persons : const {},
+      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
+      _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
+      _$data.containsKey('status') ? l$status : const {},
+      _$data.containsKey('stores') ? l$stores : const {},
+      _$data.containsKey('storesAggregate') ? l$storesAggregate : const {},
+      _$data.containsKey('unclaimedContacts') ? l$unclaimedContacts : const {},
+      _$data.containsKey('userCanEdit') ? l$userCanEdit : const {},
+      _$data.containsKey('visitHistory') ? l$visitHistory : const {},
+      _$data.containsKey('visitHistoryAggregate')
+          ? l$visitHistoryAggregate
+          : const {},
     ]);
   }
 }

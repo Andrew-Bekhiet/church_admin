@@ -2083,7 +2083,6 @@ class Input_HistoryMeetingRosterBoolExp {
     Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_BooleanComparisonExp? gender,
-    Input_StringComparisonExp? mainPhone,
     Input_HistoryMeetingsBoolExp? meeting,
     Input_UuidComparisonExp? meetingId,
     Input_StringComparisonExp? name,
@@ -2104,7 +2103,6 @@ class Input_HistoryMeetingRosterBoolExp {
     if (blurhash != null) r'blurhash': blurhash,
     if (color != null) r'color': color,
     if (gender != null) r'gender': gender,
-    if (mainPhone != null) r'mainPhone': mainPhone,
     if (meeting != null) r'meeting': meeting,
     if (meetingId != null) r'meetingId': meetingId,
     if (name != null) r'name': name,
@@ -2197,14 +2195,6 @@ class Input_HistoryMeetingRosterBoolExp {
           ? null
           : Input_BooleanComparisonExp.fromJson(
               (l$gender as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('mainPhone')) {
-      final l$mainPhone = data['mainPhone'];
-      result$data['mainPhone'] = l$mainPhone == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$mainPhone as Map<String, dynamic>),
             );
     }
     if (data.containsKey('meeting')) {
@@ -2311,9 +2301,6 @@ class Input_HistoryMeetingRosterBoolExp {
   Input_BooleanComparisonExp? get gender =>
       (_$data['gender'] as Input_BooleanComparisonExp?);
 
-  Input_StringComparisonExp? get mainPhone =>
-      (_$data['mainPhone'] as Input_StringComparisonExp?);
-
   Input_HistoryMeetingsBoolExp? get meeting =>
       (_$data['meeting'] as Input_HistoryMeetingsBoolExp?);
 
@@ -2379,10 +2366,6 @@ class Input_HistoryMeetingRosterBoolExp {
     if (_$data.containsKey('gender')) {
       final l$gender = gender;
       result$data['gender'] = l$gender?.toJson();
-    }
-    if (_$data.containsKey('mainPhone')) {
-      final l$mainPhone = mainPhone;
-      result$data['mainPhone'] = l$mainPhone?.toJson();
     }
     if (_$data.containsKey('meeting')) {
       final l$meeting = meeting;
@@ -2533,15 +2516,6 @@ class Input_HistoryMeetingRosterBoolExp {
     if (l$gender != lOther$gender) {
       return false;
     }
-    final l$mainPhone = mainPhone;
-    final lOther$mainPhone = other.mainPhone;
-    if (_$data.containsKey('mainPhone') !=
-        other._$data.containsKey('mainPhone')) {
-      return false;
-    }
-    if (l$mainPhone != lOther$mainPhone) {
-      return false;
-    }
     final l$meeting = meeting;
     final lOther$meeting = other.meeting;
     if (_$data.containsKey('meeting') != other._$data.containsKey('meeting')) {
@@ -2633,7 +2607,6 @@ class Input_HistoryMeetingRosterBoolExp {
     final l$blurhash = blurhash;
     final l$color = color;
     final l$gender = gender;
-    final l$mainPhone = mainPhone;
     final l$meeting = meeting;
     final l$meetingId = meetingId;
     final l$name = name;
@@ -2663,7 +2636,6 @@ class Input_HistoryMeetingRosterBoolExp {
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('gender') ? l$gender : const {},
-      _$data.containsKey('mainPhone') ? l$mainPhone : const {},
       _$data.containsKey('meeting') ? l$meeting : const {},
       _$data.containsKey('meetingId') ? l$meetingId : const {},
       _$data.containsKey('name') ? l$name : const {},
