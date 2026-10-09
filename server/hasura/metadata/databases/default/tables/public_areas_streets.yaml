@@ -16,8 +16,8 @@ insert_permissions:
           - _or:
               - &area_by_area_id_editable
                 _exists:
-                  _table: &permissions_view
-                    name: users_permissions_by_entity_id
+                  _table:
+                    name: users_permissions_on_area
                     schema: auth
                   _where:
                     _and:
@@ -34,7 +34,9 @@ insert_permissions:
                             - area_id
               - &all_data_editable
                 _exists:
-                  _table: *permissions_view
+                  _table:
+                    name: users_permissions_on_any
+                    schema: auth
                   _where:
                     _and:
                       - *requesting_user
@@ -47,7 +49,9 @@ insert_permissions:
           - _or:
               - &street_by_street_id_editable
                 _exists:
-                  _table: *permissions_view
+                  _table:
+                    name: users_permissions_on_street
+                    schema: auth
                   _where:
                     _and:
                       - *requesting_user

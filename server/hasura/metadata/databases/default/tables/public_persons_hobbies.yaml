@@ -13,10 +13,9 @@ insert_permissions:
     permission:
       check: &can_edit_person
         _or:
-          - &person_by_person_id_editable
-            _exists:
-              _table: &permissions_view
-                name: users_permissions_by_entity_id
+          - _exists:
+              _table: &person_permissions_view
+                name: users_permissions_on_person
                 schema: auth
               _where:
                 _and:
@@ -31,9 +30,10 @@ insert_permissions:
                       _ceq:
                         - $
                         - person_id
-          - &all_data_editable
-            _exists:
-              _table: *permissions_view
+          - _exists:
+              _table: &any_permissions_view
+                name: users_permissions_on_any
+                schema: auth
               _where:
                 _and:
                   - *requesting_user
@@ -55,7 +55,7 @@ select_permissions:
       filter:
         _or:
           - _exists:
-              _table: *permissions_view
+              _table: *person_permissions_view
               _where:
                 _and:
                   - *requesting_user
@@ -66,7 +66,7 @@ select_permissions:
                         - $
                         - person_id
           - _exists:
-              _table: *permissions_view
+              _table: *any_permissions_view
               _where:
                 _and:
                   - *requesting_user

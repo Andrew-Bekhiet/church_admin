@@ -113,7 +113,7 @@ select_permissions:
               - _and:
                   - _exists:
                       _table:
-                        name: users_permissions_by_entity_id
+                        name: users_permissions_on_person
                         schema: auth
                       _where:
                         _and:

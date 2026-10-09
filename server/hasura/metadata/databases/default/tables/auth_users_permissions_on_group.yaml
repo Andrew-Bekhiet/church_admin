@@ -1,0 +1,3 @@
+table:
+  name: users_permissions_on_group
+  schema: auth

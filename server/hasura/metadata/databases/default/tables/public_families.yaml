@@ -88,7 +88,7 @@ array_relationships:
           id: entity_id
         insertion_order: null
         remote_table:
-          name: users_permissions_by_entity_id
+          name: users_permissions_on_family
           schema: auth
   - name: persons
     using:
@@ -170,8 +170,8 @@ select_permissions:
           - _or:
               - _or:
                   - _exists:
-                      _table: &permissions_view
-                        name: users_permissions_by_entity_id
+                      _table: &family_permissions_view
+                        name: users_permissions_on_family
                         schema: auth
                       _where:
                         _and:
@@ -185,7 +185,9 @@ select_permissions:
                                 - $
                                 - id
                   - _exists:
-                      _table: *permissions_view
+                      _table: &any_permissions_view
+                        name: users_permissions_on_any
+                        schema: auth
                       _where:
                         _and:
                           - *requesting_user
@@ -209,7 +211,7 @@ update_permissions:
         _or:
           - &family_by_id_editable
             _exists:
-              _table: *permissions_view
+              _table: *family_permissions_view
               _where:
                 _and:
                   - *requesting_user
@@ -223,7 +225,7 @@ update_permissions:
                         - id
           - &all_data_editable
             _exists:
-              _table: *permissions_view
+              _table: *any_permissions_view
               _where:
                 _and:
                   - *requesting_user

@@ -66,8 +66,8 @@ select_permissions:
       filter:
         _or:
           - _exists:
-              _table: &permissions_view
-                name: users_permissions_by_entity_id
+              _table: &family_permissions_view
+                name: users_permissions_on_family
                 schema: auth
               _where:
                 _and:
@@ -81,7 +81,9 @@ select_permissions:
                         - $
                         - family_id
           - _exists:
-              _table: *permissions_view
+              _table: &store_permissions_view
+                name: users_permissions_on_store
+                schema: auth
               _where:
                 _and:
                   - *requesting_user
@@ -92,7 +94,9 @@ select_permissions:
                         - $
                         - store_id
           - _exists:
-              _table: *permissions_view
+              _table: &any_permissions_view
+                name: users_permissions_on_any
+                schema: auth
               _where:
                 _and:
                   - *requesting_user
@@ -124,7 +128,7 @@ update_permissions:
           - _or:
               - &family_by_family_id_editable
                 _exists:
-                  _table: *permissions_view
+                  _table: *family_permissions_view
                   _where:
                     _and:
                       - *requesting_user
@@ -138,7 +142,7 @@ update_permissions:
                             - family_id
               - &store_by_store_id_editable
                 _exists:
-                  _table: *permissions_view
+                  _table: *store_permissions_view
                   _where:
                     _and:
                       - *requesting_user
@@ -152,7 +156,7 @@ update_permissions:
                             - store_id
               - &all_data_editable
                 _exists:
-                  _table: *permissions_view
+                  _table: *any_permissions_view
                   _where:
                     _and:
                       - *requesting_user

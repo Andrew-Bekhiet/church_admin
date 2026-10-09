@@ -23,8 +23,8 @@ select_permissions:
       filter:
         _or:
           - _exists:
-              _table: &permissions_view
-                name: users_permissions_by_entity_id
+              _table:
+                name: users_permissions_on_any
                 schema: auth
               _where:
                 _and:
@@ -35,19 +35,127 @@ select_permissions:
                       _eq: any
                   - entity_id:
                       _is_null: true
-          - _exists:
-              _table: *permissions_view
-              _where:
-                _and:
-                  - *requesting_user
-                  - table:
-                      _ceq:
-                        - $
-                        - table
-                  - entity_id:
-                      _ceq:
-                        - $
-                        - record_id
+          - _and:
+              - table:
+                  _eq: persons
+              - _exists:
+                  _table:
+                    name: users_permissions_on_person
+                    schema: auth
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - &same_record
+                        entity_id:
+                          _ceq:
+                            - $
+                            - record_id
+                      - entity_type:
+                          _eq: person
+          - _and:
+              - table:
+                  _eq: families
+              - _exists:
+                  _table:
+                    name: users_permissions_on_family
+                    schema: auth
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - *same_record
+                      - entity_type:
+                          _eq: family
+          - _and:
+              - table:
+                  _eq: users
+              - _exists:
+                  _table:
+                    name: users_permissions_on_user
+                    schema: auth
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - *same_record
+                      - entity_type:
+                          _eq: user
+          - _and:
+              - table:
+                  _eq: services
+              - _exists:
+                  _table:
+                    name: users_permissions_on_service
+                    schema: auth
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - *same_record
+                      - entity_type:
+                          _eq: service
+          - _and:
+              - table:
+                  _eq: classes
+              - _exists:
+                  _table:
+                    name: users_permissions_on_class
+                    schema: auth
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - *same_record
+                      - entity_type:
+                          _eq: class
+          - _and:
+              - table:
+                  _eq: groups
+              - _exists:
+                  _table:
+                    name: users_permissions_on_group
+                    schema: auth
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - *same_record
+                      - entity_type:
+                          _eq: group
+          - _and:
+              - table:
+                  _eq: areas
+              - _exists:
+                  _table:
+                    name: users_permissions_on_area
+                    schema: auth
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - *same_record
+                      - entity_type:
+                          _eq: area
+          - _and:
+              - table:
+                  _eq: streets
+              - _exists:
+                  _table:
+                    name: users_permissions_on_street
+                    schema: auth
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - *same_record
+                      - entity_type:
+                          _eq: street
+          - _and:
+              - table:
+                  _eq: stores
+              - _exists:
+                  _table:
+                    name: users_permissions_on_store
+                    schema: auth
+                  _where:
+                    _and:
+                      - *requesting_user
+                      - *same_record
+                      - entity_type:
+                          _eq: store
       allow_aggregations: true
       query_root_fields: []
       subscription_root_fields: []

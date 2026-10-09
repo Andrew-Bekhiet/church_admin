@@ -95,8 +95,8 @@ update_permissions:
         _or:
           - &area_by_id_editable
             _exists:
-              _table: &permissions_view
-                name: users_permissions_by_entity_id
+              _table:
+                name: users_permissions_on_area
                 schema: auth
               _where:
                 _and:
@@ -113,7 +113,9 @@ update_permissions:
                         - id
           - &all_data_editable
             _exists:
-              _table: *permissions_view
+              _table:
+                name: users_permissions_on_any
+                schema: auth
               _where:
                 _and:
                   - *requesting_user

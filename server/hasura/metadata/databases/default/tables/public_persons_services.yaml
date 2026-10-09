@@ -16,8 +16,8 @@ insert_permissions:
           - _or:
               - &person_by_person_id_editable
                 _exists:
-                  _table: &permissions_view
-                    name: users_permissions_by_entity_id
+                  _table: &person_permissions_view
+                    name: users_permissions_on_person
                     schema: auth
                   _where:
                     _and:
@@ -34,7 +34,9 @@ insert_permissions:
                             - person_id
               - &all_data_editable
                 _exists:
-                  _table: *permissions_view
+                  _table: &any_permissions_view
+                    name: users_permissions_on_any
+                    schema: auth
                   _where:
                     _and:
                       - *requesting_user
@@ -50,7 +52,9 @@ insert_permissions:
                     _eq: true
               - &service_by_service_id_editable
                 _exists:
-                  _table: *permissions_view
+                  _table: &service_permissions_view
+                    name: users_permissions_on_service
+                    schema: auth
                   _where:
                     _and:
                       - *requesting_user
@@ -75,7 +79,7 @@ select_permissions:
         _and:
           - _or:
               - _exists:
-                  _table: *permissions_view
+                  _table: *person_permissions_view
                   _where:
                     _and:
                       - *requesting_user
@@ -87,7 +91,7 @@ select_permissions:
                             - person_id
               - &all_data_readable
                 _exists:
-                  _table: *permissions_view
+                  _table: *any_permissions_view
                   _where:
                     _and:
                       - *requesting_user
@@ -97,7 +101,7 @@ select_permissions:
                           _is_null: true
           - _or:
               - _exists:
-                  _table: *permissions_view
+                  _table: *service_permissions_view
                   _where:
                     _and:
                       - *requesting_user

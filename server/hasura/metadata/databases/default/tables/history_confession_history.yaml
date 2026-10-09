@@ -17,8 +17,8 @@ insert_permissions:
       check:
         _or:
           - _exists:
-              _table: &permissions_view
-                name: users_permissions_by_entity_id
+              _table: &person_permissions_view
+                name: users_permissions_on_person
                 schema: auth
               _where:
                 _and:
@@ -34,7 +34,9 @@ insert_permissions:
                         - $
                         - person_id
           - _exists:
-              _table: *permissions_view
+              _table: &any_permissions_view
+                name: users_permissions_on_any
+                schema: auth
               _where:
                 _and:
                   - *requesting_user
@@ -59,7 +61,7 @@ select_permissions:
       filter:
         _or:
           - _exists:
-              _table: *permissions_view
+              _table: *person_permissions_view
               _where:
                 _and:
                   - *requesting_user
@@ -70,7 +72,7 @@ select_permissions:
                         - $
                         - person_id
           - _exists:
-              _table: *permissions_view
+              _table: *any_permissions_view
               _where:
                 _and:
                   - *requesting_user
