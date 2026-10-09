@@ -9,8 +9,12 @@ part of 'service.dart';
 // QueryableFieldsGenerator
 // **************************************************************************
 
-class _ServiceFields {
-  _ServiceFields();
+class ServiceFields {
+  factory ServiceFields() => _instance;
+
+  ServiceFields._();
+
+  static final ServiceFields _instance = ServiceFields._();
 
   final FieldMetadata<Service> id = FieldMetadata<Service>(
     getValue: (obj) => obj is Service ? obj.id : null,

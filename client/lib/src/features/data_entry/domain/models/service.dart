@@ -9,7 +9,7 @@ part 'service.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(label: 'الخدمات', extensible: true)
+@Queryable(label: 'الخدمات')
 class Service extends ViewableWithIDAndImage
     with _$Service
     implements SerializableExtra {
@@ -163,15 +163,4 @@ class Service extends ViewableWithIDAndImage
       newService: result,
     );
   }
-}
-
-class ServiceFields extends _ServiceFields {
-  @override
-  FieldMetadata<User> get adminUsers => adminUsersRel.redirectTo(
-    AdminOnDataFields().user,
-    label: adminUsersRel.label,
-    isExpandable: false,
-    isOrderable: false,
-  );
-  ServiceFields();
 }

@@ -7,7 +7,7 @@ part 'person_type.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(label: 'نوع الفرد في العائلة', extensible: true)
+@Queryable(label: 'نوع الفرد في العائلة')
 class PersonType extends ViewableWithID
     with _$PersonType
     implements SerializableExtra {
@@ -30,7 +30,7 @@ class PersonType extends ViewableWithID
   final bool isFamilyAdmin;
 
   @override
-  @QueryableField(label: 'مخفي')
+  @QueryableField(label: 'مخفي', codeOnly: true)
   final bool isHidden;
 
   @override
@@ -49,17 +49,4 @@ class PersonType extends ViewableWithID
 
   @override
   Json toJson() => _$PersonTypeToJson(this);
-}
-
-class PersonTypeFields extends _PersonTypeFields {
-  @override
-  FieldMetadata<bool> get isHidden => FieldMetadata<bool>(
-    getValue: super.isHidden.getValue,
-    parentType: super.isHidden.parentType,
-    name: super.isHidden.name,
-    label: super.isHidden.label,
-    operators: super.isHidden.operators,
-    isCodeOnly: true,
-  );
-  PersonTypeFields();
 }

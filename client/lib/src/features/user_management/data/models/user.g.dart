@@ -16,8 +16,8 @@ class _UserFields {
     getValue: (obj) => obj is User ? obj.uid : null,
     parentType: User,
     name: 'uid',
-    label: 'uid',
-    isCodeOnly: false,
+    label: 'معرف المستخدم',
+    isCodeOnly: true,
     operators: {...StringOperator.values},
   );
 
@@ -34,8 +34,8 @@ class _UserFields {
     getValue: (obj) => obj is User ? obj.email : null,
     parentType: User,
     name: 'email',
-    label: 'email',
-    isCodeOnly: false,
+    label: 'البريد الإلكتروني',
+    isCodeOnly: true,
     operators: {
       ...StringOperator.values,
       PrimitiveOperator.isNull,
@@ -115,7 +115,7 @@ class _UserFields {
     parentType: User,
     name: 'currentUserCanManageThisUser',
     label: 'currentUserCanManageThisUser',
-    isCodeOnly: false,
+    isCodeOnly: true,
     operators: {...BooleanOperator.values},
   );
 

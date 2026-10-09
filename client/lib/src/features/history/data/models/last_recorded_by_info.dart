@@ -7,7 +7,7 @@ part 'last_recorded_by_info.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(label: 'بيانات آخر تسجيل', extensible: true)
+@Queryable(label: 'بيانات آخر تسجيل')
 class LastRecordedByInfo extends ViewableWithID
     with _$LastRecordedByInfo
     implements SerializableExtra {
@@ -25,7 +25,7 @@ class LastRecordedByInfo extends ViewableWithID
   final User? user;
 
   @override
-  @QueryableField(label: 'isFatherVisit')
+  @QueryableField(label: 'زيارة أب كاهن', orderable: false)
   final bool isFatherVisit;
 
   @override
@@ -53,22 +53,3 @@ class LastRecordedByInfo extends ViewableWithID
 
 String? readRecordedBy(Map json, String _) =>
     json['recordedBy'] ?? json['recorded_by'];
-
-class LastRecordedByInfoFields extends _LastRecordedByInfoFields {
-  static final LastRecordedByInfoFields _instance =
-      LastRecordedByInfoFields._();
-
-  @override
-  FieldMetadata<bool> get isFatherVisit => FieldMetadata<bool>(
-    getValue: (obj) => obj is LastRecordedByInfo ? obj.isFatherVisit : null,
-    parentType: LastRecordedByInfo,
-    name: 'isFatherVisit',
-    label: 'زيارة أب كاهن',
-    isOrderable: false,
-    operators: {...BooleanOperator.values},
-  );
-
-  factory LastRecordedByInfoFields() => _instance;
-
-  LastRecordedByInfoFields._();
-}
