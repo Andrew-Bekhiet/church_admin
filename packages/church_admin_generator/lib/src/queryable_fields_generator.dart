@@ -8,7 +8,7 @@ import 'package:source_gen/source_gen.dart';
 
 class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
   const QueryableFieldsGenerator()
-      : super(inPackage: 'church_admin_annotations', inSdk: false);
+    : super(inPackage: 'church_admin_annotations', inSdk: false);
 
   @override
   String generateForAnnotatedElement(
@@ -33,37 +33,36 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
 
     final ignoreFields = annotationInstance.ignoreFields.toSet();
     final allowExtension = annotationInstance.allowExtension;
-    final regexIgnoreFields =
-        annotationInstance.regexIgnoreFields.map(RegExp.new).toList();
+    final regexIgnoreFields = annotationInstance.regexIgnoreFields
+        .map(RegExp.new)
+        .toList();
 
     final effectiveFields = element.fields
         .where(
-      (a) =>
-          a.displayName != 'copyWith' &&
-          a.displayName != 'hashCode' &&
-          a.displayName != 'typeName' &&
-          a.displayName != 'imageInfo' &&
-          !ignoreFields.contains(a.displayName) &&
-          !regexIgnoreFields.any((r) => r.hasMatch(a.displayName)),
-    )
-        .map(
-      (g) {
-        final annotation = const TypeChecker.typeNamed(
-          QueryableField,
-          inPackage: 'church_admin_annotations',
-          inSdk: false,
+          (a) =>
+              a.displayName != 'copyWith' &&
+              a.displayName != 'hashCode' &&
+              a.displayName != 'typeName' &&
+              a.displayName != 'imageInfo' &&
+              !ignoreFields.contains(a.displayName) &&
+              !regexIgnoreFields.any((r) => r.hasMatch(a.displayName)),
         )
-            .annotationsOf(g)
-            .singleOrNull;
-        final renameTo = annotation?.getField('renameTo')?.toStringValue();
+        .map(
+          (g) {
+            final annotation = const TypeChecker.typeNamed(
+              QueryableField,
+              inPackage: 'church_admin_annotations',
+              inSdk: false,
+            ).annotationsOf(g).singleOrNull;
+            final renameTo = annotation?.getField('renameTo')?.toStringValue();
 
-        return SyntheticElement(
-          name: renameTo ?? g.displayName,
-          type: g.type,
-          element: g,
+            return SyntheticElement(
+              name: renameTo ?? g.displayName,
+              type: g.type,
+              element: g,
+            );
+          },
         );
-      },
-    );
 
     return _writeClassFieldsMetadata(
       element,
@@ -93,7 +92,7 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
         _writeClassFields(classElement, labelsOverrides, fields),
         '\n\n',
       )
-      ..writeln(_collectAllClassFields(classElement.displayName, fields))
+      ..writeln(_collectAllClassFields(fields))
       ..writeln(
         allowExtension ? '' : 'factory $generatedClassName() => _instance;',
       )
@@ -103,10 +102,7 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
     return buffer.toString();
   }
 
-  String _collectAllClassFields(
-    String className,
-    Iterable<SyntheticElement> fields,
-  ) {
+  String _collectAllClassFields(Iterable<SyntheticElement> fields) {
     return '\n\nlate final List<FieldMetadata<Object>> allFields = [${fields.map((p) => p.name.maybeAddDollar()).join(',\n')}];\n'
         'late final Map<String, FieldMetadata<Object>> allFieldsByName = {${fields.map((p) => "'${p.name}': ${p.name.maybeAddDollar()}").join(',\n')}};';
   }
@@ -116,95 +112,100 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
     Map<String?, String?> labelsOverrides,
     Iterable<SyntheticElement> fields,
   ) {
-    return fields.map((f) {
-      final name = f.name;
+    return fields
+        .map((f) {
+          final name = f.name;
 
-      String getLabel() => labelsOverrides[name] ?? _getFieldLabel(name);
+          String getLabel() => labelsOverrides[name] ?? _getFieldLabel(name);
 
-      if (name == 'id') {
-        return _writeFieldMetadata(
-          parentType: classElement.thisType,
-          type: classElement.thisType,
-          name: name,
-          label: getLabel(),
-        );
-      }
-
-      if (f.type is InterfaceType &&
-          (f.type as InterfaceType).allSupertypes.any(
-                (t) => t
-                    .getDisplayStringWithoutNullability()
-                    .startsWith('Iterable'),
-              )) {
-        log.info({
-          'type': f.type,
-          'isList': true,
-        });
-        final iterableType = (f.type as InterfaceType).allSupertypes.firstWhere(
-              (t) =>
-                  t.getDisplayStringWithoutNullability().startsWith('Iterable'),
+          if (name == 'id') {
+            return _writeFieldMetadata(
+              parentType: classElement.thisType,
+              type: classElement.thisType,
+              name: name,
+              label: getLabel(),
             );
-        final type = iterableType.typeArguments.first;
+          }
 
-        final annotation = f.element != null
-            ? const TypeChecker.typeNamed(
+          if (f.type is InterfaceType &&
+              (f.type as InterfaceType).allSupertypes.any(
+                (t) => t.getDisplayStringWithoutNullability().startsWith(
+                  'Iterable',
+                ),
+              )) {
+            log.info({
+              'type': f.type,
+              'isList': true,
+            });
+            final iterableType = (f.type as InterfaceType).allSupertypes
+                .firstWhere(
+                  (t) => t.getDisplayStringWithoutNullability().startsWith(
+                    'Iterable',
+                  ),
+                );
+            final type = iterableType.typeArguments.first;
+
+            final annotation = switch (f.element) {
+              final element? => const TypeChecker.typeNamed(
                 QueryableField,
                 inPackage: 'church_admin_annotations',
                 inSdk: false,
-              )
-                .annotationsOf(f.element!)
-                .singleOrNull
-            : null;
+              ).annotationsOf(element).singleOrNull,
+              null => null,
+            };
 
-        final manyToManyRelType =
-            annotation?.getField('manyToManyRelType')?.toTypeValue();
-        final manyToManyRelSelectField =
-            annotation?.getField('manyToManyRelSelectField')?.toStringValue();
+            final manyToManyRelType = annotation
+                ?.getField('manyToManyRelType')
+                ?.toTypeValue();
+            final manyToManyRelSelectField = annotation
+                ?.getField('manyToManyRelSelectField')
+                ?.toStringValue();
 
-        if (manyToManyRelType != null) {
-          return [
-            _writeFieldMetadata(
+            if (manyToManyRelType != null) {
+              return [
+                _writeFieldMetadata(
+                  parentType: classElement.thisType,
+                  type: manyToManyRelType,
+                  name: name,
+                  label: name,
+                  isRelationship: true,
+                  isIterable: true,
+                  isCodeOnly: true,
+                ),
+                '\n',
+                _writeRelationshipFieldMetadata(
+                  type,
+                  name,
+                  manyToManyRelType.getDisplayStringWithoutNullability(),
+                  manyToManyRelSelectField,
+                ),
+              ];
+            }
+
+            return _writeFieldMetadata(
               parentType: classElement.thisType,
-              type: manyToManyRelType,
+              type: type,
               name: name,
-              label: name,
-              isRelationship: true,
+              label: getLabel(),
               isIterable: true,
-              isCodeOnly: true,
-            ),
-            '\n',
-            _writeRelationshipFieldMetadata(
-              type,
-              name,
-              manyToManyRelType.getDisplayStringWithoutNullability(),
-              manyToManyRelSelectField,
-            ),
-          ];
-        }
+            );
+          }
 
-        return _writeFieldMetadata(
-          parentType: classElement.thisType,
-          type: type,
-          name: name,
-          label: getLabel(),
-          isIterable: true,
+          return _writeFieldMetadata(
+            parentType: classElement.thisType,
+            type: f.type,
+            name: name,
+            label: name.endsWith('Aggregate') ? name : getLabel(),
+            isCodeOnly: name.endsWith('Aggregate'),
+          );
+        })
+        .expand(
+          (e) => switch (e) {
+            String() => [e],
+            Iterable<String>() => e,
+            _ => [],
+          },
         );
-      }
-
-      return _writeFieldMetadata(
-        parentType: classElement.thisType,
-        type: f.type,
-        name: name,
-        label: name.endsWith('Aggregate') ? name : getLabel(),
-        isCodeOnly: name.endsWith('Aggregate'),
-      );
-    }).expand(
-      (e) => switch (e) {
-        String() => [e],
-        Iterable<String>() => e,
-        _ => [],
-      },
-    );
   }
 
   String _writeRelationshipFieldMetadata(
@@ -278,9 +279,10 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
   }
 
   String _toFieldMetadataType(DartType type) {
-    final typeName = type
-        .getDisplayStringWithoutNullability()
-        .replaceFirst(RegExp('^History'), '');
+    final typeName = type.getDisplayStringWithoutNullability().replaceFirst(
+      RegExp('^History'),
+      '',
+    );
 
     return 'FieldMetadata<$typeName>';
   }
@@ -293,47 +295,15 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
         'No label found for field $name, using field name as label instead',
       );
     }
+
     return label ?? name;
   }
 
   String? getOperatorsStringForType(DartType type, String fieldName) {
-    final operators = <String>[];
-
-    final typeName = type.getDisplayStringWithoutNullability();
-
-    if (fieldName == 'birthday') {
-      operators.add('...BirthdayOperator.values');
-    } else if (type.isDartCoreBool) {
-      operators.add('...BooleanOperator.values');
-    } else if (type.isDartCoreNum ||
-        type.isDartCoreInt ||
-        type.isDartCoreDouble) {
-      operators.add('...PrimitiveOperator.values');
-    } else if (type.isDartCoreString) {
-      operators.add('...StringOperator.values');
-    } else if (typeName == 'Color') {
-      operators.add('...ColorOperator.values');
-    } else if (typeName == 'DateTime') {
-      operators
-        ..add('...DateTimeOperator.values')
-        ..add('...DateRangeOperator.values');
-    } else if (type is InterfaceType &&
-        type.allSupertypes
-            .any((t) => t.getDisplayStringWithoutNullability() == 'Spatial')) {
-      operators.add('...SpatialOperator.values');
-    } else if (type is InterfaceType &&
-        type.allSupertypes.any(
-          (t) {
-            final displayString = t.getDisplayStringWithoutNullability();
-
-            return displayString == 'Enum' ||
-                displayString == 'Iterable' ||
-                displayString == 'ViewableWithID' ||
-                displayString == 'ID';
-          },
-        )) {
-      operators.add('...MultiSelectOperator.values');
-    }
+    final operators = switch (fieldName) {
+      'birthday' => ['...BirthdayOperator.values'],
+      _ => _getBaseOperatorsForType(type),
+    };
 
     if (operators.isEmpty) {
       return null;
@@ -347,29 +317,75 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
 
     return '{${operators.join(',')}}';
   }
+
+  List<String> _getBaseOperatorsForType(DartType type) {
+    return switch (type) {
+      _ when type.isDartCoreBool => ['...BooleanOperator.values'],
+      DartType(isDartCoreNum: true) ||
+      DartType(isDartCoreInt: true) ||
+      DartType(isDartCoreDouble: true) => ['...PrimitiveOperator.values'],
+      _ when type.isDartCoreString => ['...StringOperator.values'],
+      _ => _getNonPrimitiveOperatorsForType(type),
+    };
+  }
+
+  List<String> _getNonPrimitiveOperatorsForType(DartType type) {
+    return switch (type.getDisplayStringWithoutNullability()) {
+      'Color' => ['...ColorOperator.values'],
+      'DateTime' => [
+        '...DateTimeOperator.values',
+        '...DateRangeOperator.values',
+      ],
+      _ => switch (type) {
+        InterfaceType() => _getSupertypeOperatorsForType(type),
+        _ => [],
+      },
+    };
+  }
+
+  List<String> _getSupertypeOperatorsForType(InterfaceType type) {
+    final supertypeNames = type.allSupertypes
+        .map((t) => t.getDisplayStringWithoutNullability())
+        .toSet();
+
+    return switch (supertypeNames) {
+      _ when supertypeNames.contains('Spatial') => [
+        '...SpatialOperator.values',
+      ],
+      _
+          when supertypeNames.any(
+            (name) => switch (name) {
+              'Enum' || 'Iterable' || 'ViewableWithID' || 'ID' => true,
+              _ => false,
+            },
+          ) =>
+        ['...MultiSelectOperator.values'],
+      _ => [],
+    };
+  }
 }
 
 extension on ConstantReader {
   Queryable asQueryable() {
     return Queryable(
       classLabel: read('classLabel').stringValue,
-      labelsOverrides: read('labelsOverrides').mapValue.map(
-            (key, value) => MapEntry(
-              key!.toStringValue()!,
-              value!.toStringValue()!,
-            ),
-          ),
-      ignoreFields: read('ignoreFields')
-          .listValue
-          .map((e) => e.toStringValue())
-          .nonNulls
-          .toList(),
+      labelsOverrides: {
+        for (final MapEntry(:key, :value) in read(
+          'labelsOverrides',
+        ).mapValue.entries)
+          if ((key?.toStringValue(), value?.toStringValue()) case (
+            final label?,
+            final override?,
+          ))
+            label: override,
+      },
+      ignoreFields: read(
+        'ignoreFields',
+      ).listValue.map((e) => e.toStringValue()).nonNulls.toList(),
       allowExtension: read('allowExtension').boolValue,
-      regexIgnoreFields: read('regexIgnoreFields')
-          .listValue
-          .map((e) => e.toStringValue())
-          .nonNulls
-          .toList(),
+      regexIgnoreFields: read(
+        'regexIgnoreFields',
+      ).listValue.map((e) => e.toStringValue()).nonNulls.toList(),
     );
   }
 }

@@ -1,25 +1,20 @@
 name: church_admin_generator
-description: ""
+description: Generates queryable field metadata and the queryables registry for church_admin models.
 version: 1.0.0
-publish_to: "none"
+publish_to: none
 
 environment:
-  sdk: ^3.1.0
+  sdk: ^3.12.0
 
-dependency_overrides:
-  js: ^0.7.1
-
+# The floor follows the client, whose gql_code_builder holds analyzer below 14;
+# standalone resolution picks the newest so solid_lints 1.x can lint this package.
 dependencies:
-  analyzer: ^8.0.0
-  build: ^4.0.0
+  analyzer: ">=10.0.0 <15.0.0"
+  build: ^4.0.7
   church_admin_annotations:
     path: ../church_admin_annotations
-  code_builder: ^4.10.1
-  dart_style: ^3.1.0
-  glob: ^2.1.2
-  gql: ^1.0.1-alpha+1691943394579
-  source_gen: ^4.0.0
+  source_gen: ^4.2.4
 
 dev_dependencies:
-  lints: ^6.0.0
-  test: ^1.21.0
+  solid_lints: ^1.0.0
+  test: ^1.26.0

@@ -23,15 +23,23 @@ class QueryableRegisteryGenerator extends Generator {
     if (registry == null) return '';
 
     final queryables = _collectAllQueryablesFromExportedLibraries(
-      library.element.fragments.expand((f) => f.importedLibraries).firstWhere(
+      library.element.fragments
+          .expand((f) => f.importedLibraries)
+          .firstWhere(
             (l) => l.identifier == 'package:church_admin/church_admin.dart',
           ),
     );
 
-    return _writeQueryablesRegistry(
-      registry.element.name!,
-      queryables.toList(),
-    );
+    final registryName = registry.element.name;
+
+    if (registryName == null) {
+      throw InvalidGenerationSourceError(
+        'GenerateQueryablesRegistery annotation must be on a named element',
+        element: registry.element,
+      );
+    }
+
+    return _writeQueryablesRegistry(registryName, queryables.toList());
   }
 
   Iterable<AnnotatedElement> _collectAllQueryablesFromExportedLibraries(
@@ -51,8 +59,7 @@ class QueryableRegisteryGenerator extends Generator {
           ),
         )
         .followedBy(
-          LibraryReader(library)
-              .annotatedWith(
+          LibraryReader(library).annotatedWith(
             const TypeChecker.typeNamed(
               Queryable,
               inPackage: 'church_admin_annotations',
