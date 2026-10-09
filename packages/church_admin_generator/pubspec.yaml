@@ -6,7 +6,7 @@ publish_to: none
 environment:
   sdk: ^3.12.0
 
-# The floor follows the client, whose graphql_codegen holds analyzer below 14;
+# The floor follows the client, whose gql_code_builder holds analyzer below 14;
 # standalone resolution picks the newest so solid_lints 1.x can lint this package.
 dependencies:
   analyzer: ">=10.0.0 <15.0.0"
