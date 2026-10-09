@@ -19,7 +19,7 @@ pathspecs=()
 if [ -n "${1:-}" ]; then
   changed=$(git diff --name-only --relative "$1" HEAD -- .)
   if grep -qE '\.(graphql|gql)$|__generated__/|^build\.yaml$|^pubspec\.(yaml|lock)$' <<<"$changed" ||
-    ! git diff --quiet "$1" HEAD -- ../church_admin_generator; then
+    ! git diff --quiet "$1" HEAD -- ../packages; then
     echo 'GraphQL documents, builders or dependencies changed: rebuilding everything.'
   else
     while IFS= read -r file; do

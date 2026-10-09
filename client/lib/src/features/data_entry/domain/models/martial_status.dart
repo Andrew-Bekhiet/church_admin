@@ -1,5 +1,5 @@
-import 'package:church_admin/annotations/queryable.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin_annotations/church_admin_annotations.dart';
 
 @Queryable(classLabel: 'الحالات الاجتماعية')
 enum MartialStatus implements LabeledEnum {

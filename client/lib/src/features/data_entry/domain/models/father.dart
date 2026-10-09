@@ -1,5 +1,5 @@
-import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin_annotations/church_admin_annotations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'father.freezed.dart';

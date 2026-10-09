@@ -24,6 +24,8 @@ dependencies:
   auto_size_text: ^3.0.0
   cached_network_image: ^3.2.3
   calendar_date_picker2: ^3.0.0
+  church_admin_annotations:
+    path: ../packages/church_admin_annotations
   clock: ^1.1.1
   cloud_functions: ^6.0.1
   collection: ^1.17.0
@@ -119,7 +121,7 @@ dev_dependencies:
   bloc_test: ^10.0.0
   build_runner: ^2.5.3
   church_admin_generator:
-    path: ../church_admin_generator
+    path: ../packages/church_admin_generator
   cross_file: ^0.3.3+4
   device_info_plus_platform_interface: ^8.1.0
   fake_async: ^1.3.3
