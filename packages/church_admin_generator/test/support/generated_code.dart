@@ -3,7 +3,7 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:dart_style/dart_style.dart';
 
 final class GeneratedCode {
-  static const _onOneLine = 1000000;
+  static const _oneLineMaxWidth = 1_000_000;
 
   final String _source;
   final List<ClassDeclaration> _classes;
@@ -14,7 +14,7 @@ final class GeneratedCode {
   factory GeneratedCode.parse(String generated) {
     final source = DartFormatter(
       languageVersion: DartFormatter.latestLanguageVersion,
-      pageWidth: _onOneLine,
+      pageWidth: _oneLineMaxWidth,
     ).format(generated);
 
     return GeneratedCode._(
