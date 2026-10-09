@@ -1,4 +1,5 @@
 abstract final class DefaultFieldLabels {
+  // TODO: to defer to localization
   static const byName = <String, String>{
     'id': '=',
     'name': 'الاسم',
