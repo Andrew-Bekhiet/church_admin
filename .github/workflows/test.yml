@@ -49,28 +49,6 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Check formatting
-        run: dart format --output=none --set-exit-if-changed .
-
-      - name: Restore analyzer cache
-        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.dartServer
-          key: dart-server-${{ runner.os }}-${{ hashFiles('client/.fvmrc', 'client/pubspec.lock') }}-${{ github.sha }}
-          restore-keys: |
-            dart-server-${{ runner.os }}-${{ hashFiles('client/.fvmrc', 'client/pubspec.lock') }}-
-            dart-server-${{ runner.os }}-
-
-      - name: Analyze code
-        run: dart analyze --plugins --fatal-infos
-
-      - name: Save analyzer cache
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.dartServer
-          key: dart-server-${{ runner.os }}-${{ hashFiles('client/.fvmrc', 'client/pubspec.lock') }}-${{ github.sha }}
-
       - name: Run tests with coverage
         run: flutter test --coverage --reporter=expanded --file-reporter "json:test-results.json" --dart-define CI=true test/test_bundle.dart $(scripts/generate_test_bundle.sh)
 

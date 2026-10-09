@@ -192,7 +192,7 @@ dart analyze --plugins --fatal-infos
 
 Keep `--fatal-infos`. Most solid_lints diagnostics are `info`, so a plain run exits 0 with findings outstanding.
 
-**Run `dart format` over the whole package before committing**, not only the directory you touched. It also normalises a mixed-ending file back to one style. Formatting a single subdirectory is how the mixed endings above survived review. CI fails on unformatted code (`dart format --output=none --set-exit-if-changed .`).
+**Run `dart format` over the whole package before committing**, not only the directory you touched. It also normalises a mixed-ending file back to one style. Formatting a single subdirectory is how the mixed endings above survived review. CI fails on unformatted code (`dart format . && git diff --exit-code .` in `static-analysis.yml`, which prints the diff).
 
 ## CI workflows
 

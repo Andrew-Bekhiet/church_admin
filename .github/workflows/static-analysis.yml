@@ -1,0 +1,79 @@
+name: Static analysis
+
+on:
+  pull_request:
+    paths:
+      - "client/**"
+      - "packages/**"
+      - ".github/workflows/static-analysis.yml"
+
+  push:
+    branches: [master]
+    paths:
+      - "client/**"
+      - "packages/**"
+      - ".github/workflows/static-analysis.yml"
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dart:
+    name: Dart (${{ matrix.project }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - client
+          - packages/church_admin_annotations
+          - packages/church_admin_generator
+
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
+        with:
+          cache: true
+          flutter-version-file: client/.fvmrc
+          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
+          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Check formatting
+        run: dart format . && git diff --exit-code .
+
+      - name: Restore analyzer cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.dartServer
+          key: dart-server-${{ runner.os }}-${{ matrix.project }}-${{ hashFiles('client/.fvmrc', format('{0}/pubspec.*', matrix.project)) }}-${{ github.sha }}
+          restore-keys: |
+            dart-server-${{ runner.os }}-${{ matrix.project }}-${{ hashFiles('client/.fvmrc', format('{0}/pubspec.*', matrix.project)) }}-
+            dart-server-${{ runner.os }}-${{ matrix.project }}-
+
+      - name: Analyze code
+        run: dart analyze --plugins --fatal-infos
+
+      - name: Save analyzer cache
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.dartServer
+          key: dart-server-${{ runner.os }}-${{ matrix.project }}-${{ hashFiles('client/.fvmrc', format('{0}/pubspec.*', matrix.project)) }}-${{ github.sha }}
