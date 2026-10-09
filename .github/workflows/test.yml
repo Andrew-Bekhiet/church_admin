@@ -60,7 +60,7 @@ jobs:
           archive: false
 
       - name: Report test results
-        uses: dorny/test-reporter@d61b558e8df85cb60d09ca3e5b09653b4477cea7 # v1
+        uses: dorny/test-reporter@3d49bf4e0715e7fe48375099bd6b1058d42e673c # v3.2.0
         if: always()
         with:
           name: "Unit and Widget Tests"
