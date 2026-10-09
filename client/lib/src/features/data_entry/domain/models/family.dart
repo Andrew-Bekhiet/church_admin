@@ -8,56 +8,54 @@ part 'family.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(
-  classLabel: 'العائلات',
-  allowExtension: true,
-  labelsOverrides: {
-    'status': 'الحالة الاجتماعية',
-    'deceasedSpouseName': 'اسم الزوج المتوفي',
-    'marriageDate': 'تاريخ الزواج',
-    'lastFatherVisit': 'آخر افتقاد للأب الكاهن',
-    'children': 'عائلات الأبناء',
-    'parents': 'عائلات الآباء',
-  },
-  ignoreFields: ['blurhash', 'contacts', 'userCanEdit'],
-)
+@Queryable(label: 'العائلات', extensible: true)
 class Family extends ViewableWithIDAndImage
     with _$Family
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
+  @QueryableField(label: 'تفاصيل العنوان')
   final Address? address;
 
   @override
   @JsonKey(defaultValue: MartialStatus.married)
+  @QueryableField(label: 'الحالة الاجتماعية')
   final MartialStatus status;
 
   @override
   @LocalDateTimeConverter()
+  @QueryableField(label: 'تاريخ الزواج')
   final DateTime? marriageDate;
 
   @override
+  @QueryableField(label: 'اسم الزوج المتوفي')
   final String? deceasedSpouseName;
 
   @override
+  @QueryableField(label: 'الكنيسة')
   final Church? church;
 
   @override
+  @QueryableField(label: 'ملاحظات')
   final String? notes;
 
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  @QueryableField(label: 'اللون')
   final Color? color;
 
   @override
   @LocalDateTimeConverter()
+  @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
 
   @override
@@ -65,18 +63,12 @@ class Family extends ViewableWithIDAndImage
 
   @override
   @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
-  @QueryableField(
-    manyToManyRelType: FamiliesFamilies,
-    manyToManyRelSelectField: 'child',
-  )
+  @QueryableField.manyToMany(through: FamiliesFamilies, select: 'child')
   final List<Family>? children;
 
   @override
   @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
-  @QueryableField(
-    manyToManyRelType: FamiliesFamilies,
-    manyToManyRelSelectField: 'parent',
-  )
+  @QueryableField.manyToMany(through: FamiliesFamilies, select: 'parent')
   final List<Family>? parents;
 
   @override
@@ -84,18 +76,22 @@ class Family extends ViewableWithIDAndImage
   final List<FamilyPhoneContact> contacts;
 
   @override
+  @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
   @override
+  @QueryableField(label: 'أخر افتقاد')
   final LastRecordedByInfo? lastVisit;
 
   @override
+  @QueryableField(label: 'آخر افتقاد للأب الكاهن')
   final LastRecordedByInfo? lastFatherVisit;
 
   @override
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
+  @QueryableField(label: 'الموقع')
   Point? get geolocation => address?.geolocation;
 
   @override

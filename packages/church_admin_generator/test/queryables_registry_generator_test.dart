@@ -9,7 +9,7 @@ void main() {
       "import 'package:church_admin_annotations/church_admin_annotations.dart';";
 
   String queryable(String declaration, {required String label}) =>
-      "$annotationsImport\n@Queryable(classLabel: '$label')\n$declaration";
+      "$annotationsImport\n@Queryable(label: '$label')\n$declaration";
 
   final person = queryable('class Person {}', label: 'People');
   final gender = queryable('enum Gender { male }', label: 'Genders');

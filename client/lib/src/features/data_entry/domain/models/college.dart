@@ -7,15 +7,17 @@ part 'college.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'الكليات')
+@Queryable(label: 'الكليات')
 class College extends ViewableWithID
     with _$College
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
   @override
   final String? universityId;

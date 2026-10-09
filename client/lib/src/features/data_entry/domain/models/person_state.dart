@@ -9,18 +9,21 @@ part 'person_state.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'الحالات الروحية')
+@Queryable(label: 'الحالات الروحية')
 class PersonState extends ViewableWithID
     with _$PersonState
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  @QueryableField(label: 'اللون')
   final Color? color;
 
   @override

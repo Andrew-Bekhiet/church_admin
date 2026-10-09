@@ -7,15 +7,18 @@ part 'aggregate_data.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'الإحصائيات')
+@Queryable(label: 'الإحصائيات')
 class AggregateData with _$AggregateData {
   @override
+  @QueryableField(label: 'العدد')
   final int? count;
   @override
   @JsonKey(readValue: _readLastRecordedByInfo)
+  @QueryableField(label: 'أقصى')
   final LastRecordedByInfo? max;
   @override
   @JsonKey(readValue: _readLastRecordedByInfo)
+  @QueryableField(label: 'أدنى')
   final LastRecordedByInfo? min;
 
   const AggregateData({

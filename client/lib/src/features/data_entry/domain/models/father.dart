@@ -7,20 +7,23 @@ part 'father.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'أباء الاعتراف')
+@Queryable(label: 'أباء الاعتراف')
 class Father extends ViewableWithID with _$Father implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
   final String? churchId;
 
   @override
+  @QueryableField(label: 'isHidden')
   final bool isHidden;
 
   @override

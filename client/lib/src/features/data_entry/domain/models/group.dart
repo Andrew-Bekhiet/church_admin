@@ -8,30 +8,28 @@ part 'group.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(
-  classLabel: 'المجموعات',
-  allowExtension: true,
-  labelsOverrides: {
-    'defaultMeeting': 'الاجتماع الافتراضي',
-  },
-)
+@Queryable(label: 'المجموعات', extensible: true)
 class Group extends ViewableWithIDAndImage
     with _$Group
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  @QueryableField(label: 'اللون')
   final Color? color;
 
   @override
   @LocalDateTimeConverter()
+  @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
 
   @override
@@ -41,24 +39,29 @@ class Group extends ViewableWithIDAndImage
   final String? serviceId;
 
   @override
+  @QueryableField(label: 'الخدمة')
   final Service? service;
 
   @override
+  @QueryableField(label: 'الاجتماع الافتراضي')
   final Meeting? defaultMeeting;
 
   @override
+  @QueryableField(label: 'meetings')
   final List<Meeting>? meetings;
 
   @override
   @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
+  @QueryableField(label: 'validity')
   final DateTimeRange? validity;
 
   @override
+  @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
   @override
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  @QueryableField(manyToManyRelType: AdminOnData)
+  @QueryableField.manyToMany(through: AdminOnData)
   final List<User>? adminUsers;
 
   @override

@@ -7,13 +7,15 @@ part 'job.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'الوظائف')
+@Queryable(label: 'الوظائف')
 class Job extends ViewableWithID with _$Job implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override

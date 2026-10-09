@@ -132,7 +132,11 @@ final class FieldsClassBuilder {
                 '${field.throughTypeName}Fields',
               ).call([]).property(field.targetMemberName),
             ],
-            {'isExpandable': literalFalse, 'isOrderable': literalFalse},
+            {
+              'isExpandable': literalFalse,
+              'isOrderable': literalFalse,
+              if (field.label case final label?) 'label': literalString(label),
+            },
           )
           .code,
   );

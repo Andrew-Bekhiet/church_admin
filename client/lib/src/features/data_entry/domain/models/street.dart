@@ -8,28 +8,33 @@ part 'street.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'الشوارع')
+@Queryable(label: 'الشوارع')
 class Street extends ViewableWithIDAndImage
     with _$Street
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
   @JsonKey(fromJson: lineFromJson, toJson: lineToJson)
+  @QueryableField(label: 'الموقع')
   final Line? line;
 
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  @QueryableField(label: 'اللون')
   final Color? color;
 
   @override
   @LocalDateTimeConverter()
+  @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
 
   @override
@@ -37,13 +42,15 @@ class Street extends ViewableWithIDAndImage
 
   @override
   @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
-  @QueryableField(manyToManyRelType: AreasStreets)
+  @QueryableField.manyToMany(through: AreasStreets)
   final List<Area>? areas;
 
   @override
+  @QueryableField(label: 'أخر افتقاد')
   final LastRecordedByInfo? lastVisit;
 
   @override
+  @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
   @override

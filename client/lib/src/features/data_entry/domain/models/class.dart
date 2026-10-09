@@ -8,69 +8,65 @@ part 'class.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(
-  classLabel: 'الفصول',
-  ignoreFields: [
-    'blurhash',
-    'serviceStudyYear',
-    'serviceStudyYearTo',
-    'spansStudyYearRange',
-    'studyYearFromOrder',
-    'studyYearRangeName',
-    'studyYearToOrder',
-    'userCanEdit',
-  ],
-  allowExtension: true,
-)
+@Queryable(label: 'الفصول', extensible: true)
 class Class extends ViewableWithIDAndImage
     with _$Class
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  @QueryableField(label: 'اللون')
   final Color? color;
 
   @override
   @LocalDateTimeConverter()
+  @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
 
   @override
   final String? blurhash;
 
   @override
+  @QueryableField(label: 'الخدمة')
   final Service? service;
 
   @override
   final String? serviceId;
 
   @override
+  @QueryableField(label: 'السنة الدراسية')
   final StudyYear? studyYear;
 
   @override
   final int? serviceStudyYear;
 
   @override
+  @QueryableField(label: 'السنة الدراسية: إلى')
   final StudyYear? studyYearTo;
 
   @override
   final int? serviceStudyYearTo;
 
   @override
+  @QueryableField(label: 'نوع المخدومين المسؤول عنهم')
   final bool? serviceGender;
 
   @override
+  @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
   @override
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  @QueryableField(manyToManyRelType: AdminOnData)
+  @QueryableField.manyToMany(through: AdminOnData)
   final List<User>? adminUsers;
 
   @override

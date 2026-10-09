@@ -33,7 +33,7 @@ final class RegistryEntriesCollector {
           .map(
             (queryable) => RegistryEntry(
               typeName: queryable.element.displayName,
-              label: queryable.annotation.read('classLabel').stringValue,
+              label: queryable.annotation.read('label').stringValue,
               isEnum: queryable.element is EnumElement,
             ),
           ),

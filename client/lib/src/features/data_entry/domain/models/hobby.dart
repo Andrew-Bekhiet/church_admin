@@ -9,16 +9,19 @@ part 'hobby.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'الهوايات')
+@Queryable(label: 'الهوايات')
 class Hobby extends ViewableWithID with _$Hobby implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  @QueryableField(label: 'اللون')
   final Color? color;
 
   @override

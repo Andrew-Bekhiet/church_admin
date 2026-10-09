@@ -7,12 +7,16 @@ part 'families_families.g.dart';
 /// Not intended to be used directly
 ///
 /// Used only for statically typed queries
-@Queryable(classLabel: 'العائلات', regexIgnoreFields: [])
+@Queryable(label: 'العائلات')
 @JsonSerializable()
 class FamiliesFamilies {
+  @QueryableField(label: 'parent')
   final Family parent;
+  @QueryableField(label: 'child')
   final Family child;
+  @QueryableField(label: 'parentFamilyId')
   final String parentFamilyId;
+  @QueryableField(label: 'childFamilyId')
   final String childFamilyId;
 
   const FamiliesFamilies({

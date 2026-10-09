@@ -8,42 +8,49 @@ part 'area.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'المناطق', allowExtension: true)
+@Queryable(label: 'المناطق', extensible: true)
 class Area extends ViewableWithIDAndImage
     with _$Area
     implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField.self()
   final String id;
 
   @override
   @JsonKey(defaultValue: '')
+  @QueryableField(label: 'الاسم')
   final String name;
 
   @override
   @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
+  @QueryableField(label: 'الموقع')
   final Polygon? bounds;
 
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  @QueryableField(label: 'اللون')
   final Color? color;
 
   @override
   @LocalDateTimeConverter()
+  @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
 
   @override
   final String? blurhash;
 
   @override
+  @QueryableField(label: 'أخر افتقاد')
   final LastRecordedByInfo? lastVisit;
 
   @override
+  @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
   @override
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  @QueryableField(manyToManyRelType: AdminOnData)
+  @QueryableField.manyToMany(through: AdminOnData)
   final List<User>? adminUsers;
 
   @override

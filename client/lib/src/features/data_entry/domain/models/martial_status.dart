@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_annotations/church_admin_annotations.dart';
 
-@Queryable(classLabel: 'الحالات الاجتماعية')
+@Queryable(label: 'الحالات الاجتماعية')
 enum MartialStatus implements LabeledEnum {
   married('متزوج/متزوجة'),
   separated('منفصل/منفصلة'),
