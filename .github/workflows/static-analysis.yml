@@ -57,7 +57,7 @@ jobs:
         run: flutter pub get
 
       - name: Check formatting
-        run: dart format . && git diff --exit-code .
+        run: dart format --set-exit-if-changed . || { git diff; exit 1; }
 
       - name: Restore analyzer cache
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
