@@ -88,6 +88,10 @@ class Family extends ViewableWithIDAndImage
   final LastRecordedByInfo? lastFatherVisit;
 
   @override
+  @QueryableField(label: 'اكتمال البيانات')
+  final DataCheck? dataCheck;
+
+  @override
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
@@ -120,6 +124,7 @@ class Family extends ViewableWithIDAndImage
     this.lastEdit,
     this.lastVisit,
     this.lastFatherVisit,
+    this.dataCheck,
   });
 
   factory Family.fromJson(Map<String, Object?> json) => _$FamilyFromJson(json);

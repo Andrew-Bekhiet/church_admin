@@ -207,6 +207,10 @@ class Person extends ViewableWithIDAndImage
   final LastRecordedByInfo? lastEdit;
 
   @override
+  @QueryableField(label: 'اكتمال البيانات')
+  final DataCheck? dataCheck;
+
+  @override
   @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
   @QueryableField.manyToMany(through: ClassesPersons)
   final List<Class>? classes;
@@ -358,6 +362,7 @@ class Person extends ViewableWithIDAndImage
     LastRecordedByInfo? lastCall,
     LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastEdit,
+    this.dataCheck,
     this.classes,
     this.groups,
     this.services,

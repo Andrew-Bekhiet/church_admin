@@ -1,5 +1,6 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.gql.dart';
+import '../../data_checks/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
@@ -249,6 +250,7 @@ const documentNodeMutationdeleteFamily = DocumentNode(
     ),
     fragmentDefinitionFamily,
     fragmentDefinitionFamilyNoPhoto,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -502,6 +504,7 @@ const documentNodeMutationinsertFamily = DocumentNode(
     ),
     fragmentDefinitionFamily,
     fragmentDefinitionFamilyNoPhoto,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -2416,6 +2419,7 @@ const documentNodeMutationupdateFamily = DocumentNode(
     ),
     fragmentDefinitionFamily,
     fragmentDefinitionFamilyNoPhoto,
+    fragmentDefinitionDataCheck,
     fragmentDefinitionAddress,
     fragmentDefinitionArea,
     fragmentDefinitionAreaNoPhoto,

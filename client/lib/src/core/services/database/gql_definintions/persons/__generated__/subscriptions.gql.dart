@@ -2,6 +2,7 @@ import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.gql.dart';
 import '../../classes/__generated__/fragments.gql.dart';
 import '../../contacts/__generated__/fragments.gql.dart';
+import '../../data_checks/__generated__/fragments.gql.dart';
 import '../../families/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
@@ -434,6 +435,7 @@ const documentNodeSubscriptionwatchAllPersons = DocumentNode(
     ),
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -2609,6 +2611,7 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(
     ),
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionDataCheck,
     fragmentDefinitionAddress,
     fragmentDefinitionArea,
     fragmentDefinitionAreaNoPhoto,
@@ -2645,6 +2648,7 @@ class Subscription_watchPerson_personsByPk
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.blurhash,
+    this.dataCheck,
     this.nationalId,
     this.address,
     this.birthdate,
@@ -2694,6 +2698,7 @@ class Subscription_watchPerson_personsByPk
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$dataCheck = json['dataCheck'];
     final l$nationalId = json['nationalId'];
     final l$address = json['address'];
     final l$birthdate = json['birthdate'];
@@ -2741,6 +2746,9 @@ class Subscription_watchPerson_personsByPk
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      dataCheck: l$dataCheck == null
+          ? null
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
       nationalId: (l$nationalId as int?),
       address: l$address == null
           ? null
@@ -2905,6 +2913,8 @@ class Subscription_watchPerson_personsByPk
 
   final String? blurhash;
 
+  final Fragment_DataCheck? dataCheck;
+
   final int? nationalId;
 
   final Fragment_Address? address;
@@ -2997,6 +3007,8 @@ class Subscription_watchPerson_personsByPk
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$dataCheck = dataCheck;
+    _resultData['dataCheck'] = l$dataCheck?.toJson();
     final l$nationalId = nationalId;
     _resultData['nationalId'] = l$nationalId;
     final l$address = address;
@@ -3087,6 +3099,7 @@ class Subscription_watchPerson_personsByPk
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$dataCheck = dataCheck;
     final l$nationalId = nationalId;
     final l$address = address;
     final l$birthdate = birthdate;
@@ -3132,6 +3145,7 @@ class Subscription_watchPerson_personsByPk
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
+      l$dataCheck,
       l$nationalId,
       l$address,
       l$birthdate,
@@ -3214,6 +3228,11 @@ class Subscription_watchPerson_personsByPk
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$dataCheck = dataCheck;
+    final lOther$dataCheck = other.dataCheck;
+    if (l$dataCheck != lOther$dataCheck) {
       return false;
     }
     final l$nationalId = nationalId;
@@ -3479,6 +3498,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
     int? nationalId,
     Fragment_Address? address,
     DateTime? birthdate,
@@ -3517,6 +3537,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     UuidValue? uid,
     Subscription_watchPerson_personsByPk_user? user,
   });
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
   CopyWith_Fragment_Address<TRes> get address;
   TRes classes(
     Iterable<Subscription_watchPerson_personsByPk_classes> Function(
@@ -3626,6 +3647,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? dataCheck = _undefined,
     Object? nationalId = _undefined,
     Object? address = _undefined,
     Object? birthdate = _undefined,
@@ -3682,6 +3704,9 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      dataCheck: dataCheck == _undefined
+          ? _instance.dataCheck
+          : (dataCheck as Fragment_DataCheck?),
       nationalId: nationalId == _undefined
           ? _instance.nationalId
           : (nationalId as int?),
@@ -3794,6 +3819,16 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
           : (user as Subscription_watchPerson_personsByPk_user?),
     ),
   );
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
+    final local$dataCheck = _instance.dataCheck;
+    return local$dataCheck == null
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
+            local$dataCheck,
+            (e) => call(dataCheck: e),
+          );
+  }
 
   CopyWith_Fragment_Address<TRes> get address {
     final local$address = _instance.address;
@@ -4137,6 +4172,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
     int? nationalId,
     Fragment_Address? address,
     DateTime? birthdate,
@@ -4175,6 +4211,9 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     UuidValue? uid,
     Subscription_watchPerson_personsByPk_user? user,
   }) => _res;
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 
   CopyWith_Fragment_Address<TRes> get address =>
       CopyWith_Fragment_Address.stub(_res);

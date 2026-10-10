@@ -1,3 +1,4 @@
+import '../../data_checks/__generated__/fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
@@ -10,6 +11,7 @@ class Fragment_Person implements Fragment_PersonNoPhoto {
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.blurhash,
+    this.dataCheck,
   });
 
   factory Fragment_Person.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,7 @@ class Fragment_Person implements Fragment_PersonNoPhoto {
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$dataCheck = json['dataCheck'];
     return Fragment_Person(
       id: stringToUuid(l$id),
       name: (l$name as String),
@@ -30,6 +33,9 @@ class Fragment_Person implements Fragment_PersonNoPhoto {
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      dataCheck: l$dataCheck == null
+          ? null
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
     );
   }
 
@@ -46,6 +52,8 @@ class Fragment_Person implements Fragment_PersonNoPhoto {
   final DateTime? photoUpdatedAt;
 
   final String? blurhash;
+
+  final Fragment_DataCheck? dataCheck;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -65,6 +73,8 @@ class Fragment_Person implements Fragment_PersonNoPhoto {
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$dataCheck = dataCheck;
+    _resultData['dataCheck'] = l$dataCheck?.toJson();
     return _resultData;
   }
 
@@ -77,6 +87,7 @@ class Fragment_Person implements Fragment_PersonNoPhoto {
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$dataCheck = dataCheck;
     return Object.hashAll([
       l$id,
       l$name,
@@ -85,6 +96,7 @@ class Fragment_Person implements Fragment_PersonNoPhoto {
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
+      l$dataCheck,
     ]);
   }
 
@@ -131,6 +143,11 @@ class Fragment_Person implements Fragment_PersonNoPhoto {
     if (l$blurhash != lOther$blurhash) {
       return false;
     }
+    final l$dataCheck = dataCheck;
+    final lOther$dataCheck = other.dataCheck;
+    if (l$dataCheck != lOther$dataCheck) {
+      return false;
+    }
     return true;
   }
 }
@@ -157,7 +174,9 @@ abstract class CopyWith_Fragment_Person<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
   });
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
 }
 
 class _CopyWithImpl_Fragment_Person<TRes>
@@ -178,6 +197,7 @@ class _CopyWithImpl_Fragment_Person<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? dataCheck = _undefined,
   }) => _then(
     Fragment_Person(
       id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
@@ -197,8 +217,21 @@ class _CopyWithImpl_Fragment_Person<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      dataCheck: dataCheck == _undefined
+          ? _instance.dataCheck
+          : (dataCheck as Fragment_DataCheck?),
     ),
   );
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
+    final local$dataCheck = _instance.dataCheck;
+    return local$dataCheck == null
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
+            local$dataCheck,
+            (e) => call(dataCheck: e),
+          );
+  }
 }
 
 class _CopyWithStubImpl_Fragment_Person<TRes>
@@ -215,7 +248,11 @@ class _CopyWithStubImpl_Fragment_Person<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
   }) => _res;
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 }
 
 const fragmentDefinitionPerson = FragmentDefinitionNode(
@@ -245,6 +282,27 @@ const fragmentDefinitionPerson = FragmentDefinitionNode(
         selectionSet: null,
       ),
       FieldNode(
+        name: NameNode(value: 'dataCheck'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'DataCheck'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
+        ),
+      ),
+      FieldNode(
         name: NameNode(value: '__typename'),
         alias: null,
         arguments: [],
@@ -255,7 +313,11 @@ const fragmentDefinitionPerson = FragmentDefinitionNode(
   ),
 );
 const documentNodeFragmentPerson = DocumentNode(
-  definitions: [fragmentDefinitionPerson, fragmentDefinitionPersonNoPhoto],
+  definitions: [
+    fragmentDefinitionPerson,
+    fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionDataCheck,
+  ],
 );
 
 class Fragment_PersonNoPhoto {

@@ -201,6 +201,19 @@ class _FamilyFields {
         },
       );
 
+  final FieldMetadata<DataCheck> dataCheck = FieldMetadata<DataCheck>(
+    getValue: (obj) => obj is Family ? obj.dataCheck : null,
+    parentType: Family,
+    name: 'dataCheck',
+    label: 'اكتمال البيانات',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
   final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
     getValue: (obj) => obj is Family ? obj.geolocation : null,
     parentType: Family,
@@ -230,6 +243,7 @@ class _FamilyFields {
     lastEdit,
     lastVisit,
     lastFatherVisit,
+    dataCheck,
     geolocation,
   ];
 
@@ -249,6 +263,7 @@ class _FamilyFields {
     'lastEdit': lastEdit,
     'lastVisit': lastVisit,
     'lastFatherVisit': lastFatherVisit,
+    'dataCheck': dataCheck,
     'geolocation': geolocation,
   };
 }
@@ -308,6 +323,9 @@ Family _$FamilyFromJson(Map json) => Family(
       : LastRecordedByInfo.fromJson(
           Map<String, Object?>.from(json['lastFatherVisit'] as Map),
         ),
+  dataCheck: json['dataCheck'] == null
+      ? null
+      : DataCheck.fromJson(Map<String, Object?>.from(json['dataCheck'] as Map)),
 );
 
 Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
@@ -334,6 +352,7 @@ Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
   'lastEdit': instance.lastEdit?.toJson(),
   'lastVisit': instance.lastVisit?.toJson(),
   'lastFatherVisit': instance.lastFatherVisit?.toJson(),
+  'dataCheck': instance.dataCheck?.toJson(),
 };
 
 const _$MartialStatusEnumMap = {

@@ -3,6 +3,7 @@ export 'features/attendance.dart';
 export 'features/auth.dart';
 export 'features/contacts.dart';
 export 'features/data_analysis.dart';
+export 'features/data_checks.dart';
 export 'features/data_entry.dart';
 export 'features/data_export.dart';
 export 'features/download_app.dart';
