@@ -2348,7 +2348,6 @@ class Input_DataCheckOverridesBoolExp {
     List<Input_DataCheckOverridesBoolExp>? $_and,
     Input_DataCheckOverridesBoolExp? $_not,
     List<Input_DataCheckOverridesBoolExp>? $_or,
-    Input_FamiliesBoolExp? family,
     Input_UuidComparisonExp? familyId,
     Input_BooleanComparisonExp? isComplete,
     Input_UuidComparisonExp? updatedBy,
@@ -2356,7 +2355,6 @@ class Input_DataCheckOverridesBoolExp {
     if ($_and != null) r'_and': $_and,
     if ($_not != null) r'_not': $_not,
     if ($_or != null) r'_or': $_or,
-    if (family != null) r'family': family,
     if (familyId != null) r'familyId': familyId,
     if (isComplete != null) r'isComplete': isComplete,
     if (updatedBy != null) r'updatedBy': updatedBy,
@@ -2393,12 +2391,6 @@ class Input_DataCheckOverridesBoolExp {
             ),
           )
           .toList();
-    }
-    if (data.containsKey('family')) {
-      final l$family = data['family'];
-      result$data['family'] = l$family == null
-          ? null
-          : Input_FamiliesBoolExp.fromJson((l$family as Map<String, dynamic>));
     }
     if (data.containsKey('familyId')) {
       final l$familyId = data['familyId'];
@@ -2438,9 +2430,6 @@ class Input_DataCheckOverridesBoolExp {
   List<Input_DataCheckOverridesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_DataCheckOverridesBoolExp>?);
 
-  Input_FamiliesBoolExp? get family =>
-      (_$data['family'] as Input_FamiliesBoolExp?);
-
   Input_UuidComparisonExp? get familyId =>
       (_$data['familyId'] as Input_UuidComparisonExp?);
 
@@ -2463,10 +2452,6 @@ class Input_DataCheckOverridesBoolExp {
     if (_$data.containsKey('_or')) {
       final l$$_or = $_or;
       result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('family')) {
-      final l$family = family;
-      result$data['family'] = l$family?.toJson();
     }
     if (_$data.containsKey('familyId')) {
       final l$familyId = familyId;
@@ -2541,14 +2526,6 @@ class Input_DataCheckOverridesBoolExp {
     } else if (l$$_or != lOther$$_or) {
       return false;
     }
-    final l$family = family;
-    final lOther$family = other.family;
-    if (_$data.containsKey('family') != other._$data.containsKey('family')) {
-      return false;
-    }
-    if (l$family != lOther$family) {
-      return false;
-    }
     final l$familyId = familyId;
     final lOther$familyId = other.familyId;
     if (_$data.containsKey('familyId') !=
@@ -2584,7 +2561,6 @@ class Input_DataCheckOverridesBoolExp {
     final l$$_and = $_and;
     final l$$_not = $_not;
     final l$$_or = $_or;
-    final l$family = family;
     final l$familyId = familyId;
     final l$isComplete = isComplete;
     final l$updatedBy = updatedBy;
@@ -2600,7 +2576,6 @@ class Input_DataCheckOverridesBoolExp {
                 ? null
                 : Object.hashAll(l$$_or.map((v) => v))
           : const {},
-      _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('isComplete') ? l$isComplete : const {},
       _$data.containsKey('updatedBy') ? l$updatedBy : const {},

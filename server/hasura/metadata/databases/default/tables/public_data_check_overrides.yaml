@@ -1,10 +1,6 @@
 table:
   name: data_check_overrides
   schema: public
-object_relationships:
-  - name: family
-    using:
-      foreign_key_constraint_on: family_id
 insert_permissions:
   - role: user
     permission:
@@ -38,9 +34,16 @@ insert_permissions:
                       _eq: any
                   - entity_id:
                       _is_null: true
-          - family:
-              persons:
+          - _exists:
+              _table:
+                name: persons
+                schema: public
+              _where:
                 _and:
+                  - family_id:
+                      _ceq:
+                        - $
+                        - family_id
                   - deleted_at:
                       _is_null: true
                   - permissionGrants:

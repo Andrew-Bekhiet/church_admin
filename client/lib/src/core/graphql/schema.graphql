@@ -2016,7 +2016,6 @@ enum CursorOrdering {
 }
 
 type DataCheckOverrides {
-  family: Families!
   familyId: uuid!
   isComplete: Boolean!
   updatedBy: uuid
@@ -2026,7 +2025,6 @@ input DataCheckOverridesBoolExp {
   _and: [DataCheckOverridesBoolExp!]
   _not: DataCheckOverridesBoolExp
   _or: [DataCheckOverridesBoolExp!]
-  family: FamiliesBoolExp
   familyId: UuidComparisonExp
   isComplete: BooleanComparisonExp
   updatedBy: UuidComparisonExp
@@ -2037,7 +2035,6 @@ enum DataCheckOverridesConstraint {
 }
 
 input DataCheckOverridesInsertInput {
-  family: FamiliesObjRelInsertInput
   familyId: uuid
   isComplete: Boolean
 }
@@ -2054,7 +2051,6 @@ input DataCheckOverridesOnConflict {
 }
 
 input DataCheckOverridesOrderBy {
-  family: FamiliesOrderBy
   familyId: OrderBy
   isComplete: OrderBy
   updatedBy: OrderBy
@@ -2098,7 +2094,6 @@ type DataChecks {
   addressCheck: Boolean
   completenessPercent: Int
   details(path: String): jsonb
-  family: Families
   familyCheck: Boolean
   familyId: uuid
   isComplete: Boolean
@@ -2112,7 +2107,6 @@ input DataChecksBoolExp {
   addressCheck: BooleanComparisonExp
   completenessPercent: IntComparisonExp
   details: JsonbComparisonExp
-  family: FamiliesBoolExp
   familyCheck: BooleanComparisonExp
   familyId: UuidComparisonExp
   isComplete: BooleanComparisonExp
@@ -2123,7 +2117,6 @@ input DataChecksOrderBy {
   addressCheck: OrderBy
   completenessPercent: OrderBy
   details: OrderBy
-  family: FamiliesOrderBy
   familyCheck: OrderBy
   familyId: OrderBy
   isComplete: OrderBy

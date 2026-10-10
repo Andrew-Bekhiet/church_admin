@@ -14,7 +14,6 @@ abstract class CopyWith_Input_DataCheckOverridesBoolExp<TRes> {
     List<Input_DataCheckOverridesBoolExp>? $_and,
     Input_DataCheckOverridesBoolExp? $_not,
     List<Input_DataCheckOverridesBoolExp>? $_or,
-    Input_FamiliesBoolExp? family,
     Input_UuidComparisonExp? familyId,
     Input_BooleanComparisonExp? isComplete,
     Input_UuidComparisonExp? updatedBy,
@@ -40,7 +39,6 @@ abstract class CopyWith_Input_DataCheckOverridesBoolExp<TRes> {
     )
     _fn,
   );
-  CopyWith_Input_FamiliesBoolExp<TRes> get family;
   CopyWith_Input_UuidComparisonExp<TRes> get familyId;
   CopyWith_Input_BooleanComparisonExp<TRes> get isComplete;
   CopyWith_Input_UuidComparisonExp<TRes> get updatedBy;
@@ -60,7 +58,6 @@ class _CopyWithImpl_Input_DataCheckOverridesBoolExp<TRes>
     Object? $_and = _undefined,
     Object? $_not = _undefined,
     Object? $_or = _undefined,
-    Object? family = _undefined,
     Object? familyId = _undefined,
     Object? isComplete = _undefined,
     Object? updatedBy = _undefined,
@@ -73,7 +70,6 @@ class _CopyWithImpl_Input_DataCheckOverridesBoolExp<TRes>
         '_not': ($_not as Input_DataCheckOverridesBoolExp?),
       if ($_or != _undefined)
         '_or': ($_or as List<Input_DataCheckOverridesBoolExp>?),
-      if (family != _undefined) 'family': (family as Input_FamiliesBoolExp?),
       if (familyId != _undefined)
         'familyId': (familyId as Input_UuidComparisonExp?),
       if (isComplete != _undefined)
@@ -127,13 +123,6 @@ class _CopyWithImpl_Input_DataCheckOverridesBoolExp<TRes>
     )?.toList(),
   );
 
-  CopyWith_Input_FamiliesBoolExp<TRes> get family {
-    final local$family = _instance.family;
-    return local$family == null
-        ? CopyWith_Input_FamiliesBoolExp.stub(_then(_instance))
-        : CopyWith_Input_FamiliesBoolExp(local$family, (e) => call(family: e));
-  }
-
   CopyWith_Input_UuidComparisonExp<TRes> get familyId {
     final local$familyId = _instance.familyId;
     return local$familyId == null
@@ -175,7 +164,6 @@ class _CopyWithStubImpl_Input_DataCheckOverridesBoolExp<TRes>
     List<Input_DataCheckOverridesBoolExp>? $_and,
     Input_DataCheckOverridesBoolExp? $_not,
     List<Input_DataCheckOverridesBoolExp>? $_or,
-    Input_FamiliesBoolExp? family,
     Input_UuidComparisonExp? familyId,
     Input_BooleanComparisonExp? isComplete,
     Input_UuidComparisonExp? updatedBy,
@@ -187,9 +175,6 @@ class _CopyWithStubImpl_Input_DataCheckOverridesBoolExp<TRes>
       CopyWith_Input_DataCheckOverridesBoolExp.stub(_res);
 
   $_or(_fn) => _res;
-
-  CopyWith_Input_FamiliesBoolExp<TRes> get family =>
-      CopyWith_Input_FamiliesBoolExp.stub(_res);
 
   CopyWith_Input_UuidComparisonExp<TRes> get familyId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
@@ -203,11 +188,9 @@ class _CopyWithStubImpl_Input_DataCheckOverridesBoolExp<TRes>
 
 class Input_DataCheckOverridesInsertInput {
   factory Input_DataCheckOverridesInsertInput({
-    Input_FamiliesObjRelInsertInput? family,
     UuidValue? familyId,
     bool? isComplete,
   }) => Input_DataCheckOverridesInsertInput._({
-    if (family != null) r'family': family,
     if (familyId != null) r'familyId': familyId,
     if (isComplete != null) r'isComplete': isComplete,
   });
@@ -218,14 +201,6 @@ class Input_DataCheckOverridesInsertInput {
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('family')) {
-      final l$family = data['family'];
-      result$data['family'] = l$family == null
-          ? null
-          : Input_FamiliesObjRelInsertInput.fromJson(
-              (l$family as Map<String, dynamic>),
-            );
-    }
     if (data.containsKey('familyId')) {
       final l$familyId = data['familyId'];
       result$data['familyId'] = l$familyId == null
@@ -241,19 +216,12 @@ class Input_DataCheckOverridesInsertInput {
 
   Map<String, dynamic> _$data;
 
-  Input_FamiliesObjRelInsertInput? get family =>
-      (_$data['family'] as Input_FamiliesObjRelInsertInput?);
-
   UuidValue? get familyId => (_$data['familyId'] as UuidValue?);
 
   bool? get isComplete => (_$data['isComplete'] as bool?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('family')) {
-      final l$family = family;
-      result$data['family'] = l$family?.toJson();
-    }
     if (_$data.containsKey('familyId')) {
       final l$familyId = familyId;
       result$data['familyId'] = l$familyId == null
@@ -281,14 +249,6 @@ class Input_DataCheckOverridesInsertInput {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$family = family;
-    final lOther$family = other.family;
-    if (_$data.containsKey('family') != other._$data.containsKey('family')) {
-      return false;
-    }
-    if (l$family != lOther$family) {
-      return false;
-    }
     final l$familyId = familyId;
     final lOther$familyId = other.familyId;
     if (_$data.containsKey('familyId') !=
@@ -312,11 +272,9 @@ class Input_DataCheckOverridesInsertInput {
 
   @override
   int get hashCode {
-    final l$family = family;
     final l$familyId = familyId;
     final l$isComplete = isComplete;
     return Object.hashAll([
-      _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('isComplete') ? l$isComplete : const {},
     ]);
@@ -332,12 +290,7 @@ abstract class CopyWith_Input_DataCheckOverridesInsertInput<TRes> {
   factory CopyWith_Input_DataCheckOverridesInsertInput.stub(TRes res) =
       _CopyWithStubImpl_Input_DataCheckOverridesInsertInput;
 
-  TRes call({
-    Input_FamiliesObjRelInsertInput? family,
-    UuidValue? familyId,
-    bool? isComplete,
-  });
-  CopyWith_Input_FamiliesObjRelInsertInput<TRes> get family;
+  TRes call({UuidValue? familyId, bool? isComplete});
 }
 
 class _CopyWithImpl_Input_DataCheckOverridesInsertInput<TRes>
@@ -350,29 +303,14 @@ class _CopyWithImpl_Input_DataCheckOverridesInsertInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? family = _undefined,
-    Object? familyId = _undefined,
-    Object? isComplete = _undefined,
-  }) => _then(
-    Input_DataCheckOverridesInsertInput._({
-      ..._instance._$data,
-      if (family != _undefined)
-        'family': (family as Input_FamiliesObjRelInsertInput?),
-      if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
-      if (isComplete != _undefined) 'isComplete': (isComplete as bool?),
-    }),
-  );
-
-  CopyWith_Input_FamiliesObjRelInsertInput<TRes> get family {
-    final local$family = _instance.family;
-    return local$family == null
-        ? CopyWith_Input_FamiliesObjRelInsertInput.stub(_then(_instance))
-        : CopyWith_Input_FamiliesObjRelInsertInput(
-            local$family,
-            (e) => call(family: e),
-          );
-  }
+  TRes call({Object? familyId = _undefined, Object? isComplete = _undefined}) =>
+      _then(
+        Input_DataCheckOverridesInsertInput._({
+          ..._instance._$data,
+          if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
+          if (isComplete != _undefined) 'isComplete': (isComplete as bool?),
+        }),
+      );
 }
 
 class _CopyWithStubImpl_Input_DataCheckOverridesInsertInput<TRes>
@@ -381,14 +319,7 @@ class _CopyWithStubImpl_Input_DataCheckOverridesInsertInput<TRes>
 
   TRes _res;
 
-  call({
-    Input_FamiliesObjRelInsertInput? family,
-    UuidValue? familyId,
-    bool? isComplete,
-  }) => _res;
-
-  CopyWith_Input_FamiliesObjRelInsertInput<TRes> get family =>
-      CopyWith_Input_FamiliesObjRelInsertInput.stub(_res);
+  call({UuidValue? familyId, bool? isComplete}) => _res;
 }
 
 class Input_DataCheckOverridesOnConflict {
@@ -602,12 +533,10 @@ class _CopyWithStubImpl_Input_DataCheckOverridesOnConflict<TRes>
 
 class Input_DataCheckOverridesOrderBy {
   factory Input_DataCheckOverridesOrderBy({
-    Input_FamiliesOrderBy? family,
     Enum_OrderBy? familyId,
     Enum_OrderBy? isComplete,
     Enum_OrderBy? updatedBy,
   }) => Input_DataCheckOverridesOrderBy._({
-    if (family != null) r'family': family,
     if (familyId != null) r'familyId': familyId,
     if (isComplete != null) r'isComplete': isComplete,
     if (updatedBy != null) r'updatedBy': updatedBy,
@@ -617,12 +546,6 @@ class Input_DataCheckOverridesOrderBy {
 
   factory Input_DataCheckOverridesOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('family')) {
-      final l$family = data['family'];
-      result$data['family'] = l$family == null
-          ? null
-          : Input_FamiliesOrderBy.fromJson((l$family as Map<String, dynamic>));
-    }
     if (data.containsKey('familyId')) {
       final l$familyId = data['familyId'];
       result$data['familyId'] = l$familyId == null
@@ -646,9 +569,6 @@ class Input_DataCheckOverridesOrderBy {
 
   Map<String, dynamic> _$data;
 
-  Input_FamiliesOrderBy? get family =>
-      (_$data['family'] as Input_FamiliesOrderBy?);
-
   Enum_OrderBy? get familyId => (_$data['familyId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get isComplete => (_$data['isComplete'] as Enum_OrderBy?);
@@ -657,10 +577,6 @@ class Input_DataCheckOverridesOrderBy {
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('family')) {
-      final l$family = family;
-      result$data['family'] = l$family?.toJson();
-    }
     if (_$data.containsKey('familyId')) {
       final l$familyId = familyId;
       result$data['familyId'] = l$familyId == null
@@ -692,14 +608,6 @@ class Input_DataCheckOverridesOrderBy {
     }
     if (other is! Input_DataCheckOverridesOrderBy ||
         runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$family = family;
-    final lOther$family = other.family;
-    if (_$data.containsKey('family') != other._$data.containsKey('family')) {
-      return false;
-    }
-    if (l$family != lOther$family) {
       return false;
     }
     final l$familyId = familyId;
@@ -734,12 +642,10 @@ class Input_DataCheckOverridesOrderBy {
 
   @override
   int get hashCode {
-    final l$family = family;
     final l$familyId = familyId;
     final l$isComplete = isComplete;
     final l$updatedBy = updatedBy;
     return Object.hashAll([
-      _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('isComplete') ? l$isComplete : const {},
       _$data.containsKey('updatedBy') ? l$updatedBy : const {},
@@ -757,12 +663,10 @@ abstract class CopyWith_Input_DataCheckOverridesOrderBy<TRes> {
       _CopyWithStubImpl_Input_DataCheckOverridesOrderBy;
 
   TRes call({
-    Input_FamiliesOrderBy? family,
     Enum_OrderBy? familyId,
     Enum_OrderBy? isComplete,
     Enum_OrderBy? updatedBy,
   });
-  CopyWith_Input_FamiliesOrderBy<TRes> get family;
 }
 
 class _CopyWithImpl_Input_DataCheckOverridesOrderBy<TRes>
@@ -776,26 +680,17 @@ class _CopyWithImpl_Input_DataCheckOverridesOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? family = _undefined,
     Object? familyId = _undefined,
     Object? isComplete = _undefined,
     Object? updatedBy = _undefined,
   }) => _then(
     Input_DataCheckOverridesOrderBy._({
       ..._instance._$data,
-      if (family != _undefined) 'family': (family as Input_FamiliesOrderBy?),
       if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
       if (isComplete != _undefined) 'isComplete': (isComplete as Enum_OrderBy?),
       if (updatedBy != _undefined) 'updatedBy': (updatedBy as Enum_OrderBy?),
     }),
   );
-
-  CopyWith_Input_FamiliesOrderBy<TRes> get family {
-    final local$family = _instance.family;
-    return local$family == null
-        ? CopyWith_Input_FamiliesOrderBy.stub(_then(_instance))
-        : CopyWith_Input_FamiliesOrderBy(local$family, (e) => call(family: e));
-  }
 }
 
 class _CopyWithStubImpl_Input_DataCheckOverridesOrderBy<TRes>
@@ -805,14 +700,10 @@ class _CopyWithStubImpl_Input_DataCheckOverridesOrderBy<TRes>
   TRes _res;
 
   call({
-    Input_FamiliesOrderBy? family,
     Enum_OrderBy? familyId,
     Enum_OrderBy? isComplete,
     Enum_OrderBy? updatedBy,
   }) => _res;
-
-  CopyWith_Input_FamiliesOrderBy<TRes> get family =>
-      CopyWith_Input_FamiliesOrderBy.stub(_res);
 }
 
 class Input_DataCheckOverridesPkColumnsInput {
@@ -1521,7 +1412,6 @@ class Input_DataChecksBoolExp {
     Input_BooleanComparisonExp? addressCheck,
     Input_IntComparisonExp? completenessPercent,
     Input_JsonbComparisonExp? details,
-    Input_FamiliesBoolExp? family,
     Input_BooleanComparisonExp? familyCheck,
     Input_UuidComparisonExp? familyId,
     Input_BooleanComparisonExp? isComplete,
@@ -1534,7 +1424,6 @@ class Input_DataChecksBoolExp {
     if (completenessPercent != null)
       r'completenessPercent': completenessPercent,
     if (details != null) r'details': details,
-    if (family != null) r'family': family,
     if (familyCheck != null) r'familyCheck': familyCheck,
     if (familyId != null) r'familyId': familyId,
     if (isComplete != null) r'isComplete': isComplete,
@@ -1593,12 +1482,6 @@ class Input_DataChecksBoolExp {
               (l$details as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('family')) {
-      final l$family = data['family'];
-      result$data['family'] = l$family == null
-          ? null
-          : Input_FamiliesBoolExp.fromJson((l$family as Map<String, dynamic>));
-    }
     if (data.containsKey('familyCheck')) {
       final l$familyCheck = data['familyCheck'];
       result$data['familyCheck'] = l$familyCheck == null
@@ -1654,9 +1537,6 @@ class Input_DataChecksBoolExp {
   Input_JsonbComparisonExp? get details =>
       (_$data['details'] as Input_JsonbComparisonExp?);
 
-  Input_FamiliesBoolExp? get family =>
-      (_$data['family'] as Input_FamiliesBoolExp?);
-
   Input_BooleanComparisonExp? get familyCheck =>
       (_$data['familyCheck'] as Input_BooleanComparisonExp?);
 
@@ -1694,10 +1574,6 @@ class Input_DataChecksBoolExp {
     if (_$data.containsKey('details')) {
       final l$details = details;
       result$data['details'] = l$details?.toJson();
-    }
-    if (_$data.containsKey('family')) {
-      final l$family = family;
-      result$data['family'] = l$family?.toJson();
     }
     if (_$data.containsKey('familyCheck')) {
       final l$familyCheck = familyCheck;
@@ -1801,14 +1677,6 @@ class Input_DataChecksBoolExp {
     if (l$details != lOther$details) {
       return false;
     }
-    final l$family = family;
-    final lOther$family = other.family;
-    if (_$data.containsKey('family') != other._$data.containsKey('family')) {
-      return false;
-    }
-    if (l$family != lOther$family) {
-      return false;
-    }
     final l$familyCheck = familyCheck;
     final lOther$familyCheck = other.familyCheck;
     if (_$data.containsKey('familyCheck') !=
@@ -1856,7 +1724,6 @@ class Input_DataChecksBoolExp {
     final l$addressCheck = addressCheck;
     final l$completenessPercent = completenessPercent;
     final l$details = details;
-    final l$family = family;
     final l$familyCheck = familyCheck;
     final l$familyId = familyId;
     final l$isComplete = isComplete;
@@ -1878,7 +1745,6 @@ class Input_DataChecksBoolExp {
           ? l$completenessPercent
           : const {},
       _$data.containsKey('details') ? l$details : const {},
-      _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('familyCheck') ? l$familyCheck : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('isComplete') ? l$isComplete : const {},
@@ -1903,7 +1769,6 @@ abstract class CopyWith_Input_DataChecksBoolExp<TRes> {
     Input_BooleanComparisonExp? addressCheck,
     Input_IntComparisonExp? completenessPercent,
     Input_JsonbComparisonExp? details,
-    Input_FamiliesBoolExp? family,
     Input_BooleanComparisonExp? familyCheck,
     Input_UuidComparisonExp? familyId,
     Input_BooleanComparisonExp? isComplete,
@@ -1925,7 +1790,6 @@ abstract class CopyWith_Input_DataChecksBoolExp<TRes> {
   CopyWith_Input_BooleanComparisonExp<TRes> get addressCheck;
   CopyWith_Input_IntComparisonExp<TRes> get completenessPercent;
   CopyWith_Input_JsonbComparisonExp<TRes> get details;
-  CopyWith_Input_FamiliesBoolExp<TRes> get family;
   CopyWith_Input_BooleanComparisonExp<TRes> get familyCheck;
   CopyWith_Input_UuidComparisonExp<TRes> get familyId;
   CopyWith_Input_BooleanComparisonExp<TRes> get isComplete;
@@ -1949,7 +1813,6 @@ class _CopyWithImpl_Input_DataChecksBoolExp<TRes>
     Object? addressCheck = _undefined,
     Object? completenessPercent = _undefined,
     Object? details = _undefined,
-    Object? family = _undefined,
     Object? familyCheck = _undefined,
     Object? familyId = _undefined,
     Object? isComplete = _undefined,
@@ -1967,7 +1830,6 @@ class _CopyWithImpl_Input_DataChecksBoolExp<TRes>
         'completenessPercent': (completenessPercent as Input_IntComparisonExp?),
       if (details != _undefined)
         'details': (details as Input_JsonbComparisonExp?),
-      if (family != _undefined) 'family': (family as Input_FamiliesBoolExp?),
       if (familyCheck != _undefined)
         'familyCheck': (familyCheck as Input_BooleanComparisonExp?),
       if (familyId != _undefined)
@@ -2040,13 +1902,6 @@ class _CopyWithImpl_Input_DataChecksBoolExp<TRes>
           );
   }
 
-  CopyWith_Input_FamiliesBoolExp<TRes> get family {
-    final local$family = _instance.family;
-    return local$family == null
-        ? CopyWith_Input_FamiliesBoolExp.stub(_then(_instance))
-        : CopyWith_Input_FamiliesBoolExp(local$family, (e) => call(family: e));
-  }
-
   CopyWith_Input_BooleanComparisonExp<TRes> get familyCheck {
     final local$familyCheck = _instance.familyCheck;
     return local$familyCheck == null
@@ -2101,7 +1956,6 @@ class _CopyWithStubImpl_Input_DataChecksBoolExp<TRes>
     Input_BooleanComparisonExp? addressCheck,
     Input_IntComparisonExp? completenessPercent,
     Input_JsonbComparisonExp? details,
-    Input_FamiliesBoolExp? family,
     Input_BooleanComparisonExp? familyCheck,
     Input_UuidComparisonExp? familyId,
     Input_BooleanComparisonExp? isComplete,
@@ -2124,9 +1978,6 @@ class _CopyWithStubImpl_Input_DataChecksBoolExp<TRes>
   CopyWith_Input_JsonbComparisonExp<TRes> get details =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
 
-  CopyWith_Input_FamiliesBoolExp<TRes> get family =>
-      CopyWith_Input_FamiliesBoolExp.stub(_res);
-
   CopyWith_Input_BooleanComparisonExp<TRes> get familyCheck =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 
@@ -2145,7 +1996,6 @@ class Input_DataChecksOrderBy {
     Enum_OrderBy? addressCheck,
     Enum_OrderBy? completenessPercent,
     Enum_OrderBy? details,
-    Input_FamiliesOrderBy? family,
     Enum_OrderBy? familyCheck,
     Enum_OrderBy? familyId,
     Enum_OrderBy? isComplete,
@@ -2155,7 +2005,6 @@ class Input_DataChecksOrderBy {
     if (completenessPercent != null)
       r'completenessPercent': completenessPercent,
     if (details != null) r'details': details,
-    if (family != null) r'family': family,
     if (familyCheck != null) r'familyCheck': familyCheck,
     if (familyId != null) r'familyId': familyId,
     if (isComplete != null) r'isComplete': isComplete,
@@ -2183,12 +2032,6 @@ class Input_DataChecksOrderBy {
       result$data['details'] = l$details == null
           ? null
           : fromJson_Enum_OrderBy((l$details as String));
-    }
-    if (data.containsKey('family')) {
-      final l$family = data['family'];
-      result$data['family'] = l$family == null
-          ? null
-          : Input_FamiliesOrderBy.fromJson((l$family as Map<String, dynamic>));
     }
     if (data.containsKey('familyCheck')) {
       final l$familyCheck = data['familyCheck'];
@@ -2226,9 +2069,6 @@ class Input_DataChecksOrderBy {
 
   Enum_OrderBy? get details => (_$data['details'] as Enum_OrderBy?);
 
-  Input_FamiliesOrderBy? get family =>
-      (_$data['family'] as Input_FamiliesOrderBy?);
-
   Enum_OrderBy? get familyCheck => (_$data['familyCheck'] as Enum_OrderBy?);
 
   Enum_OrderBy? get familyId => (_$data['familyId'] as Enum_OrderBy?);
@@ -2256,10 +2096,6 @@ class Input_DataChecksOrderBy {
       result$data['details'] = l$details == null
           ? null
           : toJson_Enum_OrderBy(l$details);
-    }
-    if (_$data.containsKey('family')) {
-      final l$family = family;
-      result$data['family'] = l$family?.toJson();
     }
     if (_$data.containsKey('familyCheck')) {
       final l$familyCheck = familyCheck;
@@ -2325,14 +2161,6 @@ class Input_DataChecksOrderBy {
     if (l$details != lOther$details) {
       return false;
     }
-    final l$family = family;
-    final lOther$family = other.family;
-    if (_$data.containsKey('family') != other._$data.containsKey('family')) {
-      return false;
-    }
-    if (l$family != lOther$family) {
-      return false;
-    }
     final l$familyCheck = familyCheck;
     final lOther$familyCheck = other.familyCheck;
     if (_$data.containsKey('familyCheck') !=
@@ -2377,7 +2205,6 @@ class Input_DataChecksOrderBy {
     final l$addressCheck = addressCheck;
     final l$completenessPercent = completenessPercent;
     final l$details = details;
-    final l$family = family;
     final l$familyCheck = familyCheck;
     final l$familyId = familyId;
     final l$isComplete = isComplete;
@@ -2388,7 +2215,6 @@ class Input_DataChecksOrderBy {
           ? l$completenessPercent
           : const {},
       _$data.containsKey('details') ? l$details : const {},
-      _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('familyCheck') ? l$familyCheck : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
       _$data.containsKey('isComplete') ? l$isComplete : const {},
@@ -2410,13 +2236,11 @@ abstract class CopyWith_Input_DataChecksOrderBy<TRes> {
     Enum_OrderBy? addressCheck,
     Enum_OrderBy? completenessPercent,
     Enum_OrderBy? details,
-    Input_FamiliesOrderBy? family,
     Enum_OrderBy? familyCheck,
     Enum_OrderBy? familyId,
     Enum_OrderBy? isComplete,
     Enum_OrderBy? userOverride,
   });
-  CopyWith_Input_FamiliesOrderBy<TRes> get family;
 }
 
 class _CopyWithImpl_Input_DataChecksOrderBy<TRes>
@@ -2433,7 +2257,6 @@ class _CopyWithImpl_Input_DataChecksOrderBy<TRes>
     Object? addressCheck = _undefined,
     Object? completenessPercent = _undefined,
     Object? details = _undefined,
-    Object? family = _undefined,
     Object? familyCheck = _undefined,
     Object? familyId = _undefined,
     Object? isComplete = _undefined,
@@ -2446,7 +2269,6 @@ class _CopyWithImpl_Input_DataChecksOrderBy<TRes>
       if (completenessPercent != _undefined)
         'completenessPercent': (completenessPercent as Enum_OrderBy?),
       if (details != _undefined) 'details': (details as Enum_OrderBy?),
-      if (family != _undefined) 'family': (family as Input_FamiliesOrderBy?),
       if (familyCheck != _undefined)
         'familyCheck': (familyCheck as Enum_OrderBy?),
       if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
@@ -2455,13 +2277,6 @@ class _CopyWithImpl_Input_DataChecksOrderBy<TRes>
         'userOverride': (userOverride as Enum_OrderBy?),
     }),
   );
-
-  CopyWith_Input_FamiliesOrderBy<TRes> get family {
-    final local$family = _instance.family;
-    return local$family == null
-        ? CopyWith_Input_FamiliesOrderBy.stub(_then(_instance))
-        : CopyWith_Input_FamiliesOrderBy(local$family, (e) => call(family: e));
-  }
 }
 
 class _CopyWithStubImpl_Input_DataChecksOrderBy<TRes>
@@ -2474,15 +2289,11 @@ class _CopyWithStubImpl_Input_DataChecksOrderBy<TRes>
     Enum_OrderBy? addressCheck,
     Enum_OrderBy? completenessPercent,
     Enum_OrderBy? details,
-    Input_FamiliesOrderBy? family,
     Enum_OrderBy? familyCheck,
     Enum_OrderBy? familyId,
     Enum_OrderBy? isComplete,
     Enum_OrderBy? userOverride,
   }) => _res;
-
-  CopyWith_Input_FamiliesOrderBy<TRes> get family =>
-      CopyWith_Input_FamiliesOrderBy.stub(_res);
 }
 
 class Input_DateComparisonExp {

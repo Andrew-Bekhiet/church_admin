@@ -1,16 +1,6 @@
 table:
   name: data_checks
   schema: public
-object_relationships:
-  - name: family
-    using:
-      manual_configuration:
-        column_mapping:
-          family_id: id
-        insertion_order: null
-        remote_table:
-          name: families
-          schema: public
 select_permissions:
   - role: user
     permission:
