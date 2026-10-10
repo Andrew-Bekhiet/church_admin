@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -33,9 +35,12 @@ void main() {
       details: items,
     );
 
+    late _MockDataChecksDAO dao;
+
     setUp(() {
+      dao = _MockDataChecksDAO();
       final database = _MockDatabaseService();
-      when(() => database.dataChecks).thenReturn(_MockDataChecksDAO());
+      when(() => database.dataChecks).thenReturn(dao);
       initGlobalProviderContainer([
         databaseServiceProvider.overrideWithValue(database),
       ]);
@@ -121,6 +126,29 @@ void main() {
         find.byType(SegmentedButton<DataCheckOverride>),
       );
       expect(selector.onSelectionChanged, isNull);
+    });
+
+    testWidgets('the report stays open while an override is saving', (
+      tester,
+    ) async {
+      final save = Completer<bool>();
+      when(
+        () => dao.tryOverride(familyId: 'family', isComplete: true),
+      ).thenAnswer((_) => save.future);
+      await pumpIndicator(tester, incomplete);
+      await tester.tap(find.byType(DataCheckIndicator));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text(DataCheckOverride.markedComplete.label));
+      await tester.pump();
+      await tester.binding.handlePopRoute();
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 1));
+
+      expect(find.byType(DataCheckReportDialog), findsOneWidget);
+
+      save.complete(true);
+      await tester.pumpAndSettle();
     });
   });
 }
