@@ -1,0 +1,27 @@
+table:
+  name: data_checks
+  schema: public
+object_relationships:
+  - name: family
+    using:
+      manual_configuration:
+        column_mapping:
+          family_id: id
+        insertion_order: null
+        remote_table:
+          name: families
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - address_check
+        - completeness_percent
+        - details
+        - family_check
+        - family_id
+        - is_complete
+        - user_override
+      filter: {}
+      query_root_fields: []
+      subscription_root_fields: []

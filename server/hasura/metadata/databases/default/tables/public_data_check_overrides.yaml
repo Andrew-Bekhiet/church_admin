@@ -1,0 +1,79 @@
+table:
+  name: data_check_overrides
+  schema: public
+object_relationships:
+  - name: family
+    using:
+      foreign_key_constraint_on: family_id
+insert_permissions:
+  - role: user
+    permission:
+      check: &family_editable
+        _or:
+          - _exists:
+              _table: &permissions_view
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - &requesting_user
+                    uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: family
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - family_id
+          - _exists:
+              _table: *permissions_view
+              _where:
+                _and:
+                  - *requesting_user
+                  - allow_edit:
+                      _eq: true
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
+          - family:
+              persons:
+                _and:
+                  - deleted_at:
+                      _is_null: true
+                  - permissionGrants:
+                      _and:
+                        - uid:
+                            _eq: X-Hasura-User-Id
+                        - allow_edit:
+                            _eq: true
+                        - entity_type:
+                            _eq: person
+      set:
+        updated_by: x-hasura-User-Id
+      columns:
+        - family_id
+        - is_complete
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - family_id
+        - is_complete
+        - updated_by
+      filter: *family_editable
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - is_complete
+      filter: *family_editable
+      check: *family_editable
+      set:
+        updated_by: x-hasura-User-Id
+delete_permissions:
+  - role: user
+    permission:
+      filter: *family_editable

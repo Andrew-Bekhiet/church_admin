@@ -2015,6 +2015,121 @@ enum CursorOrdering {
   DESC
 }
 
+type DataCheckOverrides {
+  family: Families!
+  familyId: uuid!
+  isComplete: Boolean!
+  updatedBy: uuid
+}
+
+input DataCheckOverridesBoolExp {
+  _and: [DataCheckOverridesBoolExp!]
+  _not: DataCheckOverridesBoolExp
+  _or: [DataCheckOverridesBoolExp!]
+  family: FamiliesBoolExp
+  familyId: UuidComparisonExp
+  isComplete: BooleanComparisonExp
+  updatedBy: UuidComparisonExp
+}
+
+enum DataCheckOverridesConstraint {
+  data_check_overrides_pkey
+}
+
+input DataCheckOverridesInsertInput {
+  family: FamiliesObjRelInsertInput
+  familyId: uuid
+  isComplete: Boolean
+}
+
+type DataCheckOverridesMutationResponse {
+  affectedRows: Int!
+  returning: [DataCheckOverrides!]!
+}
+
+input DataCheckOverridesOnConflict {
+  constraint: DataCheckOverridesConstraint!
+  updateColumns: [DataCheckOverridesUpdateColumn!]! = []
+  where: DataCheckOverridesBoolExp
+}
+
+input DataCheckOverridesOrderBy {
+  family: FamiliesOrderBy
+  familyId: OrderBy
+  isComplete: OrderBy
+  updatedBy: OrderBy
+}
+
+input DataCheckOverridesPkColumnsInput {
+  familyId: uuid!
+}
+
+enum DataCheckOverridesSelectColumn {
+  familyId
+  isComplete
+  updatedBy
+}
+
+input DataCheckOverridesSetInput {
+  isComplete: Boolean
+}
+
+input DataCheckOverridesStreamCursorInput {
+  initialValue: DataCheckOverridesStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+
+input DataCheckOverridesStreamCursorValueInput {
+  familyId: uuid
+  isComplete: Boolean
+  updatedBy: uuid
+}
+
+enum DataCheckOverridesUpdateColumn {
+  isComplete
+}
+
+input DataCheckOverridesUpdates {
+  _set: DataCheckOverridesSetInput
+  where: DataCheckOverridesBoolExp!
+}
+
+type DataChecks {
+  addressCheck: Boolean
+  completenessPercent: Int
+  details(path: String): jsonb
+  family: Families
+  familyCheck: Boolean
+  familyId: uuid
+  isComplete: Boolean
+  userOverride: Boolean
+}
+
+input DataChecksBoolExp {
+  _and: [DataChecksBoolExp!]
+  _not: DataChecksBoolExp
+  _or: [DataChecksBoolExp!]
+  addressCheck: BooleanComparisonExp
+  completenessPercent: IntComparisonExp
+  details: JsonbComparisonExp
+  family: FamiliesBoolExp
+  familyCheck: BooleanComparisonExp
+  familyId: UuidComparisonExp
+  isComplete: BooleanComparisonExp
+  userOverride: BooleanComparisonExp
+}
+
+input DataChecksOrderBy {
+  addressCheck: OrderBy
+  completenessPercent: OrderBy
+  details: OrderBy
+  family: FamiliesOrderBy
+  familyCheck: OrderBy
+  familyId: OrderBy
+  isComplete: OrderBy
+  userOverride: OrderBy
+}
+
 input DateComparisonExp {
   _eq: date
   _gt: date
@@ -2122,6 +2237,7 @@ type Families {
   churchId: uuid
   color: bigint
   contacts(distinctOn: [ResolvedContactsSelectColumn!], limit: Int, offset: Int, orderBy: [ResolvedContactsOrderBy!], where: ResolvedContactsBoolExp): [ResolvedContacts!]!
+  dataCheck: DataChecks
   deceasedSpouseName: String
   editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
   editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
@@ -2179,6 +2295,7 @@ input FamiliesBoolExp {
   churchId: UuidComparisonExp
   color: BigintComparisonExp
   contacts: ResolvedContactsBoolExp
+  dataCheck: DataChecksBoolExp
   deceasedSpouseName: StringComparisonExp
   editHistory: HistoryEditHistoryBoolExp
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
@@ -2365,6 +2482,7 @@ input FamiliesOrderBy {
   churchId: OrderBy
   color: OrderBy
   contactsAggregate: ResolvedContactsAggregateOrderBy
+  dataCheck: DataChecksOrderBy
   deceasedSpouseName: OrderBy
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
   id: OrderBy
@@ -5132,6 +5250,7 @@ type Persons {
   confessionHistory(distinctOn: [HistoryConfessionHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryConfessionHistoryOrderBy!], where: HistoryConfessionHistoryBoolExp): [HistoryConfessionHistory!]!
   confessionHistoryAggregate(distinctOn: [HistoryConfessionHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryConfessionHistoryOrderBy!], where: HistoryConfessionHistoryBoolExp): HistoryConfessionHistoryAggregate!
   contacts(distinctOn: [ContactsSelectColumn!], limit: Int, offset: Int, orderBy: [ContactsOrderBy!], where: ContactsBoolExp): [Contacts!]!
+  dataCheck: DataChecks
   editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
   editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
   family: Families
@@ -5266,6 +5385,7 @@ input PersonsBoolExp {
   confessionHistory: HistoryConfessionHistoryBoolExp
   confessionHistoryAggregate: HistoryConfessionHistoryAggregateBoolExp
   contacts: ContactsBoolExp
+  dataCheck: DataChecksBoolExp
   editHistory: HistoryEditHistoryBoolExp
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
   family: FamiliesBoolExp
@@ -5757,6 +5877,7 @@ input PersonsOrderBy {
   color: OrderBy
   confessionHistoryAggregate: HistoryConfessionHistoryAggregateOrderBy
   contactsAggregate: ContactsAggregateOrderBy
+  dataCheck: DataChecksOrderBy
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
   family: FamiliesOrderBy
   familyContactsAggregate: ResolvedContactsAggregateOrderBy
@@ -7988,6 +8109,8 @@ type mutation_root {
   deleteCollegesByPk(id: uuid!): Colleges
   deleteContacts(where: ContactsBoolExp!): ContactsMutationResponse
   deleteContactsByPk(id: uuid!): Contacts
+  deleteDataCheckOverrides(where: DataCheckOverridesBoolExp!): DataCheckOverridesMutationResponse
+  deleteDataCheckOverridesByPk(familyId: uuid!): DataCheckOverrides
   deleteDistricts(where: DistrictsBoolExp!): DistrictsMutationResponse
   deleteDistrictsByPk(id: uuid!): Districts
   deleteFamilies(where: FamiliesBoolExp!): FamiliesMutationResponse
@@ -8059,6 +8182,8 @@ type mutation_root {
   insertCollegesOne(object: CollegesInsertInput!, onConflict: CollegesOnConflict): Colleges
   insertContacts(objects: [ContactsInsertInput!]!, onConflict: ContactsOnConflict): ContactsMutationResponse
   insertContactsOne(object: ContactsInsertInput!, onConflict: ContactsOnConflict): Contacts
+  insertDataCheckOverrides(objects: [DataCheckOverridesInsertInput!]!, onConflict: DataCheckOverridesOnConflict): DataCheckOverridesMutationResponse
+  insertDataCheckOverridesOne(object: DataCheckOverridesInsertInput!, onConflict: DataCheckOverridesOnConflict): DataCheckOverrides
   insertDistricts(objects: [DistrictsInsertInput!]!, onConflict: DistrictsOnConflict): DistrictsMutationResponse
   insertDistrictsOne(object: DistrictsInsertInput!, onConflict: DistrictsOnConflict): Districts
   insertFamilies(objects: [FamiliesInsertInput!]!, onConflict: FamiliesOnConflict): FamiliesMutationResponse
@@ -8143,6 +8268,9 @@ type mutation_root {
   updateContacts(_set: ContactsSetInput, where: ContactsBoolExp!): ContactsMutationResponse
   updateContactsByPk(_set: ContactsSetInput, pkColumns: ContactsPkColumnsInput!): Contacts
   updateContactsMany(updates: [ContactsUpdates!]!): [ContactsMutationResponse]
+  updateDataCheckOverrides(_set: DataCheckOverridesSetInput, where: DataCheckOverridesBoolExp!): DataCheckOverridesMutationResponse
+  updateDataCheckOverridesByPk(_set: DataCheckOverridesSetInput, pkColumns: DataCheckOverridesPkColumnsInput!): DataCheckOverrides
+  updateDataCheckOverridesMany(updates: [DataCheckOverridesUpdates!]!): [DataCheckOverridesMutationResponse]
   updateDistricts(_set: DistrictsSetInput, where: DistrictsBoolExp!): DistrictsMutationResponse
   updateDistrictsByPk(_set: DistrictsSetInput, pkColumns: DistrictsPkColumnsInput!): Districts
   updateDistrictsMany(updates: [DistrictsUpdates!]!): [DistrictsMutationResponse]
@@ -8267,6 +8395,8 @@ type query_root {
   collegesByPk(id: uuid!): Colleges
   contacts(distinctOn: [ContactsSelectColumn!], limit: Int, offset: Int, orderBy: [ContactsOrderBy!], where: ContactsBoolExp): [Contacts!]!
   contactsByPk(id: uuid!): Contacts
+  dataCheckOverrides(distinctOn: [DataCheckOverridesSelectColumn!], limit: Int, offset: Int, orderBy: [DataCheckOverridesOrderBy!], where: DataCheckOverridesBoolExp): [DataCheckOverrides!]!
+  dataCheckOverridesByPk(familyId: uuid!): DataCheckOverrides
   districts(distinctOn: [DistrictsSelectColumn!], limit: Int, offset: Int, orderBy: [DistrictsOrderBy!], where: DistrictsBoolExp): [Districts!]!
   districtsByPk(id: uuid!): Districts
   families(distinctOn: [FamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesOrderBy!], where: FamiliesBoolExp): [Families!]!
@@ -8406,6 +8536,9 @@ type subscription_root {
   contacts(distinctOn: [ContactsSelectColumn!], limit: Int, offset: Int, orderBy: [ContactsOrderBy!], where: ContactsBoolExp): [Contacts!]!
   contactsByPk(id: uuid!): Contacts
   contactsStream(batchSize: Int!, cursor: [ContactsStreamCursorInput]!, where: ContactsBoolExp): [Contacts!]!
+  dataCheckOverrides(distinctOn: [DataCheckOverridesSelectColumn!], limit: Int, offset: Int, orderBy: [DataCheckOverridesOrderBy!], where: DataCheckOverridesBoolExp): [DataCheckOverrides!]!
+  dataCheckOverridesByPk(familyId: uuid!): DataCheckOverrides
+  dataCheckOverridesStream(batchSize: Int!, cursor: [DataCheckOverridesStreamCursorInput]!, where: DataCheckOverridesBoolExp): [DataCheckOverrides!]!
   districts(distinctOn: [DistrictsSelectColumn!], limit: Int, offset: Int, orderBy: [DistrictsOrderBy!], where: DistrictsBoolExp): [Districts!]!
   districtsByPk(id: uuid!): Districts
   districtsStream(batchSize: Int!, cursor: [DistrictsStreamCursorInput]!, where: DistrictsBoolExp): [Districts!]!
