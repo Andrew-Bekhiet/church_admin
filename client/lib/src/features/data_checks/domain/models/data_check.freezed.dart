@@ -13,6 +13,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$DataCheck {
+  int get completenessPercent;
   bool get isComplete;
   bool get familyCheck;
   bool get addressCheck;
@@ -32,6 +33,8 @@ mixin _$DataCheck {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is DataCheck &&
+            (identical(other.completenessPercent, completenessPercent) ||
+                other.completenessPercent == completenessPercent) &&
             (identical(other.isComplete, isComplete) ||
                 other.isComplete == isComplete) &&
             (identical(other.familyCheck, familyCheck) ||
@@ -49,6 +52,7 @@ mixin _$DataCheck {
   @override
   int get hashCode => Object.hash(
     runtimeType,
+    completenessPercent,
     isComplete,
     familyCheck,
     addressCheck,
@@ -59,7 +63,7 @@ mixin _$DataCheck {
 
   @override
   String toString() {
-    return 'DataCheck(isComplete: $isComplete, familyCheck: $familyCheck, addressCheck: $addressCheck, userOverride: $userOverride, familyId: $familyId, details: $details)';
+    return 'DataCheck(completenessPercent: $completenessPercent, isComplete: $isComplete, familyCheck: $familyCheck, addressCheck: $addressCheck, userOverride: $userOverride, familyId: $familyId, details: $details)';
   }
 }
 
@@ -70,6 +74,7 @@ abstract mixin class $DataCheckCopyWith<$Res> {
   @useResult
   $Res call({
     String familyId,
+    int completenessPercent,
     bool isComplete,
     bool familyCheck,
     bool addressCheck,
@@ -91,6 +96,7 @@ class _$DataCheckCopyWithImpl<$Res> implements $DataCheckCopyWith<$Res> {
   @override
   $Res call({
     Object? familyId = null,
+    Object? completenessPercent = null,
     Object? isComplete = null,
     Object? familyCheck = null,
     Object? addressCheck = null,
@@ -103,6 +109,10 @@ class _$DataCheckCopyWithImpl<$Res> implements $DataCheckCopyWith<$Res> {
             ? _self.familyId
             : familyId // ignore: cast_nullable_to_non_nullable
                   as String,
+        completenessPercent: null == completenessPercent
+            ? _self.completenessPercent
+            : completenessPercent // ignore: cast_nullable_to_non_nullable
+                  as int,
         isComplete: null == isComplete
             ? _self.isComplete
             : isComplete // ignore: cast_nullable_to_non_nullable

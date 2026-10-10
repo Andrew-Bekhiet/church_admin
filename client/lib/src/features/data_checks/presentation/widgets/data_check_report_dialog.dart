@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,23 +51,25 @@ class DataCheckReportDialog extends StatelessWidget {
                     for (final item in value) DataCheckItemRow(item: item),
                   ],
                 ),
+              const Divider(),
               DataCheckOverrideSelector(canOverride: canOverride),
-              ExpansionTile(
-                title: const Text('التفاصيل الكاملة'),
-                children: [
-                  Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: SelectableText(
-                      const JsonEncoder.withIndent(
-                        '  ',
-                      ).convert(
-                        dataCheck.details.map((i) => i.toJson()).toList(),
+              if (kDebugMode)
+                ExpansionTile(
+                  title: const Text('التفاصيل الكاملة'),
+                  children: [
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: SelectableText(
+                        const JsonEncoder.withIndent(
+                          '  ',
+                        ).convert(
+                          dataCheck.details.map((i) => i.toJson()).toList(),
+                        ),
+                        style: textTheme.bodySmall,
                       ),
-                      style: textTheme.bodySmall,
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
             ],
           ),
           actions: [

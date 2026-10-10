@@ -1,6 +1,7 @@
 fragment DataCheck on DataChecks {
   familyId
   isComplete
+  completenessPercent
   familyCheck
   addressCheck
   userOverride

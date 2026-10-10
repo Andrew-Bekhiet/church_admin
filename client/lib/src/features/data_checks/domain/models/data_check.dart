@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_annotations/church_admin_annotations.dart';
 import 'package:collection/collection.dart';
@@ -12,6 +14,14 @@ part 'data_check.g.dart';
 class DataCheck extends ViewableWithID
     with _$DataCheck
     implements SerializableExtra {
+  static const int _percentCap = 99;
+  static const int _percentFull = 100;
+
+  @override
+  @JsonKey(defaultValue: 0)
+  @QueryableField(label: 'نسبة اكتمال البيانات')
+  final int completenessPercent;
+
   @override
   @JsonKey(defaultValue: false)
   @QueryableField(label: 'البيانات مكتملة')
@@ -53,11 +63,15 @@ class DataCheck extends ViewableWithID
 
   int get totalCount => details.length;
 
+  int get automaticPercent =>
+      totalCount == 0 ? 0 : passedCount * _percentFull ~/ totalCount;
+
   Map<DataCheckGroup, List<DataCheckItem>> get itemsByGroup =>
       details.groupListsBy((item) => item.group);
 
   DataCheck({
     required this.familyId,
+    this.completenessPercent = 0,
     this.isComplete = false,
     this.familyCheck = false,
     this.addressCheck = false,
@@ -70,6 +84,11 @@ class DataCheck extends ViewableWithID
 
   DataCheck withUserOverride(bool? userOverride) => DataCheck(
     familyId: familyId,
+    completenessPercent: switch (userOverride) {
+      true => _percentFull,
+      false => min(automaticPercent, _percentCap),
+      null => automaticPercent,
+    },
     isComplete: userOverride ?? automaticVerdict,
     familyCheck: familyCheck,
     addressCheck: addressCheck,
