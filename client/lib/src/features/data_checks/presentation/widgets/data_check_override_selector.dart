@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class DataCheckOverrideSelector extends StatelessWidget {
-  static const String explanation =
-      'اختر حالة لتجاوز نتيجة التحقق التلقائي، أو "تلقائي" للرجوع إليها';
+  static const String explanation = 'تجاوز نتيجة التحقق التلقائي';
 
   final bool canOverride;
 
@@ -24,33 +23,36 @@ class DataCheckOverrideSelector extends StatelessWidget {
           margin: EdgeInsets.zero,
           color: colorScheme.surfaceContainerHigh,
           child: Padding(
-            padding: const EdgeInsetsDirectional.all(16),
+            padding: const EdgeInsetsDirectional.all(12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 12,
+              spacing: 8,
               children: [
                 Row(
                   spacing: 8,
                   children: [
-                    const Icon(Symbols.tune),
-                    Text('تعديل يدوي', style: textTheme.titleSmall),
+                    const Icon(Symbols.tune, size: 20),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('تعديل يدوي', style: textTheme.titleSmall),
+                          Text(explanation, style: textTheme.bodySmall),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
-                Text(explanation, style: textTheme.bodySmall),
                 SegmentedButton<DataCheckOverride>(
                   expandedInsets: EdgeInsets.zero,
                   showSelectedIcon: false,
+                  style: const ButtonStyle(
+                    visualDensity: VisualDensity.compact,
+                  ),
                   segments: [
                     for (final override in DataCheckOverride.values)
                       ButtonSegment(
                         value: override,
-                        icon: Icon(switch (override) {
-                          DataCheckOverride.automatic => Symbols.auto_mode,
-                          DataCheckOverride.markedComplete =>
-                            Symbols.workspace_premium,
-                          DataCheckOverride.markedIncomplete =>
-                            Symbols.do_not_disturb_on,
-                        }),
                         label: Text(override.label),
                       ),
                   ],
