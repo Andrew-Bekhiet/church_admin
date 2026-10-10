@@ -81,8 +81,8 @@ void main() {
     blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
       'choosing automatic clears the override and shows the automatic verdict',
       setUp: () => when(
-        () => dao.clearOverride(familyId: 'family'),
-      ).thenAnswer((_) async {}),
+        () => dao.tryClearOverride(familyId: 'family'),
+      ).thenAnswer((_) async => true),
       build: () => cubitFor(markedIncomplete),
       act: (cubit) => cubit.choose(DataCheckOverride.automatic),
       expect: () {
@@ -93,6 +93,25 @@ void main() {
           DataCheckOverrideState(dataCheck: automatic),
         ];
       },
+    );
+
+    blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
+      'a refused clear reverts to the manual verdict and reports notPermitted',
+      setUp: () => when(
+        () => dao.tryClearOverride(familyId: 'family'),
+      ).thenAnswer((_) async => false),
+      build: () => cubitFor(markedIncomplete),
+      act: (cubit) => cubit.choose(DataCheckOverride.automatic),
+      expect: () => [
+        DataCheckOverrideState(
+          dataCheck: markedIncomplete.withUserOverride(null),
+          isSaving: true,
+        ),
+        DataCheckOverrideState(
+          dataCheck: markedIncomplete,
+          error: DataCheckOverrideError.notPermitted,
+        ),
+      ],
     );
 
     blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(

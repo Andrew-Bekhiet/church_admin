@@ -48,9 +48,9 @@ class DataCheckOverrideCubit extends Cubit<DataCheckOverrideState> {
         return applied ? null : DataCheckOverrideError.notPermitted;
       }
 
-      await _dao.clearOverride(familyId: familyId);
+      final cleared = await _dao.tryClearOverride(familyId: familyId);
 
-      return null;
+      return cleared ? null : DataCheckOverrideError.notPermitted;
     } catch (error, stackTrace) {
       unawaited(
         LoggingService.I.exception(
