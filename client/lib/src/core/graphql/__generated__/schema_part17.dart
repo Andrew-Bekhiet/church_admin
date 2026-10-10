@@ -2343,240 +2343,237 @@ class _CopyWithStubImpl_Input_ContactsUpdates<TRes>
       CopyWith_Input_ContactsBoolExp.stub(_res);
 }
 
-class Input_DateComparisonExp {
-  factory Input_DateComparisonExp({
-    DateTime? $_eq,
-    DateTime? $_gt,
-    DateTime? $_gte,
-    List<DateTime>? $_in,
-    bool? $_isNull,
-    DateTime? $_lt,
-    DateTime? $_lte,
-    DateTime? $_neq,
-    List<DateTime>? $_nin,
-  }) => Input_DateComparisonExp._({
-    if ($_eq != null) r'_eq': $_eq,
-    if ($_gt != null) r'_gt': $_gt,
-    if ($_gte != null) r'_gte': $_gte,
-    if ($_in != null) r'_in': $_in,
-    if ($_isNull != null) r'_isNull': $_isNull,
-    if ($_lt != null) r'_lt': $_lt,
-    if ($_lte != null) r'_lte': $_lte,
-    if ($_neq != null) r'_neq': $_neq,
-    if ($_nin != null) r'_nin': $_nin,
+class Input_DataCheckOverridesBoolExp {
+  factory Input_DataCheckOverridesBoolExp({
+    List<Input_DataCheckOverridesBoolExp>? $_and,
+    Input_DataCheckOverridesBoolExp? $_not,
+    List<Input_DataCheckOverridesBoolExp>? $_or,
+    Input_FamiliesBoolExp? family,
+    Input_UuidComparisonExp? familyId,
+    Input_BooleanComparisonExp? isComplete,
+    Input_UuidComparisonExp? updatedBy,
+  }) => Input_DataCheckOverridesBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (family != null) r'family': family,
+    if (familyId != null) r'familyId': familyId,
+    if (isComplete != null) r'isComplete': isComplete,
+    if (updatedBy != null) r'updatedBy': updatedBy,
   });
 
-  Input_DateComparisonExp._(this._$data);
+  Input_DataCheckOverridesBoolExp._(this._$data);
 
-  factory Input_DateComparisonExp.fromJson(Map<String, dynamic> data) {
+  factory Input_DataCheckOverridesBoolExp.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('_eq')) {
-      final l$$_eq = data['_eq'];
-      result$data['_eq'] = l$$_eq == null ? null : dateFromString(l$$_eq);
-    }
-    if (data.containsKey('_gt')) {
-      final l$$_gt = data['_gt'];
-      result$data['_gt'] = l$$_gt == null ? null : dateFromString(l$$_gt);
-    }
-    if (data.containsKey('_gte')) {
-      final l$$_gte = data['_gte'];
-      result$data['_gte'] = l$$_gte == null ? null : dateFromString(l$$_gte);
-    }
-    if (data.containsKey('_in')) {
-      final l$$_in = data['_in'];
-      result$data['_in'] = (l$$_in as List<dynamic>?)
-          ?.map((e) => dateFromString(e))
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map(
+            (e) => Input_DataCheckOverridesBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
-    if (data.containsKey('_isNull')) {
-      final l$$_isNull = data['_isNull'];
-      result$data['_isNull'] = (l$$_isNull as bool?);
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
+          ? null
+          : Input_DataCheckOverridesBoolExp.fromJson(
+              (l$$_not as Map<String, dynamic>),
+            );
     }
-    if (data.containsKey('_lt')) {
-      final l$$_lt = data['_lt'];
-      result$data['_lt'] = l$$_lt == null ? null : dateFromString(l$$_lt);
-    }
-    if (data.containsKey('_lte')) {
-      final l$$_lte = data['_lte'];
-      result$data['_lte'] = l$$_lte == null ? null : dateFromString(l$$_lte);
-    }
-    if (data.containsKey('_neq')) {
-      final l$$_neq = data['_neq'];
-      result$data['_neq'] = l$$_neq == null ? null : dateFromString(l$$_neq);
-    }
-    if (data.containsKey('_nin')) {
-      final l$$_nin = data['_nin'];
-      result$data['_nin'] = (l$$_nin as List<dynamic>?)
-          ?.map((e) => dateFromString(e))
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map(
+            (e) => Input_DataCheckOverridesBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
-    return Input_DateComparisonExp._(result$data);
+    if (data.containsKey('family')) {
+      final l$family = data['family'];
+      result$data['family'] = l$family == null
+          ? null
+          : Input_FamiliesBoolExp.fromJson((l$family as Map<String, dynamic>));
+    }
+    if (data.containsKey('familyId')) {
+      final l$familyId = data['familyId'];
+      result$data['familyId'] = l$familyId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$familyId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('isComplete')) {
+      final l$isComplete = data['isComplete'];
+      result$data['isComplete'] = l$isComplete == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$isComplete as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('updatedBy')) {
+      final l$updatedBy = data['updatedBy'];
+      result$data['updatedBy'] = l$updatedBy == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$updatedBy as Map<String, dynamic>),
+            );
+    }
+    return Input_DataCheckOverridesBoolExp._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  DateTime? get $_eq => (_$data['_eq'] as DateTime?);
+  List<Input_DataCheckOverridesBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_DataCheckOverridesBoolExp>?);
 
-  DateTime? get $_gt => (_$data['_gt'] as DateTime?);
+  Input_DataCheckOverridesBoolExp? get $_not =>
+      (_$data['_not'] as Input_DataCheckOverridesBoolExp?);
 
-  DateTime? get $_gte => (_$data['_gte'] as DateTime?);
+  List<Input_DataCheckOverridesBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_DataCheckOverridesBoolExp>?);
 
-  List<DateTime>? get $_in => (_$data['_in'] as List<DateTime>?);
+  Input_FamiliesBoolExp? get family =>
+      (_$data['family'] as Input_FamiliesBoolExp?);
 
-  bool? get $_isNull => (_$data['_isNull'] as bool?);
+  Input_UuidComparisonExp? get familyId =>
+      (_$data['familyId'] as Input_UuidComparisonExp?);
 
-  DateTime? get $_lt => (_$data['_lt'] as DateTime?);
+  Input_BooleanComparisonExp? get isComplete =>
+      (_$data['isComplete'] as Input_BooleanComparisonExp?);
 
-  DateTime? get $_lte => (_$data['_lte'] as DateTime?);
-
-  DateTime? get $_neq => (_$data['_neq'] as DateTime?);
-
-  List<DateTime>? get $_nin => (_$data['_nin'] as List<DateTime>?);
+  Input_UuidComparisonExp? get updatedBy =>
+      (_$data['updatedBy'] as Input_UuidComparisonExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_eq')) {
-      final l$$_eq = $_eq;
-      result$data['_eq'] = l$$_eq == null ? null : dateToString(l$$_eq);
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('_gt')) {
-      final l$$_gt = $_gt;
-      result$data['_gt'] = l$$_gt == null ? null : dateToString(l$$_gt);
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
     }
-    if (_$data.containsKey('_gte')) {
-      final l$$_gte = $_gte;
-      result$data['_gte'] = l$$_gte == null ? null : dateToString(l$$_gte);
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('_in')) {
-      final l$$_in = $_in;
-      result$data['_in'] = l$$_in?.map((e) => dateToString(e)).toList();
+    if (_$data.containsKey('family')) {
+      final l$family = family;
+      result$data['family'] = l$family?.toJson();
     }
-    if (_$data.containsKey('_isNull')) {
-      final l$$_isNull = $_isNull;
-      result$data['_isNull'] = l$$_isNull;
+    if (_$data.containsKey('familyId')) {
+      final l$familyId = familyId;
+      result$data['familyId'] = l$familyId?.toJson();
     }
-    if (_$data.containsKey('_lt')) {
-      final l$$_lt = $_lt;
-      result$data['_lt'] = l$$_lt == null ? null : dateToString(l$$_lt);
+    if (_$data.containsKey('isComplete')) {
+      final l$isComplete = isComplete;
+      result$data['isComplete'] = l$isComplete?.toJson();
     }
-    if (_$data.containsKey('_lte')) {
-      final l$$_lte = $_lte;
-      result$data['_lte'] = l$$_lte == null ? null : dateToString(l$$_lte);
-    }
-    if (_$data.containsKey('_neq')) {
-      final l$$_neq = $_neq;
-      result$data['_neq'] = l$$_neq == null ? null : dateToString(l$$_neq);
-    }
-    if (_$data.containsKey('_nin')) {
-      final l$$_nin = $_nin;
-      result$data['_nin'] = l$$_nin?.map((e) => dateToString(e)).toList();
+    if (_$data.containsKey('updatedBy')) {
+      final l$updatedBy = updatedBy;
+      result$data['updatedBy'] = l$updatedBy?.toJson();
     }
     return result$data;
   }
 
-  CopyWith_Input_DateComparisonExp<Input_DateComparisonExp> get copyWith =>
-      CopyWith_Input_DateComparisonExp(this, (i) => i);
+  CopyWith_Input_DataCheckOverridesBoolExp<Input_DataCheckOverridesBoolExp>
+  get copyWith => CopyWith_Input_DataCheckOverridesBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_DateComparisonExp || runtimeType != other.runtimeType) {
+    if (other is! Input_DataCheckOverridesBoolExp ||
+        runtimeType != other.runtimeType) {
       return false;
     }
-    final l$$_eq = $_eq;
-    final lOther$$_eq = other.$_eq;
-    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
       return false;
     }
-    if (l$$_eq != lOther$$_eq) {
-      return false;
-    }
-    final l$$_gt = $_gt;
-    final lOther$$_gt = other.$_gt;
-    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
-      return false;
-    }
-    if (l$$_gt != lOther$$_gt) {
-      return false;
-    }
-    final l$$_gte = $_gte;
-    final lOther$$_gte = other.$_gte;
-    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
-      return false;
-    }
-    if (l$$_gte != lOther$$_gte) {
-      return false;
-    }
-    final l$$_in = $_in;
-    final lOther$$_in = other.$_in;
-    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
-      return false;
-    }
-    if (l$$_in != null && lOther$$_in != null) {
-      if (l$$_in.length != lOther$$_in.length) {
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
         return false;
       }
-      for (int i = 0; i < l$$_in.length; i++) {
-        final l$$_in$entry = l$$_in[i];
-        final lOther$$_in$entry = lOther$$_in[i];
-        if (l$$_in$entry != lOther$$_in$entry) {
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
           return false;
         }
       }
-    } else if (l$$_in != lOther$$_in) {
+    } else if (l$$_and != lOther$$_and) {
       return false;
     }
-    final l$$_isNull = $_isNull;
-    final lOther$$_isNull = other.$_isNull;
-    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
       return false;
     }
-    if (l$$_isNull != lOther$$_isNull) {
+    if (l$$_not != lOther$$_not) {
       return false;
     }
-    final l$$_lt = $_lt;
-    final lOther$$_lt = other.$_lt;
-    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
       return false;
     }
-    if (l$$_lt != lOther$$_lt) {
-      return false;
-    }
-    final l$$_lte = $_lte;
-    final lOther$$_lte = other.$_lte;
-    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
-      return false;
-    }
-    if (l$$_lte != lOther$$_lte) {
-      return false;
-    }
-    final l$$_neq = $_neq;
-    final lOther$$_neq = other.$_neq;
-    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
-      return false;
-    }
-    if (l$$_neq != lOther$$_neq) {
-      return false;
-    }
-    final l$$_nin = $_nin;
-    final lOther$$_nin = other.$_nin;
-    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
-      return false;
-    }
-    if (l$$_nin != null && lOther$$_nin != null) {
-      if (l$$_nin.length != lOther$$_nin.length) {
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
         return false;
       }
-      for (int i = 0; i < l$$_nin.length; i++) {
-        final l$$_nin$entry = l$$_nin[i];
-        final lOther$$_nin$entry = lOther$$_nin[i];
-        if (l$$_nin$entry != lOther$$_nin$entry) {
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
           return false;
         }
       }
-    } else if (l$$_nin != lOther$$_nin) {
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$family = family;
+    final lOther$family = other.family;
+    if (_$data.containsKey('family') != other._$data.containsKey('family')) {
+      return false;
+    }
+    if (l$family != lOther$family) {
+      return false;
+    }
+    final l$familyId = familyId;
+    final lOther$familyId = other.familyId;
+    if (_$data.containsKey('familyId') !=
+        other._$data.containsKey('familyId')) {
+      return false;
+    }
+    if (l$familyId != lOther$familyId) {
+      return false;
+    }
+    final l$isComplete = isComplete;
+    final lOther$isComplete = other.isComplete;
+    if (_$data.containsKey('isComplete') !=
+        other._$data.containsKey('isComplete')) {
+      return false;
+    }
+    if (l$isComplete != lOther$isComplete) {
+      return false;
+    }
+    final l$updatedBy = updatedBy;
+    final lOther$updatedBy = other.updatedBy;
+    if (_$data.containsKey('updatedBy') !=
+        other._$data.containsKey('updatedBy')) {
+      return false;
+    }
+    if (l$updatedBy != lOther$updatedBy) {
       return false;
     }
     return true;
@@ -2584,33 +2581,29 @@ class Input_DateComparisonExp {
 
   @override
   int get hashCode {
-    final l$$_eq = $_eq;
-    final l$$_gt = $_gt;
-    final l$$_gte = $_gte;
-    final l$$_in = $_in;
-    final l$$_isNull = $_isNull;
-    final l$$_lt = $_lt;
-    final l$$_lte = $_lte;
-    final l$$_neq = $_neq;
-    final l$$_nin = $_nin;
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$family = family;
+    final l$familyId = familyId;
+    final l$isComplete = isComplete;
+    final l$updatedBy = updatedBy;
     return Object.hashAll([
-      _$data.containsKey('_eq') ? l$$_eq : const {},
-      _$data.containsKey('_gt') ? l$$_gt : const {},
-      _$data.containsKey('_gte') ? l$$_gte : const {},
-      _$data.containsKey('_in')
-          ? l$$_in == null
+      _$data.containsKey('_and')
+          ? l$$_and == null
                 ? null
-                : Object.hashAll(l$$_in.map((v) => v))
+                : Object.hashAll(l$$_and.map((v) => v))
           : const {},
-      _$data.containsKey('_isNull') ? l$$_isNull : const {},
-      _$data.containsKey('_lt') ? l$$_lt : const {},
-      _$data.containsKey('_lte') ? l$$_lte : const {},
-      _$data.containsKey('_neq') ? l$$_neq : const {},
-      _$data.containsKey('_nin')
-          ? l$$_nin == null
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
                 ? null
-                : Object.hashAll(l$$_nin.map((v) => v))
+                : Object.hashAll(l$$_or.map((v) => v))
           : const {},
+      _$data.containsKey('family') ? l$family : const {},
+      _$data.containsKey('familyId') ? l$familyId : const {},
+      _$data.containsKey('isComplete') ? l$isComplete : const {},
+      _$data.containsKey('updatedBy') ? l$updatedBy : const {},
     ]);
   }
 }
