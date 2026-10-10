@@ -123,29 +123,34 @@ class _FakeUserPreferencesDAO_16 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
-class _FakeFcmTokensDAO_17 extends _i1.SmartFake implements _i2.FcmTokensDAO {
-  _FakeFcmTokensDAO_17(Object parent, Invocation parentInvocation)
+class _FakeDataChecksDAO_17 extends _i1.SmartFake implements _i2.DataChecksDAO {
+  _FakeDataChecksDAO_17(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMetadataDAO_18 extends _i1.SmartFake implements _i2.MetadataDAO {
-  _FakeMetadataDAO_18(Object parent, Invocation parentInvocation)
+class _FakeFcmTokensDAO_18 extends _i1.SmartFake implements _i2.FcmTokensDAO {
+  _FakeFcmTokensDAO_18(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeHistoryDAO_19 extends _i1.SmartFake implements _i2.HistoryDAO {
-  _FakeHistoryDAO_19(Object parent, Invocation parentInvocation)
+class _FakeMetadataDAO_19 extends _i1.SmartFake implements _i2.MetadataDAO {
+  _FakeMetadataDAO_19(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMeetingsDAO_20 extends _i1.SmartFake implements _i2.MeetingsDAO {
-  _FakeMeetingsDAO_20(Object parent, Invocation parentInvocation)
+class _FakeHistoryDAO_20 extends _i1.SmartFake implements _i2.HistoryDAO {
+  _FakeHistoryDAO_20(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeScrollPosition_21 extends _i1.SmartFake
+class _FakeMeetingsDAO_21 extends _i1.SmartFake implements _i2.MeetingsDAO {
+  _FakeMeetingsDAO_21(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeScrollPosition_22 extends _i1.SmartFake
     implements _i3.ScrollPosition {
-  _FakeScrollPosition_21(Object parent, Invocation parentInvocation)
+  _FakeScrollPosition_22(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -441,14 +446,29 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
           as _i2.UserPreferencesDAO);
 
   @override
+  _i2.DataChecksDAO get dataChecks =>
+      (super.noSuchMethod(
+            Invocation.getter(#dataChecks),
+            returnValue: _FakeDataChecksDAO_17(
+              this,
+              Invocation.getter(#dataChecks),
+            ),
+            returnValueForMissingStub: _FakeDataChecksDAO_17(
+              this,
+              Invocation.getter(#dataChecks),
+            ),
+          )
+          as _i2.DataChecksDAO);
+
+  @override
   _i2.FcmTokensDAO get fcmTokens =>
       (super.noSuchMethod(
             Invocation.getter(#fcmTokens),
-            returnValue: _FakeFcmTokensDAO_17(
+            returnValue: _FakeFcmTokensDAO_18(
               this,
               Invocation.getter(#fcmTokens),
             ),
-            returnValueForMissingStub: _FakeFcmTokensDAO_17(
+            returnValueForMissingStub: _FakeFcmTokensDAO_18(
               this,
               Invocation.getter(#fcmTokens),
             ),
@@ -459,11 +479,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   _i2.MetadataDAO get metadata =>
       (super.noSuchMethod(
             Invocation.getter(#metadata),
-            returnValue: _FakeMetadataDAO_18(
+            returnValue: _FakeMetadataDAO_19(
               this,
               Invocation.getter(#metadata),
             ),
-            returnValueForMissingStub: _FakeMetadataDAO_18(
+            returnValueForMissingStub: _FakeMetadataDAO_19(
               this,
               Invocation.getter(#metadata),
             ),
@@ -474,8 +494,8 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   _i2.HistoryDAO get history =>
       (super.noSuchMethod(
             Invocation.getter(#history),
-            returnValue: _FakeHistoryDAO_19(this, Invocation.getter(#history)),
-            returnValueForMissingStub: _FakeHistoryDAO_19(
+            returnValue: _FakeHistoryDAO_20(this, Invocation.getter(#history)),
+            returnValueForMissingStub: _FakeHistoryDAO_20(
               this,
               Invocation.getter(#history),
             ),
@@ -486,11 +506,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   _i2.MeetingsDAO get meetings =>
       (super.noSuchMethod(
             Invocation.getter(#meetings),
-            returnValue: _FakeMeetingsDAO_20(
+            returnValue: _FakeMeetingsDAO_21(
               this,
               Invocation.getter(#meetings),
             ),
-            returnValueForMissingStub: _FakeMeetingsDAO_20(
+            returnValueForMissingStub: _FakeMeetingsDAO_21(
               this,
               Invocation.getter(#meetings),
             ),
@@ -706,11 +726,11 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
   _i3.ScrollPosition get position =>
       (super.noSuchMethod(
             Invocation.getter(#position),
-            returnValue: _FakeScrollPosition_21(
+            returnValue: _FakeScrollPosition_22(
               this,
               Invocation.getter(#position),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_21(
+            returnValueForMissingStub: _FakeScrollPosition_22(
               this,
               Invocation.getter(#position),
             ),
@@ -800,7 +820,7 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
               context,
               oldPosition,
             ]),
-            returnValue: _FakeScrollPosition_21(
+            returnValue: _FakeScrollPosition_22(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,
@@ -808,7 +828,7 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
                 oldPosition,
               ]),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_21(
+            returnValueForMissingStub: _FakeScrollPosition_22(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,

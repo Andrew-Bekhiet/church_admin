@@ -44,6 +44,14 @@ abstract final class _$AdvancedQueriesMetadata {
     fromJson: HistoryAggregateData.fromJson,
   );
 
+  final dataCheck = QueryableType<DataCheck>(
+    name: 'DataCheck',
+    label: 'اكتمال البيانات',
+    fieldsMetadata: DataCheckFields().allFields,
+    fieldsMetadataByName: DataCheckFields().allFieldsByName,
+    fromJson: DataCheck.fromJson,
+  );
+
   final address = QueryableType<Address>(
     name: 'Address',
     label: 'العنوان',
@@ -334,6 +342,7 @@ abstract final class _$AdvancedQueriesMetadata {
     meeting,
     aggregateData,
     historyAggregateData,
+    dataCheck,
     address,
     area,
     church,
@@ -377,6 +386,7 @@ abstract final class _$AdvancedQueriesMetadata {
     Meeting: meeting,
     AggregateData: aggregateData,
     HistoryAggregateData: historyAggregateData,
+    DataCheck: dataCheck,
     Address: address,
     Area: area,
     Church: church,

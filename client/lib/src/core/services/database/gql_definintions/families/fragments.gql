@@ -2,6 +2,9 @@ fragment Family on Families {
   ...FamilyNoPhoto
   photoUpdatedAt
   blurhash
+  dataCheck {
+    ...DataCheck
+  }
 }
 
 fragment FamilyNoPhoto on Families {

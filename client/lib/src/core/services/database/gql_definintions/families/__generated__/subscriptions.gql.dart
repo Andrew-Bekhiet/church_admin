@@ -1,6 +1,7 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.gql.dart';
 import '../../contacts/__generated__/fragments.gql.dart';
+import '../../data_checks/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
@@ -429,6 +430,7 @@ const documentNodeSubscriptionwatchAllFamilies = DocumentNode(
     ),
     fragmentDefinitionFamily,
     fragmentDefinitionFamilyNoPhoto,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -1590,6 +1592,7 @@ const documentNodeSubscriptionwatchAllFamiliesWithAddresses = DocumentNode(
     ),
     fragmentDefinitionFamily,
     fragmentDefinitionFamilyNoPhoto,
+    fragmentDefinitionDataCheck,
     fragmentDefinitionAddress,
     fragmentDefinitionArea,
     fragmentDefinitionAreaNoPhoto,
@@ -1608,6 +1611,7 @@ class Subscription_watchAllFamiliesWithAddresses_families
     this.$__typename = 'Families',
     this.photoUpdatedAt,
     this.blurhash,
+    this.dataCheck,
     this.address,
     required this.status,
     this.deceasedSpouseName,
@@ -1624,6 +1628,7 @@ class Subscription_watchAllFamiliesWithAddresses_families
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$dataCheck = json['dataCheck'];
     final l$address = json['address'];
     final l$status = json['status'];
     final l$deceasedSpouseName = json['deceasedSpouseName'];
@@ -1638,6 +1643,9 @@ class Subscription_watchAllFamiliesWithAddresses_families
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      dataCheck: l$dataCheck == null
+          ? null
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
       address: l$address == null
           ? null
           : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
@@ -1662,6 +1670,8 @@ class Subscription_watchAllFamiliesWithAddresses_families
   final DateTime? photoUpdatedAt;
 
   final String? blurhash;
+
+  final Fragment_DataCheck? dataCheck;
 
   final Fragment_Address? address;
 
@@ -1689,6 +1699,8 @@ class Subscription_watchAllFamiliesWithAddresses_families
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$dataCheck = dataCheck;
+    _resultData['dataCheck'] = l$dataCheck?.toJson();
     final l$address = address;
     _resultData['address'] = l$address?.toJson();
     final l$status = status;
@@ -1711,6 +1723,7 @@ class Subscription_watchAllFamiliesWithAddresses_families
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$dataCheck = dataCheck;
     final l$address = address;
     final l$status = status;
     final l$deceasedSpouseName = deceasedSpouseName;
@@ -1723,6 +1736,7 @@ class Subscription_watchAllFamiliesWithAddresses_families
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
+      l$dataCheck,
       l$address,
       l$status,
       l$deceasedSpouseName,
@@ -1772,6 +1786,11 @@ class Subscription_watchAllFamiliesWithAddresses_families
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$dataCheck = dataCheck;
+    final lOther$dataCheck = other.dataCheck;
+    if (l$dataCheck != lOther$dataCheck) {
       return false;
     }
     final l$address = address;
@@ -1829,11 +1848,13 @@ abstract class CopyWith_Subscription_watchAllFamiliesWithAddresses_families<
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
     Fragment_Address? address,
     String? status,
     String? deceasedSpouseName,
     DateTime? marriageDate,
   });
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
   CopyWith_Fragment_Address<TRes> get address;
 }
 
@@ -1860,6 +1881,7 @@ class _CopyWithImpl_Subscription_watchAllFamiliesWithAddresses_families<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? dataCheck = _undefined,
     Object? address = _undefined,
     Object? status = _undefined,
     Object? deceasedSpouseName = _undefined,
@@ -1883,6 +1905,9 @@ class _CopyWithImpl_Subscription_watchAllFamiliesWithAddresses_families<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      dataCheck: dataCheck == _undefined
+          ? _instance.dataCheck
+          : (dataCheck as Fragment_DataCheck?),
       address: address == _undefined
           ? _instance.address
           : (address as Fragment_Address?),
@@ -1897,6 +1922,16 @@ class _CopyWithImpl_Subscription_watchAllFamiliesWithAddresses_families<TRes>
           : (marriageDate as DateTime?),
     ),
   );
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
+    final local$dataCheck = _instance.dataCheck;
+    return local$dataCheck == null
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
+            local$dataCheck,
+            (e) => call(dataCheck: e),
+          );
+  }
 
   CopyWith_Fragment_Address<TRes> get address {
     final local$address = _instance.address;
@@ -1925,11 +1960,15 @@ class _CopyWithStubImpl_Subscription_watchAllFamiliesWithAddresses_families<
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
     Fragment_Address? address,
     String? status,
     String? deceasedSpouseName,
     DateTime? marriageDate,
   }) => _res;
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 
   CopyWith_Fragment_Address<TRes> get address =>
       CopyWith_Fragment_Address.stub(_res);
@@ -2417,6 +2456,7 @@ const documentNodeSubscriptionwatchFamily = DocumentNode(
     ),
     fragmentDefinitionFamily,
     fragmentDefinitionFamilyNoPhoto,
+    fragmentDefinitionDataCheck,
     fragmentDefinitionAddress,
     fragmentDefinitionArea,
     fragmentDefinitionAreaNoPhoto,
@@ -2441,6 +2481,7 @@ class Subscription_watchFamily_familiesByPk
     this.$__typename = 'Families',
     this.photoUpdatedAt,
     this.blurhash,
+    this.dataCheck,
     this.address,
     this.church,
     required this.status,
@@ -2463,6 +2504,7 @@ class Subscription_watchFamily_familiesByPk
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$dataCheck = json['dataCheck'];
     final l$address = json['address'];
     final l$church = json['church'];
     final l$status = json['status'];
@@ -2483,6 +2525,9 @@ class Subscription_watchFamily_familiesByPk
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      dataCheck: l$dataCheck == null
+          ? null
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
       address: l$address == null
           ? null
           : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
@@ -2536,6 +2581,8 @@ class Subscription_watchFamily_familiesByPk
 
   final String? blurhash;
 
+  final Fragment_DataCheck? dataCheck;
+
   final Fragment_Address? address;
 
   final Subscription_watchFamily_familiesByPk_church? church;
@@ -2574,6 +2621,8 @@ class Subscription_watchFamily_familiesByPk
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$dataCheck = dataCheck;
+    _resultData['dataCheck'] = l$dataCheck?.toJson();
     final l$address = address;
     _resultData['address'] = l$address?.toJson();
     final l$church = church;
@@ -2608,6 +2657,7 @@ class Subscription_watchFamily_familiesByPk
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$dataCheck = dataCheck;
     final l$address = address;
     final l$church = church;
     final l$status = status;
@@ -2626,6 +2676,7 @@ class Subscription_watchFamily_familiesByPk
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
+      l$dataCheck,
       l$address,
       l$church,
       l$status,
@@ -2681,6 +2732,11 @@ class Subscription_watchFamily_familiesByPk
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$dataCheck = dataCheck;
+    final lOther$dataCheck = other.dataCheck;
+    if (l$dataCheck != lOther$dataCheck) {
       return false;
     }
     final l$address = address;
@@ -2770,6 +2826,7 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
     Fragment_Address? address,
     Subscription_watchFamily_familiesByPk_church? church,
     String? status,
@@ -2781,6 +2838,7 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
     Fragment_LatestVisitHistory? lastVisit,
     Fragment_LatestFatherVisitHistory? lastFatherVisit,
   });
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
   CopyWith_Fragment_Address<TRes> get address;
   CopyWith_Subscription_watchFamily_familiesByPk_church<TRes> get church;
   TRes contacts(
@@ -2817,6 +2875,7 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? dataCheck = _undefined,
     Object? address = _undefined,
     Object? church = _undefined,
     Object? status = _undefined,
@@ -2846,6 +2905,9 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      dataCheck: dataCheck == _undefined
+          ? _instance.dataCheck
+          : (dataCheck as Fragment_DataCheck?),
       address: address == _undefined
           ? _instance.address
           : (address as Fragment_Address?),
@@ -2876,6 +2938,16 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
           : (lastFatherVisit as Fragment_LatestFatherVisitHistory?),
     ),
   );
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
+    final local$dataCheck = _instance.dataCheck;
+    return local$dataCheck == null
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
+            local$dataCheck,
+            (e) => call(dataCheck: e),
+          );
+  }
 
   CopyWith_Fragment_Address<TRes> get address {
     final local$address = _instance.address;
@@ -2956,6 +3028,7 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
     Fragment_Address? address,
     Subscription_watchFamily_familiesByPk_church? church,
     String? status,
@@ -2967,6 +3040,9 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
     Fragment_LatestVisitHistory? lastVisit,
     Fragment_LatestFatherVisitHistory? lastFatherVisit,
   }) => _res;
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 
   CopyWith_Fragment_Address<TRes> get address =>
       CopyWith_Fragment_Address.stub(_res);

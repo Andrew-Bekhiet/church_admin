@@ -439,6 +439,19 @@ class _PersonFields {
         },
       );
 
+  final FieldMetadata<DataCheck> dataCheck = FieldMetadata<DataCheck>(
+    getValue: (obj) => obj is Person ? obj.dataCheck : null,
+    parentType: Person,
+    name: 'dataCheck',
+    label: 'اكتمال البيانات',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
   final FieldMetadata<ClassesPersons> classesRel =
       FieldMetadata<ClassesPersons>(
         getValue: (obj) => obj is Person ? obj.classes : null,
@@ -700,6 +713,7 @@ class _PersonFields {
     lastCall,
     lastVisit,
     lastEdit,
+    dataCheck,
     classes,
     groups,
     services,
@@ -756,6 +770,7 @@ class _PersonFields {
     'lastCall': lastCall,
     'lastVisit': lastVisit,
     'lastEdit': lastEdit,
+    'dataCheck': dataCheck,
     'classes': classes,
     'groups': groups,
     'services': services,
@@ -918,6 +933,9 @@ Person _$PersonFromJson(Map json) => Person(
       : LastRecordedByInfo.fromJson(
           Map<String, Object?>.from(json['lastEdit'] as Map),
         ),
+  dataCheck: json['dataCheck'] == null
+      ? null
+      : DataCheck.fromJson(Map<String, Object?>.from(json['dataCheck'] as Map)),
   classes: personsClassesFromJson(json['classes'] as List?),
   groups: personsGroupsFromJson(json['groups'] as List?),
   services: personsServicesFromJson(json['services'] as List?),
@@ -1046,6 +1064,7 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
   'lastCall': instance.lastCall?.toJson(),
   'lastVisit': instance.lastVisit?.toJson(),
   'lastEdit': instance.lastEdit?.toJson(),
+  'dataCheck': instance.dataCheck?.toJson(),
   'classes': personsClassesToJson(instance.classes),
   'groups': personsGroupsToJson(instance.groups),
   'services': personsServicesToJson(instance.services),

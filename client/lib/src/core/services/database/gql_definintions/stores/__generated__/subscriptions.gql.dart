@@ -1,5 +1,6 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.gql.dart';
+import '../../data_checks/__generated__/fragments.gql.dart';
 import '../../families/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';
@@ -1382,6 +1383,7 @@ const documentNodeSubscriptionwatchStore = DocumentNode(
     fragmentDefinitionUserNoPhoto,
     fragmentDefinitionFamily,
     fragmentDefinitionFamilyNoPhoto,
+    fragmentDefinitionDataCheck,
   ],
 );
 

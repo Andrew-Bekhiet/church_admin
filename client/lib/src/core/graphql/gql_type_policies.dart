@@ -57,5 +57,7 @@ abstract final class GqlTypePolicies {
     'AuthUsersPermissions': _embedded,
     'UsersFcmTokens': _embedded,
     'UsersPreferences': _embedded,
+    'DataChecks': _embedded,
+    'DataCheckOverrides': _embedded,
   };
 }
