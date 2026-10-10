@@ -1,43 +1,6 @@
 // Part 69 of the schema
 part of "schema.graphql.dart";
 
-String toJson_Enum_HobbiesSelectColumn(Enum_HobbiesSelectColumn e) {
-  switch (e) {
-    case Enum_HobbiesSelectColumn.color:
-      return r'color';
-    case Enum_HobbiesSelectColumn.id:
-      return r'id';
-    case Enum_HobbiesSelectColumn.name:
-      return r'name';
-    case Enum_HobbiesSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HobbiesSelectColumn fromJson_Enum_HobbiesSelectColumn(String value) {
-  switch (value) {
-    case r'color':
-      return Enum_HobbiesSelectColumn.color;
-    case r'id':
-      return Enum_HobbiesSelectColumn.id;
-    case r'name':
-      return Enum_HobbiesSelectColumn.name;
-    default:
-      return Enum_HobbiesSelectColumn.$unknown;
-  }
-}
-
-enum Enum_HobbiesUpdateColumn {
-  color,
-  name,
-  $unknown;
-
-  factory Enum_HobbiesUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HobbiesUpdateColumn(value);
-
-  String toJson() => toJson_Enum_HobbiesUpdateColumn(this);
-}
-
 String toJson_Enum_HobbiesUpdateColumn(Enum_HobbiesUpdateColumn e) {
   switch (e) {
     case Enum_HobbiesUpdateColumn.color:
@@ -2522,4 +2485,63 @@ enum Enum_UsersPreferencesSelectColumn {
       fromJson_Enum_UsersPreferencesSelectColumn(value);
 
   String toJson() => toJson_Enum_UsersPreferencesSelectColumn(this);
+}
+
+String toJson_Enum_UsersPreferencesSelectColumn(
+  Enum_UsersPreferencesSelectColumn e,
+) {
+  switch (e) {
+    case Enum_UsersPreferencesSelectColumn.darkTheme:
+      return r'darkTheme';
+    case Enum_UsersPreferencesSelectColumn.greatFeastTheme:
+      return r'greatFeastTheme';
+    case Enum_UsersPreferencesSelectColumn.lastHomeMode:
+      return r'lastHomeMode';
+    case Enum_UsersPreferencesSelectColumn.orderByPreferences:
+      return r'orderByPreferences';
+    case Enum_UsersPreferencesSelectColumn.uid:
+      return r'uid';
+    case Enum_UsersPreferencesSelectColumn.updatedAt:
+      return r'updatedAt';
+    case Enum_UsersPreferencesSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_UsersPreferencesSelectColumn fromJson_Enum_UsersPreferencesSelectColumn(
+  String value,
+) {
+  switch (value) {
+    case r'darkTheme':
+      return Enum_UsersPreferencesSelectColumn.darkTheme;
+    case r'greatFeastTheme':
+      return Enum_UsersPreferencesSelectColumn.greatFeastTheme;
+    case r'lastHomeMode':
+      return Enum_UsersPreferencesSelectColumn.lastHomeMode;
+    case r'orderByPreferences':
+      return Enum_UsersPreferencesSelectColumn.orderByPreferences;
+    case r'uid':
+      return Enum_UsersPreferencesSelectColumn.uid;
+    case r'updatedAt':
+      return Enum_UsersPreferencesSelectColumn.updatedAt;
+    default:
+      return Enum_UsersPreferencesSelectColumn.$unknown;
+  }
+}
+
+enum Enum___TypeKind {
+  SCALAR,
+  OBJECT,
+  INTERFACE,
+  UNION,
+  ENUM,
+  INPUT_OBJECT,
+  LIST,
+  NON_NULL,
+  $unknown;
+
+  factory Enum___TypeKind.fromJson(String value) =>
+      fromJson_Enum___TypeKind(value);
+
+  String toJson() => toJson_Enum___TypeKind(this);
 }
