@@ -2096,6 +2096,7 @@ input DataCheckOverridesUpdates {
 
 type DataChecks {
   addressCheck: Boolean
+  completenessPercent: Int
   details(path: String): jsonb
   family: Families
   familyCheck: Boolean
@@ -2104,22 +2105,12 @@ type DataChecks {
   userOverride: Boolean
 }
 
-type DataChecksAggregate {
-  aggregate: DataChecksAggregateFields
-  nodes: [DataChecks!]!
-}
-
-type DataChecksAggregateFields {
-  count(columns: [DataChecksSelectColumn!], distinct: Boolean): Int!
-  max: DataChecksMaxFields
-  min: DataChecksMinFields
-}
-
 input DataChecksBoolExp {
   _and: [DataChecksBoolExp!]
   _not: DataChecksBoolExp
   _or: [DataChecksBoolExp!]
   addressCheck: BooleanComparisonExp
+  completenessPercent: IntComparisonExp
   details: JsonbComparisonExp
   family: FamiliesBoolExp
   familyCheck: BooleanComparisonExp
@@ -2128,45 +2119,15 @@ input DataChecksBoolExp {
   userOverride: BooleanComparisonExp
 }
 
-type DataChecksMaxFields {
-  familyId: uuid
-}
-
-type DataChecksMinFields {
-  familyId: uuid
-}
-
 input DataChecksOrderBy {
   addressCheck: OrderBy
+  completenessPercent: OrderBy
   details: OrderBy
   family: FamiliesOrderBy
   familyCheck: OrderBy
   familyId: OrderBy
   isComplete: OrderBy
   userOverride: OrderBy
-}
-
-enum DataChecksSelectColumn {
-  addressCheck
-  details
-  familyCheck
-  familyId
-  isComplete
-  userOverride
-}
-
-input DataChecksStreamCursorInput {
-  initialValue: DataChecksStreamCursorValueInput!
-  ordering: CursorOrdering
-}
-
-input DataChecksStreamCursorValueInput {
-  addressCheck: Boolean
-  details: jsonb
-  familyCheck: Boolean
-  familyId: uuid
-  isComplete: Boolean
-  userOverride: Boolean
 }
 
 input DateComparisonExp {
@@ -8436,8 +8397,6 @@ type query_root {
   contactsByPk(id: uuid!): Contacts
   dataCheckOverrides(distinctOn: [DataCheckOverridesSelectColumn!], limit: Int, offset: Int, orderBy: [DataCheckOverridesOrderBy!], where: DataCheckOverridesBoolExp): [DataCheckOverrides!]!
   dataCheckOverridesByPk(familyId: uuid!): DataCheckOverrides
-  dataChecks(distinctOn: [DataChecksSelectColumn!], limit: Int, offset: Int, orderBy: [DataChecksOrderBy!], where: DataChecksBoolExp): [DataChecks!]!
-  dataChecksAggregate(distinctOn: [DataChecksSelectColumn!], limit: Int, offset: Int, orderBy: [DataChecksOrderBy!], where: DataChecksBoolExp): DataChecksAggregate!
   districts(distinctOn: [DistrictsSelectColumn!], limit: Int, offset: Int, orderBy: [DistrictsOrderBy!], where: DistrictsBoolExp): [Districts!]!
   districtsByPk(id: uuid!): Districts
   families(distinctOn: [FamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesOrderBy!], where: FamiliesBoolExp): [Families!]!
@@ -8580,9 +8539,6 @@ type subscription_root {
   dataCheckOverrides(distinctOn: [DataCheckOverridesSelectColumn!], limit: Int, offset: Int, orderBy: [DataCheckOverridesOrderBy!], where: DataCheckOverridesBoolExp): [DataCheckOverrides!]!
   dataCheckOverridesByPk(familyId: uuid!): DataCheckOverrides
   dataCheckOverridesStream(batchSize: Int!, cursor: [DataCheckOverridesStreamCursorInput]!, where: DataCheckOverridesBoolExp): [DataCheckOverrides!]!
-  dataChecks(distinctOn: [DataChecksSelectColumn!], limit: Int, offset: Int, orderBy: [DataChecksOrderBy!], where: DataChecksBoolExp): [DataChecks!]!
-  dataChecksAggregate(distinctOn: [DataChecksSelectColumn!], limit: Int, offset: Int, orderBy: [DataChecksOrderBy!], where: DataChecksBoolExp): DataChecksAggregate!
-  dataChecksStream(batchSize: Int!, cursor: [DataChecksStreamCursorInput]!, where: DataChecksBoolExp): [DataChecks!]!
   districts(distinctOn: [DistrictsSelectColumn!], limit: Int, offset: Int, orderBy: [DistrictsOrderBy!], where: DistrictsBoolExp): [Districts!]!
   districtsByPk(id: uuid!): Districts
   districtsStream(batchSize: Int!, cursor: [DistrictsStreamCursorInput]!, where: DistrictsBoolExp): [Districts!]!

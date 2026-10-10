@@ -16,46 +16,12 @@ select_permissions:
     permission:
       columns:
         - address_check
+        - completeness_percent
         - details
         - family_check
         - family_id
         - is_complete
         - user_override
-      filter: &family_readable
-        _or:
-          - _exists:
-              _table: &permissions_view
-                name: users_permissions_by_entity_id
-                schema: auth
-              _where:
-                _and:
-                  - &requesting_user
-                    uid:
-                      _eq: X-Hasura-User-Id
-                  - entity_type:
-                      _eq: family
-                  - entity_id:
-                      _ceq:
-                        - $
-                        - family_id
-          - _exists:
-              _table: *permissions_view
-              _where:
-                _and:
-                  - *requesting_user
-                  - entity_type:
-                      _eq: any
-                  - entity_id:
-                      _is_null: true
-          - family:
-              persons:
-                _and:
-                  - deleted_at:
-                      _is_null: true
-                  - permissionGrants:
-                      _and:
-                        - uid:
-                            _eq: X-Hasura-User-Id
-                        - entity_type:
-                            _eq: person
-      allow_aggregations: true
+      filter: {}
+      query_root_fields: []
+      subscription_root_fields: []
