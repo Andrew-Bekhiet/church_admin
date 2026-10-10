@@ -12,7 +12,7 @@ part 'person.g.dart';
 @Queryable(label: 'المخدومين', extensible: true)
 class Person extends ViewableWithIDAndImage
     with _$Person
-    implements SerializableExtra {
+    implements SerializableExtra, HasDataCheck {
   static const Duration maxSpiritDataAge = Duration(days: 60);
 
   @override
