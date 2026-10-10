@@ -1,7 +1,7 @@
 import { getDatabase } from "firebase-admin/database";
 
-const maxAttempts = 3;
-const attemptWindowMilliseconds = 24 * 60 * 60 * 1000;
+const maxAttempts = 6;
+const attemptWindowMilliseconds = 5 * 60 * 60 * 1000;
 
 function recentAttempts(value: unknown, now: number): number[] {
   if (!Array.isArray(value)) {
