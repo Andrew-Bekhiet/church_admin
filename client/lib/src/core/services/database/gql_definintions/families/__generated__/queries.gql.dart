@@ -1,3 +1,4 @@
+import '../../data_checks/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
@@ -376,6 +377,7 @@ const documentNodeQuerygetFamilyRelatedFamilies = DocumentNode(
     ),
     fragmentDefinitionFamily,
     fragmentDefinitionFamilyNoPhoto,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -389,6 +391,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk
     this.$__typename = 'Families',
     this.photoUpdatedAt,
     this.blurhash,
+    this.dataCheck,
     required this.children,
     required this.parents,
   });
@@ -403,6 +406,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$dataCheck = json['dataCheck'];
     final l$children = json['children'];
     final l$parents = json['parents'];
     return Query_getFamilyRelatedFamilies_familiesByPk(
@@ -415,6 +419,9 @@ class Query_getFamilyRelatedFamilies_familiesByPk
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      dataCheck: l$dataCheck == null
+          ? null
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
       children: (l$children as List<dynamic>)
           .map(
             (e) =>
@@ -447,6 +454,8 @@ class Query_getFamilyRelatedFamilies_familiesByPk
 
   final String? blurhash;
 
+  final Fragment_DataCheck? dataCheck;
+
   final List<Query_getFamilyRelatedFamilies_familiesByPk_children> children;
 
   final List<Query_getFamilyRelatedFamilies_familiesByPk_parents> parents;
@@ -469,6 +478,8 @@ class Query_getFamilyRelatedFamilies_familiesByPk
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$dataCheck = dataCheck;
+    _resultData['dataCheck'] = l$dataCheck?.toJson();
     final l$children = children;
     _resultData['children'] = l$children.map((e) => e.toJson()).toList();
     final l$parents = parents;
@@ -485,6 +496,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$dataCheck = dataCheck;
     final l$children = children;
     final l$parents = parents;
     return Object.hashAll([
@@ -495,6 +507,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
+      l$dataCheck,
       Object.hashAll(l$children.map((v) => v)),
       Object.hashAll(l$parents.map((v) => v)),
     ]);
@@ -542,6 +555,11 @@ class Query_getFamilyRelatedFamilies_familiesByPk
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$dataCheck = dataCheck;
+    final lOther$dataCheck = other.dataCheck;
+    if (l$dataCheck != lOther$dataCheck) {
       return false;
     }
     final l$children = children;
@@ -598,9 +616,11 @@ abstract class CopyWith_Query_getFamilyRelatedFamilies_familiesByPk<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
     List<Query_getFamilyRelatedFamilies_familiesByPk_children>? children,
     List<Query_getFamilyRelatedFamilies_familiesByPk_parents>? parents,
   });
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
   TRes children(
     Iterable<Query_getFamilyRelatedFamilies_familiesByPk_children> Function(
       Iterable<
@@ -644,6 +664,7 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? dataCheck = _undefined,
     Object? children = _undefined,
     Object? parents = _undefined,
   }) => _then(
@@ -665,6 +686,9 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      dataCheck: dataCheck == _undefined
+          ? _instance.dataCheck
+          : (dataCheck as Fragment_DataCheck?),
       children: children == _undefined || children == null
           ? _instance.children
           : (children
@@ -675,6 +699,16 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
                 as List<Query_getFamilyRelatedFamilies_familiesByPk_parents>),
     ),
   );
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
+    final local$dataCheck = _instance.dataCheck;
+    return local$dataCheck == null
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
+            local$dataCheck,
+            (e) => call(dataCheck: e),
+          );
+  }
 
   TRes children(
     Iterable<Query_getFamilyRelatedFamilies_familiesByPk_children> Function(
@@ -731,9 +765,13 @@ class _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
     List<Query_getFamilyRelatedFamilies_familiesByPk_children>? children,
     List<Query_getFamilyRelatedFamilies_familiesByPk_parents>? parents,
   }) => _res;
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 
   children(_fn) => _res;
 

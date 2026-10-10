@@ -1,0 +1,18 @@
+mutation overrideDataCheck($familyId: uuid!, $isComplete: Boolean!) {
+  insertDataCheckOverridesOne(
+    object: { familyId: $familyId, isComplete: $isComplete }
+    onConflict: {
+      constraint: data_check_overrides_pkey
+      updateColumns: [isComplete]
+    }
+  ) {
+    familyId
+    isComplete
+  }
+}
+
+mutation clearDataCheckOverride($familyId: uuid!) {
+  deleteDataCheckOverridesByPk(familyId: $familyId) {
+    familyId
+  }
+}
