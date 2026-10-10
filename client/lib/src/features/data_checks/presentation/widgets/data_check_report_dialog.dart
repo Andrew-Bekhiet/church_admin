@@ -29,55 +29,61 @@ class DataCheckReportDialog extends StatelessWidget {
     return BlocBuilder<DataCheckOverrideCubit, DataCheckOverrideState>(
       buildWhen: (previous, current) =>
           previous.dataCheck.isComplete != current.dataCheck.isComplete ||
-          previous.dataCheck.userOverride != current.dataCheck.userOverride,
+          previous.dataCheck.userOverride != current.dataCheck.userOverride ||
+          previous.isSaving != current.isSaving,
       builder: (context, state) {
         final dataCheck = state.dataCheck;
 
-        return AlertDialog(
-          title: const Text('تقرير اكتمال البيانات'),
-          scrollable: true,
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 16,
-            children: [
-              DataCheckReportHeader(dataCheck: dataCheck),
-              for (final MapEntry(:key, :value)
-                  in dataCheck.itemsByGroup.entries)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 8,
-                  children: [
-                    Text(key.label, style: textTheme.titleSmall),
-                    for (final item in value) DataCheckItemRow(item: item),
-                  ],
-                ),
-              const Divider(),
-              DataCheckOverrideSelector(canOverride: canOverride),
-              if (kDebugMode)
-                ExpansionTile(
-                  title: const Text('التفاصيل الكاملة'),
-                  children: [
-                    Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: SelectableText(
-                        const JsonEncoder.withIndent(
-                          '  ',
-                        ).convert(
-                          dataCheck.details.map((i) => i.toJson()).toList(),
+        return PopScope(
+          canPop: !state.isSaving,
+          child: AlertDialog(
+            title: const Text('تقرير اكتمال البيانات'),
+            scrollable: true,
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 16,
+              children: [
+                DataCheckReportHeader(dataCheck: dataCheck),
+                for (final MapEntry(:key, :value)
+                    in dataCheck.itemsByGroup.entries)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 8,
+                    children: [
+                      Text(key.label, style: textTheme.titleSmall),
+                      for (final item in value) DataCheckItemRow(item: item),
+                    ],
+                  ),
+                const Divider(),
+                DataCheckOverrideSelector(canOverride: canOverride),
+                if (kDebugMode)
+                  ExpansionTile(
+                    title: const Text('التفاصيل الكاملة'),
+                    children: [
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: SelectableText(
+                          const JsonEncoder.withIndent(
+                            '  ',
+                          ).convert(
+                            dataCheck.details.map((i) => i.toJson()).toList(),
+                          ),
+                          style: textTheme.bodySmall,
                         ),
-                        style: textTheme.bodySmall,
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: state.isSaving
+                    ? null
+                    : () => Navigator.of(context).pop(),
+                child: const Text('إغلاق'),
+              ),
             ],
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('إغلاق'),
-            ),
-          ],
         );
       },
     );

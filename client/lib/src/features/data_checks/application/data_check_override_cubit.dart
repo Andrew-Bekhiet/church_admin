@@ -11,6 +11,8 @@ class DataCheckOverrideCubit extends Cubit<DataCheckOverrideState> {
       super(DataCheckOverrideState(dataCheck: dataCheck));
 
   Future<void> choose(DataCheckOverride override) async {
+    if (state.isSaving) return;
+
     final previous = state.dataCheck;
     if (DataCheckOverride.fromUserOverride(previous.userOverride) == override) {
       return;

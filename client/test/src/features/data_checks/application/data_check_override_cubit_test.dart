@@ -115,6 +115,23 @@ void main() {
     );
 
     blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
+      'a second choice while a save is pending is ignored',
+      setUp: () => when(
+        () => dao.tryOverride(familyId: 'family', isComplete: true),
+      ).thenAnswer((_) async => true),
+      build: () => cubitFor(incomplete),
+      act: (cubit) async {
+        final firstSave = cubit.choose(DataCheckOverride.markedComplete);
+        await cubit.choose(DataCheckOverride.markedIncomplete);
+        await firstSave;
+      },
+      expect: () => [
+        DataCheckOverrideState(dataCheck: markedComplete, isSaving: true),
+        DataCheckOverrideState(dataCheck: markedComplete),
+      ],
+    );
+
+    blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
       'choosing what is already chosen changes nothing',
       build: () => cubitFor(markedComplete),
       act: (cubit) => cubit.choose(DataCheckOverride.markedComplete),
