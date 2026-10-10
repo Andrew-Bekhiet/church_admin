@@ -35,6 +35,56 @@ void main() {
       expect(dataCheck.withUserOverride(true).isComplete, isTrue);
     });
 
+    test('marking complete lifts the completeness to 100', () {
+      final dataCheck = DataCheck(
+        familyId: 'family',
+        details: const [
+          DataCheckItem(group: DataCheckGroup.family, check: 'a', passed: true),
+          DataCheckItem(
+            group: DataCheckGroup.family,
+            check: 'b',
+            passed: false,
+          ),
+        ],
+      );
+
+      expect(dataCheck.withUserOverride(true).completenessPercent, 100);
+    });
+
+    test('marking incomplete caps a fully passing family at 99', () {
+      final dataCheck = DataCheck(
+        familyId: 'family',
+        details: const [
+          DataCheckItem(group: DataCheckGroup.family, check: 'a', passed: true),
+        ],
+      );
+
+      expect(dataCheck.withUserOverride(false).completenessPercent, 99);
+    });
+
+    test('clearing the override returns to the share of checks passed', () {
+      final dataCheck = DataCheck(
+        familyId: 'family',
+        completenessPercent: 100,
+        userOverride: true,
+        details: const [
+          DataCheckItem(group: DataCheckGroup.family, check: 'a', passed: true),
+          DataCheckItem(
+            group: DataCheckGroup.family,
+            check: 'b',
+            passed: false,
+          ),
+          DataCheckItem(
+            group: DataCheckGroup.family,
+            check: 'c',
+            passed: false,
+          ),
+        ],
+      );
+
+      expect(dataCheck.withUserOverride(null).completenessPercent, 33);
+    });
+
     test('check keys without a known label show the raw key', () {
       final item = DataCheckItem.fromJson({
         'group': 'family',

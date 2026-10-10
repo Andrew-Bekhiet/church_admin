@@ -20,7 +20,11 @@ void main() {
         passed: false,
       ),
     ];
-    final incomplete = DataCheck(familyId: 'family', details: items);
+    final incomplete = DataCheck(
+      familyId: 'family',
+      completenessPercent: 37,
+      details: items,
+    );
     final complete = DataCheck(
       familyId: 'family',
       isComplete: true,
@@ -70,7 +74,7 @@ void main() {
       final ring = tester.widget<CircularProgressIndicator>(
         find.byKey(DataCheckIndicator.progressRingKey),
       );
-      expect(ring.value, 0.5);
+      expect(ring.value, 0.37);
       expect(find.byKey(DataCheckIndicator.completeBadgeKey), findsNothing);
     });
 
@@ -93,6 +97,17 @@ void main() {
         expect(tester.widget<Icon>(iconIn('has_street')).icon, Symbols.cancel);
       },
     );
+
+    testWidgets('the report explains how the manual override works', (
+      tester,
+    ) async {
+      await pumpIndicator(tester, incomplete);
+
+      await tester.tap(find.byType(DataCheckIndicator));
+      await tester.pumpAndSettle();
+
+      expect(find.text(DataCheckOverrideSelector.explanation), findsOneWidget);
+    });
 
     testWidgets('a reader without edit rights cannot change the verdict', (
       tester,

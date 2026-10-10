@@ -5,6 +5,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 class DataCheckReportHeader extends StatelessWidget {
   static const double _emblemSize = 56;
   static const double _ringStrokeWidth = 5;
+  static const int _percentFull = 100;
 
   final DataCheck dataCheck;
 
@@ -36,16 +37,14 @@ class DataCheckReportHeader extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               CircularProgressIndicator(
-                value: dataCheck.totalCount == 0
-                    ? 0
-                    : dataCheck.passedCount / dataCheck.totalCount,
+                value: dataCheck.completenessPercent / _percentFull,
                 strokeWidth: _ringStrokeWidth,
                 color: colors.complete,
                 backgroundColor: colorScheme.outlineVariant,
               ),
               Center(
                 child: Text(
-                  '${dataCheck.passedCount}/${dataCheck.totalCount}',
+                  '${dataCheck.completenessPercent}٪',
                   style: textTheme.labelLarge,
                 ),
               ),
@@ -70,6 +69,10 @@ class DataCheckReportHeader extends StatelessWidget {
                 dataCheck.userOverride != null
                     ? 'تم تعديلها يدويًا'
                     : 'حسب التحقق التلقائي',
+                style: textTheme.bodySmall,
+              ),
+              Text(
+                'اجتاز ${dataCheck.passedCount} من ${dataCheck.totalCount} فحوصات',
                 style: textTheme.bodySmall,
               ),
             ],

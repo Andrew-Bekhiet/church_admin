@@ -12,6 +12,7 @@ class DataCheckIndicator extends StatelessWidget {
   static const double _ringSize = 20;
   static const double _ringStrokeWidth = 3;
   static const double _overrideDotSize = 8;
+  static const int _percentFull = 100;
 
   final DataCheck dataCheck;
   final bool canOverride;
@@ -38,9 +39,7 @@ class DataCheckIndicator extends StatelessWidget {
             dimension: _ringSize,
             child: CircularProgressIndicator(
               key: progressRingKey,
-              value: dataCheck.totalCount == 0
-                  ? 0
-                  : dataCheck.passedCount / dataCheck.totalCount,
+              value: dataCheck.completenessPercent / _percentFull,
               strokeWidth: _ringStrokeWidth,
               color: complete,
               backgroundColor: colorScheme.outlineVariant,
@@ -51,7 +50,7 @@ class DataCheckIndicator extends StatelessWidget {
       visualDensity: VisualDensity.compact,
       tooltip: dataCheck.isComplete
           ? 'البيانات مكتملة'
-          : 'اكتمال البيانات: ${dataCheck.passedCount} من ${dataCheck.totalCount}',
+          : 'اكتمال البيانات: ${dataCheck.completenessPercent}٪',
       onPressed: () => DataCheckReportDialog.show(
         context,
         dataCheck: dataCheck,

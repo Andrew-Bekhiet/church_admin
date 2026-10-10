@@ -5,6 +5,7 @@ class Fragment_DataCheck {
   Fragment_DataCheck({
     this.familyId,
     this.isComplete,
+    this.completenessPercent,
     this.familyCheck,
     this.addressCheck,
     this.userOverride,
@@ -15,6 +16,7 @@ class Fragment_DataCheck {
   factory Fragment_DataCheck.fromJson(Map<String, dynamic> json) {
     final l$familyId = json['familyId'];
     final l$isComplete = json['isComplete'];
+    final l$completenessPercent = json['completenessPercent'];
     final l$familyCheck = json['familyCheck'];
     final l$addressCheck = json['addressCheck'];
     final l$userOverride = json['userOverride'];
@@ -23,6 +25,7 @@ class Fragment_DataCheck {
     return Fragment_DataCheck(
       familyId: l$familyId == null ? null : stringToUuid(l$familyId),
       isComplete: (l$isComplete as bool?),
+      completenessPercent: (l$completenessPercent as int?),
       familyCheck: (l$familyCheck as bool?),
       addressCheck: (l$addressCheck as bool?),
       userOverride: (l$userOverride as bool?),
@@ -34,6 +37,8 @@ class Fragment_DataCheck {
   final UuidValue? familyId;
 
   final bool? isComplete;
+
+  final int? completenessPercent;
 
   final bool? familyCheck;
 
@@ -53,6 +58,8 @@ class Fragment_DataCheck {
         : uuidToString(l$familyId);
     final l$isComplete = isComplete;
     _resultData['isComplete'] = l$isComplete;
+    final l$completenessPercent = completenessPercent;
+    _resultData['completenessPercent'] = l$completenessPercent;
     final l$familyCheck = familyCheck;
     _resultData['familyCheck'] = l$familyCheck;
     final l$addressCheck = addressCheck;
@@ -70,6 +77,7 @@ class Fragment_DataCheck {
   int get hashCode {
     final l$familyId = familyId;
     final l$isComplete = isComplete;
+    final l$completenessPercent = completenessPercent;
     final l$familyCheck = familyCheck;
     final l$addressCheck = addressCheck;
     final l$userOverride = userOverride;
@@ -78,6 +86,7 @@ class Fragment_DataCheck {
     return Object.hashAll([
       l$familyId,
       l$isComplete,
+      l$completenessPercent,
       l$familyCheck,
       l$addressCheck,
       l$userOverride,
@@ -102,6 +111,11 @@ class Fragment_DataCheck {
     final l$isComplete = isComplete;
     final lOther$isComplete = other.isComplete;
     if (l$isComplete != lOther$isComplete) {
+      return false;
+    }
+    final l$completenessPercent = completenessPercent;
+    final lOther$completenessPercent = other.completenessPercent;
+    if (l$completenessPercent != lOther$completenessPercent) {
       return false;
     }
     final l$familyCheck = familyCheck;
@@ -150,6 +164,7 @@ abstract class CopyWith_Fragment_DataCheck<TRes> {
   TRes call({
     UuidValue? familyId,
     bool? isComplete,
+    int? completenessPercent,
     bool? familyCheck,
     bool? addressCheck,
     bool? userOverride,
@@ -171,6 +186,7 @@ class _CopyWithImpl_Fragment_DataCheck<TRes>
   TRes call({
     Object? familyId = _undefined,
     Object? isComplete = _undefined,
+    Object? completenessPercent = _undefined,
     Object? familyCheck = _undefined,
     Object? addressCheck = _undefined,
     Object? userOverride = _undefined,
@@ -184,6 +200,9 @@ class _CopyWithImpl_Fragment_DataCheck<TRes>
       isComplete: isComplete == _undefined
           ? _instance.isComplete
           : (isComplete as bool?),
+      completenessPercent: completenessPercent == _undefined
+          ? _instance.completenessPercent
+          : (completenessPercent as int?),
       familyCheck: familyCheck == _undefined
           ? _instance.familyCheck
           : (familyCheck as bool?),
@@ -210,6 +229,7 @@ class _CopyWithStubImpl_Fragment_DataCheck<TRes>
   call({
     UuidValue? familyId,
     bool? isComplete,
+    int? completenessPercent,
     bool? familyCheck,
     bool? addressCheck,
     bool? userOverride,
@@ -235,6 +255,13 @@ const fragmentDefinitionDataCheck = FragmentDefinitionNode(
       ),
       FieldNode(
         name: NameNode(value: 'isComplete'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'completenessPercent'),
         alias: null,
         arguments: [],
         directives: [],

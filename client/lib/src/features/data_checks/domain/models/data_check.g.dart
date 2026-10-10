@@ -16,6 +16,15 @@ class DataCheckFields {
 
   static final DataCheckFields _instance = DataCheckFields._();
 
+  final FieldMetadata<int> completenessPercent = FieldMetadata<int>(
+    getValue: (obj) => obj is DataCheck ? obj.completenessPercent : null,
+    parentType: DataCheck,
+    name: 'completenessPercent',
+    label: 'نسبة اكتمال البيانات',
+    isCodeOnly: false,
+    operators: {...PrimitiveOperator.values},
+  );
+
   final FieldMetadata<bool> isComplete = FieldMetadata<bool>(
     getValue: (obj) => obj is DataCheck ? obj.isComplete : null,
     parentType: DataCheck,
@@ -58,6 +67,7 @@ class DataCheckFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [
+    completenessPercent,
     isComplete,
     familyCheck,
     addressCheck,
@@ -65,6 +75,7 @@ class DataCheckFields {
   ];
 
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'completenessPercent': completenessPercent,
     'isComplete': isComplete,
     'familyCheck': familyCheck,
     'addressCheck': addressCheck,
@@ -78,6 +89,7 @@ class DataCheckFields {
 
 DataCheck _$DataCheckFromJson(Map json) => DataCheck(
   familyId: json['familyId'] as String,
+  completenessPercent: (json['completenessPercent'] as num?)?.toInt() ?? 0,
   isComplete: json['isComplete'] as bool? ?? false,
   familyCheck: json['familyCheck'] as bool? ?? false,
   addressCheck: json['addressCheck'] as bool? ?? false,
@@ -92,6 +104,7 @@ DataCheck _$DataCheckFromJson(Map json) => DataCheck(
 );
 
 Map<String, dynamic> _$DataCheckToJson(DataCheck instance) => <String, dynamic>{
+  'completenessPercent': instance.completenessPercent,
   'isComplete': instance.isComplete,
   'familyCheck': instance.familyCheck,
   'addressCheck': instance.addressCheck,
