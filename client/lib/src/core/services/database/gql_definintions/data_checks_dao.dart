@@ -28,8 +28,8 @@ class DataChecksDAO {
     return applied != null;
   }
 
-  Future<void> clearOverride({required String familyId}) async {
-    await graphQLClient.mutateAndReturnParsedNullable(
+  Future<bool> tryClearOverride({required String familyId}) async {
+    final deleted = await graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
         document: documentNodeMutationclearDataCheckOverride,
         operationName: 'clearDataCheckOverride',
@@ -41,5 +41,7 @@ class DataChecksDAO {
         ).deleteDataCheckOverridesByPk,
       ),
     );
+
+    return deleted != null;
   }
 }

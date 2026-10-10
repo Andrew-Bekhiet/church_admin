@@ -11,7 +11,7 @@ part 'family.g.dart';
 @Queryable(label: 'العائلات', extensible: true)
 class Family extends ViewableWithIDAndImage
     with _$Family
-    implements SerializableExtra {
+    implements SerializableExtra, HasDataCheck {
   @override
   @JsonKey(defaultValue: '')
   @QueryableField.self()

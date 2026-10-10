@@ -227,6 +227,7 @@ class ThemingService with WidgetsBindingObserver {
         ),
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
+      extensions: [DataCheckColors.forScheme(colorScheme)],
     );
   }
 

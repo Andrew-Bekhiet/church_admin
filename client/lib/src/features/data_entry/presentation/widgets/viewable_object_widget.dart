@@ -97,7 +97,17 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
       onTap: _onTap != null ? () => _onTap!(object) : null,
       onLongPress: _onLongPress != null ? () => _onLongPress!(object) : null,
       isThreeLine: isThreeLine ?? config.isThreeLine,
-      trailing: trailing ?? config.trailing,
+      trailing:
+          trailing ??
+          config.trailing ??
+          switch (object) {
+            HasDataCheck(:final dataCheck?, :final userCanEdit) =>
+              DataCheckIndicator(
+                dataCheck: dataCheck,
+                canOverride: userCanEdit,
+              ),
+            _ => null,
+          },
     );
 
     if (wrapInCard ?? config.wrapInCard) {
