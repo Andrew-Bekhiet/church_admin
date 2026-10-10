@@ -1,65 +1,6 @@
 // Part 70 of the schema
 part of "schema.graphql.dart";
 
-String toJson_Enum_UsersPreferencesSelectColumn(
-  Enum_UsersPreferencesSelectColumn e,
-) {
-  switch (e) {
-    case Enum_UsersPreferencesSelectColumn.darkTheme:
-      return r'darkTheme';
-    case Enum_UsersPreferencesSelectColumn.greatFeastTheme:
-      return r'greatFeastTheme';
-    case Enum_UsersPreferencesSelectColumn.lastHomeMode:
-      return r'lastHomeMode';
-    case Enum_UsersPreferencesSelectColumn.orderByPreferences:
-      return r'orderByPreferences';
-    case Enum_UsersPreferencesSelectColumn.uid:
-      return r'uid';
-    case Enum_UsersPreferencesSelectColumn.updatedAt:
-      return r'updatedAt';
-    case Enum_UsersPreferencesSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_UsersPreferencesSelectColumn fromJson_Enum_UsersPreferencesSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'darkTheme':
-      return Enum_UsersPreferencesSelectColumn.darkTheme;
-    case r'greatFeastTheme':
-      return Enum_UsersPreferencesSelectColumn.greatFeastTheme;
-    case r'lastHomeMode':
-      return Enum_UsersPreferencesSelectColumn.lastHomeMode;
-    case r'orderByPreferences':
-      return Enum_UsersPreferencesSelectColumn.orderByPreferences;
-    case r'uid':
-      return Enum_UsersPreferencesSelectColumn.uid;
-    case r'updatedAt':
-      return Enum_UsersPreferencesSelectColumn.updatedAt;
-    default:
-      return Enum_UsersPreferencesSelectColumn.$unknown;
-  }
-}
-
-enum Enum___TypeKind {
-  SCALAR,
-  OBJECT,
-  INTERFACE,
-  UNION,
-  ENUM,
-  INPUT_OBJECT,
-  LIST,
-  NON_NULL,
-  $unknown;
-
-  factory Enum___TypeKind.fromJson(String value) =>
-      fromJson_Enum___TypeKind(value);
-
-  String toJson() => toJson_Enum___TypeKind(this);
-}
-
 String toJson_Enum___TypeKind(Enum___TypeKind e) {
   switch (e) {
     case Enum___TypeKind.SCALAR:

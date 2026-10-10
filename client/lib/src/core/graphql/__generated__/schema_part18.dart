@@ -1519,6 +1519,7 @@ class Input_DataChecksBoolExp {
     Input_DataChecksBoolExp? $_not,
     List<Input_DataChecksBoolExp>? $_or,
     Input_BooleanComparisonExp? addressCheck,
+    Input_IntComparisonExp? completenessPercent,
     Input_JsonbComparisonExp? details,
     Input_FamiliesBoolExp? family,
     Input_BooleanComparisonExp? familyCheck,
@@ -1530,6 +1531,8 @@ class Input_DataChecksBoolExp {
     if ($_not != null) r'_not': $_not,
     if ($_or != null) r'_or': $_or,
     if (addressCheck != null) r'addressCheck': addressCheck,
+    if (completenessPercent != null)
+      r'completenessPercent': completenessPercent,
     if (details != null) r'details': details,
     if (family != null) r'family': family,
     if (familyCheck != null) r'familyCheck': familyCheck,
@@ -1572,6 +1575,14 @@ class Input_DataChecksBoolExp {
           ? null
           : Input_BooleanComparisonExp.fromJson(
               (l$addressCheck as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('completenessPercent')) {
+      final l$completenessPercent = data['completenessPercent'];
+      result$data['completenessPercent'] = l$completenessPercent == null
+          ? null
+          : Input_IntComparisonExp.fromJson(
+              (l$completenessPercent as Map<String, dynamic>),
             );
     }
     if (data.containsKey('details')) {
@@ -1637,6 +1648,9 @@ class Input_DataChecksBoolExp {
   Input_BooleanComparisonExp? get addressCheck =>
       (_$data['addressCheck'] as Input_BooleanComparisonExp?);
 
+  Input_IntComparisonExp? get completenessPercent =>
+      (_$data['completenessPercent'] as Input_IntComparisonExp?);
+
   Input_JsonbComparisonExp? get details =>
       (_$data['details'] as Input_JsonbComparisonExp?);
 
@@ -1672,6 +1686,10 @@ class Input_DataChecksBoolExp {
     if (_$data.containsKey('addressCheck')) {
       final l$addressCheck = addressCheck;
       result$data['addressCheck'] = l$addressCheck?.toJson();
+    }
+    if (_$data.containsKey('completenessPercent')) {
+      final l$completenessPercent = completenessPercent;
+      result$data['completenessPercent'] = l$completenessPercent?.toJson();
     }
     if (_$data.containsKey('details')) {
       final l$details = details;
@@ -1766,6 +1784,15 @@ class Input_DataChecksBoolExp {
     if (l$addressCheck != lOther$addressCheck) {
       return false;
     }
+    final l$completenessPercent = completenessPercent;
+    final lOther$completenessPercent = other.completenessPercent;
+    if (_$data.containsKey('completenessPercent') !=
+        other._$data.containsKey('completenessPercent')) {
+      return false;
+    }
+    if (l$completenessPercent != lOther$completenessPercent) {
+      return false;
+    }
     final l$details = details;
     final lOther$details = other.details;
     if (_$data.containsKey('details') != other._$data.containsKey('details')) {
@@ -1827,6 +1854,7 @@ class Input_DataChecksBoolExp {
     final l$$_not = $_not;
     final l$$_or = $_or;
     final l$addressCheck = addressCheck;
+    final l$completenessPercent = completenessPercent;
     final l$details = details;
     final l$family = family;
     final l$familyCheck = familyCheck;
@@ -1846,6 +1874,9 @@ class Input_DataChecksBoolExp {
                 : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('addressCheck') ? l$addressCheck : const {},
+      _$data.containsKey('completenessPercent')
+          ? l$completenessPercent
+          : const {},
       _$data.containsKey('details') ? l$details : const {},
       _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('familyCheck') ? l$familyCheck : const {},
@@ -1870,6 +1901,7 @@ abstract class CopyWith_Input_DataChecksBoolExp<TRes> {
     Input_DataChecksBoolExp? $_not,
     List<Input_DataChecksBoolExp>? $_or,
     Input_BooleanComparisonExp? addressCheck,
+    Input_IntComparisonExp? completenessPercent,
     Input_JsonbComparisonExp? details,
     Input_FamiliesBoolExp? family,
     Input_BooleanComparisonExp? familyCheck,
@@ -1891,6 +1923,7 @@ abstract class CopyWith_Input_DataChecksBoolExp<TRes> {
     _fn,
   );
   CopyWith_Input_BooleanComparisonExp<TRes> get addressCheck;
+  CopyWith_Input_IntComparisonExp<TRes> get completenessPercent;
   CopyWith_Input_JsonbComparisonExp<TRes> get details;
   CopyWith_Input_FamiliesBoolExp<TRes> get family;
   CopyWith_Input_BooleanComparisonExp<TRes> get familyCheck;
@@ -1914,6 +1947,7 @@ class _CopyWithImpl_Input_DataChecksBoolExp<TRes>
     Object? $_not = _undefined,
     Object? $_or = _undefined,
     Object? addressCheck = _undefined,
+    Object? completenessPercent = _undefined,
     Object? details = _undefined,
     Object? family = _undefined,
     Object? familyCheck = _undefined,
@@ -1929,6 +1963,8 @@ class _CopyWithImpl_Input_DataChecksBoolExp<TRes>
       if ($_or != _undefined) '_or': ($_or as List<Input_DataChecksBoolExp>?),
       if (addressCheck != _undefined)
         'addressCheck': (addressCheck as Input_BooleanComparisonExp?),
+      if (completenessPercent != _undefined)
+        'completenessPercent': (completenessPercent as Input_IntComparisonExp?),
       if (details != _undefined)
         'details': (details as Input_JsonbComparisonExp?),
       if (family != _undefined) 'family': (family as Input_FamiliesBoolExp?),
@@ -1981,6 +2017,16 @@ class _CopyWithImpl_Input_DataChecksBoolExp<TRes>
         : CopyWith_Input_BooleanComparisonExp(
             local$addressCheck,
             (e) => call(addressCheck: e),
+          );
+  }
+
+  CopyWith_Input_IntComparisonExp<TRes> get completenessPercent {
+    final local$completenessPercent = _instance.completenessPercent;
+    return local$completenessPercent == null
+        ? CopyWith_Input_IntComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_IntComparisonExp(
+            local$completenessPercent,
+            (e) => call(completenessPercent: e),
           );
   }
 
@@ -2053,6 +2099,7 @@ class _CopyWithStubImpl_Input_DataChecksBoolExp<TRes>
     Input_DataChecksBoolExp? $_not,
     List<Input_DataChecksBoolExp>? $_or,
     Input_BooleanComparisonExp? addressCheck,
+    Input_IntComparisonExp? completenessPercent,
     Input_JsonbComparisonExp? details,
     Input_FamiliesBoolExp? family,
     Input_BooleanComparisonExp? familyCheck,
@@ -2070,6 +2117,9 @@ class _CopyWithStubImpl_Input_DataChecksBoolExp<TRes>
 
   CopyWith_Input_BooleanComparisonExp<TRes> get addressCheck =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
+  CopyWith_Input_IntComparisonExp<TRes> get completenessPercent =>
+      CopyWith_Input_IntComparisonExp.stub(_res);
 
   CopyWith_Input_JsonbComparisonExp<TRes> get details =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
@@ -2093,6 +2143,7 @@ class _CopyWithStubImpl_Input_DataChecksBoolExp<TRes>
 class Input_DataChecksOrderBy {
   factory Input_DataChecksOrderBy({
     Enum_OrderBy? addressCheck,
+    Enum_OrderBy? completenessPercent,
     Enum_OrderBy? details,
     Input_FamiliesOrderBy? family,
     Enum_OrderBy? familyCheck,
@@ -2101,6 +2152,8 @@ class Input_DataChecksOrderBy {
     Enum_OrderBy? userOverride,
   }) => Input_DataChecksOrderBy._({
     if (addressCheck != null) r'addressCheck': addressCheck,
+    if (completenessPercent != null)
+      r'completenessPercent': completenessPercent,
     if (details != null) r'details': details,
     if (family != null) r'family': family,
     if (familyCheck != null) r'familyCheck': familyCheck,
@@ -2118,6 +2171,12 @@ class Input_DataChecksOrderBy {
       result$data['addressCheck'] = l$addressCheck == null
           ? null
           : fromJson_Enum_OrderBy((l$addressCheck as String));
+    }
+    if (data.containsKey('completenessPercent')) {
+      final l$completenessPercent = data['completenessPercent'];
+      result$data['completenessPercent'] = l$completenessPercent == null
+          ? null
+          : fromJson_Enum_OrderBy((l$completenessPercent as String));
     }
     if (data.containsKey('details')) {
       final l$details = data['details'];
@@ -2162,6 +2221,9 @@ class Input_DataChecksOrderBy {
 
   Enum_OrderBy? get addressCheck => (_$data['addressCheck'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get completenessPercent =>
+      (_$data['completenessPercent'] as Enum_OrderBy?);
+
   Enum_OrderBy? get details => (_$data['details'] as Enum_OrderBy?);
 
   Input_FamiliesOrderBy? get family =>
@@ -2182,6 +2244,12 @@ class Input_DataChecksOrderBy {
       result$data['addressCheck'] = l$addressCheck == null
           ? null
           : toJson_Enum_OrderBy(l$addressCheck);
+    }
+    if (_$data.containsKey('completenessPercent')) {
+      final l$completenessPercent = completenessPercent;
+      result$data['completenessPercent'] = l$completenessPercent == null
+          ? null
+          : toJson_Enum_OrderBy(l$completenessPercent);
     }
     if (_$data.containsKey('details')) {
       final l$details = details;
@@ -2238,6 +2306,15 @@ class Input_DataChecksOrderBy {
       return false;
     }
     if (l$addressCheck != lOther$addressCheck) {
+      return false;
+    }
+    final l$completenessPercent = completenessPercent;
+    final lOther$completenessPercent = other.completenessPercent;
+    if (_$data.containsKey('completenessPercent') !=
+        other._$data.containsKey('completenessPercent')) {
+      return false;
+    }
+    if (l$completenessPercent != lOther$completenessPercent) {
       return false;
     }
     final l$details = details;
@@ -2298,6 +2375,7 @@ class Input_DataChecksOrderBy {
   @override
   int get hashCode {
     final l$addressCheck = addressCheck;
+    final l$completenessPercent = completenessPercent;
     final l$details = details;
     final l$family = family;
     final l$familyCheck = familyCheck;
@@ -2306,6 +2384,9 @@ class Input_DataChecksOrderBy {
     final l$userOverride = userOverride;
     return Object.hashAll([
       _$data.containsKey('addressCheck') ? l$addressCheck : const {},
+      _$data.containsKey('completenessPercent')
+          ? l$completenessPercent
+          : const {},
       _$data.containsKey('details') ? l$details : const {},
       _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('familyCheck') ? l$familyCheck : const {},
@@ -2327,6 +2408,7 @@ abstract class CopyWith_Input_DataChecksOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? addressCheck,
+    Enum_OrderBy? completenessPercent,
     Enum_OrderBy? details,
     Input_FamiliesOrderBy? family,
     Enum_OrderBy? familyCheck,
@@ -2349,6 +2431,7 @@ class _CopyWithImpl_Input_DataChecksOrderBy<TRes>
 
   TRes call({
     Object? addressCheck = _undefined,
+    Object? completenessPercent = _undefined,
     Object? details = _undefined,
     Object? family = _undefined,
     Object? familyCheck = _undefined,
@@ -2360,6 +2443,8 @@ class _CopyWithImpl_Input_DataChecksOrderBy<TRes>
       ..._instance._$data,
       if (addressCheck != _undefined)
         'addressCheck': (addressCheck as Enum_OrderBy?),
+      if (completenessPercent != _undefined)
+        'completenessPercent': (completenessPercent as Enum_OrderBy?),
       if (details != _undefined) 'details': (details as Enum_OrderBy?),
       if (family != _undefined) 'family': (family as Input_FamiliesOrderBy?),
       if (familyCheck != _undefined)
@@ -2387,6 +2472,7 @@ class _CopyWithStubImpl_Input_DataChecksOrderBy<TRes>
 
   call({
     Enum_OrderBy? addressCheck,
+    Enum_OrderBy? completenessPercent,
     Enum_OrderBy? details,
     Input_FamiliesOrderBy? family,
     Enum_OrderBy? familyCheck,
@@ -2399,80 +2485,240 @@ class _CopyWithStubImpl_Input_DataChecksOrderBy<TRes>
       CopyWith_Input_FamiliesOrderBy.stub(_res);
 }
 
-class Input_DataChecksStreamCursorInput {
-  factory Input_DataChecksStreamCursorInput({
-    required Input_DataChecksStreamCursorValueInput initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => Input_DataChecksStreamCursorInput._({
-    r'initialValue': initialValue,
-    if (ordering != null) r'ordering': ordering,
+class Input_DateComparisonExp {
+  factory Input_DateComparisonExp({
+    DateTime? $_eq,
+    DateTime? $_gt,
+    DateTime? $_gte,
+    List<DateTime>? $_in,
+    bool? $_isNull,
+    DateTime? $_lt,
+    DateTime? $_lte,
+    DateTime? $_neq,
+    List<DateTime>? $_nin,
+  }) => Input_DateComparisonExp._({
+    if ($_eq != null) r'_eq': $_eq,
+    if ($_gt != null) r'_gt': $_gt,
+    if ($_gte != null) r'_gte': $_gte,
+    if ($_in != null) r'_in': $_in,
+    if ($_isNull != null) r'_isNull': $_isNull,
+    if ($_lt != null) r'_lt': $_lt,
+    if ($_lte != null) r'_lte': $_lte,
+    if ($_neq != null) r'_neq': $_neq,
+    if ($_nin != null) r'_nin': $_nin,
   });
 
-  Input_DataChecksStreamCursorInput._(this._$data);
+  Input_DateComparisonExp._(this._$data);
 
-  factory Input_DataChecksStreamCursorInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Input_DateComparisonExp.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    final l$initialValue = data['initialValue'];
-    result$data['initialValue'] =
-        Input_DataChecksStreamCursorValueInput.fromJson(
-          (l$initialValue as Map<String, dynamic>),
-        );
-    if (data.containsKey('ordering')) {
-      final l$ordering = data['ordering'];
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : fromJson_Enum_CursorOrdering((l$ordering as String));
+    if (data.containsKey('_eq')) {
+      final l$$_eq = data['_eq'];
+      result$data['_eq'] = l$$_eq == null ? null : dateFromString(l$$_eq);
     }
-    return Input_DataChecksStreamCursorInput._(result$data);
+    if (data.containsKey('_gt')) {
+      final l$$_gt = data['_gt'];
+      result$data['_gt'] = l$$_gt == null ? null : dateFromString(l$$_gt);
+    }
+    if (data.containsKey('_gte')) {
+      final l$$_gte = data['_gte'];
+      result$data['_gte'] = l$$_gte == null ? null : dateFromString(l$$_gte);
+    }
+    if (data.containsKey('_in')) {
+      final l$$_in = data['_in'];
+      result$data['_in'] = (l$$_in as List<dynamic>?)
+          ?.map((e) => dateFromString(e))
+          .toList();
+    }
+    if (data.containsKey('_isNull')) {
+      final l$$_isNull = data['_isNull'];
+      result$data['_isNull'] = (l$$_isNull as bool?);
+    }
+    if (data.containsKey('_lt')) {
+      final l$$_lt = data['_lt'];
+      result$data['_lt'] = l$$_lt == null ? null : dateFromString(l$$_lt);
+    }
+    if (data.containsKey('_lte')) {
+      final l$$_lte = data['_lte'];
+      result$data['_lte'] = l$$_lte == null ? null : dateFromString(l$$_lte);
+    }
+    if (data.containsKey('_neq')) {
+      final l$$_neq = data['_neq'];
+      result$data['_neq'] = l$$_neq == null ? null : dateFromString(l$$_neq);
+    }
+    if (data.containsKey('_nin')) {
+      final l$$_nin = data['_nin'];
+      result$data['_nin'] = (l$$_nin as List<dynamic>?)
+          ?.map((e) => dateFromString(e))
+          .toList();
+    }
+    return Input_DateComparisonExp._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input_DataChecksStreamCursorValueInput get initialValue =>
-      (_$data['initialValue'] as Input_DataChecksStreamCursorValueInput);
+  DateTime? get $_eq => (_$data['_eq'] as DateTime?);
 
-  Enum_CursorOrdering? get ordering =>
-      (_$data['ordering'] as Enum_CursorOrdering?);
+  DateTime? get $_gt => (_$data['_gt'] as DateTime?);
+
+  DateTime? get $_gte => (_$data['_gte'] as DateTime?);
+
+  List<DateTime>? get $_in => (_$data['_in'] as List<DateTime>?);
+
+  bool? get $_isNull => (_$data['_isNull'] as bool?);
+
+  DateTime? get $_lt => (_$data['_lt'] as DateTime?);
+
+  DateTime? get $_lte => (_$data['_lte'] as DateTime?);
+
+  DateTime? get $_neq => (_$data['_neq'] as DateTime?);
+
+  List<DateTime>? get $_nin => (_$data['_nin'] as List<DateTime>?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    final l$initialValue = initialValue;
-    result$data['initialValue'] = l$initialValue.toJson();
-    if (_$data.containsKey('ordering')) {
-      final l$ordering = ordering;
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : toJson_Enum_CursorOrdering(l$ordering);
+    if (_$data.containsKey('_eq')) {
+      final l$$_eq = $_eq;
+      result$data['_eq'] = l$$_eq == null ? null : dateToString(l$$_eq);
+    }
+    if (_$data.containsKey('_gt')) {
+      final l$$_gt = $_gt;
+      result$data['_gt'] = l$$_gt == null ? null : dateToString(l$$_gt);
+    }
+    if (_$data.containsKey('_gte')) {
+      final l$$_gte = $_gte;
+      result$data['_gte'] = l$$_gte == null ? null : dateToString(l$$_gte);
+    }
+    if (_$data.containsKey('_in')) {
+      final l$$_in = $_in;
+      result$data['_in'] = l$$_in?.map((e) => dateToString(e)).toList();
+    }
+    if (_$data.containsKey('_isNull')) {
+      final l$$_isNull = $_isNull;
+      result$data['_isNull'] = l$$_isNull;
+    }
+    if (_$data.containsKey('_lt')) {
+      final l$$_lt = $_lt;
+      result$data['_lt'] = l$$_lt == null ? null : dateToString(l$$_lt);
+    }
+    if (_$data.containsKey('_lte')) {
+      final l$$_lte = $_lte;
+      result$data['_lte'] = l$$_lte == null ? null : dateToString(l$$_lte);
+    }
+    if (_$data.containsKey('_neq')) {
+      final l$$_neq = $_neq;
+      result$data['_neq'] = l$$_neq == null ? null : dateToString(l$$_neq);
+    }
+    if (_$data.containsKey('_nin')) {
+      final l$$_nin = $_nin;
+      result$data['_nin'] = l$$_nin?.map((e) => dateToString(e)).toList();
     }
     return result$data;
   }
 
-  CopyWith_Input_DataChecksStreamCursorInput<Input_DataChecksStreamCursorInput>
-  get copyWith => CopyWith_Input_DataChecksStreamCursorInput(this, (i) => i);
+  CopyWith_Input_DateComparisonExp<Input_DateComparisonExp> get copyWith =>
+      CopyWith_Input_DateComparisonExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_DataChecksStreamCursorInput ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_DateComparisonExp || runtimeType != other.runtimeType) {
       return false;
     }
-    final l$initialValue = initialValue;
-    final lOther$initialValue = other.initialValue;
-    if (l$initialValue != lOther$initialValue) {
+    final l$$_eq = $_eq;
+    final lOther$$_eq = other.$_eq;
+    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
       return false;
     }
-    final l$ordering = ordering;
-    final lOther$ordering = other.ordering;
-    if (_$data.containsKey('ordering') !=
-        other._$data.containsKey('ordering')) {
+    if (l$$_eq != lOther$$_eq) {
       return false;
     }
-    if (l$ordering != lOther$ordering) {
+    final l$$_gt = $_gt;
+    final lOther$$_gt = other.$_gt;
+    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
+      return false;
+    }
+    if (l$$_gt != lOther$$_gt) {
+      return false;
+    }
+    final l$$_gte = $_gte;
+    final lOther$$_gte = other.$_gte;
+    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
+      return false;
+    }
+    if (l$$_gte != lOther$$_gte) {
+      return false;
+    }
+    final l$$_in = $_in;
+    final lOther$$_in = other.$_in;
+    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
+      return false;
+    }
+    if (l$$_in != null && lOther$$_in != null) {
+      if (l$$_in.length != lOther$$_in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_in.length; i++) {
+        final l$$_in$entry = l$$_in[i];
+        final lOther$$_in$entry = lOther$$_in[i];
+        if (l$$_in$entry != lOther$$_in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_in != lOther$$_in) {
+      return false;
+    }
+    final l$$_isNull = $_isNull;
+    final lOther$$_isNull = other.$_isNull;
+    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
+      return false;
+    }
+    if (l$$_isNull != lOther$$_isNull) {
+      return false;
+    }
+    final l$$_lt = $_lt;
+    final lOther$$_lt = other.$_lt;
+    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
+      return false;
+    }
+    if (l$$_lt != lOther$$_lt) {
+      return false;
+    }
+    final l$$_lte = $_lte;
+    final lOther$$_lte = other.$_lte;
+    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
+      return false;
+    }
+    if (l$$_lte != lOther$$_lte) {
+      return false;
+    }
+    final l$$_neq = $_neq;
+    final lOther$$_neq = other.$_neq;
+    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
+      return false;
+    }
+    if (l$$_neq != lOther$$_neq) {
+      return false;
+    }
+    final l$$_nin = $_nin;
+    final lOther$$_nin = other.$_nin;
+    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
+      return false;
+    }
+    if (l$$_nin != null && lOther$$_nin != null) {
+      if (l$$_nin.length != lOther$$_nin.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_nin.length; i++) {
+        final l$$_nin$entry = l$$_nin[i];
+        final lOther$$_nin$entry = lOther$$_nin[i];
+        if (l$$_nin$entry != lOther$$_nin$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_nin != lOther$$_nin) {
       return false;
     }
     return true;
@@ -2480,27 +2726,33 @@ class Input_DataChecksStreamCursorInput {
 
   @override
   int get hashCode {
-    final l$initialValue = initialValue;
-    final l$ordering = ordering;
+    final l$$_eq = $_eq;
+    final l$$_gt = $_gt;
+    final l$$_gte = $_gte;
+    final l$$_in = $_in;
+    final l$$_isNull = $_isNull;
+    final l$$_lt = $_lt;
+    final l$$_lte = $_lte;
+    final l$$_neq = $_neq;
+    final l$$_nin = $_nin;
     return Object.hashAll([
-      l$initialValue,
-      _$data.containsKey('ordering') ? l$ordering : const {},
+      _$data.containsKey('_eq') ? l$$_eq : const {},
+      _$data.containsKey('_gt') ? l$$_gt : const {},
+      _$data.containsKey('_gte') ? l$$_gte : const {},
+      _$data.containsKey('_in')
+          ? l$$_in == null
+                ? null
+                : Object.hashAll(l$$_in.map((v) => v))
+          : const {},
+      _$data.containsKey('_isNull') ? l$$_isNull : const {},
+      _$data.containsKey('_lt') ? l$$_lt : const {},
+      _$data.containsKey('_lte') ? l$$_lte : const {},
+      _$data.containsKey('_neq') ? l$$_neq : const {},
+      _$data.containsKey('_nin')
+          ? l$$_nin == null
+                ? null
+                : Object.hashAll(l$$_nin.map((v) => v))
+          : const {},
     ]);
   }
-}
-
-abstract class CopyWith_Input_DataChecksStreamCursorInput<TRes> {
-  factory CopyWith_Input_DataChecksStreamCursorInput(
-    Input_DataChecksStreamCursorInput instance,
-    TRes Function(Input_DataChecksStreamCursorInput) then,
-  ) = _CopyWithImpl_Input_DataChecksStreamCursorInput;
-
-  factory CopyWith_Input_DataChecksStreamCursorInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_DataChecksStreamCursorInput;
-
-  TRes call({
-    Input_DataChecksStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  });
-  CopyWith_Input_DataChecksStreamCursorValueInput<TRes> get initialValue;
 }

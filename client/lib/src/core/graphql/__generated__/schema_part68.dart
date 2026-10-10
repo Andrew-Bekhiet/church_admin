@@ -517,59 +517,6 @@ fromJson_Enum_DataCheckOverridesUpdateColumn(String value) {
   }
 }
 
-enum Enum_DataChecksSelectColumn {
-  addressCheck,
-  details,
-  familyCheck,
-  familyId,
-  isComplete,
-  userOverride,
-  $unknown;
-
-  factory Enum_DataChecksSelectColumn.fromJson(String value) =>
-      fromJson_Enum_DataChecksSelectColumn(value);
-
-  String toJson() => toJson_Enum_DataChecksSelectColumn(this);
-}
-
-String toJson_Enum_DataChecksSelectColumn(Enum_DataChecksSelectColumn e) {
-  switch (e) {
-    case Enum_DataChecksSelectColumn.addressCheck:
-      return r'addressCheck';
-    case Enum_DataChecksSelectColumn.details:
-      return r'details';
-    case Enum_DataChecksSelectColumn.familyCheck:
-      return r'familyCheck';
-    case Enum_DataChecksSelectColumn.familyId:
-      return r'familyId';
-    case Enum_DataChecksSelectColumn.isComplete:
-      return r'isComplete';
-    case Enum_DataChecksSelectColumn.userOverride:
-      return r'userOverride';
-    case Enum_DataChecksSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_DataChecksSelectColumn fromJson_Enum_DataChecksSelectColumn(String value) {
-  switch (value) {
-    case r'addressCheck':
-      return Enum_DataChecksSelectColumn.addressCheck;
-    case r'details':
-      return Enum_DataChecksSelectColumn.details;
-    case r'familyCheck':
-      return Enum_DataChecksSelectColumn.familyCheck;
-    case r'familyId':
-      return Enum_DataChecksSelectColumn.familyId;
-    case r'isComplete':
-      return Enum_DataChecksSelectColumn.isComplete;
-    case r'userOverride':
-      return Enum_DataChecksSelectColumn.userOverride;
-    default:
-      return Enum_DataChecksSelectColumn.$unknown;
-  }
-}
-
 enum Enum_DistrictsConstraint {
   districts_pk,
   districts_unique_name,
@@ -2529,4 +2476,41 @@ enum Enum_HobbiesSelectColumn {
       fromJson_Enum_HobbiesSelectColumn(value);
 
   String toJson() => toJson_Enum_HobbiesSelectColumn(this);
+}
+
+String toJson_Enum_HobbiesSelectColumn(Enum_HobbiesSelectColumn e) {
+  switch (e) {
+    case Enum_HobbiesSelectColumn.color:
+      return r'color';
+    case Enum_HobbiesSelectColumn.id:
+      return r'id';
+    case Enum_HobbiesSelectColumn.name:
+      return r'name';
+    case Enum_HobbiesSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_HobbiesSelectColumn fromJson_Enum_HobbiesSelectColumn(String value) {
+  switch (value) {
+    case r'color':
+      return Enum_HobbiesSelectColumn.color;
+    case r'id':
+      return Enum_HobbiesSelectColumn.id;
+    case r'name':
+      return Enum_HobbiesSelectColumn.name;
+    default:
+      return Enum_HobbiesSelectColumn.$unknown;
+  }
+}
+
+enum Enum_HobbiesUpdateColumn {
+  color,
+  name,
+  $unknown;
+
+  factory Enum_HobbiesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_HobbiesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_HobbiesUpdateColumn(this);
 }
