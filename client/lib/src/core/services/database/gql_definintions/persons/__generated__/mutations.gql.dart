@@ -1,5 +1,6 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.gql.dart';
+import '../../data_checks/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
@@ -249,6 +250,7 @@ const documentNodeMutationdeletePerson = DocumentNode(
     ),
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -3943,6 +3945,7 @@ const documentNodeMutationupdatePerson = DocumentNode(
     ),
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionDataCheck,
     fragmentDefinitionAddress,
     fragmentDefinitionArea,
     fragmentDefinitionAreaNoPhoto,
@@ -6785,6 +6788,7 @@ const documentNodeMutationinsertPerson = DocumentNode(
     ),
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -7615,6 +7619,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(
     ),
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionDataCheck,
   ],
 );
 

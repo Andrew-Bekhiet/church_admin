@@ -2,6 +2,9 @@ fragment Person on Persons {
   ...PersonNoPhoto
   photoUpdatedAt
   blurhash
+  dataCheck {
+    ...DataCheck
+  }
 }
 
 fragment PersonNoPhoto on Persons {
