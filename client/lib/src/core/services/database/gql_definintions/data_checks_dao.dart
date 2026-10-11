@@ -4,7 +4,9 @@ import 'package:graphql/client.dart';
 
 class DataChecksDAO {
   final DatabaseService _db;
+
   DBGraphQLClient get graphQLClient => _db.graphQLClient;
+
   DataChecksDAO({required this._db});
 
   Future<bool> tryOverride({
