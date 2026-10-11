@@ -19,14 +19,7 @@ class OrderByWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
 
-    final orderableFields = selectedQueryableType.fieldsMetadata
-        .where(
-          (p) =>
-              p.isOrderable &&
-              !p.isCodeOnly &&
-              DataChecksFlagFieldFilter.isFieldAllowed(p),
-        )
-        .toList();
+    final orderableFields = selectedQueryableType.orderableFields.toList();
 
     final FieldMetadata field = orderBy.field;
     final FieldMetadata parentField;
@@ -77,16 +70,15 @@ class OrderByWidget extends StatelessWidget {
                                     ?.isSelectableAsReference ??
                                 true)
                         ? field.redirectTo(
-                            field.fieldQueryableType!.fieldsMetadata.firstWhere(
-                              (f) =>
-                                  !f.isCodeOnly &&
-                                  f.isOrderable &&
-                                  (f.operators.isNotEmpty ||
+                            field.fieldQueryableType!.orderableFields
+                                .firstWhere(
+                                  (f) =>
+                                      f.operators.isNotEmpty ||
                                       (f
                                               .fieldQueryableType
                                               ?.isSelectableAsReference ??
-                                          false)),
-                            ),
+                                          false),
+                                ),
                           )
                         : field;
 

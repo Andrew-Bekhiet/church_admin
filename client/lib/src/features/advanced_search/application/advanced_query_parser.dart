@@ -7,17 +7,22 @@ class AdvancedQueryParser {
     AdvancedQuery query, [
     Stream<String?>? searchStream,
   ]) {
-    final streamableDAO = query.queryableType.dao!;
+    final availableQuery = query.withAvailableFields();
+    final streamableDAO = availableQuery.queryableType.dao!;
 
     return streamableDAO.streamAllWithConfig(
-      overrideTotalLimit: query.limit,
+      overrideTotalLimit: availableQuery.limit,
       streamAllConfig: streamableDAO.baseStreamAllConfig,
       streamCountConfig: streamableDAO.baseStreamCountConfig,
       searchQuery: searchStream,
       where: Stream.value([
-        Filter(const DotField(), query.logicalOperator, query.filters),
+        Filter(
+          const DotField(),
+          availableQuery.logicalOperator,
+          availableQuery.filters,
+        ),
       ]),
-      orderBy: Stream.value(query.orderBy),
+      orderBy: Stream.value(availableQuery.orderBy),
     );
   }
 }

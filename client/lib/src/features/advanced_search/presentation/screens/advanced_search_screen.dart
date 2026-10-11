@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
@@ -91,19 +92,13 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                 },
               ),
               const Divider(),
-              StreamBuilder<(QueryableType, List<OrderBy>)>(
-                stream: Rx.combineLatest2(
-                  controller.selectedTypeStream,
-                  controller.orderByStream,
-                  (type, orderBy) => (type, orderBy),
-                ),
-                initialData: (
-                  controller.selectedQueryableType,
-                  controller.orderBy,
-                ),
+              StreamBuilder<AdvancedQuery>(
+                stream: controller.queryStream,
+                initialData: controller.query,
                 builder: (context, orderByData) {
-                  final (selectedQueryableType, orderByStatements) =
-                      orderByData.data!;
+                  final query = orderByData.requireData;
+                  final selectedQueryableType = query.queryableType;
+                  final orderByStatements = query.orderBy;
 
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -145,14 +140,20 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
     );
   }
 
+  @override
+  void dispose() {
+    unawaited(controller.dispose());
+    super.dispose();
+  }
+
   void _onTypeChanged(QueryableType newType) {
     controller.changeSelectedQueryableType(newType);
   }
 
   void _onAddOrderByStatement() => controller.addOrderBy(
     OrderBy(
-      field: selectedQueryableType.fieldsMetadata.firstWhere(
-        (p) => !p.name.endsWith('id') && p.isOrderable,
+      field: selectedQueryableType.orderableFields.firstWhere(
+        (p) => !p.name.endsWith('id'),
       ),
     ),
   );

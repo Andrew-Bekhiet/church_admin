@@ -1,10 +1,9 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
+import 'package:church_admin/src/features/advanced_search/presentation/widgets/order_by_bottom_sheet_state.dart';
 import 'package:flutter/material.dart';
-import 'package:material_symbols_icons/symbols.dart';
 import 'package:rxdart/rxdart.dart';
 
-class OrderByBottomSheet extends StatelessWidget {
+class OrderByBottomSheet extends StatefulWidget {
   final QueryableType queryableType;
   final List<OrderBy> initialOrderBy;
   final void Function(List<OrderBy>) onChanged;
@@ -17,78 +16,7 @@ class OrderByBottomSheet extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final orderByValue = initialOrderBy;
-
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(
-              'ترتيب ${queryableType.label}',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              spacing: 10,
-              children: [
-                ...orderByValue.mapIndexed(
-                  (i, orderBy) => OrderByWidget(
-                    selectedQueryableType: queryableType,
-                    orderBy: orderBy,
-                    onChanged: (newValue) => onChanged(
-                      orderByValue
-                          .mapIndexed(
-                            (j, o) => j == i ? newValue : o,
-                          )
-                          .toList(),
-                    ),
-                    onRemoved: i == 0
-                        ? null
-                        : () => onChanged(
-                            orderByValue
-                                .whereIndexed((j, _) => j != i)
-                                .toList(),
-                          ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 24),
-                  child: FilledButton.icon(
-                    onPressed: () {
-                      onChanged(
-                        [
-                          ...orderByValue,
-                          OrderBy(
-                            field: queryableType.fieldsMetadata.firstWhere(
-                              (f) =>
-                                  !f.name.endsWith('id') &&
-                                  f.isOrderable &&
-                                  DataChecksFlagFieldFilter.isFieldAllowed(f),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                    icon: const Icon(Symbols.add),
-                    label: const Text('إضافة ترتيب'),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  State<OrderByBottomSheet> createState() => OrderByBottomSheetState();
 }
 
 Future<void> showOrderByBottomSheet(

@@ -6,6 +6,7 @@ import 'package:graphql/client.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../fakes/fake_feature_flags_repo.dart';
 import 'advanced_query_parser_test.mocks.dart';
 
 @GenerateNiceMocks([
@@ -291,6 +292,7 @@ Future<void> _runTestCase(AdvancedQuery query, Json expectedVarsJson) async {
 Future<void> _setUp() async {
   final overrides = [
     _mockDBService(),
+    featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
   ];
 
   initGlobalProviderContainer(overrides);

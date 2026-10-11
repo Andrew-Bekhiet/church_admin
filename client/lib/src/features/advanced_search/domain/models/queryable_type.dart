@@ -14,6 +14,14 @@ class QueryableType<T extends Object> with Equatable {
 
   Type get type => T;
 
+  Iterable<FieldMetadata> get filterableFields => fieldsMetadata.where(
+    (field) => !field.isCodeOnly && field.isAvailable,
+  );
+
+  Iterable<FieldMetadata> get orderableFields => filterableFields.where(
+    (field) => field.isOrderable,
+  );
+
   StreamableDAO? get dao =>
       isEnum ? null : DatabaseService.I.daosByType[T] as StreamableDAO?;
 

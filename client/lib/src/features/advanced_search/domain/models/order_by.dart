@@ -7,6 +7,9 @@ part 'order_by.g.dart';
 @freezed
 @JsonSerializable()
 class OrderBy with _$OrderBy {
+  static List<OrderBy> availableOrderBys(Iterable<OrderBy> orderBys) =>
+      orderBys.where((orderBy) => orderBy.field.isAvailable).toList();
+
   @override
   @JsonKey(
     fromJson: fieldMetadataFromJson,

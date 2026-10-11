@@ -29,6 +29,10 @@ class FieldMetadata<T extends Object> with Equatable {
 
   Type get type => _type ?? T;
 
+  bool get isAvailable =>
+      (type != DataCheck && parentType != DataCheck) ||
+      FeatureFlagsRepository.I.enableDataChecks;
+
   QueryableType get parentQueryableType =>
       AdvancedQueriesMetadata().allQueryablesByType[parentType]!;
 
