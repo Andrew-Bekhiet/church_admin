@@ -33,19 +33,18 @@ class _ViewServiceState extends State<ViewService> {
             ),
           ],
         ),
-        orderBy: _classesOrderBy.stream,
+        orderBy: _classesArrangement.orderByStream,
+        secondLineField: _classesArrangement.secondLineFieldStream,
       ),
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _classesOrderBy = BehaviorSubject.seeded(
-    ViewObjectDetails.getLastOrderByFor(
-      type: AdvancedQueriesMetadata().$class,
-      orElse: () => [
-        OrderBy(field: ClassFields().studyYear),
-        OrderBy(field: ClassFields().name),
-      ],
-    ),
+  final _classesArrangement = ListArrangementController(
+    type: AdvancedQueriesMetadata().$class,
+    defaultOrderBy: () => [
+      OrderBy(field: ClassFields().studyYear),
+      OrderBy(field: ClassFields().name),
+    ],
   );
 
   late final _groupsController = _ensureWillDispose(
@@ -60,18 +59,17 @@ class _ViewServiceState extends State<ViewService> {
             ),
           ],
         ),
-        orderBy: _groupsOrderBy.stream,
+        orderBy: _groupsArrangement.orderByStream,
+        secondLineField: _groupsArrangement.secondLineFieldStream,
       ),
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _groupsOrderBy = BehaviorSubject.seeded(
-    ViewObjectDetails.getLastOrderByFor(
-      type: AdvancedQueriesMetadata().group,
-      orElse: () => [
-        OrderBy(field: GroupFields().name),
-      ],
-    ),
+  final _groupsArrangement = ListArrangementController(
+    type: AdvancedQueriesMetadata().group,
+    defaultOrderBy: () => [
+      OrderBy(field: GroupFields().name),
+    ],
   );
 
   late final _personsController = _ensureWillDispose(
@@ -88,20 +86,19 @@ class _ViewServiceState extends State<ViewService> {
             ),
           ],
         ),
-        orderBy: _personsOrderBy.stream,
+        orderBy: _personsArrangement.orderByStream,
+        secondLineField: _personsArrangement.secondLineFieldStream,
       ),
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
-    ViewObjectDetails.getLastOrderByFor(
-      type: AdvancedQueriesMetadata().person,
-      inServiceContext: true,
-      orElse: () => [
-        OrderBy(field: PersonFields().studyYear),
-        OrderBy(field: PersonFields().name),
-      ],
-    ),
+  final _personsArrangement = ListArrangementController(
+    type: AdvancedQueriesMetadata().person,
+    inServiceContext: true,
+    defaultOrderBy: () => [
+      OrderBy(field: PersonFields().studyYear),
+      OrderBy(field: PersonFields().name),
+    ],
   );
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
@@ -167,7 +164,7 @@ class _ViewServiceState extends State<ViewService> {
         ),
       ),
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
-        filtersWidget: TabAwareSortButton(onPressed: _showOrderBySheet),
+        filtersWidget: TabAwareSortButton(onPressed: _showArrangementSheet),
         tabs: [
           (
             label: 'الفصول',
@@ -185,19 +182,19 @@ class _ViewServiceState extends State<ViewService> {
       ),
       tabsContentBuilders: {
         Class: (context) => StreamBuilder(
-          stream: _classesOrderBy.stream,
-          initialData: _classesOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
+          stream: _classesArrangement.stream,
+          initialData: _classesArrangement.value,
+          builder: (context, arrangementSnapshot) => ViewableObjectList(
             itemBuilder: (context, class_, config) => ViewableObjectCard<Class>(
               class_,
               config:
                   config?.copyWith(
-                    secondLineField: orderBySnapshot.data?.first
-                        .getSecondLineField(),
+                    secondLineField:
+                        arrangementSnapshot.data?.effectiveSecondLineField,
                   ) ??
                   ViewableObjectWidgetConfig(
-                    secondLineField: orderBySnapshot.data?.first
-                        .getSecondLineField(),
+                    secondLineField:
+                        arrangementSnapshot.data?.effectiveSecondLineField,
                   ),
             ),
             type: ViewableObjectListType.grid3,
@@ -206,13 +203,11 @@ class _ViewServiceState extends State<ViewService> {
           ),
         ),
         Group: (context) => OrderedViewableObjectList(
-          orderByStream: _groupsOrderBy.stream,
-          initialOrderBy: _groupsOrderBy.value,
+          arrangementController: _groupsArrangement,
           objectsController: _groupsController,
         ),
         Person: (context) => OrderedViewableObjectList(
-          orderByStream: _personsOrderBy.stream,
-          initialOrderBy: _personsOrderBy.value,
+          arrangementController: _personsArrangement,
           objectsController: _personsController,
         ),
       },
@@ -286,9 +281,9 @@ class _ViewServiceState extends State<ViewService> {
   @override
   void dispose() {
     unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
-    unawaited(_classesOrderBy.close());
-    unawaited(_groupsOrderBy.close());
-    unawaited(_personsOrderBy.close());
+    _classesArrangement.dispose();
+    _groupsArrangement.dispose();
+    _personsArrangement.dispose();
 
     super.dispose();
   }
@@ -299,22 +294,15 @@ class _ViewServiceState extends State<ViewService> {
         : (currentIndex + offset).ceil();
   }
 
-  Future<void> _showOrderBySheet(int currentTabIndex) async {
-    final advancedQueriesMetadata = AdvancedQueriesMetadata();
-
-    final (queryableType, orderBySubject) = switch (currentTabIndex) {
-      0 => (advancedQueriesMetadata.$class, _classesOrderBy),
-      1 => (advancedQueriesMetadata.group, _groupsOrderBy),
-      2 => (advancedQueriesMetadata.person, _personsOrderBy),
+  Future<void> _showArrangementSheet(int currentTabIndex) async {
+    final arrangementController = switch (currentTabIndex) {
+      0 => _classesArrangement,
+      1 => _groupsArrangement,
+      2 => _personsArrangement,
       _ => throw UnimplementedError(),
     };
 
-    await showOrderBySheetAndSave(
-      context,
-      queryableType: queryableType,
-      orderBySubject: orderBySubject,
-      inServiceContext: currentTabIndex == 2,
-    );
+    await arrangementController.edit(context);
   }
 
   ViewableObjectListController<T>

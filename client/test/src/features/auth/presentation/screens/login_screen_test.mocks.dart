@@ -895,6 +895,28 @@ class MockUserPreferencesService extends _i1.Mock
           as _i8.Future<void>);
 
   @override
+  _i3.FieldMetadata<Object>? getLastSecondLineFieldFor(
+    _i3.OrderByPreferenceKey? key,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#getLastSecondLineFieldFor, [key]),
+            returnValueForMissingStub: null,
+          )
+          as _i3.FieldMetadata<Object>?);
+
+  @override
+  _i8.Future<void> setLastSecondLineFieldFor(
+    _i3.OrderByPreferenceKey? key,
+    _i3.FieldMetadata<Object>? field,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#setLastSecondLineFieldFor, [key, field]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
+
+  @override
   void onTransition(
     _i10.Bloc<dynamic, dynamic>? bloc,
     _i10.Transition<dynamic, dynamic>? transition,

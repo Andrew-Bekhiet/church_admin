@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:rxdart/rxdart.dart';
 
 class ViewClass extends StatefulWidget {
   final Class? $class;
@@ -25,19 +24,18 @@ class _ViewClassState extends State<ViewClass> {
           widget.classId,
         ),
       ]),
-      orderBy: _personsOrderBy.stream,
+      orderBy: _personsArrangement.orderByStream,
+      secondLineField: _personsArrangement.secondLineFieldStream,
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
-    ViewObjectDetails.getLastOrderByFor(
-      type: AdvancedQueriesMetadata().person,
-      inServiceContext: true,
-      orElse: () => [
-        OrderBy(field: PersonFields().studyYear),
-        OrderBy(field: PersonFields().name),
-      ],
-    ),
+  final _personsArrangement = ListArrangementController(
+    type: AdvancedQueriesMetadata().person,
+    inServiceContext: true,
+    defaultOrderBy: () => [
+      OrderBy(field: PersonFields().studyYear),
+      OrderBy(field: PersonFields().name),
+    ],
   );
 
   late final stream = DatabaseService.I.classes.streamSingleById(
@@ -53,8 +51,7 @@ class _ViewClassState extends State<ViewClass> {
       childrenTypes: const [Person],
       tabsContentBuilders: {
         Person: (context) => OrderedViewableObjectList(
-          orderByStream: _personsOrderBy.stream,
-          initialOrderBy: _personsOrderBy.value,
+          arrangementController: _personsArrangement,
           objectsController: _personsController,
         ),
       },
@@ -106,7 +103,7 @@ class _ViewClassState extends State<ViewClass> {
           visualDensity: VisualDensity.compact,
           padding: EdgeInsets.zero,
           icon: const Icon(Symbols.sort),
-          onPressed: _showOrderBySheet,
+          onPressed: _showArrangementSheet,
         ),
         tabs: [
           (
@@ -137,17 +134,12 @@ class _ViewClassState extends State<ViewClass> {
   @override
   void dispose() {
     unawaited(_personsController.dispose());
-    unawaited(_personsOrderBy.close());
+    _personsArrangement.dispose();
 
     super.dispose();
   }
 
-  Future<void> _showOrderBySheet() async {
-    await showOrderBySheetAndSave(
-      context,
-      queryableType: AdvancedQueriesMetadata().person,
-      orderBySubject: _personsOrderBy,
-      inServiceContext: true,
-    );
+  Future<void> _showArrangementSheet() async {
+    await _personsArrangement.edit(context);
   }
 }

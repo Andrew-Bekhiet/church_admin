@@ -1186,12 +1186,14 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
     _i7.Stream<String?>? searchQuery,
     _i7.Stream<List<_i2.Filter<Object>>>? where,
     _i7.Stream<List<_i2.OrderBy>>? orderBy,
+    _i7.Stream<_i2.FieldMetadata<Object>?>? secondLineField,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#streamAll, [], {
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
+              #secondLineField: secondLineField,
             }),
             returnValue: _FakePaginatableStreamBase_31<_i2.User>(
               this,
@@ -1199,6 +1201,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
               }),
             ),
             returnValueForMissingStub: _FakePaginatableStreamBase_31<_i2.User>(
@@ -1207,6 +1210,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
               }),
             ),
           )
@@ -1219,6 +1223,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
     _i7.Stream<String?>? searchQuery,
     _i7.Stream<List<_i2.Filter<Object>>>? where,
     _i7.Stream<List<_i2.OrderBy>>? orderBy,
+    _i7.Stream<_i2.FieldMetadata<Object>?>? secondLineField,
     int? overrideTotalLimit,
   }) =>
       (super.noSuchMethod(
@@ -1228,6 +1233,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
+              #secondLineField: secondLineField,
               #overrideTotalLimit: overrideTotalLimit,
             }),
             returnValue: _FakePaginatableStreamBase_31<_i2.User>(
@@ -1238,6 +1244,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
                 #overrideTotalLimit: overrideTotalLimit,
               }),
             ),
@@ -1249,6 +1256,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
                 #overrideTotalLimit: overrideTotalLimit,
               }),
             ),

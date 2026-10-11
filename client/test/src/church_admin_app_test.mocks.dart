@@ -1069,12 +1069,14 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
     _i9.Stream<String?>? searchQuery,
     _i9.Stream<List<_i4.Filter<Object>>>? where,
     _i9.Stream<List<_i4.OrderBy>>? orderBy,
+    _i9.Stream<_i4.FieldMetadata<Object>?>? secondLineField,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#streamAll, [], {
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
+              #secondLineField: secondLineField,
             }),
             returnValue: _FakePaginatableStreamBase_30<_i4.User>(
               this,
@@ -1082,6 +1084,7 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
               }),
             ),
             returnValueForMissingStub: _FakePaginatableStreamBase_30<_i4.User>(
@@ -1090,6 +1093,7 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
               }),
             ),
           )
@@ -1102,6 +1106,7 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
     _i9.Stream<String?>? searchQuery,
     _i9.Stream<List<_i4.Filter<Object>>>? where,
     _i9.Stream<List<_i4.OrderBy>>? orderBy,
+    _i9.Stream<_i4.FieldMetadata<Object>?>? secondLineField,
     int? overrideTotalLimit,
   }) =>
       (super.noSuchMethod(
@@ -1111,6 +1116,7 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
+              #secondLineField: secondLineField,
               #overrideTotalLimit: overrideTotalLimit,
             }),
             returnValue: _FakePaginatableStreamBase_30<_i4.User>(
@@ -1121,6 +1127,7 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
                 #overrideTotalLimit: overrideTotalLimit,
               }),
             ),
@@ -1132,6 +1139,7 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
                 #overrideTotalLimit: overrideTotalLimit,
               }),
             ),
@@ -1440,12 +1448,14 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
     _i9.Stream<String?>? searchQuery,
     _i9.Stream<List<_i4.Filter<Object>>>? where,
     _i9.Stream<List<_i4.OrderBy>>? orderBy,
+    _i9.Stream<_i4.FieldMetadata<Object>?>? secondLineField,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#streamAll, [], {
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
+              #secondLineField: secondLineField,
             }),
             returnValue: _FakePaginatableStreamBase_30<_i4.Person>(
               this,
@@ -1453,6 +1463,7 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
               }),
             ),
             returnValueForMissingStub:
@@ -1462,6 +1473,7 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
                     #searchQuery: searchQuery,
                     #where: where,
                     #orderBy: orderBy,
+                    #secondLineField: secondLineField,
                   }),
                 ),
           )
@@ -1474,6 +1486,7 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
     _i9.Stream<String?>? searchQuery,
     _i9.Stream<List<_i4.Filter<Object>>>? where,
     _i9.Stream<List<_i4.OrderBy>>? orderBy,
+    _i9.Stream<_i4.FieldMetadata<Object>?>? secondLineField,
     int? overrideTotalLimit,
   }) =>
       (super.noSuchMethod(
@@ -1483,6 +1496,7 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
+              #secondLineField: secondLineField,
               #overrideTotalLimit: overrideTotalLimit,
             }),
             returnValue: _FakePaginatableStreamBase_30<_i4.Person>(
@@ -1493,6 +1507,7 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
                 #overrideTotalLimit: overrideTotalLimit,
               }),
             ),
@@ -1505,6 +1520,7 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
                     #searchQuery: searchQuery,
                     #where: where,
                     #orderBy: orderBy,
+                    #secondLineField: secondLineField,
                     #overrideTotalLimit: overrideTotalLimit,
                   }),
                 ),
@@ -1737,12 +1753,14 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
     _i9.Stream<String?>? searchQuery,
     _i9.Stream<List<_i4.Filter<Object>>>? where,
     _i9.Stream<List<_i4.OrderBy>>? orderBy,
+    _i9.Stream<_i4.FieldMetadata<Object>?>? secondLineField,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#streamAll, [], {
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
+              #secondLineField: secondLineField,
             }),
             returnValue: _FakePaginatableStreamBase_30<_i4.Area>(
               this,
@@ -1750,6 +1768,7 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
               }),
             ),
             returnValueForMissingStub: _FakePaginatableStreamBase_30<_i4.Area>(
@@ -1758,6 +1777,7 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
               }),
             ),
           )
@@ -1779,6 +1799,7 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
     _i9.Stream<String?>? searchQuery,
     _i9.Stream<List<_i4.Filter<Object>>>? where,
     _i9.Stream<List<_i4.OrderBy>>? orderBy,
+    _i9.Stream<_i4.FieldMetadata<Object>?>? secondLineField,
     int? overrideTotalLimit,
   }) =>
       (super.noSuchMethod(
@@ -1788,6 +1809,7 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
+              #secondLineField: secondLineField,
               #overrideTotalLimit: overrideTotalLimit,
             }),
             returnValue: _FakePaginatableStreamBase_30<_i4.Area>(
@@ -1798,6 +1820,7 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
                 #overrideTotalLimit: overrideTotalLimit,
               }),
             ),
@@ -1809,6 +1832,7 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
                 #overrideTotalLimit: overrideTotalLimit,
               }),
             ),
@@ -2043,12 +2067,14 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
     _i9.Stream<String?>? searchQuery,
     _i9.Stream<List<_i4.Filter<Object>>>? where,
     _i9.Stream<List<_i4.OrderBy>>? orderBy,
+    _i9.Stream<_i4.FieldMetadata<Object>?>? secondLineField,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#streamAll, [], {
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
+              #secondLineField: secondLineField,
             }),
             returnValue: _FakePaginatableStreamBase_30<_i4.Service>(
               this,
@@ -2056,6 +2082,7 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
               }),
             ),
             returnValueForMissingStub:
@@ -2065,6 +2092,7 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
                     #searchQuery: searchQuery,
                     #where: where,
                     #orderBy: orderBy,
+                    #secondLineField: secondLineField,
                   }),
                 ),
           )
@@ -2086,6 +2114,7 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
     _i9.Stream<String?>? searchQuery,
     _i9.Stream<List<_i4.Filter<Object>>>? where,
     _i9.Stream<List<_i4.OrderBy>>? orderBy,
+    _i9.Stream<_i4.FieldMetadata<Object>?>? secondLineField,
     int? overrideTotalLimit,
   }) =>
       (super.noSuchMethod(
@@ -2095,6 +2124,7 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
+              #secondLineField: secondLineField,
               #overrideTotalLimit: overrideTotalLimit,
             }),
             returnValue: _FakePaginatableStreamBase_30<_i4.Service>(
@@ -2105,6 +2135,7 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
                 #searchQuery: searchQuery,
                 #where: where,
                 #orderBy: orderBy,
+                #secondLineField: secondLineField,
                 #overrideTotalLimit: overrideTotalLimit,
               }),
             ),
@@ -2117,6 +2148,7 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
                     #searchQuery: searchQuery,
                     #where: where,
                     #orderBy: orderBy,
+                    #secondLineField: secondLineField,
                     #overrideTotalLimit: overrideTotalLimit,
                   }),
                 ),

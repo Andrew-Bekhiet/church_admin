@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:rxdart/rxdart.dart';
 
 class ViewStore extends StatefulWidget {
   final Store? store;
@@ -27,17 +26,16 @@ class _ViewStoreState extends State<ViewStore> {
           ),
         ],
       ),
-      orderBy: _personsOrderBy.stream,
+      orderBy: _personsArrangement.orderByStream,
+      secondLineField: _personsArrangement.secondLineFieldStream,
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
-    ViewObjectDetails.getLastOrderByFor(
-      type: AdvancedQueriesMetadata().person,
-      orElse: () => [
-        OrderBy(field: PersonFields().name),
-      ],
-    ),
+  final _personsArrangement = ListArrangementController(
+    type: AdvancedQueriesMetadata().person,
+    defaultOrderBy: () => [
+      OrderBy(field: PersonFields().name),
+    ],
   );
 
   late final viewableObjectService = ViewableObjectService.I;
@@ -55,8 +53,7 @@ class _ViewStoreState extends State<ViewStore> {
       childrenTypes: const [Person],
       tabsContentBuilders: {
         Person: (context) => OrderedViewableObjectList(
-          orderByStream: _personsOrderBy.stream,
-          initialOrderBy: _personsOrderBy.value,
+          arrangementController: _personsArrangement,
           objectsController: _personsController,
         ),
       },
@@ -66,7 +63,7 @@ class _ViewStoreState extends State<ViewStore> {
             visualDensity: VisualDensity.compact,
             padding: EdgeInsets.zero,
             icon: const Icon(Symbols.sort),
-            onPressed: _showOrderBySheet,
+            onPressed: _showArrangementSheet,
           ),
         ),
         tabs: [
@@ -151,16 +148,12 @@ class _ViewStoreState extends State<ViewStore> {
   @override
   void dispose() {
     unawaited(_personsController.dispose());
-    unawaited(_personsOrderBy.close());
+    _personsArrangement.dispose();
 
     super.dispose();
   }
 
-  Future<void> _showOrderBySheet() async {
-    await showOrderBySheetAndSave(
-      context,
-      queryableType: AdvancedQueriesMetadata().person,
-      orderBySubject: _personsOrderBy,
-    );
+  Future<void> _showArrangementSheet() async {
+    await _personsArrangement.edit(context);
   }
 }

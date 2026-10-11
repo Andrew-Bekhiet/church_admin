@@ -2,13 +2,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class OrderedViewableObjectList<T extends Viewable> extends StatelessWidget {
-  final Stream<List<OrderBy>> orderByStream;
-  final List<OrderBy> initialOrderBy;
+  final ListArrangementController arrangementController;
   final ViewableObjectListController<T> objectsController;
 
   const OrderedViewableObjectList({
-    required this.orderByStream,
-    required this.initialOrderBy,
+    required this.arrangementController,
     required this.objectsController,
     super.key,
   });
@@ -16,12 +14,12 @@ class OrderedViewableObjectList<T extends Viewable> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: orderByStream,
-      initialData: initialOrderBy,
-      builder: (context, orderBySnapshot) => ViewableObjectList(
+      stream: arrangementController.stream,
+      initialData: arrangementController.value,
+      builder: (context, arrangementSnapshot) => ViewableObjectList(
         scrollController: PrimaryScrollController.maybeOf(context),
         viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-          secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
+          secondLineField: arrangementSnapshot.data?.effectiveSecondLineField,
         ),
         objectsController: objectsController,
       ),

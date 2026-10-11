@@ -26,18 +26,17 @@ class _ViewAreaState extends State<ViewArea> {
             widget.areaId,
           ),
         ]),
-        orderBy: _streetsOrderBy.stream,
+        orderBy: _streetsArrangement.orderByStream,
+        secondLineField: _streetsArrangement.secondLineFieldStream,
       ),
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _streetsOrderBy = BehaviorSubject.seeded(
-    ViewObjectDetails.getLastOrderByFor(
-      type: AdvancedQueriesMetadata().street,
-      orElse: () => [
-        OrderBy(field: StreetFields().name),
-      ],
-    ),
+  final _streetsArrangement = ListArrangementController(
+    type: AdvancedQueriesMetadata().street,
+    defaultOrderBy: () => [
+      OrderBy(field: StreetFields().name),
+    ],
   );
 
   late final _familiesController = _ensureWillDispose(
@@ -50,18 +49,16 @@ class _ViewAreaState extends State<ViewArea> {
             widget.areaId,
           ),
         ]),
-        orderBy: _familiesOrderBy.stream,
+        orderBy: _familiesArrangement.orderByStream,
+        secondLineField: _familiesArrangement.secondLineFieldStream,
       ),
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _familiesOrderBy =
-      BehaviorSubject.seeded(
-        ViewObjectDetails.getLastOrderByFor(
-          type: AdvancedQueriesMetadata().family,
-          orElse: () => [OrderBy(field: FamilyFields().name)],
-        ),
-      );
+  final _familiesArrangement = ListArrangementController(
+    type: AdvancedQueriesMetadata().family,
+    defaultOrderBy: () => [OrderBy(field: FamilyFields().name)],
+  );
 
   late final _storesController = _ensureWillDispose(
     ViewableObjectListController(
@@ -73,18 +70,17 @@ class _ViewAreaState extends State<ViewArea> {
             widget.areaId,
           ),
         ]),
-        orderBy: _storesOrderBy.stream,
+        orderBy: _storesArrangement.orderByStream,
+        secondLineField: _storesArrangement.secondLineFieldStream,
       ),
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _storesOrderBy = BehaviorSubject.seeded(
-    ViewObjectDetails.getLastOrderByFor(
-      type: AdvancedQueriesMetadata().store,
-      orElse: () => [
-        OrderBy(field: StoreFields().name),
-      ],
-    ),
+  final _storesArrangement = ListArrangementController(
+    type: AdvancedQueriesMetadata().store,
+    defaultOrderBy: () => [
+      OrderBy(field: StoreFields().name),
+    ],
   );
 
   late final _personsController = _ensureWillDispose(
@@ -97,18 +93,17 @@ class _ViewAreaState extends State<ViewArea> {
             widget.areaId,
           ),
         ]),
-        orderBy: _personsOrderBy.stream,
+        orderBy: _personsArrangement.orderByStream,
+        secondLineField: _personsArrangement.secondLineFieldStream,
       ),
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
-    ViewObjectDetails.getLastOrderByFor(
-      type: AdvancedQueriesMetadata().person,
-      orElse: () => [
-        OrderBy(field: PersonFields().name),
-      ],
-    ),
+  final _personsArrangement = ListArrangementController(
+    type: AdvancedQueriesMetadata().person,
+    defaultOrderBy: () => [
+      OrderBy(field: PersonFields().name),
+    ],
   );
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
@@ -128,28 +123,24 @@ class _ViewAreaState extends State<ViewArea> {
       childrenTypes: const [Street, Family, Person, Store],
       tabsContentBuilders: {
         Street: (context) => OrderedViewableObjectList(
-          orderByStream: _streetsOrderBy.stream,
-          initialOrderBy: _streetsOrderBy.value,
+          arrangementController: _streetsArrangement,
           objectsController: _streetsController,
         ),
         Family: (context) => OrderedViewableObjectList(
-          orderByStream: _familiesOrderBy.stream,
-          initialOrderBy: _familiesOrderBy.value,
+          arrangementController: _familiesArrangement,
           objectsController: _familiesController,
         ),
         Person: (context) => OrderedViewableObjectList(
-          orderByStream: _personsOrderBy.stream,
-          initialOrderBy: _personsOrderBy.value,
+          arrangementController: _personsArrangement,
           objectsController: _personsController,
         ),
         Store: (context) => OrderedViewableObjectList(
-          orderByStream: _storesOrderBy.stream,
-          initialOrderBy: _storesOrderBy.value,
+          arrangementController: _storesArrangement,
           objectsController: _storesController,
         ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
-        filtersWidget: TabAwareSortButton(onPressed: _showOrderBySheet),
+        filtersWidget: TabAwareSortButton(onPressed: _showArrangementSheet),
         tabs: [
           (
             icon: viewableObjectService.getDefaultIconFor<Street>(),
@@ -296,30 +287,24 @@ class _ViewAreaState extends State<ViewArea> {
   @override
   void dispose() {
     unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
-    unawaited(_streetsOrderBy.close());
-    unawaited(_familiesOrderBy.close());
-    unawaited(_personsOrderBy.close());
-    unawaited(_storesOrderBy.close());
+    _streetsArrangement.dispose();
+    _familiesArrangement.dispose();
+    _personsArrangement.dispose();
+    _storesArrangement.dispose();
 
     super.dispose();
   }
 
-  Future<void> _showOrderBySheet(int currentTabIndex) async {
-    final advancedQueriesMetadata = AdvancedQueriesMetadata();
-
-    final (queryableType, orderBySubject) = switch (currentTabIndex) {
-      0 => (advancedQueriesMetadata.street, _streetsOrderBy),
-      1 => (advancedQueriesMetadata.family, _familiesOrderBy),
-      2 => (advancedQueriesMetadata.person, _personsOrderBy),
-      3 => (advancedQueriesMetadata.store, _storesOrderBy),
+  Future<void> _showArrangementSheet(int currentTabIndex) async {
+    final arrangementController = switch (currentTabIndex) {
+      0 => _streetsArrangement,
+      1 => _familiesArrangement,
+      2 => _personsArrangement,
+      3 => _storesArrangement,
       _ => throw UnimplementedError(),
     };
 
-    await showOrderBySheetAndSave(
-      context,
-      queryableType: queryableType,
-      orderBySubject: orderBySubject,
-    );
+    await arrangementController.edit(context);
   }
 
   ViewableObjectListController<T>
