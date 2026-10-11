@@ -22,4 +22,12 @@ class ListArrangement with Equatable {
 
   ListArrangement withSecondLineField(FieldMetadata? secondLineField) =>
       ListArrangement(orderBy: orderBy, secondLineField: secondLineField);
+
+  ListArrangement withEnabledFields() => ListArrangement(
+    orderBy: orderBy.whereEnabled(),
+    secondLineField: switch (secondLineField) {
+      final field? when field.isEnabled => field,
+      _ => null,
+    },
+  );
 }

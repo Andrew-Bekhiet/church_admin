@@ -127,111 +127,52 @@ void main() {
     },
   );
   testWidgets(
-    'an open RTL ordering sheet removes disabled selected fields after a config change',
+    'an open RTL arrangement sheet drops disabled sort and second-line fields after a config change',
     (tester) async {
       when(() => flags.enableDataChecks).thenReturn(true);
       final nameOrder = OrderBy(field: PersonFields().name);
-      final checkOrder = OrderBy(
-        field: PersonFields().dataCheck.redirectTo(
-          DataCheckFields().isComplete,
-        ),
+      final checkField = PersonFields().dataCheck.redirectTo(
+        DataCheckFields().isComplete,
       );
-      List<OrderBy>? changedOrder;
+      ListArrangement? saved;
       await tester.pumpWidget(
         MaterialApp(
           home: Directionality(
             textDirection: TextDirection.rtl,
-            child: Scaffold(
-              body: OrderByBottomSheet(
-                queryableType: AdvancedQueriesMetadata().person,
-                initialOrderBy: [nameOrder, checkOrder],
-                onChanged: (orderBy) => changedOrder = orderBy,
-              ),
-            ),
-          ),
-        ),
-      );
-      expect(find.byType(OrderByWidget), findsNWidgets(3));
-
-      when(() => flags.enableDataChecks).thenReturn(false);
-      configChanges.add(null);
-      await tester.pump();
-      await tester.pump();
-
-      expect(find.byType(OrderByWidget), findsOneWidget);
-      expect(changedOrder, [nameOrder]);
-      expect(tester.takeException(), isNull);
-      await tester.pumpWidget(const SizedBox.shrink());
-    },
-  );
-
-  for (final reuseInitialList in [true, false]) {
-    testWidgets(
-      'rebuilding an RTL ordering sheet with ${reuseInitialList ? 'the same' : 'an equal'} initial list retains local edits',
-      (tester) async {
-        final initialOrderBy = [OrderBy(field: PersonFields().name)];
-        Future<void> pumpSheet(List<OrderBy> orderBy) => tester.pumpWidget(
-          MaterialApp(
-            home: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Scaffold(
-                body: OrderByBottomSheet(
-                  queryableType: AdvancedQueriesMetadata().person,
-                  initialOrderBy: orderBy,
-                  onChanged: (_) {},
+            child: Builder(
+              builder: (context) => Scaffold(
+                body: TextButton(
+                  onPressed: () async =>
+                      saved = await ListArrangementSheet.show(
+                        context,
+                        queryableType: AdvancedQueriesMetadata().person,
+                        initialArrangement: ListArrangement(
+                          orderBy: [
+                            nameOrder,
+                            OrderBy(field: checkField),
+                          ],
+                          secondLineField: checkField,
+                        ),
+                      ),
+                  child: const Text('open'),
                 ),
               ),
             ),
           ),
-        );
-        await pumpSheet(initialOrderBy);
-        await tester.tap(find.byType(FilledButton));
-        await tester.pump();
-        expect(find.byType(OrderByWidget), findsNWidgets(2));
-
-        await pumpSheet(
-          reuseInitialList ? initialOrderBy : [...initialOrderBy],
-        );
-
-        expect(find.byType(OrderByWidget), findsNWidgets(2));
-        expect(tester.takeException(), isNull);
-        await tester.pumpWidget(const SizedBox.shrink());
-      },
-    );
-  }
-
-  testWidgets(
-    'new external ordering replaces local edits in an RTL ordering sheet',
-    (tester) async {
-      Future<void> pumpSheet(List<OrderBy> orderBy) => tester.pumpWidget(
-        MaterialApp(
-          home: Directionality(
-            textDirection: TextDirection.rtl,
-            child: Scaffold(
-              body: OrderByBottomSheet(
-                queryableType: AdvancedQueriesMetadata().person,
-                initialOrderBy: orderBy,
-                onChanged: (_) {},
-              ),
-            ),
-          ),
         ),
       );
-      await pumpSheet([OrderBy(field: PersonFields().name)]);
-      await tester.tap(find.byType(FilledButton));
-      await tester.pump();
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
       expect(find.byType(OrderByWidget), findsNWidgets(2));
-      final externalOrder = OrderBy(field: PersonFields().birthdate);
 
-      await pumpSheet([externalOrder]);
+      when(() => flags.enableDataChecks).thenReturn(false);
+      configChanges.add(null);
+      await tester.pump();
+      await tester.tap(find.byKey(ListArrangementSheetKeys.save));
+      await tester.pumpAndSettle();
 
-      expect(find.byType(OrderByWidget), findsOneWidget);
-      expect(
-        tester.widget<OrderByWidget>(find.byType(OrderByWidget)).orderBy,
-        externalOrder,
-      );
+      expect(saved, ListArrangement(orderBy: [nameOrder]));
       expect(tester.takeException(), isNull);
-      await tester.pumpWidget(const SizedBox.shrink());
     },
   );
 }
