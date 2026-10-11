@@ -30,7 +30,6 @@ class DataCheckEmblem extends StatelessWidget {
     return Tooltip(
       message: dataCheck.completenessLabel,
       child: Badge(
-        isLabelVisible: dataCheck.userOverride != null,
         smallSize: _overrideDotSize,
         backgroundColor: colorScheme.tertiary,
         child: dataCheck.isComplete

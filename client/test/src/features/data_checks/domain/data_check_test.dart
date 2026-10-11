@@ -12,12 +12,12 @@ void main() {
       );
 
       expect(
-        dataCheck.withUserOverride(DataCheckOverride.automatic).isComplete,
+        dataCheck.withUserOverride(DataCheckOverride.none).isComplete,
         isTrue,
       );
       expect(
-        dataCheck.withUserOverride(DataCheckOverride.automatic).userOverride,
-        DataCheckOverride.automatic,
+        dataCheck.withUserOverride(DataCheckOverride.none).userOverride,
+        DataCheckOverride.none,
       );
     });
 
@@ -116,9 +116,7 @@ void main() {
       );
 
       expect(
-        dataCheck
-            .withUserOverride(DataCheckOverride.automatic)
-            .completenessPercent,
+        dataCheck.withUserOverride(DataCheckOverride.none).completenessPercent,
         33,
       );
     });
@@ -134,7 +132,7 @@ void main() {
           userOverride: DataCheckOverride.markedIncomplete,
         );
 
-        final cleared = dataCheck.withUserOverride(DataCheckOverride.automatic);
+        final cleared = dataCheck.withUserOverride(DataCheckOverride.none);
 
         expect(cleared.isComplete, isTrue);
         expect(cleared.completenessPercent, 100);

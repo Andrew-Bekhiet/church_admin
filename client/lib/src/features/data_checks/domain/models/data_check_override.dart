@@ -1,12 +1,12 @@
 enum DataCheckOverride {
-  automatic('تلقائي'),
+  none('تلقائي'),
   markedComplete('مكتملة'),
   markedIncomplete('غير مكتملة');
 
   final String label;
 
   bool? get asBoolean => switch (this) {
-    automatic => null,
+    none => null,
     markedComplete => true,
     markedIncomplete => false,
   };
@@ -14,7 +14,7 @@ enum DataCheckOverride {
   const DataCheckOverride(this.label);
 
   static DataCheckOverride fromBoolean(bool? value) => switch (value) {
-    null => automatic,
+    null => none,
     true => markedComplete,
     false => markedIncomplete,
   };

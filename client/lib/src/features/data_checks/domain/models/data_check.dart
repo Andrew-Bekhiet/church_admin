@@ -38,7 +38,7 @@ class DataCheck with _$DataCheck implements ID, SerializableExtra {
   @override
   @QueryableField(label: 'تعديل يدوي', orderable: false)
   @JsonKey(
-    defaultValue: DataCheckOverride.automatic,
+    defaultValue: DataCheckOverride.none,
     fromJson: DataCheckOverride.fromBoolean,
     toJson: _dataCheckOverrideToBoolean,
   )
@@ -83,7 +83,7 @@ class DataCheck with _$DataCheck implements ID, SerializableExtra {
     this.familyCheck = false,
     this.addressCheck = false,
     this.checksDetails = const [],
-    this.userOverride = DataCheckOverride.automatic,
+    this.userOverride = DataCheckOverride.none,
   });
 
   factory DataCheck.fromJson(Map<String, Object?> json) =>
@@ -94,12 +94,12 @@ class DataCheck with _$DataCheck implements ID, SerializableExtra {
     completenessPercent: switch (userOverride) {
       .markedComplete => _percentFull,
       .markedIncomplete => min(automaticPercent, _percentCap),
-      .automatic => automaticPercent,
+      .none => automaticPercent,
     },
     isComplete: switch (userOverride) {
       .markedComplete => true,
       .markedIncomplete => false,
-      .automatic => automaticVerdict,
+      .none => automaticVerdict,
     },
     familyCheck: familyCheck,
     addressCheck: addressCheck,

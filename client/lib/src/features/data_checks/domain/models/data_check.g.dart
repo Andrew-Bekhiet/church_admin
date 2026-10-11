@@ -99,7 +99,7 @@ DataCheck _$DataCheckFromJson(Map json) => DataCheck(
           .toList() ??
       [],
   userOverride: json['userOverride'] == null
-      ? DataCheckOverride.automatic
+      ? DataCheckOverride.none
       : DataCheckOverride.fromBoolean(json['userOverride'] as bool?),
 );
 

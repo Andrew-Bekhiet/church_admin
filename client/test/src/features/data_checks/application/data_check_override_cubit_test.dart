@@ -86,10 +86,10 @@ void main() {
         () => dao.tryClearOverride(familyId: incomplete.familyId),
       ).thenAnswer((_) async => true),
       build: () => cubitFor(markedIncomplete),
-      act: (cubit) => cubit.choose(DataCheckOverride.automatic),
+      act: (cubit) => cubit.choose(DataCheckOverride.none),
       expect: () {
         final automatic = markedIncomplete.withUserOverride(
-          DataCheckOverride.automatic,
+          DataCheckOverride.none,
         );
 
         return [
@@ -105,11 +105,11 @@ void main() {
         () => dao.tryClearOverride(familyId: incomplete.familyId),
       ).thenAnswer((_) async => false),
       build: () => cubitFor(markedIncomplete),
-      act: (cubit) => cubit.choose(DataCheckOverride.automatic),
+      act: (cubit) => cubit.choose(DataCheckOverride.none),
       expect: () => [
         DataCheckOverrideState(
           dataCheck: markedIncomplete.withUserOverride(
-            DataCheckOverride.automatic,
+            DataCheckOverride.none,
           ),
           isSaving: true,
         ),
