@@ -35,6 +35,41 @@ void main() {
     expect(withoutDataChecks(document), printed(document));
   });
 
+  test(
+    'removing data checks prunes variables used only in removed selections',
+    () {
+      expect(
+        withoutDataChecks(r"""
+        query q($checks: Boolean!, $id: uuid!) {
+          persons(where: {id: {_eq: $id}}) { id dataCheck @include(if: $checks) { percentage } }
+        }
+      """),
+        printed(r"""
+        query q($id: uuid!) { persons(where: {id: {_eq: $id}}) { id } }
+      """),
+      );
+    },
+  );
+
+  test(
+    'variables used by reachable nested fragments remain on their operation',
+    () {
+      expect(
+        withoutDataChecks(r"""
+        query q($checks: Boolean!, $name: Boolean!, $orphan: Boolean!) { persons { ...Person } }
+        fragment Person on Persons { id ...Details dataCheck @include(if: $checks) { ...DataCheck } }
+        fragment Details on Persons { name @include(if: $name) }
+        fragment DataCheck on DataChecks { percentage @include(if: $orphan) }
+      """),
+        printed(r"""
+        query q($name: Boolean!) { persons { ...Person } }
+        fragment Person on Persons { id ...Details }
+        fragment Details on Persons { name @include(if: $name) }
+      """),
+      );
+    },
+  );
+
   test('the generated persons subscription no longer selects dataCheck', () {
     final stripped = printNode(
       DataCheckSelectionRemover.removeFrom(
