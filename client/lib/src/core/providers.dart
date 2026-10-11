@@ -16,6 +16,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart'
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:gql/ast.dart' show DocumentNode;
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -84,8 +85,14 @@ final Provider<DatabaseService> databaseServiceProvider =
 final graphQLClientProvider = Provider<DBGraphQLClient>(
   (ref) {
     final loggingService = ref.read(loggingServiceProvider);
+    final documentsWithoutDataChecks = Expando<DocumentNode>();
 
     return DBGraphQLClient(
+      transformDocument: (document) =>
+          ref.read(featureFlagsRepoProvider).enableDataChecks
+          ? document
+          : documentsWithoutDataChecks[document] ??=
+                DataCheckSelectionRemover.removeFrom(document),
       defaultPolicies: DefaultPolicies(
         query: Policies(fetch: FetchPolicy.cacheAndNetwork),
         watchQuery: Policies(fetch: FetchPolicy.cacheAndNetwork),

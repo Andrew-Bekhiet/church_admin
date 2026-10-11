@@ -1,9 +1,13 @@
+import 'package:gql/ast.dart';
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
 class DBGraphQLClient extends GraphQLClient {
+  static DocumentNode _keepDocument(DocumentNode document) => document;
+
   final bool autoChangeFetchPolicy;
 
+  final DocumentNode Function(DocumentNode document) _transformDocument;
   final ValueStream<FetchPolicy> _fetchPolicyStream;
   FetchPolicy get _currentFetchPolicy => _fetchPolicyStream.value;
   DBGraphQLClient({
@@ -11,9 +15,11 @@ class DBGraphQLClient extends GraphQLClient {
     required super.link,
     required super.cache,
     this.autoChangeFetchPolicy = true,
+    DocumentNode Function(DocumentNode document)? transformDocument,
     super.alwaysRebroadcast,
     super.defaultPolicies,
-  }) : _fetchPolicyStream = connectivityStream
+  }) : _transformDocument = transformDocument ?? _keepDocument,
+       _fetchPolicyStream = connectivityStream
            .map(
              (connected) => connected
                  ? FetchPolicy.cacheAndNetwork
@@ -35,18 +41,87 @@ class DBGraphQLClient extends GraphQLClient {
     }
   }
 
+  QueryOptions<TParsed> _withTransformedQueryDocument<TParsed>(
+    QueryOptions<TParsed> options,
+  ) {
+    final document = _transformDocument(options.document);
+
+    return identical(document, options.document)
+        ? options
+        : options.copyWithOptions(document: document);
+  }
+
+  MutationOptions<TParsed> _withTransformedMutationDocument<TParsed>(
+    MutationOptions<TParsed> options,
+  ) {
+    final document = _transformDocument(options.document);
+
+    return identical(document, options.document)
+        ? options
+        : MutationOptions<TParsed>(
+            document: document,
+            operationName: options.operationName,
+            variables: options.variables,
+            fetchPolicy: options.fetchPolicy,
+            errorPolicy: options.errorPolicy,
+            cacheRereadPolicy: options.cacheRereadPolicy,
+            context: options.context,
+            optimisticResult: options.optimisticResult,
+            onCompleted: options.onCompleted,
+            update: options.update,
+            onError: options.onError,
+            parserFn: options.parserFn,
+            queryRequestTimeout: options.queryRequestTimeout,
+          );
+  }
+
+  SubscriptionOptions<TParsed> _withTransformedSubscriptionDocument<TParsed>(
+    SubscriptionOptions<TParsed> options,
+  ) {
+    final document = _transformDocument(options.document);
+
+    return identical(document, options.document)
+        ? options
+        : SubscriptionOptions<TParsed>(
+            document: document,
+            operationName: options.operationName,
+            variables: options.variables,
+            fetchPolicy: options.fetchPolicy,
+            errorPolicy: options.errorPolicy,
+            cacheRereadPolicy: options.cacheRereadPolicy,
+            optimisticResult: options.optimisticResult,
+            context: options.context,
+            parserFn: options.parserFn,
+            queryRequestTimeout: options.queryRequestTimeout,
+          );
+  }
+
+  @override
+  ObservableQuery<TParsed> watchQuery<TParsed>(
+    WatchQueryOptions<TParsed> options,
+  ) {
+    final document = _transformDocument(options.document);
+
+    return super.watchQuery(
+      identical(document, options.document)
+          ? options
+          : options.copyWith(document: document),
+    );
+  }
+
   @override
   Future<QueryResult<TParsed>> mutate<TParsed>(
     MutationOptions<TParsed> options, {
     bool? autoChangeFetchPolicy,
   }) async {
+    final transformedOptions = _withTransformedMutationDocument(options);
     final future = autoChangeFetchPolicy ?? this.autoChangeFetchPolicy
         ? super.mutate(
-            options.copyWithPolicies(
-              options.policies.copyWith(fetch: _currentFetchPolicy),
+            transformedOptions.copyWithPolicies(
+              transformedOptions.policies.copyWith(fetch: _currentFetchPolicy),
             ),
           )
-        : super.mutate(options);
+        : super.mutate(transformedOptions);
 
     return future.then(_exceptionsMiddleware);
   }
@@ -76,15 +151,16 @@ class DBGraphQLClient extends GraphQLClient {
     SubscriptionOptions<TParsed> options, {
     bool? autoChangeFetchPolicy,
   }) {
+    final transformedOptions = _withTransformedSubscriptionDocument(options);
     final stream = autoChangeFetchPolicy ?? this.autoChangeFetchPolicy
         ? _fetchPolicyStream.switchMap(
             (fp) => super.subscribe(
-              options.copyWithPolicies(
-                options.policies.copyWith(fetch: fp),
+              transformedOptions.copyWithPolicies(
+                transformedOptions.policies.copyWith(fetch: fp),
               ),
             ),
           )
-        : super.subscribe(options);
+        : super.subscribe(transformedOptions);
 
     return stream.map(_exceptionsMiddleware);
   }
@@ -126,13 +202,14 @@ class DBGraphQLClient extends GraphQLClient {
     QueryOptions<TParsed> options, {
     bool? autoChangeFetchPolicy,
   }) async {
+    final transformedOptions = _withTransformedQueryDocument(options);
     final future = autoChangeFetchPolicy ?? this.autoChangeFetchPolicy
         ? super.query(
-            options.copyWithPolicies(
-              options.policies.copyWith(fetch: _currentFetchPolicy),
+            transformedOptions.copyWithPolicies(
+              transformedOptions.policies.copyWith(fetch: _currentFetchPolicy),
             ),
           )
-        : super.query(options);
+        : super.query(transformedOptions);
 
     return future.then(_exceptionsMiddleware);
   }
