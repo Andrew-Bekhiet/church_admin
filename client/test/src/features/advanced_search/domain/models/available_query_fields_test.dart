@@ -164,4 +164,74 @@ void main() {
       await tester.pumpWidget(const SizedBox.shrink());
     },
   );
+
+  for (final reuseInitialList in [true, false]) {
+    testWidgets(
+      'rebuilding an RTL ordering sheet with ${reuseInitialList ? 'the same' : 'an equal'} initial list retains local edits',
+      (tester) async {
+        final initialOrderBy = [OrderBy(field: PersonFields().name)];
+        Future<void> pumpSheet(List<OrderBy> orderBy) => tester.pumpWidget(
+          MaterialApp(
+            home: Directionality(
+              textDirection: TextDirection.rtl,
+              child: Scaffold(
+                body: OrderByBottomSheet(
+                  queryableType: AdvancedQueriesMetadata().person,
+                  initialOrderBy: orderBy,
+                  onChanged: (_) {},
+                ),
+              ),
+            ),
+          ),
+        );
+        await pumpSheet(initialOrderBy);
+        await tester.tap(find.byType(FilledButton));
+        await tester.pump();
+        expect(find.byType(OrderByWidget), findsNWidgets(2));
+
+        await pumpSheet(
+          reuseInitialList ? initialOrderBy : [...initialOrderBy],
+        );
+
+        expect(find.byType(OrderByWidget), findsNWidgets(2));
+        expect(tester.takeException(), isNull);
+        await tester.pumpWidget(const SizedBox.shrink());
+      },
+    );
+  }
+
+  testWidgets(
+    'new external ordering replaces local edits in an RTL ordering sheet',
+    (tester) async {
+      Future<void> pumpSheet(List<OrderBy> orderBy) => tester.pumpWidget(
+        MaterialApp(
+          home: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Scaffold(
+              body: OrderByBottomSheet(
+                queryableType: AdvancedQueriesMetadata().person,
+                initialOrderBy: orderBy,
+                onChanged: (_) {},
+              ),
+            ),
+          ),
+        ),
+      );
+      await pumpSheet([OrderBy(field: PersonFields().name)]);
+      await tester.tap(find.byType(FilledButton));
+      await tester.pump();
+      expect(find.byType(OrderByWidget), findsNWidgets(2));
+      final externalOrder = OrderBy(field: PersonFields().birthdate);
+
+      await pumpSheet([externalOrder]);
+
+      expect(find.byType(OrderByWidget), findsOneWidget);
+      expect(
+        tester.widget<OrderByWidget>(find.byType(OrderByWidget)).orderBy,
+        externalOrder,
+      );
+      expect(tester.takeException(), isNull);
+      await tester.pumpWidget(const SizedBox.shrink());
+    },
+  );
 }

@@ -22,6 +22,12 @@ class OrderByBottomSheetState extends State<OrderByBottomSheet> {
   @override
   void didUpdateWidget(OrderByBottomSheet oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (const ListEquality<OrderBy>().equals(
+      oldWidget.initialOrderBy,
+      widget.initialOrderBy,
+    )) {
+      return;
+    }
     _orderBy = OrderBy.availableOrderBys(widget.initialOrderBy);
     _notifyIfOrdersRemoved();
   }
@@ -107,9 +113,13 @@ class OrderByBottomSheetState extends State<OrderByBottomSheet> {
   }
 
   void _notifyIfOrdersRemoved() {
-    if (_orderBy.length == widget.initialOrderBy.length) return;
+    if (_orderBy.length == widget.initialOrderBy.length) {
+      return;
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
+      if (!mounted) {
+        return;
+      }
       widget.onChanged(_orderBy);
     });
   }
