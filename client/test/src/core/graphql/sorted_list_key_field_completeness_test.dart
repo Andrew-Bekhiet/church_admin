@@ -44,9 +44,9 @@ void main() {
             (f) => f.isOrderable,
           ))
             for (final violation in _violations(
-              SortedListDocument(
+              ArrangedListDocument(
                 dao.baseStreamAllConfig.document,
-              ).sortedBy([OrderBy(field: field)]),
+              ).arrangedBy(ListArrangement(orderBy: [OrderBy(field: field)])),
               schema,
               rules,
             ))

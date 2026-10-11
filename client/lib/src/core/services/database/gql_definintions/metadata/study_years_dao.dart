@@ -22,10 +22,12 @@ class StudyYearsDAO extends DAOBase<StudyYear> with StreamableDAO<StudyYear> {
     Stream<String?>? searchQuery,
     Stream<List<Filter>>? where,
     Stream<List<OrderBy>>? orderBy,
+    Stream<FieldMetadata?>? secondLineField,
     int? overrideTotalLimit,
   }) {
     return super.streamAll(
       searchQuery: searchQuery,
+      secondLineField: secondLineField,
       where: where,
       orderBy:
           orderBy ?? Stream.value([OrderBy(field: StudyYearFields().order)]),

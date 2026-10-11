@@ -19,7 +19,10 @@ abstract class DAOBase<T extends ViewableWithID> {
   DocumentNode transformDocument(
     DocumentNode document, {
     StreamableDAOParameters<T>? parameters,
-  }) => SortedListDocument(
-    document,
-  ).sortedBy(parameters?.orderBy ?? const []);
+  }) =>
+      ArrangedListDocument(
+        document,
+      ).arrangedBy(
+        parameters?.arrangement ?? const ListArrangement(orderBy: []),
+      );
 }
