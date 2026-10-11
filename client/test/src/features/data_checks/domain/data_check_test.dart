@@ -8,11 +8,17 @@ void main() {
         familyId: 'family',
         familyCheck: true,
         addressCheck: true,
-        userOverride: false,
+        userOverride: DataCheckOverride.markedIncomplete,
       );
 
-      expect(dataCheck.withUserOverride(null).isComplete, isTrue);
-      expect(dataCheck.withUserOverride(null).userOverride, isNull);
+      expect(
+        dataCheck.withUserOverride(DataCheckOverride.automatic).isComplete,
+        isTrue,
+      );
+      expect(
+        dataCheck.withUserOverride(DataCheckOverride.automatic).userOverride,
+        isNull,
+      );
     });
 
     test('marking incomplete hides an automatically complete family', () {
@@ -23,7 +29,9 @@ void main() {
         addressCheck: true,
       );
 
-      final overridden = dataCheck.withUserOverride(false);
+      final overridden = dataCheck.withUserOverride(
+        DataCheckOverride.markedIncomplete,
+      );
 
       expect(overridden.isComplete, isFalse);
       expect(overridden.userOverride, isFalse);
@@ -32,7 +40,10 @@ void main() {
     test('marking complete shows an automatically incomplete family', () {
       final dataCheck = DataCheck(familyId: 'family', familyCheck: true);
 
-      expect(dataCheck.withUserOverride(true).isComplete, isTrue);
+      expect(
+        dataCheck.withUserOverride(DataCheckOverride.markedComplete).isComplete,
+        isTrue,
+      );
     });
 
     test('marking complete lifts the completeness to 100', () {
@@ -52,7 +63,12 @@ void main() {
         ],
       );
 
-      expect(dataCheck.withUserOverride(true).completenessPercent, 100);
+      expect(
+        dataCheck
+            .withUserOverride(DataCheckOverride.markedComplete)
+            .completenessPercent,
+        100,
+      );
     });
 
     test('marking incomplete caps a fully passing family at 99', () {
@@ -67,14 +83,19 @@ void main() {
         ],
       );
 
-      expect(dataCheck.withUserOverride(false).completenessPercent, 99);
+      expect(
+        dataCheck
+            .withUserOverride(DataCheckOverride.markedIncomplete)
+            .completenessPercent,
+        99,
+      );
     });
 
     test('clearing the override returns to the share of checks passed', () {
       final dataCheck = DataCheck(
         familyId: 'family',
         completenessPercent: 100,
-        userOverride: true,
+        userOverride: DataCheckOverride.markedComplete,
         checksDetails: const [
           DataCheckDetail(
             group: DataCheckGroup.family,
@@ -94,7 +115,12 @@ void main() {
         ],
       );
 
-      expect(dataCheck.withUserOverride(null).completenessPercent, 33);
+      expect(
+        dataCheck
+            .withUserOverride(DataCheckOverride.automatic)
+            .completenessPercent,
+        33,
+      );
     });
 
     test(
@@ -105,10 +131,10 @@ void main() {
           familyId: 'family',
           familyCheck: true,
           addressCheck: true,
-          userOverride: false,
+          userOverride: DataCheckOverride.markedIncomplete,
         );
 
-        final cleared = dataCheck.withUserOverride(null);
+        final cleared = dataCheck.withUserOverride(DataCheckOverride.automatic);
 
         expect(cleared.isComplete, isTrue);
         expect(cleared.completenessPercent, 100);

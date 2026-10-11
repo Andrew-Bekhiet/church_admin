@@ -37,7 +37,12 @@ class DataCheck with _$DataCheck implements ID, SerializableExtra {
 
   @override
   @QueryableField(label: 'تعديل يدوي', orderable: false)
-  final bool? userOverride;
+  @JsonKey(
+    defaultValue: DataCheckOverride.automatic,
+    fromJson: DataCheckOverride.fromBoolean,
+    toJson: _dataCheckOverrideToBoolean,
+  )
+  final DataCheckOverride userOverride;
 
   @override
   final String familyId;
@@ -78,20 +83,24 @@ class DataCheck with _$DataCheck implements ID, SerializableExtra {
     this.familyCheck = false,
     this.addressCheck = false,
     this.checksDetails = const [],
-    this.userOverride,
+    this.userOverride = DataCheckOverride.automatic,
   });
 
   factory DataCheck.fromJson(Map<String, Object?> json) =>
       _$DataCheckFromJson(json);
 
-  DataCheck withUserOverride(bool? userOverride) => DataCheck(
+  DataCheck withUserOverride(DataCheckOverride userOverride) => DataCheck(
     familyId: familyId,
     completenessPercent: switch (userOverride) {
-      true => _percentFull,
-      false => min(automaticPercent, _percentCap),
-      null => automaticPercent,
+      .markedComplete => _percentFull,
+      .markedIncomplete => min(automaticPercent, _percentCap),
+      .automatic => automaticPercent,
     },
-    isComplete: userOverride ?? automaticVerdict,
+    isComplete: switch (userOverride) {
+      .markedComplete => true,
+      .markedIncomplete => false,
+      .automatic => automaticVerdict,
+    },
     familyCheck: familyCheck,
     addressCheck: addressCheck,
     userOverride: userOverride,
@@ -101,3 +110,6 @@ class DataCheck with _$DataCheck implements ID, SerializableExtra {
   @override
   Map<String, dynamic> toJson() => _$DataCheckToJson(this);
 }
+
+bool? _dataCheckOverrideToBoolean(DataCheckOverride override) =>
+    override.asBoolean;

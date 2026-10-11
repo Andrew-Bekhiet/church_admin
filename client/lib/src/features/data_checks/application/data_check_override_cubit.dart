@@ -14,13 +14,11 @@ class DataCheckOverrideCubit extends Cubit<DataCheckOverrideState> {
     if (state.isSaving) return;
 
     final previous = state.dataCheck;
-    if (DataCheckOverride.fromBoolean(previous.userOverride) == override) {
-      return;
-    }
+    if (previous.userOverride == override) return;
 
     emit(
       DataCheckOverrideState(
-        dataCheck: previous.withUserOverride(override.asBoolean),
+        dataCheck: previous.withUserOverride(override),
         isSaving: true,
       ),
     );

@@ -22,9 +22,9 @@ class DataCheckReportHeader extends StatelessWidget {
             children: [
               Text(dataCheck.completenessLabel, style: textTheme.titleMedium),
               Text(
-                dataCheck.userOverride != null
-                    ? 'تم تعديلها يدويًا'
-                    : 'حسب التحقق التلقائي',
+                dataCheck.userOverride == DataCheckOverride.automatic
+                    ? 'حسب التحقق التلقائي'
+                    : 'تم تعديلها يدويًا',
                 style: textTheme.bodySmall,
               ),
               Text(

@@ -17,7 +17,7 @@ mixin _$DataCheck {
   bool get isComplete;
   bool get familyCheck;
   bool get addressCheck;
-  bool? get userOverride;
+  DataCheckOverride get userOverride;
   String get familyId;
   List<DataCheckDetail> get checksDetails;
 
@@ -82,7 +82,7 @@ abstract mixin class $DataCheckCopyWith<$Res> {
     bool familyCheck,
     bool addressCheck,
     List<DataCheckDetail> checksDetails,
-    bool? userOverride,
+    DataCheckOverride userOverride,
   });
 }
 
@@ -104,7 +104,7 @@ class _$DataCheckCopyWithImpl<$Res> implements $DataCheckCopyWith<$Res> {
     Object? familyCheck = null,
     Object? addressCheck = null,
     Object? checksDetails = null,
-    Object? userOverride = freezed,
+    Object? userOverride = null,
   }) {
     return _then(
       DataCheck(
@@ -132,10 +132,10 @@ class _$DataCheckCopyWithImpl<$Res> implements $DataCheckCopyWith<$Res> {
             ? _self.checksDetails
             : checksDetails // ignore: cast_nullable_to_non_nullable
                   as List<DataCheckDetail>,
-        userOverride: freezed == userOverride
+        userOverride: null == userOverride
             ? _self.userOverride
             : userOverride // ignore: cast_nullable_to_non_nullable
-                  as bool?,
+                  as DataCheckOverride,
       ),
     );
   }

@@ -56,11 +56,7 @@ class DataCheckOverrideSelector extends StatelessWidget {
                         label: Text(override.label),
                       ),
                   ],
-                  selected: {
-                    DataCheckOverride.fromBoolean(
-                      state.dataCheck.userOverride,
-                    ),
-                  },
+                  selected: {state.dataCheck.userOverride},
                   onSelectionChanged: canOverride && !state.isSaving
                       ? (selection) => context
                             .read<DataCheckOverrideCubit>()

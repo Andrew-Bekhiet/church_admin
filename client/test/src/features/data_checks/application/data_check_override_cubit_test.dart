@@ -8,13 +8,15 @@ import '../../../utils.dart';
 void main() {
   group('DataCheckOverrideCubit', () {
     final incomplete = DataCheck(familyId: 'family', familyCheck: true);
-    final markedComplete = incomplete.withUserOverride(true);
+    final markedComplete = incomplete.withUserOverride(
+      DataCheckOverride.markedComplete,
+    );
     final markedIncomplete = DataCheck(
       familyId: incomplete.familyId,
       familyCheck: true,
       addressCheck: true,
       isComplete: true,
-    ).withUserOverride(false);
+    ).withUserOverride(DataCheckOverride.markedIncomplete);
 
     late _MockDataChecksDAO dao;
 
@@ -86,7 +88,9 @@ void main() {
       build: () => cubitFor(markedIncomplete),
       act: (cubit) => cubit.choose(DataCheckOverride.automatic),
       expect: () {
-        final automatic = markedIncomplete.withUserOverride(null);
+        final automatic = markedIncomplete.withUserOverride(
+          DataCheckOverride.automatic,
+        );
 
         return [
           DataCheckOverrideState(dataCheck: automatic, isSaving: true),
@@ -104,7 +108,9 @@ void main() {
       act: (cubit) => cubit.choose(DataCheckOverride.automatic),
       expect: () => [
         DataCheckOverrideState(
-          dataCheck: markedIncomplete.withUserOverride(null),
+          dataCheck: markedIncomplete.withUserOverride(
+            DataCheckOverride.automatic,
+          ),
           isSaving: true,
         ),
         DataCheckOverrideState(
