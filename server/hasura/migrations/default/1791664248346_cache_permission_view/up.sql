@@ -1,3 +1,17 @@
+-- Writers to the permission inputs wait until the cache and its sync triggers
+-- commit together, so no change lands between the build and the triggers.
+lock table
+auth.users_admin_on,
+auth.users_data,
+auth.users_permissions,
+public.addresses,
+public.areas_streets,
+public.classes,
+public.persons,
+public.persons_groups,
+public.persons_services
+in share mode;
+
 create table if not exists auth.users_permissions_by_entity_id_cache as
 select
     uid,
