@@ -21,7 +21,8 @@ class FiltersBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final filterableFields = queryableType.fieldsMetadata.where(
-      (field) => !field.isCodeOnly,
+      (field) =>
+          !field.isCodeOnly && DataChecksFlagFieldFilter.isFieldAllowed(field),
     );
 
     return Column(
@@ -129,7 +130,11 @@ class FilterBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final filterableFields = queryableType.fieldsMetadata
-        .where((field) => !field.isCodeOnly)
+        .where(
+          (field) =>
+              !field.isCodeOnly &&
+              DataChecksFlagFieldFilter.isFieldAllowed(field),
+        )
         .toList();
 
     final Filter(:field, :operator, :value) = filter;

@@ -69,7 +69,10 @@ class OrderByBottomSheet extends StatelessWidget {
                           ...orderByValue,
                           OrderBy(
                             field: queryableType.fieldsMetadata.firstWhere(
-                              (f) => !f.name.endsWith('id') && f.isOrderable,
+                              (f) =>
+                                  !f.name.endsWith('id') &&
+                                  f.isOrderable &&
+                                  DataChecksFlagFieldFilter.isFieldAllowed(f),
                             ),
                           ),
                         ],

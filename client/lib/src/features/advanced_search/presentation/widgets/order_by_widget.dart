@@ -20,7 +20,12 @@ class OrderByWidget extends StatelessWidget {
     final themeData = Theme.of(context);
 
     final orderableFields = selectedQueryableType.fieldsMetadata
-        .where((p) => p.isOrderable && !p.isCodeOnly)
+        .where(
+          (p) =>
+              p.isOrderable &&
+              !p.isCodeOnly &&
+              DataChecksFlagFieldFilter.isFieldAllowed(p),
+        )
         .toList();
 
     final FieldMetadata field = orderBy.field;
