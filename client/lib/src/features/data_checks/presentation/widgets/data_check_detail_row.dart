@@ -16,6 +16,7 @@ class DataCheckDetailRow extends StatelessWidget {
       children: [
         Icon(
           detail.passed ? Symbols.check_circle : Symbols.cancel,
+          semanticLabel: detail.passed ? 'اجتاز الفحص' : 'لم يجتز الفحص',
           fill: 1,
           color: detail.passed
               ? DataCheckColors.of(context).complete

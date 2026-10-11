@@ -102,6 +102,32 @@ void main() {
       },
     );
 
+    testWidgets('check results are announced in an Arabic RTL report', (
+      tester,
+    ) async {
+      final semantics = tester.ensureSemantics();
+      await tester.pumpWidget(
+        materialAppWithThemeAndLocale()(
+          Scaffold(
+            body: Column(
+              children: [
+                DataCheckDetailRow(detail: passedDetail),
+                DataCheckDetailRow(detail: failedDetail),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      expect(find.bySemanticsLabel('اجتاز الفحص'), findsOneWidget);
+      expect(find.bySemanticsLabel('لم يجتز الفحص'), findsOneWidget);
+      expect(
+        Directionality.of(tester.element(find.byType(Column).first)),
+        TextDirection.rtl,
+      );
+      semantics.dispose();
+    });
+
     testWidgets('the report explains how the manual override works', (
       tester,
     ) async {
