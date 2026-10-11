@@ -17,7 +17,7 @@ void main() {
       );
       expect(
         dataCheck.withUserOverride(DataCheckOverride.automatic).userOverride,
-        isNull,
+        DataCheckOverride.automatic,
       );
     });
 
@@ -34,7 +34,7 @@ void main() {
       );
 
       expect(overridden.isComplete, isFalse);
-      expect(overridden.userOverride, isFalse);
+      expect(overridden.userOverride, DataCheckOverride.markedIncomplete);
     });
 
     test('marking complete shows an automatically incomplete family', () {

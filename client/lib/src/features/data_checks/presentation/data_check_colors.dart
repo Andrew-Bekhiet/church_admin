@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DataCheckColors extends ThemeExtension<DataCheckColors> {
-  static const Color seedColor = Color(0xFF2E7D32);
+  static const Color _defaultSeedColor = Color(0xFF2E7D32);
 
   final Color complete;
 
@@ -9,7 +9,7 @@ class DataCheckColors extends ThemeExtension<DataCheckColors> {
 
   factory DataCheckColors.forScheme(ColorScheme scheme) {
     final green = ColorScheme.fromSeed(
-      seedColor: seedColor,
+      seedColor: _defaultSeedColor,
       brightness: scheme.brightness,
     );
 
