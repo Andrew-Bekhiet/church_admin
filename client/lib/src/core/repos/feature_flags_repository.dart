@@ -26,6 +26,7 @@ class FeatureFlagsRepository {
   static const String enablePersonNationalIdKey = 'enablePersonNationalId';
   static const String enableAccountClaimingByEmailKey =
       'enableAccountClaimingByEmail';
+  static const String enableDataChecksKey = 'enableDataChecks';
 
   final FirebaseRemoteConfig _remoteConfig;
   final PackageInfo _packageInfo;
@@ -52,6 +53,8 @@ class FeatureFlagsRepository {
 
   bool get enableAccountClaimingByEmail =>
       _remoteConfig.getBool(enableAccountClaimingByEmailKey);
+
+  bool get enableDataChecks => _remoteConfig.getBool(enableDataChecksKey);
 
   String? get forceUpdateMessage {
     final rawValue = _remoteConfig.getString(forceUpdateMessageKey);
@@ -131,6 +134,7 @@ class FeatureFlagsRepository {
       sessionReplaySampleRateKey: 1,
       enablePersonNationalIdKey: false,
       enableAccountClaimingByEmailKey: true,
+      enableDataChecksKey: true,
       allowAddingCustomObjectsKey: [
         advancedQueriesMetadata.district.name,
         advancedQueriesMetadata.college.name,
