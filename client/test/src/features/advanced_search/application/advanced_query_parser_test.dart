@@ -118,7 +118,7 @@ void main() {
                   LastRecordedByInfoFields().time,
                 ),
                 DateTimeOperator.isAfter,
-                DateTime.utc(2026, 10, 1),
+                DateTime.utc(2026, 10),
               ),
             ],
             orderBy: [
@@ -139,7 +139,7 @@ void main() {
                   {
                     'lastEdit': {
                       'time': {
-                        '_gt': DateTime.utc(2026, 10, 1).toIso8601String(),
+                        '_gt': DateTime.utc(2026, 10).toIso8601String(),
                       },
                     },
                   },
@@ -199,7 +199,7 @@ void main() {
       test(
         'person searches preserve nested logical conditions and the requested limit',
         () async {
-          final dateValue = DateTime.utc(2026, 10, 1);
+          final dateValue = DateTime.utc(2026, 10);
           final query = AdvancedQuery(
             queryableType: AdvancedQueriesMetadata().person,
             logicalOperator: LogicalOperator.or,
