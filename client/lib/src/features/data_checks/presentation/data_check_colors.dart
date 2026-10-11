@@ -4,16 +4,8 @@ class DataCheckColors extends ThemeExtension<DataCheckColors> {
   static const Color seedColor = Color(0xFF2E7D32);
 
   final Color complete;
-  final Color onComplete;
-  final Color completeContainer;
-  final Color onCompleteContainer;
 
-  const DataCheckColors({
-    required this.complete,
-    required this.onComplete,
-    required this.completeContainer,
-    required this.onCompleteContainer,
-  });
+  const DataCheckColors({required this.complete});
 
   factory DataCheckColors.forScheme(ColorScheme scheme) {
     final green = ColorScheme.fromSeed(
@@ -21,12 +13,7 @@ class DataCheckColors extends ThemeExtension<DataCheckColors> {
       brightness: scheme.brightness,
     );
 
-    return DataCheckColors(
-      complete: green.primary,
-      onComplete: green.onPrimary,
-      completeContainer: green.primaryContainer,
-      onCompleteContainer: green.onPrimaryContainer,
-    );
+    return DataCheckColors(complete: green.primary);
   }
 
   factory DataCheckColors.of(BuildContext context) =>
@@ -34,17 +21,8 @@ class DataCheckColors extends ThemeExtension<DataCheckColors> {
       DataCheckColors.forScheme(ColorScheme.of(context));
 
   @override
-  DataCheckColors copyWith({
-    Color? complete,
-    Color? onComplete,
-    Color? completeContainer,
-    Color? onCompleteContainer,
-  }) => DataCheckColors(
-    complete: complete ?? this.complete,
-    onComplete: onComplete ?? this.onComplete,
-    completeContainer: completeContainer ?? this.completeContainer,
-    onCompleteContainer: onCompleteContainer ?? this.onCompleteContainer,
-  );
+  DataCheckColors copyWith({Color? complete}) =>
+      DataCheckColors(complete: complete ?? this.complete);
 
   @override
   DataCheckColors lerp(DataCheckColors? other, double t) {
@@ -52,13 +30,6 @@ class DataCheckColors extends ThemeExtension<DataCheckColors> {
 
     return DataCheckColors(
       complete: Color.lerp(complete, other.complete, t) ?? complete,
-      onComplete: Color.lerp(onComplete, other.onComplete, t) ?? onComplete,
-      completeContainer:
-          Color.lerp(completeContainer, other.completeContainer, t) ??
-          completeContainer,
-      onCompleteContainer:
-          Color.lerp(onCompleteContainer, other.onCompleteContainer, t) ??
-          onCompleteContainer,
     );
   }
 }

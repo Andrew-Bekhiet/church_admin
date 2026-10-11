@@ -14,13 +14,13 @@ class DataCheckOverrideCubit extends Cubit<DataCheckOverrideState> {
     if (state.isSaving) return;
 
     final previous = state.dataCheck;
-    if (DataCheckOverride.fromUserOverride(previous.userOverride) == override) {
+    if (DataCheckOverride.fromBoolean(previous.userOverride) == override) {
       return;
     }
 
     emit(
       DataCheckOverrideState(
-        dataCheck: previous.withUserOverride(override.userOverride),
+        dataCheck: previous.withUserOverride(override.asBoolean),
         isSaving: true,
       ),
     );
@@ -41,7 +41,7 @@ class DataCheckOverrideCubit extends Cubit<DataCheckOverrideState> {
     DataCheckOverride override,
   ) async {
     try {
-      if (override.userOverride case final isComplete?) {
+      if (override.asBoolean case final isComplete?) {
         final applied = await _dao.tryOverride(
           familyId: familyId,
           isComplete: isComplete,

@@ -38,11 +38,15 @@ void main() {
     test('marking complete lifts the completeness to 100', () {
       final dataCheck = DataCheck(
         familyId: 'family',
-        details: const [
-          DataCheckItem(group: DataCheckGroup.family, check: 'a', passed: true),
-          DataCheckItem(
+        checksDetails: const [
+          DataCheckDetail(
             group: DataCheckGroup.family,
-            check: 'b',
+            check: DataCheckRule.hasAddress,
+            passed: true,
+          ),
+          DataCheckDetail(
+            group: DataCheckGroup.family,
+            check: DataCheckRule.hasArea,
             passed: false,
           ),
         ],
@@ -54,8 +58,12 @@ void main() {
     test('marking incomplete caps a fully passing family at 99', () {
       final dataCheck = DataCheck(
         familyId: 'family',
-        details: const [
-          DataCheckItem(group: DataCheckGroup.family, check: 'a', passed: true),
+        checksDetails: const [
+          DataCheckDetail(
+            group: DataCheckGroup.family,
+            check: DataCheckRule.hasAddress,
+            passed: true,
+          ),
         ],
       );
 
@@ -67,16 +75,20 @@ void main() {
         familyId: 'family',
         completenessPercent: 100,
         userOverride: true,
-        details: const [
-          DataCheckItem(group: DataCheckGroup.family, check: 'a', passed: true),
-          DataCheckItem(
+        checksDetails: const [
+          DataCheckDetail(
             group: DataCheckGroup.family,
-            check: 'b',
+            check: DataCheckRule.hasAddress,
+            passed: true,
+          ),
+          DataCheckDetail(
+            group: DataCheckGroup.family,
+            check: DataCheckRule.hasArea,
             passed: false,
           ),
-          DataCheckItem(
+          DataCheckDetail(
             group: DataCheckGroup.family,
-            check: 'c',
+            check: DataCheckRule.hasStreet,
             passed: false,
           ),
         ],
@@ -103,48 +115,24 @@ void main() {
       },
     );
 
-    test('check keys without a known label show the raw key', () {
-      final item = DataCheckItem.fromJson({
+    test('a check key the app does not know parses to the unknown rule', () {
+      final detail = DataCheckDetail.fromJson({
         'group': 'family',
         'check': 'brand_new_check',
         'passed': true,
       });
 
-      expect(item.label, 'brand_new_check');
-    });
-
-    test('details group in the order the server sent them', () {
-      final dataCheck = DataCheck.fromJson(const {
-        'familyId': 'family',
-        'details': [
-          {'group': 'family', 'check': 'has_family_admin', 'passed': true},
-          {'group': 'family', 'check': 'has_non_admin_member', 'passed': false},
-          {'group': 'address', 'check': 'has_address', 'passed': true},
-        ],
-      });
-
-      expect(
-        {
-          for (final MapEntry(:key, :value) in dataCheck.itemsByGroup.entries)
-            key: [for (final item in value) item.check],
-        },
-        {
-          DataCheckGroup.family: ['has_family_admin', 'has_non_admin_member'],
-          DataCheckGroup.address: ['has_address'],
-        },
-      );
-      expect(dataCheck.passedCount, 2);
-      expect(dataCheck.totalCount, 3);
+      expect(detail.check, DataCheckRule.unknown);
     });
 
     test('a group the app does not know falls under other', () {
-      final item = DataCheckItem.fromJson({
+      final detail = DataCheckDetail.fromJson({
         'group': 'finance',
         'check': 'has_budget',
         'passed': false,
       });
 
-      expect(item.group, DataCheckGroup.other);
+      expect(detail.group, DataCheckGroup.other);
     });
 
     test('a missing verdict from the server reads as incomplete', () {

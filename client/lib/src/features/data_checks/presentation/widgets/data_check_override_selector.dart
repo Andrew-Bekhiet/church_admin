@@ -57,7 +57,7 @@ class DataCheckOverrideSelector extends StatelessWidget {
                       ),
                   ],
                   selected: {
-                    DataCheckOverride.fromUserOverride(
+                    DataCheckOverride.fromBoolean(
                       state.dataCheck.userOverride,
                     ),
                   },

@@ -93,10 +93,11 @@ DataCheck _$DataCheckFromJson(Map json) => DataCheck(
   isComplete: json['isComplete'] as bool? ?? false,
   familyCheck: json['familyCheck'] as bool? ?? false,
   addressCheck: json['addressCheck'] as bool? ?? false,
-  details:
+  checksDetails:
       (json['details'] as List<dynamic>?)
           ?.map(
-            (e) => DataCheckItem.fromJson(Map<String, Object?>.from(e as Map)),
+            (e) =>
+                DataCheckDetail.fromJson(Map<String, Object?>.from(e as Map)),
           )
           .toList() ??
       [],
@@ -110,5 +111,5 @@ Map<String, dynamic> _$DataCheckToJson(DataCheck instance) => <String, dynamic>{
   'addressCheck': instance.addressCheck,
   'userOverride': instance.userOverride,
   'familyId': instance.familyId,
-  'details': instance.details.map((e) => e.toJson()).toList(),
+  'details': instance.checksDetails.map((e) => e.toJson()).toList(),
 };

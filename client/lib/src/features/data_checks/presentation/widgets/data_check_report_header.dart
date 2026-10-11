@@ -1,11 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class DataCheckReportHeader extends StatelessWidget {
   static const double _emblemSize = 56;
-  static const double _ringStrokeWidth = 5;
-  static const int _percentFull = 100;
 
   final DataCheck dataCheck;
 
@@ -14,57 +11,16 @@ class DataCheckReportHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
-    final colorScheme = ColorScheme.of(context);
-    final colors = DataCheckColors.of(context);
-
-    final Widget emblem = dataCheck.isComplete
-        ? DecoratedBox(
-            decoration: ShapeDecoration(
-              shape: const CircleBorder(),
-              color: colors.completeContainer,
-            ),
-            child: Center(
-              child: Icon(
-                Symbols.workspace_premium,
-                fill: 1,
-                size: _emblemSize / 2,
-                color: colors.onCompleteContainer,
-              ),
-            ),
-          )
-        : Stack(
-            alignment: AlignmentDirectional.center,
-            fit: StackFit.expand,
-            children: [
-              CircularProgressIndicator(
-                value: dataCheck.completenessPercent / _percentFull,
-                strokeWidth: _ringStrokeWidth,
-                color: colors.complete,
-                backgroundColor: colorScheme.outlineVariant,
-              ),
-              Center(
-                child: Text(
-                  '${dataCheck.completenessPercent}٪',
-                  style: textTheme.labelLarge,
-                ),
-              ),
-            ],
-          );
 
     return Row(
       spacing: 16,
       children: [
-        SizedBox.square(dimension: _emblemSize, child: emblem),
+        DataCheckEmblem(dataCheck: dataCheck, size: _emblemSize),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                dataCheck.isComplete
-                    ? 'البيانات مكتملة'
-                    : 'البيانات غير مكتملة',
-                style: textTheme.titleMedium,
-              ),
+              Text(dataCheck.completenessLabel, style: textTheme.titleMedium),
               Text(
                 dataCheck.userOverride != null
                     ? 'تم تعديلها يدويًا'
@@ -72,7 +28,7 @@ class DataCheckReportHeader extends StatelessWidget {
                 style: textTheme.bodySmall,
               ),
               Text(
-                'اجتاز ${dataCheck.passedCount} من ${dataCheck.totalCount} فحوصات',
+                'اجتاز ${dataCheck.passedChecksCount} من ${dataCheck.totalChecksCount} فحوصات',
                 style: textTheme.bodySmall,
               ),
             ],

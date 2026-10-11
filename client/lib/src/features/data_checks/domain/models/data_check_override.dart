@@ -5,7 +5,7 @@ enum DataCheckOverride {
 
   final String label;
 
-  bool? get userOverride => switch (this) {
+  bool? get asBoolean => switch (this) {
     automatic => null,
     markedComplete => true,
     markedIncomplete => false,
@@ -13,7 +13,7 @@ enum DataCheckOverride {
 
   const DataCheckOverride(this.label);
 
-  static DataCheckOverride fromUserOverride(bool? value) => switch (value) {
+  static DataCheckOverride fromBoolean(bool? value) => switch (value) {
     null => automatic,
     true => markedComplete,
     false => markedIncomplete,

@@ -27,10 +27,6 @@ class DataCheckReportDialog extends StatelessWidget {
     final textTheme = TextTheme.of(context);
 
     return BlocBuilder<DataCheckOverrideCubit, DataCheckOverrideState>(
-      buildWhen: (previous, current) =>
-          previous.dataCheck.isComplete != current.dataCheck.isComplete ||
-          previous.dataCheck.userOverride != current.dataCheck.userOverride ||
-          previous.isSaving != current.isSaving,
       builder: (context, state) {
         final dataCheck = state.dataCheck;
 
@@ -45,13 +41,14 @@ class DataCheckReportDialog extends StatelessWidget {
               children: [
                 DataCheckReportHeader(dataCheck: dataCheck),
                 for (final MapEntry(:key, :value)
-                    in dataCheck.itemsByGroup.entries)
+                    in dataCheck.groupedChecks.entries)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 8,
                     children: [
                       Text(key.label, style: textTheme.titleSmall),
-                      for (final item in value) DataCheckItemRow(item: item),
+                      for (final detail in value)
+                        DataCheckDetailRow(detail: detail),
                     ],
                   ),
                 const Divider(),
@@ -66,7 +63,9 @@ class DataCheckReportDialog extends StatelessWidget {
                           const JsonEncoder.withIndent(
                             '  ',
                           ).convert(
-                            dataCheck.details.map((i) => i.toJson()).toList(),
+                            dataCheck.checksDetails
+                                .map((i) => i.toJson())
+                                .toList(),
                           ),
                           style: textTheme.bodySmall,
                         ),

@@ -10,29 +10,28 @@ import '../../../utils.dart';
 
 void main() {
   group('DataCheckIndicator', () {
-    const items = [
-      DataCheckItem(
-        group: DataCheckGroup.family,
-        check: 'has_family_admin',
-        passed: true,
-      ),
-      DataCheckItem(
-        group: DataCheckGroup.address,
-        check: 'has_street',
-        passed: false,
-      ),
-    ];
+    const passedDetail = DataCheckDetail(
+      group: DataCheckGroup.family,
+      check: DataCheckRule.hasFamilyAdmin,
+      passed: true,
+    );
+    const failedDetail = DataCheckDetail(
+      group: DataCheckGroup.address,
+      check: DataCheckRule.hasStreet,
+      passed: false,
+    );
+    const details = [passedDetail, failedDetail];
     final incomplete = DataCheck(
       familyId: 'family',
       completenessPercent: 37,
-      details: items,
+      checksDetails: details,
     );
     final complete = DataCheck(
       familyId: 'family',
       isComplete: true,
       familyCheck: true,
       addressCheck: true,
-      details: items,
+      checksDetails: details,
     );
 
     late _MockDataChecksDAO dao;
@@ -67,8 +66,8 @@ void main() {
     ) async {
       await pumpIndicator(tester, complete);
 
-      expect(find.byKey(DataCheckIndicator.completeBadgeKey), findsOneWidget);
-      expect(find.byKey(DataCheckIndicator.progressRingKey), findsNothing);
+      expect(find.byKey(DataCheckEmblem.completeBadgeKey), findsOneWidget);
+      expect(find.byKey(DataCheckEmblem.progressRingKey), findsNothing);
     });
 
     testWidgets('an incomplete family shows how far it is from complete', (
@@ -77,10 +76,10 @@ void main() {
       await pumpIndicator(tester, incomplete);
 
       final ring = tester.widget<CircularProgressIndicator>(
-        find.byKey(DataCheckIndicator.progressRingKey),
+        find.byKey(DataCheckEmblem.progressRingKey),
       );
-      expect(ring.value, 0.37);
-      expect(find.byKey(DataCheckIndicator.completeBadgeKey), findsNothing);
+      expect(ring.value, incomplete.completenessPercent / 100);
+      expect(find.byKey(DataCheckEmblem.completeBadgeKey), findsNothing);
     });
 
     testWidgets(
@@ -91,15 +90,15 @@ void main() {
         await tester.tap(find.byType(DataCheckIndicator));
         await tester.pumpAndSettle();
 
-        Finder iconIn(String check) => find.descendant(
-          of: find.byKey(ValueKey('dataCheckItem.$check')),
+        Finder iconIn(DataCheckDetail detail) => find.descendant(
+          of: find.byKey(DataCheckDetailRow.keyFor(detail)),
           matching: find.byType(Icon),
         );
         expect(
-          tester.widget<Icon>(iconIn('has_family_admin')).icon,
+          tester.widget<Icon>(iconIn(passedDetail)).icon,
           Symbols.check_circle,
         );
-        expect(tester.widget<Icon>(iconIn('has_street')).icon, Symbols.cancel);
+        expect(tester.widget<Icon>(iconIn(failedDetail)).icon, Symbols.cancel);
       },
     );
 
@@ -133,7 +132,7 @@ void main() {
     ) async {
       final save = Completer<bool>();
       when(
-        () => dao.tryOverride(familyId: 'family', isComplete: true),
+        () => dao.tryOverride(familyId: incomplete.familyId, isComplete: true),
       ).thenAnswer((_) => save.future);
       await pumpIndicator(tester, incomplete);
       await tester.tap(find.byType(DataCheckIndicator));

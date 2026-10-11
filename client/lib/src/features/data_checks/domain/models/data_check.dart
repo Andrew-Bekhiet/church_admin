@@ -11,9 +11,7 @@ part 'data_check.g.dart';
 @freezed
 @JsonSerializable()
 @Queryable(label: 'اكتمال البيانات')
-class DataCheck extends ViewableWithID
-    with _$DataCheck
-    implements SerializableExtra {
+class DataCheck with _$DataCheck implements ID, SerializableExtra {
   static const int _percentCap = 99;
   static const int _percentFull = 100;
 
@@ -45,32 +43,33 @@ class DataCheck extends ViewableWithID
   final String familyId;
 
   @override
-  @JsonKey(defaultValue: <DataCheckItem>[])
-  final List<DataCheckItem> details;
+  @JsonKey(name: 'details', defaultValue: <DataCheckDetail>[])
+  final List<DataCheckDetail> checksDetails;
 
   @override
   String get id => familyId;
 
   @override
-  String get name => isComplete ? 'البيانات مكتملة' : 'البيانات غير مكتملة';
-
-  @override
   String get typeName => AdvancedQueriesMetadata().dataCheck.name;
+
+  String get completenessLabel =>
+      isComplete ? 'البيانات مكتملة' : 'اكتمال البيانات: $completenessPercent٪';
 
   bool get automaticVerdict => familyCheck && addressCheck;
 
-  int get passedCount => details.where((item) => item.passed).length;
+  int get passedChecksCount =>
+      checksDetails.where((detail) => detail.passed).length;
 
-  int get totalCount => details.length;
+  int get totalChecksCount => checksDetails.length;
 
-  int get automaticPercent => switch (totalCount) {
+  int get automaticPercent => switch (totalChecksCount) {
     0 when automaticVerdict => _percentFull,
     0 => 0,
-    _ => passedCount * _percentFull ~/ totalCount,
+    _ => passedChecksCount * _percentFull ~/ totalChecksCount,
   };
 
-  Map<DataCheckGroup, List<DataCheckItem>> get itemsByGroup =>
-      details.groupListsBy((item) => item.group);
+  Map<DataCheckGroup, List<DataCheckDetail>> get groupedChecks =>
+      checksDetails.groupListsBy((detail) => detail.group);
 
   DataCheck({
     required this.familyId,
@@ -78,7 +77,7 @@ class DataCheck extends ViewableWithID
     this.isComplete = false,
     this.familyCheck = false,
     this.addressCheck = false,
-    this.details = const [],
+    this.checksDetails = const [],
     this.userOverride,
   });
 
@@ -96,7 +95,7 @@ class DataCheck extends ViewableWithID
     familyCheck: familyCheck,
     addressCheck: addressCheck,
     userOverride: userOverride,
-    details: details,
+    checksDetails: checksDetails,
   );
 
   @override

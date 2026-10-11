@@ -19,7 +19,7 @@ mixin _$DataCheck {
   bool get addressCheck;
   bool? get userOverride;
   String get familyId;
-  List<DataCheckItem> get details;
+  List<DataCheckDetail> get checksDetails;
 
   /// Create a copy of DataCheck
   /// with the given fields replaced by the non-null parameter values.
@@ -45,7 +45,10 @@ mixin _$DataCheck {
                 other.userOverride == userOverride) &&
             (identical(other.familyId, familyId) ||
                 other.familyId == familyId) &&
-            const DeepCollectionEquality().equals(other.details, details));
+            const DeepCollectionEquality().equals(
+              other.checksDetails,
+              checksDetails,
+            ));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -58,12 +61,12 @@ mixin _$DataCheck {
     addressCheck,
     userOverride,
     familyId,
-    const DeepCollectionEquality().hash(details),
+    const DeepCollectionEquality().hash(checksDetails),
   );
 
   @override
   String toString() {
-    return 'DataCheck(completenessPercent: $completenessPercent, isComplete: $isComplete, familyCheck: $familyCheck, addressCheck: $addressCheck, userOverride: $userOverride, familyId: $familyId, details: $details)';
+    return 'DataCheck(completenessPercent: $completenessPercent, isComplete: $isComplete, familyCheck: $familyCheck, addressCheck: $addressCheck, userOverride: $userOverride, familyId: $familyId, checksDetails: $checksDetails)';
   }
 }
 
@@ -78,7 +81,7 @@ abstract mixin class $DataCheckCopyWith<$Res> {
     bool isComplete,
     bool familyCheck,
     bool addressCheck,
-    List<DataCheckItem> details,
+    List<DataCheckDetail> checksDetails,
     bool? userOverride,
   });
 }
@@ -100,7 +103,7 @@ class _$DataCheckCopyWithImpl<$Res> implements $DataCheckCopyWith<$Res> {
     Object? isComplete = null,
     Object? familyCheck = null,
     Object? addressCheck = null,
-    Object? details = null,
+    Object? checksDetails = null,
     Object? userOverride = freezed,
   }) {
     return _then(
@@ -125,10 +128,10 @@ class _$DataCheckCopyWithImpl<$Res> implements $DataCheckCopyWith<$Res> {
             ? _self.addressCheck
             : addressCheck // ignore: cast_nullable_to_non_nullable
                   as bool,
-        details: null == details
-            ? _self.details
-            : details // ignore: cast_nullable_to_non_nullable
-                  as List<DataCheckItem>,
+        checksDetails: null == checksDetails
+            ? _self.checksDetails
+            : checksDetails // ignore: cast_nullable_to_non_nullable
+                  as List<DataCheckDetail>,
         userOverride: freezed == userOverride
             ? _self.userOverride
             : userOverride // ignore: cast_nullable_to_non_nullable

@@ -10,7 +10,7 @@ void main() {
     final incomplete = DataCheck(familyId: 'family', familyCheck: true);
     final markedComplete = incomplete.withUserOverride(true);
     final markedIncomplete = DataCheck(
-      familyId: 'family',
+      familyId: incomplete.familyId,
       familyCheck: true,
       addressCheck: true,
       isComplete: true,
@@ -36,7 +36,7 @@ void main() {
     blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
       'marking complete shows complete immediately and stays complete after the save',
       setUp: () => when(
-        () => dao.tryOverride(familyId: 'family', isComplete: true),
+        () => dao.tryOverride(familyId: incomplete.familyId, isComplete: true),
       ).thenAnswer((_) async => true),
       build: () => cubitFor(incomplete),
       act: (cubit) => cubit.choose(DataCheckOverride.markedComplete),
@@ -49,7 +49,7 @@ void main() {
     blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
       'a refused override reverts and reports that the user is not permitted',
       setUp: () => when(
-        () => dao.tryOverride(familyId: 'family', isComplete: true),
+        () => dao.tryOverride(familyId: incomplete.familyId, isComplete: true),
       ).thenAnswer((_) async => false),
       build: () => cubitFor(incomplete),
       act: (cubit) => cubit.choose(DataCheckOverride.markedComplete),
@@ -65,7 +65,7 @@ void main() {
     blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
       'a failing save reverts and reports that saving failed',
       setUp: () => when(
-        () => dao.tryOverride(familyId: 'family', isComplete: true),
+        () => dao.tryOverride(familyId: incomplete.familyId, isComplete: true),
       ).thenThrow(Exception('offline')),
       build: () => cubitFor(incomplete),
       act: (cubit) => cubit.choose(DataCheckOverride.markedComplete),
@@ -81,7 +81,7 @@ void main() {
     blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
       'choosing automatic clears the override and shows the automatic verdict',
       setUp: () => when(
-        () => dao.tryClearOverride(familyId: 'family'),
+        () => dao.tryClearOverride(familyId: incomplete.familyId),
       ).thenAnswer((_) async => true),
       build: () => cubitFor(markedIncomplete),
       act: (cubit) => cubit.choose(DataCheckOverride.automatic),
@@ -98,7 +98,7 @@ void main() {
     blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
       'a refused clear reverts to the manual verdict and reports notPermitted',
       setUp: () => when(
-        () => dao.tryClearOverride(familyId: 'family'),
+        () => dao.tryClearOverride(familyId: incomplete.familyId),
       ).thenAnswer((_) async => false),
       build: () => cubitFor(markedIncomplete),
       act: (cubit) => cubit.choose(DataCheckOverride.automatic),
@@ -117,7 +117,7 @@ void main() {
     blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
       'a second choice while a save is pending is ignored',
       setUp: () => when(
-        () => dao.tryOverride(familyId: 'family', isComplete: true),
+        () => dao.tryOverride(familyId: incomplete.familyId, isComplete: true),
       ).thenAnswer((_) async => true),
       build: () => cubitFor(incomplete),
       act: (cubit) async {
