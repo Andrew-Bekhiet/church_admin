@@ -16,6 +16,11 @@ UserPreferences _$UserPreferencesFromJson(Map json) => UserPreferences(
         (k, e) => MapEntry(k as String, e),
       ) ??
       {},
+  secondLinePreferences:
+      (json['secondLinePreferences'] as Map?)?.map(
+        (k, e) => MapEntry(k as String, e),
+      ) ??
+      {},
   greatFeastTheme: json['greatFeastTheme'] as bool? ?? true,
   darkTheme: json['darkTheme'] as bool?,
   lastHomeMode: $enumDecodeNullable(_$HomeModeEnumMap, json['lastHomeMode']),
@@ -29,6 +34,7 @@ Map<String, dynamic> _$UserPreferencesToJson(UserPreferences instance) =>
     <String, dynamic>{
       'uid': instance.uid,
       'orderByPreferences': instance.orderByPreferences,
+      'secondLinePreferences': instance.secondLinePreferences,
       'darkTheme': instance.darkTheme,
       'greatFeastTheme': instance.greatFeastTheme,
       'lastHomeMode': _$HomeModeEnumMap[instance.lastHomeMode],

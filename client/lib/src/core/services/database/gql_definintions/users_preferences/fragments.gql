@@ -1,6 +1,7 @@
 fragment UserPreferences on UsersPreferences {
   uid
   orderByPreferences
+  secondLinePreferences
   darkTheme
   greatFeastTheme
   lastHomeMode

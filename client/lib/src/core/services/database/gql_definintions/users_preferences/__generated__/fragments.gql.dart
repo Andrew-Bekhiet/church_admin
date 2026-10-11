@@ -5,6 +5,7 @@ class Fragment_UserPreferences {
   Fragment_UserPreferences({
     required this.uid,
     required this.orderByPreferences,
+    required this.secondLinePreferences,
     this.darkTheme,
     required this.greatFeastTheme,
     this.lastHomeMode,
@@ -15,6 +16,7 @@ class Fragment_UserPreferences {
   factory Fragment_UserPreferences.fromJson(Map<String, dynamic> json) {
     final l$uid = json['uid'];
     final l$orderByPreferences = json['orderByPreferences'];
+    final l$secondLinePreferences = json['secondLinePreferences'];
     final l$darkTheme = json['darkTheme'];
     final l$greatFeastTheme = json['greatFeastTheme'];
     final l$lastHomeMode = json['lastHomeMode'];
@@ -23,6 +25,7 @@ class Fragment_UserPreferences {
     return Fragment_UserPreferences(
       uid: stringToUuid(l$uid),
       orderByPreferences: (l$orderByPreferences as Json),
+      secondLinePreferences: (l$secondLinePreferences as Json),
       darkTheme: (l$darkTheme as bool?),
       greatFeastTheme: (l$greatFeastTheme as bool),
       lastHomeMode: (l$lastHomeMode as String?),
@@ -34,6 +37,8 @@ class Fragment_UserPreferences {
   final UuidValue uid;
 
   final Json orderByPreferences;
+
+  final Json secondLinePreferences;
 
   final bool? darkTheme;
 
@@ -51,6 +56,8 @@ class Fragment_UserPreferences {
     _resultData['uid'] = uuidToString(l$uid);
     final l$orderByPreferences = orderByPreferences;
     _resultData['orderByPreferences'] = l$orderByPreferences;
+    final l$secondLinePreferences = secondLinePreferences;
+    _resultData['secondLinePreferences'] = l$secondLinePreferences;
     final l$darkTheme = darkTheme;
     _resultData['darkTheme'] = l$darkTheme;
     final l$greatFeastTheme = greatFeastTheme;
@@ -68,6 +75,7 @@ class Fragment_UserPreferences {
   int get hashCode {
     final l$uid = uid;
     final l$orderByPreferences = orderByPreferences;
+    final l$secondLinePreferences = secondLinePreferences;
     final l$darkTheme = darkTheme;
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
@@ -76,6 +84,7 @@ class Fragment_UserPreferences {
     return Object.hashAll([
       l$uid,
       l$orderByPreferences,
+      l$secondLinePreferences,
       l$darkTheme,
       l$greatFeastTheme,
       l$lastHomeMode,
@@ -101,6 +110,11 @@ class Fragment_UserPreferences {
     final l$orderByPreferences = orderByPreferences;
     final lOther$orderByPreferences = other.orderByPreferences;
     if (l$orderByPreferences != lOther$orderByPreferences) {
+      return false;
+    }
+    final l$secondLinePreferences = secondLinePreferences;
+    final lOther$secondLinePreferences = other.secondLinePreferences;
+    if (l$secondLinePreferences != lOther$secondLinePreferences) {
       return false;
     }
     final l$darkTheme = darkTheme;
@@ -150,6 +164,7 @@ abstract class CopyWith_Fragment_UserPreferences<TRes> {
   TRes call({
     UuidValue? uid,
     Json? orderByPreferences,
+    Json? secondLinePreferences,
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
@@ -171,6 +186,7 @@ class _CopyWithImpl_Fragment_UserPreferences<TRes>
   TRes call({
     Object? uid = _undefined,
     Object? orderByPreferences = _undefined,
+    Object? secondLinePreferences = _undefined,
     Object? darkTheme = _undefined,
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
@@ -185,6 +201,10 @@ class _CopyWithImpl_Fragment_UserPreferences<TRes>
           orderByPreferences == _undefined || orderByPreferences == null
           ? _instance.orderByPreferences
           : (orderByPreferences as Json),
+      secondLinePreferences:
+          secondLinePreferences == _undefined || secondLinePreferences == null
+          ? _instance.secondLinePreferences
+          : (secondLinePreferences as Json),
       darkTheme: darkTheme == _undefined
           ? _instance.darkTheme
           : (darkTheme as bool?),
@@ -213,6 +233,7 @@ class _CopyWithStubImpl_Fragment_UserPreferences<TRes>
   call({
     UuidValue? uid,
     Json? orderByPreferences,
+    Json? secondLinePreferences,
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
@@ -241,6 +262,13 @@ const fragmentDefinitionUserPreferences = FragmentDefinitionNode(
       ),
       FieldNode(
         name: NameNode(value: 'orderByPreferences'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'secondLinePreferences'),
         alias: null,
         arguments: [],
         directives: [],

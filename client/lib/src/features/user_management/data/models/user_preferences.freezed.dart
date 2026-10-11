@@ -15,6 +15,7 @@ T _$identity<T>(T value) => value;
 mixin _$UserPreferences {
   String get uid;
   Json get orderByPreferences;
+  Json get secondLinePreferences;
   bool? get darkTheme;
   bool get greatFeastTheme;
   HomeMode? get lastHomeMode;
@@ -40,6 +41,10 @@ mixin _$UserPreferences {
               other.orderByPreferences,
               orderByPreferences,
             ) &&
+            const DeepCollectionEquality().equals(
+              other.secondLinePreferences,
+              secondLinePreferences,
+            ) &&
             (identical(other.darkTheme, darkTheme) ||
                 other.darkTheme == darkTheme) &&
             (identical(other.greatFeastTheme, greatFeastTheme) ||
@@ -56,6 +61,7 @@ mixin _$UserPreferences {
     runtimeType,
     uid,
     const DeepCollectionEquality().hash(orderByPreferences),
+    const DeepCollectionEquality().hash(secondLinePreferences),
     darkTheme,
     greatFeastTheme,
     lastHomeMode,
@@ -64,7 +70,7 @@ mixin _$UserPreferences {
 
   @override
   String toString() {
-    return 'UserPreferences(uid: $uid, orderByPreferences: $orderByPreferences, darkTheme: $darkTheme, greatFeastTheme: $greatFeastTheme, lastHomeMode: $lastHomeMode, updatedAt: $updatedAt)';
+    return 'UserPreferences(uid: $uid, orderByPreferences: $orderByPreferences, secondLinePreferences: $secondLinePreferences, darkTheme: $darkTheme, greatFeastTheme: $greatFeastTheme, lastHomeMode: $lastHomeMode, updatedAt: $updatedAt)';
   }
 }
 
@@ -78,6 +84,7 @@ abstract mixin class $UserPreferencesCopyWith<$Res> {
   $Res call({
     String uid,
     Map<String, dynamic> orderByPreferences,
+    Map<String, dynamic> secondLinePreferences,
     bool greatFeastTheme,
     bool? darkTheme,
     HomeMode? lastHomeMode,
@@ -100,6 +107,7 @@ class _$UserPreferencesCopyWithImpl<$Res>
   $Res call({
     Object? uid = null,
     Object? orderByPreferences = null,
+    Object? secondLinePreferences = null,
     Object? greatFeastTheme = null,
     Object? darkTheme = freezed,
     Object? lastHomeMode = freezed,
@@ -114,6 +122,10 @@ class _$UserPreferencesCopyWithImpl<$Res>
         orderByPreferences: null == orderByPreferences
             ? _self.orderByPreferences
             : orderByPreferences // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>,
+        secondLinePreferences: null == secondLinePreferences
+            ? _self.secondLinePreferences
+            : secondLinePreferences // ignore: cast_nullable_to_non_nullable
                   as Map<String, dynamic>,
         greatFeastTheme: null == greatFeastTheme
             ? _self.greatFeastTheme
