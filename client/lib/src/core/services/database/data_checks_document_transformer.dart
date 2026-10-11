@@ -5,7 +5,9 @@ class DataChecksDocumentTransformer {
   static final _documentsWithoutDataChecks = Expando<DocumentNode>();
 
   static DocumentNode removeDataChecksIfDisabled(DocumentNode document) {
-    if (FeatureFlagsRepository.I.enableDataChecks) return document;
+    if (FeatureFlagsRepository.I.enableDataChecks) {
+      return document;
+    }
 
     return _documentsWithoutDataChecks[document] ??=
         DataCheckSelectionRemover.removeFrom(document);

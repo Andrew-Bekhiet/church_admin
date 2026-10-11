@@ -7,7 +7,9 @@ class DataCheckSelectionRemover extends TransformingVisitor {
 
   static DocumentNode removeFrom(DocumentNode document) {
     final stripped = transform(document, const [DataCheckSelectionRemover()]);
-    if (stripped == document) return document;
+    if (stripped == document) {
+      return document;
+    }
 
     final fragments = {
       for (final fragment

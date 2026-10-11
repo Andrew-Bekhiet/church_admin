@@ -15,7 +15,9 @@ class OperationVariableCollector extends RecursiveVisitor {
   @override
   void visitFragmentSpreadNode(FragmentSpreadNode node) {
     node.visitChildren(this);
-    if (!reachableFragments.add(node.name.value)) return;
+    if (!reachableFragments.add(node.name.value)) {
+      return;
+    }
 
     fragments[node.name.value]?.accept(this);
   }
