@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/data_check_free_documents.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart';
@@ -7,7 +8,8 @@ import 'package:church_admin/src/core/services/database/gql_definintions/persons
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_notifications_queries.dart';
 import 'package:graphql/client.dart';
 
-class PersonsDAO extends FullCRUDDAO<Person> {
+class PersonsDAO extends FullCRUDDAO<Person>
+    with DataCheckFreeDocuments<Person> {
   late final notificationsQueries = PersonsNotificationsQueries(db: db);
 
   @override
@@ -96,7 +98,7 @@ class PersonsDAO extends FullCRUDDAO<Person> {
 
   Future<Person?> personServicesClassesGroups({required String personId}) {
     final queryOptions = QueryOptions(
-      document: documentNodeQuerypersonServicesClassesGroups,
+      document: transformDocument(documentNodeQuerypersonServicesClassesGroups),
       operationName: 'personServicesClassesGroups',
       variables: Variables_Query_personServicesClassesGroups(
         id: personId.toUuid(),
@@ -128,7 +130,7 @@ class PersonsDAO extends FullCRUDDAO<Person> {
     );
 
     final queryOptions = QueryOptions(
-      document: documentNodeQuerypersonsGeolocations,
+      document: transformDocument(documentNodeQuerypersonsGeolocations),
       operationName: 'personsGeolocations',
       variables: Variables_Query_personsGeolocations(
         getAreas: getAreas,
@@ -206,7 +208,7 @@ class PersonsDAO extends FullCRUDDAO<Person> {
   }) {
     final queryOptions = QueryOptions(
       errorPolicy: ErrorPolicy.all,
-      document: documentNodeQuerypersonHistoryAnalysis,
+      document: transformDocument(documentNodeQuerypersonHistoryAnalysis),
       operationName: 'personHistoryAnalysis',
       variables: Variables_Query_personHistoryAnalysis(
         personId: personId.toUuid(),
@@ -233,7 +235,7 @@ class PersonsDAO extends FullCRUDDAO<Person> {
   }) {
     return graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
-        document: documentNodeMutationupdatePersonSpiritData,
+        document: transformDocument(documentNodeMutationupdatePersonSpiritData),
         operationName: 'updatePersonSpiritData',
         variables: Variables_Mutation_updatePersonSpiritData(
           personId: personId.toUuid(),
