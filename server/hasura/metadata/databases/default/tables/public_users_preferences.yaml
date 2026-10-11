@@ -11,6 +11,7 @@ select_permissions:
       columns:
         - uid
         - order_by_preferences
+        - second_line_preferences
         - dark_theme
         - great_feast_theme
         - last_home_mode
@@ -23,6 +24,7 @@ update_permissions:
     permission:
       columns:
         - order_by_preferences
+        - second_line_preferences
         - dark_theme
         - great_feast_theme
         - last_home_mode
