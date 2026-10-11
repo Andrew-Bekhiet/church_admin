@@ -12,6 +12,31 @@ select_permissions:
         - family_id
         - is_complete
         - user_override
-      filter: {}
+      filter:
+        _or:
+          - _exists:
+              _table: &permissions_view
+                name: users_permissions_by_entity_id_cache
+                schema: auth
+              _where:
+                _and:
+                  - &requesting_user
+                    uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
+          - _exists:
+              _table: *permissions_view
+              _where:
+                _and:
+                  - *requesting_user
+                  - entity_type:
+                      _eq: family
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - family_id
       query_root_fields: []
       subscription_root_fields: []
