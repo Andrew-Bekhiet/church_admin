@@ -85,6 +85,24 @@ void main() {
       expect(dataCheck.withUserOverride(null).completenessPercent, 33);
     });
 
+    test(
+      'clearing an override on a complete check without details reports it '
+      'fully complete',
+      () {
+        final dataCheck = DataCheck(
+          familyId: 'family',
+          familyCheck: true,
+          addressCheck: true,
+          userOverride: false,
+        );
+
+        final cleared = dataCheck.withUserOverride(null);
+
+        expect(cleared.isComplete, isTrue);
+        expect(cleared.completenessPercent, 100);
+      },
+    );
+
     test('check keys without a known label show the raw key', () {
       final item = DataCheckItem.fromJson({
         'group': 'family',

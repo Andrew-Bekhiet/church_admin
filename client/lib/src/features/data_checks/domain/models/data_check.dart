@@ -63,8 +63,11 @@ class DataCheck extends ViewableWithID
 
   int get totalCount => details.length;
 
-  int get automaticPercent =>
-      totalCount == 0 ? 0 : passedCount * _percentFull ~/ totalCount;
+  int get automaticPercent => switch (totalCount) {
+    0 when automaticVerdict => _percentFull,
+    0 => 0,
+    _ => passedCount * _percentFull ~/ totalCount,
+  };
 
   Map<DataCheckGroup, List<DataCheckItem>> get itemsByGroup =>
       details.groupListsBy((item) => item.group);
