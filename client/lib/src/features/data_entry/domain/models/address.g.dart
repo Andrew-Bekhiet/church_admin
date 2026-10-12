@@ -9,8 +9,21 @@ part of 'address.dart';
 // QueryableFieldsGenerator
 // **************************************************************************
 
-class _AddressFields {
-  _AddressFields();
+class AddressFields {
+  factory AddressFields() => _instance;
+
+  AddressFields._();
+
+  static final AddressFields _instance = AddressFields._();
+
+  final FieldMetadata<Address> id = FieldMetadata<Address>(
+    getValue: (obj) => obj is Address ? obj.id : null,
+    parentType: Address,
+    name: 'id',
+    label: '=',
+    isCodeOnly: true,
+    isOrderable: false,
+  );
 
   final FieldMetadata<Area> area = FieldMetadata<Area>(
     getValue: (obj) => obj is Address ? obj.area : null,
@@ -169,6 +182,7 @@ class _AddressFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [
+    id,
     area,
     houseCode,
     street,
@@ -184,6 +198,7 @@ class _AddressFields {
   ];
 
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
     'area': area,
     'houseCode': houseCode,
     'street': street,

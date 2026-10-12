@@ -45,15 +45,16 @@ final class QueryableField {
        select = null;
 
   /// The object's own id.
-  const QueryableField.self({String this.label = '='})
-    : graphqlName = null,
-      codeOnly = false,
-      orderable = true,
-      representsParent = true,
-      usesBirthdayOperators = false,
-      type = null,
-      through = null,
-      select = null;
+  const QueryableField.self({
+    String this.label = '=',
+    this.codeOnly = false,
+    this.orderable = true,
+  }) : graphqlName = null,
+       representsParent = true,
+       usesBirthdayOperators = false,
+       type = null,
+       through = null,
+       select = null;
 
   /// The latest entry of a history, which cannot be ordered.
   const QueryableField.history({required String this.label})
