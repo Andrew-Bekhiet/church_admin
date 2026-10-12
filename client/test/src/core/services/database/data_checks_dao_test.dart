@@ -72,6 +72,38 @@ void main() {
   }
 
   test(
+    'a sorted person list selects its sort key and omits data checks when the flag is false',
+    () async {
+      initialize(enableDataChecks: false, data: {'persons': <Object?>[]});
+      final dao = PersonsDAO(db: db);
+      final persons = dao.streamAllWithConfig(
+        streamAllConfig: dao.baseStreamAllConfig,
+        orderBy: Stream.value([
+          OrderBy(
+            field: PersonFields().lastEdit.redirectTo(
+              LastRecordedByInfoFields().time,
+            ),
+          ),
+        ]),
+      );
+      addTearDown(persons.dispose);
+
+      await persons.first;
+
+      final document = printNode(
+        link.requests
+            .singleWhere(
+              (request) => request.operation.operationName == 'watchAllPersons',
+            )
+            .operation
+            .document,
+      );
+      expect(document, contains('lastEdit'));
+      expect(document, isNot(contains('dataCheck')));
+    },
+  );
+
+  test(
     'the general GraphQL client preserves selections when data checks are disabled',
     () async {
       initialize(enableDataChecks: false, data: {'persons': <Object?>[]});
