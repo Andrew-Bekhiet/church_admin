@@ -8,13 +8,18 @@ void main() {
   const annotationsImport =
       "import 'package:church_admin_annotations/church_admin_annotations.dart';";
 
-  String queryable(String declaration, {required String label}) =>
-      "$annotationsImport\n@Queryable(label: '$label')\n$declaration";
+  String queryable(
+    String declaration, {
+    required String label,
+    String options = '',
+  }) => "$annotationsImport\n@Queryable(label: '$label'$options)\n$declaration";
 
   final person = queryable('class Person {}', label: 'People');
   final gender = queryable('enum Gender { male }', label: 'Genders');
 
-  Map<String, String> packageExporting(Map<String, String> librariesByAsset) {
+  Map<String, String> sourcesOfPackageExporting(
+    Map<String, String> librariesByAsset,
+  ) {
     final exports = librariesByAsset.keys.map((asset) {
       final [package, path] = asset.split('|');
 
@@ -41,8 +46,23 @@ class Registry {}
     Map<String, String> librariesByAsset,
   ) => ChurchAdminBuild.generatedFor(
     registryLibrary,
-    sources: packageExporting(librariesByAsset),
+    sources: sourcesOfPackageExporting(librariesByAsset),
   );
+
+  Future<String?> registrationOfNote(
+    String declaration, {
+    String options = '',
+  }) async {
+    final generated = await registryOfPackageExporting({
+      'a|lib/src/note.dart': queryable(
+        declaration,
+        label: 'Notes',
+        options: options,
+      ),
+    });
+
+    return generated.initializerOf(r'_$Registry', 'note');
+  }
 
   test('the registry lists every queryable the package exports', () async {
     final generated = await registryOfPackageExporting({
@@ -97,64 +117,63 @@ class Registry {}
     },
   );
 
-  test('a class queryable is registered with the key field it names', () async {
-    final generated = await registryOfPackageExporting({
-      'a|lib/src/note.dart':
-          """
-$annotationsImport
-@Queryable(label: 'Notes', keyField: 'note_code')
-class Note {
-  @QueryableField(label: 'Code', graphqlName: 'note_code')
-  late final String code;
-}
-""",
-    });
+  test(
+    'a class queryable is keyed by its id field unless it names another',
+    () async {
+      final registration = await registrationOfNote(
+        'class Note {\n'
+        '  @QueryableField.self()\n'
+        '  late final String id;\n'
+        '}',
+      );
 
-    expect(
-      generated.initializerOf(r'_$Registry', 'note'),
-      "QueryableType<Note>(name: 'Note', label: 'Notes', "
-      'fieldsMetadata: NoteFields().allFields, '
-      'fieldsMetadataByName: NoteFields().allFieldsByName, '
-      'fromJson: Note.fromJson, keyField: NoteFields().code)',
-    );
-  });
+      expect(registration, contains('keyField: NoteFields().id'));
+    },
+  );
+
+  test(
+    'a key field is named by its GraphQL name and registered by its Dart '
+    'member',
+    () async {
+      final registration = await registrationOfNote(
+        'class Note {\n'
+        "  @QueryableField(label: 'Code', graphqlName: 'note_code')\n"
+        '  late final String code;\n'
+        '}',
+        options: ", keyField: 'note_code'",
+      );
+
+      expect(registration, contains('keyField: NoteFields().code'));
+    },
+  );
 
   test('a key field that names no queryable field fails the build', () async {
     final result = await ChurchAdminBuild.run(
-      packageExporting({
-        'a|lib/src/note.dart':
-            """
-$annotationsImport
-@Queryable(label: 'Notes', keyField: 'code')
-class Note {}
-""",
+      sourcesOfPackageExporting({
+        'a|lib/src/note.dart': queryable(
+          'class Note {}',
+          label: 'Notes',
+          options: ", keyField: 'code'",
+        ),
       }),
     );
 
-    expect(result.succeeded, isFalse);
+    expect(result.errors, contains(contains("keyField: 'code'")));
   });
 
   test(
     'an extensible queryable is keyed by a field of its hand-written fields '
     'class',
     () async {
-      final generated = await registryOfPackageExporting({
-        'a|lib/src/note.dart':
-            """
-$annotationsImport
-@Queryable(label: 'Notes', extensible: true)
-class Note {}
-
-class NoteFields {
-  Object get id => 0;
-}
-""",
-      });
-
-      expect(
-        generated.initializerOf(r'_$Registry', 'note'),
-        endsWith('keyField: NoteFields().id)'),
+      final registration = await registrationOfNote(
+        'class Note {}\n\n'
+        'class NoteFields {\n'
+        '  Object get id => 0;\n'
+        '}',
+        options: ', extensible: true',
       );
+
+      expect(registration, contains('keyField: NoteFields().id'));
     },
   );
 }
