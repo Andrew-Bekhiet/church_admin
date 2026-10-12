@@ -161,6 +161,24 @@ class Registry {}
     expect(result.errors, contains(contains("keyField: 'code'")));
   });
 
+  test('a key field that names a relationship fails the build', () async {
+    final result = await ChurchAdminBuild.run(
+      sourcesOfPackageExporting({
+        'a|lib/src/note.dart': queryable(
+          'class Note {\n'
+          "  @QueryableField(label: 'Area')\n"
+          '  late final Area area;\n'
+          '}\n\n'
+          'class Area {}',
+          label: 'Notes',
+          options: ", keyField: 'area'",
+        ),
+      }),
+    );
+
+    expect(result.errors, contains(contains('not a scalar or enum')));
+  });
+
   test(
     'an extensible queryable is keyed by a field of its hand-written fields '
     'class',
