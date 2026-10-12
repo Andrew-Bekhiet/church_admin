@@ -44,7 +44,7 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
     required String id,
     bool fullData = false,
   }) {
-    return streamingProxy.streamSingleById(
+    return streamSingleByIdWithConfig(
       id: id,
       streamSingleByIdConfig: baseStreamSingleByIdConfig.copyWith(
         variables: _streamSingleByIdVarsConstructor(

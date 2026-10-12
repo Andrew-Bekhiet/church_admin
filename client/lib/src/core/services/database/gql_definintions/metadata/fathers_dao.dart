@@ -34,9 +34,7 @@ class FathersDAO extends DAOBase<Father>
     Stream<List<Filter>>? where,
     Stream<List<OrderBy>>? orderBy,
   }) {
-    return streamingProxy.streamAll(
-      streamAllConfig: baseStreamAllConfig,
-      streamCountConfig: baseStreamCountConfig,
+    return super.streamAll(
       searchQuery: searchQuery,
       where:
           where ??

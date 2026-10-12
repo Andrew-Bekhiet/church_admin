@@ -4,11 +4,6 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
-  late final StreamableDAOProxy<T> streamingProxy = StreamableDAOProxy<T>(
-    db: db,
-    fromJson: fromJson,
-  );
-
   StreamAllConfig<T> get baseStreamAllConfig;
 
   StreamCountConfig<T>? get baseStreamCountConfig => null;
@@ -21,7 +16,7 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
     Stream<List<Filter>>? where,
     Stream<List<OrderBy>>? orderBy,
   }) {
-    return streamingProxy.streamAll(
+    return streamAllWithConfig(
       streamAllConfig: baseStreamAllConfig,
       streamCountConfig: baseStreamCountConfig,
       searchQuery: searchQuery,
@@ -33,20 +28,13 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
   Stream<T?> streamSingleById({
     required String id,
   }) {
-    return streamingProxy.streamSingleById(
+    return streamSingleByIdWithConfig(
       id: id,
       streamSingleByIdConfig: baseStreamSingleByIdConfig,
     );
   }
-}
 
-class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
-  StreamableDAOProxy({
-    required super.db,
-    required super.fromJson,
-  });
-
-  PaginatableStreamBase<T> streamAll({
+  PaginatableStreamBase<T> streamAllWithConfig({
     required StreamAllConfig<T> streamAllConfig,
     StreamCountConfig<T>? streamCountConfig,
     Stream<String?>? searchQuery,
@@ -96,7 +84,7 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
           (where) => graphQLClient.subscribeAndReturnParsed(
             streamCountConfig.operationOptions ??
                 SubscriptionOptions(
-                  document: streamCountConfig.document,
+                  document: transformDocument(streamCountConfig.document),
                   operationName: streamCountConfig.effectiveOperationName,
                   variables:
                       streamCountConfig.variables ??
@@ -152,7 +140,7 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
         db.varsTransformer.transformrequestForPagination<T>(request);
   }
 
-  Stream<T?> streamSingleById({
+  Stream<T?> streamSingleByIdWithConfig({
     required String id,
     required StreamSingleByIdConfig<T> streamSingleByIdConfig,
   }) {
@@ -160,7 +148,7 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
         .subscribe(
           streamSingleByIdConfig.operationOptions ??
               SubscriptionOptions(
-                document: streamSingleByIdConfig.document,
+                document: transformDocument(streamSingleByIdConfig.document),
                 operationName: streamSingleByIdConfig.effectiveOperationName,
                 variables:
                     streamSingleByIdConfig.variables ??

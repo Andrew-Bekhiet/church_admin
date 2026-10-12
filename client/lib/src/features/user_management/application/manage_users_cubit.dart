@@ -14,7 +14,7 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
   ManageUsersCubit({UsersDAO? usersDao}) : super(const ManageUsersState()) {
     final dao = usersDao ?? DatabaseService.I.users;
 
-    _users = dao.streamingProxy.streamAll(
+    _users = dao.streamAllWithConfig(
       streamAllConfig: dao.baseStreamAllConfig,
       searchQuery: _search.stream,
       where: Stream.value([

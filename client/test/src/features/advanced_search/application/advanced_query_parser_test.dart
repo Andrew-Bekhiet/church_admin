@@ -12,7 +12,6 @@ import 'advanced_query_parser_test.mocks.dart';
   MockSpec<DatabaseService>(),
   MockSpec<DBGraphQLClient>(),
   MockSpec<PersonsDAO>(),
-  MockSpec<StreamableDAOProxy>(),
   MockSpec<PaginatableStreamBase>(),
   MockSpec<PaginatableStreamRequest>(),
   MockSpec<DBVarsTransformer>(),
