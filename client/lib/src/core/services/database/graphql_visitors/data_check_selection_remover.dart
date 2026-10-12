@@ -5,65 +5,39 @@ class DataCheckSelectionRemover extends TransformingVisitor {
   static const _fieldName = 'dataCheck';
   static const _fragmentName = 'DataCheck';
 
-  static DocumentNode removeFrom(DocumentNode document) {
-    final stripped = transform(document, const [DataCheckSelectionRemover()]);
-    if (stripped == document) {
-      return document;
-    }
-
-    final fragments = {
-      for (final fragment
-          in stripped.definitions.whereType<FragmentDefinitionNode>())
-        fragment.name.value: fragment,
-    };
-    final reachableFragments = <String>{};
-    final definitions = <DefinitionNode>[];
-    for (final operation
-        in stripped.definitions.whereType<OperationDefinitionNode>()) {
-      final collector = OperationVariableCollector(fragments);
-      operation.selectionSet.accept(collector);
-      for (final directive in operation.directives) {
-        directive.accept(collector);
-      }
-      reachableFragments.addAll(collector.reachableFragments);
-      definitions.add(
-        OperationDefinitionNode(
-          span: operation.span,
-          type: operation.type,
-          name: operation.name,
-          directives: operation.directives,
-          selectionSet: operation.selectionSet,
-          variableDefinitions: operation.variableDefinitions
-              .where(
-                (variable) =>
-                    collector.variables.contains(variable.variable.name.value),
-              )
-              .toList(),
-        ),
-      );
-    }
-    definitions.addAll(
-      fragments.values.where(
-        (fragment) => reachableFragments.contains(fragment.name.value),
-      ),
-    );
-
-    return DocumentNode(span: stripped.span, definitions: definitions);
-  }
+  static DocumentNode removeFrom(DocumentNode document) =>
+      transform(document, const [DataCheckSelectionRemover()]);
 
   const DataCheckSelectionRemover();
 
   @override
-  DocumentNode visitDocumentNode(DocumentNode node) => DocumentNode(
-    span: node.span,
-    definitions: node.definitions
-        .where(
-          (definition) =>
-              definition is! FragmentDefinitionNode ||
-              definition.name.value != _fragmentName,
-        )
-        .toList(),
-  );
+  DocumentNode visitDocumentNode(DocumentNode node) {
+    final fragments = {
+      for (final fragment
+          in node.definitions.whereType<FragmentDefinitionNode>())
+        if (fragment.name.value != _fragmentName) fragment.name.value: fragment,
+    };
+    final usagesByOperation = {
+      for (final operation
+          in node.definitions.whereType<OperationDefinitionNode>())
+        operation: _collectUsages(operation, fragments),
+    };
+    final reachableFragments = usagesByOperation.values
+        .expand((usages) => usages.reachableFragments)
+        .toSet();
+
+    return DocumentNode(
+      span: node.span,
+      definitions: [
+        for (final MapEntry(key: operation, value: usages)
+            in usagesByOperation.entries)
+          _withoutUnusedVariables(operation, usages.variables),
+        ...fragments.values.where(
+          (fragment) => reachableFragments.contains(fragment.name.value),
+        ),
+      ],
+    );
+  }
 
   @override
   SelectionSetNode visitSelectionSetNode(SelectionSetNode node) =>
@@ -76,4 +50,33 @@ class DataCheckSelectionRemover extends TransformingVisitor {
             )
             .toList(),
       );
+
+  OperationVariableCollector _collectUsages(
+    OperationDefinitionNode operation,
+    Map<String, FragmentDefinitionNode> fragments,
+  ) {
+    final collector = OperationVariableCollector(fragments);
+    operation.selectionSet.accept(collector);
+    for (final directive in operation.directives) {
+      directive.accept(collector);
+    }
+
+    return collector;
+  }
+
+  OperationDefinitionNode _withoutUnusedVariables(
+    OperationDefinitionNode operation,
+    Set<String> usedVariables,
+  ) => OperationDefinitionNode(
+    span: operation.span,
+    type: operation.type,
+    name: operation.name,
+    directives: operation.directives,
+    selectionSet: operation.selectionSet,
+    variableDefinitions: operation.variableDefinitions
+        .where(
+          (variable) => usedVariables.contains(variable.variable.name.value),
+        )
+        .toList(),
+  );
 }
