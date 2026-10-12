@@ -46,14 +46,17 @@ insert_permissions:
                         - family_id
                   - deleted_at:
                       _is_null: true
-                  - permissionGrants:
-                      _and:
-                        - uid:
-                            _eq: X-Hasura-User-Id
-                        - allow_edit:
-                            _eq: true
-                        - entity_type:
-                            _eq: person
+                  - _or:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - permissionGrants:
+                          _and:
+                            - uid:
+                                _eq: X-Hasura-User-Id
+                            - allow_edit:
+                                _eq: true
+                            - entity_type:
+                                _eq: person
       set:
         updated_by: x-hasura-User-Id
       columns:
