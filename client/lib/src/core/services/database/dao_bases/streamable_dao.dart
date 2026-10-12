@@ -120,9 +120,10 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
       graphQLClient.subscribeAndReturnParsed(
         streamAllConfig.operationOptions ??
             SubscriptionOptions(
-              document: SortedListDocument(
+              document: transformDocument(
                 streamAllConfig.document,
-              ).sortedBy(request.param?.orderBy ?? []),
+                parameters: request.param,
+              ),
               operationName: streamAllConfig.effectiveOperationName,
               variables: _getEffectiveStreamAllVars(streamAllConfig, request),
               parserFn:
