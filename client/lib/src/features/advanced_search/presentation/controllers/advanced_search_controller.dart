@@ -56,7 +56,7 @@ class AdvancedSearchController {
   }
 
   void changeQuery(AdvancedQuery value) =>
-      _query.add(value.withAvailableFields());
+      _query.add(value.withEnabledFields());
 
   void changeSelectedQueryableType(QueryableType queryableType) {
     final defaultField = queryableType.filterableFields.firstWhere(

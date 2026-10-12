@@ -34,7 +34,7 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
   int get hashCode => Object.hash(parentField, targetField);
 
   @override
-  bool get isAvailable => parentField.isAvailable && targetField.isAvailable;
+  bool get isEnabled => parentField.isEnabled && targetField.isEnabled;
 
   @override
   QueryableType? get referencedObjectType => targetField.referencedObjectType;

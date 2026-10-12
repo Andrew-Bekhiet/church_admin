@@ -29,7 +29,7 @@ class FieldMetadata<T extends Object> with Equatable {
 
   Type get type => _type ?? T;
 
-  bool get isAvailable =>
+  bool get isEnabled =>
       (type != DataCheck && parentType != DataCheck) ||
       FeatureFlagsRepository.I.enableDataChecks;
 

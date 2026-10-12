@@ -6,29 +6,6 @@ import 'package:equatable/equatable.dart';
 class Filter<T extends Object> with Equatable {
   static const _undefined = Object();
 
-  static List<Filter> availableFilters(Iterable<Filter> filters) {
-    final available = <Filter>[];
-    for (final filter in filters) {
-      if (!filter.field.isAvailable) {
-        continue;
-      }
-      if ((filter.operator, filter.value) case (
-        LogicalOperator(),
-        final List<Filter> children,
-      )) {
-        final availableChildren = availableFilters(children);
-        if (availableChildren.isEmpty) {
-          continue;
-        }
-        available.add(filter.copyWith(value: availableChildren));
-        continue;
-      }
-      available.add(filter);
-    }
-
-    return available;
-  }
-
   final FieldMetadata<T> field;
   final Operator operator;
   final Object? value;

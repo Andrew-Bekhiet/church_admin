@@ -52,7 +52,7 @@ void main() {
       );
 
       expect(
-        query.withAvailableFields(),
+        query.withEnabledFields(),
         query.copyWith(
           filters: [
             Filter(const DotField(), LogicalOperator.and, [name]),
@@ -94,7 +94,7 @@ void main() {
   );
 
   test(
-    'config changes publish available choices even when selected conditions remain unchanged',
+    'config changes publish enabled choices even when selected conditions remain unchanged',
     () async {
       final controller = AdvancedSearchController();
       addTearDown(controller.dispose);
@@ -112,7 +112,7 @@ void main() {
   );
 
   test(
-    'data check child fields and redirected fields are unavailable when disabled',
+    'data check child fields and redirected fields are disabled when data checks are off',
     () {
       final redirect = PersonFields().dataCheck.redirectTo(
         DataCheckFields().isComplete,
@@ -123,11 +123,11 @@ void main() {
         AdvancedQueriesMetadata().person.orderableFields,
         isNot(contains(PersonFields().dataCheck)),
       );
-      expect(redirect.isAvailable, isFalse);
+      expect(redirect.isEnabled, isFalse);
     },
   );
   testWidgets(
-    'an open RTL ordering sheet removes unavailable selected fields after a config change',
+    'an open RTL ordering sheet removes disabled selected fields after a config change',
     (tester) async {
       when(() => flags.enableDataChecks).thenReturn(true);
       final nameOrder = OrderBy(field: PersonFields().name);

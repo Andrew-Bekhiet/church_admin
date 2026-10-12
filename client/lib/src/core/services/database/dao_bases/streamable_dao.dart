@@ -48,8 +48,8 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
       orderBy ?? Stream.value(null),
       (search, where, orderBy) => StreamableDAOParameters<T>(
         search: search,
-        where: where,
-        orderBy: orderBy,
+        where: where?.whereEnabled(),
+        orderBy: orderBy?.whereEnabled(),
       ),
     ).shareValue();
 

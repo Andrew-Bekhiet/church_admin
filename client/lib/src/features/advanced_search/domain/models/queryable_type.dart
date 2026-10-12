@@ -15,7 +15,7 @@ class QueryableType<T extends Object> with Equatable {
   Type get type => T;
 
   Iterable<FieldMetadata> get filterableFields => fieldsMetadata.where(
-    (field) => !field.isCodeOnly && field.isAvailable,
+    (field) => !field.isCodeOnly && field.isEnabled,
   );
 
   Iterable<FieldMetadata> get orderableFields => filterableFields.where(

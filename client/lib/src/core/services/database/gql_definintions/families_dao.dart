@@ -117,8 +117,8 @@ class FamiliesDAO extends FullCRUDDAO<Family>
         orderBy ?? Stream.value(null),
         (search, where, orderBy) => StreamableDAOParameters<Family>(
           search: search,
-          where: where == null ? null : Filter.availableFilters(where),
-          orderBy: orderBy == null ? null : OrderBy.availableOrderBys(orderBy),
+          where: where?.whereEnabled(),
+          orderBy: orderBy?.whereEnabled(),
         ),
       ),
       factory: (request) => _streamAllFactory(streamAllConfig, request),

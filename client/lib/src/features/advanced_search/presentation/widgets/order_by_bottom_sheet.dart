@@ -29,7 +29,7 @@ class _OrderByBottomSheetState extends State<OrderByBottomSheet> {
   @override
   void initState() {
     super.initState();
-    _orderBy = OrderBy.availableOrderBys(widget.initialOrderBy);
+    _orderBy = widget.initialOrderBy.whereEnabled();
     _configSubscription = FeatureFlagsRepository.I.onConfigChanged.listen(
       (_) => _changeOrderBy(_orderBy),
     );
@@ -45,7 +45,7 @@ class _OrderByBottomSheetState extends State<OrderByBottomSheet> {
     )) {
       return;
     }
-    _orderBy = OrderBy.availableOrderBys(widget.initialOrderBy);
+    _orderBy = widget.initialOrderBy.whereEnabled();
     _notifyIfOrdersRemoved();
   }
 
@@ -142,9 +142,9 @@ class _OrderByBottomSheetState extends State<OrderByBottomSheet> {
   }
 
   void _changeOrderBy(List<OrderBy> orderBy) {
-    final availableOrderBy = OrderBy.availableOrderBys(orderBy);
-    setState(() => _orderBy = availableOrderBy);
-    widget.onChanged(availableOrderBy);
+    final enabledOrderBy = orderBy.whereEnabled();
+    setState(() => _orderBy = enabledOrderBy);
+    widget.onChanged(enabledOrderBy);
   }
 }
 
