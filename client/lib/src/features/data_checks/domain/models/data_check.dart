@@ -10,7 +10,7 @@ part 'data_check.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(label: 'اكتمال البيانات')
+@Queryable(label: 'اكتمال البيانات', keyField: 'familyId')
 class DataCheck with _$DataCheck implements ID, SerializableExtra {
   static const int _percentCap = 99;
   static const int _percentFull = 100;
@@ -45,6 +45,7 @@ class DataCheck with _$DataCheck implements ID, SerializableExtra {
   final DataCheckOverride userOverride;
 
   @override
+  @QueryableField(label: 'العائلة', codeOnly: true)
   final String familyId;
 
   @override

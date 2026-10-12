@@ -63,12 +63,22 @@ class DataCheckFields {
         operators: {...MultiSelectOperator.values},
       );
 
+  final FieldMetadata<String> familyId = FieldMetadata<String>(
+    getValue: (obj) => obj is DataCheck ? obj.familyId : null,
+    parentType: DataCheck,
+    name: 'familyId',
+    label: 'العائلة',
+    isCodeOnly: true,
+    operators: {...StringOperator.values},
+  );
+
   late final List<FieldMetadata<Object>> allFields = [
     completenessPercent,
     isComplete,
     familyCheck,
     addressCheck,
     userOverride,
+    familyId,
   ];
 
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
@@ -77,6 +87,7 @@ class DataCheckFields {
     'familyCheck': familyCheck,
     'addressCheck': addressCheck,
     'userOverride': userOverride,
+    'familyId': familyId,
   };
 }
 

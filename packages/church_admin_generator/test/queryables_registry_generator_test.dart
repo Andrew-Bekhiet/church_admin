@@ -14,22 +14,18 @@ void main() {
   final person = queryable('class Person {}', label: 'People');
   final gender = queryable('enum Gender { male }', label: 'Genders');
 
-  Future<GeneratedCode> registryOfPackageExporting(
-    Map<String, String> librariesByAsset,
-  ) {
+  Map<String, String> packageExporting(Map<String, String> librariesByAsset) {
     final exports = librariesByAsset.keys.map((asset) {
       final [package, path] = asset.split('|');
 
       return "export 'package:$package/${path.replaceFirst('lib/', '')}';";
     });
 
-    return ChurchAdminBuild.generatedFor(
-      registryLibrary,
-      sources: {
-        ...librariesByAsset,
-        'a|lib/a.dart': exports.join('\n'),
-        registryLibrary:
-            '''
+    return {
+      ...librariesByAsset,
+      'a|lib/a.dart': exports.join('\n'),
+      registryLibrary:
+          '''
 $annotationsImport
 import 'package:a/a.dart';
 
@@ -38,9 +34,15 @@ part 'registry.g.dart';
 @GenerateQueryablesRegistery()
 class Registry {}
 ''',
-      },
-    );
+    };
   }
+
+  Future<GeneratedCode> registryOfPackageExporting(
+    Map<String, String> librariesByAsset,
+  ) => ChurchAdminBuild.generatedFor(
+    registryLibrary,
+    sources: packageExporting(librariesByAsset),
+  );
 
   test('the registry lists every queryable the package exports', () async {
     final generated = await registryOfPackageExporting({
@@ -91,6 +93,67 @@ class Registry {}
         'fieldsMetadata: PersonFields().allFields, '
         'fieldsMetadataByName: PersonFields().allFieldsByName, '
         'fromJson: Person.fromJson)',
+      );
+    },
+  );
+
+  test('a class queryable is registered with the key field it names', () async {
+    final generated = await registryOfPackageExporting({
+      'a|lib/src/note.dart':
+          """
+$annotationsImport
+@Queryable(label: 'Notes', keyField: 'note_code')
+class Note {
+  @QueryableField(label: 'Code', graphqlName: 'note_code')
+  late final String code;
+}
+""",
+    });
+
+    expect(
+      generated.initializerOf(r'_$Registry', 'note'),
+      "QueryableType<Note>(name: 'Note', label: 'Notes', "
+      'fieldsMetadata: NoteFields().allFields, '
+      'fieldsMetadataByName: NoteFields().allFieldsByName, '
+      'fromJson: Note.fromJson, keyField: NoteFields().code)',
+    );
+  });
+
+  test('a key field that names no queryable field fails the build', () async {
+    final result = await ChurchAdminBuild.run(
+      packageExporting({
+        'a|lib/src/note.dart':
+            """
+$annotationsImport
+@Queryable(label: 'Notes', keyField: 'code')
+class Note {}
+""",
+      }),
+    );
+
+    expect(result.succeeded, isFalse);
+  });
+
+  test(
+    'an extensible queryable is keyed by a field of its hand-written fields '
+    'class',
+    () async {
+      final generated = await registryOfPackageExporting({
+        'a|lib/src/note.dart':
+            """
+$annotationsImport
+@Queryable(label: 'Notes', extensible: true)
+class Note {}
+
+class NoteFields {
+  Object get id => 0;
+}
+""",
+      });
+
+      expect(
+        generated.initializerOf(r'_$Registry', 'note'),
+        endsWith('keyField: NoteFields().id)'),
       );
     },
   );

@@ -7,7 +7,7 @@ part 'study_year.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(label: 'السنوات الدراسية', extensible: true)
+@Queryable(label: 'السنوات الدراسية', keyField: 'order', extensible: true)
 class StudyYear extends ViewableWithID
     with _$StudyYear
     implements SerializableExtra {

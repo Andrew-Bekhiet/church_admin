@@ -82,6 +82,8 @@ final class RegistryClassBuilder {
                           entry,
                         ).property('allFieldsByName'),
                         'fromJson': type.property('fromJson'),
+                        if (entry.keyFieldMemberName case final keyField?)
+                          'keyField': _fieldsOf(entry).property(keyField),
                       }))
                 .code,
     );
