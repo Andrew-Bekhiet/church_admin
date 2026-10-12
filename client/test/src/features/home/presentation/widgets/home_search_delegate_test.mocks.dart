@@ -182,7 +182,7 @@ class MockViewableObjectService extends _i1.Mock
           as String?);
 
   @override
-  _i4.IconData getDefaultIconFor<T extends _i2.IImage>([T? imageObject]) =>
+  _i4.IconData getDefaultIconFor<T extends Object>([T? imageObject]) =>
       (super.noSuchMethod(
             Invocation.method(#getDefaultIconFor, [imageObject]),
             returnValue: _i8.dummyValue<_i4.IconData>(

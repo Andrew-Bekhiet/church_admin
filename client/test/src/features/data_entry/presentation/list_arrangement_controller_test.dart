@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -36,6 +37,9 @@ void main() {
     initGlobalProviderContainer([
       userPreferencesServiceProvider.overrideWithValue(preferences),
       featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
+      viewableObjectServiceProvider.overrideWith(
+        (ref) => ViewableObjectService(router: GoRouter(routes: [])),
+      ),
     ]);
   });
 

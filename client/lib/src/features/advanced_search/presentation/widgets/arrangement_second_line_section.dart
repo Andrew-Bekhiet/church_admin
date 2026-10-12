@@ -77,7 +77,7 @@ class ArrangementSecondLineSection extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: colorScheme.secondaryContainer,
                   foregroundColor: colorScheme.onSecondaryContainer,
-                  child: const Icon(Symbols.visibility),
+                  child: Icon(queryableType.icon),
                 ),
                 Expanded(
                   child: Column(

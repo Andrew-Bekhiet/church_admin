@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockFeatureFlagsRepository extends Mock
@@ -19,6 +20,9 @@ void main() {
     when(() => flags.onConfigChanged).thenAnswer((_) => configChanges.stream);
     initGlobalProviderContainer([
       featureFlagsRepoProvider.overrideWithValue(flags),
+      viewableObjectServiceProvider.overrideWith(
+        (ref) => ViewableObjectService(router: GoRouter(routes: [])),
+      ),
     ]);
   });
 
