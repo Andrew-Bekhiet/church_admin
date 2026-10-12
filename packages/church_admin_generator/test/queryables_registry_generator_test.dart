@@ -185,13 +185,36 @@ class Registry {}
     () async {
       final registration = await registrationOfNote(
         'class Note {}\n\n'
+        'class FieldMetadata<T> {}\n\n'
         'class NoteFields {\n'
-        '  Object get id => 0;\n'
+        '  FieldMetadata<Note> get id => FieldMetadata();\n'
         '}',
         options: ', extensible: true',
       );
 
       expect(registration, contains('keyField: NoteFields().id'));
+    },
+  );
+
+  test(
+    'a hand-written key field that holds a relationship fails the build',
+    () async {
+      final result = await ChurchAdminBuild.run(
+        sourcesOfPackageExporting({
+          'a|lib/src/note.dart': queryable(
+            'class Note {}\n\n'
+            'class Area {}\n\n'
+            'class FieldMetadata<T> {}\n\n'
+            'class NoteFields {\n'
+            '  FieldMetadata<Area> get area => FieldMetadata();\n'
+            '}',
+            label: 'Notes',
+            options: ", keyField: 'area', extensible: true",
+          ),
+        }),
+      );
+
+      expect(result.errors, contains(contains('not a scalar or enum')));
     },
   );
 }

@@ -17,6 +17,16 @@ final class RegistryEntriesCollector {
           type.isDartCoreBool ||
           type.element is EnumElement);
 
+  static InvalidGenerationSourceError _notALeafFieldError(
+    ClassElement element,
+    String keyFieldName,
+    String memberName,
+  ) => InvalidGenerationSourceError(
+    "@Queryable(keyField: '$keyFieldName') names $memberName of "
+    '${element.displayName}, which is not a scalar or enum field',
+    element: element,
+  );
+
   final String _package;
   final Set<Uri> _visited = {};
   final List<RegistryEntry> _entries = [];
@@ -102,11 +112,10 @@ final class RegistryEntriesCollector {
         _isScalarOrEnum(element.getField(annotatedKeyField.memberName)?.type);
 
     if (!isLeafField) {
-      throw InvalidGenerationSourceError(
-        "@Queryable(keyField: '$keyFieldName') names "
-        '${annotatedKeyField.memberName} of ${element.displayName}, which is '
-        'not a scalar or enum field',
-        element: element,
+      throw _notALeafFieldError(
+        element,
+        keyFieldName,
+        annotatedKeyField.memberName,
       );
     }
 
@@ -122,9 +131,23 @@ final class RegistryEntriesCollector {
 
     if (!isExtensible) return null;
 
-    return element.library
+    final getter = element.library
         .getClass('${element.displayName}Fields')
-        ?.getGetter(keyFieldName)
-        ?.name;
+        ?.getGetter(keyFieldName);
+
+    if (getter == null) return null;
+
+    final valueType = switch (getter.returnType) {
+      InterfaceType(typeArguments: [final valueType]) => valueType,
+      _ => null,
+    };
+    final isLeafField =
+        valueType == element.thisType || _isScalarOrEnum(valueType);
+
+    if (!isLeafField) {
+      throw _notALeafFieldError(element, keyFieldName, getter.displayName);
+    }
+
+    return getter.name;
   }
 }
