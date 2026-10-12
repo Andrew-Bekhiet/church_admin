@@ -1,4 +1,5 @@
 export 'widgets/arrangement_second_line_section.dart';
+export 'widgets/arrangement_section.dart';
 export 'widgets/arrangement_sort_section.dart';
 export 'widgets/field_path_picker.dart';
 export 'widgets/filters_builder.dart';

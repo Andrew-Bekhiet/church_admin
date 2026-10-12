@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class FieldPathPicker extends StatelessWidget {
   final QueryableType queryableType;
   final FieldMetadata field;
-  final String labelText;
   final ValueChanged<FieldMetadata> onChanged;
   final List<Widget> leafTrailing;
+  final String? labelText;
 
   static FieldMetadata topLevelFieldOf(
     QueryableType queryableType,
@@ -21,9 +21,9 @@ class FieldPathPicker extends StatelessWidget {
   const FieldPathPicker({
     required this.queryableType,
     required this.field,
-    required this.labelText,
     required this.onChanged,
     this.leafTrailing = const [],
+    this.labelText,
     super.key,
   });
 

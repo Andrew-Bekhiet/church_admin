@@ -6,12 +6,14 @@ class OrderByWidget extends StatelessWidget {
   final QueryableType selectedQueryableType;
   final OrderBy orderBy;
   final void Function(OrderBy) onChanged;
+  final String labelText;
   final void Function()? onRemoved;
 
   const OrderByWidget({
     required this.selectedQueryableType,
     required this.orderBy,
     required this.onChanged,
+    this.labelText = 'ترتيب حسب',
     this.onRemoved,
     super.key,
   });
@@ -23,7 +25,7 @@ class OrderByWidget extends StatelessWidget {
     return FieldPathPicker(
       queryableType: selectedQueryableType,
       field: orderBy.field,
-      labelText: 'ترتيب حسب',
+      labelText: labelText,
       onChanged: (newField) => onChanged(
         OrderBy(field: newField, value: orderBy.value),
       ),

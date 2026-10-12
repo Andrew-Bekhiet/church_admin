@@ -16,74 +16,113 @@ class ArrangementSecondLineSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = ColorScheme.of(context);
     final textTheme = TextTheme.of(context);
+    final chosenField = arrangement.secondLineField;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      spacing: 8,
+    return ArrangementSection(
+      icon: Symbols.subtitles,
+      title: 'السطر الثاني',
+      caption: 'ما يظهر تحت اسم كل عنصر في القائمة',
       children: [
-        Text('السطر الثاني', style: textTheme.titleSmall),
-        switch (arrangement.secondLineField) {
-          final chosen? => FieldPathPicker(
+        SegmentedButton<bool>(
+          showSelectedIcon: false,
+          segments: const [
+            ButtonSegment(
+              value: false,
+              icon: Icon(Symbols.sort),
+              label: Text(
+                'حقل الترتيب',
+                key: ArrangementSecondLineSectionKeys.followSort,
+              ),
+            ),
+            ButtonSegment(
+              value: true,
+              icon: Icon(Symbols.tune),
+              label: Text(
+                'حقل آخر',
+                key: ArrangementSecondLineSectionKeys.chooseSecondLine,
+              ),
+            ),
+          ],
+          selected: {chosenField != null},
+          onSelectionChanged: (selection) => onChanged(
+            arrangement.withSecondLineField(
+              selection.single
+                  ? arrangement.effectiveSecondLineField ??
+                        queryableType.orderableFields.first
+                  : null,
+            ),
+          ),
+        ),
+        if (chosenField != null)
+          FieldPathPicker(
             queryableType: queryableType,
-            field: chosen,
-            labelText: 'السطر الثاني',
+            field: chosenField,
             onChanged: (newField) =>
                 onChanged(arrangement.withSecondLineField(newField)),
-            leafTrailing: [
-              IconButton(
-                key: ArrangementSecondLineSectionKeys.clearSecondLine,
-                tooltip: 'استخدام حقل الترتيب',
-                onPressed: () =>
-                    onChanged(arrangement.withSecondLineField(null)),
-                icon: const Icon(Symbols.clear),
-              ),
-            ],
           ),
-          null => Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                switch (arrangement.effectiveSecondLineField) {
-                  final shown? =>
-                    'يُعرض حقل الترتيب الأول: ${FieldPathPicker.topLevelFieldOf(queryableType, shown).label}',
-                  null => 'لا يوجد سطر ثانٍ',
-                },
-                key: ArrangementSecondLineSectionKeys.fallbackSummary,
-                style: textTheme.bodyMedium?.copyWith(
-                  color: ColorScheme.of(context).onSurfaceVariant,
+        DecoratedBox(
+          decoration: ShapeDecoration(
+            color: colorScheme.surface,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              spacing: 12,
+              children: [
+                CircleAvatar(
+                  backgroundColor: colorScheme.secondaryContainer,
+                  foregroundColor: colorScheme.onSecondaryContainer,
+                  child: const Icon(Symbols.visibility),
                 ),
-              ),
-              Align(
-                alignment: AlignmentDirectional.centerStart,
-                child: TextButton.icon(
-                  key: ArrangementSecondLineSectionKeys.chooseSecondLine,
-                  onPressed: () => onChanged(
-                    arrangement.withSecondLineField(
-                      arrangement.effectiveSecondLineField ??
-                          queryableType.orderableFields.first,
-                    ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 6,
+                    children: [
+                      FractionallySizedBox(
+                        widthFactor: 0.45,
+                        child: DecoratedBox(
+                          decoration: ShapeDecoration(
+                            color: colorScheme.outlineVariant,
+                            shape: const StadiumBorder(),
+                          ),
+                          child: const SizedBox(height: 10),
+                        ),
+                      ),
+                      Text(
+                        switch (arrangement.effectiveSecondLineField) {
+                          final shown? => FieldPathPicker.topLevelFieldOf(
+                            queryableType,
+                            shown,
+                          ).label,
+                          null => 'لا يوجد سطر ثانٍ',
+                        },
+                        key: ArrangementSecondLineSectionKeys.preview,
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: colorScheme.primary,
+                        ),
+                      ),
+                    ],
                   ),
-                  icon: const Icon(Symbols.add),
-                  label: const Text('اختيار سطر ثانٍ مختلف'),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        },
+        ),
       ],
     );
   }
 }
 
 abstract final class ArrangementSecondLineSectionKeys {
+  static const followSort = Key('ArrangementSecondLineSection.followSort');
   static const chooseSecondLine = Key(
     'ArrangementSecondLineSection.chooseSecondLine',
   );
-  static const clearSecondLine = Key(
-    'ArrangementSecondLineSection.clearSecondLine',
-  );
-  static const fallbackSummary = Key(
-    'ArrangementSecondLineSection.fallbackSummary',
-  );
+  static const preview = Key('ArrangementSecondLineSection.preview');
 }

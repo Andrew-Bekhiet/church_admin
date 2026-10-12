@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class ListArrangementSheet extends StatefulWidget {
   final QueryableType queryableType;
@@ -15,6 +16,7 @@ class ListArrangementSheet extends StatefulWidget {
     context: context,
     isScrollControlled: true,
     useSafeArea: true,
+    showDragHandle: true,
     builder: (context) => ListArrangementSheet(
       queryableType: queryableType,
       initialArrangement: initialArrangement,
@@ -53,7 +55,11 @@ class _ListArrangementSheetState extends State<ListArrangementSheet> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsetsDirectional.only(
+              start: 16,
+              end: 16,
+              bottom: 16,
+            ),
             child: Text(
               'ترتيب وعرض ${widget.queryableType.label}',
               textAlign: TextAlign.center,
@@ -65,6 +71,7 @@ class _ListArrangementSheetState extends State<ListArrangementSheet> {
               padding: const EdgeInsetsDirectional.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: 16,
                 children: [
                   ArrangementSortSection(
                     queryableType: widget.queryableType,
@@ -72,7 +79,6 @@ class _ListArrangementSheetState extends State<ListArrangementSheet> {
                     onChanged: (arrangement) =>
                         setState(() => _draft = arrangement),
                   ),
-                  const Divider(),
                   ArrangementSecondLineSection(
                     queryableType: widget.queryableType,
                     arrangement: _draft,
@@ -83,27 +89,28 @@ class _ListArrangementSheetState extends State<ListArrangementSheet> {
               ),
             ),
           ),
-          const Divider(),
           SafeArea(
             top: false,
             child: Padding(
-              padding: const EdgeInsetsDirectional.symmetric(
-                horizontal: 16,
-                vertical: 8,
-              ),
+              padding: const EdgeInsets.all(16),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                spacing: 8,
+                spacing: 12,
                 children: [
-                  TextButton(
-                    key: ListArrangementSheetKeys.cancel,
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('إلغاء'),
+                  Expanded(
+                    child: OutlinedButton(
+                      key: ListArrangementSheetKeys.cancel,
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('إلغاء'),
+                    ),
                   ),
-                  FilledButton(
-                    key: ListArrangementSheetKeys.save,
-                    onPressed: () => Navigator.of(context).pop(_draft),
-                    child: const Text('حفظ'),
+                  Expanded(
+                    flex: 2,
+                    child: FilledButton.icon(
+                      key: ListArrangementSheetKeys.save,
+                      onPressed: () => Navigator.of(context).pop(_draft),
+                      icon: const Icon(Symbols.check),
+                      label: const Text('حفظ'),
+                    ),
                   ),
                 ],
               ),

@@ -19,15 +19,16 @@ class ArrangementSortSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final orderBy = arrangement.orderBy;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      spacing: 8,
+    return ArrangementSection(
+      icon: Symbols.sort,
+      title: 'الترتيب',
+      caption: 'ترتيب العناصر في القائمة',
       children: [
-        Text('الترتيب', style: TextTheme.of(context).titleSmall),
         ...orderBy.mapIndexed(
           (i, row) => OrderByWidget(
             selectedQueryableType: queryableType,
             orderBy: row,
+            labelText: i == 0 ? 'حسب' : 'ثم حسب',
             onChanged: (newValue) => onChanged(
               arrangement.withOrderBy(
                 orderBy.mapIndexed((j, o) => j == i ? newValue : o).toList(),

@@ -30,10 +30,6 @@ void main() {
   ) async {
     savedArrangement = null;
     sheetClosed = false;
-    tester.view.physicalSize = const Size(800, 2400);
-    tester.view.devicePixelRatio = 1;
-    addTearDown(tester.view.reset);
-
     await tester.pumpWidgetBuilder(
       Scaffold(
         body: Builder(
@@ -52,6 +48,7 @@ void main() {
         ),
       ),
       wrapper: materialAppWithThemeAndLocale(),
+      surfaceSize: const Size(800, 2400),
     );
     await tester.tap(find.byKey(openKey));
     await tester.pumpAndSettle();
@@ -161,7 +158,7 @@ void main() {
       await openSheet(tester, byName);
 
       final summary = tester.widget<Text>(
-        find.byKey(ArrangementSecondLineSectionKeys.fallbackSummary),
+        find.byKey(ArrangementSecondLineSectionKeys.preview),
       );
 
       expect(summary.data, contains(fields.name.label));
@@ -178,31 +175,31 @@ void main() {
         );
 
         final summary = tester.widget<Text>(
-          find.byKey(ArrangementSecondLineSectionKeys.fallbackSummary),
+          find.byKey(ArrangementSecondLineSectionKeys.preview),
         );
         expect(summary.data, endsWith(fields.studyYear.label));
       },
     );
 
-    testWidgets('clearing the second line falls back to the sort field', (
+    testWidgets('following the sort field again previews the sort field', (
       tester,
     ) async {
       await openSheet(tester, byName.withSecondLineField(fields.birthdate));
       expect(secondLineDropdown(), findsOneWidget);
 
-      await tapKey(tester, ArrangementSecondLineSectionKeys.clearSecondLine);
+      await tapKey(tester, ArrangementSecondLineSectionKeys.followSort);
 
       final summary = tester.widget<Text>(
-        find.byKey(ArrangementSecondLineSectionKeys.fallbackSummary),
+        find.byKey(ArrangementSecondLineSectionKeys.preview),
       );
       expect(summary.data, contains(fields.name.label));
     });
 
-    testWidgets('clearing the second line saves no second line', (
+    testWidgets('following the sort field again saves no second line', (
       tester,
     ) async {
       await openSheet(tester, byName.withSecondLineField(fields.birthdate));
-      await tapKey(tester, ArrangementSecondLineSectionKeys.clearSecondLine);
+      await tapKey(tester, ArrangementSecondLineSectionKeys.followSort);
 
       await tapKey(tester, ListArrangementSheetKeys.save);
 
@@ -221,7 +218,7 @@ void main() {
       );
 
       final summary = tester.widget<Text>(
-        find.byKey(ArrangementSecondLineSectionKeys.fallbackSummary),
+        find.byKey(ArrangementSecondLineSectionKeys.preview),
       );
       expect(summary.data, contains(fields.birthdate.label));
     });
