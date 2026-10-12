@@ -59,19 +59,22 @@ final class RegistryEntriesCollector {
 
     element.accept(collector);
 
-    final isExtensible = annotation.read('extensible').boolValue;
-    final keyFieldMember =
-        collector.fields
-            .firstWhereOrNull((field) => field.name == keyFieldName)
-            ?.memberName ??
-        (isExtensible
-            ? element.library
-                  .getClass('${element.displayName}Fields')
-                  ?.getGetter(keyFieldName)
-                  ?.name
-            : null);
+    final annotatedKeyField = collector.fields.firstWhereOrNull(
+      (field) => field.name == keyFieldName,
+    );
 
-    if (keyField != null && keyFieldMember == null) {
+    if (annotatedKeyField case final field?) return field.memberName;
+
+    final isExtensible = annotation.read('extensible').boolValue;
+    final handWrittenFieldsClass = isExtensible
+        ? element.library.getClass('${element.displayName}Fields')
+        : null;
+
+    if (handWrittenFieldsClass?.getGetter(keyFieldName) case final getter?) {
+      return getter.name;
+    }
+
+    if (keyField != null) {
       throw InvalidGenerationSourceError(
         "@Queryable(keyField: '$keyField') names no @QueryableField of "
         '${element.displayName} nor a field of its hand-written fields class',
@@ -79,6 +82,6 @@ final class RegistryEntriesCollector {
       );
     }
 
-    return keyFieldMember;
+    return null;
   }
 }
