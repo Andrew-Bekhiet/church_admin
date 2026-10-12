@@ -16,7 +16,7 @@ final class Queryable {
 
   const Queryable({
     required this.label,
-    this.keyField,
     this.extensible = false,
+    this.keyField,
   });
 }
