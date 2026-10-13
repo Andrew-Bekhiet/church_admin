@@ -5,5 +5,9 @@ abstract interface class Geocoder {
 
   Future<Address?> addressAt(Point location);
 
-  Future<Point?> locationOf(Address address);
+  Future<Point?> locationFromStreetAddress({
+    required String houseCode,
+    required Street street,
+    required String countryIsoCode,
+  });
 }

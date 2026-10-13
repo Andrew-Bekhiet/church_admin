@@ -134,6 +134,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
   }
 
   void _handleHouseCodeChanged(String? houseCode) {
+    if (houseCode == _address.houseCode) return;
+
     _setAddress(_address.copyWith(houseCode: houseCode), false);
 
     _houseNumberGeocodingDebounce?.cancel();

@@ -30,6 +30,27 @@ void main() {
     );
   }
 
+  void failWithBadResponse() {
+    when(
+      () => dio.getUri<dynamic>(any(), options: any(named: 'options')),
+    ).thenThrow(
+      DioException.badResponse(
+        statusCode: 503,
+        requestOptions: RequestOptions(),
+        response: Response<dynamic>(
+          statusCode: 503,
+          requestOptions: RequestOptions(),
+        ),
+      ),
+    );
+  }
+
+  Future<Point?> locationOfHouse() => geocoder.locationFromStreetAddress(
+    houseCode: '12',
+    street: const Street(id: 'street-id', name: 'شارع الجمهورية'),
+    countryIsoCode: 'EG',
+  );
+
   setUpAll(() => registerFallbackValue(Uri()));
 
   setUp(() {
@@ -58,18 +79,7 @@ void main() {
   });
 
   test('a failed request yields no address', () async {
-    when(
-      () => dio.getUri<dynamic>(any(), options: any(named: 'options')),
-    ).thenThrow(
-      DioException.badResponse(
-        statusCode: 503,
-        requestOptions: RequestOptions(),
-        response: Response<dynamic>(
-          statusCode: 503,
-          requestOptions: RequestOptions(),
-        ),
-      ),
-    );
+    failWithBadResponse();
 
     expect(await geocoder.addressAt(location), isNull);
   });
@@ -89,32 +99,25 @@ void main() {
     },
   );
 
-  const houseAddress = Address(
-    houseCode: '12',
-    street: Street(id: 'street-id', name: 'شارع الجمهورية'),
-  );
-
   test('the first result of a search response becomes the location', () async {
     answerWith([
       {'lat': '30.0444', 'lon': '31.2357'},
       {'lat': '29.0', 'lon': '30.0'},
     ]);
 
-    expect(await geocoder.locationOf(houseAddress), location);
+    expect(await locationOfHouse(), location);
   });
 
   test('a search response without results yields no location', () async {
     answerWith(<Object?>[]);
 
-    expect(await geocoder.locationOf(houseAddress), isNull);
+    expect(await locationOfHouse(), isNull);
   });
 
   test('a failed search response yields no location', () async {
-    answerWith([
-      {'lat': '30.0444', 'lon': '31.2357'},
-    ], statusCode: 500);
+    failWithBadResponse();
 
-    expect(await geocoder.locationOf(houseAddress), isNull);
+    expect(await locationOfHouse(), isNull);
   });
 
   test('a search result without coordinates yields no location', () async {
@@ -122,6 +125,6 @@ void main() {
       {'display_name': 'شارع الجمهورية'},
     ]);
 
-    expect(await geocoder.locationOf(houseAddress), isNull);
+    expect(await locationOfHouse(), isNull);
   });
 }

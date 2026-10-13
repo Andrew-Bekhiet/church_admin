@@ -44,31 +44,42 @@ class NominatimGeocoder implements Geocoder {
   }
 
   @override
-  Future<Point?> locationOf(Address address) async {
-    final response = await _dio.getUri(
-      Uri(
-        scheme: 'https',
-        host: _host,
-        path: 'search',
-        queryParameters: {
-          'street': [?address.houseCode, ?address.street?.name].join(' '),
-          'countrycodes': address.countryIsoCode.toLowerCase(),
-          'accept-language': _language,
-          'format': 'jsonv2',
-          'limit': '1',
-        },
-      ),
-      options: _requestOptions,
-    );
+  Future<Point?> locationFromStreetAddress({
+    required String houseCode,
+    required Street street,
+    required String countryIsoCode,
+  }) async {
+    final Response<dynamic> response;
+    try {
+      response = await _dio.getUri(
+        Uri(
+          scheme: 'https',
+          host: _host,
+          path: 'search',
+          queryParameters: {
+            'street': '$houseCode ${street.name}',
+            'countrycodes': countryIsoCode.toLowerCase(),
+            'accept-language': _language,
+            'format': 'jsonv2',
+            'limit': '1',
+          },
+        ),
+        options: _requestOptions,
+      );
+    } on DioException {
+      return null;
+    }
 
     return switch (response.data) {
-      [final Map<String, Object?> firstResult, ...]
-          when response.statusCode == 200 =>
-        switch ((
-          double.tryParse('${firstResult['lat']}'),
-          double.tryParse('${firstResult['lon']}'),
-        )) {
-          (final latitude?, final longitude?) => Point(latitude, longitude),
+      [
+        {'lat': final String latitude, 'lon': final String longitude},
+        ...,
+      ] =>
+        switch ((double.tryParse(latitude), double.tryParse(longitude))) {
+          (final parsedLatitude?, final parsedLongitude?) => Point(
+            parsedLatitude,
+            parsedLongitude,
+          ),
           _ => null,
         },
       _ => null,

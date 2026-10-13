@@ -23,7 +23,11 @@ class AddressAutofill {
     final houseCode = address.houseCode;
     if (street == null || houseCode == null || houseCode.isEmpty) return null;
 
-    final houseLocation = await _geocoder.locationOf(address);
+    final houseLocation = await _geocoder.locationFromStreetAddress(
+      houseCode: houseCode,
+      street: street,
+      countryIsoCode: address.countryIsoCode,
+    );
     if (houseLocation == null) return null;
 
     final areasContainingHouse = await _areasOfStreetWhere(street, [

@@ -303,4 +303,18 @@ void main() {
 
     expect(reportedAddresses.last.area, otherArea);
   });
+
+  testWidgets('a house number edit that leaves the trimmed house number '
+      'unchanged does not geocode again', (tester) async {
+    await pumpField(tester, initialAddress: const Address(street: mainStreet));
+    await typeHouseNumber(tester, '12');
+    await tester.pump(AddressWithLocationField.houseNumberGeocodingDebounce);
+    await tester.pumpAndSettle();
+
+    await typeHouseNumber(tester, '12 ');
+    await tester.pump(AddressWithLocationField.houseNumberGeocodingDebounce);
+    await tester.pumpAndSettle();
+
+    expect(geocoder.locationRequestCount, 1);
+  });
 }
