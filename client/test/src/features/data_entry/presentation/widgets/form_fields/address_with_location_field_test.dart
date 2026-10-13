@@ -7,44 +7,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../fakes/fake_areas_dao.dart';
 import '../../../../../fakes/fake_feature_flags_repo.dart';
+import '../../../../../fakes/fake_logging_service.dart';
+import '../../../../../fakes/fake_streets_dao.dart';
 import '../../../../../fakes/mock_database_service.dart';
 import '../../../../../fakes/mock_image_url_cache_service.dart';
 import '../../../../../fakes/mock_viewable_object_service.dart';
 import '../../../../../utils.dart';
-
-class FakeStreetsDAO extends Fake implements StreetsDAO {
-  List<Street> streets = const [];
-
-  @override
-  PaginatableStreamBase<Street> streamAll({
-    Stream<String?>? searchQuery,
-    Stream<List<Filter>>? where,
-    Stream<List<OrderBy>>? orderBy,
-    Stream<FieldMetadata?>? secondLineField,
-  }) => PaginatableStream.simple(
-    factory: (_) => Stream.value(PaginatableStreamResponse(data: streets)),
-  );
-}
-
-class FakeAreasDAO extends Fake implements AreasDAO {
-  final areasByStreetId = <String, List<Area>>{};
-  final lookupGatesByStreetId = <String, Completer<void>>{};
-
-  @override
-  Future<List<Area>> query({
-    bool onlineFirst = false,
-    String? searchQuery,
-    List<Filter>? where,
-    List<OrderBy>? orderBy,
-    int? limit,
-  }) async {
-    final streetId = where?.firstOrNull?.value;
-    await lookupGatesByStreetId[streetId]?.future;
-
-    return areasByStreetId[streetId] ?? const [];
-  }
-}
 
 void main() {
   const mainStreet = Street(id: 'main-street-id', name: 'شارع الجمهورية');
@@ -106,6 +76,7 @@ void main() {
     initGlobalProviderContainer([
       featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
       databaseServiceProvider.overrideWithValue(databaseService),
+      loggingServiceProvider.overrideWithValue(FakeLoggingService()),
       imageUrlCacheServiceProvider.overrideWithValue(
         MockImageUrlCacheService(),
       ),
@@ -194,6 +165,37 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(reportedAddresses.last.street, sideStreet);
+    expect(reportedAddresses.last.area, stMinaArea);
+  });
+
+  testWidgets('a failed area lookup leaves the area for the user to choose', (
+    tester,
+  ) async {
+    areas.lookupFailure = StateError('offline');
+    await pumpField(tester);
+
+    await chooseStreet(tester, mainStreet);
+
+    expect(reportedAddresses.last.street, mainStreet);
+    expect(reportedAddresses.last.area, isNull);
+  });
+
+  testWidgets('an area the user chose while the lookup was pending is not '
+      'overwritten by its result', (tester) async {
+    areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
+    areas.pickableAreas = const [stMarkArea, stMinaArea];
+    final mainStreetLookup = areas.lookupGatesByStreetId[mainStreet.id] =
+        Completer<void>();
+    await pumpField(tester);
+
+    await chooseStreet(tester, mainStreet);
+    await tester.tap(areaField());
+    await tester.pumpAndSettle();
+    await tester.tap(listItem(stMinaArea.id));
+    await tester.pumpAndSettle();
+    mainStreetLookup.complete();
+    await tester.pumpAndSettle();
+
     expect(reportedAddresses.last.area, stMinaArea);
   });
 }

@@ -129,10 +129,33 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
   }
 
   Future<void> _fillOnlyAreaOf(Street street) async {
-    final onlyArea = await _autofill.maybeOnlyAreaOf(street);
+    final areaWhenLookupStarted = _address.area;
+    final Area? onlyArea;
+    try {
+      onlyArea = await _autofill.maybeOnlyAreaOf(street);
+    } on Object catch (error, stackTrace) {
+      unawaited(
+        LoggingService.I.exception(
+          LogRecord(
+            moduleName: '$AddressWithLocationField',
+            eventName: 'fillOnlyAreaOf',
+            error: error,
+            stackTrace: stackTrace,
+          ),
+        ),
+      );
+
+      return;
+    }
 
     final streetWasReplacedMeanwhile = _address.street != street;
-    if (!mounted || streetWasReplacedMeanwhile || onlyArea == null) return;
+    final areaWasChosenMeanwhile = _address.area != areaWhenLookupStarted;
+    if (!mounted ||
+        streetWasReplacedMeanwhile ||
+        areaWasChosenMeanwhile ||
+        onlyArea == null) {
+      return;
+    }
 
     _setAddress(_address.copyWith(area: onlyArea));
   }
