@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:dio/dio.dart';
+import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -9,6 +12,10 @@ void main() {
   const location = Point(30.0444, 31.2357);
   const road = 'شارع الجمهورية';
   const suburb = 'وسط البلد';
+  final searchResult = {
+    'lat': '${location.latitude}',
+    'lon': '${location.longitude}',
+  };
   final reverseResponse = {
     'lat': '${location.latitude}',
     'lon': '${location.longitude}',
@@ -101,12 +108,31 @@ void main() {
 
   test('the first result of a search response becomes the location', () async {
     answerWith([
-      {'lat': '30.0444', 'lon': '31.2357'},
-      {'lat': '29.0', 'lon': '30.0'},
+      searchResult,
+      {'lat': '${location.latitude + 1}', 'lon': '${location.longitude + 1}'},
     ]);
 
     expect(await locationOfHouse(), location);
   });
+
+  test('numeric coordinates of a search result become the location', () async {
+    answerWith([
+      {'lat': location.latitude, 'lon': location.longitude},
+    ]);
+
+    expect(await locationOfHouse(), location);
+  });
+
+  test(
+    'a search result with an unparseable coordinate yields no location',
+    () async {
+      answerWith([
+        {'lat': 'north', 'lon': searchResult['lon']},
+      ]);
+
+      expect(await locationOfHouse(), isNull);
+    },
+  );
 
   test('a search response without results yields no location', () async {
     answerWith(<Object?>[]);
@@ -126,5 +152,38 @@ void main() {
     ]);
 
     expect(await locationOfHouse(), isNull);
+  });
+
+  test('requests issued together start at least the minimum spacing apart', () {
+    fakeAsync((async) {
+      geocoder = NominatimGeocoder(dio: dio);
+      final startTimes = <Duration>[];
+      when(
+        () => dio.getUri<dynamic>(any(), options: any(named: 'options')),
+      ).thenAnswer((_) async {
+        startTimes.add(async.elapsed);
+
+        return Response<dynamic>(
+          data: [searchResult],
+          statusCode: 200,
+          requestOptions: RequestOptions(),
+        );
+      });
+
+      unawaited(geocoder.addressAt(location));
+      unawaited(locationOfHouse());
+      unawaited(locationOfHouse());
+      async.elapse(NominatimGeocoder.minimumRequestSpacing * 3);
+
+      expect(startTimes, hasLength(3));
+      expect(
+        startTimes[1] - startTimes[0],
+        greaterThanOrEqualTo(NominatimGeocoder.minimumRequestSpacing),
+      );
+      expect(
+        startTimes[2] - startTimes[1],
+        greaterThanOrEqualTo(NominatimGeocoder.minimumRequestSpacing),
+      );
+    });
   });
 }

@@ -1,6 +1,22 @@
 part of 'spatial.dart';
 
 class Point extends Spatial {
+  static Point? tryParse(Object? latitude, Object? longitude) {
+    double? coordinate(Object? value) => switch (value) {
+      final num number => number.toDouble(),
+      final String text => double.tryParse(text),
+      _ => null,
+    };
+
+    return switch ((coordinate(latitude), coordinate(longitude))) {
+      (final parsedLatitude?, final parsedLongitude?) => Point(
+        parsedLatitude,
+        parsedLongitude,
+      ),
+      _ => null,
+    };
+  }
+
   final double latitude;
   final double longitude;
 

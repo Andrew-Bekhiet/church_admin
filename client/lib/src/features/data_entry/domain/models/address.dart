@@ -121,9 +121,6 @@ class Address with _$Address {
   factory Address.fromNominatimResponse(Map<String, Object?> data) {
     final addressData = data['address']! as Map<String, Object?>;
 
-    final double? lat = double.tryParse(data['lat'] as String? ?? '');
-    final double? lon = double.tryParse(data['lon'] as String? ?? '');
-
     final String? houseCode = switch ((addressData['house_number'] as String?)
         ?.trim()) {
       final houseNumber?
@@ -145,7 +142,7 @@ class Address with _$Address {
         .toUpperCase();
 
     return Address(
-      geolocation: lat != null && lon != null ? Point(lat, lon) : null,
+      geolocation: Point.tryParse(data['lat'], data['lon']),
       houseCode: houseCode,
       street: streetName != null
           ? Street(id: Namespace.nil.value, name: streetName.trim())
