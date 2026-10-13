@@ -1217,6 +1217,29 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
           as _i2.PaginatableStreamBase<_i2.User>);
 
   @override
+  _i7.Future<List<_i2.User>> query({
+    bool? onlineFirst = false,
+    String? searchQuery,
+    List<_i2.Filter<Object>>? where,
+    List<_i2.OrderBy>? orderBy,
+    int? limit,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#query, [], {
+              #onlineFirst: onlineFirst,
+              #searchQuery: searchQuery,
+              #where: where,
+              #orderBy: orderBy,
+              #limit: limit,
+            }),
+            returnValue: _i7.Future<List<_i2.User>>.value(<_i2.User>[]),
+            returnValueForMissingStub: _i7.Future<List<_i2.User>>.value(
+              <_i2.User>[],
+            ),
+          )
+          as _i7.Future<List<_i2.User>>);
+
+  @override
   _i2.PaginatableStreamBase<_i2.User> streamAllWithConfig({
     required _i2.StreamAllConfig<_i2.User>? streamAllConfig,
     _i2.StreamCountConfig<_i2.User>? streamCountConfig,

@@ -32,87 +32,102 @@ class AddressDistrictStreetAreaFields extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        ObjectSelectionField<District, District?>(
-          key: ValueKey(address.district),
-          enabled: enabled,
-          onCreateCustom: (name) =>
-              DatabaseService.I.metadata.districts.createObject(
-                newObject: District(id: const Uuid().v4(), name: name),
-              ),
-          listController: (s) =>
-              listControllerFor(DatabaseService.I.metadata.districts, s),
-          initialValue: address.district,
-          dialogFieldLabel: 'الحي',
-          builder: (context, state) {
-            if (state.value == null) {
-              return null;
-            }
+        KeyedSubtree(
+          key: AddressDistrictStreetAreaFieldsKeys.district,
+          child: ObjectSelectionField<District, District?>(
+            key: ValueKey(address.district),
+            enabled: enabled,
+            onCreateCustom: (name) =>
+                DatabaseService.I.metadata.districts.createObject(
+                  newObject: District(id: const Uuid().v4(), name: name),
+                ),
+            listController: (s) =>
+                listControllerFor(DatabaseService.I.metadata.districts, s),
+            initialValue: address.district,
+            dialogFieldLabel: 'الحي',
+            builder: (context, state) {
+              if (state.value == null) {
+                return null;
+              }
 
-            return Text(state.value!.name);
-          },
-          onChanged: onDistrictChanged,
+              return Text(state.value!.name);
+            },
+            onChanged: onDistrictChanged,
+          ),
         ),
-        ObjectSelectionField<Street, Street?>(
-          key: ValueKey(address.street),
-          enabled: enabled,
-          listController: (s) => listControllerFor(
-            DatabaseService.I.streets,
-            s,
-            where: address.area != null
-                ? [
-                    Filter(
-                      StreetFields().areasRel.redirectTo(
-                        AreasStreetsFields().areaId,
+        KeyedSubtree(
+          key: AddressDistrictStreetAreaFieldsKeys.street,
+          child: ObjectSelectionField<Street, Street?>(
+            key: ValueKey(address.street),
+            enabled: enabled,
+            listController: (s) => listControllerFor(
+              DatabaseService.I.streets,
+              s,
+              where: address.area != null
+                  ? [
+                      Filter(
+                        StreetFields().areasRel.redirectTo(
+                          AreasStreetsFields().areaId,
+                        ),
+                        PrimitiveOperator.eq,
+                        address.area!.id,
                       ),
-                      PrimitiveOperator.eq,
-                      address.area!.id,
-                    ),
-                  ]
-                : <Filter>[],
-          ),
-          initialValue: address.street,
-          dialogFieldLabel: 'الشارع الرئيسي',
-          builder: (context, state) {
-            if (state.value == null) {
-              return null;
-            }
+                    ]
+                  : <Filter>[],
+            ),
+            initialValue: address.street,
+            dialogFieldLabel: 'الشارع الرئيسي',
+            builder: (context, state) {
+              if (state.value == null) {
+                return null;
+              }
 
-            return Text(state.value!.name);
-          },
-          onChanged: onStreetChanged,
-          validator: (value) =>
-              value == null && required ? 'يجب إدخال الشارع' : null,
+              return Text(state.value!.name);
+            },
+            onChanged: onStreetChanged,
+            validator: (value) =>
+                value == null && required ? 'يجب إدخال الشارع' : null,
+          ),
         ),
-        ObjectSelectionField<Area, Area?>(
-          key: ValueKey(address.area),
-          enabled: enabled,
-          listController: (s) => listControllerFor(
-            DatabaseService.I.areas,
-            s,
-            where: address.street != null
-                ? [
-                    Filter(
-                      AreaFields().streets.redirectTo(StreetFields().id),
-                      PrimitiveOperator.eq,
-                      address.street!.id,
-                    ),
-                  ]
-                : [],
-          ),
-          initialValue: address.area,
-          dialogFieldLabel: 'المنطقة',
-          builder: (context, state) {
-            if (state.value == null) {
-              return null;
-            }
+        KeyedSubtree(
+          key: AddressDistrictStreetAreaFieldsKeys.area,
+          child: ObjectSelectionField<Area, Area?>(
+            key: ValueKey(address.area),
+            enabled: enabled,
+            listController: (s) => listControllerFor(
+              DatabaseService.I.areas,
+              s,
+              where: address.street != null
+                  ? [
+                      Filter(
+                        AreaFields().streets.redirectTo(StreetFields().id),
+                        PrimitiveOperator.eq,
+                        address.street!.id,
+                      ),
+                    ]
+                  : [],
+            ),
+            initialValue: address.area,
+            dialogFieldLabel: 'المنطقة',
+            builder: (context, state) {
+              if (state.value == null) {
+                return null;
+              }
 
-            return Text(state.value!.name);
-          },
-          onChanged: onAreaChanged,
-          validator: (value) =>
-              value == null && required ? 'يجب إدخال المنطقة' : null,
+              return Text(state.value!.name);
+            },
+            onChanged: onAreaChanged,
+            validator: (value) =>
+                value == null && required ? 'يجب إدخال المنطقة' : null,
+          ),
         ),
       ],
     );
   }
+}
+
+abstract final class AddressDistrictStreetAreaFieldsKeys {
+  static const Key district = ValueKey('Address District Field Key');
+  static const Key street = ValueKey('Address Street Field Key');
+  static const Key area = ValueKey('Address Area Field Key');
 }

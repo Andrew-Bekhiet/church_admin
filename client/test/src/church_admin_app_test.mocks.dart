@@ -1100,6 +1100,29 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
           as _i4.PaginatableStreamBase<_i4.User>);
 
   @override
+  _i9.Future<List<_i4.User>> query({
+    bool? onlineFirst = false,
+    String? searchQuery,
+    List<_i4.Filter<Object>>? where,
+    List<_i4.OrderBy>? orderBy,
+    int? limit,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#query, [], {
+              #onlineFirst: onlineFirst,
+              #searchQuery: searchQuery,
+              #where: where,
+              #orderBy: orderBy,
+              #limit: limit,
+            }),
+            returnValue: _i9.Future<List<_i4.User>>.value(<_i4.User>[]),
+            returnValueForMissingStub: _i9.Future<List<_i4.User>>.value(
+              <_i4.User>[],
+            ),
+          )
+          as _i9.Future<List<_i4.User>>);
+
+  @override
   _i4.PaginatableStreamBase<_i4.User> streamAllWithConfig({
     required _i4.StreamAllConfig<_i4.User>? streamAllConfig,
     _i4.StreamCountConfig<_i4.User>? streamCountConfig,
@@ -1480,6 +1503,29 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
           as _i4.PaginatableStreamBase<_i4.Person>);
 
   @override
+  _i9.Future<List<_i4.Person>> query({
+    bool? onlineFirst = false,
+    String? searchQuery,
+    List<_i4.Filter<Object>>? where,
+    List<_i4.OrderBy>? orderBy,
+    int? limit,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#query, [], {
+              #onlineFirst: onlineFirst,
+              #searchQuery: searchQuery,
+              #where: where,
+              #orderBy: orderBy,
+              #limit: limit,
+            }),
+            returnValue: _i9.Future<List<_i4.Person>>.value(<_i4.Person>[]),
+            returnValueForMissingStub: _i9.Future<List<_i4.Person>>.value(
+              <_i4.Person>[],
+            ),
+          )
+          as _i9.Future<List<_i4.Person>>);
+
+  @override
   _i4.PaginatableStreamBase<_i4.Person> streamAllWithConfig({
     required _i4.StreamAllConfig<_i4.Person>? streamAllConfig,
     _i4.StreamCountConfig<_i4.Person>? streamCountConfig,
@@ -1782,6 +1828,29 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
             ),
           )
           as _i4.PaginatableStreamBase<_i4.Area>);
+
+  @override
+  _i9.Future<List<_i4.Area>> query({
+    bool? onlineFirst = false,
+    String? searchQuery,
+    List<_i4.Filter<Object>>? where,
+    List<_i4.OrderBy>? orderBy,
+    int? limit,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#query, [], {
+              #onlineFirst: onlineFirst,
+              #searchQuery: searchQuery,
+              #where: where,
+              #orderBy: orderBy,
+              #limit: limit,
+            }),
+            returnValue: _i9.Future<List<_i4.Area>>.value(<_i4.Area>[]),
+            returnValueForMissingStub: _i9.Future<List<_i4.Area>>.value(
+              <_i4.Area>[],
+            ),
+          )
+          as _i9.Future<List<_i4.Area>>);
 
   @override
   _i9.Stream<_i4.Area?> streamSingleById({required String? id}) =>
@@ -2097,6 +2166,29 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
                 ),
           )
           as _i4.PaginatableStreamBase<_i4.Service>);
+
+  @override
+  _i9.Future<List<_i4.Service>> query({
+    bool? onlineFirst = false,
+    String? searchQuery,
+    List<_i4.Filter<Object>>? where,
+    List<_i4.OrderBy>? orderBy,
+    int? limit,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#query, [], {
+              #onlineFirst: onlineFirst,
+              #searchQuery: searchQuery,
+              #where: where,
+              #orderBy: orderBy,
+              #limit: limit,
+            }),
+            returnValue: _i9.Future<List<_i4.Service>>.value(<_i4.Service>[]),
+            returnValueForMissingStub: _i9.Future<List<_i4.Service>>.value(
+              <_i4.Service>[],
+            ),
+          )
+          as _i9.Future<List<_i4.Service>>);
 
   @override
   _i9.Stream<_i4.Service?> streamSingleById({required String? id}) =>

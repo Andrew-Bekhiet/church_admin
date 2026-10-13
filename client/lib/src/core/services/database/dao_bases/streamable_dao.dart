@@ -28,6 +28,43 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
     );
   }
 
+  Future<List<T>> query({
+    bool onlineFirst = false,
+    String? searchQuery,
+    List<Filter>? where,
+    List<OrderBy>? orderBy,
+    int? limit,
+  }) async {
+    final streamAllConfig = baseStreamAllConfig;
+    final pageSize = limit ?? PaginatableStream.defaultPageSize;
+    final parameters = StreamableDAOParameters<T>(
+      search: searchQuery,
+      where: where?.whereEnabled(),
+      orderBy: orderBy?.whereEnabled(),
+    );
+    final request = PaginatableStreamRequest<T, StreamableDAOParameters<T>?>(
+      pageIndex: 0,
+      pageSize: pageSize,
+      param: parameters,
+    );
+
+    final response = await graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: SubscriptionToQueryConverter.convert(
+          transformDocument(streamAllConfig.document, parameters: parameters),
+        ),
+        operationName: streamAllConfig.effectiveOperationName,
+        variables: _getEffectiveStreamAllVars(streamAllConfig, request),
+        parserFn:
+            streamAllConfig.parserFn ??
+            db.parser.singleListParser(fromJson, pageSize: pageSize),
+      ),
+      onlineFirst: onlineFirst,
+    );
+
+    return response.data;
+  }
+
   Stream<T?> streamSingleById({
     required String id,
   }) {
