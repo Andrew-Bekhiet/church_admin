@@ -1,3 +1,4 @@
+export 'application/address_autofill.dart';
 export 'application/contacts_service.dart';
 export 'application/image_picker_service.dart';
 export 'application/image_url_cache_migration.dart';

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/data_entry/presentation/widgets/form_fields/address_apartment_details_row.dart';
 import 'package:church_admin/src/features/data_entry/presentation/widgets/form_fields/address_district_street_area_fields.dart';
@@ -32,6 +34,9 @@ class AddressWithLocationField extends StatefulWidget {
 class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
   late Address _address = widget.initialAddress ?? const Address();
   late final ValueNotifier<Address> _previewedAddress = ValueNotifier(_address);
+  late final AddressAutofill _autofill = AddressAutofill(
+    DatabaseService.I.areas,
+  );
   Address? _suggestedAddress;
 
   @override
@@ -71,8 +76,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
             listControllerFor: _listControllerFor,
             onDistrictChanged: (district) =>
                 _setAddress(_address.copyWith(district: district)),
-            onStreetChanged: (street) =>
-                _setAddress(_address.copyWith(street: street)),
+            onStreetChanged: _handleStreetChanged,
             onAreaChanged: (area) => _setAddress(_address.copyWith(area: area)),
           ),
           AddressHouseNumberRow(
@@ -116,6 +120,21 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
   void dispose() {
     _previewedAddress.dispose();
     super.dispose();
+  }
+
+  void _handleStreetChanged(Street? street) {
+    _setAddress(_address.copyWith(street: street));
+
+    if (street != null) unawaited(_fillOnlyAreaOf(street));
+  }
+
+  Future<void> _fillOnlyAreaOf(Street street) async {
+    final onlyArea = await _autofill.maybeOnlyAreaOf(street);
+
+    final streetWasReplacedMeanwhile = _address.street != street;
+    if (!mounted || streetWasReplacedMeanwhile || onlyArea == null) return;
+
+    _setAddress(_address.copyWith(area: onlyArea));
   }
 
   Future<void> _handleLocationTap(FormFieldState<Point?> state) async {
