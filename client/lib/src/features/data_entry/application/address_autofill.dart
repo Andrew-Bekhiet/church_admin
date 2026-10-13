@@ -6,17 +6,16 @@ class AddressAutofill {
   const AddressAutofill(this._areas);
 
   Future<Area?> maybeOnlyAreaOf(Street street) async {
-    final areasOfStreet = await _areas
-        .streamAll(
-          where: Stream.value([
-            Filter(
-              AreaFields().streets.redirectTo(StreetFields().id),
-              PrimitiveOperator.eq,
-              street.id,
-            ),
-          ]),
-        )
-        .first;
+    final areasOfStreet = await _areas.query(
+      where: [
+        Filter(
+          AreaFields().streets.redirectTo(StreetFields().id),
+          PrimitiveOperator.eq,
+          street.id,
+        ),
+      ],
+      onlineFirst: true,
+    );
 
     return switch (areasOfStreet) {
       [final onlyArea] => onlyArea,

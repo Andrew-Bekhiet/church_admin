@@ -2,10 +2,20 @@ import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
 class DBGraphQLClient extends GraphQLClient {
+  static FetchPolicy _fetchPolicyFor(
+    bool? connected, {
+    required FetchPolicy whenConnected,
+  }) => connected == false ? FetchPolicy.cacheFirst : whenConnected;
+
   final bool autoChangeFetchPolicy;
 
+  final ValueStream<bool> _connectivityStream;
   final ValueStream<FetchPolicy> _fetchPolicyStream;
   FetchPolicy get _currentFetchPolicy => _fetchPolicyStream.value;
+  FetchPolicy get _onlineFirstFetchPolicy => _fetchPolicyFor(
+    _connectivityStream.valueOrNull,
+    whenConnected: FetchPolicy.networkOnly,
+  );
   DBGraphQLClient({
     required ValueStream<bool> connectivityStream,
     required super.link,
@@ -13,11 +23,13 @@ class DBGraphQLClient extends GraphQLClient {
     this.autoChangeFetchPolicy = true,
     super.alwaysRebroadcast,
     super.defaultPolicies,
-  }) : _fetchPolicyStream = connectivityStream
+  }) : _connectivityStream = connectivityStream,
+       _fetchPolicyStream = connectivityStream
            .map(
-             (connected) => connected
-                 ? FetchPolicy.cacheAndNetwork
-                 : FetchPolicy.cacheFirst,
+             (connected) => _fetchPolicyFor(
+               connected,
+               whenConnected: FetchPolicy.cacheAndNetwork,
+             ),
            )
            .distinct()
            .shareValueSeeded(FetchPolicy.cacheAndNetwork);
@@ -124,12 +136,19 @@ class DBGraphQLClient extends GraphQLClient {
   @override
   Future<QueryResult<TParsed>> query<TParsed>(
     QueryOptions<TParsed> options, {
+    bool onlineFirst = false,
     bool? autoChangeFetchPolicy,
   }) async {
-    final future = autoChangeFetchPolicy ?? this.autoChangeFetchPolicy
+    final fetchPolicy = switch (onlineFirst) {
+      true => _onlineFirstFetchPolicy,
+      false when autoChangeFetchPolicy ?? this.autoChangeFetchPolicy =>
+        _currentFetchPolicy,
+      false => null,
+    };
+    final future = fetchPolicy != null
         ? super.query(
             options.copyWithPolicies(
-              options.policies.copyWith(fetch: _currentFetchPolicy),
+              options.policies.copyWith(fetch: fetchPolicy),
             ),
           )
         : super.query(options);
@@ -149,11 +168,13 @@ class DBGraphQLClient extends GraphQLClient {
 
   Future<T> queryAndReturnParsed<T>(
     QueryOptions<T> options, {
+    bool onlineFirst = false,
     bool? autoChangeFetchPolicy,
   }) {
     return query(
       options,
       autoChangeFetchPolicy: autoChangeFetchPolicy,
+      onlineFirst: onlineFirst,
     ).then((r) => r.parsedData!);
   }
 }

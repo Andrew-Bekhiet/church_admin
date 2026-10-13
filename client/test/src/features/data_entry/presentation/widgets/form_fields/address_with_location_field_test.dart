@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/data_entry/presentation/widgets/form_fields/address_district_street_area_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -31,23 +32,18 @@ class FakeAreasDAO extends Fake implements AreasDAO {
   final lookupGatesByStreetId = <String, Completer<void>>{};
 
   @override
-  PaginatableStreamBase<Area> streamAll({
-    Stream<String?>? searchQuery,
-    Stream<List<Filter>>? where,
-    Stream<List<OrderBy>>? orderBy,
-    Stream<FieldMetadata?>? secondLineField,
-  }) => PaginatableStream.simple(
-    factory: (_) => (where ?? Stream.value(const <Filter>[])).asyncMap((
-      filters,
-    ) async {
-      final streetId = filters.firstOrNull?.value;
-      await lookupGatesByStreetId[streetId]?.future;
+  Future<List<Area>> query({
+    bool onlineFirst = false,
+    String? searchQuery,
+    List<Filter>? where,
+    List<OrderBy>? orderBy,
+    int? limit,
+  }) async {
+    final streetId = where?.firstOrNull?.value;
+    await lookupGatesByStreetId[streetId]?.future;
 
-      return PaginatableStreamResponse(
-        data: areasByStreetId[streetId] ?? const [],
-      );
-    }),
-  );
+    return areasByStreetId[streetId] ?? const [];
+  }
 }
 
 void main() {
@@ -84,10 +80,10 @@ void main() {
     );
   }
 
-  Finder areaField() => find.byType(ObjectSelectionField<Area, Area?>);
+  Finder areaField() => find.byKey(AddressDistrictStreetAreaFieldsKeys.area);
 
   Future<void> chooseStreet(WidgetTester tester, Street street) async {
-    await tester.tap(find.byType(ObjectSelectionField<Street, Street?>));
+    await tester.tap(find.byKey(AddressDistrictStreetAreaFieldsKeys.street));
     await tester.pumpAndSettle();
     await tester.tap(listItem(street.id));
     await tester.pumpAndSettle();
@@ -174,7 +170,7 @@ void main() {
 
     await tester.tap(
       find.descendant(
-        of: find.byType(ObjectSelectionField<Street, Street?>),
+        of: find.byKey(AddressDistrictStreetAreaFieldsKeys.street),
         matching: find.byTooltip('حذف القيمة'),
       ),
     );
