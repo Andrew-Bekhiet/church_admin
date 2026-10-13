@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/churches_dao.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/colleges_dao.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/districts_dao.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/fathers_dao.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/hobbies_dao.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/jobs_dao.dart';

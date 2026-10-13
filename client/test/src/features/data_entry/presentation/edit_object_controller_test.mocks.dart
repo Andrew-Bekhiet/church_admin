@@ -172,15 +172,6 @@ class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
           as _i6.Future<bool>);
 
   @override
-  _i6.Future<_i5.Address?> getAddressFromLocation(_i5.Point? location) =>
-      (super.noSuchMethod(
-            Invocation.method(#getAddressFromLocation, [location]),
-            returnValue: _i6.Future<_i5.Address?>.value(),
-            returnValueForMissingStub: _i6.Future<_i5.Address?>.value(),
-          )
-          as _i6.Future<_i5.Address?>);
-
-  @override
   _i6.Future<_i3.Response<dynamic>> uploadPhoto({
     required String? url,
     required _i6.Stream<List<int>>? fileStream,

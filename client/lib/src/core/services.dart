@@ -8,6 +8,8 @@ export 'services/device_info_service.dart';
 export 'services/encryption.dart';
 export 'services/font_licenses.dart';
 export 'services/functions_service.dart';
+export 'services/geocoding/geocoder.dart';
+export 'services/geocoding/nominatim_geocoder.dart';
 export 'services/launcher_service.dart';
 export 'services/router.dart';
 export 'services/secrets/secrets_service.dart';

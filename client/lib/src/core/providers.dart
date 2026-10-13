@@ -238,6 +238,10 @@ final functionsServiceProvider = Provider<FunctionsService>(
   (ref) => FunctionsService(dio: ref.watch(dioProvider)),
 );
 
+final geocoderProvider = Provider<Geocoder>(
+  (ref) => NominatimGeocoder(dio: ref.watch(dioProvider)),
+);
+
 final secureStorageProvider = Provider<FlutterSecureStorage>(
   (ref) => const FlutterSecureStorage(
     aOptions: AndroidOptions(storageNamespace: 'secure_storage'),

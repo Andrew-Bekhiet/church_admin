@@ -7,11 +7,14 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../fakes/fake_areas_dao.dart';
+import '../../../../../fakes/fake_districts_dao.dart';
 import '../../../../../fakes/fake_feature_flags_repo.dart';
+import '../../../../../fakes/fake_geocoder.dart';
 import '../../../../../fakes/fake_logging_service.dart';
 import '../../../../../fakes/fake_streets_dao.dart';
 import '../../../../../fakes/mock_database_service.dart';
 import '../../../../../fakes/mock_image_url_cache_service.dart';
+import '../../../../../fakes/mock_metadata_dao.dart';
 import '../../../../../fakes/mock_viewable_object_service.dart';
 import '../../../../../utils.dart';
 
@@ -66,6 +69,9 @@ void main() {
     final databaseService = MockDatabaseService();
     when(() => databaseService.streets).thenReturn(streets);
     when(() => databaseService.areas).thenReturn(areas);
+    final metadata = MockMetadataDAO();
+    when(() => metadata.districts).thenReturn(FakeDistrictsDAO());
+    when(() => databaseService.metadata).thenReturn(metadata);
 
     final viewableObjects = MockViewableObjectService();
     when(
@@ -76,6 +82,7 @@ void main() {
       featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
       databaseServiceProvider.overrideWithValue(databaseService),
       loggingServiceProvider.overrideWithValue(FakeLoggingService()),
+      geocoderProvider.overrideWithValue(FakeGeocoder()),
       imageUrlCacheServiceProvider.overrideWithValue(
         MockImageUrlCacheService(),
       ),

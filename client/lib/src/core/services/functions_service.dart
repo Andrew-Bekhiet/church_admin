@@ -77,30 +77,6 @@ class FunctionsService {
     }
   }
 
-  Future<Address?> getAddressFromLocation(Point location) async {
-    final response = await _dio.getUri(
-      Uri(
-        scheme: 'https',
-        host: 'nominatim.openstreetmap.org',
-        path: 'reverse',
-        queryParameters: {
-          'lat': '${location.latitude}',
-          'lon': '${location.longitude}',
-          'accept': 'language=ar-EG',
-          'format': 'jsonv2',
-          'addressdetails': '1',
-        },
-      ),
-      options: Options(headers: {'User-Agent': 'church_admin'}),
-    );
-
-    if (response.statusCode != 200 || response.data == null) {
-      return null;
-    }
-
-    return Address.fromNominatimResponse(response.data);
-  }
-
   Future<Response> uploadPhoto({
     required String url,
     required Stream<List<int>> fileStream,

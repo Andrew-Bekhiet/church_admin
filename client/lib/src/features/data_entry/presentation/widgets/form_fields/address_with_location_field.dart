@@ -30,7 +30,10 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
   late Address _address = widget.initialAddress ?? const Address();
   late final ValueNotifier<Address> _previewedAddress = ValueNotifier(_address);
   late final AddressAutofill _autofill = AddressAutofill(
-    DatabaseService.I.areas,
+    areas: DatabaseService.I.areas,
+    streets: DatabaseService.I.streets,
+    districts: DatabaseService.I.metadata.districts,
+    geocoder: Geocoder.I,
   );
   Address? _suggestedAddress;
 
@@ -162,23 +165,36 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
 
     final newAddress = _address.copyWith(geolocation: newLocation);
     state.didChange(newLocation);
+    _suggestedAddress = null;
     _setAddress(newAddress);
 
-    final addressFromLocation = await FunctionsService.I.getAddressFromLocation(
-      newLocation,
-    );
+    final Address suggestedAddress;
+    try {
+      suggestedAddress = await _autofill.suggestFromLocation(newLocation);
+    } on Object catch (error, stackTrace) {
+      unawaited(
+        LoggingService.I.exception(
+          LogRecord(
+            moduleName: '$AddressWithLocationField',
+            eventName: 'suggestFromLocation',
+            error: error,
+            stackTrace: stackTrace,
+          ),
+        ),
+      );
 
-    if (addressFromLocation == null) return;
+      return;
+    }
 
-    final addressWithParsedObjects = await _parseAddressParentObjects(
-      addressFromLocation,
-    );
+    final locationWasReplacedMeanwhile = _address.geolocation != newLocation;
+    if (!mounted || locationWasReplacedMeanwhile) return;
+
+    final hasAnythingToSuggest =
+        suggestedAddress.area != null ||
+        suggestedAddress.toString().trim().isNotEmpty;
 
     setState(
-      () =>
-          _suggestedAddress = addressWithParsedObjects.toString().trim().isEmpty
-          ? null
-          : addressWithParsedObjects,
+      () => _suggestedAddress = hasAnythingToSuggest ? suggestedAddress : null,
     );
   }
 
@@ -218,38 +234,6 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     );
 
     return ViewableObjectListController<T>(objectsPaginatableStream: stream);
-  }
-
-  Future<Address> _parseAddressParentObjects(Address address) async {
-    final area = address.area != null
-        ? await DatabaseService.I.areas
-              .streamAll(searchQuery: Stream.value(address.area!.name))
-              .first
-        : null;
-
-    final street = address.street != null
-        ? await DatabaseService.I.streets
-              .streamAll(
-                searchQuery: Stream.value(
-                  address.street!.name
-                      .replaceAll(RegExp('(شارع)|(الشارع)'), '')
-                      .trim(),
-                ),
-              )
-              .first
-        : null;
-
-    final district = address.district != null
-        ? await DatabaseService.I.metadata.districts
-              .streamAll(searchQuery: Stream.value(address.district!.name))
-              .first
-        : null;
-
-    return address.copyWith(
-      area: area?.firstOrNull,
-      street: street?.firstOrNull,
-      district: district?.firstOrNull,
-    );
   }
 
   Address _mergeWithCurrentAddress(Address suggestedAddress) {
