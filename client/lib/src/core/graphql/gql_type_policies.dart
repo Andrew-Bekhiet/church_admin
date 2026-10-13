@@ -28,6 +28,8 @@ abstract final class GqlTypePolicies {
     // Keyed by order (studyYearsByPk(order:)); their id is a nullable String
     // that is never selected.
     'StudyYears': TypePolicy(keyFields: {'order': true}),
+    'DataChecks': TypePolicy(keyFields: {'familyId': true}),
+    'DataCheckOverrides': TypePolicy(keyFields: {'familyId': true}),
   };
 
   // Keying these is deferred to ENG-157.

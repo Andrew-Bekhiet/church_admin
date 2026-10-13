@@ -49,6 +49,9 @@ const model = 0;
 ''',
     });
 
-    expect(result.succeeded, isFalse);
+    expect(
+      result.errors,
+      contains(contains('@Queryable can only be used on classes or enums')),
+    );
   });
 }

@@ -2,6 +2,7 @@ final class RegistryEntry {
   final String typeName;
   final String label;
   final bool isEnum;
+  final String? keyFieldMemberName;
 
   String get memberName {
     final lowerFirst = typeName[0].toLowerCase() + typeName.substring(1);
@@ -13,5 +14,6 @@ final class RegistryEntry {
     required this.typeName,
     required this.label,
     required this.isEnum,
+    this.keyFieldMemberName,
   });
 }

@@ -12,7 +12,7 @@ part 'person.g.dart';
 @Queryable(label: 'المخدومين', extensible: true)
 class Person extends ViewableWithIDAndImage
     with _$Person
-    implements SerializableExtra {
+    implements SerializableExtra, HasDataCheck {
   static const Duration maxSpiritDataAge = Duration(days: 60);
 
   @override
@@ -207,6 +207,10 @@ class Person extends ViewableWithIDAndImage
   final LastRecordedByInfo? lastEdit;
 
   @override
+  @QueryableField(label: 'اكتمال البيانات')
+  final DataCheck? dataCheck;
+
+  @override
   @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
   @QueryableField.manyToMany(through: ClassesPersons)
   final List<Class>? classes;
@@ -358,6 +362,7 @@ class Person extends ViewableWithIDAndImage
     LastRecordedByInfo? lastCall,
     LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastEdit,
+    this.dataCheck,
     this.classes,
     this.groups,
     this.services,

@@ -7,7 +7,7 @@ part 'user.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(label: 'الخدام', extensible: true)
+@Queryable(label: 'الخدام', keyField: 'uid', extensible: true)
 class User extends ViewableWithIDAndImage
     with _$User
     implements SerializableExtra {

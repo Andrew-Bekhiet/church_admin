@@ -1,0 +1,125 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
+part of 'data_check.dart';
+
+// **************************************************************************
+// QueryableFieldsGenerator
+// **************************************************************************
+
+class DataCheckFields {
+  factory DataCheckFields() => _instance;
+
+  DataCheckFields._();
+
+  static final DataCheckFields _instance = DataCheckFields._();
+
+  final FieldMetadata<int> completenessPercent = FieldMetadata<int>(
+    getValue: (obj) => obj is DataCheck ? obj.completenessPercent : null,
+    parentType: DataCheck,
+    name: 'completenessPercent',
+    label: 'نسبة اكتمال البيانات',
+    isCodeOnly: false,
+    operators: {...PrimitiveOperator.values},
+  );
+
+  final FieldMetadata<bool> isComplete = FieldMetadata<bool>(
+    getValue: (obj) => obj is DataCheck ? obj.isComplete : null,
+    parentType: DataCheck,
+    name: 'isComplete',
+    label: 'البيانات مكتملة',
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  final FieldMetadata<bool> familyCheck = FieldMetadata<bool>(
+    getValue: (obj) => obj is DataCheck ? obj.familyCheck : null,
+    parentType: DataCheck,
+    name: 'familyCheck',
+    label: 'بيانات العائلة مكتملة',
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  final FieldMetadata<bool> addressCheck = FieldMetadata<bool>(
+    getValue: (obj) => obj is DataCheck ? obj.addressCheck : null,
+    parentType: DataCheck,
+    name: 'addressCheck',
+    label: 'العنوان مكتمل',
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  final FieldMetadata<DataCheckOverride> userOverride =
+      FieldMetadata<DataCheckOverride>(
+        getValue: (obj) => obj is DataCheck ? obj.userOverride : null,
+        parentType: DataCheck,
+        name: 'userOverride',
+        label: 'تعديل يدوي',
+        isCodeOnly: false,
+        isOrderable: false,
+        operators: {...MultiSelectOperator.values},
+      );
+
+  final FieldMetadata<String> familyId = FieldMetadata<String>(
+    getValue: (obj) => obj is DataCheck ? obj.familyId : null,
+    parentType: DataCheck,
+    name: 'familyId',
+    label: 'العائلة',
+    isCodeOnly: true,
+    operators: {...StringOperator.values},
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    completenessPercent,
+    isComplete,
+    familyCheck,
+    addressCheck,
+    userOverride,
+    familyId,
+  ];
+
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'completenessPercent': completenessPercent,
+    'isComplete': isComplete,
+    'familyCheck': familyCheck,
+    'addressCheck': addressCheck,
+    'userOverride': userOverride,
+    'familyId': familyId,
+  };
+}
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+DataCheck _$DataCheckFromJson(Map json) => DataCheck(
+  familyId: json['familyId'] as String,
+  completenessPercent: (json['completenessPercent'] as num?)?.toInt() ?? 0,
+  isComplete: json['isComplete'] as bool? ?? false,
+  familyCheck: json['familyCheck'] as bool? ?? false,
+  addressCheck: json['addressCheck'] as bool? ?? false,
+  checksDetails:
+      (json['details'] as List<dynamic>?)
+          ?.map(
+            (e) =>
+                DataCheckDetail.fromJson(Map<String, Object?>.from(e as Map)),
+          )
+          .toList() ??
+      [],
+  userOverride: json['userOverride'] == null
+      ? DataCheckOverride.none
+      : DataCheckOverride.fromBoolean(json['userOverride'] as bool?),
+);
+
+Map<String, dynamic> _$DataCheckToJson(DataCheck instance) => <String, dynamic>{
+  'completenessPercent': instance.completenessPercent,
+  'isComplete': instance.isComplete,
+  'familyCheck': instance.familyCheck,
+  'addressCheck': instance.addressCheck,
+  'userOverride': _dataCheckOverrideToBoolean(instance.userOverride),
+  'familyId': instance.familyId,
+  'details': instance.checksDetails.map((e) => e.toJson()).toList(),
+};

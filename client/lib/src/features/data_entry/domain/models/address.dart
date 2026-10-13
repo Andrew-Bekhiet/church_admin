@@ -8,7 +8,7 @@ part 'address.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(label: 'العنوان', extensible: true)
+@Queryable(label: 'العنوان')
 class Address with _$Address {
   static const int houseCodeMaxLength = 5;
 
@@ -27,6 +27,7 @@ class Address with _$Address {
   }
 
   @override
+  @QueryableField.self(codeOnly: true, orderable: false)
   final String? id;
 
   @override
@@ -238,28 +239,4 @@ class Address with _$Address {
 
     return result;
   }
-}
-
-class AddressFields extends _AddressFields {
-  FieldMetadata<Address> get id => FieldMetadata<Address>(
-    parentType: Address,
-    name: 'id',
-    label: '=',
-    isCodeOnly: true,
-    isOrderable: false,
-    getValue: (obj) => obj is Address ? obj.id : null,
-  );
-
-  @override
-  List<FieldMetadata<Object>> get allFields => [id, ...super.allFields];
-
-  @override
-  Map<String, FieldMetadata<Object>> get allFieldsByName {
-    return {
-      id.name: id,
-      ...super.allFieldsByName,
-    };
-  }
-
-  AddressFields();
 }

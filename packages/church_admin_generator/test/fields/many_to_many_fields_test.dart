@@ -36,6 +36,9 @@ void main() {
       '@QueryableField.manyToMany(through: PersonsTags)\nlate final Tag tag;',
     );
 
-    expect(result.succeeded, isFalse);
+    expect(
+      result.errors,
+      contains(contains('@QueryableField.manyToMany needs a collection field')),
+    );
   });
 }

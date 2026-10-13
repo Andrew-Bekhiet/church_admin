@@ -30,6 +30,7 @@ mixin _$Family {
   LastRecordedByInfo? get lastEdit;
   LastRecordedByInfo? get lastVisit;
   LastRecordedByInfo? get lastFatherVisit;
+  DataCheck? get dataCheck;
   bool get userCanEdit;
 
   /// Create a copy of Family
@@ -68,13 +69,15 @@ mixin _$Family {
                 other.lastVisit == lastVisit) &&
             (identical(other.lastFatherVisit, lastFatherVisit) ||
                 other.lastFatherVisit == lastFatherVisit) &&
+            (identical(other.dataCheck, dataCheck) ||
+                other.dataCheck == dataCheck) &&
             (identical(other.userCanEdit, userCanEdit) ||
                 other.userCanEdit == userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     id,
     name,
@@ -93,12 +96,13 @@ mixin _$Family {
     lastEdit,
     lastVisit,
     lastFatherVisit,
+    dataCheck,
     userCanEdit,
-  );
+  ]);
 
   @override
   String toString() {
-    return 'Family(id: $id, name: $name, address: $address, status: $status, marriageDate: $marriageDate, deceasedSpouseName: $deceasedSpouseName, church: $church, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, contacts: $contacts, lastEdit: $lastEdit, lastVisit: $lastVisit, lastFatherVisit: $lastFatherVisit, userCanEdit: $userCanEdit)';
+    return 'Family(id: $id, name: $name, address: $address, status: $status, marriageDate: $marriageDate, deceasedSpouseName: $deceasedSpouseName, church: $church, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, contacts: $contacts, lastEdit: $lastEdit, lastVisit: $lastVisit, lastFatherVisit: $lastFatherVisit, dataCheck: $dataCheck, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -126,6 +130,7 @@ abstract mixin class $FamilyCopyWith<$Res> {
     LastRecordedByInfo? lastEdit,
     LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastFatherVisit,
+    DataCheck? dataCheck,
   });
 }
 
@@ -159,6 +164,7 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
     Object? lastEdit = freezed,
     Object? lastVisit = freezed,
     Object? lastFatherVisit = freezed,
+    Object? dataCheck = freezed,
   }) {
     return _then(
       Family(
@@ -234,6 +240,10 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
             ? _self.lastFatherVisit
             : lastFatherVisit // ignore: cast_nullable_to_non_nullable
                   as LastRecordedByInfo?,
+        dataCheck: freezed == dataCheck
+            ? _self.dataCheck
+            : dataCheck // ignore: cast_nullable_to_non_nullable
+                  as DataCheck?,
       ),
     );
   }

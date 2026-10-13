@@ -18,6 +18,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: AttendanceRecordFields().allFields,
     fieldsMetadataByName: AttendanceRecordFields().allFieldsByName,
     fromJson: AttendanceRecord.fromJson,
+    keyField: AttendanceRecordFields().id,
   );
 
   final meeting = QueryableType<Meeting>(
@@ -26,6 +27,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: MeetingFields().allFields,
     fieldsMetadataByName: MeetingFields().allFieldsByName,
     fromJson: Meeting.fromJson,
+    keyField: MeetingFields().id,
   );
 
   final aggregateData = QueryableType<AggregateData>(
@@ -44,12 +46,22 @@ abstract final class _$AdvancedQueriesMetadata {
     fromJson: HistoryAggregateData.fromJson,
   );
 
+  final dataCheck = QueryableType<DataCheck>(
+    name: 'DataCheck',
+    label: 'اكتمال البيانات',
+    fieldsMetadata: DataCheckFields().allFields,
+    fieldsMetadataByName: DataCheckFields().allFieldsByName,
+    fromJson: DataCheck.fromJson,
+    keyField: DataCheckFields().familyId,
+  );
+
   final address = QueryableType<Address>(
     name: 'Address',
     label: 'العنوان',
     fieldsMetadata: AddressFields().allFields,
     fieldsMetadataByName: AddressFields().allFieldsByName,
     fromJson: Address.fromJson,
+    keyField: AddressFields().id,
   );
 
   final area = QueryableType<Area>(
@@ -58,6 +70,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: AreaFields().allFields,
     fieldsMetadataByName: AreaFields().allFieldsByName,
     fromJson: Area.fromJson,
+    keyField: AreaFields().id,
   );
 
   final church = QueryableType<Church>(
@@ -66,6 +79,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: ChurchFields().allFields,
     fieldsMetadataByName: ChurchFields().allFieldsByName,
     fromJson: Church.fromJson,
+    keyField: ChurchFields().id,
   );
 
   final $class = QueryableType<Class>(
@@ -74,6 +88,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: ClassFields().allFields,
     fieldsMetadataByName: ClassFields().allFieldsByName,
     fromJson: Class.fromJson,
+    keyField: ClassFields().id,
   );
 
   final college = QueryableType<College>(
@@ -82,6 +97,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: CollegeFields().allFields,
     fieldsMetadataByName: CollegeFields().allFieldsByName,
     fromJson: College.fromJson,
+    keyField: CollegeFields().id,
   );
 
   final district = QueryableType<District>(
@@ -90,6 +106,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: DistrictFields().allFields,
     fieldsMetadataByName: DistrictFields().allFieldsByName,
     fromJson: District.fromJson,
+    keyField: DistrictFields().id,
   );
 
   final family = QueryableType<Family>(
@@ -98,6 +115,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: FamilyFields().allFields,
     fieldsMetadataByName: FamilyFields().allFieldsByName,
     fromJson: Family.fromJson,
+    keyField: FamilyFields().id,
   );
 
   final father = QueryableType<Father>(
@@ -106,6 +124,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: FatherFields().allFields,
     fieldsMetadataByName: FatherFields().allFieldsByName,
     fromJson: Father.fromJson,
+    keyField: FatherFields().id,
   );
 
   final group = QueryableType<Group>(
@@ -114,6 +133,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: GroupFields().allFields,
     fieldsMetadataByName: GroupFields().allFieldsByName,
     fromJson: Group.fromJson,
+    keyField: GroupFields().id,
   );
 
   final hobby = QueryableType<Hobby>(
@@ -122,6 +142,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: HobbyFields().allFields,
     fieldsMetadataByName: HobbyFields().allFieldsByName,
     fromJson: Hobby.fromJson,
+    keyField: HobbyFields().id,
   );
 
   final job = QueryableType<Job>(
@@ -130,6 +151,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: JobFields().allFields,
     fieldsMetadataByName: JobFields().allFieldsByName,
     fromJson: Job.fromJson,
+    keyField: JobFields().id,
   );
 
   final martialStatus = QueryableType<MartialStatus>.enum$(
@@ -145,6 +167,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: PersonFields().allFields,
     fieldsMetadataByName: PersonFields().allFieldsByName,
     fromJson: Person.fromJson,
+    keyField: PersonFields().id,
   );
 
   final personState = QueryableType<PersonState>(
@@ -153,6 +176,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: PersonStateFields().allFields,
     fieldsMetadataByName: PersonStateFields().allFieldsByName,
     fromJson: PersonState.fromJson,
+    keyField: PersonStateFields().id,
   );
 
   final personType = QueryableType<PersonType>(
@@ -161,6 +185,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: PersonTypeFields().allFields,
     fieldsMetadataByName: PersonTypeFields().allFieldsByName,
     fromJson: PersonType.fromJson,
+    keyField: PersonTypeFields().id,
   );
 
   final qualification = QueryableType<Qualification>(
@@ -169,6 +194,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: QualificationFields().allFields,
     fieldsMetadataByName: QualificationFields().allFieldsByName,
     fromJson: Qualification.fromJson,
+    keyField: QualificationFields().id,
   );
 
   final areasStreets = QueryableType<AreasStreets>(
@@ -233,6 +259,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: SchoolFields().allFields,
     fieldsMetadataByName: SchoolFields().allFieldsByName,
     fromJson: School.fromJson,
+    keyField: SchoolFields().id,
   );
 
   final service = QueryableType<Service>(
@@ -241,6 +268,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: ServiceFields().allFields,
     fieldsMetadataByName: ServiceFields().allFieldsByName,
     fromJson: Service.fromJson,
+    keyField: ServiceFields().id,
   );
 
   final shammasLevel = QueryableType<ShammasLevel>(
@@ -249,6 +277,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: ShammasLevelFields().allFields,
     fieldsMetadataByName: ShammasLevelFields().allFieldsByName,
     fromJson: ShammasLevel.fromJson,
+    keyField: ShammasLevelFields().id,
   );
 
   final store = QueryableType<Store>(
@@ -257,6 +286,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: StoreFields().allFields,
     fieldsMetadataByName: StoreFields().allFieldsByName,
     fromJson: Store.fromJson,
+    keyField: StoreFields().id,
   );
 
   final street = QueryableType<Street>(
@@ -265,6 +295,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: StreetFields().allFields,
     fieldsMetadataByName: StreetFields().allFieldsByName,
     fromJson: Street.fromJson,
+    keyField: StreetFields().id,
   );
 
   final studyYear = QueryableType<StudyYear>(
@@ -273,6 +304,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: StudyYearFields().allFields,
     fieldsMetadataByName: StudyYearFields().allFieldsByName,
     fromJson: StudyYear.fromJson,
+    keyField: StudyYearFields().order,
   );
 
   final tag = QueryableType<Tag>(
@@ -281,6 +313,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: TagFields().allFields,
     fieldsMetadataByName: TagFields().allFieldsByName,
     fromJson: Tag.fromJson,
+    keyField: TagFields().id,
   );
 
   final workStatus = QueryableType<WorkStatus>.enum$(
@@ -320,6 +353,7 @@ abstract final class _$AdvancedQueriesMetadata {
     fieldsMetadata: UserFields().allFields,
     fieldsMetadataByName: UserFields().allFieldsByName,
     fromJson: User.fromJson,
+    keyField: UserFields().uid,
   );
 
   final userPermission = QueryableType<UserPermission>.enum$(
@@ -334,6 +368,7 @@ abstract final class _$AdvancedQueriesMetadata {
     meeting,
     aggregateData,
     historyAggregateData,
+    dataCheck,
     address,
     area,
     church,
@@ -377,6 +412,7 @@ abstract final class _$AdvancedQueriesMetadata {
     Meeting: meeting,
     AggregateData: aggregateData,
     HistoryAggregateData: historyAggregateData,
+    DataCheck: dataCheck,
     Address: address,
     Area: area,
     Church: church,

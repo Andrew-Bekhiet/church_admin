@@ -35,6 +35,7 @@ class DatabaseService {
   late final userPermissions = UserPermissionsDAO(db: this);
   late final invitations = InvitationsDAO(db: this);
   late final userPreferences = UserPreferencesDAO(db: this);
+  late final dataChecks = DataChecksDAO(db: this);
   late final fcmTokens = FcmTokensDAO(db: this);
 
   late final metadata = MetadataDAO(db: this);

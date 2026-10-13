@@ -1,5 +1,6 @@
 import '../../areas/__generated__/fragments.gql.dart';
 import '../../classes/__generated__/fragments.gql.dart';
+import '../../data_checks/__generated__/fragments.gql.dart';
 import '../../fcm_tokens/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
@@ -952,6 +953,7 @@ const documentNodeFragmentUserOverview = DocumentNode(
     fragmentDefinitionUserPermissions,
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionDataCheck,
     fragmentDefinitionLatestKodasHistory,
     fragmentDefinitionLatestConfessionHistory,
   ],
@@ -1080,6 +1082,7 @@ class Fragment_UserOverview_person
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.blurhash,
+    this.dataCheck,
     this.lastKodas,
     this.lastConfession,
   });
@@ -1092,6 +1095,7 @@ class Fragment_UserOverview_person
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$dataCheck = json['dataCheck'];
     final l$lastKodas = json['lastKodas'];
     final l$lastConfession = json['lastConfession'];
     return Fragment_UserOverview_person(
@@ -1104,6 +1108,9 @@ class Fragment_UserOverview_person
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      dataCheck: l$dataCheck == null
+          ? null
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
       lastKodas: l$lastKodas == null
           ? null
           : Fragment_LatestKodasHistory.fromJson(
@@ -1131,6 +1138,8 @@ class Fragment_UserOverview_person
 
   final String? blurhash;
 
+  final Fragment_DataCheck? dataCheck;
+
   final Fragment_LatestKodasHistory? lastKodas;
 
   final Fragment_LatestConfessionHistory? lastConfession;
@@ -1153,6 +1162,8 @@ class Fragment_UserOverview_person
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$dataCheck = dataCheck;
+    _resultData['dataCheck'] = l$dataCheck?.toJson();
     final l$lastKodas = lastKodas;
     _resultData['lastKodas'] = l$lastKodas?.toJson();
     final l$lastConfession = lastConfession;
@@ -1169,6 +1180,7 @@ class Fragment_UserOverview_person
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$dataCheck = dataCheck;
     final l$lastKodas = lastKodas;
     final l$lastConfession = lastConfession;
     return Object.hashAll([
@@ -1179,6 +1191,7 @@ class Fragment_UserOverview_person
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
+      l$dataCheck,
       l$lastKodas,
       l$lastConfession,
     ]);
@@ -1228,6 +1241,11 @@ class Fragment_UserOverview_person
     if (l$blurhash != lOther$blurhash) {
       return false;
     }
+    final l$dataCheck = dataCheck;
+    final lOther$dataCheck = other.dataCheck;
+    if (l$dataCheck != lOther$dataCheck) {
+      return false;
+    }
     final l$lastKodas = lastKodas;
     final lOther$lastKodas = other.lastKodas;
     if (l$lastKodas != lOther$lastKodas) {
@@ -1265,9 +1283,11 @@ abstract class CopyWith_Fragment_UserOverview_person<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
     Fragment_LatestKodasHistory? lastKodas,
     Fragment_LatestConfessionHistory? lastConfession,
   });
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
   CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas;
   CopyWith_Fragment_LatestConfessionHistory<TRes> get lastConfession;
 }
@@ -1290,6 +1310,7 @@ class _CopyWithImpl_Fragment_UserOverview_person<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? dataCheck = _undefined,
     Object? lastKodas = _undefined,
     Object? lastConfession = _undefined,
   }) => _then(
@@ -1311,6 +1332,9 @@ class _CopyWithImpl_Fragment_UserOverview_person<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      dataCheck: dataCheck == _undefined
+          ? _instance.dataCheck
+          : (dataCheck as Fragment_DataCheck?),
       lastKodas: lastKodas == _undefined
           ? _instance.lastKodas
           : (lastKodas as Fragment_LatestKodasHistory?),
@@ -1319,6 +1343,16 @@ class _CopyWithImpl_Fragment_UserOverview_person<TRes>
           : (lastConfession as Fragment_LatestConfessionHistory?),
     ),
   );
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
+    final local$dataCheck = _instance.dataCheck;
+    return local$dataCheck == null
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
+            local$dataCheck,
+            (e) => call(dataCheck: e),
+          );
+  }
 
   CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas {
     final local$lastKodas = _instance.lastKodas;
@@ -1355,9 +1389,13 @@ class _CopyWithStubImpl_Fragment_UserOverview_person<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
     Fragment_LatestKodasHistory? lastKodas,
     Fragment_LatestConfessionHistory? lastConfession,
   }) => _res;
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 
   CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas =>
       CopyWith_Fragment_LatestKodasHistory.stub(_res);
@@ -2030,6 +2068,7 @@ const documentNodeFragmentUserDetails = DocumentNode(
     fragmentDefinitionUserPermissions,
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionDataCheck,
     fragmentDefinitionLatestKodasHistory,
     fragmentDefinitionLatestConfessionHistory,
     fragmentDefinitionLatestEditHistory,
@@ -2174,6 +2213,7 @@ class Fragment_UserDetails_person
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.blurhash,
+    this.dataCheck,
     this.lastKodas,
     this.lastConfession,
   });
@@ -2186,6 +2226,7 @@ class Fragment_UserDetails_person
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$dataCheck = json['dataCheck'];
     final l$lastKodas = json['lastKodas'];
     final l$lastConfession = json['lastConfession'];
     return Fragment_UserDetails_person(
@@ -2198,6 +2239,9 @@ class Fragment_UserDetails_person
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      dataCheck: l$dataCheck == null
+          ? null
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
       lastKodas: l$lastKodas == null
           ? null
           : Fragment_LatestKodasHistory.fromJson(
@@ -2225,6 +2269,8 @@ class Fragment_UserDetails_person
 
   final String? blurhash;
 
+  final Fragment_DataCheck? dataCheck;
+
   final Fragment_LatestKodasHistory? lastKodas;
 
   final Fragment_LatestConfessionHistory? lastConfession;
@@ -2247,6 +2293,8 @@ class Fragment_UserDetails_person
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$dataCheck = dataCheck;
+    _resultData['dataCheck'] = l$dataCheck?.toJson();
     final l$lastKodas = lastKodas;
     _resultData['lastKodas'] = l$lastKodas?.toJson();
     final l$lastConfession = lastConfession;
@@ -2263,6 +2311,7 @@ class Fragment_UserDetails_person
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$dataCheck = dataCheck;
     final l$lastKodas = lastKodas;
     final l$lastConfession = lastConfession;
     return Object.hashAll([
@@ -2273,6 +2322,7 @@ class Fragment_UserDetails_person
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
+      l$dataCheck,
       l$lastKodas,
       l$lastConfession,
     ]);
@@ -2322,6 +2372,11 @@ class Fragment_UserDetails_person
     if (l$blurhash != lOther$blurhash) {
       return false;
     }
+    final l$dataCheck = dataCheck;
+    final lOther$dataCheck = other.dataCheck;
+    if (l$dataCheck != lOther$dataCheck) {
+      return false;
+    }
     final l$lastKodas = lastKodas;
     final lOther$lastKodas = other.lastKodas;
     if (l$lastKodas != lOther$lastKodas) {
@@ -2359,9 +2414,11 @@ abstract class CopyWith_Fragment_UserDetails_person<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
     Fragment_LatestKodasHistory? lastKodas,
     Fragment_LatestConfessionHistory? lastConfession,
   });
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
   CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas;
   CopyWith_Fragment_LatestConfessionHistory<TRes> get lastConfession;
 }
@@ -2384,6 +2441,7 @@ class _CopyWithImpl_Fragment_UserDetails_person<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? dataCheck = _undefined,
     Object? lastKodas = _undefined,
     Object? lastConfession = _undefined,
   }) => _then(
@@ -2405,6 +2463,9 @@ class _CopyWithImpl_Fragment_UserDetails_person<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      dataCheck: dataCheck == _undefined
+          ? _instance.dataCheck
+          : (dataCheck as Fragment_DataCheck?),
       lastKodas: lastKodas == _undefined
           ? _instance.lastKodas
           : (lastKodas as Fragment_LatestKodasHistory?),
@@ -2413,6 +2474,16 @@ class _CopyWithImpl_Fragment_UserDetails_person<TRes>
           : (lastConfession as Fragment_LatestConfessionHistory?),
     ),
   );
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
+    final local$dataCheck = _instance.dataCheck;
+    return local$dataCheck == null
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
+            local$dataCheck,
+            (e) => call(dataCheck: e),
+          );
+  }
 
   CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas {
     final local$lastKodas = _instance.lastKodas;
@@ -2449,9 +2520,13 @@ class _CopyWithStubImpl_Fragment_UserDetails_person<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_DataCheck? dataCheck,
     Fragment_LatestKodasHistory? lastKodas,
     Fragment_LatestConfessionHistory? lastConfession,
   }) => _res;
+
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 
   CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas =>
       CopyWith_Fragment_LatestKodasHistory.stub(_res);

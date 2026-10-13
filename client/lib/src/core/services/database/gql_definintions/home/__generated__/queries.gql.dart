@@ -1,5 +1,6 @@
 import '../../areas/__generated__/fragments.gql.dart';
 import '../../classes/__generated__/fragments.gql.dart';
+import '../../data_checks/__generated__/fragments.gql.dart';
 import '../../families/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
 import '../../persons/__generated__/fragments.gql.dart';
@@ -932,6 +933,7 @@ const documentNodeQueryhomeSearch = DocumentNode(
     ),
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionDataCheck,
     fragmentDefinitionClass,
     fragmentDefinitionClassNoPhoto,
     fragmentDefinitionGroup,

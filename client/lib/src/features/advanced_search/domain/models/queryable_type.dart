@@ -10,6 +10,7 @@ class QueryableType<T extends Object> with Equatable {
   final bool isEnum;
   final T Function(Json)? fromJson;
   final T Function(String)? byName;
+  final FieldMetadata? keyField;
 
   Type get type => T;
 
@@ -18,11 +19,14 @@ class QueryableType<T extends Object> with Equatable {
 
   bool get isSelectableAsReference => isEnum || dao != null;
 
-  FieldMetadata? get keyField =>
-      fieldsMetadataByName['id'] ?? fieldsMetadataByName['uid'];
-
   @override
-  List<Object?> get props => [name, label, fieldsMetadataByName, fromJson];
+  List<Object?> get props => [
+    name,
+    label,
+    fieldsMetadataByName,
+    fromJson,
+    keyField,
+  ];
 
   QueryableType({
     required this.name,
@@ -30,6 +34,7 @@ class QueryableType<T extends Object> with Equatable {
     required T Function(Json) this.fromJson,
     this.fieldsMetadataByName = const {},
     this.fieldsMetadata = const [],
+    this.keyField,
   }) : byName = null,
        enumValues = const [],
        isEnum = false;
@@ -42,7 +47,8 @@ class QueryableType<T extends Object> with Equatable {
   }) : fieldsMetadataByName = const {},
        fieldsMetadata = const [],
        fromJson = null,
-       isEnum = true;
+       isEnum = true,
+       keyField = null;
 
   bool hasField(String fieldName) {
     return fieldsMetadataByName.containsKey(fieldName);
