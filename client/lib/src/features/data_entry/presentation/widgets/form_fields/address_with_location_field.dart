@@ -4,6 +4,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class AddressWithLocationField extends StatefulWidget {
+  static const Duration houseNumberGeocodingDebounce = Duration(seconds: 1);
+
   final String? label;
   final bool enabled;
   final bool required;
@@ -36,6 +38,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     geocoder: Geocoder.I,
   );
   Address? _suggestedAddress;
+  Timer? _houseNumberGeocodingDebounce;
+  int _textResetToken = 0;
 
   @override
   void didUpdateWidget(covariant AddressWithLocationField oldWidget) {
@@ -45,6 +49,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
       _address = widget.initialAddress ?? const Address();
       _previewedAddress.value = _address;
       _suggestedAddress = null;
+      _textResetToken++;
+      _houseNumberGeocodingDebounce?.cancel();
     }
   }
 
@@ -80,18 +86,17 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
           AddressHouseNumberRow(
             address: _address,
             enabled: widget.enabled,
+            textResetToken: _textResetToken,
             onSubstreetNameChanged: (value) => _setAddress(
               _address.copyWith(substreetName: value),
               false,
             ),
-            onHouseCodeChanged: (houseCode) => _setAddress(
-              _address.copyWith(houseCode: houseCode),
-              false,
-            ),
+            onHouseCodeChanged: _handleHouseCodeChanged,
           ),
           AddressApartmentDetailsRow(
             address: _address,
             enabled: widget.enabled,
+            textResetToken: _textResetToken,
             onStoreyNumberChanged: (storeyNumber) => _setAddress(
               _address.copyWith(storeyNumber: storeyNumber),
               false,
@@ -116,46 +121,125 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
 
   @override
   void dispose() {
+    _houseNumberGeocodingDebounce?.cancel();
     _previewedAddress.dispose();
     super.dispose();
   }
 
   void _handleStreetChanged(Street? street) {
+    _houseNumberGeocodingDebounce?.cancel();
     _setAddress(_address.copyWith(street: street));
 
-    if (street != null) unawaited(_fillOnlyAreaOf(street));
+    if (street != null) unawaited(_fillAreaOf(street));
   }
 
-  Future<void> _fillOnlyAreaOf(Street street) async {
-    final areaWhenLookupStarted = _address.area;
-    final Area? onlyArea;
-    try {
-      onlyArea = await _autofill.maybeOnlyAreaOf(street);
-    } on Object catch (error, stackTrace) {
-      unawaited(
-        LoggingService.I.exception(
-          LogRecord(
-            moduleName: '$AddressWithLocationField',
-            eventName: 'fillOnlyAreaOf',
-            error: error,
-            stackTrace: stackTrace,
-          ),
-        ),
-      );
+  void _handleHouseCodeChanged(String? houseCode) {
+    _setAddress(_address.copyWith(houseCode: houseCode), false);
 
-      return;
-    }
+    _houseNumberGeocodingDebounce?.cancel();
+    if (houseCode == null || _address.street == null) return;
+
+    _houseNumberGeocodingDebounce = Timer(
+      AddressWithLocationField.houseNumberGeocodingDebounce,
+      () => unawaited(_fillAreaOfTypedHouse()),
+    );
+  }
+
+  Future<void> _fillAreaOf(Street street) async {
+    final areaWhenLookupStarted = _address.area;
+    final areasOfStreet = await _logFailureOf(
+      'lookupAreasOfStreet',
+      () => _autofill.areasOf(street),
+    );
 
     final streetWasReplacedMeanwhile = _address.street != street;
     final areaWasChosenMeanwhile = _address.area != areaWhenLookupStarted;
     if (!mounted ||
         streetWasReplacedMeanwhile ||
         areaWasChosenMeanwhile ||
-        onlyArea == null) {
+        areasOfStreet == null) {
       return;
     }
 
-    _setAddress(_address.copyWith(area: onlyArea));
+    switch (areasOfStreet) {
+      case [final onlyArea]:
+        _setAddress(_address.copyWith(area: onlyArea));
+      case [_, _, ...]:
+        await _fillAreaOfGeocodedHouse(areasOfStreet, areaWhenLookupStarted);
+    }
+  }
+
+  Future<void> _fillAreaOfTypedHouse() async {
+    final street = _address.street;
+    if (street == null) return;
+
+    final areaWhenLookupStarted = _address.area;
+    final areasOfStreet = await _logFailureOf(
+      'lookupAreasOfStreet',
+      () => _autofill.areasOf(street),
+    );
+
+    final streetWasReplacedMeanwhile = _address.street != street;
+    if (!mounted ||
+        streetWasReplacedMeanwhile ||
+        areasOfStreet == null ||
+        areasOfStreet.length < 2) {
+      return;
+    }
+
+    await _fillAreaOfGeocodedHouse(areasOfStreet, areaWhenLookupStarted);
+  }
+
+  Future<void> _fillAreaOfGeocodedHouse(
+    List<Area> areasOfStreet,
+    Area? areaWhenLookupStarted,
+  ) async {
+    final geocodedAddress = _address;
+    final geocodedHouse = await _logFailureOf(
+      'geocodeHouse',
+      () => _autofill.maybeAreaOfGeocodedHouse(geocodedAddress),
+    );
+
+    final houseWasChangedMeanwhile =
+        _address.street != geocodedAddress.street ||
+        _address.houseCode != geocodedAddress.houseCode;
+    if (!mounted || houseWasChangedMeanwhile || geocodedHouse == null) return;
+
+    final areaWasChosenMeanwhile = _address.area != areaWhenLookupStarted;
+    final userChoseAreaOfStreet = areasOfStreet.any(
+      (area) => area.id == _address.area?.id,
+    );
+
+    _setAddress(
+      _address.copyWith(
+        area: areaWasChosenMeanwhile || userChoseAreaOfStreet
+            ? _address.area
+            : geocodedHouse.area,
+        geolocation: _address.geolocation ?? geocodedHouse.location,
+      ),
+    );
+  }
+
+  Future<T?> _logFailureOf<T>(
+    String eventName,
+    Future<T> Function() lookup,
+  ) async {
+    try {
+      return await lookup();
+    } on Object catch (error, stackTrace) {
+      unawaited(
+        LoggingService.I.exception(
+          LogRecord(
+            moduleName: '$AddressWithLocationField',
+            eventName: eventName,
+            error: error,
+            stackTrace: stackTrace,
+          ),
+        ),
+      );
+
+      return null;
+    }
   }
 
   Future<void> _handleLocationTap(FormFieldState<Point?> state) async {
@@ -205,6 +289,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
       return;
     }
 
+    _textResetToken++;
     _setAddress(_mergeWithCurrentAddress(_suggestedAddress!));
     _suggestedAddress = null;
   }

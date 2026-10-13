@@ -88,4 +88,40 @@ void main() {
       expect(await geocoder.addressAt(location), isNull);
     },
   );
+
+  const houseAddress = Address(
+    houseCode: '12',
+    street: Street(id: 'street-id', name: 'شارع الجمهورية'),
+  );
+
+  test('the first result of a search response becomes the location', () async {
+    answerWith([
+      {'lat': '30.0444', 'lon': '31.2357'},
+      {'lat': '29.0', 'lon': '30.0'},
+    ]);
+
+    expect(await geocoder.locationOf(houseAddress), location);
+  });
+
+  test('a search response without results yields no location', () async {
+    answerWith(<Object?>[]);
+
+    expect(await geocoder.locationOf(houseAddress), isNull);
+  });
+
+  test('a failed search response yields no location', () async {
+    answerWith([
+      {'lat': '30.0444', 'lon': '31.2357'},
+    ], statusCode: 500);
+
+    expect(await geocoder.locationOf(houseAddress), isNull);
+  });
+
+  test('a search result without coordinates yields no location', () async {
+    answerWith([
+      {'display_name': 'شارع الجمهورية'},
+    ]);
+
+    expect(await geocoder.locationOf(houseAddress), isNull);
+  });
 }

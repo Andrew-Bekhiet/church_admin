@@ -4,4 +4,6 @@ abstract interface class Geocoder {
   static Geocoder get I => globalProviderContainer.read(geocoderProvider);
 
   Future<Address?> addressAt(Point location);
+
+  Future<Point?> locationOf(Address address);
 }

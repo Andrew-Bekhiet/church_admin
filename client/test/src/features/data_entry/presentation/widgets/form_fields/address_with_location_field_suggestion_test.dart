@@ -264,4 +264,15 @@ void main() {
 
     expect(find.text('استخدام العنوان المقترح'), findsNothing);
   });
+
+  testWidgets('accepting the suggestion shows the house number it suggests', (
+    tester,
+  ) async {
+    geocoder.addressUnderEveryLocation = const Address(houseCode: '12');
+    await pickLocation(tester);
+
+    await acceptSuggestion(tester);
+
+    expect(find.widgetWithText(TextFormField, '12'), findsOneWidget);
+  });
 }
