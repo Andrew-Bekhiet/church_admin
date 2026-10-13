@@ -1,3 +1,7 @@
+export 'form_fields/address_apartment_details_row.dart';
+export 'form_fields/address_district_street_area_fields.dart';
+export 'form_fields/address_house_number_row.dart';
+export 'form_fields/address_location_tap_field.dart';
 export 'form_fields/address_preview.dart';
 export 'form_fields/address_with_location_field.dart';
 export 'form_fields/color_field.dart';
@@ -12,4 +16,5 @@ export 'form_fields/object_selection_field.dart';
 export 'form_fields/password_form_field.dart';
 export 'form_fields/photo_field.dart';
 export 'form_fields/study_year_range_field.dart';
+export 'form_fields/suggested_address_card.dart';
 export 'form_fields/tappable_form_field.dart';
