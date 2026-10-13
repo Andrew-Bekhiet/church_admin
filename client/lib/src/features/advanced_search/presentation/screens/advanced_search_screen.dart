@@ -154,6 +154,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
     OrderBy(
       field: selectedQueryableType.orderableFields.firstWhere(
         (f) => f != selectedQueryableType.keyField,
+        orElse: () => selectedQueryableType.orderableFields.first,
       ),
     ),
   );
