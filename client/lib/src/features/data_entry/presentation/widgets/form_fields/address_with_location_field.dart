@@ -165,6 +165,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
 
     final newAddress = _address.copyWith(geolocation: newLocation);
     state.didChange(newLocation);
+    _suggestedAddress = null;
     _setAddress(newAddress);
 
     final Address suggestedAddress;

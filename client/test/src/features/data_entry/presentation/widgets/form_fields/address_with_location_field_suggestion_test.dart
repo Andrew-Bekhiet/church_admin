@@ -250,4 +250,18 @@ void main() {
 
     expect(find.text('استخدام العنوان المقترح'), findsNothing);
   });
+
+  testWidgets('picking a new location withdraws the previous suggestion', (
+    tester,
+  ) async {
+    const laterLocation = Point(30.0500, 31.2400);
+    areas.areasAtPoint[pickedLocation] = stMarkArea;
+    locationsToPick = [pickedLocation, laterLocation];
+    await pickLocation(tester);
+
+    areas.lookupFailure = StateError('offline');
+    await tapLocationField(tester);
+
+    expect(find.text('استخدام العنوان المقترح'), findsNothing);
+  });
 }
