@@ -147,6 +147,9 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
         final objectData = snapshot.requireData!;
 
+        final isObjectFullyLoaded =
+            snapshot.connectionState == ConnectionState.active;
+
         final canEditObject = AuthBloc.I.currentUserData!.canEditObject(
           objectData,
         );
@@ -157,7 +160,7 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
             pinned: true,
             expandedHeight: appBarMaxHeight,
             actions: [
-              if (snapshot.connectionState != ConnectionState.active)
+              if (!isObjectFullyLoaded)
                 const Padding(
                   padding: EdgeInsets.all(8),
                   child: Center(child: CircularProgressIndicator()),
@@ -240,6 +243,10 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                   widget.floatingActionButtonBuilder != null && canEditObject
                   ? Builder(
                       builder: (context) {
+                        if (!isObjectFullyLoaded) {
+                          return const LoadingFloatingActionButton();
+                        }
+
                         return widget.floatingActionButtonBuilder!(
                           context,
                           DefaultTabController.of(context),

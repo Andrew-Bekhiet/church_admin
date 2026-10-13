@@ -7,6 +7,7 @@ export 'widgets/family_details_list.dart';
 export 'widgets/family_relatives_fields.dart';
 export 'widgets/form_fields.dart';
 export 'widgets/image_object_widget.dart';
+export 'widgets/loading_floating_action_button.dart';
 export 'widgets/object_selection_preview.dart';
 export 'widgets/object_selection_preview_list.dart';
 export 'widgets/ordered_viewable_object_list.dart';

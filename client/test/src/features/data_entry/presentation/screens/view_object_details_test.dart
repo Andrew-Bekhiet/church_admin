@@ -91,6 +91,37 @@ void main() {
           );
 
           testWidgets(
+            'shows a progress button instead of the add button until the object has finished loading',
+            (tester) async {
+              final streamController = StreamController<Area?>();
+              addTearDown(streamController.close);
+
+              await _pumpWidget(
+                tester,
+                area,
+                streamController: streamController,
+              );
+
+              expect(
+                find.byKey(LoadingFloatingActionButton.button),
+                findsOneWidget,
+              );
+              expect(
+                find.byKey(const ValueKey('floatingActionButton')),
+                findsNothing,
+              );
+
+              streamController.add(area);
+              await tester.pump();
+
+              expect(
+                find.byKey(const ValueKey('floatingActionButton')),
+                findsOneWidget,
+              );
+            },
+          );
+
+          testWidgets(
             'Deleted/Not Found',
             (tester) async {
               final streamController = StreamController<Area?>()..add(null);
