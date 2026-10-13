@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/districts_dao.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class FakeDistrictsDAO extends Fake implements DistrictsDAO {

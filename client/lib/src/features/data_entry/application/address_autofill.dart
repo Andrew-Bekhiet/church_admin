@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/districts_dao.dart';
 import 'package:collection/collection.dart';
 
 class AddressAutofill {

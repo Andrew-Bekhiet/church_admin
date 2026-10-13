@@ -8,6 +8,7 @@ export 'gql_definintions/history_dao.dart';
 export 'gql_definintions/home.dart';
 export 'gql_definintions/invitations_dao.dart';
 export 'gql_definintions/meetings_dao.dart';
+export 'gql_definintions/metadata/districts_dao.dart';
 export 'gql_definintions/metadata_dao.dart';
 export 'gql_definintions/persons_dao.dart';
 export 'gql_definintions/services_dao.dart';
