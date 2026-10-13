@@ -62,7 +62,24 @@ void main() {
     deceasedSpouseName: 'مينا',
   );
 
-  Future<void> save(WidgetTester tester) async {
+  Future<void> saveWithDeceasedSpouseName(
+    WidgetTester tester,
+    MartialStatus status,
+    String enteredName,
+  ) async {
+    await tester.pumpWidget(
+      materialAppWithThemeAndLocale()(
+        EditFamily(family: widowedFamily(status: status)),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.scrollUntilVisible(
+      find.byKey(deceasedSpouseNameField),
+      100,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.enterText(find.byKey(deceasedSpouseNameField), enteredName);
     await tester.tap(find.byKey(EditObjectDataKeys.saveButton));
     await tester.pumpAndSettle();
   }
@@ -113,6 +130,20 @@ void main() {
 
   tearDown(defaultTearDown);
 
+  testWidgets("a widowed family's deceased spouse name is saved trimmed", (
+    tester,
+  ) async {
+    const name = 'جرجس';
+
+    await saveWithDeceasedSpouseName(
+      tester,
+      MartialStatus.widowed,
+      '  $name  ',
+    );
+
+    expect(families.savedFamilies.single.deceasedSpouseName, name);
+  });
+
   for (final status in [
     MartialStatus.widowed,
     MartialStatus.widowedWithoutChildren,
@@ -121,20 +152,7 @@ void main() {
       'a ${status.name} family can be saved after clearing the deceased '
       "spouse's name",
       (tester) async {
-        await tester.pumpWidget(
-          materialAppWithThemeAndLocale()(
-            EditFamily(family: widowedFamily(status: status)),
-          ),
-        );
-        await tester.pumpAndSettle();
-
-        await tester.scrollUntilVisible(
-          find.byKey(deceasedSpouseNameField),
-          100,
-          scrollable: find.byType(Scrollable).first,
-        );
-        await tester.enterText(find.byKey(deceasedSpouseNameField), '');
-        await save(tester);
+        await saveWithDeceasedSpouseName(tester, status, '');
 
         expect(families.savedFamilies.single.deceasedSpouseName, isNull);
       },
