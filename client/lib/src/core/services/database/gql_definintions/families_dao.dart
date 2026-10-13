@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/data_check_free_documents.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/subscriptions.gql.dart';
@@ -7,7 +8,8 @@ import 'package:church_admin/src/core/services/database/gql_definintions/familie
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
-class FamiliesDAO extends FullCRUDDAO<Family> {
+class FamiliesDAO extends FullCRUDDAO<Family>
+    with DataCheckFreeDocuments<Family> {
   @override
   final StreamAllConfig<Family> baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllFamilies,
@@ -77,7 +79,7 @@ class FamiliesDAO extends FullCRUDDAO<Family> {
 
     return graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
-        document: documentNodeMutationupdateFamily,
+        document: transformDocument(documentNodeMutationupdateFamily),
         operationName: 'updateFamily',
         variables: helper.variables.toJson(),
         parserFn: db.parser.singleOrNullParser(Family.fromJson),
@@ -87,7 +89,7 @@ class FamiliesDAO extends FullCRUDDAO<Family> {
 
   Future<Family?> getFamilyRelatedFamilies({required String familyId}) {
     final queryOptions = QueryOptions(
-      document: documentNodeQuerygetFamilyRelatedFamilies,
+      document: transformDocument(documentNodeQuerygetFamilyRelatedFamilies),
       operationName: 'getFamilyRelatedFamilies',
       variables: Variables_Query_getFamilyRelatedFamilies(
         familyId: familyId.toUuid(),
@@ -115,8 +117,8 @@ class FamiliesDAO extends FullCRUDDAO<Family> {
         orderBy ?? Stream.value(null),
         (search, where, orderBy) => StreamableDAOParameters<Family>(
           search: search,
-          where: where,
-          orderBy: orderBy,
+          where: where?.whereEnabled(),
+          orderBy: orderBy?.whereEnabled(),
         ),
       ),
       factory: (request) => _streamAllFactory(streamAllConfig, request),
@@ -129,7 +131,7 @@ class FamiliesDAO extends FullCRUDDAO<Family> {
   ) => graphQLClient.subscribeAndReturnParsed(
     streamAllConfig.operationOptions ??
         SubscriptionOptions(
-          document: streamAllConfig.document,
+          document: transformDocument(streamAllConfig.document),
           operationName: streamAllConfig.effectiveOperationName,
           variables:
               streamAllConfig.variables ??

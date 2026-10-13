@@ -5,7 +5,13 @@ class FakeFeatureFlagsRepo implements FeatureFlagsRepository {
   @override
   final bool enableAccountClaimingByEmail;
 
-  FakeFeatureFlagsRepo({this.enableAccountClaimingByEmail = true});
+  @override
+  final bool enableDataChecks;
+
+  FakeFeatureFlagsRepo({
+    this.enableAccountClaimingByEmail = true,
+    this.enableDataChecks = true,
+  });
 
   @override
   Future<void> initialize() async {}

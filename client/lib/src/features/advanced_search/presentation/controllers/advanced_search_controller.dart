@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AdvancedSearchController {
+  late final StreamSubscription<void> _configSubscription;
+
   final BehaviorSubject<AdvancedQuery> _query = BehaviorSubject.seeded(
     AdvancedQuery(
       queryableType: AdvancedQueriesMetadata().person,
@@ -23,13 +27,15 @@ class AdvancedSearchController {
   Stream<LogicalOperator> get logicalOperatorStream =>
       _query.map((q) => q.logicalOperator).distinct();
 
-  Stream<List<Filter>> get filtersStream =>
-      _query.map((q) => q.filters).distinct();
+  Stream<List<Filter>> get filtersStream => _query
+      .map((q) => q.filters)
+      .distinct(const ListEquality<Filter>().equals);
 
   Stream<int?> get limitStream => _query.map((q) => q.limit).distinct();
 
-  Stream<List<OrderBy>> get orderByStream =>
-      _query.map((q) => q.orderBy).distinct();
+  Stream<List<OrderBy>> get orderByStream => _query
+      .map((q) => q.orderBy)
+      .distinct(const ListEquality<OrderBy>().equals);
 
   AdvancedQuery get query => _query.value;
 
@@ -43,15 +49,26 @@ class AdvancedSearchController {
 
   List<OrderBy> get orderBy => _query.value.orderBy;
 
-  void changeQuery(AdvancedQuery value) => _query.add(value);
+  AdvancedSearchController() {
+    _configSubscription = FeatureFlagsRepository.I.onConfigChanged.listen(
+      (_) => changeQuery(query),
+    );
+  }
+
+  void changeQuery(AdvancedQuery value) =>
+      _query.add(value.withEnabledFields());
 
   void changeSelectedQueryableType(QueryableType queryableType) {
-    final defaultField = queryableType.fieldsMetadata.firstWhere(
+    final defaultField = queryableType.filterableFields.firstWhere(
       (p) => !p.name.endsWith('id') && p.operators.isNotEmpty,
-      orElse: () => queryableType.fieldsMetadata.first,
+      orElse: () => queryableType.filterableFields.first,
     );
 
-    _query.add(
+    final defaultOrderField = defaultField.isOrderable
+        ? defaultField
+        : queryableType.orderableFields.firstOrNull;
+
+    changeQuery(
       AdvancedQuery(
         name: query.name,
         queryableType: queryableType,
@@ -63,7 +80,7 @@ class AdvancedSearchController {
           ),
         ],
         orderBy: [
-          OrderBy(field: defaultField),
+          if (defaultOrderField case final field?) OrderBy(field: field),
         ],
       ),
     );
@@ -74,7 +91,7 @@ class AdvancedSearchController {
       _checkFilterType(filter);
     }
 
-    _query.add(query.copyWith(filters: newFilters));
+    changeQuery(query.copyWith(filters: newFilters));
   }
 
   void addFilter(Filter newFilter) {
@@ -108,10 +125,10 @@ class AdvancedSearchController {
     changeFilters(filters.whereIndexed((i, e) => i != index).toList());
   }
 
-  void changeLimit(int? limit) => _query.add(query.copyWith(limit: limit));
+  void changeLimit(int? limit) => changeQuery(query.copyWith(limit: limit));
 
   void changeOrderBy(List<OrderBy> orderBy) =>
-      _query.add(query.copyWith(orderBy: orderBy));
+      changeQuery(query.copyWith(orderBy: orderBy));
 
   void addOrderBy(OrderBy newOrderBy) {
     changeOrderBy([...orderBy, newOrderBy]);
@@ -132,6 +149,7 @@ class AdvancedSearchController {
   }
 
   Future<void> dispose() async {
+    await _configSubscription.cancel();
     await _query.close();
   }
 }

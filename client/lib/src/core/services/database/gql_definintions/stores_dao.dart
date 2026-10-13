@@ -1,9 +1,10 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/data_check_free_documents.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/subscriptions.gql.dart';
 import 'package:uuid/enums.dart';
 
-class StoresDAO extends FullCRUDDAO<Store> {
+class StoresDAO extends FullCRUDDAO<Store> with DataCheckFreeDocuments<Store> {
   @override
   late final StreamAllConfig<Store> baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllStores,

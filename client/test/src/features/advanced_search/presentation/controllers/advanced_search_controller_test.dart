@@ -1,7 +1,16 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../../fakes/fake_feature_flags_repo.dart';
+
 void main() {
+  setUp(
+    () => initGlobalProviderContainer([
+      featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
+    ]),
+  );
+  tearDown(resetGlobalProviderContainer);
+
   group(
     'Advanced Search controller =>',
     () {

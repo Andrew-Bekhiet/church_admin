@@ -20,9 +20,7 @@ class FiltersBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filterableFields = queryableType.fieldsMetadata.where(
-      (field) => !field.isCodeOnly,
-    );
+    final filterableFields = queryableType.filterableFields;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -38,12 +36,11 @@ class FiltersBuilder extends StatelessWidget {
                   !(field.fieldQueryableType?.isSelectableAsReference ??
                       true)) {
                 final newField = field.redirectTo(
-                  field.fieldQueryableType!.fieldsMetadata.firstWhere(
+                  field.fieldQueryableType!.filterableFields.firstWhere(
                     (f) =>
-                        !f.isCodeOnly &&
-                        (f.operators.isNotEmpty ||
-                            (f.fieldQueryableType?.isSelectableAsReference ??
-                                false)),
+                        f.operators.isNotEmpty ||
+                        (f.fieldQueryableType?.isSelectableAsReference ??
+                            false),
                   ),
                 );
                 newFilter = Filter(
@@ -86,7 +83,8 @@ class FiltersBuilder extends StatelessWidget {
             },
           ),
         ),
-        if (canAddManyFilters || filters.isEmpty)
+        if (filterableFields.isNotEmpty &&
+            (canAddManyFilters || filters.isEmpty))
           ElevatedButton.icon(
             onPressed: () => onChanged([
               ...filters,
@@ -128,9 +126,7 @@ class FilterBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final filterableFields = queryableType.fieldsMetadata
-        .where((field) => !field.isCodeOnly)
-        .toList();
+    final filterableFields = queryableType.filterableFields.toList();
 
     final Filter(:field, :operator, :value) = filter;
     final FieldMetadata parentField;
@@ -230,14 +226,13 @@ class FilterBuilder extends StatelessWidget {
                     onFieldChanged(
                       parentField.redirectTo(
                         field.redirectTo(
-                          field.fieldQueryableType!.fieldsMetadata.firstWhere(
+                          field.fieldQueryableType!.filterableFields.firstWhere(
                             (f) =>
-                                !f.isCodeOnly &&
-                                (f.operators.isNotEmpty ||
-                                    (f
-                                            .fieldQueryableType
-                                            ?.isSelectableAsReference ??
-                                        false)),
+                                f.operators.isNotEmpty ||
+                                (f
+                                        .fieldQueryableType
+                                        ?.isSelectableAsReference ??
+                                    false),
                           ),
                         ),
                       ),

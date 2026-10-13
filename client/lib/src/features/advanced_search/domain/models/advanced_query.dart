@@ -41,6 +41,11 @@ class AdvancedQuery with _$AdvancedQuery implements ToJson, SerializableExtra {
   @override
   Map<String, dynamic> toJson() => _$AdvancedQueryToJson(this);
 
+  AdvancedQuery withEnabledFields() => copyWith(
+    filters: filters.whereEnabled(),
+    orderBy: orderBy.whereEnabled(),
+  );
+
   Json serializeFilter() =>
       logicalOperator.queryToJson(const DotField(), filters);
 }

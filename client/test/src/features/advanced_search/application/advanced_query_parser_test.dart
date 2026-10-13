@@ -1,30 +1,114 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import 'package:rxdart/rxdart.dart';
 
-import 'advanced_query_parser_test.mocks.dart';
+import '../../../fakes/fake_feature_flags_repo.dart';
+import '../../../fakes/recording_graphql_link.dart';
 
-@GenerateNiceMocks([
-  MockSpec<DatabaseService>(),
-  MockSpec<DBGraphQLClient>(),
-  MockSpec<PersonsDAO>(),
-  MockSpec<PaginatableStreamBase>(),
-  MockSpec<PaginatableStreamRequest>(),
-  MockSpec<DBVarsTransformer>(),
-])
 void main() {
+  late BehaviorSubject<bool> connectivity;
+  late RecordingGraphQLLink link;
+
+  Future<void> expectPersonSearchRequest(
+    AdvancedQuery query,
+    Json expectedVarsJson,
+  ) async {
+    const unit = AdvancedQueryParser();
+    final stream = unit.createPaginatableStream(query);
+    addTearDown(stream.dispose);
+    await stream.first;
+
+    final request = link.requests.singleWhere(
+      (request) => request.operation.operationName == 'watchAllPersons',
+    );
+
+    final firstSelectionNode = request.operation.document.definitions
+        .whereType<OperationDefinitionNode>()
+        .first
+        .firstSelectionNode;
+
+    final capturedVars = request.variables;
+
+    expect(capturedVars, expectedVarsJson);
+
+    final fragments = {
+      for (final fragment
+          in request.operation.document.definitions
+              .whereType<FragmentDefinitionNode>())
+        fragment.name.value: fragment.selectionSet.selections,
+    };
+
+    bool selectsPath(List<SelectionNode> selections, Json orderBy) {
+      final MapEntry(:key, :value) = orderBy.entries.single;
+
+      return selections.any(
+        (selection) => switch (selection) {
+          FragmentSpreadNode(:final name) => selectsPath(
+            fragments[name.value] ?? [],
+            orderBy,
+          ),
+          FieldNode(:final name, :final selectionSet) when name.value == key =>
+            switch (value) {
+              final Json nested => selectsPath(
+                selectionSet?.selections ?? [],
+                nested,
+              ),
+              _ => true,
+            },
+          _ => false,
+        },
+      );
+    }
+
+    final unselectedOrderBy = (expectedVarsJson['orderBy'] as List<Json>).where(
+      (orderBy) => !selectsPath(
+        firstSelectionNode.selectionSet?.selections ?? [],
+        orderBy,
+      ),
+    );
+
+    expect(unselectedOrderBy, isEmpty);
+  }
+
   group(
     'Advanced Query Parser',
     () {
-      setUp(_setUp);
-      tearDown(resetGlobalProviderContainer);
+      setUp(() {
+        connectivity = BehaviorSubject.seeded(true);
+        link = RecordingGraphQLLink({'persons': <Object?>[]});
+        final countLink = RecordingGraphQLLink({
+          'personsAggregate': {
+            'aggregate': {'count': 0},
+          },
+        });
+        initGlobalProviderContainer([
+          featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
+          databaseServiceProvider.overrideWithValue(
+            DatabaseService(
+              DBGraphQLClient(
+                connectivityStream: connectivity,
+                link: Link.function(
+                  (request, [forward]) =>
+                      request.operation.operationName == 'watchPersonsCount'
+                      ? countLink.request(request)
+                      : link.request(request),
+                ),
+                cache: GraphQLCache(),
+                autoChangeFetchPolicy: false,
+              ),
+            ),
+          ),
+        ]);
+      });
+      tearDown(() async {
+        await connectivity.close();
+        resetGlobalProviderContainer();
+      });
 
       test(
-        'createPaginatableStream: nested conditions, orderBy',
+        'person searches send nested date conditions and select every ordered field',
         () async {
           final query = AdvancedQuery(
             queryableType: AdvancedQueriesMetadata().person,
@@ -34,7 +118,7 @@ void main() {
                   LastRecordedByInfoFields().time,
                 ),
                 DateTimeOperator.isAfter,
-                DateTime.now().subtract(const Duration(days: 7)),
+                DateTime.utc(2026, 10),
               ),
             ],
             orderBy: [
@@ -55,9 +139,7 @@ void main() {
                   {
                     'lastEdit': {
                       'time': {
-                        '_gt': (query.filters.first.value! as DateTime)
-                            .toUtc()
-                            .toIso8601String(),
+                        '_gt': DateTime.utc(2026, 10).toIso8601String(),
                       },
                     },
                   },
@@ -74,12 +156,12 @@ void main() {
             'limit': PaginatableStream.defaultPageSize + 1,
           };
 
-          await _runTestCase(query, expectedVarsJson);
+          await expectPersonSearchRequest(query, expectedVarsJson);
         },
       );
 
       test(
-        'createPaginatableStream: default orderBy',
+        'person searches use id ordering when no ordering is selected',
         () async {
           final query = AdvancedQuery(
             queryableType: AdvancedQueriesMetadata().person,
@@ -110,14 +192,14 @@ void main() {
             'limit': PaginatableStream.defaultPageSize + 1,
           };
 
-          await _runTestCase(query, expectedVarsJson);
+          await expectPersonSearchRequest(query, expectedVarsJson);
         },
       );
 
       test(
-        'createPaginatableStream: nested conditions, logicalOperatos, limit',
+        'person searches preserve nested logical conditions and the requested limit',
         () async {
-          final dateValue = DateTime.now().subtract(const Duration(days: 7));
+          final dateValue = DateTime.utc(2026, 10);
           final query = AdvancedQuery(
             queryableType: AdvancedQueriesMetadata().person,
             logicalOperator: LogicalOperator.or,
@@ -202,102 +284,9 @@ void main() {
             'limit': 13,
           };
 
-          await _runTestCase(query, expectedVarsJson);
+          await expectPersonSearchRequest(query, expectedVarsJson);
         },
       );
     },
-  );
-}
-
-Future<void> _runTestCase(AdvancedQuery query, Json expectedVarsJson) async {
-  const unit = AdvancedQueryParser();
-  final stream = unit.createPaginatableStream(query);
-  await Future.delayed(Duration.zero);
-  await stream.dispose();
-
-  final gqlClient =
-      globalProviderContainer.read(databaseServiceProvider).graphQLClient
-          as MockDBGraphQLClient;
-
-  final verificationResult = verify(
-    gqlClient.subscribeAndReturnParsed(
-      captureThat(
-        predicate<SubscriptionOptions>(
-          (o) =>
-              !(o.document.definitions
-                      .whereType<OperationDefinitionNode>()
-                      .firstOrNull
-                      ?.name
-                      ?.value
-                      .toLowerCase()
-                      .contains('count') ??
-                  false),
-        ),
-      ),
-    ),
-  )..called(1);
-
-  final subscriptionOptions =
-      verificationResult.captured[0] as SubscriptionOptions;
-
-  final firstSelectionNode = subscriptionOptions.document.definitions
-      .whereType<OperationDefinitionNode>()
-      .first
-      .firstSelectionNode;
-
-  final capturedVars = subscriptionOptions.variables;
-
-  expect(capturedVars, expectedVarsJson);
-
-  final fragments = {
-    for (final fragment
-        in subscriptionOptions.document.definitions
-            .whereType<FragmentDefinitionNode>())
-      fragment.name.value: fragment.selectionSet.selections,
-  };
-
-  bool selectsPath(List<SelectionNode> selections, Json orderBy) {
-    final MapEntry(:key, :value) = orderBy.entries.single;
-
-    return selections.any(
-      (selection) => switch (selection) {
-        FragmentSpreadNode(:final name) => selectsPath(
-          fragments[name.value] ?? [],
-          orderBy,
-        ),
-        FieldNode(:final name, :final selectionSet) when name.value == key =>
-          switch (value) {
-            final Json nested => selectsPath(
-              selectionSet?.selections ?? [],
-              nested,
-            ),
-            _ => true,
-          },
-        _ => false,
-      },
-    );
-  }
-
-  final unselectedOrderBy = (expectedVarsJson['orderBy'] as List<Json>).where(
-    (orderBy) => !selectsPath(
-      firstSelectionNode.selectionSet?.selections ?? [],
-      orderBy,
-    ),
-  );
-
-  expect(unselectedOrderBy, isEmpty);
-}
-
-Future<void> _setUp() async {
-  final overrides = [
-    _mockDBService(),
-  ];
-
-  initGlobalProviderContainer(overrides);
-}
-
-Override _mockDBService() {
-  return databaseServiceProvider.overrideWithValue(
-    DatabaseService(MockDBGraphQLClient()),
   );
 }

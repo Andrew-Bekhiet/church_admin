@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/data_checks_document_transformer.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/history/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/history/__generated__/subscriptions.gql.dart';
 import 'package:gql/ast.dart';
@@ -21,7 +22,9 @@ class HistoryDAO {
   }) => PaginatableStream<LastRecordedByInfo, void>.simple(
     factory: (request) => graphQLClient.subscribeAndReturnParsed(
       SubscriptionOptions(
-        document: document,
+        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
+          document,
+        ),
         operationName: operationName,
         variables: variables(request),
         parserFn: db.parser.singleListParser(
@@ -170,7 +173,9 @@ class HistoryDAO {
   }) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationinsertPersonLastCall,
+        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
+          documentNodeMutationinsertPersonLastCall,
+        ),
         operationName: 'insertPersonLastCall',
         variables: Variables_Mutation_insertPersonLastCall(
           personId: personId.toUuid(),
@@ -189,7 +194,9 @@ class HistoryDAO {
   }) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationinsertPersonLastConfession,
+        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
+          documentNodeMutationinsertPersonLastConfession,
+        ),
         operationName: 'insertPersonLastConfession',
         variables: Variables_Mutation_insertPersonLastConfession(
           personId: personId.toUuid(),
@@ -205,7 +212,9 @@ class HistoryDAO {
   Stream<List<KodasRecord>> streamDayKodas({required DateTime day}) {
     return graphQLClient.subscribeAndReturnParsed(
       SubscriptionOptions(
-        document: documentNodeSubscriptionwatchDayKodas,
+        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
+          documentNodeSubscriptionwatchDayKodas,
+        ),
         operationName: 'watchDayKodas',
         variables: Variables_Subscription_watchDayKodas(day: day).toJson(),
         parserFn: (data) => Subscription_watchDayKodas.fromJson(
@@ -221,7 +230,9 @@ class HistoryDAO {
   }) {
     return graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
-        document: documentNodeMutationrecordKodas,
+        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
+          documentNodeMutationrecordKodas,
+        ),
         operationName: 'recordKodas',
         variables: Variables_Mutation_recordKodas(
           personId: personId.toUuid(),
@@ -240,7 +251,9 @@ class HistoryDAO {
   Future<KodasRecord> deleteKodas({required String kodasRecordId}) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationdeleteKodas,
+        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
+          documentNodeMutationdeleteKodas,
+        ),
         operationName: 'deleteKodas',
         variables: Variables_Mutation_deleteKodas(
           id: kodasRecordId.toUuid(),
@@ -261,7 +274,9 @@ class HistoryDAO {
   }) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationinsertPersonLastVisit,
+        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
+          documentNodeMutationinsertPersonLastVisit,
+        ),
         operationName: 'insertPersonLastVisit',
         variables: Variables_Mutation_insertPersonLastVisit(
           personId: personId.toUuid(),
@@ -281,7 +296,9 @@ class HistoryDAO {
   }) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationinsertFamilyLastVisit,
+        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
+          documentNodeMutationinsertFamilyLastVisit,
+        ),
         operationName: 'insertFamilyLastVisit',
         variables: Variables_Mutation_insertFamilyLastVisit(
           familyId: familyId.toUuid(),
@@ -301,7 +318,9 @@ class HistoryDAO {
   }) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationinsertStreetLastVisit,
+        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
+          documentNodeMutationinsertStreetLastVisit,
+        ),
         operationName: 'insertStreetLastVisit',
         variables: Variables_Mutation_insertStreetLastVisit(
           streetId: streetId.toUuid(),

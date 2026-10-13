@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
@@ -48,8 +49,8 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
       orderBy ?? Stream.value(null),
       (search, where, orderBy) => StreamableDAOParameters<T>(
         search: search,
-        where: where,
-        orderBy: orderBy,
+        where: where?.whereEnabled(),
+        orderBy: orderBy?.whereEnabled(),
       ),
     ).shareValue();
 
@@ -79,7 +80,7 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
 
     return parametersStream
         .map((p) => p.where)
-        .distinct()
+        .distinct(const ListEquality<Filter>().equals)
         .switchMap(
           (where) => graphQLClient.subscribeAndReturnParsed(
             streamCountConfig.operationOptions ??

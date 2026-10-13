@@ -1,9 +1,11 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/data_check_free_documents.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
 import 'package:graphql/client.dart';
 
-class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
+class UsersDAO extends DAOBase<User>
+    with StreamableDAO<User>, DataCheckFreeDocuments<User> {
   @override
   late final StreamAllConfig<User> baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllUsers,
@@ -60,7 +62,7 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
 
     final result = await graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationupdateUser,
+        document: transformDocument(documentNodeMutationupdateUser),
         operationName: 'updateUser',
         variables: Variables_Mutation_updateUser(
           uid: update.uid.toUuid(),
