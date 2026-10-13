@@ -788,11 +788,14 @@ class _CopyWithStubImpl_Input_UsersFcmTokensStreamCursorValueInput<TRes>
 }
 
 class Input_UsersPreferencesAppendInput {
-  factory Input_UsersPreferencesAppendInput({Json? orderByPreferences}) =>
-      Input_UsersPreferencesAppendInput._({
-        if (orderByPreferences != null)
-          r'orderByPreferences': orderByPreferences,
-      });
+  factory Input_UsersPreferencesAppendInput({
+    Json? orderByPreferences,
+    Json? secondLinePreferences,
+  }) => Input_UsersPreferencesAppendInput._({
+    if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
+    if (secondLinePreferences != null)
+      r'secondLinePreferences': secondLinePreferences,
+  });
 
   Input_UsersPreferencesAppendInput._(this._$data);
 
@@ -804,6 +807,10 @@ class Input_UsersPreferencesAppendInput {
       final l$orderByPreferences = data['orderByPreferences'];
       result$data['orderByPreferences'] = (l$orderByPreferences as Json?);
     }
+    if (data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = data['secondLinePreferences'];
+      result$data['secondLinePreferences'] = (l$secondLinePreferences as Json?);
+    }
     return Input_UsersPreferencesAppendInput._(result$data);
   }
 
@@ -811,11 +818,17 @@ class Input_UsersPreferencesAppendInput {
 
   Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
 
+  Json? get secondLinePreferences => (_$data['secondLinePreferences'] as Json?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
       result$data['orderByPreferences'] = l$orderByPreferences;
+    }
+    if (_$data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = secondLinePreferences;
+      result$data['secondLinePreferences'] = l$secondLinePreferences;
     }
     return result$data;
   }
@@ -841,15 +854,28 @@ class Input_UsersPreferencesAppendInput {
     if (l$orderByPreferences != lOther$orderByPreferences) {
       return false;
     }
+    final l$secondLinePreferences = secondLinePreferences;
+    final lOther$secondLinePreferences = other.secondLinePreferences;
+    if (_$data.containsKey('secondLinePreferences') !=
+        other._$data.containsKey('secondLinePreferences')) {
+      return false;
+    }
+    if (l$secondLinePreferences != lOther$secondLinePreferences) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$orderByPreferences = orderByPreferences;
+    final l$secondLinePreferences = secondLinePreferences;
     return Object.hashAll([
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
+          : const {},
+      _$data.containsKey('secondLinePreferences')
+          ? l$secondLinePreferences
           : const {},
     ]);
   }
@@ -864,7 +890,7 @@ abstract class CopyWith_Input_UsersPreferencesAppendInput<TRes> {
   factory CopyWith_Input_UsersPreferencesAppendInput.stub(TRes res) =
       _CopyWithStubImpl_Input_UsersPreferencesAppendInput;
 
-  TRes call({Json? orderByPreferences});
+  TRes call({Json? orderByPreferences, Json? secondLinePreferences});
 }
 
 class _CopyWithImpl_Input_UsersPreferencesAppendInput<TRes>
@@ -877,11 +903,16 @@ class _CopyWithImpl_Input_UsersPreferencesAppendInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? orderByPreferences = _undefined}) => _then(
+  TRes call({
+    Object? orderByPreferences = _undefined,
+    Object? secondLinePreferences = _undefined,
+  }) => _then(
     Input_UsersPreferencesAppendInput._({
       ..._instance._$data,
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as Json?),
+      if (secondLinePreferences != _undefined)
+        'secondLinePreferences': (secondLinePreferences as Json?),
     }),
   );
 }
@@ -892,7 +923,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesAppendInput<TRes>
 
   TRes _res;
 
-  call({Json? orderByPreferences}) => _res;
+  call({Json? orderByPreferences, Json? secondLinePreferences}) => _res;
 }
 
 class Input_UsersPreferencesBoolExp {
@@ -904,6 +935,7 @@ class Input_UsersPreferencesBoolExp {
     Input_BooleanComparisonExp? greatFeastTheme,
     Input_StringComparisonExp? lastHomeMode,
     Input_JsonbComparisonExp? orderByPreferences,
+    Input_JsonbComparisonExp? secondLinePreferences,
     Input_UuidComparisonExp? uid,
     Input_TimestamptzComparisonExp? updatedAt,
     Input_AuthUsersDataBoolExp? user,
@@ -915,6 +947,8 @@ class Input_UsersPreferencesBoolExp {
     if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
     if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
     if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
+    if (secondLinePreferences != null)
+      r'secondLinePreferences': secondLinePreferences,
     if (uid != null) r'uid': uid,
     if (updatedAt != null) r'updatedAt': updatedAt,
     if (user != null) r'user': user,
@@ -984,6 +1018,14 @@ class Input_UsersPreferencesBoolExp {
               (l$orderByPreferences as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = data['secondLinePreferences'];
+      result$data['secondLinePreferences'] = l$secondLinePreferences == null
+          ? null
+          : Input_JsonbComparisonExp.fromJson(
+              (l$secondLinePreferences as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
       result$data['uid'] = l$uid == null
@@ -1032,6 +1074,9 @@ class Input_UsersPreferencesBoolExp {
   Input_JsonbComparisonExp? get orderByPreferences =>
       (_$data['orderByPreferences'] as Input_JsonbComparisonExp?);
 
+  Input_JsonbComparisonExp? get secondLinePreferences =>
+      (_$data['secondLinePreferences'] as Input_JsonbComparisonExp?);
+
   Input_UuidComparisonExp? get uid =>
       (_$data['uid'] as Input_UuidComparisonExp?);
 
@@ -1070,6 +1115,10 @@ class Input_UsersPreferencesBoolExp {
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
       result$data['orderByPreferences'] = l$orderByPreferences?.toJson();
+    }
+    if (_$data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = secondLinePreferences;
+      result$data['secondLinePreferences'] = l$secondLinePreferences?.toJson();
     }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
@@ -1180,6 +1229,15 @@ class Input_UsersPreferencesBoolExp {
     if (l$orderByPreferences != lOther$orderByPreferences) {
       return false;
     }
+    final l$secondLinePreferences = secondLinePreferences;
+    final lOther$secondLinePreferences = other.secondLinePreferences;
+    if (_$data.containsKey('secondLinePreferences') !=
+        other._$data.containsKey('secondLinePreferences')) {
+      return false;
+    }
+    if (l$secondLinePreferences != lOther$secondLinePreferences) {
+      return false;
+    }
     final l$uid = uid;
     final lOther$uid = other.uid;
     if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
@@ -1217,6 +1275,7 @@ class Input_UsersPreferencesBoolExp {
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
     final l$orderByPreferences = orderByPreferences;
+    final l$secondLinePreferences = secondLinePreferences;
     final l$uid = uid;
     final l$updatedAt = updatedAt;
     final l$user = user;
@@ -1237,6 +1296,9 @@ class Input_UsersPreferencesBoolExp {
       _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
+          : const {},
+      _$data.containsKey('secondLinePreferences')
+          ? l$secondLinePreferences
           : const {},
       _$data.containsKey('uid') ? l$uid : const {},
       _$data.containsKey('updatedAt') ? l$updatedAt : const {},
@@ -1262,6 +1324,7 @@ abstract class CopyWith_Input_UsersPreferencesBoolExp<TRes> {
     Input_BooleanComparisonExp? greatFeastTheme,
     Input_StringComparisonExp? lastHomeMode,
     Input_JsonbComparisonExp? orderByPreferences,
+    Input_JsonbComparisonExp? secondLinePreferences,
     Input_UuidComparisonExp? uid,
     Input_TimestamptzComparisonExp? updatedAt,
     Input_AuthUsersDataBoolExp? user,
@@ -1287,6 +1350,7 @@ abstract class CopyWith_Input_UsersPreferencesBoolExp<TRes> {
   CopyWith_Input_BooleanComparisonExp<TRes> get greatFeastTheme;
   CopyWith_Input_StringComparisonExp<TRes> get lastHomeMode;
   CopyWith_Input_JsonbComparisonExp<TRes> get orderByPreferences;
+  CopyWith_Input_JsonbComparisonExp<TRes> get secondLinePreferences;
   CopyWith_Input_UuidComparisonExp<TRes> get uid;
   CopyWith_Input_TimestamptzComparisonExp<TRes> get updatedAt;
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user;
@@ -1310,6 +1374,7 @@ class _CopyWithImpl_Input_UsersPreferencesBoolExp<TRes>
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
     Object? orderByPreferences = _undefined,
+    Object? secondLinePreferences = _undefined,
     Object? uid = _undefined,
     Object? updatedAt = _undefined,
     Object? user = _undefined,
@@ -1330,6 +1395,9 @@ class _CopyWithImpl_Input_UsersPreferencesBoolExp<TRes>
         'lastHomeMode': (lastHomeMode as Input_StringComparisonExp?),
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as Input_JsonbComparisonExp?),
+      if (secondLinePreferences != _undefined)
+        'secondLinePreferences':
+            (secondLinePreferences as Input_JsonbComparisonExp?),
       if (uid != _undefined) 'uid': (uid as Input_UuidComparisonExp?),
       if (updatedAt != _undefined)
         'updatedAt': (updatedAt as Input_TimestamptzComparisonExp?),
@@ -1417,6 +1485,16 @@ class _CopyWithImpl_Input_UsersPreferencesBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_JsonbComparisonExp<TRes> get secondLinePreferences {
+    final local$secondLinePreferences = _instance.secondLinePreferences;
+    return local$secondLinePreferences == null
+        ? CopyWith_Input_JsonbComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_JsonbComparisonExp(
+            local$secondLinePreferences,
+            (e) => call(secondLinePreferences: e),
+          );
+  }
+
   CopyWith_Input_UuidComparisonExp<TRes> get uid {
     final local$uid = _instance.uid;
     return local$uid == null
@@ -1456,6 +1534,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesBoolExp<TRes>
     Input_BooleanComparisonExp? greatFeastTheme,
     Input_StringComparisonExp? lastHomeMode,
     Input_JsonbComparisonExp? orderByPreferences,
+    Input_JsonbComparisonExp? secondLinePreferences,
     Input_UuidComparisonExp? uid,
     Input_TimestamptzComparisonExp? updatedAt,
     Input_AuthUsersDataBoolExp? user,
@@ -1480,6 +1559,9 @@ class _CopyWithStubImpl_Input_UsersPreferencesBoolExp<TRes>
   CopyWith_Input_JsonbComparisonExp<TRes> get orderByPreferences =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
 
+  CopyWith_Input_JsonbComparisonExp<TRes> get secondLinePreferences =>
+      CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get uid =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 
@@ -1493,8 +1575,11 @@ class _CopyWithStubImpl_Input_UsersPreferencesBoolExp<TRes>
 class Input_UsersPreferencesDeleteAtPathInput {
   factory Input_UsersPreferencesDeleteAtPathInput({
     List<String>? orderByPreferences,
+    List<String>? secondLinePreferences,
   }) => Input_UsersPreferencesDeleteAtPathInput._({
     if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
+    if (secondLinePreferences != null)
+      r'secondLinePreferences': secondLinePreferences,
   });
 
   Input_UsersPreferencesDeleteAtPathInput._(this._$data);
@@ -1510,6 +1595,13 @@ class Input_UsersPreferencesDeleteAtPathInput {
               ?.map((e) => (e as String))
               .toList();
     }
+    if (data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = data['secondLinePreferences'];
+      result$data['secondLinePreferences'] =
+          (l$secondLinePreferences as List<dynamic>?)
+              ?.map((e) => (e as String))
+              .toList();
+    }
     return Input_UsersPreferencesDeleteAtPathInput._(result$data);
   }
 
@@ -1518,11 +1610,20 @@ class Input_UsersPreferencesDeleteAtPathInput {
   List<String>? get orderByPreferences =>
       (_$data['orderByPreferences'] as List<String>?);
 
+  List<String>? get secondLinePreferences =>
+      (_$data['secondLinePreferences'] as List<String>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
       result$data['orderByPreferences'] = l$orderByPreferences
+          ?.map((e) => e)
+          .toList();
+    }
+    if (_$data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = secondLinePreferences;
+      result$data['secondLinePreferences'] = l$secondLinePreferences
           ?.map((e) => e)
           .toList();
     }
@@ -1564,17 +1665,47 @@ class Input_UsersPreferencesDeleteAtPathInput {
     } else if (l$orderByPreferences != lOther$orderByPreferences) {
       return false;
     }
+    final l$secondLinePreferences = secondLinePreferences;
+    final lOther$secondLinePreferences = other.secondLinePreferences;
+    if (_$data.containsKey('secondLinePreferences') !=
+        other._$data.containsKey('secondLinePreferences')) {
+      return false;
+    }
+    if (l$secondLinePreferences != null &&
+        lOther$secondLinePreferences != null) {
+      if (l$secondLinePreferences.length !=
+          lOther$secondLinePreferences.length) {
+        return false;
+      }
+      for (int i = 0; i < l$secondLinePreferences.length; i++) {
+        final l$secondLinePreferences$entry = l$secondLinePreferences[i];
+        final lOther$secondLinePreferences$entry =
+            lOther$secondLinePreferences[i];
+        if (l$secondLinePreferences$entry !=
+            lOther$secondLinePreferences$entry) {
+          return false;
+        }
+      }
+    } else if (l$secondLinePreferences != lOther$secondLinePreferences) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$orderByPreferences = orderByPreferences;
+    final l$secondLinePreferences = secondLinePreferences;
     return Object.hashAll([
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences == null
                 ? null
                 : Object.hashAll(l$orderByPreferences.map((v) => v))
+          : const {},
+      _$data.containsKey('secondLinePreferences')
+          ? l$secondLinePreferences == null
+                ? null
+                : Object.hashAll(l$secondLinePreferences.map((v) => v))
           : const {},
     ]);
   }
@@ -1589,7 +1720,10 @@ abstract class CopyWith_Input_UsersPreferencesDeleteAtPathInput<TRes> {
   factory CopyWith_Input_UsersPreferencesDeleteAtPathInput.stub(TRes res) =
       _CopyWithStubImpl_Input_UsersPreferencesDeleteAtPathInput;
 
-  TRes call({List<String>? orderByPreferences});
+  TRes call({
+    List<String>? orderByPreferences,
+    List<String>? secondLinePreferences,
+  });
 }
 
 class _CopyWithImpl_Input_UsersPreferencesDeleteAtPathInput<TRes>
@@ -1605,11 +1739,16 @@ class _CopyWithImpl_Input_UsersPreferencesDeleteAtPathInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? orderByPreferences = _undefined}) => _then(
+  TRes call({
+    Object? orderByPreferences = _undefined,
+    Object? secondLinePreferences = _undefined,
+  }) => _then(
     Input_UsersPreferencesDeleteAtPathInput._({
       ..._instance._$data,
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as List<String>?),
+      if (secondLinePreferences != _undefined)
+        'secondLinePreferences': (secondLinePreferences as List<String>?),
     }),
   );
 }
@@ -1620,15 +1759,21 @@ class _CopyWithStubImpl_Input_UsersPreferencesDeleteAtPathInput<TRes>
 
   TRes _res;
 
-  call({List<String>? orderByPreferences}) => _res;
+  call({
+    List<String>? orderByPreferences,
+    List<String>? secondLinePreferences,
+  }) => _res;
 }
 
 class Input_UsersPreferencesDeleteElemInput {
-  factory Input_UsersPreferencesDeleteElemInput({int? orderByPreferences}) =>
-      Input_UsersPreferencesDeleteElemInput._({
-        if (orderByPreferences != null)
-          r'orderByPreferences': orderByPreferences,
-      });
+  factory Input_UsersPreferencesDeleteElemInput({
+    int? orderByPreferences,
+    int? secondLinePreferences,
+  }) => Input_UsersPreferencesDeleteElemInput._({
+    if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
+    if (secondLinePreferences != null)
+      r'secondLinePreferences': secondLinePreferences,
+  });
 
   Input_UsersPreferencesDeleteElemInput._(this._$data);
 
@@ -1640,6 +1785,10 @@ class Input_UsersPreferencesDeleteElemInput {
       final l$orderByPreferences = data['orderByPreferences'];
       result$data['orderByPreferences'] = (l$orderByPreferences as int?);
     }
+    if (data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = data['secondLinePreferences'];
+      result$data['secondLinePreferences'] = (l$secondLinePreferences as int?);
+    }
     return Input_UsersPreferencesDeleteElemInput._(result$data);
   }
 
@@ -1647,11 +1796,17 @@ class Input_UsersPreferencesDeleteElemInput {
 
   int? get orderByPreferences => (_$data['orderByPreferences'] as int?);
 
+  int? get secondLinePreferences => (_$data['secondLinePreferences'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
       result$data['orderByPreferences'] = l$orderByPreferences;
+    }
+    if (_$data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = secondLinePreferences;
+      result$data['secondLinePreferences'] = l$secondLinePreferences;
     }
     return result$data;
   }
@@ -1680,15 +1835,28 @@ class Input_UsersPreferencesDeleteElemInput {
     if (l$orderByPreferences != lOther$orderByPreferences) {
       return false;
     }
+    final l$secondLinePreferences = secondLinePreferences;
+    final lOther$secondLinePreferences = other.secondLinePreferences;
+    if (_$data.containsKey('secondLinePreferences') !=
+        other._$data.containsKey('secondLinePreferences')) {
+      return false;
+    }
+    if (l$secondLinePreferences != lOther$secondLinePreferences) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$orderByPreferences = orderByPreferences;
+    final l$secondLinePreferences = secondLinePreferences;
     return Object.hashAll([
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
+          : const {},
+      _$data.containsKey('secondLinePreferences')
+          ? l$secondLinePreferences
           : const {},
     ]);
   }
@@ -1703,7 +1871,7 @@ abstract class CopyWith_Input_UsersPreferencesDeleteElemInput<TRes> {
   factory CopyWith_Input_UsersPreferencesDeleteElemInput.stub(TRes res) =
       _CopyWithStubImpl_Input_UsersPreferencesDeleteElemInput;
 
-  TRes call({int? orderByPreferences});
+  TRes call({int? orderByPreferences, int? secondLinePreferences});
 }
 
 class _CopyWithImpl_Input_UsersPreferencesDeleteElemInput<TRes>
@@ -1719,11 +1887,16 @@ class _CopyWithImpl_Input_UsersPreferencesDeleteElemInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? orderByPreferences = _undefined}) => _then(
+  TRes call({
+    Object? orderByPreferences = _undefined,
+    Object? secondLinePreferences = _undefined,
+  }) => _then(
     Input_UsersPreferencesDeleteElemInput._({
       ..._instance._$data,
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as int?),
+      if (secondLinePreferences != _undefined)
+        'secondLinePreferences': (secondLinePreferences as int?),
     }),
   );
 }
@@ -1734,15 +1907,18 @@ class _CopyWithStubImpl_Input_UsersPreferencesDeleteElemInput<TRes>
 
   TRes _res;
 
-  call({int? orderByPreferences}) => _res;
+  call({int? orderByPreferences, int? secondLinePreferences}) => _res;
 }
 
 class Input_UsersPreferencesDeleteKeyInput {
-  factory Input_UsersPreferencesDeleteKeyInput({String? orderByPreferences}) =>
-      Input_UsersPreferencesDeleteKeyInput._({
-        if (orderByPreferences != null)
-          r'orderByPreferences': orderByPreferences,
-      });
+  factory Input_UsersPreferencesDeleteKeyInput({
+    String? orderByPreferences,
+    String? secondLinePreferences,
+  }) => Input_UsersPreferencesDeleteKeyInput._({
+    if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
+    if (secondLinePreferences != null)
+      r'secondLinePreferences': secondLinePreferences,
+  });
 
   Input_UsersPreferencesDeleteKeyInput._(this._$data);
 
@@ -1754,6 +1930,11 @@ class Input_UsersPreferencesDeleteKeyInput {
       final l$orderByPreferences = data['orderByPreferences'];
       result$data['orderByPreferences'] = (l$orderByPreferences as String?);
     }
+    if (data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = data['secondLinePreferences'];
+      result$data['secondLinePreferences'] =
+          (l$secondLinePreferences as String?);
+    }
     return Input_UsersPreferencesDeleteKeyInput._(result$data);
   }
 
@@ -1761,11 +1942,18 @@ class Input_UsersPreferencesDeleteKeyInput {
 
   String? get orderByPreferences => (_$data['orderByPreferences'] as String?);
 
+  String? get secondLinePreferences =>
+      (_$data['secondLinePreferences'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
       result$data['orderByPreferences'] = l$orderByPreferences;
+    }
+    if (_$data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = secondLinePreferences;
+      result$data['secondLinePreferences'] = l$secondLinePreferences;
     }
     return result$data;
   }
@@ -1793,15 +1981,28 @@ class Input_UsersPreferencesDeleteKeyInput {
     if (l$orderByPreferences != lOther$orderByPreferences) {
       return false;
     }
+    final l$secondLinePreferences = secondLinePreferences;
+    final lOther$secondLinePreferences = other.secondLinePreferences;
+    if (_$data.containsKey('secondLinePreferences') !=
+        other._$data.containsKey('secondLinePreferences')) {
+      return false;
+    }
+    if (l$secondLinePreferences != lOther$secondLinePreferences) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$orderByPreferences = orderByPreferences;
+    final l$secondLinePreferences = secondLinePreferences;
     return Object.hashAll([
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
+          : const {},
+      _$data.containsKey('secondLinePreferences')
+          ? l$secondLinePreferences
           : const {},
     ]);
   }
@@ -1816,7 +2017,7 @@ abstract class CopyWith_Input_UsersPreferencesDeleteKeyInput<TRes> {
   factory CopyWith_Input_UsersPreferencesDeleteKeyInput.stub(TRes res) =
       _CopyWithStubImpl_Input_UsersPreferencesDeleteKeyInput;
 
-  TRes call({String? orderByPreferences});
+  TRes call({String? orderByPreferences, String? secondLinePreferences});
 }
 
 class _CopyWithImpl_Input_UsersPreferencesDeleteKeyInput<TRes>
@@ -1832,11 +2033,16 @@ class _CopyWithImpl_Input_UsersPreferencesDeleteKeyInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? orderByPreferences = _undefined}) => _then(
+  TRes call({
+    Object? orderByPreferences = _undefined,
+    Object? secondLinePreferences = _undefined,
+  }) => _then(
     Input_UsersPreferencesDeleteKeyInput._({
       ..._instance._$data,
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as String?),
+      if (secondLinePreferences != _undefined)
+        'secondLinePreferences': (secondLinePreferences as String?),
     }),
   );
 }
@@ -1847,7 +2053,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesDeleteKeyInput<TRes>
 
   TRes _res;
 
-  call({String? orderByPreferences}) => _res;
+  call({String? orderByPreferences, String? secondLinePreferences}) => _res;
 }
 
 class Input_UsersPreferencesOrderBy {
@@ -1856,6 +2062,7 @@ class Input_UsersPreferencesOrderBy {
     Enum_OrderBy? greatFeastTheme,
     Enum_OrderBy? lastHomeMode,
     Enum_OrderBy? orderByPreferences,
+    Enum_OrderBy? secondLinePreferences,
     Enum_OrderBy? uid,
     Enum_OrderBy? updatedAt,
     Input_AuthUsersDataOrderBy? user,
@@ -1864,6 +2071,8 @@ class Input_UsersPreferencesOrderBy {
     if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
     if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
     if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
+    if (secondLinePreferences != null)
+      r'secondLinePreferences': secondLinePreferences,
     if (uid != null) r'uid': uid,
     if (updatedAt != null) r'updatedAt': updatedAt,
     if (user != null) r'user': user,
@@ -1896,6 +2105,12 @@ class Input_UsersPreferencesOrderBy {
       result$data['orderByPreferences'] = l$orderByPreferences == null
           ? null
           : fromJson_Enum_OrderBy((l$orderByPreferences as String));
+    }
+    if (data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = data['secondLinePreferences'];
+      result$data['secondLinePreferences'] = l$secondLinePreferences == null
+          ? null
+          : fromJson_Enum_OrderBy((l$secondLinePreferences as String));
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
@@ -1932,6 +2147,9 @@ class Input_UsersPreferencesOrderBy {
   Enum_OrderBy? get orderByPreferences =>
       (_$data['orderByPreferences'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get secondLinePreferences =>
+      (_$data['secondLinePreferences'] as Enum_OrderBy?);
+
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
 
   Enum_OrderBy? get updatedAt => (_$data['updatedAt'] as Enum_OrderBy?);
@@ -1964,6 +2182,12 @@ class Input_UsersPreferencesOrderBy {
       result$data['orderByPreferences'] = l$orderByPreferences == null
           ? null
           : toJson_Enum_OrderBy(l$orderByPreferences);
+    }
+    if (_$data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = secondLinePreferences;
+      result$data['secondLinePreferences'] = l$secondLinePreferences == null
+          ? null
+          : toJson_Enum_OrderBy(l$secondLinePreferences);
     }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
@@ -2030,6 +2254,15 @@ class Input_UsersPreferencesOrderBy {
     if (l$orderByPreferences != lOther$orderByPreferences) {
       return false;
     }
+    final l$secondLinePreferences = secondLinePreferences;
+    final lOther$secondLinePreferences = other.secondLinePreferences;
+    if (_$data.containsKey('secondLinePreferences') !=
+        other._$data.containsKey('secondLinePreferences')) {
+      return false;
+    }
+    if (l$secondLinePreferences != lOther$secondLinePreferences) {
+      return false;
+    }
     final l$uid = uid;
     final lOther$uid = other.uid;
     if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
@@ -2064,6 +2297,7 @@ class Input_UsersPreferencesOrderBy {
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
     final l$orderByPreferences = orderByPreferences;
+    final l$secondLinePreferences = secondLinePreferences;
     final l$uid = uid;
     final l$updatedAt = updatedAt;
     final l$user = user;
@@ -2073,6 +2307,9 @@ class Input_UsersPreferencesOrderBy {
       _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
+          : const {},
+      _$data.containsKey('secondLinePreferences')
+          ? l$secondLinePreferences
           : const {},
       _$data.containsKey('uid') ? l$uid : const {},
       _$data.containsKey('updatedAt') ? l$updatedAt : const {},
@@ -2095,6 +2332,7 @@ abstract class CopyWith_Input_UsersPreferencesOrderBy<TRes> {
     Enum_OrderBy? greatFeastTheme,
     Enum_OrderBy? lastHomeMode,
     Enum_OrderBy? orderByPreferences,
+    Enum_OrderBy? secondLinePreferences,
     Enum_OrderBy? uid,
     Enum_OrderBy? updatedAt,
     Input_AuthUsersDataOrderBy? user,
@@ -2117,6 +2355,7 @@ class _CopyWithImpl_Input_UsersPreferencesOrderBy<TRes>
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
     Object? orderByPreferences = _undefined,
+    Object? secondLinePreferences = _undefined,
     Object? uid = _undefined,
     Object? updatedAt = _undefined,
     Object? user = _undefined,
@@ -2130,6 +2369,8 @@ class _CopyWithImpl_Input_UsersPreferencesOrderBy<TRes>
         'lastHomeMode': (lastHomeMode as Enum_OrderBy?),
       if (orderByPreferences != _undefined)
         'orderByPreferences': (orderByPreferences as Enum_OrderBy?),
+      if (secondLinePreferences != _undefined)
+        'secondLinePreferences': (secondLinePreferences as Enum_OrderBy?),
       if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
       if (updatedAt != _undefined) 'updatedAt': (updatedAt as Enum_OrderBy?),
       if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
@@ -2155,6 +2396,7 @@ class _CopyWithStubImpl_Input_UsersPreferencesOrderBy<TRes>
     Enum_OrderBy? greatFeastTheme,
     Enum_OrderBy? lastHomeMode,
     Enum_OrderBy? orderByPreferences,
+    Enum_OrderBy? secondLinePreferences,
     Enum_OrderBy? uid,
     Enum_OrderBy? updatedAt,
     Input_AuthUsersDataOrderBy? user,
@@ -2262,11 +2504,14 @@ class _CopyWithStubImpl_Input_UsersPreferencesPkColumnsInput<TRes>
 }
 
 class Input_UsersPreferencesPrependInput {
-  factory Input_UsersPreferencesPrependInput({Json? orderByPreferences}) =>
-      Input_UsersPreferencesPrependInput._({
-        if (orderByPreferences != null)
-          r'orderByPreferences': orderByPreferences,
-      });
+  factory Input_UsersPreferencesPrependInput({
+    Json? orderByPreferences,
+    Json? secondLinePreferences,
+  }) => Input_UsersPreferencesPrependInput._({
+    if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
+    if (secondLinePreferences != null)
+      r'secondLinePreferences': secondLinePreferences,
+  });
 
   Input_UsersPreferencesPrependInput._(this._$data);
 
@@ -2278,6 +2523,10 @@ class Input_UsersPreferencesPrependInput {
       final l$orderByPreferences = data['orderByPreferences'];
       result$data['orderByPreferences'] = (l$orderByPreferences as Json?);
     }
+    if (data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = data['secondLinePreferences'];
+      result$data['secondLinePreferences'] = (l$secondLinePreferences as Json?);
+    }
     return Input_UsersPreferencesPrependInput._(result$data);
   }
 
@@ -2285,11 +2534,17 @@ class Input_UsersPreferencesPrependInput {
 
   Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
 
+  Json? get secondLinePreferences => (_$data['secondLinePreferences'] as Json?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('orderByPreferences')) {
       final l$orderByPreferences = orderByPreferences;
       result$data['orderByPreferences'] = l$orderByPreferences;
+    }
+    if (_$data.containsKey('secondLinePreferences')) {
+      final l$secondLinePreferences = secondLinePreferences;
+      result$data['secondLinePreferences'] = l$secondLinePreferences;
     }
     return result$data;
   }
@@ -2317,190 +2572,28 @@ class Input_UsersPreferencesPrependInput {
     if (l$orderByPreferences != lOther$orderByPreferences) {
       return false;
     }
+    final l$secondLinePreferences = secondLinePreferences;
+    final lOther$secondLinePreferences = other.secondLinePreferences;
+    if (_$data.containsKey('secondLinePreferences') !=
+        other._$data.containsKey('secondLinePreferences')) {
+      return false;
+    }
+    if (l$secondLinePreferences != lOther$secondLinePreferences) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$orderByPreferences = orderByPreferences;
+    final l$secondLinePreferences = secondLinePreferences;
     return Object.hashAll([
       _$data.containsKey('orderByPreferences')
           ? l$orderByPreferences
           : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_UsersPreferencesPrependInput<TRes> {
-  factory CopyWith_Input_UsersPreferencesPrependInput(
-    Input_UsersPreferencesPrependInput instance,
-    TRes Function(Input_UsersPreferencesPrependInput) then,
-  ) = _CopyWithImpl_Input_UsersPreferencesPrependInput;
-
-  factory CopyWith_Input_UsersPreferencesPrependInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_UsersPreferencesPrependInput;
-
-  TRes call({Json? orderByPreferences});
-}
-
-class _CopyWithImpl_Input_UsersPreferencesPrependInput<TRes>
-    implements CopyWith_Input_UsersPreferencesPrependInput<TRes> {
-  _CopyWithImpl_Input_UsersPreferencesPrependInput(this._instance, this._then);
-
-  final Input_UsersPreferencesPrependInput _instance;
-
-  final TRes Function(Input_UsersPreferencesPrependInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? orderByPreferences = _undefined}) => _then(
-    Input_UsersPreferencesPrependInput._({
-      ..._instance._$data,
-      if (orderByPreferences != _undefined)
-        'orderByPreferences': (orderByPreferences as Json?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_UsersPreferencesPrependInput<TRes>
-    implements CopyWith_Input_UsersPreferencesPrependInput<TRes> {
-  _CopyWithStubImpl_Input_UsersPreferencesPrependInput(this._res);
-
-  TRes _res;
-
-  call({Json? orderByPreferences}) => _res;
-}
-
-class Input_UsersPreferencesSetInput {
-  factory Input_UsersPreferencesSetInput({
-    bool? darkTheme,
-    bool? greatFeastTheme,
-    String? lastHomeMode,
-    Json? orderByPreferences,
-  }) => Input_UsersPreferencesSetInput._({
-    if (darkTheme != null) r'darkTheme': darkTheme,
-    if (greatFeastTheme != null) r'greatFeastTheme': greatFeastTheme,
-    if (lastHomeMode != null) r'lastHomeMode': lastHomeMode,
-    if (orderByPreferences != null) r'orderByPreferences': orderByPreferences,
-  });
-
-  Input_UsersPreferencesSetInput._(this._$data);
-
-  factory Input_UsersPreferencesSetInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('darkTheme')) {
-      final l$darkTheme = data['darkTheme'];
-      result$data['darkTheme'] = (l$darkTheme as bool?);
-    }
-    if (data.containsKey('greatFeastTheme')) {
-      final l$greatFeastTheme = data['greatFeastTheme'];
-      result$data['greatFeastTheme'] = (l$greatFeastTheme as bool?);
-    }
-    if (data.containsKey('lastHomeMode')) {
-      final l$lastHomeMode = data['lastHomeMode'];
-      result$data['lastHomeMode'] = (l$lastHomeMode as String?);
-    }
-    if (data.containsKey('orderByPreferences')) {
-      final l$orderByPreferences = data['orderByPreferences'];
-      result$data['orderByPreferences'] = (l$orderByPreferences as Json?);
-    }
-    return Input_UsersPreferencesSetInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get darkTheme => (_$data['darkTheme'] as bool?);
-
-  bool? get greatFeastTheme => (_$data['greatFeastTheme'] as bool?);
-
-  String? get lastHomeMode => (_$data['lastHomeMode'] as String?);
-
-  Json? get orderByPreferences => (_$data['orderByPreferences'] as Json?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('darkTheme')) {
-      final l$darkTheme = darkTheme;
-      result$data['darkTheme'] = l$darkTheme;
-    }
-    if (_$data.containsKey('greatFeastTheme')) {
-      final l$greatFeastTheme = greatFeastTheme;
-      result$data['greatFeastTheme'] = l$greatFeastTheme;
-    }
-    if (_$data.containsKey('lastHomeMode')) {
-      final l$lastHomeMode = lastHomeMode;
-      result$data['lastHomeMode'] = l$lastHomeMode;
-    }
-    if (_$data.containsKey('orderByPreferences')) {
-      final l$orderByPreferences = orderByPreferences;
-      result$data['orderByPreferences'] = l$orderByPreferences;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_UsersPreferencesSetInput<Input_UsersPreferencesSetInput>
-  get copyWith => CopyWith_Input_UsersPreferencesSetInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_UsersPreferencesSetInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$darkTheme = darkTheme;
-    final lOther$darkTheme = other.darkTheme;
-    if (_$data.containsKey('darkTheme') !=
-        other._$data.containsKey('darkTheme')) {
-      return false;
-    }
-    if (l$darkTheme != lOther$darkTheme) {
-      return false;
-    }
-    final l$greatFeastTheme = greatFeastTheme;
-    final lOther$greatFeastTheme = other.greatFeastTheme;
-    if (_$data.containsKey('greatFeastTheme') !=
-        other._$data.containsKey('greatFeastTheme')) {
-      return false;
-    }
-    if (l$greatFeastTheme != lOther$greatFeastTheme) {
-      return false;
-    }
-    final l$lastHomeMode = lastHomeMode;
-    final lOther$lastHomeMode = other.lastHomeMode;
-    if (_$data.containsKey('lastHomeMode') !=
-        other._$data.containsKey('lastHomeMode')) {
-      return false;
-    }
-    if (l$lastHomeMode != lOther$lastHomeMode) {
-      return false;
-    }
-    final l$orderByPreferences = orderByPreferences;
-    final lOther$orderByPreferences = other.orderByPreferences;
-    if (_$data.containsKey('orderByPreferences') !=
-        other._$data.containsKey('orderByPreferences')) {
-      return false;
-    }
-    if (l$orderByPreferences != lOther$orderByPreferences) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$darkTheme = darkTheme;
-    final l$greatFeastTheme = greatFeastTheme;
-    final l$lastHomeMode = lastHomeMode;
-    final l$orderByPreferences = orderByPreferences;
-    return Object.hashAll([
-      _$data.containsKey('darkTheme') ? l$darkTheme : const {},
-      _$data.containsKey('greatFeastTheme') ? l$greatFeastTheme : const {},
-      _$data.containsKey('lastHomeMode') ? l$lastHomeMode : const {},
-      _$data.containsKey('orderByPreferences')
-          ? l$orderByPreferences
+      _$data.containsKey('secondLinePreferences')
+          ? l$secondLinePreferences
           : const {},
     ]);
   }

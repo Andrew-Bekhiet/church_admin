@@ -51,6 +51,7 @@ class InMemoryStudyYearsDAO extends Fake implements StudyYearsDAO {
     Stream<String?>? searchQuery,
     Stream<List<Filter>>? where,
     Stream<List<OrderBy>>? orderBy,
+    Stream<FieldMetadata?>? secondLineField,
     int? overrideTotalLimit,
   }) => PaginatableStream.simple(
     factory: (_) => Stream.value(

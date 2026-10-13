@@ -156,7 +156,7 @@ class ViewableObjectService {
     return value.toString();
   }
 
-  IconData getDefaultIconFor<T extends IImage>([T? imageObject]) {
+  IconData getDefaultIconFor<T extends Object>([T? imageObject]) {
     if (imageObject is Area || _isSubtype<T, Area>()) {
       return Symbols.pin_drop;
     } else if (imageObject is Street || _isSubtype<T, Street>()) {

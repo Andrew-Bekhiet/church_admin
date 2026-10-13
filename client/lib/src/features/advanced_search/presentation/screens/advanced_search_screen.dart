@@ -153,7 +153,8 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
   void _onAddOrderByStatement() => controller.addOrderBy(
     OrderBy(
       field: selectedQueryableType.orderableFields.firstWhere(
-        (p) => !p.name.endsWith('id'),
+        (f) => f != selectedQueryableType.keyField,
+        orElse: () => selectedQueryableType.orderableFields.first,
       ),
     ),
   );

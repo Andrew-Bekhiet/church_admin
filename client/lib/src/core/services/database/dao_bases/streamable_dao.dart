@@ -16,6 +16,7 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
     Stream<String?>? searchQuery,
     Stream<List<Filter>>? where,
     Stream<List<OrderBy>>? orderBy,
+    Stream<FieldMetadata?>? secondLineField,
   }) {
     return streamAllWithConfig(
       streamAllConfig: baseStreamAllConfig,
@@ -23,6 +24,7 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
       searchQuery: searchQuery,
       where: where,
       orderBy: orderBy,
+      secondLineField: secondLineField,
     );
   }
 
@@ -41,16 +43,22 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
     Stream<String?>? searchQuery,
     Stream<List<Filter>>? where,
     Stream<List<OrderBy>>? orderBy,
+    Stream<FieldMetadata?>? secondLineField,
     int? overrideTotalLimit,
   }) {
-    final shareableParametersStream = Rx.combineLatest3(
+    final shareableParametersStream = Rx.combineLatest4(
       searchQuery ?? Stream.value(null),
       where ?? Stream.value(null),
       orderBy ?? Stream.value(null),
-      (search, where, orderBy) => StreamableDAOParameters<T>(
+      secondLineField ?? Stream.value(null),
+      (search, where, orderBy, secondLineField) => StreamableDAOParameters<T>(
         search: search,
         where: where?.whereEnabled(),
         orderBy: orderBy?.whereEnabled(),
+        secondLineField: switch (secondLineField) {
+          final field? when field.isEnabled => field,
+          _ => null,
+        },
       ),
     ).shareValue();
 

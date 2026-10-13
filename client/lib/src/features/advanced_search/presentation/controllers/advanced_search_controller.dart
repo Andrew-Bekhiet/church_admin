@@ -60,7 +60,7 @@ class AdvancedSearchController {
 
   void changeSelectedQueryableType(QueryableType queryableType) {
     final defaultField = queryableType.filterableFields.firstWhere(
-      (p) => !p.name.endsWith('id') && p.operators.isNotEmpty,
+      (f) => f != queryableType.keyField && f.operators.isNotEmpty,
       orElse: () => queryableType.filterableFields.first,
     );
 

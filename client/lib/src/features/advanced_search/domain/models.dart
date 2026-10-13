@@ -3,6 +3,7 @@ export 'models/dot_field.dart';
 export 'models/field_metadata.dart';
 export 'models/field_metadata_visitor.dart';
 export 'models/filter.dart';
+export 'models/list_arrangement.dart';
 export 'models/operator.dart';
 export 'models/order_by.dart';
 export 'models/phone_search_field_metadata.dart';

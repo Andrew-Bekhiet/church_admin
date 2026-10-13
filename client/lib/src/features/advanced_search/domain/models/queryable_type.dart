@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/widgets.dart';
 
 class QueryableType<T extends Object> with Equatable {
   final String name;
@@ -26,6 +27,8 @@ class QueryableType<T extends Object> with Equatable {
       isEnum ? null : DatabaseService.I.daosByType[T] as StreamableDAO?;
 
   bool get isSelectableAsReference => isEnum || dao != null;
+
+  IconData get icon => ViewableObjectService.I.getDefaultIconFor<T>();
 
   @override
   List<Object?> get props => [

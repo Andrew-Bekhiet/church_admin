@@ -27,7 +27,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
   static const snapPositions = <double>[0, 0.85, 1];
   static const snapDuration = Duration(milliseconds: 300);
 
-  static List<OrderBy> getLastOrderByFor({
+  static ListArrangement getLastArrangementFor({
     required QueryableType type,
     required List<OrderBy> Function() orElse,
     bool inServiceContext = false,
@@ -37,26 +37,32 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
       inServiceContext: inServiceContext,
     );
 
-    final value = UserPreferencesService.I.getLastOrderByFor(key);
-    if (value != null) return value;
+    final savedOrderBy = UserPreferencesService.I.getLastOrderByFor(key);
+    final orderBy = savedOrderBy ?? orElse();
+    if (savedOrderBy == null) {
+      unawaited(UserPreferencesService.I.setLastOrderByFor(key, orderBy));
+    }
 
-    final newOrderBy = orElse();
-    unawaited(UserPreferencesService.I.setLastOrderByFor(key, newOrderBy));
-
-    return newOrderBy;
+    return ListArrangement(
+      orderBy: orderBy,
+      secondLineField: UserPreferencesService.I.getLastSecondLineFieldFor(key),
+    );
   }
 
-  static Future<void> saveLastOrderByFor({
+  static Future<void> saveLastArrangementFor({
     required QueryableType type,
-    required List<OrderBy> orderBy,
+    required ListArrangement arrangement,
     bool inServiceContext = false,
   }) async {
-    await UserPreferencesService.I.setLastOrderByFor(
-      OrderByPreferenceKey(
-        type: type,
-        inServiceContext: inServiceContext,
-      ),
-      orderBy,
+    final key = OrderByPreferenceKey(
+      type: type,
+      inServiceContext: inServiceContext,
+    );
+
+    await UserPreferencesService.I.setLastOrderByFor(key, arrangement.orderBy);
+    await UserPreferencesService.I.setLastSecondLineFieldFor(
+      key,
+      arrangement.secondLineField,
     );
   }
 

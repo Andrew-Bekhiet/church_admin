@@ -16,6 +16,10 @@ class UserPreferences with _$UserPreferences implements ToJson {
   final Json orderByPreferences;
 
   @override
+  @JsonKey(defaultValue: <String, dynamic>{})
+  final Json secondLinePreferences;
+
+  @override
   final bool? darkTheme;
 
   @override
@@ -32,6 +36,7 @@ class UserPreferences with _$UserPreferences implements ToJson {
   const UserPreferences({
     required this.uid,
     this.orderByPreferences = const {},
+    this.secondLinePreferences = const {},
     this.greatFeastTheme = true,
     this.darkTheme,
     this.lastHomeMode,

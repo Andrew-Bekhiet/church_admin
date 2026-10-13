@@ -132,6 +132,28 @@ class MockUserPreferencesService extends _i1.Mock
           as _i8.Future<void>);
 
   @override
+  _i2.FieldMetadata<Object>? getLastSecondLineFieldFor(
+    _i2.OrderByPreferenceKey? key,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#getLastSecondLineFieldFor, [key]),
+            returnValueForMissingStub: null,
+          )
+          as _i2.FieldMetadata<Object>?);
+
+  @override
+  _i8.Future<void> setLastSecondLineFieldFor(
+    _i2.OrderByPreferenceKey? key,
+    _i2.FieldMetadata<Object>? field,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#setLastSecondLineFieldFor, [key, field]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
+
+  @override
   void onTransition(
     _i9.Bloc<dynamic, dynamic>? bloc,
     _i9.Transition<dynamic, dynamic>? transition,
@@ -364,7 +386,7 @@ class MockViewableObjectService extends _i1.Mock
           as String?);
 
   @override
-  _i6.IconData getDefaultIconFor<T extends _i2.IImage>([T? imageObject]) =>
+  _i6.IconData getDefaultIconFor<T extends Object>([T? imageObject]) =>
       (super.noSuchMethod(
             Invocation.method(#getDefaultIconFor, [imageObject]),
             returnValue: _i10.dummyValue<_i6.IconData>(

@@ -13,6 +13,7 @@ class UserPreferencesService extends BlocObserver {
   static const _equality = DeepCollectionEquality();
 
   static const _orderByKeyPrefix = 'lastOrderByFor';
+  static const _secondLineKeyPrefix = 'lastSecondLineFor';
   static const _darkThemeKey = 'darkTheme';
   static const _greatFeastThemeKey = 'greatFeastTheme';
   static const _lastHomeModeKey = 'lastHomeMode';
@@ -98,6 +99,25 @@ class UserPreferencesService extends BlocObserver {
     unawaited(_flushPending());
   }
 
+  FieldMetadata? getLastSecondLineFieldFor(OrderByPreferenceKey key) {
+    final storageKey = key.storageKey;
+    final pendingKey = '$_secondLineKeyPrefix$storageKey';
+
+    final value = _hasQueuedWrite(pendingKey)
+        ? _readQueuedWrite(pendingKey)
+        : _serverPreferences?.secondLinePreferences[storageKey];
+
+    return _parseFieldMetadata(value);
+  }
+
+  Future<void> setLastSecondLineFieldFor(
+    OrderByPreferenceKey key,
+    FieldMetadata? field,
+  ) async {
+    _queueWrite('$_secondLineKeyPrefix${key.storageKey}', field?.toJson());
+    unawaited(_flushPending());
+  }
+
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
@@ -122,46 +142,35 @@ class UserPreferencesService extends BlocObserver {
     final uid = _authBloc.currentUserData?.uid;
     if (uid == null) return;
 
-    final (:orderByPreferences, :scalarWrites) = _pendingWritesBox
-        .toMap()
-        .entries
-        .fold(
-          (
-            orderByPreferences: <String, Object?>{},
-            scalarWrites: <String, Object?>{},
-          ),
-          (acc, e) {
-            final isOrderByEntry =
-                e.key.startsWith(_orderByKeyPrefix) && e.value is List;
+    final orderByPreferences = <String, Object?>{};
+    final secondLinePreferences = <String, Object?>{};
+    final scalarWrites = <String, Object?>{};
 
-            if (isOrderByEntry) {
-              return (
-                orderByPreferences: {
-                  ...acc.orderByPreferences,
-                  e.key.substring(_orderByKeyPrefix.length): e.value,
-                },
-                scalarWrites: acc.scalarWrites,
-              );
-            }
+    for (final MapEntry(:key, :value) in _pendingWritesBox.toMap().entries) {
+      if (key.startsWith(_orderByKeyPrefix) && value is List) {
+        orderByPreferences[key.substring(_orderByKeyPrefix.length)] = value;
+      } else if (key.startsWith(_secondLineKeyPrefix)) {
+        secondLinePreferences[key.substring(_secondLineKeyPrefix.length)] =
+            _isNullQueuedValue(value) ? null : value;
+      } else {
+        scalarWrites[key] = _isNullQueuedValue(value) ? null : value;
+      }
+    }
 
-            final scalarValue = _isNullQueuedValue(e.value) ? null : e.value;
-
-            return (
-              orderByPreferences: acc.orderByPreferences,
-              scalarWrites: {...acc.scalarWrites, e.key: scalarValue},
-            );
-          },
-        );
-
-    Input_UsersPreferencesAppendInput appendFields =
-        Input_UsersPreferencesAppendInput();
-    if (orderByPreferences.isNotEmpty) {
-      appendFields = appendFields.copyWith(
-        orderByPreferences: orderByPreferences,
-      );
-    } else if (scalarWrites.isEmpty) {
+    if (orderByPreferences.isEmpty &&
+        secondLinePreferences.isEmpty &&
+        scalarWrites.isEmpty) {
       return;
     }
+
+    final appendFields = Input_UsersPreferencesAppendInput(
+      orderByPreferences: orderByPreferences.isEmpty
+          ? null
+          : orderByPreferences,
+      secondLinePreferences: secondLinePreferences.isEmpty
+          ? null
+          : secondLinePreferences,
+    );
 
     try {
       await _databaseService.userPreferences.updatePreferences(
@@ -170,32 +179,33 @@ class UserPreferencesService extends BlocObserver {
         append: appendFields,
       );
 
-      for (final MapEntry(:key, :value) in scalarWrites.entries) {
-        if (!_hasQueuedWrite(key) ||
-            !_equality.equals(_readQueuedWrite(key), value)) {
-          continue;
-        }
-
-        _pendingWritesBox.delete(key);
-      }
-
-      for (final MapEntry(:key, :value) in orderByPreferences.entries) {
-        final pendingWriteKey = '$_orderByKeyPrefix$key';
-        if (!_equality.equals(
-          _pendingWritesBox.get(pendingWriteKey),
-          value,
-        )) {
-          continue;
-        }
-
-        _pendingWritesBox.delete(pendingWriteKey);
-      }
+      _deleteUnchangedPendingWrites('', scalarWrites);
+      _deleteUnchangedPendingWrites(_orderByKeyPrefix, orderByPreferences);
+      _deleteUnchangedPendingWrites(
+        _secondLineKeyPrefix,
+        secondLinePreferences,
+      );
     } on Object catch (error, stackTrace) {
       unawaited(
         LoggingService.I.exception(
           LogRecord(error: error, stackTrace: stackTrace),
         ),
       );
+    }
+  }
+
+  void _deleteUnchangedPendingWrites(
+    String prefix,
+    Map<String, Object?> flushed,
+  ) {
+    for (final MapEntry(:key, :value) in flushed.entries) {
+      final pendingWriteKey = '$prefix$key';
+      if (!_hasQueuedWrite(pendingWriteKey) ||
+          !_equality.equals(_readQueuedWrite(pendingWriteKey), value)) {
+        continue;
+      }
+
+      _pendingWritesBox.delete(pendingWriteKey);
     }
   }
 
@@ -233,6 +243,16 @@ class UserPreferencesService extends BlocObserver {
         .toList();
 
     return orderBy.isEmpty ? null : orderBy;
+  }
+
+  FieldMetadata? _parseFieldMetadata(Object? value) {
+    if (value is! Map) return null;
+
+    try {
+      return FieldMetadata.fromJson(Json.from(value));
+    } catch (error) {
+      return null;
+    }
   }
 
   Json toJson() => _pendingWritesBox.toMap().cast<String, dynamic>();

@@ -33,9 +33,11 @@ class FathersDAO extends DAOBase<Father>
     Stream<String?>? searchQuery,
     Stream<List<Filter>>? where,
     Stream<List<OrderBy>>? orderBy,
+    Stream<FieldMetadata?>? secondLineField,
   }) {
     return super.streamAll(
       searchQuery: searchQuery,
+      secondLineField: secondLineField,
       where:
           where ??
           Stream.value(

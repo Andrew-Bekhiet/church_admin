@@ -7839,6 +7839,7 @@ type UsersPreferences {
   greatFeastTheme: Boolean!
   lastHomeMode: String
   orderByPreferences(path: String): jsonb!
+  secondLinePreferences(path: String): jsonb!
   uid: uuid!
   updatedAt: timestamptz!
   user: AuthUsersData!
@@ -7846,6 +7847,7 @@ type UsersPreferences {
 
 input UsersPreferencesAppendInput {
   orderByPreferences: jsonb
+  secondLinePreferences: jsonb
 }
 
 input UsersPreferencesBoolExp {
@@ -7856,6 +7858,7 @@ input UsersPreferencesBoolExp {
   greatFeastTheme: BooleanComparisonExp
   lastHomeMode: StringComparisonExp
   orderByPreferences: JsonbComparisonExp
+  secondLinePreferences: JsonbComparisonExp
   uid: UuidComparisonExp
   updatedAt: TimestamptzComparisonExp
   user: AuthUsersDataBoolExp
@@ -7863,14 +7866,17 @@ input UsersPreferencesBoolExp {
 
 input UsersPreferencesDeleteAtPathInput {
   orderByPreferences: [String!]
+  secondLinePreferences: [String!]
 }
 
 input UsersPreferencesDeleteElemInput {
   orderByPreferences: Int
+  secondLinePreferences: Int
 }
 
 input UsersPreferencesDeleteKeyInput {
   orderByPreferences: String
+  secondLinePreferences: String
 }
 
 type UsersPreferencesMutationResponse {
@@ -7883,6 +7889,7 @@ input UsersPreferencesOrderBy {
   greatFeastTheme: OrderBy
   lastHomeMode: OrderBy
   orderByPreferences: OrderBy
+  secondLinePreferences: OrderBy
   uid: OrderBy
   updatedAt: OrderBy
   user: AuthUsersDataOrderBy
@@ -7894,6 +7901,7 @@ input UsersPreferencesPkColumnsInput {
 
 input UsersPreferencesPrependInput {
   orderByPreferences: jsonb
+  secondLinePreferences: jsonb
 }
 
 enum UsersPreferencesSelectColumn {
@@ -7901,6 +7909,7 @@ enum UsersPreferencesSelectColumn {
   greatFeastTheme
   lastHomeMode
   orderByPreferences
+  secondLinePreferences
   uid
   updatedAt
 }
@@ -7910,6 +7919,7 @@ input UsersPreferencesSetInput {
   greatFeastTheme: Boolean
   lastHomeMode: String
   orderByPreferences: jsonb
+  secondLinePreferences: jsonb
 }
 
 input UsersPreferencesStreamCursorInput {
@@ -7922,6 +7932,7 @@ input UsersPreferencesStreamCursorValueInput {
   greatFeastTheme: Boolean
   lastHomeMode: String
   orderByPreferences: jsonb
+  secondLinePreferences: jsonb
   uid: uuid
   updatedAt: timestamptz
 }

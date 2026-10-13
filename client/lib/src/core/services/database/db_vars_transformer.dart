@@ -44,22 +44,16 @@ class DBVarsTransformer {
   }
 
   List<OrderBy> _maybeAddIdOrder<T>(List<OrderBy> orderBy) {
-    final hasIdOrder = orderBy.lastOrNull?.field.name == 'id';
+    final keyField = AdvancedQueriesMetadata().allQueryablesByType[T]?.keyField;
+    if (keyField == null) return orderBy;
 
-    if (hasIdOrder) {
-      return orderBy;
-    }
+    final hasKeyFieldOrder = orderBy.lastOrNull?.field == keyField;
+    if (hasKeyFieldOrder) return orderBy;
 
     return [
       ...orderBy,
-      switch (AdvancedQueriesMetadata()
-          .allQueryablesByType[T]
-          ?.fieldsMetadataByName) {
-        {'id': final idField} => OrderBy(field: idField),
-        {'uid': final uidField} => OrderBy(field: uidField),
-        _ => null,
-      },
-    ].nonNulls.toList();
+      OrderBy(field: keyField),
+    ];
   }
 
   Json _nameSearch(String search) => {
