@@ -19,4 +19,6 @@ alter table "public"."families" add constraint "check_deceased_spouse_name"
 check (
     "status" = 'widowed' and "deceased_spouse_name" is not null
     or "status" <> 'widowed' and "deceased_spouse_name" is null
-);
+) not valid;
+
+alter table "public"."families" validate constraint "check_deceased_spouse_name";
