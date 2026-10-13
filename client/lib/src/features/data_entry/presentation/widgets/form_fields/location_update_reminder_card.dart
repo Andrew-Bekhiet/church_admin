@@ -97,6 +97,9 @@ class LocationUpdateReminderCard extends StatelessWidget {
                         TextButton(
                           key: LocationUpdateReminderCardKeys.keepLocation,
                           onPressed: onKeepLocation,
+                          style: TextButton.styleFrom(
+                            foregroundColor: colorScheme.onTertiaryContainer,
+                          ),
                           child: const Text('الموقع صحيح'),
                         ),
                         FilledButton.tonalIcon(
