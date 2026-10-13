@@ -46,14 +46,20 @@ class ArrangementSecondLineSection extends StatelessWidget {
             ),
           ],
           selected: {chosenField != null},
-          onSelectionChanged: (selection) => onChanged(
-            arrangement.withSecondLineField(
-              selection.single
-                  ? arrangement.effectiveSecondLineField ??
-                        queryableType.orderableFields.first
-                  : null,
-            ),
-          ),
+          onSelectionChanged: (selection) {
+            if (!selection.single) {
+              onChanged(arrangement.withSecondLineField(null));
+
+              return;
+            }
+
+            final field =
+                arrangement.effectiveSecondLineField ??
+                queryableType.orderableFields.firstOrNull;
+            if (field == null) return;
+
+            onChanged(arrangement.withSecondLineField(field));
+          },
         ),
         if (chosenField != null)
           FieldPathPicker(
