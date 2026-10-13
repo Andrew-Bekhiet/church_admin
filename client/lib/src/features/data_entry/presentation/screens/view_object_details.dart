@@ -147,6 +147,9 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
         final objectData = snapshot.requireData!;
 
+        final isObjectFullyLoaded =
+            snapshot.connectionState == ConnectionState.active;
+
         final canEditObject = AuthBloc.I.currentUserData!.canEditObject(
           objectData,
         );
@@ -237,7 +240,9 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                   ? FloatingActionButtonLocation.endContained
                   : null,
               floatingActionButton:
-                  widget.floatingActionButtonBuilder != null && canEditObject
+                  widget.floatingActionButtonBuilder != null &&
+                      canEditObject &&
+                      isObjectFullyLoaded
                   ? Builder(
                       builder: (context) {
                         return widget.floatingActionButtonBuilder!(
