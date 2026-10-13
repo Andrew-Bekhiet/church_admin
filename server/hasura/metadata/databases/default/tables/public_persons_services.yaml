@@ -135,10 +135,6 @@ delete_permissions:
   - role: user
     permission:
       filter:
-        _and:
-          - _or:
-              - *person_by_person_id_editable
-              - *all_data_editable
-          - _or:
-              - *service_by_service_id_editable
-              - *all_data_editable
+        _or:
+          - *service_by_service_id_editable
+          - *all_data_editable

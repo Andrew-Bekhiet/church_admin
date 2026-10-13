@@ -43,8 +43,9 @@ mutation updatePerson(
   $insertContacts: Boolean! = false
 ) {
   # Root fields run in order, and edit permission on a person comes from its
-  # services, groups, study year and gender together. Linking first, updating,
-  # then unlinking keeps every intermediate row inside the old or new scope.
+  # services, groups, study year and gender together. Link first, write what
+  # leaves the scope unchanged, then update the person and unlink last, so no
+  # root field runs after the person has left the scope that allowed it.
   insertPersonsServices(objects: $newServices)
     @include(if: $insertPersonsServices) {
     affectedRows
@@ -58,16 +59,6 @@ mutation updatePerson(
   }
   insertPersonsTags(objects: $newTags) @include(if: $insertPersonsTags) {
     affectedRows
-  }
-
-  updatePersonsByPk(pkColumns: { id: $personId }, _set: $newPerson)
-    @include(if: $updatePersonsByPk) {
-    ...Person
-  }
-
-  updateAddressesByPk(pkColumns: { id: $addressId }, _set: $newAddress)
-    @include(if: $updateAddressByPk) {
-    ...Address
   }
 
   deleteContacts(where: { id: { _in: $deletedContactIds } })
@@ -90,16 +81,6 @@ mutation updatePerson(
   deletePersonsHobbies(
     where: { personId: { _eq: $personId }, hobbyId: { _in: $deleteHobbies } }
   ) @include(if: $deletePersonsHobbies) {
-    affectedRows
-  }
-  deletePersonsGroups(
-    where: { personId: { _eq: $personId }, groupId: { _in: $deleteGroups } }
-  ) @include(if: $deletePersonsGroups) {
-    affectedRows
-  }
-  deletePersonsServices(
-    where: { personId: { _eq: $personId }, serviceId: { _in: $deleteServices } }
-  ) @include(if: $deletePersonsServices) {
     affectedRows
   }
 
@@ -149,6 +130,27 @@ mutation updatePerson(
     object: { table: "persons", recordId: $personId, time: $lastVisit }
   ) @include(if: $insertHistoryVisitHistoryOne) {
     visitId
+  }
+
+  updatePersonsByPk(pkColumns: { id: $personId }, _set: $newPerson)
+    @include(if: $updatePersonsByPk) {
+    ...Person
+  }
+
+  updateAddressesByPk(pkColumns: { id: $addressId }, _set: $newAddress)
+    @include(if: $updateAddressByPk) {
+    ...Address
+  }
+
+  deletePersonsGroups(
+    where: { personId: { _eq: $personId }, groupId: { _in: $deleteGroups } }
+  ) @include(if: $deletePersonsGroups) {
+    affectedRows
+  }
+  deletePersonsServices(
+    where: { personId: { _eq: $personId }, serviceId: { _in: $deleteServices } }
+  ) @include(if: $deletePersonsServices) {
+    affectedRows
   }
 }
 

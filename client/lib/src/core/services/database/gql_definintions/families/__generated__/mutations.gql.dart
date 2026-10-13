@@ -1214,7 +1214,6 @@ class _CopyWithStubImpl_Variables_Mutation_updateFamily<TRes>
 class Mutation_updateFamily {
   Mutation_updateFamily({
     this.updateFamiliesByPk,
-    this.updateAddressesByPk,
     this.deleteFamiliesFamilies,
     this.insertFamiliesFamilies,
     this.deleteContacts,
@@ -1222,11 +1221,11 @@ class Mutation_updateFamily {
     this.insertContacts,
     this.insertHistoryVisitHistoryOne,
     this.$_fatherVisitHistory,
+    this.updateAddressesByPk,
   });
 
   factory Mutation_updateFamily.fromJson(Map<String, dynamic> json) {
     final l$updateFamiliesByPk = json['updateFamiliesByPk'];
-    final l$updateAddressesByPk = json['updateAddressesByPk'];
     final l$deleteFamiliesFamilies = json['deleteFamiliesFamilies'];
     final l$insertFamiliesFamilies = json['insertFamiliesFamilies'];
     final l$deleteContacts = json['deleteContacts'];
@@ -1234,16 +1233,12 @@ class Mutation_updateFamily {
     final l$insertContacts = json['insertContacts'];
     final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
     final l$$_fatherVisitHistory = json['_fatherVisitHistory'];
+    final l$updateAddressesByPk = json['updateAddressesByPk'];
     return Mutation_updateFamily(
       updateFamiliesByPk: l$updateFamiliesByPk == null
           ? null
           : Fragment_Family.fromJson(
               (l$updateFamiliesByPk as Map<String, dynamic>),
-            ),
-      updateAddressesByPk: l$updateAddressesByPk == null
-          ? null
-          : Fragment_Address.fromJson(
-              (l$updateAddressesByPk as Map<String, dynamic>),
             ),
       deleteFamiliesFamilies: l$deleteFamiliesFamilies == null
           ? null
@@ -1284,12 +1279,15 @@ class Mutation_updateFamily {
           : Mutation_updateFamily__fatherVisitHistory.fromJson(
               (l$$_fatherVisitHistory as Map<String, dynamic>),
             ),
+      updateAddressesByPk: l$updateAddressesByPk == null
+          ? null
+          : Fragment_Address.fromJson(
+              (l$updateAddressesByPk as Map<String, dynamic>),
+            ),
     );
   }
 
   final Fragment_Family? updateFamiliesByPk;
-
-  final Fragment_Address? updateAddressesByPk;
 
   final Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies;
 
@@ -1306,12 +1304,12 @@ class Mutation_updateFamily {
 
   final Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory;
 
+  final Fragment_Address? updateAddressesByPk;
+
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$updateFamiliesByPk = updateFamiliesByPk;
     _resultData['updateFamiliesByPk'] = l$updateFamiliesByPk?.toJson();
-    final l$updateAddressesByPk = updateAddressesByPk;
-    _resultData['updateAddressesByPk'] = l$updateAddressesByPk?.toJson();
     final l$deleteFamiliesFamilies = deleteFamiliesFamilies;
     _resultData['deleteFamiliesFamilies'] = l$deleteFamiliesFamilies?.toJson();
     final l$insertFamiliesFamilies = insertFamiliesFamilies;
@@ -1329,13 +1327,14 @@ class Mutation_updateFamily {
         ?.toJson();
     final l$$_fatherVisitHistory = $_fatherVisitHistory;
     _resultData['_fatherVisitHistory'] = l$$_fatherVisitHistory?.toJson();
+    final l$updateAddressesByPk = updateAddressesByPk;
+    _resultData['updateAddressesByPk'] = l$updateAddressesByPk?.toJson();
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$updateFamiliesByPk = updateFamiliesByPk;
-    final l$updateAddressesByPk = updateAddressesByPk;
     final l$deleteFamiliesFamilies = deleteFamiliesFamilies;
     final l$insertFamiliesFamilies = insertFamiliesFamilies;
     final l$deleteContacts = deleteContacts;
@@ -1343,9 +1342,9 @@ class Mutation_updateFamily {
     final l$insertContacts = insertContacts;
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     final l$$_fatherVisitHistory = $_fatherVisitHistory;
+    final l$updateAddressesByPk = updateAddressesByPk;
     return Object.hashAll([
       l$updateFamiliesByPk,
-      l$updateAddressesByPk,
       l$deleteFamiliesFamilies,
       l$insertFamiliesFamilies,
       l$deleteContacts,
@@ -1355,6 +1354,7 @@ class Mutation_updateFamily {
       l$insertContacts,
       l$insertHistoryVisitHistoryOne,
       l$$_fatherVisitHistory,
+      l$updateAddressesByPk,
     ]);
   }
 
@@ -1369,11 +1369,6 @@ class Mutation_updateFamily {
     final l$updateFamiliesByPk = updateFamiliesByPk;
     final lOther$updateFamiliesByPk = other.updateFamiliesByPk;
     if (l$updateFamiliesByPk != lOther$updateFamiliesByPk) {
-      return false;
-    }
-    final l$updateAddressesByPk = updateAddressesByPk;
-    final lOther$updateAddressesByPk = other.updateAddressesByPk;
-    if (l$updateAddressesByPk != lOther$updateAddressesByPk) {
       return false;
     }
     final l$deleteFamiliesFamilies = deleteFamiliesFamilies;
@@ -1423,6 +1418,11 @@ class Mutation_updateFamily {
     if (l$$_fatherVisitHistory != lOther$$_fatherVisitHistory) {
       return false;
     }
+    final l$updateAddressesByPk = updateAddressesByPk;
+    final lOther$updateAddressesByPk = other.updateAddressesByPk;
+    if (l$updateAddressesByPk != lOther$updateAddressesByPk) {
+      return false;
+    }
     return true;
   }
 }
@@ -1443,7 +1443,6 @@ abstract class CopyWith_Mutation_updateFamily<TRes> {
 
   TRes call({
     Fragment_Family? updateFamiliesByPk,
-    Fragment_Address? updateAddressesByPk,
     Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies,
     Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies,
     Mutation_updateFamily_deleteContacts? deleteContacts,
@@ -1452,9 +1451,9 @@ abstract class CopyWith_Mutation_updateFamily<TRes> {
     Mutation_updateFamily_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
     Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory,
+    Fragment_Address? updateAddressesByPk,
   });
   CopyWith_Fragment_Family<TRes> get updateFamiliesByPk;
-  CopyWith_Fragment_Address<TRes> get updateAddressesByPk;
   CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
   get deleteFamiliesFamilies;
   CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
@@ -1475,6 +1474,7 @@ abstract class CopyWith_Mutation_updateFamily<TRes> {
   get insertHistoryVisitHistoryOne;
   CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes>
   get $_fatherVisitHistory;
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk;
 }
 
 class _CopyWithImpl_Mutation_updateFamily<TRes>
@@ -1489,7 +1489,6 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
 
   TRes call({
     Object? updateFamiliesByPk = _undefined,
-    Object? updateAddressesByPk = _undefined,
     Object? deleteFamiliesFamilies = _undefined,
     Object? insertFamiliesFamilies = _undefined,
     Object? deleteContacts = _undefined,
@@ -1497,14 +1496,12 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
     Object? insertContacts = _undefined,
     Object? insertHistoryVisitHistoryOne = _undefined,
     Object? $_fatherVisitHistory = _undefined,
+    Object? updateAddressesByPk = _undefined,
   }) => _then(
     Mutation_updateFamily(
       updateFamiliesByPk: updateFamiliesByPk == _undefined
           ? _instance.updateFamiliesByPk
           : (updateFamiliesByPk as Fragment_Family?),
-      updateAddressesByPk: updateAddressesByPk == _undefined
-          ? _instance.updateAddressesByPk
-          : (updateAddressesByPk as Fragment_Address?),
       deleteFamiliesFamilies: deleteFamiliesFamilies == _undefined
           ? _instance.deleteFamiliesFamilies
           : (deleteFamiliesFamilies
@@ -1531,6 +1528,9 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
           ? _instance.$_fatherVisitHistory
           : ($_fatherVisitHistory
                 as Mutation_updateFamily__fatherVisitHistory?),
+      updateAddressesByPk: updateAddressesByPk == _undefined
+          ? _instance.updateAddressesByPk
+          : (updateAddressesByPk as Fragment_Address?),
     ),
   );
 
@@ -1541,16 +1541,6 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
         : CopyWith_Fragment_Family(
             local$updateFamiliesByPk,
             (e) => call(updateFamiliesByPk: e),
-          );
-  }
-
-  CopyWith_Fragment_Address<TRes> get updateAddressesByPk {
-    final local$updateAddressesByPk = _instance.updateAddressesByPk;
-    return local$updateAddressesByPk == null
-        ? CopyWith_Fragment_Address.stub(_then(_instance))
-        : CopyWith_Fragment_Address(
-            local$updateAddressesByPk,
-            (e) => call(updateAddressesByPk: e),
           );
   }
 
@@ -1645,6 +1635,16 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
             (e) => call($_fatherVisitHistory: e),
           );
   }
+
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk {
+    final local$updateAddressesByPk = _instance.updateAddressesByPk;
+    return local$updateAddressesByPk == null
+        ? CopyWith_Fragment_Address.stub(_then(_instance))
+        : CopyWith_Fragment_Address(
+            local$updateAddressesByPk,
+            (e) => call(updateAddressesByPk: e),
+          );
+  }
 }
 
 class _CopyWithStubImpl_Mutation_updateFamily<TRes>
@@ -1655,7 +1655,6 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
 
   call({
     Fragment_Family? updateFamiliesByPk,
-    Fragment_Address? updateAddressesByPk,
     Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies,
     Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies,
     Mutation_updateFamily_deleteContacts? deleteContacts,
@@ -1664,13 +1663,11 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
     Mutation_updateFamily_insertHistoryVisitHistoryOne?
     insertHistoryVisitHistoryOne,
     Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory,
+    Fragment_Address? updateAddressesByPk,
   }) => _res;
 
   CopyWith_Fragment_Family<TRes> get updateFamiliesByPk =>
       CopyWith_Fragment_Family.stub(_res);
-
-  CopyWith_Fragment_Address<TRes> get updateAddressesByPk =>
-      CopyWith_Fragment_Address.stub(_res);
 
   CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
   get deleteFamiliesFamilies =>
@@ -1695,6 +1692,9 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
   CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes>
   get $_fatherVisitHistory =>
       CopyWith_Mutation_updateFamily__fatherVisitHistory.stub(_res);
+
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk =>
+      CopyWith_Fragment_Address.stub(_res);
 }
 
 const documentNodeMutationupdateFamily = DocumentNode(
@@ -1940,53 +1940,6 @@ const documentNodeMutationupdateFamily = DocumentNode(
               selections: [
                 FragmentSpreadNode(
                   name: NameNode(value: 'Family'),
-                  directives: [],
-                ),
-                FieldNode(
-                  name: NameNode(value: '__typename'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-              ],
-            ),
-          ),
-          FieldNode(
-            name: NameNode(value: 'updateAddressesByPk'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'pkColumns'),
-                value: ObjectValueNode(
-                  fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'id'),
-                      value: VariableNode(name: NameNode(value: 'addressId')),
-                    ),
-                  ],
-                ),
-              ),
-              ArgumentNode(
-                name: NameNode(value: '_set'),
-                value: VariableNode(name: NameNode(value: 'newAddress')),
-              ),
-            ],
-            directives: [
-              DirectiveNode(
-                name: NameNode(value: 'include'),
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'if'),
-                    value: VariableNode(name: NameNode(value: 'updateAddress')),
-                  ),
-                ],
-              ),
-            ],
-            selectionSet: SelectionSetNode(
-              selections: [
-                FragmentSpreadNode(
-                  name: NameNode(value: 'Address'),
                   directives: [],
                 ),
                 FieldNode(
@@ -2403,6 +2356,53 @@ const documentNodeMutationupdateFamily = DocumentNode(
                   arguments: [],
                   directives: [],
                   selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'updateAddressesByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'addressId')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: VariableNode(name: NameNode(value: 'newAddress')),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(name: NameNode(value: 'updateAddress')),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Address'),
+                  directives: [],
                 ),
                 FieldNode(
                   name: NameNode(value: '__typename'),
