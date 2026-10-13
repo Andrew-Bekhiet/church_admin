@@ -76,7 +76,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
           AddressDistrictStreetAreaFields(
             address: _address,
             enabled: widget.enabled,
-            required: widget.required,
+            required: _mustNameAreaAndStreetOf(_address),
             listControllerFor: _listControllerFor,
             onDistrictChanged: (district) =>
                 _setAddress(_address.copyWith(district: district)),
@@ -299,7 +299,9 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
   void _setAddress(Address address, [bool setState = true]) {
     _previewedAddress.value = address;
 
-    if (setState) {
+    final areaAndStreetRequirementChanged =
+        _mustNameAreaAndStreetOf(address) != _mustNameAreaAndStreetOf(_address);
+    if (setState || areaAndStreetRequirementChanged) {
       this.setState(() {
         _address = address;
       });
@@ -308,6 +310,13 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     }
 
     widget.onAddressChanged(_address);
+  }
+
+  bool _mustNameAreaAndStreetOf(Address address) {
+    final addressWasEdited =
+        address != (widget.initialAddress ?? const Address());
+
+    return widget.required || addressWasEdited;
   }
 
   ViewableObjectListController<T> _listControllerFor<T extends ViewableWithID>(
