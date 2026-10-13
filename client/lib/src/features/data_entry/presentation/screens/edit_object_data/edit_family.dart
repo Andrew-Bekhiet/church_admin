@@ -149,12 +149,11 @@ class _EditFamilyState extends State<EditFamily> {
                   ),
                   initialValue: newFamily.deceasedSpouseName,
                   onChanged: (value) => newFamily = newFamily.copyWith(
-                    deceasedSpouseName: value.trim(),
+                    deceasedSpouseName: value.trim().isEmpty
+                        ? null
+                        : value.trim(),
                   ),
                   textInputAction: TextInputAction.next,
-                  validator: (value) => value != null && value.isEmpty
-                      ? 'الرجاء إدخال اسم المتوفي/ـة'
-                      : null,
                 ),
               )
             else
