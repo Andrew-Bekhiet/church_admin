@@ -12,6 +12,9 @@ void main() {
   const location = Point(30.0444, 31.2357);
   const road = 'شارع الجمهورية';
   const suburb = 'وسط البلد';
+  const houseCode = '12';
+  const houseStreet = Street(id: 'street-id', name: road);
+  const countryIsoCode = 'EG';
   final searchResult = {
     'lat': '${location.latitude}',
     'lon': '${location.longitude}',
@@ -53,9 +56,9 @@ void main() {
   }
 
   Future<Point?> locationOfHouse() => geocoder.locationFromStreetAddress(
-    houseCode: '12',
-    street: const Street(id: 'street-id', name: 'شارع الجمهورية'),
-    countryIsoCode: 'EG',
+    houseCode: houseCode,
+    street: houseStreet,
+    countryIsoCode: countryIsoCode,
   );
 
   setUpAll(() => registerFallbackValue(Uri()));
@@ -114,6 +117,39 @@ void main() {
 
     expect(await locationOfHouse(), location);
   });
+
+  test('the search request carries the house, street and country', () async {
+    answerWith([searchResult]);
+
+    await locationOfHouse();
+
+    final request =
+        verify(
+              () => dio.getUri<dynamic>(
+                captureAny(),
+                options: any(named: 'options'),
+              ),
+            ).captured.single
+            as Uri;
+    expect(request.pathSegments, ['search']);
+    expect(request.queryParameters['street'], '$houseCode ${houseStreet.name}');
+    expect(
+      request.queryParameters['countrycodes'],
+      countryIsoCode.toLowerCase(),
+    );
+    expect(request.queryParameters['limit'], '1');
+  });
+
+  test(
+    'a search result with a non-finite coordinate yields no location',
+    () async {
+      answerWith([
+        {'lat': '${double.nan}', 'lon': double.infinity},
+      ]);
+
+      expect(await locationOfHouse(), isNull);
+    },
+  );
 
   test('numeric coordinates of a search result become the location', () async {
     answerWith([

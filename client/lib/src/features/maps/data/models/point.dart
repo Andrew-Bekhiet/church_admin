@@ -9,10 +9,9 @@ class Point extends Spatial {
     };
 
     return switch ((coordinate(latitude), coordinate(longitude))) {
-      (final parsedLatitude?, final parsedLongitude?) => Point(
-        parsedLatitude,
-        parsedLongitude,
-      ),
+      (final parsedLatitude?, final parsedLongitude?)
+          when parsedLatitude.isFinite && parsedLongitude.isFinite =>
+        Point(parsedLatitude, parsedLongitude),
       _ => null,
     };
   }
