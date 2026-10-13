@@ -27,6 +27,7 @@ void main() {
   late FakeStreetsDAO streets;
   late FakeAreasDAO areas;
   late List<Address> reportedAddresses;
+  late GlobalKey<FormState> formKey;
 
   Finder listItem(String id) => find.byWidgetPredicate(
     (widget) => switch (widget) {
@@ -36,15 +37,24 @@ void main() {
     },
   );
 
-  Future<void> pumpField(WidgetTester tester, {Address? initialAddress}) async {
+  Future<void> pumpField(
+    WidgetTester tester, {
+    Address? initialAddress,
+    bool required = true,
+    Point? locationToPick,
+  }) async {
     await tester.pumpWidget(
       materialAppWithThemeAndLocale()(
         Scaffold(
           body: SingleChildScrollView(
-            child: AddressWithLocationField(
-              initialAddress: initialAddress,
-              onAddressChanged: reportedAddresses.add,
-              onEditLocation: (_) async => null,
+            child: Form(
+              key: formKey,
+              child: AddressWithLocationField(
+                initialAddress: initialAddress,
+                required: required,
+                onAddressChanged: reportedAddresses.add,
+                onEditLocation: (_) async => locationToPick,
+              ),
             ),
           ),
         ),
@@ -65,6 +75,7 @@ void main() {
     streets = FakeStreetsDAO()..streets = const [mainStreet, sideStreet];
     areas = FakeAreasDAO();
     reportedAddresses = [];
+    formKey = GlobalKey<FormState>();
 
     final databaseService = MockDatabaseService();
     when(() => databaseService.streets).thenReturn(streets);
@@ -203,5 +214,50 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(reportedAddresses.last.area, stMinaArea);
+  });
+
+  group('an optional address', () {
+    const unplacedAddress = Address(houseCode: '12');
+
+    testWidgets('left as it was saves without an area or street', (
+      tester,
+    ) async {
+      await pumpField(tester, initialAddress: unplacedAddress, required: false);
+
+      expect(formKey.currentState?.validate(), isTrue);
+    });
+
+    testWidgets('given a location must name its area and street', (
+      tester,
+    ) async {
+      await pumpField(
+        tester,
+        initialAddress: unplacedAddress,
+        required: false,
+        locationToPick: const Point(30.0444, 31.2357),
+      );
+
+      await tester.tap(find.byType(AddressLocationTapField));
+      await tester.pumpAndSettle();
+
+      expect(formKey.currentState?.validate(), isFalse);
+    });
+
+    testWidgets('given a new house number must name its area and street', (
+      tester,
+    ) async {
+      await pumpField(tester, initialAddress: unplacedAddress, required: false);
+
+      await tester.enterText(
+        find.descendant(
+          of: find.byKey(AddressHouseNumberRowKeys.houseCode),
+          matching: find.byType(EditableText),
+        ),
+        '14',
+      );
+      await tester.pump();
+
+      expect(formKey.currentState?.validate(), isFalse);
+    });
   });
 }
