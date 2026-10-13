@@ -10,6 +10,7 @@ class AddressApartmentDetailsRow extends StatelessWidget {
     required this.onStoreyNumberChanged,
     required this.onApartmentNumberChanged,
     required this.onSpecialLandmarkChanged,
+    this.textResetToken = 0,
     super.key,
   });
 
@@ -18,6 +19,7 @@ class AddressApartmentDetailsRow extends StatelessWidget {
   final void Function(int) onStoreyNumberChanged;
   final void Function(int) onApartmentNumberChanged;
   final void Function(String?) onSpecialLandmarkChanged;
+  final int textResetToken;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class AddressApartmentDetailsRow extends StatelessWidget {
           Expanded(
             flex: 3,
             child: TextFormField(
-              key: ValueKey(address.storeyNumber),
+              key: ValueKey(textResetToken),
               initialValue: address.storeyNumber?.toString(),
               decoration: const InputDecoration(
                 label: AutoSizeText('رقم الدور', maxLines: 1, minFontSize: 9),
@@ -61,7 +63,7 @@ class AddressApartmentDetailsRow extends StatelessWidget {
           Expanded(
             flex: 3,
             child: TextFormField(
-              key: ValueKey(address.apartmentNumber),
+              key: ValueKey(textResetToken),
               initialValue: address.apartmentNumber?.toString(),
               decoration: const InputDecoration(
                 label: AutoSizeText('رقم الشقة', maxLines: 1, minFontSize: 9),
@@ -92,7 +94,7 @@ class AddressApartmentDetailsRow extends StatelessWidget {
           Expanded(
             flex: 5,
             child: TextFormField(
-              key: ValueKey(address.specialLandmark),
+              key: ValueKey(textResetToken),
               initialValue: address.specialLandmark,
               decoration: const InputDecoration(labelText: 'علامة مميزة'),
               enabled: enabled,

@@ -1,8 +1,20 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:dio/dio.dart';
 
 class NominatimGeocoder implements Geocoder {
+  static const Duration minimumRequestSpacing = Duration(seconds: 1);
+
+  static const String _host = 'nominatim.openstreetmap.org';
+  static const String _language = 'ar-EG';
+
+  static final Options _requestOptions = Options(
+    headers: {'User-Agent': 'church_admin'},
+  );
+
   final Dio _dio;
+  Future<void> _nextRequestSlot = Future.value();
 
   NominatimGeocoder({required this._dio});
 
@@ -10,20 +22,22 @@ class NominatimGeocoder implements Geocoder {
   Future<Address?> addressAt(Point location) async {
     final Response<dynamic> response;
     try {
-      response = await _dio.getUri(
-        Uri(
-          scheme: 'https',
-          host: 'nominatim.openstreetmap.org',
-          path: 'reverse',
-          queryParameters: {
-            'lat': '${location.latitude}',
-            'lon': '${location.longitude}',
-            'accept-language': 'ar-EG',
-            'format': 'jsonv2',
-            'addressdetails': '1',
-          },
+      response = await _rateLimited(
+        () => _dio.getUri(
+          Uri(
+            scheme: 'https',
+            host: _host,
+            path: 'reverse',
+            queryParameters: {
+              'lat': '${location.latitude}',
+              'lon': '${location.longitude}',
+              'accept-language': _language,
+              'format': 'jsonv2',
+              'addressdetails': '1',
+            },
+          ),
+          options: _requestOptions,
         ),
-        options: Options(headers: {'User-Agent': 'church_admin'}),
       );
     } on DioException {
       return null;
@@ -34,5 +48,58 @@ class NominatimGeocoder implements Geocoder {
         Address.fromNominatimResponse(data),
       _ => null,
     };
+  }
+
+  @override
+  Future<Point?> locationFromStreetAddress({
+    required String houseCode,
+    required Street street,
+    required String countryIsoCode,
+  }) async {
+    final Response<dynamic> response;
+    try {
+      response = await _rateLimited(
+        () => _dio.getUri(
+          Uri(
+            scheme: 'https',
+            host: _host,
+            path: 'search',
+            queryParameters: {
+              'street': '$houseCode ${street.name}',
+              'countrycodes': countryIsoCode.toLowerCase(),
+              'accept-language': _language,
+              'format': 'jsonv2',
+              'limit': '1',
+            },
+          ),
+          options: _requestOptions,
+        ),
+      );
+    } on DioException {
+      return null;
+    }
+
+    return switch (response.data) {
+      [{'lat': final latitude, 'lon': final longitude}, ...] => Point.tryParse(
+        latitude,
+        longitude,
+      ),
+      _ => null,
+    };
+  }
+
+  Future<T> _rateLimited<T>(Future<T> Function() request) async {
+    final myTurn = _nextRequestSlot;
+    final nextRequestMayStart = Completer<void>();
+    _nextRequestSlot = nextRequestMayStart.future;
+
+    await myTurn;
+    unawaited(
+      Future<void>.delayed(
+        minimumRequestSpacing,
+      ).then((_) => nextRequestMayStart.complete()),
+    );
+
+    return request();
   }
 }

@@ -8,6 +8,7 @@ class AddressHouseNumberRow extends StatelessWidget {
     required this.enabled,
     required this.onSubstreetNameChanged,
     required this.onHouseCodeChanged,
+    this.textResetToken = 0,
     super.key,
   });
 
@@ -15,6 +16,7 @@ class AddressHouseNumberRow extends StatelessWidget {
   final bool enabled;
   final void Function(String?) onSubstreetNameChanged;
   final void Function(String?) onHouseCodeChanged;
+  final int textResetToken;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class AddressHouseNumberRow extends StatelessWidget {
           Expanded(
             flex: 3,
             child: TextFormField(
-              key: ValueKey(address.substreetName),
+              key: ValueKey(textResetToken),
               initialValue: address.substreetName,
               decoration: const InputDecoration(labelText: 'الشارع الفرعي'),
               enabled: enabled,
@@ -39,7 +41,7 @@ class AddressHouseNumberRow extends StatelessWidget {
             key: AddressHouseNumberRowKeys.houseCode,
             flex: 2,
             child: TextFormField(
-              key: ValueKey(address.houseCode),
+              key: ValueKey(textResetToken),
               initialValue: address.houseCode,
               decoration: const InputDecoration(
                 label: AutoSizeText(

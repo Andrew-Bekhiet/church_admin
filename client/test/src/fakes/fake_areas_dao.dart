@@ -8,6 +8,7 @@ class FakeAreasDAO extends Fake implements AreasDAO {
   final areasByStreetId = <String, List<Area>>{};
   final areasAtPoint = <Point, Area>{};
   final lookupGatesByStreetId = <String, Completer<void>>{};
+  final areaIdsContainingPoint = <Point, Set<String>>{};
   List<Area> pickableAreas = const [];
   Object? lookupFailure;
 
@@ -37,8 +38,17 @@ class FakeAreasDAO extends Fake implements AreasDAO {
     final boundsFilter = where?.firstWhereOrNull(
       (filter) => filter.operator == PointSpatialOperator.intersects,
     );
-    if (boundsFilter != null) return [?areasAtPoint[boundsFilter.value]];
+    if (boundsFilter != null && where?.length == 1) {
+      return [?areasAtPoint[boundsFilter.value]];
+    }
 
-    return areasByStreetId[streetId] ?? const [];
+    final areasOfStreet = areasByStreetId[streetId] ?? const [];
+    if (boundsFilter == null) return areasOfStreet;
+
+    final idsContainingPoint = areaIdsContainingPoint[boundsFilter.value];
+
+    return areasOfStreet
+        .where((area) => idsContainingPoint?.contains(area.id) ?? false)
+        .toList();
   }
 }

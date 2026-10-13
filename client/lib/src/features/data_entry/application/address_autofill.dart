@@ -16,22 +16,49 @@ class AddressAutofill {
     required this._geocoder,
   });
 
-  Future<Area?> maybeOnlyAreaOf(Street street) async {
-    final areasOfStreet = await _areas.query(
+  Future<List<Area>> areasOf(Street street) => _areasOfStreetWhere(street);
+
+  Future<AreaOfGeocodedHouse?> maybeAreaOfGeocodedHouse(Address address) async {
+    final street = address.street;
+    final houseCode = address.houseCode;
+    if (street == null || houseCode == null || houseCode.isEmpty) return null;
+
+    final houseLocation = await _geocoder.locationFromStreetAddress(
+      houseCode: houseCode,
+      street: street,
+      countryIsoCode: address.countryIsoCode,
+    );
+    if (houseLocation == null) return null;
+
+    final areasContainingHouse = await _areasOfStreetWhere(street, [
+      Filter(
+        AreaFields().bounds,
+        PointSpatialOperator.intersects,
+        houseLocation,
+      ),
+    ]);
+
+    return switch (areasContainingHouse.firstOrNull) {
+      final area? => AreaOfGeocodedHouse(area: area, location: houseLocation),
+      _ => null,
+    };
+  }
+
+  Future<List<Area>> _areasOfStreetWhere(
+    Street street, [
+    List<Filter> otherFilters = const [],
+  ]) {
+    return _areas.query(
       where: [
         Filter(
           AreaFields().streets.redirectTo(StreetFields().id),
           PrimitiveOperator.eq,
           street.id,
         ),
+        ...otherFilters,
       ],
       onlineFirst: true,
     );
-
-    return switch (areasOfStreet) {
-      [final onlyArea] => onlyArea,
-      _ => null,
-    };
   }
 
   Future<Address> suggestFromLocation(Point location) async {
