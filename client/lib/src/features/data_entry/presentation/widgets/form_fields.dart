@@ -9,6 +9,7 @@ export 'form_fields/date_time_field.dart';
 export 'form_fields/date_time_range_field.dart';
 export 'form_fields/default_meeting_field.dart';
 export 'form_fields/gender_field.dart';
+export 'form_fields/location_update_reminder_card.dart';
 export 'form_fields/multi_object_selection_field.dart';
 export 'form_fields/name_field.dart';
 export 'form_fields/new_password_field.dart';

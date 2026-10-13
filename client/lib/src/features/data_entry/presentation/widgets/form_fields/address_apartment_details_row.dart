@@ -61,6 +61,7 @@ class AddressApartmentDetailsRow extends StatelessWidget {
             ),
           ),
           Expanded(
+            key: AddressApartmentDetailsRowKeys.apartmentNumber,
             flex: 3,
             child: TextFormField(
               key: ValueKey(textResetToken),
@@ -106,4 +107,10 @@ class AddressApartmentDetailsRow extends StatelessWidget {
       ),
     );
   }
+}
+
+abstract final class AddressApartmentDetailsRowKeys {
+  static const Key apartmentNumber = ValueKey(
+    'Address Apartment Details Row Apartment Number Key',
+  );
 }

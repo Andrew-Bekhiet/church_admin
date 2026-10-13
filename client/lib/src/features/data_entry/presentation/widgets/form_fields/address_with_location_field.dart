@@ -38,6 +38,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     geocoder: Geocoder.I,
   );
   Address? _suggestedAddress;
+  Address? _locationConfirmedFor;
   Timer? _houseNumberGeocodingDebounce;
   int _textResetToken = 0;
 
@@ -49,6 +50,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
       _address = widget.initialAddress ?? const Address();
       _previewedAddress.value = _address;
       _suggestedAddress = null;
+      _locationConfirmedFor = null;
       _textResetToken++;
       _houseNumberGeocodingDebounce?.cancel();
     }
@@ -67,7 +69,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
           AddressLocationTapField(
             geolocation: _address.geolocation,
             enabled: widget.enabled,
-            onTap: _handleLocationTap,
+            onTap: (state) =>
+                _pickLocationAndSuggestAddress(onPicked: state.didChange),
           ),
           SuggestedAddressCard(
             suggestedAddress: _suggestedAddress,
@@ -87,10 +90,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
             address: _address,
             enabled: widget.enabled,
             textResetToken: _textResetToken,
-            onSubstreetNameChanged: (value) => _setAddress(
-              _address.copyWith(substreetName: value),
-              false,
-            ),
+            onSubstreetNameChanged: (value) =>
+                _setAddress(_address.copyWith(substreetName: value), false),
             onHouseCodeChanged: _handleHouseCodeChanged,
           ),
           AddressApartmentDetailsRow(
@@ -105,9 +106,18 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
               _address.copyWith(apartmentNumber: apartmentNumber),
               false,
             ),
-            onSpecialLandmarkChanged: (value) => _setAddress(
-              _address.copyWith(specialLandmark: value),
-              false,
+            onSpecialLandmarkChanged: (value) =>
+                _setAddress(_address.copyWith(specialLandmark: value), false),
+          ),
+          ValueListenableBuilder(
+            valueListenable: _previewedAddress,
+            builder: (context, address, _) => LocationUpdateReminderCard(
+              changedPlaceParts: _placePartsChangedSinceLocationWasChecked(
+                address,
+              ),
+              onUpdateLocation: _pickLocationAndSuggestAddress,
+              onKeepLocation: () =>
+                  setState(() => _locationConfirmedFor = address),
             ),
           ),
           ValueListenableBuilder(
@@ -244,13 +254,15 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     }
   }
 
-  Future<void> _handleLocationTap(FormFieldState<Point?> state) async {
+  Future<void> _pickLocationAndSuggestAddress({
+    void Function(Point)? onPicked,
+  }) async {
     final newLocation = await widget.onEditLocation(context);
 
     if (newLocation == null) return;
 
     final newAddress = _address.copyWith(geolocation: newLocation);
-    state.didChange(newLocation);
+    onPicked?.call(newLocation);
     _suggestedAddress = null;
     _setAddress(newAddress);
 
@@ -310,6 +322,21 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     }
 
     widget.onAddressChanged(_address);
+  }
+
+  Set<AddressPlacePart> _placePartsChangedSinceLocationWasChecked(
+    Address address,
+  ) {
+    if (widget.initialAddress case final initialAddress?
+        when initialAddress.geolocation != null &&
+            address.geolocation == initialAddress.geolocation) {
+      return AddressPlacePart.changedBetween(
+        _locationConfirmedFor ?? initialAddress,
+        address,
+      );
+    }
+
+    return const {};
   }
 
   bool _mustNameAreaAndStreetOf(Address address) {
