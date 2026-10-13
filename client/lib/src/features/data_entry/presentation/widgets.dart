@@ -1,3 +1,4 @@
+export 'widgets/address_change_blocked_field.dart';
 export 'widgets/chip_tab_bar.dart';
 export 'widgets/chip_tab_bar_persistent_header_delegate.dart';
 export 'widgets/contact_import_dialog.dart';

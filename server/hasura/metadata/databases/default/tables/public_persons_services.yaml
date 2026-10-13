@@ -8,6 +8,12 @@ object_relationships:
   - name: service
     using:
       foreign_key_constraint_on: service_id
+computed_fields:
+  - name: isOutsideServiceStudyYears
+    definition:
+      function:
+        name: persons_service_is_outside_service_study_years
+        schema: public
 insert_permissions:
   - role: user
     permission:
@@ -135,10 +141,11 @@ delete_permissions:
   - role: user
     permission:
       filter:
-        _and:
-          - _or:
-              - *person_by_person_id_editable
-              - *all_data_editable
-          - _or:
+        _or:
+          - *all_data_editable
+          - _and:
               - *service_by_service_id_editable
-              - *all_data_editable
+              - _or:
+                  - *person_by_person_id_editable
+                  - isOutsideServiceStudyYears:
+                      _eq: true

@@ -75,10 +75,12 @@ class _PersonEditFormState extends State<PersonEditForm> {
           onEditLocation: _editGeoLocation,
           familyValidator: _familyValidator,
           onFamilyChanged: _changeFamily,
+          addressChangeValidator: _addressChangeValidator,
         ),
         const Divider(),
         PersonServicesAndGroupsField(
           person: person,
+          initialPerson: widget.controller.initialObject,
           classesAndGroupsLoaded: widget.classesAndGroupsLoaded,
           onTap: _selectServices,
           combineGroupsWithServices: _combineGroupsWithServices,
@@ -311,6 +313,24 @@ class _PersonEditFormState extends State<PersonEditForm> {
       family == null && widget.controller.newObject.address == null
       ? 'يجب تحديد العائلة${widget.controller.isCreate ? ' أو العنوان' : ''}'
       : null;
+
+  String? _addressChangeValidator() {
+    final initial = widget.controller.initialObject;
+    final edited = widget.controller.newObject;
+
+    if (initial == null ||
+        edited.family?.id != initial.family?.id ||
+        edited.address == initial.address) {
+      return null;
+    }
+
+    return OutOfSightAfterSave(
+          AuthBloc.I.currentUserData,
+        ).isMovedOutOfSightIgnoringAddress(initial, edited)
+        ? 'لا يمكن تعديل العنوان مع نقل المخدوم خارج نطاقك في نفس الحفظ. '
+              'احفظ النقل أولاً أو تراجع عن تعديل العنوان'
+        : null;
+  }
 
   String? _generalCheckValidator([dynamic _]) {
     final person = widget.controller.newObject;

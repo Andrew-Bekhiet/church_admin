@@ -9,6 +9,7 @@ class PersonFamilyAndAddressFields extends StatelessWidget {
   final Future<Point?> Function(BuildContext) onEditLocation;
   final String? Function(Family?) familyValidator;
   final ValueChanged<Family?> onFamilyChanged;
+  final String? Function() addressChangeValidator;
 
   const PersonFamilyAndAddressFields({
     required this.person,
@@ -18,6 +19,7 @@ class PersonFamilyAndAddressFields extends StatelessWidget {
     required this.onEditLocation,
     required this.familyValidator,
     required this.onFamilyChanged,
+    required this.addressChangeValidator,
     super.key,
   });
 
@@ -28,7 +30,7 @@ class PersonFamilyAndAddressFields extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (hasFamilyAddressToShow)
+        if (hasFamilyAddressToShow) ...[
           AddressWithLocationField(
             label: 'عنوان وموقع العائلة',
             enabled: canEditFamilyAddress,
@@ -37,6 +39,8 @@ class PersonFamilyAndAddressFields extends StatelessWidget {
             onAddressChanged: onAddressChanged,
             onEditLocation: onEditLocation,
           ),
+          AddressChangeBlockedField(validator: addressChangeValidator),
+        ],
         ObjectSelectionField<Family, Family?>(
           key: PersonFamilyAndAddressFieldsKeys.family,
           validator: familyValidator,

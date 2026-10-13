@@ -25,6 +25,8 @@ class EditObjectController<T extends ViewableWithID> {
   final Future<T> Function(T object)? onCreate;
   final Future<void> Function(T object)? onDelete;
   final bool Function()? hasUnsavedInput;
+  final OutOfSightAfterSave? outOfSightAfterSave;
+  final String? movedOutOfSightMessage;
 
   bool get hasChanged => initialObject != newObject;
   bool get isCreate => initialObject == null;
@@ -38,6 +40,8 @@ class EditObjectController<T extends ViewableWithID> {
     this.onUpdate,
     this.onDelete,
     this.hasUnsavedInput,
+    this.outOfSightAfterSave,
+    this.movedOutOfSightMessage,
     this.initialObject,
   }) : assert(
          initialObject == null || (onUpdate != null && onDelete != null),
@@ -51,6 +55,8 @@ class EditObjectController<T extends ViewableWithID> {
     required UpdateFunc<T> this.onUpdate,
     this.onDelete,
     this.hasUnsavedInput,
+    this.outOfSightAfterSave,
+    this.movedOutOfSightMessage,
   }) : onCreate = null,
        afterCreate = null;
 
@@ -62,6 +68,8 @@ class EditObjectController<T extends ViewableWithID> {
     this.onUpdate,
     this.onDelete,
     this.hasUnsavedInput,
+    this.outOfSightAfterSave,
+    this.movedOutOfSightMessage,
     this.initialObject,
   });
 
@@ -74,6 +82,24 @@ class EditObjectController<T extends ViewableWithID> {
       if (formKey.currentState!.validate()) {
         _saveLock = true;
         formKey.currentState!.save();
+
+        final movesOutOfSight =
+            initialObject != null &&
+            (outOfSightAfterSave?.isMovedOutOfSight(
+                  initialObject!,
+                  newObject,
+                ) ??
+                false);
+
+        if (movesOutOfSight) {
+          final confirmed = await _confirmMoveOutOfSight(context);
+
+          if (!confirmed || !context.mounted) {
+            _saveLock = false;
+
+            return;
+          }
+        }
 
         final themeData = Theme.of(context);
         final navigator = Navigator.of(context);
@@ -102,7 +128,13 @@ class EditObjectController<T extends ViewableWithID> {
             SnackBar(
               content: Row(
                 children: [
-                  const Expanded(child: Text('تم بنجاح')),
+                  Expanded(
+                    child: Text(
+                      movesOutOfSight
+                          ? movedOutOfSightMessage ?? 'تم النقل'
+                          : 'تم بنجاح',
+                    ),
+                  ),
                   Icon(Symbols.done, color: themeData.primaryIconTheme.color),
                 ],
               ),
@@ -113,6 +145,12 @@ class EditObjectController<T extends ViewableWithID> {
           afterCreate(returnedObject);
         } else {
           navigator.pop();
+
+          if (movesOutOfSight) {
+            WidgetsBinding.instance.addPostFrameCallback(
+              (_) => navigator.pop(),
+            );
+          }
         }
 
         _saveLock = false;
@@ -139,6 +177,31 @@ class EditObjectController<T extends ViewableWithID> {
         );
       }
     }
+  }
+
+  Future<bool> _confirmMoveOutOfSight(BuildContext context) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('لن تتمكن من رؤية البيانات بعد الحفظ'),
+        content: const Text(
+          'بعد الحفظ ستصبح هذه البيانات خارج المناطق والخدمات '
+          'التي تتابعها، ولن تتمكن من رؤيتها أو تعديلها.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('إلغاء'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('حفظ'),
+          ),
+        ],
+      ),
+    );
+
+    return confirmed ?? false;
   }
 
   Future<void> _handlePhotoChange(
@@ -276,6 +339,8 @@ class EditObjectController<T extends ViewableWithID> {
       toJson: toJson ?? this.toJson,
       afterCreate: afterCreate ?? this.afterCreate,
       hasUnsavedInput: hasUnsavedInput,
+      outOfSightAfterSave: outOfSightAfterSave,
+      movedOutOfSightMessage: movedOutOfSightMessage,
     );
   }
 }
