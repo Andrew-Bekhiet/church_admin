@@ -1,50 +1,21 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types_dao.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../fakes/fake_feature_flags_repo.dart';
+import '../../../../../fakes/fake_person_types_dao.dart';
+import '../../../../../fakes/in_memory_families_dao.dart';
+import '../../../../../fakes/mock_auth_bloc.dart';
+import '../../../../../fakes/mock_database_service.dart';
+import '../../../../../fakes/mock_image_url_cache_service.dart';
+import '../../../../../fakes/mock_metadata_dao.dart';
+import '../../../../../fakes/mock_user_preferences_service.dart';
+import '../../../../../fakes/mock_viewable_object_service.dart';
 import '../../../../../utils.dart';
-
-class MockAuthBloc extends Mock implements AuthBloc {}
-
-class MockDatabaseService extends Mock implements DatabaseService {}
-
-class MockMetadataDAO extends Mock implements MetadataDAO {}
-
-class FakePersonTypesDAO extends Fake implements PersonTypesDAO {
-  @override
-  Future<List<PersonType>> fetchFamilyRoles() async => const [];
-}
-
-class MockImageUrlCacheService extends Mock implements ImageUrlCacheService {}
-
-class MockUserPreferencesService extends Mock
-    implements UserPreferencesService {}
-
-class MockViewableObjectService extends Mock implements ViewableObjectService {}
-
-class InMemoryFamiliesDAO extends Fake implements FamiliesDAO {
-  final savedFamilies = <Family>[];
-
-  @override
-  Future<Family?> getFamilyRelatedFamilies({required String familyId}) async =>
-      null;
-
-  @override
-  Future<Family?> updateFamily({
-    required Family newFamily,
-    required Family oldFamily,
-  }) async {
-    savedFamilies.add(newFamily);
-
-    return newFamily;
-  }
-}
 
 void main() {
   const deceasedSpouseNameField = ValueKey('deceasedSpouseName');
