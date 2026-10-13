@@ -103,7 +103,7 @@ void main() {
               );
 
               expect(
-                find.byKey(LoadingFloatingActionButtonKeys.button),
+                find.byKey(LoadingFloatingActionButton.button),
                 findsOneWidget,
               );
               expect(
