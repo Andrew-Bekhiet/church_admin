@@ -91,7 +91,7 @@ void main() {
           );
 
           testWidgets(
-            'hides the add button until the object has finished loading',
+            'shows a progress button instead of the add button until the object has finished loading',
             (tester) async {
               final streamController = StreamController<Area?>();
               addTearDown(streamController.close);
@@ -102,6 +102,10 @@ void main() {
                 streamController: streamController,
               );
 
+              expect(
+                find.byKey(LoadingFloatingActionButtonKeys.button),
+                findsOneWidget,
+              );
               expect(
                 find.byKey(const ValueKey('floatingActionButton')),
                 findsNothing,

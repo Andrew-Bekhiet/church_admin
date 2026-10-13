@@ -240,11 +240,13 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                   ? FloatingActionButtonLocation.endContained
                   : null,
               floatingActionButton:
-                  widget.floatingActionButtonBuilder != null &&
-                      canEditObject &&
-                      isObjectFullyLoaded
+                  widget.floatingActionButtonBuilder != null && canEditObject
                   ? Builder(
                       builder: (context) {
+                        if (!isObjectFullyLoaded) {
+                          return const LoadingFloatingActionButton();
+                        }
+
                         return widget.floatingActionButtonBuilder!(
                           context,
                           DefaultTabController.of(context),
