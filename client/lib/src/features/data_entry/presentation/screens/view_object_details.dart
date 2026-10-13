@@ -160,7 +160,7 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
             pinned: true,
             expandedHeight: appBarMaxHeight,
             actions: [
-              if (snapshot.connectionState != ConnectionState.active)
+              if (!isObjectFullyLoaded)
                 const Padding(
                   padding: EdgeInsets.all(8),
                   child: Center(child: CircularProgressIndicator()),
