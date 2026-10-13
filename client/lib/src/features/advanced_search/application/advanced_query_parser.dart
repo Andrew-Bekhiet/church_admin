@@ -9,7 +9,7 @@ class AdvancedQueryParser {
   ]) {
     final streamableDAO = query.queryableType.dao!;
 
-    return streamableDAO.streamingProxy.streamAll(
+    return streamableDAO.streamAllWithConfig(
       overrideTotalLimit: query.limit,
       streamAllConfig: streamableDAO.baseStreamAllConfig,
       streamCountConfig: streamableDAO.baseStreamCountConfig,

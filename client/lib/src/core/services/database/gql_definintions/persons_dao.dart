@@ -81,7 +81,7 @@ class PersonsDAO extends FullCRUDDAO<Person> {
     int? classesLimit = 6,
     int? groupsLimit = 6,
   }) {
-    return streamingProxy.streamSingleById(
+    return streamSingleByIdWithConfig(
       id: id,
       streamSingleByIdConfig: baseStreamSingleByIdConfig.copyWith(
         variables: _streamSingleByIdVarsConstructor(

@@ -4,36 +4,17 @@ import 'package:meta/meta.dart';
 
 mixin CreatableDAO<T extends ViewableWithID> on DAOBase<T> {
   @protected
-  late final CreatableDAOProxy<T> createObjectProxy = CreatableDAOProxy<T>(
-    db: db,
-    fromJson: fromJson,
-  );
-
-  @protected
   CreateObjectConfig<T> get baseCreateObjectConfig;
 
   Future<T> createObject({
     required T newObject,
   }) {
-    return createObjectProxy.createObject(
-      newObject: newObject,
-      createObjectConfig: baseCreateObjectConfig,
-    );
-  }
-}
+    final createObjectConfig = baseCreateObjectConfig;
 
-class CreatableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
-  CreatableDAOProxy({required super.db, required super.fromJson});
-
-  @protected
-  Future<T> createObject({
-    required T newObject,
-    required CreateObjectConfig<T> createObjectConfig,
-  }) {
     return graphQLClient.mutateAndReturnParsed(
       createObjectConfig.operationOptions ??
           MutationOptions(
-            document: createObjectConfig.document,
+            document: transformDocument(createObjectConfig.document),
             operationName: createObjectConfig.effectiveOperationName,
             variables:
                 createObjectConfig.variables ??

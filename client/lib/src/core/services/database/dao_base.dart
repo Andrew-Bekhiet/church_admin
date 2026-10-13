@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:gql/ast.dart';
 import 'package:meta/meta.dart';
 
 abstract class DAOBase<T extends ViewableWithID> {
@@ -12,4 +13,13 @@ abstract class DAOBase<T extends ViewableWithID> {
     required this.db,
     required this.fromJson,
   });
+
+  @protected
+  @mustCallSuper
+  DocumentNode transformDocument(
+    DocumentNode document, {
+    StreamableDAOParameters<T>? parameters,
+  }) => SortedListDocument(
+    document,
+  ).sortedBy(parameters?.orderBy ?? const []);
 }

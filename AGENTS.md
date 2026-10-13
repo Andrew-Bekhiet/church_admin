@@ -14,7 +14,7 @@ Conventions for anyone (human or agent) writing code here. Rules are stated as r
 
 Organise files by feature or domain, not by type. All backend access goes through the database service module (`client/lib/src/core/services/database/`) with `graphql_codegen`-generated operations — features never issue raw GraphQL themselves.
 
-To stream a whole collection rather than the default page size, raise the limit instead of draining pages: `dao.streamingProxy.streamAll(streamAllConfig: dao.baseStreamAllConfig, overrideTotalLimit: _pageSize, …)` with `static const int _pageSize` on the caller.
+To stream a whole collection rather than the default page size, raise the limit instead of draining pages: `dao.streamAllWithConfig(streamAllConfig: dao.baseStreamAllConfig, overrideTotalLimit: _pageSize, …)` with `static const int _pageSize` on the caller.
 
 ## Working agreements
 
