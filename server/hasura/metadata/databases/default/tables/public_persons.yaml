@@ -17,6 +17,15 @@ object_relationships:
   - name: college
     using:
       foreign_key_constraint_on: college_id
+  - name: dataCheck
+    using:
+      manual_configuration:
+        column_mapping:
+          family_id: family_id
+        insertion_order: null
+        remote_table:
+          name: data_checks
+          schema: public
   - name: family
     using:
       foreign_key_constraint_on: family_id
