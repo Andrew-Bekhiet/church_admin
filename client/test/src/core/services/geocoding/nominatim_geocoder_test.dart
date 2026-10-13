@@ -7,6 +7,13 @@ class MockDio extends Mock implements Dio {}
 
 void main() {
   const location = Point(30.0444, 31.2357);
+  const road = 'شارع الجمهورية';
+  const suburb = 'وسط البلد';
+  final reverseResponse = {
+    'lat': '${location.latitude}',
+    'lon': '${location.longitude}',
+    'address': {'road': road, 'suburb': suburb},
+  };
 
   late MockDio dio;
   late NominatimGeocoder geocoder;
@@ -33,29 +40,21 @@ void main() {
   test(
     'the road of the reverse geocoding response becomes the street name',
     () async {
-      answerWith({
-        'lat': '30.0444',
-        'lon': '31.2357',
-        'address': {'road': 'شارع الجمهورية', 'suburb': 'وسط البلد'},
-      });
+      answerWith(reverseResponse);
 
       final address = await geocoder.addressAt(location);
 
-      expect(address?.street?.name, 'شارع الجمهورية');
+      expect(address?.street?.name, road);
     },
   );
 
   test('the suburb of the reverse geocoding response becomes the district '
       'name', () async {
-    answerWith({
-      'lat': '30.0444',
-      'lon': '31.2357',
-      'address': {'road': 'شارع الجمهورية', 'suburb': 'وسط البلد'},
-    });
+    answerWith(reverseResponse);
 
     final address = await geocoder.addressAt(location);
 
-    expect(address?.district?.name, 'وسط البلد');
+    expect(address?.district?.name, suburb);
   });
 
   test('a failed request yields no address', () async {
