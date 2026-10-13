@@ -33,29 +33,23 @@ enum MultiSelectOperator<V extends Object> implements Operator<List<V>?> {
       return {'_not': field.queryToJson({})};
     }
 
+    final keyField = field.fieldQueryableType?.keyField;
     final value = switch (filterValue) {
       final List<ViewableEnumWithID> filterValue => {
         name: filterValue.map((e) => e.id).toList(),
       },
-      final List<ID> filterValue when filterValue.every((u) => u is User) => {
-        'uid': {
-          name: filterValue.cast<User>().map((e) => e.uid).toList(),
+      final List<String> filterValue => {
+        name: filterValue,
+      },
+      final List<Object> filterValue when keyField != null => {
+        keyField.name: {
+          name: filterValue.map(keyField.getValue).toList(),
         },
       },
-      final List<ID> filterValue
-          when filterValue.every((u) => u is StudyYear) =>
-        {
-          'order': {
-            name: filterValue.cast<StudyYear>().map((e) => e.order).toList(),
-          },
-        },
       final List<ID> filterValue => {
         'id': {
           name: filterValue.map((e) => e.id).toList(),
         },
-      },
-      final List<String> filterValue => {
-        name: filterValue,
       },
       _ => throw UnsupportedError(
         'MultiSelectOperator does not support $name: $filterValue',

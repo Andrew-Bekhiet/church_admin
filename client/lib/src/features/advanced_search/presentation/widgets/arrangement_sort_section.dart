@@ -54,7 +54,8 @@ class ArrangementSortSection extends StatelessWidget {
                       ...orderBy,
                       OrderBy(
                         field: queryableType.orderableFields.firstWhere(
-                          (f) => !f.name.endsWith('id'),
+                          (f) => f != queryableType.keyField,
+                          orElse: () => queryableType.orderableFields.first,
                         ),
                       ),
                     ]),
