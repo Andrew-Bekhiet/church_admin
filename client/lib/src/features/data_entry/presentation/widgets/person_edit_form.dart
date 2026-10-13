@@ -79,6 +79,7 @@ class _PersonEditFormState extends State<PersonEditForm> {
         const Divider(),
         PersonServicesAndGroupsField(
           person: person,
+          initialPerson: widget.controller.initialObject,
           classesAndGroupsLoaded: widget.classesAndGroupsLoaded,
           onTap: _selectServices,
           combineGroupsWithServices: _combineGroupsWithServices,

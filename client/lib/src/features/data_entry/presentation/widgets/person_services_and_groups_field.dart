@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class PersonServicesAndGroupsField extends StatelessWidget {
   final Person person;
+  final Person? initialPerson;
   final bool classesAndGroupsLoaded;
   final Future<void> Function(FormFieldState<(Set<Service>, Set<Group>)>) onTap;
   final List<Service> Function(Iterable<Service>, Iterable<Group>)
@@ -10,6 +11,7 @@ class PersonServicesAndGroupsField extends StatelessWidget {
 
   const PersonServicesAndGroupsField({
     required this.person,
+    required this.initialPerson,
     required this.classesAndGroupsLoaded,
     required this.onTap,
     required this.combineGroupsWithServices,
@@ -136,8 +138,14 @@ class PersonServicesAndGroupsField extends StatelessWidget {
       return 'يجب اختيار خدمة أو مجموعة';
     }
 
-    return servicesAndGroups.every(currentUserData.canEditObject)
+    final keptIds = servicesAndGroups.map((o) => o.id).toSet();
+    final removedServicesAndGroups = <ViewableWithID>[
+      ...?initialPerson?.services,
+      ...?initialPerson?.groups,
+    ].where((o) => !keptIds.contains(o.id));
+
+    return removedServicesAndGroups.every(currentUserData.canEditObject)
         ? null
-        : 'ليس لديك الصلاحية لتعديل بعض الخدمات او المجموعات';
+        : 'ليس لديك الصلاحية لإزالة بعض الخدمات او المجموعات';
   }
 }

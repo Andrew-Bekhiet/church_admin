@@ -79,6 +79,8 @@ class _EditPersonState extends State<EditPerson> {
       onDelete: (object) => DatabaseService.I.persons.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
       hasUnsavedInput: () => _phoneContacts.hasUnsavedInput,
+      outOfSightAfterSave: OutOfSightAfterSave(AuthBloc.I.currentUserData),
+      movedOutOfSightMessage: 'تم نقل المخدوم',
       newObject:
           oldPerson ??
           Person(

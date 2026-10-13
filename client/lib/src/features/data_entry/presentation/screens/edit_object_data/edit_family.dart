@@ -61,6 +61,8 @@ class _EditFamilyState extends State<EditFamily> {
           DatabaseService.I.families.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
       hasUnsavedInput: () => _phoneContacts.hasUnsavedInput,
+      outOfSightAfterSave: OutOfSightAfterSave(AuthBloc.I.currentUserData),
+      movedOutOfSightMessage: 'تم نقل العائلة',
       newObject:
           oldFamily ??
           Family(
