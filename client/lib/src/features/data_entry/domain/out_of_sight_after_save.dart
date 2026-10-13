@@ -25,6 +25,15 @@ class OutOfSightAfterSave {
     };
   }
 
+  bool isMovedOutOfSightIgnoringAddress(Person oldPerson, Person newPerson) {
+    final keepsFamily = oldPerson.family?.id == newPerson.family?.id;
+
+    return isMovedOutOfSight(
+      oldPerson,
+      keepsFamily ? newPerson.copyWith(address: oldPerson.address) : newPerson,
+    );
+  }
+
   bool _seesPerson(Person person) =>
       person.id == user?.person?.id ||
       person.uid == user?.uid ||

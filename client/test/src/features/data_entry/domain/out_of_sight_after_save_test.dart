@@ -291,4 +291,103 @@ void main() {
       );
     });
   });
+
+  group('person changes other than the address =>', () {
+    bool hidesIgnoringAddress(User user, Person before, Person after) =>
+        OutOfSightAfterSave(user).isMovedOutOfSightIgnoringAddress(
+          before,
+          after,
+        );
+
+    const shubraFamily = Family(
+      id: 'shubra-family',
+      name: 'عائلة شبرا',
+      address: Address(area: shubra),
+    );
+    const maadiFamily = Family(
+      id: 'maadi-family',
+      name: 'عائلة المعادي',
+      address: Address(area: maadi),
+    );
+    final child = Person(
+      id: 'child',
+      name: 'طفل',
+      services: const [primarySchool],
+      family: shubraFamily,
+      address: shubraFamily.address,
+    );
+
+    test(
+      'changing only the address of a person keeps it out of the verdict',
+      () {
+        final user = userWith(
+          adminOn: [const AdminOnData(permissionId: 'a', area: shubra)],
+        );
+
+        expect(
+          hidesIgnoringAddress(
+            user,
+            child,
+            child.copyWith(address: const Address(area: maadi)),
+          ),
+          isFalse,
+        );
+      },
+    );
+
+    test(
+      'moving a child to another service counts even while the address changes too',
+      () {
+        final user = userWith(adminOn: [serviceAdmin(primarySchool)]);
+
+        expect(
+          hidesIgnoringAddress(
+            user,
+            child,
+            child.copyWith(
+              services: const [kindergarten],
+              address: const Address(area: maadi),
+            ),
+          ),
+          isTrue,
+        );
+      },
+    );
+
+    test(
+      'a move that another grant of the servant covers does not count while the address changes',
+      () {
+        final user = userWith(
+          adminOn: [serviceAdmin(primarySchool), serviceAdmin(kindergarten)],
+        );
+
+        expect(
+          hidesIgnoringAddress(
+            user,
+            child,
+            child.copyWith(
+              services: const [kindergarten],
+              address: const Address(area: maadi),
+            ),
+          ),
+          isFalse,
+        );
+      },
+    );
+
+    test('choosing a family in another area counts as a move out of sight', () {
+      final user = userWith(
+        adminOn: [const AdminOnData(permissionId: 'a', area: shubra)],
+      );
+
+      expect(
+        hidesIgnoringAddress(
+          user,
+          child,
+          child.copyWith(family: maadiFamily, address: maadiFamily.address),
+        ),
+        isTrue,
+      );
+    });
+  });
 }

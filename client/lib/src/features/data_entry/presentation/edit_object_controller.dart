@@ -80,6 +80,7 @@ class EditObjectController<T extends ViewableWithID> {
       if (_saveLock) return;
 
       if (formKey.currentState!.validate()) {
+        _saveLock = true;
         formKey.currentState!.save();
 
         final movesOutOfSight =
@@ -93,10 +94,12 @@ class EditObjectController<T extends ViewableWithID> {
         if (movesOutOfSight) {
           final confirmed = await _confirmMoveOutOfSight(context);
 
-          if (!confirmed || !context.mounted) return;
-        }
+          if (!confirmed || !context.mounted) {
+            _saveLock = false;
 
-        _saveLock = true;
+            return;
+          }
+        }
 
         final themeData = Theme.of(context);
         final navigator = Navigator.of(context);
