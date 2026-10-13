@@ -58,8 +58,19 @@ void main() {
     expect(address?.district?.name, 'وسط البلد');
   });
 
-  test('a failed response yields no address', () async {
-    answerWith({'address': <String, Object?>{}}, statusCode: 500);
+  test('a failed request yields no address', () async {
+    when(
+      () => dio.getUri<dynamic>(any(), options: any(named: 'options')),
+    ).thenThrow(
+      DioException.badResponse(
+        statusCode: 503,
+        requestOptions: RequestOptions(),
+        response: Response<dynamic>(
+          statusCode: 503,
+          requestOptions: RequestOptions(),
+        ),
+      ),
+    );
 
     expect(await geocoder.addressAt(location), isNull);
   });

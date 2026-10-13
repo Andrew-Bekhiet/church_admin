@@ -167,9 +167,26 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     state.didChange(newLocation);
     _setAddress(newAddress);
 
-    final suggestedAddress = await _autofill.suggestFromLocation(newLocation);
+    final Address suggestedAddress;
+    try {
+      suggestedAddress = await _autofill.suggestFromLocation(newLocation);
+    } on Object catch (error, stackTrace) {
+      unawaited(
+        LoggingService.I.exception(
+          LogRecord(
+            moduleName: '$AddressWithLocationField',
+            eventName: 'suggestFromLocation',
+            error: error,
+            stackTrace: stackTrace,
+          ),
+        ),
+      );
 
-    if (!mounted) return;
+      return;
+    }
+
+    final locationWasReplacedMeanwhile = _address.geolocation != newLocation;
+    if (!mounted || locationWasReplacedMeanwhile) return;
 
     final hasAnythingToSuggest =
         suggestedAddress.area != null ||

@@ -41,7 +41,7 @@ class AddressAutofill {
     final area = await _firstAreaContaining(location);
     final street =
         await _firstStreetNear(location, area, reverseGeocoded?.street?.name) ??
-        await _firstStreetNamed(reverseGeocoded?.street?.name);
+        await _firstStreetNamed(reverseGeocoded?.street?.name, area);
     final district = await _firstDistrictNamed(reverseGeocoded?.district?.name);
 
     return (reverseGeocoded ?? const Address()).copyWith(
@@ -53,17 +53,16 @@ class AddressAutofill {
   }
 
   Future<Area?> _firstAreaContaining(Point location) async {
-    final matches = await _areas
-        .streamAll(
-          where: Stream.value([
-            Filter(
-              AreaFields().bounds,
-              PointSpatialOperator.intersects,
-              location,
-            ),
-          ]),
-        )
-        .first;
+    final matches = await _areas.query(
+      where: [
+        Filter(
+          AreaFields().bounds,
+          PointSpatialOperator.intersects,
+          location,
+        ),
+      ],
+      onlineFirst: true,
+    );
 
     return matches.firstOrNull;
   }
@@ -73,23 +72,17 @@ class AddressAutofill {
     Area? area,
     String? reportedRoadName,
   ) async {
-    final nearbyStreets = await _streets
-        .streamAll(
-          where: Stream.value([
-            Filter(
-              StreetFields().line,
-              const WithinDistanceOperator(nearbyStreetRadiusInMeters),
-              location,
-            ),
-            if (area != null)
-              Filter(
-                StreetFields().areasRel.redirectTo(AreasStreetsFields().areaId),
-                PrimitiveOperator.eq,
-                area.id,
-              ),
-          ]),
-        )
-        .first;
+    final nearbyStreets = await _streets.query(
+      where: [
+        Filter(
+          StreetFields().line,
+          const WithinDistanceOperator(nearbyStreetRadiusInMeters),
+          location,
+        ),
+        ?_inAreaFilter(area),
+      ],
+      onlineFirst: true,
+    );
 
     final roadName = _withoutStreetPrefix(reportedRoadName);
     final streetNamedLikeRoad = roadName == null || roadName.isEmpty
@@ -101,15 +94,26 @@ class AddressAutofill {
     return streetNamedLikeRoad ?? nearbyStreets.firstOrNull;
   }
 
-  Future<Street?> _firstStreetNamed(String? name) async {
-    if (name == null) return null;
+  Future<Street?> _firstStreetNamed(String? name, Area? area) async {
+    final nameWithoutPrefix = _withoutStreetPrefix(name);
+    if (nameWithoutPrefix == null || nameWithoutPrefix.isEmpty) return null;
 
-    final matches = await _streets
-        .streamAll(searchQuery: Stream.value(_withoutStreetPrefix(name)))
-        .first;
+    final matches = await _streets.query(
+      searchQuery: nameWithoutPrefix,
+      where: [?_inAreaFilter(area)],
+      onlineFirst: true,
+    );
 
     return matches.firstOrNull;
   }
+
+  Filter? _inAreaFilter(Area? area) => area == null
+      ? null
+      : Filter(
+          StreetFields().areasRel.redirectTo(AreasStreetsFields().areaId),
+          PrimitiveOperator.eq,
+          area.id,
+        );
 
   String? _withoutStreetPrefix(String? name) =>
       name?.replaceAll(RegExp('(شارع)|(الشارع)'), '').trim();
@@ -117,9 +121,10 @@ class AddressAutofill {
   Future<District?> _firstDistrictNamed(String? name) async {
     if (name == null) return null;
 
-    final matches = await _districts
-        .streamAll(searchQuery: Stream.value(name))
-        .first;
+    final matches = await _districts.query(
+      searchQuery: name,
+      onlineFirst: true,
+    );
 
     return matches.firstOrNull;
   }

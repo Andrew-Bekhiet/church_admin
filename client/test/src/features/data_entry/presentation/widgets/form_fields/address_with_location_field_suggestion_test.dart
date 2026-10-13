@@ -1,89 +1,22 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/data_entry/presentation/widgets/form_fields/address_location_tap_field.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../fakes/fake_areas_dao.dart';
 import '../../../../../fakes/fake_districts_dao.dart';
 import '../../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../../fakes/fake_geocoder.dart';
+import '../../../../../fakes/fake_logging_service.dart';
+import '../../../../../fakes/fake_streets_dao.dart';
 import '../../../../../fakes/mock_database_service.dart';
 import '../../../../../fakes/mock_image_url_cache_service.dart';
 import '../../../../../fakes/mock_metadata_dao.dart';
 import '../../../../../fakes/mock_viewable_object_service.dart';
 import '../../../../../utils.dart';
-
-class FakeAreasDAO extends Fake implements AreasDAO {
-  final areasByName = <String, Area>{};
-  final areasAtPoint = <Point, Area>{};
-
-  @override
-  PaginatableStreamBase<Area> streamAll({
-    Stream<String?>? searchQuery,
-    Stream<List<Filter>>? where,
-    Stream<List<OrderBy>>? orderBy,
-    Stream<FieldMetadata?>? secondLineField,
-  }) => PaginatableStream.simple(
-    factory: (_) => (where ?? Stream.value(const <Filter>[])).asyncMap((
-      filters,
-    ) async {
-      final boundsFilter = filters.firstWhereOrNull(
-        (filter) => filter.operator == PointSpatialOperator.intersects,
-      );
-      final name = await searchQuery?.first;
-
-      return PaginatableStreamResponse(
-        data: [
-          ?boundsFilter != null
-              ? areasAtPoint[boundsFilter.value]
-              : areasByName[name],
-        ],
-      );
-    }),
-  );
-}
-
-class FakeStreetsDAO extends Fake implements StreetsDAO {
-  final streetsByName = <String, Street>{};
-  final streetsNearPoint = <Point, List<Street>>{};
-  final streetIdsByAreaId = <String, Set<String>>{};
-
-  @override
-  PaginatableStreamBase<Street> streamAll({
-    Stream<String?>? searchQuery,
-    Stream<List<Filter>>? where,
-    Stream<List<OrderBy>>? orderBy,
-    Stream<FieldMetadata?>? secondLineField,
-  }) => PaginatableStream.simple(
-    factory: (_) => (where ?? Stream.value(const <Filter>[])).asyncMap((
-      filters,
-    ) async {
-      final nearFilter = filters.firstWhereOrNull(
-        (filter) => filter.operator is WithinDistanceOperator,
-      );
-      final areaFilter = filters.firstWhereOrNull(
-        (filter) => filter.operator == PrimitiveOperator.eq,
-      );
-      final name = await searchQuery?.first;
-
-      final candidates = nearFilter != null
-          ? streetsNearPoint[nearFilter.value] ?? const <Street>[]
-          : [?streetsByName[name]];
-
-      return PaginatableStreamResponse(
-        data: candidates
-            .where(
-              (street) =>
-                  areaFilter == null ||
-                  (streetIdsByAreaId[areaFilter.value]?.contains(street.id) ??
-                      false),
-            )
-            .toList(),
-      );
-    }),
-  );
-}
 
 void main() {
   const pickedLocation = Point(30.0444, 31.2357);
@@ -97,6 +30,12 @@ void main() {
   late FakeStreetsDAO streets;
   late FakeDistrictsDAO districts;
   late List<Address> reportedAddresses;
+  late List<Point> locationsToPick;
+
+  Future<void> tapLocationField(WidgetTester tester) async {
+    await tester.tap(find.byType(AddressLocationTapField));
+    await tester.pumpAndSettle();
+  }
 
   Future<void> pickLocation(WidgetTester tester) async {
     await tester.pumpWidget(
@@ -106,15 +45,14 @@ void main() {
             child: AddressWithLocationField(
               initialAddress: null,
               onAddressChanged: reportedAddresses.add,
-              onEditLocation: (_) async => pickedLocation,
+              onEditLocation: (_) async => locationsToPick.removeAt(0),
             ),
           ),
         ),
       ),
     );
 
-    await tester.tap(find.byType(AddressLocationTapField));
-    await tester.pumpAndSettle();
+    await tapLocationField(tester);
   }
 
   Future<void> acceptSuggestion(WidgetTester tester) async {
@@ -128,6 +66,7 @@ void main() {
     streets = FakeStreetsDAO();
     districts = FakeDistrictsDAO();
     reportedAddresses = [];
+    locationsToPick = [pickedLocation];
 
     final metadata = MockMetadataDAO();
     when(() => metadata.districts).thenReturn(districts);
@@ -139,6 +78,7 @@ void main() {
     initGlobalProviderContainer([
       featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
       databaseServiceProvider.overrideWithValue(databaseService),
+      loggingServiceProvider.overrideWithValue(FakeLoggingService()),
       geocoderProvider.overrideWithValue(geocoder),
       imageUrlCacheServiceProvider.overrideWithValue(
         MockImageUrlCacheService(),
@@ -249,5 +189,66 @@ void main() {
     await acceptSuggestion(tester);
 
     expect(reportedAddresses.last.geolocation, pickedLocation);
+  });
+
+  testWidgets('the street found by the reported road name must belong to the '
+      'matched area', (tester) async {
+    areas.areasAtPoint[pickedLocation] = stMarkArea;
+    streets.streetsByName['النصر'] = sideStreet;
+    streets.streetIdsByAreaId[stMarkArea.id] = {mainStreet.id};
+    geocoder.addressUnderEveryLocation = Address(
+      street: Street(id: '', name: sideStreet.name),
+    );
+    await pickLocation(tester);
+
+    await acceptSuggestion(tester);
+
+    expect(reportedAddresses.last.street, isNull);
+  });
+
+  testWidgets('a reported road named only by its prefix suggests no street', (
+    tester,
+  ) async {
+    streets.streetsByName[''] = mainStreet;
+    streets.streetsByName['شارع'] = mainStreet;
+    districts.districtsByName[downtown.name] = downtown;
+    geocoder.addressUnderEveryLocation = const Address(
+      street: Street(id: '', name: 'شارع'),
+      district: District(id: '', name: 'وسط البلد'),
+    );
+    await pickLocation(tester);
+
+    await acceptSuggestion(tester);
+
+    expect(reportedAddresses.last.street, isNull);
+  });
+
+  testWidgets('a suggestion computed for a location the user has since '
+      'replaced is dropped', (tester) async {
+    const laterLocation = Point(30.0500, 31.2400);
+    const stMinaArea = Area(id: 'st-mina-id', name: 'منطقة مارمينا');
+    areas.areasAtPoint[pickedLocation] = stMarkArea;
+    areas.areasAtPoint[laterLocation] = stMinaArea;
+    final earlierLookup = geocoder.gatesByLocation[pickedLocation] =
+        Completer<void>();
+    locationsToPick = [pickedLocation, laterLocation];
+    await pickLocation(tester);
+    await tapLocationField(tester);
+
+    earlierLookup.complete();
+    await tester.pumpAndSettle();
+    await acceptSuggestion(tester);
+
+    expect(reportedAddresses.last.area, stMinaArea);
+  });
+
+  testWidgets('a failed lookup for a picked location shows no suggestion', (
+    tester,
+  ) async {
+    areas.lookupFailure = StateError('offline');
+
+    await pickLocation(tester);
+
+    expect(find.text('استخدام العنوان المقترح'), findsNothing);
   });
 }

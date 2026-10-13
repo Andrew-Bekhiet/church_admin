@@ -6,18 +6,11 @@ class FakeDistrictsDAO extends Fake implements DistrictsDAO {
   final districtsByName = <String, District>{};
 
   @override
-  PaginatableStreamBase<District> streamAll({
-    Stream<String?>? searchQuery,
-    Stream<List<Filter>>? where,
-    Stream<List<OrderBy>>? orderBy,
-    Stream<FieldMetadata?>? secondLineField,
-  }) => PaginatableStream.simple(
-    factory: (_) async* {
-      final name = await searchQuery?.first;
-
-      yield PaginatableStreamResponse(
-        data: [?districtsByName[name]],
-      );
-    },
-  );
+  Future<List<District>> query({
+    bool onlineFirst = false,
+    String? searchQuery,
+    List<Filter>? where,
+    List<OrderBy>? orderBy,
+    int? limit,
+  }) async => [?districtsByName[searchQuery]];
 }
