@@ -1,3 +1,6 @@
+export 'form_fields/advanced_date_field.dart';
+export 'form_fields/advanced_single_object_selection_field.dart';
+export 'form_fields/advanced_text_input.dart';
 export 'form_fields/color_field.dart';
 export 'form_fields/date_time_field.dart';
 export 'form_fields/date_time_range_field.dart';
@@ -6,8 +9,10 @@ export 'form_fields/gender_field.dart';
 export 'form_fields/multi_object_selection_field.dart';
 export 'form_fields/name_field.dart';
 export 'form_fields/new_password_field.dart';
+export 'form_fields/object_selection_dialog.dart';
 export 'form_fields/object_selection_field.dart';
 export 'form_fields/password_form_field.dart';
 export 'form_fields/photo_field.dart';
 export 'form_fields/study_year_range_field.dart';
 export 'form_fields/tappable_form_field.dart';
+export 'form_fields/tappable_input_field.dart';
