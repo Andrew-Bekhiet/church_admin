@@ -1,5 +1,5 @@
-export 'application/address_autofill.dart';
-export 'application/area_of_geocoded_house.dart';
+export 'application/address/address_autofill.dart';
+export 'application/address/area_of_geocoded_house.dart';
 export 'application/contacts_service.dart';
 export 'application/image_picker_service.dart';
 export 'application/image_url_cache_migration.dart';
