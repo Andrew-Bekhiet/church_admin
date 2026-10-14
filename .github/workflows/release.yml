@@ -123,15 +123,16 @@ jobs:
           APP_STORE_APPLE_ID: ${{ secrets.APP_STORE_APPLE_ID }}
         run: |
           cd client/ios
-          app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) \
-          --type IOS_APP_STORE \
-          --create
+          bundle_id=$(xcode-project detect-bundle-id 2>/dev/null)
+          app-store-connect fetch-signing-files "$bundle_id" --type IOS_APP_STORE --create >"$RUNNER_TEMP/fetch-signing-files.log" 2>&1 || { echo "::error::fetch-signing-files failed; output hidden to keep Apple identifiers out of public logs"; exit 1; }
       - name: Set up signing certificate
         if: ${{ matrix.os == 'macos-latest' }}
-        run: keychain add-certificates
+        run: |
+          keychain add-certificates >"$RUNNER_TEMP/add-certificates.log" 2>&1 || { echo "::error::add-certificates failed; output hidden to keep Apple identifiers out of public logs"; exit 1; }
       - name: Set up code signing settings on Xcode project
         if: ${{ matrix.os == 'macos-latest' }}
-        run: xcode-project use-profiles --export-options-plist=${{ runner.temp }}/export_options.plist
+        run: |
+          xcode-project use-profiles --export-options-plist=${{ runner.temp }}/export_options.plist >"$RUNNER_TEMP/use-profiles.log" 2>&1 || { echo "::error::use-profiles failed; output hidden to keep Apple identifiers out of public logs"; exit 1; }
 
       - name: 🐦 Setup Shorebird
         uses: shorebirdtech/setup-shorebird@1866dd9f55da8f25608b70bdde6e095c06f1dc01 # main
@@ -239,7 +240,7 @@ jobs:
           APP_STORE_APPLE_ID: ${{ secrets.APP_STORE_APPLE_ID }}
         run: |
           cd client
-          app-store-connect publish --path "$(find $(pwd) -name "*.ipa")"
+          app-store-connect publish --path "$(find $(pwd) -name "*.ipa")" >"$RUNNER_TEMP/publish.log" 2>&1 || { echo "::error::publish failed; output hidden to keep Apple identifiers out of public logs"; exit 1; }
 
       - name: Add version to APK filename
         if: ${{ matrix.os == 'ubuntu-latest' }}
