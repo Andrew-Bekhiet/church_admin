@@ -7,6 +7,7 @@ class FakeGeocoder implements Geocoder {
   final gatesByLocation = <Point, Completer<void>>{};
   Point? locationOfEveryAddress;
   Object? locationFailure;
+  Completer<void>? locationGate;
   int locationRequestCount = 0;
 
   @override
@@ -23,6 +24,7 @@ class FakeGeocoder implements Geocoder {
     required String countryIsoCode,
   }) async {
     locationRequestCount++;
+    await locationGate?.future;
     if (locationFailure case final failure?) throw failure;
 
     return locationOfEveryAddress;
