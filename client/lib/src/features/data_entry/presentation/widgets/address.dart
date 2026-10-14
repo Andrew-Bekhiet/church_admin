@@ -1,6 +1,9 @@
 export 'address/address_apartment_details_row.dart';
 export 'address/address_change_blocked_field.dart';
 export 'address/address_district_street_area_fields.dart';
+export 'address/address_form_place_fields.dart';
+export 'address/address_form_section.dart';
+export 'address/address_form_unit_fields.dart';
 export 'address/address_house_number_row.dart';
 export 'address/address_location_tap_field.dart';
 export 'address/address_preview.dart';
