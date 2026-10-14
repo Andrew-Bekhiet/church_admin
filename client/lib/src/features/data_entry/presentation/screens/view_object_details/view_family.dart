@@ -232,7 +232,7 @@ class _ViewFamilyState extends State<ViewFamily> {
               if (newIndex == 0) {
                 unawaited(
                   EditPersonRoute(
-                    $extra: EditPersonExtra(family: family),
+                    $extra: CreatePersonInFamily(family: family),
                   ).push(context),
                 );
               } else if (newIndex == 1) {

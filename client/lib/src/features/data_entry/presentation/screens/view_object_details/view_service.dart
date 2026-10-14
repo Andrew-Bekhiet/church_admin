@@ -269,7 +269,7 @@ class _ViewServiceState extends State<ViewService> {
               } else if (newIndex == 2) {
                 unawaited(
                   EditPersonRoute(
-                    $extra: EditPersonExtra(service: service),
+                    $extra: CreatePersonInService(service: service),
                   ).push(context),
                 );
               }

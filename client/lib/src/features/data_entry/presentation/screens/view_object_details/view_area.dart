@@ -269,7 +269,7 @@ class _ViewAreaState extends State<ViewArea> {
               } else if (newIndex == 2) {
                 unawaited(
                   EditPersonRoute(
-                    $extra: EditPersonExtra(area: area),
+                    $extra: CreatePersonInArea(area: area),
                   ).push(context),
                 );
               } else if (newIndex == 3) {

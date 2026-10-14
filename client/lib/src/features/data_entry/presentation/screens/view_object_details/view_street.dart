@@ -244,7 +244,7 @@ class _ViewStreetState extends State<ViewStreet> {
               } else if (newIndex == 1) {
                 unawaited(
                   EditPersonRoute(
-                    $extra: EditPersonExtra(street: street),
+                    $extra: CreatePersonOnStreet(street: street),
                   ).push(context),
                 );
               } else if (newIndex == 2) {

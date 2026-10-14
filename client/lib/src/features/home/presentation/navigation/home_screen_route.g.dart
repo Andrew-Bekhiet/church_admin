@@ -210,7 +210,7 @@ mixin $ViewPersonRoute on GoRouteData {
 
 mixin $EditPersonRoute on GoRouteData {
   static EditPersonRoute _fromState(GoRouterState state) =>
-      EditPersonRoute($extra: state.extra as EditPersonExtra?);
+      EditPersonRoute($extra: state.extra as PersonEditIntent?);
 
   EditPersonRoute get _self => this as EditPersonRoute;
 

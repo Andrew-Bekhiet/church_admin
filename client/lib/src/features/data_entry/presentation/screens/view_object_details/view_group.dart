@@ -169,10 +169,7 @@ class _ViewGroupState extends State<ViewGroup> {
       floatingActionButtonBuilder: (context, tabController, group) =>
           FloatingActionButton(
             onPressed: () => EditPersonRoute(
-              $extra: EditPersonExtra(
-                service: group.service?.copyWith(groups: [group]),
-                group: group,
-              ),
+              $extra: CreatePersonInGroup(group: group),
             ).push(context),
             child: const Icon(Symbols.person_add),
           ),

@@ -120,11 +120,7 @@ class _ViewClassState extends State<ViewClass> {
       floatingActionButtonBuilder: (context, tabController, class$) =>
           FloatingActionButton(
             onPressed: () => EditPersonRoute(
-              $extra: EditPersonExtra(
-                service: class$.service,
-                studyYear: class$.studyYear,
-                gender: class$.serviceGender,
-              ),
+              $extra: CreatePersonInClass(class$: class$),
             ).push(context),
             child: const Icon(Symbols.person_add),
           ),
