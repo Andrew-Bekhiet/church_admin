@@ -31,7 +31,6 @@ class AddressFormUnitFields extends StatelessWidget {
             ),
           ),
           Expanded(
-            key: AddressFormUnitFieldsKeys.apartmentNumber,
             flex: 3,
             child: AdvancedTextInput<AddressFieldError>(
               field: form.apartmentNumber,
@@ -57,10 +56,4 @@ class AddressFormUnitFields extends StatelessWidget {
       ),
     );
   }
-}
-
-abstract final class AddressFormUnitFieldsKeys {
-  static const Key apartmentNumber = ValueKey(
-    'Address Form Apartment Number Key',
-  );
 }

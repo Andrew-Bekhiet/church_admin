@@ -28,7 +28,6 @@ class PersonEditMembershipsSection extends StatelessWidget {
                   final services = state.value.servicesWithTheirSelectedGroups;
 
                   return TappableInputField<PersonMemberships>(
-                    key: PersonEditMembershipsSectionKeys.field,
                     value: state.value,
                     isEmpty: false,
                     focusNode: form.memberships.focusNode,
@@ -111,8 +110,4 @@ class PersonEditMembershipsSection extends StatelessWidget {
 
     if (result != null && !form.isDisposed) form.selectServices(result);
   }
-}
-
-abstract final class PersonEditMembershipsSectionKeys {
-  static const Key field = ValueKey('Person Edit Memberships Field Key');
 }

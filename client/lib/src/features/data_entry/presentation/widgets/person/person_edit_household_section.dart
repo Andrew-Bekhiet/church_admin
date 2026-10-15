@@ -40,7 +40,6 @@ class PersonEditHouseholdSection extends StatelessWidget {
           },
         ),
         AdvancedSingleObjectSelectionField<Family, PersonEditError>(
-          key: PersonEditHouseholdSectionKeys.family,
           field: form.family,
           label: 'العائلة',
           translateError: PersonEditError.messageOf,
@@ -52,8 +51,4 @@ class PersonEditHouseholdSection extends StatelessWidget {
       ],
     );
   }
-}
-
-abstract final class PersonEditHouseholdSectionKeys {
-  static const Key family = ValueKey('Person Edit Household Family Key');
 }
