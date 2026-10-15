@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class DeleteConfirmationDialog extends StatelessWidget {
@@ -7,18 +8,11 @@ class DeleteConfirmationDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('هل تريد حذف $objectName؟'),
-      actions: [
-        FilledButton(
-          onPressed: () => Navigator.of(context).pop(false),
-          child: const Text('لا'),
-        ),
-        FilledButton(
-          onPressed: () => Navigator.of(context).pop(true),
-          child: const Text('نعم'),
-        ),
-      ],
+    return ConfirmationDialog(
+      title: 'هل تريد حذف $objectName؟',
+      explanation: 'لا يمكن التراجع عن الحذف.',
+      confirmLabel: 'حذف',
+      isDestructive: true,
     );
   }
 }

@@ -34,7 +34,7 @@ void main() {
   testWidgets('choosing to stay keeps the screen and the edit', (tester) async {
     await renameAndPressBack(tester);
 
-    await tester.tap(find.text('البقاء'));
+    await tester.tap(find.text('متابعة التعديل'));
     await tester.pumpAndSettle();
 
     expect(find.widgetWithText(TextField, 'مينا جرجس'), findsOneWidget);

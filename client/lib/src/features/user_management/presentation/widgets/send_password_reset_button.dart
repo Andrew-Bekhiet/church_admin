@@ -63,21 +63,11 @@ class SendPasswordResetButton extends StatelessWidget {
 
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('إرسال رابط إعادة تعيين كلمة المرور؟'),
-        content: Text(
-          'سيتم إرسال رابط إعادة تعيين كلمة المرور إلى $isolatedEmail',
-        ),
-        actions: [
-          OutlinedButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('إلغاء'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('إرسال'),
-          ),
-        ],
+      builder: (context) => ConfirmationDialog(
+        title: 'إرسال رابط إعادة تعيين كلمة المرور؟',
+        explanation:
+            'سيتم إرسال رابط إعادة تعيين كلمة المرور إلى $isolatedEmail',
+        confirmLabel: 'إرسال',
       ),
     );
 

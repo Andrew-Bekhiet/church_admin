@@ -164,10 +164,10 @@ void main() {
               await tester.pumpAndSettle();
 
               expect(find.byType(AlertDialog), findsOneWidget);
-              expect(find.text('البقاء'), findsOneWidget);
+              expect(find.text('متابعة التعديل'), findsOneWidget);
               expect(find.text('تجاهل'), findsOneWidget);
 
-              await tester.tap(find.text('البقاء'));
+              await tester.tap(find.text('متابعة التعديل'));
               await tester.pumpAndSettle();
 
               expect(find.byType(AlertDialog), findsNothing);
@@ -248,10 +248,10 @@ void main() {
 
               expect(find.byType(AlertDialog), findsOneWidget);
               expect(find.text('هل تريد حذف name؟'), findsOneWidget);
-              expect(find.text('لا'), findsOneWidget);
-              expect(find.text('نعم'), findsOneWidget);
+              expect(find.text('إلغاء'), findsOneWidget);
+              expect(find.text('حذف'), findsOneWidget);
 
-              await tester.tap(find.text('لا'));
+              await tester.tap(find.text('إلغاء'));
               await tester.pumpAndSettle();
 
               expect(find.byType(AlertDialog), findsNothing);
@@ -261,7 +261,7 @@ void main() {
 
               await tester.pumpAndSettle();
 
-              await tester.tap(find.text('نعم'));
+              await tester.tap(find.text('حذف'));
               await tester.pumpAndSettle();
 
               expect(find.byType(AlertDialog), findsNothing);

@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class DiscardChangesDialog extends StatelessWidget {
@@ -5,18 +6,12 @@ class DiscardChangesDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('هل تريد تجاهل التغييرات؟'),
-      actions: [
-        FilledButton(
-          onPressed: () => Navigator.of(context).pop(false),
-          child: const Text('البقاء'),
-        ),
-        FilledButton(
-          onPressed: () => Navigator.of(context).pop(true),
-          child: const Text('تجاهل'),
-        ),
-      ],
+    return const ConfirmationDialog(
+      title: 'هل تريد تجاهل التغييرات؟',
+      explanation: 'التغييرات التي لم يتم حفظها سيتم فقدانها.',
+      confirmLabel: 'تجاهل',
+      cancelLabel: 'متابعة التعديل',
+      isDestructive: true,
     );
   }
 }

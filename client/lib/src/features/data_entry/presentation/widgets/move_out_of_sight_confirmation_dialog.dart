@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class MoveOutOfSightConfirmationDialog extends StatelessWidget {
@@ -5,22 +6,12 @@ class MoveOutOfSightConfirmationDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('لن تتمكن من رؤية البيانات بعد الحفظ'),
-      content: const Text(
-        'بعد الحفظ ستصبح هذه البيانات خارج المناطق والخدمات '
-        'التي تتابعها، ولن تتمكن من رؤيتها أو تعديلها.',
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(false),
-          child: const Text('إلغاء'),
-        ),
-        FilledButton(
-          onPressed: () => Navigator.of(context).pop(true),
-          child: const Text('حفظ'),
-        ),
-      ],
+    return const ConfirmationDialog(
+      title: 'لن تتمكن من رؤية البيانات بعد الحفظ',
+      explanation:
+          'بعد الحفظ ستصبح هذه البيانات خارج المناطق والخدمات '
+          'التي تتابعها، ولن تتمكن من رؤيتها أو تعديلها.',
+      confirmLabel: 'حفظ',
     );
   }
 }

@@ -28,7 +28,7 @@ void main() {
 
     await tester.tap(find.byTooltip('حذف'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('نعم'));
+    await tester.tap(find.text('حذف'));
     await tester.pumpAndSettle();
 
     expect(harness.persons.deletedPersonIds, [person.id]);
@@ -47,7 +47,7 @@ void main() {
     );
     await tester.tap(find.byTooltip('حذف'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('نعم'));
+    await tester.tap(find.text('حذف'));
     await tester.pumpAndSettle();
     await harness.pressBack(tester);
 
@@ -65,7 +65,7 @@ void main() {
 
     await tester.tap(find.byTooltip('حذف'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('نعم'));
+    await tester.tap(find.text('حذف'));
     await tester.pumpAndSettle();
 
     expect(find.byType(CAErrorDialog), findsOneWidget);
@@ -77,7 +77,7 @@ void main() {
 
     await tester.tap(find.byTooltip('حذف'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('لا'));
+    await tester.tap(find.text('إلغاء'));
     await tester.pumpAndSettle();
 
     expect(harness.persons.deletedPersonIds, isEmpty);

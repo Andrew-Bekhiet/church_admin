@@ -102,18 +102,10 @@ class PersonContactSection extends StatelessWidget {
 
     final recordLastCall = await showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('هل تريد تسجيل تاريخ هذه المكالمة؟'),
-        actions: [
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('نعم'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('لا'),
-          ),
-        ],
+      builder: (context) => const ConfirmationDialog(
+        title: 'هل تريد تسجيل تاريخ هذه المكالمة؟',
+        confirmLabel: 'تسجيل',
+        cancelLabel: 'تخطي',
       ),
     );
 
