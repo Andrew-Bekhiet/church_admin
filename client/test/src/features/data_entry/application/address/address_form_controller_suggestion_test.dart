@@ -293,4 +293,11 @@ void main() {
 
     await expectLater(pick, completes);
   });
+
+  test('using a location on a disposed controller throws nothing', () async {
+    final controller = fixture.controllerFor();
+    controller.dispose();
+
+    await expectLater(controller.useLocation(pickedLocation), completes);
+  });
 }
