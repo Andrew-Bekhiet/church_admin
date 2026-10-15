@@ -20,7 +20,7 @@ class EditPersonSaveButton extends StatelessWidget {
         key: EditPersonSaveButtonKeys.saveButton,
         label: const Text('حفظ'),
         icon: switch (progress) {
-          NotSaving() => const Icon(Icons.save),
+          NotSaving() || AwaitingMoveConfirmation() => const Icon(Icons.save),
           SavingPerson() || UploadingPhoto() => SizedBox.square(
             dimension: 18,
             child: CircularProgressIndicator(
@@ -31,7 +31,9 @@ class EditPersonSaveButton extends StatelessWidget {
         },
         onPressed: switch (progress) {
           NotSaving() => onPressed,
-          SavingPerson() || UploadingPhoto() => null,
+          AwaitingMoveConfirmation() ||
+          SavingPerson() ||
+          UploadingPhoto() => null,
         },
       ),
     );

@@ -47,12 +47,12 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
         logging: LoggingService.I,
       ),
     );
-    final initialPerson = _form.initialPerson;
+    final savedPerson = _form.savedPerson;
     _phoneContacts = PhoneContactsEditorCubit(
-      own: initialPerson?.contacts ?? const [],
-      family: initialPerson?.visibleFamilyContacts ?? const [],
+      own: savedPerson?.contacts ?? const [],
+      family: savedPerson?.visibleFamilyContacts ?? const [],
       hasFamily: _form.household.canHaveFamilyNumbers,
-      fetchFamilyRoles: switch (initialPerson?.personType) {
+      fetchFamilyRoles: switch (savedPerson?.personType) {
         PersonType(isFamilyAdmin: true) => () async => const [],
         _ => null,
       },
@@ -144,7 +144,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
 
   void _showSaveProgressWhileSaving() {
     switch (_form.saveProgress.value) {
-      case NotSaving():
+      case NotSaving() || AwaitingMoveConfirmation():
         _progressSnackBar?.close();
         _progressSnackBar = null;
 
@@ -211,7 +211,12 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
           context: context,
           builder: (context) => const MoveOutOfSightConfirmationDialog(),
         );
-        if (confirmed ?? false) await _save(confirmedMove: true);
+        if (!mounted) return;
+        if (confirmed ?? false) {
+          await _save(confirmedMove: true);
+        } else {
+          _form.declineMove();
+        }
 
       case PersonSaved(:final person, :final movedOutOfSight):
         _leaveAfterSave(
@@ -253,7 +258,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
             stackTrace: stackTrace,
             data: {
               'objectType': 'Person',
-              'initialObject': _form.initialPerson?.toJson(),
+              'initialObject': _form.savedPerson?.toJson(),
               'newObject': attemptedPerson.toJson(),
             },
           ),
@@ -322,12 +327,30 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => DeleteConfirmationDialog(
-        objectName: _form.initialPerson?.name ?? '',
+        objectName: _form.savedPerson?.name ?? '',
       ),
     );
     if (confirmed != true) return;
 
-    await _form.deletePerson();
+    try {
+      await _form.deletePerson();
+    } on Exception catch (error, stackTrace) {
+      if (!mounted) return;
+
+      await LoggingService.I.showErrorDialogAndReport(
+        context,
+        LogRecord(
+          error: error,
+          stackTrace: stackTrace,
+          data: {
+            'objectType': 'Person',
+            'initialObject': _form.savedPerson?.toJson(),
+          },
+        ),
+      );
+
+      return;
+    }
 
     messenger.showSnackBar(
       SnackBar(

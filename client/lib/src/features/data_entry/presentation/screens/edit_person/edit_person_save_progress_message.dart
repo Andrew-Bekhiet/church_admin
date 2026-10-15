@@ -16,13 +16,17 @@ class EditPersonSaveProgressMessage extends StatelessWidget {
           Expanded(
             child: Text(switch (progress) {
               UploadingPhoto() => 'جار رفع الصورة ...',
-              NotSaving() || SavingPerson() => 'جار الحفظ ...',
+              NotSaving() ||
+              AwaitingMoveConfirmation() ||
+              SavingPerson() => 'جار الحفظ ...',
             }),
           ),
           CircularProgressIndicator(
             value: switch (progress) {
               UploadingPhoto(:final progress) => progress,
-              NotSaving() || SavingPerson() => null,
+              NotSaving() ||
+              AwaitingMoveConfirmation() ||
+              SavingPerson() => null,
             },
           ),
         ],

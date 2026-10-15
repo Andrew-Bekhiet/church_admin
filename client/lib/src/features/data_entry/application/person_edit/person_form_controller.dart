@@ -52,7 +52,7 @@ class PersonFormController extends AdvancedFormController {
 
   bool get wasModified => value.wasModified;
 
-  Person? get initialPerson => isCreate ? null : memberships.loadedPerson;
+  Person? get savedPerson => isCreate ? null : memberships.loadedPerson;
 
   Set<PersonRuleViolation> get ruleViolations => {
     if (_nothingPlacesThePerson) const NothingPlacesThePerson(),
@@ -68,16 +68,15 @@ class PersonFormController extends AdvancedFormController {
       memberships.memberships.fieldValue.servicesAndGroups.isEmpty;
 
   bool get _addressChangeIsBlockedByMove {
-    final initial = initialPerson;
-    if (initial == null) return false;
+    final saved = savedPerson;
+    if (saved == null) return false;
 
-    final edited = toPerson();
     final addressWasChangedInPlace =
-        edited.family?.id == initial.family?.id &&
-        edited.address != initial.address;
+        household.family.fieldValue?.id == saved.family?.id &&
+        household.editedAddress != saved.address;
 
     return addressWasChangedInPlace &&
-        _outOfSight.isMovedOutOfSightIgnoringAddress(initial, edited);
+        _outOfSight.isMovedOutOfSightIgnoringAddress(saved, toPerson());
   }
 
   bool get _servicesAreOutsideStudyYear => switch (work.studyYear.fieldValue) {
@@ -146,11 +145,7 @@ class PersonFormController extends AdvancedFormController {
     addRelation(
       maritalStatusAndType.gender,
       (isMale) => isMale,
-      (isMale) {
-        if (isMale) return;
-
-        churchAndSpiritual.isShammas.prefill(false);
-      },
+      _clearShammasWhenFemale,
     );
     onValuesChanged.addListener(_showRuleViolationsIfAlreadyShown);
     memberships.loadState.addListener(_showRuleViolationsIfAlreadyShown);
@@ -165,6 +160,10 @@ class PersonFormController extends AdvancedFormController {
     _ownContacts = own;
     _familyContacts = family;
   }
+
+  Person get personForPhotoPreview => identity.editedVersionOf(
+    hobbiesTagsAndNotes.editedVersionOf(_startingPerson),
+  );
 
   Person toPerson() =>
       <PersonFormSection>[
@@ -196,19 +195,28 @@ class PersonFormController extends AdvancedFormController {
   }
 
   Future<PersonSaveOutcome> submit({bool confirmedMove = false}) async {
-    if (_saveProgress.value is! NotSaving) return const SaveAlreadyInProgress();
+    final canStart = switch (_saveProgress.value) {
+      NotSaving() => true,
+      AwaitingMoveConfirmation() => confirmedMove,
+      SavingPerson() || UploadingPhoto() => false,
+    };
+    if (!canStart) return const SaveAlreadyInProgress();
 
     _saveProgress.value = const SavingPerson();
+    var stayAwaitingMoveConfirmation = false;
     try {
       final isValid = await validate();
       if (isDisposed) return const SaveAbandonedBecauseFormWasDisposed();
       if (!isValid) return const InvalidPerson();
 
       final person = toPerson();
-      final initial = initialPerson;
+      final initial = savedPerson;
       final movesOutOfSight =
           initial != null && _outOfSight.isMovedOutOfSight(initial, person);
       if (movesOutOfSight && !confirmedMove) {
+        stayAwaitingMoveConfirmation = true;
+        _saveProgress.value = const AwaitingMoveConfirmation();
+
         return const NeedsMoveConfirmation();
       }
 
@@ -228,7 +236,15 @@ class PersonFormController extends AdvancedFormController {
         attemptedPerson: toPerson(),
       );
     } finally {
-      if (!isDisposed) _saveProgress.value = const NotSaving();
+      if (!isDisposed && !stayAwaitingMoveConfirmation) {
+        _saveProgress.value = const NotSaving();
+      }
+    }
+  }
+
+  void declineMove() {
+    if (_saveProgress.value is AwaitingMoveConfirmation) {
+      _saveProgress.value = const NotSaving();
     }
   }
 
@@ -280,6 +296,12 @@ class PersonFormController extends AdvancedFormController {
     if (isDisposed) return const SaveAbandonedBecauseFormWasDisposed();
 
     return PersonSaved(person: saved, movedOutOfSight: movedOutOfSight);
+  }
+
+  void _clearShammasWhenFemale(bool isMale) {
+    if (isMale) return;
+
+    churchAndSpiritual.isShammas.prefill(false);
   }
 
   void _showRuleViolationsIfAlreadyShown() {
