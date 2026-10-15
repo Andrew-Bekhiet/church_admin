@@ -156,6 +156,30 @@ void main() {
       );
     });
 
+    test(
+      'a failing save carries the name that was submitted, not later edits',
+      () async {
+        final controller = await validNewPerson();
+        fixture.persons.saveGate = Completer<void>();
+        fixture.persons.saveError = Exception('offline');
+        final submit = controller.submit();
+        await pumpEventQueue();
+
+        controller.identity.name.setValue('بيشوي');
+        fixture.persons.saveGate?.complete();
+        final outcome = await submit;
+
+        expect(
+          outcome,
+          isA<PersonSaveFailed>().having(
+            (failed) => failed.attemptedPerson.name,
+            'attemptedPerson.name',
+            'مينا',
+          ),
+        );
+      },
+    );
+
     test('the form can be submitted again after a failure', () async {
       final controller = await validNewPerson();
       fixture.persons.saveError = Exception('offline');
