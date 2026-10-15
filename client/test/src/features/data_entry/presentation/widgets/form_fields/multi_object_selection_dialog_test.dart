@@ -4,9 +4,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../../utils.dart';
 import '../../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../../fakes/fake_logging_service.dart';
+import '../../../../../utils.dart';
 
 void main() {
   const newName = 'اسم جديد';
