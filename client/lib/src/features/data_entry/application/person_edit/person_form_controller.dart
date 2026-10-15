@@ -214,12 +214,13 @@ class PersonFormController extends AdvancedFormController {
 
     _saveProgress.value = const SavingPerson();
     var stayAwaitingMoveConfirmation = false;
+    Person? submittedPerson;
     try {
       final isValid = await validate();
       if (isDisposed) return const SaveAbandonedBecauseFormWasDisposed();
       if (!isValid) return const InvalidPerson();
 
-      final person = toPerson();
+      final person = submittedPerson = toPerson();
       final initial = savedPerson;
       final movesOutOfSight =
           initial != null && _outOfSight.isMovedOutOfSight(initial, person);
@@ -243,7 +244,7 @@ class PersonFormController extends AdvancedFormController {
       return PersonSaveFailed(
         error: error,
         stackTrace: stackTrace,
-        attemptedPerson: toPerson(),
+        attemptedPerson: submittedPerson ?? toPerson(),
       );
     } finally {
       if (!isDisposed && !stayAwaitingMoveConfirmation) {
