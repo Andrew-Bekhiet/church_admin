@@ -39,8 +39,10 @@ class PersonHouseholdFormController extends AdvancedFormController
       ? address.toAddress()
       : _addressCarriedByPerson;
 
-  bool get hasNoAddress =>
-      editedAddress == null || editedAddress == const Address();
+  bool get hasNoAddress => switch (editedAddress) {
+    null || const Address() => true,
+    _ => false,
+  };
 
   PersonHouseholdFormController({
     required Person startingPerson,
