@@ -8,6 +8,8 @@ enum PersonEditError {
     'ليس لديك الصلاحية لإزالة بعض الخدمات او المجموعات',
   );
 
+  static String messageOf(PersonEditError error) => error.message;
+
   final String message;
 
   const PersonEditError(this.message);

@@ -7,6 +7,7 @@ export 'domain/person_edit/person_edit_error.dart';
 export 'domain/person_edit/person_edit_intent.dart';
 export 'domain/person_edit/person_memberships.dart';
 export 'domain/person_edit/person_rule_violation.dart';
+export 'domain/person_edit/person_rule_violation_section.dart';
 export 'domain/person_edit/person_save_outcome.dart';
 export 'domain/person_edit/person_save_progress.dart';
 export 'domain/person_edit/photo_change.dart';

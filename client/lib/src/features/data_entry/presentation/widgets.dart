@@ -14,6 +14,7 @@ export 'widgets/move_out_of_sight_confirmation_dialog.dart';
 export 'widgets/object_selection_preview.dart';
 export 'widgets/object_selection_preview_list.dart';
 export 'widgets/ordered_viewable_object_list.dart';
+export 'widgets/person.dart';
 export 'widgets/person_affiliations_section.dart';
 export 'widgets/person_church_and_spiritual_fields.dart';
 export 'widgets/person_church_section.dart';

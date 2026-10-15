@@ -4,7 +4,7 @@ import 'package:church_admin/church_admin.dart';
 class PersonHouseholdFormController extends AdvancedFormController
     implements PersonFormSection {
   final Person _startingPerson;
-  final bool _isCreate;
+  final bool isCreate;
   final FamiliesDAO _families;
 
   Address? _addressCarriedByPerson;
@@ -13,25 +13,25 @@ class PersonHouseholdFormController extends AdvancedFormController
   late final family = AdvancedFieldController<Family?, PersonEditError>(
     initialValue: _startingPerson.family,
     validator: (family) => family == null && hasNoAddress
-        ? (_isCreate
+        ? (isCreate
               ? PersonEditError.familyOrAddressRequired
               : PersonEditError.familyRequired)
         : null,
   );
   late final AddressFormController address;
 
-  bool get showsAddress => _isCreate || family.fieldValue != null;
+  bool get showsAddress => isCreate || family.fieldValue != null;
 
   bool get canEditFamilyAddress => switch (family.fieldValue) {
-    null => _isCreate,
-    Family(:final id) => !_isCreate && id == _startingPerson.family?.id,
+    null => isCreate,
+    Family(:final id) => !isCreate && id == _startingPerson.family?.id,
   };
 
   bool get canHaveFamilyNumbers =>
-      family.fieldValue != null || (_isCreate && editedAddress != null);
+      family.fieldValue != null || (isCreate && editedAddress != null);
 
   List<FamilyPhoneContact> get savedFamilyContacts =>
-      !_isCreate && family.fieldValue?.id == _startingPerson.family?.id
+      !isCreate && family.fieldValue?.id == _startingPerson.family?.id
       ? _startingPerson.visibleFamilyContacts
       : const [];
 
@@ -44,7 +44,7 @@ class PersonHouseholdFormController extends AdvancedFormController
 
   PersonHouseholdFormController({
     required Person startingPerson,
-    required this._isCreate,
+    required this.isCreate,
     required this._families,
     required AddressFormServices addressServices,
   }) : _startingPerson = startingPerson,
