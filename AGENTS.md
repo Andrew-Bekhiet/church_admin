@@ -68,7 +68,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 - **Pattern matching over conditionals.** `switch` on enums and sealed classes for compile-time exhaustiveness; `if (x case final y?)` for non-null matching. Use the object-pattern shorthand `Foo(:final bar?)`, not `Foo(bar: final bar?)`.
 - **`package:collection`** (`maxBy`, `groupListsBy`, `EqualitySet.from(EqualityBy(...))` for de-duplication, `.map(...).sum`, …) instead of hand-rolled folds and `{key: value}` map tricks.
 - **Domain models are classes, not record typedefs.** Behaviour (display names, formatting) belongs on the class.
-- **A helper with one caller is inlined at that caller** — as an expression, or a local closure when it needs a name (`int nullsFirst(int? a, int? b) => …` inside the method that sorts). Do not add a private static method for it.
+- **A helper with one caller is inlined at that caller as an expression.** When it needs a name, make it a private method on the class. Never declare a nested (local) function.
 - **`Row.spacing` / `Column.spacing`** instead of `SizedBox` gaps; `MainAxisAlignment.space*` instead of `Expanded` where it fits; `Padding` instead of `SizedBox` in linear layouts.
 - **Shape APIs over numeric approximations.** `ShapeDecoration(shape: StadiumBorder())`, not `BorderRadius.circular(999)`; `EdgeInsetsDirectional.only(start:, end:)`, not `fromSTEB`; a bare `const Divider()` over one with hand-set colour and height — the theme owns those.
 - **Bind an indexed element to a local** (`final user = users[index];`) before using it more than once.
