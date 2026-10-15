@@ -68,11 +68,8 @@ class _MultiObjectSelectionDialogState<T extends Viewable>
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     child: OutlinedButton.icon(
                       icon: const Icon(Symbols.add),
-                      onPressed: () async {
-                        final created = await createCustom(newName);
-                        _controller.selectionController.select(created);
-                        _search.add(null);
-                      },
+                      onPressed: () =>
+                          unawaited(_createAndSelect(createCustom, newName)),
                       label: Text('إضافة $newName'),
                     ),
                   ),
@@ -102,5 +99,32 @@ class _MultiObjectSelectionDialogState<T extends Viewable>
     unawaited(_search.close());
     unawaited(_controller.dispose());
     super.dispose();
+  }
+
+  Future<void> _createAndSelect(
+    Future<T> Function(String) createCustom,
+    String newName,
+  ) async {
+    final T created;
+    try {
+      created = await createCustom(newName);
+    } on Exception catch (error, stackTrace) {
+      if (!mounted) return;
+
+      await LoggingService.I.showErrorDialogAndReport(
+        context,
+        LogRecord(
+          error: error,
+          stackTrace: stackTrace,
+          data: {'objectType': '$T', 'newName': newName},
+        ),
+      );
+
+      return;
+    }
+    if (!mounted) return;
+
+    _controller.selectionController.select(created);
+    _search.add(null);
   }
 }
