@@ -17,7 +17,12 @@ void main() {
     name: 'مينا',
     family: family,
     familyId: family.id,
-    address: const Address(id: 'address-id', houseCode: '12'),
+    address: const Address(
+      id: 'address-id',
+      houseCode: '12',
+      street: Street(id: 'street-id', name: 'شارع'),
+      area: Area(id: 'area-id', name: 'منطقة'),
+    ),
   );
 
   late EditPersonScreenHarness harness;

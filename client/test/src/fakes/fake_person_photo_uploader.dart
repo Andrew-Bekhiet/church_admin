@@ -7,7 +7,7 @@ class FakePersonPhotoUploader implements PersonPhotoUploader {
   final List<Person> peopleWhosePhotoWasDeleted = [];
   final List<XFile> uploadedPhotos = [];
 
-  Completer<void> uploadFinished = Completer<void>();
+  late final Completer<void> uploadFinished = Completer<void>();
   void Function(double progress)? reportProgress;
   Object? uploadError;
 

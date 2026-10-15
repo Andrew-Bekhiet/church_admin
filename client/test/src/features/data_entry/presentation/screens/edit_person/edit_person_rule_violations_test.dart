@@ -92,7 +92,6 @@ void main() {
     final boy = Person(
       id: 'person-id',
       name: 'مينا',
-      gender: true,
       family: family,
       familyId: family.id,
       address: address,

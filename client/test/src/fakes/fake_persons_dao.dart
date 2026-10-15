@@ -8,7 +8,7 @@ class FakePersonsDAO extends Fake implements PersonsDAO {
   final List<Person> updatedPeople = [];
   final List<String> deletedPersonIds = [];
 
-  Completer<Person?> savedMembershipsResponse = Completer<Person?>();
+  late final Completer<Person?> savedMembershipsResponse = Completer<Person?>();
   Completer<void>? saveGate;
   Object? saveError;
 

@@ -62,7 +62,13 @@ class FakeMetadataDAO extends MetadataDAO {
   DistrictsDAO get districts => fakeDistricts;
 }
 
-class FakeFunctionsService extends Fake implements FunctionsService {}
+class FakeFunctionsService extends Fake implements FunctionsService {
+  final List<({String table, String id})> deletedPhotos = [];
+
+  @override
+  Future<void> deletePhoto(String table, String id) async =>
+      deletedPhotos.add((table: table, id: id));
+}
 
 class EditPersonScreenHarness {
   static const String discardDialogTitle = 'هل تريد تجاهل التغييرات؟';
@@ -78,6 +84,7 @@ class EditPersonScreenHarness {
   final FakeHobbiesDAO hobbies = FakeHobbiesDAO();
   final FakePersonPhotoUploader photos = FakePersonPhotoUploader();
   final FakeLoggingService logging = FakeLoggingService();
+  final FakeFunctionsService functions = FakeFunctionsService();
   final FakeStreetsDAO streets = FakeStreetsDAO();
   final FakeAreasDAO areas = FakeAreasDAO();
 
@@ -130,7 +137,7 @@ class EditPersonScreenHarness {
       viewableObjectServiceProvider.overrideWithValue(viewableObjects),
       loggingServiceProvider.overrideWithValue(logging),
       geocoderProvider.overrideWithValue(FakeGeocoder()),
-      functionsServiceProvider.overrideWithValue(FakeFunctionsService()),
+      functionsServiceProvider.overrideWithValue(functions),
     ]);
   }
 
@@ -139,6 +146,7 @@ class EditPersonScreenHarness {
     PersonEditIntent intent, {
     bool membershipsLoaded = true,
     bool withPageBelow = false,
+    bool scrollPastPhoto = true,
   }) async {
     if (membershipsLoaded) persons.respondWithSavedMemberships(null);
 
@@ -193,15 +201,23 @@ class EditPersonScreenHarness {
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
     if (membershipsLoaded) await tester.pumpAndSettle();
+    if (scrollPastPhoto) {
+      await tester.drag(find.byType(Scrollable).first, const Offset(0, -700));
+      await tester.pump();
+    }
   }
 
   Future<void> scrollTo(WidgetTester tester, Finder finder) async {
-    await tester.scrollUntilVisible(
-      finder,
-      100,
-      scrollable: find.byType(Scrollable).first,
-    );
-    await tester.pumpAndSettle();
+    final scrollable = find.byType(Scrollable).first;
+    await tester.scrollUntilVisible(finder, 100, scrollable: scrollable);
+    final viewportCenter = tester.getCenter(scrollable).dy;
+    for (var attempt = 0; attempt < 20; attempt++) {
+      final distance = tester.getCenter(finder.first).dy - viewportCenter;
+      if (distance.abs() < 100) break;
+
+      await tester.drag(scrollable, Offset(0, -distance.clamp(-300.0, 300.0)));
+      await tester.pumpAndSettle();
+    }
   }
 
   Future<void> pressBack(WidgetTester tester) async {

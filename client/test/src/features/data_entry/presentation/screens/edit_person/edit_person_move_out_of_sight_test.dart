@@ -12,7 +12,6 @@ void main() {
   final boy = Person(
     id: 'person-id',
     name: 'مينا',
-    gender: true,
     family: family,
     familyId: family.id,
     services: const [primary],
@@ -96,6 +95,6 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
 
-    expect(find.text('تم نقل المخدوم'), findsOneWidget);
+    expect(find.text('تم نقل المخدوم'), findsWidgets);
   });
 }

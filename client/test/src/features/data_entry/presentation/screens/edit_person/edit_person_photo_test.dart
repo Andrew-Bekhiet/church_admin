@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
@@ -26,7 +25,11 @@ void main() {
   testWidgets('tapping the photo offers the camera and the gallery', (
     tester,
   ) async {
-    await harness.open(tester, UpdatePerson(person: person));
+    await harness.open(
+      tester,
+      UpdatePerson(person: person),
+      scrollPastPhoto: false,
+    );
 
     await tester.tap(find.byIcon(Symbols.camera_alt));
     await tester.pumpAndSettle();
@@ -36,7 +39,11 @@ void main() {
   });
 
   testWidgets('an existing person can have the photo deleted', (tester) async {
-    await harness.open(tester, UpdatePerson(person: person));
+    await harness.open(
+      tester,
+      UpdatePerson(person: person),
+      scrollPastPhoto: false,
+    );
 
     await tester.tap(find.byIcon(Symbols.camera_alt));
     await tester.pumpAndSettle();
@@ -46,13 +53,19 @@ void main() {
     await tester.pumpAndSettle();
     await harness.tapSave(tester);
 
-    expect(harness.photos.peopleWhosePhotoWasDeleted.single.id, person.id);
+    expect(harness.functions.deletedPhotos, [
+      (table: 'persons', id: person.id),
+    ]);
   });
 
   testWidgets('a person that is not saved yet has no photo to delete', (
     tester,
   ) async {
-    await harness.open(tester, const CreatePersonInFamily(family: family));
+    await harness.open(
+      tester,
+      const CreatePersonInFamily(family: family),
+      scrollPastPhoto: false,
+    );
 
     await tester.tap(find.byIcon(Symbols.camera_alt));
     await tester.pumpAndSettle();
