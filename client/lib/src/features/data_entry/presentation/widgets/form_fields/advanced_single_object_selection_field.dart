@@ -70,7 +70,7 @@ class AdvancedSingleObjectSelectionField<
         onCreateCustom != null &&
         FeatureFlagsRepository.I.canAddCustomObjects<T>();
 
-    final result = await showDialog<Object>(
+    final result = await showDialog<ObjectSelectionResult<T>>(
       context: context,
       builder: (context) => ObjectSelectionDialog<T>(
         fieldLabel: label,
@@ -81,11 +81,15 @@ class AdvancedSingleObjectSelectionField<
 
     if (field.isDisposed || !context.mounted) return;
 
-    switch ((result, onCreateCustom)) {
-      case (final String newName, final createCustom?):
-        await _createAndSelect(context, createCustom, newName);
-      case (final T picked, _) when picked != field.fieldValue:
-        _change(picked);
+    switch (result) {
+      case null:
+        return;
+      case NewObjectNamed<T>(:final name):
+        if (onCreateCustom case final createCustom?) {
+          await _createAndSelect(context, createCustom, name);
+        }
+      case ObjectSelected<T>(:final object):
+        if (object != field.fieldValue) _change(object);
     }
   }
 

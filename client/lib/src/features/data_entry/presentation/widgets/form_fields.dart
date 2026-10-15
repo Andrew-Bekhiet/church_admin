@@ -11,6 +11,7 @@ export 'form_fields/name_field.dart';
 export 'form_fields/new_password_field.dart';
 export 'form_fields/object_selection_dialog.dart';
 export 'form_fields/object_selection_field.dart';
+export 'form_fields/object_selection_result.dart';
 export 'form_fields/password_form_field.dart';
 export 'form_fields/photo_field.dart';
 export 'form_fields/study_year_range_field.dart';

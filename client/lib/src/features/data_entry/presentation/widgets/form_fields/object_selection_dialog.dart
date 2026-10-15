@@ -50,7 +50,8 @@ class _ObjectSelectionDialogState<T extends ViewableWithID>
                 builder: (context, snapshot) => switch (snapshot.data) {
                   final newName? => OutlinedButton.icon(
                     icon: const Icon(Symbols.add),
-                    onPressed: () => Navigator.of(context).pop(newName),
+                    onPressed: () =>
+                        Navigator.of(context).pop(NewObjectNamed<T>(newName)),
                     label: Text('إضافة $newName'),
                   ),
                   null => const SizedBox.shrink(),
@@ -60,7 +61,8 @@ class _ObjectSelectionDialogState<T extends ViewableWithID>
               child: ViewableObjectList<T>(
                 objectsController: _controller,
                 viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                  onTap: Navigator.of(context).pop,
+                  onTap: (object) =>
+                      Navigator.of(context).pop(ObjectSelected<T>(object)),
                   forceShowSecondLine: false,
                   isDense: true,
                 ),
