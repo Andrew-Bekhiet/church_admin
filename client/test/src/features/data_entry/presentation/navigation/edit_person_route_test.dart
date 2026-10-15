@@ -4,6 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
+// GoRouterState overrides == and cannot be built without a RouteConfiguration; the route's build ignores it.
+// ignore: avoid_implementing_value_types
 class _MockGoRouterState extends Mock implements GoRouterState {}
 
 void main() {
