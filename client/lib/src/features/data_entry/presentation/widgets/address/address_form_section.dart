@@ -76,12 +76,17 @@ class AddressFormSection extends StatelessWidget {
           ),
           AddressFormPlaceFields(form: form),
           AddressFormUnitFields(form: form),
-          ListenableBuilder(
-            listenable: form.placePartsMayHaveChanged,
-            builder: (context, _) => LocationUpdateReminderCard(
-              isShown: form.hasPlaceChangedSinceLocationWasChecked,
-              onUpdateLocation: () => unawaited(chooseLocationOnMap()),
-              onKeepLocation: form.keepLocation,
+          AdvancedFieldBuilder<Point?, AddressFieldError>(
+            field: form.geolocation,
+            builder: (context, state, _) => ListenableBuilder(
+              listenable: form.placePartsMayHaveChanged,
+              builder: (context, _) => LocationUpdateReminderCard(
+                isShown:
+                    !state.readOnly &&
+                    form.hasPlaceChangedSinceLocationWasChecked,
+                onUpdateLocation: () => unawaited(chooseLocationOnMap()),
+                onKeepLocation: form.keepLocation,
+              ),
             ),
           ),
           ListenableBuilder(
