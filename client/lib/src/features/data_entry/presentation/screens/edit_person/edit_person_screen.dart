@@ -118,18 +118,6 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
     );
   }
 
-  @override
-  void dispose() {
-    _progressSnackBar?.close();
-    _form.saveProgress.removeListener(_showSaveProgressWhileSaving);
-    _form.household.onValuesChanged.removeListener(
-      _followHouseholdInPhoneContacts,
-    );
-    _form.dispose();
-    unawaited(_phoneContacts.close());
-    super.dispose();
-  }
-
   void _followHouseholdInPhoneContacts() {
     final household = _form.household;
     final familyId = household.family.fieldValue?.id;
@@ -363,5 +351,17 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
 
     navigator.pop();
     WidgetsBinding.instance.addPostFrameCallback((_) => navigator.pop());
+  }
+
+  @override
+  void dispose() {
+    _progressSnackBar?.close();
+    _form.saveProgress.removeListener(_showSaveProgressWhileSaving);
+    _form.household.onValuesChanged.removeListener(
+      _followHouseholdInPhoneContacts,
+    );
+    _form.dispose();
+    unawaited(_phoneContacts.close());
+    super.dispose();
   }
 }

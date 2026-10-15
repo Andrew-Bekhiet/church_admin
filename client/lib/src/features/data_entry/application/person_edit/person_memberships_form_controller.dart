@@ -95,12 +95,6 @@ class PersonMembershipsFormController extends AdvancedFormController
     );
   }
 
-  @override
-  void dispose() {
-    _loadState.dispose();
-    super.dispose();
-  }
-
   void _adoptLoadedMembershipsAsBaseline() => registerFields(value.fields);
 
   PersonEditError? _removesNothingTheUserCannotEdit(
@@ -114,5 +108,11 @@ class PersonMembershipsFormController extends AdvancedFormController
     return removed.every((o) => _currentUser?.canEditObject(o) ?? false)
         ? null
         : PersonEditError.cannotRemoveServicesOrGroups;
+  }
+
+  @override
+  void dispose() {
+    _loadState.dispose();
+    super.dispose();
   }
 }

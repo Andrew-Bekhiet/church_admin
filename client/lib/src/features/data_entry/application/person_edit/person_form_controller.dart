@@ -267,13 +267,6 @@ class PersonFormController extends AdvancedFormController {
     await _persons.deleteById(id: _startingPerson.id);
   }
 
-  @override
-  void dispose() {
-    _saveProgress.dispose();
-    _shownViolations.dispose();
-    super.dispose();
-  }
-
   Future<PersonSaveOutcome> _applyPhotoChangeTo(
     Person saved, {
     required bool movedOutOfSight,
@@ -322,5 +315,12 @@ class PersonFormController extends AdvancedFormController {
     if (!setEquals(violations, _shownViolations.value)) {
       _shownViolations.value = violations;
     }
+  }
+
+  @override
+  void dispose() {
+    _saveProgress.dispose();
+    _shownViolations.dispose();
+    super.dispose();
   }
 }

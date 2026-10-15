@@ -94,13 +94,6 @@ class _MultiObjectSelectionDialogState<T extends Viewable>
     );
   }
 
-  @override
-  void dispose() {
-    unawaited(_search.close());
-    unawaited(_controller.dispose());
-    super.dispose();
-  }
-
   Future<void> _createAndSelect(
     Future<T> Function(String) createCustom,
     String newName,
@@ -126,5 +119,12 @@ class _MultiObjectSelectionDialogState<T extends Viewable>
 
     _controller.selectionController.select(created);
     _search.add(null);
+  }
+
+  @override
+  void dispose() {
+    unawaited(_search.close());
+    unawaited(_controller.dispose());
+    super.dispose();
   }
 }
