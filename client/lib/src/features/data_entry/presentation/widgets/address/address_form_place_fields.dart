@@ -72,6 +72,8 @@ class AddressFormPlaceFields extends StatelessWidget {
                   ),
                   keyboardType: keyboardThatCanSwitchToLetters,
                   maxLength: Address.houseCodeMaxLength,
+                  counterText: '',
+                  errorMaxLines: 2,
                   onChanged: form.houseCodeTyped,
                 ),
               ),

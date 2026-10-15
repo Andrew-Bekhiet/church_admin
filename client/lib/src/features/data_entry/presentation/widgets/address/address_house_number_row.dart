@@ -49,6 +49,8 @@ class AddressHouseNumberRow extends StatelessWidget {
                   maxLines: 1,
                   minFontSize: 9,
                 ),
+                counterText: '',
+                errorMaxLines: 2,
               ),
               enabled: enabled,
               // Android has no keyboard that opens on digits and can still
