@@ -278,16 +278,6 @@ class _ViewServiceState extends State<ViewService> {
     );
   }
 
-  @override
-  void dispose() {
-    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
-    _classesArrangement.dispose();
-    _groupsArrangement.dispose();
-    _personsArrangement.dispose();
-
-    super.dispose();
-  }
-
   int getNewIndex(double offset, int currentIndex) {
     return offset.isNegative
         ? (currentIndex + offset).floor()
@@ -312,5 +302,15 @@ class _ViewServiceState extends State<ViewService> {
     _controllersToDispose.add(controller);
 
     return controller;
+  }
+
+  @override
+  void dispose() {
+    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
+    _classesArrangement.dispose();
+    _groupsArrangement.dispose();
+    _personsArrangement.dispose();
+
+    super.dispose();
   }
 }

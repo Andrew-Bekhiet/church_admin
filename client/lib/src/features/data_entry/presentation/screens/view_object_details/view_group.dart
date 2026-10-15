@@ -176,15 +176,15 @@ class _ViewGroupState extends State<ViewGroup> {
     );
   }
 
+  Future<void> _showArrangementSheet() async {
+    await _personsArrangement.edit(context);
+  }
+
   @override
   void dispose() {
     unawaited(_personsController.dispose());
     _personsArrangement.dispose();
 
     super.dispose();
-  }
-
-  Future<void> _showArrangementSheet() async {
-    await _personsArrangement.edit(context);
   }
 }

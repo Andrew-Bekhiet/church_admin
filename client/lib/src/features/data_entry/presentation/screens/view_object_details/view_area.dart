@@ -284,17 +284,6 @@ class _ViewAreaState extends State<ViewArea> {
     );
   }
 
-  @override
-  void dispose() {
-    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
-    _streetsArrangement.dispose();
-    _familiesArrangement.dispose();
-    _personsArrangement.dispose();
-    _storesArrangement.dispose();
-
-    super.dispose();
-  }
-
   Future<void> _showArrangementSheet(int currentTabIndex) async {
     final arrangementController = switch (currentTabIndex) {
       0 => _streetsArrangement,
@@ -314,5 +303,16 @@ class _ViewAreaState extends State<ViewArea> {
     _controllersToDispose.add(controller);
 
     return controller;
+  }
+
+  @override
+  void dispose() {
+    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
+    _streetsArrangement.dispose();
+    _familiesArrangement.dispose();
+    _personsArrangement.dispose();
+    _storesArrangement.dispose();
+
+    super.dispose();
   }
 }

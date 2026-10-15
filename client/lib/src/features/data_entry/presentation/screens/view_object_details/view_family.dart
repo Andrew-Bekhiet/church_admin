@@ -259,17 +259,6 @@ class _ViewFamilyState extends State<ViewFamily> {
     );
   }
 
-  @override
-  void dispose() {
-    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
-    _personsArrangement.dispose();
-    _childrenFamiliesArrangement.dispose();
-    _parentFamiliesArrangement.dispose();
-    _storesArrangement.dispose();
-
-    super.dispose();
-  }
-
   Future<void> _showArrangementSheet(int currentTabIndex) async {
     final arrangementController = switch (currentTabIndex) {
       0 => _personsArrangement,
@@ -289,6 +278,17 @@ class _ViewFamilyState extends State<ViewFamily> {
     _controllersToDispose.add(controller);
 
     return controller;
+  }
+
+  @override
+  void dispose() {
+    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
+    _personsArrangement.dispose();
+    _childrenFamiliesArrangement.dispose();
+    _parentFamiliesArrangement.dispose();
+    _storesArrangement.dispose();
+
+    super.dispose();
   }
 }
 
