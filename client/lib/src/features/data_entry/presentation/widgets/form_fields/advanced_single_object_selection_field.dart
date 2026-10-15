@@ -84,10 +84,12 @@ class AdvancedSingleObjectSelectionField<
     switch (result) {
       case null:
         return;
+
       case NewObjectNamed<T>(:final name):
         if (onCreateCustom case final createCustom?) {
           await _createAndSelect(context, createCustom, name);
         }
+
       case ObjectSelected<T>(:final object):
         if (object != field.fieldValue) _change(object);
     }

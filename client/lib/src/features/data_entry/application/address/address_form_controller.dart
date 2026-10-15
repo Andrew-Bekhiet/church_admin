@@ -261,6 +261,7 @@ class AddressFormController extends AdvancedFormController {
     switch (areasOfStreet) {
       case [final onlyArea]:
         area.prefill(onlyArea);
+
       case [_, _, ...]:
         await _fillAreaOfGeocodedHouse(
           areasOfStreet,

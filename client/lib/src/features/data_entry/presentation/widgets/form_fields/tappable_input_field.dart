@@ -83,6 +83,7 @@ class _TappableInputFieldState<T> extends State<TappableInputField<T>> {
       case final givenNode?:
         _ownedFocusNode = null;
         _effectiveFocusNode = givenNode;
+
       case null:
         final ownedNode = FocusNode(debugLabel: 'TappableInputField<$T>');
         _ownedFocusNode = ownedNode;
