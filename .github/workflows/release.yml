@@ -71,6 +71,11 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - name: Mask log values
+        env:
+          LOG_MASK_VALUES: ${{ secrets.LOG_MASK_VALUES }}
+        run: while IFS= read -r v; do if [ -n "$v" ]; then echo "::add-mask::$v"; fi; done <<< "$LOG_MASK_VALUES"
+
       - name: Free up disk space
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
