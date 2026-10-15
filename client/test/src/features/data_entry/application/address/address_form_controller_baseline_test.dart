@@ -239,20 +239,20 @@ void main() {
       expect(controller.hasPlaceChangedWithStaleLocation, isFalse);
     });
 
-    test('goes away when the user keeps the location', () {
+    test('goes away when the user confirms the address is not stale', () {
       final controller = fixture.controllerFor(locatedAddress);
       controller.houseCode.setValue('14');
 
-      controller.keepLocation();
+      controller.confirmAddressNotStale();
 
       expect(controller.hasPlaceChangedWithStaleLocation, isFalse);
     });
 
-    test('returns when a place part changes again after keeping the '
-        'location', () {
+    test('returns when a place part changes again after confirming the '
+        'address is not stale', () {
       final controller = fixture.controllerFor(locatedAddress);
       controller.houseCode.setValue('14');
-      controller.keepLocation();
+      controller.confirmAddressNotStale();
 
       controller.houseCode.setValue('16');
 
@@ -262,7 +262,7 @@ void main() {
     test('is forgotten when a new baseline is loaded', () {
       final controller = fixture.controllerFor(locatedAddress);
       controller.houseCode.setValue('14');
-      controller.keepLocation();
+      controller.confirmAddressNotStale();
 
       controller.loadAsNewBaseline(locatedAddress);
       controller.houseCode.setValue('16');
@@ -270,12 +270,12 @@ void main() {
       expect(controller.hasPlaceChangedWithStaleLocation, isTrue);
     });
 
-    test('tells listeners when the user keeps the location', () {
+    test('tells listeners when the user confirms the address is not stale', () {
       final controller = fixture.controllerFor(locatedAddress);
       var notifications = 0;
-      controller.placePartsMayHaveChanged.addListener(() => notifications++);
+      controller.staleLocationInputsChanged.addListener(() => notifications++);
 
-      controller.keepLocation();
+      controller.confirmAddressNotStale();
 
       expect(notifications, 1);
     });

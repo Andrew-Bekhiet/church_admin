@@ -21,7 +21,7 @@ class AddressFormController extends AdvancedFormController {
     const NoAddressSuggestion(),
   );
   late final ValueListenable<AddressSuggestion> suggestion = _suggestion;
-  final ValueNotifier<Address?> _locationConfirmedFor = ValueNotifier(null);
+  final ValueNotifier<Address?> _addressConfirmedNotStale = ValueNotifier(null);
 
   Address _baselineAddress;
   String? _lastTypedHouseCode;
@@ -64,9 +64,9 @@ class AddressFormController extends AdvancedFormController {
     initialValue: _baselineAddress.geolocation,
   );
 
-  late final Listenable placePartsMayHaveChanged = Listenable.merge([
+  late final Listenable staleLocationInputsChanged = Listenable.merge([
     onValuesChanged,
-    _locationConfirmedFor,
+    _addressConfirmedNotStale,
   ]);
 
   bool get wasEditedSinceBaseline => toAddress() != _baselineAddress;
@@ -82,7 +82,7 @@ class AddressFormController extends AdvancedFormController {
 
     return locationIsStillTheSavedOne &&
         AddressPlacePart.anyChangedBetween(
-          _locationConfirmedFor.value ?? _baselineAddress,
+          _addressConfirmedNotStale.value ?? _baselineAddress,
           toAddress(),
         );
   }
@@ -125,7 +125,7 @@ class AddressFormController extends AdvancedFormController {
     _baselineAddress = address ?? const Address();
     _lastTypedHouseCode = _baselineAddress.houseCode;
     _suggestion.value = const NoAddressSuggestion();
-    _locationConfirmedFor.value = null;
+    _addressConfirmedNotStale.value = null;
 
     district.prefill(_baselineAddress.district, force: true);
     street.prefill(_baselineAddress.street, force: true);
@@ -226,7 +226,8 @@ class AddressFormController extends AdvancedFormController {
     _suggestion.value = const NoAddressSuggestion();
   }
 
-  void keepLocation() => _locationConfirmedFor.value = toAddress();
+  void confirmAddressNotStale() =>
+      _addressConfirmedNotStale.value = toAddress();
 
   ViewableObjectListController<District> districtListController(
     Stream<String?> search,
@@ -247,7 +248,7 @@ class AddressFormController extends AdvancedFormController {
   void dispose() {
     _houseNumberGeocodingDebounce?.cancel();
     _suggestion.dispose();
-    _locationConfirmedFor.dispose();
+    _addressConfirmedNotStale.dispose();
     super.dispose();
   }
 

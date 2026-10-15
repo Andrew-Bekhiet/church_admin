@@ -79,12 +79,12 @@ class AddressFormSection extends StatelessWidget {
           AdvancedFieldBuilder<Point?, AddressFieldError>(
             field: form.geolocation,
             builder: (context, state, _) => ListenableBuilder(
-              listenable: form.placePartsMayHaveChanged,
+              listenable: form.staleLocationInputsChanged,
               builder: (context, _) => LocationUpdateReminderCard(
                 isShown:
                     !state.readOnly && form.hasPlaceChangedWithStaleLocation,
                 onUpdateLocation: () => unawaited(chooseLocationOnMap()),
-                onKeepLocation: form.keepLocation,
+                onKeepLocation: form.confirmAddressNotStale,
               ),
             ),
           ),
