@@ -54,6 +54,10 @@ class PersonFormController extends AdvancedFormController {
 
   Person? get savedPerson => isCreate ? null : memberships.loadedPerson;
 
+  Person get personForPhotoPreview => identity.editedVersionOf(
+    hobbiesTagsAndNotes.editedVersionOf(_startingPerson),
+  );
+
   Set<PersonRuleViolation> get ruleViolations => {
     if (_nothingPlacesThePerson) const NothingPlacesThePerson(),
     if (_addressChangeIsBlockedByMove) const AddressChangeBlockedByMove(),
@@ -161,10 +165,6 @@ class PersonFormController extends AdvancedFormController {
     _familyContacts = family;
   }
 
-  Person get personForPhotoPreview => identity.editedVersionOf(
-    hobbiesTagsAndNotes.editedVersionOf(_startingPerson),
-  );
-
   Person toPerson() =>
       <PersonFormSection>[
         identity,
@@ -243,9 +243,9 @@ class PersonFormController extends AdvancedFormController {
   }
 
   void declineMove() {
-    if (_saveProgress.value is AwaitingMoveConfirmation) {
-      _saveProgress.value = const NotSaving();
-    }
+    if (_saveProgress.value is! AwaitingMoveConfirmation) return;
+
+    _saveProgress.value = const NotSaving();
   }
 
   Future<void> deletePerson() async {

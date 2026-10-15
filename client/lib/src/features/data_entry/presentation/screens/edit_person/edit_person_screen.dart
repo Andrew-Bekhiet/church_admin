@@ -5,7 +5,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class EditPersonScreen extends StatefulWidget {
   final PersonEditIntent intent;
@@ -18,6 +17,7 @@ class EditPersonScreen extends StatefulWidget {
 
 class _EditPersonScreenState extends State<EditPersonScreen> {
   late final PersonFormController _form;
+  final _metadata = PersonMetadataCatalog(DatabaseService.I.metadata);
   late final PhoneContactsEditorCubit _phoneContacts;
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? _progressSnackBar;
   String? _familyIdLastSeenByPhoneContacts;
@@ -91,7 +91,13 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
                 child: Scaffold(
                   body: EditPersonScrollView(
                     form: _form,
-                    onImportFromContacts: _importFromContacts,
+                    metadata: _metadata,
+                    onImportFromContacts: () => unawaited(
+                      EditPersonContactsImport(
+                        phoneContacts: _phoneContacts,
+                        name: _form.identity.name,
+                      ).run(context),
+                    ),
                     onChooseLocationOnMap: _chooseLocationOnMap,
                     onDelete: switch (intent) {
                       UpdatePerson(:final person)
@@ -174,31 +180,6 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
     );
 
     return result?.geolocation;
-  }
-
-  Future<void> _importFromContacts() async {
-    FocusScope.of(context).requestFocus();
-    final permissionStatus = await Permission.contacts.request();
-    if (permissionStatus != PermissionStatus.granted &&
-        permissionStatus != PermissionStatus.limited) {
-      return;
-    }
-    final contact = await ContactsService.I.pickContact();
-    if (contact == null || !mounted) return;
-
-    final result =
-        await showDialog<
-          ({bool useContactName, Set<({String label, String number})> numbers})
-        >(
-          context: context,
-          builder: (context) => ContactImportDialog(contact: contact),
-        );
-    if (result == null || !mounted) return;
-
-    _phoneContacts.importNumbers(result.numbers);
-    if (result.useContactName) {
-      _form.identity.name.setValue(contact.displayName ?? '');
-    }
   }
 
   Future<void> _save({bool confirmedMove = false}) async {
