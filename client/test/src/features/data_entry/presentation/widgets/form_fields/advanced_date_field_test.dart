@@ -57,4 +57,28 @@ void main() {
 
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('a time with single digit minutes shows them padded', (
+    tester,
+  ) async {
+    final field = AdvancedFieldController<DateTime?, PersonEditError>(
+      initialValue: DateTime(2024, 1, 2, 3, 5),
+    );
+    addTearDown(field.dispose);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: AdvancedDateField<PersonEditError>(
+            field: field,
+            label: 'التاريخ',
+            translateError: (error) => '$error',
+            withTime: true,
+          ),
+        ),
+      ),
+    );
+
+    expect(find.textContaining('3:05'), findsOneWidget);
+  });
 }
