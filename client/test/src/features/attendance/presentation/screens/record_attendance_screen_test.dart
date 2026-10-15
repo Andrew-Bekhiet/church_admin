@@ -9,13 +9,11 @@ import 'package:mocktail/mocktail.dart';
 import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/mock_auth_bloc.dart';
 import '../../../../fakes/mock_database_service.dart';
+import '../../../../fakes/mock_history_dao.dart';
 import '../../../../fakes/mock_image_url_cache_service.dart';
+import '../../../../fakes/mock_meetings_dao.dart';
 import '../../../../fakes/mock_viewable_object_service.dart';
 import '../../../../utils.dart';
-
-class _MockMeetingsDAO extends Mock implements MeetingsDAO {}
-
-class _MockHistoryDAO extends Mock implements HistoryDAO {}
 
 void main() {
   const meeting = Meeting(
@@ -66,7 +64,7 @@ void main() {
   });
 
   setUp(() {
-    final meetings = _MockMeetingsDAO();
+    final meetings = MockMeetingsDAO();
     when(
       () => meetings.getMeetingRoster(
         meetingId: any(named: 'meetingId'),
@@ -122,7 +120,7 @@ void main() {
       ),
     );
 
-    final history = _MockHistoryDAO();
+    final history = MockHistoryDAO();
     when(
       () => history.streamDayKodas(day: any(named: 'day')),
     ).thenAnswer((_) => Stream.value(const []));
