@@ -201,6 +201,8 @@ class AddressFormController extends AdvancedFormController {
   }
 
   void useSuggestedAddress() {
+    if (_isReadOnly) return;
+
     if (_suggestion.value case AddressSuggested(:final address)) {
       if (address.area case final suggestedArea?) area.setValue(suggestedArea);
       if (address.street case final suggestedStreet?) {
