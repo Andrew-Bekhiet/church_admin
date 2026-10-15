@@ -166,24 +166,14 @@ class PersonFormController extends AdvancedFormController {
     _familyContacts = family;
   }
 
-  Person toPerson() =>
-      <PersonFormSection>[
-        identity,
-        household,
-        memberships,
-        work,
-        maritalStatusAndType,
-        churchAndSpiritual,
-        hobbiesTagsAndNotes,
-        pastoralDates,
-      ].fold(
-        _startingPerson.copyWith(
-          contacts: _ownContacts,
-          familyContacts: _familyContacts,
-          color: color.fieldValue,
-        ),
-        (person, section) => section.editedVersionOf(person),
-      );
+  Person toPerson() => value.subforms.whereType<PersonFormSection>().fold(
+    _startingPerson.copyWith(
+      contacts: _ownContacts,
+      familyContacts: _familyContacts,
+      color: color.fieldValue,
+    ),
+    (person, section) => section.editedVersionOf(person),
+  );
 
   @override
   Future<bool> validate() async {
