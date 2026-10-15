@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -250,11 +251,18 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
           ),
         );
 
-      case InvalidPerson() ||
-          SaveAlreadyInProgress() ||
-          SaveAbandonedBecauseFormWasDisposed():
+      case InvalidPerson():
+        _focusFirstInvalidField();
+
+      case SaveAlreadyInProgress() || SaveAbandonedBecauseFormWasDisposed():
         return;
     }
+  }
+
+  void _focusFirstInvalidField() {
+    _form.value.allFields
+        .firstWhereOrNull((field) => field.value.isInvalid)
+        ?.focus();
   }
 
   void _leaveAfterSave(
