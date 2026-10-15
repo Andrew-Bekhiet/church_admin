@@ -21,12 +21,6 @@ class AddressFormSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.of(context);
 
-    Future<void> chooseLocationOnMap() async {
-      final location = await onChooseLocationOnMap(context);
-
-      if (location != null) unawaited(form.useLocation(location));
-    }
-
     return AdvancedFieldBuilder<Point?, AddressFieldError>(
       field: form.geolocation,
       builder: (context, state, child) => InputDecorator(
@@ -59,7 +53,9 @@ class AddressFormSection extends StatelessWidget {
                       ? const Icon(Symbols.check_circle)
                       : null,
                 ),
-                onTap: state.readOnly ? null : chooseLocationOnMap,
+                onTap: state.readOnly
+                    ? null
+                    : () => _chooseLocationOnMap(context),
                 child: location == null ? null : const Text('تم تحديد الموقع'),
               );
             },
@@ -83,7 +79,8 @@ class AddressFormSection extends StatelessWidget {
               builder: (context, _) => LocationUpdateReminderCard(
                 isShown:
                     !state.readOnly && form.hasPlaceChangedWithStaleLocation,
-                onUpdateLocation: () => unawaited(chooseLocationOnMap()),
+                onUpdateLocation: () =>
+                    unawaited(_chooseLocationOnMap(context)),
                 onKeepLocation: form.confirmAddressNotStale,
               ),
             ),
@@ -95,6 +92,12 @@ class AddressFormSection extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _chooseLocationOnMap(BuildContext context) async {
+    final location = await onChooseLocationOnMap(context);
+
+    if (location != null) unawaited(form.useLocation(location));
   }
 }
 
