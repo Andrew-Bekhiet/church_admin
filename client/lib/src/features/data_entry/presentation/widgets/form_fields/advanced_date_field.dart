@@ -51,13 +51,22 @@ class AdvancedDateField<E extends Object> extends StatelessWidget {
   }
 
   Future<void> _pickDate(BuildContext context) async {
+    final firstDate = DateTime(1500);
+    final lastDate = DateTime.now();
+    final storedDate = field.fieldValue ?? lastDate;
+    final initialDate = switch (storedDate) {
+      _ when storedDate.isBefore(firstDate) => firstDate,
+      _ when storedDate.isAfter(lastDate) => lastDate,
+      _ => storedDate,
+    };
+
     final picked = await showDatePicker(
       helpText: label,
       locale: const Locale('ar', 'EG'),
       context: context,
-      initialDate: field.fieldValue ?? DateTime.now(),
-      firstDate: DateTime(1500),
-      lastDate: DateTime.now(),
+      initialDate: initialDate,
+      firstDate: firstDate,
+      lastDate: lastDate,
     );
 
     if (picked == null || field.isDisposed) return;
