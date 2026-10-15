@@ -60,6 +60,18 @@ void main() {
     expect(harness.persons.updatedPeople, isEmpty);
   });
 
+  testWidgets('the save button stays disabled while the confirmation shows', (
+    tester,
+  ) async {
+    await makeGirlAndSave(tester);
+
+    final saveButton = tester.widget<FloatingActionButton>(
+      find.byKey(EditPersonSaveButtonKeys.saveButton),
+    );
+
+    expect(saveButton.onPressed, isNull);
+  });
+
   testWidgets(
     'cancelling the confirmation keeps the screen and saves nothing',
     (
