@@ -1,16 +1,15 @@
-import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class LocationUpdateReminderCard extends StatelessWidget {
   const LocationUpdateReminderCard({
-    required this.changedPlaceParts,
+    required this.isShown,
     required this.onUpdateLocation,
     required this.onKeepLocation,
     super.key,
   });
 
-  final Set<AddressPlacePart> changedPlaceParts;
+  final bool isShown;
   final VoidCallback onUpdateLocation;
   final VoidCallback onKeepLocation;
 
@@ -27,11 +26,14 @@ class LocationUpdateReminderCard extends StatelessWidget {
         sizeFactor: animation,
         child: FadeTransition(opacity: animation, child: child),
       ),
-      child: changedPlaceParts.isEmpty
-          ? const SizedBox.shrink()
-          : Card(
+      child: isShown
+          ? Card(
               key: LocationUpdateReminderCardKeys.card,
-              color: colorScheme.tertiaryContainer,
+              color: colorScheme.surfaceContainerHigh,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(color: colorScheme.outlineVariant),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(12),
                 child: Column(
@@ -45,13 +47,13 @@ class LocationUpdateReminderCard extends StatelessWidget {
                         DecoratedBox(
                           decoration: ShapeDecoration(
                             shape: const CircleBorder(),
-                            color: colorScheme.tertiary,
+                            color: colorScheme.primary,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8),
                             child: Icon(
                               Symbols.wrong_location,
-                              color: colorScheme.onTertiary,
+                              color: colorScheme.onPrimary,
                             ),
                           ),
                         ),
@@ -61,33 +63,21 @@ class LocationUpdateReminderCard extends StatelessWidget {
                             spacing: 2,
                             children: [
                               Text(
-                                'هل انتقل المنزل؟',
+                                'هل تم نقل المنزل؟',
                                 style: textTheme.titleSmall?.copyWith(
-                                  color: colorScheme.onTertiaryContainer,
+                                  color: colorScheme.onSurface,
                                 ),
                               ),
                               Text(
                                 'تغيّر العنوان لكن الموقع على الخريطة ما زال '
                                 'على المكان القديم',
                                 style: textTheme.bodyMedium?.copyWith(
-                                  color: colorScheme.onTertiaryContainer,
+                                  color: colorScheme.onSurface,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                    Wrap(
-                      spacing: 6,
-                      runSpacing: 6,
-                      children: [
-                        for (final part in changedPlaceParts)
-                          Chip(
-                            avatar: const Icon(Symbols.edit, size: 16),
-                            label: Text(part.label),
-                            visualDensity: VisualDensity.compact,
-                          ),
                       ],
                     ),
                     Row(
@@ -98,7 +88,7 @@ class LocationUpdateReminderCard extends StatelessWidget {
                           key: LocationUpdateReminderCardKeys.keepLocation,
                           onPressed: onKeepLocation,
                           style: TextButton.styleFrom(
-                            foregroundColor: colorScheme.onTertiaryContainer,
+                            foregroundColor: colorScheme.onSurface,
                           ),
                           child: const Text('الموقع صحيح'),
                         ),
@@ -113,7 +103,8 @@ class LocationUpdateReminderCard extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
+            )
+          : const SizedBox.shrink(),
     );
   }
 }

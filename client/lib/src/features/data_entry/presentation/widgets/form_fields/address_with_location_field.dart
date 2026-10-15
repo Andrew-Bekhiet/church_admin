@@ -112,9 +112,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
           ValueListenableBuilder(
             valueListenable: _previewedAddress,
             builder: (context, address, _) => LocationUpdateReminderCard(
-              changedPlaceParts: _placePartsChangedSinceLocationWasChecked(
-                address,
-              ),
+              isShown: _hasPlaceChangedSinceLocationWasChecked(address),
               onUpdateLocation: _pickLocationAndSuggestAddress,
               onKeepLocation: () =>
                   setState(() => _locationConfirmedFor = address),
@@ -324,19 +322,17 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     widget.onAddressChanged(_address);
   }
 
-  Set<AddressPlacePart> _placePartsChangedSinceLocationWasChecked(
-    Address address,
-  ) {
+  bool _hasPlaceChangedSinceLocationWasChecked(Address address) {
     if (widget.initialAddress case final initialAddress?
         when initialAddress.geolocation != null &&
             address.geolocation == initialAddress.geolocation) {
-      return AddressPlacePart.changedBetween(
+      return AddressPlacePart.anyChangedBetween(
         _locationConfirmedFor ?? initialAddress,
         address,
       );
     }
 
-    return const {};
+    return false;
   }
 
   bool _mustNameAreaAndStreetOf(Address address) {

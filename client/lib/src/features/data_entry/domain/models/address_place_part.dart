@@ -1,24 +1,14 @@
 import 'package:church_admin/church_admin.dart';
 
-enum AddressPlacePart implements LabeledEnum {
-  district('الحي'),
-  area('المنطقة'),
-  street('الشارع'),
-  substreet('الشارع الفرعي'),
-  houseCode('رقم العمارة');
+enum AddressPlacePart {
+  district,
+  area,
+  street,
+  substreet,
+  houseCode;
 
-  static Set<AddressPlacePart> changedBetween(
-    Address previous,
-    Address current,
-  ) => {
-    for (final part in values)
-      if (part._valueIn(previous) != part._valueIn(current)) part,
-  };
-
-  @override
-  final String label;
-
-  const AddressPlacePart(this.label);
+  static bool anyChangedBetween(Address previous, Address current) =>
+      values.any((part) => part._valueIn(previous) != part._valueIn(current));
 
   Object? _valueIn(Address address) => switch (this) {
     district => address.district?.id,
