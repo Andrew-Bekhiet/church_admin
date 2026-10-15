@@ -18,6 +18,7 @@ dependency_overrides:
   objective_c: 9.3.0
 
 dependencies:
+  advanced_forms: ^0.2.3
   align_positioned: ^5.0.1
   android_alarm_manager_plus: ^5.0.0
   async: ^2.9.0
