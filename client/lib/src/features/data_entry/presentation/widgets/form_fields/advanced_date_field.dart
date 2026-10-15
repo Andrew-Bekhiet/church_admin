@@ -60,6 +60,8 @@ class AdvancedDateField<E extends Object> extends StatelessWidget {
       lastDate: DateTime.now(),
     );
 
-    if (picked != null) field.setValue(picked);
+    if (picked == null || field.isDisposed) return;
+
+    field.setValue(picked);
   }
 }
