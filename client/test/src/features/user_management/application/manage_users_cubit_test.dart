@@ -133,10 +133,10 @@ void main() {
       verify: (cubit) {
         expect(cubit.state.view, ManageUsersView.grouped);
         expect(cubit.state.groups, [
-          areaGroup(area, ['مينا']),
           serviceGroup(service, [
             allStudyYears(['مريم', 'مينا']),
           ]),
+          areaGroup(area, ['مينا']),
         ]);
       },
     );
@@ -245,10 +245,10 @@ void main() {
       verify: (cubit) {
         expect(cubit.state.isLoading, isFalse);
         expect(cubit.state.groups, [
-          areaGroup(area, ['بيتر']),
           serviceGroup(service, [
             allStudyYears(['مريم', 'مينا']),
           ]),
+          areaGroup(area, ['بيتر']),
           unscoped(['ماري', 'يوسف']),
         ]);
       },
