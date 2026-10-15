@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 
 class PersonEditChurchAndSpiritualSection extends StatelessWidget {
   static const double personStateColorSwatchSize = 50;
+  static const ShapeBorder personStateColorSwatchShape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+  );
 
   final PersonChurchAndSpiritualFormController form;
   final AdvancedFieldController<bool, PersonEditError> gender;
@@ -99,9 +102,7 @@ class PersonEditChurchAndSpiritualSection extends StatelessWidget {
                   final color? => DecoratedBox(
                     decoration: ShapeDecoration(
                       color: color,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
+                      shape: personStateColorSwatchShape,
                     ),
                     child: const SizedBox.square(
                       dimension: personStateColorSwatchSize,

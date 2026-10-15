@@ -29,13 +29,16 @@ class PersonPastoralDatesFormController extends AdvancedFormController
 
   @override
   Person editedVersionOf(Person person) => person.copyWith(
-    lastKodas: _recorded(lastKodas, _person.lastKodas),
-    lastConfession: _recorded(lastConfession, _person.lastConfession),
-    lastVisit: _recorded(lastVisit, _person.lastVisit),
-    lastCall: _recorded(lastCall, _person.lastCall),
+    lastKodas: _withRecorderIfDateChanged(lastKodas, _person.lastKodas),
+    lastConfession: _withRecorderIfDateChanged(
+      lastConfession,
+      _person.lastConfession,
+    ),
+    lastVisit: _withRecorderIfDateChanged(lastVisit, _person.lastVisit),
+    lastCall: _withRecorderIfDateChanged(lastCall, _person.lastCall),
   );
 
-  LastRecordedByInfo? _recorded(
+  LastRecordedByInfo? _withRecorderIfDateChanged(
     AdvancedFieldController<DateTime?, PersonEditError> field,
     LastRecordedByInfo? original,
   ) => switch (field.fieldValue) {

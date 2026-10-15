@@ -72,7 +72,7 @@ class PersonMembershipsFormController extends AdvancedFormController
 
     if (!value.wasModified) {
       memberships.prefill(_savedMemberships);
-      registerFields(value.fields);
+      _adoptLoadedMembershipsAsBaseline();
     }
 
     _loadState.value = MembershipsLoaded(classes: _loadedPerson.classes);
@@ -100,6 +100,8 @@ class PersonMembershipsFormController extends AdvancedFormController
     _loadState.dispose();
     super.dispose();
   }
+
+  void _adoptLoadedMembershipsAsBaseline() => registerFields(value.fields);
 
   PersonEditError? _removesNothingTheUserCannotEdit(
     PersonMemberships selection,

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class EditPersonScrollView extends StatelessWidget {
+  static const double floatingActionButtonClearance = 120;
+
   final PersonFormController form;
   final VoidCallback onImportFromContacts;
   final Future<Point?> Function(BuildContext) onChooseLocationOnMap;
@@ -33,17 +35,20 @@ class EditPersonScrollView extends StatelessWidget {
               ),
           ],
           flexibleSpace: ListenableBuilder(
-            listenable: form.identity.name,
+            listenable: Listenable.merge([
+              form.identity.name,
+              form.hobbiesTagsAndNotes.color,
+            ]),
             builder: (context, _) => AdvancedPhotoField<PersonEditError>(
               field: form.photo,
-              object: form.toPerson(),
+              object: form.personForPhotoPreview,
               canDelete: !form.isCreate,
               circleCrop: true,
             ),
           ),
         ),
         SliverPadding(
-          padding: const EdgeInsets.only(bottom: 120),
+          padding: const EdgeInsets.only(bottom: floatingActionButtonClearance),
           sliver: SliverToBoxAdapter(
             child: FocusScope(
               child: Padding(

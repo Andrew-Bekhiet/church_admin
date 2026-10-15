@@ -20,17 +20,22 @@ class PersonRuleViolationMessages extends StatelessWidget {
 
     return ValueListenableBuilder<Set<PersonRuleViolation>>(
       valueListenable: violations,
-      builder: (context, shown, _) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 8,
-        children: [
-          for (final violation in shown.where((v) => v.section == section))
-            Padding(
-              padding: const EdgeInsetsDirectional.only(top: 8),
-              child: Text(violation.message, style: errorStyle),
-            ),
-        ],
-      ),
+      builder: (context, shown, _) {
+        final messages = shown.where((v) => v.section == section);
+        if (messages.isEmpty) return const SizedBox.shrink();
+
+        return Padding(
+          padding: const EdgeInsetsDirectional.symmetric(vertical: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 8,
+            children: [
+              for (final violation in messages)
+                Text(violation.message, style: errorStyle),
+            ],
+          ),
+        );
+      },
     );
   }
 }
