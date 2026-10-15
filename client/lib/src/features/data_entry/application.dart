@@ -11,6 +11,7 @@ export 'application/image_url_cache_service.dart';
 export 'application/location_parsing_service.dart';
 export 'application/person_edit/functions_person_photo_uploader.dart';
 export 'application/person_edit/person_church_and_spiritual_form_controller.dart';
+export 'application/person_edit/person_form_controller.dart';
 export 'application/person_edit/person_form_section.dart';
 export 'application/person_edit/person_form_values.dart';
 export 'application/person_edit/person_hobbies_tags_and_notes_form_controller.dart';
