@@ -81,7 +81,7 @@ void main() {
   group('PersonEditIntent decoding', () {
     test('a known kind without a subject is rejected as a format error', () {
       expect(
-        () => PersonEditIntent.fromJson({'kind': UpdatePerson.kind}),
+        () => PersonEditIntent.fromJson(const {'kind': UpdatePerson.kind}),
         throwsFormatException,
       );
     });
