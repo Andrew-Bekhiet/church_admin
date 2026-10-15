@@ -6,7 +6,7 @@ export 'navigation/edit_family_route.dart'
 export 'navigation/edit_group_route.dart'
     show $editGroupRoute, EditGroupExtra, EditGroupRoute;
 export 'navigation/edit_person_route.dart'
-    show $editPersonRoute, EditPersonExtra, EditPersonRoute;
+    show $editPersonRoute, EditPersonRoute;
 export 'navigation/edit_service_route.dart'
     show $editServiceRoute, EditServiceRoute;
 export 'navigation/edit_store_route.dart'

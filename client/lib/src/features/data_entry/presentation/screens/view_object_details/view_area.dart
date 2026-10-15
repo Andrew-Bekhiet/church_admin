@@ -269,7 +269,7 @@ class _ViewAreaState extends State<ViewArea> {
               } else if (newIndex == 2) {
                 unawaited(
                   EditPersonRoute(
-                    $extra: EditPersonExtra(area: area),
+                    $extra: CreatePersonInArea(area: area),
                   ).push(context),
                 );
               } else if (newIndex == 3) {
@@ -282,17 +282,6 @@ class _ViewAreaState extends State<ViewArea> {
             },
           ),
     );
-  }
-
-  @override
-  void dispose() {
-    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
-    _streetsArrangement.dispose();
-    _familiesArrangement.dispose();
-    _personsArrangement.dispose();
-    _storesArrangement.dispose();
-
-    super.dispose();
   }
 
   Future<void> _showArrangementSheet(int currentTabIndex) async {
@@ -314,5 +303,16 @@ class _ViewAreaState extends State<ViewArea> {
     _controllersToDispose.add(controller);
 
     return controller;
+  }
+
+  @override
+  void dispose() {
+    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
+    _streetsArrangement.dispose();
+    _familiesArrangement.dispose();
+    _personsArrangement.dispose();
+    _storesArrangement.dispose();
+
+    super.dispose();
   }
 }

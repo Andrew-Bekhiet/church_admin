@@ -120,15 +120,15 @@ class _ViewClassState extends State<ViewClass> {
       floatingActionButtonBuilder: (context, tabController, class$) =>
           FloatingActionButton(
             onPressed: () => EditPersonRoute(
-              $extra: EditPersonExtra(
-                service: class$.service,
-                studyYear: class$.studyYear,
-                gender: class$.serviceGender,
-              ),
+              $extra: CreatePersonInClass(class$: class$),
             ).push(context),
             child: const Icon(Symbols.person_add),
           ),
     );
+  }
+
+  Future<void> _showArrangementSheet() async {
+    await _personsArrangement.edit(context);
   }
 
   @override
@@ -137,9 +137,5 @@ class _ViewClassState extends State<ViewClass> {
     _personsArrangement.dispose();
 
     super.dispose();
-  }
-
-  Future<void> _showArrangementSheet() async {
-    await _personsArrangement.edit(context);
   }
 }

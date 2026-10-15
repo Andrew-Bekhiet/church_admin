@@ -269,23 +269,13 @@ class _ViewServiceState extends State<ViewService> {
               } else if (newIndex == 2) {
                 unawaited(
                   EditPersonRoute(
-                    $extra: EditPersonExtra(service: service),
+                    $extra: CreatePersonInService(service: service),
                   ).push(context),
                 );
               }
             },
           ),
     );
-  }
-
-  @override
-  void dispose() {
-    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
-    _classesArrangement.dispose();
-    _groupsArrangement.dispose();
-    _personsArrangement.dispose();
-
-    super.dispose();
   }
 
   int getNewIndex(double offset, int currentIndex) {
@@ -312,5 +302,15 @@ class _ViewServiceState extends State<ViewService> {
     _controllersToDispose.add(controller);
 
     return controller;
+  }
+
+  @override
+  void dispose() {
+    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
+    _classesArrangement.dispose();
+    _groupsArrangement.dispose();
+    _personsArrangement.dispose();
+
+    super.dispose();
   }
 }
