@@ -41,6 +41,18 @@ void main() {
 
   tearDown(defaultTearDown);
 
+  testWidgets('the save button stays disabled while memberships load', (
+    tester,
+  ) async {
+    await openBeforeLoad(tester);
+
+    final saveButton = tester.widget<FloatingActionButton>(
+      find.byKey(EditPersonSaveButtonKeys.saveButton),
+    );
+
+    expect(saveButton.onPressed, isNull);
+  });
+
   testWidgets('a number changed before loading finishes is saved', (
     tester,
   ) async {

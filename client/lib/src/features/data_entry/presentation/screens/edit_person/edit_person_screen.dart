@@ -246,6 +246,8 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
         );
 
       case InvalidPerson() ||
+          MembershipsNotLoadedYet() ||
+          MembershipsFailedToLoad() ||
           SaveAlreadyInProgress() ||
           SaveAbandonedBecauseFormWasDisposed():
         return;

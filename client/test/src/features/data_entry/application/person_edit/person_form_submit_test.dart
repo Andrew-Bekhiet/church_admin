@@ -58,6 +58,32 @@ void main() {
       expect(fixture.persons.createdPeople, isEmpty);
     });
 
+    test('an update waits for the saved memberships to load', () async {
+      final controller = fixture.controllerOfUpdate(storedPerson);
+      controller.identity.name.setValue('مينا جرجس');
+
+      final outcome = await controller.submit();
+
+      expect(outcome, isA<MembershipsNotLoadedYet>());
+      expect(fixture.persons.updatedPeople, isEmpty);
+    });
+
+    test(
+      'an update is refused when the saved memberships failed to load',
+      () async {
+        final controller = fixture.controllerOfUpdate(storedPerson);
+        fixture.persons.savedMembershipsResponse.completeError(
+          Exception('offline'),
+        );
+        await pumpEventQueue();
+
+        final outcome = await controller.submit();
+
+        expect(outcome, isA<MembershipsFailedToLoad>());
+        expect(fixture.persons.updatedPeople, isEmpty);
+      },
+    );
+
     test('a new person is created', () async {
       final controller = await validNewPerson();
 
