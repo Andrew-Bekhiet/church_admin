@@ -1,8 +1,15 @@
 import 'package:church_admin/church_admin.dart';
 
-part 'address_suggested.dart';
-part 'no_address_suggestion.dart';
-
 sealed class AddressSuggestion {
   const AddressSuggestion();
+}
+
+final class AddressSuggested extends AddressSuggestion {
+  final Address address;
+
+  const AddressSuggested(this.address);
+}
+
+final class NoAddressSuggestion extends AddressSuggestion {
+  const NoAddressSuggestion();
 }
