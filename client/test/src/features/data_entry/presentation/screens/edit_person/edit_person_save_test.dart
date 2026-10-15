@@ -84,7 +84,7 @@ void main() {
     expect(
       tester
           .widget<FloatingActionButton>(
-            find.byKey(EditPersonScreenKeys.saveButton),
+            find.byKey(EditPersonSaveButtonKeys.saveButton),
           )
           .onPressed,
       isNull,
@@ -104,7 +104,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(CAErrorDialog), findsOneWidget);
-    expect(find.byKey(EditPersonScreenKeys.saveButton), findsOneWidget);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
   });
 
   testWidgets('a failed save is reported with the person that was sent', (

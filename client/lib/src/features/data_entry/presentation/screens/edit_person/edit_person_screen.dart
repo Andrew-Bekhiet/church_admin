@@ -89,109 +89,21 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
                 canPop: false,
                 onPopInvokedWithResult: _confirmExit,
                 child: Scaffold(
-                  body: CustomScrollView(
-                    slivers: [
-                      SliverAppBar(
-                        stretch: true,
-                        pinned: true,
-                        expandedHeight: MediaQuery.sizeOf(context).width,
-                        actions: [
-                          if (intent case UpdatePerson(
-                            :final person,
-                          ) when person.user?.email == null)
-                            IconButton(
-                              onPressed: _delete,
-                              icon: const Icon(Symbols.delete),
-                              tooltip: 'حذف',
-                            ),
-                        ],
-                        flexibleSpace: ListenableBuilder(
-                          listenable: _form.identity.name,
-                          builder: (context, _) =>
-                              AdvancedPhotoField<PersonEditError>(
-                                field: _form.photo,
-                                object: _form.toPerson(),
-                                canDelete: !_form.isCreate,
-                                circleCrop: true,
-                              ),
-                        ),
-                      ),
-                      SliverPadding(
-                        padding: const EdgeInsets.only(bottom: 120),
-                        sliver: SliverToBoxAdapter(
-                          child: FocusScope(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  PersonEditIdentitySection(
-                                    form: _form.identity,
-                                    onImportFromContacts: _importFromContacts,
-                                  ),
-                                  PersonEditHouseholdSection(
-                                    form: _form.household,
-                                    violations: _form.shownViolations,
-                                    onChooseLocationOnMap: _chooseLocationOnMap,
-                                  ),
-                                  const Divider(),
-                                  PersonEditMembershipsSection(
-                                    form: _form.memberships,
-                                    violations: _form.shownViolations,
-                                  ),
-                                  PersonEditWorkSection(form: _form.work),
-                                  const Divider(),
-                                  PersonEditMaritalStatusAndTypeSection(
-                                    form: _form.maritalStatusAndType,
-                                  ),
-                                  const Divider(),
-                                  PersonEditChurchAndSpiritualSection(
-                                    form: _form.churchAndSpiritual,
-                                    gender: _form.maritalStatusAndType.gender,
-                                  ),
-                                  const Divider(),
-                                  PersonEditHobbiesTagsAndNotesSection(
-                                    form: _form.hobbiesTagsAndNotes,
-                                  ),
-                                  PersonEditPastoralDatesSection(
-                                    form: _form.pastoralDates,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  body: EditPersonScrollView(
+                    form: _form,
+                    onImportFromContacts: _importFromContacts,
+                    onChooseLocationOnMap: _chooseLocationOnMap,
+                    onDelete: switch (intent) {
+                      UpdatePerson(:final person)
+                          when person.user?.email == null =>
+                        _delete,
+                      _ => null,
+                    },
                   ),
-                  floatingActionButton:
-                      ValueListenableBuilder<PersonSaveProgress>(
-                        valueListenable: _form.saveProgress,
-                        builder: (context, progress, _) =>
-                            FloatingActionButton.extended(
-                              key: EditPersonScreenKeys.saveButton,
-                              label: const Text('حفظ'),
-                              icon: switch (progress) {
-                                NotSaving() => const Icon(Icons.save),
-                                SavingPerson() ||
-                                UploadingPhoto() => SizedBox.square(
-                                  dimension: 18,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    color: ColorScheme.of(
-                                      context,
-                                    ).onPrimaryContainer,
-                                  ),
-                                ),
-                              },
-                              onPressed: switch (progress) {
-                                NotSaving() => _save,
-                                SavingPerson() || UploadingPhoto() => null,
-                              },
-                            ),
-                      ),
+                  floatingActionButton: EditPersonSaveButton(
+                    progress: _form.saveProgress,
+                    onPressed: _save,
+                  ),
                 ),
               ),
             ),
@@ -240,24 +152,8 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
         _progressSnackBar ??= ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             duration: const Duration(minutes: 30),
-            content: ValueListenableBuilder<PersonSaveProgress>(
-              valueListenable: _form.saveProgress,
-              builder: (context, progress, _) => Row(
-                children: [
-                  Expanded(
-                    child: Text(switch (progress) {
-                      UploadingPhoto() => 'جار رفع الصورة ...',
-                      NotSaving() || SavingPerson() => 'جار الحفظ ...',
-                    }),
-                  ),
-                  CircularProgressIndicator(
-                    value: switch (progress) {
-                      UploadingPhoto(:final progress) => progress,
-                      NotSaving() || SavingPerson() => null,
-                    },
-                  ),
-                ],
-              ),
+            content: EditPersonSaveProgressMessage(
+              progress: _form.saveProgress,
             ),
           ),
         );
@@ -447,8 +343,4 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
     navigator.pop();
     WidgetsBinding.instance.addPostFrameCallback((_) => navigator.pop());
   }
-}
-
-abstract final class EditPersonScreenKeys {
-  static const Key saveButton = ValueKey('Edit Person Save Button Key');
 }

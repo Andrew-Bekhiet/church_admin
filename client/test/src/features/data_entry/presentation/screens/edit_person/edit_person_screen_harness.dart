@@ -226,7 +226,7 @@ class EditPersonScreenHarness {
   }
 
   Future<void> tapSave(WidgetTester tester) async {
-    await tester.tap(find.byKey(EditPersonScreenKeys.saveButton));
+    await tester.tap(find.byKey(EditPersonSaveButtonKeys.saveButton));
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
   }

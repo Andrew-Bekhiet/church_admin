@@ -47,7 +47,7 @@ void main() {
       UpdatePerson(person: boy.copyWith(gender: false)),
     );
 
-    expect(find.byKey(EditPersonScreenKeys.saveButton), findsOneWidget);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
     expect(find.text('شماس؟'), findsNothing);
   });
 

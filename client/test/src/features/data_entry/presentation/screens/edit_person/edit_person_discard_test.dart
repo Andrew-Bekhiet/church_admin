@@ -46,7 +46,7 @@ void main() {
     await tester.tap(find.text('تجاهل'));
     await tester.pumpAndSettle();
 
-    expect(find.byKey(EditPersonScreenKeys.saveButton), findsNothing);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsNothing);
     expect(find.text('open'), findsOneWidget);
   });
 

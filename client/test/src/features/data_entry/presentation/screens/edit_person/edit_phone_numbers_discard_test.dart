@@ -152,7 +152,7 @@ void main() {
   testWidgets('leaving without changing anything does not ask', (tester) async {
     await openPerson(tester);
 
-    expect(find.byKey(EditPersonScreenKeys.saveButton), findsOneWidget);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
     await harness.pressBack(tester);
 
     expect(find.text(discardDialogTitle), findsNothing);

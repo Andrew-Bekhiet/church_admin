@@ -30,7 +30,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(harness.persons.deletedPersonIds, [person.id]);
-    expect(find.byKey(EditPersonScreenKeys.saveButton), findsNothing);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsNothing);
     expect(find.text('open'), findsOneWidget);
   });
 
@@ -43,7 +43,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(harness.persons.deletedPersonIds, isEmpty);
-    expect(find.byKey(EditPersonScreenKeys.saveButton), findsOneWidget);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
   });
 
   testWidgets('a person with an account cannot be deleted', (tester) async {
@@ -52,7 +52,7 @@ void main() {
     );
     await harness.open(tester, UpdatePerson(person: withAccount));
 
-    expect(find.byKey(EditPersonScreenKeys.saveButton), findsOneWidget);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
     expect(find.byTooltip('حذف'), findsNothing);
   });
 
@@ -61,7 +61,7 @@ void main() {
   ) async {
     await harness.open(tester, const CreateBlankPerson());
 
-    expect(find.byKey(EditPersonScreenKeys.saveButton), findsOneWidget);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
     expect(find.byTooltip('حذف'), findsNothing);
   });
 }

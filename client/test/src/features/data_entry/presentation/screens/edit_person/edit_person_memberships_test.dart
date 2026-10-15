@@ -63,7 +63,7 @@ void main() {
     harness.persons.respondWithSavedMemberships(null);
     await tester.pumpAndSettle();
 
-    expect(find.byKey(EditPersonScreenKeys.saveButton), findsOneWidget);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
     expect(find.byType(CircularProgressIndicator), findsNothing);
   });
 

@@ -46,7 +46,7 @@ void main() {
   ) async {
     await openRoute(tester);
 
-    expect(find.byKey(EditPersonScreenKeys.saveButton), findsOneWidget);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
     expect(find.byTooltip('حذف'), findsNothing);
   });
 
@@ -57,7 +57,7 @@ void main() {
 
     await openRoute(tester, intent: UpdatePerson(person: person));
 
-    expect(find.byKey(EditPersonScreenKeys.saveButton), findsOneWidget);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
     expect(find.byTooltip('حذف'), findsOneWidget);
   });
 }

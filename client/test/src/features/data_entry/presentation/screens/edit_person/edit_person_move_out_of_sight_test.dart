@@ -70,7 +70,7 @@ void main() {
       await tester.tap(confirmationButton('إلغاء'));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(EditPersonScreenKeys.saveButton), findsOneWidget);
+      expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
       expect(harness.persons.updatedPeople, isEmpty);
     },
   );
@@ -84,7 +84,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(harness.persons.updatedPeople.single.gender, isFalse);
-    expect(find.byKey(EditPersonScreenKeys.saveButton), findsNothing);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsNothing);
     expect(find.text('open'), findsOneWidget);
   });
 
