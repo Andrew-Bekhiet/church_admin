@@ -27,13 +27,18 @@ void main() {
 
   Finder reminder() => find.byKey(LocationUpdateReminderCardKeys.card);
 
-  Future<void> pumpField(WidgetTester tester, Address initialAddress) async {
+  Future<void> pumpField(
+    WidgetTester tester,
+    Address initialAddress, {
+    bool enabled = true,
+  }) async {
     await tester.pumpWidget(
       materialAppWithThemeAndLocale()(
         Scaffold(
           body: SingleChildScrollView(
             child: AddressWithLocationField(
               initialAddress: initialAddress,
+              enabled: enabled,
               onAddressChanged: reportedAddresses.add,
               onEditLocation: (_) async => newHouseLocation,
             ),
@@ -144,6 +149,17 @@ void main() {
     await pumpField(tester, const Address(houseCode: '12'));
 
     await typeHouseNumber(tester, '14');
+
+    expect(reminder(), findsNothing);
+  });
+
+  testWidgets('a disabled address field shows no reminder for a changed '
+      'place', (tester) async {
+    await pumpField(tester, locatedAddress);
+    await typeHouseNumber(tester, '14');
+
+    await pumpField(tester, locatedAddress, enabled: false);
+    await tester.pumpAndSettle();
 
     expect(reminder(), findsNothing);
   });
