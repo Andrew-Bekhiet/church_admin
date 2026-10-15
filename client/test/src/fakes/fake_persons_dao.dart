@@ -11,6 +11,7 @@ class FakePersonsDAO extends Fake implements PersonsDAO {
   late final Completer<Person?> savedMembershipsResponse = Completer<Person?>();
   Completer<void>? saveGate;
   Object? saveError;
+  Object? deleteError;
 
   void respondWithSavedMemberships(Person? saved) =>
       savedMembershipsResponse.complete(saved);
@@ -42,6 +43,7 @@ class FakePersonsDAO extends Fake implements PersonsDAO {
 
   @override
   Future<Person?> deleteById({required String id}) async {
+    if (deleteError case final error?) throw error;
     deletedPersonIds.add(id);
 
     return null;

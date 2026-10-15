@@ -34,6 +34,21 @@ void main() {
     expect(find.text('open'), findsOneWidget);
   });
 
+  testWidgets('a failed deletion shows the error and keeps the screen', (
+    tester,
+  ) async {
+    harness.persons.deleteError = Exception('connection lost');
+    await harness.open(tester, UpdatePerson(person: person));
+
+    await tester.tap(find.byTooltip('حذف'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('نعم'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(CAErrorDialog), findsOneWidget);
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
+  });
+
   testWidgets('declining the deletion keeps the person', (tester) async {
     await harness.open(tester, UpdatePerson(person: person));
 
