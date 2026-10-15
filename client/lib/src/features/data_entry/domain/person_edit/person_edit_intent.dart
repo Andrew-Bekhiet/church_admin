@@ -191,18 +191,18 @@ final class UpdatePerson extends PersonEditIntent {
   final Person person;
 
   Person get personWithRelationIds => person.copyWith(
-    familyId: person.family?.id,
-    churchId: person.church?.id,
-    collegeId: person.college?.id,
-    fatherId: person.father?.id,
-    jobId: person.job?.id,
-    personTypeId: person.personType?.id,
-    qualificationId: person.qualification?.id,
-    schoolId: person.school?.id,
-    shammasLevelId: person.shammasLevel?.id,
-    stateId: person.state?.id,
-    storeId: person.store?.id,
-    studyYearId: person.studyYear?.order,
+    familyId: person.family?.id ?? person.familyId,
+    churchId: person.church?.id ?? person.churchId,
+    collegeId: person.college?.id ?? person.collegeId,
+    fatherId: person.father?.id ?? person.fatherId,
+    jobId: person.job?.id ?? person.jobId,
+    personTypeId: person.personType?.id ?? person.personTypeId,
+    qualificationId: person.qualification?.id ?? person.qualificationId,
+    schoolId: person.school?.id ?? person.schoolId,
+    shammasLevelId: person.shammasLevel?.id ?? person.shammasLevelId,
+    stateId: person.state?.id ?? person.stateId,
+    storeId: person.store?.id ?? person.storeId,
+    studyYearId: person.studyYear?.order ?? person.studyYearId,
   );
 
   const UpdatePerson({required this.person});
