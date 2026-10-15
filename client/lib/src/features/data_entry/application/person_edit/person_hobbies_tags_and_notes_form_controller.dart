@@ -1,6 +1,5 @@
 import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/painting.dart';
 
 class PersonHobbiesTagsAndNotesFormController extends AdvancedFormController
     implements PersonFormSection {
@@ -15,13 +14,10 @@ class PersonHobbiesTagsAndNotesFormController extends AdvancedFormController
   late final notes = AdvancedTextFieldController<PersonEditError>(
     initialValue: _person.notes ?? '',
   );
-  late final color = AdvancedFieldController<Color?, PersonEditError>(
-    initialValue: _person.color,
-  );
 
   PersonHobbiesTagsAndNotesFormController({required this._person})
     : super(debugName: 'hobbiesTagsAndNotes') {
-    registerFields([hobbies, tags, notes, color]);
+    registerFields([hobbies, tags, notes]);
   }
 
   @override
@@ -29,6 +25,5 @@ class PersonHobbiesTagsAndNotesFormController extends AdvancedFormController
     hobbies: PersonFormValues.listOf(_person.hobbies, hobbies.fieldValue),
     tags: PersonFormValues.listOf(_person.tags, tags.fieldValue),
     notes: PersonFormValues.optionalText(_person.notes, notes.fieldValue),
-    color: color.fieldValue,
   );
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/painting.dart' show Color;
 import 'package:uuid/uuid.dart' show Uuid;
 
 class PersonFormController extends AdvancedFormController {
@@ -30,6 +31,9 @@ class PersonFormController extends AdvancedFormController {
   late final photo = AdvancedFieldController<PhotoChange, PersonEditError>(
     initialValue: const KeepPhoto(),
   );
+  late final color = AdvancedFieldController<Color?, PersonEditError>(
+    initialValue: _startingPerson.color,
+  );
   late final identity = PersonIdentityFormController(person: _startingPerson);
   late final PersonHouseholdFormController household;
   late final PersonMembershipsFormController memberships;
@@ -55,7 +59,7 @@ class PersonFormController extends AdvancedFormController {
   Person? get savedPerson => isCreate ? null : memberships.loadedPerson;
 
   Person get personForPhotoPreview => identity.editedVersionOf(
-    hobbiesTagsAndNotes.editedVersionOf(_startingPerson),
+    _startingPerson.copyWith(color: color.fieldValue),
   );
 
   Set<PersonRuleViolation> get ruleViolations => {
@@ -133,7 +137,7 @@ class PersonFormController extends AdvancedFormController {
       currentUser: _currentUser,
     );
 
-    registerFields([photo]);
+    registerFields([photo, color]);
     addSubform(identity);
     addSubform(household);
     addSubform(memberships);
@@ -176,6 +180,7 @@ class PersonFormController extends AdvancedFormController {
         _startingPerson.copyWith(
           contacts: _ownContacts,
           familyContacts: _familyContacts,
+          color: color.fieldValue,
         ),
         (person, section) => section.editedVersionOf(person),
       );

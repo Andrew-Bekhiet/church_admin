@@ -81,7 +81,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
         ),
         child:
             ValueListenableBuilder<AdvancedFieldState<Color?, PersonEditError>>(
-              valueListenable: _form.hobbiesTagsAndNotes.color,
+              valueListenable: _form.color,
               builder: (context, color, child) => Theme(
                 data: ThemingService.getDefault(seedOverride: color.value),
                 child: child!,

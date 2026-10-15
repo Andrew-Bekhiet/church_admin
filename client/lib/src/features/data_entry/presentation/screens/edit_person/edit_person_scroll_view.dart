@@ -39,7 +39,7 @@ class EditPersonScrollView extends StatelessWidget {
           flexibleSpace: ListenableBuilder(
             listenable: Listenable.merge([
               form.identity.name,
-              form.hobbiesTagsAndNotes.color,
+              form.color,
             ]),
             builder: (context, _) => AdvancedPhotoField<PersonEditError>(
               field: form.photo,
@@ -87,6 +87,7 @@ class EditPersonScrollView extends StatelessWidget {
                     const Divider(),
                     PersonEditHobbiesTagsAndNotesSection(
                       form: form.hobbiesTagsAndNotes,
+                      color: form.color,
                       metadata: metadata,
                     ),
                     PersonEditPastoralDatesSection(form: form.pastoralDates),

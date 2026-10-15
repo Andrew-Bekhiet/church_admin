@@ -1,12 +1,15 @@
+import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class PersonEditHobbiesTagsAndNotesSection extends StatelessWidget {
   final PersonHobbiesTagsAndNotesFormController form;
+  final AdvancedFieldController<Color?, PersonEditError> color;
   final PersonMetadataCatalog metadata;
 
   const PersonEditHobbiesTagsAndNotesSection({
     required this.form,
+    required this.color,
     required this.metadata,
     super.key,
   });
@@ -48,7 +51,7 @@ class PersonEditHobbiesTagsAndNotesSection extends StatelessWidget {
           ),
         ),
         AdvancedColorField<PersonEditError>(
-          field: form.color,
+          field: color,
           translateError: PersonEditError.messageOf,
         ),
       ],
