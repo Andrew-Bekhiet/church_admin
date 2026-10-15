@@ -245,6 +245,16 @@ void main() {
 
       expect(controller.toAddress().area, stMinaArea);
     });
+
+    test('keeps the suggestion offered while the form is read-only', () async {
+      fixture.areas.areasAtPoint[pickedLocation] = stMarkArea;
+      final controller = await controllerThatPickedLocation();
+      controller.markReadOnly();
+
+      controller.useSuggestedAddress();
+
+      expect(suggestedAddressOf(controller)?.area, stMarkArea);
+    });
   });
 
   test('loading a new baseline drops the offered suggestion', () async {
