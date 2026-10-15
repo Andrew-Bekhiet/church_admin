@@ -77,7 +77,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 - **`dispose()` returns `void`.** `Future<void> dispose() async` compiles and the analyzer accepts it, because any type is assignable to `void` in an override. It is still wrong: awaiting before `super.dispose()` defers the super call past the frame in which the framework treats the state as disposed. Close sinks with `unawaited(x.close())` and keep `dispose` synchronous.
 - **`close_sinks` does not catch a missing `dispose()`,** only an incomplete one. A `BehaviorSubject` field on a `State` with no `dispose` at all is invisible to it, so check by hand.
 - **Handle errors thoroughly** with typed Dart exceptions, and carry user-facing messages as error codes so they can be localised later.
-- **Presentation talks only to blocs/cubits, never to repositories or data sources.**
+- **Presentation talks only to blocs/cubits and `application/` advanced_forms form controllers, never to repositories or data sources.**
 - **Keep the upstream message** when mapping a Firebase error to a typed exception. The code drives the UI's wording; the original message is what explains the real cause.
 
 #### Unenforced house style
