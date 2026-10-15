@@ -26,6 +26,7 @@ class AddressFormController extends AdvancedFormController {
   Address _baselineAddress;
   String? _lastTypedHouseCode;
   Timer? _houseNumberGeocodingDebounce;
+  int _baselineGeneration = 0;
 
   late final district = AdvancedFieldController<District?, AddressFieldError>(
     initialValue: _baselineAddress.district,
@@ -121,6 +122,7 @@ class AddressFormController extends AdvancedFormController {
 
   void loadAsNewBaseline(Address? address) {
     _houseNumberGeocodingDebounce?.cancel();
+    _baselineGeneration++;
     _baselineAddress = address ?? const Address();
     _lastTypedHouseCode = _baselineAddress.houseCode;
     _suggestion.value = const NoAddressSuggestion();
@@ -177,13 +179,19 @@ class AddressFormController extends AdvancedFormController {
     geolocation.setValue(newLocation);
     _suggestion.value = const NoAddressSuggestion();
 
+    final generationWhenLookupStarted = _baselineGeneration;
     final suggested = await _logFailureOf(
       'suggestFromLocation',
       () => _services.autofill.suggestFromLocation(newLocation),
     );
 
     final locationWasReplacedMeanwhile = geolocation.fieldValue != newLocation;
-    if (isDisposed || locationWasReplacedMeanwhile || suggested == null) return;
+    if (isDisposed ||
+        generationWhenLookupStarted != _baselineGeneration ||
+        locationWasReplacedMeanwhile ||
+        suggested == null) {
+      return;
+    }
 
     final hasAnythingToSuggest =
         suggested.area != null || suggested.toString().trim().isNotEmpty;
@@ -244,6 +252,7 @@ class AddressFormController extends AdvancedFormController {
 
   Future<void> _fillAreaOf(Street chosen) async {
     final areaWhenLookupStarted = area.fieldValue;
+    final generationWhenLookupStarted = _baselineGeneration;
     final areasOfStreet = await _logFailureOf(
       'lookupAreasOfStreet',
       () => _services.autofill.areasOf(chosen),
@@ -252,6 +261,7 @@ class AddressFormController extends AdvancedFormController {
     final streetWasReplacedMeanwhile = street.fieldValue != chosen;
     final areaWasChosenMeanwhile = area.fieldValue != areaWhenLookupStarted;
     if (isDisposed ||
+        generationWhenLookupStarted != _baselineGeneration ||
         streetWasReplacedMeanwhile ||
         areaWasChosenMeanwhile ||
         areasOfStreet == null) {
@@ -262,7 +272,11 @@ class AddressFormController extends AdvancedFormController {
       case [final onlyArea]:
         area.prefill(onlyArea);
       case [_, _, ...]:
-        await _fillAreaOfGeocodedHouse(areasOfStreet, areaWhenLookupStarted);
+        await _fillAreaOfGeocodedHouse(
+          areasOfStreet,
+          areaWhenLookupStarted,
+          generationWhenLookupStarted,
+        );
     }
   }
 
@@ -271,6 +285,7 @@ class AddressFormController extends AdvancedFormController {
     if (typedStreet == null) return;
 
     final areaWhenLookupStarted = area.fieldValue;
+    final generationWhenLookupStarted = _baselineGeneration;
     final areasOfStreet = await _logFailureOf(
       'lookupAreasOfStreet',
       () => _services.autofill.areasOf(typedStreet),
@@ -278,18 +293,24 @@ class AddressFormController extends AdvancedFormController {
 
     final streetWasReplacedMeanwhile = street.fieldValue != typedStreet;
     if (isDisposed ||
+        generationWhenLookupStarted != _baselineGeneration ||
         streetWasReplacedMeanwhile ||
         areasOfStreet == null ||
         areasOfStreet.length < 2) {
       return;
     }
 
-    await _fillAreaOfGeocodedHouse(areasOfStreet, areaWhenLookupStarted);
+    await _fillAreaOfGeocodedHouse(
+      areasOfStreet,
+      areaWhenLookupStarted,
+      generationWhenLookupStarted,
+    );
   }
 
   Future<void> _fillAreaOfGeocodedHouse(
     List<Area> areasOfStreet,
     Area? areaWhenLookupStarted,
+    int generationWhenLookupStarted,
   ) async {
     final geocodedAddress = toAddress();
     final geocodedHouse = await _logFailureOf(
@@ -300,7 +321,12 @@ class AddressFormController extends AdvancedFormController {
     final houseWasChangedMeanwhile =
         street.fieldValue != geocodedAddress.street ||
         _nullIfEmpty(houseCode.fieldValue.trim()) != geocodedAddress.houseCode;
-    if (isDisposed || houseWasChangedMeanwhile || geocodedHouse == null) return;
+    if (isDisposed ||
+        generationWhenLookupStarted != _baselineGeneration ||
+        houseWasChangedMeanwhile ||
+        geocodedHouse == null) {
+      return;
+    }
 
     final areaWasChosenMeanwhile = area.fieldValue != areaWhenLookupStarted;
     final userChoseAreaOfStreet = areasOfStreet.any(
