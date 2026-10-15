@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class AttendanceSearchBar extends StatefulWidget {
+  final TextEditingController controller;
   final double bottomViewInset;
   final ValueChanged<String?> onChanged;
 
   const AttendanceSearchBar({
+    required this.controller,
     required this.onChanged,
     required this.bottomViewInset,
     super.key,
@@ -16,8 +18,6 @@ class AttendanceSearchBar extends StatefulWidget {
 }
 
 class _AttendanceSearchBarState extends State<AttendanceSearchBar> {
-  final TextEditingController _controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -34,9 +34,9 @@ class _AttendanceSearchBarState extends State<AttendanceSearchBar> {
         borderRadius: BorderRadius.circular(30),
         color: theme.colorScheme.surfaceContainerHigh,
         child: ValueListenableBuilder(
-          valueListenable: _controller,
+          valueListenable: widget.controller,
           builder: (context, value, child) => TextField(
-            controller: _controller,
+            controller: widget.controller,
             textInputAction: TextInputAction.search,
             onChanged: _onChanged,
             decoration: InputDecoration(
@@ -61,18 +61,12 @@ class _AttendanceSearchBarState extends State<AttendanceSearchBar> {
     );
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   void _onChanged(String value) {
     widget.onChanged(value.isEmpty ? null : value);
   }
 
   void _clear() {
-    _controller.clear();
+    widget.controller.clear();
     widget.onChanged(null);
     FocusScope.of(context).unfocus();
   }

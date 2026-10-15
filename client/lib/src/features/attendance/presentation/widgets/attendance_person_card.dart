@@ -51,7 +51,7 @@ class AttendancePersonCard extends StatelessWidget {
           horizontal: 12,
           vertical: _cardVerticalPadding,
         ),
-        onTap: () => onToggle(entry),
+        onTap: () => _toggle(context),
         onLongPress: () => _openDetails(context),
         leading: ImageObjectWidget(entry.person, size: 44),
         horizontalTitleGap: 10,
@@ -79,7 +79,7 @@ class AttendancePersonCard extends StatelessWidget {
               fillColor: colorScheme.inverseSurface,
               iconColor: colorScheme.onInverseSurface,
               selectedLabelColor: colorScheme.onSurface,
-              onTap: () => onToggle(entry),
+              onTap: () => _toggle(context),
               onLongPress: present
                   ? () => _changeAttendanceTime(context)
                   : null,
@@ -88,6 +88,11 @@ class AttendancePersonCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _toggle(BuildContext context) {
+    onToggle(entry);
+    const AttendanceMarkedNotification().dispatch(context);
   }
 
   void _openDetails(BuildContext context) =>

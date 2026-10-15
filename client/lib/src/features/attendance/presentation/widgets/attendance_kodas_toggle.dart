@@ -29,10 +29,13 @@ class AttendanceKodasToggle extends StatelessWidget {
       selectedLabelColor: colorScheme.primary,
       onTap: switch (tookKodas) {
         null => null,
-        _ => () => unawaited(
-          context.read<RecordKodasCubit>().toggleKodas(person),
-        ),
+        _ => () => _toggle(context),
       },
     );
+  }
+
+  void _toggle(BuildContext context) {
+    unawaited(context.read<RecordKodasCubit>().toggleKodas(person));
+    const AttendanceMarkedNotification().dispatch(context);
   }
 }

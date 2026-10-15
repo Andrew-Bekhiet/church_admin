@@ -19,6 +19,7 @@ class _RecordAttendanceScreenState extends State<RecordAttendanceScreen> {
     meeting: widget.meeting,
   );
   final RecordKodasCubit _kodasCubit = RecordKodasCubit();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,30 +28,34 @@ class _RecordAttendanceScreenState extends State<RecordAttendanceScreen> {
         BlocProvider.value(value: _cubit),
         BlocProvider.value(value: _kodasCubit),
       ],
-      child: BlocListener<RecordAttendanceCubit, RecordAttendanceState>(
-        listener: (context, state) {
-          if (state is! RecordAttendanceLoaded) return;
+      child: SelectSearchTextOnAttendanceMarked(
+        controller: _searchController,
+        child: BlocListener<RecordAttendanceCubit, RecordAttendanceState>(
+          listener: (context, state) {
+            if (state is! RecordAttendanceLoaded) return;
 
-          _kodasCubit.follow(meeting: state.meeting, day: state.selectedDate);
-        },
-        child: Scaffold(
-          extendBody: true,
-          body: SafeArea(
-            bottom: false,
-            child: BlocBuilder<RecordAttendanceCubit, RecordAttendanceState>(
-              builder: (context, state) => switch (state) {
-                RecordAttendanceLoading() => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                RecordAttendanceLoaded() => RecordAttendanceLoadedView(
-                  state: state,
-                ),
-              },
+            _kodasCubit.follow(meeting: state.meeting, day: state.selectedDate);
+          },
+          child: Scaffold(
+            extendBody: true,
+            body: SafeArea(
+              bottom: false,
+              child: BlocBuilder<RecordAttendanceCubit, RecordAttendanceState>(
+                builder: (context, state) => switch (state) {
+                  RecordAttendanceLoading() => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  RecordAttendanceLoaded() => RecordAttendanceLoadedView(
+                    state: state,
+                  ),
+                },
+              ),
             ),
-          ),
-          bottomNavigationBar: AttendanceSearchBar(
-            bottomViewInset: MediaQuery.viewInsetsOf(context).bottom,
-            onChanged: _cubit.onSearch,
+            bottomNavigationBar: AttendanceSearchBar(
+              controller: _searchController,
+              bottomViewInset: MediaQuery.viewInsetsOf(context).bottom,
+              onChanged: _cubit.onSearch,
+            ),
           ),
         ),
       ),
@@ -59,6 +64,7 @@ class _RecordAttendanceScreenState extends State<RecordAttendanceScreen> {
 
   @override
   void dispose() {
+    _searchController.dispose();
     unawaited(_cubit.close());
     unawaited(_kodasCubit.close());
     super.dispose();
