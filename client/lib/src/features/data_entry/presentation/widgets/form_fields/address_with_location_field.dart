@@ -112,7 +112,9 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
           ValueListenableBuilder(
             valueListenable: _previewedAddress,
             builder: (context, address, _) => LocationUpdateReminderCard(
-              isShown: _hasPlaceChangedSinceLocationWasChecked(address),
+              isShown:
+                  widget.enabled &&
+                  _hasPlaceChangedSinceLocationWasChecked(address),
               onUpdateLocation: _pickLocationAndSuggestAddress,
               onKeepLocation: () =>
                   setState(() => _locationConfirmedFor = address),
