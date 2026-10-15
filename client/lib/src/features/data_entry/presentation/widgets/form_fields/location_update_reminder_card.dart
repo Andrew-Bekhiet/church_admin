@@ -30,6 +30,7 @@ class LocationUpdateReminderCard extends StatelessWidget {
           ? Card(
               key: LocationUpdateReminderCardKeys.card,
               color: colorScheme.surfaceContainerHigh,
+              elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
                 side: BorderSide(color: colorScheme.outlineVariant),
@@ -92,7 +93,7 @@ class LocationUpdateReminderCard extends StatelessWidget {
                           ),
                           child: const Text('الموقع صحيح'),
                         ),
-                        FilledButton.tonalIcon(
+                        FilledButton.icon(
                           key: LocationUpdateReminderCardKeys.updateLocation,
                           onPressed: onUpdateLocation,
                           icon: const Icon(Symbols.edit_location_alt),
