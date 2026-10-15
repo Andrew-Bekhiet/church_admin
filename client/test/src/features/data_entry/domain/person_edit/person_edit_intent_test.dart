@@ -101,6 +101,25 @@ void main() {
       expect(person.familyId, family.id);
       expect(person.studyYearId, studyYear.order);
     });
+
+    test(
+      'keeps the relation ids of a person whose related objects are not loaded',
+      () {
+        final person = UpdatePerson(
+          person: Person(
+            id: 'person-1',
+            name: 'Mina',
+            familyId: 'family-1',
+            churchId: 'church-1',
+            studyYearId: 3,
+          ),
+        ).personWithRelationIds;
+
+        expect(person.familyId, 'family-1');
+        expect(person.churchId, 'church-1');
+        expect(person.studyYearId, 3);
+      },
+    );
   });
 
   group('CreatePerson draft', () {
