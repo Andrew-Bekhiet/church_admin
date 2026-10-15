@@ -316,7 +316,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
         objectName: _form.savedPerson?.name ?? '',
       ),
     );
-    if (confirmed != true) return;
+    if (confirmed != true || !mounted) return;
 
     try {
       await _form.deletePerson();
@@ -337,6 +337,8 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
 
       return;
     }
+
+    if (!mounted) return;
 
     messenger.showSnackBar(
       SnackBar(
