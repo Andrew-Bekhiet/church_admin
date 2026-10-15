@@ -87,7 +87,15 @@ void main() {
   tearDown(defaultTearDown);
 
   testWidgets('changing the house number of a located address reminds the '
-      'user to move the location, naming the house number', (tester) async {
+      'user to move the location', (tester) async {
+    await pumpField(tester, locatedAddress);
+
+    await typeHouseNumber(tester, '14');
+
+    expect(reminder(), findsOneWidget);
+  });
+
+  testWidgets('the reminder asks whether the house was moved', (tester) async {
     await pumpField(tester, locatedAddress);
 
     await typeHouseNumber(tester, '14');
@@ -95,9 +103,22 @@ void main() {
     expect(
       find.descendant(
         of: reminder(),
-        matching: find.text(AddressPlacePart.houseCode.label),
+        matching: find.text('هل تم نقل المنزل؟'),
       ),
       findsOneWidget,
+    );
+  });
+
+  testWidgets('the reminder does not list which address parts were edited', (
+    tester,
+  ) async {
+    await pumpField(tester, locatedAddress);
+
+    await typeHouseNumber(tester, '14');
+
+    expect(
+      find.descendant(of: reminder(), matching: find.byType(Chip)),
+      findsNothing,
     );
   });
 
