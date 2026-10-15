@@ -21,7 +21,7 @@ class FakeLoggingService extends Fake implements LoggingService {
     unawaited(
       showDialog<void>(
         context: context,
-        builder: (context) => CAErrorDialog(exception: record.error!),
+        builder: (context) => CAErrorDialog(exception: record.error ?? record),
       ),
     );
     await error(record);
