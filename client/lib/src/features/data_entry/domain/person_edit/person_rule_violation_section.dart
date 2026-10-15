@@ -1,0 +1,1 @@
+enum PersonRuleViolationSection { household, memberships }

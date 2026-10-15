@@ -36,19 +36,6 @@ class FakePersonTypesDAO extends Fake implements PersonTypesDAO {
   Future<List<PersonType>> fetchFamilyRoles() async => familyRoles;
 }
 
-class FakePersonsDAO extends Fake implements PersonsDAO {
-  Future<void>? loadGate;
-
-  @override
-  Future<Person?> personServicesClassesGroups({
-    required String personId,
-  }) async {
-    await loadGate;
-
-    return null;
-  }
-}
-
 class FakeFamiliesDAO extends Fake implements FamiliesDAO {
   Future<void>? loadGate;
 
@@ -61,17 +48,10 @@ class FakeFamiliesDAO extends Fake implements FamiliesDAO {
 }
 
 void main() {
-  const savedNumber = PhoneContact(id: 'saved', phone: '+201001111111');
-  const savedInput = '01001111111';
   const otherValidInput = '01002222222';
   const incompleteInput = '0100';
   const discardDialogTitle = 'هل تريد تجاهل التغييرات؟';
 
-  final person = Person(
-    id: 'person-id',
-    name: 'مينا',
-    contacts: const [savedNumber],
-  );
   const family = Family(
     id: 'family-id',
     name: 'أسرة',
@@ -130,12 +110,10 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  late FakePersonsDAO persons;
   late FakeFamiliesDAO families;
   late FakePersonTypesDAO personTypes;
 
   setUp(() {
-    persons = FakePersonsDAO();
     families = FakeFamiliesDAO();
     personTypes = FakePersonTypesDAO();
     final authBloc = MockAuthBloc();
@@ -150,7 +128,6 @@ void main() {
     when(() => metadata.personTypes).thenReturn(personTypes);
     final databaseService = MockDatabaseService();
     when(() => databaseService.metadata).thenReturn(metadata);
-    when(() => databaseService.persons).thenReturn(persons);
     when(() => databaseService.families).thenReturn(families);
 
     registerFallbackValue(
@@ -181,132 +158,6 @@ void main() {
   });
 
   tearDown(defaultTearDown);
-
-  group('person editor', () {
-    Future<void> openPerson(WidgetTester tester, {bool settle = true}) =>
-        openEditor(tester, EditPerson(person: person), settle: settle);
-
-    testWidgets('leaving after changing a number to another valid one asks '
-        'to discard', (tester) async {
-      await openPerson(tester);
-
-      await scrollTo(tester, phoneField('saved'));
-      await tester.enterText(phoneField('saved'), otherValidInput);
-      await pressBack(tester);
-
-      expect(find.text(discardDialogTitle), findsOneWidget);
-    });
-
-    testWidgets('leaving after typing an incomplete number asks to discard', (
-      tester,
-    ) async {
-      await openPerson(tester);
-
-      await scrollTo(tester, phoneField('saved'));
-      await tester.enterText(phoneField('saved'), incompleteInput);
-      await pressBack(tester);
-
-      expect(find.text(discardDialogTitle), findsOneWidget);
-    });
-
-    testWidgets('leaving after adding an empty number row asks to discard', (
-      tester,
-    ) async {
-      await openPerson(tester);
-
-      await scrollTo(tester, find.byKey(PhoneContactsEditorKeys.addButton));
-      await tester.tap(find.byKey(PhoneContactsEditorKeys.addButton));
-      await tester.pumpAndSettle();
-      await pressBack(tester);
-
-      expect(find.text(discardDialogTitle), findsOneWidget);
-    });
-
-    testWidgets(
-      'leaving after typing an incomplete number into a new row asks to '
-      'discard',
-      (tester) async {
-        await openPerson(tester);
-
-        await scrollTo(tester, find.byKey(PhoneContactsEditorKeys.addButton));
-        await tester.tap(find.byKey(PhoneContactsEditorKeys.addButton));
-        await tester.pumpAndSettle();
-        final newField = find.byWidgetPredicate(
-          (widget) => switch (widget.key) {
-            ValueKey<String>(:final value) =>
-              value.startsWith('phone_contacts_editor_phone_') &&
-                  !value.endsWith('_saved'),
-            _ => false,
-          },
-        );
-        await tester.enterText(newField, incompleteInput);
-        await pressBack(tester);
-
-        expect(find.text(discardDialogTitle), findsOneWidget);
-      },
-    );
-
-    testWidgets('leaving after removing the number asks to discard', (
-      tester,
-    ) async {
-      await openPerson(tester);
-
-      final remove = find.byKey(
-        PhoneContactDraftFieldKeys.removeButton('saved'),
-      );
-      await scrollTo(tester, remove);
-      await tester.tap(remove);
-      await tester.pumpAndSettle();
-      await pressBack(tester);
-
-      expect(find.text(discardDialogTitle), findsOneWidget);
-    });
-
-    testWidgets('leaving after changing a number before the person has '
-        'finished loading asks to discard', (tester) async {
-      final loaded = Completer<void>();
-      persons.loadGate = loaded.future;
-      await openPerson(tester, settle: false);
-
-      await tester.scrollUntilVisible(
-        phoneField('saved'),
-        100,
-        scrollable: find.byType(Scrollable).first,
-      );
-      await tester.pump();
-      await tester.enterText(phoneField('saved'), otherValidInput);
-      loaded.complete();
-      await tester.pumpAndSettle();
-      await pressBack(tester);
-
-      expect(find.text(discardDialogTitle), findsOneWidget);
-    });
-
-    testWidgets('leaving after typing the saved number back in does not ask', (
-      tester,
-    ) async {
-      await openPerson(tester);
-
-      await scrollTo(tester, phoneField('saved'));
-      await tester.enterText(phoneField('saved'), otherValidInput);
-      await tester.enterText(phoneField('saved'), savedInput);
-      await pressBack(tester);
-
-      expect(find.text(discardDialogTitle), findsNothing);
-      expect(find.text('open'), findsOneWidget);
-    });
-
-    testWidgets('leaving without changing anything does not ask', (
-      tester,
-    ) async {
-      await openPerson(tester);
-
-      await pressBack(tester);
-
-      expect(find.text(discardDialogTitle), findsNothing);
-      expect(find.text('open'), findsOneWidget);
-    });
-  });
 
   group('family editor', () {
     Future<void> openFamily(WidgetTester tester, {bool settle = true}) =>

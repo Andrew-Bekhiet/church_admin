@@ -28,30 +28,6 @@ class FakePersonTypesDAO extends Fake implements PersonTypesDAO {
   Future<List<PersonType>> fetchFamilyRoles() async => const [];
 }
 
-class FakePersonsDAO extends Fake implements PersonsDAO {
-  Completer<void>? loadGate;
-  final savedPersons = <Person>[];
-
-  @override
-  Future<Person?> personServicesClassesGroups({
-    required String personId,
-  }) async {
-    await loadGate?.future;
-
-    return null;
-  }
-
-  @override
-  Future<Person?> updateObject({
-    required Person newObject,
-    required Person oldObject,
-  }) async {
-    savedPersons.add(newObject);
-
-    return newObject;
-  }
-}
-
 class FakeFamiliesDAO extends Fake implements FamiliesDAO {
   Completer<void>? loadGate;
   final savedFamilies = <Family>[];
@@ -75,17 +51,10 @@ class FakeFamiliesDAO extends Fake implements FamiliesDAO {
 }
 
 void main() {
-  const savedNumber = PhoneContact(id: 'saved', phone: '+201001111111');
   const otherNumber = '01002222222';
   const otherE164 = '+201002222222';
   const renamed = 'اسم جديد';
 
-  final person = Person(
-    id: 'person-id',
-    name: 'مينا',
-    family: const Family(id: 'person-family-id', name: 'أسرة مينا'),
-    contacts: const [savedNumber],
-  );
   const family = Family(
     id: 'family-id',
     name: 'أسرة',
@@ -101,7 +70,6 @@ void main() {
     ],
   );
 
-  late FakePersonsDAO persons;
   late FakeFamiliesDAO families;
 
   Finder phoneField(String draftKey) =>
@@ -170,7 +138,6 @@ void main() {
   }
 
   setUp(() {
-    persons = FakePersonsDAO();
     families = FakeFamiliesDAO();
 
     final authBloc = MockAuthBloc();
@@ -185,7 +152,6 @@ void main() {
     when(() => metadata.personTypes).thenReturn(FakePersonTypesDAO());
     final databaseService = MockDatabaseService();
     when(() => databaseService.metadata).thenReturn(metadata);
-    when(() => databaseService.persons).thenReturn(persons);
     when(() => databaseService.families).thenReturn(families);
 
     registerFallbackValue(
@@ -216,35 +182,6 @@ void main() {
   });
 
   tearDown(defaultTearDown);
-
-  group('person editor', () {
-    testWidgets('a number changed before loading finishes is saved', (
-      tester,
-    ) async {
-      final loadGate = persons.loadGate = Completer<void>();
-      await openEditorBeforeLoad(tester, EditPerson(person: person));
-
-      await enterPhone(tester, 'saved', otherNumber);
-      await finishLoadingAndSave(tester, loadGate);
-
-      expect(
-        persons.savedPersons.single.contacts.map((c) => c.phone),
-        [otherE164],
-      );
-    });
-
-    testWidgets('a name changed before loading finishes is saved', (
-      tester,
-    ) async {
-      final loadGate = persons.loadGate = Completer<void>();
-      await openEditorBeforeLoad(tester, EditPerson(person: person));
-
-      await enterName(tester, person.name, renamed);
-      await finishLoadingAndSave(tester, loadGate);
-
-      expect(persons.savedPersons.single.name, renamed);
-    });
-  });
 
   group('family editor', () {
     testWidgets('a number changed before loading finishes is saved', (

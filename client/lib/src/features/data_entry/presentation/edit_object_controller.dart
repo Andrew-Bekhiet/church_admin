@@ -182,23 +182,7 @@ class EditObjectController<T extends ViewableWithID> {
   Future<bool> _confirmMoveOutOfSight(BuildContext context) async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('لن تتمكن من رؤية البيانات بعد الحفظ'),
-        content: const Text(
-          'بعد الحفظ ستصبح هذه البيانات خارج المناطق والخدمات '
-          'التي تتابعها، ولن تتمكن من رؤيتها أو تعديلها.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('إلغاء'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('حفظ'),
-          ),
-        ],
-      ),
+      builder: (context) => const MoveOutOfSightConfirmationDialog(),
     );
 
     return confirmed ?? false;
@@ -262,19 +246,8 @@ class EditObjectController<T extends ViewableWithID> {
 
     final rslt = await showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text('هل تريد حذف ${initialObject!.name}؟'),
-        actions: [
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('لا'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('نعم'),
-          ),
-        ],
-      ),
+      builder: (context) =>
+          DeleteConfirmationDialog(objectName: initialObject!.name),
     );
 
     if (rslt != true) return;
@@ -304,19 +277,7 @@ class EditObjectController<T extends ViewableWithID> {
             !(hasUnsavedInput?.call() ?? false) ||
         (await showDialog(
               context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('هل تريد تجاهل التغييرات؟'),
-                actions: [
-                  FilledButton(
-                    onPressed: () => Navigator.of(context).pop(false),
-                    child: const Text('البقاء'),
-                  ),
-                  FilledButton(
-                    onPressed: () => Navigator.of(context).pop(true),
-                    child: const Text('تجاهل'),
-                  ),
-                ],
-              ),
+              builder: (context) => const DiscardChangesDialog(),
             ) ??
             false);
   }

@@ -1,0 +1,11 @@
+export 'person/colored_object_chips.dart';
+export 'person/memberships_summary.dart';
+export 'person/person_edit_church_and_spiritual_section.dart';
+export 'person/person_edit_hobbies_tags_and_notes_section.dart';
+export 'person/person_edit_household_section.dart';
+export 'person/person_edit_identity_section.dart';
+export 'person/person_edit_marital_status_and_type_section.dart';
+export 'person/person_edit_memberships_section.dart';
+export 'person/person_edit_pastoral_dates_section.dart';
+export 'person/person_edit_work_section.dart';
+export 'person/person_rule_violation_messages.dart';

@@ -2,79 +2,62 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mocktail/mocktail.dart';
 
-// GoRouterState overrides == and cannot be built without a RouteConfiguration; the route's build ignores it.
-// ignore: avoid_implementing_value_types
-class _MockGoRouterState extends Mock implements GoRouterState {}
+import '../../../../utils.dart';
+import '../screens/edit_person/edit_person_screen_harness.dart';
 
 void main() {
-  group('EditPersonRoute', () {
-    const service = Service(id: 'service', name: 'service');
-    const family = Family(id: 'family', name: 'family');
+  final person = Person(id: 'person-id', name: 'مينا');
 
-    Future<EditPerson> buildScreen(
-      WidgetTester tester,
-      PersonEditIntent? intent,
-    ) async {
-      late Widget screen;
-      await tester.pumpWidget(
-        Builder(
-          builder: (context) {
-            screen = EditPersonRoute(
-              $extra: intent,
-            ).build(context, _MockGoRouterState());
+  late EditPersonScreenHarness harness;
 
-            return const SizedBox.shrink();
-          },
+  Future<void> openRoute(
+    WidgetTester tester, {
+    PersonEditIntent? intent,
+  }) async {
+    final router = GoRouter(
+      initialLocation: '/edit_person',
+      initialExtra: intent,
+      routes: [$editPersonRoute],
+    );
+    addTearDown(router.dispose);
+
+    await tester.pumpWidget(
+      MaterialApp.router(
+        routerConfig: router,
+        locale: const Locale('ar', 'EG'),
+        theme: ThemingService.getDefault(
+          isDarkOverride: false,
+          greatFeastThemeOverride: false,
         ),
-      );
-
-      return screen as EditPerson;
-    }
-
-    testWidgets(
-      'a new person without a starting point gets an address to hold a family phone',
-      (tester) async {
-        final screen = await buildScreen(tester, null);
-
-        expect(screen.withAddress, isNotNull);
-      },
+      ),
     );
+    await tester.pumpAndSettle();
+  }
 
-    testWidgets(
-      'a new person in a service gets an address to hold a family phone',
-      (tester) async {
-        final screen = await buildScreen(
-          tester,
-          const CreatePersonInService(service: service),
-        );
+  setUp(() {
+    harness = EditPersonScreenHarness()..install();
+  });
 
-        expect(screen.withAddress, isNotNull);
-      },
-    );
+  tearDown(defaultTearDown);
 
-    testWidgets(
-      'a new person in a family gets an address to hold a family phone',
-      (tester) async {
-        final screen = await buildScreen(
-          tester,
-          const CreatePersonInFamily(family: family),
-        );
+  testWidgets('opening the route without an intent edits a blank new person', (
+    tester,
+  ) async {
+    await openRoute(tester);
 
-        expect(screen.withAddress, isNotNull);
-      },
-    );
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
+    expect(find.byTooltip('حذف'), findsNothing);
+  });
 
-    testWidgets('editing a person gets no starting address', (tester) async {
-      final screen = await buildScreen(
-        tester,
-        UpdatePerson(
-          person: Person(id: 'person', name: 'person'),
-        ),
-      );
+  testWidgets('opening the route with an intent edits that person', (
+    tester,
+  ) async {
+    harness.persons.respondWithSavedMemberships(null);
 
-      expect(screen.withAddress, isNull);
-    });
+    await openRoute(tester, intent: UpdatePerson(person: person));
+
+    expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
+    expect(find.byTooltip('حذف'), findsOneWidget);
   });
 }

@@ -53,7 +53,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 
 ### Structure
 
-- **One widget/class per file**, public. No private `_Foo` widget classes, no two widgets sharing a file.
+- **One widget/class per file**, public. No private `_Foo` widget classes, no two widgets sharing a file. A sealed class and its subclasses share one file — no `part`/`part of` — while it stays under 420 lines.
 - **Widget keys live with the widget.** Define a widget's test keys in the same file as the widget that renders them.
 - **UI is mobile-first and responsive**; keep components modular and reusable rather than page-specific.
 - **Never return widgets from methods** (`Widget _buildFoo()`). Extract a widget class, or if the subtree is small (under ~100 lines) inline it at the call site. Non-widget helpers returning `String`/data are fine.
@@ -68,7 +68,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 - **Pattern matching over conditionals.** `switch` on enums and sealed classes for compile-time exhaustiveness; `if (x case final y?)` for non-null matching. Use the object-pattern shorthand `Foo(:final bar?)`, not `Foo(bar: final bar?)`.
 - **`package:collection`** (`maxBy`, `groupListsBy`, `EqualitySet.from(EqualityBy(...))` for de-duplication, `.map(...).sum`, …) instead of hand-rolled folds and `{key: value}` map tricks.
 - **Domain models are classes, not record typedefs.** Behaviour (display names, formatting) belongs on the class.
-- **A helper with one caller is inlined at that caller** — as an expression, or a local closure when it needs a name (`int nullsFirst(int? a, int? b) => …` inside the method that sorts). Do not add a private static method for it.
+- **A helper with one caller is inlined at that caller as an expression.** When it needs a name, make it a private method on the class. Never declare a nested (local) function.
 - **`Row.spacing` / `Column.spacing`** instead of `SizedBox` gaps; `MainAxisAlignment.space*` instead of `Expanded` where it fits; `Padding` instead of `SizedBox` in linear layouts.
 - **Shape APIs over numeric approximations.** `ShapeDecoration(shape: StadiumBorder())`, not `BorderRadius.circular(999)`; `EdgeInsetsDirectional.only(start:, end:)`, not `fromSTEB`; a bare `const Divider()` over one with hand-set colour and height — the theme owns those.
 - **Bind an indexed element to a local** (`final user = users[index];`) before using it more than once.
@@ -77,7 +77,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 - **`dispose()` returns `void`.** `Future<void> dispose() async` compiles and the analyzer accepts it, because any type is assignable to `void` in an override. It is still wrong: awaiting before `super.dispose()` defers the super call past the frame in which the framework treats the state as disposed. Close sinks with `unawaited(x.close())` and keep `dispose` synchronous.
 - **`close_sinks` does not catch a missing `dispose()`,** only an incomplete one. A `BehaviorSubject` field on a `State` with no `dispose` at all is invisible to it, so check by hand.
 - **Handle errors thoroughly** with typed Dart exceptions, and carry user-facing messages as error codes so they can be localised later.
-- **Presentation talks only to blocs/cubits, never to repositories or data sources.**
+- **Presentation talks only to blocs/cubits and `application/` advanced_forms form controllers, never to repositories or data sources.**
 - **Keep the upstream message** when mapping a Firebase error to a typed exception. The code drives the UI's wording; the original message is what explains the real cause.
 
 #### Unenforced house style

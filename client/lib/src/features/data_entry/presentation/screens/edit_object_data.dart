@@ -6,7 +6,6 @@ export 'edit_object_data/edit_area.dart';
 export 'edit_object_data/edit_class.dart';
 export 'edit_object_data/edit_family.dart';
 export 'edit_object_data/edit_group.dart';
-export 'edit_object_data/edit_person.dart';
 export 'edit_object_data/edit_service.dart';
 export 'edit_object_data/edit_store.dart';
 export 'edit_object_data/edit_street.dart';

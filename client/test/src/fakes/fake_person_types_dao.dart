@@ -3,6 +3,8 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 import 'package:flutter_test/flutter_test.dart';
 
 class FakePersonTypesDAO extends Fake implements PersonTypesDAO {
+  List<PersonType> familyRoles = const [];
+
   @override
-  Future<List<PersonType>> fetchFamilyRoles() async => const [];
+  Future<List<PersonType>> fetchFamilyRoles() async => familyRoles;
 }
