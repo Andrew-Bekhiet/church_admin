@@ -33,7 +33,7 @@ class PhotoField extends StatelessWidget {
         canDelete: canDelete,
         circleCrop: circleCrop,
         foregroundColor: foregroundColor,
-        change: switch (state.value!) {
+        change: switch (state.value) {
           PhotoFieldState(deletePhoto: true) => const DeletePhoto(),
           PhotoFieldState(:final newPhoto?) => ReplacePhoto(newPhoto),
           _ => const KeepPhoto(),
