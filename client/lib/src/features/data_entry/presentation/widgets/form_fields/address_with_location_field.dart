@@ -129,13 +129,6 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     );
   }
 
-  @override
-  void dispose() {
-    _houseNumberGeocodingDebounce?.cancel();
-    _previewedAddress.dispose();
-    super.dispose();
-  }
-
   void _handleStreetChanged(Street? street) {
     _houseNumberGeocodingDebounce?.cancel();
     _setAddress(_address.copyWith(street: street));
@@ -367,5 +360,12 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
       houseCode: suggestedAddress.houseCode ?? _address.houseCode,
       geolocation: suggestedAddress.geolocation ?? _address.geolocation,
     );
+  }
+
+  @override
+  void dispose() {
+    _houseNumberGeocodingDebounce?.cancel();
+    _previewedAddress.dispose();
+    super.dispose();
   }
 }
