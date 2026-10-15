@@ -1,15 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 
-part 'create_person.dart';
-part 'create_person_in_area.dart';
-part 'create_person_in_class.dart';
-part 'create_person_in_family.dart';
-part 'create_person_in_group.dart';
-part 'create_person_in_service.dart';
-part 'create_person_on_street.dart';
-part 'create_blank_person.dart';
-part 'update_person.dart';
-
 sealed class PersonEditIntent extends SerializableExtra {
   static const String _kindKey = 'kind';
   static const String _subjectKey = 'subject';
@@ -58,4 +48,165 @@ sealed class PersonEditIntent extends SerializableExtra {
     _kindKey: kind,
     if (subject != null) _subjectKey: subject.toJson(),
   };
+}
+
+sealed class CreatePerson extends PersonEditIntent {
+  const CreatePerson();
+
+  Person draftPerson(String id);
+
+  Person _draft(
+    String id, {
+    Address address = const Address(),
+    List<Service> services = const [],
+    List<Group> groups = const [],
+    bool gender = true,
+    Family? family,
+    StudyYear? studyYear,
+  }) => Person(
+    id: id,
+    name: '',
+    family: family,
+    familyId: family?.id,
+    services: services,
+    groups: groups,
+    studyYear: studyYear,
+    studyYearId: studyYear?.order,
+    workStatus: studyYear != null ? WorkStatus.student : WorkStatus.employed,
+    gender: gender,
+    address: address,
+  );
+}
+
+final class CreatePersonInArea extends CreatePerson {
+  static const String kind = 'inArea';
+
+  final Area area;
+
+  const CreatePersonInArea({required this.area});
+
+  @override
+  Person draftPerson(String id) => _draft(id, address: Address(area: area));
+
+  @override
+  Json toJson() => _toJsonOfKind(kind, area);
+}
+
+final class CreatePersonInClass extends CreatePerson {
+  static const String kind = 'inClass';
+
+  final Class class$;
+
+  const CreatePersonInClass({required this.class$});
+
+  @override
+  Person draftPerson(String id) => _draft(
+    id,
+    services: [?class$.service],
+    studyYear: class$.studyYear,
+    gender: class$.serviceGender ?? true,
+  );
+
+  @override
+  Json toJson() => _toJsonOfKind(kind, class$);
+}
+
+final class CreatePersonInFamily extends CreatePerson {
+  static const String kind = 'inFamily';
+
+  final Family family;
+
+  const CreatePersonInFamily({required this.family});
+
+  @override
+  Person draftPerson(String id) => _draft(id, family: family);
+
+  @override
+  Json toJson() => _toJsonOfKind(kind, family);
+}
+
+final class CreatePersonInGroup extends CreatePerson {
+  static const String kind = 'inGroup';
+
+  final Group group;
+
+  const CreatePersonInGroup({required this.group});
+
+  @override
+  Person draftPerson(String id) => _draft(
+    id,
+    services: [
+      if (group.service case final service?) service.copyWith(groups: [group]),
+    ],
+    groups: [group],
+  );
+
+  @override
+  Json toJson() => _toJsonOfKind(kind, group);
+}
+
+final class CreatePersonInService extends CreatePerson {
+  static const String kind = 'inService';
+
+  final Service service;
+
+  const CreatePersonInService({required this.service});
+
+  @override
+  Person draftPerson(String id) => _draft(id, services: [service]);
+
+  @override
+  Json toJson() => _toJsonOfKind(kind, service);
+}
+
+final class CreatePersonOnStreet extends CreatePerson {
+  static const String kind = 'onStreet';
+
+  final Street street;
+
+  const CreatePersonOnStreet({required this.street});
+
+  @override
+  Person draftPerson(String id) => _draft(id, address: Address(street: street));
+
+  @override
+  Json toJson() => _toJsonOfKind(kind, street);
+}
+
+final class CreateBlankPerson extends CreatePerson {
+  static const String kind = 'create';
+
+  const CreateBlankPerson();
+
+  @override
+  Person draftPerson(String id) => _draft(id);
+
+  @override
+  Json toJson() => _toJsonOfKind(kind);
+}
+
+final class UpdatePerson extends PersonEditIntent {
+  static const String kind = 'update';
+
+  final Person person;
+
+  Person get personWithRelationIds => person.copyWith(
+    familyId: person.family?.id,
+    churchId: person.church?.id,
+    collegeId: person.college?.id,
+    fatherId: person.father?.id,
+    jobId: person.job?.id,
+    personTypeId: person.personType?.id,
+    qualificationId: person.qualification?.id,
+    schoolId: person.school?.id,
+    shammasLevelId: person.shammasLevel?.id,
+    stateId: person.state?.id,
+    storeId: person.store?.id,
+    studyYearId: person.studyYear?.order,
+  );
+
+  const UpdatePerson({required this.person});
+
+  @override
+  Json toJson() => _toJsonOfKind(kind, person);
 }
