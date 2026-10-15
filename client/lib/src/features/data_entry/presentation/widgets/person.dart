@@ -1,4 +1,5 @@
 export 'person/colored_object_chips.dart';
+export 'person/memberships_summary.dart';
 export 'person/person_edit_church_and_spiritual_section.dart';
 export 'person/person_edit_hobbies_tags_and_notes_section.dart';
 export 'person/person_edit_household_section.dart';

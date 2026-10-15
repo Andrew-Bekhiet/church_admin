@@ -53,40 +53,7 @@ class PersonEditMembershipsSection extends StatelessWidget {
                       },
                     ),
                     onTap: state.readOnly ? null : () => _select(context),
-                    child: switch (services) {
-                      [] => const Text('لا يوجد خدمات أو مجموعات'),
-                      _ => ExcludeFocus(
-                        child: IgnorePointer(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              for (final service in services) ...[
-                                ViewableObjectWidget(
-                                  service,
-                                  isDense: true,
-                                  forceShowSecondLine: false,
-                                ),
-                                for (final group in service.groups ?? <Group>[])
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.only(
-                                      start: 26,
-                                    ),
-                                    child: Card(
-                                      elevation: 0,
-                                      child: ViewableObjectWidget(
-                                        group,
-                                        isDense: true,
-                                        forceShowSecondLine: false,
-                                        wrapInCard: false,
-                                      ),
-                                    ),
-                                  ),
-                              ],
-                            ],
-                          ),
-                        ),
-                      ),
-                    },
+                    child: MembershipsSummary(services: services),
                   );
                 },
               ),
