@@ -197,14 +197,12 @@ void main() {
   });
 
   group('the location reminder', () {
-    test('names the place part that changed after the saved location', () {
+    test('fires when the house number changes after the saved location', () {
       final controller = fixture.controllerFor(locatedAddress);
 
       controller.houseCode.setValue('14');
 
-      expect(controller.placePartsChangedSinceLocationWasChecked, {
-        AddressPlacePart.houseCode,
-      });
+      expect(controller.hasPlaceChangedSinceLocationWasChecked, isTrue);
     });
 
     test('ignores details that do not move the house', () {
@@ -212,7 +210,7 @@ void main() {
 
       controller.apartmentNumber.setValue('7');
 
-      expect(controller.placePartsChangedSinceLocationWasChecked, isEmpty);
+      expect(controller.hasPlaceChangedSinceLocationWasChecked, isFalse);
     });
 
     test('never fires for an address without a saved location', () {
@@ -220,7 +218,7 @@ void main() {
 
       controller.houseCode.setValue('14');
 
-      expect(controller.placePartsChangedSinceLocationWasChecked, isEmpty);
+      expect(controller.hasPlaceChangedSinceLocationWasChecked, isFalse);
     });
 
     test('goes away once the original house number is restored', () {
@@ -229,7 +227,7 @@ void main() {
 
       controller.houseCode.setValue('12');
 
-      expect(controller.placePartsChangedSinceLocationWasChecked, isEmpty);
+      expect(controller.hasPlaceChangedSinceLocationWasChecked, isFalse);
     });
 
     test('goes away once the location is replaced', () async {
@@ -238,7 +236,7 @@ void main() {
 
       await controller.useLocation(newLocation);
 
-      expect(controller.placePartsChangedSinceLocationWasChecked, isEmpty);
+      expect(controller.hasPlaceChangedSinceLocationWasChecked, isFalse);
     });
 
     test('goes away when the user keeps the location', () {
@@ -247,7 +245,7 @@ void main() {
 
       controller.keepLocation();
 
-      expect(controller.placePartsChangedSinceLocationWasChecked, isEmpty);
+      expect(controller.hasPlaceChangedSinceLocationWasChecked, isFalse);
     });
 
     test('returns when a place part changes again after keeping the '
@@ -258,9 +256,7 @@ void main() {
 
       controller.houseCode.setValue('16');
 
-      expect(controller.placePartsChangedSinceLocationWasChecked, {
-        AddressPlacePart.houseCode,
-      });
+      expect(controller.hasPlaceChangedSinceLocationWasChecked, isTrue);
     });
 
     test('is forgotten when a new baseline is loaded', () {
@@ -271,9 +267,7 @@ void main() {
       controller.loadAsNewBaseline(locatedAddress);
       controller.houseCode.setValue('16');
 
-      expect(controller.placePartsChangedSinceLocationWasChecked, {
-        AddressPlacePart.houseCode,
-      });
+      expect(controller.hasPlaceChangedSinceLocationWasChecked, isTrue);
     });
 
     test('tells listeners when the user keeps the location', () {

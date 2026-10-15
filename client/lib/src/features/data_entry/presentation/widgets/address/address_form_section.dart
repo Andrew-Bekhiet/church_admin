@@ -79,7 +79,7 @@ class AddressFormSection extends StatelessWidget {
           ListenableBuilder(
             listenable: form.placePartsMayHaveChanged,
             builder: (context, _) => LocationUpdateReminderCard(
-              changedPlaceParts: form.placePartsChangedSinceLocationWasChecked,
+              isShown: form.hasPlaceChangedSinceLocationWasChecked,
               onUpdateLocation: () => unawaited(chooseLocationOnMap()),
               onKeepLocation: form.keepLocation,
             ),

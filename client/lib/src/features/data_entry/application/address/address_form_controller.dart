@@ -75,18 +75,7 @@ class AddressFormController extends AdvancedFormController {
 
   bool get _isReadOnly => street.value.readOnly;
 
-  Set<AddressPlacePart> get placePartsChangedSinceLocationWasChecked {
-    final locationIsStillTheSavedOne =
-        _baselineAddress.geolocation != null &&
-        geolocation.fieldValue == _baselineAddress.geolocation;
-
-    return locationIsStillTheSavedOne
-        ? AddressPlacePart.changedBetween(
-            _locationConfirmedFor.value ?? _baselineAddress,
-            toAddress(),
-          )
-        : const {};
-  }
+  bool get hasPlaceChangedSinceLocationWasChecked => false;
 
   AddressFormController({
     required Address? initialAddress,
