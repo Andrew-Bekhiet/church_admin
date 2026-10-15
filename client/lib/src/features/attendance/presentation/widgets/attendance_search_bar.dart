@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-class AttendanceSearchBar extends StatefulWidget {
+class AttendanceSearchBar extends StatelessWidget {
+  final TextEditingController controller;
   final double bottomViewInset;
   final ValueChanged<String?> onChanged;
 
   const AttendanceSearchBar({
+    required this.controller,
     required this.onChanged,
     required this.bottomViewInset,
     super.key,
   });
-
-  @override
-  State<AttendanceSearchBar> createState() => _AttendanceSearchBarState();
-}
-
-class _AttendanceSearchBarState extends State<AttendanceSearchBar> {
-  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +22,16 @@ class _AttendanceSearchBarState extends State<AttendanceSearchBar> {
         left: 16,
         right: 16,
         top: 8,
-        bottom: 12 + widget.bottomViewInset,
+        bottom: 12 + bottomViewInset,
       ),
       child: Material(
         elevation: 1,
         borderRadius: BorderRadius.circular(30),
         color: theme.colorScheme.surfaceContainerHigh,
         child: ValueListenableBuilder(
-          valueListenable: _controller,
+          valueListenable: controller,
           builder: (context, value, child) => TextField(
-            controller: _controller,
+            controller: controller,
             textInputAction: TextInputAction.search,
             onChanged: _onChanged,
             decoration: InputDecoration(
@@ -46,7 +41,7 @@ class _AttendanceSearchBarState extends State<AttendanceSearchBar> {
                   ? null
                   : IconButton(
                       icon: const Icon(Symbols.clear),
-                      onPressed: _clear,
+                      onPressed: () => _clear(context),
                     ),
               filled: true,
               fillColor: Colors.transparent,
@@ -61,19 +56,13 @@ class _AttendanceSearchBarState extends State<AttendanceSearchBar> {
     );
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   void _onChanged(String value) {
-    widget.onChanged(value.isEmpty ? null : value);
+    onChanged(value.isEmpty ? null : value);
   }
 
-  void _clear() {
-    _controller.clear();
-    widget.onChanged(null);
+  void _clear(BuildContext context) {
+    controller.clear();
+    onChanged(null);
     FocusScope.of(context).unfocus();
   }
 }
