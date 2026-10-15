@@ -169,7 +169,7 @@ class AddressFormController extends AdvancedFormController {
   }
 
   Future<void> useLocation(Point newLocation) async {
-    if (_isReadOnly) return;
+    if (isDisposed || _isReadOnly) return;
 
     geolocation.setValue(newLocation);
     _suggestion.value = const NoAddressSuggestion();
