@@ -32,4 +32,29 @@ void main() {
 
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('opening the picker on a future date raises nothing', (
+    tester,
+  ) async {
+    final field = AdvancedFieldController<DateTime?, String>(
+      initialValue: DateTime.now().add(const Duration(days: 30)),
+    );
+    addTearDown(field.dispose);
+    await tester.pumpWidget(
+      materialAppWithThemeAndLocale()(
+        Scaffold(
+          body: AdvancedDateField<String>(
+            field: field,
+            label: 'التاريخ',
+            translateError: (error) => error,
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byType(TappableInputField<DateTime?>));
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+  });
 }
