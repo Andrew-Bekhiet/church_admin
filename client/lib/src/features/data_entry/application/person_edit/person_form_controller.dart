@@ -241,6 +241,8 @@ class PersonFormController extends AdvancedFormController {
 
       return await _applyPhotoChangeTo(saved, movedOutOfSight: movesOutOfSight);
     } on Exception catch (error, stackTrace) {
+      if (isDisposed) return const SaveAbandonedBecauseFormWasDisposed();
+
       return PersonSaveFailed(
         error: error,
         stackTrace: stackTrace,
