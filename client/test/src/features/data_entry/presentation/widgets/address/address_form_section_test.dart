@@ -162,6 +162,24 @@ void main() {
     expect(find.text('تم تحديد الموقع'), findsOneWidget);
   });
 
+  testWidgets('the location control is announced as a tappable "الموقع"', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    await pumpSection(tester);
+
+    expect(
+      tester.getSemantics(find.bySemanticsLabel('الموقع')),
+      matchesSemantics(
+        label: 'الموقع',
+        hasTapAction: true,
+        hasFocusAction: true,
+        isFocusable: true,
+      ),
+    );
+    semantics.dispose();
+  });
+
   testWidgets('accepting the suggestion for a picked location shows the area '
       'whose bounds contain it', (tester) async {
     fixture.areas.areasAtPoint[pickedLocation] = stMarkArea;
