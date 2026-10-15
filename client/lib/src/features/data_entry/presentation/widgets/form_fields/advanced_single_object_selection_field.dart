@@ -79,14 +79,40 @@ class AdvancedSingleObjectSelectionField<
       ),
     );
 
-    if (field.isDisposed) return;
+    if (field.isDisposed || !context.mounted) return;
 
     switch ((result, onCreateCustom)) {
       case (final String newName, final createCustom?):
-        final created = await createCustom(newName);
-        if (!field.isDisposed) _change(created);
+        await _createAndSelect(context, createCustom, newName);
       case (final T picked, _) when picked != field.fieldValue:
         _change(picked);
     }
+  }
+
+  Future<void> _createAndSelect(
+    BuildContext context,
+    Future<T> Function(String) createCustom,
+    String newName,
+  ) async {
+    final T created;
+    try {
+      created = await createCustom(newName);
+    } on Exception catch (error, stackTrace) {
+      if (field.isDisposed || !context.mounted) return;
+
+      await LoggingService.I.showErrorDialogAndReport(
+        context,
+        LogRecord(
+          error: error,
+          stackTrace: stackTrace,
+          data: {'objectType': '$T', 'newName': newName},
+        ),
+      );
+
+      return;
+    }
+    if (field.isDisposed) return;
+
+    _change(created);
   }
 }
