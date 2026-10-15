@@ -92,15 +92,12 @@ class PersonFormController extends AdvancedFormController {
   };
 
   bool get _noServiceOrGroupKeepsPersonEditable {
-    bool canEdit(ViewableWithID object) =>
-        _currentUser?.canEditObject(object) ?? false;
-
     final family = household.family.fieldValue;
     final address = household.editedAddress;
     final area = address?.area;
-    final canEditFamily = family == null || canEdit(family);
+    final canEditFamily = family == null || _currentUserCanEdit(family);
     final canEditAddress =
-        area == null || address?.street == null || canEdit(area);
+        area == null || address?.street == null || _currentUserCanEdit(area);
 
     return !canEditFamily &&
         !canEditAddress &&
@@ -316,6 +313,9 @@ class PersonFormController extends AdvancedFormController {
       _shownViolations.value = violations;
     }
   }
+
+  bool _currentUserCanEdit(ViewableWithID object) =>
+      _currentUser?.canEditObject(object) ?? false;
 
   @override
   void dispose() {
