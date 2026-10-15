@@ -86,24 +86,32 @@ class PersonEditMaritalStatusAndTypeSection extends StatelessWidget {
   }
 
   Future<void> _selectMartialStatus(BuildContext context) async {
-    final picked = await showDialog<ViewableEnumWithID<MartialStatus>>(
-      context: context,
-      builder: (context) =>
-          ObjectSelectionDialog<ViewableEnumWithID<MartialStatus>>(
-            fieldLabel: 'الحالة الاجتماعية',
-            canCreateFromSearch: false,
-            listController: (search) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  ViewableEnumWithID.createPaginatableStream(
-                    MartialStatus.values,
-                    search,
-                  ),
-            ),
-          ),
-    );
+    final result =
+        await showDialog<
+          ObjectSelectionResult<ViewableEnumWithID<MartialStatus>>
+        >(
+          context: context,
+          builder: (context) =>
+              ObjectSelectionDialog<ViewableEnumWithID<MartialStatus>>(
+                fieldLabel: 'الحالة الاجتماعية',
+                canCreateFromSearch: false,
+                listController: (search) => ViewableObjectListController(
+                  objectsPaginatableStream:
+                      ViewableEnumWithID.createPaginatableStream(
+                        MartialStatus.values,
+                        search,
+                      ),
+                ),
+              ),
+        );
 
-    if (picked != null && !form.isDisposed) {
-      form.martialStatus.setValue(picked.enumValue);
+    if (form.isDisposed) return;
+
+    switch (result) {
+      case null || NewObjectNamed():
+        return;
+      case ObjectSelected(:final object):
+        form.martialStatus.setValue(object.enumValue);
     }
   }
 }
