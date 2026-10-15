@@ -6,17 +6,20 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class AdvancedDateField<E extends Object> extends StatelessWidget {
   static final DateFormat _dateFormat = DateFormat('yyyy/M/d');
+  static final DateFormat _dateTimeFormat = DateFormat('yyyy/M/d h:m a');
 
   final AdvancedFieldController<DateTime?, E> field;
   final String label;
   final ErrorTranslator<E> translateError;
   final bool clearable;
+  final bool withTime;
 
   const AdvancedDateField({
     required this.field,
     required this.label,
     required this.translateError,
     this.clearable = true,
+    this.withTime = false,
     super.key,
   });
 
@@ -44,7 +47,11 @@ class AdvancedDateField<E extends Object> extends StatelessWidget {
                 : null,
           ),
           onTap: state.readOnly ? null : () => _pickDate(context),
-          child: date == null ? null : Text(_dateFormat.format(date)),
+          child: date == null
+              ? null
+              : Text(
+                  (withTime ? _dateTimeFormat : _dateFormat).format(date),
+                ),
         );
       },
     );
@@ -60,7 +67,7 @@ class AdvancedDateField<E extends Object> extends StatelessWidget {
       _ => storedDate,
     };
 
-    final picked = await showDatePicker(
+    final pickedDate = await showDatePicker(
       helpText: label,
       locale: const Locale('ar', 'EG'),
       context: context,
@@ -68,9 +75,31 @@ class AdvancedDateField<E extends Object> extends StatelessWidget {
       firstDate: firstDate,
       lastDate: lastDate,
     );
+    if (pickedDate == null || field.isDisposed) return;
 
-    if (picked == null || field.isDisposed) return;
+    if (!withTime) {
+      field.setValue(pickedDate);
 
-    field.setValue(picked);
+      return;
+    }
+
+    final pickedTime = context.mounted
+        ? await showTimePicker(
+            helpText: label,
+            context: context,
+            initialTime: TimeOfDay.fromDateTime(storedDate),
+          )
+        : null;
+    if (pickedTime == null || field.isDisposed) return;
+
+    field.setValue(
+      DateTime(
+        pickedDate.year,
+        pickedDate.month,
+        pickedDate.day,
+        pickedTime.hour,
+        pickedTime.minute,
+      ),
+    );
   }
 }

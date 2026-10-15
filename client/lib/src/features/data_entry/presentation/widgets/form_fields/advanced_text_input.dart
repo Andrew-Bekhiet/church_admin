@@ -16,6 +16,7 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
   final int? maxLength;
   final String? counterText;
   final int? errorMaxLines;
+  final int? maxLines;
   final ValueChanged<String>? onChanged;
 
   const AdvancedTextInput({
@@ -23,6 +24,7 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
     required this.translateError,
     this.textInputAction = TextInputAction.next,
     this.textCapitalization = TextCapitalization.none,
+    this.maxLines = 1,
     this.labelText,
     this.label,
     this.hintText,
@@ -54,6 +56,7 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
           autofillHints: autofillHints,
           inputFormatters: inputFormatters,
           maxLength: maxLength,
+          maxLines: maxLines,
           onChanged: onChanged,
           decoration: InputDecoration(
             labelText: labelText,

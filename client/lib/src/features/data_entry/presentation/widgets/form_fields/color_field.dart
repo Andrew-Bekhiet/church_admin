@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -62,72 +63,17 @@ class ColorField extends StatelessWidget {
     BuildContext context,
     FormFieldState<Color?> state,
   ) async {
-    final themeData = Theme.of(context);
-
     final focusScope = FocusScope.of(context);
-    Color? newColorColor;
 
-    final primaryColor = themeData.primaryColor;
-    final dialogResult =
-        await ColorPicker(
-          color: state.value ?? themeData.primaryColor,
-          onColorChanged: (newColor) => newColorColor = newColor,
-          title: Text(
-            'اختيار اللون',
-            style: themeData.textTheme.titleLarge,
-          ),
-          subheading: Text(
-            'درجة اللون ١',
-            style: themeData.textTheme.bodyLarge,
-          ),
-          tonalSubheading: Text(
-            'درجة اللون ٢',
-            style: themeData.textTheme.bodyLarge,
-          ),
-          spacing: 10,
-          runSpacing: 10,
-          borderRadius: 20,
-          wheelDiameter: 165,
-          enableTonalPalette: true,
-          showColorCode: true,
-          pickerTypeLabels: const {
-            ColorPickerType.custom: 'ألوان جاهزة',
-            ColorPickerType.wheel: 'متقدم',
-          },
-          pickersEnabled: const <ColorPickerType, bool>{
-            ColorPickerType.wheel: true,
-            ColorPickerType.both: false,
-            ColorPickerType.primary: false,
-            ColorPickerType.accent: false,
-            ColorPickerType.bw: false,
-            ColorPickerType.custom: true,
-            ColorPickerType.customSecondary: false,
-          },
-          customColorSwatchesAndNames: {
-            for (final color in ColorTools.primaryAndAccentColors)
-              color: ColorTools.nameThatColor(color),
-            ColorTools.primarySwatch(primaryColor): ColorTools.nameThatColor(
-              primaryColor,
-            ),
-          },
-          copyPasteBehavior: const ColorPickerCopyPasteBehavior(
-            copyButton: true,
-            pasteButton: true,
-            longPressMenu: true,
-          ),
-        ).showPickerDialog(
-          context,
-          barrierColor: Colors.black54,
-        );
+    final picked = await ColorPickerDialog.pick(
+      context,
+      initial: state.value ?? Theme.of(context).primaryColor,
+    );
 
-    if (!dialogResult ||
-        newColorColor == null ||
-        newColorColor == state.value) {
-      return;
-    }
+    if (picked == null || picked == state.value) return;
 
-    state.didChange(newColorColor);
-    onChanged?.call(newColorColor);
+    state.didChange(picked);
+    onChanged?.call(picked);
     focusScope.nextFocus();
   }
 }
