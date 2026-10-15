@@ -7,11 +7,6 @@ import 'package:flutter/foundation.dart';
 class AddressFormController extends AdvancedFormController {
   static const Duration houseNumberGeocodingDebounce = Duration(seconds: 1);
 
-  static AddressFieldError? _invalidWholeNumber(String value) =>
-      value.isNotEmpty && int.tryParse(value) == null
-      ? AddressFieldError.invalidNumber
-      : null;
-
   static String? _nullIfEmpty(String value) => value.isEmpty ? null : value;
 
   final AddressFormServices _services;
@@ -48,14 +43,15 @@ class AddressFormController extends AdvancedFormController {
   );
   late final houseCode = AdvancedTextFieldController<AddressFieldError>(
     initialValue: _baselineAddress.houseCode ?? '',
+    validator: AddressFieldValidators.englishDigitsOnly,
   );
   late final storeyNumber = AdvancedTextFieldController<AddressFieldError>(
     initialValue: _baselineAddress.storeyNumber?.toString() ?? '',
-    validator: _invalidWholeNumber,
+    validator: AddressFieldValidators.wholeNumber,
   );
   late final apartmentNumber = AdvancedTextFieldController<AddressFieldError>(
     initialValue: _baselineAddress.apartmentNumber?.toString() ?? '',
-    validator: _invalidWholeNumber,
+    validator: AddressFieldValidators.wholeNumber,
   );
   late final specialLandmark = AdvancedTextFieldController<AddressFieldError>(
     initialValue: _baselineAddress.specialLandmark ?? '',
@@ -179,7 +175,7 @@ class AddressFormController extends AdvancedFormController {
     _suggestion.value = const NoAddressSuggestion();
 
     final generationWhenLookupStarted = _baselineGeneration;
-    final suggested = await _logFailureOf(
+    final suggested = await _services.logFailureOf(
       'suggestFromLocation',
       () => _services.autofill.suggestFromLocation(newLocation),
     );
@@ -247,7 +243,7 @@ class AddressFormController extends AdvancedFormController {
   Future<void> _fillAreaOf(Street chosen) async {
     final areaWhenLookupStarted = area.fieldValue;
     final generationWhenLookupStarted = _baselineGeneration;
-    final areasOfStreet = await _logFailureOf(
+    final areasOfStreet = await _services.logFailureOf(
       'lookupAreasOfStreet',
       () => _services.autofill.areasOf(chosen),
     );
@@ -280,7 +276,7 @@ class AddressFormController extends AdvancedFormController {
 
     final areaWhenLookupStarted = area.fieldValue;
     final generationWhenLookupStarted = _baselineGeneration;
-    final areasOfStreet = await _logFailureOf(
+    final areasOfStreet = await _services.logFailureOf(
       'lookupAreasOfStreet',
       () => _services.autofill.areasOf(typedStreet),
     );
@@ -307,7 +303,7 @@ class AddressFormController extends AdvancedFormController {
     int generationWhenLookupStarted,
   ) async {
     final geocodedAddress = toAddress();
-    final geocodedHouse = await _logFailureOf(
+    final geocodedHouse = await _services.logFailureOf(
       'geocodeHouse',
       () => _services.autofill.maybeAreaOfGeocodedHouse(geocodedAddress),
     );
@@ -331,28 +327,6 @@ class AddressFormController extends AdvancedFormController {
       area.prefill(geocodedHouse.area);
     }
     geolocation.prefill(geolocation.fieldValue ?? geocodedHouse.location);
-  }
-
-  Future<T?> _logFailureOf<T>(
-    String eventName,
-    Future<T> Function() lookup,
-  ) async {
-    try {
-      return await lookup();
-    } on Object catch (error, stackTrace) {
-      unawaited(
-        _services.logging.exception(
-          LogRecord(
-            moduleName: '$AddressFormController',
-            eventName: eventName,
-            error: error,
-            stackTrace: stackTrace,
-          ),
-        ),
-      );
-
-      return null;
-    }
   }
 
   @override

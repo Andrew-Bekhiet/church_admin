@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 
 class AddressFormServices {
@@ -10,4 +12,26 @@ class AddressFormServices {
     required this.places,
     required this.logging,
   });
+
+  Future<T?> logFailureOf<T>(
+    String eventName,
+    Future<T> Function() lookup,
+  ) async {
+    try {
+      return await lookup();
+    } on Object catch (error, stackTrace) {
+      unawaited(
+        logging.exception(
+          LogRecord(
+            moduleName: '$AddressFormController',
+            eventName: eventName,
+            error: error,
+            stackTrace: stackTrace,
+          ),
+        ),
+      );
+
+      return null;
+    }
+  }
 }
