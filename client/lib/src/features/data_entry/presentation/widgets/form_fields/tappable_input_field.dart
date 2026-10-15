@@ -23,8 +23,20 @@ class TappableInputField<T> extends StatefulWidget {
 }
 
 class _TappableInputFieldState<T> extends State<TappableInputField<T>> {
-  late final FocusNode _effectiveFocusNode =
-      widget.focusNode ?? FocusNode(debugLabel: 'TappableInputField<$T>');
+  late FocusNode _effectiveFocusNode;
+  FocusNode? _ownedFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _useFocusNodeOfWidget();
+  }
+
+  @override
+  void didUpdateWidget(TappableInputField<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.focusNode != oldWidget.focusNode) _useFocusNodeOfWidget();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +78,21 @@ class _TappableInputFieldState<T> extends State<TappableInputField<T>> {
 
   @override
   void dispose() {
-    if (widget.focusNode == null) _effectiveFocusNode.dispose();
+    _ownedFocusNode?.dispose();
     super.dispose();
+  }
+
+  void _useFocusNodeOfWidget() {
+    _ownedFocusNode?.dispose();
+
+    switch (widget.focusNode) {
+      case final givenNode?:
+        _ownedFocusNode = null;
+        _effectiveFocusNode = givenNode;
+      case null:
+        final ownedNode = FocusNode(debugLabel: 'TappableInputField<$T>');
+        _ownedFocusNode = ownedNode;
+        _effectiveFocusNode = ownedNode;
+    }
   }
 }
