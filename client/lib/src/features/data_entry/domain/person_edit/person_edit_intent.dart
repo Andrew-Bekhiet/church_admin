@@ -14,8 +14,10 @@ sealed class PersonEditIntent extends SerializableExtra {
   static const String _kindKey = 'kind';
   static const String _subjectKey = 'subject';
 
-  static Json _subjectJson(Object? subject) =>
-      Map<String, Object?>.from(subject! as Map);
+  static Json _subjectJson(Object? kind, Object? subject) => switch (subject) {
+    final Map<Object?, Object?> map => Map<String, Object?>.from(map),
+    _ => throw FormatException('PersonEditIntent kind "$kind" has no subject'),
+  };
 
   @override
   String get typeName => 'PersonEditIntent';
@@ -23,29 +25,30 @@ sealed class PersonEditIntent extends SerializableExtra {
   const PersonEditIntent();
 
   factory PersonEditIntent.fromJson(Json json) {
+    final kind = json[_kindKey];
     final subject = json[_subjectKey];
 
-    return switch (json[_kindKey]) {
+    return switch (kind) {
       UpdatePerson.kind => UpdatePerson(
-        person: Person.fromJson(_subjectJson(subject)),
+        person: Person.fromJson(_subjectJson(kind, subject)),
       ),
       CreatePersonInFamily.kind => CreatePersonInFamily(
-        family: Family.fromJson(_subjectJson(subject)),
+        family: Family.fromJson(_subjectJson(kind, subject)),
       ),
       CreatePersonOnStreet.kind => CreatePersonOnStreet(
-        street: Street.fromJson(_subjectJson(subject)),
+        street: Street.fromJson(_subjectJson(kind, subject)),
       ),
       CreatePersonInArea.kind => CreatePersonInArea(
-        area: Area.fromJson(_subjectJson(subject)),
+        area: Area.fromJson(_subjectJson(kind, subject)),
       ),
       CreatePersonInService.kind => CreatePersonInService(
-        service: Service.fromJson(_subjectJson(subject)),
+        service: Service.fromJson(_subjectJson(kind, subject)),
       ),
       CreatePersonInGroup.kind => CreatePersonInGroup(
-        group: Group.fromJson(_subjectJson(subject)),
+        group: Group.fromJson(_subjectJson(kind, subject)),
       ),
       CreatePersonInClass.kind => CreatePersonInClass(
-        class$: Class.fromJson(_subjectJson(subject)),
+        class$: Class.fromJson(_subjectJson(kind, subject)),
       ),
       _ => const CreateBlankPerson(),
     };
