@@ -6,12 +6,14 @@ class EditPersonScrollView extends StatelessWidget {
   static const double floatingActionButtonClearance = 120;
 
   final PersonFormController form;
+  final PersonMetadataCatalog metadata;
   final VoidCallback onImportFromContacts;
   final Future<Point?> Function(BuildContext) onChooseLocationOnMap;
   final VoidCallback? onDelete;
 
   const EditPersonScrollView({
     required this.form,
+    required this.metadata,
     required this.onImportFromContacts,
     required this.onChooseLocationOnMap,
     required this.onDelete,
@@ -70,19 +72,22 @@ class EditPersonScrollView extends StatelessWidget {
                       form: form.memberships,
                       violations: form.shownViolations,
                     ),
-                    PersonEditWorkSection(form: form.work),
+                    PersonEditWorkSection(form: form.work, metadata: metadata),
                     const Divider(),
                     PersonEditMaritalStatusAndTypeSection(
                       form: form.maritalStatusAndType,
+                      metadata: metadata,
                     ),
                     const Divider(),
                     PersonEditChurchAndSpiritualSection(
                       form: form.churchAndSpiritual,
+                      metadata: metadata,
                       gender: form.maritalStatusAndType.gender,
                     ),
                     const Divider(),
                     PersonEditHobbiesTagsAndNotesSection(
                       form: form.hobbiesTagsAndNotes,
+                      metadata: metadata,
                     ),
                     PersonEditPastoralDatesSection(form: form.pastoralDates),
                   ],

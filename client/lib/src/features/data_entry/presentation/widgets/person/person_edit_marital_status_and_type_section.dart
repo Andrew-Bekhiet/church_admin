@@ -4,8 +4,13 @@ import 'package:flutter/material.dart';
 
 class PersonEditMaritalStatusAndTypeSection extends StatelessWidget {
   final PersonMaritalStatusAndTypeFormController form;
+  final PersonMetadataCatalog metadata;
 
-  const PersonEditMaritalStatusAndTypeSection({required this.form, super.key});
+  const PersonEditMaritalStatusAndTypeSection({
+    required this.form,
+    required this.metadata,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +77,8 @@ class PersonEditMaritalStatusAndTypeSection extends StatelessWidget {
           field: form.personType,
           label: 'نوع الفرد في العائلة',
           translateError: PersonEditError.messageOf,
-          listController: SearchableDaoListController.over(
-            DatabaseService.I.metadata.personTypes,
-          ),
-          onCreateCustom: MetadataQuickCreate.personType,
+          listController: metadata.personTypes,
+          onCreateCustom: metadata.createPersonType,
           previewBuilder: (personType) => Text(personType.name),
         ),
       ],

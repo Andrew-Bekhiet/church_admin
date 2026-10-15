@@ -19,6 +19,7 @@ export 'application/person_edit/person_household_form_controller.dart';
 export 'application/person_edit/person_identity_form_controller.dart';
 export 'application/person_edit/person_marital_status_and_type_form_controller.dart';
 export 'application/person_edit/person_memberships_form_controller.dart';
+export 'application/person_edit/person_metadata_catalog.dart';
 export 'application/person_edit/person_pastoral_dates_form_controller.dart';
 export 'application/person_edit/person_photo_uploader.dart';
 export 'application/person_edit/person_work_form_controller.dart';

@@ -9,18 +9,18 @@ class PersonEditChurchAndSpiritualSection extends StatelessWidget {
   );
 
   final PersonChurchAndSpiritualFormController form;
+  final PersonMetadataCatalog metadata;
   final AdvancedFieldController<bool, PersonEditError> gender;
 
   const PersonEditChurchAndSpiritualSection({
     required this.form,
+    required this.metadata,
     required this.gender,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final metadata = DatabaseService.I.metadata;
-
     return ListenableBuilder(
       listenable: Listenable.merge([form.isServant, form.isShammas, gender]),
       builder: (context, _) => Column(
@@ -30,18 +30,16 @@ class PersonEditChurchAndSpiritualSection extends StatelessWidget {
             field: form.church,
             label: 'الكنيسة',
             translateError: PersonEditError.messageOf,
-            listController: SearchableDaoListController.over(
-              metadata.churches,
-            ),
-            onCreateCustom: MetadataQuickCreate.church,
+            listController: metadata.churches,
+            onCreateCustom: metadata.createChurch,
             previewBuilder: (church) => Text(church.name),
           ),
           AdvancedSingleObjectSelectionField<Father, PersonEditError>(
             field: form.father,
             label: 'أب الاعتراف',
             translateError: PersonEditError.messageOf,
-            listController: SearchableDaoListController.over(metadata.fathers),
-            onCreateCustom: MetadataQuickCreate.father,
+            listController: metadata.fathers,
+            onCreateCustom: metadata.createFather,
             previewBuilder: (father) => Text(father.name),
           ),
           AdvancedCheckboxTile<PersonEditError>(
@@ -53,10 +51,8 @@ class PersonEditChurchAndSpiritualSection extends StatelessWidget {
               field: form.servingChurch,
               label: 'الكنيسة التي يخدم بها',
               translateError: PersonEditError.messageOf,
-              listController: SearchableDaoListController.over(
-                metadata.churches,
-              ),
-              onCreateCustom: MetadataQuickCreate.church,
+              listController: metadata.churches,
+              onCreateCustom: metadata.createChurch,
               previewBuilder: (church) => Text(church.name),
             ),
             Padding(
@@ -78,9 +74,7 @@ class PersonEditChurchAndSpiritualSection extends StatelessWidget {
                 field: form.shammasLevel,
                 label: 'رتبة الشموسية',
                 translateError: PersonEditError.messageOf,
-                listController: SearchableDaoListController.over(
-                  metadata.shammasLevels,
-                ),
+                listController: metadata.shammasLevels,
                 clearable: false,
                 previewBuilder: (level) => Text(level.name),
               ),
@@ -89,9 +83,7 @@ class PersonEditChurchAndSpiritualSection extends StatelessWidget {
             field: form.state,
             label: 'الحالة الروحية',
             translateError: PersonEditError.messageOf,
-            listController: SearchableDaoListController.over(
-              metadata.personStates,
-            ),
+            listController: metadata.personStates,
             previewBuilder: (personState) => IgnorePointer(
               child: ViewableObjectWidget(
                 personState,

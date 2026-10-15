@@ -5,13 +5,16 @@ class PersonEditWorkSection extends StatelessWidget {
   static const int firstUniversityStudyYear = 13;
 
   final PersonWorkFormController form;
+  final PersonMetadataCatalog metadata;
 
-  const PersonEditWorkSection({required this.form, super.key});
+  const PersonEditWorkSection({
+    required this.form,
+    required this.metadata,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final metadata = DatabaseService.I.metadata;
-
     return ListenableBuilder(
       listenable: Listenable.merge([form.workStatus, form.studyYear]),
       builder: (context, _) => Column(
@@ -28,9 +31,7 @@ class PersonEditWorkSection extends StatelessWidget {
               field: form.studyYear,
               label: 'السنة الدراسية',
               translateError: PersonEditError.messageOf,
-              listController: SearchableDaoListController.over(
-                metadata.studyYears,
-              ),
+              listController: metadata.studyYears,
               previewBuilder: (studyYear) => Text(studyYear.name),
             ),
             if ((form.studyYear.fieldValue?.order ?? 0) >=
@@ -39,10 +40,8 @@ class PersonEditWorkSection extends StatelessWidget {
                 field: form.college,
                 label: 'الكلية',
                 translateError: PersonEditError.messageOf,
-                listController: SearchableDaoListController.over(
-                  metadata.colleges,
-                ),
-                onCreateCustom: MetadataQuickCreate.college,
+                listController: metadata.colleges,
+                onCreateCustom: metadata.createCollege,
                 previewBuilder: (college) => Text(college.name),
               )
             else
@@ -50,10 +49,8 @@ class PersonEditWorkSection extends StatelessWidget {
                 field: form.school,
                 label: 'المدرسة',
                 translateError: PersonEditError.messageOf,
-                listController: SearchableDaoListController.over(
-                  metadata.schools,
-                ),
-                onCreateCustom: MetadataQuickCreate.school,
+                listController: metadata.schools,
+                onCreateCustom: metadata.createSchool,
                 previewBuilder: (school) => Text(school.name),
               ),
           ] else
@@ -61,10 +58,8 @@ class PersonEditWorkSection extends StatelessWidget {
               field: form.qualification,
               label: 'المؤهل',
               translateError: PersonEditError.messageOf,
-              listController: SearchableDaoListController.over(
-                metadata.qualifications,
-              ),
-              onCreateCustom: MetadataQuickCreate.qualification,
+              listController: metadata.qualifications,
+              onCreateCustom: metadata.createQualification,
               previewBuilder: (qualification) => Text(qualification.name),
             ),
           if (form.workStatus.fieldValue
@@ -73,8 +68,8 @@ class PersonEditWorkSection extends StatelessWidget {
               field: form.job,
               label: 'الوظيفة',
               translateError: PersonEditError.messageOf,
-              listController: SearchableDaoListController.over(metadata.jobs),
-              onCreateCustom: MetadataQuickCreate.job,
+              listController: metadata.jobs,
+              onCreateCustom: metadata.createJob,
               previewBuilder: (job) => Text(job.name),
             ),
             Padding(

@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 
 class PersonEditHobbiesTagsAndNotesSection extends StatelessWidget {
   final PersonHobbiesTagsAndNotesFormController form;
+  final PersonMetadataCatalog metadata;
 
-  const PersonEditHobbiesTagsAndNotesSection({required this.form, super.key});
+  const PersonEditHobbiesTagsAndNotesSection({
+    required this.form,
+    required this.metadata,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final metadata = DatabaseService.I.metadata;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -17,8 +20,8 @@ class PersonEditHobbiesTagsAndNotesSection extends StatelessWidget {
           field: form.hobbies,
           label: 'الهوايات',
           translateError: PersonEditError.messageOf,
-          listController: SearchableDaoListController.over(metadata.hobbies),
-          onCreateCustom: MetadataQuickCreate.hobby,
+          listController: metadata.hobbies,
+          onCreateCustom: metadata.createHobby,
           previewBuilder: (hobbies) => ColoredObjectChips(
             objects: hobbies,
             emptyText: 'لا يوجد هوايات',
@@ -28,8 +31,8 @@ class PersonEditHobbiesTagsAndNotesSection extends StatelessWidget {
           field: form.tags,
           label: 'الشارات',
           translateError: PersonEditError.messageOf,
-          listController: SearchableDaoListController.over(metadata.tags),
-          onCreateCustom: MetadataQuickCreate.tag,
+          listController: metadata.tags,
+          onCreateCustom: metadata.createTag,
           previewBuilder: (tags) =>
               ColoredObjectChips(objects: tags, emptyText: 'لا يوجد شارات'),
         ),
