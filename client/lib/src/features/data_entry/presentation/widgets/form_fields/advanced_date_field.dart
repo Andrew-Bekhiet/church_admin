@@ -6,7 +6,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class AdvancedDateField<E extends Object> extends StatelessWidget {
   static final DateFormat _dateFormat = DateFormat('yyyy/M/d');
-  static final DateFormat _dateTimeFormat = DateFormat('yyyy/M/d h:m a');
+  static final DateFormat _dateTimeFormat = DateFormat('yyyy/M/d h:mm a');
 
   final AdvancedFieldController<DateTime?, E> field;
   final String label;
