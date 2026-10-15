@@ -1,48 +1,63 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mocktail/mocktail.dart';
 
-class MockBuildContext extends Mock implements BuildContext {}
-
-class MockGoRouterState extends Mock implements GoRouterState {}
+import '../../../../utils.dart';
+import '../screens/edit_person/edit_person_screen_harness.dart';
 
 void main() {
   final person = Person(id: 'person-id', name: 'مينا');
 
-  Widget build(EditPersonRoute route) =>
-      route.build(MockBuildContext(), MockGoRouterState());
+  late EditPersonScreenHarness harness;
+
+  Future<void> openRoute(
+    WidgetTester tester, {
+    PersonEditIntent? intent,
+  }) async {
+    final router = GoRouter(
+      initialLocation: '/edit_person',
+      initialExtra: intent,
+      routes: [$editPersonRoute],
+    );
+    addTearDown(router.dispose);
+
+    await tester.pumpWidget(
+      MaterialApp.router(
+        routerConfig: router,
+        locale: const Locale('ar', 'EG'),
+        theme: ThemingService.getDefault(
+          isDarkOverride: false,
+          greatFeastThemeOverride: false,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+  }
+
+  setUp(() {
+    harness = EditPersonScreenHarness()..install();
+  });
+
+  tearDown(defaultTearDown);
 
   testWidgets('opening the route without an intent edits a blank new person', (
     tester,
   ) async {
-    final screen = build(const EditPersonRoute());
+    await openRoute(tester);
 
-    expect(
-      screen,
-      isA<EditPersonScreen>().having(
-        (screen) => screen.intent,
-        'intent',
-        isA<CreateBlankPerson>(),
-      ),
-    );
+    expect(find.byKey(EditPersonScreenKeys.saveButton), findsOneWidget);
+    expect(find.byTooltip('حذف'), findsNothing);
   });
 
-  testWidgets('opening the route with an intent passes it to the screen', (
+  testWidgets('opening the route with an intent edits that person', (
     tester,
   ) async {
-    final intent = UpdatePerson(person: person);
+    harness.persons.respondWithSavedMemberships(null);
 
-    final screen = build(EditPersonRoute($extra: intent));
+    await openRoute(tester, intent: UpdatePerson(person: person));
 
-    expect(
-      screen,
-      isA<EditPersonScreen>().having(
-        (screen) => screen.intent,
-        'intent',
-        same(intent),
-      ),
-    );
+    expect(find.byKey(EditPersonScreenKeys.saveButton), findsOneWidget);
+    expect(find.byTooltip('حذف'), findsOneWidget);
   });
 }
