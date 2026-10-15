@@ -42,6 +42,7 @@ analyzer:
     strict-raw-types: false
   exclude:
     - "build/**"
+    - test/test_bundle.dart
     - "**.g.dart"
     - "**.freezed.dart"
     - "**.gr.dart"

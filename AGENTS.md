@@ -59,7 +59,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 - **Never return widgets from methods** (`Widget _buildFoo()`). Extract a widget class, or if the subtree is small (under ~100 lines) inline it at the call site. Non-widget helpers returning `String`/data are fine.
 - **No top-level variables or functions.** Use `static` members on the class that owns them.
 - **Files under 350 lines; 420 is a hard maximum.** Split before you reach it.
-- **Member order:** every static first as one block, then instance members. `static_getters_setters` → `static_fields` → `static_methods` → `fields` → `getters_setters` → `constructors` → `methods`. The static block puts getters and setters before fields, which is the reverse of the instance block.
+- **Member order:** every static first as one block, then instance members. `static_getters_setters` → `static_fields` → `static_methods` → `fields` → `getters_setters` → `constructors` → `methods`. The static block puts getters and setters before fields, which is the reverse of the instance block. `dispose()` is the last member of any class that has one (controllers, notifiers, form controllers, not only widget `State`).
 - **Widget state order:** `initState` → `didChangeDependencies` → `didUpdateWidget` → `build` → `deactivate` → `dispose`. `build` sits fourth, not first.
 - **`prefer_match_file_name`** — the public class name matches the file name.
 
@@ -192,7 +192,7 @@ dart analyze --plugins --fatal-infos
 
 Keep `--fatal-infos`. Most solid_lints diagnostics are `info`, so a plain run exits 0 with findings outstanding.
 
-**Run `dart format` over the whole package before committing**, not only the directory you touched. It also normalises a mixed-ending file back to one style. Formatting a single subdirectory is how the mixed endings above survived review. CI fails on unformatted code (`dart format --set-exit-if-changed . || { git diff; exit 1; }` in `static-analysis.yml`, which prints the diff).
+**Run `dart format lib test patrol_test` from `client/` before committing**, covering every tracked Dart directory, not only the directory you touched. Locally `dart format .` also walks the untracked `build/` directory and reports about 68 files as changed while git stays clean. It also normalises a mixed-ending file back to one style. Formatting a single subdirectory is how the mixed endings above survived review. CI fails on unformatted code (`dart format --set-exit-if-changed . || { git diff; exit 1; }` in `static-analysis.yml`, which prints the diff).
 
 ## CI workflows
 
