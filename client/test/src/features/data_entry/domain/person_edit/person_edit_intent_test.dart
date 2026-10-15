@@ -78,6 +78,15 @@ void main() {
     });
   });
 
+  group('PersonEditIntent decoding', () {
+    test('a known kind without a subject is rejected as a format error', () {
+      expect(
+        () => PersonEditIntent.fromJson({'kind': UpdatePerson.kind}),
+        throwsFormatException,
+      );
+    });
+  });
+
   group('UpdatePerson', () {
     test('exposes the person with every relation id filled', () {
       final person = UpdatePerson(
