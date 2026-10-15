@@ -120,6 +120,18 @@ class Service extends ViewableWithIDAndImage
   @override
   Json toJson() => _$ServiceToJson(this);
 
+  bool isOutsideStudyYearRangeOf(int grade) => switch (this) {
+    Service(
+      studyYearFrom: StudyYear(order: final minGrade),
+      studyYearTo: StudyYear(order: final maxGrade),
+    ) =>
+      grade < minGrade || grade > maxGrade,
+    Service(studyYearFrom: StudyYear(order: final minGrade)) =>
+      grade < minGrade,
+    Service(studyYearTo: StudyYear(order: final maxGrade)) => grade > maxGrade,
+    _ => false,
+  };
+
   Variables_Mutation_insertService toInsertInput() =>
       Variables_Mutation_insertService(
         newService: Input_ServicesInsertInput(
