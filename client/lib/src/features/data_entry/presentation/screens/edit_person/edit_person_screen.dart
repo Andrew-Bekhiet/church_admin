@@ -108,6 +108,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
                   ),
                   floatingActionButton: EditPersonSaveButton(
                     progress: _form.saveProgress,
+                    membershipsLoadState: _form.memberships.loadState,
                     onPressed: _save,
                   ),
                 ),
@@ -245,9 +246,23 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
           ),
         );
 
+      case MembershipsNotLoadedYet():
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'جاري تحميل عضويات المخدوم، انتظر قليلاً ثم حاول مرة أخرى',
+            ),
+          ),
+        );
+
+      case MembershipsFailedToLoad():
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('تعذر تحميل عضويات المخدوم، لا يمكن الحفظ الآن'),
+          ),
+        );
+
       case InvalidPerson() ||
-          MembershipsNotLoadedYet() ||
-          MembershipsFailedToLoad() ||
           SaveAlreadyInProgress() ||
           SaveAbandonedBecauseFormWasDisposed():
         return;

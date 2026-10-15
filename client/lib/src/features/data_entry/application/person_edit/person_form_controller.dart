@@ -202,6 +202,17 @@ class PersonFormController extends AdvancedFormController {
     };
     if (!canStart) return const SaveAlreadyInProgress();
 
+    if (!isCreate) {
+      switch (memberships.loadState.value) {
+        case MembershipsLoaded():
+          break;
+        case MembershipsLoading():
+          return const MembershipsNotLoadedYet();
+        case MembershipsLoadFailed():
+          return const MembershipsFailedToLoad();
+      }
+    }
+
     _saveProgress.value = const SavingPerson();
     var stayAwaitingMoveConfirmation = false;
     try {
