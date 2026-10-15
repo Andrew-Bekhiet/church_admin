@@ -59,7 +59,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 - **Never return widgets from methods** (`Widget _buildFoo()`). Extract a widget class, or if the subtree is small (under ~100 lines) inline it at the call site. Non-widget helpers returning `String`/data are fine.
 - **No top-level variables or functions.** Use `static` members on the class that owns them.
 - **Files under 350 lines; 420 is a hard maximum.** Split before you reach it.
-- **Member order:** every static first as one block, then instance members. `static_getters_setters` → `static_fields` → `static_methods` → `fields` → `getters_setters` → `constructors` → `methods`. The static block puts getters and setters before fields, which is the reverse of the instance block.
+- **Member order:** every static first as one block, then instance members. `static_getters_setters` → `static_fields` → `static_methods` → `fields` → `getters_setters` → `constructors` → `methods`. The static block puts getters and setters before fields, which is the reverse of the instance block. `dispose()` is the last member of any class that has one (controllers, notifiers, form controllers, not only widget `State`).
 - **Widget state order:** `initState` → `didChangeDependencies` → `didUpdateWidget` → `build` → `deactivate` → `dispose`. `build` sits fourth, not first.
 - **`prefer_match_file_name`** — the public class name matches the file name.
 
