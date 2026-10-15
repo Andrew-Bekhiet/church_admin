@@ -224,6 +224,17 @@ void main() {
     expect(form.geolocation.fieldValue, pickedLocation);
   });
 
+  testWidgets('a read-only address shows no reminder for a changed place', (
+    tester,
+  ) async {
+    await pumpSection(tester, initialAddress: locatedAddress);
+    await typeHouseCode(tester, '14');
+    form.markReadOnly();
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(LocationUpdateReminderCardKeys.card), findsNothing);
+  });
+
   testWidgets('a required address shows what is missing once validated', (
     tester,
   ) async {
