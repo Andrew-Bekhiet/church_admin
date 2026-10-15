@@ -138,19 +138,23 @@ class EditPersonScreenHarness {
     WidgetTester tester,
     PersonEditIntent intent, {
     bool membershipsLoaded = true,
+    bool withPageBelow = false,
   }) async {
     if (membershipsLoaded) persons.respondWithSavedMemberships(null);
 
+    Widget openButtonPage(BuildContext context) => Scaffold(
+      body: TextButton(
+        onPressed: () => unawaited(context.push('/edit')),
+        child: const Text('open'),
+      ),
+    );
+
     final router = GoRouter(
       routes: [
+        GoRoute(path: '/', builder: (context, _) => openButtonPage(context)),
         GoRoute(
-          path: '/',
-          builder: (context, state) => Scaffold(
-            body: TextButton(
-              onPressed: () => unawaited(context.push('/edit')),
-              child: const Text('open'),
-            ),
-          ),
+          path: '/below',
+          builder: (context, _) => openButtonPage(context),
         ),
         GoRoute(
           path: '/edit',
@@ -181,6 +185,10 @@ class EditPersonScreenHarness {
         ),
       ),
     );
+    if (withPageBelow) {
+      unawaited(router.push<void>('/below'));
+      await tester.pumpAndSettle();
+    }
     await tester.tap(find.text('open'));
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
