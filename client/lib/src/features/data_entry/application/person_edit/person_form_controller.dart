@@ -203,8 +203,10 @@ class PersonFormController extends AdvancedFormController {
       switch (memberships.loadState.value) {
         case MembershipsLoaded():
           break;
+
         case MembershipsLoading():
           return const MembershipsNotLoadedYet();
+
         case MembershipsLoadFailed():
           return const MembershipsFailedToLoad();
       }
@@ -272,8 +274,10 @@ class PersonFormController extends AdvancedFormController {
       switch (photo.fieldValue) {
         case KeepPhoto():
           break;
+
         case DeletePhoto():
           await _photoUploader.deletePhotoOf(saved);
+
         case ReplacePhoto(:final photo):
           _saveProgress.value = const UploadingPhoto();
           await _photoUploader.uploadPhotoOf(

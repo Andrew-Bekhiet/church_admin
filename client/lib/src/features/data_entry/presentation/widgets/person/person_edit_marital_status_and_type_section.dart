@@ -110,6 +110,7 @@ class PersonEditMaritalStatusAndTypeSection extends StatelessWidget {
     switch (result) {
       case null || NewObjectNamed():
         return;
+
       case ObjectSelected(:final object):
         form.martialStatus.setValue(object.enumValue);
     }
