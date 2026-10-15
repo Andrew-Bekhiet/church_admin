@@ -76,12 +76,6 @@ class _TappableInputFieldState<T> extends State<TappableInputField<T>> {
     );
   }
 
-  @override
-  void dispose() {
-    _ownedFocusNode?.dispose();
-    super.dispose();
-  }
-
   void _useFocusNodeOfWidget() {
     _ownedFocusNode?.dispose();
 
@@ -94,5 +88,11 @@ class _TappableInputFieldState<T> extends State<TappableInputField<T>> {
         _ownedFocusNode = ownedNode;
         _effectiveFocusNode = ownedNode;
     }
+  }
+
+  @override
+  void dispose() {
+    _ownedFocusNode?.dispose();
+    super.dispose();
   }
 }

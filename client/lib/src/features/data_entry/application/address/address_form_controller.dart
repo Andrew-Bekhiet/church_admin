@@ -244,14 +244,6 @@ class AddressFormController extends AdvancedFormController {
   Future<District> createDistrictNamed(String name) =>
       _services.places.createDistrictNamed(name);
 
-  @override
-  void dispose() {
-    _houseNumberGeocodingDebounce?.cancel();
-    _suggestion.dispose();
-    _addressConfirmedNotStale.dispose();
-    super.dispose();
-  }
-
   Future<void> _fillAreaOf(Street chosen) async {
     final areaWhenLookupStarted = area.fieldValue;
     final generationWhenLookupStarted = _baselineGeneration;
@@ -361,5 +353,13 @@ class AddressFormController extends AdvancedFormController {
 
       return null;
     }
+  }
+
+  @override
+  void dispose() {
+    _houseNumberGeocodingDebounce?.cancel();
+    _suggestion.dispose();
+    _addressConfirmedNotStale.dispose();
+    super.dispose();
   }
 }
