@@ -136,19 +136,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (_needsSaving) {
       final confirmExit = await showDialog<bool>(
         context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('هل أنت متأكد من الخروج؟'),
-          content: const Text('لم يتم حفظ التغييرات الجديدة'),
-          actions: [
-            FilledButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('البقاء'),
-            ),
-            FilledButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('خروج بدون حفظ'),
-            ),
-          ],
+        builder: (context) => const ConfirmationDialog(
+          title: 'هل أنت متأكد من الخروج؟',
+          explanation: 'لم يتم حفظ التغييرات الجديدة',
+          confirmLabel: 'خروج بدون حفظ',
+          cancelLabel: 'البقاء',
+          isDestructive: true,
         ),
       );
 

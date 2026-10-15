@@ -195,18 +195,10 @@ class _ViewUserState extends State<ViewUser> {
   Future<void> _confirmDeleteMyAccount() async {
     bool? dialogResult = await showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('هل تريد حقا حذف حسابك وجميع البيانات المتعلقة به؟'),
-        actions: [
-          OutlinedButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('لا'),
-          ),
-          OutlinedButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('نعم'),
-          ),
-        ],
+      builder: (context) => const ConfirmationDialog(
+        title: 'هل تريد حقا حذف حسابك وجميع البيانات المتعلقة به؟',
+        confirmLabel: 'متابعة',
+        isDestructive: true,
       ),
     );
 
@@ -214,24 +206,13 @@ class _ViewUserState extends State<ViewUser> {
 
     dialogResult = await showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'سيتم حذف حسابك في التطبيق ولا يمكن استرجاعه ولا البيانات المتعلقة به\nبرجاء التأكيد',
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onErrorContainer,
-          ),
-        ),
-        actions: [
-          OutlinedButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('تراجع'),
-          ),
-          FilledButton.tonal(
-            style: Theme.of(context).filledTonalButtonStyleWorkaround,
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('قد قرأت الرسالة أعلاه وأريد حذف حسابي'),
-          ),
-        ],
+      builder: (context) => const ConfirmationDialog(
+        title: 'تأكيد حذف الحساب',
+        explanation:
+            'سيتم حذف حسابك في التطبيق ولا يمكن استرجاعه ولا البيانات المتعلقة به',
+        confirmLabel: 'حذف حسابي نهائيًا',
+        cancelLabel: 'تراجع',
+        isDestructive: true,
       ),
     );
 
@@ -290,21 +271,12 @@ class _ViewUserState extends State<ViewUser> {
   Future<void> _unapproveUser(User user) async {
     final bool? dialogResult = await showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('هل تريد إلغاء تفعيل هذا الحساب؟'),
-        content: Text(
-          'سيتم إلغاء تفعيل حساب ${user.name} ولن يتمكن من الوصول إلى التطبيق',
-        ),
-        actions: [
-          OutlinedButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('إلغاء'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('تأكيد'),
-          ),
-        ],
+      builder: (context) => ConfirmationDialog(
+        title: 'هل تريد إلغاء تفعيل هذا الحساب؟',
+        explanation:
+            'سيتم إلغاء تفعيل حساب ${user.name} ولن يتمكن من الوصول إلى التطبيق',
+        confirmLabel: 'إلغاء التفعيل',
+        isDestructive: true,
       ),
     );
 

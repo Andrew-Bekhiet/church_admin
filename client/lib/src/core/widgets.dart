@@ -3,6 +3,7 @@ export 'widgets/app_switcher_privacy_cover.dart';
 export 'widgets/ca_error_dialog.dart';
 export 'widgets/ca_error_widget.dart';
 export 'widgets/church_admin_splash_screen.dart';
+export 'widgets/confirmation_dialog.dart';
 export 'widgets/lazy_tab_page.dart';
 export 'widgets/search_field.dart';
 export 'widgets/service_hierarchy_card.dart';
