@@ -229,6 +229,19 @@ void main() {
 
       expect(await submit, isA<SaveAbandonedBecauseFormWasDisposed>());
     });
+
+    test('a save that fails after the form closed is abandoned', () async {
+      final controller = await validNewPerson();
+      fixture.persons.saveGate = Completer<void>();
+      fixture.persons.saveError = Exception('offline');
+      final submit = controller.submit();
+      await pumpEventQueue();
+
+      controller.dispose();
+      fixture.persons.saveGate?.complete();
+
+      expect(await submit, isA<SaveAbandonedBecauseFormWasDisposed>());
+    });
   });
 
   group('the photo', () {
