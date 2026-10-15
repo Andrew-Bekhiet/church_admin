@@ -177,6 +177,23 @@ void main() {
 
       expect(controller.area.fieldValue, isNull);
     });
+
+    test(
+      'discards the lookup of a street the new baseline also names',
+      () async {
+        fixture.areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
+        final lookup = fixture.areas.lookupGatesByStreetId[mainStreet.id] =
+            Completer<void>();
+        final controller = fixture.controllerFor();
+        controller.chooseStreet(mainStreet);
+
+        controller.loadAsNewBaseline(const Address(street: mainStreet));
+        lookup.complete();
+        await pumpEventQueue();
+
+        expect(controller.area.fieldValue, isNull);
+      },
+    );
   });
 
   group('the location reminder', () {

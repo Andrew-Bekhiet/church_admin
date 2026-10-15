@@ -104,6 +104,25 @@ void main() {
     });
   });
 
+  test('a house geocoded before a reload that names the same house '
+      'leaves the new baseline unchanged', () {
+    fakeAsync((async) {
+      final controller = controllerOnMainStreet();
+      final geocoding = fixture.geocoder.locationGate = Completer<void>();
+      typeHouseCode(controller, '12');
+      async.elapse(typingPause);
+      async.flushMicrotasks();
+
+      controller.loadAsNewBaseline(
+        const Address(street: mainStreet, houseCode: '12'),
+      );
+      geocoding.complete();
+      async.flushMicrotasks();
+
+      expect(controller.area.fieldValue, isNull);
+    });
+  });
+
   test('clearing the house number geocodes nothing', () {
     fakeAsync((async) {
       final controller = fixture.controllerFor(

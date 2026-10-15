@@ -256,6 +256,21 @@ void main() {
     expect(controller.suggestion.value, isA<NoAddressSuggestion>());
   });
 
+  test('a suggestion computed before a reload that keeps the same location '
+      'is dropped', () async {
+    fixture.areas.areasAtPoint[pickedLocation] = stMarkArea;
+    final lookup = fixture.geocoder.gatesByLocation[pickedLocation] =
+        Completer<void>();
+    final controller = fixture.controllerFor();
+
+    final pick = controller.useLocation(pickedLocation);
+    controller.loadAsNewBaseline(const Address(geolocation: pickedLocation));
+    lookup.complete();
+    await pick;
+
+    expect(controller.suggestion.value, isA<NoAddressSuggestion>());
+  });
+
   test('disposing the controller while a suggestion is being computed '
       'throws nothing', () async {
     final lookup = fixture.geocoder.gatesByLocation[pickedLocation] =
