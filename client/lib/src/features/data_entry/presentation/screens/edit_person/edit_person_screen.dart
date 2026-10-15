@@ -58,9 +58,6 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
       },
     );
     _familyIdLastSeenByPhoneContacts = _form.household.family.fieldValue?.id;
-    _form.household.onValuesChanged.addListener(
-      _followHouseholdInPhoneContacts,
-    );
     _form.saveProgress.addListener(_showSaveProgressWhileSaving);
   }
 
@@ -82,7 +79,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
             ValueListenableBuilder<AdvancedFieldState<Color?, PersonEditError>>(
               valueListenable: _form.hobbiesTagsAndNotes.color,
               builder: (context, color, child) => Theme(
-                data: ThemingService.getDefault(seedOverride: color.value),
+                data: ThemingService.getDefault(),
                 child: child!,
               ),
               child: PopScope(
