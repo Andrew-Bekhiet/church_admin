@@ -105,7 +105,7 @@ class PersonContactSection extends StatelessWidget {
       builder: (context) => const ConfirmationDialog(
         title: 'هل تريد تسجيل تاريخ هذه المكالمة؟',
         confirmLabel: 'تسجيل',
-        cancelLabel: 'لا',
+        cancelLabel: 'تخطي',
       ),
     );
 
