@@ -28,7 +28,7 @@ android {
     defaultConfig {
         applicationId = "com.AndroidQuartz.church_admin"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 37
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
