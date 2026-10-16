@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class UpdateUserSpiritDataScreen extends StatefulWidget {
@@ -46,88 +45,28 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(height: 40),
-              TappableFormField<DateTime?>(
+              SpiritDataDateField(
                 key: UpdateUserSpiritDataScreenKeys.lastCommunionField,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: (context, state) => InputDecoration(
-                  errorText: state.errorText,
-                  labelText: 'تاريخ أخر تناول',
-                  suffixIcon: state.isValid
-                      ? const Icon(Symbols.done, color: Colors.green)
-                      : const Icon(Symbols.close, color: Colors.red),
-                ),
+                label: 'تاريخ أخر تناول',
                 initialValue: _userData.lastKodas?.time,
-                onTap: (state) async {
-                  final picked = await _selectDate(
-                    'تاريخ أخر تناول',
-                    state.value ?? DateTime.now(),
-                  );
-                  if (picked != null) {
-                    state.didChange(
-                      picked,
-                    );
-                  }
-                },
-                builder: (context, state) {
-                  return state.value != null
-                      ? Text(DateFormat('yyyy/M/d').format(state.value!))
-                      : null;
-                },
                 onSaved: (v) => _userData = _userData.copyWith(
                   lastKodas: LastRecordedByInfo(
                     time: v,
                     recordedBy: AuthBloc.I.currentUser!.uid,
                   ),
                 ),
-                validator: (value) => value == null
-                    ? 'برجاء اختيار تاريخ أخر تناول'
-                    : value.isBefore(
-                        DateTime.now().subtract(Person.maxSpiritDataAge),
-                      )
-                    ? 'يجب أن يكون التاريخ منذ شهرين على الأكثر'
-                    : null,
               ),
               const SizedBox(height: 20),
-              TappableFormField<DateTime?>(
+              SpiritDataDateField(
                 key: UpdateUserSpiritDataScreenKeys.lastConfessionField,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: (context, state) => InputDecoration(
-                  errorText: state.errorText,
-                  labelText: 'تاريخ أخر اعتراف',
-                  suffixIcon: state.isValid
-                      ? const Icon(Symbols.done, color: Colors.green)
-                      : const Icon(Symbols.close, color: Colors.red),
-                ),
+                label: 'تاريخ أخر اعتراف',
                 initialValue: _userData.lastConfession?.time,
-                onTap: (state) async {
-                  final picked = await _selectDate(
-                    'تاريخ أخر اعتراف',
-                    state.value ?? DateTime.now(),
-                  );
-                  if (picked != null) {
-                    state.didChange(
-                      picked,
-                    );
-                  }
-                },
-                builder: (context, state) {
-                  return state.value != null
-                      ? Text(DateFormat('yyyy/M/d').format(state.value!))
-                      : null;
-                },
                 onSaved: (v) => _userData = _userData.copyWith(
                   lastConfession: LastRecordedByInfo(
                     time: v,
                     recordedBy: AuthBloc.I.currentUser!.uid,
                   ),
                 ),
-                validator: (value) => value == null
-                    ? 'برجاء اختيار تاريخ أخر اعتراف'
-                    : value.isBefore(
-                        DateTime.now().subtract(Person.maxSpiritDataAge),
-                      )
-                    ? 'يجب أن يكون التاريخ منذ شهرين على الأكثر'
-                    : null,
               ),
               const SizedBox(height: 40),
             ],
@@ -190,21 +129,5 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
     } finally {
       _isSaving = false;
     }
-  }
-
-  Future<DateTime?> _selectDate(String helpText, DateTime initialDate) async {
-    final picked = await showDatePicker(
-      helpText: helpText,
-      locale: const Locale('ar', 'EG'),
-      context: context,
-      initialDate: initialDate,
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
-    if (picked != null && picked != initialDate) {
-      return picked;
-    }
-
-    return null;
   }
 }
