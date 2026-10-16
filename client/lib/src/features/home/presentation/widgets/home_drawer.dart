@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_cache_inspector/graphql_cache_inspector.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';

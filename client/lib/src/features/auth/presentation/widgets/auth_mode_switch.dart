@@ -1,5 +1,5 @@
 import 'package:church_admin/src/features/auth/presentation/screens/login_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AuthModeSwitch extends StatelessWidget {
   const AuthModeSwitch({

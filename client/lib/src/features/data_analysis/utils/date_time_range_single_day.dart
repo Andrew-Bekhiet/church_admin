@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 extension DateTimeRangeSingleDay on DateTimeRange {
   /// Range bounds are consumed inclusively, so only start == end covers a

@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class HomePageConfig<T extends Viewable> extends Equatable {
   final String label;

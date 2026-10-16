@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart' hide Polygon;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class GeomapOptionsDataSelectionTile extends StatelessWidget {
   final String title;

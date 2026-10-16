@@ -6,7 +6,7 @@ import 'package:church_admin/src/features/attendance/application/live_records.da
 import 'package:church_admin/src/features/attendance/application/scaffold_attendance_undo_presenter.dart';
 import 'package:church_admin/src/features/attendance/domain/attendance_record_rights.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart' show DateTimeRange, DateUtils, TimeOfDay;
+import 'package:material_ui/material_ui.dart' show DateTimeRange, DateUtils, TimeOfDay;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 

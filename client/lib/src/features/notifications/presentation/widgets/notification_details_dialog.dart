@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart' hide Notification;
+import 'package:material_ui/material_ui.dart' hide Notification;
 import 'package:intl/intl.dart';
 
 class NotificationDetailsDialog extends StatelessWidget {

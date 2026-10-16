@@ -3,7 +3,7 @@ import 'package:church_admin/src/features/auth/presentation/widgets/login_passwo
 import 'package:church_admin/src/features/auth/presentation/widgets/signup_agreement_text.dart';
 import 'package:church_admin/src/features/auth/presentation/widgets/signup_password_fields.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AuthForm extends StatelessWidget {
   const AuthForm({

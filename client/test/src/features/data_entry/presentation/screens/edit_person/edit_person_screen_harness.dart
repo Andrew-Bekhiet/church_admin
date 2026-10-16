@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/hobbies_dao.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types_dao.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';

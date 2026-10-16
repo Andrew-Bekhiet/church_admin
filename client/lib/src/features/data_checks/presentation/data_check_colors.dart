@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class DataCheckColors extends ThemeExtension<DataCheckColors> {
   static const Color _defaultSeedColor = Color(0xFF2E7D32);

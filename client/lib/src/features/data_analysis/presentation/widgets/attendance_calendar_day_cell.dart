@@ -1,5 +1,5 @@
 import 'package:derived_colors/derived_colors.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AttendanceCalendarDayCell extends StatelessWidget {
   final DateTime day;
