@@ -48,7 +48,7 @@ class _ViewableObjectListState<T extends Viewable>
       widget.objectsController;
 
   Widget Function(BuildContext, int) _itemBuilderFor(List<T> items) =>
-      (context, i) => _ListItem<T>(
+      (context, i) => ViewableObjectListIndexedItem<T>(
         index: i,
         items: items,
         objectsController: objectsController,
@@ -164,57 +164,8 @@ class _ViewableObjectListState<T extends Viewable>
   }
 }
 
-class _ListItem<T extends Viewable> extends StatelessWidget {
-  final int index;
-  final List<T> items;
-  final ViewableObjectListController<T> objectsController;
-  final ViewableObjectListType type;
-  final bool addSeparator;
-  final ItemBuilder<T>? itemBuilder;
-  final ViewableObjectWidgetConfig<T>? viewableObjectWidgetConfig;
-
-  const _ListItem({
-    required this.index,
-    required this.items,
-    required this.objectsController,
-    required this.type,
-    required this.addSeparator,
-    this.itemBuilder,
-    this.viewableObjectWidgetConfig,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    if (index >= items.length) {
-      return StreamBuilder(
-        stream: objectsController.onLoadingChanged,
-        builder: (context, state) =>
-            state.hasData &&
-                state.requireData &&
-                (type != ViewableObjectListType.list || index == items.length)
-            ? const Center(child: CircularProgressIndicator())
-            : const SizedBox(height: 120),
-      );
-    }
-
-    return ViewableObjectListItem(
-      key: ValueKey(items[index]),
-      item: items[index],
-      selectionController: objectsController.selectionController,
-      itemBuilder: itemBuilder,
-      viewableObjectWidgetConfig: viewableObjectWidgetConfig,
-      addSeparator:
-          addSeparator &&
-          index < items.length - 1 &&
-          type == ViewableObjectListType.list,
-    );
-  }
-}
-
-typedef ItemBuilder<T extends Viewable> =
-    Widget Function(
-      BuildContext context,
-      T item,
-      ViewableObjectWidgetConfig<T>? config,
-    );
+typedef ItemBuilder<T extends Viewable> = Widget Function(
+  BuildContext context,
+  T item,
+  ViewableObjectWidgetConfig<T>? config,
+);
