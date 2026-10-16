@@ -8,7 +8,6 @@ import 'package:file/file.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
@@ -35,13 +34,14 @@ void main() {
     (tester) async {
       final unit = Person(id: 'id', name: 'name');
 
-      await tester.pumpWidgetBuilder(
-        Scaffold(
-          body: ImageObjectWidget(
-            unit,
+      await tester.pumpWidget(
+        MaterialUiTestApp(
+          child: Scaffold(
+            body: ImageObjectWidget(
+              unit,
+            ),
           ),
         ),
-        wrapper: MaterialUiTestApp.wrapper(),
       );
 
       await tester.pumpAndSettle();
@@ -98,14 +98,16 @@ void main() {
         ),
       );
 
-      await tester.pumpWidgetBuilder(
-        Scaffold(
-          body: ImageObjectWidget(
-            person,
+      await tester.pumpWidget(
+        MaterialUiTestApp(
+          child: Scaffold(
+            body: ImageObjectWidget(
+              person,
+            ),
           ),
         ),
-        wrapper: MaterialUiTestApp.wrapper(),
       );
+      await tester.pump();
 
       expect(
         freshImageFinder,
@@ -160,16 +162,14 @@ void main() {
             .future,
       );
 
-      await tester.pumpWidgetBuilder(
-        Scaffold(body: ImageObjectWidget(personA)),
-        wrapper: MaterialUiTestApp.wrapper(),
+      await tester.pumpWidget(
+        MaterialUiTestApp(child: Scaffold(body: ImageObjectWidget(personA))),
       );
       urlCompleters[personA.imageInfo.cacheKey]!.complete('urlA');
       await tester.pump();
 
-      await tester.pumpWidgetBuilder(
-        Scaffold(body: ImageObjectWidget(personB)),
-        wrapper: MaterialUiTestApp.wrapper(),
+      await tester.pumpWidget(
+        MaterialUiTestApp(child: Scaffold(body: ImageObjectWidget(personB))),
       );
       await tester.pump();
 
@@ -262,15 +262,17 @@ void main() {
         return tester.widget<RawImage>(find.byType(RawImage)).image?.width;
       }
 
-      await tester.pumpWidgetBuilder(
-        Scaffold(body: ImageObjectWidget(personWithOldPhoto)),
-        wrapper: MaterialUiTestApp.wrapper(),
+      await tester.pumpWidget(
+        MaterialUiTestApp(
+          child: Scaffold(body: ImageObjectWidget(personWithOldPhoto)),
+        ),
       );
       expect(await displayedPhotoWidth(), 1);
 
-      await tester.pumpWidgetBuilder(
-        Scaffold(body: ImageObjectWidget(personWithNewPhoto)),
-        wrapper: MaterialUiTestApp.wrapper(),
+      await tester.pumpWidget(
+        MaterialUiTestApp(
+          child: Scaffold(body: ImageObjectWidget(personWithNewPhoto)),
+        ),
       );
 
       expect(await displayedPhotoWidth(), 2);
@@ -286,13 +288,14 @@ void main() {
         photoUpdatedAt: DateTime.now(),
       );
 
-      await tester.pumpWidgetBuilder(
-        Scaffold(
-          body: ImageObjectWidget(
-            person,
+      await tester.pumpWidget(
+        MaterialUiTestApp(
+          child: Scaffold(
+            body: ImageObjectWidget(
+              person,
+            ),
           ),
         ),
-        wrapper: MaterialUiTestApp.wrapper(),
       );
 
       expect(
@@ -340,14 +343,15 @@ void main() {
         photoUpdatedAt: DateTime.now(),
       );
 
-      await tester.pumpWidgetBuilder(
-        Scaffold(
-          body: ImageObjectWidget(
-            person,
-            circleCrop: false,
+      await tester.pumpWidget(
+        MaterialUiTestApp(
+          child: Scaffold(
+            body: ImageObjectWidget(
+              person,
+              circleCrop: false,
+            ),
           ),
         ),
-        wrapper: MaterialUiTestApp.wrapper(),
       );
 
       expect(
@@ -395,13 +399,14 @@ void main() {
         photoUpdatedAt: DateTime.now(),
       );
 
-      await tester.pumpWidgetBuilder(
-        Scaffold(
-          body: ImageObjectWidget(
-            person,
+      await tester.pumpWidget(
+        MaterialUiTestApp(
+          child: Scaffold(
+            body: ImageObjectWidget(
+              person,
+            ),
           ),
         ),
-        wrapper: MaterialUiTestApp.wrapper(),
       );
 
       await tester.pump(const Duration(milliseconds: 120));

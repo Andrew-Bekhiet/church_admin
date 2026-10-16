@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -46,10 +45,7 @@ void main() {
 
         initGlobalProviderContainer(overrides);
 
-        await tester.pumpWidgetBuilder(
-          const LoginScreen(),
-          wrapper: MaterialUiTestApp.wrapper(),
-        );
+        await tester.pumpWidget(const MaterialUiTestApp(child: LoginScreen()));
         await act.enterText(
           spotKey(LoginScreenKeys.emailFieldKey),
           'email@example.com',
@@ -90,10 +86,7 @@ void main() {
 
         initGlobalProviderContainer(overrides);
 
-        await tester.pumpWidgetBuilder(
-          const LoginScreen(),
-          wrapper: MaterialUiTestApp.wrapper(),
-        );
+        await tester.pumpWidget(const MaterialUiTestApp(child: LoginScreen()));
 
         await tester.dragUntilVisible(
           find.byKey(LoginScreenKeys.switchLoginSignupButtonKey),
@@ -145,7 +138,7 @@ void main() {
 
         initGlobalProviderContainer(overrides);
 
-        await tester.pumpWidgetBuilder(
+        await tester.pumpWidget(
           MaterialApp.router(
             routerConfig: $appRouter,
           ),

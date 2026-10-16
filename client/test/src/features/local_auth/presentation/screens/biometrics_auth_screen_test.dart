@@ -7,7 +7,6 @@ import 'package:device_info_plus_platform_interface/device_info_plus_platform_in
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -44,14 +43,13 @@ void main() {
   Future<void> pumpLockScreen(
     WidgetTester tester, {
     Widget screen = const BiometricsAuthScreen(),
-    WidgetWrapper? wrapper,
+    Widget Function({required Widget child}) app = MaterialUiTestApp.new,
   }) async {
-    addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.pumpWidgetBuilder(
-      screen,
-      wrapper: wrapper ?? MaterialUiTestApp.wrapper(),
-      surfaceSize: const Size(390, 1200),
-    );
+    tester.view
+      ..physicalSize = const Size(390, 1200)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(app(child: screen));
     await tester.pumpAndSettle();
   }
 
@@ -172,7 +170,7 @@ void main() {
         overlayChildBuilder: (context) => const BiometricsAuthScreen(),
         child: const Scaffold(),
       ),
-      wrapper: materialAppWithThemeAndLocale(),
+      app: MaterialUiTestApp.withThemeAndLocale,
     );
     overlayController.show();
     await tester.pumpAndSettle();

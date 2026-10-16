@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -8,6 +7,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:spot/spot.dart';
 
 import '../../../../fakes/fake_feature_flags_repo.dart';
+import '../../../../material_ui_test_app.dart';
 import '../../../../utils.dart';
 import 'home_screen_summary_test.mocks.dart';
 
@@ -60,9 +60,10 @@ void main() {
 
   group('HomeModeSelector =>', () {
     testWidgets('requests new data on dialog button tap', (tester) async {
-      await tester.pumpWidgetBuilder(
-        Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
-        wrapper: materialAppWithThemeAndLocale(),
+      await tester.pumpWidget(
+        MaterialUiTestApp.withThemeAndLocale(
+          child: Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
+        ),
       );
 
       await act.tap(spotKey(HomeScreenSummaryKeys.verseButtonKey));
@@ -76,9 +77,10 @@ void main() {
     });
 
     testWidgets('shares text when share button is tapped', (tester) async {
-      await tester.pumpWidgetBuilder(
-        Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
-        wrapper: materialAppWithThemeAndLocale(),
+      await tester.pumpWidget(
+        MaterialUiTestApp.withThemeAndLocale(
+          child: Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
+        ),
       );
 
       await act.tap(spotKey(HomeScreenSummaryKeys.verseButtonKey));
@@ -90,9 +92,10 @@ void main() {
     });
 
     testWidgets('switches to church data mode', (tester) async {
-      await tester.pumpWidgetBuilder(
-        Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
-        wrapper: materialAppWithThemeAndLocale(),
+      await tester.pumpWidget(
+        MaterialUiTestApp.withThemeAndLocale(
+          child: Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
+        ),
       );
 
       await act.tap(spotKey(HomeScreenSummaryKeys.churchDataButtonKey));
@@ -101,9 +104,10 @@ void main() {
     });
 
     testWidgets('switches to sunday school mode', (tester) async {
-      await tester.pumpWidgetBuilder(
-        Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
-        wrapper: materialAppWithThemeAndLocale(),
+      await tester.pumpWidget(
+        MaterialUiTestApp.withThemeAndLocale(
+          child: Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
+        ),
       );
 
       await act.tap(spotKey(HomeScreenSummaryKeys.sundaySchoolButtonKey));

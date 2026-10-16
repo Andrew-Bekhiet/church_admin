@@ -6,6 +6,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../material_ui_test_app.dart';
 import '../../../utils.dart';
 
 void main() {
@@ -107,8 +108,8 @@ void main() {
     ) async {
       final semantics = tester.ensureSemantics();
       await tester.pumpWidget(
-        materialAppWithThemeAndLocale()(
-          Scaffold(
+        MaterialUiTestApp.withThemeAndLocale(
+          child: Scaffold(
             body: Column(
               children: [
                 DataCheckDetailRow(detail: passedDetail),

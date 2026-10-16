@@ -1,12 +1,10 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rxdart_ext/single.dart';
 
 import '../../material_ui_test_app.dart';
-import '../../utils.dart';
 
 void main() {
   group(
@@ -18,14 +16,15 @@ void main() {
           final sink = BehaviorSubject<String?>.seeded('');
           addTearDown(sink.close);
 
-          await tester.pumpWidgetBuilder(
-            Scaffold(
-              body: SearchField(
-                searchSink: sink,
-                canHide: true,
+          await tester.pumpWidget(
+            MaterialUiTestApp.withThemeAndLocale(
+              child: Scaffold(
+                body: SearchField(
+                  searchSink: sink,
+                  canHide: true,
+                ),
               ),
             ),
-            wrapper: materialAppWithThemeAndLocale(),
           );
 
           expect(find.byType(TextField), findsOneWidget);
@@ -46,16 +45,16 @@ void main() {
           final sink = BehaviorSubject<String?>.seeded('');
           addTearDown(sink.close);
 
-          await tester.pumpWidgetBuilder(
-            Scaffold(
-              body: SearchField(
-                searchSink: sink,
-              ),
-            ),
-            wrapper: MaterialUiTestApp.wrapper(
+          await tester.pumpWidget(
+            MaterialUiTestApp(
               theme: ThemingService.getDefault(
                 isDarkOverride: false,
                 greatFeastThemeOverride: false,
+              ),
+              child: Scaffold(
+                body: SearchField(
+                  searchSink: sink,
+                ),
               ),
             ),
           );

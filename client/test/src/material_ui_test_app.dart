@@ -1,19 +1,34 @@
-import 'package:golden_toolkit/golden_toolkit.dart' show WidgetWrapper;
+import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
-// golden_toolkit's own wrapper builds the framework's MaterialApp, which
-// material_ui widgets cannot read their theme or localizations from
-abstract final class MaterialUiTestApp {
-  static WidgetWrapper wrapper({
-    Iterable<LocalizationsDelegate<dynamic>>? localizations,
-    Iterable<Locale>? localeOverrides,
-    ThemeData? theme,
-  }) =>
-      (child) => MaterialApp(
-        localizationsDelegates: localizations,
-        supportedLocales: localeOverrides ?? const [Locale('en')],
-        theme: theme?.copyWith(platform: TargetPlatform.android),
-        debugShowCheckedModeBanner: false,
-        home: Material(child: child),
+class MaterialUiTestApp extends StatelessWidget {
+  final Widget child;
+  final Iterable<LocalizationsDelegate<dynamic>>? localizations;
+  final Iterable<Locale> supportedLocales;
+  final ThemeData? theme;
+
+  const MaterialUiTestApp({
+    required this.child,
+    this.localizations,
+    this.supportedLocales = const [Locale('en')],
+    this.theme,
+    super.key,
+  });
+
+  MaterialUiTestApp.withThemeAndLocale({required this.child, super.key})
+    : localizations = GlobalMaterialLocalizations.delegates,
+      supportedLocales = const [Locale('ar', 'EG')],
+      theme = ThemingService.getDefault(
+        isDarkOverride: false,
+        greatFeastThemeOverride: false,
       );
+
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+    localizationsDelegates: localizations,
+    supportedLocales: supportedLocales,
+    theme: theme?.copyWith(platform: TargetPlatform.android),
+    debugShowCheckedModeBanner: false,
+    home: Material(child: child),
+  );
 }

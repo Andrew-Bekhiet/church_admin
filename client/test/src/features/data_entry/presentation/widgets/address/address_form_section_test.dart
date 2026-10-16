@@ -7,6 +7,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../../fakes/mock_image_url_cache_service.dart';
 import '../../../../../fakes/mock_viewable_object_service.dart';
+import '../../../../../material_ui_test_app.dart';
 import '../../../../../utils.dart';
 import '../../../application/address/address_form_controller_fixture.dart';
 
@@ -42,8 +43,8 @@ void main() {
   }) async {
     form = fixture.controllerFor(initialAddress);
     await tester.pumpWidget(
-      materialAppWithThemeAndLocale()(
-        Scaffold(
+      MaterialUiTestApp.withThemeAndLocale(
+        child: Scaffold(
           body: SingleChildScrollView(
             child: AddressFormSection(
               form: form,

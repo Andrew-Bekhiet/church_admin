@@ -1,12 +1,11 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../../fakes/fake_feature_flags_repo.dart';
-import '../../../../utils.dart';
+import '../../../../material_ui_test_app.dart';
 
 void main() {
   final person = AdvancedQueriesMetadata().person;
@@ -34,25 +33,29 @@ void main() {
   ) async {
     savedArrangement = null;
     sheetClosed = false;
-    await tester.pumpWidgetBuilder(
-      Scaffold(
-        body: Builder(
-          builder: (context) => TextButton(
-            key: openKey,
-            onPressed: () async {
-              savedArrangement = await ListArrangementSheet.show(
-                context,
-                queryableType: person,
-                initialArrangement: initialArrangement,
-              );
-              sheetClosed = true;
-            },
-            child: const Text('open'),
+    tester.view
+      ..physicalSize = const Size(800, 2400)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(
+      MaterialUiTestApp.withThemeAndLocale(
+        child: Scaffold(
+          body: Builder(
+            builder: (context) => TextButton(
+              key: openKey,
+              onPressed: () async {
+                savedArrangement = await ListArrangementSheet.show(
+                  context,
+                  queryableType: person,
+                  initialArrangement: initialArrangement,
+                );
+                sheetClosed = true;
+              },
+              child: const Text('open'),
+            ),
           ),
         ),
       ),
-      wrapper: materialAppWithThemeAndLocale(),
-      surfaceSize: const Size(800, 2400),
     );
     await tester.tap(find.byKey(openKey));
     await tester.pumpAndSettle();

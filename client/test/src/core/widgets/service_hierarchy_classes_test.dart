@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
-import '../../utils.dart';
+import '../../material_ui_test_app.dart';
 
 void main() {
   final third = StudyYear(order: 3, name: 'ثالثة');
@@ -17,8 +17,8 @@ void main() {
 
   Future<void> showClassesOf(WidgetTester tester, List<Class> classes) =>
       tester.pumpWidget(
-        materialAppWithThemeAndLocale()(
-          Scaffold(
+        MaterialUiTestApp.withThemeAndLocale(
+          child: Scaffold(
             body: ServiceHierarchyClasses(
               animationValue: 1,
               service: Service(

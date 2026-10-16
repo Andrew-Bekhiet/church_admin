@@ -1,13 +1,12 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../fakes/fake_box.dart';
 import '../../../fakes/fake_feature_flags_repo.dart';
-import '../../../utils.dart';
+import '../../../material_ui_test_app.dart';
 
 class MockDatabaseService extends Mock implements DatabaseService {}
 
@@ -63,17 +62,18 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
 
-    await tester.pumpWidgetBuilder(
-      Scaffold(
-        body: Builder(
-          builder: (context) => TextButton(
-            key: editKey,
-            onPressed: () => controller.edit(context),
-            child: const Text('edit'),
+    await tester.pumpWidget(
+      MaterialUiTestApp.withThemeAndLocale(
+        child: Scaffold(
+          body: Builder(
+            builder: (context) => TextButton(
+              key: editKey,
+              onPressed: () => controller.edit(context),
+              child: const Text('edit'),
+            ),
           ),
         ),
       ),
-      wrapper: materialAppWithThemeAndLocale(),
     );
     await tester.tap(find.byKey(editKey));
     await tester.pumpAndSettle();

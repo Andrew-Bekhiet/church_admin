@@ -4,6 +4,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../material_ui_test_app.dart';
 import '../../../../../utils.dart';
 
 class MockAuthBloc extends Mock implements AuthBloc {}
@@ -69,8 +70,8 @@ void main() {
       const service = Service(id: 'service-id', name: 'خدمة قديمة');
 
       await tester.pumpWidget(
-        materialAppWithThemeAndLocale()(
-          Builder(
+        MaterialUiTestApp.withThemeAndLocale(
+          child: Builder(
             builder: (context) => TextButton(
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute<void>(

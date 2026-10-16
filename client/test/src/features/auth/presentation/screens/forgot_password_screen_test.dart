@@ -1,11 +1,11 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:spot/spot.dart';
 
+import '../../../../material_ui_test_app.dart';
 import '../../../../utils.dart';
 import 'forgot_password_screen_test.mocks.dart';
 
@@ -20,9 +20,10 @@ void main() {
       testWidgets(
         'Send Reset Link',
         (tester) async {
-          await tester.pumpWidgetBuilder(
-            const ForgotPasswordScreen(),
-            wrapper: materialAppWithThemeAndLocale(),
+          await tester.pumpWidget(
+            MaterialUiTestApp.withThemeAndLocale(
+              child: const ForgotPasswordScreen(),
+            ),
           );
 
           await tester.pumpAndSettle();

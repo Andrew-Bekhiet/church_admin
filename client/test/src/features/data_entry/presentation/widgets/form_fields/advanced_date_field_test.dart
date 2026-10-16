@@ -3,7 +3,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
-import '../../../../../utils.dart';
+import '../../../../../material_ui_test_app.dart';
 
 void main() {
   testWidgets('picking a date after the field was disposed raises nothing', (
@@ -13,8 +13,8 @@ void main() {
       initialValue: null,
     );
     await tester.pumpWidget(
-      materialAppWithThemeAndLocale()(
-        Scaffold(
+      MaterialUiTestApp.withThemeAndLocale(
+        child: Scaffold(
           body: AdvancedDateField<String>(
             field: field,
             label: 'التاريخ',
@@ -41,8 +41,8 @@ void main() {
     );
     addTearDown(field.dispose);
     await tester.pumpWidget(
-      materialAppWithThemeAndLocale()(
-        Scaffold(
+      MaterialUiTestApp.withThemeAndLocale(
+        child: Scaffold(
           body: AdvancedDateField<String>(
             field: field,
             label: 'التاريخ',

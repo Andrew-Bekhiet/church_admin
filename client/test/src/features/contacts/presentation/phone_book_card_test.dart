@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../../material_ui_test_app.dart';
 import '../../../utils.dart';
 
 void main() {
@@ -30,8 +31,8 @@ void main() {
     List<PhoneContact> own = const [],
     List<FamilyPhoneContact> family = const [],
   }) => tester.pumpWidget(
-    materialAppWithThemeAndLocale()(
-      Scaffold(
+    MaterialUiTestApp.withThemeAndLocale(
+      child: Scaffold(
         body: SingleChildScrollView(
           child: PhoneBookCard(own: own, family: family, onCall: (_) {}),
         ),
