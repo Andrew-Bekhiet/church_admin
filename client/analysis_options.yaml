@@ -5,6 +5,11 @@ plugins:
 
 solid_lints:
   diagnostics:
+    avoid_duplicate_code:
+      min_tokens: 40
+      exclude:
+        - method_name: initState
+        - method_name: dispose
     avoid_multiple_declarations_per_file:
       ignored_types:
         - State
@@ -13,6 +18,10 @@ solid_lints:
     avoid_non_null_assertion: false
     avoid_late_keyword: false
     cyclomatic_complexity: false
+    feature_envy:
+      atfd_threshold: 6
+      laa_threshold: 0.33
+      fdp_threshold: 2
     member_ordering:
       order:
         - static_getters_setters
