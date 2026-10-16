@@ -19,7 +19,6 @@ class Church extends ViewableWithID with _$Church implements SerializableExtra {
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @override
   @QueryableField(label: 'isHidden')
   final bool isHidden;
 

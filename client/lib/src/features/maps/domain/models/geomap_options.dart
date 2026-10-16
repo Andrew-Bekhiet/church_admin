@@ -7,21 +7,13 @@ part 'geomap_options.g.dart';
 @freezed
 @JsonSerializable()
 class GeomapOptions with _$GeomapOptions {
-  @override
   final Set<GeoMapLayer> layers;
-  @override
   final Set<Area> selectedAreas;
-  @override
   final Set<Street> selectedStreets;
-  @override
   final Set<Family> selectedFamilies;
-  @override
   final Set<Store> selectedStores;
-  @override
   final Set<Service> selectedServices;
-  @override
   final Set<Class> selectedClasses;
-  @override
   final Set<Group> selectedGroups;
 
   GeomapOptions({

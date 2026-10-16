@@ -9,10 +9,8 @@ part 'history_aggregate_data.g.dart';
 @JsonSerializable()
 @Queryable(label: 'HistoryAggregateData')
 class HistoryAggregateData with _$HistoryAggregateData {
-  @override
   @QueryableField(label: 'aggregate')
   final AggregateData aggregate;
-  @override
   final List<LastRecordedByInfo> nodes;
 
   const HistoryAggregateData({

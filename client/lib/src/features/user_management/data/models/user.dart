@@ -11,7 +11,6 @@ part 'user.g.dart';
 class User extends ViewableWithIDAndImage
     with _$User
     implements SerializableExtra {
-  @override
   @JsonKey(defaultValue: '')
   @QueryableField(label: 'معرف المستخدم', codeOnly: true)
   final String uid;
@@ -21,11 +20,9 @@ class User extends ViewableWithIDAndImage
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @override
   @QueryableField(label: 'البريد الإلكتروني', codeOnly: true)
   final String? email;
 
-  @override
   @LocalDateTimeConverter()
   @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
@@ -33,46 +30,34 @@ class User extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
-  @override
   @QueryableField(label: 'مسؤول عن')
   final List<AdminOnData>? adminOn;
 
-  @override
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
   @QueryableField.manyToMany(through: UsersPermissionsRel, select: 'permission')
   final PermissionsSet permissions;
 
-  @override
   final String? authId;
 
-  @override
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
-  @override
   @QueryableField(label: 'بيانات المخدوم')
   final Person? person;
 
-  @override
   final UserPreferences? preferences;
 
-  @override
   @JsonKey(defaultValue: <FcmToken>[])
   final List<FcmToken> fcmTokens;
 
-  @override
   final List<AdminOnData>? servicesHistory;
 
-  @override
   final List<AdminOnData>? classesHistory;
 
-  @override
   final List<AdminOnData>? groupsHistory;
 
-  @override
   final Invitation? invitation;
 
-  @override
   @JsonKey(includeToJson: false)
   @QueryableField(label: 'currentUserCanManageThisUser', codeOnly: true)
   final bool currentUserCanManageThisUser;

@@ -20,7 +20,6 @@ class Person extends ViewableWithIDAndImage
   @QueryableField.self()
   final String id;
 
-  @override
   final int? nationalId;
 
   @override
@@ -28,145 +27,107 @@ class Person extends ViewableWithIDAndImage
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @override
   @QueryableField(label: 'تفاصيل العنوان')
   final Address? address;
 
-  @override
   @JsonKey(defaultValue: <PhoneContact>[])
   final List<PhoneContact> contacts;
 
-  @override
   @JsonKey(defaultValue: <FamilyPhoneContact>[])
   final List<FamilyPhoneContact> familyContacts;
 
-  @override
   @LocalDateTimeConverter()
   @QueryableField(label: 'تاريخ الميلاد')
   final DateTime? birthdate;
 
-  @override
   @QueryableField.birthday(label: 'يوم وشهر الميلاد')
   final String? birthday;
 
-  @override
   @QueryableField(label: 'النوع')
   final bool gender;
 
-  @override
   @QueryableField(label: 'شماس؟')
   final bool isShammas;
 
-  @override
   final String? shammasLevelId;
 
-  @override
   @QueryableField(label: 'رتبة الشموسية')
   final ShammasLevel? shammasLevel;
 
-  @override
   @QueryableField(label: 'المدرسة')
   final School? school;
 
-  @override
   final String? schoolId;
 
-  @override
   @QueryableField(label: 'الكلية')
   final College? college;
 
-  @override
   final String? collegeId;
 
-  @override
   @QueryableField(label: 'الكنيسة')
   final Church? church;
 
-  @override
   final String? churchId;
 
-  @override
   @QueryableField(label: 'اب الاعتراف')
   final Father? father;
 
-  @override
   final String? fatherId;
 
-  @override
   @QueryableField(label: 'حالة العمل')
   final WorkStatus? workStatus;
 
-  @override
   @QueryableField(label: 'الوظيفة')
   final Job? job;
 
-  @override
   final String? jobId;
 
-  @override
   @QueryableField(label: 'تفاصيل الوظيفة')
   final String? jobDescription;
 
-  @override
   @QueryableField(label: 'المؤهل')
   final Qualification? qualification;
 
-  @override
   final String? qualificationId;
 
-  @override
   @QueryableField(label: 'الحالة الاجتماعية')
   final MartialStatus? martialStatus;
 
-  @override
   @QueryableField(label: 'نوع الفرد في العائلة')
   final PersonType? personType;
 
-  @override
   final String? personTypeId;
 
-  @override
   @QueryableField(label: 'الحالة الروحية')
   final PersonState? state;
 
-  @override
   final String? stateId;
 
-  @override
   @QueryableField(label: 'خادم؟')
   final bool isServant;
 
-  @override
   @QueryableField(label: 'الكنيسة التي يخدم بها')
   final Church? servingChurch;
 
-  @override
   @QueryableField(label: 'نوع الخدمة')
   final String? serviceType;
 
-  @override
   @QueryableField(label: 'ملاحظات')
   final String? notes;
 
-  @override
   @QueryableField(label: 'العائلة')
   final Family? family;
 
-  @override
   final String? familyId;
 
-  @override
   @QueryableField(label: 'المتجر')
   final Store? store;
 
-  @override
   final String? storeId;
 
-  @override
   @QueryableField(label: 'السنة الدراسية')
   final StudyYear? studyYear;
 
-  @override
   final int? studyYearId;
 
   @override
@@ -174,7 +135,6 @@ class Person extends ViewableWithIDAndImage
   @QueryableField(label: 'اللون')
   final Color? color;
 
-  @override
   @LocalDateTimeConverter()
   @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
@@ -182,27 +142,21 @@ class Person extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
-  @override
   @QueryableField(label: 'أخر اعتراف')
   final LastRecordedByInfo? lastConfession;
 
-  @override
   @QueryableField(label: 'أخر تناول')
   final LastRecordedByInfo? lastKodas;
 
-  @override
   @QueryableField(label: 'أخر حضور')
   final LastRecordedByInfo? lastAttendance;
 
-  @override
   @QueryableField(label: 'أخر مكالمات')
   final LastRecordedByInfo? lastCall;
 
-  @override
   @QueryableField(label: 'أخر افتقاد')
   final LastRecordedByInfo? lastVisit;
 
-  @override
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
@@ -210,83 +164,64 @@ class Person extends ViewableWithIDAndImage
   @QueryableField(label: 'اكتمال البيانات')
   final DataCheck? dataCheck;
 
-  @override
   @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
   @QueryableField.manyToMany(through: ClassesPersons)
   final List<Class>? classes;
 
-  @override
   @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
   @QueryableField.manyToMany(through: PersonsGroups)
   final List<Group>? groups;
 
-  @override
   @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
   @QueryableField.manyToMany(through: PersonsServices)
   final List<Service>? services;
 
-  @override
   @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
   @QueryableField.manyToMany(through: PersonsTags)
   final List<Tag>? tags;
 
-  @override
   @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
   @QueryableField.manyToMany(through: PersonsHobbies)
   final List<Hobby>? hobbies;
 
-  @override
   @QueryableField(label: 'بيانات الخادم')
   final User? user;
 
-  @override
   final String? uid;
 
-  @override
   @QueryableField.history(label: 'سجل التناول')
   final List<LastRecordedByInfo>? kodasHistory;
 
-  @override
   @QueryableField.history(label: 'سجل الحضور')
   final List<LastRecordedByInfo>? attendanceHistory;
 
-  @override
   @QueryableField.history(label: 'سجل الاعتراف')
   final List<LastRecordedByInfo>? confessionHistory;
 
-  @override
   @QueryableField.history(label: 'سجل المكالمات')
   final List<LastRecordedByInfo>? callHistory;
 
-  @override
   @QueryableField.history(label: 'سجل الافتقاد')
   final List<LastRecordedByInfo>? visitHistory;
 
-  @override
   @QueryableField.history(label: 'سجل تحديث البيانات')
   final List<LastRecordedByInfo>? editHistory;
 
-  @override
   @QueryableField.aggregate(type: AggregateData)
   final HistoryAggregateData? kodasHistoryAggregate;
 
-  @override
   @QueryableField.aggregate(type: AggregateData)
   final HistoryAggregateData? attendanceHistoryAggregate;
 
-  @override
   @QueryableField.aggregate(type: AggregateData)
   final HistoryAggregateData? confessionHistoryAggregate;
 
-  @override
   @QueryableField.aggregate(type: AggregateData)
   final HistoryAggregateData? callHistoryAggregate;
 
-  @override
   @QueryableField.aggregate(type: AggregateData)
   final HistoryAggregateData? visitHistoryAggregate;
 
-  @override
   @QueryableField.aggregate(type: AggregateData)
   final HistoryAggregateData? editHistoryAggregate;
 

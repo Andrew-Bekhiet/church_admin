@@ -6,19 +6,14 @@ part 'meeting_roster_entry.freezed.dart';
 
 @freezed
 class MeetingRosterEntry with _$MeetingRosterEntry {
-  @override
   final bool asServant;
 
-  @override
   final Person person;
 
-  @override
   final AttendanceRecord? attendanceRecord;
 
-  @override
   final List<String> phones;
 
-  @override
   final PersonMeetingAttendanceAnalysis? personAttendanceAnalysis;
 
   bool get attended => attendanceRecord != null;

@@ -27,22 +27,14 @@ class Notification with _$Notification {
     }
   }
 
-  @override
   final String id;
-  @override
   final String title;
-  @override
   final String body;
-  @override
   @LocalDateTimeConverter()
   final DateTime sentTime;
-  @override
   final String senderUID;
-  @override
   final String? imageURL;
-  @override
   final NotificationType type;
-  @override
   final Json? additionalData;
 
   const Notification({

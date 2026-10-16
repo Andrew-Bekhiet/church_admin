@@ -8,15 +8,10 @@ part 'auth_user.g.dart';
 class AuthUser with _$AuthUser {
   static const String hasuraUserIdKey = 'x-hasura-user-id';
 
-  @override
   final String uid;
-  @override
   final String email;
-  @override
   final bool emailVerified;
-  @override
   final String idToken;
-  @override
   final Map<String, dynamic> claims;
 
   @JsonKey(includeFromJson: false, includeToJson: false)

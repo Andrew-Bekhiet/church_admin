@@ -27,7 +27,6 @@ class Group extends ViewableWithIDAndImage
   @QueryableField(label: 'اللون')
   final Color? color;
 
-  @override
   @LocalDateTimeConverter()
   @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
@@ -35,36 +34,28 @@ class Group extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
-  @override
   final String? serviceId;
 
-  @override
   @QueryableField(label: 'الخدمة')
   final Service? service;
 
-  @override
   @QueryableField(label: 'الاجتماع الافتراضي')
   final Meeting? defaultMeeting;
 
-  @override
   @QueryableField(label: 'meetings')
   final List<Meeting>? meetings;
 
-  @override
   @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
   @QueryableField(label: 'validity', codeOnly: true)
   final DateTimeRange? validity;
 
-  @override
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
-  @override
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   @QueryableField.manyToMany(through: AdminOnData)
   final List<User>? adminUsers;
 
-  @override
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 

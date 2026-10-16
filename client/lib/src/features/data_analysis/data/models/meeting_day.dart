@@ -4,16 +4,12 @@ part 'meeting_day.freezed.dart';
 
 @freezed
 class MeetingDay with _$MeetingDay {
-  @override
   final DateTime day;
 
-  @override
   final int personsCount;
 
-  @override
   final int servantsCount;
 
-  @override
   final int totalCount;
 
   const MeetingDay({

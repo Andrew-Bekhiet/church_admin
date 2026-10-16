@@ -11,7 +11,6 @@ part 'study_year.g.dart';
 class StudyYear extends ViewableWithID
     with _$StudyYear
     implements SerializableExtra {
-  @override
   @JsonKey(defaultValue: 0)
   @QueryableField(label: 'الترتيب')
   final int order;

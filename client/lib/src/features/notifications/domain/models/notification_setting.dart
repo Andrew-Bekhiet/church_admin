@@ -7,11 +7,8 @@ part 'notification_setting.g.dart';
 @freezed
 @JsonSerializable()
 class NotificationSetting with _$NotificationSetting {
-  @override
   final int hours;
-  @override
   final int minutes;
-  @override
   final int intervalInDays;
 
   const NotificationSetting({

@@ -9,15 +9,10 @@ part 'persons_geolocations_response.g.dart';
 class PersonsGeolocationsResponse
     with _$PersonsGeolocationsResponse
     implements ToJson {
-  @override
   final Set<Area> areas;
-  @override
   final Set<Street> streets;
-  @override
   final Set<Family> families;
-  @override
   final Set<Store> stores;
-  @override
   final Set<Person> persons;
 
   const PersonsGeolocationsResponse({

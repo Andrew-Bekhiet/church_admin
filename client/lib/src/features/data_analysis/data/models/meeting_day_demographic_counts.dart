@@ -5,25 +5,18 @@ part 'meeting_day_demographic_counts.freezed.dart';
 
 @freezed
 class MeetingDayDemographicCounts with _$MeetingDayDemographicCounts {
-  @override
   final DateTime day;
 
-  @override
   final int? studyYearId;
 
-  @override
   final bool? gender;
 
-  @override
   final int personsCount;
 
-  @override
   final int servantsCount;
 
-  @override
   final int totalCount;
 
-  @override
   final String? studyYearName;
 
   const MeetingDayDemographicCounts({
