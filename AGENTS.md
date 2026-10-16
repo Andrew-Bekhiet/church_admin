@@ -53,7 +53,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 
 ### Structure
 
-- **One widget/class per file**, public. No private `_Foo` widget classes, no two widgets sharing a file. A sealed class and its subclasses share one file — no `part`/`part of` — while it stays under 420 lines.
+- **One class, enum, mixin or extension per file** is enforced by `avoid_multiple_declarations_per_file` (a sealed family and companions of ≤ 15 lines such as `XKeys` may share a file). Not enforced, still required: no private `_Foo` widget classes, and no `part`/`part of` in hand-written code.
 - **Widget keys live with the widget.** Define a widget's test keys in the same file as the widget that renders them.
 - **UI is mobile-first and responsive**; keep components modular and reusable rather than page-specific.
 - **Never return widgets from methods** (`Widget _buildFoo()`). Extract a widget class, or if the subtree is small (under ~100 lines) inline it at the call site. Non-widget helpers returning `String`/data are fine.
