@@ -33,8 +33,7 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
         UppercaseValidationRule(customText: 'تحتوي على حروف كبيرة (A-Z)'),
         LowercaseValidationRule(customText: 'تحتوي على حروف صغيرة (a-z)'),
         RegexValidationRule(
-          name:
-              'تحتوي على رموز (^ \$ * . [ ] { } ( ) ? " ! @ # % & / \\ , > < \' : ; | _ ~ `)',
+          name: 'تحتوي على رموز (^ \$ * . [ ] { } ( ) ? " ! @ # % & / \\ , > < \' : ; | _ ~ `)',
           regex:
               '[${RegExp.escape(r"^$.[]{}()?"
               r'"!@#%&/\,><'

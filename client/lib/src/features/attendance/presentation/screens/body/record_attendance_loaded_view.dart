@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/attendance/presentation/screens/body/attendance_error_view.dart';
 import 'package:church_admin/src/features/attendance/presentation/screens/body/attendance_flat_roster.dart';
@@ -27,12 +25,10 @@ class _RecordAttendanceLoadedViewState
       controller.position.maxScrollExtent,
     );
 
-    unawaited(
-      controller.animateTo(
-        target,
-        duration: const Duration(milliseconds: 250),
-        curve: Curves.easeInOut,
-      ),
+    controller.animateTo(
+      target,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeInOut,
     );
   }
 

@@ -143,9 +143,9 @@ void main() {
       );
 
       final urlCompleters = <String, Completer<String>>{};
-      final imageUrlCacheService =
-          globalProviderContainer.read(imageUrlCacheServiceProvider)
-              as MockImageUrlCacheService;
+      final imageUrlCacheService = globalProviderContainer.read(
+        imageUrlCacheServiceProvider,
+      ) as MockImageUrlCacheService;
       when(
         () => imageUrlCacheService.getCachedImageUrl(any()),
       ).thenReturn(null);
@@ -171,9 +171,9 @@ void main() {
       );
       await tester.pump();
 
-      final cacheManager =
-          globalProviderContainer.read(baseCacheManagerProvider)
-              as MockBaseCacheManager;
+      final cacheManager = globalProviderContainer.read(
+        baseCacheManagerProvider,
+      ) as MockBaseCacheManager;
       verifyNever(
         () => cacheManager.getFileStream(
           'urlA',
@@ -208,9 +208,9 @@ void main() {
         'newPhotoUrl': twoPixelWideTransparentImage,
       };
 
-      final imageUrlCacheService =
-          globalProviderContainer.read(imageUrlCacheServiceProvider)
-              as MockImageUrlCacheService;
+      final imageUrlCacheService = globalProviderContainer.read(
+        imageUrlCacheServiceProvider,
+      ) as MockImageUrlCacheService;
       when(() => imageUrlCacheService.getCachedImageUrl(any())).thenAnswer(
         (i) =>
             photoUrls[(i.positionalArguments.first as ObjectImageInfo)
@@ -221,9 +221,9 @@ void main() {
             photoUrls[(i.positionalArguments.first as ObjectImageInfo)
                 .lastUpdatedTime]!,
       );
-      final cacheManager =
-          globalProviderContainer.read(baseCacheManagerProvider)
-              as MockBaseCacheManager;
+      final cacheManager = globalProviderContainer.read(
+        baseCacheManagerProvider,
+      ) as MockBaseCacheManager;
       when(
         () => cacheManager.getFileStream(
           any(),

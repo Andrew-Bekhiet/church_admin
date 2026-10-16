@@ -95,8 +95,7 @@ void main() {
       ),
       (
         description: 'a Google Maps directions link, as its destination',
-        link:
-            'https://www.google.com/maps/dir/30.0626,31.2497/30.0444,31.2357/@30.05,31.24,14z/data=!4m2!4m1!3e0',
+        link: 'https://www.google.com/maps/dir/30.0626,31.2497/30.0444,31.2357/@30.05,31.24,14z/data=!4m2!4m1!3e0',
         location: const Point(30.0444, 31.2357),
       ),
       (

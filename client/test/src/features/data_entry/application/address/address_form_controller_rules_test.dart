@@ -101,18 +101,16 @@ void main() {
 
   group('while read-only', () {
     test('choosing a street changes nothing', () async {
-      final controller = fixture.controllerFor(completeAddress);
-      controller.markReadOnly();
-
-      controller.chooseStreet(sideStreet);
+      final controller = fixture.controllerFor(completeAddress)
+        ..markReadOnly()
+        ..chooseStreet(sideStreet);
       await pumpEventQueue();
 
       expect(controller.toAddress(), completeAddress);
     });
 
     test('picking a location changes nothing', () async {
-      final controller = fixture.controllerFor(completeAddress);
-      controller.markReadOnly();
+      final controller = fixture.controllerFor(completeAddress)..markReadOnly();
 
       await controller.useLocation(const Point(30.05, 31.24));
 
@@ -124,9 +122,9 @@ void main() {
       fixture.areas.areasAtPoint[const Point(30.05, 31.24)] = stMarkArea;
       final controller = fixture.controllerFor();
       await controller.useLocation(const Point(30.05, 31.24));
-      controller.markReadOnly();
-
-      controller.useSuggestedAddress();
+      controller
+        ..markReadOnly()
+        ..useSuggestedAddress();
 
       expect(controller.area.fieldValue, isNull);
     });

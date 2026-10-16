@@ -208,8 +208,7 @@ class _ViewUserState extends State<ViewUser> {
       context: context,
       builder: (context) => const ConfirmationDialog(
         title: 'تأكيد حذف الحساب',
-        explanation:
-            'سيتم حذف حسابك في التطبيق ولا يمكن استرجاعه ولا البيانات المتعلقة به',
+        explanation: 'سيتم حذف حسابك في التطبيق ولا يمكن استرجاعه ولا البيانات المتعلقة به',
         confirmLabel: 'حذف حسابي نهائيًا',
         cancelLabel: 'تراجع',
         isDestructive: true,

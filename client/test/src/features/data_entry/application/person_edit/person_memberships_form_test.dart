@@ -123,9 +123,7 @@ void main() {
     });
 
     test('finishing after the form is disposed raises nothing', () async {
-      final controller = fixture.controllerOfUpdate(person);
-
-      controller.dispose();
+      fixture.controllerOfUpdate(person).dispose();
       fixture.persons.respondWithSavedMemberships(
         Person(id: 'p', name: 'مينا', services: const [primary]),
       );

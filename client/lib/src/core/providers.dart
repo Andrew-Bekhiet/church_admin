@@ -453,9 +453,7 @@ final Provider<UserDataWiper> userDataWiperProvider = Provider<UserDataWiper>(
   (ref) {
     final wiper = UserDataWiper(
       userChangesStream: ref.watch(authRepositoryProvider).userChanges,
-    );
-
-    wiper.register(SyncKVStore.clearAllLoaded);
+    )..register(SyncKVStore.clearAllLoaded);
 
     ref.onDispose(wiper.dispose);
 

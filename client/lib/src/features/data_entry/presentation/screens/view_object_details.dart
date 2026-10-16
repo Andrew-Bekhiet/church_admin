@@ -16,11 +16,10 @@ export 'view_object_details/view_street.dart';
 
 typedef WidgetBuilderWithObject<T> = WBuilderWithObject<T, Widget>;
 
-typedef WBuilderWithObject<T, W extends Widget> =
-    W Function(
-      BuildContext context,
-      T object,
-    );
+typedef WBuilderWithObject<T, W extends Widget> = W Function(
+  BuildContext context,
+  T object,
+);
 
 class ViewObjectDetails<T extends ViewableWithIDAndImage>
     extends StatefulWidget {

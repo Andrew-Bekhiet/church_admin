@@ -40,7 +40,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
   Widget build(BuildContext context) {
     final listType = widget.type ?? ViewableObjectListType.list;
 
-    return ViewableObjectList(
+    return ViewableObjectList<Service>(
       type: listType,
       addSeparator: false,
       itemsExpandable: true,
@@ -49,14 +49,14 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
           listType == ViewableObjectListType.grid ||
               listType == ViewableObjectListType.grid3
           ? (
-              BuildContext context,
-              Service service,
-              ViewableObjectWidgetConfig<Service>? config,
+              context,
+              service,
+              config,
             ) => ServiceHierarchyCard(service: service, config: config)
           : (
-              BuildContext context,
-              Service service,
-              ViewableObjectWidgetConfig<Service>? config,
+              context,
+              service,
+              config,
             ) => ServiceHierarchyTile(
               service: service,
               config: config,
@@ -82,33 +82,29 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
   }
 }
 
-typedef ServiceTrailingBuilder =
-    Widget Function(
-      BuildContext,
-      Service, {
-      void Function(Service)? onLongPress,
-      void Function(Service)? onTap,
-      Widget? trailing,
-    });
+typedef ServiceTrailingBuilder = Widget Function(
+  BuildContext,
+  Service, {
+  void Function(Service)? onLongPress,
+  void Function(Service)? onTap,
+  Widget? trailing,
+});
 
-typedef StudyYearBuilder =
-    Widget Function(
-      BuildContext, {
-      required Service service,
-      required StudyYear studyYear,
-    });
+typedef StudyYearBuilder = Widget Function(
+  BuildContext, {
+  required Service service,
+  required StudyYear studyYear,
+});
 
-typedef GroupBuilder =
-    Widget Function(
-      BuildContext, {
-      required Service service,
-      required Group group,
-    });
+typedef GroupBuilder = Widget Function(
+  BuildContext, {
+  required Service service,
+  required Group group,
+});
 
-typedef ClassBuilder =
-    Widget Function(
-      BuildContext, {
-      required Service service,
-      required Class $class,
-      required StudyYear studyYear,
-    });
+typedef ClassBuilder = Widget Function(
+  BuildContext, {
+  required Service service,
+  required Class $class,
+  required StudyYear studyYear,
+});

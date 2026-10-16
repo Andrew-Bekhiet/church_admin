@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -54,7 +53,7 @@ class _SnowflakeAnimationState extends State<SnowflakeAnimation>
       vsync: this,
       duration: const Duration(seconds: 20),
     );
-    unawaited(_controller.repeat());
+    _controller.repeat();
   }
 
   @override

@@ -140,9 +140,9 @@ void main() {
               .having((s) => s.userData, 'userData', initialUserData),
         ],
         verify: (bloc) {
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
 
           verifyInOrder([
             mockRepo.signInWithEmailPassword(
@@ -184,9 +184,9 @@ void main() {
               .having((s) => s.userData, 'userData', initialUserData),
         ],
         verify: (bloc) {
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
 
           verifyInOrder([
             mockRepo.signUpWithEmailPassword(
@@ -251,9 +251,9 @@ void main() {
         setUp: () async {
           await _cacheExpiredAuthUser();
 
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
           when(mockRepo.refreshToken()).thenAnswer(
             (_) async => throw const SessionRevokedException(null, null),
           );
@@ -272,9 +272,9 @@ void main() {
         setUp: () async {
           await _cacheExpiredAuthUser();
 
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
           when(mockRepo.refreshToken()).thenAnswer(
             (_) async => throw const AuthNetworkException(null, null),
           );
@@ -292,9 +292,9 @@ void main() {
       blocTest<AuthBloc, AuthState>(
         'a session with a fresh token stays signed in when the app reconnects',
         setUp: () {
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
           when(mockRepo.refreshToken()).thenAnswer(
             (_) async => throw const SessionRevokedException(null, null),
           );
@@ -323,9 +323,9 @@ void main() {
           isA<AuthUnauthenticated>(),
         ],
         verify: (bloc) {
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
           verify(mockRepo.sendPasswordResetEmail(email: 'email@example.com'));
         },
       );
@@ -348,9 +348,9 @@ void main() {
               .having((s) => s.userData, 'userData', initialUserData),
         ],
         verify: (bloc) {
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
           verify(mockRepo.sendPasswordResetEmail(email: 'email@example.com'));
         },
       );
@@ -405,9 +405,9 @@ void main() {
           ),
         ],
         verify: (bloc) {
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
           verify(mockRepo.refreshToken());
         },
       );
@@ -447,9 +447,9 @@ void main() {
           ),
         ],
         verify: (bloc) {
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
           verify(mockRepo.refreshToken()).called(1);
         },
       );
@@ -475,9 +475,9 @@ void main() {
               .having((s) => s.userData, 'userData', initialUserData),
         ],
         verify: (bloc) {
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
           verify(mockRepo.sendEmailVerification());
         },
       );
@@ -501,9 +501,9 @@ void main() {
               .having((s) => s.userData, 'userData', initialUserData),
         ],
         verify: (bloc) {
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
           verify(mockRepo.reload());
         },
       );
@@ -511,17 +511,17 @@ void main() {
       blocTest<AuthBloc, AuthState>(
         'reloadUser_whenTokenCarriesNoHasuraUserId_onboardsTheInvitee',
         setUp: () async {
-          final functionsMock =
-              globalProviderContainer.read(functionsServiceProvider)
-                  as MockFunctionsService;
+          final functionsMock = globalProviderContainer.read(
+            functionsServiceProvider,
+          ) as MockFunctionsService;
           when(functionsMock.tryClaimAccount()).thenAnswer((_) async => true);
 
           await AuthStorage.I.clearAll();
           await AuthStorage.I.writeAuthDataToCache(unclaimedAuthUser);
 
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
 
           when(mockRepo.reload()).thenAnswer((_) async {});
         },
@@ -547,9 +547,9 @@ void main() {
       blocTest<AuthBloc, AuthState>(
         'applyInvitationCode_whenApplyingFails_restoresThePreloadingState',
         setUp: () {
-          final mockFunctions =
-              globalProviderContainer.read(functionsServiceProvider)
-                  as MockFunctionsService;
+          final mockFunctions = globalProviderContainer.read(
+            functionsServiceProvider,
+          ) as MockFunctionsService;
           when(
             mockFunctions.applyInvitationCode('INVITE-CODE'),
           ).thenThrow(StateError('invalid invitation code'));
