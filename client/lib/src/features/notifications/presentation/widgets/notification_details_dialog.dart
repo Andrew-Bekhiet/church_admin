@@ -44,8 +44,8 @@ class NotificationDetailsDialog extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(notification.body),
-                  if (notification.imageURL != null)
-                    NotificationDetailsPhoto(notification: notification),
+                  if (notification.imageURL case final imageUrl?)
+                    NotificationDetailsPhoto(imageUrl: imageUrl),
                 ],
               ),
             ),

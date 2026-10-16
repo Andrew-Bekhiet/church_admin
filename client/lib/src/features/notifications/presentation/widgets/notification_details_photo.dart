@@ -3,9 +3,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart' hide Notification;
 
 class NotificationDetailsPhoto extends StatelessWidget {
-  final Notification notification;
+  final String imageUrl;
   const NotificationDetailsPhoto({
-    required this.notification,
+    required this.imageUrl,
   });
 
   @override
@@ -14,7 +14,7 @@ class NotificationDetailsPhoto extends StatelessWidget {
     final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
 
     return CachedNetworkImage(
-      imageUrl: notification.imageURL!,
+      imageUrl: imageUrl,
       useOldImageOnUrlChange: true,
       memCacheWidth: devicePixelRatio * screenSize.width * 85 ~/ 100,
       cacheManager: globalProviderContainer.read(baseCacheManagerProvider),

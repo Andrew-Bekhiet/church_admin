@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class SpiritDataDateField extends StatelessWidget {
+  static const int _earliestSelectableYear = 1900;
+
   final String label;
   final DateTime? initialValue;
   final void Function(DateTime?) onSaved;
@@ -58,7 +60,7 @@ class SpiritDataDateField extends StatelessWidget {
       locale: const Locale('ar', 'EG'),
       context: context,
       initialDate: initialDate,
-      firstDate: DateTime(1900),
+      firstDate: DateTime(_earliestSelectableYear),
       lastDate: DateTime.now(),
     );
 

@@ -12,9 +12,9 @@ class NotificationDetailsSender extends StatelessWidget {
     return FutureBuilder(
       future: senderDataFuture,
       builder: (context, senderData) {
-        if (senderData.hasError) {
+        if (senderData.error case final error?) {
           return ErrorWidget.builder(
-            FlutterErrorDetails(exception: senderData.error!),
+            FlutterErrorDetails(exception: error),
           );
         }
 
