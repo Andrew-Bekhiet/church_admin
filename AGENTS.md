@@ -157,7 +157,7 @@ Before reusing a SQL permission function such as `auth.user_can_edit_user`, chec
 
 **GraphQL codegen** — the split is not a build_runner output. `graphql_codegen` always emits `schema.graphql.dart` as one ~166k-line file, and `client/scripts/split_schema_graphql_dart.sh` rewrites that file in place into a stub plus `schema_partN.dart`. Any build that regenerates it destroys the split.
 
-On the current toolchain (build*runner 2.15.2), `--build-filter` does not merely scope the build — from a cold cache (no `.dart_tool/build`, e.g. a fresh clone or CI runner) it deletes every generated output \_outside* the filter and still re-collapses `schema.graphql.dart`, because `graphql_codegen` runs lazily regardless of the filter. **Prefer a full `dart run build_runner build`** for hand-run builds, then restore the stub and clean up:
+On the current toolchain (build_runner 2.15.2), `--build-filter` does not merely scope the build — from a cold cache (no `.dart_tool/build`, e.g. a fresh clone or CI runner) it deletes every generated output _outside_ the filter and still re-collapses `schema.graphql.dart`, because `graphql_codegen` runs lazily regardless of the filter. **Prefer a full `dart run build_runner build`** for hand-run builds, then restore the stub and clean up:
 
 ```sh
 cd client
@@ -194,7 +194,7 @@ Keep `--fatal-infos`. Most solid_lints diagnostics are `info`, so a plain run ex
 
 **Run `dart format lib test patrol_test` from `client/` before committing**, covering every tracked Dart directory, not only the directory you touched. Locally `dart format .` also walks the untracked `build/` directory and reports about 68 files as changed while git stays clean. It also normalises a mixed-ending file back to one style. Formatting a single subdirectory is how the mixed endings above survived review. CI fails on unformatted code (`dart format --set-exit-if-changed . || { git diff; exit 1; }` in `static-analysis.yml`, which prints the diff).
 
-**Tests**: prefer using the test bundle and running full test suite with `fvm flutter test --dart-define CI=true test/test_bundle.dart $(scripts/generate_test_bundle.sh)` if possible, because it's much faster that running with `fvm flutter test --dart-define CI=true` for full test suite. See [flutter/flutter#90225](https://github.com/flutter/flutter/issues/90225)
+**Tests**: prefer using the test bundle and running full test suite from `client/` with `fvm flutter test --dart-define CI=true test/test_bundle.dart $(scripts/generate_test_bundle.sh)` if possible, because it's much faster that running with `fvm flutter test --dart-define CI=true` for full test suite. See [flutter/flutter#90225](https://github.com/flutter/flutter/issues/90225)
 
 ## CI workflows
 
