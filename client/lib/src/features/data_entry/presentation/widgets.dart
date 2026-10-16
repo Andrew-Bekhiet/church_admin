@@ -31,6 +31,7 @@ export 'widgets/phone_field_name_dialog.dart';
 export 'widgets/phone_number_property_widget.dart';
 export 'widgets/show_more_list.dart';
 export 'widgets/tab_aware_sort_button.dart';
+export 'widgets/tabbed_total_count_label.dart';
 export 'widgets/total_count_label.dart';
 export 'widgets/unmask_unless_parish_data.dart';
 export 'widgets/viewable_object_app_bar.dart';
