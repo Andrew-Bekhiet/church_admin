@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_account_status_indicators.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ManageUserListItem extends StatelessWidget {
   final User user;

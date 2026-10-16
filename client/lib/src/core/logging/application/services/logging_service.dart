@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:graphql/client.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 class LoggingService {
@@ -197,11 +197,9 @@ class LoggingService {
     BuildContext context,
     LogRecord record,
   ) async {
-    unawaited(
-      showDialog(
-        context: context,
-        builder: (context) => CAErrorDialog(exception: record.error!),
-      ),
+    showDialog(
+      context: context,
+      builder: (context) => CAErrorDialog(exception: record.error!),
     );
 
     await error(record);

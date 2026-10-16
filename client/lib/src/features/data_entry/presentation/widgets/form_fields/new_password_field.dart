@@ -1,6 +1,6 @@
 import 'package:fancy_password_field/fancy_password_field.dart';
-import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class NewPasswordField extends StatefulWidget {
   final TextEditingController? controller;

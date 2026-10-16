@@ -1,6 +1,6 @@
 import 'package:advanced_forms/advanced_forms.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AdvancedTextInput<E extends Object> extends StatelessWidget {
   final AdvancedTextFieldController<E> field;

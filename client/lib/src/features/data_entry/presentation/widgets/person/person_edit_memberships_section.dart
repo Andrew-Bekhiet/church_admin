@@ -1,7 +1,7 @@
 import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class PersonEditMembershipsSection extends StatelessWidget {
   final PersonMembershipsFormController form;

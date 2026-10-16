@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ImageObjectFromUrl extends StatelessWidget {
   static const animationsDuration = Duration.zero;

@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:derived_colors/derived_colors.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ColoredObjectChips<T extends ViewableWithID> extends StatelessWidget {
   final Iterable<T> objects;
