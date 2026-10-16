@@ -6,6 +6,7 @@ class FakeGeocoder implements Geocoder {
   Address? addressUnderEveryLocation;
   final gatesByLocation = <Point, Completer<void>>{};
   Point? locationOfEveryAddress;
+  final locationsByPlaceName = <String, Point>{};
   Object? locationFailure;
   Completer<void>? locationGate;
   int locationRequestCount = 0;
@@ -29,4 +30,8 @@ class FakeGeocoder implements Geocoder {
 
     return locationOfEveryAddress;
   }
+
+  @override
+  Future<Point?> locationOfPlace(String placeName) async =>
+      locationsByPlaceName[placeName];
 }

@@ -55,7 +55,18 @@ class NominatimGeocoder implements Geocoder {
     required String houseCode,
     required Street street,
     required String countryIsoCode,
-  }) async {
+  }) => _firstSearchResultLocation({
+    'street': '$houseCode ${street.name}',
+    'countrycodes': countryIsoCode.toLowerCase(),
+  });
+
+  @override
+  Future<Point?> locationOfPlace(String placeName) =>
+      _firstSearchResultLocation({'q': placeName});
+
+  Future<Point?> _firstSearchResultLocation(
+    Map<String, String> searchParameters,
+  ) async {
     final Response<dynamic> response;
     try {
       response = await _rateLimited(
@@ -65,8 +76,7 @@ class NominatimGeocoder implements Geocoder {
             host: _host,
             path: 'search',
             queryParameters: {
-              'street': '$houseCode ${street.name}',
-              'countrycodes': countryIsoCode.toLowerCase(),
+              ...searchParameters,
               'accept-language': _language,
               'format': 'jsonv2',
               'limit': '1',

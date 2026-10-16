@@ -10,4 +10,6 @@ abstract interface class Geocoder {
     required Street street,
     required String countryIsoCode,
   });
+
+  Future<Point?> locationOfPlace(String placeName);
 }
