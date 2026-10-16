@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class EditPersonSaveProgressMessage extends StatelessWidget {
   final ValueListenable<PersonSaveProgress> progress;

@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_code_tile.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_expiry_tile.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class UserInvitationField extends StatelessWidget {
   final InvitationChoice invitation;

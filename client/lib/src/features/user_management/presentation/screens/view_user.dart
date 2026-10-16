@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_account_card.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_section_card.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class ViewUser extends StatefulWidget {

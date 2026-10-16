@@ -1,5 +1,5 @@
 import 'package:advanced_forms/advanced_forms.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AdvancedCheckboxTile<E extends Object> extends StatelessWidget {
   final AdvancedBooleanFieldController<E> field;

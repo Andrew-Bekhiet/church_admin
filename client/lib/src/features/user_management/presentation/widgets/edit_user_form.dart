@@ -4,7 +4,7 @@ import 'package:church_admin/src/features/user_management/presentation/widgets/u
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_field.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_person_link_field.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_section_card.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
