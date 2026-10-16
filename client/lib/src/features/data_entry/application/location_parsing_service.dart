@@ -107,7 +107,9 @@ class LocationParsingService {
           return segments
               .where(
                 (segment) =>
-                    !segment.startsWith('@') && !segment.startsWith('data='),
+                    segment.isNotEmpty &&
+                    !segment.startsWith('@') &&
+                    !segment.startsWith('data='),
               )
               .map(_maybeParseCoordinates)
               .lastOrNull;

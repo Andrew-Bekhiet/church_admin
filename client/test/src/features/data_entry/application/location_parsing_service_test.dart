@@ -100,6 +100,12 @@ void main() {
         location: const Point(30.0444, 31.2357),
       ),
       (
+        description: 'a Google Maps directions link ending in a slash',
+        link:
+            'https://www.google.com/maps/dir/30.0626,31.2497/30.0444,31.2357/',
+        location: const Point(30.0444, 31.2357),
+      ),
+      (
         description: 'a Google Maps directions link from the current location',
         link: 'https://www.google.com/maps/dir//30.0444,31.2357',
         location: const Point(30.0444, 31.2357),
