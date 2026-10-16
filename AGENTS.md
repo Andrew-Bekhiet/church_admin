@@ -192,7 +192,7 @@ dart analyze --fatal-infos
 
 **Never pass a directory.** `dart analyze lib` silently drops every solid_lints diagnostic, with or without `--plugins`, while core analyzer and linter diagnostics still show up, so the run looks clean. A single file path (`dart analyze lib/src/foo.dart`) keeps them.
 
-Keep `--fatal-infos`. Most solid_lints diagnostics are `info`, so a plain run exits 0 with findings outstanding. CI runs `dart analyze --plugins --fatal-infos` in `static-analysis.yml`; the extra flag is harmless.
+Keep `--fatal-infos`. Most solid_lints diagnostics are `info`, so a plain run exits 0 with findings outstanding. CI runs the same command in `static-analysis.yml`.
 
 **Run `dart format lib test patrol_test` from `client/` before committing**, covering every tracked Dart directory, not only the directory you touched. Locally `dart format .` also walks the untracked `build/` directory and reports about 68 files as changed while git stays clean. It also normalises a mixed-ending file back to one style. Formatting a single subdirectory is how the mixed endings above survived review. CI fails on unformatted code (`dart format --set-exit-if-changed . || { git diff; exit 1; }` in `static-analysis.yml`, which prints the diff).
 
