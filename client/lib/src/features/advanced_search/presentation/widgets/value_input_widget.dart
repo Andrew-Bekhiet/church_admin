@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ValueInputWidget extends StatelessWidget {
   final QueryableType? queryableType;
@@ -19,17 +19,6 @@ class ValueInputWidget extends StatelessWidget {
     required this.queryableType,
     super.key,
   });
-
-  static Widget? selectedNamesBuilder<T extends ViewableWithID>(
-    BuildContext context,
-    FormFieldState<Set<T>?> state,
-  ) {
-    if (state.value case final selected?) {
-      return Text(selected.map((e) => e.name).join(', '));
-    }
-
-    return null;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +112,10 @@ class ValueInputWidget extends StatelessWidget {
                   s,
                 ),
           ),
-          builder: selectedNamesBuilder,
+          builder: (context, state) => switch (state.value) {
+            final selected? => SelectedNamesText(selected: selected),
+            null => null,
+          },
           initialValue: (value as List<ViewableEnumWithID>? ?? []).toSet(),
           labelText: 'اختيار القيم المطلوبة',
           nullable: false,
@@ -138,7 +130,10 @@ class ValueInputWidget extends StatelessWidget {
           listController: (s) => ViewableObjectListController(
             objectsPaginatableStream: dao.streamAll(searchQuery: s),
           ),
-          builder: selectedNamesBuilder,
+          builder: (context, state) => switch (state.value) {
+            final selected? => SelectedNamesText(selected: selected),
+            null => null,
+          },
           initialValue: (value as List<ViewableWithID>? ?? []).toSet(),
           labelText: 'اختيار القيم المطلوبة',
           nullable: false,

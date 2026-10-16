@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ViewFamily extends StatefulWidget {
   final Family? family;
@@ -196,28 +195,14 @@ class _ViewFamilyState extends State<ViewFamily> {
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
-      bottomNavBarBuilder: (context, tabController) => TotalCountLabel(
-        countStream: tabController.animation!.asStream().switchMap(
-          (index) {
-            final currentIndex = index.round();
-
-            return switch (currentIndex) {
-              0 => _personsController,
-              1 => _childrenFamiliesController,
-              2 => _parentFamiliesController,
-              3 => _storesController,
-              _ => throw UnimplementedError(),
-            }.totalCountStream.map(
-              (c) => switch (currentIndex) {
-                0 => '$c مخدوم',
-                1 => '$c أبناء',
-                2 => '$c أباء',
-                3 => '$c متجر',
-                _ => throw UnimplementedError(),
-              },
-            );
-          },
-        ),
+      bottomNavBarBuilder: (context, tabController) => TabbedTotalCountLabel(
+        tabController: tabController,
+        unitByController: {
+          _personsController: 'مخدوم',
+          _childrenFamiliesController: 'أبناء',
+          _parentFamiliesController: 'أباء',
+          _storesController: 'متجر',
+        },
       ),
       floatingActionButtonBuilder: (context, tabController, family) =>
           SwitchingFAB.fromTabController(

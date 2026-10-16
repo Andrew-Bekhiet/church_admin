@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_annotations/church_admin_annotations.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'class.freezed.dart';
 part 'class.g.dart';
@@ -27,7 +27,6 @@ class Class extends ViewableWithIDAndImage
   @QueryableField(label: 'اللون')
   final Color? color;
 
-  @override
   @LocalDateTimeConverter()
   @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
@@ -35,41 +34,31 @@ class Class extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
-  @override
   @QueryableField(label: 'الخدمة')
   final Service? service;
 
-  @override
   final String? serviceId;
 
-  @override
   @QueryableField(label: 'السنة الدراسية')
   final StudyYear? studyYear;
 
-  @override
   final int? serviceStudyYear;
 
-  @override
   @QueryableField(label: 'السنة الدراسية: إلى')
   final StudyYear? studyYearTo;
 
-  @override
   final int? serviceStudyYearTo;
 
-  @override
   @QueryableField(label: 'نوع المخدومين المسؤول عنهم')
   final bool? serviceGender;
 
-  @override
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
-  @override
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   @QueryableField.manyToMany(through: AdminOnData)
   final List<User>? adminUsers;
 
-  @override
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AdminUsers extends StatelessWidget {
   final List<User> users;
@@ -71,7 +71,7 @@ class AdminUsers extends StatelessWidget {
           final user = users[i];
 
           if (users.length > 6 && i == 6) {
-            return _RemainingAdmins(
+            return AdminUsersRemainingAdmins(
               lastVisibleUser: user,
               remainingCount: users.length - 6,
             );
@@ -81,46 +81,6 @@ class AdminUsers extends StatelessWidget {
             child: ImageObjectWidget(user),
           );
         },
-      ),
-    );
-  }
-}
-
-class _RemainingAdmins extends StatelessWidget {
-  final User lastVisibleUser;
-  final int remainingCount;
-  const _RemainingAdmins({
-    required this.lastVisibleUser,
-    required this.remainingCount,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: ClipOval(
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Colors.black38
-                    : Colors.black54,
-              ),
-              child: Opacity(
-                opacity: 0.55,
-                child: ImageObjectWidget(lastVisibleUser),
-              ),
-            ),
-            Center(
-              child: Text(
-                '+$remainingCount',
-                style: Theme.of(context).primaryTextTheme.titleMedium,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

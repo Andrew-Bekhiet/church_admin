@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'family.dart';
@@ -9,30 +9,11 @@ part of 'family.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Family {
-  String get id;
-  String get name;
-  Address? get address;
-  MartialStatus get status;
-  DateTime? get marriageDate;
-  String? get deceasedSpouseName;
-  Church? get church;
-  String? get notes;
-  Color? get color;
-  DateTime? get photoUpdatedAt;
-  String? get blurhash;
-  List<Family>? get children;
-  List<Family>? get parents;
-  List<FamilyPhoneContact> get contacts;
-  LastRecordedByInfo? get lastEdit;
-  LastRecordedByInfo? get lastVisit;
-  LastRecordedByInfo? get lastFatherVisit;
-  DataCheck? get dataCheck;
-  bool get userCanEdit;
-
   /// Create a copy of Family
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -42,67 +23,86 @@ mixin _$Family {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as Family;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Family &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.marriageDate, marriageDate) ||
-                other.marriageDate == marriageDate) &&
-            (identical(other.deceasedSpouseName, deceasedSpouseName) ||
-                other.deceasedSpouseName == deceasedSpouseName) &&
-            (identical(other.church, church) || other.church == church) &&
-            (identical(other.notes, notes) || other.notes == notes) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
-                other.photoUpdatedAt == photoUpdatedAt) &&
-            (identical(other.blurhash, blurhash) ||
-                other.blurhash == blurhash) &&
-            const DeepCollectionEquality().equals(other.children, children) &&
-            const DeepCollectionEquality().equals(other.parents, parents) &&
-            const DeepCollectionEquality().equals(other.contacts, contacts) &&
-            (identical(other.lastEdit, lastEdit) ||
-                other.lastEdit == lastEdit) &&
-            (identical(other.lastVisit, lastVisit) ||
-                other.lastVisit == lastVisit) &&
-            (identical(other.lastFatherVisit, lastFatherVisit) ||
-                other.lastFatherVisit == lastFatherVisit) &&
-            (identical(other.dataCheck, dataCheck) ||
-                other.dataCheck == dataCheck) &&
-            (identical(other.userCanEdit, userCanEdit) ||
-                other.userCanEdit == userCanEdit));
+            (identical(other.id, _this.id) || other.id == _this.id) &&
+            (identical(other.name, _this.name) || other.name == _this.name) &&
+            (identical(other.address, _this.address) ||
+                other.address == _this.address) &&
+            (identical(other.status, _this.status) ||
+                other.status == _this.status) &&
+            (identical(other.marriageDate, _this.marriageDate) ||
+                other.marriageDate == _this.marriageDate) &&
+            (identical(other.deceasedSpouseName, _this.deceasedSpouseName) ||
+                other.deceasedSpouseName == _this.deceasedSpouseName) &&
+            (identical(other.church, _this.church) ||
+                other.church == _this.church) &&
+            (identical(other.notes, _this.notes) ||
+                other.notes == _this.notes) &&
+            (identical(other.color, _this.color) ||
+                other.color == _this.color) &&
+            (identical(other.photoUpdatedAt, _this.photoUpdatedAt) ||
+                other.photoUpdatedAt == _this.photoUpdatedAt) &&
+            (identical(other.blurhash, _this.blurhash) ||
+                other.blurhash == _this.blurhash) &&
+            const DeepCollectionEquality().equals(
+              other.children,
+              _this.children,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.parents,
+              _this.parents,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.contacts,
+              _this.contacts,
+            ) &&
+            (identical(other.lastEdit, _this.lastEdit) ||
+                other.lastEdit == _this.lastEdit) &&
+            (identical(other.lastVisit, _this.lastVisit) ||
+                other.lastVisit == _this.lastVisit) &&
+            (identical(other.lastFatherVisit, _this.lastFatherVisit) ||
+                other.lastFatherVisit == _this.lastFatherVisit) &&
+            (identical(other.dataCheck, _this.dataCheck) ||
+                other.dataCheck == _this.dataCheck) &&
+            (identical(other.userCanEdit, _this.userCanEdit) ||
+                other.userCanEdit == _this.userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hashAll([
-    runtimeType,
-    id,
-    name,
-    address,
-    status,
-    marriageDate,
-    deceasedSpouseName,
-    church,
-    notes,
-    color,
-    photoUpdatedAt,
-    blurhash,
-    const DeepCollectionEquality().hash(children),
-    const DeepCollectionEquality().hash(parents),
-    const DeepCollectionEquality().hash(contacts),
-    lastEdit,
-    lastVisit,
-    lastFatherVisit,
-    dataCheck,
-    userCanEdit,
-  ]);
+  int get hashCode {
+    final _this = this as Family;
+    return Object.hashAll([
+      runtimeType,
+      _this.id,
+      _this.name,
+      _this.address,
+      _this.status,
+      _this.marriageDate,
+      _this.deceasedSpouseName,
+      _this.church,
+      _this.notes,
+      _this.color,
+      _this.photoUpdatedAt,
+      _this.blurhash,
+      const DeepCollectionEquality().hash(_this.children),
+      const DeepCollectionEquality().hash(_this.parents),
+      const DeepCollectionEquality().hash(_this.contacts),
+      _this.lastEdit,
+      _this.lastVisit,
+      _this.lastFatherVisit,
+      _this.dataCheck,
+      _this.userCanEdit,
+    ]);
+  }
 
   @override
   String toString() {
-    return 'Family(id: $id, name: $name, address: $address, status: $status, marriageDate: $marriageDate, deceasedSpouseName: $deceasedSpouseName, church: $church, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, contacts: $contacts, lastEdit: $lastEdit, lastVisit: $lastVisit, lastFatherVisit: $lastFatherVisit, dataCheck: $dataCheck, userCanEdit: $userCanEdit)';
+    final _this = this as Family;
+    return 'Family(id: ${_this.id}, name: ${_this.name}, address: ${_this.address}, status: ${_this.status}, marriageDate: ${_this.marriageDate}, deceasedSpouseName: ${_this.deceasedSpouseName}, church: ${_this.church}, notes: ${_this.notes}, color: ${_this.color}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, children: ${_this.children}, parents: ${_this.parents}, contacts: ${_this.contacts}, lastEdit: ${_this.lastEdit}, lastVisit: ${_this.lastVisit}, lastFatherVisit: ${_this.lastFatherVisit}, dataCheck: ${_this.dataCheck}, userCanEdit: ${_this.userCanEdit})';
   }
 }
 
@@ -132,6 +132,13 @@ abstract mixin class $FamilyCopyWith<$Res> {
     LastRecordedByInfo? lastFatherVisit,
     DataCheck? dataCheck,
   });
+
+  $AddressCopyWith<$Res>? get address;
+  $ChurchCopyWith<$Res>? get church;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
+  $LastRecordedByInfoCopyWith<$Res>? get lastFatherVisit;
+  $DataCheckCopyWith<$Res>? get dataCheck;
 }
 
 /// @nodoc
@@ -246,5 +253,89 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
                   as DataCheck?,
       ),
     );
+  }
+
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressCopyWith<$Res>? get address {
+    if (_self.address == null) {
+      return null;
+    }
+
+    return $AddressCopyWith<$Res>(_self.address!, (value) {
+      return _then(_self.copyWith(address: value));
+    });
+  }
+
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ChurchCopyWith<$Res>? get church {
+    if (_self.church == null) {
+      return null;
+    }
+
+    return $ChurchCopyWith<$Res>(_self.church!, (value) {
+      return _then(_self.copyWith(church: value));
+    });
+  }
+
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
+  }
+
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
+    if (_self.lastVisit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastVisit!, (value) {
+      return _then(_self.copyWith(lastVisit: value));
+    });
+  }
+
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastFatherVisit {
+    if (_self.lastFatherVisit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastFatherVisit!, (value) {
+      return _then(_self.copyWith(lastFatherVisit: value));
+    });
+  }
+
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DataCheckCopyWith<$Res>? get dataCheck {
+    if (_self.dataCheck == null) {
+      return null;
+    }
+
+    return $DataCheckCopyWith<$Res>(_self.dataCheck!, (value) {
+      return _then(_self.copyWith(dataCheck: value));
+    });
   }
 }

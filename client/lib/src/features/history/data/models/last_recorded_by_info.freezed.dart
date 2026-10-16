@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'last_recorded_by_info.dart';
@@ -9,15 +9,11 @@ part of 'last_recorded_by_info.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$LastRecordedByInfo {
-  DateTime get time;
-  String? get recordedBy;
-  User? get user;
-  bool get isFatherVisit;
-
   /// Create a copy of LastRecordedByInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,25 +26,35 @@ mixin _$LastRecordedByInfo {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as LastRecordedByInfo;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is LastRecordedByInfo &&
-            (identical(other.time, time) || other.time == time) &&
-            (identical(other.recordedBy, recordedBy) ||
-                other.recordedBy == recordedBy) &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.isFatherVisit, isFatherVisit) ||
-                other.isFatherVisit == isFatherVisit));
+            (identical(other.time, _this.time) || other.time == _this.time) &&
+            (identical(other.recordedBy, _this.recordedBy) ||
+                other.recordedBy == _this.recordedBy) &&
+            (identical(other.user, _this.user) || other.user == _this.user) &&
+            (identical(other.isFatherVisit, _this.isFatherVisit) ||
+                other.isFatherVisit == _this.isFatherVisit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, time, recordedBy, user, isFatherVisit);
+  int get hashCode {
+    final _this = this as LastRecordedByInfo;
+    return Object.hash(
+      runtimeType,
+      _this.time,
+      _this.recordedBy,
+      _this.user,
+      _this.isFatherVisit,
+    );
+  }
 
   @override
   String toString() {
-    return 'LastRecordedByInfo(time: $time, recordedBy: $recordedBy, user: $user, isFatherVisit: $isFatherVisit)';
+    final _this = this as LastRecordedByInfo;
+    return 'LastRecordedByInfo(time: ${_this.time}, recordedBy: ${_this.recordedBy}, user: ${_this.user}, isFatherVisit: ${_this.isFatherVisit})';
   }
 }
 
@@ -65,6 +71,8 @@ abstract mixin class $LastRecordedByInfoCopyWith<$Res> {
     String? recordedBy,
     User? user,
   });
+
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -105,5 +113,19 @@ class _$LastRecordedByInfoCopyWithImpl<$Res>
                   as User?,
       ),
     );
+  }
+
+  /// Create a copy of LastRecordedByInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get user {
+    if (_self.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_self.user!, (value) {
+      return _then(_self.copyWith(user: value));
+    });
   }
 }

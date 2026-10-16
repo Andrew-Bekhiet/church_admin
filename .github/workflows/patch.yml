@@ -166,14 +166,6 @@ jobs:
           args: --allow-asset-diffs
             --dart-define-from-file=.env
 
-      - name: Run pod repo update
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: pod repo update
-
-      - name: Update podfile.lock
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: cd ios && pod install --repo-update
-
       - name: 🚀 Shorebird Patch iOS
         uses: shorebirdtech/shorebird-patch@deb179c67708c6b0caf7582eac41361c8d51948a # main
         if: ${{ matrix.os == 'macos-latest' }}

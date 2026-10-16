@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AttendanceOverflowMenu extends StatelessWidget {
   static const List<int> _streakWindowOptions = [30, 60, 90];
@@ -80,21 +80,21 @@ class AttendanceOverflowMenu extends StatelessWidget {
               style: TextTheme.of(context).labelMedium,
             ),
           ),
-          _SortingMenuItem<AttendanceSortingByName>(
+          AttendanceSortingMenuItem<AttendanceSortingByName>(
             title: 'الاسم',
             icon: Symbols.person,
             currentSorting: sorting,
             onChanged: onSortChanged,
             value: AttendanceSorting.byName(),
           ),
-          _SortingMenuItem<AttendanceSortingByTime>(
+          AttendanceSortingMenuItem<AttendanceSortingByTime>(
             title: 'وقت الحضور',
             icon: Symbols.access_time,
             currentSorting: sorting,
             onChanged: onSortChanged,
             value: AttendanceSorting.byAttendanceTime(),
           ),
-          _SortingMenuItem<AttendanceSortingByStreak>(
+          AttendanceSortingMenuItem<AttendanceSortingByStreak>(
             title: switch (sorting) {
               AttendanceSortingByStreak(
                 direction: SortingDirection.descending,
@@ -113,7 +113,7 @@ class AttendanceOverflowMenu extends StatelessWidget {
             onChanged: onSortChanged,
             value: AttendanceSorting.byAttendanceStreak(),
           ),
-          _SortingMenuItem<AttendanceSortingByLastAttendanceTime>(
+          AttendanceSortingMenuItem<AttendanceSortingByLastAttendanceTime>(
             title: 'آخر وقت حضور',
             icon: Symbols.history,
             currentSorting: sorting,
@@ -158,43 +158,4 @@ class AttendanceOverflowMenu extends StatelessWidget {
       },
     );
   }
-}
-
-class _SortingMenuItem<T extends AttendanceSorting>
-    extends PopupMenuItem<AttendanceSorting> {
-  final String title;
-  final IconData icon;
-  final ValueChanged<AttendanceSorting> onChanged;
-  final AttendanceSorting currentSorting;
-
-  _SortingMenuItem({
-    required this.title,
-    required this.icon,
-    required this.currentSorting,
-    required this.onChanged,
-    required AttendanceSorting super.value,
-    super.key,
-  }) : super(
-         onTap: () => currentSorting is T
-             ? onChanged(currentSorting.withReversedDirection())
-             : onChanged(value),
-         child: ListTile(
-           contentPadding: EdgeInsets.zero,
-           leading: Icon(icon),
-           title: Text(title),
-           trailing: Visibility(
-             visible: currentSorting is T,
-             maintainAnimation: true,
-             maintainSize: true,
-             maintainState: true,
-             child: AnimatedRotation(
-               duration: Durations.medium1,
-               turns: currentSorting.direction == SortingDirection.ascending
-                   ? 0
-                   : 0.5,
-               child: const Icon(Symbols.arrow_upward_rounded),
-             ),
-           ),
-         ),
-       );
 }

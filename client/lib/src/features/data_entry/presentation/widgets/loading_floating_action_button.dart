@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class LoadingFloatingActionButton extends StatelessWidget {
   static const button = ValueKey('loadingFloatingActionButton');

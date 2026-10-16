@@ -7,7 +7,6 @@ part 'order_by.g.dart';
 @freezed
 @JsonSerializable()
 class OrderBy with _$OrderBy {
-  @override
   @JsonKey(
     fromJson: fieldMetadataFromJson,
     toJson: fieldMetadataToJson,
@@ -15,7 +14,6 @@ class OrderBy with _$OrderBy {
   final FieldMetadata field;
 
   /// [value] is either OrderBy or Enum_OrderBy
-  @override
   @JsonKey(
     fromJson: orderByValueFromJson,
     toJson: orderByValueToJson,

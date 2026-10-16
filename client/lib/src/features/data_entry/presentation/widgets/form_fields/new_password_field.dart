@@ -1,6 +1,6 @@
 import 'package:fancy_password_field/fancy_password_field.dart';
-import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class NewPasswordField extends StatefulWidget {
   final TextEditingController? controller;
@@ -33,8 +33,7 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
         UppercaseValidationRule(customText: 'تحتوي على حروف كبيرة (A-Z)'),
         LowercaseValidationRule(customText: 'تحتوي على حروف صغيرة (a-z)'),
         RegexValidationRule(
-          name:
-              'تحتوي على رموز (^ \$ * . [ ] { } ( ) ? " ! @ # % & / \\ , > < \' : ; | _ ~ `)',
+          name: 'تحتوي على رموز (^ \$ * . [ ] { } ( ) ? " ! @ # % & / \\ , > < \' : ; | _ ~ `)',
           regex:
               '[${RegExp.escape(r"^$.[]{}()?"
               r'"!@#%&/\,><'

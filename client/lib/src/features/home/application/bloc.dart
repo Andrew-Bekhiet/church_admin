@@ -1,3 +1,4 @@
 export 'bloc/home_bloc.dart';
 export 'bloc/home_event.dart';
+export 'bloc/home_pages_config.dart';
 export 'bloc/home_state.dart';

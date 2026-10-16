@@ -113,24 +113,22 @@ void main() {
     });
 
     test('shows the loaded house number in the field text', () {
-      final controller = fixture.controllerFor();
-
-      controller.loadAsNewBaseline(locatedAddress);
+      final controller = fixture.controllerFor()
+        ..loadAsNewBaseline(locatedAddress);
 
       expect(controller.houseCode.textController.text, '12');
     });
 
     test('does not count the loaded address as edited', () {
-      final controller = fixture.controllerFor();
-
-      controller.loadAsNewBaseline(locatedAddress);
+      final controller = fixture.controllerFor()
+        ..loadAsNewBaseline(locatedAddress);
 
       expect(controller.wasEditedSinceBaseline, isFalse);
     });
 
     test('counts an edit of the loaded address as edited', () {
-      final controller = fixture.controllerFor();
-      controller.loadAsNewBaseline(locatedAddress);
+      final controller = fixture.controllerFor()
+        ..loadAsNewBaseline(locatedAddress);
 
       controller.houseCode.setValue('14');
 
@@ -138,27 +136,24 @@ void main() {
     });
 
     test('loading none empties every field', () {
-      final controller = fixture.controllerFor(locatedAddress);
-
-      controller.loadAsNewBaseline(null);
+      final controller = fixture.controllerFor(locatedAddress)
+        ..loadAsNewBaseline(null);
 
       expect(controller.toAddress(), const Address());
     });
 
     test('loads while the form is read-only', () {
-      final controller = fixture.controllerFor();
-      controller.markReadOnly();
-
-      controller.loadAsNewBaseline(locatedAddress);
+      final controller = fixture.controllerFor()
+        ..markReadOnly()
+        ..loadAsNewBaseline(locatedAddress);
 
       expect(controller.toAddress(), locatedAddress);
     });
 
     test('keeps the form read-only', () {
-      final controller = fixture.controllerFor();
-      controller.markReadOnly();
-
-      controller.loadAsNewBaseline(locatedAddress);
+      final controller = fixture.controllerFor()
+        ..markReadOnly()
+        ..loadAsNewBaseline(locatedAddress);
       controller.houseCode.setValue('14');
 
       expect(controller.houseCode.fieldValue, '12');
@@ -168,10 +163,9 @@ void main() {
       fixture.areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
       final lookup = fixture.areas.lookupGatesByStreetId[mainStreet.id] =
           Completer<void>();
-      final controller = fixture.controllerFor();
-      controller.chooseStreet(mainStreet);
-
-      controller.loadAsNewBaseline(const Address(street: sideStreet));
+      final controller = fixture.controllerFor()
+        ..chooseStreet(mainStreet)
+        ..loadAsNewBaseline(const Address(street: sideStreet));
       lookup.complete();
       await pumpEventQueue();
 
@@ -184,10 +178,9 @@ void main() {
         fixture.areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
         final lookup = fixture.areas.lookupGatesByStreetId[mainStreet.id] =
             Completer<void>();
-        final controller = fixture.controllerFor();
-        controller.chooseStreet(mainStreet);
-
-        controller.loadAsNewBaseline(const Address(street: mainStreet));
+        final controller = fixture.controllerFor()
+          ..chooseStreet(mainStreet)
+          ..loadAsNewBaseline(const Address(street: mainStreet));
         lookup.complete();
         await pumpEventQueue();
 
@@ -262,9 +255,9 @@ void main() {
     test('is forgotten when a new baseline is loaded', () {
       final controller = fixture.controllerFor(locatedAddress);
       controller.houseCode.setValue('14');
-      controller.confirmAddressNotStale();
-
-      controller.loadAsNewBaseline(locatedAddress);
+      controller
+        ..confirmAddressNotStale()
+        ..loadAsNewBaseline(locatedAddress);
       controller.houseCode.setValue('16');
 
       expect(controller.hasPlaceChangedWithStaleLocation, isTrue);

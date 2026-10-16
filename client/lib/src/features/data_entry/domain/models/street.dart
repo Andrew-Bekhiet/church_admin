@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_annotations/church_admin_annotations.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'street.freezed.dart';
 part 'street.g.dart';
@@ -22,7 +22,6 @@ class Street extends ViewableWithIDAndImage
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @override
   @JsonKey(fromJson: lineFromJson, toJson: lineToJson)
   @QueryableField(label: 'الموقع')
   final Line? line;
@@ -32,7 +31,6 @@ class Street extends ViewableWithIDAndImage
   @QueryableField(label: 'اللون')
   final Color? color;
 
-  @override
   @LocalDateTimeConverter()
   @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
@@ -40,20 +38,16 @@ class Street extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
-  @override
   @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
   @QueryableField.manyToMany(through: AreasStreets)
   final List<Area>? areas;
 
-  @override
   @QueryableField(label: 'أخر افتقاد')
   final LastRecordedByInfo? lastVisit;
 
-  @override
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
-  @override
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 

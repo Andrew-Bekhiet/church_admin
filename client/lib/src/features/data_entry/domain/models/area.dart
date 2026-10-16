@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_annotations/church_admin_annotations.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'area.freezed.dart';
 part 'area.g.dart';
@@ -22,7 +22,6 @@ class Area extends ViewableWithIDAndImage
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @override
   @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
   @QueryableField(label: 'الموقع')
   final Polygon? bounds;
@@ -32,7 +31,6 @@ class Area extends ViewableWithIDAndImage
   @QueryableField(label: 'اللون')
   final Color? color;
 
-  @override
   @LocalDateTimeConverter()
   @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
@@ -40,20 +38,16 @@ class Area extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
-  @override
   @QueryableField(label: 'أخر افتقاد')
   final LastRecordedByInfo? lastVisit;
 
-  @override
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
-  @override
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   @QueryableField.manyToMany(through: AdminOnData)
   final List<User>? adminUsers;
 
-  @override
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
@@ -83,6 +77,8 @@ class Area extends ViewableWithIDAndImage
   Json toJson() => _$AreaToJson(this);
 }
 
+// Extends the generated private base, which only this library can see
+// ignore: solid_lints/avoid_multiple_declarations_per_file
 class AreaFields extends _AreaFields {
   static final AreaFields _instance = AreaFields._();
 

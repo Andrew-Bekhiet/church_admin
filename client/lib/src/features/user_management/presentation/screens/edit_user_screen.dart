@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/edit_user_form.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_ui/material_ui.dart';
 
 class EditUserScreen extends StatefulWidget {
   final UserEditIntent intent;

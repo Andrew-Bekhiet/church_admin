@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:photo_view/photo_view.dart';
 
 class ImageObjectWidget extends StatelessWidget {
@@ -46,7 +44,7 @@ class ImageObjectWidget extends StatelessWidget {
               ),
               tightMode: true,
               childSize: constraints.smallest,
-              child: _ImageFromUrlWidget(
+              child: ImageObjectFromUrl(
                 cacheKey: cacheKey,
                 defaultIcon: defaultIcon,
                 imageUrl: downloadUrlOrCache,
@@ -120,7 +118,7 @@ class ImageObjectWidget extends StatelessWidget {
                   final downloadUrlOrCache =
                       downloadUrlData.data ?? cachedImageUrl;
 
-                  final imagePlaceholder = _ImagePlaceholder(
+                  final imagePlaceholder = ImageObjectPlaceholder(
                     defaultIcon: defaultIcon,
                     size: blurhashSize ?? size,
                     blurhash: imageObject.blurhash,
@@ -130,7 +128,7 @@ class ImageObjectWidget extends StatelessWidget {
                     return imagePlaceholder;
                   }
 
-                  final imageFromUrlWidget = _ImageFromUrlWidget(
+                  final imageFromUrlWidget = ImageObjectFromUrl(
                     defaultIcon: defaultIcon,
                     imageUrl: downloadUrlOrCache,
                     cacheKey: cacheKey,
@@ -157,94 +155,6 @@ class ImageObjectWidget extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-}
-
-class _ImageFromUrlWidget extends StatelessWidget {
-  static const animationsDuration = Duration.zero;
-
-  final String imageUrl;
-  final String cacheKey;
-  final Widget imagePlaceholder;
-  final IconData defaultIcon;
-  final double maxHeight;
-  final bool fullQuality;
-  final bool hasBlurhash;
-
-  const _ImageFromUrlWidget({
-    required this.imageUrl,
-    required this.cacheKey,
-    required this.defaultIcon,
-    required this.maxHeight,
-    required this.imagePlaceholder,
-    required this.hasBlurhash,
-    this.fullQuality = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      fit: StackFit.expand,
-      children: [
-        if (hasBlurhash) imagePlaceholder,
-        CachedNetworkImage(
-          key: ValueKey(imageUrl + cacheKey),
-          cacheKey: cacheKey,
-          imageUrl: imageUrl,
-          placeholder: (context, _) => imagePlaceholder,
-          memCacheHeight: fullQuality
-              ? null
-              : (MediaQuery.devicePixelRatioOf(context) * maxHeight).floor(),
-          cacheManager: globalProviderContainer.read(baseCacheManagerProvider),
-          errorWidget: (context, url, error) => imagePlaceholder,
-          fadeInDuration: animationsDuration,
-          placeholderFadeInDuration: animationsDuration,
-          fadeOutDuration: animationsDuration,
-          useOldImageOnUrlChange: true,
-        ),
-      ],
-    );
-  }
-}
-
-class _ImagePlaceholder extends StatelessWidget {
-  final IconData defaultIcon;
-  final String? blurhash;
-  final double size;
-
-  const _ImagePlaceholder({
-    required this.defaultIcon,
-    required this.size,
-    this.blurhash,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    if (blurhash != null) {
-      return Image(
-        height: size,
-        width: size,
-        image: BlurHashImage(
-          blurhash!,
-          scale: 32 / size,
-        ),
-        frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-          if (frame != null) return child;
-
-          return Icon(
-            defaultIcon,
-            size: size,
-          );
-        },
-        gaplessPlayback: true,
-      );
-    }
-
-    return Icon(
-      defaultIcon,
-      size: size,
     );
   }
 }

@@ -4,10 +4,10 @@ version: 1.0.0
 publish_to: none
 
 environment:
-  sdk: ^3.12.0
+  sdk: ^3.13.0
 
 dependencies:
   meta: ^1.16.0
 
 dev_dependencies:
-  solid_lints: ^1.0.0
+  solid_lints: ^2.0.0

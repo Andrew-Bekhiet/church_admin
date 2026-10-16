@@ -1,0 +1,30 @@
+import 'package:church_admin/church_admin.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:rxdart/rxdart.dart';
+
+class TabbedTotalCountLabel extends StatelessWidget {
+  final TabController tabController;
+  final Map<ViewableObjectListController<Viewable>, String> unitByController;
+
+  const TabbedTotalCountLabel({
+    required this.tabController,
+    required this.unitByController,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final tabs = unitByController.entries.toList();
+
+    return TotalCountLabel(
+      countStream: switch (tabController.animation) {
+        final animation? => animation.asStream().switchMap((index) {
+          final MapEntry(key: controller, value: unit) = tabs[index.round()];
+
+          return controller.totalCountStream.map((count) => '$count $unit');
+        }),
+        null => const Stream.empty(),
+      },
+    );
+  }
+}

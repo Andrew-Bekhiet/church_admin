@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 
 import '../../../../utils.dart';
@@ -38,15 +36,13 @@ void main() {
                 const SizedBox(),
                 wrapper: materialAppWithThemeAndLocale(),
               );
-              unawaited(
-                tester
-                    .firstState<NavigatorState>(find.byType(Navigator))
-                    .push(
-                      MaterialPageRoute(
-                        builder: (_) => const SettingsScreen(),
-                      ),
+              tester
+                  .firstState<NavigatorState>(find.byType(Navigator))
+                  .push(
+                    MaterialPageRoute(
+                      builder: (_) => const SettingsScreen(),
                     ),
-              );
+                  );
 
               await tester.pumpAndSettle();
 
@@ -70,15 +66,13 @@ void main() {
                 const SizedBox(),
                 wrapper: materialAppWithThemeAndLocale(),
               );
-              unawaited(
-                tester
-                    .firstState<NavigatorState>(find.byType(Navigator))
-                    .push(
-                      MaterialPageRoute(
-                        builder: (_) => const SettingsScreen(),
-                      ),
+              tester
+                  .firstState<NavigatorState>(find.byType(Navigator))
+                  .push(
+                    MaterialPageRoute(
+                      builder: (_) => const SettingsScreen(),
                     ),
-              );
+                  );
 
               await tester.pumpAndSettle();
 
@@ -107,15 +101,13 @@ void main() {
             const SizedBox(),
             wrapper: materialAppWithThemeAndLocale(),
           );
-          unawaited(
-            tester
-                .firstState<NavigatorState>(find.byType(Navigator))
-                .push(
-                  MaterialPageRoute(
-                    builder: (_) => const SettingsScreen(),
-                  ),
+          tester
+              .firstState<NavigatorState>(find.byType(Navigator))
+              .push(
+                MaterialPageRoute(
+                  builder: (_) => const SettingsScreen(),
                 ),
-          );
+              );
 
           await tester.pumpAndSettle();
 

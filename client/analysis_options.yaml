@@ -1,14 +1,27 @@
 include: package:solid_lints/analysis_options.yaml
 
 plugins:
-  solid_lints: 1.0.0-dev.1
+  solid_lints: ^2.0.0
 
 solid_lints:
   diagnostics:
+    avoid_duplicate_code:
+      min_tokens: 40
+      exclude:
+        - method_name: initState
+        - method_name: dispose
+    avoid_multiple_declarations_per_file:
+      ignored_types:
+        - State
+      maximum_loc: 15
     avoid_unused_parameters: false
     avoid_non_null_assertion: false
     avoid_late_keyword: false
     cyclomatic_complexity: false
+    feature_envy:
+      atfd_threshold: 6
+      laa_threshold: 0.33
+      fdp_threshold: 2
     member_ordering:
       order:
         - static_getters_setters

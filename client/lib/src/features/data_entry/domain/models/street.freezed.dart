@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'street.dart';
@@ -9,21 +9,11 @@ part of 'street.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Street {
-  String get id;
-  String get name;
-  Line? get line;
-  Color? get color;
-  DateTime? get photoUpdatedAt;
-  String? get blurhash;
-  List<Area>? get areas;
-  LastRecordedByInfo? get lastVisit;
-  LastRecordedByInfo? get lastEdit;
-  bool get userCanEdit;
-
   /// Create a copy of Street
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -33,45 +23,51 @@ mixin _$Street {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as Street;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Street &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.line, line) || other.line == line) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
-                other.photoUpdatedAt == photoUpdatedAt) &&
-            (identical(other.blurhash, blurhash) ||
-                other.blurhash == blurhash) &&
-            const DeepCollectionEquality().equals(other.areas, areas) &&
-            (identical(other.lastVisit, lastVisit) ||
-                other.lastVisit == lastVisit) &&
-            (identical(other.lastEdit, lastEdit) ||
-                other.lastEdit == lastEdit) &&
-            (identical(other.userCanEdit, userCanEdit) ||
-                other.userCanEdit == userCanEdit));
+            (identical(other.id, _this.id) || other.id == _this.id) &&
+            (identical(other.name, _this.name) || other.name == _this.name) &&
+            (identical(other.line, _this.line) || other.line == _this.line) &&
+            (identical(other.color, _this.color) ||
+                other.color == _this.color) &&
+            (identical(other.photoUpdatedAt, _this.photoUpdatedAt) ||
+                other.photoUpdatedAt == _this.photoUpdatedAt) &&
+            (identical(other.blurhash, _this.blurhash) ||
+                other.blurhash == _this.blurhash) &&
+            const DeepCollectionEquality().equals(other.areas, _this.areas) &&
+            (identical(other.lastVisit, _this.lastVisit) ||
+                other.lastVisit == _this.lastVisit) &&
+            (identical(other.lastEdit, _this.lastEdit) ||
+                other.lastEdit == _this.lastEdit) &&
+            (identical(other.userCanEdit, _this.userCanEdit) ||
+                other.userCanEdit == _this.userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    line,
-    color,
-    photoUpdatedAt,
-    blurhash,
-    const DeepCollectionEquality().hash(areas),
-    lastVisit,
-    lastEdit,
-    userCanEdit,
-  );
+  int get hashCode {
+    final _this = this as Street;
+    return Object.hash(
+      runtimeType,
+      _this.id,
+      _this.name,
+      _this.line,
+      _this.color,
+      _this.photoUpdatedAt,
+      _this.blurhash,
+      const DeepCollectionEquality().hash(_this.areas),
+      _this.lastVisit,
+      _this.lastEdit,
+      _this.userCanEdit,
+    );
+  }
 
   @override
   String toString() {
-    return 'Street(id: $id, name: $name, line: $line, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, areas: $areas, lastVisit: $lastVisit, lastEdit: $lastEdit, userCanEdit: $userCanEdit)';
+    final _this = this as Street;
+    return 'Street(id: ${_this.id}, name: ${_this.name}, line: ${_this.line}, color: ${_this.color}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, areas: ${_this.areas}, lastVisit: ${_this.lastVisit}, lastEdit: ${_this.lastEdit}, userCanEdit: ${_this.userCanEdit})';
   }
 }
 
@@ -92,6 +88,9 @@ abstract mixin class $StreetCopyWith<$Res> {
     LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastEdit,
   });
+
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -161,5 +160,33 @@ class _$StreetCopyWithImpl<$Res> implements $StreetCopyWith<$Res> {
                   as LastRecordedByInfo?,
       ),
     );
+  }
+
+  /// Create a copy of Street
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
+    if (_self.lastVisit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastVisit!, (value) {
+      return _then(_self.copyWith(lastVisit: value));
+    });
+  }
+
+  /// Create a copy of Street
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
   }
 }

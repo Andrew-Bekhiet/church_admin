@@ -1,8 +1,9 @@
 export 'navigation/edit_area_route.dart' show $editAreaRoute, EditAreaRoute;
 export 'navigation/edit_class_route.dart'
     show $editClassRoute, EditClassExtra, EditClassRoute;
+export 'navigation/edit_family_extra.dart';
 export 'navigation/edit_family_route.dart'
-    show $editFamilyRoute, EditFamilyExtra, EditFamilyRoute;
+    show $editFamilyRoute, EditFamilyRoute;
 export 'navigation/edit_group_route.dart'
     show $editGroupRoute, EditGroupExtra, EditGroupRoute;
 export 'navigation/edit_person_route.dart'

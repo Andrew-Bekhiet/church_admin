@@ -3,7 +3,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 export 'view_object_details/view_area.dart';
 export 'view_object_details/view_class.dart';
@@ -16,11 +16,10 @@ export 'view_object_details/view_street.dart';
 
 typedef WidgetBuilderWithObject<T> = WBuilderWithObject<T, Widget>;
 
-typedef WBuilderWithObject<T, W extends Widget> =
-    W Function(
-      BuildContext context,
-      T object,
-    );
+typedef WBuilderWithObject<T, W extends Widget> = W Function(
+  BuildContext context,
+  T object,
+);
 
 class ViewObjectDetails<T extends ViewableWithIDAndImage>
     extends StatefulWidget {

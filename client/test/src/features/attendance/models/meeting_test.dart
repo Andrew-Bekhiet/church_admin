@@ -1,7 +1,7 @@
 import 'package:church_admin/src/features/attendance/domain/models/meeting.dart';
 import 'package:church_admin/src/features/attendance/domain/models/meeting_audience.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 Meeting _meeting({
   String id = 'm1',

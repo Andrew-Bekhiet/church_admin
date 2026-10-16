@@ -1,16 +1,17 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart_ext/single.dart';
 
+import '../../utils.dart';
 import 'services_hierarchy_list_test.mocks.dart';
 
 @GenerateNiceMocks(
@@ -39,6 +40,7 @@ void main() {
         ServicesHierarchyList(
           listController: viewableObjectListController,
         ),
+        wrapper: materialAppWithThemeAndLocale(),
       );
 
       expect(find.text('Class 1'), findsNothing);
@@ -145,6 +147,7 @@ void main() {
               ),
           listController: viewableObjectListController,
         ),
+        wrapper: materialAppWithThemeAndLocale(),
       );
 
       expect(find.byKey(const Key('Class 1')), findsNothing);

@@ -4,12 +4,13 @@ import 'dart:typed_data';
 import 'package:church_admin/church_admin.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../material_ui_test_app.dart';
 import 'edit_object_controller_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<FunctionsService>(), MockSpec<LoggingService>()])
@@ -84,33 +85,31 @@ void main() {
                 const Scaffold(
                   body: Text('Route 1'),
                 ),
-                wrapper: materialAppWrapper(),
+                wrapper: MaterialUiTestApp.wrapper(),
               );
 
-              unawaited(
-                tester
-                    .firstState<NavigatorState>(find.byType(Navigator))
-                    .push(
-                      MaterialPageRoute(
-                        builder: (context) => Form(
-                          canPop: false,
-                          onPopInvokedWithResult: (didPop, result) async {
-                            if (didPop) return;
+              tester
+                  .firstState<NavigatorState>(find.byType(Navigator))
+                  .push(
+                    MaterialPageRoute(
+                      builder: (context) => Form(
+                        canPop: false,
+                        onPopInvokedWithResult: (didPop, result) async {
+                          if (didPop) return;
 
-                            final navigator = Navigator.of(context);
-                            if (await unit.confirmExit(context)) {
-                              navigator.pop(result);
-                            }
-                          },
-                          key: unit.formKey,
-                          child: Scaffold(
-                            appBar: AppBar(),
-                            body: const Text('Route 2'),
-                          ),
+                          final navigator = Navigator.of(context);
+                          if (await unit.confirmExit(context)) {
+                            navigator.pop(result);
+                          }
+                        },
+                        key: unit.formKey,
+                        child: Scaffold(
+                          appBar: AppBar(),
+                          body: const Text('Route 2'),
                         ),
                       ),
                     ),
-              );
+                  );
               await tester.pumpAndSettle();
 
               await tester.tap(find.byType(BackButton));
@@ -130,33 +129,31 @@ void main() {
                 const Scaffold(
                   body: Text('Route 1'),
                 ),
-                wrapper: materialAppWrapper(),
+                wrapper: MaterialUiTestApp.wrapper(),
               );
 
-              unawaited(
-                tester
-                    .firstState<NavigatorState>(find.byType(Navigator))
-                    .push(
-                      MaterialPageRoute(
-                        builder: (context) => Form(
-                          canPop: false,
-                          onPopInvokedWithResult: (didPop, result) async {
-                            if (didPop) return;
+              tester
+                  .firstState<NavigatorState>(find.byType(Navigator))
+                  .push(
+                    MaterialPageRoute(
+                      builder: (context) => Form(
+                        canPop: false,
+                        onPopInvokedWithResult: (didPop, result) async {
+                          if (didPop) return;
 
-                            final navigator = Navigator.of(context);
-                            if (await unit.confirmExit(context)) {
-                              navigator.pop(result);
-                            }
-                          },
-                          key: unit.formKey,
-                          child: Scaffold(
-                            appBar: AppBar(),
-                            body: const Text('Route 2'),
-                          ),
+                          final navigator = Navigator.of(context);
+                          if (await unit.confirmExit(context)) {
+                            navigator.pop(result);
+                          }
+                        },
+                        key: unit.formKey,
+                        child: Scaffold(
+                          appBar: AppBar(),
+                          body: const Text('Route 2'),
                         ),
                       ),
                     ),
-              );
+                  );
 
               await tester.pumpAndSettle();
 
@@ -197,7 +194,7 @@ void main() {
 
               await tester.pumpWidgetBuilder(
                 const Scaffold(body: Text('Route 1')),
-                wrapper: materialAppWrapper(),
+                wrapper: MaterialUiTestApp.wrapper(),
               );
 
               expect(
@@ -224,22 +221,20 @@ void main() {
                 const Scaffold(
                   body: Placeholder(),
                 ),
-                wrapper: materialAppWrapper(),
+                wrapper: MaterialUiTestApp.wrapper(),
               );
-              unawaited(
-                tester
-                    .firstState<NavigatorState>(find.byType(Navigator))
-                    .push(
-                      MaterialPageRoute(
-                        builder: (context) => Scaffold(
-                          body: ElevatedButton(
-                            onPressed: () => unit.delete(context),
-                            child: const Text(''),
-                          ),
+              tester
+                  .firstState<NavigatorState>(find.byType(Navigator))
+                  .push(
+                    MaterialPageRoute(
+                      builder: (context) => Scaffold(
+                        body: ElevatedButton(
+                          onPressed: () => unit.delete(context),
+                          child: const Text(''),
                         ),
                       ),
                     ),
-              );
+                  );
               await tester.pumpAndSettle();
 
               await tester.tap(find.byType(ElevatedButton));
@@ -298,7 +293,7 @@ void main() {
                     Scaffold(
                       body: Form(key: unit.formKey, child: const Placeholder()),
                     ),
-                    wrapper: materialAppWrapper(),
+                    wrapper: MaterialUiTestApp.wrapper(),
                   );
 
                   unawaited(
@@ -352,7 +347,7 @@ void main() {
                     Scaffold(
                       body: Form(key: unit.formKey, child: const Placeholder()),
                     ),
-                    wrapper: materialAppWrapper(),
+                    wrapper: MaterialUiTestApp.wrapper(),
                   );
 
                   unawaited(
@@ -417,7 +412,7 @@ void main() {
                     ),
                   ),
                 ),
-                wrapper: materialAppWrapper(),
+                wrapper: MaterialUiTestApp.wrapper(),
               );
 
               unawaited(
@@ -442,7 +437,7 @@ void main() {
                 Scaffold(
                   body: Form(key: unit.formKey, child: const Placeholder()),
                 ),
-                wrapper: materialAppWrapper(),
+                wrapper: MaterialUiTestApp.wrapper(),
               );
 
               await unit.save(tester.firstState(find.byType(Scaffold)).context);
@@ -467,7 +462,7 @@ void main() {
                 Scaffold(
                   body: Form(key: unit.formKey, child: const Placeholder()),
                 ),
-                wrapper: materialAppWrapper(),
+                wrapper: MaterialUiTestApp.wrapper(),
               );
 
               unawaited(
@@ -504,7 +499,7 @@ void main() {
                 Scaffold(
                   body: Form(key: unit.formKey, child: const Placeholder()),
                 ),
-                wrapper: materialAppWrapper(),
+                wrapper: MaterialUiTestApp.wrapper(),
               );
 
               unawaited(
@@ -545,7 +540,7 @@ void main() {
                     Scaffold(
                       body: Form(key: unit.formKey, child: const Placeholder()),
                     ),
-                    wrapper: materialAppWrapper(),
+                    wrapper: MaterialUiTestApp.wrapper(),
                   );
 
                   unit.photoFieldState = PhotoFieldState(
@@ -584,7 +579,7 @@ void main() {
                     Scaffold(
                       body: Form(key: unit.formKey, child: const Placeholder()),
                     ),
-                    wrapper: materialAppWrapper(),
+                    wrapper: MaterialUiTestApp.wrapper(),
                   );
 
                   final mockXFile = MockXFile(

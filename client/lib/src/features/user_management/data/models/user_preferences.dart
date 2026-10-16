@@ -7,29 +7,22 @@ part 'user_preferences.g.dart';
 @freezed
 @JsonSerializable()
 class UserPreferences with _$UserPreferences implements ToJson {
-  @override
   @JsonKey(defaultValue: '')
   final String uid;
 
-  @override
   @JsonKey(defaultValue: <String, dynamic>{})
   final Json orderByPreferences;
 
-  @override
   @JsonKey(defaultValue: <String, dynamic>{})
   final Json secondLinePreferences;
 
-  @override
   final bool? darkTheme;
 
-  @override
   @JsonKey(defaultValue: true)
   final bool greatFeastTheme;
 
-  @override
   final HomeMode? lastHomeMode;
 
-  @override
   @LocalDateTimeConverter()
   final DateTime? updatedAt;
 

@@ -154,7 +154,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         _scheduleTokenRefresh(authUser);
 
         final state = AuthAuthenticated(authUser: authUser, userData: userData);
-        if (!state.isApproved && authUser.emailVerified) _maybeClaimAccount();
+        if (!state.isApproved && authUser.emailVerified) {
+          unawaited(_maybeClaimAccount());
+        }
 
         return state;
       },

@@ -132,9 +132,10 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
     _emit(
       drafts: [
         for (final draft in state.drafts)
-          draft.key == key
-              ? draft.copyWith(isMainPhone: becomesMain)
-              : draft.copyWith(isMainPhone: draft.isMainPhone && !becomesMain),
+          if (draft.key == key)
+            draft.copyWith(isMainPhone: becomesMain)
+          else
+            draft.copyWith(isMainPhone: draft.isMainPhone && !becomesMain),
       ],
     );
   }
@@ -154,7 +155,7 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
   ) => _emit(
     drafts: [
       for (final draft in state.drafts)
-        draft.key == key ? change(draft) : draft,
+        if (draft.key == key) change(draft) else draft,
     ],
   );
 

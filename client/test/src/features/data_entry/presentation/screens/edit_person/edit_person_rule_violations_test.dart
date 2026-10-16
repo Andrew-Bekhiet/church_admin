@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../../../utils.dart';
 import 'edit_person_screen_harness.dart';
@@ -77,18 +77,19 @@ void main() {
 
   testWidgets('an address change that cannot be combined with a move is '
       'explained below the address', (tester) async {
-    harness.currentUser = const User(
-      uid: 'me',
-      name: 'خادم',
-      adminOn: [
-        AdminOnData(
-          permissionId: 'grant',
-          service: primary,
-          serviceGender: true,
-        ),
-      ],
-    );
-    harness.install();
+    harness
+      ..currentUser = const User(
+        uid: 'me',
+        name: 'خادم',
+        adminOn: [
+          AdminOnData(
+            permissionId: 'grant',
+            service: primary,
+            serviceGender: true,
+          ),
+        ],
+      )
+      ..install();
     final boy = Person(
       id: 'person-id',
       name: 'مينا',

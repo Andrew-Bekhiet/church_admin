@@ -26,8 +26,6 @@ void main() {
   testWidgets('the label is revealed in Sentry replays', (tester) async {
     await pumpUnmaskedLabel(tester);
 
-    // Sentry has no stable unmask API to assert against instead.
-    // ignore: experimental_member_use
     expect(ancestorOfLabel(SentryUnmask), findsOneWidget);
   });
 }

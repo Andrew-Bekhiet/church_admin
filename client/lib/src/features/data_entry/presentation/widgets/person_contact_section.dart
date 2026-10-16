@@ -1,8 +1,8 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as contacts;
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PersonContactSection extends StatelessWidget {

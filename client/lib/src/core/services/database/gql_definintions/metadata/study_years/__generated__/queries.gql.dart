@@ -1,4 +1,5 @@
 import 'fragments.gql.dart';
+
 import 'package:gql/ast.dart';
 
 class Variables_Query_getStudyYearName {

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'store.dart';
@@ -9,21 +9,11 @@ part of 'store.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Store {
-  String get id;
-  String get name;
-  Address? get address;
-  Family? get family;
-  String? get familyId;
-  Color? get color;
-  LastRecordedByInfo? get lastEdit;
-  DateTime? get photoUpdatedAt;
-  String? get blurhash;
-  bool get userCanEdit;
-
   /// Create a copy of Store
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -33,45 +23,53 @@ mixin _$Store {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as Store;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Store &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.family, family) || other.family == family) &&
-            (identical(other.familyId, familyId) ||
-                other.familyId == familyId) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.lastEdit, lastEdit) ||
-                other.lastEdit == lastEdit) &&
-            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
-                other.photoUpdatedAt == photoUpdatedAt) &&
-            (identical(other.blurhash, blurhash) ||
-                other.blurhash == blurhash) &&
-            (identical(other.userCanEdit, userCanEdit) ||
-                other.userCanEdit == userCanEdit));
+            (identical(other.id, _this.id) || other.id == _this.id) &&
+            (identical(other.name, _this.name) || other.name == _this.name) &&
+            (identical(other.address, _this.address) ||
+                other.address == _this.address) &&
+            (identical(other.family, _this.family) ||
+                other.family == _this.family) &&
+            (identical(other.familyId, _this.familyId) ||
+                other.familyId == _this.familyId) &&
+            (identical(other.color, _this.color) ||
+                other.color == _this.color) &&
+            (identical(other.lastEdit, _this.lastEdit) ||
+                other.lastEdit == _this.lastEdit) &&
+            (identical(other.photoUpdatedAt, _this.photoUpdatedAt) ||
+                other.photoUpdatedAt == _this.photoUpdatedAt) &&
+            (identical(other.blurhash, _this.blurhash) ||
+                other.blurhash == _this.blurhash) &&
+            (identical(other.userCanEdit, _this.userCanEdit) ||
+                other.userCanEdit == _this.userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    address,
-    family,
-    familyId,
-    color,
-    lastEdit,
-    photoUpdatedAt,
-    blurhash,
-    userCanEdit,
-  );
+  int get hashCode {
+    final _this = this as Store;
+    return Object.hash(
+      runtimeType,
+      _this.id,
+      _this.name,
+      _this.address,
+      _this.family,
+      _this.familyId,
+      _this.color,
+      _this.lastEdit,
+      _this.photoUpdatedAt,
+      _this.blurhash,
+      _this.userCanEdit,
+    );
+  }
 
   @override
   String toString() {
-    return 'Store(id: $id, name: $name, address: $address, family: $family, familyId: $familyId, color: $color, lastEdit: $lastEdit, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, userCanEdit: $userCanEdit)';
+    final _this = this as Store;
+    return 'Store(id: ${_this.id}, name: ${_this.name}, address: ${_this.address}, family: ${_this.family}, familyId: ${_this.familyId}, color: ${_this.color}, lastEdit: ${_this.lastEdit}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, userCanEdit: ${_this.userCanEdit})';
   }
 }
 
@@ -92,6 +90,10 @@ abstract mixin class $StoreCopyWith<$Res> {
     DateTime? photoUpdatedAt,
     String? blurhash,
   });
+
+  $AddressCopyWith<$Res>? get address;
+  $FamilyCopyWith<$Res>? get family;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -161,5 +163,47 @@ class _$StoreCopyWithImpl<$Res> implements $StoreCopyWith<$Res> {
                   as String?,
       ),
     );
+  }
+
+  /// Create a copy of Store
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressCopyWith<$Res>? get address {
+    if (_self.address == null) {
+      return null;
+    }
+
+    return $AddressCopyWith<$Res>(_self.address!, (value) {
+      return _then(_self.copyWith(address: value));
+    });
+  }
+
+  /// Create a copy of Store
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FamilyCopyWith<$Res>? get family {
+    if (_self.family == null) {
+      return null;
+    }
+
+    return $FamilyCopyWith<$Res>(_self.family!, (value) {
+      return _then(_self.copyWith(family: value));
+    });
+  }
+
+  /// Create a copy of Store
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
   }
 }

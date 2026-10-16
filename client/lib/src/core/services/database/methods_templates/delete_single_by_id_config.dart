@@ -37,7 +37,6 @@ class DeleteSingleByIdConfig<T> extends DAOMethodTemplate<T?> {
   }
 }
 
-typedef DeleteSingleByIdConfigVarsConstructor =
-    Json Function({
-      required UuidValue id,
-    });
+typedef DeleteSingleByIdConfigVarsConstructor = Json Function({
+  required UuidValue id,
+});

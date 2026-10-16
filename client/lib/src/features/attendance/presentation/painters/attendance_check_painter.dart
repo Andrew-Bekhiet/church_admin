@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AttendanceCheckPainter extends CustomPainter {
   static const double _viewBox = 24;

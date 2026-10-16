@@ -118,21 +118,11 @@ abstract final class E2eBackend {
     return (inserted['insertAuthUsersDataOne'] as Map)['uid'] as String;
   }
 
-  static Future<Set<String>> adminOnServicesOf(String uid) async {
-    final data = await hasuraQuery(
-      r'''
-      query AdminOnServicesOf($uid: uuid!) {
-        authUsersAdminOn(where: {uid: {_eq: $uid}}) { adminOnService }
-      }
-      ''',
-      variables: {'uid': uid},
-    );
-
-    return {
-      for (final row in data['authUsersAdminOn'] as List)
-        (row as Map)['adminOnService'] as String,
-    };
-  }
+  static Future<Set<String>> adminOnServicesOf(String uid) => _columnOfUserRows(
+    uid,
+    table: 'authUsersAdminOn',
+    column: 'adminOnService',
+  );
 
   static Future<Map<String, dynamic>> userByEmail(String email) async {
     final data = await hasuraQuery(
@@ -151,19 +141,24 @@ abstract final class E2eBackend {
     return (data['authUsersData'] as List).single as Map<String, dynamic>;
   }
 
-  static Future<Set<String>> permissionsOf(String uid) async {
+  static Future<Set<String>> permissionsOf(String uid) => _columnOfUserRows(
+    uid,
+    table: 'authUsersPermissions',
+    column: 'permission',
+  );
+
+  static Future<Set<String>> _columnOfUserRows(
+    String uid, {
+    required String table,
+    required String column,
+  }) async {
     final data = await hasuraQuery(
-      r'''
-      query PermissionsOf($uid: uuid!) {
-        authUsersPermissions(where: {uid: {_eq: $uid}}) { permission }
-      }
-      ''',
+      'query (\$uid: uuid!) { $table(where: {uid: {_eq: \$uid}}) { $column } }',
       variables: {'uid': uid},
     );
 
     return {
-      for (final row in data['authUsersPermissions'] as List)
-        (row as Map)['permission'] as String,
+      for (final row in data[table] as List) (row as Map)[column] as String,
     };
   }
 }

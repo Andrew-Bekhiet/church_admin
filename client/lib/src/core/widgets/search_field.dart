@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SearchField extends StatelessWidget {
   /// The sink to which the search query will be added

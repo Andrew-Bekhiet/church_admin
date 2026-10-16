@@ -8,6 +8,7 @@ export 'models/college.dart';
 export 'models/district.dart';
 export 'models/family.dart';
 export 'models/father.dart';
+export 'models/functions_object_image_info.dart';
 export 'models/group.dart';
 export 'models/hobby.dart';
 export 'models/i_image.dart';

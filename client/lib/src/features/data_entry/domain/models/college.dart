@@ -19,7 +19,6 @@ class College extends ViewableWithID
   @JsonKey(defaultValue: '')
   @QueryableField(label: 'الاسم')
   final String name;
-  @override
   final String? universityId;
 
   @override

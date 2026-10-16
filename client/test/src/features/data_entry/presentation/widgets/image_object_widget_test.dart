@@ -5,14 +5,16 @@ import 'dart:typed_data';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:file/file.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:photo_view/photo_view.dart';
+
+import '../../../../material_ui_test_app.dart';
 
 class MockImageUrlCacheService extends Mock implements ImageUrlCacheService {}
 
@@ -39,7 +41,7 @@ void main() {
             unit,
           ),
         ),
-        wrapper: materialAppWrapper(),
+        wrapper: MaterialUiTestApp.wrapper(),
       );
 
       await tester.pumpAndSettle();
@@ -102,7 +104,7 @@ void main() {
             person,
           ),
         ),
-        wrapper: materialAppWrapper(),
+        wrapper: MaterialUiTestApp.wrapper(),
       );
 
       expect(
@@ -143,9 +145,9 @@ void main() {
       );
 
       final urlCompleters = <String, Completer<String>>{};
-      final imageUrlCacheService =
-          globalProviderContainer.read(imageUrlCacheServiceProvider)
-              as MockImageUrlCacheService;
+      final imageUrlCacheService = globalProviderContainer.read(
+        imageUrlCacheServiceProvider,
+      ) as MockImageUrlCacheService;
       when(
         () => imageUrlCacheService.getCachedImageUrl(any()),
       ).thenReturn(null);
@@ -160,20 +162,20 @@ void main() {
 
       await tester.pumpWidgetBuilder(
         Scaffold(body: ImageObjectWidget(personA)),
-        wrapper: materialAppWrapper(),
+        wrapper: MaterialUiTestApp.wrapper(),
       );
       urlCompleters[personA.imageInfo.cacheKey]!.complete('urlA');
       await tester.pump();
 
       await tester.pumpWidgetBuilder(
         Scaffold(body: ImageObjectWidget(personB)),
-        wrapper: materialAppWrapper(),
+        wrapper: MaterialUiTestApp.wrapper(),
       );
       await tester.pump();
 
-      final cacheManager =
-          globalProviderContainer.read(baseCacheManagerProvider)
-              as MockBaseCacheManager;
+      final cacheManager = globalProviderContainer.read(
+        baseCacheManagerProvider,
+      ) as MockBaseCacheManager;
       verifyNever(
         () => cacheManager.getFileStream(
           'urlA',
@@ -208,9 +210,9 @@ void main() {
         'newPhotoUrl': twoPixelWideTransparentImage,
       };
 
-      final imageUrlCacheService =
-          globalProviderContainer.read(imageUrlCacheServiceProvider)
-              as MockImageUrlCacheService;
+      final imageUrlCacheService = globalProviderContainer.read(
+        imageUrlCacheServiceProvider,
+      ) as MockImageUrlCacheService;
       when(() => imageUrlCacheService.getCachedImageUrl(any())).thenAnswer(
         (i) =>
             photoUrls[(i.positionalArguments.first as ObjectImageInfo)
@@ -221,9 +223,9 @@ void main() {
             photoUrls[(i.positionalArguments.first as ObjectImageInfo)
                 .lastUpdatedTime]!,
       );
-      final cacheManager =
-          globalProviderContainer.read(baseCacheManagerProvider)
-              as MockBaseCacheManager;
+      final cacheManager = globalProviderContainer.read(
+        baseCacheManagerProvider,
+      ) as MockBaseCacheManager;
       when(
         () => cacheManager.getFileStream(
           any(),
@@ -262,13 +264,13 @@ void main() {
 
       await tester.pumpWidgetBuilder(
         Scaffold(body: ImageObjectWidget(personWithOldPhoto)),
-        wrapper: materialAppWrapper(),
+        wrapper: MaterialUiTestApp.wrapper(),
       );
       expect(await displayedPhotoWidth(), 1);
 
       await tester.pumpWidgetBuilder(
         Scaffold(body: ImageObjectWidget(personWithNewPhoto)),
-        wrapper: materialAppWrapper(),
+        wrapper: MaterialUiTestApp.wrapper(),
       );
 
       expect(await displayedPhotoWidth(), 2);
@@ -290,7 +292,7 @@ void main() {
             person,
           ),
         ),
-        wrapper: materialAppWrapper(),
+        wrapper: MaterialUiTestApp.wrapper(),
       );
 
       expect(
@@ -345,7 +347,7 @@ void main() {
             circleCrop: false,
           ),
         ),
-        wrapper: materialAppWrapper(),
+        wrapper: MaterialUiTestApp.wrapper(),
       );
 
       expect(
@@ -399,7 +401,7 @@ void main() {
             person,
           ),
         ),
-        wrapper: materialAppWrapper(),
+        wrapper: MaterialUiTestApp.wrapper(),
       );
 
       await tester.pump(const Duration(milliseconds: 120));

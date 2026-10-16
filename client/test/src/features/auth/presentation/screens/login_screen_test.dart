@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -13,6 +13,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:spot/spot.dart';
 
 import '../../../../fakes/fake_feature_flags_repo.dart';
+import '../../../../material_ui_test_app.dart';
 import '../../../../utils.dart';
 import 'login_screen_test.mocks.dart';
 
@@ -47,7 +48,7 @@ void main() {
 
         await tester.pumpWidgetBuilder(
           const LoginScreen(),
-          wrapper: materialAppWrapper(),
+          wrapper: MaterialUiTestApp.wrapper(),
         );
         await act.enterText(
           spotKey(LoginScreenKeys.emailFieldKey),
@@ -91,7 +92,7 @@ void main() {
 
         await tester.pumpWidgetBuilder(
           const LoginScreen(),
-          wrapper: materialAppWrapper(),
+          wrapper: MaterialUiTestApp.wrapper(),
         );
 
         await tester.dragUntilVisible(

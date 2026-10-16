@@ -2,8 +2,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/auth/presentation/widgets/auth_form.dart';
 import 'package:church_admin/src/features/auth/presentation/widgets/auth_mode_switch.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_ui/material_ui.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  const SessionReplayUnmask(child: _LoginTitle()),
+                  const SessionReplayUnmask(child: LoginTitle()),
                   SessionReplayUnmask(
                     child: SizedBox(
                       height: screenSize.shortestSide,
@@ -179,30 +179,5 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       }
     }
-  }
-}
-
-class _LoginTitle extends StatelessWidget {
-  const _LoginTitle();
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return SafeArea(
-      child: Container(
-        margin: const EdgeInsets.all(16),
-        child: Center(
-          child: Text(
-            'كنيسة السيدة العذراء مريم',
-            style: theme.textTheme.displayMedium?.copyWith(
-              color: theme.textTheme.displayMedium?.color?.withValues(
-                alpha: 1,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }

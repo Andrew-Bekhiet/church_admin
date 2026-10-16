@@ -4,17 +4,18 @@ import 'dart:typed_data';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mocktail/mocktail.dart' as mocktail;
 import 'package:spot/spot.dart';
 
 import '../../../../fakes/fake_device_info.dart';
+import '../../../../material_ui_test_app.dart';
 import '../../../../utils.dart';
 import 'biometrics_auth_screen_test.mocks.dart';
 
@@ -48,7 +49,7 @@ void main() {
     addTearDown(() => tester.binding.setSurfaceSize(null));
     await tester.pumpWidgetBuilder(
       screen,
-      wrapper: wrapper ?? materialAppWrapper(),
+      wrapper: wrapper ?? MaterialUiTestApp.wrapper(),
       surfaceSize: const Size(390, 1200),
     );
     await tester.pumpAndSettle();

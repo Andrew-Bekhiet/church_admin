@@ -1,5 +1,5 @@
 export 'package:church_admin/church_admin.dart' show Json;
-export 'package:flutter/material.dart' show DateTimeRange;
+export 'package:material_ui/material_ui.dart' show DateTimeRange;
 export 'package:uuid/uuid.dart' show UuidValue;
 
 export 'scalars/color.dart';

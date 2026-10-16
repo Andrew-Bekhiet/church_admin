@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart' hide Notification;
 import 'package:intl/intl.dart';
+import 'package:material_ui/material_ui.dart' hide Notification;
 
 class NotificationDetailsDialog extends StatelessWidget {
   final Notification notification;
@@ -45,15 +44,15 @@ class NotificationDetailsDialog extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(notification.body),
-                  if (notification.imageURL != null)
-                    _NotificationPhoto(notification: notification),
+                  if (notification.imageURL case final imageUrl?)
+                    NotificationDetailsPhoto(imageUrl: imageUrl),
                 ],
               ),
             ),
             const SizedBox(height: 20),
             if (notification.senderUID !=
                 NotificationsService.localNotificationSenderUID)
-              _NotificationSender(senderDataFuture: senderDataFuture),
+              NotificationDetailsSender(senderDataFuture: senderDataFuture),
             Align(
               alignment: Alignment.bottomLeft,
               child: Text(
@@ -83,68 +82,6 @@ class NotificationDetailsDialog extends StatelessWidget {
           child: const Text('حسنًا'),
         ),
       ],
-    );
-  }
-}
-
-class _NotificationSender extends StatelessWidget {
-  final Future<User?> senderDataFuture;
-  const _NotificationSender({
-    required this.senderDataFuture,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: senderDataFuture,
-      builder: (context, senderData) {
-        if (senderData.hasError) {
-          return ErrorWidget.builder(
-            FlutterErrorDetails(exception: senderData.error!),
-          );
-        }
-
-        if (senderData.connectionState != ConnectionState.done) {
-          return const LinearProgressIndicator();
-        }
-
-        final sender = senderData.data;
-
-        if (sender == null) {
-          return const SizedBox();
-        }
-
-        return ViewableObjectWidget(
-          sender,
-          subtitle: const SizedBox(),
-          isDense: true,
-        );
-      },
-    );
-  }
-}
-
-class _NotificationPhoto extends StatelessWidget {
-  final Notification notification;
-  const _NotificationPhoto({
-    required this.notification,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final screenSize = MediaQuery.sizeOf(context);
-    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
-
-    return CachedNetworkImage(
-      imageUrl: notification.imageURL!,
-      useOldImageOnUrlChange: true,
-      memCacheWidth: devicePixelRatio * screenSize.width * 85 ~/ 100,
-      cacheManager: globalProviderContainer.read(baseCacheManagerProvider),
-      progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-        child: CircularProgressIndicator(
-          value: downloadProgress.progress,
-        ),
-      ),
     );
   }
 }

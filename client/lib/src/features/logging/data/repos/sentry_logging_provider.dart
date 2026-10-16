@@ -32,7 +32,6 @@ class SentryLoggingProvider implements LoggingProvider {
         ..reportSilentFlutterErrors = true
         ..attachScreenshot = true
         ..screenshotQuality = SentryScreenshotQuality.low
-        ..enableLogs = true
         ..enableUserInteractionTracing = true
         ..replay.sessionSampleRate = settings.sessionReplaySampleRate
         ..replay.onErrorSampleRate = 1

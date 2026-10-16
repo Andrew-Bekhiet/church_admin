@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'service.dart';
@@ -9,29 +9,11 @@ part of 'service.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Service {
-  String get id;
-  String get name;
-  StudyYear? get studyYearFrom;
-  StudyYear? get studyYearTo;
-  int? get studyYearFromId;
-  int? get studyYearToId;
-  Service? get nextService;
-  String? get nextServiceId;
-  Meeting? get defaultMeeting;
-  Color? get color;
-  DateTime? get photoUpdatedAt;
-  String? get blurhash;
-  List<Class>? get classes;
-  List<Group>? get groups;
-  List<Meeting>? get meetings;
-  LastRecordedByInfo? get lastEdit;
-  List<User>? get adminUsers;
-  bool get userCanEdit;
-
   /// Create a copy of Service
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -41,70 +23,82 @@ mixin _$Service {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as Service;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Service &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.studyYearFrom, studyYearFrom) ||
-                other.studyYearFrom == studyYearFrom) &&
-            (identical(other.studyYearTo, studyYearTo) ||
-                other.studyYearTo == studyYearTo) &&
-            (identical(other.studyYearFromId, studyYearFromId) ||
-                other.studyYearFromId == studyYearFromId) &&
-            (identical(other.studyYearToId, studyYearToId) ||
-                other.studyYearToId == studyYearToId) &&
-            (identical(other.nextService, nextService) ||
-                other.nextService == nextService) &&
-            (identical(other.nextServiceId, nextServiceId) ||
-                other.nextServiceId == nextServiceId) &&
-            (identical(other.defaultMeeting, defaultMeeting) ||
-                other.defaultMeeting == defaultMeeting) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
-                other.photoUpdatedAt == photoUpdatedAt) &&
-            (identical(other.blurhash, blurhash) ||
-                other.blurhash == blurhash) &&
-            const DeepCollectionEquality().equals(other.classes, classes) &&
-            const DeepCollectionEquality().equals(other.groups, groups) &&
-            const DeepCollectionEquality().equals(other.meetings, meetings) &&
-            (identical(other.lastEdit, lastEdit) ||
-                other.lastEdit == lastEdit) &&
+            (identical(other.id, _this.id) || other.id == _this.id) &&
+            (identical(other.name, _this.name) || other.name == _this.name) &&
+            (identical(other.studyYearFrom, _this.studyYearFrom) ||
+                other.studyYearFrom == _this.studyYearFrom) &&
+            (identical(other.studyYearTo, _this.studyYearTo) ||
+                other.studyYearTo == _this.studyYearTo) &&
+            (identical(other.studyYearFromId, _this.studyYearFromId) ||
+                other.studyYearFromId == _this.studyYearFromId) &&
+            (identical(other.studyYearToId, _this.studyYearToId) ||
+                other.studyYearToId == _this.studyYearToId) &&
+            (identical(other.nextService, _this.nextService) ||
+                other.nextService == _this.nextService) &&
+            (identical(other.nextServiceId, _this.nextServiceId) ||
+                other.nextServiceId == _this.nextServiceId) &&
+            (identical(other.defaultMeeting, _this.defaultMeeting) ||
+                other.defaultMeeting == _this.defaultMeeting) &&
+            (identical(other.color, _this.color) ||
+                other.color == _this.color) &&
+            (identical(other.photoUpdatedAt, _this.photoUpdatedAt) ||
+                other.photoUpdatedAt == _this.photoUpdatedAt) &&
+            (identical(other.blurhash, _this.blurhash) ||
+                other.blurhash == _this.blurhash) &&
+            const DeepCollectionEquality().equals(
+              other.classes,
+              _this.classes,
+            ) &&
+            const DeepCollectionEquality().equals(other.groups, _this.groups) &&
+            const DeepCollectionEquality().equals(
+              other.meetings,
+              _this.meetings,
+            ) &&
+            (identical(other.lastEdit, _this.lastEdit) ||
+                other.lastEdit == _this.lastEdit) &&
             const DeepCollectionEquality().equals(
               other.adminUsers,
-              adminUsers,
+              _this.adminUsers,
             ) &&
-            (identical(other.userCanEdit, userCanEdit) ||
-                other.userCanEdit == userCanEdit));
+            (identical(other.userCanEdit, _this.userCanEdit) ||
+                other.userCanEdit == _this.userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    studyYearFrom,
-    studyYearTo,
-    studyYearFromId,
-    studyYearToId,
-    nextService,
-    nextServiceId,
-    defaultMeeting,
-    color,
-    photoUpdatedAt,
-    blurhash,
-    const DeepCollectionEquality().hash(classes),
-    const DeepCollectionEquality().hash(groups),
-    const DeepCollectionEquality().hash(meetings),
-    lastEdit,
-    const DeepCollectionEquality().hash(adminUsers),
-    userCanEdit,
-  );
+  int get hashCode {
+    final _this = this as Service;
+    return Object.hash(
+      runtimeType,
+      _this.id,
+      _this.name,
+      _this.studyYearFrom,
+      _this.studyYearTo,
+      _this.studyYearFromId,
+      _this.studyYearToId,
+      _this.nextService,
+      _this.nextServiceId,
+      _this.defaultMeeting,
+      _this.color,
+      _this.photoUpdatedAt,
+      _this.blurhash,
+      const DeepCollectionEquality().hash(_this.classes),
+      const DeepCollectionEquality().hash(_this.groups),
+      const DeepCollectionEquality().hash(_this.meetings),
+      _this.lastEdit,
+      const DeepCollectionEquality().hash(_this.adminUsers),
+      _this.userCanEdit,
+    );
+  }
 
   @override
   String toString() {
-    return 'Service(id: $id, name: $name, studyYearFrom: $studyYearFrom, studyYearTo: $studyYearTo, studyYearFromId: $studyYearFromId, studyYearToId: $studyYearToId, nextService: $nextService, nextServiceId: $nextServiceId, defaultMeeting: $defaultMeeting, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, classes: $classes, groups: $groups, meetings: $meetings, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
+    final _this = this as Service;
+    return 'Service(id: ${_this.id}, name: ${_this.name}, studyYearFrom: ${_this.studyYearFrom}, studyYearTo: ${_this.studyYearTo}, studyYearFromId: ${_this.studyYearFromId}, studyYearToId: ${_this.studyYearToId}, nextService: ${_this.nextService}, nextServiceId: ${_this.nextServiceId}, defaultMeeting: ${_this.defaultMeeting}, color: ${_this.color}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, classes: ${_this.classes}, groups: ${_this.groups}, meetings: ${_this.meetings}, lastEdit: ${_this.lastEdit}, adminUsers: ${_this.adminUsers}, userCanEdit: ${_this.userCanEdit})';
   }
 }
 
@@ -133,6 +127,12 @@ abstract mixin class $ServiceCopyWith<$Res> {
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
   });
+
+  $StudyYearCopyWith<$Res>? get studyYearFrom;
+  $StudyYearCopyWith<$Res>? get studyYearTo;
+  $ServiceCopyWith<$Res>? get nextService;
+  $MeetingCopyWith<$Res>? get defaultMeeting;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -242,5 +242,75 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
                   as List<User>?,
       ),
     );
+  }
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StudyYearCopyWith<$Res>? get studyYearFrom {
+    if (_self.studyYearFrom == null) {
+      return null;
+    }
+
+    return $StudyYearCopyWith<$Res>(_self.studyYearFrom!, (value) {
+      return _then(_self.copyWith(studyYearFrom: value));
+    });
+  }
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StudyYearCopyWith<$Res>? get studyYearTo {
+    if (_self.studyYearTo == null) {
+      return null;
+    }
+
+    return $StudyYearCopyWith<$Res>(_self.studyYearTo!, (value) {
+      return _then(_self.copyWith(studyYearTo: value));
+    });
+  }
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ServiceCopyWith<$Res>? get nextService {
+    if (_self.nextService == null) {
+      return null;
+    }
+
+    return $ServiceCopyWith<$Res>(_self.nextService!, (value) {
+      return _then(_self.copyWith(nextService: value));
+    });
+  }
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MeetingCopyWith<$Res>? get defaultMeeting {
+    if (_self.defaultMeeting == null) {
+      return null;
+    }
+
+    return $MeetingCopyWith<$Res>(_self.defaultMeeting!, (value) {
+      return _then(_self.copyWith(defaultMeeting: value));
+    });
+  }
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
   }
 }

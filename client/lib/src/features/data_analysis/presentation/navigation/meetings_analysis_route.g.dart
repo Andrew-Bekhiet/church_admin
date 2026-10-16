@@ -41,28 +41,3 @@ mixin $MeetingsAnalysisRoute on GoRouteData {
   void replace(BuildContext context) =>
       context.replace(location, extra: _self.$extra);
 }
-
-// **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
-
-MeetingsAnalysisExtra _$MeetingsAnalysisExtraFromJson(Map json) =>
-    MeetingsAnalysisExtra(
-      title: json['title'] as String,
-      initialRangePreset: MeetingsAnalysisExtra._dateRangePresetFromString(
-        json['initialRangePreset'] as String,
-      ),
-      subject: MeetingsAnalysisExtra._subjectFromJson(
-        (json['subject'] as num).toInt(),
-      ),
-    );
-
-Map<String, dynamic> _$MeetingsAnalysisExtraToJson(
-  MeetingsAnalysisExtra instance,
-) => <String, dynamic>{
-  'title': instance.title,
-  'initialRangePreset': MeetingsAnalysisExtra._dateRangePresetToString(
-    instance.initialRangePreset,
-  ),
-  'subject': MeetingsAnalysisExtra._subjectToJson(instance.subject),
-};

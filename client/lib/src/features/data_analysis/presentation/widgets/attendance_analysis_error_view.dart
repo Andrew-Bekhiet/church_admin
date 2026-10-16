@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AttendanceAnalysisErrorView extends StatelessWidget {
   final Object error;

@@ -1,8 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_account_card.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_section_card.dart';
-import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ViewUser extends StatefulWidget {
   final User? user;
@@ -208,8 +208,7 @@ class _ViewUserState extends State<ViewUser> {
       context: context,
       builder: (context) => const ConfirmationDialog(
         title: 'تأكيد حذف الحساب',
-        explanation:
-            'سيتم حذف حسابك في التطبيق ولا يمكن استرجاعه ولا البيانات المتعلقة به',
+        explanation: 'سيتم حذف حسابك في التطبيق ولا يمكن استرجاعه ولا البيانات المتعلقة به',
         confirmLabel: 'حذف حسابي نهائيًا',
         cancelLabel: 'تراجع',
         isDestructive: true,

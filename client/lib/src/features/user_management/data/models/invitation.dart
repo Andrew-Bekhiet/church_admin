@@ -7,24 +7,18 @@ part 'invitation.g.dart';
 @freezed
 @JsonSerializable()
 class Invitation with _$Invitation implements ToJson {
-  @override
   final String id;
 
-  @override
   final String userUid;
 
-  @override
   final String code;
 
-  @override
   @LocalDateTimeConverter()
   final DateTime createdAt;
 
-  @override
   @LocalDateTimeConverter()
   final DateTime expiresAt;
 
-  @override
   @LocalDateTimeConverter()
   final DateTime? claimedAt;
 

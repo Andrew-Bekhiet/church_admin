@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'aggregate_data.dart';
@@ -9,14 +9,11 @@ part of 'aggregate_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$AggregateData {
-  int? get count;
-  LastRecordedByInfo? get max;
-  LastRecordedByInfo? get min;
-
   /// Create a copy of AggregateData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,21 +26,27 @@ mixin _$AggregateData {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as AggregateData;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is AggregateData &&
-            (identical(other.count, count) || other.count == count) &&
-            (identical(other.max, max) || other.max == max) &&
-            (identical(other.min, min) || other.min == min));
+            (identical(other.count, _this.count) ||
+                other.count == _this.count) &&
+            (identical(other.max, _this.max) || other.max == _this.max) &&
+            (identical(other.min, _this.min) || other.min == _this.min));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, count, max, min);
+  int get hashCode {
+    final _this = this as AggregateData;
+    return Object.hash(runtimeType, _this.count, _this.max, _this.min);
+  }
 
   @override
   String toString() {
-    return 'AggregateData(count: $count, max: $max, min: $min)';
+    final _this = this as AggregateData;
+    return 'AggregateData(count: ${_this.count}, max: ${_this.max}, min: ${_this.min})';
   }
 }
 
@@ -55,6 +58,9 @@ abstract mixin class $AggregateDataCopyWith<$Res> {
   ) = _$AggregateDataCopyWithImpl;
   @useResult
   $Res call({int? count, LastRecordedByInfo? max, LastRecordedByInfo? min});
+
+  $LastRecordedByInfoCopyWith<$Res>? get max;
+  $LastRecordedByInfoCopyWith<$Res>? get min;
 }
 
 /// @nodoc
@@ -90,5 +96,33 @@ class _$AggregateDataCopyWithImpl<$Res>
                   as LastRecordedByInfo?,
       ),
     );
+  }
+
+  /// Create a copy of AggregateData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get max {
+    if (_self.max == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.max!, (value) {
+      return _then(_self.copyWith(max: value));
+    });
+  }
+
+  /// Create a copy of AggregateData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get min {
+    if (_self.min == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.min!, (value) {
+      return _then(_self.copyWith(min: value));
+    });
   }
 }

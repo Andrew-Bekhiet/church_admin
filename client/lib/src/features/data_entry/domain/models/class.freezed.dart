@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'class.dart';
@@ -9,26 +9,11 @@ part of 'class.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Class {
-  String get id;
-  String get name;
-  Color? get color;
-  DateTime? get photoUpdatedAt;
-  String? get blurhash;
-  Service? get service;
-  String? get serviceId;
-  StudyYear? get studyYear;
-  int? get serviceStudyYear;
-  StudyYear? get studyYearTo;
-  int? get serviceStudyYearTo;
-  bool? get serviceGender;
-  LastRecordedByInfo? get lastEdit;
-  List<User>? get adminUsers;
-  bool get userCanEdit;
-
   /// Create a copy of Class
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -38,63 +23,70 @@ mixin _$Class {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as Class;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Class &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
-                other.photoUpdatedAt == photoUpdatedAt) &&
-            (identical(other.blurhash, blurhash) ||
-                other.blurhash == blurhash) &&
-            (identical(other.service, service) || other.service == service) &&
-            (identical(other.serviceId, serviceId) ||
-                other.serviceId == serviceId) &&
-            (identical(other.studyYear, studyYear) ||
-                other.studyYear == studyYear) &&
-            (identical(other.serviceStudyYear, serviceStudyYear) ||
-                other.serviceStudyYear == serviceStudyYear) &&
-            (identical(other.studyYearTo, studyYearTo) ||
-                other.studyYearTo == studyYearTo) &&
-            (identical(other.serviceStudyYearTo, serviceStudyYearTo) ||
-                other.serviceStudyYearTo == serviceStudyYearTo) &&
-            (identical(other.serviceGender, serviceGender) ||
-                other.serviceGender == serviceGender) &&
-            (identical(other.lastEdit, lastEdit) ||
-                other.lastEdit == lastEdit) &&
+            (identical(other.id, _this.id) || other.id == _this.id) &&
+            (identical(other.name, _this.name) || other.name == _this.name) &&
+            (identical(other.color, _this.color) ||
+                other.color == _this.color) &&
+            (identical(other.photoUpdatedAt, _this.photoUpdatedAt) ||
+                other.photoUpdatedAt == _this.photoUpdatedAt) &&
+            (identical(other.blurhash, _this.blurhash) ||
+                other.blurhash == _this.blurhash) &&
+            (identical(other.service, _this.service) ||
+                other.service == _this.service) &&
+            (identical(other.serviceId, _this.serviceId) ||
+                other.serviceId == _this.serviceId) &&
+            (identical(other.studyYear, _this.studyYear) ||
+                other.studyYear == _this.studyYear) &&
+            (identical(other.serviceStudyYear, _this.serviceStudyYear) ||
+                other.serviceStudyYear == _this.serviceStudyYear) &&
+            (identical(other.studyYearTo, _this.studyYearTo) ||
+                other.studyYearTo == _this.studyYearTo) &&
+            (identical(other.serviceStudyYearTo, _this.serviceStudyYearTo) ||
+                other.serviceStudyYearTo == _this.serviceStudyYearTo) &&
+            (identical(other.serviceGender, _this.serviceGender) ||
+                other.serviceGender == _this.serviceGender) &&
+            (identical(other.lastEdit, _this.lastEdit) ||
+                other.lastEdit == _this.lastEdit) &&
             const DeepCollectionEquality().equals(
               other.adminUsers,
-              adminUsers,
+              _this.adminUsers,
             ) &&
-            (identical(other.userCanEdit, userCanEdit) ||
-                other.userCanEdit == userCanEdit));
+            (identical(other.userCanEdit, _this.userCanEdit) ||
+                other.userCanEdit == _this.userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    color,
-    photoUpdatedAt,
-    blurhash,
-    service,
-    serviceId,
-    studyYear,
-    serviceStudyYear,
-    studyYearTo,
-    serviceStudyYearTo,
-    serviceGender,
-    lastEdit,
-    const DeepCollectionEquality().hash(adminUsers),
-    userCanEdit,
-  );
+  int get hashCode {
+    final _this = this as Class;
+    return Object.hash(
+      runtimeType,
+      _this.id,
+      _this.name,
+      _this.color,
+      _this.photoUpdatedAt,
+      _this.blurhash,
+      _this.service,
+      _this.serviceId,
+      _this.studyYear,
+      _this.serviceStudyYear,
+      _this.studyYearTo,
+      _this.serviceStudyYearTo,
+      _this.serviceGender,
+      _this.lastEdit,
+      const DeepCollectionEquality().hash(_this.adminUsers),
+      _this.userCanEdit,
+    );
+  }
 
   @override
   String toString() {
-    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, service: $service, serviceId: $serviceId, studyYear: $studyYear, serviceStudyYear: $serviceStudyYear, studyYearTo: $studyYearTo, serviceStudyYearTo: $serviceStudyYearTo, serviceGender: $serviceGender, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
+    final _this = this as Class;
+    return 'Class(id: ${_this.id}, name: ${_this.name}, color: ${_this.color}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, service: ${_this.service}, serviceId: ${_this.serviceId}, studyYear: ${_this.studyYear}, serviceStudyYear: ${_this.serviceStudyYear}, studyYearTo: ${_this.studyYearTo}, serviceStudyYearTo: ${_this.serviceStudyYearTo}, serviceGender: ${_this.serviceGender}, lastEdit: ${_this.lastEdit}, adminUsers: ${_this.adminUsers}, userCanEdit: ${_this.userCanEdit})';
   }
 }
 
@@ -120,6 +112,11 @@ abstract mixin class $ClassCopyWith<$Res> {
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
   });
+
+  $ServiceCopyWith<$Res>? get service;
+  $StudyYearCopyWith<$Res>? get studyYear;
+  $StudyYearCopyWith<$Res>? get studyYearTo;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -214,5 +211,61 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
                   as List<User>?,
       ),
     );
+  }
+
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ServiceCopyWith<$Res>? get service {
+    if (_self.service == null) {
+      return null;
+    }
+
+    return $ServiceCopyWith<$Res>(_self.service!, (value) {
+      return _then(_self.copyWith(service: value));
+    });
+  }
+
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StudyYearCopyWith<$Res>? get studyYear {
+    if (_self.studyYear == null) {
+      return null;
+    }
+
+    return $StudyYearCopyWith<$Res>(_self.studyYear!, (value) {
+      return _then(_self.copyWith(studyYear: value));
+    });
+  }
+
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StudyYearCopyWith<$Res>? get studyYearTo {
+    if (_self.studyYearTo == null) {
+      return null;
+    }
+
+    return $StudyYearCopyWith<$Res>(_self.studyYearTo!, (value) {
+      return _then(_self.copyWith(studyYearTo: value));
+    });
+  }
+
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
   }
 }

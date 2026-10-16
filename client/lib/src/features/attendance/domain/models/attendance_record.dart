@@ -14,24 +14,17 @@ class AttendanceRecord
   @override
   @QueryableField.self()
   final String id;
-  @override
   final String meetingId;
-  @override
   @QueryableField(label: 'meeting')
   final Meeting? meeting;
-  @override
   final String personId;
-  @override
   @QueryableField(label: 'بيانات المخدوم')
   final Person? person;
-  @override
   @LocalDateTimeConverter()
   @QueryableField(label: 'datetime')
   final DateTime datetime;
-  @override
   @QueryableField(label: 'asServant')
   final bool asServant;
-  @override
   @QueryableField(label: 'الخادم الذي سجل')
   final User? recordedByUser;
 

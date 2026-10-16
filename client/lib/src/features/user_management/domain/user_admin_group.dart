@@ -83,8 +83,8 @@ class UserAdminGroup with Equatable {
   }
 
   static List<User> _distinctUsers(List<AdminOnData> adminOn) =>
-      EqualitySet.from(
-        EqualityBy((User u) => u.uid),
+      EqualitySet<User>.from(
+        EqualityBy((u) => u.uid),
         adminOn.map((a) => a.user).nonNulls,
       ).toList();
 

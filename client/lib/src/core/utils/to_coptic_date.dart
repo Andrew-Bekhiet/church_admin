@@ -1,7 +1,7 @@
 // Derived from NodaTime (Apache 2.0 License)
 // https://github.com/nodatime/nodatime
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 extension ToCopticDate on DateTime {
   ({int year, int month, int day}) toCopticDate() {

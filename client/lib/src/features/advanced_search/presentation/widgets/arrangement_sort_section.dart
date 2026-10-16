@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ArrangementSortSection extends StatelessWidget {
   final QueryableType queryableType;

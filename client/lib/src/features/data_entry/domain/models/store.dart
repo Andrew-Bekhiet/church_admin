@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_annotations/church_admin_annotations.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'store.freezed.dart';
 part 'store.g.dart';
@@ -22,15 +22,12 @@ class Store extends ViewableWithIDAndImage
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @override
   @QueryableField(label: 'تفاصيل العنوان')
   final Address? address;
 
-  @override
   @QueryableField(label: 'العائلة')
   final Family? family;
 
-  @override
   @JsonKey(name: 'adminFamily')
   final String? familyId;
 
@@ -39,11 +36,9 @@ class Store extends ViewableWithIDAndImage
   @QueryableField(label: 'اللون')
   final Color? color;
 
-  @override
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
-  @override
   @LocalDateTimeConverter()
   @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
@@ -51,7 +46,6 @@ class Store extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
-  @override
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 

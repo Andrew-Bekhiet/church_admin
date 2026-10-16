@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' hide Notification;
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart' hide Notification;
 import 'package:phone_form_field/phone_form_field.dart';
 
 class ChurchAdminApp extends StatefulWidget {
@@ -45,19 +44,22 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
           theme: themeData.requireData,
           scaffoldMessengerKey: scaffoldMessengerKey,
           routerConfig: widget.routerConfig,
-          builder: (context, child) => AppSwitcherPrivacyCover(
-            child: kIsWeb
-                ? child ?? const SizedBox.shrink()
-                : LocalAuthLock(
-                    routerDelegate: widget.routerConfig.routerDelegate,
-                    protectedLocation: const HomeScreenRoute().location,
-                    child: child ?? const SizedBox.shrink(),
-                  ),
+          // fl_chart, flutter_map, table_calendar and others still read the
+          // framework's Material theme and localizations
+          // ignore: deprecated_member_use
+          builder: (context, child) => MaterialUiCompatibilityBridge(
+            child: AppSwitcherPrivacyCover(
+              child: kIsWeb
+                  ? child ?? const SizedBox.shrink()
+                  : LocalAuthLock(
+                      routerDelegate: widget.routerConfig.routerDelegate,
+                      protectedLocation: const HomeScreenRoute().location,
+                      child: child ?? const SizedBox.shrink(),
+                    ),
+            ),
           ),
           localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
             ...PhoneFieldLocalization.delegates,
           ],
           supportedLocales: const [
