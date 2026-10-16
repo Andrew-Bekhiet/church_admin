@@ -1,0 +1,7 @@
+[sqlfluff]
+dialect = postgres
+max_line_length = 120
+
+# RF06 unquotes identifiers it considers unnecessary, which breaks columns named
+# after reserved words ("table", "time") in these migrations.
+exclude_rules = RF06
