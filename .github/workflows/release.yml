@@ -189,14 +189,6 @@ jobs:
           args: --artifact=apk
             --dart-define-from-file=.env
 
-      - name: Run pod repo update
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: cd client && pod repo update
-
-      - name: Update podfile.lock
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: cd client/ios && pod install --repo-update
-
       - name: Get version from tag
         id: version
         run: |
