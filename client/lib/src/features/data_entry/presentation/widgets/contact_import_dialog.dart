@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' show Contact;
+import 'package:material_ui/material_ui.dart';
 
 class ContactImportDialog extends StatefulWidget {
   final Contact contact;

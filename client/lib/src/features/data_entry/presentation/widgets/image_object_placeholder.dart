@@ -1,5 +1,5 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ImageObjectPlaceholder extends StatelessWidget {
   final IconData defaultIcon;

@@ -1,8 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
   Set<UserPermission> get permissions => this;

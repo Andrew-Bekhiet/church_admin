@@ -60,8 +60,6 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   flutter_contacts: ^2.0.0
   flutter_local_notifications: ^22.0.1
-  flutter_localizations:
-    sdk: flutter
   flutter_map: ^8.1.1
   flutter_map_dragmarker: ^8.0.3
   flutter_map_location_marker: ^10.1.0

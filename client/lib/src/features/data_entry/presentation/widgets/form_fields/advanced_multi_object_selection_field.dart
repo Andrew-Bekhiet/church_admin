@@ -1,7 +1,7 @@
 import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AdvancedMultiObjectSelectionField<T extends Viewable, E extends Object>
     extends StatelessWidget {

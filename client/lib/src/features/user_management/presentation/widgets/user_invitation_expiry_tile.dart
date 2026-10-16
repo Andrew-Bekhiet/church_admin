@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class UserInvitationExpiryTile extends StatelessWidget {
   final DateTime expiresAt;

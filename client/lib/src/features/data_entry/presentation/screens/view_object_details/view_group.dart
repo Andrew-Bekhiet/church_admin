@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ViewGroup extends StatefulWidget {
   final Group? group;

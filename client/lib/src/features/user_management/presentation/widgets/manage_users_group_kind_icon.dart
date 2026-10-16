@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ManageUsersGroupKindIcon extends StatelessWidget {
   static const _size = 36.0;

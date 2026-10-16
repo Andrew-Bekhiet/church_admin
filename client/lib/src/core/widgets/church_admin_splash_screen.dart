@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class ChurchAdminSplashScreen extends StatefulWidget {
   const ChurchAdminSplashScreen({super.key});
@@ -36,9 +35,7 @@ class _ChurchAdminSplashScreenState extends State<ChurchAdminSplashScreen> {
       theme: ThemingService.I.theme,
       scaffoldMessengerKey: scaffoldMessengerKey,
       localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
       ],
       supportedLocales: const [
         Locale('ar', 'EG'),
