@@ -3,12 +3,23 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../fakes/fake_geocoder.dart';
+
 void main() {
+  const pyramids = Point(29.9776875, 31.1340625);
+  const tahrirSquare = Point(30.0444375, 31.2356875);
+  const downtownCairo = Point(30.05, 31.24);
+
   late _MockDio dio;
+  late FakeGeocoder geocoder;
 
   setUp(() {
     dio = _MockDio();
-    initGlobalProviderContainer([dioProvider.overrideWithValue(dio)]);
+    geocoder = FakeGeocoder();
+    initGlobalProviderContainer([
+      dioProvider.overrideWithValue(dio),
+      geocoderProvider.overrideWithValue(geocoder),
+    ]);
   });
 
   tearDown(resetGlobalProviderContainer);
@@ -27,6 +38,9 @@ void main() {
       'https://maps.apple.com/directions?destination=30.0444,31.2357',
       'https://maps.apple.com/frame?center=30.0444,31.2357',
       'https://maps.apple.com/search?center=30.0444,31.2357',
+      '7GXHX4HM+3J',
+      '26VP+Q7 Cairo, Egypt',
+      'https://plus.codes/7GXHX4HM+3J',
     ]) {
       test('$link is a maps link', () {
         expect(
@@ -155,13 +169,33 @@ void main() {
         link: 'https://maps.apple.com/search?center=30.0444,31.2357',
         location: const Point(30.0444, 31.2357),
       ),
+      (
+        description: 'a pasted full plus code',
+        link: '7GXHX4HM+3J',
+        location: pyramids,
+      ),
+      (
+        description: 'a plus.codes link',
+        link: 'https://plus.codes/7GXHX4HM+3J',
+        location: pyramids,
+      ),
+      (
+        description: 'a Google Maps place link to a plus code',
+        link: 'https://www.google.com/maps/place/7GXHX4HM%2B3J',
+        location: pyramids,
+      ),
+      (
+        description: 'a maps.google.com query link to a plus code',
+        link: 'https://maps.google.com/?q=7GXHX4HM%2B3J',
+        location: pyramids,
+      ),
     ]) {
       test(description, () async {
         await expectLater(
           const LocationParsingService().maybeParseLocationUri(
             Uri.parse(link),
           ),
-          completion(location),
+          completion(_Locations.near(location)),
         );
       });
     }
@@ -206,6 +240,91 @@ void main() {
       },
     );
   });
+
+  group('plus codes', () {
+    test('a full plus code is its own location', () async {
+      await expectLater(
+        const LocationParsingService().maybeParsePlusCode('7GXHX4HM+3J'),
+        completion(_Locations.near(pyramids)),
+      );
+    });
+
+    test(
+      'a short plus code is the matching location nearest the reference',
+      () async {
+        await expectLater(
+          const LocationParsingService().maybeParsePlusCode(
+            '26VP+Q7',
+            reference: downtownCairo,
+          ),
+          completion(_Locations.near(tahrirSquare)),
+        );
+      },
+    );
+
+    test(
+      'without a reference, a short plus code is the matching location nearest its locality',
+      () async {
+        geocoder.locationsByPlaceName['Cairo, Egypt'] = downtownCairo;
+
+        await expectLater(
+          const LocationParsingService().maybeParsePlusCode(
+            '26VP+Q7 Cairo, Egypt',
+          ),
+          completion(_Locations.near(tahrirSquare)),
+        );
+      },
+    );
+
+    test('the reference takes precedence over the locality', () async {
+      geocoder.locationsByPlaceName['Alexandria'] = const Point(31.2, 29.92);
+
+      await expectLater(
+        const LocationParsingService().maybeParsePlusCode(
+          '26VP+Q7 Alexandria',
+          reference: downtownCairo,
+        ),
+        completion(_Locations.near(tahrirSquare)),
+      );
+    });
+
+    test(
+      'a short plus code without a reference or a locality has no location',
+      () async {
+        await expectLater(
+          const LocationParsingService().maybeParsePlusCode('26VP+Q7'),
+          completion(isNull),
+        );
+      },
+    );
+
+    test(
+      'a Google Maps search link to a short plus code is the matching location nearest its locality',
+      () async {
+        geocoder.locationsByPlaceName['Cairo'] = downtownCairo;
+
+        await expectLater(
+          const LocationParsingService().maybeParseLocationUri(
+            Uri.parse('https://www.google.com/maps/search/26VP%2BQ7+Cairo'),
+          ),
+          completion(_Locations.near(tahrirSquare)),
+        );
+      },
+    );
+
+    test(
+      'a pasted short plus code is the matching location nearest the reference',
+      () async {
+        await expectLater(
+          const LocationParsingService().maybeParseLocationUri(
+            Uri.parse('26VP+Q7'),
+            reference: downtownCairo,
+          ),
+          completion(_Locations.near(tahrirSquare)),
+        );
+      },
+    );
+  });
 }
 
 class _MockDio extends Mock implements Dio {
@@ -219,4 +338,18 @@ class _MockDio extends Mock implements Dio {
       ),
     );
   }
+}
+
+abstract final class _Locations {
+  static Matcher near(Point expected) => isA<Point>()
+      .having(
+        (location) => location.latitude,
+        'latitude',
+        closeTo(expected.latitude, 1e-9),
+      )
+      .having(
+        (location) => location.longitude,
+        'longitude',
+        closeTo(expected.longitude, 1e-9),
+      );
 }

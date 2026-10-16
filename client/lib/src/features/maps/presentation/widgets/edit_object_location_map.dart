@@ -41,6 +41,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
   final _sheetScrollController = ScrollController();
   final BehaviorSubject<Position?> _userLocationSubject =
       BehaviorSubject.seeded(null);
+  Point? _mapCenter;
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +135,12 @@ class _EditObjectLocationMap<T extends ViewableWithID>
               flags: InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
             ),
             initialCenter: center,
+            onMapReady: () =>
+                _mapCenter ??= Point(center.latitude, center.longitude),
+            onPositionChanged: (camera, _) => _mapCenter = Point(
+              camera.center.latitude,
+              camera.center.longitude,
+            ),
           ),
         ),
       ),
@@ -174,6 +181,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
     final locationResult = Uri.tryParse(result) != null
         ? await LocationParsingService.I.maybeParseLocationUri(
             Uri.parse(result),
+            reference: widget.getLocation(resultObject.value) ?? _mapCenter,
           )
         : null;
 
