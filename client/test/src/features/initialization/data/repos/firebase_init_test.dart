@@ -2,25 +2,18 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/default_firebase_options.dart';
 import 'package:firebase_app_check_platform_interface/firebase_app_check_platform_interface.dart';
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import 'package:firebase_messaging_platform_interface/firebase_messaging_platform_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-import 'package:sembast/sembast.dart' as sembast;
 
-import 'firebase_init_test.mocks.dart';
-
-@GenerateNiceMocks([
-  MockSpec<sembast.DatabaseClient>(),
-  MockSpec<FirebasePlatform>(as: #FirebasePlatform_),
-  MockSpec<FirebaseAuthPlatform>(as: #FirebaseAuthPlatform_),
-  MockSpec<FirebaseAppPlatform>(as: #MockFirebaseAppPlatform_),
-  MockSpec<FirebaseAppCheckPlatform>(as: #FirebaseAppCheckPlatform_),
-  MockSpec<FirebaseMessagingPlatform>(as: #FirebaseMessagingPlatform_),
-])
 void main() {
+  setUpAll(() {
+    registerFallbackValue(DefaultFirebaseOptions.currentPlatform);
+    registerFallbackValue(FakeFirebaseApp());
+  });
   setUp(_setUp);
   tearDown(resetGlobalProviderContainer);
 
@@ -32,17 +25,17 @@ void main() {
       await unit.initialize();
 
       verifyInOrder([
-        FirebasePlatform.instance.initializeApp(
-          name: anyNamed('name'),
+        () => FirebasePlatform.instance.initializeApp(
+          name: any(named: 'name'),
           options: DefaultFirebaseOptions.currentPlatform,
         ),
-        FirebaseAppCheckPlatform.instance.activate(
-          providerWeb: anyNamed('providerWeb'),
-          providerAndroid: anyNamed('providerAndroid'),
-          providerApple: anyNamed('providerApple'),
-          providerWindows: anyNamed('providerWindows'),
+        () => FirebaseAppCheckPlatform.instance.activate(
+          providerWeb: any(named: 'providerWeb'),
+          providerAndroid: any(named: 'providerAndroid'),
+          providerApple: any(named: 'providerApple'),
+          providerWindows: any(named: 'providerWindows'),
         ),
-        FirebaseMessagingPlatform.onBackgroundMessage =
+        () => FirebaseMessagingPlatform.onBackgroundMessage =
             NotificationsServiceCallbacks.onBackgroundMessageReceived,
       ]);
     },
@@ -58,14 +51,15 @@ void _setUp() {
 
 void _setUpMockFirebaseCore() {
   final mock = MockFirebasePlatform();
+  final app = FakeFirebaseAppPlatform();
 
   when(
-    mock.initializeApp(
-      name: anyNamed('name'),
-      options: anyNamed('options'),
+    () => mock.initializeApp(
+      name: any(named: 'name'),
+      options: any(named: 'options'),
     ),
-  ).thenAnswer((_) async => MockFirebaseAppPlatform());
-  when(mock.app(any)).thenReturn(MockFirebaseAppPlatform());
+  ).thenAnswer((_) async => app);
+  when(() => mock.app(any())).thenReturn(app);
 
   FirebasePlatform.instance = mock;
 }
@@ -73,28 +67,29 @@ void _setUpMockFirebaseCore() {
 void _setUpMockFirebaseAppCheck() {
   final mock = MockFirebaseAppCheckPlatform();
   when(
-    mock.activate(
-      providerWeb: anyNamed('providerWeb'),
-      providerAndroid: anyNamed('providerAndroid'),
-      providerApple: anyNamed('providerApple'),
-      providerWindows: anyNamed('providerWindows'),
+    () => mock.activate(
+      providerWeb: any(named: 'providerWeb'),
+      providerAndroid: any(named: 'providerAndroid'),
+      providerApple: any(named: 'providerApple'),
+      providerWindows: any(named: 'providerWindows'),
     ),
   ).thenAnswer((_) async {
     return;
   });
-
-  when(mock.delegateFor(app: anyNamed('app'))).thenReturn(mock);
-  when(mock.setInitialValues()).thenReturn(mock);
+  when(
+    () => mock.setTokenAutoRefreshEnabled(any()),
+  ).thenAnswer((_) async {
+    return;
+  });
 
   FirebaseAppCheckPlatform.instance = mock;
 }
 
 void _setUpMockFirebaseAuth() {
   final mock = MockFirebaseAuthPlatform();
-  when(mock.delegateFor(app: anyNamed('app'))).thenReturn(mock);
-  when(mock.setInitialValues()).thenReturn(mock);
   when(
-    mock.setSettings(forceRecaptchaFlow: anyNamed('forceRecaptchaFlow')),
+    () =>
+        mock.setSettings(forceRecaptchaFlow: any(named: 'forceRecaptchaFlow')),
   ).thenAnswer((_) async {
     return;
   });
@@ -105,28 +100,49 @@ void _setUpMockFirebaseAuth() {
 void _setUpMockFirebaseMessaging() {
   final mock = MockFirebaseMessagingPlatform();
   when(
-    mock.registerBackgroundMessageHandler(any),
+    () => mock.registerBackgroundMessageHandler(any()),
   ).thenAnswer((_) async {
     return;
   });
 
-  when(mock.delegateFor(app: anyNamed('app'))).thenReturn(mock);
-  when(mock.setInitialValues()).thenReturn(mock);
-
   FirebaseMessagingPlatform.instance = mock;
 }
 
-class MockFirebasePlatform extends FirebasePlatform_
-    with MockPlatformInterfaceMixin {}
+class MockFirebasePlatform extends Mock
+    with MockPlatformInterfaceMixin
+    implements FirebasePlatform {}
 
-class MockFirebaseAppPlatform extends MockFirebaseAppPlatform_
-    with MockPlatformInterfaceMixin {}
+class FakeFirebaseAppPlatform extends FirebaseAppPlatform
+    with MockPlatformInterfaceMixin {
+  FakeFirebaseAppPlatform() : super('', DefaultFirebaseOptions.currentPlatform);
+}
 
-class MockFirebaseAppCheckPlatform extends FirebaseAppCheckPlatform_
-    with MockPlatformInterfaceMixin {}
+class MockFirebaseAppCheckPlatform extends Mock
+    with MockPlatformInterfaceMixin
+    implements FirebaseAppCheckPlatform {
+  MockFirebaseAppCheckPlatform() {
+    when(() => delegateFor(app: any(named: 'app'))).thenReturn(this);
+    when(setInitialValues).thenReturn(this);
+  }
+}
 
-class MockFirebaseMessagingPlatform extends FirebaseMessagingPlatform_
-    with MockPlatformInterfaceMixin {}
+class MockFirebaseMessagingPlatform extends Mock
+    with MockPlatformInterfaceMixin
+    implements FirebaseMessagingPlatform {
+  MockFirebaseMessagingPlatform() {
+    when(() => delegateFor(app: any(named: 'app'))).thenReturn(this);
+    when(setInitialValues).thenReturn(this);
+  }
+}
 
-class MockFirebaseAuthPlatform extends FirebaseAuthPlatform_
-    with MockPlatformInterfaceMixin {}
+class MockFirebaseAuthPlatform extends Mock
+    with MockPlatformInterfaceMixin
+    implements FirebaseAuthPlatform {
+  MockFirebaseAuthPlatform() {
+    when(() => delegateFor(app: any(named: 'app'))).thenReturn(this);
+    when(setInitialValues).thenReturn(this);
+  }
+}
+
+// ignore: avoid_implementing_value_types, FirebaseApp has a private constructor so it cannot be extended; the fake is only a fallback value and never compared
+class FakeFirebaseApp extends Fake implements FirebaseApp {}
