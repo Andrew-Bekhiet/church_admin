@@ -61,28 +61,24 @@ class LocationParsingService {
           );
 
         case Uri(
-                  scheme: 'https',
-                  host: 'www.google.com' || 'google.com',
-                  pathSegments: [
-                    'maps',
-                    'search' || 'place',
-                    final location,
-                    ...,
-                  ],
-                ) ||
-                Uri(
+              scheme: 'https',
+              host: 'www.google.com' || 'google.com',
+              pathSegments: ['maps', 'search' || 'place', final location, ...],
+            )
+            when _plusCodePattern.hasMatch(location):
+          return await maybeParsePlusCode(location, reference: reference);
+
+        case Uri(
                   scheme: 'https',
                   host: 'www.google.com' || 'google.com',
                   pathSegments: ['maps', ...],
-                  queryParameters: {'q': final location},
                 ) ||
-                Uri(
-                  scheme: 'https',
-                  host: 'maps.google.com',
-                  queryParameters: {'q': final location},
-                )
-            when _plusCodePattern.hasMatch(location):
-          return await maybeParsePlusCode(location, reference: reference);
+                Uri(scheme: 'https', host: 'maps.google.com')
+            when _maybePlusCodeQuery(uri) != null:
+          return await maybeParsePlusCode(
+            _maybePlusCodeQuery(uri) ?? '',
+            reference: reference,
+          );
 
         case Uri(
                   scheme: 'https',
@@ -225,6 +221,13 @@ class LocationParsingService {
         return null;
     }
   }
+
+  String? _maybePlusCodeQuery(Uri uri) =>
+      switch (Uri.splitQueryString(uri.query.replaceAll('+', '%2B'))) {
+        {'q': final query} ||
+        {'query': final query} when _plusCodePattern.hasMatch(query) => query,
+        _ => null,
+      };
 
   Point? _maybeParseCoordinates(String text) => switch (text.split(',')) {
     [final latitude, final longitude, ...] => Point.tryParse(

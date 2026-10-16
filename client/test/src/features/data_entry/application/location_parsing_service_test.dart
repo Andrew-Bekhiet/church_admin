@@ -191,6 +191,16 @@ void main() {
         location: pyramids,
       ),
       (
+        description: 'a Google Maps query link to an unencoded plus code',
+        link: 'https://www.google.com/maps?q=7GXHX4HM+3J',
+        location: pyramids,
+      ),
+      (
+        description: 'a Google Maps URLs API search link to a plus code',
+        link: 'https://www.google.com/maps/search/?api=1&query=7GXHX4HM%2B3J',
+        location: pyramids,
+      ),
+      (
         description: 'a maps.google.com query link to a plus code',
         link: 'https://maps.google.com/?q=7GXHX4HM%2B3J',
         location: pyramids,
