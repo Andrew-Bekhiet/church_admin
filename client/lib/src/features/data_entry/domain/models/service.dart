@@ -23,28 +23,21 @@ class Service extends ViewableWithIDAndImage
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @override
   @QueryableField(label: 'السنة الدراسية: من')
   final StudyYear? studyYearFrom;
 
-  @override
   @QueryableField(label: 'السنة الدراسية: إلى')
   final StudyYear? studyYearTo;
 
-  @override
   final int? studyYearFromId;
 
-  @override
   final int? studyYearToId;
 
-  @override
   @QueryableField(label: 'الخدمة التالية')
   final Service? nextService;
 
-  @override
   final String? nextServiceId;
 
-  @override
   @QueryableField(label: 'الاجتماع الافتراضي')
   final Meeting? defaultMeeting;
 
@@ -53,7 +46,6 @@ class Service extends ViewableWithIDAndImage
   @QueryableField(label: 'اللون')
   final Color? color;
 
-  @override
   @LocalDateTimeConverter()
   @QueryableField(label: 'أخر تحديث للصورة')
   final DateTime? photoUpdatedAt;
@@ -61,28 +53,22 @@ class Service extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
-  @override
   @QueryableField(label: 'الفصول')
   final List<Class>? classes;
 
-  @override
   @QueryableField(label: 'المجموعات')
   final List<Group>? groups;
 
-  @override
   @QueryableField(label: 'meetings')
   final List<Meeting>? meetings;
 
-  @override
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
-  @override
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   @QueryableField.manyToMany(through: AdminOnData)
   final List<User>? adminUsers;
 
-  @override
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 

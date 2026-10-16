@@ -568,6 +568,8 @@ void main() {
               when(
                 globalProviderContainer
                     .read(firebaseMessagingProvider)
+                    // The service still reads FCM tokens rather than installation IDs
+                    // ignore: deprecated_member_use
                     .getToken(),
               ).thenAnswer((_) async => expectedToken);
 

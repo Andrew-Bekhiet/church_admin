@@ -11,20 +11,16 @@ part 'last_recorded_by_info.g.dart';
 class LastRecordedByInfo extends ViewableWithID
     with _$LastRecordedByInfo
     implements SerializableExtra {
-  @override
   @LocalDateTimeConverter()
   @QueryableField(label: 'الوقت')
   final DateTime time;
 
-  @override
   @JsonKey(readValue: readRecordedBy)
   final String? recordedBy;
 
-  @override
   @QueryableField(label: 'بيانات الخادم')
   final User? user;
 
-  @override
   @QueryableField(label: 'زيارة أب كاهن', orderable: false)
   final bool isFatherVisit;
 

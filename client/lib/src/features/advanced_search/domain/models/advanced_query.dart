@@ -7,20 +7,14 @@ part 'advanced_query.g.dart';
 @freezed
 @JsonSerializable()
 class AdvancedQuery with _$AdvancedQuery implements ToJson, SerializableExtra {
-  @override
   final String? name;
-  @override
   @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
   final QueryableType queryableType;
-  @override
   @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
   final List<Filter> filters;
-  @override
   final LogicalOperator logicalOperator;
-  @override
   @JsonKey(fromJson: orderBysFromJson, toJson: orderBysToJson)
   final List<OrderBy> orderBy;
-  @override
   final int? limit;
 
   @override

@@ -284,6 +284,9 @@ class NotificationsService extends BlocObserver {
     }
 
     final uid = _authBloc.currentUserData?.uid;
+    // The functions send to FCM tokens; register() yields installation IDs
+    // for direct send, which the backend does not support yet
+    // ignore: deprecated_member_use
     final token = cachedToken ?? await _firebaseMessaging.getToken();
 
     if (uid == null || token == null) {
@@ -297,6 +300,9 @@ class NotificationsService extends BlocObserver {
       await _databaseService.fcmTokens.registerToken(uid: uid, token: token);
     }
 
+    // The functions send to FCM tokens; register() yields installation IDs
+    // for direct send, which the backend does not support yet
+    // ignore: deprecated_member_use
     _onFCMTokenRefresh ??= _firebaseMessaging.onTokenRefresh
         .delayWhen((_) => _isPausedSubject.where((isPaused) => !isPaused))
         .listen(

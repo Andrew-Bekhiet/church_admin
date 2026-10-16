@@ -15,27 +15,22 @@ class DataCheck with _$DataCheck implements ID, SerializableExtra {
   static const int _percentCap = 99;
   static const int _percentFull = 100;
 
-  @override
   @JsonKey(defaultValue: 0)
   @QueryableField(label: 'نسبة اكتمال البيانات')
   final int completenessPercent;
 
-  @override
   @JsonKey(defaultValue: false)
   @QueryableField(label: 'البيانات مكتملة')
   final bool isComplete;
 
-  @override
   @JsonKey(defaultValue: false)
   @QueryableField(label: 'بيانات العائلة مكتملة')
   final bool familyCheck;
 
-  @override
   @JsonKey(defaultValue: false)
   @QueryableField(label: 'العنوان مكتمل')
   final bool addressCheck;
 
-  @override
   @QueryableField(label: 'تعديل يدوي', orderable: false)
   @JsonKey(
     defaultValue: DataCheckOverride.none,
@@ -44,11 +39,9 @@ class DataCheck with _$DataCheck implements ID, SerializableExtra {
   )
   final DataCheckOverride userOverride;
 
-  @override
   @QueryableField(label: 'العائلة', codeOnly: true)
   final String familyId;
 
-  @override
   @JsonKey(name: 'details', defaultValue: <DataCheckDetail>[])
   final List<DataCheckDetail> checksDetails;
 

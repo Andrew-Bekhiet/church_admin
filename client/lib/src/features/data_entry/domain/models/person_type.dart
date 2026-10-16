@@ -21,15 +21,12 @@ class PersonType extends ViewableWithID
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @override
   @QueryableField(label: 'الترتيب')
   final int order;
 
-  @override
   @QueryableField(label: 'مسؤول عن العائلة')
   final bool isFamilyAdmin;
 
-  @override
   @QueryableField(label: 'مخفي', codeOnly: true)
   final bool isHidden;
 

@@ -19,10 +19,8 @@ class Father extends ViewableWithID with _$Father implements SerializableExtra {
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @override
   final String? churchId;
 
-  @override
   @QueryableField(label: 'isHidden')
   final bool isHidden;
 

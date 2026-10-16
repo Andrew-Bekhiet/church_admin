@@ -11,7 +11,6 @@ part 'shammas_level.g.dart';
 class ShammasLevel extends ViewableWithID
     with _$ShammasLevel
     implements SerializableExtra {
-  @override
   @JsonKey(defaultValue: 0)
   @QueryableField(label: 'الترتيب')
   final int order;

@@ -7,15 +7,12 @@ part 'fcm_token.g.dart';
 @freezed
 @JsonSerializable()
 class FcmToken with _$FcmToken implements ToJson {
-  @override
   @JsonKey(defaultValue: '')
   final String uid;
 
-  @override
   @JsonKey(defaultValue: '')
   final String token;
 
-  @override
   @LocalDateTimeConverter()
   final DateTime? createdAt;
 
