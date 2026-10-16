@@ -4,6 +4,7 @@ export 'widgets/admin_on_service_widget.dart';
 export 'widgets/admin_scope_action_buttons.dart';
 export 'widgets/admin_scope_permission_checkboxes.dart';
 export 'widgets/admin_users.dart';
+export 'widgets/admin_users_remaining_admins.dart';
 export 'widgets/edit_admin_on_data_widget.dart';
 export 'widgets/edit_user_admin_scope_widget.dart';
 export 'widgets/manage_user_list_item.dart';
