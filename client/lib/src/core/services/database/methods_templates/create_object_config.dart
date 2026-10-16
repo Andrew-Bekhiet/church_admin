@@ -39,5 +39,6 @@ class CreateObjectConfig<T> extends DAOMethodTemplate<T> {
   }
 }
 
-typedef CreateObjectConfigVarsConstructor<T> =
-    Json Function({required T newObject});
+typedef CreateObjectConfigVarsConstructor<T> = Json Function({
+  required T newObject,
+});

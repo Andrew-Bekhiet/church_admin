@@ -41,7 +41,6 @@ class StreamAllConfig<T>
   }
 }
 
-typedef StreamAllConfigVarsConstructor<T> =
-    Json Function(
-      PaginatableStreamRequest<T, StreamableDAOParameters<T>?> request,
-    );
+typedef StreamAllConfigVarsConstructor<T> = Json Function(
+  PaginatableStreamRequest<T, StreamableDAOParameters<T>?> request,
+);

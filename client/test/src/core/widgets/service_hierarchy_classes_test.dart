@@ -26,13 +26,12 @@ void main() {
                 name: 'ابتدائي',
                 classes: classes,
               ),
-              classBuilder:
-                  (
-                    context, {
-                    required $class,
-                    required service,
-                    required studyYear,
-                  }) => Text($class.name),
+              classBuilder: (
+                context, {
+                required $class,
+                required service,
+                required studyYear,
+              }) => Text($class.name),
             ),
           ),
         ),
