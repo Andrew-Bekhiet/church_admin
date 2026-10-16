@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ArrangementSecondLineSection extends StatelessWidget {
   final QueryableType queryableType;

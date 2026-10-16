@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../../fakes/fake_logging_service.dart';

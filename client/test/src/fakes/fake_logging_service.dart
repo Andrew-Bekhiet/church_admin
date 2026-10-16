@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FakeLoggingService extends Fake implements LoggingService {
   final List<LogRecord> reportedErrors = [];

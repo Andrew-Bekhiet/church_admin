@@ -1,8 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:cupertino_ui/cupertino_ui.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
 
 void main() {

@@ -2,16 +2,18 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:golden_toolkit/golden_toolkit.dart' hide materialAppWrapper;
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'viewable_object_list_test.mocks.dart';
+
+import '../../../../utils.dart';
 
 @GenerateNiceMocks([
   MockSpec<PaginatableStreamBase>(),

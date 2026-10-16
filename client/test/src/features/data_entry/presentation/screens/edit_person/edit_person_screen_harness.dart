@@ -3,11 +3,10 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/hobbies_dao.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types_dao.dart';
-import 'package:material_ui/material_ui.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../fakes/fake_areas_dao.dart';
@@ -183,9 +182,7 @@ class EditPersonScreenHarness {
         locale: const Locale('ar', 'EG'),
         supportedLocales: const [Locale('ar', 'EG')],
         localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
         ],
         theme: ThemingService.getDefault(
           isDarkOverride: false,

@@ -2,8 +2,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/attendance/presentation/screens/body/attendance_error_view.dart';
 import 'package:church_admin/src/features/attendance/presentation/screens/body/attendance_flat_roster.dart';
 import 'package:church_admin/src/features/attendance/presentation/screens/body/attendance_grouped_roster.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RecordAttendanceLoadedView extends StatefulWidget {
   final RecordAttendanceLoaded state;

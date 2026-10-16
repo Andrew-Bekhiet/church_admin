@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' hide TextDirection;
+import 'package:material_ui/material_ui.dart';
 
 class AttendancePersonCard extends StatelessWidget {
   static const int _staleWeeks = 3;

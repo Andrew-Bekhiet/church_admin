@@ -4,13 +4,15 @@ import 'dart:typed_data';
 import 'package:church_admin/church_admin.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:dio/dio.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:golden_toolkit/golden_toolkit.dart' hide materialAppWrapper;
+import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'edit_object_controller_test.mocks.dart';
+
+import '../../../utils.dart';
 
 @GenerateNiceMocks([MockSpec<FunctionsService>(), MockSpec<LoggingService>()])
 void main() {
