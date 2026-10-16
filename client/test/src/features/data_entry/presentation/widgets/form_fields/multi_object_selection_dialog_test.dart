@@ -28,23 +28,21 @@ void main() {
       MaterialApp(
         home: Builder(
           builder: (context) => TextButton(
-            onPressed: () => unawaited(
-              showDialog<Set<Person>>(
-                context: context,
-                builder: (context) => MultiObjectSelectionDialog<Person>(
-                  fieldLabel: 'مخدوم',
-                  selected: const {},
-                  listController: (search) => ViewableObjectListController(
-                    selectionController: SelectionController<Person>(),
-                    objectsPaginatableStream: PaginatableStream.simple(
-                      factory: (_) => Stream.value(
-                        const PaginatableStreamResponse(data: <Person>[]),
-                      ),
+            onPressed: () => showDialog<Set<Person>>(
+              context: context,
+              builder: (context) => MultiObjectSelectionDialog<Person>(
+                fieldLabel: 'مخدوم',
+                selected: const {},
+                listController: (search) => ViewableObjectListController(
+                  selectionController: SelectionController<Person>(),
+                  objectsPaginatableStream: PaginatableStream.simple(
+                    factory: (_) => Stream.value(
+                      const PaginatableStreamResponse(data: <Person>[]),
                     ),
-                    filterStream: search,
                   ),
-                  onCreateCustom: onCreateCustom,
+                  filterStream: search,
                 ),
+                onCreateCustom: onCreateCustom,
               ),
             ),
             child: const Text('open'),

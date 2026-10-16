@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
@@ -18,11 +16,9 @@ class FakeLoggingService extends Fake implements LoggingService {
     BuildContext context,
     LogRecord record,
   ) async {
-    unawaited(
-      showDialog<void>(
-        context: context,
-        builder: (context) => CAErrorDialog(exception: record.error ?? record),
-      ),
+    showDialog<void>(
+      context: context,
+      builder: (context) => CAErrorDialog(exception: record.error ?? record),
     );
     await error(record);
   }

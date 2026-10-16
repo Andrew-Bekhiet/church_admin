@@ -11,9 +11,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'viewable_object_list_test.mocks.dart';
-
 import '../../../../utils.dart';
+import 'viewable_object_list_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<PaginatableStreamBase>(),

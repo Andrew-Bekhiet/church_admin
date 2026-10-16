@@ -11,9 +11,8 @@ import 'package:mockito/mockito.dart';
 import 'package:rxdart_ext/single.dart';
 import 'package:timeago/timeago.dart';
 
-import 'history_property_test.mocks.dart';
-
 import '../../../../utils.dart';
+import 'history_property_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<PaginatableStreamBase>(),

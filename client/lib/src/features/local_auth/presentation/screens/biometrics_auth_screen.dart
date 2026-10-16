@@ -53,12 +53,10 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
             current is BiometricsAuthWrongPassword,
         listener: (context, state) {
           _passwordText.clear();
-          unawaited(
-            showDialog<void>(
-              context: context,
-              builder: (context) =>
-                  const AlertDialog(title: Text('كلمة سر خاطئة!')),
-            ),
+          showDialog<void>(
+            context: context,
+            builder: (context) =>
+                const AlertDialog(title: Text('كلمة سر خاطئة!')),
           );
         },
         builder: (context, state) => Scaffold(

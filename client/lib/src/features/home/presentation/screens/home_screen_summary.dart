@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
@@ -168,45 +166,43 @@ class HomeScreenSummary extends StatelessWidget {
     final title = type.title;
     final label = type.label;
 
-    unawaited(
-      showDialog(
-        context: context,
-        builder: (context) => BlocBuilder<HomeBloc, HomeState>(
-          bloc: homeBloc,
-          builder: (context, state) {
-            final message = switch (state) {
-              HomeState(dailyData: null) => initialMessage,
-              HomeState(:final HomeDailyData dailyData) => dailyData.select(
-                type,
-              ),
-            };
+    showDialog(
+      context: context,
+      builder: (context) => BlocBuilder<HomeBloc, HomeState>(
+        bloc: homeBloc,
+        builder: (context, state) {
+          final message = switch (state) {
+            HomeState(dailyData: null) => initialMessage,
+            HomeState(:final HomeDailyData dailyData) => dailyData.select(
+              type,
+            ),
+          };
 
-            return AlertDialog(
-              scrollable: true,
-              title: Text(title),
-              content: Text(message, textAlign: TextAlign.center),
-              contentTextStyle: Theme.of(context).textTheme.displaySmall,
-              actionsAlignment: MainAxisAlignment.center,
-              actions: [
+          return AlertDialog(
+            scrollable: true,
+            title: Text(title),
+            content: Text(message, textAlign: TextAlign.center),
+            contentTextStyle: Theme.of(context).textTheme.displaySmall,
+            actionsAlignment: MainAxisAlignment.center,
+            actions: [
+              FilledButton(
+                key: HomeScreenSummaryKeys.shareButtonKey,
+                onPressed: () => ShareService.I.shareText(message),
+                child: Text('مشاركة $title'),
+              ),
+              if (canGetNew)
                 FilledButton(
-                  key: HomeScreenSummaryKeys.shareButtonKey,
-                  onPressed: () => ShareService.I.shareText(message),
-                  child: Text('مشاركة $title'),
+                  key: HomeScreenSummaryKeys.newItemButtonKey,
+                  onPressed: () => homeBloc.add(HomeDailyDataGetNew(type)),
+                  child: Text('$label أخرى'),
                 ),
-                if (canGetNew)
-                  FilledButton(
-                    key: HomeScreenSummaryKeys.newItemButtonKey,
-                    onPressed: () => homeBloc.add(HomeDailyDataGetNew(type)),
-                    child: Text('$label أخرى'),
-                  ),
-                FilledButton(
-                  onPressed: Navigator.of(context).pop,
-                  child: const Text('إلغاء'),
-                ),
-              ],
-            );
-          },
-        ),
+              FilledButton(
+                onPressed: Navigator.of(context).pop,
+                child: const Text('إلغاء'),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
