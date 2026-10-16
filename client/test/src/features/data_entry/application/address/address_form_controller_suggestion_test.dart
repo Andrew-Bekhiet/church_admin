@@ -249,9 +249,9 @@ void main() {
     test('keeps the suggestion offered while the form is read-only', () async {
       fixture.areas.areasAtPoint[pickedLocation] = stMarkArea;
       final controller = await controllerThatPickedLocation();
-      controller.markReadOnly();
-
-      controller.useSuggestedAddress();
+      controller
+        ..markReadOnly()
+        ..useSuggestedAddress();
 
       expect(suggestedAddressOf(controller)?.area, stMarkArea);
     });
@@ -295,8 +295,7 @@ void main() {
   });
 
   test('using a location on a disposed controller throws nothing', () async {
-    final controller = fixture.controllerFor();
-    controller.dispose();
+    final controller = fixture.controllerFor()..dispose();
 
     await expectLater(controller.useLocation(pickedLocation), completes);
   });

@@ -37,8 +37,9 @@ void main() {
       final controller = controllerOnMainStreet();
 
       typeHouseCode(controller, '12');
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       expect(controller.area.fieldValue, stMinaArea);
     });
@@ -49,8 +50,9 @@ void main() {
       final controller = controllerOnMainStreet();
 
       typeHouseCode(controller, '12');
-      async.elapse(typingPause - const Duration(milliseconds: 1));
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause - const Duration(milliseconds: 1))
+        ..flushMicrotasks();
 
       expect(controller.area.fieldValue, isNull);
     });
@@ -64,8 +66,9 @@ void main() {
       typeHouseCode(controller, '12');
       async.elapse(typingPause - const Duration(milliseconds: 1));
       typeHouseCode(controller, '14');
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       expect(fixture.geocoder.locationRequestCount, 1);
     });
@@ -76,12 +79,14 @@ void main() {
     fakeAsync((async) {
       final controller = controllerOnMainStreet();
       typeHouseCode(controller, '12');
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       typeHouseCode(controller, '12 ');
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       expect(fixture.geocoder.locationRequestCount, 1);
     });
@@ -93,8 +98,9 @@ void main() {
       final controller = controllerOnMainStreet();
       final geocoding = fixture.geocoder.locationGate = Completer<void>();
       typeHouseCode(controller, '12');
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       typeHouseCode(controller, '14');
       geocoding.complete();
@@ -110,8 +116,9 @@ void main() {
       final controller = controllerOnMainStreet();
       final geocoding = fixture.geocoder.locationGate = Completer<void>();
       typeHouseCode(controller, '12');
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       controller.loadAsNewBaseline(
         const Address(street: mainStreet, houseCode: '12'),
@@ -130,8 +137,9 @@ void main() {
       );
 
       typeHouseCode(controller, '');
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       expect(fixture.geocoder.locationRequestCount, 0);
     });
@@ -142,8 +150,9 @@ void main() {
       final controller = fixture.controllerFor();
 
       typeHouseCode(controller, '12');
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       expect(fixture.geocoder.locationRequestCount, 0);
     });
@@ -156,8 +165,9 @@ void main() {
       final controller = controllerOnMainStreet();
 
       typeHouseCode(controller, '12');
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       expect(fixture.geocoder.locationRequestCount, 0);
     });
@@ -170,8 +180,9 @@ void main() {
       typeHouseCode(controller, '12');
 
       controller.chooseStreet(null);
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       expect(fixture.geocoder.locationRequestCount, 0);
     });
@@ -184,8 +195,9 @@ void main() {
       typeHouseCode(controller, '12');
 
       controller.loadAsNewBaseline(null);
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       expect(fixture.geocoder.locationRequestCount, 0);
     });
@@ -198,8 +210,9 @@ void main() {
       final controller = controllerOnMainStreet();
 
       typeHouseCode(controller, '12');
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       expect(controller.area.fieldValue, isNull);
     });
@@ -211,8 +224,9 @@ void main() {
       typeHouseCode(controller, '12');
 
       controller.dispose();
-      async.elapse(typingPause);
-      async.flushMicrotasks();
+      async
+        ..elapse(typingPause)
+        ..flushMicrotasks();
 
       expect(fixture.geocoder.locationRequestCount, 0);
     });

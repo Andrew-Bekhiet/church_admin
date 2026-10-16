@@ -26,9 +26,7 @@ void main() {
   group('choosing a street', () {
     test('that lies in one area fills that area', () async {
       fixture.areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
-      final controller = fixture.controllerFor();
-
-      controller.chooseStreet(mainStreet);
+      final controller = fixture.controllerFor()..chooseStreet(mainStreet);
       await pumpEventQueue();
 
       expect(controller.area.fieldValue, stMarkArea);
@@ -36,9 +34,8 @@ void main() {
 
     test('that lies in one area does not geocode the house', () async {
       fixture.areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
-      final controller = fixture.controllerFor(const Address(houseCode: '12'));
-
-      controller.chooseStreet(mainStreet);
+      final controller = fixture.controllerFor(const Address(houseCode: '12'))
+        ..chooseStreet(mainStreet);
       await pumpEventQueue();
 
       expect(controller.geolocation.fieldValue, isNull);
@@ -46,9 +43,8 @@ void main() {
 
     test('that lies in several areas, with a house number typed, fills the '
         'area containing the geocoded house', () async {
-      final controller = fixture.controllerFor(const Address(houseCode: '12'));
-
-      controller.chooseStreet(mainStreet);
+      final controller = fixture.controllerFor(const Address(houseCode: '12'))
+        ..chooseStreet(mainStreet);
       await pumpEventQueue();
 
       expect(controller.area.fieldValue, stMinaArea);
@@ -56,9 +52,8 @@ void main() {
 
     test('that lies in several areas, with a house number typed, locates the '
         'house', () async {
-      final controller = fixture.controllerFor(const Address(houseCode: '12'));
-
-      controller.chooseStreet(mainStreet);
+      final controller = fixture.controllerFor(const Address(houseCode: '12'))
+        ..chooseStreet(mainStreet);
       await pumpEventQueue();
 
       expect(controller.geolocation.fieldValue, houseLocation);
@@ -66,9 +61,7 @@ void main() {
 
     test('that lies in several areas, without a house number, leaves the area '
         'empty', () async {
-      final controller = fixture.controllerFor();
-
-      controller.chooseStreet(mainStreet);
+      final controller = fixture.controllerFor()..chooseStreet(mainStreet);
       await pumpEventQueue();
 
       expect(controller.area.fieldValue, isNull);
@@ -78,9 +71,7 @@ void main() {
       const savedLocation = Point(30.0500, 31.2400);
       final controller = fixture.controllerFor(
         const Address(houseCode: '12', geolocation: savedLocation),
-      );
-
-      controller.chooseStreet(mainStreet);
+      )..chooseStreet(mainStreet);
       await pumpEventQueue();
 
       expect(controller.geolocation.fieldValue, savedLocation);
@@ -89,9 +80,7 @@ void main() {
     test('keeps an area that is one of the areas of the street', () async {
       final controller = fixture.controllerFor(
         const Address(houseCode: '12', area: stMarkArea),
-      );
-
-      controller.chooseStreet(mainStreet);
+      )..chooseStreet(mainStreet);
       await pumpEventQueue();
 
       expect(controller.area.fieldValue, stMarkArea);
@@ -101,9 +90,7 @@ void main() {
         'the area containing the geocoded house', () async {
       final controller = fixture.controllerFor(
         const Address(houseCode: '12', area: otherArea),
-      );
-
-      controller.chooseStreet(mainStreet);
+      )..chooseStreet(mainStreet);
       await pumpEventQueue();
 
       expect(controller.area.fieldValue, stMinaArea);
@@ -112,9 +99,8 @@ void main() {
     test('whose geocoded house lies outside every area of the street leaves '
         'the area empty', () async {
       fixture.areas.areaIdsContainingPoint.clear();
-      final controller = fixture.controllerFor(const Address(houseCode: '12'));
-
-      controller.chooseStreet(mainStreet);
+      final controller = fixture.controllerFor(const Address(houseCode: '12'))
+        ..chooseStreet(mainStreet);
       await pumpEventQueue();
 
       expect(controller.area.fieldValue, isNull);
@@ -126,9 +112,7 @@ void main() {
         fixture.geocoder.locationOfEveryAddress = null;
         final controller = fixture.controllerFor(
           const Address(houseCode: '12'),
-        );
-
-        controller.chooseStreet(mainStreet);
+        )..chooseStreet(mainStreet);
         await pumpEventQueue();
 
         expect(controller.area.fieldValue, isNull);
@@ -138,9 +122,8 @@ void main() {
     test('keeps an area the user chose while the lookup was pending', () async {
       final lookup = fixture.areas.lookupGatesByStreetId[mainStreet.id] =
           Completer<void>();
-      final controller = fixture.controllerFor(const Address(houseCode: '12'));
-
-      controller.chooseStreet(mainStreet);
+      final controller = fixture.controllerFor(const Address(houseCode: '12'))
+        ..chooseStreet(mainStreet);
       controller.area.setValue(otherArea);
       lookup.complete();
       await pumpEventQueue();
@@ -156,10 +139,9 @@ void main() {
           ..areasByStreetId[sideStreet.id] = const [otherArea];
         final firstLookup = fixture.areas.lookupGatesByStreetId[mainStreet.id] =
             Completer<void>();
-        final controller = fixture.controllerFor();
-
-        controller.chooseStreet(mainStreet);
-        controller.chooseStreet(sideStreet);
+        final controller = fixture.controllerFor()
+          ..chooseStreet(mainStreet)
+          ..chooseStreet(sideStreet);
         firstLookup.complete();
         await pumpEventQueue();
 
@@ -170,9 +152,7 @@ void main() {
     test('clearing the street fills no area', () async {
       final controller = fixture.controllerFor(
         const Address(street: mainStreet),
-      );
-
-      controller.chooseStreet(null);
+      )..chooseStreet(null);
       await pumpEventQueue();
 
       expect(controller.area.fieldValue, isNull);
@@ -181,9 +161,8 @@ void main() {
     test('whose area lookup fails keeps the street and leaves the area '
         'empty', () async {
       fixture.areas.lookupFailure = StateError('offline');
-      final controller = fixture.controllerFor(const Address(houseCode: '12'));
-
-      controller.chooseStreet(mainStreet);
+      final controller = fixture.controllerFor(const Address(houseCode: '12'))
+        ..chooseStreet(mainStreet);
       await pumpEventQueue();
 
       expect(controller.toAddress().street, mainStreet);
@@ -193,9 +172,8 @@ void main() {
     test('whose geocoding fails keeps the street and leaves the area and '
         'location empty', () async {
       fixture.geocoder.locationFailure = StateError('offline');
-      final controller = fixture.controllerFor(const Address(houseCode: '12'));
-
-      controller.chooseStreet(mainStreet);
+      final controller = fixture.controllerFor(const Address(houseCode: '12'))
+        ..chooseStreet(mainStreet);
       await pumpEventQueue();
 
       expect(controller.toAddress().street, mainStreet);
