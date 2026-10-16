@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'meeting_day_demographic_counts.dart';
@@ -9,18 +9,11 @@ part of 'meeting_day_demographic_counts.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$MeetingDayDemographicCounts {
-  DateTime get day;
-  int? get studyYearId;
-  bool? get gender;
-  int get personsCount;
-  int get servantsCount;
-  int get totalCount;
-  String? get studyYearName;
-
   /// Create a copy of MeetingDayDemographicCounts
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -34,38 +27,44 @@ mixin _$MeetingDayDemographicCounts {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as MeetingDayDemographicCounts;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is MeetingDayDemographicCounts &&
-            (identical(other.day, day) || other.day == day) &&
-            (identical(other.studyYearId, studyYearId) ||
-                other.studyYearId == studyYearId) &&
-            (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.personsCount, personsCount) ||
-                other.personsCount == personsCount) &&
-            (identical(other.servantsCount, servantsCount) ||
-                other.servantsCount == servantsCount) &&
-            (identical(other.totalCount, totalCount) ||
-                other.totalCount == totalCount) &&
-            (identical(other.studyYearName, studyYearName) ||
-                other.studyYearName == studyYearName));
+            (identical(other.day, _this.day) || other.day == _this.day) &&
+            (identical(other.studyYearId, _this.studyYearId) ||
+                other.studyYearId == _this.studyYearId) &&
+            (identical(other.gender, _this.gender) ||
+                other.gender == _this.gender) &&
+            (identical(other.personsCount, _this.personsCount) ||
+                other.personsCount == _this.personsCount) &&
+            (identical(other.servantsCount, _this.servantsCount) ||
+                other.servantsCount == _this.servantsCount) &&
+            (identical(other.totalCount, _this.totalCount) ||
+                other.totalCount == _this.totalCount) &&
+            (identical(other.studyYearName, _this.studyYearName) ||
+                other.studyYearName == _this.studyYearName));
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    day,
-    studyYearId,
-    gender,
-    personsCount,
-    servantsCount,
-    totalCount,
-    studyYearName,
-  );
+  int get hashCode {
+    final _this = this as MeetingDayDemographicCounts;
+    return Object.hash(
+      runtimeType,
+      _this.day,
+      _this.studyYearId,
+      _this.gender,
+      _this.personsCount,
+      _this.servantsCount,
+      _this.totalCount,
+      _this.studyYearName,
+    );
+  }
 
   @override
   String toString() {
-    return 'MeetingDayDemographicCounts(day: $day, studyYearId: $studyYearId, gender: $gender, personsCount: $personsCount, servantsCount: $servantsCount, totalCount: $totalCount, studyYearName: $studyYearName)';
+    final _this = this as MeetingDayDemographicCounts;
+    return 'MeetingDayDemographicCounts(day: ${_this.day}, studyYearId: ${_this.studyYearId}, gender: ${_this.gender}, personsCount: ${_this.personsCount}, servantsCount: ${_this.servantsCount}, totalCount: ${_this.totalCount}, studyYearName: ${_this.studyYearName})';
   }
 }
 

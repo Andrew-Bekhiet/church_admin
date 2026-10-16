@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'meeting.dart';
@@ -9,24 +9,11 @@ part of 'meeting.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Meeting {
-  String get id;
-  String get name;
-  MeetingAudience get audience;
-  bool get isArchived;
-  bool get showKodasCheckbox;
-  Color? get color;
-  String? get serviceId;
-  Service? get service;
-  int? get serviceStudyYear;
-  StudyYear? get studyYear;
-  bool? get serviceGender;
-  String? get groupId;
-  Group? get group;
-
   /// Create a copy of Meeting
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -36,53 +23,62 @@ mixin _$Meeting {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as Meeting;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Meeting &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.audience, audience) ||
-                other.audience == audience) &&
-            (identical(other.isArchived, isArchived) ||
-                other.isArchived == isArchived) &&
-            (identical(other.showKodasCheckbox, showKodasCheckbox) ||
-                other.showKodasCheckbox == showKodasCheckbox) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.serviceId, serviceId) ||
-                other.serviceId == serviceId) &&
-            (identical(other.service, service) || other.service == service) &&
-            (identical(other.serviceStudyYear, serviceStudyYear) ||
-                other.serviceStudyYear == serviceStudyYear) &&
-            (identical(other.studyYear, studyYear) ||
-                other.studyYear == studyYear) &&
-            (identical(other.serviceGender, serviceGender) ||
-                other.serviceGender == serviceGender) &&
-            (identical(other.groupId, groupId) || other.groupId == groupId) &&
-            (identical(other.group, group) || other.group == group));
+            (identical(other.id, _this.id) || other.id == _this.id) &&
+            (identical(other.name, _this.name) || other.name == _this.name) &&
+            (identical(other.audience, _this.audience) ||
+                other.audience == _this.audience) &&
+            (identical(other.isArchived, _this.isArchived) ||
+                other.isArchived == _this.isArchived) &&
+            (identical(other.showKodasCheckbox, _this.showKodasCheckbox) ||
+                other.showKodasCheckbox == _this.showKodasCheckbox) &&
+            (identical(other.color, _this.color) ||
+                other.color == _this.color) &&
+            (identical(other.serviceId, _this.serviceId) ||
+                other.serviceId == _this.serviceId) &&
+            (identical(other.service, _this.service) ||
+                other.service == _this.service) &&
+            (identical(other.serviceStudyYear, _this.serviceStudyYear) ||
+                other.serviceStudyYear == _this.serviceStudyYear) &&
+            (identical(other.studyYear, _this.studyYear) ||
+                other.studyYear == _this.studyYear) &&
+            (identical(other.serviceGender, _this.serviceGender) ||
+                other.serviceGender == _this.serviceGender) &&
+            (identical(other.groupId, _this.groupId) ||
+                other.groupId == _this.groupId) &&
+            (identical(other.group, _this.group) ||
+                other.group == _this.group));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    audience,
-    isArchived,
-    showKodasCheckbox,
-    color,
-    serviceId,
-    service,
-    serviceStudyYear,
-    studyYear,
-    serviceGender,
-    groupId,
-    group,
-  );
+  int get hashCode {
+    final _this = this as Meeting;
+    return Object.hash(
+      runtimeType,
+      _this.id,
+      _this.name,
+      _this.audience,
+      _this.isArchived,
+      _this.showKodasCheckbox,
+      _this.color,
+      _this.serviceId,
+      _this.service,
+      _this.serviceStudyYear,
+      _this.studyYear,
+      _this.serviceGender,
+      _this.groupId,
+      _this.group,
+    );
+  }
 
   @override
   String toString() {
-    return 'Meeting(id: $id, name: $name, audience: $audience, isArchived: $isArchived, showKodasCheckbox: $showKodasCheckbox, color: $color, serviceId: $serviceId, service: $service, serviceStudyYear: $serviceStudyYear, studyYear: $studyYear, serviceGender: $serviceGender, groupId: $groupId, group: $group)';
+    final _this = this as Meeting;
+    return 'Meeting(id: ${_this.id}, name: ${_this.name}, audience: ${_this.audience}, isArchived: ${_this.isArchived}, showKodasCheckbox: ${_this.showKodasCheckbox}, color: ${_this.color}, serviceId: ${_this.serviceId}, service: ${_this.service}, serviceStudyYear: ${_this.serviceStudyYear}, studyYear: ${_this.studyYear}, serviceGender: ${_this.serviceGender}, groupId: ${_this.groupId}, group: ${_this.group})';
   }
 }
 
@@ -106,6 +102,10 @@ abstract mixin class $MeetingCopyWith<$Res> {
     String? groupId,
     Group? group,
   });
+
+  $ServiceCopyWith<$Res>? get service;
+  $StudyYearCopyWith<$Res>? get studyYear;
+  $GroupCopyWith<$Res>? get group;
 }
 
 /// @nodoc
@@ -190,5 +190,47 @@ class _$MeetingCopyWithImpl<$Res> implements $MeetingCopyWith<$Res> {
                   as Group?,
       ),
     );
+  }
+
+  /// Create a copy of Meeting
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ServiceCopyWith<$Res>? get service {
+    if (_self.service == null) {
+      return null;
+    }
+
+    return $ServiceCopyWith<$Res>(_self.service!, (value) {
+      return _then(_self.copyWith(service: value));
+    });
+  }
+
+  /// Create a copy of Meeting
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StudyYearCopyWith<$Res>? get studyYear {
+    if (_self.studyYear == null) {
+      return null;
+    }
+
+    return $StudyYearCopyWith<$Res>(_self.studyYear!, (value) {
+      return _then(_self.copyWith(studyYear: value));
+    });
+  }
+
+  /// Create a copy of Meeting
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $GroupCopyWith<$Res>? get group {
+    if (_self.group == null) {
+      return null;
+    }
+
+    return $GroupCopyWith<$Res>(_self.group!, (value) {
+      return _then(_self.copyWith(group: value));
+    });
   }
 }

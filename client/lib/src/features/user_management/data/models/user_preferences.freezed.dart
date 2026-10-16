@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_preferences.dart';
@@ -9,18 +9,11 @@ part of 'user_preferences.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$UserPreferences {
-  String get uid;
-  Json get orderByPreferences;
-  Json get secondLinePreferences;
-  bool? get darkTheme;
-  bool get greatFeastTheme;
-  HomeMode? get lastHomeMode;
-  DateTime? get updatedAt;
-
   /// Create a copy of UserPreferences
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -33,44 +26,49 @@ mixin _$UserPreferences {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as UserPreferences;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is UserPreferences &&
-            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.uid, _this.uid) || other.uid == _this.uid) &&
             const DeepCollectionEquality().equals(
               other.orderByPreferences,
-              orderByPreferences,
+              _this.orderByPreferences,
             ) &&
             const DeepCollectionEquality().equals(
               other.secondLinePreferences,
-              secondLinePreferences,
+              _this.secondLinePreferences,
             ) &&
-            (identical(other.darkTheme, darkTheme) ||
-                other.darkTheme == darkTheme) &&
-            (identical(other.greatFeastTheme, greatFeastTheme) ||
-                other.greatFeastTheme == greatFeastTheme) &&
-            (identical(other.lastHomeMode, lastHomeMode) ||
-                other.lastHomeMode == lastHomeMode) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+            (identical(other.darkTheme, _this.darkTheme) ||
+                other.darkTheme == _this.darkTheme) &&
+            (identical(other.greatFeastTheme, _this.greatFeastTheme) ||
+                other.greatFeastTheme == _this.greatFeastTheme) &&
+            (identical(other.lastHomeMode, _this.lastHomeMode) ||
+                other.lastHomeMode == _this.lastHomeMode) &&
+            (identical(other.updatedAt, _this.updatedAt) ||
+                other.updatedAt == _this.updatedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    uid,
-    const DeepCollectionEquality().hash(orderByPreferences),
-    const DeepCollectionEquality().hash(secondLinePreferences),
-    darkTheme,
-    greatFeastTheme,
-    lastHomeMode,
-    updatedAt,
-  );
+  int get hashCode {
+    final _this = this as UserPreferences;
+    return Object.hash(
+      runtimeType,
+      _this.uid,
+      const DeepCollectionEquality().hash(_this.orderByPreferences),
+      const DeepCollectionEquality().hash(_this.secondLinePreferences),
+      _this.darkTheme,
+      _this.greatFeastTheme,
+      _this.lastHomeMode,
+      _this.updatedAt,
+    );
+  }
 
   @override
   String toString() {
-    return 'UserPreferences(uid: $uid, orderByPreferences: $orderByPreferences, secondLinePreferences: $secondLinePreferences, darkTheme: $darkTheme, greatFeastTheme: $greatFeastTheme, lastHomeMode: $lastHomeMode, updatedAt: $updatedAt)';
+    final _this = this as UserPreferences;
+    return 'UserPreferences(uid: ${_this.uid}, orderByPreferences: ${_this.orderByPreferences}, secondLinePreferences: ${_this.secondLinePreferences}, darkTheme: ${_this.darkTheme}, greatFeastTheme: ${_this.greatFeastTheme}, lastHomeMode: ${_this.lastHomeMode}, updatedAt: ${_this.updatedAt})';
   }
 }
 
@@ -83,8 +81,8 @@ abstract mixin class $UserPreferencesCopyWith<$Res> {
   @useResult
   $Res call({
     String uid,
-    Map<String, dynamic> orderByPreferences,
-    Map<String, dynamic> secondLinePreferences,
+    Json orderByPreferences,
+    Json secondLinePreferences,
     bool greatFeastTheme,
     bool? darkTheme,
     HomeMode? lastHomeMode,
@@ -122,11 +120,11 @@ class _$UserPreferencesCopyWithImpl<$Res>
         orderByPreferences: null == orderByPreferences
             ? _self.orderByPreferences
             : orderByPreferences // ignore: cast_nullable_to_non_nullable
-                  as Map<String, dynamic>,
+                  as Json,
         secondLinePreferences: null == secondLinePreferences
             ? _self.secondLinePreferences
             : secondLinePreferences // ignore: cast_nullable_to_non_nullable
-                  as Map<String, dynamic>,
+                  as Json,
         greatFeastTheme: null == greatFeastTheme
             ? _self.greatFeastTheme
             : greatFeastTheme // ignore: cast_nullable_to_non_nullable

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'group.dart';
@@ -9,24 +9,11 @@ part of 'group.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Group {
-  String get id;
-  String get name;
-  Color? get color;
-  DateTime? get photoUpdatedAt;
-  String? get blurhash;
-  String? get serviceId;
-  Service? get service;
-  Meeting? get defaultMeeting;
-  List<Meeting>? get meetings;
-  DateTimeRange? get validity;
-  LastRecordedByInfo? get lastEdit;
-  List<User>? get adminUsers;
-  bool get userCanEdit;
-
   /// Create a copy of Group
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -36,56 +23,66 @@ mixin _$Group {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as Group;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Group &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
-                other.photoUpdatedAt == photoUpdatedAt) &&
-            (identical(other.blurhash, blurhash) ||
-                other.blurhash == blurhash) &&
-            (identical(other.serviceId, serviceId) ||
-                other.serviceId == serviceId) &&
-            (identical(other.service, service) || other.service == service) &&
-            (identical(other.defaultMeeting, defaultMeeting) ||
-                other.defaultMeeting == defaultMeeting) &&
-            const DeepCollectionEquality().equals(other.meetings, meetings) &&
-            (identical(other.validity, validity) ||
-                other.validity == validity) &&
-            (identical(other.lastEdit, lastEdit) ||
-                other.lastEdit == lastEdit) &&
+            (identical(other.id, _this.id) || other.id == _this.id) &&
+            (identical(other.name, _this.name) || other.name == _this.name) &&
+            (identical(other.color, _this.color) ||
+                other.color == _this.color) &&
+            (identical(other.photoUpdatedAt, _this.photoUpdatedAt) ||
+                other.photoUpdatedAt == _this.photoUpdatedAt) &&
+            (identical(other.blurhash, _this.blurhash) ||
+                other.blurhash == _this.blurhash) &&
+            (identical(other.serviceId, _this.serviceId) ||
+                other.serviceId == _this.serviceId) &&
+            (identical(other.service, _this.service) ||
+                other.service == _this.service) &&
+            (identical(other.defaultMeeting, _this.defaultMeeting) ||
+                other.defaultMeeting == _this.defaultMeeting) &&
+            const DeepCollectionEquality().equals(
+              other.meetings,
+              _this.meetings,
+            ) &&
+            (identical(other.validity, _this.validity) ||
+                other.validity == _this.validity) &&
+            (identical(other.lastEdit, _this.lastEdit) ||
+                other.lastEdit == _this.lastEdit) &&
             const DeepCollectionEquality().equals(
               other.adminUsers,
-              adminUsers,
+              _this.adminUsers,
             ) &&
-            (identical(other.userCanEdit, userCanEdit) ||
-                other.userCanEdit == userCanEdit));
+            (identical(other.userCanEdit, _this.userCanEdit) ||
+                other.userCanEdit == _this.userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    color,
-    photoUpdatedAt,
-    blurhash,
-    serviceId,
-    service,
-    defaultMeeting,
-    const DeepCollectionEquality().hash(meetings),
-    validity,
-    lastEdit,
-    const DeepCollectionEquality().hash(adminUsers),
-    userCanEdit,
-  );
+  int get hashCode {
+    final _this = this as Group;
+    return Object.hash(
+      runtimeType,
+      _this.id,
+      _this.name,
+      _this.color,
+      _this.photoUpdatedAt,
+      _this.blurhash,
+      _this.serviceId,
+      _this.service,
+      _this.defaultMeeting,
+      const DeepCollectionEquality().hash(_this.meetings),
+      _this.validity,
+      _this.lastEdit,
+      const DeepCollectionEquality().hash(_this.adminUsers),
+      _this.userCanEdit,
+    );
+  }
 
   @override
   String toString() {
-    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, serviceId: $serviceId, service: $service, defaultMeeting: $defaultMeeting, meetings: $meetings, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
+    final _this = this as Group;
+    return 'Group(id: ${_this.id}, name: ${_this.name}, color: ${_this.color}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, serviceId: ${_this.serviceId}, service: ${_this.service}, defaultMeeting: ${_this.defaultMeeting}, meetings: ${_this.meetings}, validity: ${_this.validity}, lastEdit: ${_this.lastEdit}, adminUsers: ${_this.adminUsers}, userCanEdit: ${_this.userCanEdit})';
   }
 }
 
@@ -109,6 +106,10 @@ abstract mixin class $GroupCopyWith<$Res> {
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
   });
+
+  $ServiceCopyWith<$Res>? get service;
+  $MeetingCopyWith<$Res>? get defaultMeeting;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -193,5 +194,47 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
                   as List<User>?,
       ),
     );
+  }
+
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ServiceCopyWith<$Res>? get service {
+    if (_self.service == null) {
+      return null;
+    }
+
+    return $ServiceCopyWith<$Res>(_self.service!, (value) {
+      return _then(_self.copyWith(service: value));
+    });
+  }
+
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MeetingCopyWith<$Res>? get defaultMeeting {
+    if (_self.defaultMeeting == null) {
+      return null;
+    }
+
+    return $MeetingCopyWith<$Res>(_self.defaultMeeting!, (value) {
+      return _then(_self.copyWith(defaultMeeting: value));
+    });
+  }
+
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
   }
 }

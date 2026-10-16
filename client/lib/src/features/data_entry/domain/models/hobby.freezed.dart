@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'hobby.dart';
@@ -9,14 +9,11 @@ part of 'hobby.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Hobby {
-  String get id;
-  String get name;
-  Color? get color;
-
   /// Create a copy of Hobby
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,21 +23,27 @@ mixin _$Hobby {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as Hobby;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Hobby &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.color, color) || other.color == color));
+            (identical(other.id, _this.id) || other.id == _this.id) &&
+            (identical(other.name, _this.name) || other.name == _this.name) &&
+            (identical(other.color, _this.color) ||
+                other.color == _this.color));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, color);
+  int get hashCode {
+    final _this = this as Hobby;
+    return Object.hash(runtimeType, _this.id, _this.name, _this.color);
+  }
 
   @override
   String toString() {
-    return 'Hobby(id: $id, name: $name, color: $color)';
+    final _this = this as Hobby;
+    return 'Hobby(id: ${_this.id}, name: ${_this.name}, color: ${_this.color})';
   }
 }
 

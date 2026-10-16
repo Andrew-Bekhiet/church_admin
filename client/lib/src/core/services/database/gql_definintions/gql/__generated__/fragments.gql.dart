@@ -1,6 +1,7 @@
 import '../../areas/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
+
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 

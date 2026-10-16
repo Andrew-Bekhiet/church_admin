@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'order_by.dart';
@@ -9,13 +9,11 @@ part of 'order_by.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$OrderBy {
-  FieldMetadata get field;
-  OrderByValue get value;
-
   /// Create a copy of OrderBy
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,20 +23,27 @@ mixin _$OrderBy {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as OrderBy;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is OrderBy &&
-            (identical(other.field, field) || other.field == field) &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.field, _this.field) ||
+                other.field == _this.field) &&
+            (identical(other.value, _this.value) ||
+                other.value == _this.value));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, field, value);
+  int get hashCode {
+    final _this = this as OrderBy;
+    return Object.hash(runtimeType, _this.field, _this.value);
+  }
 
   @override
   String toString() {
-    return 'OrderBy(field: $field, value: $value)';
+    final _this = this as OrderBy;
+    return 'OrderBy(field: ${_this.field}, value: ${_this.value})';
   }
 }
 

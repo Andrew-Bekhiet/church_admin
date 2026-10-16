@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'invitation.dart';
@@ -9,17 +9,11 @@ part of 'invitation.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Invitation {
-  String get id;
-  String get userUid;
-  String get code;
-  DateTime get createdAt;
-  DateTime get expiresAt;
-  DateTime? get claimedAt;
-
   /// Create a copy of Invitation
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,35 +23,41 @@ mixin _$Invitation {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as Invitation;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Invitation &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.userUid, userUid) || other.userUid == userUid) &&
-            (identical(other.code, code) || other.code == code) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.expiresAt, expiresAt) ||
-                other.expiresAt == expiresAt) &&
-            (identical(other.claimedAt, claimedAt) ||
-                other.claimedAt == claimedAt));
+            (identical(other.id, _this.id) || other.id == _this.id) &&
+            (identical(other.userUid, _this.userUid) ||
+                other.userUid == _this.userUid) &&
+            (identical(other.code, _this.code) || other.code == _this.code) &&
+            (identical(other.createdAt, _this.createdAt) ||
+                other.createdAt == _this.createdAt) &&
+            (identical(other.expiresAt, _this.expiresAt) ||
+                other.expiresAt == _this.expiresAt) &&
+            (identical(other.claimedAt, _this.claimedAt) ||
+                other.claimedAt == _this.claimedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    userUid,
-    code,
-    createdAt,
-    expiresAt,
-    claimedAt,
-  );
+  int get hashCode {
+    final _this = this as Invitation;
+    return Object.hash(
+      runtimeType,
+      _this.id,
+      _this.userUid,
+      _this.code,
+      _this.createdAt,
+      _this.expiresAt,
+      _this.claimedAt,
+    );
+  }
 
   @override
   String toString() {
-    return 'Invitation(id: $id, userUid: $userUid, code: $code, createdAt: $createdAt, expiresAt: $expiresAt, claimedAt: $claimedAt)';
+    final _this = this as Invitation;
+    return 'Invitation(id: ${_this.id}, userUid: ${_this.userUid}, code: ${_this.code}, createdAt: ${_this.createdAt}, expiresAt: ${_this.expiresAt}, claimedAt: ${_this.claimedAt})';
   }
 }
 

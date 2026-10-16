@@ -8,6 +8,7 @@ import '../../services/__generated__/fragments.gql.dart';
 import '../../stores/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
+
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
@@ -1645,8 +1646,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
                                                             ),
                                                             value: VariableNode(
                                                               name: NameNode(
-                                                                value:
-                                                                    'personsConditions',
+                                                                value: 'personsConditions',
                                                               ),
                                                             ),
                                                           ),
@@ -1822,8 +1822,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
                                                             ),
                                                             value: VariableNode(
                                                               name: NameNode(
-                                                                value:
-                                                                    'personsConditions',
+                                                                value: 'personsConditions',
                                                               ),
                                                             ),
                                                           ),

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user.dart';
@@ -9,28 +9,11 @@ part of 'user.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$User {
-  String get uid;
-  String get name;
-  String? get email;
-  DateTime? get photoUpdatedAt;
-  String? get blurhash;
-  List<AdminOnData>? get adminOn;
-  PermissionsSet get permissions;
-  String? get authId;
-  LastRecordedByInfo? get lastEdit;
-  Person? get person;
-  UserPreferences? get preferences;
-  List<FcmToken> get fcmTokens;
-  List<AdminOnData>? get servicesHistory;
-  List<AdminOnData>? get classesHistory;
-  List<AdminOnData>? get groupsHistory;
-  Invitation? get invitation;
-  bool get currentUserCanManageThisUser;
-
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -40,76 +23,90 @@ mixin _$User {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as User;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is User &&
-            (identical(other.uid, uid) || other.uid == uid) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
-                other.photoUpdatedAt == photoUpdatedAt) &&
-            (identical(other.blurhash, blurhash) ||
-                other.blurhash == blurhash) &&
-            const DeepCollectionEquality().equals(other.adminOn, adminOn) &&
+            (identical(other.uid, _this.uid) || other.uid == _this.uid) &&
+            (identical(other.name, _this.name) || other.name == _this.name) &&
+            (identical(other.email, _this.email) ||
+                other.email == _this.email) &&
+            (identical(other.photoUpdatedAt, _this.photoUpdatedAt) ||
+                other.photoUpdatedAt == _this.photoUpdatedAt) &&
+            (identical(other.blurhash, _this.blurhash) ||
+                other.blurhash == _this.blurhash) &&
+            const DeepCollectionEquality().equals(
+              other.adminOn,
+              _this.adminOn,
+            ) &&
             const DeepCollectionEquality().equals(
               other.permissions,
-              permissions,
+              _this.permissions,
             ) &&
-            (identical(other.authId, authId) || other.authId == authId) &&
-            (identical(other.lastEdit, lastEdit) ||
-                other.lastEdit == lastEdit) &&
-            (identical(other.person, person) || other.person == person) &&
-            (identical(other.preferences, preferences) ||
-                other.preferences == preferences) &&
-            const DeepCollectionEquality().equals(other.fcmTokens, fcmTokens) &&
+            (identical(other.authId, _this.authId) ||
+                other.authId == _this.authId) &&
+            (identical(other.lastEdit, _this.lastEdit) ||
+                other.lastEdit == _this.lastEdit) &&
+            (identical(other.person, _this.person) ||
+                other.person == _this.person) &&
+            (identical(other.preferences, _this.preferences) ||
+                other.preferences == _this.preferences) &&
+            const DeepCollectionEquality().equals(
+              other.fcmTokens,
+              _this.fcmTokens,
+            ) &&
             const DeepCollectionEquality().equals(
               other.servicesHistory,
-              servicesHistory,
+              _this.servicesHistory,
             ) &&
             const DeepCollectionEquality().equals(
               other.classesHistory,
-              classesHistory,
+              _this.classesHistory,
             ) &&
             const DeepCollectionEquality().equals(
               other.groupsHistory,
-              groupsHistory,
+              _this.groupsHistory,
             ) &&
-            (identical(other.invitation, invitation) ||
-                other.invitation == invitation) &&
+            (identical(other.invitation, _this.invitation) ||
+                other.invitation == _this.invitation) &&
             (identical(
                   other.currentUserCanManageThisUser,
-                  currentUserCanManageThisUser,
+                  _this.currentUserCanManageThisUser,
                 ) ||
                 other.currentUserCanManageThisUser ==
-                    currentUserCanManageThisUser));
+                    _this.currentUserCanManageThisUser));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    uid,
-    name,
-    email,
-    photoUpdatedAt,
-    blurhash,
-    const DeepCollectionEquality().hash(adminOn),
-    const DeepCollectionEquality().hash(permissions),
-    authId,
-    lastEdit,
-    person,
-    preferences,
-    const DeepCollectionEquality().hash(fcmTokens),
-    const DeepCollectionEquality().hash(servicesHistory),
-    const DeepCollectionEquality().hash(classesHistory),
-    const DeepCollectionEquality().hash(groupsHistory),
-    invitation,
-    currentUserCanManageThisUser,
-  );
+  int get hashCode {
+    final _this = this as User;
+    return Object.hash(
+      runtimeType,
+      _this.uid,
+      _this.name,
+      _this.email,
+      _this.photoUpdatedAt,
+      _this.blurhash,
+      const DeepCollectionEquality().hash(_this.adminOn),
+      const DeepCollectionEquality().hash(_this.permissions),
+      _this.authId,
+      _this.lastEdit,
+      _this.person,
+      _this.preferences,
+      const DeepCollectionEquality().hash(_this.fcmTokens),
+      const DeepCollectionEquality().hash(_this.servicesHistory),
+      const DeepCollectionEquality().hash(_this.classesHistory),
+      const DeepCollectionEquality().hash(_this.groupsHistory),
+      _this.invitation,
+      _this.currentUserCanManageThisUser,
+    );
+  }
 
   @override
   String toString() {
-    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, lastEdit: $lastEdit, person: $person, preferences: $preferences, fcmTokens: $fcmTokens, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory, invitation: $invitation, currentUserCanManageThisUser: $currentUserCanManageThisUser)';
+    final _this = this as User;
+    return 'User(uid: ${_this.uid}, name: ${_this.name}, email: ${_this.email}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, adminOn: ${_this.adminOn}, permissions: ${_this.permissions}, authId: ${_this.authId}, lastEdit: ${_this.lastEdit}, person: ${_this.person}, preferences: ${_this.preferences}, fcmTokens: ${_this.fcmTokens}, servicesHistory: ${_this.servicesHistory}, classesHistory: ${_this.classesHistory}, groupsHistory: ${_this.groupsHistory}, invitation: ${_this.invitation}, currentUserCanManageThisUser: ${_this.currentUserCanManageThisUser})';
   }
 }
 
@@ -137,6 +134,11 @@ abstract mixin class $UserCopyWith<$Res> {
     List<AdminOnData>? groupsHistory,
     Invitation? invitation,
   });
+
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
+  $PersonCopyWith<$Res>? get person;
+  $UserPreferencesCopyWith<$Res>? get preferences;
+  $InvitationCopyWith<$Res>? get invitation;
 }
 
 /// @nodoc
@@ -241,5 +243,61 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
                   as Invitation?,
       ),
     );
+  }
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
+  }
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PersonCopyWith<$Res>? get person {
+    if (_self.person == null) {
+      return null;
+    }
+
+    return $PersonCopyWith<$Res>(_self.person!, (value) {
+      return _then(_self.copyWith(person: value));
+    });
+  }
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserPreferencesCopyWith<$Res>? get preferences {
+    if (_self.preferences == null) {
+      return null;
+    }
+
+    return $UserPreferencesCopyWith<$Res>(_self.preferences!, (value) {
+      return _then(_self.copyWith(preferences: value));
+    });
+  }
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $InvitationCopyWith<$Res>? get invitation {
+    if (_self.invitation == null) {
+      return null;
+    }
+
+    return $InvitationCopyWith<$Res>(_self.invitation!, (value) {
+      return _then(_self.copyWith(invitation: value));
+    });
   }
 }

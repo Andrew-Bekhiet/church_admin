@@ -2,6 +2,7 @@ import '../../data_checks/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../persons/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
+
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 

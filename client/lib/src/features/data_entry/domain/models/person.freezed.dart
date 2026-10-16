@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'person.dart';
@@ -9,82 +9,11 @@ part of 'person.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Person {
-  String get id;
-  int? get nationalId;
-  String get name;
-  Address? get address;
-  List<PhoneContact> get contacts;
-  List<FamilyPhoneContact> get familyContacts;
-  DateTime? get birthdate;
-  String? get birthday;
-  bool get gender;
-  bool get isShammas;
-  String? get shammasLevelId;
-  ShammasLevel? get shammasLevel;
-  School? get school;
-  String? get schoolId;
-  College? get college;
-  String? get collegeId;
-  Church? get church;
-  String? get churchId;
-  Father? get father;
-  String? get fatherId;
-  WorkStatus? get workStatus;
-  Job? get job;
-  String? get jobId;
-  String? get jobDescription;
-  Qualification? get qualification;
-  String? get qualificationId;
-  MartialStatus? get martialStatus;
-  PersonType? get personType;
-  String? get personTypeId;
-  PersonState? get state;
-  String? get stateId;
-  bool get isServant;
-  Church? get servingChurch;
-  String? get serviceType;
-  String? get notes;
-  Family? get family;
-  String? get familyId;
-  Store? get store;
-  String? get storeId;
-  StudyYear? get studyYear;
-  int? get studyYearId;
-  Color? get color;
-  DateTime? get photoUpdatedAt;
-  String? get blurhash;
-  LastRecordedByInfo? get lastConfession;
-  LastRecordedByInfo? get lastKodas;
-  LastRecordedByInfo? get lastAttendance;
-  LastRecordedByInfo? get lastCall;
-  LastRecordedByInfo? get lastVisit;
-  LastRecordedByInfo? get lastEdit;
-  DataCheck? get dataCheck;
-  List<Class>? get classes;
-  List<Group>? get groups;
-  List<Service>? get services;
-  List<Tag>? get tags;
-  List<Hobby>? get hobbies;
-  User? get user;
-  String? get uid;
-  List<LastRecordedByInfo>? get kodasHistory;
-  List<LastRecordedByInfo>? get attendanceHistory;
-  List<LastRecordedByInfo>? get confessionHistory;
-  List<LastRecordedByInfo>? get callHistory;
-  List<LastRecordedByInfo>? get visitHistory;
-  List<LastRecordedByInfo>? get editHistory;
-  HistoryAggregateData? get kodasHistoryAggregate;
-  HistoryAggregateData? get attendanceHistoryAggregate;
-  HistoryAggregateData? get confessionHistoryAggregate;
-  HistoryAggregateData? get callHistoryAggregate;
-  HistoryAggregateData? get visitHistoryAggregate;
-  HistoryAggregateData? get editHistoryAggregate;
-  bool get userCanEdit;
-
   /// Create a copy of Person
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -94,230 +23,273 @@ mixin _$Person {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as Person;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Person &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.nationalId, nationalId) ||
-                other.nationalId == nationalId) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.address, address) || other.address == address) &&
-            const DeepCollectionEquality().equals(other.contacts, contacts) &&
+            (identical(other.id, _this.id) || other.id == _this.id) &&
+            (identical(other.nationalId, _this.nationalId) ||
+                other.nationalId == _this.nationalId) &&
+            (identical(other.name, _this.name) || other.name == _this.name) &&
+            (identical(other.address, _this.address) ||
+                other.address == _this.address) &&
+            const DeepCollectionEquality().equals(
+              other.contacts,
+              _this.contacts,
+            ) &&
             const DeepCollectionEquality().equals(
               other.familyContacts,
-              familyContacts,
+              _this.familyContacts,
             ) &&
-            (identical(other.birthdate, birthdate) ||
-                other.birthdate == birthdate) &&
-            (identical(other.birthday, birthday) ||
-                other.birthday == birthday) &&
-            (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.isShammas, isShammas) ||
-                other.isShammas == isShammas) &&
-            (identical(other.shammasLevelId, shammasLevelId) ||
-                other.shammasLevelId == shammasLevelId) &&
-            (identical(other.shammasLevel, shammasLevel) ||
-                other.shammasLevel == shammasLevel) &&
-            (identical(other.school, school) || other.school == school) &&
-            (identical(other.schoolId, schoolId) ||
-                other.schoolId == schoolId) &&
-            (identical(other.college, college) || other.college == college) &&
-            (identical(other.collegeId, collegeId) ||
-                other.collegeId == collegeId) &&
-            (identical(other.church, church) || other.church == church) &&
-            (identical(other.churchId, churchId) ||
-                other.churchId == churchId) &&
-            (identical(other.father, father) || other.father == father) &&
-            (identical(other.fatherId, fatherId) ||
-                other.fatherId == fatherId) &&
-            (identical(other.workStatus, workStatus) ||
-                other.workStatus == workStatus) &&
-            (identical(other.job, job) || other.job == job) &&
-            (identical(other.jobId, jobId) || other.jobId == jobId) &&
-            (identical(other.jobDescription, jobDescription) ||
-                other.jobDescription == jobDescription) &&
-            (identical(other.qualification, qualification) ||
-                other.qualification == qualification) &&
-            (identical(other.qualificationId, qualificationId) ||
-                other.qualificationId == qualificationId) &&
-            (identical(other.martialStatus, martialStatus) ||
-                other.martialStatus == martialStatus) &&
-            (identical(other.personType, personType) ||
-                other.personType == personType) &&
-            (identical(other.personTypeId, personTypeId) ||
-                other.personTypeId == personTypeId) &&
-            (identical(other.state, state) || other.state == state) &&
-            (identical(other.stateId, stateId) || other.stateId == stateId) &&
-            (identical(other.isServant, isServant) ||
-                other.isServant == isServant) &&
-            (identical(other.servingChurch, servingChurch) ||
-                other.servingChurch == servingChurch) &&
-            (identical(other.serviceType, serviceType) ||
-                other.serviceType == serviceType) &&
-            (identical(other.notes, notes) || other.notes == notes) &&
-            (identical(other.family, family) || other.family == family) &&
-            (identical(other.familyId, familyId) ||
-                other.familyId == familyId) &&
-            (identical(other.store, store) || other.store == store) &&
-            (identical(other.storeId, storeId) || other.storeId == storeId) &&
-            (identical(other.studyYear, studyYear) ||
-                other.studyYear == studyYear) &&
-            (identical(other.studyYearId, studyYearId) ||
-                other.studyYearId == studyYearId) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
-                other.photoUpdatedAt == photoUpdatedAt) &&
-            (identical(other.blurhash, blurhash) ||
-                other.blurhash == blurhash) &&
-            (identical(other.lastConfession, lastConfession) ||
-                other.lastConfession == lastConfession) &&
-            (identical(other.lastKodas, lastKodas) ||
-                other.lastKodas == lastKodas) &&
-            (identical(other.lastAttendance, lastAttendance) ||
-                other.lastAttendance == lastAttendance) &&
-            (identical(other.lastCall, lastCall) ||
-                other.lastCall == lastCall) &&
-            (identical(other.lastVisit, lastVisit) ||
-                other.lastVisit == lastVisit) &&
-            (identical(other.lastEdit, lastEdit) ||
-                other.lastEdit == lastEdit) &&
-            (identical(other.dataCheck, dataCheck) ||
-                other.dataCheck == dataCheck) &&
-            const DeepCollectionEquality().equals(other.classes, classes) &&
-            const DeepCollectionEquality().equals(other.groups, groups) &&
-            const DeepCollectionEquality().equals(other.services, services) &&
-            const DeepCollectionEquality().equals(other.tags, tags) &&
-            const DeepCollectionEquality().equals(other.hobbies, hobbies) &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.birthdate, _this.birthdate) ||
+                other.birthdate == _this.birthdate) &&
+            (identical(other.birthday, _this.birthday) ||
+                other.birthday == _this.birthday) &&
+            (identical(other.gender, _this.gender) ||
+                other.gender == _this.gender) &&
+            (identical(other.isShammas, _this.isShammas) ||
+                other.isShammas == _this.isShammas) &&
+            (identical(other.shammasLevelId, _this.shammasLevelId) ||
+                other.shammasLevelId == _this.shammasLevelId) &&
+            (identical(other.shammasLevel, _this.shammasLevel) ||
+                other.shammasLevel == _this.shammasLevel) &&
+            (identical(other.school, _this.school) ||
+                other.school == _this.school) &&
+            (identical(other.schoolId, _this.schoolId) ||
+                other.schoolId == _this.schoolId) &&
+            (identical(other.college, _this.college) ||
+                other.college == _this.college) &&
+            (identical(other.collegeId, _this.collegeId) ||
+                other.collegeId == _this.collegeId) &&
+            (identical(other.church, _this.church) ||
+                other.church == _this.church) &&
+            (identical(other.churchId, _this.churchId) ||
+                other.churchId == _this.churchId) &&
+            (identical(other.father, _this.father) ||
+                other.father == _this.father) &&
+            (identical(other.fatherId, _this.fatherId) ||
+                other.fatherId == _this.fatherId) &&
+            (identical(other.workStatus, _this.workStatus) ||
+                other.workStatus == _this.workStatus) &&
+            (identical(other.job, _this.job) || other.job == _this.job) &&
+            (identical(other.jobId, _this.jobId) ||
+                other.jobId == _this.jobId) &&
+            (identical(other.jobDescription, _this.jobDescription) ||
+                other.jobDescription == _this.jobDescription) &&
+            (identical(other.qualification, _this.qualification) ||
+                other.qualification == _this.qualification) &&
+            (identical(other.qualificationId, _this.qualificationId) ||
+                other.qualificationId == _this.qualificationId) &&
+            (identical(other.martialStatus, _this.martialStatus) ||
+                other.martialStatus == _this.martialStatus) &&
+            (identical(other.personType, _this.personType) ||
+                other.personType == _this.personType) &&
+            (identical(other.personTypeId, _this.personTypeId) ||
+                other.personTypeId == _this.personTypeId) &&
+            (identical(other.state, _this.state) ||
+                other.state == _this.state) &&
+            (identical(other.stateId, _this.stateId) ||
+                other.stateId == _this.stateId) &&
+            (identical(other.isServant, _this.isServant) ||
+                other.isServant == _this.isServant) &&
+            (identical(other.servingChurch, _this.servingChurch) ||
+                other.servingChurch == _this.servingChurch) &&
+            (identical(other.serviceType, _this.serviceType) ||
+                other.serviceType == _this.serviceType) &&
+            (identical(other.notes, _this.notes) ||
+                other.notes == _this.notes) &&
+            (identical(other.family, _this.family) ||
+                other.family == _this.family) &&
+            (identical(other.familyId, _this.familyId) ||
+                other.familyId == _this.familyId) &&
+            (identical(other.store, _this.store) ||
+                other.store == _this.store) &&
+            (identical(other.storeId, _this.storeId) ||
+                other.storeId == _this.storeId) &&
+            (identical(other.studyYear, _this.studyYear) ||
+                other.studyYear == _this.studyYear) &&
+            (identical(other.studyYearId, _this.studyYearId) ||
+                other.studyYearId == _this.studyYearId) &&
+            (identical(other.color, _this.color) ||
+                other.color == _this.color) &&
+            (identical(other.photoUpdatedAt, _this.photoUpdatedAt) ||
+                other.photoUpdatedAt == _this.photoUpdatedAt) &&
+            (identical(other.blurhash, _this.blurhash) ||
+                other.blurhash == _this.blurhash) &&
+            (identical(other.lastConfession, _this.lastConfession) ||
+                other.lastConfession == _this.lastConfession) &&
+            (identical(other.lastKodas, _this.lastKodas) ||
+                other.lastKodas == _this.lastKodas) &&
+            (identical(other.lastAttendance, _this.lastAttendance) ||
+                other.lastAttendance == _this.lastAttendance) &&
+            (identical(other.lastCall, _this.lastCall) ||
+                other.lastCall == _this.lastCall) &&
+            (identical(other.lastVisit, _this.lastVisit) ||
+                other.lastVisit == _this.lastVisit) &&
+            (identical(other.lastEdit, _this.lastEdit) ||
+                other.lastEdit == _this.lastEdit) &&
+            (identical(other.dataCheck, _this.dataCheck) ||
+                other.dataCheck == _this.dataCheck) &&
+            const DeepCollectionEquality().equals(
+              other.classes,
+              _this.classes,
+            ) &&
+            const DeepCollectionEquality().equals(other.groups, _this.groups) &&
+            const DeepCollectionEquality().equals(
+              other.services,
+              _this.services,
+            ) &&
+            const DeepCollectionEquality().equals(other.tags, _this.tags) &&
+            const DeepCollectionEquality().equals(
+              other.hobbies,
+              _this.hobbies,
+            ) &&
+            (identical(other.user, _this.user) || other.user == _this.user) &&
+            (identical(other.uid, _this.uid) || other.uid == _this.uid) &&
             const DeepCollectionEquality().equals(
               other.kodasHistory,
-              kodasHistory,
+              _this.kodasHistory,
             ) &&
             const DeepCollectionEquality().equals(
               other.attendanceHistory,
-              attendanceHistory,
+              _this.attendanceHistory,
             ) &&
             const DeepCollectionEquality().equals(
               other.confessionHistory,
-              confessionHistory,
+              _this.confessionHistory,
             ) &&
             const DeepCollectionEquality().equals(
               other.callHistory,
-              callHistory,
+              _this.callHistory,
             ) &&
             const DeepCollectionEquality().equals(
               other.visitHistory,
-              visitHistory,
+              _this.visitHistory,
             ) &&
             const DeepCollectionEquality().equals(
               other.editHistory,
-              editHistory,
+              _this.editHistory,
             ) &&
-            (identical(other.kodasHistoryAggregate, kodasHistoryAggregate) ||
-                other.kodasHistoryAggregate == kodasHistoryAggregate) &&
+            (identical(
+                  other.kodasHistoryAggregate,
+                  _this.kodasHistoryAggregate,
+                ) ||
+                other.kodasHistoryAggregate == _this.kodasHistoryAggregate) &&
             (identical(
                   other.attendanceHistoryAggregate,
-                  attendanceHistoryAggregate,
+                  _this.attendanceHistoryAggregate,
                 ) ||
                 other.attendanceHistoryAggregate ==
-                    attendanceHistoryAggregate) &&
+                    _this.attendanceHistoryAggregate) &&
             (identical(
                   other.confessionHistoryAggregate,
-                  confessionHistoryAggregate,
+                  _this.confessionHistoryAggregate,
                 ) ||
                 other.confessionHistoryAggregate ==
-                    confessionHistoryAggregate) &&
-            (identical(other.callHistoryAggregate, callHistoryAggregate) ||
-                other.callHistoryAggregate == callHistoryAggregate) &&
-            (identical(other.visitHistoryAggregate, visitHistoryAggregate) ||
-                other.visitHistoryAggregate == visitHistoryAggregate) &&
-            (identical(other.editHistoryAggregate, editHistoryAggregate) ||
-                other.editHistoryAggregate == editHistoryAggregate) &&
-            (identical(other.userCanEdit, userCanEdit) ||
-                other.userCanEdit == userCanEdit));
+                    _this.confessionHistoryAggregate) &&
+            (identical(
+                  other.callHistoryAggregate,
+                  _this.callHistoryAggregate,
+                ) ||
+                other.callHistoryAggregate == _this.callHistoryAggregate) &&
+            (identical(
+                  other.visitHistoryAggregate,
+                  _this.visitHistoryAggregate,
+                ) ||
+                other.visitHistoryAggregate == _this.visitHistoryAggregate) &&
+            (identical(
+                  other.editHistoryAggregate,
+                  _this.editHistoryAggregate,
+                ) ||
+                other.editHistoryAggregate == _this.editHistoryAggregate) &&
+            (identical(other.userCanEdit, _this.userCanEdit) ||
+                other.userCanEdit == _this.userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hashAll([
-    runtimeType,
-    id,
-    nationalId,
-    name,
-    address,
-    const DeepCollectionEquality().hash(contacts),
-    const DeepCollectionEquality().hash(familyContacts),
-    birthdate,
-    birthday,
-    gender,
-    isShammas,
-    shammasLevelId,
-    shammasLevel,
-    school,
-    schoolId,
-    college,
-    collegeId,
-    church,
-    churchId,
-    father,
-    fatherId,
-    workStatus,
-    job,
-    jobId,
-    jobDescription,
-    qualification,
-    qualificationId,
-    martialStatus,
-    personType,
-    personTypeId,
-    state,
-    stateId,
-    isServant,
-    servingChurch,
-    serviceType,
-    notes,
-    family,
-    familyId,
-    store,
-    storeId,
-    studyYear,
-    studyYearId,
-    color,
-    photoUpdatedAt,
-    blurhash,
-    lastConfession,
-    lastKodas,
-    lastAttendance,
-    lastCall,
-    lastVisit,
-    lastEdit,
-    dataCheck,
-    const DeepCollectionEquality().hash(classes),
-    const DeepCollectionEquality().hash(groups),
-    const DeepCollectionEquality().hash(services),
-    const DeepCollectionEquality().hash(tags),
-    const DeepCollectionEquality().hash(hobbies),
-    user,
-    uid,
-    const DeepCollectionEquality().hash(kodasHistory),
-    const DeepCollectionEquality().hash(attendanceHistory),
-    const DeepCollectionEquality().hash(confessionHistory),
-    const DeepCollectionEquality().hash(callHistory),
-    const DeepCollectionEquality().hash(visitHistory),
-    const DeepCollectionEquality().hash(editHistory),
-    kodasHistoryAggregate,
-    attendanceHistoryAggregate,
-    confessionHistoryAggregate,
-    callHistoryAggregate,
-    visitHistoryAggregate,
-    editHistoryAggregate,
-    userCanEdit,
-  ]);
+  int get hashCode {
+    final _this = this as Person;
+    return Object.hashAll([
+      runtimeType,
+      _this.id,
+      _this.nationalId,
+      _this.name,
+      _this.address,
+      const DeepCollectionEquality().hash(_this.contacts),
+      const DeepCollectionEquality().hash(_this.familyContacts),
+      _this.birthdate,
+      _this.birthday,
+      _this.gender,
+      _this.isShammas,
+      _this.shammasLevelId,
+      _this.shammasLevel,
+      _this.school,
+      _this.schoolId,
+      _this.college,
+      _this.collegeId,
+      _this.church,
+      _this.churchId,
+      _this.father,
+      _this.fatherId,
+      _this.workStatus,
+      _this.job,
+      _this.jobId,
+      _this.jobDescription,
+      _this.qualification,
+      _this.qualificationId,
+      _this.martialStatus,
+      _this.personType,
+      _this.personTypeId,
+      _this.state,
+      _this.stateId,
+      _this.isServant,
+      _this.servingChurch,
+      _this.serviceType,
+      _this.notes,
+      _this.family,
+      _this.familyId,
+      _this.store,
+      _this.storeId,
+      _this.studyYear,
+      _this.studyYearId,
+      _this.color,
+      _this.photoUpdatedAt,
+      _this.blurhash,
+      _this.lastConfession,
+      _this.lastKodas,
+      _this.lastAttendance,
+      _this.lastCall,
+      _this.lastVisit,
+      _this.lastEdit,
+      _this.dataCheck,
+      const DeepCollectionEquality().hash(_this.classes),
+      const DeepCollectionEquality().hash(_this.groups),
+      const DeepCollectionEquality().hash(_this.services),
+      const DeepCollectionEquality().hash(_this.tags),
+      const DeepCollectionEquality().hash(_this.hobbies),
+      _this.user,
+      _this.uid,
+      const DeepCollectionEquality().hash(_this.kodasHistory),
+      const DeepCollectionEquality().hash(_this.attendanceHistory),
+      const DeepCollectionEquality().hash(_this.confessionHistory),
+      const DeepCollectionEquality().hash(_this.callHistory),
+      const DeepCollectionEquality().hash(_this.visitHistory),
+      const DeepCollectionEquality().hash(_this.editHistory),
+      _this.kodasHistoryAggregate,
+      _this.attendanceHistoryAggregate,
+      _this.confessionHistoryAggregate,
+      _this.callHistoryAggregate,
+      _this.visitHistoryAggregate,
+      _this.editHistoryAggregate,
+      _this.userCanEdit,
+    ]);
+  }
 
   @override
   String toString() {
-    return 'Person(id: $id, nationalId: $nationalId, name: $name, address: $address, contacts: $contacts, familyContacts: $familyContacts, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, workStatus: $workStatus, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, martialStatus: $martialStatus, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, servingChurch: $servingChurch, serviceType: $serviceType, notes: $notes, family: $family, familyId: $familyId, store: $store, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastAttendance: $lastAttendance, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, dataCheck: $dataCheck, classes: $classes, groups: $groups, services: $services, tags: $tags, hobbies: $hobbies, user: $user, uid: $uid, kodasHistory: $kodasHistory, attendanceHistory: $attendanceHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, attendanceHistoryAggregate: $attendanceHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate, userCanEdit: $userCanEdit)';
+    final _this = this as Person;
+    return 'Person(id: ${_this.id}, nationalId: ${_this.nationalId}, name: ${_this.name}, address: ${_this.address}, contacts: ${_this.contacts}, familyContacts: ${_this.familyContacts}, birthdate: ${_this.birthdate}, birthday: ${_this.birthday}, gender: ${_this.gender}, isShammas: ${_this.isShammas}, shammasLevelId: ${_this.shammasLevelId}, shammasLevel: ${_this.shammasLevel}, school: ${_this.school}, schoolId: ${_this.schoolId}, college: ${_this.college}, collegeId: ${_this.collegeId}, church: ${_this.church}, churchId: ${_this.churchId}, father: ${_this.father}, fatherId: ${_this.fatherId}, workStatus: ${_this.workStatus}, job: ${_this.job}, jobId: ${_this.jobId}, jobDescription: ${_this.jobDescription}, qualification: ${_this.qualification}, qualificationId: ${_this.qualificationId}, martialStatus: ${_this.martialStatus}, personType: ${_this.personType}, personTypeId: ${_this.personTypeId}, state: ${_this.state}, stateId: ${_this.stateId}, isServant: ${_this.isServant}, servingChurch: ${_this.servingChurch}, serviceType: ${_this.serviceType}, notes: ${_this.notes}, family: ${_this.family}, familyId: ${_this.familyId}, store: ${_this.store}, storeId: ${_this.storeId}, studyYear: ${_this.studyYear}, studyYearId: ${_this.studyYearId}, color: ${_this.color}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, lastConfession: ${_this.lastConfession}, lastKodas: ${_this.lastKodas}, lastAttendance: ${_this.lastAttendance}, lastCall: ${_this.lastCall}, lastVisit: ${_this.lastVisit}, lastEdit: ${_this.lastEdit}, dataCheck: ${_this.dataCheck}, classes: ${_this.classes}, groups: ${_this.groups}, services: ${_this.services}, tags: ${_this.tags}, hobbies: ${_this.hobbies}, user: ${_this.user}, uid: ${_this.uid}, kodasHistory: ${_this.kodasHistory}, attendanceHistory: ${_this.attendanceHistory}, confessionHistory: ${_this.confessionHistory}, callHistory: ${_this.callHistory}, visitHistory: ${_this.visitHistory}, editHistory: ${_this.editHistory}, kodasHistoryAggregate: ${_this.kodasHistoryAggregate}, attendanceHistoryAggregate: ${_this.attendanceHistoryAggregate}, confessionHistoryAggregate: ${_this.confessionHistoryAggregate}, callHistoryAggregate: ${_this.callHistoryAggregate}, visitHistoryAggregate: ${_this.visitHistoryAggregate}, editHistoryAggregate: ${_this.editHistoryAggregate}, userCanEdit: ${_this.userCanEdit})';
   }
 }
 
@@ -399,6 +371,35 @@ abstract mixin class $PersonCopyWith<$Res> {
     HistoryAggregateData? visitHistoryAggregate,
     HistoryAggregateData? editHistoryAggregate,
   });
+
+  $AddressCopyWith<$Res>? get address;
+  $ShammasLevelCopyWith<$Res>? get shammasLevel;
+  $SchoolCopyWith<$Res>? get school;
+  $CollegeCopyWith<$Res>? get college;
+  $ChurchCopyWith<$Res>? get church;
+  $FatherCopyWith<$Res>? get father;
+  $JobCopyWith<$Res>? get job;
+  $QualificationCopyWith<$Res>? get qualification;
+  $PersonTypeCopyWith<$Res>? get personType;
+  $PersonStateCopyWith<$Res>? get state;
+  $ChurchCopyWith<$Res>? get servingChurch;
+  $FamilyCopyWith<$Res>? get family;
+  $StoreCopyWith<$Res>? get store;
+  $StudyYearCopyWith<$Res>? get studyYear;
+  $LastRecordedByInfoCopyWith<$Res>? get lastConfession;
+  $LastRecordedByInfoCopyWith<$Res>? get lastKodas;
+  $LastRecordedByInfoCopyWith<$Res>? get lastAttendance;
+  $LastRecordedByInfoCopyWith<$Res>? get lastCall;
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
+  $DataCheckCopyWith<$Res>? get dataCheck;
+  $UserCopyWith<$Res>? get user;
+  $HistoryAggregateDataCopyWith<$Res>? get kodasHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get confessionHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get callHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get visitHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get editHistoryAggregate;
 }
 
 /// @nodoc
@@ -773,5 +774,411 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
                   as HistoryAggregateData?,
       ),
     );
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressCopyWith<$Res>? get address {
+    if (_self.address == null) {
+      return null;
+    }
+
+    return $AddressCopyWith<$Res>(_self.address!, (value) {
+      return _then(_self.copyWith(address: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ShammasLevelCopyWith<$Res>? get shammasLevel {
+    if (_self.shammasLevel == null) {
+      return null;
+    }
+
+    return $ShammasLevelCopyWith<$Res>(_self.shammasLevel!, (value) {
+      return _then(_self.copyWith(shammasLevel: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SchoolCopyWith<$Res>? get school {
+    if (_self.school == null) {
+      return null;
+    }
+
+    return $SchoolCopyWith<$Res>(_self.school!, (value) {
+      return _then(_self.copyWith(school: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CollegeCopyWith<$Res>? get college {
+    if (_self.college == null) {
+      return null;
+    }
+
+    return $CollegeCopyWith<$Res>(_self.college!, (value) {
+      return _then(_self.copyWith(college: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ChurchCopyWith<$Res>? get church {
+    if (_self.church == null) {
+      return null;
+    }
+
+    return $ChurchCopyWith<$Res>(_self.church!, (value) {
+      return _then(_self.copyWith(church: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FatherCopyWith<$Res>? get father {
+    if (_self.father == null) {
+      return null;
+    }
+
+    return $FatherCopyWith<$Res>(_self.father!, (value) {
+      return _then(_self.copyWith(father: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $JobCopyWith<$Res>? get job {
+    if (_self.job == null) {
+      return null;
+    }
+
+    return $JobCopyWith<$Res>(_self.job!, (value) {
+      return _then(_self.copyWith(job: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $QualificationCopyWith<$Res>? get qualification {
+    if (_self.qualification == null) {
+      return null;
+    }
+
+    return $QualificationCopyWith<$Res>(_self.qualification!, (value) {
+      return _then(_self.copyWith(qualification: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PersonTypeCopyWith<$Res>? get personType {
+    if (_self.personType == null) {
+      return null;
+    }
+
+    return $PersonTypeCopyWith<$Res>(_self.personType!, (value) {
+      return _then(_self.copyWith(personType: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PersonStateCopyWith<$Res>? get state {
+    if (_self.state == null) {
+      return null;
+    }
+
+    return $PersonStateCopyWith<$Res>(_self.state!, (value) {
+      return _then(_self.copyWith(state: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ChurchCopyWith<$Res>? get servingChurch {
+    if (_self.servingChurch == null) {
+      return null;
+    }
+
+    return $ChurchCopyWith<$Res>(_self.servingChurch!, (value) {
+      return _then(_self.copyWith(servingChurch: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FamilyCopyWith<$Res>? get family {
+    if (_self.family == null) {
+      return null;
+    }
+
+    return $FamilyCopyWith<$Res>(_self.family!, (value) {
+      return _then(_self.copyWith(family: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StoreCopyWith<$Res>? get store {
+    if (_self.store == null) {
+      return null;
+    }
+
+    return $StoreCopyWith<$Res>(_self.store!, (value) {
+      return _then(_self.copyWith(store: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StudyYearCopyWith<$Res>? get studyYear {
+    if (_self.studyYear == null) {
+      return null;
+    }
+
+    return $StudyYearCopyWith<$Res>(_self.studyYear!, (value) {
+      return _then(_self.copyWith(studyYear: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastConfession {
+    if (_self.lastConfession == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastConfession!, (value) {
+      return _then(_self.copyWith(lastConfession: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastKodas {
+    if (_self.lastKodas == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastKodas!, (value) {
+      return _then(_self.copyWith(lastKodas: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastAttendance {
+    if (_self.lastAttendance == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastAttendance!, (value) {
+      return _then(_self.copyWith(lastAttendance: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastCall {
+    if (_self.lastCall == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastCall!, (value) {
+      return _then(_self.copyWith(lastCall: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
+    if (_self.lastVisit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastVisit!, (value) {
+      return _then(_self.copyWith(lastVisit: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DataCheckCopyWith<$Res>? get dataCheck {
+    if (_self.dataCheck == null) {
+      return null;
+    }
+
+    return $DataCheckCopyWith<$Res>(_self.dataCheck!, (value) {
+      return _then(_self.copyWith(dataCheck: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get user {
+    if (_self.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_self.user!, (value) {
+      return _then(_self.copyWith(user: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryAggregateDataCopyWith<$Res>? get kodasHistoryAggregate {
+    if (_self.kodasHistoryAggregate == null) {
+      return null;
+    }
+
+    return $HistoryAggregateDataCopyWith<$Res>(_self.kodasHistoryAggregate!, (
+      value,
+    ) {
+      return _then(_self.copyWith(kodasHistoryAggregate: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate {
+    if (_self.attendanceHistoryAggregate == null) {
+      return null;
+    }
+
+    return $HistoryAggregateDataCopyWith<$Res>(
+      _self.attendanceHistoryAggregate!,
+      (value) {
+        return _then(_self.copyWith(attendanceHistoryAggregate: value));
+      },
+    );
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryAggregateDataCopyWith<$Res>? get confessionHistoryAggregate {
+    if (_self.confessionHistoryAggregate == null) {
+      return null;
+    }
+
+    return $HistoryAggregateDataCopyWith<$Res>(
+      _self.confessionHistoryAggregate!,
+      (value) {
+        return _then(_self.copyWith(confessionHistoryAggregate: value));
+      },
+    );
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryAggregateDataCopyWith<$Res>? get callHistoryAggregate {
+    if (_self.callHistoryAggregate == null) {
+      return null;
+    }
+
+    return $HistoryAggregateDataCopyWith<$Res>(_self.callHistoryAggregate!, (
+      value,
+    ) {
+      return _then(_self.copyWith(callHistoryAggregate: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryAggregateDataCopyWith<$Res>? get visitHistoryAggregate {
+    if (_self.visitHistoryAggregate == null) {
+      return null;
+    }
+
+    return $HistoryAggregateDataCopyWith<$Res>(_self.visitHistoryAggregate!, (
+      value,
+    ) {
+      return _then(_self.copyWith(visitHistoryAggregate: value));
+    });
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryAggregateDataCopyWith<$Res>? get editHistoryAggregate {
+    if (_self.editHistoryAggregate == null) {
+      return null;
+    }
+
+    return $HistoryAggregateDataCopyWith<$Res>(_self.editHistoryAggregate!, (
+      value,
+    ) {
+      return _then(_self.copyWith(editHistoryAggregate: value));
+    });
   }
 }
