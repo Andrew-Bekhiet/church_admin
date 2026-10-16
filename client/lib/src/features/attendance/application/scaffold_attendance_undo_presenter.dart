@@ -1,7 +1,7 @@
 import 'package:church_admin/src/core/utils/globals.dart';
 import 'package:church_admin/src/features/attendance/application/attendance_undo_presenter.dart';
 import 'package:church_admin/src/features/attendance/application/attendance_undoable_change.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 final class ScaffoldAttendanceUndoPresenter implements AttendanceUndoPresenter {
   const ScaffoldAttendanceUndoPresenter();

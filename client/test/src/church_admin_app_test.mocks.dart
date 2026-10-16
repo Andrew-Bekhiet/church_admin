@@ -12,12 +12,12 @@ import 'package:church_admin/church_admin.dart' as _i4;
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_notifications_queries.dart'
     as _i6;
 import 'package:dio/dio.dart' as _i2;
-import 'package:flutter/material.dart' as _i8;
 import 'package:flutter/services.dart' as _i13;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     as _i14;
 import 'package:gql/ast.dart' as _i5;
 import 'package:graphql/client.dart' as _i3;
+import 'package:material_ui/material_ui.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i10;
 import 'package:package_info_plus/package_info_plus.dart' as _i15;

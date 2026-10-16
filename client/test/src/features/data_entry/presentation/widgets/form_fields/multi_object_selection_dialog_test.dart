@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../../fakes/fake_logging_service.dart';
@@ -28,23 +28,21 @@ void main() {
       MaterialApp(
         home: Builder(
           builder: (context) => TextButton(
-            onPressed: () => unawaited(
-              showDialog<Set<Person>>(
-                context: context,
-                builder: (context) => MultiObjectSelectionDialog<Person>(
-                  fieldLabel: 'مخدوم',
-                  selected: const {},
-                  listController: (search) => ViewableObjectListController(
-                    selectionController: SelectionController<Person>(),
-                    objectsPaginatableStream: PaginatableStream.simple(
-                      factory: (_) => Stream.value(
-                        const PaginatableStreamResponse(data: <Person>[]),
-                      ),
+            onPressed: () => showDialog<Set<Person>>(
+              context: context,
+              builder: (context) => MultiObjectSelectionDialog<Person>(
+                fieldLabel: 'مخدوم',
+                selected: const {},
+                listController: (search) => ViewableObjectListController(
+                  selectionController: SelectionController<Person>(),
+                  objectsPaginatableStream: PaginatableStream.simple(
+                    factory: (_) => Stream.value(
+                      const PaginatableStreamResponse(data: <Person>[]),
                     ),
-                    filterStream: search,
                   ),
-                  onCreateCustom: onCreateCustom,
+                  filterStream: search,
                 ),
+                onCreateCustom: onCreateCustom,
               ),
             ),
             child: const Text('open'),

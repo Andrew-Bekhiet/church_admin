@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Single-day KPIs are roster-derived, so a day with a roster but zero
 /// recorded attendance still shows its 0% KPIs and class breakdown; the empty

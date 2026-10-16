@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
 /// A weighted pie of attendance share per class: each slice is sized by how

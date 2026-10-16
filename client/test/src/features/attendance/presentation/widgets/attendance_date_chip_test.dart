@@ -1,8 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:clock/clock.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('AttendanceDateChip', () {
@@ -25,9 +24,7 @@ void main() {
     }) {
       return MaterialApp(
         localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
         ],
         supportedLocales: const [
           Locale('ar'),

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_ui/material_ui.dart';
 
 class MapsLinkDialog extends StatefulWidget {
   const MapsLinkDialog({super.key});

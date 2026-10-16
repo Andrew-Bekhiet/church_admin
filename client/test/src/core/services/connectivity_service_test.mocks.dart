@@ -11,8 +11,8 @@ import 'package:connectivity_plus/connectivity_plus.dart' as _i4;
 import 'package:connectivity_plus_platform_interface/connectivity_plus_platform_interface.dart'
     as _i6;
 import 'package:dio/dio.dart' as _i2;
-import 'package:flutter/material.dart' as _i9;
 import 'package:graphql/client.dart' as _i3;
+import 'package:material_ui/material_ui.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i8;
 

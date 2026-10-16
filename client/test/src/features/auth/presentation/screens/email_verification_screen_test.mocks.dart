@@ -10,7 +10,7 @@ import 'package:bloc/bloc.dart' as _i10;
 import 'package:church_admin/church_admin.dart' as _i3;
 import 'package:dio/dio.dart' as _i6;
 import 'package:flutter/foundation.dart' as _i5;
-import 'package:flutter/material.dart' as _i4;
+import 'package:flutter/widgets.dart' as _i4;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     as _i11;
 import 'package:go_router/src/state.dart' as _i12;

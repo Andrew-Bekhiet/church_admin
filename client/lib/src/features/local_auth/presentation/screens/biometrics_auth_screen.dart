@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class BiometricsAuthScreen extends StatefulWidget {
   final String? next;
@@ -53,12 +53,10 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
             current is BiometricsAuthWrongPassword,
         listener: (context, state) {
           _passwordText.clear();
-          unawaited(
-            showDialog<void>(
-              context: context,
-              builder: (context) =>
-                  const AlertDialog(title: Text('كلمة سر خاطئة!')),
-            ),
+          showDialog<void>(
+            context: context,
+            builder: (context) =>
+                const AlertDialog(title: Text('كلمة سر خاطئة!')),
           );
         },
         builder: (context, state) => Scaffold(

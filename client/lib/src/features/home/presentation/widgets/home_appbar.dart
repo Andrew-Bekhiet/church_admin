@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/home/presentation/widgets/snowflake_animation.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final HomeBloc homeBloc;

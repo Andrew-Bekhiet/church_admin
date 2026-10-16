@@ -1,5 +1,5 @@
 import 'package:church_admin/src/features/attendance/presentation/painters/attendance_check_painter.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AttendanceCheckIcon extends StatelessWidget {
   static const double _defaultSize = 24;

@@ -1,5 +1,5 @@
 import 'package:church_admin/src/features/attendance/presentation/painters/kodas_chalice_painter.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class KodasChaliceIcon extends StatelessWidget {
   static const double _defaultSize = 24;

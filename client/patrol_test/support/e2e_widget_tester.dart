@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Polling helpers for a live app, where `pumpAndSettle` never returns while
 /// a progress indicator or a live query keeps scheduling frames.

@@ -3,8 +3,8 @@ import 'package:church_admin/src/features/user_management/presentation/widgets/e
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_identity_fields.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_code_tile.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_person_link_field.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'e2e_app.dart';
 import 'e2e_widget_tester.dart';
