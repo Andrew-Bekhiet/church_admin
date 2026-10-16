@@ -12,18 +12,10 @@ class BirthdayFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //2025-07-05T
-    final [month, day] =
-        value?.split('-') ??
-        DateTime.now()
-            .toIso8601String()
-            .split('T')
-            .first
-            .substring(5, 10)
-            .split('-');
-
-    final parsedMonth = int.tryParse(month);
-    final parsedDay = int.tryParse(day);
+    final [parsedMonth, parsedDay] = switch (value?.split('-')) {
+      [final month, final day] => [int.tryParse(month), int.tryParse(day)],
+      _ => [DateTime.now().month, DateTime.now().day],
+    };
 
     return Row(
       children: [
