@@ -81,10 +81,8 @@ void main() {
         Builder(
           builder: (context) => Scaffold(
             body: TextButton(
-              onPressed: () => unawaited(
-                Navigator.of(context).push<void>(
-                  MaterialPageRoute(builder: (_) => editor),
-                ),
+              onPressed: () => Navigator.of(context).push<void>(
+                MaterialPageRoute(builder: (_) => editor),
               ),
               child: const Text('open'),
             ),

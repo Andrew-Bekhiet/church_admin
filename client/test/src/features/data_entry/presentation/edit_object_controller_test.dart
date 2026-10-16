@@ -87,30 +87,28 @@ void main() {
                 wrapper: materialAppWrapper(),
               );
 
-              unawaited(
-                tester
-                    .firstState<NavigatorState>(find.byType(Navigator))
-                    .push(
-                      MaterialPageRoute(
-                        builder: (context) => Form(
-                          canPop: false,
-                          onPopInvokedWithResult: (didPop, result) async {
-                            if (didPop) return;
+              tester
+                  .firstState<NavigatorState>(find.byType(Navigator))
+                  .push(
+                    MaterialPageRoute(
+                      builder: (context) => Form(
+                        canPop: false,
+                        onPopInvokedWithResult: (didPop, result) async {
+                          if (didPop) return;
 
-                            final navigator = Navigator.of(context);
-                            if (await unit.confirmExit(context)) {
-                              navigator.pop(result);
-                            }
-                          },
-                          key: unit.formKey,
-                          child: Scaffold(
-                            appBar: AppBar(),
-                            body: const Text('Route 2'),
-                          ),
+                          final navigator = Navigator.of(context);
+                          if (await unit.confirmExit(context)) {
+                            navigator.pop(result);
+                          }
+                        },
+                        key: unit.formKey,
+                        child: Scaffold(
+                          appBar: AppBar(),
+                          body: const Text('Route 2'),
                         ),
                       ),
                     ),
-              );
+                  );
               await tester.pumpAndSettle();
 
               await tester.tap(find.byType(BackButton));
@@ -133,30 +131,28 @@ void main() {
                 wrapper: materialAppWrapper(),
               );
 
-              unawaited(
-                tester
-                    .firstState<NavigatorState>(find.byType(Navigator))
-                    .push(
-                      MaterialPageRoute(
-                        builder: (context) => Form(
-                          canPop: false,
-                          onPopInvokedWithResult: (didPop, result) async {
-                            if (didPop) return;
+              tester
+                  .firstState<NavigatorState>(find.byType(Navigator))
+                  .push(
+                    MaterialPageRoute(
+                      builder: (context) => Form(
+                        canPop: false,
+                        onPopInvokedWithResult: (didPop, result) async {
+                          if (didPop) return;
 
-                            final navigator = Navigator.of(context);
-                            if (await unit.confirmExit(context)) {
-                              navigator.pop(result);
-                            }
-                          },
-                          key: unit.formKey,
-                          child: Scaffold(
-                            appBar: AppBar(),
-                            body: const Text('Route 2'),
-                          ),
+                          final navigator = Navigator.of(context);
+                          if (await unit.confirmExit(context)) {
+                            navigator.pop(result);
+                          }
+                        },
+                        key: unit.formKey,
+                        child: Scaffold(
+                          appBar: AppBar(),
+                          body: const Text('Route 2'),
                         ),
                       ),
                     ),
-              );
+                  );
 
               await tester.pumpAndSettle();
 
@@ -226,20 +222,18 @@ void main() {
                 ),
                 wrapper: materialAppWrapper(),
               );
-              unawaited(
-                tester
-                    .firstState<NavigatorState>(find.byType(Navigator))
-                    .push(
-                      MaterialPageRoute(
-                        builder: (context) => Scaffold(
-                          body: ElevatedButton(
-                            onPressed: () => unit.delete(context),
-                            child: const Text(''),
-                          ),
+              tester
+                  .firstState<NavigatorState>(find.byType(Navigator))
+                  .push(
+                    MaterialPageRoute(
+                      builder: (context) => Scaffold(
+                        body: ElevatedButton(
+                          onPressed: () => unit.delete(context),
+                          child: const Text(''),
                         ),
                       ),
                     ),
-              );
+                  );
               await tester.pumpAndSettle();
 
               await tester.tap(find.byType(ElevatedButton));
