@@ -17,11 +17,14 @@ class TabbedTotalCountLabel extends StatelessWidget {
     final tabs = unitByController.entries.toList();
 
     return TotalCountLabel(
-      countStream: tabController.animation!.asStream().switchMap((index) {
-        final MapEntry(key: controller, value: unit) = tabs[index.round()];
+      countStream: switch (tabController.animation) {
+        final animation? => animation.asStream().switchMap((index) {
+          final MapEntry(key: controller, value: unit) = tabs[index.round()];
 
-        return controller.totalCountStream.map((count) => '$count $unit');
-      }),
+          return controller.totalCountStream.map((count) => '$count $unit');
+        }),
+        null => const Stream.empty(),
+      },
     );
   }
 }

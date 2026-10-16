@@ -11,6 +11,8 @@ class ViewableObjectAppBarPhoto extends StatelessWidget {
   final bool circleCrop;
   final BorderRadius? borderRadius;
   final Widget? overrideImage;
+  final void Function()? onTap;
+
   const ViewableObjectAppBarPhoto({
     required this.photoAlign,
     required this.borderRadius,
@@ -55,6 +57,4 @@ class ViewableObjectAppBarPhoto extends StatelessWidget {
       ),
     );
   }
-
-  final void Function()? onTap;
 }

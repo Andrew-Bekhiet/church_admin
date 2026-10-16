@@ -14,12 +14,12 @@ class ImageObjectPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (blurhash != null) {
+    if (blurhash case final blurhash?) {
       return Image(
         height: size,
         width: size,
         image: BlurHashImage(
-          blurhash!,
+          blurhash,
           scale: 32 / size,
         ),
         frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {

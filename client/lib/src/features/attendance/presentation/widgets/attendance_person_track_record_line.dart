@@ -4,6 +4,9 @@ import 'package:intl/intl.dart' hide TextDirection;
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class AttendancePersonTrackRecordLine extends StatelessWidget {
+  static const int _relativeDateMaxDays = 30;
+  static const int _daysPerWeek = 7;
+
   final PersonMeetingAttendanceAnalysis? analysis;
   final int staleWeeks;
 
@@ -28,9 +31,8 @@ class AttendancePersonTrackRecordLine extends StatelessWidget {
         ? colorScheme.error
         : null;
 
-    final textStyle = themeData.textTheme.bodySmall!.copyWith(
-      fontWeight: FontWeight.w400,
-    );
+    final textStyle = (themeData.textTheme.bodySmall ?? const TextStyle())
+        .copyWith(fontWeight: FontWeight.w400);
 
     return DefaultTextStyle(
       style: textStyle,
@@ -99,10 +101,10 @@ class AttendancePersonTrackRecordLine extends StatelessWidget {
 
     if (daysSince <= 0) return 'اليوم';
     if (daysSince == 1) return 'أمس';
-    if (daysSince <= 30) {
-      return daysSince < 7
+    if (daysSince <= _relativeDateMaxDays) {
+      return daysSince < _daysPerWeek
           ? 'منذ $daysSince يوم'
-          : 'منذ ${daysSince ~/ 7} أسبوع';
+          : 'منذ ${daysSince ~/ _daysPerWeek} أسبوع';
     }
 
     return DateFormat.yMd('ar').format(date);
