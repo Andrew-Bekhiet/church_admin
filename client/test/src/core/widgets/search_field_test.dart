@@ -1,10 +1,11 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart' hide materialAppWrapper;
+import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rxdart_ext/single.dart';
 
+import '../../material_ui_test_app.dart';
 import '../../utils.dart';
 
 void main() {
@@ -51,7 +52,7 @@ void main() {
                 searchSink: sink,
               ),
             ),
-            wrapper: materialAppWrapper(
+            wrapper: MaterialUiTestApp.wrapper(
               theme: ThemingService.getDefault(
                 isDarkOverride: false,
                 greatFeastThemeOverride: false,

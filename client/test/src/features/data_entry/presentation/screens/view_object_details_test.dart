@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart' hide materialAppWrapper;
+import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod/src/framework.dart';
 
-import '../../../../utils.dart';
+import '../../../../material_ui_test_app.dart';
 import 'view_object_details_test.mocks.dart';
 
 @GenerateNiceMocks(
@@ -241,7 +241,7 @@ Future<void> _pumpWidget(
           ),
     ),
     surfaceSize: surfaceSize,
-    wrapper: materialAppWrapper(
+    wrapper: MaterialUiTestApp.wrapper(
       localeOverrides: [const Locale('ar', 'EG')],
       localizations: [
         ...GlobalMaterialLocalizations.delegates,

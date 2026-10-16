@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart' hide materialAppWrapper;
+import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
@@ -11,7 +11,7 @@ import 'package:mockito/mockito.dart';
 import 'package:rxdart_ext/single.dart';
 import 'package:timeago/timeago.dart';
 
-import '../../../../utils.dart';
+import '../../../../material_ui_test_app.dart';
 import 'history_property_test.mocks.dart';
 
 @GenerateNiceMocks([
@@ -46,7 +46,7 @@ void main() {
         Scaffold(
           body: historyProperty,
         ),
-        wrapper: materialAppWrapper(),
+        wrapper: MaterialUiTestApp.wrapper(),
       );
       await tester.tap(
         find.descendant(
@@ -113,7 +113,7 @@ void main() {
           Scaffold(
             body: historyProperty,
           ),
-          wrapper: materialAppWrapper(),
+          wrapper: MaterialUiTestApp.wrapper(),
         );
 
         await tester.tap(
