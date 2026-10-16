@@ -8,7 +8,7 @@ To stream a whole collection rather than the default page size, raise the limit 
 
 ## Where the rest lives
 
-Each area's rules load when you work under it. Every nested file is `AGENTS.md` with a `CLAUDE.md` symlink, like this one.
+Each area's rules load when you work under it. The repo carries only `AGENTS.md` files, read by Claude Code 2.1.277+ (built-in `agents-md` mod, default `instructionFiles: claude-md-or-agents-md`) and Codex alike. Do not add a `CLAUDE.md` next to one: Claude Code then reads the `CLAUDE.md` and skips that directory's `AGENTS.md`.
 
 - `client/AGENTS.md` — Dart & Flutter structure, idioms, tests, analyze/format/test commands (also binds `packages/`).
 - `client/patrol_test/AGENTS.md` — E2E journeys.
