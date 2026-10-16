@@ -197,11 +197,9 @@ class LoggingService {
     BuildContext context,
     LogRecord record,
   ) async {
-    unawaited(
-      showDialog(
-        context: context,
-        builder: (context) => CAErrorDialog(exception: record.error!),
-      ),
+    showDialog(
+      context: context,
+      builder: (context) => CAErrorDialog(exception: record.error!),
     );
 
     await error(record);
