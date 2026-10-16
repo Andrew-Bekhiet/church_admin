@@ -128,9 +128,6 @@ void main() {
           ),
         );
       },
-      // fancy_password_field 2 merges its text field's semantics, which Flutter
-      // 3.47 asserts against; 3.0 fixes it but needs material_ui
-      skip: true,
     );
 
     testWidgets(
