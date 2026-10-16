@@ -8,8 +8,8 @@ import 'dart:async' as _i6;
 
 import 'package:church_admin/church_admin.dart' as _i4;
 import 'package:dio/dio.dart' as _i3;
-import 'package:flutter/material.dart' as _i5;
 import 'package:graphql/client.dart' as _i2;
+import 'package:material_ui/material_ui.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

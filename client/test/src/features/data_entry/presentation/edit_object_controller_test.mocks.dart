@@ -9,8 +9,8 @@ import 'dart:async' as _i6;
 import 'package:church_admin/church_admin.dart' as _i5;
 import 'package:cloud_functions/cloud_functions.dart' as _i2;
 import 'package:dio/dio.dart' as _i3;
-import 'package:flutter/material.dart' as _i8;
 import 'package:graphql/client.dart' as _i4;
+import 'package:material_ui/material_ui.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i7;
 
