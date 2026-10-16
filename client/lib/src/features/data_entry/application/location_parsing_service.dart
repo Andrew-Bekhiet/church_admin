@@ -7,6 +7,16 @@ class LocationParsingService {
   static LocationParsingService get I =>
       globalProviderContainer.read(locationParsingServiceProvider);
 
+  static const _appleMapsLocationParametersByPrecision = [
+    'll',
+    'coordinate',
+    'destination',
+    'daddr',
+    'center',
+    'sll',
+    'q',
+  ];
+
   const LocationParsingService();
 
   bool isSupportedLocationUri(Uri uri) => switch (uri) {
@@ -16,7 +26,7 @@ class LocationParsingService {
       host: 'www.google.com' || 'google.com',
       pathSegments: ['maps', ...],
     ) ||
-    Uri(scheme: 'https', host: 'maps.google.com') ||
+    Uri(scheme: 'https', host: 'maps.google.com' || 'maps.apple.com') ||
     Uri(scheme: 'https', host: 'maps.app.goo.gl', pathSegments: [_]) ||
     Uri(scheme: 'https', host: 'goo.gl', pathSegments: ['maps', _]) => true,
     _ => false,
@@ -25,37 +35,79 @@ class LocationParsingService {
   Future<Point?> maybeParseLocationUri(Uri uri) async {
     try {
       switch (uri) {
-        case Uri(scheme: 'geo', :final String path)
-            when path.split(',').length == 2 &&
-                double.tryParse(path.split(',').first) != null &&
-                double.tryParse(path.split(',')[1]) != null:
-          final [lat, lng] = path.split(',');
+        case Uri(scheme: 'geo', :final path):
+          return _maybeParseCoordinates(path);
 
-          return Point(double.parse(lat), double.parse(lng));
+        case Uri(
+                  scheme: 'https',
+                  host: 'www.google.com' || 'google.com',
+                  pathSegments: ['maps', ...],
+                  queryParameters: {'q': final String location},
+                ) ||
+                Uri(
+                  scheme: 'https',
+                  host: 'www.google.com' || 'google.com',
+                  pathSegments: ['maps', ...],
+                  queryParameters: {'query': final String location},
+                )
+            when _maybeParseCoordinates(location) != null:
+          return _maybeParseCoordinates(location);
+
+        case Uri(
+          scheme: 'https',
+          host: 'www.google.com' || 'google.com',
+          pathSegments: ['maps', 'dir', ...final segments],
+        ):
+          return segments
+              .where(
+                (segment) =>
+                    !segment.startsWith('@') && !segment.startsWith('data='),
+              )
+              .map(_maybeParseCoordinates)
+              .lastOrNull;
 
         case Uri(
               scheme: 'https',
               host: 'www.google.com' || 'google.com',
-              pathSegments: ['maps', 'search', final String location],
+              pathSegments: [
+                'maps',
+                'search' || 'place',
+                final String location,
+                ...,
+              ],
             )
-            when location.split(',').length == 2 &&
-                double.tryParse(location.split(',').first) != null &&
-                double.tryParse(location.split(',')[1]) != null:
-          final [lat, lng] = location.split(',');
+            when _maybeParseCoordinates(location) != null:
+          return _maybeParseCoordinates(location);
 
-          return Point(double.parse(lat), double.parse(lng));
+        case Uri(
+          scheme: 'https',
+          host: 'www.google.com' || 'google.com',
+          pathSegments: ['maps', ...final segments],
+        ):
+          return segments
+              .where((segment) => segment.startsWith('@'))
+              .map((camera) => _maybeParseCoordinates(camera.substring(1)))
+              .firstOrNull;
 
         case Uri(
               scheme: 'https',
               host: 'maps.google.com',
               queryParameters: {'q': final String location},
             )
-            when location.split(',').length == 2 &&
-                double.tryParse(location.split(',').first) != null &&
-                double.tryParse(location.split(',')[1]) != null:
-          final [lat, lng] = location.split(',');
+            when _maybeParseCoordinates(location) != null:
+          return _maybeParseCoordinates(location);
 
-          return Point(double.parse(lat), double.parse(lng));
+        case Uri(
+          scheme: 'https',
+          host: 'maps.apple.com',
+          :final queryParameters,
+        ):
+          return _appleMapsLocationParametersByPrecision
+              .map((name) => queryParameters[name])
+              .nonNulls
+              .map(_maybeParseCoordinates)
+              .nonNulls
+              .firstOrNull;
 
         case Uri(scheme: 'https', host: 'maps.app.goo.gl', pathSegments: [_]) ||
             Uri(scheme: 'https', host: 'goo.gl', pathSegments: ['maps', _]):
@@ -92,4 +144,12 @@ class LocationParsingService {
       return null;
     }
   }
+
+  Point? _maybeParseCoordinates(String text) => switch (text.split(',')) {
+    [final latitude, final longitude, ...] => Point.tryParse(
+      latitude,
+      longitude,
+    ),
+    _ => null,
+  };
 }
