@@ -38,7 +38,6 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
             .toSet(),
       );
 
-  // Ignored for readability
   const PermissionsSet.fromSet(super.permissions);
 
   String toHumanReadableString() {

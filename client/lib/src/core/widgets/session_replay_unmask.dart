@@ -10,7 +10,6 @@ class SessionReplayUnmask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => PostHogUnmaskWidget(
-    // Sentry has no stable unmask API; this is the only place that depends on it.
     child: SentryUnmask(child),
   );
 }
