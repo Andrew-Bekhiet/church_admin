@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  const SessionReplayUnmask(child: _LoginTitle()),
+                  const SessionReplayUnmask(child: LoginTitle()),
                   SessionReplayUnmask(
                     child: SizedBox(
                       height: screenSize.shortestSide,
@@ -179,30 +179,5 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       }
     }
-  }
-}
-
-class _LoginTitle extends StatelessWidget {
-  const _LoginTitle();
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return SafeArea(
-      child: Container(
-        margin: const EdgeInsets.all(16),
-        child: Center(
-          child: Text(
-            'كنيسة السيدة العذراء مريم',
-            style: theme.textTheme.displayMedium?.copyWith(
-              color: theme.textTheme.displayMedium?.color?.withValues(
-                alpha: 1,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }

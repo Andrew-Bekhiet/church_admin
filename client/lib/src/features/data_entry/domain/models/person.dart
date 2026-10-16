@@ -656,6 +656,8 @@ class Person extends ViewableWithIDAndImage
   }
 }
 
+// Extends the generated private base, which only this library can see
+// ignore: solid_lints/avoid_multiple_declarations_per_file
 class PersonFields extends _PersonFields {
   FieldMetadata<String> get uid => FieldMetadata<String>(
     parentType: Person,

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/attendance/application/attendance_undo_presenter.dart';
 import 'package:church_admin/src/features/attendance/application/live_records.dart';
+import 'package:church_admin/src/features/attendance/application/scaffold_attendance_undo_presenter.dart';
 import 'package:flutter/material.dart' show DateUtils;
 import 'package:flutter_bloc/flutter_bloc.dart';
 

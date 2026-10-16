@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -123,7 +122,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                 label: const Text('إضافة ترتيب'),
               ),
               const Divider(),
-              _QueryLimitWidget(
+              AdvancedSearchLimitField(
                 limitStream: controller.limitStream,
                 onChangeLimit: _onChangeLimit,
               ),
@@ -229,44 +228,5 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
 
     await viewableObjectListController.dispose();
     await searchQuery.close();
-  }
-}
-
-class _QueryLimitWidget extends StatelessWidget {
-  final void Function(int?) onChangeLimit;
-  final Stream<int?> limitStream;
-  const _QueryLimitWidget({
-    required this.onChangeLimit,
-    required this.limitStream,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<int?>(
-      stream: limitStream,
-      builder: (context, limitData) {
-        if (limitData.hasData) {
-          return TextFormField(
-            initialValue: limitData.data?.toString(),
-            decoration: InputDecoration(
-              labelText: 'الحد الأقصى',
-              suffixIcon: IconButton(
-                onPressed: () => onChangeLimit(null),
-                icon: const Icon(Symbols.clear),
-              ),
-            ),
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            onChanged: (v) => onChangeLimit(int.tryParse(v)),
-          );
-        }
-
-        return ElevatedButton.icon(
-          onPressed: () => onChangeLimit(100),
-          icon: const Icon(Symbols.maximize),
-          label: const Text('إضافة حد أقصى'),
-        );
-      },
-    );
   }
 }

@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:rxdart/rxdart.dart';
 
 class ViewService extends StatefulWidget {
   final Service? service;
@@ -224,26 +223,13 @@ class _ViewServiceState extends State<ViewService> {
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
-      bottomNavBarBuilder: (context, tabController) => TotalCountLabel(
-        countStream: tabController.animation!.asStream().switchMap(
-          (index) {
-            final currentIndex = index.round();
-
-            return switch (currentIndex) {
-              0 => _classesController,
-              1 => _groupsController,
-              2 => _personsController,
-              _ => throw UnimplementedError(),
-            }.totalCountStream.map(
-              (c) => switch (currentIndex) {
-                0 => '$c فصل',
-                1 => '$c مجموعة',
-                2 => '$c مخدوم',
-                _ => throw UnimplementedError(),
-              },
-            );
-          },
-        ),
+      bottomNavBarBuilder: (context, tabController) => TabbedTotalCountLabel(
+        tabController: tabController,
+        unitByController: {
+          _classesController: 'فصل',
+          _groupsController: 'مجموعة',
+          _personsController: 'مخدوم',
+        },
       ),
       floatingActionButtonBuilder: (context, tabController, service) =>
           SwitchingFAB.fromTabController(

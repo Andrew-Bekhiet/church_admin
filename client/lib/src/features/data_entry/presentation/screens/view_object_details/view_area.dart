@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:rxdart/rxdart.dart';
 
 class ViewArea extends StatefulWidget {
   final Area? area;
@@ -221,28 +220,14 @@ class _ViewAreaState extends State<ViewArea> {
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
-      bottomNavBarBuilder: (context, tabController) => TotalCountLabel(
-        countStream: tabController.animation!.asStream().switchMap(
-          (index) {
-            final currentIndex = index.round();
-
-            return switch (currentIndex) {
-              0 => _streetsController,
-              1 => _familiesController,
-              2 => _personsController,
-              3 => _storesController,
-              _ => throw UnimplementedError(),
-            }.totalCountStream.map(
-              (c) => switch (currentIndex) {
-                0 => '$c شارع',
-                1 => '$c عائلة',
-                2 => '$c مخدوم',
-                3 => '$c متجر',
-                _ => throw UnimplementedError(),
-              },
-            );
-          },
-        ),
+      bottomNavBarBuilder: (context, tabController) => TabbedTotalCountLabel(
+        tabController: tabController,
+        unitByController: {
+          _streetsController: 'شارع',
+          _familiesController: 'عائلة',
+          _personsController: 'مخدوم',
+          _storesController: 'متجر',
+        },
       ),
       floatingActionButtonBuilder: (context, tabController, area) =>
           SwitchingFAB.fromTabController(

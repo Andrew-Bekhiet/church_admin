@@ -7,6 +7,7 @@ final Map<String, Object Function(Json)> fromJsonByTypeName = {
   'EditStoreExtra': EditStoreExtra.fromJson,
   'PersonAnalysisExtra': PersonAnalysisExtra.fromJson,
   'UserAnalysisExtra': UserAnalysisExtra.fromJson,
+  'MeetingsAnalysisExtra': MeetingsAnalysisExtra.fromJson,
   'PersonEditIntent': PersonEditIntent.fromJson,
   'EditClassExtra': EditClassExtra.fromJson,
   'EditGroupExtra': EditGroupExtra.fromJson,
@@ -41,27 +42,5 @@ class ChurchAdminRouterExtraEncoder
       input.typeName,
       input.toJson(),
     ];
-  }
-}
-
-class ChurchAdminRouterExtraDecoder
-    extends Converter<List?, SerializableExtra?> {
-  const ChurchAdminRouterExtraDecoder();
-
-  @override
-  SerializableExtra? convert(List? input) {
-    if (input == null) {
-      return null;
-    }
-
-    final [typeName, json] = input;
-
-    final result = fromJsonByTypeName[typeName]?.call(json);
-
-    if (result == null) {
-      throw Exception('Failed to decode $input with typeName $typeName');
-    }
-
-    return result as SerializableExtra?;
   }
 }
