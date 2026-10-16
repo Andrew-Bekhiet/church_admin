@@ -29,7 +29,7 @@ class _MapsLinkDialogState extends State<MapsLinkDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('تحديد الموقع من لينك Google Maps'),
+      title: const Text('تحديد الموقع من رابط خرائط'),
       content: TextField(
         key: MapsLinkDialogKeys.linkField,
         autofocus: true,
@@ -44,7 +44,7 @@ class _MapsLinkDialogState extends State<MapsLinkDialog> {
         },
         onSubmitted: Navigator.of(context).pop,
         decoration: InputDecoration(
-          hintText: 'https://maps.app.goo.gl/...',
+          hintText: 'رابط خرائط أو Plus Code',
           helperText: _pastedFromClipboard
               ? 'تم لصق الرابط من الحافظة، يمكنك تغييره'
               : null,
