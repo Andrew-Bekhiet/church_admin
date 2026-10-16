@@ -58,38 +58,38 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
             subtitle: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                _DataSelectionTile(
+                GeomapOptionsDataSelectionTile(
                   title: 'المناطق',
                   selected: stagingMapOptions.selectedAreas,
                   onSelect: _selectAreas,
                 ),
-                _DataSelectionTile(
+                GeomapOptionsDataSelectionTile(
                   title: 'الشوارع',
                   selected: stagingMapOptions.selectedStreets,
                   onSelect: _selectStreets,
                 ),
-                _DataSelectionTile(
+                GeomapOptionsDataSelectionTile(
                   title: 'العائلات',
                   selected: stagingMapOptions.selectedFamilies,
                   onSelect: _selectFamilies,
                 ),
-                _DataSelectionTile(
+                GeomapOptionsDataSelectionTile(
                   title: 'المتاجر',
                   selected: stagingMapOptions.selectedStores,
                   onSelect: _selectStores,
                 ),
                 const Divider(thickness: 1),
-                _DataSelectionTile(
+                GeomapOptionsDataSelectionTile(
                   title: 'الخدمات',
                   selected: stagingMapOptions.selectedServices,
                   onSelect: _selectServices,
                 ),
-                _DataSelectionTile(
+                GeomapOptionsDataSelectionTile(
                   title: 'الفصول',
                   selected: stagingMapOptions.selectedClasses,
                   onSelect: _selectClasses,
                 ),
-                _DataSelectionTile(
+                GeomapOptionsDataSelectionTile(
                   title: 'المجموعات',
                   selected: stagingMapOptions.selectedGroups,
                   onSelect: _selectGroups,
@@ -311,30 +311,5 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     });
 
     return null;
-  }
-}
-
-class _DataSelectionTile extends StatelessWidget {
-  final String title;
-  final Set<ViewableWithID> selected;
-  final Future<void> Function() onSelect;
-  const _DataSelectionTile({
-    required this.title,
-    required this.selected,
-    required this.onSelect,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(title),
-      subtitle: selected.isEmpty
-          ? const Text('الكل')
-          : Text(selected.take(10).map((e) => e.name).join(',')),
-      trailing: TextButton(
-        onPressed: onSelect,
-        child: const Text('اختيار'),
-      ),
-    );
   }
 }
