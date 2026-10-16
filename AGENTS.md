@@ -4,13 +4,13 @@ Conventions for anyone (human or agent) writing code here. Rules are stated as r
 
 ## Layout
 
-| Path                         | What it is                                                                                          |
-| ---------------------------- | --------------------------------------------------------------------------------------------------- |
-| `client/`                    | Flutter app. Riverpod providers + BLoC, GoRouter, `graphql_codegen` against Hasura.                 |
+| Path                         | What it is                                                                                                                     |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `client/`                    | Flutter app. Riverpod providers + BLoC, GoRouter, `graphql_codegen` against Hasura.                                            |
 | `packages/`                  | Dart packages the client depends on by path, each with its own lockfile: `church_admin_annotations`, `church_admin_generator`. |
-| `server/hasura/`             | Hasura metadata + Postgres migrations (`migrations/default/<timestamp>_<name>/{up,down}.sql`).      |
-| `server/firebase/functions/` | TypeScript Cloud Functions: auth blocking functions, callables, storage proxy, export.              |
-| `server/postgres/`           | Postgres image (`ghcr.io/railwayapp-templates/timescale-postgis-ssl:pg17-ts2.17`) and init scripts. |
+| `server/hasura/`             | Hasura metadata + Postgres migrations (`migrations/default/<timestamp>_<name>/{up,down}.sql`).                                 |
+| `server/firebase/functions/` | TypeScript Cloud Functions: auth blocking functions, callables, storage proxy, export.                                         |
+| `server/postgres/`           | Postgres image (`ghcr.io/railwayapp-templates/timescale-postgis-ssl:pg17-ts2.17`) and init scripts.                            |
 
 Organise files by feature or domain, not by type. All backend access goes through the database service module (`client/lib/src/core/services/database/`) with `graphql_codegen`-generated operations — features never issue raw GraphQL themselves.
 
@@ -193,6 +193,8 @@ dart analyze --plugins --fatal-infos
 Keep `--fatal-infos`. Most solid_lints diagnostics are `info`, so a plain run exits 0 with findings outstanding.
 
 **Run `dart format lib test patrol_test` from `client/` before committing**, covering every tracked Dart directory, not only the directory you touched. Locally `dart format .` also walks the untracked `build/` directory and reports about 68 files as changed while git stays clean. It also normalises a mixed-ending file back to one style. Formatting a single subdirectory is how the mixed endings above survived review. CI fails on unformatted code (`dart format --set-exit-if-changed . || { git diff; exit 1; }` in `static-analysis.yml`, which prints the diff).
+
+**Tests**: prefer using the test bundle and running full test suite from `client/` with `fvm flutter test --dart-define CI=true test/test_bundle.dart $(scripts/generate_test_bundle.sh)` if possible, because it's much faster that running with `fvm flutter test --dart-define CI=true` for full test suite. See [flutter/flutter#90225](https://github.com/flutter/flutter/issues/90225)
 
 ## CI workflows
 
