@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'meeting_roster_entry.dart';
@@ -9,16 +9,11 @@ part of 'meeting_roster_entry.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$MeetingRosterEntry {
-  bool get asServant;
-  Person get person;
-  AttendanceRecord? get attendanceRecord;
-  List<String> get phones;
-  PersonMeetingAttendanceAnalysis? get personAttendanceAnalysis;
-
   /// Create a copy of MeetingRosterEntry
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -31,35 +26,42 @@ mixin _$MeetingRosterEntry {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as MeetingRosterEntry;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is MeetingRosterEntry &&
-            (identical(other.asServant, asServant) ||
-                other.asServant == asServant) &&
-            (identical(other.person, person) || other.person == person) &&
-            (identical(other.attendanceRecord, attendanceRecord) ||
-                other.attendanceRecord == attendanceRecord) &&
-            const DeepCollectionEquality().equals(other.phones, phones) &&
+            (identical(other.asServant, _this.asServant) ||
+                other.asServant == _this.asServant) &&
+            (identical(other.person, _this.person) ||
+                other.person == _this.person) &&
+            (identical(other.attendanceRecord, _this.attendanceRecord) ||
+                other.attendanceRecord == _this.attendanceRecord) &&
+            const DeepCollectionEquality().equals(other.phones, _this.phones) &&
             (identical(
                   other.personAttendanceAnalysis,
-                  personAttendanceAnalysis,
+                  _this.personAttendanceAnalysis,
                 ) ||
-                other.personAttendanceAnalysis == personAttendanceAnalysis));
+                other.personAttendanceAnalysis ==
+                    _this.personAttendanceAnalysis));
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    asServant,
-    person,
-    attendanceRecord,
-    const DeepCollectionEquality().hash(phones),
-    personAttendanceAnalysis,
-  );
+  int get hashCode {
+    final _this = this as MeetingRosterEntry;
+    return Object.hash(
+      runtimeType,
+      _this.asServant,
+      _this.person,
+      _this.attendanceRecord,
+      const DeepCollectionEquality().hash(_this.phones),
+      _this.personAttendanceAnalysis,
+    );
+  }
 
   @override
   String toString() {
-    return 'MeetingRosterEntry(asServant: $asServant, person: $person, attendanceRecord: $attendanceRecord, phones: $phones, personAttendanceAnalysis: $personAttendanceAnalysis)';
+    final _this = this as MeetingRosterEntry;
+    return 'MeetingRosterEntry(asServant: ${_this.asServant}, person: ${_this.person}, attendanceRecord: ${_this.attendanceRecord}, phones: ${_this.phones}, personAttendanceAnalysis: ${_this.personAttendanceAnalysis})';
   }
 }
 
@@ -77,6 +79,9 @@ abstract mixin class $MeetingRosterEntryCopyWith<$Res> {
     PersonMeetingAttendanceAnalysis? personAttendanceAnalysis,
     List<String> phones,
   });
+
+  $PersonCopyWith<$Res> get person;
+  $AttendanceRecordCopyWith<$Res>? get attendanceRecord;
 }
 
 /// @nodoc
@@ -122,5 +127,29 @@ class _$MeetingRosterEntryCopyWithImpl<$Res>
                   as List<String>,
       ),
     );
+  }
+
+  /// Create a copy of MeetingRosterEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PersonCopyWith<$Res> get person {
+    return $PersonCopyWith<$Res>(_self.person, (value) {
+      return _then(_self.copyWith(person: value));
+    });
+  }
+
+  /// Create a copy of MeetingRosterEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AttendanceRecordCopyWith<$Res>? get attendanceRecord {
+    if (_self.attendanceRecord == null) {
+      return null;
+    }
+
+    return $AttendanceRecordCopyWith<$Res>(_self.attendanceRecord!, (value) {
+      return _then(_self.copyWith(attendanceRecord: value));
+    });
   }
 }

@@ -7,6 +7,7 @@ import '../../persons/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
 import '../../stores/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';
+
 import 'package:gql/ast.dart';
 
 class Variables_Query_homeSearch {
@@ -520,9 +521,8 @@ class _CopyWithImpl_Query_homeSearch<TRes>
     )
     _fn,
   ) => call(
-    areas: _fn(
-      _instance.areas.map((e) => CopyWith_Fragment_Area(e, (i) => i)),
-    ).toList(),
+    areas: _fn(_instance.areas.map((e) => CopyWith_Fragment_Area(e, (i) => i)))
+        .toList(),
   );
 }
 

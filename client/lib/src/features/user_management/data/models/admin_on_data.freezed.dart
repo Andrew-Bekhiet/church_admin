@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'admin_on_data.dart';
@@ -9,34 +9,11 @@ part of 'admin_on_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$AdminOnData {
-  String get permissionId;
-  Area? get area;
-  bool? get areaAllowExport;
-  bool? get areaAllowEdit;
-  bool? get areaAdminOnUsers;
-  Service? get service;
-  StudyYear? get serviceStudyYearData;
-  bool? get serviceGender;
-  bool? get serviceAllowExport;
-  bool? get serviceAllowEdit;
-  bool? get serviceAllowRecordAttendance;
-  bool? get serviceAllowRecordServantsAttendance;
-  bool? get serviceAdminOnUsers;
-  bool? get serviceWriteRelatedFamilies;
-  List<Class> get classes;
-  Group? get group;
-  bool? get groupAllowExport;
-  bool? get groupAllowEdit;
-  bool? get groupAllowRecordAttendance;
-  bool? get groupAllowRecordServantsAttendance;
-  bool? get groupAdminOnUsers;
-  bool? get groupWriteRelatedFamilies;
-  User? get user;
-
   /// Create a copy of AdminOnData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -46,107 +23,121 @@ mixin _$AdminOnData {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as AdminOnData;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is AdminOnData &&
-            (identical(other.permissionId, permissionId) ||
-                other.permissionId == permissionId) &&
-            (identical(other.area, area) || other.area == area) &&
-            (identical(other.areaAllowExport, areaAllowExport) ||
-                other.areaAllowExport == areaAllowExport) &&
-            (identical(other.areaAllowEdit, areaAllowEdit) ||
-                other.areaAllowEdit == areaAllowEdit) &&
-            (identical(other.areaAdminOnUsers, areaAdminOnUsers) ||
-                other.areaAdminOnUsers == areaAdminOnUsers) &&
-            (identical(other.service, service) || other.service == service) &&
-            (identical(other.serviceStudyYearData, serviceStudyYearData) ||
-                other.serviceStudyYearData == serviceStudyYearData) &&
-            (identical(other.serviceGender, serviceGender) ||
-                other.serviceGender == serviceGender) &&
-            (identical(other.serviceAllowExport, serviceAllowExport) ||
-                other.serviceAllowExport == serviceAllowExport) &&
-            (identical(other.serviceAllowEdit, serviceAllowEdit) ||
-                other.serviceAllowEdit == serviceAllowEdit) &&
+            (identical(other.permissionId, _this.permissionId) ||
+                other.permissionId == _this.permissionId) &&
+            (identical(other.area, _this.area) || other.area == _this.area) &&
+            (identical(other.areaAllowExport, _this.areaAllowExport) ||
+                other.areaAllowExport == _this.areaAllowExport) &&
+            (identical(other.areaAllowEdit, _this.areaAllowEdit) ||
+                other.areaAllowEdit == _this.areaAllowEdit) &&
+            (identical(other.areaAdminOnUsers, _this.areaAdminOnUsers) ||
+                other.areaAdminOnUsers == _this.areaAdminOnUsers) &&
+            (identical(other.service, _this.service) ||
+                other.service == _this.service) &&
+            (identical(
+                  other.serviceStudyYearData,
+                  _this.serviceStudyYearData,
+                ) ||
+                other.serviceStudyYearData == _this.serviceStudyYearData) &&
+            (identical(other.serviceGender, _this.serviceGender) ||
+                other.serviceGender == _this.serviceGender) &&
+            (identical(other.serviceAllowExport, _this.serviceAllowExport) ||
+                other.serviceAllowExport == _this.serviceAllowExport) &&
+            (identical(other.serviceAllowEdit, _this.serviceAllowEdit) ||
+                other.serviceAllowEdit == _this.serviceAllowEdit) &&
             (identical(
                   other.serviceAllowRecordAttendance,
-                  serviceAllowRecordAttendance,
+                  _this.serviceAllowRecordAttendance,
                 ) ||
                 other.serviceAllowRecordAttendance ==
-                    serviceAllowRecordAttendance) &&
+                    _this.serviceAllowRecordAttendance) &&
             (identical(
                   other.serviceAllowRecordServantsAttendance,
-                  serviceAllowRecordServantsAttendance,
+                  _this.serviceAllowRecordServantsAttendance,
                 ) ||
                 other.serviceAllowRecordServantsAttendance ==
-                    serviceAllowRecordServantsAttendance) &&
-            (identical(other.serviceAdminOnUsers, serviceAdminOnUsers) ||
-                other.serviceAdminOnUsers == serviceAdminOnUsers) &&
+                    _this.serviceAllowRecordServantsAttendance) &&
+            (identical(other.serviceAdminOnUsers, _this.serviceAdminOnUsers) ||
+                other.serviceAdminOnUsers == _this.serviceAdminOnUsers) &&
             (identical(
                   other.serviceWriteRelatedFamilies,
-                  serviceWriteRelatedFamilies,
+                  _this.serviceWriteRelatedFamilies,
                 ) ||
                 other.serviceWriteRelatedFamilies ==
-                    serviceWriteRelatedFamilies) &&
-            const DeepCollectionEquality().equals(other.classes, classes) &&
-            (identical(other.group, group) || other.group == group) &&
-            (identical(other.groupAllowExport, groupAllowExport) ||
-                other.groupAllowExport == groupAllowExport) &&
-            (identical(other.groupAllowEdit, groupAllowEdit) ||
-                other.groupAllowEdit == groupAllowEdit) &&
+                    _this.serviceWriteRelatedFamilies) &&
+            const DeepCollectionEquality().equals(
+              other.classes,
+              _this.classes,
+            ) &&
+            (identical(other.group, _this.group) ||
+                other.group == _this.group) &&
+            (identical(other.groupAllowExport, _this.groupAllowExport) ||
+                other.groupAllowExport == _this.groupAllowExport) &&
+            (identical(other.groupAllowEdit, _this.groupAllowEdit) ||
+                other.groupAllowEdit == _this.groupAllowEdit) &&
             (identical(
                   other.groupAllowRecordAttendance,
-                  groupAllowRecordAttendance,
+                  _this.groupAllowRecordAttendance,
                 ) ||
                 other.groupAllowRecordAttendance ==
-                    groupAllowRecordAttendance) &&
+                    _this.groupAllowRecordAttendance) &&
             (identical(
                   other.groupAllowRecordServantsAttendance,
-                  groupAllowRecordServantsAttendance,
+                  _this.groupAllowRecordServantsAttendance,
                 ) ||
                 other.groupAllowRecordServantsAttendance ==
-                    groupAllowRecordServantsAttendance) &&
-            (identical(other.groupAdminOnUsers, groupAdminOnUsers) ||
-                other.groupAdminOnUsers == groupAdminOnUsers) &&
+                    _this.groupAllowRecordServantsAttendance) &&
+            (identical(other.groupAdminOnUsers, _this.groupAdminOnUsers) ||
+                other.groupAdminOnUsers == _this.groupAdminOnUsers) &&
             (identical(
                   other.groupWriteRelatedFamilies,
-                  groupWriteRelatedFamilies,
+                  _this.groupWriteRelatedFamilies,
                 ) ||
-                other.groupWriteRelatedFamilies == groupWriteRelatedFamilies) &&
-            (identical(other.user, user) || other.user == user));
+                other.groupWriteRelatedFamilies ==
+                    _this.groupWriteRelatedFamilies) &&
+            (identical(other.user, _this.user) || other.user == _this.user));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hashAll([
-    runtimeType,
-    permissionId,
-    area,
-    areaAllowExport,
-    areaAllowEdit,
-    areaAdminOnUsers,
-    service,
-    serviceStudyYearData,
-    serviceGender,
-    serviceAllowExport,
-    serviceAllowEdit,
-    serviceAllowRecordAttendance,
-    serviceAllowRecordServantsAttendance,
-    serviceAdminOnUsers,
-    serviceWriteRelatedFamilies,
-    const DeepCollectionEquality().hash(classes),
-    group,
-    groupAllowExport,
-    groupAllowEdit,
-    groupAllowRecordAttendance,
-    groupAllowRecordServantsAttendance,
-    groupAdminOnUsers,
-    groupWriteRelatedFamilies,
-    user,
-  ]);
+  int get hashCode {
+    final _this = this as AdminOnData;
+    return Object.hashAll([
+      runtimeType,
+      _this.permissionId,
+      _this.area,
+      _this.areaAllowExport,
+      _this.areaAllowEdit,
+      _this.areaAdminOnUsers,
+      _this.service,
+      _this.serviceStudyYearData,
+      _this.serviceGender,
+      _this.serviceAllowExport,
+      _this.serviceAllowEdit,
+      _this.serviceAllowRecordAttendance,
+      _this.serviceAllowRecordServantsAttendance,
+      _this.serviceAdminOnUsers,
+      _this.serviceWriteRelatedFamilies,
+      const DeepCollectionEquality().hash(_this.classes),
+      _this.group,
+      _this.groupAllowExport,
+      _this.groupAllowEdit,
+      _this.groupAllowRecordAttendance,
+      _this.groupAllowRecordServantsAttendance,
+      _this.groupAdminOnUsers,
+      _this.groupWriteRelatedFamilies,
+      _this.user,
+    ]);
+  }
 
   @override
   String toString() {
-    return 'AdminOnData(permissionId: $permissionId, area: $area, areaAllowExport: $areaAllowExport, areaAllowEdit: $areaAllowEdit, areaAdminOnUsers: $areaAdminOnUsers, service: $service, serviceStudyYearData: $serviceStudyYearData, serviceGender: $serviceGender, serviceAllowExport: $serviceAllowExport, serviceAllowEdit: $serviceAllowEdit, serviceAllowRecordAttendance: $serviceAllowRecordAttendance, serviceAllowRecordServantsAttendance: $serviceAllowRecordServantsAttendance, serviceAdminOnUsers: $serviceAdminOnUsers, serviceWriteRelatedFamilies: $serviceWriteRelatedFamilies, classes: $classes, group: $group, groupAllowExport: $groupAllowExport, groupAllowEdit: $groupAllowEdit, groupAllowRecordAttendance: $groupAllowRecordAttendance, groupAllowRecordServantsAttendance: $groupAllowRecordServantsAttendance, groupAdminOnUsers: $groupAdminOnUsers, groupWriteRelatedFamilies: $groupWriteRelatedFamilies, user: $user)';
+    final _this = this as AdminOnData;
+    return 'AdminOnData(permissionId: ${_this.permissionId}, area: ${_this.area}, areaAllowExport: ${_this.areaAllowExport}, areaAllowEdit: ${_this.areaAllowEdit}, areaAdminOnUsers: ${_this.areaAdminOnUsers}, service: ${_this.service}, serviceStudyYearData: ${_this.serviceStudyYearData}, serviceGender: ${_this.serviceGender}, serviceAllowExport: ${_this.serviceAllowExport}, serviceAllowEdit: ${_this.serviceAllowEdit}, serviceAllowRecordAttendance: ${_this.serviceAllowRecordAttendance}, serviceAllowRecordServantsAttendance: ${_this.serviceAllowRecordServantsAttendance}, serviceAdminOnUsers: ${_this.serviceAdminOnUsers}, serviceWriteRelatedFamilies: ${_this.serviceWriteRelatedFamilies}, classes: ${_this.classes}, group: ${_this.group}, groupAllowExport: ${_this.groupAllowExport}, groupAllowEdit: ${_this.groupAllowEdit}, groupAllowRecordAttendance: ${_this.groupAllowRecordAttendance}, groupAllowRecordServantsAttendance: ${_this.groupAllowRecordServantsAttendance}, groupAdminOnUsers: ${_this.groupAdminOnUsers}, groupWriteRelatedFamilies: ${_this.groupWriteRelatedFamilies}, user: ${_this.user})';
   }
 }
 
@@ -182,6 +173,12 @@ abstract mixin class $AdminOnDataCopyWith<$Res> {
     bool? groupWriteRelatedFamilies,
     User? user,
   });
+
+  $AreaCopyWith<$Res>? get area;
+  $ServiceCopyWith<$Res>? get service;
+  $StudyYearCopyWith<$Res>? get serviceStudyYearData;
+  $GroupCopyWith<$Res>? get group;
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -318,5 +315,75 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
                   as User?,
       ),
     );
+  }
+
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AreaCopyWith<$Res>? get area {
+    if (_self.area == null) {
+      return null;
+    }
+
+    return $AreaCopyWith<$Res>(_self.area!, (value) {
+      return _then(_self.copyWith(area: value));
+    });
+  }
+
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ServiceCopyWith<$Res>? get service {
+    if (_self.service == null) {
+      return null;
+    }
+
+    return $ServiceCopyWith<$Res>(_self.service!, (value) {
+      return _then(_self.copyWith(service: value));
+    });
+  }
+
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StudyYearCopyWith<$Res>? get serviceStudyYearData {
+    if (_self.serviceStudyYearData == null) {
+      return null;
+    }
+
+    return $StudyYearCopyWith<$Res>(_self.serviceStudyYearData!, (value) {
+      return _then(_self.copyWith(serviceStudyYearData: value));
+    });
+  }
+
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $GroupCopyWith<$Res>? get group {
+    if (_self.group == null) {
+      return null;
+    }
+
+    return $GroupCopyWith<$Res>(_self.group!, (value) {
+      return _then(_self.copyWith(group: value));
+    });
+  }
+
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get user {
+    if (_self.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_self.user!, (value) {
+      return _then(_self.copyWith(user: value));
+    });
   }
 }

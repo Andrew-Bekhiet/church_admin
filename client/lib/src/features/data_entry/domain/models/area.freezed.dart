@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'area.dart';
@@ -9,21 +9,11 @@ part of 'area.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Area {
-  String get id;
-  String get name;
-  Polygon? get bounds;
-  Color? get color;
-  DateTime? get photoUpdatedAt;
-  String? get blurhash;
-  LastRecordedByInfo? get lastVisit;
-  LastRecordedByInfo? get lastEdit;
-  List<User>? get adminUsers;
-  bool get userCanEdit;
-
   /// Create a copy of Area
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -33,48 +23,55 @@ mixin _$Area {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as Area;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Area &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.bounds, bounds) || other.bounds == bounds) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
-                other.photoUpdatedAt == photoUpdatedAt) &&
-            (identical(other.blurhash, blurhash) ||
-                other.blurhash == blurhash) &&
-            (identical(other.lastVisit, lastVisit) ||
-                other.lastVisit == lastVisit) &&
-            (identical(other.lastEdit, lastEdit) ||
-                other.lastEdit == lastEdit) &&
+            (identical(other.id, _this.id) || other.id == _this.id) &&
+            (identical(other.name, _this.name) || other.name == _this.name) &&
+            (identical(other.bounds, _this.bounds) ||
+                other.bounds == _this.bounds) &&
+            (identical(other.color, _this.color) ||
+                other.color == _this.color) &&
+            (identical(other.photoUpdatedAt, _this.photoUpdatedAt) ||
+                other.photoUpdatedAt == _this.photoUpdatedAt) &&
+            (identical(other.blurhash, _this.blurhash) ||
+                other.blurhash == _this.blurhash) &&
+            (identical(other.lastVisit, _this.lastVisit) ||
+                other.lastVisit == _this.lastVisit) &&
+            (identical(other.lastEdit, _this.lastEdit) ||
+                other.lastEdit == _this.lastEdit) &&
             const DeepCollectionEquality().equals(
               other.adminUsers,
-              adminUsers,
+              _this.adminUsers,
             ) &&
-            (identical(other.userCanEdit, userCanEdit) ||
-                other.userCanEdit == userCanEdit));
+            (identical(other.userCanEdit, _this.userCanEdit) ||
+                other.userCanEdit == _this.userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    bounds,
-    color,
-    photoUpdatedAt,
-    blurhash,
-    lastVisit,
-    lastEdit,
-    const DeepCollectionEquality().hash(adminUsers),
-    userCanEdit,
-  );
+  int get hashCode {
+    final _this = this as Area;
+    return Object.hash(
+      runtimeType,
+      _this.id,
+      _this.name,
+      _this.bounds,
+      _this.color,
+      _this.photoUpdatedAt,
+      _this.blurhash,
+      _this.lastVisit,
+      _this.lastEdit,
+      const DeepCollectionEquality().hash(_this.adminUsers),
+      _this.userCanEdit,
+    );
+  }
 
   @override
   String toString() {
-    return 'Area(id: $id, name: $name, bounds: $bounds, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastVisit: $lastVisit, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
+    final _this = this as Area;
+    return 'Area(id: ${_this.id}, name: ${_this.name}, bounds: ${_this.bounds}, color: ${_this.color}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, lastVisit: ${_this.lastVisit}, lastEdit: ${_this.lastEdit}, adminUsers: ${_this.adminUsers}, userCanEdit: ${_this.userCanEdit})';
   }
 }
 
@@ -95,6 +92,9 @@ abstract mixin class $AreaCopyWith<$Res> {
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
   });
+
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
 /// @nodoc
@@ -164,5 +164,33 @@ class _$AreaCopyWithImpl<$Res> implements $AreaCopyWith<$Res> {
                   as List<User>?,
       ),
     );
+  }
+
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
+    if (_self.lastVisit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastVisit!, (value) {
+      return _then(_self.copyWith(lastVisit: value));
+    });
+  }
+
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
   }
 }

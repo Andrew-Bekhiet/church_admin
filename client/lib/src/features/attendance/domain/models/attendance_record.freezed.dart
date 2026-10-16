@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'attendance_record.dart';
@@ -9,19 +9,11 @@ part of 'attendance_record.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$AttendanceRecord {
-  String get id;
-  String get meetingId;
-  Meeting? get meeting;
-  String get personId;
-  Person? get person;
-  DateTime get datetime;
-  bool get asServant;
-  User? get recordedByUser;
-
   /// Create a copy of AttendanceRecord
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -34,41 +26,48 @@ mixin _$AttendanceRecord {
 
   @override
   bool operator ==(Object other) {
+    final _this = this as AttendanceRecord;
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is AttendanceRecord &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.meetingId, meetingId) ||
-                other.meetingId == meetingId) &&
-            (identical(other.meeting, meeting) || other.meeting == meeting) &&
-            (identical(other.personId, personId) ||
-                other.personId == personId) &&
-            (identical(other.person, person) || other.person == person) &&
-            (identical(other.datetime, datetime) ||
-                other.datetime == datetime) &&
-            (identical(other.asServant, asServant) ||
-                other.asServant == asServant) &&
-            (identical(other.recordedByUser, recordedByUser) ||
-                other.recordedByUser == recordedByUser));
+            (identical(other.id, _this.id) || other.id == _this.id) &&
+            (identical(other.meetingId, _this.meetingId) ||
+                other.meetingId == _this.meetingId) &&
+            (identical(other.meeting, _this.meeting) ||
+                other.meeting == _this.meeting) &&
+            (identical(other.personId, _this.personId) ||
+                other.personId == _this.personId) &&
+            (identical(other.person, _this.person) ||
+                other.person == _this.person) &&
+            (identical(other.datetime, _this.datetime) ||
+                other.datetime == _this.datetime) &&
+            (identical(other.asServant, _this.asServant) ||
+                other.asServant == _this.asServant) &&
+            (identical(other.recordedByUser, _this.recordedByUser) ||
+                other.recordedByUser == _this.recordedByUser));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    meetingId,
-    meeting,
-    personId,
-    person,
-    datetime,
-    asServant,
-    recordedByUser,
-  );
+  int get hashCode {
+    final _this = this as AttendanceRecord;
+    return Object.hash(
+      runtimeType,
+      _this.id,
+      _this.meetingId,
+      _this.meeting,
+      _this.personId,
+      _this.person,
+      _this.datetime,
+      _this.asServant,
+      _this.recordedByUser,
+    );
+  }
 
   @override
   String toString() {
-    return 'AttendanceRecord(id: $id, meetingId: $meetingId, meeting: $meeting, personId: $personId, person: $person, datetime: $datetime, asServant: $asServant, recordedByUser: $recordedByUser)';
+    final _this = this as AttendanceRecord;
+    return 'AttendanceRecord(id: ${_this.id}, meetingId: ${_this.meetingId}, meeting: ${_this.meeting}, personId: ${_this.personId}, person: ${_this.person}, datetime: ${_this.datetime}, asServant: ${_this.asServant}, recordedByUser: ${_this.recordedByUser})';
   }
 }
 
@@ -89,6 +88,10 @@ abstract mixin class $AttendanceRecordCopyWith<$Res> {
     Person? person,
     User? recordedByUser,
   });
+
+  $MeetingCopyWith<$Res>? get meeting;
+  $PersonCopyWith<$Res>? get person;
+  $UserCopyWith<$Res>? get recordedByUser;
 }
 
 /// @nodoc
@@ -149,5 +152,47 @@ class _$AttendanceRecordCopyWithImpl<$Res>
                   as User?,
       ),
     );
+  }
+
+  /// Create a copy of AttendanceRecord
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MeetingCopyWith<$Res>? get meeting {
+    if (_self.meeting == null) {
+      return null;
+    }
+
+    return $MeetingCopyWith<$Res>(_self.meeting!, (value) {
+      return _then(_self.copyWith(meeting: value));
+    });
+  }
+
+  /// Create a copy of AttendanceRecord
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PersonCopyWith<$Res>? get person {
+    if (_self.person == null) {
+      return null;
+    }
+
+    return $PersonCopyWith<$Res>(_self.person!, (value) {
+      return _then(_self.copyWith(person: value));
+    });
+  }
+
+  /// Create a copy of AttendanceRecord
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get recordedByUser {
+    if (_self.recordedByUser == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_self.recordedByUser!, (value) {
+      return _then(_self.copyWith(recordedByUser: value));
+    });
   }
 }
