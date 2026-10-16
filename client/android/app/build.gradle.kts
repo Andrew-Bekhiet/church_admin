@@ -16,7 +16,7 @@ dependencies {
 
 android {
     namespace = "com.AndroidQuartz.church_admin"
-    compileSdk = 36
+    compileSdk = 37
     ndkVersion = "28.2.13676358"
 
     compileOptions {
@@ -27,7 +27,7 @@ android {
 
     defaultConfig {
         applicationId = "com.AndroidQuartz.church_admin"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
