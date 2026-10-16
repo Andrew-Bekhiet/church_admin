@@ -15,6 +15,7 @@ import '../../../../../fakes/mock_image_url_cache_service.dart';
 import '../../../../../fakes/mock_metadata_dao.dart';
 import '../../../../../fakes/mock_user_preferences_service.dart';
 import '../../../../../fakes/mock_viewable_object_service.dart';
+import '../../../../../material_ui_test_app.dart';
 import '../../../../../utils.dart';
 
 void main() {
@@ -39,8 +40,8 @@ void main() {
     String enteredName,
   ) async {
     await tester.pumpWidget(
-      materialAppWithThemeAndLocale()(
-        EditFamily(family: widowedFamily(status: status)),
+      MaterialUiTestApp.withThemeAndLocale(
+        child: EditFamily(family: widowedFamily(status: status)),
       ),
     );
     await tester.pumpAndSettle();

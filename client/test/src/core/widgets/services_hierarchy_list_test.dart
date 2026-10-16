@@ -4,14 +4,13 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart_ext/single.dart';
 
-import '../../utils.dart';
+import '../../material_ui_test_app.dart';
 import 'services_hierarchy_list_test.mocks.dart';
 
 @GenerateNiceMocks(
@@ -36,11 +35,12 @@ void main() {
         objectsPaginatableStream: mock,
       );
 
-      await tester.pumpWidgetBuilder(
-        ServicesHierarchyList(
-          listController: viewableObjectListController,
+      await tester.pumpWidget(
+        MaterialUiTestApp.withThemeAndLocale(
+          child: ServicesHierarchyList(
+            listController: viewableObjectListController,
+          ),
         ),
-        wrapper: materialAppWithThemeAndLocale(),
       );
 
       expect(find.text('Class 1'), findsNothing);
@@ -92,62 +92,63 @@ void main() {
         objectsPaginatableStream: mock,
       );
 
-      await tester.pumpWidgetBuilder(
-        ServicesHierarchyList(
-          classBuilder:
-              (
-                context, {
-                required $class,
-                required service,
-                required studyYear,
-              }) => IgnorePointer(
-                child: Column(
-                  key: ValueKey($class.name),
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ViewableObjectWidget($class),
-                    ViewableObjectWidget(service),
-                    ViewableObjectWidget(studyYear),
-                  ],
+      await tester.pumpWidget(
+        MaterialUiTestApp.withThemeAndLocale(
+          child: ServicesHierarchyList(
+            classBuilder:
+                (
+                  context, {
+                  required $class,
+                  required service,
+                  required studyYear,
+                }) => IgnorePointer(
+                  child: Column(
+                    key: ValueKey($class.name),
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ViewableObjectWidget($class),
+                      ViewableObjectWidget(service),
+                      ViewableObjectWidget(studyYear),
+                    ],
+                  ),
                 ),
-              ),
-          groupBuilder: (p0, {required group, required service}) =>
-              IgnorePointer(
-                child: Column(
-                  key: ValueKey(group.name),
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ViewableObjectWidget(group),
-                    ViewableObjectWidget(service),
-                  ],
+            groupBuilder: (p0, {required group, required service}) =>
+                IgnorePointer(
+                  child: Column(
+                    key: ValueKey(group.name),
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ViewableObjectWidget(group),
+                      ViewableObjectWidget(service),
+                    ],
+                  ),
                 ),
-              ),
-          serviceTrailingBuilder:
-              (
-                context,
-                service, {
-                onLongPress,
-                onTap,
-                subtitle,
-                trailing,
-              }) => Icon(
-                Symbols.ac_unit,
-                key: ValueKey(service.name),
-              ),
-          studyYearBuilder: (p0, {required service, required studyYear}) =>
-              IgnorePointer(
-                child: Column(
-                  key: ValueKey(studyYear.name),
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ViewableObjectWidget(service),
-                    ViewableObjectWidget(studyYear),
-                  ],
+            serviceTrailingBuilder:
+                (
+                  context,
+                  service, {
+                  onLongPress,
+                  onTap,
+                  subtitle,
+                  trailing,
+                }) => Icon(
+                  Symbols.ac_unit,
+                  key: ValueKey(service.name),
                 ),
-              ),
-          listController: viewableObjectListController,
+            studyYearBuilder: (p0, {required service, required studyYear}) =>
+                IgnorePointer(
+                  child: Column(
+                    key: ValueKey(studyYear.name),
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ViewableObjectWidget(service),
+                      ViewableObjectWidget(studyYear),
+                    ],
+                  ),
+                ),
+            listController: viewableObjectListController,
+          ),
         ),
-        wrapper: materialAppWithThemeAndLocale(),
       );
 
       expect(find.byKey(const Key('Class 1')), findsNothing);

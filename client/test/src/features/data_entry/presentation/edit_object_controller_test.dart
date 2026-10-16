@@ -5,7 +5,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -81,11 +80,12 @@ void main() {
             (tester) async {
               final unit = createEditObjectController();
 
-              await tester.pumpWidgetBuilder(
-                const Scaffold(
-                  body: Text('Route 1'),
+              await tester.pumpWidget(
+                const MaterialUiTestApp(
+                  child: Scaffold(
+                    body: Text('Route 1'),
+                  ),
                 ),
-                wrapper: MaterialUiTestApp.wrapper(),
               );
 
               tester
@@ -125,11 +125,12 @@ void main() {
             (tester) async {
               final unit = createEditObjectController();
 
-              await tester.pumpWidgetBuilder(
-                const Scaffold(
-                  body: Text('Route 1'),
+              await tester.pumpWidget(
+                const MaterialUiTestApp(
+                  child: Scaffold(
+                    body: Text('Route 1'),
+                  ),
                 ),
-                wrapper: MaterialUiTestApp.wrapper(),
               );
 
               tester
@@ -192,9 +193,8 @@ void main() {
             (tester) async {
               final unit = createEditObjectController();
 
-              await tester.pumpWidgetBuilder(
-                const Scaffold(body: Text('Route 1')),
-                wrapper: MaterialUiTestApp.wrapper(),
+              await tester.pumpWidget(
+                const MaterialUiTestApp(child: Scaffold(body: Text('Route 1'))),
               );
 
               expect(
@@ -217,11 +217,12 @@ void main() {
                 onUpdate: (_, _) async => null,
               );
 
-              await tester.pumpWidgetBuilder(
-                const Scaffold(
-                  body: Placeholder(),
+              await tester.pumpWidget(
+                const MaterialUiTestApp(
+                  child: Scaffold(
+                    body: Placeholder(),
+                  ),
                 ),
-                wrapper: MaterialUiTestApp.wrapper(),
               );
               tester
                   .firstState<NavigatorState>(find.byType(Navigator))
@@ -289,11 +290,15 @@ void main() {
                     onDelete: (_) async {},
                   );
 
-                  await tester.pumpWidgetBuilder(
-                    Scaffold(
-                      body: Form(key: unit.formKey, child: const Placeholder()),
+                  await tester.pumpWidget(
+                    MaterialUiTestApp(
+                      child: Scaffold(
+                        body: Form(
+                          key: unit.formKey,
+                          child: const Placeholder(),
+                        ),
+                      ),
                     ),
-                    wrapper: MaterialUiTestApp.wrapper(),
                   );
 
                   unawaited(
@@ -343,11 +348,15 @@ void main() {
                     onDelete: (_) async {},
                   );
 
-                  await tester.pumpWidgetBuilder(
-                    Scaffold(
-                      body: Form(key: unit.formKey, child: const Placeholder()),
+                  await tester.pumpWidget(
+                    MaterialUiTestApp(
+                      child: Scaffold(
+                        body: Form(
+                          key: unit.formKey,
+                          child: const Placeholder(),
+                        ),
+                      ),
                     ),
-                    wrapper: MaterialUiTestApp.wrapper(),
                   );
 
                   unawaited(
@@ -396,23 +405,24 @@ void main() {
                 onDelete: (_) async {},
               );
 
-              await tester.pumpWidgetBuilder(
-                Scaffold(
-                  body: Form(
-                    key: unit.formKey,
-                    child: FormField(
-                      validator: (_) {
-                        validated = true;
-                        return;
-                      },
-                      onSaved: (_) {
-                        saved = true;
-                      },
-                      builder: (context) => const Placeholder(),
+              await tester.pumpWidget(
+                MaterialUiTestApp(
+                  child: Scaffold(
+                    body: Form(
+                      key: unit.formKey,
+                      child: FormField(
+                        validator: (_) {
+                          validated = true;
+                          return;
+                        },
+                        onSaved: (_) {
+                          saved = true;
+                        },
+                        builder: (context) => const Placeholder(),
+                      ),
                     ),
                   ),
                 ),
-                wrapper: MaterialUiTestApp.wrapper(),
               );
 
               unawaited(
@@ -433,11 +443,12 @@ void main() {
                 afterCreate: (person) => afterCreateCalled = true,
               );
 
-              await tester.pumpWidgetBuilder(
-                Scaffold(
-                  body: Form(key: unit.formKey, child: const Placeholder()),
+              await tester.pumpWidget(
+                MaterialUiTestApp(
+                  child: Scaffold(
+                    body: Form(key: unit.formKey, child: const Placeholder()),
+                  ),
                 ),
-                wrapper: MaterialUiTestApp.wrapper(),
               );
 
               await unit.save(tester.firstState(find.byType(Scaffold)).context);
@@ -458,11 +469,12 @@ void main() {
                 },
               );
 
-              await tester.pumpWidgetBuilder(
-                Scaffold(
-                  body: Form(key: unit.formKey, child: const Placeholder()),
+              await tester.pumpWidget(
+                MaterialUiTestApp(
+                  child: Scaffold(
+                    body: Form(key: unit.formKey, child: const Placeholder()),
+                  ),
                 ),
-                wrapper: MaterialUiTestApp.wrapper(),
               );
 
               unawaited(
@@ -495,11 +507,12 @@ void main() {
                 },
               );
 
-              await tester.pumpWidgetBuilder(
-                Scaffold(
-                  body: Form(key: unit.formKey, child: const Placeholder()),
+              await tester.pumpWidget(
+                MaterialUiTestApp(
+                  child: Scaffold(
+                    body: Form(key: unit.formKey, child: const Placeholder()),
+                  ),
                 ),
-                wrapper: MaterialUiTestApp.wrapper(),
               );
 
               unawaited(
@@ -536,11 +549,15 @@ void main() {
                     },
                   );
 
-                  await tester.pumpWidgetBuilder(
-                    Scaffold(
-                      body: Form(key: unit.formKey, child: const Placeholder()),
+                  await tester.pumpWidget(
+                    MaterialUiTestApp(
+                      child: Scaffold(
+                        body: Form(
+                          key: unit.formKey,
+                          child: const Placeholder(),
+                        ),
+                      ),
                     ),
-                    wrapper: MaterialUiTestApp.wrapper(),
                   );
 
                   unit.photoFieldState = PhotoFieldState(
@@ -575,11 +592,15 @@ void main() {
                     },
                   );
 
-                  await tester.pumpWidgetBuilder(
-                    Scaffold(
-                      body: Form(key: unit.formKey, child: const Placeholder()),
+                  await tester.pumpWidget(
+                    MaterialUiTestApp(
+                      child: Scaffold(
+                        body: Form(
+                          key: unit.formKey,
+                          child: const Placeholder(),
+                        ),
+                      ),
                     ),
-                    wrapper: MaterialUiTestApp.wrapper(),
                   );
 
                   final mockXFile = MockXFile(

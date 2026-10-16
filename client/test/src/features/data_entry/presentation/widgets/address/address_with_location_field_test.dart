@@ -16,6 +16,7 @@ import '../../../../../fakes/mock_database_service.dart';
 import '../../../../../fakes/mock_image_url_cache_service.dart';
 import '../../../../../fakes/mock_metadata_dao.dart';
 import '../../../../../fakes/mock_viewable_object_service.dart';
+import '../../../../../material_ui_test_app.dart';
 import '../../../../../utils.dart';
 
 void main() {
@@ -44,8 +45,8 @@ void main() {
     Point? locationToPick,
   }) async {
     await tester.pumpWidget(
-      materialAppWithThemeAndLocale()(
-        Scaffold(
+      MaterialUiTestApp.withThemeAndLocale(
+        child: Scaffold(
           body: SingleChildScrollView(
             child: Form(
               key: formKey,

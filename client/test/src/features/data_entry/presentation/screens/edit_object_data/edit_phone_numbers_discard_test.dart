@@ -8,6 +8,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../fakes/fake_feature_flags_repo.dart';
+import '../../../../../material_ui_test_app.dart';
 import '../../../../../utils.dart';
 
 class MockAuthBloc extends Mock implements AuthBloc {}
@@ -72,8 +73,8 @@ void main() {
     bool settle = true,
   }) async {
     await tester.pumpWidget(
-      materialAppWithThemeAndLocale()(
-        Builder(
+      MaterialUiTestApp.withThemeAndLocale(
+        child: Builder(
           builder: (context) => Scaffold(
             body: TextButton(
               onPressed: () => Navigator.of(context).push<void>(

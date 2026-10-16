@@ -7,6 +7,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../material_ui_test_app.dart';
 import '../../../../../utils.dart';
 
 class MockAuthBloc extends Mock implements AuthBloc {}
@@ -96,7 +97,11 @@ void main() {
       (class$.studyYearFromOrder, class$.studyYearToOrder);
 
   Future<void> openEditor(WidgetTester tester, EditClass editor) async {
-    await tester.pumpWidget(materialAppWithThemeAndLocale()(editor));
+    await tester.pumpWidget(
+      MaterialUiTestApp.withThemeAndLocale(
+        child: editor,
+      ),
+    );
   }
 
   Future<void> scrollTo(WidgetTester tester, Key key) async {

@@ -4,7 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
@@ -131,9 +130,10 @@ void main() {
         selectionController: selectionController,
       );
 
-      await tester.pumpWidgetBuilder(
-        ViewableObjectList(objectsController: controller),
-        wrapper: MaterialUiTestApp.wrapper(),
+      await tester.pumpWidget(
+        MaterialUiTestApp(
+          child: ViewableObjectList(objectsController: controller),
+        ),
       );
 
       await tester.pumpAndSettle();
@@ -199,9 +199,10 @@ void main() {
         selectionController: SelectionController<Person>(),
       );
 
-      await tester.pumpWidgetBuilder(
-        ViewableObjectList(objectsController: controller),
-        wrapper: MaterialUiTestApp.wrapper(),
+      await tester.pumpWidget(
+        MaterialUiTestApp(
+          child: ViewableObjectList(objectsController: controller),
+        ),
       );
 
       await tester.pumpAndSettle();
@@ -270,9 +271,10 @@ void main() {
         objectsPaginatableStream: paginatableStream,
       );
 
-      await tester.pumpWidgetBuilder(
-        ViewableObjectList(objectsController: controller),
-        wrapper: MaterialUiTestApp.wrapper(),
+      await tester.pumpWidget(
+        MaterialUiTestApp(
+          child: ViewableObjectList(objectsController: controller),
+        ),
       );
       await tester.pumpAndSettle();
 

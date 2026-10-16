@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../../utils.dart';
+import '../../../../../material_ui_test_app.dart';
 
 void main() {
   group(
@@ -11,8 +11,8 @@ void main() {
         'shows the text composed from the entered parts, not the server text',
         (tester) async {
           await tester.pumpWidget(
-            materialAppWithThemeAndLocale()(
-              const AddressPreview(
+            MaterialUiTestApp.withThemeAndLocale(
+              child: const AddressPreview(
                 address: Address(
                   houseCode: '12',
                   fullAddressText: 'عنوان قديم من الخادم',

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
@@ -202,56 +201,50 @@ Future<void> _pumpWidget(
     addTearDown(objectStreamController.close);
   }
 
-  addTearDown(() => tester.binding.setSurfaceSize(null));
-
-  await tester.pumpWidgetBuilder(
-    ViewObjectDetails<Area>(
-      object: area,
-      objectId: area.id,
-      objectStream: objectStreamController.stream,
-      notFoundBuilder: (context) =>
-          const Placeholder(key: ValueKey('notFound')),
-      editButtonBuilder: (context, person) => const Icon(
-        Symbols.edit,
-        key: ValueKey('editButton'),
-      ),
-      detailsBuilder: (context, person) => const SliverToBoxAdapter(
-        child: Placeholder(
-          key: ValueKey('details'),
-          fallbackHeight: 70,
+  tester.view
+    ..physicalSize = surfaceSize
+    ..devicePixelRatio = 1;
+  addTearDown(tester.view.reset);
+  await tester.pumpWidget(
+    MaterialUiTestApp.withThemeAndLocale(
+      child: ViewObjectDetails<Area>(
+        object: area,
+        objectId: area.id,
+        objectStream: objectStreamController.stream,
+        notFoundBuilder: (context) =>
+            const Placeholder(key: ValueKey('notFound')),
+        editButtonBuilder: (context, person) => const Icon(
+          Symbols.edit,
+          key: ValueKey('editButton'),
         ),
-      ),
-      sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
-        tabs: [
-          (
-            label: 'المخدومين',
-            icon: Symbols.person,
+        detailsBuilder: (context, person) => const SliverToBoxAdapter(
+          child: Placeholder(
+            key: ValueKey('details'),
+            fallbackHeight: 70,
           ),
-        ],
-      ),
-      childrenTypes: const [Person],
-      tabsContentBuilders: {
-        Person: (context) => const Placeholder(key: ValueKey('personsTab')),
-      },
-      floatingActionButtonBuilder: (context, tabController, person) =>
-          FloatingActionButton(
-            key: const ValueKey('floatingActionButton'),
-            child: const Icon(Symbols.add),
-            onPressed: () {},
-          ),
-    ),
-    surfaceSize: surfaceSize,
-    wrapper: MaterialUiTestApp.wrapper(
-      localeOverrides: [const Locale('ar', 'EG')],
-      localizations: [
-        ...GlobalMaterialLocalizations.delegates,
-      ],
-      theme: ThemingService.getDefault(
-        isDarkOverride: false,
-        greatFeastThemeOverride: false,
+        ),
+        sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
+          tabs: [
+            (
+              label: 'المخدومين',
+              icon: Symbols.person,
+            ),
+          ],
+        ),
+        childrenTypes: const [Person],
+        tabsContentBuilders: {
+          Person: (context) => const Placeholder(key: ValueKey('personsTab')),
+        },
+        floatingActionButtonBuilder: (context, tabController, person) =>
+            FloatingActionButton(
+              key: const ValueKey('floatingActionButton'),
+              child: const Icon(Symbols.add),
+              onPressed: () {},
+            ),
       ),
     ),
   );
+  await tester.pump();
 }
 
 void _setUp() {

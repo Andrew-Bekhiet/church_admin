@@ -1,10 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 
-import '../../../../utils.dart';
+import '../../../../material_ui_test_app.dart';
 import 'settings_screen_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<UserPreferencesService>()])
@@ -32,9 +31,8 @@ void main() {
           testWidgets(
             'No changes',
             (tester) async {
-              await tester.pumpWidgetBuilder(
-                const SizedBox(),
-                wrapper: materialAppWithThemeAndLocale(),
+              await tester.pumpWidget(
+                MaterialUiTestApp.withThemeAndLocale(child: const SizedBox()),
               );
               tester
                   .firstState<NavigatorState>(find.byType(Navigator))
@@ -62,9 +60,8 @@ void main() {
           testWidgets(
             'Changing theme',
             (tester) async {
-              await tester.pumpWidgetBuilder(
-                const SizedBox(),
-                wrapper: materialAppWithThemeAndLocale(),
+              await tester.pumpWidget(
+                MaterialUiTestApp.withThemeAndLocale(child: const SizedBox()),
               );
               tester
                   .firstState<NavigatorState>(find.byType(Navigator))
@@ -97,9 +94,8 @@ void main() {
       testWidgets(
         'Saving changes',
         (tester) async {
-          await tester.pumpWidgetBuilder(
-            const SizedBox(),
-            wrapper: materialAppWithThemeAndLocale(),
+          await tester.pumpWidget(
+            MaterialUiTestApp.withThemeAndLocale(child: const SizedBox()),
           );
           tester
               .firstState<NavigatorState>(find.byType(Navigator))

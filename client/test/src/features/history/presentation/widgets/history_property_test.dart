@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
@@ -42,11 +41,12 @@ void main() {
         onRecordNow: () => called = true,
       );
 
-      await tester.pumpWidgetBuilder(
-        Scaffold(
-          body: historyProperty,
+      await tester.pumpWidget(
+        MaterialUiTestApp(
+          child: Scaffold(
+            body: historyProperty,
+          ),
         ),
-        wrapper: MaterialUiTestApp.wrapper(),
       );
       await tester.tap(
         find.descendant(
@@ -109,11 +109,12 @@ void main() {
           onRecordNow: () {},
         );
 
-        await tester.pumpWidgetBuilder(
-          Scaffold(
-            body: historyProperty,
+        await tester.pumpWidget(
+          MaterialUiTestApp(
+            child: Scaffold(
+              body: historyProperty,
+            ),
           ),
-          wrapper: MaterialUiTestApp.wrapper(),
         );
 
         await tester.tap(

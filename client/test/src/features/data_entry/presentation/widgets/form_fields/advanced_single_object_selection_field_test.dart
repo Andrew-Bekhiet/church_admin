@@ -5,6 +5,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../../fakes/fake_logging_service.dart';
+import '../../../../../material_ui_test_app.dart';
 import '../../../../../utils.dart';
 
 void main() {
@@ -30,8 +31,8 @@ void main() {
     Future<Person> Function(String) onCreateCustom,
   ) async {
     await tester.pumpWidget(
-      materialAppWithThemeAndLocale()(
-        Scaffold(
+      MaterialUiTestApp.withThemeAndLocale(
+        child: Scaffold(
           body: AdvancedSingleObjectSelectionField<Person, String>(
             field: field,
             label: 'مخدوم',
