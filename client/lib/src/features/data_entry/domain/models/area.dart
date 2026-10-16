@@ -77,6 +77,8 @@ class Area extends ViewableWithIDAndImage
   Json toJson() => _$AreaToJson(this);
 }
 
+// Extends the generated private base, which only this library can see
+// ignore: solid_lints/avoid_multiple_declarations_per_file
 class AreaFields extends _AreaFields {
   static final AreaFields _instance = AreaFields._();
 

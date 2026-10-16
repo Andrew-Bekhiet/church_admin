@@ -129,6 +129,8 @@ class User extends ViewableWithIDAndImage
   bool canDeleteObject(ViewableWithID object) => permissions.deleteData;
 }
 
+// Extends the generated private base, which only this library can see
+// ignore: solid_lints/avoid_multiple_declarations_per_file
 class UserFields extends _UserFields {
   FieldMetadata<String> get authId => FieldMetadata<String>(
     parentType: User,

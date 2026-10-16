@@ -36,6 +36,8 @@ class StudyYear extends ViewableWithID
   Json toJson() => _$StudyYearToJson(this);
 }
 
+// Extends the generated private base, which only this library can see
+// ignore: solid_lints/avoid_multiple_declarations_per_file
 class StudyYearFields extends _StudyYearFields {
   static T _identity<T>(T value) => value;
 
