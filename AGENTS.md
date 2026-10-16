@@ -183,14 +183,16 @@ If an unfiltered build slips through, `git checkout -- lib/src/core/graphql/__ge
 
 CI enforces both halves: `check_graphql_schema.sh` fails when `schema.graphql` drifts from the migrations and metadata, and `check_generated_code.sh` fails when committed build_runner outputs differ from a fresh build (outputs of changed files on PRs, everything on master).
 
-**Lints** — `dart analyze` does load the solid_lints plugin. It is declared under `plugins:` in `client/analysis_options.yaml` and the analyzer picks it up on its own, so a plain `dart analyze` already reports diagnostics such as `prefer_match_file_name`. `--plugins` is a real but undocumented flag, and redundant on Dart 3.12.2. Run the same gate CI runs:
+**Lints** — `dart analyze` loads the solid_lints plugin on its own from the `plugins:` section of `client/analysis_options.yaml`. `--plugins` changes nothing: runs with and without it report identical diagnostics on Dart 3.12 and 3.13. Run the gate from `client/` with no path arguments:
 
 ```sh
 cd client
-dart analyze --plugins --fatal-infos
+dart analyze --fatal-infos
 ```
 
-Keep `--fatal-infos`. Most solid_lints diagnostics are `info`, so a plain run exits 0 with findings outstanding.
+**Never pass a directory.** `dart analyze lib` silently drops every solid_lints diagnostic, with or without `--plugins`, while core analyzer and linter diagnostics still show up, so the run looks clean. A single file path (`dart analyze lib/src/foo.dart`) keeps them.
+
+Keep `--fatal-infos`. Most solid_lints diagnostics are `info`, so a plain run exits 0 with findings outstanding. CI runs the same command in `static-analysis.yml`.
 
 **Run `dart format lib test patrol_test` from `client/` before committing**, covering every tracked Dart directory, not only the directory you touched. Locally `dart format .` also walks the untracked `build/` directory and reports about 68 files as changed while git stays clean. It also normalises a mixed-ending file back to one style. Formatting a single subdirectory is how the mixed endings above survived review. CI fails on unformatted code (`dart format --set-exit-if-changed . || { git diff; exit 1; }` in `static-analysis.yml`, which prints the diff).
 
