@@ -123,6 +123,7 @@ class ThemingService with WidgetsBindingObserver {
         keepPrimary: isLight,
         keepSecondary: isLight,
         keepTertiary: isLight,
+        useExpressiveOnContainerColors: false,
       ),
       variant: FlexSchemeVariant.fidelity,
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
