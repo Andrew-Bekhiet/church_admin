@@ -4,60 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_symbols_icons/symbols.dart';
 import 'package:rxdart/rxdart.dart';
-
-abstract final class _HomePagesConfig {
-  static const summaryPage = HomePageConfig(
-    label: 'الرئيسية',
-    pageIcon: Symbols.home,
-  );
-
-  static final services = HomePageConfig<Service>(
-    label: 'الخدمات',
-    pageIcon: Symbols.volunteer_activism,
-    fabIcon: const Icon(Symbols.add),
-    listType: ViewableObjectListType.grid,
-    fabOnTapLocation: const EditServiceRoute().location,
-  );
-  static final sundaySchoolPersons = HomePageConfig<Person>(
-    label: 'المخدومين',
-    pageIcon: Symbols.person,
-    fabIcon: const Icon(Symbols.person_add),
-    fabOnTapLocation: const EditPersonRoute().location,
-  );
-
-  static final areas = HomePageConfig<Area>(
-    label: 'المناطق',
-    fabIcon: const Icon(Symbols.add_location),
-    pageIcon: Symbols.pin_drop,
-    fabOnTapLocation: const EditAreaRoute().location,
-  );
-  static final streets = HomePageConfig<Street>(
-    label: 'الشوراع',
-    fabIcon: const Icon(Symbols.add_road),
-    pageIcon: Symbols.road,
-    fabOnTapLocation: const EditStreetRoute().location,
-  );
-  static final families = HomePageConfig<Family>(
-    label: 'العائلات',
-    fabIcon: const Icon(Symbols.group_add),
-    pageIcon: Symbols.diversity_1,
-    fabOnTapLocation: const EditFamilyRoute().location,
-  );
-  static final stores = HomePageConfig<Store>(
-    label: 'المتاجر',
-    fabIcon: const Icon(Symbols.add_business),
-    pageIcon: Symbols.store,
-    fabOnTapLocation: const EditStoreRoute().location,
-  );
-  static final churchDataPersons = HomePageConfig<Person>(
-    label: 'الأفراد',
-    pageIcon: Symbols.person,
-    fabIcon: const Icon(Symbols.person_add),
-    fabOnTapLocation: const EditPersonRoute().location,
-  );
-}
 
 /// Manages and handles [HomeScreen] state like switching between
 /// [HomeMode]s, switching pages, and loading daily data.
@@ -81,36 +28,36 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   late final Map<HomeMode, List<HomePageConfig>> _pagesConfigState = {
     HomeMode.sundaySchool: [
-      _HomePagesConfig.summaryPage,
+      HomePagesConfig.summaryPage,
       _ensureControllerWillDispose<Service>(
-        _HomePagesConfig.services,
+        HomePagesConfig.services,
         _databaseService.services.streamAll,
       ),
       _ensureControllerWillDispose<Person>(
-        _HomePagesConfig.sundaySchoolPersons,
+        HomePagesConfig.sundaySchoolPersons,
         _databaseService.persons.streamAll,
       ),
     ],
     HomeMode.churchData: [
-      _HomePagesConfig.summaryPage,
+      HomePagesConfig.summaryPage,
       _ensureControllerWillDispose<Area>(
-        _HomePagesConfig.areas,
+        HomePagesConfig.areas,
         _databaseService.areas.streamAll,
       ),
       _ensureControllerWillDispose<Street>(
-        _HomePagesConfig.streets,
+        HomePagesConfig.streets,
         _databaseService.streets.streamAll,
       ),
       _ensureControllerWillDispose<Family>(
-        _HomePagesConfig.families,
+        HomePagesConfig.families,
         _databaseService.families.streamAll,
       ),
       _ensureControllerWillDispose<Store>(
-        _HomePagesConfig.stores,
+        HomePagesConfig.stores,
         _databaseService.stores.streamAll,
       ),
       _ensureControllerWillDispose<Person>(
-        _HomePagesConfig.churchDataPersons,
+        HomePagesConfig.churchDataPersons,
         _databaseService.persons.streamAll,
       ),
     ],
@@ -128,7 +75,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
          HomeState(
            mode: userPreferencesService.lastHomeMode ?? HomeMode.sundaySchool,
            pageController: pageController,
-           pages: const [_HomePagesConfig.summaryPage],
+           pages: const [HomePagesConfig.summaryPage],
            showSnowflakeAnimation:
                LiturgySeason.current == LiturgySeason.christmas,
          ),
@@ -181,19 +128,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     paginatableStreamFactory,
   ) {
     return config.copyWith(
-      objectsController: () =>
-          _controllersToDispose.putIfAbsent(
-                T,
-                () {
-                  return ViewableObjectListController<T>(
-                    objectsPaginatableStream: paginatableStreamFactory(
-                      where: _paginatableStreamsParams[T]?.where,
-                      orderBy: _paginatableStreamsParams[T]?.orderBy,
-                    ),
-                  );
-                },
-              )
-              as ViewableObjectListController<T>,
+      objectsController: () => _controllersToDispose.putIfAbsent(
+        T,
+        () {
+          return ViewableObjectListController<T>(
+            objectsPaginatableStream: paginatableStreamFactory(
+              where: _paginatableStreamsParams[T]?.where,
+              orderBy: _paginatableStreamsParams[T]?.orderBy,
+            ),
+          );
+        },
+      ) as ViewableObjectListController<T>,
     );
   }
 
