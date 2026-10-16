@@ -16,10 +16,6 @@ sealed class PlusCode {
   static const int _gridRows = 5;
   static const int _gridColumns = 4;
 
-  final String code;
-
-  const PlusCode._(this.code);
-
   static PlusCode? tryParse(String text) {
     final code = text.toUpperCase();
     if (!_isValid(code)) return null;
@@ -30,8 +26,6 @@ sealed class PlusCode {
 
     return _startsInsideTheGlobe(code) ? FullPlusCode._decode(code) : null;
   }
-
-  Point locationNearest(Point reference);
 
   static bool _isValid(String code) {
     final separatorIndex = code.indexOf(_separator);
@@ -72,6 +66,12 @@ sealed class PlusCode {
   static bool _startsInsideTheGlobe(String code) =>
       _alphabet.indexOf(code[0]) * _encodingBase < _latitudeSpan &&
       _alphabet.indexOf(code[1]) * _encodingBase < _longitudeSpan;
+
+  final String code;
+
+  const PlusCode._(this.code);
+
+  Point locationNearest(Point reference);
 }
 
 class FullPlusCode extends PlusCode {
@@ -84,16 +84,14 @@ class FullPlusCode extends PlusCode {
 
   final Point southWest;
   final Point northEast;
+  final Point center;
 
-  Point get center => Point(
-    (southWest.latitude + northEast.latitude) / 2,
-    (southWest.longitude + northEast.longitude) / 2,
-  );
-
-  const FullPlusCode._(super.code, this.southWest, this.northEast) : super._();
-
-  @override
-  Point locationNearest(Point reference) => center;
+  const FullPlusCode._(
+    super.code, {
+    required this.southWest,
+    required this.northEast,
+    required this.center,
+  }) : super._();
 
   factory FullPlusCode._decode(String code) {
     final digits = code
@@ -137,10 +135,14 @@ class FullPlusCode extends PlusCode {
 
     return FullPlusCode._(
       code,
-      Point(south, west),
-      Point(south + latitudeHeight, west + longitudeWidth),
+      southWest: Point(south, west),
+      northEast: Point(south + latitudeHeight, west + longitudeWidth),
+      center: Point(south + latitudeHeight / 2, west + longitudeWidth / 2),
     );
   }
+
+  @override
+  Point locationNearest(Point reference) => center;
 }
 
 class ShortPlusCode extends PlusCode {
