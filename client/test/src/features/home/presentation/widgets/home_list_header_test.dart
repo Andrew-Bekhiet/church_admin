@@ -92,33 +92,14 @@ void main() {
     expect(button.selected, {ViewableObjectListType.grid});
   });
 
-  testWidgets('selecting the other segment calls onToggleListType', (
+  testWidgets('without onToggleListType the toggle is disabled', (
     tester,
   ) async {
-    var toggles = 0;
-    await pumpHeader(
-      tester,
-      listType: ViewableObjectListType.list,
-      onToggleListType: () => toggles++,
+    await pumpHeader(tester, listType: ViewableObjectListType.list);
+
+    final button = tester.widget<SegmentedButton<ViewableObjectListType>>(
+      find.byType(SegmentedButton<ViewableObjectListType>),
     );
-
-    await tester.tap(find.byIcon(Symbols.grid_view));
-
-    expect(toggles, 1);
-  });
-
-  testWidgets('selecting the segment already selected does nothing', (
-    tester,
-  ) async {
-    var toggles = 0;
-    await pumpHeader(
-      tester,
-      listType: ViewableObjectListType.list,
-      onToggleListType: () => toggles++,
-    );
-
-    await tester.tap(find.byIcon(Symbols.view_list));
-
-    expect(toggles, 0);
+    expect(button.onSelectionChanged, isNull);
   });
 }
