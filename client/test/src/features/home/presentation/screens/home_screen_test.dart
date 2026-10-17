@@ -90,7 +90,7 @@ void main() {
     ) async {
       await harness.pump(tester);
 
-      await tester.tap(find.byKey(HomeScreenSummaryKeys.churchDataButtonKey));
+      await tester.tap(find.byKey(HomeModeCardsKeys.churchDataButtonKey));
       await tester.pumpAndSettle();
       await tester.tap(find.byIcon(Symbols.pin_drop));
       await tester.pumpAndSettle();
@@ -105,7 +105,7 @@ void main() {
       harness.preferences.lastHomeMode = HomeMode.churchData;
       await harness.pump(tester);
 
-      await tester.tap(find.byKey(HomeScreenSummaryKeys.sundaySchoolButtonKey));
+      await tester.tap(find.byKey(HomeModeCardsKeys.sundaySchoolButtonKey));
       await tester.pumpAndSettle();
       await tester.tap(find.byIcon(Symbols.volunteer_activism));
       await tester.pumpAndSettle();
@@ -173,7 +173,7 @@ void main() {
       harness.database = HomeDatabaseFixture(totals: totals);
       await harness.pump(tester);
 
-      await tester.tap(find.byKey(HomeScreenSummaryKeys.churchDataButtonKey));
+      await tester.tap(find.byKey(HomeModeCardsKeys.churchDataButtonKey));
       await tester.pumpAndSettle();
       await tester.tap(find.byIcon(Symbols.pin_drop));
       await tester.pumpAndSettle();

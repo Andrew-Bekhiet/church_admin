@@ -20,7 +20,7 @@ class HomeModeCards extends StatelessWidget {
           for (final mode in HomeMode.values)
             Expanded(
               child: HomeModeCard(
-                key: HomeScreenSummaryKeys.modeKeyFor(mode),
+                key: HomeModeCardsKeys.modeKeyFor(mode),
                 mode: mode,
                 isSelected: mode == selectedMode,
                 onTap: () => onModeSelected(mode),
@@ -30,4 +30,14 @@ class HomeModeCards extends StatelessWidget {
       ),
     );
   }
+}
+
+abstract final class HomeModeCardsKeys {
+  static const Key churchDataButtonKey = Key('church_data_button');
+  static const Key sundaySchoolButtonKey = Key('sunday_school_button');
+
+  static Key modeKeyFor(HomeMode mode) => switch (mode) {
+    HomeMode.churchData => churchDataButtonKey,
+    HomeMode.sundaySchool => sundaySchoolButtonKey,
+  };
 }

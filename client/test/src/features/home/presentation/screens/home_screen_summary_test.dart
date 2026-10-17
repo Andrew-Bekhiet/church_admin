@@ -30,7 +30,7 @@ void main() {
       await harness.pump(tester);
 
       expect(
-        find.byKey(HomeScreenSummaryKeys.birthdaysButtonKey),
+        find.byKey(HomeBirthdaysSectionKeys.birthdaysButtonKey),
         findsNothing,
       );
 
@@ -45,7 +45,7 @@ void main() {
 
       await harness.openSummarySection(
         tester,
-        HomeScreenSummaryKeys.birthdaysButtonKey,
+        HomeBirthdaysSectionKeys.birthdaysButtonKey,
       );
 
       expect(harness.advancedSearchExtras, [harness.dailyData.birthdaysQuery]);
@@ -64,7 +64,7 @@ void main() {
         HomeDailyDataType.saying: harness.dailyData.saying,
       };
       for (final MapEntry(key: type, value: text) in texts.entries) {
-        final card = find.byKey(HomeScreenSummaryKeys.dailyTextKeyFor(type));
+        final card = find.byKey(HomeDailyTextCardsKeys.dailyTextKeyFor(type));
         await tester.ensureVisible(card);
 
         expect(
@@ -85,7 +85,7 @@ void main() {
 
       await harness.openSummarySection(
         tester,
-        HomeScreenSummaryKeys.sneksarButtonKey,
+        HomeDailyTextCardsKeys.sneksarButtonKey,
       );
 
       expect(find.byType(HomeDailyTextSheet), findsOneWidget);
@@ -99,7 +99,7 @@ void main() {
       await harness.pump(tester);
 
       for (final mode in HomeMode.values) {
-        final card = find.byKey(HomeScreenSummaryKeys.modeKeyFor(mode));
+        final card = find.byKey(HomeModeCardsKeys.modeKeyFor(mode));
 
         expect(
           find.descendant(of: card, matching: find.text(mode.label)),
@@ -117,7 +117,7 @@ void main() {
       final checkedModes = HomeMode.values.where(
         (mode) => find
             .descendant(
-              of: find.byKey(HomeScreenSummaryKeys.modeKeyFor(mode)),
+              of: find.byKey(HomeModeCardsKeys.modeKeyFor(mode)),
               matching: find.byIcon(Symbols.check_circle),
             )
             .evaluate()
