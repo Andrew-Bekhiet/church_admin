@@ -1,22 +1,21 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 class HomeModeSwitcher extends StatelessWidget {
-  final HomeBloc homeBloc;
-
-  const HomeModeSwitcher({required this.homeBloc, super.key});
+  const HomeModeSwitcher({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<HomeBloc, HomeState, HomeMode>(
-      bloc: homeBloc,
+    return BlocSelector<HomeCubit, HomeState, HomeMode>(
       selector: (state) => state.mode,
       builder: (context, mode) {
         return ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
           child: GestureDetector(
-            onTap: () => homeBloc.add(const HomeSwitchMode()),
+            onTap: () => unawaited(context.read<HomeCubit>().switchMode()),
             child: Image.asset(
               switch (mode) {
                 HomeMode.sundaySchool =>
