@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:clock/clock.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -20,6 +21,15 @@ class _MockAuthRepository extends Mock implements AuthRepository {}
 class _MockLocalAuthService extends Mock implements LocalAuthService {}
 
 class HomeScreenHarness {
+  static const Map<String, List<String>> _appFonts = {
+    AppTypography.cairo: ['assets/fonts/Cairo-VariableFont.ttf'],
+    AppTypography.elMessiri: ['assets/fonts/ElMessiri-VariableFont.ttf'],
+    AppTypography.amiri: [
+      'assets/fonts/Amiri-Regular.ttf',
+      'assets/fonts/Amiri-Bold.ttf',
+    ],
+  };
+
   static final DateTime outsideAnySeason = DateTime(2026, 7);
 
   final InMemoryUserPreferencesService preferences =
@@ -53,12 +63,10 @@ class HomeScreenHarness {
     );
     tester.state<ScaffoldState>(scaffold.first).openDrawer();
     await tester.pumpAndSettle();
-
-    // Without the app fonts, the long arabic drawer labels overflow.
-    tester.takeException();
   }
 
   Future<void> pump(WidgetTester tester, {bool settle = true}) async {
+    await _loadAppFonts();
     tester.view
       ..physicalSize = const Size(720, 1600)
       ..devicePixelRatio = 1;
@@ -134,6 +142,16 @@ class HomeScreenHarness {
     await tester.pumpWidget(const SizedBox.shrink());
     resetGlobalProviderContainer();
     await tester.pump();
+  }
+
+  Future<void> _loadAppFonts() async {
+    for (final font in _appFonts.entries) {
+      final loader = FontLoader(font.key);
+      for (final asset in font.value) {
+        loader.addFont(rootBundle.load(asset));
+      }
+      await loader.load();
+    }
   }
 
   void _installProviders() {
