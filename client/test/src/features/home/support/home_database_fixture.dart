@@ -3,6 +3,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../fakes/mock_database_service.dart';
+import 'fake_home_dao.dart';
 
 class _MockServicesDAO extends Mock implements ServicesDAO {}
 
@@ -18,6 +19,7 @@ class _MockStoresDAO extends Mock implements StoresDAO {}
 
 class HomeDatabaseFixture {
   final MockDatabaseService service = MockDatabaseService();
+  final FakeHomeDao home = FakeHomeDao();
   final Map<Type, List<Filter>> latestFiltersByEntity = {};
   final Set<Type> disposedEntities = {};
 
@@ -36,6 +38,7 @@ class HomeDatabaseFixture {
     _stubStreamAll<Family>(families, totals[Family]);
     _stubStreamAll<Store>(stores, totals[Store]);
 
+    when(() => service.home).thenReturn(home);
     when(() => service.services).thenReturn(services);
     when(() => service.persons).thenReturn(persons);
     when(() => service.areas).thenReturn(areas);

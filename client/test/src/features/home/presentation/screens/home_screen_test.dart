@@ -97,7 +97,7 @@ void main() {
 
       expect(
         find.descendant(
-          of: find.byType(HomeBottomNavBar),
+          of: find.byType(HomeListHeader),
           matching: find.text('$areaTotal المناطق'),
         ),
         findsOneWidget,
@@ -117,7 +117,7 @@ void main() {
 
       expect(
         find.descendant(
-          of: find.byType(HomeBottomNavBar),
+          of: find.byType(HomeListHeader),
           matching: find.text('$serviceTotal الخدمات'),
         ),
         findsOneWidget,
@@ -138,7 +138,7 @@ void main() {
 
       expect(
         find.descendant(
-          of: find.byType(HomeBottomNavBar),
+          of: find.byType(HomeListHeader),
           matching: find.text('$serviceTotal الخدمات'),
         ),
         findsOneWidget,
@@ -155,13 +155,7 @@ void main() {
       await tester.tap(find.text('تبديل إلى الافتقاد'));
       await tester.pumpAndSettle();
 
-      expect(
-        find.descendant(
-          of: find.byType(HomeBottomNavBar),
-          matching: find.text(HomeTab.summary.label),
-        ),
-        findsWidgets,
-      );
+      expect(find.byType(HomeListHeader), findsNothing);
       await harness.unmount(tester);
     });
   });
@@ -169,8 +163,7 @@ void main() {
   group('app bar mode chip', () {
     testWidgets('on a list tab names the current mode', (tester) async {
       await harness.pump(tester);
-      await tester.tap(find.byIcon(Symbols.volunteer_activism));
-      await tester.pumpAndSettle();
+      await harness.selectTab(tester, HomeTab.services);
 
       expect(
         find.widgetWithText(ActionChip, HomeMode.sundaySchool.label),
@@ -181,8 +174,7 @@ void main() {
 
     testWidgets('pressing it switches to the other mode', (tester) async {
       await harness.pump(tester);
-      await tester.tap(find.byIcon(Symbols.volunteer_activism));
-      await tester.pumpAndSettle();
+      await harness.selectTab(tester, HomeTab.services);
 
       await tester.tap(find.byType(HomeModeChip));
       await tester.pumpAndSettle();
@@ -202,6 +194,85 @@ void main() {
     });
   });
 
+  group('navigation bar', () {
+    testWidgets('has a destination for every tab of the mode', (tester) async {
+      await harness.pump(tester);
+
+      final bar = tester.widget<NavigationBar>(find.byType(NavigationBar));
+      expect(bar.destinations, hasLength(HomeMode.sundaySchool.tabs.length));
+      await harness.unmount(tester);
+    });
+
+    testWidgets('starts on the summary', (tester) async {
+      await harness.pump(tester);
+
+      final bar = tester.widget<NavigationBar>(find.byType(NavigationBar));
+      expect(bar.selectedIndex, 0);
+      await harness.unmount(tester);
+    });
+
+    testWidgets('tapping a destination moves to that tab', (tester) async {
+      await harness.pump(tester);
+      final tabs = HomeMode.sundaySchool.tabs;
+      final target = tabs.last;
+
+      await harness.selectTab(tester, target);
+
+      final bar = tester.widget<NavigationBar>(find.byType(NavigationBar));
+      expect(bar.selectedIndex, tabs.indexOf(target));
+      await harness.unmount(tester);
+    });
+  });
+
+  group('app bar search', () {
+    testWidgets('on a list tab offers the search bar', (tester) async {
+      await harness.pump(tester);
+
+      await harness.selectTab(tester, HomeTab.services);
+
+      expect(find.byType(HomeSearchBar), findsOneWidget);
+      await harness.unmount(tester);
+    });
+
+    testWidgets('is absent on the summary', (tester) async {
+      await harness.pump(tester);
+
+      expect(find.byType(HomeSearchBar), findsNothing);
+      await harness.unmount(tester);
+    });
+  });
+
+  group('list type toggle', () {
+    testWidgets('on the services tab switches the grid to a list', (
+      tester,
+    ) async {
+      await harness.pump(tester);
+      await harness.selectTab(tester, HomeTab.services);
+
+      await tester.tap(find.byIcon(Symbols.view_list));
+      await tester.pumpAndSettle();
+
+      final button = tester.widget<SegmentedButton<ViewableObjectListType>>(
+        find.byType(SegmentedButton<ViewableObjectListType>),
+      );
+      expect(button.selected, {ViewableObjectListType.list});
+      await harness.unmount(tester);
+    });
+
+    testWidgets('is absent on a tab with a single list type', (tester) async {
+      harness.preferences.lastHomeMode = HomeMode.churchData;
+      await harness.pump(tester);
+
+      await harness.selectTab(tester, HomeTab.areas);
+
+      expect(
+        find.byType(SegmentedButton<ViewableObjectListType>),
+        findsNothing,
+      );
+      await harness.unmount(tester);
+    });
+  });
+
   group('swiping', () {
     testWidgets('moves to the next tab and shows its label', (tester) async {
       await harness.pump(tester);
@@ -209,7 +280,7 @@ void main() {
       await tester.fling(find.byType(PageView), const Offset(400, 0), 1000);
       await tester.pumpAndSettle();
 
-      expect(find.text('الخدمات'), findsWidgets);
+      expect(harness.destinationLabelOf(HomeTab.services), findsOneWidget);
 
       await harness.unmount(tester);
     });
@@ -228,7 +299,13 @@ void main() {
       await tester.tap(find.byIcon(Symbols.pin_drop));
       await tester.pumpAndSettle();
 
-      expect(find.text('${totals[Area]} المناطق'), findsWidgets);
+      expect(
+        find.descendant(
+          of: find.byType(HomeListHeader),
+          matching: find.text('${totals[Area]} المناطق'),
+        ),
+        findsOneWidget,
+      );
       await harness.unmount(tester);
     });
 
@@ -236,10 +313,15 @@ void main() {
       harness.database = HomeDatabaseFixture(totals: totals);
       await harness.pump(tester);
 
-      await tester.tap(find.byIcon(Symbols.volunteer_activism));
-      await tester.pumpAndSettle();
+      await harness.selectTab(tester, HomeTab.services);
 
-      expect(find.text('${totals[Service]} الخدمات'), findsWidgets);
+      expect(
+        find.descendant(
+          of: find.byType(HomeListHeader),
+          matching: find.text('${totals[Service]} الخدمات'),
+        ),
+        findsOneWidget,
+      );
       await harness.unmount(tester);
     });
   });
@@ -264,14 +346,16 @@ void main() {
     testWidgets('on the persons tab lands on the persons tab of the other '
         'mode', (tester) async {
       await harness.pump(tester);
-      await tester.tap(find.byIcon(Symbols.person));
-      await tester.pumpAndSettle();
+      await harness.selectTab(tester, HomeTab.sundaySchoolPersons);
 
       await harness.openDrawer(tester);
       await tester.tap(find.text('تبديل إلى الافتقاد'));
       await tester.pumpAndSettle();
 
-      expect(find.text('الأفراد'), findsWidgets);
+      expect(
+        harness.destinationLabelOf(HomeTab.churchDataPersons),
+        findsOneWidget,
+      );
       await harness.unmount(tester);
     });
 
@@ -280,14 +364,13 @@ void main() {
     ) async {
       harness.preferences.lastHomeMode = HomeMode.churchData;
       await harness.pump(tester);
-      await tester.tap(find.byIcon(Symbols.road));
-      await tester.pumpAndSettle();
+      await harness.selectTab(tester, HomeTab.streets);
 
       await harness.openDrawer(tester);
       await tester.tap(find.text('تبديل إلى مدارس الأحد'));
       await tester.pumpAndSettle();
 
-      expect(find.text('الخدمات'), findsWidgets);
+      expect(harness.destinationLabelOf(HomeTab.services), findsOneWidget);
       await harness.unmount(tester);
     });
   });
@@ -296,13 +379,23 @@ void main() {
     testWidgets('on the areas tab opens the new area screen', (tester) async {
       harness.preferences.lastHomeMode = HomeMode.churchData;
       await harness.pump(tester);
-      await tester.tap(find.byIcon(Symbols.pin_drop));
-      await tester.pumpAndSettle();
+      await harness.selectTab(tester, HomeTab.areas);
 
-      await tester.tap(find.byIcon(Symbols.add_location).first);
+      await tester.tap(find.byType(FloatingActionButton).first);
       await tester.pumpAndSettle();
 
       expect(harness.currentLocation, const EditAreaRoute().location);
+      await harness.unmount(tester);
+    });
+
+    testWidgets('is labelled with what the current tab creates', (
+      tester,
+    ) async {
+      harness.preferences.lastHomeMode = HomeMode.churchData;
+      await harness.pump(tester);
+      await harness.selectTab(tester, HomeTab.areas);
+
+      expect(find.byTooltip('إضافة منطقة'), findsWidgets);
       await harness.unmount(tester);
     });
 
