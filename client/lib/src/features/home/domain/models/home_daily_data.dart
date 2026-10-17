@@ -5,24 +5,14 @@ class HomeDailyData extends Equatable {
   final String verse;
   final String sneksar;
   final String saying;
-  final String birthdaysText;
-  final AdvancedQuery? birthdaysQuery;
 
   @override
-  List<Object?> get props => [
-    verse,
-    sneksar,
-    saying,
-    birthdaysText,
-    birthdaysQuery,
-  ];
+  List<Object?> get props => [verse, sneksar, saying];
 
   const HomeDailyData({
     required this.verse,
     required this.sneksar,
     required this.saying,
-    this.birthdaysText = '',
-    this.birthdaysQuery,
   });
 
   HomeDailyData copyWithNewText({
@@ -33,8 +23,6 @@ class HomeDailyData extends Equatable {
       verse: type == HomeDailyDataType.verse ? text : verse,
       sneksar: type == HomeDailyDataType.sneksar ? text : sneksar,
       saying: type == HomeDailyDataType.saying ? text : saying,
-      birthdaysText: birthdaysText,
-      birthdaysQuery: birthdaysQuery,
     );
   }
 

@@ -18,6 +18,8 @@ class _MockStoresDAO extends Mock implements StoresDAO {}
 
 class HomeDatabaseFixture {
   final MockDatabaseService service = MockDatabaseService();
+  final Map<Type, List<Filter>> latestFiltersByEntity = {};
+  final Set<Type> disposedEntities = {};
 
   HomeDatabaseFixture({Map<Type, int> totals = const {}}) {
     final services = _MockServicesDAO();
@@ -42,7 +44,7 @@ class HomeDatabaseFixture {
     when(() => service.stores).thenReturn(stores);
   }
 
-  static void _stubStreamAll<T extends ViewableWithID>(
+  void _stubStreamAll<T extends ViewableWithID>(
     StreamableDAO<T> dao,
     int? total,
   ) {
@@ -51,15 +53,18 @@ class HomeDatabaseFixture {
         where: any(named: 'where'),
         orderBy: any(named: 'orderBy'),
       ),
-    ).thenAnswer(
-      (_) => PaginatableStream<T, Object?>.simple(
+    ).thenAnswer((invocation) {
+      final where = invocation.namedArguments[#where] as Stream<List<Filter>>?;
+      where?.listen((filters) => latestFiltersByEntity[T] = filters);
+
+      return PaginatableStream<T, Object?>.simple(
         factory: (_) => Rx.concat([
           Stream.value(
             PaginatableStreamResponse<T>(data: const [], totalCount: total),
           ),
           NeverStream<PaginatableStreamResponse<T>>(),
-        ]),
-      ),
-    );
+        ]).doOnCancel(() => disposedEntities.add(T)),
+      );
+    });
   }
 }

@@ -15,27 +15,30 @@ void main() {
 
   tearDown(defaultTearDown);
 
-  group('home bloc lifetime', () {
-    testWidgets('unmounting the home screen leaves the shared home bloc open', (
-      tester,
-    ) async {
-      await harness.pump(tester, settle: false);
-      await tester.pumpWidget(const SizedBox.shrink());
+  group('home cubit lifetime', () {
+    testWidgets(
+      'unmounting the home screen leaves the shared home cubit open',
+      (
+        tester,
+      ) async {
+        await harness.pump(tester, settle: false);
+        await tester.pumpWidget(const SizedBox.shrink());
 
-      expect(HomeBloc.I.isClosed, isFalse);
-    });
+        expect(HomeCubit.I.isClosed, isFalse);
+        await harness.unmount(tester);
+      },
+    );
 
     testWidgets('disposing the providers after the home screen is unmounted '
-        'closes the home bloc cleanly', (tester) async {
+        'closes the home cubit cleanly', (tester) async {
       await harness.pump(tester, settle: false);
       await tester.pumpWidget(const SizedBox.shrink());
 
-      final homeBloc = HomeBloc.I;
+      final homeCubit = HomeCubit.I;
       resetGlobalProviderContainer();
+      await harness.finishAsyncDisposal(tester);
 
-      await tester.pump();
-
-      expect(homeBloc.isClosed, isTrue);
+      expect(homeCubit.isClosed, isTrue);
     });
   });
 
@@ -199,6 +202,28 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('الخدمات'), findsWidgets);
+      await harness.unmount(tester);
+    });
+  });
+
+  group('create button', () {
+    testWidgets('on the areas tab opens the new area screen', (tester) async {
+      harness.preferences.lastHomeMode = HomeMode.churchData;
+      await harness.pump(tester);
+      await tester.tap(find.byIcon(Symbols.pin_drop));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Symbols.add_location).first);
+      await tester.pumpAndSettle();
+
+      expect(harness.currentLocation, const EditAreaRoute().location);
+      await harness.unmount(tester);
+    });
+
+    testWidgets('is absent on the summary', (tester) async {
+      await harness.pump(tester);
+
+      expect(find.byType(FloatingActionButton), findsNothing);
       await harness.unmount(tester);
     });
   });

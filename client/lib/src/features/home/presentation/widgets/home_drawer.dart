@@ -9,88 +9,95 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 class HomeDrawer extends StatelessWidget {
-  final HomeBloc homeBloc;
-
-  const HomeDrawer({required this.homeBloc, super.key});
+  const HomeDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final authBloc = AuthBloc.I;
+    final homeCubit = context.read<HomeCubit>();
 
-    return BlocBuilder<AuthBloc, AuthState>(
-      bloc: authBloc,
+    return BlocBuilder<HomeCubit, HomeState>(
+      buildWhen: (previous, current) =>
+          previous.mode != current.mode ||
+          previous.canManageUsers != current.canManageUsers ||
+          previous.account != current.account,
       builder: (context, state) {
-        final destinations = [
-          HomeDrawerDestination(
-            label: BlocSelector<HomeBloc, HomeState, HomeMode>(
-              bloc: homeBloc,
-              selector: (state) => state.mode,
-              builder: (context, modeSnapshot) {
-                return Text(
-                  modeSnapshot == HomeMode.sundaySchool
-                      ? 'تبديل إلى الافتقاد'
-                      : 'تبديل إلى مدارس الأحد',
-                );
-              },
-            ),
-            icon: const Icon(Symbols.home),
-            onTap: () => homeBloc.add(const HomeSwitchMode()),
-          ),
-          if (state case AuthAuthenticated(
-            userData: User(
-              canManageSomeUsers: true,
-            ),
-          ))
-            HomeDrawerDestination(
-              icon: const Icon(Symbols.manage_accounts),
-              label: const Text(
-                'إدارة الخدام',
-                key: HomeDrawerKeys.manageUsers,
-              ),
-              onTap: () => const ManageUsersRoute().push(context),
-            ),
-          HomeDrawerDestination(
-            icon: const Icon(Symbols.search),
-            label: const Text('البحث المتقدم'),
-            onTap: () => const AdvancedSearchRoute().push(context),
-          ),
-          HomeDrawerDestination(
-            icon: const Icon(Symbols.upload_file),
-            label: const Text('تصدير البيانات'),
-            onTap: () => const ExportEntitiesSelectionRoute().push(context),
-          ),
-          HomeDrawerDestination(
-            icon: const Icon(Symbols.map),
-            label: const Text('خريطة الافتقاد'),
-            onTap: () => const VisitsMapRoute().push(context),
-          ),
-          HomeDrawerDestination(
-            icon: const Icon(Symbols.settings),
-            label: const Text('الإعدادات'),
-            onTap: () => const SettingsRoute().push(context),
-          ),
-          if (kDebugMode)
-            HomeDrawerDestination(
-              icon: const Icon(Symbols.developer_mode),
-              label: const Text('gql cache'),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) {
-                    final gqlClient = globalProviderContainer.read(
-                      graphQLClientProvider,
-                    );
-
-                    return GraphqlCacheInspector(
-                      title: 'GraphQL Cache',
-                      data: (gqlClient.cache.store as HiveStore).box.toMap(),
-                      getCacheData:
-                          (gqlClient.cache.store as HiveStore).box.toMap,
-                    );
-                  },
+        final destinations =
+            <({NavigationDrawerDestination destination, VoidCallback onTap})>[
+              (
+                destination: NavigationDrawerDestination(
+                  icon: const Icon(Symbols.home),
+                  label: Text(
+                    state.mode == HomeMode.sundaySchool
+                        ? 'تبديل إلى الافتقاد'
+                        : 'تبديل إلى مدارس الأحد',
+                  ),
                 ),
+                onTap: () => unawaited(homeCubit.switchMode()),
               ),
-            ),
-        ];
+              if (state.canManageUsers)
+                (
+                  destination: const NavigationDrawerDestination(
+                    icon: Icon(Symbols.manage_accounts),
+                    label: Text(
+                      'إدارة الخدام',
+                      key: HomeDrawerKeys.manageUsers,
+                    ),
+                  ),
+                  onTap: () => const ManageUsersRoute().push(context),
+                ),
+              (
+                destination: const NavigationDrawerDestination(
+                  icon: Icon(Symbols.search),
+                  label: Text('البحث المتقدم'),
+                ),
+                onTap: () => const AdvancedSearchRoute().push(context),
+              ),
+              (
+                destination: const NavigationDrawerDestination(
+                  icon: Icon(Symbols.upload_file),
+                  label: Text('تصدير البيانات'),
+                ),
+                onTap: () => const ExportEntitiesSelectionRoute().push(context),
+              ),
+              (
+                destination: const NavigationDrawerDestination(
+                  icon: Icon(Symbols.map),
+                  label: Text('خريطة الافتقاد'),
+                ),
+                onTap: () => const VisitsMapRoute().push(context),
+              ),
+              (
+                destination: const NavigationDrawerDestination(
+                  icon: Icon(Symbols.settings),
+                  label: Text('الإعدادات'),
+                ),
+                onTap: () => const SettingsRoute().push(context),
+              ),
+              if (kDebugMode)
+                (
+                  destination: const NavigationDrawerDestination(
+                    icon: Icon(Symbols.developer_mode),
+                    label: Text('gql cache'),
+                  ),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        final gqlClient = globalProviderContainer.read(
+                          graphQLClientProvider,
+                        );
+
+                        return GraphqlCacheInspector(
+                          title: 'GraphQL Cache',
+                          data: (gqlClient.cache.store as HiveStore).box
+                              .toMap(),
+                          getCacheData:
+                              (gqlClient.cache.store as HiveStore).box.toMap,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+            ];
 
         return Drawer(
           child: SafeArea(
@@ -104,9 +111,9 @@ class HomeDrawer extends StatelessWidget {
                   ),
                   child: SizedBox.expand(),
                 ),
-                if (state case AuthAuthenticated(:final userData?))
+                if (state.account case final account?)
                   ListTile(
-                    leading: ImageObjectWidget(userData),
+                    leading: ImageObjectWidget(account),
                     title: const SessionReplayUnmask(child: Text('حسابي')),
                     onTap: () {
                       Scaffold.of(context).openEndDrawer();
@@ -122,12 +129,7 @@ class HomeDrawer extends StatelessWidget {
                         destinations[i].onTap();
                       },
                       children: destinations
-                          .map(
-                            (e) => NavigationDrawerDestination(
-                              icon: e.icon,
-                              label: e.label,
-                            ),
-                          )
+                          .map((entry) => entry.destination)
                           .toList(),
                     ),
                   ),
@@ -150,8 +152,7 @@ class HomeDrawer extends StatelessWidget {
                         onTap: () {
                           Scaffold.of(context).openEndDrawer();
 
-                          LocalAuthService.I.scheduleReauth();
-                          authBloc.add(const SignOut());
+                          homeCubit.signOut();
                         },
                       ),
                     ],

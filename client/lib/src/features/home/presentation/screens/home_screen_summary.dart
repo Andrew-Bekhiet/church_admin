@@ -1,26 +1,29 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 class HomeScreenSummary extends StatelessWidget {
-  final HomeBloc homeBloc;
-
-  const HomeScreenSummary({required this.homeBloc, super.key});
+  const HomeScreenSummary({super.key});
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
+    final homeCubit = context.read<HomeCubit>();
 
-    return BlocSelector<HomeBloc, HomeState, HomeDailyData?>(
-      bloc: homeBloc,
-      selector: (state) => state.dailyData,
-      builder: (context, dailyData) {
+    return BlocBuilder<HomeCubit, HomeState>(
+      buildWhen: (previous, current) =>
+          previous.dailyData != current.dailyData ||
+          previous.birthdays != current.birthdays ||
+          previous.hero != current.hero,
+      builder: (context, homeState) {
         return ListView(
           children: [
             SessionReplayUnmask(
               child: Image.asset(
-                _getHomeImage(),
+                homeState.hero.imageAsset,
                 alignment: const Alignment(0, -0.7),
                 height: size.height * 0.24,
                 fit: BoxFit.fitWidth,
@@ -43,14 +46,15 @@ class HomeScreenSummary extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
               ),
-              child: switch (dailyData) {
+              child: switch (homeState.dailyData) {
                 null => const Center(
                   child: CircularProgressIndicator(),
                 ),
                 final HomeDailyData dailyData => Column(
                   spacing: 6,
                   children: [
-                    if (dailyData.birthdaysText.isNotEmpty)
+                    if (homeState.birthdays case final birthdays?
+                        when !birthdays.isEmpty)
                       AnimatedSize(
                         duration: const Duration(milliseconds: 400),
                         alignment: Alignment.topCenter,
@@ -58,10 +62,10 @@ class HomeScreenSummary extends StatelessWidget {
                         child: HomeModeSection(
                           key: HomeScreenSummaryKeys.birthdaysButtonKey,
                           onTap: () => AdvancedSearchRoute(
-                            $extra: dailyData.birthdaysQuery,
+                            $extra: birthdays.query,
                           ).push(context),
                           title: 'أعياد الميلاد اليوم',
-                          text: dailyData.birthdaysText,
+                          text: birthdays.preview,
                           textMaxLines: 2,
                         ),
                       ),
@@ -116,16 +120,16 @@ class HomeScreenSummary extends StatelessWidget {
                     children: [
                       HomeModeCard(
                         key: HomeScreenSummaryKeys.churchDataButtonKey,
-                        onTap: () => homeBloc.add(
-                          const HomeChangeMode(HomeMode.churchData),
+                        onTap: () => unawaited(
+                          homeCubit.changeMode(HomeMode.churchData),
                         ),
                         assetName: 'assets/images/church_data.png',
                         title: 'أسرة أبونا بيشوى كامل',
                       ),
                       HomeModeCard(
                         key: HomeScreenSummaryKeys.sundaySchoolButtonKey,
-                        onTap: () => homeBloc.add(
-                          const HomeChangeMode(HomeMode.sundaySchool),
+                        onTap: () => unawaited(
+                          homeCubit.changeMode(HomeMode.sundaySchool),
                         ),
                         assetName:
                             'assets/images/sunday_school_services_image.png',
@@ -143,33 +147,21 @@ class HomeScreenSummary extends StatelessWidget {
     );
   }
 
-  String _getHomeImage() {
-    switch (LiturgySeason.current) {
-      case LiturgySeason.holyWeek:
-        return 'assets/holyweek.jpeg';
-
-      case LiturgySeason.pentecost:
-        return 'assets/risen.jpg';
-
-      case _:
-        return 'assets/images/home-screen.jpg';
-    }
-  }
-
   void showMessageDialog(
     BuildContext context, {
     required HomeDailyData initialData,
     required HomeDailyDataType type,
     bool canGetNew = true,
   }) {
+    final homeCubit = context.read<HomeCubit>();
     final initialMessage = initialData.select(type);
     final title = type.title;
     final label = type.label;
 
     showDialog(
       context: context,
-      builder: (context) => BlocBuilder<HomeBloc, HomeState>(
-        bloc: homeBloc,
+      builder: (context) => BlocBuilder<HomeCubit, HomeState>(
+        bloc: homeCubit,
         builder: (context, state) {
           final message = switch (state) {
             HomeState(dailyData: null) => initialMessage,
@@ -193,7 +185,7 @@ class HomeScreenSummary extends StatelessWidget {
               if (canGetNew)
                 FilledButton(
                   key: HomeScreenSummaryKeys.newItemButtonKey,
-                  onPressed: () => homeBloc.add(HomeDailyDataGetNew(type)),
+                  onPressed: () => homeCubit.showAnotherDailyText(type),
                   child: Text('$label أخرى'),
                 ),
               FilledButton(

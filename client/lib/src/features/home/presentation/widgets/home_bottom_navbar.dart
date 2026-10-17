@@ -1,35 +1,28 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 class HomeBottomNavBar extends StatelessWidget {
-  final HomeBloc homeBloc;
+  final PageController pageController;
 
-  const HomeBottomNavBar({required this.homeBloc, super.key});
+  const HomeBottomNavBar({required this.pageController, super.key});
 
   @override
   Widget build(BuildContext context) {
     return SessionReplayUnmask(
       child: RepaintBoundary(
-        child: BlocBuilder<HomeBloc, HomeState>(
-          bloc: homeBloc,
+        child: BlocBuilder<HomeCubit, HomeState>(
           buildWhen: (previous, current) =>
-              previous.pageController != current.pageController ||
-              previous.currentPage.round() != current.currentPage.round() ||
-              !const DeepCollectionEquality().equals(
-                previous.pages,
-                current.pages,
-              ),
+              previous.currentTabIndex != current.currentTabIndex ||
+              !listEquals(previous.tabs, current.tabs),
           builder: (context, homeState) {
             final theme = Theme.of(context);
 
-            final pages = homeState.pages;
-
-            final int currentPageIndex = homeState.currentPage.round();
-
-            final currentPage = pages[currentPageIndex];
+            final tabs = homeState.tabs;
+            final currentTabIndex = homeState.currentTabIndex;
 
             return Column(
               mainAxisSize: MainAxisSize.min,
@@ -40,19 +33,19 @@ class HomeBottomNavBar extends StatelessWidget {
                   child: CurvedNavigationBar(
                     animationCurve: Curves.easeInOutCirc,
                     height: 50,
-                    key: ValueKey(pages.length),
+                    key: ValueKey(tabs.length),
                     color: theme.colorScheme.primaryContainer,
                     buttonBackgroundColor: theme.colorScheme.primaryContainer,
-                    onTap: (i) => homeState.pageController.animateToPage(
+                    onTap: (i) => pageController.animateToPage(
                       i,
                       duration: kTabScrollDuration,
                       curve: Curves.easeInOutCirc,
                     ),
-                    index: currentPageIndex,
+                    index: currentTabIndex,
                     animationDuration: kTabScrollDuration,
                     backgroundColor: Colors.transparent,
-                    items: pages.mapIndexed((index, item) {
-                      final isActive = index == currentPageIndex;
+                    items: tabs.mapIndexed((index, tab) {
+                      final isActive = index == currentTabIndex;
                       final fgColor = theme.colorScheme.onPrimary.withValues(
                         alpha: isActive ? 1 : 0.7,
                       );
@@ -60,10 +53,10 @@ class HomeBottomNavBar extends StatelessWidget {
                       return Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(item.pageIcon, color: fgColor, fill: 1),
+                          Icon(tab.icon, color: fgColor, fill: 1),
                           if (isActive)
                             Text(
-                              item.label,
+                              tab.label,
                               style: theme.textTheme.labelMedium?.copyWith(
                                 color: fgColor,
                               ),
@@ -78,16 +71,14 @@ class HomeBottomNavBar extends StatelessWidget {
                     height: 25,
                     padding: EdgeInsets.zero,
                     color: theme.colorScheme.primaryContainer,
-                    child: StreamBuilder<String?>(
-                      stream: currentPage.objectsController == null
-                          ? Stream.value('')
-                          : currentPage.objectsController!().totalCountStream
-                                .map(
-                                  (c) => '$c ${currentPage.label}',
-                                ),
-                      builder: (context, snapshot) {
+                    child: BlocSelector<HomeCubit, HomeState, String>(
+                      selector: (state) => switch (state.currentTabTotal) {
+                        final total? => '$total ${state.currentTab.label}',
+                        null => '',
+                      },
+                      builder: (context, countText) {
                         return Text(
-                          '${snapshot.data}',
+                          countText,
                           style: theme.textTheme.labelLarge?.copyWith(
                             color: theme.colorScheme.onPrimary,
                           ),

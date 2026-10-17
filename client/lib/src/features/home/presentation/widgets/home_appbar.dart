@@ -2,21 +2,15 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/home/presentation/widgets/snowflake_animation.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final HomeBloc homeBloc;
-
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
-  const HomeAppBar({
-    required this.homeBloc,
-    super.key,
-  });
+  const HomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,43 +19,22 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: AnimatedSize(
           duration: const Duration(milliseconds: 250),
           alignment: Alignment.topCenter,
-          child: BlocBuilder<HomeBloc, HomeState>(
-            bloc: homeBloc,
+          child: BlocBuilder<HomeCubit, HomeState>(
             buildWhen: (previous, current) =>
-                previous.currentPage.round() != current.currentPage.round() ||
-                previous.showSnowflakeAnimation !=
-                    current.showSnowflakeAnimation ||
-                !const DeepCollectionEquality().equals(
-                  previous.pages,
-                  current.pages,
-                ),
+                previous.currentTab != current.currentTab ||
+                previous.listTypeOf(previous.currentTab) !=
+                    current.listTypeOf(current.currentTab) ||
+                previous.hero != current.hero,
             builder: (context, homeState) {
-              final int pageIndex = homeState.currentPage.round();
-
-              if (pageIndex == 0) {
+              if (homeState.currentTab == HomeTab.summary) {
                 return const SizedBox.shrink();
               }
 
-              final ViewableObjectListType? listType =
-                  homeState.pages[pageIndex].listType;
-
               final appbar = AppBar(
                 actions: [
-                  if (listType != null)
+                  if (homeState.listTypeOf(homeState.currentTab) != null)
                     IconButton(
-                      onPressed: listType == ViewableObjectListType.list
-                          ? () => homeBloc.add(
-                              HomeSwitchPageListType(
-                                pageIndex,
-                                ViewableObjectListType.grid,
-                              ),
-                            )
-                          : () => homeBloc.add(
-                              HomeSwitchPageListType(
-                                pageIndex,
-                                ViewableObjectListType.list,
-                              ),
-                            ),
+                      onPressed: context.read<HomeCubit>().toggleListType,
                       icon: const Icon(Symbols.lists),
                     ),
                 ],
@@ -74,7 +47,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                         onPressed: () => Scaffold.of(context).openDrawer(),
                       ),
                     ),
-                    HomeModeSwitcher(homeBloc: homeBloc),
+                    const HomeModeSwitcher(),
                   ],
                 ),
                 titleSpacing: 0,
@@ -99,7 +72,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               );
 
-              if (homeState.showSnowflakeAnimation) {
+              if (homeState.hero.showsSnowfall) {
                 return SnowflakeAnimation(child: appbar);
               }
 
