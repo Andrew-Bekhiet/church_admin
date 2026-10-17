@@ -39,7 +39,11 @@ class HomeSearchCubit extends Cubit<HomeSearchState> {
             final sections => HomeSearchFound(sections),
           },
         )
-        .onErrorReturnWith((error, _) => HomeSearchFailed(error))
+        .onErrorReturnWith((error, stackTrace) {
+          addError(error, stackTrace);
+
+          return HomeSearchFailed(error);
+        })
         .startWith(const HomeSearchLoading());
   }
 

@@ -46,15 +46,10 @@ void main() {
     expect(find.text('لم يتم العثور على أي نتائج'), findsOneWidget);
   });
 
-  testWidgets('failed shows the error widget for the error', (tester) async {
-    final error = Exception('boom');
+  testWidgets('failed says the search failed', (tester) async {
+    await pumpView(tester, HomeSearchFailed(Exception('boom')));
 
-    await pumpView(tester, HomeSearchFailed(error));
-
-    expect(
-      tester.widget<ErrorWidget>(find.byType(ErrorWidget)).message,
-      contains('boom'),
-    );
+    expect(find.text('حدث خطأ أثناء البحث، حاول مرة أخرى'), findsOneWidget);
   });
 
   group('found', () {

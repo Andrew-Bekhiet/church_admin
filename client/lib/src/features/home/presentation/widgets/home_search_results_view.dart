@@ -21,8 +21,11 @@ class HomeSearchResultsView extends StatelessWidget {
           style: textTheme.headlineSmall,
         ),
       ),
-      HomeSearchFailed(:final error) => ErrorWidget.builder(
-        FlutterErrorDetails(exception: error),
+      HomeSearchFailed() => Center(
+        child: Text(
+          'حدث خطأ أثناء البحث، حاول مرة أخرى',
+          style: textTheme.headlineSmall,
+        ),
       ),
       HomeSearchFound(:final sections) => ListView.builder(
         itemCount: sections.length,
