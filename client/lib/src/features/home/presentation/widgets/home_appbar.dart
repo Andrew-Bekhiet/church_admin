@@ -88,7 +88,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     unawaited(
       showSearch(
         context: context,
-        delegate: HomeSearchDelegate(DatabaseService.I.home),
+        delegate: HomeSearchDelegate(HomeSearchCubit()),
       ),
     );
   }

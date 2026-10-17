@@ -2,19 +2,13 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 class HomeSearchDelegate extends SearchDelegate {
-  static const Duration debounceDuration = Duration(milliseconds: 500);
+  final HomeSearchCubit searchCubit;
 
-  final HomeDAO homeDAO;
-
-  Timer? _debounceTimer;
-  String _lastQuery = '';
-
-  Future<HomeSearchResults>? _searchFuture;
-
-  HomeSearchDelegate(this.homeDAO) : super();
+  HomeSearchDelegate(this.searchCubit) : super();
 
   @override
   ThemeData appBarTheme(BuildContext context) {
@@ -49,123 +43,93 @@ class HomeSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return StatefulBuilder(
-      builder: (context, setState) {
-        _debounceTimer?.cancel();
-        _debounceTimer = Timer(
-          debounceDuration,
-          () {
-            if (_lastQuery == query) return;
+    searchCubit.search(query);
 
-            _lastQuery = query;
-            _searchFuture = homeDAO.searchAll(_lastQuery);
-            setState(() => query = _lastQuery);
-          },
-        );
+    return BlocBuilder<HomeSearchCubit, HomeSearchState>(
+      bloc: searchCubit,
+      builder: (context, state) {
+        final textTheme = Theme.of(context).textTheme;
 
-        return FutureBuilder<HomeSearchResults>(
-          future: _searchFuture,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return ErrorWidget.builder(
-                FlutterErrorDetails(exception: snapshot.error!),
-              );
-            }
+        return switch (state) {
+          HomeSearchIdle() => Center(
+            child: Text(
+              'ابدأ بالكتابة للبحث ...',
+              style: textTheme.headlineSmall,
+            ),
+          ),
+          HomeSearchLoading() => const Center(
+            child: CircularProgressIndicator(),
+          ),
+          HomeSearchNothingFound() => Center(
+            child: Text(
+              'لم يتم العثور على أي نتائج',
+              style: textTheme.headlineSmall,
+            ),
+          ),
+          HomeSearchFailed(:final error) => ErrorWidget.builder(
+            FlutterErrorDetails(exception: error),
+          ),
+          HomeSearchFound(:final sections) => ListView.builder(
+            itemCount: sections.length,
+            itemBuilder: (context, index) {
+              final section = sections[index];
 
-            if (!snapshot.hasData) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-
-            final results = snapshot.data!;
-
-            final nonEmptySections = results.nonEmptySections;
-
-            if (nonEmptySections.isEmpty) {
-              return Center(
-                child: Text(
-                  'لم يتم العثور على أي نتائج',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              );
-            }
-
-            return ListView.builder(
-              itemCount: nonEmptySections.length,
-              itemBuilder: (context, index) {
-                final (type, sectionItems) = nonEmptySections[index];
-
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 10,
-                      ),
-                      child: Text(
-                        AdvancedQueriesMetadata()
-                            .allQueryablesByType[type]!
-                            .label,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                        textAlign: TextAlign.start,
-                      ),
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 10,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 4,
-                        horizontal: 8,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: sectionItems
-                            .map(
-                              (item) => ViewableObjectWidget(
-                                item,
-                                key: ValueKey(item.id),
-                                config: const ViewableObjectWidgetConfig(
-                                  isDense: true,
-                                  forceShowSecondLine: false,
-                                ),
+                    child: Text(
+                      section.label,
+                      style: textTheme.headlineSmall,
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 4,
+                      horizontal: 8,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: section.items
+                          .map(
+                            (item) => ViewableObjectWidget(
+                              item,
+                              key: ValueKey(item.id),
+                              config: const ViewableObjectWidgetConfig(
+                                isDense: true,
+                                forceShowSecondLine: false,
                               ),
-                            )
-                            .expandIndexed(
-                              (i, w) => i != sectionItems.length - 1
-                                  ? [w, const Divider()]
-                                  : [w],
-                            )
-                            .toList(),
-                      ),
+                            ),
+                          )
+                          .expandIndexed(
+                            (i, w) => i != section.items.length - 1
+                                ? [w, const Divider()]
+                                : [w],
+                          )
+                          .toList(),
                     ),
-                  ],
-                );
-              },
-            );
-          },
-        );
+                  ),
+                ],
+              );
+            },
+          ),
+        };
       },
     );
   }
 
   @override
-  Widget buildSuggestions(BuildContext context) {
-    if (query.isEmpty) {
-      return Center(
-        child: Text(
-          'ابدأ بالكتابة للبحث ...',
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-      );
-    }
-
-    return buildResults(context);
-  }
+  Widget buildSuggestions(BuildContext context) => buildResults(context);
 
   @override
   void dispose() {
-    _debounceTimer?.cancel();
+    unawaited(searchCubit.close());
     super.dispose();
   }
 }
