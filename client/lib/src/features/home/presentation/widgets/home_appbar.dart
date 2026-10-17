@@ -30,6 +30,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               }
 
               final appbar = AppBar(
+                actionsPadding: const EdgeInsetsDirectional.only(end: 8),
                 actions: [
                   HomeModeChip(
                     mode: homeState.mode,
