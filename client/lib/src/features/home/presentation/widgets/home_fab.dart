@@ -29,9 +29,12 @@ class HomeFAB extends StatelessWidget {
           },
           icons: tabs
               .map(
-                (tab) => switch (tab.createIcon) {
-                  final icon? => Icon(icon),
-                  null => null,
+                (tab) => switch ((tab.createIcon, tab.createLabel)) {
+                  (final icon?, final label?) => Tooltip(
+                    message: label,
+                    child: Icon(icon),
+                  ),
+                  _ => null,
                 },
               )
               .toList(),

@@ -48,7 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
           bottomNavigationBar: HomeBottomNavBar(
             pageController: _pageController,
           ),
-          extendBody: true,
         ),
       ),
     );
