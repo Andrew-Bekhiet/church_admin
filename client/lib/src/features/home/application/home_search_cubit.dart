@@ -14,15 +14,17 @@ class HomeSearchCubit extends Cubit<HomeSearchState> {
     final dao = homeDao ?? DatabaseService.I.home;
 
     _subscription = _queries
-        .debounceTime(debounceDuration)
+        .debounce(
+          (query) => query.isEmpty
+              ? Stream<void>.value(null)
+              : TimerStream<void>(null, debounceDuration),
+        )
         .distinct()
         .switchMap((query) => _statesOfSearching(dao, query))
         .listen(emit);
   }
 
   void search(String query) {
-    if (query.isEmpty) emit(const HomeSearchIdle());
-
     _queries.add(query);
   }
 
