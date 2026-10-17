@@ -115,6 +115,42 @@ void main() {
     });
   });
 
+  group('app bar mode chip', () {
+    testWidgets('on a list tab names the current mode', (tester) async {
+      await harness.pump(tester);
+      await tester.tap(find.byIcon(Symbols.volunteer_activism));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.widgetWithText(ActionChip, HomeMode.sundaySchool.label),
+        findsOneWidget,
+      );
+      await harness.unmount(tester);
+    });
+
+    testWidgets('pressing it switches to the other mode', (tester) async {
+      await harness.pump(tester);
+      await tester.tap(find.byIcon(Symbols.volunteer_activism));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(HomeModeChip));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.widgetWithText(ActionChip, HomeMode.churchData.label),
+        findsOneWidget,
+      );
+      await harness.unmount(tester);
+    });
+
+    testWidgets('is absent on the summary', (tester) async {
+      await harness.pump(tester);
+
+      expect(find.byType(HomeModeChip), findsNothing);
+      await harness.unmount(tester);
+    });
+  });
+
   group('swiping', () {
     testWidgets('moves to the next tab and shows its label', (tester) async {
       await harness.pump(tester);

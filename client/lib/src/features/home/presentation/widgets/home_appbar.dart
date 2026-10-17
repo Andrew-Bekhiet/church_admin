@@ -21,6 +21,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           alignment: Alignment.topCenter,
           child: BlocBuilder<HomeCubit, HomeState>(
             buildWhen: (previous, current) =>
+                previous.mode != current.mode ||
                 previous.currentTab != current.currentTab ||
                 previous.listTypeOf(previous.currentTab) !=
                     current.listTypeOf(current.currentTab) ||
@@ -32,23 +33,22 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
               final appbar = AppBar(
                 actions: [
+                  HomeModeChip(
+                    mode: homeState.mode,
+                    onPressed: () =>
+                        unawaited(context.read<HomeCubit>().switchMode()),
+                  ),
                   if (homeState.listTypeOf(homeState.currentTab) != null)
                     IconButton(
                       onPressed: context.read<HomeCubit>().toggleListType,
                       icon: const Icon(Symbols.lists),
                     ),
                 ],
-                leadingWidth: kToolbarHeight * 2 - 12,
-                leading: Row(
-                  children: [
-                    Builder(
-                      builder: (context) => IconButton(
-                        icon: const Icon(Symbols.menu),
-                        onPressed: () => Scaffold.of(context).openDrawer(),
-                      ),
-                    ),
-                    const HomeModeSwitcher(),
-                  ],
+                leading: Builder(
+                  builder: (context) => IconButton(
+                    icon: const Icon(Symbols.menu),
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                  ),
                 ),
                 titleSpacing: 0,
                 title: InkWell(
