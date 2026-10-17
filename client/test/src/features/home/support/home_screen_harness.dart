@@ -61,10 +61,13 @@ class HomeScreenHarness {
     matching: find.byIcon(tab.icon),
   );
 
-  Finder destinationLabelOf(HomeTab tab) => find.descendant(
-    of: find.byType(NavigationBar),
-    matching: find.text(tab.label),
-  );
+  int selectedIndexOf(WidgetTester tester) {
+    return tester
+        .widget<NavigationBar>(find.byType(NavigationBar))
+        .selectedIndex;
+  }
+
+  int indexOfTab(HomeMode mode, HomeTab tab) => mode.tabs.indexOf(tab);
 
   Future<void> selectTab(WidgetTester tester, HomeTab tab) async {
     await tester.tap(destinationOf(tab));
