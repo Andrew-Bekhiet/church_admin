@@ -1,3 +1,4 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -23,7 +24,6 @@ import 'fakes/fake_feature_flags_repo.dart';
   MockSpec<LocalAuthService>(),
   MockSpec<ConnectivityService>(),
   MockSpec<NotificationsService>(),
-  MockSpec<HomeBloc>(),
   MockSpec<PackageInfo>(),
 ])
 void main() {
@@ -130,7 +130,7 @@ List<Override> _setUp({
     _setUpDatabaseRepo(),
     _setUpConnectivityService(),
     _setUpNotificationsService(),
-    _setUpHomeBloc(),
+    _setUpHomeCubit(),
     packageInfoPluginProvider.overrideWith((_) => MockPackageInfo()),
     featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
   ];
@@ -240,18 +240,25 @@ Override _setUpLoggingService() {
   return loggingServiceProvider.overrideWithValue(mockLoggingService);
 }
 
-Override _setUpHomeBloc() {
-  provideDummy<HomeState>(
-    HomeState(
-      pageController: PageController(),
-      dailyData: const HomeDailyData(saying: '', verse: '', sneksar: ''),
-      pages: const [HomePageConfig(label: '', pageIcon: Icons.home)],
-    ),
-  );
-  final mockHomeBloc = MockHomeBloc();
+Override _setUpHomeCubit() {
+  final mockHomeCubit = _MockHomeCubit();
+  mocktail
+      .when(() => mockHomeCubit.state)
+      .thenReturn(
+        HomeState(
+          mode: HomeMode.sundaySchool,
+          tabs: HomeMode.sundaySchool.tabs,
+          currentTabIndex: 0,
+          listTypes: const {},
+          hero: HomeHero.forSeason(null),
+          dailyData: const HomeDailyData(saying: '', verse: '', sneksar: ''),
+        ),
+      );
 
-  return homeBlocProvider.overrideWithValue(mockHomeBloc);
+  return homeCubitProvider.overrideWithValue(mockHomeCubit);
 }
+
+class _MockHomeCubit extends MockCubit<HomeState> implements HomeCubit {}
 
 class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
   FirstScreenVariant() : super(FirstScreenVariantEnum.values.toSet());

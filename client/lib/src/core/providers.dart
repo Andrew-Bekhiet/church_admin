@@ -488,18 +488,21 @@ final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
   ),
 );
 
-final homeBlocProvider = Provider<HomeBloc>(
+final homeCubitProvider = Provider<HomeCubit>(
   (ref) {
-    final homeBloc = HomeBloc(
+    final authBloc = ref.watch(authBlocProvider);
+    final homeCubit = HomeCubit(
       userPreferencesService: ref.watch(userPreferencesServiceProvider),
-      pageController: PageController(),
       databaseService: ref.watch(databaseServiceProvider),
       homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
-      userDataStream: ref.watch(authBlocProvider).userDataStream,
+      userDataStream: authBloc.userDataStream,
+      authBloc: authBloc,
+      localAuthService: ref.watch(localAuthServiceProvider),
+      userPersistenceService: ref.watch(userPersistenceServiceProvider),
     );
-    ref.onDispose(homeBloc.close);
+    ref.onDispose(homeCubit.close);
 
-    return homeBloc;
+    return homeCubit;
   },
 );
 
