@@ -1,120 +1,154 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:spot/spot.dart';
 
-import '../../../../fakes/fake_feature_flags_repo.dart';
-import '../../../../material_ui_test_app.dart';
 import '../../../../utils.dart';
-import 'home_screen_summary_test.mocks.dart';
+import '../../support/fake_home_daily_data_repository.dart';
+import '../../support/home_screen_harness.dart';
 
-@GenerateNiceMocks([
-  MockSpec<HomeBloc>(),
-  MockSpec<ShareService>(),
-  MockSpec<PackageInfo>(),
-])
 void main() {
-  late MockHomeBloc homeBloc;
-  late MockShareService shareService;
+  late HomeScreenHarness harness;
 
-  const mockData = HomeDailyData(
-    verse: 'Test Verse',
-    sneksar: 'Test Sneksar',
-    saying: 'Test Saying',
-  );
-
-  setUp(() {
-    homeBloc = MockHomeBloc();
-    shareService = MockShareService();
-
-    provideDummy<HomeState>(
-      HomeState(
-        pageController: PageController(),
-        pages: const [],
-        dailyData: mockData,
-      ),
-    );
-
-    when(
-      homeBloc.state,
-    ).thenReturn(
-      HomeState(
-        dailyData: mockData,
-        pageController: PageController(),
-        pages: const [],
-      ),
-    );
-
-    initGlobalProviderContainer([
-      homeBlocProvider.overrideWithValue(homeBloc),
-      shareServiceProvider.overrideWithValue(shareService),
-      packageInfoPluginProvider.overrideWith((_) => MockPackageInfo()),
-      featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
-    ]);
-  });
+  setUp(() => harness = HomeScreenHarness());
 
   tearDown(defaultTearDown);
 
-  group('HomeModeSelector =>', () {
-    testWidgets('requests new data on dialog button tap', (tester) async {
-      await tester.pumpWidget(
-        MaterialUiTestApp.withThemeAndLocale(
-          child: Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
-        ),
+  Finder inDialog(String text) =>
+      find.descendant(of: find.byType(AlertDialog), matching: find.text(text));
+
+  group('birthdays', () {
+    testWidgets('are listed on the summary', (tester) async {
+      harness.dailyData = FakeHomeDailyDataRepository(
+        birthdays: ['ann', 'ben'],
+      );
+      await harness.pump(tester);
+
+      final [first, second] = harness.dailyData.birthdays;
+      expect(find.text('$first، $second'), findsOneWidget);
+
+      await harness.unmount(tester);
+    });
+
+    testWidgets('are hidden when nobody has a birthday today', (tester) async {
+      await harness.pump(tester);
+
+      expect(
+        find.byKey(HomeScreenSummaryKeys.birthdaysButtonKey),
+        findsNothing,
       );
 
-      await act.tap(spotKey(HomeScreenSummaryKeys.verseButtonKey));
+      await harness.unmount(tester);
+    });
+
+    testWidgets('tapping them opens advanced search with the birthdays query', (
+      tester,
+    ) async {
+      harness.dailyData = FakeHomeDailyDataRepository(birthdays: ['ann']);
+      await harness.pump(tester);
+
+      await harness.openSummarySection(
+        tester,
+        HomeScreenSummaryKeys.birthdaysButtonKey,
+      );
+
+      expect(harness.advancedSearchExtras, [harness.dailyData.birthdaysQuery]);
+
+      await harness.unmount(tester);
+    });
+  });
+
+  group('verse dialog', () {
+    testWidgets('shows the verse', (tester) async {
+      await harness.pump(tester);
+
+      await harness.openSummarySection(
+        tester,
+        HomeScreenSummaryKeys.verseButtonKey,
+      );
+
+      expect(inDialog(harness.dailyData.verse), findsOneWidget);
+
+      await harness.unmount(tester);
+    });
+
+    testWidgets('asking for another verse shows the new verse', (
+      tester,
+    ) async {
+      await harness.pump(tester);
+      await harness.openSummarySection(
+        tester,
+        HomeScreenSummaryKeys.verseButtonKey,
+      );
+
+      await tester.tap(find.byKey(HomeScreenSummaryKeys.newItemButtonKey));
       await tester.pumpAndSettle();
 
-      await act.tap(spotKey(HomeScreenSummaryKeys.newItemButtonKey));
+      expect(inDialog(harness.dailyData.refreshedVerse), findsOneWidget);
 
-      verify(
-        homeBloc.add(const HomeDailyDataGetNew(HomeDailyDataType.verse)),
-      ).called(1);
+      await harness.unmount(tester);
     });
 
-    testWidgets('shares text when share button is tapped', (tester) async {
-      await tester.pumpWidget(
-        MaterialUiTestApp.withThemeAndLocale(
-          child: Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
-        ),
+    testWidgets('sharing hands the shown verse to the share sheet', (
+      tester,
+    ) async {
+      await harness.pump(tester);
+      await harness.openSummarySection(
+        tester,
+        HomeScreenSummaryKeys.verseButtonKey,
       );
 
-      await act.tap(spotKey(HomeScreenSummaryKeys.verseButtonKey));
+      await tester.tap(find.byKey(HomeScreenSummaryKeys.shareButtonKey));
+
+      expect(harness.share.sharedTexts, [harness.dailyData.verse]);
+
+      await harness.unmount(tester);
+    });
+  });
+
+  group('saying dialog', () {
+    testWidgets('asking for another saying shows the new saying', (
+      tester,
+    ) async {
+      await harness.pump(tester);
+      await harness.openSummarySection(
+        tester,
+        HomeScreenSummaryKeys.sayingButtonKey,
+      );
+
+      await tester.tap(find.byKey(HomeScreenSummaryKeys.newItemButtonKey));
       await tester.pumpAndSettle();
 
-      await act.tap(spotKey(HomeScreenSummaryKeys.shareButtonKey));
+      expect(inDialog(harness.dailyData.refreshedSaying), findsOneWidget);
 
-      verify(shareService.shareText(mockData.verse)).called(1);
+      await harness.unmount(tester);
     });
+  });
 
-    testWidgets('switches to church data mode', (tester) async {
-      await tester.pumpWidget(
-        MaterialUiTestApp.withThemeAndLocale(
-          child: Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
-        ),
+  group('sneksar dialog', () {
+    testWidgets('shows the sneksar', (tester) async {
+      await harness.pump(tester);
+
+      await harness.openSummarySection(
+        tester,
+        HomeScreenSummaryKeys.sneksarButtonKey,
       );
 
-      await act.tap(spotKey(HomeScreenSummaryKeys.churchDataButtonKey));
+      expect(inDialog(harness.dailyData.sneksar), findsOneWidget);
 
-      verify(homeBloc.add(const HomeChangeMode(HomeMode.churchData))).called(1);
+      await harness.unmount(tester);
     });
 
-    testWidgets('switches to sunday school mode', (tester) async {
-      await tester.pumpWidget(
-        MaterialUiTestApp.withThemeAndLocale(
-          child: Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
-        ),
+    testWidgets('has no button for another sneksar', (tester) async {
+      await harness.pump(tester);
+
+      await harness.openSummarySection(
+        tester,
+        HomeScreenSummaryKeys.sneksarButtonKey,
       );
 
-      await act.tap(spotKey(HomeScreenSummaryKeys.sundaySchoolButtonKey));
+      expect(find.byKey(HomeScreenSummaryKeys.newItemButtonKey), findsNothing);
 
-      verify(
-        homeBloc.add(const HomeChangeMode(HomeMode.sundaySchool)),
-      ).called(1);
+      await harness.unmount(tester);
     });
   });
 }
