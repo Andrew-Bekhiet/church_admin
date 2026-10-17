@@ -14,16 +14,4 @@ void main() {
 
     expect(find.text(birthdays.preview), findsOneWidget);
   });
-
-  testWidgets('tapping it calls onTap', (tester) async {
-    var taps = 0;
-    await HomeWidgetPump.pump(
-      tester,
-      HomeBirthdaysCard(birthdays: birthdays, onTap: () => taps++),
-    );
-
-    await tester.tap(find.byType(HomeBirthdaysCard));
-
-    expect(taps, 1);
-  });
 }

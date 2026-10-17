@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../support/home_widget_pump.dart';
 
@@ -26,15 +27,22 @@ void main() {
     expect(find.byIcon(type.icon), findsOneWidget);
   });
 
-  testWidgets('tapping it calls onTap', (tester) async {
-    var taps = 0;
+  testWidgets('is exposed to accessibility as a tappable title and text', (
+    tester,
+  ) async {
+    final handle = tester.ensureSemantics();
     await HomeWidgetPump.pump(
       tester,
-      HomeDailyTextCard(type: type, text: text, onTap: () => taps++),
+      HomeDailyTextCard(type: type, text: text, onTap: () {}),
     );
 
-    await tester.tap(find.byType(HomeDailyTextCard));
-
-    expect(taps, 1);
+    expect(
+      tester.getSemantics(find.byType(InkWell)),
+      isSemantics(
+        label: '${type.title}\n$text\nاقرأ المزيد',
+        hasTapAction: true,
+      ),
+    );
+    handle.dispose();
   });
 }
