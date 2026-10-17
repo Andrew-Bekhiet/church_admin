@@ -43,7 +43,8 @@ class HomeSearchCubit extends Cubit<HomeSearchState> {
       yield sections.isEmpty
           ? const HomeSearchNothingFound()
           : HomeSearchFound(sections);
-    } catch (error) {
+    } catch (error, stackTrace) {
+      addError(error, stackTrace);
       yield HomeSearchFailed(error);
     }
   }
