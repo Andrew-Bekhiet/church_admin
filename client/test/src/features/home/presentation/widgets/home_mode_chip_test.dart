@@ -6,34 +6,39 @@ import '../../support/home_widget_pump.dart';
 void main() {
   const mode = HomeMode.sundaySchool;
 
-  Future<void> pumpChip(WidgetTester tester, {void Function()? onPressed}) {
-    return HomeWidgetPump.pump(
-      tester,
-      HomeModeChip(mode: mode, onPressed: onPressed ?? () {}),
-    );
-  }
-
   testWidgets('shows the label of the current mode', (tester) async {
-    await pumpChip(tester);
+    await HomeWidgetPump.pump(
+      tester,
+      HomeModeChip(mode: mode, onPressed: () {}),
+    );
 
     expect(find.text(mode.label), findsOneWidget);
   });
 
   testWidgets('shows the icon of the current mode', (tester) async {
-    await pumpChip(tester);
+    await HomeWidgetPump.pump(
+      tester,
+      HomeModeChip(mode: mode, onPressed: () {}),
+    );
 
     expect(find.byIcon(mode.icon), findsOneWidget);
   });
 
   testWidgets('has a tooltip naming the other mode', (tester) async {
-    await pumpChip(tester);
+    await HomeWidgetPump.pump(
+      tester,
+      HomeModeChip(mode: mode, onPressed: () {}),
+    );
 
     expect(find.byTooltip('تبديل إلى ${mode.other.label}'), findsOneWidget);
   });
 
   testWidgets('pressing it calls onPressed', (tester) async {
     var presses = 0;
-    await pumpChip(tester, onPressed: () => presses++);
+    await HomeWidgetPump.pump(
+      tester,
+      HomeModeChip(mode: mode, onPressed: () => presses++),
+    );
 
     await tester.tap(find.byType(HomeModeChip));
 
