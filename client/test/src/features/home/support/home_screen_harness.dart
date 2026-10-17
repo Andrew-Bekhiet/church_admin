@@ -117,14 +117,17 @@ class HomeScreenHarness {
     }
   }
 
-  void bringAppToForeground(WidgetTester tester) {
+  void returnAppToInactive(WidgetTester tester) {
     for (final state in [
       AppLifecycleState.hidden,
       AppLifecycleState.inactive,
-      AppLifecycleState.resumed,
     ]) {
       tester.binding.handleAppLifecycleStateChanged(state);
     }
+  }
+
+  void resumeApp(WidgetTester tester) {
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
   }
 
   Future<void> unmount(WidgetTester tester) async {

@@ -47,9 +47,11 @@ void main() {
 
       harness
         ..moveAppToBackground(tester)
-        ..bringAppToForeground(tester);
+        ..returnAppToInactive(tester);
+      harness.persistence.records.clear();
+      harness.resumeApp(tester);
 
-      expect(harness.persistence.records.last, UserPresenceRecord.active);
+      expect(harness.persistence.records, [UserPresenceRecord.active]);
       await harness.unmount(tester);
     });
 
@@ -61,9 +63,11 @@ void main() {
 
       harness
         ..moveAppToBackground(tester)
-        ..bringAppToForeground(tester);
+        ..returnAppToInactive(tester);
+      harness.persistence.records.clear();
+      harness.resumeApp(tester);
 
-      expect(harness.persistence.records.last, UserPresenceRecord.lastSeen);
+      expect(harness.persistence.records, [UserPresenceRecord.lastSeen]);
       await harness.unmount(tester);
     });
 
