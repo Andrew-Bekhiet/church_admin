@@ -9,7 +9,7 @@ OUTPUT_DIR="$(dirname "$SCHEMA_FILE")"
 BASE_FILENAME="schema_part"
 MAX_LINES_PER_PART=2500
 
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/.." || exit 1
 
 # A second run on an already split stub would move the part directives into a
 # part file and leave the stub empty, so refuse to split a stub.
