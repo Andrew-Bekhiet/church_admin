@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -5,6 +7,9 @@ import 'package:flutter_test/flutter_test.dart';
 import '../support/fake_home_dao.dart';
 
 void main() {
+  const family = Family(id: '1', name: 'family');
+  const area = Area(id: '2', name: 'area');
+
   late FakeHomeDao dao;
 
   setUp(() => dao = FakeHomeDao());
@@ -47,14 +52,10 @@ void main() {
 
     blocTest<HomeSearchCubit, HomeSearchState>(
       'a query with results lists its sections',
-      setUp: () => dao.results = HomeSearchResults.fromJson(const {
-        'families': [
-          {'id': '1', 'name': 'family'},
-        ],
-        'areas': [
-          {'id': '2', 'name': 'area'},
-        ],
-      }),
+      setUp: () => dao.results = const HomeSearchResults(
+        families: [family],
+        areas: [area],
+      ),
       build: () => HomeSearchCubit(homeDao: dao),
       act: (cubit) => cubit.search('anyone'),
       wait: HomeSearchCubit.debounceDuration,
@@ -107,6 +108,40 @@ void main() {
       },
       wait: HomeSearchCubit.debounceDuration,
       verify: (_) => expect(dao.queries, ['same']),
+    );
+
+    blocTest<HomeSearchCubit, HomeSearchState>(
+      'retyping a query right after clearing it still searches',
+      setUp: () => dao.results = const HomeSearchResults(families: [family]),
+      build: () => HomeSearchCubit(homeDao: dao),
+      act: (cubit) async {
+        cubit.search('a');
+        await Future<void>.delayed(
+          HomeSearchCubit.debounceDuration + const Duration(milliseconds: 50),
+        );
+        cubit.search('');
+        await Future<void>.delayed(HomeSearchCubit.debounceDuration ~/ 5);
+        cubit.search('a');
+      },
+      wait: HomeSearchCubit.debounceDuration * 2,
+      verify: (cubit) => expect(cubit.state, isA<HomeSearchFound>()),
+    );
+
+    blocTest<HomeSearchCubit, HomeSearchState>(
+      'clearing the query while a search is in flight ends idle',
+      setUp: () => dao.gate = Completer(),
+      build: () => HomeSearchCubit(homeDao: dao),
+      act: (cubit) async {
+        cubit.search('slow');
+        await Future<void>.delayed(
+          HomeSearchCubit.debounceDuration + const Duration(milliseconds: 50),
+        );
+        cubit.search('');
+        await Future<void>.delayed(const Duration(milliseconds: 20));
+        dao.gate?.complete(const HomeSearchResults(families: [family]));
+      },
+      wait: const Duration(milliseconds: 100),
+      verify: (cubit) => expect(cubit.state, isA<HomeSearchIdle>()),
     );
   });
 }
