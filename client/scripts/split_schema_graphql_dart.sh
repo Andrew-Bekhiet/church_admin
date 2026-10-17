@@ -9,6 +9,15 @@ OUTPUT_DIR="$(dirname "$SCHEMA_FILE")"
 BASE_FILENAME="schema_part"
 MAX_LINES_PER_PART=2500
 
+cd "$(dirname "$0")/.." || exit 1
+
+# A second run on an already split stub would move the part directives into a
+# part file and leave the stub empty, so refuse to split a stub.
+if grep -q '^part "schema_part1.dart";' "$SCHEMA_FILE"; then
+  echo "$SCHEMA_FILE is already split; nothing to do"
+  exit 0
+fi
+
 # Make a backup of the original file
 BACKUP_FILE="${SCHEMA_FILE}.bak"
 
@@ -121,7 +130,11 @@ END {
 ' "$BACKUP_FILE"
 
 rm "$BACKUP_FILE"
-dart format "$OUTPUT_DIR"
+if command -v fvm >/dev/null 2>&1 && [ -f .fvmrc ]; then
+  fvm dart format "$OUTPUT_DIR"
+else
+  dart format "$OUTPUT_DIR"
+fi
 
 echo "Schema split complete"
 
