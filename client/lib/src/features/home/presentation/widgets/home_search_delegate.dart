@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -126,10 +124,4 @@ class HomeSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) => buildResults(context);
-
-  @override
-  void dispose() {
-    unawaited(searchCubit.close());
-    super.dispose();
-  }
 }

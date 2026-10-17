@@ -52,7 +52,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 titleSpacing: 0,
                 title: InkWell(
-                  onTap: () => onSearch(context),
+                  onTap: () => unawaited(onSearch(context)),
                   child: const SizedBox(
                     height: kToolbarHeight,
                     child: Row(
@@ -84,12 +84,13 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  void onSearch(BuildContext context) {
-    unawaited(
-      showSearch(
-        context: context,
-        delegate: HomeSearchDelegate(HomeSearchCubit()),
-      ),
+  Future<void> onSearch(BuildContext context) async {
+    final searchCubit = HomeSearchCubit();
+
+    await showSearch(
+      context: context,
+      delegate: HomeSearchDelegate(searchCubit),
     );
+    await searchCubit.close();
   }
 }
