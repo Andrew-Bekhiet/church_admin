@@ -17,7 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
       tabs: mode.tabs,
       currentTabIndex: 0,
       listTypes: {
-        for (final tab in mode.tabs)
+        for (final tab in HomeTab.values)
           if (tab.defaultListType case final listType?) tab: listType,
       },
       hero: HomeHero.forSeason(LiturgySeason.current),

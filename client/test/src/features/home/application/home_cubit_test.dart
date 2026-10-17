@@ -75,6 +75,18 @@ void main() {
     );
 
     blocTest<HomeCubit, HomeState>(
+      'the services tab is a grid after switching from church data mode',
+      setUp: () =>
+          fixture = HomeCubitFixture(lastHomeMode: HomeMode.churchData),
+      build: () => fixture.buildCubit(),
+      act: (cubit) => cubit.switchMode(),
+      verify: (cubit) => expect(
+        cubit.state.listTypeOf(HomeTab.services),
+        ViewableObjectListType.grid,
+      ),
+    );
+
+    blocTest<HomeCubit, HomeState>(
       'selecting a tab past the last one lands on the last tab',
       build: () => fixture.buildCubit(),
       act: (cubit) => cubit.selectTab(cubit.state.tabs.length),
