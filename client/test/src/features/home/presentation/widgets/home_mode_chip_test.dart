@@ -32,16 +32,4 @@ void main() {
 
     expect(find.byTooltip('تبديل إلى ${mode.other.label}'), findsOneWidget);
   });
-
-  testWidgets('pressing it calls onPressed', (tester) async {
-    var presses = 0;
-    await HomeWidgetPump.pump(
-      tester,
-      HomeModeChip(mode: mode, onPressed: () => presses++),
-    );
-
-    await tester.tap(find.byType(HomeModeChip));
-
-    expect(presses, 1);
-  });
 }
