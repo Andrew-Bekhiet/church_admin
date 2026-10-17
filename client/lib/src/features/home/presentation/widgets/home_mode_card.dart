@@ -56,20 +56,22 @@ class HomeModeCard extends StatelessWidget {
       ),
     );
 
-    return Semantics(
-      selected: isSelected,
-      button: true,
-      child: isSelected
-          ? Card.filled(
-              color: colorScheme.primaryContainer,
-              clipBehavior: Clip.antiAlias,
-              child: content,
-            )
-          : Card.outlined(
-              color: colorScheme.surface,
-              clipBehavior: Clip.antiAlias,
-              child: content,
-            ),
+    return MergeSemantics(
+      child: Semantics(
+        selected: isSelected,
+        button: true,
+        child: isSelected
+            ? Card.filled(
+                color: colorScheme.primaryContainer,
+                clipBehavior: Clip.antiAlias,
+                child: content,
+              )
+            : Card.outlined(
+                color: colorScheme.surface,
+                clipBehavior: Clip.antiAlias,
+                child: content,
+              ),
+      ),
     );
   }
 }
