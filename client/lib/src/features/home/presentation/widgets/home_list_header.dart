@@ -65,7 +65,9 @@ class HomeListHeader extends StatelessWidget {
                 ),
               ],
               selected: {segmentOf(listType)},
-              onSelectionChanged: (_) => onToggleListType?.call(),
+              onSelectionChanged: onToggleListType == null
+                  ? null
+                  : (_) => onToggleListType?.call(),
             ),
         ],
       ),
