@@ -85,32 +85,83 @@ void main() {
   });
 
   group('mode cards', () {
-    testWidgets('tapping the church data card shows the church data tabs', (
+    testWidgets('tapping the church data card lands on the areas tab', (
       tester,
     ) async {
+      const areaTotal = 7;
+      harness.database = HomeDatabaseFixture(totals: {Area: areaTotal});
       await harness.pump(tester);
 
       await tester.tap(find.byKey(HomeModeCardsKeys.churchDataButtonKey));
       await tester.pumpAndSettle();
-      await tester.tap(find.byIcon(Symbols.pin_drop));
-      await tester.pumpAndSettle();
 
-      expect(find.text('المناطق'), findsWidgets);
+      expect(
+        find.descendant(
+          of: find.byType(HomeBottomNavBar),
+          matching: find.text('$areaTotal المناطق'),
+        ),
+        findsOneWidget,
+      );
       await harness.unmount(tester);
     });
 
-    testWidgets('tapping the sunday school card shows the sunday school tabs', (
+    testWidgets('tapping the active mode card lands on its services tab', (
       tester,
     ) async {
+      const serviceTotal = 3;
+      harness.database = HomeDatabaseFixture(totals: {Service: serviceTotal});
+      await harness.pump(tester);
+
+      await tester.tap(find.byKey(HomeModeCardsKeys.sundaySchoolButtonKey));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.descendant(
+          of: find.byType(HomeBottomNavBar),
+          matching: find.text('$serviceTotal الخدمات'),
+        ),
+        findsOneWidget,
+      );
+      await harness.unmount(tester);
+    });
+
+    testWidgets('tapping the sunday school card lands on the services tab', (
+      tester,
+    ) async {
+      const serviceTotal = 3;
+      harness.database = HomeDatabaseFixture(totals: {Service: serviceTotal});
       harness.preferences.lastHomeMode = HomeMode.churchData;
       await harness.pump(tester);
 
       await tester.tap(find.byKey(HomeModeCardsKeys.sundaySchoolButtonKey));
       await tester.pumpAndSettle();
-      await tester.tap(find.byIcon(Symbols.volunteer_activism));
+
+      expect(
+        find.descendant(
+          of: find.byType(HomeBottomNavBar),
+          matching: find.text('$serviceTotal الخدمات'),
+        ),
+        findsOneWidget,
+      );
+      await harness.unmount(tester);
+    });
+  });
+
+  group('changing mode from the drawer on the summary', () {
+    testWidgets('stays on the summary', (tester) async {
+      await harness.pump(tester);
+
+      await harness.openDrawer(tester);
+      await tester.tap(find.text('تبديل إلى الافتقاد'));
       await tester.pumpAndSettle();
 
-      expect(find.text('الخدمات'), findsWidgets);
+      expect(
+        find.descendant(
+          of: find.byType(HomeBottomNavBar),
+          matching: find.text(HomeTab.summary.label),
+        ),
+        findsWidgets,
+      );
       await harness.unmount(tester);
     });
   });
@@ -171,10 +222,9 @@ void main() {
       tester,
     ) async {
       harness.database = HomeDatabaseFixture(totals: totals);
+      harness.preferences.lastHomeMode = HomeMode.churchData;
       await harness.pump(tester);
 
-      await tester.tap(find.byKey(HomeModeCardsKeys.churchDataButtonKey));
-      await tester.pumpAndSettle();
       await tester.tap(find.byIcon(Symbols.pin_drop));
       await tester.pumpAndSettle();
 
