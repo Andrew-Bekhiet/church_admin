@@ -24,30 +24,32 @@ void main() {
 
   tearDown(defaultTearDown);
 
-  Future<void> pumpView(WidgetTester tester, HomeSearchState state) {
-    return HomeWidgetPump.pump(tester, HomeSearchResultsView(state: state));
-  }
-
   testWidgets('idle prompts the user to start typing', (tester) async {
-    await pumpView(tester, const HomeSearchIdle());
+    await HomeSearchResultsViewPump.pump(tester, const HomeSearchIdle());
 
     expect(find.text('ابدأ بالكتابة للبحث ...'), findsOneWidget);
   });
 
   testWidgets('loading shows a spinner', (tester) async {
-    await pumpView(tester, const HomeSearchLoading());
+    await HomeSearchResultsViewPump.pump(tester, const HomeSearchLoading());
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 
   testWidgets('nothing found says so', (tester) async {
-    await pumpView(tester, const HomeSearchNothingFound());
+    await HomeSearchResultsViewPump.pump(
+      tester,
+      const HomeSearchNothingFound(),
+    );
 
     expect(find.text('لم يتم العثور على أي نتائج'), findsOneWidget);
   });
 
   testWidgets('failed says the search failed', (tester) async {
-    await pumpView(tester, HomeSearchFailed(Exception('boom')));
+    await HomeSearchResultsViewPump.pump(
+      tester,
+      HomeSearchFailed(Exception('boom')),
+    );
 
     expect(find.text('حدث خطأ أثناء البحث، حاول مرة أخرى'), findsOneWidget);
   });
@@ -59,7 +61,7 @@ void main() {
     ).sections;
 
     testWidgets('titles each section with its label', (tester) async {
-      await pumpView(tester, HomeSearchFound(sections));
+      await HomeSearchResultsViewPump.pump(tester, HomeSearchFound(sections));
 
       for (final section in sections) {
         expect(find.text(section.label), findsOneWidget);
@@ -67,7 +69,7 @@ void main() {
     });
 
     testWidgets('lists the items of every section', (tester) async {
-      await pumpView(tester, HomeSearchFound(sections));
+      await HomeSearchResultsViewPump.pump(tester, HomeSearchFound(sections));
 
       expect(find.text(family.name), findsOneWidget);
       expect(find.text(area.name), findsOneWidget);
@@ -81,9 +83,15 @@ void main() {
         families: [family, second],
       ).sections;
 
-      await pumpView(tester, HomeSearchFound(section));
+      await HomeSearchResultsViewPump.pump(tester, HomeSearchFound(section));
 
       expect(find.byType(Divider), findsOneWidget);
     });
   });
+}
+
+abstract final class HomeSearchResultsViewPump {
+  static Future<void> pump(WidgetTester tester, HomeSearchState state) {
+    return HomeWidgetPump.pump(tester, HomeSearchResultsView(state: state));
+  }
 }
