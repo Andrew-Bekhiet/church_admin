@@ -24,7 +24,7 @@ enum HomeTab {
     entity: Area,
   ),
   streets(
-    label: 'الشوراع',
+    label: 'الشوارع',
     icon: Symbols.road,
     createIcon: Symbols.add_road,
     entity: Street,
