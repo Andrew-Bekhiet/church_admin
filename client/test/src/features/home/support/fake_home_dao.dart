@@ -5,12 +5,15 @@ class FakeHomeDao extends Fake implements HomeDAO {
   final List<String> queries = [];
 
   HomeSearchResults results;
+  Object? error;
 
-  FakeHomeDao({this.results = const HomeSearchResults()});
+  FakeHomeDao({this.results = const HomeSearchResults(), this.error});
 
   @override
   Future<HomeSearchResults> searchAll(String query) async {
     queries.add(query);
+
+    if (error case final error?) throw error;
 
     return results;
   }

@@ -12,16 +12,16 @@ class HomeSearchResults {
   final List<Street> streets;
   final List<Store> stores;
 
-  List<(Type, List<ViewableWithIDAndImage>)> get nonEmptySections {
+  List<HomeSearchSection> get sections {
     return [
-      if (persons.isNotEmpty) (Person, persons),
-      if (areas.isNotEmpty) (Area, areas),
-      if (classes.isNotEmpty) (Class, classes),
-      if (groups.isNotEmpty) (Group, groups),
-      if (families.isNotEmpty) (Family, families),
-      if (services.isNotEmpty) (Service, services),
-      if (streets.isNotEmpty) (Street, streets),
-      if (stores.isNotEmpty) (Store, stores),
+      if (persons.isNotEmpty) HomeSearchSection.ofType(Person, persons),
+      if (areas.isNotEmpty) HomeSearchSection.ofType(Area, areas),
+      if (classes.isNotEmpty) HomeSearchSection.ofType(Class, classes),
+      if (groups.isNotEmpty) HomeSearchSection.ofType(Group, groups),
+      if (families.isNotEmpty) HomeSearchSection.ofType(Family, families),
+      if (services.isNotEmpty) HomeSearchSection.ofType(Service, services),
+      if (streets.isNotEmpty) HomeSearchSection.ofType(Street, streets),
+      if (stores.isNotEmpty) HomeSearchSection.ofType(Store, stores),
     ];
   }
 
