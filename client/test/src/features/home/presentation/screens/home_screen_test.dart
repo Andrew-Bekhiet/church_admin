@@ -102,6 +102,10 @@ void main() {
         ),
         findsOneWidget,
       );
+      expect(
+        harness.selectedIndexOf(tester),
+        harness.indexOfTab(HomeMode.churchData, HomeTab.areas),
+      );
       await harness.unmount(tester);
     });
 
@@ -121,6 +125,10 @@ void main() {
           matching: find.text('$serviceTotal الخدمات'),
         ),
         findsOneWidget,
+      );
+      expect(
+        harness.selectedIndexOf(tester),
+        harness.indexOfTab(HomeMode.sundaySchool, HomeTab.services),
       );
       await harness.unmount(tester);
     });
@@ -143,6 +151,10 @@ void main() {
         ),
         findsOneWidget,
       );
+      expect(
+        harness.selectedIndexOf(tester),
+        harness.indexOfTab(HomeMode.sundaySchool, HomeTab.services),
+      );
       await harness.unmount(tester);
     });
   });
@@ -156,6 +168,10 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(HomeListHeader), findsNothing);
+      expect(
+        harness.selectedIndexOf(tester),
+        harness.indexOfTab(HomeMode.churchData, HomeTab.summary),
+      );
       await harness.unmount(tester);
     });
   });
@@ -280,7 +296,11 @@ void main() {
       await tester.fling(find.byType(PageView), const Offset(400, 0), 1000);
       await tester.pumpAndSettle();
 
-      expect(harness.destinationLabelOf(HomeTab.services), findsOneWidget);
+      expect(
+        harness.selectedIndexOf(tester),
+        harness.indexOfTab(HomeMode.sundaySchool, HomeTab.services),
+      );
+      expect(find.text('الخدمات'), findsWidgets);
 
       await harness.unmount(tester);
     });
@@ -339,6 +359,10 @@ void main() {
       await tester.tap(find.text('تبديل إلى الافتقاد'));
       await tester.pumpAndSettle();
 
+      expect(
+        harness.selectedIndexOf(tester),
+        harness.indexOfTab(HomeMode.churchData, HomeTab.churchDataPersons),
+      );
       expect(find.text('الأفراد'), findsWidgets);
       await harness.unmount(tester);
     });
@@ -353,9 +377,10 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(
-        harness.destinationLabelOf(HomeTab.churchDataPersons),
-        findsOneWidget,
+        harness.selectedIndexOf(tester),
+        harness.indexOfTab(HomeMode.churchData, HomeTab.churchDataPersons),
       );
+      expect(find.text('الأفراد'), findsWidgets);
       await harness.unmount(tester);
     });
 
@@ -370,7 +395,10 @@ void main() {
       await tester.tap(find.text('تبديل إلى مدارس الأحد'));
       await tester.pumpAndSettle();
 
-      expect(harness.destinationLabelOf(HomeTab.services), findsOneWidget);
+      expect(
+        harness.selectedIndexOf(tester),
+        harness.indexOfTab(HomeMode.sundaySchool, HomeTab.services),
+      );
       await harness.unmount(tester);
     });
   });
