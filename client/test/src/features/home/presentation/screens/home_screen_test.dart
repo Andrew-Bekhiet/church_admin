@@ -419,11 +419,20 @@ void main() {
     testWidgets('is labelled with what the current tab creates', (
       tester,
     ) async {
+      final handle = tester.ensureSemantics();
       harness.preferences.lastHomeMode = HomeMode.churchData;
       await harness.pump(tester);
       await harness.selectTab(tester, HomeTab.areas);
 
-      expect(find.byTooltip('إضافة منطقة'), findsWidgets);
+      expect(
+        tester.getSemantics(find.byType(FloatingActionButton).first),
+        isSemantics(
+          isButton: true,
+          hasTapAction: true,
+          tooltip: HomeTab.areas.createLabel,
+        ),
+      );
+      handle.dispose();
       await harness.unmount(tester);
     });
 
