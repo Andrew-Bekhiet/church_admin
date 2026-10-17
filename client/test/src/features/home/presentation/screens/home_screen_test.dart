@@ -156,6 +156,22 @@ void main() {
   });
 
   group('changing mode from the drawer', () {
+    testWidgets('after swiping to the persons tab lands on the persons tab of '
+        'the other mode', (tester) async {
+      await harness.pump(tester);
+      await tester.fling(find.byType(PageView), const Offset(400, 0), 1000);
+      await tester.pumpAndSettle();
+      await tester.fling(find.byType(PageView), const Offset(400, 0), 1000);
+      await tester.pumpAndSettle();
+
+      await harness.openDrawer(tester);
+      await tester.tap(find.text('تبديل إلى الافتقاد'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('الأفراد'), findsWidgets);
+      await harness.unmount(tester);
+    });
+
     testWidgets('on the persons tab lands on the persons tab of the other '
         'mode', (tester) async {
       await harness.pump(tester);
