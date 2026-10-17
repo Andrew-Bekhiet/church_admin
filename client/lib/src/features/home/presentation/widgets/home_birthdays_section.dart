@@ -20,7 +20,7 @@ class HomeBirthdaysSection extends StatelessWidget {
       child: switch (birthdays) {
         final HomeBirthdays birthdays when !birthdays.isEmpty =>
           HomeBirthdaysCard(
-            key: HomeScreenSummaryKeys.birthdaysButtonKey,
+            key: HomeBirthdaysSectionKeys.birthdaysButtonKey,
             birthdays: birthdays,
             onTap: () => onTap(birthdays),
           ),
@@ -28,4 +28,8 @@ class HomeBirthdaysSection extends StatelessWidget {
       },
     );
   }
+}
+
+abstract final class HomeBirthdaysSectionKeys {
+  static const Key birthdaysButtonKey = Key('birthdays_button');
 }

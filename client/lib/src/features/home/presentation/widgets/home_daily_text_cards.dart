@@ -19,7 +19,7 @@ class HomeDailyTextCards extends StatelessWidget {
           for (final type in HomeDailyDataType.values)
             SessionReplayUnmask(
               child: HomeDailyTextCard(
-                key: HomeScreenSummaryKeys.dailyTextKeyFor(type),
+                key: HomeDailyTextCardsKeys.dailyTextKeyFor(type),
                 type: type,
                 text: dailyData.select(type),
                 onTap: () => onTap(type),
@@ -31,4 +31,16 @@ class HomeDailyTextCards extends StatelessWidget {
 
     return const Center(child: CircularProgressIndicator());
   }
+}
+
+abstract final class HomeDailyTextCardsKeys {
+  static const Key verseButtonKey = Key('verse_button');
+  static const Key sneksarButtonKey = Key('sneksar_button');
+  static const Key sayingButtonKey = Key('saying_button');
+
+  static Key dailyTextKeyFor(HomeDailyDataType type) => switch (type) {
+    HomeDailyDataType.verse => verseButtonKey,
+    HomeDailyDataType.sneksar => sneksarButtonKey,
+    HomeDailyDataType.saying => sayingButtonKey,
+  };
 }
