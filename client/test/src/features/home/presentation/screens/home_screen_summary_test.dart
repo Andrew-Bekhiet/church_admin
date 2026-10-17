@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:material_ui/material_ui.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 import '../../../../utils.dart';
 import '../../support/fake_home_daily_data_repository.dart';
@@ -12,9 +12,6 @@ void main() {
   setUp(() => harness = HomeScreenHarness());
 
   tearDown(defaultTearDown);
-
-  Finder inDialog(String text) =>
-      find.descendant(of: find.byType(AlertDialog), matching: find.text(text));
 
   group('birthdays', () {
     testWidgets('are listed on the summary', (tester) async {
@@ -57,75 +54,33 @@ void main() {
     });
   });
 
-  group('verse dialog', () {
-    testWidgets('shows the verse', (tester) async {
+  group('daily texts', () {
+    testWidgets('each card shows its title and its text', (tester) async {
       await harness.pump(tester);
 
-      await harness.openSummarySection(
-        tester,
-        HomeScreenSummaryKeys.verseButtonKey,
-      );
+      final texts = {
+        HomeDailyDataType.verse: harness.dailyData.verse,
+        HomeDailyDataType.sneksar: harness.dailyData.sneksar,
+        HomeDailyDataType.saying: harness.dailyData.saying,
+      };
+      for (final MapEntry(key: type, value: text) in texts.entries) {
+        final card = find.byKey(HomeScreenSummaryKeys.dailyTextKeyFor(type));
+        await tester.ensureVisible(card);
 
-      expect(inDialog(harness.dailyData.verse), findsOneWidget);
+        expect(
+          find.descendant(of: card, matching: find.text(type.title)),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(of: card, matching: find.text(text)),
+          findsOneWidget,
+        );
+      }
 
       await harness.unmount(tester);
     });
 
-    testWidgets('asking for another verse shows the new verse', (
-      tester,
-    ) async {
-      await harness.pump(tester);
-      await harness.openSummarySection(
-        tester,
-        HomeScreenSummaryKeys.verseButtonKey,
-      );
-
-      await tester.tap(find.byKey(HomeScreenSummaryKeys.newItemButtonKey));
-      await tester.pumpAndSettle();
-
-      expect(inDialog(harness.dailyData.refreshedVerse), findsOneWidget);
-
-      await harness.unmount(tester);
-    });
-
-    testWidgets('sharing hands the shown verse to the share sheet', (
-      tester,
-    ) async {
-      await harness.pump(tester);
-      await harness.openSummarySection(
-        tester,
-        HomeScreenSummaryKeys.verseButtonKey,
-      );
-
-      await tester.tap(find.byKey(HomeScreenSummaryKeys.shareButtonKey));
-
-      expect(harness.share.sharedTexts, [harness.dailyData.verse]);
-
-      await harness.unmount(tester);
-    });
-  });
-
-  group('saying dialog', () {
-    testWidgets('asking for another saying shows the new saying', (
-      tester,
-    ) async {
-      await harness.pump(tester);
-      await harness.openSummarySection(
-        tester,
-        HomeScreenSummaryKeys.sayingButtonKey,
-      );
-
-      await tester.tap(find.byKey(HomeScreenSummaryKeys.newItemButtonKey));
-      await tester.pumpAndSettle();
-
-      expect(inDialog(harness.dailyData.refreshedSaying), findsOneWidget);
-
-      await harness.unmount(tester);
-    });
-  });
-
-  group('sneksar dialog', () {
-    testWidgets('shows the sneksar', (tester) async {
+    testWidgets('tapping a card opens its sheet', (tester) async {
       await harness.pump(tester);
 
       await harness.openSummarySection(
@@ -133,20 +88,43 @@ void main() {
         HomeScreenSummaryKeys.sneksarButtonKey,
       );
 
-      expect(inDialog(harness.dailyData.sneksar), findsOneWidget);
+      expect(find.byType(HomeDailyTextSheet), findsOneWidget);
+
+      await harness.unmount(tester);
+    });
+  });
+
+  group('mode cards', () {
+    testWidgets('both modes are offered with their names', (tester) async {
+      await harness.pump(tester);
+
+      for (final mode in HomeMode.values) {
+        final card = find.byKey(HomeScreenSummaryKeys.modeKeyFor(mode));
+
+        expect(
+          find.descendant(of: card, matching: find.text(mode.label)),
+          findsOneWidget,
+        );
+      }
 
       await harness.unmount(tester);
     });
 
-    testWidgets('has no button for another sneksar', (tester) async {
+    testWidgets('only the current mode is marked selected', (tester) async {
+      harness.preferences.lastHomeMode = HomeMode.churchData;
       await harness.pump(tester);
 
-      await harness.openSummarySection(
-        tester,
-        HomeScreenSummaryKeys.sneksarButtonKey,
+      final checkedModes = HomeMode.values.where(
+        (mode) => find
+            .descendant(
+              of: find.byKey(HomeScreenSummaryKeys.modeKeyFor(mode)),
+              matching: find.byIcon(Symbols.check_circle),
+            )
+            .evaluate()
+            .isNotEmpty,
       );
 
-      expect(find.byKey(HomeScreenSummaryKeys.newItemButtonKey), findsNothing);
+      expect(checkedModes, [HomeMode.churchData]);
 
       await harness.unmount(tester);
     });
