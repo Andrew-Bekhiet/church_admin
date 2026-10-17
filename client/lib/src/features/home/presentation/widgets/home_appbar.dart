@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/home/presentation/widgets/snowflake_animation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -23,8 +23,6 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             buildWhen: (previous, current) =>
                 previous.mode != current.mode ||
                 previous.currentTab != current.currentTab ||
-                previous.listTypeOf(previous.currentTab) !=
-                    current.listTypeOf(current.currentTab) ||
                 previous.hero != current.hero,
             builder: (context, homeState) {
               if (homeState.currentTab == HomeTab.summary) {
@@ -32,17 +30,13 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               }
 
               final appbar = AppBar(
+                actionsPadding: const EdgeInsetsDirectional.only(end: 8),
                 actions: [
                   HomeModeChip(
                     mode: homeState.mode,
                     onPressed: () =>
                         unawaited(context.read<HomeCubit>().switchMode()),
                   ),
-                  if (homeState.listTypeOf(homeState.currentTab) != null)
-                    IconButton(
-                      onPressed: context.read<HomeCubit>().toggleListType,
-                      icon: const Icon(Symbols.lists),
-                    ),
                 ],
                 leading: Builder(
                   builder: (context) => IconButton(
@@ -51,25 +45,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
                 titleSpacing: 0,
-                title: InkWell(
-                  onTap: () => unawaited(onSearch(context)),
-                  child: const SizedBox(
-                    height: kToolbarHeight,
-                    child: Row(
-                      children: [
-                        SizedBox(width: 8),
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Text('بحث ...'),
-                          ),
-                        ),
-                        Icon(Symbols.search),
-                        SizedBox(width: 8),
-                      ],
-                    ),
-                  ),
-                ),
+                title: const HomeSearchBar(),
               );
 
               if (homeState.hero.showsSnowfall) {
@@ -82,15 +58,5 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
     );
-  }
-
-  Future<void> onSearch(BuildContext context) async {
-    final searchCubit = HomeSearchCubit();
-
-    await showSearch(
-      context: context,
-      delegate: HomeSearchDelegate(searchCubit),
-    );
-    await searchCubit.close();
   }
 }

@@ -25,10 +25,10 @@ class HomeScreenSummary extends StatelessWidget {
             ),
             const SliverToBoxAdapter(child: UpdateAvailableWidget()),
             SliverPadding(
-              padding: EdgeInsetsDirectional.only(
+              padding: const EdgeInsetsDirectional.only(
                 start: 16,
                 end: 16,
-                bottom: MediaQuery.paddingOf(context).bottom + 16,
+                bottom: 16,
               ),
               sliver: SliverList.list(
                 children: [

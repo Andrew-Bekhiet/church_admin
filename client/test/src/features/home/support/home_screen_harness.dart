@@ -56,6 +56,24 @@ class HomeScreenHarness {
     return matches.uri.toString();
   }
 
+  Finder destinationOf(HomeTab tab) => find.descendant(
+    of: find.byType(NavigationBar),
+    matching: find.byIcon(tab.icon),
+  );
+
+  int selectedIndexOf(WidgetTester tester) {
+    return tester
+        .widget<NavigationBar>(find.byType(NavigationBar))
+        .selectedIndex;
+  }
+
+  int indexOfTab(HomeMode mode, HomeTab tab) => mode.tabs.indexOf(tab);
+
+  Future<void> selectTab(WidgetTester tester, HomeTab tab) async {
+    await tester.tap(destinationOf(tab));
+    await tester.pumpAndSettle();
+  }
+
   void signInAs(User user) {
     authState = AuthAuthenticated(
       authUser: AuthUser(
