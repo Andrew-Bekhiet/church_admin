@@ -8,12 +8,19 @@ set -euo pipefail
 base=${1:?usage: lint_changed_migrations.sh <base-ref>}
 cd "$(dirname "$0")/.."
 
-changed=$(git diff --name-only --diff-filter=AM --relative "$base" HEAD -- migrations | grep -E '\.sql$' || true)
-if [ -z "$changed" ]; then
+diff_output=$(mktemp)
+trap 'rm -f "$diff_output"' EXIT
+git diff -z --name-only --diff-filter=AMR --relative "$base" HEAD -- migrations >"$diff_output"
+
+files=()
+while IFS= read -r -d '' file; do
+  case $file in *.sql) files+=("$file") ;; esac
+done <"$diff_output"
+
+if [ "${#files[@]}" -eq 0 ]; then
   echo "No migration SQL changed since $base: nothing to lint."
   exit 0
 fi
 
-echo "$changed"
-# shellcheck disable=SC2086
-sqlfluff lint --disable-progress-bar $changed
+printf '%s\n' "${files[@]}"
+sqlfluff lint --disable-progress-bar "${files[@]}"
