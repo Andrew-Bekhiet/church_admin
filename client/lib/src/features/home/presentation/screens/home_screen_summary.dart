@@ -37,7 +37,7 @@ class HomeScreenSummary extends StatelessWidget {
                     child: HomeModeCards(
                       selectedMode: homeState.mode,
                       onModeSelected: (mode) => unawaited(
-                        context.read<HomeCubit>().changeMode(mode),
+                        context.read<HomeCubit>().openFirstTabOf(mode),
                       ),
                     ),
                   ),

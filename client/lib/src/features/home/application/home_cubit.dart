@@ -78,13 +78,17 @@ class HomeCubit extends Cubit<HomeState> {
     _followCurrentTabTotal();
   }
 
-  Future<void> changeMode(HomeMode mode) async {
-    final newTabs = mode.tabs;
-    final sameEntityIndex = newTabs.indexWhere(
+  Future<void> changeMode(HomeMode mode) {
+    final sameEntityIndex = mode.tabs.indexWhere(
       (tab) => tab.entity == state.currentTab.entity,
     );
-    final newIndex = sameEntityIndex == -1 ? 1 : sameEntityIndex;
 
+    return _enterMode(mode, sameEntityIndex == -1 ? 1 : sameEntityIndex);
+  }
+
+  Future<void> openFirstTabOf(HomeMode mode) => _enterMode(mode, 1);
+
+  Future<void> _enterMode(HomeMode mode, int tabIndex) async {
     await _userPreferencesService.setLastHomeMode(mode);
 
     if (isClosed) return;
@@ -92,8 +96,8 @@ class HomeCubit extends Cubit<HomeState> {
     emit(
       state.copyWith(
         mode: mode,
-        tabs: newTabs,
-        currentTabIndex: newIndex,
+        tabs: mode.tabs,
+        currentTabIndex: tabIndex,
         currentTabTotal: () => null,
       ),
     );
