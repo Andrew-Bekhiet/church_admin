@@ -36,9 +36,7 @@ class HomeScreenSummary extends StatelessWidget {
                   SessionReplayUnmask(
                     child: HomeModeCards(
                       selectedMode: homeState.mode,
-                      onModeSelected: (mode) => unawaited(
-                        context.read<HomeCubit>().openFirstTabOf(mode),
-                      ),
+                      onModeSelected: context.read<HomeCubit>().openFirstTabOf,
                     ),
                   ),
                   const HomeSectionHeader(title: 'اليوم'),
