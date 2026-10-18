@@ -1,10 +1,14 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../../utils.dart';
+import '../../support/fake_home_daily_data_repository.dart';
 import '../../support/home_screen_harness.dart';
 
 void main() {
+  const smallScreen = Size(320, 480);
+
   late HomeScreenHarness harness;
 
   setUp(() => harness = HomeScreenHarness());
@@ -141,6 +145,28 @@ void main() {
         find.byKey(HomeDailyTextSheetKeys.newItemButtonKey),
         findsNothing,
       );
+
+      await harness.unmount(tester);
+    });
+  });
+
+  group('a very long text on a small screen', () {
+    testWidgets('does not overflow and keeps the sharing button reachable', (
+      tester,
+    ) async {
+      final longVerse = List.filled(60, 'verse').join(' ');
+      harness.dailyData = FakeHomeDailyDataRepository(verse: longVerse);
+      await harness.openSheet(tester, HomeDailyTextCardsKeys.verseButtonKey);
+      tester.view.physicalSize = smallScreen;
+      await tester.pumpAndSettle();
+
+      await tester.ensureVisible(
+        find.byKey(HomeDailyTextSheetKeys.shareButtonKey),
+      );
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), isNull);
+      expect(find.byKey(HomeDailyTextSheetKeys.shareButtonKey), findsOneWidget);
 
       await harness.unmount(tester);
     });

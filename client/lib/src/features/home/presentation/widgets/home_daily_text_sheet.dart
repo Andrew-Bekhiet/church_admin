@@ -40,20 +40,20 @@ class HomeDailyTextSheet extends StatelessWidget {
       builder: (context, text) {
         if (text == null) return const SizedBox.shrink();
 
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 16,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 8,
-              children: [
-                Icon(type.icon),
-                Text(type.title, style: textTheme.titleLarge),
-              ],
-            ),
-            Flexible(
-              child: SingleChildScrollView(
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            spacing: 16,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 8,
+                children: [
+                  Icon(type.icon),
+                  Text(type.title, style: textTheme.titleLarge),
+                ],
+              ),
+              Padding(
                 padding: const EdgeInsetsDirectional.symmetric(horizontal: 24),
                 child: Text(
                   text,
@@ -61,30 +61,31 @@ class HomeDailyTextSheet extends StatelessWidget {
                   style: textTheme.displaySmall,
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(bottom: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 12,
-                children: [
-                  FilledButton.tonalIcon(
-                    key: HomeDailyTextSheetKeys.shareButtonKey,
-                    onPressed: () => unawaited(ShareService.I.shareText(text)),
-                    icon: const Icon(Symbols.share),
-                    label: const Text('مشاركة'),
-                  ),
-                  if (type.canShowAnother)
-                    FilledButton.icon(
-                      key: HomeDailyTextSheetKeys.newItemButtonKey,
-                      onPressed: () => homeCubit.showAnotherDailyText(type),
-                      icon: const Icon(Symbols.refresh),
-                      label: Text('${type.label} أخرى'),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(bottom: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 12,
+                  children: [
+                    FilledButton.tonalIcon(
+                      key: HomeDailyTextSheetKeys.shareButtonKey,
+                      onPressed: () =>
+                          unawaited(ShareService.I.shareText(text)),
+                      icon: const Icon(Symbols.share),
+                      label: const Text('مشاركة'),
                     ),
-                ],
+                    if (type.canShowAnother)
+                      FilledButton.icon(
+                        key: HomeDailyTextSheetKeys.newItemButtonKey,
+                        onPressed: () => homeCubit.showAnotherDailyText(type),
+                        icon: const Icon(Symbols.refresh),
+                        label: Text('${type.label} أخرى'),
+                      ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );
