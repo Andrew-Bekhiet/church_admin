@@ -34,7 +34,12 @@ class HomeDailyTextCard extends StatelessWidget {
                 spacing: 8,
                 children: [
                   Icon(type.icon),
-                  Text(type.title, style: textTheme.titleMedium),
+                  Text(
+                    type.title,
+                    style: textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
               Text(

@@ -20,7 +20,12 @@ class HomeBirthdaysCard extends StatelessWidget {
       child: ListTile(
         onTap: onTap,
         leading: const Icon(Symbols.cake),
-        title: const Text('أعياد الميلاد اليوم'),
+        title: Text(
+          'أعياد الميلاد اليوم',
+          style: TextTheme.of(context).titleMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         subtitle: Text(
           birthdays.preview,
           maxLines: 2,
