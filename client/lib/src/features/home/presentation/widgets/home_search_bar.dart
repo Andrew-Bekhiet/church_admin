@@ -29,6 +29,7 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
           final cubit = context.read<HomeSearchCubit>();
 
           return SearchAnchor.bar(
+            barElevation: const WidgetStatePropertyAll(0),
             searchController: _searchController,
             constraints: const BoxConstraints(minHeight: 40),
             barHintText: 'بحث ...',
