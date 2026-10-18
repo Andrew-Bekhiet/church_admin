@@ -19,11 +19,9 @@ class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _HomeAppBarState extends State<HomeAppBar> {
   double get _firstPageScrollProgress {
     final controller = widget._pageController;
-    if (!controller.hasClients) return 0;
+    final page = controller.hasClients ? controller.page : null;
 
-    final position = controller.position;
-
-    return (position.pixels / position.extentInside).clamp(0, 1);
+    return (page ?? controller.initialPage.toDouble()).clamp(0, 1).toDouble();
   }
 
   @override
