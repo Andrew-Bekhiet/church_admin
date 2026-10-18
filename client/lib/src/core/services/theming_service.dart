@@ -3,6 +3,7 @@ import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tinycolor2/tinycolor2.dart';
@@ -229,6 +230,12 @@ class ThemingService with WidgetsBindingObserver {
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       extensions: [DataCheckColors.forScheme(colorScheme)],
+      actionIconTheme: ActionIconThemeData(
+        drawerButtonIconBuilder: (_) => const Icon(Symbols.menu),
+        endDrawerButtonIconBuilder: (_) => const Icon(Symbols.menu),
+        closeButtonIconBuilder: (_) => const Icon(Symbols.close),
+        backButtonIconBuilder: (_) => const Icon(Symbols.arrow_back_ios_new),
+      ),
     );
   }
 
