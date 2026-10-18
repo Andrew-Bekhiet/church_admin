@@ -156,9 +156,12 @@ void main() {
     ) async {
       final longVerse = List.filled(60, 'verse').join(' ');
       harness.dailyData = FakeHomeDailyDataRepository(verse: longVerse);
-      await harness.openSheet(tester, HomeDailyTextCardsKeys.verseButtonKey);
+      await harness.pump(tester);
       tester.view.physicalSize = smallScreen;
-      await tester.pumpAndSettle();
+      await harness.openSummarySection(
+        tester,
+        HomeDailyTextCardsKeys.verseButtonKey,
+      );
 
       await tester.ensureVisible(
         find.byKey(HomeDailyTextSheetKeys.shareButtonKey),
