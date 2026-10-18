@@ -7,12 +7,13 @@ import 'package:rxdart/rxdart.dart';
 class HomeSearchCubit extends Cubit<HomeSearchState> {
   static const Duration debounceDuration = Duration(milliseconds: 500);
 
+  final HomeDAO _homeDao;
   final BehaviorSubject<String> _queries = BehaviorSubject();
   late final StreamSubscription<HomeSearchState> _subscription;
 
-  HomeSearchCubit({HomeDAO? homeDao}) : super(const HomeSearchIdle()) {
-    final dao = homeDao ?? DatabaseService.I.home;
-
+  HomeSearchCubit({HomeDAO? homeDao})
+    : _homeDao = homeDao ?? DatabaseService.I.home,
+      super(const HomeSearchIdle()) {
     _subscription = _queries
         .debounce(
           (query) => query.isEmpty
@@ -20,7 +21,7 @@ class HomeSearchCubit extends Cubit<HomeSearchState> {
               : TimerStream<void>(null, debounceDuration),
         )
         .distinct()
-        .switchMap((query) => _statesOfSearching(dao, query))
+        .switchMap(_statesOfSearching)
         .listen(emit);
   }
 
@@ -28,7 +29,7 @@ class HomeSearchCubit extends Cubit<HomeSearchState> {
     _queries.add(query);
   }
 
-  Stream<HomeSearchState> _statesOfSearching(HomeDAO dao, String query) async* {
+  Stream<HomeSearchState> _statesOfSearching(String query) async* {
     if (query.isEmpty) {
       yield const HomeSearchIdle();
 
@@ -38,7 +39,7 @@ class HomeSearchCubit extends Cubit<HomeSearchState> {
     yield const HomeSearchLoading();
 
     try {
-      final sections = (await dao.searchAll(query)).sections;
+      final sections = (await _homeDao.searchAll(query)).sections;
 
       yield sections.isEmpty
           ? const HomeSearchNothingFound()
