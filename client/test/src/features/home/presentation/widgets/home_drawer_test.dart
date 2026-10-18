@@ -31,6 +31,27 @@ void main() {
       await harness.unmount(tester);
     });
 
+    testWidgets('is shown to a user who manages the users of one area', (
+      tester,
+    ) async {
+      harness.signInAs(
+        const User(
+          uid: 'area-manager',
+          name: 'area manager',
+          adminOn: [
+            AdminOnData(permissionId: 'area-scope', areaAdminOnUsers: true),
+          ],
+        ),
+      );
+      await harness.pump(tester);
+
+      await harness.openDrawer(tester);
+
+      expect(find.byKey(HomeDrawerKeys.manageUsers), findsOneWidget);
+
+      await harness.unmount(tester);
+    });
+
     testWidgets('is hidden from a user who cannot manage users', (
       tester,
     ) async {
