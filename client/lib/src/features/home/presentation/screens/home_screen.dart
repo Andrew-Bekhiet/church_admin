@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Scaffold(
           drawer: const HomeDrawer(),
-          appBar: const HomeAppBar(),
+          appBar: HomeAppBar(pageController: _pageController),
           body: HomeBody(pageController: _pageController),
           floatingActionButton: HomeFAB(pageController: _pageController),
           bottomNavigationBar: HomeBottomNavBar(
