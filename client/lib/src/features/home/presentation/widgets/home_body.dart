@@ -74,7 +74,12 @@ class HomeBody extends StatelessWidget {
 
             if (tab == HomeTab.summary) return page;
 
-            return HomeListPage(tab: tab, child: page);
+            return SafeArea(
+              left: false,
+              right: false,
+              bottom: false,
+              child: HomeListPage(tab: tab, child: page),
+            );
           },
         );
       },

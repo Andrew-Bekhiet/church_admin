@@ -41,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
         child: Scaffold(
+          extendBodyBehindAppBar: true,
           drawer: const HomeDrawer(),
           appBar: HomeAppBar(pageController: _pageController),
           body: HomeBody(pageController: _pageController),

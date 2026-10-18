@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/home/presentation/widgets/snowflake_animation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -34,7 +35,23 @@ class _HomeAppBarState extends State<HomeAppBar> {
             previous.currentTab != current.currentTab ||
             previous.hero != current.hero,
         builder: (context, homeState) {
+          final theme = Theme.of(context);
           final appbar = AppBar(
+            backgroundColor: Colors.transparent,
+            scrolledUnderElevation: 0,
+            systemOverlayStyle: switch (theme.brightness) {
+              Brightness.light => SystemUiOverlayStyle.dark,
+              Brightness.dark => SystemUiOverlayStyle.light,
+            },
+            flexibleSpace: ListenableBuilder(
+              listenable: widget._pageController,
+              builder: (context, _) => ColoredBox(
+                color:
+                    (theme.appBarTheme.backgroundColor ??
+                            theme.colorScheme.surface)
+                        .withValues(alpha: _firstPageScrollProgress),
+              ),
+            ),
             actionsPadding: const EdgeInsetsDirectional.symmetric(
               horizontal: 8,
             ),
