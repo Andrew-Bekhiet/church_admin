@@ -15,6 +15,7 @@ class HomeDailyTextCards extends StatelessWidget {
   Widget build(BuildContext context) {
     if (dailyData case final dailyData?) {
       return Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           for (final type in HomeDailyDataType.values)
             SessionReplayUnmask(

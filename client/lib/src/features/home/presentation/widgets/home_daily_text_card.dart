@@ -26,6 +26,7 @@ class HomeDailyTextCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsetsDirectional.all(16),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             spacing: 8,
             children: [

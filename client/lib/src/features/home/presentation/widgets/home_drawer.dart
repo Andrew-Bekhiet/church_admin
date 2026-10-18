@@ -132,6 +132,7 @@ class HomeDrawer extends StatelessWidget {
                 ),
                 SessionReplayUnmask(
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       ListTile(
                         leading: const Icon(Symbols.info),
