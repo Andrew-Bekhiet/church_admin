@@ -9,6 +9,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'fakes/fake_feature_flags_repo.dart';
+import 'features/home/support/fake_home_dao.dart';
 import 'features/home/support/recording_user_persistence_service.dart';
 
 void main() {
@@ -184,6 +185,7 @@ DatabaseService _databaseService() {
   when(() => databaseService.streets).thenReturn(_MockStreetsDAO());
   when(() => databaseService.families).thenReturn(_MockFamiliesDAO());
   when(() => databaseService.stores).thenReturn(_MockStoresDAO());
+  when(() => databaseService.home).thenReturn(FakeHomeDao());
 
   return databaseService;
 }

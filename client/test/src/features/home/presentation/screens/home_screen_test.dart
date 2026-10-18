@@ -10,6 +10,9 @@ import '../../support/recording_user_persistence_service.dart';
 
 void main() {
   late HomeScreenHarness harness;
+  final modeChipSlot = find
+      .ancestor(of: find.byType(HomeModeChip), matching: find.byType(Align))
+      .first;
 
   setUp(() => harness = HomeScreenHarness());
 
@@ -202,10 +205,21 @@ void main() {
       await harness.unmount(tester);
     });
 
-    testWidgets('is absent on the summary', (tester) async {
+    testWidgets('takes no width on the summary', (tester) async {
       await harness.pump(tester);
 
-      expect(find.byType(HomeModeChip), findsNothing);
+      expect(tester.getSize(modeChipSlot).width, 0);
+      await harness.unmount(tester);
+    });
+
+    testWidgets('takes its full width on a list tab', (tester) async {
+      await harness.pump(tester);
+      await harness.selectTab(tester, HomeTab.services);
+
+      expect(
+        tester.getSize(modeChipSlot).width,
+        tester.getSize(find.byType(HomeModeChip)).width,
+      );
       await harness.unmount(tester);
     });
   });
@@ -250,10 +264,10 @@ void main() {
       await harness.unmount(tester);
     });
 
-    testWidgets('is absent on the summary', (tester) async {
+    testWidgets('on the summary offers the search bar', (tester) async {
       await harness.pump(tester);
 
-      expect(find.byType(HomeSearchBar), findsNothing);
+      expect(find.byType(HomeSearchBar), findsOneWidget);
       await harness.unmount(tester);
     });
   });
