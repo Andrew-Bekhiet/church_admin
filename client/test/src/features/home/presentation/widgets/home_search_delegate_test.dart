@@ -85,20 +85,12 @@ void main() {
     });
 
     test('result sections keep a fixed order regardless of the response', () {
-      final results = HomeSearchResults.fromJson(const {
-        'stores': [
-          {'id': '1', 'name': 'store'},
-        ],
-        'streets': [
-          {'id': '2', 'name': 'street'},
-        ],
-        'families': [
-          {'id': '3', 'name': 'family'},
-        ],
-        'areas': [
-          {'id': '4', 'name': 'area'},
-        ],
-      });
+      const results = HomeSearchResults(
+        stores: [Store(id: '1', name: 'store')],
+        streets: [Street(id: '2', name: 'street')],
+        families: [Family(id: '3', name: 'family')],
+        areas: [Area(id: '4', name: 'area')],
+      );
 
       expect(results.nonEmptySections.map((section) => section.$1), [
         Area,
@@ -109,19 +101,14 @@ void main() {
     });
 
     test('nonEmptySections filters correctly', () {
-      final results = HomeSearchResults.fromJson(const {
-        'areas': [],
-        'families': [
-          {'id': '1', 'name': 'Test'},
-        ],
-        'persons': [],
-      });
+      const family = Family(id: '1', name: 'Test');
+      const results = HomeSearchResults(families: [family]);
 
       expect(results.nonEmptySections.length, 1);
       expect(results.nonEmptySections.first.$1, Family);
       expect(results.nonEmptySections.first.$2.length, 1);
-      expect(results.nonEmptySections.first.$2.first.id, '1');
-      expect(results.nonEmptySections.first.$2.first.name, 'Test');
+      expect(results.nonEmptySections.first.$2.first.id, family.id);
+      expect(results.nonEmptySections.first.$2.first.name, family.name);
     });
   });
 }
