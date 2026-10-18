@@ -427,18 +427,9 @@ void main() {
         cubit.selectTab(1);
         await pumpEventQueue();
       },
-      verify: (_) => expect(
-        fixture.database.latestFiltersByEntity[Area]?.map(
-          (filter) => filter.queryToJson(),
-        ),
-        [
-          {
-            'id': {
-              '_in': [area.id],
-            },
-          },
-        ],
-      ),
+      verify: (_) => expect(fixture.database.latestFiltersByEntity[Area], [
+        Filter<Object>(AreaFields().id, MultiSelectOperator.anyOf, [area.id]),
+      ]),
     );
 
     blocTest<HomeCubit, HomeState>(
