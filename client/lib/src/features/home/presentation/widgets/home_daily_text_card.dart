@@ -44,8 +44,6 @@ class HomeDailyTextCard extends StatelessWidget {
               ),
               Text(
                 text,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
                 style: textTheme.bodyLarge,
               ),
               Align(
