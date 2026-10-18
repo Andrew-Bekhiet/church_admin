@@ -1,0 +1,111 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+# Review rules live in REVIEW.md files (loaded below as code guidelines); this file holds settings only.
+language: en-US
+inheritance: true
+tone_instructions: >-
+  Be brief and concrete. One finding per root cause, with file, line and the trigger.
+  Never restate what the analyzer enforces. Accept a reasoned decline unless you have new evidence.
+
+reviews:
+  profile: chill
+  request_changes_workflow: true
+  high_level_summary_instructions: |
+    First line: the risk label you applied and the one path or change that set it.
+    Then what changes for users, in at most three bullets. No file-by-file list.
+  poem: false
+  in_progress_fortune: false
+
+  auto_review:
+    enabled: true
+    drafts: false
+    auto_incremental_review: true
+    # Stacked PRs target the layer below, not master.
+    base_branches:
+      - ".*"
+
+  path_filters:
+    - "!**/*.g.dart"
+    - "!**/*.freezed.dart"
+    - "!**/*.gql.dart"
+    - "!**/*.graphql.dart"
+    - "!client/lib/src/core/graphql/schema.graphql"
+
+  labeling_instructions:
+    - label: "risk: high"
+      instructions: >-
+        Apply when the PR changes anything under server/hasura/ (migrations or metadata permissions), server/firebase/functions/,
+        .github/workflows/, client/lib/src/features/auth/, or the release and signing setup (client/android/, client/ios/ build files).
+        These deploy on merge or guard access to real users' data.
+    - label: "risk: medium"
+      instructions: >-
+        Apply to ordinary product changes under client/lib/ or packages/ that do not meet the high-risk rule,
+        and to dependency upgrades.
+    - label: "risk: low"
+      instructions: >-
+        Apply when the PR only changes docs, AGENTS.md or REVIEW.md files, tests, or user-facing copy, with no change to runtime logic.
+  mutually_exclusive_groups:
+    risk:
+      - "risk: high"
+      - "risk: medium"
+      - "risk: low"
+  auto_apply_labels: true
+
+  pre_merge_checks:
+    docstrings:
+      mode: "off"
+    title:
+      mode: warning
+      requirements: >-
+        Conventional commit form: type(scope): summary in the imperative, lowercase type.
+        Append the Linear key in parentheses when the branch names one, e.g. (ENG-280).
+    description:
+      mode: warning
+    custom_checks:
+      - name: Migration keeps data
+        mode: warning
+        instructions: >-
+          Applies only when the PR adds or changes files under server/hasura/migrations/. Pass when every up.sql is additive
+          (no DROP of a populated table or column, no UPDATE or DELETE rewriting existing rows without the PR description
+          explaining why), every down.sql raises an exception before destroying rows, the directory timestamp is a full
+          millisecond Unix time, CHECK or foreign-key constraints on existing tables are added NOT VALID and validated in a
+          later migration, nothing dropped or renamed is still referenced by a trigger, function, view or seed, and down.sql
+          drops triggers before their functions. Fail otherwise and name the file and line. Pass with "not applicable" when no migration changed.
+      - name: Permission parity
+        mode: warning
+        instructions: >-
+          Applies only when the PR changes server/hasura/metadata/. For each changed permission or relationship, state who gains or
+          loses select, insert, update or delete. Fail when a relationship lets a role read rows of the remote table that the
+          role's own select permission on that table would hide, or when a permission keys on auth_id instead of uid.
+          Pass with "not applicable" when no metadata changed.
+      - name: Testing evidence
+        mode: warning
+        instructions: >-
+          Pass when the PR description's Testing section names the commands run (analyzer, tests, e2e or manual steps) and their
+          outcome, and, when files under client/lib/ change visible UI, links screenshots. Fail when the section is missing,
+          empty, or only says that tests pass.
+      - name: Deploy order
+        mode: warning
+        instructions: >-
+          Applies when the PR renames or removes a Firebase callable, a Hasura root field, column or table the client reads, or a
+          GraphQL operation. Pass when the PR description says which side ships first and why old clients keep working.
+          Pass with "not applicable" otherwise.
+
+  finishing_touches:
+    # The repo writes no doc comments and writes tests first; generated ones would fight both rules.
+    docstrings:
+      enabled: false
+    unit_tests:
+      enabled: false
+
+knowledge_base:
+  learnings:
+    scope: local
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "**/REVIEW.md"
+      # packages/AGENTS.md defers to client/AGENTS.md by link, and links are not followed.
+      - files: "client/AGENTS.md"
+        applyTo: "packages/**"
+      - files: "client/REVIEW.md"
+        applyTo: "packages/**"
