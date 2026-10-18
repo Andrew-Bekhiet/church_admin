@@ -15,7 +15,6 @@ void main() {
     );
 
     expect(find.text(mode.label), findsOneWidget);
-    expect(find.text(mode.contents), findsOneWidget);
   });
 
   testWidgets('shows the mode icon', (tester) async {

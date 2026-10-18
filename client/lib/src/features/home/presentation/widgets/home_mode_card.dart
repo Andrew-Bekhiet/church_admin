@@ -26,32 +26,19 @@ class HomeModeCard extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsetsDirectional.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           spacing: 8,
           children: [
-            Row(
-              spacing: 8,
-              children: [
-                Icon(mode.icon, color: contentColor),
-                Expanded(
-                  child: Text(
-                    mode.label,
-                    style: textTheme.titleMedium?.copyWith(
-                      color: contentColor,
-                    ),
-                  ),
+            Icon(mode.icon, color: contentColor),
+            Expanded(
+              child: Text(
+                mode.label,
+                style: textTheme.titleMedium?.copyWith(
+                  color: contentColor,
                 ),
-                if (isSelected) Icon(Symbols.check_circle, color: contentColor),
-              ],
+              ),
             ),
-            Text(
-              mode.contents,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: textTheme.bodySmall?.copyWith(color: contentColor),
-            ),
+            if (isSelected) Icon(Symbols.check_circle, color: contentColor),
           ],
         ),
       ),

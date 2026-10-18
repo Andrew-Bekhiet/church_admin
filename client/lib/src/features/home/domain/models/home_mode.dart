@@ -29,11 +29,6 @@ enum HomeMode {
   final IconData icon;
   final List<HomeTab> tabs;
 
-  String get contents => tabs
-      .where((tab) => tab != HomeTab.summary)
-      .map((tab) => tab.label)
-      .join(' · ');
-
   HomeMode get other => switch (this) {
     sundaySchool => churchData,
     churchData => sundaySchool,
