@@ -13,21 +13,19 @@ class HomeModeCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          for (final mode in HomeMode.values)
-            Expanded(
-              child: HomeModeCard(
-                key: HomeModeCardsKeys.modeKeyFor(mode),
-                mode: mode,
-                isSelected: mode == selectedMode,
-                onTap: () => onModeSelected(mode),
-              ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final mode in HomeMode.values)
+          Expanded(
+            child: HomeModeCard(
+              key: HomeModeCardsKeys.modeKeyFor(mode),
+              mode: mode,
+              isSelected: mode == selectedMode,
+              onTap: () => onModeSelected(mode),
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 }
