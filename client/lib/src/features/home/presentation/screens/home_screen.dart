@@ -37,7 +37,11 @@ class _HomeScreenState extends State<HomeScreen> {
         listener: (context, state) {
           if (_pageController.hasClients &&
               _pageController.page?.round() != state.currentTabIndex) {
-            _pageController.jumpToPage(state.currentTabIndex);
+            _pageController.animateToPage(
+              state.currentTabIndex,
+              duration: kTabScrollDuration,
+              curve: Curves.easeInOutCirc,
+            );
           }
         },
         child: Scaffold(
