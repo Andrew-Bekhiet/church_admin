@@ -29,24 +29,18 @@ class HomeSearchCubit extends Cubit<HomeSearchState> {
     _queries.add(query);
   }
 
-  Stream<HomeSearchState> _statesOfSearching(String query) async* {
-    if (query.isEmpty) {
-      yield const HomeSearchIdle();
+  Stream<HomeSearchState> _statesOfSearching(String query) {
+    if (query.isEmpty) return Stream.value(const HomeSearchIdle());
 
-      return;
-    }
-
-    yield const HomeSearchLoading();
-
-    try {
-      final sections = (await _homeDao.searchAll(query)).sections;
-
-      yield sections.isEmpty
-          ? const HomeSearchNothingFound()
-          : HomeSearchFound(sections);
-    } catch (error) {
-      yield HomeSearchFailed(error);
-    }
+    return Stream.fromFuture(Future.sync(() => _homeDao.searchAll(query)))
+        .map<HomeSearchState>(
+          (results) => switch (results.sections) {
+            [] => const HomeSearchNothingFound(),
+            final sections => HomeSearchFound(sections),
+          },
+        )
+        .onErrorReturnWith((error, _) => HomeSearchFailed(error))
+        .startWith(const HomeSearchLoading());
   }
 
   @override

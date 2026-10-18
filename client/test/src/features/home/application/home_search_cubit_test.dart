@@ -143,5 +143,20 @@ void main() {
       wait: const Duration(milliseconds: 100),
       verify: (cubit) => expect(cubit.state, isA<HomeSearchIdle>()),
     );
+
+    blocTest<HomeSearchCubit, HomeSearchState>(
+      'clearing the query goes idle without waiting for the pending search',
+      setUp: () => dao.gate = Completer(),
+      build: () => HomeSearchCubit(homeDao: dao),
+      act: (cubit) async {
+        cubit.search('slow');
+        await Future<void>.delayed(
+          HomeSearchCubit.debounceDuration + const Duration(milliseconds: 50),
+        );
+        cubit.search('');
+      },
+      wait: const Duration(milliseconds: 100),
+      expect: () => [isA<HomeSearchLoading>(), isA<HomeSearchIdle>()],
+    );
   });
 }
