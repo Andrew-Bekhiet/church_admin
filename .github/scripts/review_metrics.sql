@@ -1,8 +1,5 @@
--- Review-health metrics over a SQLite dump of PR review data with tables
--- prs(number, title, state, author, …), threads(id, pr, path, line, is_resolved, is_outdated, resolved_by, n_comments),
--- thread_comments(thread, pr, seq, author, body, created_at, url), reviews(pr, author, state, body, submitted_at)
--- and issue_comments(pr, author, body, created_at).
--- Run: sqlite3 -header -column reviews.sqlite < .github/scripts/review_metrics.sql
+-- Review-health metrics over the SQLite file written by .github/scripts/dump_pr_reviews.py.
+-- Run: sqlite3 -header -column <out>/reviews.sqlite < .github/scripts/review_metrics.sql
 -- Rerun after every few weeks of REVIEW.md or .coderabbit.yaml changes and compare.
 
 .print '== Inline threads by reviewer, across every dumped PR =='
