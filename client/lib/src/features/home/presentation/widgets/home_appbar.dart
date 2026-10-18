@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/home/presentation/widgets/snowflake_animation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -34,16 +31,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 actions: [
                   HomeModeChip(
                     mode: homeState.mode,
-                    onPressed: () =>
-                        unawaited(context.read<HomeCubit>().switchMode()),
+                    onPressed: context.read<HomeCubit>().switchMode,
                   ),
                 ],
-                leading: Builder(
-                  builder: (context) => IconButton(
-                    icon: const Icon(Symbols.menu),
-                    onPressed: () => Scaffold.of(context).openDrawer(),
-                  ),
-                ),
                 titleSpacing: 0,
                 title: const HomeSearchBar(),
               );
