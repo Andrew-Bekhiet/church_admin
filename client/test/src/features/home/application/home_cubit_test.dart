@@ -571,6 +571,21 @@ void main() {
       wait: Duration.zero,
       verify: (cubit) => expect(cubit.state.account, isNull),
     );
+
+    blocTest<HomeCubit, HomeState>(
+      'signing out ends the signed-in session',
+      build: () => fixture.buildCubit(),
+      act: (cubit) => cubit.signOut(),
+      verify: (_) => expect(fixture.authRepository.isSignedIn, isFalse),
+    );
+
+    blocTest<HomeCubit, HomeState>(
+      'signing out requires local authentication before the next use',
+      build: () => fixture.buildCubit(),
+      act: (cubit) => cubit.signOut(),
+      verify: (_) =>
+          expect(fixture.localAuthService.shouldAuthenticate, isTrue),
+    );
   });
 
   group('hero', () {

@@ -31,7 +31,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   final HomeDailyDataRepository _homeDailyDataRepository;
   final UserPreferencesService _userPreferencesService;
-  final AuthBloc _authBloc;
+  final AuthRepository _authRepository;
   final LocalAuthService _localAuthService;
   final UserPersistenceService _userPersistenceService;
   final DatabaseService _databaseService;
@@ -49,7 +49,7 @@ class HomeCubit extends Cubit<HomeState> {
     required this._databaseService,
     required this._userPreferencesService,
     required Stream<User?> userDataStream,
-    required this._authBloc,
+    required this._authRepository,
     required this._localAuthService,
     required this._userPersistenceService,
   }) : _users = userDataStream.shareReplay(maxSize: 1),
@@ -142,9 +142,9 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(dailyData: newData));
   }
 
-  void signOut() {
+  Future<void> signOut() async {
     _localAuthService.scheduleReauth();
-    _authBloc.add(const SignOut());
+    await _authRepository.signOut();
   }
 
   void recordLifecycle(AppLifecycleState lifecycleState) {

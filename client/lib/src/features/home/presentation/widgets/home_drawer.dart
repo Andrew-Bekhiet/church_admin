@@ -152,7 +152,7 @@ class HomeDrawer extends StatelessWidget {
                         onTap: () {
                           Scaffold.of(context).openEndDrawer();
 
-                          homeCubit.signOut();
+                          unawaited(homeCubit.signOut());
                         },
                       ),
                     ],
