@@ -35,11 +35,11 @@ class HomeCubit extends Cubit<HomeState> {
   final LocalAuthService _localAuthService;
   final UserPersistenceService _userPersistenceService;
   final DatabaseService _databaseService;
-  final Stream<User?> _users;
+  final Stream<User?> _userStream;
 
   late final HomeListControllers _listControllers = HomeListControllers(
     databaseService: _databaseService,
-    visibility: _users.map(HomeContainerVisibility.fromUser),
+    visibility: _userStream.map(HomeContainerVisibility.fromUser),
   );
   late final StreamSubscription<User?> _userSubscription;
   StreamSubscription<int?>? _currentTabTotalSubscription;
@@ -52,14 +52,14 @@ class HomeCubit extends Cubit<HomeState> {
     required this._authRepository,
     required this._localAuthService,
     required this._userPersistenceService,
-  }) : _users = userDataStream.shareReplay(maxSize: 1),
+  }) : _userStream = userDataStream.shareReplay(maxSize: 1),
        super(
          _initialState(
            _homeDailyDataRepository,
            _userPreferencesService.lastHomeMode ?? HomeMode.sundaySchool,
          ),
        ) {
-    _userSubscription = _users.listen(_onUserChanged);
+    _userSubscription = _userStream.listen(_onUserChanged);
     unawaited(_loadBirthdays());
     _followCurrentTabTotal();
   }
