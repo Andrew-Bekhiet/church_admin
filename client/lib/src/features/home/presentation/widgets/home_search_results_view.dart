@@ -28,6 +28,7 @@ class HomeSearchResultsView extends StatelessWidget {
         ),
       ),
       HomeSearchFound(:final sections) => ListView.builder(
+        padding: EdgeInsets.zero,
         itemCount: sections.length,
         itemBuilder: (context, index) {
           final section = sections[index];
