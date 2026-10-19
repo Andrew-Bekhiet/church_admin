@@ -5,6 +5,7 @@ final class FieldMetadataSpec {
   final String label;
   final bool isCodeOnly;
   final bool isOrderable;
+  final bool isDateOnly;
   final OperatorFamily? operatorFamily;
   final bool isNullable;
 
@@ -15,5 +16,6 @@ final class FieldMetadataSpec {
     required this.isNullable,
     this.isCodeOnly = false,
     this.isOrderable = true,
+    this.isDateOnly = false,
   });
 }

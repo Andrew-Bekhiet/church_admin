@@ -118,6 +118,7 @@ final class QueryableFieldCollector extends SimpleElementVisitor2<void> {
     label: annotation.label ?? name,
     isCodeOnly: annotation.isCodeOnly,
     isOrderable: annotation.isOrderable && !isCollection,
+    isDateOnly: annotation.isDateOnly,
     operatorFamily: annotation.usesBirthdayOperators
         ? OperatorFamily.birthday
         : type.accept(const OperatorFamilyVisitor()),

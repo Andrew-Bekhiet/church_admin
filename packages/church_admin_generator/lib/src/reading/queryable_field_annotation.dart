@@ -28,6 +28,7 @@ final class QueryableFieldAnnotation {
   bool get representsParent => _reader.read('representsParent').boolValue;
   bool get usesBirthdayOperators =>
       _reader.read('usesBirthdayOperators').boolValue;
+  bool get isDateOnly => _reader.read('dateOnly').boolValue;
   DartType? get type => _reader.peek('type')?.typeValue;
   DartType? get through => _reader.peek('through')?.typeValue;
   String? get select => _reader.peek('select')?.stringValue;

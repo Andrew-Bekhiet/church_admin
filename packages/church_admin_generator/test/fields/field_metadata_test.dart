@@ -104,6 +104,32 @@ void main() {
     expect(field, contains("name: 'visits'"));
   });
 
+  test('a field the server keeps as a calendar date says so', () async {
+    final field = await ModelFixture.generatedFieldFor(
+      "@QueryableField(label: 'Birthdate', dateOnly: true)\n"
+      'late final DateTime birthdate;',
+    );
+
+    expect(field, contains('isDateOnly: true'));
+  });
+
+  test('a history whose records keep a calendar date says so', () async {
+    final field = await ModelFixture.generatedFieldFor(
+      "@QueryableField.history(label: 'Kodas', dateOnly: true)\n"
+      'late final List<Person> kodasHistory;',
+    );
+
+    expect(field, contains('isDateOnly: true'));
+  });
+
+  test('a field is not a calendar date unless it says so', () async {
+    final field = await ModelFixture.generatedFieldFor(
+      "@QueryableField(label: 'Created')\nlate final DateTime createdAt;",
+    );
+
+    expect(field, isNot(contains('isDateOnly')));
+  });
+
   test(
     'an aggregate is code-only, labelled by its name and typed as asked',
     () async {
