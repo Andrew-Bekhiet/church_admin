@@ -23,7 +23,21 @@ defmodule ChurchAdmin.Equivalence.Roots do
   alias ChurchAdmin.Catalog
   alias ChurchAdmin.DataQuality.{DataCheck, Override}
   alias ChurchAdmin.Organization.{Class, Group, Service}
-  alias ChurchAdmin.People.{ClassMembership, Family, GroupMembership, Person, ServiceMembership}
+
+  alias ChurchAdmin.People.{
+    ClassMembership,
+    Contact,
+    Family,
+    FamilyRelation,
+    GroupMembership,
+    MainContact,
+    Person,
+    PersonHobby,
+    PersonTag,
+    ResolvedContact,
+    ServiceMembership
+  }
+
   alias ChurchAdmin.Places.{Address, Area, AreaStreet, District, Store, Street}
 
   # `hasura` is master's root field (graphql-default naming); `key` lists
@@ -136,6 +150,39 @@ defmodule ChurchAdmin.Equivalence.Roots do
         hasura: "authUsersAdminOn",
         resource: ScopeGrant,
         key: [{"permissionId", :permission_id}]
+      },
+      %{name: "contacts", hasura: "contacts", resource: Contact, key: [{"id", :id}]},
+      %{
+        name: "familyContacts",
+        hasura: "resolvedContacts",
+        resource: ResolvedContact,
+        key: [{"id", :id}]
+      },
+      %{
+        name: "mainContacts",
+        hasura: "personsMainContacts",
+        resource: MainContact,
+        key: [{"id", :id}]
+      },
+      %{
+        name: "familyRelations",
+        hasura: "familiesFamilies",
+        resource: FamilyRelation,
+        key: [{"parentFamilyId", :parent_family_id}, {"childFamilyId", :child_family_id}]
+      },
+      %{
+        name: "personHobbies",
+        hasura: "personsHobbies",
+        resource: PersonHobby,
+        key: [{"personId", :person_id}, {"hobbyId", :hobby_id}],
+        page: 100
+      },
+      %{
+        name: "personTags",
+        hasura: "personsTags",
+        resource: PersonTag,
+        key: [{"personId", :person_id}, {"tagId", :tag_id}],
+        page: 100
       },
       %{
         name: "activityDays",

@@ -2,12 +2,20 @@ defmodule ChurchAdmin.People.FamilyRelation do
   use Ash.Resource,
     domain: ChurchAdmin.People,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
+  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.People.Family
 
   graphql do
     type :family_relation
+
+    relationships [:child, :parent]
+
+    queries do
+      list :family_relations, :read
+    end
   end
 
   postgres do
@@ -30,7 +38,29 @@ defmodule ChurchAdmin.People.FamilyRelation do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :child, entity: :family, access: :read}
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :parent, entity: :family, access: :read}
+    end
   end
 
   attributes do
@@ -49,5 +79,10 @@ defmodule ChurchAdmin.People.FamilyRelation do
       source_attribute: :parent_family_id,
       define_attribute?: false,
       public?: true
+  end
+
+  aggregates do
+    first :child_name, :child, :name, public?: true
+    first :parent_name, :parent, :name, public?: true
   end
 end
