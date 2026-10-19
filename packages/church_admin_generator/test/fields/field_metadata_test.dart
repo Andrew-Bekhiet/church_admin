@@ -95,6 +95,15 @@ void main() {
     expect(field, contains('isOrderable: false'));
   });
 
+  test('a history entry takes the GraphQL name of the server field', () async {
+    final field = await ModelFixture.generatedFieldFor(
+      "@QueryableField.history(label: 'Visits', graphqlName: 'visits')\n"
+      'late final List<Person> visitHistory;',
+    );
+
+    expect(field, contains("name: 'visits'"));
+  });
+
   test(
     'an aggregate is code-only, labelled by its name and typed as asked',
     () async {

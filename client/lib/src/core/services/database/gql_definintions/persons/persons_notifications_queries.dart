@@ -1,156 +1,85 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.gql.dart';
+import 'package:church_admin/src/core/services/database/data_checks_document_transformer.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.graphql.dart';
 import 'package:graphql/client.dart';
 
+/// The persons a warning names: those whose latest record is on or before
+/// the date. A person who was never recorded has no latest record and is
+/// left out.
 class PersonsNotificationsQueries {
+  static const int _namesShown = 25;
+
   final DatabaseService db;
 
   DBGraphQLClient get graphQLClient => db.graphQLClient;
 
   const PersonsNotificationsQueries({required this.db});
 
-  Future<Iterable<Person>> _getPersonsNames({
-    List<Input_PersonsBoolExp>? where,
-    int? limit,
-  }) {
-    return graphQLClient.queryAndReturnParsed(
-      QueryOptions(
-        document: documentNodeQuerypersonsNames,
-        operationName: 'personsNames',
-        variables: Variables_Query_personsNames(
-          where: where,
-          limit: limit,
-        ).toJson(),
-        parserFn: (json) => db.parser
-            .singleListParser(
-              Person.fromJson,
-              pageSize: limit ?? 100,
-            )(json)
-            .data,
-      ),
-    );
-  }
-
   Future<Iterable<Person>> getPersonsConfessionWarning({
     required DateTime date,
-  }) {
-    return _getPersonsNames(
-      where: [
-        Input_PersonsBoolExp(
-          confessionHistoryAggregate:
-              Input_HistoryConfessionHistoryAggregateBoolExp(
-                count: Input_historyConfessionHistoryAggregateBoolExpCount(
-                  predicate: Input_IntComparisonExp(
-                    $_neq: 0,
-                  ),
-                ),
-              ),
-          $_not: Input_PersonsBoolExp(
-            confessionHistory: Input_HistoryConfessionHistoryBoolExp(
-              dayId: Input_DateComparisonExp(
-                $_gt: date,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  }) => _personsNamed(
+    Input_PersonFilterInput(
+      lastConfessionDay: Input_PersonFilterLastConfessionDay(
+        lessThanOrEqual: date,
+      ),
+    ),
+  );
 
-  Future<Iterable<Person>> getPersonsKodasWarning({
-    required DateTime date,
-  }) {
-    return _getPersonsNames(
-      where: [
-        Input_PersonsBoolExp(
-          kodasHistoryAggregate: Input_HistoryKodasHistoryAggregateBoolExp(
-            count: Input_historyKodasHistoryAggregateBoolExpCount(
-              predicate: Input_IntComparisonExp(
-                $_neq: 0,
-              ),
-            ),
-          ),
-          $_not: Input_PersonsBoolExp(
-            kodasHistory: Input_HistoryKodasHistoryBoolExp(
-              dayId: Input_DateComparisonExp(
-                $_gt: date,
-              ),
-            ),
-          ),
+  Future<Iterable<Person>> getPersonsKodasWarning({required DateTime date}) =>
+      _personsNamed(
+        Input_PersonFilterInput(
+          lastKodasDay: Input_PersonFilterLastKodasDay(lessThanOrEqual: date),
         ),
-      ],
-    );
-  }
+      );
 
   Future<Iterable<Person>> getPersonsAttendanceWarning({
     required DateTime date,
-  }) {
-    return _getPersonsNames(
-      where: [
-        Input_PersonsBoolExp(
-          attendanceHistoryAggregate:
-              Input_HistoryAttendanceHistoryAggregateBoolExp(
-                count: Input_historyAttendanceHistoryAggregateBoolExpCount(
-                  predicate: Input_IntComparisonExp(
-                    $_neq: 0,
-                  ),
-                ),
-              ),
-          $_not: Input_PersonsBoolExp(
-            attendanceHistory: Input_HistoryAttendanceHistoryBoolExp(
-              datetime: Input_TimestamptzComparisonExp(
-                $_gt: date,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  }) => _personsNamed(
+    Input_PersonFilterInput(
+      lastAttendedAt: Input_PersonFilterLastAttendedAt(lessThanOrEqual: date),
+    ),
+  );
 
-  Future<Iterable<Person>> getPersonsVisitWarning({
-    required DateTime date,
-  }) {
-    return _getPersonsNames(
-      where: [
-        Input_PersonsBoolExp(
-          visitHistoryAggregate: Input_HistoryVisitHistoryAggregateBoolExp(
-            count: Input_historyVisitHistoryAggregateBoolExpCount(
-              predicate: Input_IntComparisonExp(
-                $_neq: 0,
-              ),
-            ),
-          ),
-          $_not: Input_PersonsBoolExp(
-            visitHistory: Input_HistoryVisitHistoryBoolExp(
-              time: Input_TimestamptzComparisonExp(
-                $_gt: date,
-              ),
-            ),
-          ),
+  Future<Iterable<Person>> getPersonsVisitWarning({required DateTime date}) =>
+      _personsNamed(
+        Input_PersonFilterInput(
+          lastVisitAt: Input_PersonFilterLastVisitAt(lessThanOrEqual: date),
         ),
-      ],
-    );
-  }
+      );
 
-  Future<Iterable<Person>> getBirthdayPersons({
-    required DateTime date,
-  }) {
-    return _getPersonsNames(
-      where: [
-        Input_PersonsBoolExp(
-          birthday: Input_StringComparisonExp(
-            //2022-06-25T12:30:00.440Z => 06-25
-            $_eq: date
-                .toIso8601String()
-                .split('-')
-                .sublist(1, 3)
-                .join('-')
-                .split('T')
-                .first,
+  Future<Iterable<Person>> getBirthdayPersons({required DateTime date}) =>
+      _personsNamed(
+        Input_PersonFilterInput(
+          birthday: Input_PersonFilterBirthday(
+            eq:
+                '${date.month.toString().padLeft(2, '0')}-'
+                '${date.day.toString().padLeft(2, '0')}',
           ),
         ),
-      ],
+      );
+
+  Future<Iterable<Person>> _personsNamed(Input_PersonFilterInput filter) {
+    final document = DataChecksDocumentTransformer.removeDataChecksIfDisabled(
+      documentNodeQuerypersons,
+    );
+
+    return graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: document,
+        operationName: 'persons',
+        variables: Variables_Query_persons(
+          filter: filter,
+          sort: [
+            Input_PersonSortInput(
+              field: Enum_PersonSortField.NAME,
+              order: Enum_SortOrder.ASC,
+            ),
+          ],
+          first: _namesShown,
+        ).toJson(),
+        parserFn: (data) =>
+            AshResultParser(document).page(Person.fromJson)(data).items,
+      ),
     );
   }
 }

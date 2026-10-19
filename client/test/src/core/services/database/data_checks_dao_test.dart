@@ -55,7 +55,7 @@ void main() {
     test(
       'person detail subscriptions ${enabled ? 'include' : 'omit'} data checks when the flag is $enabled',
       () async {
-        initialize(enableDataChecks: enabled, data: {'personsByPk': null});
+        initialize(enableDataChecks: enabled, data: {'person': null});
 
         await PersonsDAO(
           db: db,
@@ -72,19 +72,23 @@ void main() {
   }
 
   test(
-    'a sorted person list selects its sort key and omits data checks when the flag is false',
+    'a sorted person list omits data checks when the flag is false',
     () async {
-      initialize(enableDataChecks: false, data: {'persons': <Object?>[]});
+      initialize(
+        enableDataChecks: false,
+        data: {
+          'persons': {
+            '__typename': 'KeysetPageOfPerson',
+            'count': 0,
+            'endKeyset': null,
+            'results': <Object?>[],
+          },
+        },
+      );
       final dao = PersonsDAO(db: db);
       final persons = dao.streamAllWithConfig(
         streamAllConfig: dao.baseStreamAllConfig,
-        orderBy: Stream.value([
-          OrderBy(
-            field: PersonFields().lastEdit.redirectTo(
-              LastRecordedByInfoFields().time,
-            ),
-          ),
-        ]),
+        orderBy: Stream.value([OrderBy(field: PersonFields().name)]),
       );
       addTearDown(persons.dispose);
 
@@ -93,12 +97,11 @@ void main() {
       final document = printNode(
         link.requests
             .singleWhere(
-              (request) => request.operation.operationName == 'watchAllPersons',
+              (request) => request.operation.operationName == 'persons',
             )
             .operation
             .document,
       );
-      expect(document, contains('lastEdit'));
       expect(document, isNot(contains('dataCheck')));
     },
   );

@@ -31,6 +31,30 @@ void main() {
     ]);
   });
 
+  test(
+    "a person's latest record sorts by the day or time the server keeps",
+    () {
+      expect(
+        [
+          PersonFields().lastKodas,
+          PersonFields().lastConfession,
+          PersonFields().lastVisit,
+          PersonFields().lastAttendance,
+        ].map(
+          (latest) => sortBy(
+            latest.redirectTo(LastRecordedByInfoFields().time),
+          ).single['field'],
+        ),
+        [
+          'LAST_KODAS_DAY',
+          'LAST_CONFESSION_DAY',
+          'LAST_VISIT_AT',
+          'LAST_ATTENDED_AT',
+        ],
+      );
+    },
+  );
+
   test('an id field sorts by the id itself', () {
     expect(sortBy(PersonFields().id).single['field'], 'ID');
   });

@@ -40,8 +40,9 @@ class FamilyPhoneContact with Equatable {
     };
   }
 
-  Input_FamilyContactInput toFamilyContactInput() =>
+  Input_FamilyContactInput toFamilyContactInput({String? serverOwnedId}) =>
       Input_FamilyContactInput.fromJson({
+        'id': ?serverOwnedId,
         'phone': contact.phone,
         'personTypeId': role.id,
         'label': contact.label,

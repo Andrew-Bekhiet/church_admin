@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_annotations/church_admin_annotations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:uuid/uuid.dart';
 
 part 'person.freezed.dart';
 part 'person.g.dart';
@@ -25,7 +24,7 @@ class Person extends ViewableWithIDAndImage
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @QueryableField(label: 'تفاصيل العنوان')
+  @QueryableField(label: 'تفاصيل العنوان', orderable: false)
   final Address? address;
 
   @JsonKey(defaultValue: <PhoneContact>[])
@@ -140,46 +139,70 @@ class Person extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
-  @QueryableField(label: 'أخر اعتراف')
+  @JsonKey(name: 'latestConfession')
+  @QueryableField(label: 'أخر اعتراف', graphqlName: 'lastConfessionDay')
   final LastRecordedByInfo? lastConfession;
 
-  @QueryableField(label: 'أخر تناول')
+  @JsonKey(name: 'latestKodas')
+  @QueryableField(label: 'أخر تناول', graphqlName: 'lastKodasDay')
   final LastRecordedByInfo? lastKodas;
 
-  @QueryableField(label: 'أخر حضور')
+  @QueryableField(label: 'أخر حضور', graphqlName: 'lastAttendedAt')
   final LastRecordedByInfo? lastAttendance;
 
+  @JsonKey(name: 'latestCall')
   @QueryableField(label: 'أخر مكالمات')
   final LastRecordedByInfo? lastCall;
 
-  @QueryableField(label: 'أخر افتقاد')
+  @JsonKey(name: 'latestVisit')
+  @QueryableField(label: 'أخر افتقاد', graphqlName: 'lastVisitAt')
   final LastRecordedByInfo? lastVisit;
 
+  @JsonKey(name: 'latestEdit')
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
   @override
-  @QueryableField(label: 'اكتمال البيانات')
+  @QueryableField(label: 'اكتمال البيانات', orderable: false)
   final DataCheck? dataCheck;
 
-  @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
-  @QueryableField.manyToMany(through: ClassesPersons)
+  @JsonKey(
+    name: 'classMemberships',
+    fromJson: personsClassesFromJson,
+    toJson: personsClassesToJson,
+  )
+  @QueryableField.manyToMany(
+    through: ClassesPersons,
+    graphqlName: 'classMemberships',
+  )
   final List<Class>? classes;
 
-  @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
-  @QueryableField.manyToMany(through: PersonsGroups)
+  @JsonKey(
+    name: 'groupMemberships',
+    fromJson: personsGroupsFromJson,
+    toJson: personsGroupsToJson,
+  )
+  @QueryableField.manyToMany(
+    through: PersonsGroups,
+    graphqlName: 'groupMemberships',
+  )
   final List<Group>? groups;
 
-  @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
-  @QueryableField.manyToMany(through: PersonsServices)
+  @JsonKey(
+    name: 'serviceMemberships',
+    fromJson: personsServicesFromJson,
+    toJson: personsServicesToJson,
+  )
+  @QueryableField.manyToMany(
+    through: PersonsServices,
+    graphqlName: 'serviceMemberships',
+  )
   final List<Service>? services;
 
-  @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
-  @QueryableField.manyToMany(through: PersonsTags)
+  @QueryableField(label: 'الشارة', orderable: false)
   final List<Tag>? tags;
 
-  @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
-  @QueryableField.manyToMany(through: PersonsHobbies)
+  @QueryableField(label: 'الهواية', orderable: false)
   final List<Hobby>? hobbies;
 
   @QueryableField(label: 'بيانات الخادم')
@@ -187,39 +210,54 @@ class Person extends ViewableWithIDAndImage
 
   final String? uid;
 
-  @QueryableField.history(label: 'سجل التناول')
+  @JsonKey(name: 'kodases')
+  @QueryableField.history(label: 'سجل التناول', graphqlName: 'kodases')
   final List<LastRecordedByInfo>? kodasHistory;
 
-  @QueryableField.history(label: 'سجل الحضور', type: AttendanceRecord)
+  @JsonKey(name: 'attendanceRecords')
+  @QueryableField.history(
+    label: 'سجل الحضور',
+    graphqlName: 'attendanceRecords',
+  )
   final List<LastRecordedByInfo>? attendanceHistory;
 
-  @QueryableField.history(label: 'سجل الاعتراف')
+  @JsonKey(name: 'confessions')
+  @QueryableField.history(label: 'سجل الاعتراف', graphqlName: 'confessions')
   final List<LastRecordedByInfo>? confessionHistory;
 
-  @QueryableField.history(label: 'سجل المكالمات')
+  @JsonKey(name: 'calls')
+  @QueryableField.history(label: 'سجل المكالمات', graphqlName: 'calls')
   final List<LastRecordedByInfo>? callHistory;
 
-  @QueryableField.history(label: 'سجل الافتقاد')
+  @JsonKey(name: 'visits')
+  @QueryableField.history(label: 'سجل الافتقاد', graphqlName: 'visits')
   final List<LastRecordedByInfo>? visitHistory;
 
-  @QueryableField.history(label: 'سجل تحديث البيانات')
+  @JsonKey(name: 'edits')
+  @QueryableField.history(label: 'سجل تحديث البيانات', graphqlName: 'edits')
   final List<LastRecordedByInfo>? editHistory;
 
+  @JsonKey(fromJson: HistoryAggregateData.fromJsonOrNodes)
   @QueryableField.aggregate(type: AggregateData)
   final HistoryAggregateData? kodasHistoryAggregate;
 
+  @JsonKey(fromJson: HistoryAggregateData.fromJsonOrNodes)
   @QueryableField.aggregate(type: AggregateData)
   final HistoryAggregateData? attendanceHistoryAggregate;
 
+  @JsonKey(fromJson: HistoryAggregateData.fromJsonOrNodes)
   @QueryableField.aggregate(type: AggregateData)
   final HistoryAggregateData? confessionHistoryAggregate;
 
+  @JsonKey(fromJson: HistoryAggregateData.fromJsonOrNodes)
   @QueryableField.aggregate(type: AggregateData)
   final HistoryAggregateData? callHistoryAggregate;
 
+  @JsonKey(fromJson: HistoryAggregateData.fromJsonOrNodes)
   @QueryableField.aggregate(type: AggregateData)
   final HistoryAggregateData? visitHistoryAggregate;
 
+  @JsonKey(fromJson: HistoryAggregateData.fromJsonOrNodes)
   @QueryableField.aggregate(type: AggregateData)
   final HistoryAggregateData? editHistoryAggregate;
 
@@ -358,297 +396,6 @@ class Person extends ViewableWithIDAndImage
         !lastKodas!.time.isBefore(earliestDate) &&
         !lastConfession!.time.isBefore(earliestDate);
   }
-
-  Input_PersonsInsertInput toInsertInput() => Input_PersonsInsertInput(
-    name: name,
-    birthdate: birthdate,
-    gender: gender,
-    isShammas: isShammas,
-    shammasLevelId: shammasLevel?.id.toUuid(),
-    schoolId: school?.id.toUuid(),
-    collegeId: college?.id.toUuid(),
-    churchId: church?.id.toUuid(),
-    fatherId: father?.id.toUuid(),
-    workStatus: workStatus?.name,
-    jobId: job?.id.toUuid(),
-    jobDescription: jobDescription,
-    qualificationId: qualification?.id.toUuid(),
-    martialStatus: martialStatus?.name,
-    personTypeId: personType?.id.toUuid(),
-    stateId: state?.id.toUuid(),
-    isServant: isServant,
-    servingChurchId: servingChurch?.id.toUuid(),
-    serviceType: serviceType,
-    notes: notes,
-    contacts: Input_ContactsArrRelInsertInput(
-      data: contacts.map((c) => c.toInsertInput()).toList(),
-    ),
-    family: switch ((family, address)) {
-      (null, final address?) => Input_FamiliesObjRelInsertInput(
-        data: Family(
-          id: Namespace.nil.value,
-          name: name.split(' ').sublist(1).join(' '),
-          address: address.copyWith(family: null),
-          contacts: familyContacts,
-        ).toInsertInput(),
-      ),
-      _ => null,
-    },
-    familyId: family?.id.toUuid(),
-    storeId: store?.id.toUuid(),
-    studyYearId: studyYear?.order,
-    groups: groups != null
-        ? Input_PersonsGroupsArrRelInsertInput(
-            data: groups!
-                .map(
-                  (g) => Input_PersonsGroupsInsertInput(
-                    groupId: g.id.toUuid(),
-                  ),
-                )
-                .toList(),
-          )
-        : null,
-    services: services != null
-        ? Input_PersonsServicesArrRelInsertInput(
-            data: services!
-                .map(
-                  (s) => Input_PersonsServicesInsertInput(
-                    serviceId: s.id.toUuid(),
-                  ),
-                )
-                .toList(),
-          )
-        : null,
-    uid: uid?.toUuid(),
-    tags: tags != null
-        ? Input_PersonsTagsArrRelInsertInput(
-            data: tags!
-                .map(
-                  (t) => Input_PersonsTagsInsertInput(tagId: t.id.toUuid()),
-                )
-                .toList(),
-          )
-        : null,
-    hobbies: hobbies != null
-        ? Input_PersonsHobbiesArrRelInsertInput(
-            data: hobbies!
-                .map(
-                  (h) => Input_PersonsHobbiesInsertInput(
-                    hobbyId: h.id.toUuid(),
-                  ),
-                )
-                .toList(),
-          )
-        : null,
-    color: colorToInt(color),
-    kodasHistory: Input_HistoryKodasHistoryArrRelInsertInput(
-      data: [
-        if (lastKodas != null)
-          Input_HistoryKodasHistoryInsertInput(
-            day: Input_HistoryAttendanceDaysObjRelInsertInput(
-              data: Input_HistoryAttendanceDaysInsertInput(
-                day: lastKodas!.time,
-              ),
-              onConflict: Input_HistoryAttendanceDaysOnConflict(
-                constraint:
-                    Enum_HistoryAttendanceDaysConstraint.attendance_days_pkey,
-                updateColumns: [
-                  Enum_HistoryAttendanceDaysUpdateColumn.day,
-                ],
-              ),
-            ),
-          ),
-      ],
-      onConflict: Input_HistoryKodasHistoryOnConflict(
-        constraint: Enum_HistoryKodasHistoryConstraint
-            .kodas_history_day_id_person_id_key,
-      ),
-    ),
-    confessionHistory: Input_HistoryConfessionHistoryArrRelInsertInput(
-      data: [
-        if (lastConfession != null)
-          Input_HistoryConfessionHistoryInsertInput(
-            day: Input_HistoryAttendanceDaysObjRelInsertInput(
-              data: Input_HistoryAttendanceDaysInsertInput(
-                day: lastConfession!.time,
-              ),
-              onConflict: Input_HistoryAttendanceDaysOnConflict(
-                constraint:
-                    Enum_HistoryAttendanceDaysConstraint.attendance_days_pkey,
-                updateColumns: [
-                  Enum_HistoryAttendanceDaysUpdateColumn.day,
-                ],
-              ),
-            ),
-          ),
-      ],
-      onConflict: Input_HistoryConfessionHistoryOnConflict(
-        constraint: Enum_HistoryConfessionHistoryConstraint
-            .confession_history_day_id_person_id_key,
-      ),
-    ),
-    visitHistory: Input_HistoryVisitHistoryArrRelInsertInput(
-      data: [
-        if (lastVisit != null)
-          Input_HistoryVisitHistoryInsertInput(
-            time: lastVisit!.time,
-            isFatherVisit: lastVisit!.isFatherVisit,
-            table: 'persons',
-          ),
-      ],
-    ),
-    callHistory: Input_HistoryCallHistoryArrRelInsertInput(
-      data: [
-        if (lastCall != null)
-          Input_HistoryCallHistoryInsertInput(
-            time: lastCall!.time,
-          ),
-      ],
-    ),
-  );
-
-  Input_PersonsSetInput toUpdateInput(Person oldPerson) {
-    Input_PersonsSetInput result = Input_PersonsSetInput();
-
-    if (name != oldPerson.name) {
-      result = result.copyWith(name: name);
-    }
-
-    if (birthdate != oldPerson.birthdate) {
-      result = result.copyWith(birthdate: birthdate);
-    }
-
-    if (jobDescription != oldPerson.jobDescription) {
-      result = result.copyWith(jobDescription: jobDescription);
-    }
-
-    if (servingChurch?.id != oldPerson.servingChurch?.id) {
-      result = result.copyWith(servingChurchId: servingChurch?.id.toUuid());
-    }
-
-    if (serviceType != oldPerson.serviceType) {
-      result = result.copyWith(serviceType: serviceType);
-    }
-
-    if (isServant != oldPerson.isServant) {
-      result = result.copyWith(
-        isServant: isServant,
-        servingChurchId: isServant ? result.servingChurchId : null,
-        serviceType: isServant ? result.serviceType : null,
-      );
-    }
-
-    if (notes != oldPerson.notes) {
-      result = result.copyWith(notes: notes);
-    }
-
-    if (color != oldPerson.color) {
-      result = result.copyWith(color: colorToInt(color));
-    }
-
-    if (shammasLevel?.id != oldPerson.shammasLevel?.id) {
-      result = result.copyWith(shammasLevelId: shammasLevel?.id.toUuid());
-    }
-
-    if (school?.id != oldPerson.school?.id) {
-      result = result.copyWith(schoolId: school?.id.toUuid());
-    }
-
-    if (college?.id != oldPerson.college?.id) {
-      result = result.copyWith(collegeId: college?.id.toUuid());
-    }
-
-    if (studyYear?.order != oldPerson.studyYear?.order) {
-      result = result.copyWith(
-        studyYearId: studyYear?.order,
-        schoolId: (studyYear?.order ?? 0) <= 12 ? school?.id.toUuid() : null,
-        collegeId: (studyYear?.order ?? 12) >= 12 ? college?.id.toUuid() : null,
-      );
-    }
-
-    if (church?.id != oldPerson.church?.id) {
-      result = result.copyWith(churchId: church?.id.toUuid());
-    }
-
-    if (father?.id != oldPerson.father?.id) {
-      result = result.copyWith(fatherId: father?.id.toUuid());
-    }
-
-    if (job?.id != oldPerson.job?.id) {
-      result = result.copyWith(jobId: job?.id.toUuid());
-    }
-
-    if (qualification?.id != oldPerson.qualification?.id) {
-      result = result.copyWith(qualificationId: qualification?.id.toUuid());
-    }
-
-    if (martialStatus != oldPerson.martialStatus) {
-      result = result.copyWith(martialStatus: martialStatus?.name);
-    }
-
-    if (personType?.id != oldPerson.personType?.id) {
-      result = result.copyWith(personTypeId: personType?.id.toUuid());
-    }
-
-    if (state?.id != oldPerson.state?.id) {
-      result = result.copyWith(stateId: state?.id.toUuid());
-    }
-
-    if (family?.id != oldPerson.family?.id) {
-      result = result.copyWith(familyId: family?.id.toUuid());
-    }
-
-    if (store?.id != oldPerson.store?.id) {
-      result = result.copyWith(storeId: store?.id.toUuid());
-    }
-
-    if (workStatus != oldPerson.workStatus) {
-      result = result.copyWith(
-        workStatus: workStatus?.name,
-        studyYearId: workStatus == WorkStatus.student
-            ? result.studyYearId
-            : null,
-        schoolId:
-            workStatus == WorkStatus.student && (studyYear?.order ?? 0) <= 12
-            ? result.schoolId
-            : null,
-        collegeId:
-            workStatus == WorkStatus.student && (studyYear?.order ?? 12) >= 12
-            ? result.collegeId
-            : null,
-        jobId:
-            workStatus == WorkStatus.employed ||
-                workStatus == WorkStatus.retired
-            ? result.jobId
-            : null,
-        jobDescription:
-            workStatus == WorkStatus.employed ||
-                workStatus == WorkStatus.retired
-            ? result.jobDescription
-            : null,
-        qualificationId: workStatus != WorkStatus.student
-            ? result.qualificationId
-            : null,
-      );
-    }
-
-    if (isShammas != oldPerson.isShammas) {
-      result = result.copyWith(
-        isShammas: isShammas,
-        shammasLevelId: isShammas ? result.shammasLevelId : null,
-      );
-    }
-
-    if (gender != oldPerson.gender) {
-      result = result.copyWith(
-        gender: gender,
-        isShammas: isShammas && gender,
-        shammasLevelId: isShammas && gender ? result.shammasLevelId : null,
-      );
-    }
-
-    return result;
-  }
 }
 
 // Extends the generated private base, which only this library can see
@@ -684,8 +431,11 @@ class PersonFields extends _PersonFields {
       address.redirectTo(AddressFields().fullAddressText, isExpandable: false);
 
   @override
-  FieldMetadata<Point> get geolocation =>
-      address.redirectTo(AddressFields().geolocation, isExpandable: false);
+  FieldMetadata<Point> get geolocation => address.redirectTo(
+    AddressFields().geolocation,
+    isExpandable: false,
+    isOrderable: false,
+  );
 
   @override
   List<FieldMetadata<Object>> get allFields => {
@@ -764,13 +514,3 @@ List<Service>? personsServicesFromJson(List? data) =>
     data?.map((e) => Service.fromJson(e['service'])).toList();
 List<Json>? personsServicesToJson(List<Service>? services) =>
     services?.map((e) => {'service': e.toJson()}).toList();
-
-List<Tag>? personsTagsFromJson(List? data) =>
-    data?.map((e) => Tag.fromJson(e['tag'])).toList();
-List<Json>? personsTagsToJson(List<Tag>? tags) =>
-    tags?.map((e) => {'tag': e.toJson()}).toList();
-
-List<Hobby>? personsHobbiesFromJson(List? data) =>
-    data?.map((e) => Hobby.fromJson(e['hobby'])).toList();
-List<Json>? personsHobbiesToJson(List<Hobby>? hobbies) =>
-    hobbies?.map((e) => {'hobby': e.toJson()}).toList();
