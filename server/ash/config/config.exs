@@ -98,7 +98,8 @@ config :church_admin,
     ChurchAdmin.Accounts,
     ChurchAdmin.Catalog,
     ChurchAdmin.DataQuality,
-    ChurchAdmin.Operations
+    ChurchAdmin.Operations,
+    ChurchAdmin.Exports
   ]
 
 # Configure the endpoint
