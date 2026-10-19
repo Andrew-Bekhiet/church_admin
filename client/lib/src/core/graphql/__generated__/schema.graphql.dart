@@ -97861,6 +97861,96 @@ class _CopyWithStubImpl_Input_StoreSortInput<TRes>
       CopyWith_Input_StoreWithinPolygonFieldInput.stub(_res);
 }
 
+class Input_CreateDistrictInput {
+  factory Input_CreateDistrictInput({required String name}) =>
+      Input_CreateDistrictInput._({r'name': name});
+
+  Input_CreateDistrictInput._(this._$data);
+
+  factory Input_CreateDistrictInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    return Input_CreateDistrictInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    return result$data;
+  }
+
+  CopyWith_Input_CreateDistrictInput<Input_CreateDistrictInput> get copyWith =>
+      CopyWith_Input_CreateDistrictInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateDistrictInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    return Object.hashAll([l$name]);
+  }
+}
+
+abstract class CopyWith_Input_CreateDistrictInput<TRes> {
+  factory CopyWith_Input_CreateDistrictInput(
+    Input_CreateDistrictInput instance,
+    TRes Function(Input_CreateDistrictInput) then,
+  ) = _CopyWithImpl_Input_CreateDistrictInput;
+
+  factory CopyWith_Input_CreateDistrictInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateDistrictInput;
+
+  TRes call({String? name});
+}
+
+class _CopyWithImpl_Input_CreateDistrictInput<TRes>
+    implements CopyWith_Input_CreateDistrictInput<TRes> {
+  _CopyWithImpl_Input_CreateDistrictInput(this._instance, this._then);
+
+  final Input_CreateDistrictInput _instance;
+
+  final TRes Function(Input_CreateDistrictInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? name = _undefined}) => _then(
+    Input_CreateDistrictInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateDistrictInput<TRes>
+    implements CopyWith_Input_CreateDistrictInput<TRes> {
+  _CopyWithStubImpl_Input_CreateDistrictInput(this._res);
+
+  TRes _res;
+
+  call({String? name}) => _res;
+}
+
 class Input_DistrictFilterName {
   factory Input_DistrictFilterName({
     bool? isNil,
@@ -175492,6 +175582,121 @@ class _CopyWithStubImpl_Input_UniversitySortInput<TRes>
   call({Enum_SortOrder? order, Enum_UniversitySortField? field}) => _res;
 }
 
+class Input_CreateTagInput {
+  factory Input_CreateTagInput({required String name, int? color}) =>
+      Input_CreateTagInput._({
+        r'name': name,
+        if (color != null) r'color': color,
+      });
+
+  Input_CreateTagInput._(this._$data);
+
+  factory Input_CreateTagInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    return Input_CreateTagInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  int? get color => (_$data['color'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateTagInput<Input_CreateTagInput> get copyWith =>
+      CopyWith_Input_CreateTagInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateTagInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$color = color;
+    return Object.hashAll([
+      l$name,
+      _$data.containsKey('color') ? l$color : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateTagInput<TRes> {
+  factory CopyWith_Input_CreateTagInput(
+    Input_CreateTagInput instance,
+    TRes Function(Input_CreateTagInput) then,
+  ) = _CopyWithImpl_Input_CreateTagInput;
+
+  factory CopyWith_Input_CreateTagInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateTagInput;
+
+  TRes call({String? name, int? color});
+}
+
+class _CopyWithImpl_Input_CreateTagInput<TRes>
+    implements CopyWith_Input_CreateTagInput<TRes> {
+  _CopyWithImpl_Input_CreateTagInput(this._instance, this._then);
+
+  final Input_CreateTagInput _instance;
+
+  final TRes Function(Input_CreateTagInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? name = _undefined, Object? color = _undefined}) => _then(
+    Input_CreateTagInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (color != _undefined) 'color': (color as int?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateTagInput<TRes>
+    implements CopyWith_Input_CreateTagInput<TRes> {
+  _CopyWithStubImpl_Input_CreateTagInput(this._res);
+
+  TRes _res;
+
+  call({String? name, int? color}) => _res;
+}
+
 class Input_TagFilterColor {
   factory Input_TagFilterColor({
     bool? isNil,
@@ -180451,6 +180656,95 @@ class _CopyWithStubImpl_Input_ShammasLevelSortInput<TRes>
   call({Enum_SortOrder? order, Enum_ShammasLevelSortField? field}) => _res;
 }
 
+class Input_CreateSchoolInput {
+  factory Input_CreateSchoolInput({required String name}) =>
+      Input_CreateSchoolInput._({r'name': name});
+
+  Input_CreateSchoolInput._(this._$data);
+
+  factory Input_CreateSchoolInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    return Input_CreateSchoolInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    return result$data;
+  }
+
+  CopyWith_Input_CreateSchoolInput<Input_CreateSchoolInput> get copyWith =>
+      CopyWith_Input_CreateSchoolInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateSchoolInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    return Object.hashAll([l$name]);
+  }
+}
+
+abstract class CopyWith_Input_CreateSchoolInput<TRes> {
+  factory CopyWith_Input_CreateSchoolInput(
+    Input_CreateSchoolInput instance,
+    TRes Function(Input_CreateSchoolInput) then,
+  ) = _CopyWithImpl_Input_CreateSchoolInput;
+
+  factory CopyWith_Input_CreateSchoolInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateSchoolInput;
+
+  TRes call({String? name});
+}
+
+class _CopyWithImpl_Input_CreateSchoolInput<TRes>
+    implements CopyWith_Input_CreateSchoolInput<TRes> {
+  _CopyWithImpl_Input_CreateSchoolInput(this._instance, this._then);
+
+  final Input_CreateSchoolInput _instance;
+
+  final TRes Function(Input_CreateSchoolInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? name = _undefined}) => _then(
+    Input_CreateSchoolInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateSchoolInput<TRes>
+    implements CopyWith_Input_CreateSchoolInput<TRes> {
+  _CopyWithStubImpl_Input_CreateSchoolInput(this._res);
+
+  TRes _res;
+
+  call({String? name}) => _res;
+}
+
 class Input_SchoolFilterName {
   factory Input_SchoolFilterName({
     bool? isNil,
@@ -181804,6 +182098,96 @@ class _CopyWithStubImpl_Input_SchoolSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_SchoolSortField? field}) => _res;
+}
+
+class Input_CreateQualificationInput {
+  factory Input_CreateQualificationInput({required String name}) =>
+      Input_CreateQualificationInput._({r'name': name});
+
+  Input_CreateQualificationInput._(this._$data);
+
+  factory Input_CreateQualificationInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    return Input_CreateQualificationInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    return result$data;
+  }
+
+  CopyWith_Input_CreateQualificationInput<Input_CreateQualificationInput>
+  get copyWith => CopyWith_Input_CreateQualificationInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateQualificationInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    return Object.hashAll([l$name]);
+  }
+}
+
+abstract class CopyWith_Input_CreateQualificationInput<TRes> {
+  factory CopyWith_Input_CreateQualificationInput(
+    Input_CreateQualificationInput instance,
+    TRes Function(Input_CreateQualificationInput) then,
+  ) = _CopyWithImpl_Input_CreateQualificationInput;
+
+  factory CopyWith_Input_CreateQualificationInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateQualificationInput;
+
+  TRes call({String? name});
+}
+
+class _CopyWithImpl_Input_CreateQualificationInput<TRes>
+    implements CopyWith_Input_CreateQualificationInput<TRes> {
+  _CopyWithImpl_Input_CreateQualificationInput(this._instance, this._then);
+
+  final Input_CreateQualificationInput _instance;
+
+  final TRes Function(Input_CreateQualificationInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? name = _undefined}) => _then(
+    Input_CreateQualificationInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateQualificationInput<TRes>
+    implements CopyWith_Input_CreateQualificationInput<TRes> {
+  _CopyWithStubImpl_Input_CreateQualificationInput(this._res);
+
+  TRes _res;
+
+  call({String? name}) => _res;
 }
 
 class Input_QualificationFilterName {
@@ -183197,6 +183581,96 @@ class _CopyWithStubImpl_Input_QualificationSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_QualificationSortField? field}) => _res;
+}
+
+class Input_CreatePersonTypeInput {
+  factory Input_CreatePersonTypeInput({required String name}) =>
+      Input_CreatePersonTypeInput._({r'name': name});
+
+  Input_CreatePersonTypeInput._(this._$data);
+
+  factory Input_CreatePersonTypeInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    return Input_CreatePersonTypeInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    return result$data;
+  }
+
+  CopyWith_Input_CreatePersonTypeInput<Input_CreatePersonTypeInput>
+  get copyWith => CopyWith_Input_CreatePersonTypeInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreatePersonTypeInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    return Object.hashAll([l$name]);
+  }
+}
+
+abstract class CopyWith_Input_CreatePersonTypeInput<TRes> {
+  factory CopyWith_Input_CreatePersonTypeInput(
+    Input_CreatePersonTypeInput instance,
+    TRes Function(Input_CreatePersonTypeInput) then,
+  ) = _CopyWithImpl_Input_CreatePersonTypeInput;
+
+  factory CopyWith_Input_CreatePersonTypeInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreatePersonTypeInput;
+
+  TRes call({String? name});
+}
+
+class _CopyWithImpl_Input_CreatePersonTypeInput<TRes>
+    implements CopyWith_Input_CreatePersonTypeInput<TRes> {
+  _CopyWithImpl_Input_CreatePersonTypeInput(this._instance, this._then);
+
+  final Input_CreatePersonTypeInput _instance;
+
+  final TRes Function(Input_CreatePersonTypeInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? name = _undefined}) => _then(
+    Input_CreatePersonTypeInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreatePersonTypeInput<TRes>
+    implements CopyWith_Input_CreatePersonTypeInput<TRes> {
+  _CopyWithStubImpl_Input_CreatePersonTypeInput(this._res);
+
+  TRes _res;
+
+  call({String? name}) => _res;
 }
 
 class Input_PersonTypeFilterIsHidden {
@@ -187650,6 +188124,95 @@ class _CopyWithStubImpl_Input_PersonStateSortInput<TRes>
   call({Enum_SortOrder? order, Enum_PersonStateSortField? field}) => _res;
 }
 
+class Input_CreateJobInput {
+  factory Input_CreateJobInput({required String name}) =>
+      Input_CreateJobInput._({r'name': name});
+
+  Input_CreateJobInput._(this._$data);
+
+  factory Input_CreateJobInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    return Input_CreateJobInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    return result$data;
+  }
+
+  CopyWith_Input_CreateJobInput<Input_CreateJobInput> get copyWith =>
+      CopyWith_Input_CreateJobInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateJobInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    return Object.hashAll([l$name]);
+  }
+}
+
+abstract class CopyWith_Input_CreateJobInput<TRes> {
+  factory CopyWith_Input_CreateJobInput(
+    Input_CreateJobInput instance,
+    TRes Function(Input_CreateJobInput) then,
+  ) = _CopyWithImpl_Input_CreateJobInput;
+
+  factory CopyWith_Input_CreateJobInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateJobInput;
+
+  TRes call({String? name});
+}
+
+class _CopyWithImpl_Input_CreateJobInput<TRes>
+    implements CopyWith_Input_CreateJobInput<TRes> {
+  _CopyWithImpl_Input_CreateJobInput(this._instance, this._then);
+
+  final Input_CreateJobInput _instance;
+
+  final TRes Function(Input_CreateJobInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? name = _undefined}) => _then(
+    Input_CreateJobInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateJobInput<TRes>
+    implements CopyWith_Input_CreateJobInput<TRes> {
+  _CopyWithStubImpl_Input_CreateJobInput(this._res);
+
+  TRes _res;
+
+  call({String? name}) => _res;
+}
+
 class Input_JobFilterName {
   factory Input_JobFilterName({
     bool? isNil,
@@ -188999,6 +189562,121 @@ class _CopyWithStubImpl_Input_JobSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_JobSortField? field}) => _res;
+}
+
+class Input_CreateHobbyInput {
+  factory Input_CreateHobbyInput({required String name, int? color}) =>
+      Input_CreateHobbyInput._({
+        r'name': name,
+        if (color != null) r'color': color,
+      });
+
+  Input_CreateHobbyInput._(this._$data);
+
+  factory Input_CreateHobbyInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    return Input_CreateHobbyInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  int? get color => (_$data['color'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateHobbyInput<Input_CreateHobbyInput> get copyWith =>
+      CopyWith_Input_CreateHobbyInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateHobbyInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$color = color;
+    return Object.hashAll([
+      l$name,
+      _$data.containsKey('color') ? l$color : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateHobbyInput<TRes> {
+  factory CopyWith_Input_CreateHobbyInput(
+    Input_CreateHobbyInput instance,
+    TRes Function(Input_CreateHobbyInput) then,
+  ) = _CopyWithImpl_Input_CreateHobbyInput;
+
+  factory CopyWith_Input_CreateHobbyInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateHobbyInput;
+
+  TRes call({String? name, int? color});
+}
+
+class _CopyWithImpl_Input_CreateHobbyInput<TRes>
+    implements CopyWith_Input_CreateHobbyInput<TRes> {
+  _CopyWithImpl_Input_CreateHobbyInput(this._instance, this._then);
+
+  final Input_CreateHobbyInput _instance;
+
+  final TRes Function(Input_CreateHobbyInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? name = _undefined, Object? color = _undefined}) => _then(
+    Input_CreateHobbyInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (color != _undefined) 'color': (color as int?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateHobbyInput<TRes>
+    implements CopyWith_Input_CreateHobbyInput<TRes> {
+  _CopyWithStubImpl_Input_CreateHobbyInput(this._res);
+
+  TRes _res;
+
+  call({String? name, int? color}) => _res;
 }
 
 class Input_HobbyFilterColor {
@@ -190760,6 +191438,123 @@ class _CopyWithStubImpl_Input_HobbySortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_HobbySortField? field}) => _res;
+}
+
+class Input_CreateFatherInput {
+  factory Input_CreateFatherInput({required String name, String? churchId}) =>
+      Input_CreateFatherInput._({
+        r'name': name,
+        if (churchId != null) r'churchId': churchId,
+      });
+
+  Input_CreateFatherInput._(this._$data);
+
+  factory Input_CreateFatherInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    if (data.containsKey('churchId')) {
+      final l$churchId = data['churchId'];
+      result$data['churchId'] = (l$churchId as String?);
+    }
+    return Input_CreateFatherInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  String? get churchId => (_$data['churchId'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    if (_$data.containsKey('churchId')) {
+      final l$churchId = churchId;
+      result$data['churchId'] = l$churchId;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateFatherInput<Input_CreateFatherInput> get copyWith =>
+      CopyWith_Input_CreateFatherInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateFatherInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$churchId = churchId;
+    final lOther$churchId = other.churchId;
+    if (_$data.containsKey('churchId') !=
+        other._$data.containsKey('churchId')) {
+      return false;
+    }
+    if (l$churchId != lOther$churchId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$churchId = churchId;
+    return Object.hashAll([
+      l$name,
+      _$data.containsKey('churchId') ? l$churchId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateFatherInput<TRes> {
+  factory CopyWith_Input_CreateFatherInput(
+    Input_CreateFatherInput instance,
+    TRes Function(Input_CreateFatherInput) then,
+  ) = _CopyWithImpl_Input_CreateFatherInput;
+
+  factory CopyWith_Input_CreateFatherInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateFatherInput;
+
+  TRes call({String? name, String? churchId});
+}
+
+class _CopyWithImpl_Input_CreateFatherInput<TRes>
+    implements CopyWith_Input_CreateFatherInput<TRes> {
+  _CopyWithImpl_Input_CreateFatherInput(this._instance, this._then);
+
+  final Input_CreateFatherInput _instance;
+
+  final TRes Function(Input_CreateFatherInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? name = _undefined, Object? churchId = _undefined}) =>
+      _then(
+        Input_CreateFatherInput._({
+          ..._instance._$data,
+          if (name != _undefined && name != null) 'name': (name as String),
+          if (churchId != _undefined) 'churchId': (churchId as String?),
+        }),
+      );
+}
+
+class _CopyWithStubImpl_Input_CreateFatherInput<TRes>
+    implements CopyWith_Input_CreateFatherInput<TRes> {
+  _CopyWithStubImpl_Input_CreateFatherInput(this._res);
+
+  TRes _res;
+
+  call({String? name, String? churchId}) => _res;
 }
 
 class Input_FatherFilterIsHidden {
@@ -192998,6 +193793,127 @@ class _CopyWithStubImpl_Input_FatherSortInput<TRes>
   call({Enum_SortOrder? order, Enum_FatherSortField? field}) => _res;
 }
 
+class Input_CreateCollegeInput {
+  factory Input_CreateCollegeInput({
+    required String name,
+    String? universityId,
+  }) => Input_CreateCollegeInput._({
+    r'name': name,
+    if (universityId != null) r'universityId': universityId,
+  });
+
+  Input_CreateCollegeInput._(this._$data);
+
+  factory Input_CreateCollegeInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    if (data.containsKey('universityId')) {
+      final l$universityId = data['universityId'];
+      result$data['universityId'] = (l$universityId as String?);
+    }
+    return Input_CreateCollegeInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  String? get universityId => (_$data['universityId'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    if (_$data.containsKey('universityId')) {
+      final l$universityId = universityId;
+      result$data['universityId'] = l$universityId;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateCollegeInput<Input_CreateCollegeInput> get copyWith =>
+      CopyWith_Input_CreateCollegeInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateCollegeInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$universityId = universityId;
+    final lOther$universityId = other.universityId;
+    if (_$data.containsKey('universityId') !=
+        other._$data.containsKey('universityId')) {
+      return false;
+    }
+    if (l$universityId != lOther$universityId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$universityId = universityId;
+    return Object.hashAll([
+      l$name,
+      _$data.containsKey('universityId') ? l$universityId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateCollegeInput<TRes> {
+  factory CopyWith_Input_CreateCollegeInput(
+    Input_CreateCollegeInput instance,
+    TRes Function(Input_CreateCollegeInput) then,
+  ) = _CopyWithImpl_Input_CreateCollegeInput;
+
+  factory CopyWith_Input_CreateCollegeInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateCollegeInput;
+
+  TRes call({String? name, String? universityId});
+}
+
+class _CopyWithImpl_Input_CreateCollegeInput<TRes>
+    implements CopyWith_Input_CreateCollegeInput<TRes> {
+  _CopyWithImpl_Input_CreateCollegeInput(this._instance, this._then);
+
+  final Input_CreateCollegeInput _instance;
+
+  final TRes Function(Input_CreateCollegeInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? name = _undefined, Object? universityId = _undefined}) =>
+      _then(
+        Input_CreateCollegeInput._({
+          ..._instance._$data,
+          if (name != _undefined && name != null) 'name': (name as String),
+          if (universityId != _undefined)
+            'universityId': (universityId as String?),
+        }),
+      );
+}
+
+class _CopyWithStubImpl_Input_CreateCollegeInput<TRes>
+    implements CopyWith_Input_CreateCollegeInput<TRes> {
+  _CopyWithStubImpl_Input_CreateCollegeInput(this._res);
+
+  TRes _res;
+
+  call({String? name, String? universityId}) => _res;
+}
+
 class Input_CollegeFilterUniversityId {
   factory Input_CollegeFilterUniversityId({
     bool? isNil,
@@ -194817,6 +195733,95 @@ class _CopyWithStubImpl_Input_CollegeSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_CollegeSortField? field}) => _res;
+}
+
+class Input_CreateChurchInput {
+  factory Input_CreateChurchInput({required String name}) =>
+      Input_CreateChurchInput._({r'name': name});
+
+  Input_CreateChurchInput._(this._$data);
+
+  factory Input_CreateChurchInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    return Input_CreateChurchInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    return result$data;
+  }
+
+  CopyWith_Input_CreateChurchInput<Input_CreateChurchInput> get copyWith =>
+      CopyWith_Input_CreateChurchInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateChurchInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    return Object.hashAll([l$name]);
+  }
+}
+
+abstract class CopyWith_Input_CreateChurchInput<TRes> {
+  factory CopyWith_Input_CreateChurchInput(
+    Input_CreateChurchInput instance,
+    TRes Function(Input_CreateChurchInput) then,
+  ) = _CopyWithImpl_Input_CreateChurchInput;
+
+  factory CopyWith_Input_CreateChurchInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateChurchInput;
+
+  TRes call({String? name});
+}
+
+class _CopyWithImpl_Input_CreateChurchInput<TRes>
+    implements CopyWith_Input_CreateChurchInput<TRes> {
+  _CopyWithImpl_Input_CreateChurchInput(this._instance, this._then);
+
+  final Input_CreateChurchInput _instance;
+
+  final TRes Function(Input_CreateChurchInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? name = _undefined}) => _then(
+    Input_CreateChurchInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateChurchInput<TRes>
+    implements CopyWith_Input_CreateChurchInput<TRes> {
+  _CopyWithStubImpl_Input_CreateChurchInput(this._res);
+
+  TRes _res;
+
+  call({String? name}) => _res;
 }
 
 class Input_ChurchFilterIsHidden {
