@@ -2,14 +2,22 @@ defmodule ChurchAdmin.Activity.Edit do
   use Ash.Resource,
     domain: ChurchAdmin.Activity,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource],
     fragments: [ChurchAdmin.Authz.Fragments.HistoryRecord]
 
   alias ChurchAdmin.Accounts.User
+  alias ChurchAdmin.Authz.Checks.{InScope, System}
   alias ChurchAdmin.Types.Text
 
   graphql do
     type :edit
+
+    relationships [:user]
+
+    queries do
+      list :edits, :read
+    end
   end
 
   postgres do
@@ -33,12 +41,30 @@ defmodule ChurchAdmin.Activity.Edit do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
 
     create :record do
       public? false
       accept [:table, :record_id, :recorded_by, :user_role]
       change atomic_set(:time, expr(fragment("now()")))
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {InScope, entity: :history_record, access: :read}
     end
   end
 
