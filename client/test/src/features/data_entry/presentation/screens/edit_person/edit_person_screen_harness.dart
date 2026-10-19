@@ -90,7 +90,6 @@ class EditPersonScreenHarness {
   final FakeServicesDAO services = FakeServicesDAO();
 
   User? currentUser = userWhoWritesEverything;
-  bool enablePersonNationalId = false;
 
   void install() {
     final authBloc = MockAuthBloc();
@@ -131,7 +130,7 @@ class EditPersonScreenHarness {
     initGlobalProviderContainer([
       authBlocProvider.overrideWithValue(authBloc),
       featureFlagsRepoProvider.overrideWithValue(
-        FakeFeatureFlagsRepo(enablePersonNationalId: enablePersonNationalId),
+        FakeFeatureFlagsRepo(),
       ),
       databaseServiceProvider.overrideWithValue(databaseService),
       imageUrlCacheServiceProvider.overrideWithValue(imageUrls),

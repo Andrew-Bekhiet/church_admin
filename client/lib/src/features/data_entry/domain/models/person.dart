@@ -20,8 +20,6 @@ class Person extends ViewableWithIDAndImage
   @QueryableField.self()
   final String id;
 
-  final int? nationalId;
-
   @override
   @JsonKey(defaultValue: '')
   @QueryableField(label: 'الاسم')
@@ -256,7 +254,6 @@ class Person extends ViewableWithIDAndImage
     this.martialStatus = MartialStatus.single,
     this.isServant = false,
     this.userCanEdit = false,
-    this.nationalId,
     this.address,
     this.birthdate,
     this.birthday,
@@ -360,7 +357,6 @@ class Person extends ViewableWithIDAndImage
   }
 
   Input_PersonsInsertInput toInsertInput() => Input_PersonsInsertInput(
-    nationalId: nationalId,
     name: name,
     birthdate: birthdate,
     gender: gender,
@@ -513,10 +509,6 @@ class Person extends ViewableWithIDAndImage
 
     if (name != oldPerson.name) {
       result = result.copyWith(name: name);
-    }
-
-    if (nationalId != oldPerson.nationalId) {
-      result = result.copyWith(nationalId: nationalId);
     }
 
     if (birthdate != oldPerson.birthdate) {

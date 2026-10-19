@@ -19,7 +19,6 @@ void main() {
   final fullPerson = Person(
     id: 'p',
     name: 'مينا',
-    nationalId: 29901011234567,
     birthdate: DateTime(1999),
     family: family,
     address: shubraAddress,
@@ -143,14 +142,6 @@ void main() {
       controller.identity.name.setValue('  مينا جرجس ');
 
       expect(controller.toPerson().name, 'مينا جرجس');
-    });
-
-    test('carry the national id as a number', () {
-      final controller = fixture.controllerOfUpdate(fullPerson);
-
-      controller.identity.nationalId.setValue('29801011234567');
-
-      expect(controller.toPerson().nationalId, 29801011234567);
     });
 
     test('carry the relation id along with the chosen object', () {
@@ -310,18 +301,6 @@ void main() {
       expect(
         controller.identity.name.value.error,
         PersonEditError.nameRequired,
-      );
-    });
-
-    test('rejects a national id that is too small', () async {
-      final controller = fixture.controllerOfUpdate(fullPerson);
-      controller.identity.nationalId.setValue('123');
-
-      await controller.validate();
-
-      expect(
-        controller.identity.nationalId.value.error,
-        PersonEditError.invalidNationalId,
       );
     });
   });

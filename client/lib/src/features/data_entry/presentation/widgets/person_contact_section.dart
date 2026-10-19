@@ -16,11 +16,6 @@ class PersonContactSection extends StatelessWidget {
 
     return Column(
       children: [
-        if (person.nationalId != null)
-          ListTile(
-            title: const Text('الرقم القومي'),
-            subtitle: Text(person.nationalId?.toString() ?? ''),
-          ),
         PhoneBookCard(
           own: person.contacts,
           family: person.visibleFamilyContacts,

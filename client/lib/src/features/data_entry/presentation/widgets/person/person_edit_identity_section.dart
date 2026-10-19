@@ -29,16 +29,6 @@ class PersonEditIdentitySection extends StatelessWidget {
             textCapitalization: TextCapitalization.words,
           ),
         ),
-        if (FeatureFlagsRepository.I.enablePersonNationalId)
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: AdvancedTextInput<PersonEditError>(
-              field: form.nationalId,
-              translateError: PersonEditError.messageOf,
-              labelText: 'الرقم القومي',
-              keyboardType: TextInputType.number,
-            ),
-          ),
         PhoneContactsEditor(
           onImportFromContacts:
               CurrentPlatformService.I.isAndroid ||

@@ -1,6 +1,5 @@
 enum PersonEditError {
   nameRequired('برجاء إدخال الاسم'),
-  invalidNationalId('برجاء إدخال رقم قومي صالح'),
   familyRequired('يجب تحديد العائلة'),
   familyOrAddressRequired('يجب تحديد العائلة أو العنوان'),
   shammasLevelRequired('برجاء اختيار رتبة الشموسية'),
