@@ -12,6 +12,7 @@ Each area's rules load when you work under it. The repo carries only `AGENTS.md`
 
 - `client/AGENTS.md` — Dart & Flutter structure, idioms, tests, analyze/format/test commands (also binds `packages/`).
 - `client/patrol_test/AGENTS.md` — E2E journeys.
+- `server/ash/AGENTS.md` — the Ash backend: generators, tests, the baseline schema, its dev database and `mix precommit`.
 - `server/hasura/AGENTS.md` — migrations and the auth model.
 - `server/firebase/functions/AGENTS.md` — TypeScript Cloud Functions.
 - `.github/workflows/AGENTS.md` — CI workflow conventions.
