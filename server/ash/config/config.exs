@@ -72,6 +72,16 @@ config :spark,
 
 config :church_admin, ChurchAdmin.Repo, migration_source: "ash_schema_migrations"
 
+config :church_admin, :config_env, config_env()
+
+config :church_admin, ChurchAdmin.Google.Config,
+  identity_toolkit: [
+    adapter: ChurchAdmin.Google.IdentityToolkit.Http,
+    base_url: "https://identitytoolkit.googleapis.com"
+  ],
+  storage: [adapter: ChurchAdmin.Google.Storage.Http, base_url: "https://storage.googleapis.com"],
+  messaging: [adapter: ChurchAdmin.Google.Messaging.Http, base_url: "https://fcm.googleapis.com"]
+
 config :church_admin,
   ecto_repos: [ChurchAdmin.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true],
