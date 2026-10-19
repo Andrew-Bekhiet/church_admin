@@ -1,0 +1,23 @@
+mutation createGroup($input: CreateGroupInput!) {
+  createGroup(input: $input) {
+    result {
+      ...GroupDetails
+    }
+  }
+}
+
+mutation updateGroup($id: ID!, $input: UpdateGroupInput) {
+  updateGroup(id: $id, input: $input) {
+    result {
+      ...GroupDetails
+    }
+  }
+}
+
+mutation deleteGroup($id: ID!) {
+  deleteGroup(id: $id) {
+    result {
+      ...Group
+    }
+  }
+}

@@ -1,0 +1,39 @@
+fragment ClassNoPhoto on Class {
+  id
+  name
+  color
+  userCanEdit
+}
+
+fragment Class on Class {
+  ...ClassNoPhoto
+  photoUpdatedAt
+  blurhash
+}
+
+fragment ClassWithStudyYears on Class {
+  ...Class
+  serviceId
+  serviceStudyYear
+  serviceStudyYearTo
+  serviceGender
+  studyYearFrom {
+    ...StudyYear
+  }
+  studyYearTo {
+    ...StudyYear
+  }
+}
+
+fragment ClassDetails on Class {
+  ...ClassWithStudyYears
+  service {
+    ...ServiceWithStudyYears
+  }
+  latestEdit {
+    ...OrgLatestEdit
+  }
+  admins {
+    ...OrgUser
+  }
+}

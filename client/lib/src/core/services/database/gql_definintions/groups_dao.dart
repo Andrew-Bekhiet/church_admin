@@ -1,78 +1,72 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/groups/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/groups/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/groups/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/groups/__generated__/queries.graphql.dart';
 
-class GroupsDAO extends LegacyFullCRUDDAO<Group> {
+class GroupsDAO extends FullCRUDDAO<Group> {
   @override
-  late final LegacyStreamAllConfig<Group> baseStreamAllConfig =
-      LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllGroups,
-        transformRequest: _streamAllVarsConstructor,
-      );
+  StreamAllConfig<Group> get baseStreamAllConfig => StreamAllConfig(
+    document: documentNodeQuerygroups,
+    arguments: _listArguments,
+  );
+
   @override
-  late final LegacyStreamCountConfig<Group> baseStreamCountConfig =
-      const LegacyStreamCountConfig(
-        document: documentNodeSubscriptionwatchGroupsCount,
-      );
+  StreamSingleByIdConfig<Group> get baseStreamSingleByIdConfig =>
+      const StreamSingleByIdConfig(document: documentNodeQuerygroup);
+
   @override
-  late final LegacyStreamSingleByIdConfig<Group> baseStreamSingleByIdConfig =
-      LegacyStreamSingleByIdConfig(
-        document: documentNodeSubscriptionwatchGroup,
-        varsConstructor: _streamSingleByIdVarsConstructor,
-      );
+  CreateObjectConfig<Group> get baseCreateObjectConfig => CreateObjectConfig(
+    document: documentNodeMutationcreateGroup,
+    varsConstructor: ({required newObject}) => Variables_Mutation_createGroup(
+      input: Input_CreateGroupInput(
+        name: newObject.name,
+        color: colorToInt(newObject.color),
+        serviceId:
+            newObject.service?.id ??
+            newObject.serviceId ??
+            (throw ArgumentError.value(
+              newObject,
+              'newObject',
+              'A group needs the service it belongs to',
+            )),
+        validity: dateRangeToString(newObject.validity),
+      ),
+    ).toJson(),
+  );
+
   @override
-  late final LegacyDeleteSingleByIdConfig<Group> baseDeleteSingleByIdConfig =
-      LegacyDeleteSingleByIdConfig(
-        document: documentNodeMutationdeleteGroup,
-        varsConstructor: _deleteSingleByIdVarsConstructor,
-      );
+  UpdateObjectConfig<Group> get baseUpdateObjectConfig => UpdateObjectConfig(
+    document: documentNodeMutationupdateGroup,
+    varsConstructor: ({required newObject}) => Variables_Mutation_updateGroup(
+      id: newObject.id,
+      input: Input_UpdateGroupInput.fromJson({
+        'name': newObject.name,
+        'color': colorToInt(newObject.color),
+        'serviceId': newObject.service?.id ?? newObject.serviceId,
+        'validity': dateRangeToString(newObject.validity),
+        'defaultMeetingId': newObject.defaultMeeting?.id,
+      }),
+    ).toJson(),
+  );
+
   @override
-  late final LegacyUpdateObjectConfig<Group> baseUpdateObjectConfig =
-      LegacyUpdateObjectConfig(
-        document: documentNodeMutationupdateGroup,
-        varsConstructor: _updateGroupVarsConstructor,
-      );
-  @override
-  late final LegacyCreateObjectConfig<Group> baseCreateObjectConfig =
-      LegacyCreateObjectConfig(
-        document: documentNodeMutationinsertGroup,
-        varsConstructor: _createGroupVarsConstructor,
-      );
+  DeleteSingleByIdConfig<Group> get baseDeleteSingleByIdConfig =>
+      const DeleteSingleByIdConfig(document: documentNodeMutationdeleteGroup);
 
   GroupsDAO({required super.db}) : super(fromJson: Group.fromJson);
 
-  Json _streamAllVarsConstructor(
-    PaginatableStreamRequest<Group, StreamableDAOParameters<Group>?> request,
-  ) {
-    final orderBy = request.param?.orderBy;
-
-    return db.varsTransformer.transformrequestForPagination(
-      request,
-      overrideOrderBy: (orderBy?.isEmpty ?? true)
-          ? [
-              OrderBy(field: GroupFields().validity),
-              OrderBy(field: GroupFields().name),
-            ]
-          : null,
-    );
-  }
-
-  Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
-      Variables_Subscription_watchGroup(id: id).toJson();
-
-  Json _createGroupVarsConstructor({required Group newObject}) =>
-      Variables_Mutation_insertGroup(
-        newGroup: newObject.toInsertInput(),
-      ).toJson();
-
-  Json _updateGroupVarsConstructor({
-    required Group newObject,
-    required Group oldObject,
-  }) => Variables_Mutation_updateGroup(
-    groupId: newObject.id.toUuid(),
-    newGroup: newObject.toUpdateInput(oldObject: oldObject),
-  ).toJson();
-
-  Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
-      Variables_Mutation_deleteGroup(groupId: id).toJson();
+  ListQueryArguments _listArguments(
+    StreamableDAOParameters<Group>? parameters,
+  ) => ListQueryArguments.fromParameters(
+    StreamableDAOParameters<Group>(
+      search: parameters?.search,
+      where: parameters?.where,
+      orderBy: (parameters?.orderBy?.isEmpty ?? true)
+          ? null
+          : parameters?.orderBy,
+    ),
+    defaultOrderBy: [
+      OrderBy(field: GroupFields().validity),
+      OrderBy(field: GroupFields().name),
+    ],
+  );
 }
