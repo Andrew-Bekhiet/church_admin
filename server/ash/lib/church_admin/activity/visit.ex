@@ -7,7 +7,10 @@ defmodule ChurchAdmin.Activity.Visit do
     fragments: [ChurchAdmin.Authz.Fragments.HistoryRecord]
 
   alias ChurchAdmin.Accounts.User
+  alias ChurchAdmin.Activity.Changes.ApplyVisitSubject
+  alias ChurchAdmin.Activity.VisitSubject
   alias ChurchAdmin.Authz.Checks.{InScope, System}
+  alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.Types.Text
 
   graphql do
@@ -18,6 +21,10 @@ defmodule ChurchAdmin.Activity.Visit do
     queries do
       get :visit, :read
       list :visits, :read
+    end
+
+    mutations do
+      create :record_visit, :record_visit
     end
   end
 
@@ -49,6 +56,15 @@ defmodule ChurchAdmin.Activity.Visit do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :record_visit do
+      accept [:record_id, :time, :is_father_visit]
+
+      argument :subject, VisitSubject, allow_nil?: false
+
+      change ApplyVisitSubject
+      change {StampActor, attribute: :recorded_by}
+    end
   end
 
   policies do
@@ -58,6 +74,10 @@ defmodule ChurchAdmin.Activity.Visit do
 
     policy action_type(:read) do
       authorize_if {InScope, entity: :history_record, access: :read}
+    end
+
+    policy action_type(:create) do
+      authorize_if {InScope, entity: :history_record, access: :edit}
     end
   end
 

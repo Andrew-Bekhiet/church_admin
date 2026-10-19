@@ -34,14 +34,19 @@ defmodule ChurchAdmin.Changes.StampActor do
         Ash.Changeset.force_change_attribute(changeset, attribute, uid)
 
       _actor ->
-        Ash.Changeset.add_error(
-          changeset,
-          InvalidAttribute.exception(
-            field: attribute,
-            message: "is stamped from the actor, and this write has no user or system actor"
-          )
-        )
+        Ash.Changeset.before_action(changeset, &fail_without_actor(&1, attribute))
     end
+  end
+
+  # Deferred so the policies refuse an anonymous write first (forbidden, not invalid).
+  defp fail_without_actor(changeset, attribute) do
+    Ash.Changeset.add_error(
+      changeset,
+      InvalidAttribute.exception(
+        field: attribute,
+        message: "is stamped from the actor, and this write has no user or system actor"
+      )
+    )
   end
 
   @impl true

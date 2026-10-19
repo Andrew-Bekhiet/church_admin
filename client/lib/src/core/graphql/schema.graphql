@@ -3,6 +3,13 @@ schema {
   query: RootQueryType
 }
 
+enum VisitSubject {
+  AREAS
+  FAMILIES
+  PERSONS
+  STREETS
+}
+
 type ExportDownloadLink {
   expiresAt: DateTime!
   downloadUrl: String!
@@ -6119,6 +6126,22 @@ type AttendanceRecord {
   recordedByUser: User
 }
 
+"The result of the :record_visit mutation"
+type RecordVisitResult {
+  "The successful result of the mutation"
+  result: Visit
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input RecordVisitInput {
+  recordId: ID!
+  time: DateTime
+  isFatherVisit: Boolean
+  subject: VisitSubject!
+}
+
 enum VisitSortField {
   VISIT_ID
   TABLE
@@ -6874,6 +6897,29 @@ type LatestCall {
   user: User
 }
 
+"The result of the :delete_kodas mutation"
+type DeleteKodasResult {
+  "The record that was successfully deleted"
+  result: Kodas
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :record_kodas mutation"
+type RecordKodasResult {
+  "The successful result of the mutation"
+  result: Kodas
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input RecordKodasInput {
+  personId: ID!
+  day: Date!
+}
+
 enum KodasSortField {
   ID
   DAY_ID
@@ -7095,6 +7141,20 @@ type Edit {
   user: User
 }
 
+"The result of the :record_confession mutation"
+type RecordConfessionResult {
+  "The successful result of the mutation"
+  result: Confession
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input RecordConfessionInput {
+  personId: ID!
+  day: Date!
+}
+
 enum ConfessionSortField {
   ID
   DAY_ID
@@ -7211,6 +7271,20 @@ type Confession {
   day: ActivityDay
   person: Person
   user: User
+}
+
+"The result of the :record_call mutation"
+type RecordCallResult {
+  "The successful result of the mutation"
+  result: Call
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input RecordCallInput {
+  time: DateTime
+  personId: ID!
 }
 
 enum CallSortField {
@@ -10820,6 +10894,11 @@ type RootMutationType {
   applyInvitationCode(input: ApplyInvitationCodeInput!): ClaimedAccount!
   tryClaimAccount: ClaimedAccount!
   deleteMyAccount: Boolean!
+  recordCall(input: RecordCallInput!): RecordCallResult
+  recordConfession(input: RecordConfessionInput!): RecordConfessionResult
+  recordKodas(input: RecordKodasInput!): RecordKodasResult
+  deleteKodas(id: ID!): DeleteKodasResult
+  recordVisit(input: RecordVisitInput!): RecordVisitResult
   createDistrict(input: CreateDistrictInput!): CreateDistrictResult
 }
 
