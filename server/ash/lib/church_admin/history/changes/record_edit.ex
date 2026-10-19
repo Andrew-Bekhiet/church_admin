@@ -2,7 +2,8 @@ defmodule ChurchAdmin.History.Changes.RecordEdit do
   @moduledoc """
   Writes `history.edit_history` rows for every record a create, update or soft
   delete writes, inside the action's transaction; a hard delete writes none.
-  An update writes its row even when nothing changed.
+  An update writes its row even when nothing changed. An upsert that found the
+  row already there (`upsert_skipped`) writes nothing.
 
       changes do
         change {RecordEdit, table: "persons"}, on: [:create, :update, :destroy]
@@ -63,7 +64,7 @@ defmodule ChurchAdmin.History.Changes.RecordEdit do
   def change(changeset, opts, context) do
     if writes_history?(changeset) do
       Ash.Changeset.after_action(changeset, fn changeset, record ->
-        case record_edits([record], opts, context.actor) do
+        case record_edits(written([record]), opts, context.actor) do
           :ok -> {:ok, record}
           {:error, error} -> AfterActionFailure.roll_back(changeset.resource, error)
         end
@@ -88,7 +89,7 @@ defmodule ChurchAdmin.History.Changes.RecordEdit do
     records =
       for {changeset, record} <- changesets_and_results, writes_history?(changeset), do: record
 
-    case record_edits(records, opts, context.actor) do
+    case record_edits(written(records), opts, context.actor) do
       :ok -> :ok
       {:error, error} -> [{:error, error}]
     end
@@ -96,6 +97,9 @@ defmodule ChurchAdmin.History.Changes.RecordEdit do
 
   defp writes_history?(%{action: %{type: :destroy, soft?: soft?}}), do: soft?
   defp writes_history?(_changeset), do: true
+
+  defp written(records),
+    do: Enum.reject(records, &Ash.Resource.get_metadata(&1, :upsert_skipped))
 
   defp record_edits([], _opts, _actor), do: :ok
 
