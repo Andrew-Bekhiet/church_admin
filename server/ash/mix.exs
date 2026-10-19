@@ -99,7 +99,8 @@ defmodule ChurchAdmin.MixProject do
       {:jose, "~> 1.11"},
       {:corsica, "~> 2.1"},
       {:picosat_elixir, "~> 0.2"},
-      {:goth, "~> 1.4"}
+      {:goth, "~> 1.4"},
+      {:elixlsx, "~> 0.6"}
     ]
   end
 
