@@ -61,4 +61,8 @@ defmodule ChurchAdmin.People.ClassMembership do
     belongs_to :class, Class, source_attribute: :class_id, define_attribute?: false, public?: true
     belongs_to :person, Person, define_attribute?: false, public?: true
   end
+
+  aggregates do
+    first :class_name, :class, :name, public?: true
+  end
 end
