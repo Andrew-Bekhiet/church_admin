@@ -1,7 +1,5 @@
 defmodule ChurchAdminWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :church_admin
-  socket "/ws/gql", ChurchAdminWeb.GraphqlSocket, websocket: true, longpoll: true
-  use Absinthe.Phoenix.Endpoint
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -38,6 +36,12 @@ defmodule ChurchAdminWeb.Endpoint do
 
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
+
+  plug Corsica,
+    origins: {ChurchAdminWeb.CorsOrigins, :allowed?, []},
+    allow_methods: :all,
+    allow_headers: ["authorization", "content-type"],
+    max_age: 600
 
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json, Absinthe.Plug.Parser],

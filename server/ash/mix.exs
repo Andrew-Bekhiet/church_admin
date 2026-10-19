@@ -77,7 +77,6 @@ defmodule ChurchAdmin.MixProject do
   defp deps do
     [
       {:usage_rules, "~> 1.0", only: [:dev]},
-      {:absinthe_phoenix, "~> 2.0"},
       {:sourceror, "~> 1.8", only: [:dev, :test]},
       {:oban, "~> 2.0"},
       {:ash_oban, "~> 0.10"},
@@ -93,7 +92,11 @@ defmodule ChurchAdmin.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:req, "~> 0.7"},
+      {:jose, "~> 1.11"},
+      {:corsica, "~> 2.1"},
+      {:picosat_elixir, "~> 0.2"}
     ]
   end
 
