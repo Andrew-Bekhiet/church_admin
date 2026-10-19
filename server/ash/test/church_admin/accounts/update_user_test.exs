@@ -58,6 +58,13 @@ defmodule ChurchAdmin.Accounts.UpdateUserTest do
                Accounts.update_user(claimed, %{name: "Still renamable"}, actor: ctx.actor)
     end
 
+    test "the locked email is reported as user/email-locked", ctx do
+      claimed = Factory.user!(%{email: "locked@example.com", auth_id: "firebase-locked"})
+
+      assert codes(Accounts.update_user(claimed, %{email: "other@example.com"}, actor: ctx.actor)) ==
+               ["user/email-locked"]
+    end
+
     test "reports a taken email", ctx do
       Factory.user!(%{email: "taken@example.com"})
 
