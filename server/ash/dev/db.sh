@@ -28,7 +28,7 @@ case "${1:-}" in
     compose down --volumes
     compose up --detach --build --wait
     (cd "$app_dir" && mix church_admin.setup --scale "${SEED_SCALE:-small}")
-    (cd "$app_dir" && MIX_ENV=test mix church_admin.setup)
+    (cd "$app_dir" && MIX_ENV=test mix ecto.migrate)
     ;;
   psql)
     shift
