@@ -38,7 +38,9 @@ defmodule ChurchAdmin.Accounts.Actions.BootstrapAdmin do
 
   defp no_other_admin(email, false) do
     UserPermission
-    |> Ash.Query.do_filter(expr(permission == "manageAllUsers" and (is_nil(user.email) or user.email != ^email)))
+    |> Ash.Query.do_filter(
+      expr(permission == "manageAllUsers" and (is_nil(user.email) or user.email != ^email))
+    )
     |> Ash.exists?(authorize?: false)
     |> if(
       do: {:error, "another user already holds manageAllUsers; pass force? to add one more"},
@@ -81,7 +83,9 @@ defmodule ChurchAdmin.Accounts.Actions.BootstrapAdmin do
     Person
     |> Ash.Changeset.for_create(
       :create_for_user,
-      %{name: user.email, gender: true, uid: user.uid}, actor: Actor.system())
+      %{name: user.email, gender: true, uid: user.uid},
+      actor: Actor.system()
+    )
     |> Ash.create()
     |> case do
       {:ok, _person} -> :ok

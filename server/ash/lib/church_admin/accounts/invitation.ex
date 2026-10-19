@@ -5,6 +5,7 @@ defmodule ChurchAdmin.Accounts.Invitation do
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
+  alias ChurchAdmin.Accounts.Changes.GenerateInvitationCode
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Accounts.Validations.ExpiresWithinThirtyDays
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
@@ -26,9 +27,7 @@ defmodule ChurchAdmin.Accounts.Invitation do
     repo ChurchAdmin.Repo
 
     migration_defaults created_at: ~S[fragment("now()")],
-                       expires_at: ~S[fragment("(now() + '7 days'::interval)")],
-                       code:
-                         ~S[fragment("auth.format_invitation_code(auth.generate_invitation_code())")]
+                       expires_at: ~S[fragment("(now() + '7 days'::interval)")]
 
     identity_index_names unique_code: "invitations_code_key",
                          unique_user_uid: "invitations_user_uid_key"
@@ -45,6 +44,7 @@ defmodule ChurchAdmin.Accounts.Invitation do
     create :create_invitation do
       accept [:user_uid, :expires_at]
       change {StampActor, attribute: :created_by}
+      change GenerateInvitationCode
       validate ExpiresWithinThirtyDays
     end
 
@@ -91,7 +91,7 @@ defmodule ChurchAdmin.Accounts.Invitation do
       public?: true
 
     attribute :claimed_at, AshPostgres.TimestamptzUsec, public?: true
-    attribute :code, Text, allow_nil?: false, generated?: true, public?: true
+    attribute :code, Text, allow_nil?: false, public?: true
   end
 
   relationships do
