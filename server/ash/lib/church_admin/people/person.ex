@@ -63,6 +63,7 @@ defmodule ChurchAdmin.People.Person do
 
   alias ChurchAdmin.People.Person.Changes.SyncLinkedUser
   alias ChurchAdmin.People.Person.Invariants
+  alias ChurchAdmin.People.Person.Validations.CallerMayRelinkUser
 
   alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.History.Changes.RecordEdit
@@ -229,6 +230,7 @@ defmodule ChurchAdmin.People.Person do
       description "Links the person to a user, or unlinks it with a nil uid."
       accept [:uid]
       require_atomic? false
+      validate CallerMayRelinkUser, before_action?: true
 
       change {InvariantHolds,
               code: Codes.person_container_required(), violations: &Invariants.unanchored/1}
