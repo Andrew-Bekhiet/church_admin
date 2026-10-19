@@ -27,7 +27,12 @@ defmodule ChurchAdmin.Accounts.User do
     SetApproval
   }
 
-  alias ChurchAdmin.Accounts.Validations.{EachScopeOnOneContainer, GrantsWithinActorAuthority}
+  alias ChurchAdmin.Accounts.Validations.{
+    EachScopeOnOneContainer,
+    EmailLockedAfterClaim,
+    GrantsWithinActorAuthority
+  }
+
   alias ChurchAdmin.Activity.LatestEdit
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, SignedInToFirebase, System}
@@ -136,6 +141,7 @@ defmodule ChurchAdmin.Accounts.User do
     update :claim_account do
       description "Links a Firebase account; callers check that no other account holds the user."
       accept [:auth_id, :email]
+      require_atomic? false
     end
 
     update :release_account do
@@ -210,6 +216,10 @@ defmodule ChurchAdmin.Accounts.User do
               "users_admin_on_service" => Codes.user_duplicate_scope()
             }},
            on: [:create, :update]
+  end
+
+  validations do
+    validate EmailLockedAfterClaim, on: [:update]
   end
 
   attributes do
