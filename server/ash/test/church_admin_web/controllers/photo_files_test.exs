@@ -1,7 +1,7 @@
 defmodule ChurchAdminWeb.PhotoFilesTest do
   use ChurchAdminWeb.ConnCase, async: false
 
-  import ExUnit.CaptureLog, only: [capture_log: 1, with_log: 1]
+  import ExUnit.CaptureLog, only: [with_log: 1]
 
   alias ChurchAdmin.{AuthzWorld, FirebaseTokens}
   alias ChurchAdmin.Accounts.User
@@ -13,6 +13,7 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
   @photo File.read!(Path.expand("../../support/fixtures/photo.jpg", __DIR__))
   @updated "2026-10-19T08:30:15.123Z"
   @blurhash_length 54
+  @svg ~S|<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><script>alert(1)</script></svg>|
 
   setup do
     {:ok, world: AuthzWorld.build!()}
@@ -24,14 +25,14 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
   end
 
   defp upload_token(user, subject, record, opts \\ []) do
-    params = %{subject: subject, id: record.id, content_type: "image/jpeg"}
+    params = %{subject: subject, id: record.id}
 
     {token, _expires_at} = FileToken.issue(:photo_upload, user.uid, params, opts)
     token
   end
 
   defp download_token(user, subject, record, opts \\ []) do
-    params = %{subject: subject, id: record.id, content_type: "image/png"}
+    params = %{subject: subject, id: record.id}
 
     {token, _expires_at} = FileToken.issue(:photo_download, user.uid, params, opts)
     token
@@ -138,33 +139,50 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
       assert String.length(reload_person(self).blurhash) == @blurhash_length
     end
 
-    test "records the upload even when no blurhash can be computed", %{
-      conn: conn,
-      world: world
-    } do
+    test "refuses bytes that are not an image and stores nothing", %{conn: conn, world: world} do
       stub_upload()
       person = world.records.m1
       token = upload_token(world.users.read_write, :persons, person)
 
-      log =
-        capture_log(fn ->
-          assert put_photo(conn, token, "this is not an image", "image/jpeg").status == 204
-        end)
+      for {bytes, claimed_type} <- [
+            {"this is not an image", "image/jpeg"},
+            {"<html><script>alert(1)</script></html>", "text/html"},
+            {@svg, "image/svg+xml"},
+            {@svg, "image/jpeg"}
+          ] do
+        response = put_photo(conn, token, bytes, claimed_type)
 
-      assert log =~ "blurhash"
+        assert response.status == 415, claimed_type
 
-      reloaded = reload_person(person)
-      assert DateTime.compare(reloaded.photo_updated_at, ~U[2026-10-19 08:30:15.123Z]) == :eq
-      assert reloaded.blurhash == nil
+        assert %{"errors" => [%{"extensions" => %{"code" => "invalid"}}]} =
+                 json_response(response, 415)
+      end
+
+      refute_received {:gcs_upload, _method, _path, _query, _type, _body}
+      assert reload_person(person).photo_updated_at == nil
     end
 
-    test "an upload keeps the content type the token names", %{conn: conn, world: world} do
+    test "stores the format the bytes have, whatever type the request claims", %{
+      conn: conn,
+      world: world
+    } do
       stub_upload()
       token = upload_token(world.users.read_write, :areas, world.records.a1)
 
       assert put_photo(conn, token, @photo, "application/octet-stream").status == 204
-
       assert_received {:gcs_upload, _method, _path, _query, ["image/jpeg"], _body}
+
+      assert put_photo(conn, token, @photo, "text/html").status == 204
+      assert_received {:gcs_upload, _method, _path, _query, ["image/jpeg"], _body}
+
+      {:ok, image} = Image.from_binary(@photo)
+
+      for {suffix, stored_type} <- [{".png", "image/png"}, {".webp", "image/webp"}] do
+        bytes = Image.write!(image, :memory, suffix: suffix)
+
+        assert put_photo(conn, token, bytes, "image/jpeg").status == 204, suffix
+        assert_received {:gcs_upload, _method, _path, _query, [^stored_type], _body}
+      end
     end
 
     test "answers 502 and records nothing when storage fails", %{conn: conn, world: world} do
@@ -251,14 +269,28 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
   end
 
   describe "GET /api/files/:token for a photo" do
-    test "streams the object with a private five minute cache", %{conn: conn, world: world} do
+    defp stub_stored_photo(stored_type) do
       test = self()
 
       Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
         send(test, {:gcs_download, conn.request_path, conn.query_params})
-        Plug.Conn.send_resp(conn, 200, @photo)
-      end)
 
+        case conn.query_params do
+          %{"alt" => "media"} ->
+            Plug.Conn.send_resp(conn, 200, @photo)
+
+          _metadata ->
+            Req.Test.json(conn, %{
+              "name" => "persons/photo",
+              "bucket" => @bucket,
+              "contentType" => stored_type
+            })
+        end
+      end)
+    end
+
+    test "streams the object with a private five minute cache", %{conn: conn, world: world} do
+      stub_stored_photo("image/jpeg")
       person = world.records.m1
       token = download_token(world.users.read_all, :persons, person)
 
@@ -267,10 +299,65 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
       assert response.status == 200
       assert response.resp_body == @photo
       assert get_resp_header(response, "cache-control") == ["private, max-age=300"]
-      assert get_resp_header(response, "content-type") == ["image/png"]
 
       assert_received {:gcs_download, path, %{"alt" => "media"}}
       assert path == "/storage/v1/b/#{@bucket}/o/persons%2F#{person.id}"
+    end
+
+    test "serves the stored image type inline and forbids sniffing", %{conn: conn, world: world} do
+      token = download_token(world.users.read_all, :persons, world.records.m1)
+
+      for stored_type <- ~w(image/jpeg image/png image/webp image/gif image/heic) do
+        stub_stored_photo(stored_type)
+        response = get(conn, ~p"/api/files/#{token}")
+
+        assert response.status == 200, stored_type
+        assert get_resp_header(response, "content-type") == [stored_type]
+        assert get_resp_header(response, "x-content-type-options") == ["nosniff"]
+        assert get_resp_header(response, "content-disposition") == [~s(inline; filename="photo")]
+      end
+    end
+
+    test "serves anything but an allowed image type as opaque bytes", %{conn: conn, world: world} do
+      token = download_token(world.users.read_all, :persons, world.records.m1)
+
+      for stored_type <- [
+            "text/html",
+            "image/svg+xml",
+            "application/xhtml+xml",
+            "text/html; charset=utf-8",
+            nil
+          ] do
+        stub_stored_photo(stored_type)
+        response = get(conn, ~p"/api/files/#{token}")
+
+        assert response.status == 200, inspect(stored_type)
+        assert get_resp_header(response, "content-type") == ["application/octet-stream"]
+        assert get_resp_header(response, "x-content-type-options") == ["nosniff"]
+      end
+    end
+
+    test "ignores the content type the client asked for", %{conn: conn, world: world} do
+      stub_stored_photo("image/jpeg")
+      user = world.users.read_all
+      id = world.records.m1.id
+
+      %{"data" => %{"photoDownloadUrl" => %{"url" => url}}} =
+        gql(conn, user, """
+        query { photoDownloadUrl(subject: PERSONS, id: "#{id}", contentType: "text/html") { url } }
+        """)
+
+      response = get(conn, URI.parse(url).path)
+
+      assert response.status == 200
+      assert get_resp_header(response, "content-type") == ["image/jpeg"]
+    end
+
+    test "every file response forbids sniffing, errors included", %{conn: conn} do
+      response = get(conn, ~p"/api/files/forged-token")
+
+      assert response.status == 401
+      assert get_resp_header(response, "x-content-type-options") == ["nosniff"]
     end
 
     test "answers 404 for a missing object", %{conn: conn, world: world} do

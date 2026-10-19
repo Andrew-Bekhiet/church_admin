@@ -13,7 +13,7 @@ defmodule ChurchAdmin.Organization.Service do
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Attendance.{Meeting, MeetingInput}
-  alias ChurchAdmin.Authz.Checks.{HasPermission, System}
+  alias ChurchAdmin.Authz.Checks.{HasPermission, Onboarded, System}
   alias ChurchAdmin.Catalog.StudyYear
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.Errors.{Codes, ConstraintCodes}
@@ -175,7 +175,7 @@ defmodule ChurchAdmin.Organization.Service do
     end
 
     policy action_type(:read) do
-      authorize_if actor_present()
+      authorize_if Onboarded
     end
 
     policy action(:create_service) do

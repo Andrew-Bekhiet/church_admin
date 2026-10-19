@@ -10,6 +10,7 @@ defmodule ChurchAdmin.People.Person.Commands do
   use Spark.Dsl.Fragment, of: Ash.Resource, extensions: [Ash.Policy.Authorizer]
 
   alias ChurchAdmin.Activity.Changes.RecordLastVisit
+  alias ChurchAdmin.Authz.Changes.RememberCreated
   alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, RelatedInScope}
   alias ChurchAdmin.Catalog.{Hobby, Tag}
   alias ChurchAdmin.Changes.StampActor
@@ -75,6 +76,7 @@ defmodule ChurchAdmin.People.Person.Commands do
       validate {ReferencesVisible, argument: :tags, resource: Tag}
       validate {ReferencesVisible, argument: :hobbies, resource: Hobby}
 
+      change {RememberCreated, kind: :person}
       change Changes.NormalizeEmployment
       change Changes.CreateImplicitFamily
       change Changes.ApplyMemberships

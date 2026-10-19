@@ -44,7 +44,12 @@ defmodule ChurchAdmin.Accounts.Changes.SetApproval do
   defp set_approval(user, false, actor) do
     UserPermission
     |> Ash.Query.do_filter(expr(uid == ^user.uid and permission == "approved"))
-    |> Ash.bulk_destroy(:destroy, %{}, actor: actor, authorize?: false, return_errors?: true)
+    |> Ash.bulk_destroy(:destroy, %{},
+      actor: actor,
+      authorize?: false,
+      return_errors?: true,
+      notify?: true
+    )
     |> case do
       %Ash.BulkResult{status: :success} -> :ok
       %Ash.BulkResult{errors: errors} -> {:error, Ash.Error.to_error_class(errors)}
