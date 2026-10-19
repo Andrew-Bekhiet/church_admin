@@ -12,9 +12,7 @@ Each area's rules load when you work under it. The repo carries only `AGENTS.md`
 
 - `client/AGENTS.md` — Dart & Flutter structure, idioms, tests, analyze/format/test commands (also binds `packages/`).
 - `client/patrol_test/AGENTS.md` — E2E journeys.
-- `server/ash/AGENTS.md` — the Ash backend: generators, tests, the baseline schema, its dev database and `mix precommit`.
-- `server/hasura/AGENTS.md` — migrations and the auth model.
-- `server/firebase/functions/AGENTS.md` — TypeScript Cloud Functions.
+- `server/ash/AGENTS.md` — the Ash backend: generators, tests, the baseline schema, its dev database, the local compose stack and `mix precommit`.
 - `.github/workflows/AGENTS.md` — CI workflow conventions.
 - `.claude/skills/graphql-codegen/SKILL.md` — regenerating GraphQL code and refreshing `schema.graphql`.
 
@@ -38,7 +36,7 @@ These rules apply to every language and all code in the repo. A name tells the *
 - A predicate's name _is_ the rule — `if (await mustVerifyEmailBeforeClaiming(authUser))`.
 - A condition inside an expression gets an explaining variable — `phoneExists`, `existingPhone`.
 
-**Keep names in sync across the client/server boundary.** A client wrapper, the callable it invokes, and the file exporting it share one name (`tryClaimInvitation` / `try_claim_invitation.ts`). Renaming a deployed callable is a deploy-order dependency — client and functions ship separately, so a mismatched pair fails with `NOT_FOUND`.
+**Keep names in sync across the client/server boundary.** A client wrapper, the GraphQL mutation it sends, and the Ash action behind it share one name (`applyInvitationCode` / `apply_invitation_code`). Renaming a deployed mutation is a deploy-order dependency — client and server ship separately, so a mismatched pair fails with an unknown-field error.
 
 ## Comments — write none
 

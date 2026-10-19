@@ -4,11 +4,11 @@
 set -euo pipefail
 
 server_dir="$(cd "$(dirname "$0")/.." && pwd)"
-functions_dir="$server_dir/firebase/functions"
 
+compose_project="${E2E_COMPOSE_PROJECT:-church-admin-e2e}"
 project_id=demo-church-admin
 auth_url="http://localhost:9099"
-hasura_url="http://localhost:8080"
+ash_url="http://localhost:8080"
 
 admin_email="${E2E_ADMIN_EMAIL:-admin@e2e.test}"
 admin_password="${E2E_ADMIN_PASSWORD:-Harness_Passw0rd}"
@@ -19,65 +19,67 @@ start_docker_compose() {
     --env-file "$server_dir/e2e/backend.env" \
     -f "$server_dir/docker-compose.yml" \
     -f "$server_dir/docker-compose.e2e.yml" \
-    -p church-admin-e2e \
+    -p "$compose_project" \
     "$@"
 }
 
-ensure_functions_env_exist() {
-  [ -f "$functions_dir/.env.local" ] || cp "$functions_dir/example.env.local" "$functions_dir/.env.local"
-  [ -f "$functions_dir/.secret.local" ] || cp "$functions_dir/example.secrets.local" "$functions_dir/.secret.local"
+auth_emulator_post() {
+  curl -fsS -X POST "$auth_url/identitytoolkit.googleapis.com/v1/accounts:$1?key=e2e" \
+    -H 'Content-Type: application/json' \
+    -d "$2"
 }
 
-wait_for() {
-  local description="$1" attempts="$2"
-  shift 2
-
-  for _ in $(seq 1 "$attempts"); do
-    if "$@" >/dev/null 2>&1; then return 0; fi
-    sleep 2
-  done
-
-  echo "Timed out waiting for $description" >&2
-  start_docker_compose logs --tail 80 firebase-emulators >&2
-
-  return 1
-}
-
-functions_loaded() {
-  start_docker_compose logs firebase-emulators | grep -q "beforeUserSignUp"
+credentials_json() {
+  jq -n --arg email "$1" --arg password "$2" \
+    '{email: $email, password: $password, returnSecureToken: true}'
 }
 
 sign_up() {
-  curl -fsS -X POST "$auth_url/identitytoolkit.googleapis.com/v1/accounts:signUp?key=e2e" \
-    -H 'Content-Type: application/json' \
-    -d "{\"email\":\"$1\",\"password\":\"$2\",\"returnSecureToken\":true}"
+  auth_emulator_post signUp "$(credentials_json "$1" "$2")"
 }
 
-hasura_admin_query() {
-  curl -fsS "$hasura_url/v1/graphql" \
+sign_in_id_token() {
+  auth_emulator_post signInWithPassword "$(credentials_json "$1" "$2")" | jq -r '.idToken'
+}
+
+ash_query() {
+  curl -fsS "$ash_url/gql" \
     -H 'Content-Type: application/json' \
-    -H "x-hasura-admin-secret: $(grep '^HASURA_GRAPHQL_ADMIN_SECRET=' "$server_dir/e2e/backend.env" | cut -d= -f2-)" \
-    -d "$(jq -n --arg q "$1" '{query: $q}')"
+    -H "Authorization: Bearer $1" \
+    -d "$(jq -n --arg q "$2" '{query: $q}')"
+}
+
+bootstrap_admin() {
+  local output
+  output="$(start_docker_compose exec -T ash mix church_admin.bootstrap_admin --email "$admin_email" 2>&1)" ||
+    { echo "$output" >&2; return 1; }
+
+  echo "${output##*$'\n'}"
+}
+
+verify_admin_through_ash() {
+  local token admin_query
+  token="$(sign_in_id_token "$admin_email" "$admin_password")"
+  admin_query="{ users(filter: {email: {eq: \"$admin_email\"}}) { results { uid authId permissions { permission } } } }"
+
+  ash_query "$token" "$admin_query" |
+    jq -e '.data.users.results | length == 1 and (.[0].authId != null) and (.[0].permissions | length > 0)' >/dev/null ||
+    { echo "Ash does not see $admin_email as a linked administrator with permissions" >&2; return 1; }
+
+  ash_query "$token" '{ services(first: 1) { count } }' |
+    jq -e '.data.services.count > 0' >/dev/null ||
+    { echo "Ash serves no seeded services to $admin_email" >&2; return 1; }
 }
 
 up() {
-  ensure_functions_env_exist
-
-  start_docker_compose config --images | while read -r image; do
-    docker image inspect "$image" >/dev/null 2>&1 || { start_docker_compose build; break; }
-  done
-
   start_docker_compose down --remove-orphans
-  docker volume rm -f church-admin-e2e_pgdata >/dev/null
-  start_docker_compose up -d --no-build --wait postgres local-unsigned-jwt-verifier hasura firebase-emulators
-  start_docker_compose --profile plant_seeds run --rm seed
-
-  wait_for "the functions emulator to load the auth blocking function" 150 functions_loaded
+  docker volume rm -f "${compose_project}_pgdata_ash" >/dev/null
+  start_docker_compose build
+  start_docker_compose up -d --no-build --wait postgres firebase-emulators ash
 
   sign_up "$admin_email" "$admin_password" >/dev/null
-
-  hasura_admin_query '{ authUsersData { uid email authId } }' | jq -e '.data.authUsersData | length == 1' >/dev/null ||
-    { echo "The blocking function did not create the admin user" >&2; exit 1; }
+  bootstrap_admin
+  verify_admin_through_ash
 
   echo "Backend ready. Admin: $admin_email / $admin_password (project $project_id)"
 }
