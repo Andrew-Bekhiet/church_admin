@@ -80,6 +80,11 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
     end
   end
 
+  changes do
+    change {ChurchAdmin.History.Changes.RecordEdit, table: "users", record_id: :uid},
+      on: [:create]
+  end
+
   attributes do
     attribute :permission_id, :uuid,
       primary_key?: true,
