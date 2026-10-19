@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -42,8 +43,8 @@ class DBGraphQLClient extends GraphQLClient {
           ):
         return result;
 
-      case final exception:
-        throw exception;
+      case final exception?:
+        throw BackendException.fromOperationException(exception);
     }
   }
 
