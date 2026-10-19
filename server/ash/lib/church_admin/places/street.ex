@@ -2,15 +2,26 @@ defmodule ChurchAdmin.Places.Street do
   use Ash.Resource,
     domain: ChurchAdmin.Places,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
+  alias ChurchAdmin.Authz.Calculations.UserCanEdit
+  alias ChurchAdmin.Authz.Checks.{SignedIn, System}
+  alias ChurchAdmin.Places.Calculations.{IntersectsGeography, NearGeography}
   alias ChurchAdmin.Places.{Address, Area, AreaStreet}
   alias ChurchAdmin.Types.{Geography, Text}
 
   graphql do
     type :street
+
+    relationships [:addresses, :area_streets, :areas]
+
+    queries do
+      get :street, :read
+      list :streets, :read
+    end
   end
 
   postgres do
@@ -24,7 +35,25 @@ defmodule ChurchAdmin.Places.Street do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if SignedIn
+    end
   end
 
   attributes do
@@ -77,5 +106,24 @@ defmodule ChurchAdmin.Places.Street do
       destination_attribute: :record_id,
       filter: expr(table == "streets"),
       public?: true
+  end
+
+  calculations do
+    calculate :user_can_edit, :boolean, {UserCanEdit, entity: :street},
+      allow_nil?: false,
+      public?: true
+
+    calculate :within_polygon,
+              :boolean,
+              {IntersectsGeography, attribute: :line, argument: :polygon} do
+      argument :polygon, Geography, allow_nil?: false
+      public? true
+    end
+
+    calculate :within_distance, :boolean, {NearGeography, attribute: :line} do
+      argument :from, Geography, allow_nil?: false
+      argument :meters, :float, allow_nil?: false
+      public? true
+    end
   end
 end
