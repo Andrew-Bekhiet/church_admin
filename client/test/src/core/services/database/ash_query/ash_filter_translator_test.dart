@@ -201,13 +201,15 @@ void main() {
           value: moment,
           expected: (at) => at({'lessThanOrEqual': moment.toIso8601String()}),
         ),
-        'date range is between two calendar days': (
+        'date range covers every moment of its days': (
           operator: DateRangeOperator.isBetween,
           value: range,
           expected: (at) => {
             'and': [
-              at({'greaterThanOrEqual': dateToString(range.start)}),
-              at({'lessThanOrEqual': dateToString(range.end)}),
+              at({'greaterThanOrEqual': range.start.toUtc().toIso8601String()}),
+              at({
+                'lessThan': DateTime(2024, 7, 9).toUtc().toIso8601String(),
+              }),
             ],
           },
         ),
@@ -377,15 +379,15 @@ void main() {
       );
     });
 
-    test('any of enum values sends the upper-case server enum values', () {
+    test('any of enum values sends the values the server stores', () {
       expect(translate(workStatus, MultiSelectOperator.anyOf, [employed]), {
         'workStatus': {
-          'in': ['EMPLOYED'],
+          'in': [employed.id],
         },
       });
     });
 
-    test('multi-word enum values become SCREAMING_SNAKE', () {
+    test('multi-word enum values are sent as stored', () {
       expect(
         translate(UserFields().permissions, MultiSelectOperator.anyOf, [
           manageUsersPermission,
@@ -393,17 +395,17 @@ void main() {
         {
           'permissions': {
             'permission': {
-              'in': ['MANAGE_ALL_USERS'],
+              'in': [manageUsersPermission.id],
             },
           },
         },
       );
     });
 
-    test('enum values given as plain strings are converted too', () {
+    test('enum values given as plain strings are sent as given', () {
       expect(translate(workStatus, MultiSelectOperator.anyOf, ['employed']), {
         'workStatus': {
-          'in': ['EMPLOYED'],
+          'in': [employed.id],
         },
       });
     });

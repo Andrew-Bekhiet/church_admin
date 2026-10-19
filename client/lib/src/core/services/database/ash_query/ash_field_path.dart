@@ -38,16 +38,19 @@ class AshFieldPath {
   };
 
   // The server keeps the time of a place's last edit or visit as a scalar
-  // named after the field, and the rest of the record under `latest<Kind>`.
+  // named after the field, and the rest of the record under `latest<Kind>`;
+  // a history is the list of records itself.
   static List<String> _recordedByInfoSegments(
     FieldMetadata recordedField,
     FieldMetadata inner,
-  ) => inner == LastRecordedByInfoFields().time
-      ? [recordedField.name]
-      : [
-          AshNaming.latestRelationship(recordedField.name),
-          ..._filterSegments(inner),
-        ];
+  ) => switch (AshNaming.namesLatestScalar(recordedField.name)) {
+    false => [recordedField.name, ..._filterSegments(inner)],
+    true when inner == LastRecordedByInfoFields().time => [recordedField.name],
+    true => [
+      AshNaming.latestRelationship(recordedField.name),
+      ..._filterSegments(inner),
+    ],
+  };
 
   static List<String> _orderingSubfieldSegments(FieldMetadata field) {
     final subfields = AdvancedQueriesMetadata()

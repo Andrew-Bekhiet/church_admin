@@ -54,6 +54,7 @@ class _FamilyFields {
     name: 'marriageDate',
     label: 'تاريخ الزواج',
     isCodeOnly: false,
+    isDateOnly: true,
     operators: {
       ...DateTimeOperator.values,
       ...DateRangeOperator.values,

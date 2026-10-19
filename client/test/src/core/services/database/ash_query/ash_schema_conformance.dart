@@ -30,6 +30,11 @@ class AshSchemaConformance {
         }
       case final String text when values != null && !values.contains(text):
         yield 'enum value $typeName.$text';
+      case final String text when typeName == 'Date' && !_day.hasMatch(text):
+        yield 'Date value $text';
+      case final String text
+          when typeName == 'DateTime' && !_moment.hasMatch(text):
+        yield 'DateTime value $text';
     }
   }
 
@@ -76,5 +81,7 @@ class AshSchemaConformance {
     }
   }
 
+  static final RegExp _day = RegExp(r'^\d{4}-\d{2}-\d{2}$');
+  static final RegExp _moment = RegExp(r'^\d{4}-\d{2}-\d{2}T');
   static final RegExp _statedMaximum = RegExp(r'Maximum (\d+)');
 }
