@@ -1,0 +1,24 @@
+mutation tryClaimAccount {
+  tryClaimAccount {
+    uid
+  }
+}
+
+mutation applyInvitationCode($input: ApplyInvitationCodeInput!) {
+  applyInvitationCode(input: $input) {
+    uid
+  }
+}
+
+mutation deleteMyAccount {
+  deleteMyAccount
+}
+
+mutation createUser($input: CreateUserInput!) {
+  createUser(input: $input) {
+    result {
+      id
+      uid
+    }
+  }
+}

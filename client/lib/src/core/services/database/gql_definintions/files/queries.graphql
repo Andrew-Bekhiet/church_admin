@@ -1,0 +1,13 @@
+query photoDownloadUrl($subject: PhotoSubject!, $id: ID!, $contentType: String) {
+  photoDownloadUrl(subject: $subject, id: $id, contentType: $contentType) {
+    ...PhotoLink
+  }
+}
+
+query appDownloadLink($platform: AppPlatform!) {
+  appDownloadLink(platform: $platform) {
+    url
+    expiresAt
+    version
+  }
+}
