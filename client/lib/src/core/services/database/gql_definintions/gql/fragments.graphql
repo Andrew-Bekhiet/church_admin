@@ -1,0 +1,8 @@
+fragment User on User {
+  id
+  uid
+  name
+  email
+  photoUpdatedAt
+  blurhash
+}

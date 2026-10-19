@@ -1,0 +1,39 @@
+mutation recordVisit($input: RecordVisitInput!) {
+  recordVisit(input: $input) {
+    result {
+      ...Visit
+    }
+  }
+}
+
+mutation recordCall($input: RecordCallInput!) {
+  recordCall(input: $input) {
+    result {
+      ...Call
+    }
+  }
+}
+
+mutation recordConfession($input: RecordConfessionInput!) {
+  recordConfession(input: $input) {
+    result {
+      ...Confession
+    }
+  }
+}
+
+mutation recordKodas($input: RecordKodasInput!) {
+  recordKodas(input: $input) {
+    result {
+      ...KodasDayRecord
+    }
+  }
+}
+
+mutation deleteKodas($id: ID!) {
+  deleteKodas(id: $id) {
+    result {
+      ...KodasDayRecord
+    }
+  }
+}

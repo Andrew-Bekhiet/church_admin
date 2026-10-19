@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/data_checks_document_transformer.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/history/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/history/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/history/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/history/__generated__/queries.graphql.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart';
 
@@ -14,48 +13,43 @@ class HistoryDAO {
 
   PaginatableStreamBase<LastRecordedByInfo> _paginateHistory({
     required DocumentNode document,
-    required String operationName,
-    required Map<String, dynamic> Function(
-      PaginatableStreamRequest<LastRecordedByInfo, void> request,
-    )
-    variables,
-  }) => PaginatableStream<LastRecordedByInfo, void>.simple(
-    factory: (request) => graphQLClient.legacySubscribeAndReturnParsed(
-      SubscriptionOptions(
-        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
-          document,
-        ),
-        operationName: operationName,
-        variables: variables(request),
-        parserFn: db.parser.singleListParser(
-          LastRecordedByInfo.fromJson,
-          pageSize: request.pageSize,
-        ),
-      ),
-    ),
-  );
+    required Json variables,
+  }) {
+    final pageQuery = KeysetPageQuery(
+      client: graphQLClient,
+      document: document,
+      fromJson: LastRecordedByInfo.fromJson,
+    );
+
+    return KeysetPaginatedStream<LastRecordedByInfo, void>(
+      registry: db.liveQueries,
+      parametersStream: Stream.value(null),
+      fetchChunk: (_, chunk) =>
+          pageQuery.fetch(variables: variables, chunk: chunk),
+    );
+  }
 
   PaginatableStreamBase<LastRecordedByInfo>
   paginateEditHistory<T extends Viewable>({
     required String id,
   }) => _paginateHistory(
-    document: documentNodeSubscriptioneditHistory,
-    operationName: 'editHistory',
-    variables: (request) => Variables_Subscription_editHistory(
-      limit: request.pageSize,
-      where: [
-        Input_HistoryEditHistoryBoolExp(
-          table: Input_NameComparisonExp(
-            $_eq: ViewablesEnum.from<T>().toPluralString(),
+    document: documentNodeQueryedits,
+    variables: Variables_Query_edits(
+      filter: Input_EditFilterInput(
+        and: [
+          Input_EditFilterInput(
+            table: Input_EditFilterTable(
+              eq: ViewablesEnum.from<T>().toPluralString(),
+            ),
           ),
+          Input_EditFilterInput(recordId: Input_EditFilterRecordId(eq: id)),
+        ],
+      ),
+      sort: [
+        Input_EditSortInput(
+          field: Enum_EditSortField.TIME,
+          order: Enum_SortOrder.DESC,
         ),
-        Input_HistoryEditHistoryBoolExp(
-          recordId: Input_UuidComparisonExp($_eq: id.toUuid()),
-        ),
-        if (request.cursor != null)
-          Input_HistoryEditHistoryBoolExp(
-            time: Input_TimestamptzComparisonExp($_lt: request.cursor!.time),
-          ),
       ],
     ).toJson(),
   );
@@ -65,26 +59,26 @@ class HistoryDAO {
     required String id,
     bool fatherVisit = false,
   }) => _paginateHistory(
-    document: documentNodeSubscriptionvisitHistory,
-    operationName: 'visitHistory',
-    variables: (request) => Variables_Subscription_visitHistory(
-      limit: request.pageSize,
-      where: [
-        Input_HistoryVisitHistoryBoolExp(
-          table: Input_NameComparisonExp(
-            $_eq: ViewablesEnum.from<T>().toPluralString(),
+    document: documentNodeQueryvisits,
+    variables: Variables_Query_visits(
+      filter: Input_VisitFilterInput(
+        and: [
+          Input_VisitFilterInput(
+            table: Input_VisitFilterTable(
+              eq: ViewablesEnum.from<T>().toPluralString(),
+            ),
           ),
-        ),
-        Input_HistoryVisitHistoryBoolExp(
-          recordId: Input_UuidComparisonExp($_eq: id.toUuid()),
-        ),
-        Input_HistoryVisitHistoryBoolExp(
-          isFatherVisit: Input_BooleanComparisonExp($_eq: fatherVisit),
-        ),
-        if (request.cursor != null)
-          Input_HistoryVisitHistoryBoolExp(
-            time: Input_TimestamptzComparisonExp($_lt: request.cursor!.time),
+          Input_VisitFilterInput(recordId: Input_VisitFilterRecordId(eq: id)),
+          Input_VisitFilterInput(
+            isFatherVisit: Input_VisitFilterIsFatherVisit(eq: fatherVisit),
           ),
+        ],
+      ),
+      sort: [
+        Input_VisitSortInput(
+          field: Enum_VisitSortField.TIME,
+          order: Enum_SortOrder.DESC,
+        ),
       ],
     ).toJson(),
   );
@@ -92,16 +86,16 @@ class HistoryDAO {
   PaginatableStreamBase<LastRecordedByInfo> paginatePersonCallHistory({
     required String personId,
   }) => _paginateHistory(
-    document: documentNodeSubscriptionpersonCallHistory,
-    operationName: 'personCallHistory',
-    variables: (request) => Variables_Subscription_personCallHistory(
-      personId: personId.toUuid(),
-      limit: request.pageSize,
-      where: [
-        if (request.cursor != null)
-          Input_HistoryCallHistoryBoolExp(
-            time: Input_TimestamptzComparisonExp($_lt: request.cursor!.time),
-          ),
+    document: documentNodeQuerycalls,
+    variables: Variables_Query_calls(
+      filter: Input_CallFilterInput(
+        personId: Input_CallFilterPersonId(eq: personId),
+      ),
+      sort: [
+        Input_CallSortInput(
+          field: Enum_CallSortField.TIME,
+          order: Enum_SortOrder.DESC,
+        ),
       ],
     ).toJson(),
   );
@@ -109,16 +103,16 @@ class HistoryDAO {
   PaginatableStreamBase<LastRecordedByInfo> paginatePersonConfessionHistory({
     required String personId,
   }) => _paginateHistory(
-    document: documentNodeSubscriptionpersonConfessionHistory,
-    operationName: 'personConfessionHistory',
-    variables: (request) => Variables_Subscription_personConfessionHistory(
-      personId: personId.toUuid(),
-      limit: request.pageSize,
-      where: [
-        if (request.cursor != null)
-          Input_HistoryConfessionHistoryBoolExp(
-            dayId: Input_DateComparisonExp($_lt: request.cursor!.time),
-          ),
+    document: documentNodeQueryconfessions,
+    variables: Variables_Query_confessions(
+      filter: Input_ConfessionFilterInput(
+        personId: Input_ConfessionFilterPersonId(eq: personId),
+      ),
+      sort: [
+        Input_ConfessionSortInput(
+          field: Enum_ConfessionSortField.TIME,
+          order: Enum_SortOrder.DESC,
+        ),
       ],
     ).toJson(),
   );
@@ -126,16 +120,16 @@ class HistoryDAO {
   PaginatableStreamBase<LastRecordedByInfo> paginatePersonKodasHistory({
     required String personId,
   }) => _paginateHistory(
-    document: documentNodeSubscriptionpersonKodasHistory,
-    operationName: 'personKodasHistory',
-    variables: (request) => Variables_Subscription_personKodasHistory(
-      personId: personId.toUuid(),
-      limit: request.pageSize,
-      where: [
-        if (request.cursor != null)
-          Input_HistoryKodasHistoryBoolExp(
-            dayId: Input_DateComparisonExp($_lt: request.cursor!.time),
-          ),
+    document: documentNodeQuerykodases,
+    variables: Variables_Query_kodases(
+      filter: Input_KodasFilterInput(
+        personId: Input_KodasFilterPersonId(eq: personId),
+      ),
+      sort: [
+        Input_KodasSortInput(
+          field: Enum_KodasSortField.TIME,
+          order: Enum_SortOrder.DESC,
+        ),
       ],
     ).toJson(),
   );
@@ -143,16 +137,25 @@ class HistoryDAO {
   PaginatableStreamBase<LastRecordedByInfo> paginatePersonVisitHistory({
     required String personId,
   }) => _paginateHistory(
-    document: documentNodeSubscriptionpersonVisitHistory,
-    operationName: 'personVisitHistory',
-    variables: (request) => Variables_Subscription_personVisitHistory(
-      personId: personId.toUuid(),
-      limit: request.pageSize,
-      where: [
-        if (request.cursor != null)
-          Input_HistoryVisitHistoryBoolExp(
-            time: Input_TimestamptzComparisonExp($_lt: request.cursor!.time),
+    document: documentNodeQueryvisits,
+    variables: Variables_Query_visits(
+      filter: Input_VisitFilterInput(
+        and: [
+          Input_VisitFilterInput(
+            table: Input_VisitFilterTable(
+              eq: ViewablesEnum.person.toPluralString(),
+            ),
           ),
+          Input_VisitFilterInput(
+            recordId: Input_VisitFilterRecordId(eq: personId),
+          ),
+        ],
+      ),
+      sort: [
+        Input_VisitSortInput(
+          field: Enum_VisitSortField.TIME,
+          order: Enum_SortOrder.DESC,
+        ),
       ],
     ).toJson(),
   );
@@ -167,59 +170,63 @@ class HistoryDAO {
     );
   }
 
-  Future<Person?> updatePersonLastCall({
+  Stream<List<KodasRecord>> streamDayKodas({required DateTime day}) {
+    const document = documentNodeQuerydayKodases;
+    final parsePage = AshResultParser(document).page(KodasRecord.fromJson);
+
+    return LiveQuery<List<KodasRecord>>(
+      client: graphQLClient,
+      registry: db.liveQueries,
+      kind: LiveQueryKind.list,
+      options: WatchQueryOptions(
+        document: document,
+        operationName: 'dayKodases',
+        variables: Variables_Query_dayKodases(
+          filter: Input_KodasFilterInput(
+            dayId: Input_KodasFilterDayId(eq: day),
+          ),
+          first: AshPagination.maxPageSize,
+        ).toJson(),
+        parserFn: (data) => parsePage(data).items,
+      ),
+    );
+  }
+
+  Future<LastRecordedByInfo> updatePersonLastCall({
     required String personId,
     required DateTime lastCall,
   }) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
-          documentNodeMutationinsertPersonLastCall,
-        ),
-        operationName: 'insertPersonLastCall',
-        variables: Variables_Mutation_insertPersonLastCall(
-          personId: personId.toUuid(),
-          lastCall: lastCall,
+        document: documentNodeMutationrecordCall,
+        operationName: 'recordCall',
+        variables: Variables_Mutation_recordCall(
+          input: Input_RecordCallInput(personId: personId, time: lastCall),
         ).toJson(),
-        parserFn: db.parser.singleOrNullParser(
-          db.parser.singleOrNullParser(Person.fromJson),
-        ),
+        parserFn: AshResultParser(
+          documentNodeMutationrecordCall,
+        ).mutationResult(LastRecordedByInfo.fromJson),
       ),
     );
   }
 
-  Future<Person?> updatePersonLastConfession({
+  Future<LastRecordedByInfo> updatePersonLastConfession({
     required String personId,
     required DateTime lastConfession,
   }) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
-          documentNodeMutationinsertPersonLastConfession,
-        ),
-        operationName: 'insertPersonLastConfession',
-        variables: Variables_Mutation_insertPersonLastConfession(
-          personId: personId.toUuid(),
-          lastConfession: lastConfession,
+        document: documentNodeMutationrecordConfession,
+        operationName: 'recordConfession',
+        variables: Variables_Mutation_recordConfession(
+          input: Input_RecordConfessionInput(
+            personId: personId,
+            day: lastConfession,
+          ),
         ).toJson(),
-        parserFn: db.parser.singleOrNullParser(
-          db.parser.singleOrNullParser(Person.fromJson),
-        ),
-      ),
-    );
-  }
-
-  Stream<List<KodasRecord>> streamDayKodas({required DateTime day}) {
-    return graphQLClient.legacySubscribeAndReturnParsed(
-      SubscriptionOptions(
-        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
-          documentNodeSubscriptionwatchDayKodas,
-        ),
-        operationName: 'watchDayKodas',
-        variables: Variables_Subscription_watchDayKodas(day: day).toJson(),
-        parserFn: (data) => Subscription_watchDayKodas.fromJson(
-          data,
-        ).historyKodasHistory.map(KodasRecord.fromFragment).toList(),
+        parserFn: AshResultParser(
+          documentNodeMutationrecordConfession,
+        ).mutationResult(LastRecordedByInfo.fromJson),
       ),
     );
   }
@@ -230,105 +237,77 @@ class HistoryDAO {
   }) {
     return graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
-        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
-          documentNodeMutationrecordKodas,
-        ),
+        document: documentNodeMutationrecordKodas,
         operationName: 'recordKodas',
         variables: Variables_Mutation_recordKodas(
-          personId: personId.toUuid(),
-          day: day,
+          input: Input_RecordKodasInput(personId: personId, day: day),
         ).toJson(),
-        parserFn: (data) => switch (Mutation_recordKodas.fromJson(
-          data,
-        ).insertHistoryKodasHistoryOne) {
-          final inserted? => KodasRecord.fromFragment(inserted),
-          null => null,
-        },
+        parserFn: AshResultParser(
+          documentNodeMutationrecordKodas,
+        ).mutationResultOrNull(KodasRecord.fromJson),
       ),
     );
   }
 
-  Future<KodasRecord> deleteKodas({required String kodasRecordId}) {
-    return graphQLClient.mutateAndReturnParsed(
+  Future<KodasRecord> deleteKodas({required String kodasRecordId}) async {
+    final deleted = await graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
-        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
-          documentNodeMutationdeleteKodas,
-        ),
+        document: documentNodeMutationdeleteKodas,
         operationName: 'deleteKodas',
-        variables: Variables_Mutation_deleteKodas(
-          id: kodasRecordId.toUuid(),
-        ).toJson(),
-        parserFn: (data) => switch (Mutation_deleteKodas.fromJson(
-          data,
-        ).deleteHistoryKodasHistoryByPk) {
-          final deleted? => KodasRecord.fromFragment(deleted),
-          null => throw const KodasChangeRejectedException(),
-        },
+        variables: Variables_Mutation_deleteKodas(id: kodasRecordId).toJson(),
+        parserFn: AshResultParser(
+          documentNodeMutationdeleteKodas,
+        ).mutationResultOrNull(KodasRecord.fromJson),
       ),
     );
+
+    return deleted ?? (throw const KodasChangeRejectedException());
   }
 
-  Future<LastRecordedByInfo?> updatePersonLastVisit({
+  Future<LastRecordedByInfo> updatePersonLastVisit({
     required String personId,
     required DateTime lastVisit,
-  }) {
-    return graphQLClient.mutateAndReturnParsed(
-      MutationOptions(
-        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
-          documentNodeMutationinsertPersonLastVisit,
-        ),
-        operationName: 'insertPersonLastVisit',
-        variables: Variables_Mutation_insertPersonLastVisit(
-          personId: personId.toUuid(),
-          lastVisit: lastVisit,
-        ).toJson(),
-        parserFn: db.parser.singleOrNullParser(
-          db.parser.singleOrNullParser(LastRecordedByInfo.fromJson),
-        ),
-      ),
-    );
-  }
+  }) => _recordVisit(
+    Input_RecordVisitInput(
+      subject: Enum_VisitSubject.PERSONS,
+      recordId: personId,
+      time: lastVisit,
+    ),
+  );
 
-  Future<LastRecordedByInfo?> updateFamilyLastVisit({
+  Future<LastRecordedByInfo> updateFamilyLastVisit({
     required String familyId,
     required DateTime lastVisit,
     bool isFatherVisit = false,
-  }) {
-    return graphQLClient.mutateAndReturnParsed(
-      MutationOptions(
-        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
-          documentNodeMutationinsertFamilyLastVisit,
-        ),
-        operationName: 'insertFamilyLastVisit',
-        variables: Variables_Mutation_insertFamilyLastVisit(
-          familyId: familyId.toUuid(),
-          lastVisit: lastVisit,
-          isFatherVisit: isFatherVisit,
-        ).toJson(),
-        parserFn: db.parser.singleOrNullParser(
-          db.parser.singleOrNullParser(LastRecordedByInfo.fromJson),
-        ),
-      ),
-    );
-  }
+  }) => _recordVisit(
+    Input_RecordVisitInput(
+      subject: Enum_VisitSubject.FAMILIES,
+      recordId: familyId,
+      time: lastVisit,
+      isFatherVisit: isFatherVisit,
+    ),
+  );
 
-  Future<LastRecordedByInfo?> updateStreetLastVisit({
+  Future<LastRecordedByInfo> updateStreetLastVisit({
     required String streetId,
     required DateTime lastVisit,
-  }) {
+  }) => _recordVisit(
+    Input_RecordVisitInput(
+      subject: Enum_VisitSubject.STREETS,
+      recordId: streetId,
+      time: lastVisit,
+    ),
+  );
+
+  Future<LastRecordedByInfo> _recordVisit(Input_RecordVisitInput input) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
-          documentNodeMutationinsertStreetLastVisit,
-        ),
-        operationName: 'insertStreetLastVisit',
-        variables: Variables_Mutation_insertStreetLastVisit(
-          streetId: streetId.toUuid(),
-          lastVisit: lastVisit,
-        ).toJson(),
-        parserFn: db.parser.singleOrNullParser(
-          db.parser.singleOrNullParser(LastRecordedByInfo.fromJson),
-        ),
+        document: documentNodeMutationrecordVisit,
+        operationName: 'recordVisit',
+        variables: Variables_Mutation_recordVisit(input: input).toJson(),
+        parserFn: AshResultParser(
+          documentNodeMutationrecordVisit,
+        ).mutationResult(LastRecordedByInfo.fromJson),
       ),
     );
   }
