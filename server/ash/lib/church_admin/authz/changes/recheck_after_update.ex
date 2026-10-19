@@ -17,6 +17,7 @@ defmodule ChurchAdmin.Authz.Changes.RecheckAfterUpdate do
   import Ash.Expr
 
   alias ChurchAdmin.Authz.Checks.InScope
+  alias ChurchAdmin.Changes.AfterActionFailure
 
   @impl true
   def change(changeset, opts, context) do
@@ -24,7 +25,7 @@ defmodule ChurchAdmin.Authz.Changes.RecheckAfterUpdate do
       if still_matches?(changeset, record, opts, context.actor) do
         {:ok, record}
       else
-        {:error, Ash.Error.Forbidden.exception([])}
+        AfterActionFailure.roll_back(changeset.resource, Ash.Error.Forbidden.exception([]))
       end
     end)
   end
