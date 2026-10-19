@@ -2,12 +2,19 @@ defmodule ChurchAdmin.Catalog.PersonType do
   use Ash.Resource,
     domain: ChurchAdmin.Catalog,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.Lookup]
 
+  alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Types.Text
 
   graphql do
     type :person_type
+
+    queries do
+      get :person_type, :read
+      list :person_types, :read
+    end
   end
 
   postgres do
@@ -21,7 +28,21 @@ defmodule ChurchAdmin.Catalog.PersonType do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 25,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
   end
 
   attributes do

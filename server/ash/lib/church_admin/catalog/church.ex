@@ -2,12 +2,19 @@ defmodule ChurchAdmin.Catalog.Church do
   use Ash.Resource,
     domain: ChurchAdmin.Catalog,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.Lookup]
 
+  alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Types.Text
 
   graphql do
     type :church
+
+    queries do
+      get :church, :read
+      list :churches, :read
+    end
   end
 
   postgres do
@@ -17,7 +24,21 @@ defmodule ChurchAdmin.Catalog.Church do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 25,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
   end
 
   attributes do

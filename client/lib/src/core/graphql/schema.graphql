@@ -1925,7 +1925,1384 @@ type ScopeGrant {
   user: User
 }
 
+enum UniversitySortField {
+  ID
+  NAME
+}
+
+"A keyset page of :university"
+type KeysetPageOfUniversity {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [University!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input UniversityFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input UniversityFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input UniversityFilterInput {
+  and: [UniversityFilterInput!]
+  or: [UniversityFilterInput!]
+  not: [UniversityFilterInput!]
+  id: UniversityFilterId
+  name: UniversityFilterName
+}
+
+input UniversitySortInput {
+  order: SortOrder
+  field: UniversitySortField!
+}
+
+type University {
+  id: ID!
+  name: String!
+}
+
+enum TagSortField {
+  ID
+  NAME
+  COLOR
+}
+
+"A keyset page of :tag"
+type KeysetPageOfTag {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Tag!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input TagFilterColor {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input TagFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input TagFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input TagFilterInput {
+  and: [TagFilterInput!]
+  or: [TagFilterInput!]
+  not: [TagFilterInput!]
+  id: TagFilterId
+  name: TagFilterName
+  color: TagFilterColor
+}
+
+input TagSortInput {
+  order: SortOrder
+  field: TagSortField!
+}
+
+type Tag {
+  id: ID!
+  name: String!
+  color: Int
+}
+
+enum StudyYearSortField {
+  NAME
+  ORDER
+}
+
+"A keyset page of :study_year"
+type KeysetPageOfStudyYear {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [StudyYear!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input StudyYearFilterOrder {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int!]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input StudyYearFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input StudyYearFilterInput {
+  and: [StudyYearFilterInput!]
+  or: [StudyYearFilterInput!]
+  not: [StudyYearFilterInput!]
+  name: StudyYearFilterName
+  order: StudyYearFilterOrder
+}
+
+input StudyYearSortInput {
+  order: SortOrder
+  field: StudyYearSortField!
+}
+
+type StudyYear {
+  id: ID!
+  name: String!
+  order: Int!
+}
+
+enum ShammasLevelSortField {
+  ID
+  NAME
+  ORDER
+}
+
+"A keyset page of :shammas_level"
+type KeysetPageOfShammasLevel {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [ShammasLevel!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input ShammasLevelFilterOrder {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int!]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input ShammasLevelFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input ShammasLevelFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ShammasLevelFilterInput {
+  and: [ShammasLevelFilterInput!]
+  or: [ShammasLevelFilterInput!]
+  not: [ShammasLevelFilterInput!]
+  id: ShammasLevelFilterId
+  name: ShammasLevelFilterName
+  order: ShammasLevelFilterOrder
+}
+
+input ShammasLevelSortInput {
+  order: SortOrder
+  field: ShammasLevelSortField!
+}
+
+type ShammasLevel {
+  id: ID!
+  name: String!
+  order: Int!
+}
+
+enum SchoolSortField {
+  ID
+  NAME
+}
+
+"A keyset page of :school"
+type KeysetPageOfSchool {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [School!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input SchoolFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input SchoolFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input SchoolFilterInput {
+  and: [SchoolFilterInput!]
+  or: [SchoolFilterInput!]
+  not: [SchoolFilterInput!]
+  id: SchoolFilterId
+  name: SchoolFilterName
+}
+
+input SchoolSortInput {
+  order: SortOrder
+  field: SchoolSortField!
+}
+
+type School {
+  id: ID!
+  name: String!
+}
+
+enum QualificationSortField {
+  ID
+  NAME
+}
+
+"A keyset page of :qualification"
+type KeysetPageOfQualification {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Qualification!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input QualificationFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input QualificationFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input QualificationFilterInput {
+  and: [QualificationFilterInput!]
+  or: [QualificationFilterInput!]
+  not: [QualificationFilterInput!]
+  id: QualificationFilterId
+  name: QualificationFilterName
+}
+
+input QualificationSortInput {
+  order: SortOrder
+  field: QualificationSortField!
+}
+
+type Qualification {
+  id: ID!
+  name: String!
+}
+
+enum PersonTypeSortField {
+  ID
+  NAME
+  ORDER
+  IS_FAMILY_ADMIN
+  IS_HIDDEN
+}
+
+"A keyset page of :person_type"
+type KeysetPageOfPersonType {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [PersonType!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input PersonTypeFilterIsHidden {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input PersonTypeFilterIsFamilyAdmin {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input PersonTypeFilterOrder {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int!]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input PersonTypeFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonTypeFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input PersonTypeFilterInput {
+  and: [PersonTypeFilterInput!]
+  or: [PersonTypeFilterInput!]
+  not: [PersonTypeFilterInput!]
+  id: PersonTypeFilterId
+  name: PersonTypeFilterName
+  order: PersonTypeFilterOrder
+  isFamilyAdmin: PersonTypeFilterIsFamilyAdmin
+  isHidden: PersonTypeFilterIsHidden
+}
+
+input PersonTypeSortInput {
+  order: SortOrder
+  field: PersonTypeSortField!
+}
+
+type PersonType {
+  id: ID!
+  name: String!
+  order: Int!
+  isFamilyAdmin: Boolean!
+  isHidden: Boolean!
+}
+
+enum PersonStateSortField {
+  ID
+  NAME
+  COLOR
+}
+
+"A keyset page of :person_state"
+type KeysetPageOfPersonState {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [PersonState!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input PersonStateFilterColor {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int!]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input PersonStateFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonStateFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input PersonStateFilterInput {
+  and: [PersonStateFilterInput!]
+  or: [PersonStateFilterInput!]
+  not: [PersonStateFilterInput!]
+  id: PersonStateFilterId
+  name: PersonStateFilterName
+  color: PersonStateFilterColor
+}
+
+input PersonStateSortInput {
+  order: SortOrder
+  field: PersonStateSortField!
+}
+
+type PersonState {
+  id: ID!
+  name: String!
+  color: Int!
+}
+
+enum JobSortField {
+  ID
+  NAME
+}
+
+"A keyset page of :job"
+type KeysetPageOfJob {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Job!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input JobFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input JobFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input JobFilterInput {
+  and: [JobFilterInput!]
+  or: [JobFilterInput!]
+  not: [JobFilterInput!]
+  id: JobFilterId
+  name: JobFilterName
+}
+
+input JobSortInput {
+  order: SortOrder
+  field: JobSortField!
+}
+
+type Job {
+  id: ID!
+  name: String!
+}
+
+enum HobbySortField {
+  ID
+  NAME
+  COLOR
+}
+
+"A keyset page of :hobby"
+type KeysetPageOfHobby {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Hobby!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input HobbyFilterColor {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input HobbyFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input HobbyFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input HobbyFilterInput {
+  and: [HobbyFilterInput!]
+  or: [HobbyFilterInput!]
+  not: [HobbyFilterInput!]
+  id: HobbyFilterId
+  name: HobbyFilterName
+  color: HobbyFilterColor
+}
+
+input HobbySortInput {
+  order: SortOrder
+  field: HobbySortField!
+}
+
+type Hobby {
+  id: ID!
+  name: String!
+  color: Int
+}
+
+enum FatherSortField {
+  ID
+  NAME
+  CHURCH_ID
+  IS_HIDDEN
+}
+
+"A keyset page of :father"
+type KeysetPageOfFather {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Father!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input FatherFilterIsHidden {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input FatherFilterChurchId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input FatherFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input FatherFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input FatherFilterInput {
+  and: [FatherFilterInput!]
+  or: [FatherFilterInput!]
+  not: [FatherFilterInput!]
+  id: FatherFilterId
+  name: FatherFilterName
+  churchId: FatherFilterChurchId
+  isHidden: FatherFilterIsHidden
+  church: ChurchFilterInput
+}
+
+input FatherSortInput {
+  order: SortOrder
+  field: FatherSortField!
+}
+
+type Father {
+  id: ID!
+  name: String!
+  churchId: ID
+  isHidden: Boolean!
+  church: Church
+}
+
+enum CollegeSortField {
+  ID
+  NAME
+  UNIVERSITY_ID
+}
+
+"A keyset page of :college"
+type KeysetPageOfCollege {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [College!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input CollegeFilterUniversityId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input CollegeFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input CollegeFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input CollegeFilterInput {
+  and: [CollegeFilterInput!]
+  or: [CollegeFilterInput!]
+  not: [CollegeFilterInput!]
+  id: CollegeFilterId
+  name: CollegeFilterName
+  universityId: CollegeFilterUniversityId
+  university: UniversityFilterInput
+}
+
+input CollegeSortInput {
+  order: SortOrder
+  field: CollegeSortField!
+}
+
+type College {
+  id: ID!
+  name: String!
+  universityId: ID
+  university: University
+}
+
+enum ChurchSortField {
+  ID
+  NAME
+  IS_HIDDEN
+}
+
+"A keyset page of :church"
+type KeysetPageOfChurch {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Church!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input ChurchFilterIsHidden {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input ChurchFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input ChurchFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ChurchFilterInput {
+  and: [ChurchFilterInput!]
+  or: [ChurchFilterInput!]
+  not: [ChurchFilterInput!]
+  id: ChurchFilterId
+  name: ChurchFilterName
+  isHidden: ChurchFilterIsHidden
+}
+
+input ChurchSortInput {
+  order: SortOrder
+  field: ChurchSortField!
+}
+
+type Church {
+  id: ID!
+  name: String!
+  isHidden: Boolean!
+}
+
 type RootQueryType {
+  church(
+    "The id of the record"
+    id: ID!
+  ): Church
+  churches(
+    "How to sort the records in the response"
+    sort: [ChurchSortInput]
+
+    "A filter to limit the results"
+    filter: ChurchFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfChurch
+  college(
+    "The id of the record"
+    id: ID!
+  ): College
+  colleges(
+    "How to sort the records in the response"
+    sort: [CollegeSortInput]
+
+    "A filter to limit the results"
+    filter: CollegeFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfCollege
+  father(
+    "The id of the record"
+    id: ID!
+  ): Father
+  fathers(
+    "How to sort the records in the response"
+    sort: [FatherSortInput]
+
+    "A filter to limit the results"
+    filter: FatherFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfFather
+  hobby(
+    "The id of the record"
+    id: ID!
+  ): Hobby
+  hobbies(
+    "How to sort the records in the response"
+    sort: [HobbySortInput]
+
+    "A filter to limit the results"
+    filter: HobbyFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfHobby
+  job(
+    "The id of the record"
+    id: ID!
+  ): Job
+  jobs(
+    "How to sort the records in the response"
+    sort: [JobSortInput]
+
+    "A filter to limit the results"
+    filter: JobFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfJob
+  personState(
+    "The id of the record"
+    id: ID!
+  ): PersonState
+  personStates(
+    "How to sort the records in the response"
+    sort: [PersonStateSortInput]
+
+    "A filter to limit the results"
+    filter: PersonStateFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfPersonState
+  personType(
+    "The id of the record"
+    id: ID!
+  ): PersonType
+  personTypes(
+    "How to sort the records in the response"
+    sort: [PersonTypeSortInput]
+
+    "A filter to limit the results"
+    filter: PersonTypeFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfPersonType
+  qualification(
+    "The id of the record"
+    id: ID!
+  ): Qualification
+  qualifications(
+    "How to sort the records in the response"
+    sort: [QualificationSortInput]
+
+    "A filter to limit the results"
+    filter: QualificationFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfQualification
+  school(
+    "The id of the record"
+    id: ID!
+  ): School
+  schools(
+    "How to sort the records in the response"
+    sort: [SchoolSortInput]
+
+    "A filter to limit the results"
+    filter: SchoolFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfSchool
+  shammasLevel(
+    "The id of the record"
+    id: ID!
+  ): ShammasLevel
+  shammasLevels(
+    "How to sort the records in the response"
+    sort: [ShammasLevelSortInput]
+
+    "A filter to limit the results"
+    filter: ShammasLevelFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfShammasLevel
+  studyYear(
+    "The id of the record"
+    id: ID!
+  ): StudyYear
+  studyYears(
+    "How to sort the records in the response"
+    sort: [StudyYearSortInput]
+
+    "A filter to limit the results"
+    filter: StudyYearFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfStudyYear
+  tag(
+    "The id of the record"
+    id: ID!
+  ): Tag
+  tags(
+    "How to sort the records in the response"
+    sort: [TagSortInput]
+
+    "A filter to limit the results"
+    filter: TagFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfTag
+  university(
+    "The id of the record"
+    id: ID!
+  ): University
+  universities(
+    "How to sort the records in the response"
+    sort: [UniversitySortInput]
+
+    "A filter to limit the results"
+    filter: UniversityFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfUniversity
   scopeGrant(
     "The id of the record"
     id: ID!
