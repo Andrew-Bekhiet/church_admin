@@ -24,7 +24,6 @@ defmodule ChurchAdmin.PersonWrites do
       Codes.person_group_outside_service(),
     "person/user-link-not-permitted" => Codes.person_user_link_not_permitted(),
     "Permission denies inserting person" => Codes.forbidden(),
-    "You do not have permission to insert this address" => Codes.forbidden(),
     "users_data_name_key" => Codes.user_name_taken()
   }
 
@@ -85,13 +84,6 @@ defmodule ChurchAdmin.PersonWrites do
     ChurchAdmin.DataCase.set_system_db_session()
     Repo.query!("set constraints all immediate")
     Repo.query!("set constraints all deferred")
-    forget_fixture_rows_as_inserted_in_this_transaction!()
-  end
-
-  defp forget_fixture_rows_as_inserted_in_this_transaction! do
-    Repo.query!(
-      "select set_config('church_admin.inserted_families', '', true), set_config('church_admin.inserted_persons', '', true)"
-    )
   end
 
   defp code_of(error) do

@@ -16,11 +16,6 @@ defmodule ChurchAdmin.FamilyWrites do
   alias ChurchAdmin.Repo
   alias ChurchAdmin.Repo.HasuraSession
 
-  @messages %{
-    "Permission denies inserting" => Codes.forbidden(),
-    "You do not have permission to insert this address" => Codes.forbidden()
-  }
-
   def create_family(actor, attrs) do
     transact(actor, fn ->
       Family
@@ -78,21 +73,12 @@ defmodule ChurchAdmin.FamilyWrites do
       {:ok, id} -> {:ok, id}
       {:error, error} -> {:error, code_of(error)}
     end
-  rescue
-    error in Postgrex.Error -> {:error, message_code(error.postgres.message)}
   end
 
   defp fire_fixtures_deferred_checks! do
     ChurchAdmin.DataCase.set_system_db_session()
     Repo.query!("set constraints all immediate")
     Repo.query!("set constraints all deferred")
-    forget_fixture_rows_as_inserted_in_this_transaction!()
-  end
-
-  defp forget_fixture_rows_as_inserted_in_this_transaction! do
-    Repo.query!(
-      "select set_config('church_admin.inserted_families', '', true), set_config('church_admin.inserted_persons', '', true)"
-    )
   end
 
   defp code_of(error) do
@@ -104,13 +90,7 @@ defmodule ChurchAdmin.FamilyWrites do
       %Ash.Error.Forbidden.Policy{} -> Codes.forbidden()
       %Ash.Error.Forbidden{} -> Codes.forbidden()
       _error -> nil
-    end) || message_code(Exception.message(Ash.Error.to_error_class(error)))
-  end
-
-  defp message_code(message) do
-    Enum.find_value(@messages, message, fn {text, code} ->
-      if String.contains?(message, text), do: code
-    end)
+    end) || Exception.message(Ash.Error.to_error_class(error))
   end
 
   defp leaf_errors(%{errors: [_ | _] = errors}), do: Enum.flat_map(errors, &leaf_errors/1)
