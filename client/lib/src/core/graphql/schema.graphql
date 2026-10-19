@@ -8183,6 +8183,8 @@ enum UserSortField {
   BLURHASH
   AUTH_ID
   CURRENT_USER_CAN_MANAGE_THIS_USER
+  LAST_EDIT
+  PERSON_NAME
 }
 
 "A keyset page of :user"
@@ -8211,6 +8213,37 @@ input UserFilterCurrentUserCanManageThisUser {
   greaterThanOrEqual: Boolean
   isDistinctFrom: Boolean
   isNotDistinctFrom: Boolean
+}
+
+input UserFilterPersonName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input UserFilterLastEdit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
 }
 
 input UserFilterAuthId {
@@ -8324,8 +8357,12 @@ input UserFilterInput {
   invitation: InvitationFilterInput
   person: PersonFilterInput
   preferences: UserPreferencesFilterInput
+  latestEdit: LatestEditFilterInput
   scopeGrants: ScopeGrantFilterInput
+  deviceTokens: DeviceTokenFilterInput
   permissions: UserPermissionFilterInput
+  lastEdit: UserFilterLastEdit
+  personName: UserFilterPersonName
   currentUserCanManageThisUser: UserFilterCurrentUserCanManageThisUser
 }
 
@@ -8345,6 +8382,7 @@ type User {
   invitation: Invitation
   person: Person
   preferences: UserPreferences
+  latestEdit: LatestEdit
   scopeGrants(
     "How to sort the records in the response"
     sort: [ScopeGrantSortInput]
@@ -8358,6 +8396,19 @@ type User {
     "The number of records to skip."
     offset: Int
   ): [ScopeGrant!]!
+  deviceTokens(
+    "How to sort the records in the response"
+    sort: [DeviceTokenSortInput]
+
+    "A filter to limit the results"
+    filter: DeviceTokenFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [DeviceToken!]!
   permissions(
     "How to sort the records in the response"
     sort: [UserPermissionSortInput]
@@ -8371,6 +8422,8 @@ type User {
     "The number of records to skip."
     offset: Int
   ): [UserPermission!]!
+  lastEdit: DateTime
+  personName: String
   currentUserCanManageThisUser: Boolean!
 }
 
@@ -8726,7 +8779,12 @@ input ScopeGrantFilterInput {
   serviceAllowRecordServantsAttendance: ScopeGrantFilterServiceAllowRecordServantsAttendance
   groupAllowRecordAttendance: ScopeGrantFilterGroupAllowRecordAttendance
   groupAllowRecordServantsAttendance: ScopeGrantFilterGroupAllowRecordServantsAttendance
+  area: AreaFilterInput
+  group: GroupFilterInput
+  service: ServiceFilterInput
   user: UserFilterInput
+  studyYear: StudyYearFilterInput
+  classes: ClassFilterInput
 }
 
 input ScopeGrantSortInput {
@@ -8758,7 +8816,24 @@ type ScopeGrant {
   serviceAllowRecordServantsAttendance: Boolean
   groupAllowRecordAttendance: Boolean
   groupAllowRecordServantsAttendance: Boolean
+  area: Area
+  group: Group
+  service: Service
   user: User
+  studyYear: StudyYear
+  classes(
+    "How to sort the records in the response"
+    sort: [ClassSortInput]
+
+    "A filter to limit the results"
+    filter: ClassFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Class!]!
 }
 
 "The result of the :update_my_preferences mutation"
@@ -9061,6 +9136,71 @@ type RegisterFcmTokenResult {
 
 input RegisterFcmTokenInput {
   token: String!
+}
+
+enum DeviceTokenSortField {
+  UID
+  TOKEN
+  CREATED_AT
+}
+
+input DeviceTokenFilterCreatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input DeviceTokenFilterToken {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input DeviceTokenFilterUid {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input DeviceTokenFilterInput {
+  and: [DeviceTokenFilterInput!]
+  or: [DeviceTokenFilterInput!]
+  not: [DeviceTokenFilterInput!]
+  uid: DeviceTokenFilterUid
+  token: DeviceTokenFilterToken
+  createdAt: DeviceTokenFilterCreatedAt
+  user: UserFilterInput
+}
+
+input DeviceTokenSortInput {
+  order: SortOrder
+  field: DeviceTokenSortField!
 }
 
 type DeviceToken {
