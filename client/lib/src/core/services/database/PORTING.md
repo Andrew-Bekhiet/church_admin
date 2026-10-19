@@ -60,6 +60,12 @@ Reference port: `gql_definintions/metadata/` (commit `refactor(data): port the m
 - Records with `List`/`Set` fields compare by identity in `expect`: assert an Equatable summary of them.
 - A sort on a relationship path needs a server `first` aggregate. Never hide a missing one with `orderable: false` when a feature sorts by it.
 - A queryable whose key field is not `id` needs an Ash `TypePolicy(keyFields: …)` in `GqlTypePolicies`.
+- Never send an id the client made up locally for a reconciled child (a contact, an address): the server rejects it with `contact/not-owned`. Send the children without ids, or only the ones the server owns.
+- `FakeAshTablesLink` answers a multi-root query root by root, so a document may select several roots and the fake serves each from its own table.
+- A join model with no server relationship (`FamiliesFamilies`) is deleted, and a filter through it redirects through the related type's `id`.
+- An ID-typed field (`personId`, `familyId`) uses `QueryableField.self`, not a plain column field.
+- A wire `[JsonString]` list arrives as one JSON string per element (`DataCheck.details`): decode each element in `fromJson` and encode it in `toJson`.
+- A relationship the server exposes is selected and filtered directly (`contacts(filter: {personType: {isFamilyAdmin: {eq: true}}}) { personType { ...PersonType } }`); never join it client-side from a second root.
 
 ## Done
 
