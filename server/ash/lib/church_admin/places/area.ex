@@ -2,15 +2,26 @@ defmodule ChurchAdmin.Places.Area do
   use Ash.Resource,
     domain: ChurchAdmin.Places,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.{ScopeGrant, User}
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
+  alias ChurchAdmin.Authz.Calculations.UserCanEdit
+  alias ChurchAdmin.Authz.Checks.{SignedIn, System}
+  alias ChurchAdmin.Places.Calculations.IntersectsGeography
   alias ChurchAdmin.Places.{Address, AreaStreet, Street}
   alias ChurchAdmin.Types.{Geography, Text}
 
   graphql do
     type :area
+
+    relationships [:addresses, :area_streets, :streets, :admins]
+
+    queries do
+      get :area, :read
+      list :areas, :read
+    end
   end
 
   postgres do
@@ -24,7 +35,25 @@ defmodule ChurchAdmin.Places.Area do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if SignedIn
+    end
   end
 
   attributes do
@@ -60,6 +89,13 @@ defmodule ChurchAdmin.Places.Area do
 
     has_many :scope_grants, ScopeGrant, destination_attribute: :admin_on_area, public?: true
 
+    many_to_many :admins, User,
+      through: ScopeGrant,
+      source_attribute_on_join_resource: :admin_on_area,
+      destination_attribute_on_join_resource: :uid,
+      destination_attribute: :uid,
+      public?: true
+
     has_one :latest_edit, LatestEdit,
       destination_attribute: :record_id,
       filter: expr(table == "areas"),
@@ -69,5 +105,25 @@ defmodule ChurchAdmin.Places.Area do
       destination_attribute: :record_id,
       filter: expr(table == "areas"),
       public?: true
+  end
+
+  calculations do
+    calculate :user_can_edit, :boolean, {UserCanEdit, entity: :area},
+      allow_nil?: false,
+      public?: true
+
+    calculate :within_polygon,
+              :boolean,
+              {IntersectsGeography, attribute: :bounds, argument: :polygon} do
+      argument :polygon, Geography, allow_nil?: false
+      public? true
+    end
+
+    calculate :contains_point,
+              :boolean,
+              {IntersectsGeography, attribute: :bounds, argument: :point} do
+      argument :point, Geography, allow_nil?: false
+      public? true
+    end
   end
 end

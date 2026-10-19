@@ -2,16 +2,27 @@ defmodule ChurchAdmin.Places.Store do
   use Ash.Resource,
     domain: ChurchAdmin.Places,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
+  alias ChurchAdmin.Authz.Calculations.UserCanEdit
+  alias ChurchAdmin.Authz.Checks.{InScope, System}
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Places.Address
-  alias ChurchAdmin.Types.Text
+  alias ChurchAdmin.Places.Calculations.IntersectsGeography
+  alias ChurchAdmin.Types.{Geography, Text}
 
   graphql do
     type :store
+
+    relationships [:address, :admin_family]
+
+    queries do
+      get :store, :read
+      list :stores, :read
+    end
   end
 
   postgres do
@@ -26,7 +37,25 @@ defmodule ChurchAdmin.Places.Store do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {InScope, access: :read}
+    end
   end
 
   attributes do
@@ -74,5 +103,25 @@ defmodule ChurchAdmin.Places.Store do
       destination_attribute: :record_id,
       filter: expr(table == "stores"),
       public?: true
+  end
+
+  calculations do
+    calculate :user_can_edit, :boolean, {UserCanEdit, entity: :store},
+      allow_nil?: false,
+      public?: true
+
+    calculate :within_polygon,
+              :boolean,
+              {IntersectsGeography,
+               attribute: :geolocation, argument: :polygon, through: :address} do
+      argument :polygon, Geography, allow_nil?: false
+      public? true
+    end
+  end
+
+  aggregates do
+    first :address_area_name, [:address, :area], :name, public?: true
+    first :address_street_name, [:address, :street], :name, public?: true
+    first :address_district_name, [:address, :district], :name, public?: true
   end
 end

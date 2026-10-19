@@ -7,13 +7,14 @@ defmodule ChurchAdmin.Places.Address do
 
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.People.Family
+  alias ChurchAdmin.Places.Calculations.IntersectsGeography
   alias ChurchAdmin.Places.{Area, District, Store, Street}
   alias ChurchAdmin.Types.{Geography, Text}
 
   graphql do
     type :address
 
-    relationships [:family]
+    relationships [:family, :store, :area, :street, :district]
 
     queries do
       get :address, :read
@@ -104,6 +105,15 @@ defmodule ChurchAdmin.Places.Address do
     belongs_to :family, Family, define_attribute?: false, public?: true
     belongs_to :store, Store, define_attribute?: false, public?: true
     belongs_to :street, Street, define_attribute?: false, public?: true
+  end
+
+  calculations do
+    calculate :within_polygon,
+              :boolean,
+              {IntersectsGeography, attribute: :geolocation, argument: :polygon} do
+      argument :polygon, Geography, allow_nil?: false
+      public? true
+    end
   end
 
   identities do
