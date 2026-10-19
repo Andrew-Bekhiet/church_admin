@@ -1,0 +1,10 @@
+fragment DataCheck on DataCheck {
+  id
+  familyId
+  isComplete
+  completenessPercent
+  familyCheck
+  addressCheck
+  userOverride
+  details
+}
