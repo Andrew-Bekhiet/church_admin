@@ -122,7 +122,8 @@ class FakeAshRejection implements Exception {
 typedef FakeAshAction = Object? Function(Json variables);
 
 /// An Ash GraphQL server over [FakeAshTable]s. It applies the `filter`
-/// operators the client sends (`and or not eq notEq in isNil ilike`, and a
+/// operators the client sends (`and or not eq notEq in isNil ilike` and the
+/// orderings `lessThan lessThanOrEqual greaterThan greaterThanOrEqual`, and a
 /// nested filter on a related row or list of rows), sorts by `sort` and then
 /// by id as Ash does, and pages with `first`/`after`. A list field of a row
 /// that takes `filter`/`sort` variables (`classes(filter: $classesFilter)`)
@@ -132,7 +133,17 @@ typedef FakeAshAction = Object? Function(Json variables);
 /// named in [actions] is a generic action: its function answers with the root
 /// field's value or throws a [FakeAshRejection].
 class FakeAshTablesLink extends Link {
-  static const _filterOperators = {'eq', 'notEq', 'in', 'isNil', 'ilike'};
+  static const _filterOperators = {
+    'eq',
+    'notEq',
+    'in',
+    'isNil',
+    'ilike',
+    'lessThan',
+    'lessThanOrEqual',
+    'greaterThan',
+    'greaterThanOrEqual',
+  };
 
   final List<FakeAshTable> tables;
   final Map<String, FakeAshMutation> mutations;
@@ -408,6 +419,14 @@ class FakeAshTablesLink extends Link {
           '^${value.split('%').map(RegExp.escape).join('.*')}\$',
           caseSensitive: false,
         ).hasMatch(fieldValue as String? ?? ''),
+        MapEntry(key: 'lessThan', :final Object value) =>
+          fieldValue != null && _compareValues(fieldValue, value) < 0,
+        MapEntry(key: 'lessThanOrEqual', :final Object value) =>
+          fieldValue != null && _compareValues(fieldValue, value) <= 0,
+        MapEntry(key: 'greaterThan', :final Object value) =>
+          fieldValue != null && _compareValues(fieldValue, value) > 0,
+        MapEntry(key: 'greaterThanOrEqual', :final Object value) =>
+          fieldValue != null && _compareValues(fieldValue, value) >= 0,
         _ => throw UnsupportedError('Unsupported filter operator $operator'),
       };
 
