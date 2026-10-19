@@ -129,6 +129,8 @@ defmodule ChurchAdmin.Organization.Group do
 
   aggregates do
     first :service_name, :service, :name, public?: true
+    first :default_meeting_name, :default_meeting, :name, public?: true
+    first :last_edit, :latest_edit, :time, public?: true
   end
 
   identities do

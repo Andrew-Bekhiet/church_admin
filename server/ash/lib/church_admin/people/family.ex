@@ -18,7 +18,21 @@ defmodule ChurchAdmin.People.Family do
   graphql do
     type :family
 
-    relationships [:persons, :address, :data_check, :children, :parents, :unclaimed_contacts]
+    relationships [
+      :persons,
+      :address,
+      :data_check,
+      :children,
+      :parents,
+      :unclaimed_contacts,
+      :contacts,
+      :church,
+      :latest_edit,
+      :latest_visit,
+      :latest_father_visit,
+      :edits,
+      :visits
+    ]
 
     queries do
       get :family, :read
@@ -154,5 +168,16 @@ defmodule ChurchAdmin.People.Family do
     calculate :user_can_edit, :boolean, {UserCanEdit, entity: :family},
       allow_nil?: false,
       public?: true
+  end
+
+  aggregates do
+    first :last_edit, :latest_edit, :time, public?: true
+    first :last_visit, :latest_visit, :time, public?: true
+    first :last_father_visit, :latest_father_visit, :time, public?: true
+    first :church_name, :church, :name, public?: true
+    first :address_area_name, [:address, :area], :name, public?: true
+    first :address_street_name, [:address, :street], :name, public?: true
+    first :address_district_name, [:address, :district], :name, public?: true
+    first :address_full_address_text, :address, :full_address_text, public?: true
   end
 end
