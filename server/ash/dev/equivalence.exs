@@ -14,12 +14,15 @@ defmodule ChurchAdmin.Equivalence do
   alias ChurchAdmin.Accounts.{ScopeGrant, User, UserPermission}
   alias ChurchAdmin.Authz.ActorLoader
   alias ChurchAdmin.People.{Family, GroupMembership, Person, ServiceMembership}
+  alias ChurchAdmin.DataQuality.{DataCheck, Override}
   alias ChurchAdmin.Places.Address
 
   # `hasura` is master's root field (graphql-default naming); `key` lists
   # Hasura's camelCase key fields and the matching Ash attributes; `page` is
   # the role's select `limit`, which caps every Hasura page; `flag` is a
-  # per-row boolean compared with Hasura's NULL read as false.
+  # per-row boolean compared with Hasura's NULL read as false; `via` names a
+  # resource master's Hasura serves only through a relationship
+  # (`query_root_fields: []`): {parent root field, relationship field}.
   def roots do
     [
       %{
@@ -69,6 +72,19 @@ defmodule ChurchAdmin.Equivalence do
         hasura: "authUsersAdminOn",
         resource: ScopeGrant,
         key: [{"permissionId", :permission_id}]
+      },
+      %{
+        name: "dataChecks",
+        hasura: "dataChecks",
+        via: {"families", "dataCheck"},
+        resource: DataCheck,
+        key: [{"familyId", :family_id}]
+      },
+      %{
+        name: "dataCheckOverrides",
+        hasura: "dataCheckOverrides",
+        resource: Override,
+        key: [{"familyId", :family_id}]
       }
     ]
   end
@@ -127,18 +143,32 @@ defmodule ChurchAdmin.Equivalence do
   defp hasura_rows(hasura, uid, root) do
     page = Map.get(root, :page, 100_000)
     fields = Enum.map(root.key, &elem(&1, 0)) ++ List.wrap(flag_field(root))
-    order = Enum.map_join(root.key, ", ", fn {field, _} -> "{#{field}: ASC}" end)
+    {root_field, selection, order} = hasura_selection(root, fields)
 
     Stream.iterate(0, &(&1 + page))
     |> Enum.reduce_while(%{}, fn offset, acc ->
       document =
-        "{ rows: #{root.hasura}(limit: #{page}, offset: #{offset}, orderBy: [#{order}]) { #{Enum.join(fields, " ")} } }"
+        "{ rows: #{root_field}(limit: #{page}, offset: #{offset}, orderBy: [#{order}]) { #{selection} } }"
 
-      rows = hasura_query!(hasura, uid, document)
+      page_rows = hasura_query!(hasura, uid, document)
+      rows = unwrap_via(page_rows, root)
       acc = Enum.into(rows, acc, &{hasura_key(&1, root), &1[flag_field(root)] == true})
-      if length(rows) < page, do: {:halt, acc}, else: {:cont, acc}
+      if length(page_rows) < page, do: {:halt, acc}, else: {:cont, acc}
     end)
   end
+
+  defp hasura_selection(%{via: {parent, relationship}}, fields),
+    do: {parent, "#{relationship} { #{Enum.join(fields, " ")} }", "{id: ASC}"}
+
+  defp hasura_selection(root, fields) do
+    order = Enum.map_join(root.key, ", ", fn {field, _} -> "{#{field}: ASC}" end)
+    {root.hasura, Enum.join(fields, " "), order}
+  end
+
+  defp unwrap_via(rows, %{via: {_parent, relationship}}),
+    do: rows |> Enum.map(& &1[relationship]) |> Enum.reject(&is_nil/1)
+
+  defp unwrap_via(rows, _root), do: rows
 
   defp hasura_query!(hasura, uid, document) do
     response =
