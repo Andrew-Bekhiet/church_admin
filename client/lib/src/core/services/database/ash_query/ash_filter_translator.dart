@@ -141,16 +141,16 @@ class AshFilterTranslator {
     AshFieldPath path,
     PrimitiveOperator operator,
     Object? value,
-  ) => switch (operator) {
-    PrimitiveOperator.isNull => path.wrap({'isNil': true}),
-    PrimitiveOperator.isNotNull => path.wrap({'isNil': false}),
-    PrimitiveOperator.eq => path.wrap({'eq': value}),
-    PrimitiveOperator.neq => path.wrap({'notEq': value}),
-    PrimitiveOperator.lt => path.wrap({'lessThan': value}),
-    PrimitiveOperator.lte => path.wrap({'lessThanOrEqual': value}),
-    PrimitiveOperator.gt => path.wrap({'greaterThan': value}),
-    PrimitiveOperator.gte => path.wrap({'greaterThanOrEqual': value}),
-  };
+  ) => path.wrap(switch (operator) {
+    PrimitiveOperator.isNull => {'isNil': true},
+    PrimitiveOperator.isNotNull => {'isNil': false},
+    PrimitiveOperator.eq => {'eq': value},
+    PrimitiveOperator.neq => {'notEq': value},
+    PrimitiveOperator.lt => {'lessThan': value},
+    PrimitiveOperator.lte => {'lessThanOrEqual': value},
+    PrimitiveOperator.gt => {'greaterThan': value},
+    PrimitiveOperator.gte => {'greaterThanOrEqual': value},
+  });
 
   Json _boolean(AshFieldPath path, BooleanOperator operator, bool? value) {
     if (value == null) {
