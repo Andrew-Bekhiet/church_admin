@@ -49,11 +49,12 @@ class Group extends ViewableWithIDAndImage
   @QueryableField(label: 'validity', codeOnly: true)
   final DateTimeRange? validity;
 
+  @JsonKey(name: 'latestEdit')
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
-  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  @QueryableField.manyToMany(through: AdminOnData)
+  @JsonKey(name: 'admins')
+  @QueryableField(label: 'المسؤولون', graphqlName: 'admins', orderable: false)
   final List<User>? adminUsers;
 
   @JsonKey(includeToJson: false)
@@ -86,42 +87,4 @@ class Group extends ViewableWithIDAndImage
 
   @override
   Json toJson() => _$GroupToJson(this);
-
-  Input_GroupsInsertInput toInsertInput() {
-    return Input_GroupsInsertInput(
-      name: name,
-      color: colorToInt(color),
-      serviceId: service?.id.toUuid() ?? serviceId?.toUuid(),
-      defaultMeetingId: defaultMeeting?.id.toUuid(),
-      validity: validity,
-    );
-  }
-
-  Input_GroupsSetInput toUpdateInput({
-    required Group oldObject,
-  }) {
-    Input_GroupsSetInput result = Input_GroupsSetInput();
-
-    if (name != oldObject.name) {
-      result = result.copyWith(name: name);
-    }
-
-    if (color != oldObject.color) {
-      result = result.copyWith(color: colorToInt(color));
-    }
-
-    if (service?.id != oldObject.service?.id) {
-      result = result.copyWith(serviceId: service?.id.toUuid());
-    }
-
-    if (defaultMeeting?.id != oldObject.defaultMeeting?.id) {
-      result = result.copyWith(defaultMeetingId: defaultMeeting?.id.toUuid());
-    }
-
-    if (validity != oldObject.validity) {
-      result = result.copyWith(validity: validity);
-    }
-
-    return result;
-  }
 }

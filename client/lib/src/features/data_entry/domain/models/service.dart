@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/mutations.gql.dart';
 import 'package:church_admin_annotations/church_admin_annotations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:material_ui/material_ui.dart';
@@ -62,11 +61,12 @@ class Service extends ViewableWithIDAndImage
   @QueryableField(label: 'meetings')
   final List<Meeting>? meetings;
 
+  @JsonKey(name: 'latestEdit')
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
-  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  @QueryableField.manyToMany(through: AdminOnData)
+  @JsonKey(name: 'admins')
+  @QueryableField(label: 'المسؤولون', graphqlName: 'admins', orderable: false)
   final List<User>? adminUsers;
 
   @JsonKey(includeToJson: false)
@@ -117,48 +117,4 @@ class Service extends ViewableWithIDAndImage
     Service(studyYearTo: StudyYear(order: final maxGrade)) => grade > maxGrade,
     _ => false,
   };
-
-  Variables_Mutation_insertService toInsertInput() =>
-      Variables_Mutation_insertService(
-        newService: Input_ServicesInsertInput(
-          name: name,
-          studyYearFromId: studyYearFromId,
-          studyYearToId: studyYearToId,
-          nextServiceId: nextServiceId?.toUuid(),
-          defaultMeeting: switch (defaultMeeting) {
-            final meeting? => Input_HistoryMeetingsObjRelInsertInput(
-              data: meeting.toInsertInput(),
-            ),
-            null => null,
-          },
-          color: color?.argbValue,
-        ),
-      );
-
-  Variables_Mutation_updateService toUpdateInput(Service oldService) {
-    Input_ServicesSetInput result = Input_ServicesSetInput();
-    if (name != oldService.name) {
-      result = result.copyWith(name: name);
-    }
-    if (studyYearFromId != oldService.studyYearFromId) {
-      result = result.copyWith(studyYearFromId: studyYearFromId);
-    }
-    if (studyYearToId != oldService.studyYearToId) {
-      result = result.copyWith(studyYearToId: studyYearToId);
-    }
-    if (nextServiceId != oldService.nextServiceId) {
-      result = result.copyWith(nextServiceId: nextServiceId?.toUuid());
-    }
-    if (defaultMeeting?.id != oldService.defaultMeeting?.id) {
-      result = result.copyWith(defaultMeetingId: defaultMeeting?.id.toUuid());
-    }
-    if (color != oldService.color) {
-      result = result.copyWith(color: color?.argbValue);
-    }
-
-    return Variables_Mutation_updateService(
-      serviceId: id.toUuid(),
-      newService: result,
-    );
-  }
 }
