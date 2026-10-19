@@ -12,6 +12,7 @@ defmodule ChurchAdmin.Places.Street do
   alias ChurchAdmin.Authz.Checks.{HasPermission, System}
   alias ChurchAdmin.Changes.{InUseOnForeignKey, StampActor}
   alias ChurchAdmin.Errors.Codes
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.Places.Calculations.{IntersectsGeography, NearGeography}
   alias ChurchAdmin.Places.Changes.ApplyStreetAreas
   alias ChurchAdmin.Places.{Address, Area, AreaStreet}
@@ -104,6 +105,7 @@ defmodule ChurchAdmin.Places.Street do
   end
 
   changes do
+    change {RecordEdit, table: "streets"}, on: [:create, :update, :destroy]
     change {InUseOnForeignKey, code: Codes.street_in_use()}, on: [:destroy]
   end
 

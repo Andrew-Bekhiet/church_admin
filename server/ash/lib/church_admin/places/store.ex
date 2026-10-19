@@ -10,6 +10,7 @@ defmodule ChurchAdmin.Places.Store do
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, RelatedInScope, System}
   alias ChurchAdmin.Changes.StampActor
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Places.Address
   alias ChurchAdmin.Places.Calculations.IntersectsGeography
@@ -93,6 +94,10 @@ defmodule ChurchAdmin.Places.Store do
     destroy :hard_destroy do
       require_atomic? false
     end
+  end
+
+  changes do
+    change {RecordEdit, table: "stores"}, on: [:create, :update, :destroy]
   end
 
   policies do
