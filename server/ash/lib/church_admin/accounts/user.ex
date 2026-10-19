@@ -46,7 +46,15 @@ defmodule ChurchAdmin.Accounts.User do
   graphql do
     type :user
 
-    relationships [:person, :permissions, :scope_grants, :invitation, :preferences]
+    relationships [
+      :person,
+      :permissions,
+      :scope_grants,
+      :invitation,
+      :preferences,
+      :latest_edit,
+      :device_tokens
+    ]
 
     queries do
       get :user, :read
@@ -285,6 +293,11 @@ defmodule ChurchAdmin.Accounts.User do
     calculate :current_user_can_manage_this_user, :boolean, {UserCanEdit, entity: :user},
       allow_nil?: false,
       public?: true
+  end
+
+  aggregates do
+    max :last_edit, :latest_edit, :time, public?: true
+    first :person_name, :person, :name, public?: true
   end
 
   identities do

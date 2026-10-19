@@ -8,7 +8,7 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.Catalog.StudyYear
-  alias ChurchAdmin.Organization.{Group, Service}
+  alias ChurchAdmin.Organization.{Class, Group, Service}
   alias ChurchAdmin.Places.Area
 
   @scope_fields ChurchAdmin.Accounts.AdminOn.field_names()
@@ -16,7 +16,7 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
   graphql do
     type :scope_grant
 
-    relationships [:user]
+    relationships [:user, :area, :service, :group, :study_year, :classes]
 
     queries do
       get :scope_grant, :read
@@ -155,6 +155,15 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
       destination_attribute: :order,
       define_attribute?: false,
       public?: true
+
+    has_many :classes, Class,
+      no_attributes?: true,
+      public?: true,
+      filter:
+        expr(
+          service_gender == parent(service_gender) and
+            service_study_year == parent(service_study_year)
+        )
   end
 
   identities do

@@ -110,6 +110,32 @@ defmodule ChurchAdmin.Equivalence do
     end)
   end
 
+  defp hasura_rows(hasura, uid, %{nested: nested} = root) do
+    page = Map.get(root, :page, 100_000)
+    parent_fields = Enum.map_join(root.key, " ", &elem(&1, 0))
+    child_fields = Enum.map_join(nested.key, " ", &elem(&1, 0))
+    order = Enum.map_join(root.key, ", ", fn {field, _} -> "{#{field}: ASC}" end)
+
+    rows =
+      Stream.iterate(0, &(&1 + page))
+      |> Enum.reduce_while(%{}, fn offset, acc ->
+        document =
+          "{ rows: #{root.hasura}(limit: #{page}, offset: #{offset}, orderBy: [#{order}]) " <>
+            "{ #{parent_fields} #{nested.field} { #{child_fields} } } }"
+
+        page_rows = hasura_query!(hasura, uid, document)
+
+        acc =
+          for parent <- page_rows, child <- parent[nested.field], into: acc do
+            {nested_key(parent, child, root), {false, []}}
+          end
+
+        if length(page_rows) < page, do: {:halt, acc}, else: {:cont, acc}
+      end)
+
+    {rows, nil}
+  end
+
   defp hasura_rows(hasura, uid, root) do
     page = Map.get(root, :page, 100_000)
 
@@ -171,6 +197,24 @@ defmodule ChurchAdmin.Equivalence do
 
   defp ash_rows(:admin, root, entity_ids), do: ash_rows(Actor.system(), root, entity_ids)
 
+  defp ash_rows(uid, %{nested: nested} = root, _entity_ids) do
+    actor = if is_binary(uid), do: ActorLoader.load(uid), else: uid
+    attributes = Enum.map(root.key, &elem(&1, 1))
+    child_attributes = Enum.map(nested.key, &elem(&1, 1))
+
+    root.resource
+    |> Ash.Query.load(nested.relationship)
+    |> Ash.read!(actor: actor, page: false)
+    |> Enum.flat_map(fn parent ->
+      for child <- Map.fetch!(parent, nested.relationship) do
+        parent_key = Enum.map_join(attributes, "|", &key_part(Map.fetch!(parent, &1)))
+        child_key = Enum.map_join(child_attributes, "|", &key_part(Map.fetch!(child, &1)))
+        {parent_key <> "|" <> child_key, {false, []}}
+      end
+    end)
+    |> Map.new()
+  end
+
   defp ash_rows(uid, root, entity_ids) do
     actor = if is_binary(uid), do: ActorLoader.load(uid), else: uid
     attributes = Enum.map(root.key, &elem(&1, 1))
@@ -198,6 +242,11 @@ defmodule ChurchAdmin.Equivalence do
 
   defp ash_flag(row, %{flag: {_, attribute}}), do: Map.fetch!(row, attribute) == true
   defp ash_flag(_row, _root), do: false
+
+  defp nested_key(parent, child, %{nested: nested} = root),
+    do:
+      hasura_key(parent, root) <>
+        "|" <> Enum.map_join(nested.key, "|", fn {field, _} -> key_part(child[field]) end)
 
   defp hasura_key(row, root),
     do: Enum.map_join(root.key, "|", fn {field, _} -> key_part(row[field]) end)

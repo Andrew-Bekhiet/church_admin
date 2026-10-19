@@ -48,7 +48,8 @@ defmodule ChurchAdmin.Equivalence.Roots do
   # `admin` roots are compared once, Hasura's admin role against the system
   # actor, for fields role `user` cannot select; `through` names a
   # resource master's Hasura serves only through a relationship
-  # (`query_root_fields: []`): {parent root field, relationship field}.
+  # (`query_root_fields: []`): {parent root field, relationship field};
+  # `nested` compares a parent's array relationship as parent-key|child-key pairs.
   def roots do
     [
       %{
@@ -169,6 +170,13 @@ defmodule ChurchAdmin.Equivalence.Roots do
         hasura: "authUsersAdminOn",
         resource: ScopeGrant,
         key: [{"permissionId", :permission_id}]
+      },
+      %{
+        name: "scopeGrants.classes",
+        hasura: "authUsersAdminOn",
+        resource: ScopeGrant,
+        key: [{"permissionId", :permission_id}],
+        nested: %{field: "classes", relationship: :classes, key: [{"id", :id}]}
       },
       %{name: "contacts", hasura: "contacts", resource: Contact, key: [{"id", :id}]},
       %{
