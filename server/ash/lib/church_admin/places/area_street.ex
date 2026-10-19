@@ -5,7 +5,7 @@ defmodule ChurchAdmin.Places.AreaStreet do
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
-  alias ChurchAdmin.Authz.Checks.System
+  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.Places.{Area, Street}
 
   graphql do
@@ -38,6 +38,16 @@ defmodule ChurchAdmin.Places.AreaStreet do
                  default_limit: 100,
                  max_page_size: 100
     end
+
+    create :create do
+      public? false
+      accept [:area_id, :street_id]
+    end
+
+    destroy :destroy do
+      primary? true
+      require_atomic? false
+    end
   end
 
   policies do
@@ -47,6 +57,14 @@ defmodule ChurchAdmin.Places.AreaStreet do
 
     policy action_type(:read) do
       authorize_if actor_present()
+    end
+
+    policy action_type([:create, :destroy]) do
+      authorize_if {RelatedInScope, path: :area, entity: :area, access: :edit}
+    end
+
+    policy action_type([:create, :destroy]) do
+      authorize_if {RelatedInScope, path: :street, entity: :street, access: :edit}
     end
   end
 

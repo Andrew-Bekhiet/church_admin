@@ -6,10 +6,25 @@ defmodule ChurchAdmin.Places.Address do
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
+  alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Places.Calculations.{FullAddressText, IntersectsGeography}
-  alias ChurchAdmin.Places.{Area, District, Store, Street}
+  alias ChurchAdmin.Places.{Area, AreaStreet, District, Invariants, Store, Street}
   alias ChurchAdmin.Types.{Geography, Text}
+  alias ChurchAdmin.Validations.{InvariantHolds, ReferencesVisible}
+
+  @command_attributes [
+    :country_iso_code,
+    :district_id,
+    :area_id,
+    :street_id,
+    :substreet_name,
+    :geolocation,
+    :storey_number,
+    :house_code,
+    :apartment_number,
+    :special_landmark
+  ]
 
   graphql do
     type :address
@@ -64,6 +79,45 @@ defmodule ChurchAdmin.Places.Address do
                  default_limit: 100,
                  max_page_size: 100
     end
+
+    create :create do
+      public? false
+      accept @command_attributes ++ [:family_id, :store_id]
+
+      validate {ReferencesVisible, attribute: :area_id, resource: Area},
+        where: changing(:area_id)
+
+      validate {ReferencesVisible, attribute: :street_id, resource: Street},
+        where: changing(:street_id)
+
+      validate {ReferencesVisible, attribute: :district_id, resource: District},
+        where: changing(:district_id)
+
+      change {InvariantHolds,
+              code: Codes.address_street_outside_area(),
+              fields: [:street_id],
+              violations: &Invariants.address_outside_street_area/1}
+    end
+
+    update :update do
+      public? false
+      require_atomic? false
+      accept @command_attributes
+
+      validate {ReferencesVisible, attribute: :area_id, resource: Area},
+        where: changing(:area_id)
+
+      validate {ReferencesVisible, attribute: :street_id, resource: Street},
+        where: changing(:street_id)
+
+      validate {ReferencesVisible, attribute: :district_id, resource: District},
+        where: changing(:district_id)
+
+      change {InvariantHolds,
+              code: Codes.address_street_outside_area(),
+              fields: [:street_id],
+              violations: &Invariants.address_outside_street_area/1}
+    end
   end
 
   policies do
@@ -100,6 +154,8 @@ defmodule ChurchAdmin.Places.Address do
   end
 
   relationships do
+    has_many :area_links, AreaStreet, source_attribute: :area_id, destination_attribute: :area_id
+
     belongs_to :area, Area, define_attribute?: false, public?: true
     belongs_to :district, District, define_attribute?: false, public?: true
     belongs_to :family, Family, define_attribute?: false, public?: true

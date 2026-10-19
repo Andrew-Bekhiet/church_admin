@@ -2,7 +2,7 @@ defmodule ChurchAdmin.PlacesWorld do
   @moduledoc """
   `ChurchAdmin.AuthzWorld` plus geometry on the seed generator's fixed grid
   (origin 31.2, 30.0; cells 0.02 degrees wide), so geographic filters have
-  known answers:
+  known answers, and the `areas_streets` links the geography implies:
 
     * area `a1` is cell 0 (longitude 31.20-31.22), `a2` is cell 1 (31.22-31.24);
       `a_gone` is a soft-deleted area on cell 2
@@ -17,7 +17,7 @@ defmodule ChurchAdmin.PlacesWorld do
   """
 
   alias ChurchAdmin.{DataCase, Factory}
-  alias ChurchAdmin.Places.{District, Street}
+  alias ChurchAdmin.Places.{AreasStreetsSync, District, Street}
 
   @cell_size 0.02
   @origin_longitude 31.2
@@ -78,6 +78,8 @@ defmodule ChurchAdmin.PlacesWorld do
     }
 
     districts = %{d1: district!("district 1"), d2: district!("district 2")}
+
+    for area <- [a1, a2, a_gone], do: AreasStreetsSync.link_area(area.id)
 
     new_records =
       %{a1: a1, a2: a2, a_gone: a_gone, store2: store2, store_gone: store_gone}
