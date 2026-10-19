@@ -20,7 +20,10 @@ fragment PersonDetails on Person {
     ...PersonAddress
   }
   birthdate
-  classMemberships(limit: $classesLimit) {
+  classMemberships(
+    limit: $classesLimit
+    sort: [{ field: CLASS_NAME, order: ASC }]
+  ) {
     id
     class {
       ...Class
@@ -50,7 +53,10 @@ fragment PersonDetails on Person {
     }
   }
   gender
-  groupMemberships(limit: $groupsLimit) {
+  groupMemberships(
+    limit: $groupsLimit
+    sort: [{ field: GROUP_NAME, order: ASC }]
+  ) {
     groupId
     group {
       ...Group
@@ -93,7 +99,10 @@ fragment PersonDetails on Person {
   school {
     ...School
   }
-  serviceMemberships(limit: $servicesLimit) {
+  serviceMemberships(
+    limit: $servicesLimit
+    sort: [{ field: SERVICE_NAME, order: ASC }]
+  ) {
     serviceId
     service {
       ...ServiceWithStudyYears
@@ -235,13 +244,13 @@ fragment PersonMemberships on Person {
   id
   name
   userCanEdit
-  serviceMemberships {
+  serviceMemberships(sort: [{ field: SERVICE_NAME, order: ASC }]) {
     serviceId
     service {
       ...ServiceWithStudyYears
     }
   }
-  classMemberships {
+  classMemberships(sort: [{ field: CLASS_NAME, order: ASC }]) {
     id
     class {
       ...Class
@@ -250,7 +259,7 @@ fragment PersonMemberships on Person {
       }
     }
   }
-  groupMemberships {
+  groupMemberships(sort: [{ field: GROUP_NAME, order: ASC }]) {
     groupId
     group {
       ...Group
