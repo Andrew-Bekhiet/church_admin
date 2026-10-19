@@ -23,16 +23,12 @@ class ConnectivityService {
   ConnectivityService({
     required this._connectivityPlugin,
     required this._dio,
-    SecretsService? secretsService,
+    ApiEndpoints? apiEndpoints,
     LoggingService? loggingService,
     String? urlToPing,
-  }) : assert((secretsService == null) != (urlToPing == null)),
+  }) : assert((apiEndpoints == null) != (urlToPing == null)),
        _loggingService = loggingService ?? LoggingService.I,
-       urlToPing =
-           urlToPing ??
-           Uri.parse(
-             secretsService!.hasuraServer,
-           ).replace(pathSegments: ['healthz']).toString() {
+       urlToPing = urlToPing ?? apiEndpoints!.healthCheck.toString() {
     _connectivityStreamSubscription = _createConnectivityStreamSubscription();
   }
 
@@ -79,7 +75,9 @@ class ConnectivityService {
           .get(urlToPing)
           .timeout(const Duration(seconds: 8));
 
-      return response.statusCode == 200;
+      final statusCode = response.statusCode;
+
+      return statusCode != null && statusCode >= 200 && statusCode < 300;
     } on Exception {
       return false;
     }
