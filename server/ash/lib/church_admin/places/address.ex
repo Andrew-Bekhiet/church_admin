@@ -10,6 +10,20 @@ defmodule ChurchAdmin.Places.Address do
   alias ChurchAdmin.Places.Calculations.{FullAddressText, IntersectsGeography}
   alias ChurchAdmin.Places.{Area, District, Store, Street}
   alias ChurchAdmin.Types.{Geography, Text}
+  alias ChurchAdmin.Validations.ReferencesVisible
+
+  @command_attributes [
+    :country_iso_code,
+    :district_id,
+    :area_id,
+    :street_id,
+    :substreet_name,
+    :geolocation,
+    :storey_number,
+    :house_code,
+    :apartment_number,
+    :special_landmark
+  ]
 
   graphql do
     type :address
@@ -63,6 +77,35 @@ defmodule ChurchAdmin.Places.Address do
                  required?: false,
                  default_limit: 100,
                  max_page_size: 100
+    end
+
+    create :create do
+      public? false
+      accept @command_attributes ++ [:family_id, :store_id]
+
+      validate {ReferencesVisible, attribute: :area_id, resource: Area},
+        where: changing(:area_id)
+
+      validate {ReferencesVisible, attribute: :street_id, resource: Street},
+        where: changing(:street_id)
+
+      validate {ReferencesVisible, attribute: :district_id, resource: District},
+        where: changing(:district_id)
+    end
+
+    update :update do
+      public? false
+      require_atomic? false
+      accept @command_attributes
+
+      validate {ReferencesVisible, attribute: :area_id, resource: Area},
+        where: changing(:area_id)
+
+      validate {ReferencesVisible, attribute: :street_id, resource: Street},
+        where: changing(:street_id)
+
+      validate {ReferencesVisible, attribute: :district_id, resource: District},
+        where: changing(:district_id)
     end
   end
 

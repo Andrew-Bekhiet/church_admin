@@ -6,12 +6,15 @@ defmodule ChurchAdmin.Places.Street do
     fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.User
+  alias ChurchAdmin.Activity.Changes.RecordLastVisit
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
-  alias ChurchAdmin.Authz.Checks.System
+  alias ChurchAdmin.Authz.Checks.{HasPermission, System}
   alias ChurchAdmin.Places.Calculations.{IntersectsGeography, NearGeography}
+  alias ChurchAdmin.Places.Changes.ApplyStreetAreas
   alias ChurchAdmin.Places.{Address, Area, AreaStreet}
   alias ChurchAdmin.Types.{Geography, Text}
+  alias ChurchAdmin.Validations.ReferencesVisible
 
   graphql do
     type :street
@@ -29,6 +32,11 @@ defmodule ChurchAdmin.Places.Street do
     queries do
       get :street, :read
       list :streets, :read
+    end
+
+    mutations do
+      create :create_street, :create_street
+      update :update_street, :update_street
     end
   end
 
@@ -52,6 +60,27 @@ defmodule ChurchAdmin.Places.Street do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :create_street do
+      accept [:name, :line, :color]
+      argument :areas, {:array, :uuid}
+      argument :last_visit, :utc_datetime_usec
+
+      validate {ReferencesVisible, argument: :areas, resource: Area}
+      change ApplyStreetAreas
+      change {RecordLastVisit, table: "streets"}
+    end
+
+    update :update_street do
+      require_atomic? false
+      accept [:name, :line, :color]
+      argument :areas, {:array, :uuid}
+      argument :last_visit, :utc_datetime_usec
+
+      validate {ReferencesVisible, argument: :areas, resource: Area}
+      change ApplyStreetAreas
+      change {RecordLastVisit, table: "streets"}
+    end
   end
 
   policies do
@@ -61,6 +90,10 @@ defmodule ChurchAdmin.Places.Street do
 
     policy action_type(:read) do
       authorize_if actor_present()
+    end
+
+    policy action(:create_street) do
+      authorize_if {HasPermission, name: "writeAllData"}
     end
   end
 

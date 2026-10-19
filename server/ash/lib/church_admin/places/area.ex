@@ -6,9 +6,10 @@ defmodule ChurchAdmin.Places.Area do
     fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.{ScopeGrant, User}
+  alias ChurchAdmin.Activity.Changes.RecordLastVisit
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
-  alias ChurchAdmin.Authz.Checks.System
+  alias ChurchAdmin.Authz.Checks.{HasPermission, System}
   alias ChurchAdmin.Places.Calculations.IntersectsGeography
   alias ChurchAdmin.Places.{Address, AreaStreet, Street}
   alias ChurchAdmin.Types.{Geography, Text}
@@ -30,6 +31,11 @@ defmodule ChurchAdmin.Places.Area do
     queries do
       get :area, :read
       list :areas, :read
+    end
+
+    mutations do
+      create :create_area, :create_area
+      update :update_area, :update_area
     end
   end
 
@@ -53,6 +59,19 @@ defmodule ChurchAdmin.Places.Area do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :create_area do
+      accept [:name, :bounds, :color]
+      argument :last_visit, :utc_datetime_usec
+      change {RecordLastVisit, table: "areas"}
+    end
+
+    update :update_area do
+      require_atomic? false
+      accept [:name, :bounds, :color]
+      argument :last_visit, :utc_datetime_usec
+      change {RecordLastVisit, table: "areas"}
+    end
   end
 
   policies do
@@ -62,6 +81,10 @@ defmodule ChurchAdmin.Places.Area do
 
     policy action_type(:read) do
       authorize_if actor_present()
+    end
+
+    policy action(:create_area) do
+      authorize_if {HasPermission, name: "writeAllData"}
     end
   end
 
