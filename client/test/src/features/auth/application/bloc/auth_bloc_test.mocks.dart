@@ -378,6 +378,14 @@ class MockFirebaseAuthRepository extends _i1.Mock
   ) as _i5.Future<void>);
 
   @override
+  _i5.Future<String?> idToken({bool? forceRefresh = false}) =>
+      (super.noSuchMethod(
+        Invocation.method(#idToken, [], {#forceRefresh: forceRefresh}),
+        returnValue: _i5.Future<String?>.value(),
+        returnValueForMissingStub: _i5.Future<String?>.value(),
+      ) as _i5.Future<String?>);
+
+  @override
   _i5.Future<void> reload() => (super.noSuchMethod(
     Invocation.method(#reload, []),
     returnValue: _i5.Future<void>.value(),
