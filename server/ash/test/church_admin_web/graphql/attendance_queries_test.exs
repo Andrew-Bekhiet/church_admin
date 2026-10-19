@@ -331,7 +331,8 @@ defmodule ChurchAdminWeb.Graphql.AttendanceQueriesTest do
       "uid" => world.users.read_all.uid
     }
 
-    rows = data!(run(conn, document, variables, :service_open, world))["attendanceRecords"]["results"]
+    rows =
+      data!(run(conn, document, variables, :service_open, world))["attendanceRecords"]["results"]
 
     assert ids(rows) == MapSet.new(for n <- [:a_m1, :a_f2, :a_servant], do: world.records[n].id)
     assert Enum.all?(rows, &(&1["time"] == &1["datetime"]))
@@ -339,7 +340,10 @@ defmodule ChurchAdminWeb.Graphql.AttendanceQueriesTest do
     assert Enum.map(rows, & &1["time"]) == Enum.sort(Enum.map(rows, & &1["time"]), :desc)
 
     others = put_in(variables["uid"], world.users.service_open.uid)
-    assert data!(run(conn, document, others, :service_open, world))["attendanceRecords"]["results"] == []
+
+    assert data!(run(conn, document, others, :service_open, world))["attendanceRecords"][
+             "results"
+           ] == []
   end
 
   test "meeting by id is null outside the actor's meetings", %{conn: conn, world: world} do

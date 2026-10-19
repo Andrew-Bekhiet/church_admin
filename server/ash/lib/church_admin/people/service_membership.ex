@@ -76,10 +76,6 @@ defmodule ChurchAdmin.People.ServiceMembership do
     belongs_to :service, Service, define_attribute?: false, public?: true
   end
 
-  aggregates do
-    first :service_name, :service, :name, public?: true
-  end
-
   calculations do
     calculate :is_outside_service_study_years,
               :boolean,
@@ -95,6 +91,10 @@ defmodule ChurchAdmin.People.ServiceMembership do
               ),
               allow_nil?: false,
               public?: true
+  end
+
+  aggregates do
+    first :service_name, :service, :name, public?: true
   end
 
   identities do
