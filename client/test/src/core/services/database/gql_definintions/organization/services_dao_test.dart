@@ -17,6 +17,7 @@ void main() {
     test('services are listed by the study years they serve', () {
       final table = FakeAshTable(
         typename: 'Service',
+        projectsSelections: true,
         listRoot: 'services',
         rows: [
           OrganizationRow.service(servants),
@@ -45,6 +46,7 @@ void main() {
       );
       final table = FakeAshTable(
         typename: 'Service',
+        projectsSelections: true,
         listRoot: 'services',
         rows: [
           OrganizationRow.service(inPrimary),
@@ -82,6 +84,7 @@ void main() {
         );
         final table = FakeAshTable(
           typename: 'Service',
+          projectsSelections: true,
           listRoot: 'services',
           rows: [OrganizationRow.service(service)],
         );
@@ -113,6 +116,7 @@ void main() {
       );
       final table = FakeAshTable(
         typename: 'Service',
+        projectsSelections: true,
         listRoot: 'services',
         rows: [OrganizationRow.service(service)],
       );
@@ -133,6 +137,7 @@ void main() {
       final editable = primary.copyWith(userCanEdit: true);
       final table = FakeAshTable(
         typename: 'Service',
+        projectsSelections: true,
         listRoot: 'services',
         rows: [OrganizationRow.service(editable)],
       );
@@ -150,6 +155,7 @@ void main() {
       fakeAsync((async) {
         final table = FakeAshTable(
           typename: 'Service',
+          projectsSelections: true,
           listRoot: 'services',
           rows: [OrganizationRow.service(primary)],
         );
@@ -191,6 +197,7 @@ void main() {
         );
         final table = FakeAshTable(
           typename: 'Service',
+          projectsSelections: true,
           listRoot: 'services',
           rows: [OrganizationRow.service(detailed)],
         );

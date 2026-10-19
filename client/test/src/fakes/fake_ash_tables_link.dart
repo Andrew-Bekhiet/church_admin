@@ -12,11 +12,14 @@ import 'ash_responses.dart';
 /// returns the row of the same name when one exists (upsert by name) and
 /// otherwise stores the input over [createdPresets]. A row of a resource
 /// without an `id` (a model that is not an [ID]) is paged by a keyset the
-/// table assigns.
+/// table assigns. With [projectsSelections], an answer about this resource
+/// carries exactly the fields the document selects, so a field a document
+/// leaves out reads as missing.
 class FakeAshTable {
   final String typename;
   final String listRoot;
   final Json createdPresets;
+  final bool projectsSelections;
   final List<Json> rows = [];
 
   int _createdCount = 0;
@@ -30,6 +33,7 @@ class FakeAshTable {
     required this.listRoot,
     Iterable<ToJson> rows = const [],
     this.createdPresets = const {},
+    this.projectsSelections = false,
   }) {
     rows.forEach(add);
   }
@@ -79,8 +83,7 @@ class FakeAshRejection implements Exception {
 /// nested filter on a related row or list of rows), sorts by `sort` and then
 /// by id as Ash does, and pages with `first`/`after`. A list field of a row
 /// that takes `filter`/`sort` variables (`classes(filter: $classesFilter)`)
-/// is filtered and sorted the same way. Answers carry exactly the fields the
-/// document selects, so a field a document leaves out reads as missing.
+/// is filtered and sorted the same way.
 class FakeAshTablesLink extends Link {
   static const _filterOperators = {'eq', 'notEq', 'in', 'isNil', 'ilike'};
 
@@ -97,9 +100,7 @@ class FakeAshTablesLink extends Link {
     try {
       return Stream.value(
         Response(
-          data: GraphQLResponseProjector(
-            request.operation.document,
-          ).respond(_answer(request)),
+          data: _projected(request, _answer(request)),
           response: const {},
         ),
       );
@@ -116,6 +117,23 @@ class FakeAshTablesLink extends Link {
         ),
       );
     }
+  }
+
+  Json _projected(Request request, Json answer) {
+    final root = AshResultParser.rootFieldOf(request.operation.document);
+    final table = tables.firstWhereOrNull(
+      (table) => {
+        table.listRoot,
+        table.getRoot,
+        table.createRoot,
+        'update${table.typename}',
+        'delete${table.typename}',
+      }.contains(root),
+    );
+
+    return table?.projectsSelections ?? false
+        ? GraphQLResponseProjector(request.operation.document).respond(answer)
+        : answer;
   }
 
   Json _answer(Request request) {
