@@ -40,6 +40,7 @@ abstract final class GqlTypePolicies {
     'HistoryLatestFatherVisits': _embedded,
     'HistoryLatestKodases': _embedded,
     'HistoryLatestConfessions': _embedded,
+    'Edit': _embedded,
     'HistoryEditHistory': _embedded,
     'HistoryCallHistory': _embedded,
     'HistoryVisitHistory': _embedded,

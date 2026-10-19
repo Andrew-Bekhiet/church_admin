@@ -8,7 +8,9 @@ import 'ash_responses.dart';
 /// field names, read by the list root `<listRoot>` and the get root
 /// `<typename in lowerCamelCase>(id:)`, written by `create<typename>`, which
 /// returns the row of the same name when one exists (upsert by name) and
-/// otherwise stores the input over [createdPresets].
+/// otherwise stores the input over [createdPresets]. A row of a resource
+/// without an `id` (a model that is not an [ID]) is paged by a keyset the
+/// table assigns.
 class FakeAshTable {
   final String typename;
   final String listRoot;
@@ -31,10 +33,15 @@ class FakeAshTable {
   }
 
   void add(ToJson model) => rows.add({
-    if (model case ID(:final id)) 'id': id,
+    if (model case ID(:final id))
+      'id': id
+    else
+      '__keyset': '$listRoot-${rows.length}',
     ...model.toJson(),
     '__typename': typename,
   });
+
+  static String keysetOf(Json row) => (row['id'] ?? row['__keyset']) as String;
 
   Json createOrReturnByName(Json input) {
     if (rows.firstWhereOrNull((row) => row['name'] == input['name'])
@@ -54,13 +61,18 @@ class FakeAshTable {
   }
 }
 
+/// Answers the `result` of a mutation root the tables do not derive from
+/// their typename, given the mutation's variables.
+typedef FakeAshMutation = Json? Function(Json variables);
+
 /// An Ash GraphQL server over [FakeAshTable]s. It applies the `filter`
 /// operators the client sends (`and or not eq notEq in isNil ilike`), sorts
 /// by `sort` and then by id as Ash does, and pages with `first`/`after`.
 class FakeAshTablesLink extends Link {
   final List<FakeAshTable> tables;
+  final Map<String, FakeAshMutation> mutations;
 
-  FakeAshTablesLink(this.tables);
+  FakeAshTablesLink(this.tables, {this.mutations = const {}});
 
   FakeAshTable table(String typename) =>
       tables.singleWhere((table) => table.typename == typename);
@@ -74,6 +86,13 @@ class FakeAshTablesLink extends Link {
     final variables = request.variables;
 
     if (request.isMutation) {
+      if (mutations[root] case final mutation?) {
+        return {
+          '__typename': 'Mutation',
+          root: AshResponses.mutationResult(mutation(variables)),
+        };
+      }
+
       final table = tables.singleWhere((table) => table.createRoot == root);
       final input = (variables['input'] as Map).cast<String, dynamic>();
 
@@ -106,13 +125,16 @@ class FakeAshTablesLink extends Link {
     final after = variables['after'] as String?;
     final start = after == null
         ? 0
-        : matching.indexWhere((row) => row['id'] == after) + 1;
+        : matching.indexWhere((row) => FakeAshTable.keysetOf(row) == after) + 1;
     final first = variables['first'] as int? ?? matching.length;
 
+    final results = matching.skip(start).take(first).toList();
+
     return AshResponses.page(
-      matching.skip(start).take(first).toList(),
+      results,
       typename: 'KeysetPageOf${table.typename}',
       count: matching.length,
+      endKeyset: results.isEmpty ? null : FakeAshTable.keysetOf(results.last),
     );
   }
 
@@ -166,7 +188,7 @@ class FakeAshTablesLink extends Link {
       if (compared != 0) return compared;
     }
 
-    return (a['id'] as String).compareTo(b['id'] as String);
+    return FakeAshTable.keysetOf(a).compareTo(FakeAshTable.keysetOf(b));
   };
 
   int _compareValues(Object a, Object b) => switch ((a, b)) {

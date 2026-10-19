@@ -19,13 +19,6 @@ fragment Address on Addresses {
   apartmentNumber
   specialLandmark
 }
-fragment EditHistory on HistoryEditHistory {
-  time
-  user {
-    ...User
-  }
-}
-
 fragment AttendanceHistory on HistoryAttendanceHistory {
   id
   time: datetime
@@ -34,36 +27,7 @@ fragment AttendanceHistory on HistoryAttendanceHistory {
   }
 }
 
-fragment CallHistory on HistoryCallHistory {
-  time
-  user {
-    ...User
-  }
-}
-
 fragment VisitHistory on HistoryVisitHistory {
-  time
-  user {
-    ...User
-  }
-}
-
-fragment KodasHistory on HistoryKodasHistory {
-  id
-  time
-  user {
-    ...User
-  }
-}
-
-fragment KodasDayRecord on HistoryKodasHistory {
-  id
-  personId
-  dayId
-}
-
-fragment ConfessionHistory on HistoryConfessionHistory {
-  id
   time
   user {
     ...User

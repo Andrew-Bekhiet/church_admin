@@ -1,0 +1,84 @@
+query edits(
+  $filter: EditFilterInput
+  $sort: [EditSortInput]
+  $first: Int
+  $after: String
+) {
+  edits(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Edit
+    }
+  }
+}
+
+query visits(
+  $filter: VisitFilterInput
+  $sort: [VisitSortInput]
+  $first: Int
+  $after: String
+) {
+  visits(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Visit
+    }
+  }
+}
+
+query calls(
+  $filter: CallFilterInput
+  $sort: [CallSortInput]
+  $first: Int
+  $after: String
+) {
+  calls(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Call
+    }
+  }
+}
+
+query confessions(
+  $filter: ConfessionFilterInput
+  $sort: [ConfessionSortInput]
+  $first: Int
+  $after: String
+) {
+  confessions(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Confession
+    }
+  }
+}
+
+query kodases(
+  $filter: KodasFilterInput
+  $sort: [KodasSortInput]
+  $first: Int
+  $after: String
+) {
+  kodases(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Kodas
+    }
+  }
+}
+
+query dayKodases($filter: KodasFilterInput, $first: Int) {
+  kodases(filter: $filter, first: $first) {
+    count
+    endKeyset
+    results {
+      ...KodasDayRecord
+    }
+  }
+}
