@@ -13,13 +13,14 @@ defmodule ChurchAdmin.People.Person.Commands do
   alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, RelatedInScope}
   alias ChurchAdmin.Catalog.{Hobby, Tag}
   alias ChurchAdmin.Changes.StampActor
+  alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.Organization.{Group, Service}
   alias ChurchAdmin.People.{ContactInput, Family, FamilyContactInput}
-  alias ChurchAdmin.People.Person.Changes
+  alias ChurchAdmin.People.Person.{Changes, Invariants}
   alias ChurchAdmin.Places.Changes.ApplyOwnerAddress
   alias ChurchAdmin.Places.Types.AddressInput
   alias ChurchAdmin.Types.Text
-  alias ChurchAdmin.Validations.ReferencesVisible
+  alias ChurchAdmin.Validations.{InvariantHolds, ReferencesVisible}
 
   @accepted [
     :name,
@@ -85,6 +86,9 @@ defmodule ChurchAdmin.People.Person.Commands do
               confession: :last_confession, kodas: :last_kodas, call: :last_call}
 
       change {RecordLastVisit, table: "persons"}
+
+      change {InvariantHolds,
+              code: Codes.person_container_required(), violations: &Invariants.unanchored/1}
     end
 
     update :update_person do
@@ -123,6 +127,9 @@ defmodule ChurchAdmin.People.Person.Commands do
               confession: :last_confession, kodas: :last_kodas, call: :last_call}
 
       change {RecordLastVisit, table: "persons"}
+
+      change {InvariantHolds,
+              code: Codes.person_container_required(), violations: &Invariants.unanchored/1}
     end
 
     update :record_person_spiritual_days do

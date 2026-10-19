@@ -61,9 +61,14 @@ defmodule ChurchAdmin.People.Person do
     ServiceMembership
   }
 
+  alias ChurchAdmin.People.Person.Changes.SyncLinkedUser
+  alias ChurchAdmin.People.Person.Invariants
+
+  alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.Places.{Address, Store}
   alias ChurchAdmin.Types.Text
+  alias ChurchAdmin.Validations.InvariantHolds
 
   graphql do
     type :person
@@ -215,12 +220,18 @@ defmodule ChurchAdmin.People.Person do
       description "The servant person of a user an account command creates; the Person commands own every other write."
       accept [:name, :gender, :uid]
       change set_attribute(:is_servant, true)
+
+      change {InvariantHolds,
+              code: Codes.person_container_required(), violations: &Invariants.unanchored/1}
     end
 
     update :set_user do
       description "Links the person to a user, or unlinks it with a nil uid."
       accept [:uid]
       require_atomic? false
+
+      change {InvariantHolds,
+              code: Codes.person_container_required(), violations: &Invariants.unanchored/1}
     end
   end
 
@@ -228,6 +239,12 @@ defmodule ChurchAdmin.People.Person do
     change {RecordEdit, table: "persons"},
       on: [:create, :update, :destroy],
       where: [negate(action_is(:record_person_spiritual_days))]
+
+    change set_attribute(:is_servant, true),
+      on: [:create, :update],
+      where: [present(:uid), changing(:uid)]
+
+    change SyncLinkedUser, on: [:create, :update]
   end
 
   policies do

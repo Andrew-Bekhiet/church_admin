@@ -148,6 +148,12 @@ defmodule ChurchAdmin.Accounts.User do
       require_atomic? false
     end
 
+    update :sync_from_person do
+      description "Shows the linked person's name and photo on the user; called by the person's writes."
+      accept [:name, :photo_updated_at, :blurhash]
+      require_atomic? false
+    end
+
     update :release_account do
       description "Unlinks the Firebase account; the uid row stays."
       accept []
