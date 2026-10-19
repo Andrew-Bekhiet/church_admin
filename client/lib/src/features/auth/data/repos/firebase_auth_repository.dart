@@ -126,6 +126,10 @@ class FirebaseAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<String?> idToken({bool forceRefresh = false}) async =>
+      _auth.currentUser?.getIdToken(forceRefresh);
+
+  @override
   Future<void> reload() async {
     if (_auth.currentUser == null) {
       throw StateError('Must be signed in');

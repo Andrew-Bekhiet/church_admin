@@ -30,6 +30,10 @@ abstract interface class AuthRepository {
 
   Future<void> refreshToken();
 
+  /// The signed-in user's ID token, refreshed when it has expired or when
+  /// [forceRefresh] asks for it; null when nobody is signed in.
+  Future<String?> idToken({bool forceRefresh = false});
+
   Future<void> signOut();
 
   Future<void> dispose();
