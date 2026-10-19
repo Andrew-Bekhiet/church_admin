@@ -5,20 +5,22 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 class DistrictsDAO extends DAOBase<District>
     with LegacyStreamableDAO<District>, LegacyCreatableDAO<District> {
   @override
-  LegacyStreamAllConfig<District> get baseStreamAllConfig => const LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllDistricts,
-  );
+  LegacyStreamAllConfig<District> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllDistricts,
+      );
 
   @override
   LegacyStreamSingleByIdConfig<District> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  LegacyCreateObjectConfig<District> get baseCreateObjectConfig => LegacyCreateObjectConfig(
-    document: documentNodeMutationcreateDistrict,
-    varsConstructor: _createDistrictVarsConstructor,
-    parserFn: db.parser.singleParser(fromJson, 'insertDistrictsOne'),
-  );
+  LegacyCreateObjectConfig<District> get baseCreateObjectConfig =>
+      LegacyCreateObjectConfig(
+        document: documentNodeMutationcreateDistrict,
+        varsConstructor: _createDistrictVarsConstructor,
+        parserFn: db.parser.singleParser(fromJson, 'insertDistrictsOne'),
+      );
 
   DistrictsDAO({required super.db}) : super(fromJson: District.fromJson);
 

@@ -5,7 +5,10 @@ import 'package:church_admin/src/core/services/database/gql_definintions/meeting
 import 'package:graphql/client.dart';
 
 class MeetingsDAO extends DAOBase<Meeting>
-    with LegacyStreamableDAO<Meeting>, LegacyCreatableDAO<Meeting>, LegacyUpdatableDAO<Meeting> {
+    with
+        LegacyStreamableDAO<Meeting>,
+        LegacyCreatableDAO<Meeting>,
+        LegacyUpdatableDAO<Meeting> {
   @override
   late final LegacyStreamAllConfig<Meeting> baseStreamAllConfig =
       const LegacyStreamAllConfig(

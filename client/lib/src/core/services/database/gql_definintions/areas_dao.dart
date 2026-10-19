@@ -6,9 +6,10 @@ import 'package:church_admin/src/core/services/database/gql_definintions/areas/a
 
 class AreasDAO extends LegacyFullCRUDDAO<Area> {
   @override
-  late final LegacyStreamAllConfig<Area> baseStreamAllConfig = const LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllAreas,
-  );
+  late final LegacyStreamAllConfig<Area> baseStreamAllConfig =
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllAreas,
+      );
 
   @override
   late final LegacyStreamCountConfig<Area> baseStreamCountConfig =

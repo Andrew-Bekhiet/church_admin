@@ -898,17 +898,18 @@ class MockConnectivityService extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
   @override
-  _i2.LegacyStreamAllConfig<_i2.User> get baseStreamAllConfig => (super.noSuchMethod(
-    Invocation.getter(#baseStreamAllConfig),
-    returnValue: _FakeStreamAllConfig_25<_i2.User>(
-      this,
-      Invocation.getter(#baseStreamAllConfig),
-    ),
-    returnValueForMissingStub: _FakeStreamAllConfig_25<_i2.User>(
-      this,
-      Invocation.getter(#baseStreamAllConfig),
-    ),
-  ) as _i2.LegacyStreamAllConfig<_i2.User>);
+  _i2.LegacyStreamAllConfig<_i2.User> get baseStreamAllConfig =>
+      (super.noSuchMethod(
+        Invocation.getter(#baseStreamAllConfig),
+        returnValue: _FakeStreamAllConfig_25<_i2.User>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamAllConfig_25<_i2.User>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+      ) as _i2.LegacyStreamAllConfig<_i2.User>);
 
   @override
   _i2.LegacyStreamCountConfig<_i2.User> get baseStreamCountConfig =>

@@ -4,9 +4,10 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 class PersonStatesDAO extends DAOBase<PersonState>
     with LegacyStreamableDAO<PersonState> {
   @override
-  LegacyStreamAllConfig<PersonState> get baseStreamAllConfig => const LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllPersonStates,
-  );
+  LegacyStreamAllConfig<PersonState> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllPersonStates,
+      );
 
   @override
   LegacyStreamSingleByIdConfig<PersonState> get baseStreamSingleByIdConfig =>

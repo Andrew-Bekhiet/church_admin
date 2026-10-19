@@ -6,10 +6,11 @@ import 'package:graphql/client.dart';
 
 class ClassesDAO extends LegacyFullCRUDDAO<Class> {
   @override
-  late final LegacyStreamAllConfig<Class> baseStreamAllConfig = LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllClasses,
-    transformRequest: _streamAllVarsConstructor,
-  );
+  late final LegacyStreamAllConfig<Class> baseStreamAllConfig =
+      LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllClasses,
+        transformRequest: _streamAllVarsConstructor,
+      );
   @override
   late final LegacyStreamCountConfig<Class> baseStreamCountConfig =
       const LegacyStreamCountConfig(

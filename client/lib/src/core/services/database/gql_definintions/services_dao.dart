@@ -4,10 +4,11 @@ import 'package:church_admin/src/core/services/database/gql_definintions/service
 
 class ServicesDAO extends LegacyFullCRUDDAO<Service> {
   @override
-  late final LegacyStreamAllConfig<Service> baseStreamAllConfig = LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllServices,
-    transformRequest: _streamAllVarsConstructor,
-  );
+  late final LegacyStreamAllConfig<Service> baseStreamAllConfig =
+      LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllServices,
+        transformRequest: _streamAllVarsConstructor,
+      );
 
   @override
   late final LegacyStreamCountConfig<Service> baseStreamCountConfig =

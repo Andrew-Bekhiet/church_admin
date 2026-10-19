@@ -5,20 +5,22 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 class FathersDAO extends DAOBase<Father>
     with LegacyStreamableDAO<Father>, LegacyCreatableDAO<Father> {
   @override
-  LegacyStreamAllConfig<Father> get baseStreamAllConfig => const LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllFathers,
-  );
+  LegacyStreamAllConfig<Father> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllFathers,
+      );
 
   @override
   LegacyStreamSingleByIdConfig<Father> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  LegacyCreateObjectConfig<Father> get baseCreateObjectConfig => LegacyCreateObjectConfig(
-    document: documentNodeMutationcreateFather,
-    varsConstructor: _createFatherVarsConstructor,
-    parserFn: db.parser.singleParser(fromJson),
-  );
+  LegacyCreateObjectConfig<Father> get baseCreateObjectConfig =>
+      LegacyCreateObjectConfig(
+        document: documentNodeMutationcreateFather,
+        varsConstructor: _createFatherVarsConstructor,
+        parserFn: db.parser.singleParser(fromJson),
+      );
 
   FathersDAO({
     required super.db,

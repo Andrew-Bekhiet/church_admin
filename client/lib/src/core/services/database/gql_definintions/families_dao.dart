@@ -11,9 +11,10 @@ import 'package:rxdart/rxdart.dart';
 class FamiliesDAO extends LegacyFullCRUDDAO<Family>
     with DataCheckFreeDocuments<Family> {
   @override
-  final LegacyStreamAllConfig<Family> baseStreamAllConfig = const LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllFamilies,
-  );
+  final LegacyStreamAllConfig<Family> baseStreamAllConfig =
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllFamilies,
+      );
 
   @override
   late final LegacyStreamCountConfig<Family> baseStreamCountConfig =

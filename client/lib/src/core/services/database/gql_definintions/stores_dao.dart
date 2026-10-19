@@ -4,11 +4,13 @@ import 'package:church_admin/src/core/services/database/gql_definintions/stores/
 import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/subscriptions.gql.dart';
 import 'package:uuid/enums.dart';
 
-class StoresDAO extends LegacyFullCRUDDAO<Store> with DataCheckFreeDocuments<Store> {
+class StoresDAO extends LegacyFullCRUDDAO<Store>
+    with DataCheckFreeDocuments<Store> {
   @override
-  late final LegacyStreamAllConfig<Store> baseStreamAllConfig = const LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllStores,
-  );
+  late final LegacyStreamAllConfig<Store> baseStreamAllConfig =
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllStores,
+      );
 
   @override
   late final LegacyStreamCountConfig<Store> baseStreamCountConfig =
