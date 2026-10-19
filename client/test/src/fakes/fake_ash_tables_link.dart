@@ -401,7 +401,10 @@ class FakeAshTablesLink extends Link {
     ...row,
     for (final field in selections.whereType<FieldNode>())
       if (row[field.name.value] case final List related
-          when field.arguments.isNotEmpty)
+          when field.arguments.any(
+            (argument) =>
+                const {'filter', 'sort'}.contains(argument.name.value),
+          ))
         field.name.value: _arrangedList(
           table,
           related,
