@@ -5,20 +5,6 @@ part 'meetings_analysis_extra.g.dart';
 
 @JsonSerializable()
 class MeetingsAnalysisExtra extends SerializableExtra {
-  // Subjects can't be encoded to JSON, so the subject is stashed here and only
-  // its index travels through serialization.
-  static final List<MeetingsAnalysisSubject> _serializedSubjects = [];
-
-  static MeetingsAnalysisSubject _subjectFromJson(int id) =>
-      _serializedSubjects[id];
-
-  static int _subjectToJson(MeetingsAnalysisSubject subject) {
-    final id = _serializedSubjects.length;
-    _serializedSubjects.add(subject);
-
-    return id;
-  }
-
   static DateTimeRangePreset _dateRangePresetFromString(String data) {
     switch (data) {
       case 'today':
@@ -62,7 +48,6 @@ class MeetingsAnalysisExtra extends SerializableExtra {
   )
   final DateTimeRangePreset initialRangePreset;
 
-  @JsonKey(fromJson: _subjectFromJson, toJson: _subjectToJson)
   final MeetingsAnalysisSubject subject;
 
   @override
