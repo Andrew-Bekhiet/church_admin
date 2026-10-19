@@ -10,7 +10,9 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyMemberships do
   would run after the removals.
 
   The links are written without authorization (the command's policy covers
-  the person); every referenced id was checked visible beforehand.
+  the person); every referenced id was checked visible beforehand. Once all
+  are written, the added links must fit
+  (`ChurchAdmin.People.Person.Invariants.added_memberships_fit/3`).
   """
 
   use Ash.Resource.Change
@@ -18,6 +20,7 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyMemberships do
   alias ChurchAdmin.Authz.Scope
   alias ChurchAdmin.Changes.AfterActionFailure
   alias ChurchAdmin.People.{GroupMembership, Person, PersonHobby, PersonTag, ServiceMembership}
+  alias ChurchAdmin.People.Person.Invariants
 
   require Ash.Query
 
@@ -51,9 +54,21 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyMemberships do
           do: {list, Enum.uniq(ids), current_ids(list, person.id)}
 
     with :ok <- each(wanted, &add(&1, person, actor)),
-         :ok <- still_editable(changeset.action_type, person, actor) do
-      each(wanted, &remove(&1, person, actor))
+         :ok <- still_editable(changeset.action_type, person, actor),
+         :ok <- each(wanted, &remove(&1, person, actor)) do
+      Invariants.added_memberships_fit(
+        person.id,
+        added(wanted, :services),
+        added(wanted, :groups)
+      )
     end
+  end
+
+  defp added(wanted, argument) do
+    Enum.find_value(wanted, [], fn
+      {{^argument, _, _, _, _}, ids, current} -> ids -- current
+      _other -> nil
+    end)
   end
 
   defp each(wanted, fun) do
