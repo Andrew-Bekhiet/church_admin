@@ -2,13 +2,21 @@ defmodule ChurchAdmin.People.MainContact do
   use Ash.Resource,
     domain: ChurchAdmin.People,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
+  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.People.Person
   alias ChurchAdmin.Types.Text
 
   graphql do
     type :main_contact
+
+    relationships [:person]
+
+    queries do
+      list :main_contacts, :read
+    end
   end
 
   postgres do
@@ -18,7 +26,25 @@ defmodule ChurchAdmin.People.MainContact do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :person, entity: :person, access: :read}
+    end
   end
 
   attributes do
