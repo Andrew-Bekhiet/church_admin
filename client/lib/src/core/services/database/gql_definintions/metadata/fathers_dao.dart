@@ -3,22 +3,24 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/fathers/__generated__/subscriptions.gql.dart';
 
 class FathersDAO extends DAOBase<Father>
-    with StreamableDAO<Father>, CreatableDAO<Father> {
+    with LegacyStreamableDAO<Father>, LegacyCreatableDAO<Father> {
   @override
-  StreamAllConfig<Father> get baseStreamAllConfig => const StreamAllConfig(
-    document: documentNodeSubscriptionwatchAllFathers,
-  );
+  LegacyStreamAllConfig<Father> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllFathers,
+      );
 
   @override
-  StreamSingleByIdConfig<Father> get baseStreamSingleByIdConfig =>
+  LegacyStreamSingleByIdConfig<Father> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  CreateObjectConfig<Father> get baseCreateObjectConfig => CreateObjectConfig(
-    document: documentNodeMutationcreateFather,
-    varsConstructor: _createFatherVarsConstructor,
-    parserFn: db.parser.singleParser(fromJson),
-  );
+  LegacyCreateObjectConfig<Father> get baseCreateObjectConfig =>
+      LegacyCreateObjectConfig(
+        document: documentNodeMutationcreateFather,
+        varsConstructor: _createFatherVarsConstructor,
+        parserFn: db.parser.singleParser(fromJson),
+      );
 
   FathersDAO({
     required super.db,

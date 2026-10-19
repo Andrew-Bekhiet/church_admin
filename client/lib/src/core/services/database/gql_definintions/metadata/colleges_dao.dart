@@ -3,21 +3,23 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/colleges/__generated__/subscriptions.gql.dart';
 
 class CollegesDAO extends DAOBase<College>
-    with StreamableDAO<College>, CreatableDAO<College> {
+    with LegacyStreamableDAO<College>, LegacyCreatableDAO<College> {
   @override
-  StreamAllConfig<College> get baseStreamAllConfig => const StreamAllConfig(
-    document: documentNodeSubscriptionwatchAllColleges,
-  );
+  LegacyStreamAllConfig<College> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllColleges,
+      );
   @override
-  StreamSingleByIdConfig<College> get baseStreamSingleByIdConfig =>
+  LegacyStreamSingleByIdConfig<College> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  CreateObjectConfig<College> get baseCreateObjectConfig => CreateObjectConfig(
-    document: documentNodeMutationcreateCollege,
-    varsConstructor: _createCollegeVarsConstructor,
-    parserFn: db.parser.singleParser(fromJson),
-  );
+  LegacyCreateObjectConfig<College> get baseCreateObjectConfig =>
+      LegacyCreateObjectConfig(
+        document: documentNodeMutationcreateCollege,
+        varsConstructor: _createCollegeVarsConstructor,
+        parserFn: db.parser.singleParser(fromJson),
+      );
 
   CollegesDAO({
     required super.db,

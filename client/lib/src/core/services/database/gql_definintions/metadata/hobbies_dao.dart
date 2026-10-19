@@ -3,21 +3,23 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/hobbies/__generated__/subscriptions.gql.dart';
 
 class HobbiesDAO extends DAOBase<Hobby>
-    with StreamableDAO<Hobby>, CreatableDAO<Hobby> {
+    with LegacyStreamableDAO<Hobby>, LegacyCreatableDAO<Hobby> {
   @override
-  StreamAllConfig<Hobby> get baseStreamAllConfig => const StreamAllConfig(
-    document: documentNodeSubscriptionwatchAllHobbies,
-  );
+  LegacyStreamAllConfig<Hobby> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllHobbies,
+      );
   @override
-  StreamSingleByIdConfig<Hobby> get baseStreamSingleByIdConfig =>
+  LegacyStreamSingleByIdConfig<Hobby> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  CreateObjectConfig<Hobby> get baseCreateObjectConfig => CreateObjectConfig(
-    document: documentNodeMutationcreateHobby,
-    varsConstructor: _createHobbyVarsConstructor,
-    parserFn: db.parser.singleParser(fromJson, 'insertHobbiesOne'),
-  );
+  LegacyCreateObjectConfig<Hobby> get baseCreateObjectConfig =>
+      LegacyCreateObjectConfig(
+        document: documentNodeMutationcreateHobby,
+        varsConstructor: _createHobbyVarsConstructor,
+        parserFn: db.parser.singleParser(fromJson, 'insertHobbiesOne'),
+      );
 
   HobbiesDAO({
     required super.db,

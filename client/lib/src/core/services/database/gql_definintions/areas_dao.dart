@@ -4,39 +4,40 @@ import 'package:church_admin/src/core/services/database/gql_definintions/areas/_
 import 'package:church_admin/src/core/services/database/gql_definintions/areas/area_insert_helper.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/areas/area_update_helper.dart';
 
-class AreasDAO extends FullCRUDDAO<Area> {
+class AreasDAO extends LegacyFullCRUDDAO<Area> {
   @override
-  late final StreamAllConfig<Area> baseStreamAllConfig = const StreamAllConfig(
-    document: documentNodeSubscriptionwatchAllAreas,
-  );
+  late final LegacyStreamAllConfig<Area> baseStreamAllConfig =
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllAreas,
+      );
 
   @override
-  late final StreamCountConfig<Area> baseStreamCountConfig =
-      const StreamCountConfig(
+  late final LegacyStreamCountConfig<Area> baseStreamCountConfig =
+      const LegacyStreamCountConfig(
         document: documentNodeSubscriptionwatchAreasCount,
       );
 
   @override
-  late final StreamSingleByIdConfig<Area> baseStreamSingleByIdConfig =
-      StreamSingleByIdConfig(
+  late final LegacyStreamSingleByIdConfig<Area> baseStreamSingleByIdConfig =
+      LegacyStreamSingleByIdConfig(
         document: documentNodeSubscriptionwatchArea,
         varsConstructor: _streamSingleByIdVarsConstructor,
       );
   @override
-  late final DeleteSingleByIdConfig<Area> baseDeleteSingleByIdConfig =
-      DeleteSingleByIdConfig(
+  late final LegacyDeleteSingleByIdConfig<Area> baseDeleteSingleByIdConfig =
+      LegacyDeleteSingleByIdConfig(
         document: documentNodeMutationdeleteArea,
         varsConstructor: _deleteSingleByIdVarsConstructor,
       );
   @override
-  late final UpdateObjectConfig<Area> baseUpdateObjectConfig =
-      UpdateObjectConfig(
+  late final LegacyUpdateObjectConfig<Area> baseUpdateObjectConfig =
+      LegacyUpdateObjectConfig(
         document: documentNodeMutationupdateArea,
         varsConstructor: _updateAreaVarsConstructor,
       );
   @override
-  late final CreateObjectConfig<Area> baseCreateObjectConfig =
-      CreateObjectConfig(
+  late final LegacyCreateObjectConfig<Area> baseCreateObjectConfig =
+      LegacyCreateObjectConfig(
         document: documentNodeMutationinsertArea,
         varsConstructor: _createAreaVarsConstructor,
       );

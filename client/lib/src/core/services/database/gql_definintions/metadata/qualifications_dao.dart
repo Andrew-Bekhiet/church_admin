@@ -3,19 +3,19 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/qualifications/__generated__/subscriptions.gql.dart';
 
 class QualificationsDAO extends DAOBase<Qualification>
-    with StreamableDAO<Qualification>, CreatableDAO<Qualification> {
+    with LegacyStreamableDAO<Qualification>, LegacyCreatableDAO<Qualification> {
   @override
-  StreamAllConfig<Qualification> get baseStreamAllConfig =>
-      const StreamAllConfig(
+  LegacyStreamAllConfig<Qualification> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
         document: documentNodeSubscriptionwatchAllQualifications,
       );
   @override
-  StreamSingleByIdConfig<Qualification> get baseStreamSingleByIdConfig =>
+  LegacyStreamSingleByIdConfig<Qualification> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  CreateObjectConfig<Qualification> get baseCreateObjectConfig =>
-      CreateObjectConfig(
+  LegacyCreateObjectConfig<Qualification> get baseCreateObjectConfig =>
+      LegacyCreateObjectConfig(
         document: documentNodeMutationcreateQualification,
         varsConstructor: _createQualificationVarsConstructor,
         parserFn: db.parser.singleParser(fromJson),

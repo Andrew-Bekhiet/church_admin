@@ -4,43 +4,45 @@ import 'package:church_admin/src/core/services/database/gql_definintions/stores/
 import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/subscriptions.gql.dart';
 import 'package:uuid/enums.dart';
 
-class StoresDAO extends FullCRUDDAO<Store> with DataCheckFreeDocuments<Store> {
+class StoresDAO extends LegacyFullCRUDDAO<Store>
+    with DataCheckFreeDocuments<Store> {
   @override
-  late final StreamAllConfig<Store> baseStreamAllConfig = const StreamAllConfig(
-    document: documentNodeSubscriptionwatchAllStores,
-  );
+  late final LegacyStreamAllConfig<Store> baseStreamAllConfig =
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllStores,
+      );
 
   @override
-  late final StreamCountConfig<Store> baseStreamCountConfig =
-      const StreamCountConfig(
+  late final LegacyStreamCountConfig<Store> baseStreamCountConfig =
+      const LegacyStreamCountConfig(
         document: documentNodeSubscriptionwatchStoresCount,
       );
 
   @override
-  late final StreamSingleByIdConfig<Store> baseStreamSingleByIdConfig =
-      StreamSingleByIdConfig(
+  late final LegacyStreamSingleByIdConfig<Store> baseStreamSingleByIdConfig =
+      LegacyStreamSingleByIdConfig(
         document: documentNodeSubscriptionwatchStore,
         varsConstructor: _streamSingleByIdVarsConstructor,
       );
 
   @override
-  late final DeleteSingleByIdConfig<Store> baseDeleteSingleByIdConfig =
-      DeleteSingleByIdConfig(
+  late final LegacyDeleteSingleByIdConfig<Store> baseDeleteSingleByIdConfig =
+      LegacyDeleteSingleByIdConfig(
         document: documentNodeMutationdeleteStore,
         varsConstructor: _deleteSingleByIdVarsConstructor,
       );
 
   @override
-  late final UpdateObjectConfig<Store> baseUpdateObjectConfig =
-      UpdateObjectConfig(
+  late final LegacyUpdateObjectConfig<Store> baseUpdateObjectConfig =
+      LegacyUpdateObjectConfig(
         document: documentNodeMutationupdateStore,
         varsConstructor: _updateStoreVarsConstructor,
         parserFn: db.parser.singleOrNullParser(fromJson, 'updateStoresByPk'),
       );
 
   @override
-  late final CreateObjectConfig<Store> baseCreateObjectConfig =
-      CreateObjectConfig(
+  late final LegacyCreateObjectConfig<Store> baseCreateObjectConfig =
+      LegacyCreateObjectConfig(
         document: documentNodeMutationinsertStore,
         varsConstructor: _createStoreVarsConstructor,
       );

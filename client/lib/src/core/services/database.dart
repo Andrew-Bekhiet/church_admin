@@ -1,6 +1,8 @@
 export '../../features/advanced_search/application/advanced_query_parser.dart';
 export 'database/arranged_list_document.dart';
+export 'database/ash.dart';
 export 'database/ash_query.dart';
+export 'database/backend_exception.dart';
 export 'database/dao_base.dart';
 export 'database/dao_bases.dart';
 export 'database/db_graphql_client.dart';
@@ -12,4 +14,5 @@ export 'database/gql_selection_node.dart';
 export 'database/graphql_visitors.dart';
 export 'database/iterable_difference_result.dart';
 export 'database/methods_templates.dart';
+export 'database/realtime.dart';
 export 'database/string_to_uuid.dart';

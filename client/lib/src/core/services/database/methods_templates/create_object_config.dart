@@ -1,44 +1,32 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
-import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
 
 @immutable
 class CreateObjectConfig<T> extends DAOMethodTemplate<T> {
-  final CreateObjectConfigVarsConstructor<T>? varsConstructor;
-  final MutationOptions<T>? operationOptions;
+  final ObjectVarsConstructor<T> varsConstructor;
 
   @override
   T Function(Json)? get parserFn => super.parserFn as T Function(Json)?;
 
   const CreateObjectConfig({
+    required this.varsConstructor,
     required super.document,
-    this.varsConstructor,
-    this.operationOptions,
     super.operationName,
-    super.variables,
     T Function(Json)? super.parserFn,
   });
 
   CreateObjectConfig<T> copyWith({
     DocumentNode? document,
     String? operationName,
-    Json? variables,
-    CreateObjectConfigVarsConstructor<T>? varsConstructor,
-    MutationOptions<T>? operationOptions,
+    ObjectVarsConstructor<T>? varsConstructor,
     T Function(Json)? parserFn,
-  }) {
-    return CreateObjectConfig<T>(
-      document: document ?? this.document,
-      operationName: operationName ?? super.effectiveOperationName,
-      variables: variables ?? this.variables,
-      varsConstructor: varsConstructor ?? this.varsConstructor,
-      operationOptions: operationOptions ?? this.operationOptions,
-      parserFn: parserFn ?? this.parserFn,
-    );
-  }
+  }) => CreateObjectConfig<T>(
+    document: document ?? this.document,
+    operationName: operationName ?? effectiveOperationName,
+    varsConstructor: varsConstructor ?? this.varsConstructor,
+    parserFn: parserFn ?? this.parserFn,
+  );
 }
 
-typedef CreateObjectConfigVarsConstructor<T> = Json Function({
-  required T newObject,
-});
+typedef ObjectVarsConstructor<T> = Json Function({required T newObject});

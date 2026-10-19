@@ -1,46 +1,32 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class StreamAllConfig<T>
-    extends DAOMethodTemplate<PaginatableStreamResponse<T>> {
-  final StreamAllConfigVarsConstructor<T>? transformRequest;
-  final SubscriptionOptions<PaginatableStreamResponse<T>>? operationOptions;
-
-  @override
-  PaginatableStreamResponse<T> Function(Json)? get parserFn =>
-      super.parserFn as PaginatableStreamResponse<T> Function(Json)?;
+class StreamAllConfig<T> extends DAOMethodTemplate<KeysetPage<T>> {
+  final ListQueryArgumentsBuilder<T> arguments;
 
   const StreamAllConfig({
+    required this.arguments,
     required super.document,
-    this.transformRequest,
-    this.operationOptions,
     super.operationName,
     super.variables,
-    PaginatableStreamResponse<T> Function(Json)? super.parserFn,
   });
 
   StreamAllConfig<T> copyWith({
     DocumentNode? document,
     String? operationName,
     Json? variables,
-    StreamAllConfigVarsConstructor<T>? transformRequest,
-    SubscriptionOptions<PaginatableStreamResponse<T>>? operationOptions,
-    PaginatableStreamResponse<T> Function(Json)? parserFn,
-  }) {
-    return StreamAllConfig<T>(
-      document: document ?? this.document,
-      operationName: operationName ?? super.effectiveOperationName,
-      variables: variables ?? this.variables,
-      transformRequest: transformRequest ?? this.transformRequest,
-      operationOptions: operationOptions ?? this.operationOptions,
-      parserFn: parserFn ?? this.parserFn,
-    );
-  }
-}
+    ListQueryArgumentsBuilder<T>? arguments,
+  }) => StreamAllConfig<T>(
+    document: document ?? this.document,
+    operationName: operationName ?? effectiveOperationName,
+    variables: variables ?? this.variables,
+    arguments: arguments ?? this.arguments,
+  );
 
-typedef StreamAllConfigVarsConstructor<T> = Json Function(
-  PaginatableStreamRequest<T, StreamableDAOParameters<T>?> request,
-);
+  Json variablesFor(StreamableDAOParameters<T>? parameters) => {
+    ...?variables,
+    ...arguments(parameters).toVariables(),
+  };
+}

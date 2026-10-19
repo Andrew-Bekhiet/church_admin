@@ -2,21 +2,24 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/tags/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/tags/__generated__/subscriptions.gql.dart';
 
-class TagsDAO extends DAOBase<Tag> with StreamableDAO<Tag>, CreatableDAO<Tag> {
+class TagsDAO extends DAOBase<Tag>
+    with LegacyStreamableDAO<Tag>, LegacyCreatableDAO<Tag> {
   @override
-  StreamAllConfig<Tag> get baseStreamAllConfig => const StreamAllConfig(
-    document: documentNodeSubscriptionwatchAllTags,
-  );
+  LegacyStreamAllConfig<Tag> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllTags,
+      );
   @override
-  StreamSingleByIdConfig<Tag> get baseStreamSingleByIdConfig =>
+  LegacyStreamSingleByIdConfig<Tag> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  CreateObjectConfig<Tag> get baseCreateObjectConfig => CreateObjectConfig(
-    document: documentNodeMutationcreateTag,
-    varsConstructor: _createTagVarsConstructor,
-    parserFn: db.parser.singleParser(fromJson, 'insertTagsOne'),
-  );
+  LegacyCreateObjectConfig<Tag> get baseCreateObjectConfig =>
+      LegacyCreateObjectConfig(
+        document: documentNodeMutationcreateTag,
+        varsConstructor: _createTagVarsConstructor,
+        parserFn: db.parser.singleParser(fromJson, 'insertTagsOne'),
+      );
 
   TagsDAO({
     required super.db,

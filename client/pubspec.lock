@@ -2028,6 +2028,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.1.0"
+  phoenix_socket:
+    dependency: "direct main"
+    description:
+      name: phoenix_socket
+      sha256: befa09b9861b69f922e8b4854de3e40bf9601e381a89460dacdd1198799ca28a
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.0"
   phone_form_field:
     dependency: "direct main"
     description:
@@ -2786,7 +2794,7 @@ packages:
     source: hosted
     version: "1.0.1"
   web_socket_channel:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: web_socket_channel
       sha256: d645757fb0f4773d602444000a8131ff5d48c9e47adfe9772652dd1a4f2d45c8
