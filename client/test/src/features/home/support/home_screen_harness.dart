@@ -122,12 +122,14 @@ class HomeScreenHarness {
     if (settle) await tester.pumpAndSettle();
   }
 
+  Future<void> openSheet(WidgetTester tester, Key cardKey) async {
+    await pump(tester);
+    await openSummarySection(tester, cardKey);
+  }
+
   Future<void> openSummarySection(WidgetTester tester, Key sectionKey) async {
-    final text = find.descendant(
-      of: find.byKey(sectionKey),
-      matching: find.byType(Text),
-    );
-    await tester.tap(text.last);
+    await tester.ensureVisible(find.byKey(sectionKey));
+    await tester.tap(find.byKey(sectionKey));
     await tester.pumpAndSettle();
   }
 

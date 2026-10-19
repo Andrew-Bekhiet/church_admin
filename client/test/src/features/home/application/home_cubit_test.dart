@@ -332,6 +332,31 @@ void main() {
     );
   });
 
+  group('opening the first tab of a mode', () {
+    blocTest<HomeCubit, HomeState>(
+      'from the summary lands on the first list tab of church data',
+      build: () => fixture.buildCubit(),
+      act: (cubit) => cubit.openFirstTabOf(HomeMode.churchData),
+      wait: Duration.zero,
+      verify: (cubit) {
+        expect(cubit.state.mode, HomeMode.churchData);
+        expect(cubit.state.currentTab, HomeTab.areas);
+        expect(fixture.preferences.lastHomeMode, HomeMode.churchData);
+      },
+    );
+
+    blocTest<HomeCubit, HomeState>(
+      'of the mode already active lands on its first list tab',
+      build: () => fixture.buildCubit(),
+      act: (cubit) => cubit.openFirstTabOf(HomeMode.sundaySchool),
+      wait: Duration.zero,
+      verify: (cubit) {
+        expect(cubit.state.mode, HomeMode.sundaySchool);
+        expect(cubit.state.currentTab, HomeTab.services);
+      },
+    );
+  });
+
   group('list type', () {
     blocTest<HomeCubit, HomeState>(
       'a list type chosen on the services tab is kept after switching mode '

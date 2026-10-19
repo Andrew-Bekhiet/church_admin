@@ -15,7 +15,7 @@ abstract final class E2eApp {
     LoginScreenKeys.loginSignupButtonKey,
   );
   static final Finder homeScreen = find.byKey(
-    HomeScreenSummaryKeys.churchDataButtonKey,
+    HomeModeCardsKeys.churchDataButtonKey,
   );
   static const _maxUnlocksWhileLeaving = 3;
 

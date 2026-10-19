@@ -25,12 +25,8 @@ class HomeDrawer extends StatelessWidget {
             <({NavigationDrawerDestination destination, VoidCallback onTap})>[
               (
                 destination: NavigationDrawerDestination(
-                  icon: const Icon(Symbols.home),
-                  label: Text(
-                    state.mode == HomeMode.sundaySchool
-                        ? 'تبديل إلى الافتقاد'
-                        : 'تبديل إلى مدارس الأحد',
-                  ),
+                  icon: Icon(state.mode.other.icon),
+                  label: Text('تبديل إلى ${state.mode.other.label}'),
                 ),
                 onTap: () => unawaited(homeCubit.switchMode()),
               ),
@@ -136,6 +132,7 @@ class HomeDrawer extends StatelessWidget {
                 ),
                 SessionReplayUnmask(
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       ListTile(
                         leading: const Icon(Symbols.info),
