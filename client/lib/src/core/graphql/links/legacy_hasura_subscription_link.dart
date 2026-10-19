@@ -26,6 +26,12 @@ class LegacyHasuraSubscriptionLink extends Link {
   Stream<String?> get _idTokenStream =>
       _credentialsStream.map((credentials) => credentials?.idToken);
 
+  String get _webSocketUrl {
+    final uri = Uri.parse(url);
+
+    return uri.replace(scheme: uri.isScheme('https') ? 'wss' : 'ws').toString();
+  }
+
   LegacyHasuraSubscriptionLink({
     required this.url,
     required Stream<AuthLinkCredentials?> credentialsStream,
@@ -46,12 +52,6 @@ class LegacyHasuraSubscriptionLink extends Link {
     _wsLink ??= createWSLink(_webSocketUrl, _createWSConfig());
 
     return _wsLink!.request(request, forward);
-  }
-
-  String get _webSocketUrl {
-    final uri = Uri.parse(url);
-
-    return uri.replace(scheme: uri.isScheme('https') ? 'wss' : 'ws').toString();
   }
 
   SocketClientConfig _createWSConfig() {

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -35,8 +37,8 @@ void main() {
       expect(sentWhileSignedOut, isEmpty);
       expect(httpLink.sentAuthorizations, ['Bearer signedInToken']);
 
-      unit.dispose();
-      credentials.close();
+      unawaited(unit.dispose());
+      unawaited(credentials.close());
     });
   });
 
@@ -64,8 +66,8 @@ void main() {
         'Bearer refreshedIdToken',
       ]);
 
-      unit.dispose();
-      credentials.close();
+      unawaited(unit.dispose());
+      unawaited(credentials.close());
     });
   });
 

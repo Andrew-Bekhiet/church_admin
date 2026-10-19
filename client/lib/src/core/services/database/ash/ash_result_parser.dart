@@ -4,10 +4,6 @@ import 'package:gql/ast.dart';
 class AshResultParser {
   static final _rootFields = Expando<String>();
 
-  final String rootField;
-
-  AshResultParser(DocumentNode document) : rootField = rootFieldOf(document);
-
   static String rootFieldOf(DocumentNode document) =>
       _rootFields[document] ??= switch (document.definitions
           .whereType<OperationDefinitionNode>()
@@ -19,6 +15,10 @@ class AshResultParser {
         FieldNode(:final alias?) => alias.value,
         FieldNode(:final name) => name.value,
       };
+
+  final String rootField;
+
+  AshResultParser(DocumentNode document) : rootField = rootFieldOf(document);
 
   KeysetPage<T> Function(Json data) page<T>(T Function(Json) fromJson) =>
       (data) {

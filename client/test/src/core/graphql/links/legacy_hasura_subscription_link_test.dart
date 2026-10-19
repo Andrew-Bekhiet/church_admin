@@ -105,7 +105,7 @@ void main() {
     );
     addTearDown(unit.dispose);
 
-    unit.request(subscriptionRequest()).listen(null).cancel();
+    unawaited(unit.request(subscriptionRequest()).listen(null).cancel());
 
     expect(connectedUrl, 'wss://example.com/gql');
   });
