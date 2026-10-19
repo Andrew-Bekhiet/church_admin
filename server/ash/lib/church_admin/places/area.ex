@@ -16,7 +16,7 @@ defmodule ChurchAdmin.Places.Area do
   graphql do
     type :area
 
-    relationships [:addresses, :area_streets, :streets, :admins]
+    relationships [:addresses, :area_streets, :streets, :admins, :latest_edit, :edits]
 
     queries do
       get :area, :read

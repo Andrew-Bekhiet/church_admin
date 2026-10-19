@@ -12,7 +12,7 @@ defmodule ChurchAdmin.People.GroupMembership do
   graphql do
     type :group_membership
 
-    relationships [:person]
+    relationships [:person, :group]
 
     queries do
       list :group_memberships, :read

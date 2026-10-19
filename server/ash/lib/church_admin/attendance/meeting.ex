@@ -14,7 +14,7 @@ defmodule ChurchAdmin.Attendance.Meeting do
   graphql do
     type :meeting
 
-    relationships [:attendance_records, :days, :roster_entries]
+    relationships [:attendance_records, :days, :roster_entries, :service, :group, :study_year]
 
     queries do
       get :meeting, :read

@@ -55,6 +55,7 @@ input ServiceMembershipFilterInput {
   personId: ServiceMembershipFilterPersonId
   serviceId: ServiceMembershipFilterServiceId
   person: PersonFilterInput
+  service: ServiceFilterInput
 }
 
 input ServiceMembershipSortInput {
@@ -66,6 +67,7 @@ type ServiceMembership {
   personId: ID!
   serviceId: ID!
   person: Person
+  service: Service
 }
 
 enum FamilyContactSortField {
@@ -989,8 +991,16 @@ input PersonFilterInput {
   family: FamilyFilterInput
   user: UserFilterInput
   address: AddressFilterInput
+  dataCheck: DataCheckFilterInput
+  mainContact: MainContactFilterInput
+  contacts: ContactFilterInput
+  familyContacts: FamilyContactFilterInput
+  attendanceRecords: AttendanceRecordFilterInput
+  classMemberships: ClassMembershipFilterInput
   groupMemberships: GroupMembershipFilterInput
   serviceMemberships: ServiceMembershipFilterInput
+  hobbies: HobbyFilterInput
+  tags: TagFilterInput
   userCanEdit: PersonFilterUserCanEdit
 }
 
@@ -1032,6 +1042,60 @@ type Person {
   family: Family
   user: User
   address: Address
+  dataCheck: DataCheck
+  mainContact: MainContact
+  contacts(
+    "How to sort the records in the response"
+    sort: [ContactSortInput]
+
+    "A filter to limit the results"
+    filter: ContactFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Contact!]!
+  familyContacts(
+    "How to sort the records in the response"
+    sort: [FamilyContactSortInput]
+
+    "A filter to limit the results"
+    filter: FamilyContactFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [FamilyContact!]!
+  attendanceRecords(
+    "How to sort the records in the response"
+    sort: [AttendanceRecordSortInput]
+
+    "A filter to limit the results"
+    filter: AttendanceRecordFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [AttendanceRecord!]!
+  classMemberships(
+    "How to sort the records in the response"
+    sort: [ClassMembershipSortInput]
+
+    "A filter to limit the results"
+    filter: ClassMembershipFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [ClassMembership!]!
   groupMemberships(
     "How to sort the records in the response"
     sort: [GroupMembershipSortInput]
@@ -1058,6 +1122,32 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [ServiceMembership!]!
+  hobbies(
+    "How to sort the records in the response"
+    sort: [HobbySortInput]
+
+    "A filter to limit the results"
+    filter: HobbyFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Hobby!]!
+  tags(
+    "How to sort the records in the response"
+    sort: [TagSortInput]
+
+    "A filter to limit the results"
+    filter: TagFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Tag!]!
   userCanEdit: Boolean!
 }
 
@@ -1221,6 +1311,7 @@ input GroupMembershipFilterInput {
   not: [GroupMembershipFilterInput!]
   personId: GroupMembershipFilterPersonId
   groupId: GroupMembershipFilterGroupId
+  group: GroupFilterInput
   person: PersonFilterInput
 }
 
@@ -1232,6 +1323,7 @@ input GroupMembershipSortInput {
 type GroupMembership {
   personId: ID!
   groupId: ID!
+  group: Group
   person: Person
 }
 
@@ -1557,6 +1649,10 @@ input FamilyFilterInput {
   marriageDate: FamilyFilterMarriageDate
   churchId: FamilyFilterChurchId
   address: AddressFilterInput
+  dataCheck: DataCheckFilterInput
+  children: FamilyFilterInput
+  parents: FamilyFilterInput
+  unclaimedContacts: ContactFilterInput
   persons: PersonFilterInput
   userCanEdit: FamilyFilterUserCanEdit
 }
@@ -1578,6 +1674,46 @@ type Family {
   marriageDate: Date
   churchId: ID
   address: Address
+  dataCheck: DataCheck
+  children(
+    "How to sort the records in the response"
+    sort: [FamilySortInput]
+
+    "A filter to limit the results"
+    filter: FamilyFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Family!]!
+  parents(
+    "How to sort the records in the response"
+    sort: [FamilySortInput]
+
+    "A filter to limit the results"
+    filter: FamilyFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Family!]!
+  unclaimedContacts(
+    "How to sort the records in the response"
+    sort: [ContactSortInput]
+
+    "A filter to limit the results"
+    filter: ContactFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Contact!]!
   persons(
     "How to sort the records in the response"
     sort: [PersonSortInput]
@@ -2095,9 +2231,11 @@ input ServiceFilterInput {
   photoUpdatedAt: ServiceFilterPhotoUpdatedAt
   blurhash: ServiceFilterBlurhash
   defaultMeetingId: ServiceFilterDefaultMeetingId
+  defaultMeeting: MeetingFilterInput
   nextService: ServiceFilterInput
   classes: ClassFilterInput
   groups: GroupFilterInput
+  meetings: MeetingFilterInput
   serviceMemberships: ServiceMembershipFilterInput
   admins: UserFilterInput
   latestEdit: LatestEditFilterInput
@@ -2122,6 +2260,7 @@ type Service {
   photoUpdatedAt: DateTime
   blurhash: String
   defaultMeetingId: ID
+  defaultMeeting: Meeting
   nextService: Service
   classes(
     "How to sort the records in the response"
@@ -2149,6 +2288,19 @@ type Service {
     "The number of records to skip."
     offset: Int
   ): [Group!]!
+  meetings(
+    "How to sort the records in the response"
+    sort: [MeetingSortInput]
+
+    "A filter to limit the results"
+    filter: MeetingFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Meeting!]!
   serviceMemberships(
     "How to sort the records in the response"
     sort: [ServiceMembershipSortInput]
@@ -2367,7 +2519,9 @@ input GroupFilterInput {
   photoUpdatedAt: GroupFilterPhotoUpdatedAt
   blurhash: GroupFilterBlurhash
   defaultMeetingId: GroupFilterDefaultMeetingId
+  defaultMeeting: MeetingFilterInput
   service: ServiceFilterInput
+  meetings: MeetingFilterInput
   groupMemberships: GroupMembershipFilterInput
   admins: UserFilterInput
   latestEdit: LatestEditFilterInput
@@ -2389,7 +2543,21 @@ type Group {
   photoUpdatedAt: DateTime
   blurhash: String
   defaultMeetingId: ID
+  defaultMeeting: Meeting
   service: Service
+  meetings(
+    "How to sort the records in the response"
+    sort: [MeetingSortInput]
+
+    "A filter to limit the results"
+    filter: MeetingFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Meeting!]!
   groupMemberships(
     "How to sort the records in the response"
     sort: [GroupMembershipSortInput]
@@ -2651,6 +2819,7 @@ input ClassFilterInput {
   serviceStudyYearTo: ClassFilterServiceStudyYearTo
   service: ServiceFilterInput
   classMemberships: ClassMembershipFilterInput
+  meetings: MeetingFilterInput
   latestEdit: LatestEditFilterInput
   admins: UserFilterInput
   serviceName: ClassFilterServiceName
@@ -2688,6 +2857,19 @@ type Class {
     "The number of records to skip."
     offset: Int
   ): [ClassMembership!]!
+  meetings(
+    "How to sort the records in the response"
+    sort: [MeetingSortInput]
+
+    "A filter to limit the results"
+    filter: MeetingFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Meeting!]!
   latestEdit: LatestEdit
   admins(
     "How to sort the records in the response"
@@ -2886,6 +3068,10 @@ input StreetFilterInput {
   addresses: AddressFilterInput
   areaStreets: AreaStreetFilterInput
   areas: AreaFilterInput
+  latestEdit: LatestEditFilterInput
+  edits: EditFilterInput
+  latestVisit: LatestVisitFilterInput
+  visits: VisitFilterInput
   userCanEdit: StreetFilterUserCanEdit
   withinPolygon: StreetFilterWithinPolygon
   withinDistance: StreetFilterWithinDistance
@@ -2944,6 +3130,34 @@ type Street {
     "The number of records to skip."
     offset: Int
   ): [Area!]!
+  latestEdit: LatestEdit
+  edits(
+    "How to sort the records in the response"
+    sort: [EditSortInput]
+
+    "A filter to limit the results"
+    filter: EditFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Edit!]!
+  latestVisit: LatestVisit
+  visits(
+    "How to sort the records in the response"
+    sort: [VisitSortInput]
+
+    "A filter to limit the results"
+    filter: VisitFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Visit!]!
   userCanEdit: Boolean!
   withinPolygon(polygon: Json!): Boolean
   withinDistance(from: Json!, meters: Float!): Boolean
@@ -3163,6 +3377,10 @@ input StoreFilterInput {
   blurhash: StoreFilterBlurhash
   adminFamily: FamilyFilterInput
   address: AddressFilterInput
+  latestEdit: LatestEditFilterInput
+  edits: EditFilterInput
+  latestVisit: LatestVisitFilterInput
+  visits: VisitFilterInput
   addressAreaName: StoreFilterAddressAreaName
   addressStreetName: StoreFilterAddressStreetName
   addressDistrictName: StoreFilterAddressDistrictName
@@ -3185,6 +3403,34 @@ type Store {
   blurhash: String
   adminFamily: Family
   address: Address
+  latestEdit: LatestEdit
+  edits(
+    "How to sort the records in the response"
+    sort: [EditSortInput]
+
+    "A filter to limit the results"
+    filter: EditFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Edit!]!
+  latestVisit: LatestVisit
+  visits(
+    "How to sort the records in the response"
+    sort: [VisitSortInput]
+
+    "A filter to limit the results"
+    filter: VisitFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Visit!]!
   addressAreaName: String
   addressStreetName: String
   addressDistrictName: String
@@ -3527,6 +3773,8 @@ input AreaFilterInput {
   areaStreets: AreaStreetFilterInput
   streets: StreetFilterInput
   admins: UserFilterInput
+  latestEdit: LatestEditFilterInput
+  edits: EditFilterInput
   userCanEdit: AreaFilterUserCanEdit
   withinPolygon: AreaFilterWithinPolygon
   containsPoint: AreaFilterContainsPoint
@@ -3598,6 +3846,20 @@ type Area {
     "The number of records to skip."
     offset: Int
   ): [User!]!
+  latestEdit: LatestEdit
+  edits(
+    "How to sort the records in the response"
+    sort: [EditSortInput]
+
+    "A filter to limit the results"
+    filter: EditFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Edit!]!
   userCanEdit: Boolean!
   withinPolygon(polygon: Json!): Boolean
   containsPoint(point: Json!): Boolean
@@ -4471,6 +4733,9 @@ input MeetingFilterInput {
   isArchived: MeetingFilterIsArchived
   color: MeetingFilterColor
   showKodasCheckbox: MeetingFilterShowKodasCheckbox
+  group: GroupFilterInput
+  service: ServiceFilterInput
+  studyYear: StudyYearFilterInput
   attendanceRecords: AttendanceRecordFilterInput
   days: MeetingDayFilterInput
   rosterEntries: RosterEntryFilterInput
@@ -4492,6 +4757,9 @@ type Meeting {
   isArchived: Boolean!
   color: Int
   showKodasCheckbox: Boolean!
+  group: Group
+  service: Service
+  studyYear: StudyYear
   attendanceRecords(
     "How to sort the records in the response"
     sort: [AttendanceRecordSortInput]

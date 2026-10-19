@@ -18,7 +18,7 @@ defmodule ChurchAdmin.People.Family do
   graphql do
     type :family
 
-    relationships [:persons, :address]
+    relationships [:persons, :address, :data_check, :children, :parents, :unclaimed_contacts]
 
     queries do
       get :family, :read

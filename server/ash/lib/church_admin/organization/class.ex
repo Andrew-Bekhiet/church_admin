@@ -18,7 +18,7 @@ defmodule ChurchAdmin.Organization.Class do
   graphql do
     type :class
 
-    relationships [:service, :class_memberships, :admins, :latest_edit]
+    relationships [:service, :class_memberships, :admins, :latest_edit, :meetings]
 
     queries do
       get :class, :read

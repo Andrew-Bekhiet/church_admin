@@ -67,7 +67,15 @@ defmodule ChurchAdmin.People.Person do
       :address,
       :user,
       :service_memberships,
-      :group_memberships
+      :group_memberships,
+      :class_memberships,
+      :data_check,
+      :attendance_records,
+      :contacts,
+      :hobbies,
+      :tags,
+      :family_contacts,
+      :main_contact
     ]
 
     queries do

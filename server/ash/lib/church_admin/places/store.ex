@@ -17,7 +17,7 @@ defmodule ChurchAdmin.Places.Store do
   graphql do
     type :store
 
-    relationships [:address, :admin_family]
+    relationships [:address, :admin_family, :latest_edit, :edits, :latest_visit, :visits]
 
     queries do
       get :store, :read
