@@ -9,9 +9,13 @@ defmodule ChurchAdmin.TestDomain do
   resources do
     resource ChurchAdmin.TestDomain.AuthzProbe
     resource ChurchAdmin.TestDomain.AuthzProbeLink
+    resource ChurchAdmin.TestDomain.EditedThing
     resource ChurchAdmin.TestDomain.ErrorProbe
+    resource ChurchAdmin.TestDomain.GuardedThing
+    resource ChurchAdmin.TestDomain.HasuraSessionProbe
     resource ChurchAdmin.TestDomain.LookupProbe
     resource ChurchAdmin.TestDomain.PersonChildProbe
-    resource ChurchAdmin.TestDomain.HasuraSessionProbe
+    resource ChurchAdmin.TestDomain.StampedNote
+    resource ChurchAdmin.TestDomain.ThingMembership
   end
 end
