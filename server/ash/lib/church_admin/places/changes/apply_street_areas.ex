@@ -49,7 +49,7 @@ defmodule ChurchAdmin.Places.Changes.ApplyStreetAreas do
   defp apply_difference(changeset, street, desired, actor) do
     stored = changeset.context.stored_area_ids
     current = area_ids(street.id)
-    to_add = (desired -- stored) -- current
+    to_add = Enum.uniq((desired -- stored) -- current)
     to_remove = (stored -- desired) |> Enum.filter(&(&1 in current))
 
     with :ok <- add(to_add, street.id, actor) do
