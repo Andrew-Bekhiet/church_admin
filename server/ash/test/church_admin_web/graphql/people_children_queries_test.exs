@@ -95,6 +95,47 @@ defmodule ChurchAdminWeb.Graphql.PeopleChildrenQueriesTest do
     assert orders == Enum.sort(orders, :asc)
   end
 
+  test "a family's contacts expose their person type", %{conn: conn, world: world} do
+    document = """
+    query($id: ID!) {
+      family(id: $id) {
+        contacts { id personType { id isFamilyAdmin } }
+      }
+    }
+    """
+
+    %{f_grp: f_grp, c_grp: c_grp, c_adm_grp: c_adm_grp, u_grp_admin: u_grp_admin} = world.records
+
+    %{"data" => %{"family" => %{"contacts" => results}}} =
+      run(conn, document, %{"id" => f_grp.id}, :group_read, world)
+
+    flags = Map.new(results, &{&1["id"], get_in(&1, ["personType", "isFamilyAdmin"])})
+
+    assert flags == %{c_grp.id => nil, c_adm_grp.id => true, u_grp_admin.id => true}
+    assert Enum.all?(results, &(&1["personType"] == nil or is_binary(&1["personType"]["id"])))
+  end
+
+  test "family contacts filter by whether their person type is a family admin",
+       %{conn: conn, world: world} do
+    document = """
+    query($isAdmin: Boolean!) {
+      familyContacts(filter: {personType: {isFamilyAdmin: {eq: $isAdmin}}}) {
+        results { id }
+      }
+    }
+    """
+
+    %{c_adm_grp: c_adm_grp, u_grp_admin: u_grp_admin} = world.records
+
+    ids = fn is_admin ->
+      response = run(conn, document, %{"isAdmin" => is_admin}, :group_read, world)
+      MapSet.new(response["data"]["familyContacts"]["results"], & &1["id"])
+    end
+
+    assert ids.(true) == MapSet.new([c_adm_grp.id, u_grp_admin.id])
+    assert ids.(false) == MapSet.new()
+  end
+
   test "contacts load their person and family with the destination's own policy",
        %{conn: conn, world: world} do
     document = """
