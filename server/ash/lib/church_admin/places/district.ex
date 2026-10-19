@@ -2,8 +2,8 @@ defmodule ChurchAdmin.Places.District do
   use Ash.Resource,
     domain: ChurchAdmin.Places,
     data_layer: AshPostgres.DataLayer,
-    authorizers: [Ash.Policy.Authorizer],
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.Lookup]
 
   alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Places.Address
@@ -17,6 +17,10 @@ defmodule ChurchAdmin.Places.District do
     queries do
       get :district, :read
       list :districts, :read
+    end
+
+    mutations do
+      create :create_district, :create_district
     end
   end
 
@@ -36,15 +40,18 @@ defmodule ChurchAdmin.Places.District do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :create_district do
+      accept [:name]
+      upsert? true
+      upsert_identity :unique_name
+      upsert_fields [:name]
+    end
   end
 
   policies do
     bypass System do
       authorize_if always()
-    end
-
-    policy action_type(:read) do
-      authorize_if actor_present()
     end
   end
 

@@ -15,6 +15,10 @@ defmodule ChurchAdmin.Catalog.Church do
       get :church, :read
       list :churches, :read
     end
+
+    mutations do
+      create :create_church, :create_church
+    end
   end
 
   postgres do
@@ -32,6 +36,14 @@ defmodule ChurchAdmin.Catalog.Church do
                  required?: false,
                  default_limit: 25,
                  max_page_size: 1000
+    end
+
+    create :create_church do
+      accept [:name]
+      upsert? true
+      upsert_identity :unique_name
+      upsert_fields [:name]
+      change set_attribute(:is_hidden, true)
     end
   end
 
