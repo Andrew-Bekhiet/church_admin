@@ -4,266 +4,231 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../fakes/ash_responses.dart';
+import '../../../fakes/fake_ash_backend.dart';
 import '../../../fakes/fake_box.dart';
 
 class MockBaseCacheManager extends Mock implements BaseCacheManager {}
 
-class MockFunctionsService extends Mock implements FunctionsService {}
-
 void main() {
+  const freshUrl = 'https://api.example.com/api/files/fresh/photo';
+  const storedUrl = 'https://api.example.com/api/files/stored/photo';
+  final photoUpdatedAt = DateTime(2024);
+  final person = Person(
+    id: 'person-1',
+    name: 'name',
+    photoUpdatedAt: photoUpdatedAt,
+  );
+
+  late FakeSyncKVStore<String> box;
+  late int linkRequests;
+
+  CachedImageUrl storedLink({required Duration expiresIn}) => CachedImageUrl(
+    photoUpdatedAt: photoUpdatedAt,
+    expiresAt: DateTime.now().add(expiresIn),
+    url: storedUrl,
+  );
+
+  ImageUrlCacheService serviceWith({String? photoOnDisk}) {
+    return ImageUrlCacheService(
+      box: box,
+      cacheManager: _cacheManagerWith(photoOnDisk: photoOnDisk),
+    );
+  }
+
+  setUp(() {
+    box = FakeSyncKVStore<String>();
+    linkRequests = 0;
+    final backend = FakeAshBackend(
+      [],
+      actions: {
+        'photoDownloadUrl': (_) {
+          linkRequests++;
+
+          return AshResponses.photoLink(
+            freshUrl,
+            DateTime.now().add(const Duration(minutes: 5)),
+          );
+        },
+      },
+    );
+    addTearDown(backend.dispose);
+    initGlobalProviderContainer([
+      databaseServiceProvider.overrideWithValue(backend.db),
+    ]);
+  });
+
   tearDown(resetGlobalProviderContainer);
 
-  test(
-    'Image Url Cache Service: isUrlExpired',
-    () async {
-      final unit = ImageUrlCacheService(
-        box: FakeSyncKVStore(),
-        cacheManager: MockBaseCacheManager(),
-      );
-
-      final testExpiredUrl = Uri(
-        host: 'example.com',
-        path: 'file.jpg',
-        queryParameters: {
-          'X-Goog-Date': DateTime.now()
-              .subtract(const Duration(minutes: 3))
-              .toIso8601String(),
-          'X-Goog-Expires': const Duration(minutes: 2).inSeconds.toString(),
-        },
-      );
-
-      final testNotExpiredUrl = Uri(
-        host: 'example.com',
-        path: 'file.jpg',
-        queryParameters: {
-          'X-Goog-Date': DateTime.now()
-              .subtract(const Duration(minutes: 1))
-              .toIso8601String(),
-          'X-Goog-Expires': const Duration(minutes: 2).inSeconds.toString(),
-        },
-      );
-
-      expect(unit.isUrlExpired(testExpiredUrl.toString()), isTrue);
-      expect(unit.isUrlExpired(testNotExpiredUrl.toString()), isFalse);
-    },
-  );
-
-  test(
-    'Image Url Cache Service: isUrlFileCached',
-    () async {
-      final baseCacheManager = getMockedCacheManager('cachedUrl');
-
-      final unit = ImageUrlCacheService(
-        box: FakeSyncKVStore(),
-        cacheManager: baseCacheManager,
-      );
-
-      expect(unit.isUrlFileCachedAndValid('cachedUrl'), completion(isTrue));
-      expect(unit.isUrlFileCachedAndValid('uncachedUrl'), completion(isFalse));
-    },
-  );
-
-  test(
-    'Image Url Cache Service: getNonExpiredCachedImageUrl',
-    () async {
-      final fakeBox = FakeSyncKVStore<String>();
-      final unit = ImageUrlCacheService(
-        box: fakeBox,
-        cacheManager: MockBaseCacheManager(),
-      );
-
-      final person = Person(
-        id: 'id',
-        name: 'name',
-        photoUpdatedAt: DateTime.now(),
-      );
-
-      expect(unit.getNonExpiredCachedImageUrl(person.imageInfo), isNull);
-
-      fakeBox.put(
-        person.imageInfo.cacheKey,
-        '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|url',
-      );
-
-      expect(unit.getNonExpiredCachedImageUrl(person.imageInfo), isNull);
-    },
-  );
-
-  test(
-    'Image Url Cache Service: getImageUrl',
-    () async {
-      // Setup:
-      final baseCacheManager = getMockedCacheManager('cachedUrl');
-
-      final testExpiredUrl = Uri(
-        host: 'example.com',
-        path: 'file.jpg',
-        queryParameters: {
-          'X-Goog-Date': DateTime.now()
-              .subtract(const Duration(minutes: 3))
-              .toIso8601String(),
-          'X-Goog-Expires': const Duration(minutes: 2).inSeconds.toString(),
-        },
-      );
-
-      final testNotExpiredUrl = Uri(
-        host: 'example.com',
-        path: 'file.jpg',
-        queryParameters: {
-          'X-Goog-Date': DateTime.now()
-              .subtract(const Duration(minutes: 1))
-              .toIso8601String(),
-          'X-Goog-Expires': const Duration(minutes: 2).inSeconds.toString(),
-        },
-      );
-
-      registerFunctionsService(
-        getMockedFunctionsSrvc('id', testNotExpiredUrl.toString()),
-      );
-
-      final box = FakeSyncKVStore<String>();
-      final unit = ImageUrlCacheService(
-        box: box,
-        cacheManager: baseCacheManager,
-      );
-
-      final person = Person(
-        id: 'id',
-        name: 'name',
-        photoUpdatedAt: DateTime.now(),
-      );
-
-      // Test:
-      expect(
-        await unit.getImageUrl(person.imageInfo),
-        testNotExpiredUrl.toString(),
-      );
-      expect(
-        box.get(person.imageInfo.cacheKey),
-        '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|$testNotExpiredUrl',
-      );
-      expect(
-        await unit.getImageUrl(person.imageInfo),
-        testNotExpiredUrl.toString(),
-      );
-
+  group('ImageUrlCacheService.getNonExpiredCachedImageUrl', () {
+    test('is the stored url before the link expires', () {
       box.put(
         person.imageInfo.cacheKey,
-        '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|$testExpiredUrl',
+        storedLink(expiresIn: const Duration(minutes: 1)).toStoredString(),
       );
+
       expect(
-        await unit.getImageUrl(person.imageInfo),
-        testNotExpiredUrl.toString(),
+        serviceWith().getNonExpiredCachedImageUrl(person.imageInfo),
+        storedUrl,
       );
-    },
-  );
+    });
 
-  test(
-    'an expired url stays in use while the displayed photo is on disk',
-    () async {
-      final person = Person(
-        id: 'id',
-        name: 'name',
-        photoUpdatedAt: DateTime(2024),
+    test('is nothing once the link expired', () {
+      box.put(
+        person.imageInfo.cacheKey,
+        storedLink(expiresIn: const Duration(minutes: -1)).toStoredString(),
       );
-      final expiredUrl = Uri(
-        host: 'example.com',
-        path: 'file.jpg',
-        queryParameters: {
-          'X-Goog-Date': DateTime(2024).toIso8601String(),
-          'X-Goog-Expires': const Duration(minutes: 5).inSeconds.toString(),
-        },
-      ).toString();
-      final box = FakeSyncKVStore<String>()
-        ..put(
+
+      expect(
+        serviceWith().getNonExpiredCachedImageUrl(person.imageInfo),
+        isNull,
+      );
+    });
+
+    test('is nothing for a link stored before links carried an expiry', () {
+      box.put(
+        person.imageInfo.cacheKey,
+        '${photoUpdatedAt.toIso8601String()}|https://old.example.com/photo.jpg',
+      );
+
+      expect(
+        serviceWith().getNonExpiredCachedImageUrl(person.imageInfo),
+        isNull,
+      );
+    });
+
+    test('is nothing for a link stored for an older photo', () {
+      box.put(
+        person.imageInfo.cacheKey,
+        CachedImageUrl(
+          photoUpdatedAt: photoUpdatedAt.subtract(const Duration(days: 1)),
+          expiresAt: DateTime.now().add(const Duration(minutes: 1)),
+          url: storedUrl,
+        ).toStoredString(),
+      );
+
+      expect(
+        serviceWith().getNonExpiredCachedImageUrl(person.imageInfo),
+        isNull,
+      );
+    });
+
+    test('is nothing when no link was stored', () {
+      expect(
+        serviceWith().getNonExpiredCachedImageUrl(person.imageInfo),
+        isNull,
+      );
+    });
+  });
+
+  group('ImageUrlCacheService.getImageUrl', () {
+    test('fetches a link and stores it with its expiry', () async {
+      final before = DateTime.now();
+
+      expect(await serviceWith().getImageUrl(person.imageInfo), freshUrl);
+
+      final stored = CachedImageUrl.parse(box.get(person.imageInfo.cacheKey)!);
+      expect(stored.url, freshUrl);
+      expect(stored.photoUpdatedAt, photoUpdatedAt);
+      expect(stored.expiresAt, isNotNull);
+      expect(stored.expiresAt!.isAfter(before), isTrue);
+    });
+
+    test('reuses the stored link until it expires', () async {
+      final service = serviceWith();
+
+      await service.getImageUrl(person.imageInfo);
+      await service.getImageUrl(person.imageInfo);
+
+      expect(linkRequests, 1);
+    });
+
+    test('fetches a fresh link when the stored one expired', () async {
+      box.put(
+        person.imageInfo.cacheKey,
+        storedLink(expiresIn: const Duration(minutes: -1)).toStoredString(),
+      );
+
+      expect(await serviceWith().getImageUrl(person.imageInfo), freshUrl);
+    });
+
+    test('keeps using an expired link while the photo is on disk', () async {
+      box.put(
+        person.imageInfo.cacheKey,
+        storedLink(expiresIn: const Duration(minutes: -1)).toStoredString(),
+      );
+      final service = serviceWith(photoOnDisk: person.imageInfo.photoCacheKey);
+
+      expect(await service.getImageUrl(person.imageInfo), storedUrl);
+      expect(linkRequests, 0);
+    });
+
+    test(
+      'keeps using a link stored without expiry while the photo is on disk',
+      () async {
+        box.put(
           person.imageInfo.cacheKey,
-          '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|$expiredUrl',
+          '${photoUpdatedAt.toIso8601String()}|$storedUrl',
         );
-      registerFunctionsService(getMockedFunctionsSrvc('id', 'freshUrl'));
+        final service = serviceWith(
+          photoOnDisk: person.imageInfo.photoCacheKey,
+        );
 
-      final unit = ImageUrlCacheService(
-        box: box,
-        cacheManager: getMockedCacheManager(person.imageInfo.photoCacheKey),
-      );
-
-      expect(await unit.getImageUrl(person.imageInfo), expiredUrl);
-    },
-  );
-
-  test('Image Url Cache Service: getImageFileFromCache', () async {
-    final baseCacheManager = getMockedCacheManager('cachedUrl');
-
-    final unit = ImageUrlCacheService(
-      box: FakeSyncKVStore(),
-      cacheManager: baseCacheManager,
+        expect(await service.getImageUrl(person.imageInfo), storedUrl);
+        expect(linkRequests, 0);
+      },
     );
 
-    final srvc = getMockedFunctionsSrvc('person1', 'cachedUrl');
-    when(
-      () => srvc.getDownloadUrl('persons', 'person2'),
-    ).thenAnswer((_) async => 'uncachedUrl');
-    registerFunctionsService(srvc);
+    test(
+      'replaces a link stored without expiry when the photo is not on disk',
+      () async {
+        box.put(
+          person.imageInfo.cacheKey,
+          '${photoUpdatedAt.toIso8601String()}|$storedUrl',
+        );
 
-    final person = Person(
-      id: 'person1',
-      name: 'name',
-      photoUpdatedAt: DateTime.now(),
+        expect(await serviceWith().getImageUrl(person.imageInfo), freshUrl);
+        expect(
+          CachedImageUrl.parse(box.get(person.imageInfo.cacheKey)!).expiresAt,
+          isNotNull,
+        );
+      },
     );
-    final person2 = Person(
-      id: 'person2',
-      name: 'name',
-      photoUpdatedAt: DateTime.now(),
-    );
+  });
 
-    expect(
-      unit.getImageFile(person.imageInfo),
-      completion(isNotNull),
-    );
-    expect(
-      unit.getImageFile(person2.imageInfo),
-      completion(isNotNull),
-    );
+  test('a photo file on disk is reported as cached', () async {
+    final service = serviceWith(photoOnDisk: 'cachedUrl');
+
+    expect(await service.isUrlFileCachedAndValid('cachedUrl'), isTrue);
+    expect(await service.isUrlFileCachedAndValid('uncachedUrl'), isFalse);
+  });
+
+  test('the image file is fetched from the link it resolved', () async {
+    final service = serviceWith();
+
+    expect(await service.getImageFile(person.imageInfo), isNotNull);
   });
 }
 
-MockBaseCacheManager getMockedCacheManager(String cachedUrl) {
-  final baseCacheManager = MockBaseCacheManager();
+MockBaseCacheManager _cacheManagerWith({String? photoOnDisk}) {
+  final cacheManager = MockBaseCacheManager();
 
-  when(() => baseCacheManager.getFileFromCache(any())).thenAnswer(
-    (i) async => i.positionalArguments.first == cachedUrl
+  when(() => cacheManager.getFileFromCache(any())).thenAnswer(
+    (i) async => i.positionalArguments.first == photoOnDisk
         ? FileInfo(
             MemoryFileSystem().file('path'),
             FileSource.Cache,
             DateTime.now().add(const Duration(days: 1)),
-            cachedUrl,
+            photoOnDisk!,
           )
         : null,
   );
-
   when(
-    () => baseCacheManager.getSingleFile(any(), key: any(named: 'key')),
+    () => cacheManager.getSingleFile(any(), key: any(named: 'key')),
   ).thenAnswer(
     (i) async => MemoryFileSystem().file(i.positionalArguments.first as String),
   );
-  when(() => baseCacheManager.removeFile(any())).thenAnswer((_) async {});
+  when(() => cacheManager.removeFile(any())).thenAnswer((_) async {});
 
-  return baseCacheManager;
-}
-
-void registerFunctionsService(MockFunctionsService mockFunctionsService) {
-  initGlobalProviderContainer(
-    [functionsServiceProvider.overrideWithValue(mockFunctionsService)],
-  );
-}
-
-MockFunctionsService getMockedFunctionsSrvc(
-  String personId,
-  String urlFromNetwork,
-) {
-  final mockFunctionsService = MockFunctionsService();
-
-  when(
-    () => mockFunctionsService.getDownloadUrl('persons', personId),
-  ).thenAnswer((_) async => urlFromNetwork);
-  return mockFunctionsService;
+  return cacheManager;
 }

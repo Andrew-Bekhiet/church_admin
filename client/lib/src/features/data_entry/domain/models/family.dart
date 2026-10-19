@@ -86,8 +86,11 @@ class Family extends ViewableWithIDAndImage
   Point? get geolocation => address?.geolocation;
 
   @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('families', id, lastUpdatedTime: photoUpdatedAt);
+  ObjectImageInfo get imageInfo => ObjectPhotoInfo(
+    Enum_PhotoSubject.FAMILIES,
+    id,
+    lastUpdatedTime: photoUpdatedAt,
+  );
 
   @override
   String get typeName => AdvancedQueriesMetadata().family.name;

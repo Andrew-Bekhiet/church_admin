@@ -62,12 +62,14 @@ class FakeMetadataDAO extends MetadataDAO {
   DistrictsDAO get districts => fakeDistricts;
 }
 
-class FakeFunctionsService extends Fake implements FunctionsService {
-  final List<({String table, String id})> deletedPhotos = [];
+class FakePhotosDAO extends Fake implements PhotosDAO {
+  final List<({Enum_PhotoSubject subject, String id})> deletedPhotos = [];
 
   @override
-  Future<void> deletePhoto(String table, String id) async =>
-      deletedPhotos.add((table: table, id: id));
+  Future<void> deletePhoto({
+    required Enum_PhotoSubject subject,
+    required String id,
+  }) async => deletedPhotos.add((subject: subject, id: id));
 }
 
 class EditPersonScreenHarness {
@@ -84,7 +86,7 @@ class EditPersonScreenHarness {
   final FakeHobbiesDAO hobbies = FakeHobbiesDAO();
   final FakePhotoUploader photos = FakePhotoUploader();
   final FakeLoggingService logging = FakeLoggingService();
-  final FakeFunctionsService functions = FakeFunctionsService();
+  final FakePhotosDAO photosDao = FakePhotosDAO();
   final FakeStreetsDAO streets = FakeStreetsDAO();
   final FakeAreasDAO areas = FakeAreasDAO();
   final FakeServicesDAO services = FakeServicesDAO();
@@ -100,6 +102,7 @@ class EditPersonScreenHarness {
     when(() => databaseService.families).thenReturn(families);
     when(() => databaseService.areas).thenReturn(areas);
     when(() => databaseService.streets).thenReturn(streets);
+    when(() => databaseService.photos).thenReturn(photosDao);
     when(() => databaseService.services).thenReturn(services);
     when(() => databaseService.metadata).thenReturn(
       FakeMetadataDAO(
@@ -111,34 +114,29 @@ class EditPersonScreenHarness {
     );
 
     registerFallbackValue(
-      const FunctionsObjectImageInfo('persons', 'fallback'),
+      const ObjectPhotoInfo(Enum_PhotoSubject.PERSONS, 'fallback'),
     );
     final imageUrls = MockImageUrlCacheService();
-    when(
-      () => imageUrls.getImageUrl(any()),
-    ).thenAnswer((_) => Completer<String>().future);
+    when(() => imageUrls.getImageUrl(any()))
+        .thenAnswer((_) => Completer<String>().future);
 
     final preferences = MockUserPreferencesService();
     when(() => preferences.darkTheme).thenReturn(false);
     when(() => preferences.greatFeastTheme).thenReturn(false);
 
     final viewableObjects = MockViewableObjectService();
-    when(
-      () => viewableObjects.getDefaultIconFor<IImage>(any()),
-    ).thenReturn(Symbols.person);
+    when(() => viewableObjects.getDefaultIconFor<IImage>(any()))
+        .thenReturn(Symbols.person);
 
     initGlobalProviderContainer([
       authBlocProvider.overrideWithValue(authBloc),
-      featureFlagsRepoProvider.overrideWithValue(
-        FakeFeatureFlagsRepo(),
-      ),
+      featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
       databaseServiceProvider.overrideWithValue(databaseService),
       imageUrlCacheServiceProvider.overrideWithValue(imageUrls),
       userPreferencesServiceProvider.overrideWithValue(preferences),
       viewableObjectServiceProvider.overrideWithValue(viewableObjects),
       loggingServiceProvider.overrideWithValue(logging),
       geocoderProvider.overrideWithValue(FakeGeocoder()),
-      functionsServiceProvider.overrideWithValue(functions),
     ]);
   }
 

@@ -218,7 +218,7 @@ class _ViewUserState extends State<ViewUser> {
     if (dialogResult != true) return;
 
     try {
-      await FunctionsService.I.deleteMyAccount();
+      await DatabaseService.I.accounts.deleteMyAccount();
       AuthBloc.I.add(const SignOut());
     } catch (err, stkTrace) {
       await LoggingService.I.exception(

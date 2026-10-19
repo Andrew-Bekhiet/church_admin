@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:dio/dio.dart';
 
 export 'database/dao_base.dart';
 export 'database/dao_bases.dart';
@@ -18,6 +19,7 @@ class DatabaseService {
   final DBVarsTransformer varsTransformer;
   final AdvancedQueryParser advancedQueryParser;
   final LiveQueryRegistry? _liveQueries;
+  final Dio _dio;
 
   late final LiveQueryRegistry liveQueries =
       _liveQueries ??
@@ -44,12 +46,17 @@ class DatabaseService {
   late final userPreferences = UserPreferencesDAO(db: this);
   late final dataChecks = DataChecksDAO(db: this);
   late final fcmTokens = FcmTokensDAO(db: this);
+  late final accounts = AccountsDAO(db: this);
 
   late final metadata = MetadataDAO(db: this);
 
   late final history = HistoryDAO(db: this);
 
   late final meetings = MeetingsDAO(db: this);
+
+  late final photos = PhotosDAO(db: this, dio: _dio);
+  late final exports = ExportsDAO(db: this);
+  late final releases = ReleasesDAO(db: this);
 
   late final Map<Type, DAOBase> daosByType = {
     Area: areas,
@@ -83,5 +90,6 @@ class DatabaseService {
     this.varsTransformer = const DBVarsTransformer(),
     this.advancedQueryParser = const AdvancedQueryParser(),
     this._liveQueries,
-  });
+    Dio? dio,
+  }) : _dio = dio ?? Dio();
 }

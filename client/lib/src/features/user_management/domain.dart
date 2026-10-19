@@ -8,5 +8,6 @@ export 'domain/user_admin_group_kind.dart';
 export 'domain/user_admin_subgroup.dart';
 export 'domain/user_draft.dart';
 export 'domain/user_edit_intent.dart';
+export 'domain/user_form_error_message.dart';
 export 'domain/user_form_validation_error.dart';
 export 'domain/user_update.dart';

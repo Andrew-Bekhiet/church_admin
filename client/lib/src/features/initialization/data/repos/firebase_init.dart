@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/default_firebase_options.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -55,10 +54,6 @@ class FirebaseInit implements Initializer {
 
   Future<void> _initializeFirebaseEmulators(String kEmulatorsHost) async {
     await FirebaseAuth.instance.useAuthEmulator(kEmulatorsHost, 9099);
-    FirebaseFunctions.instanceFor(
-      region: 'europe-west6',
-    ).useFunctionsEmulator(kEmulatorsHost, 5001);
-    FirebaseFunctions.instance.useFunctionsEmulator(kEmulatorsHost, 5001);
     FirebaseDatabase.instance.useDatabaseEmulator(kEmulatorsHost, 9000);
   }
 

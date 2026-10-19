@@ -23,7 +23,9 @@ class MockBaseCacheManager extends Mock implements BaseCacheManager {}
 
 void main() {
   setUpAll(() {
-    registerFallbackValue(const FunctionsObjectImageInfo('table', 'id'));
+    registerFallbackValue(
+      const ObjectPhotoInfo(Enum_PhotoSubject.PERSONS, 'id'),
+    );
     registerFallbackValue(Person(id: 'id', name: 'name'));
   });
   setUp(_setUp);

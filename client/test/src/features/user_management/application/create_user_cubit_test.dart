@@ -3,11 +3,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class _MockFunctionsService extends Mock implements FunctionsService {}
+class _MockUsersDAO extends Mock implements UsersDAO {}
 
 void main() {
   group('CreateUserCubit', () {
-    late _MockFunctionsService functions;
+    late _MockUsersDAO usersDao;
 
     final validDraft = UserDraft(
       name: 'مينا',
@@ -27,14 +27,14 @@ void main() {
     });
 
     setUp(() {
-      functions = _MockFunctionsService();
+      usersDao = _MockUsersDAO();
     });
 
     blocTest<CreateUserCubit, UserFormState>(
       'saving an incomplete form reports a validation error and stays editable',
       build: () => CreateUserCubit(
         initial: const UserDraft.empty(),
-        functions: functions,
+        usersDao: usersDao,
       ),
       act: (cubit) => cubit.save(),
       expect: () => [
@@ -49,9 +49,9 @@ void main() {
     blocTest<CreateUserCubit, UserFormState>(
       'saving a complete form creates the user and reports the new uid',
       setUp: () => when(
-        () => functions.createUser(any()),
+        () => usersDao.createUser(any()),
       ).thenAnswer((_) async => 'new-uid'),
-      build: () => CreateUserCubit(initial: validDraft, functions: functions),
+      build: () => CreateUserCubit(initial: validDraft, usersDao: usersDao),
       act: (cubit) => cubit.save(),
       expect: () => [
         isA<UserFormSaving>(),
@@ -62,9 +62,9 @@ void main() {
     blocTest<CreateUserCubit, UserFormState>(
       'a failed creation surfaces the error and returns to editing',
       setUp: () => when(
-        () => functions.createUser(any()),
+        () => usersDao.createUser(any()),
       ).thenThrow(Exception('boom')),
-      build: () => CreateUserCubit(initial: validDraft, functions: functions),
+      build: () => CreateUserCubit(initial: validDraft, usersDao: usersDao),
       act: (cubit) => cubit.save(),
       expect: () => [
         isA<UserFormSaving>(),
@@ -78,7 +78,7 @@ void main() {
 
     blocTest<CreateUserCubit, UserFormState>(
       'the email is stored trimmed and lowercased',
-      build: () => CreateUserCubit(initial: validDraft, functions: functions),
+      build: () => CreateUserCubit(initial: validDraft, usersDao: usersDao),
       act: (cubit) => cubit.setEmail('  Mina@Example.COM  '),
       expect: () => [
         isA<UserFormEditing>().having(
@@ -93,7 +93,7 @@ void main() {
       'selecting an existing person gives the user that person name',
       build: () => CreateUserCubit(
         initial: const UserDraft.empty(),
-        functions: functions,
+        usersDao: usersDao,
       ),
       act: (cubit) => cubit.selectPerson(
         LinkExistingPerson(Person(id: 'p2', name: 'كيرلس')),
@@ -109,7 +109,7 @@ void main() {
         initial: const UserDraft.empty().copyWith(
           person: const CreateNewPerson(name: '', gender: true),
         ),
-        functions: functions,
+        usersDao: usersDao,
       ),
       act: (cubit) => cubit.setName('يوسف'),
       expect: () => [

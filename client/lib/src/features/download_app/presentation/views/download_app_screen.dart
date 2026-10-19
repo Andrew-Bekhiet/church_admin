@@ -23,13 +23,14 @@ class DownloadAppScreen extends StatelessWidget {
             children: [
               FilledButton.tonalIcon(
                 style: Theme.of(context).filledTonalButtonStyleWorkaround,
-                onPressed: () => _downloadAndroidApp(context, 'android'),
+                onPressed: () =>
+                    _downloadApp(context, Enum_AppPlatform.ANDROID),
                 icon: const Icon(Symbols.android),
                 label: const Text('تنزيل التطبيق لنظام Android'),
               ),
               FilledButton.tonalIcon(
                 style: Theme.of(context).filledTonalButtonStyleWorkaround,
-                onPressed: () => _downloadAndroidApp(context, 'ios'),
+                onPressed: () => _downloadApp(context, Enum_AppPlatform.IOS),
                 icon: const Icon(Symbols.ios),
                 label: const Text('تنزيل التطبيق لنظام iOS (.ipa)'),
               ),
@@ -40,16 +41,16 @@ class DownloadAppScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _downloadAndroidApp(
+  Future<void> _downloadApp(
     BuildContext context,
-    String platform,
+    Enum_AppPlatform platform,
   ) async {
-    final String url = await _showLoadingLinkDialog(
+    final link = await _showLoadingLinkDialog(
       context,
-      FunctionsService.I.getAppDownloadLink(platform),
+      DatabaseService.I.releases.appDownloadLink(platform: platform),
     );
 
-    unawaited(LauncherService.I.launchUrl(Uri.parse(url)));
+    unawaited(LauncherService.I.launchUrl(Uri.parse(link.url)));
   }
 
   Future<T> _showLoadingLinkDialog<T>(BuildContext context, Future<T> future) {

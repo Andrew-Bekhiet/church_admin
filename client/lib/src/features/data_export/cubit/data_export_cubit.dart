@@ -38,18 +38,15 @@ class DataExportCubit extends Cubit<DataExportState> {
   ViewableObjectListController<Class>? _classesController;
   ViewableObjectListController<Group>? _groupsController;
 
-  final FunctionsService _functionsService;
   final AuthBloc _authBloc;
   final ExportOperationsStorage _exportOperationsStorage;
   final DatabaseService _databaseService;
 
   DataExportCubit({
-    FunctionsService? functionsService,
     AuthBloc? authBloc,
     ExportOperationsStorage? exportOperationsStorage,
     DatabaseService? databaseService,
-  }) : _functionsService = functionsService ?? FunctionsService.I,
-       _authBloc = authBloc ?? AuthBloc.I,
+  }) : _authBloc = authBloc ?? AuthBloc.I,
        _exportOperationsStorage =
            exportOperationsStorage ?? ExportOperationsStorage.I,
        _databaseService = databaseService ?? DatabaseService.I,
@@ -243,7 +240,7 @@ class DataExportCubit extends Cubit<DataExportState> {
 
     emit(const DataExportInProgress());
     try {
-      final downloadUrl = await _functionsService.exportData(
+      final downloadUrl = await _databaseService.exports.exportData(
         areasIds: areasIds,
         servicesIds: servicesIds,
         classesIds: classesIds,

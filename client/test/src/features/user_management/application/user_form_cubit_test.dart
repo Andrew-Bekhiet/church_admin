@@ -4,7 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class _MockFunctionsService extends Mock implements FunctionsService {}
+class _MockUsersDAO extends Mock implements UsersDAO {}
 
 void main() {
   setUpAll(() {
@@ -14,10 +14,10 @@ void main() {
   test(
     'save_whenDraftChangesDuringRequest_staysSavingUntilCompletion',
     () async {
-      final functions = _MockFunctionsService();
+      final usersDao = _MockUsersDAO();
       final response = Completer<String>();
       when(
-        () => functions.createUser(any()),
+        () => usersDao.createUser(any()),
       ).thenAnswer((_) => response.future);
       final cubit = CreateUserCubit(
         initial: UserDraft(
@@ -28,7 +28,7 @@ void main() {
           adminOn: const [],
           invitation: const NoInvitation(),
         ),
-        functions: functions,
+        usersDao: usersDao,
       );
       addTearDown(cubit.close);
 

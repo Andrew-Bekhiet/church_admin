@@ -109,6 +109,29 @@ class AdminOnData with _$AdminOnData implements ToJson {
   @override
   Map<String, dynamic> toJson() => _$AdminOnDataToJson(this);
 
+  Input_AdminOnInput toCommandInput() => Input_AdminOnInput(
+    adminOnArea: area?.id,
+    areaAllowEdit: areaAllowEdit,
+    areaAllowExport: areaAllowExport,
+    areaAdminOnUsers: areaAdminOnUsers,
+    adminOnService: service?.id,
+    serviceStudyYear: serviceStudyYearData?.order,
+    serviceGender: serviceGender,
+    serviceAllowEdit: serviceAllowEdit,
+    serviceAllowExport: serviceAllowExport,
+    serviceAllowRecordAttendance: serviceAllowRecordAttendance,
+    serviceAllowRecordServantsAttendance: serviceAllowRecordServantsAttendance,
+    serviceAdminOnUsers: serviceAdminOnUsers,
+    serviceWriteRelatedFamilies: serviceWriteRelatedFamilies,
+    adminOnGroup: group?.id,
+    groupAllowEdit: groupAllowEdit,
+    groupAllowExport: groupAllowExport,
+    groupAllowRecordAttendance: groupAllowRecordAttendance,
+    groupAllowRecordServantsAttendance: groupAllowRecordServantsAttendance,
+    groupAdminOnUsers: groupAdminOnUsers,
+    groupWriteRelatedFamilies: groupWriteRelatedFamilies,
+  );
+
   String describeServicePermission() {
     if (serviceGender == null && serviceStudyYearData == null) {
       return '(جميع البيانات داخل الخدمة)';

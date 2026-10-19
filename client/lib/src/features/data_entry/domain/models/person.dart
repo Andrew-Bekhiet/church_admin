@@ -240,8 +240,11 @@ class Person extends ViewableWithIDAndImage
   @override
   String get typeName => AdvancedQueriesMetadata().person.name;
   @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('persons', id, lastUpdatedTime: photoUpdatedAt);
+  ObjectImageInfo get imageInfo => ObjectPhotoInfo(
+    Enum_PhotoSubject.PERSONS,
+    id,
+    lastUpdatedTime: photoUpdatedAt,
+  );
 
   Person({
     required this.id,

@@ -54,24 +54,60 @@ class FakeAshTable {
   }
 }
 
+/// A domain rejection of a generic action, as AshGraphql reports it: an
+/// error whose `extensions.code` names the reason.
+class FakeAshRejection implements Exception {
+  final String code;
+  final String message;
+
+  const FakeAshRejection(this.code, {this.message = 'rejected'});
+}
+
+typedef FakeAshAction = Object? Function(Json variables);
+
 /// An Ash GraphQL server over [FakeAshTable]s. It applies the `filter`
 /// operators the client sends (`and or not eq notEq in isNil ilike`), sorts
 /// by `sort` and then by id as Ash does, and pages with `first`/`after`.
+/// A root named in [actions] is a generic action: its function answers with
+/// the root field's value or throws a [FakeAshRejection].
 class FakeAshTablesLink extends Link {
   final List<FakeAshTable> tables;
+  final Map<String, FakeAshAction> actions;
 
-  FakeAshTablesLink(this.tables);
+  FakeAshTablesLink(this.tables, {this.actions = const {}});
 
   FakeAshTable table(String typename) =>
       tables.singleWhere((table) => table.typename == typename);
 
   @override
-  Stream<Response> request(Request request, [NextLink? forward]) =>
-      Stream.value(Response(data: _answer(request), response: const {}));
+  Stream<Response> request(Request request, [NextLink? forward]) {
+    try {
+      return Stream.value(Response(data: _answer(request), response: const {}));
+    } on FakeAshRejection catch (rejection) {
+      return Stream.value(
+        Response(
+          errors: [
+            GraphQLError(
+              message: rejection.message,
+              extensions: {'code': rejection.code},
+            ),
+          ],
+          response: const {},
+        ),
+      );
+    }
+  }
 
   Json _answer(Request request) {
     final root = AshResultParser.rootFieldOf(request.operation.document);
     final variables = request.variables;
+
+    if (actions[root] case final action?) {
+      return {
+        '__typename': request.isMutation ? 'Mutation' : 'Query',
+        root: action(variables),
+      };
+    }
 
     if (request.isMutation) {
       final table = tables.singleWhere((table) => table.createRoot == root);
