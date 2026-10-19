@@ -172415,6 +172415,7 @@ class Input_UserFilterInput {
     Input_ScopeGrantFilterInput? scopeGrants,
     Input_UserPermissionFilterInput? permissions,
     Input_UserFilterCurrentUserCanManageThisUser? currentUserCanManageThisUser,
+    Input_UserFilterLastEdit? lastEdit,
   }) => Input_UserFilterInput._({
     if (and != null) r'and': and,
     if (or != null) r'or': or,
@@ -172432,6 +172433,7 @@ class Input_UserFilterInput {
     if (permissions != null) r'permissions': permissions,
     if (currentUserCanManageThisUser != null)
       r'currentUserCanManageThisUser': currentUserCanManageThisUser,
+    if (lastEdit != null) r'lastEdit': lastEdit,
   });
 
   Input_UserFilterInput._(this._$data);
@@ -172552,6 +172554,14 @@ class Input_UserFilterInput {
               (l$currentUserCanManageThisUser as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('lastEdit')) {
+      final l$lastEdit = data['lastEdit'];
+      result$data['lastEdit'] = l$lastEdit == null
+          ? null
+          : Input_UserFilterLastEdit.fromJson(
+              (l$lastEdit as Map<String, dynamic>),
+            );
+    }
     return Input_UserFilterInput._(result$data);
   }
 
@@ -172601,6 +172611,9 @@ class Input_UserFilterInput {
   get currentUserCanManageThisUser =>
       (_$data['currentUserCanManageThisUser']
           as Input_UserFilterCurrentUserCanManageThisUser?);
+
+  Input_UserFilterLastEdit? get lastEdit =>
+      (_$data['lastEdit'] as Input_UserFilterLastEdit?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -172664,6 +172677,10 @@ class Input_UserFilterInput {
       final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
       result$data['currentUserCanManageThisUser'] =
           l$currentUserCanManageThisUser?.toJson();
+    }
+    if (_$data.containsKey('lastEdit')) {
+      final l$lastEdit = lastEdit;
+      result$data['lastEdit'] = l$lastEdit?.toJson();
     }
     return result$data;
   }
@@ -172840,6 +172857,15 @@ class Input_UserFilterInput {
     if (l$currentUserCanManageThisUser != lOther$currentUserCanManageThisUser) {
       return false;
     }
+    final l$lastEdit = lastEdit;
+    final lOther$lastEdit = other.lastEdit;
+    if (_$data.containsKey('lastEdit') !=
+        other._$data.containsKey('lastEdit')) {
+      return false;
+    }
+    if (l$lastEdit != lOther$lastEdit) {
+      return false;
+    }
     return true;
   }
 
@@ -172860,6 +172886,7 @@ class Input_UserFilterInput {
     final l$scopeGrants = scopeGrants;
     final l$permissions = permissions;
     final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
+    final l$lastEdit = lastEdit;
     return Object.hashAll([
       _$data.containsKey('and')
           ? l$and == null
@@ -172890,6 +172917,7 @@ class Input_UserFilterInput {
       _$data.containsKey('currentUserCanManageThisUser')
           ? l$currentUserCanManageThisUser
           : const {},
+      _$data.containsKey('lastEdit') ? l$lastEdit : const {},
     ]);
   }
 }
@@ -172919,6 +172947,7 @@ abstract class CopyWith_Input_UserFilterInput<TRes> {
     Input_ScopeGrantFilterInput? scopeGrants,
     Input_UserPermissionFilterInput? permissions,
     Input_UserFilterCurrentUserCanManageThisUser? currentUserCanManageThisUser,
+    Input_UserFilterLastEdit? lastEdit,
   });
   TRes and(
     Iterable<Input_UserFilterInput>? Function(
@@ -172951,6 +172980,7 @@ abstract class CopyWith_Input_UserFilterInput<TRes> {
   CopyWith_Input_UserPermissionFilterInput<TRes> get permissions;
   CopyWith_Input_UserFilterCurrentUserCanManageThisUser<TRes>
   get currentUserCanManageThisUser;
+  CopyWith_Input_UserFilterLastEdit<TRes> get lastEdit;
 }
 
 class _CopyWithImpl_Input_UserFilterInput<TRes>
@@ -172979,6 +173009,7 @@ class _CopyWithImpl_Input_UserFilterInput<TRes>
     Object? scopeGrants = _undefined,
     Object? permissions = _undefined,
     Object? currentUserCanManageThisUser = _undefined,
+    Object? lastEdit = _undefined,
   }) => _then(
     Input_UserFilterInput._({
       ..._instance._$data,
@@ -173006,6 +173037,8 @@ class _CopyWithImpl_Input_UserFilterInput<TRes>
         'currentUserCanManageThisUser':
             (currentUserCanManageThisUser
                 as Input_UserFilterCurrentUserCanManageThisUser?),
+      if (lastEdit != _undefined)
+        'lastEdit': (lastEdit as Input_UserFilterLastEdit?),
     }),
   );
 
@@ -173153,6 +173186,16 @@ class _CopyWithImpl_Input_UserFilterInput<TRes>
             (e) => call(currentUserCanManageThisUser: e),
           );
   }
+
+  CopyWith_Input_UserFilterLastEdit<TRes> get lastEdit {
+    final local$lastEdit = _instance.lastEdit;
+    return local$lastEdit == null
+        ? CopyWith_Input_UserFilterLastEdit.stub(_then(_instance))
+        : CopyWith_Input_UserFilterLastEdit(
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
+  }
 }
 
 class _CopyWithStubImpl_Input_UserFilterInput<TRes>
@@ -173177,6 +173220,7 @@ class _CopyWithStubImpl_Input_UserFilterInput<TRes>
     Input_ScopeGrantFilterInput? scopeGrants,
     Input_UserPermissionFilterInput? permissions,
     Input_UserFilterCurrentUserCanManageThisUser? currentUserCanManageThisUser,
+    Input_UserFilterLastEdit? lastEdit,
   }) => _res;
 
   and(_fn) => _res;
@@ -173221,6 +173265,407 @@ class _CopyWithStubImpl_Input_UserFilterInput<TRes>
   CopyWith_Input_UserFilterCurrentUserCanManageThisUser<TRes>
   get currentUserCanManageThisUser =>
       CopyWith_Input_UserFilterCurrentUserCanManageThisUser.stub(_res);
+
+  CopyWith_Input_UserFilterLastEdit<TRes> get lastEdit =>
+      CopyWith_Input_UserFilterLastEdit.stub(_res);
+}
+
+class Input_UserFilterLastEdit {
+  factory Input_UserFilterLastEdit({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime?>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => Input_UserFilterLastEdit._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_UserFilterLastEdit._(this._$data);
+
+  factory Input_UserFilterLastEdit.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = l$eq == null ? null : tstzFromString(l$eq);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = l$notEq == null ? null : tstzFromString(l$notEq);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => e == null ? null : tstzFromString(e))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzFromString(l$lessThan);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzFromString(l$greaterThan);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzFromString(l$lessThanOrEqual);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzFromString(l$greaterThanOrEqual);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzFromString(l$isDistinctFrom);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzFromString(l$isNotDistinctFrom);
+    }
+    return Input_UserFilterLastEdit._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  DateTime? get eq => (_$data['eq'] as DateTime?);
+
+  DateTime? get notEq => (_$data['notEq'] as DateTime?);
+
+  List<DateTime?>? get $in => (_$data['in'] as List<DateTime?>?);
+
+  DateTime? get lessThan => (_$data['lessThan'] as DateTime?);
+
+  DateTime? get greaterThan => (_$data['greaterThan'] as DateTime?);
+
+  DateTime? get lessThanOrEqual => (_$data['lessThanOrEqual'] as DateTime?);
+
+  DateTime? get greaterThanOrEqual =>
+      (_$data['greaterThanOrEqual'] as DateTime?);
+
+  DateTime? get isDistinctFrom => (_$data['isDistinctFrom'] as DateTime?);
+
+  DateTime? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq == null ? null : tstzToString(l$eq);
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq == null ? null : tstzToString(l$notEq);
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in
+          ?.map((e) => e == null ? null : tstzToString(e))
+          .toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzToString(l$lessThan);
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzToString(l$greaterThan);
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzToString(l$lessThanOrEqual);
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzToString(l$greaterThanOrEqual);
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzToString(l$isDistinctFrom);
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzToString(l$isNotDistinctFrom);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UserFilterLastEdit<Input_UserFilterLastEdit> get copyWith =>
+      CopyWith_Input_UserFilterLastEdit(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UserFilterLastEdit ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UserFilterLastEdit<TRes> {
+  factory CopyWith_Input_UserFilterLastEdit(
+    Input_UserFilterLastEdit instance,
+    TRes Function(Input_UserFilterLastEdit) then,
+  ) = _CopyWithImpl_Input_UserFilterLastEdit;
+
+  factory CopyWith_Input_UserFilterLastEdit.stub(TRes res) =
+      _CopyWithStubImpl_Input_UserFilterLastEdit;
+
+  TRes call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime?>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_UserFilterLastEdit<TRes>
+    implements CopyWith_Input_UserFilterLastEdit<TRes> {
+  _CopyWithImpl_Input_UserFilterLastEdit(this._instance, this._then);
+
+  final Input_UserFilterLastEdit _instance;
+
+  final TRes Function(Input_UserFilterLastEdit) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_UserFilterLastEdit._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as DateTime?),
+      if (notEq != _undefined) 'notEq': (notEq as DateTime?),
+      if ($in != _undefined) 'in': ($in as List<DateTime?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as DateTime?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as DateTime?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as DateTime?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as DateTime?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as DateTime?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UserFilterLastEdit<TRes>
+    implements CopyWith_Input_UserFilterLastEdit<TRes> {
+  _CopyWithStubImpl_Input_UserFilterLastEdit(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime?>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => _res;
 }
 
 class Input_UserSortInput {
@@ -221790,6 +222235,8 @@ enum Enum_UserSortField {
   BLURHASH,
   AUTH_ID,
   CURRENT_USER_CAN_MANAGE_THIS_USER,
+  LAST_EDIT,
+  PERSON_NAME,
   $unknown;
 
   factory Enum_UserSortField.fromJson(String value) =>
@@ -221814,6 +222261,10 @@ String toJson_Enum_UserSortField(Enum_UserSortField e) {
       return r'AUTH_ID';
     case Enum_UserSortField.CURRENT_USER_CAN_MANAGE_THIS_USER:
       return r'CURRENT_USER_CAN_MANAGE_THIS_USER';
+    case Enum_UserSortField.LAST_EDIT:
+      return r'LAST_EDIT';
+    case Enum_UserSortField.PERSON_NAME:
+      return r'PERSON_NAME';
     case Enum_UserSortField.$unknown:
       return r'$unknown';
   }
@@ -221835,6 +222286,10 @@ Enum_UserSortField fromJson_Enum_UserSortField(String value) {
       return Enum_UserSortField.AUTH_ID;
     case r'CURRENT_USER_CAN_MANAGE_THIS_USER':
       return Enum_UserSortField.CURRENT_USER_CAN_MANAGE_THIS_USER;
+    case r'LAST_EDIT':
+      return Enum_UserSortField.LAST_EDIT;
+    case r'PERSON_NAME':
+      return Enum_UserSortField.PERSON_NAME;
     default:
       return Enum_UserSortField.$unknown;
   }

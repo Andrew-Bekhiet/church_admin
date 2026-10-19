@@ -8124,6 +8124,8 @@ enum UserSortField {
   BLURHASH
   AUTH_ID
   CURRENT_USER_CAN_MANAGE_THIS_USER
+  LAST_EDIT
+  PERSON_NAME
 }
 
 "A keyset page of :user"
@@ -8268,6 +8270,20 @@ input UserFilterInput {
   scopeGrants: ScopeGrantFilterInput
   permissions: UserPermissionFilterInput
   currentUserCanManageThisUser: UserFilterCurrentUserCanManageThisUser
+  lastEdit: UserFilterLastEdit
+}
+
+input UserFilterLastEdit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
 }
 
 input UserSortInput {
@@ -8313,6 +8329,10 @@ type User {
     offset: Int
   ): [UserPermission!]!
   currentUserCanManageThisUser: Boolean!
+  latestEdit: LatestEdit
+  deviceTokens: [DeviceToken!]!
+  lastEdit: DateTime
+  personName: String
 }
 
 enum ScopeGrantSortField {
@@ -8700,6 +8720,10 @@ type ScopeGrant {
   groupAllowRecordAttendance: Boolean
   groupAllowRecordServantsAttendance: Boolean
   user: User
+  area: Area
+  service: Service
+  group: Group
+  studyYear: StudyYear
 }
 
 "The result of the :update_my_preferences mutation"
