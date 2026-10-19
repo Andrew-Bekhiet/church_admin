@@ -1,0 +1,20 @@
+query classes(
+  $filter: ClassFilterInput
+  $sort: [ClassSortInput]
+  $first: Int
+  $after: String
+) {
+  classes(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...ClassWithStudyYears
+    }
+  }
+}
+
+query class($id: ID!) {
+  class(id: $id) {
+    ...ClassDetails
+  }
+}

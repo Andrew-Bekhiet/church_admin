@@ -1,0 +1,84 @@
+fragment ServiceNoPhoto on Service {
+  id
+  name
+  color
+  userCanEdit
+}
+
+fragment Service on Service {
+  ...ServiceNoPhoto
+  photoUpdatedAt
+  blurhash
+}
+
+fragment ServiceWithStudyYears on Service {
+  ...Service
+  studyYearFromId
+  studyYearToId
+  studyYearFrom {
+    ...StudyYear
+  }
+  studyYearTo {
+    ...StudyYear
+  }
+}
+
+fragment ServiceDetails on Service {
+  ...ServiceWithStudyYears
+  nextServiceId
+  nextService {
+    ...Service
+  }
+  defaultMeeting {
+    ...OrgMeeting
+  }
+  meetings {
+    ...OrgMeeting
+  }
+  latestEdit {
+    ...OrgLatestEdit
+  }
+  admins {
+    ...OrgUser
+  }
+}
+
+fragment OrgUser on User {
+  id
+  uid
+  name
+  email
+  photoUpdatedAt
+  blurhash
+}
+
+fragment OrgLatestEdit on LatestEdit {
+  id
+  time
+  recordedBy
+  user {
+    ...OrgUser
+  }
+}
+
+fragment OrgMeeting on Meeting {
+  id
+  name
+  audience
+  color
+  isArchived
+  showKodasCheckbox
+  serviceId
+  serviceGender
+  serviceStudyYear
+  groupId
+  service {
+    ...ServiceNoPhoto
+  }
+  studyYear {
+    ...StudyYear
+  }
+  group {
+    ...GroupNoPhoto
+  }
+}

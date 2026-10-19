@@ -1,0 +1,33 @@
+fragment GroupNoPhoto on Group {
+  id
+  name
+  color
+  userCanEdit
+}
+
+fragment Group on Group {
+  ...GroupNoPhoto
+  photoUpdatedAt
+  blurhash
+  serviceId
+  validity
+}
+
+fragment GroupDetails on Group {
+  ...Group
+  defaultMeeting {
+    ...OrgMeeting
+  }
+  meetings {
+    ...OrgMeeting
+  }
+  service {
+    ...ServiceWithStudyYears
+  }
+  latestEdit {
+    ...OrgLatestEdit
+  }
+  admins {
+    ...OrgUser
+  }
+}

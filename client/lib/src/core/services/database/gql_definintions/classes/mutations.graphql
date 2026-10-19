@@ -1,0 +1,23 @@
+mutation createClass($input: CreateClassInput!) {
+  createClass(input: $input) {
+    result {
+      ...ClassDetails
+    }
+  }
+}
+
+mutation updateClass($id: ID!, $input: UpdateClassInput) {
+  updateClass(id: $id, input: $input) {
+    result {
+      ...ClassDetails
+    }
+  }
+}
+
+mutation deleteClass($id: ID!) {
+  deleteClass(id: $id) {
+    result {
+      ...ClassWithStudyYears
+    }
+  }
+}
