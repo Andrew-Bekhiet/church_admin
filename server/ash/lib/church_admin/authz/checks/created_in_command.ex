@@ -39,6 +39,10 @@ defmodule ChurchAdmin.Authz.Checks.CreatedInCommand do
     end)
   end
 
+  @doc "The part of a command's context a nested changeset needs for this check."
+  @spec carried(map()) :: map()
+  def carried(context), do: Map.take(context, [:church_admin])
+
   @spec created_ids(map(), kind()) :: [String.t()]
   def created_ids(context, kind), do: get_in(context, [:church_admin, :created, kind]) || []
 end
