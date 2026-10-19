@@ -41,6 +41,17 @@ defmodule ChurchAdmin.DataCase do
   end
 
   @doc """
+  Runs the rest of the test's raw SQL writes with the system actor's database
+  session (role admin), as Hasura's admin did before the Ash migration.
+  """
+  def set_system_db_session do
+    ChurchAdmin.Repo.HasuraSession.set_for_transaction(
+      ChurchAdmin.Repo,
+      ChurchAdmin.Authz.Actor.system()
+    )
+  end
+
+  @doc """
   A helper that transforms changeset errors into a map of messages.
 
       assert {:error, changeset} = Accounts.create_user(%{password: "short"})
