@@ -122,6 +122,18 @@ defmodule ChurchAdmin.Accounts.CreateUserTest do
       assert length(edits) == 2
     end
 
+    test "records the new person's edit as the acting manager", ctx do
+      {:ok, user} = create(ctx.actor, %{})
+      person_id = person_of(user).id
+
+      edits =
+        Edit
+        |> Ash.Query.do_filter(expr(table == "persons" and record_id == ^person_id))
+        |> Ash.read!(authorize?: false, page: false)
+
+      assert Enum.map(edits, &{&1.recorded_by, &1.user_role}) == [{ctx.manager.uid, "user"}]
+    end
+
     test "reports a taken email and a taken name", ctx do
       taken = Factory.user!(%{email: "taken@example.com"})
 

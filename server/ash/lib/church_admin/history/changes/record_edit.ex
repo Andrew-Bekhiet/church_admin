@@ -18,6 +18,9 @@ defmodule ChurchAdmin.History.Changes.RecordEdit do
       `"user"`, or nil with role `"admin"` for the system actor. A history row
       that names its own recorder passes `{:attribute, :recorded_by}`.
 
+  A write authorized as the system actor on a user's behalf records that user
+  when its changeset context carries `on_behalf_of/1`.
+
   A write without an actor fails rather than record an anonymous edit.
   """
 
@@ -60,11 +63,15 @@ defmodule ChurchAdmin.History.Changes.RecordEdit do
     end
   end
 
+  @doc "Changeset context that records `actor` as the editor whatever actor authorizes the write."
+  @spec on_behalf_of(Actor.t()) :: map()
+  def on_behalf_of(%Actor{} = actor), do: %{church_admin: %{edit_recorder: actor}}
+
   @impl true
   def change(changeset, opts, context) do
     if writes_history?(changeset) do
       Ash.Changeset.after_action(changeset, fn changeset, record ->
-        case record_edits(written([record]), opts, context.actor) do
+        case record_edits(written([record]), opts, editor(changeset, context.actor)) do
           :ok -> {:ok, record}
           {:error, error} -> AfterActionFailure.roll_back(changeset.resource, error)
         end
@@ -86,14 +93,22 @@ defmodule ChurchAdmin.History.Changes.RecordEdit do
 
   @impl true
   def after_batch(changesets_and_results, opts, context) do
-    records =
-      for {changeset, record} <- changesets_and_results, writes_history?(changeset), do: record
-
-    case record_edits(written(records), opts, context.actor) do
-      :ok -> :ok
-      {:error, error} -> [{:error, error}]
-    end
+    changesets_and_results
+    |> Enum.filter(fn {changeset, _record} -> writes_history?(changeset) end)
+    |> Enum.group_by(
+      fn {changeset, _record} -> editor(changeset, context.actor) end,
+      fn {_changeset, record} -> record end
+    )
+    |> Enum.reduce_while(:ok, fn {editor, records}, :ok ->
+      case record_edits(written(records), opts, editor) do
+        :ok -> {:cont, :ok}
+        {:error, error} -> {:halt, [{:error, error}]}
+      end
+    end)
   end
+
+  defp editor(changeset, actor),
+    do: get_in(changeset.context, [:church_admin, :edit_recorder]) || actor
 
   defp writes_history?(%{action: %{type: :destroy, soft?: soft?}}), do: soft?
   defp writes_history?(_changeset), do: true
