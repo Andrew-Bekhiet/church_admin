@@ -1,0 +1,176 @@
+{
+  "attributes": [
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"gen_random_uuid()\")",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": true,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "uid",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "invitations_user_uid_fkey",
+        "on_delete": "delete",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "auth",
+        "table": "users_data"
+      },
+      "scale": null,
+      "size": null,
+      "source": "user_uid",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "uid",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "invitations_created_by_fkey",
+        "on_delete": "restrict",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "auth",
+        "table": "users_data"
+      },
+      "scale": null,
+      "size": null,
+      "source": "created_by",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"now()\")",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "created_at",
+      "type": "timestamptz(6)"
+    },
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"(now() + '7 days'::interval)\")",
+      "generated?": true,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "expires_at",
+      "type": "timestamptz(6)"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "claimed_at",
+      "type": "timestamptz(6)"
+    },
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"auth.format_invitation_code(auth.generate_invitation_code())\")",
+      "generated?": true,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "code",
+      "type": "text"
+    }
+  ],
+  "base_filter": null,
+  "check_constraints": [],
+  "create_table_options": null,
+  "custom_indexes": [],
+  "custom_statements": [],
+  "has_create_action": false,
+  "hash": "961AD6981F68750370CF2A9EA86C09ECC8116924F55CD56C31BABE87B41AAEFC",
+  "identities": [
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "invitations_code_key",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "code"
+        }
+      ],
+      "name": "unique_code",
+      "nils_distinct?": true,
+      "where": null
+    },
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "invitations_user_uid_key",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "user_uid"
+        }
+      ],
+      "name": "unique_user_uid",
+      "nils_distinct?": true,
+      "where": null
+    }
+  ],
+  "multitenancy": {
+    "attribute": null,
+    "global": null,
+    "strategy": null
+  },
+  "repo": "Elixir.ChurchAdmin.Repo",
+  "schema": "auth",
+  "table": "invitations",
+  "temporal": null
+}

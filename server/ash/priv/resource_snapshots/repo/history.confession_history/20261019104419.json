@@ -1,0 +1,163 @@
+{
+  "attributes": [
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"gen_random_uuid()\")",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": true,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "day",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "confession_history_day_id_fkey",
+        "on_delete": "restrict",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "history",
+        "table": "attendance_days"
+      },
+      "scale": null,
+      "size": null,
+      "source": "day_id",
+      "type": "date"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "confession_history_person_id_fkey",
+        "on_delete": "restrict",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "public",
+        "table": "persons"
+      },
+      "scale": null,
+      "size": null,
+      "source": "person_id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"(((current_setting('hasura.user'::text, true))::json ->> 'x-hasura-user-id'::text))::uuid\")",
+      "generated?": true,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "uid",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "confession_history_recorded_by_fkey",
+        "on_delete": "restrict",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "auth",
+        "table": "users_data"
+      },
+      "scale": null,
+      "size": null,
+      "source": "recorded_by",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": true,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "time",
+      "type": "date"
+    }
+  ],
+  "base_filter": null,
+  "check_constraints": [],
+  "create_table_options": null,
+  "custom_indexes": [],
+  "custom_statements": [],
+  "has_create_action": false,
+  "hash": "56EFAAE12AB73EFBC87F22AF5BFE2076780363451E3106F5DA67D8201E27BC6E",
+  "identities": [
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "confession_history_day_id_person_id_key",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "day_id"
+        },
+        {
+          "type": "atom",
+          "value": "person_id"
+        }
+      ],
+      "name": "unique_day_id_person_id",
+      "nils_distinct?": true,
+      "where": null
+    }
+  ],
+  "multitenancy": {
+    "attribute": null,
+    "global": null,
+    "strategy": null
+  },
+  "repo": "Elixir.ChurchAdmin.Repo",
+  "schema": "history",
+  "table": "confession_history",
+  "temporal": null
+}
