@@ -141,6 +141,28 @@ defmodule ChurchAdmin.Realtime.TypeMapTest do
     end
   end
 
+  test "a new meeting updates the service or group whose meetings it joins", %{
+    type_map: type_map
+  } do
+    for {owner_column, type} <- [{"service_id", "Service"}, {"group_id", "Group"}] do
+      row = %{"id" => @row_id, owner_column => @family_id}
+      emitted = changes(type_map, {"history", "meetings"}, :insert, row)
+
+      assert %{type: type, id: @family_id, op: "update"} in emitted
+    end
+  end
+
+  test "a new admin grant updates the service or group whose admins it joins", %{
+    type_map: type_map
+  } do
+    for {owner_column, type} <- [{"admin_on_service", "Service"}, {"admin_on_group", "Group"}] do
+      row = %{"permission_id" => @row_id, "uid" => @uid, owner_column => @family_id}
+      emitted = changes(type_map, {"auth", "users_admin_on"}, :insert, row)
+
+      assert %{type: type, id: @family_id, op: "update"} in emitted
+    end
+  end
+
   test "a table without a GraphQL type emits nothing", %{type_map: type_map} do
     assert changes(type_map, {"public", "oban_jobs"}, :insert, %{"id" => "1"}) == []
   end
