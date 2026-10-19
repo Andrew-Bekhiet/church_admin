@@ -22,11 +22,8 @@ class Meeting extends ViewableWithID
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @JsonKey(defaultValue: MeetingAudience.personsAndServants)
-  @QueryableField(label: 'audience')
   final MeetingAudience audience;
 
-  @JsonKey(defaultValue: false)
   @QueryableField(label: 'isArchived')
   final bool isArchived;
 

@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meeting_audience_graphql_value.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/mutations.graphql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/queries.graphql.dart';
 
@@ -33,7 +34,7 @@ class ServicesDAO extends FullCRUDDAO<Service> {
         defaultMeeting: switch (newObject.defaultMeeting) {
           final meeting? => Input_MeetingInput(
             name: meeting.name,
-            audience: meeting.audience.name,
+            audience: meeting.audience.graphqlValue,
             color: colorToInt(meeting.color),
             isArchived: meeting.isArchived,
             showKodasCheckbox: meeting.showKodasCheckbox,

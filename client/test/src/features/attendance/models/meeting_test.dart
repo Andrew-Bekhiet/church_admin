@@ -28,16 +28,16 @@ Meeting _meeting({
 
 void main() {
   group('MeetingAudience', () {
-    test('enum names match expected JSON string values', () {
-      expect(MeetingAudience.onlyPersons.name, 'onlyPersons');
-      expect(MeetingAudience.onlyServants.name, 'onlyServants');
-      expect(MeetingAudience.personsAndServants.name, 'personsAndServants');
-    });
+    const wireValues = {
+      MeetingAudience.onlyPersons: 'ONLY_PERSONS',
+      MeetingAudience.onlyServants: 'ONLY_SERVANTS',
+      MeetingAudience.personsAndServants: 'PERSONS_AND_SERVANTS',
+    };
 
-    test('audience round-trips through Meeting.fromJson / toJson', () {
+    test('audience round-trips through the upper-case GraphQL enum', () {
       for (final aud in MeetingAudience.values) {
         final json = _meeting(audience: aud).toJson();
-        expect(json['audience'], aud.name);
+        expect(json['audience'], wireValues[aud]);
         expect(Meeting.fromJson(json).audience, aud);
       }
     });
@@ -73,7 +73,7 @@ void main() {
       final json = {
         'id': 'meet-1',
         'name': 'Sunday Meeting',
-        'audience': 'onlyPersons',
+        'audience': 'ONLY_PERSONS',
         'isArchived': false,
       };
       final meeting = Meeting.fromJson(json);
@@ -88,7 +88,7 @@ void main() {
       final json = {
         'id': 'meet-1',
         'name': 'Sunday Meeting',
-        'audience': 'onlyPersons',
+        'audience': 'ONLY_PERSONS',
         'isArchived': false,
       };
 
@@ -101,7 +101,7 @@ void main() {
       final json = {
         'id': 'meet-1',
         'name': 'Liturgy',
-        'audience': 'onlyPersons',
+        'audience': 'ONLY_PERSONS',
         'isArchived': false,
         'showKodasCheckbox': false,
       };
@@ -115,7 +115,7 @@ void main() {
       final json = {
         'id': 'meet-1',
         'name': 'Coloured Meeting',
-        'audience': 'onlyPersons',
+        'audience': 'ONLY_PERSONS',
         'isArchived': false,
         'color': 0xFF2196F3,
       };
@@ -127,7 +127,7 @@ void main() {
       final json = {
         'id': 'meet-2',
         'name': 'Servants Meeting',
-        'audience': 'onlyServants',
+        'audience': 'ONLY_SERVANTS',
         'isArchived': true,
         'serviceId': 'svc-uuid',
         'serviceStudyYear': 3,

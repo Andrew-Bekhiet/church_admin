@@ -1,3 +1,4 @@
+import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../gql/__generated__/fragments.graphql.dart';
 import '../../groups/__generated__/fragments.graphql.dart';
 import '../../metadata/study_years/__generated__/fragments.graphql.dart';
@@ -1657,7 +1658,7 @@ class Fragment_OrgMeeting {
     return Fragment_OrgMeeting(
       id: (l$id as String),
       name: (l$name as String),
-      audience: (l$audience as String),
+      audience: fromJson_Enum_MeetingAudience((l$audience as String)),
       color: (l$color as int?),
       isArchived: (l$isArchived as bool),
       showKodasCheckbox: (l$showKodasCheckbox as bool),
@@ -1684,7 +1685,7 @@ class Fragment_OrgMeeting {
 
   final String name;
 
-  final String audience;
+  final Enum_MeetingAudience audience;
 
   final int? color;
 
@@ -1715,7 +1716,7 @@ class Fragment_OrgMeeting {
     final l$name = name;
     _resultData['name'] = l$name;
     final l$audience = audience;
-    _resultData['audience'] = l$audience;
+    _resultData['audience'] = toJson_Enum_MeetingAudience(l$audience);
     final l$color = color;
     _resultData['color'] = l$color;
     final l$isArchived = isArchived;
@@ -1874,7 +1875,7 @@ abstract class CopyWith_Fragment_OrgMeeting<TRes> {
   TRes call({
     String? id,
     String? name,
-    String? audience,
+    Enum_MeetingAudience? audience,
     int? color,
     bool? isArchived,
     bool? showKodasCheckbox,
@@ -1925,7 +1926,7 @@ class _CopyWithImpl_Fragment_OrgMeeting<TRes>
           : (name as String),
       audience: audience == _undefined || audience == null
           ? _instance.audience
-          : (audience as String),
+          : (audience as Enum_MeetingAudience),
       color: color == _undefined ? _instance.color : (color as int?),
       isArchived: isArchived == _undefined || isArchived == null
           ? _instance.isArchived
@@ -1996,7 +1997,7 @@ class _CopyWithStubImpl_Fragment_OrgMeeting<TRes>
   call({
     String? id,
     String? name,
-    String? audience,
+    Enum_MeetingAudience? audience,
     int? color,
     bool? isArchived,
     bool? showKodasCheckbox,
