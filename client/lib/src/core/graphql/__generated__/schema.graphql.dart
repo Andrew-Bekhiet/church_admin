@@ -1152,6 +1152,270 @@ class _CopyWithStubImpl_Input_AddressInput<TRes>
   }) => _res;
 }
 
+class Input_MeetingInput {
+  factory Input_MeetingInput({
+    bool? showKodasCheckbox,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    required String name,
+    bool? isArchived,
+    int? color,
+    String? audience,
+  }) => Input_MeetingInput._({
+    if (showKodasCheckbox != null) r'showKodasCheckbox': showKodasCheckbox,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceGender != null) r'serviceGender': serviceGender,
+    r'name': name,
+    if (isArchived != null) r'isArchived': isArchived,
+    if (color != null) r'color': color,
+    if (audience != null) r'audience': audience,
+  });
+
+  Input_MeetingInput._(this._$data);
+
+  factory Input_MeetingInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('showKodasCheckbox')) {
+      final l$showKodasCheckbox = data['showKodasCheckbox'];
+      result$data['showKodasCheckbox'] = (l$showKodasCheckbox as bool?);
+    }
+    if (data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = data['serviceStudyYear'];
+      result$data['serviceStudyYear'] = (l$serviceStudyYear as int?);
+    }
+    if (data.containsKey('serviceGender')) {
+      final l$serviceGender = data['serviceGender'];
+      result$data['serviceGender'] = (l$serviceGender as bool?);
+    }
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    if (data.containsKey('isArchived')) {
+      final l$isArchived = data['isArchived'];
+      result$data['isArchived'] = (l$isArchived as bool?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('audience')) {
+      final l$audience = data['audience'];
+      result$data['audience'] = (l$audience as String?);
+    }
+    return Input_MeetingInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get showKodasCheckbox => (_$data['showKodasCheckbox'] as bool?);
+
+  int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
+  bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
+  String get name => (_$data['name'] as String);
+
+  bool? get isArchived => (_$data['isArchived'] as bool?);
+
+  int? get color => (_$data['color'] as int?);
+
+  String? get audience => (_$data['audience'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('showKodasCheckbox')) {
+      final l$showKodasCheckbox = showKodasCheckbox;
+      result$data['showKodasCheckbox'] = l$showKodasCheckbox;
+    }
+    if (_$data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = serviceStudyYear;
+      result$data['serviceStudyYear'] = l$serviceStudyYear;
+    }
+    if (_$data.containsKey('serviceGender')) {
+      final l$serviceGender = serviceGender;
+      result$data['serviceGender'] = l$serviceGender;
+    }
+    final l$name = name;
+    result$data['name'] = l$name;
+    if (_$data.containsKey('isArchived')) {
+      final l$isArchived = isArchived;
+      result$data['isArchived'] = l$isArchived;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('audience')) {
+      final l$audience = audience;
+      result$data['audience'] = l$audience;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_MeetingInput<Input_MeetingInput> get copyWith =>
+      CopyWith_Input_MeetingInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_MeetingInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$showKodasCheckbox = showKodasCheckbox;
+    final lOther$showKodasCheckbox = other.showKodasCheckbox;
+    if (_$data.containsKey('showKodasCheckbox') !=
+        other._$data.containsKey('showKodasCheckbox')) {
+      return false;
+    }
+    if (l$showKodasCheckbox != lOther$showKodasCheckbox) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (_$data.containsKey('serviceStudyYear') !=
+        other._$data.containsKey('serviceStudyYear')) {
+      return false;
+    }
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    final l$serviceGender = serviceGender;
+    final lOther$serviceGender = other.serviceGender;
+    if (_$data.containsKey('serviceGender') !=
+        other._$data.containsKey('serviceGender')) {
+      return false;
+    }
+    if (l$serviceGender != lOther$serviceGender) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$isArchived = isArchived;
+    final lOther$isArchived = other.isArchived;
+    if (_$data.containsKey('isArchived') !=
+        other._$data.containsKey('isArchived')) {
+      return false;
+    }
+    if (l$isArchived != lOther$isArchived) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$audience = audience;
+    final lOther$audience = other.audience;
+    if (_$data.containsKey('audience') !=
+        other._$data.containsKey('audience')) {
+      return false;
+    }
+    if (l$audience != lOther$audience) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$showKodasCheckbox = showKodasCheckbox;
+    final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceGender = serviceGender;
+    final l$name = name;
+    final l$isArchived = isArchived;
+    final l$color = color;
+    final l$audience = audience;
+    return Object.hashAll([
+      _$data.containsKey('showKodasCheckbox') ? l$showKodasCheckbox : const {},
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('serviceGender') ? l$serviceGender : const {},
+      l$name,
+      _$data.containsKey('isArchived') ? l$isArchived : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('audience') ? l$audience : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_MeetingInput<TRes> {
+  factory CopyWith_Input_MeetingInput(
+    Input_MeetingInput instance,
+    TRes Function(Input_MeetingInput) then,
+  ) = _CopyWithImpl_Input_MeetingInput;
+
+  factory CopyWith_Input_MeetingInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_MeetingInput;
+
+  TRes call({
+    bool? showKodasCheckbox,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    String? name,
+    bool? isArchived,
+    int? color,
+    String? audience,
+  });
+}
+
+class _CopyWithImpl_Input_MeetingInput<TRes>
+    implements CopyWith_Input_MeetingInput<TRes> {
+  _CopyWithImpl_Input_MeetingInput(this._instance, this._then);
+
+  final Input_MeetingInput _instance;
+
+  final TRes Function(Input_MeetingInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? showKodasCheckbox = _undefined,
+    Object? serviceStudyYear = _undefined,
+    Object? serviceGender = _undefined,
+    Object? name = _undefined,
+    Object? isArchived = _undefined,
+    Object? color = _undefined,
+    Object? audience = _undefined,
+  }) => _then(
+    Input_MeetingInput._({
+      ..._instance._$data,
+      if (showKodasCheckbox != _undefined)
+        'showKodasCheckbox': (showKodasCheckbox as bool?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as int?),
+      if (serviceGender != _undefined)
+        'serviceGender': (serviceGender as bool?),
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (isArchived != _undefined) 'isArchived': (isArchived as bool?),
+      if (color != _undefined) 'color': (color as int?),
+      if (audience != _undefined) 'audience': (audience as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_MeetingInput<TRes>
+    implements CopyWith_Input_MeetingInput<TRes> {
+  _CopyWithStubImpl_Input_MeetingInput(this._res);
+
+  TRes _res;
+
+  call({
+    bool? showKodasCheckbox,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    String? name,
+    bool? isArchived,
+    int? color,
+    String? audience,
+  }) => _res;
+}
+
 class Input_ServiceMembershipFilterIsOutsideServiceStudyYears {
   factory Input_ServiceMembershipFilterIsOutsideServiceStudyYears({
     bool? isNil,
@@ -64209,6 +64473,508 @@ class _CopyWithStubImpl_Input_ClassMembershipSortInput<TRes>
   call({Enum_SortOrder? order, Enum_ClassMembershipSortField? field}) => _res;
 }
 
+class Input_UpdateServiceInput {
+  factory Input_UpdateServiceInput({
+    String? name,
+    int? studyYearFromId,
+    int? studyYearToId,
+    String? nextServiceId,
+    int? color,
+    String? defaultMeetingId,
+  }) => Input_UpdateServiceInput._({
+    if (name != null) r'name': name,
+    if (studyYearFromId != null) r'studyYearFromId': studyYearFromId,
+    if (studyYearToId != null) r'studyYearToId': studyYearToId,
+    if (nextServiceId != null) r'nextServiceId': nextServiceId,
+    if (color != null) r'color': color,
+    if (defaultMeetingId != null) r'defaultMeetingId': defaultMeetingId,
+  });
+
+  Input_UpdateServiceInput._(this._$data);
+
+  factory Input_UpdateServiceInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = data['studyYearFromId'];
+      result$data['studyYearFromId'] = (l$studyYearFromId as int?);
+    }
+    if (data.containsKey('studyYearToId')) {
+      final l$studyYearToId = data['studyYearToId'];
+      result$data['studyYearToId'] = (l$studyYearToId as int?);
+    }
+    if (data.containsKey('nextServiceId')) {
+      final l$nextServiceId = data['nextServiceId'];
+      result$data['nextServiceId'] = (l$nextServiceId as String?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = data['defaultMeetingId'];
+      result$data['defaultMeetingId'] = (l$defaultMeetingId as String?);
+    }
+    return Input_UpdateServiceInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get name => (_$data['name'] as String?);
+
+  int? get studyYearFromId => (_$data['studyYearFromId'] as int?);
+
+  int? get studyYearToId => (_$data['studyYearToId'] as int?);
+
+  String? get nextServiceId => (_$data['nextServiceId'] as String?);
+
+  int? get color => (_$data['color'] as int?);
+
+  String? get defaultMeetingId => (_$data['defaultMeetingId'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = studyYearFromId;
+      result$data['studyYearFromId'] = l$studyYearFromId;
+    }
+    if (_$data.containsKey('studyYearToId')) {
+      final l$studyYearToId = studyYearToId;
+      result$data['studyYearToId'] = l$studyYearToId;
+    }
+    if (_$data.containsKey('nextServiceId')) {
+      final l$nextServiceId = nextServiceId;
+      result$data['nextServiceId'] = l$nextServiceId;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = defaultMeetingId;
+      result$data['defaultMeetingId'] = l$defaultMeetingId;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UpdateServiceInput<Input_UpdateServiceInput> get copyWith =>
+      CopyWith_Input_UpdateServiceInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UpdateServiceInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$studyYearFromId = studyYearFromId;
+    final lOther$studyYearFromId = other.studyYearFromId;
+    if (_$data.containsKey('studyYearFromId') !=
+        other._$data.containsKey('studyYearFromId')) {
+      return false;
+    }
+    if (l$studyYearFromId != lOther$studyYearFromId) {
+      return false;
+    }
+    final l$studyYearToId = studyYearToId;
+    final lOther$studyYearToId = other.studyYearToId;
+    if (_$data.containsKey('studyYearToId') !=
+        other._$data.containsKey('studyYearToId')) {
+      return false;
+    }
+    if (l$studyYearToId != lOther$studyYearToId) {
+      return false;
+    }
+    final l$nextServiceId = nextServiceId;
+    final lOther$nextServiceId = other.nextServiceId;
+    if (_$data.containsKey('nextServiceId') !=
+        other._$data.containsKey('nextServiceId')) {
+      return false;
+    }
+    if (l$nextServiceId != lOther$nextServiceId) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$defaultMeetingId = defaultMeetingId;
+    final lOther$defaultMeetingId = other.defaultMeetingId;
+    if (_$data.containsKey('defaultMeetingId') !=
+        other._$data.containsKey('defaultMeetingId')) {
+      return false;
+    }
+    if (l$defaultMeetingId != lOther$defaultMeetingId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$studyYearFromId = studyYearFromId;
+    final l$studyYearToId = studyYearToId;
+    final l$nextServiceId = nextServiceId;
+    final l$color = color;
+    final l$defaultMeetingId = defaultMeetingId;
+    return Object.hashAll([
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('studyYearFromId') ? l$studyYearFromId : const {},
+      _$data.containsKey('studyYearToId') ? l$studyYearToId : const {},
+      _$data.containsKey('nextServiceId') ? l$nextServiceId : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeetingId') ? l$defaultMeetingId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UpdateServiceInput<TRes> {
+  factory CopyWith_Input_UpdateServiceInput(
+    Input_UpdateServiceInput instance,
+    TRes Function(Input_UpdateServiceInput) then,
+  ) = _CopyWithImpl_Input_UpdateServiceInput;
+
+  factory CopyWith_Input_UpdateServiceInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UpdateServiceInput;
+
+  TRes call({
+    String? name,
+    int? studyYearFromId,
+    int? studyYearToId,
+    String? nextServiceId,
+    int? color,
+    String? defaultMeetingId,
+  });
+}
+
+class _CopyWithImpl_Input_UpdateServiceInput<TRes>
+    implements CopyWith_Input_UpdateServiceInput<TRes> {
+  _CopyWithImpl_Input_UpdateServiceInput(this._instance, this._then);
+
+  final Input_UpdateServiceInput _instance;
+
+  final TRes Function(Input_UpdateServiceInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? studyYearFromId = _undefined,
+    Object? studyYearToId = _undefined,
+    Object? nextServiceId = _undefined,
+    Object? color = _undefined,
+    Object? defaultMeetingId = _undefined,
+  }) => _then(
+    Input_UpdateServiceInput._({
+      ..._instance._$data,
+      if (name != _undefined) 'name': (name as String?),
+      if (studyYearFromId != _undefined)
+        'studyYearFromId': (studyYearFromId as int?),
+      if (studyYearToId != _undefined) 'studyYearToId': (studyYearToId as int?),
+      if (nextServiceId != _undefined)
+        'nextServiceId': (nextServiceId as String?),
+      if (color != _undefined) 'color': (color as int?),
+      if (defaultMeetingId != _undefined)
+        'defaultMeetingId': (defaultMeetingId as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UpdateServiceInput<TRes>
+    implements CopyWith_Input_UpdateServiceInput<TRes> {
+  _CopyWithStubImpl_Input_UpdateServiceInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    int? studyYearFromId,
+    int? studyYearToId,
+    String? nextServiceId,
+    int? color,
+    String? defaultMeetingId,
+  }) => _res;
+}
+
+class Input_CreateServiceInput {
+  factory Input_CreateServiceInput({
+    required String name,
+    int? studyYearFromId,
+    int? studyYearToId,
+    String? nextServiceId,
+    int? color,
+    Input_MeetingInput? defaultMeeting,
+  }) => Input_CreateServiceInput._({
+    r'name': name,
+    if (studyYearFromId != null) r'studyYearFromId': studyYearFromId,
+    if (studyYearToId != null) r'studyYearToId': studyYearToId,
+    if (nextServiceId != null) r'nextServiceId': nextServiceId,
+    if (color != null) r'color': color,
+    if (defaultMeeting != null) r'defaultMeeting': defaultMeeting,
+  });
+
+  Input_CreateServiceInput._(this._$data);
+
+  factory Input_CreateServiceInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    if (data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = data['studyYearFromId'];
+      result$data['studyYearFromId'] = (l$studyYearFromId as int?);
+    }
+    if (data.containsKey('studyYearToId')) {
+      final l$studyYearToId = data['studyYearToId'];
+      result$data['studyYearToId'] = (l$studyYearToId as int?);
+    }
+    if (data.containsKey('nextServiceId')) {
+      final l$nextServiceId = data['nextServiceId'];
+      result$data['nextServiceId'] = (l$nextServiceId as String?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('defaultMeeting')) {
+      final l$defaultMeeting = data['defaultMeeting'];
+      result$data['defaultMeeting'] = l$defaultMeeting == null
+          ? null
+          : Input_MeetingInput.fromJson(
+              (l$defaultMeeting as Map<String, dynamic>),
+            );
+    }
+    return Input_CreateServiceInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  int? get studyYearFromId => (_$data['studyYearFromId'] as int?);
+
+  int? get studyYearToId => (_$data['studyYearToId'] as int?);
+
+  String? get nextServiceId => (_$data['nextServiceId'] as String?);
+
+  int? get color => (_$data['color'] as int?);
+
+  Input_MeetingInput? get defaultMeeting =>
+      (_$data['defaultMeeting'] as Input_MeetingInput?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    if (_$data.containsKey('studyYearFromId')) {
+      final l$studyYearFromId = studyYearFromId;
+      result$data['studyYearFromId'] = l$studyYearFromId;
+    }
+    if (_$data.containsKey('studyYearToId')) {
+      final l$studyYearToId = studyYearToId;
+      result$data['studyYearToId'] = l$studyYearToId;
+    }
+    if (_$data.containsKey('nextServiceId')) {
+      final l$nextServiceId = nextServiceId;
+      result$data['nextServiceId'] = l$nextServiceId;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('defaultMeeting')) {
+      final l$defaultMeeting = defaultMeeting;
+      result$data['defaultMeeting'] = l$defaultMeeting?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateServiceInput<Input_CreateServiceInput> get copyWith =>
+      CopyWith_Input_CreateServiceInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateServiceInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$studyYearFromId = studyYearFromId;
+    final lOther$studyYearFromId = other.studyYearFromId;
+    if (_$data.containsKey('studyYearFromId') !=
+        other._$data.containsKey('studyYearFromId')) {
+      return false;
+    }
+    if (l$studyYearFromId != lOther$studyYearFromId) {
+      return false;
+    }
+    final l$studyYearToId = studyYearToId;
+    final lOther$studyYearToId = other.studyYearToId;
+    if (_$data.containsKey('studyYearToId') !=
+        other._$data.containsKey('studyYearToId')) {
+      return false;
+    }
+    if (l$studyYearToId != lOther$studyYearToId) {
+      return false;
+    }
+    final l$nextServiceId = nextServiceId;
+    final lOther$nextServiceId = other.nextServiceId;
+    if (_$data.containsKey('nextServiceId') !=
+        other._$data.containsKey('nextServiceId')) {
+      return false;
+    }
+    if (l$nextServiceId != lOther$nextServiceId) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$defaultMeeting = defaultMeeting;
+    final lOther$defaultMeeting = other.defaultMeeting;
+    if (_$data.containsKey('defaultMeeting') !=
+        other._$data.containsKey('defaultMeeting')) {
+      return false;
+    }
+    if (l$defaultMeeting != lOther$defaultMeeting) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$studyYearFromId = studyYearFromId;
+    final l$studyYearToId = studyYearToId;
+    final l$nextServiceId = nextServiceId;
+    final l$color = color;
+    final l$defaultMeeting = defaultMeeting;
+    return Object.hashAll([
+      l$name,
+      _$data.containsKey('studyYearFromId') ? l$studyYearFromId : const {},
+      _$data.containsKey('studyYearToId') ? l$studyYearToId : const {},
+      _$data.containsKey('nextServiceId') ? l$nextServiceId : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeeting') ? l$defaultMeeting : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateServiceInput<TRes> {
+  factory CopyWith_Input_CreateServiceInput(
+    Input_CreateServiceInput instance,
+    TRes Function(Input_CreateServiceInput) then,
+  ) = _CopyWithImpl_Input_CreateServiceInput;
+
+  factory CopyWith_Input_CreateServiceInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateServiceInput;
+
+  TRes call({
+    String? name,
+    int? studyYearFromId,
+    int? studyYearToId,
+    String? nextServiceId,
+    int? color,
+    Input_MeetingInput? defaultMeeting,
+  });
+  CopyWith_Input_MeetingInput<TRes> get defaultMeeting;
+}
+
+class _CopyWithImpl_Input_CreateServiceInput<TRes>
+    implements CopyWith_Input_CreateServiceInput<TRes> {
+  _CopyWithImpl_Input_CreateServiceInput(this._instance, this._then);
+
+  final Input_CreateServiceInput _instance;
+
+  final TRes Function(Input_CreateServiceInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? studyYearFromId = _undefined,
+    Object? studyYearToId = _undefined,
+    Object? nextServiceId = _undefined,
+    Object? color = _undefined,
+    Object? defaultMeeting = _undefined,
+  }) => _then(
+    Input_CreateServiceInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (studyYearFromId != _undefined)
+        'studyYearFromId': (studyYearFromId as int?),
+      if (studyYearToId != _undefined) 'studyYearToId': (studyYearToId as int?),
+      if (nextServiceId != _undefined)
+        'nextServiceId': (nextServiceId as String?),
+      if (color != _undefined) 'color': (color as int?),
+      if (defaultMeeting != _undefined)
+        'defaultMeeting': (defaultMeeting as Input_MeetingInput?),
+    }),
+  );
+
+  CopyWith_Input_MeetingInput<TRes> get defaultMeeting {
+    final local$defaultMeeting = _instance.defaultMeeting;
+    return local$defaultMeeting == null
+        ? CopyWith_Input_MeetingInput.stub(_then(_instance))
+        : CopyWith_Input_MeetingInput(
+            local$defaultMeeting,
+            (e) => call(defaultMeeting: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_CreateServiceInput<TRes>
+    implements CopyWith_Input_CreateServiceInput<TRes> {
+  _CopyWithStubImpl_Input_CreateServiceInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    int? studyYearFromId,
+    int? studyYearToId,
+    String? nextServiceId,
+    int? color,
+    Input_MeetingInput? defaultMeeting,
+  }) => _res;
+
+  CopyWith_Input_MeetingInput<TRes> get defaultMeeting =>
+      CopyWith_Input_MeetingInput.stub(_res);
+}
+
 class Input_ServiceFilterUserCanEdit {
   factory Input_ServiceFilterUserCanEdit({
     bool? isNil,
@@ -71956,6 +72722,384 @@ class _CopyWithStubImpl_Input_ServiceSortInput<TRes>
   call({Enum_SortOrder? order, Enum_ServiceSortField? field}) => _res;
 }
 
+class Input_UpdateGroupInput {
+  factory Input_UpdateGroupInput({
+    String? name,
+    String? serviceId,
+    String? validity,
+    int? color,
+    String? defaultMeetingId,
+  }) => Input_UpdateGroupInput._({
+    if (name != null) r'name': name,
+    if (serviceId != null) r'serviceId': serviceId,
+    if (validity != null) r'validity': validity,
+    if (color != null) r'color': color,
+    if (defaultMeetingId != null) r'defaultMeetingId': defaultMeetingId,
+  });
+
+  Input_UpdateGroupInput._(this._$data);
+
+  factory Input_UpdateGroupInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('serviceId')) {
+      final l$serviceId = data['serviceId'];
+      result$data['serviceId'] = (l$serviceId as String?);
+    }
+    if (data.containsKey('validity')) {
+      final l$validity = data['validity'];
+      result$data['validity'] = (l$validity as String?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = data['defaultMeetingId'];
+      result$data['defaultMeetingId'] = (l$defaultMeetingId as String?);
+    }
+    return Input_UpdateGroupInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get name => (_$data['name'] as String?);
+
+  String? get serviceId => (_$data['serviceId'] as String?);
+
+  String? get validity => (_$data['validity'] as String?);
+
+  int? get color => (_$data['color'] as int?);
+
+  String? get defaultMeetingId => (_$data['defaultMeetingId'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('serviceId')) {
+      final l$serviceId = serviceId;
+      result$data['serviceId'] = l$serviceId;
+    }
+    if (_$data.containsKey('validity')) {
+      final l$validity = validity;
+      result$data['validity'] = l$validity;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = defaultMeetingId;
+      result$data['defaultMeetingId'] = l$defaultMeetingId;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UpdateGroupInput<Input_UpdateGroupInput> get copyWith =>
+      CopyWith_Input_UpdateGroupInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UpdateGroupInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (_$data.containsKey('serviceId') !=
+        other._$data.containsKey('serviceId')) {
+      return false;
+    }
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$validity = validity;
+    final lOther$validity = other.validity;
+    if (_$data.containsKey('validity') !=
+        other._$data.containsKey('validity')) {
+      return false;
+    }
+    if (l$validity != lOther$validity) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$defaultMeetingId = defaultMeetingId;
+    final lOther$defaultMeetingId = other.defaultMeetingId;
+    if (_$data.containsKey('defaultMeetingId') !=
+        other._$data.containsKey('defaultMeetingId')) {
+      return false;
+    }
+    if (l$defaultMeetingId != lOther$defaultMeetingId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$serviceId = serviceId;
+    final l$validity = validity;
+    final l$color = color;
+    final l$defaultMeetingId = defaultMeetingId;
+    return Object.hashAll([
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('serviceId') ? l$serviceId : const {},
+      _$data.containsKey('validity') ? l$validity : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeetingId') ? l$defaultMeetingId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UpdateGroupInput<TRes> {
+  factory CopyWith_Input_UpdateGroupInput(
+    Input_UpdateGroupInput instance,
+    TRes Function(Input_UpdateGroupInput) then,
+  ) = _CopyWithImpl_Input_UpdateGroupInput;
+
+  factory CopyWith_Input_UpdateGroupInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UpdateGroupInput;
+
+  TRes call({
+    String? name,
+    String? serviceId,
+    String? validity,
+    int? color,
+    String? defaultMeetingId,
+  });
+}
+
+class _CopyWithImpl_Input_UpdateGroupInput<TRes>
+    implements CopyWith_Input_UpdateGroupInput<TRes> {
+  _CopyWithImpl_Input_UpdateGroupInput(this._instance, this._then);
+
+  final Input_UpdateGroupInput _instance;
+
+  final TRes Function(Input_UpdateGroupInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? serviceId = _undefined,
+    Object? validity = _undefined,
+    Object? color = _undefined,
+    Object? defaultMeetingId = _undefined,
+  }) => _then(
+    Input_UpdateGroupInput._({
+      ..._instance._$data,
+      if (name != _undefined) 'name': (name as String?),
+      if (serviceId != _undefined) 'serviceId': (serviceId as String?),
+      if (validity != _undefined) 'validity': (validity as String?),
+      if (color != _undefined) 'color': (color as int?),
+      if (defaultMeetingId != _undefined)
+        'defaultMeetingId': (defaultMeetingId as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UpdateGroupInput<TRes>
+    implements CopyWith_Input_UpdateGroupInput<TRes> {
+  _CopyWithStubImpl_Input_UpdateGroupInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? serviceId,
+    String? validity,
+    int? color,
+    String? defaultMeetingId,
+  }) => _res;
+}
+
+class Input_CreateGroupInput {
+  factory Input_CreateGroupInput({
+    required String name,
+    required String serviceId,
+    String? validity,
+    int? color,
+  }) => Input_CreateGroupInput._({
+    r'name': name,
+    r'serviceId': serviceId,
+    if (validity != null) r'validity': validity,
+    if (color != null) r'color': color,
+  });
+
+  Input_CreateGroupInput._(this._$data);
+
+  factory Input_CreateGroupInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    final l$serviceId = data['serviceId'];
+    result$data['serviceId'] = (l$serviceId as String);
+    if (data.containsKey('validity')) {
+      final l$validity = data['validity'];
+      result$data['validity'] = (l$validity as String?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    return Input_CreateGroupInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  String get serviceId => (_$data['serviceId'] as String);
+
+  String? get validity => (_$data['validity'] as String?);
+
+  int? get color => (_$data['color'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    final l$serviceId = serviceId;
+    result$data['serviceId'] = l$serviceId;
+    if (_$data.containsKey('validity')) {
+      final l$validity = validity;
+      result$data['validity'] = l$validity;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateGroupInput<Input_CreateGroupInput> get copyWith =>
+      CopyWith_Input_CreateGroupInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateGroupInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$validity = validity;
+    final lOther$validity = other.validity;
+    if (_$data.containsKey('validity') !=
+        other._$data.containsKey('validity')) {
+      return false;
+    }
+    if (l$validity != lOther$validity) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$serviceId = serviceId;
+    final l$validity = validity;
+    final l$color = color;
+    return Object.hashAll([
+      l$name,
+      l$serviceId,
+      _$data.containsKey('validity') ? l$validity : const {},
+      _$data.containsKey('color') ? l$color : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateGroupInput<TRes> {
+  factory CopyWith_Input_CreateGroupInput(
+    Input_CreateGroupInput instance,
+    TRes Function(Input_CreateGroupInput) then,
+  ) = _CopyWithImpl_Input_CreateGroupInput;
+
+  factory CopyWith_Input_CreateGroupInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateGroupInput;
+
+  TRes call({String? name, String? serviceId, String? validity, int? color});
+}
+
+class _CopyWithImpl_Input_CreateGroupInput<TRes>
+    implements CopyWith_Input_CreateGroupInput<TRes> {
+  _CopyWithImpl_Input_CreateGroupInput(this._instance, this._then);
+
+  final Input_CreateGroupInput _instance;
+
+  final TRes Function(Input_CreateGroupInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? serviceId = _undefined,
+    Object? validity = _undefined,
+    Object? color = _undefined,
+  }) => _then(
+    Input_CreateGroupInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (serviceId != _undefined && serviceId != null)
+        'serviceId': (serviceId as String),
+      if (validity != _undefined) 'validity': (validity as String?),
+      if (color != _undefined) 'color': (color as int?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateGroupInput<TRes>
+    implements CopyWith_Input_CreateGroupInput<TRes> {
+  _CopyWithStubImpl_Input_CreateGroupInput(this._res);
+
+  TRes _res;
+
+  call({String? name, String? serviceId, String? validity, int? color}) => _res;
+}
+
 class Input_GroupFilterUserCanEdit {
   factory Input_GroupFilterUserCanEdit({
     bool? isNil,
@@ -78221,6 +79365,476 @@ class _CopyWithStubImpl_Input_GroupSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_GroupSortField? field}) => _res;
+}
+
+class Input_UpdateClassInput {
+  factory Input_UpdateClassInput({
+    String? name,
+    String? serviceId,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    int? color,
+    int? serviceStudyYearTo,
+  }) => Input_UpdateClassInput._({
+    if (name != null) r'name': name,
+    if (serviceId != null) r'serviceId': serviceId,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceGender != null) r'serviceGender': serviceGender,
+    if (color != null) r'color': color,
+    if (serviceStudyYearTo != null) r'serviceStudyYearTo': serviceStudyYearTo,
+  });
+
+  Input_UpdateClassInput._(this._$data);
+
+  factory Input_UpdateClassInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('serviceId')) {
+      final l$serviceId = data['serviceId'];
+      result$data['serviceId'] = (l$serviceId as String?);
+    }
+    if (data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = data['serviceStudyYear'];
+      result$data['serviceStudyYear'] = (l$serviceStudyYear as int?);
+    }
+    if (data.containsKey('serviceGender')) {
+      final l$serviceGender = data['serviceGender'];
+      result$data['serviceGender'] = (l$serviceGender as bool?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = data['serviceStudyYearTo'];
+      result$data['serviceStudyYearTo'] = (l$serviceStudyYearTo as int?);
+    }
+    return Input_UpdateClassInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get name => (_$data['name'] as String?);
+
+  String? get serviceId => (_$data['serviceId'] as String?);
+
+  int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
+  bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
+  int? get color => (_$data['color'] as int?);
+
+  int? get serviceStudyYearTo => (_$data['serviceStudyYearTo'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('serviceId')) {
+      final l$serviceId = serviceId;
+      result$data['serviceId'] = l$serviceId;
+    }
+    if (_$data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = serviceStudyYear;
+      result$data['serviceStudyYear'] = l$serviceStudyYear;
+    }
+    if (_$data.containsKey('serviceGender')) {
+      final l$serviceGender = serviceGender;
+      result$data['serviceGender'] = l$serviceGender;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = serviceStudyYearTo;
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UpdateClassInput<Input_UpdateClassInput> get copyWith =>
+      CopyWith_Input_UpdateClassInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UpdateClassInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (_$data.containsKey('serviceId') !=
+        other._$data.containsKey('serviceId')) {
+      return false;
+    }
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (_$data.containsKey('serviceStudyYear') !=
+        other._$data.containsKey('serviceStudyYear')) {
+      return false;
+    }
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    final l$serviceGender = serviceGender;
+    final lOther$serviceGender = other.serviceGender;
+    if (_$data.containsKey('serviceGender') !=
+        other._$data.containsKey('serviceGender')) {
+      return false;
+    }
+    if (l$serviceGender != lOther$serviceGender) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    final lOther$serviceStudyYearTo = other.serviceStudyYearTo;
+    if (_$data.containsKey('serviceStudyYearTo') !=
+        other._$data.containsKey('serviceStudyYearTo')) {
+      return false;
+    }
+    if (l$serviceStudyYearTo != lOther$serviceStudyYearTo) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$serviceId = serviceId;
+    final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceGender = serviceGender;
+    final l$color = color;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    return Object.hashAll([
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('serviceId') ? l$serviceId : const {},
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('serviceGender') ? l$serviceGender : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('serviceStudyYearTo')
+          ? l$serviceStudyYearTo
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UpdateClassInput<TRes> {
+  factory CopyWith_Input_UpdateClassInput(
+    Input_UpdateClassInput instance,
+    TRes Function(Input_UpdateClassInput) then,
+  ) = _CopyWithImpl_Input_UpdateClassInput;
+
+  factory CopyWith_Input_UpdateClassInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UpdateClassInput;
+
+  TRes call({
+    String? name,
+    String? serviceId,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    int? color,
+    int? serviceStudyYearTo,
+  });
+}
+
+class _CopyWithImpl_Input_UpdateClassInput<TRes>
+    implements CopyWith_Input_UpdateClassInput<TRes> {
+  _CopyWithImpl_Input_UpdateClassInput(this._instance, this._then);
+
+  final Input_UpdateClassInput _instance;
+
+  final TRes Function(Input_UpdateClassInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? serviceId = _undefined,
+    Object? serviceStudyYear = _undefined,
+    Object? serviceGender = _undefined,
+    Object? color = _undefined,
+    Object? serviceStudyYearTo = _undefined,
+  }) => _then(
+    Input_UpdateClassInput._({
+      ..._instance._$data,
+      if (name != _undefined) 'name': (name as String?),
+      if (serviceId != _undefined) 'serviceId': (serviceId as String?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as int?),
+      if (serviceGender != _undefined)
+        'serviceGender': (serviceGender as bool?),
+      if (color != _undefined) 'color': (color as int?),
+      if (serviceStudyYearTo != _undefined)
+        'serviceStudyYearTo': (serviceStudyYearTo as int?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UpdateClassInput<TRes>
+    implements CopyWith_Input_UpdateClassInput<TRes> {
+  _CopyWithStubImpl_Input_UpdateClassInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? serviceId,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    int? color,
+    int? serviceStudyYearTo,
+  }) => _res;
+}
+
+class Input_CreateClassInput {
+  factory Input_CreateClassInput({
+    required String name,
+    required String serviceId,
+    required int serviceStudyYear,
+    bool? serviceGender,
+    int? color,
+    int? serviceStudyYearTo,
+  }) => Input_CreateClassInput._({
+    r'name': name,
+    r'serviceId': serviceId,
+    r'serviceStudyYear': serviceStudyYear,
+    if (serviceGender != null) r'serviceGender': serviceGender,
+    if (color != null) r'color': color,
+    if (serviceStudyYearTo != null) r'serviceStudyYearTo': serviceStudyYearTo,
+  });
+
+  Input_CreateClassInput._(this._$data);
+
+  factory Input_CreateClassInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    final l$serviceId = data['serviceId'];
+    result$data['serviceId'] = (l$serviceId as String);
+    final l$serviceStudyYear = data['serviceStudyYear'];
+    result$data['serviceStudyYear'] = (l$serviceStudyYear as int);
+    if (data.containsKey('serviceGender')) {
+      final l$serviceGender = data['serviceGender'];
+      result$data['serviceGender'] = (l$serviceGender as bool?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = data['serviceStudyYearTo'];
+      result$data['serviceStudyYearTo'] = (l$serviceStudyYearTo as int?);
+    }
+    return Input_CreateClassInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  String get serviceId => (_$data['serviceId'] as String);
+
+  int get serviceStudyYear => (_$data['serviceStudyYear'] as int);
+
+  bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
+  int? get color => (_$data['color'] as int?);
+
+  int? get serviceStudyYearTo => (_$data['serviceStudyYearTo'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    final l$serviceId = serviceId;
+    result$data['serviceId'] = l$serviceId;
+    final l$serviceStudyYear = serviceStudyYear;
+    result$data['serviceStudyYear'] = l$serviceStudyYear;
+    if (_$data.containsKey('serviceGender')) {
+      final l$serviceGender = serviceGender;
+      result$data['serviceGender'] = l$serviceGender;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('serviceStudyYearTo')) {
+      final l$serviceStudyYearTo = serviceStudyYearTo;
+      result$data['serviceStudyYearTo'] = l$serviceStudyYearTo;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateClassInput<Input_CreateClassInput> get copyWith =>
+      CopyWith_Input_CreateClassInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateClassInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    final l$serviceGender = serviceGender;
+    final lOther$serviceGender = other.serviceGender;
+    if (_$data.containsKey('serviceGender') !=
+        other._$data.containsKey('serviceGender')) {
+      return false;
+    }
+    if (l$serviceGender != lOther$serviceGender) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    final lOther$serviceStudyYearTo = other.serviceStudyYearTo;
+    if (_$data.containsKey('serviceStudyYearTo') !=
+        other._$data.containsKey('serviceStudyYearTo')) {
+      return false;
+    }
+    if (l$serviceStudyYearTo != lOther$serviceStudyYearTo) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$serviceId = serviceId;
+    final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceGender = serviceGender;
+    final l$color = color;
+    final l$serviceStudyYearTo = serviceStudyYearTo;
+    return Object.hashAll([
+      l$name,
+      l$serviceId,
+      l$serviceStudyYear,
+      _$data.containsKey('serviceGender') ? l$serviceGender : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('serviceStudyYearTo')
+          ? l$serviceStudyYearTo
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateClassInput<TRes> {
+  factory CopyWith_Input_CreateClassInput(
+    Input_CreateClassInput instance,
+    TRes Function(Input_CreateClassInput) then,
+  ) = _CopyWithImpl_Input_CreateClassInput;
+
+  factory CopyWith_Input_CreateClassInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateClassInput;
+
+  TRes call({
+    String? name,
+    String? serviceId,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    int? color,
+    int? serviceStudyYearTo,
+  });
+}
+
+class _CopyWithImpl_Input_CreateClassInput<TRes>
+    implements CopyWith_Input_CreateClassInput<TRes> {
+  _CopyWithImpl_Input_CreateClassInput(this._instance, this._then);
+
+  final Input_CreateClassInput _instance;
+
+  final TRes Function(Input_CreateClassInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? serviceId = _undefined,
+    Object? serviceStudyYear = _undefined,
+    Object? serviceGender = _undefined,
+    Object? color = _undefined,
+    Object? serviceStudyYearTo = _undefined,
+  }) => _then(
+    Input_CreateClassInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (serviceId != _undefined && serviceId != null)
+        'serviceId': (serviceId as String),
+      if (serviceStudyYear != _undefined && serviceStudyYear != null)
+        'serviceStudyYear': (serviceStudyYear as int),
+      if (serviceGender != _undefined)
+        'serviceGender': (serviceGender as bool?),
+      if (color != _undefined) 'color': (color as int?),
+      if (serviceStudyYearTo != _undefined)
+        'serviceStudyYearTo': (serviceStudyYearTo as int?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateClassInput<TRes>
+    implements CopyWith_Input_CreateClassInput<TRes> {
+  _CopyWithStubImpl_Input_CreateClassInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? serviceId,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    int? color,
+    int? serviceStudyYearTo,
+  }) => _res;
 }
 
 class Input_ClassFilterUserCanEdit {
@@ -125931,6 +127545,540 @@ class _CopyWithStubImpl_Input_MeetingDaySortInput<TRes>
   call({Enum_SortOrder? order, Enum_MeetingDaySortField? field}) => _res;
 }
 
+class Input_UpdateMeetingInput {
+  factory Input_UpdateMeetingInput({
+    String? name,
+    String? audience,
+    bool? isArchived,
+    int? color,
+    bool? showKodasCheckbox,
+  }) => Input_UpdateMeetingInput._({
+    if (name != null) r'name': name,
+    if (audience != null) r'audience': audience,
+    if (isArchived != null) r'isArchived': isArchived,
+    if (color != null) r'color': color,
+    if (showKodasCheckbox != null) r'showKodasCheckbox': showKodasCheckbox,
+  });
+
+  Input_UpdateMeetingInput._(this._$data);
+
+  factory Input_UpdateMeetingInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('audience')) {
+      final l$audience = data['audience'];
+      result$data['audience'] = (l$audience as String?);
+    }
+    if (data.containsKey('isArchived')) {
+      final l$isArchived = data['isArchived'];
+      result$data['isArchived'] = (l$isArchived as bool?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('showKodasCheckbox')) {
+      final l$showKodasCheckbox = data['showKodasCheckbox'];
+      result$data['showKodasCheckbox'] = (l$showKodasCheckbox as bool?);
+    }
+    return Input_UpdateMeetingInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get name => (_$data['name'] as String?);
+
+  String? get audience => (_$data['audience'] as String?);
+
+  bool? get isArchived => (_$data['isArchived'] as bool?);
+
+  int? get color => (_$data['color'] as int?);
+
+  bool? get showKodasCheckbox => (_$data['showKodasCheckbox'] as bool?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('audience')) {
+      final l$audience = audience;
+      result$data['audience'] = l$audience;
+    }
+    if (_$data.containsKey('isArchived')) {
+      final l$isArchived = isArchived;
+      result$data['isArchived'] = l$isArchived;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('showKodasCheckbox')) {
+      final l$showKodasCheckbox = showKodasCheckbox;
+      result$data['showKodasCheckbox'] = l$showKodasCheckbox;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UpdateMeetingInput<Input_UpdateMeetingInput> get copyWith =>
+      CopyWith_Input_UpdateMeetingInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UpdateMeetingInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$audience = audience;
+    final lOther$audience = other.audience;
+    if (_$data.containsKey('audience') !=
+        other._$data.containsKey('audience')) {
+      return false;
+    }
+    if (l$audience != lOther$audience) {
+      return false;
+    }
+    final l$isArchived = isArchived;
+    final lOther$isArchived = other.isArchived;
+    if (_$data.containsKey('isArchived') !=
+        other._$data.containsKey('isArchived')) {
+      return false;
+    }
+    if (l$isArchived != lOther$isArchived) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$showKodasCheckbox = showKodasCheckbox;
+    final lOther$showKodasCheckbox = other.showKodasCheckbox;
+    if (_$data.containsKey('showKodasCheckbox') !=
+        other._$data.containsKey('showKodasCheckbox')) {
+      return false;
+    }
+    if (l$showKodasCheckbox != lOther$showKodasCheckbox) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$audience = audience;
+    final l$isArchived = isArchived;
+    final l$color = color;
+    final l$showKodasCheckbox = showKodasCheckbox;
+    return Object.hashAll([
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('audience') ? l$audience : const {},
+      _$data.containsKey('isArchived') ? l$isArchived : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('showKodasCheckbox') ? l$showKodasCheckbox : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UpdateMeetingInput<TRes> {
+  factory CopyWith_Input_UpdateMeetingInput(
+    Input_UpdateMeetingInput instance,
+    TRes Function(Input_UpdateMeetingInput) then,
+  ) = _CopyWithImpl_Input_UpdateMeetingInput;
+
+  factory CopyWith_Input_UpdateMeetingInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UpdateMeetingInput;
+
+  TRes call({
+    String? name,
+    String? audience,
+    bool? isArchived,
+    int? color,
+    bool? showKodasCheckbox,
+  });
+}
+
+class _CopyWithImpl_Input_UpdateMeetingInput<TRes>
+    implements CopyWith_Input_UpdateMeetingInput<TRes> {
+  _CopyWithImpl_Input_UpdateMeetingInput(this._instance, this._then);
+
+  final Input_UpdateMeetingInput _instance;
+
+  final TRes Function(Input_UpdateMeetingInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? audience = _undefined,
+    Object? isArchived = _undefined,
+    Object? color = _undefined,
+    Object? showKodasCheckbox = _undefined,
+  }) => _then(
+    Input_UpdateMeetingInput._({
+      ..._instance._$data,
+      if (name != _undefined) 'name': (name as String?),
+      if (audience != _undefined) 'audience': (audience as String?),
+      if (isArchived != _undefined) 'isArchived': (isArchived as bool?),
+      if (color != _undefined) 'color': (color as int?),
+      if (showKodasCheckbox != _undefined)
+        'showKodasCheckbox': (showKodasCheckbox as bool?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UpdateMeetingInput<TRes>
+    implements CopyWith_Input_UpdateMeetingInput<TRes> {
+  _CopyWithStubImpl_Input_UpdateMeetingInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? audience,
+    bool? isArchived,
+    int? color,
+    bool? showKodasCheckbox,
+  }) => _res;
+}
+
+class Input_CreateMeetingInput {
+  factory Input_CreateMeetingInput({
+    required String name,
+    String? serviceId,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    String? groupId,
+    String? audience,
+    bool? isArchived,
+    int? color,
+    bool? showKodasCheckbox,
+  }) => Input_CreateMeetingInput._({
+    r'name': name,
+    if (serviceId != null) r'serviceId': serviceId,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceGender != null) r'serviceGender': serviceGender,
+    if (groupId != null) r'groupId': groupId,
+    if (audience != null) r'audience': audience,
+    if (isArchived != null) r'isArchived': isArchived,
+    if (color != null) r'color': color,
+    if (showKodasCheckbox != null) r'showKodasCheckbox': showKodasCheckbox,
+  });
+
+  Input_CreateMeetingInput._(this._$data);
+
+  factory Input_CreateMeetingInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    if (data.containsKey('serviceId')) {
+      final l$serviceId = data['serviceId'];
+      result$data['serviceId'] = (l$serviceId as String?);
+    }
+    if (data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = data['serviceStudyYear'];
+      result$data['serviceStudyYear'] = (l$serviceStudyYear as int?);
+    }
+    if (data.containsKey('serviceGender')) {
+      final l$serviceGender = data['serviceGender'];
+      result$data['serviceGender'] = (l$serviceGender as bool?);
+    }
+    if (data.containsKey('groupId')) {
+      final l$groupId = data['groupId'];
+      result$data['groupId'] = (l$groupId as String?);
+    }
+    if (data.containsKey('audience')) {
+      final l$audience = data['audience'];
+      result$data['audience'] = (l$audience as String?);
+    }
+    if (data.containsKey('isArchived')) {
+      final l$isArchived = data['isArchived'];
+      result$data['isArchived'] = (l$isArchived as bool?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('showKodasCheckbox')) {
+      final l$showKodasCheckbox = data['showKodasCheckbox'];
+      result$data['showKodasCheckbox'] = (l$showKodasCheckbox as bool?);
+    }
+    return Input_CreateMeetingInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  String? get serviceId => (_$data['serviceId'] as String?);
+
+  int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
+  bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
+  String? get groupId => (_$data['groupId'] as String?);
+
+  String? get audience => (_$data['audience'] as String?);
+
+  bool? get isArchived => (_$data['isArchived'] as bool?);
+
+  int? get color => (_$data['color'] as int?);
+
+  bool? get showKodasCheckbox => (_$data['showKodasCheckbox'] as bool?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    if (_$data.containsKey('serviceId')) {
+      final l$serviceId = serviceId;
+      result$data['serviceId'] = l$serviceId;
+    }
+    if (_$data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = serviceStudyYear;
+      result$data['serviceStudyYear'] = l$serviceStudyYear;
+    }
+    if (_$data.containsKey('serviceGender')) {
+      final l$serviceGender = serviceGender;
+      result$data['serviceGender'] = l$serviceGender;
+    }
+    if (_$data.containsKey('groupId')) {
+      final l$groupId = groupId;
+      result$data['groupId'] = l$groupId;
+    }
+    if (_$data.containsKey('audience')) {
+      final l$audience = audience;
+      result$data['audience'] = l$audience;
+    }
+    if (_$data.containsKey('isArchived')) {
+      final l$isArchived = isArchived;
+      result$data['isArchived'] = l$isArchived;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('showKodasCheckbox')) {
+      final l$showKodasCheckbox = showKodasCheckbox;
+      result$data['showKodasCheckbox'] = l$showKodasCheckbox;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateMeetingInput<Input_CreateMeetingInput> get copyWith =>
+      CopyWith_Input_CreateMeetingInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateMeetingInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (_$data.containsKey('serviceId') !=
+        other._$data.containsKey('serviceId')) {
+      return false;
+    }
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (_$data.containsKey('serviceStudyYear') !=
+        other._$data.containsKey('serviceStudyYear')) {
+      return false;
+    }
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    final l$serviceGender = serviceGender;
+    final lOther$serviceGender = other.serviceGender;
+    if (_$data.containsKey('serviceGender') !=
+        other._$data.containsKey('serviceGender')) {
+      return false;
+    }
+    if (l$serviceGender != lOther$serviceGender) {
+      return false;
+    }
+    final l$groupId = groupId;
+    final lOther$groupId = other.groupId;
+    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
+      return false;
+    }
+    if (l$groupId != lOther$groupId) {
+      return false;
+    }
+    final l$audience = audience;
+    final lOther$audience = other.audience;
+    if (_$data.containsKey('audience') !=
+        other._$data.containsKey('audience')) {
+      return false;
+    }
+    if (l$audience != lOther$audience) {
+      return false;
+    }
+    final l$isArchived = isArchived;
+    final lOther$isArchived = other.isArchived;
+    if (_$data.containsKey('isArchived') !=
+        other._$data.containsKey('isArchived')) {
+      return false;
+    }
+    if (l$isArchived != lOther$isArchived) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$showKodasCheckbox = showKodasCheckbox;
+    final lOther$showKodasCheckbox = other.showKodasCheckbox;
+    if (_$data.containsKey('showKodasCheckbox') !=
+        other._$data.containsKey('showKodasCheckbox')) {
+      return false;
+    }
+    if (l$showKodasCheckbox != lOther$showKodasCheckbox) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$serviceId = serviceId;
+    final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceGender = serviceGender;
+    final l$groupId = groupId;
+    final l$audience = audience;
+    final l$isArchived = isArchived;
+    final l$color = color;
+    final l$showKodasCheckbox = showKodasCheckbox;
+    return Object.hashAll([
+      l$name,
+      _$data.containsKey('serviceId') ? l$serviceId : const {},
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('serviceGender') ? l$serviceGender : const {},
+      _$data.containsKey('groupId') ? l$groupId : const {},
+      _$data.containsKey('audience') ? l$audience : const {},
+      _$data.containsKey('isArchived') ? l$isArchived : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('showKodasCheckbox') ? l$showKodasCheckbox : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateMeetingInput<TRes> {
+  factory CopyWith_Input_CreateMeetingInput(
+    Input_CreateMeetingInput instance,
+    TRes Function(Input_CreateMeetingInput) then,
+  ) = _CopyWithImpl_Input_CreateMeetingInput;
+
+  factory CopyWith_Input_CreateMeetingInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateMeetingInput;
+
+  TRes call({
+    String? name,
+    String? serviceId,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    String? groupId,
+    String? audience,
+    bool? isArchived,
+    int? color,
+    bool? showKodasCheckbox,
+  });
+}
+
+class _CopyWithImpl_Input_CreateMeetingInput<TRes>
+    implements CopyWith_Input_CreateMeetingInput<TRes> {
+  _CopyWithImpl_Input_CreateMeetingInput(this._instance, this._then);
+
+  final Input_CreateMeetingInput _instance;
+
+  final TRes Function(Input_CreateMeetingInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? serviceId = _undefined,
+    Object? serviceStudyYear = _undefined,
+    Object? serviceGender = _undefined,
+    Object? groupId = _undefined,
+    Object? audience = _undefined,
+    Object? isArchived = _undefined,
+    Object? color = _undefined,
+    Object? showKodasCheckbox = _undefined,
+  }) => _then(
+    Input_CreateMeetingInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (serviceId != _undefined) 'serviceId': (serviceId as String?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as int?),
+      if (serviceGender != _undefined)
+        'serviceGender': (serviceGender as bool?),
+      if (groupId != _undefined) 'groupId': (groupId as String?),
+      if (audience != _undefined) 'audience': (audience as String?),
+      if (isArchived != _undefined) 'isArchived': (isArchived as bool?),
+      if (color != _undefined) 'color': (color as int?),
+      if (showKodasCheckbox != _undefined)
+        'showKodasCheckbox': (showKodasCheckbox as bool?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateMeetingInput<TRes>
+    implements CopyWith_Input_CreateMeetingInput<TRes> {
+  _CopyWithStubImpl_Input_CreateMeetingInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? serviceId,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    String? groupId,
+    String? audience,
+    bool? isArchived,
+    int? color,
+    bool? showKodasCheckbox,
+  }) => _res;
+}
+
 class Input_MeetingFilterShowKodasCheckbox {
   factory Input_MeetingFilterShowKodasCheckbox({
     bool? isNil,
@@ -130909,6 +133057,292 @@ class _CopyWithStubImpl_Input_MeetingSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_MeetingSortField? field}) => _res;
+}
+
+class Input_UpdateAttendanceTimeInput {
+  factory Input_UpdateAttendanceTimeInput({DateTime? datetime}) =>
+      Input_UpdateAttendanceTimeInput._({
+        if (datetime != null) r'datetime': datetime,
+      });
+
+  Input_UpdateAttendanceTimeInput._(this._$data);
+
+  factory Input_UpdateAttendanceTimeInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('datetime')) {
+      final l$datetime = data['datetime'];
+      result$data['datetime'] = l$datetime == null
+          ? null
+          : tstzFromString(l$datetime);
+    }
+    return Input_UpdateAttendanceTimeInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  DateTime? get datetime => (_$data['datetime'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('datetime')) {
+      final l$datetime = datetime;
+      result$data['datetime'] = l$datetime == null
+          ? null
+          : tstzToString(l$datetime);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UpdateAttendanceTimeInput<Input_UpdateAttendanceTimeInput>
+  get copyWith => CopyWith_Input_UpdateAttendanceTimeInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UpdateAttendanceTimeInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$datetime = datetime;
+    final lOther$datetime = other.datetime;
+    if (_$data.containsKey('datetime') !=
+        other._$data.containsKey('datetime')) {
+      return false;
+    }
+    if (l$datetime != lOther$datetime) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$datetime = datetime;
+    return Object.hashAll([
+      _$data.containsKey('datetime') ? l$datetime : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UpdateAttendanceTimeInput<TRes> {
+  factory CopyWith_Input_UpdateAttendanceTimeInput(
+    Input_UpdateAttendanceTimeInput instance,
+    TRes Function(Input_UpdateAttendanceTimeInput) then,
+  ) = _CopyWithImpl_Input_UpdateAttendanceTimeInput;
+
+  factory CopyWith_Input_UpdateAttendanceTimeInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UpdateAttendanceTimeInput;
+
+  TRes call({DateTime? datetime});
+}
+
+class _CopyWithImpl_Input_UpdateAttendanceTimeInput<TRes>
+    implements CopyWith_Input_UpdateAttendanceTimeInput<TRes> {
+  _CopyWithImpl_Input_UpdateAttendanceTimeInput(this._instance, this._then);
+
+  final Input_UpdateAttendanceTimeInput _instance;
+
+  final TRes Function(Input_UpdateAttendanceTimeInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? datetime = _undefined}) => _then(
+    Input_UpdateAttendanceTimeInput._({
+      ..._instance._$data,
+      if (datetime != _undefined) 'datetime': (datetime as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UpdateAttendanceTimeInput<TRes>
+    implements CopyWith_Input_UpdateAttendanceTimeInput<TRes> {
+  _CopyWithStubImpl_Input_UpdateAttendanceTimeInput(this._res);
+
+  TRes _res;
+
+  call({DateTime? datetime}) => _res;
+}
+
+class Input_MarkAttendanceInput {
+  factory Input_MarkAttendanceInput({
+    required String meetingId,
+    required String personId,
+    DateTime? datetime,
+    bool? asServant,
+  }) => Input_MarkAttendanceInput._({
+    r'meetingId': meetingId,
+    r'personId': personId,
+    if (datetime != null) r'datetime': datetime,
+    if (asServant != null) r'asServant': asServant,
+  });
+
+  Input_MarkAttendanceInput._(this._$data);
+
+  factory Input_MarkAttendanceInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$meetingId = data['meetingId'];
+    result$data['meetingId'] = (l$meetingId as String);
+    final l$personId = data['personId'];
+    result$data['personId'] = (l$personId as String);
+    if (data.containsKey('datetime')) {
+      final l$datetime = data['datetime'];
+      result$data['datetime'] = l$datetime == null
+          ? null
+          : tstzFromString(l$datetime);
+    }
+    if (data.containsKey('asServant')) {
+      final l$asServant = data['asServant'];
+      result$data['asServant'] = (l$asServant as bool?);
+    }
+    return Input_MarkAttendanceInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get meetingId => (_$data['meetingId'] as String);
+
+  String get personId => (_$data['personId'] as String);
+
+  DateTime? get datetime => (_$data['datetime'] as DateTime?);
+
+  bool? get asServant => (_$data['asServant'] as bool?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$meetingId = meetingId;
+    result$data['meetingId'] = l$meetingId;
+    final l$personId = personId;
+    result$data['personId'] = l$personId;
+    if (_$data.containsKey('datetime')) {
+      final l$datetime = datetime;
+      result$data['datetime'] = l$datetime == null
+          ? null
+          : tstzToString(l$datetime);
+    }
+    if (_$data.containsKey('asServant')) {
+      final l$asServant = asServant;
+      result$data['asServant'] = l$asServant;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_MarkAttendanceInput<Input_MarkAttendanceInput> get copyWith =>
+      CopyWith_Input_MarkAttendanceInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_MarkAttendanceInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$meetingId = meetingId;
+    final lOther$meetingId = other.meetingId;
+    if (l$meetingId != lOther$meetingId) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$datetime = datetime;
+    final lOther$datetime = other.datetime;
+    if (_$data.containsKey('datetime') !=
+        other._$data.containsKey('datetime')) {
+      return false;
+    }
+    if (l$datetime != lOther$datetime) {
+      return false;
+    }
+    final l$asServant = asServant;
+    final lOther$asServant = other.asServant;
+    if (_$data.containsKey('asServant') !=
+        other._$data.containsKey('asServant')) {
+      return false;
+    }
+    if (l$asServant != lOther$asServant) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$meetingId = meetingId;
+    final l$personId = personId;
+    final l$datetime = datetime;
+    final l$asServant = asServant;
+    return Object.hashAll([
+      l$meetingId,
+      l$personId,
+      _$data.containsKey('datetime') ? l$datetime : const {},
+      _$data.containsKey('asServant') ? l$asServant : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_MarkAttendanceInput<TRes> {
+  factory CopyWith_Input_MarkAttendanceInput(
+    Input_MarkAttendanceInput instance,
+    TRes Function(Input_MarkAttendanceInput) then,
+  ) = _CopyWithImpl_Input_MarkAttendanceInput;
+
+  factory CopyWith_Input_MarkAttendanceInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_MarkAttendanceInput;
+
+  TRes call({
+    String? meetingId,
+    String? personId,
+    DateTime? datetime,
+    bool? asServant,
+  });
+}
+
+class _CopyWithImpl_Input_MarkAttendanceInput<TRes>
+    implements CopyWith_Input_MarkAttendanceInput<TRes> {
+  _CopyWithImpl_Input_MarkAttendanceInput(this._instance, this._then);
+
+  final Input_MarkAttendanceInput _instance;
+
+  final TRes Function(Input_MarkAttendanceInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? meetingId = _undefined,
+    Object? personId = _undefined,
+    Object? datetime = _undefined,
+    Object? asServant = _undefined,
+  }) => _then(
+    Input_MarkAttendanceInput._({
+      ..._instance._$data,
+      if (meetingId != _undefined && meetingId != null)
+        'meetingId': (meetingId as String),
+      if (personId != _undefined && personId != null)
+        'personId': (personId as String),
+      if (datetime != _undefined) 'datetime': (datetime as DateTime?),
+      if (asServant != _undefined) 'asServant': (asServant as bool?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_MarkAttendanceInput<TRes>
+    implements CopyWith_Input_MarkAttendanceInput<TRes> {
+  _CopyWithStubImpl_Input_MarkAttendanceInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? meetingId,
+    String? personId,
+    DateTime? datetime,
+    bool? asServant,
+  }) => _res;
 }
 
 class Input_AttendanceRecordFilterDay {
