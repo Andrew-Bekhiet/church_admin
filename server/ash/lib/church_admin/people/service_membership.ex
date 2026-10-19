@@ -40,6 +40,12 @@ defmodule ChurchAdmin.People.ServiceMembership do
                  default_limit: 100,
                  max_page_size: 100
     end
+
+    create :join_service do
+      accept [:person_id, :service_id]
+    end
+
+    destroy :leave_service
   end
 
   policies do

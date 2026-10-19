@@ -153,6 +153,21 @@ defmodule ChurchAdmin.People.Person do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    update :advance_study_year do
+      accept [:study_year_id]
+      require_atomic? false
+    end
+
+    update :graduate do
+      require_atomic? false
+      change set_attribute(:study_year_id, nil)
+
+      change atomic_update(
+               :work_status,
+               expr(if work_status == "student", do: "unemployed", else: work_status)
+             )
+    end
   end
 
   policies do
