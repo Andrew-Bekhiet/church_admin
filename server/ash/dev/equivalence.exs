@@ -13,6 +13,7 @@
 defmodule ChurchAdmin.Equivalence do
   alias ChurchAdmin.Accounts.{ScopeGrant, User, UserPermission}
   alias ChurchAdmin.Authz.ActorLoader
+  alias ChurchAdmin.Catalog
   alias ChurchAdmin.People.{Family, GroupMembership, Person, ServiceMembership}
   alias ChurchAdmin.Places.Address
 
@@ -70,7 +71,36 @@ defmodule ChurchAdmin.Equivalence do
         resource: ScopeGrant,
         key: [{"permissionId", :permission_id}]
       }
+    ] ++ catalog_roots()
+  end
+
+  defp catalog_roots do
+    lookups = [
+      {"churches", Catalog.Church},
+      {"fathers", Catalog.Father},
+      {"schools", Catalog.School},
+      {"colleges", Catalog.College},
+      {"universities", Catalog.University},
+      {"jobs", Catalog.Job},
+      {"qualifications", Catalog.Qualification},
+      {"hobbies", Catalog.Hobby},
+      {"tags", Catalog.Tag},
+      {"personStates", Catalog.PersonState},
+      {"personTypes", Catalog.PersonType},
+      {"shammasLevels", Catalog.ShammasLevel}
     ]
+
+    for {name, resource} <- lookups do
+      %{name: name, hasura: name, resource: resource, key: [{"id", :id}]}
+    end ++
+      [
+        %{
+          name: "studyYears",
+          hasura: "studyYears",
+          resource: Catalog.StudyYear,
+          key: [{"order", :order}]
+        }
+      ]
   end
 
   def run(argv) do
