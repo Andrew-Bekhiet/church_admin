@@ -6,7 +6,7 @@ defmodule ChurchAdmin.Activity.ActivityDay do
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Activity.{Confession, Kodas}
-  alias ChurchAdmin.Authz.Checks.System
+  alias ChurchAdmin.Authz.Checks.{HasPermission, System}
 
   graphql do
     type :activity_day
@@ -36,6 +36,12 @@ defmodule ChurchAdmin.Activity.ActivityDay do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :ensure_attendance_day do
+      accept [:day]
+      upsert? true
+      upsert_fields [:day]
+    end
   end
 
   policies do
@@ -45,6 +51,10 @@ defmodule ChurchAdmin.Activity.ActivityDay do
 
     policy action_type(:read) do
       authorize_if actor_present()
+    end
+
+    policy action_type(:create) do
+      authorize_if {HasPermission, name: "approved"}
     end
   end
 

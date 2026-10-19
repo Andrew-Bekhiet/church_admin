@@ -7,7 +7,9 @@ defmodule ChurchAdmin.Activity.Confession do
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Activity.ActivityDay
+  alias ChurchAdmin.Activity.Changes.EnsureAttendanceDay
   alias ChurchAdmin.Authz.Checks.System
+  alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.People.Person
 
   graphql do
@@ -18,6 +20,10 @@ defmodule ChurchAdmin.Activity.Confession do
     queries do
       get :confession, :read
       list :confessions, :read
+    end
+
+    mutations do
+      create :record_confession, :record_confession
     end
   end
 
@@ -47,6 +53,20 @@ defmodule ChurchAdmin.Activity.Confession do
                  required?: false,
                  default_limit: 100,
                  max_page_size: 1000
+    end
+
+    create :record_confession do
+      accept [:person_id]
+      upsert? true
+      upsert_identity :unique_day_id_person_id
+      upsert_fields []
+      return_skipped_upsert? true
+
+      argument :day, :date, allow_nil?: false
+
+      change set_attribute(:day_id, arg(:day))
+      change EnsureAttendanceDay
+      change {StampActor, attribute: :recorded_by}
     end
   end
 

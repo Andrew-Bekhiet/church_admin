@@ -7,7 +7,9 @@ defmodule ChurchAdmin.Activity.Kodas do
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Activity.ActivityDay
+  alias ChurchAdmin.Activity.Changes.EnsureAttendanceDay
   alias ChurchAdmin.Authz.Checks.System
+  alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.People.Person
 
   graphql do
@@ -18,6 +20,11 @@ defmodule ChurchAdmin.Activity.Kodas do
     queries do
       get :kodas, :read
       list :kodases, :read
+    end
+
+    mutations do
+      create :record_kodas, :record_kodas
+      destroy :delete_kodas, :delete_kodas
     end
   end
 
@@ -47,6 +54,24 @@ defmodule ChurchAdmin.Activity.Kodas do
                  required?: false,
                  default_limit: 100,
                  max_page_size: 1000
+    end
+
+    create :record_kodas do
+      accept [:person_id]
+      upsert? true
+      upsert_identity :unique_day_id_person_id
+      upsert_fields []
+      return_skipped_upsert? true
+
+      argument :day, :date, allow_nil?: false
+
+      change set_attribute(:day_id, arg(:day))
+      change EnsureAttendanceDay
+      change {StampActor, attribute: :recorded_by}
+    end
+
+    destroy :delete_kodas do
+      primary? true
     end
   end
 
