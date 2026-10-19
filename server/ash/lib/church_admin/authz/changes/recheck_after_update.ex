@@ -6,7 +6,10 @@ defmodule ChurchAdmin.Authz.Changes.RecheckAfterUpdate do
   update policies only see the row as it was.
 
   `check` is a `{filter_check_module, opts}` pair and defaults to
-  `{ChurchAdmin.Authz.Checks.InScope, access: :edit}`. The change is not
+  `{ChurchAdmin.Authz.Checks.InScope, access: :edit}`. An internal action that
+  writes on behalf of another command (the meeting's archive clearing its
+  owner's default meeting) opts out with `set_context(%{skip_scope_recheck?:
+  true})`; the command's own policy has authorized it. The change is not
   atomic: Ash runs a fully atomic update's after-action hooks outside a
   transaction it could roll back, so an update using it sets
   `require_atomic? false`.
@@ -22,13 +25,15 @@ defmodule ChurchAdmin.Authz.Changes.RecheckAfterUpdate do
   @impl true
   def change(changeset, opts, context) do
     Ash.Changeset.after_action(changeset, fn changeset, record ->
-      if still_matches?(changeset, record, opts, context.actor) do
+      if skip_recheck?(changeset) or still_matches?(changeset, record, opts, context.actor) do
         {:ok, record}
       else
         AfterActionFailure.roll_back(changeset.resource, Ash.Error.Forbidden.exception([]))
       end
     end)
   end
+
+  defp skip_recheck?(changeset), do: Map.get(changeset.context, :skip_scope_recheck?, false)
 
   @impl true
   def atomic(_changeset, _opts, _context),

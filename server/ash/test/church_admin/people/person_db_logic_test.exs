@@ -238,9 +238,13 @@ defmodule ChurchAdmin.People.PersonDbLogicTest do
   end
 
   describe "guards" do
-    test "a service editor creates a person in the service, and nobody else", ctx do
+    test "a service editor creates a person in the service, not one in a family it only reads",
+         ctx do
       assert {:ok, _id} =
                PersonWrites.create_person(ctx.editor, %{name: "p", services: [ctx.service.id]})
+
+      member = Factory.person!(family_id: ctx.family.id)
+      Factory.in_service!(member, ctx.service)
 
       assert PersonWrites.create_person(ctx.editor, %{name: "p", family_id: ctx.family.id}) ==
                {:error, Codes.forbidden()}
