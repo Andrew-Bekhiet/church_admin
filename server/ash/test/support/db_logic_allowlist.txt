@@ -63,7 +63,6 @@ function public.sync_house_code_with_legacy_house_number()
 function public.sync_street_areas()
 procedure operations.record_missed_study_year_roll(date)
 procedure operations.run_study_year_roll_when_due(date)
-trigger auth.users_admin_on.edit_history
 trigger auth.users_admin_on.sync_users_permissions_by_entity_id_cache
 trigger auth.users_data.sync_users_permissions_by_entity_id_cache
 trigger auth.users_permissions.sync_users_permissions_by_entity_id_cache
