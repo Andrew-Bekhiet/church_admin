@@ -12,7 +12,10 @@ defmodule ChurchAdmin.Places.Store do
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Places.Address
   alias ChurchAdmin.Places.Calculations.IntersectsGeography
+  alias ChurchAdmin.Places.Changes.ApplyOwnerAddress
+  alias ChurchAdmin.Places.Types.AddressInput
   alias ChurchAdmin.Types.{Geography, Text}
+  alias ChurchAdmin.Validations.ReferencesVisible
 
   graphql do
     type :store
@@ -22,6 +25,11 @@ defmodule ChurchAdmin.Places.Store do
     queries do
       get :store, :read
       list :stores, :read
+    end
+
+    mutations do
+      create :create_store, :create_store
+      update :update_store, :update_store
     end
   end
 
@@ -46,6 +54,27 @@ defmodule ChurchAdmin.Places.Store do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :create_store do
+      accept [:name, :admin_family_id, :color]
+      argument :address, AddressInput
+
+      validate {ReferencesVisible, attribute: :admin_family_id, resource: Family},
+        where: changing(:admin_family_id)
+
+      change {ApplyOwnerAddress, owner: :store_id}
+    end
+
+    update :update_store do
+      require_atomic? false
+      accept [:name, :admin_family_id, :color]
+      argument :address, AddressInput
+
+      validate {ReferencesVisible, attribute: :admin_family_id, resource: Family},
+        where: changing(:admin_family_id)
+
+      change {ApplyOwnerAddress, owner: :store_id}
+    end
   end
 
   policies do
@@ -55,6 +84,10 @@ defmodule ChurchAdmin.Places.Store do
 
     policy action_type(:read) do
       authorize_if {InScope, access: :read}
+    end
+
+    policy action(:create_store) do
+      authorize_if {InScope, access: :edit}
     end
   end
 

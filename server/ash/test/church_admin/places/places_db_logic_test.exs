@@ -22,6 +22,10 @@ defmodule ChurchAdmin.Places.PlacesDbLogicTest do
   @line_nowhere PlacesWorld.line([{40.0, 40.0}, {40.1, 40.0}])
 
   setup do
+    Repo.query!(
+      "insert into auth.permissions (name) values ('deleteData') on conflict do nothing"
+    )
+
     user = Factory.user!()
     Factory.permissions!(user, ~w(approved readAllData writeAllData deleteData))
 

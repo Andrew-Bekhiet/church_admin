@@ -8,6 +8,7 @@ defmodule ChurchAdmin.Activity.Visit do
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Authz.Checks.{InScope, System}
+  alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.Types.Text
 
   graphql do
@@ -48,6 +49,12 @@ defmodule ChurchAdmin.Activity.Visit do
                  required?: false,
                  default_limit: 100,
                  max_page_size: 1000
+    end
+
+    create :record do
+      public? false
+      accept [:table, :record_id, :time, :is_father_visit]
+      change {StampActor, attribute: :recorded_by}
     end
   end
 
