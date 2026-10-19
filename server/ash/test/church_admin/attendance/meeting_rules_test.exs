@@ -74,6 +74,31 @@ defmodule ChurchAdmin.Attendance.MeetingRulesTest do
     end
   end
 
+  describe "a meeting's owner" do
+    test "is exactly one of a service and a group", ctx do
+      service = Factory.service!()
+      group = Factory.group!(service)
+
+      for attrs <- [%{}, %{service_id: service.id, group_id: group.id}] do
+        assert {:error, "meeting/service-or-group-required"} =
+                 OrgWrites.create(ctx.actor, :meeting, Map.put(attrs, :name, "ownerless"))
+      end
+    end
+
+    test "gives a group's meeting no study year or gender", ctx do
+      group = Factory.group!(Factory.service!())
+
+      for properties <- [%{service_study_year: 1}, %{service_gender: true}] do
+        assert {:error, "meeting/group-with-service-properties"} =
+                 OrgWrites.create(
+                   ctx.actor,
+                   :meeting,
+                   Map.merge(%{name: "group", group_id: group.id}, properties)
+                 )
+      end
+    end
+  end
+
   for {kind, owner_column, mismatch, archived} <- [
         {:service, :service_id, "service/default-meeting-mismatch",
          "service/default-meeting-archived"},
