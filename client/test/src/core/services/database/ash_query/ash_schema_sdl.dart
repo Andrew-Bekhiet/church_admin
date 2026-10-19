@@ -27,7 +27,7 @@ class AshSchemaSdl {
             in definitions.whereType<InputObjectTypeDefinitionNode>())
           input.name.value: {
             for (final field in input.fields)
-              field.name.value: _namedTypeOf(field.type),
+              field.name.value: namedTypeOf(field.type),
           },
       },
       enumValues: {
@@ -59,9 +59,9 @@ class AshSchemaSdl {
     required this.scalarTypes,
   });
 
-  static String _namedTypeOf(TypeNode type) => switch (type) {
+  static String namedTypeOf(TypeNode type) => switch (type) {
     NamedTypeNode(:final name) => name.value,
-    ListTypeNode(:final type) => _namedTypeOf(type),
+    ListTypeNode(:final type) => namedTypeOf(type),
     _ => throw ArgumentError('Unsupported type node $type'),
   };
 }
