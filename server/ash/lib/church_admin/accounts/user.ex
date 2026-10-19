@@ -23,6 +23,7 @@ defmodule ChurchAdmin.Accounts.User do
     CreateInvitation,
     LinkPerson,
     ManageGrants,
+    PermissionLevelsConsistent,
     SeedPreferences,
     SetApproval
   }
@@ -103,6 +104,7 @@ defmodule ChurchAdmin.Accounts.User do
       change CanonicalizeNameAndEmail
       change WriteWithAdminDbSession
       change ManageGrants
+      change PermissionLevelsConsistent
       change {LinkPerson, as: :system}
       change CreateInvitation
     end
@@ -124,6 +126,7 @@ defmodule ChurchAdmin.Accounts.User do
 
       validate EachScopeOnOneContainer, before_action?: true
       change ManageGrants
+      change PermissionLevelsConsistent
     end
 
     update :approve_user do
