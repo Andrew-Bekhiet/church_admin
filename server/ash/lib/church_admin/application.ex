@@ -24,6 +24,7 @@ defmodule ChurchAdmin.Application do
            Application.fetch_env!(:church_admin, Oban)
          )},
         {Phoenix.PubSub, name: ChurchAdmin.PubSub},
+        ChurchAdmin.Realtime.Supervisor,
         # Start a worker by calling: ChurchAdmin.Worker.start_link(arg)
         # {ChurchAdmin.Worker, arg},
         # Start to serve requests, typically the last entry

@@ -11,6 +11,10 @@ defmodule ChurchAdminWeb.Endpoint do
     same_site: "Lax"
   ]
 
+  socket "/socket", ChurchAdminWeb.ChangesSocket,
+    websocket: [check_origin: {ChurchAdminWeb.CorsOrigins, :websocket_origin_allowed?, []}],
+    longpoll: false
+
   # socket "/live", Phoenix.LiveView.Socket,
   #   websocket: [connect_info: [session: @session_options]],
   #   longpoll: [connect_info: [session: @session_options]]

@@ -18,6 +18,7 @@ config :church_admin, ChurchAdmin.Google.Config,
     req_options: [plug: {Req.Test, ChurchAdmin.Google.Messaging}, retry: false]
   ]
 
+config :church_admin, ChurchAdmin.Realtime, start_replication_stream?: false
 config :ash, policies: [show_policy_breakdowns?: true], disable_async?: true
 
 config :church_admin, ChurchAdmin.Repo,
