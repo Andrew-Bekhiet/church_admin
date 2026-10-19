@@ -46,7 +46,12 @@ defmodule ChurchAdmin.Accounts.Actions.DeleteMyAccount do
   defp destroy_all(resource, uid, actor) do
     resource
     |> Ash.Query.do_filter(expr(uid == ^uid))
-    |> Ash.bulk_destroy(:destroy, %{}, actor: actor, authorize?: false, return_errors?: true)
+    |> Ash.bulk_destroy(:destroy, %{},
+      actor: actor,
+      authorize?: false,
+      return_errors?: true,
+      notify?: true
+    )
     |> case do
       %Ash.BulkResult{status: :success} -> :ok
       %Ash.BulkResult{errors: errors} -> {:error, Ash.Error.to_error_class(errors)}

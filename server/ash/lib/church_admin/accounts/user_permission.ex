@@ -3,6 +3,7 @@ defmodule ChurchAdmin.Accounts.UserPermission do
     domain: ChurchAdmin.Accounts,
     data_layer: AshPostgres.DataLayer,
     authorizers: [Ash.Policy.Authorizer],
+    notifiers: [ChurchAdmin.Accounts.DisconnectSocketsOnRevokedApproval],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Accounts.{Permission, User}
