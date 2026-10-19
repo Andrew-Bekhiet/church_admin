@@ -1,12 +1,12 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
 
-class MeetingRowsReader {
+class KeysetRowsReader {
   static const everyRow = 1 << 20;
 
   final DBGraphQLClient client;
 
-  const MeetingRowsReader(this.client);
+  const KeysetRowsReader(this.client);
 
   Future<List<T>> read<T>({
     required DocumentNode document,

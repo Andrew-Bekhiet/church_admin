@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/mutations.graphql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.graphql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meeting_audience_graphql_value.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meeting_rows_reader.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meetings_analysis_queries.dart';
 import 'package:graphql/client.dart';
 
@@ -21,7 +20,7 @@ class MeetingsDAO extends DAOBase<Meeting>
     );
   }
 
-  late final MeetingRowsReader _rows = MeetingRowsReader(graphQLClient);
+  late final KeysetRowsReader _rows = KeysetRowsReader(graphQLClient);
 
   late final MeetingsAnalysisQueries _analysis = MeetingsAnalysisQueries(db);
 
