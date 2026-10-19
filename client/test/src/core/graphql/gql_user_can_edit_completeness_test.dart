@@ -23,7 +23,7 @@ void main() {
   );
 
   test('every read selection of an editable type selects userCanEdit', () {
-    const schemaPath = 'lib/src/core/graphql/schema.graphql';
+    const schemaPath = 'lib/src/core/graphql/hasura_schema.gql';
     const operationsDir = 'lib/src/core/services/database/gql_definintions';
 
     final schema = GqlSchemaIndex.fromDocument(

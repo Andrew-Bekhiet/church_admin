@@ -5,7 +5,7 @@ class SecretsService {
       globalProviderContainer.read(secretsServiceProvider);
 
   @pragma('vm:prefer-inline')
-  String get hasuraServer => const String.fromEnvironment('HASURA_SERVER');
+  String get apiServerUrl => const String.fromEnvironment('API_SERVER_URL');
   @pragma('vm:prefer-inline')
   String get sentryDSN => const String.fromEnvironment('SENTRY_DSN');
   @pragma('vm:prefer-inline')

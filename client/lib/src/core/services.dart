@@ -12,6 +12,7 @@ export 'services/geocoding/geocoder.dart';
 export 'services/geocoding/nominatim_geocoder.dart';
 export 'services/launcher_service.dart';
 export 'services/router.dart';
+export 'services/secrets/api_endpoints.dart';
 export 'services/secrets/secrets_service.dart';
 export 'services/share_service.dart';
 export 'services/theming_service.dart';

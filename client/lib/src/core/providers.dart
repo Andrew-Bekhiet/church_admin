@@ -110,7 +110,7 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
                   null => null,
                 },
               ),
-          url: ref.watch(secretsServiceProvider).hasuraServer,
+          url: ref.watch(apiEndpointsProvider).graphql.toString(),
         ),
       ),
       cache: GraphQLCache(
@@ -143,7 +143,7 @@ final connectivityServiceProvider = Provider<ConnectivityService>((ref) {
   final service = ConnectivityService(
     connectivityPlugin: ref.watch(connectivityPluginProvider),
     dio: ref.watch(dioProvider),
-    secretsService: ref.watch(secretsServiceProvider),
+    apiEndpoints: ref.watch(apiEndpointsProvider),
   );
 
   ref.onDispose(service.dispose);
@@ -153,6 +153,10 @@ final connectivityServiceProvider = Provider<ConnectivityService>((ref) {
 
 final secretsServiceProvider = Provider<SecretsService>(
   (ref) => const SecretsService(),
+);
+
+final apiEndpointsProvider = Provider<ApiEndpoints>(
+  (ref) => ApiEndpoints(ref.watch(secretsServiceProvider).apiServerUrl),
 );
 
 final authBlocProvider = Provider<AuthBloc>((ref) {

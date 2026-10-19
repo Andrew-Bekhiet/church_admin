@@ -1,19 +1,19 @@
 #!/bin/bash
 
-# This script splits a large schema.graphql.dart file into multiple smaller parts
+# This script splits the large hasura_schema.gql.dart file into multiple smaller parts
 # using Dart's part/part of directives for better maintainability.
 
 # Path to the large schema file
-SCHEMA_FILE="lib/src/core/graphql/__generated__/schema.graphql.dart"
+SCHEMA_FILE="lib/src/core/graphql/__generated__/hasura_schema.gql.dart"
 OUTPUT_DIR="$(dirname "$SCHEMA_FILE")"
-BASE_FILENAME="schema_part"
+BASE_FILENAME="hasura_schema_part"
 MAX_LINES_PER_PART=2500
 
 cd "$(dirname "$0")/.." || exit 1
 
 # A second run on an already split stub would move the part directives into a
 # part file and leave the stub empty, so refuse to split a stub.
-if grep -q '^part "schema_part1.dart";' "$SCHEMA_FILE"; then
+if grep -q '^part "hasura_schema_part1.dart";' "$SCHEMA_FILE"; then
   echo "$SCHEMA_FILE is already split; nothing to do"
   exit 0
 fi
@@ -46,7 +46,7 @@ BEGIN {
   
   # Start the first part file
   print "// Part " part_number " of the schema" > current_part_file;
-  print "part of \"schema.graphql.dart\";" >> current_part_file;
+  print "part of \"hasura_schema.gql.dart\";" >> current_part_file;
   print "" >> current_part_file;
   
   # Add part directive to main schema file
@@ -103,7 +103,7 @@ BEGIN {
           
           # Initialize the new part file
           print "// Part " part_number " of the schema" > current_part_file;
-          print "part of \"schema.graphql.dart\";" >> current_part_file;
+          print "part of \"hasura_schema.gql.dart\";" >> current_part_file;
           print "" >> current_part_file;
           
           # Add part directive to main schema file

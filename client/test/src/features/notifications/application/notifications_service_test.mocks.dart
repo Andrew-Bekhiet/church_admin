@@ -1363,13 +1363,6 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
   ) as _i11.Future<_i6.Response<dynamic>>);
 
   @override
-  _i11.Future<bool> checkHasuraHealth() => (super.noSuchMethod(
-    Invocation.method(#checkHasuraHealth, []),
-    returnValue: _i11.Future<bool>.value(false),
-    returnValueForMissingStub: _i11.Future<bool>.value(false),
-  ) as _i11.Future<bool>);
-
-  @override
   _i11.Future<void> applyInvitationCode(String? invitationCode) =>
       (super.noSuchMethod(
         Invocation.method(#applyInvitationCode, [invitationCode]),

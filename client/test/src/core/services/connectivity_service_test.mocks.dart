@@ -1304,12 +1304,12 @@ class MockResponse<T> extends _i1.Mock implements _i2.Response<T> {
 /// See the documentation for Mockito's code generation for more information.
 class MockSecretsService extends _i1.Mock implements _i7.SecretsService {
   @override
-  String get hasuraServer => (super.noSuchMethod(
-    Invocation.getter(#hasuraServer),
-    returnValue: _i8.dummyValue<String>(this, Invocation.getter(#hasuraServer)),
+  String get apiServerUrl => (super.noSuchMethod(
+    Invocation.getter(#apiServerUrl),
+    returnValue: _i8.dummyValue<String>(this, Invocation.getter(#apiServerUrl)),
     returnValueForMissingStub: _i8.dummyValue<String>(
       this,
-      Invocation.getter(#hasuraServer),
+      Invocation.getter(#apiServerUrl),
     ),
   ) as String);
 

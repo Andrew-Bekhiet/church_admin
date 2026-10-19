@@ -97,18 +97,6 @@ class FunctionsService {
     );
   }
 
-  Future<bool> checkHasuraHealth() async {
-    final res = await _dio
-        .getUri(
-          Uri.parse(
-            SecretsService.I.hasuraServer,
-          ).replace(pathSegments: ['healthz']),
-        )
-        .timeout(const Duration(seconds: 15));
-
-    return res.data == 'OK';
-  }
-
   Future<void> applyInvitationCode(String invitationCode) async {
     await httpsCallable('applyInvitationCode').call({'code': invitationCode});
   }
