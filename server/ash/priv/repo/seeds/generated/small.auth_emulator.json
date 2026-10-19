@@ -1,0 +1,324 @@
+{
+  "users": [
+    {
+      "localId": "gj3kqgxw5b2mm9rlgo39jpfpaeuf",
+      "email": "unapproved@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "مينا بيشوي جرجس",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"ade38f83-1266-5b71-bebe-ea98554fc933\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "9ug4fi54x6dicf2l6pp1pqel1x50",
+      "email": "unapproved-with-grants@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "مارتينا بولا عبد المسيح",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"d71c7f8e-7450-5ae9-b922-a9749ac039ca\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "hen7wtatci9o3nxvkz2oa691u7ce",
+      "email": "approved-only@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "كيرلس مايكل فهمي",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"049d589d-3828-5298-9a4e-2b80817369a4\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "5ktnx6eifl59bdtu3zvh3ktu59da",
+      "email": "approved-plain@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "إيرين مارك شنودة",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"b2f74626-81a4-58e4-b14a-b25ad7713013\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "khzmr0toc32ogdfvkwwz6t79hwcl",
+      "email": "read-all@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "بولا عماد بشاي",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"8755da86-da25-514b-93e0-cbf0420556b5\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "ind9ukrarwqic2bhsultkmwnnrl5",
+      "email": "read-write@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "يوستينا وليم ميخائيل",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"98af10ad-5c80-52cb-88f6-09c3aac7aac5\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "lcp4tp7jat9vz6tpm4q8pzcem3pq",
+      "email": "manage-users@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "أنطونيوس إيهاب لبيب",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"bb67df7b-fa07-561c-bfd6-6f5c2d2d6fdb\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "rzeclhy5xiu31xblvwkddqzzlx9w",
+      "email": "record-all-attendance@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "ماري يوأنس سمعان",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"8646be51-104c-54ac-a600-ba54d7ffbe90\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "tgc9krewsj4v32ldps7kepkiv1q7",
+      "email": "record-all-attendance-read@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "جورج تادرس رزق",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"42cd8c3c-d9e7-5ad8-b4f2-8815d7d96f82\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "ay2qqa161qhyyvzb6etf0e7hgnqe",
+      "email": "record-all-servants-attendance@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "سارة أثناسيوس حنا",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"3bff86f0-bac0-5667-a894-128fc3f46272\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "gnykt7nyihsimg7uxc7i9nmoljj9",
+      "email": "recover-deleted@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "مارك بيشوي عطا الله",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"75a039bf-a28e-5b96-9a30-ab4f8ef4b4f9\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "t6zjhlywtvt4eh3fr38jxkquhx7j",
+      "email": "delete-data@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "ليديا بولا إبراهيم",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"75bbb725-2602-5aa8-87f7-4cdb919ad479\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "fsz6ti6c1fcum2v5x6w9zadxo9at",
+      "email": "export-all@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "رامي مايكل موسى",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"e197557c-79ca-57e9-8255-39d40c68c55d\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "ho0obndhsy3jmtloxueo9e4i445y",
+      "email": "maintenance-notifications@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "كريستينا مارك ويصا",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"4613ed12-3459-5a09-af2b-b7b200417bac\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "qsqm6h3h8j2pxouwkf10rszjb5kk",
+      "email": "write-without-read@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "سامح عماد جابر",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"96300ac7-a0d1-5d14-8760-5b59c28d1586\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "pjdlwwvkmjntsibr716dned803g5",
+      "email": "service-open@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "نيفين وليم فرج",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"f8e8d06b-add6-521c-887c-bf8c16e8ba06\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "mwzt965rbj1glutwz0wonnxrpi8h",
+      "email": "service-year@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "وليم إيهاب مسعد",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"066a735a-67ce-5320-a24b-dfad4d9eec2f\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "iy5ojih3lioqs5ex9cyaqiithfxa",
+      "email": "service-gender@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "منى يوأنس سلامة",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"00956207-d632-5c4b-a6a5-c9ffd4af7410\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "p157fbkmi8391dnvgqygdamd53h9",
+      "email": "service-year-gender@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "هاني تادرس غبريال",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"8ec5f0fa-56a0-56c2-85c5-bd4ac5de17c2\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "trfzncurf2mb7fabqu38c8aeoafx",
+      "email": "service-open-edit@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "رحاب أثناسيوس نصيف",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"b44da321-b52d-5b9d-bfc9-5e09e885c6de\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "7jlxxtzfcykq16dgxukqp069rsj1",
+      "email": "service-year-edit@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "شنودة بيشوي يعقوب",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"911a19d5-8c32-56fe-8501-4d02d8355298\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "dk35ullh8h3hf2qlecuty8xrwz9u",
+      "email": "service-gender-edit@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "كاترين بولا زكريا",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"1f88089a-a8d8-54a1-b644-acc8c176ca66\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "1ifyoy2yspimknbwm38tg18oze5j",
+      "email": "service-year-gender-edit@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "يوأنس مايكل مكرم",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"f0b47146-52e4-56c1-a3fc-14e88c26eb68\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "fyd2jbpca85mow9487vsbj3avuj2",
+      "email": "service-write-related@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "تريزا مارك عازر",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"988db9ce-1e22-50dc-b760-adc371100884\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "sjitkchfvdw44p5w396f03p7cevr",
+      "email": "service-admin-users@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "لوقا عماد نجيب",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"8011d12e-9db8-5782-90b7-7a8b121b3381\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "eadyxkm4hfqg3gv6zdtphsw18z8y",
+      "email": "service-record-servants@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "دينا وليم توفيق",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"e28fd5b3-940c-5bb3-b6c0-c8022262a28b\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "pdhtg9b4aiy76ii6ulx58nve2bcy",
+      "email": "service-record-persons@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "صموئيل إيهاب وهبة",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"ae4ec984-350f-505e-8deb-5b0e88d0b2af\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "qi8tew5dxlz0umsmtk051vtzcdzd",
+      "email": "service-export@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "رانيا يوأنس صادق",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"5c329e05-a36c-54ee-bffb-578402d38b87\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "5mome1yj63p1sl53chaqklw39bf6",
+      "email": "group-read@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "أثناسيوس تادرس إسكندر",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"dcd3466b-c77b-5db1-85ca-f5b1fc241c07\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "qdcguf83crpvmi7kdc01r1ucrl8u",
+      "email": "group-edit@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "جاكلين أثناسيوس بطرس",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"f08725e2-7fb8-5b48-be4b-6d3b1007f8fe\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "edggacd0pi8x2krv64zhwmp4whev",
+      "email": "group-admin-users@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "مينا بيشوي عبد المسيح",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"9663a580-384c-5646-9494-abfcc13f002b\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "g5sl05tck8hc2t5bjqjgwhrc5l8m",
+      "email": "group-write-related@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "مارتينا بولا فهمي",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"30e08487-bd06-5e4e-bdab-5b1d48c1c359\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "755ai7zb78i9ub4guze71b0u2vlb",
+      "email": "group-record-servants@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "كيرلس مايكل شنودة",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"e3414319-7d66-5dd0-82a2-518fa5bcdc16\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "4y4mdta4jr262n80x173j7naks3k",
+      "email": "area-read@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "إيرين مارك بشاي",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"aa114536-86d6-54c3-9edd-ebf8f2994792\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "pronbdboh1s5ph69b5jq11i5gri6",
+      "email": "area-edit@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "بولا عماد ميخائيل",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"3a97b6c9-f8b5-5d22-87bd-7e556d42a0f7\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "paqkeo5ympvaduqcowi696q5sp1r",
+      "email": "area-admin-users@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "يوستينا وليم لبيب",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"8c7b6740-1ac2-562a-8acc-b7c37e617162\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "sfhqiqut2uzpzxndk1785n9wow1a",
+      "email": "area-export@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "أنطونيوس إيهاب سمعان",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"040582fc-7a12-5ba9-9738-b56aaffe1bfe\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "99v58dhi4ac711g2hohjvt6pn72m",
+      "email": "multi-scope@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "ماري يوأنس رزق",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"222006a6-47a3-58ae-a7b2-5010b72fcf9a\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "3y1cjl3inwnjahlaxh3nnco7nhab",
+      "email": "deleted-person-user@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "جورج تادرس حنا",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"38b55e7f-2b25-55fc-a244-be0090e07d29\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    },
+    {
+      "localId": "atboxoec8ld82un3uaolcrlvbupm",
+      "email": "family-admin-member-editor@seed.church-admin.test",
+      "emailVerified": true,
+      "displayName": "سارة أثناسيوس عطا الله",
+      "rawPassword": "SeedPass-123",
+      "customAttributes": "{\"x-hasura-user-id\":\"77434789-ac49-5a3e-ad23-9f125faea529\",\"x-hasura-default-role\":\"user\",\"x-hasura-allowed-roles\":[\"user\"]}"
+    }
+  ]
+}
