@@ -7,7 +7,10 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
   first pending one go out as one batch from the current head to the last
   commit's LSN, deduplicated. Batches stay replayable for `retention_ms`.
   `reset/2` starts a new history (a new replication slot): the backlog and
-  pending commits are dropped, so clients behind it must refetch.
+  pending commits are dropped, so clients behind it must refetch. The reset
+  is announced at once as an empty batch from the new head to itself: no
+  joined client has seen that version, so each one rejoins from its last
+  version, is told `complete: false` and refetches.
   """
 
   use GenServer
@@ -59,6 +62,12 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
 
   @impl true
   def handle_call({:reset, version}, _from, state) do
+    Phoenix.PubSub.broadcast(
+      ChurchAdmin.PubSub,
+      state.topic,
+      {:realtime_changes, %{from: version, to: version, changes: []}}
+    )
+
     {:reply, :ok,
      %{
        state

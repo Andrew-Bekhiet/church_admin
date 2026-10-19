@@ -21,6 +21,7 @@ defmodule ChurchAdmin.Realtime.BroadcasterTest do
     start_supervised!({Broadcaster, opts})
     Phoenix.PubSub.subscribe(ChurchAdmin.PubSub, topic)
     Broadcaster.reset(name, 100)
+    assert_receive {:realtime_changes, %{from: 100, to: 100, changes: []}}
     {:ok, broadcaster: name}
   end
 
@@ -104,16 +105,30 @@ defmodule ChurchAdmin.Realtime.BroadcasterTest do
     receive_batch()
 
     Broadcaster.reset(b, 500)
+    assert %{changes: []} = receive_batch()
     Broadcaster.commit(b, 510, [hobby_updated(@hobby_b)])
 
     assert %{from: 500, to: 510} = receive_batch()
     assert Broadcaster.batches_since(b, 110) == :unknown
   end
 
+  test "a reset broadcasts an empty batch that starts at the new head", %{broadcaster: b} do
+    Broadcaster.commit(b, 110, [hobby_updated(@hobby_a)])
+    receive_batch()
+
+    Broadcaster.reset(b, 500)
+
+    assert %{from: 500, to: 500, changes: []} = receive_batch()
+    assert Broadcaster.head(b) == 500
+    assert Broadcaster.batches_since(b, 110) == :unknown
+    assert Broadcaster.batches_since(b, 500) == {:ok, []}
+  end
+
   test "a reset drops commits still waiting for the coalesce window", %{broadcaster: b} do
     Broadcaster.commit(b, 110, [hobby_updated(@hobby_a)])
     Broadcaster.reset(b, 500)
 
+    assert %{from: 500, to: 500, changes: []} = receive_batch()
     refute_receive {:realtime_changes, _batch}, @coalesce_ms * 4
     assert Broadcaster.head(b) == 500
   end
