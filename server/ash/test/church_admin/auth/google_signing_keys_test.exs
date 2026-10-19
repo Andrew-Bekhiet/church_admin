@@ -4,7 +4,7 @@ defmodule ChurchAdmin.Auth.GoogleSigningKeysTest do
   alias ChurchAdmin.Auth.GoogleSigningKeys
   alias ChurchAdmin.FirebaseTokens
 
-  setup do
+  setup ctx do
     test_pid = self()
     clock = start_supervised!({Agent, fn -> 0 end})
 
@@ -13,7 +13,7 @@ defmodule ChurchAdmin.Auth.GoogleSigningKeysTest do
         {GoogleSigningKeys,
          name: nil,
          req_options: [plug: {Req.Test, __MODULE__}],
-         refresh_deadline_ms: 300,
+         refresh_deadline_ms: Map.get(ctx, :refresh_deadline_ms, 4_000),
          now_ms: fn -> Agent.get(clock, & &1) end}
       )
 
@@ -186,6 +186,7 @@ defmodule ChurchAdmin.Auth.GoogleSigningKeysTest do
       refute_receive :keys_fetched, 1_300
     end
 
+    @tag refresh_deadline_ms: 300
     test "a hanging refresh gives up instead of crashing the caller", ctx do
       Req.Test.stub(__MODULE__, fn _conn -> Process.sleep(:infinity) end)
 
@@ -200,6 +201,7 @@ defmodule ChurchAdmin.Auth.GoogleSigningKeysTest do
     end
   end
 
+  @tag refresh_deadline_ms: 300
   test "a hanging first fetch answers unavailable within the deadline", ctx do
     Req.Test.stub(__MODULE__, fn _conn -> Process.sleep(:infinity) end)
 
