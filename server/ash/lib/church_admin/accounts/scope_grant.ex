@@ -86,7 +86,7 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
 
   changes do
     change {ChurchAdmin.History.Changes.RecordEdit, table: "users", record_id: :uid},
-      on: [:create]
+      on: [:create, :update]
   end
 
   attributes do
