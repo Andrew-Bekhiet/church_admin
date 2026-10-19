@@ -1,7 +1,8 @@
 defmodule ChurchAdmin.Authz.Fragments.Lookup do
   @moduledoc """
-  For Catalog lookup lists: anyone authenticated or not reads them, a user
-  holding `approved` (raw, as Hasura's `&approved_user`) writes them. The
+  For Catalog lookup lists: any authenticated actor reads them (Hasura's
+  `filter {}` for role `user`, which an unauthenticated request never gets), a
+  user holding `approved` (raw, as Hasura's `&approved_user`) writes them. The
   resource adds its own `bypass ChurchAdmin.Authz.Checks.System` first.
   """
 
@@ -11,7 +12,7 @@ defmodule ChurchAdmin.Authz.Fragments.Lookup do
 
   policies do
     policy action_type(:read) do
-      authorize_if always()
+      authorize_if actor_present()
     end
 
     policy action_type([:create, :update, :destroy]) do
