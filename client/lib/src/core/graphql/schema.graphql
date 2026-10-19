@@ -1925,7 +1925,260 @@ type ScopeGrant {
   user: User
 }
 
+enum DataCheckOverrideSortField {
+  FAMILY_ID
+  IS_COMPLETE
+  UPDATED_BY
+}
+
+"A keyset page of :data_check_override"
+type KeysetPageOfDataCheckOverride {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [DataCheckOverride!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input DataCheckOverrideFilterUpdatedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input DataCheckOverrideFilterIsComplete {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input DataCheckOverrideFilterFamilyId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input DataCheckOverrideFilterInput {
+  and: [DataCheckOverrideFilterInput!]
+  or: [DataCheckOverrideFilterInput!]
+  not: [DataCheckOverrideFilterInput!]
+  familyId: DataCheckOverrideFilterFamilyId
+  isComplete: DataCheckOverrideFilterIsComplete
+  updatedBy: DataCheckOverrideFilterUpdatedBy
+  family: FamilyFilterInput
+}
+
+input DataCheckOverrideSortInput {
+  order: SortOrder
+  field: DataCheckOverrideSortField!
+}
+
+type DataCheckOverride {
+  id: ID!
+  familyId: ID!
+  isComplete: Boolean!
+  updatedBy: ID
+  family: Family
+}
+
+enum DataCheckSortField {
+  FAMILY_ID
+  USER_OVERRIDE
+  FAMILY_CHECK
+  ADDRESS_CHECK
+  COMPLETENESS_PERCENT
+  IS_COMPLETE
+}
+
+"A keyset page of :data_check"
+type KeysetPageOfDataCheck {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [DataCheck!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input DataCheckFilterIsComplete {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input DataCheckFilterCompletenessPercent {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input DataCheckFilterAddressCheck {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input DataCheckFilterFamilyCheck {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input DataCheckFilterUserOverride {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input DataCheckFilterFamilyId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input DataCheckFilterInput {
+  and: [DataCheckFilterInput!]
+  or: [DataCheckFilterInput!]
+  not: [DataCheckFilterInput!]
+  familyId: DataCheckFilterFamilyId
+  userOverride: DataCheckFilterUserOverride
+  familyCheck: DataCheckFilterFamilyCheck
+  addressCheck: DataCheckFilterAddressCheck
+  completenessPercent: DataCheckFilterCompletenessPercent
+  isComplete: DataCheckFilterIsComplete
+  family: FamilyFilterInput
+}
+
+input DataCheckSortInput {
+  order: SortOrder
+  field: DataCheckSortField!
+}
+
+type DataCheck {
+  id: ID!
+  familyId: ID!
+  userOverride: Boolean
+  familyCheck: Boolean
+  addressCheck: Boolean
+  completenessPercent: Int
+  isComplete: Boolean
+  details: [JsonString!]
+  family: Family
+}
+
 type RootQueryType {
+  dataChecks(
+    "How to sort the records in the response"
+    sort: [DataCheckSortInput]
+
+    "A filter to limit the results"
+    filter: DataCheckFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfDataCheck
+  dataCheckOverrides(
+    "How to sort the records in the response"
+    sort: [DataCheckOverrideSortInput]
+
+    "A filter to limit the results"
+    filter: DataCheckOverrideFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfDataCheckOverride
   scopeGrant(
     "The id of the record"
     id: ID!
@@ -2099,6 +2352,13 @@ type RootQueryType {
     last: Int
   ): KeysetPageOfServiceMembership
 }
+
+"""
+The `Json` scalar type represents arbitrary json string data, represented as UTF-8
+character sequences. The Json type is most often used to represent a free-form
+human-readable json string.
+"""
+scalar JsonString
 
 """
 The `Json` scalar type represents arbitrary json string data, represented as UTF-8

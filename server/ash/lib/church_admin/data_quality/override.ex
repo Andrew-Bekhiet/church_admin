@@ -2,13 +2,21 @@ defmodule ChurchAdmin.DataQuality.Override do
   use Ash.Resource,
     domain: ChurchAdmin.DataQuality,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Accounts.User
+  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.People.Family
 
   graphql do
     type :data_check_override
+
+    relationships [:family]
+
+    queries do
+      list :data_check_overrides, :read
+    end
   end
 
   postgres do
@@ -22,7 +30,25 @@ defmodule ChurchAdmin.DataQuality.Override do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :family, entity: :family, access: :read}
+    end
   end
 
   attributes do
