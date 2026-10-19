@@ -46,6 +46,10 @@ Reference port: `gql_definintions/metadata/` (commit `refactor(data): port the m
 - `DateTime` fixtures must be local: `LocalDateTimeConverter` returns local times.
 - Name lane-local fragments of shared types distinctly (e.g. `PlaceUser`) until the shared fragments are unified.
 - Feature tests fake DAOs with `Fake implements XDAO`; they keep compiling as long as public signatures stay.
+- A `latestEdit`/`latestVisit` object has an `id`: select it, define the fragment once per lane (e.g. `OrgLatestEdit`) and spread the lane-local user fragment inside it.
+- A list taking `filter`/`sort` on a nested field (`classes(filter: $classesFilter)`) needs those variables declared in the query; the fake link applies them to the nested rows.
+- Opt in to `FakeAshTable(projectsSelections: true)` in a port's tests, so a field the document forgets reads as missing.
+- A sort on a relation whose type's key field is not `id` (StudyYear's `order`) must also select `id`: `NestedSelectionBuilder` does this, and the type needs an Ash `TypePolicy(keyFields: …)`.
 
 ## Done
 
