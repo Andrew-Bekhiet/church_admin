@@ -9,7 +9,7 @@ import 'package:mocktail/mocktail.dart';
 class _MockUsersDAO extends Mock implements UsersDAO {}
 
 class MockStreamAllConfig<T extends ViewableWithID> extends Mock
-    implements LegacyStreamAllConfig<T> {}
+    implements StreamAllConfig<T> {}
 
 void main() {
   group('ManageUsersCubit', () {

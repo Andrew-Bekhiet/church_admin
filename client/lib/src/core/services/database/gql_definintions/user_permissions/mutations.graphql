@@ -1,0 +1,36 @@
+mutation updateUserPermissions($id: ID!, $input: UpdateUserPermissionsInput) {
+  updateUserPermissions(id: $id, input: $input) {
+    result {
+      id
+      permissions {
+        id
+        permission
+      }
+      ...UserAdminScopes
+    }
+  }
+}
+
+mutation approveUser($id: ID!) {
+  approveUser(id: $id) {
+    result {
+      id
+      permissions {
+        id
+        permission
+      }
+    }
+  }
+}
+
+mutation unapproveUser($id: ID!) {
+  unapproveUser(id: $id) {
+    result {
+      id
+      permissions {
+        id
+        permission
+      }
+    }
+  }
+}

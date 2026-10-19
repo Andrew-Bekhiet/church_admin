@@ -3,6 +3,7 @@ import 'package:gql/ast.dart';
 
 class Fragment_UserPreferences {
   Fragment_UserPreferences({
+    required this.id,
     required this.uid,
     required this.orderByPreferences,
     required this.secondLinePreferences,
@@ -10,10 +11,11 @@ class Fragment_UserPreferences {
     required this.greatFeastTheme,
     this.lastHomeMode,
     required this.updatedAt,
-    this.$__typename = 'UsersPreferences',
+    this.$__typename = 'UserPreferences',
   });
 
   factory Fragment_UserPreferences.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$uid = json['uid'];
     final l$orderByPreferences = json['orderByPreferences'];
     final l$secondLinePreferences = json['secondLinePreferences'];
@@ -23,7 +25,8 @@ class Fragment_UserPreferences {
     final l$updatedAt = json['updatedAt'];
     final l$$__typename = json['__typename'];
     return Fragment_UserPreferences(
-      uid: stringToUuid(l$uid),
+      id: (l$id as String),
+      uid: (l$uid as String),
       orderByPreferences: (l$orderByPreferences as Json),
       secondLinePreferences: (l$secondLinePreferences as Json),
       darkTheme: (l$darkTheme as bool?),
@@ -34,7 +37,9 @@ class Fragment_UserPreferences {
     );
   }
 
-  final UuidValue uid;
+  final String id;
+
+  final String uid;
 
   final Json orderByPreferences;
 
@@ -52,8 +57,10 @@ class Fragment_UserPreferences {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$uid = uid;
-    _resultData['uid'] = uuidToString(l$uid);
+    _resultData['uid'] = l$uid;
     final l$orderByPreferences = orderByPreferences;
     _resultData['orderByPreferences'] = l$orderByPreferences;
     final l$secondLinePreferences = secondLinePreferences;
@@ -73,6 +80,7 @@ class Fragment_UserPreferences {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$uid = uid;
     final l$orderByPreferences = orderByPreferences;
     final l$secondLinePreferences = secondLinePreferences;
@@ -82,6 +90,7 @@ class Fragment_UserPreferences {
     final l$updatedAt = updatedAt;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$id,
       l$uid,
       l$orderByPreferences,
       l$secondLinePreferences,
@@ -100,6 +109,11 @@ class Fragment_UserPreferences {
     }
     if (other is! Fragment_UserPreferences ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$uid = uid;
@@ -162,7 +176,8 @@ abstract class CopyWith_Fragment_UserPreferences<TRes> {
       _CopyWithStubImpl_Fragment_UserPreferences;
 
   TRes call({
-    UuidValue? uid,
+    String? id,
+    String? uid,
     Json? orderByPreferences,
     Json? secondLinePreferences,
     bool? darkTheme,
@@ -184,6 +199,7 @@ class _CopyWithImpl_Fragment_UserPreferences<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? uid = _undefined,
     Object? orderByPreferences = _undefined,
     Object? secondLinePreferences = _undefined,
@@ -194,9 +210,8 @@ class _CopyWithImpl_Fragment_UserPreferences<TRes>
     Object? $__typename = _undefined,
   }) => _then(
     Fragment_UserPreferences(
-      uid: uid == _undefined || uid == null
-          ? _instance.uid
-          : (uid as UuidValue),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      uid: uid == _undefined || uid == null ? _instance.uid : (uid as String),
       orderByPreferences:
           orderByPreferences == _undefined || orderByPreferences == null
           ? _instance.orderByPreferences
@@ -231,7 +246,8 @@ class _CopyWithStubImpl_Fragment_UserPreferences<TRes>
   TRes _res;
 
   call({
-    UuidValue? uid,
+    String? id,
+    String? uid,
     Json? orderByPreferences,
     Json? secondLinePreferences,
     bool? darkTheme,
@@ -246,13 +262,20 @@ const fragmentDefinitionUserPreferences = FragmentDefinitionNode(
   name: NameNode(value: 'UserPreferences'),
   typeCondition: TypeConditionNode(
     on: NamedTypeNode(
-      name: NameNode(value: 'UsersPreferences'),
+      name: NameNode(value: 'UserPreferences'),
       isNonNull: false,
     ),
   ),
   directives: [],
   selectionSet: SelectionSetNode(
     selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
       FieldNode(
         name: NameNode(value: 'uid'),
         alias: null,

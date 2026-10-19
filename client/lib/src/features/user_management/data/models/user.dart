@@ -12,7 +12,7 @@ class User extends ViewableWithIDAndImage
     with _$User
     implements SerializableExtra {
   @JsonKey(defaultValue: '')
-  @QueryableField(label: 'معرف المستخدم', codeOnly: true)
+  @QueryableField.self(label: 'معرف المستخدم', codeOnly: true)
   final String uid;
 
   @override
@@ -30,7 +30,8 @@ class User extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
-  @QueryableField(label: 'مسؤول عن')
+  @JsonKey(name: 'scopeGrants', fromJson: AdminOnData.sortedListFromJson)
+  @QueryableField(label: 'مسؤول عن', graphqlName: 'scopeGrants')
   final List<AdminOnData>? adminOn;
 
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
@@ -39,6 +40,7 @@ class User extends ViewableWithIDAndImage
 
   final String? authId;
 
+  @JsonKey(name: 'latestEdit')
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
@@ -47,7 +49,7 @@ class User extends ViewableWithIDAndImage
 
   final UserPreferences? preferences;
 
-  @JsonKey(defaultValue: <FcmToken>[])
+  @JsonKey(name: 'deviceTokens', defaultValue: <FcmToken>[])
   final List<FcmToken> fcmTokens;
 
   final List<AdminOnData>? servicesHistory;
@@ -143,30 +145,6 @@ class UserFields extends _UserFields {
     isCodeOnly: true,
     getValue: (obj) => obj is User ? obj.authId : null,
   );
-
-  FieldMetadata<AggregateData> get permissionsAggregate => FieldMetadata(
-    parentType: User,
-    name: 'permissionsAggregate',
-    label: 'permissionsAggregate',
-    isCodeOnly: true,
-    isOrderable: false,
-    operators: {...MultiSelectOperator.values},
-    getValue: (obj) => obj is User ? obj.permissions : null,
-  );
-
-  @override
-  List<FieldMetadata<Object>> get allFields => [
-    ...super.allFields,
-    permissionsAggregate,
-  ];
-
-  @override
-  Map<String, FieldMetadata<Object>> get allFieldsByName {
-    return {
-      ...super.allFieldsByName,
-      permissionsAggregate.name: permissionsAggregate,
-    };
-  }
 
   UserFields();
 }

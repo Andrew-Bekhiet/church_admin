@@ -71,6 +71,8 @@ class FakeAshBackend {
   void announce(List<EntityChange> changes) =>
       _changeFeed.add(ChangesReceived(changes));
 
+  void resync() => _changeFeed.add(const ResyncRequired());
+
   void dispose() {
     unawaited(_changeFeed.close());
     unawaited(_connectivity.close());

@@ -297,7 +297,7 @@ class NotificationsService extends BlocObserver {
         _authBloc.currentUserData?.fcmTokens.any((t) => t.token == token) ??
         false;
     if (!alreadyRegistered) {
-      await _databaseService.fcmTokens.registerToken(uid: uid, token: token);
+      await _databaseService.fcmTokens.registerToken(token: token);
     }
 
     // The functions send to FCM tokens; register() yields installation IDs

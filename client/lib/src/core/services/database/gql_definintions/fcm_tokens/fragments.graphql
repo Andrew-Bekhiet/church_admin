@@ -1,0 +1,6 @@
+fragment DeviceToken on DeviceToken {
+  id
+  uid
+  token
+  createdAt
+}
