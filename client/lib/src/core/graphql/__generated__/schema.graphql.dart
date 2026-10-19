@@ -1062,6 +1062,361 @@ class _CopyWithStubImpl_Input_MeetingInput<TRes>
   }) => _res;
 }
 
+class Input_ContactInput {
+  factory Input_ContactInput({
+    required String phone,
+    String? label,
+    required bool isMainPhone,
+    String? id,
+  }) => Input_ContactInput._({
+    r'phone': phone,
+    if (label != null) r'label': label,
+    r'isMainPhone': isMainPhone,
+    if (id != null) r'id': id,
+  });
+
+  Input_ContactInput._(this._$data);
+
+  factory Input_ContactInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$phone = data['phone'];
+    result$data['phone'] = (l$phone as String);
+    if (data.containsKey('label')) {
+      final l$label = data['label'];
+      result$data['label'] = (l$label as String?);
+    }
+    final l$isMainPhone = data['isMainPhone'];
+    result$data['isMainPhone'] = (l$isMainPhone as bool);
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    return Input_ContactInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get phone => (_$data['phone'] as String);
+
+  String? get label => (_$data['label'] as String?);
+
+  bool get isMainPhone => (_$data['isMainPhone'] as bool);
+
+  String? get id => (_$data['id'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$phone = phone;
+    result$data['phone'] = l$phone;
+    if (_$data.containsKey('label')) {
+      final l$label = label;
+      result$data['label'] = l$label;
+    }
+    final l$isMainPhone = isMainPhone;
+    result$data['isMainPhone'] = l$isMainPhone;
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_ContactInput<Input_ContactInput> get copyWith =>
+      CopyWith_Input_ContactInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_ContactInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$phone = phone;
+    final lOther$phone = other.phone;
+    if (l$phone != lOther$phone) {
+      return false;
+    }
+    final l$label = label;
+    final lOther$label = other.label;
+    if (_$data.containsKey('label') != other._$data.containsKey('label')) {
+      return false;
+    }
+    if (l$label != lOther$label) {
+      return false;
+    }
+    final l$isMainPhone = isMainPhone;
+    final lOther$isMainPhone = other.isMainPhone;
+    if (l$isMainPhone != lOther$isMainPhone) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$phone = phone;
+    final l$label = label;
+    final l$isMainPhone = isMainPhone;
+    final l$id = id;
+    return Object.hashAll([
+      l$phone,
+      _$data.containsKey('label') ? l$label : const {},
+      l$isMainPhone,
+      _$data.containsKey('id') ? l$id : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_ContactInput<TRes> {
+  factory CopyWith_Input_ContactInput(
+    Input_ContactInput instance,
+    TRes Function(Input_ContactInput) then,
+  ) = _CopyWithImpl_Input_ContactInput;
+
+  factory CopyWith_Input_ContactInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_ContactInput;
+
+  TRes call({String? phone, String? label, bool? isMainPhone, String? id});
+}
+
+class _CopyWithImpl_Input_ContactInput<TRes>
+    implements CopyWith_Input_ContactInput<TRes> {
+  _CopyWithImpl_Input_ContactInput(this._instance, this._then);
+
+  final Input_ContactInput _instance;
+
+  final TRes Function(Input_ContactInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? phone = _undefined,
+    Object? label = _undefined,
+    Object? isMainPhone = _undefined,
+    Object? id = _undefined,
+  }) => _then(
+    Input_ContactInput._({
+      ..._instance._$data,
+      if (phone != _undefined && phone != null) 'phone': (phone as String),
+      if (label != _undefined) 'label': (label as String?),
+      if (isMainPhone != _undefined && isMainPhone != null)
+        'isMainPhone': (isMainPhone as bool),
+      if (id != _undefined) 'id': (id as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_ContactInput<TRes>
+    implements CopyWith_Input_ContactInput<TRes> {
+  _CopyWithStubImpl_Input_ContactInput(this._res);
+
+  TRes _res;
+
+  call({String? phone, String? label, bool? isMainPhone, String? id}) => _res;
+}
+
+class Input_FamilyContactInput {
+  factory Input_FamilyContactInput({
+    required String phone,
+    required String personTypeId,
+    String? label,
+    required bool isMainPhone,
+    String? id,
+  }) => Input_FamilyContactInput._({
+    r'phone': phone,
+    r'personTypeId': personTypeId,
+    if (label != null) r'label': label,
+    r'isMainPhone': isMainPhone,
+    if (id != null) r'id': id,
+  });
+
+  Input_FamilyContactInput._(this._$data);
+
+  factory Input_FamilyContactInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$phone = data['phone'];
+    result$data['phone'] = (l$phone as String);
+    final l$personTypeId = data['personTypeId'];
+    result$data['personTypeId'] = (l$personTypeId as String);
+    if (data.containsKey('label')) {
+      final l$label = data['label'];
+      result$data['label'] = (l$label as String?);
+    }
+    final l$isMainPhone = data['isMainPhone'];
+    result$data['isMainPhone'] = (l$isMainPhone as bool);
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
+    return Input_FamilyContactInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get phone => (_$data['phone'] as String);
+
+  String get personTypeId => (_$data['personTypeId'] as String);
+
+  String? get label => (_$data['label'] as String?);
+
+  bool get isMainPhone => (_$data['isMainPhone'] as bool);
+
+  String? get id => (_$data['id'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$phone = phone;
+    result$data['phone'] = l$phone;
+    final l$personTypeId = personTypeId;
+    result$data['personTypeId'] = l$personTypeId;
+    if (_$data.containsKey('label')) {
+      final l$label = label;
+      result$data['label'] = l$label;
+    }
+    final l$isMainPhone = isMainPhone;
+    result$data['isMainPhone'] = l$isMainPhone;
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FamilyContactInput<Input_FamilyContactInput> get copyWith =>
+      CopyWith_Input_FamilyContactInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FamilyContactInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$phone = phone;
+    final lOther$phone = other.phone;
+    if (l$phone != lOther$phone) {
+      return false;
+    }
+    final l$personTypeId = personTypeId;
+    final lOther$personTypeId = other.personTypeId;
+    if (l$personTypeId != lOther$personTypeId) {
+      return false;
+    }
+    final l$label = label;
+    final lOther$label = other.label;
+    if (_$data.containsKey('label') != other._$data.containsKey('label')) {
+      return false;
+    }
+    if (l$label != lOther$label) {
+      return false;
+    }
+    final l$isMainPhone = isMainPhone;
+    final lOther$isMainPhone = other.isMainPhone;
+    if (l$isMainPhone != lOther$isMainPhone) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$phone = phone;
+    final l$personTypeId = personTypeId;
+    final l$label = label;
+    final l$isMainPhone = isMainPhone;
+    final l$id = id;
+    return Object.hashAll([
+      l$phone,
+      l$personTypeId,
+      _$data.containsKey('label') ? l$label : const {},
+      l$isMainPhone,
+      _$data.containsKey('id') ? l$id : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_FamilyContactInput<TRes> {
+  factory CopyWith_Input_FamilyContactInput(
+    Input_FamilyContactInput instance,
+    TRes Function(Input_FamilyContactInput) then,
+  ) = _CopyWithImpl_Input_FamilyContactInput;
+
+  factory CopyWith_Input_FamilyContactInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_FamilyContactInput;
+
+  TRes call({
+    String? phone,
+    String? personTypeId,
+    String? label,
+    bool? isMainPhone,
+    String? id,
+  });
+}
+
+class _CopyWithImpl_Input_FamilyContactInput<TRes>
+    implements CopyWith_Input_FamilyContactInput<TRes> {
+  _CopyWithImpl_Input_FamilyContactInput(this._instance, this._then);
+
+  final Input_FamilyContactInput _instance;
+
+  final TRes Function(Input_FamilyContactInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? phone = _undefined,
+    Object? personTypeId = _undefined,
+    Object? label = _undefined,
+    Object? isMainPhone = _undefined,
+    Object? id = _undefined,
+  }) => _then(
+    Input_FamilyContactInput._({
+      ..._instance._$data,
+      if (phone != _undefined && phone != null) 'phone': (phone as String),
+      if (personTypeId != _undefined && personTypeId != null)
+        'personTypeId': (personTypeId as String),
+      if (label != _undefined) 'label': (label as String?),
+      if (isMainPhone != _undefined && isMainPhone != null)
+        'isMainPhone': (isMainPhone as bool),
+      if (id != _undefined) 'id': (id as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_FamilyContactInput<TRes>
+    implements CopyWith_Input_FamilyContactInput<TRes> {
+  _CopyWithStubImpl_Input_FamilyContactInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? phone,
+    String? personTypeId,
+    String? label,
+    bool? isMainPhone,
+    String? id,
+  }) => _res;
+}
+
 class Input_AddressInput {
   factory Input_AddressInput({
     String? substreetName,
@@ -1414,361 +1769,6 @@ class _CopyWithStubImpl_Input_AddressInput<TRes>
     String? areaId,
     int? apartmentNumber,
   }) => _res;
-}
-
-class Input_FamilyContactInput {
-  factory Input_FamilyContactInput({
-    required String phone,
-    required String personTypeId,
-    String? label,
-    required bool isMainPhone,
-    String? id,
-  }) => Input_FamilyContactInput._({
-    r'phone': phone,
-    r'personTypeId': personTypeId,
-    if (label != null) r'label': label,
-    r'isMainPhone': isMainPhone,
-    if (id != null) r'id': id,
-  });
-
-  Input_FamilyContactInput._(this._$data);
-
-  factory Input_FamilyContactInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$phone = data['phone'];
-    result$data['phone'] = (l$phone as String);
-    final l$personTypeId = data['personTypeId'];
-    result$data['personTypeId'] = (l$personTypeId as String);
-    if (data.containsKey('label')) {
-      final l$label = data['label'];
-      result$data['label'] = (l$label as String?);
-    }
-    final l$isMainPhone = data['isMainPhone'];
-    result$data['isMainPhone'] = (l$isMainPhone as bool);
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = (l$id as String?);
-    }
-    return Input_FamilyContactInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String get phone => (_$data['phone'] as String);
-
-  String get personTypeId => (_$data['personTypeId'] as String);
-
-  String? get label => (_$data['label'] as String?);
-
-  bool get isMainPhone => (_$data['isMainPhone'] as bool);
-
-  String? get id => (_$data['id'] as String?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$phone = phone;
-    result$data['phone'] = l$phone;
-    final l$personTypeId = personTypeId;
-    result$data['personTypeId'] = l$personTypeId;
-    if (_$data.containsKey('label')) {
-      final l$label = label;
-      result$data['label'] = l$label;
-    }
-    final l$isMainPhone = isMainPhone;
-    result$data['isMainPhone'] = l$isMainPhone;
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_FamilyContactInput<Input_FamilyContactInput> get copyWith =>
-      CopyWith_Input_FamilyContactInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_FamilyContactInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$phone = phone;
-    final lOther$phone = other.phone;
-    if (l$phone != lOther$phone) {
-      return false;
-    }
-    final l$personTypeId = personTypeId;
-    final lOther$personTypeId = other.personTypeId;
-    if (l$personTypeId != lOther$personTypeId) {
-      return false;
-    }
-    final l$label = label;
-    final lOther$label = other.label;
-    if (_$data.containsKey('label') != other._$data.containsKey('label')) {
-      return false;
-    }
-    if (l$label != lOther$label) {
-      return false;
-    }
-    final l$isMainPhone = isMainPhone;
-    final lOther$isMainPhone = other.isMainPhone;
-    if (l$isMainPhone != lOther$isMainPhone) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$phone = phone;
-    final l$personTypeId = personTypeId;
-    final l$label = label;
-    final l$isMainPhone = isMainPhone;
-    final l$id = id;
-    return Object.hashAll([
-      l$phone,
-      l$personTypeId,
-      _$data.containsKey('label') ? l$label : const {},
-      l$isMainPhone,
-      _$data.containsKey('id') ? l$id : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_FamilyContactInput<TRes> {
-  factory CopyWith_Input_FamilyContactInput(
-    Input_FamilyContactInput instance,
-    TRes Function(Input_FamilyContactInput) then,
-  ) = _CopyWithImpl_Input_FamilyContactInput;
-
-  factory CopyWith_Input_FamilyContactInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_FamilyContactInput;
-
-  TRes call({
-    String? phone,
-    String? personTypeId,
-    String? label,
-    bool? isMainPhone,
-    String? id,
-  });
-}
-
-class _CopyWithImpl_Input_FamilyContactInput<TRes>
-    implements CopyWith_Input_FamilyContactInput<TRes> {
-  _CopyWithImpl_Input_FamilyContactInput(this._instance, this._then);
-
-  final Input_FamilyContactInput _instance;
-
-  final TRes Function(Input_FamilyContactInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? phone = _undefined,
-    Object? personTypeId = _undefined,
-    Object? label = _undefined,
-    Object? isMainPhone = _undefined,
-    Object? id = _undefined,
-  }) => _then(
-    Input_FamilyContactInput._({
-      ..._instance._$data,
-      if (phone != _undefined && phone != null) 'phone': (phone as String),
-      if (personTypeId != _undefined && personTypeId != null)
-        'personTypeId': (personTypeId as String),
-      if (label != _undefined) 'label': (label as String?),
-      if (isMainPhone != _undefined && isMainPhone != null)
-        'isMainPhone': (isMainPhone as bool),
-      if (id != _undefined) 'id': (id as String?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_FamilyContactInput<TRes>
-    implements CopyWith_Input_FamilyContactInput<TRes> {
-  _CopyWithStubImpl_Input_FamilyContactInput(this._res);
-
-  TRes _res;
-
-  call({
-    String? phone,
-    String? personTypeId,
-    String? label,
-    bool? isMainPhone,
-    String? id,
-  }) => _res;
-}
-
-class Input_ContactInput {
-  factory Input_ContactInput({
-    required String phone,
-    String? label,
-    required bool isMainPhone,
-    String? id,
-  }) => Input_ContactInput._({
-    r'phone': phone,
-    if (label != null) r'label': label,
-    r'isMainPhone': isMainPhone,
-    if (id != null) r'id': id,
-  });
-
-  Input_ContactInput._(this._$data);
-
-  factory Input_ContactInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$phone = data['phone'];
-    result$data['phone'] = (l$phone as String);
-    if (data.containsKey('label')) {
-      final l$label = data['label'];
-      result$data['label'] = (l$label as String?);
-    }
-    final l$isMainPhone = data['isMainPhone'];
-    result$data['isMainPhone'] = (l$isMainPhone as bool);
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = (l$id as String?);
-    }
-    return Input_ContactInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String get phone => (_$data['phone'] as String);
-
-  String? get label => (_$data['label'] as String?);
-
-  bool get isMainPhone => (_$data['isMainPhone'] as bool);
-
-  String? get id => (_$data['id'] as String?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$phone = phone;
-    result$data['phone'] = l$phone;
-    if (_$data.containsKey('label')) {
-      final l$label = label;
-      result$data['label'] = l$label;
-    }
-    final l$isMainPhone = isMainPhone;
-    result$data['isMainPhone'] = l$isMainPhone;
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ContactInput<Input_ContactInput> get copyWith =>
-      CopyWith_Input_ContactInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ContactInput || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$phone = phone;
-    final lOther$phone = other.phone;
-    if (l$phone != lOther$phone) {
-      return false;
-    }
-    final l$label = label;
-    final lOther$label = other.label;
-    if (_$data.containsKey('label') != other._$data.containsKey('label')) {
-      return false;
-    }
-    if (l$label != lOther$label) {
-      return false;
-    }
-    final l$isMainPhone = isMainPhone;
-    final lOther$isMainPhone = other.isMainPhone;
-    if (l$isMainPhone != lOther$isMainPhone) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$phone = phone;
-    final l$label = label;
-    final l$isMainPhone = isMainPhone;
-    final l$id = id;
-    return Object.hashAll([
-      l$phone,
-      _$data.containsKey('label') ? l$label : const {},
-      l$isMainPhone,
-      _$data.containsKey('id') ? l$id : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ContactInput<TRes> {
-  factory CopyWith_Input_ContactInput(
-    Input_ContactInput instance,
-    TRes Function(Input_ContactInput) then,
-  ) = _CopyWithImpl_Input_ContactInput;
-
-  factory CopyWith_Input_ContactInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_ContactInput;
-
-  TRes call({String? phone, String? label, bool? isMainPhone, String? id});
-}
-
-class _CopyWithImpl_Input_ContactInput<TRes>
-    implements CopyWith_Input_ContactInput<TRes> {
-  _CopyWithImpl_Input_ContactInput(this._instance, this._then);
-
-  final Input_ContactInput _instance;
-
-  final TRes Function(Input_ContactInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? phone = _undefined,
-    Object? label = _undefined,
-    Object? isMainPhone = _undefined,
-    Object? id = _undefined,
-  }) => _then(
-    Input_ContactInput._({
-      ..._instance._$data,
-      if (phone != _undefined && phone != null) 'phone': (phone as String),
-      if (label != _undefined) 'label': (label as String?),
-      if (isMainPhone != _undefined && isMainPhone != null)
-        'isMainPhone': (isMainPhone as bool),
-      if (id != _undefined) 'id': (id as String?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_ContactInput<TRes>
-    implements CopyWith_Input_ContactInput<TRes> {
-  _CopyWithStubImpl_Input_ContactInput(this._res);
-
-  TRes _res;
-
-  call({String? phone, String? label, bool? isMainPhone, String? id}) => _res;
 }
 
 class Input_ServiceMembershipFilterIsOutsideServiceStudyYears {
@@ -51118,6 +51118,1065 @@ class _CopyWithStubImpl_Input_FamilyRelationSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_FamilyRelationSortField? field}) => _res;
+}
+
+class Input_UpdateFamilyInput {
+  factory Input_UpdateFamilyInput({
+    String? name,
+    String? notes,
+    int? color,
+    String? status,
+    String? deceasedSpouseName,
+    DateTime? marriageDate,
+    String? churchId,
+    Input_AddressInput? address,
+    List<Input_FamilyContactInput>? contacts,
+    List<String>? parents,
+    List<String>? children,
+    DateTime? lastVisit,
+    DateTime? lastFatherVisit,
+  }) => Input_UpdateFamilyInput._({
+    if (name != null) r'name': name,
+    if (notes != null) r'notes': notes,
+    if (color != null) r'color': color,
+    if (status != null) r'status': status,
+    if (deceasedSpouseName != null) r'deceasedSpouseName': deceasedSpouseName,
+    if (marriageDate != null) r'marriageDate': marriageDate,
+    if (churchId != null) r'churchId': churchId,
+    if (address != null) r'address': address,
+    if (contacts != null) r'contacts': contacts,
+    if (parents != null) r'parents': parents,
+    if (children != null) r'children': children,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+    if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
+  });
+
+  Input_UpdateFamilyInput._(this._$data);
+
+  factory Input_UpdateFamilyInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('notes')) {
+      final l$notes = data['notes'];
+      result$data['notes'] = (l$notes as String?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('status')) {
+      final l$status = data['status'];
+      result$data['status'] = (l$status as String?);
+    }
+    if (data.containsKey('deceasedSpouseName')) {
+      final l$deceasedSpouseName = data['deceasedSpouseName'];
+      result$data['deceasedSpouseName'] = (l$deceasedSpouseName as String?);
+    }
+    if (data.containsKey('marriageDate')) {
+      final l$marriageDate = data['marriageDate'];
+      result$data['marriageDate'] = l$marriageDate == null
+          ? null
+          : dateFromString(l$marriageDate);
+    }
+    if (data.containsKey('churchId')) {
+      final l$churchId = data['churchId'];
+      result$data['churchId'] = (l$churchId as String?);
+    }
+    if (data.containsKey('address')) {
+      final l$address = data['address'];
+      result$data['address'] = l$address == null
+          ? null
+          : Input_AddressInput.fromJson((l$address as Map<String, dynamic>));
+    }
+    if (data.containsKey('contacts')) {
+      final l$contacts = data['contacts'];
+      result$data['contacts'] = (l$contacts as List<dynamic>?)
+          ?.map(
+            (e) =>
+                Input_FamilyContactInput.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
+    }
+    if (data.containsKey('parents')) {
+      final l$parents = data['parents'];
+      result$data['parents'] = (l$parents as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('children')) {
+      final l$children = data['children'];
+      result$data['children'] = (l$children as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzFromString(l$lastVisit);
+    }
+    if (data.containsKey('lastFatherVisit')) {
+      final l$lastFatherVisit = data['lastFatherVisit'];
+      result$data['lastFatherVisit'] = l$lastFatherVisit == null
+          ? null
+          : tstzFromString(l$lastFatherVisit);
+    }
+    return Input_UpdateFamilyInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get name => (_$data['name'] as String?);
+
+  String? get notes => (_$data['notes'] as String?);
+
+  int? get color => (_$data['color'] as int?);
+
+  String? get status => (_$data['status'] as String?);
+
+  String? get deceasedSpouseName => (_$data['deceasedSpouseName'] as String?);
+
+  DateTime? get marriageDate => (_$data['marriageDate'] as DateTime?);
+
+  String? get churchId => (_$data['churchId'] as String?);
+
+  Input_AddressInput? get address => (_$data['address'] as Input_AddressInput?);
+
+  List<Input_FamilyContactInput>? get contacts =>
+      (_$data['contacts'] as List<Input_FamilyContactInput>?);
+
+  List<String>? get parents => (_$data['parents'] as List<String>?);
+
+  List<String>? get children => (_$data['children'] as List<String>?);
+
+  DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
+
+  DateTime? get lastFatherVisit => (_$data['lastFatherVisit'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('notes')) {
+      final l$notes = notes;
+      result$data['notes'] = l$notes;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('status')) {
+      final l$status = status;
+      result$data['status'] = l$status;
+    }
+    if (_$data.containsKey('deceasedSpouseName')) {
+      final l$deceasedSpouseName = deceasedSpouseName;
+      result$data['deceasedSpouseName'] = l$deceasedSpouseName;
+    }
+    if (_$data.containsKey('marriageDate')) {
+      final l$marriageDate = marriageDate;
+      result$data['marriageDate'] = l$marriageDate == null
+          ? null
+          : dateToString(l$marriageDate);
+    }
+    if (_$data.containsKey('churchId')) {
+      final l$churchId = churchId;
+      result$data['churchId'] = l$churchId;
+    }
+    if (_$data.containsKey('address')) {
+      final l$address = address;
+      result$data['address'] = l$address?.toJson();
+    }
+    if (_$data.containsKey('contacts')) {
+      final l$contacts = contacts;
+      result$data['contacts'] = l$contacts?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('parents')) {
+      final l$parents = parents;
+      result$data['parents'] = l$parents?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('children')) {
+      final l$children = children;
+      result$data['children'] = l$children?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzToString(l$lastVisit);
+    }
+    if (_$data.containsKey('lastFatherVisit')) {
+      final l$lastFatherVisit = lastFatherVisit;
+      result$data['lastFatherVisit'] = l$lastFatherVisit == null
+          ? null
+          : tstzToString(l$lastFatherVisit);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UpdateFamilyInput<Input_UpdateFamilyInput> get copyWith =>
+      CopyWith_Input_UpdateFamilyInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UpdateFamilyInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$notes = notes;
+    final lOther$notes = other.notes;
+    if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
+      return false;
+    }
+    if (l$notes != lOther$notes) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (_$data.containsKey('status') != other._$data.containsKey('status')) {
+      return false;
+    }
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$deceasedSpouseName = deceasedSpouseName;
+    final lOther$deceasedSpouseName = other.deceasedSpouseName;
+    if (_$data.containsKey('deceasedSpouseName') !=
+        other._$data.containsKey('deceasedSpouseName')) {
+      return false;
+    }
+    if (l$deceasedSpouseName != lOther$deceasedSpouseName) {
+      return false;
+    }
+    final l$marriageDate = marriageDate;
+    final lOther$marriageDate = other.marriageDate;
+    if (_$data.containsKey('marriageDate') !=
+        other._$data.containsKey('marriageDate')) {
+      return false;
+    }
+    if (l$marriageDate != lOther$marriageDate) {
+      return false;
+    }
+    final l$churchId = churchId;
+    final lOther$churchId = other.churchId;
+    if (_$data.containsKey('churchId') !=
+        other._$data.containsKey('churchId')) {
+      return false;
+    }
+    if (l$churchId != lOther$churchId) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
+      return false;
+    }
+    if (l$address != lOther$address) {
+      return false;
+    }
+    final l$contacts = contacts;
+    final lOther$contacts = other.contacts;
+    if (_$data.containsKey('contacts') !=
+        other._$data.containsKey('contacts')) {
+      return false;
+    }
+    if (l$contacts != null && lOther$contacts != null) {
+      if (l$contacts.length != lOther$contacts.length) {
+        return false;
+      }
+      for (int i = 0; i < l$contacts.length; i++) {
+        final l$contacts$entry = l$contacts[i];
+        final lOther$contacts$entry = lOther$contacts[i];
+        if (l$contacts$entry != lOther$contacts$entry) {
+          return false;
+        }
+      }
+    } else if (l$contacts != lOther$contacts) {
+      return false;
+    }
+    final l$parents = parents;
+    final lOther$parents = other.parents;
+    if (_$data.containsKey('parents') != other._$data.containsKey('parents')) {
+      return false;
+    }
+    if (l$parents != null && lOther$parents != null) {
+      if (l$parents.length != lOther$parents.length) {
+        return false;
+      }
+      for (int i = 0; i < l$parents.length; i++) {
+        final l$parents$entry = l$parents[i];
+        final lOther$parents$entry = lOther$parents[i];
+        if (l$parents$entry != lOther$parents$entry) {
+          return false;
+        }
+      }
+    } else if (l$parents != lOther$parents) {
+      return false;
+    }
+    final l$children = children;
+    final lOther$children = other.children;
+    if (_$data.containsKey('children') !=
+        other._$data.containsKey('children')) {
+      return false;
+    }
+    if (l$children != null && lOther$children != null) {
+      if (l$children.length != lOther$children.length) {
+        return false;
+      }
+      for (int i = 0; i < l$children.length; i++) {
+        final l$children$entry = l$children[i];
+        final lOther$children$entry = lOther$children[i];
+        if (l$children$entry != lOther$children$entry) {
+          return false;
+        }
+      }
+    } else if (l$children != lOther$children) {
+      return false;
+    }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    final l$lastFatherVisit = lastFatherVisit;
+    final lOther$lastFatherVisit = other.lastFatherVisit;
+    if (_$data.containsKey('lastFatherVisit') !=
+        other._$data.containsKey('lastFatherVisit')) {
+      return false;
+    }
+    if (l$lastFatherVisit != lOther$lastFatherVisit) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$notes = notes;
+    final l$color = color;
+    final l$status = status;
+    final l$deceasedSpouseName = deceasedSpouseName;
+    final l$marriageDate = marriageDate;
+    final l$churchId = churchId;
+    final l$address = address;
+    final l$contacts = contacts;
+    final l$parents = parents;
+    final l$children = children;
+    final l$lastVisit = lastVisit;
+    final l$lastFatherVisit = lastFatherVisit;
+    return Object.hashAll([
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('notes') ? l$notes : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('status') ? l$status : const {},
+      _$data.containsKey('deceasedSpouseName')
+          ? l$deceasedSpouseName
+          : const {},
+      _$data.containsKey('marriageDate') ? l$marriageDate : const {},
+      _$data.containsKey('churchId') ? l$churchId : const {},
+      _$data.containsKey('address') ? l$address : const {},
+      _$data.containsKey('contacts')
+          ? l$contacts == null
+                ? null
+                : Object.hashAll(l$contacts.map((v) => v))
+          : const {},
+      _$data.containsKey('parents')
+          ? l$parents == null
+                ? null
+                : Object.hashAll(l$parents.map((v) => v))
+          : const {},
+      _$data.containsKey('children')
+          ? l$children == null
+                ? null
+                : Object.hashAll(l$children.map((v) => v))
+          : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
+      _$data.containsKey('lastFatherVisit') ? l$lastFatherVisit : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UpdateFamilyInput<TRes> {
+  factory CopyWith_Input_UpdateFamilyInput(
+    Input_UpdateFamilyInput instance,
+    TRes Function(Input_UpdateFamilyInput) then,
+  ) = _CopyWithImpl_Input_UpdateFamilyInput;
+
+  factory CopyWith_Input_UpdateFamilyInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UpdateFamilyInput;
+
+  TRes call({
+    String? name,
+    String? notes,
+    int? color,
+    String? status,
+    String? deceasedSpouseName,
+    DateTime? marriageDate,
+    String? churchId,
+    Input_AddressInput? address,
+    List<Input_FamilyContactInput>? contacts,
+    List<String>? parents,
+    List<String>? children,
+    DateTime? lastVisit,
+    DateTime? lastFatherVisit,
+  });
+  CopyWith_Input_AddressInput<TRes> get address;
+  TRes contacts(
+    Iterable<Input_FamilyContactInput>? Function(
+      Iterable<CopyWith_Input_FamilyContactInput<Input_FamilyContactInput>>?,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Input_UpdateFamilyInput<TRes>
+    implements CopyWith_Input_UpdateFamilyInput<TRes> {
+  _CopyWithImpl_Input_UpdateFamilyInput(this._instance, this._then);
+
+  final Input_UpdateFamilyInput _instance;
+
+  final TRes Function(Input_UpdateFamilyInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? notes = _undefined,
+    Object? color = _undefined,
+    Object? status = _undefined,
+    Object? deceasedSpouseName = _undefined,
+    Object? marriageDate = _undefined,
+    Object? churchId = _undefined,
+    Object? address = _undefined,
+    Object? contacts = _undefined,
+    Object? parents = _undefined,
+    Object? children = _undefined,
+    Object? lastVisit = _undefined,
+    Object? lastFatherVisit = _undefined,
+  }) => _then(
+    Input_UpdateFamilyInput._({
+      ..._instance._$data,
+      if (name != _undefined) 'name': (name as String?),
+      if (notes != _undefined) 'notes': (notes as String?),
+      if (color != _undefined) 'color': (color as int?),
+      if (status != _undefined) 'status': (status as String?),
+      if (deceasedSpouseName != _undefined)
+        'deceasedSpouseName': (deceasedSpouseName as String?),
+      if (marriageDate != _undefined)
+        'marriageDate': (marriageDate as DateTime?),
+      if (churchId != _undefined) 'churchId': (churchId as String?),
+      if (address != _undefined) 'address': (address as Input_AddressInput?),
+      if (contacts != _undefined)
+        'contacts': (contacts as List<Input_FamilyContactInput>?),
+      if (parents != _undefined) 'parents': (parents as List<String>?),
+      if (children != _undefined) 'children': (children as List<String>?),
+      if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+      if (lastFatherVisit != _undefined)
+        'lastFatherVisit': (lastFatherVisit as DateTime?),
+    }),
+  );
+
+  CopyWith_Input_AddressInput<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Input_AddressInput.stub(_then(_instance))
+        : CopyWith_Input_AddressInput(local$address, (e) => call(address: e));
+  }
+
+  TRes contacts(
+    Iterable<Input_FamilyContactInput>? Function(
+      Iterable<CopyWith_Input_FamilyContactInput<Input_FamilyContactInput>>?,
+    )
+    _fn,
+  ) => call(
+    contacts: _fn(
+      _instance.contacts?.map(
+        (e) => CopyWith_Input_FamilyContactInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+}
+
+class _CopyWithStubImpl_Input_UpdateFamilyInput<TRes>
+    implements CopyWith_Input_UpdateFamilyInput<TRes> {
+  _CopyWithStubImpl_Input_UpdateFamilyInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? notes,
+    int? color,
+    String? status,
+    String? deceasedSpouseName,
+    DateTime? marriageDate,
+    String? churchId,
+    Input_AddressInput? address,
+    List<Input_FamilyContactInput>? contacts,
+    List<String>? parents,
+    List<String>? children,
+    DateTime? lastVisit,
+    DateTime? lastFatherVisit,
+  }) => _res;
+
+  CopyWith_Input_AddressInput<TRes> get address =>
+      CopyWith_Input_AddressInput.stub(_res);
+
+  contacts(_fn) => _res;
+}
+
+class Input_CreateFamilyInput {
+  factory Input_CreateFamilyInput({
+    required String name,
+    String? notes,
+    int? color,
+    String? status,
+    String? deceasedSpouseName,
+    DateTime? marriageDate,
+    String? churchId,
+    Input_AddressInput? address,
+    List<Input_FamilyContactInput>? contacts,
+    List<String>? parents,
+    List<String>? children,
+    DateTime? lastVisit,
+    DateTime? lastFatherVisit,
+  }) => Input_CreateFamilyInput._({
+    r'name': name,
+    if (notes != null) r'notes': notes,
+    if (color != null) r'color': color,
+    if (status != null) r'status': status,
+    if (deceasedSpouseName != null) r'deceasedSpouseName': deceasedSpouseName,
+    if (marriageDate != null) r'marriageDate': marriageDate,
+    if (churchId != null) r'churchId': churchId,
+    if (address != null) r'address': address,
+    if (contacts != null) r'contacts': contacts,
+    if (parents != null) r'parents': parents,
+    if (children != null) r'children': children,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+    if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
+  });
+
+  Input_CreateFamilyInput._(this._$data);
+
+  factory Input_CreateFamilyInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    if (data.containsKey('notes')) {
+      final l$notes = data['notes'];
+      result$data['notes'] = (l$notes as String?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('status')) {
+      final l$status = data['status'];
+      result$data['status'] = (l$status as String?);
+    }
+    if (data.containsKey('deceasedSpouseName')) {
+      final l$deceasedSpouseName = data['deceasedSpouseName'];
+      result$data['deceasedSpouseName'] = (l$deceasedSpouseName as String?);
+    }
+    if (data.containsKey('marriageDate')) {
+      final l$marriageDate = data['marriageDate'];
+      result$data['marriageDate'] = l$marriageDate == null
+          ? null
+          : dateFromString(l$marriageDate);
+    }
+    if (data.containsKey('churchId')) {
+      final l$churchId = data['churchId'];
+      result$data['churchId'] = (l$churchId as String?);
+    }
+    if (data.containsKey('address')) {
+      final l$address = data['address'];
+      result$data['address'] = l$address == null
+          ? null
+          : Input_AddressInput.fromJson((l$address as Map<String, dynamic>));
+    }
+    if (data.containsKey('contacts')) {
+      final l$contacts = data['contacts'];
+      result$data['contacts'] = (l$contacts as List<dynamic>?)
+          ?.map(
+            (e) =>
+                Input_FamilyContactInput.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
+    }
+    if (data.containsKey('parents')) {
+      final l$parents = data['parents'];
+      result$data['parents'] = (l$parents as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('children')) {
+      final l$children = data['children'];
+      result$data['children'] = (l$children as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzFromString(l$lastVisit);
+    }
+    if (data.containsKey('lastFatherVisit')) {
+      final l$lastFatherVisit = data['lastFatherVisit'];
+      result$data['lastFatherVisit'] = l$lastFatherVisit == null
+          ? null
+          : tstzFromString(l$lastFatherVisit);
+    }
+    return Input_CreateFamilyInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  String? get notes => (_$data['notes'] as String?);
+
+  int? get color => (_$data['color'] as int?);
+
+  String? get status => (_$data['status'] as String?);
+
+  String? get deceasedSpouseName => (_$data['deceasedSpouseName'] as String?);
+
+  DateTime? get marriageDate => (_$data['marriageDate'] as DateTime?);
+
+  String? get churchId => (_$data['churchId'] as String?);
+
+  Input_AddressInput? get address => (_$data['address'] as Input_AddressInput?);
+
+  List<Input_FamilyContactInput>? get contacts =>
+      (_$data['contacts'] as List<Input_FamilyContactInput>?);
+
+  List<String>? get parents => (_$data['parents'] as List<String>?);
+
+  List<String>? get children => (_$data['children'] as List<String>?);
+
+  DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
+
+  DateTime? get lastFatherVisit => (_$data['lastFatherVisit'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    if (_$data.containsKey('notes')) {
+      final l$notes = notes;
+      result$data['notes'] = l$notes;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('status')) {
+      final l$status = status;
+      result$data['status'] = l$status;
+    }
+    if (_$data.containsKey('deceasedSpouseName')) {
+      final l$deceasedSpouseName = deceasedSpouseName;
+      result$data['deceasedSpouseName'] = l$deceasedSpouseName;
+    }
+    if (_$data.containsKey('marriageDate')) {
+      final l$marriageDate = marriageDate;
+      result$data['marriageDate'] = l$marriageDate == null
+          ? null
+          : dateToString(l$marriageDate);
+    }
+    if (_$data.containsKey('churchId')) {
+      final l$churchId = churchId;
+      result$data['churchId'] = l$churchId;
+    }
+    if (_$data.containsKey('address')) {
+      final l$address = address;
+      result$data['address'] = l$address?.toJson();
+    }
+    if (_$data.containsKey('contacts')) {
+      final l$contacts = contacts;
+      result$data['contacts'] = l$contacts?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('parents')) {
+      final l$parents = parents;
+      result$data['parents'] = l$parents?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('children')) {
+      final l$children = children;
+      result$data['children'] = l$children?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzToString(l$lastVisit);
+    }
+    if (_$data.containsKey('lastFatherVisit')) {
+      final l$lastFatherVisit = lastFatherVisit;
+      result$data['lastFatherVisit'] = l$lastFatherVisit == null
+          ? null
+          : tstzToString(l$lastFatherVisit);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateFamilyInput<Input_CreateFamilyInput> get copyWith =>
+      CopyWith_Input_CreateFamilyInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateFamilyInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$notes = notes;
+    final lOther$notes = other.notes;
+    if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
+      return false;
+    }
+    if (l$notes != lOther$notes) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (_$data.containsKey('status') != other._$data.containsKey('status')) {
+      return false;
+    }
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$deceasedSpouseName = deceasedSpouseName;
+    final lOther$deceasedSpouseName = other.deceasedSpouseName;
+    if (_$data.containsKey('deceasedSpouseName') !=
+        other._$data.containsKey('deceasedSpouseName')) {
+      return false;
+    }
+    if (l$deceasedSpouseName != lOther$deceasedSpouseName) {
+      return false;
+    }
+    final l$marriageDate = marriageDate;
+    final lOther$marriageDate = other.marriageDate;
+    if (_$data.containsKey('marriageDate') !=
+        other._$data.containsKey('marriageDate')) {
+      return false;
+    }
+    if (l$marriageDate != lOther$marriageDate) {
+      return false;
+    }
+    final l$churchId = churchId;
+    final lOther$churchId = other.churchId;
+    if (_$data.containsKey('churchId') !=
+        other._$data.containsKey('churchId')) {
+      return false;
+    }
+    if (l$churchId != lOther$churchId) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
+      return false;
+    }
+    if (l$address != lOther$address) {
+      return false;
+    }
+    final l$contacts = contacts;
+    final lOther$contacts = other.contacts;
+    if (_$data.containsKey('contacts') !=
+        other._$data.containsKey('contacts')) {
+      return false;
+    }
+    if (l$contacts != null && lOther$contacts != null) {
+      if (l$contacts.length != lOther$contacts.length) {
+        return false;
+      }
+      for (int i = 0; i < l$contacts.length; i++) {
+        final l$contacts$entry = l$contacts[i];
+        final lOther$contacts$entry = lOther$contacts[i];
+        if (l$contacts$entry != lOther$contacts$entry) {
+          return false;
+        }
+      }
+    } else if (l$contacts != lOther$contacts) {
+      return false;
+    }
+    final l$parents = parents;
+    final lOther$parents = other.parents;
+    if (_$data.containsKey('parents') != other._$data.containsKey('parents')) {
+      return false;
+    }
+    if (l$parents != null && lOther$parents != null) {
+      if (l$parents.length != lOther$parents.length) {
+        return false;
+      }
+      for (int i = 0; i < l$parents.length; i++) {
+        final l$parents$entry = l$parents[i];
+        final lOther$parents$entry = lOther$parents[i];
+        if (l$parents$entry != lOther$parents$entry) {
+          return false;
+        }
+      }
+    } else if (l$parents != lOther$parents) {
+      return false;
+    }
+    final l$children = children;
+    final lOther$children = other.children;
+    if (_$data.containsKey('children') !=
+        other._$data.containsKey('children')) {
+      return false;
+    }
+    if (l$children != null && lOther$children != null) {
+      if (l$children.length != lOther$children.length) {
+        return false;
+      }
+      for (int i = 0; i < l$children.length; i++) {
+        final l$children$entry = l$children[i];
+        final lOther$children$entry = lOther$children[i];
+        if (l$children$entry != lOther$children$entry) {
+          return false;
+        }
+      }
+    } else if (l$children != lOther$children) {
+      return false;
+    }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    final l$lastFatherVisit = lastFatherVisit;
+    final lOther$lastFatherVisit = other.lastFatherVisit;
+    if (_$data.containsKey('lastFatherVisit') !=
+        other._$data.containsKey('lastFatherVisit')) {
+      return false;
+    }
+    if (l$lastFatherVisit != lOther$lastFatherVisit) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$notes = notes;
+    final l$color = color;
+    final l$status = status;
+    final l$deceasedSpouseName = deceasedSpouseName;
+    final l$marriageDate = marriageDate;
+    final l$churchId = churchId;
+    final l$address = address;
+    final l$contacts = contacts;
+    final l$parents = parents;
+    final l$children = children;
+    final l$lastVisit = lastVisit;
+    final l$lastFatherVisit = lastFatherVisit;
+    return Object.hashAll([
+      l$name,
+      _$data.containsKey('notes') ? l$notes : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('status') ? l$status : const {},
+      _$data.containsKey('deceasedSpouseName')
+          ? l$deceasedSpouseName
+          : const {},
+      _$data.containsKey('marriageDate') ? l$marriageDate : const {},
+      _$data.containsKey('churchId') ? l$churchId : const {},
+      _$data.containsKey('address') ? l$address : const {},
+      _$data.containsKey('contacts')
+          ? l$contacts == null
+                ? null
+                : Object.hashAll(l$contacts.map((v) => v))
+          : const {},
+      _$data.containsKey('parents')
+          ? l$parents == null
+                ? null
+                : Object.hashAll(l$parents.map((v) => v))
+          : const {},
+      _$data.containsKey('children')
+          ? l$children == null
+                ? null
+                : Object.hashAll(l$children.map((v) => v))
+          : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
+      _$data.containsKey('lastFatherVisit') ? l$lastFatherVisit : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateFamilyInput<TRes> {
+  factory CopyWith_Input_CreateFamilyInput(
+    Input_CreateFamilyInput instance,
+    TRes Function(Input_CreateFamilyInput) then,
+  ) = _CopyWithImpl_Input_CreateFamilyInput;
+
+  factory CopyWith_Input_CreateFamilyInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateFamilyInput;
+
+  TRes call({
+    String? name,
+    String? notes,
+    int? color,
+    String? status,
+    String? deceasedSpouseName,
+    DateTime? marriageDate,
+    String? churchId,
+    Input_AddressInput? address,
+    List<Input_FamilyContactInput>? contacts,
+    List<String>? parents,
+    List<String>? children,
+    DateTime? lastVisit,
+    DateTime? lastFatherVisit,
+  });
+  CopyWith_Input_AddressInput<TRes> get address;
+  TRes contacts(
+    Iterable<Input_FamilyContactInput>? Function(
+      Iterable<CopyWith_Input_FamilyContactInput<Input_FamilyContactInput>>?,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Input_CreateFamilyInput<TRes>
+    implements CopyWith_Input_CreateFamilyInput<TRes> {
+  _CopyWithImpl_Input_CreateFamilyInput(this._instance, this._then);
+
+  final Input_CreateFamilyInput _instance;
+
+  final TRes Function(Input_CreateFamilyInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? notes = _undefined,
+    Object? color = _undefined,
+    Object? status = _undefined,
+    Object? deceasedSpouseName = _undefined,
+    Object? marriageDate = _undefined,
+    Object? churchId = _undefined,
+    Object? address = _undefined,
+    Object? contacts = _undefined,
+    Object? parents = _undefined,
+    Object? children = _undefined,
+    Object? lastVisit = _undefined,
+    Object? lastFatherVisit = _undefined,
+  }) => _then(
+    Input_CreateFamilyInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (notes != _undefined) 'notes': (notes as String?),
+      if (color != _undefined) 'color': (color as int?),
+      if (status != _undefined) 'status': (status as String?),
+      if (deceasedSpouseName != _undefined)
+        'deceasedSpouseName': (deceasedSpouseName as String?),
+      if (marriageDate != _undefined)
+        'marriageDate': (marriageDate as DateTime?),
+      if (churchId != _undefined) 'churchId': (churchId as String?),
+      if (address != _undefined) 'address': (address as Input_AddressInput?),
+      if (contacts != _undefined)
+        'contacts': (contacts as List<Input_FamilyContactInput>?),
+      if (parents != _undefined) 'parents': (parents as List<String>?),
+      if (children != _undefined) 'children': (children as List<String>?),
+      if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+      if (lastFatherVisit != _undefined)
+        'lastFatherVisit': (lastFatherVisit as DateTime?),
+    }),
+  );
+
+  CopyWith_Input_AddressInput<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Input_AddressInput.stub(_then(_instance))
+        : CopyWith_Input_AddressInput(local$address, (e) => call(address: e));
+  }
+
+  TRes contacts(
+    Iterable<Input_FamilyContactInput>? Function(
+      Iterable<CopyWith_Input_FamilyContactInput<Input_FamilyContactInput>>?,
+    )
+    _fn,
+  ) => call(
+    contacts: _fn(
+      _instance.contacts?.map(
+        (e) => CopyWith_Input_FamilyContactInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateFamilyInput<TRes>
+    implements CopyWith_Input_CreateFamilyInput<TRes> {
+  _CopyWithStubImpl_Input_CreateFamilyInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? notes,
+    int? color,
+    String? status,
+    String? deceasedSpouseName,
+    DateTime? marriageDate,
+    String? churchId,
+    Input_AddressInput? address,
+    List<Input_FamilyContactInput>? contacts,
+    List<String>? parents,
+    List<String>? children,
+    DateTime? lastVisit,
+    DateTime? lastFatherVisit,
+  }) => _res;
+
+  CopyWith_Input_AddressInput<TRes> get address =>
+      CopyWith_Input_AddressInput.stub(_res);
+
+  contacts(_fn) => _res;
 }
 
 class Input_FamilyFilterUserCanEdit {

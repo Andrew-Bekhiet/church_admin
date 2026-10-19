@@ -17,27 +17,14 @@ function auth.user_can_edit_store(stores, json)
 function auth.user_can_edit_street(streets, json)
 function auth.user_can_edit_user(auth.users_data, json)
 function history.edit_history_trigger()
-function public.check_address_insertion()
-function public.check_row_insertion_permission()
-function public.family_inserted_in_current_transaction(families)
-function public.person_inserted_in_current_transaction(persons)
-function public.remember_row_inserted_in_transaction()
 function public.set_current_timestamp_updated_at()
 function public.soft_delete_trigger()
 trigger auth.users_admin_on.sync_users_permissions_by_entity_id_cache
 trigger auth.users_data.sync_users_permissions_by_entity_id_cache
 trigger auth.users_permissions.sync_users_permissions_by_entity_id_cache
-trigger public.addresses.check_address_insertion
 trigger public.addresses.sync_users_permissions_by_entity_id_cache
 trigger public.areas_streets.sync_users_permissions_by_entity_id_cache
 trigger public.classes.sync_users_permissions_by_entity_id_cache
-trigger public.families.check_family_insertion
-trigger public.families.edit_history
-trigger public.families.remember_family_inserted_in_transaction
-trigger public.families.soft_delete_families
-trigger public.families_families.edit_history
-trigger public.persons.remember_person_inserted_in_transaction
 trigger public.persons.sync_users_permissions_by_entity_id_cache
 trigger public.persons_groups.sync_users_permissions_by_entity_id_cache
 trigger public.persons_services.sync_users_permissions_by_entity_id_cache
-trigger public.stores.check_store_insertion
