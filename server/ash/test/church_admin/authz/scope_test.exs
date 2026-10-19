@@ -109,5 +109,16 @@ defmodule ChurchAdmin.Authz.ScopeTest do
       assert Scope.exportable?(actor(world, :export_all), :person, ids)
       refute Scope.exportable?(actor(world, :read_all), :person, ids)
     end
+
+    test "the global export right covers ids that do not exist, as the view's any row did", %{
+      world: world
+    } do
+      assert Scope.exportable?(actor(world, :export_all), :area, [Ash.UUID.generate()])
+      refute Scope.exportable?(actor(world, :area_edit), :area, [Ash.UUID.generate()])
+    end
+
+    test "an empty request is exportable by anyone", %{world: world} do
+      assert Scope.exportable?(actor(world, :approved_plain), :service, [])
+    end
   end
 end
