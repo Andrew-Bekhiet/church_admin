@@ -146,6 +146,12 @@ defmodule ChurchAdmin.Dev.SeedGenerator do
   @spec generated_directory() :: Path.t()
   def generated_directory, do: Path.join(File.cwd!(), @generated_dir)
 
+  defp areas_streets_rows(places) do
+    Enum.map(places.expected_areas_streets, fn {area_id, street_id} ->
+      %{area_id: area_id, street_id: street_id}
+    end)
+  end
+
   defp parts(data) do
     lookups = data.lookups
     accounts = data.accounts
@@ -184,6 +190,9 @@ defmodule ChurchAdmin.Dev.SeedGenerator do
       Renderer.insert("auth.invitations", accounts.invitations),
       Renderer.insert("public.areas", data.places.areas),
       Renderer.insert("public.streets", street_rows(data.places.streets, accounts.actor_uid)),
+      Renderer.insert("public.areas_streets", areas_streets_rows(data.places),
+        skip_duplicates?: true
+      ),
       Renderer.insert("public.families", Enum.map(data.families, & &1.row)),
       Renderer.insert("public.stores", Enum.map(data.stores, & &1.row)),
       Renderer.insert("public.addresses", data.addresses),

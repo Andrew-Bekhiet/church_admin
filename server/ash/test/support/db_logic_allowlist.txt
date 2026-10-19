@@ -43,14 +43,11 @@ function operations.study_year_outgrows_service(smallint, smallint)
 function operations.study_year_roll_succeeded(integer)
 function public.assert_caller_can_change_person_user_link()
 function public.check_address_insertion()
-function public.check_address_street_same_area()
 function public.check_group_default_meeting_belongs_to_group()
 function public.check_person_group_service_rel()
 function public.check_persons_service_rel()
 function public.check_row_insertion_permission()
 function public.check_service_default_meeting_belongs_to_service()
-function public.check_store_admin_family_or_address()
-function public.check_street_has_area()
 function public.claim_contact_for_sole_family_member()
 function public.claim_family_contacts_for_sole_member()
 function public.default_order_by_preferences()
@@ -64,9 +61,6 @@ function public.remember_row_inserted_in_transaction()
 function public.seed_user_preferences()
 function public.set_current_timestamp_updated_at()
 function public.soft_delete_trigger()
-function public.sync_area_streets()
-function public.sync_house_code_with_legacy_house_number()
-function public.sync_street_areas()
 procedure operations.record_missed_study_year_roll(date)
 procedure operations.run_study_year_roll_when_due(date)
 trigger auth.users_admin_on.edit_history
@@ -86,10 +80,7 @@ trigger history.meetings.check_service_study_year_rel
 trigger history.meetings.maybe_remove_group_archived_default_meeting
 trigger history.meetings.maybe_remove_service_archived_default_meeting
 trigger public.addresses.check_address_insertion
-trigger public.addresses.check_address_street_same_area
-trigger public.addresses.sync_house_code_with_legacy_house_number
 trigger public.addresses.sync_users_permissions_by_entity_id_cache
-trigger public.areas.sync_area_streets
 trigger public.areas_streets.sync_users_permissions_by_entity_id_cache
 trigger public.classes.edit_history
 trigger public.classes.soft_delete_classes
@@ -127,8 +118,5 @@ trigger public.persons_tags.edit_history
 trigger public.services.check_service_default_meeting_belongs_to_service
 trigger public.services.edit_history
 trigger public.services.soft_delete_services
-trigger public.stores.check_store_admin_family_or_address
 trigger public.stores.check_store_insertion
-trigger public.streets.check_street_has_area
-trigger public.streets.sync_street_areas
 trigger public.users_preferences.set_public_users_preferences_updated_at

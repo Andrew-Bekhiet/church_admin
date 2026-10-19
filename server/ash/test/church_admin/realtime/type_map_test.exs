@@ -42,6 +42,19 @@ defmodule ChurchAdmin.Realtime.TypeMapTest do
            )
   end
 
+  test "a street link written by the geography sync updates its area and its street", %{
+    type_map: type_map
+  } do
+    row = %{"area_id" => @row_id, "street_id" => @street_id}
+
+    for op <- [:insert, :delete] do
+      emitted = changes(type_map, {"public", "areas_streets"}, op, row)
+
+      assert %{type: "Area", id: @row_id, op: "update"} in emitted
+      assert %{type: "Street", id: @street_id, op: "update"} in emitted
+    end
+  end
+
   test "a join row also updates its declared parent", %{type_map: type_map} do
     row = %{"rel_id" => @row_id, "person_id" => @person_id, "service_id" => @store_id}
 

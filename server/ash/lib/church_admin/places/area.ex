@@ -14,6 +14,7 @@ defmodule ChurchAdmin.Places.Area do
   alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.Places.Calculations.IntersectsGeography
+  alias ChurchAdmin.Places.Changes.SyncAreasStreets
   alias ChurchAdmin.Places.{Address, AreaStreet, Street}
   alias ChurchAdmin.Types.{Geography, Text}
 
@@ -74,6 +75,7 @@ defmodule ChurchAdmin.Places.Area do
     create :create_area do
       accept [:name, :bounds, :color]
       argument :last_visit, :utc_datetime_usec
+      change {SyncAreasStreets, geography: :bounds}
       change {RecordLastVisit, table: "areas"}
     end
 
@@ -81,6 +83,7 @@ defmodule ChurchAdmin.Places.Area do
       require_atomic? false
       accept [:name, :bounds, :color]
       argument :last_visit, :utc_datetime_usec
+      change {SyncAreasStreets, geography: :bounds}
       change {RecordLastVisit, table: "areas"}
     end
 

@@ -10,14 +10,16 @@ defmodule ChurchAdmin.Places.Store do
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, RelatedInScope, System}
   alias ChurchAdmin.Changes.StampActor
+  alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Places.Address
   alias ChurchAdmin.Places.Calculations.IntersectsGeography
   alias ChurchAdmin.Places.Changes.ApplyOwnerAddress
+  alias ChurchAdmin.Places.Invariants
   alias ChurchAdmin.Places.Types.AddressInput
   alias ChurchAdmin.Types.{Geography, Text}
-  alias ChurchAdmin.Validations.ReferencesVisible
+  alias ChurchAdmin.Validations.{InvariantHolds, ReferencesVisible}
 
   graphql do
     type :store
@@ -72,6 +74,11 @@ defmodule ChurchAdmin.Places.Store do
         where: changing(:admin_family_id)
 
       change {ApplyOwnerAddress, owner: :store_id}
+
+      change {InvariantHolds,
+              code: Codes.store_admin_family_or_address_required(),
+              fields: [:admin_family_id],
+              violations: &Invariants.store_without_admin_family_or_address/1}
     end
 
     update :update_store do
@@ -83,6 +90,11 @@ defmodule ChurchAdmin.Places.Store do
         where: changing(:admin_family_id)
 
       change {ApplyOwnerAddress, owner: :store_id}
+
+      change {InvariantHolds,
+              code: Codes.store_admin_family_or_address_required(),
+              fields: [:admin_family_id],
+              violations: &Invariants.store_without_admin_family_or_address/1}
     end
 
     destroy :destroy do

@@ -11,15 +11,6 @@ defmodule ChurchAdmin.PlacesWrites do
   alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.Errors.DomainError
   alias ChurchAdmin.Places.{Area, Store, Street}
-  alias ChurchAdmin.Repo
-  alias ChurchAdmin.Repo.HasuraSession
-
-  @messages %{
-    "Street must belong to at least one area" => Codes.street_area_required(),
-    "Address must belong to the same area as the street" => Codes.address_street_outside_area(),
-    "Store must belong to an admin family or have an address" =>
-      Codes.store_admin_family_or_address_required()
-  }
 
   def create_area(actor, attrs), do: create(actor, Area, :create_area, attrs)
   def update_area(actor, id, attrs), do: update(actor, Area, :update_area, id, attrs)
@@ -79,26 +70,5 @@ defmodule ChurchAdmin.PlacesWrites do
     {:error, code || inspect(errors)}
   end
 
-  defp transact(actor, fun) do
-    Repo.transaction(fn ->
-      HasuraSession.set_for_transaction(Repo, actor)
-
-      case fun.() do
-        {:ok, _id} = ok ->
-          Repo.query!("set constraints all immediate")
-          Repo.query!("set constraints all deferred")
-          ok
-
-        {:error, _code} = error ->
-          Repo.rollback(error)
-      end
-    end)
-    |> case do
-      {:ok, result} -> result
-      {:error, {:error, _code} = error} -> error
-    end
-  rescue
-    error in Postgrex.Error ->
-      {:error, Map.get(@messages, error.postgres.message, error.postgres.message)}
-  end
+  defp transact(_actor, fun), do: fun.()
 end

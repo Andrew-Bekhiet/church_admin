@@ -1,8 +1,8 @@
 defmodule ChurchAdmin.Dev.SeedGenerator.Places do
   @moduledoc """
   Areas as cells of a fixed grid and streets as lines inside them, so the
-  `areas_streets` pairs the baseline triggers derive are known in advance: a
-  street lies in its home cell, except every eighth street, which crosses into a
+  `areas_streets` pairs the geography implies are known in advance: a street
+  lies in its home cell, except every eighth street, which crosses into a
   neighbouring cell and belongs to both areas.
   """
 

@@ -6,11 +6,12 @@ defmodule ChurchAdmin.Places.Address do
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
+  alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Places.Calculations.{FullAddressText, IntersectsGeography}
-  alias ChurchAdmin.Places.{Area, District, Store, Street}
+  alias ChurchAdmin.Places.{Area, AreaStreet, District, Invariants, Store, Street}
   alias ChurchAdmin.Types.{Geography, Text}
-  alias ChurchAdmin.Validations.ReferencesVisible
+  alias ChurchAdmin.Validations.{InvariantHolds, ReferencesVisible}
 
   @command_attributes [
     :country_iso_code,
@@ -91,6 +92,11 @@ defmodule ChurchAdmin.Places.Address do
 
       validate {ReferencesVisible, attribute: :district_id, resource: District},
         where: changing(:district_id)
+
+      change {InvariantHolds,
+              code: Codes.address_street_outside_area(),
+              fields: [:street_id],
+              violations: &Invariants.address_outside_street_area/1}
     end
 
     update :update do
@@ -106,6 +112,11 @@ defmodule ChurchAdmin.Places.Address do
 
       validate {ReferencesVisible, attribute: :district_id, resource: District},
         where: changing(:district_id)
+
+      change {InvariantHolds,
+              code: Codes.address_street_outside_area(),
+              fields: [:street_id],
+              violations: &Invariants.address_outside_street_area/1}
     end
   end
 
@@ -143,6 +154,8 @@ defmodule ChurchAdmin.Places.Address do
   end
 
   relationships do
+    has_many :area_links, AreaStreet, source_attribute: :area_id, destination_attribute: :area_id
+
     belongs_to :area, Area, define_attribute?: false, public?: true
     belongs_to :district, District, define_attribute?: false, public?: true
     belongs_to :family, Family, define_attribute?: false, public?: true
