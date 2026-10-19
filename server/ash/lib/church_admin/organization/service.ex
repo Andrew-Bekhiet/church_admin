@@ -157,6 +157,8 @@ defmodule ChurchAdmin.Organization.Service do
               "groups_service_id_fkey" => Codes.service_in_use()
             }},
            on: [:create, :update, :destroy]
+
+    change {RecordEdit, table: "services"}, on: [:update], where: action_is(:record_photo)
   end
 
   validations do
