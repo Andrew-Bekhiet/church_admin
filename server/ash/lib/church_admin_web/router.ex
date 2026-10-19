@@ -6,6 +6,7 @@ defmodule ChurchAdminWeb.Router do
 
   pipeline :graphql do
     plug ChurchAdminWeb.Plugs.Authenticate
+    plug ChurchAdminWeb.Plugs.LoadActor
     plug AshGraphql.Plug
   end
 

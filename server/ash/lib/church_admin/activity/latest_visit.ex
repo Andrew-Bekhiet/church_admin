@@ -2,7 +2,8 @@ defmodule ChurchAdmin.Activity.LatestVisit do
   use Ash.Resource,
     domain: ChurchAdmin.Activity,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.HistoryRecord]
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Types.Text

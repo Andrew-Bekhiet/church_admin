@@ -2,15 +2,25 @@ defmodule ChurchAdmin.Accounts.User do
   use Ash.Resource,
     domain: ChurchAdmin.Accounts,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Accounts.{DeviceToken, Invitation, Preferences, ScopeGrant, UserPermission}
   alias ChurchAdmin.Activity.LatestEdit
+  alias ChurchAdmin.Authz.Calculations.UserCanEdit
+  alias ChurchAdmin.Authz.Checks.{InScope, System}
   alias ChurchAdmin.People.Person
   alias ChurchAdmin.Types.Text
 
   graphql do
     type :user
+
+    relationships [:person, :permissions, :scope_grants]
+
+    queries do
+      get :user, :read
+      list :users, :read
+    end
   end
 
   postgres do
@@ -24,7 +34,25 @@ defmodule ChurchAdmin.Accounts.User do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {InScope, access: :read}
+    end
   end
 
   attributes do
@@ -73,6 +101,12 @@ defmodule ChurchAdmin.Accounts.User do
     has_many :permissions, UserPermission,
       destination_attribute: :uid,
       source_attribute: :uid,
+      public?: true
+  end
+
+  calculations do
+    calculate :current_user_can_manage_this_user, :boolean, {UserCanEdit, entity: :user},
+      allow_nil?: false,
       public?: true
   end
 

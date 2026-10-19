@@ -2,9 +2,12 @@ defmodule ChurchAdmin.People.Family do
   use Ash.Resource,
     domain: ChurchAdmin.People,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.User
+  alias ChurchAdmin.Authz.Calculations.UserCanEdit
+  alias ChurchAdmin.Authz.Checks.{InScope, System}
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestFatherVisit, LatestVisit, Visit}
   alias ChurchAdmin.Catalog.{Church, MaritalStatus}
   alias ChurchAdmin.DataQuality.DataCheck
@@ -14,6 +17,13 @@ defmodule ChurchAdmin.People.Family do
 
   graphql do
     type :family
+
+    relationships [:persons, :address]
+
+    queries do
+      get :family, :read
+      list :families, :read
+    end
   end
 
   postgres do
@@ -29,7 +39,25 @@ defmodule ChurchAdmin.People.Family do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {InScope, access: :read}
+    end
   end
 
   attributes do
@@ -120,5 +148,11 @@ defmodule ChurchAdmin.People.Family do
     has_many :unclaimed_contacts, Contact, destination_attribute: :family_id, public?: true
     has_many :persons, Person, destination_attribute: :family_id, public?: true
     has_many :stores, Store, destination_attribute: :admin_family_id, public?: true
+  end
+
+  calculations do
+    calculate :user_can_edit, :boolean, {UserCanEdit, entity: :family},
+      allow_nil?: false,
+      public?: true
   end
 end

@@ -74,6 +74,15 @@ defmodule ChurchAdmin.Organization.Class do
 
     has_many :class_memberships, ClassMembership, destination_attribute: :class_id, public?: true
 
+    has_many :persons_of_matching_year_and_gender, Person,
+      no_attributes?: true,
+      filter:
+        expr(
+          study_year_id >= parent(service_study_year) and
+            study_year_id <= parent(service_study_year_to) and
+            (is_nil(parent(service_gender)) or gender == parent(service_gender))
+        )
+
     many_to_many :persons, Person,
       through: ClassMembership,
       source_attribute_on_join_resource: :class_id,

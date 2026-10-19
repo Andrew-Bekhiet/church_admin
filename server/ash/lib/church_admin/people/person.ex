@@ -2,7 +2,8 @@ defmodule ChurchAdmin.People.Person do
   use Ash.Resource,
     domain: ChurchAdmin.People,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.User
 
@@ -20,6 +21,8 @@ defmodule ChurchAdmin.People.Person do
   }
 
   alias ChurchAdmin.Attendance.AttendanceRecord
+  alias ChurchAdmin.Authz.Calculations.UserCanEdit
+  alias ChurchAdmin.Authz.Checks.{InScope, System}
 
   alias ChurchAdmin.Catalog.{
     Church,
@@ -58,6 +61,19 @@ defmodule ChurchAdmin.People.Person do
 
   graphql do
     type :person
+
+    relationships [
+      :family,
+      :address,
+      :user,
+      :service_memberships,
+      :group_memberships
+    ]
+
+    queries do
+      get :person, :read
+      list :persons, :read
+    end
   end
 
   postgres do
@@ -120,7 +136,25 @@ defmodule ChurchAdmin.People.Person do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {InScope, access: :read}
+    end
   end
 
   attributes do
@@ -210,6 +244,14 @@ defmodule ChurchAdmin.People.Person do
       source_attribute: :family_id,
       public?: true
 
+    has_one :store_address, Address,
+      destination_attribute: :store_id,
+      source_attribute: :store_id
+
+    has_many :family_members, __MODULE__,
+      destination_attribute: :family_id,
+      source_attribute: :family_id
+
     has_one :data_check, DataCheck,
       destination_attribute: :family_id,
       source_attribute: :family_id,
@@ -289,6 +331,12 @@ defmodule ChurchAdmin.People.Person do
       through: PersonTag,
       source_attribute_on_join_resource: :person_id,
       destination_attribute_on_join_resource: :tag_id,
+      public?: true
+  end
+
+  calculations do
+    calculate :user_can_edit, :boolean, {UserCanEdit, entity: :person},
+      allow_nil?: false,
       public?: true
   end
 

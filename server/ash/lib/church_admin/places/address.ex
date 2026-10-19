@@ -2,14 +2,23 @@ defmodule ChurchAdmin.Places.Address do
   use Ash.Resource,
     domain: ChurchAdmin.Places,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
+  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Places.{Area, District, Store, Street}
   alias ChurchAdmin.Types.{Geography, Text}
 
   graphql do
     type :address
+
+    relationships [:family]
+
+    queries do
+      get :address, :read
+      list :addresses, :read
+    end
   end
 
   postgres do
@@ -45,7 +54,26 @@ defmodule ChurchAdmin.Places.Address do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 100
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :family, entity: :family, access: :read}
+      authorize_if {RelatedInScope, path: :store, entity: :store, access: :read}
+    end
   end
 
   attributes do
