@@ -28,7 +28,7 @@ defmodule ChurchAdmin.Exports.Export do
 
   policies do
     policy action(:export_data) do
-      authorize_if actor_present()
+      authorize_if ChurchAdmin.Authz.Checks.Onboarded
     end
   end
 end
