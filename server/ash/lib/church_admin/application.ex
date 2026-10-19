@@ -24,6 +24,7 @@ defmodule ChurchAdmin.Application do
            Application.fetch_env!(:church_admin, Oban)
          )},
         {Phoenix.PubSub, name: ChurchAdmin.PubSub},
+        {ChurchAdmin.Accounts.InvitationAttempts.Counter, clean_period: :timer.minutes(10)},
         ChurchAdmin.Realtime.Supervisor,
         # Start a worker by calling: ChurchAdmin.Worker.start_link(arg)
         # {ChurchAdmin.Worker, arg},

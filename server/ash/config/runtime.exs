@@ -47,6 +47,11 @@ config :church_admin, ChurchAdmin.Auth.TokenVerifier,
     auth_env.("FIREBASE_PROJECT_ID", default_firebase_project_id) ||
       raise("environment variable FIREBASE_PROJECT_ID is missing")
 
+config :church_admin,
+  account_claiming_by_email?:
+    auth_env.("ACCOUNT_CLAIMING_BY_EMAIL", if(config_env() == :prod, do: "false", else: "true")) ==
+      "true"
+
 if config_env() == :dev do
   config :church_admin, ChurchAdmin.Google.Config,
     project_id: System.get_env("FIREBASE_PROJECT_ID", "church-admin-local"),

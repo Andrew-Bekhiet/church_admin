@@ -191,6 +191,18 @@ defmodule ChurchAdmin.People.Person do
                expr(if work_status == "student", do: "unemployed", else: work_status)
              )
     end
+
+    create :create_for_user do
+      description "The servant person of a user an account command creates; the Person commands own every other write."
+      accept [:name, :gender, :uid]
+      change set_attribute(:is_servant, true)
+    end
+
+    update :set_user do
+      description "Links the person to a user, or unlinks it with a nil uid."
+      accept [:uid]
+      require_atomic? false
+    end
   end
 
   policies do

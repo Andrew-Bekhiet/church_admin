@@ -1,0 +1,111 @@
+{
+    "Area": [
+        {
+            "field": {
+                "name": "name",
+                "parentQueryableType": "Area"
+            },
+            "value": "asc"
+        }
+    ],
+    "Class": [
+        {
+            "field": {
+                "name": "studyYear",
+                "parentQueryableType": "Class"
+            },
+            "value": "asc"
+        },
+        {
+            "field": {
+                "name": "serviceGender",
+                "parentQueryableType": "Class"
+            },
+            "value": "desc"
+        },
+        {
+            "field": {
+                "name": "name",
+                "parentQueryableType": "Class"
+            },
+            "value": "asc"
+        }
+    ],
+    "Group": [
+        {
+            "field": {
+                "name": "name",
+                "parentQueryableType": "Group"
+            },
+            "value": "asc"
+        }
+    ],
+    "Store": [
+        {
+            "field": {
+                "name": "name",
+                "parentQueryableType": "Store"
+            },
+            "value": "asc"
+        }
+    ],
+    "Family": [
+        {
+            "field": {
+                "parentField": {
+                    "name": "address",
+                    "parentQueryableType": "Family"
+                },
+                "targetField": {
+                    "name": "fullAddressText",
+                    "parentQueryableType": "Address"
+                },
+                "isExpandable": false
+            },
+            "value": "asc"
+        }
+    ],
+    "Person": [
+        {
+            "field": {
+                "name": "personType",
+                "parentQueryableType": "Person"
+            },
+            "value": "asc"
+        }
+    ],
+    "Street": [
+        {
+            "field": {
+                "alias": "time",
+                "label": "الوقت",
+                "parentField": {
+                    "name": "lastVisit",
+                    "parentQueryableType": "Street"
+                },
+                "targetField": {
+                    "name": "time",
+                    "parentQueryableType": "LastRecordedByInfo"
+                },
+                "isExpandable": true
+            },
+            "value": "asc"
+        }
+    ],
+    "Person-InService": [
+        {
+            "field": {
+                "name": "name",
+                "parentQueryableType": "Person"
+            },
+            "value": "asc"
+        },
+        {
+            "field": {
+                "name": "studyYear",
+                "parentQueryableType": "Person"
+            },
+            "value": "asc"
+        }
+    ]
+}
