@@ -105,4 +105,3 @@ trigger public.streets.check_street_has_area
 trigger public.streets.edit_history
 trigger public.streets.soft_delete_streets
 trigger public.streets.sync_street_areas
-trigger public.users_preferences.set_public_users_preferences_updated_at
