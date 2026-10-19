@@ -2,7 +2,10 @@ defmodule ChurchAdmin.Accounts do
   use ChurchAdmin.Domain
 
   resources do
-    resource ChurchAdmin.Accounts.DeviceToken
+    resource ChurchAdmin.Accounts.DeviceToken do
+      define :register_fcm_token, action: :register_fcm_token, args: [:token]
+    end
+
     resource ChurchAdmin.Accounts.HomeMode
 
     resource ChurchAdmin.Accounts.Invitation do
@@ -11,7 +14,12 @@ defmodule ChurchAdmin.Accounts do
     end
 
     resource ChurchAdmin.Accounts.Permission
-    resource ChurchAdmin.Accounts.Preferences
+
+    resource ChurchAdmin.Accounts.Preferences do
+      define :my_preferences, action: :mine
+      define :update_my_preferences, action: :update_my_preferences
+    end
+
     resource ChurchAdmin.Accounts.ScopeGrant
 
     resource ChurchAdmin.Accounts.User do

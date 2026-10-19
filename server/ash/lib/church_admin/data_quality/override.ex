@@ -7,6 +7,8 @@ defmodule ChurchAdmin.DataQuality.Override do
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
+  alias ChurchAdmin.Changes.StampActor
+  alias ChurchAdmin.DataQuality.Checks.OwnOrEditablePersonInFamily
   alias ChurchAdmin.People.Family
 
   graphql do
@@ -16,6 +18,11 @@ defmodule ChurchAdmin.DataQuality.Override do
 
     queries do
       list :data_check_overrides, :read
+    end
+
+    mutations do
+      create :override_data_check, :override_data_check
+      destroy :clear_data_check_override, :clear_data_check_override
     end
   end
 
@@ -39,6 +46,19 @@ defmodule ChurchAdmin.DataQuality.Override do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :override_data_check do
+      description "Sets whether the family's data is complete, whatever the automatic check says."
+      accept [:family_id, :is_complete]
+      upsert? true
+      upsert_fields [:is_complete, :updated_by]
+
+      change {StampActor, attribute: :updated_by}
+    end
+
+    destroy :clear_data_check_override do
+      description "Gives the family's data check back to the automatic result."
+    end
   end
 
   policies do
@@ -48,6 +68,11 @@ defmodule ChurchAdmin.DataQuality.Override do
 
     policy action_type(:read) do
       authorize_if {RelatedInScope, path: :family, entity: :family, access: :read}
+    end
+
+    policy action_type([:create, :destroy]) do
+      authorize_if {RelatedInScope, path: :family, entity: :family, access: :edit}
+      authorize_if OwnOrEditablePersonInFamily
     end
   end
 

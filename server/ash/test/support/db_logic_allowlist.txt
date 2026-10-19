@@ -69,4 +69,3 @@ trigger public.persons_services.edit_history
 trigger public.persons_services.sync_users_permissions_by_entity_id_cache
 trigger public.persons_tags.edit_history
 trigger public.stores.check_store_insertion
-trigger public.users_preferences.set_public_users_preferences_updated_at
