@@ -170668,6 +170668,910 @@ class _CopyWithStubImpl_Input_UserFilterCurrentUserCanManageThisUser<TRes>
   }) => _res;
 }
 
+class Input_UserFilterPersonName {
+  factory Input_UserFilterPersonName({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  }) => Input_UserFilterPersonName._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (contains != null) r'contains': contains,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+    if (stringEndsWith != null) r'stringEndsWith': stringEndsWith,
+    if (stringStartsWith != null) r'stringStartsWith': stringStartsWith,
+    if (like != null) r'like': like,
+    if (ilike != null) r'ilike': ilike,
+  });
+
+  Input_UserFilterPersonName._(this._$data);
+
+  factory Input_UserFilterPersonName.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('contains')) {
+      final l$contains = data['contains'];
+      result$data['contains'] = (l$contains as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    if (data.containsKey('stringEndsWith')) {
+      final l$stringEndsWith = data['stringEndsWith'];
+      result$data['stringEndsWith'] = (l$stringEndsWith as String?);
+    }
+    if (data.containsKey('stringStartsWith')) {
+      final l$stringStartsWith = data['stringStartsWith'];
+      result$data['stringStartsWith'] = (l$stringStartsWith as String?);
+    }
+    if (data.containsKey('like')) {
+      final l$like = data['like'];
+      result$data['like'] = (l$like as String?);
+    }
+    if (data.containsKey('ilike')) {
+      final l$ilike = data['ilike'];
+      result$data['ilike'] = (l$ilike as String?);
+    }
+    return Input_UserFilterPersonName._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String?>? get $in => (_$data['in'] as List<String?>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get contains => (_$data['contains'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  String? get stringEndsWith => (_$data['stringEndsWith'] as String?);
+
+  String? get stringStartsWith => (_$data['stringStartsWith'] as String?);
+
+  String? get like => (_$data['like'] as String?);
+
+  String? get ilike => (_$data['ilike'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('contains')) {
+      final l$contains = contains;
+      result$data['contains'] = l$contains;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    if (_$data.containsKey('stringEndsWith')) {
+      final l$stringEndsWith = stringEndsWith;
+      result$data['stringEndsWith'] = l$stringEndsWith;
+    }
+    if (_$data.containsKey('stringStartsWith')) {
+      final l$stringStartsWith = stringStartsWith;
+      result$data['stringStartsWith'] = l$stringStartsWith;
+    }
+    if (_$data.containsKey('like')) {
+      final l$like = like;
+      result$data['like'] = l$like;
+    }
+    if (_$data.containsKey('ilike')) {
+      final l$ilike = ilike;
+      result$data['ilike'] = l$ilike;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UserFilterPersonName<Input_UserFilterPersonName>
+  get copyWith => CopyWith_Input_UserFilterPersonName(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UserFilterPersonName ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$contains = contains;
+    final lOther$contains = other.contains;
+    if (_$data.containsKey('contains') !=
+        other._$data.containsKey('contains')) {
+      return false;
+    }
+    if (l$contains != lOther$contains) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    final l$stringEndsWith = stringEndsWith;
+    final lOther$stringEndsWith = other.stringEndsWith;
+    if (_$data.containsKey('stringEndsWith') !=
+        other._$data.containsKey('stringEndsWith')) {
+      return false;
+    }
+    if (l$stringEndsWith != lOther$stringEndsWith) {
+      return false;
+    }
+    final l$stringStartsWith = stringStartsWith;
+    final lOther$stringStartsWith = other.stringStartsWith;
+    if (_$data.containsKey('stringStartsWith') !=
+        other._$data.containsKey('stringStartsWith')) {
+      return false;
+    }
+    if (l$stringStartsWith != lOther$stringStartsWith) {
+      return false;
+    }
+    final l$like = like;
+    final lOther$like = other.like;
+    if (_$data.containsKey('like') != other._$data.containsKey('like')) {
+      return false;
+    }
+    if (l$like != lOther$like) {
+      return false;
+    }
+    final l$ilike = ilike;
+    final lOther$ilike = other.ilike;
+    if (_$data.containsKey('ilike') != other._$data.containsKey('ilike')) {
+      return false;
+    }
+    if (l$ilike != lOther$ilike) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$contains = contains;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final l$stringEndsWith = stringEndsWith;
+    final l$stringStartsWith = stringStartsWith;
+    final l$like = like;
+    final l$ilike = ilike;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('contains') ? l$contains : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+      _$data.containsKey('stringEndsWith') ? l$stringEndsWith : const {},
+      _$data.containsKey('stringStartsWith') ? l$stringStartsWith : const {},
+      _$data.containsKey('like') ? l$like : const {},
+      _$data.containsKey('ilike') ? l$ilike : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UserFilterPersonName<TRes> {
+  factory CopyWith_Input_UserFilterPersonName(
+    Input_UserFilterPersonName instance,
+    TRes Function(Input_UserFilterPersonName) then,
+  ) = _CopyWithImpl_Input_UserFilterPersonName;
+
+  factory CopyWith_Input_UserFilterPersonName.stub(TRes res) =
+      _CopyWithStubImpl_Input_UserFilterPersonName;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  });
+}
+
+class _CopyWithImpl_Input_UserFilterPersonName<TRes>
+    implements CopyWith_Input_UserFilterPersonName<TRes> {
+  _CopyWithImpl_Input_UserFilterPersonName(this._instance, this._then);
+
+  final Input_UserFilterPersonName _instance;
+
+  final TRes Function(Input_UserFilterPersonName) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? contains = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+    Object? stringEndsWith = _undefined,
+    Object? stringStartsWith = _undefined,
+    Object? like = _undefined,
+    Object? ilike = _undefined,
+  }) => _then(
+    Input_UserFilterPersonName._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (contains != _undefined) 'contains': (contains as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+      if (stringEndsWith != _undefined)
+        'stringEndsWith': (stringEndsWith as String?),
+      if (stringStartsWith != _undefined)
+        'stringStartsWith': (stringStartsWith as String?),
+      if (like != _undefined) 'like': (like as String?),
+      if (ilike != _undefined) 'ilike': (ilike as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UserFilterPersonName<TRes>
+    implements CopyWith_Input_UserFilterPersonName<TRes> {
+  _CopyWithStubImpl_Input_UserFilterPersonName(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  }) => _res;
+}
+
+class Input_UserFilterLastEdit {
+  factory Input_UserFilterLastEdit({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime?>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => Input_UserFilterLastEdit._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_UserFilterLastEdit._(this._$data);
+
+  factory Input_UserFilterLastEdit.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = l$eq == null ? null : tstzFromString(l$eq);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = l$notEq == null ? null : tstzFromString(l$notEq);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => e == null ? null : tstzFromString(e))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzFromString(l$lessThan);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzFromString(l$greaterThan);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzFromString(l$lessThanOrEqual);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzFromString(l$greaterThanOrEqual);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzFromString(l$isDistinctFrom);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzFromString(l$isNotDistinctFrom);
+    }
+    return Input_UserFilterLastEdit._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  DateTime? get eq => (_$data['eq'] as DateTime?);
+
+  DateTime? get notEq => (_$data['notEq'] as DateTime?);
+
+  List<DateTime?>? get $in => (_$data['in'] as List<DateTime?>?);
+
+  DateTime? get lessThan => (_$data['lessThan'] as DateTime?);
+
+  DateTime? get greaterThan => (_$data['greaterThan'] as DateTime?);
+
+  DateTime? get lessThanOrEqual => (_$data['lessThanOrEqual'] as DateTime?);
+
+  DateTime? get greaterThanOrEqual =>
+      (_$data['greaterThanOrEqual'] as DateTime?);
+
+  DateTime? get isDistinctFrom => (_$data['isDistinctFrom'] as DateTime?);
+
+  DateTime? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq == null ? null : tstzToString(l$eq);
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq == null ? null : tstzToString(l$notEq);
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in
+          ?.map((e) => e == null ? null : tstzToString(e))
+          .toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzToString(l$lessThan);
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzToString(l$greaterThan);
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzToString(l$lessThanOrEqual);
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzToString(l$greaterThanOrEqual);
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzToString(l$isDistinctFrom);
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzToString(l$isNotDistinctFrom);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UserFilterLastEdit<Input_UserFilterLastEdit> get copyWith =>
+      CopyWith_Input_UserFilterLastEdit(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UserFilterLastEdit ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UserFilterLastEdit<TRes> {
+  factory CopyWith_Input_UserFilterLastEdit(
+    Input_UserFilterLastEdit instance,
+    TRes Function(Input_UserFilterLastEdit) then,
+  ) = _CopyWithImpl_Input_UserFilterLastEdit;
+
+  factory CopyWith_Input_UserFilterLastEdit.stub(TRes res) =
+      _CopyWithStubImpl_Input_UserFilterLastEdit;
+
+  TRes call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime?>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_UserFilterLastEdit<TRes>
+    implements CopyWith_Input_UserFilterLastEdit<TRes> {
+  _CopyWithImpl_Input_UserFilterLastEdit(this._instance, this._then);
+
+  final Input_UserFilterLastEdit _instance;
+
+  final TRes Function(Input_UserFilterLastEdit) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_UserFilterLastEdit._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as DateTime?),
+      if (notEq != _undefined) 'notEq': (notEq as DateTime?),
+      if ($in != _undefined) 'in': ($in as List<DateTime?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as DateTime?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as DateTime?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as DateTime?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as DateTime?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as DateTime?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UserFilterLastEdit<TRes>
+    implements CopyWith_Input_UserFilterLastEdit<TRes> {
+  _CopyWithStubImpl_Input_UserFilterLastEdit(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime?>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => _res;
+}
+
 class Input_UserFilterAuthId {
   factory Input_UserFilterAuthId({
     bool? isNil,
@@ -173471,8 +174375,12 @@ class Input_UserFilterInput {
     Input_InvitationFilterInput? invitation,
     Input_PersonFilterInput? person,
     Input_UserPreferencesFilterInput? preferences,
+    Input_LatestEditFilterInput? latestEdit,
     Input_ScopeGrantFilterInput? scopeGrants,
+    Input_DeviceTokenFilterInput? deviceTokens,
     Input_UserPermissionFilterInput? permissions,
+    Input_UserFilterLastEdit? lastEdit,
+    Input_UserFilterPersonName? personName,
     Input_UserFilterCurrentUserCanManageThisUser? currentUserCanManageThisUser,
   }) => Input_UserFilterInput._({
     if (and != null) r'and': and,
@@ -173487,8 +174395,12 @@ class Input_UserFilterInput {
     if (invitation != null) r'invitation': invitation,
     if (person != null) r'person': person,
     if (preferences != null) r'preferences': preferences,
+    if (latestEdit != null) r'latestEdit': latestEdit,
     if (scopeGrants != null) r'scopeGrants': scopeGrants,
+    if (deviceTokens != null) r'deviceTokens': deviceTokens,
     if (permissions != null) r'permissions': permissions,
+    if (lastEdit != null) r'lastEdit': lastEdit,
+    if (personName != null) r'personName': personName,
     if (currentUserCanManageThisUser != null)
       r'currentUserCanManageThisUser': currentUserCanManageThisUser,
   });
@@ -173585,6 +174497,14 @@ class Input_UserFilterInput {
               (l$preferences as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('latestEdit')) {
+      final l$latestEdit = data['latestEdit'];
+      result$data['latestEdit'] = l$latestEdit == null
+          ? null
+          : Input_LatestEditFilterInput.fromJson(
+              (l$latestEdit as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('scopeGrants')) {
       final l$scopeGrants = data['scopeGrants'];
       result$data['scopeGrants'] = l$scopeGrants == null
@@ -173593,12 +174513,36 @@ class Input_UserFilterInput {
               (l$scopeGrants as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('deviceTokens')) {
+      final l$deviceTokens = data['deviceTokens'];
+      result$data['deviceTokens'] = l$deviceTokens == null
+          ? null
+          : Input_DeviceTokenFilterInput.fromJson(
+              (l$deviceTokens as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('permissions')) {
       final l$permissions = data['permissions'];
       result$data['permissions'] = l$permissions == null
           ? null
           : Input_UserPermissionFilterInput.fromJson(
               (l$permissions as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('lastEdit')) {
+      final l$lastEdit = data['lastEdit'];
+      result$data['lastEdit'] = l$lastEdit == null
+          ? null
+          : Input_UserFilterLastEdit.fromJson(
+              (l$lastEdit as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('personName')) {
+      final l$personName = data['personName'];
+      result$data['personName'] = l$personName == null
+          ? null
+          : Input_UserFilterPersonName.fromJson(
+              (l$personName as Map<String, dynamic>),
             );
     }
     if (data.containsKey('currentUserCanManageThisUser')) {
@@ -173650,11 +174594,23 @@ class Input_UserFilterInput {
   Input_UserPreferencesFilterInput? get preferences =>
       (_$data['preferences'] as Input_UserPreferencesFilterInput?);
 
+  Input_LatestEditFilterInput? get latestEdit =>
+      (_$data['latestEdit'] as Input_LatestEditFilterInput?);
+
   Input_ScopeGrantFilterInput? get scopeGrants =>
       (_$data['scopeGrants'] as Input_ScopeGrantFilterInput?);
 
+  Input_DeviceTokenFilterInput? get deviceTokens =>
+      (_$data['deviceTokens'] as Input_DeviceTokenFilterInput?);
+
   Input_UserPermissionFilterInput? get permissions =>
       (_$data['permissions'] as Input_UserPermissionFilterInput?);
+
+  Input_UserFilterLastEdit? get lastEdit =>
+      (_$data['lastEdit'] as Input_UserFilterLastEdit?);
+
+  Input_UserFilterPersonName? get personName =>
+      (_$data['personName'] as Input_UserFilterPersonName?);
 
   Input_UserFilterCurrentUserCanManageThisUser?
   get currentUserCanManageThisUser =>
@@ -173711,13 +174667,29 @@ class Input_UserFilterInput {
       final l$preferences = preferences;
       result$data['preferences'] = l$preferences?.toJson();
     }
+    if (_$data.containsKey('latestEdit')) {
+      final l$latestEdit = latestEdit;
+      result$data['latestEdit'] = l$latestEdit?.toJson();
+    }
     if (_$data.containsKey('scopeGrants')) {
       final l$scopeGrants = scopeGrants;
       result$data['scopeGrants'] = l$scopeGrants?.toJson();
     }
+    if (_$data.containsKey('deviceTokens')) {
+      final l$deviceTokens = deviceTokens;
+      result$data['deviceTokens'] = l$deviceTokens?.toJson();
+    }
     if (_$data.containsKey('permissions')) {
       final l$permissions = permissions;
       result$data['permissions'] = l$permissions?.toJson();
+    }
+    if (_$data.containsKey('lastEdit')) {
+      final l$lastEdit = lastEdit;
+      result$data['lastEdit'] = l$lastEdit?.toJson();
+    }
+    if (_$data.containsKey('personName')) {
+      final l$personName = personName;
+      result$data['personName'] = l$personName?.toJson();
     }
     if (_$data.containsKey('currentUserCanManageThisUser')) {
       final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
@@ -173871,6 +174843,15 @@ class Input_UserFilterInput {
     if (l$preferences != lOther$preferences) {
       return false;
     }
+    final l$latestEdit = latestEdit;
+    final lOther$latestEdit = other.latestEdit;
+    if (_$data.containsKey('latestEdit') !=
+        other._$data.containsKey('latestEdit')) {
+      return false;
+    }
+    if (l$latestEdit != lOther$latestEdit) {
+      return false;
+    }
     final l$scopeGrants = scopeGrants;
     final lOther$scopeGrants = other.scopeGrants;
     if (_$data.containsKey('scopeGrants') !=
@@ -173880,6 +174861,15 @@ class Input_UserFilterInput {
     if (l$scopeGrants != lOther$scopeGrants) {
       return false;
     }
+    final l$deviceTokens = deviceTokens;
+    final lOther$deviceTokens = other.deviceTokens;
+    if (_$data.containsKey('deviceTokens') !=
+        other._$data.containsKey('deviceTokens')) {
+      return false;
+    }
+    if (l$deviceTokens != lOther$deviceTokens) {
+      return false;
+    }
     final l$permissions = permissions;
     final lOther$permissions = other.permissions;
     if (_$data.containsKey('permissions') !=
@@ -173887,6 +174877,24 @@ class Input_UserFilterInput {
       return false;
     }
     if (l$permissions != lOther$permissions) {
+      return false;
+    }
+    final l$lastEdit = lastEdit;
+    final lOther$lastEdit = other.lastEdit;
+    if (_$data.containsKey('lastEdit') !=
+        other._$data.containsKey('lastEdit')) {
+      return false;
+    }
+    if (l$lastEdit != lOther$lastEdit) {
+      return false;
+    }
+    final l$personName = personName;
+    final lOther$personName = other.personName;
+    if (_$data.containsKey('personName') !=
+        other._$data.containsKey('personName')) {
+      return false;
+    }
+    if (l$personName != lOther$personName) {
       return false;
     }
     final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
@@ -173916,8 +174924,12 @@ class Input_UserFilterInput {
     final l$invitation = invitation;
     final l$person = person;
     final l$preferences = preferences;
+    final l$latestEdit = latestEdit;
     final l$scopeGrants = scopeGrants;
+    final l$deviceTokens = deviceTokens;
     final l$permissions = permissions;
+    final l$lastEdit = lastEdit;
+    final l$personName = personName;
     final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
     return Object.hashAll([
       _$data.containsKey('and')
@@ -173944,8 +174956,12 @@ class Input_UserFilterInput {
       _$data.containsKey('invitation') ? l$invitation : const {},
       _$data.containsKey('person') ? l$person : const {},
       _$data.containsKey('preferences') ? l$preferences : const {},
+      _$data.containsKey('latestEdit') ? l$latestEdit : const {},
       _$data.containsKey('scopeGrants') ? l$scopeGrants : const {},
+      _$data.containsKey('deviceTokens') ? l$deviceTokens : const {},
       _$data.containsKey('permissions') ? l$permissions : const {},
+      _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('personName') ? l$personName : const {},
       _$data.containsKey('currentUserCanManageThisUser')
           ? l$currentUserCanManageThisUser
           : const {},
@@ -173975,8 +174991,12 @@ abstract class CopyWith_Input_UserFilterInput<TRes> {
     Input_InvitationFilterInput? invitation,
     Input_PersonFilterInput? person,
     Input_UserPreferencesFilterInput? preferences,
+    Input_LatestEditFilterInput? latestEdit,
     Input_ScopeGrantFilterInput? scopeGrants,
+    Input_DeviceTokenFilterInput? deviceTokens,
     Input_UserPermissionFilterInput? permissions,
+    Input_UserFilterLastEdit? lastEdit,
+    Input_UserFilterPersonName? personName,
     Input_UserFilterCurrentUserCanManageThisUser? currentUserCanManageThisUser,
   });
   TRes and(
@@ -174006,8 +175026,12 @@ abstract class CopyWith_Input_UserFilterInput<TRes> {
   CopyWith_Input_InvitationFilterInput<TRes> get invitation;
   CopyWith_Input_PersonFilterInput<TRes> get person;
   CopyWith_Input_UserPreferencesFilterInput<TRes> get preferences;
+  CopyWith_Input_LatestEditFilterInput<TRes> get latestEdit;
   CopyWith_Input_ScopeGrantFilterInput<TRes> get scopeGrants;
+  CopyWith_Input_DeviceTokenFilterInput<TRes> get deviceTokens;
   CopyWith_Input_UserPermissionFilterInput<TRes> get permissions;
+  CopyWith_Input_UserFilterLastEdit<TRes> get lastEdit;
+  CopyWith_Input_UserFilterPersonName<TRes> get personName;
   CopyWith_Input_UserFilterCurrentUserCanManageThisUser<TRes>
   get currentUserCanManageThisUser;
 }
@@ -174035,8 +175059,12 @@ class _CopyWithImpl_Input_UserFilterInput<TRes>
     Object? invitation = _undefined,
     Object? person = _undefined,
     Object? preferences = _undefined,
+    Object? latestEdit = _undefined,
     Object? scopeGrants = _undefined,
+    Object? deviceTokens = _undefined,
     Object? permissions = _undefined,
+    Object? lastEdit = _undefined,
+    Object? personName = _undefined,
     Object? currentUserCanManageThisUser = _undefined,
   }) => _then(
     Input_UserFilterInput._({
@@ -174057,10 +175085,18 @@ class _CopyWithImpl_Input_UserFilterInput<TRes>
       if (person != _undefined) 'person': (person as Input_PersonFilterInput?),
       if (preferences != _undefined)
         'preferences': (preferences as Input_UserPreferencesFilterInput?),
+      if (latestEdit != _undefined)
+        'latestEdit': (latestEdit as Input_LatestEditFilterInput?),
       if (scopeGrants != _undefined)
         'scopeGrants': (scopeGrants as Input_ScopeGrantFilterInput?),
+      if (deviceTokens != _undefined)
+        'deviceTokens': (deviceTokens as Input_DeviceTokenFilterInput?),
       if (permissions != _undefined)
         'permissions': (permissions as Input_UserPermissionFilterInput?),
+      if (lastEdit != _undefined)
+        'lastEdit': (lastEdit as Input_UserFilterLastEdit?),
+      if (personName != _undefined)
+        'personName': (personName as Input_UserFilterPersonName?),
       if (currentUserCanManageThisUser != _undefined)
         'currentUserCanManageThisUser':
             (currentUserCanManageThisUser
@@ -174179,6 +175215,16 @@ class _CopyWithImpl_Input_UserFilterInput<TRes>
           );
   }
 
+  CopyWith_Input_LatestEditFilterInput<TRes> get latestEdit {
+    final local$latestEdit = _instance.latestEdit;
+    return local$latestEdit == null
+        ? CopyWith_Input_LatestEditFilterInput.stub(_then(_instance))
+        : CopyWith_Input_LatestEditFilterInput(
+            local$latestEdit,
+            (e) => call(latestEdit: e),
+          );
+  }
+
   CopyWith_Input_ScopeGrantFilterInput<TRes> get scopeGrants {
     final local$scopeGrants = _instance.scopeGrants;
     return local$scopeGrants == null
@@ -174189,6 +175235,16 @@ class _CopyWithImpl_Input_UserFilterInput<TRes>
           );
   }
 
+  CopyWith_Input_DeviceTokenFilterInput<TRes> get deviceTokens {
+    final local$deviceTokens = _instance.deviceTokens;
+    return local$deviceTokens == null
+        ? CopyWith_Input_DeviceTokenFilterInput.stub(_then(_instance))
+        : CopyWith_Input_DeviceTokenFilterInput(
+            local$deviceTokens,
+            (e) => call(deviceTokens: e),
+          );
+  }
+
   CopyWith_Input_UserPermissionFilterInput<TRes> get permissions {
     final local$permissions = _instance.permissions;
     return local$permissions == null
@@ -174196,6 +175252,26 @@ class _CopyWithImpl_Input_UserFilterInput<TRes>
         : CopyWith_Input_UserPermissionFilterInput(
             local$permissions,
             (e) => call(permissions: e),
+          );
+  }
+
+  CopyWith_Input_UserFilterLastEdit<TRes> get lastEdit {
+    final local$lastEdit = _instance.lastEdit;
+    return local$lastEdit == null
+        ? CopyWith_Input_UserFilterLastEdit.stub(_then(_instance))
+        : CopyWith_Input_UserFilterLastEdit(
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
+  }
+
+  CopyWith_Input_UserFilterPersonName<TRes> get personName {
+    final local$personName = _instance.personName;
+    return local$personName == null
+        ? CopyWith_Input_UserFilterPersonName.stub(_then(_instance))
+        : CopyWith_Input_UserFilterPersonName(
+            local$personName,
+            (e) => call(personName: e),
           );
   }
 
@@ -174233,8 +175309,12 @@ class _CopyWithStubImpl_Input_UserFilterInput<TRes>
     Input_InvitationFilterInput? invitation,
     Input_PersonFilterInput? person,
     Input_UserPreferencesFilterInput? preferences,
+    Input_LatestEditFilterInput? latestEdit,
     Input_ScopeGrantFilterInput? scopeGrants,
+    Input_DeviceTokenFilterInput? deviceTokens,
     Input_UserPermissionFilterInput? permissions,
+    Input_UserFilterLastEdit? lastEdit,
+    Input_UserFilterPersonName? personName,
     Input_UserFilterCurrentUserCanManageThisUser? currentUserCanManageThisUser,
   }) => _res;
 
@@ -174271,11 +175351,23 @@ class _CopyWithStubImpl_Input_UserFilterInput<TRes>
   CopyWith_Input_UserPreferencesFilterInput<TRes> get preferences =>
       CopyWith_Input_UserPreferencesFilterInput.stub(_res);
 
+  CopyWith_Input_LatestEditFilterInput<TRes> get latestEdit =>
+      CopyWith_Input_LatestEditFilterInput.stub(_res);
+
   CopyWith_Input_ScopeGrantFilterInput<TRes> get scopeGrants =>
       CopyWith_Input_ScopeGrantFilterInput.stub(_res);
 
+  CopyWith_Input_DeviceTokenFilterInput<TRes> get deviceTokens =>
+      CopyWith_Input_DeviceTokenFilterInput.stub(_res);
+
   CopyWith_Input_UserPermissionFilterInput<TRes> get permissions =>
       CopyWith_Input_UserPermissionFilterInput.stub(_res);
+
+  CopyWith_Input_UserFilterLastEdit<TRes> get lastEdit =>
+      CopyWith_Input_UserFilterLastEdit.stub(_res);
+
+  CopyWith_Input_UserFilterPersonName<TRes> get personName =>
+      CopyWith_Input_UserFilterPersonName.stub(_res);
 
   CopyWith_Input_UserFilterCurrentUserCanManageThisUser<TRes>
   get currentUserCanManageThisUser =>
@@ -182808,7 +183900,12 @@ class Input_ScopeGrantFilterInput {
     groupAllowRecordAttendance,
     Input_ScopeGrantFilterGroupAllowRecordServantsAttendance?
     groupAllowRecordServantsAttendance,
+    Input_AreaFilterInput? area,
+    Input_GroupFilterInput? group,
+    Input_ServiceFilterInput? service,
     Input_UserFilterInput? user,
+    Input_StudyYearFilterInput? studyYear,
+    Input_ClassFilterInput? classes,
   }) => Input_ScopeGrantFilterInput._({
     if (and != null) r'and': and,
     if (or != null) r'or': or,
@@ -182843,7 +183940,12 @@ class Input_ScopeGrantFilterInput {
       r'groupAllowRecordAttendance': groupAllowRecordAttendance,
     if (groupAllowRecordServantsAttendance != null)
       r'groupAllowRecordServantsAttendance': groupAllowRecordServantsAttendance,
+    if (area != null) r'area': area,
+    if (group != null) r'group': group,
+    if (service != null) r'service': service,
     if (user != null) r'user': user,
+    if (studyYear != null) r'studyYear': studyYear,
+    if (classes != null) r'classes': classes,
   });
 
   Input_ScopeGrantFilterInput._(this._$data);
@@ -183063,11 +184165,47 @@ class Input_ScopeGrantFilterInput {
               (l$groupAllowRecordServantsAttendance as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('area')) {
+      final l$area = data['area'];
+      result$data['area'] = l$area == null
+          ? null
+          : Input_AreaFilterInput.fromJson((l$area as Map<String, dynamic>));
+    }
+    if (data.containsKey('group')) {
+      final l$group = data['group'];
+      result$data['group'] = l$group == null
+          ? null
+          : Input_GroupFilterInput.fromJson((l$group as Map<String, dynamic>));
+    }
+    if (data.containsKey('service')) {
+      final l$service = data['service'];
+      result$data['service'] = l$service == null
+          ? null
+          : Input_ServiceFilterInput.fromJson(
+              (l$service as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('user')) {
       final l$user = data['user'];
       result$data['user'] = l$user == null
           ? null
           : Input_UserFilterInput.fromJson((l$user as Map<String, dynamic>));
+    }
+    if (data.containsKey('studyYear')) {
+      final l$studyYear = data['studyYear'];
+      result$data['studyYear'] = l$studyYear == null
+          ? null
+          : Input_StudyYearFilterInput.fromJson(
+              (l$studyYear as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('classes')) {
+      final l$classes = data['classes'];
+      result$data['classes'] = l$classes == null
+          ? null
+          : Input_ClassFilterInput.fromJson(
+              (l$classes as Map<String, dynamic>),
+            );
     }
     return Input_ScopeGrantFilterInput._(result$data);
   }
@@ -183163,7 +184301,21 @@ class Input_ScopeGrantFilterInput {
       (_$data['groupAllowRecordServantsAttendance']
           as Input_ScopeGrantFilterGroupAllowRecordServantsAttendance?);
 
+  Input_AreaFilterInput? get area => (_$data['area'] as Input_AreaFilterInput?);
+
+  Input_GroupFilterInput? get group =>
+      (_$data['group'] as Input_GroupFilterInput?);
+
+  Input_ServiceFilterInput? get service =>
+      (_$data['service'] as Input_ServiceFilterInput?);
+
   Input_UserFilterInput? get user => (_$data['user'] as Input_UserFilterInput?);
+
+  Input_StudyYearFilterInput? get studyYear =>
+      (_$data['studyYear'] as Input_StudyYearFilterInput?);
+
+  Input_ClassFilterInput? get classes =>
+      (_$data['classes'] as Input_ClassFilterInput?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -183275,9 +184427,29 @@ class Input_ScopeGrantFilterInput {
       result$data['groupAllowRecordServantsAttendance'] =
           l$groupAllowRecordServantsAttendance?.toJson();
     }
+    if (_$data.containsKey('area')) {
+      final l$area = area;
+      result$data['area'] = l$area?.toJson();
+    }
+    if (_$data.containsKey('group')) {
+      final l$group = group;
+      result$data['group'] = l$group?.toJson();
+    }
+    if (_$data.containsKey('service')) {
+      final l$service = service;
+      result$data['service'] = l$service?.toJson();
+    }
     if (_$data.containsKey('user')) {
       final l$user = user;
       result$data['user'] = l$user?.toJson();
+    }
+    if (_$data.containsKey('studyYear')) {
+      final l$studyYear = studyYear;
+      result$data['studyYear'] = l$studyYear?.toJson();
+    }
+    if (_$data.containsKey('classes')) {
+      final l$classes = classes;
+      result$data['classes'] = l$classes?.toJson();
     }
     return result$data;
   }
@@ -183556,12 +184728,53 @@ class Input_ScopeGrantFilterInput {
         lOther$groupAllowRecordServantsAttendance) {
       return false;
     }
+    final l$area = area;
+    final lOther$area = other.area;
+    if (_$data.containsKey('area') != other._$data.containsKey('area')) {
+      return false;
+    }
+    if (l$area != lOther$area) {
+      return false;
+    }
+    final l$group = group;
+    final lOther$group = other.group;
+    if (_$data.containsKey('group') != other._$data.containsKey('group')) {
+      return false;
+    }
+    if (l$group != lOther$group) {
+      return false;
+    }
+    final l$service = service;
+    final lOther$service = other.service;
+    if (_$data.containsKey('service') != other._$data.containsKey('service')) {
+      return false;
+    }
+    if (l$service != lOther$service) {
+      return false;
+    }
     final l$user = user;
     final lOther$user = other.user;
     if (_$data.containsKey('user') != other._$data.containsKey('user')) {
       return false;
     }
     if (l$user != lOther$user) {
+      return false;
+    }
+    final l$studyYear = studyYear;
+    final lOther$studyYear = other.studyYear;
+    if (_$data.containsKey('studyYear') !=
+        other._$data.containsKey('studyYear')) {
+      return false;
+    }
+    if (l$studyYear != lOther$studyYear) {
+      return false;
+    }
+    final l$classes = classes;
+    final lOther$classes = other.classes;
+    if (_$data.containsKey('classes') != other._$data.containsKey('classes')) {
+      return false;
+    }
+    if (l$classes != lOther$classes) {
       return false;
     }
     return true;
@@ -183596,7 +184809,12 @@ class Input_ScopeGrantFilterInput {
     final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
     final l$groupAllowRecordServantsAttendance =
         groupAllowRecordServantsAttendance;
+    final l$area = area;
+    final l$group = group;
+    final l$service = service;
     final l$user = user;
+    final l$studyYear = studyYear;
+    final l$classes = classes;
     return Object.hashAll([
       _$data.containsKey('and')
           ? l$and == null
@@ -183651,7 +184869,12 @@ class Input_ScopeGrantFilterInput {
       _$data.containsKey('groupAllowRecordServantsAttendance')
           ? l$groupAllowRecordServantsAttendance
           : const {},
+      _$data.containsKey('area') ? l$area : const {},
+      _$data.containsKey('group') ? l$group : const {},
+      _$data.containsKey('service') ? l$service : const {},
       _$data.containsKey('user') ? l$user : const {},
+      _$data.containsKey('studyYear') ? l$studyYear : const {},
+      _$data.containsKey('classes') ? l$classes : const {},
     ]);
   }
 }
@@ -183696,7 +184919,12 @@ abstract class CopyWith_Input_ScopeGrantFilterInput<TRes> {
     groupAllowRecordAttendance,
     Input_ScopeGrantFilterGroupAllowRecordServantsAttendance?
     groupAllowRecordServantsAttendance,
+    Input_AreaFilterInput? area,
+    Input_GroupFilterInput? group,
+    Input_ServiceFilterInput? service,
     Input_UserFilterInput? user,
+    Input_StudyYearFilterInput? studyYear,
+    Input_ClassFilterInput? classes,
   });
   TRes and(
     Iterable<Input_ScopeGrantFilterInput>? Function(
@@ -183752,7 +184980,12 @@ abstract class CopyWith_Input_ScopeGrantFilterInput<TRes> {
   get groupAllowRecordAttendance;
   CopyWith_Input_ScopeGrantFilterGroupAllowRecordServantsAttendance<TRes>
   get groupAllowRecordServantsAttendance;
+  CopyWith_Input_AreaFilterInput<TRes> get area;
+  CopyWith_Input_GroupFilterInput<TRes> get group;
+  CopyWith_Input_ServiceFilterInput<TRes> get service;
   CopyWith_Input_UserFilterInput<TRes> get user;
+  CopyWith_Input_StudyYearFilterInput<TRes> get studyYear;
+  CopyWith_Input_ClassFilterInput<TRes> get classes;
 }
 
 class _CopyWithImpl_Input_ScopeGrantFilterInput<TRes>
@@ -183791,7 +185024,12 @@ class _CopyWithImpl_Input_ScopeGrantFilterInput<TRes>
     Object? serviceAllowRecordServantsAttendance = _undefined,
     Object? groupAllowRecordAttendance = _undefined,
     Object? groupAllowRecordServantsAttendance = _undefined,
+    Object? area = _undefined,
+    Object? group = _undefined,
+    Object? service = _undefined,
     Object? user = _undefined,
+    Object? studyYear = _undefined,
+    Object? classes = _undefined,
   }) => _then(
     Input_ScopeGrantFilterInput._({
       ..._instance._$data,
@@ -183865,7 +185103,15 @@ class _CopyWithImpl_Input_ScopeGrantFilterInput<TRes>
         'groupAllowRecordServantsAttendance':
             (groupAllowRecordServantsAttendance
                 as Input_ScopeGrantFilterGroupAllowRecordServantsAttendance?),
+      if (area != _undefined) 'area': (area as Input_AreaFilterInput?),
+      if (group != _undefined) 'group': (group as Input_GroupFilterInput?),
+      if (service != _undefined)
+        'service': (service as Input_ServiceFilterInput?),
       if (user != _undefined) 'user': (user as Input_UserFilterInput?),
+      if (studyYear != _undefined)
+        'studyYear': (studyYear as Input_StudyYearFilterInput?),
+      if (classes != _undefined)
+        'classes': (classes as Input_ClassFilterInput?),
     }),
   );
 
@@ -184162,11 +185408,55 @@ class _CopyWithImpl_Input_ScopeGrantFilterInput<TRes>
           );
   }
 
+  CopyWith_Input_AreaFilterInput<TRes> get area {
+    final local$area = _instance.area;
+    return local$area == null
+        ? CopyWith_Input_AreaFilterInput.stub(_then(_instance))
+        : CopyWith_Input_AreaFilterInput(local$area, (e) => call(area: e));
+  }
+
+  CopyWith_Input_GroupFilterInput<TRes> get group {
+    final local$group = _instance.group;
+    return local$group == null
+        ? CopyWith_Input_GroupFilterInput.stub(_then(_instance))
+        : CopyWith_Input_GroupFilterInput(local$group, (e) => call(group: e));
+  }
+
+  CopyWith_Input_ServiceFilterInput<TRes> get service {
+    final local$service = _instance.service;
+    return local$service == null
+        ? CopyWith_Input_ServiceFilterInput.stub(_then(_instance))
+        : CopyWith_Input_ServiceFilterInput(
+            local$service,
+            (e) => call(service: e),
+          );
+  }
+
   CopyWith_Input_UserFilterInput<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
         ? CopyWith_Input_UserFilterInput.stub(_then(_instance))
         : CopyWith_Input_UserFilterInput(local$user, (e) => call(user: e));
+  }
+
+  CopyWith_Input_StudyYearFilterInput<TRes> get studyYear {
+    final local$studyYear = _instance.studyYear;
+    return local$studyYear == null
+        ? CopyWith_Input_StudyYearFilterInput.stub(_then(_instance))
+        : CopyWith_Input_StudyYearFilterInput(
+            local$studyYear,
+            (e) => call(studyYear: e),
+          );
+  }
+
+  CopyWith_Input_ClassFilterInput<TRes> get classes {
+    final local$classes = _instance.classes;
+    return local$classes == null
+        ? CopyWith_Input_ClassFilterInput.stub(_then(_instance))
+        : CopyWith_Input_ClassFilterInput(
+            local$classes,
+            (e) => call(classes: e),
+          );
   }
 }
 
@@ -184207,7 +185497,12 @@ class _CopyWithStubImpl_Input_ScopeGrantFilterInput<TRes>
     groupAllowRecordAttendance,
     Input_ScopeGrantFilterGroupAllowRecordServantsAttendance?
     groupAllowRecordServantsAttendance,
+    Input_AreaFilterInput? area,
+    Input_GroupFilterInput? group,
+    Input_ServiceFilterInput? service,
     Input_UserFilterInput? user,
+    Input_StudyYearFilterInput? studyYear,
+    Input_ClassFilterInput? classes,
   }) => _res;
 
   and(_fn) => _res;
@@ -184295,8 +185590,23 @@ class _CopyWithStubImpl_Input_ScopeGrantFilterInput<TRes>
         _res,
       );
 
+  CopyWith_Input_AreaFilterInput<TRes> get area =>
+      CopyWith_Input_AreaFilterInput.stub(_res);
+
+  CopyWith_Input_GroupFilterInput<TRes> get group =>
+      CopyWith_Input_GroupFilterInput.stub(_res);
+
+  CopyWith_Input_ServiceFilterInput<TRes> get service =>
+      CopyWith_Input_ServiceFilterInput.stub(_res);
+
   CopyWith_Input_UserFilterInput<TRes> get user =>
       CopyWith_Input_UserFilterInput.stub(_res);
+
+  CopyWith_Input_StudyYearFilterInput<TRes> get studyYear =>
+      CopyWith_Input_StudyYearFilterInput.stub(_res);
+
+  CopyWith_Input_ClassFilterInput<TRes> get classes =>
+      CopyWith_Input_ClassFilterInput.stub(_res);
 }
 
 class Input_ScopeGrantSortInput {
@@ -192001,6 +193311,1882 @@ class _CopyWithStubImpl_Input_RegisterFcmTokenInput<TRes>
   TRes _res;
 
   call({String? token}) => _res;
+}
+
+class Input_DeviceTokenFilterCreatedAt {
+  factory Input_DeviceTokenFilterCreatedAt({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => Input_DeviceTokenFilterCreatedAt._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_DeviceTokenFilterCreatedAt._(this._$data);
+
+  factory Input_DeviceTokenFilterCreatedAt.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = l$eq == null ? null : tstzFromString(l$eq);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = l$notEq == null ? null : tstzFromString(l$notEq);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => tstzFromString(e))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzFromString(l$lessThan);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzFromString(l$greaterThan);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzFromString(l$lessThanOrEqual);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzFromString(l$greaterThanOrEqual);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzFromString(l$isDistinctFrom);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzFromString(l$isNotDistinctFrom);
+    }
+    return Input_DeviceTokenFilterCreatedAt._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  DateTime? get eq => (_$data['eq'] as DateTime?);
+
+  DateTime? get notEq => (_$data['notEq'] as DateTime?);
+
+  List<DateTime>? get $in => (_$data['in'] as List<DateTime>?);
+
+  DateTime? get lessThan => (_$data['lessThan'] as DateTime?);
+
+  DateTime? get greaterThan => (_$data['greaterThan'] as DateTime?);
+
+  DateTime? get lessThanOrEqual => (_$data['lessThanOrEqual'] as DateTime?);
+
+  DateTime? get greaterThanOrEqual =>
+      (_$data['greaterThanOrEqual'] as DateTime?);
+
+  DateTime? get isDistinctFrom => (_$data['isDistinctFrom'] as DateTime?);
+
+  DateTime? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq == null ? null : tstzToString(l$eq);
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq == null ? null : tstzToString(l$notEq);
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => tstzToString(e)).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzToString(l$lessThan);
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzToString(l$greaterThan);
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzToString(l$lessThanOrEqual);
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzToString(l$greaterThanOrEqual);
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzToString(l$isDistinctFrom);
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzToString(l$isNotDistinctFrom);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_DeviceTokenFilterCreatedAt<Input_DeviceTokenFilterCreatedAt>
+  get copyWith => CopyWith_Input_DeviceTokenFilterCreatedAt(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_DeviceTokenFilterCreatedAt ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_DeviceTokenFilterCreatedAt<TRes> {
+  factory CopyWith_Input_DeviceTokenFilterCreatedAt(
+    Input_DeviceTokenFilterCreatedAt instance,
+    TRes Function(Input_DeviceTokenFilterCreatedAt) then,
+  ) = _CopyWithImpl_Input_DeviceTokenFilterCreatedAt;
+
+  factory CopyWith_Input_DeviceTokenFilterCreatedAt.stub(TRes res) =
+      _CopyWithStubImpl_Input_DeviceTokenFilterCreatedAt;
+
+  TRes call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_DeviceTokenFilterCreatedAt<TRes>
+    implements CopyWith_Input_DeviceTokenFilterCreatedAt<TRes> {
+  _CopyWithImpl_Input_DeviceTokenFilterCreatedAt(this._instance, this._then);
+
+  final Input_DeviceTokenFilterCreatedAt _instance;
+
+  final TRes Function(Input_DeviceTokenFilterCreatedAt) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_DeviceTokenFilterCreatedAt._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as DateTime?),
+      if (notEq != _undefined) 'notEq': (notEq as DateTime?),
+      if ($in != _undefined) 'in': ($in as List<DateTime>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as DateTime?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as DateTime?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as DateTime?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as DateTime?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as DateTime?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_DeviceTokenFilterCreatedAt<TRes>
+    implements CopyWith_Input_DeviceTokenFilterCreatedAt<TRes> {
+  _CopyWithStubImpl_Input_DeviceTokenFilterCreatedAt(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_DeviceTokenFilterToken {
+  factory Input_DeviceTokenFilterToken({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  }) => Input_DeviceTokenFilterToken._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (contains != null) r'contains': contains,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+    if (stringEndsWith != null) r'stringEndsWith': stringEndsWith,
+    if (stringStartsWith != null) r'stringStartsWith': stringStartsWith,
+    if (like != null) r'like': like,
+    if (ilike != null) r'ilike': ilike,
+  });
+
+  Input_DeviceTokenFilterToken._(this._$data);
+
+  factory Input_DeviceTokenFilterToken.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('contains')) {
+      final l$contains = data['contains'];
+      result$data['contains'] = (l$contains as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    if (data.containsKey('stringEndsWith')) {
+      final l$stringEndsWith = data['stringEndsWith'];
+      result$data['stringEndsWith'] = (l$stringEndsWith as String?);
+    }
+    if (data.containsKey('stringStartsWith')) {
+      final l$stringStartsWith = data['stringStartsWith'];
+      result$data['stringStartsWith'] = (l$stringStartsWith as String?);
+    }
+    if (data.containsKey('like')) {
+      final l$like = data['like'];
+      result$data['like'] = (l$like as String?);
+    }
+    if (data.containsKey('ilike')) {
+      final l$ilike = data['ilike'];
+      result$data['ilike'] = (l$ilike as String?);
+    }
+    return Input_DeviceTokenFilterToken._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String>? get $in => (_$data['in'] as List<String>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get contains => (_$data['contains'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  String? get stringEndsWith => (_$data['stringEndsWith'] as String?);
+
+  String? get stringStartsWith => (_$data['stringStartsWith'] as String?);
+
+  String? get like => (_$data['like'] as String?);
+
+  String? get ilike => (_$data['ilike'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('contains')) {
+      final l$contains = contains;
+      result$data['contains'] = l$contains;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    if (_$data.containsKey('stringEndsWith')) {
+      final l$stringEndsWith = stringEndsWith;
+      result$data['stringEndsWith'] = l$stringEndsWith;
+    }
+    if (_$data.containsKey('stringStartsWith')) {
+      final l$stringStartsWith = stringStartsWith;
+      result$data['stringStartsWith'] = l$stringStartsWith;
+    }
+    if (_$data.containsKey('like')) {
+      final l$like = like;
+      result$data['like'] = l$like;
+    }
+    if (_$data.containsKey('ilike')) {
+      final l$ilike = ilike;
+      result$data['ilike'] = l$ilike;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_DeviceTokenFilterToken<Input_DeviceTokenFilterToken>
+  get copyWith => CopyWith_Input_DeviceTokenFilterToken(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_DeviceTokenFilterToken ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$contains = contains;
+    final lOther$contains = other.contains;
+    if (_$data.containsKey('contains') !=
+        other._$data.containsKey('contains')) {
+      return false;
+    }
+    if (l$contains != lOther$contains) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    final l$stringEndsWith = stringEndsWith;
+    final lOther$stringEndsWith = other.stringEndsWith;
+    if (_$data.containsKey('stringEndsWith') !=
+        other._$data.containsKey('stringEndsWith')) {
+      return false;
+    }
+    if (l$stringEndsWith != lOther$stringEndsWith) {
+      return false;
+    }
+    final l$stringStartsWith = stringStartsWith;
+    final lOther$stringStartsWith = other.stringStartsWith;
+    if (_$data.containsKey('stringStartsWith') !=
+        other._$data.containsKey('stringStartsWith')) {
+      return false;
+    }
+    if (l$stringStartsWith != lOther$stringStartsWith) {
+      return false;
+    }
+    final l$like = like;
+    final lOther$like = other.like;
+    if (_$data.containsKey('like') != other._$data.containsKey('like')) {
+      return false;
+    }
+    if (l$like != lOther$like) {
+      return false;
+    }
+    final l$ilike = ilike;
+    final lOther$ilike = other.ilike;
+    if (_$data.containsKey('ilike') != other._$data.containsKey('ilike')) {
+      return false;
+    }
+    if (l$ilike != lOther$ilike) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$contains = contains;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final l$stringEndsWith = stringEndsWith;
+    final l$stringStartsWith = stringStartsWith;
+    final l$like = like;
+    final l$ilike = ilike;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('contains') ? l$contains : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+      _$data.containsKey('stringEndsWith') ? l$stringEndsWith : const {},
+      _$data.containsKey('stringStartsWith') ? l$stringStartsWith : const {},
+      _$data.containsKey('like') ? l$like : const {},
+      _$data.containsKey('ilike') ? l$ilike : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_DeviceTokenFilterToken<TRes> {
+  factory CopyWith_Input_DeviceTokenFilterToken(
+    Input_DeviceTokenFilterToken instance,
+    TRes Function(Input_DeviceTokenFilterToken) then,
+  ) = _CopyWithImpl_Input_DeviceTokenFilterToken;
+
+  factory CopyWith_Input_DeviceTokenFilterToken.stub(TRes res) =
+      _CopyWithStubImpl_Input_DeviceTokenFilterToken;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  });
+}
+
+class _CopyWithImpl_Input_DeviceTokenFilterToken<TRes>
+    implements CopyWith_Input_DeviceTokenFilterToken<TRes> {
+  _CopyWithImpl_Input_DeviceTokenFilterToken(this._instance, this._then);
+
+  final Input_DeviceTokenFilterToken _instance;
+
+  final TRes Function(Input_DeviceTokenFilterToken) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? contains = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+    Object? stringEndsWith = _undefined,
+    Object? stringStartsWith = _undefined,
+    Object? like = _undefined,
+    Object? ilike = _undefined,
+  }) => _then(
+    Input_DeviceTokenFilterToken._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (contains != _undefined) 'contains': (contains as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+      if (stringEndsWith != _undefined)
+        'stringEndsWith': (stringEndsWith as String?),
+      if (stringStartsWith != _undefined)
+        'stringStartsWith': (stringStartsWith as String?),
+      if (like != _undefined) 'like': (like as String?),
+      if (ilike != _undefined) 'ilike': (ilike as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_DeviceTokenFilterToken<TRes>
+    implements CopyWith_Input_DeviceTokenFilterToken<TRes> {
+  _CopyWithStubImpl_Input_DeviceTokenFilterToken(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  }) => _res;
+}
+
+class Input_DeviceTokenFilterUid {
+  factory Input_DeviceTokenFilterUid({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_DeviceTokenFilterUid._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_DeviceTokenFilterUid._(this._$data);
+
+  factory Input_DeviceTokenFilterUid.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    return Input_DeviceTokenFilterUid._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String>? get $in => (_$data['in'] as List<String>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_DeviceTokenFilterUid<Input_DeviceTokenFilterUid>
+  get copyWith => CopyWith_Input_DeviceTokenFilterUid(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_DeviceTokenFilterUid ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_DeviceTokenFilterUid<TRes> {
+  factory CopyWith_Input_DeviceTokenFilterUid(
+    Input_DeviceTokenFilterUid instance,
+    TRes Function(Input_DeviceTokenFilterUid) then,
+  ) = _CopyWithImpl_Input_DeviceTokenFilterUid;
+
+  factory CopyWith_Input_DeviceTokenFilterUid.stub(TRes res) =
+      _CopyWithStubImpl_Input_DeviceTokenFilterUid;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_DeviceTokenFilterUid<TRes>
+    implements CopyWith_Input_DeviceTokenFilterUid<TRes> {
+  _CopyWithImpl_Input_DeviceTokenFilterUid(this._instance, this._then);
+
+  final Input_DeviceTokenFilterUid _instance;
+
+  final TRes Function(Input_DeviceTokenFilterUid) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_DeviceTokenFilterUid._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_DeviceTokenFilterUid<TRes>
+    implements CopyWith_Input_DeviceTokenFilterUid<TRes> {
+  _CopyWithStubImpl_Input_DeviceTokenFilterUid(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_DeviceTokenFilterInput {
+  factory Input_DeviceTokenFilterInput({
+    List<Input_DeviceTokenFilterInput>? and,
+    List<Input_DeviceTokenFilterInput>? or,
+    List<Input_DeviceTokenFilterInput>? not,
+    Input_DeviceTokenFilterUid? uid,
+    Input_DeviceTokenFilterToken? token,
+    Input_DeviceTokenFilterCreatedAt? createdAt,
+    Input_UserFilterInput? user,
+  }) => Input_DeviceTokenFilterInput._({
+    if (and != null) r'and': and,
+    if (or != null) r'or': or,
+    if (not != null) r'not': not,
+    if (uid != null) r'uid': uid,
+    if (token != null) r'token': token,
+    if (createdAt != null) r'createdAt': createdAt,
+    if (user != null) r'user': user,
+  });
+
+  Input_DeviceTokenFilterInput._(this._$data);
+
+  factory Input_DeviceTokenFilterInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('and')) {
+      final l$and = data['and'];
+      result$data['and'] = (l$and as List<dynamic>?)
+          ?.map(
+            (e) => Input_DeviceTokenFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('or')) {
+      final l$or = data['or'];
+      result$data['or'] = (l$or as List<dynamic>?)
+          ?.map(
+            (e) => Input_DeviceTokenFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('not')) {
+      final l$not = data['not'];
+      result$data['not'] = (l$not as List<dynamic>?)
+          ?.map(
+            (e) => Input_DeviceTokenFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('uid')) {
+      final l$uid = data['uid'];
+      result$data['uid'] = l$uid == null
+          ? null
+          : Input_DeviceTokenFilterUid.fromJson(
+              (l$uid as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('token')) {
+      final l$token = data['token'];
+      result$data['token'] = l$token == null
+          ? null
+          : Input_DeviceTokenFilterToken.fromJson(
+              (l$token as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = l$createdAt == null
+          ? null
+          : Input_DeviceTokenFilterCreatedAt.fromJson(
+              (l$createdAt as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('user')) {
+      final l$user = data['user'];
+      result$data['user'] = l$user == null
+          ? null
+          : Input_UserFilterInput.fromJson((l$user as Map<String, dynamic>));
+    }
+    return Input_DeviceTokenFilterInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_DeviceTokenFilterInput>? get and =>
+      (_$data['and'] as List<Input_DeviceTokenFilterInput>?);
+
+  List<Input_DeviceTokenFilterInput>? get or =>
+      (_$data['or'] as List<Input_DeviceTokenFilterInput>?);
+
+  List<Input_DeviceTokenFilterInput>? get not =>
+      (_$data['not'] as List<Input_DeviceTokenFilterInput>?);
+
+  Input_DeviceTokenFilterUid? get uid =>
+      (_$data['uid'] as Input_DeviceTokenFilterUid?);
+
+  Input_DeviceTokenFilterToken? get token =>
+      (_$data['token'] as Input_DeviceTokenFilterToken?);
+
+  Input_DeviceTokenFilterCreatedAt? get createdAt =>
+      (_$data['createdAt'] as Input_DeviceTokenFilterCreatedAt?);
+
+  Input_UserFilterInput? get user => (_$data['user'] as Input_UserFilterInput?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('and')) {
+      final l$and = and;
+      result$data['and'] = l$and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('or')) {
+      final l$or = or;
+      result$data['or'] = l$or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('not')) {
+      final l$not = not;
+      result$data['not'] = l$not?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('uid')) {
+      final l$uid = uid;
+      result$data['uid'] = l$uid?.toJson();
+    }
+    if (_$data.containsKey('token')) {
+      final l$token = token;
+      result$data['token'] = l$token?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toJson();
+    }
+    if (_$data.containsKey('user')) {
+      final l$user = user;
+      result$data['user'] = l$user?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_DeviceTokenFilterInput<Input_DeviceTokenFilterInput>
+  get copyWith => CopyWith_Input_DeviceTokenFilterInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_DeviceTokenFilterInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$and = and;
+    final lOther$and = other.and;
+    if (_$data.containsKey('and') != other._$data.containsKey('and')) {
+      return false;
+    }
+    if (l$and != null && lOther$and != null) {
+      if (l$and.length != lOther$and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$and.length; i++) {
+        final l$and$entry = l$and[i];
+        final lOther$and$entry = lOther$and[i];
+        if (l$and$entry != lOther$and$entry) {
+          return false;
+        }
+      }
+    } else if (l$and != lOther$and) {
+      return false;
+    }
+    final l$or = or;
+    final lOther$or = other.or;
+    if (_$data.containsKey('or') != other._$data.containsKey('or')) {
+      return false;
+    }
+    if (l$or != null && lOther$or != null) {
+      if (l$or.length != lOther$or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$or.length; i++) {
+        final l$or$entry = l$or[i];
+        final lOther$or$entry = lOther$or[i];
+        if (l$or$entry != lOther$or$entry) {
+          return false;
+        }
+      }
+    } else if (l$or != lOther$or) {
+      return false;
+    }
+    final l$not = not;
+    final lOther$not = other.not;
+    if (_$data.containsKey('not') != other._$data.containsKey('not')) {
+      return false;
+    }
+    if (l$not != null && lOther$not != null) {
+      if (l$not.length != lOther$not.length) {
+        return false;
+      }
+      for (int i = 0; i < l$not.length; i++) {
+        final l$not$entry = l$not[i];
+        final lOther$not$entry = lOther$not[i];
+        if (l$not$entry != lOther$not$entry) {
+          return false;
+        }
+      }
+    } else if (l$not != lOther$not) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
+      return false;
+    }
+    if (l$uid != lOther$uid) {
+      return false;
+    }
+    final l$token = token;
+    final lOther$token = other.token;
+    if (_$data.containsKey('token') != other._$data.containsKey('token')) {
+      return false;
+    }
+    if (l$token != lOther$token) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
+      return false;
+    }
+    if (l$user != lOther$user) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$and = and;
+    final l$or = or;
+    final l$not = not;
+    final l$uid = uid;
+    final l$token = token;
+    final l$createdAt = createdAt;
+    final l$user = user;
+    return Object.hashAll([
+      _$data.containsKey('and')
+          ? l$and == null
+                ? null
+                : Object.hashAll(l$and.map((v) => v))
+          : const {},
+      _$data.containsKey('or')
+          ? l$or == null
+                ? null
+                : Object.hashAll(l$or.map((v) => v))
+          : const {},
+      _$data.containsKey('not')
+          ? l$not == null
+                ? null
+                : Object.hashAll(l$not.map((v) => v))
+          : const {},
+      _$data.containsKey('uid') ? l$uid : const {},
+      _$data.containsKey('token') ? l$token : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('user') ? l$user : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_DeviceTokenFilterInput<TRes> {
+  factory CopyWith_Input_DeviceTokenFilterInput(
+    Input_DeviceTokenFilterInput instance,
+    TRes Function(Input_DeviceTokenFilterInput) then,
+  ) = _CopyWithImpl_Input_DeviceTokenFilterInput;
+
+  factory CopyWith_Input_DeviceTokenFilterInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_DeviceTokenFilterInput;
+
+  TRes call({
+    List<Input_DeviceTokenFilterInput>? and,
+    List<Input_DeviceTokenFilterInput>? or,
+    List<Input_DeviceTokenFilterInput>? not,
+    Input_DeviceTokenFilterUid? uid,
+    Input_DeviceTokenFilterToken? token,
+    Input_DeviceTokenFilterCreatedAt? createdAt,
+    Input_UserFilterInput? user,
+  });
+  TRes and(
+    Iterable<Input_DeviceTokenFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_DeviceTokenFilterInput<Input_DeviceTokenFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  TRes or(
+    Iterable<Input_DeviceTokenFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_DeviceTokenFilterInput<Input_DeviceTokenFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  TRes not(
+    Iterable<Input_DeviceTokenFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_DeviceTokenFilterInput<Input_DeviceTokenFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_DeviceTokenFilterUid<TRes> get uid;
+  CopyWith_Input_DeviceTokenFilterToken<TRes> get token;
+  CopyWith_Input_DeviceTokenFilterCreatedAt<TRes> get createdAt;
+  CopyWith_Input_UserFilterInput<TRes> get user;
+}
+
+class _CopyWithImpl_Input_DeviceTokenFilterInput<TRes>
+    implements CopyWith_Input_DeviceTokenFilterInput<TRes> {
+  _CopyWithImpl_Input_DeviceTokenFilterInput(this._instance, this._then);
+
+  final Input_DeviceTokenFilterInput _instance;
+
+  final TRes Function(Input_DeviceTokenFilterInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? and = _undefined,
+    Object? or = _undefined,
+    Object? not = _undefined,
+    Object? uid = _undefined,
+    Object? token = _undefined,
+    Object? createdAt = _undefined,
+    Object? user = _undefined,
+  }) => _then(
+    Input_DeviceTokenFilterInput._({
+      ..._instance._$data,
+      if (and != _undefined)
+        'and': (and as List<Input_DeviceTokenFilterInput>?),
+      if (or != _undefined) 'or': (or as List<Input_DeviceTokenFilterInput>?),
+      if (not != _undefined)
+        'not': (not as List<Input_DeviceTokenFilterInput>?),
+      if (uid != _undefined) 'uid': (uid as Input_DeviceTokenFilterUid?),
+      if (token != _undefined)
+        'token': (token as Input_DeviceTokenFilterToken?),
+      if (createdAt != _undefined)
+        'createdAt': (createdAt as Input_DeviceTokenFilterCreatedAt?),
+      if (user != _undefined) 'user': (user as Input_UserFilterInput?),
+    }),
+  );
+
+  TRes and(
+    Iterable<Input_DeviceTokenFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_DeviceTokenFilterInput<Input_DeviceTokenFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    and: _fn(
+      _instance.and?.map(
+        (e) => CopyWith_Input_DeviceTokenFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  TRes or(
+    Iterable<Input_DeviceTokenFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_DeviceTokenFilterInput<Input_DeviceTokenFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    or: _fn(
+      _instance.or?.map(
+        (e) => CopyWith_Input_DeviceTokenFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  TRes not(
+    Iterable<Input_DeviceTokenFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_DeviceTokenFilterInput<Input_DeviceTokenFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    not: _fn(
+      _instance.not?.map(
+        (e) => CopyWith_Input_DeviceTokenFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_DeviceTokenFilterUid<TRes> get uid {
+    final local$uid = _instance.uid;
+    return local$uid == null
+        ? CopyWith_Input_DeviceTokenFilterUid.stub(_then(_instance))
+        : CopyWith_Input_DeviceTokenFilterUid(local$uid, (e) => call(uid: e));
+  }
+
+  CopyWith_Input_DeviceTokenFilterToken<TRes> get token {
+    final local$token = _instance.token;
+    return local$token == null
+        ? CopyWith_Input_DeviceTokenFilterToken.stub(_then(_instance))
+        : CopyWith_Input_DeviceTokenFilterToken(
+            local$token,
+            (e) => call(token: e),
+          );
+  }
+
+  CopyWith_Input_DeviceTokenFilterCreatedAt<TRes> get createdAt {
+    final local$createdAt = _instance.createdAt;
+    return local$createdAt == null
+        ? CopyWith_Input_DeviceTokenFilterCreatedAt.stub(_then(_instance))
+        : CopyWith_Input_DeviceTokenFilterCreatedAt(
+            local$createdAt,
+            (e) => call(createdAt: e),
+          );
+  }
+
+  CopyWith_Input_UserFilterInput<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_UserFilterInput.stub(_then(_instance))
+        : CopyWith_Input_UserFilterInput(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_DeviceTokenFilterInput<TRes>
+    implements CopyWith_Input_DeviceTokenFilterInput<TRes> {
+  _CopyWithStubImpl_Input_DeviceTokenFilterInput(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_DeviceTokenFilterInput>? and,
+    List<Input_DeviceTokenFilterInput>? or,
+    List<Input_DeviceTokenFilterInput>? not,
+    Input_DeviceTokenFilterUid? uid,
+    Input_DeviceTokenFilterToken? token,
+    Input_DeviceTokenFilterCreatedAt? createdAt,
+    Input_UserFilterInput? user,
+  }) => _res;
+
+  and(_fn) => _res;
+
+  or(_fn) => _res;
+
+  not(_fn) => _res;
+
+  CopyWith_Input_DeviceTokenFilterUid<TRes> get uid =>
+      CopyWith_Input_DeviceTokenFilterUid.stub(_res);
+
+  CopyWith_Input_DeviceTokenFilterToken<TRes> get token =>
+      CopyWith_Input_DeviceTokenFilterToken.stub(_res);
+
+  CopyWith_Input_DeviceTokenFilterCreatedAt<TRes> get createdAt =>
+      CopyWith_Input_DeviceTokenFilterCreatedAt.stub(_res);
+
+  CopyWith_Input_UserFilterInput<TRes> get user =>
+      CopyWith_Input_UserFilterInput.stub(_res);
+}
+
+class Input_DeviceTokenSortInput {
+  factory Input_DeviceTokenSortInput({
+    Enum_SortOrder? order,
+    required Enum_DeviceTokenSortField field,
+  }) => Input_DeviceTokenSortInput._({
+    if (order != null) r'order': order,
+    r'field': field,
+  });
+
+  Input_DeviceTokenSortInput._(this._$data);
+
+  factory Input_DeviceTokenSortInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('order')) {
+      final l$order = data['order'];
+      result$data['order'] = l$order == null
+          ? null
+          : fromJson_Enum_SortOrder((l$order as String));
+    }
+    final l$field = data['field'];
+    result$data['field'] = fromJson_Enum_DeviceTokenSortField(
+      (l$field as String),
+    );
+    return Input_DeviceTokenSortInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_SortOrder? get order => (_$data['order'] as Enum_SortOrder?);
+
+  Enum_DeviceTokenSortField get field =>
+      (_$data['field'] as Enum_DeviceTokenSortField);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('order')) {
+      final l$order = order;
+      result$data['order'] = l$order == null
+          ? null
+          : toJson_Enum_SortOrder(l$order);
+    }
+    final l$field = field;
+    result$data['field'] = toJson_Enum_DeviceTokenSortField(l$field);
+    return result$data;
+  }
+
+  CopyWith_Input_DeviceTokenSortInput<Input_DeviceTokenSortInput>
+  get copyWith => CopyWith_Input_DeviceTokenSortInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_DeviceTokenSortInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
+      return false;
+    }
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$field = field;
+    final lOther$field = other.field;
+    if (l$field != lOther$field) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$order = order;
+    final l$field = field;
+    return Object.hashAll([
+      _$data.containsKey('order') ? l$order : const {},
+      l$field,
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_DeviceTokenSortInput<TRes> {
+  factory CopyWith_Input_DeviceTokenSortInput(
+    Input_DeviceTokenSortInput instance,
+    TRes Function(Input_DeviceTokenSortInput) then,
+  ) = _CopyWithImpl_Input_DeviceTokenSortInput;
+
+  factory CopyWith_Input_DeviceTokenSortInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_DeviceTokenSortInput;
+
+  TRes call({Enum_SortOrder? order, Enum_DeviceTokenSortField? field});
+}
+
+class _CopyWithImpl_Input_DeviceTokenSortInput<TRes>
+    implements CopyWith_Input_DeviceTokenSortInput<TRes> {
+  _CopyWithImpl_Input_DeviceTokenSortInput(this._instance, this._then);
+
+  final Input_DeviceTokenSortInput _instance;
+
+  final TRes Function(Input_DeviceTokenSortInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? order = _undefined, Object? field = _undefined}) => _then(
+    Input_DeviceTokenSortInput._({
+      ..._instance._$data,
+      if (order != _undefined) 'order': (order as Enum_SortOrder?),
+      if (field != _undefined && field != null)
+        'field': (field as Enum_DeviceTokenSortField),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_DeviceTokenSortInput<TRes>
+    implements CopyWith_Input_DeviceTokenSortInput<TRes> {
+  _CopyWithStubImpl_Input_DeviceTokenSortInput(this._res);
+
+  TRes _res;
+
+  call({Enum_SortOrder? order, Enum_DeviceTokenSortField? field}) => _res;
 }
 
 class Input_UniversityFilterName {
@@ -222849,6 +226035,8 @@ enum Enum_UserSortField {
   BLURHASH,
   AUTH_ID,
   CURRENT_USER_CAN_MANAGE_THIS_USER,
+  LAST_EDIT,
+  PERSON_NAME,
   $unknown;
 
   factory Enum_UserSortField.fromJson(String value) =>
@@ -222873,6 +226061,10 @@ String toJson_Enum_UserSortField(Enum_UserSortField e) {
       return r'AUTH_ID';
     case Enum_UserSortField.CURRENT_USER_CAN_MANAGE_THIS_USER:
       return r'CURRENT_USER_CAN_MANAGE_THIS_USER';
+    case Enum_UserSortField.LAST_EDIT:
+      return r'LAST_EDIT';
+    case Enum_UserSortField.PERSON_NAME:
+      return r'PERSON_NAME';
     case Enum_UserSortField.$unknown:
       return r'$unknown';
   }
@@ -222894,6 +226086,10 @@ Enum_UserSortField fromJson_Enum_UserSortField(String value) {
       return Enum_UserSortField.AUTH_ID;
     case r'CURRENT_USER_CAN_MANAGE_THIS_USER':
       return Enum_UserSortField.CURRENT_USER_CAN_MANAGE_THIS_USER;
+    case r'LAST_EDIT':
+      return Enum_UserSortField.LAST_EDIT;
+    case r'PERSON_NAME':
+      return Enum_UserSortField.PERSON_NAME;
     default:
       return Enum_UserSortField.$unknown;
   }
@@ -223029,6 +226225,44 @@ Enum_ScopeGrantSortField fromJson_Enum_ScopeGrantSortField(String value) {
       return Enum_ScopeGrantSortField.GROUP_ALLOW_RECORD_SERVANTS_ATTENDANCE;
     default:
       return Enum_ScopeGrantSortField.$unknown;
+  }
+}
+
+enum Enum_DeviceTokenSortField {
+  UID,
+  TOKEN,
+  CREATED_AT,
+  $unknown;
+
+  factory Enum_DeviceTokenSortField.fromJson(String value) =>
+      fromJson_Enum_DeviceTokenSortField(value);
+
+  String toJson() => toJson_Enum_DeviceTokenSortField(this);
+}
+
+String toJson_Enum_DeviceTokenSortField(Enum_DeviceTokenSortField e) {
+  switch (e) {
+    case Enum_DeviceTokenSortField.UID:
+      return r'UID';
+    case Enum_DeviceTokenSortField.TOKEN:
+      return r'TOKEN';
+    case Enum_DeviceTokenSortField.CREATED_AT:
+      return r'CREATED_AT';
+    case Enum_DeviceTokenSortField.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_DeviceTokenSortField fromJson_Enum_DeviceTokenSortField(String value) {
+  switch (value) {
+    case r'UID':
+      return Enum_DeviceTokenSortField.UID;
+    case r'TOKEN':
+      return Enum_DeviceTokenSortField.TOKEN;
+    case r'CREATED_AT':
+      return Enum_DeviceTokenSortField.CREATED_AT;
+    default:
+      return Enum_DeviceTokenSortField.$unknown;
   }
 }
 

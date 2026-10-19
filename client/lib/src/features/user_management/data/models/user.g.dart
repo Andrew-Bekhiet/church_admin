@@ -12,13 +12,13 @@ part of 'user.dart';
 class _UserFields {
   _UserFields();
 
-  final FieldMetadata<String> uid = FieldMetadata<String>(
+  final FieldMetadata<User> uid = FieldMetadata<User>(
     getValue: (obj) => obj is User ? obj.uid : null,
     parentType: User,
     name: 'uid',
     label: 'معرف المستخدم',
     isCodeOnly: true,
-    operators: {...StringOperator.values},
+    operators: {...MultiSelectOperator.values},
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
@@ -60,7 +60,7 @@ class _UserFields {
   final FieldMetadata<AdminOnData> adminOn = FieldMetadata<AdminOnData>(
     getValue: (obj) => obj is User ? obj.adminOn : null,
     parentType: User,
-    name: 'adminOn',
+    name: 'scopeGrants',
     label: 'مسؤول عن',
     isCodeOnly: false,
     isOrderable: false,
@@ -136,7 +136,7 @@ class _UserFields {
     'name': name,
     'email': email,
     'photoUpdatedAt': photoUpdatedAt,
-    'adminOn': adminOn,
+    'scopeGrants': adminOn,
     'permissions': permissions,
     'lastEdit': lastEdit,
     'person': person,
@@ -155,7 +155,7 @@ User _$UserFromJson(Map json) => User(
       ? const PermissionsSet.empty()
       : permissionsSetFromJson(json['permissions']),
   fcmTokens:
-      (json['fcmTokens'] as List<dynamic>?)
+      (json['deviceTokens'] as List<dynamic>?)
           ?.map((e) => FcmToken.fromJson(Map<String, Object?>.from(e as Map)))
           .toList() ??
       [],
@@ -167,14 +167,12 @@ User _$UserFromJson(Map json) => User(
     const LocalDateTimeConverter().fromJson,
   ),
   blurhash: json['blurhash'] as String?,
-  adminOn: (json['adminOn'] as List<dynamic>?)
-      ?.map((e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
-      .toList(),
+  adminOn: AdminOnData.sortedListFromJson(json['scopeGrants'] as List?),
   authId: json['authId'] as String?,
-  lastEdit: json['lastEdit'] == null
+  lastEdit: json['latestEdit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastEdit'] as Map),
+          Map<String, Object?>.from(json['latestEdit'] as Map),
         ),
   person: json['person'] == null
       ? null
@@ -209,13 +207,13 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
     const LocalDateTimeConverter().toJson,
   ),
   'blurhash': instance.blurhash,
-  'adminOn': instance.adminOn?.map((e) => e.toJson()).toList(),
+  'scopeGrants': instance.adminOn?.map((e) => e.toJson()).toList(),
   'permissions': permissionsSetToJson(instance.permissions),
   'authId': instance.authId,
-  'lastEdit': instance.lastEdit?.toJson(),
+  'latestEdit': instance.lastEdit?.toJson(),
   'person': instance.person?.toJson(),
   'preferences': instance.preferences?.toJson(),
-  'fcmTokens': instance.fcmTokens.map((e) => e.toJson()).toList(),
+  'deviceTokens': instance.fcmTokens.map((e) => e.toJson()).toList(),
   'servicesHistory': instance.servicesHistory?.map((e) => e.toJson()).toList(),
   'classesHistory': instance.classesHistory?.map((e) => e.toJson()).toList(),
   'groupsHistory': instance.groupsHistory?.map((e) => e.toJson()).toList(),

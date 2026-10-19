@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/fcm_tokens/__generated__/fragments.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/fcm_tokens/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/fcm_tokens/__generated__/mutations.graphql.dart';
 import 'package:graphql/client.dart';
 
 class FcmTokensDAO {
@@ -8,22 +7,17 @@ class FcmTokensDAO {
   DBGraphQLClient get graphQLClient => _db.graphQLClient;
   FcmTokensDAO({required this._db});
 
-  Future<Fragment_FcmToken?> registerToken({
-    required String uid,
-    required String token,
-  }) {
-    return graphQLClient.mutateAndReturnParsedNullable(
+  Future<FcmToken> registerToken({required String token}) {
+    const document = documentNodeMutationregisterFcmToken;
+
+    return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationregisterFcmToken,
+        document: document,
         operationName: 'registerFcmToken',
         variables: Variables_Mutation_registerFcmToken(
-          object: Input_UsersFcmTokensInsertInput(
-            uid: uid.toUuid(),
-            token: token,
-          ),
+          input: Input_RegisterFcmTokenInput(token: token),
         ).toJson(),
-        parserFn: (json) =>
-            Mutation_registerFcmToken.fromJson(json).insertUsersFcmTokensOne,
+        parserFn: AshResultParser(document).mutationResult(FcmToken.fromJson),
       ),
     );
   }

@@ -3,41 +3,43 @@ import 'package:gql/ast.dart';
 
 class Fragment_UserPreferences {
   Fragment_UserPreferences({
+    required this.id,
     required this.uid,
     required this.orderByPreferences,
     required this.secondLinePreferences,
     this.darkTheme,
     required this.greatFeastTheme,
     this.lastHomeMode,
-    this.lastWhatsappMessageText,
     required this.updatedAt,
-    this.$__typename = 'UsersPreferences',
+    this.$__typename = 'UserPreferences',
   });
 
   factory Fragment_UserPreferences.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$uid = json['uid'];
     final l$orderByPreferences = json['orderByPreferences'];
     final l$secondLinePreferences = json['secondLinePreferences'];
     final l$darkTheme = json['darkTheme'];
     final l$greatFeastTheme = json['greatFeastTheme'];
     final l$lastHomeMode = json['lastHomeMode'];
-    final l$lastWhatsappMessageText = json['lastWhatsappMessageText'];
     final l$updatedAt = json['updatedAt'];
     final l$$__typename = json['__typename'];
     return Fragment_UserPreferences(
-      uid: stringToUuid(l$uid),
+      id: (l$id as String),
+      uid: (l$uid as String),
       orderByPreferences: (l$orderByPreferences as Json),
       secondLinePreferences: (l$secondLinePreferences as Json),
       darkTheme: (l$darkTheme as bool?),
       greatFeastTheme: (l$greatFeastTheme as bool),
       lastHomeMode: (l$lastHomeMode as String?),
-      lastWhatsappMessageText: (l$lastWhatsappMessageText as String?),
       updatedAt: tstzFromString(l$updatedAt),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final UuidValue uid;
+  final String id;
+
+  final String uid;
 
   final Json orderByPreferences;
 
@@ -49,16 +51,16 @@ class Fragment_UserPreferences {
 
   final String? lastHomeMode;
 
-  final String? lastWhatsappMessageText;
-
   final DateTime updatedAt;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$uid = uid;
-    _resultData['uid'] = uuidToString(l$uid);
+    _resultData['uid'] = l$uid;
     final l$orderByPreferences = orderByPreferences;
     _resultData['orderByPreferences'] = l$orderByPreferences;
     final l$secondLinePreferences = secondLinePreferences;
@@ -69,8 +71,6 @@ class Fragment_UserPreferences {
     _resultData['greatFeastTheme'] = l$greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
     _resultData['lastHomeMode'] = l$lastHomeMode;
-    final l$lastWhatsappMessageText = lastWhatsappMessageText;
-    _resultData['lastWhatsappMessageText'] = l$lastWhatsappMessageText;
     final l$updatedAt = updatedAt;
     _resultData['updatedAt'] = tstzToString(l$updatedAt);
     final l$$__typename = $__typename;
@@ -80,23 +80,23 @@ class Fragment_UserPreferences {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$uid = uid;
     final l$orderByPreferences = orderByPreferences;
     final l$secondLinePreferences = secondLinePreferences;
     final l$darkTheme = darkTheme;
     final l$greatFeastTheme = greatFeastTheme;
     final l$lastHomeMode = lastHomeMode;
-    final l$lastWhatsappMessageText = lastWhatsappMessageText;
     final l$updatedAt = updatedAt;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$id,
       l$uid,
       l$orderByPreferences,
       l$secondLinePreferences,
       l$darkTheme,
       l$greatFeastTheme,
       l$lastHomeMode,
-      l$lastWhatsappMessageText,
       l$updatedAt,
       l$$__typename,
     ]);
@@ -109,6 +109,11 @@ class Fragment_UserPreferences {
     }
     if (other is! Fragment_UserPreferences ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$uid = uid;
@@ -141,11 +146,6 @@ class Fragment_UserPreferences {
     if (l$lastHomeMode != lOther$lastHomeMode) {
       return false;
     }
-    final l$lastWhatsappMessageText = lastWhatsappMessageText;
-    final lOther$lastWhatsappMessageText = other.lastWhatsappMessageText;
-    if (l$lastWhatsappMessageText != lOther$lastWhatsappMessageText) {
-      return false;
-    }
     final l$updatedAt = updatedAt;
     final lOther$updatedAt = other.updatedAt;
     if (l$updatedAt != lOther$updatedAt) {
@@ -176,13 +176,13 @@ abstract class CopyWith_Fragment_UserPreferences<TRes> {
       _CopyWithStubImpl_Fragment_UserPreferences;
 
   TRes call({
-    UuidValue? uid,
+    String? id,
+    String? uid,
     Json? orderByPreferences,
     Json? secondLinePreferences,
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
-    String? lastWhatsappMessageText,
     DateTime? updatedAt,
     String? $__typename,
   });
@@ -199,20 +199,19 @@ class _CopyWithImpl_Fragment_UserPreferences<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? uid = _undefined,
     Object? orderByPreferences = _undefined,
     Object? secondLinePreferences = _undefined,
     Object? darkTheme = _undefined,
     Object? greatFeastTheme = _undefined,
     Object? lastHomeMode = _undefined,
-    Object? lastWhatsappMessageText = _undefined,
     Object? updatedAt = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Fragment_UserPreferences(
-      uid: uid == _undefined || uid == null
-          ? _instance.uid
-          : (uid as UuidValue),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      uid: uid == _undefined || uid == null ? _instance.uid : (uid as String),
       orderByPreferences:
           orderByPreferences == _undefined || orderByPreferences == null
           ? _instance.orderByPreferences
@@ -230,9 +229,6 @@ class _CopyWithImpl_Fragment_UserPreferences<TRes>
       lastHomeMode: lastHomeMode == _undefined
           ? _instance.lastHomeMode
           : (lastHomeMode as String?),
-      lastWhatsappMessageText: lastWhatsappMessageText == _undefined
-          ? _instance.lastWhatsappMessageText
-          : (lastWhatsappMessageText as String?),
       updatedAt: updatedAt == _undefined || updatedAt == null
           ? _instance.updatedAt
           : (updatedAt as DateTime),
@@ -250,13 +246,13 @@ class _CopyWithStubImpl_Fragment_UserPreferences<TRes>
   TRes _res;
 
   call({
-    UuidValue? uid,
+    String? id,
+    String? uid,
     Json? orderByPreferences,
     Json? secondLinePreferences,
     bool? darkTheme,
     bool? greatFeastTheme,
     String? lastHomeMode,
-    String? lastWhatsappMessageText,
     DateTime? updatedAt,
     String? $__typename,
   }) => _res;
@@ -266,13 +262,20 @@ const fragmentDefinitionUserPreferences = FragmentDefinitionNode(
   name: NameNode(value: 'UserPreferences'),
   typeCondition: TypeConditionNode(
     on: NamedTypeNode(
-      name: NameNode(value: 'UsersPreferences'),
+      name: NameNode(value: 'UserPreferences'),
       isNonNull: false,
     ),
   ),
   directives: [],
   selectionSet: SelectionSetNode(
     selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
       FieldNode(
         name: NameNode(value: 'uid'),
         alias: null,
@@ -310,13 +313,6 @@ const fragmentDefinitionUserPreferences = FragmentDefinitionNode(
       ),
       FieldNode(
         name: NameNode(value: 'lastHomeMode'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'lastWhatsappMessageText'),
         alias: null,
         arguments: [],
         directives: [],

@@ -30,7 +30,10 @@ class _FlakyUsersDAO extends Fake implements UsersDAO {
   Future<void> updateUser(UserUpdate update) async {
     if (failuresLeft > 0) {
       failuresLeft--;
-      throw PersonAlreadyLinkedException(update.linkPersonId ?? '');
+      throw const BackendRejectedException(
+        'person already linked',
+        code: 'user/person-already-linked',
+      );
     }
   }
 }

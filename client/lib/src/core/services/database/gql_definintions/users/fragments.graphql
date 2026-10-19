@@ -1,0 +1,157 @@
+fragment UserOverview on User {
+  ...User
+  currentUserCanManageThisUser
+  authId
+  invitation {
+    ...Invitation
+  }
+  permissions {
+    id
+    permission
+  }
+  person {
+    ...UserPerson
+  }
+}
+
+fragment UserDetails on User {
+  ...UserOverview
+  latestEdit {
+    ...UserLatestEdit
+  }
+  ...UserAdminOn
+  preferences {
+    ...UserPreferences
+  }
+  deviceTokens {
+    ...DeviceToken
+  }
+}
+
+fragment UserAdminScopes on User {
+  scopeGrants {
+    id
+    permissionId
+    area {
+      ...Area
+    }
+    service {
+      ...UserScopeService
+    }
+    studyYear {
+      ...StudyYear
+    }
+  }
+}
+
+fragment UserAdminOn on User {
+  scopeGrants {
+    id
+    permissionId
+    area {
+      ...Area
+    }
+    areaAllowExport
+    areaAllowEdit
+    areaAdminOnUsers
+    service {
+      ...UserScopeService
+      studyYearFrom {
+        ...StudyYear
+      }
+      studyYearTo {
+        ...StudyYear
+      }
+    }
+    studyYear {
+      ...StudyYear
+    }
+    serviceGender
+    serviceAllowExport
+    serviceAllowEdit
+    serviceAllowRecordAttendance
+    serviceAllowRecordServantsAttendance
+    serviceAdminOnUsers
+    serviceWriteRelatedFamilies
+    group {
+      ...UserScopeGroup
+    }
+    groupAllowExport
+    groupAllowEdit
+    groupAllowRecordAttendance
+    groupAllowRecordServantsAttendance
+    groupAdminOnUsers
+    groupWriteRelatedFamilies
+  }
+}
+
+fragment UserScopeService on Service {
+  id
+  name
+  color
+  userCanEdit
+  photoUpdatedAt
+  blurhash
+}
+
+fragment UserScopeGroup on Group {
+  id
+  name
+  color
+  userCanEdit
+  photoUpdatedAt
+  blurhash
+}
+
+fragment UserPerson on Person {
+  id
+  name
+  color
+  userCanEdit
+  photoUpdatedAt
+  blurhash
+  dataCheck {
+    ...UserPersonDataCheck
+  }
+  latestKodas {
+    ...UserPersonLatestKodas
+  }
+  latestConfession {
+    ...UserPersonLatestConfession
+  }
+}
+
+fragment UserPersonDataCheck on DataCheck {
+  id
+  familyId
+  isComplete
+  completenessPercent
+  familyCheck
+  addressCheck
+  userOverride
+  details
+}
+
+fragment UserPersonLatestKodas on LatestKodas {
+  id
+  time
+  user {
+    ...User
+  }
+}
+
+fragment UserPersonLatestConfession on LatestConfession {
+  id
+  time
+  user {
+    ...User
+  }
+}
+
+fragment UserLatestEdit on LatestEdit {
+  id
+  time
+  user {
+    ...User
+  }
+}

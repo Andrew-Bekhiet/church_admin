@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/users_preferences/__generated__/fragments.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/users_preferences/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/users_preferences/__generated__/mutations.graphql.dart';
 import 'package:graphql/client.dart';
 
 class UserPreferencesDAO {
@@ -8,23 +7,32 @@ class UserPreferencesDAO {
   DBGraphQLClient get graphQLClient => _db.graphQLClient;
   UserPreferencesDAO({required this._db});
 
-  Future<Fragment_UserPreferences?> updatePreferences({
-    required String uid,
-    Input_UsersPreferencesSetInput? set,
-    Input_UsersPreferencesAppendInput? append,
+  /// Writes the signed-in user's preferences. [scalars] are set as given, a
+  /// null value included; a patch merges into its stored map, and a null
+  /// value inside it removes that key. An empty patch leaves the map alone.
+  Future<UserPreferences> updatePreferences({
+    Json scalars = const {},
+    Json orderByPatch = const {},
+    Json secondLinePatch = const {},
   }) {
-    return graphQLClient.mutateAndReturnParsedNullable(
+    const document = documentNodeMutationupdateMyPreferences;
+
+    return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationupdateUserPreferences,
-        operationName: 'updateUserPreferences',
-        variables: Variables_Mutation_updateUserPreferences(
-          uid: uid.toUuid(),
-          $set: set,
-          append: append,
+        document: document,
+        operationName: 'updateMyPreferences',
+        variables: Variables_Mutation_updateMyPreferences(
+          input: Input_UpdateMyPreferencesInput.fromJson({
+            ...scalars,
+            if (orderByPatch.isNotEmpty)
+              'orderByPreferencesPatch': orderByPatch,
+            if (secondLinePatch.isNotEmpty)
+              'secondLinePreferencesPatch': secondLinePatch,
+          }),
         ).toJson(),
-        parserFn: (json) => Mutation_updateUserPreferences.fromJson(
-          json,
-        ).updateUsersPreferencesByPk,
+        parserFn: AshResultParser(
+          document,
+        ).mutationResult(UserPreferences.fromJson),
       ),
     );
   }

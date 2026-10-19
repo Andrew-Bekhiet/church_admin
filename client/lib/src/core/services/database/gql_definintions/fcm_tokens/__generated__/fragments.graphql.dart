@@ -1,28 +1,33 @@
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
-class Fragment_FcmToken {
-  Fragment_FcmToken({
+class Fragment_DeviceToken {
+  Fragment_DeviceToken({
+    required this.id,
     required this.uid,
     required this.token,
     required this.createdAt,
-    this.$__typename = 'UsersFcmTokens',
+    this.$__typename = 'DeviceToken',
   });
 
-  factory Fragment_FcmToken.fromJson(Map<String, dynamic> json) {
+  factory Fragment_DeviceToken.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$uid = json['uid'];
     final l$token = json['token'];
     final l$createdAt = json['createdAt'];
     final l$$__typename = json['__typename'];
-    return Fragment_FcmToken(
-      uid: stringToUuid(l$uid),
+    return Fragment_DeviceToken(
+      id: (l$id as String),
+      uid: (l$uid as String),
       token: (l$token as String),
       createdAt: tstzFromString(l$createdAt),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final UuidValue uid;
+  final String id;
+
+  final String uid;
 
   final String token;
 
@@ -32,8 +37,10 @@ class Fragment_FcmToken {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
     final l$uid = uid;
-    _resultData['uid'] = uuidToString(l$uid);
+    _resultData['uid'] = l$uid;
     final l$token = token;
     _resultData['token'] = l$token;
     final l$createdAt = createdAt;
@@ -45,11 +52,12 @@ class Fragment_FcmToken {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$uid = uid;
     final l$token = token;
     final l$createdAt = createdAt;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$uid, l$token, l$createdAt, l$$__typename]);
+    return Object.hashAll([l$id, l$uid, l$token, l$createdAt, l$$__typename]);
   }
 
   @override
@@ -57,7 +65,12 @@ class Fragment_FcmToken {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Fragment_FcmToken || runtimeType != other.runtimeType) {
+    if (other is! Fragment_DeviceToken || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$uid = uid;
@@ -84,48 +97,49 @@ class Fragment_FcmToken {
   }
 }
 
-extension UtilityExtension_Fragment_FcmToken on Fragment_FcmToken {
-  CopyWith_Fragment_FcmToken<Fragment_FcmToken> get copyWith =>
-      CopyWith_Fragment_FcmToken(this, (i) => i);
+extension UtilityExtension_Fragment_DeviceToken on Fragment_DeviceToken {
+  CopyWith_Fragment_DeviceToken<Fragment_DeviceToken> get copyWith =>
+      CopyWith_Fragment_DeviceToken(this, (i) => i);
 }
 
-abstract class CopyWith_Fragment_FcmToken<TRes> {
-  factory CopyWith_Fragment_FcmToken(
-    Fragment_FcmToken instance,
-    TRes Function(Fragment_FcmToken) then,
-  ) = _CopyWithImpl_Fragment_FcmToken;
+abstract class CopyWith_Fragment_DeviceToken<TRes> {
+  factory CopyWith_Fragment_DeviceToken(
+    Fragment_DeviceToken instance,
+    TRes Function(Fragment_DeviceToken) then,
+  ) = _CopyWithImpl_Fragment_DeviceToken;
 
-  factory CopyWith_Fragment_FcmToken.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_FcmToken;
+  factory CopyWith_Fragment_DeviceToken.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_DeviceToken;
 
   TRes call({
-    UuidValue? uid,
+    String? id,
+    String? uid,
     String? token,
     DateTime? createdAt,
     String? $__typename,
   });
 }
 
-class _CopyWithImpl_Fragment_FcmToken<TRes>
-    implements CopyWith_Fragment_FcmToken<TRes> {
-  _CopyWithImpl_Fragment_FcmToken(this._instance, this._then);
+class _CopyWithImpl_Fragment_DeviceToken<TRes>
+    implements CopyWith_Fragment_DeviceToken<TRes> {
+  _CopyWithImpl_Fragment_DeviceToken(this._instance, this._then);
 
-  final Fragment_FcmToken _instance;
+  final Fragment_DeviceToken _instance;
 
-  final TRes Function(Fragment_FcmToken) _then;
+  final TRes Function(Fragment_DeviceToken) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? uid = _undefined,
     Object? token = _undefined,
     Object? createdAt = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
-    Fragment_FcmToken(
-      uid: uid == _undefined || uid == null
-          ? _instance.uid
-          : (uid as UuidValue),
+    Fragment_DeviceToken(
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      uid: uid == _undefined || uid == null ? _instance.uid : (uid as String),
       token: token == _undefined || token == null
           ? _instance.token
           : (token as String),
@@ -139,31 +153,36 @@ class _CopyWithImpl_Fragment_FcmToken<TRes>
   );
 }
 
-class _CopyWithStubImpl_Fragment_FcmToken<TRes>
-    implements CopyWith_Fragment_FcmToken<TRes> {
-  _CopyWithStubImpl_Fragment_FcmToken(this._res);
+class _CopyWithStubImpl_Fragment_DeviceToken<TRes>
+    implements CopyWith_Fragment_DeviceToken<TRes> {
+  _CopyWithStubImpl_Fragment_DeviceToken(this._res);
 
   TRes _res;
 
   call({
-    UuidValue? uid,
+    String? id,
+    String? uid,
     String? token,
     DateTime? createdAt,
     String? $__typename,
   }) => _res;
 }
 
-const fragmentDefinitionFcmToken = FragmentDefinitionNode(
-  name: NameNode(value: 'FcmToken'),
+const fragmentDefinitionDeviceToken = FragmentDefinitionNode(
+  name: NameNode(value: 'DeviceToken'),
   typeCondition: TypeConditionNode(
-    on: NamedTypeNode(
-      name: NameNode(value: 'UsersFcmTokens'),
-      isNonNull: false,
-    ),
+    on: NamedTypeNode(name: NameNode(value: 'DeviceToken'), isNonNull: false),
   ),
   directives: [],
   selectionSet: SelectionSetNode(
     selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
       FieldNode(
         name: NameNode(value: 'uid'),
         alias: null,
@@ -195,6 +214,6 @@ const fragmentDefinitionFcmToken = FragmentDefinitionNode(
     ],
   ),
 );
-const documentNodeFragmentFcmToken = DocumentNode(
-  definitions: [fragmentDefinitionFcmToken],
+const documentNodeFragmentDeviceToken = DocumentNode(
+  definitions: [fragmentDefinitionDeviceToken],
 );

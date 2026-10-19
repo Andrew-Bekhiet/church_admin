@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/invitations/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/invitations/__generated__/mutations.graphql.dart';
 import 'package:graphql/client.dart';
 
 class InvitationsDAO {
@@ -12,35 +12,39 @@ class InvitationsDAO {
   Future<Invitation> createInvitation({
     required String userUid,
     required DateTime expiresAt,
-  }) async {
-    final result = await graphQLClient.mutateAndReturnParsed(
+  }) {
+    const document = documentNodeMutationcreateInvitation;
+
+    return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationinsertInvitation,
-        operationName: 'insertInvitation',
-        variables: Variables_Mutation_insertInvitation(
-          userUid: userUid.toUuid(),
-          expiresAt: expiresAt,
+        document: document,
+        operationName: 'createInvitation',
+        variables: Variables_Mutation_createInvitation(
+          input: Input_CreateInvitationInput(
+            userUid: userUid,
+            expiresAt: expiresAt,
+          ),
         ).toJson(),
-        parserFn: Mutation_insertInvitation.fromJson,
+        parserFn: AshResultParser(document).mutationResult(Invitation.fromJson),
       ),
     );
-
-    return Invitation.fromJson(result.insertAuthInvitationsOne!.toJson());
   }
 
   Future<void> updateInvitationExpiry({
     required String id,
     required DateTime expiresAt,
   }) async {
+    const document = documentNodeMutationupdateInvitationExpiry;
+
     await graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationupdateInvitationExpiry,
+        document: document,
         operationName: 'updateInvitationExpiry',
         variables: Variables_Mutation_updateInvitationExpiry(
-          id: id.toUuid(),
-          expiresAt: expiresAt,
+          id: id,
+          input: Input_UpdateInvitationExpiryInput(expiresAt: expiresAt),
         ).toJson(),
-        parserFn: Mutation_updateInvitationExpiry.fromJson,
+        parserFn: AshResultParser(document).mutationResult(Invitation.fromJson),
       ),
     );
   }

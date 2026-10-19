@@ -1,4 +1,4 @@
-fragment Invitation on AuthInvitations {
+fragment Invitation on Invitation {
   id
   userUid
   code
