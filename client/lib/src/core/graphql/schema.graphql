@@ -5,6 +5,7 @@ schema {
 enum ServiceMembershipSortField {
   PERSON_ID
   SERVICE_ID
+  IS_OUTSIDE_SERVICE_STUDY_YEARS
 }
 
 "A keyset page of :service_membership"
@@ -20,6 +21,19 @@ type KeysetPageOfServiceMembership {
 
   "The last keyset in the results"
   endKeyset: String
+}
+
+input ServiceMembershipFilterIsOutsideServiceStudyYears {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
 }
 
 input ServiceMembershipFilterServiceId {
@@ -56,6 +70,7 @@ input ServiceMembershipFilterInput {
   serviceId: ServiceMembershipFilterServiceId
   person: PersonFilterInput
   service: ServiceFilterInput
+  isOutsideServiceStudyYears: ServiceMembershipFilterIsOutsideServiceStudyYears
 }
 
 input ServiceMembershipSortInput {
@@ -68,6 +83,7 @@ type ServiceMembership {
   serviceId: ID!
   person: Person
   service: Service
+  isOutsideServiceStudyYears: Boolean!
 }
 
 enum FamilyContactSortField {
@@ -512,7 +528,33 @@ enum PersonSortField {
   MARTIAL_STATUS
   SERVING_CHURCH_ID
   SERVICE_TYPE
+  BIRTHDAY
   USER_CAN_EDIT
+  LAST_CONFESSION_DAY
+  LAST_KODAS_DAY
+  LAST_ATTENDED_AT
+  LAST_VISIT_AT
+  MAIN_PHONE
+  LAST_EDIT
+  LAST_CALL
+  FAMILY_NAME
+  USER_NAME
+  STORE_NAME
+  CHURCH_NAME
+  SERVING_CHURCH_NAME
+  COLLEGE_NAME
+  SCHOOL_NAME
+  FATHER_NAME
+  JOB_NAME
+  QUALIFICATION_NAME
+  STATE_NAME
+  PERSON_TYPE_ORDER
+  SHAMMAS_LEVEL_ORDER
+  STUDY_YEAR_ORDER
+  ADDRESS_AREA_NAME
+  ADDRESS_STREET_NAME
+  ADDRESS_DISTRICT_NAME
+  ADDRESS_FULL_ADDRESS_TEXT
 }
 
 "A keyset page of :person"
@@ -541,6 +583,429 @@ input PersonFilterUserCanEdit {
   greaterThanOrEqual: Boolean
   isDistinctFrom: Boolean
   isNotDistinctFrom: Boolean
+}
+
+input PersonFilterBirthday {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterAddressFullAddressText {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterAddressDistrictName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterAddressStreetName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterAddressAreaName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterStudyYearOrder {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input PersonFilterShammasLevelOrder {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input PersonFilterPersonTypeOrder {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input PersonFilterStateName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterQualificationName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterJobName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterFatherName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterSchoolName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterCollegeName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterServingChurchName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterChurchName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterStoreName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterFamilyName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterLastCall {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input PersonFilterLastEdit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input PersonFilterMainPhone {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterLastVisitAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input PersonFilterLastAttendedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input PersonFilterLastKodasDay {
+  isNil: Boolean
+  eq: Date
+  notEq: Date
+  in: [Date]
+  lessThan: Date
+  greaterThan: Date
+  lessThanOrEqual: Date
+  greaterThanOrEqual: Date
+  isDistinctFrom: Date
+  isNotDistinctFrom: Date
+}
+
+input PersonFilterLastConfessionDay {
+  isNil: Boolean
+  eq: Date
+  notEq: Date
+  in: [Date]
+  lessThan: Date
+  greaterThan: Date
+  lessThanOrEqual: Date
+  greaterThanOrEqual: Date
+  isDistinctFrom: Date
+  isNotDistinctFrom: Date
 }
 
 input PersonFilterServiceType {
@@ -988,19 +1453,68 @@ input PersonFilterInput {
   martialStatus: PersonFilterMartialStatus
   servingChurchId: PersonFilterServingChurchId
   serviceType: PersonFilterServiceType
+  church: ChurchFilterInput
+  college: CollegeFilterInput
   family: FamilyFilterInput
+  father: FatherFilterInput
+  job: JobFilterInput
+  personType: PersonTypeFilterInput
+  qualification: QualificationFilterInput
+  school: SchoolFilterInput
+  servingChurch: ChurchFilterInput
+  shammasLevel: ShammasLevelFilterInput
+  state: PersonStateFilterInput
+  store: StoreFilterInput
+  studyYear: StudyYearFilterInput
   user: UserFilterInput
   address: AddressFilterInput
   dataCheck: DataCheckFilterInput
   mainContact: MainContactFilterInput
+  latestCall: LatestCallFilterInput
+  latestConfession: LatestConfessionFilterInput
+  latestKodas: LatestKodasFilterInput
+  latestEdit: LatestEditFilterInput
+  edits: EditFilterInput
+  latestVisit: LatestVisitFilterInput
+  visits: VisitFilterInput
   contacts: ContactFilterInput
   familyContacts: FamilyContactFilterInput
+  searchablePhones: FamilyContactFilterInput
   attendanceRecords: AttendanceRecordFilterInput
+  calls: CallFilterInput
+  confessions: ConfessionFilterInput
+  kodases: KodasFilterInput
   classMemberships: ClassMembershipFilterInput
   groupMemberships: GroupMembershipFilterInput
   serviceMemberships: ServiceMembershipFilterInput
   hobbies: HobbyFilterInput
   tags: TagFilterInput
+  lastConfessionDay: PersonFilterLastConfessionDay
+  lastKodasDay: PersonFilterLastKodasDay
+  lastAttendedAt: PersonFilterLastAttendedAt
+  lastVisitAt: PersonFilterLastVisitAt
+  mainPhone: PersonFilterMainPhone
+  lastEdit: PersonFilterLastEdit
+  lastCall: PersonFilterLastCall
+  familyName: PersonFilterFamilyName
+  userName: PersonFilterUserName
+  storeName: PersonFilterStoreName
+  churchName: PersonFilterChurchName
+  servingChurchName: PersonFilterServingChurchName
+  collegeName: PersonFilterCollegeName
+  schoolName: PersonFilterSchoolName
+  fatherName: PersonFilterFatherName
+  jobName: PersonFilterJobName
+  qualificationName: PersonFilterQualificationName
+  stateName: PersonFilterStateName
+  personTypeOrder: PersonFilterPersonTypeOrder
+  shammasLevelOrder: PersonFilterShammasLevelOrder
+  studyYearOrder: PersonFilterStudyYearOrder
+  addressAreaName: PersonFilterAddressAreaName
+  addressStreetName: PersonFilterAddressStreetName
+  addressDistrictName: PersonFilterAddressDistrictName
+  addressFullAddressText: PersonFilterAddressFullAddressText
+  birthday: PersonFilterBirthday
   userCanEdit: PersonFilterUserCanEdit
 }
 
@@ -1039,11 +1553,54 @@ type Person {
   martialStatus: String!
   servingChurchId: ID
   serviceType: String
+  church: Church
+  college: College
   family: Family
+  father: Father
+  job: Job
+  personType: PersonType
+  qualification: Qualification
+  school: School
+  servingChurch: Church
+  shammasLevel: ShammasLevel
+  state: PersonState
+  store: Store
+  studyYear: StudyYear
   user: User
   address: Address
   dataCheck: DataCheck
   mainContact: MainContact
+  latestCall: LatestCall
+  latestConfession: LatestConfession
+  latestKodas: LatestKodas
+  latestEdit: LatestEdit
+  edits(
+    "How to sort the records in the response"
+    sort: [EditSortInput]
+
+    "A filter to limit the results"
+    filter: EditFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Edit!]!
+  latestVisit: LatestVisit
+  visits(
+    "How to sort the records in the response"
+    sort: [VisitSortInput]
+
+    "A filter to limit the results"
+    filter: VisitFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Visit!]!
   contacts(
     "How to sort the records in the response"
     sort: [ContactSortInput]
@@ -1070,6 +1627,19 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [FamilyContact!]!
+  searchablePhones(
+    "How to sort the records in the response"
+    sort: [FamilyContactSortInput]
+
+    "A filter to limit the results"
+    filter: FamilyContactFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [FamilyContact!]!
   attendanceRecords(
     "How to sort the records in the response"
     sort: [AttendanceRecordSortInput]
@@ -1083,6 +1653,45 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [AttendanceRecord!]!
+  calls(
+    "How to sort the records in the response"
+    sort: [CallSortInput]
+
+    "A filter to limit the results"
+    filter: CallFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Call!]!
+  confessions(
+    "How to sort the records in the response"
+    sort: [ConfessionSortInput]
+
+    "A filter to limit the results"
+    filter: ConfessionFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Confession!]!
+  kodases(
+    "How to sort the records in the response"
+    sort: [KodasSortInput]
+
+    "A filter to limit the results"
+    filter: KodasFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Kodas!]!
   classMemberships(
     "How to sort the records in the response"
     sort: [ClassMembershipSortInput]
@@ -1148,6 +1757,32 @@ type Person {
     "The number of records to skip."
     offset: Int
   ): [Tag!]!
+  lastConfessionDay: Date
+  lastKodasDay: Date
+  lastAttendedAt: DateTime
+  lastVisitAt: DateTime
+  mainPhone: String
+  lastEdit: DateTime
+  lastCall: DateTime
+  familyName: String
+  userName: String
+  storeName: String
+  churchName: String
+  servingChurchName: String
+  collegeName: String
+  schoolName: String
+  fatherName: String
+  jobName: String
+  qualificationName: String
+  stateName: String
+  personTypeOrder: Int
+  shammasLevelOrder: Int
+  studyYearOrder: Int
+  addressAreaName: String
+  addressStreetName: String
+  addressDistrictName: String
+  addressFullAddressText: String
+  birthday: String
   userCanEdit: Boolean!
 }
 
@@ -1449,6 +2084,14 @@ enum FamilySortField {
   MARRIAGE_DATE
   CHURCH_ID
   USER_CAN_EDIT
+  LAST_EDIT
+  LAST_VISIT
+  LAST_FATHER_VISIT
+  CHURCH_NAME
+  ADDRESS_AREA_NAME
+  ADDRESS_STREET_NAME
+  ADDRESS_DISTRICT_NAME
+  ADDRESS_FULL_ADDRESS_TEXT
 }
 
 "A keyset page of :family"
@@ -1477,6 +2120,135 @@ input FamilyFilterUserCanEdit {
   greaterThanOrEqual: Boolean
   isDistinctFrom: Boolean
   isNotDistinctFrom: Boolean
+}
+
+input FamilyFilterAddressFullAddressText {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input FamilyFilterAddressDistrictName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input FamilyFilterAddressStreetName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input FamilyFilterAddressAreaName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input FamilyFilterChurchName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input FamilyFilterLastFatherVisit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input FamilyFilterLastVisit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input FamilyFilterLastEdit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
 }
 
 input FamilyFilterChurchId {
@@ -1648,12 +2420,27 @@ input FamilyFilterInput {
   deceasedSpouseName: FamilyFilterDeceasedSpouseName
   marriageDate: FamilyFilterMarriageDate
   churchId: FamilyFilterChurchId
+  church: ChurchFilterInput
   address: AddressFilterInput
   dataCheck: DataCheckFilterInput
+  latestEdit: LatestEditFilterInput
+  edits: EditFilterInput
+  latestVisit: LatestVisitFilterInput
+  visits: VisitFilterInput
+  latestFatherVisit: LatestFatherVisitFilterInput
   children: FamilyFilterInput
   parents: FamilyFilterInput
+  contacts: FamilyContactFilterInput
   unclaimedContacts: ContactFilterInput
   persons: PersonFilterInput
+  lastEdit: FamilyFilterLastEdit
+  lastVisit: FamilyFilterLastVisit
+  lastFatherVisit: FamilyFilterLastFatherVisit
+  churchName: FamilyFilterChurchName
+  addressAreaName: FamilyFilterAddressAreaName
+  addressStreetName: FamilyFilterAddressStreetName
+  addressDistrictName: FamilyFilterAddressDistrictName
+  addressFullAddressText: FamilyFilterAddressFullAddressText
   userCanEdit: FamilyFilterUserCanEdit
 }
 
@@ -1673,8 +2460,38 @@ type Family {
   deceasedSpouseName: String
   marriageDate: Date
   churchId: ID
+  church: Church
   address: Address
   dataCheck: DataCheck
+  latestEdit: LatestEdit
+  edits(
+    "How to sort the records in the response"
+    sort: [EditSortInput]
+
+    "A filter to limit the results"
+    filter: EditFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Edit!]!
+  latestVisit: LatestVisit
+  visits(
+    "How to sort the records in the response"
+    sort: [VisitSortInput]
+
+    "A filter to limit the results"
+    filter: VisitFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Visit!]!
+  latestFatherVisit: LatestFatherVisit
   children(
     "How to sort the records in the response"
     sort: [FamilySortInput]
@@ -1701,6 +2518,19 @@ type Family {
     "The number of records to skip."
     offset: Int
   ): [Family!]!
+  contacts(
+    "How to sort the records in the response"
+    sort: [FamilyContactSortInput]
+
+    "A filter to limit the results"
+    filter: FamilyContactFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [FamilyContact!]!
   unclaimedContacts(
     "How to sort the records in the response"
     sort: [ContactSortInput]
@@ -1727,6 +2557,14 @@ type Family {
     "The number of records to skip."
     offset: Int
   ): [Person!]!
+  lastEdit: DateTime
+  lastVisit: DateTime
+  lastFatherVisit: DateTime
+  churchName: String
+  addressAreaName: String
+  addressStreetName: String
+  addressDistrictName: String
+  addressFullAddressText: String
   userCanEdit: Boolean!
 }
 
@@ -2015,6 +2853,8 @@ enum ServiceSortField {
   DEFAULT_MEETING_ID
   USER_CAN_EDIT
   NEXT_SERVICE_NAME
+  DEFAULT_MEETING_NAME
+  LAST_EDIT
   STUDY_YEAR_FROM_ORDER
   STUDY_YEAR_TO_ORDER
 }
@@ -2071,6 +2911,37 @@ input ServiceFilterStudyYearFromOrder {
   greaterThanOrEqual: Int
   isDistinctFrom: Int
   isNotDistinctFrom: Int
+}
+
+input ServiceFilterLastEdit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input ServiceFilterDefaultMeetingName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input ServiceFilterNextServiceName {
@@ -2233,6 +3104,8 @@ input ServiceFilterInput {
   defaultMeetingId: ServiceFilterDefaultMeetingId
   defaultMeeting: MeetingFilterInput
   nextService: ServiceFilterInput
+  studyYearFrom: StudyYearFilterInput
+  studyYearTo: StudyYearFilterInput
   classes: ClassFilterInput
   groups: GroupFilterInput
   meetings: MeetingFilterInput
@@ -2240,6 +3113,8 @@ input ServiceFilterInput {
   admins: UserFilterInput
   latestEdit: LatestEditFilterInput
   nextServiceName: ServiceFilterNextServiceName
+  defaultMeetingName: ServiceFilterDefaultMeetingName
+  lastEdit: ServiceFilterLastEdit
   studyYearFromOrder: ServiceFilterStudyYearFromOrder
   studyYearToOrder: ServiceFilterStudyYearToOrder
   userCanEdit: ServiceFilterUserCanEdit
@@ -2262,6 +3137,8 @@ type Service {
   defaultMeetingId: ID
   defaultMeeting: Meeting
   nextService: Service
+  studyYearFrom: StudyYear
+  studyYearTo: StudyYear
   classes(
     "How to sort the records in the response"
     sort: [ClassSortInput]
@@ -2329,6 +3206,8 @@ type Service {
   ): [User!]!
   latestEdit: LatestEdit
   nextServiceName: String
+  defaultMeetingName: String
+  lastEdit: DateTime
   studyYearFromOrder: Int
   studyYearToOrder: Int
   userCanEdit: Boolean!
@@ -2345,6 +3224,8 @@ enum GroupSortField {
   DEFAULT_MEETING_ID
   USER_CAN_EDIT
   SERVICE_NAME
+  DEFAULT_MEETING_NAME
+  LAST_EDIT
 }
 
 "A keyset page of :group"
@@ -2373,6 +3254,37 @@ input GroupFilterUserCanEdit {
   greaterThanOrEqual: Boolean
   isDistinctFrom: Boolean
   isNotDistinctFrom: Boolean
+}
+
+input GroupFilterLastEdit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input GroupFilterDefaultMeetingName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input GroupFilterServiceName {
@@ -2526,6 +3438,8 @@ input GroupFilterInput {
   admins: UserFilterInput
   latestEdit: LatestEditFilterInput
   serviceName: GroupFilterServiceName
+  defaultMeetingName: GroupFilterDefaultMeetingName
+  lastEdit: GroupFilterLastEdit
   userCanEdit: GroupFilterUserCanEdit
 }
 
@@ -2586,6 +3500,8 @@ type Group {
   ): [User!]!
   latestEdit: LatestEdit
   serviceName: String
+  defaultMeetingName: String
+  lastEdit: DateTime
   userCanEdit: Boolean!
 }
 
@@ -2601,6 +3517,7 @@ enum ClassSortField {
   SERVICE_STUDY_YEAR_TO
   USER_CAN_EDIT
   SERVICE_NAME
+  LAST_EDIT
   STUDY_YEAR_FROM_ORDER
   STUDY_YEAR_TO_ORDER
 }
@@ -2657,6 +3574,19 @@ input ClassFilterStudyYearFromOrder {
   greaterThanOrEqual: Int
   isDistinctFrom: Int
   isNotDistinctFrom: Int
+}
+
+input ClassFilterLastEdit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
 }
 
 input ClassFilterServiceName {
@@ -2818,11 +3748,14 @@ input ClassFilterInput {
   blurhash: ClassFilterBlurhash
   serviceStudyYearTo: ClassFilterServiceStudyYearTo
   service: ServiceFilterInput
+  studyYearFrom: StudyYearFilterInput
+  studyYearTo: StudyYearFilterInput
   classMemberships: ClassMembershipFilterInput
   meetings: MeetingFilterInput
   latestEdit: LatestEditFilterInput
   admins: UserFilterInput
   serviceName: ClassFilterServiceName
+  lastEdit: ClassFilterLastEdit
   studyYearFromOrder: ClassFilterStudyYearFromOrder
   studyYearToOrder: ClassFilterStudyYearToOrder
   userCanEdit: ClassFilterUserCanEdit
@@ -2844,6 +3777,8 @@ type Class {
   blurhash: String
   serviceStudyYearTo: Int!
   service: Service
+  studyYearFrom: StudyYear
+  studyYearTo: StudyYear
   classMemberships(
     "How to sort the records in the response"
     sort: [ClassMembershipSortInput]
@@ -2885,6 +3820,7 @@ type Class {
     offset: Int
   ): [User!]!
   serviceName: String
+  lastEdit: DateTime
   studyYearFromOrder: Int
   studyYearToOrder: Int
   userCanEdit: Boolean!
@@ -2900,6 +3836,8 @@ enum StreetSortField {
   USER_CAN_EDIT
   WITHIN_POLYGON
   WITHIN_DISTANCE
+  LAST_EDIT
+  LAST_VISIT
 }
 
 "A keyset page of :street"
@@ -2965,6 +3903,32 @@ input StreetFilterUserCanEdit {
   greaterThanOrEqual: Boolean
   isDistinctFrom: Boolean
   isNotDistinctFrom: Boolean
+}
+
+input StreetFilterLastVisit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input StreetFilterLastEdit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
 }
 
 input StreetFilterBlurhash {
@@ -3072,6 +4036,8 @@ input StreetFilterInput {
   edits: EditFilterInput
   latestVisit: LatestVisitFilterInput
   visits: VisitFilterInput
+  lastEdit: StreetFilterLastEdit
+  lastVisit: StreetFilterLastVisit
   userCanEdit: StreetFilterUserCanEdit
   withinPolygon: StreetFilterWithinPolygon
   withinDistance: StreetFilterWithinDistance
@@ -3158,6 +4124,8 @@ type Street {
     "The number of records to skip."
     offset: Int
   ): [Visit!]!
+  lastEdit: DateTime
+  lastVisit: DateTime
   userCanEdit: Boolean!
   withinPolygon(polygon: Json!): Boolean
   withinDistance(from: Json!, meters: Float!): Boolean
@@ -3175,6 +4143,9 @@ enum StoreSortField {
   ADDRESS_AREA_NAME
   ADDRESS_STREET_NAME
   ADDRESS_DISTRICT_NAME
+  ADDRESS_FULL_ADDRESS_TEXT
+  ADMIN_FAMILY_NAME
+  LAST_EDIT
 }
 
 "A keyset page of :store"
@@ -3221,6 +4192,55 @@ input StoreFilterUserCanEdit {
   greaterThanOrEqual: Boolean
   isDistinctFrom: Boolean
   isNotDistinctFrom: Boolean
+}
+
+input StoreFilterLastEdit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input StoreFilterAdminFamilyName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input StoreFilterAddressFullAddressText {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input StoreFilterAddressDistrictName {
@@ -3384,6 +4404,9 @@ input StoreFilterInput {
   addressAreaName: StoreFilterAddressAreaName
   addressStreetName: StoreFilterAddressStreetName
   addressDistrictName: StoreFilterAddressDistrictName
+  addressFullAddressText: StoreFilterAddressFullAddressText
+  adminFamilyName: StoreFilterAdminFamilyName
+  lastEdit: StoreFilterLastEdit
   userCanEdit: StoreFilterUserCanEdit
   withinPolygon: StoreFilterWithinPolygon
 }
@@ -3434,6 +4457,9 @@ type Store {
   addressAreaName: String
   addressStreetName: String
   addressDistrictName: String
+  addressFullAddressText: String
+  adminFamilyName: String
+  lastEdit: DateTime
   userCanEdit: Boolean!
   withinPolygon(polygon: Json!): Boolean
 }
@@ -3605,6 +4631,8 @@ enum AreaSortField {
   USER_CAN_EDIT
   WITHIN_POLYGON
   CONTAINS_POINT
+  LAST_EDIT
+  LAST_VISIT
 }
 
 "A keyset page of :area"
@@ -3669,6 +4697,32 @@ input AreaFilterUserCanEdit {
   greaterThanOrEqual: Boolean
   isDistinctFrom: Boolean
   isNotDistinctFrom: Boolean
+}
+
+input AreaFilterLastVisit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input AreaFilterLastEdit {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
 }
 
 input AreaFilterBlurhash {
@@ -3775,6 +4829,10 @@ input AreaFilterInput {
   admins: UserFilterInput
   latestEdit: LatestEditFilterInput
   edits: EditFilterInput
+  latestVisit: LatestVisitFilterInput
+  visits: VisitFilterInput
+  lastEdit: AreaFilterLastEdit
+  lastVisit: AreaFilterLastVisit
   userCanEdit: AreaFilterUserCanEdit
   withinPolygon: AreaFilterWithinPolygon
   containsPoint: AreaFilterContainsPoint
@@ -3860,6 +4918,22 @@ type Area {
     "The number of records to skip."
     offset: Int
   ): [Edit!]!
+  latestVisit: LatestVisit
+  visits(
+    "How to sort the records in the response"
+    sort: [VisitSortInput]
+
+    "A filter to limit the results"
+    filter: VisitFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Visit!]!
+  lastEdit: DateTime
+  lastVisit: DateTime
   userCanEdit: Boolean!
   withinPolygon(polygon: Json!): Boolean
   containsPoint(point: Json!): Boolean
@@ -3880,6 +4954,7 @@ enum AddressSortField {
   FAMILY_ID
   STORE_ID
   HOUSE_CODE
+  FULL_ADDRESS_TEXT
   WITHIN_POLYGON
 }
 
@@ -3914,6 +4989,24 @@ input AddressFilterWithinPolygon {
   greaterThanOrEqual: Boolean
   isDistinctFrom: Boolean
   isNotDistinctFrom: Boolean
+}
+
+input AddressFilterFullAddressText {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input AddressFilterHouseCode {
@@ -4141,6 +5234,7 @@ input AddressFilterInput {
   family: FamilyFilterInput
   store: StoreFilterInput
   street: StreetFilterInput
+  fullAddressText: AddressFilterFullAddressText
   withinPolygon: AddressFilterWithinPolygon
 }
 
@@ -4170,6 +5264,7 @@ type Address {
   family: Family
   store: Store
   street: Street
+  fullAddressText: String
   withinPolygon(polygon: Json!): Boolean
 }
 
