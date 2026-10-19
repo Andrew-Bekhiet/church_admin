@@ -41,4 +41,22 @@ defmodule ChurchAdminWeb.FileTokenTest do
       assert FileToken.verify(bad) == {:error, :invalid}
     end
   end
+
+  for {op, minutes} <- [export: 10, photo_upload: 5, photo_download: 5, app_download: 20] do
+    test "a #{op} token lasts #{minutes} minutes" do
+      {fresh, expires_at} =
+        FileToken.issue(unquote(op), @uid, %{},
+          signed_at: System.system_time(:second) - (unquote(minutes) - 1) * 60
+        )
+
+      {stale, _expires_at} =
+        FileToken.issue(unquote(op), @uid, %{},
+          signed_at: System.system_time(:second) - (unquote(minutes) + 1) * 60
+        )
+
+      assert {:ok, %{op: unquote(op)}} = FileToken.verify(fresh)
+      assert FileToken.verify(stale) == {:error, :expired}
+      assert DateTime.diff(expires_at, DateTime.utc_now(), :second) in 55..65
+    end
+  end
 end
