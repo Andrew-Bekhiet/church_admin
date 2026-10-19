@@ -57,8 +57,10 @@ defmodule ChurchAdminWeb.Graphql.OrganizationAttendanceMutationsTest do
 
     assert %{"result" => result, "errors" => []} = response["data"]["createService"]
     assert result["name"] == "Graph service"
+
     assert %{"name" => "Graph meeting", "audience" => "ONLY_PERSONS", "serviceId" => service_id} =
              result["defaultMeeting"]
+
     assert service_id == result["id"]
   end
 
