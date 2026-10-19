@@ -26,7 +26,7 @@ db_port="${EQUIVALENCE_DB_PORT:-55502}"
 hasura_port="${EQUIVALENCE_HASURA_PORT:-55580}"
 secret=church-admin-ash-equivalence
 work_dir="$(mktemp -d)"
-project=church-admin-ash-equivalence
+project="${EQUIVALENCE_PROJECT:-church-admin-ash-equivalence}"
 
 compose() {
   HASURA_DIR="$work_dir/server/hasura" EQUIVALENCE_DB_PORT="$db_port" \
