@@ -52,8 +52,21 @@ defmodule ChurchAdmin.Dev.SeedLoadTest do
 
           assert Session.count!(
                    session,
-                   "select count(*) from public.persons_services ps " <>
-                     "where public.persons_service_is_outside_service_study_years(ps)"
+                   """
+                   select count(*) from public.persons_services ps
+                   where not exists (
+                     select 1
+                     from public.persons p
+                     join public.services s on s.id = ps.service_id
+                     where p.id = ps.person_id
+                       and (
+                         p.study_year_id is null
+                         or (s.study_year_from_id is null and s.study_year_to_id is null)
+                         or s.study_year_from_id <= p.study_year_id
+                            and s.study_year_to_id >= p.study_year_id
+                       )
+                   )
+                   """
                  ) == spec.persons_outside_service_range
 
           assert Session.count!(
