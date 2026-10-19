@@ -132943,6 +132943,181 @@ class _CopyWithStubImpl_Input_AttendanceRecordSortInput<TRes>
   call({Enum_SortOrder? order, Enum_AttendanceRecordSortField? field}) => _res;
 }
 
+class Input_RecordVisitInput {
+  factory Input_RecordVisitInput({
+    required String recordId,
+    DateTime? time,
+    bool? isFatherVisit,
+    required Enum_VisitSubject subject,
+  }) => Input_RecordVisitInput._({
+    r'recordId': recordId,
+    if (time != null) r'time': time,
+    if (isFatherVisit != null) r'isFatherVisit': isFatherVisit,
+    r'subject': subject,
+  });
+
+  Input_RecordVisitInput._(this._$data);
+
+  factory Input_RecordVisitInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$recordId = data['recordId'];
+    result$data['recordId'] = (l$recordId as String);
+    if (data.containsKey('time')) {
+      final l$time = data['time'];
+      result$data['time'] = l$time == null ? null : tstzFromString(l$time);
+    }
+    if (data.containsKey('isFatherVisit')) {
+      final l$isFatherVisit = data['isFatherVisit'];
+      result$data['isFatherVisit'] = (l$isFatherVisit as bool?);
+    }
+    final l$subject = data['subject'];
+    result$data['subject'] = fromJson_Enum_VisitSubject((l$subject as String));
+    return Input_RecordVisitInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get recordId => (_$data['recordId'] as String);
+
+  DateTime? get time => (_$data['time'] as DateTime?);
+
+  bool? get isFatherVisit => (_$data['isFatherVisit'] as bool?);
+
+  Enum_VisitSubject get subject => (_$data['subject'] as Enum_VisitSubject);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$recordId = recordId;
+    result$data['recordId'] = l$recordId;
+    if (_$data.containsKey('time')) {
+      final l$time = time;
+      result$data['time'] = l$time == null ? null : tstzToString(l$time);
+    }
+    if (_$data.containsKey('isFatherVisit')) {
+      final l$isFatherVisit = isFatherVisit;
+      result$data['isFatherVisit'] = l$isFatherVisit;
+    }
+    final l$subject = subject;
+    result$data['subject'] = toJson_Enum_VisitSubject(l$subject);
+    return result$data;
+  }
+
+  CopyWith_Input_RecordVisitInput<Input_RecordVisitInput> get copyWith =>
+      CopyWith_Input_RecordVisitInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_RecordVisitInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (l$recordId != lOther$recordId) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
+      return false;
+    }
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$isFatherVisit = isFatherVisit;
+    final lOther$isFatherVisit = other.isFatherVisit;
+    if (_$data.containsKey('isFatherVisit') !=
+        other._$data.containsKey('isFatherVisit')) {
+      return false;
+    }
+    if (l$isFatherVisit != lOther$isFatherVisit) {
+      return false;
+    }
+    final l$subject = subject;
+    final lOther$subject = other.subject;
+    if (l$subject != lOther$subject) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$recordId = recordId;
+    final l$time = time;
+    final l$isFatherVisit = isFatherVisit;
+    final l$subject = subject;
+    return Object.hashAll([
+      l$recordId,
+      _$data.containsKey('time') ? l$time : const {},
+      _$data.containsKey('isFatherVisit') ? l$isFatherVisit : const {},
+      l$subject,
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_RecordVisitInput<TRes> {
+  factory CopyWith_Input_RecordVisitInput(
+    Input_RecordVisitInput instance,
+    TRes Function(Input_RecordVisitInput) then,
+  ) = _CopyWithImpl_Input_RecordVisitInput;
+
+  factory CopyWith_Input_RecordVisitInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_RecordVisitInput;
+
+  TRes call({
+    String? recordId,
+    DateTime? time,
+    bool? isFatherVisit,
+    Enum_VisitSubject? subject,
+  });
+}
+
+class _CopyWithImpl_Input_RecordVisitInput<TRes>
+    implements CopyWith_Input_RecordVisitInput<TRes> {
+  _CopyWithImpl_Input_RecordVisitInput(this._instance, this._then);
+
+  final Input_RecordVisitInput _instance;
+
+  final TRes Function(Input_RecordVisitInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? recordId = _undefined,
+    Object? time = _undefined,
+    Object? isFatherVisit = _undefined,
+    Object? subject = _undefined,
+  }) => _then(
+    Input_RecordVisitInput._({
+      ..._instance._$data,
+      if (recordId != _undefined && recordId != null)
+        'recordId': (recordId as String),
+      if (time != _undefined) 'time': (time as DateTime?),
+      if (isFatherVisit != _undefined)
+        'isFatherVisit': (isFatherVisit as bool?),
+      if (subject != _undefined && subject != null)
+        'subject': (subject as Enum_VisitSubject),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_RecordVisitInput<TRes>
+    implements CopyWith_Input_RecordVisitInput<TRes> {
+  _CopyWithStubImpl_Input_RecordVisitInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? recordId,
+    DateTime? time,
+    bool? isFatherVisit,
+    Enum_VisitSubject? subject,
+  }) => _res;
+}
+
 class Input_VisitFilterIsFatherVisit {
   factory Input_VisitFilterIsFatherVisit({
     bool? isNil,
@@ -149210,6 +149385,111 @@ class _CopyWithStubImpl_Input_LatestCallSortInput<TRes>
   call({Enum_SortOrder? order, Enum_LatestCallSortField? field}) => _res;
 }
 
+class Input_RecordKodasInput {
+  factory Input_RecordKodasInput({
+    required String personId,
+    required DateTime day,
+  }) => Input_RecordKodasInput._({r'personId': personId, r'day': day});
+
+  Input_RecordKodasInput._(this._$data);
+
+  factory Input_RecordKodasInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$personId = data['personId'];
+    result$data['personId'] = (l$personId as String);
+    final l$day = data['day'];
+    result$data['day'] = dateFromString(l$day);
+    return Input_RecordKodasInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get personId => (_$data['personId'] as String);
+
+  DateTime get day => (_$data['day'] as DateTime);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$personId = personId;
+    result$data['personId'] = l$personId;
+    final l$day = day;
+    result$data['day'] = dateToString(l$day);
+    return result$data;
+  }
+
+  CopyWith_Input_RecordKodasInput<Input_RecordKodasInput> get copyWith =>
+      CopyWith_Input_RecordKodasInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_RecordKodasInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$personId = personId;
+    final l$day = day;
+    return Object.hashAll([l$personId, l$day]);
+  }
+}
+
+abstract class CopyWith_Input_RecordKodasInput<TRes> {
+  factory CopyWith_Input_RecordKodasInput(
+    Input_RecordKodasInput instance,
+    TRes Function(Input_RecordKodasInput) then,
+  ) = _CopyWithImpl_Input_RecordKodasInput;
+
+  factory CopyWith_Input_RecordKodasInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_RecordKodasInput;
+
+  TRes call({String? personId, DateTime? day});
+}
+
+class _CopyWithImpl_Input_RecordKodasInput<TRes>
+    implements CopyWith_Input_RecordKodasInput<TRes> {
+  _CopyWithImpl_Input_RecordKodasInput(this._instance, this._then);
+
+  final Input_RecordKodasInput _instance;
+
+  final TRes Function(Input_RecordKodasInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? personId = _undefined, Object? day = _undefined}) => _then(
+    Input_RecordKodasInput._({
+      ..._instance._$data,
+      if (personId != _undefined && personId != null)
+        'personId': (personId as String),
+      if (day != _undefined && day != null) 'day': (day as DateTime),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_RecordKodasInput<TRes>
+    implements CopyWith_Input_RecordKodasInput<TRes> {
+  _CopyWithStubImpl_Input_RecordKodasInput(this._res);
+
+  TRes _res;
+
+  call({String? personId, DateTime? day}) => _res;
+}
+
 class Input_KodasFilterTime {
   factory Input_KodasFilterTime({
     bool? isNil,
@@ -154102,6 +154382,112 @@ class _CopyWithStubImpl_Input_EditSortInput<TRes>
   call({Enum_SortOrder? order, Enum_EditSortField? field}) => _res;
 }
 
+class Input_RecordConfessionInput {
+  factory Input_RecordConfessionInput({
+    required String personId,
+    required DateTime day,
+  }) => Input_RecordConfessionInput._({r'personId': personId, r'day': day});
+
+  Input_RecordConfessionInput._(this._$data);
+
+  factory Input_RecordConfessionInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$personId = data['personId'];
+    result$data['personId'] = (l$personId as String);
+    final l$day = data['day'];
+    result$data['day'] = dateFromString(l$day);
+    return Input_RecordConfessionInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get personId => (_$data['personId'] as String);
+
+  DateTime get day => (_$data['day'] as DateTime);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$personId = personId;
+    result$data['personId'] = l$personId;
+    final l$day = day;
+    result$data['day'] = dateToString(l$day);
+    return result$data;
+  }
+
+  CopyWith_Input_RecordConfessionInput<Input_RecordConfessionInput>
+  get copyWith => CopyWith_Input_RecordConfessionInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_RecordConfessionInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$personId = personId;
+    final l$day = day;
+    return Object.hashAll([l$personId, l$day]);
+  }
+}
+
+abstract class CopyWith_Input_RecordConfessionInput<TRes> {
+  factory CopyWith_Input_RecordConfessionInput(
+    Input_RecordConfessionInput instance,
+    TRes Function(Input_RecordConfessionInput) then,
+  ) = _CopyWithImpl_Input_RecordConfessionInput;
+
+  factory CopyWith_Input_RecordConfessionInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_RecordConfessionInput;
+
+  TRes call({String? personId, DateTime? day});
+}
+
+class _CopyWithImpl_Input_RecordConfessionInput<TRes>
+    implements CopyWith_Input_RecordConfessionInput<TRes> {
+  _CopyWithImpl_Input_RecordConfessionInput(this._instance, this._then);
+
+  final Input_RecordConfessionInput _instance;
+
+  final TRes Function(Input_RecordConfessionInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? personId = _undefined, Object? day = _undefined}) => _then(
+    Input_RecordConfessionInput._({
+      ..._instance._$data,
+      if (personId != _undefined && personId != null)
+        'personId': (personId as String),
+      if (day != _undefined && day != null) 'day': (day as DateTime),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_RecordConfessionInput<TRes>
+    implements CopyWith_Input_RecordConfessionInput<TRes> {
+  _CopyWithStubImpl_Input_RecordConfessionInput(this._res);
+
+  TRes _res;
+
+  call({String? personId, DateTime? day}) => _res;
+}
+
 class Input_ConfessionFilterTime {
   factory Input_ConfessionFilterTime({
     bool? isNil,
@@ -156781,6 +157167,123 @@ class _CopyWithStubImpl_Input_ConfessionSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_ConfessionSortField? field}) => _res;
+}
+
+class Input_RecordCallInput {
+  factory Input_RecordCallInput({DateTime? time, required String personId}) =>
+      Input_RecordCallInput._({
+        if (time != null) r'time': time,
+        r'personId': personId,
+      });
+
+  Input_RecordCallInput._(this._$data);
+
+  factory Input_RecordCallInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('time')) {
+      final l$time = data['time'];
+      result$data['time'] = l$time == null ? null : tstzFromString(l$time);
+    }
+    final l$personId = data['personId'];
+    result$data['personId'] = (l$personId as String);
+    return Input_RecordCallInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  DateTime? get time => (_$data['time'] as DateTime?);
+
+  String get personId => (_$data['personId'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('time')) {
+      final l$time = time;
+      result$data['time'] = l$time == null ? null : tstzToString(l$time);
+    }
+    final l$personId = personId;
+    result$data['personId'] = l$personId;
+    return result$data;
+  }
+
+  CopyWith_Input_RecordCallInput<Input_RecordCallInput> get copyWith =>
+      CopyWith_Input_RecordCallInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_RecordCallInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
+      return false;
+    }
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$time = time;
+    final l$personId = personId;
+    return Object.hashAll([
+      _$data.containsKey('time') ? l$time : const {},
+      l$personId,
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_RecordCallInput<TRes> {
+  factory CopyWith_Input_RecordCallInput(
+    Input_RecordCallInput instance,
+    TRes Function(Input_RecordCallInput) then,
+  ) = _CopyWithImpl_Input_RecordCallInput;
+
+  factory CopyWith_Input_RecordCallInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_RecordCallInput;
+
+  TRes call({DateTime? time, String? personId});
+}
+
+class _CopyWithImpl_Input_RecordCallInput<TRes>
+    implements CopyWith_Input_RecordCallInput<TRes> {
+  _CopyWithImpl_Input_RecordCallInput(this._instance, this._then);
+
+  final Input_RecordCallInput _instance;
+
+  final TRes Function(Input_RecordCallInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? time = _undefined, Object? personId = _undefined}) =>
+      _then(
+        Input_RecordCallInput._({
+          ..._instance._$data,
+          if (time != _undefined) 'time': (time as DateTime?),
+          if (personId != _undefined && personId != null)
+            'personId': (personId as String),
+        }),
+      );
+}
+
+class _CopyWithStubImpl_Input_RecordCallInput<TRes>
+    implements CopyWith_Input_RecordCallInput<TRes> {
+  _CopyWithStubImpl_Input_RecordCallInput(this._res);
+
+  TRes _res;
+
+  call({DateTime? time, String? personId}) => _res;
 }
 
 class Input_CallFilterRecordedBy {
@@ -207724,6 +208227,49 @@ class _CopyWithStubImpl_Input_DataCheckSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_DataCheckSortField? field}) => _res;
+}
+
+enum Enum_VisitSubject {
+  AREAS,
+  FAMILIES,
+  PERSONS,
+  STREETS,
+  $unknown;
+
+  factory Enum_VisitSubject.fromJson(String value) =>
+      fromJson_Enum_VisitSubject(value);
+
+  String toJson() => toJson_Enum_VisitSubject(this);
+}
+
+String toJson_Enum_VisitSubject(Enum_VisitSubject e) {
+  switch (e) {
+    case Enum_VisitSubject.AREAS:
+      return r'AREAS';
+    case Enum_VisitSubject.FAMILIES:
+      return r'FAMILIES';
+    case Enum_VisitSubject.PERSONS:
+      return r'PERSONS';
+    case Enum_VisitSubject.STREETS:
+      return r'STREETS';
+    case Enum_VisitSubject.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_VisitSubject fromJson_Enum_VisitSubject(String value) {
+  switch (value) {
+    case r'AREAS':
+      return Enum_VisitSubject.AREAS;
+    case r'FAMILIES':
+      return Enum_VisitSubject.FAMILIES;
+    case r'PERSONS':
+      return Enum_VisitSubject.PERSONS;
+    case r'STREETS':
+      return Enum_VisitSubject.STREETS;
+    default:
+      return Enum_VisitSubject.$unknown;
+  }
 }
 
 enum Enum_ServiceMembershipSortField {
