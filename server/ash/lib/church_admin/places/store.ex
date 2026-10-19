@@ -123,5 +123,8 @@ defmodule ChurchAdmin.Places.Store do
     first :address_area_name, [:address, :area], :name, public?: true
     first :address_street_name, [:address, :street], :name, public?: true
     first :address_district_name, [:address, :district], :name, public?: true
+    first :address_full_address_text, :address, :full_address_text, public?: true
+    first :admin_family_name, :admin_family, :name, public?: true
+    first :last_edit, :latest_edit, :time, public?: true
   end
 end

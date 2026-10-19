@@ -134,4 +134,9 @@ defmodule ChurchAdmin.Places.Street do
       public? true
     end
   end
+
+  aggregates do
+    first :last_edit, :latest_edit, :time, public?: true
+    first :last_visit, :latest_visit, :time, public?: true
+  end
 end

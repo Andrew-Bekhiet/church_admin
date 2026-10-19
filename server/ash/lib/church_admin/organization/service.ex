@@ -26,7 +26,9 @@ defmodule ChurchAdmin.Organization.Service do
       :admins,
       :latest_edit,
       :meetings,
-      :default_meeting
+      :default_meeting,
+      :study_year_from,
+      :study_year_to
     ]
 
     queries do
@@ -165,6 +167,8 @@ defmodule ChurchAdmin.Organization.Service do
 
   aggregates do
     first :next_service_name, :next_service, :name, public?: true
+    first :default_meeting_name, :default_meeting, :name, public?: true
+    first :last_edit, :latest_edit, :time, public?: true
     first :study_year_from_order, :study_year_from, :order, public?: true
     first :study_year_to_order, :study_year_to, :order, public?: true
   end

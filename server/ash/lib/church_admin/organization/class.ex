@@ -18,7 +18,15 @@ defmodule ChurchAdmin.Organization.Class do
   graphql do
     type :class
 
-    relationships [:service, :class_memberships, :admins, :latest_edit, :meetings]
+    relationships [
+      :service,
+      :class_memberships,
+      :admins,
+      :latest_edit,
+      :meetings,
+      :study_year_from,
+      :study_year_to
+    ]
 
     queries do
       get :class, :read
@@ -158,6 +166,7 @@ defmodule ChurchAdmin.Organization.Class do
 
   aggregates do
     first :service_name, :service, :name, public?: true
+    first :last_edit, :latest_edit, :time, public?: true
     first :study_year_from_order, :study_year_from, :order, public?: true
     first :study_year_to_order, :study_year_to, :order, public?: true
   end

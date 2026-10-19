@@ -6,7 +6,7 @@ defmodule ChurchAdmin.Places.Area do
     fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.{ScopeGrant, User}
-  alias ChurchAdmin.Activity.{Edit, LatestEdit}
+  alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Places.Calculations.IntersectsGeography
@@ -16,7 +16,16 @@ defmodule ChurchAdmin.Places.Area do
   graphql do
     type :area
 
-    relationships [:addresses, :area_streets, :streets, :admins, :latest_edit, :edits]
+    relationships [
+      :addresses,
+      :area_streets,
+      :streets,
+      :admins,
+      :latest_edit,
+      :edits,
+      :latest_visit,
+      :visits
+    ]
 
     queries do
       get :area, :read
@@ -105,6 +114,16 @@ defmodule ChurchAdmin.Places.Area do
       destination_attribute: :record_id,
       filter: expr(table == "areas"),
       public?: true
+
+    has_one :latest_visit, LatestVisit,
+      destination_attribute: :record_id,
+      filter: expr(table == "areas"),
+      public?: true
+
+    has_many :visits, Visit,
+      destination_attribute: :record_id,
+      filter: expr(table == "areas"),
+      public?: true
   end
 
   calculations do
@@ -125,5 +144,10 @@ defmodule ChurchAdmin.Places.Area do
       argument :point, Geography, allow_nil?: false
       public? true
     end
+  end
+
+  aggregates do
+    first :last_edit, :latest_edit, :time, public?: true
+    first :last_visit, :latest_visit, :time, public?: true
   end
 end
