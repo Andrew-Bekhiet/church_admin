@@ -1,7 +1,9 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../gql/__generated__/fragments.graphql.dart';
+import '../../persons/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
 
+import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Mutation_recordVisit {
@@ -688,6 +690,27 @@ const documentNodeMutationrecordCall = DocumentNode(
                         directives: [],
                       ),
                       FieldNode(
+                        name: NameNode(value: 'person'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(
+                          selections: [
+                            FragmentSpreadNode(
+                              name: NameNode(value: 'Person'),
+                              directives: [],
+                            ),
+                            FieldNode(
+                              name: NameNode(value: '__typename'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                          ],
+                        ),
+                      ),
+                      FieldNode(
                         name: NameNode(value: '__typename'),
                         alias: null,
                         arguments: [],
@@ -719,6 +742,9 @@ const documentNodeMutationrecordCall = DocumentNode(
     ),
     fragmentDefinitionCall,
     fragmentDefinitionUser,
+    fragmentDefinitionPerson,
+    fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionPersonDataCheck,
   ],
 );
 
@@ -734,12 +760,14 @@ class Mutation_recordCall_recordCall {
     return Mutation_recordCall_recordCall(
       result: l$result == null
           ? null
-          : Fragment_Call.fromJson((l$result as Map<String, dynamic>)),
+          : Mutation_recordCall_recordCall_result.fromJson(
+              (l$result as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment_Call? result;
+  final Mutation_recordCall_recordCall_result? result;
 
   final String $__typename;
 
@@ -797,8 +825,11 @@ abstract class CopyWith_Mutation_recordCall_recordCall<TRes> {
   factory CopyWith_Mutation_recordCall_recordCall.stub(TRes res) =
       _CopyWithStubImpl_Mutation_recordCall_recordCall;
 
-  TRes call({Fragment_Call? result, String? $__typename});
-  CopyWith_Fragment_Call<TRes> get result;
+  TRes call({
+    Mutation_recordCall_recordCall_result? result,
+    String? $__typename,
+  });
+  CopyWith_Mutation_recordCall_recordCall_result<TRes> get result;
 }
 
 class _CopyWithImpl_Mutation_recordCall_recordCall<TRes>
@@ -816,18 +847,21 @@ class _CopyWithImpl_Mutation_recordCall_recordCall<TRes>
         Mutation_recordCall_recordCall(
           result: result == _undefined
               ? _instance.result
-              : (result as Fragment_Call?),
+              : (result as Mutation_recordCall_recordCall_result?),
           $__typename: $__typename == _undefined || $__typename == null
               ? _instance.$__typename
               : ($__typename as String),
         ),
       );
 
-  CopyWith_Fragment_Call<TRes> get result {
+  CopyWith_Mutation_recordCall_recordCall_result<TRes> get result {
     final local$result = _instance.result;
     return local$result == null
-        ? CopyWith_Fragment_Call.stub(_then(_instance))
-        : CopyWith_Fragment_Call(local$result, (e) => call(result: e));
+        ? CopyWith_Mutation_recordCall_recordCall_result.stub(_then(_instance))
+        : CopyWith_Mutation_recordCall_recordCall_result(
+            local$result,
+            (e) => call(result: e),
+          );
   }
 }
 
@@ -837,9 +871,239 @@ class _CopyWithStubImpl_Mutation_recordCall_recordCall<TRes>
 
   TRes _res;
 
-  call({Fragment_Call? result, String? $__typename}) => _res;
+  call({Mutation_recordCall_recordCall_result? result, String? $__typename}) =>
+      _res;
 
-  CopyWith_Fragment_Call<TRes> get result => CopyWith_Fragment_Call.stub(_res);
+  CopyWith_Mutation_recordCall_recordCall_result<TRes> get result =>
+      CopyWith_Mutation_recordCall_recordCall_result.stub(_res);
+}
+
+class Mutation_recordCall_recordCall_result implements Fragment_Call {
+  Mutation_recordCall_recordCall_result({
+    required this.id,
+    required this.time,
+    this.recordedBy,
+    this.user,
+    this.$__typename = 'Call',
+    this.person,
+  });
+
+  factory Mutation_recordCall_recordCall_result.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$id = json['id'];
+    final l$time = json['time'];
+    final l$recordedBy = json['recordedBy'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    final l$person = json['person'];
+    return Mutation_recordCall_recordCall_result(
+      id: (l$id as String),
+      time: tstzFromString(l$time),
+      recordedBy: (l$recordedBy as String?),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+      person: l$person == null
+          ? null
+          : Fragment_Person.fromJson((l$person as Map<String, dynamic>)),
+    );
+  }
+
+  final String id;
+
+  final DateTime time;
+
+  final String? recordedBy;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  final Fragment_Person? person;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$time = time;
+    _resultData['time'] = tstzToString(l$time);
+    final l$recordedBy = recordedBy;
+    _resultData['recordedBy'] = l$recordedBy;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$person = person;
+    _resultData['person'] = l$person?.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$time = time;
+    final l$recordedBy = recordedBy;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    final l$person = person;
+    return Object.hashAll([
+      l$id,
+      l$time,
+      l$recordedBy,
+      l$user,
+      l$$__typename,
+      l$person,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_recordCall_recordCall_result ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$person = person;
+    final lOther$person = other.person;
+    if (l$person != lOther$person) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_recordCall_recordCall_result
+    on Mutation_recordCall_recordCall_result {
+  CopyWith_Mutation_recordCall_recordCall_result<
+    Mutation_recordCall_recordCall_result
+  >
+  get copyWith =>
+      CopyWith_Mutation_recordCall_recordCall_result(this, (i) => i);
+}
+
+abstract class CopyWith_Mutation_recordCall_recordCall_result<TRes> {
+  factory CopyWith_Mutation_recordCall_recordCall_result(
+    Mutation_recordCall_recordCall_result instance,
+    TRes Function(Mutation_recordCall_recordCall_result) then,
+  ) = _CopyWithImpl_Mutation_recordCall_recordCall_result;
+
+  factory CopyWith_Mutation_recordCall_recordCall_result.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_recordCall_recordCall_result;
+
+  TRes call({
+    String? id,
+    DateTime? time,
+    String? recordedBy,
+    Fragment_User? user,
+    String? $__typename,
+    Fragment_Person? person,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+  CopyWith_Fragment_Person<TRes> get person;
+}
+
+class _CopyWithImpl_Mutation_recordCall_recordCall_result<TRes>
+    implements CopyWith_Mutation_recordCall_recordCall_result<TRes> {
+  _CopyWithImpl_Mutation_recordCall_recordCall_result(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_recordCall_recordCall_result _instance;
+
+  final TRes Function(Mutation_recordCall_recordCall_result) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? time = _undefined,
+    Object? recordedBy = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+    Object? person = _undefined,
+  }) => _then(
+    Mutation_recordCall_recordCall_result(
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      time: time == _undefined || time == null
+          ? _instance.time
+          : (time as DateTime),
+      recordedBy: recordedBy == _undefined
+          ? _instance.recordedBy
+          : (recordedBy as String?),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      person: person == _undefined
+          ? _instance.person
+          : (person as Fragment_Person?),
+    ),
+  );
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+
+  CopyWith_Fragment_Person<TRes> get person {
+    final local$person = _instance.person;
+    return local$person == null
+        ? CopyWith_Fragment_Person.stub(_then(_instance))
+        : CopyWith_Fragment_Person(local$person, (e) => call(person: e));
+  }
+}
+
+class _CopyWithStubImpl_Mutation_recordCall_recordCall_result<TRes>
+    implements CopyWith_Mutation_recordCall_recordCall_result<TRes> {
+  _CopyWithStubImpl_Mutation_recordCall_recordCall_result(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    DateTime? time,
+    String? recordedBy,
+    Fragment_User? user,
+    String? $__typename,
+    Fragment_Person? person,
+  }) => _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
+
+  CopyWith_Fragment_Person<TRes> get person =>
+      CopyWith_Fragment_Person.stub(_res);
 }
 
 class Variables_Mutation_recordConfession {
@@ -1123,6 +1387,27 @@ const documentNodeMutationrecordConfession = DocumentNode(
                         directives: [],
                       ),
                       FieldNode(
+                        name: NameNode(value: 'person'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(
+                          selections: [
+                            FragmentSpreadNode(
+                              name: NameNode(value: 'Person'),
+                              directives: [],
+                            ),
+                            FieldNode(
+                              name: NameNode(value: '__typename'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                          ],
+                        ),
+                      ),
+                      FieldNode(
                         name: NameNode(value: '__typename'),
                         alias: null,
                         arguments: [],
@@ -1154,6 +1439,9 @@ const documentNodeMutationrecordConfession = DocumentNode(
     ),
     fragmentDefinitionConfession,
     fragmentDefinitionUser,
+    fragmentDefinitionPerson,
+    fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionPersonDataCheck,
   ],
 );
 
@@ -1171,12 +1459,14 @@ class Mutation_recordConfession_recordConfession {
     return Mutation_recordConfession_recordConfession(
       result: l$result == null
           ? null
-          : Fragment_Confession.fromJson((l$result as Map<String, dynamic>)),
+          : Mutation_recordConfession_recordConfession_result.fromJson(
+              (l$result as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment_Confession? result;
+  final Mutation_recordConfession_recordConfession_result? result;
 
   final String $__typename;
 
@@ -1237,8 +1527,11 @@ abstract class CopyWith_Mutation_recordConfession_recordConfession<TRes> {
   factory CopyWith_Mutation_recordConfession_recordConfession.stub(TRes res) =
       _CopyWithStubImpl_Mutation_recordConfession_recordConfession;
 
-  TRes call({Fragment_Confession? result, String? $__typename});
-  CopyWith_Fragment_Confession<TRes> get result;
+  TRes call({
+    Mutation_recordConfession_recordConfession_result? result,
+    String? $__typename,
+  });
+  CopyWith_Mutation_recordConfession_recordConfession_result<TRes> get result;
 }
 
 class _CopyWithImpl_Mutation_recordConfession_recordConfession<TRes>
@@ -1259,18 +1552,23 @@ class _CopyWithImpl_Mutation_recordConfession_recordConfession<TRes>
         Mutation_recordConfession_recordConfession(
           result: result == _undefined
               ? _instance.result
-              : (result as Fragment_Confession?),
+              : (result as Mutation_recordConfession_recordConfession_result?),
           $__typename: $__typename == _undefined || $__typename == null
               ? _instance.$__typename
               : ($__typename as String),
         ),
       );
 
-  CopyWith_Fragment_Confession<TRes> get result {
+  CopyWith_Mutation_recordConfession_recordConfession_result<TRes> get result {
     final local$result = _instance.result;
     return local$result == null
-        ? CopyWith_Fragment_Confession.stub(_then(_instance))
-        : CopyWith_Fragment_Confession(local$result, (e) => call(result: e));
+        ? CopyWith_Mutation_recordConfession_recordConfession_result.stub(
+            _then(_instance),
+          )
+        : CopyWith_Mutation_recordConfession_recordConfession_result(
+            local$result,
+            (e) => call(result: e),
+          );
   }
 }
 
@@ -1280,10 +1578,249 @@ class _CopyWithStubImpl_Mutation_recordConfession_recordConfession<TRes>
 
   TRes _res;
 
-  call({Fragment_Confession? result, String? $__typename}) => _res;
+  call({
+    Mutation_recordConfession_recordConfession_result? result,
+    String? $__typename,
+  }) => _res;
 
-  CopyWith_Fragment_Confession<TRes> get result =>
-      CopyWith_Fragment_Confession.stub(_res);
+  CopyWith_Mutation_recordConfession_recordConfession_result<TRes> get result =>
+      CopyWith_Mutation_recordConfession_recordConfession_result.stub(_res);
+}
+
+class Mutation_recordConfession_recordConfession_result
+    implements Fragment_Confession {
+  Mutation_recordConfession_recordConfession_result({
+    required this.id,
+    this.time,
+    required this.recordedBy,
+    this.user,
+    this.$__typename = 'Confession',
+    this.person,
+  });
+
+  factory Mutation_recordConfession_recordConfession_result.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$id = json['id'];
+    final l$time = json['time'];
+    final l$recordedBy = json['recordedBy'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    final l$person = json['person'];
+    return Mutation_recordConfession_recordConfession_result(
+      id: (l$id as String),
+      time: l$time == null ? null : dateFromString(l$time),
+      recordedBy: (l$recordedBy as String),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+      person: l$person == null
+          ? null
+          : Fragment_Person.fromJson((l$person as Map<String, dynamic>)),
+    );
+  }
+
+  final String id;
+
+  final DateTime? time;
+
+  final String recordedBy;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  final Fragment_Person? person;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$time = time;
+    _resultData['time'] = l$time == null ? null : dateToString(l$time);
+    final l$recordedBy = recordedBy;
+    _resultData['recordedBy'] = l$recordedBy;
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$person = person;
+    _resultData['person'] = l$person?.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$time = time;
+    final l$recordedBy = recordedBy;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    final l$person = person;
+    return Object.hashAll([
+      l$id,
+      l$time,
+      l$recordedBy,
+      l$user,
+      l$$__typename,
+      l$person,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_recordConfession_recordConfession_result ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$person = person;
+    final lOther$person = other.person;
+    if (l$person != lOther$person) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_recordConfession_recordConfession_result
+    on Mutation_recordConfession_recordConfession_result {
+  CopyWith_Mutation_recordConfession_recordConfession_result<
+    Mutation_recordConfession_recordConfession_result
+  >
+  get copyWith => CopyWith_Mutation_recordConfession_recordConfession_result(
+    this,
+    (i) => i,
+  );
+}
+
+abstract class CopyWith_Mutation_recordConfession_recordConfession_result<
+  TRes
+> {
+  factory CopyWith_Mutation_recordConfession_recordConfession_result(
+    Mutation_recordConfession_recordConfession_result instance,
+    TRes Function(Mutation_recordConfession_recordConfession_result) then,
+  ) = _CopyWithImpl_Mutation_recordConfession_recordConfession_result;
+
+  factory CopyWith_Mutation_recordConfession_recordConfession_result.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_recordConfession_recordConfession_result;
+
+  TRes call({
+    String? id,
+    DateTime? time,
+    String? recordedBy,
+    Fragment_User? user,
+    String? $__typename,
+    Fragment_Person? person,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+  CopyWith_Fragment_Person<TRes> get person;
+}
+
+class _CopyWithImpl_Mutation_recordConfession_recordConfession_result<TRes>
+    implements
+        CopyWith_Mutation_recordConfession_recordConfession_result<TRes> {
+  _CopyWithImpl_Mutation_recordConfession_recordConfession_result(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_recordConfession_recordConfession_result _instance;
+
+  final TRes Function(Mutation_recordConfession_recordConfession_result) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? time = _undefined,
+    Object? recordedBy = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+    Object? person = _undefined,
+  }) => _then(
+    Mutation_recordConfession_recordConfession_result(
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      time: time == _undefined ? _instance.time : (time as DateTime?),
+      recordedBy: recordedBy == _undefined || recordedBy == null
+          ? _instance.recordedBy
+          : (recordedBy as String),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      person: person == _undefined
+          ? _instance.person
+          : (person as Fragment_Person?),
+    ),
+  );
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+
+  CopyWith_Fragment_Person<TRes> get person {
+    final local$person = _instance.person;
+    return local$person == null
+        ? CopyWith_Fragment_Person.stub(_then(_instance))
+        : CopyWith_Fragment_Person(local$person, (e) => call(person: e));
+  }
+}
+
+class _CopyWithStubImpl_Mutation_recordConfession_recordConfession_result<TRes>
+    implements
+        CopyWith_Mutation_recordConfession_recordConfession_result<TRes> {
+  _CopyWithStubImpl_Mutation_recordConfession_recordConfession_result(
+    this._res,
+  );
+
+  TRes _res;
+
+  call({
+    String? id,
+    DateTime? time,
+    String? recordedBy,
+    Fragment_User? user,
+    String? $__typename,
+    Fragment_Person? person,
+  }) => _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
+
+  CopyWith_Fragment_Person<TRes> get person =>
+      CopyWith_Fragment_Person.stub(_res);
 }
 
 class Variables_Mutation_recordKodas {

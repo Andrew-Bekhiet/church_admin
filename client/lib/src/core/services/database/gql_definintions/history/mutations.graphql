@@ -10,6 +10,9 @@ mutation recordCall($input: RecordCallInput!) {
   recordCall(input: $input) {
     result {
       ...Call
+      person {
+        ...Person
+      }
     }
   }
 }
@@ -18,6 +21,9 @@ mutation recordConfession($input: RecordConfessionInput!) {
   recordConfession(input: $input) {
     result {
       ...Confession
+      person {
+        ...Person
+      }
     }
   }
 }
