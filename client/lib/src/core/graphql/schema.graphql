@@ -980,6 +980,80 @@ type Family {
   userCanEdit: Boolean!
 }
 
+enum ClassMembershipSortField {
+  CLASS_ID
+  PERSON_ID
+}
+
+"A keyset page of :class_membership"
+type KeysetPageOfClassMembership {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [ClassMembership!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input ClassMembershipFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ClassMembershipFilterClassId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ClassMembershipFilterInput {
+  and: [ClassMembershipFilterInput!]
+  or: [ClassMembershipFilterInput!]
+  not: [ClassMembershipFilterInput!]
+  classId: ClassMembershipFilterClassId
+  personId: ClassMembershipFilterPersonId
+  class: ClassFilterInput
+  person: PersonFilterInput
+}
+
+input ClassMembershipSortInput {
+  order: SortOrder
+  field: ClassMembershipSortField!
+}
+
+type ClassMembership {
+  "A unique identifier"
+  id: ID!
+
+  classId: ID!
+
+  personId: ID!
+
+  class: Class
+
+  person: Person
+}
+
 enum SortOrder {
   DESC
   DESC_NULLS_FIRST
@@ -987,6 +1061,847 @@ enum SortOrder {
   ASC
   ASC_NULLS_FIRST
   ASC_NULLS_LAST
+}
+
+enum ServiceSortField {
+  ID
+  NAME
+  STUDY_YEAR_FROM_ID
+  STUDY_YEAR_TO_ID
+  NEXT_SERVICE_ID
+  COLOR
+  PHOTO_UPDATED_AT
+  BLURHASH
+  DEFAULT_MEETING_ID
+  USER_CAN_EDIT
+  NEXT_SERVICE_NAME
+  STUDY_YEAR_FROM_ORDER
+  STUDY_YEAR_TO_ORDER
+}
+
+"A keyset page of :service"
+type KeysetPageOfService {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Service!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input ServiceFilterUserCanEdit {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input ServiceFilterStudyYearToOrder {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input ServiceFilterStudyYearFromOrder {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input ServiceFilterNextServiceName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input ServiceFilterDefaultMeetingId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ServiceFilterBlurhash {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input ServiceFilterPhotoUpdatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input ServiceFilterColor {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input ServiceFilterNextServiceId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ServiceFilterStudyYearToId {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input ServiceFilterStudyYearFromId {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input ServiceFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input ServiceFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ServiceFilterInput {
+  and: [ServiceFilterInput!]
+  or: [ServiceFilterInput!]
+  not: [ServiceFilterInput!]
+  id: ServiceFilterId
+  name: ServiceFilterName
+  studyYearFromId: ServiceFilterStudyYearFromId
+  studyYearToId: ServiceFilterStudyYearToId
+  nextServiceId: ServiceFilterNextServiceId
+  color: ServiceFilterColor
+  photoUpdatedAt: ServiceFilterPhotoUpdatedAt
+  blurhash: ServiceFilterBlurhash
+  defaultMeetingId: ServiceFilterDefaultMeetingId
+  nextService: ServiceFilterInput
+  classes: ClassFilterInput
+  groups: GroupFilterInput
+  serviceMemberships: ServiceMembershipFilterInput
+  admins: UserFilterInput
+  latestEdit: LatestEditFilterInput
+  nextServiceName: ServiceFilterNextServiceName
+  studyYearFromOrder: ServiceFilterStudyYearFromOrder
+  studyYearToOrder: ServiceFilterStudyYearToOrder
+  userCanEdit: ServiceFilterUserCanEdit
+}
+
+input ServiceSortInput {
+  order: SortOrder
+  field: ServiceSortField!
+}
+
+type Service {
+  id: ID!
+  name: String!
+  studyYearFromId: Int
+  studyYearToId: Int
+  nextServiceId: ID
+  color: Int
+  photoUpdatedAt: DateTime
+  blurhash: String
+  defaultMeetingId: ID
+  nextService: Service
+  classes(
+    "How to sort the records in the response"
+    sort: [ClassSortInput]
+
+    "A filter to limit the results"
+    filter: ClassFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Class!]!
+  groups(
+    "How to sort the records in the response"
+    sort: [GroupSortInput]
+
+    "A filter to limit the results"
+    filter: GroupFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Group!]!
+  serviceMemberships(
+    "How to sort the records in the response"
+    sort: [ServiceMembershipSortInput]
+
+    "A filter to limit the results"
+    filter: ServiceMembershipFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [ServiceMembership!]!
+  admins(
+    "How to sort the records in the response"
+    sort: [UserSortInput]
+
+    "A filter to limit the results"
+    filter: UserFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [User!]!
+  latestEdit: LatestEdit
+  nextServiceName: String
+  studyYearFromOrder: Int
+  studyYearToOrder: Int
+  userCanEdit: Boolean!
+}
+
+enum GroupSortField {
+  ID
+  NAME
+  SERVICE_ID
+  VALIDITY
+  COLOR
+  PHOTO_UPDATED_AT
+  BLURHASH
+  DEFAULT_MEETING_ID
+  USER_CAN_EDIT
+  SERVICE_NAME
+}
+
+"A keyset page of :group"
+type KeysetPageOfGroup {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Group!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input GroupFilterUserCanEdit {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input GroupFilterServiceName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input GroupFilterDefaultMeetingId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input GroupFilterBlurhash {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input GroupFilterPhotoUpdatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input GroupFilterColor {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input GroupFilterValidity {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+}
+
+input GroupFilterServiceId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input GroupFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input GroupFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input GroupFilterInput {
+  and: [GroupFilterInput!]
+  or: [GroupFilterInput!]
+  not: [GroupFilterInput!]
+  id: GroupFilterId
+  name: GroupFilterName
+  serviceId: GroupFilterServiceId
+  validity: GroupFilterValidity
+  color: GroupFilterColor
+  photoUpdatedAt: GroupFilterPhotoUpdatedAt
+  blurhash: GroupFilterBlurhash
+  defaultMeetingId: GroupFilterDefaultMeetingId
+  service: ServiceFilterInput
+  groupMemberships: GroupMembershipFilterInput
+  admins: UserFilterInput
+  latestEdit: LatestEditFilterInput
+  serviceName: GroupFilterServiceName
+  userCanEdit: GroupFilterUserCanEdit
+}
+
+input GroupSortInput {
+  order: SortOrder
+  field: GroupSortField!
+}
+
+type Group {
+  id: ID!
+  name: String!
+  serviceId: ID!
+  validity: String
+  color: Int
+  photoUpdatedAt: DateTime
+  blurhash: String
+  defaultMeetingId: ID
+  service: Service
+  groupMemberships(
+    "How to sort the records in the response"
+    sort: [GroupMembershipSortInput]
+
+    "A filter to limit the results"
+    filter: GroupMembershipFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [GroupMembership!]!
+  admins(
+    "How to sort the records in the response"
+    sort: [UserSortInput]
+
+    "A filter to limit the results"
+    filter: UserFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [User!]!
+  latestEdit: LatestEdit
+  serviceName: String
+  userCanEdit: Boolean!
+}
+
+enum ClassSortField {
+  ID
+  NAME
+  SERVICE_ID
+  SERVICE_STUDY_YEAR
+  SERVICE_GENDER
+  COLOR
+  PHOTO_UPDATED_AT
+  BLURHASH
+  SERVICE_STUDY_YEAR_TO
+  USER_CAN_EDIT
+  SERVICE_NAME
+  STUDY_YEAR_FROM_ORDER
+  STUDY_YEAR_TO_ORDER
+}
+
+"A keyset page of :class"
+type KeysetPageOfClass {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Class!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input ClassFilterUserCanEdit {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input ClassFilterStudyYearToOrder {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input ClassFilterStudyYearFromOrder {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input ClassFilterServiceName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input ClassFilterServiceStudyYearTo {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int!]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input ClassFilterBlurhash {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input ClassFilterPhotoUpdatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input ClassFilterColor {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input ClassFilterServiceGender {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input ClassFilterServiceStudyYear {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int!]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input ClassFilterServiceId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ClassFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input ClassFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ClassFilterInput {
+  and: [ClassFilterInput!]
+  or: [ClassFilterInput!]
+  not: [ClassFilterInput!]
+  id: ClassFilterId
+  name: ClassFilterName
+  serviceId: ClassFilterServiceId
+  serviceStudyYear: ClassFilterServiceStudyYear
+  serviceGender: ClassFilterServiceGender
+  color: ClassFilterColor
+  photoUpdatedAt: ClassFilterPhotoUpdatedAt
+  blurhash: ClassFilterBlurhash
+  serviceStudyYearTo: ClassFilterServiceStudyYearTo
+  service: ServiceFilterInput
+  classMemberships: ClassMembershipFilterInput
+  latestEdit: LatestEditFilterInput
+  admins: UserFilterInput
+  serviceName: ClassFilterServiceName
+  studyYearFromOrder: ClassFilterStudyYearFromOrder
+  studyYearToOrder: ClassFilterStudyYearToOrder
+  userCanEdit: ClassFilterUserCanEdit
+}
+
+input ClassSortInput {
+  order: SortOrder
+  field: ClassSortField!
+}
+
+type Class {
+  id: ID!
+  name: String!
+  serviceId: ID!
+  serviceStudyYear: Int!
+  serviceGender: Boolean
+  color: Int
+  photoUpdatedAt: DateTime
+  blurhash: String
+  serviceStudyYearTo: Int!
+  service: Service
+  classMemberships(
+    "How to sort the records in the response"
+    sort: [ClassMembershipSortInput]
+
+    "A filter to limit the results"
+    filter: ClassMembershipFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [ClassMembership!]!
+  latestEdit: LatestEdit
+  admins(
+    "How to sort the records in the response"
+    sort: [UserSortInput]
+
+    "A filter to limit the results"
+    filter: UserFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [User!]!
+  serviceName: String
+  studyYearFromOrder: Int
+  studyYearToOrder: Int
+  userCanEdit: Boolean!
 }
 
 enum AddressSortField {
@@ -1265,6 +2180,89 @@ type Address {
   storeId: ID
   houseCode: String
   family: Family
+}
+
+input LatestEditFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestEditFilterTime {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input LatestEditFilterRecordId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestEditFilterTable {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input LatestEditFilterInput {
+  and: [LatestEditFilterInput!]
+  or: [LatestEditFilterInput!]
+  not: [LatestEditFilterInput!]
+  table: LatestEditFilterTable
+  recordId: LatestEditFilterRecordId
+  time: LatestEditFilterTime
+  recordedBy: LatestEditFilterRecordedBy
+  user: UserFilterInput
+}
+
+type LatestEdit {
+  "A unique identifier"
+  id: ID!
+
+  table: String!
+
+  recordId: ID!
+
+  time: DateTime
+
+  recordedBy: ID
+
+  user: User
 }
 
 enum UserPermissionSortField {
@@ -2014,6 +3012,94 @@ type RootQueryType {
     "The number of records to return to the end. Maximum 100"
     last: Int
   ): KeysetPageOfAddress
+  class(
+    "The id of the record"
+    id: ID!
+  ): Class
+  classes(
+    "How to sort the records in the response"
+    sort: [ClassSortInput]
+
+    "A filter to limit the results"
+    filter: ClassFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfClass
+  group(
+    "The id of the record"
+    id: ID!
+  ): Group
+  groups(
+    "How to sort the records in the response"
+    sort: [GroupSortInput]
+
+    "A filter to limit the results"
+    filter: GroupFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfGroup
+  service(
+    "The id of the record"
+    id: ID!
+  ): Service
+  services(
+    "How to sort the records in the response"
+    sort: [ServiceSortInput]
+
+    "A filter to limit the results"
+    filter: ServiceFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfService
+  classMemberships(
+    "How to sort the records in the response"
+    sort: [ClassMembershipSortInput]
+
+    "A filter to limit the results"
+    filter: ClassMembershipFilterInput
+
+    "The number of records to return from the beginning. Maximum 100"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 100"
+    last: Int
+  ): KeysetPageOfClassMembership
   family(
     "The id of the record"
     id: ID!
