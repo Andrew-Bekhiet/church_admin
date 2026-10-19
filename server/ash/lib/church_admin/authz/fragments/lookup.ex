@@ -1,6 +1,6 @@
 defmodule ChurchAdmin.Authz.Fragments.Lookup do
   @moduledoc """
-  For Catalog lookup lists: any authenticated actor reads them (Hasura's
+  For Catalog lookup lists: any onboarded actor reads them (Hasura's
   `filter {}` for role `user`, which an unauthenticated request never gets), a
   user holding `approved` (raw, as Hasura's `&approved_user`) writes them. The
   resource adds its own `bypass ChurchAdmin.Authz.Checks.System` first.
@@ -8,11 +8,11 @@ defmodule ChurchAdmin.Authz.Fragments.Lookup do
 
   use Spark.Dsl.Fragment, of: Ash.Resource, authorizers: [Ash.Policy.Authorizer]
 
-  alias ChurchAdmin.Authz.Checks.HasPermission
+  alias ChurchAdmin.Authz.Checks.{HasPermission, Onboarded}
 
   policies do
     policy action_type(:read) do
-      authorize_if actor_present()
+      authorize_if Onboarded
     end
 
     policy action_type([:create, :update, :destroy]) do
