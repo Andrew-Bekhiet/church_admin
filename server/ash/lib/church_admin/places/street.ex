@@ -2,7 +2,7 @@ defmodule ChurchAdmin.Places.Street do
   use Ash.Resource,
     domain: ChurchAdmin.Places,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource],
+    extensions: [AshGraphql.Resource, AshArchival.Resource],
     fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.User
@@ -10,6 +10,8 @@ defmodule ChurchAdmin.Places.Street do
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Authz.Checks.{HasPermission, System}
+  alias ChurchAdmin.Changes.{InUseOnForeignKey, StampActor}
+  alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.Places.Calculations.{IntersectsGeography, NearGeography}
   alias ChurchAdmin.Places.Changes.ApplyStreetAreas
   alias ChurchAdmin.Places.{Address, Area, AreaStreet}
@@ -37,17 +39,25 @@ defmodule ChurchAdmin.Places.Street do
     mutations do
       create :create_street, :create_street
       update :update_street, :update_street
+      destroy :delete_street, :destroy
     end
   end
 
   postgres do
     table "streets"
     repo ChurchAdmin.Repo
+    foreign_key_names [{:addresses, "addresses_streets_fk"}]
     migration_types line: :"geography(LineString,4326)", color: :bigint
 
     references do
       reference :deleted_by_user, on_delete: :restrict, on_update: :restrict
     end
+  end
+
+  archive do
+    attribute :deleted_at
+    base_filter?(true)
+    exclude_destroy_actions([:hard_destroy])
   end
 
   actions do
@@ -81,6 +91,20 @@ defmodule ChurchAdmin.Places.Street do
       change ApplyStreetAreas
       change {RecordLastVisit, table: "streets"}
     end
+
+    destroy :destroy do
+      primary? true
+      require_atomic? false
+      change {StampActor, attribute: :deleted_by}
+    end
+
+    destroy :hard_destroy do
+      require_atomic? false
+    end
+  end
+
+  changes do
+    change {InUseOnForeignKey, code: Codes.street_in_use()}, on: [:destroy]
   end
 
   policies do
@@ -94,6 +118,18 @@ defmodule ChurchAdmin.Places.Street do
 
     policy action(:create_street) do
       authorize_if {HasPermission, name: "writeAllData"}
+    end
+
+    policy action(:destroy) do
+      authorize_if {HasPermission, name: "writeAllData"}
+    end
+
+    policy action(:destroy) do
+      authorize_if {HasPermission, name: "deleteData"}
+    end
+
+    policy action(:hard_destroy) do
+      forbid_if always()
     end
   end
 

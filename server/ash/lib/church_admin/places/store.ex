@@ -2,13 +2,14 @@ defmodule ChurchAdmin.Places.Store do
   use Ash.Resource,
     domain: ChurchAdmin.Places,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource],
+    extensions: [AshGraphql.Resource, AshArchival.Resource],
     fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
-  alias ChurchAdmin.Authz.Checks.{InScope, System}
+  alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, RelatedInScope, System}
+  alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Places.Address
   alias ChurchAdmin.Places.Calculations.IntersectsGeography
@@ -30,6 +31,7 @@ defmodule ChurchAdmin.Places.Store do
     mutations do
       create :create_store, :create_store
       update :update_store, :update_store
+      destroy :delete_store, :destroy
     end
   end
 
@@ -42,6 +44,12 @@ defmodule ChurchAdmin.Places.Store do
       reference :admin_family, on_delete: :nilify, on_update: :restrict
       reference :deleted_by_user, on_delete: :restrict, on_update: :restrict
     end
+  end
+
+  archive do
+    attribute :deleted_at
+    base_filter?(true)
+    exclude_destroy_actions([:hard_destroy])
   end
 
   actions do
@@ -75,6 +83,16 @@ defmodule ChurchAdmin.Places.Store do
 
       change {ApplyOwnerAddress, owner: :store_id}
     end
+
+    destroy :destroy do
+      primary? true
+      require_atomic? false
+      change {StampActor, attribute: :deleted_by}
+    end
+
+    destroy :hard_destroy do
+      require_atomic? false
+    end
   end
 
   policies do
@@ -88,6 +106,23 @@ defmodule ChurchAdmin.Places.Store do
 
     policy action(:create_store) do
       authorize_if {InScope, access: :edit}
+    end
+
+    policy action(:destroy) do
+      authorize_if {HasPermission, name: "deleteData"}
+    end
+
+    policy action(:destroy) do
+      authorize_if {InScope, access: :edit}
+    end
+
+    policy action(:destroy) do
+      authorize_if {RelatedInScope, path: :admin_family, entity: :family, access: :edit}
+      authorize_if actor_attribute_equals(:write_all?, true)
+    end
+
+    policy action(:hard_destroy) do
+      forbid_if always()
     end
   end
 

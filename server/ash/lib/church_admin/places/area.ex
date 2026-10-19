@@ -2,7 +2,7 @@ defmodule ChurchAdmin.Places.Area do
   use Ash.Resource,
     domain: ChurchAdmin.Places,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource],
+    extensions: [AshGraphql.Resource, AshArchival.Resource],
     fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.{ScopeGrant, User}
@@ -10,6 +10,8 @@ defmodule ChurchAdmin.Places.Area do
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Authz.Checks.{HasPermission, System}
+  alias ChurchAdmin.Changes.{InUseOnForeignKey, StampActor}
+  alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.Places.Calculations.IntersectsGeography
   alias ChurchAdmin.Places.{Address, AreaStreet, Street}
   alias ChurchAdmin.Types.{Geography, Text}
@@ -36,17 +38,25 @@ defmodule ChurchAdmin.Places.Area do
     mutations do
       create :create_area, :create_area
       update :update_area, :update_area
+      destroy :delete_area, :destroy
     end
   end
 
   postgres do
     table "areas"
     repo ChurchAdmin.Repo
+    foreign_key_names [{:addresses, "addresses_areas_fk"}]
     migration_types bounds: :"geography(Polygon,4326)", color: :bigint
 
     references do
       reference :deleted_by_user, on_delete: :restrict, on_update: :restrict
     end
+  end
+
+  archive do
+    attribute :deleted_at
+    base_filter?(true)
+    exclude_destroy_actions([:hard_destroy])
   end
 
   actions do
@@ -72,6 +82,20 @@ defmodule ChurchAdmin.Places.Area do
       argument :last_visit, :utc_datetime_usec
       change {RecordLastVisit, table: "areas"}
     end
+
+    destroy :destroy do
+      primary? true
+      require_atomic? false
+      change {StampActor, attribute: :deleted_by}
+    end
+
+    destroy :hard_destroy do
+      require_atomic? false
+    end
+  end
+
+  changes do
+    change {InUseOnForeignKey, code: Codes.area_in_use()}, on: [:destroy]
   end
 
   policies do
@@ -85,6 +109,18 @@ defmodule ChurchAdmin.Places.Area do
 
     policy action(:create_area) do
       authorize_if {HasPermission, name: "writeAllData"}
+    end
+
+    policy action(:destroy) do
+      authorize_if {HasPermission, name: "writeAllData"}
+    end
+
+    policy action(:destroy) do
+      authorize_if {HasPermission, name: "deleteData"}
+    end
+
+    policy action(:hard_destroy) do
+      forbid_if always()
     end
   end
 
