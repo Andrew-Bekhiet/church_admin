@@ -1,30 +1,29 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/districts/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/districts/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/districts/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/districts/__generated__/queries.graphql.dart';
 
 class DistrictsDAO extends DAOBase<District>
-    with LegacyStreamableDAO<District>, LegacyCreatableDAO<District> {
+    with KeysetStreamableDAO<District>, CreatableDAO<District> {
   @override
-  LegacyStreamAllConfig<District> get baseStreamAllConfig =>
-      const LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllDistricts,
-      );
+  StreamAllConfig<District> get baseStreamAllConfig => const StreamAllConfig(
+    document: documentNodeQuerydistricts,
+    arguments: ListQueryArguments.fromParameters,
+  );
 
   @override
-  LegacyStreamSingleByIdConfig<District> get baseStreamSingleByIdConfig =>
+  StreamSingleByIdConfig<District> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  LegacyCreateObjectConfig<District> get baseCreateObjectConfig =>
-      LegacyCreateObjectConfig(
-        document: documentNodeMutationcreateDistrict,
-        varsConstructor: _createDistrictVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson, 'insertDistrictsOne'),
-      );
+  CreateObjectConfig<District> get baseCreateObjectConfig => CreateObjectConfig(
+    document: documentNodeMutationcreateDistrict,
+    varsConstructor: ({required newObject}) =>
+        Variables_Mutation_createDistrict(
+          input: Input_CreateDistrictInput(name: newObject.name),
+        ).toJson(),
+  );
 
-  DistrictsDAO({required super.db}) : super(fromJson: District.fromJson);
-
-  Json _createDistrictVarsConstructor({required District newObject}) => {
-    'object': {'name': newObject.name},
-  };
+  DistrictsDAO({
+    required super.db,
+  }) : super(fromJson: District.fromJson);
 }

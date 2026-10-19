@@ -1,0 +1,14 @@
+query districts(
+  $filter: DistrictFilterInput
+  $sort: [DistrictSortInput]
+  $first: Int
+  $after: String
+) {
+  districts(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...District
+    }
+  }
+}

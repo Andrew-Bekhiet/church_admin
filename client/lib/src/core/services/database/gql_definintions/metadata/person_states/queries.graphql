@@ -1,0 +1,14 @@
+query personStates(
+  $filter: PersonStateFilterInput
+  $sort: [PersonStateSortInput]
+  $first: Int
+  $after: String
+) {
+  personStates(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...PersonState
+    }
+  }
+}

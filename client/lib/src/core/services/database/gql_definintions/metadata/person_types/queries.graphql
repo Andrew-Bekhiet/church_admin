@@ -1,0 +1,14 @@
+query personTypes(
+  $filter: PersonTypeFilterInput
+  $sort: [PersonTypeSortInput]
+  $first: Int
+  $after: String
+) {
+  personTypes(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...PersonType
+    }
+  }
+}

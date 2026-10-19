@@ -1,0 +1,5 @@
+fragment Church on Church {
+  id
+  name
+  isHidden
+}

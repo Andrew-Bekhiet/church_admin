@@ -1,0 +1,7 @@
+mutation createHobby($input: CreateHobbyInput!) {
+  createHobby(input: $input) {
+    result {
+      ...Hobby
+    }
+  }
+}

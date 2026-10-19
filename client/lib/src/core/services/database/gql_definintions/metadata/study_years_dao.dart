@@ -1,49 +1,34 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/queries.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/subscriptions.gql.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/queries.graphql.dart';
+import 'package:graphql/client.dart';
 
 class StudyYearsDAO extends DAOBase<StudyYear>
-    with LegacyStreamableDAO<StudyYear> {
+    with KeysetStreamableDAO<StudyYear> {
   @override
-  LegacyStreamAllConfig<StudyYear> get baseStreamAllConfig =>
-      const LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllStudyYears,
-      );
+  StreamAllConfig<StudyYear> get baseStreamAllConfig => StreamAllConfig(
+    document: documentNodeQuerystudyYears,
+    arguments: (parameters) => ListQueryArguments.fromParameters(
+      parameters,
+      defaultOrderBy: [OrderBy(field: StudyYearFields().order)],
+    ),
+  );
 
   @override
-  LegacyStreamSingleByIdConfig<StudyYear> get baseStreamSingleByIdConfig =>
+  StreamSingleByIdConfig<StudyYear> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   StudyYearsDAO({
     required super.db,
   }) : super(fromJson: StudyYear.fromJson);
 
-  @override
-  PaginatableStreamBase<StudyYear> streamAll({
-    Stream<String?>? searchQuery,
-    Stream<List<Filter>>? where,
-    Stream<List<OrderBy>>? orderBy,
-    Stream<FieldMetadata?>? secondLineField,
-    int? overrideTotalLimit,
-  }) {
-    return super.streamAll(
-      searchQuery: searchQuery,
-      secondLineField: secondLineField,
-      where: where,
-      orderBy:
-          orderBy ?? Stream.value([OrderBy(field: StudyYearFields().order)]),
-    );
-  }
-
-  Future<StudyYear?> getStudyYearName(int order) {
-    return graphQLClient.queryAndReturnParsedNullable(
-      QueryOptions(
-        document: documentNodeQuerygetStudyYearName,
-        operationName: 'getStudyYearName',
-        variables: Variables_Query_getStudyYearName(order: order).toJson(),
-        parserFn: db.parser.singleParser(StudyYear.fromJson),
-      ),
-    );
-  }
+  Future<StudyYear?> getStudyYearName(int order) =>
+      graphQLClient.queryAndReturnParsedNullable(
+        QueryOptions(
+          document: documentNodeQuerystudyYear,
+          variables: Variables_Query_studyYear(id: '$order').toJson(),
+          parserFn: AshResultParser(
+            documentNodeQuerystudyYear,
+          ).entity(fromJson),
+        ),
+      );
 }

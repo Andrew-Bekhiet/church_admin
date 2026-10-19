@@ -1,0 +1,5 @@
+fragment PersonState on PersonState {
+  id
+  name
+  color
+}

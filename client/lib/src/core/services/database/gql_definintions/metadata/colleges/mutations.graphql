@@ -1,0 +1,7 @@
+mutation createCollege($input: CreateCollegeInput!) {
+  createCollege(input: $input) {
+    result {
+      ...College
+    }
+  }
+}
