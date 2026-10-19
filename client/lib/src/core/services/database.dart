@@ -13,4 +13,5 @@ export 'database/gql_selection_node.dart';
 export 'database/graphql_visitors.dart';
 export 'database/iterable_difference_result.dart';
 export 'database/methods_templates.dart';
+export 'database/realtime.dart';
 export 'database/string_to_uuid.dart';
