@@ -1,0 +1,33 @@
+{
+  "attributes": [
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": true,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "name",
+      "type": "text"
+    }
+  ],
+  "base_filter": null,
+  "check_constraints": [],
+  "create_table_options": null,
+  "custom_indexes": [],
+  "custom_statements": [],
+  "has_create_action": false,
+  "hash": "B2A5C41214A33613DB9B3BDD5400A7C4BDFAC3DE1464F1BA7ECD5F3B9B8EB520",
+  "identities": [],
+  "multitenancy": {
+    "attribute": null,
+    "global": null,
+    "strategy": null
+  },
+  "repo": "Elixir.ChurchAdmin.Repo",
+  "schema": null,
+  "table": "work_status",
+  "temporal": null
+}

@@ -1,0 +1,195 @@
+{
+  "attributes": [
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"gen_random_uuid()\")",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": true,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "attendance_history_meeting_id_fkey",
+        "on_delete": "restrict",
+        "on_update": "update",
+        "primary_key?": true,
+        "schema": "history",
+        "table": "meetings"
+      },
+      "scale": null,
+      "size": null,
+      "source": "meeting_id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "attendance_history_person_id_fkey",
+        "on_delete": "nothing",
+        "on_update": "update",
+        "primary_key?": true,
+        "schema": "public",
+        "table": "persons"
+      },
+      "scale": null,
+      "size": null,
+      "source": "person_id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"now()\")",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "datetime",
+      "type": "timestamptz(6)"
+    },
+    {
+      "allow_nil?": false,
+      "default": "false",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "as_servant",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"(((current_setting('hasura.user'::text, true))::json ->> 'x-hasura-user-id'::text))::uuid\")",
+      "generated?": true,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "uid",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "attendance_history_recorded_by_fkey",
+        "on_delete": "nothing",
+        "on_update": "update",
+        "primary_key?": true,
+        "schema": "auth",
+        "table": "users_data"
+      },
+      "scale": null,
+      "size": null,
+      "source": "recorded_by",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": true,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "day",
+      "type": "date"
+    }
+  ],
+  "base_filter": null,
+  "check_constraints": [],
+  "create_table_options": null,
+  "custom_indexes": [],
+  "custom_statements": [],
+  "has_create_action": false,
+  "hash": "23F1D4E6C3125952DBC0BB09B919BD20FD32034BA3F553409030F1B0DB5B6573",
+  "identities": [
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "attendance_history_meeting_person_day_idx",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "day"
+        },
+        {
+          "type": "atom",
+          "value": "meeting_id"
+        },
+        {
+          "type": "atom",
+          "value": "person_id"
+        },
+        {
+          "type": "atom",
+          "value": "as_servant"
+        }
+      ],
+      "name": "unique_attendance_per_day_meeting_person_and_role",
+      "nils_distinct?": true,
+      "where": null
+    }
+  ],
+  "multitenancy": {
+    "attribute": null,
+    "global": null,
+    "strategy": null
+  },
+  "repo": "Elixir.ChurchAdmin.Repo",
+  "schema": "history",
+  "table": "attendance_history",
+  "temporal": null
+}

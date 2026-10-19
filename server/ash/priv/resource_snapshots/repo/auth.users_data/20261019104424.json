@@ -1,0 +1,136 @@
+{
+  "attributes": [
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"gen_random_uuid()\")",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": true,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "uid",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "name",
+      "type": "text"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "email",
+      "type": "text"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "photo_updated_at",
+      "type": "timestamptz(6)"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "blurhash",
+      "type": "text"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "auth_id",
+      "type": "text"
+    }
+  ],
+  "base_filter": null,
+  "check_constraints": [],
+  "create_table_options": null,
+  "custom_indexes": [],
+  "custom_statements": [],
+  "has_create_action": false,
+  "hash": "826BECD08EF394937D8D14FA471E0B9001DECA18AC14868F7676ECC27969FAA9",
+  "identities": [
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "users_data_auth_id_key",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "auth_id"
+        }
+      ],
+      "name": "unique_auth_id",
+      "nils_distinct?": true,
+      "where": null
+    },
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "users_data_email_key",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "email"
+        }
+      ],
+      "name": "unique_email",
+      "nils_distinct?": true,
+      "where": null
+    },
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "users_data_name_key",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "name"
+        }
+      ],
+      "name": "unique_name",
+      "nils_distinct?": true,
+      "where": null
+    }
+  ],
+  "multitenancy": {
+    "attribute": null,
+    "global": null,
+    "strategy": null
+  },
+  "repo": "Elixir.ChurchAdmin.Repo",
+  "schema": "auth",
+  "table": "users_data",
+  "temporal": null
+}

@@ -1,0 +1,86 @@
+{
+  "attributes": [
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"gen_random_uuid()\")",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": true,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "name",
+      "type": "text"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "order",
+      "type": "integer"
+    }
+  ],
+  "base_filter": null,
+  "check_constraints": [],
+  "create_table_options": null,
+  "custom_indexes": [],
+  "custom_statements": [],
+  "has_create_action": false,
+  "hash": "BF3D23E28FC4229AAD53E81B4DA82B3BFE2C568FF75272E5091A33D6143FCC05",
+  "identities": [
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "shammas_level_name_key",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "name"
+        }
+      ],
+      "name": "unique_name",
+      "nils_distinct?": true,
+      "where": null
+    },
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "shammas_level_order_key",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "order"
+        }
+      ],
+      "name": "unique_order",
+      "nils_distinct?": true,
+      "where": null
+    }
+  ],
+  "multitenancy": {
+    "attribute": null,
+    "global": null,
+    "strategy": null
+  },
+  "repo": "Elixir.ChurchAdmin.Repo",
+  "schema": null,
+  "table": "shammas_levels",
+  "temporal": null
+}

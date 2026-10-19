@@ -1,0 +1,432 @@
+{
+  "attributes": [
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"gen_random_uuid()\")",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": true,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "permission_id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "uid",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "users_admin_on_uid_fkey",
+        "on_delete": "delete",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "auth",
+        "table": "users_data"
+      },
+      "scale": null,
+      "size": null,
+      "source": "uid",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "users_admin_on_admin_on_service_fkey",
+        "on_delete": "delete",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "public",
+        "table": "services"
+      },
+      "scale": null,
+      "size": null,
+      "source": "admin_on_service",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "service_gender",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "service_study_year",
+      "type": "integer"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "service_allow_edit",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "service_admin_on_users",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "users_admin_on_admin_on_group_fkey",
+        "on_delete": "delete",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "public",
+        "table": "groups"
+      },
+      "scale": null,
+      "size": null,
+      "source": "admin_on_group",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "group_allow_edit",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "group_admin_on_users",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "users_admin_on_admin_on_area_fkey",
+        "on_delete": "delete",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "public",
+        "table": "areas"
+      },
+      "scale": null,
+      "size": null,
+      "source": "admin_on_area",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "area_allow_edit",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "area_admin_on_users",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": false,
+      "default": "false",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "service_write_related_families",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": false,
+      "default": "false",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "group_write_related_families",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "area_allow_export",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "service_allow_export",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "group_allow_export",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "service_allow_record_attendance",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "service_allow_record_servants_attendance",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "group_allow_record_attendance",
+      "type": "boolean"
+    },
+    {
+      "allow_nil?": true,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "group_allow_record_servants_attendance",
+      "type": "boolean"
+    }
+  ],
+  "base_filter": null,
+  "check_constraints": [],
+  "create_table_options": null,
+  "custom_indexes": [],
+  "custom_statements": [],
+  "has_create_action": false,
+  "hash": "8188F390EEBACAD52988C2CE7B38B4D56D15F3E1E5B6ED301CC58426EF7FC379",
+  "identities": [
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "users_admin_on_area",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "uid"
+        },
+        {
+          "type": "atom",
+          "value": "admin_on_area"
+        }
+      ],
+      "name": "unique_uid_admin_on_area",
+      "nils_distinct?": true,
+      "where": null
+    },
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "users_admin_on_group",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "uid"
+        },
+        {
+          "type": "atom",
+          "value": "admin_on_group"
+        }
+      ],
+      "name": "unique_uid_admin_on_group",
+      "nils_distinct?": true,
+      "where": null
+    },
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "users_admin_on_service",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "uid"
+        },
+        {
+          "type": "atom",
+          "value": "admin_on_service"
+        },
+        {
+          "type": "atom",
+          "value": "service_study_year"
+        },
+        {
+          "type": "atom",
+          "value": "service_gender"
+        }
+      ],
+      "name": "unique_uid_admin_on_service_service_study_year_service_gender",
+      "nils_distinct?": true,
+      "where": null
+    }
+  ],
+  "multitenancy": {
+    "attribute": null,
+    "global": null,
+    "strategy": null
+  },
+  "repo": "Elixir.ChurchAdmin.Repo",
+  "schema": "auth",
+  "table": "users_admin_on",
+  "temporal": null
+}
