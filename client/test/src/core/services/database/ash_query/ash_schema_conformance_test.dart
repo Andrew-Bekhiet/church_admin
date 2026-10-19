@@ -127,10 +127,9 @@ type RootQueryType {
   });
 
   test('a missing sort field is reported with its enum', () {
-    expect(
-      conformance.missingSortFields('Person', ['NAME', 'MAIN_PHONE']),
-      ['PersonSortField.MAIN_PHONE'],
-    );
+    expect(conformance.missingSortFields('Person', ['NAME', 'MAIN_PHONE']), [
+      'PersonSortField.MAIN_PHONE',
+    ]);
   });
 
   test('a sort enum the server lacks is reported', () {
@@ -140,9 +139,29 @@ type RootQueryType {
   });
 
   test('a list query that does not state its maximum is reported', () {
+    expect(conformance.paginationProblems(), [
+      'query families: the description of `first` does not state "Maximum N"',
+    ]);
+  });
+
+  test('pagination is checked only for the queries of the chosen entities', () {
+    final pagedSchema = AshSchemaSdl.parse('''
+type RootQueryType {
+  persons(first: Int): KeysetPageOfPerson
+  families(
+    "Maximum 100"
+    first: Int
+  ): KeysetPageOfFamily
+}
+''');
+    final pagedConformance = AshSchemaConformance(pagedSchema);
+
     expect(
-      conformance.paginationProblems(),
-      ['query families: the description of `first` does not state "Maximum N"'],
+      pagedConformance.paginationProblems(onlyEntities: {'Family'}),
+      isEmpty,
     );
+    expect(pagedConformance.paginationProblems(onlyEntities: {'Person'}), [
+      'query persons: the description of `first` does not state "Maximum N"',
+    ]);
   });
 }

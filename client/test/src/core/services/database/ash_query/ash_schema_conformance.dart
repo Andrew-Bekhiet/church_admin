@@ -44,11 +44,20 @@ class AshSchemaConformance {
   }
 
   /// Problems with the `Maximum N` the list queries state on their `first`.
-  Iterable<String> paginationProblems() sync* {
+  ///
+  /// With [onlyEntities], only the queries returning a page of those entities
+  /// are checked.
+  Iterable<String> paginationProblems({Set<String>? onlyEntities}) sync* {
     final maximums = <String, int>{};
 
     for (final MapEntry(key: query, value: field)
         in schema.queryFields.entries) {
+      final returnedType = AshSchemaSdl.namedTypeOf(field.type);
+      final isPageOfCheckedEntity =
+          onlyEntities == null ||
+          onlyEntities.any((entity) => returnedType == 'KeysetPageOf$entity');
+      if (!isPageOfCheckedEntity) continue;
+
       final first = field.args.where((arg) => arg.name.value == 'first');
       if (first.isEmpty) continue;
 
