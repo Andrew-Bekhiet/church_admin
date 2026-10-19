@@ -8179,6 +8179,35 @@ type ScopeGrant {
   user: User
 }
 
+"The result of the :update_my_preferences mutation"
+type UpdateMyPreferencesResult {
+  "The successful result of the mutation"
+  result: UserPreferences
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateMyPreferencesInput {
+  darkTheme: Boolean
+  greatFeastTheme: Boolean
+  lastHomeMode: String
+  orderByPreferencesPatch: Json
+  secondLinePreferencesPatch: Json
+}
+
+type UserPreferences {
+  id: ID!
+  uid: ID!
+  orderByPreferences: Json!
+  darkTheme: Boolean
+  greatFeastTheme: Boolean!
+  lastHomeMode: String
+  updatedAt: DateTime!
+  secondLinePreferences: Json!
+  user: User
+}
+
 "The result of the :update_invitation_expiry mutation"
 type UpdateInvitationExpiryResult {
   "The successful result of the mutation"
@@ -8326,6 +8355,32 @@ type Invitation {
   claimedAt: DateTime
   code: String!
   creator: User
+  user: User
+}
+
+"The result of the :register_fcm_token mutation"
+type RegisterFcmTokenResult {
+  "The successful result of the mutation"
+  result: DeviceToken
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input RegisterFcmTokenInput {
+  token: String!
+}
+
+type DeviceToken {
+  "A unique identifier"
+  id: ID!
+
+  uid: ID!
+
+  token: String!
+
+  createdAt: DateTime!
+
   user: User
 }
 
@@ -9526,6 +9581,29 @@ type Church {
   id: ID!
   name: String!
   isHidden: Boolean!
+}
+
+"The result of the :clear_data_check_override mutation"
+type ClearDataCheckOverrideResult {
+  "The record that was successfully deleted"
+  result: DataCheckOverride
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :override_data_check mutation"
+type OverrideDataCheckResult {
+  "The successful result of the mutation"
+  result: DataCheckOverride
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input OverrideDataCheckInput {
+  familyId: ID!
+  isComplete: Boolean!
 }
 
 enum DataCheckOverrideSortField {
@@ -10875,30 +10953,67 @@ type RootQueryType {
 
 type RootMutationType {
   exportData(areasIds: [ID!], servicesIds: [ID!], classesIds: [ID!], groupsIds: [ID!]): ExportDownloadLink!
+
+  "Sets whether the family's data is complete, whatever the automatic check says."
+  overrideDataCheck(input: OverrideDataCheckInput!): OverrideDataCheckResult
+
+  "Gives the family's data check back to the automatic result."
+  clearDataCheckOverride(id: ID!): ClearDataCheckOverrideResult
+
   createChurch(input: CreateChurchInput!): CreateChurchResult
+
   createCollege(input: CreateCollegeInput!): CreateCollegeResult
+
   createFather(input: CreateFatherInput!): CreateFatherResult
+
   createHobby(input: CreateHobbyInput!): CreateHobbyResult
+
   createJob(input: CreateJobInput!): CreateJobResult
+
   createPersonType(input: CreatePersonTypeInput!): CreatePersonTypeResult
+
   createQualification(input: CreateQualificationInput!): CreateQualificationResult
+
   createSchool(input: CreateSchoolInput!): CreateSchoolResult
+
   createTag(input: CreateTagInput!): CreateTagResult
+
+  "Remembers the device token for the acting user; registering it again returns the stored row."
+  registerFcmToken(input: RegisterFcmTokenInput!): RegisterFcmTokenResult
+
   createInvitation(input: CreateInvitationInput!): CreateInvitationResult
+
   updateInvitationExpiry(id: ID!, input: UpdateInvitationExpiryInput): UpdateInvitationExpiryResult
+
+  "Sets the scalar preferences given and merges the patches into the maps; a null patch value removes its key."
+  updateMyPreferences(input: UpdateMyPreferencesInput): UpdateMyPreferencesResult
+
   createUser(input: CreateUserInput!): CreateUserResult
+
   updateUser(id: ID!, input: UpdateUserInput): UpdateUserResult
+
   updateUserPermissions(id: ID!, input: UpdateUserPermissionsInput): UpdateUserPermissionsResult
+
   approveUser(id: ID!): ApproveUserResult
+
   unapproveUser(id: ID!): UnapproveUserResult
+
   applyInvitationCode(input: ApplyInvitationCodeInput!): ClaimedAccount!
+
   tryClaimAccount: ClaimedAccount!
+
   deleteMyAccount: Boolean!
+
   recordCall(input: RecordCallInput!): RecordCallResult
+
   recordConfession(input: RecordConfessionInput!): RecordConfessionResult
+
   recordKodas(input: RecordKodasInput!): RecordKodasResult
+
   deleteKodas(id: ID!): DeleteKodasResult
+
   recordVisit(input: RecordVisitInput!): RecordVisitResult
+
   createDistrict(input: CreateDistrictInput!): CreateDistrictResult
 }
 
