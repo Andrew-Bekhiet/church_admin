@@ -1002,29 +1002,6 @@ create or replace view auth.users_admin_on_meetings (
 
 );
 
-create or replace view history.meetings_persons (meeting_id, person_id) as (
-    select
-        meeting.id as meeting_id,
-        pg.person_id
-    from history.meetings as meeting
-    inner join persons_groups as pg on meeting.group_id = pg.group_id
-    union all
-    select
-        meeting.id as meeting_id,
-        ps.person_id
-    from history.meetings as meeting
-    inner join persons_services as ps on meeting.service_id = ps.service_id
-    inner join persons as p on ps.person_id = p.id
-    where (
-        meeting.service_study_year is NULL
-        or meeting.service_study_year = p.study_year_id
-    )
-    and (
-        meeting.service_gender is NULL
-        or meeting.service_gender = p.gender
-    )
-);
-
 -- Writers to the permission inputs wait until the cache and its sync triggers
 -- commit together, so no change lands between the build and the triggers.
 lock table
