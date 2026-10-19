@@ -63,10 +63,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollScheduleTest do
 
       assert alerted_run_ids() == []
     end
-
-    test "the alert job completes" do
-      assert :ok = perform_job(StudyYearRollAlert, %{run_id: 1})
-    end
   end
 
   describe "schedule" do

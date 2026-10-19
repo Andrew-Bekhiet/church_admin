@@ -106,6 +106,11 @@ defmodule ChurchAdmin.Operations.StudyYearRollRun do
       accept [:error]
       change atomic_update(:recorded_at, expr(now()))
     end
+
+    update :mark_notified do
+      accept []
+      change atomic_update(:notified_at, expr(now()))
+    end
   end
 
   policies do
@@ -130,6 +135,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollRun do
 
     attribute :error, Text
     attribute :step_counts, :map
+    attribute :notified_at, AshPostgres.TimestamptzUsec
   end
 
   identities do
