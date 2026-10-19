@@ -99,7 +99,9 @@ config :church_admin,
     ChurchAdmin.Catalog,
     ChurchAdmin.DataQuality,
     ChurchAdmin.Operations,
-    ChurchAdmin.Exports
+    ChurchAdmin.Exports,
+    ChurchAdmin.Files,
+    ChurchAdmin.Releases
   ]
 
 # Configure the endpoint

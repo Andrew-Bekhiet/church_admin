@@ -52,7 +52,21 @@ config :church_admin,
     auth_env.("ACCOUNT_CLAIMING_BY_EMAIL", if(config_env() == :prod, do: "false", else: "true")) ==
       "true"
 
+storage_buckets = fn firebase_project_id ->
+  if config_env() == :test do
+    [photos: "church-admin-test.appspot.com", app_releases: "church-admin-test-releases"]
+  else
+    [
+      photos: System.get_env("PHOTOS_GCS_BUCKET", "#{firebase_project_id}.appspot.com"),
+      app_releases: System.get_env("APP_RELEASE_GCS_BUCKET", "church-admin-local-releases")
+    ]
+  end
+end
+
 if config_env() == :dev do
+  config :church_admin, ChurchAdmin.Files,
+    buckets: storage_buckets.(System.get_env("FIREBASE_PROJECT_ID", "church-admin-local"))
+
   config :church_admin, ChurchAdmin.Google.Config,
     project_id: System.get_env("FIREBASE_PROJECT_ID", "church-admin-local"),
     credentials: :emulator_owner,
@@ -67,6 +81,8 @@ if config_env() == :dev do
 end
 
 if config_env() == :test do
+  config :church_admin, ChurchAdmin.Files, buckets: storage_buckets.(nil)
+
   config :church_admin, :firebase_emulators,
     auth_host: System.get_env("FIREBASE_AUTH_EMULATOR_HOST", "localhost:9099"),
     storage_host: System.get_env("FIREBASE_STORAGE_EMULATOR_HOST", "localhost:9199"),
@@ -108,8 +124,13 @@ if config_env() == :prod do
        raise("environment variable GOOGLE_APPLICATION_CREDENTIALS_JSON is missing."))
     |> Jason.decode!()
 
+  firebase_project_id =
+    System.get_env("FIREBASE_PROJECT_ID") || google_service_account["project_id"]
+
+  config :church_admin, ChurchAdmin.Files, buckets: storage_buckets.(firebase_project_id)
+
   config :church_admin, ChurchAdmin.Google.Config,
-    project_id: System.get_env("FIREBASE_PROJECT_ID") || google_service_account["project_id"],
+    project_id: firebase_project_id,
     credentials: {:service_account, google_service_account}
 
   host = System.get_env("PHX_HOST") || "example.com"

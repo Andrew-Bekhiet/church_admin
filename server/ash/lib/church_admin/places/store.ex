@@ -3,7 +3,11 @@ defmodule ChurchAdmin.Places.Store do
     domain: ChurchAdmin.Places,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshGraphql.Resource, AshArchival.Resource],
-    fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
+    fragments: [
+      ChurchAdmin.Authz.Fragments.ScopedEntity,
+      ChurchAdmin.Archival.HideArchived,
+      ChurchAdmin.Files.RecordsPhoto
+    ]
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}

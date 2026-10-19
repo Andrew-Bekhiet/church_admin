@@ -102,6 +102,7 @@ defmodule ChurchAdmin.MixProject do
       {:picosat_elixir, "~> 0.2"},
       {:goth, "~> 1.4"},
       {:elixlsx, "~> 0.6"},
+      {:image, "~> 0.62"},
       {:ash_rate_limiter, "~> 2.0"},
       {:hammer, "~> 7.5"}
     ]

@@ -3,11 +3,39 @@ schema {
   query: RootQueryType
 }
 
+enum AppPlatform {
+  ANDROID
+  IOS
+}
+
+enum PhotoSubject {
+  AREAS
+  CLASSES
+  FAMILIES
+  GROUPS
+  PERSONS
+  SERVICES
+  STORES
+  STREETS
+  USERS
+}
+
 enum VisitSubject {
   AREAS
   FAMILIES
   PERSONS
   STREETS
+}
+
+type AppDownloadLink {
+  version: String!
+  url: String!
+  expiresAt: DateTime!
+}
+
+type PhotoLink {
+  url: String!
+  expiresAt: DateTime!
 }
 
 type ExportDownloadLink {
@@ -45,6 +73,19 @@ input AdminOnInput {
   adminOnService: ID
   adminOnGroup: ID
   adminOnArea: ID
+}
+
+input AddressInput {
+  substreetName: String
+  streetId: ID
+  storeyNumber: Int
+  specialLandmark: String
+  houseCode: String
+  geolocation: Json
+  districtId: ID
+  countryIsoCode: String
+  areaId: ID
+  apartmentNumber: Int
 }
 
 enum ServiceMembershipSortField {
@@ -3892,6 +3933,49 @@ type Class {
   userCanEdit: Boolean!
 }
 
+"The result of the :delete_street mutation"
+type DeleteStreetResult {
+  "The record that was successfully deleted"
+  result: Street
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_street mutation"
+type UpdateStreetResult {
+  "The successful result of the mutation"
+  result: Street
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateStreetInput {
+  name: String
+  line: Json
+  color: Int
+  areas: [ID!]
+  lastVisit: DateTime
+}
+
+"The result of the :create_street mutation"
+type CreateStreetResult {
+  "The successful result of the mutation"
+  result: Street
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateStreetInput {
+  name: String!
+  line: Json
+  color: Int
+  areas: [ID!]
+  lastVisit: DateTime
+}
+
 enum StreetSortField {
   ID
   NAME
@@ -4195,6 +4279,47 @@ type Street {
   userCanEdit: Boolean!
   withinPolygon(polygon: Json!): Boolean
   withinDistance(from: Json!, meters: Float!): Boolean
+}
+
+"The result of the :delete_store mutation"
+type DeleteStoreResult {
+  "The record that was successfully deleted"
+  result: Store
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_store mutation"
+type UpdateStoreResult {
+  "The successful result of the mutation"
+  result: Store
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateStoreInput {
+  name: String
+  adminFamilyId: ID
+  color: Int
+  address: AddressInput
+}
+
+"The result of the :create_store mutation"
+type CreateStoreResult {
+  "The successful result of the mutation"
+  result: Store
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateStoreInput {
+  name: String!
+  adminFamilyId: ID
+  color: Int
+  address: AddressInput
 }
 
 enum StoreSortField {
@@ -4698,6 +4823,47 @@ type AreaStreet {
   area: Area
 
   street: Street
+}
+
+"The result of the :delete_area mutation"
+type DeleteAreaResult {
+  "The record that was successfully deleted"
+  result: Area
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_area mutation"
+type UpdateAreaResult {
+  "The successful result of the mutation"
+  result: Area
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateAreaInput {
+  name: String
+  bounds: Json
+  color: Int
+  lastVisit: DateTime
+}
+
+"The result of the :create_area mutation"
+type CreateAreaResult {
+  "The successful result of the mutation"
+  result: Area
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateAreaInput {
+  name: String!
+  bounds: Json
+  color: Int
+  lastVisit: DateTime
 }
 
 enum AreaSortField {
@@ -9744,6 +9910,8 @@ type DataCheck {
 }
 
 type RootQueryType {
+  appDownloadLink(platform: AppPlatform): AppDownloadLink!
+  photoDownloadUrl(subject: PhotoSubject!, id: ID!, contentType: String): PhotoLink!
   dataChecks(
     "How to sort the records in the response"
     sort: [DataCheckSortInput]
@@ -10874,6 +11042,8 @@ type RootQueryType {
 }
 
 type RootMutationType {
+  requestPhotoUpload(subject: PhotoSubject!, id: ID!, contentType: String): PhotoLink!
+  deletePhoto(subject: PhotoSubject!, id: ID!): Boolean!
   exportData(areasIds: [ID!], servicesIds: [ID!], classesIds: [ID!], groupsIds: [ID!]): ExportDownloadLink!
   createChurch(input: CreateChurchInput!): CreateChurchResult
   createCollege(input: CreateCollegeInput!): CreateCollegeResult
@@ -10899,7 +11069,16 @@ type RootMutationType {
   recordKodas(input: RecordKodasInput!): RecordKodasResult
   deleteKodas(id: ID!): DeleteKodasResult
   recordVisit(input: RecordVisitInput!): RecordVisitResult
+  createArea(input: CreateAreaInput!): CreateAreaResult
+  updateArea(id: ID!, input: UpdateAreaInput): UpdateAreaResult
+  deleteArea(id: ID!): DeleteAreaResult
   createDistrict(input: CreateDistrictInput!): CreateDistrictResult
+  createStore(input: CreateStoreInput!): CreateStoreResult
+  updateStore(id: ID!, input: UpdateStoreInput): UpdateStoreResult
+  deleteStore(id: ID!): DeleteStoreResult
+  createStreet(input: CreateStreetInput!): CreateStreetResult
+  updateStreet(id: ID!, input: UpdateStreetInput): UpdateStreetResult
+  deleteStreet(id: ID!): DeleteStreetResult
 }
 
 """
