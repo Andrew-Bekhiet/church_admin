@@ -70,6 +70,8 @@ config :spark,
     ]
   ]
 
+config :church_admin, ChurchAdmin.Realtime, start_replication_stream?: true
+
 config :church_admin, ChurchAdmin.Repo,
   migration_source: "ash_schema_migrations",
   types: ChurchAdmin.PostgrexTypes
