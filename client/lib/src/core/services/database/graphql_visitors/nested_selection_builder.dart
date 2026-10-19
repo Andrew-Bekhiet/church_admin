@@ -6,11 +6,33 @@ import 'package:gql/ast.dart';
 /// one, so the cache can link it.
 class NestedSelectionBuilder extends FieldMetadataVisitor<FieldNode> {
   final List<SelectionNode> nestedSelections;
+  final bool selectsRecordedByInfoAsAshRelationship;
 
-  const NestedSelectionBuilder({this.nestedSelections = const []});
+  const NestedSelectionBuilder({
+    this.nestedSelections = const [],
+    this.selectsRecordedByInfoAsAshRelationship = false,
+  });
 
   @override
-  FieldNode visitField(FieldMetadata field) => FieldNode(
+  FieldNode visitField(FieldMetadata field) =>
+      selectsRecordedByInfoAsAshRelationship && field.type == LastRecordedByInfo
+      ? _ashRecordedByInfoRelationship(field)
+      : _fieldWithObjectSelection(field);
+
+  /// On Ash `lastEdit` is the scalar time and `latestEdit` the record, which
+  /// is the key the ported models read.
+  FieldNode _ashRecordedByInfoRelationship(FieldMetadata field) => FieldNode(
+    name: NameNode(value: AshNaming.latestRelationship(field.name)),
+    selectionSet: SelectionSetNode(
+      selections: [
+        const FieldNode(name: NameNode(value: 'id')),
+        const FieldNode(name: NameNode(value: 'time')),
+        ...nestedSelections,
+      ],
+    ),
+  );
+
+  FieldNode _fieldWithObjectSelection(FieldMetadata field) => FieldNode(
     name: NameNode(value: field.name),
     selectionSet: switch (field.referencedObjectType) {
       final objectType? => SelectionSetNode(
@@ -45,5 +67,7 @@ class NestedSelectionBuilder extends FieldMetadataVisitor<FieldNode> {
   FieldNode visitRedirectingField(RedirectingFieldMetadata field) =>
       NestedSelectionBuilder(
         nestedSelections: [visit(field.targetField)],
+        selectsRecordedByInfoAsAshRelationship:
+            selectsRecordedByInfoAsAshRelationship,
       ).visit(field.parentField);
 }
