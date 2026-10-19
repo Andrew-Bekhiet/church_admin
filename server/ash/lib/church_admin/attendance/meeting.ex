@@ -6,6 +6,7 @@ defmodule ChurchAdmin.Attendance.Meeting do
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Attendance.{AttendanceRecord, MeetingAudience, MeetingDay, RosterEntry}
+  alias ChurchAdmin.Attendance.Changes.ClearArchivedDefaultMeeting
   alias ChurchAdmin.Attendance.Validations.StudyYearWithinService
   alias ChurchAdmin.Authz.Changes.RecheckAfterUpdate
   alias ChurchAdmin.Authz.Checks.{InScope, MeetingWriteGate, System}
@@ -72,6 +73,7 @@ defmodule ChurchAdmin.Attendance.Meeting do
       require_atomic? false
 
       change {RecheckAfterUpdate, check: {MeetingWriteGate, []}}
+      change ClearArchivedDefaultMeeting
     end
   end
 
