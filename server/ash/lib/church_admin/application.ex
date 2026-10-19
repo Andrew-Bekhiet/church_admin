@@ -9,22 +9,27 @@ defmodule ChurchAdmin.Application do
   def start(_type, _args) do
     ChurchAdmin.Auth.TokenVerifier.configured!()
 
-    children = [
-      ChurchAdminWeb.Telemetry,
-      ChurchAdmin.Repo,
-      {DNSCluster, query: Application.get_env(:church_admin, :dns_cluster_query) || :ignore},
-      {Oban,
-       AshOban.config(
-         Application.fetch_env!(:church_admin, :ash_domains),
-         Application.fetch_env!(:church_admin, Oban)
-       )},
-      {Phoenix.PubSub, name: ChurchAdmin.PubSub},
-      # Start a worker by calling: ChurchAdmin.Worker.start_link(arg)
-      # {ChurchAdmin.Worker, arg},
-      # Start to serve requests, typically the last entry
-      ChurchAdmin.Auth.GoogleSigningKeys,
-      ChurchAdminWeb.Endpoint
-    ]
+    ChurchAdmin.Google.Config.ensure_allowed_in!(
+      Application.fetch_env!(:church_admin, :config_env)
+    )
+
+    children =
+      [
+        ChurchAdminWeb.Telemetry,
+        ChurchAdmin.Repo,
+        {DNSCluster, query: Application.get_env(:church_admin, :dns_cluster_query) || :ignore},
+        {Oban,
+         AshOban.config(
+           Application.fetch_env!(:church_admin, :ash_domains),
+           Application.fetch_env!(:church_admin, Oban)
+         )},
+        {Phoenix.PubSub, name: ChurchAdmin.PubSub},
+        # Start a worker by calling: ChurchAdmin.Worker.start_link(arg)
+        # {ChurchAdmin.Worker, arg},
+        # Start to serve requests, typically the last entry
+        ChurchAdmin.Auth.GoogleSigningKeys,
+        ChurchAdminWeb.Endpoint
+      ] ++ ChurchAdmin.Google.Credentials.child_specs(ChurchAdmin.Google.Config.credentials())
 
     # See https://elixir.hexdocs.pm/Supervisor.html
     # for other strategies and supported options
