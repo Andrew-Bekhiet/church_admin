@@ -1,5 +1,5 @@
--- Two users for a smoke run of dev/equivalence.sh until the seed generator
--- lands: `service_reader` (approved, read grant on the service) and
+-- Two users for a smoke run of dev/equivalence.sh, loaded after the enums seed
+-- (which carries the study years): `service_reader` (approved, read grant on the service) and
 -- `area_editor` (approved, edit grant on the area). Fixed ids so a run can
 -- name the users.
 begin;
@@ -7,8 +7,6 @@ begin;
 set constraints all deferred;
 
 select set_config('hasura.user', '{"x-hasura-role":"admin"}', true);
-
-insert into study_years ("order", name) values (1, 'year 1'), (2, 'year 2');
 
 insert into services (id, name)
 values ('00000000-0000-4000-8000-000000000101', 'service');
