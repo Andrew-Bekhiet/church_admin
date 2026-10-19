@@ -2,13 +2,18 @@ defmodule ChurchAdmin.Attendance.MeetingDay do
   use Ash.Resource,
     domain: ChurchAdmin.Attendance,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Attendance.Meeting
+  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.Catalog.StudyYear
 
   graphql do
     type :meeting_day
+
+    relationships [:meeting]
+    nullable_fields [:study_year_id]
   end
 
   postgres do
@@ -20,6 +25,20 @@ defmodule ChurchAdmin.Attendance.MeetingDay do
 
   actions do
     defaults [:read]
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    bypass actor_attribute_equals(:read_all?, true) do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :meeting, entity: :meeting, access: :admin}
+    end
   end
 
   attributes do

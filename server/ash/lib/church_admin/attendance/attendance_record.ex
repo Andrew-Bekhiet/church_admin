@@ -2,14 +2,22 @@ defmodule ChurchAdmin.Attendance.AttendanceRecord do
   use Ash.Resource,
     domain: ChurchAdmin.Attendance,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Attendance.Meeting
+  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.People.Person
 
   graphql do
     type :attendance_record
+
+    relationships [:meeting, :person, :recorded_by_user]
+
+    queries do
+      list :attendance_records, :read
+    end
   end
 
   postgres do
@@ -32,7 +40,34 @@ defmodule ChurchAdmin.Attendance.AttendanceRecord do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    bypass actor_attribute_equals(:read_all?, true) do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :meeting, entity: :meeting, access: :admin}
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :person, entity: :person, access: :read}
+      authorize_if expr(as_servant)
+    end
   end
 
   attributes do

@@ -2,14 +2,23 @@ defmodule ChurchAdmin.Attendance.RosterEntry do
   use Ash.Resource,
     domain: ChurchAdmin.Attendance,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    authorizers: [Ash.Policy.Authorizer],
+    extensions: [AshGraphql.Resource],
+    primary_read_warning?: false
 
   alias ChurchAdmin.Attendance.{AttendanceRecord, Meeting}
+  alias ChurchAdmin.Authz.Checks.{HoldsRosterGrant, RelatedInScope, System}
   alias ChurchAdmin.People.Person
   alias ChurchAdmin.Types.Text
 
   graphql do
     type :roster_entry
+
+    relationships [:attendance_records, :meeting, :person]
+
+    queries do
+      list :roster_entries, :read
+    end
   end
 
   postgres do
@@ -20,7 +29,35 @@ defmodule ChurchAdmin.Attendance.RosterEntry do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+      prepare build(distinct: [:meeting_id, :person_id, :as_servant])
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    bypass actor_attribute_equals(:read_all?, true) do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :meeting, entity: :meeting, access: :admin}
+    end
+
+    policy action_type(:read) do
+      authorize_if expr(as_servant)
+      authorize_if HoldsRosterGrant
+    end
   end
 
   attributes do
