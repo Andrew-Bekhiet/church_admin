@@ -75,7 +75,30 @@ defmodule ChurchAdmin.People.Person do
       :hobbies,
       :tags,
       :family_contacts,
-      :main_contact
+      :main_contact,
+      :searchable_phones,
+      :church,
+      :college,
+      :father,
+      :job,
+      :person_type,
+      :qualification,
+      :school,
+      :serving_church,
+      :shammas_level,
+      :state,
+      :store,
+      :study_year,
+      :latest_call,
+      :latest_confession,
+      :latest_kodas,
+      :latest_edit,
+      :latest_visit,
+      :calls,
+      :confessions,
+      :kodases,
+      :edits,
+      :visits
     ]
 
     queries do
@@ -296,6 +319,15 @@ defmodule ChurchAdmin.People.Person do
       source_attribute: :family_id,
       public?: true
 
+    has_many :searchable_phones, ResolvedContact,
+      no_attributes?: true,
+      public?: true,
+      filter:
+        expr(
+          person_id == parent(id) or
+            (effective_family_id == parent(family_id) and exists(person_type, is_family_admin))
+        )
+
     has_many :attendance_records, AttendanceRecord,
       destination_attribute: :person_id,
       public?: true
@@ -347,6 +379,36 @@ defmodule ChurchAdmin.People.Person do
     calculate :user_can_edit, :boolean, {UserCanEdit, entity: :person},
       allow_nil?: false,
       public?: true
+  end
+
+  aggregates do
+    max :last_confession_day, :confessions, :day_id, public?: true
+    max :last_kodas_day, :kodases, :day_id, public?: true
+    max :last_attended_at, :attendance_records, :datetime, public?: true
+    max :last_visit_at, :visits, :time, public?: true
+
+    first :main_phone, :contacts, :phone, filter: expr(is_main_phone), public?: true
+
+    first :last_edit, :latest_edit, :time, public?: true
+    first :last_call, :latest_call, :time, public?: true
+    first :family_name, :family, :name, public?: true
+    first :user_name, :user, :name, public?: true
+    first :store_name, :store, :name, public?: true
+    first :church_name, :church, :name, public?: true
+    first :serving_church_name, :serving_church, :name, public?: true
+    first :college_name, :college, :name, public?: true
+    first :school_name, :school, :name, public?: true
+    first :father_name, :father, :name, public?: true
+    first :job_name, :job, :name, public?: true
+    first :qualification_name, :qualification, :name, public?: true
+    first :state_name, :state, :name, public?: true
+    first :person_type_order, :person_type, :order, public?: true
+    first :shammas_level_order, :shammas_level, :order, public?: true
+    first :study_year_order, :study_year, :order, public?: true
+    first :address_area_name, [:address, :area], :name, public?: true
+    first :address_street_name, [:address, :street], :name, public?: true
+    first :address_district_name, [:address, :district], :name, public?: true
+    first :address_full_address_text, :address, :full_address_text, public?: true
   end
 
   identities do
