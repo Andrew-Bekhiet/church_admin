@@ -4,7 +4,13 @@ defmodule ChurchAdmin.People do
   resources do
     resource ChurchAdmin.People.ClassMembership
     resource ChurchAdmin.People.Contact
-    resource ChurchAdmin.People.Family
+
+    resource ChurchAdmin.People.Family do
+      define :create_family, action: :create_family
+      define :update_family, action: :update_family
+      define :delete_family, action: :destroy
+    end
+
     resource ChurchAdmin.People.FamilyRelation
     resource ChurchAdmin.People.GroupMembership
     resource ChurchAdmin.People.MainContact

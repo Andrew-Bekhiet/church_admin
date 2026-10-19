@@ -6,6 +6,7 @@ defmodule ChurchAdmin.People.FamilyRelation do
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Family
 
   graphql do
@@ -47,6 +48,16 @@ defmodule ChurchAdmin.People.FamilyRelation do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :create do
+      description "Links a parent and a child family; the family commands call it."
+      accept [:parent_family_id, :child_family_id]
+    end
+
+    destroy :destroy do
+      description "Unlinks a parent and a child family; the family commands call it."
+      primary? true
+    end
   end
 
   policies do
@@ -61,6 +72,18 @@ defmodule ChurchAdmin.People.FamilyRelation do
     policy action_type(:read) do
       authorize_if {RelatedInScope, path: :parent, entity: :family, access: :read}
     end
+
+    policy action_type([:create, :destroy]) do
+      authorize_if {RelatedInScope, path: :child, entity: :family, access: :edit}
+    end
+
+    policy action_type([:create, :destroy]) do
+      authorize_if {RelatedInScope, path: :parent, entity: :family, access: :edit}
+    end
+  end
+
+  changes do
+    change {RecordEdit, table: "families", record_id: :parent_family_id}, on: [:create]
   end
 
   attributes do

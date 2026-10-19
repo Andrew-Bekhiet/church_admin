@@ -11,8 +11,8 @@ defmodule ChurchAdmin.Authz.Checks.CreatedInCommand do
 
       context = CreatedInCommand.remember_created(changeset.context, :person, person.id)
 
-  Nothing writes the context yet; until a command does, this check never
-  matches.
+  A create action remembers its own record with
+  `change {ChurchAdmin.Authz.Changes.RememberCreated, kind: :family}`.
 
       authorize_if {ChurchAdmin.Authz.Checks.CreatedInCommand, attribute: :person_id, kind: :person}
   """
@@ -38,6 +38,10 @@ defmodule ChurchAdmin.Authz.Checks.CreatedInCommand do
       Map.update(created, kind, [id], &[id | &1])
     end)
   end
+
+  @doc "The part of a command's context a nested changeset needs for this check."
+  @spec carried(map()) :: map()
+  def carried(context), do: Map.take(context, [:church_admin])
 
   @spec created_ids(map(), kind()) :: [String.t()]
   def created_ids(context, kind), do: get_in(context, [:church_admin, :created, kind]) || []

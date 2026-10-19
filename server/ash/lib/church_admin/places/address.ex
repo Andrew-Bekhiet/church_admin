@@ -5,7 +5,7 @@ defmodule ChurchAdmin.Places.Address do
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
-  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
+  alias ChurchAdmin.Authz.Checks.{CreatedInCommand, RelatedInScope, System}
   alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Places.Calculations.{FullAddressText, IntersectsGeography}
@@ -128,6 +128,12 @@ defmodule ChurchAdmin.Places.Address do
     policy action_type(:read) do
       authorize_if {RelatedInScope, path: :family, entity: :family, access: :read}
       authorize_if {RelatedInScope, path: :store, entity: :store, access: :read}
+    end
+
+    policy action_type(:create) do
+      authorize_if {CreatedInCommand, attribute: :family_id, kind: :family}
+      authorize_if {RelatedInScope, path: :family, entity: :family, access: :edit}
+      authorize_if {RelatedInScope, path: :store, entity: :store, access: :edit}
     end
   end
 
