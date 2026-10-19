@@ -79,7 +79,7 @@ defmodule ChurchAdmin.People.Person do
   postgres do
     table "persons"
     repo ChurchAdmin.Repo
-    migration_types study_year_id: :smallint, color: :bigint, national_id: :integer
+    migration_types study_year_id: :smallint, color: :bigint
     identity_index_names unique_uid: "persons_uid_key"
 
     references do
@@ -188,7 +188,6 @@ defmodule ChurchAdmin.People.Person do
     attribute :color, :integer, public?: true
     attribute :photo_updated_at, AshPostgres.TimestamptzUsec, public?: true
     attribute :blurhash, Text, public?: true
-    attribute :national_id, :integer, public?: true
     attribute :work_status, Text, public?: true
     attribute :martial_status, Text, allow_nil?: false, default: "single", public?: true
     attribute :serving_church_id, :uuid, public?: true

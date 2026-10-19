@@ -94,7 +94,6 @@ enum PersonSortField {
   COLOR
   PHOTO_UPDATED_AT
   BLURHASH
-  NATIONAL_ID
   WORK_STATUS
   MARTIAL_STATUS
   SERVING_CHURCH_ID
@@ -195,19 +194,6 @@ input PersonFilterWorkStatus {
   stringStartsWith: String
   like: String
   ilike: String
-}
-
-input PersonFilterNationalId {
-  isNil: Boolean
-  eq: Int
-  notEq: Int
-  in: [Int]
-  lessThan: Int
-  greaterThan: Int
-  lessThanOrEqual: Int
-  greaterThanOrEqual: Int
-  isDistinctFrom: Int
-  isNotDistinctFrom: Int
 }
 
 input PersonFilterBlurhash {
@@ -584,7 +570,6 @@ input PersonFilterInput {
   color: PersonFilterColor
   photoUpdatedAt: PersonFilterPhotoUpdatedAt
   blurhash: PersonFilterBlurhash
-  nationalId: PersonFilterNationalId
   workStatus: PersonFilterWorkStatus
   martialStatus: PersonFilterMartialStatus
   servingChurchId: PersonFilterServingChurchId
@@ -628,7 +613,6 @@ type Person {
   color: Int
   photoUpdatedAt: DateTime
   blurhash: String
-  nationalId: Int
   workStatus: String
   martialStatus: String!
   servingChurchId: ID
