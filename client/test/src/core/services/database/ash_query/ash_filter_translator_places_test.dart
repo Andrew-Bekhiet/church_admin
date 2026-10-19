@@ -1,6 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'ash_schema_conformance.dart';
+import 'ash_schema_sdl.dart';
+
 void main() {
   const filterTranslator = AshFilterTranslator();
   const sortTranslator = AshSortTranslator();
@@ -161,4 +164,86 @@ void main() {
       },
     );
   });
+
+  group(
+    'the filters the places features build resolve in the server schema',
+    () {
+      final conformance = AshSchemaConformance(AshSchemaSdl.read());
+      final cases =
+          <
+            String,
+            ({
+              String input,
+              FieldMetadata field,
+              Operator operator,
+              Object? value,
+            })
+          >{
+            'the areas of a street': (
+              input: 'StreetFilterInput',
+              field: StreetFields().areas.redirectTo(AreaFields().id),
+              operator: MultiSelectOperator.anyOf,
+              value: ['area-1'],
+            ),
+            'the join rows of a street': (
+              input: 'StreetFilterInput',
+              field: StreetFields().areasRel.redirectTo(
+                AreasStreetsFields().areaId,
+              ),
+              operator: StringOperator.eq,
+              value: 'area-1',
+            ),
+            'the streets of an area': (
+              input: 'AreaFilterInput',
+              field: AreaFields().streets.redirectTo(StreetFields().line),
+              operator: const WithinDistanceOperator(250),
+              value: const Point(30, 31),
+            ),
+            'the admins of an area': (
+              input: 'AreaFilterInput',
+              field: AreaFields().adminUsers,
+              operator: MultiSelectOperator.anyOf,
+              value: ['user-1'],
+            ),
+            'the last edit time of an area': (
+              input: 'AreaFilterInput',
+              field: AreaFields().lastEdit.redirectTo<Object>(recorded.time),
+              operator: DateTimeOperator.isAfter,
+              value: moment,
+            ),
+            'the last visit user of a street': (
+              input: 'StreetFilterInput',
+              field: StreetFields().lastVisit.redirectTo<Object>(recorded.user),
+              operator: MultiSelectOperator.anyOf,
+              value: ['user-1'],
+            ),
+            'the admin family of a store': (
+              input: 'StoreFilterInput',
+              field: StoreFields().family,
+              operator: MultiSelectOperator.anyOf,
+              value: ['family-1'],
+            ),
+            'the area of the address of a store': (
+              input: 'StoreFilterInput',
+              field: StoreFields().address.redirectTo<Object>(
+                AddressFields().area,
+              ),
+              operator: PrimitiveOperator.isNull,
+              value: null,
+            ),
+          };
+
+      for (final MapEntry(key: name, value: testCase) in cases.entries) {
+        test(name, () {
+          expect(
+            conformance.missingForInput(
+              testCase.input,
+              translate(testCase.field, testCase.operator, testCase.value),
+            ),
+            isEmpty,
+          );
+        });
+      }
+    },
+  );
 }
