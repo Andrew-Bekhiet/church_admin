@@ -47,7 +47,11 @@ defmodule ChurchAdmin.Authz.Scope do
       raise ArgumentError, "#{inspect(resource)} is not a scoped entity"
   end
 
-  @spec for_entity(entity() | :meeting | :history_record, Actor.t() | nil, atom()) ::
+  @spec for_entity(
+          entity() | :meeting | :history_record | :contact | :resolved_contact,
+          Actor.t() | nil,
+          atom()
+        ) ::
           Ash.Expr.t()
   def for_entity(entity, actor, access), do: apply(__MODULE__, entity, [actor, access])
 
@@ -185,6 +189,12 @@ defmodule ChurchAdmin.Authz.Scope do
 
   @spec history_record(Actor.t() | nil, :read | :edit) :: Ash.Expr.t()
   defdelegate history_record(actor, access), to: ChurchAdmin.Authz.Scope.HistoryRecord
+
+  @spec contact(Actor.t() | nil, :read) :: Ash.Expr.t()
+  defdelegate contact(actor, access), to: ChurchAdmin.Authz.Scope.Contact
+
+  @spec resolved_contact(Actor.t() | nil, :read) :: Ash.Expr.t()
+  defdelegate resolved_contact(actor, access), to: ChurchAdmin.Authz.Scope.Contact
 
   @doc "Whether the actor may export every one of `ids` of `entity`."
   @spec exportable?(Actor.t() | nil, entity(), [String.t()]) :: boolean()

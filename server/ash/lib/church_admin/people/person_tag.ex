@@ -2,13 +2,21 @@ defmodule ChurchAdmin.People.PersonTag do
   use Ash.Resource,
     domain: ChurchAdmin.People,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Catalog.Tag
+  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.People.Person
 
   graphql do
     type :person_tag
+
+    relationships [:person]
+
+    queries do
+      list :person_tags, :read
+    end
   end
 
   postgres do
@@ -22,7 +30,25 @@ defmodule ChurchAdmin.People.PersonTag do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 100
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :person, entity: :person, access: :read}
+    end
   end
 
   attributes do
@@ -34,5 +60,9 @@ defmodule ChurchAdmin.People.PersonTag do
   relationships do
     belongs_to :person, Person, define_attribute?: false, public?: true
     belongs_to :tag, Tag, define_attribute?: false, public?: true
+  end
+
+  aggregates do
+    first :tag_name, :tag, :name, public?: true
   end
 end

@@ -68,6 +68,418 @@ type ServiceMembership {
   person: Person
 }
 
+enum FamilyContactSortField {
+  ID
+  PERSON_ID
+  FAMILY_ID
+  PERSON_TYPE_ID
+  LABEL
+  PHONE
+  IS_MAIN_PHONE
+  CREATED_AT
+  UPDATED_AT
+  EFFECTIVE_FAMILY_ID
+  EFFECTIVE_PERSON_TYPE_ID
+  PERSON_TYPE_ORDER
+}
+
+"A keyset page of :family_contact"
+type KeysetPageOfFamilyContact {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [FamilyContact!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input FamilyContactFilterPersonTypeOrder {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input FamilyContactFilterEffectivePersonTypeId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input FamilyContactFilterEffectiveFamilyId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input FamilyContactFilterUpdatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input FamilyContactFilterCreatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input FamilyContactFilterIsMainPhone {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input FamilyContactFilterPhone {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input FamilyContactFilterLabel {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input FamilyContactFilterPersonTypeId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input FamilyContactFilterFamilyId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input FamilyContactFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input FamilyContactFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input FamilyContactFilterInput {
+  and: [FamilyContactFilterInput!]
+  or: [FamilyContactFilterInput!]
+  not: [FamilyContactFilterInput!]
+  id: FamilyContactFilterId
+  personId: FamilyContactFilterPersonId
+  familyId: FamilyContactFilterFamilyId
+  personTypeId: FamilyContactFilterPersonTypeId
+  label: FamilyContactFilterLabel
+  phone: FamilyContactFilterPhone
+  isMainPhone: FamilyContactFilterIsMainPhone
+  createdAt: FamilyContactFilterCreatedAt
+  updatedAt: FamilyContactFilterUpdatedAt
+  effectiveFamilyId: FamilyContactFilterEffectiveFamilyId
+  effectivePersonTypeId: FamilyContactFilterEffectivePersonTypeId
+  person: PersonFilterInput
+  family: FamilyFilterInput
+  personTypeOrder: FamilyContactFilterPersonTypeOrder
+}
+
+input FamilyContactSortInput {
+  order: SortOrder
+  field: FamilyContactSortField!
+}
+
+type FamilyContact {
+  id: ID!
+  personId: ID
+  familyId: ID
+  personTypeId: ID
+  label: String
+  phone: String
+  isMainPhone: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  effectiveFamilyId: ID
+  effectivePersonTypeId: ID
+  person: Person
+  family: Family
+  personTypeOrder: Int
+}
+
+enum PersonTagSortField {
+  PERSON_ID
+  TAG_ID
+  TAG_NAME
+}
+
+"A keyset page of :person_tag"
+type KeysetPageOfPersonTag {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [PersonTag!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input PersonTagFilterTagName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonTagFilterTagId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input PersonTagFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input PersonTagFilterInput {
+  and: [PersonTagFilterInput!]
+  or: [PersonTagFilterInput!]
+  not: [PersonTagFilterInput!]
+  personId: PersonTagFilterPersonId
+  tagId: PersonTagFilterTagId
+  person: PersonFilterInput
+  tagName: PersonTagFilterTagName
+}
+
+input PersonTagSortInput {
+  order: SortOrder
+  field: PersonTagSortField!
+}
+
+type PersonTag {
+  personId: ID!
+  tagId: ID!
+  person: Person
+  tagName: String
+}
+
+enum PersonHobbySortField {
+  PERSON_ID
+  HOBBY_ID
+  HOBBY_NAME
+}
+
+"A keyset page of :person_hobby"
+type KeysetPageOfPersonHobby {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [PersonHobby!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input PersonHobbyFilterHobbyName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonHobbyFilterHobbyId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input PersonHobbyFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input PersonHobbyFilterInput {
+  and: [PersonHobbyFilterInput!]
+  or: [PersonHobbyFilterInput!]
+  not: [PersonHobbyFilterInput!]
+  personId: PersonHobbyFilterPersonId
+  hobbyId: PersonHobbyFilterHobbyId
+  person: PersonFilterInput
+  hobbyName: PersonHobbyFilterHobbyName
+}
+
+input PersonHobbySortInput {
+  order: SortOrder
+  field: PersonHobbySortField!
+}
+
+type PersonHobby {
+  personId: ID!
+  hobbyId: ID!
+  person: Person
+  hobbyName: String
+}
+
 enum PersonSortField {
   ID
   NAME
@@ -649,6 +1061,114 @@ type Person {
   userCanEdit: Boolean!
 }
 
+enum MainContactSortField {
+  ID
+  PERSON_ID
+  LABEL
+  PHONE
+}
+
+"A keyset page of :main_contact"
+type KeysetPageOfMainContact {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [MainContact!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input MainContactFilterPhone {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input MainContactFilterLabel {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input MainContactFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input MainContactFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input MainContactFilterInput {
+  and: [MainContactFilterInput!]
+  or: [MainContactFilterInput!]
+  not: [MainContactFilterInput!]
+  id: MainContactFilterId
+  personId: MainContactFilterPersonId
+  label: MainContactFilterLabel
+  phone: MainContactFilterPhone
+  person: PersonFilterInput
+}
+
+input MainContactSortInput {
+  order: SortOrder
+  field: MainContactSortField!
+}
+
+type MainContact {
+  id: ID!
+  personId: ID
+  label: String
+  phone: String
+  person: Person
+}
+
 enum GroupMembershipSortField {
   PERSON_ID
   GROUP_ID
@@ -713,6 +1233,116 @@ type GroupMembership {
   personId: ID!
   groupId: ID!
   person: Person
+}
+
+enum FamilyRelationSortField {
+  PARENT_FAMILY_ID
+  CHILD_FAMILY_ID
+  CHILD_NAME
+  PARENT_NAME
+}
+
+"A keyset page of :family_relation"
+type KeysetPageOfFamilyRelation {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [FamilyRelation!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input FamilyRelationFilterParentName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input FamilyRelationFilterChildName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input FamilyRelationFilterChildFamilyId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input FamilyRelationFilterParentFamilyId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input FamilyRelationFilterInput {
+  and: [FamilyRelationFilterInput!]
+  or: [FamilyRelationFilterInput!]
+  not: [FamilyRelationFilterInput!]
+  parentFamilyId: FamilyRelationFilterParentFamilyId
+  childFamilyId: FamilyRelationFilterChildFamilyId
+  child: FamilyFilterInput
+  parent: FamilyFilterInput
+  childName: FamilyRelationFilterChildName
+  parentName: FamilyRelationFilterParentName
+}
+
+input FamilyRelationSortInput {
+  order: SortOrder
+  field: FamilyRelationSortField!
+}
+
+type FamilyRelation {
+  parentFamilyId: ID!
+  childFamilyId: ID!
+  child: Family
+  parent: Family
+  childName: String
+  parentName: String
 }
 
 enum FamilySortField {
@@ -962,6 +1592,196 @@ type Family {
     offset: Int
   ): [Person!]!
   userCanEdit: Boolean!
+}
+
+enum ContactSortField {
+  ID
+  PERSON_ID
+  FAMILY_ID
+  PERSON_TYPE_ID
+  LABEL
+  PHONE
+  IS_MAIN_PHONE
+  CREATED_AT
+  UPDATED_AT
+}
+
+"A keyset page of :contact"
+type KeysetPageOfContact {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Contact!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input ContactFilterUpdatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input ContactFilterCreatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input ContactFilterIsMainPhone {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input ContactFilterPhone {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input ContactFilterLabel {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input ContactFilterPersonTypeId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ContactFilterFamilyId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ContactFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ContactFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ContactFilterInput {
+  and: [ContactFilterInput!]
+  or: [ContactFilterInput!]
+  not: [ContactFilterInput!]
+  id: ContactFilterId
+  personId: ContactFilterPersonId
+  familyId: ContactFilterFamilyId
+  personTypeId: ContactFilterPersonTypeId
+  label: ContactFilterLabel
+  phone: ContactFilterPhone
+  isMainPhone: ContactFilterIsMainPhone
+  createdAt: ContactFilterCreatedAt
+  updatedAt: ContactFilterUpdatedAt
+  family: FamilyFilterInput
+  person: PersonFilterInput
+}
+
+input ContactSortInput {
+  order: SortOrder
+  field: ContactSortField!
+}
+
+type Contact {
+  id: ID!
+  personId: ID
+  familyId: ID
+  personTypeId: ID
+  label: String
+  phone: String!
+  isMainPhone: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  family: Family
+  person: Person
 }
 
 enum ClassMembershipSortField {
@@ -8001,6 +8821,25 @@ type RootQueryType {
     "The number of records to return to the end. Maximum 100"
     last: Int
   ): KeysetPageOfClassMembership
+  contacts(
+    "How to sort the records in the response"
+    sort: [ContactSortInput]
+
+    "A filter to limit the results"
+    filter: ContactFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfContact
   family(
     "The id of the record"
     id: ID!
@@ -8024,6 +8863,25 @@ type RootQueryType {
     "The number of records to return to the end. Maximum 1000"
     last: Int
   ): KeysetPageOfFamily
+  familyRelations(
+    "How to sort the records in the response"
+    sort: [FamilyRelationSortInput]
+
+    "A filter to limit the results"
+    filter: FamilyRelationFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfFamilyRelation
   groupMemberships(
     "How to sort the records in the response"
     sort: [GroupMembershipSortInput]
@@ -8043,6 +8901,25 @@ type RootQueryType {
     "The number of records to return to the end. Maximum 100"
     last: Int
   ): KeysetPageOfGroupMembership
+  mainContacts(
+    "How to sort the records in the response"
+    sort: [MainContactSortInput]
+
+    "A filter to limit the results"
+    filter: MainContactFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfMainContact
   person(
     "The id of the record"
     id: ID!
@@ -8066,6 +8943,63 @@ type RootQueryType {
     "The number of records to return to the end. Maximum 1000"
     last: Int
   ): KeysetPageOfPerson
+  personHobbies(
+    "How to sort the records in the response"
+    sort: [PersonHobbySortInput]
+
+    "A filter to limit the results"
+    filter: PersonHobbyFilterInput
+
+    "The number of records to return from the beginning. Maximum 100"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 100"
+    last: Int
+  ): KeysetPageOfPersonHobby
+  personTags(
+    "How to sort the records in the response"
+    sort: [PersonTagSortInput]
+
+    "A filter to limit the results"
+    filter: PersonTagFilterInput
+
+    "The number of records to return from the beginning. Maximum 100"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 100"
+    last: Int
+  ): KeysetPageOfPersonTag
+  familyContacts(
+    "How to sort the records in the response"
+    sort: [FamilyContactSortInput]
+
+    "A filter to limit the results"
+    filter: FamilyContactFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfFamilyContact
   serviceMemberships(
     "How to sort the records in the response"
     sort: [ServiceMembershipSortInput]
