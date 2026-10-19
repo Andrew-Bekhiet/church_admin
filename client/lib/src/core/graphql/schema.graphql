@@ -410,6 +410,7 @@ input FamilyContactFilterInput {
   effectivePersonTypeId: FamilyContactFilterEffectivePersonTypeId
   person: PersonFilterInput
   family: FamilyFilterInput
+  personType: PersonTypeFilterInput
   personTypeOrder: FamilyContactFilterPersonTypeOrder
 }
 
@@ -432,6 +433,7 @@ type FamilyContact {
   effectivePersonTypeId: ID
   person: Person
   family: Family
+  personType: PersonType
   personTypeOrder: Int
 }
 
