@@ -27,6 +27,12 @@ enum VisitSubject {
   STREETS
 }
 
+enum MeetingAudience {
+  ONLY_PERSONS
+  ONLY_SERVANTS
+  PERSONS_AND_SERVANTS
+}
+
 type AppDownloadLink {
   version: String!
   url: String!
@@ -82,7 +88,7 @@ input MeetingInput {
   name: String!
   isArchived: Boolean
   color: Int
-  audience: String
+  audience: MeetingAudience
 }
 
 input ContactInput {
@@ -6316,7 +6322,7 @@ type UpdateMeetingResult {
 
 input UpdateMeetingInput {
   name: String
-  audience: String
+  audience: MeetingAudience
   isArchived: Boolean
   color: Int
   showKodasCheckbox: Boolean
@@ -6337,7 +6343,7 @@ input CreateMeetingInput {
   serviceStudyYear: Int
   serviceGender: Boolean
   groupId: ID
-  audience: String
+  audience: MeetingAudience
   isArchived: Boolean
   color: Int
   showKodasCheckbox: Boolean
@@ -6464,15 +6470,15 @@ input MeetingFilterIsArchived {
 
 input MeetingFilterAudience {
   isNil: Boolean
-  eq: String
-  notEq: String
-  in: [String!]
-  lessThan: String
-  greaterThan: String
-  lessThanOrEqual: String
-  greaterThanOrEqual: String
-  isDistinctFrom: String
-  isNotDistinctFrom: String
+  eq: MeetingAudience
+  notEq: MeetingAudience
+  in: [MeetingAudience!]
+  lessThan: MeetingAudience
+  greaterThan: MeetingAudience
+  lessThanOrEqual: MeetingAudience
+  greaterThanOrEqual: MeetingAudience
+  isDistinctFrom: MeetingAudience
+  isNotDistinctFrom: MeetingAudience
 }
 
 input MeetingFilterGroupId {
@@ -6595,7 +6601,7 @@ type Meeting {
   serviceStudyYear: Int
   serviceGender: Boolean
   groupId: ID
-  audience: String!
+  audience: MeetingAudience!
   isArchived: Boolean!
   color: Int
   showKodasCheckbox: Boolean!

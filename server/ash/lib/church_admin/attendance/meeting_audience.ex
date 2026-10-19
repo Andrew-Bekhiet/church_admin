@@ -1,6 +1,7 @@
 defmodule ChurchAdmin.Attendance.MeetingAudience do
   @moduledoc "Who a meeting is for; stored as the Postgres enum `history.meeting_audience` with camelCase labels."
   use Ash.Type.Enum, values: [:only_persons, :only_servants, :persons_and_servants]
+  use AshGraphql.Type
 
   @stored_labels %{
     only_persons: "onlyPersons",
@@ -8,6 +9,9 @@ defmodule ChurchAdmin.Attendance.MeetingAudience do
     persons_and_servants: "personsAndServants"
   }
   @values_by_label Map.new(@stored_labels, fn {value, label} -> {label, value} end)
+
+  @impl AshGraphql.Type
+  def graphql_type(_), do: :meeting_audience
 
   @impl Ash.Type
   def storage_type, do: :meeting_audience
