@@ -1,5 +1,803 @@
 import 'package:church_admin/src/core/graphql/scalars.dart';
 
+class Input_NewPersonInput {
+  factory Input_NewPersonInput({required String name, required bool gender}) =>
+      Input_NewPersonInput._({r'name': name, r'gender': gender});
+
+  Input_NewPersonInput._(this._$data);
+
+  factory Input_NewPersonInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    final l$gender = data['gender'];
+    result$data['gender'] = (l$gender as bool);
+    return Input_NewPersonInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  bool get gender => (_$data['gender'] as bool);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    final l$gender = gender;
+    result$data['gender'] = l$gender;
+    return result$data;
+  }
+
+  CopyWith_Input_NewPersonInput<Input_NewPersonInput> get copyWith =>
+      CopyWith_Input_NewPersonInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_NewPersonInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$gender = gender;
+    final lOther$gender = other.gender;
+    if (l$gender != lOther$gender) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$gender = gender;
+    return Object.hashAll([l$name, l$gender]);
+  }
+}
+
+abstract class CopyWith_Input_NewPersonInput<TRes> {
+  factory CopyWith_Input_NewPersonInput(
+    Input_NewPersonInput instance,
+    TRes Function(Input_NewPersonInput) then,
+  ) = _CopyWithImpl_Input_NewPersonInput;
+
+  factory CopyWith_Input_NewPersonInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_NewPersonInput;
+
+  TRes call({String? name, bool? gender});
+}
+
+class _CopyWithImpl_Input_NewPersonInput<TRes>
+    implements CopyWith_Input_NewPersonInput<TRes> {
+  _CopyWithImpl_Input_NewPersonInput(this._instance, this._then);
+
+  final Input_NewPersonInput _instance;
+
+  final TRes Function(Input_NewPersonInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? name = _undefined, Object? gender = _undefined}) => _then(
+    Input_NewPersonInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (gender != _undefined && gender != null) 'gender': (gender as bool),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_NewPersonInput<TRes>
+    implements CopyWith_Input_NewPersonInput<TRes> {
+  _CopyWithStubImpl_Input_NewPersonInput(this._res);
+
+  TRes _res;
+
+  call({String? name, bool? gender}) => _res;
+}
+
+class Input_AdminOnInput {
+  factory Input_AdminOnInput({
+    bool? serviceWriteRelatedFamilies,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    bool? serviceAllowRecordServantsAttendance,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowExport,
+    bool? serviceAllowEdit,
+    bool? serviceAdminOnUsers,
+    bool? groupWriteRelatedFamilies,
+    bool? groupAllowRecordServantsAttendance,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowExport,
+    bool? groupAllowEdit,
+    bool? groupAdminOnUsers,
+    bool? areaAllowExport,
+    bool? areaAllowEdit,
+    bool? areaAdminOnUsers,
+    String? adminOnService,
+    String? adminOnGroup,
+    String? adminOnArea,
+  }) => Input_AdminOnInput._({
+    if (serviceWriteRelatedFamilies != null)
+      r'serviceWriteRelatedFamilies': serviceWriteRelatedFamilies,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceGender != null) r'serviceGender': serviceGender,
+    if (serviceAllowRecordServantsAttendance != null)
+      r'serviceAllowRecordServantsAttendance':
+          serviceAllowRecordServantsAttendance,
+    if (serviceAllowRecordAttendance != null)
+      r'serviceAllowRecordAttendance': serviceAllowRecordAttendance,
+    if (serviceAllowExport != null) r'serviceAllowExport': serviceAllowExport,
+    if (serviceAllowEdit != null) r'serviceAllowEdit': serviceAllowEdit,
+    if (serviceAdminOnUsers != null)
+      r'serviceAdminOnUsers': serviceAdminOnUsers,
+    if (groupWriteRelatedFamilies != null)
+      r'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
+    if (groupAllowRecordServantsAttendance != null)
+      r'groupAllowRecordServantsAttendance': groupAllowRecordServantsAttendance,
+    if (groupAllowRecordAttendance != null)
+      r'groupAllowRecordAttendance': groupAllowRecordAttendance,
+    if (groupAllowExport != null) r'groupAllowExport': groupAllowExport,
+    if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
+    if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
+    if (areaAllowExport != null) r'areaAllowExport': areaAllowExport,
+    if (areaAllowEdit != null) r'areaAllowEdit': areaAllowEdit,
+    if (areaAdminOnUsers != null) r'areaAdminOnUsers': areaAdminOnUsers,
+    if (adminOnService != null) r'adminOnService': adminOnService,
+    if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
+    if (adminOnArea != null) r'adminOnArea': adminOnArea,
+  });
+
+  Input_AdminOnInput._(this._$data);
+
+  factory Input_AdminOnInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('serviceWriteRelatedFamilies')) {
+      final l$serviceWriteRelatedFamilies = data['serviceWriteRelatedFamilies'];
+      result$data['serviceWriteRelatedFamilies'] =
+          (l$serviceWriteRelatedFamilies as bool?);
+    }
+    if (data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = data['serviceStudyYear'];
+      result$data['serviceStudyYear'] = (l$serviceStudyYear as int?);
+    }
+    if (data.containsKey('serviceGender')) {
+      final l$serviceGender = data['serviceGender'];
+      result$data['serviceGender'] = (l$serviceGender as bool?);
+    }
+    if (data.containsKey('serviceAllowRecordServantsAttendance')) {
+      final l$serviceAllowRecordServantsAttendance =
+          data['serviceAllowRecordServantsAttendance'];
+      result$data['serviceAllowRecordServantsAttendance'] =
+          (l$serviceAllowRecordServantsAttendance as bool?);
+    }
+    if (data.containsKey('serviceAllowRecordAttendance')) {
+      final l$serviceAllowRecordAttendance =
+          data['serviceAllowRecordAttendance'];
+      result$data['serviceAllowRecordAttendance'] =
+          (l$serviceAllowRecordAttendance as bool?);
+    }
+    if (data.containsKey('serviceAllowExport')) {
+      final l$serviceAllowExport = data['serviceAllowExport'];
+      result$data['serviceAllowExport'] = (l$serviceAllowExport as bool?);
+    }
+    if (data.containsKey('serviceAllowEdit')) {
+      final l$serviceAllowEdit = data['serviceAllowEdit'];
+      result$data['serviceAllowEdit'] = (l$serviceAllowEdit as bool?);
+    }
+    if (data.containsKey('serviceAdminOnUsers')) {
+      final l$serviceAdminOnUsers = data['serviceAdminOnUsers'];
+      result$data['serviceAdminOnUsers'] = (l$serviceAdminOnUsers as bool?);
+    }
+    if (data.containsKey('groupWriteRelatedFamilies')) {
+      final l$groupWriteRelatedFamilies = data['groupWriteRelatedFamilies'];
+      result$data['groupWriteRelatedFamilies'] =
+          (l$groupWriteRelatedFamilies as bool?);
+    }
+    if (data.containsKey('groupAllowRecordServantsAttendance')) {
+      final l$groupAllowRecordServantsAttendance =
+          data['groupAllowRecordServantsAttendance'];
+      result$data['groupAllowRecordServantsAttendance'] =
+          (l$groupAllowRecordServantsAttendance as bool?);
+    }
+    if (data.containsKey('groupAllowRecordAttendance')) {
+      final l$groupAllowRecordAttendance = data['groupAllowRecordAttendance'];
+      result$data['groupAllowRecordAttendance'] =
+          (l$groupAllowRecordAttendance as bool?);
+    }
+    if (data.containsKey('groupAllowExport')) {
+      final l$groupAllowExport = data['groupAllowExport'];
+      result$data['groupAllowExport'] = (l$groupAllowExport as bool?);
+    }
+    if (data.containsKey('groupAllowEdit')) {
+      final l$groupAllowEdit = data['groupAllowEdit'];
+      result$data['groupAllowEdit'] = (l$groupAllowEdit as bool?);
+    }
+    if (data.containsKey('groupAdminOnUsers')) {
+      final l$groupAdminOnUsers = data['groupAdminOnUsers'];
+      result$data['groupAdminOnUsers'] = (l$groupAdminOnUsers as bool?);
+    }
+    if (data.containsKey('areaAllowExport')) {
+      final l$areaAllowExport = data['areaAllowExport'];
+      result$data['areaAllowExport'] = (l$areaAllowExport as bool?);
+    }
+    if (data.containsKey('areaAllowEdit')) {
+      final l$areaAllowEdit = data['areaAllowEdit'];
+      result$data['areaAllowEdit'] = (l$areaAllowEdit as bool?);
+    }
+    if (data.containsKey('areaAdminOnUsers')) {
+      final l$areaAdminOnUsers = data['areaAdminOnUsers'];
+      result$data['areaAdminOnUsers'] = (l$areaAdminOnUsers as bool?);
+    }
+    if (data.containsKey('adminOnService')) {
+      final l$adminOnService = data['adminOnService'];
+      result$data['adminOnService'] = (l$adminOnService as String?);
+    }
+    if (data.containsKey('adminOnGroup')) {
+      final l$adminOnGroup = data['adminOnGroup'];
+      result$data['adminOnGroup'] = (l$adminOnGroup as String?);
+    }
+    if (data.containsKey('adminOnArea')) {
+      final l$adminOnArea = data['adminOnArea'];
+      result$data['adminOnArea'] = (l$adminOnArea as String?);
+    }
+    return Input_AdminOnInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get serviceWriteRelatedFamilies =>
+      (_$data['serviceWriteRelatedFamilies'] as bool?);
+
+  int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
+  bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
+  bool? get serviceAllowRecordServantsAttendance =>
+      (_$data['serviceAllowRecordServantsAttendance'] as bool?);
+
+  bool? get serviceAllowRecordAttendance =>
+      (_$data['serviceAllowRecordAttendance'] as bool?);
+
+  bool? get serviceAllowExport => (_$data['serviceAllowExport'] as bool?);
+
+  bool? get serviceAllowEdit => (_$data['serviceAllowEdit'] as bool?);
+
+  bool? get serviceAdminOnUsers => (_$data['serviceAdminOnUsers'] as bool?);
+
+  bool? get groupWriteRelatedFamilies =>
+      (_$data['groupWriteRelatedFamilies'] as bool?);
+
+  bool? get groupAllowRecordServantsAttendance =>
+      (_$data['groupAllowRecordServantsAttendance'] as bool?);
+
+  bool? get groupAllowRecordAttendance =>
+      (_$data['groupAllowRecordAttendance'] as bool?);
+
+  bool? get groupAllowExport => (_$data['groupAllowExport'] as bool?);
+
+  bool? get groupAllowEdit => (_$data['groupAllowEdit'] as bool?);
+
+  bool? get groupAdminOnUsers => (_$data['groupAdminOnUsers'] as bool?);
+
+  bool? get areaAllowExport => (_$data['areaAllowExport'] as bool?);
+
+  bool? get areaAllowEdit => (_$data['areaAllowEdit'] as bool?);
+
+  bool? get areaAdminOnUsers => (_$data['areaAdminOnUsers'] as bool?);
+
+  String? get adminOnService => (_$data['adminOnService'] as String?);
+
+  String? get adminOnGroup => (_$data['adminOnGroup'] as String?);
+
+  String? get adminOnArea => (_$data['adminOnArea'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('serviceWriteRelatedFamilies')) {
+      final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+      result$data['serviceWriteRelatedFamilies'] =
+          l$serviceWriteRelatedFamilies;
+    }
+    if (_$data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = serviceStudyYear;
+      result$data['serviceStudyYear'] = l$serviceStudyYear;
+    }
+    if (_$data.containsKey('serviceGender')) {
+      final l$serviceGender = serviceGender;
+      result$data['serviceGender'] = l$serviceGender;
+    }
+    if (_$data.containsKey('serviceAllowRecordServantsAttendance')) {
+      final l$serviceAllowRecordServantsAttendance =
+          serviceAllowRecordServantsAttendance;
+      result$data['serviceAllowRecordServantsAttendance'] =
+          l$serviceAllowRecordServantsAttendance;
+    }
+    if (_$data.containsKey('serviceAllowRecordAttendance')) {
+      final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+      result$data['serviceAllowRecordAttendance'] =
+          l$serviceAllowRecordAttendance;
+    }
+    if (_$data.containsKey('serviceAllowExport')) {
+      final l$serviceAllowExport = serviceAllowExport;
+      result$data['serviceAllowExport'] = l$serviceAllowExport;
+    }
+    if (_$data.containsKey('serviceAllowEdit')) {
+      final l$serviceAllowEdit = serviceAllowEdit;
+      result$data['serviceAllowEdit'] = l$serviceAllowEdit;
+    }
+    if (_$data.containsKey('serviceAdminOnUsers')) {
+      final l$serviceAdminOnUsers = serviceAdminOnUsers;
+      result$data['serviceAdminOnUsers'] = l$serviceAdminOnUsers;
+    }
+    if (_$data.containsKey('groupWriteRelatedFamilies')) {
+      final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+      result$data['groupWriteRelatedFamilies'] = l$groupWriteRelatedFamilies;
+    }
+    if (_$data.containsKey('groupAllowRecordServantsAttendance')) {
+      final l$groupAllowRecordServantsAttendance =
+          groupAllowRecordServantsAttendance;
+      result$data['groupAllowRecordServantsAttendance'] =
+          l$groupAllowRecordServantsAttendance;
+    }
+    if (_$data.containsKey('groupAllowRecordAttendance')) {
+      final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+      result$data['groupAllowRecordAttendance'] = l$groupAllowRecordAttendance;
+    }
+    if (_$data.containsKey('groupAllowExport')) {
+      final l$groupAllowExport = groupAllowExport;
+      result$data['groupAllowExport'] = l$groupAllowExport;
+    }
+    if (_$data.containsKey('groupAllowEdit')) {
+      final l$groupAllowEdit = groupAllowEdit;
+      result$data['groupAllowEdit'] = l$groupAllowEdit;
+    }
+    if (_$data.containsKey('groupAdminOnUsers')) {
+      final l$groupAdminOnUsers = groupAdminOnUsers;
+      result$data['groupAdminOnUsers'] = l$groupAdminOnUsers;
+    }
+    if (_$data.containsKey('areaAllowExport')) {
+      final l$areaAllowExport = areaAllowExport;
+      result$data['areaAllowExport'] = l$areaAllowExport;
+    }
+    if (_$data.containsKey('areaAllowEdit')) {
+      final l$areaAllowEdit = areaAllowEdit;
+      result$data['areaAllowEdit'] = l$areaAllowEdit;
+    }
+    if (_$data.containsKey('areaAdminOnUsers')) {
+      final l$areaAdminOnUsers = areaAdminOnUsers;
+      result$data['areaAdminOnUsers'] = l$areaAdminOnUsers;
+    }
+    if (_$data.containsKey('adminOnService')) {
+      final l$adminOnService = adminOnService;
+      result$data['adminOnService'] = l$adminOnService;
+    }
+    if (_$data.containsKey('adminOnGroup')) {
+      final l$adminOnGroup = adminOnGroup;
+      result$data['adminOnGroup'] = l$adminOnGroup;
+    }
+    if (_$data.containsKey('adminOnArea')) {
+      final l$adminOnArea = adminOnArea;
+      result$data['adminOnArea'] = l$adminOnArea;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AdminOnInput<Input_AdminOnInput> get copyWith =>
+      CopyWith_Input_AdminOnInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AdminOnInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+    final lOther$serviceWriteRelatedFamilies =
+        other.serviceWriteRelatedFamilies;
+    if (_$data.containsKey('serviceWriteRelatedFamilies') !=
+        other._$data.containsKey('serviceWriteRelatedFamilies')) {
+      return false;
+    }
+    if (l$serviceWriteRelatedFamilies != lOther$serviceWriteRelatedFamilies) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (_$data.containsKey('serviceStudyYear') !=
+        other._$data.containsKey('serviceStudyYear')) {
+      return false;
+    }
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    final l$serviceGender = serviceGender;
+    final lOther$serviceGender = other.serviceGender;
+    if (_$data.containsKey('serviceGender') !=
+        other._$data.containsKey('serviceGender')) {
+      return false;
+    }
+    if (l$serviceGender != lOther$serviceGender) {
+      return false;
+    }
+    final l$serviceAllowRecordServantsAttendance =
+        serviceAllowRecordServantsAttendance;
+    final lOther$serviceAllowRecordServantsAttendance =
+        other.serviceAllowRecordServantsAttendance;
+    if (_$data.containsKey('serviceAllowRecordServantsAttendance') !=
+        other._$data.containsKey('serviceAllowRecordServantsAttendance')) {
+      return false;
+    }
+    if (l$serviceAllowRecordServantsAttendance !=
+        lOther$serviceAllowRecordServantsAttendance) {
+      return false;
+    }
+    final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+    final lOther$serviceAllowRecordAttendance =
+        other.serviceAllowRecordAttendance;
+    if (_$data.containsKey('serviceAllowRecordAttendance') !=
+        other._$data.containsKey('serviceAllowRecordAttendance')) {
+      return false;
+    }
+    if (l$serviceAllowRecordAttendance != lOther$serviceAllowRecordAttendance) {
+      return false;
+    }
+    final l$serviceAllowExport = serviceAllowExport;
+    final lOther$serviceAllowExport = other.serviceAllowExport;
+    if (_$data.containsKey('serviceAllowExport') !=
+        other._$data.containsKey('serviceAllowExport')) {
+      return false;
+    }
+    if (l$serviceAllowExport != lOther$serviceAllowExport) {
+      return false;
+    }
+    final l$serviceAllowEdit = serviceAllowEdit;
+    final lOther$serviceAllowEdit = other.serviceAllowEdit;
+    if (_$data.containsKey('serviceAllowEdit') !=
+        other._$data.containsKey('serviceAllowEdit')) {
+      return false;
+    }
+    if (l$serviceAllowEdit != lOther$serviceAllowEdit) {
+      return false;
+    }
+    final l$serviceAdminOnUsers = serviceAdminOnUsers;
+    final lOther$serviceAdminOnUsers = other.serviceAdminOnUsers;
+    if (_$data.containsKey('serviceAdminOnUsers') !=
+        other._$data.containsKey('serviceAdminOnUsers')) {
+      return false;
+    }
+    if (l$serviceAdminOnUsers != lOther$serviceAdminOnUsers) {
+      return false;
+    }
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+    final lOther$groupWriteRelatedFamilies = other.groupWriteRelatedFamilies;
+    if (_$data.containsKey('groupWriteRelatedFamilies') !=
+        other._$data.containsKey('groupWriteRelatedFamilies')) {
+      return false;
+    }
+    if (l$groupWriteRelatedFamilies != lOther$groupWriteRelatedFamilies) {
+      return false;
+    }
+    final l$groupAllowRecordServantsAttendance =
+        groupAllowRecordServantsAttendance;
+    final lOther$groupAllowRecordServantsAttendance =
+        other.groupAllowRecordServantsAttendance;
+    if (_$data.containsKey('groupAllowRecordServantsAttendance') !=
+        other._$data.containsKey('groupAllowRecordServantsAttendance')) {
+      return false;
+    }
+    if (l$groupAllowRecordServantsAttendance !=
+        lOther$groupAllowRecordServantsAttendance) {
+      return false;
+    }
+    final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+    final lOther$groupAllowRecordAttendance = other.groupAllowRecordAttendance;
+    if (_$data.containsKey('groupAllowRecordAttendance') !=
+        other._$data.containsKey('groupAllowRecordAttendance')) {
+      return false;
+    }
+    if (l$groupAllowRecordAttendance != lOther$groupAllowRecordAttendance) {
+      return false;
+    }
+    final l$groupAllowExport = groupAllowExport;
+    final lOther$groupAllowExport = other.groupAllowExport;
+    if (_$data.containsKey('groupAllowExport') !=
+        other._$data.containsKey('groupAllowExport')) {
+      return false;
+    }
+    if (l$groupAllowExport != lOther$groupAllowExport) {
+      return false;
+    }
+    final l$groupAllowEdit = groupAllowEdit;
+    final lOther$groupAllowEdit = other.groupAllowEdit;
+    if (_$data.containsKey('groupAllowEdit') !=
+        other._$data.containsKey('groupAllowEdit')) {
+      return false;
+    }
+    if (l$groupAllowEdit != lOther$groupAllowEdit) {
+      return false;
+    }
+    final l$groupAdminOnUsers = groupAdminOnUsers;
+    final lOther$groupAdminOnUsers = other.groupAdminOnUsers;
+    if (_$data.containsKey('groupAdminOnUsers') !=
+        other._$data.containsKey('groupAdminOnUsers')) {
+      return false;
+    }
+    if (l$groupAdminOnUsers != lOther$groupAdminOnUsers) {
+      return false;
+    }
+    final l$areaAllowExport = areaAllowExport;
+    final lOther$areaAllowExport = other.areaAllowExport;
+    if (_$data.containsKey('areaAllowExport') !=
+        other._$data.containsKey('areaAllowExport')) {
+      return false;
+    }
+    if (l$areaAllowExport != lOther$areaAllowExport) {
+      return false;
+    }
+    final l$areaAllowEdit = areaAllowEdit;
+    final lOther$areaAllowEdit = other.areaAllowEdit;
+    if (_$data.containsKey('areaAllowEdit') !=
+        other._$data.containsKey('areaAllowEdit')) {
+      return false;
+    }
+    if (l$areaAllowEdit != lOther$areaAllowEdit) {
+      return false;
+    }
+    final l$areaAdminOnUsers = areaAdminOnUsers;
+    final lOther$areaAdminOnUsers = other.areaAdminOnUsers;
+    if (_$data.containsKey('areaAdminOnUsers') !=
+        other._$data.containsKey('areaAdminOnUsers')) {
+      return false;
+    }
+    if (l$areaAdminOnUsers != lOther$areaAdminOnUsers) {
+      return false;
+    }
+    final l$adminOnService = adminOnService;
+    final lOther$adminOnService = other.adminOnService;
+    if (_$data.containsKey('adminOnService') !=
+        other._$data.containsKey('adminOnService')) {
+      return false;
+    }
+    if (l$adminOnService != lOther$adminOnService) {
+      return false;
+    }
+    final l$adminOnGroup = adminOnGroup;
+    final lOther$adminOnGroup = other.adminOnGroup;
+    if (_$data.containsKey('adminOnGroup') !=
+        other._$data.containsKey('adminOnGroup')) {
+      return false;
+    }
+    if (l$adminOnGroup != lOther$adminOnGroup) {
+      return false;
+    }
+    final l$adminOnArea = adminOnArea;
+    final lOther$adminOnArea = other.adminOnArea;
+    if (_$data.containsKey('adminOnArea') !=
+        other._$data.containsKey('adminOnArea')) {
+      return false;
+    }
+    if (l$adminOnArea != lOther$adminOnArea) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+    final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceGender = serviceGender;
+    final l$serviceAllowRecordServantsAttendance =
+        serviceAllowRecordServantsAttendance;
+    final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+    final l$serviceAllowExport = serviceAllowExport;
+    final l$serviceAllowEdit = serviceAllowEdit;
+    final l$serviceAdminOnUsers = serviceAdminOnUsers;
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+    final l$groupAllowRecordServantsAttendance =
+        groupAllowRecordServantsAttendance;
+    final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+    final l$groupAllowExport = groupAllowExport;
+    final l$groupAllowEdit = groupAllowEdit;
+    final l$groupAdminOnUsers = groupAdminOnUsers;
+    final l$areaAllowExport = areaAllowExport;
+    final l$areaAllowEdit = areaAllowEdit;
+    final l$areaAdminOnUsers = areaAdminOnUsers;
+    final l$adminOnService = adminOnService;
+    final l$adminOnGroup = adminOnGroup;
+    final l$adminOnArea = adminOnArea;
+    return Object.hashAll([
+      _$data.containsKey('serviceWriteRelatedFamilies')
+          ? l$serviceWriteRelatedFamilies
+          : const {},
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('serviceGender') ? l$serviceGender : const {},
+      _$data.containsKey('serviceAllowRecordServantsAttendance')
+          ? l$serviceAllowRecordServantsAttendance
+          : const {},
+      _$data.containsKey('serviceAllowRecordAttendance')
+          ? l$serviceAllowRecordAttendance
+          : const {},
+      _$data.containsKey('serviceAllowExport')
+          ? l$serviceAllowExport
+          : const {},
+      _$data.containsKey('serviceAllowEdit') ? l$serviceAllowEdit : const {},
+      _$data.containsKey('serviceAdminOnUsers')
+          ? l$serviceAdminOnUsers
+          : const {},
+      _$data.containsKey('groupWriteRelatedFamilies')
+          ? l$groupWriteRelatedFamilies
+          : const {},
+      _$data.containsKey('groupAllowRecordServantsAttendance')
+          ? l$groupAllowRecordServantsAttendance
+          : const {},
+      _$data.containsKey('groupAllowRecordAttendance')
+          ? l$groupAllowRecordAttendance
+          : const {},
+      _$data.containsKey('groupAllowExport') ? l$groupAllowExport : const {},
+      _$data.containsKey('groupAllowEdit') ? l$groupAllowEdit : const {},
+      _$data.containsKey('groupAdminOnUsers') ? l$groupAdminOnUsers : const {},
+      _$data.containsKey('areaAllowExport') ? l$areaAllowExport : const {},
+      _$data.containsKey('areaAllowEdit') ? l$areaAllowEdit : const {},
+      _$data.containsKey('areaAdminOnUsers') ? l$areaAdminOnUsers : const {},
+      _$data.containsKey('adminOnService') ? l$adminOnService : const {},
+      _$data.containsKey('adminOnGroup') ? l$adminOnGroup : const {},
+      _$data.containsKey('adminOnArea') ? l$adminOnArea : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AdminOnInput<TRes> {
+  factory CopyWith_Input_AdminOnInput(
+    Input_AdminOnInput instance,
+    TRes Function(Input_AdminOnInput) then,
+  ) = _CopyWithImpl_Input_AdminOnInput;
+
+  factory CopyWith_Input_AdminOnInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_AdminOnInput;
+
+  TRes call({
+    bool? serviceWriteRelatedFamilies,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    bool? serviceAllowRecordServantsAttendance,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowExport,
+    bool? serviceAllowEdit,
+    bool? serviceAdminOnUsers,
+    bool? groupWriteRelatedFamilies,
+    bool? groupAllowRecordServantsAttendance,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowExport,
+    bool? groupAllowEdit,
+    bool? groupAdminOnUsers,
+    bool? areaAllowExport,
+    bool? areaAllowEdit,
+    bool? areaAdminOnUsers,
+    String? adminOnService,
+    String? adminOnGroup,
+    String? adminOnArea,
+  });
+}
+
+class _CopyWithImpl_Input_AdminOnInput<TRes>
+    implements CopyWith_Input_AdminOnInput<TRes> {
+  _CopyWithImpl_Input_AdminOnInput(this._instance, this._then);
+
+  final Input_AdminOnInput _instance;
+
+  final TRes Function(Input_AdminOnInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? serviceWriteRelatedFamilies = _undefined,
+    Object? serviceStudyYear = _undefined,
+    Object? serviceGender = _undefined,
+    Object? serviceAllowRecordServantsAttendance = _undefined,
+    Object? serviceAllowRecordAttendance = _undefined,
+    Object? serviceAllowExport = _undefined,
+    Object? serviceAllowEdit = _undefined,
+    Object? serviceAdminOnUsers = _undefined,
+    Object? groupWriteRelatedFamilies = _undefined,
+    Object? groupAllowRecordServantsAttendance = _undefined,
+    Object? groupAllowRecordAttendance = _undefined,
+    Object? groupAllowExport = _undefined,
+    Object? groupAllowEdit = _undefined,
+    Object? groupAdminOnUsers = _undefined,
+    Object? areaAllowExport = _undefined,
+    Object? areaAllowEdit = _undefined,
+    Object? areaAdminOnUsers = _undefined,
+    Object? adminOnService = _undefined,
+    Object? adminOnGroup = _undefined,
+    Object? adminOnArea = _undefined,
+  }) => _then(
+    Input_AdminOnInput._({
+      ..._instance._$data,
+      if (serviceWriteRelatedFamilies != _undefined)
+        'serviceWriteRelatedFamilies': (serviceWriteRelatedFamilies as bool?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as int?),
+      if (serviceGender != _undefined)
+        'serviceGender': (serviceGender as bool?),
+      if (serviceAllowRecordServantsAttendance != _undefined)
+        'serviceAllowRecordServantsAttendance':
+            (serviceAllowRecordServantsAttendance as bool?),
+      if (serviceAllowRecordAttendance != _undefined)
+        'serviceAllowRecordAttendance': (serviceAllowRecordAttendance as bool?),
+      if (serviceAllowExport != _undefined)
+        'serviceAllowExport': (serviceAllowExport as bool?),
+      if (serviceAllowEdit != _undefined)
+        'serviceAllowEdit': (serviceAllowEdit as bool?),
+      if (serviceAdminOnUsers != _undefined)
+        'serviceAdminOnUsers': (serviceAdminOnUsers as bool?),
+      if (groupWriteRelatedFamilies != _undefined)
+        'groupWriteRelatedFamilies': (groupWriteRelatedFamilies as bool?),
+      if (groupAllowRecordServantsAttendance != _undefined)
+        'groupAllowRecordServantsAttendance':
+            (groupAllowRecordServantsAttendance as bool?),
+      if (groupAllowRecordAttendance != _undefined)
+        'groupAllowRecordAttendance': (groupAllowRecordAttendance as bool?),
+      if (groupAllowExport != _undefined)
+        'groupAllowExport': (groupAllowExport as bool?),
+      if (groupAllowEdit != _undefined)
+        'groupAllowEdit': (groupAllowEdit as bool?),
+      if (groupAdminOnUsers != _undefined)
+        'groupAdminOnUsers': (groupAdminOnUsers as bool?),
+      if (areaAllowExport != _undefined)
+        'areaAllowExport': (areaAllowExport as bool?),
+      if (areaAllowEdit != _undefined)
+        'areaAllowEdit': (areaAllowEdit as bool?),
+      if (areaAdminOnUsers != _undefined)
+        'areaAdminOnUsers': (areaAdminOnUsers as bool?),
+      if (adminOnService != _undefined)
+        'adminOnService': (adminOnService as String?),
+      if (adminOnGroup != _undefined) 'adminOnGroup': (adminOnGroup as String?),
+      if (adminOnArea != _undefined) 'adminOnArea': (adminOnArea as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_AdminOnInput<TRes>
+    implements CopyWith_Input_AdminOnInput<TRes> {
+  _CopyWithStubImpl_Input_AdminOnInput(this._res);
+
+  TRes _res;
+
+  call({
+    bool? serviceWriteRelatedFamilies,
+    int? serviceStudyYear,
+    bool? serviceGender,
+    bool? serviceAllowRecordServantsAttendance,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowExport,
+    bool? serviceAllowEdit,
+    bool? serviceAdminOnUsers,
+    bool? groupWriteRelatedFamilies,
+    bool? groupAllowRecordServantsAttendance,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowExport,
+    bool? groupAllowEdit,
+    bool? groupAdminOnUsers,
+    bool? areaAllowExport,
+    bool? areaAllowEdit,
+    bool? areaAdminOnUsers,
+    String? adminOnService,
+    String? adminOnGroup,
+    String? adminOnArea,
+  }) => _res;
+}
+
 class Input_ServiceMembershipFilterIsOutsideServiceStudyYears {
   factory Input_ServiceMembershipFilterIsOutsideServiceStudyYears({
     bool? isNil,
@@ -160154,6 +160952,776 @@ class _CopyWithStubImpl_Input_UserPermissionSortInput<TRes>
   call({Enum_SortOrder? order, Enum_UserPermissionSortField? field}) => _res;
 }
 
+class Input_ApplyInvitationCodeInput {
+  factory Input_ApplyInvitationCodeInput({required String code}) =>
+      Input_ApplyInvitationCodeInput._({r'code': code});
+
+  Input_ApplyInvitationCodeInput._(this._$data);
+
+  factory Input_ApplyInvitationCodeInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$code = data['code'];
+    result$data['code'] = (l$code as String);
+    return Input_ApplyInvitationCodeInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get code => (_$data['code'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$code = code;
+    result$data['code'] = l$code;
+    return result$data;
+  }
+
+  CopyWith_Input_ApplyInvitationCodeInput<Input_ApplyInvitationCodeInput>
+  get copyWith => CopyWith_Input_ApplyInvitationCodeInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_ApplyInvitationCodeInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$code = code;
+    final lOther$code = other.code;
+    if (l$code != lOther$code) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$code = code;
+    return Object.hashAll([l$code]);
+  }
+}
+
+abstract class CopyWith_Input_ApplyInvitationCodeInput<TRes> {
+  factory CopyWith_Input_ApplyInvitationCodeInput(
+    Input_ApplyInvitationCodeInput instance,
+    TRes Function(Input_ApplyInvitationCodeInput) then,
+  ) = _CopyWithImpl_Input_ApplyInvitationCodeInput;
+
+  factory CopyWith_Input_ApplyInvitationCodeInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_ApplyInvitationCodeInput;
+
+  TRes call({String? code});
+}
+
+class _CopyWithImpl_Input_ApplyInvitationCodeInput<TRes>
+    implements CopyWith_Input_ApplyInvitationCodeInput<TRes> {
+  _CopyWithImpl_Input_ApplyInvitationCodeInput(this._instance, this._then);
+
+  final Input_ApplyInvitationCodeInput _instance;
+
+  final TRes Function(Input_ApplyInvitationCodeInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? code = _undefined}) => _then(
+    Input_ApplyInvitationCodeInput._({
+      ..._instance._$data,
+      if (code != _undefined && code != null) 'code': (code as String),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_ApplyInvitationCodeInput<TRes>
+    implements CopyWith_Input_ApplyInvitationCodeInput<TRes> {
+  _CopyWithStubImpl_Input_ApplyInvitationCodeInput(this._res);
+
+  TRes _res;
+
+  call({String? code}) => _res;
+}
+
+class Input_UpdateUserPermissionsInput {
+  factory Input_UpdateUserPermissionsInput({
+    List<String>? permissions,
+    List<Input_AdminOnInput>? adminOn,
+  }) => Input_UpdateUserPermissionsInput._({
+    if (permissions != null) r'permissions': permissions,
+    if (adminOn != null) r'adminOn': adminOn,
+  });
+
+  Input_UpdateUserPermissionsInput._(this._$data);
+
+  factory Input_UpdateUserPermissionsInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('permissions')) {
+      final l$permissions = data['permissions'];
+      result$data['permissions'] = (l$permissions as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('adminOn')) {
+      final l$adminOn = data['adminOn'];
+      result$data['adminOn'] = (l$adminOn as List<dynamic>?)
+          ?.map((e) => Input_AdminOnInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    return Input_UpdateUserPermissionsInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<String>? get permissions => (_$data['permissions'] as List<String>?);
+
+  List<Input_AdminOnInput>? get adminOn =>
+      (_$data['adminOn'] as List<Input_AdminOnInput>?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('permissions')) {
+      final l$permissions = permissions;
+      result$data['permissions'] = l$permissions?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('adminOn')) {
+      final l$adminOn = adminOn;
+      result$data['adminOn'] = l$adminOn?.map((e) => e.toJson()).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UpdateUserPermissionsInput<Input_UpdateUserPermissionsInput>
+  get copyWith => CopyWith_Input_UpdateUserPermissionsInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UpdateUserPermissionsInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$permissions = permissions;
+    final lOther$permissions = other.permissions;
+    if (_$data.containsKey('permissions') !=
+        other._$data.containsKey('permissions')) {
+      return false;
+    }
+    if (l$permissions != null && lOther$permissions != null) {
+      if (l$permissions.length != lOther$permissions.length) {
+        return false;
+      }
+      for (int i = 0; i < l$permissions.length; i++) {
+        final l$permissions$entry = l$permissions[i];
+        final lOther$permissions$entry = lOther$permissions[i];
+        if (l$permissions$entry != lOther$permissions$entry) {
+          return false;
+        }
+      }
+    } else if (l$permissions != lOther$permissions) {
+      return false;
+    }
+    final l$adminOn = adminOn;
+    final lOther$adminOn = other.adminOn;
+    if (_$data.containsKey('adminOn') != other._$data.containsKey('adminOn')) {
+      return false;
+    }
+    if (l$adminOn != null && lOther$adminOn != null) {
+      if (l$adminOn.length != lOther$adminOn.length) {
+        return false;
+      }
+      for (int i = 0; i < l$adminOn.length; i++) {
+        final l$adminOn$entry = l$adminOn[i];
+        final lOther$adminOn$entry = lOther$adminOn[i];
+        if (l$adminOn$entry != lOther$adminOn$entry) {
+          return false;
+        }
+      }
+    } else if (l$adminOn != lOther$adminOn) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$permissions = permissions;
+    final l$adminOn = adminOn;
+    return Object.hashAll([
+      _$data.containsKey('permissions')
+          ? l$permissions == null
+                ? null
+                : Object.hashAll(l$permissions.map((v) => v))
+          : const {},
+      _$data.containsKey('adminOn')
+          ? l$adminOn == null
+                ? null
+                : Object.hashAll(l$adminOn.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UpdateUserPermissionsInput<TRes> {
+  factory CopyWith_Input_UpdateUserPermissionsInput(
+    Input_UpdateUserPermissionsInput instance,
+    TRes Function(Input_UpdateUserPermissionsInput) then,
+  ) = _CopyWithImpl_Input_UpdateUserPermissionsInput;
+
+  factory CopyWith_Input_UpdateUserPermissionsInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UpdateUserPermissionsInput;
+
+  TRes call({List<String>? permissions, List<Input_AdminOnInput>? adminOn});
+  TRes adminOn(
+    Iterable<Input_AdminOnInput>? Function(
+      Iterable<CopyWith_Input_AdminOnInput<Input_AdminOnInput>>?,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Input_UpdateUserPermissionsInput<TRes>
+    implements CopyWith_Input_UpdateUserPermissionsInput<TRes> {
+  _CopyWithImpl_Input_UpdateUserPermissionsInput(this._instance, this._then);
+
+  final Input_UpdateUserPermissionsInput _instance;
+
+  final TRes Function(Input_UpdateUserPermissionsInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? permissions = _undefined, Object? adminOn = _undefined}) =>
+      _then(
+        Input_UpdateUserPermissionsInput._({
+          ..._instance._$data,
+          if (permissions != _undefined)
+            'permissions': (permissions as List<String>?),
+          if (adminOn != _undefined)
+            'adminOn': (adminOn as List<Input_AdminOnInput>?),
+        }),
+      );
+
+  TRes adminOn(
+    Iterable<Input_AdminOnInput>? Function(
+      Iterable<CopyWith_Input_AdminOnInput<Input_AdminOnInput>>?,
+    )
+    _fn,
+  ) => call(
+    adminOn: _fn(
+      _instance.adminOn?.map((e) => CopyWith_Input_AdminOnInput(e, (i) => i)),
+    )?.toList(),
+  );
+}
+
+class _CopyWithStubImpl_Input_UpdateUserPermissionsInput<TRes>
+    implements CopyWith_Input_UpdateUserPermissionsInput<TRes> {
+  _CopyWithStubImpl_Input_UpdateUserPermissionsInput(this._res);
+
+  TRes _res;
+
+  call({List<String>? permissions, List<Input_AdminOnInput>? adminOn}) => _res;
+
+  adminOn(_fn) => _res;
+}
+
+class Input_UpdateUserInput {
+  factory Input_UpdateUserInput({
+    String? name,
+    String? email,
+    String? personId,
+  }) => Input_UpdateUserInput._({
+    if (name != null) r'name': name,
+    if (email != null) r'email': email,
+    if (personId != null) r'personId': personId,
+  });
+
+  Input_UpdateUserInput._(this._$data);
+
+  factory Input_UpdateUserInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('email')) {
+      final l$email = data['email'];
+      result$data['email'] = (l$email as String?);
+    }
+    if (data.containsKey('personId')) {
+      final l$personId = data['personId'];
+      result$data['personId'] = (l$personId as String?);
+    }
+    return Input_UpdateUserInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get name => (_$data['name'] as String?);
+
+  String? get email => (_$data['email'] as String?);
+
+  String? get personId => (_$data['personId'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('email')) {
+      final l$email = email;
+      result$data['email'] = l$email;
+    }
+    if (_$data.containsKey('personId')) {
+      final l$personId = personId;
+      result$data['personId'] = l$personId;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UpdateUserInput<Input_UpdateUserInput> get copyWith =>
+      CopyWith_Input_UpdateUserInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UpdateUserInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$email = email;
+    final lOther$email = other.email;
+    if (_$data.containsKey('email') != other._$data.containsKey('email')) {
+      return false;
+    }
+    if (l$email != lOther$email) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (_$data.containsKey('personId') !=
+        other._$data.containsKey('personId')) {
+      return false;
+    }
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$email = email;
+    final l$personId = personId;
+    return Object.hashAll([
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('email') ? l$email : const {},
+      _$data.containsKey('personId') ? l$personId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UpdateUserInput<TRes> {
+  factory CopyWith_Input_UpdateUserInput(
+    Input_UpdateUserInput instance,
+    TRes Function(Input_UpdateUserInput) then,
+  ) = _CopyWithImpl_Input_UpdateUserInput;
+
+  factory CopyWith_Input_UpdateUserInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UpdateUserInput;
+
+  TRes call({String? name, String? email, String? personId});
+}
+
+class _CopyWithImpl_Input_UpdateUserInput<TRes>
+    implements CopyWith_Input_UpdateUserInput<TRes> {
+  _CopyWithImpl_Input_UpdateUserInput(this._instance, this._then);
+
+  final Input_UpdateUserInput _instance;
+
+  final TRes Function(Input_UpdateUserInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? email = _undefined,
+    Object? personId = _undefined,
+  }) => _then(
+    Input_UpdateUserInput._({
+      ..._instance._$data,
+      if (name != _undefined) 'name': (name as String?),
+      if (email != _undefined) 'email': (email as String?),
+      if (personId != _undefined) 'personId': (personId as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UpdateUserInput<TRes>
+    implements CopyWith_Input_UpdateUserInput<TRes> {
+  _CopyWithStubImpl_Input_UpdateUserInput(this._res);
+
+  TRes _res;
+
+  call({String? name, String? email, String? personId}) => _res;
+}
+
+class Input_CreateUserInput {
+  factory Input_CreateUserInput({
+    required String name,
+    String? email,
+    List<String>? permissions,
+    List<Input_AdminOnInput>? adminOn,
+    String? personId,
+    Input_NewPersonInput? newPerson,
+    DateTime? invitationExpiresAt,
+  }) => Input_CreateUserInput._({
+    r'name': name,
+    if (email != null) r'email': email,
+    if (permissions != null) r'permissions': permissions,
+    if (adminOn != null) r'adminOn': adminOn,
+    if (personId != null) r'personId': personId,
+    if (newPerson != null) r'newPerson': newPerson,
+    if (invitationExpiresAt != null)
+      r'invitationExpiresAt': invitationExpiresAt,
+  });
+
+  Input_CreateUserInput._(this._$data);
+
+  factory Input_CreateUserInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    if (data.containsKey('email')) {
+      final l$email = data['email'];
+      result$data['email'] = (l$email as String?);
+    }
+    if (data.containsKey('permissions')) {
+      final l$permissions = data['permissions'];
+      result$data['permissions'] = (l$permissions as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('adminOn')) {
+      final l$adminOn = data['adminOn'];
+      result$data['adminOn'] = (l$adminOn as List<dynamic>?)
+          ?.map((e) => Input_AdminOnInput.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('personId')) {
+      final l$personId = data['personId'];
+      result$data['personId'] = (l$personId as String?);
+    }
+    if (data.containsKey('newPerson')) {
+      final l$newPerson = data['newPerson'];
+      result$data['newPerson'] = l$newPerson == null
+          ? null
+          : Input_NewPersonInput.fromJson(
+              (l$newPerson as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('invitationExpiresAt')) {
+      final l$invitationExpiresAt = data['invitationExpiresAt'];
+      result$data['invitationExpiresAt'] = l$invitationExpiresAt == null
+          ? null
+          : tstzFromString(l$invitationExpiresAt);
+    }
+    return Input_CreateUserInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  String? get email => (_$data['email'] as String?);
+
+  List<String>? get permissions => (_$data['permissions'] as List<String>?);
+
+  List<Input_AdminOnInput>? get adminOn =>
+      (_$data['adminOn'] as List<Input_AdminOnInput>?);
+
+  String? get personId => (_$data['personId'] as String?);
+
+  Input_NewPersonInput? get newPerson =>
+      (_$data['newPerson'] as Input_NewPersonInput?);
+
+  DateTime? get invitationExpiresAt =>
+      (_$data['invitationExpiresAt'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    if (_$data.containsKey('email')) {
+      final l$email = email;
+      result$data['email'] = l$email;
+    }
+    if (_$data.containsKey('permissions')) {
+      final l$permissions = permissions;
+      result$data['permissions'] = l$permissions?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('adminOn')) {
+      final l$adminOn = adminOn;
+      result$data['adminOn'] = l$adminOn?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('personId')) {
+      final l$personId = personId;
+      result$data['personId'] = l$personId;
+    }
+    if (_$data.containsKey('newPerson')) {
+      final l$newPerson = newPerson;
+      result$data['newPerson'] = l$newPerson?.toJson();
+    }
+    if (_$data.containsKey('invitationExpiresAt')) {
+      final l$invitationExpiresAt = invitationExpiresAt;
+      result$data['invitationExpiresAt'] = l$invitationExpiresAt == null
+          ? null
+          : tstzToString(l$invitationExpiresAt);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateUserInput<Input_CreateUserInput> get copyWith =>
+      CopyWith_Input_CreateUserInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateUserInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$email = email;
+    final lOther$email = other.email;
+    if (_$data.containsKey('email') != other._$data.containsKey('email')) {
+      return false;
+    }
+    if (l$email != lOther$email) {
+      return false;
+    }
+    final l$permissions = permissions;
+    final lOther$permissions = other.permissions;
+    if (_$data.containsKey('permissions') !=
+        other._$data.containsKey('permissions')) {
+      return false;
+    }
+    if (l$permissions != null && lOther$permissions != null) {
+      if (l$permissions.length != lOther$permissions.length) {
+        return false;
+      }
+      for (int i = 0; i < l$permissions.length; i++) {
+        final l$permissions$entry = l$permissions[i];
+        final lOther$permissions$entry = lOther$permissions[i];
+        if (l$permissions$entry != lOther$permissions$entry) {
+          return false;
+        }
+      }
+    } else if (l$permissions != lOther$permissions) {
+      return false;
+    }
+    final l$adminOn = adminOn;
+    final lOther$adminOn = other.adminOn;
+    if (_$data.containsKey('adminOn') != other._$data.containsKey('adminOn')) {
+      return false;
+    }
+    if (l$adminOn != null && lOther$adminOn != null) {
+      if (l$adminOn.length != lOther$adminOn.length) {
+        return false;
+      }
+      for (int i = 0; i < l$adminOn.length; i++) {
+        final l$adminOn$entry = l$adminOn[i];
+        final lOther$adminOn$entry = lOther$adminOn[i];
+        if (l$adminOn$entry != lOther$adminOn$entry) {
+          return false;
+        }
+      }
+    } else if (l$adminOn != lOther$adminOn) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (_$data.containsKey('personId') !=
+        other._$data.containsKey('personId')) {
+      return false;
+    }
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$newPerson = newPerson;
+    final lOther$newPerson = other.newPerson;
+    if (_$data.containsKey('newPerson') !=
+        other._$data.containsKey('newPerson')) {
+      return false;
+    }
+    if (l$newPerson != lOther$newPerson) {
+      return false;
+    }
+    final l$invitationExpiresAt = invitationExpiresAt;
+    final lOther$invitationExpiresAt = other.invitationExpiresAt;
+    if (_$data.containsKey('invitationExpiresAt') !=
+        other._$data.containsKey('invitationExpiresAt')) {
+      return false;
+    }
+    if (l$invitationExpiresAt != lOther$invitationExpiresAt) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$email = email;
+    final l$permissions = permissions;
+    final l$adminOn = adminOn;
+    final l$personId = personId;
+    final l$newPerson = newPerson;
+    final l$invitationExpiresAt = invitationExpiresAt;
+    return Object.hashAll([
+      l$name,
+      _$data.containsKey('email') ? l$email : const {},
+      _$data.containsKey('permissions')
+          ? l$permissions == null
+                ? null
+                : Object.hashAll(l$permissions.map((v) => v))
+          : const {},
+      _$data.containsKey('adminOn')
+          ? l$adminOn == null
+                ? null
+                : Object.hashAll(l$adminOn.map((v) => v))
+          : const {},
+      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('newPerson') ? l$newPerson : const {},
+      _$data.containsKey('invitationExpiresAt')
+          ? l$invitationExpiresAt
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateUserInput<TRes> {
+  factory CopyWith_Input_CreateUserInput(
+    Input_CreateUserInput instance,
+    TRes Function(Input_CreateUserInput) then,
+  ) = _CopyWithImpl_Input_CreateUserInput;
+
+  factory CopyWith_Input_CreateUserInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateUserInput;
+
+  TRes call({
+    String? name,
+    String? email,
+    List<String>? permissions,
+    List<Input_AdminOnInput>? adminOn,
+    String? personId,
+    Input_NewPersonInput? newPerson,
+    DateTime? invitationExpiresAt,
+  });
+  TRes adminOn(
+    Iterable<Input_AdminOnInput>? Function(
+      Iterable<CopyWith_Input_AdminOnInput<Input_AdminOnInput>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_NewPersonInput<TRes> get newPerson;
+}
+
+class _CopyWithImpl_Input_CreateUserInput<TRes>
+    implements CopyWith_Input_CreateUserInput<TRes> {
+  _CopyWithImpl_Input_CreateUserInput(this._instance, this._then);
+
+  final Input_CreateUserInput _instance;
+
+  final TRes Function(Input_CreateUserInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? email = _undefined,
+    Object? permissions = _undefined,
+    Object? adminOn = _undefined,
+    Object? personId = _undefined,
+    Object? newPerson = _undefined,
+    Object? invitationExpiresAt = _undefined,
+  }) => _then(
+    Input_CreateUserInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (email != _undefined) 'email': (email as String?),
+      if (permissions != _undefined)
+        'permissions': (permissions as List<String>?),
+      if (adminOn != _undefined)
+        'adminOn': (adminOn as List<Input_AdminOnInput>?),
+      if (personId != _undefined) 'personId': (personId as String?),
+      if (newPerson != _undefined)
+        'newPerson': (newPerson as Input_NewPersonInput?),
+      if (invitationExpiresAt != _undefined)
+        'invitationExpiresAt': (invitationExpiresAt as DateTime?),
+    }),
+  );
+
+  TRes adminOn(
+    Iterable<Input_AdminOnInput>? Function(
+      Iterable<CopyWith_Input_AdminOnInput<Input_AdminOnInput>>?,
+    )
+    _fn,
+  ) => call(
+    adminOn: _fn(
+      _instance.adminOn?.map((e) => CopyWith_Input_AdminOnInput(e, (i) => i)),
+    )?.toList(),
+  );
+
+  CopyWith_Input_NewPersonInput<TRes> get newPerson {
+    final local$newPerson = _instance.newPerson;
+    return local$newPerson == null
+        ? CopyWith_Input_NewPersonInput.stub(_then(_instance))
+        : CopyWith_Input_NewPersonInput(
+            local$newPerson,
+            (e) => call(newPerson: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_CreateUserInput<TRes>
+    implements CopyWith_Input_CreateUserInput<TRes> {
+  _CopyWithStubImpl_Input_CreateUserInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? email,
+    List<String>? permissions,
+    List<Input_AdminOnInput>? adminOn,
+    String? personId,
+    Input_NewPersonInput? newPerson,
+    DateTime? invitationExpiresAt,
+  }) => _res;
+
+  adminOn(_fn) => _res;
+
+  CopyWith_Input_NewPersonInput<TRes> get newPerson =>
+      CopyWith_Input_NewPersonInput.stub(_res);
+}
+
 class Input_UserFilterCurrentUserCanManageThisUser {
   factory Input_UserFilterCurrentUserCanManageThisUser({
     bool? isNil,
@@ -163333,6 +164901,7 @@ class Input_UserFilterInput {
     Input_UserFilterPhotoUpdatedAt? photoUpdatedAt,
     Input_UserFilterBlurhash? blurhash,
     Input_UserFilterAuthId? authId,
+    Input_InvitationFilterInput? invitation,
     Input_PersonFilterInput? person,
     Input_ScopeGrantFilterInput? scopeGrants,
     Input_UserPermissionFilterInput? permissions,
@@ -163347,6 +164916,7 @@ class Input_UserFilterInput {
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
     if (blurhash != null) r'blurhash': blurhash,
     if (authId != null) r'authId': authId,
+    if (invitation != null) r'invitation': invitation,
     if (person != null) r'person': person,
     if (scopeGrants != null) r'scopeGrants': scopeGrants,
     if (permissions != null) r'permissions': permissions,
@@ -163422,6 +164992,14 @@ class Input_UserFilterInput {
           ? null
           : Input_UserFilterAuthId.fromJson((l$authId as Map<String, dynamic>));
     }
+    if (data.containsKey('invitation')) {
+      final l$invitation = data['invitation'];
+      result$data['invitation'] = l$invitation == null
+          ? null
+          : Input_InvitationFilterInput.fromJson(
+              (l$invitation as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('person')) {
       final l$person = data['person'];
       result$data['person'] = l$person == null
@@ -163486,6 +165064,9 @@ class Input_UserFilterInput {
   Input_UserFilterAuthId? get authId =>
       (_$data['authId'] as Input_UserFilterAuthId?);
 
+  Input_InvitationFilterInput? get invitation =>
+      (_$data['invitation'] as Input_InvitationFilterInput?);
+
   Input_PersonFilterInput? get person =>
       (_$data['person'] as Input_PersonFilterInput?);
 
@@ -163537,6 +165118,10 @@ class Input_UserFilterInput {
     if (_$data.containsKey('authId')) {
       final l$authId = authId;
       result$data['authId'] = l$authId?.toJson();
+    }
+    if (_$data.containsKey('invitation')) {
+      final l$invitation = invitation;
+      result$data['invitation'] = l$invitation?.toJson();
     }
     if (_$data.containsKey('person')) {
       final l$person = person;
@@ -163676,6 +165261,15 @@ class Input_UserFilterInput {
     if (l$authId != lOther$authId) {
       return false;
     }
+    final l$invitation = invitation;
+    final lOther$invitation = other.invitation;
+    if (_$data.containsKey('invitation') !=
+        other._$data.containsKey('invitation')) {
+      return false;
+    }
+    if (l$invitation != lOther$invitation) {
+      return false;
+    }
     final l$person = person;
     final lOther$person = other.person;
     if (_$data.containsKey('person') != other._$data.containsKey('person')) {
@@ -163726,6 +165320,7 @@ class Input_UserFilterInput {
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
     final l$authId = authId;
+    final l$invitation = invitation;
     final l$person = person;
     final l$scopeGrants = scopeGrants;
     final l$permissions = permissions;
@@ -163752,6 +165347,7 @@ class Input_UserFilterInput {
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('authId') ? l$authId : const {},
+      _$data.containsKey('invitation') ? l$invitation : const {},
       _$data.containsKey('person') ? l$person : const {},
       _$data.containsKey('scopeGrants') ? l$scopeGrants : const {},
       _$data.containsKey('permissions') ? l$permissions : const {},
@@ -163781,6 +165377,7 @@ abstract class CopyWith_Input_UserFilterInput<TRes> {
     Input_UserFilterPhotoUpdatedAt? photoUpdatedAt,
     Input_UserFilterBlurhash? blurhash,
     Input_UserFilterAuthId? authId,
+    Input_InvitationFilterInput? invitation,
     Input_PersonFilterInput? person,
     Input_ScopeGrantFilterInput? scopeGrants,
     Input_UserPermissionFilterInput? permissions,
@@ -163810,6 +165407,7 @@ abstract class CopyWith_Input_UserFilterInput<TRes> {
   CopyWith_Input_UserFilterPhotoUpdatedAt<TRes> get photoUpdatedAt;
   CopyWith_Input_UserFilterBlurhash<TRes> get blurhash;
   CopyWith_Input_UserFilterAuthId<TRes> get authId;
+  CopyWith_Input_InvitationFilterInput<TRes> get invitation;
   CopyWith_Input_PersonFilterInput<TRes> get person;
   CopyWith_Input_ScopeGrantFilterInput<TRes> get scopeGrants;
   CopyWith_Input_UserPermissionFilterInput<TRes> get permissions;
@@ -163837,6 +165435,7 @@ class _CopyWithImpl_Input_UserFilterInput<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
     Object? authId = _undefined,
+    Object? invitation = _undefined,
     Object? person = _undefined,
     Object? scopeGrants = _undefined,
     Object? permissions = _undefined,
@@ -163855,6 +165454,8 @@ class _CopyWithImpl_Input_UserFilterInput<TRes>
       if (blurhash != _undefined)
         'blurhash': (blurhash as Input_UserFilterBlurhash?),
       if (authId != _undefined) 'authId': (authId as Input_UserFilterAuthId?),
+      if (invitation != _undefined)
+        'invitation': (invitation as Input_InvitationFilterInput?),
       if (person != _undefined) 'person': (person as Input_PersonFilterInput?),
       if (scopeGrants != _undefined)
         'scopeGrants': (scopeGrants as Input_ScopeGrantFilterInput?),
@@ -163948,6 +165549,16 @@ class _CopyWithImpl_Input_UserFilterInput<TRes>
         : CopyWith_Input_UserFilterAuthId(local$authId, (e) => call(authId: e));
   }
 
+  CopyWith_Input_InvitationFilterInput<TRes> get invitation {
+    final local$invitation = _instance.invitation;
+    return local$invitation == null
+        ? CopyWith_Input_InvitationFilterInput.stub(_then(_instance))
+        : CopyWith_Input_InvitationFilterInput(
+            local$invitation,
+            (e) => call(invitation: e),
+          );
+  }
+
   CopyWith_Input_PersonFilterInput<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -164009,6 +165620,7 @@ class _CopyWithStubImpl_Input_UserFilterInput<TRes>
     Input_UserFilterPhotoUpdatedAt? photoUpdatedAt,
     Input_UserFilterBlurhash? blurhash,
     Input_UserFilterAuthId? authId,
+    Input_InvitationFilterInput? invitation,
     Input_PersonFilterInput? person,
     Input_ScopeGrantFilterInput? scopeGrants,
     Input_UserPermissionFilterInput? permissions,
@@ -164038,6 +165650,9 @@ class _CopyWithStubImpl_Input_UserFilterInput<TRes>
 
   CopyWith_Input_UserFilterAuthId<TRes> get authId =>
       CopyWith_Input_UserFilterAuthId.stub(_res);
+
+  CopyWith_Input_InvitationFilterInput<TRes> get invitation =>
+      CopyWith_Input_InvitationFilterInput.stub(_res);
 
   CopyWith_Input_PersonFilterInput<TRes> get person =>
       CopyWith_Input_PersonFilterInput.stub(_res);
@@ -174194,6 +175809,3747 @@ class _CopyWithStubImpl_Input_ScopeGrantSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_ScopeGrantSortField? field}) => _res;
+}
+
+class Input_UpdateInvitationExpiryInput {
+  factory Input_UpdateInvitationExpiryInput({DateTime? expiresAt}) =>
+      Input_UpdateInvitationExpiryInput._({
+        if (expiresAt != null) r'expiresAt': expiresAt,
+      });
+
+  Input_UpdateInvitationExpiryInput._(this._$data);
+
+  factory Input_UpdateInvitationExpiryInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('expiresAt')) {
+      final l$expiresAt = data['expiresAt'];
+      result$data['expiresAt'] = l$expiresAt == null
+          ? null
+          : tstzFromString(l$expiresAt);
+    }
+    return Input_UpdateInvitationExpiryInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  DateTime? get expiresAt => (_$data['expiresAt'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('expiresAt')) {
+      final l$expiresAt = expiresAt;
+      result$data['expiresAt'] = l$expiresAt == null
+          ? null
+          : tstzToString(l$expiresAt);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UpdateInvitationExpiryInput<Input_UpdateInvitationExpiryInput>
+  get copyWith => CopyWith_Input_UpdateInvitationExpiryInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UpdateInvitationExpiryInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$expiresAt = expiresAt;
+    final lOther$expiresAt = other.expiresAt;
+    if (_$data.containsKey('expiresAt') !=
+        other._$data.containsKey('expiresAt')) {
+      return false;
+    }
+    if (l$expiresAt != lOther$expiresAt) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$expiresAt = expiresAt;
+    return Object.hashAll([
+      _$data.containsKey('expiresAt') ? l$expiresAt : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UpdateInvitationExpiryInput<TRes> {
+  factory CopyWith_Input_UpdateInvitationExpiryInput(
+    Input_UpdateInvitationExpiryInput instance,
+    TRes Function(Input_UpdateInvitationExpiryInput) then,
+  ) = _CopyWithImpl_Input_UpdateInvitationExpiryInput;
+
+  factory CopyWith_Input_UpdateInvitationExpiryInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UpdateInvitationExpiryInput;
+
+  TRes call({DateTime? expiresAt});
+}
+
+class _CopyWithImpl_Input_UpdateInvitationExpiryInput<TRes>
+    implements CopyWith_Input_UpdateInvitationExpiryInput<TRes> {
+  _CopyWithImpl_Input_UpdateInvitationExpiryInput(this._instance, this._then);
+
+  final Input_UpdateInvitationExpiryInput _instance;
+
+  final TRes Function(Input_UpdateInvitationExpiryInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? expiresAt = _undefined}) => _then(
+    Input_UpdateInvitationExpiryInput._({
+      ..._instance._$data,
+      if (expiresAt != _undefined) 'expiresAt': (expiresAt as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UpdateInvitationExpiryInput<TRes>
+    implements CopyWith_Input_UpdateInvitationExpiryInput<TRes> {
+  _CopyWithStubImpl_Input_UpdateInvitationExpiryInput(this._res);
+
+  TRes _res;
+
+  call({DateTime? expiresAt}) => _res;
+}
+
+class Input_CreateInvitationInput {
+  factory Input_CreateInvitationInput({
+    required String userUid,
+    DateTime? expiresAt,
+  }) => Input_CreateInvitationInput._({
+    r'userUid': userUid,
+    if (expiresAt != null) r'expiresAt': expiresAt,
+  });
+
+  Input_CreateInvitationInput._(this._$data);
+
+  factory Input_CreateInvitationInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$userUid = data['userUid'];
+    result$data['userUid'] = (l$userUid as String);
+    if (data.containsKey('expiresAt')) {
+      final l$expiresAt = data['expiresAt'];
+      result$data['expiresAt'] = l$expiresAt == null
+          ? null
+          : tstzFromString(l$expiresAt);
+    }
+    return Input_CreateInvitationInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get userUid => (_$data['userUid'] as String);
+
+  DateTime? get expiresAt => (_$data['expiresAt'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$userUid = userUid;
+    result$data['userUid'] = l$userUid;
+    if (_$data.containsKey('expiresAt')) {
+      final l$expiresAt = expiresAt;
+      result$data['expiresAt'] = l$expiresAt == null
+          ? null
+          : tstzToString(l$expiresAt);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateInvitationInput<Input_CreateInvitationInput>
+  get copyWith => CopyWith_Input_CreateInvitationInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateInvitationInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$userUid = userUid;
+    final lOther$userUid = other.userUid;
+    if (l$userUid != lOther$userUid) {
+      return false;
+    }
+    final l$expiresAt = expiresAt;
+    final lOther$expiresAt = other.expiresAt;
+    if (_$data.containsKey('expiresAt') !=
+        other._$data.containsKey('expiresAt')) {
+      return false;
+    }
+    if (l$expiresAt != lOther$expiresAt) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$userUid = userUid;
+    final l$expiresAt = expiresAt;
+    return Object.hashAll([
+      l$userUid,
+      _$data.containsKey('expiresAt') ? l$expiresAt : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateInvitationInput<TRes> {
+  factory CopyWith_Input_CreateInvitationInput(
+    Input_CreateInvitationInput instance,
+    TRes Function(Input_CreateInvitationInput) then,
+  ) = _CopyWithImpl_Input_CreateInvitationInput;
+
+  factory CopyWith_Input_CreateInvitationInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateInvitationInput;
+
+  TRes call({String? userUid, DateTime? expiresAt});
+}
+
+class _CopyWithImpl_Input_CreateInvitationInput<TRes>
+    implements CopyWith_Input_CreateInvitationInput<TRes> {
+  _CopyWithImpl_Input_CreateInvitationInput(this._instance, this._then);
+
+  final Input_CreateInvitationInput _instance;
+
+  final TRes Function(Input_CreateInvitationInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? userUid = _undefined, Object? expiresAt = _undefined}) =>
+      _then(
+        Input_CreateInvitationInput._({
+          ..._instance._$data,
+          if (userUid != _undefined && userUid != null)
+            'userUid': (userUid as String),
+          if (expiresAt != _undefined) 'expiresAt': (expiresAt as DateTime?),
+        }),
+      );
+}
+
+class _CopyWithStubImpl_Input_CreateInvitationInput<TRes>
+    implements CopyWith_Input_CreateInvitationInput<TRes> {
+  _CopyWithStubImpl_Input_CreateInvitationInput(this._res);
+
+  TRes _res;
+
+  call({String? userUid, DateTime? expiresAt}) => _res;
+}
+
+class Input_InvitationFilterCode {
+  factory Input_InvitationFilterCode({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  }) => Input_InvitationFilterCode._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (contains != null) r'contains': contains,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+    if (stringEndsWith != null) r'stringEndsWith': stringEndsWith,
+    if (stringStartsWith != null) r'stringStartsWith': stringStartsWith,
+    if (like != null) r'like': like,
+    if (ilike != null) r'ilike': ilike,
+  });
+
+  Input_InvitationFilterCode._(this._$data);
+
+  factory Input_InvitationFilterCode.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('contains')) {
+      final l$contains = data['contains'];
+      result$data['contains'] = (l$contains as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    if (data.containsKey('stringEndsWith')) {
+      final l$stringEndsWith = data['stringEndsWith'];
+      result$data['stringEndsWith'] = (l$stringEndsWith as String?);
+    }
+    if (data.containsKey('stringStartsWith')) {
+      final l$stringStartsWith = data['stringStartsWith'];
+      result$data['stringStartsWith'] = (l$stringStartsWith as String?);
+    }
+    if (data.containsKey('like')) {
+      final l$like = data['like'];
+      result$data['like'] = (l$like as String?);
+    }
+    if (data.containsKey('ilike')) {
+      final l$ilike = data['ilike'];
+      result$data['ilike'] = (l$ilike as String?);
+    }
+    return Input_InvitationFilterCode._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String>? get $in => (_$data['in'] as List<String>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get contains => (_$data['contains'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  String? get stringEndsWith => (_$data['stringEndsWith'] as String?);
+
+  String? get stringStartsWith => (_$data['stringStartsWith'] as String?);
+
+  String? get like => (_$data['like'] as String?);
+
+  String? get ilike => (_$data['ilike'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('contains')) {
+      final l$contains = contains;
+      result$data['contains'] = l$contains;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    if (_$data.containsKey('stringEndsWith')) {
+      final l$stringEndsWith = stringEndsWith;
+      result$data['stringEndsWith'] = l$stringEndsWith;
+    }
+    if (_$data.containsKey('stringStartsWith')) {
+      final l$stringStartsWith = stringStartsWith;
+      result$data['stringStartsWith'] = l$stringStartsWith;
+    }
+    if (_$data.containsKey('like')) {
+      final l$like = like;
+      result$data['like'] = l$like;
+    }
+    if (_$data.containsKey('ilike')) {
+      final l$ilike = ilike;
+      result$data['ilike'] = l$ilike;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_InvitationFilterCode<Input_InvitationFilterCode>
+  get copyWith => CopyWith_Input_InvitationFilterCode(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_InvitationFilterCode ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$contains = contains;
+    final lOther$contains = other.contains;
+    if (_$data.containsKey('contains') !=
+        other._$data.containsKey('contains')) {
+      return false;
+    }
+    if (l$contains != lOther$contains) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    final l$stringEndsWith = stringEndsWith;
+    final lOther$stringEndsWith = other.stringEndsWith;
+    if (_$data.containsKey('stringEndsWith') !=
+        other._$data.containsKey('stringEndsWith')) {
+      return false;
+    }
+    if (l$stringEndsWith != lOther$stringEndsWith) {
+      return false;
+    }
+    final l$stringStartsWith = stringStartsWith;
+    final lOther$stringStartsWith = other.stringStartsWith;
+    if (_$data.containsKey('stringStartsWith') !=
+        other._$data.containsKey('stringStartsWith')) {
+      return false;
+    }
+    if (l$stringStartsWith != lOther$stringStartsWith) {
+      return false;
+    }
+    final l$like = like;
+    final lOther$like = other.like;
+    if (_$data.containsKey('like') != other._$data.containsKey('like')) {
+      return false;
+    }
+    if (l$like != lOther$like) {
+      return false;
+    }
+    final l$ilike = ilike;
+    final lOther$ilike = other.ilike;
+    if (_$data.containsKey('ilike') != other._$data.containsKey('ilike')) {
+      return false;
+    }
+    if (l$ilike != lOther$ilike) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$contains = contains;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final l$stringEndsWith = stringEndsWith;
+    final l$stringStartsWith = stringStartsWith;
+    final l$like = like;
+    final l$ilike = ilike;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('contains') ? l$contains : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+      _$data.containsKey('stringEndsWith') ? l$stringEndsWith : const {},
+      _$data.containsKey('stringStartsWith') ? l$stringStartsWith : const {},
+      _$data.containsKey('like') ? l$like : const {},
+      _$data.containsKey('ilike') ? l$ilike : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_InvitationFilterCode<TRes> {
+  factory CopyWith_Input_InvitationFilterCode(
+    Input_InvitationFilterCode instance,
+    TRes Function(Input_InvitationFilterCode) then,
+  ) = _CopyWithImpl_Input_InvitationFilterCode;
+
+  factory CopyWith_Input_InvitationFilterCode.stub(TRes res) =
+      _CopyWithStubImpl_Input_InvitationFilterCode;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  });
+}
+
+class _CopyWithImpl_Input_InvitationFilterCode<TRes>
+    implements CopyWith_Input_InvitationFilterCode<TRes> {
+  _CopyWithImpl_Input_InvitationFilterCode(this._instance, this._then);
+
+  final Input_InvitationFilterCode _instance;
+
+  final TRes Function(Input_InvitationFilterCode) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? contains = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+    Object? stringEndsWith = _undefined,
+    Object? stringStartsWith = _undefined,
+    Object? like = _undefined,
+    Object? ilike = _undefined,
+  }) => _then(
+    Input_InvitationFilterCode._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (contains != _undefined) 'contains': (contains as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+      if (stringEndsWith != _undefined)
+        'stringEndsWith': (stringEndsWith as String?),
+      if (stringStartsWith != _undefined)
+        'stringStartsWith': (stringStartsWith as String?),
+      if (like != _undefined) 'like': (like as String?),
+      if (ilike != _undefined) 'ilike': (ilike as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_InvitationFilterCode<TRes>
+    implements CopyWith_Input_InvitationFilterCode<TRes> {
+  _CopyWithStubImpl_Input_InvitationFilterCode(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  }) => _res;
+}
+
+class Input_InvitationFilterClaimedAt {
+  factory Input_InvitationFilterClaimedAt({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime?>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => Input_InvitationFilterClaimedAt._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_InvitationFilterClaimedAt._(this._$data);
+
+  factory Input_InvitationFilterClaimedAt.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = l$eq == null ? null : tstzFromString(l$eq);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = l$notEq == null ? null : tstzFromString(l$notEq);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => e == null ? null : tstzFromString(e))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzFromString(l$lessThan);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzFromString(l$greaterThan);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzFromString(l$lessThanOrEqual);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzFromString(l$greaterThanOrEqual);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzFromString(l$isDistinctFrom);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzFromString(l$isNotDistinctFrom);
+    }
+    return Input_InvitationFilterClaimedAt._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  DateTime? get eq => (_$data['eq'] as DateTime?);
+
+  DateTime? get notEq => (_$data['notEq'] as DateTime?);
+
+  List<DateTime?>? get $in => (_$data['in'] as List<DateTime?>?);
+
+  DateTime? get lessThan => (_$data['lessThan'] as DateTime?);
+
+  DateTime? get greaterThan => (_$data['greaterThan'] as DateTime?);
+
+  DateTime? get lessThanOrEqual => (_$data['lessThanOrEqual'] as DateTime?);
+
+  DateTime? get greaterThanOrEqual =>
+      (_$data['greaterThanOrEqual'] as DateTime?);
+
+  DateTime? get isDistinctFrom => (_$data['isDistinctFrom'] as DateTime?);
+
+  DateTime? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq == null ? null : tstzToString(l$eq);
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq == null ? null : tstzToString(l$notEq);
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in
+          ?.map((e) => e == null ? null : tstzToString(e))
+          .toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzToString(l$lessThan);
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzToString(l$greaterThan);
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzToString(l$lessThanOrEqual);
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzToString(l$greaterThanOrEqual);
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzToString(l$isDistinctFrom);
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzToString(l$isNotDistinctFrom);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_InvitationFilterClaimedAt<Input_InvitationFilterClaimedAt>
+  get copyWith => CopyWith_Input_InvitationFilterClaimedAt(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_InvitationFilterClaimedAt ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_InvitationFilterClaimedAt<TRes> {
+  factory CopyWith_Input_InvitationFilterClaimedAt(
+    Input_InvitationFilterClaimedAt instance,
+    TRes Function(Input_InvitationFilterClaimedAt) then,
+  ) = _CopyWithImpl_Input_InvitationFilterClaimedAt;
+
+  factory CopyWith_Input_InvitationFilterClaimedAt.stub(TRes res) =
+      _CopyWithStubImpl_Input_InvitationFilterClaimedAt;
+
+  TRes call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime?>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_InvitationFilterClaimedAt<TRes>
+    implements CopyWith_Input_InvitationFilterClaimedAt<TRes> {
+  _CopyWithImpl_Input_InvitationFilterClaimedAt(this._instance, this._then);
+
+  final Input_InvitationFilterClaimedAt _instance;
+
+  final TRes Function(Input_InvitationFilterClaimedAt) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_InvitationFilterClaimedAt._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as DateTime?),
+      if (notEq != _undefined) 'notEq': (notEq as DateTime?),
+      if ($in != _undefined) 'in': ($in as List<DateTime?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as DateTime?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as DateTime?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as DateTime?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as DateTime?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as DateTime?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_InvitationFilterClaimedAt<TRes>
+    implements CopyWith_Input_InvitationFilterClaimedAt<TRes> {
+  _CopyWithStubImpl_Input_InvitationFilterClaimedAt(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime?>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_InvitationFilterExpiresAt {
+  factory Input_InvitationFilterExpiresAt({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => Input_InvitationFilterExpiresAt._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_InvitationFilterExpiresAt._(this._$data);
+
+  factory Input_InvitationFilterExpiresAt.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = l$eq == null ? null : tstzFromString(l$eq);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = l$notEq == null ? null : tstzFromString(l$notEq);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => tstzFromString(e))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzFromString(l$lessThan);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzFromString(l$greaterThan);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzFromString(l$lessThanOrEqual);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzFromString(l$greaterThanOrEqual);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzFromString(l$isDistinctFrom);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzFromString(l$isNotDistinctFrom);
+    }
+    return Input_InvitationFilterExpiresAt._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  DateTime? get eq => (_$data['eq'] as DateTime?);
+
+  DateTime? get notEq => (_$data['notEq'] as DateTime?);
+
+  List<DateTime>? get $in => (_$data['in'] as List<DateTime>?);
+
+  DateTime? get lessThan => (_$data['lessThan'] as DateTime?);
+
+  DateTime? get greaterThan => (_$data['greaterThan'] as DateTime?);
+
+  DateTime? get lessThanOrEqual => (_$data['lessThanOrEqual'] as DateTime?);
+
+  DateTime? get greaterThanOrEqual =>
+      (_$data['greaterThanOrEqual'] as DateTime?);
+
+  DateTime? get isDistinctFrom => (_$data['isDistinctFrom'] as DateTime?);
+
+  DateTime? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq == null ? null : tstzToString(l$eq);
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq == null ? null : tstzToString(l$notEq);
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => tstzToString(e)).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzToString(l$lessThan);
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzToString(l$greaterThan);
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzToString(l$lessThanOrEqual);
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzToString(l$greaterThanOrEqual);
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzToString(l$isDistinctFrom);
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzToString(l$isNotDistinctFrom);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_InvitationFilterExpiresAt<Input_InvitationFilterExpiresAt>
+  get copyWith => CopyWith_Input_InvitationFilterExpiresAt(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_InvitationFilterExpiresAt ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_InvitationFilterExpiresAt<TRes> {
+  factory CopyWith_Input_InvitationFilterExpiresAt(
+    Input_InvitationFilterExpiresAt instance,
+    TRes Function(Input_InvitationFilterExpiresAt) then,
+  ) = _CopyWithImpl_Input_InvitationFilterExpiresAt;
+
+  factory CopyWith_Input_InvitationFilterExpiresAt.stub(TRes res) =
+      _CopyWithStubImpl_Input_InvitationFilterExpiresAt;
+
+  TRes call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_InvitationFilterExpiresAt<TRes>
+    implements CopyWith_Input_InvitationFilterExpiresAt<TRes> {
+  _CopyWithImpl_Input_InvitationFilterExpiresAt(this._instance, this._then);
+
+  final Input_InvitationFilterExpiresAt _instance;
+
+  final TRes Function(Input_InvitationFilterExpiresAt) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_InvitationFilterExpiresAt._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as DateTime?),
+      if (notEq != _undefined) 'notEq': (notEq as DateTime?),
+      if ($in != _undefined) 'in': ($in as List<DateTime>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as DateTime?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as DateTime?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as DateTime?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as DateTime?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as DateTime?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_InvitationFilterExpiresAt<TRes>
+    implements CopyWith_Input_InvitationFilterExpiresAt<TRes> {
+  _CopyWithStubImpl_Input_InvitationFilterExpiresAt(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_InvitationFilterCreatedAt {
+  factory Input_InvitationFilterCreatedAt({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => Input_InvitationFilterCreatedAt._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_InvitationFilterCreatedAt._(this._$data);
+
+  factory Input_InvitationFilterCreatedAt.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = l$eq == null ? null : tstzFromString(l$eq);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = l$notEq == null ? null : tstzFromString(l$notEq);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => tstzFromString(e))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzFromString(l$lessThan);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzFromString(l$greaterThan);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzFromString(l$lessThanOrEqual);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzFromString(l$greaterThanOrEqual);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzFromString(l$isDistinctFrom);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzFromString(l$isNotDistinctFrom);
+    }
+    return Input_InvitationFilterCreatedAt._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  DateTime? get eq => (_$data['eq'] as DateTime?);
+
+  DateTime? get notEq => (_$data['notEq'] as DateTime?);
+
+  List<DateTime>? get $in => (_$data['in'] as List<DateTime>?);
+
+  DateTime? get lessThan => (_$data['lessThan'] as DateTime?);
+
+  DateTime? get greaterThan => (_$data['greaterThan'] as DateTime?);
+
+  DateTime? get lessThanOrEqual => (_$data['lessThanOrEqual'] as DateTime?);
+
+  DateTime? get greaterThanOrEqual =>
+      (_$data['greaterThanOrEqual'] as DateTime?);
+
+  DateTime? get isDistinctFrom => (_$data['isDistinctFrom'] as DateTime?);
+
+  DateTime? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq == null ? null : tstzToString(l$eq);
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq == null ? null : tstzToString(l$notEq);
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => tstzToString(e)).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : tstzToString(l$lessThan);
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : tstzToString(l$greaterThan);
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : tstzToString(l$lessThanOrEqual);
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : tstzToString(l$greaterThanOrEqual);
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : tstzToString(l$isDistinctFrom);
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : tstzToString(l$isNotDistinctFrom);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_InvitationFilterCreatedAt<Input_InvitationFilterCreatedAt>
+  get copyWith => CopyWith_Input_InvitationFilterCreatedAt(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_InvitationFilterCreatedAt ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_InvitationFilterCreatedAt<TRes> {
+  factory CopyWith_Input_InvitationFilterCreatedAt(
+    Input_InvitationFilterCreatedAt instance,
+    TRes Function(Input_InvitationFilterCreatedAt) then,
+  ) = _CopyWithImpl_Input_InvitationFilterCreatedAt;
+
+  factory CopyWith_Input_InvitationFilterCreatedAt.stub(TRes res) =
+      _CopyWithStubImpl_Input_InvitationFilterCreatedAt;
+
+  TRes call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_InvitationFilterCreatedAt<TRes>
+    implements CopyWith_Input_InvitationFilterCreatedAt<TRes> {
+  _CopyWithImpl_Input_InvitationFilterCreatedAt(this._instance, this._then);
+
+  final Input_InvitationFilterCreatedAt _instance;
+
+  final TRes Function(Input_InvitationFilterCreatedAt) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_InvitationFilterCreatedAt._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as DateTime?),
+      if (notEq != _undefined) 'notEq': (notEq as DateTime?),
+      if ($in != _undefined) 'in': ($in as List<DateTime>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as DateTime?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as DateTime?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as DateTime?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as DateTime?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as DateTime?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_InvitationFilterCreatedAt<TRes>
+    implements CopyWith_Input_InvitationFilterCreatedAt<TRes> {
+  _CopyWithStubImpl_Input_InvitationFilterCreatedAt(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_InvitationFilterCreatedBy {
+  factory Input_InvitationFilterCreatedBy({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_InvitationFilterCreatedBy._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_InvitationFilterCreatedBy._(this._$data);
+
+  factory Input_InvitationFilterCreatedBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    return Input_InvitationFilterCreatedBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String>? get $in => (_$data['in'] as List<String>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_InvitationFilterCreatedBy<Input_InvitationFilterCreatedBy>
+  get copyWith => CopyWith_Input_InvitationFilterCreatedBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_InvitationFilterCreatedBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_InvitationFilterCreatedBy<TRes> {
+  factory CopyWith_Input_InvitationFilterCreatedBy(
+    Input_InvitationFilterCreatedBy instance,
+    TRes Function(Input_InvitationFilterCreatedBy) then,
+  ) = _CopyWithImpl_Input_InvitationFilterCreatedBy;
+
+  factory CopyWith_Input_InvitationFilterCreatedBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_InvitationFilterCreatedBy;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_InvitationFilterCreatedBy<TRes>
+    implements CopyWith_Input_InvitationFilterCreatedBy<TRes> {
+  _CopyWithImpl_Input_InvitationFilterCreatedBy(this._instance, this._then);
+
+  final Input_InvitationFilterCreatedBy _instance;
+
+  final TRes Function(Input_InvitationFilterCreatedBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_InvitationFilterCreatedBy._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_InvitationFilterCreatedBy<TRes>
+    implements CopyWith_Input_InvitationFilterCreatedBy<TRes> {
+  _CopyWithStubImpl_Input_InvitationFilterCreatedBy(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_InvitationFilterUserUid {
+  factory Input_InvitationFilterUserUid({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_InvitationFilterUserUid._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_InvitationFilterUserUid._(this._$data);
+
+  factory Input_InvitationFilterUserUid.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    return Input_InvitationFilterUserUid._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String>? get $in => (_$data['in'] as List<String>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_InvitationFilterUserUid<Input_InvitationFilterUserUid>
+  get copyWith => CopyWith_Input_InvitationFilterUserUid(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_InvitationFilterUserUid ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_InvitationFilterUserUid<TRes> {
+  factory CopyWith_Input_InvitationFilterUserUid(
+    Input_InvitationFilterUserUid instance,
+    TRes Function(Input_InvitationFilterUserUid) then,
+  ) = _CopyWithImpl_Input_InvitationFilterUserUid;
+
+  factory CopyWith_Input_InvitationFilterUserUid.stub(TRes res) =
+      _CopyWithStubImpl_Input_InvitationFilterUserUid;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_InvitationFilterUserUid<TRes>
+    implements CopyWith_Input_InvitationFilterUserUid<TRes> {
+  _CopyWithImpl_Input_InvitationFilterUserUid(this._instance, this._then);
+
+  final Input_InvitationFilterUserUid _instance;
+
+  final TRes Function(Input_InvitationFilterUserUid) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_InvitationFilterUserUid._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_InvitationFilterUserUid<TRes>
+    implements CopyWith_Input_InvitationFilterUserUid<TRes> {
+  _CopyWithStubImpl_Input_InvitationFilterUserUid(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_InvitationFilterId {
+  factory Input_InvitationFilterId({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_InvitationFilterId._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_InvitationFilterId._(this._$data);
+
+  factory Input_InvitationFilterId.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    return Input_InvitationFilterId._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String>? get $in => (_$data['in'] as List<String>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_InvitationFilterId<Input_InvitationFilterId> get copyWith =>
+      CopyWith_Input_InvitationFilterId(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_InvitationFilterId ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_InvitationFilterId<TRes> {
+  factory CopyWith_Input_InvitationFilterId(
+    Input_InvitationFilterId instance,
+    TRes Function(Input_InvitationFilterId) then,
+  ) = _CopyWithImpl_Input_InvitationFilterId;
+
+  factory CopyWith_Input_InvitationFilterId.stub(TRes res) =
+      _CopyWithStubImpl_Input_InvitationFilterId;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_InvitationFilterId<TRes>
+    implements CopyWith_Input_InvitationFilterId<TRes> {
+  _CopyWithImpl_Input_InvitationFilterId(this._instance, this._then);
+
+  final Input_InvitationFilterId _instance;
+
+  final TRes Function(Input_InvitationFilterId) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_InvitationFilterId._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_InvitationFilterId<TRes>
+    implements CopyWith_Input_InvitationFilterId<TRes> {
+  _CopyWithStubImpl_Input_InvitationFilterId(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_InvitationFilterInput {
+  factory Input_InvitationFilterInput({
+    List<Input_InvitationFilterInput>? and,
+    List<Input_InvitationFilterInput>? or,
+    List<Input_InvitationFilterInput>? not,
+    Input_InvitationFilterId? id,
+    Input_InvitationFilterUserUid? userUid,
+    Input_InvitationFilterCreatedBy? createdBy,
+    Input_InvitationFilterCreatedAt? createdAt,
+    Input_InvitationFilterExpiresAt? expiresAt,
+    Input_InvitationFilterClaimedAt? claimedAt,
+    Input_InvitationFilterCode? code,
+    Input_UserFilterInput? creator,
+    Input_UserFilterInput? user,
+  }) => Input_InvitationFilterInput._({
+    if (and != null) r'and': and,
+    if (or != null) r'or': or,
+    if (not != null) r'not': not,
+    if (id != null) r'id': id,
+    if (userUid != null) r'userUid': userUid,
+    if (createdBy != null) r'createdBy': createdBy,
+    if (createdAt != null) r'createdAt': createdAt,
+    if (expiresAt != null) r'expiresAt': expiresAt,
+    if (claimedAt != null) r'claimedAt': claimedAt,
+    if (code != null) r'code': code,
+    if (creator != null) r'creator': creator,
+    if (user != null) r'user': user,
+  });
+
+  Input_InvitationFilterInput._(this._$data);
+
+  factory Input_InvitationFilterInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('and')) {
+      final l$and = data['and'];
+      result$data['and'] = (l$and as List<dynamic>?)
+          ?.map(
+            (e) => Input_InvitationFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('or')) {
+      final l$or = data['or'];
+      result$data['or'] = (l$or as List<dynamic>?)
+          ?.map(
+            (e) => Input_InvitationFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('not')) {
+      final l$not = data['not'];
+      result$data['not'] = (l$not as List<dynamic>?)
+          ?.map(
+            (e) => Input_InvitationFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_InvitationFilterId.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('userUid')) {
+      final l$userUid = data['userUid'];
+      result$data['userUid'] = l$userUid == null
+          ? null
+          : Input_InvitationFilterUserUid.fromJson(
+              (l$userUid as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = l$createdBy == null
+          ? null
+          : Input_InvitationFilterCreatedBy.fromJson(
+              (l$createdBy as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = l$createdAt == null
+          ? null
+          : Input_InvitationFilterCreatedAt.fromJson(
+              (l$createdAt as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('expiresAt')) {
+      final l$expiresAt = data['expiresAt'];
+      result$data['expiresAt'] = l$expiresAt == null
+          ? null
+          : Input_InvitationFilterExpiresAt.fromJson(
+              (l$expiresAt as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('claimedAt')) {
+      final l$claimedAt = data['claimedAt'];
+      result$data['claimedAt'] = l$claimedAt == null
+          ? null
+          : Input_InvitationFilterClaimedAt.fromJson(
+              (l$claimedAt as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('code')) {
+      final l$code = data['code'];
+      result$data['code'] = l$code == null
+          ? null
+          : Input_InvitationFilterCode.fromJson(
+              (l$code as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('creator')) {
+      final l$creator = data['creator'];
+      result$data['creator'] = l$creator == null
+          ? null
+          : Input_UserFilterInput.fromJson((l$creator as Map<String, dynamic>));
+    }
+    if (data.containsKey('user')) {
+      final l$user = data['user'];
+      result$data['user'] = l$user == null
+          ? null
+          : Input_UserFilterInput.fromJson((l$user as Map<String, dynamic>));
+    }
+    return Input_InvitationFilterInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_InvitationFilterInput>? get and =>
+      (_$data['and'] as List<Input_InvitationFilterInput>?);
+
+  List<Input_InvitationFilterInput>? get or =>
+      (_$data['or'] as List<Input_InvitationFilterInput>?);
+
+  List<Input_InvitationFilterInput>? get not =>
+      (_$data['not'] as List<Input_InvitationFilterInput>?);
+
+  Input_InvitationFilterId? get id =>
+      (_$data['id'] as Input_InvitationFilterId?);
+
+  Input_InvitationFilterUserUid? get userUid =>
+      (_$data['userUid'] as Input_InvitationFilterUserUid?);
+
+  Input_InvitationFilterCreatedBy? get createdBy =>
+      (_$data['createdBy'] as Input_InvitationFilterCreatedBy?);
+
+  Input_InvitationFilterCreatedAt? get createdAt =>
+      (_$data['createdAt'] as Input_InvitationFilterCreatedAt?);
+
+  Input_InvitationFilterExpiresAt? get expiresAt =>
+      (_$data['expiresAt'] as Input_InvitationFilterExpiresAt?);
+
+  Input_InvitationFilterClaimedAt? get claimedAt =>
+      (_$data['claimedAt'] as Input_InvitationFilterClaimedAt?);
+
+  Input_InvitationFilterCode? get code =>
+      (_$data['code'] as Input_InvitationFilterCode?);
+
+  Input_UserFilterInput? get creator =>
+      (_$data['creator'] as Input_UserFilterInput?);
+
+  Input_UserFilterInput? get user => (_$data['user'] as Input_UserFilterInput?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('and')) {
+      final l$and = and;
+      result$data['and'] = l$and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('or')) {
+      final l$or = or;
+      result$data['or'] = l$or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('not')) {
+      final l$not = not;
+      result$data['not'] = l$not?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('userUid')) {
+      final l$userUid = userUid;
+      result$data['userUid'] = l$userUid?.toJson();
+    }
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toJson();
+    }
+    if (_$data.containsKey('expiresAt')) {
+      final l$expiresAt = expiresAt;
+      result$data['expiresAt'] = l$expiresAt?.toJson();
+    }
+    if (_$data.containsKey('claimedAt')) {
+      final l$claimedAt = claimedAt;
+      result$data['claimedAt'] = l$claimedAt?.toJson();
+    }
+    if (_$data.containsKey('code')) {
+      final l$code = code;
+      result$data['code'] = l$code?.toJson();
+    }
+    if (_$data.containsKey('creator')) {
+      final l$creator = creator;
+      result$data['creator'] = l$creator?.toJson();
+    }
+    if (_$data.containsKey('user')) {
+      final l$user = user;
+      result$data['user'] = l$user?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_InvitationFilterInput<Input_InvitationFilterInput>
+  get copyWith => CopyWith_Input_InvitationFilterInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_InvitationFilterInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$and = and;
+    final lOther$and = other.and;
+    if (_$data.containsKey('and') != other._$data.containsKey('and')) {
+      return false;
+    }
+    if (l$and != null && lOther$and != null) {
+      if (l$and.length != lOther$and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$and.length; i++) {
+        final l$and$entry = l$and[i];
+        final lOther$and$entry = lOther$and[i];
+        if (l$and$entry != lOther$and$entry) {
+          return false;
+        }
+      }
+    } else if (l$and != lOther$and) {
+      return false;
+    }
+    final l$or = or;
+    final lOther$or = other.or;
+    if (_$data.containsKey('or') != other._$data.containsKey('or')) {
+      return false;
+    }
+    if (l$or != null && lOther$or != null) {
+      if (l$or.length != lOther$or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$or.length; i++) {
+        final l$or$entry = l$or[i];
+        final lOther$or$entry = lOther$or[i];
+        if (l$or$entry != lOther$or$entry) {
+          return false;
+        }
+      }
+    } else if (l$or != lOther$or) {
+      return false;
+    }
+    final l$not = not;
+    final lOther$not = other.not;
+    if (_$data.containsKey('not') != other._$data.containsKey('not')) {
+      return false;
+    }
+    if (l$not != null && lOther$not != null) {
+      if (l$not.length != lOther$not.length) {
+        return false;
+      }
+      for (int i = 0; i < l$not.length; i++) {
+        final l$not$entry = l$not[i];
+        final lOther$not$entry = lOther$not[i];
+        if (l$not$entry != lOther$not$entry) {
+          return false;
+        }
+      }
+    } else if (l$not != lOther$not) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$userUid = userUid;
+    final lOther$userUid = other.userUid;
+    if (_$data.containsKey('userUid') != other._$data.containsKey('userUid')) {
+      return false;
+    }
+    if (l$userUid != lOther$userUid) {
+      return false;
+    }
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
+      return false;
+    }
+    if (l$createdBy != lOther$createdBy) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$expiresAt = expiresAt;
+    final lOther$expiresAt = other.expiresAt;
+    if (_$data.containsKey('expiresAt') !=
+        other._$data.containsKey('expiresAt')) {
+      return false;
+    }
+    if (l$expiresAt != lOther$expiresAt) {
+      return false;
+    }
+    final l$claimedAt = claimedAt;
+    final lOther$claimedAt = other.claimedAt;
+    if (_$data.containsKey('claimedAt') !=
+        other._$data.containsKey('claimedAt')) {
+      return false;
+    }
+    if (l$claimedAt != lOther$claimedAt) {
+      return false;
+    }
+    final l$code = code;
+    final lOther$code = other.code;
+    if (_$data.containsKey('code') != other._$data.containsKey('code')) {
+      return false;
+    }
+    if (l$code != lOther$code) {
+      return false;
+    }
+    final l$creator = creator;
+    final lOther$creator = other.creator;
+    if (_$data.containsKey('creator') != other._$data.containsKey('creator')) {
+      return false;
+    }
+    if (l$creator != lOther$creator) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
+      return false;
+    }
+    if (l$user != lOther$user) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$and = and;
+    final l$or = or;
+    final l$not = not;
+    final l$id = id;
+    final l$userUid = userUid;
+    final l$createdBy = createdBy;
+    final l$createdAt = createdAt;
+    final l$expiresAt = expiresAt;
+    final l$claimedAt = claimedAt;
+    final l$code = code;
+    final l$creator = creator;
+    final l$user = user;
+    return Object.hashAll([
+      _$data.containsKey('and')
+          ? l$and == null
+                ? null
+                : Object.hashAll(l$and.map((v) => v))
+          : const {},
+      _$data.containsKey('or')
+          ? l$or == null
+                ? null
+                : Object.hashAll(l$or.map((v) => v))
+          : const {},
+      _$data.containsKey('not')
+          ? l$not == null
+                ? null
+                : Object.hashAll(l$not.map((v) => v))
+          : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('userUid') ? l$userUid : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('expiresAt') ? l$expiresAt : const {},
+      _$data.containsKey('claimedAt') ? l$claimedAt : const {},
+      _$data.containsKey('code') ? l$code : const {},
+      _$data.containsKey('creator') ? l$creator : const {},
+      _$data.containsKey('user') ? l$user : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_InvitationFilterInput<TRes> {
+  factory CopyWith_Input_InvitationFilterInput(
+    Input_InvitationFilterInput instance,
+    TRes Function(Input_InvitationFilterInput) then,
+  ) = _CopyWithImpl_Input_InvitationFilterInput;
+
+  factory CopyWith_Input_InvitationFilterInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_InvitationFilterInput;
+
+  TRes call({
+    List<Input_InvitationFilterInput>? and,
+    List<Input_InvitationFilterInput>? or,
+    List<Input_InvitationFilterInput>? not,
+    Input_InvitationFilterId? id,
+    Input_InvitationFilterUserUid? userUid,
+    Input_InvitationFilterCreatedBy? createdBy,
+    Input_InvitationFilterCreatedAt? createdAt,
+    Input_InvitationFilterExpiresAt? expiresAt,
+    Input_InvitationFilterClaimedAt? claimedAt,
+    Input_InvitationFilterCode? code,
+    Input_UserFilterInput? creator,
+    Input_UserFilterInput? user,
+  });
+  TRes and(
+    Iterable<Input_InvitationFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_InvitationFilterInput<Input_InvitationFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  TRes or(
+    Iterable<Input_InvitationFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_InvitationFilterInput<Input_InvitationFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  TRes not(
+    Iterable<Input_InvitationFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_InvitationFilterInput<Input_InvitationFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_InvitationFilterId<TRes> get id;
+  CopyWith_Input_InvitationFilterUserUid<TRes> get userUid;
+  CopyWith_Input_InvitationFilterCreatedBy<TRes> get createdBy;
+  CopyWith_Input_InvitationFilterCreatedAt<TRes> get createdAt;
+  CopyWith_Input_InvitationFilterExpiresAt<TRes> get expiresAt;
+  CopyWith_Input_InvitationFilterClaimedAt<TRes> get claimedAt;
+  CopyWith_Input_InvitationFilterCode<TRes> get code;
+  CopyWith_Input_UserFilterInput<TRes> get creator;
+  CopyWith_Input_UserFilterInput<TRes> get user;
+}
+
+class _CopyWithImpl_Input_InvitationFilterInput<TRes>
+    implements CopyWith_Input_InvitationFilterInput<TRes> {
+  _CopyWithImpl_Input_InvitationFilterInput(this._instance, this._then);
+
+  final Input_InvitationFilterInput _instance;
+
+  final TRes Function(Input_InvitationFilterInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? and = _undefined,
+    Object? or = _undefined,
+    Object? not = _undefined,
+    Object? id = _undefined,
+    Object? userUid = _undefined,
+    Object? createdBy = _undefined,
+    Object? createdAt = _undefined,
+    Object? expiresAt = _undefined,
+    Object? claimedAt = _undefined,
+    Object? code = _undefined,
+    Object? creator = _undefined,
+    Object? user = _undefined,
+  }) => _then(
+    Input_InvitationFilterInput._({
+      ..._instance._$data,
+      if (and != _undefined) 'and': (and as List<Input_InvitationFilterInput>?),
+      if (or != _undefined) 'or': (or as List<Input_InvitationFilterInput>?),
+      if (not != _undefined) 'not': (not as List<Input_InvitationFilterInput>?),
+      if (id != _undefined) 'id': (id as Input_InvitationFilterId?),
+      if (userUid != _undefined)
+        'userUid': (userUid as Input_InvitationFilterUserUid?),
+      if (createdBy != _undefined)
+        'createdBy': (createdBy as Input_InvitationFilterCreatedBy?),
+      if (createdAt != _undefined)
+        'createdAt': (createdAt as Input_InvitationFilterCreatedAt?),
+      if (expiresAt != _undefined)
+        'expiresAt': (expiresAt as Input_InvitationFilterExpiresAt?),
+      if (claimedAt != _undefined)
+        'claimedAt': (claimedAt as Input_InvitationFilterClaimedAt?),
+      if (code != _undefined) 'code': (code as Input_InvitationFilterCode?),
+      if (creator != _undefined) 'creator': (creator as Input_UserFilterInput?),
+      if (user != _undefined) 'user': (user as Input_UserFilterInput?),
+    }),
+  );
+
+  TRes and(
+    Iterable<Input_InvitationFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_InvitationFilterInput<Input_InvitationFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    and: _fn(
+      _instance.and?.map(
+        (e) => CopyWith_Input_InvitationFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  TRes or(
+    Iterable<Input_InvitationFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_InvitationFilterInput<Input_InvitationFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    or: _fn(
+      _instance.or?.map(
+        (e) => CopyWith_Input_InvitationFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  TRes not(
+    Iterable<Input_InvitationFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_InvitationFilterInput<Input_InvitationFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    not: _fn(
+      _instance.not?.map(
+        (e) => CopyWith_Input_InvitationFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_InvitationFilterId<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_InvitationFilterId.stub(_then(_instance))
+        : CopyWith_Input_InvitationFilterId(local$id, (e) => call(id: e));
+  }
+
+  CopyWith_Input_InvitationFilterUserUid<TRes> get userUid {
+    final local$userUid = _instance.userUid;
+    return local$userUid == null
+        ? CopyWith_Input_InvitationFilterUserUid.stub(_then(_instance))
+        : CopyWith_Input_InvitationFilterUserUid(
+            local$userUid,
+            (e) => call(userUid: e),
+          );
+  }
+
+  CopyWith_Input_InvitationFilterCreatedBy<TRes> get createdBy {
+    final local$createdBy = _instance.createdBy;
+    return local$createdBy == null
+        ? CopyWith_Input_InvitationFilterCreatedBy.stub(_then(_instance))
+        : CopyWith_Input_InvitationFilterCreatedBy(
+            local$createdBy,
+            (e) => call(createdBy: e),
+          );
+  }
+
+  CopyWith_Input_InvitationFilterCreatedAt<TRes> get createdAt {
+    final local$createdAt = _instance.createdAt;
+    return local$createdAt == null
+        ? CopyWith_Input_InvitationFilterCreatedAt.stub(_then(_instance))
+        : CopyWith_Input_InvitationFilterCreatedAt(
+            local$createdAt,
+            (e) => call(createdAt: e),
+          );
+  }
+
+  CopyWith_Input_InvitationFilterExpiresAt<TRes> get expiresAt {
+    final local$expiresAt = _instance.expiresAt;
+    return local$expiresAt == null
+        ? CopyWith_Input_InvitationFilterExpiresAt.stub(_then(_instance))
+        : CopyWith_Input_InvitationFilterExpiresAt(
+            local$expiresAt,
+            (e) => call(expiresAt: e),
+          );
+  }
+
+  CopyWith_Input_InvitationFilterClaimedAt<TRes> get claimedAt {
+    final local$claimedAt = _instance.claimedAt;
+    return local$claimedAt == null
+        ? CopyWith_Input_InvitationFilterClaimedAt.stub(_then(_instance))
+        : CopyWith_Input_InvitationFilterClaimedAt(
+            local$claimedAt,
+            (e) => call(claimedAt: e),
+          );
+  }
+
+  CopyWith_Input_InvitationFilterCode<TRes> get code {
+    final local$code = _instance.code;
+    return local$code == null
+        ? CopyWith_Input_InvitationFilterCode.stub(_then(_instance))
+        : CopyWith_Input_InvitationFilterCode(local$code, (e) => call(code: e));
+  }
+
+  CopyWith_Input_UserFilterInput<TRes> get creator {
+    final local$creator = _instance.creator;
+    return local$creator == null
+        ? CopyWith_Input_UserFilterInput.stub(_then(_instance))
+        : CopyWith_Input_UserFilterInput(
+            local$creator,
+            (e) => call(creator: e),
+          );
+  }
+
+  CopyWith_Input_UserFilterInput<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_UserFilterInput.stub(_then(_instance))
+        : CopyWith_Input_UserFilterInput(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_InvitationFilterInput<TRes>
+    implements CopyWith_Input_InvitationFilterInput<TRes> {
+  _CopyWithStubImpl_Input_InvitationFilterInput(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_InvitationFilterInput>? and,
+    List<Input_InvitationFilterInput>? or,
+    List<Input_InvitationFilterInput>? not,
+    Input_InvitationFilterId? id,
+    Input_InvitationFilterUserUid? userUid,
+    Input_InvitationFilterCreatedBy? createdBy,
+    Input_InvitationFilterCreatedAt? createdAt,
+    Input_InvitationFilterExpiresAt? expiresAt,
+    Input_InvitationFilterClaimedAt? claimedAt,
+    Input_InvitationFilterCode? code,
+    Input_UserFilterInput? creator,
+    Input_UserFilterInput? user,
+  }) => _res;
+
+  and(_fn) => _res;
+
+  or(_fn) => _res;
+
+  not(_fn) => _res;
+
+  CopyWith_Input_InvitationFilterId<TRes> get id =>
+      CopyWith_Input_InvitationFilterId.stub(_res);
+
+  CopyWith_Input_InvitationFilterUserUid<TRes> get userUid =>
+      CopyWith_Input_InvitationFilterUserUid.stub(_res);
+
+  CopyWith_Input_InvitationFilterCreatedBy<TRes> get createdBy =>
+      CopyWith_Input_InvitationFilterCreatedBy.stub(_res);
+
+  CopyWith_Input_InvitationFilterCreatedAt<TRes> get createdAt =>
+      CopyWith_Input_InvitationFilterCreatedAt.stub(_res);
+
+  CopyWith_Input_InvitationFilterExpiresAt<TRes> get expiresAt =>
+      CopyWith_Input_InvitationFilterExpiresAt.stub(_res);
+
+  CopyWith_Input_InvitationFilterClaimedAt<TRes> get claimedAt =>
+      CopyWith_Input_InvitationFilterClaimedAt.stub(_res);
+
+  CopyWith_Input_InvitationFilterCode<TRes> get code =>
+      CopyWith_Input_InvitationFilterCode.stub(_res);
+
+  CopyWith_Input_UserFilterInput<TRes> get creator =>
+      CopyWith_Input_UserFilterInput.stub(_res);
+
+  CopyWith_Input_UserFilterInput<TRes> get user =>
+      CopyWith_Input_UserFilterInput.stub(_res);
 }
 
 class Input_UniversityFilterName {
