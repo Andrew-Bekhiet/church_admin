@@ -18,6 +18,10 @@ defmodule ChurchAdmin.Catalog.College do
       get :college, :read
       list :colleges, :read
     end
+
+    mutations do
+      create :create_college, :create_college
+    end
   end
 
   postgres do
@@ -39,6 +43,13 @@ defmodule ChurchAdmin.Catalog.College do
                  required?: false,
                  default_limit: 25,
                  max_page_size: 1000
+    end
+
+    create :create_college do
+      accept [:name, :university_id]
+      upsert? true
+      upsert_identity :unique_name
+      upsert_fields [:name]
     end
   end
 

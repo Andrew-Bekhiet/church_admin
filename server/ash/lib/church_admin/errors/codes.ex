@@ -29,6 +29,7 @@ defmodule ChurchAdmin.Errors.Codes do
     account/already-claimed account/not-claimable
     photo/own-photo-only
     export/forbidden
+    person-type/order-taken
   )
 
   @lifecycle_codes for resource <- @resources_with_lifecycle_codes,
