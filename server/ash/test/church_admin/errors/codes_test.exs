@@ -22,7 +22,7 @@ defmodule ChurchAdmin.Errors.CodesTest do
 
   test "every code is a lower-case word, or a resource and a kebab-case reason" do
     for code <- Codes.all() do
-      assert code =~ ~r{^([a-z_]+|[a-z]+/[a-z]+(-[a-z]+)*)$}
+      assert code =~ ~r{^([a-z_]+|[a-z]+(-[a-z]+)*/[a-z]+(-[a-z]+)*)$}
     end
   end
 end
