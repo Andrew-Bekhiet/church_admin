@@ -7,7 +7,10 @@ defmodule ChurchAdmin.TestDomain do
   use ChurchAdmin.Domain, validate_config_inclusion?: false
 
   resources do
+    resource ChurchAdmin.TestDomain.EditedThing
     resource ChurchAdmin.TestDomain.ErrorProbe
     resource ChurchAdmin.TestDomain.HasuraSessionProbe
+    resource ChurchAdmin.TestDomain.StampedNote
+    resource ChurchAdmin.TestDomain.ThingMembership
   end
 end

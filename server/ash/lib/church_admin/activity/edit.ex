@@ -33,6 +33,12 @@ defmodule ChurchAdmin.Activity.Edit do
 
   actions do
     defaults [:read]
+
+    create :record do
+      public? false
+      accept [:table, :record_id, :recorded_by, :user_role]
+      change atomic_set(:time, expr(fragment("now()")))
+    end
   end
 
   attributes do
