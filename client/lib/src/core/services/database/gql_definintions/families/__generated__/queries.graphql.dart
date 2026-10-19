@@ -1357,9 +1357,11 @@ class _CopyWithStubImpl_Query_familiesWithAddresses_families<TRes>
 class Variables_Query_family {
   factory Variables_Query_family({
     required String id,
+    Input_FamilyContactFilterInput? contactsFilter,
     List<Input_FamilyContactSortInput?>? contactsSort,
   }) => Variables_Query_family._({
     r'id': id,
+    if (contactsFilter != null) r'contactsFilter': contactsFilter,
     if (contactsSort != null) r'contactsSort': contactsSort,
   });
 
@@ -1369,6 +1371,14 @@ class Variables_Query_family {
     final result$data = <String, dynamic>{};
     final l$id = data['id'];
     result$data['id'] = (l$id as String);
+    if (data.containsKey('contactsFilter')) {
+      final l$contactsFilter = data['contactsFilter'];
+      result$data['contactsFilter'] = l$contactsFilter == null
+          ? null
+          : Input_FamilyContactFilterInput.fromJson(
+              (l$contactsFilter as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('contactsSort')) {
       final l$contactsSort = data['contactsSort'];
       result$data['contactsSort'] = (l$contactsSort as List<dynamic>?)
@@ -1388,6 +1398,9 @@ class Variables_Query_family {
 
   String get id => (_$data['id'] as String);
 
+  Input_FamilyContactFilterInput? get contactsFilter =>
+      (_$data['contactsFilter'] as Input_FamilyContactFilterInput?);
+
   List<Input_FamilyContactSortInput?>? get contactsSort =>
       (_$data['contactsSort'] as List<Input_FamilyContactSortInput?>?);
 
@@ -1395,6 +1408,10 @@ class Variables_Query_family {
     final result$data = <String, dynamic>{};
     final l$id = id;
     result$data['id'] = l$id;
+    if (_$data.containsKey('contactsFilter')) {
+      final l$contactsFilter = contactsFilter;
+      result$data['contactsFilter'] = l$contactsFilter?.toJson();
+    }
     if (_$data.containsKey('contactsSort')) {
       final l$contactsSort = contactsSort;
       result$data['contactsSort'] = l$contactsSort
@@ -1418,6 +1435,15 @@ class Variables_Query_family {
     final l$id = id;
     final lOther$id = other.id;
     if (l$id != lOther$id) {
+      return false;
+    }
+    final l$contactsFilter = contactsFilter;
+    final lOther$contactsFilter = other.contactsFilter;
+    if (_$data.containsKey('contactsFilter') !=
+        other._$data.containsKey('contactsFilter')) {
+      return false;
+    }
+    if (l$contactsFilter != lOther$contactsFilter) {
       return false;
     }
     final l$contactsSort = contactsSort;
@@ -1446,9 +1472,11 @@ class Variables_Query_family {
   @override
   int get hashCode {
     final l$id = id;
+    final l$contactsFilter = contactsFilter;
     final l$contactsSort = contactsSort;
     return Object.hashAll([
       l$id,
+      _$data.containsKey('contactsFilter') ? l$contactsFilter : const {},
       _$data.containsKey('contactsSort')
           ? l$contactsSort == null
                 ? null
@@ -1467,7 +1495,11 @@ abstract class CopyWith_Variables_Query_family<TRes> {
   factory CopyWith_Variables_Query_family.stub(TRes res) =
       _CopyWithStubImpl_Variables_Query_family;
 
-  TRes call({String? id, List<Input_FamilyContactSortInput?>? contactsSort});
+  TRes call({
+    String? id,
+    Input_FamilyContactFilterInput? contactsFilter,
+    List<Input_FamilyContactSortInput?>? contactsSort,
+  });
 }
 
 class _CopyWithImpl_Variables_Query_family<TRes>
@@ -1480,16 +1512,20 @@ class _CopyWithImpl_Variables_Query_family<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? id = _undefined, Object? contactsSort = _undefined}) =>
-      _then(
-        Variables_Query_family._({
-          ..._instance._$data,
-          if (id != _undefined && id != null) 'id': (id as String),
-          if (contactsSort != _undefined)
-            'contactsSort':
-                (contactsSort as List<Input_FamilyContactSortInput?>?),
-        }),
-      );
+  TRes call({
+    Object? id = _undefined,
+    Object? contactsFilter = _undefined,
+    Object? contactsSort = _undefined,
+  }) => _then(
+    Variables_Query_family._({
+      ..._instance._$data,
+      if (id != _undefined && id != null) 'id': (id as String),
+      if (contactsFilter != _undefined)
+        'contactsFilter': (contactsFilter as Input_FamilyContactFilterInput?),
+      if (contactsSort != _undefined)
+        'contactsSort': (contactsSort as List<Input_FamilyContactSortInput?>?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Query_family<TRes>
@@ -1498,36 +1534,28 @@ class _CopyWithStubImpl_Variables_Query_family<TRes>
 
   TRes _res;
 
-  call({String? id, List<Input_FamilyContactSortInput?>? contactsSort}) => _res;
+  call({
+    String? id,
+    Input_FamilyContactFilterInput? contactsFilter,
+    List<Input_FamilyContactSortInput?>? contactsSort,
+  }) => _res;
 }
 
 class Query_family {
-  Query_family({
-    this.family,
-    this.personTypes,
-    this.$__typename = 'RootQueryType',
-  });
+  Query_family({this.family, this.$__typename = 'RootQueryType'});
 
   factory Query_family.fromJson(Map<String, dynamic> json) {
     final l$family = json['family'];
-    final l$personTypes = json['personTypes'];
     final l$$__typename = json['__typename'];
     return Query_family(
       family: l$family == null
           ? null
           : Query_family_family.fromJson((l$family as Map<String, dynamic>)),
-      personTypes: l$personTypes == null
-          ? null
-          : Query_family_personTypes.fromJson(
-              (l$personTypes as Map<String, dynamic>),
-            ),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Query_family_family? family;
-
-  final Query_family_personTypes? personTypes;
 
   final String $__typename;
 
@@ -1535,8 +1563,6 @@ class Query_family {
     final _resultData = <String, dynamic>{};
     final l$family = family;
     _resultData['family'] = l$family?.toJson();
-    final l$personTypes = personTypes;
-    _resultData['personTypes'] = l$personTypes?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1545,9 +1571,8 @@ class Query_family {
   @override
   int get hashCode {
     final l$family = family;
-    final l$personTypes = personTypes;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$family, l$personTypes, l$$__typename]);
+    return Object.hashAll([l$family, l$$__typename]);
   }
 
   @override
@@ -1561,11 +1586,6 @@ class Query_family {
     final l$family = family;
     final lOther$family = other.family;
     if (l$family != lOther$family) {
-      return false;
-    }
-    final l$personTypes = personTypes;
-    final lOther$personTypes = other.personTypes;
-    if (l$personTypes != lOther$personTypes) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1590,13 +1610,8 @@ abstract class CopyWith_Query_family<TRes> {
 
   factory CopyWith_Query_family.stub(TRes res) = _CopyWithStubImpl_Query_family;
 
-  TRes call({
-    Query_family_family? family,
-    Query_family_personTypes? personTypes,
-    String? $__typename,
-  });
+  TRes call({Query_family_family? family, String? $__typename});
   CopyWith_Query_family_family<TRes> get family;
-  CopyWith_Query_family_personTypes<TRes> get personTypes;
 }
 
 class _CopyWithImpl_Query_family<TRes> implements CopyWith_Query_family<TRes> {
@@ -1608,39 +1623,23 @@ class _CopyWithImpl_Query_family<TRes> implements CopyWith_Query_family<TRes> {
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? family = _undefined,
-    Object? personTypes = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Query_family(
-      family: family == _undefined
-          ? _instance.family
-          : (family as Query_family_family?),
-      personTypes: personTypes == _undefined
-          ? _instance.personTypes
-          : (personTypes as Query_family_personTypes?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
+  TRes call({Object? family = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Query_family(
+          family: family == _undefined
+              ? _instance.family
+              : (family as Query_family_family?),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 
   CopyWith_Query_family_family<TRes> get family {
     final local$family = _instance.family;
     return local$family == null
         ? CopyWith_Query_family_family.stub(_then(_instance))
         : CopyWith_Query_family_family(local$family, (e) => call(family: e));
-  }
-
-  CopyWith_Query_family_personTypes<TRes> get personTypes {
-    final local$personTypes = _instance.personTypes;
-    return local$personTypes == null
-        ? CopyWith_Query_family_personTypes.stub(_then(_instance))
-        : CopyWith_Query_family_personTypes(
-            local$personTypes,
-            (e) => call(personTypes: e),
-          );
   }
 }
 
@@ -1650,17 +1649,10 @@ class _CopyWithStubImpl_Query_family<TRes>
 
   TRes _res;
 
-  call({
-    Query_family_family? family,
-    Query_family_personTypes? personTypes,
-    String? $__typename,
-  }) => _res;
+  call({Query_family_family? family, String? $__typename}) => _res;
 
   CopyWith_Query_family_family<TRes> get family =>
       CopyWith_Query_family_family.stub(_res);
-
-  CopyWith_Query_family_personTypes<TRes> get personTypes =>
-      CopyWith_Query_family_personTypes.stub(_res);
 }
 
 const documentNodeQueryfamily = DocumentNode(
@@ -1672,6 +1664,15 @@ const documentNodeQueryfamily = DocumentNode(
         VariableDefinitionNode(
           variable: VariableNode(name: NameNode(value: 'id')),
           type: NamedTypeNode(name: NameNode(value: 'ID'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'contactsFilter')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'FamilyContactFilterInput'),
+            isNonNull: false,
+          ),
           defaultValue: DefaultValueNode(value: null),
           directives: [],
         ),
@@ -1712,6 +1713,12 @@ const documentNodeQueryfamily = DocumentNode(
                   alias: null,
                   arguments: [
                     ArgumentNode(
+                      name: NameNode(value: 'filter'),
+                      value: VariableNode(
+                        name: NameNode(value: 'contactsFilter'),
+                      ),
+                    ),
+                    ArgumentNode(
                       name: NameNode(value: 'sort'),
                       value: VariableNode(
                         name: NameNode(value: 'contactsSort'),
@@ -1723,49 +1730,6 @@ const documentNodeQueryfamily = DocumentNode(
                     selections: [
                       FragmentSpreadNode(
                         name: NameNode(value: 'FamilyContact'),
-                        directives: [],
-                      ),
-                      FieldNode(
-                        name: NameNode(value: '__typename'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                    ],
-                  ),
-                ),
-                FieldNode(
-                  name: NameNode(value: '__typename'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-              ],
-            ),
-          ),
-          FieldNode(
-            name: NameNode(value: 'personTypes'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'first'),
-                value: IntValueNode(value: '1000'),
-              ),
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(
-              selections: [
-                FieldNode(
-                  name: NameNode(value: 'results'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(
-                    selections: [
-                      FragmentSpreadNode(
-                        name: NameNode(value: 'PersonType'),
                         directives: [],
                       ),
                       FieldNode(
@@ -2518,151 +2482,6 @@ class _CopyWithStubImpl_Query_family_family_church<TRes>
   TRes _res;
 
   call({String? id, String? name, String? $__typename}) => _res;
-}
-
-class Query_family_personTypes {
-  Query_family_personTypes({
-    this.results,
-    this.$__typename = 'KeysetPageOfPersonType',
-  });
-
-  factory Query_family_personTypes.fromJson(Map<String, dynamic> json) {
-    final l$results = json['results'];
-    final l$$__typename = json['__typename'];
-    return Query_family_personTypes(
-      results: (l$results as List<dynamic>?)
-          ?.map(
-            (e) => Fragment_PersonType.fromJson((e as Map<String, dynamic>)),
-          )
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final List<Fragment_PersonType>? results;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$results = results;
-    _resultData['results'] = l$results?.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$results = results;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$results == null ? null : Object.hashAll(l$results.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_family_personTypes ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$results = results;
-    final lOther$results = other.results;
-    if (l$results != null && lOther$results != null) {
-      if (l$results.length != lOther$results.length) {
-        return false;
-      }
-      for (int i = 0; i < l$results.length; i++) {
-        final l$results$entry = l$results[i];
-        final lOther$results$entry = lOther$results[i];
-        if (l$results$entry != lOther$results$entry) {
-          return false;
-        }
-      }
-    } else if (l$results != lOther$results) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_family_personTypes
-    on Query_family_personTypes {
-  CopyWith_Query_family_personTypes<Query_family_personTypes> get copyWith =>
-      CopyWith_Query_family_personTypes(this, (i) => i);
-}
-
-abstract class CopyWith_Query_family_personTypes<TRes> {
-  factory CopyWith_Query_family_personTypes(
-    Query_family_personTypes instance,
-    TRes Function(Query_family_personTypes) then,
-  ) = _CopyWithImpl_Query_family_personTypes;
-
-  factory CopyWith_Query_family_personTypes.stub(TRes res) =
-      _CopyWithStubImpl_Query_family_personTypes;
-
-  TRes call({List<Fragment_PersonType>? results, String? $__typename});
-  TRes results(
-    Iterable<Fragment_PersonType>? Function(
-      Iterable<CopyWith_Fragment_PersonType<Fragment_PersonType>>?,
-    )
-    _fn,
-  );
-}
-
-class _CopyWithImpl_Query_family_personTypes<TRes>
-    implements CopyWith_Query_family_personTypes<TRes> {
-  _CopyWithImpl_Query_family_personTypes(this._instance, this._then);
-
-  final Query_family_personTypes _instance;
-
-  final TRes Function(Query_family_personTypes) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? results = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_family_personTypes(
-          results: results == _undefined
-              ? _instance.results
-              : (results as List<Fragment_PersonType>?),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
-
-  TRes results(
-    Iterable<Fragment_PersonType>? Function(
-      Iterable<CopyWith_Fragment_PersonType<Fragment_PersonType>>?,
-    )
-    _fn,
-  ) => call(
-    results: _fn(
-      _instance.results?.map((e) => CopyWith_Fragment_PersonType(e, (i) => i)),
-    )?.toList(),
-  );
-}
-
-class _CopyWithStubImpl_Query_family_personTypes<TRes>
-    implements CopyWith_Query_family_personTypes<TRes> {
-  _CopyWithStubImpl_Query_family_personTypes(this._res);
-
-  TRes _res;
-
-  call({List<Fragment_PersonType>? results, String? $__typename}) => _res;
-
-  results(_fn) => _res;
 }
 
 class Variables_Query_familyWithRelatives {

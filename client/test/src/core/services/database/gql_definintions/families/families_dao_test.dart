@@ -39,7 +39,6 @@ void main() {
   Family? openedWith(Iterable<Family> rows, String id) => fakeAsync((async) {
     final backend = FakeAshBackend([
       FamilyFixtures.familiesTable(rows: rows),
-      FamilyFixtures.personTypesTable(),
     ]);
     final stream = backend.db.families.streamSingleById(id: id);
     Family? emitted;
@@ -162,11 +161,12 @@ void main() {
       final visitedLater = LastRecordedByInfo(
         time: FamilyFixtures.fatherVisitedAt,
       );
+      final lastVisited = george.copyWith(lastVisit: visitedLater);
+      final visitedBefore = boulos.copyWith(lastVisit: visited);
 
       expect(
         listedBy(
           (families) => families.streamAll(
-            secondLineField: Stream.value(FamilyFields().name),
             orderBy: Stream.value([
               OrderBy(
                 field: FamilyFields().lastVisit.redirectTo(
@@ -176,13 +176,9 @@ void main() {
               ),
             ]),
           ),
-          rows: [
-            boulos.copyWith(lastVisit: visited),
-            mark,
-            george.copyWith(lastVisit: visitedLater),
-          ],
+          rows: [visitedBefore, mark, lastVisited],
         ),
-        [george, boulos, mark],
+        [lastVisited, visitedBefore, mark],
       );
     });
 
@@ -190,26 +186,25 @@ void main() {
       final inShubra = FamilyFixtures.address.copyWith(
         area: PlaceFixtures.shubra,
       );
+      final inAddress = george.copyWith(address: FamilyFixtures.address);
+      final inShubraFamily = boulos.copyWith(address: inShubra);
+
+      final listed = listedBy(
+        (families) => families.streamAll(
+          orderBy: Stream.value([
+            OrderBy(
+              field: FamilyFields().address.redirectTo(
+                AddressFields().area.redirectTo(AreaFields().name),
+              ),
+            ),
+          ]),
+        ),
+        rows: [mark, inShubraFamily, inAddress],
+      );
 
       expect(
-        listedBy(
-          (families) => families.streamAll(
-            secondLineField: Stream.value(FamilyFields().name),
-            orderBy: Stream.value([
-              OrderBy(
-                field: FamilyFields().address.redirectTo(
-                  AddressFields().area.redirectTo(AreaFields().name),
-                ),
-              ),
-            ]),
-          ),
-          rows: [
-            george.copyWith(address: FamilyFixtures.address),
-            boulos.copyWith(address: inShubra),
-            mark,
-          ],
-        ),
-        [george, boulos, mark],
+        listed.map((family) => family.id),
+        [inAddress, inShubraFamily, mark].map((family) => family.id),
       );
     });
 

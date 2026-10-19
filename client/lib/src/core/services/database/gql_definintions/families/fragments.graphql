@@ -66,7 +66,9 @@ fragment FamilyContact on FamilyContact {
   label
   phone
   isMainPhone
-  effectivePersonTypeId
+  personType {
+    ...PersonType
+  }
 }
 
 fragment FamilyUser on User {

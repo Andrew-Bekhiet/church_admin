@@ -101,7 +101,7 @@ class FamilyRow implements ToJson, ID {
     'label': contact.contact.label,
     'phone': contact.contact.phone,
     'isMainPhone': contact.contact.isMainPhone,
-    'effectivePersonTypeId': contact.role.id,
+    'personType': _typed(contact.role.toJson(), 'PersonType'),
     'personTypeOrder': contact.role.order,
     'createdAt': DateTime.utc(2026, 1, 1, 0, index).toIso8601String(),
     '__typename': 'FamilyContact',
@@ -256,11 +256,5 @@ abstract final class FamilyFixtures {
       'lastVisit',
       'lastFatherVisit',
     },
-  );
-
-  static FakeAshTable personTypesTable() => FakeAshTable(
-    typename: 'PersonType',
-    listRoot: 'personTypes',
-    rows: [father, mother, daughter],
   );
 }

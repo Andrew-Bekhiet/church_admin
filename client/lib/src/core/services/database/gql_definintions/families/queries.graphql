@@ -28,16 +28,15 @@ query familiesWithAddresses(
   }
 }
 
-query family($id: ID!, $contactsSort: [FamilyContactSortInput]) {
+query family(
+  $id: ID!
+  $contactsFilter: FamilyContactFilterInput
+  $contactsSort: [FamilyContactSortInput]
+) {
   family(id: $id) {
     ...FamilyDetails
-    contacts(sort: $contactsSort) {
+    contacts(filter: $contactsFilter, sort: $contactsSort) {
       ...FamilyContact
-    }
-  }
-  personTypes(first: 1000) {
-    results {
-      ...PersonType
     }
   }
 }
