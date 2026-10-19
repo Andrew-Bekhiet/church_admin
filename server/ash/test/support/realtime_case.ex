@@ -23,7 +23,7 @@ defmodule ChurchAdmin.RealtimeCase do
     {broadcaster, topic} = start_broadcaster(context)
     stream = start_supervised!({ReplicationStream, broadcaster: broadcaster})
     Phoenix.PubSub.subscribe(ChurchAdmin.PubSub, topic)
-    await_streaming(broadcaster)
+    await_slot(writer)
 
     {:ok, writer: writer, broadcaster: broadcaster, stream: stream}
   end
@@ -57,9 +57,16 @@ defmodule ChurchAdmin.RealtimeCase do
 
   def uuid, do: Ash.UUID.generate()
 
-  defp await_streaming(broadcaster, attempts \\ 100) do
+  defp await_slot(writer, attempts \\ 100) do
+    %{rows: [[slots]]} =
+      Postgrex.query!(
+        writer,
+        "select count(*) from pg_replication_slots where slot_name like 'church_admin_realtime_%' and active",
+        []
+      )
+
     cond do
-      Broadcaster.head(broadcaster) != 0 ->
+      slots > 0 ->
         :ok
 
       attempts == 0 ->
@@ -67,7 +74,7 @@ defmodule ChurchAdmin.RealtimeCase do
 
       true ->
         Process.sleep(50)
-        await_streaming(broadcaster, attempts - 1)
+        await_slot(writer, attempts - 1)
     end
   end
 
