@@ -11,7 +11,9 @@ defmodule ChurchAdmin.Accounts.Changes.LinkPerson do
   `as: :system` links any person (`createUser` wrote with Hasura's admin
   secret); `as: :actor` reaches only persons the actor may edit, as Hasura's
   person update permission did. A person out of reach or already linked fails
-  with `user/person-already-linked` and rolls the whole command back.
+  with `user/person-already-linked` and rolls the whole command back. The new
+  person is written as the system actor and recorded in the edit history as
+  the acting user.
   """
 
   use Ash.Resource.Change
@@ -21,6 +23,7 @@ defmodule ChurchAdmin.Accounts.Changes.LinkPerson do
   alias ChurchAdmin.Authz.{Actor, Scope}
   alias ChurchAdmin.Changes.AfterActionFailure
   alias ChurchAdmin.Errors.{Codes, ConstraintCodes, DomainError}
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Person
 
   @impl true
@@ -35,15 +38,16 @@ defmodule ChurchAdmin.Accounts.Changes.LinkPerson do
     Ash.Changeset.after_action(changeset, fn changeset, user ->
       writer = if opts[:as] == :system, do: Actor.system(), else: context.actor
 
-      case link(changeset, user, writer) do
+      case link(changeset, user, writer, context.actor) do
         :ok -> {:ok, user}
         {:error, error} -> AfterActionFailure.roll_back(changeset.resource, error)
       end
     end)
   end
 
-  defp link(changeset, user, writer) do
-    with :ok <- create_new_person(Ash.Changeset.get_argument(changeset, :new_person), user) do
+  defp link(changeset, user, writer, editor) do
+    with :ok <-
+           create_new_person(Ash.Changeset.get_argument(changeset, :new_person), user, editor) do
       case Ash.Changeset.fetch_argument(changeset, :person_id) do
         {:ok, person_id} -> relink(changeset.action_type, person_id, user, writer)
         :error -> :ok
@@ -51,14 +55,15 @@ defmodule ChurchAdmin.Accounts.Changes.LinkPerson do
     end
   end
 
-  defp create_new_person(nil, _user), do: :ok
+  defp create_new_person(nil, _user, _editor), do: :ok
 
-  defp create_new_person(new_person, user) do
+  defp create_new_person(new_person, user, editor) do
     Person
     |> Ash.Changeset.for_create(
       :create_for_user,
       %{name: new_person.name, gender: new_person.gender, uid: user.uid},
-      actor: Actor.system()
+      actor: Actor.system(),
+      context: RecordEdit.on_behalf_of(editor)
     )
     |> Ash.create(return_notifications?: true)
     |> case do
