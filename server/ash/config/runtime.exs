@@ -23,6 +23,27 @@ end
 config :church_admin, ChurchAdminWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT", "4100"))]
 
+if config_env() == :dev do
+  config :church_admin, ChurchAdmin.Google.Config,
+    project_id: System.get_env("FIREBASE_PROJECT_ID", "church-admin-local"),
+    credentials: :emulator_owner,
+    identity_toolkit: [
+      base_url:
+        "http://#{System.get_env("FIREBASE_AUTH_EMULATOR_HOST", "localhost:9099")}/identitytoolkit.googleapis.com"
+    ],
+    storage: [
+      base_url: "http://#{System.get_env("FIREBASE_STORAGE_EMULATOR_HOST", "localhost:9199")}"
+    ],
+    messaging: [adapter: ChurchAdmin.Google.Messaging.Local, local_delivery: :log]
+end
+
+if config_env() == :test do
+  config :church_admin, :firebase_emulators,
+    auth_host: System.get_env("FIREBASE_AUTH_EMULATOR_HOST", "localhost:9099"),
+    storage_host: System.get_env("FIREBASE_STORAGE_EMULATOR_HOST", "localhost:9199"),
+    project_id: System.get_env("FIREBASE_PROJECT_ID", "church-admin-local")
+end
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
@@ -52,6 +73,15 @@ if config_env() == :prod do
       environment variable SECRET_KEY_BASE is missing.
       You can generate one by calling: mix phx.gen.secret
       """
+
+  google_service_account =
+    (System.get_env("GOOGLE_APPLICATION_CREDENTIALS_JSON") ||
+       raise("environment variable GOOGLE_APPLICATION_CREDENTIALS_JSON is missing."))
+    |> Jason.decode!()
+
+  config :church_admin, ChurchAdmin.Google.Config,
+    project_id: System.get_env("FIREBASE_PROJECT_ID") || google_service_account["project_id"],
+    credentials: {:service_account, google_service_account}
 
   host = System.get_env("PHX_HOST") || "example.com"
 
