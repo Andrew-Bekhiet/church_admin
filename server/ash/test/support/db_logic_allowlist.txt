@@ -54,7 +54,6 @@ function public.check_store_admin_family_or_address()
 function public.check_street_has_area()
 function public.claim_contact_for_sole_family_member()
 function public.claim_family_contacts_for_sole_member()
-function public.default_order_by_preferences()
 function public.family_inserted_in_current_transaction(families)
 function public.get_person_birthday(persons)
 function public.keep_one_main_contact_per_owner()
@@ -64,7 +63,6 @@ function public.person_inserted_in_current_transaction(persons)
 function public.persons_general_check()
 function public.persons_service_is_outside_service_study_years(persons_services)
 function public.remember_row_inserted_in_transaction()
-function public.seed_user_preferences()
 function public.set_current_timestamp_updated_at()
 function public.soft_delete_trigger()
 function public.sync_area_streets()
@@ -76,7 +74,6 @@ trigger auth.users_admin_on.edit_history
 trigger auth.users_admin_on.enforce_admin_on_grant_level
 trigger auth.users_admin_on.sync_users_permissions_by_entity_id_cache
 trigger auth.users_data.prevent_email_change_after_claim
-trigger auth.users_data.seed_user_preferences
 trigger auth.users_data.sync_users_permissions_by_entity_id_cache
 trigger auth.users_permissions.check_users_permissions_level_consistency
 trigger auth.users_permissions.enforce_permission_grant_level

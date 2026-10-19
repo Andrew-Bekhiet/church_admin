@@ -23,6 +23,7 @@ defmodule ChurchAdmin.Accounts.User do
     CreateInvitation,
     LinkPerson,
     ManageGrants,
+    SeedPreferences,
     SetApproval
   }
 
@@ -198,6 +199,8 @@ defmodule ChurchAdmin.Accounts.User do
   end
 
   changes do
+    change SeedPreferences, on: [:create]
+
     change {ConstraintCodes,
             codes: %{
               "users_data_email_key" => Codes.user_email_taken(),
