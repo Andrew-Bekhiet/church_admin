@@ -28,8 +28,6 @@ mixin _$Person {
         (other.runtimeType == runtimeType &&
             other is Person &&
             (identical(other.id, _this.id) || other.id == _this.id) &&
-            (identical(other.nationalId, _this.nationalId) ||
-                other.nationalId == _this.nationalId) &&
             (identical(other.name, _this.name) || other.name == _this.name) &&
             (identical(other.address, _this.address) ||
                 other.address == _this.address) &&
@@ -213,7 +211,6 @@ mixin _$Person {
     return Object.hashAll([
       runtimeType,
       _this.id,
-      _this.nationalId,
       _this.name,
       _this.address,
       const DeepCollectionEquality().hash(_this.contacts),
@@ -289,7 +286,7 @@ mixin _$Person {
   @override
   String toString() {
     final _this = this as Person;
-    return 'Person(id: ${_this.id}, nationalId: ${_this.nationalId}, name: ${_this.name}, address: ${_this.address}, contacts: ${_this.contacts}, familyContacts: ${_this.familyContacts}, birthdate: ${_this.birthdate}, birthday: ${_this.birthday}, gender: ${_this.gender}, isShammas: ${_this.isShammas}, shammasLevelId: ${_this.shammasLevelId}, shammasLevel: ${_this.shammasLevel}, school: ${_this.school}, schoolId: ${_this.schoolId}, college: ${_this.college}, collegeId: ${_this.collegeId}, church: ${_this.church}, churchId: ${_this.churchId}, father: ${_this.father}, fatherId: ${_this.fatherId}, workStatus: ${_this.workStatus}, job: ${_this.job}, jobId: ${_this.jobId}, jobDescription: ${_this.jobDescription}, qualification: ${_this.qualification}, qualificationId: ${_this.qualificationId}, martialStatus: ${_this.martialStatus}, personType: ${_this.personType}, personTypeId: ${_this.personTypeId}, state: ${_this.state}, stateId: ${_this.stateId}, isServant: ${_this.isServant}, servingChurch: ${_this.servingChurch}, serviceType: ${_this.serviceType}, notes: ${_this.notes}, family: ${_this.family}, familyId: ${_this.familyId}, store: ${_this.store}, storeId: ${_this.storeId}, studyYear: ${_this.studyYear}, studyYearId: ${_this.studyYearId}, color: ${_this.color}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, lastConfession: ${_this.lastConfession}, lastKodas: ${_this.lastKodas}, lastAttendance: ${_this.lastAttendance}, lastCall: ${_this.lastCall}, lastVisit: ${_this.lastVisit}, lastEdit: ${_this.lastEdit}, dataCheck: ${_this.dataCheck}, classes: ${_this.classes}, groups: ${_this.groups}, services: ${_this.services}, tags: ${_this.tags}, hobbies: ${_this.hobbies}, user: ${_this.user}, uid: ${_this.uid}, kodasHistory: ${_this.kodasHistory}, attendanceHistory: ${_this.attendanceHistory}, confessionHistory: ${_this.confessionHistory}, callHistory: ${_this.callHistory}, visitHistory: ${_this.visitHistory}, editHistory: ${_this.editHistory}, kodasHistoryAggregate: ${_this.kodasHistoryAggregate}, attendanceHistoryAggregate: ${_this.attendanceHistoryAggregate}, confessionHistoryAggregate: ${_this.confessionHistoryAggregate}, callHistoryAggregate: ${_this.callHistoryAggregate}, visitHistoryAggregate: ${_this.visitHistoryAggregate}, editHistoryAggregate: ${_this.editHistoryAggregate}, userCanEdit: ${_this.userCanEdit})';
+    return 'Person(id: ${_this.id}, name: ${_this.name}, address: ${_this.address}, contacts: ${_this.contacts}, familyContacts: ${_this.familyContacts}, birthdate: ${_this.birthdate}, birthday: ${_this.birthday}, gender: ${_this.gender}, isShammas: ${_this.isShammas}, shammasLevelId: ${_this.shammasLevelId}, shammasLevel: ${_this.shammasLevel}, school: ${_this.school}, schoolId: ${_this.schoolId}, college: ${_this.college}, collegeId: ${_this.collegeId}, church: ${_this.church}, churchId: ${_this.churchId}, father: ${_this.father}, fatherId: ${_this.fatherId}, workStatus: ${_this.workStatus}, job: ${_this.job}, jobId: ${_this.jobId}, jobDescription: ${_this.jobDescription}, qualification: ${_this.qualification}, qualificationId: ${_this.qualificationId}, martialStatus: ${_this.martialStatus}, personType: ${_this.personType}, personTypeId: ${_this.personTypeId}, state: ${_this.state}, stateId: ${_this.stateId}, isServant: ${_this.isServant}, servingChurch: ${_this.servingChurch}, serviceType: ${_this.serviceType}, notes: ${_this.notes}, family: ${_this.family}, familyId: ${_this.familyId}, store: ${_this.store}, storeId: ${_this.storeId}, studyYear: ${_this.studyYear}, studyYearId: ${_this.studyYearId}, color: ${_this.color}, photoUpdatedAt: ${_this.photoUpdatedAt}, blurhash: ${_this.blurhash}, lastConfession: ${_this.lastConfession}, lastKodas: ${_this.lastKodas}, lastAttendance: ${_this.lastAttendance}, lastCall: ${_this.lastCall}, lastVisit: ${_this.lastVisit}, lastEdit: ${_this.lastEdit}, dataCheck: ${_this.dataCheck}, classes: ${_this.classes}, groups: ${_this.groups}, services: ${_this.services}, tags: ${_this.tags}, hobbies: ${_this.hobbies}, user: ${_this.user}, uid: ${_this.uid}, kodasHistory: ${_this.kodasHistory}, attendanceHistory: ${_this.attendanceHistory}, confessionHistory: ${_this.confessionHistory}, callHistory: ${_this.callHistory}, visitHistory: ${_this.visitHistory}, editHistory: ${_this.editHistory}, kodasHistoryAggregate: ${_this.kodasHistoryAggregate}, attendanceHistoryAggregate: ${_this.attendanceHistoryAggregate}, confessionHistoryAggregate: ${_this.confessionHistoryAggregate}, callHistoryAggregate: ${_this.callHistoryAggregate}, visitHistoryAggregate: ${_this.visitHistoryAggregate}, editHistoryAggregate: ${_this.editHistoryAggregate}, userCanEdit: ${_this.userCanEdit})';
   }
 }
 
@@ -309,7 +306,6 @@ abstract mixin class $PersonCopyWith<$Res> {
     MartialStatus? martialStatus,
     bool isServant,
     bool userCanEdit,
-    int? nationalId,
     Address? address,
     DateTime? birthdate,
     String? birthday,
@@ -424,7 +420,6 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? martialStatus = freezed,
     Object? isServant = null,
     Object? userCanEdit = null,
-    Object? nationalId = freezed,
     Object? address = freezed,
     Object? birthdate = freezed,
     Object? birthday = freezed,
@@ -528,10 +523,6 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
             ? _self.userCanEdit
             : userCanEdit // ignore: cast_nullable_to_non_nullable
                   as bool,
-        nationalId: freezed == nationalId
-            ? _self.nationalId
-            : nationalId // ignore: cast_nullable_to_non_nullable
-                  as int?,
         address: freezed == address
             ? _self.address
             : address // ignore: cast_nullable_to_non_nullable

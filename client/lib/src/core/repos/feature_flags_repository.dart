@@ -22,7 +22,6 @@ class FeatureFlagsRepository {
   static const String enablePostHogLogsKey = 'enablePostHogLogs';
   static const String sessionReplaySampleRateKey = 'sessionReplaySampleRate';
   static const String allowAddingCustomObjectsKey = 'allowAddingCustomObjects';
-  static const String enablePersonNationalIdKey = 'enablePersonNationalId';
   static const String enableAccountClaimingByEmailKey =
       'enableAccountClaimingByEmail';
   static const String enableDataChecksKey = 'enableDataChecks';
@@ -47,9 +46,6 @@ class FeatureFlagsRepository {
   }
 
   bool get mustForceUpdate => _remoteConfig.getBool(mustForceUpdateKey);
-
-  bool get enablePersonNationalId =>
-      _remoteConfig.getBool(enablePersonNationalIdKey);
 
   bool get enableAccountClaimingByEmail =>
       _remoteConfig.getBool(enableAccountClaimingByEmailKey);
@@ -128,7 +124,6 @@ class FeatureFlagsRepository {
       enableSentryKey: true,
       enablePostHogLogsKey: true,
       sessionReplaySampleRateKey: 1,
-      enablePersonNationalIdKey: false,
       enableAccountClaimingByEmailKey: true,
       enableDataChecksKey: true,
       enableAnalyticsKey: false,
