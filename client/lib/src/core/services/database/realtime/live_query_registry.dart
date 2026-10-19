@@ -21,7 +21,7 @@ class LiveQueryRegistry {
   StreamSubscription<ChangeFeedEvent>? _changeFeedSubscription;
   StreamSubscription<bool>? _connectivitySubscription;
 
-  bool get _isOnline => _connectivity.valueOrNull ?? true;
+  bool get isOnline => _connectivity.valueOrNull ?? true;
 
   LiveQueryRegistry({
     required this._changeFeedEvents,
@@ -90,7 +90,7 @@ class LiveQueryRegistry {
     if (schedule == null) return;
 
     schedule.debounce = null;
-    if (!target.isListened || !_isOnline) {
+    if (!target.isListened || !isOnline) {
       schedule.stale = true;
 
       return;

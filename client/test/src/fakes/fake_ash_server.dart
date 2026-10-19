@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
@@ -29,7 +30,7 @@ class FakeAshServerLink extends Link {
   Stream<Response> request(Request request, [NextLink? forward]) {
     requestCount++;
     _requestsInFlight++;
-    maxRequestsInFlight = max(maxRequestsInFlight, _requestsInFlight);
+    maxRequestsInFlight = math.max(maxRequestsInFlight, _requestsInFlight);
     final data = _answer(request);
 
     return Stream.fromFuture(
@@ -52,29 +53,34 @@ class FakeAshServerLink extends Link {
       };
     }
 
+    final filteredRows = switch (variables['filter']) {
+      {'id': {'in': final List<Object?> ids}} =>
+        rows.where((row) => ids.contains(row.id)).toList(),
+      _ => rows,
+    };
     final after = variables['after'] as String?;
     final start = after == null
         ? 0
-        : rows.indexWhere((row) => row.id == after) + 1;
-    final first = variables['first'] as int? ?? rows.length;
-    final page = rows.skip(start).take(first).toList();
+        : filteredRows.indexWhere((row) => row.id == after) + 1;
+    final first = variables['first'] as int? ?? filteredRows.length;
+    final page = filteredRows.skip(start).take(first).toList();
 
     return {
       '__typename': 'Query',
       root: AshResponses.page(
         [for (final row in page) row.toJson()],
-        count: rows.length,
+        count: filteredRows.length,
       ),
     };
   }
-
-  static int max(int a, int b) => a > b ? a : b;
 }
 
 class LiveQueryHarness {
   static final listDocument = gql(r'''
-    query testItems($first: Int, $after: String) {
-      testItems(first: $first, after: $after) { count endKeyset results { id name } }
+    query testItems($filter: TestItemFilterInput, $first: Int, $after: String) {
+      testItems(filter: $filter, first: $first, after: $after) {
+        count endKeyset results { id name }
+      }
     }
   ''');
   static final entityDocument = gql(r'''
