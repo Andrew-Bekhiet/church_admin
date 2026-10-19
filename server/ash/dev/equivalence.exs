@@ -12,6 +12,7 @@
 
 defmodule ChurchAdmin.Equivalence do
   alias ChurchAdmin.Accounts.{ScopeGrant, User, UserPermission}
+  alias ChurchAdmin.Attendance.{AttendanceRecord, Meeting, MeetingDay, RosterEntry}
   alias ChurchAdmin.Authz.ActorLoader
   alias ChurchAdmin.People.{Family, GroupMembership, Person, ServiceMembership}
   alias ChurchAdmin.Places.Address
@@ -69,6 +70,30 @@ defmodule ChurchAdmin.Equivalence do
         hasura: "authUsersAdminOn",
         resource: ScopeGrant,
         key: [{"permissionId", :permission_id}]
+      },
+      %{name: "meetings", hasura: "historyMeetings", resource: Meeting, key: [{"id", :id}]},
+      %{
+        name: "attendanceRecords",
+        hasura: "historyAttendanceHistory",
+        resource: AttendanceRecord,
+        key: [{"id", :id}]
+      },
+      %{
+        name: "rosterEntries",
+        hasura: "historyMeetingRoster",
+        resource: RosterEntry,
+        key: [{"meetingId", :meeting_id}, {"personId", :person_id}, {"asServant", :as_servant}]
+      },
+      %{
+        name: "meetingDays",
+        hasura: "historyMeetingDays",
+        resource: MeetingDay,
+        key: [
+          {"meetingId", :meeting_id},
+          {"day", :day},
+          {"studyYearId", :study_year_id},
+          {"gender", :gender}
+        ]
       }
     ]
   end
