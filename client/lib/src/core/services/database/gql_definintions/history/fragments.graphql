@@ -1,0 +1,50 @@
+fragment Edit on Edit {
+  time
+  recordedBy
+  user {
+    ...User
+  }
+}
+
+fragment Visit on Visit {
+  id
+  time
+  recordedBy
+  isFatherVisit
+  user {
+    ...User
+  }
+}
+
+fragment Call on Call {
+  id
+  time
+  recordedBy
+  user {
+    ...User
+  }
+}
+
+fragment Confession on Confession {
+  id
+  time
+  recordedBy
+  user {
+    ...User
+  }
+}
+
+fragment Kodas on Kodas {
+  id
+  time
+  recordedBy
+  user {
+    ...User
+  }
+}
+
+fragment KodasDayRecord on Kodas {
+  id
+  personId
+  dayId
+}
