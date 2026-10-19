@@ -3,22 +3,36 @@ name: Check generated code matches committed files
 on:
   pull_request:
     paths:
-      - "client/**"
-      - "packages/**"
-      - "server/hasura/**"
-      - "server/postgres/**"
-      - "server/docker-compose.yml"
+      - "client/lib/**"
+      - "client/test/**/*.dart"
+      - "client/build.yaml"
+      - "client/pubspec.*"
+      - "client/.fvmrc"
+      - "client/scripts/check_generated_code.sh"
+      - "client/scripts/regenerate_graphql.sh"
+      - "client/scripts/split_schema_graphql_dart.sh"
+      - "packages/*/lib/**"
+      - "packages/*/build.yaml"
+      - "packages/*/pubspec.*"
       - ".github/workflows/generated-code.yml"
+      - ".github/actions/setup-flutter/**"
 
   push:
     branches: [master]
     paths:
-      - "client/**"
-      - "packages/**"
-      - "server/hasura/**"
-      - "server/postgres/**"
-      - "server/docker-compose.yml"
+      - "client/lib/**"
+      - "client/test/**/*.dart"
+      - "client/build.yaml"
+      - "client/pubspec.*"
+      - "client/.fvmrc"
+      - "client/scripts/check_generated_code.sh"
+      - "client/scripts/regenerate_graphql.sh"
+      - "client/scripts/split_schema_graphql_dart.sh"
+      - "packages/*/lib/**"
+      - "packages/*/build.yaml"
+      - "packages/*/pubspec.*"
       - ".github/workflows/generated-code.yml"
+      - ".github/actions/setup-flutter/**"
 
   workflow_dispatch:
 
@@ -33,21 +47,16 @@ jobs:
       contents: read
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 2
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
-        with:
-          cache: true
-          flutter-version-file: client/.fvmrc
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
-          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+      - name: 💙 Setup Flutter
+        uses: ./.github/actions/setup-flutter
 
-      - name: Install client dependencies
+      - name: 📦 Install client dependencies
         run: flutter pub get --directory client
 
-      - name: Check committed build_runner outputs match a fresh build (changed files on PRs, everything on master)
+      - name: 🔍 Check committed build_runner outputs match a fresh build (changed files on PRs, everything on master)
         run: client/scripts/check_generated_code.sh ${{ github.event_name == 'pull_request' && 'HEAD^1' || '' }}

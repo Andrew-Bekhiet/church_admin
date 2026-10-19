@@ -6,50 +6,19 @@ on:
     paths:
       - ".github/workflows/deploy-firebase.yml"
       - "server/firebase/**"
-  pull_request:
-    paths:
-      - ".github/workflows/deploy-firebase.yml"
-      - "server/firebase/**"
 
 permissions: {}
 
 concurrency:
   group: deploy-firebase-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: false
 
 defaults:
   run:
-    working-directory: server/firebase/functions
+    working-directory: server/firebase
 
 jobs:
-  check:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 1
-
-      - name: Set up Node.js
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version-file: server/firebase/functions/.nvmrc
-          cache: npm
-          cache-dependency-path: server/firebase/functions/package-lock.json
-
-      - name: Install Firebase Functions dependencies
-        run: npm ci
-
-      - name: Lint Firebase Functions
-        run: npm run lint
-
-      - name: Build Firebase Functions
-        run: npm run build
-
   deploy:
-    needs: check
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     permissions:
@@ -61,16 +30,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Set up Node.js
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version-file: server/firebase/functions/.nvmrc
-          cache: npm
-          cache-dependency-path: server/firebase/functions/package-lock.json
-
-      - name: Install Firebase Functions dependencies
-        run: npm ci
-
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
         with:
@@ -80,18 +39,9 @@ jobs:
           create_credentials_file: true
           export_environment_variables: true
 
-      - name: Set Firebase project environment variables
-        env:
-          FUNCTIONS_PROD_ENV_FILE: ${{ secrets.FUNCTIONS_PROD_ENV_FILE }}
-        run: echo "$FUNCTIONS_PROD_ENV_FILE" | base64 -d > .env
-
       - name: Deploy Firebase project
         env:
           FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
         run: |
           DEPLOY_MESSAGE="$(git log -1 --pretty=oneline)"
-          npx firebase deploy --project "$FIREBASE_PROJECT_ID" --only database,functions,hosting -m "$DEPLOY_MESSAGE"
-
-      - name: Remove Firebase project environment variables
-        if: ${{ always() }}
-        run: rm -f .env
+          npx firebase-tools@15.29.0 deploy --project "$FIREBASE_PROJECT_ID" --only database,hosting -m "$DEPLOY_MESSAGE"
