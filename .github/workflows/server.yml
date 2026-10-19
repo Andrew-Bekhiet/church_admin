@@ -1,0 +1,75 @@
+name: Server
+
+on:
+  pull_request:
+    paths:
+      - "server/ash/**"
+      - "server/postgres/**"
+      - "client/lib/src/core/graphql/schema.graphql"
+      - ".github/workflows/server.yml"
+
+  push:
+    branches: [master]
+    paths:
+      - "server/ash/**"
+      - "server/postgres/**"
+      - "client/lib/src/core/graphql/schema.graphql"
+      - ".github/workflows/server.yml"
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: server/ash
+
+jobs:
+  precommit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup Elixir and Erlang
+        id: beam
+        uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124 # v1.24.1
+        with:
+          version-file: server/ash/.tool-versions
+          version-type: strict
+
+      - name: Restore dependencies and build cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            server/ash/deps
+            server/ash/_build
+          key: mix-${{ runner.os }}-${{ steps.beam.outputs.elixir-version }}-${{ steps.beam.outputs.otp-version }}-${{ hashFiles('server/ash/mix.lock') }}
+          restore-keys: |
+            mix-${{ runner.os }}-${{ steps.beam.outputs.elixir-version }}-${{ steps.beam.outputs.otp-version }}-
+
+      - name: Install dependencies
+        run: mix deps.get
+
+      - name: Check the Ecto migrations and schema.graphql match the Ash resources
+        run: mix ash.codegen --check
+
+      - name: Start Postgres built from server/postgres
+        run: |
+          docker build --tag church-admin-postgres ../postgres
+          docker run --detach --name church-admin-postgres \
+            --publish 55433:5432 \
+            --env POSTGRES_PASSWORD=church-admin-ash-dev \
+            --env POSTGRES_DB=church_admin \
+            church-admin-postgres
+          until docker exec church-admin-postgres pg_isready -h 127.0.0.1 -U postgres -d church_admin; do sleep 2; done
+
+      - name: Compile, check formatting and run the tests
+        run: mix precommit

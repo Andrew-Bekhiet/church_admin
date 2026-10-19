@@ -64,6 +64,11 @@ storage_buckets = fn firebase_project_id ->
 end
 
 if config_env() == :dev do
+  {:ok, http_bind_ip} =
+    "HTTP_BIND_IP" |> System.get_env("127.0.0.1") |> String.to_charlist() |> :inet.parse_address()
+
+  config :church_admin, ChurchAdminWeb.Endpoint, http: [ip: http_bind_ip]
+
   config :church_admin, ChurchAdmin.Files,
     buckets: storage_buckets.(System.get_env("FIREBASE_PROJECT_ID", "church-admin-local"))
 

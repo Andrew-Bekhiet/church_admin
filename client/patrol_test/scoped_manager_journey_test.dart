@@ -23,19 +23,19 @@ void main() {
 
       final managedServiceId = await E2eBackend.serviceIdByName('خدمة ثانوي');
       final otherServiceId = await E2eBackend.serviceIdByName('خدمة KG');
-      final scopedPersonId = await E2eBackend.insertPerson(
+      final scopedPersonId = await E2eBackend.createPerson(
         scopedPerson,
         serviceName: 'خدمة ثانوي',
       );
-      final replacementPersonId = await E2eBackend.insertPerson(
+      final replacementPersonId = await E2eBackend.createPerson(
         replacementPerson,
         serviceName: 'خدمة ثانوي',
       );
-      final inScopeUid = await E2eBackend.insertApprovedUser(
+      final inScopeUid = await E2eBackend.createUser(
         'خادم داخل الخدمة',
         adminOnServiceId: managedServiceId,
       );
-      final outOfScopeUid = await E2eBackend.insertApprovedUser(
+      final outOfScopeUid = await E2eBackend.createUser(
         'خادم خارج الخدمة',
         adminOnServiceId: otherServiceId,
       );
