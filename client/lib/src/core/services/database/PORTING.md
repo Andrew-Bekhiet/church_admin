@@ -54,6 +54,12 @@ Reference port: `gql_definintions/metadata/` (commit `refactor(data): port the m
 - A server field the SDL lacks: stand it in by hand in `schema.graphql` in its own commit, regenerate, and report it. The real SDL replaces it at merge.
 - A string key that is an `ID` in the SDL (`User.uid`) uses `@QueryableField.self`.
 - A rejection test uses `isA<BackendException>()`; `forbidden`, `not_found` and `unauthenticated` have their own subclasses.
+- A DAO that reads every row for an analysis needs a read-all-pages helper (`KeysetPageQuery.fetchChained`): `default_limit` is 100, so one page silently truncates.
+- One Ash document per root field: split a multi-root Hasura document and run the parts with `(a, b).wait`.
+- `FakeAshTable(nestedFilterVariables: …)` plus nested object filters let analysis tests assert domain results instead of echoed rows.
+- Records with `List`/`Set` fields compare by identity in `expect`: assert an Equatable summary of them.
+- A sort on a relationship path needs a server `first` aggregate. Never hide a missing one with `orderable: false` when a feature sorts by it.
+- A queryable whose key field is not `id` needs an Ash `TypePolicy(keyFields: …)` in `GqlTypePolicies`.
 
 ## Done
 
