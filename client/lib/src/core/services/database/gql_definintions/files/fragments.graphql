@@ -1,0 +1,4 @@
+fragment PhotoLink on PhotoLink {
+  url
+  expiresAt
+}
