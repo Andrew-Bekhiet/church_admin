@@ -15,16 +15,15 @@ bool _assertIsPrimitiveValidType(Object? value) {
 }
 
 enum PrimitiveOperator<V> implements Operator<V?> {
-  eq('_eq', 'يساوي'),
-  neq('_neq', 'لا يساوي'),
-  lt('_lt', '<'),
-  lte('_lte', '<='),
-  gt('_gt', '>'),
-  gte('_gte', '>='),
-  isNull('_isNull', 'فارغ'),
-  isNotNull('_isNotNull', 'ليس فارغاً');
+  eq('يساوي'),
+  neq('لا يساوي'),
+  lt('<'),
+  lte('<='),
+  gt('>'),
+  gte('>='),
+  isNull('فارغ'),
+  isNotNull('ليس فارغاً');
 
-  final String _operatorValue;
   @override
   final String label;
 
@@ -34,25 +33,7 @@ enum PrimitiveOperator<V> implements Operator<V?> {
   @override
   bool get acceptsValue => !{isNull, isNotNull}.contains(this);
 
-  const PrimitiveOperator(this._operatorValue, this.label);
-
-  @override
-  Json queryToJson(FieldMetadata field, V? filterValue) {
-    if ((this == isNull || this == isNotNull) &&
-        field.referencedObjectType != null) {
-      final hasRelatedRow = field.queryToJson({});
-
-      return this == isNull ? {'_not': hasRelatedRow} : hasRelatedRow;
-    }
-
-    if (this == isNull || this == isNotNull) {
-      return field.queryToJson({'_isNull': this == isNull});
-    }
-
-    _assertIsPrimitiveValidType(filterValue);
-
-    return field.queryToJson({_operatorValue: filterValue});
-  }
+  const PrimitiveOperator(this.label);
 
   @override
   Object? serializeValue(V? value) {

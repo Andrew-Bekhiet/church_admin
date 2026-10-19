@@ -76,28 +76,6 @@ class FieldMetadata<T extends Object> with Equatable {
     };
   }
 
-  Json queryToJson(Json serializedValue) {
-    return {name: serializedValue};
-  }
-
-  Json serializeOrderBy(Object serializedValue) {
-    final subFields = AdvancedQueriesMetadata()
-        .allQueryablesByType[type]
-        ?.fieldsMetadataByName;
-
-    return {
-      name:
-          name == 'id' ||
-              name == 'uid' ||
-              serializedValue is Map ||
-              serializedValue is List
-          ? serializedValue
-          : subFields?['order']?.serializeOrderBy(serializedValue) ??
-                subFields?['name']?.serializeOrderBy(serializedValue) ??
-                serializedValue,
-    };
-  }
-
   /// Creates a redirecting field that exposes deeply nested fields directly on parent types.
   ///
   /// **Purpose:** Flatten complex object hierarchies to improve UX by allowing direct access

@@ -53,10 +53,6 @@ class Filter<T extends Object> with Equatable {
     );
   }
 
-  Json queryToJson() {
-    return operator.queryToJson(field, value);
-  }
-
   Json toJson() {
     return {
       'field': field.toJson(),

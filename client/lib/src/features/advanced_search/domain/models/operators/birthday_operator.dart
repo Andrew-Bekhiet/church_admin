@@ -15,13 +15,6 @@ enum BirthdayOperator implements Operator<String?> {
   const BirthdayOperator();
 
   @override
-  Json queryToJson(FieldMetadata field, String? filterValue) {
-    final value = filterValue ?? '';
-
-    return field.queryToJson({'_ilike': value});
-  }
-
-  @override
   Object? serializeValue(String? value) => value;
 
   @override

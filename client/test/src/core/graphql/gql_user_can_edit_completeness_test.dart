@@ -20,7 +20,7 @@ void main() {
   );
 
   test('every read selection of an editable type selects userCanEdit', () {
-    const schemaPath = 'lib/src/core/graphql/hasura_schema.gql';
+    const schemaPath = 'lib/src/core/graphql/schema.graphql';
     const operationsDir = 'lib/src/core/services/database/gql_definintions';
 
     final schema = GqlSchemaIndex.fromDocument(
@@ -71,7 +71,7 @@ void main() {
 
   group('checker behavior', () {
     const schemaSource = '''
-type subscription_root {
+type Subscription {
   familiesByPk: Families
   districtsByPk: Districts
 }
@@ -232,7 +232,11 @@ subscription watchFamily {
   });
 }
 
-Iterable<File> _allGqlFilesIn(String dir) => Directory(dir)
-    .listSync(recursive: true)
-    .whereType<File>()
-    .where((f) => f.path.endsWith('.gql') && !f.path.contains('__generated__'));
+Iterable<File> _allGqlFilesIn(String dir) =>
+    Directory(dir)
+        .listSync(recursive: true)
+        .whereType<File>()
+        .where(
+          (f) =>
+              f.path.endsWith('.graphql') && !f.path.contains('__generated__'),
+        );

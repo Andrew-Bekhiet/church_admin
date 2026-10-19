@@ -39,9 +39,6 @@ class AdvancedQuery with _$AdvancedQuery implements ToJson, SerializableExtra {
     filters: filters.whereEnabled(),
     orderBy: orderBy.whereEnabled(),
   );
-
-  Json serializeFilter() =>
-      logicalOperator.queryToJson(const DotField(), filters);
 }
 
 List<Json> conditionsToJson(List<Filter> data) =>
