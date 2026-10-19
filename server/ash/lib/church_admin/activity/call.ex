@@ -8,6 +8,7 @@ defmodule ChurchAdmin.Activity.Call do
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Changes.{StampActor, StampActorRole}
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Person
   alias ChurchAdmin.Types.Text
 
@@ -58,6 +59,9 @@ defmodule ChurchAdmin.Activity.Call do
 
       change {StampActor, attribute: :recorded_by}
       change {StampActorRole, attribute: :user_role}
+
+      change {RecordEdit,
+              table: "persons", record_id: :person_id, recorded_by: {:attribute, :recorded_by}}
     end
   end
 

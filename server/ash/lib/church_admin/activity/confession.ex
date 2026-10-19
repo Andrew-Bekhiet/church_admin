@@ -10,6 +10,7 @@ defmodule ChurchAdmin.Activity.Confession do
   alias ChurchAdmin.Activity.Changes.EnsureAttendanceDay
   alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Changes.StampActor
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Person
 
   graphql do
@@ -59,7 +60,7 @@ defmodule ChurchAdmin.Activity.Confession do
       accept [:person_id]
       upsert? true
       upsert_identity :unique_day_id_person_id
-      upsert_fields []
+      upsert_condition expr(false)
       return_skipped_upsert? true
 
       argument :day, :date, allow_nil?: false
@@ -67,6 +68,9 @@ defmodule ChurchAdmin.Activity.Confession do
       change set_attribute(:day_id, arg(:day))
       change EnsureAttendanceDay
       change {StampActor, attribute: :recorded_by}
+
+      change {RecordEdit,
+              table: "persons", record_id: :person_id, recorded_by: {:attribute, :recorded_by}}
     end
   end
 
