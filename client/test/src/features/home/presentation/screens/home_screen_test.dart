@@ -1,147 +1,205 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:rxdart/rxdart.dart';
 
-import '../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../utils.dart';
-
-class _MockAuthBloc extends Mock implements AuthBloc {}
-
-class _MockAuthRepository extends Mock implements AuthRepository {}
-
-class _MockDatabaseService extends Mock implements DatabaseService {}
-
-class _MockPersonsDAO extends Mock implements PersonsDAO {}
-
-class _MockServicesDAO extends Mock implements ServicesDAO {}
-
-class _MockAreasDAO extends Mock implements AreasDAO {}
-
-class _MockStreetsDAO extends Mock implements StreetsDAO {}
-
-class _MockFamiliesDAO extends Mock implements FamiliesDAO {}
-
-class _MockStoresDAO extends Mock implements StoresDAO {}
-
-class _MockHomeDailyDataRepository extends Mock
-    implements HomeDailyDataRepository {}
-
-class _MockLocalAuthService extends Mock implements LocalAuthService {}
-
-class _MockUserPreferencesService extends Mock
-    implements UserPreferencesService {}
+import '../../support/home_database_fixture.dart';
+import '../../support/home_screen_harness.dart';
+import '../../support/recording_user_persistence_service.dart';
 
 void main() {
-  late _MockAuthBloc authBloc;
-  late StreamController<AuthState> authStates;
+  late HomeScreenHarness harness;
 
-  setUp(() {
-    authStates = StreamController<AuthState>.broadcast();
-    addTearDown(authStates.close);
-
-    authBloc = _MockAuthBloc();
-    when(() => authBloc.userDataStream).thenAnswer((_) => const Stream.empty());
-    when(() => authBloc.stream).thenAnswer((_) => authStates.stream);
-    when(() => authBloc.isSignedIn).thenReturn(true);
-    when(() => authBloc.isSignedInStream).thenAnswer(
-      (_) => authStates.stream
-          .map((state) => state is! AuthUnauthenticated)
-          .startWith(true),
-    );
-
-    final personsDAO = _MockPersonsDAO();
-    when(
-      () => personsDAO.streamAll(
-        where: any(named: 'where'),
-        orderBy: any(named: 'orderBy'),
-      ),
-    ).thenAnswer((_) => PaginatableStream.simple(factory: (_) async* {}));
-
-    final servicesDAO = _MockServicesDAO();
-    when(
-      () => servicesDAO.streamAll(
-        where: any(named: 'where'),
-        orderBy: any(named: 'orderBy'),
-      ),
-    ).thenAnswer((_) => PaginatableStream.simple(factory: (_) async* {}));
-
-    final databaseService = _MockDatabaseService();
-    when(() => databaseService.persons).thenReturn(personsDAO);
-    when(() => databaseService.services).thenReturn(servicesDAO);
-    when(() => databaseService.areas).thenReturn(_MockAreasDAO());
-    when(() => databaseService.streets).thenReturn(_MockStreetsDAO());
-    when(() => databaseService.families).thenReturn(_MockFamiliesDAO());
-    when(() => databaseService.stores).thenReturn(_MockStoresDAO());
-
-    final homeDailyDataRepository = _MockHomeDailyDataRepository();
-    when(homeDailyDataRepository.getVerse).thenReturn('verse');
-    when(homeDailyDataRepository.getTodaysSneksar).thenReturn('sneksar');
-    when(homeDailyDataRepository.getSaying).thenReturn('saying');
-    when(
-      homeDailyDataRepository.getTodaysBirthdaysData,
-    ).thenAnswer((_) async => []);
-
-    final localAuthService = _MockLocalAuthService();
-    when(() => localAuthService.shouldAuthenticate).thenReturn(false);
-    when(
-      () => localAuthService.refreshUIStream,
-    ).thenAnswer((_) => const Stream.empty());
-    when(localAuthService.canCheckBiometrics).thenAnswer((_) async => false);
-
-    final authRepository = _MockAuthRepository();
-    when(
-      () => authRepository.userChanges,
-    ).thenAnswer((_) => const Stream.empty());
-
-    initGlobalProviderContainer([
-      authBlocProvider.overrideWithValue(authBloc),
-      authRepositoryProvider.overrideWithValue(authRepository),
-      databaseServiceProvider.overrideWithValue(databaseService),
-      homeDailyDataRepositoryProvider.overrideWithValue(
-        homeDailyDataRepository,
-      ),
-      localAuthServiceProvider.overrideWithValue(localAuthService),
-      featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
-      packageInfoPluginProvider.overrideWith(
-        (_) => PackageInfo(
-          appName: 'church_admin',
-          packageName: 'church_admin',
-          version: '1.0.0',
-          buildNumber: '1',
-        ),
-      ),
-      userPreferencesServiceProvider.overrideWithValue(
-        _MockUserPreferencesService(),
-      ),
-    ]);
-  });
+  setUp(() => harness = HomeScreenHarness());
 
   tearDown(defaultTearDown);
 
-  testWidgets('unmounting the home screen leaves the shared home bloc open', (
-    tester,
-  ) async {
-    await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
-    await tester.pumpWidget(const SizedBox.shrink());
+  group('home bloc lifetime', () {
+    testWidgets('unmounting the home screen leaves the shared home bloc open', (
+      tester,
+    ) async {
+      await harness.pump(tester, settle: false);
+      await tester.pumpWidget(const SizedBox.shrink());
 
-    expect(HomeBloc.I.isClosed, isFalse);
+      expect(HomeBloc.I.isClosed, isFalse);
+    });
+
+    testWidgets('disposing the providers after the home screen is unmounted '
+        'closes the home bloc cleanly', (tester) async {
+      await harness.pump(tester, settle: false);
+      await tester.pumpWidget(const SizedBox.shrink());
+
+      final homeBloc = HomeBloc.I;
+      resetGlobalProviderContainer();
+
+      await tester.pump();
+
+      expect(homeBloc.isClosed, isTrue);
+    });
   });
 
-  testWidgets('disposing the providers after the home screen is unmounted '
-      'closes the home bloc cleanly', (tester) async {
-    await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
-    await tester.pumpWidget(const SizedBox.shrink());
+  group('app lifecycle', () {
+    testWidgets('resuming the app while unlocked records the user as active', (
+      tester,
+    ) async {
+      await harness.pump(tester);
 
-    final homeBloc = HomeBloc.I;
-    resetGlobalProviderContainer();
+      harness
+        ..moveAppToBackground(tester)
+        ..returnAppToInactive(tester);
+      harness.persistence.records.clear();
+      harness.resumeApp(tester);
 
-    await tester.pump();
+      expect(harness.persistence.records, [UserPresenceRecord.active]);
+      await harness.unmount(tester);
+    });
 
-    expect(homeBloc.isClosed, isTrue);
+    testWidgets('resuming the app while locked records last seen', (
+      tester,
+    ) async {
+      harness.isLocked = true;
+      await harness.pump(tester);
+
+      harness
+        ..moveAppToBackground(tester)
+        ..returnAppToInactive(tester);
+      harness.persistence.records.clear();
+      harness.resumeApp(tester);
+
+      expect(harness.persistence.records, [UserPresenceRecord.lastSeen]);
+      await harness.unmount(tester);
+    });
+
+    testWidgets('pausing the app records last seen', (tester) async {
+      await harness.pump(tester);
+
+      harness.moveAppToBackground(tester);
+
+      expect(harness.persistence.records.last, UserPresenceRecord.lastSeen);
+      await harness.unmount(tester);
+    });
+  });
+
+  group('mode cards', () {
+    testWidgets('tapping the church data card shows the church data tabs', (
+      tester,
+    ) async {
+      await harness.pump(tester);
+
+      await tester.tap(find.byKey(HomeScreenSummaryKeys.churchDataButtonKey));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byIcon(Symbols.pin_drop));
+      await tester.pumpAndSettle();
+
+      expect(find.text('المناطق'), findsWidgets);
+      await harness.unmount(tester);
+    });
+
+    testWidgets('tapping the sunday school card shows the sunday school tabs', (
+      tester,
+    ) async {
+      harness.preferences.lastHomeMode = HomeMode.churchData;
+      await harness.pump(tester);
+
+      await tester.tap(find.byKey(HomeScreenSummaryKeys.sundaySchoolButtonKey));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byIcon(Symbols.volunteer_activism));
+      await tester.pumpAndSettle();
+
+      expect(find.text('الخدمات'), findsWidgets);
+      await harness.unmount(tester);
+    });
+  });
+
+  group('swiping', () {
+    testWidgets('moves to the next tab and shows its label', (tester) async {
+      await harness.pump(tester);
+
+      await tester.fling(find.byType(PageView), const Offset(400, 0), 1000);
+      await tester.pumpAndSettle();
+
+      expect(find.text('الخدمات'), findsWidgets);
+
+      await harness.unmount(tester);
+    });
+  });
+
+  group('tab total', () {
+    const totals = {Area: 7, Service: 3};
+
+    testWidgets('a church data list tab shows its total and label', (
+      tester,
+    ) async {
+      harness.database = HomeDatabaseFixture(totals: totals);
+      await harness.pump(tester);
+
+      await tester.tap(find.byKey(HomeScreenSummaryKeys.churchDataButtonKey));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byIcon(Symbols.pin_drop));
+      await tester.pumpAndSettle();
+
+      expect(find.text('${totals[Area]} المناطق'), findsWidgets);
+      await harness.unmount(tester);
+    });
+
+    testWidgets('the services tab shows its total and label', (tester) async {
+      harness.database = HomeDatabaseFixture(totals: totals);
+      await harness.pump(tester);
+
+      await tester.tap(find.byIcon(Symbols.volunteer_activism));
+      await tester.pumpAndSettle();
+
+      expect(find.text('${totals[Service]} الخدمات'), findsWidgets);
+      await harness.unmount(tester);
+    });
+  });
+
+  group('changing mode from the drawer', () {
+    testWidgets('after swiping to the persons tab lands on the persons tab of '
+        'the other mode', (tester) async {
+      await harness.pump(tester);
+      await tester.fling(find.byType(PageView), const Offset(400, 0), 1000);
+      await tester.pumpAndSettle();
+      await tester.fling(find.byType(PageView), const Offset(400, 0), 1000);
+      await tester.pumpAndSettle();
+
+      await harness.openDrawer(tester);
+      await tester.tap(find.text('تبديل إلى الافتقاد'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('الأفراد'), findsWidgets);
+      await harness.unmount(tester);
+    });
+
+    testWidgets('on the persons tab lands on the persons tab of the other '
+        'mode', (tester) async {
+      await harness.pump(tester);
+      await tester.tap(find.byIcon(Symbols.person));
+      await tester.pumpAndSettle();
+
+      await harness.openDrawer(tester);
+      await tester.tap(find.text('تبديل إلى الافتقاد'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('الأفراد'), findsWidgets);
+      await harness.unmount(tester);
+    });
+
+    testWidgets('on a tab the other mode lacks lands on the second tab', (
+      tester,
+    ) async {
+      harness.preferences.lastHomeMode = HomeMode.churchData;
+      await harness.pump(tester);
+      await tester.tap(find.byIcon(Symbols.road));
+      await tester.pumpAndSettle();
+
+      await harness.openDrawer(tester);
+      await tester.tap(find.text('تبديل إلى مدارس الأحد'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('الخدمات'), findsWidgets);
+      await harness.unmount(tester);
+    });
   });
 }
