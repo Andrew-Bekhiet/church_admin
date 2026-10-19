@@ -1,0 +1,20 @@
+query stores(
+  $filter: StoreFilterInput
+  $sort: [StoreSortInput]
+  $first: Int
+  $after: String
+) {
+  stores(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Store
+    }
+  }
+}
+
+query store($id: ID!) {
+  store(id: $id) {
+    ...StoreDetails
+  }
+}

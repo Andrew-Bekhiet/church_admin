@@ -1,0 +1,63 @@
+fragment Store on Store {
+  id
+  name
+  color
+  adminFamilyId
+  photoUpdatedAt
+  blurhash
+  userCanEdit
+}
+
+fragment StoreDetails on Store {
+  ...Store
+  address {
+    ...StoreAddress
+  }
+  latestEdit {
+    ...PlaceLatestEdit
+  }
+  adminFamily {
+    ...StoreAdminFamily
+  }
+}
+
+fragment StoreAddress on Address {
+  id
+  countryIsoCode
+  area {
+    ...Area
+  }
+  district {
+    id
+    name
+  }
+  street {
+    ...Street
+  }
+  substreetName
+  fullAddressText
+  geolocation
+  houseCode
+  storeyNumber
+  apartmentNumber
+  specialLandmark
+}
+
+fragment StoreAdminFamily on Family {
+  id
+  name
+  color
+  userCanEdit
+  photoUpdatedAt
+  blurhash
+  dataCheck {
+    id
+    familyId
+    isComplete
+    completenessPercent
+    familyCheck
+    addressCheck
+    userOverride
+    details
+  }
+}

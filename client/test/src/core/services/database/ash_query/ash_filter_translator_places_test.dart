@@ -103,4 +103,62 @@ void main() {
       );
     });
   });
+
+  test('the admins of an area are filtered through their user key', () {
+    expect(
+      translate(AreaFields().adminUsers, MultiSelectOperator.anyOf, ['user-1']),
+      {
+        'admins': {
+          'uid': {
+            'in': ['user-1'],
+          },
+        },
+      },
+    );
+  });
+
+  test('the areas of a street are filtered through the area key', () {
+    expect(
+      translate(
+        StreetFields().areas.redirectTo(AreaFields().id),
+        MultiSelectOperator.anyOf,
+        ['area-1'],
+      ),
+      {
+        'areas': {
+          'id': {
+            'in': ['area-1'],
+          },
+        },
+      },
+    );
+  });
+
+  test('the join rows of a street are filtered by their area id', () {
+    expect(
+      translate(
+        StreetFields().areasRel.redirectTo(AreasStreetsFields().areaId),
+        StringOperator.eq,
+        'area-1',
+      ),
+      {
+        'areaStreets': {
+          'areaId': {'eq': 'area-1'},
+        },
+      },
+    );
+  });
+
+  test('the admin family of a store is filtered under its server name', () {
+    expect(
+      translate(StoreFields().family, MultiSelectOperator.anyOf, ['family-1']),
+      {
+        'adminFamily': {
+          'id': {
+            'in': ['family-1'],
+          },
+        },
+      },
+    );
+  });
 }

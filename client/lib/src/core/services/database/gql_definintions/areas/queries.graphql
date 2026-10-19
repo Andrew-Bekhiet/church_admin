@@ -1,0 +1,20 @@
+query areas(
+  $filter: AreaFilterInput
+  $sort: [AreaSortInput]
+  $first: Int
+  $after: String
+) {
+  areas(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...AreaWithBounds
+    }
+  }
+}
+
+query area($id: ID!) {
+  area(id: $id) {
+    ...AreaDetails
+  }
+}
