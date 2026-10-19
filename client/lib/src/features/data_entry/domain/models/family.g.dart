@@ -36,6 +36,7 @@ class _FamilyFields {
     name: 'address',
     label: 'تفاصيل العنوان',
     isCodeOnly: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<MartialStatus> status = FieldMetadata<MartialStatus>(
@@ -127,36 +128,24 @@ class _FamilyFields {
     },
   );
 
-  final FieldMetadata<FamiliesFamilies> childrenRel =
-      FieldMetadata<FamiliesFamilies>(
-        getValue: (obj) => obj is Family ? obj.children : null,
-        parentType: Family,
-        name: 'children',
-        label: 'children',
-        isCodeOnly: true,
-        isOrderable: false,
-      );
-
-  late final FieldMetadata<Family> children = childrenRel.redirectTo(
-    FamiliesFamiliesFields().child,
-    isExpandable: false,
+  final FieldMetadata<Family> children = FieldMetadata<Family>(
+    getValue: (obj) => obj is Family ? obj.children : null,
+    parentType: Family,
+    name: 'children',
+    label: 'الأبناء',
+    isCodeOnly: false,
     isOrderable: false,
+    operators: {...MultiSelectOperator.values},
   );
 
-  final FieldMetadata<FamiliesFamilies> parentsRel =
-      FieldMetadata<FamiliesFamilies>(
-        getValue: (obj) => obj is Family ? obj.parents : null,
-        parentType: Family,
-        name: 'parents',
-        label: 'parents',
-        isCodeOnly: true,
-        isOrderable: false,
-      );
-
-  late final FieldMetadata<Family> parents = parentsRel.redirectTo(
-    FamiliesFamiliesFields().parent,
-    isExpandable: false,
+  final FieldMetadata<Family> parents = FieldMetadata<Family>(
+    getValue: (obj) => obj is Family ? obj.parents : null,
+    parentType: Family,
+    name: 'parents',
+    label: 'الآباء',
+    isCodeOnly: false,
     isOrderable: false,
+    operators: {...MultiSelectOperator.values},
   );
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
@@ -207,6 +196,7 @@ class _FamilyFields {
     name: 'dataCheck',
     label: 'اكتمال البيانات',
     isCodeOnly: false,
+    isOrderable: false,
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
@@ -306,22 +296,26 @@ Family _$FamilyFromJson(Map json) => Family(
     const LocalDateTimeConverter().fromJson,
   ),
   blurhash: json['blurhash'] as String?,
-  children: familyChildrenFromJson(json['children'] as List?),
-  parents: familyParentsFromJson(json['parents'] as List?),
-  lastEdit: json['lastEdit'] == null
+  children: (json['children'] as List<dynamic>?)
+      ?.map((e) => Family.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
+  parents: (json['parents'] as List<dynamic>?)
+      ?.map((e) => Family.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
+  lastEdit: json['latestEdit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastEdit'] as Map),
+          Map<String, Object?>.from(json['latestEdit'] as Map),
         ),
-  lastVisit: json['lastVisit'] == null
+  lastVisit: json['latestVisit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastVisit'] as Map),
+          Map<String, Object?>.from(json['latestVisit'] as Map),
         ),
-  lastFatherVisit: json['lastFatherVisit'] == null
+  lastFatherVisit: json['latestFatherVisit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastFatherVisit'] as Map),
+          Map<String, Object?>.from(json['latestFatherVisit'] as Map),
         ),
   dataCheck: json['dataCheck'] == null
       ? null
@@ -346,12 +340,12 @@ Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
     const LocalDateTimeConverter().toJson,
   ),
   'blurhash': instance.blurhash,
-  'children': familyChildrenToJson(instance.children),
-  'parents': familyParentsToJson(instance.parents),
+  'children': instance.children?.map((e) => e.toJson()).toList(),
+  'parents': instance.parents?.map((e) => e.toJson()).toList(),
   'contacts': instance.contacts.map((e) => e.toJson()).toList(),
-  'lastEdit': instance.lastEdit?.toJson(),
-  'lastVisit': instance.lastVisit?.toJson(),
-  'lastFatherVisit': instance.lastFatherVisit?.toJson(),
+  'latestEdit': instance.lastEdit?.toJson(),
+  'latestVisit': instance.lastVisit?.toJson(),
+  'latestFatherVisit': instance.lastFatherVisit?.toJson(),
   'dataCheck': instance.dataCheck?.toJson(),
 };
 

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -168,6 +170,43 @@ void main() {
       });
 
       expect(dataCheck.isComplete, isFalse);
+    });
+
+    test('details arrive from the server as one JSON string each', () {
+      final dataCheck = DataCheck.fromJson({
+        'familyId': 'family',
+        'details': [
+          jsonEncode({
+            'group': 'family',
+            'check': 'has_family_admin',
+            'passed': true,
+          }),
+          jsonEncode({
+            'group': 'address',
+            'check': 'has_area',
+            'passed': false,
+          }),
+        ],
+      });
+
+      expect(
+        dataCheck.checksDetails.map(
+          (detail) => (detail.group, detail.check, detail.passed),
+        ),
+        [
+          (DataCheckGroup.family, DataCheckRule.hasFamilyAdmin, true),
+          (DataCheckGroup.address, DataCheckRule.hasArea, false),
+        ],
+      );
+    });
+
+    test('a data check the server sent without details has none', () {
+      final dataCheck = DataCheck.fromJson(const {
+        'familyId': 'family',
+        'details': null,
+      });
+
+      expect(dataCheck.checksDetails, isEmpty);
     });
   });
 }

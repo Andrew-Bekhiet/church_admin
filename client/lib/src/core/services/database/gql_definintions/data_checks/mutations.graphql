@@ -1,0 +1,18 @@
+mutation overrideDataCheck($input: OverrideDataCheckInput!) {
+  overrideDataCheck(input: $input) {
+    result {
+      id
+      familyId
+      isComplete
+    }
+  }
+}
+
+mutation clearDataCheckOverride($id: ID!) {
+  clearDataCheckOverride(id: $id) {
+    result {
+      id
+      familyId
+    }
+  }
+}
