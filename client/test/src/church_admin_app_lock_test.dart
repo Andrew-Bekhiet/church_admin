@@ -9,6 +9,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'fakes/fake_feature_flags_repo.dart';
+import 'features/home/support/recording_user_persistence_service.dart';
 
 void main() {
   late bool isReauthDue;
@@ -36,6 +37,9 @@ void main() {
       databaseServiceProvider.overrideWithValue(_databaseService()),
       homeDailyDataRepositoryProvider.overrideWithValue(
         _homeDailyDataRepository(),
+      ),
+      userPersistenceServiceProvider.overrideWithValue(
+        RecordingUserPersistenceService(),
       ),
       loggingServiceProvider.overrideWithValue(_loggingService()),
       connectivityServiceProvider.overrideWithValue(_connectivityService()),

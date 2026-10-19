@@ -31,6 +31,7 @@ class HomeScreenHarness {
   };
 
   static final DateTime outsideAnySeason = DateTime(2026, 7);
+  static const int _disposalRounds = 5;
 
   final InMemoryUserPreferencesService preferences =
       InMemoryUserPreferencesService(lastHomeMode: HomeMode.sundaySchool);
@@ -43,6 +44,17 @@ class HomeScreenHarness {
   HomeDatabaseFixture database = HomeDatabaseFixture();
   AuthState authState = const AuthUnauthenticated();
   bool isLocked = false;
+  late GoRouter router;
+
+  String get currentLocation {
+    final configuration = router.routerDelegate.currentConfiguration;
+    final lastMatch = configuration.lastOrNull;
+    final matches = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : configuration;
+
+    return matches.uri.toString();
+  }
 
   void signInAs(User user) {
     authState = AuthAuthenticated(
@@ -73,7 +85,7 @@ class HomeScreenHarness {
     addTearDown(tester.view.reset);
 
     _installProviders();
-    final router = GoRouter(
+    router = GoRouter(
       routes: [
         GoRoute(path: '/', builder: (_, _) => const HomeScreen()),
         GoRoute(
@@ -83,6 +95,10 @@ class HomeScreenHarness {
 
             return const Scaffold(body: Text('advanced search'));
           },
+        ),
+        GoRoute(
+          path: const EditAreaRoute().location,
+          builder: (_, _) => const Scaffold(body: Text('edit area')),
         ),
       ],
     );
@@ -144,6 +160,13 @@ class HomeScreenHarness {
     await tester.pump();
   }
 
+  Future<void> finishAsyncDisposal(WidgetTester tester) async {
+    for (var round = 0; round < _disposalRounds; round++) {
+      await tester.pump();
+      await tester.runAsync(pumpEventQueue);
+    }
+  }
+
   Future<void> _loadAppFonts() async {
     for (final font in _appFonts.entries) {
       final loader = FontLoader(font.key);
@@ -156,7 +179,12 @@ class HomeScreenHarness {
 
   void _installProviders() {
     final authBloc = MockAuthBloc();
-    when(() => authBloc.userDataStream).thenAnswer((_) => const Stream.empty());
+    when(() => authBloc.userDataStream).thenAnswer(
+      (_) => Stream.value(switch (authState) {
+        AuthAuthenticated(:final userData) => userData,
+        _ => null,
+      }),
+    );
     when(() => authBloc.state).thenAnswer((_) => authState);
     when(() => authBloc.stream).thenAnswer((_) => const Stream.empty());
     when(() => authBloc.isSignedIn).thenReturn(true);

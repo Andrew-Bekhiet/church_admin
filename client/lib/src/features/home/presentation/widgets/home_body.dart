@@ -1,61 +1,75 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 class HomeBody extends StatelessWidget {
-  final HomeBloc homeBloc;
-  const HomeBody({required this.homeBloc, super.key});
+  final PageController pageController;
+
+  const HomeBody({required this.pageController, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
-      bloc: homeBloc,
+    final homeCubit = context.read<HomeCubit>();
+
+    return BlocBuilder<HomeCubit, HomeState>(
       buildWhen: (previous, current) =>
-          previous.pageController != current.pageController ||
-          !const DeepCollectionEquality().equals(previous.pages, current.pages),
+          !listEquals(previous.tabs, current.tabs) ||
+          previous.listTypes != current.listTypes,
       builder: (context, homeState) {
-        final pages = homeState.pages;
+        final tabs = homeState.tabs;
 
         return PageView.builder(
-          controller: homeState.pageController,
-          itemCount: pages.length,
+          controller: pageController,
+          itemCount: tabs.length,
           allowImplicitScrolling: true,
           padEnds: false,
+          onPageChanged: homeCubit.selectTab,
           itemBuilder: (context, i) {
-            final page = pages[i];
+            final tab = tabs[i];
+            final pageKey = PageStorageKey('Home => ${tab.entity} Page');
 
-            return switch (page) {
-              _ when i == 0 => HomeScreenSummary(homeBloc: homeBloc),
-              HomePageConfig<Service> _ => ServicesHierarchyList(
-                key: PageStorageKey('Home => ${page.type} Page'),
-                type: page.listType,
-                listController: page.objectsController!(),
-                serviceTrailingBuilder:
-                    (
-                      context,
-                      s, {
-                      onLongPress,
-                      onTap,
-                      subtitle,
-                      trailing,
-                    }) => IconButton(
-                      onPressed: onTap != null ? () => onTap(s) : null,
-                      icon: const Icon(Symbols.info),
-                    ),
-              ),
-              HomePageConfig<Area> _ => ViewableObjectList(
-                key: PageStorageKey('Home => ${page.type} Page'),
-                objectsController: page.objectsController!(),
-                viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
-                  forceShowSecondLine: false,
+            return switch ((tab, homeCubit.listControllerFor(tab))) {
+              (HomeTab.summary, _) => const HomeScreenSummary(),
+              (
+                HomeTab.services,
+                final ViewableObjectListController<Service> controller,
+              ) =>
+                ServicesHierarchyList(
+                  key: pageKey,
+                  type: homeState.listTypeOf(tab),
+                  listController: controller,
+                  serviceTrailingBuilder:
+                      (
+                        context,
+                        s, {
+                        onLongPress,
+                        onTap,
+                        subtitle,
+                        trailing,
+                      }) => IconButton(
+                        onPressed: onTap != null ? () => onTap(s) : null,
+                        icon: const Icon(Symbols.info),
+                      ),
                 ),
-              ),
-              HomePageConfig<Viewable> _ => ViewableObjectList(
-                key: PageStorageKey('Home => ${page.type} Page'),
-                objectsController: page.objectsController!(),
-              ),
+              (
+                HomeTab.areas,
+                final ViewableObjectListController<Area> controller,
+              ) =>
+                ViewableObjectList(
+                  key: pageKey,
+                  objectsController: controller,
+                  viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
+                    forceShowSecondLine: false,
+                  ),
+                ),
+              (_, final ViewableObjectListController controller) =>
+                ViewableObjectList(
+                  key: pageKey,
+                  objectsController: controller,
+                ),
+              _ => const SizedBox.shrink(),
             };
           },
         );
