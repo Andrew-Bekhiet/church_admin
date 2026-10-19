@@ -1267,6 +1267,779 @@ type Address {
   family: Family
 }
 
+enum RosterEntrySortField {
+  MEETING_ID
+  PERSON_ID
+  AS_SERVANT
+  NAME
+  GENDER
+  STUDY_YEAR_ID
+  STUDY_YEAR_NAME
+  COLOR
+  PHOTO_UPDATED_AT
+  BLURHASH
+}
+
+"A keyset page of :roster_entry"
+type KeysetPageOfRosterEntry {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [RosterEntry!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input RosterEntryFilterBlurhash {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input RosterEntryFilterPhotoUpdatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input RosterEntryFilterColor {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input RosterEntryFilterStudyYearName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input RosterEntryFilterStudyYearId {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input RosterEntryFilterGender {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input RosterEntryFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input RosterEntryFilterAsServant {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input RosterEntryFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input RosterEntryFilterMeetingId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input RosterEntryFilterInput {
+  and: [RosterEntryFilterInput!]
+  or: [RosterEntryFilterInput!]
+  not: [RosterEntryFilterInput!]
+  meetingId: RosterEntryFilterMeetingId
+  personId: RosterEntryFilterPersonId
+  asServant: RosterEntryFilterAsServant
+  name: RosterEntryFilterName
+  gender: RosterEntryFilterGender
+  studyYearId: RosterEntryFilterStudyYearId
+  studyYearName: RosterEntryFilterStudyYearName
+  color: RosterEntryFilterColor
+  photoUpdatedAt: RosterEntryFilterPhotoUpdatedAt
+  blurhash: RosterEntryFilterBlurhash
+  attendanceRecords: AttendanceRecordFilterInput
+  meeting: MeetingFilterInput
+  person: PersonFilterInput
+}
+
+input RosterEntrySortInput {
+  order: SortOrder
+  field: RosterEntrySortField!
+}
+
+type RosterEntry {
+  "A unique identifier"
+  id: ID!
+
+  meetingId: ID!
+
+  personId: ID!
+
+  asServant: Boolean!
+
+  name: String
+
+  gender: Boolean
+
+  studyYearId: Int
+
+  studyYearName: String
+
+  color: Int
+
+  photoUpdatedAt: DateTime
+
+  blurhash: String
+
+  phones: [String!]
+
+  attendanceRecords(
+    "How to sort the records in the response"
+    sort: [AttendanceRecordSortInput]
+
+    "A filter to limit the results"
+    filter: AttendanceRecordFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [AttendanceRecord!]!
+
+  meeting: Meeting
+
+  person: Person
+}
+
+enum MeetingDaySortField {
+  MEETING_ID
+  DAY
+  STUDY_YEAR_ID
+  GENDER
+  PERSONS_COUNT
+  SERVANTS_COUNT
+  TOTAL_COUNT
+}
+
+input MeetingDayFilterTotalCount {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input MeetingDayFilterServantsCount {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input MeetingDayFilterPersonsCount {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input MeetingDayFilterGender {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input MeetingDayFilterStudyYearId {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int!]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input MeetingDayFilterDay {
+  isNil: Boolean
+  eq: Date
+  notEq: Date
+  in: [Date!]
+  lessThan: Date
+  greaterThan: Date
+  lessThanOrEqual: Date
+  greaterThanOrEqual: Date
+  isDistinctFrom: Date
+  isNotDistinctFrom: Date
+}
+
+input MeetingDayFilterMeetingId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input MeetingDayFilterInput {
+  and: [MeetingDayFilterInput!]
+  or: [MeetingDayFilterInput!]
+  not: [MeetingDayFilterInput!]
+  meetingId: MeetingDayFilterMeetingId
+  day: MeetingDayFilterDay
+  studyYearId: MeetingDayFilterStudyYearId
+  gender: MeetingDayFilterGender
+  personsCount: MeetingDayFilterPersonsCount
+  servantsCount: MeetingDayFilterServantsCount
+  totalCount: MeetingDayFilterTotalCount
+  meeting: MeetingFilterInput
+}
+
+input MeetingDaySortInput {
+  order: SortOrder
+  field: MeetingDaySortField!
+}
+
+type MeetingDay {
+  "A unique identifier"
+  id: ID!
+
+  meetingId: ID!
+
+  day: Date!
+
+  studyYearId: Int
+
+  gender: Boolean!
+
+  personsCount: Int
+
+  servantsCount: Int
+
+  totalCount: Int
+
+  meeting: Meeting
+}
+
+enum MeetingSortField {
+  ID
+  NAME
+  SERVICE_ID
+  SERVICE_STUDY_YEAR
+  SERVICE_GENDER
+  GROUP_ID
+  AUDIENCE
+  IS_ARCHIVED
+  COLOR
+  SHOW_KODAS_CHECKBOX
+}
+
+"A keyset page of :meeting"
+type KeysetPageOfMeeting {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Meeting!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input MeetingFilterShowKodasCheckbox {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input MeetingFilterColor {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input MeetingFilterIsArchived {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input MeetingFilterAudience {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+}
+
+input MeetingFilterGroupId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input MeetingFilterServiceGender {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input MeetingFilterServiceStudyYear {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input MeetingFilterServiceId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input MeetingFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input MeetingFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input MeetingFilterInput {
+  and: [MeetingFilterInput!]
+  or: [MeetingFilterInput!]
+  not: [MeetingFilterInput!]
+  id: MeetingFilterId
+  name: MeetingFilterName
+  serviceId: MeetingFilterServiceId
+  serviceStudyYear: MeetingFilterServiceStudyYear
+  serviceGender: MeetingFilterServiceGender
+  groupId: MeetingFilterGroupId
+  audience: MeetingFilterAudience
+  isArchived: MeetingFilterIsArchived
+  color: MeetingFilterColor
+  showKodasCheckbox: MeetingFilterShowKodasCheckbox
+  attendanceRecords: AttendanceRecordFilterInput
+  days: MeetingDayFilterInput
+  rosterEntries: RosterEntryFilterInput
+}
+
+input MeetingSortInput {
+  order: SortOrder
+  field: MeetingSortField!
+}
+
+type Meeting {
+  id: ID!
+  name: String!
+  serviceId: ID
+  serviceStudyYear: Int
+  serviceGender: Boolean
+  groupId: ID
+  audience: String!
+  isArchived: Boolean!
+  color: Int
+  showKodasCheckbox: Boolean!
+  attendanceRecords(
+    "How to sort the records in the response"
+    sort: [AttendanceRecordSortInput]
+
+    "A filter to limit the results"
+    filter: AttendanceRecordFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [AttendanceRecord!]!
+  days(
+    "How to sort the records in the response"
+    sort: [MeetingDaySortInput]
+
+    "A filter to limit the results"
+    filter: MeetingDayFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [MeetingDay!]!
+  rosterEntries(
+    "How to sort the records in the response"
+    sort: [RosterEntrySortInput]
+
+    "A filter to limit the results"
+    filter: RosterEntryFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [RosterEntry!]!
+  heldDays(from: Date!, to: Date!): [Date!]
+}
+
+enum AttendanceRecordSortField {
+  ID
+  MEETING_ID
+  PERSON_ID
+  DATETIME
+  AS_SERVANT
+  RECORDED_BY
+  DAY
+}
+
+"A keyset page of :attendance_record"
+type KeysetPageOfAttendanceRecord {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [AttendanceRecord!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input AttendanceRecordFilterDay {
+  isNil: Boolean
+  eq: Date
+  notEq: Date
+  in: [Date]
+  lessThan: Date
+  greaterThan: Date
+  lessThanOrEqual: Date
+  greaterThanOrEqual: Date
+  isDistinctFrom: Date
+  isNotDistinctFrom: Date
+}
+
+input AttendanceRecordFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input AttendanceRecordFilterAsServant {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input AttendanceRecordFilterDatetime {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input AttendanceRecordFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input AttendanceRecordFilterMeetingId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input AttendanceRecordFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input AttendanceRecordFilterInput {
+  and: [AttendanceRecordFilterInput!]
+  or: [AttendanceRecordFilterInput!]
+  not: [AttendanceRecordFilterInput!]
+  id: AttendanceRecordFilterId
+  meetingId: AttendanceRecordFilterMeetingId
+  personId: AttendanceRecordFilterPersonId
+  datetime: AttendanceRecordFilterDatetime
+  asServant: AttendanceRecordFilterAsServant
+  recordedBy: AttendanceRecordFilterRecordedBy
+  day: AttendanceRecordFilterDay
+  meeting: MeetingFilterInput
+  person: PersonFilterInput
+  recordedByUser: UserFilterInput
+}
+
+input AttendanceRecordSortInput {
+  order: SortOrder
+  field: AttendanceRecordSortField!
+}
+
+type AttendanceRecord {
+  id: ID!
+  meetingId: ID!
+  personId: ID!
+  datetime: DateTime!
+  asServant: Boolean!
+  recordedBy: ID!
+  day: Date
+  meeting: Meeting
+  person: Person
+  recordedByUser: User
+}
+
 enum UserPermissionSortField {
   UID
   PERMISSION
@@ -1991,6 +2764,67 @@ type RootQueryType {
     "The number of records to return to the end. Maximum 1000"
     last: Int
   ): KeysetPageOfUserPermission
+  attendanceRecords(
+    "How to sort the records in the response"
+    sort: [AttendanceRecordSortInput]
+
+    "A filter to limit the results"
+    filter: AttendanceRecordFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfAttendanceRecord
+  meeting(
+    "The id of the record"
+    id: ID!
+  ): Meeting
+  meetings(
+    "How to sort the records in the response"
+    sort: [MeetingSortInput]
+
+    "A filter to limit the results"
+    filter: MeetingFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfMeeting
+  rosterEntries(
+    "How to sort the records in the response"
+    sort: [RosterEntrySortInput]
+
+    "A filter to limit the results"
+    filter: RosterEntryFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfRosterEntry
   address(
     "The id of the record"
     id: ID!
