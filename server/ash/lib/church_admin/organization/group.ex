@@ -17,7 +17,14 @@ defmodule ChurchAdmin.Organization.Group do
   graphql do
     type :group
 
-    relationships [:service, :group_memberships, :admins, :latest_edit]
+    relationships [
+      :service,
+      :group_memberships,
+      :admins,
+      :latest_edit,
+      :meetings,
+      :default_meeting
+    ]
 
     queries do
       get :group, :read

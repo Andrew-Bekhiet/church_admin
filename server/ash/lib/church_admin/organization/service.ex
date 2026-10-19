@@ -24,7 +24,9 @@ defmodule ChurchAdmin.Organization.Service do
       :next_service,
       :service_memberships,
       :admins,
-      :latest_edit
+      :latest_edit,
+      :meetings,
+      :default_meeting
     ]
 
     queries do

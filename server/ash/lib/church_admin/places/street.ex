@@ -16,7 +16,15 @@ defmodule ChurchAdmin.Places.Street do
   graphql do
     type :street
 
-    relationships [:addresses, :area_streets, :areas]
+    relationships [
+      :addresses,
+      :area_streets,
+      :areas,
+      :latest_edit,
+      :edits,
+      :latest_visit,
+      :visits
+    ]
 
     queries do
       get :street, :read
