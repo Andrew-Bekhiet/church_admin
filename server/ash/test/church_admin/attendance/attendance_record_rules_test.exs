@@ -42,6 +42,7 @@ defmodule ChurchAdmin.Attendance.AttendanceRecordRulesTest do
 
   defp servant!(attrs \\ %{}) do
     user = Factory.user!()
+    Factory.permissions!(user, ["approved"])
     person = Factory.person!(Map.merge(%{uid: user.uid, family_id: Factory.family!().id}, attrs))
     {user, person}
   end
@@ -216,7 +217,7 @@ defmodule ChurchAdmin.Attendance.AttendanceRecordRulesTest do
       {:ok, id} = attend(ctx, meeting, ctx.boy)
       archive_meeting(meeting)
 
-      assert {:ok, ^id} = OrgWrites.delete(ctx.actor, :attendance, id)
+      assert {:ok, ^id} = OrgWrites.delete(system_actor(), :attendance, id)
       assert column("history.attendance_history", "id", id) == nil
     end
 

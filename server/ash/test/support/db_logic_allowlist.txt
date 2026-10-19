@@ -16,8 +16,6 @@ function auth.user_can_edit_service(services, json)
 function auth.user_can_edit_store(stores, json)
 function auth.user_can_edit_street(streets, json)
 function auth.user_can_edit_user(auth.users_data, json)
-function history.check_attendance_history_meeting()
-function history.check_meeting_service_study_year_rel()
 function history.edit_history_trigger()
 function history.insert_person_edit_history()
 function history.maybe_remove_group_archived_default_meeting()
@@ -50,11 +48,9 @@ function public.sync_street_areas()
 trigger auth.users_admin_on.sync_users_permissions_by_entity_id_cache
 trigger auth.users_data.sync_users_permissions_by_entity_id_cache
 trigger auth.users_permissions.sync_users_permissions_by_entity_id_cache
-trigger history.attendance_history.check_attendance_history_meeting
 trigger history.call_history.insert_person_edit_history
 trigger history.confession_history.insert_person_edit_history
 trigger history.kodas_history.insert_person_edit_history
-trigger history.meetings.check_service_study_year_rel
 trigger history.meetings.maybe_remove_group_archived_default_meeting
 trigger history.meetings.maybe_remove_service_archived_default_meeting
 trigger public.addresses.check_address_insertion
