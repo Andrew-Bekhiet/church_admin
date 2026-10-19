@@ -17,6 +17,7 @@ defmodule ChurchAdmin.People.Person.Commands do
   alias ChurchAdmin.Organization.{Group, Service}
   alias ChurchAdmin.People.{ContactInput, Family, FamilyContactInput}
   alias ChurchAdmin.People.Person.{Changes, Invariants}
+  alias ChurchAdmin.People.Person.Validations.CallerMayRelinkUser
   alias ChurchAdmin.Places.Changes.ApplyOwnerAddress
   alias ChurchAdmin.Places.Types.AddressInput
   alias ChurchAdmin.Types.Text
@@ -115,6 +116,7 @@ defmodule ChurchAdmin.People.Person.Commands do
       validate {ReferencesVisible, argument: :tags, resource: Tag}
       validate {ReferencesVisible, argument: :hobbies, resource: Hobby}
       validate present(:family_id), where: present(:address)
+      validate CallerMayRelinkUser, before_action?: true
 
       change Changes.NormalizeEmployment
       change Changes.ApplyMemberships

@@ -21,7 +21,6 @@ function history.check_meeting_service_study_year_rel()
 function history.edit_history_trigger()
 function history.maybe_remove_group_archived_default_meeting()
 function history.maybe_remove_service_archived_default_meeting()
-function public.assert_caller_can_change_person_user_link()
 function public.check_address_insertion()
 function public.check_group_default_meeting_belongs_to_group()
 function public.check_row_insertion_permission()
@@ -52,8 +51,6 @@ trigger public.families_families.edit_history
 trigger public.groups.check_group_default_meeting_belongs_to_group
 trigger public.groups.edit_history
 trigger public.groups.soft_delete_groups
-trigger public.persons.assert_caller_can_change_person_user_link
-trigger public.persons.check_person_insertion_permission
 trigger public.persons.remember_person_inserted_in_transaction
 trigger public.persons.sync_users_permissions_by_entity_id_cache
 trigger public.persons_groups.sync_users_permissions_by_entity_id_cache
