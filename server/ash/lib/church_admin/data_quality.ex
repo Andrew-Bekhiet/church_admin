@@ -1,9 +1,5 @@
 defmodule ChurchAdmin.DataQuality do
-  use Ash.Domain, otp_app: :church_admin, extensions: [AshGraphql.Domain]
-
-  graphql do
-    root_level_errors? true
-  end
+  use ChurchAdmin.Domain
 
   resources do
     resource ChurchAdmin.DataQuality.DataCheck
