@@ -38,6 +38,16 @@ defmodule ChurchAdminWeb.Graphql.PlacesStreetMutationsTest do
       assert pair_set(%{id: id}) == MapSet.new([a1, a2])
     end
 
+    test "links an area named twice once", %{conn: conn, world: world} do
+      a2 = world.records.a2.id
+      input = %{"name" => "twice", "areas" => [a2, a2]}
+
+      response = run(conn, @create_street, %{"input" => input}, user(world, :read_write))
+
+      id = response["data"]["createStreet"]["result"]["id"]
+      assert pair_set(%{id: id}) == MapSet.new([a2])
+    end
+
     test "rejects an area the actor cannot find and writes nothing", %{conn: conn, world: world} do
       before = count(Street)
       input = %{"name" => "s", "areas" => [Ash.UUID.generate()]}
