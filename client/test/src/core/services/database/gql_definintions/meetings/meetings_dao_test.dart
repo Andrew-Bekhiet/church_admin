@@ -146,7 +146,7 @@ void main() {
         expect(backend.server.sentTo('createMeeting').single.variables, {
           'input': {
             'name': draft.name,
-            'audience': draft.audience.name,
+            'audience': 'ONLY_SERVANTS',
             'color': colorToInt(draft.color),
             'isArchived': draft.isArchived,
             'showKodasCheckbox': draft.showKodasCheckbox,
@@ -202,7 +202,7 @@ void main() {
           'id': renamed.id,
           'input': {
             'name': renamed.name,
-            'audience': renamed.audience.name,
+            'audience': 'ONLY_PERSONS',
             'color': null,
             'isArchived': renamed.isArchived,
             'showKodasCheckbox': renamed.showKodasCheckbox,

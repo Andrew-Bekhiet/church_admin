@@ -1,4 +1,5 @@
 import '../../areas/__generated__/fragments.graphql.dart';
+import '../../gql/__generated__/fragments.graphql.dart';
 
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
@@ -596,12 +597,12 @@ class Fragment_StreetDetails
           .toList(),
       latestEdit: l$latestEdit == null
           ? null
-          : Fragment_PlaceLatestEdit.fromJson(
+          : Fragment_LatestEdit.fromJson(
               (l$latestEdit as Map<String, dynamic>),
             ),
       latestVisit: l$latestVisit == null
           ? null
-          : Fragment_PlaceLatestVisit.fromJson(
+          : Fragment_LatestVisit.fromJson(
               (l$latestVisit as Map<String, dynamic>),
             ),
     );
@@ -625,9 +626,9 @@ class Fragment_StreetDetails
 
   final List<Fragment_Area> areas;
 
-  final Fragment_PlaceLatestEdit? latestEdit;
+  final Fragment_LatestEdit? latestEdit;
 
-  final Fragment_PlaceLatestVisit? latestVisit;
+  final Fragment_LatestVisit? latestVisit;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -784,8 +785,8 @@ abstract class CopyWith_Fragment_StreetDetails<TRes> {
     String? $__typename,
     Json? line,
     List<Fragment_Area>? areas,
-    Fragment_PlaceLatestEdit? latestEdit,
-    Fragment_PlaceLatestVisit? latestVisit,
+    Fragment_LatestEdit? latestEdit,
+    Fragment_LatestVisit? latestVisit,
   });
   TRes areas(
     Iterable<Fragment_Area> Function(
@@ -793,8 +794,8 @@ abstract class CopyWith_Fragment_StreetDetails<TRes> {
     )
     _fn,
   );
-  CopyWith_Fragment_PlaceLatestEdit<TRes> get latestEdit;
-  CopyWith_Fragment_PlaceLatestVisit<TRes> get latestVisit;
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit;
+  CopyWith_Fragment_LatestVisit<TRes> get latestVisit;
 }
 
 class _CopyWithImpl_Fragment_StreetDetails<TRes>
@@ -844,10 +845,10 @@ class _CopyWithImpl_Fragment_StreetDetails<TRes>
           : (areas as List<Fragment_Area>),
       latestEdit: latestEdit == _undefined
           ? _instance.latestEdit
-          : (latestEdit as Fragment_PlaceLatestEdit?),
+          : (latestEdit as Fragment_LatestEdit?),
       latestVisit: latestVisit == _undefined
           ? _instance.latestVisit
-          : (latestVisit as Fragment_PlaceLatestVisit?),
+          : (latestVisit as Fragment_LatestVisit?),
     ),
   );
 
@@ -861,21 +862,21 @@ class _CopyWithImpl_Fragment_StreetDetails<TRes>
         .toList(),
   );
 
-  CopyWith_Fragment_PlaceLatestEdit<TRes> get latestEdit {
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit {
     final local$latestEdit = _instance.latestEdit;
     return local$latestEdit == null
-        ? CopyWith_Fragment_PlaceLatestEdit.stub(_then(_instance))
-        : CopyWith_Fragment_PlaceLatestEdit(
+        ? CopyWith_Fragment_LatestEdit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestEdit(
             local$latestEdit,
             (e) => call(latestEdit: e),
           );
   }
 
-  CopyWith_Fragment_PlaceLatestVisit<TRes> get latestVisit {
+  CopyWith_Fragment_LatestVisit<TRes> get latestVisit {
     final local$latestVisit = _instance.latestVisit;
     return local$latestVisit == null
-        ? CopyWith_Fragment_PlaceLatestVisit.stub(_then(_instance))
-        : CopyWith_Fragment_PlaceLatestVisit(
+        ? CopyWith_Fragment_LatestVisit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestVisit(
             local$latestVisit,
             (e) => call(latestVisit: e),
           );
@@ -898,17 +899,17 @@ class _CopyWithStubImpl_Fragment_StreetDetails<TRes>
     String? $__typename,
     Json? line,
     List<Fragment_Area>? areas,
-    Fragment_PlaceLatestEdit? latestEdit,
-    Fragment_PlaceLatestVisit? latestVisit,
+    Fragment_LatestEdit? latestEdit,
+    Fragment_LatestVisit? latestVisit,
   }) => _res;
 
   areas(_fn) => _res;
 
-  CopyWith_Fragment_PlaceLatestEdit<TRes> get latestEdit =>
-      CopyWith_Fragment_PlaceLatestEdit.stub(_res);
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit =>
+      CopyWith_Fragment_LatestEdit.stub(_res);
 
-  CopyWith_Fragment_PlaceLatestVisit<TRes> get latestVisit =>
-      CopyWith_Fragment_PlaceLatestVisit.stub(_res);
+  CopyWith_Fragment_LatestVisit<TRes> get latestVisit =>
+      CopyWith_Fragment_LatestVisit.stub(_res);
 }
 
 const fragmentDefinitionStreetDetails = FragmentDefinitionNode(
@@ -972,7 +973,7 @@ const fragmentDefinitionStreetDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PlaceLatestEdit'),
+              name: NameNode(value: 'LatestEdit'),
               directives: [],
             ),
             FieldNode(
@@ -993,7 +994,7 @@ const fragmentDefinitionStreetDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PlaceLatestVisit'),
+              name: NameNode(value: 'LatestVisit'),
               directives: [],
             ),
             FieldNode(
@@ -1022,8 +1023,8 @@ const documentNodeFragmentStreetDetails = DocumentNode(
     fragmentDefinitionStreetWithLine,
     fragmentDefinitionStreet,
     fragmentDefinitionArea,
-    fragmentDefinitionPlaceLatestEdit,
-    fragmentDefinitionPlaceUser,
-    fragmentDefinitionPlaceLatestVisit,
+    fragmentDefinitionLatestEdit,
+    fragmentDefinitionUser,
+    fragmentDefinitionLatestVisit,
   ],
 );

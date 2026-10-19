@@ -28,16 +28,16 @@ Meeting _meeting({
 
 void main() {
   group('MeetingAudience', () {
-    test('enum names match expected JSON string values', () {
-      expect(MeetingAudience.onlyPersons.name, 'onlyPersons');
-      expect(MeetingAudience.onlyServants.name, 'onlyServants');
-      expect(MeetingAudience.personsAndServants.name, 'personsAndServants');
-    });
+    const wireValues = {
+      MeetingAudience.onlyPersons: 'ONLY_PERSONS',
+      MeetingAudience.onlyServants: 'ONLY_SERVANTS',
+      MeetingAudience.personsAndServants: 'PERSONS_AND_SERVANTS',
+    };
 
-    test('audience round-trips through Meeting.fromJson / toJson', () {
+    test('audience round-trips through the upper-case GraphQL enum', () {
       for (final aud in MeetingAudience.values) {
         final json = _meeting(audience: aud).toJson();
-        expect(json['audience'], aud.name);
+        expect(json['audience'], wireValues[aud]);
         expect(Meeting.fromJson(json).audience, aud);
       }
     });
@@ -73,7 +73,7 @@ void main() {
       final json = {
         'id': 'meet-1',
         'name': 'Sunday Meeting',
-        'audience': 'onlyPersons',
+        'audience': 'ONLY_PERSONS',
         'isArchived': false,
       };
       final meeting = Meeting.fromJson(json);
@@ -88,7 +88,7 @@ void main() {
       final json = {
         'id': 'meet-1',
         'name': 'Sunday Meeting',
-        'audience': 'onlyPersons',
+        'audience': 'ONLY_PERSONS',
         'isArchived': false,
       };
 
@@ -101,7 +101,7 @@ void main() {
       final json = {
         'id': 'meet-1',
         'name': 'Liturgy',
-        'audience': 'onlyPersons',
+        'audience': 'ONLY_PERSONS',
         'isArchived': false,
         'showKodasCheckbox': false,
       };
@@ -115,7 +115,7 @@ void main() {
       final json = {
         'id': 'meet-1',
         'name': 'Coloured Meeting',
-        'audience': 'onlyPersons',
+        'audience': 'ONLY_PERSONS',
         'isArchived': false,
         'color': 0xFF2196F3,
       };
@@ -127,7 +127,7 @@ void main() {
       final json = {
         'id': 'meet-2',
         'name': 'Servants Meeting',
-        'audience': 'onlyServants',
+        'audience': 'ONLY_SERVANTS',
         'isArchived': true,
         'serviceId': 'svc-uuid',
         'serviceStudyYear': 3,
@@ -141,44 +141,6 @@ void main() {
       expect(meeting.serviceStudyYear, 3);
       expect(meeting.serviceGender, Gender.male);
       expect(meeting.groupId, isNull);
-    });
-  });
-
-  group('Meeting.toInsertInput', () {
-    test('builds insert input with all fields', () {
-      final meeting = _meeting(
-        name: 'New Meeting',
-        audience: MeetingAudience.personsAndServants,
-        color: const Color(0xFF2196F3),
-        serviceId: 'svc-abc',
-        serviceStudyYear: 2,
-        serviceGender: Gender.female,
-      );
-      final input = meeting.toInsertInput();
-      expect(input.name, 'New Meeting');
-      expect(input.audience, 'personsAndServants');
-      expect(input.isArchived, isFalse);
-      expect(input.color, isNotNull);
-      expect(input.serviceStudyYear, 2);
-      expect(input.serviceGender, isFalse);
-    });
-
-    test('builds insert input for group meeting', () {
-      final meeting = _meeting(
-        name: 'Group Meeting',
-        groupId: 'grp-abc',
-      );
-      final input = meeting.toInsertInput();
-      expect(input.groupId, isNotNull);
-      expect(input.serviceId, isNull);
-      expect(input.color, isNull);
-    });
-
-    test('audience serialises as enum name string', () {
-      for (final aud in MeetingAudience.values) {
-        final input = _meeting(audience: aud).toInsertInput();
-        expect(input.audience, aud.name);
-      }
     });
   });
 }

@@ -1,5 +1,8 @@
 import '../../areas/__generated__/fragments.graphql.dart';
 import '../../classes/__generated__/fragments.graphql.dart';
+import '../../contacts/__generated__/fragments.graphql.dart';
+import '../../data_checks/__generated__/fragments.graphql.dart';
+import '../../gql/__generated__/fragments.graphql.dart';
 import '../../groups/__generated__/fragments.graphql.dart';
 import '../../metadata/churches/__generated__/fragments.graphql.dart';
 import '../../metadata/colleges/__generated__/fragments.graphql.dart';
@@ -276,9 +279,7 @@ class Fragment_Person implements Fragment_PersonNoPhoto {
       blurhash: (l$blurhash as String?),
       dataCheck: l$dataCheck == null
           ? null
-          : Fragment_PersonDataCheck.fromJson(
-              (l$dataCheck as Map<String, dynamic>),
-            ),
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
     );
   }
 
@@ -296,7 +297,7 @@ class Fragment_Person implements Fragment_PersonNoPhoto {
 
   final String? blurhash;
 
-  final Fragment_PersonDataCheck? dataCheck;
+  final Fragment_DataCheck? dataCheck;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -417,9 +418,9 @@ abstract class CopyWith_Fragment_Person<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
+    Fragment_DataCheck? dataCheck,
   });
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck;
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
 }
 
 class _CopyWithImpl_Fragment_Person<TRes>
@@ -462,15 +463,15 @@ class _CopyWithImpl_Fragment_Person<TRes>
           : (blurhash as String?),
       dataCheck: dataCheck == _undefined
           ? _instance.dataCheck
-          : (dataCheck as Fragment_PersonDataCheck?),
+          : (dataCheck as Fragment_DataCheck?),
     ),
   );
 
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck {
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
     final local$dataCheck = _instance.dataCheck;
     return local$dataCheck == null
-        ? CopyWith_Fragment_PersonDataCheck.stub(_then(_instance))
-        : CopyWith_Fragment_PersonDataCheck(
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
             local$dataCheck,
             (e) => call(dataCheck: e),
           );
@@ -491,11 +492,11 @@ class _CopyWithStubImpl_Fragment_Person<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
+    Fragment_DataCheck? dataCheck,
   }) => _res;
 
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck =>
-      CopyWith_Fragment_PersonDataCheck.stub(_res);
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 }
 
 const fragmentDefinitionPerson = FragmentDefinitionNode(
@@ -532,7 +533,7 @@ const fragmentDefinitionPerson = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PersonDataCheck'),
+              name: NameNode(value: 'DataCheck'),
               directives: [],
             ),
             FieldNode(
@@ -559,7 +560,7 @@ const documentNodeFragmentPerson = DocumentNode(
   definitions: [
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
-    fragmentDefinitionPersonDataCheck,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -822,14 +823,10 @@ class Fragment_PersonDetails
       blurhash: (l$blurhash as String?),
       dataCheck: l$dataCheck == null
           ? null
-          : Fragment_PersonDataCheck.fromJson(
-              (l$dataCheck as Map<String, dynamic>),
-            ),
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
       address: l$address == null
           ? null
-          : Fragment_PersonAddress.fromJson(
-              (l$address as Map<String, dynamic>),
-            ),
+          : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
       birthdate: l$birthdate == null ? null : dateFromString(l$birthdate),
       classMemberships: (l$classMemberships as List<dynamic>)
           .map(
@@ -842,9 +839,7 @@ class Fragment_PersonDetails
           ? null
           : Fragment_Church.fromJson((l$church as Map<String, dynamic>)),
       contacts: (l$contacts as List<dynamic>)
-          .map(
-            (e) => Fragment_PersonContact.fromJson((e as Map<String, dynamic>)),
-          )
+          .map((e) => Fragment_Contact.fromJson((e as Map<String, dynamic>)))
           .toList(),
       college: l$college == null
           ? null
@@ -878,27 +873,27 @@ class Fragment_PersonDetails
       jobDescription: (l$jobDescription as String?),
       latestCall: l$latestCall == null
           ? null
-          : Fragment_PersonLatestCall.fromJson(
+          : Fragment_LatestCall.fromJson(
               (l$latestCall as Map<String, dynamic>),
             ),
       latestConfession: l$latestConfession == null
           ? null
-          : Fragment_PersonLatestConfession.fromJson(
+          : Fragment_LatestConfession.fromJson(
               (l$latestConfession as Map<String, dynamic>),
             ),
       latestEdit: l$latestEdit == null
           ? null
-          : Fragment_PersonLatestEdit.fromJson(
+          : Fragment_LatestEdit.fromJson(
               (l$latestEdit as Map<String, dynamic>),
             ),
       latestKodas: l$latestKodas == null
           ? null
-          : Fragment_PersonLatestKodas.fromJson(
+          : Fragment_LatestKodas.fromJson(
               (l$latestKodas as Map<String, dynamic>),
             ),
       latestVisit: l$latestVisit == null
           ? null
-          : Fragment_PersonLatestVisit.fromJson(
+          : Fragment_LatestVisit.fromJson(
               (l$latestVisit as Map<String, dynamic>),
             ),
       notes: (l$notes as String?),
@@ -943,7 +938,7 @@ class Fragment_PersonDetails
       uid: (l$uid as String?),
       user: l$user == null
           ? null
-          : Fragment_PersonUser.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
     );
   }
 
@@ -961,9 +956,9 @@ class Fragment_PersonDetails
 
   final String? blurhash;
 
-  final Fragment_PersonDataCheck? dataCheck;
+  final Fragment_DataCheck? dataCheck;
 
-  final Fragment_PersonAddress? address;
+  final Fragment_Address? address;
 
   final DateTime? birthdate;
 
@@ -971,7 +966,7 @@ class Fragment_PersonDetails
 
   final Fragment_Church? church;
 
-  final List<Fragment_PersonContact> contacts;
+  final List<Fragment_Contact> contacts;
 
   final Fragment_College? college;
 
@@ -997,15 +992,15 @@ class Fragment_PersonDetails
 
   final String? jobDescription;
 
-  final Fragment_PersonLatestCall? latestCall;
+  final Fragment_LatestCall? latestCall;
 
-  final Fragment_PersonLatestConfession? latestConfession;
+  final Fragment_LatestConfession? latestConfession;
 
-  final Fragment_PersonLatestEdit? latestEdit;
+  final Fragment_LatestEdit? latestEdit;
 
-  final Fragment_PersonLatestKodas? latestKodas;
+  final Fragment_LatestKodas? latestKodas;
 
-  final Fragment_PersonLatestVisit? latestVisit;
+  final Fragment_LatestVisit? latestVisit;
 
   final String? notes;
 
@@ -1031,7 +1026,7 @@ class Fragment_PersonDetails
 
   final String? uid;
 
-  final Fragment_PersonUser? user;
+  final Fragment_User? user;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -1517,12 +1512,12 @@ abstract class CopyWith_Fragment_PersonDetails<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
-    Fragment_PersonAddress? address,
+    Fragment_DataCheck? dataCheck,
+    Fragment_Address? address,
     DateTime? birthdate,
     List<Fragment_PersonDetails_classMemberships>? classMemberships,
     Fragment_Church? church,
-    List<Fragment_PersonContact>? contacts,
+    List<Fragment_Contact>? contacts,
     Fragment_College? college,
     Fragment_PersonFamily? family,
     Fragment_PersonDetails_father? father,
@@ -1535,11 +1530,11 @@ abstract class CopyWith_Fragment_PersonDetails<TRes> {
     String? workStatus,
     Fragment_Job? job,
     String? jobDescription,
-    Fragment_PersonLatestCall? latestCall,
-    Fragment_PersonLatestConfession? latestConfession,
-    Fragment_PersonLatestEdit? latestEdit,
-    Fragment_PersonLatestKodas? latestKodas,
-    Fragment_PersonLatestVisit? latestVisit,
+    Fragment_LatestCall? latestCall,
+    Fragment_LatestConfession? latestConfession,
+    Fragment_LatestEdit? latestEdit,
+    Fragment_LatestKodas? latestKodas,
+    Fragment_LatestVisit? latestVisit,
     String? notes,
     String? martialStatus,
     Fragment_PersonType? personType,
@@ -1552,10 +1547,10 @@ abstract class CopyWith_Fragment_PersonDetails<TRes> {
     List<Fragment_Hobby>? hobbies,
     List<Fragment_Tag>? tags,
     String? uid,
-    Fragment_PersonUser? user,
+    Fragment_User? user,
   });
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck;
-  CopyWith_Fragment_PersonAddress<TRes> get address;
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
+  CopyWith_Fragment_Address<TRes> get address;
   TRes classMemberships(
     Iterable<Fragment_PersonDetails_classMemberships> Function(
       Iterable<
@@ -1568,8 +1563,8 @@ abstract class CopyWith_Fragment_PersonDetails<TRes> {
   );
   CopyWith_Fragment_Church<TRes> get church;
   TRes contacts(
-    Iterable<Fragment_PersonContact> Function(
-      Iterable<CopyWith_Fragment_PersonContact<Fragment_PersonContact>>,
+    Iterable<Fragment_Contact> Function(
+      Iterable<CopyWith_Fragment_Contact<Fragment_Contact>>,
     )
     _fn,
   );
@@ -1588,11 +1583,11 @@ abstract class CopyWith_Fragment_PersonDetails<TRes> {
   );
   CopyWith_Fragment_Church<TRes> get servingChurch;
   CopyWith_Fragment_Job<TRes> get job;
-  CopyWith_Fragment_PersonLatestCall<TRes> get latestCall;
-  CopyWith_Fragment_PersonLatestConfession<TRes> get latestConfession;
-  CopyWith_Fragment_PersonLatestEdit<TRes> get latestEdit;
-  CopyWith_Fragment_PersonLatestKodas<TRes> get latestKodas;
-  CopyWith_Fragment_PersonLatestVisit<TRes> get latestVisit;
+  CopyWith_Fragment_LatestCall<TRes> get latestCall;
+  CopyWith_Fragment_LatestConfession<TRes> get latestConfession;
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit;
+  CopyWith_Fragment_LatestKodas<TRes> get latestKodas;
+  CopyWith_Fragment_LatestVisit<TRes> get latestVisit;
   CopyWith_Fragment_PersonType<TRes> get personType;
   CopyWith_Fragment_Qualification<TRes> get qualification;
   CopyWith_Fragment_School<TRes> get school;
@@ -1621,7 +1616,7 @@ abstract class CopyWith_Fragment_PersonDetails<TRes> {
     )
     _fn,
   );
-  CopyWith_Fragment_PersonUser<TRes> get user;
+  CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Fragment_PersonDetails<TRes>
@@ -1699,10 +1694,10 @@ class _CopyWithImpl_Fragment_PersonDetails<TRes>
           : (blurhash as String?),
       dataCheck: dataCheck == _undefined
           ? _instance.dataCheck
-          : (dataCheck as Fragment_PersonDataCheck?),
+          : (dataCheck as Fragment_DataCheck?),
       address: address == _undefined
           ? _instance.address
-          : (address as Fragment_PersonAddress?),
+          : (address as Fragment_Address?),
       birthdate: birthdate == _undefined
           ? _instance.birthdate
           : (birthdate as DateTime?),
@@ -1715,7 +1710,7 @@ class _CopyWithImpl_Fragment_PersonDetails<TRes>
           : (church as Fragment_Church?),
       contacts: contacts == _undefined || contacts == null
           ? _instance.contacts
-          : (contacts as List<Fragment_PersonContact>),
+          : (contacts as List<Fragment_Contact>),
       college: college == _undefined
           ? _instance.college
           : (college as Fragment_College?),
@@ -1753,19 +1748,19 @@ class _CopyWithImpl_Fragment_PersonDetails<TRes>
           : (jobDescription as String?),
       latestCall: latestCall == _undefined
           ? _instance.latestCall
-          : (latestCall as Fragment_PersonLatestCall?),
+          : (latestCall as Fragment_LatestCall?),
       latestConfession: latestConfession == _undefined
           ? _instance.latestConfession
-          : (latestConfession as Fragment_PersonLatestConfession?),
+          : (latestConfession as Fragment_LatestConfession?),
       latestEdit: latestEdit == _undefined
           ? _instance.latestEdit
-          : (latestEdit as Fragment_PersonLatestEdit?),
+          : (latestEdit as Fragment_LatestEdit?),
       latestKodas: latestKodas == _undefined
           ? _instance.latestKodas
-          : (latestKodas as Fragment_PersonLatestKodas?),
+          : (latestKodas as Fragment_LatestKodas?),
       latestVisit: latestVisit == _undefined
           ? _instance.latestVisit
-          : (latestVisit as Fragment_PersonLatestVisit?),
+          : (latestVisit as Fragment_LatestVisit?),
       notes: notes == _undefined ? _instance.notes : (notes as String?),
       martialStatus: martialStatus == _undefined || martialStatus == null
           ? _instance.martialStatus
@@ -1800,30 +1795,25 @@ class _CopyWithImpl_Fragment_PersonDetails<TRes>
           ? _instance.tags
           : (tags as List<Fragment_Tag>),
       uid: uid == _undefined ? _instance.uid : (uid as String?),
-      user: user == _undefined
-          ? _instance.user
-          : (user as Fragment_PersonUser?),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
     ),
   );
 
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck {
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
     final local$dataCheck = _instance.dataCheck;
     return local$dataCheck == null
-        ? CopyWith_Fragment_PersonDataCheck.stub(_then(_instance))
-        : CopyWith_Fragment_PersonDataCheck(
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
             local$dataCheck,
             (e) => call(dataCheck: e),
           );
   }
 
-  CopyWith_Fragment_PersonAddress<TRes> get address {
+  CopyWith_Fragment_Address<TRes> get address {
     final local$address = _instance.address;
     return local$address == null
-        ? CopyWith_Fragment_PersonAddress.stub(_then(_instance))
-        : CopyWith_Fragment_PersonAddress(
-            local$address,
-            (e) => call(address: e),
-          );
+        ? CopyWith_Fragment_Address.stub(_then(_instance))
+        : CopyWith_Fragment_Address(local$address, (e) => call(address: e));
   }
 
   TRes classMemberships(
@@ -1851,15 +1841,13 @@ class _CopyWithImpl_Fragment_PersonDetails<TRes>
   }
 
   TRes contacts(
-    Iterable<Fragment_PersonContact> Function(
-      Iterable<CopyWith_Fragment_PersonContact<Fragment_PersonContact>>,
+    Iterable<Fragment_Contact> Function(
+      Iterable<CopyWith_Fragment_Contact<Fragment_Contact>>,
     )
     _fn,
   ) => call(
     contacts: _fn(
-      _instance.contacts.map(
-        (e) => CopyWith_Fragment_PersonContact(e, (i) => i),
-      ),
+      _instance.contacts.map((e) => CopyWith_Fragment_Contact(e, (i) => i)),
     ).toList(),
   );
 
@@ -1921,51 +1909,51 @@ class _CopyWithImpl_Fragment_PersonDetails<TRes>
         : CopyWith_Fragment_Job(local$job, (e) => call(job: e));
   }
 
-  CopyWith_Fragment_PersonLatestCall<TRes> get latestCall {
+  CopyWith_Fragment_LatestCall<TRes> get latestCall {
     final local$latestCall = _instance.latestCall;
     return local$latestCall == null
-        ? CopyWith_Fragment_PersonLatestCall.stub(_then(_instance))
-        : CopyWith_Fragment_PersonLatestCall(
+        ? CopyWith_Fragment_LatestCall.stub(_then(_instance))
+        : CopyWith_Fragment_LatestCall(
             local$latestCall,
             (e) => call(latestCall: e),
           );
   }
 
-  CopyWith_Fragment_PersonLatestConfession<TRes> get latestConfession {
+  CopyWith_Fragment_LatestConfession<TRes> get latestConfession {
     final local$latestConfession = _instance.latestConfession;
     return local$latestConfession == null
-        ? CopyWith_Fragment_PersonLatestConfession.stub(_then(_instance))
-        : CopyWith_Fragment_PersonLatestConfession(
+        ? CopyWith_Fragment_LatestConfession.stub(_then(_instance))
+        : CopyWith_Fragment_LatestConfession(
             local$latestConfession,
             (e) => call(latestConfession: e),
           );
   }
 
-  CopyWith_Fragment_PersonLatestEdit<TRes> get latestEdit {
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit {
     final local$latestEdit = _instance.latestEdit;
     return local$latestEdit == null
-        ? CopyWith_Fragment_PersonLatestEdit.stub(_then(_instance))
-        : CopyWith_Fragment_PersonLatestEdit(
+        ? CopyWith_Fragment_LatestEdit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestEdit(
             local$latestEdit,
             (e) => call(latestEdit: e),
           );
   }
 
-  CopyWith_Fragment_PersonLatestKodas<TRes> get latestKodas {
+  CopyWith_Fragment_LatestKodas<TRes> get latestKodas {
     final local$latestKodas = _instance.latestKodas;
     return local$latestKodas == null
-        ? CopyWith_Fragment_PersonLatestKodas.stub(_then(_instance))
-        : CopyWith_Fragment_PersonLatestKodas(
+        ? CopyWith_Fragment_LatestKodas.stub(_then(_instance))
+        : CopyWith_Fragment_LatestKodas(
             local$latestKodas,
             (e) => call(latestKodas: e),
           );
   }
 
-  CopyWith_Fragment_PersonLatestVisit<TRes> get latestVisit {
+  CopyWith_Fragment_LatestVisit<TRes> get latestVisit {
     final local$latestVisit = _instance.latestVisit;
     return local$latestVisit == null
-        ? CopyWith_Fragment_PersonLatestVisit.stub(_then(_instance))
-        : CopyWith_Fragment_PersonLatestVisit(
+        ? CopyWith_Fragment_LatestVisit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestVisit(
             local$latestVisit,
             (e) => call(latestVisit: e),
           );
@@ -2063,11 +2051,11 @@ class _CopyWithImpl_Fragment_PersonDetails<TRes>
         .toList(),
   );
 
-  CopyWith_Fragment_PersonUser<TRes> get user {
+  CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith_Fragment_PersonUser.stub(_then(_instance))
-        : CopyWith_Fragment_PersonUser(local$user, (e) => call(user: e));
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
   }
 }
 
@@ -2085,12 +2073,12 @@ class _CopyWithStubImpl_Fragment_PersonDetails<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
-    Fragment_PersonAddress? address,
+    Fragment_DataCheck? dataCheck,
+    Fragment_Address? address,
     DateTime? birthdate,
     List<Fragment_PersonDetails_classMemberships>? classMemberships,
     Fragment_Church? church,
-    List<Fragment_PersonContact>? contacts,
+    List<Fragment_Contact>? contacts,
     Fragment_College? college,
     Fragment_PersonFamily? family,
     Fragment_PersonDetails_father? father,
@@ -2103,11 +2091,11 @@ class _CopyWithStubImpl_Fragment_PersonDetails<TRes>
     String? workStatus,
     Fragment_Job? job,
     String? jobDescription,
-    Fragment_PersonLatestCall? latestCall,
-    Fragment_PersonLatestConfession? latestConfession,
-    Fragment_PersonLatestEdit? latestEdit,
-    Fragment_PersonLatestKodas? latestKodas,
-    Fragment_PersonLatestVisit? latestVisit,
+    Fragment_LatestCall? latestCall,
+    Fragment_LatestConfession? latestConfession,
+    Fragment_LatestEdit? latestEdit,
+    Fragment_LatestKodas? latestKodas,
+    Fragment_LatestVisit? latestVisit,
     String? notes,
     String? martialStatus,
     Fragment_PersonType? personType,
@@ -2120,14 +2108,14 @@ class _CopyWithStubImpl_Fragment_PersonDetails<TRes>
     List<Fragment_Hobby>? hobbies,
     List<Fragment_Tag>? tags,
     String? uid,
-    Fragment_PersonUser? user,
+    Fragment_User? user,
   }) => _res;
 
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck =>
-      CopyWith_Fragment_PersonDataCheck.stub(_res);
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 
-  CopyWith_Fragment_PersonAddress<TRes> get address =>
-      CopyWith_Fragment_PersonAddress.stub(_res);
+  CopyWith_Fragment_Address<TRes> get address =>
+      CopyWith_Fragment_Address.stub(_res);
 
   classMemberships(_fn) => _res;
 
@@ -2152,20 +2140,20 @@ class _CopyWithStubImpl_Fragment_PersonDetails<TRes>
 
   CopyWith_Fragment_Job<TRes> get job => CopyWith_Fragment_Job.stub(_res);
 
-  CopyWith_Fragment_PersonLatestCall<TRes> get latestCall =>
-      CopyWith_Fragment_PersonLatestCall.stub(_res);
+  CopyWith_Fragment_LatestCall<TRes> get latestCall =>
+      CopyWith_Fragment_LatestCall.stub(_res);
 
-  CopyWith_Fragment_PersonLatestConfession<TRes> get latestConfession =>
-      CopyWith_Fragment_PersonLatestConfession.stub(_res);
+  CopyWith_Fragment_LatestConfession<TRes> get latestConfession =>
+      CopyWith_Fragment_LatestConfession.stub(_res);
 
-  CopyWith_Fragment_PersonLatestEdit<TRes> get latestEdit =>
-      CopyWith_Fragment_PersonLatestEdit.stub(_res);
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit =>
+      CopyWith_Fragment_LatestEdit.stub(_res);
 
-  CopyWith_Fragment_PersonLatestKodas<TRes> get latestKodas =>
-      CopyWith_Fragment_PersonLatestKodas.stub(_res);
+  CopyWith_Fragment_LatestKodas<TRes> get latestKodas =>
+      CopyWith_Fragment_LatestKodas.stub(_res);
 
-  CopyWith_Fragment_PersonLatestVisit<TRes> get latestVisit =>
-      CopyWith_Fragment_PersonLatestVisit.stub(_res);
+  CopyWith_Fragment_LatestVisit<TRes> get latestVisit =>
+      CopyWith_Fragment_LatestVisit.stub(_res);
 
   CopyWith_Fragment_PersonType<TRes> get personType =>
       CopyWith_Fragment_PersonType.stub(_res);
@@ -2191,8 +2179,7 @@ class _CopyWithStubImpl_Fragment_PersonDetails<TRes>
 
   tags(_fn) => _res;
 
-  CopyWith_Fragment_PersonUser<TRes> get user =>
-      CopyWith_Fragment_PersonUser.stub(_res);
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
 const fragmentDefinitionPersonDetails = FragmentDefinitionNode(
@@ -2215,7 +2202,7 @@ const fragmentDefinitionPersonDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PersonAddress'),
+              name: NameNode(value: 'Address'),
               directives: [],
             ),
             FieldNode(
@@ -2367,7 +2354,7 @@ const fragmentDefinitionPersonDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PersonContact'),
+              name: NameNode(value: 'Contact'),
               directives: [],
             ),
             FieldNode(
@@ -2625,7 +2612,7 @@ const fragmentDefinitionPersonDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PersonLatestCall'),
+              name: NameNode(value: 'LatestCall'),
               directives: [],
             ),
             FieldNode(
@@ -2646,7 +2633,7 @@ const fragmentDefinitionPersonDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PersonLatestConfession'),
+              name: NameNode(value: 'LatestConfession'),
               directives: [],
             ),
             FieldNode(
@@ -2667,7 +2654,7 @@ const fragmentDefinitionPersonDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PersonLatestEdit'),
+              name: NameNode(value: 'LatestEdit'),
               directives: [],
             ),
             FieldNode(
@@ -2688,7 +2675,7 @@ const fragmentDefinitionPersonDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PersonLatestKodas'),
+              name: NameNode(value: 'LatestKodas'),
               directives: [],
             ),
             FieldNode(
@@ -2709,7 +2696,7 @@ const fragmentDefinitionPersonDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PersonLatestVisit'),
+              name: NameNode(value: 'LatestVisit'),
               directives: [],
             ),
             FieldNode(
@@ -3030,7 +3017,7 @@ const fragmentDefinitionPersonDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PersonUser'),
+              name: NameNode(value: 'User'),
               directives: [],
             ),
             FieldNode(
@@ -3058,27 +3045,27 @@ const documentNodeFragmentPersonDetails = DocumentNode(
     fragmentDefinitionPersonDetails,
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
-    fragmentDefinitionPersonDataCheck,
-    fragmentDefinitionPersonAddress,
+    fragmentDefinitionDataCheck,
+    fragmentDefinitionAddress,
     fragmentDefinitionArea,
     fragmentDefinitionDistrict,
     fragmentDefinitionStreet,
     fragmentDefinitionClass,
     fragmentDefinitionClassNoPhoto,
     fragmentDefinitionChurch,
-    fragmentDefinitionPersonContact,
+    fragmentDefinitionContact,
     fragmentDefinitionCollege,
     fragmentDefinitionPersonFamily,
     fragmentDefinitionFather,
     fragmentDefinitionGroup,
     fragmentDefinitionGroupNoPhoto,
     fragmentDefinitionJob,
-    fragmentDefinitionPersonLatestCall,
-    fragmentDefinitionPersonUser,
-    fragmentDefinitionPersonLatestConfession,
-    fragmentDefinitionPersonLatestEdit,
-    fragmentDefinitionPersonLatestKodas,
-    fragmentDefinitionPersonLatestVisit,
+    fragmentDefinitionLatestCall,
+    fragmentDefinitionUser,
+    fragmentDefinitionLatestConfession,
+    fragmentDefinitionLatestEdit,
+    fragmentDefinitionLatestKodas,
+    fragmentDefinitionLatestVisit,
     fragmentDefinitionPersonType,
     fragmentDefinitionQualification,
     fragmentDefinitionSchool,
@@ -3755,1413 +3742,6 @@ class _CopyWithStubImpl_Fragment_PersonDetails_serviceMemberships<TRes>
       CopyWith_Fragment_ServiceWithStudyYears.stub(_res);
 }
 
-class Fragment_PersonDataCheck {
-  Fragment_PersonDataCheck({
-    required this.id,
-    required this.familyId,
-    this.isComplete,
-    this.completenessPercent,
-    this.familyCheck,
-    this.addressCheck,
-    this.userOverride,
-    this.details,
-    this.$__typename = 'DataCheck',
-  });
-
-  factory Fragment_PersonDataCheck.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$familyId = json['familyId'];
-    final l$isComplete = json['isComplete'];
-    final l$completenessPercent = json['completenessPercent'];
-    final l$familyCheck = json['familyCheck'];
-    final l$addressCheck = json['addressCheck'];
-    final l$userOverride = json['userOverride'];
-    final l$details = json['details'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PersonDataCheck(
-      id: (l$id as String),
-      familyId: (l$familyId as String),
-      isComplete: (l$isComplete as bool?),
-      completenessPercent: (l$completenessPercent as int?),
-      familyCheck: (l$familyCheck as bool?),
-      addressCheck: (l$addressCheck as bool?),
-      userOverride: (l$userOverride as bool?),
-      details: (l$details as List<dynamic>?)
-          ?.map((e) => (e as String))
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final String familyId;
-
-  final bool? isComplete;
-
-  final int? completenessPercent;
-
-  final bool? familyCheck;
-
-  final bool? addressCheck;
-
-  final bool? userOverride;
-
-  final List<String>? details;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$familyId = familyId;
-    _resultData['familyId'] = l$familyId;
-    final l$isComplete = isComplete;
-    _resultData['isComplete'] = l$isComplete;
-    final l$completenessPercent = completenessPercent;
-    _resultData['completenessPercent'] = l$completenessPercent;
-    final l$familyCheck = familyCheck;
-    _resultData['familyCheck'] = l$familyCheck;
-    final l$addressCheck = addressCheck;
-    _resultData['addressCheck'] = l$addressCheck;
-    final l$userOverride = userOverride;
-    _resultData['userOverride'] = l$userOverride;
-    final l$details = details;
-    _resultData['details'] = l$details?.map((e) => e).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$familyId = familyId;
-    final l$isComplete = isComplete;
-    final l$completenessPercent = completenessPercent;
-    final l$familyCheck = familyCheck;
-    final l$addressCheck = addressCheck;
-    final l$userOverride = userOverride;
-    final l$details = details;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$familyId,
-      l$isComplete,
-      l$completenessPercent,
-      l$familyCheck,
-      l$addressCheck,
-      l$userOverride,
-      l$details == null ? null : Object.hashAll(l$details.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PersonDataCheck ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$familyId = familyId;
-    final lOther$familyId = other.familyId;
-    if (l$familyId != lOther$familyId) {
-      return false;
-    }
-    final l$isComplete = isComplete;
-    final lOther$isComplete = other.isComplete;
-    if (l$isComplete != lOther$isComplete) {
-      return false;
-    }
-    final l$completenessPercent = completenessPercent;
-    final lOther$completenessPercent = other.completenessPercent;
-    if (l$completenessPercent != lOther$completenessPercent) {
-      return false;
-    }
-    final l$familyCheck = familyCheck;
-    final lOther$familyCheck = other.familyCheck;
-    if (l$familyCheck != lOther$familyCheck) {
-      return false;
-    }
-    final l$addressCheck = addressCheck;
-    final lOther$addressCheck = other.addressCheck;
-    if (l$addressCheck != lOther$addressCheck) {
-      return false;
-    }
-    final l$userOverride = userOverride;
-    final lOther$userOverride = other.userOverride;
-    if (l$userOverride != lOther$userOverride) {
-      return false;
-    }
-    final l$details = details;
-    final lOther$details = other.details;
-    if (l$details != null && lOther$details != null) {
-      if (l$details.length != lOther$details.length) {
-        return false;
-      }
-      for (int i = 0; i < l$details.length; i++) {
-        final l$details$entry = l$details[i];
-        final lOther$details$entry = lOther$details[i];
-        if (l$details$entry != lOther$details$entry) {
-          return false;
-        }
-      }
-    } else if (l$details != lOther$details) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PersonDataCheck
-    on Fragment_PersonDataCheck {
-  CopyWith_Fragment_PersonDataCheck<Fragment_PersonDataCheck> get copyWith =>
-      CopyWith_Fragment_PersonDataCheck(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PersonDataCheck<TRes> {
-  factory CopyWith_Fragment_PersonDataCheck(
-    Fragment_PersonDataCheck instance,
-    TRes Function(Fragment_PersonDataCheck) then,
-  ) = _CopyWithImpl_Fragment_PersonDataCheck;
-
-  factory CopyWith_Fragment_PersonDataCheck.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PersonDataCheck;
-
-  TRes call({
-    String? id,
-    String? familyId,
-    bool? isComplete,
-    int? completenessPercent,
-    bool? familyCheck,
-    bool? addressCheck,
-    bool? userOverride,
-    List<String>? details,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl_Fragment_PersonDataCheck<TRes>
-    implements CopyWith_Fragment_PersonDataCheck<TRes> {
-  _CopyWithImpl_Fragment_PersonDataCheck(this._instance, this._then);
-
-  final Fragment_PersonDataCheck _instance;
-
-  final TRes Function(Fragment_PersonDataCheck) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? familyId = _undefined,
-    Object? isComplete = _undefined,
-    Object? completenessPercent = _undefined,
-    Object? familyCheck = _undefined,
-    Object? addressCheck = _undefined,
-    Object? userOverride = _undefined,
-    Object? details = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PersonDataCheck(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      familyId: familyId == _undefined || familyId == null
-          ? _instance.familyId
-          : (familyId as String),
-      isComplete: isComplete == _undefined
-          ? _instance.isComplete
-          : (isComplete as bool?),
-      completenessPercent: completenessPercent == _undefined
-          ? _instance.completenessPercent
-          : (completenessPercent as int?),
-      familyCheck: familyCheck == _undefined
-          ? _instance.familyCheck
-          : (familyCheck as bool?),
-      addressCheck: addressCheck == _undefined
-          ? _instance.addressCheck
-          : (addressCheck as bool?),
-      userOverride: userOverride == _undefined
-          ? _instance.userOverride
-          : (userOverride as bool?),
-      details: details == _undefined
-          ? _instance.details
-          : (details as List<String>?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Fragment_PersonDataCheck<TRes>
-    implements CopyWith_Fragment_PersonDataCheck<TRes> {
-  _CopyWithStubImpl_Fragment_PersonDataCheck(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? familyId,
-    bool? isComplete,
-    int? completenessPercent,
-    bool? familyCheck,
-    bool? addressCheck,
-    bool? userOverride,
-    List<String>? details,
-    String? $__typename,
-  }) => _res;
-}
-
-const fragmentDefinitionPersonDataCheck = FragmentDefinitionNode(
-  name: NameNode(value: 'PersonDataCheck'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'DataCheck'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'familyId'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'isComplete'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'completenessPercent'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'familyCheck'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'addressCheck'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'userOverride'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'details'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPersonDataCheck = DocumentNode(
-  definitions: [fragmentDefinitionPersonDataCheck],
-);
-
-class Fragment_PersonAddress {
-  Fragment_PersonAddress({
-    required this.id,
-    required this.countryIsoCode,
-    this.area,
-    this.district,
-    this.street,
-    this.substreetName,
-    this.fullAddressText,
-    this.geolocation,
-    this.houseCode,
-    this.storeyNumber,
-    this.apartmentNumber,
-    this.specialLandmark,
-    this.$__typename = 'Address',
-  });
-
-  factory Fragment_PersonAddress.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$countryIsoCode = json['countryIsoCode'];
-    final l$area = json['area'];
-    final l$district = json['district'];
-    final l$street = json['street'];
-    final l$substreetName = json['substreetName'];
-    final l$fullAddressText = json['fullAddressText'];
-    final l$geolocation = json['geolocation'];
-    final l$houseCode = json['houseCode'];
-    final l$storeyNumber = json['storeyNumber'];
-    final l$apartmentNumber = json['apartmentNumber'];
-    final l$specialLandmark = json['specialLandmark'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PersonAddress(
-      id: (l$id as String),
-      countryIsoCode: (l$countryIsoCode as String),
-      area: l$area == null
-          ? null
-          : Fragment_Area.fromJson((l$area as Map<String, dynamic>)),
-      district: l$district == null
-          ? null
-          : Fragment_District.fromJson((l$district as Map<String, dynamic>)),
-      street: l$street == null
-          ? null
-          : Fragment_Street.fromJson((l$street as Map<String, dynamic>)),
-      substreetName: (l$substreetName as String?),
-      fullAddressText: (l$fullAddressText as String?),
-      geolocation: (l$geolocation as Json?),
-      houseCode: (l$houseCode as String?),
-      storeyNumber: (l$storeyNumber as int?),
-      apartmentNumber: (l$apartmentNumber as int?),
-      specialLandmark: (l$specialLandmark as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final String countryIsoCode;
-
-  final Fragment_Area? area;
-
-  final Fragment_District? district;
-
-  final Fragment_Street? street;
-
-  final String? substreetName;
-
-  final String? fullAddressText;
-
-  final Json? geolocation;
-
-  final String? houseCode;
-
-  final int? storeyNumber;
-
-  final int? apartmentNumber;
-
-  final String? specialLandmark;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$countryIsoCode = countryIsoCode;
-    _resultData['countryIsoCode'] = l$countryIsoCode;
-    final l$area = area;
-    _resultData['area'] = l$area?.toJson();
-    final l$district = district;
-    _resultData['district'] = l$district?.toJson();
-    final l$street = street;
-    _resultData['street'] = l$street?.toJson();
-    final l$substreetName = substreetName;
-    _resultData['substreetName'] = l$substreetName;
-    final l$fullAddressText = fullAddressText;
-    _resultData['fullAddressText'] = l$fullAddressText;
-    final l$geolocation = geolocation;
-    _resultData['geolocation'] = l$geolocation;
-    final l$houseCode = houseCode;
-    _resultData['houseCode'] = l$houseCode;
-    final l$storeyNumber = storeyNumber;
-    _resultData['storeyNumber'] = l$storeyNumber;
-    final l$apartmentNumber = apartmentNumber;
-    _resultData['apartmentNumber'] = l$apartmentNumber;
-    final l$specialLandmark = specialLandmark;
-    _resultData['specialLandmark'] = l$specialLandmark;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$countryIsoCode = countryIsoCode;
-    final l$area = area;
-    final l$district = district;
-    final l$street = street;
-    final l$substreetName = substreetName;
-    final l$fullAddressText = fullAddressText;
-    final l$geolocation = geolocation;
-    final l$houseCode = houseCode;
-    final l$storeyNumber = storeyNumber;
-    final l$apartmentNumber = apartmentNumber;
-    final l$specialLandmark = specialLandmark;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$countryIsoCode,
-      l$area,
-      l$district,
-      l$street,
-      l$substreetName,
-      l$fullAddressText,
-      l$geolocation,
-      l$houseCode,
-      l$storeyNumber,
-      l$apartmentNumber,
-      l$specialLandmark,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PersonAddress || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$countryIsoCode = countryIsoCode;
-    final lOther$countryIsoCode = other.countryIsoCode;
-    if (l$countryIsoCode != lOther$countryIsoCode) {
-      return false;
-    }
-    final l$area = area;
-    final lOther$area = other.area;
-    if (l$area != lOther$area) {
-      return false;
-    }
-    final l$district = district;
-    final lOther$district = other.district;
-    if (l$district != lOther$district) {
-      return false;
-    }
-    final l$street = street;
-    final lOther$street = other.street;
-    if (l$street != lOther$street) {
-      return false;
-    }
-    final l$substreetName = substreetName;
-    final lOther$substreetName = other.substreetName;
-    if (l$substreetName != lOther$substreetName) {
-      return false;
-    }
-    final l$fullAddressText = fullAddressText;
-    final lOther$fullAddressText = other.fullAddressText;
-    if (l$fullAddressText != lOther$fullAddressText) {
-      return false;
-    }
-    final l$geolocation = geolocation;
-    final lOther$geolocation = other.geolocation;
-    if (l$geolocation != lOther$geolocation) {
-      return false;
-    }
-    final l$houseCode = houseCode;
-    final lOther$houseCode = other.houseCode;
-    if (l$houseCode != lOther$houseCode) {
-      return false;
-    }
-    final l$storeyNumber = storeyNumber;
-    final lOther$storeyNumber = other.storeyNumber;
-    if (l$storeyNumber != lOther$storeyNumber) {
-      return false;
-    }
-    final l$apartmentNumber = apartmentNumber;
-    final lOther$apartmentNumber = other.apartmentNumber;
-    if (l$apartmentNumber != lOther$apartmentNumber) {
-      return false;
-    }
-    final l$specialLandmark = specialLandmark;
-    final lOther$specialLandmark = other.specialLandmark;
-    if (l$specialLandmark != lOther$specialLandmark) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PersonAddress on Fragment_PersonAddress {
-  CopyWith_Fragment_PersonAddress<Fragment_PersonAddress> get copyWith =>
-      CopyWith_Fragment_PersonAddress(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PersonAddress<TRes> {
-  factory CopyWith_Fragment_PersonAddress(
-    Fragment_PersonAddress instance,
-    TRes Function(Fragment_PersonAddress) then,
-  ) = _CopyWithImpl_Fragment_PersonAddress;
-
-  factory CopyWith_Fragment_PersonAddress.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PersonAddress;
-
-  TRes call({
-    String? id,
-    String? countryIsoCode,
-    Fragment_Area? area,
-    Fragment_District? district,
-    Fragment_Street? street,
-    String? substreetName,
-    String? fullAddressText,
-    Json? geolocation,
-    String? houseCode,
-    int? storeyNumber,
-    int? apartmentNumber,
-    String? specialLandmark,
-    String? $__typename,
-  });
-  CopyWith_Fragment_Area<TRes> get area;
-  CopyWith_Fragment_District<TRes> get district;
-  CopyWith_Fragment_Street<TRes> get street;
-}
-
-class _CopyWithImpl_Fragment_PersonAddress<TRes>
-    implements CopyWith_Fragment_PersonAddress<TRes> {
-  _CopyWithImpl_Fragment_PersonAddress(this._instance, this._then);
-
-  final Fragment_PersonAddress _instance;
-
-  final TRes Function(Fragment_PersonAddress) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? countryIsoCode = _undefined,
-    Object? area = _undefined,
-    Object? district = _undefined,
-    Object? street = _undefined,
-    Object? substreetName = _undefined,
-    Object? fullAddressText = _undefined,
-    Object? geolocation = _undefined,
-    Object? houseCode = _undefined,
-    Object? storeyNumber = _undefined,
-    Object? apartmentNumber = _undefined,
-    Object? specialLandmark = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PersonAddress(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      countryIsoCode: countryIsoCode == _undefined || countryIsoCode == null
-          ? _instance.countryIsoCode
-          : (countryIsoCode as String),
-      area: area == _undefined ? _instance.area : (area as Fragment_Area?),
-      district: district == _undefined
-          ? _instance.district
-          : (district as Fragment_District?),
-      street: street == _undefined
-          ? _instance.street
-          : (street as Fragment_Street?),
-      substreetName: substreetName == _undefined
-          ? _instance.substreetName
-          : (substreetName as String?),
-      fullAddressText: fullAddressText == _undefined
-          ? _instance.fullAddressText
-          : (fullAddressText as String?),
-      geolocation: geolocation == _undefined
-          ? _instance.geolocation
-          : (geolocation as Json?),
-      houseCode: houseCode == _undefined
-          ? _instance.houseCode
-          : (houseCode as String?),
-      storeyNumber: storeyNumber == _undefined
-          ? _instance.storeyNumber
-          : (storeyNumber as int?),
-      apartmentNumber: apartmentNumber == _undefined
-          ? _instance.apartmentNumber
-          : (apartmentNumber as int?),
-      specialLandmark: specialLandmark == _undefined
-          ? _instance.specialLandmark
-          : (specialLandmark as String?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  CopyWith_Fragment_Area<TRes> get area {
-    final local$area = _instance.area;
-    return local$area == null
-        ? CopyWith_Fragment_Area.stub(_then(_instance))
-        : CopyWith_Fragment_Area(local$area, (e) => call(area: e));
-  }
-
-  CopyWith_Fragment_District<TRes> get district {
-    final local$district = _instance.district;
-    return local$district == null
-        ? CopyWith_Fragment_District.stub(_then(_instance))
-        : CopyWith_Fragment_District(local$district, (e) => call(district: e));
-  }
-
-  CopyWith_Fragment_Street<TRes> get street {
-    final local$street = _instance.street;
-    return local$street == null
-        ? CopyWith_Fragment_Street.stub(_then(_instance))
-        : CopyWith_Fragment_Street(local$street, (e) => call(street: e));
-  }
-}
-
-class _CopyWithStubImpl_Fragment_PersonAddress<TRes>
-    implements CopyWith_Fragment_PersonAddress<TRes> {
-  _CopyWithStubImpl_Fragment_PersonAddress(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? countryIsoCode,
-    Fragment_Area? area,
-    Fragment_District? district,
-    Fragment_Street? street,
-    String? substreetName,
-    String? fullAddressText,
-    Json? geolocation,
-    String? houseCode,
-    int? storeyNumber,
-    int? apartmentNumber,
-    String? specialLandmark,
-    String? $__typename,
-  }) => _res;
-
-  CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
-
-  CopyWith_Fragment_District<TRes> get district =>
-      CopyWith_Fragment_District.stub(_res);
-
-  CopyWith_Fragment_Street<TRes> get street =>
-      CopyWith_Fragment_Street.stub(_res);
-}
-
-const fragmentDefinitionPersonAddress = FragmentDefinitionNode(
-  name: NameNode(value: 'PersonAddress'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'Address'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'countryIsoCode'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'area'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(
-          selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'Area'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ],
-        ),
-      ),
-      FieldNode(
-        name: NameNode(value: 'district'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(
-          selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'District'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ],
-        ),
-      ),
-      FieldNode(
-        name: NameNode(value: 'street'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(
-          selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'Street'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ],
-        ),
-      ),
-      FieldNode(
-        name: NameNode(value: 'substreetName'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'fullAddressText'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'geolocation'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'houseCode'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'storeyNumber'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'apartmentNumber'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'specialLandmark'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPersonAddress = DocumentNode(
-  definitions: [
-    fragmentDefinitionPersonAddress,
-    fragmentDefinitionArea,
-    fragmentDefinitionDistrict,
-    fragmentDefinitionStreet,
-  ],
-);
-
-class Fragment_PersonContact {
-  Fragment_PersonContact({
-    required this.id,
-    this.label,
-    required this.phone,
-    required this.isMainPhone,
-    this.$__typename = 'Contact',
-  });
-
-  factory Fragment_PersonContact.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$label = json['label'];
-    final l$phone = json['phone'];
-    final l$isMainPhone = json['isMainPhone'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PersonContact(
-      id: (l$id as String),
-      label: (l$label as String?),
-      phone: (l$phone as String),
-      isMainPhone: (l$isMainPhone as bool),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final String? label;
-
-  final String phone;
-
-  final bool isMainPhone;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$label = label;
-    _resultData['label'] = l$label;
-    final l$phone = phone;
-    _resultData['phone'] = l$phone;
-    final l$isMainPhone = isMainPhone;
-    _resultData['isMainPhone'] = l$isMainPhone;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$label = label;
-    final l$phone = phone;
-    final l$isMainPhone = isMainPhone;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$label,
-      l$phone,
-      l$isMainPhone,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PersonContact || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$label = label;
-    final lOther$label = other.label;
-    if (l$label != lOther$label) {
-      return false;
-    }
-    final l$phone = phone;
-    final lOther$phone = other.phone;
-    if (l$phone != lOther$phone) {
-      return false;
-    }
-    final l$isMainPhone = isMainPhone;
-    final lOther$isMainPhone = other.isMainPhone;
-    if (l$isMainPhone != lOther$isMainPhone) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PersonContact on Fragment_PersonContact {
-  CopyWith_Fragment_PersonContact<Fragment_PersonContact> get copyWith =>
-      CopyWith_Fragment_PersonContact(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PersonContact<TRes> {
-  factory CopyWith_Fragment_PersonContact(
-    Fragment_PersonContact instance,
-    TRes Function(Fragment_PersonContact) then,
-  ) = _CopyWithImpl_Fragment_PersonContact;
-
-  factory CopyWith_Fragment_PersonContact.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PersonContact;
-
-  TRes call({
-    String? id,
-    String? label,
-    String? phone,
-    bool? isMainPhone,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl_Fragment_PersonContact<TRes>
-    implements CopyWith_Fragment_PersonContact<TRes> {
-  _CopyWithImpl_Fragment_PersonContact(this._instance, this._then);
-
-  final Fragment_PersonContact _instance;
-
-  final TRes Function(Fragment_PersonContact) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? label = _undefined,
-    Object? phone = _undefined,
-    Object? isMainPhone = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PersonContact(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      label: label == _undefined ? _instance.label : (label as String?),
-      phone: phone == _undefined || phone == null
-          ? _instance.phone
-          : (phone as String),
-      isMainPhone: isMainPhone == _undefined || isMainPhone == null
-          ? _instance.isMainPhone
-          : (isMainPhone as bool),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Fragment_PersonContact<TRes>
-    implements CopyWith_Fragment_PersonContact<TRes> {
-  _CopyWithStubImpl_Fragment_PersonContact(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? label,
-    String? phone,
-    bool? isMainPhone,
-    String? $__typename,
-  }) => _res;
-}
-
-const fragmentDefinitionPersonContact = FragmentDefinitionNode(
-  name: NameNode(value: 'PersonContact'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'Contact'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'label'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'phone'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'isMainPhone'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPersonContact = DocumentNode(
-  definitions: [fragmentDefinitionPersonContact],
-);
-
-class Fragment_PersonFamilyContact {
-  Fragment_PersonFamilyContact({
-    required this.id,
-    this.personId,
-    this.label,
-    this.phone,
-    this.isMainPhone,
-    this.personType,
-    this.$__typename = 'FamilyContact',
-  });
-
-  factory Fragment_PersonFamilyContact.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$personId = json['personId'];
-    final l$label = json['label'];
-    final l$phone = json['phone'];
-    final l$isMainPhone = json['isMainPhone'];
-    final l$personType = json['personType'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PersonFamilyContact(
-      id: (l$id as String),
-      personId: (l$personId as String?),
-      label: (l$label as String?),
-      phone: (l$phone as String?),
-      isMainPhone: (l$isMainPhone as bool?),
-      personType: l$personType == null
-          ? null
-          : Fragment_PersonType.fromJson(
-              (l$personType as Map<String, dynamic>),
-            ),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final String? personId;
-
-  final String? label;
-
-  final String? phone;
-
-  final bool? isMainPhone;
-
-  final Fragment_PersonType? personType;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$personId = personId;
-    _resultData['personId'] = l$personId;
-    final l$label = label;
-    _resultData['label'] = l$label;
-    final l$phone = phone;
-    _resultData['phone'] = l$phone;
-    final l$isMainPhone = isMainPhone;
-    _resultData['isMainPhone'] = l$isMainPhone;
-    final l$personType = personType;
-    _resultData['personType'] = l$personType?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$personId = personId;
-    final l$label = label;
-    final l$phone = phone;
-    final l$isMainPhone = isMainPhone;
-    final l$personType = personType;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$personId,
-      l$label,
-      l$phone,
-      l$isMainPhone,
-      l$personType,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PersonFamilyContact ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (l$personId != lOther$personId) {
-      return false;
-    }
-    final l$label = label;
-    final lOther$label = other.label;
-    if (l$label != lOther$label) {
-      return false;
-    }
-    final l$phone = phone;
-    final lOther$phone = other.phone;
-    if (l$phone != lOther$phone) {
-      return false;
-    }
-    final l$isMainPhone = isMainPhone;
-    final lOther$isMainPhone = other.isMainPhone;
-    if (l$isMainPhone != lOther$isMainPhone) {
-      return false;
-    }
-    final l$personType = personType;
-    final lOther$personType = other.personType;
-    if (l$personType != lOther$personType) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PersonFamilyContact
-    on Fragment_PersonFamilyContact {
-  CopyWith_Fragment_PersonFamilyContact<Fragment_PersonFamilyContact>
-  get copyWith => CopyWith_Fragment_PersonFamilyContact(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PersonFamilyContact<TRes> {
-  factory CopyWith_Fragment_PersonFamilyContact(
-    Fragment_PersonFamilyContact instance,
-    TRes Function(Fragment_PersonFamilyContact) then,
-  ) = _CopyWithImpl_Fragment_PersonFamilyContact;
-
-  factory CopyWith_Fragment_PersonFamilyContact.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PersonFamilyContact;
-
-  TRes call({
-    String? id,
-    String? personId,
-    String? label,
-    String? phone,
-    bool? isMainPhone,
-    Fragment_PersonType? personType,
-    String? $__typename,
-  });
-  CopyWith_Fragment_PersonType<TRes> get personType;
-}
-
-class _CopyWithImpl_Fragment_PersonFamilyContact<TRes>
-    implements CopyWith_Fragment_PersonFamilyContact<TRes> {
-  _CopyWithImpl_Fragment_PersonFamilyContact(this._instance, this._then);
-
-  final Fragment_PersonFamilyContact _instance;
-
-  final TRes Function(Fragment_PersonFamilyContact) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? personId = _undefined,
-    Object? label = _undefined,
-    Object? phone = _undefined,
-    Object? isMainPhone = _undefined,
-    Object? personType = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PersonFamilyContact(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      personId: personId == _undefined
-          ? _instance.personId
-          : (personId as String?),
-      label: label == _undefined ? _instance.label : (label as String?),
-      phone: phone == _undefined ? _instance.phone : (phone as String?),
-      isMainPhone: isMainPhone == _undefined
-          ? _instance.isMainPhone
-          : (isMainPhone as bool?),
-      personType: personType == _undefined
-          ? _instance.personType
-          : (personType as Fragment_PersonType?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  CopyWith_Fragment_PersonType<TRes> get personType {
-    final local$personType = _instance.personType;
-    return local$personType == null
-        ? CopyWith_Fragment_PersonType.stub(_then(_instance))
-        : CopyWith_Fragment_PersonType(
-            local$personType,
-            (e) => call(personType: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Fragment_PersonFamilyContact<TRes>
-    implements CopyWith_Fragment_PersonFamilyContact<TRes> {
-  _CopyWithStubImpl_Fragment_PersonFamilyContact(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? personId,
-    String? label,
-    String? phone,
-    bool? isMainPhone,
-    Fragment_PersonType? personType,
-    String? $__typename,
-  }) => _res;
-
-  CopyWith_Fragment_PersonType<TRes> get personType =>
-      CopyWith_Fragment_PersonType.stub(_res);
-}
-
-const fragmentDefinitionPersonFamilyContact = FragmentDefinitionNode(
-  name: NameNode(value: 'PersonFamilyContact'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'FamilyContact'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'personId'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'label'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'phone'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'isMainPhone'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'personType'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(
-          selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'PersonType'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ],
-        ),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPersonFamilyContact = DocumentNode(
-  definitions: [
-    fragmentDefinitionPersonFamilyContact,
-    fragmentDefinitionPersonType,
-  ],
-);
-
 class Fragment_PersonFamily {
   Fragment_PersonFamily({
     required this.id,
@@ -5194,9 +3774,7 @@ class Fragment_PersonFamily {
       blurhash: (l$blurhash as String?),
       dataCheck: l$dataCheck == null
           ? null
-          : Fragment_PersonDataCheck.fromJson(
-              (l$dataCheck as Map<String, dynamic>),
-            ),
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -5213,7 +3791,7 @@ class Fragment_PersonFamily {
 
   final String? blurhash;
 
-  final Fragment_PersonDataCheck? dataCheck;
+  final Fragment_DataCheck? dataCheck;
 
   final String $__typename;
 
@@ -5335,10 +3913,10 @@ abstract class CopyWith_Fragment_PersonFamily<TRes> {
     bool? userCanEdit,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
+    Fragment_DataCheck? dataCheck,
     String? $__typename,
   });
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck;
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
 }
 
 class _CopyWithImpl_Fragment_PersonFamily<TRes>
@@ -5378,18 +3956,18 @@ class _CopyWithImpl_Fragment_PersonFamily<TRes>
           : (blurhash as String?),
       dataCheck: dataCheck == _undefined
           ? _instance.dataCheck
-          : (dataCheck as Fragment_PersonDataCheck?),
+          : (dataCheck as Fragment_DataCheck?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
     ),
   );
 
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck {
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
     final local$dataCheck = _instance.dataCheck;
     return local$dataCheck == null
-        ? CopyWith_Fragment_PersonDataCheck.stub(_then(_instance))
-        : CopyWith_Fragment_PersonDataCheck(
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
             local$dataCheck,
             (e) => call(dataCheck: e),
           );
@@ -5409,12 +3987,12 @@ class _CopyWithStubImpl_Fragment_PersonFamily<TRes>
     bool? userCanEdit,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
+    Fragment_DataCheck? dataCheck,
     String? $__typename,
   }) => _res;
 
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck =>
-      CopyWith_Fragment_PersonDataCheck.stub(_res);
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 }
 
 const fragmentDefinitionPersonFamily = FragmentDefinitionNode(
@@ -5475,7 +4053,7 @@ const fragmentDefinitionPersonFamily = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PersonDataCheck'),
+              name: NameNode(value: 'DataCheck'),
               directives: [],
             ),
             FieldNode(
@@ -5499,1407 +4077,7 @@ const fragmentDefinitionPersonFamily = FragmentDefinitionNode(
   ),
 );
 const documentNodeFragmentPersonFamily = DocumentNode(
-  definitions: [
-    fragmentDefinitionPersonFamily,
-    fragmentDefinitionPersonDataCheck,
-  ],
-);
-
-class Fragment_PersonUser {
-  Fragment_PersonUser({
-    required this.id,
-    required this.uid,
-    required this.name,
-    this.email,
-    this.photoUpdatedAt,
-    this.blurhash,
-    this.$__typename = 'User',
-  });
-
-  factory Fragment_PersonUser.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$uid = json['uid'];
-    final l$name = json['name'];
-    final l$email = json['email'];
-    final l$photoUpdatedAt = json['photoUpdatedAt'];
-    final l$blurhash = json['blurhash'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PersonUser(
-      id: (l$id as String),
-      uid: (l$uid as String),
-      name: (l$name as String),
-      email: (l$email as String?),
-      photoUpdatedAt: l$photoUpdatedAt == null
-          ? null
-          : tstzFromString(l$photoUpdatedAt),
-      blurhash: (l$blurhash as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final String uid;
-
-  final String name;
-
-  final String? email;
-
-  final DateTime? photoUpdatedAt;
-
-  final String? blurhash;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$uid = uid;
-    _resultData['uid'] = l$uid;
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$email = email;
-    _resultData['email'] = l$email;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
-        ? null
-        : tstzToString(l$photoUpdatedAt);
-    final l$blurhash = blurhash;
-    _resultData['blurhash'] = l$blurhash;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$uid = uid;
-    final l$name = name;
-    final l$email = email;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final l$blurhash = blurhash;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$uid,
-      l$name,
-      l$email,
-      l$photoUpdatedAt,
-      l$blurhash,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PersonUser || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$uid = uid;
-    final lOther$uid = other.uid;
-    if (l$uid != lOther$uid) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$email = email;
-    final lOther$email = other.email;
-    if (l$email != lOther$email) {
-      return false;
-    }
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final lOther$photoUpdatedAt = other.photoUpdatedAt;
-    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
-      return false;
-    }
-    final l$blurhash = blurhash;
-    final lOther$blurhash = other.blurhash;
-    if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PersonUser on Fragment_PersonUser {
-  CopyWith_Fragment_PersonUser<Fragment_PersonUser> get copyWith =>
-      CopyWith_Fragment_PersonUser(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PersonUser<TRes> {
-  factory CopyWith_Fragment_PersonUser(
-    Fragment_PersonUser instance,
-    TRes Function(Fragment_PersonUser) then,
-  ) = _CopyWithImpl_Fragment_PersonUser;
-
-  factory CopyWith_Fragment_PersonUser.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PersonUser;
-
-  TRes call({
-    String? id,
-    String? uid,
-    String? name,
-    String? email,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl_Fragment_PersonUser<TRes>
-    implements CopyWith_Fragment_PersonUser<TRes> {
-  _CopyWithImpl_Fragment_PersonUser(this._instance, this._then);
-
-  final Fragment_PersonUser _instance;
-
-  final TRes Function(Fragment_PersonUser) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? uid = _undefined,
-    Object? name = _undefined,
-    Object? email = _undefined,
-    Object? photoUpdatedAt = _undefined,
-    Object? blurhash = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PersonUser(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      uid: uid == _undefined || uid == null ? _instance.uid : (uid as String),
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      email: email == _undefined ? _instance.email : (email as String?),
-      photoUpdatedAt: photoUpdatedAt == _undefined
-          ? _instance.photoUpdatedAt
-          : (photoUpdatedAt as DateTime?),
-      blurhash: blurhash == _undefined
-          ? _instance.blurhash
-          : (blurhash as String?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Fragment_PersonUser<TRes>
-    implements CopyWith_Fragment_PersonUser<TRes> {
-  _CopyWithStubImpl_Fragment_PersonUser(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? uid,
-    String? name,
-    String? email,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    String? $__typename,
-  }) => _res;
-}
-
-const fragmentDefinitionPersonUser = FragmentDefinitionNode(
-  name: NameNode(value: 'PersonUser'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'User'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'uid'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'name'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'email'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'photoUpdatedAt'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'blurhash'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPersonUser = DocumentNode(
-  definitions: [fragmentDefinitionPersonUser],
-);
-
-class Fragment_PersonLatestCall {
-  Fragment_PersonLatestCall({
-    required this.id,
-    this.time,
-    this.user,
-    this.$__typename = 'LatestCall',
-  });
-
-  factory Fragment_PersonLatestCall.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$time = json['time'];
-    final l$user = json['user'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PersonLatestCall(
-      id: (l$id as String),
-      time: l$time == null ? null : tstzFromString(l$time),
-      user: l$user == null
-          ? null
-          : Fragment_PersonUser.fromJson((l$user as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final DateTime? time;
-
-  final Fragment_PersonUser? user;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$time = time;
-    _resultData['time'] = l$time == null ? null : tstzToString(l$time);
-    final l$user = user;
-    _resultData['user'] = l$user?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$time = time;
-    final l$user = user;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$time, l$user, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PersonLatestCall ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (l$user != lOther$user) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PersonLatestCall
-    on Fragment_PersonLatestCall {
-  CopyWith_Fragment_PersonLatestCall<Fragment_PersonLatestCall> get copyWith =>
-      CopyWith_Fragment_PersonLatestCall(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PersonLatestCall<TRes> {
-  factory CopyWith_Fragment_PersonLatestCall(
-    Fragment_PersonLatestCall instance,
-    TRes Function(Fragment_PersonLatestCall) then,
-  ) = _CopyWithImpl_Fragment_PersonLatestCall;
-
-  factory CopyWith_Fragment_PersonLatestCall.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PersonLatestCall;
-
-  TRes call({
-    String? id,
-    DateTime? time,
-    Fragment_PersonUser? user,
-    String? $__typename,
-  });
-  CopyWith_Fragment_PersonUser<TRes> get user;
-}
-
-class _CopyWithImpl_Fragment_PersonLatestCall<TRes>
-    implements CopyWith_Fragment_PersonLatestCall<TRes> {
-  _CopyWithImpl_Fragment_PersonLatestCall(this._instance, this._then);
-
-  final Fragment_PersonLatestCall _instance;
-
-  final TRes Function(Fragment_PersonLatestCall) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? time = _undefined,
-    Object? user = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PersonLatestCall(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      time: time == _undefined ? _instance.time : (time as DateTime?),
-      user: user == _undefined
-          ? _instance.user
-          : (user as Fragment_PersonUser?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  CopyWith_Fragment_PersonUser<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Fragment_PersonUser.stub(_then(_instance))
-        : CopyWith_Fragment_PersonUser(local$user, (e) => call(user: e));
-  }
-}
-
-class _CopyWithStubImpl_Fragment_PersonLatestCall<TRes>
-    implements CopyWith_Fragment_PersonLatestCall<TRes> {
-  _CopyWithStubImpl_Fragment_PersonLatestCall(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    DateTime? time,
-    Fragment_PersonUser? user,
-    String? $__typename,
-  }) => _res;
-
-  CopyWith_Fragment_PersonUser<TRes> get user =>
-      CopyWith_Fragment_PersonUser.stub(_res);
-}
-
-const fragmentDefinitionPersonLatestCall = FragmentDefinitionNode(
-  name: NameNode(value: 'PersonLatestCall'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'LatestCall'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'time'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'user'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(
-          selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'PersonUser'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ],
-        ),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPersonLatestCall = DocumentNode(
-  definitions: [
-    fragmentDefinitionPersonLatestCall,
-    fragmentDefinitionPersonUser,
-  ],
-);
-
-class Fragment_PersonLatestConfession {
-  Fragment_PersonLatestConfession({
-    required this.id,
-    this.time,
-    this.user,
-    this.$__typename = 'LatestConfession',
-  });
-
-  factory Fragment_PersonLatestConfession.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$time = json['time'];
-    final l$user = json['user'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PersonLatestConfession(
-      id: (l$id as String),
-      time: l$time == null ? null : dateFromString(l$time),
-      user: l$user == null
-          ? null
-          : Fragment_PersonUser.fromJson((l$user as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final DateTime? time;
-
-  final Fragment_PersonUser? user;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$time = time;
-    _resultData['time'] = l$time == null ? null : dateToString(l$time);
-    final l$user = user;
-    _resultData['user'] = l$user?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$time = time;
-    final l$user = user;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$time, l$user, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PersonLatestConfession ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (l$user != lOther$user) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PersonLatestConfession
-    on Fragment_PersonLatestConfession {
-  CopyWith_Fragment_PersonLatestConfession<Fragment_PersonLatestConfession>
-  get copyWith => CopyWith_Fragment_PersonLatestConfession(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PersonLatestConfession<TRes> {
-  factory CopyWith_Fragment_PersonLatestConfession(
-    Fragment_PersonLatestConfession instance,
-    TRes Function(Fragment_PersonLatestConfession) then,
-  ) = _CopyWithImpl_Fragment_PersonLatestConfession;
-
-  factory CopyWith_Fragment_PersonLatestConfession.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PersonLatestConfession;
-
-  TRes call({
-    String? id,
-    DateTime? time,
-    Fragment_PersonUser? user,
-    String? $__typename,
-  });
-  CopyWith_Fragment_PersonUser<TRes> get user;
-}
-
-class _CopyWithImpl_Fragment_PersonLatestConfession<TRes>
-    implements CopyWith_Fragment_PersonLatestConfession<TRes> {
-  _CopyWithImpl_Fragment_PersonLatestConfession(this._instance, this._then);
-
-  final Fragment_PersonLatestConfession _instance;
-
-  final TRes Function(Fragment_PersonLatestConfession) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? time = _undefined,
-    Object? user = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PersonLatestConfession(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      time: time == _undefined ? _instance.time : (time as DateTime?),
-      user: user == _undefined
-          ? _instance.user
-          : (user as Fragment_PersonUser?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  CopyWith_Fragment_PersonUser<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Fragment_PersonUser.stub(_then(_instance))
-        : CopyWith_Fragment_PersonUser(local$user, (e) => call(user: e));
-  }
-}
-
-class _CopyWithStubImpl_Fragment_PersonLatestConfession<TRes>
-    implements CopyWith_Fragment_PersonLatestConfession<TRes> {
-  _CopyWithStubImpl_Fragment_PersonLatestConfession(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    DateTime? time,
-    Fragment_PersonUser? user,
-    String? $__typename,
-  }) => _res;
-
-  CopyWith_Fragment_PersonUser<TRes> get user =>
-      CopyWith_Fragment_PersonUser.stub(_res);
-}
-
-const fragmentDefinitionPersonLatestConfession = FragmentDefinitionNode(
-  name: NameNode(value: 'PersonLatestConfession'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(
-      name: NameNode(value: 'LatestConfession'),
-      isNonNull: false,
-    ),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'time'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'user'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(
-          selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'PersonUser'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ],
-        ),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPersonLatestConfession = DocumentNode(
-  definitions: [
-    fragmentDefinitionPersonLatestConfession,
-    fragmentDefinitionPersonUser,
-  ],
-);
-
-class Fragment_PersonLatestEdit {
-  Fragment_PersonLatestEdit({
-    required this.id,
-    this.time,
-    this.user,
-    this.$__typename = 'LatestEdit',
-  });
-
-  factory Fragment_PersonLatestEdit.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$time = json['time'];
-    final l$user = json['user'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PersonLatestEdit(
-      id: (l$id as String),
-      time: l$time == null ? null : tstzFromString(l$time),
-      user: l$user == null
-          ? null
-          : Fragment_PersonUser.fromJson((l$user as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final DateTime? time;
-
-  final Fragment_PersonUser? user;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$time = time;
-    _resultData['time'] = l$time == null ? null : tstzToString(l$time);
-    final l$user = user;
-    _resultData['user'] = l$user?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$time = time;
-    final l$user = user;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$time, l$user, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PersonLatestEdit ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (l$user != lOther$user) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PersonLatestEdit
-    on Fragment_PersonLatestEdit {
-  CopyWith_Fragment_PersonLatestEdit<Fragment_PersonLatestEdit> get copyWith =>
-      CopyWith_Fragment_PersonLatestEdit(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PersonLatestEdit<TRes> {
-  factory CopyWith_Fragment_PersonLatestEdit(
-    Fragment_PersonLatestEdit instance,
-    TRes Function(Fragment_PersonLatestEdit) then,
-  ) = _CopyWithImpl_Fragment_PersonLatestEdit;
-
-  factory CopyWith_Fragment_PersonLatestEdit.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PersonLatestEdit;
-
-  TRes call({
-    String? id,
-    DateTime? time,
-    Fragment_PersonUser? user,
-    String? $__typename,
-  });
-  CopyWith_Fragment_PersonUser<TRes> get user;
-}
-
-class _CopyWithImpl_Fragment_PersonLatestEdit<TRes>
-    implements CopyWith_Fragment_PersonLatestEdit<TRes> {
-  _CopyWithImpl_Fragment_PersonLatestEdit(this._instance, this._then);
-
-  final Fragment_PersonLatestEdit _instance;
-
-  final TRes Function(Fragment_PersonLatestEdit) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? time = _undefined,
-    Object? user = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PersonLatestEdit(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      time: time == _undefined ? _instance.time : (time as DateTime?),
-      user: user == _undefined
-          ? _instance.user
-          : (user as Fragment_PersonUser?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  CopyWith_Fragment_PersonUser<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Fragment_PersonUser.stub(_then(_instance))
-        : CopyWith_Fragment_PersonUser(local$user, (e) => call(user: e));
-  }
-}
-
-class _CopyWithStubImpl_Fragment_PersonLatestEdit<TRes>
-    implements CopyWith_Fragment_PersonLatestEdit<TRes> {
-  _CopyWithStubImpl_Fragment_PersonLatestEdit(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    DateTime? time,
-    Fragment_PersonUser? user,
-    String? $__typename,
-  }) => _res;
-
-  CopyWith_Fragment_PersonUser<TRes> get user =>
-      CopyWith_Fragment_PersonUser.stub(_res);
-}
-
-const fragmentDefinitionPersonLatestEdit = FragmentDefinitionNode(
-  name: NameNode(value: 'PersonLatestEdit'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'LatestEdit'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'time'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'user'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(
-          selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'PersonUser'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ],
-        ),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPersonLatestEdit = DocumentNode(
-  definitions: [
-    fragmentDefinitionPersonLatestEdit,
-    fragmentDefinitionPersonUser,
-  ],
-);
-
-class Fragment_PersonLatestKodas {
-  Fragment_PersonLatestKodas({
-    required this.id,
-    this.time,
-    this.user,
-    this.$__typename = 'LatestKodas',
-  });
-
-  factory Fragment_PersonLatestKodas.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$time = json['time'];
-    final l$user = json['user'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PersonLatestKodas(
-      id: (l$id as String),
-      time: l$time == null ? null : dateFromString(l$time),
-      user: l$user == null
-          ? null
-          : Fragment_PersonUser.fromJson((l$user as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final DateTime? time;
-
-  final Fragment_PersonUser? user;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$time = time;
-    _resultData['time'] = l$time == null ? null : dateToString(l$time);
-    final l$user = user;
-    _resultData['user'] = l$user?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$time = time;
-    final l$user = user;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$time, l$user, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PersonLatestKodas ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (l$user != lOther$user) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PersonLatestKodas
-    on Fragment_PersonLatestKodas {
-  CopyWith_Fragment_PersonLatestKodas<Fragment_PersonLatestKodas>
-  get copyWith => CopyWith_Fragment_PersonLatestKodas(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PersonLatestKodas<TRes> {
-  factory CopyWith_Fragment_PersonLatestKodas(
-    Fragment_PersonLatestKodas instance,
-    TRes Function(Fragment_PersonLatestKodas) then,
-  ) = _CopyWithImpl_Fragment_PersonLatestKodas;
-
-  factory CopyWith_Fragment_PersonLatestKodas.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PersonLatestKodas;
-
-  TRes call({
-    String? id,
-    DateTime? time,
-    Fragment_PersonUser? user,
-    String? $__typename,
-  });
-  CopyWith_Fragment_PersonUser<TRes> get user;
-}
-
-class _CopyWithImpl_Fragment_PersonLatestKodas<TRes>
-    implements CopyWith_Fragment_PersonLatestKodas<TRes> {
-  _CopyWithImpl_Fragment_PersonLatestKodas(this._instance, this._then);
-
-  final Fragment_PersonLatestKodas _instance;
-
-  final TRes Function(Fragment_PersonLatestKodas) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? time = _undefined,
-    Object? user = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PersonLatestKodas(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      time: time == _undefined ? _instance.time : (time as DateTime?),
-      user: user == _undefined
-          ? _instance.user
-          : (user as Fragment_PersonUser?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  CopyWith_Fragment_PersonUser<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Fragment_PersonUser.stub(_then(_instance))
-        : CopyWith_Fragment_PersonUser(local$user, (e) => call(user: e));
-  }
-}
-
-class _CopyWithStubImpl_Fragment_PersonLatestKodas<TRes>
-    implements CopyWith_Fragment_PersonLatestKodas<TRes> {
-  _CopyWithStubImpl_Fragment_PersonLatestKodas(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    DateTime? time,
-    Fragment_PersonUser? user,
-    String? $__typename,
-  }) => _res;
-
-  CopyWith_Fragment_PersonUser<TRes> get user =>
-      CopyWith_Fragment_PersonUser.stub(_res);
-}
-
-const fragmentDefinitionPersonLatestKodas = FragmentDefinitionNode(
-  name: NameNode(value: 'PersonLatestKodas'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'LatestKodas'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'time'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'user'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(
-          selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'PersonUser'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ],
-        ),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPersonLatestKodas = DocumentNode(
-  definitions: [
-    fragmentDefinitionPersonLatestKodas,
-    fragmentDefinitionPersonUser,
-  ],
-);
-
-class Fragment_PersonLatestVisit {
-  Fragment_PersonLatestVisit({
-    required this.id,
-    this.time,
-    this.user,
-    this.$__typename = 'LatestVisit',
-  });
-
-  factory Fragment_PersonLatestVisit.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$time = json['time'];
-    final l$user = json['user'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PersonLatestVisit(
-      id: (l$id as String),
-      time: l$time == null ? null : tstzFromString(l$time),
-      user: l$user == null
-          ? null
-          : Fragment_PersonUser.fromJson((l$user as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final DateTime? time;
-
-  final Fragment_PersonUser? user;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$time = time;
-    _resultData['time'] = l$time == null ? null : tstzToString(l$time);
-    final l$user = user;
-    _resultData['user'] = l$user?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$time = time;
-    final l$user = user;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$time, l$user, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PersonLatestVisit ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (l$user != lOther$user) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PersonLatestVisit
-    on Fragment_PersonLatestVisit {
-  CopyWith_Fragment_PersonLatestVisit<Fragment_PersonLatestVisit>
-  get copyWith => CopyWith_Fragment_PersonLatestVisit(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PersonLatestVisit<TRes> {
-  factory CopyWith_Fragment_PersonLatestVisit(
-    Fragment_PersonLatestVisit instance,
-    TRes Function(Fragment_PersonLatestVisit) then,
-  ) = _CopyWithImpl_Fragment_PersonLatestVisit;
-
-  factory CopyWith_Fragment_PersonLatestVisit.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PersonLatestVisit;
-
-  TRes call({
-    String? id,
-    DateTime? time,
-    Fragment_PersonUser? user,
-    String? $__typename,
-  });
-  CopyWith_Fragment_PersonUser<TRes> get user;
-}
-
-class _CopyWithImpl_Fragment_PersonLatestVisit<TRes>
-    implements CopyWith_Fragment_PersonLatestVisit<TRes> {
-  _CopyWithImpl_Fragment_PersonLatestVisit(this._instance, this._then);
-
-  final Fragment_PersonLatestVisit _instance;
-
-  final TRes Function(Fragment_PersonLatestVisit) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? time = _undefined,
-    Object? user = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PersonLatestVisit(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      time: time == _undefined ? _instance.time : (time as DateTime?),
-      user: user == _undefined
-          ? _instance.user
-          : (user as Fragment_PersonUser?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  CopyWith_Fragment_PersonUser<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Fragment_PersonUser.stub(_then(_instance))
-        : CopyWith_Fragment_PersonUser(local$user, (e) => call(user: e));
-  }
-}
-
-class _CopyWithStubImpl_Fragment_PersonLatestVisit<TRes>
-    implements CopyWith_Fragment_PersonLatestVisit<TRes> {
-  _CopyWithStubImpl_Fragment_PersonLatestVisit(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    DateTime? time,
-    Fragment_PersonUser? user,
-    String? $__typename,
-  }) => _res;
-
-  CopyWith_Fragment_PersonUser<TRes> get user =>
-      CopyWith_Fragment_PersonUser.stub(_res);
-}
-
-const fragmentDefinitionPersonLatestVisit = FragmentDefinitionNode(
-  name: NameNode(value: 'PersonLatestVisit'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'LatestVisit'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'time'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'user'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(
-          selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'PersonUser'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ],
-        ),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPersonLatestVisit = DocumentNode(
-  definitions: [
-    fragmentDefinitionPersonLatestVisit,
-    fragmentDefinitionPersonUser,
-  ],
+  definitions: [fragmentDefinitionPersonFamily, fragmentDefinitionDataCheck],
 );
 
 class Fragment_PersonMemberships {

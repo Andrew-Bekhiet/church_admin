@@ -7,4 +7,3 @@ export 'scalars/date.dart';
 export 'scalars/date_range.dart';
 export 'scalars/time.dart';
 export 'scalars/timestamptz.dart';
-export 'scalars/uuid.dart';

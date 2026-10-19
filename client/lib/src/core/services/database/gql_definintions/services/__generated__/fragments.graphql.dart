@@ -1,3 +1,5 @@
+import '../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../gql/__generated__/fragments.graphql.dart';
 import '../../groups/__generated__/fragments.graphql.dart';
 import '../../metadata/study_years/__generated__/fragments.graphql.dart';
 
@@ -986,11 +988,11 @@ class Fragment_ServiceDetails
           .toList(),
       latestEdit: l$latestEdit == null
           ? null
-          : Fragment_OrgLatestEdit.fromJson(
+          : Fragment_LatestEdit.fromJson(
               (l$latestEdit as Map<String, dynamic>),
             ),
       admins: (l$admins as List<dynamic>)
-          .map((e) => Fragment_OrgUser.fromJson((e as Map<String, dynamic>)))
+          .map((e) => Fragment_User.fromJson((e as Map<String, dynamic>)))
           .toList(),
     );
   }
@@ -1025,9 +1027,9 @@ class Fragment_ServiceDetails
 
   final List<Fragment_OrgMeeting> meetings;
 
-  final Fragment_OrgLatestEdit? latestEdit;
+  final Fragment_LatestEdit? latestEdit;
 
-  final List<Fragment_OrgUser> admins;
+  final List<Fragment_User> admins;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -1251,8 +1253,8 @@ abstract class CopyWith_Fragment_ServiceDetails<TRes> {
     Fragment_Service? nextService,
     Fragment_OrgMeeting? defaultMeeting,
     List<Fragment_OrgMeeting>? meetings,
-    Fragment_OrgLatestEdit? latestEdit,
-    List<Fragment_OrgUser>? admins,
+    Fragment_LatestEdit? latestEdit,
+    List<Fragment_User>? admins,
   });
   CopyWith_Fragment_StudyYear<TRes> get studyYearFrom;
   CopyWith_Fragment_StudyYear<TRes> get studyYearTo;
@@ -1264,10 +1266,10 @@ abstract class CopyWith_Fragment_ServiceDetails<TRes> {
     )
     _fn,
   );
-  CopyWith_Fragment_OrgLatestEdit<TRes> get latestEdit;
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit;
   TRes admins(
-    Iterable<Fragment_OrgUser> Function(
-      Iterable<CopyWith_Fragment_OrgUser<Fragment_OrgUser>>,
+    Iterable<Fragment_User> Function(
+      Iterable<CopyWith_Fragment_User<Fragment_User>>,
     )
     _fn,
   );
@@ -1346,10 +1348,10 @@ class _CopyWithImpl_Fragment_ServiceDetails<TRes>
           : (meetings as List<Fragment_OrgMeeting>),
       latestEdit: latestEdit == _undefined
           ? _instance.latestEdit
-          : (latestEdit as Fragment_OrgLatestEdit?),
+          : (latestEdit as Fragment_LatestEdit?),
       admins: admins == _undefined || admins == null
           ? _instance.admins
-          : (admins as List<Fragment_OrgUser>),
+          : (admins as List<Fragment_User>),
     ),
   );
 
@@ -1404,24 +1406,24 @@ class _CopyWithImpl_Fragment_ServiceDetails<TRes>
     ).toList(),
   );
 
-  CopyWith_Fragment_OrgLatestEdit<TRes> get latestEdit {
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit {
     final local$latestEdit = _instance.latestEdit;
     return local$latestEdit == null
-        ? CopyWith_Fragment_OrgLatestEdit.stub(_then(_instance))
-        : CopyWith_Fragment_OrgLatestEdit(
+        ? CopyWith_Fragment_LatestEdit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestEdit(
             local$latestEdit,
             (e) => call(latestEdit: e),
           );
   }
 
   TRes admins(
-    Iterable<Fragment_OrgUser> Function(
-      Iterable<CopyWith_Fragment_OrgUser<Fragment_OrgUser>>,
+    Iterable<Fragment_User> Function(
+      Iterable<CopyWith_Fragment_User<Fragment_User>>,
     )
     _fn,
   ) => call(
     admins: _fn(
-      _instance.admins.map((e) => CopyWith_Fragment_OrgUser(e, (i) => i)),
+      _instance.admins.map((e) => CopyWith_Fragment_User(e, (i) => i)),
     ).toList(),
   );
 }
@@ -1448,8 +1450,8 @@ class _CopyWithStubImpl_Fragment_ServiceDetails<TRes>
     Fragment_Service? nextService,
     Fragment_OrgMeeting? defaultMeeting,
     List<Fragment_OrgMeeting>? meetings,
-    Fragment_OrgLatestEdit? latestEdit,
-    List<Fragment_OrgUser>? admins,
+    Fragment_LatestEdit? latestEdit,
+    List<Fragment_User>? admins,
   }) => _res;
 
   CopyWith_Fragment_StudyYear<TRes> get studyYearFrom =>
@@ -1466,8 +1468,8 @@ class _CopyWithStubImpl_Fragment_ServiceDetails<TRes>
 
   meetings(_fn) => _res;
 
-  CopyWith_Fragment_OrgLatestEdit<TRes> get latestEdit =>
-      CopyWith_Fragment_OrgLatestEdit.stub(_res);
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit =>
+      CopyWith_Fragment_LatestEdit.stub(_res);
 
   admins(_fn) => _res;
 }
@@ -1562,7 +1564,7 @@ const fragmentDefinitionServiceDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'OrgLatestEdit'),
+              name: NameNode(value: 'LatestEdit'),
               directives: [],
             ),
             FieldNode(
@@ -1583,7 +1585,7 @@ const fragmentDefinitionServiceDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'OrgUser'),
+              name: NameNode(value: 'User'),
               directives: [],
             ),
             FieldNode(
@@ -1615,530 +1617,9 @@ const documentNodeFragmentServiceDetails = DocumentNode(
     fragmentDefinitionStudyYear,
     fragmentDefinitionOrgMeeting,
     fragmentDefinitionGroupNoPhoto,
-    fragmentDefinitionOrgLatestEdit,
-    fragmentDefinitionOrgUser,
+    fragmentDefinitionLatestEdit,
+    fragmentDefinitionUser,
   ],
-);
-
-class Fragment_OrgUser {
-  Fragment_OrgUser({
-    required this.id,
-    required this.uid,
-    required this.name,
-    this.email,
-    this.photoUpdatedAt,
-    this.blurhash,
-    this.$__typename = 'User',
-  });
-
-  factory Fragment_OrgUser.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$uid = json['uid'];
-    final l$name = json['name'];
-    final l$email = json['email'];
-    final l$photoUpdatedAt = json['photoUpdatedAt'];
-    final l$blurhash = json['blurhash'];
-    final l$$__typename = json['__typename'];
-    return Fragment_OrgUser(
-      id: (l$id as String),
-      uid: (l$uid as String),
-      name: (l$name as String),
-      email: (l$email as String?),
-      photoUpdatedAt: l$photoUpdatedAt == null
-          ? null
-          : tstzFromString(l$photoUpdatedAt),
-      blurhash: (l$blurhash as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final String uid;
-
-  final String name;
-
-  final String? email;
-
-  final DateTime? photoUpdatedAt;
-
-  final String? blurhash;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$uid = uid;
-    _resultData['uid'] = l$uid;
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$email = email;
-    _resultData['email'] = l$email;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
-        ? null
-        : tstzToString(l$photoUpdatedAt);
-    final l$blurhash = blurhash;
-    _resultData['blurhash'] = l$blurhash;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$uid = uid;
-    final l$name = name;
-    final l$email = email;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final l$blurhash = blurhash;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$uid,
-      l$name,
-      l$email,
-      l$photoUpdatedAt,
-      l$blurhash,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_OrgUser || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$uid = uid;
-    final lOther$uid = other.uid;
-    if (l$uid != lOther$uid) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$email = email;
-    final lOther$email = other.email;
-    if (l$email != lOther$email) {
-      return false;
-    }
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final lOther$photoUpdatedAt = other.photoUpdatedAt;
-    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
-      return false;
-    }
-    final l$blurhash = blurhash;
-    final lOther$blurhash = other.blurhash;
-    if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_OrgUser on Fragment_OrgUser {
-  CopyWith_Fragment_OrgUser<Fragment_OrgUser> get copyWith =>
-      CopyWith_Fragment_OrgUser(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_OrgUser<TRes> {
-  factory CopyWith_Fragment_OrgUser(
-    Fragment_OrgUser instance,
-    TRes Function(Fragment_OrgUser) then,
-  ) = _CopyWithImpl_Fragment_OrgUser;
-
-  factory CopyWith_Fragment_OrgUser.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_OrgUser;
-
-  TRes call({
-    String? id,
-    String? uid,
-    String? name,
-    String? email,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl_Fragment_OrgUser<TRes>
-    implements CopyWith_Fragment_OrgUser<TRes> {
-  _CopyWithImpl_Fragment_OrgUser(this._instance, this._then);
-
-  final Fragment_OrgUser _instance;
-
-  final TRes Function(Fragment_OrgUser) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? uid = _undefined,
-    Object? name = _undefined,
-    Object? email = _undefined,
-    Object? photoUpdatedAt = _undefined,
-    Object? blurhash = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_OrgUser(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      uid: uid == _undefined || uid == null ? _instance.uid : (uid as String),
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      email: email == _undefined ? _instance.email : (email as String?),
-      photoUpdatedAt: photoUpdatedAt == _undefined
-          ? _instance.photoUpdatedAt
-          : (photoUpdatedAt as DateTime?),
-      blurhash: blurhash == _undefined
-          ? _instance.blurhash
-          : (blurhash as String?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Fragment_OrgUser<TRes>
-    implements CopyWith_Fragment_OrgUser<TRes> {
-  _CopyWithStubImpl_Fragment_OrgUser(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? uid,
-    String? name,
-    String? email,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    String? $__typename,
-  }) => _res;
-}
-
-const fragmentDefinitionOrgUser = FragmentDefinitionNode(
-  name: NameNode(value: 'OrgUser'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'User'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'uid'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'name'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'email'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'photoUpdatedAt'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'blurhash'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentOrgUser = DocumentNode(
-  definitions: [fragmentDefinitionOrgUser],
-);
-
-class Fragment_OrgLatestEdit {
-  Fragment_OrgLatestEdit({
-    required this.id,
-    this.time,
-    this.recordedBy,
-    this.user,
-    this.$__typename = 'LatestEdit',
-  });
-
-  factory Fragment_OrgLatestEdit.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$time = json['time'];
-    final l$recordedBy = json['recordedBy'];
-    final l$user = json['user'];
-    final l$$__typename = json['__typename'];
-    return Fragment_OrgLatestEdit(
-      id: (l$id as String),
-      time: l$time == null ? null : tstzFromString(l$time),
-      recordedBy: (l$recordedBy as String?),
-      user: l$user == null
-          ? null
-          : Fragment_OrgUser.fromJson((l$user as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final DateTime? time;
-
-  final String? recordedBy;
-
-  final Fragment_OrgUser? user;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$time = time;
-    _resultData['time'] = l$time == null ? null : tstzToString(l$time);
-    final l$recordedBy = recordedBy;
-    _resultData['recordedBy'] = l$recordedBy;
-    final l$user = user;
-    _resultData['user'] = l$user?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$time = time;
-    final l$recordedBy = recordedBy;
-    final l$user = user;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$time, l$recordedBy, l$user, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_OrgLatestEdit || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$recordedBy = recordedBy;
-    final lOther$recordedBy = other.recordedBy;
-    if (l$recordedBy != lOther$recordedBy) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (l$user != lOther$user) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_OrgLatestEdit on Fragment_OrgLatestEdit {
-  CopyWith_Fragment_OrgLatestEdit<Fragment_OrgLatestEdit> get copyWith =>
-      CopyWith_Fragment_OrgLatestEdit(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_OrgLatestEdit<TRes> {
-  factory CopyWith_Fragment_OrgLatestEdit(
-    Fragment_OrgLatestEdit instance,
-    TRes Function(Fragment_OrgLatestEdit) then,
-  ) = _CopyWithImpl_Fragment_OrgLatestEdit;
-
-  factory CopyWith_Fragment_OrgLatestEdit.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_OrgLatestEdit;
-
-  TRes call({
-    String? id,
-    DateTime? time,
-    String? recordedBy,
-    Fragment_OrgUser? user,
-    String? $__typename,
-  });
-  CopyWith_Fragment_OrgUser<TRes> get user;
-}
-
-class _CopyWithImpl_Fragment_OrgLatestEdit<TRes>
-    implements CopyWith_Fragment_OrgLatestEdit<TRes> {
-  _CopyWithImpl_Fragment_OrgLatestEdit(this._instance, this._then);
-
-  final Fragment_OrgLatestEdit _instance;
-
-  final TRes Function(Fragment_OrgLatestEdit) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? time = _undefined,
-    Object? recordedBy = _undefined,
-    Object? user = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_OrgLatestEdit(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      time: time == _undefined ? _instance.time : (time as DateTime?),
-      recordedBy: recordedBy == _undefined
-          ? _instance.recordedBy
-          : (recordedBy as String?),
-      user: user == _undefined ? _instance.user : (user as Fragment_OrgUser?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  CopyWith_Fragment_OrgUser<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Fragment_OrgUser.stub(_then(_instance))
-        : CopyWith_Fragment_OrgUser(local$user, (e) => call(user: e));
-  }
-}
-
-class _CopyWithStubImpl_Fragment_OrgLatestEdit<TRes>
-    implements CopyWith_Fragment_OrgLatestEdit<TRes> {
-  _CopyWithStubImpl_Fragment_OrgLatestEdit(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    DateTime? time,
-    String? recordedBy,
-    Fragment_OrgUser? user,
-    String? $__typename,
-  }) => _res;
-
-  CopyWith_Fragment_OrgUser<TRes> get user =>
-      CopyWith_Fragment_OrgUser.stub(_res);
-}
-
-const fragmentDefinitionOrgLatestEdit = FragmentDefinitionNode(
-  name: NameNode(value: 'OrgLatestEdit'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'LatestEdit'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'time'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'recordedBy'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'user'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(
-          selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'OrgUser'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ],
-        ),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentOrgLatestEdit = DocumentNode(
-  definitions: [fragmentDefinitionOrgLatestEdit, fragmentDefinitionOrgUser],
 );
 
 class Fragment_OrgMeeting {
@@ -2177,7 +1658,7 @@ class Fragment_OrgMeeting {
     return Fragment_OrgMeeting(
       id: (l$id as String),
       name: (l$name as String),
-      audience: (l$audience as String),
+      audience: fromJson_Enum_MeetingAudience((l$audience as String)),
       color: (l$color as int?),
       isArchived: (l$isArchived as bool),
       showKodasCheckbox: (l$showKodasCheckbox as bool),
@@ -2204,7 +1685,7 @@ class Fragment_OrgMeeting {
 
   final String name;
 
-  final String audience;
+  final Enum_MeetingAudience audience;
 
   final int? color;
 
@@ -2235,7 +1716,7 @@ class Fragment_OrgMeeting {
     final l$name = name;
     _resultData['name'] = l$name;
     final l$audience = audience;
-    _resultData['audience'] = l$audience;
+    _resultData['audience'] = toJson_Enum_MeetingAudience(l$audience);
     final l$color = color;
     _resultData['color'] = l$color;
     final l$isArchived = isArchived;
@@ -2394,7 +1875,7 @@ abstract class CopyWith_Fragment_OrgMeeting<TRes> {
   TRes call({
     String? id,
     String? name,
-    String? audience,
+    Enum_MeetingAudience? audience,
     int? color,
     bool? isArchived,
     bool? showKodasCheckbox,
@@ -2445,7 +1926,7 @@ class _CopyWithImpl_Fragment_OrgMeeting<TRes>
           : (name as String),
       audience: audience == _undefined || audience == null
           ? _instance.audience
-          : (audience as String),
+          : (audience as Enum_MeetingAudience),
       color: color == _undefined ? _instance.color : (color as int?),
       isArchived: isArchived == _undefined || isArchived == null
           ? _instance.isArchived
@@ -2516,7 +1997,7 @@ class _CopyWithStubImpl_Fragment_OrgMeeting<TRes>
   call({
     String? id,
     String? name,
-    String? audience,
+    Enum_MeetingAudience? audience,
     int? color,
     bool? isArchived,
     bool? showKodasCheckbox,

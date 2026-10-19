@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/fragments.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/fragments.graphql.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:graphql/client.dart';
 
@@ -18,29 +18,29 @@ void main() {
       );
     });
 
-    test('AuthUsersData normalizes under its uid, not an id', () {
+    test('a User normalizes under its uid, not an id', () {
       final request = Request(
         operation: Operation(
-          document: gql('{ authUsersData { __typename uid name } }'),
+          document: gql('{ users { __typename uid name } }'),
         ),
       );
 
       final data = {
         '__typename': 'Query',
-        'authUsersData': [
-          {'__typename': 'AuthUsersData', 'uid': userUid, 'name': 'Nabil'},
+        'users': [
+          {'__typename': 'User', 'uid': userUid, 'name': 'Nabil'},
         ],
       };
 
       cache.writeQuery(request, broadcast: false, data: data);
 
-      const userKey = 'AuthUsersData:{"uid":"$userUid"}';
+      const userKey = 'User:{"uid":"$userUid"}';
       expect(store.get(userKey), isNotNull);
       expect(store.get(userKey), containsPair('name', 'Nabil'));
     });
 
-    test('StudyYears normalizes under its order key', () {
-      final year = Fragment_StudyYear(order: 3, name: 'Third year');
+    test('a StudyYear normalizes under its order key', () {
+      final year = Fragment_StudyYear(id: '3', order: 3, name: 'Third year');
 
       cache.writeFragment(
         FragmentRequest(
@@ -51,9 +51,9 @@ void main() {
         data: year.toJson(),
       );
 
-      const yearKey = 'StudyYears:{"order":3}';
+      const yearKey = 'StudyYear:{"order":3}';
       expect(store.get(yearKey), isNotNull);
-      expect(store.get(yearKey), containsPair('name', 'Third year'));
+      expect(store.get(yearKey), containsPair('name', year.name));
     });
   });
 }

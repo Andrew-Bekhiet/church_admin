@@ -84,16 +84,4 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
       'isExpandable': isExpandable,
     };
   }
-
-  @override
-  Json queryToJson(Json serializedValue) {
-    return parentField.queryToJson(targetField.queryToJson(serializedValue));
-  }
-
-  @override
-  Json serializeOrderBy(Object serializedValue) {
-    return parentField.serializeOrderBy(
-      targetField.serializeOrderBy(serializedValue),
-    );
-  }
 }

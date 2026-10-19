@@ -23,7 +23,6 @@ class Meeting extends ViewableWithID
   final String name;
 
   @JsonKey(defaultValue: MeetingAudience.personsAndServants)
-  @QueryableField(label: 'audience')
   final MeetingAudience audience;
 
   @JsonKey(defaultValue: false)
@@ -83,18 +82,4 @@ class Meeting extends ViewableWithID
 
   @override
   Json toJson() => _$MeetingToJson(this);
-
-  Input_HistoryMeetingsInsertInput toInsertInput() {
-    return Input_HistoryMeetingsInsertInput(
-      name: name,
-      audience: audience.name,
-      color: colorToInt(color),
-      isArchived: isArchived,
-      showKodasCheckbox: showKodasCheckbox,
-      serviceId: service?.id.toUuid() ?? serviceId?.toUuid(),
-      serviceStudyYear: serviceStudyYear,
-      serviceGender: serviceGender.isMale,
-      groupId: group?.id.toUuid() ?? groupId?.toUuid(),
-    );
-  }
 }

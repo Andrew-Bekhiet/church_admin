@@ -1,6 +1,8 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.graphql.dart';
 import '../../data_checks/__generated__/fragments.graphql.dart';
+import '../../gql/__generated__/fragments.graphql.dart';
+import '../../metadata/districts/__generated__/fragments.graphql.dart';
 import '../../streets/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
 
@@ -903,11 +905,12 @@ const documentNodeQuerystore = DocumentNode(
     ),
     fragmentDefinitionStoreDetails,
     fragmentDefinitionStore,
-    fragmentDefinitionStoreAddress,
+    fragmentDefinitionAddress,
     fragmentDefinitionArea,
+    fragmentDefinitionDistrict,
     fragmentDefinitionStreet,
-    fragmentDefinitionPlaceLatestEdit,
-    fragmentDefinitionPlaceUser,
+    fragmentDefinitionLatestEdit,
+    fragmentDefinitionUser,
     fragmentDefinitionStoreAdminFamily,
     fragmentDefinitionDataCheck,
   ],

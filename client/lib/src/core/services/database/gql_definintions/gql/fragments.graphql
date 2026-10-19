@@ -6,3 +6,78 @@ fragment User on User {
   photoUpdatedAt
   blurhash
 }
+
+fragment Address on Address {
+  id
+  countryIsoCode
+  area {
+    ...Area
+  }
+  district {
+    ...District
+  }
+  street {
+    ...Street
+  }
+  substreetName
+  fullAddressText
+  geolocation
+  houseCode
+  storeyNumber
+  apartmentNumber
+  specialLandmark
+}
+
+fragment LatestEdit on LatestEdit {
+  id
+  time
+  recordedBy
+  user {
+    ...User
+  }
+}
+
+fragment LatestVisit on LatestVisit {
+  id
+  time
+  recordedBy
+  user {
+    ...User
+  }
+}
+
+fragment LatestFatherVisit on LatestFatherVisit {
+  id
+  time
+  recordedBy
+  user {
+    ...User
+  }
+}
+
+fragment LatestCall on LatestCall {
+  id
+  time
+  recordedBy
+  user {
+    ...User
+  }
+}
+
+fragment LatestConfession on LatestConfession {
+  id
+  time
+  recordedBy
+  user {
+    ...User
+  }
+}
+
+fragment LatestKodas on LatestKodas {
+  id
+  time
+  recordedBy
+  user {
+    ...User
+  }
+}

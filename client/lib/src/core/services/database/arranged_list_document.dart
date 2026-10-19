@@ -2,11 +2,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
 
 /// A list document that also selects what its arrangement needs: the field
-/// shown as each item's second line and, for Hasura documents, every sort key
-/// (an Ash keyset page sorts on the server), each identifiable by the cache
-/// exactly like generated selections.
+/// shown as each item's second line and, for a document that is not a keyset
+/// page, every sort key (a keyset page sorts on the server), each identifiable
+/// by the cache exactly like generated selections.
 class ArrangedListDocument {
-  static const _hasuraSelectionBuilder = NestedSelectionBuilder();
+  static const _unpagedSelectionBuilder = NestedSelectionBuilder();
   static const _ashSelectionBuilder = NestedSelectionBuilder(
     selectsRecordedByInfoAsAshRelationship: true,
   );
@@ -29,7 +29,7 @@ class ArrangedListDocument {
 
     final selectionBuilder = isKeysetPage
         ? _ashSelectionBuilder
-        : _hasuraSelectionBuilder;
+        : _unpagedSelectionBuilder;
     final selections = selectedFields
         .map(
           (field) => transform(selectionBuilder.visit(field), [

@@ -37,39 +37,21 @@ class HomeSearchResults {
   });
 
   factory HomeSearchResults.fromJson(Map<String, dynamic> json) {
+    List<T> resultsOf<T>(String root, T Function(Json) fromJson) =>
+        ((json[root] as Map?)?['results'] as List? ?? [])
+            .cast<Json>()
+            .map(fromJson)
+            .toList();
+
     return HomeSearchResults(
-      persons: (json['persons'] as List? ?? [])
-          .cast<Json>()
-          .map(Person.fromJson)
-          .toList(),
-      classes: (json['classes'] as List? ?? [])
-          .cast<Json>()
-          .map(Class.fromJson)
-          .toList(),
-      groups: (json['groups'] as List? ?? [])
-          .cast<Json>()
-          .map(Group.fromJson)
-          .toList(),
-      families: (json['families'] as List? ?? [])
-          .cast<Json>()
-          .map(Family.fromJson)
-          .toList(),
-      services: (json['services'] as List? ?? [])
-          .cast<Json>()
-          .map(Service.fromJson)
-          .toList(),
-      streets: (json['streets'] as List? ?? [])
-          .cast<Json>()
-          .map(Street.fromJson)
-          .toList(),
-      stores: (json['stores'] as List? ?? [])
-          .cast<Json>()
-          .map(Store.fromJson)
-          .toList(),
-      areas: (json['areas'] as List? ?? [])
-          .cast<Json>()
-          .map(Area.fromJson)
-          .toList(),
+      persons: resultsOf('persons', Person.fromJson),
+      classes: resultsOf('classes', Class.fromJson),
+      groups: resultsOf('groups', Group.fromJson),
+      families: resultsOf('families', Family.fromJson),
+      services: resultsOf('services', Service.fromJson),
+      streets: resultsOf('streets', Street.fromJson),
+      stores: resultsOf('stores', Store.fromJson),
+      areas: resultsOf('areas', Area.fromJson),
     );
   }
 }

@@ -334,6 +334,13 @@ const documentNodeMutationupdateUserPermissions = DocumentNode(
                         selectionSet: null,
                       ),
                       FieldNode(
+                        name: NameNode(value: 'uid'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'permissions'),
                         alias: null,
                         arguments: [],
@@ -571,6 +578,7 @@ class Mutation_updateUserPermissions_updateUserPermissions_result
     implements Fragment_UserAdminScopes {
   Mutation_updateUserPermissions_updateUserPermissions_result({
     required this.id,
+    required this.uid,
     required this.permissions,
     required this.scopeGrants,
     this.$__typename = 'User',
@@ -580,11 +588,13 @@ class Mutation_updateUserPermissions_updateUserPermissions_result
     Map<String, dynamic> json,
   ) {
     final l$id = json['id'];
+    final l$uid = json['uid'];
     final l$permissions = json['permissions'];
     final l$scopeGrants = json['scopeGrants'];
     final l$$__typename = json['__typename'];
     return Mutation_updateUserPermissions_updateUserPermissions_result(
       id: (l$id as String),
+      uid: (l$uid as String),
       permissions: (l$permissions as List<dynamic>)
           .map(
             (e) =>
@@ -607,6 +617,8 @@ class Mutation_updateUserPermissions_updateUserPermissions_result
 
   final String id;
 
+  final String uid;
+
   final List<
     Mutation_updateUserPermissions_updateUserPermissions_result_permissions
   >
@@ -623,6 +635,8 @@ class Mutation_updateUserPermissions_updateUserPermissions_result
     final _resultData = <String, dynamic>{};
     final l$id = id;
     _resultData['id'] = l$id;
+    final l$uid = uid;
+    _resultData['uid'] = l$uid;
     final l$permissions = permissions;
     _resultData['permissions'] = l$permissions.map((e) => e.toJson()).toList();
     final l$scopeGrants = scopeGrants;
@@ -635,11 +649,13 @@ class Mutation_updateUserPermissions_updateUserPermissions_result
   @override
   int get hashCode {
     final l$id = id;
+    final l$uid = uid;
     final l$permissions = permissions;
     final l$scopeGrants = scopeGrants;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
+      l$uid,
       Object.hashAll(l$permissions.map((v) => v)),
       Object.hashAll(l$scopeGrants.map((v) => v)),
       l$$__typename,
@@ -658,6 +674,11 @@ class Mutation_updateUserPermissions_updateUserPermissions_result
     final l$id = id;
     final lOther$id = other.id;
     if (l$id != lOther$id) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (l$uid != lOther$uid) {
       return false;
     }
     final l$permissions = permissions;
@@ -720,6 +741,7 @@ abstract class CopyWith_Mutation_updateUserPermissions_updateUserPermissions_res
 
   TRes call({
     String? id,
+    String? uid,
     List<
       Mutation_updateUserPermissions_updateUserPermissions_result_permissions
     >?
@@ -781,12 +803,14 @@ class _CopyWithImpl_Mutation_updateUserPermissions_updateUserPermissions_result<
 
   TRes call({
     Object? id = _undefined,
+    Object? uid = _undefined,
     Object? permissions = _undefined,
     Object? scopeGrants = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Mutation_updateUserPermissions_updateUserPermissions_result(
       id: id == _undefined || id == null ? _instance.id : (id as String),
+      uid: uid == _undefined || uid == null ? _instance.uid : (uid as String),
       permissions: permissions == _undefined || permissions == null
           ? _instance.permissions
           : (permissions
@@ -869,6 +893,7 @@ class _CopyWithStubImpl_Mutation_updateUserPermissions_updateUserPermissions_res
 
   call({
     String? id,
+    String? uid,
     List<
       Mutation_updateUserPermissions_updateUserPermissions_result_permissions
     >?
@@ -1585,6 +1610,13 @@ const documentNodeMutationapproveUser = DocumentNode(
                         selectionSet: null,
                       ),
                       FieldNode(
+                        name: NameNode(value: 'uid'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'permissions'),
                         alias: null,
                         arguments: [],
@@ -1785,6 +1817,7 @@ class _CopyWithStubImpl_Mutation_approveUser_approveUser<TRes>
 class Mutation_approveUser_approveUser_result {
   Mutation_approveUser_approveUser_result({
     required this.id,
+    required this.uid,
     required this.permissions,
     this.$__typename = 'User',
   });
@@ -1793,10 +1826,12 @@ class Mutation_approveUser_approveUser_result {
     Map<String, dynamic> json,
   ) {
     final l$id = json['id'];
+    final l$uid = json['uid'];
     final l$permissions = json['permissions'];
     final l$$__typename = json['__typename'];
     return Mutation_approveUser_approveUser_result(
       id: (l$id as String),
+      uid: (l$uid as String),
       permissions: (l$permissions as List<dynamic>)
           .map(
             (e) => Mutation_approveUser_approveUser_result_permissions.fromJson(
@@ -1810,6 +1845,8 @@ class Mutation_approveUser_approveUser_result {
 
   final String id;
 
+  final String uid;
+
   final List<Mutation_approveUser_approveUser_result_permissions> permissions;
 
   final String $__typename;
@@ -1818,6 +1855,8 @@ class Mutation_approveUser_approveUser_result {
     final _resultData = <String, dynamic>{};
     final l$id = id;
     _resultData['id'] = l$id;
+    final l$uid = uid;
+    _resultData['uid'] = l$uid;
     final l$permissions = permissions;
     _resultData['permissions'] = l$permissions.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
@@ -1828,10 +1867,12 @@ class Mutation_approveUser_approveUser_result {
   @override
   int get hashCode {
     final l$id = id;
+    final l$uid = uid;
     final l$permissions = permissions;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
+      l$uid,
       Object.hashAll(l$permissions.map((v) => v)),
       l$$__typename,
     ]);
@@ -1849,6 +1890,11 @@ class Mutation_approveUser_approveUser_result {
     final l$id = id;
     final lOther$id = other.id;
     if (l$id != lOther$id) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (l$uid != lOther$uid) {
       return false;
     }
     final l$permissions = permissions;
@@ -1892,6 +1938,7 @@ abstract class CopyWith_Mutation_approveUser_approveUser_result<TRes> {
 
   TRes call({
     String? id,
+    String? uid,
     List<Mutation_approveUser_approveUser_result_permissions>? permissions,
     String? $__typename,
   });
@@ -1922,11 +1969,13 @@ class _CopyWithImpl_Mutation_approveUser_approveUser_result<TRes>
 
   TRes call({
     Object? id = _undefined,
+    Object? uid = _undefined,
     Object? permissions = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Mutation_approveUser_approveUser_result(
       id: id == _undefined || id == null ? _instance.id : (id as String),
+      uid: uid == _undefined || uid == null ? _instance.uid : (uid as String),
       permissions: permissions == _undefined || permissions == null
           ? _instance.permissions
           : (permissions
@@ -1966,6 +2015,7 @@ class _CopyWithStubImpl_Mutation_approveUser_approveUser_result<TRes>
 
   call({
     String? id,
+    String? uid,
     List<Mutation_approveUser_approveUser_result_permissions>? permissions,
     String? $__typename,
   }) => _res;
@@ -2383,6 +2433,13 @@ const documentNodeMutationunapproveUser = DocumentNode(
                         selectionSet: null,
                       ),
                       FieldNode(
+                        name: NameNode(value: 'uid'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'permissions'),
                         alias: null,
                         arguments: [],
@@ -2590,6 +2647,7 @@ class _CopyWithStubImpl_Mutation_unapproveUser_unapproveUser<TRes>
 class Mutation_unapproveUser_unapproveUser_result {
   Mutation_unapproveUser_unapproveUser_result({
     required this.id,
+    required this.uid,
     required this.permissions,
     this.$__typename = 'User',
   });
@@ -2598,10 +2656,12 @@ class Mutation_unapproveUser_unapproveUser_result {
     Map<String, dynamic> json,
   ) {
     final l$id = json['id'];
+    final l$uid = json['uid'];
     final l$permissions = json['permissions'];
     final l$$__typename = json['__typename'];
     return Mutation_unapproveUser_unapproveUser_result(
       id: (l$id as String),
+      uid: (l$uid as String),
       permissions: (l$permissions as List<dynamic>)
           .map(
             (e) =>
@@ -2616,6 +2676,8 @@ class Mutation_unapproveUser_unapproveUser_result {
 
   final String id;
 
+  final String uid;
+
   final List<Mutation_unapproveUser_unapproveUser_result_permissions>
   permissions;
 
@@ -2625,6 +2687,8 @@ class Mutation_unapproveUser_unapproveUser_result {
     final _resultData = <String, dynamic>{};
     final l$id = id;
     _resultData['id'] = l$id;
+    final l$uid = uid;
+    _resultData['uid'] = l$uid;
     final l$permissions = permissions;
     _resultData['permissions'] = l$permissions.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
@@ -2635,10 +2699,12 @@ class Mutation_unapproveUser_unapproveUser_result {
   @override
   int get hashCode {
     final l$id = id;
+    final l$uid = uid;
     final l$permissions = permissions;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
+      l$uid,
       Object.hashAll(l$permissions.map((v) => v)),
       l$$__typename,
     ]);
@@ -2656,6 +2722,11 @@ class Mutation_unapproveUser_unapproveUser_result {
     final l$id = id;
     final lOther$id = other.id;
     if (l$id != lOther$id) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (l$uid != lOther$uid) {
       return false;
     }
     final l$permissions = permissions;
@@ -2699,6 +2770,7 @@ abstract class CopyWith_Mutation_unapproveUser_unapproveUser_result<TRes> {
 
   TRes call({
     String? id,
+    String? uid,
     List<Mutation_unapproveUser_unapproveUser_result_permissions>? permissions,
     String? $__typename,
   });
@@ -2729,11 +2801,13 @@ class _CopyWithImpl_Mutation_unapproveUser_unapproveUser_result<TRes>
 
   TRes call({
     Object? id = _undefined,
+    Object? uid = _undefined,
     Object? permissions = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Mutation_unapproveUser_unapproveUser_result(
       id: id == _undefined || id == null ? _instance.id : (id as String),
+      uid: uid == _undefined || uid == null ? _instance.uid : (uid as String),
       permissions: permissions == _undefined || permissions == null
           ? _instance.permissions
           : (permissions
@@ -2775,6 +2849,7 @@ class _CopyWithStubImpl_Mutation_unapproveUser_unapproveUser_result<TRes>
 
   call({
     String? id,
+    String? uid,
     List<Mutation_unapproveUser_unapproveUser_result_permissions>? permissions,
     String? $__typename,
   }) => _res;

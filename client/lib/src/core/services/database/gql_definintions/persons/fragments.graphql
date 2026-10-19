@@ -10,14 +10,14 @@ fragment Person on Person {
   photoUpdatedAt
   blurhash
   dataCheck {
-    ...PersonDataCheck
+    ...DataCheck
   }
 }
 
 fragment PersonDetails on Person {
   ...Person
   address {
-    ...PersonAddress
+    ...Address
   }
   birthdate
   classMemberships(
@@ -38,7 +38,7 @@ fragment PersonDetails on Person {
       { field: CREATED_AT, order: ASC }
     ]
   ) {
-    ...PersonContact
+    ...Contact
   }
   college {
     ...College
@@ -74,19 +74,19 @@ fragment PersonDetails on Person {
   }
   jobDescription
   latestCall {
-    ...PersonLatestCall
+    ...LatestCall
   }
   latestConfession {
-    ...PersonLatestConfession
+    ...LatestConfession
   }
   latestEdit {
-    ...PersonLatestEdit
+    ...LatestEdit
   }
   latestKodas {
-    ...PersonLatestKodas
+    ...LatestKodas
   }
   latestVisit {
-    ...PersonLatestVisit
+    ...LatestVisit
   }
   notes
   martialStatus
@@ -125,57 +125,7 @@ fragment PersonDetails on Person {
   }
   uid
   user {
-    ...PersonUser
-  }
-}
-
-fragment PersonDataCheck on DataCheck {
-  id
-  familyId
-  isComplete
-  completenessPercent
-  familyCheck
-  addressCheck
-  userOverride
-  details
-}
-
-fragment PersonAddress on Address {
-  id
-  countryIsoCode
-  area {
-    ...Area
-  }
-  district {
-    ...District
-  }
-  street {
-    ...Street
-  }
-  substreetName
-  fullAddressText
-  geolocation
-  houseCode
-  storeyNumber
-  apartmentNumber
-  specialLandmark
-}
-
-fragment PersonContact on Contact {
-  id
-  label
-  phone
-  isMainPhone
-}
-
-fragment PersonFamilyContact on FamilyContact {
-  id
-  personId
-  label
-  phone
-  isMainPhone
-  personType {
-    ...PersonType
+    ...User
   }
 }
 
@@ -187,56 +137,7 @@ fragment PersonFamily on Family {
   photoUpdatedAt
   blurhash
   dataCheck {
-    ...PersonDataCheck
-  }
-}
-
-fragment PersonUser on User {
-  id
-  uid
-  name
-  email
-  photoUpdatedAt
-  blurhash
-}
-
-fragment PersonLatestCall on LatestCall {
-  id
-  time
-  user {
-    ...PersonUser
-  }
-}
-
-fragment PersonLatestConfession on LatestConfession {
-  id
-  time
-  user {
-    ...PersonUser
-  }
-}
-
-fragment PersonLatestEdit on LatestEdit {
-  id
-  time
-  user {
-    ...PersonUser
-  }
-}
-
-fragment PersonLatestKodas on LatestKodas {
-  id
-  time
-  user {
-    ...PersonUser
-  }
-}
-
-fragment PersonLatestVisit on LatestVisit {
-  id
-  time
-  user {
-    ...PersonUser
+    ...DataCheck
   }
 }
 

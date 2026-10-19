@@ -37,9 +37,15 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
       inServiceContext: inServiceContext,
     );
 
-    final savedOrderBy = UserPreferencesService.I.getLastOrderByFor(key);
-    final orderBy = savedOrderBy ?? orElse();
-    if (savedOrderBy == null) {
+    final sortableSavedOrderBy = UserPreferencesService.I
+        .getLastOrderByFor(key)
+        ?.where((order) => type.canOrderBy(order.field))
+        .toList();
+    final orderBy = switch (sortableSavedOrderBy) {
+      final saved? when saved.isNotEmpty => saved,
+      _ => orElse(),
+    };
+    if (sortableSavedOrderBy?.isNotEmpty != true) {
       unawaited(UserPreferencesService.I.setLastOrderByFor(key, orderBy));
     }
 

@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/data_checks_document_transformer.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/home/__generated__/queries.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/home/__generated__/queries.graphql.dart';
 import 'package:graphql/client.dart';
 
 class HomeDAO {
@@ -14,7 +14,7 @@ class HomeDAO {
         document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
           documentNodeQueryhomeSearch,
         ),
-        variables: {'query': '%$query%'},
+        variables: Variables_Query_homeSearch(query: '%$query%').toJson(),
         parserFn: HomeSearchResults.fromJson,
       ),
     );

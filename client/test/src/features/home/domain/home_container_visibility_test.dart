@@ -2,6 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  Json translated(List<Filter> filters) =>
+      const AshFilterTranslator().toFilterInput(filters);
+
   group('$HomeContainerVisibility', () {
     test('does not filter users with global read access', () {
       final visibility = HomeContainerVisibility.fromUser(
@@ -33,17 +36,15 @@ void main() {
       );
 
       expect(
-        visibility.areaFilters.map((filter) => filter.queryToJson()),
-        [
-          {
-            'id': {
-              '_in': ['area-id'],
-            },
+        translated(visibility.areaFilters),
+        {
+          'id': {
+            'in': ['area-id'],
           },
-        ],
+        },
       );
       expect(
-        const AshFilterTranslator().toFilterInput(visibility.streetFilters),
+        translated(visibility.streetFilters),
         {
           'areas': {
             'id': {
@@ -69,25 +70,23 @@ void main() {
       );
 
       expect(
-        visibility.serviceFilters.map((filter) => filter.queryToJson()),
-        [
-          {
-            '_or': [
-              {
+        translated(visibility.serviceFilters),
+        {
+          'or': [
+            {
+              'id': {
+                'in': ['service-id'],
+              },
+            },
+            {
+              'groups': {
                 'id': {
-                  '_in': ['service-id'],
+                  'in': ['group-id'],
                 },
               },
-              {
-                'groups': {
-                  'id': {
-                    '_in': ['group-id'],
-                  },
-                },
-              },
-            ],
-          },
-        ],
+            },
+          ],
+        },
       );
     });
 
@@ -95,21 +94,21 @@ void main() {
       final visibility = HomeContainerVisibility.fromUser(null);
 
       expect(
-        visibility.areaFilters.single.queryToJson(),
+        translated(visibility.areaFilters),
         {
-          'id': {'_in': <String>[]},
+          'id': {'in': <String>[]},
         },
       );
       expect(
-        visibility.streetFilters.single.queryToJson(),
+        translated(visibility.streetFilters),
         {
-          'id': {'_in': <String>[]},
+          'id': {'in': <String>[]},
         },
       );
       expect(
-        visibility.serviceFilters.single.queryToJson(),
+        translated(visibility.serviceFilters),
         {
-          'id': {'_in': <String>[]},
+          'id': {'in': <String>[]},
         },
       );
     });

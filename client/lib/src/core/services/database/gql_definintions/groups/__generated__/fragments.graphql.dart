@@ -1,3 +1,4 @@
+import '../../gql/__generated__/fragments.graphql.dart';
 import '../../metadata/study_years/__generated__/fragments.graphql.dart';
 import '../../services/__generated__/fragments.graphql.dart';
 
@@ -598,11 +599,11 @@ class Fragment_GroupDetails implements Fragment_Group, Fragment_GroupNoPhoto {
             ),
       latestEdit: l$latestEdit == null
           ? null
-          : Fragment_OrgLatestEdit.fromJson(
+          : Fragment_LatestEdit.fromJson(
               (l$latestEdit as Map<String, dynamic>),
             ),
       admins: (l$admins as List<dynamic>)
-          .map((e) => Fragment_OrgUser.fromJson((e as Map<String, dynamic>)))
+          .map((e) => Fragment_User.fromJson((e as Map<String, dynamic>)))
           .toList(),
     );
   }
@@ -631,9 +632,9 @@ class Fragment_GroupDetails implements Fragment_Group, Fragment_GroupNoPhoto {
 
   final Fragment_ServiceWithStudyYears? service;
 
-  final Fragment_OrgLatestEdit? latestEdit;
+  final Fragment_LatestEdit? latestEdit;
 
-  final List<Fragment_OrgUser> admins;
+  final List<Fragment_User> admins;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -827,8 +828,8 @@ abstract class CopyWith_Fragment_GroupDetails<TRes> {
     Fragment_OrgMeeting? defaultMeeting,
     List<Fragment_OrgMeeting>? meetings,
     Fragment_ServiceWithStudyYears? service,
-    Fragment_OrgLatestEdit? latestEdit,
-    List<Fragment_OrgUser>? admins,
+    Fragment_LatestEdit? latestEdit,
+    List<Fragment_User>? admins,
   });
   CopyWith_Fragment_OrgMeeting<TRes> get defaultMeeting;
   TRes meetings(
@@ -838,10 +839,10 @@ abstract class CopyWith_Fragment_GroupDetails<TRes> {
     _fn,
   );
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service;
-  CopyWith_Fragment_OrgLatestEdit<TRes> get latestEdit;
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit;
   TRes admins(
-    Iterable<Fragment_OrgUser> Function(
-      Iterable<CopyWith_Fragment_OrgUser<Fragment_OrgUser>>,
+    Iterable<Fragment_User> Function(
+      Iterable<CopyWith_Fragment_User<Fragment_User>>,
     )
     _fn,
   );
@@ -908,10 +909,10 @@ class _CopyWithImpl_Fragment_GroupDetails<TRes>
           : (service as Fragment_ServiceWithStudyYears?),
       latestEdit: latestEdit == _undefined
           ? _instance.latestEdit
-          : (latestEdit as Fragment_OrgLatestEdit?),
+          : (latestEdit as Fragment_LatestEdit?),
       admins: admins == _undefined || admins == null
           ? _instance.admins
-          : (admins as List<Fragment_OrgUser>),
+          : (admins as List<Fragment_User>),
     ),
   );
 
@@ -946,24 +947,24 @@ class _CopyWithImpl_Fragment_GroupDetails<TRes>
           );
   }
 
-  CopyWith_Fragment_OrgLatestEdit<TRes> get latestEdit {
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit {
     final local$latestEdit = _instance.latestEdit;
     return local$latestEdit == null
-        ? CopyWith_Fragment_OrgLatestEdit.stub(_then(_instance))
-        : CopyWith_Fragment_OrgLatestEdit(
+        ? CopyWith_Fragment_LatestEdit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestEdit(
             local$latestEdit,
             (e) => call(latestEdit: e),
           );
   }
 
   TRes admins(
-    Iterable<Fragment_OrgUser> Function(
-      Iterable<CopyWith_Fragment_OrgUser<Fragment_OrgUser>>,
+    Iterable<Fragment_User> Function(
+      Iterable<CopyWith_Fragment_User<Fragment_User>>,
     )
     _fn,
   ) => call(
     admins: _fn(
-      _instance.admins.map((e) => CopyWith_Fragment_OrgUser(e, (i) => i)),
+      _instance.admins.map((e) => CopyWith_Fragment_User(e, (i) => i)),
     ).toList(),
   );
 }
@@ -987,8 +988,8 @@ class _CopyWithStubImpl_Fragment_GroupDetails<TRes>
     Fragment_OrgMeeting? defaultMeeting,
     List<Fragment_OrgMeeting>? meetings,
     Fragment_ServiceWithStudyYears? service,
-    Fragment_OrgLatestEdit? latestEdit,
-    List<Fragment_OrgUser>? admins,
+    Fragment_LatestEdit? latestEdit,
+    List<Fragment_User>? admins,
   }) => _res;
 
   CopyWith_Fragment_OrgMeeting<TRes> get defaultMeeting =>
@@ -999,8 +1000,8 @@ class _CopyWithStubImpl_Fragment_GroupDetails<TRes>
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service =>
       CopyWith_Fragment_ServiceWithStudyYears.stub(_res);
 
-  CopyWith_Fragment_OrgLatestEdit<TRes> get latestEdit =>
-      CopyWith_Fragment_OrgLatestEdit.stub(_res);
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit =>
+      CopyWith_Fragment_LatestEdit.stub(_res);
 
   admins(_fn) => _res;
 }
@@ -1088,7 +1089,7 @@ const fragmentDefinitionGroupDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'OrgLatestEdit'),
+              name: NameNode(value: 'LatestEdit'),
               directives: [],
             ),
             FieldNode(
@@ -1109,7 +1110,7 @@ const fragmentDefinitionGroupDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'OrgUser'),
+              name: NameNode(value: 'User'),
               directives: [],
             ),
             FieldNode(
@@ -1142,7 +1143,7 @@ const documentNodeFragmentGroupDetails = DocumentNode(
     fragmentDefinitionStudyYear,
     fragmentDefinitionServiceWithStudyYears,
     fragmentDefinitionService,
-    fragmentDefinitionOrgLatestEdit,
-    fragmentDefinitionOrgUser,
+    fragmentDefinitionLatestEdit,
+    fragmentDefinitionUser,
   ],
 );

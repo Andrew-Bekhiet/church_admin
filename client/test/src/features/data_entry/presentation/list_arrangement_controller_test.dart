@@ -118,6 +118,63 @@ void main() {
     );
 
     test(
+      'a saved sort on a field the list can no longer sort by is dropped',
+      () async {
+        await preferences.setLastOrderByFor(
+          OrderByPreferenceKey(type: person),
+          [
+            OrderBy(
+              field: fields.address.redirectTo(AddressFields().houseCode),
+            ),
+            OrderBy(field: fields.birthdate),
+          ],
+        );
+
+        final controller = createController();
+
+        expect(controller.value.orderBy, [OrderBy(field: fields.birthdate)]);
+      },
+    );
+
+    test(
+      'a list whose saved sorts are all unsortable falls back to the default',
+      () async {
+        await preferences.setLastOrderByFor(
+          OrderByPreferenceKey(type: person),
+          [
+            OrderBy(
+              field: fields.address.redirectTo(AddressFields().houseCode),
+            ),
+          ],
+        );
+
+        final controller = createController();
+
+        expect(controller.value.orderBy, byName());
+      },
+    );
+
+    testWidgets(
+      'the sheet opens for a list saved with a now unsortable field',
+      (tester) async {
+        await preferences.setLastOrderByFor(
+          OrderByPreferenceKey(type: person),
+          [
+            OrderBy(
+              field: fields.address.redirectTo(AddressFields().houseCode),
+            ),
+          ],
+        );
+        final controller = createController();
+
+        await openSheetFor(tester, controller);
+
+        expect(tester.takeException(), isNull);
+        expect(find.byType(ArrangementSortSection), findsOneWidget);
+      },
+    );
+
+    test(
       'a list whose user saved a second line starts with that second line',
       () async {
         await preferences.setLastSecondLineFieldFor(

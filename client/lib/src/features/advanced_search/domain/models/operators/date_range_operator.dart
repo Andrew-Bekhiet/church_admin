@@ -13,16 +13,6 @@ enum DateRangeOperator implements Operator<DateTimeRange> {
   bool get acceptsValue => true;
 
   @override
-  Json queryToJson(FieldMetadata field, DateTimeRange filterValue) {
-    return {
-      '_and': [
-        field.queryToJson({'_gte': dateToString(filterValue.start)}),
-        field.queryToJson({'_lte': dateToString(filterValue.end)}),
-      ],
-    };
-  }
-
-  @override
   Object serializeValue(DateTimeRange value) {
     return {
       'start': dateToString(value.start),

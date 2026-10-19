@@ -15,34 +15,9 @@ fragment AreaWithBounds on Area {
 fragment AreaDetails on Area {
   ...AreaWithBounds
   latestEdit {
-    ...PlaceLatestEdit
+    ...LatestEdit
   }
   admins {
-    ...PlaceUser
-  }
-}
-
-fragment PlaceUser on User {
-  id
-  uid
-  name
-  email
-  photoUpdatedAt
-  blurhash
-}
-
-fragment PlaceLatestEdit on LatestEdit {
-  id
-  time
-  user {
-    ...PlaceUser
-  }
-}
-
-fragment PlaceLatestVisit on LatestVisit {
-  id
-  time
-  user {
-    ...PlaceUser
+    ...User
   }
 }

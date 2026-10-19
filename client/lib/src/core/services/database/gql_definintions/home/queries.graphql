@@ -1,0 +1,42 @@
+query homeSearch($query: String!) {
+  persons(filter: { name: { ilike: $query } }, first: 5) {
+    results {
+      ...Person
+    }
+  }
+  classes(filter: { name: { ilike: $query } }, first: 5) {
+    results {
+      ...Class
+    }
+  }
+  groups(filter: { name: { ilike: $query } }, first: 5) {
+    results {
+      ...Group
+    }
+  }
+  families(filter: { name: { ilike: $query } }, first: 5) {
+    results {
+      ...Family
+    }
+  }
+  services(filter: { name: { ilike: $query } }, first: 5) {
+    results {
+      ...Service
+    }
+  }
+  streets(filter: { name: { ilike: $query } }, first: 5) {
+    results {
+      ...Street
+    }
+  }
+  stores(filter: { name: { ilike: $query } }, first: 5) {
+    results {
+      ...Store
+    }
+  }
+  areas(filter: { name: { ilike: $query } }, first: 5) {
+    results {
+      ...Area
+    }
+  }
+}

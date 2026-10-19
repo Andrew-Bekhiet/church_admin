@@ -18,13 +18,6 @@ class WithinDistanceOperator implements Operator<Point> {
   const WithinDistanceOperator(this.meters);
 
   @override
-  Json queryToJson(FieldMetadata field, Point filterValue) {
-    return field.queryToJson({
-      '_stDWithin': {'distance': meters, 'from': filterValue.toPostGISJson()},
-    });
-  }
-
-  @override
   Object serializeValue(Point value) =>
       PointSpatialOperator.intersects.serializeValue(value);
 

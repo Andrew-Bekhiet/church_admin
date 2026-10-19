@@ -4,9 +4,7 @@ import 'package:dio/dio.dart';
 export 'database/dao_base.dart';
 export 'database/dao_bases.dart';
 export 'database/db_graphql_client.dart';
-export 'database/db_vars_transformer.dart';
 export 'database/diff.dart';
-export 'database/gql_selection_node.dart';
 export 'database/methods_templates.dart';
 export 'database/string_to_uuid.dart';
 
@@ -15,8 +13,6 @@ class DatabaseService {
       globalProviderContainer.read(databaseServiceProvider);
 
   final DBGraphQLClient graphQLClient;
-  final GQLParser parser;
-  final DBVarsTransformer varsTransformer;
   final AdvancedQueryParser advancedQueryParser;
   final LiveQueryRegistry? _liveQueries;
   final Dio _dio;
@@ -47,6 +43,7 @@ class DatabaseService {
   late final dataChecks = DataChecksDAO(db: this);
   late final fcmTokens = FcmTokensDAO(db: this);
   late final accounts = AccountsDAO(db: this);
+  late final screenCaptureAttempts = ScreenCaptureAttemptsDAO(db: this);
 
   late final metadata = MetadataDAO(db: this);
 
@@ -86,8 +83,6 @@ class DatabaseService {
 
   DatabaseService(
     this.graphQLClient, {
-    this.parser = const GQLParser(),
-    this.varsTransformer = const DBVarsTransformer(),
     this.advancedQueryParser = const AdvancedQueryParser(),
     this._liveQueries,
     Dio? dio,
