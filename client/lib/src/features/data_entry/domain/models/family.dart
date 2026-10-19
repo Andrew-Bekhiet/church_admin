@@ -22,7 +22,7 @@ class Family extends ViewableWithIDAndImage
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @QueryableField(label: 'تفاصيل العنوان')
+  @QueryableField(label: 'تفاصيل العنوان', orderable: false)
   final Address? address;
 
   @JsonKey(defaultValue: MartialStatus.married)
@@ -54,28 +54,29 @@ class Family extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
-  @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
-  @QueryableField.manyToMany(through: FamiliesFamilies, select: 'child')
+  @QueryableField(label: 'الأبناء', orderable: false)
   final List<Family>? children;
 
-  @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
-  @QueryableField.manyToMany(through: FamiliesFamilies, select: 'parent')
+  @QueryableField(label: 'الآباء', orderable: false)
   final List<Family>? parents;
 
   @JsonKey(defaultValue: <FamilyPhoneContact>[])
   final List<FamilyPhoneContact> contacts;
 
+  @JsonKey(name: 'latestEdit')
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
+  @JsonKey(name: 'latestVisit')
   @QueryableField(label: 'أخر افتقاد')
   final LastRecordedByInfo? lastVisit;
 
+  @JsonKey(name: 'latestFatherVisit')
   @QueryableField(label: 'آخر افتقاد للأب الكاهن')
   final LastRecordedByInfo? lastFatherVisit;
 
   @override
-  @QueryableField(label: 'اكتمال البيانات')
+  @QueryableField(label: 'اكتمال البيانات', orderable: false)
   final DataCheck? dataCheck;
 
   @override
@@ -164,69 +165,43 @@ class Family extends ViewableWithIDAndImage
     ),
   );
 
-  Input_FamiliesSetInput toUpdateInput(Family oldFamily) {
-    Input_FamiliesSetInput result = Input_FamiliesSetInput();
-
-    if (name != oldFamily.name) {
-      result = result.copyWith(
-        name: name,
-      );
-    }
-
-    if (notes != oldFamily.notes) {
-      result = result.copyWith(
-        notes: notes,
-      );
-    }
-
-    if (church?.id != oldFamily.church?.id) {
-      result = result.copyWith(
-        churchId: church?.id.toUuid(),
-      );
-    }
-
-    if (color != oldFamily.color) {
-      result = result.copyWith(
-        color: colorToInt(color),
-      );
-    }
-
-    if (marriageDate != oldFamily.marriageDate) {
-      result = result.copyWith(
-        marriageDate: marriageDate,
-      );
-    }
-
-    if (deceasedSpouseName != oldFamily.deceasedSpouseName) {
-      result = result.copyWith(
-        deceasedSpouseName: deceasedSpouseName,
-      );
-    }
-
-    if (status != oldFamily.status) {
-      result = result.copyWith(
-        status: status.name,
-        marriageDate:
-            status == MartialStatus.widowed ||
-                status == MartialStatus.widowedWithoutChildren
-            ? null
-            : marriageDate,
-        deceasedSpouseName:
-            status == MartialStatus.widowed ||
-                status == MartialStatus.widowedWithoutChildren
-            ? deceasedSpouseName
-            : null,
-      );
-    }
-
-    return result;
-  }
+  Json toCommandInput() => {
+    'name': name,
+    'notes': notes,
+    'color': colorToInt(color),
+    'status': status.name,
+    'deceasedSpouseName': deceasedSpouseName,
+    'marriageDate': switch (marriageDate) {
+      final date? => dateToString(date),
+      null => null,
+    },
+    'churchId': church?.id,
+    if (address case final address?)
+      'address': address.toAddressInput().toJson(),
+    'contacts': [
+      for (final contact in contacts)
+        if (contact.personId == null) contact.toFamilyContactInput().toJson(),
+    ],
+    if (parents case final parents?)
+      'parents': [for (final parent in parents) parent.id],
+    if (children case final children?)
+      'children': [for (final child in children) child.id],
+    if (lastVisit case LastRecordedByInfo(:final time))
+      'lastVisit': tstzToString(time),
+    if (lastFatherVisit case LastRecordedByInfo(:final time))
+      'lastFatherVisit': tstzToString(time),
+  };
 }
 
+// Extends the generated private base, which only this library can see
+// ignore: solid_lints/avoid_multiple_declarations_per_file
 class FamilyFields extends _FamilyFields with AddressDetailFields {
   @override
-  FieldMetadata<Point> get geolocation =>
-      address.redirectTo(AddressFields().geolocation, isExpandable: false);
+  FieldMetadata<Point> get geolocation => address.redirectTo(
+    AddressFields().geolocation,
+    isExpandable: false,
+    isOrderable: false,
+  );
 
   @override
   List<FieldMetadata<Object>> get allFields =>
@@ -238,13 +213,3 @@ class FamilyFields extends _FamilyFields with AddressDetailFields {
 
   FamilyFields();
 }
-
-List<Family>? familyChildrenFromJson(List? data) =>
-    data?.map((e) => Family.fromJson(e['child'])).toList();
-List<Json>? familyChildrenToJson(List<Family>? hobbies) =>
-    hobbies?.map((e) => {'child': e.toJson()}).toList();
-
-List<Family>? familyParentsFromJson(List? data) =>
-    data?.map((e) => Family.fromJson(e['parent'])).toList();
-List<Json>? familyParentsToJson(List<Family>? hobbies) =>
-    hobbies?.map((e) => {'parent': e.toJson()}).toList();

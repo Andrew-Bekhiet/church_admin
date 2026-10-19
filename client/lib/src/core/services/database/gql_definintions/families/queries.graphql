@@ -1,0 +1,55 @@
+query families(
+  $filter: FamilyFilterInput
+  $sort: [FamilySortInput]
+  $first: Int
+  $after: String
+) {
+  families(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Family
+    }
+  }
+}
+
+query familiesWithAddresses(
+  $filter: FamilyFilterInput
+  $sort: [FamilySortInput]
+  $first: Int
+  $after: String
+) {
+  families(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...FamilyWithAddress
+    }
+  }
+}
+
+query family($id: ID!, $contactsSort: [FamilyContactSortInput]) {
+  family(id: $id) {
+    ...FamilyDetails
+    contacts(sort: $contactsSort) {
+      ...FamilyContact
+    }
+  }
+  personTypes(first: 1000) {
+    results {
+      ...PersonType
+    }
+  }
+}
+
+query familyWithRelatives($id: ID!, $relativesSort: [FamilySortInput]) {
+  family(id: $id) {
+    ...Family
+    children(sort: $relativesSort) {
+      ...Family
+    }
+    parents(sort: $relativesSort) {
+      ...Family
+    }
+  }
+}

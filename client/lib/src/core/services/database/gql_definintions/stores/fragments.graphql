@@ -51,13 +51,6 @@ fragment StoreAdminFamily on Family {
   photoUpdatedAt
   blurhash
   dataCheck {
-    id
-    familyId
-    isComplete
-    completenessPercent
-    familyCheck
-    addressCheck
-    userOverride
-    details
+    ...DataCheck
   }
 }

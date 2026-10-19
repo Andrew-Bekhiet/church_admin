@@ -245,40 +245,41 @@ class FakeAshTablesLink extends Link {
       };
     }
 
-    if (tables.firstWhereOrNull((table) => table.getRoot == root)
-        case final table?) {
-      return {
-        '__typename': 'Query',
-        root: switch (table.rows.firstWhereOrNull(
-          (row) => row['id'] == variables['id'],
-        )) {
-          final row? => _withNestedLists(
-            table,
-            row,
-            _rootSelections(request.operation.document),
-            variables,
-          ),
-          null => null,
-        },
-      };
-    }
-
-    final table = tables.singleWhere((table) => table.listRoot == root);
-
     return {
       '__typename': 'Query',
-      root: _page(table, variables, request.operation.document),
+      for (final field in _rootFields(request.operation.document))
+        (field.alias ?? field.name).value: _queryRootValue(field, variables),
     };
   }
 
-  List<SelectionNode> _rootSelections(DocumentNode document) =>
-      document.definitions
-          .whereType<OperationDefinitionNode>()
-          .first
-          .rootField
-          .selectionSet
-          ?.selections ??
-      const [];
+  Object? _queryRootValue(FieldNode field, Json variables) {
+    final root = (field.alias ?? field.name).value;
+    final selections = field.selectionSet?.selections ?? const [];
+
+    if (tables.firstWhereOrNull((table) => table.getRoot == root)
+        case final table?) {
+      return switch (table.rows.firstWhereOrNull(
+        (row) => row['id'] == variables['id'],
+      )) {
+        final row? => _withNestedLists(table, row, selections, variables),
+        null => null,
+      };
+    }
+
+    return _page(
+      tables.singleWhere((table) => table.listRoot == root),
+      variables,
+      selections,
+    );
+  }
+
+  Iterable<FieldNode> _rootFields(DocumentNode document) => document.definitions
+      .whereType<OperationDefinitionNode>()
+      .first
+      .selectionSet
+      .selections
+      .whereType<FieldNode>()
+      .where((field) => field.name.value != '__typename');
 
   Json? _write(String root, Json variables) {
     final input = (variables['input'] as Map?)?.cast<String, dynamic>();
@@ -298,7 +299,11 @@ class FakeAshTablesLink extends Link {
         .deleteById(id!);
   }
 
-  Json _page(FakeAshTable table, Json variables, DocumentNode document) {
+  Json _page(
+    FakeAshTable table,
+    Json variables,
+    List<SelectionNode> rootSelections,
+  ) {
     final matching = table.rows
         .where((row) => _matches(table, row, variables['filter'] as Map?))
         .toList();
@@ -310,7 +315,7 @@ class FakeAshTablesLink extends Link {
     final first = variables['first'] as int? ?? matching.length;
 
     final rowSelections = [
-      for (final field in _rootSelections(document).whereType<FieldNode>())
+      for (final field in rootSelections.whereType<FieldNode>())
         if (field.name.value == 'results') ...?field.selectionSet?.selections,
     ];
     final results = [

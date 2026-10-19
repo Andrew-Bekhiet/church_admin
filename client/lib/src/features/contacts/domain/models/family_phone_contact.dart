@@ -40,6 +40,14 @@ class FamilyPhoneContact with Equatable {
     };
   }
 
+  Input_FamilyContactInput toFamilyContactInput() =>
+      Input_FamilyContactInput.fromJson({
+        'phone': contact.phone,
+        'personTypeId': role.id,
+        'label': contact.label,
+        'isMainPhone': contact.isMainPhone,
+      });
+
   FamilyPhoneContact copyWith({PhoneContact? contact}) => FamilyPhoneContact(
     contact: contact ?? this.contact,
     role: role,

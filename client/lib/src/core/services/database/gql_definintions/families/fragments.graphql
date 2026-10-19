@@ -1,0 +1,103 @@
+fragment Family on Family {
+  id
+  name
+  color
+  userCanEdit
+  photoUpdatedAt
+  blurhash
+  dataCheck {
+    ...DataCheck
+  }
+}
+
+fragment FamilyWithAddress on Family {
+  ...Family
+  status
+  deceasedSpouseName
+  marriageDate
+  address {
+    ...FamilyAddress
+  }
+}
+
+fragment FamilyDetails on Family {
+  ...FamilyWithAddress
+  church {
+    id
+    name
+  }
+  notes
+  latestEdit {
+    ...FamilyLatestEdit
+  }
+  latestVisit {
+    ...FamilyLatestVisit
+  }
+  latestFatherVisit {
+    ...FamilyLatestFatherVisit
+  }
+}
+
+fragment FamilyAddress on Address {
+  id
+  countryIsoCode
+  area {
+    ...Area
+  }
+  district {
+    id
+    name
+  }
+  street {
+    ...Street
+  }
+  substreetName
+  fullAddressText
+  geolocation
+  houseCode
+  storeyNumber
+  apartmentNumber
+  specialLandmark
+}
+
+fragment FamilyContact on FamilyContact {
+  id
+  personId
+  label
+  phone
+  isMainPhone
+  effectivePersonTypeId
+}
+
+fragment FamilyUser on User {
+  id
+  uid
+  name
+  email
+  photoUpdatedAt
+  blurhash
+}
+
+fragment FamilyLatestEdit on LatestEdit {
+  id
+  time
+  user {
+    ...FamilyUser
+  }
+}
+
+fragment FamilyLatestVisit on LatestVisit {
+  id
+  time
+  user {
+    ...FamilyUser
+  }
+}
+
+fragment FamilyLatestFatherVisit on LatestFatherVisit {
+  id
+  time
+  user {
+    ...FamilyUser
+  }
+}

@@ -213,14 +213,6 @@ abstract final class _$AdvancedQueriesMetadata {
     fromJson: ClassesPersons.fromJson,
   );
 
-  final familiesFamilies = QueryableType<FamiliesFamilies>(
-    name: 'FamiliesFamilies',
-    label: 'العائلات',
-    fieldsMetadata: FamiliesFamiliesFields().allFields,
-    fieldsMetadataByName: FamiliesFamiliesFields().allFieldsByName,
-    fromJson: FamiliesFamilies.fromJson,
-  );
-
   final personsGroups = QueryableType<PersonsGroups>(
     name: 'PersonsGroups',
     label: 'مجموعات المخدوم',
@@ -387,7 +379,6 @@ abstract final class _$AdvancedQueriesMetadata {
     qualification,
     areasStreets,
     classesPersons,
-    familiesFamilies,
     personsGroups,
     personsHobbies,
     personsServices,
@@ -431,7 +422,6 @@ abstract final class _$AdvancedQueriesMetadata {
     Qualification: qualification,
     AreasStreets: areasStreets,
     ClassesPersons: classesPersons,
-    FamiliesFamilies: familiesFamilies,
     PersonsGroups: personsGroups,
     PersonsHobbies: personsHobbies,
     PersonsServices: personsServices,
