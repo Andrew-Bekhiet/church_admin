@@ -20,7 +20,7 @@ defmodule ChurchAdmin.People.Contact do
   graphql do
     type :contact
 
-    relationships [:person, :family]
+    relationships [:person, :person_type, :family]
 
     queries do
       list :contacts, :read
