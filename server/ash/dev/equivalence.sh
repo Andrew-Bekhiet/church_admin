@@ -1,13 +1,16 @@
 #!/bin/sh
-# Equivalence harness (ENG-266 decision 12): loads FIXTURE (an SQL file, later
-# the seed generator's output) into a database built by the Ecto baseline
+# Equivalence harness (ENG-266 decision 12): loads the enums and services
+# reference seeds, then FIXTURE (an SQL file, e.g. the seed generator's
+# priv/repo/seeds/generated/small.sql), into a database built by the Ecto baseline
 # only, starts master's Hasura (BASELINE_REF's metadata, migrations skipped)
 # on it, and lets dev/equivalence.exs compare per user and root what Hasura
 # and Ash return. Writes the mismatches to OUT as CSV; exits 1 if there are
 # any. Uids default to every auth.users_data uid plus an anonymous request.
-# The scratch stack is torn down on exit.
+# The scratch stack is torn down on exit. EQUIVALENCE_PROJECT names the compose
+# project (default church-admin-ash-equivalence), so concurrent runs need
+# distinct projects as well as distinct ports.
 #
-#   dev/equivalence.sh FIXTURE.sql OUT.csv [uid ...]
+#   [EQUIVALENCE_PROJECT=name] dev/equivalence.sh FIXTURE.sql OUT.csv [uid ...]
 set -eu
 
 if [ "$#" -lt 2 ]; then
@@ -26,7 +29,7 @@ db_port="${EQUIVALENCE_DB_PORT:-55502}"
 hasura_port="${EQUIVALENCE_HASURA_PORT:-55580}"
 secret=church-admin-ash-equivalence
 work_dir="$(mktemp -d)"
-project=church-admin-ash-equivalence
+project="${EQUIVALENCE_PROJECT:-church-admin-ash-equivalence}"
 
 compose() {
   HASURA_DIR="$work_dir/server/hasura" EQUIVALENCE_DB_PORT="$db_port" \
@@ -50,8 +53,10 @@ compose up --detach --build --wait postgres >&2
 (cd "$app_dir" && MIX_ENV=dev DB_PORT="$db_port" DB_PASSWORD="$secret" \
   mix ecto.migrate --to "$last_baseline_version" >&2)
 
-compose exec -T postgres psql --username postgres --dbname church_admin \
-  --set ON_ERROR_STOP=1 --quiet <"$fixture" >&2
+for seed in "$app_dir"/priv/repo/seeds/*.sql "$fixture"; do
+  compose exec -T postgres psql --username postgres --dbname church_admin \
+    --set ON_ERROR_STOP=1 --quiet <"$seed" >&2
+done
 
 echo "starting master's Hasura on it..." >&2
 compose --profile hasura up --detach --build --wait hasura >&2
