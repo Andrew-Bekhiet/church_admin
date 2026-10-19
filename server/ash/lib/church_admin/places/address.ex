@@ -7,7 +7,7 @@ defmodule ChurchAdmin.Places.Address do
 
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.People.Family
-  alias ChurchAdmin.Places.Calculations.IntersectsGeography
+  alias ChurchAdmin.Places.Calculations.{FullAddressText, IntersectsGeography}
   alias ChurchAdmin.Places.{Area, District, Store, Street}
   alias ChurchAdmin.Types.{Geography, Text}
 
@@ -108,6 +108,8 @@ defmodule ChurchAdmin.Places.Address do
   end
 
   calculations do
+    calculate :full_address_text, :string, FullAddressText, public?: true
+
     calculate :within_polygon,
               :boolean,
               {IntersectsGeography, attribute: :geolocation, argument: :polygon} do
