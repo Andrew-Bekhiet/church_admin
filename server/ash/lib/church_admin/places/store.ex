@@ -12,6 +12,7 @@ defmodule ChurchAdmin.Places.Store do
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
+  alias ChurchAdmin.Authz.Changes.RecheckAfterUpdate
   alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, RelatedInScope, System}
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.Errors.Codes
@@ -93,6 +94,8 @@ defmodule ChurchAdmin.Places.Store do
       validate {ReferencesVisible, attribute: :admin_family_id, resource: Family},
         where: changing(:admin_family_id)
 
+      change set_context(%{skip_scope_recheck?: true})
+      change {RecheckAfterUpdate, skippable?: false}
       change {ApplyOwnerAddress, owner: :store_id}
 
       change {InvariantHolds,

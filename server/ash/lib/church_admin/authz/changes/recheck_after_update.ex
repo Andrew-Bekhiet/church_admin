@@ -9,7 +9,11 @@ defmodule ChurchAdmin.Authz.Changes.RecheckAfterUpdate do
   `{ChurchAdmin.Authz.Checks.InScope, access: :edit}`. An internal action that
   writes on behalf of another command (the meeting's archive clearing its
   owner's default meeting) opts out with `set_context(%{skip_scope_recheck?:
-  true})`; the command's own policy has authorized it. The change is not
+  true})`; the command's own policy has authorized it. A command that
+  rechecks at its own point instead (the family update, before it moves the
+  address, as Hasura checked the family row before the address root field)
+  skips the resource-wide recheck and declares its own with
+  `skippable?: false`. The change is not
   atomic: Ash runs a fully atomic update's after-action hooks outside a
   transaction it could roll back, so an update using it sets
   `require_atomic? false`.
@@ -25,7 +29,8 @@ defmodule ChurchAdmin.Authz.Changes.RecheckAfterUpdate do
   @impl true
   def change(changeset, opts, context) do
     Ash.Changeset.after_action(changeset, fn changeset, record ->
-      if skip_recheck?(changeset) or still_matches?(changeset, record, opts, context.actor) do
+      if (Keyword.get(opts, :skippable?, true) and skip_recheck?(changeset)) or
+           still_matches?(changeset, record, opts, context.actor) do
         {:ok, record}
       else
         AfterActionFailure.roll_back(changeset.resource, Ash.Error.Forbidden.exception([]))
