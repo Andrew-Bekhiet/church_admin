@@ -50,14 +50,17 @@ defmodule ChurchAdminWeb.Graphql.OrganizationAttendanceMutationsTest do
             "name" => "Graph service",
             "studyYearFromId" => 1,
             "studyYearToId" => 3,
-            "defaultMeeting" => %{"name" => "Graph meeting", "audience" => "onlyPersons"}
+            "defaultMeeting" => %{"name" => "Graph meeting", "audience" => "ONLY_PERSONS"}
           }
         }
       )
 
     assert %{"result" => result, "errors" => []} = response["data"]["createService"]
     assert result["name"] == "Graph service"
-    assert %{"name" => "Graph meeting", "serviceId" => service_id} = result["defaultMeeting"]
+
+    assert %{"name" => "Graph meeting", "audience" => "ONLY_PERSONS", "serviceId" => service_id} =
+             result["defaultMeeting"]
+
     assert service_id == result["id"]
   end
 
@@ -146,16 +149,22 @@ defmodule ChurchAdminWeb.Graphql.OrganizationAttendanceMutationsTest do
         writer,
         """
         mutation($service: ID!) {
-          createMeeting(input: {name: "Meeting", serviceId: $service, audience: "personsAndServants", showKodasCheckbox: true}) {
-            result { id name isArchived }
+          createMeeting(input: {name: "Meeting", serviceId: $service, audience: PERSONS_AND_SERVANTS, showKodasCheckbox: true}) {
+            result { id name isArchived audience }
           }
         }
         """,
         %{"service" => service.id}
       )
 
-    assert %{"id" => meeting_id, "isArchived" => false} =
+    assert %{"id" => meeting_id, "isArchived" => false, "audience" => "PERSONS_AND_SERVANTS"} =
              meeting["data"]["createMeeting"]["result"]
+
+    assert %{rows: [["personsAndServants"]]} =
+             Repo.query!(
+               "select audience::text from history.meetings where id = $1",
+               [Ecto.UUID.dump!(meeting_id)]
+             )
 
     renamed =
       run(

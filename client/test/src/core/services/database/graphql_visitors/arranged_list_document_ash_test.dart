@@ -41,14 +41,17 @@ void main() {
     expect(validity.problemsOf(document), isNotEmpty);
   });
 
-  test('a Hasura document keeps the sub-selection of the field', () {
-    final document =
-        ArrangedListDocument(
-          parseString('query families { families { id name } }'),
-        ).arrangedBy(
-          ListArrangement(orderBy: [OrderBy(field: FamilyFields().lastEdit)]),
-        );
+  test(
+    'a document that is not a keyset page keeps the sub-selection of the field',
+    () {
+      final document =
+          ArrangedListDocument(
+            parseString('query families { families { id name } }'),
+          ).arrangedBy(
+            ListArrangement(orderBy: [OrderBy(field: FamilyFields().lastEdit)]),
+          );
 
-    expect(printNode(document), isNot(contains('latestEdit')));
-  });
+      expect(printNode(document), isNot(contains('latestEdit')));
+    },
+  );
 }

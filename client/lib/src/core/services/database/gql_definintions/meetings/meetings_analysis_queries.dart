@@ -1,14 +1,12 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.graphql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meeting_rows_reader.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meetings_analysis_scope.dart';
 
 class MeetingsAnalysisQueries {
   final DatabaseService db;
-  final MeetingRowsReader _rows;
+  final KeysetRowsReader _rows;
 
-  MeetingsAnalysisQueries(this.db)
-    : _rows = MeetingRowsReader(db.graphQLClient);
+  MeetingsAnalysisQueries(this.db) : _rows = KeysetRowsReader(db.graphQLClient);
 
   Future<List<PersonMeetingAttendanceAnalysis>> personAttendance({
     required String personId,

@@ -1,5 +1,6 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../classes/__generated__/fragments.graphql.dart';
+import '../../gql/__generated__/fragments.graphql.dart';
 import '../../groups/__generated__/fragments.graphql.dart';
 import '../../metadata/study_years/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
@@ -1605,7 +1606,7 @@ const documentNodeQueryservice = DocumentNode(
     fragmentDefinitionStudyYear,
     fragmentDefinitionOrgMeeting,
     fragmentDefinitionGroupNoPhoto,
-    fragmentDefinitionOrgLatestEdit,
-    fragmentDefinitionOrgUser,
+    fragmentDefinitionLatestEdit,
+    fragmentDefinitionUser,
   ],
 );

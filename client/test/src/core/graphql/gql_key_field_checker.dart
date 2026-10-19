@@ -33,9 +33,9 @@ class GqlSchemaIndex {
 
     if (roots.isEmpty) {
       const fallback = {
-        OperationType.query: 'query_root',
-        OperationType.mutation: 'mutation_root',
-        OperationType.subscription: 'subscription_root',
+        OperationType.query: 'Query',
+        OperationType.mutation: 'Mutation',
+        OperationType.subscription: 'Subscription',
       };
       for (final entry in fallback.entries) {
         if (objectFields.containsKey(entry.value)) {
@@ -95,22 +95,6 @@ class KeyFieldViolation {
 
 /// Decides whether a single object selection satisfies its keying rules.
 class KeyFieldRules {
-  static const hasuraTransientSuffixes = [
-    'Aggregate',
-    'AggregateFields',
-    'AvgFields',
-    'MaxFields',
-    'MinFields',
-    'SumFields',
-    'StddevFields',
-    'StddevPopFields',
-    'StddevSampFields',
-    'VarPopFields',
-    'VarSampFields',
-    'VarianceFields',
-    'MutationResponse',
-  ];
-
   /// Ash page wrappers (`KeysetPageOfChurch`) and mutation payloads
   /// (`CreateChurchResult`) live only inside the response that carries them.
   static const ashTransientPrefixes = ['KeysetPageOf', 'PageOf'];

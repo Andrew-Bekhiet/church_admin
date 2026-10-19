@@ -36,28 +36,10 @@ fragment ServiceDetails on Service {
     ...OrgMeeting
   }
   latestEdit {
-    ...OrgLatestEdit
+    ...LatestEdit
   }
   admins {
-    ...OrgUser
-  }
-}
-
-fragment OrgUser on User {
-  id
-  uid
-  name
-  email
-  photoUpdatedAt
-  blurhash
-}
-
-fragment OrgLatestEdit on LatestEdit {
-  id
-  time
-  recordedBy
-  user {
-    ...OrgUser
+    ...User
   }
 }
 

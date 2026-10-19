@@ -25,9 +25,9 @@ fragment GroupDetails on Group {
     ...ServiceWithStudyYears
   }
   latestEdit {
-    ...OrgLatestEdit
+    ...LatestEdit
   }
   admins {
-    ...OrgUser
+    ...User
   }
 }

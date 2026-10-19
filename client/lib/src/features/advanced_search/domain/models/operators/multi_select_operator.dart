@@ -26,43 +26,6 @@ enum MultiSelectOperator<V extends Object> implements Operator<List<V>?> {
   const MultiSelectOperator._(this.name, this.label);
 
   @override
-  Json queryToJson(FieldMetadata field, List<V>? filterValue) {
-    if (filterValue == null || this == MultiSelectOperator.isNotEmpty) {
-      return field.queryToJson({});
-    } else if (this == MultiSelectOperator.isEmpty) {
-      return {'_not': field.queryToJson({})};
-    }
-
-    final keyField = field.fieldQueryableType?.keyField;
-    final value = switch (filterValue) {
-      final List<ViewableEnumWithID> filterValue => {
-        name: filterValue.map((e) => e.id).toList(),
-      },
-      final List<String> filterValue => {
-        name: filterValue,
-      },
-      final List<Object> filterValue
-          when keyField != null && field.referencedObjectType == null =>
-        {name: filterValue.map(keyField.getValue).toList()},
-      final List<Object> filterValue when keyField != null => {
-        keyField.name: {
-          name: filterValue.map(keyField.getValue).toList(),
-        },
-      },
-      final List<ID> filterValue => {
-        'id': {
-          name: filterValue.map((e) => e.id).toList(),
-        },
-      },
-      _ => throw UnsupportedError(
-        'MultiSelectOperator does not support $name: $filterValue',
-      ),
-    };
-
-    return field.queryToJson(value);
-  }
-
-  @override
   Object? serializeValue(List<V>? value) {
     return switch (this) {
       MultiSelectOperator.isNotEmpty => null,

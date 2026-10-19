@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/data_check_free_documents.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meeting_rows_reader.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/mutations.graphql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.graphql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/person_command_inputs.dart';
@@ -39,7 +38,7 @@ class PersonsDAO extends FullCRUDDAO<Person>
   ).toJson();
 
   late final notificationsQueries = PersonsNotificationsQueries(db: db);
-  late final MeetingRowsReader _everyRow = MeetingRowsReader(graphQLClient);
+  late final KeysetRowsReader _everyRow = KeysetRowsReader(graphQLClient);
 
   @override
   StreamAllConfig<Person> get baseStreamAllConfig => StreamAllConfig(

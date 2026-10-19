@@ -1,6 +1,9 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.graphql.dart';
 import '../../classes/__generated__/fragments.graphql.dart';
+import '../../contacts/__generated__/fragments.graphql.dart';
+import '../../data_checks/__generated__/fragments.graphql.dart';
+import '../../gql/__generated__/fragments.graphql.dart';
 import '../../groups/__generated__/fragments.graphql.dart';
 import '../../metadata/churches/__generated__/fragments.graphql.dart';
 import '../../metadata/colleges/__generated__/fragments.graphql.dart';
@@ -481,7 +484,7 @@ const documentNodeQuerypersons = DocumentNode(
     ),
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
-    fragmentDefinitionPersonDataCheck,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -1133,7 +1136,7 @@ const documentNodeQueryperson = DocumentNode(
                   selectionSet: SelectionSetNode(
                     selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'PersonFamilyContact'),
+                        name: NameNode(value: 'FamilyContact'),
                         directives: [],
                       ),
                       FieldNode(
@@ -1169,27 +1172,27 @@ const documentNodeQueryperson = DocumentNode(
     fragmentDefinitionPersonDetails,
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
-    fragmentDefinitionPersonDataCheck,
-    fragmentDefinitionPersonAddress,
+    fragmentDefinitionDataCheck,
+    fragmentDefinitionAddress,
     fragmentDefinitionArea,
     fragmentDefinitionDistrict,
     fragmentDefinitionStreet,
     fragmentDefinitionClass,
     fragmentDefinitionClassNoPhoto,
     fragmentDefinitionChurch,
-    fragmentDefinitionPersonContact,
+    fragmentDefinitionContact,
     fragmentDefinitionCollege,
     fragmentDefinitionPersonFamily,
     fragmentDefinitionFather,
     fragmentDefinitionGroup,
     fragmentDefinitionGroupNoPhoto,
     fragmentDefinitionJob,
-    fragmentDefinitionPersonLatestCall,
-    fragmentDefinitionPersonUser,
-    fragmentDefinitionPersonLatestConfession,
-    fragmentDefinitionPersonLatestEdit,
-    fragmentDefinitionPersonLatestKodas,
-    fragmentDefinitionPersonLatestVisit,
+    fragmentDefinitionLatestCall,
+    fragmentDefinitionUser,
+    fragmentDefinitionLatestConfession,
+    fragmentDefinitionLatestEdit,
+    fragmentDefinitionLatestKodas,
+    fragmentDefinitionLatestVisit,
     fragmentDefinitionPersonType,
     fragmentDefinitionQualification,
     fragmentDefinitionSchool,
@@ -1201,7 +1204,7 @@ const documentNodeQueryperson = DocumentNode(
     fragmentDefinitionPersonState,
     fragmentDefinitionHobby,
     fragmentDefinitionTag,
-    fragmentDefinitionPersonFamilyContact,
+    fragmentDefinitionFamilyContact,
   ],
 );
 
@@ -1311,14 +1314,10 @@ class Query_person_person
       blurhash: (l$blurhash as String?),
       dataCheck: l$dataCheck == null
           ? null
-          : Fragment_PersonDataCheck.fromJson(
-              (l$dataCheck as Map<String, dynamic>),
-            ),
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
       address: l$address == null
           ? null
-          : Fragment_PersonAddress.fromJson(
-              (l$address as Map<String, dynamic>),
-            ),
+          : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
       birthdate: l$birthdate == null ? null : dateFromString(l$birthdate),
       classMemberships: (l$classMemberships as List<dynamic>)
           .map(
@@ -1331,9 +1330,7 @@ class Query_person_person
           ? null
           : Fragment_Church.fromJson((l$church as Map<String, dynamic>)),
       contacts: (l$contacts as List<dynamic>)
-          .map(
-            (e) => Fragment_PersonContact.fromJson((e as Map<String, dynamic>)),
-          )
+          .map((e) => Fragment_Contact.fromJson((e as Map<String, dynamic>)))
           .toList(),
       college: l$college == null
           ? null
@@ -1367,27 +1364,27 @@ class Query_person_person
       jobDescription: (l$jobDescription as String?),
       latestCall: l$latestCall == null
           ? null
-          : Fragment_PersonLatestCall.fromJson(
+          : Fragment_LatestCall.fromJson(
               (l$latestCall as Map<String, dynamic>),
             ),
       latestConfession: l$latestConfession == null
           ? null
-          : Fragment_PersonLatestConfession.fromJson(
+          : Fragment_LatestConfession.fromJson(
               (l$latestConfession as Map<String, dynamic>),
             ),
       latestEdit: l$latestEdit == null
           ? null
-          : Fragment_PersonLatestEdit.fromJson(
+          : Fragment_LatestEdit.fromJson(
               (l$latestEdit as Map<String, dynamic>),
             ),
       latestKodas: l$latestKodas == null
           ? null
-          : Fragment_PersonLatestKodas.fromJson(
+          : Fragment_LatestKodas.fromJson(
               (l$latestKodas as Map<String, dynamic>),
             ),
       latestVisit: l$latestVisit == null
           ? null
-          : Fragment_PersonLatestVisit.fromJson(
+          : Fragment_LatestVisit.fromJson(
               (l$latestVisit as Map<String, dynamic>),
             ),
       notes: (l$notes as String?),
@@ -1432,12 +1429,10 @@ class Query_person_person
       uid: (l$uid as String?),
       user: l$user == null
           ? null
-          : Fragment_PersonUser.fromJson((l$user as Map<String, dynamic>)),
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
       familyContacts: (l$familyContacts as List<dynamic>)
           .map(
-            (e) => Fragment_PersonFamilyContact.fromJson(
-              (e as Map<String, dynamic>),
-            ),
+            (e) => Fragment_FamilyContact.fromJson((e as Map<String, dynamic>)),
           )
           .toList(),
     );
@@ -1457,9 +1452,9 @@ class Query_person_person
 
   final String? blurhash;
 
-  final Fragment_PersonDataCheck? dataCheck;
+  final Fragment_DataCheck? dataCheck;
 
-  final Fragment_PersonAddress? address;
+  final Fragment_Address? address;
 
   final DateTime? birthdate;
 
@@ -1467,7 +1462,7 @@ class Query_person_person
 
   final Fragment_Church? church;
 
-  final List<Fragment_PersonContact> contacts;
+  final List<Fragment_Contact> contacts;
 
   final Fragment_College? college;
 
@@ -1493,15 +1488,15 @@ class Query_person_person
 
   final String? jobDescription;
 
-  final Fragment_PersonLatestCall? latestCall;
+  final Fragment_LatestCall? latestCall;
 
-  final Fragment_PersonLatestConfession? latestConfession;
+  final Fragment_LatestConfession? latestConfession;
 
-  final Fragment_PersonLatestEdit? latestEdit;
+  final Fragment_LatestEdit? latestEdit;
 
-  final Fragment_PersonLatestKodas? latestKodas;
+  final Fragment_LatestKodas? latestKodas;
 
-  final Fragment_PersonLatestVisit? latestVisit;
+  final Fragment_LatestVisit? latestVisit;
 
   final String? notes;
 
@@ -1527,9 +1522,9 @@ class Query_person_person
 
   final String? uid;
 
-  final Fragment_PersonUser? user;
+  final Fragment_User? user;
 
-  final List<Fragment_PersonFamilyContact> familyContacts;
+  final List<Fragment_FamilyContact> familyContacts;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -2033,12 +2028,12 @@ abstract class CopyWith_Query_person_person<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
-    Fragment_PersonAddress? address,
+    Fragment_DataCheck? dataCheck,
+    Fragment_Address? address,
     DateTime? birthdate,
     List<Query_person_person_classMemberships>? classMemberships,
     Fragment_Church? church,
-    List<Fragment_PersonContact>? contacts,
+    List<Fragment_Contact>? contacts,
     Fragment_College? college,
     Fragment_PersonFamily? family,
     Query_person_person_father? father,
@@ -2051,11 +2046,11 @@ abstract class CopyWith_Query_person_person<TRes> {
     String? workStatus,
     Fragment_Job? job,
     String? jobDescription,
-    Fragment_PersonLatestCall? latestCall,
-    Fragment_PersonLatestConfession? latestConfession,
-    Fragment_PersonLatestEdit? latestEdit,
-    Fragment_PersonLatestKodas? latestKodas,
-    Fragment_PersonLatestVisit? latestVisit,
+    Fragment_LatestCall? latestCall,
+    Fragment_LatestConfession? latestConfession,
+    Fragment_LatestEdit? latestEdit,
+    Fragment_LatestKodas? latestKodas,
+    Fragment_LatestVisit? latestVisit,
     String? notes,
     String? martialStatus,
     Fragment_PersonType? personType,
@@ -2068,11 +2063,11 @@ abstract class CopyWith_Query_person_person<TRes> {
     List<Fragment_Hobby>? hobbies,
     List<Fragment_Tag>? tags,
     String? uid,
-    Fragment_PersonUser? user,
-    List<Fragment_PersonFamilyContact>? familyContacts,
+    Fragment_User? user,
+    List<Fragment_FamilyContact>? familyContacts,
   });
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck;
-  CopyWith_Fragment_PersonAddress<TRes> get address;
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
+  CopyWith_Fragment_Address<TRes> get address;
   TRes classMemberships(
     Iterable<Query_person_person_classMemberships> Function(
       Iterable<
@@ -2085,8 +2080,8 @@ abstract class CopyWith_Query_person_person<TRes> {
   );
   CopyWith_Fragment_Church<TRes> get church;
   TRes contacts(
-    Iterable<Fragment_PersonContact> Function(
-      Iterable<CopyWith_Fragment_PersonContact<Fragment_PersonContact>>,
+    Iterable<Fragment_Contact> Function(
+      Iterable<CopyWith_Fragment_Contact<Fragment_Contact>>,
     )
     _fn,
   );
@@ -2105,11 +2100,11 @@ abstract class CopyWith_Query_person_person<TRes> {
   );
   CopyWith_Fragment_Church<TRes> get servingChurch;
   CopyWith_Fragment_Job<TRes> get job;
-  CopyWith_Fragment_PersonLatestCall<TRes> get latestCall;
-  CopyWith_Fragment_PersonLatestConfession<TRes> get latestConfession;
-  CopyWith_Fragment_PersonLatestEdit<TRes> get latestEdit;
-  CopyWith_Fragment_PersonLatestKodas<TRes> get latestKodas;
-  CopyWith_Fragment_PersonLatestVisit<TRes> get latestVisit;
+  CopyWith_Fragment_LatestCall<TRes> get latestCall;
+  CopyWith_Fragment_LatestConfession<TRes> get latestConfession;
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit;
+  CopyWith_Fragment_LatestKodas<TRes> get latestKodas;
+  CopyWith_Fragment_LatestVisit<TRes> get latestVisit;
   CopyWith_Fragment_PersonType<TRes> get personType;
   CopyWith_Fragment_Qualification<TRes> get qualification;
   CopyWith_Fragment_School<TRes> get school;
@@ -2138,12 +2133,10 @@ abstract class CopyWith_Query_person_person<TRes> {
     )
     _fn,
   );
-  CopyWith_Fragment_PersonUser<TRes> get user;
+  CopyWith_Fragment_User<TRes> get user;
   TRes familyContacts(
-    Iterable<Fragment_PersonFamilyContact> Function(
-      Iterable<
-        CopyWith_Fragment_PersonFamilyContact<Fragment_PersonFamilyContact>
-      >,
+    Iterable<Fragment_FamilyContact> Function(
+      Iterable<CopyWith_Fragment_FamilyContact<Fragment_FamilyContact>>,
     )
     _fn,
   );
@@ -2225,10 +2218,10 @@ class _CopyWithImpl_Query_person_person<TRes>
           : (blurhash as String?),
       dataCheck: dataCheck == _undefined
           ? _instance.dataCheck
-          : (dataCheck as Fragment_PersonDataCheck?),
+          : (dataCheck as Fragment_DataCheck?),
       address: address == _undefined
           ? _instance.address
-          : (address as Fragment_PersonAddress?),
+          : (address as Fragment_Address?),
       birthdate: birthdate == _undefined
           ? _instance.birthdate
           : (birthdate as DateTime?),
@@ -2241,7 +2234,7 @@ class _CopyWithImpl_Query_person_person<TRes>
           : (church as Fragment_Church?),
       contacts: contacts == _undefined || contacts == null
           ? _instance.contacts
-          : (contacts as List<Fragment_PersonContact>),
+          : (contacts as List<Fragment_Contact>),
       college: college == _undefined
           ? _instance.college
           : (college as Fragment_College?),
@@ -2279,19 +2272,19 @@ class _CopyWithImpl_Query_person_person<TRes>
           : (jobDescription as String?),
       latestCall: latestCall == _undefined
           ? _instance.latestCall
-          : (latestCall as Fragment_PersonLatestCall?),
+          : (latestCall as Fragment_LatestCall?),
       latestConfession: latestConfession == _undefined
           ? _instance.latestConfession
-          : (latestConfession as Fragment_PersonLatestConfession?),
+          : (latestConfession as Fragment_LatestConfession?),
       latestEdit: latestEdit == _undefined
           ? _instance.latestEdit
-          : (latestEdit as Fragment_PersonLatestEdit?),
+          : (latestEdit as Fragment_LatestEdit?),
       latestKodas: latestKodas == _undefined
           ? _instance.latestKodas
-          : (latestKodas as Fragment_PersonLatestKodas?),
+          : (latestKodas as Fragment_LatestKodas?),
       latestVisit: latestVisit == _undefined
           ? _instance.latestVisit
-          : (latestVisit as Fragment_PersonLatestVisit?),
+          : (latestVisit as Fragment_LatestVisit?),
       notes: notes == _undefined ? _instance.notes : (notes as String?),
       martialStatus: martialStatus == _undefined || martialStatus == null
           ? _instance.martialStatus
@@ -2326,33 +2319,28 @@ class _CopyWithImpl_Query_person_person<TRes>
           ? _instance.tags
           : (tags as List<Fragment_Tag>),
       uid: uid == _undefined ? _instance.uid : (uid as String?),
-      user: user == _undefined
-          ? _instance.user
-          : (user as Fragment_PersonUser?),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
       familyContacts: familyContacts == _undefined || familyContacts == null
           ? _instance.familyContacts
-          : (familyContacts as List<Fragment_PersonFamilyContact>),
+          : (familyContacts as List<Fragment_FamilyContact>),
     ),
   );
 
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck {
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
     final local$dataCheck = _instance.dataCheck;
     return local$dataCheck == null
-        ? CopyWith_Fragment_PersonDataCheck.stub(_then(_instance))
-        : CopyWith_Fragment_PersonDataCheck(
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
             local$dataCheck,
             (e) => call(dataCheck: e),
           );
   }
 
-  CopyWith_Fragment_PersonAddress<TRes> get address {
+  CopyWith_Fragment_Address<TRes> get address {
     final local$address = _instance.address;
     return local$address == null
-        ? CopyWith_Fragment_PersonAddress.stub(_then(_instance))
-        : CopyWith_Fragment_PersonAddress(
-            local$address,
-            (e) => call(address: e),
-          );
+        ? CopyWith_Fragment_Address.stub(_then(_instance))
+        : CopyWith_Fragment_Address(local$address, (e) => call(address: e));
   }
 
   TRes classMemberships(
@@ -2380,15 +2368,13 @@ class _CopyWithImpl_Query_person_person<TRes>
   }
 
   TRes contacts(
-    Iterable<Fragment_PersonContact> Function(
-      Iterable<CopyWith_Fragment_PersonContact<Fragment_PersonContact>>,
+    Iterable<Fragment_Contact> Function(
+      Iterable<CopyWith_Fragment_Contact<Fragment_Contact>>,
     )
     _fn,
   ) => call(
     contacts: _fn(
-      _instance.contacts.map(
-        (e) => CopyWith_Fragment_PersonContact(e, (i) => i),
-      ),
+      _instance.contacts.map((e) => CopyWith_Fragment_Contact(e, (i) => i)),
     ).toList(),
   );
 
@@ -2450,51 +2436,51 @@ class _CopyWithImpl_Query_person_person<TRes>
         : CopyWith_Fragment_Job(local$job, (e) => call(job: e));
   }
 
-  CopyWith_Fragment_PersonLatestCall<TRes> get latestCall {
+  CopyWith_Fragment_LatestCall<TRes> get latestCall {
     final local$latestCall = _instance.latestCall;
     return local$latestCall == null
-        ? CopyWith_Fragment_PersonLatestCall.stub(_then(_instance))
-        : CopyWith_Fragment_PersonLatestCall(
+        ? CopyWith_Fragment_LatestCall.stub(_then(_instance))
+        : CopyWith_Fragment_LatestCall(
             local$latestCall,
             (e) => call(latestCall: e),
           );
   }
 
-  CopyWith_Fragment_PersonLatestConfession<TRes> get latestConfession {
+  CopyWith_Fragment_LatestConfession<TRes> get latestConfession {
     final local$latestConfession = _instance.latestConfession;
     return local$latestConfession == null
-        ? CopyWith_Fragment_PersonLatestConfession.stub(_then(_instance))
-        : CopyWith_Fragment_PersonLatestConfession(
+        ? CopyWith_Fragment_LatestConfession.stub(_then(_instance))
+        : CopyWith_Fragment_LatestConfession(
             local$latestConfession,
             (e) => call(latestConfession: e),
           );
   }
 
-  CopyWith_Fragment_PersonLatestEdit<TRes> get latestEdit {
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit {
     final local$latestEdit = _instance.latestEdit;
     return local$latestEdit == null
-        ? CopyWith_Fragment_PersonLatestEdit.stub(_then(_instance))
-        : CopyWith_Fragment_PersonLatestEdit(
+        ? CopyWith_Fragment_LatestEdit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestEdit(
             local$latestEdit,
             (e) => call(latestEdit: e),
           );
   }
 
-  CopyWith_Fragment_PersonLatestKodas<TRes> get latestKodas {
+  CopyWith_Fragment_LatestKodas<TRes> get latestKodas {
     final local$latestKodas = _instance.latestKodas;
     return local$latestKodas == null
-        ? CopyWith_Fragment_PersonLatestKodas.stub(_then(_instance))
-        : CopyWith_Fragment_PersonLatestKodas(
+        ? CopyWith_Fragment_LatestKodas.stub(_then(_instance))
+        : CopyWith_Fragment_LatestKodas(
             local$latestKodas,
             (e) => call(latestKodas: e),
           );
   }
 
-  CopyWith_Fragment_PersonLatestVisit<TRes> get latestVisit {
+  CopyWith_Fragment_LatestVisit<TRes> get latestVisit {
     final local$latestVisit = _instance.latestVisit;
     return local$latestVisit == null
-        ? CopyWith_Fragment_PersonLatestVisit.stub(_then(_instance))
-        : CopyWith_Fragment_PersonLatestVisit(
+        ? CopyWith_Fragment_LatestVisit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestVisit(
             local$latestVisit,
             (e) => call(latestVisit: e),
           );
@@ -2592,24 +2578,22 @@ class _CopyWithImpl_Query_person_person<TRes>
         .toList(),
   );
 
-  CopyWith_Fragment_PersonUser<TRes> get user {
+  CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
-        ? CopyWith_Fragment_PersonUser.stub(_then(_instance))
-        : CopyWith_Fragment_PersonUser(local$user, (e) => call(user: e));
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
   }
 
   TRes familyContacts(
-    Iterable<Fragment_PersonFamilyContact> Function(
-      Iterable<
-        CopyWith_Fragment_PersonFamilyContact<Fragment_PersonFamilyContact>
-      >,
+    Iterable<Fragment_FamilyContact> Function(
+      Iterable<CopyWith_Fragment_FamilyContact<Fragment_FamilyContact>>,
     )
     _fn,
   ) => call(
     familyContacts: _fn(
       _instance.familyContacts.map(
-        (e) => CopyWith_Fragment_PersonFamilyContact(e, (i) => i),
+        (e) => CopyWith_Fragment_FamilyContact(e, (i) => i),
       ),
     ).toList(),
   );
@@ -2629,12 +2613,12 @@ class _CopyWithStubImpl_Query_person_person<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
-    Fragment_PersonAddress? address,
+    Fragment_DataCheck? dataCheck,
+    Fragment_Address? address,
     DateTime? birthdate,
     List<Query_person_person_classMemberships>? classMemberships,
     Fragment_Church? church,
-    List<Fragment_PersonContact>? contacts,
+    List<Fragment_Contact>? contacts,
     Fragment_College? college,
     Fragment_PersonFamily? family,
     Query_person_person_father? father,
@@ -2647,11 +2631,11 @@ class _CopyWithStubImpl_Query_person_person<TRes>
     String? workStatus,
     Fragment_Job? job,
     String? jobDescription,
-    Fragment_PersonLatestCall? latestCall,
-    Fragment_PersonLatestConfession? latestConfession,
-    Fragment_PersonLatestEdit? latestEdit,
-    Fragment_PersonLatestKodas? latestKodas,
-    Fragment_PersonLatestVisit? latestVisit,
+    Fragment_LatestCall? latestCall,
+    Fragment_LatestConfession? latestConfession,
+    Fragment_LatestEdit? latestEdit,
+    Fragment_LatestKodas? latestKodas,
+    Fragment_LatestVisit? latestVisit,
     String? notes,
     String? martialStatus,
     Fragment_PersonType? personType,
@@ -2664,15 +2648,15 @@ class _CopyWithStubImpl_Query_person_person<TRes>
     List<Fragment_Hobby>? hobbies,
     List<Fragment_Tag>? tags,
     String? uid,
-    Fragment_PersonUser? user,
-    List<Fragment_PersonFamilyContact>? familyContacts,
+    Fragment_User? user,
+    List<Fragment_FamilyContact>? familyContacts,
   }) => _res;
 
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck =>
-      CopyWith_Fragment_PersonDataCheck.stub(_res);
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 
-  CopyWith_Fragment_PersonAddress<TRes> get address =>
-      CopyWith_Fragment_PersonAddress.stub(_res);
+  CopyWith_Fragment_Address<TRes> get address =>
+      CopyWith_Fragment_Address.stub(_res);
 
   classMemberships(_fn) => _res;
 
@@ -2697,20 +2681,20 @@ class _CopyWithStubImpl_Query_person_person<TRes>
 
   CopyWith_Fragment_Job<TRes> get job => CopyWith_Fragment_Job.stub(_res);
 
-  CopyWith_Fragment_PersonLatestCall<TRes> get latestCall =>
-      CopyWith_Fragment_PersonLatestCall.stub(_res);
+  CopyWith_Fragment_LatestCall<TRes> get latestCall =>
+      CopyWith_Fragment_LatestCall.stub(_res);
 
-  CopyWith_Fragment_PersonLatestConfession<TRes> get latestConfession =>
-      CopyWith_Fragment_PersonLatestConfession.stub(_res);
+  CopyWith_Fragment_LatestConfession<TRes> get latestConfession =>
+      CopyWith_Fragment_LatestConfession.stub(_res);
 
-  CopyWith_Fragment_PersonLatestEdit<TRes> get latestEdit =>
-      CopyWith_Fragment_PersonLatestEdit.stub(_res);
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit =>
+      CopyWith_Fragment_LatestEdit.stub(_res);
 
-  CopyWith_Fragment_PersonLatestKodas<TRes> get latestKodas =>
-      CopyWith_Fragment_PersonLatestKodas.stub(_res);
+  CopyWith_Fragment_LatestKodas<TRes> get latestKodas =>
+      CopyWith_Fragment_LatestKodas.stub(_res);
 
-  CopyWith_Fragment_PersonLatestVisit<TRes> get latestVisit =>
-      CopyWith_Fragment_PersonLatestVisit.stub(_res);
+  CopyWith_Fragment_LatestVisit<TRes> get latestVisit =>
+      CopyWith_Fragment_LatestVisit.stub(_res);
 
   CopyWith_Fragment_PersonType<TRes> get personType =>
       CopyWith_Fragment_PersonType.stub(_res);
@@ -2736,8 +2720,7 @@ class _CopyWithStubImpl_Query_person_person<TRes>
 
   tags(_fn) => _res;
 
-  CopyWith_Fragment_PersonUser<TRes> get user =>
-      CopyWith_Fragment_PersonUser.stub(_res);
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 
   familyContacts(_fn) => _res;
 }
@@ -6276,7 +6259,7 @@ const documentNodeQueryfamilyUnclaimedContacts = DocumentNode(
                   selectionSet: SelectionSetNode(
                     selections: [
                       FragmentSpreadNode(
-                        name: NameNode(value: 'PersonFamilyContact'),
+                        name: NameNode(value: 'FamilyContact'),
                         directives: [],
                       ),
                       FieldNode(
@@ -6309,7 +6292,7 @@ const documentNodeQueryfamilyUnclaimedContacts = DocumentNode(
         ],
       ),
     ),
-    fragmentDefinitionPersonFamilyContact,
+    fragmentDefinitionFamilyContact,
     fragmentDefinitionPersonType,
   ],
 );
@@ -6328,16 +6311,14 @@ class Query_familyUnclaimedContacts_familyContacts {
     return Query_familyUnclaimedContacts_familyContacts(
       results: (l$results as List<dynamic>?)
           ?.map(
-            (e) => Fragment_PersonFamilyContact.fromJson(
-              (e as Map<String, dynamic>),
-            ),
+            (e) => Fragment_FamilyContact.fromJson((e as Map<String, dynamic>)),
           )
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Fragment_PersonFamilyContact>? results;
+  final List<Fragment_FamilyContact>? results;
 
   final String $__typename;
 
@@ -6412,12 +6393,10 @@ abstract class CopyWith_Query_familyUnclaimedContacts_familyContacts<TRes> {
   factory CopyWith_Query_familyUnclaimedContacts_familyContacts.stub(TRes res) =
       _CopyWithStubImpl_Query_familyUnclaimedContacts_familyContacts;
 
-  TRes call({List<Fragment_PersonFamilyContact>? results, String? $__typename});
+  TRes call({List<Fragment_FamilyContact>? results, String? $__typename});
   TRes results(
-    Iterable<Fragment_PersonFamilyContact>? Function(
-      Iterable<
-        CopyWith_Fragment_PersonFamilyContact<Fragment_PersonFamilyContact>
-      >?,
+    Iterable<Fragment_FamilyContact>? Function(
+      Iterable<CopyWith_Fragment_FamilyContact<Fragment_FamilyContact>>?,
     )
     _fn,
   );
@@ -6441,7 +6420,7 @@ class _CopyWithImpl_Query_familyUnclaimedContacts_familyContacts<TRes>
         Query_familyUnclaimedContacts_familyContacts(
           results: results == _undefined
               ? _instance.results
-              : (results as List<Fragment_PersonFamilyContact>?),
+              : (results as List<Fragment_FamilyContact>?),
           $__typename: $__typename == _undefined || $__typename == null
               ? _instance.$__typename
               : ($__typename as String),
@@ -6449,16 +6428,14 @@ class _CopyWithImpl_Query_familyUnclaimedContacts_familyContacts<TRes>
       );
 
   TRes results(
-    Iterable<Fragment_PersonFamilyContact>? Function(
-      Iterable<
-        CopyWith_Fragment_PersonFamilyContact<Fragment_PersonFamilyContact>
-      >?,
+    Iterable<Fragment_FamilyContact>? Function(
+      Iterable<CopyWith_Fragment_FamilyContact<Fragment_FamilyContact>>?,
     )
     _fn,
   ) => call(
     results: _fn(
       _instance.results?.map(
-        (e) => CopyWith_Fragment_PersonFamilyContact(e, (i) => i),
+        (e) => CopyWith_Fragment_FamilyContact(e, (i) => i),
       ),
     )?.toList(),
   );
@@ -6470,8 +6447,7 @@ class _CopyWithStubImpl_Query_familyUnclaimedContacts_familyContacts<TRes>
 
   TRes _res;
 
-  call({List<Fragment_PersonFamilyContact>? results, String? $__typename}) =>
-      _res;
+  call({List<Fragment_FamilyContact>? results, String? $__typename}) => _res;
 
   results(_fn) => _res;
 }
@@ -8019,7 +7995,7 @@ const documentNodeQuerygeolocatedFamilies = DocumentNode(
       ),
     ),
     fragmentDefinitionPersonFamily,
-    fragmentDefinitionPersonDataCheck,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -8247,9 +8223,7 @@ class Query_geolocatedFamilies_families_results
       blurhash: (l$blurhash as String?),
       dataCheck: l$dataCheck == null
           ? null
-          : Fragment_PersonDataCheck.fromJson(
-              (l$dataCheck as Map<String, dynamic>),
-            ),
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
       address: l$address == null
           ? null
@@ -8271,7 +8245,7 @@ class Query_geolocatedFamilies_families_results
 
   final String? blurhash;
 
-  final Fragment_PersonDataCheck? dataCheck;
+  final Fragment_DataCheck? dataCheck;
 
   final String $__typename;
 
@@ -8409,11 +8383,11 @@ abstract class CopyWith_Query_geolocatedFamilies_families_results<TRes> {
     bool? userCanEdit,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
+    Fragment_DataCheck? dataCheck,
     String? $__typename,
     Query_geolocatedFamilies_families_results_address? address,
   });
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck;
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
   CopyWith_Query_geolocatedFamilies_families_results_address<TRes> get address;
 }
 
@@ -8458,7 +8432,7 @@ class _CopyWithImpl_Query_geolocatedFamilies_families_results<TRes>
           : (blurhash as String?),
       dataCheck: dataCheck == _undefined
           ? _instance.dataCheck
-          : (dataCheck as Fragment_PersonDataCheck?),
+          : (dataCheck as Fragment_DataCheck?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -8468,11 +8442,11 @@ class _CopyWithImpl_Query_geolocatedFamilies_families_results<TRes>
     ),
   );
 
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck {
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
     final local$dataCheck = _instance.dataCheck;
     return local$dataCheck == null
-        ? CopyWith_Fragment_PersonDataCheck.stub(_then(_instance))
-        : CopyWith_Fragment_PersonDataCheck(
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
             local$dataCheck,
             (e) => call(dataCheck: e),
           );
@@ -8504,13 +8478,13 @@ class _CopyWithStubImpl_Query_geolocatedFamilies_families_results<TRes>
     bool? userCanEdit,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
+    Fragment_DataCheck? dataCheck,
     String? $__typename,
     Query_geolocatedFamilies_families_results_address? address,
   }) => _res;
 
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck =>
-      CopyWith_Fragment_PersonDataCheck.stub(_res);
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 
   CopyWith_Query_geolocatedFamilies_families_results_address<TRes>
   get address =>

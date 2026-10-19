@@ -16,7 +16,7 @@ fragment FamilyWithAddress on Family {
   deceasedSpouseName
   marriageDate
   address {
-    ...FamilyAddress
+    ...Address
   }
 }
 
@@ -28,78 +28,12 @@ fragment FamilyDetails on Family {
   }
   notes
   latestEdit {
-    ...FamilyLatestEdit
+    ...LatestEdit
   }
   latestVisit {
-    ...FamilyLatestVisit
+    ...LatestVisit
   }
   latestFatherVisit {
-    ...FamilyLatestFatherVisit
-  }
-}
-
-fragment FamilyAddress on Address {
-  id
-  countryIsoCode
-  area {
-    ...Area
-  }
-  district {
-    id
-    name
-  }
-  street {
-    ...Street
-  }
-  substreetName
-  fullAddressText
-  geolocation
-  houseCode
-  storeyNumber
-  apartmentNumber
-  specialLandmark
-}
-
-fragment FamilyContact on FamilyContact {
-  id
-  personId
-  label
-  phone
-  isMainPhone
-  personType {
-    ...PersonType
-  }
-}
-
-fragment FamilyUser on User {
-  id
-  uid
-  name
-  email
-  photoUpdatedAt
-  blurhash
-}
-
-fragment FamilyLatestEdit on LatestEdit {
-  id
-  time
-  user {
-    ...FamilyUser
-  }
-}
-
-fragment FamilyLatestVisit on LatestVisit {
-  id
-  time
-  user {
-    ...FamilyUser
-  }
-}
-
-fragment FamilyLatestFatherVisit on LatestFatherVisit {
-  id
-  time
-  user {
-    ...FamilyUser
+    ...LatestFatherVisit
   }
 }

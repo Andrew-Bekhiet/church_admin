@@ -7,9 +7,6 @@ mixin KeysetStreamableDAO<T extends ViewableWithID> on DAOBase<T>
   @override
   StreamAllConfig<T> get baseStreamAllConfig;
 
-  @override
-  LegacyStreamCountConfig<T>? get baseStreamCountConfig => null;
-
   @protected
   StreamSingleByIdConfig<T> get baseStreamSingleByIdConfig;
 
@@ -27,11 +24,9 @@ mixin KeysetStreamableDAO<T extends ViewableWithID> on DAOBase<T>
     secondLineField: secondLineField,
   );
 
-  /// [streamCountConfig] is ignored: an Ash page carries its own `count`.
   @override
   PaginatableStreamBase<T> streamAllWithConfig({
     required covariant StreamAllConfig<T> streamAllConfig,
-    LegacyStreamCountConfig<T>? streamCountConfig,
     Stream<String?>? searchQuery,
     Stream<List<Filter>>? where,
     Stream<List<OrderBy>>? orderBy,

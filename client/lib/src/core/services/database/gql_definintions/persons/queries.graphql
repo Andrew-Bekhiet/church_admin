@@ -30,7 +30,7 @@ query person(
         { field: CREATED_AT, order: ASC }
       ]
     ) {
-      ...PersonFamilyContact
+      ...FamilyContact
     }
   }
 }
@@ -88,7 +88,7 @@ query personHistoryAnalysis(
 query familyUnclaimedContacts($filter: FamilyContactFilterInput, $first: Int) {
   familyContacts(filter: $filter, first: $first) {
     results {
-      ...PersonFamilyContact
+      ...FamilyContact
     }
   }
 }

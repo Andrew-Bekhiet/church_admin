@@ -39,7 +39,15 @@ void main() {
     test(
       'home searches ${enabled ? 'include' : 'omit'} data checks when the flag is $enabled',
       () async {
-        initialize(enableDataChecks: enabled, data: {'persons': <Object?>[]});
+        initialize(
+          enableDataChecks: enabled,
+          data: {
+            'persons': {
+              '__typename': 'KeysetPageOfPerson',
+              'results': <Object?>[],
+            },
+          },
+        );
 
         await HomeDAO(db: db).searchAll('اسم');
 

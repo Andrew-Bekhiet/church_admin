@@ -30,10 +30,6 @@ class OrderBy with _$OrderBy {
 
   Map<String, dynamic> toJson() => _$OrderByToJson(this);
 
-  Json toSearchJson() {
-    return field.serializeOrderBy(value.serializedName);
-  }
-
   FieldMetadata getSecondLineField() {
     final subFields = AdvancedQueriesMetadata()
         .allQueryablesByType[field.type]
@@ -61,10 +57,5 @@ Json fieldMetadataToJson(FieldMetadata field) => field.toJson();
 
 enum OrderByValue {
   asc,
-  desc;
-
-  String get serializedName => switch (this) {
-    OrderByValue.asc => 'ASC_NULLS_LAST',
-    OrderByValue.desc => 'DESC_NULLS_LAST',
-  };
+  desc,
 }

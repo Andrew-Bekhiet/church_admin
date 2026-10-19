@@ -4,8 +4,6 @@ import 'package:church_admin/church_admin.dart';
 ///
 /// Used when you want don't want to go anywhere in the field path, but still required to provide a field
 /// in the API
-///
-/// Passes through the serialized value without any modification.
 class DotField extends FieldMetadata<Object> {
   static T _identity<T>(T value) => value;
 
@@ -18,14 +16,4 @@ class DotField extends FieldMetadata<Object> {
         isOrderable: false,
         getValue: _identity,
       );
-
-  @override
-  Json queryToJson(Json serializedValue) {
-    return serializedValue;
-  }
-
-  @override
-  Json serializeOrderBy(Object serializedValue) {
-    throw UnsupportedError('NilField cannot be used for ordering');
-  }
 }

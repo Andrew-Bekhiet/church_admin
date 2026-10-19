@@ -18,9 +18,9 @@ fragment StreetDetails on Street {
     ...Area
   }
   latestEdit {
-    ...PlaceLatestEdit
+    ...LatestEdit
   }
   latestVisit {
-    ...PlaceLatestVisit
+    ...LatestVisit
   }
 }

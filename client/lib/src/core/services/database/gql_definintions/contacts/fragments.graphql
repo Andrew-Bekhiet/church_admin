@@ -1,0 +1,17 @@
+fragment Contact on Contact {
+  id
+  label
+  phone
+  isMainPhone
+}
+
+fragment FamilyContact on FamilyContact {
+  id
+  personId
+  label
+  phone
+  isMainPhone
+  personType {
+    ...PersonType
+  }
+}

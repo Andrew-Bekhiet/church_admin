@@ -1,4 +1,5 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../data_checks/__generated__/fragments.graphql.dart';
 import '../../gql/__generated__/fragments.graphql.dart';
 import '../../persons/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
@@ -744,7 +745,7 @@ const documentNodeMutationrecordCall = DocumentNode(
     fragmentDefinitionUser,
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
-    fragmentDefinitionPersonDataCheck,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -1441,7 +1442,7 @@ const documentNodeMutationrecordConfession = DocumentNode(
     fragmentDefinitionUser,
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
-    fragmentDefinitionPersonDataCheck,
+    fragmentDefinitionDataCheck,
   ],
 );
 

@@ -15,11 +15,6 @@ enum PointSpatialOperator implements Operator<Point> {
   const PointSpatialOperator();
 
   @override
-  Json queryToJson(FieldMetadata field, Point filterValue) {
-    return field.queryToJson({'_stIntersects': filterValue.toPostGISJson()});
-  }
-
-  @override
   Object serializeValue(Point value) {
     return value.toPostGISJson();
   }

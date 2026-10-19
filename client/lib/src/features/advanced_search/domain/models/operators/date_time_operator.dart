@@ -1,13 +1,12 @@
 import 'package:church_admin/church_admin.dart';
 
 enum DateTimeOperator implements Operator<DateTime> {
-  isOn('_eq', 'في نفس اليوم'),
-  isAfter('_gt', 'بعد'),
-  isOnOrAfter('_gte', 'في نفس اليوم أو بعد'),
-  isBefore('_lt', 'قبل'),
-  isOnOrBefore('_lte', 'في نفس اليوم أو قبل');
+  isOn('في نفس اليوم'),
+  isAfter('بعد'),
+  isOnOrAfter('في نفس اليوم أو بعد'),
+  isBefore('قبل'),
+  isOnOrBefore('في نفس اليوم أو قبل');
 
-  final String _operatorValue;
   @override
   final String label;
 
@@ -17,12 +16,7 @@ enum DateTimeOperator implements Operator<DateTime> {
   @override
   bool get acceptsValue => true;
 
-  const DateTimeOperator(this._operatorValue, this.label);
-
-  @override
-  Json queryToJson(FieldMetadata field, DateTime value) {
-    return field.queryToJson({_operatorValue: value.toUtc().toIso8601String()});
-  }
+  const DateTimeOperator(this.label);
 
   @override
   Object serializeValue(DateTime value) => value.toUtc().toIso8601String();

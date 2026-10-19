@@ -1,4 +1,6 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../data_checks/__generated__/fragments.graphql.dart';
+import '../../gql/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
 
 import 'package:church_admin/src/core/graphql/scalars.dart';
@@ -305,7 +307,7 @@ const documentNodeMutationcreatePerson = DocumentNode(
     ),
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
-    fragmentDefinitionPersonDataCheck,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -771,7 +773,7 @@ const documentNodeMutationupdatePerson = DocumentNode(
     ),
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
-    fragmentDefinitionPersonDataCheck,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -1193,7 +1195,7 @@ const documentNodeMutationdeletePerson = DocumentNode(
     ),
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
-    fragmentDefinitionPersonDataCheck,
+    fragmentDefinitionDataCheck,
   ],
 );
 
@@ -1652,7 +1654,7 @@ const documentNodeMutationrecordPersonSpiritualDays = DocumentNode(
                         selectionSet: SelectionSetNode(
                           selections: [
                             FragmentSpreadNode(
-                              name: NameNode(value: 'PersonLatestConfession'),
+                              name: NameNode(value: 'LatestConfession'),
                               directives: [],
                             ),
                             FieldNode(
@@ -1673,7 +1675,7 @@ const documentNodeMutationrecordPersonSpiritualDays = DocumentNode(
                         selectionSet: SelectionSetNode(
                           selections: [
                             FragmentSpreadNode(
-                              name: NameNode(value: 'PersonLatestKodas'),
+                              name: NameNode(value: 'LatestKodas'),
                               directives: [],
                             ),
                             FieldNode(
@@ -1718,10 +1720,10 @@ const documentNodeMutationrecordPersonSpiritualDays = DocumentNode(
     ),
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
-    fragmentDefinitionPersonDataCheck,
-    fragmentDefinitionPersonLatestConfession,
-    fragmentDefinitionPersonUser,
-    fragmentDefinitionPersonLatestKodas,
+    fragmentDefinitionDataCheck,
+    fragmentDefinitionLatestConfession,
+    fragmentDefinitionUser,
+    fragmentDefinitionLatestKodas,
   ],
 );
 
@@ -1945,17 +1947,15 @@ class Mutation_recordPersonSpiritualDays_recordPersonSpiritualDays_result
       blurhash: (l$blurhash as String?),
       dataCheck: l$dataCheck == null
           ? null
-          : Fragment_PersonDataCheck.fromJson(
-              (l$dataCheck as Map<String, dynamic>),
-            ),
+          : Fragment_DataCheck.fromJson((l$dataCheck as Map<String, dynamic>)),
       latestConfession: l$latestConfession == null
           ? null
-          : Fragment_PersonLatestConfession.fromJson(
+          : Fragment_LatestConfession.fromJson(
               (l$latestConfession as Map<String, dynamic>),
             ),
       latestKodas: l$latestKodas == null
           ? null
-          : Fragment_PersonLatestKodas.fromJson(
+          : Fragment_LatestKodas.fromJson(
               (l$latestKodas as Map<String, dynamic>),
             ),
     );
@@ -1975,11 +1975,11 @@ class Mutation_recordPersonSpiritualDays_recordPersonSpiritualDays_result
 
   final String? blurhash;
 
-  final Fragment_PersonDataCheck? dataCheck;
+  final Fragment_DataCheck? dataCheck;
 
-  final Fragment_PersonLatestConfession? latestConfession;
+  final Fragment_LatestConfession? latestConfession;
 
-  final Fragment_PersonLatestKodas? latestKodas;
+  final Fragment_LatestKodas? latestKodas;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -2134,13 +2134,13 @@ abstract class CopyWith_Mutation_recordPersonSpiritualDays_recordPersonSpiritual
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
-    Fragment_PersonLatestConfession? latestConfession,
-    Fragment_PersonLatestKodas? latestKodas,
+    Fragment_DataCheck? dataCheck,
+    Fragment_LatestConfession? latestConfession,
+    Fragment_LatestKodas? latestKodas,
   });
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck;
-  CopyWith_Fragment_PersonLatestConfession<TRes> get latestConfession;
-  CopyWith_Fragment_PersonLatestKodas<TRes> get latestKodas;
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck;
+  CopyWith_Fragment_LatestConfession<TRes> get latestConfession;
+  CopyWith_Fragment_LatestKodas<TRes> get latestKodas;
 }
 
 class _CopyWithImpl_Mutation_recordPersonSpiritualDays_recordPersonSpiritualDays_result<
@@ -2197,41 +2197,41 @@ class _CopyWithImpl_Mutation_recordPersonSpiritualDays_recordPersonSpiritualDays
           : (blurhash as String?),
       dataCheck: dataCheck == _undefined
           ? _instance.dataCheck
-          : (dataCheck as Fragment_PersonDataCheck?),
+          : (dataCheck as Fragment_DataCheck?),
       latestConfession: latestConfession == _undefined
           ? _instance.latestConfession
-          : (latestConfession as Fragment_PersonLatestConfession?),
+          : (latestConfession as Fragment_LatestConfession?),
       latestKodas: latestKodas == _undefined
           ? _instance.latestKodas
-          : (latestKodas as Fragment_PersonLatestKodas?),
+          : (latestKodas as Fragment_LatestKodas?),
     ),
   );
 
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck {
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck {
     final local$dataCheck = _instance.dataCheck;
     return local$dataCheck == null
-        ? CopyWith_Fragment_PersonDataCheck.stub(_then(_instance))
-        : CopyWith_Fragment_PersonDataCheck(
+        ? CopyWith_Fragment_DataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_DataCheck(
             local$dataCheck,
             (e) => call(dataCheck: e),
           );
   }
 
-  CopyWith_Fragment_PersonLatestConfession<TRes> get latestConfession {
+  CopyWith_Fragment_LatestConfession<TRes> get latestConfession {
     final local$latestConfession = _instance.latestConfession;
     return local$latestConfession == null
-        ? CopyWith_Fragment_PersonLatestConfession.stub(_then(_instance))
-        : CopyWith_Fragment_PersonLatestConfession(
+        ? CopyWith_Fragment_LatestConfession.stub(_then(_instance))
+        : CopyWith_Fragment_LatestConfession(
             local$latestConfession,
             (e) => call(latestConfession: e),
           );
   }
 
-  CopyWith_Fragment_PersonLatestKodas<TRes> get latestKodas {
+  CopyWith_Fragment_LatestKodas<TRes> get latestKodas {
     final local$latestKodas = _instance.latestKodas;
     return local$latestKodas == null
-        ? CopyWith_Fragment_PersonLatestKodas.stub(_then(_instance))
-        : CopyWith_Fragment_PersonLatestKodas(
+        ? CopyWith_Fragment_LatestKodas.stub(_then(_instance))
+        : CopyWith_Fragment_LatestKodas(
             local$latestKodas,
             (e) => call(latestKodas: e),
           );
@@ -2259,17 +2259,17 @@ class _CopyWithStubImpl_Mutation_recordPersonSpiritualDays_recordPersonSpiritual
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
-    Fragment_PersonLatestConfession? latestConfession,
-    Fragment_PersonLatestKodas? latestKodas,
+    Fragment_DataCheck? dataCheck,
+    Fragment_LatestConfession? latestConfession,
+    Fragment_LatestKodas? latestKodas,
   }) => _res;
 
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck =>
-      CopyWith_Fragment_PersonDataCheck.stub(_res);
+  CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_DataCheck.stub(_res);
 
-  CopyWith_Fragment_PersonLatestConfession<TRes> get latestConfession =>
-      CopyWith_Fragment_PersonLatestConfession.stub(_res);
+  CopyWith_Fragment_LatestConfession<TRes> get latestConfession =>
+      CopyWith_Fragment_LatestConfession.stub(_res);
 
-  CopyWith_Fragment_PersonLatestKodas<TRes> get latestKodas =>
-      CopyWith_Fragment_PersonLatestKodas.stub(_res);
+  CopyWith_Fragment_LatestKodas<TRes> get latestKodas =>
+      CopyWith_Fragment_LatestKodas.stub(_res);
 }

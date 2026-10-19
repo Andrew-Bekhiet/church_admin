@@ -1,4 +1,5 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../data_checks/__generated__/fragments.graphql.dart';
 import '../../gql/__generated__/fragments.graphql.dart';
 import '../../invitations/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
@@ -336,9 +337,9 @@ const documentNodeMutationupdateUser = DocumentNode(
     fragmentDefinitionUser,
     fragmentDefinitionInvitation,
     fragmentDefinitionUserPerson,
-    fragmentDefinitionUserPersonDataCheck,
-    fragmentDefinitionUserPersonLatestKodas,
-    fragmentDefinitionUserPersonLatestConfession,
+    fragmentDefinitionDataCheck,
+    fragmentDefinitionLatestKodas,
+    fragmentDefinitionLatestConfession,
   ],
 );
 

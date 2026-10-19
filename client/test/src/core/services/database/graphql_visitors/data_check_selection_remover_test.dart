@@ -82,6 +82,6 @@ void main() {
       contains('dataCheck'),
     );
     expect(stripped, isNot(contains('dataCheck')));
-    expect(stripped, isNot(contains('fragment PersonDataCheck')));
+    expect(stripped, isNot(contains('fragment DataCheck')));
   });
 }
