@@ -4,11 +4,6 @@ sealed class PersonEditIntent extends SerializableExtra {
   static const String _kindKey = 'kind';
   static const String _subjectKey = 'subject';
 
-  static Json _subjectJson(Object? kind, Object? subject) => switch (subject) {
-    final Map<Object?, Object?> map => Map<String, Object?>.from(map),
-    _ => throw FormatException('PersonEditIntent kind "$kind" has no subject'),
-  };
-
   @override
   String get typeName => 'PersonEditIntent';
 
@@ -18,27 +13,30 @@ sealed class PersonEditIntent extends SerializableExtra {
     final kind = json[_kindKey];
     final subject = json[_subjectKey];
 
+    Json subjectJson() =>
+        requireNestedJson(subject, owner: 'PersonEditIntent', kind: kind);
+
     return switch (kind) {
       UpdatePerson.kind => UpdatePerson(
-        person: Person.fromJson(_subjectJson(kind, subject)),
+        person: Person.fromJson(subjectJson()),
       ),
       CreatePersonInFamily.kind => CreatePersonInFamily(
-        family: Family.fromJson(_subjectJson(kind, subject)),
+        family: Family.fromJson(subjectJson()),
       ),
       CreatePersonOnStreet.kind => CreatePersonOnStreet(
-        street: Street.fromJson(_subjectJson(kind, subject)),
+        street: Street.fromJson(subjectJson()),
       ),
       CreatePersonInArea.kind => CreatePersonInArea(
-        area: Area.fromJson(_subjectJson(kind, subject)),
+        area: Area.fromJson(subjectJson()),
       ),
       CreatePersonInService.kind => CreatePersonInService(
-        service: Service.fromJson(_subjectJson(kind, subject)),
+        service: Service.fromJson(subjectJson()),
       ),
       CreatePersonInGroup.kind => CreatePersonInGroup(
-        group: Group.fromJson(_subjectJson(kind, subject)),
+        group: Group.fromJson(subjectJson()),
       ),
       CreatePersonInClass.kind => CreatePersonInClass(
-        class$: Class.fromJson(_subjectJson(kind, subject)),
+        class$: Class.fromJson(subjectJson()),
       ),
       _ => const CreateBlankPerson(),
     };
