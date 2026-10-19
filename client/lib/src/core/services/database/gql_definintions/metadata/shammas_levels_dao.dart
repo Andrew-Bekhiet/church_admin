@@ -2,15 +2,15 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/shammas_levels/__generated__/subscriptions.gql.dart';
 
 class ShammasLevelsDAO extends DAOBase<ShammasLevel>
-    with StreamableDAO<ShammasLevel> {
+    with LegacyStreamableDAO<ShammasLevel> {
   @override
-  StreamAllConfig<ShammasLevel> get baseStreamAllConfig =>
-      const StreamAllConfig(
+  LegacyStreamAllConfig<ShammasLevel> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
         document: documentNodeSubscriptionwatchAllShammasLevels,
       );
 
   @override
-  StreamSingleByIdConfig<ShammasLevel> get baseStreamSingleByIdConfig =>
+  LegacyStreamSingleByIdConfig<ShammasLevel> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   ShammasLevelsDAO({

@@ -167,19 +167,19 @@ class _FakeValueStream_24<T> extends _i1.SmartFake
 }
 
 class _FakeStreamAllConfig_25<T> extends _i1.SmartFake
-    implements _i2.StreamAllConfig<T> {
+    implements _i2.LegacyStreamAllConfig<T> {
   _FakeStreamAllConfig_25(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
 class _FakeStreamCountConfig_26<T> extends _i1.SmartFake
-    implements _i2.StreamCountConfig<T> {
+    implements _i2.LegacyStreamCountConfig<T> {
   _FakeStreamCountConfig_26(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
 class _FakeStreamSingleByIdConfig_27<T> extends _i1.SmartFake
-    implements _i2.StreamSingleByIdConfig<T> {
+    implements _i2.LegacyStreamSingleByIdConfig<T> {
   _FakeStreamSingleByIdConfig_27(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
@@ -898,20 +898,21 @@ class MockConnectivityService extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
   @override
-  _i2.StreamAllConfig<_i2.User> get baseStreamAllConfig => (super.noSuchMethod(
-    Invocation.getter(#baseStreamAllConfig),
-    returnValue: _FakeStreamAllConfig_25<_i2.User>(
-      this,
-      Invocation.getter(#baseStreamAllConfig),
-    ),
-    returnValueForMissingStub: _FakeStreamAllConfig_25<_i2.User>(
-      this,
-      Invocation.getter(#baseStreamAllConfig),
-    ),
-  ) as _i2.StreamAllConfig<_i2.User>);
+  _i2.LegacyStreamAllConfig<_i2.User> get baseStreamAllConfig =>
+      (super.noSuchMethod(
+        Invocation.getter(#baseStreamAllConfig),
+        returnValue: _FakeStreamAllConfig_25<_i2.User>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamAllConfig_25<_i2.User>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+      ) as _i2.LegacyStreamAllConfig<_i2.User>);
 
   @override
-  _i2.StreamCountConfig<_i2.User> get baseStreamCountConfig =>
+  _i2.LegacyStreamCountConfig<_i2.User> get baseStreamCountConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamCountConfig),
         returnValue: _FakeStreamCountConfig_26<_i2.User>(
@@ -922,10 +923,10 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
           this,
           Invocation.getter(#baseStreamCountConfig),
         ),
-      ) as _i2.StreamCountConfig<_i2.User>);
+      ) as _i2.LegacyStreamCountConfig<_i2.User>);
 
   @override
-  _i2.StreamSingleByIdConfig<_i2.User> get baseStreamSingleByIdConfig =>
+  _i2.LegacyStreamSingleByIdConfig<_i2.User> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamSingleByIdConfig),
         returnValue: _FakeStreamSingleByIdConfig_27<_i2.User>(
@@ -936,7 +937,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
           this,
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
-      ) as _i2.StreamSingleByIdConfig<_i2.User>);
+      ) as _i2.LegacyStreamSingleByIdConfig<_i2.User>);
 
   @override
   _i2.DatabaseService get db => (super.noSuchMethod(
@@ -1069,8 +1070,8 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
 
   @override
   _i2.PaginatableStreamBase<_i2.User> streamAllWithConfig({
-    required _i2.StreamAllConfig<_i2.User>? streamAllConfig,
-    _i2.StreamCountConfig<_i2.User>? streamCountConfig,
+    required _i2.LegacyStreamAllConfig<_i2.User>? streamAllConfig,
+    _i2.LegacyStreamCountConfig<_i2.User>? streamCountConfig,
     _i7.Stream<String?>? searchQuery,
     _i7.Stream<List<_i2.Filter<Object>>>? where,
     _i7.Stream<List<_i2.OrderBy>>? orderBy,
@@ -1115,7 +1116,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
   @override
   _i7.Stream<_i2.User?> streamSingleByIdWithConfig({
     required String? id,
-    required _i2.StreamSingleByIdConfig<_i2.User>? streamSingleByIdConfig,
+    required _i2.LegacyStreamSingleByIdConfig<_i2.User>? streamSingleByIdConfig,
   }) => (super.noSuchMethod(
     Invocation.method(#streamSingleByIdWithConfig, [], {
       #id: id,

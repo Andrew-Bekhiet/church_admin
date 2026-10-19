@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -9,22 +10,21 @@ class DBGraphQLClient extends GraphQLClient {
 
   final bool autoChangeFetchPolicy;
 
-  final ValueStream<bool> _connectivityStream;
+  final ValueStream<bool> connectivityStream;
   final ValueStream<FetchPolicy> _fetchPolicyStream;
   FetchPolicy get _currentFetchPolicy => _fetchPolicyStream.value;
   FetchPolicy get _onlineFirstFetchPolicy => _fetchPolicyFor(
-    _connectivityStream.valueOrNull,
+    connectivityStream.valueOrNull,
     whenConnected: FetchPolicy.networkOnly,
   );
   DBGraphQLClient({
-    required ValueStream<bool> connectivityStream,
+    required this.connectivityStream,
     required super.link,
     required super.cache,
     this.autoChangeFetchPolicy = true,
     super.alwaysRebroadcast,
     super.defaultPolicies,
-  }) : _connectivityStream = connectivityStream,
-       _fetchPolicyStream = connectivityStream
+  }) : _fetchPolicyStream = connectivityStream
            .map(
              (connected) => _fetchPolicyFor(
                connected,
@@ -43,7 +43,7 @@ class DBGraphQLClient extends GraphQLClient {
         return result;
 
       case final exception:
-        throw exception;
+        throw BackendException.fromOperationException(exception);
     }
   }
 
@@ -101,20 +101,24 @@ class DBGraphQLClient extends GraphQLClient {
     return stream.map(_exceptionsMiddleware);
   }
 
-  Stream<T?> subscribeAndReturnParsedNullable<T>(
-    SubscriptionOptions<T?> options, {
-    bool? autoChangeFetchPolicy,
-  }) {
-    return subscribe(
-      options,
-      autoChangeFetchPolicy: autoChangeFetchPolicy,
-    ).map((r) => r.parsedData);
-  }
-
-  Stream<T> subscribeAndReturnParsed<T>(
+  Stream<T> legacySubscribeAndReturnParsed<T>(
     SubscriptionOptions<T> options,
   ) {
     return subscribe(options).map((r) => r.parsedData!);
+  }
+
+  FetchPolicy queryFetchPolicy({required bool onlineFirst}) =>
+      onlineFirst ? _onlineFirstFetchPolicy : _currentFetchPolicy;
+
+  ({ObservableQuery<T> query, Stream<QueryResult<T>> results})
+  watchQueryWithConnectivityPolicy<T>(WatchQueryOptions<T> options) {
+    final query = watchQuery(
+      options
+          .copyWithFetchPolicy(_currentFetchPolicy)
+          .copyWith(fetchResults: true, eagerlyFetchResults: false),
+    );
+
+    return (query: query, results: query.stream.map(_exceptionsMiddleware));
   }
 
   Stream<T?> watchQueryAndReturnParsedNullable<T>(

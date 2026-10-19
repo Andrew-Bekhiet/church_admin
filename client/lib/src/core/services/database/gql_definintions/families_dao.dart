@@ -8,43 +8,44 @@ import 'package:church_admin/src/core/services/database/gql_definintions/familie
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
-class FamiliesDAO extends FullCRUDDAO<Family>
+class FamiliesDAO extends LegacyFullCRUDDAO<Family>
     with DataCheckFreeDocuments<Family> {
   @override
-  final StreamAllConfig<Family> baseStreamAllConfig = const StreamAllConfig(
-    document: documentNodeSubscriptionwatchAllFamilies,
-  );
+  final LegacyStreamAllConfig<Family> baseStreamAllConfig =
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllFamilies,
+      );
 
   @override
-  late final StreamCountConfig<Family> baseStreamCountConfig =
-      const StreamCountConfig(
+  late final LegacyStreamCountConfig<Family> baseStreamCountConfig =
+      const LegacyStreamCountConfig(
         document: documentNodeSubscriptionwatchFamiliesCount,
       );
 
   @override
-  late final StreamSingleByIdConfig<Family> baseStreamSingleByIdConfig =
-      StreamSingleByIdConfig(
+  late final LegacyStreamSingleByIdConfig<Family> baseStreamSingleByIdConfig =
+      LegacyStreamSingleByIdConfig(
         document: documentNodeSubscriptionwatchFamily,
         varsConstructor: _streamSingleByIdVarsConstructor,
       );
 
   @override
-  late final DeleteSingleByIdConfig<Family> baseDeleteSingleByIdConfig =
-      DeleteSingleByIdConfig(
+  late final LegacyDeleteSingleByIdConfig<Family> baseDeleteSingleByIdConfig =
+      LegacyDeleteSingleByIdConfig(
         document: documentNodeMutationdeleteFamily,
         varsConstructor: _deleteSingleByIdVarsConstructor,
       );
 
   @override
-  late final UpdateObjectConfig<Family> baseUpdateObjectConfig =
-      UpdateObjectConfig(
+  late final LegacyUpdateObjectConfig<Family> baseUpdateObjectConfig =
+      LegacyUpdateObjectConfig(
         document: documentNodeMutationupdateFamily,
         varsConstructor: _updateFamilyVarsConstructor,
       );
 
   @override
-  late final CreateObjectConfig<Family> baseCreateObjectConfig =
-      CreateObjectConfig(
+  late final LegacyCreateObjectConfig<Family> baseCreateObjectConfig =
+      LegacyCreateObjectConfig(
         document: documentNodeMutationinsertFamily,
         varsConstructor: _createFamilyVarsConstructor,
       );
@@ -126,9 +127,9 @@ class FamiliesDAO extends FullCRUDDAO<Family>
   }
 
   Stream<PaginatableStreamResponse<Family>> _streamAllFactory(
-    StreamAllConfig<Family> streamAllConfig,
+    LegacyStreamAllConfig<Family> streamAllConfig,
     PaginatableStreamRequest<Family, StreamableDAOParameters<Family>?> request,
-  ) => graphQLClient.subscribeAndReturnParsed(
+  ) => graphQLClient.legacySubscribeAndReturnParsed(
     streamAllConfig.operationOptions ??
         SubscriptionOptions(
           document: transformDocument(streamAllConfig.document),

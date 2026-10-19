@@ -1,41 +1,31 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
-import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
 
 @immutable
 class StreamSingleByIdConfig<T> extends DAOMethodTemplate<T?> {
-  final StreamSingleByIdConfigVarsConstructor? varsConstructor;
-  final SubscriptionOptions<T>? operationOptions;
+  final IdVarsConstructor? varsConstructor;
 
   const StreamSingleByIdConfig({
     required super.document,
     this.varsConstructor,
-    this.operationOptions,
     super.operationName,
-    super.variables,
     super.parserFn,
   });
 
   StreamSingleByIdConfig<T> copyWith({
     DocumentNode? document,
     String? operationName,
-    Json? variables,
-    StreamSingleByIdConfigVarsConstructor? varsConstructor,
-    SubscriptionOptions<T>? operationOptions,
+    IdVarsConstructor? varsConstructor,
     T? Function(Json)? parserFn,
-  }) {
-    return StreamSingleByIdConfig<T>(
-      document: document ?? this.document,
-      operationName: operationName ?? super.effectiveOperationName,
-      variables: variables ?? this.variables,
-      varsConstructor: varsConstructor ?? this.varsConstructor,
-      operationOptions: operationOptions ?? this.operationOptions,
-      parserFn: parserFn ?? this.parserFn,
-    );
-  }
+  }) => StreamSingleByIdConfig<T>(
+    document: document ?? this.document,
+    operationName: operationName ?? effectiveOperationName,
+    varsConstructor: varsConstructor ?? this.varsConstructor,
+    parserFn: parserFn ?? this.parserFn,
+  );
+
+  Json variablesFor(String id) => varsConstructor?.call(id: id) ?? {'id': id};
 }
 
-typedef StreamSingleByIdConfigVarsConstructor = Json Function({
-  required UuidValue id,
-});
+typedef IdVarsConstructor = Json Function({required String id});

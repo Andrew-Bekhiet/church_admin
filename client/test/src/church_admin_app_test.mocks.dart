@@ -166,19 +166,19 @@ class _FakeMeetingsDAO_23 extends _i1.SmartFake implements _i4.MeetingsDAO {
 }
 
 class _FakeStreamAllConfig_24<T> extends _i1.SmartFake
-    implements _i4.StreamAllConfig<T> {
+    implements _i4.LegacyStreamAllConfig<T> {
   _FakeStreamAllConfig_24(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
 class _FakeStreamCountConfig_25<T> extends _i1.SmartFake
-    implements _i4.StreamCountConfig<T> {
+    implements _i4.LegacyStreamCountConfig<T> {
   _FakeStreamCountConfig_25(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
 class _FakeStreamSingleByIdConfig_26<T> extends _i1.SmartFake
-    implements _i4.StreamSingleByIdConfig<T> {
+    implements _i4.LegacyStreamSingleByIdConfig<T> {
   _FakeStreamSingleByIdConfig_26(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
@@ -214,19 +214,19 @@ class _FakePersonsNotificationsQueries_31 extends _i1.SmartFake
 }
 
 class _FakeDeleteSingleByIdConfig_32<T> extends _i1.SmartFake
-    implements _i4.DeleteSingleByIdConfig<T> {
+    implements _i4.LegacyDeleteSingleByIdConfig<T> {
   _FakeDeleteSingleByIdConfig_32(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
 class _FakeUpdateObjectConfig_33<T> extends _i1.SmartFake
-    implements _i4.UpdateObjectConfig<T> {
+    implements _i4.LegacyUpdateObjectConfig<T> {
   _FakeUpdateObjectConfig_33(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
 class _FakeCreateObjectConfig_34<T> extends _i1.SmartFake
-    implements _i4.CreateObjectConfig<T> {
+    implements _i4.LegacyCreateObjectConfig<T> {
   _FakeCreateObjectConfig_34(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
@@ -800,20 +800,21 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
 /// See the documentation for Mockito's code generation for more information.
 class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
   @override
-  _i4.StreamAllConfig<_i4.User> get baseStreamAllConfig => (super.noSuchMethod(
-    Invocation.getter(#baseStreamAllConfig),
-    returnValue: _FakeStreamAllConfig_24<_i4.User>(
-      this,
-      Invocation.getter(#baseStreamAllConfig),
-    ),
-    returnValueForMissingStub: _FakeStreamAllConfig_24<_i4.User>(
-      this,
-      Invocation.getter(#baseStreamAllConfig),
-    ),
-  ) as _i4.StreamAllConfig<_i4.User>);
+  _i4.LegacyStreamAllConfig<_i4.User> get baseStreamAllConfig =>
+      (super.noSuchMethod(
+        Invocation.getter(#baseStreamAllConfig),
+        returnValue: _FakeStreamAllConfig_24<_i4.User>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamAllConfig_24<_i4.User>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+      ) as _i4.LegacyStreamAllConfig<_i4.User>);
 
   @override
-  _i4.StreamCountConfig<_i4.User> get baseStreamCountConfig =>
+  _i4.LegacyStreamCountConfig<_i4.User> get baseStreamCountConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamCountConfig),
         returnValue: _FakeStreamCountConfig_25<_i4.User>(
@@ -824,10 +825,10 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
           this,
           Invocation.getter(#baseStreamCountConfig),
         ),
-      ) as _i4.StreamCountConfig<_i4.User>);
+      ) as _i4.LegacyStreamCountConfig<_i4.User>);
 
   @override
-  _i4.StreamSingleByIdConfig<_i4.User> get baseStreamSingleByIdConfig =>
+  _i4.LegacyStreamSingleByIdConfig<_i4.User> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamSingleByIdConfig),
         returnValue: _FakeStreamSingleByIdConfig_26<_i4.User>(
@@ -838,7 +839,7 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
           this,
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
-      ) as _i4.StreamSingleByIdConfig<_i4.User>);
+      ) as _i4.LegacyStreamSingleByIdConfig<_i4.User>);
 
   @override
   _i4.DatabaseService get db => (super.noSuchMethod(
@@ -971,8 +972,8 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
 
   @override
   _i4.PaginatableStreamBase<_i4.User> streamAllWithConfig({
-    required _i4.StreamAllConfig<_i4.User>? streamAllConfig,
-    _i4.StreamCountConfig<_i4.User>? streamCountConfig,
+    required _i4.LegacyStreamAllConfig<_i4.User>? streamAllConfig,
+    _i4.LegacyStreamCountConfig<_i4.User>? streamCountConfig,
     _i9.Stream<String?>? searchQuery,
     _i9.Stream<List<_i4.Filter<Object>>>? where,
     _i9.Stream<List<_i4.OrderBy>>? orderBy,
@@ -1017,7 +1018,7 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
   @override
   _i9.Stream<_i4.User?> streamSingleByIdWithConfig({
     required String? id,
-    required _i4.StreamSingleByIdConfig<_i4.User>? streamSingleByIdConfig,
+    required _i4.LegacyStreamSingleByIdConfig<_i4.User>? streamSingleByIdConfig,
   }) => (super.noSuchMethod(
     Invocation.method(#streamSingleByIdWithConfig, [], {
       #id: id,
@@ -1047,7 +1048,7 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
       ) as _i6.PersonsNotificationsQueries);
 
   @override
-  _i4.StreamAllConfig<_i4.Person> get baseStreamAllConfig =>
+  _i4.LegacyStreamAllConfig<_i4.Person> get baseStreamAllConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamAllConfig),
         returnValue: _FakeStreamAllConfig_24<_i4.Person>(
@@ -1058,10 +1059,10 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
           this,
           Invocation.getter(#baseStreamAllConfig),
         ),
-      ) as _i4.StreamAllConfig<_i4.Person>);
+      ) as _i4.LegacyStreamAllConfig<_i4.Person>);
 
   @override
-  _i4.StreamCountConfig<_i4.Person> get baseStreamCountConfig =>
+  _i4.LegacyStreamCountConfig<_i4.Person> get baseStreamCountConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamCountConfig),
         returnValue: _FakeStreamCountConfig_25<_i4.Person>(
@@ -1072,10 +1073,10 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
           this,
           Invocation.getter(#baseStreamCountConfig),
         ),
-      ) as _i4.StreamCountConfig<_i4.Person>);
+      ) as _i4.LegacyStreamCountConfig<_i4.Person>);
 
   @override
-  _i4.StreamSingleByIdConfig<_i4.Person> get baseStreamSingleByIdConfig =>
+  _i4.LegacyStreamSingleByIdConfig<_i4.Person> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamSingleByIdConfig),
         returnValue: _FakeStreamSingleByIdConfig_26<_i4.Person>(
@@ -1086,10 +1087,10 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
           this,
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
-      ) as _i4.StreamSingleByIdConfig<_i4.Person>);
+      ) as _i4.LegacyStreamSingleByIdConfig<_i4.Person>);
 
   @override
-  _i4.DeleteSingleByIdConfig<_i4.Person> get baseDeleteSingleByIdConfig =>
+  _i4.LegacyDeleteSingleByIdConfig<_i4.Person> get baseDeleteSingleByIdConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseDeleteSingleByIdConfig),
         returnValue: _FakeDeleteSingleByIdConfig_32<_i4.Person>(
@@ -1100,10 +1101,10 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
           this,
           Invocation.getter(#baseDeleteSingleByIdConfig),
         ),
-      ) as _i4.DeleteSingleByIdConfig<_i4.Person>);
+      ) as _i4.LegacyDeleteSingleByIdConfig<_i4.Person>);
 
   @override
-  _i4.UpdateObjectConfig<_i4.Person> get baseUpdateObjectConfig =>
+  _i4.LegacyUpdateObjectConfig<_i4.Person> get baseUpdateObjectConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseUpdateObjectConfig),
         returnValue: _FakeUpdateObjectConfig_33<_i4.Person>(
@@ -1114,10 +1115,10 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
           this,
           Invocation.getter(#baseUpdateObjectConfig),
         ),
-      ) as _i4.UpdateObjectConfig<_i4.Person>);
+      ) as _i4.LegacyUpdateObjectConfig<_i4.Person>);
 
   @override
-  _i4.CreateObjectConfig<_i4.Person> get baseCreateObjectConfig =>
+  _i4.LegacyCreateObjectConfig<_i4.Person> get baseCreateObjectConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseCreateObjectConfig),
         returnValue: _FakeCreateObjectConfig_34<_i4.Person>(
@@ -1128,7 +1129,7 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
           this,
           Invocation.getter(#baseCreateObjectConfig),
         ),
-      ) as _i4.CreateObjectConfig<_i4.Person>);
+      ) as _i4.LegacyCreateObjectConfig<_i4.Person>);
 
   @override
   _i4.DatabaseService get db => (super.noSuchMethod(
@@ -1336,8 +1337,8 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
 
   @override
   _i4.PaginatableStreamBase<_i4.Person> streamAllWithConfig({
-    required _i4.StreamAllConfig<_i4.Person>? streamAllConfig,
-    _i4.StreamCountConfig<_i4.Person>? streamCountConfig,
+    required _i4.LegacyStreamAllConfig<_i4.Person>? streamAllConfig,
+    _i4.LegacyStreamCountConfig<_i4.Person>? streamCountConfig,
     _i9.Stream<String?>? searchQuery,
     _i9.Stream<List<_i4.Filter<Object>>>? where,
     _i9.Stream<List<_i4.OrderBy>>? orderBy,
@@ -1382,7 +1383,8 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
   @override
   _i9.Stream<_i4.Person?> streamSingleByIdWithConfig({
     required String? id,
-    required _i4.StreamSingleByIdConfig<_i4.Person>? streamSingleByIdConfig,
+    required _i4.LegacyStreamSingleByIdConfig<_i4.Person>?
+    streamSingleByIdConfig,
   }) => (super.noSuchMethod(
     Invocation.method(#streamSingleByIdWithConfig, [], {
       #id: id,
@@ -1437,20 +1439,21 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
 /// See the documentation for Mockito's code generation for more information.
 class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
   @override
-  _i4.StreamAllConfig<_i4.Area> get baseStreamAllConfig => (super.noSuchMethod(
-    Invocation.getter(#baseStreamAllConfig),
-    returnValue: _FakeStreamAllConfig_24<_i4.Area>(
-      this,
-      Invocation.getter(#baseStreamAllConfig),
-    ),
-    returnValueForMissingStub: _FakeStreamAllConfig_24<_i4.Area>(
-      this,
-      Invocation.getter(#baseStreamAllConfig),
-    ),
-  ) as _i4.StreamAllConfig<_i4.Area>);
+  _i4.LegacyStreamAllConfig<_i4.Area> get baseStreamAllConfig =>
+      (super.noSuchMethod(
+        Invocation.getter(#baseStreamAllConfig),
+        returnValue: _FakeStreamAllConfig_24<_i4.Area>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamAllConfig_24<_i4.Area>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+      ) as _i4.LegacyStreamAllConfig<_i4.Area>);
 
   @override
-  _i4.StreamCountConfig<_i4.Area> get baseStreamCountConfig =>
+  _i4.LegacyStreamCountConfig<_i4.Area> get baseStreamCountConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamCountConfig),
         returnValue: _FakeStreamCountConfig_25<_i4.Area>(
@@ -1461,10 +1464,10 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
           this,
           Invocation.getter(#baseStreamCountConfig),
         ),
-      ) as _i4.StreamCountConfig<_i4.Area>);
+      ) as _i4.LegacyStreamCountConfig<_i4.Area>);
 
   @override
-  _i4.StreamSingleByIdConfig<_i4.Area> get baseStreamSingleByIdConfig =>
+  _i4.LegacyStreamSingleByIdConfig<_i4.Area> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamSingleByIdConfig),
         returnValue: _FakeStreamSingleByIdConfig_26<_i4.Area>(
@@ -1475,10 +1478,10 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
           this,
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
-      ) as _i4.StreamSingleByIdConfig<_i4.Area>);
+      ) as _i4.LegacyStreamSingleByIdConfig<_i4.Area>);
 
   @override
-  _i4.DeleteSingleByIdConfig<_i4.Area> get baseDeleteSingleByIdConfig =>
+  _i4.LegacyDeleteSingleByIdConfig<_i4.Area> get baseDeleteSingleByIdConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseDeleteSingleByIdConfig),
         returnValue: _FakeDeleteSingleByIdConfig_32<_i4.Area>(
@@ -1489,10 +1492,10 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
           this,
           Invocation.getter(#baseDeleteSingleByIdConfig),
         ),
-      ) as _i4.DeleteSingleByIdConfig<_i4.Area>);
+      ) as _i4.LegacyDeleteSingleByIdConfig<_i4.Area>);
 
   @override
-  _i4.UpdateObjectConfig<_i4.Area> get baseUpdateObjectConfig =>
+  _i4.LegacyUpdateObjectConfig<_i4.Area> get baseUpdateObjectConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseUpdateObjectConfig),
         returnValue: _FakeUpdateObjectConfig_33<_i4.Area>(
@@ -1503,10 +1506,10 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
           this,
           Invocation.getter(#baseUpdateObjectConfig),
         ),
-      ) as _i4.UpdateObjectConfig<_i4.Area>);
+      ) as _i4.LegacyUpdateObjectConfig<_i4.Area>);
 
   @override
-  _i4.CreateObjectConfig<_i4.Area> get baseCreateObjectConfig =>
+  _i4.LegacyCreateObjectConfig<_i4.Area> get baseCreateObjectConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseCreateObjectConfig),
         returnValue: _FakeCreateObjectConfig_34<_i4.Area>(
@@ -1517,7 +1520,7 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
           this,
           Invocation.getter(#baseCreateObjectConfig),
         ),
-      ) as _i4.CreateObjectConfig<_i4.Area>);
+      ) as _i4.LegacyCreateObjectConfig<_i4.Area>);
 
   @override
   _i4.DatabaseService get db => (super.noSuchMethod(
@@ -1641,8 +1644,8 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
 
   @override
   _i4.PaginatableStreamBase<_i4.Area> streamAllWithConfig({
-    required _i4.StreamAllConfig<_i4.Area>? streamAllConfig,
-    _i4.StreamCountConfig<_i4.Area>? streamCountConfig,
+    required _i4.LegacyStreamAllConfig<_i4.Area>? streamAllConfig,
+    _i4.LegacyStreamCountConfig<_i4.Area>? streamCountConfig,
     _i9.Stream<String?>? searchQuery,
     _i9.Stream<List<_i4.Filter<Object>>>? where,
     _i9.Stream<List<_i4.OrderBy>>? orderBy,
@@ -1687,7 +1690,7 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
   @override
   _i9.Stream<_i4.Area?> streamSingleByIdWithConfig({
     required String? id,
-    required _i4.StreamSingleByIdConfig<_i4.Area>? streamSingleByIdConfig,
+    required _i4.LegacyStreamSingleByIdConfig<_i4.Area>? streamSingleByIdConfig,
   }) => (super.noSuchMethod(
     Invocation.method(#streamSingleByIdWithConfig, [], {
       #id: id,
@@ -1742,7 +1745,7 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
 /// See the documentation for Mockito's code generation for more information.
 class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
   @override
-  _i4.StreamAllConfig<_i4.Service> get baseStreamAllConfig =>
+  _i4.LegacyStreamAllConfig<_i4.Service> get baseStreamAllConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamAllConfig),
         returnValue: _FakeStreamAllConfig_24<_i4.Service>(
@@ -1753,10 +1756,10 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
           this,
           Invocation.getter(#baseStreamAllConfig),
         ),
-      ) as _i4.StreamAllConfig<_i4.Service>);
+      ) as _i4.LegacyStreamAllConfig<_i4.Service>);
 
   @override
-  _i4.StreamCountConfig<_i4.Service> get baseStreamCountConfig =>
+  _i4.LegacyStreamCountConfig<_i4.Service> get baseStreamCountConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamCountConfig),
         returnValue: _FakeStreamCountConfig_25<_i4.Service>(
@@ -1767,38 +1770,38 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
           this,
           Invocation.getter(#baseStreamCountConfig),
         ),
-      ) as _i4.StreamCountConfig<_i4.Service>);
+      ) as _i4.LegacyStreamCountConfig<_i4.Service>);
 
   @override
-  _i4.StreamSingleByIdConfig<_i4.Service> get baseStreamSingleByIdConfig =>
-      (super.noSuchMethod(
-        Invocation.getter(#baseStreamSingleByIdConfig),
-        returnValue: _FakeStreamSingleByIdConfig_26<_i4.Service>(
-          this,
-          Invocation.getter(#baseStreamSingleByIdConfig),
-        ),
-        returnValueForMissingStub: _FakeStreamSingleByIdConfig_26<_i4.Service>(
-          this,
-          Invocation.getter(#baseStreamSingleByIdConfig),
-        ),
-      ) as _i4.StreamSingleByIdConfig<_i4.Service>);
+  _i4.LegacyStreamSingleByIdConfig<_i4.Service>
+  get baseStreamSingleByIdConfig => (super.noSuchMethod(
+    Invocation.getter(#baseStreamSingleByIdConfig),
+    returnValue: _FakeStreamSingleByIdConfig_26<_i4.Service>(
+      this,
+      Invocation.getter(#baseStreamSingleByIdConfig),
+    ),
+    returnValueForMissingStub: _FakeStreamSingleByIdConfig_26<_i4.Service>(
+      this,
+      Invocation.getter(#baseStreamSingleByIdConfig),
+    ),
+  ) as _i4.LegacyStreamSingleByIdConfig<_i4.Service>);
 
   @override
-  _i4.DeleteSingleByIdConfig<_i4.Service> get baseDeleteSingleByIdConfig =>
-      (super.noSuchMethod(
-        Invocation.getter(#baseDeleteSingleByIdConfig),
-        returnValue: _FakeDeleteSingleByIdConfig_32<_i4.Service>(
-          this,
-          Invocation.getter(#baseDeleteSingleByIdConfig),
-        ),
-        returnValueForMissingStub: _FakeDeleteSingleByIdConfig_32<_i4.Service>(
-          this,
-          Invocation.getter(#baseDeleteSingleByIdConfig),
-        ),
-      ) as _i4.DeleteSingleByIdConfig<_i4.Service>);
+  _i4.LegacyDeleteSingleByIdConfig<_i4.Service>
+  get baseDeleteSingleByIdConfig => (super.noSuchMethod(
+    Invocation.getter(#baseDeleteSingleByIdConfig),
+    returnValue: _FakeDeleteSingleByIdConfig_32<_i4.Service>(
+      this,
+      Invocation.getter(#baseDeleteSingleByIdConfig),
+    ),
+    returnValueForMissingStub: _FakeDeleteSingleByIdConfig_32<_i4.Service>(
+      this,
+      Invocation.getter(#baseDeleteSingleByIdConfig),
+    ),
+  ) as _i4.LegacyDeleteSingleByIdConfig<_i4.Service>);
 
   @override
-  _i4.UpdateObjectConfig<_i4.Service> get baseUpdateObjectConfig =>
+  _i4.LegacyUpdateObjectConfig<_i4.Service> get baseUpdateObjectConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseUpdateObjectConfig),
         returnValue: _FakeUpdateObjectConfig_33<_i4.Service>(
@@ -1809,10 +1812,10 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
           this,
           Invocation.getter(#baseUpdateObjectConfig),
         ),
-      ) as _i4.UpdateObjectConfig<_i4.Service>);
+      ) as _i4.LegacyUpdateObjectConfig<_i4.Service>);
 
   @override
-  _i4.CreateObjectConfig<_i4.Service> get baseCreateObjectConfig =>
+  _i4.LegacyCreateObjectConfig<_i4.Service> get baseCreateObjectConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseCreateObjectConfig),
         returnValue: _FakeCreateObjectConfig_34<_i4.Service>(
@@ -1823,7 +1826,7 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
           this,
           Invocation.getter(#baseCreateObjectConfig),
         ),
-      ) as _i4.CreateObjectConfig<_i4.Service>);
+      ) as _i4.LegacyCreateObjectConfig<_i4.Service>);
 
   @override
   _i4.DatabaseService get db => (super.noSuchMethod(
@@ -1950,8 +1953,8 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
 
   @override
   _i4.PaginatableStreamBase<_i4.Service> streamAllWithConfig({
-    required _i4.StreamAllConfig<_i4.Service>? streamAllConfig,
-    _i4.StreamCountConfig<_i4.Service>? streamCountConfig,
+    required _i4.LegacyStreamAllConfig<_i4.Service>? streamAllConfig,
+    _i4.LegacyStreamCountConfig<_i4.Service>? streamCountConfig,
     _i9.Stream<String?>? searchQuery,
     _i9.Stream<List<_i4.Filter<Object>>>? where,
     _i9.Stream<List<_i4.OrderBy>>? orderBy,
@@ -1996,7 +1999,8 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
   @override
   _i9.Stream<_i4.Service?> streamSingleByIdWithConfig({
     required String? id,
-    required _i4.StreamSingleByIdConfig<_i4.Service>? streamSingleByIdConfig,
+    required _i4.LegacyStreamSingleByIdConfig<_i4.Service>?
+    streamSingleByIdConfig,
   }) => (super.noSuchMethod(
     Invocation.method(#streamSingleByIdWithConfig, [], {
       #id: id,

@@ -78,12 +78,16 @@ final encryptionServiceProvider = Provider<EncryptionService>(
 
 final Provider<DatabaseService> databaseServiceProvider =
     Provider<DatabaseService>(
-      (ref) => DatabaseService(ref.watch(graphQLClientProvider)),
+      (ref) => DatabaseService(
+        ref.watch(graphQLClientProvider),
+        liveQueries: ref.watch(liveQueryRegistryProvider),
+      ),
     );
 
 final graphQLClientProvider = Provider<DBGraphQLClient>(
   (ref) {
     final loggingService = ref.read(loggingServiceProvider);
+    final graphqlUrl = ref.watch(apiEndpointsProvider).graphql.toString();
 
     return DBGraphQLClient(
       defaultPolicies: DefaultPolicies(
@@ -93,24 +97,16 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
       ),
       link: Link.concat(
         loggingService.loggingLink,
-        AddAuthLink(
-          credentialsStream: ref
-              .watch(authStorageProvider)
-              .getAuthDataFromCache()
-              .asStream()
-              .concatWith([ref.watch(authRepositoryProvider).userChanges])
-              .map(
-                (user) => switch (user) {
-                  AuthUser(:final uid, :final hasuraUserId, :final idToken) =>
-                    AuthLinkCredentials(
-                      uid: uid,
-                      hasuraUserId: hasuraUserId,
-                      idToken: idToken,
-                    ),
-                  null => null,
-                },
-              ),
-          url: ref.watch(apiEndpointsProvider).graphql.toString(),
+        Link.split(
+          (request) => request.isSubscription,
+          LegacyHasuraSubscriptionLink(
+            credentialsStream: ref.watch(authLinkCredentialsProvider),
+            url: graphqlUrl,
+          ),
+          AddAuthLink(
+            credentialsStream: ref.watch(authLinkCredentialsProvider),
+            url: graphqlUrl,
+          ),
         ),
       ),
       cache: GraphQLCache(
@@ -122,6 +118,43 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
           .connectivityStream,
     );
   },
+);
+
+final changeFeedClientProvider = Provider<ChangeFeedClient>((ref) {
+  final client = ChangeFeedClient(
+    socketUrl: ref.watch(apiEndpointsProvider).changeFeedSocket,
+    credentials: ref.watch(authLinkCredentialsProvider),
+  );
+  ref.onDispose(client.dispose);
+
+  return client;
+});
+
+final liveQueryRegistryProvider = Provider<LiveQueryRegistry>(
+  (ref) => LiveQueryRegistry(
+    changeFeedEvents: ref.watch(changeFeedClientProvider).events,
+    connectivity: ref.watch(connectivityServiceProvider).connectivityStream,
+  ),
+);
+
+final authLinkCredentialsProvider = Provider<Stream<AuthLinkCredentials?>>(
+  (ref) => ref
+      .watch(authStorageProvider)
+      .getAuthDataFromCache()
+      .asStream()
+      .concatWith([ref.watch(authRepositoryProvider).userChanges])
+      .map(
+        (user) => switch (user) {
+          AuthUser(:final uid, :final hasuraUserId, :final idToken) =>
+            AuthLinkCredentials(
+              uid: uid,
+              hasuraUserId: hasuraUserId,
+              idToken: idToken,
+            ),
+          null => null,
+        },
+      )
+      .shareValue(),
 );
 
 final graphQLCacheStore = Provider<GqlKvStore>((ref) {

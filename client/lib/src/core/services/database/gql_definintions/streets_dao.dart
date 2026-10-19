@@ -3,43 +3,43 @@ import 'package:church_admin/church_admin.dart';
 export 'streets/__generated__/mutations.gql.dart';
 export 'streets/__generated__/subscriptions.gql.dart';
 
-class StreetsDAO extends FullCRUDDAO<Street> {
+class StreetsDAO extends LegacyFullCRUDDAO<Street> {
   @override
-  late final StreamAllConfig<Street> baseStreamAllConfig =
-      const StreamAllConfig(
+  late final LegacyStreamAllConfig<Street> baseStreamAllConfig =
+      const LegacyStreamAllConfig(
         document: documentNodeSubscriptionwatchAllStreets,
       );
 
   @override
-  late final StreamCountConfig<Street> baseStreamCountConfig =
-      const StreamCountConfig(
+  late final LegacyStreamCountConfig<Street> baseStreamCountConfig =
+      const LegacyStreamCountConfig(
         document: documentNodeSubscriptionwatchStreetsCount,
       );
 
   @override
-  late final StreamSingleByIdConfig<Street> baseStreamSingleByIdConfig =
-      StreamSingleByIdConfig(
+  late final LegacyStreamSingleByIdConfig<Street> baseStreamSingleByIdConfig =
+      LegacyStreamSingleByIdConfig(
         document: documentNodeSubscriptionwatchStreet,
         varsConstructor: _streamSingleByIdVarsConstructor,
       );
 
   @override
-  late final DeleteSingleByIdConfig<Street> baseDeleteSingleByIdConfig =
-      DeleteSingleByIdConfig(
+  late final LegacyDeleteSingleByIdConfig<Street> baseDeleteSingleByIdConfig =
+      LegacyDeleteSingleByIdConfig(
         document: documentNodeMutationdeleteStreet,
         varsConstructor: _deleteSingleByIdVarsConstructor,
       );
 
   @override
-  late final UpdateObjectConfig<Street> baseUpdateObjectConfig =
-      UpdateObjectConfig(
+  late final LegacyUpdateObjectConfig<Street> baseUpdateObjectConfig =
+      LegacyUpdateObjectConfig(
         document: documentNodeMutationupdateStreet,
         varsConstructor: _updateStreetVarsConstructor,
       );
 
   @override
-  late final CreateObjectConfig<Street> baseCreateObjectConfig =
-      CreateObjectConfig(
+  late final LegacyCreateObjectConfig<Street> baseCreateObjectConfig =
+      LegacyCreateObjectConfig(
         document: documentNodeMutationinsertStreet,
         varsConstructor: _createStreetVarsConstructor,
       );

@@ -8,41 +8,41 @@ import 'package:church_admin/src/core/services/database/gql_definintions/persons
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_notifications_queries.dart';
 import 'package:graphql/client.dart';
 
-class PersonsDAO extends FullCRUDDAO<Person>
+class PersonsDAO extends LegacyFullCRUDDAO<Person>
     with DataCheckFreeDocuments<Person> {
   late final notificationsQueries = PersonsNotificationsQueries(db: db);
 
   @override
-  late final StreamAllConfig<Person> baseStreamAllConfig =
-      const StreamAllConfig(
+  late final LegacyStreamAllConfig<Person> baseStreamAllConfig =
+      const LegacyStreamAllConfig(
         document: documentNodeSubscriptionwatchAllPersons,
       );
   @override
-  late final StreamCountConfig<Person> baseStreamCountConfig =
-      const StreamCountConfig(
+  late final LegacyStreamCountConfig<Person> baseStreamCountConfig =
+      const LegacyStreamCountConfig(
         document: documentNodeSubscriptionwatchPersonsCount,
       );
   @override
-  final StreamSingleByIdConfig<Person> baseStreamSingleByIdConfig =
-      const StreamSingleByIdConfig(
+  final LegacyStreamSingleByIdConfig<Person> baseStreamSingleByIdConfig =
+      const LegacyStreamSingleByIdConfig(
         document: documentNodeSubscriptionwatchPerson,
       );
   @override
-  late final DeleteSingleByIdConfig<Person> baseDeleteSingleByIdConfig =
-      DeleteSingleByIdConfig(
+  late final LegacyDeleteSingleByIdConfig<Person> baseDeleteSingleByIdConfig =
+      LegacyDeleteSingleByIdConfig(
         document: documentNodeMutationdeletePerson,
         varsConstructor: _deleteSingleByIdVarsConstructor,
       );
   @override
-  late final UpdateObjectConfig<Person> baseUpdateObjectConfig =
-      UpdateObjectConfig(
+  late final LegacyUpdateObjectConfig<Person> baseUpdateObjectConfig =
+      LegacyUpdateObjectConfig(
         document: documentNodeMutationupdatePerson,
         varsConstructor: _updatePersonVarsConstructor,
         parserFn: db.parser.singleOrNullParser(fromJson, 'updatePersonsByPk'),
       );
   @override
-  late final CreateObjectConfig<Person> baseCreateObjectConfig =
-      CreateObjectConfig(
+  late final LegacyCreateObjectConfig<Person> baseCreateObjectConfig =
+      LegacyCreateObjectConfig(
         document: documentNodeMutationinsertPerson,
         varsConstructor: _createPersonVarsConstructor,
         parserFn: db.parser.singleParser(fromJson, 'insertPersonsOne'),

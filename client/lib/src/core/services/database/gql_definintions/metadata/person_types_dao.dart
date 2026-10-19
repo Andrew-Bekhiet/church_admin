@@ -5,19 +5,20 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 import 'package:graphql/client.dart';
 
 class PersonTypesDAO extends DAOBase<PersonType>
-    with StreamableDAO<PersonType>, CreatableDAO<PersonType> {
+    with LegacyStreamableDAO<PersonType>, LegacyCreatableDAO<PersonType> {
   @override
-  StreamAllConfig<PersonType> get baseStreamAllConfig => const StreamAllConfig(
-    document: documentNodeSubscriptionwatchAllPersonTypes,
-  );
+  LegacyStreamAllConfig<PersonType> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllPersonTypes,
+      );
 
   @override
-  StreamSingleByIdConfig<PersonType> get baseStreamSingleByIdConfig =>
+  LegacyStreamSingleByIdConfig<PersonType> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  CreateObjectConfig<PersonType> get baseCreateObjectConfig =>
-      CreateObjectConfig(
+  LegacyCreateObjectConfig<PersonType> get baseCreateObjectConfig =>
+      LegacyCreateObjectConfig(
         document: documentNodeMutationcreatePersonType,
         varsConstructor: _createPersonTypeVarsConstructor,
         parserFn: db.parser.singleParser(fromJson, 'insertPersonTypesOne'),

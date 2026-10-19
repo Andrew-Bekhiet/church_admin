@@ -20,7 +20,7 @@ class HistoryDAO {
     )
     variables,
   }) => PaginatableStream<LastRecordedByInfo, void>.simple(
-    factory: (request) => graphQLClient.subscribeAndReturnParsed(
+    factory: (request) => graphQLClient.legacySubscribeAndReturnParsed(
       SubscriptionOptions(
         document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
           document,
@@ -210,7 +210,7 @@ class HistoryDAO {
   }
 
   Stream<List<KodasRecord>> streamDayKodas({required DateTime day}) {
-    return graphQLClient.subscribeAndReturnParsed(
+    return graphQLClient.legacySubscribeAndReturnParsed(
       SubscriptionOptions(
         document: DataChecksDocumentTransformer.removeDataChecksIfDisabled(
           documentNodeSubscriptionwatchDayKodas,

@@ -1,7 +1,29 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
+import 'package:rxdart/rxdart.dart';
 
 class StreamableDAOParameters<T> with Equatable {
+  static Stream<StreamableDAOParameters<T>> combineLatest<T>({
+    Stream<String?>? searchQuery,
+    Stream<List<Filter>>? where,
+    Stream<List<OrderBy>>? orderBy,
+    Stream<FieldMetadata?>? secondLineField,
+  }) => Rx.combineLatest4(
+    searchQuery ?? Stream.value(null),
+    where ?? Stream.value(null),
+    orderBy ?? Stream.value(null),
+    secondLineField ?? Stream.value(null),
+    (search, where, orderBy, secondLineField) => StreamableDAOParameters<T>(
+      search: search,
+      where: where?.whereEnabled(),
+      orderBy: orderBy?.whereEnabled(),
+      secondLineField: switch (secondLineField) {
+        final field? when field.isEnabled => field,
+        _ => null,
+      },
+    ),
+  );
+
   final String? search;
   final List<Filter>? where;
   final List<OrderBy>? orderBy;

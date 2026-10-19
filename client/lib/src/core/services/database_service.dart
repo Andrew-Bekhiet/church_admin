@@ -17,6 +17,13 @@ class DatabaseService {
   final GQLParser parser;
   final DBVarsTransformer varsTransformer;
   final AdvancedQueryParser advancedQueryParser;
+  final LiveQueryRegistry? _liveQueries;
+
+  late final LiveQueryRegistry liveQueries =
+      _liveQueries ??
+      LiveQueryRegistry.withoutChangeFeed(
+        connectivity: graphQLClient.connectivityStream,
+      );
 
   late final home = HomeDAO(db: this);
 
@@ -75,5 +82,6 @@ class DatabaseService {
     this.parser = const GQLParser(),
     this.varsTransformer = const DBVarsTransformer(),
     this.advancedQueryParser = const AdvancedQueryParser(),
+    this._liveQueries,
   });
 }
