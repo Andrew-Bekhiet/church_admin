@@ -163,4 +163,10 @@ defmodule ChurchAdmin.Attendance.Meeting do
       argument :to, :date, allow_nil?: false
     end
   end
+
+  aggregates do
+    first :service_name, :service, :name, public?: true
+    first :group_name, :group, :name, public?: true
+    first :study_year_order, :study_year, :order, public?: true
+  end
 end
