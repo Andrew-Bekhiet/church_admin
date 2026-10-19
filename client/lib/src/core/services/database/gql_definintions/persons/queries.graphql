@@ -93,30 +93,27 @@ query familyUnclaimedContacts($filter: FamilyContactFilterInput, $first: Int) {
   }
 }
 
-query personsGeolocations(
-  $getAreas: Boolean! = true
-  $getStreets: Boolean! = true
-  $getFamilies: Boolean! = true
-  $getStores: Boolean! = true
-  $getPersons: Boolean! = true
-  $areasFilter: AreaFilterInput
-  $streetsFilter: StreetFilterInput
-  $familiesFilter: FamilyFilterInput
-  $storesFilter: StoreFilterInput
-  $personsFilter: PersonFilterInput
-  $first: Int
-) {
-  areas(filter: $areasFilter, first: $first) @include(if: $getAreas) {
+query geolocatedAreas($filter: AreaFilterInput, $first: Int, $after: String) {
+  areas(filter: $filter, first: $first, after: $after) {
+    endKeyset
     results {
       ...AreaWithBounds
     }
   }
-  streets(filter: $streetsFilter, first: $first) @include(if: $getStreets) {
+}
+
+query geolocatedStreets($filter: StreetFilterInput, $first: Int, $after: String) {
+  streets(filter: $filter, first: $first, after: $after) {
+    endKeyset
     results {
       ...StreetWithLine
     }
   }
-  families(filter: $familiesFilter, first: $first) @include(if: $getFamilies) {
+}
+
+query geolocatedFamilies($filter: FamilyFilterInput, $first: Int, $after: String) {
+  families(filter: $filter, first: $first, after: $after) {
+    endKeyset
     results {
       ...PersonFamily
       address {
@@ -125,7 +122,11 @@ query personsGeolocations(
       }
     }
   }
-  stores(filter: $storesFilter, first: $first) @include(if: $getStores) {
+}
+
+query geolocatedStores($filter: StoreFilterInput, $first: Int, $after: String) {
+  stores(filter: $filter, first: $first, after: $after) {
+    endKeyset
     results {
       ...Store
       address {
@@ -134,7 +135,11 @@ query personsGeolocations(
       }
     }
   }
-  persons(filter: $personsFilter, first: $first) @include(if: $getPersons) {
+}
+
+query geolocatedPersons($filter: PersonFilterInput, $first: Int, $after: String) {
+  persons(filter: $filter, first: $first, after: $after) {
+    endKeyset
     results {
       ...PersonNoPhoto
       address {

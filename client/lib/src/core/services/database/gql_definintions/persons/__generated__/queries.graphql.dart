@@ -6476,286 +6476,82 @@ class _CopyWithStubImpl_Query_familyUnclaimedContacts_familyContacts<TRes>
   results(_fn) => _res;
 }
 
-class Variables_Query_personsGeolocations {
-  factory Variables_Query_personsGeolocations({
-    bool? getAreas,
-    bool? getStreets,
-    bool? getFamilies,
-    bool? getStores,
-    bool? getPersons,
-    Input_AreaFilterInput? areasFilter,
-    Input_StreetFilterInput? streetsFilter,
-    Input_FamilyFilterInput? familiesFilter,
-    Input_StoreFilterInput? storesFilter,
-    Input_PersonFilterInput? personsFilter,
+class Variables_Query_geolocatedAreas {
+  factory Variables_Query_geolocatedAreas({
+    Input_AreaFilterInput? filter,
     int? first,
-  }) => Variables_Query_personsGeolocations._({
-    if (getAreas != null) r'getAreas': getAreas,
-    if (getStreets != null) r'getStreets': getStreets,
-    if (getFamilies != null) r'getFamilies': getFamilies,
-    if (getStores != null) r'getStores': getStores,
-    if (getPersons != null) r'getPersons': getPersons,
-    if (areasFilter != null) r'areasFilter': areasFilter,
-    if (streetsFilter != null) r'streetsFilter': streetsFilter,
-    if (familiesFilter != null) r'familiesFilter': familiesFilter,
-    if (storesFilter != null) r'storesFilter': storesFilter,
-    if (personsFilter != null) r'personsFilter': personsFilter,
+    String? after,
+  }) => Variables_Query_geolocatedAreas._({
+    if (filter != null) r'filter': filter,
     if (first != null) r'first': first,
+    if (after != null) r'after': after,
   });
 
-  Variables_Query_personsGeolocations._(this._$data);
+  Variables_Query_geolocatedAreas._(this._$data);
 
-  factory Variables_Query_personsGeolocations.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Variables_Query_geolocatedAreas.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('getAreas')) {
-      final l$getAreas = data['getAreas'];
-      result$data['getAreas'] = (l$getAreas as bool);
-    }
-    if (data.containsKey('getStreets')) {
-      final l$getStreets = data['getStreets'];
-      result$data['getStreets'] = (l$getStreets as bool);
-    }
-    if (data.containsKey('getFamilies')) {
-      final l$getFamilies = data['getFamilies'];
-      result$data['getFamilies'] = (l$getFamilies as bool);
-    }
-    if (data.containsKey('getStores')) {
-      final l$getStores = data['getStores'];
-      result$data['getStores'] = (l$getStores as bool);
-    }
-    if (data.containsKey('getPersons')) {
-      final l$getPersons = data['getPersons'];
-      result$data['getPersons'] = (l$getPersons as bool);
-    }
-    if (data.containsKey('areasFilter')) {
-      final l$areasFilter = data['areasFilter'];
-      result$data['areasFilter'] = l$areasFilter == null
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
           ? null
-          : Input_AreaFilterInput.fromJson(
-              (l$areasFilter as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('streetsFilter')) {
-      final l$streetsFilter = data['streetsFilter'];
-      result$data['streetsFilter'] = l$streetsFilter == null
-          ? null
-          : Input_StreetFilterInput.fromJson(
-              (l$streetsFilter as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('familiesFilter')) {
-      final l$familiesFilter = data['familiesFilter'];
-      result$data['familiesFilter'] = l$familiesFilter == null
-          ? null
-          : Input_FamilyFilterInput.fromJson(
-              (l$familiesFilter as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('storesFilter')) {
-      final l$storesFilter = data['storesFilter'];
-      result$data['storesFilter'] = l$storesFilter == null
-          ? null
-          : Input_StoreFilterInput.fromJson(
-              (l$storesFilter as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('personsFilter')) {
-      final l$personsFilter = data['personsFilter'];
-      result$data['personsFilter'] = l$personsFilter == null
-          ? null
-          : Input_PersonFilterInput.fromJson(
-              (l$personsFilter as Map<String, dynamic>),
-            );
+          : Input_AreaFilterInput.fromJson((l$filter as Map<String, dynamic>));
     }
     if (data.containsKey('first')) {
       final l$first = data['first'];
       result$data['first'] = (l$first as int?);
     }
-    return Variables_Query_personsGeolocations._(result$data);
+    if (data.containsKey('after')) {
+      final l$after = data['after'];
+      result$data['after'] = (l$after as String?);
+    }
+    return Variables_Query_geolocatedAreas._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  bool? get getAreas => (_$data['getAreas'] as bool?);
-
-  bool? get getStreets => (_$data['getStreets'] as bool?);
-
-  bool? get getFamilies => (_$data['getFamilies'] as bool?);
-
-  bool? get getStores => (_$data['getStores'] as bool?);
-
-  bool? get getPersons => (_$data['getPersons'] as bool?);
-
-  Input_AreaFilterInput? get areasFilter =>
-      (_$data['areasFilter'] as Input_AreaFilterInput?);
-
-  Input_StreetFilterInput? get streetsFilter =>
-      (_$data['streetsFilter'] as Input_StreetFilterInput?);
-
-  Input_FamilyFilterInput? get familiesFilter =>
-      (_$data['familiesFilter'] as Input_FamilyFilterInput?);
-
-  Input_StoreFilterInput? get storesFilter =>
-      (_$data['storesFilter'] as Input_StoreFilterInput?);
-
-  Input_PersonFilterInput? get personsFilter =>
-      (_$data['personsFilter'] as Input_PersonFilterInput?);
+  Input_AreaFilterInput? get filter =>
+      (_$data['filter'] as Input_AreaFilterInput?);
 
   int? get first => (_$data['first'] as int?);
 
+  String? get after => (_$data['after'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('getAreas')) {
-      final l$getAreas = getAreas;
-      result$data['getAreas'] = (l$getAreas as bool);
-    }
-    if (_$data.containsKey('getStreets')) {
-      final l$getStreets = getStreets;
-      result$data['getStreets'] = (l$getStreets as bool);
-    }
-    if (_$data.containsKey('getFamilies')) {
-      final l$getFamilies = getFamilies;
-      result$data['getFamilies'] = (l$getFamilies as bool);
-    }
-    if (_$data.containsKey('getStores')) {
-      final l$getStores = getStores;
-      result$data['getStores'] = (l$getStores as bool);
-    }
-    if (_$data.containsKey('getPersons')) {
-      final l$getPersons = getPersons;
-      result$data['getPersons'] = (l$getPersons as bool);
-    }
-    if (_$data.containsKey('areasFilter')) {
-      final l$areasFilter = areasFilter;
-      result$data['areasFilter'] = l$areasFilter?.toJson();
-    }
-    if (_$data.containsKey('streetsFilter')) {
-      final l$streetsFilter = streetsFilter;
-      result$data['streetsFilter'] = l$streetsFilter?.toJson();
-    }
-    if (_$data.containsKey('familiesFilter')) {
-      final l$familiesFilter = familiesFilter;
-      result$data['familiesFilter'] = l$familiesFilter?.toJson();
-    }
-    if (_$data.containsKey('storesFilter')) {
-      final l$storesFilter = storesFilter;
-      result$data['storesFilter'] = l$storesFilter?.toJson();
-    }
-    if (_$data.containsKey('personsFilter')) {
-      final l$personsFilter = personsFilter;
-      result$data['personsFilter'] = l$personsFilter?.toJson();
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
     }
     if (_$data.containsKey('first')) {
       final l$first = first;
       result$data['first'] = l$first;
     }
+    if (_$data.containsKey('after')) {
+      final l$after = after;
+      result$data['after'] = l$after;
+    }
     return result$data;
   }
 
-  CopyWith_Variables_Query_personsGeolocations<
-    Variables_Query_personsGeolocations
-  >
-  get copyWith => CopyWith_Variables_Query_personsGeolocations(this, (i) => i);
+  CopyWith_Variables_Query_geolocatedAreas<Variables_Query_geolocatedAreas>
+  get copyWith => CopyWith_Variables_Query_geolocatedAreas(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables_Query_personsGeolocations ||
+    if (other is! Variables_Query_geolocatedAreas ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$getAreas = getAreas;
-    final lOther$getAreas = other.getAreas;
-    if (_$data.containsKey('getAreas') !=
-        other._$data.containsKey('getAreas')) {
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
       return false;
     }
-    if (l$getAreas != lOther$getAreas) {
-      return false;
-    }
-    final l$getStreets = getStreets;
-    final lOther$getStreets = other.getStreets;
-    if (_$data.containsKey('getStreets') !=
-        other._$data.containsKey('getStreets')) {
-      return false;
-    }
-    if (l$getStreets != lOther$getStreets) {
-      return false;
-    }
-    final l$getFamilies = getFamilies;
-    final lOther$getFamilies = other.getFamilies;
-    if (_$data.containsKey('getFamilies') !=
-        other._$data.containsKey('getFamilies')) {
-      return false;
-    }
-    if (l$getFamilies != lOther$getFamilies) {
-      return false;
-    }
-    final l$getStores = getStores;
-    final lOther$getStores = other.getStores;
-    if (_$data.containsKey('getStores') !=
-        other._$data.containsKey('getStores')) {
-      return false;
-    }
-    if (l$getStores != lOther$getStores) {
-      return false;
-    }
-    final l$getPersons = getPersons;
-    final lOther$getPersons = other.getPersons;
-    if (_$data.containsKey('getPersons') !=
-        other._$data.containsKey('getPersons')) {
-      return false;
-    }
-    if (l$getPersons != lOther$getPersons) {
-      return false;
-    }
-    final l$areasFilter = areasFilter;
-    final lOther$areasFilter = other.areasFilter;
-    if (_$data.containsKey('areasFilter') !=
-        other._$data.containsKey('areasFilter')) {
-      return false;
-    }
-    if (l$areasFilter != lOther$areasFilter) {
-      return false;
-    }
-    final l$streetsFilter = streetsFilter;
-    final lOther$streetsFilter = other.streetsFilter;
-    if (_$data.containsKey('streetsFilter') !=
-        other._$data.containsKey('streetsFilter')) {
-      return false;
-    }
-    if (l$streetsFilter != lOther$streetsFilter) {
-      return false;
-    }
-    final l$familiesFilter = familiesFilter;
-    final lOther$familiesFilter = other.familiesFilter;
-    if (_$data.containsKey('familiesFilter') !=
-        other._$data.containsKey('familiesFilter')) {
-      return false;
-    }
-    if (l$familiesFilter != lOther$familiesFilter) {
-      return false;
-    }
-    final l$storesFilter = storesFilter;
-    final lOther$storesFilter = other.storesFilter;
-    if (_$data.containsKey('storesFilter') !=
-        other._$data.containsKey('storesFilter')) {
-      return false;
-    }
-    if (l$storesFilter != lOther$storesFilter) {
-      return false;
-    }
-    final l$personsFilter = personsFilter;
-    final lOther$personsFilter = other.personsFilter;
-    if (_$data.containsKey('personsFilter') !=
-        other._$data.containsKey('personsFilter')) {
-      return false;
-    }
-    if (l$personsFilter != lOther$personsFilter) {
+    if (l$filter != lOther$filter) {
       return false;
     }
     final l$first = first;
@@ -6766,189 +6562,92 @@ class Variables_Query_personsGeolocations {
     if (l$first != lOther$first) {
       return false;
     }
+    final l$after = after;
+    final lOther$after = other.after;
+    if (_$data.containsKey('after') != other._$data.containsKey('after')) {
+      return false;
+    }
+    if (l$after != lOther$after) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
-    final l$getAreas = getAreas;
-    final l$getStreets = getStreets;
-    final l$getFamilies = getFamilies;
-    final l$getStores = getStores;
-    final l$getPersons = getPersons;
-    final l$areasFilter = areasFilter;
-    final l$streetsFilter = streetsFilter;
-    final l$familiesFilter = familiesFilter;
-    final l$storesFilter = storesFilter;
-    final l$personsFilter = personsFilter;
+    final l$filter = filter;
     final l$first = first;
+    final l$after = after;
     return Object.hashAll([
-      _$data.containsKey('getAreas') ? l$getAreas : const {},
-      _$data.containsKey('getStreets') ? l$getStreets : const {},
-      _$data.containsKey('getFamilies') ? l$getFamilies : const {},
-      _$data.containsKey('getStores') ? l$getStores : const {},
-      _$data.containsKey('getPersons') ? l$getPersons : const {},
-      _$data.containsKey('areasFilter') ? l$areasFilter : const {},
-      _$data.containsKey('streetsFilter') ? l$streetsFilter : const {},
-      _$data.containsKey('familiesFilter') ? l$familiesFilter : const {},
-      _$data.containsKey('storesFilter') ? l$storesFilter : const {},
-      _$data.containsKey('personsFilter') ? l$personsFilter : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
       _$data.containsKey('first') ? l$first : const {},
+      _$data.containsKey('after') ? l$after : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Variables_Query_personsGeolocations<TRes> {
-  factory CopyWith_Variables_Query_personsGeolocations(
-    Variables_Query_personsGeolocations instance,
-    TRes Function(Variables_Query_personsGeolocations) then,
-  ) = _CopyWithImpl_Variables_Query_personsGeolocations;
+abstract class CopyWith_Variables_Query_geolocatedAreas<TRes> {
+  factory CopyWith_Variables_Query_geolocatedAreas(
+    Variables_Query_geolocatedAreas instance,
+    TRes Function(Variables_Query_geolocatedAreas) then,
+  ) = _CopyWithImpl_Variables_Query_geolocatedAreas;
 
-  factory CopyWith_Variables_Query_personsGeolocations.stub(TRes res) =
-      _CopyWithStubImpl_Variables_Query_personsGeolocations;
+  factory CopyWith_Variables_Query_geolocatedAreas.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Query_geolocatedAreas;
 
-  TRes call({
-    bool? getAreas,
-    bool? getStreets,
-    bool? getFamilies,
-    bool? getStores,
-    bool? getPersons,
-    Input_AreaFilterInput? areasFilter,
-    Input_StreetFilterInput? streetsFilter,
-    Input_FamilyFilterInput? familiesFilter,
-    Input_StoreFilterInput? storesFilter,
-    Input_PersonFilterInput? personsFilter,
-    int? first,
-  });
+  TRes call({Input_AreaFilterInput? filter, int? first, String? after});
 }
 
-class _CopyWithImpl_Variables_Query_personsGeolocations<TRes>
-    implements CopyWith_Variables_Query_personsGeolocations<TRes> {
-  _CopyWithImpl_Variables_Query_personsGeolocations(this._instance, this._then);
+class _CopyWithImpl_Variables_Query_geolocatedAreas<TRes>
+    implements CopyWith_Variables_Query_geolocatedAreas<TRes> {
+  _CopyWithImpl_Variables_Query_geolocatedAreas(this._instance, this._then);
 
-  final Variables_Query_personsGeolocations _instance;
+  final Variables_Query_geolocatedAreas _instance;
 
-  final TRes Function(Variables_Query_personsGeolocations) _then;
+  final TRes Function(Variables_Query_geolocatedAreas) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? getAreas = _undefined,
-    Object? getStreets = _undefined,
-    Object? getFamilies = _undefined,
-    Object? getStores = _undefined,
-    Object? getPersons = _undefined,
-    Object? areasFilter = _undefined,
-    Object? streetsFilter = _undefined,
-    Object? familiesFilter = _undefined,
-    Object? storesFilter = _undefined,
-    Object? personsFilter = _undefined,
+    Object? filter = _undefined,
     Object? first = _undefined,
+    Object? after = _undefined,
   }) => _then(
-    Variables_Query_personsGeolocations._({
+    Variables_Query_geolocatedAreas._({
       ..._instance._$data,
-      if (getAreas != _undefined && getAreas != null)
-        'getAreas': (getAreas as bool),
-      if (getStreets != _undefined && getStreets != null)
-        'getStreets': (getStreets as bool),
-      if (getFamilies != _undefined && getFamilies != null)
-        'getFamilies': (getFamilies as bool),
-      if (getStores != _undefined && getStores != null)
-        'getStores': (getStores as bool),
-      if (getPersons != _undefined && getPersons != null)
-        'getPersons': (getPersons as bool),
-      if (areasFilter != _undefined)
-        'areasFilter': (areasFilter as Input_AreaFilterInput?),
-      if (streetsFilter != _undefined)
-        'streetsFilter': (streetsFilter as Input_StreetFilterInput?),
-      if (familiesFilter != _undefined)
-        'familiesFilter': (familiesFilter as Input_FamilyFilterInput?),
-      if (storesFilter != _undefined)
-        'storesFilter': (storesFilter as Input_StoreFilterInput?),
-      if (personsFilter != _undefined)
-        'personsFilter': (personsFilter as Input_PersonFilterInput?),
+      if (filter != _undefined) 'filter': (filter as Input_AreaFilterInput?),
       if (first != _undefined) 'first': (first as int?),
+      if (after != _undefined) 'after': (after as String?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Variables_Query_personsGeolocations<TRes>
-    implements CopyWith_Variables_Query_personsGeolocations<TRes> {
-  _CopyWithStubImpl_Variables_Query_personsGeolocations(this._res);
+class _CopyWithStubImpl_Variables_Query_geolocatedAreas<TRes>
+    implements CopyWith_Variables_Query_geolocatedAreas<TRes> {
+  _CopyWithStubImpl_Variables_Query_geolocatedAreas(this._res);
 
   TRes _res;
 
-  call({
-    bool? getAreas,
-    bool? getStreets,
-    bool? getFamilies,
-    bool? getStores,
-    bool? getPersons,
-    Input_AreaFilterInput? areasFilter,
-    Input_StreetFilterInput? streetsFilter,
-    Input_FamilyFilterInput? familiesFilter,
-    Input_StoreFilterInput? storesFilter,
-    Input_PersonFilterInput? personsFilter,
-    int? first,
-  }) => _res;
+  call({Input_AreaFilterInput? filter, int? first, String? after}) => _res;
 }
 
-class Query_personsGeolocations {
-  Query_personsGeolocations({
-    this.areas,
-    this.streets,
-    this.families,
-    this.stores,
-    this.persons,
-    this.$__typename = 'RootQueryType',
-  });
+class Query_geolocatedAreas {
+  Query_geolocatedAreas({this.areas, this.$__typename = 'RootQueryType'});
 
-  factory Query_personsGeolocations.fromJson(Map<String, dynamic> json) {
+  factory Query_geolocatedAreas.fromJson(Map<String, dynamic> json) {
     final l$areas = json['areas'];
-    final l$streets = json['streets'];
-    final l$families = json['families'];
-    final l$stores = json['stores'];
-    final l$persons = json['persons'];
     final l$$__typename = json['__typename'];
-    return Query_personsGeolocations(
+    return Query_geolocatedAreas(
       areas: l$areas == null
           ? null
-          : Query_personsGeolocations_areas.fromJson(
+          : Query_geolocatedAreas_areas.fromJson(
               (l$areas as Map<String, dynamic>),
-            ),
-      streets: l$streets == null
-          ? null
-          : Query_personsGeolocations_streets.fromJson(
-              (l$streets as Map<String, dynamic>),
-            ),
-      families: l$families == null
-          ? null
-          : Query_personsGeolocations_families.fromJson(
-              (l$families as Map<String, dynamic>),
-            ),
-      stores: l$stores == null
-          ? null
-          : Query_personsGeolocations_stores.fromJson(
-              (l$stores as Map<String, dynamic>),
-            ),
-      persons: l$persons == null
-          ? null
-          : Query_personsGeolocations_persons.fromJson(
-              (l$persons as Map<String, dynamic>),
             ),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query_personsGeolocations_areas? areas;
-
-  final Query_personsGeolocations_streets? streets;
-
-  final Query_personsGeolocations_families? families;
-
-  final Query_personsGeolocations_stores? stores;
-
-  final Query_personsGeolocations_persons? persons;
+  final Query_geolocatedAreas_areas? areas;
 
   final String $__typename;
 
@@ -6956,14 +6655,6 @@ class Query_personsGeolocations {
     final _resultData = <String, dynamic>{};
     final l$areas = areas;
     _resultData['areas'] = l$areas?.toJson();
-    final l$streets = streets;
-    _resultData['streets'] = l$streets?.toJson();
-    final l$families = families;
-    _resultData['families'] = l$families?.toJson();
-    final l$stores = stores;
-    _resultData['stores'] = l$stores?.toJson();
-    final l$persons = persons;
-    _resultData['persons'] = l$persons?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -6972,19 +6663,8 @@ class Query_personsGeolocations {
   @override
   int get hashCode {
     final l$areas = areas;
-    final l$streets = streets;
-    final l$families = families;
-    final l$stores = stores;
-    final l$persons = persons;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$areas,
-      l$streets,
-      l$families,
-      l$stores,
-      l$persons,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$areas, l$$__typename]);
   }
 
   @override
@@ -6992,33 +6672,12 @@ class Query_personsGeolocations {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query_personsGeolocations ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query_geolocatedAreas || runtimeType != other.runtimeType) {
       return false;
     }
     final l$areas = areas;
     final lOther$areas = other.areas;
     if (l$areas != lOther$areas) {
-      return false;
-    }
-    final l$streets = streets;
-    final lOther$streets = other.streets;
-    if (l$streets != lOther$streets) {
-      return false;
-    }
-    final l$families = families;
-    final lOther$families = other.families;
-    if (l$families != lOther$families) {
-      return false;
-    }
-    final l$stores = stores;
-    final lOther$stores = other.stores;
-    if (l$stores != lOther$stores) {
-      return false;
-    }
-    final l$persons = persons;
-    final lOther$persons = other.persons;
-    if (l$persons != lOther$persons) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -7030,211 +6689,77 @@ class Query_personsGeolocations {
   }
 }
 
-extension UtilityExtension_Query_personsGeolocations
-    on Query_personsGeolocations {
-  CopyWith_Query_personsGeolocations<Query_personsGeolocations> get copyWith =>
-      CopyWith_Query_personsGeolocations(this, (i) => i);
+extension UtilityExtension_Query_geolocatedAreas on Query_geolocatedAreas {
+  CopyWith_Query_geolocatedAreas<Query_geolocatedAreas> get copyWith =>
+      CopyWith_Query_geolocatedAreas(this, (i) => i);
 }
 
-abstract class CopyWith_Query_personsGeolocations<TRes> {
-  factory CopyWith_Query_personsGeolocations(
-    Query_personsGeolocations instance,
-    TRes Function(Query_personsGeolocations) then,
-  ) = _CopyWithImpl_Query_personsGeolocations;
+abstract class CopyWith_Query_geolocatedAreas<TRes> {
+  factory CopyWith_Query_geolocatedAreas(
+    Query_geolocatedAreas instance,
+    TRes Function(Query_geolocatedAreas) then,
+  ) = _CopyWithImpl_Query_geolocatedAreas;
 
-  factory CopyWith_Query_personsGeolocations.stub(TRes res) =
-      _CopyWithStubImpl_Query_personsGeolocations;
+  factory CopyWith_Query_geolocatedAreas.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedAreas;
 
-  TRes call({
-    Query_personsGeolocations_areas? areas,
-    Query_personsGeolocations_streets? streets,
-    Query_personsGeolocations_families? families,
-    Query_personsGeolocations_stores? stores,
-    Query_personsGeolocations_persons? persons,
-    String? $__typename,
-  });
-  CopyWith_Query_personsGeolocations_areas<TRes> get areas;
-  CopyWith_Query_personsGeolocations_streets<TRes> get streets;
-  CopyWith_Query_personsGeolocations_families<TRes> get families;
-  CopyWith_Query_personsGeolocations_stores<TRes> get stores;
-  CopyWith_Query_personsGeolocations_persons<TRes> get persons;
+  TRes call({Query_geolocatedAreas_areas? areas, String? $__typename});
+  CopyWith_Query_geolocatedAreas_areas<TRes> get areas;
 }
 
-class _CopyWithImpl_Query_personsGeolocations<TRes>
-    implements CopyWith_Query_personsGeolocations<TRes> {
-  _CopyWithImpl_Query_personsGeolocations(this._instance, this._then);
+class _CopyWithImpl_Query_geolocatedAreas<TRes>
+    implements CopyWith_Query_geolocatedAreas<TRes> {
+  _CopyWithImpl_Query_geolocatedAreas(this._instance, this._then);
 
-  final Query_personsGeolocations _instance;
+  final Query_geolocatedAreas _instance;
 
-  final TRes Function(Query_personsGeolocations) _then;
+  final TRes Function(Query_geolocatedAreas) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? areas = _undefined,
-    Object? streets = _undefined,
-    Object? families = _undefined,
-    Object? stores = _undefined,
-    Object? persons = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Query_personsGeolocations(
-      areas: areas == _undefined
-          ? _instance.areas
-          : (areas as Query_personsGeolocations_areas?),
-      streets: streets == _undefined
-          ? _instance.streets
-          : (streets as Query_personsGeolocations_streets?),
-      families: families == _undefined
-          ? _instance.families
-          : (families as Query_personsGeolocations_families?),
-      stores: stores == _undefined
-          ? _instance.stores
-          : (stores as Query_personsGeolocations_stores?),
-      persons: persons == _undefined
-          ? _instance.persons
-          : (persons as Query_personsGeolocations_persons?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
+  TRes call({Object? areas = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Query_geolocatedAreas(
+          areas: areas == _undefined
+              ? _instance.areas
+              : (areas as Query_geolocatedAreas_areas?),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 
-  CopyWith_Query_personsGeolocations_areas<TRes> get areas {
+  CopyWith_Query_geolocatedAreas_areas<TRes> get areas {
     final local$areas = _instance.areas;
     return local$areas == null
-        ? CopyWith_Query_personsGeolocations_areas.stub(_then(_instance))
-        : CopyWith_Query_personsGeolocations_areas(
+        ? CopyWith_Query_geolocatedAreas_areas.stub(_then(_instance))
+        : CopyWith_Query_geolocatedAreas_areas(
             local$areas,
             (e) => call(areas: e),
           );
   }
-
-  CopyWith_Query_personsGeolocations_streets<TRes> get streets {
-    final local$streets = _instance.streets;
-    return local$streets == null
-        ? CopyWith_Query_personsGeolocations_streets.stub(_then(_instance))
-        : CopyWith_Query_personsGeolocations_streets(
-            local$streets,
-            (e) => call(streets: e),
-          );
-  }
-
-  CopyWith_Query_personsGeolocations_families<TRes> get families {
-    final local$families = _instance.families;
-    return local$families == null
-        ? CopyWith_Query_personsGeolocations_families.stub(_then(_instance))
-        : CopyWith_Query_personsGeolocations_families(
-            local$families,
-            (e) => call(families: e),
-          );
-  }
-
-  CopyWith_Query_personsGeolocations_stores<TRes> get stores {
-    final local$stores = _instance.stores;
-    return local$stores == null
-        ? CopyWith_Query_personsGeolocations_stores.stub(_then(_instance))
-        : CopyWith_Query_personsGeolocations_stores(
-            local$stores,
-            (e) => call(stores: e),
-          );
-  }
-
-  CopyWith_Query_personsGeolocations_persons<TRes> get persons {
-    final local$persons = _instance.persons;
-    return local$persons == null
-        ? CopyWith_Query_personsGeolocations_persons.stub(_then(_instance))
-        : CopyWith_Query_personsGeolocations_persons(
-            local$persons,
-            (e) => call(persons: e),
-          );
-  }
 }
 
-class _CopyWithStubImpl_Query_personsGeolocations<TRes>
-    implements CopyWith_Query_personsGeolocations<TRes> {
-  _CopyWithStubImpl_Query_personsGeolocations(this._res);
+class _CopyWithStubImpl_Query_geolocatedAreas<TRes>
+    implements CopyWith_Query_geolocatedAreas<TRes> {
+  _CopyWithStubImpl_Query_geolocatedAreas(this._res);
 
   TRes _res;
 
-  call({
-    Query_personsGeolocations_areas? areas,
-    Query_personsGeolocations_streets? streets,
-    Query_personsGeolocations_families? families,
-    Query_personsGeolocations_stores? stores,
-    Query_personsGeolocations_persons? persons,
-    String? $__typename,
-  }) => _res;
+  call({Query_geolocatedAreas_areas? areas, String? $__typename}) => _res;
 
-  CopyWith_Query_personsGeolocations_areas<TRes> get areas =>
-      CopyWith_Query_personsGeolocations_areas.stub(_res);
-
-  CopyWith_Query_personsGeolocations_streets<TRes> get streets =>
-      CopyWith_Query_personsGeolocations_streets.stub(_res);
-
-  CopyWith_Query_personsGeolocations_families<TRes> get families =>
-      CopyWith_Query_personsGeolocations_families.stub(_res);
-
-  CopyWith_Query_personsGeolocations_stores<TRes> get stores =>
-      CopyWith_Query_personsGeolocations_stores.stub(_res);
-
-  CopyWith_Query_personsGeolocations_persons<TRes> get persons =>
-      CopyWith_Query_personsGeolocations_persons.stub(_res);
+  CopyWith_Query_geolocatedAreas_areas<TRes> get areas =>
+      CopyWith_Query_geolocatedAreas_areas.stub(_res);
 }
 
-const documentNodeQuerypersonsGeolocations = DocumentNode(
+const documentNodeQuerygeolocatedAreas = DocumentNode(
   definitions: [
     OperationDefinitionNode(
       type: OperationType.query,
-      name: NameNode(value: 'personsGeolocations'),
+      name: NameNode(value: 'geolocatedAreas'),
       variableDefinitions: [
         VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'getAreas')),
-          type: NamedTypeNode(
-            name: NameNode(value: 'Boolean'),
-            isNonNull: true,
-          ),
-          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-          directives: [],
-        ),
-        VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'getStreets')),
-          type: NamedTypeNode(
-            name: NameNode(value: 'Boolean'),
-            isNonNull: true,
-          ),
-          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-          directives: [],
-        ),
-        VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'getFamilies')),
-          type: NamedTypeNode(
-            name: NameNode(value: 'Boolean'),
-            isNonNull: true,
-          ),
-          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-          directives: [],
-        ),
-        VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'getStores')),
-          type: NamedTypeNode(
-            name: NameNode(value: 'Boolean'),
-            isNonNull: true,
-          ),
-          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-          directives: [],
-        ),
-        VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'getPersons')),
-          type: NamedTypeNode(
-            name: NameNode(value: 'Boolean'),
-            isNonNull: true,
-          ),
-          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-          directives: [],
-        ),
-        VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'areasFilter')),
+          variable: VariableNode(name: NameNode(value: 'filter')),
           type: NamedTypeNode(
             name: NameNode(value: 'AreaFilterInput'),
             isNonNull: false,
@@ -7243,44 +6768,17 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
           directives: [],
         ),
         VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'streetsFilter')),
-          type: NamedTypeNode(
-            name: NameNode(value: 'StreetFilterInput'),
-            isNonNull: false,
-          ),
-          defaultValue: DefaultValueNode(value: null),
-          directives: [],
-        ),
-        VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'familiesFilter')),
-          type: NamedTypeNode(
-            name: NameNode(value: 'FamilyFilterInput'),
-            isNonNull: false,
-          ),
-          defaultValue: DefaultValueNode(value: null),
-          directives: [],
-        ),
-        VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'storesFilter')),
-          type: NamedTypeNode(
-            name: NameNode(value: 'StoreFilterInput'),
-            isNonNull: false,
-          ),
-          defaultValue: DefaultValueNode(value: null),
-          directives: [],
-        ),
-        VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'personsFilter')),
-          type: NamedTypeNode(
-            name: NameNode(value: 'PersonFilterInput'),
-            isNonNull: false,
-          ),
-          defaultValue: DefaultValueNode(value: null),
-          directives: [],
-        ),
-        VariableDefinitionNode(
           variable: VariableNode(name: NameNode(value: 'first')),
           type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'after')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'String'),
+            isNonNull: false,
+          ),
           defaultValue: DefaultValueNode(value: null),
           directives: [],
         ),
@@ -7294,26 +6792,27 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
             arguments: [
               ArgumentNode(
                 name: NameNode(value: 'filter'),
-                value: VariableNode(name: NameNode(value: 'areasFilter')),
+                value: VariableNode(name: NameNode(value: 'filter')),
               ),
               ArgumentNode(
                 name: NameNode(value: 'first'),
                 value: VariableNode(name: NameNode(value: 'first')),
               ),
-            ],
-            directives: [
-              DirectiveNode(
-                name: NameNode(value: 'include'),
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'if'),
-                    value: VariableNode(name: NameNode(value: 'getAreas')),
-                  ),
-                ],
+              ArgumentNode(
+                name: NameNode(value: 'after'),
+                value: VariableNode(name: NameNode(value: 'after')),
               ),
             ],
+            directives: [],
             selectionSet: SelectionSetNode(
               selections: [
+                FieldNode(
+                  name: NameNode(value: 'endKeyset'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
                 FieldNode(
                   name: NameNode(value: 'results'),
                   alias: null,
@@ -7346,31 +6845,537 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
             ),
           ),
           FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionAreaWithBounds,
+    fragmentDefinitionArea,
+  ],
+);
+
+class Query_geolocatedAreas_areas {
+  Query_geolocatedAreas_areas({
+    this.endKeyset,
+    this.results,
+    this.$__typename = 'KeysetPageOfArea',
+  });
+
+  factory Query_geolocatedAreas_areas.fromJson(Map<String, dynamic> json) {
+    final l$endKeyset = json['endKeyset'];
+    final l$results = json['results'];
+    final l$$__typename = json['__typename'];
+    return Query_geolocatedAreas_areas(
+      endKeyset: (l$endKeyset as String?),
+      results: (l$results as List<dynamic>?)
+          ?.map(
+            (e) =>
+                Fragment_AreaWithBounds.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? endKeyset;
+
+  final List<Fragment_AreaWithBounds>? results;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$endKeyset = endKeyset;
+    _resultData['endKeyset'] = l$endKeyset;
+    final l$results = results;
+    _resultData['results'] = l$results?.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$endKeyset = endKeyset;
+    final l$results = results;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$endKeyset,
+      l$results == null ? null : Object.hashAll(l$results.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedAreas_areas ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$endKeyset = endKeyset;
+    final lOther$endKeyset = other.endKeyset;
+    if (l$endKeyset != lOther$endKeyset) {
+      return false;
+    }
+    final l$results = results;
+    final lOther$results = other.results;
+    if (l$results != null && lOther$results != null) {
+      if (l$results.length != lOther$results.length) {
+        return false;
+      }
+      for (int i = 0; i < l$results.length; i++) {
+        final l$results$entry = l$results[i];
+        final lOther$results$entry = lOther$results[i];
+        if (l$results$entry != lOther$results$entry) {
+          return false;
+        }
+      }
+    } else if (l$results != lOther$results) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedAreas_areas
+    on Query_geolocatedAreas_areas {
+  CopyWith_Query_geolocatedAreas_areas<Query_geolocatedAreas_areas>
+  get copyWith => CopyWith_Query_geolocatedAreas_areas(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedAreas_areas<TRes> {
+  factory CopyWith_Query_geolocatedAreas_areas(
+    Query_geolocatedAreas_areas instance,
+    TRes Function(Query_geolocatedAreas_areas) then,
+  ) = _CopyWithImpl_Query_geolocatedAreas_areas;
+
+  factory CopyWith_Query_geolocatedAreas_areas.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedAreas_areas;
+
+  TRes call({
+    String? endKeyset,
+    List<Fragment_AreaWithBounds>? results,
+    String? $__typename,
+  });
+  TRes results(
+    Iterable<Fragment_AreaWithBounds>? Function(
+      Iterable<CopyWith_Fragment_AreaWithBounds<Fragment_AreaWithBounds>>?,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Query_geolocatedAreas_areas<TRes>
+    implements CopyWith_Query_geolocatedAreas_areas<TRes> {
+  _CopyWithImpl_Query_geolocatedAreas_areas(this._instance, this._then);
+
+  final Query_geolocatedAreas_areas _instance;
+
+  final TRes Function(Query_geolocatedAreas_areas) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? endKeyset = _undefined,
+    Object? results = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_geolocatedAreas_areas(
+      endKeyset: endKeyset == _undefined
+          ? _instance.endKeyset
+          : (endKeyset as String?),
+      results: results == _undefined
+          ? _instance.results
+          : (results as List<Fragment_AreaWithBounds>?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  TRes results(
+    Iterable<Fragment_AreaWithBounds>? Function(
+      Iterable<CopyWith_Fragment_AreaWithBounds<Fragment_AreaWithBounds>>?,
+    )
+    _fn,
+  ) => call(
+    results: _fn(
+      _instance.results?.map(
+        (e) => CopyWith_Fragment_AreaWithBounds(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+}
+
+class _CopyWithStubImpl_Query_geolocatedAreas_areas<TRes>
+    implements CopyWith_Query_geolocatedAreas_areas<TRes> {
+  _CopyWithStubImpl_Query_geolocatedAreas_areas(this._res);
+
+  TRes _res;
+
+  call({
+    String? endKeyset,
+    List<Fragment_AreaWithBounds>? results,
+    String? $__typename,
+  }) => _res;
+
+  results(_fn) => _res;
+}
+
+class Variables_Query_geolocatedStreets {
+  factory Variables_Query_geolocatedStreets({
+    Input_StreetFilterInput? filter,
+    int? first,
+    String? after,
+  }) => Variables_Query_geolocatedStreets._({
+    if (filter != null) r'filter': filter,
+    if (first != null) r'first': first,
+    if (after != null) r'after': after,
+  });
+
+  Variables_Query_geolocatedStreets._(this._$data);
+
+  factory Variables_Query_geolocatedStreets.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_StreetFilterInput.fromJson(
+              (l$filter as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('first')) {
+      final l$first = data['first'];
+      result$data['first'] = (l$first as int?);
+    }
+    if (data.containsKey('after')) {
+      final l$after = data['after'];
+      result$data['after'] = (l$after as String?);
+    }
+    return Variables_Query_geolocatedStreets._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_StreetFilterInput? get filter =>
+      (_$data['filter'] as Input_StreetFilterInput?);
+
+  int? get first => (_$data['first'] as int?);
+
+  String? get after => (_$data['after'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    if (_$data.containsKey('first')) {
+      final l$first = first;
+      result$data['first'] = l$first;
+    }
+    if (_$data.containsKey('after')) {
+      final l$after = after;
+      result$data['after'] = l$after;
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Query_geolocatedStreets<Variables_Query_geolocatedStreets>
+  get copyWith => CopyWith_Variables_Query_geolocatedStreets(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Query_geolocatedStreets ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$first = first;
+    final lOther$first = other.first;
+    if (_$data.containsKey('first') != other._$data.containsKey('first')) {
+      return false;
+    }
+    if (l$first != lOther$first) {
+      return false;
+    }
+    final l$after = after;
+    final lOther$after = other.after;
+    if (_$data.containsKey('after') != other._$data.containsKey('after')) {
+      return false;
+    }
+    if (l$after != lOther$after) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$filter = filter;
+    final l$first = first;
+    final l$after = after;
+    return Object.hashAll([
+      _$data.containsKey('filter') ? l$filter : const {},
+      _$data.containsKey('first') ? l$first : const {},
+      _$data.containsKey('after') ? l$after : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Query_geolocatedStreets<TRes> {
+  factory CopyWith_Variables_Query_geolocatedStreets(
+    Variables_Query_geolocatedStreets instance,
+    TRes Function(Variables_Query_geolocatedStreets) then,
+  ) = _CopyWithImpl_Variables_Query_geolocatedStreets;
+
+  factory CopyWith_Variables_Query_geolocatedStreets.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Query_geolocatedStreets;
+
+  TRes call({Input_StreetFilterInput? filter, int? first, String? after});
+}
+
+class _CopyWithImpl_Variables_Query_geolocatedStreets<TRes>
+    implements CopyWith_Variables_Query_geolocatedStreets<TRes> {
+  _CopyWithImpl_Variables_Query_geolocatedStreets(this._instance, this._then);
+
+  final Variables_Query_geolocatedStreets _instance;
+
+  final TRes Function(Variables_Query_geolocatedStreets) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? filter = _undefined,
+    Object? first = _undefined,
+    Object? after = _undefined,
+  }) => _then(
+    Variables_Query_geolocatedStreets._({
+      ..._instance._$data,
+      if (filter != _undefined) 'filter': (filter as Input_StreetFilterInput?),
+      if (first != _undefined) 'first': (first as int?),
+      if (after != _undefined) 'after': (after as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Variables_Query_geolocatedStreets<TRes>
+    implements CopyWith_Variables_Query_geolocatedStreets<TRes> {
+  _CopyWithStubImpl_Variables_Query_geolocatedStreets(this._res);
+
+  TRes _res;
+
+  call({Input_StreetFilterInput? filter, int? first, String? after}) => _res;
+}
+
+class Query_geolocatedStreets {
+  Query_geolocatedStreets({this.streets, this.$__typename = 'RootQueryType'});
+
+  factory Query_geolocatedStreets.fromJson(Map<String, dynamic> json) {
+    final l$streets = json['streets'];
+    final l$$__typename = json['__typename'];
+    return Query_geolocatedStreets(
+      streets: l$streets == null
+          ? null
+          : Query_geolocatedStreets_streets.fromJson(
+              (l$streets as Map<String, dynamic>),
+            ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query_geolocatedStreets_streets? streets;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$streets = streets;
+    _resultData['streets'] = l$streets?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$streets = streets;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$streets, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedStreets || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$streets = streets;
+    final lOther$streets = other.streets;
+    if (l$streets != lOther$streets) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedStreets on Query_geolocatedStreets {
+  CopyWith_Query_geolocatedStreets<Query_geolocatedStreets> get copyWith =>
+      CopyWith_Query_geolocatedStreets(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedStreets<TRes> {
+  factory CopyWith_Query_geolocatedStreets(
+    Query_geolocatedStreets instance,
+    TRes Function(Query_geolocatedStreets) then,
+  ) = _CopyWithImpl_Query_geolocatedStreets;
+
+  factory CopyWith_Query_geolocatedStreets.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedStreets;
+
+  TRes call({Query_geolocatedStreets_streets? streets, String? $__typename});
+  CopyWith_Query_geolocatedStreets_streets<TRes> get streets;
+}
+
+class _CopyWithImpl_Query_geolocatedStreets<TRes>
+    implements CopyWith_Query_geolocatedStreets<TRes> {
+  _CopyWithImpl_Query_geolocatedStreets(this._instance, this._then);
+
+  final Query_geolocatedStreets _instance;
+
+  final TRes Function(Query_geolocatedStreets) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? streets = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Query_geolocatedStreets(
+          streets: streets == _undefined
+              ? _instance.streets
+              : (streets as Query_geolocatedStreets_streets?),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
+
+  CopyWith_Query_geolocatedStreets_streets<TRes> get streets {
+    final local$streets = _instance.streets;
+    return local$streets == null
+        ? CopyWith_Query_geolocatedStreets_streets.stub(_then(_instance))
+        : CopyWith_Query_geolocatedStreets_streets(
+            local$streets,
+            (e) => call(streets: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Query_geolocatedStreets<TRes>
+    implements CopyWith_Query_geolocatedStreets<TRes> {
+  _CopyWithStubImpl_Query_geolocatedStreets(this._res);
+
+  TRes _res;
+
+  call({Query_geolocatedStreets_streets? streets, String? $__typename}) => _res;
+
+  CopyWith_Query_geolocatedStreets_streets<TRes> get streets =>
+      CopyWith_Query_geolocatedStreets_streets.stub(_res);
+}
+
+const documentNodeQuerygeolocatedStreets = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'geolocatedStreets'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'filter')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'StreetFilterInput'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'first')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'after')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'String'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
             name: NameNode(value: 'streets'),
             alias: null,
             arguments: [
               ArgumentNode(
                 name: NameNode(value: 'filter'),
-                value: VariableNode(name: NameNode(value: 'streetsFilter')),
+                value: VariableNode(name: NameNode(value: 'filter')),
               ),
               ArgumentNode(
                 name: NameNode(value: 'first'),
                 value: VariableNode(name: NameNode(value: 'first')),
               ),
-            ],
-            directives: [
-              DirectiveNode(
-                name: NameNode(value: 'include'),
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'if'),
-                    value: VariableNode(name: NameNode(value: 'getStreets')),
-                  ),
-                ],
+              ArgumentNode(
+                name: NameNode(value: 'after'),
+                value: VariableNode(name: NameNode(value: 'after')),
               ),
             ],
+            directives: [],
             selectionSet: SelectionSetNode(
               selections: [
+                FieldNode(
+                  name: NameNode(value: 'endKeyset'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
                 FieldNode(
                   name: NameNode(value: 'results'),
                   alias: null,
@@ -7403,31 +7408,544 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
             ),
           ),
           FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionStreetWithLine,
+    fragmentDefinitionStreet,
+  ],
+);
+
+class Query_geolocatedStreets_streets {
+  Query_geolocatedStreets_streets({
+    this.endKeyset,
+    this.results,
+    this.$__typename = 'KeysetPageOfStreet',
+  });
+
+  factory Query_geolocatedStreets_streets.fromJson(Map<String, dynamic> json) {
+    final l$endKeyset = json['endKeyset'];
+    final l$results = json['results'];
+    final l$$__typename = json['__typename'];
+    return Query_geolocatedStreets_streets(
+      endKeyset: (l$endKeyset as String?),
+      results: (l$results as List<dynamic>?)
+          ?.map(
+            (e) =>
+                Fragment_StreetWithLine.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? endKeyset;
+
+  final List<Fragment_StreetWithLine>? results;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$endKeyset = endKeyset;
+    _resultData['endKeyset'] = l$endKeyset;
+    final l$results = results;
+    _resultData['results'] = l$results?.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$endKeyset = endKeyset;
+    final l$results = results;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$endKeyset,
+      l$results == null ? null : Object.hashAll(l$results.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedStreets_streets ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$endKeyset = endKeyset;
+    final lOther$endKeyset = other.endKeyset;
+    if (l$endKeyset != lOther$endKeyset) {
+      return false;
+    }
+    final l$results = results;
+    final lOther$results = other.results;
+    if (l$results != null && lOther$results != null) {
+      if (l$results.length != lOther$results.length) {
+        return false;
+      }
+      for (int i = 0; i < l$results.length; i++) {
+        final l$results$entry = l$results[i];
+        final lOther$results$entry = lOther$results[i];
+        if (l$results$entry != lOther$results$entry) {
+          return false;
+        }
+      }
+    } else if (l$results != lOther$results) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedStreets_streets
+    on Query_geolocatedStreets_streets {
+  CopyWith_Query_geolocatedStreets_streets<Query_geolocatedStreets_streets>
+  get copyWith => CopyWith_Query_geolocatedStreets_streets(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedStreets_streets<TRes> {
+  factory CopyWith_Query_geolocatedStreets_streets(
+    Query_geolocatedStreets_streets instance,
+    TRes Function(Query_geolocatedStreets_streets) then,
+  ) = _CopyWithImpl_Query_geolocatedStreets_streets;
+
+  factory CopyWith_Query_geolocatedStreets_streets.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedStreets_streets;
+
+  TRes call({
+    String? endKeyset,
+    List<Fragment_StreetWithLine>? results,
+    String? $__typename,
+  });
+  TRes results(
+    Iterable<Fragment_StreetWithLine>? Function(
+      Iterable<CopyWith_Fragment_StreetWithLine<Fragment_StreetWithLine>>?,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Query_geolocatedStreets_streets<TRes>
+    implements CopyWith_Query_geolocatedStreets_streets<TRes> {
+  _CopyWithImpl_Query_geolocatedStreets_streets(this._instance, this._then);
+
+  final Query_geolocatedStreets_streets _instance;
+
+  final TRes Function(Query_geolocatedStreets_streets) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? endKeyset = _undefined,
+    Object? results = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_geolocatedStreets_streets(
+      endKeyset: endKeyset == _undefined
+          ? _instance.endKeyset
+          : (endKeyset as String?),
+      results: results == _undefined
+          ? _instance.results
+          : (results as List<Fragment_StreetWithLine>?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  TRes results(
+    Iterable<Fragment_StreetWithLine>? Function(
+      Iterable<CopyWith_Fragment_StreetWithLine<Fragment_StreetWithLine>>?,
+    )
+    _fn,
+  ) => call(
+    results: _fn(
+      _instance.results?.map(
+        (e) => CopyWith_Fragment_StreetWithLine(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+}
+
+class _CopyWithStubImpl_Query_geolocatedStreets_streets<TRes>
+    implements CopyWith_Query_geolocatedStreets_streets<TRes> {
+  _CopyWithStubImpl_Query_geolocatedStreets_streets(this._res);
+
+  TRes _res;
+
+  call({
+    String? endKeyset,
+    List<Fragment_StreetWithLine>? results,
+    String? $__typename,
+  }) => _res;
+
+  results(_fn) => _res;
+}
+
+class Variables_Query_geolocatedFamilies {
+  factory Variables_Query_geolocatedFamilies({
+    Input_FamilyFilterInput? filter,
+    int? first,
+    String? after,
+  }) => Variables_Query_geolocatedFamilies._({
+    if (filter != null) r'filter': filter,
+    if (first != null) r'first': first,
+    if (after != null) r'after': after,
+  });
+
+  Variables_Query_geolocatedFamilies._(this._$data);
+
+  factory Variables_Query_geolocatedFamilies.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_FamilyFilterInput.fromJson(
+              (l$filter as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('first')) {
+      final l$first = data['first'];
+      result$data['first'] = (l$first as int?);
+    }
+    if (data.containsKey('after')) {
+      final l$after = data['after'];
+      result$data['after'] = (l$after as String?);
+    }
+    return Variables_Query_geolocatedFamilies._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_FamilyFilterInput? get filter =>
+      (_$data['filter'] as Input_FamilyFilterInput?);
+
+  int? get first => (_$data['first'] as int?);
+
+  String? get after => (_$data['after'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    if (_$data.containsKey('first')) {
+      final l$first = first;
+      result$data['first'] = l$first;
+    }
+    if (_$data.containsKey('after')) {
+      final l$after = after;
+      result$data['after'] = l$after;
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Query_geolocatedFamilies<
+    Variables_Query_geolocatedFamilies
+  >
+  get copyWith => CopyWith_Variables_Query_geolocatedFamilies(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Query_geolocatedFamilies ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$first = first;
+    final lOther$first = other.first;
+    if (_$data.containsKey('first') != other._$data.containsKey('first')) {
+      return false;
+    }
+    if (l$first != lOther$first) {
+      return false;
+    }
+    final l$after = after;
+    final lOther$after = other.after;
+    if (_$data.containsKey('after') != other._$data.containsKey('after')) {
+      return false;
+    }
+    if (l$after != lOther$after) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$filter = filter;
+    final l$first = first;
+    final l$after = after;
+    return Object.hashAll([
+      _$data.containsKey('filter') ? l$filter : const {},
+      _$data.containsKey('first') ? l$first : const {},
+      _$data.containsKey('after') ? l$after : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Query_geolocatedFamilies<TRes> {
+  factory CopyWith_Variables_Query_geolocatedFamilies(
+    Variables_Query_geolocatedFamilies instance,
+    TRes Function(Variables_Query_geolocatedFamilies) then,
+  ) = _CopyWithImpl_Variables_Query_geolocatedFamilies;
+
+  factory CopyWith_Variables_Query_geolocatedFamilies.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Query_geolocatedFamilies;
+
+  TRes call({Input_FamilyFilterInput? filter, int? first, String? after});
+}
+
+class _CopyWithImpl_Variables_Query_geolocatedFamilies<TRes>
+    implements CopyWith_Variables_Query_geolocatedFamilies<TRes> {
+  _CopyWithImpl_Variables_Query_geolocatedFamilies(this._instance, this._then);
+
+  final Variables_Query_geolocatedFamilies _instance;
+
+  final TRes Function(Variables_Query_geolocatedFamilies) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? filter = _undefined,
+    Object? first = _undefined,
+    Object? after = _undefined,
+  }) => _then(
+    Variables_Query_geolocatedFamilies._({
+      ..._instance._$data,
+      if (filter != _undefined) 'filter': (filter as Input_FamilyFilterInput?),
+      if (first != _undefined) 'first': (first as int?),
+      if (after != _undefined) 'after': (after as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Variables_Query_geolocatedFamilies<TRes>
+    implements CopyWith_Variables_Query_geolocatedFamilies<TRes> {
+  _CopyWithStubImpl_Variables_Query_geolocatedFamilies(this._res);
+
+  TRes _res;
+
+  call({Input_FamilyFilterInput? filter, int? first, String? after}) => _res;
+}
+
+class Query_geolocatedFamilies {
+  Query_geolocatedFamilies({this.families, this.$__typename = 'RootQueryType'});
+
+  factory Query_geolocatedFamilies.fromJson(Map<String, dynamic> json) {
+    final l$families = json['families'];
+    final l$$__typename = json['__typename'];
+    return Query_geolocatedFamilies(
+      families: l$families == null
+          ? null
+          : Query_geolocatedFamilies_families.fromJson(
+              (l$families as Map<String, dynamic>),
+            ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query_geolocatedFamilies_families? families;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$families = families;
+    _resultData['families'] = l$families?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$families = families;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$families, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedFamilies ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$families = families;
+    final lOther$families = other.families;
+    if (l$families != lOther$families) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedFamilies
+    on Query_geolocatedFamilies {
+  CopyWith_Query_geolocatedFamilies<Query_geolocatedFamilies> get copyWith =>
+      CopyWith_Query_geolocatedFamilies(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedFamilies<TRes> {
+  factory CopyWith_Query_geolocatedFamilies(
+    Query_geolocatedFamilies instance,
+    TRes Function(Query_geolocatedFamilies) then,
+  ) = _CopyWithImpl_Query_geolocatedFamilies;
+
+  factory CopyWith_Query_geolocatedFamilies.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedFamilies;
+
+  TRes call({Query_geolocatedFamilies_families? families, String? $__typename});
+  CopyWith_Query_geolocatedFamilies_families<TRes> get families;
+}
+
+class _CopyWithImpl_Query_geolocatedFamilies<TRes>
+    implements CopyWith_Query_geolocatedFamilies<TRes> {
+  _CopyWithImpl_Query_geolocatedFamilies(this._instance, this._then);
+
+  final Query_geolocatedFamilies _instance;
+
+  final TRes Function(Query_geolocatedFamilies) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? families = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_geolocatedFamilies(
+      families: families == _undefined
+          ? _instance.families
+          : (families as Query_geolocatedFamilies_families?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Query_geolocatedFamilies_families<TRes> get families {
+    final local$families = _instance.families;
+    return local$families == null
+        ? CopyWith_Query_geolocatedFamilies_families.stub(_then(_instance))
+        : CopyWith_Query_geolocatedFamilies_families(
+            local$families,
+            (e) => call(families: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Query_geolocatedFamilies<TRes>
+    implements CopyWith_Query_geolocatedFamilies<TRes> {
+  _CopyWithStubImpl_Query_geolocatedFamilies(this._res);
+
+  TRes _res;
+
+  call({Query_geolocatedFamilies_families? families, String? $__typename}) =>
+      _res;
+
+  CopyWith_Query_geolocatedFamilies_families<TRes> get families =>
+      CopyWith_Query_geolocatedFamilies_families.stub(_res);
+}
+
+const documentNodeQuerygeolocatedFamilies = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'geolocatedFamilies'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'filter')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'FamilyFilterInput'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'first')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'after')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'String'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
             name: NameNode(value: 'families'),
             alias: null,
             arguments: [
               ArgumentNode(
                 name: NameNode(value: 'filter'),
-                value: VariableNode(name: NameNode(value: 'familiesFilter')),
+                value: VariableNode(name: NameNode(value: 'filter')),
               ),
               ArgumentNode(
                 name: NameNode(value: 'first'),
                 value: VariableNode(name: NameNode(value: 'first')),
               ),
-            ],
-            directives: [
-              DirectiveNode(
-                name: NameNode(value: 'include'),
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'if'),
-                    value: VariableNode(name: NameNode(value: 'getFamilies')),
-                  ),
-                ],
+              ArgumentNode(
+                name: NameNode(value: 'after'),
+                value: VariableNode(name: NameNode(value: 'after')),
               ),
             ],
+            directives: [],
             selectionSet: SelectionSetNode(
               selections: [
+                FieldNode(
+                  name: NameNode(value: 'endKeyset'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
                 FieldNode(
                   name: NameNode(value: 'results'),
                   alias: null,
@@ -7491,31 +8009,993 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
             ),
           ),
           FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionPersonFamily,
+    fragmentDefinitionPersonDataCheck,
+  ],
+);
+
+class Query_geolocatedFamilies_families {
+  Query_geolocatedFamilies_families({
+    this.endKeyset,
+    this.results,
+    this.$__typename = 'KeysetPageOfFamily',
+  });
+
+  factory Query_geolocatedFamilies_families.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$endKeyset = json['endKeyset'];
+    final l$results = json['results'];
+    final l$$__typename = json['__typename'];
+    return Query_geolocatedFamilies_families(
+      endKeyset: (l$endKeyset as String?),
+      results: (l$results as List<dynamic>?)
+          ?.map(
+            (e) => Query_geolocatedFamilies_families_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? endKeyset;
+
+  final List<Query_geolocatedFamilies_families_results>? results;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$endKeyset = endKeyset;
+    _resultData['endKeyset'] = l$endKeyset;
+    final l$results = results;
+    _resultData['results'] = l$results?.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$endKeyset = endKeyset;
+    final l$results = results;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$endKeyset,
+      l$results == null ? null : Object.hashAll(l$results.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedFamilies_families ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$endKeyset = endKeyset;
+    final lOther$endKeyset = other.endKeyset;
+    if (l$endKeyset != lOther$endKeyset) {
+      return false;
+    }
+    final l$results = results;
+    final lOther$results = other.results;
+    if (l$results != null && lOther$results != null) {
+      if (l$results.length != lOther$results.length) {
+        return false;
+      }
+      for (int i = 0; i < l$results.length; i++) {
+        final l$results$entry = l$results[i];
+        final lOther$results$entry = lOther$results[i];
+        if (l$results$entry != lOther$results$entry) {
+          return false;
+        }
+      }
+    } else if (l$results != lOther$results) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedFamilies_families
+    on Query_geolocatedFamilies_families {
+  CopyWith_Query_geolocatedFamilies_families<Query_geolocatedFamilies_families>
+  get copyWith => CopyWith_Query_geolocatedFamilies_families(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedFamilies_families<TRes> {
+  factory CopyWith_Query_geolocatedFamilies_families(
+    Query_geolocatedFamilies_families instance,
+    TRes Function(Query_geolocatedFamilies_families) then,
+  ) = _CopyWithImpl_Query_geolocatedFamilies_families;
+
+  factory CopyWith_Query_geolocatedFamilies_families.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedFamilies_families;
+
+  TRes call({
+    String? endKeyset,
+    List<Query_geolocatedFamilies_families_results>? results,
+    String? $__typename,
+  });
+  TRes results(
+    Iterable<Query_geolocatedFamilies_families_results>? Function(
+      Iterable<
+        CopyWith_Query_geolocatedFamilies_families_results<
+          Query_geolocatedFamilies_families_results
+        >
+      >?,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Query_geolocatedFamilies_families<TRes>
+    implements CopyWith_Query_geolocatedFamilies_families<TRes> {
+  _CopyWithImpl_Query_geolocatedFamilies_families(this._instance, this._then);
+
+  final Query_geolocatedFamilies_families _instance;
+
+  final TRes Function(Query_geolocatedFamilies_families) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? endKeyset = _undefined,
+    Object? results = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_geolocatedFamilies_families(
+      endKeyset: endKeyset == _undefined
+          ? _instance.endKeyset
+          : (endKeyset as String?),
+      results: results == _undefined
+          ? _instance.results
+          : (results as List<Query_geolocatedFamilies_families_results>?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  TRes results(
+    Iterable<Query_geolocatedFamilies_families_results>? Function(
+      Iterable<
+        CopyWith_Query_geolocatedFamilies_families_results<
+          Query_geolocatedFamilies_families_results
+        >
+      >?,
+    )
+    _fn,
+  ) => call(
+    results: _fn(
+      _instance.results?.map(
+        (e) => CopyWith_Query_geolocatedFamilies_families_results(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+}
+
+class _CopyWithStubImpl_Query_geolocatedFamilies_families<TRes>
+    implements CopyWith_Query_geolocatedFamilies_families<TRes> {
+  _CopyWithStubImpl_Query_geolocatedFamilies_families(this._res);
+
+  TRes _res;
+
+  call({
+    String? endKeyset,
+    List<Query_geolocatedFamilies_families_results>? results,
+    String? $__typename,
+  }) => _res;
+
+  results(_fn) => _res;
+}
+
+class Query_geolocatedFamilies_families_results
+    implements Fragment_PersonFamily {
+  Query_geolocatedFamilies_families_results({
+    required this.id,
+    required this.name,
+    this.color,
+    required this.userCanEdit,
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.dataCheck,
+    this.$__typename = 'Family',
+    this.address,
+  });
+
+  factory Query_geolocatedFamilies_families_results.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$dataCheck = json['dataCheck'];
+    final l$$__typename = json['__typename'];
+    final l$address = json['address'];
+    return Query_geolocatedFamilies_families_results(
+      id: (l$id as String),
+      name: (l$name as String),
+      color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      dataCheck: l$dataCheck == null
+          ? null
+          : Fragment_PersonDataCheck.fromJson(
+              (l$dataCheck as Map<String, dynamic>),
+            ),
+      $__typename: (l$$__typename as String),
+      address: l$address == null
+          ? null
+          : Query_geolocatedFamilies_families_results_address.fromJson(
+              (l$address as Map<String, dynamic>),
+            ),
+    );
+  }
+
+  final String id;
+
+  final String name;
+
+  final int? color;
+
+  final bool userCanEdit;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final Fragment_PersonDataCheck? dataCheck;
+
+  final String $__typename;
+
+  final Query_geolocatedFamilies_families_results_address? address;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$dataCheck = dataCheck;
+    _resultData['dataCheck'] = l$dataCheck?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$address = address;
+    _resultData['address'] = l$address?.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$userCanEdit = userCanEdit;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$dataCheck = dataCheck;
+    final l$$__typename = $__typename;
+    final l$address = address;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$dataCheck,
+      l$$__typename,
+      l$address,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedFamilies_families_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$dataCheck = dataCheck;
+    final lOther$dataCheck = other.dataCheck;
+    if (l$dataCheck != lOther$dataCheck) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (l$address != lOther$address) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedFamilies_families_results
+    on Query_geolocatedFamilies_families_results {
+  CopyWith_Query_geolocatedFamilies_families_results<
+    Query_geolocatedFamilies_families_results
+  >
+  get copyWith =>
+      CopyWith_Query_geolocatedFamilies_families_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedFamilies_families_results<TRes> {
+  factory CopyWith_Query_geolocatedFamilies_families_results(
+    Query_geolocatedFamilies_families_results instance,
+    TRes Function(Query_geolocatedFamilies_families_results) then,
+  ) = _CopyWithImpl_Query_geolocatedFamilies_families_results;
+
+  factory CopyWith_Query_geolocatedFamilies_families_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedFamilies_families_results;
+
+  TRes call({
+    String? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    Fragment_PersonDataCheck? dataCheck,
+    String? $__typename,
+    Query_geolocatedFamilies_families_results_address? address,
+  });
+  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck;
+  CopyWith_Query_geolocatedFamilies_families_results_address<TRes> get address;
+}
+
+class _CopyWithImpl_Query_geolocatedFamilies_families_results<TRes>
+    implements CopyWith_Query_geolocatedFamilies_families_results<TRes> {
+  _CopyWithImpl_Query_geolocatedFamilies_families_results(
+    this._instance,
+    this._then,
+  );
+
+  final Query_geolocatedFamilies_families_results _instance;
+
+  final TRes Function(Query_geolocatedFamilies_families_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? dataCheck = _undefined,
+    Object? $__typename = _undefined,
+    Object? address = _undefined,
+  }) => _then(
+    Query_geolocatedFamilies_families_results(
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined || userCanEdit == null
+          ? _instance.userCanEdit
+          : (userCanEdit as bool),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      dataCheck: dataCheck == _undefined
+          ? _instance.dataCheck
+          : (dataCheck as Fragment_PersonDataCheck?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      address: address == _undefined
+          ? _instance.address
+          : (address as Query_geolocatedFamilies_families_results_address?),
+    ),
+  );
+
+  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck {
+    final local$dataCheck = _instance.dataCheck;
+    return local$dataCheck == null
+        ? CopyWith_Fragment_PersonDataCheck.stub(_then(_instance))
+        : CopyWith_Fragment_PersonDataCheck(
+            local$dataCheck,
+            (e) => call(dataCheck: e),
+          );
+  }
+
+  CopyWith_Query_geolocatedFamilies_families_results_address<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Query_geolocatedFamilies_families_results_address.stub(
+            _then(_instance),
+          )
+        : CopyWith_Query_geolocatedFamilies_families_results_address(
+            local$address,
+            (e) => call(address: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Query_geolocatedFamilies_families_results<TRes>
+    implements CopyWith_Query_geolocatedFamilies_families_results<TRes> {
+  _CopyWithStubImpl_Query_geolocatedFamilies_families_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    Fragment_PersonDataCheck? dataCheck,
+    String? $__typename,
+    Query_geolocatedFamilies_families_results_address? address,
+  }) => _res;
+
+  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck =>
+      CopyWith_Fragment_PersonDataCheck.stub(_res);
+
+  CopyWith_Query_geolocatedFamilies_families_results_address<TRes>
+  get address =>
+      CopyWith_Query_geolocatedFamilies_families_results_address.stub(_res);
+}
+
+class Query_geolocatedFamilies_families_results_address {
+  Query_geolocatedFamilies_families_results_address({
+    required this.id,
+    this.geolocation,
+    this.$__typename = 'Address',
+  });
+
+  factory Query_geolocatedFamilies_families_results_address.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$id = json['id'];
+    final l$geolocation = json['geolocation'];
+    final l$$__typename = json['__typename'];
+    return Query_geolocatedFamilies_families_results_address(
+      id: (l$id as String),
+      geolocation: (l$geolocation as Json?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final Json? geolocation;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$geolocation = geolocation;
+    _resultData['geolocation'] = l$geolocation;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$geolocation = geolocation;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$id, l$geolocation, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedFamilies_families_results_address ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$geolocation = geolocation;
+    final lOther$geolocation = other.geolocation;
+    if (l$geolocation != lOther$geolocation) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedFamilies_families_results_address
+    on Query_geolocatedFamilies_families_results_address {
+  CopyWith_Query_geolocatedFamilies_families_results_address<
+    Query_geolocatedFamilies_families_results_address
+  >
+  get copyWith => CopyWith_Query_geolocatedFamilies_families_results_address(
+    this,
+    (i) => i,
+  );
+}
+
+abstract class CopyWith_Query_geolocatedFamilies_families_results_address<
+  TRes
+> {
+  factory CopyWith_Query_geolocatedFamilies_families_results_address(
+    Query_geolocatedFamilies_families_results_address instance,
+    TRes Function(Query_geolocatedFamilies_families_results_address) then,
+  ) = _CopyWithImpl_Query_geolocatedFamilies_families_results_address;
+
+  factory CopyWith_Query_geolocatedFamilies_families_results_address.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Query_geolocatedFamilies_families_results_address;
+
+  TRes call({String? id, Json? geolocation, String? $__typename});
+}
+
+class _CopyWithImpl_Query_geolocatedFamilies_families_results_address<TRes>
+    implements
+        CopyWith_Query_geolocatedFamilies_families_results_address<TRes> {
+  _CopyWithImpl_Query_geolocatedFamilies_families_results_address(
+    this._instance,
+    this._then,
+  );
+
+  final Query_geolocatedFamilies_families_results_address _instance;
+
+  final TRes Function(Query_geolocatedFamilies_families_results_address) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? geolocation = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_geolocatedFamilies_families_results_address(
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      geolocation: geolocation == _undefined
+          ? _instance.geolocation
+          : (geolocation as Json?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_geolocatedFamilies_families_results_address<TRes>
+    implements
+        CopyWith_Query_geolocatedFamilies_families_results_address<TRes> {
+  _CopyWithStubImpl_Query_geolocatedFamilies_families_results_address(
+    this._res,
+  );
+
+  TRes _res;
+
+  call({String? id, Json? geolocation, String? $__typename}) => _res;
+}
+
+class Variables_Query_geolocatedStores {
+  factory Variables_Query_geolocatedStores({
+    Input_StoreFilterInput? filter,
+    int? first,
+    String? after,
+  }) => Variables_Query_geolocatedStores._({
+    if (filter != null) r'filter': filter,
+    if (first != null) r'first': first,
+    if (after != null) r'after': after,
+  });
+
+  Variables_Query_geolocatedStores._(this._$data);
+
+  factory Variables_Query_geolocatedStores.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_StoreFilterInput.fromJson((l$filter as Map<String, dynamic>));
+    }
+    if (data.containsKey('first')) {
+      final l$first = data['first'];
+      result$data['first'] = (l$first as int?);
+    }
+    if (data.containsKey('after')) {
+      final l$after = data['after'];
+      result$data['after'] = (l$after as String?);
+    }
+    return Variables_Query_geolocatedStores._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_StoreFilterInput? get filter =>
+      (_$data['filter'] as Input_StoreFilterInput?);
+
+  int? get first => (_$data['first'] as int?);
+
+  String? get after => (_$data['after'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    if (_$data.containsKey('first')) {
+      final l$first = first;
+      result$data['first'] = l$first;
+    }
+    if (_$data.containsKey('after')) {
+      final l$after = after;
+      result$data['after'] = l$after;
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Query_geolocatedStores<Variables_Query_geolocatedStores>
+  get copyWith => CopyWith_Variables_Query_geolocatedStores(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Query_geolocatedStores ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$first = first;
+    final lOther$first = other.first;
+    if (_$data.containsKey('first') != other._$data.containsKey('first')) {
+      return false;
+    }
+    if (l$first != lOther$first) {
+      return false;
+    }
+    final l$after = after;
+    final lOther$after = other.after;
+    if (_$data.containsKey('after') != other._$data.containsKey('after')) {
+      return false;
+    }
+    if (l$after != lOther$after) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$filter = filter;
+    final l$first = first;
+    final l$after = after;
+    return Object.hashAll([
+      _$data.containsKey('filter') ? l$filter : const {},
+      _$data.containsKey('first') ? l$first : const {},
+      _$data.containsKey('after') ? l$after : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Query_geolocatedStores<TRes> {
+  factory CopyWith_Variables_Query_geolocatedStores(
+    Variables_Query_geolocatedStores instance,
+    TRes Function(Variables_Query_geolocatedStores) then,
+  ) = _CopyWithImpl_Variables_Query_geolocatedStores;
+
+  factory CopyWith_Variables_Query_geolocatedStores.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Query_geolocatedStores;
+
+  TRes call({Input_StoreFilterInput? filter, int? first, String? after});
+}
+
+class _CopyWithImpl_Variables_Query_geolocatedStores<TRes>
+    implements CopyWith_Variables_Query_geolocatedStores<TRes> {
+  _CopyWithImpl_Variables_Query_geolocatedStores(this._instance, this._then);
+
+  final Variables_Query_geolocatedStores _instance;
+
+  final TRes Function(Variables_Query_geolocatedStores) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? filter = _undefined,
+    Object? first = _undefined,
+    Object? after = _undefined,
+  }) => _then(
+    Variables_Query_geolocatedStores._({
+      ..._instance._$data,
+      if (filter != _undefined) 'filter': (filter as Input_StoreFilterInput?),
+      if (first != _undefined) 'first': (first as int?),
+      if (after != _undefined) 'after': (after as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Variables_Query_geolocatedStores<TRes>
+    implements CopyWith_Variables_Query_geolocatedStores<TRes> {
+  _CopyWithStubImpl_Variables_Query_geolocatedStores(this._res);
+
+  TRes _res;
+
+  call({Input_StoreFilterInput? filter, int? first, String? after}) => _res;
+}
+
+class Query_geolocatedStores {
+  Query_geolocatedStores({this.stores, this.$__typename = 'RootQueryType'});
+
+  factory Query_geolocatedStores.fromJson(Map<String, dynamic> json) {
+    final l$stores = json['stores'];
+    final l$$__typename = json['__typename'];
+    return Query_geolocatedStores(
+      stores: l$stores == null
+          ? null
+          : Query_geolocatedStores_stores.fromJson(
+              (l$stores as Map<String, dynamic>),
+            ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query_geolocatedStores_stores? stores;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$stores = stores;
+    _resultData['stores'] = l$stores?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$stores = stores;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$stores, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedStores || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$stores = stores;
+    final lOther$stores = other.stores;
+    if (l$stores != lOther$stores) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedStores on Query_geolocatedStores {
+  CopyWith_Query_geolocatedStores<Query_geolocatedStores> get copyWith =>
+      CopyWith_Query_geolocatedStores(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedStores<TRes> {
+  factory CopyWith_Query_geolocatedStores(
+    Query_geolocatedStores instance,
+    TRes Function(Query_geolocatedStores) then,
+  ) = _CopyWithImpl_Query_geolocatedStores;
+
+  factory CopyWith_Query_geolocatedStores.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedStores;
+
+  TRes call({Query_geolocatedStores_stores? stores, String? $__typename});
+  CopyWith_Query_geolocatedStores_stores<TRes> get stores;
+}
+
+class _CopyWithImpl_Query_geolocatedStores<TRes>
+    implements CopyWith_Query_geolocatedStores<TRes> {
+  _CopyWithImpl_Query_geolocatedStores(this._instance, this._then);
+
+  final Query_geolocatedStores _instance;
+
+  final TRes Function(Query_geolocatedStores) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? stores = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Query_geolocatedStores(
+          stores: stores == _undefined
+              ? _instance.stores
+              : (stores as Query_geolocatedStores_stores?),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
+
+  CopyWith_Query_geolocatedStores_stores<TRes> get stores {
+    final local$stores = _instance.stores;
+    return local$stores == null
+        ? CopyWith_Query_geolocatedStores_stores.stub(_then(_instance))
+        : CopyWith_Query_geolocatedStores_stores(
+            local$stores,
+            (e) => call(stores: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Query_geolocatedStores<TRes>
+    implements CopyWith_Query_geolocatedStores<TRes> {
+  _CopyWithStubImpl_Query_geolocatedStores(this._res);
+
+  TRes _res;
+
+  call({Query_geolocatedStores_stores? stores, String? $__typename}) => _res;
+
+  CopyWith_Query_geolocatedStores_stores<TRes> get stores =>
+      CopyWith_Query_geolocatedStores_stores.stub(_res);
+}
+
+const documentNodeQuerygeolocatedStores = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'geolocatedStores'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'filter')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'StoreFilterInput'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'first')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'after')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'String'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
             name: NameNode(value: 'stores'),
             alias: null,
             arguments: [
               ArgumentNode(
                 name: NameNode(value: 'filter'),
-                value: VariableNode(name: NameNode(value: 'storesFilter')),
+                value: VariableNode(name: NameNode(value: 'filter')),
               ),
               ArgumentNode(
                 name: NameNode(value: 'first'),
                 value: VariableNode(name: NameNode(value: 'first')),
               ),
-            ],
-            directives: [
-              DirectiveNode(
-                name: NameNode(value: 'include'),
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'if'),
-                    value: VariableNode(name: NameNode(value: 'getStores')),
-                  ),
-                ],
+              ArgumentNode(
+                name: NameNode(value: 'after'),
+                value: VariableNode(name: NameNode(value: 'after')),
               ),
             ],
+            directives: [],
             selectionSet: SelectionSetNode(
               selections: [
+                FieldNode(
+                  name: NameNode(value: 'endKeyset'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
                 FieldNode(
                   name: NameNode(value: 'results'),
                   alias: null,
@@ -7579,31 +9059,966 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
             ),
           ),
           FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionStore,
+  ],
+);
+
+class Query_geolocatedStores_stores {
+  Query_geolocatedStores_stores({
+    this.endKeyset,
+    this.results,
+    this.$__typename = 'KeysetPageOfStore',
+  });
+
+  factory Query_geolocatedStores_stores.fromJson(Map<String, dynamic> json) {
+    final l$endKeyset = json['endKeyset'];
+    final l$results = json['results'];
+    final l$$__typename = json['__typename'];
+    return Query_geolocatedStores_stores(
+      endKeyset: (l$endKeyset as String?),
+      results: (l$results as List<dynamic>?)
+          ?.map(
+            (e) => Query_geolocatedStores_stores_results.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? endKeyset;
+
+  final List<Query_geolocatedStores_stores_results>? results;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$endKeyset = endKeyset;
+    _resultData['endKeyset'] = l$endKeyset;
+    final l$results = results;
+    _resultData['results'] = l$results?.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$endKeyset = endKeyset;
+    final l$results = results;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$endKeyset,
+      l$results == null ? null : Object.hashAll(l$results.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedStores_stores ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$endKeyset = endKeyset;
+    final lOther$endKeyset = other.endKeyset;
+    if (l$endKeyset != lOther$endKeyset) {
+      return false;
+    }
+    final l$results = results;
+    final lOther$results = other.results;
+    if (l$results != null && lOther$results != null) {
+      if (l$results.length != lOther$results.length) {
+        return false;
+      }
+      for (int i = 0; i < l$results.length; i++) {
+        final l$results$entry = l$results[i];
+        final lOther$results$entry = lOther$results[i];
+        if (l$results$entry != lOther$results$entry) {
+          return false;
+        }
+      }
+    } else if (l$results != lOther$results) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedStores_stores
+    on Query_geolocatedStores_stores {
+  CopyWith_Query_geolocatedStores_stores<Query_geolocatedStores_stores>
+  get copyWith => CopyWith_Query_geolocatedStores_stores(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedStores_stores<TRes> {
+  factory CopyWith_Query_geolocatedStores_stores(
+    Query_geolocatedStores_stores instance,
+    TRes Function(Query_geolocatedStores_stores) then,
+  ) = _CopyWithImpl_Query_geolocatedStores_stores;
+
+  factory CopyWith_Query_geolocatedStores_stores.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedStores_stores;
+
+  TRes call({
+    String? endKeyset,
+    List<Query_geolocatedStores_stores_results>? results,
+    String? $__typename,
+  });
+  TRes results(
+    Iterable<Query_geolocatedStores_stores_results>? Function(
+      Iterable<
+        CopyWith_Query_geolocatedStores_stores_results<
+          Query_geolocatedStores_stores_results
+        >
+      >?,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Query_geolocatedStores_stores<TRes>
+    implements CopyWith_Query_geolocatedStores_stores<TRes> {
+  _CopyWithImpl_Query_geolocatedStores_stores(this._instance, this._then);
+
+  final Query_geolocatedStores_stores _instance;
+
+  final TRes Function(Query_geolocatedStores_stores) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? endKeyset = _undefined,
+    Object? results = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_geolocatedStores_stores(
+      endKeyset: endKeyset == _undefined
+          ? _instance.endKeyset
+          : (endKeyset as String?),
+      results: results == _undefined
+          ? _instance.results
+          : (results as List<Query_geolocatedStores_stores_results>?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  TRes results(
+    Iterable<Query_geolocatedStores_stores_results>? Function(
+      Iterable<
+        CopyWith_Query_geolocatedStores_stores_results<
+          Query_geolocatedStores_stores_results
+        >
+      >?,
+    )
+    _fn,
+  ) => call(
+    results: _fn(
+      _instance.results?.map(
+        (e) => CopyWith_Query_geolocatedStores_stores_results(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+}
+
+class _CopyWithStubImpl_Query_geolocatedStores_stores<TRes>
+    implements CopyWith_Query_geolocatedStores_stores<TRes> {
+  _CopyWithStubImpl_Query_geolocatedStores_stores(this._res);
+
+  TRes _res;
+
+  call({
+    String? endKeyset,
+    List<Query_geolocatedStores_stores_results>? results,
+    String? $__typename,
+  }) => _res;
+
+  results(_fn) => _res;
+}
+
+class Query_geolocatedStores_stores_results implements Fragment_Store {
+  Query_geolocatedStores_stores_results({
+    required this.id,
+    required this.name,
+    this.color,
+    this.adminFamilyId,
+    this.photoUpdatedAt,
+    this.blurhash,
+    required this.userCanEdit,
+    this.$__typename = 'Store',
+    this.address,
+  });
+
+  factory Query_geolocatedStores_stores_results.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$adminFamilyId = json['adminFamilyId'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$$__typename = json['__typename'];
+    final l$address = json['address'];
+    return Query_geolocatedStores_stores_results(
+      id: (l$id as String),
+      name: (l$name as String),
+      color: (l$color as int?),
+      adminFamilyId: (l$adminFamilyId as String?),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      userCanEdit: (l$userCanEdit as bool),
+      $__typename: (l$$__typename as String),
+      address: l$address == null
+          ? null
+          : Query_geolocatedStores_stores_results_address.fromJson(
+              (l$address as Map<String, dynamic>),
+            ),
+    );
+  }
+
+  final String id;
+
+  final String name;
+
+  final int? color;
+
+  final String? adminFamilyId;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final bool userCanEdit;
+
+  final String $__typename;
+
+  final Query_geolocatedStores_stores_results_address? address;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$adminFamilyId = adminFamilyId;
+    _resultData['adminFamilyId'] = l$adminFamilyId;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$address = address;
+    _resultData['address'] = l$address?.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$adminFamilyId = adminFamilyId;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$userCanEdit = userCanEdit;
+    final l$$__typename = $__typename;
+    final l$address = address;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$adminFamilyId,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$userCanEdit,
+      l$$__typename,
+      l$address,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedStores_stores_results ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$adminFamilyId = adminFamilyId;
+    final lOther$adminFamilyId = other.adminFamilyId;
+    if (l$adminFamilyId != lOther$adminFamilyId) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (l$address != lOther$address) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedStores_stores_results
+    on Query_geolocatedStores_stores_results {
+  CopyWith_Query_geolocatedStores_stores_results<
+    Query_geolocatedStores_stores_results
+  >
+  get copyWith =>
+      CopyWith_Query_geolocatedStores_stores_results(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedStores_stores_results<TRes> {
+  factory CopyWith_Query_geolocatedStores_stores_results(
+    Query_geolocatedStores_stores_results instance,
+    TRes Function(Query_geolocatedStores_stores_results) then,
+  ) = _CopyWithImpl_Query_geolocatedStores_stores_results;
+
+  factory CopyWith_Query_geolocatedStores_stores_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedStores_stores_results;
+
+  TRes call({
+    String? id,
+    String? name,
+    int? color,
+    String? adminFamilyId,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? userCanEdit,
+    String? $__typename,
+    Query_geolocatedStores_stores_results_address? address,
+  });
+  CopyWith_Query_geolocatedStores_stores_results_address<TRes> get address;
+}
+
+class _CopyWithImpl_Query_geolocatedStores_stores_results<TRes>
+    implements CopyWith_Query_geolocatedStores_stores_results<TRes> {
+  _CopyWithImpl_Query_geolocatedStores_stores_results(
+    this._instance,
+    this._then,
+  );
+
+  final Query_geolocatedStores_stores_results _instance;
+
+  final TRes Function(Query_geolocatedStores_stores_results) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? adminFamilyId = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? $__typename = _undefined,
+    Object? address = _undefined,
+  }) => _then(
+    Query_geolocatedStores_stores_results(
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      adminFamilyId: adminFamilyId == _undefined
+          ? _instance.adminFamilyId
+          : (adminFamilyId as String?),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      userCanEdit: userCanEdit == _undefined || userCanEdit == null
+          ? _instance.userCanEdit
+          : (userCanEdit as bool),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      address: address == _undefined
+          ? _instance.address
+          : (address as Query_geolocatedStores_stores_results_address?),
+    ),
+  );
+
+  CopyWith_Query_geolocatedStores_stores_results_address<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Query_geolocatedStores_stores_results_address.stub(
+            _then(_instance),
+          )
+        : CopyWith_Query_geolocatedStores_stores_results_address(
+            local$address,
+            (e) => call(address: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Query_geolocatedStores_stores_results<TRes>
+    implements CopyWith_Query_geolocatedStores_stores_results<TRes> {
+  _CopyWithStubImpl_Query_geolocatedStores_stores_results(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? name,
+    int? color,
+    String? adminFamilyId,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? userCanEdit,
+    String? $__typename,
+    Query_geolocatedStores_stores_results_address? address,
+  }) => _res;
+
+  CopyWith_Query_geolocatedStores_stores_results_address<TRes> get address =>
+      CopyWith_Query_geolocatedStores_stores_results_address.stub(_res);
+}
+
+class Query_geolocatedStores_stores_results_address {
+  Query_geolocatedStores_stores_results_address({
+    required this.id,
+    this.geolocation,
+    this.$__typename = 'Address',
+  });
+
+  factory Query_geolocatedStores_stores_results_address.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$id = json['id'];
+    final l$geolocation = json['geolocation'];
+    final l$$__typename = json['__typename'];
+    return Query_geolocatedStores_stores_results_address(
+      id: (l$id as String),
+      geolocation: (l$geolocation as Json?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final Json? geolocation;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$geolocation = geolocation;
+    _resultData['geolocation'] = l$geolocation;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$geolocation = geolocation;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$id, l$geolocation, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedStores_stores_results_address ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$geolocation = geolocation;
+    final lOther$geolocation = other.geolocation;
+    if (l$geolocation != lOther$geolocation) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedStores_stores_results_address
+    on Query_geolocatedStores_stores_results_address {
+  CopyWith_Query_geolocatedStores_stores_results_address<
+    Query_geolocatedStores_stores_results_address
+  >
+  get copyWith =>
+      CopyWith_Query_geolocatedStores_stores_results_address(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedStores_stores_results_address<TRes> {
+  factory CopyWith_Query_geolocatedStores_stores_results_address(
+    Query_geolocatedStores_stores_results_address instance,
+    TRes Function(Query_geolocatedStores_stores_results_address) then,
+  ) = _CopyWithImpl_Query_geolocatedStores_stores_results_address;
+
+  factory CopyWith_Query_geolocatedStores_stores_results_address.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Query_geolocatedStores_stores_results_address;
+
+  TRes call({String? id, Json? geolocation, String? $__typename});
+}
+
+class _CopyWithImpl_Query_geolocatedStores_stores_results_address<TRes>
+    implements CopyWith_Query_geolocatedStores_stores_results_address<TRes> {
+  _CopyWithImpl_Query_geolocatedStores_stores_results_address(
+    this._instance,
+    this._then,
+  );
+
+  final Query_geolocatedStores_stores_results_address _instance;
+
+  final TRes Function(Query_geolocatedStores_stores_results_address) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? geolocation = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_geolocatedStores_stores_results_address(
+      id: id == _undefined || id == null ? _instance.id : (id as String),
+      geolocation: geolocation == _undefined
+          ? _instance.geolocation
+          : (geolocation as Json?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Query_geolocatedStores_stores_results_address<TRes>
+    implements CopyWith_Query_geolocatedStores_stores_results_address<TRes> {
+  _CopyWithStubImpl_Query_geolocatedStores_stores_results_address(this._res);
+
+  TRes _res;
+
+  call({String? id, Json? geolocation, String? $__typename}) => _res;
+}
+
+class Variables_Query_geolocatedPersons {
+  factory Variables_Query_geolocatedPersons({
+    Input_PersonFilterInput? filter,
+    int? first,
+    String? after,
+  }) => Variables_Query_geolocatedPersons._({
+    if (filter != null) r'filter': filter,
+    if (first != null) r'first': first,
+    if (after != null) r'after': after,
+  });
+
+  Variables_Query_geolocatedPersons._(this._$data);
+
+  factory Variables_Query_geolocatedPersons.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_PersonFilterInput.fromJson(
+              (l$filter as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('first')) {
+      final l$first = data['first'];
+      result$data['first'] = (l$first as int?);
+    }
+    if (data.containsKey('after')) {
+      final l$after = data['after'];
+      result$data['after'] = (l$after as String?);
+    }
+    return Variables_Query_geolocatedPersons._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_PersonFilterInput? get filter =>
+      (_$data['filter'] as Input_PersonFilterInput?);
+
+  int? get first => (_$data['first'] as int?);
+
+  String? get after => (_$data['after'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    if (_$data.containsKey('first')) {
+      final l$first = first;
+      result$data['first'] = l$first;
+    }
+    if (_$data.containsKey('after')) {
+      final l$after = after;
+      result$data['after'] = l$after;
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Query_geolocatedPersons<Variables_Query_geolocatedPersons>
+  get copyWith => CopyWith_Variables_Query_geolocatedPersons(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Query_geolocatedPersons ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$first = first;
+    final lOther$first = other.first;
+    if (_$data.containsKey('first') != other._$data.containsKey('first')) {
+      return false;
+    }
+    if (l$first != lOther$first) {
+      return false;
+    }
+    final l$after = after;
+    final lOther$after = other.after;
+    if (_$data.containsKey('after') != other._$data.containsKey('after')) {
+      return false;
+    }
+    if (l$after != lOther$after) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$filter = filter;
+    final l$first = first;
+    final l$after = after;
+    return Object.hashAll([
+      _$data.containsKey('filter') ? l$filter : const {},
+      _$data.containsKey('first') ? l$first : const {},
+      _$data.containsKey('after') ? l$after : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Query_geolocatedPersons<TRes> {
+  factory CopyWith_Variables_Query_geolocatedPersons(
+    Variables_Query_geolocatedPersons instance,
+    TRes Function(Variables_Query_geolocatedPersons) then,
+  ) = _CopyWithImpl_Variables_Query_geolocatedPersons;
+
+  factory CopyWith_Variables_Query_geolocatedPersons.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Query_geolocatedPersons;
+
+  TRes call({Input_PersonFilterInput? filter, int? first, String? after});
+}
+
+class _CopyWithImpl_Variables_Query_geolocatedPersons<TRes>
+    implements CopyWith_Variables_Query_geolocatedPersons<TRes> {
+  _CopyWithImpl_Variables_Query_geolocatedPersons(this._instance, this._then);
+
+  final Variables_Query_geolocatedPersons _instance;
+
+  final TRes Function(Variables_Query_geolocatedPersons) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? filter = _undefined,
+    Object? first = _undefined,
+    Object? after = _undefined,
+  }) => _then(
+    Variables_Query_geolocatedPersons._({
+      ..._instance._$data,
+      if (filter != _undefined) 'filter': (filter as Input_PersonFilterInput?),
+      if (first != _undefined) 'first': (first as int?),
+      if (after != _undefined) 'after': (after as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Variables_Query_geolocatedPersons<TRes>
+    implements CopyWith_Variables_Query_geolocatedPersons<TRes> {
+  _CopyWithStubImpl_Variables_Query_geolocatedPersons(this._res);
+
+  TRes _res;
+
+  call({Input_PersonFilterInput? filter, int? first, String? after}) => _res;
+}
+
+class Query_geolocatedPersons {
+  Query_geolocatedPersons({this.persons, this.$__typename = 'RootQueryType'});
+
+  factory Query_geolocatedPersons.fromJson(Map<String, dynamic> json) {
+    final l$persons = json['persons'];
+    final l$$__typename = json['__typename'];
+    return Query_geolocatedPersons(
+      persons: l$persons == null
+          ? null
+          : Query_geolocatedPersons_persons.fromJson(
+              (l$persons as Map<String, dynamic>),
+            ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query_geolocatedPersons_persons? persons;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$persons = persons;
+    _resultData['persons'] = l$persons?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$persons = persons;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$persons, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_geolocatedPersons || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_geolocatedPersons on Query_geolocatedPersons {
+  CopyWith_Query_geolocatedPersons<Query_geolocatedPersons> get copyWith =>
+      CopyWith_Query_geolocatedPersons(this, (i) => i);
+}
+
+abstract class CopyWith_Query_geolocatedPersons<TRes> {
+  factory CopyWith_Query_geolocatedPersons(
+    Query_geolocatedPersons instance,
+    TRes Function(Query_geolocatedPersons) then,
+  ) = _CopyWithImpl_Query_geolocatedPersons;
+
+  factory CopyWith_Query_geolocatedPersons.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedPersons;
+
+  TRes call({Query_geolocatedPersons_persons? persons, String? $__typename});
+  CopyWith_Query_geolocatedPersons_persons<TRes> get persons;
+}
+
+class _CopyWithImpl_Query_geolocatedPersons<TRes>
+    implements CopyWith_Query_geolocatedPersons<TRes> {
+  _CopyWithImpl_Query_geolocatedPersons(this._instance, this._then);
+
+  final Query_geolocatedPersons _instance;
+
+  final TRes Function(Query_geolocatedPersons) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? persons = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Query_geolocatedPersons(
+          persons: persons == _undefined
+              ? _instance.persons
+              : (persons as Query_geolocatedPersons_persons?),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
+
+  CopyWith_Query_geolocatedPersons_persons<TRes> get persons {
+    final local$persons = _instance.persons;
+    return local$persons == null
+        ? CopyWith_Query_geolocatedPersons_persons.stub(_then(_instance))
+        : CopyWith_Query_geolocatedPersons_persons(
+            local$persons,
+            (e) => call(persons: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Query_geolocatedPersons<TRes>
+    implements CopyWith_Query_geolocatedPersons<TRes> {
+  _CopyWithStubImpl_Query_geolocatedPersons(this._res);
+
+  TRes _res;
+
+  call({Query_geolocatedPersons_persons? persons, String? $__typename}) => _res;
+
+  CopyWith_Query_geolocatedPersons_persons<TRes> get persons =>
+      CopyWith_Query_geolocatedPersons_persons.stub(_res);
+}
+
+const documentNodeQuerygeolocatedPersons = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'geolocatedPersons'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'filter')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'PersonFilterInput'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'first')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'after')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'String'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
             name: NameNode(value: 'persons'),
             alias: null,
             arguments: [
               ArgumentNode(
                 name: NameNode(value: 'filter'),
-                value: VariableNode(name: NameNode(value: 'personsFilter')),
+                value: VariableNode(name: NameNode(value: 'filter')),
               ),
               ArgumentNode(
                 name: NameNode(value: 'first'),
                 value: VariableNode(name: NameNode(value: 'first')),
               ),
-            ],
-            directives: [
-              DirectiveNode(
-                name: NameNode(value: 'include'),
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'if'),
-                    value: VariableNode(name: NameNode(value: 'getPersons')),
-                  ),
-                ],
+              ArgumentNode(
+                name: NameNode(value: 'after'),
+                value: VariableNode(name: NameNode(value: 'after')),
               ),
             ],
+            directives: [],
             selectionSet: SelectionSetNode(
               selections: [
+                FieldNode(
+                  name: NameNode(value: 'endKeyset'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
                 FieldNode(
                   name: NameNode(value: 'results'),
                   alias: null,
@@ -7676,1531 +10091,26 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
         ],
       ),
     ),
-    fragmentDefinitionAreaWithBounds,
-    fragmentDefinitionArea,
-    fragmentDefinitionStreetWithLine,
-    fragmentDefinitionStreet,
-    fragmentDefinitionPersonFamily,
-    fragmentDefinitionPersonDataCheck,
-    fragmentDefinitionStore,
     fragmentDefinitionPersonNoPhoto,
   ],
 );
 
-class Query_personsGeolocations_areas {
-  Query_personsGeolocations_areas({
-    this.results,
-    this.$__typename = 'KeysetPageOfArea',
-  });
-
-  factory Query_personsGeolocations_areas.fromJson(Map<String, dynamic> json) {
-    final l$results = json['results'];
-    final l$$__typename = json['__typename'];
-    return Query_personsGeolocations_areas(
-      results: (l$results as List<dynamic>?)
-          ?.map(
-            (e) =>
-                Fragment_AreaWithBounds.fromJson((e as Map<String, dynamic>)),
-          )
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final List<Fragment_AreaWithBounds>? results;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$results = results;
-    _resultData['results'] = l$results?.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$results = results;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$results == null ? null : Object.hashAll(l$results.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_personsGeolocations_areas ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$results = results;
-    final lOther$results = other.results;
-    if (l$results != null && lOther$results != null) {
-      if (l$results.length != lOther$results.length) {
-        return false;
-      }
-      for (int i = 0; i < l$results.length; i++) {
-        final l$results$entry = l$results[i];
-        final lOther$results$entry = lOther$results[i];
-        if (l$results$entry != lOther$results$entry) {
-          return false;
-        }
-      }
-    } else if (l$results != lOther$results) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_personsGeolocations_areas
-    on Query_personsGeolocations_areas {
-  CopyWith_Query_personsGeolocations_areas<Query_personsGeolocations_areas>
-  get copyWith => CopyWith_Query_personsGeolocations_areas(this, (i) => i);
-}
-
-abstract class CopyWith_Query_personsGeolocations_areas<TRes> {
-  factory CopyWith_Query_personsGeolocations_areas(
-    Query_personsGeolocations_areas instance,
-    TRes Function(Query_personsGeolocations_areas) then,
-  ) = _CopyWithImpl_Query_personsGeolocations_areas;
-
-  factory CopyWith_Query_personsGeolocations_areas.stub(TRes res) =
-      _CopyWithStubImpl_Query_personsGeolocations_areas;
-
-  TRes call({List<Fragment_AreaWithBounds>? results, String? $__typename});
-  TRes results(
-    Iterable<Fragment_AreaWithBounds>? Function(
-      Iterable<CopyWith_Fragment_AreaWithBounds<Fragment_AreaWithBounds>>?,
-    )
-    _fn,
-  );
-}
-
-class _CopyWithImpl_Query_personsGeolocations_areas<TRes>
-    implements CopyWith_Query_personsGeolocations_areas<TRes> {
-  _CopyWithImpl_Query_personsGeolocations_areas(this._instance, this._then);
-
-  final Query_personsGeolocations_areas _instance;
-
-  final TRes Function(Query_personsGeolocations_areas) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? results = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_personsGeolocations_areas(
-          results: results == _undefined
-              ? _instance.results
-              : (results as List<Fragment_AreaWithBounds>?),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
-
-  TRes results(
-    Iterable<Fragment_AreaWithBounds>? Function(
-      Iterable<CopyWith_Fragment_AreaWithBounds<Fragment_AreaWithBounds>>?,
-    )
-    _fn,
-  ) => call(
-    results: _fn(
-      _instance.results?.map(
-        (e) => CopyWith_Fragment_AreaWithBounds(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-}
-
-class _CopyWithStubImpl_Query_personsGeolocations_areas<TRes>
-    implements CopyWith_Query_personsGeolocations_areas<TRes> {
-  _CopyWithStubImpl_Query_personsGeolocations_areas(this._res);
-
-  TRes _res;
-
-  call({List<Fragment_AreaWithBounds>? results, String? $__typename}) => _res;
-
-  results(_fn) => _res;
-}
-
-class Query_personsGeolocations_streets {
-  Query_personsGeolocations_streets({
-    this.results,
-    this.$__typename = 'KeysetPageOfStreet',
-  });
-
-  factory Query_personsGeolocations_streets.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$results = json['results'];
-    final l$$__typename = json['__typename'];
-    return Query_personsGeolocations_streets(
-      results: (l$results as List<dynamic>?)
-          ?.map(
-            (e) =>
-                Fragment_StreetWithLine.fromJson((e as Map<String, dynamic>)),
-          )
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final List<Fragment_StreetWithLine>? results;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$results = results;
-    _resultData['results'] = l$results?.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$results = results;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$results == null ? null : Object.hashAll(l$results.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_personsGeolocations_streets ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$results = results;
-    final lOther$results = other.results;
-    if (l$results != null && lOther$results != null) {
-      if (l$results.length != lOther$results.length) {
-        return false;
-      }
-      for (int i = 0; i < l$results.length; i++) {
-        final l$results$entry = l$results[i];
-        final lOther$results$entry = lOther$results[i];
-        if (l$results$entry != lOther$results$entry) {
-          return false;
-        }
-      }
-    } else if (l$results != lOther$results) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_personsGeolocations_streets
-    on Query_personsGeolocations_streets {
-  CopyWith_Query_personsGeolocations_streets<Query_personsGeolocations_streets>
-  get copyWith => CopyWith_Query_personsGeolocations_streets(this, (i) => i);
-}
-
-abstract class CopyWith_Query_personsGeolocations_streets<TRes> {
-  factory CopyWith_Query_personsGeolocations_streets(
-    Query_personsGeolocations_streets instance,
-    TRes Function(Query_personsGeolocations_streets) then,
-  ) = _CopyWithImpl_Query_personsGeolocations_streets;
-
-  factory CopyWith_Query_personsGeolocations_streets.stub(TRes res) =
-      _CopyWithStubImpl_Query_personsGeolocations_streets;
-
-  TRes call({List<Fragment_StreetWithLine>? results, String? $__typename});
-  TRes results(
-    Iterable<Fragment_StreetWithLine>? Function(
-      Iterable<CopyWith_Fragment_StreetWithLine<Fragment_StreetWithLine>>?,
-    )
-    _fn,
-  );
-}
-
-class _CopyWithImpl_Query_personsGeolocations_streets<TRes>
-    implements CopyWith_Query_personsGeolocations_streets<TRes> {
-  _CopyWithImpl_Query_personsGeolocations_streets(this._instance, this._then);
-
-  final Query_personsGeolocations_streets _instance;
-
-  final TRes Function(Query_personsGeolocations_streets) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? results = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_personsGeolocations_streets(
-          results: results == _undefined
-              ? _instance.results
-              : (results as List<Fragment_StreetWithLine>?),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
-
-  TRes results(
-    Iterable<Fragment_StreetWithLine>? Function(
-      Iterable<CopyWith_Fragment_StreetWithLine<Fragment_StreetWithLine>>?,
-    )
-    _fn,
-  ) => call(
-    results: _fn(
-      _instance.results?.map(
-        (e) => CopyWith_Fragment_StreetWithLine(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-}
-
-class _CopyWithStubImpl_Query_personsGeolocations_streets<TRes>
-    implements CopyWith_Query_personsGeolocations_streets<TRes> {
-  _CopyWithStubImpl_Query_personsGeolocations_streets(this._res);
-
-  TRes _res;
-
-  call({List<Fragment_StreetWithLine>? results, String? $__typename}) => _res;
-
-  results(_fn) => _res;
-}
-
-class Query_personsGeolocations_families {
-  Query_personsGeolocations_families({
-    this.results,
-    this.$__typename = 'KeysetPageOfFamily',
-  });
-
-  factory Query_personsGeolocations_families.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$results = json['results'];
-    final l$$__typename = json['__typename'];
-    return Query_personsGeolocations_families(
-      results: (l$results as List<dynamic>?)
-          ?.map(
-            (e) => Query_personsGeolocations_families_results.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final List<Query_personsGeolocations_families_results>? results;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$results = results;
-    _resultData['results'] = l$results?.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$results = results;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$results == null ? null : Object.hashAll(l$results.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_personsGeolocations_families ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$results = results;
-    final lOther$results = other.results;
-    if (l$results != null && lOther$results != null) {
-      if (l$results.length != lOther$results.length) {
-        return false;
-      }
-      for (int i = 0; i < l$results.length; i++) {
-        final l$results$entry = l$results[i];
-        final lOther$results$entry = lOther$results[i];
-        if (l$results$entry != lOther$results$entry) {
-          return false;
-        }
-      }
-    } else if (l$results != lOther$results) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_personsGeolocations_families
-    on Query_personsGeolocations_families {
-  CopyWith_Query_personsGeolocations_families<
-    Query_personsGeolocations_families
-  >
-  get copyWith => CopyWith_Query_personsGeolocations_families(this, (i) => i);
-}
-
-abstract class CopyWith_Query_personsGeolocations_families<TRes> {
-  factory CopyWith_Query_personsGeolocations_families(
-    Query_personsGeolocations_families instance,
-    TRes Function(Query_personsGeolocations_families) then,
-  ) = _CopyWithImpl_Query_personsGeolocations_families;
-
-  factory CopyWith_Query_personsGeolocations_families.stub(TRes res) =
-      _CopyWithStubImpl_Query_personsGeolocations_families;
-
-  TRes call({
-    List<Query_personsGeolocations_families_results>? results,
-    String? $__typename,
-  });
-  TRes results(
-    Iterable<Query_personsGeolocations_families_results>? Function(
-      Iterable<
-        CopyWith_Query_personsGeolocations_families_results<
-          Query_personsGeolocations_families_results
-        >
-      >?,
-    )
-    _fn,
-  );
-}
-
-class _CopyWithImpl_Query_personsGeolocations_families<TRes>
-    implements CopyWith_Query_personsGeolocations_families<TRes> {
-  _CopyWithImpl_Query_personsGeolocations_families(this._instance, this._then);
-
-  final Query_personsGeolocations_families _instance;
-
-  final TRes Function(Query_personsGeolocations_families) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? results = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_personsGeolocations_families(
-          results: results == _undefined
-              ? _instance.results
-              : (results as List<Query_personsGeolocations_families_results>?),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
-
-  TRes results(
-    Iterable<Query_personsGeolocations_families_results>? Function(
-      Iterable<
-        CopyWith_Query_personsGeolocations_families_results<
-          Query_personsGeolocations_families_results
-        >
-      >?,
-    )
-    _fn,
-  ) => call(
-    results: _fn(
-      _instance.results?.map(
-        (e) => CopyWith_Query_personsGeolocations_families_results(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-}
-
-class _CopyWithStubImpl_Query_personsGeolocations_families<TRes>
-    implements CopyWith_Query_personsGeolocations_families<TRes> {
-  _CopyWithStubImpl_Query_personsGeolocations_families(this._res);
-
-  TRes _res;
-
-  call({
-    List<Query_personsGeolocations_families_results>? results,
-    String? $__typename,
-  }) => _res;
-
-  results(_fn) => _res;
-}
-
-class Query_personsGeolocations_families_results
-    implements Fragment_PersonFamily {
-  Query_personsGeolocations_families_results({
-    required this.id,
-    required this.name,
-    this.color,
-    required this.userCanEdit,
-    this.photoUpdatedAt,
-    this.blurhash,
-    this.dataCheck,
-    this.$__typename = 'Family',
-    this.address,
-  });
-
-  factory Query_personsGeolocations_families_results.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$id = json['id'];
-    final l$name = json['name'];
-    final l$color = json['color'];
-    final l$userCanEdit = json['userCanEdit'];
-    final l$photoUpdatedAt = json['photoUpdatedAt'];
-    final l$blurhash = json['blurhash'];
-    final l$dataCheck = json['dataCheck'];
-    final l$$__typename = json['__typename'];
-    final l$address = json['address'];
-    return Query_personsGeolocations_families_results(
-      id: (l$id as String),
-      name: (l$name as String),
-      color: (l$color as int?),
-      userCanEdit: (l$userCanEdit as bool),
-      photoUpdatedAt: l$photoUpdatedAt == null
-          ? null
-          : tstzFromString(l$photoUpdatedAt),
-      blurhash: (l$blurhash as String?),
-      dataCheck: l$dataCheck == null
-          ? null
-          : Fragment_PersonDataCheck.fromJson(
-              (l$dataCheck as Map<String, dynamic>),
-            ),
-      $__typename: (l$$__typename as String),
-      address: l$address == null
-          ? null
-          : Query_personsGeolocations_families_results_address.fromJson(
-              (l$address as Map<String, dynamic>),
-            ),
-    );
-  }
-
-  final String id;
-
-  final String name;
-
-  final int? color;
-
-  final bool userCanEdit;
-
-  final DateTime? photoUpdatedAt;
-
-  final String? blurhash;
-
-  final Fragment_PersonDataCheck? dataCheck;
-
-  final String $__typename;
-
-  final Query_personsGeolocations_families_results_address? address;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$color = color;
-    _resultData['color'] = l$color;
-    final l$userCanEdit = userCanEdit;
-    _resultData['userCanEdit'] = l$userCanEdit;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
-        ? null
-        : tstzToString(l$photoUpdatedAt);
-    final l$blurhash = blurhash;
-    _resultData['blurhash'] = l$blurhash;
-    final l$dataCheck = dataCheck;
-    _resultData['dataCheck'] = l$dataCheck?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    final l$address = address;
-    _resultData['address'] = l$address?.toJson();
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$name = name;
-    final l$color = color;
-    final l$userCanEdit = userCanEdit;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final l$blurhash = blurhash;
-    final l$dataCheck = dataCheck;
-    final l$$__typename = $__typename;
-    final l$address = address;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$color,
-      l$userCanEdit,
-      l$photoUpdatedAt,
-      l$blurhash,
-      l$dataCheck,
-      l$$__typename,
-      l$address,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_personsGeolocations_families_results ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$userCanEdit = userCanEdit;
-    final lOther$userCanEdit = other.userCanEdit;
-    if (l$userCanEdit != lOther$userCanEdit) {
-      return false;
-    }
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final lOther$photoUpdatedAt = other.photoUpdatedAt;
-    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
-      return false;
-    }
-    final l$blurhash = blurhash;
-    final lOther$blurhash = other.blurhash;
-    if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
-    final l$dataCheck = dataCheck;
-    final lOther$dataCheck = other.dataCheck;
-    if (l$dataCheck != lOther$dataCheck) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    final l$address = address;
-    final lOther$address = other.address;
-    if (l$address != lOther$address) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_personsGeolocations_families_results
-    on Query_personsGeolocations_families_results {
-  CopyWith_Query_personsGeolocations_families_results<
-    Query_personsGeolocations_families_results
-  >
-  get copyWith =>
-      CopyWith_Query_personsGeolocations_families_results(this, (i) => i);
-}
-
-abstract class CopyWith_Query_personsGeolocations_families_results<TRes> {
-  factory CopyWith_Query_personsGeolocations_families_results(
-    Query_personsGeolocations_families_results instance,
-    TRes Function(Query_personsGeolocations_families_results) then,
-  ) = _CopyWithImpl_Query_personsGeolocations_families_results;
-
-  factory CopyWith_Query_personsGeolocations_families_results.stub(TRes res) =
-      _CopyWithStubImpl_Query_personsGeolocations_families_results;
-
-  TRes call({
-    String? id,
-    String? name,
-    int? color,
-    bool? userCanEdit,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
-    String? $__typename,
-    Query_personsGeolocations_families_results_address? address,
-  });
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck;
-  CopyWith_Query_personsGeolocations_families_results_address<TRes> get address;
-}
-
-class _CopyWithImpl_Query_personsGeolocations_families_results<TRes>
-    implements CopyWith_Query_personsGeolocations_families_results<TRes> {
-  _CopyWithImpl_Query_personsGeolocations_families_results(
-    this._instance,
-    this._then,
-  );
-
-  final Query_personsGeolocations_families_results _instance;
-
-  final TRes Function(Query_personsGeolocations_families_results) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? name = _undefined,
-    Object? color = _undefined,
-    Object? userCanEdit = _undefined,
-    Object? photoUpdatedAt = _undefined,
-    Object? blurhash = _undefined,
-    Object? dataCheck = _undefined,
-    Object? $__typename = _undefined,
-    Object? address = _undefined,
-  }) => _then(
-    Query_personsGeolocations_families_results(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      color: color == _undefined ? _instance.color : (color as int?),
-      userCanEdit: userCanEdit == _undefined || userCanEdit == null
-          ? _instance.userCanEdit
-          : (userCanEdit as bool),
-      photoUpdatedAt: photoUpdatedAt == _undefined
-          ? _instance.photoUpdatedAt
-          : (photoUpdatedAt as DateTime?),
-      blurhash: blurhash == _undefined
-          ? _instance.blurhash
-          : (blurhash as String?),
-      dataCheck: dataCheck == _undefined
-          ? _instance.dataCheck
-          : (dataCheck as Fragment_PersonDataCheck?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-      address: address == _undefined
-          ? _instance.address
-          : (address as Query_personsGeolocations_families_results_address?),
-    ),
-  );
-
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck {
-    final local$dataCheck = _instance.dataCheck;
-    return local$dataCheck == null
-        ? CopyWith_Fragment_PersonDataCheck.stub(_then(_instance))
-        : CopyWith_Fragment_PersonDataCheck(
-            local$dataCheck,
-            (e) => call(dataCheck: e),
-          );
-  }
-
-  CopyWith_Query_personsGeolocations_families_results_address<TRes>
-  get address {
-    final local$address = _instance.address;
-    return local$address == null
-        ? CopyWith_Query_personsGeolocations_families_results_address.stub(
-            _then(_instance),
-          )
-        : CopyWith_Query_personsGeolocations_families_results_address(
-            local$address,
-            (e) => call(address: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Query_personsGeolocations_families_results<TRes>
-    implements CopyWith_Query_personsGeolocations_families_results<TRes> {
-  _CopyWithStubImpl_Query_personsGeolocations_families_results(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? name,
-    int? color,
-    bool? userCanEdit,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    Fragment_PersonDataCheck? dataCheck,
-    String? $__typename,
-    Query_personsGeolocations_families_results_address? address,
-  }) => _res;
-
-  CopyWith_Fragment_PersonDataCheck<TRes> get dataCheck =>
-      CopyWith_Fragment_PersonDataCheck.stub(_res);
-
-  CopyWith_Query_personsGeolocations_families_results_address<TRes>
-  get address =>
-      CopyWith_Query_personsGeolocations_families_results_address.stub(_res);
-}
-
-class Query_personsGeolocations_families_results_address {
-  Query_personsGeolocations_families_results_address({
-    required this.id,
-    this.geolocation,
-    this.$__typename = 'Address',
-  });
-
-  factory Query_personsGeolocations_families_results_address.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$id = json['id'];
-    final l$geolocation = json['geolocation'];
-    final l$$__typename = json['__typename'];
-    return Query_personsGeolocations_families_results_address(
-      id: (l$id as String),
-      geolocation: (l$geolocation as Json?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final Json? geolocation;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$geolocation = geolocation;
-    _resultData['geolocation'] = l$geolocation;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$geolocation = geolocation;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$geolocation, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_personsGeolocations_families_results_address ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$geolocation = geolocation;
-    final lOther$geolocation = other.geolocation;
-    if (l$geolocation != lOther$geolocation) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_personsGeolocations_families_results_address
-    on Query_personsGeolocations_families_results_address {
-  CopyWith_Query_personsGeolocations_families_results_address<
-    Query_personsGeolocations_families_results_address
-  >
-  get copyWith => CopyWith_Query_personsGeolocations_families_results_address(
-    this,
-    (i) => i,
-  );
-}
-
-abstract class CopyWith_Query_personsGeolocations_families_results_address<
-  TRes
-> {
-  factory CopyWith_Query_personsGeolocations_families_results_address(
-    Query_personsGeolocations_families_results_address instance,
-    TRes Function(Query_personsGeolocations_families_results_address) then,
-  ) = _CopyWithImpl_Query_personsGeolocations_families_results_address;
-
-  factory CopyWith_Query_personsGeolocations_families_results_address.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Query_personsGeolocations_families_results_address;
-
-  TRes call({String? id, Json? geolocation, String? $__typename});
-}
-
-class _CopyWithImpl_Query_personsGeolocations_families_results_address<TRes>
-    implements
-        CopyWith_Query_personsGeolocations_families_results_address<TRes> {
-  _CopyWithImpl_Query_personsGeolocations_families_results_address(
-    this._instance,
-    this._then,
-  );
-
-  final Query_personsGeolocations_families_results_address _instance;
-
-  final TRes Function(Query_personsGeolocations_families_results_address) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? geolocation = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Query_personsGeolocations_families_results_address(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      geolocation: geolocation == _undefined
-          ? _instance.geolocation
-          : (geolocation as Json?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Query_personsGeolocations_families_results_address<TRes>
-    implements
-        CopyWith_Query_personsGeolocations_families_results_address<TRes> {
-  _CopyWithStubImpl_Query_personsGeolocations_families_results_address(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({String? id, Json? geolocation, String? $__typename}) => _res;
-}
-
-class Query_personsGeolocations_stores {
-  Query_personsGeolocations_stores({
-    this.results,
-    this.$__typename = 'KeysetPageOfStore',
-  });
-
-  factory Query_personsGeolocations_stores.fromJson(Map<String, dynamic> json) {
-    final l$results = json['results'];
-    final l$$__typename = json['__typename'];
-    return Query_personsGeolocations_stores(
-      results: (l$results as List<dynamic>?)
-          ?.map(
-            (e) => Query_personsGeolocations_stores_results.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final List<Query_personsGeolocations_stores_results>? results;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$results = results;
-    _resultData['results'] = l$results?.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$results = results;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$results == null ? null : Object.hashAll(l$results.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_personsGeolocations_stores ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$results = results;
-    final lOther$results = other.results;
-    if (l$results != null && lOther$results != null) {
-      if (l$results.length != lOther$results.length) {
-        return false;
-      }
-      for (int i = 0; i < l$results.length; i++) {
-        final l$results$entry = l$results[i];
-        final lOther$results$entry = lOther$results[i];
-        if (l$results$entry != lOther$results$entry) {
-          return false;
-        }
-      }
-    } else if (l$results != lOther$results) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_personsGeolocations_stores
-    on Query_personsGeolocations_stores {
-  CopyWith_Query_personsGeolocations_stores<Query_personsGeolocations_stores>
-  get copyWith => CopyWith_Query_personsGeolocations_stores(this, (i) => i);
-}
-
-abstract class CopyWith_Query_personsGeolocations_stores<TRes> {
-  factory CopyWith_Query_personsGeolocations_stores(
-    Query_personsGeolocations_stores instance,
-    TRes Function(Query_personsGeolocations_stores) then,
-  ) = _CopyWithImpl_Query_personsGeolocations_stores;
-
-  factory CopyWith_Query_personsGeolocations_stores.stub(TRes res) =
-      _CopyWithStubImpl_Query_personsGeolocations_stores;
-
-  TRes call({
-    List<Query_personsGeolocations_stores_results>? results,
-    String? $__typename,
-  });
-  TRes results(
-    Iterable<Query_personsGeolocations_stores_results>? Function(
-      Iterable<
-        CopyWith_Query_personsGeolocations_stores_results<
-          Query_personsGeolocations_stores_results
-        >
-      >?,
-    )
-    _fn,
-  );
-}
-
-class _CopyWithImpl_Query_personsGeolocations_stores<TRes>
-    implements CopyWith_Query_personsGeolocations_stores<TRes> {
-  _CopyWithImpl_Query_personsGeolocations_stores(this._instance, this._then);
-
-  final Query_personsGeolocations_stores _instance;
-
-  final TRes Function(Query_personsGeolocations_stores) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? results = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_personsGeolocations_stores(
-          results: results == _undefined
-              ? _instance.results
-              : (results as List<Query_personsGeolocations_stores_results>?),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
-
-  TRes results(
-    Iterable<Query_personsGeolocations_stores_results>? Function(
-      Iterable<
-        CopyWith_Query_personsGeolocations_stores_results<
-          Query_personsGeolocations_stores_results
-        >
-      >?,
-    )
-    _fn,
-  ) => call(
-    results: _fn(
-      _instance.results?.map(
-        (e) => CopyWith_Query_personsGeolocations_stores_results(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-}
-
-class _CopyWithStubImpl_Query_personsGeolocations_stores<TRes>
-    implements CopyWith_Query_personsGeolocations_stores<TRes> {
-  _CopyWithStubImpl_Query_personsGeolocations_stores(this._res);
-
-  TRes _res;
-
-  call({
-    List<Query_personsGeolocations_stores_results>? results,
-    String? $__typename,
-  }) => _res;
-
-  results(_fn) => _res;
-}
-
-class Query_personsGeolocations_stores_results implements Fragment_Store {
-  Query_personsGeolocations_stores_results({
-    required this.id,
-    required this.name,
-    this.color,
-    this.adminFamilyId,
-    this.photoUpdatedAt,
-    this.blurhash,
-    required this.userCanEdit,
-    this.$__typename = 'Store',
-    this.address,
-  });
-
-  factory Query_personsGeolocations_stores_results.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$id = json['id'];
-    final l$name = json['name'];
-    final l$color = json['color'];
-    final l$adminFamilyId = json['adminFamilyId'];
-    final l$photoUpdatedAt = json['photoUpdatedAt'];
-    final l$blurhash = json['blurhash'];
-    final l$userCanEdit = json['userCanEdit'];
-    final l$$__typename = json['__typename'];
-    final l$address = json['address'];
-    return Query_personsGeolocations_stores_results(
-      id: (l$id as String),
-      name: (l$name as String),
-      color: (l$color as int?),
-      adminFamilyId: (l$adminFamilyId as String?),
-      photoUpdatedAt: l$photoUpdatedAt == null
-          ? null
-          : tstzFromString(l$photoUpdatedAt),
-      blurhash: (l$blurhash as String?),
-      userCanEdit: (l$userCanEdit as bool),
-      $__typename: (l$$__typename as String),
-      address: l$address == null
-          ? null
-          : Query_personsGeolocations_stores_results_address.fromJson(
-              (l$address as Map<String, dynamic>),
-            ),
-    );
-  }
-
-  final String id;
-
-  final String name;
-
-  final int? color;
-
-  final String? adminFamilyId;
-
-  final DateTime? photoUpdatedAt;
-
-  final String? blurhash;
-
-  final bool userCanEdit;
-
-  final String $__typename;
-
-  final Query_personsGeolocations_stores_results_address? address;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$color = color;
-    _resultData['color'] = l$color;
-    final l$adminFamilyId = adminFamilyId;
-    _resultData['adminFamilyId'] = l$adminFamilyId;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
-        ? null
-        : tstzToString(l$photoUpdatedAt);
-    final l$blurhash = blurhash;
-    _resultData['blurhash'] = l$blurhash;
-    final l$userCanEdit = userCanEdit;
-    _resultData['userCanEdit'] = l$userCanEdit;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    final l$address = address;
-    _resultData['address'] = l$address?.toJson();
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$name = name;
-    final l$color = color;
-    final l$adminFamilyId = adminFamilyId;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final l$blurhash = blurhash;
-    final l$userCanEdit = userCanEdit;
-    final l$$__typename = $__typename;
-    final l$address = address;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$color,
-      l$adminFamilyId,
-      l$photoUpdatedAt,
-      l$blurhash,
-      l$userCanEdit,
-      l$$__typename,
-      l$address,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_personsGeolocations_stores_results ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$adminFamilyId = adminFamilyId;
-    final lOther$adminFamilyId = other.adminFamilyId;
-    if (l$adminFamilyId != lOther$adminFamilyId) {
-      return false;
-    }
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final lOther$photoUpdatedAt = other.photoUpdatedAt;
-    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
-      return false;
-    }
-    final l$blurhash = blurhash;
-    final lOther$blurhash = other.blurhash;
-    if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
-    final l$userCanEdit = userCanEdit;
-    final lOther$userCanEdit = other.userCanEdit;
-    if (l$userCanEdit != lOther$userCanEdit) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    final l$address = address;
-    final lOther$address = other.address;
-    if (l$address != lOther$address) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_personsGeolocations_stores_results
-    on Query_personsGeolocations_stores_results {
-  CopyWith_Query_personsGeolocations_stores_results<
-    Query_personsGeolocations_stores_results
-  >
-  get copyWith =>
-      CopyWith_Query_personsGeolocations_stores_results(this, (i) => i);
-}
-
-abstract class CopyWith_Query_personsGeolocations_stores_results<TRes> {
-  factory CopyWith_Query_personsGeolocations_stores_results(
-    Query_personsGeolocations_stores_results instance,
-    TRes Function(Query_personsGeolocations_stores_results) then,
-  ) = _CopyWithImpl_Query_personsGeolocations_stores_results;
-
-  factory CopyWith_Query_personsGeolocations_stores_results.stub(TRes res) =
-      _CopyWithStubImpl_Query_personsGeolocations_stores_results;
-
-  TRes call({
-    String? id,
-    String? name,
-    int? color,
-    String? adminFamilyId,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    bool? userCanEdit,
-    String? $__typename,
-    Query_personsGeolocations_stores_results_address? address,
-  });
-  CopyWith_Query_personsGeolocations_stores_results_address<TRes> get address;
-}
-
-class _CopyWithImpl_Query_personsGeolocations_stores_results<TRes>
-    implements CopyWith_Query_personsGeolocations_stores_results<TRes> {
-  _CopyWithImpl_Query_personsGeolocations_stores_results(
-    this._instance,
-    this._then,
-  );
-
-  final Query_personsGeolocations_stores_results _instance;
-
-  final TRes Function(Query_personsGeolocations_stores_results) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? name = _undefined,
-    Object? color = _undefined,
-    Object? adminFamilyId = _undefined,
-    Object? photoUpdatedAt = _undefined,
-    Object? blurhash = _undefined,
-    Object? userCanEdit = _undefined,
-    Object? $__typename = _undefined,
-    Object? address = _undefined,
-  }) => _then(
-    Query_personsGeolocations_stores_results(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      color: color == _undefined ? _instance.color : (color as int?),
-      adminFamilyId: adminFamilyId == _undefined
-          ? _instance.adminFamilyId
-          : (adminFamilyId as String?),
-      photoUpdatedAt: photoUpdatedAt == _undefined
-          ? _instance.photoUpdatedAt
-          : (photoUpdatedAt as DateTime?),
-      blurhash: blurhash == _undefined
-          ? _instance.blurhash
-          : (blurhash as String?),
-      userCanEdit: userCanEdit == _undefined || userCanEdit == null
-          ? _instance.userCanEdit
-          : (userCanEdit as bool),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-      address: address == _undefined
-          ? _instance.address
-          : (address as Query_personsGeolocations_stores_results_address?),
-    ),
-  );
-
-  CopyWith_Query_personsGeolocations_stores_results_address<TRes> get address {
-    final local$address = _instance.address;
-    return local$address == null
-        ? CopyWith_Query_personsGeolocations_stores_results_address.stub(
-            _then(_instance),
-          )
-        : CopyWith_Query_personsGeolocations_stores_results_address(
-            local$address,
-            (e) => call(address: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Query_personsGeolocations_stores_results<TRes>
-    implements CopyWith_Query_personsGeolocations_stores_results<TRes> {
-  _CopyWithStubImpl_Query_personsGeolocations_stores_results(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? name,
-    int? color,
-    String? adminFamilyId,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    bool? userCanEdit,
-    String? $__typename,
-    Query_personsGeolocations_stores_results_address? address,
-  }) => _res;
-
-  CopyWith_Query_personsGeolocations_stores_results_address<TRes> get address =>
-      CopyWith_Query_personsGeolocations_stores_results_address.stub(_res);
-}
-
-class Query_personsGeolocations_stores_results_address {
-  Query_personsGeolocations_stores_results_address({
-    required this.id,
-    this.geolocation,
-    this.$__typename = 'Address',
-  });
-
-  factory Query_personsGeolocations_stores_results_address.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$id = json['id'];
-    final l$geolocation = json['geolocation'];
-    final l$$__typename = json['__typename'];
-    return Query_personsGeolocations_stores_results_address(
-      id: (l$id as String),
-      geolocation: (l$geolocation as Json?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final Json? geolocation;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$geolocation = geolocation;
-    _resultData['geolocation'] = l$geolocation;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$geolocation = geolocation;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$geolocation, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_personsGeolocations_stores_results_address ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$geolocation = geolocation;
-    final lOther$geolocation = other.geolocation;
-    if (l$geolocation != lOther$geolocation) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_personsGeolocations_stores_results_address
-    on Query_personsGeolocations_stores_results_address {
-  CopyWith_Query_personsGeolocations_stores_results_address<
-    Query_personsGeolocations_stores_results_address
-  >
-  get copyWith =>
-      CopyWith_Query_personsGeolocations_stores_results_address(this, (i) => i);
-}
-
-abstract class CopyWith_Query_personsGeolocations_stores_results_address<TRes> {
-  factory CopyWith_Query_personsGeolocations_stores_results_address(
-    Query_personsGeolocations_stores_results_address instance,
-    TRes Function(Query_personsGeolocations_stores_results_address) then,
-  ) = _CopyWithImpl_Query_personsGeolocations_stores_results_address;
-
-  factory CopyWith_Query_personsGeolocations_stores_results_address.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Query_personsGeolocations_stores_results_address;
-
-  TRes call({String? id, Json? geolocation, String? $__typename});
-}
-
-class _CopyWithImpl_Query_personsGeolocations_stores_results_address<TRes>
-    implements CopyWith_Query_personsGeolocations_stores_results_address<TRes> {
-  _CopyWithImpl_Query_personsGeolocations_stores_results_address(
-    this._instance,
-    this._then,
-  );
-
-  final Query_personsGeolocations_stores_results_address _instance;
-
-  final TRes Function(Query_personsGeolocations_stores_results_address) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? geolocation = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Query_personsGeolocations_stores_results_address(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      geolocation: geolocation == _undefined
-          ? _instance.geolocation
-          : (geolocation as Json?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Query_personsGeolocations_stores_results_address<TRes>
-    implements CopyWith_Query_personsGeolocations_stores_results_address<TRes> {
-  _CopyWithStubImpl_Query_personsGeolocations_stores_results_address(this._res);
-
-  TRes _res;
-
-  call({String? id, Json? geolocation, String? $__typename}) => _res;
-}
-
-class Query_personsGeolocations_persons {
-  Query_personsGeolocations_persons({
+class Query_geolocatedPersons_persons {
+  Query_geolocatedPersons_persons({
+    this.endKeyset,
     this.results,
     this.$__typename = 'KeysetPageOfPerson',
   });
 
-  factory Query_personsGeolocations_persons.fromJson(
-    Map<String, dynamic> json,
-  ) {
+  factory Query_geolocatedPersons_persons.fromJson(Map<String, dynamic> json) {
+    final l$endKeyset = json['endKeyset'];
     final l$results = json['results'];
     final l$$__typename = json['__typename'];
-    return Query_personsGeolocations_persons(
+    return Query_geolocatedPersons_persons(
+      endKeyset: (l$endKeyset as String?),
       results: (l$results as List<dynamic>?)
           ?.map(
-            (e) => Query_personsGeolocations_persons_results.fromJson(
+            (e) => Query_geolocatedPersons_persons_results.fromJson(
               (e as Map<String, dynamic>),
             ),
           )
@@ -9209,12 +10119,16 @@ class Query_personsGeolocations_persons {
     );
   }
 
-  final List<Query_personsGeolocations_persons_results>? results;
+  final String? endKeyset;
+
+  final List<Query_geolocatedPersons_persons_results>? results;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$endKeyset = endKeyset;
+    _resultData['endKeyset'] = l$endKeyset;
     final l$results = results;
     _resultData['results'] = l$results?.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
@@ -9224,9 +10138,11 @@ class Query_personsGeolocations_persons {
 
   @override
   int get hashCode {
+    final l$endKeyset = endKeyset;
     final l$results = results;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$endKeyset,
       l$results == null ? null : Object.hashAll(l$results.map((v) => v)),
       l$$__typename,
     ]);
@@ -9237,8 +10153,13 @@ class Query_personsGeolocations_persons {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query_personsGeolocations_persons ||
+    if (other is! Query_geolocatedPersons_persons ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$endKeyset = endKeyset;
+    final lOther$endKeyset = other.endKeyset;
+    if (l$endKeyset != lOther$endKeyset) {
       return false;
     }
     final l$results = results;
@@ -9266,30 +10187,31 @@ class Query_personsGeolocations_persons {
   }
 }
 
-extension UtilityExtension_Query_personsGeolocations_persons
-    on Query_personsGeolocations_persons {
-  CopyWith_Query_personsGeolocations_persons<Query_personsGeolocations_persons>
-  get copyWith => CopyWith_Query_personsGeolocations_persons(this, (i) => i);
+extension UtilityExtension_Query_geolocatedPersons_persons
+    on Query_geolocatedPersons_persons {
+  CopyWith_Query_geolocatedPersons_persons<Query_geolocatedPersons_persons>
+  get copyWith => CopyWith_Query_geolocatedPersons_persons(this, (i) => i);
 }
 
-abstract class CopyWith_Query_personsGeolocations_persons<TRes> {
-  factory CopyWith_Query_personsGeolocations_persons(
-    Query_personsGeolocations_persons instance,
-    TRes Function(Query_personsGeolocations_persons) then,
-  ) = _CopyWithImpl_Query_personsGeolocations_persons;
+abstract class CopyWith_Query_geolocatedPersons_persons<TRes> {
+  factory CopyWith_Query_geolocatedPersons_persons(
+    Query_geolocatedPersons_persons instance,
+    TRes Function(Query_geolocatedPersons_persons) then,
+  ) = _CopyWithImpl_Query_geolocatedPersons_persons;
 
-  factory CopyWith_Query_personsGeolocations_persons.stub(TRes res) =
-      _CopyWithStubImpl_Query_personsGeolocations_persons;
+  factory CopyWith_Query_geolocatedPersons_persons.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedPersons_persons;
 
   TRes call({
-    List<Query_personsGeolocations_persons_results>? results,
+    String? endKeyset,
+    List<Query_geolocatedPersons_persons_results>? results,
     String? $__typename,
   });
   TRes results(
-    Iterable<Query_personsGeolocations_persons_results>? Function(
+    Iterable<Query_geolocatedPersons_persons_results>? Function(
       Iterable<
-        CopyWith_Query_personsGeolocations_persons_results<
-          Query_personsGeolocations_persons_results
+        CopyWith_Query_geolocatedPersons_persons_results<
+          Query_geolocatedPersons_persons_results
         >
       >?,
     )
@@ -9297,33 +10219,39 @@ abstract class CopyWith_Query_personsGeolocations_persons<TRes> {
   );
 }
 
-class _CopyWithImpl_Query_personsGeolocations_persons<TRes>
-    implements CopyWith_Query_personsGeolocations_persons<TRes> {
-  _CopyWithImpl_Query_personsGeolocations_persons(this._instance, this._then);
+class _CopyWithImpl_Query_geolocatedPersons_persons<TRes>
+    implements CopyWith_Query_geolocatedPersons_persons<TRes> {
+  _CopyWithImpl_Query_geolocatedPersons_persons(this._instance, this._then);
 
-  final Query_personsGeolocations_persons _instance;
+  final Query_geolocatedPersons_persons _instance;
 
-  final TRes Function(Query_personsGeolocations_persons) _then;
+  final TRes Function(Query_geolocatedPersons_persons) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? results = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_personsGeolocations_persons(
-          results: results == _undefined
-              ? _instance.results
-              : (results as List<Query_personsGeolocations_persons_results>?),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
+  TRes call({
+    Object? endKeyset = _undefined,
+    Object? results = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_geolocatedPersons_persons(
+      endKeyset: endKeyset == _undefined
+          ? _instance.endKeyset
+          : (endKeyset as String?),
+      results: results == _undefined
+          ? _instance.results
+          : (results as List<Query_geolocatedPersons_persons_results>?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   TRes results(
-    Iterable<Query_personsGeolocations_persons_results>? Function(
+    Iterable<Query_geolocatedPersons_persons_results>? Function(
       Iterable<
-        CopyWith_Query_personsGeolocations_persons_results<
-          Query_personsGeolocations_persons_results
+        CopyWith_Query_geolocatedPersons_persons_results<
+          Query_geolocatedPersons_persons_results
         >
       >?,
     )
@@ -9331,29 +10259,30 @@ class _CopyWithImpl_Query_personsGeolocations_persons<TRes>
   ) => call(
     results: _fn(
       _instance.results?.map(
-        (e) => CopyWith_Query_personsGeolocations_persons_results(e, (i) => i),
+        (e) => CopyWith_Query_geolocatedPersons_persons_results(e, (i) => i),
       ),
     )?.toList(),
   );
 }
 
-class _CopyWithStubImpl_Query_personsGeolocations_persons<TRes>
-    implements CopyWith_Query_personsGeolocations_persons<TRes> {
-  _CopyWithStubImpl_Query_personsGeolocations_persons(this._res);
+class _CopyWithStubImpl_Query_geolocatedPersons_persons<TRes>
+    implements CopyWith_Query_geolocatedPersons_persons<TRes> {
+  _CopyWithStubImpl_Query_geolocatedPersons_persons(this._res);
 
   TRes _res;
 
   call({
-    List<Query_personsGeolocations_persons_results>? results,
+    String? endKeyset,
+    List<Query_geolocatedPersons_persons_results>? results,
     String? $__typename,
   }) => _res;
 
   results(_fn) => _res;
 }
 
-class Query_personsGeolocations_persons_results
+class Query_geolocatedPersons_persons_results
     implements Fragment_PersonNoPhoto {
-  Query_personsGeolocations_persons_results({
+  Query_geolocatedPersons_persons_results({
     required this.id,
     required this.name,
     this.color,
@@ -9362,7 +10291,7 @@ class Query_personsGeolocations_persons_results
     this.address,
   });
 
-  factory Query_personsGeolocations_persons_results.fromJson(
+  factory Query_geolocatedPersons_persons_results.fromJson(
     Map<String, dynamic> json,
   ) {
     final l$id = json['id'];
@@ -9371,7 +10300,7 @@ class Query_personsGeolocations_persons_results
     final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$address = json['address'];
-    return Query_personsGeolocations_persons_results(
+    return Query_geolocatedPersons_persons_results(
       id: (l$id as String),
       name: (l$name as String),
       color: (l$color as int?),
@@ -9379,7 +10308,7 @@ class Query_personsGeolocations_persons_results
       $__typename: (l$$__typename as String),
       address: l$address == null
           ? null
-          : Query_personsGeolocations_persons_results_address.fromJson(
+          : Query_geolocatedPersons_persons_results_address.fromJson(
               (l$address as Map<String, dynamic>),
             ),
     );
@@ -9395,7 +10324,7 @@ class Query_personsGeolocations_persons_results
 
   final String $__typename;
 
-  final Query_personsGeolocations_persons_results_address? address;
+  final Query_geolocatedPersons_persons_results_address? address;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -9437,7 +10366,7 @@ class Query_personsGeolocations_persons_results
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query_personsGeolocations_persons_results ||
+    if (other is! Query_geolocatedPersons_persons_results ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9475,23 +10404,23 @@ class Query_personsGeolocations_persons_results
   }
 }
 
-extension UtilityExtension_Query_personsGeolocations_persons_results
-    on Query_personsGeolocations_persons_results {
-  CopyWith_Query_personsGeolocations_persons_results<
-    Query_personsGeolocations_persons_results
+extension UtilityExtension_Query_geolocatedPersons_persons_results
+    on Query_geolocatedPersons_persons_results {
+  CopyWith_Query_geolocatedPersons_persons_results<
+    Query_geolocatedPersons_persons_results
   >
   get copyWith =>
-      CopyWith_Query_personsGeolocations_persons_results(this, (i) => i);
+      CopyWith_Query_geolocatedPersons_persons_results(this, (i) => i);
 }
 
-abstract class CopyWith_Query_personsGeolocations_persons_results<TRes> {
-  factory CopyWith_Query_personsGeolocations_persons_results(
-    Query_personsGeolocations_persons_results instance,
-    TRes Function(Query_personsGeolocations_persons_results) then,
-  ) = _CopyWithImpl_Query_personsGeolocations_persons_results;
+abstract class CopyWith_Query_geolocatedPersons_persons_results<TRes> {
+  factory CopyWith_Query_geolocatedPersons_persons_results(
+    Query_geolocatedPersons_persons_results instance,
+    TRes Function(Query_geolocatedPersons_persons_results) then,
+  ) = _CopyWithImpl_Query_geolocatedPersons_persons_results;
 
-  factory CopyWith_Query_personsGeolocations_persons_results.stub(TRes res) =
-      _CopyWithStubImpl_Query_personsGeolocations_persons_results;
+  factory CopyWith_Query_geolocatedPersons_persons_results.stub(TRes res) =
+      _CopyWithStubImpl_Query_geolocatedPersons_persons_results;
 
   TRes call({
     String? id,
@@ -9499,21 +10428,21 @@ abstract class CopyWith_Query_personsGeolocations_persons_results<TRes> {
     int? color,
     bool? userCanEdit,
     String? $__typename,
-    Query_personsGeolocations_persons_results_address? address,
+    Query_geolocatedPersons_persons_results_address? address,
   });
-  CopyWith_Query_personsGeolocations_persons_results_address<TRes> get address;
+  CopyWith_Query_geolocatedPersons_persons_results_address<TRes> get address;
 }
 
-class _CopyWithImpl_Query_personsGeolocations_persons_results<TRes>
-    implements CopyWith_Query_personsGeolocations_persons_results<TRes> {
-  _CopyWithImpl_Query_personsGeolocations_persons_results(
+class _CopyWithImpl_Query_geolocatedPersons_persons_results<TRes>
+    implements CopyWith_Query_geolocatedPersons_persons_results<TRes> {
+  _CopyWithImpl_Query_geolocatedPersons_persons_results(
     this._instance,
     this._then,
   );
 
-  final Query_personsGeolocations_persons_results _instance;
+  final Query_geolocatedPersons_persons_results _instance;
 
-  final TRes Function(Query_personsGeolocations_persons_results) _then;
+  final TRes Function(Query_geolocatedPersons_persons_results) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -9525,7 +10454,7 @@ class _CopyWithImpl_Query_personsGeolocations_persons_results<TRes>
     Object? $__typename = _undefined,
     Object? address = _undefined,
   }) => _then(
-    Query_personsGeolocations_persons_results(
+    Query_geolocatedPersons_persons_results(
       id: id == _undefined || id == null ? _instance.id : (id as String),
       name: name == _undefined || name == null
           ? _instance.name
@@ -9539,26 +10468,26 @@ class _CopyWithImpl_Query_personsGeolocations_persons_results<TRes>
           : ($__typename as String),
       address: address == _undefined
           ? _instance.address
-          : (address as Query_personsGeolocations_persons_results_address?),
+          : (address as Query_geolocatedPersons_persons_results_address?),
     ),
   );
 
-  CopyWith_Query_personsGeolocations_persons_results_address<TRes> get address {
+  CopyWith_Query_geolocatedPersons_persons_results_address<TRes> get address {
     final local$address = _instance.address;
     return local$address == null
-        ? CopyWith_Query_personsGeolocations_persons_results_address.stub(
+        ? CopyWith_Query_geolocatedPersons_persons_results_address.stub(
             _then(_instance),
           )
-        : CopyWith_Query_personsGeolocations_persons_results_address(
+        : CopyWith_Query_geolocatedPersons_persons_results_address(
             local$address,
             (e) => call(address: e),
           );
   }
 }
 
-class _CopyWithStubImpl_Query_personsGeolocations_persons_results<TRes>
-    implements CopyWith_Query_personsGeolocations_persons_results<TRes> {
-  _CopyWithStubImpl_Query_personsGeolocations_persons_results(this._res);
+class _CopyWithStubImpl_Query_geolocatedPersons_persons_results<TRes>
+    implements CopyWith_Query_geolocatedPersons_persons_results<TRes> {
+  _CopyWithStubImpl_Query_geolocatedPersons_persons_results(this._res);
 
   TRes _res;
 
@@ -9568,28 +10497,27 @@ class _CopyWithStubImpl_Query_personsGeolocations_persons_results<TRes>
     int? color,
     bool? userCanEdit,
     String? $__typename,
-    Query_personsGeolocations_persons_results_address? address,
+    Query_geolocatedPersons_persons_results_address? address,
   }) => _res;
 
-  CopyWith_Query_personsGeolocations_persons_results_address<TRes>
-  get address =>
-      CopyWith_Query_personsGeolocations_persons_results_address.stub(_res);
+  CopyWith_Query_geolocatedPersons_persons_results_address<TRes> get address =>
+      CopyWith_Query_geolocatedPersons_persons_results_address.stub(_res);
 }
 
-class Query_personsGeolocations_persons_results_address {
-  Query_personsGeolocations_persons_results_address({
+class Query_geolocatedPersons_persons_results_address {
+  Query_geolocatedPersons_persons_results_address({
     required this.id,
     this.geolocation,
     this.$__typename = 'Address',
   });
 
-  factory Query_personsGeolocations_persons_results_address.fromJson(
+  factory Query_geolocatedPersons_persons_results_address.fromJson(
     Map<String, dynamic> json,
   ) {
     final l$id = json['id'];
     final l$geolocation = json['geolocation'];
     final l$$__typename = json['__typename'];
-    return Query_personsGeolocations_persons_results_address(
+    return Query_geolocatedPersons_persons_results_address(
       id: (l$id as String),
       geolocation: (l$geolocation as Json?),
       $__typename: (l$$__typename as String),
@@ -9626,7 +10554,7 @@ class Query_personsGeolocations_persons_results_address {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query_personsGeolocations_persons_results_address ||
+    if (other is! Query_geolocatedPersons_persons_results_address ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9649,43 +10577,38 @@ class Query_personsGeolocations_persons_results_address {
   }
 }
 
-extension UtilityExtension_Query_personsGeolocations_persons_results_address
-    on Query_personsGeolocations_persons_results_address {
-  CopyWith_Query_personsGeolocations_persons_results_address<
-    Query_personsGeolocations_persons_results_address
+extension UtilityExtension_Query_geolocatedPersons_persons_results_address
+    on Query_geolocatedPersons_persons_results_address {
+  CopyWith_Query_geolocatedPersons_persons_results_address<
+    Query_geolocatedPersons_persons_results_address
   >
-  get copyWith => CopyWith_Query_personsGeolocations_persons_results_address(
-    this,
-    (i) => i,
-  );
+  get copyWith =>
+      CopyWith_Query_geolocatedPersons_persons_results_address(this, (i) => i);
 }
 
-abstract class CopyWith_Query_personsGeolocations_persons_results_address<
-  TRes
-> {
-  factory CopyWith_Query_personsGeolocations_persons_results_address(
-    Query_personsGeolocations_persons_results_address instance,
-    TRes Function(Query_personsGeolocations_persons_results_address) then,
-  ) = _CopyWithImpl_Query_personsGeolocations_persons_results_address;
+abstract class CopyWith_Query_geolocatedPersons_persons_results_address<TRes> {
+  factory CopyWith_Query_geolocatedPersons_persons_results_address(
+    Query_geolocatedPersons_persons_results_address instance,
+    TRes Function(Query_geolocatedPersons_persons_results_address) then,
+  ) = _CopyWithImpl_Query_geolocatedPersons_persons_results_address;
 
-  factory CopyWith_Query_personsGeolocations_persons_results_address.stub(
+  factory CopyWith_Query_geolocatedPersons_persons_results_address.stub(
     TRes res,
-  ) = _CopyWithStubImpl_Query_personsGeolocations_persons_results_address;
+  ) = _CopyWithStubImpl_Query_geolocatedPersons_persons_results_address;
 
   TRes call({String? id, Json? geolocation, String? $__typename});
 }
 
-class _CopyWithImpl_Query_personsGeolocations_persons_results_address<TRes>
-    implements
-        CopyWith_Query_personsGeolocations_persons_results_address<TRes> {
-  _CopyWithImpl_Query_personsGeolocations_persons_results_address(
+class _CopyWithImpl_Query_geolocatedPersons_persons_results_address<TRes>
+    implements CopyWith_Query_geolocatedPersons_persons_results_address<TRes> {
+  _CopyWithImpl_Query_geolocatedPersons_persons_results_address(
     this._instance,
     this._then,
   );
 
-  final Query_personsGeolocations_persons_results_address _instance;
+  final Query_geolocatedPersons_persons_results_address _instance;
 
-  final TRes Function(Query_personsGeolocations_persons_results_address) _then;
+  final TRes Function(Query_geolocatedPersons_persons_results_address) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -9694,7 +10617,7 @@ class _CopyWithImpl_Query_personsGeolocations_persons_results_address<TRes>
     Object? geolocation = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
-    Query_personsGeolocations_persons_results_address(
+    Query_geolocatedPersons_persons_results_address(
       id: id == _undefined || id == null ? _instance.id : (id as String),
       geolocation: geolocation == _undefined
           ? _instance.geolocation
@@ -9706,12 +10629,9 @@ class _CopyWithImpl_Query_personsGeolocations_persons_results_address<TRes>
   );
 }
 
-class _CopyWithStubImpl_Query_personsGeolocations_persons_results_address<TRes>
-    implements
-        CopyWith_Query_personsGeolocations_persons_results_address<TRes> {
-  _CopyWithStubImpl_Query_personsGeolocations_persons_results_address(
-    this._res,
-  );
+class _CopyWithStubImpl_Query_geolocatedPersons_persons_results_address<TRes>
+    implements CopyWith_Query_geolocatedPersons_persons_results_address<TRes> {
+  _CopyWithStubImpl_Query_geolocatedPersons_persons_results_address(this._res);
 
   TRes _res;
 

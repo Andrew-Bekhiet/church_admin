@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/data_check_free_documents.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meeting_rows_reader.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/mutations.graphql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.graphql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/person_command_inputs.dart';
@@ -11,7 +12,6 @@ import 'package:graphql/client.dart';
 class PersonsDAO extends FullCRUDDAO<Person>
     with DataCheckFreeDocuments<Person> {
   static const int _membershipsShownBeforeAll = 6;
-  static const Duration _geolocationsTimeout = Duration(seconds: 30);
 
   static Json _detailsVariables({
     required String id,
@@ -39,6 +39,7 @@ class PersonsDAO extends FullCRUDDAO<Person>
   ).toJson();
 
   late final notificationsQueries = PersonsNotificationsQueries(db: db);
+  late final MeetingRowsReader _everyRow = MeetingRowsReader(graphQLClient);
 
   @override
   StreamAllConfig<Person> get baseStreamAllConfig => StreamAllConfig(
@@ -152,7 +153,7 @@ class PersonsDAO extends FullCRUDDAO<Person>
     bool getStores = false,
     bool getPersons = false,
     String? personId,
-  }) {
+  }) async {
     assert(
       getAreas || getStreets || getFamilies || getStores || getPersons,
       'At lease one type should be fetched',
@@ -169,36 +170,34 @@ class PersonsDAO extends FullCRUDDAO<Person>
       personId: personId,
     );
 
-    return graphQLClient.queryAndReturnParsedNullable(
-      QueryOptions(
-        document: transformDocument(documentNodeQuerypersonsGeolocations),
-        operationName: 'personsGeolocations',
-        variables: Variables_Query_personsGeolocations(
-          getAreas: getAreas,
-          getStreets: getStreets,
-          getFamilies: getFamilies,
-          getStores: getStores,
-          getPersons: getPersons,
-          areasFilter: Input_AreaFilterInput.fromJson(filters.areas),
-          streetsFilter: Input_StreetFilterInput.fromJson(filters.streets),
-          familiesFilter: Input_FamilyFilterInput.fromJson(filters.families),
-          storesFilter: Input_StoreFilterInput.fromJson(filters.stores),
-          personsFilter: Input_PersonFilterInput.fromJson(filters.persons),
-          first: AshPagination.maxPageSize,
-        ).toJson(),
-        queryRequestTimeout: _geolocationsTimeout,
-        parserFn: (data) => PersonsGeolocationsResponse.fromJson({
-          for (final root in const [
-            'areas',
-            'streets',
-            'families',
-            'stores',
-            'persons',
-          ])
-            if (data[root] case {'results': final List results}) root: results,
-        }),
+    Future<List<Json>> placed(bool shown, DocumentNode document, Json filter) =>
+        shown
+        ? _everyRow.read(
+            document: document,
+            fromJson: (row) => row,
+            variables: {'filter': filter},
+          )
+        : Future.value(const []);
+
+    final (areas, streets, families, stores, persons) = await (
+      placed(getAreas, documentNodeQuerygeolocatedAreas, filters.areas),
+      placed(getStreets, documentNodeQuerygeolocatedStreets, filters.streets),
+      placed(
+        getFamilies,
+        documentNodeQuerygeolocatedFamilies,
+        filters.families,
       ),
-    );
+      placed(getStores, documentNodeQuerygeolocatedStores, filters.stores),
+      placed(getPersons, documentNodeQuerygeolocatedPersons, filters.persons),
+    ).wait;
+
+    return PersonsGeolocationsResponse.fromJson({
+      'areas': areas,
+      'streets': streets,
+      'families': families,
+      'stores': stores,
+      'persons': persons,
+    });
   }
 
   Future<Person?> getPersonAnalysis({
