@@ -10,22 +10,21 @@ class DBGraphQLClient extends GraphQLClient {
 
   final bool autoChangeFetchPolicy;
 
-  final ValueStream<bool> _connectivityStream;
+  final ValueStream<bool> connectivityStream;
   final ValueStream<FetchPolicy> _fetchPolicyStream;
   FetchPolicy get _currentFetchPolicy => _fetchPolicyStream.value;
   FetchPolicy get _onlineFirstFetchPolicy => _fetchPolicyFor(
-    _connectivityStream.valueOrNull,
+    connectivityStream.valueOrNull,
     whenConnected: FetchPolicy.networkOnly,
   );
   DBGraphQLClient({
-    required ValueStream<bool> connectivityStream,
+    required this.connectivityStream,
     required super.link,
     required super.cache,
     this.autoChangeFetchPolicy = true,
     super.alwaysRebroadcast,
     super.defaultPolicies,
-  }) : _connectivityStream = connectivityStream,
-       _fetchPolicyStream = connectivityStream
+  }) : _fetchPolicyStream = connectivityStream
            .map(
              (connected) => _fetchPolicyFor(
                connected,
@@ -106,6 +105,17 @@ class DBGraphQLClient extends GraphQLClient {
     SubscriptionOptions<T> options,
   ) {
     return subscribe(options).map((r) => r.parsedData!);
+  }
+
+  ({ObservableQuery<T> query, Stream<QueryResult<T>> results})
+  watchQueryWithConnectivityPolicy<T>(WatchQueryOptions<T> options) {
+    final query = watchQuery(
+      options
+          .copyWithFetchPolicy(_currentFetchPolicy)
+          .copyWith(fetchResults: true, eagerlyFetchResults: false),
+    );
+
+    return (query: query, results: query.stream.map(_exceptionsMiddleware));
   }
 
   Stream<T?> watchQueryAndReturnParsedNullable<T>(
