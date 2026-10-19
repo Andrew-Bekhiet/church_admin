@@ -36,7 +36,6 @@ defmodule ChurchAdmin.Authz.Catalog.LookupPolicyTest do
   ]
 
   defp seed_row!(resource) do
-    ChurchAdmin.DataCase.set_system_db_session()
     n = System.unique_integer([:positive])
 
     attrs =

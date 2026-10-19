@@ -34,9 +34,7 @@ defmodule ChurchAdmin.Attendance.AttendanceRecord do
     table "attendance_history"
     repo ChurchAdmin.Repo
 
-    migration_defaults datetime: ~S[fragment("now()")],
-                       recorded_by:
-                         ~S[fragment("(((current_setting('hasura.user'::text, true))::json ->> 'x-hasura-user-id'::text))::uuid")]
+    migration_defaults datetime: ~S[fragment("now()")]
 
     identity_index_names unique_attendance_per_day_meeting_person_and_role:
                            "attendance_history_meeting_person_day_idx"

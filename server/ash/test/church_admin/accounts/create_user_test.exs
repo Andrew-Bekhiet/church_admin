@@ -198,10 +198,7 @@ defmodule ChurchAdmin.Accounts.CreateUserTest do
     test "a scoped actor's new user and person commit", ctx do
       actor = service_manager!(ctx.service)
 
-      assert :ok =
-               commits?(actor, fn ->
-                 create(actor, %{admin_on: [%{admin_on_service: ctx.service.id}]})
-               end)
+      assert {:ok, _} = create(actor, %{admin_on: [%{admin_on_service: ctx.service.id}]})
     end
 
     test "a manageAllUsers actor needs no scope", ctx do

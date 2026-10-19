@@ -6,7 +6,7 @@ defmodule ChurchAdmin.People.PersonReadExtrasTest do
   alias ChurchAdmin.Catalog.{Church, PersonType, ShammasLevel}
   alias ChurchAdmin.People.{Contact, Person}
   alias ChurchAdmin.Places.{Area, District, Street}
-  alias ChurchAdmin.{ActivityWorld, AttendanceWorld, DataCase, Factory}
+  alias ChurchAdmin.{ActivityWorld, AttendanceWorld, Factory}
 
   require Ash.Query
 
@@ -63,8 +63,6 @@ defmodule ChurchAdmin.People.PersonReadExtrasTest do
     end
 
     test "visits of other tables sharing the person's id do not count", %{world: world} do
-      DataCase.set_system_db_session()
-
       Ash.Seed.seed!(Visit, %{
         table: "families",
         record_id: world.records.m1.id,
@@ -136,7 +134,6 @@ defmodule ChurchAdmin.People.PersonReadExtrasTest do
 
   describe "main phone" do
     setup do
-      DataCase.set_system_db_session()
       family = Factory.family!()
 
       phones = [
@@ -198,7 +195,6 @@ defmodule ChurchAdmin.People.PersonReadExtrasTest do
 
   describe "sort aggregates over related names and orders" do
     test "carry the related row's name or order" do
-      DataCase.set_system_db_session()
       church = Ash.Seed.seed!(Church, %{name: "كنيسة الأنبا"})
       level = Ash.Seed.seed!(ShammasLevel, %{name: "إبصالتس", order: 7})
       type = Ash.Seed.seed!(PersonType, %{name: "ابن"})

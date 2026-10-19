@@ -53,11 +53,8 @@ service = "0a7e2c1e-5d2b-4a0e-9a59-6f3c1b2d4e02"
 membership = "0a7e2c1e-5d2b-4a0e-9a59-6f3c1b2d4e03"
 family = "0a7e2c1e-5d2b-4a0e-9a59-6f3c1b2d4e04"
 
-run_as_system = fn statements ->
+run_statements = fn statements ->
   Postgrex.transaction(sql, fn conn ->
-    Postgrex.query!(conn, "select set_config('hasura.user', $1, true)", [
-      ~s({"x-hasura-role":"admin"})
-    ])
     Enum.each(statements, &Postgrex.query!(conn, &1, []))
   end)
 end
@@ -92,7 +89,7 @@ end
 
 fixtures =
   for {name, statements} <- scenarios, into: %{} do
-    {:ok, :ok} = run_as_system.(statements)
+    {:ok, :ok} = run_statements.(statements)
     {name, collect.(collect, [])}
   end
 

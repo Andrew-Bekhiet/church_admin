@@ -14,7 +14,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollClassesTest do
   end
 
   defp roll_counts!(steps) do
-    committed!()
     {:ok, counts} = Roll.run(@season)
     Map.take(counts, steps)
   end

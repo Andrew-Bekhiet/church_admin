@@ -6,7 +6,7 @@ defmodule ChurchAdmin.Calculations.OutsideServiceStudyYearsTest do
 
   use ChurchAdmin.DataCase, async: false
 
-  alias ChurchAdmin.{DataCase, Factory}
+  alias ChurchAdmin.Factory
   alias ChurchAdmin.People.ServiceMembership
 
   require Ash.Query
@@ -27,7 +27,6 @@ defmodule ChurchAdmin.Calculations.OutsideServiceStudyYearsTest do
   ]
 
   setup do
-    DataCase.set_system_db_session()
     for order <- 1..5, do: Factory.study_year!(order)
 
     memberships =
@@ -72,8 +71,6 @@ defmodule ChurchAdmin.Calculations.OutsideServiceStudyYearsTest do
     memberships: memberships
   } do
     {_case, membership} = Enum.find(memberships, fn {{_, _, _, outside?}, _} -> outside? end)
-
-    DataCase.set_system_db_session()
 
     Ash.Seed.update!(
       Ash.get!(ChurchAdmin.People.Person, membership.person_id, authorize?: false),

@@ -10,8 +10,6 @@ defmodule ChurchAdmin.Attendance.MeetingRulesTest do
   end
 
   defp set_service_range(service, from, to) do
-    ChurchAdmin.DataCase.set_system_db_session()
-
     Repo.query!(
       "update services set study_year_from_id = $2, study_year_to_id = $3 where id = $1::text::uuid",
       [service.id, from, to]
@@ -176,8 +174,6 @@ defmodule ChurchAdmin.Attendance.MeetingRulesTest do
   defp table(:group), do: "groups"
 
   defp set_default_meeting(kind, owner, meeting) do
-    ChurchAdmin.DataCase.set_system_db_session()
-
     Repo.query!(
       "update #{table(kind)} set default_meeting_id = $2::text::uuid where id = $1::text::uuid",
       [owner.id, meeting.id]

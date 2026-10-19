@@ -2,8 +2,7 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Renderer do
   @moduledoc """
   Writes the generated rows as one SQL script in foreign-key and trigger order.
 
-  The script runs in a single transaction with `hasura.user` unset, which the
-  baseline triggers treat as an admin session. Two checks that reject states the
+  The script runs in a single transaction. Two checks that reject states the
   data deliberately contains are switched off around the statements that insert
   them: persons outside their service's study years, and write access without
   read access.

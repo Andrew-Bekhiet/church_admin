@@ -64,29 +64,21 @@ defmodule ChurchAdmin.Accounts.UpdateUserPermissionsTest do
       for permissions <- [~w(manageAllUsers), ~w(writeAllData manageAllUsers), ~w(writeAllData)] do
         user = Factory.user!()
 
-        assert {:error, _} =
-                 commits?(ctx.actor, fn ->
-                   update(user, %{permissions: permissions}, ctx.actor)
-                 end)
+        assert {:error, _} = update(user, %{permissions: permissions}, ctx.actor)
       end
 
-      assert :ok =
-               commits?(ctx.actor, fn ->
-                 update(
-                   ctx.user,
-                   %{permissions: ~w(manageAllUsers writeAllData readAllData)},
-                   ctx.actor
-                 )
-               end)
+      assert {:ok, _} =
+               update(
+                 ctx.user,
+                 %{permissions: ~w(manageAllUsers writeAllData readAllData)},
+                 ctx.actor
+               )
     end
 
     test "only granted levels are checked: dropping readAllData under writeAllData passes", ctx do
       Factory.permissions!(ctx.user, ~w(readAllData writeAllData))
 
-      assert :ok =
-               commits?(ctx.actor, fn ->
-                 update(ctx.user, %{permissions: ~w(writeAllData)}, ctx.actor)
-               end)
+      assert {:ok, _} = update(ctx.user, %{permissions: ~w(writeAllData)}, ctx.actor)
     end
   end
 

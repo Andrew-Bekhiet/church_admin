@@ -8,10 +8,6 @@ defmodule ChurchAdmin.Resources.TypeRoundTripTest do
 
   require Ash.Query
 
-  setup do
-    set_system_db_session()
-  end
-
   @polygon %{
     "type" => "Polygon",
     "coordinates" => [[[30.0, 31.0], [30.0, 32.0], [31.0, 32.0], [30.0, 31.0]]]

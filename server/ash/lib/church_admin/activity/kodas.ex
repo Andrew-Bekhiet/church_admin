@@ -34,9 +34,6 @@ defmodule ChurchAdmin.Activity.Kodas do
     table "kodas_history"
     repo ChurchAdmin.Repo
 
-    migration_defaults recorded_by:
-                         ~S[fragment("(((current_setting('hasura.user'::text, true))::json ->> 'x-hasura-user-id'::text))::uuid")]
-
     identity_index_names unique_day_id_person_id: "kodas_history_day_id_person_id_key"
 
     references do
