@@ -5,13 +5,12 @@ defmodule ChurchAdmin.Authz.Actor do
   the authorization facts `ChurchAdmin.Authz.ActorLoader` reads for that uid;
   the system actor (`system/0`) stands for jobs and internal calls.
 
-  The flags mirror the global rows of `auth.users_permissions_by_entity_id`
-  and `auth.users_admin_on_meetings`: each one already includes approval and
-  `readAllData` where the view required them. `permissions` holds the raw
-  permission names, approved or not, for checks that read
-  `auth.users_permissions` directly. Grants, `managed_user_uids` and
-  `visible_servant_uids` are empty unless the user is approved; `family_id`
-  is set only while the own person is live.
+  The `*_all?` and `record_all_*` flags are the global grants: each one
+  already includes approval and `readAllData` where the rule requires them.
+  `permissions` holds the raw permission names, approved or not, for checks
+  that read `auth.users_permissions` directly. Grants, `managed_user_uids`
+  and `visible_servant_uids` are empty unless the user is approved;
+  `family_id` is set only while the own person is live.
   """
 
   alias ChurchAdmin.Auth.Principal

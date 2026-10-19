@@ -1,15 +1,15 @@
 defmodule ChurchAdmin.Authz.Scope do
   @moduledoc """
   Which records an actor may read, edit or export, as Ash expressions. Each
-  entity function reproduces the rows `auth.users_permissions_by_entity_id`
-  holds for (actor, entity type) — with `allow_edit` for `:edit`,
-  `allow_export` for `:export` — plus the global `any` / `any-user` row, and
-  is written relative to that entity's resource. The global row folds to
-  `true`, so admins never carry a scope into SQL; a nil actor gets `false`.
+  entity function combines the actor's grants on that entity type (those
+  that allow edit for `:edit`, export for `:export`) with the actor's global
+  grant, and is written relative to that entity's resource. The global grant
+  folds to `true`, so admins never carry a scope into SQL; a nil actor gets
+  `false`.
 
   Every expression is NULL-free (nullable columns are guarded), so it can be
   negated and returned as a non-null boolean. Data-dependent sets stay
-  `exists` subqueries; deleted rows count exactly where the view counted them.
+  `exists` subqueries; soft-deleted rows still count towards a scope.
   """
 
   import Ash.Expr
@@ -175,7 +175,7 @@ defmodule ChurchAdmin.Authz.Scope do
     do: unless_empty(listed_user_uids(actor, access), fn uids -> expr(uid in ^uids) end)
 
   @doc """
-  The uids of the view's per-user rows (`entity_type = 'user'`): users the
+  The uids of the users the actor holds a per-user grant on: users the
   actor manages, and itself while unapproved (read only).
   """
   @spec listed_user_uids(Actor.t(), :read | :edit) :: [String.t()]
@@ -217,7 +217,7 @@ defmodule ChurchAdmin.Authz.Scope do
     |> Ash.count!(authorize?: false) == length(ids)
   end
 
-  @doc "Whether the actor holds the view's global `any` row for `access`."
+  @doc "Whether the actor holds the global grant for `access`."
   @spec global?(Actor.t(), access()) :: boolean()
   def global?(%Actor{} = actor, :read), do: actor.read_all?
   def global?(%Actor{} = actor, :edit), do: actor.write_all?
