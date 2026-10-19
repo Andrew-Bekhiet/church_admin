@@ -25,6 +25,9 @@ abstract final class GqlTypePolicies {
       keyFields: {'personId': true, 'asServant': true, 'meetingId': true},
     ),
     'AuthUsersData': TypePolicy(keyFields: {'uid': true}),
+    // The Ash id of a user is its uid, and a sort or second line that reaches
+    // a user selects only the uid.
+    'User': TypePolicy(keyFields: {'uid': true}),
     // Keyed by order (studyYearsByPk(order:)); their id is a nullable String
     // that is never selected.
     'StudyYears': TypePolicy(keyFields: {'order': true}),
@@ -54,6 +57,8 @@ abstract final class GqlTypePolicies {
     'PersonsServices': _embedded,
     'PersonsTags': _embedded,
     'ClassesPersons': _embedded,
+    'ServiceMembership': _embedded,
+    'GroupMembership': _embedded,
     'AreasStreets': _embedded,
     'FamiliesFamilies': _embedded,
     'AuthUsersAdminOn': _embedded,

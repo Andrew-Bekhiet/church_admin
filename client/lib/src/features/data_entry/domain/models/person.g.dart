@@ -36,6 +36,7 @@ class _PersonFields {
     name: 'address',
     label: 'تفاصيل العنوان',
     isCodeOnly: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<DateTime> birthdate = FieldMetadata<DateTime>(
@@ -359,7 +360,7 @@ class _PersonFields {
       FieldMetadata<LastRecordedByInfo>(
         getValue: (obj) => obj is Person ? obj.lastConfession : null,
         parentType: Person,
-        name: 'lastConfession',
+        name: 'lastConfessionDay',
         label: 'أخر اعتراف',
         isCodeOnly: false,
         operators: {
@@ -373,7 +374,7 @@ class _PersonFields {
       FieldMetadata<LastRecordedByInfo>(
         getValue: (obj) => obj is Person ? obj.lastKodas : null,
         parentType: Person,
-        name: 'lastKodas',
+        name: 'lastKodasDay',
         label: 'أخر تناول',
         isCodeOnly: false,
         operators: {
@@ -387,7 +388,7 @@ class _PersonFields {
       FieldMetadata<LastRecordedByInfo>(
         getValue: (obj) => obj is Person ? obj.lastAttendance : null,
         parentType: Person,
-        name: 'lastAttendance',
+        name: 'lastAttendedAt',
         label: 'أخر حضور',
         isCodeOnly: false,
         operators: {
@@ -415,7 +416,7 @@ class _PersonFields {
       FieldMetadata<LastRecordedByInfo>(
         getValue: (obj) => obj is Person ? obj.lastVisit : null,
         parentType: Person,
-        name: 'lastVisit',
+        name: 'lastVisitAt',
         label: 'أخر افتقاد',
         isCodeOnly: false,
         operators: {
@@ -445,6 +446,7 @@ class _PersonFields {
     name: 'dataCheck',
     label: 'اكتمال البيانات',
     isCodeOnly: false,
+    isOrderable: false,
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
@@ -456,8 +458,8 @@ class _PersonFields {
       FieldMetadata<ClassesPersons>(
         getValue: (obj) => obj is Person ? obj.classes : null,
         parentType: Person,
-        name: 'classes',
-        label: 'classes',
+        name: 'classMemberships',
+        label: 'classMemberships',
         isCodeOnly: true,
         isOrderable: false,
       );
@@ -471,8 +473,8 @@ class _PersonFields {
   final FieldMetadata<PersonsGroups> groupsRel = FieldMetadata<PersonsGroups>(
     getValue: (obj) => obj is Person ? obj.groups : null,
     parentType: Person,
-    name: 'groups',
-    label: 'groups',
+    name: 'groupMemberships',
+    label: 'groupMemberships',
     isCodeOnly: true,
     isOrderable: false,
   );
@@ -487,8 +489,8 @@ class _PersonFields {
       FieldMetadata<PersonsServices>(
         getValue: (obj) => obj is Person ? obj.services : null,
         parentType: Person,
-        name: 'services',
-        label: 'services',
+        name: 'serviceMemberships',
+        label: 'serviceMemberships',
         isCodeOnly: true,
         isOrderable: false,
       );
@@ -499,35 +501,24 @@ class _PersonFields {
     isOrderable: false,
   );
 
-  final FieldMetadata<PersonsTags> tagsRel = FieldMetadata<PersonsTags>(
+  final FieldMetadata<Tag> tags = FieldMetadata<Tag>(
     getValue: (obj) => obj is Person ? obj.tags : null,
     parentType: Person,
     name: 'tags',
-    label: 'tags',
-    isCodeOnly: true,
+    label: 'الشارة',
+    isCodeOnly: false,
     isOrderable: false,
+    operators: {...MultiSelectOperator.values},
   );
 
-  late final FieldMetadata<Tag> tags = tagsRel.redirectTo(
-    PersonsTagsFields().tag,
-    isExpandable: false,
+  final FieldMetadata<Hobby> hobbies = FieldMetadata<Hobby>(
+    getValue: (obj) => obj is Person ? obj.hobbies : null,
+    parentType: Person,
+    name: 'hobbies',
+    label: 'الهواية',
+    isCodeOnly: false,
     isOrderable: false,
-  );
-
-  final FieldMetadata<PersonsHobbies> hobbiesRel =
-      FieldMetadata<PersonsHobbies>(
-        getValue: (obj) => obj is Person ? obj.hobbies : null,
-        parentType: Person,
-        name: 'hobbies',
-        label: 'hobbies',
-        isCodeOnly: true,
-        isOrderable: false,
-      );
-
-  late final FieldMetadata<Hobby> hobbies = hobbiesRel.redirectTo(
-    PersonsHobbiesFields().hobby,
-    isExpandable: false,
-    isOrderable: false,
+    operators: {...MultiSelectOperator.values},
   );
 
   final FieldMetadata<User> user = FieldMetadata<User>(
@@ -547,7 +538,7 @@ class _PersonFields {
       FieldMetadata<LastRecordedByInfo>(
         getValue: (obj) => obj is Person ? obj.kodasHistory : null,
         parentType: Person,
-        name: 'kodasHistory',
+        name: 'kodases',
         label: 'سجل التناول',
         isCodeOnly: false,
         isOrderable: false,
@@ -558,7 +549,7 @@ class _PersonFields {
       FieldMetadata<AttendanceRecord>(
         getValue: (obj) => obj is Person ? obj.attendanceHistory : null,
         parentType: Person,
-        name: 'attendanceHistory',
+        name: 'attendanceRecords',
         label: 'سجل الحضور',
         isCodeOnly: false,
         isOrderable: false,
@@ -569,7 +560,7 @@ class _PersonFields {
       FieldMetadata<LastRecordedByInfo>(
         getValue: (obj) => obj is Person ? obj.confessionHistory : null,
         parentType: Person,
-        name: 'confessionHistory',
+        name: 'confessions',
         label: 'سجل الاعتراف',
         isCodeOnly: false,
         isOrderable: false,
@@ -580,7 +571,7 @@ class _PersonFields {
       FieldMetadata<LastRecordedByInfo>(
         getValue: (obj) => obj is Person ? obj.callHistory : null,
         parentType: Person,
-        name: 'callHistory',
+        name: 'calls',
         label: 'سجل المكالمات',
         isCodeOnly: false,
         isOrderable: false,
@@ -591,7 +582,7 @@ class _PersonFields {
       FieldMetadata<LastRecordedByInfo>(
         getValue: (obj) => obj is Person ? obj.visitHistory : null,
         parentType: Person,
-        name: 'visitHistory',
+        name: 'visits',
         label: 'سجل الافتقاد',
         isCodeOnly: false,
         isOrderable: false,
@@ -602,7 +593,7 @@ class _PersonFields {
       FieldMetadata<LastRecordedByInfo>(
         getValue: (obj) => obj is Person ? obj.editHistory : null,
         parentType: Person,
-        name: 'editHistory',
+        name: 'edits',
         label: 'سجل تحديث البيانات',
         isCodeOnly: false,
         isOrderable: false,
@@ -764,25 +755,25 @@ class _PersonFields {
     'studyYear': studyYear,
     'color': color,
     'photoUpdatedAt': photoUpdatedAt,
-    'lastConfession': lastConfession,
-    'lastKodas': lastKodas,
-    'lastAttendance': lastAttendance,
+    'lastConfessionDay': lastConfession,
+    'lastKodasDay': lastKodas,
+    'lastAttendedAt': lastAttendance,
     'lastCall': lastCall,
-    'lastVisit': lastVisit,
+    'lastVisitAt': lastVisit,
     'lastEdit': lastEdit,
     'dataCheck': dataCheck,
-    'classes': classes,
-    'groups': groups,
-    'services': services,
+    'classMemberships': classes,
+    'groupMemberships': groups,
+    'serviceMemberships': services,
     'tags': tags,
     'hobbies': hobbies,
     'user': user,
-    'kodasHistory': kodasHistory,
-    'attendanceHistory': attendanceHistory,
-    'confessionHistory': confessionHistory,
-    'callHistory': callHistory,
-    'visitHistory': visitHistory,
-    'editHistory': editHistory,
+    'kodases': kodasHistory,
+    'attendanceRecords': attendanceHistory,
+    'confessions': confessionHistory,
+    'calls': callHistory,
+    'visits': visitHistory,
+    'edits': editHistory,
     'kodasHistoryAggregate': kodasHistoryAggregate,
     'attendanceHistoryAggregate': attendanceHistoryAggregate,
     'confessionHistoryAggregate': confessionHistoryAggregate,
@@ -902,108 +893,100 @@ Person _$PersonFromJson(Map json) => Person(
     const LocalDateTimeConverter().fromJson,
   ),
   blurhash: json['blurhash'] as String?,
-  lastConfession: json['lastConfession'] == null
+  lastConfession: json['latestConfession'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastConfession'] as Map),
+          Map<String, Object?>.from(json['latestConfession'] as Map),
         ),
-  lastKodas: json['lastKodas'] == null
+  lastKodas: json['latestKodas'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastKodas'] as Map),
+          Map<String, Object?>.from(json['latestKodas'] as Map),
         ),
   lastAttendance: json['lastAttendance'] == null
       ? null
       : LastRecordedByInfo.fromJson(
           Map<String, Object?>.from(json['lastAttendance'] as Map),
         ),
-  lastCall: json['lastCall'] == null
+  lastCall: json['latestCall'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastCall'] as Map),
+          Map<String, Object?>.from(json['latestCall'] as Map),
         ),
-  lastVisit: json['lastVisit'] == null
+  lastVisit: json['latestVisit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastVisit'] as Map),
+          Map<String, Object?>.from(json['latestVisit'] as Map),
         ),
-  lastEdit: json['lastEdit'] == null
+  lastEdit: json['latestEdit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastEdit'] as Map),
+          Map<String, Object?>.from(json['latestEdit'] as Map),
         ),
   dataCheck: json['dataCheck'] == null
       ? null
       : DataCheck.fromJson(Map<String, Object?>.from(json['dataCheck'] as Map)),
-  classes: personsClassesFromJson(json['classes'] as List?),
-  groups: personsGroupsFromJson(json['groups'] as List?),
-  services: personsServicesFromJson(json['services'] as List?),
-  tags: personsTagsFromJson(json['tags'] as List?),
-  hobbies: personsHobbiesFromJson(json['hobbies'] as List?),
+  classes: personsClassesFromJson(json['classMemberships'] as List?),
+  groups: personsGroupsFromJson(json['groupMemberships'] as List?),
+  services: personsServicesFromJson(json['serviceMemberships'] as List?),
+  tags: (json['tags'] as List<dynamic>?)
+      ?.map((e) => Tag.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
+  hobbies: (json['hobbies'] as List<dynamic>?)
+      ?.map((e) => Hobby.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
   uid: json['uid'] as String?,
   user: json['user'] == null
       ? null
       : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
-  kodasHistory: (json['kodasHistory'] as List<dynamic>?)
+  kodasHistory: (json['kodases'] as List<dynamic>?)
       ?.map(
         (e) => LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)),
       )
       .toList(),
-  attendanceHistory: (json['attendanceHistory'] as List<dynamic>?)
+  attendanceHistory: (json['attendanceRecords'] as List<dynamic>?)
       ?.map(
         (e) => LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)),
       )
       .toList(),
-  confessionHistory: (json['confessionHistory'] as List<dynamic>?)
+  confessionHistory: (json['confessions'] as List<dynamic>?)
       ?.map(
         (e) => LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)),
       )
       .toList(),
-  callHistory: (json['callHistory'] as List<dynamic>?)
+  callHistory: (json['calls'] as List<dynamic>?)
       ?.map(
         (e) => LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)),
       )
       .toList(),
-  visitHistory: (json['visitHistory'] as List<dynamic>?)
+  visitHistory: (json['visits'] as List<dynamic>?)
       ?.map(
         (e) => LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)),
       )
       .toList(),
-  editHistory: (json['editHistory'] as List<dynamic>?)
+  editHistory: (json['edits'] as List<dynamic>?)
       ?.map(
         (e) => LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)),
       )
       .toList(),
-  kodasHistoryAggregate: json['kodasHistoryAggregate'] == null
-      ? null
-      : HistoryAggregateData.fromJson(
-          Map<String, dynamic>.from(json['kodasHistoryAggregate'] as Map),
-        ),
-  attendanceHistoryAggregate: json['attendanceHistoryAggregate'] == null
-      ? null
-      : HistoryAggregateData.fromJson(
-          Map<String, dynamic>.from(json['attendanceHistoryAggregate'] as Map),
-        ),
-  confessionHistoryAggregate: json['confessionHistoryAggregate'] == null
-      ? null
-      : HistoryAggregateData.fromJson(
-          Map<String, dynamic>.from(json['confessionHistoryAggregate'] as Map),
-        ),
-  callHistoryAggregate: json['callHistoryAggregate'] == null
-      ? null
-      : HistoryAggregateData.fromJson(
-          Map<String, dynamic>.from(json['callHistoryAggregate'] as Map),
-        ),
-  visitHistoryAggregate: json['visitHistoryAggregate'] == null
-      ? null
-      : HistoryAggregateData.fromJson(
-          Map<String, dynamic>.from(json['visitHistoryAggregate'] as Map),
-        ),
-  editHistoryAggregate: json['editHistoryAggregate'] == null
-      ? null
-      : HistoryAggregateData.fromJson(
-          Map<String, dynamic>.from(json['editHistoryAggregate'] as Map),
-        ),
+  kodasHistoryAggregate: HistoryAggregateData.fromJsonOrNodes(
+    json['kodasHistoryAggregate'],
+  ),
+  attendanceHistoryAggregate: HistoryAggregateData.fromJsonOrNodes(
+    json['attendanceHistoryAggregate'],
+  ),
+  confessionHistoryAggregate: HistoryAggregateData.fromJsonOrNodes(
+    json['confessionHistoryAggregate'],
+  ),
+  callHistoryAggregate: HistoryAggregateData.fromJsonOrNodes(
+    json['callHistoryAggregate'],
+  ),
+  visitHistoryAggregate: HistoryAggregateData.fromJsonOrNodes(
+    json['visitHistoryAggregate'],
+  ),
+  editHistoryAggregate: HistoryAggregateData.fromJsonOrNodes(
+    json['editHistoryAggregate'],
+  ),
 );
 
 Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
@@ -1056,30 +1039,28 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
     const LocalDateTimeConverter().toJson,
   ),
   'blurhash': instance.blurhash,
-  'lastConfession': instance.lastConfession?.toJson(),
-  'lastKodas': instance.lastKodas?.toJson(),
+  'latestConfession': instance.lastConfession?.toJson(),
+  'latestKodas': instance.lastKodas?.toJson(),
   'lastAttendance': instance.lastAttendance?.toJson(),
-  'lastCall': instance.lastCall?.toJson(),
-  'lastVisit': instance.lastVisit?.toJson(),
-  'lastEdit': instance.lastEdit?.toJson(),
+  'latestCall': instance.lastCall?.toJson(),
+  'latestVisit': instance.lastVisit?.toJson(),
+  'latestEdit': instance.lastEdit?.toJson(),
   'dataCheck': instance.dataCheck?.toJson(),
-  'classes': personsClassesToJson(instance.classes),
-  'groups': personsGroupsToJson(instance.groups),
-  'services': personsServicesToJson(instance.services),
-  'tags': personsTagsToJson(instance.tags),
-  'hobbies': personsHobbiesToJson(instance.hobbies),
+  'classMemberships': personsClassesToJson(instance.classes),
+  'groupMemberships': personsGroupsToJson(instance.groups),
+  'serviceMemberships': personsServicesToJson(instance.services),
+  'tags': instance.tags?.map((e) => e.toJson()).toList(),
+  'hobbies': instance.hobbies?.map((e) => e.toJson()).toList(),
   'user': instance.user?.toJson(),
   'uid': instance.uid,
-  'kodasHistory': instance.kodasHistory?.map((e) => e.toJson()).toList(),
-  'attendanceHistory': instance.attendanceHistory
+  'kodases': instance.kodasHistory?.map((e) => e.toJson()).toList(),
+  'attendanceRecords': instance.attendanceHistory
       ?.map((e) => e.toJson())
       .toList(),
-  'confessionHistory': instance.confessionHistory
-      ?.map((e) => e.toJson())
-      .toList(),
-  'callHistory': instance.callHistory?.map((e) => e.toJson()).toList(),
-  'visitHistory': instance.visitHistory?.map((e) => e.toJson()).toList(),
-  'editHistory': instance.editHistory?.map((e) => e.toJson()).toList(),
+  'confessions': instance.confessionHistory?.map((e) => e.toJson()).toList(),
+  'calls': instance.callHistory?.map((e) => e.toJson()).toList(),
+  'visits': instance.visitHistory?.map((e) => e.toJson()).toList(),
+  'edits': instance.editHistory?.map((e) => e.toJson()).toList(),
   'kodasHistoryAggregate': instance.kodasHistoryAggregate?.toJson(),
   'attendanceHistoryAggregate': instance.attendanceHistoryAggregate?.toJson(),
   'confessionHistoryAggregate': instance.confessionHistoryAggregate?.toJson(),

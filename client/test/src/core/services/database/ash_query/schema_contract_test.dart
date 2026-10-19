@@ -23,6 +23,7 @@ const Set<String> portedEntities = {
   'Invitation',
   'Job',
   'Kodas',
+  'Person',
   'PersonState',
   'PersonType',
   'Qualification',

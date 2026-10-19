@@ -3,8 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:kaisel/kaisel.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../../../../fakes/fake_feature_flags_repo.dart';
+import '../../../../fakes/mock_database_service.dart';
 import '../../../../material_ui_test_app.dart';
 
 void main() {
@@ -17,9 +19,19 @@ void main() {
   late ListArrangement? savedArrangement;
   late bool sheetClosed;
 
+  DatabaseService databaseWithoutReferenceLists() {
+    final database = MockDatabaseService();
+    when(() => database.daosByType).thenReturn(const {});
+
+    return database;
+  }
+
   setUp(
     () => initGlobalProviderContainer([
       featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
+      databaseServiceProvider.overrideWithValue(
+        databaseWithoutReferenceLists(),
+      ),
       viewableObjectServiceProvider.overrideWith(
         (ref) => ViewableObjectService(
           router: KaiselRouter<AppRoute>(initial: const HomeScreenRoute()),
@@ -240,7 +252,7 @@ void main() {
       await pickField(
         tester,
         dropdown: secondLineDropdown(),
-        field: fields.address,
+        field: fields.church,
       );
 
       await tapKey(tester, ListArrangementSheetKeys.save);
@@ -250,7 +262,7 @@ void main() {
         isA<RedirectingFieldMetadata>().having(
           (f) => f.parentField,
           'parentField',
-          fields.address,
+          fields.church,
         ),
       );
     });

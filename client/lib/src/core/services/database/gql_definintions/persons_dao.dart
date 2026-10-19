@@ -1,112 +1,141 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/data_check_free_documents.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/persons/person_insert_helper.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/persons/person_update_helper.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/person_command_inputs.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_geolocations_filters.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_notifications_queries.dart';
+import 'package:gql/ast.dart';
 import 'package:graphql/client.dart';
 
-class PersonsDAO extends LegacyFullCRUDDAO<Person>
+class PersonsDAO extends FullCRUDDAO<Person>
     with DataCheckFreeDocuments<Person> {
-  late final notificationsQueries = PersonsNotificationsQueries(db: db);
+  static const int _membershipsShownBeforeAll = 6;
+  static const Duration _geolocationsTimeout = Duration(seconds: 30);
 
-  @override
-  late final LegacyStreamAllConfig<Person> baseStreamAllConfig =
-      const LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllPersons,
-      );
-  @override
-  late final LegacyStreamCountConfig<Person> baseStreamCountConfig =
-      const LegacyStreamCountConfig(
-        document: documentNodeSubscriptionwatchPersonsCount,
-      );
-  @override
-  final LegacyStreamSingleByIdConfig<Person> baseStreamSingleByIdConfig =
-      const LegacyStreamSingleByIdConfig(
-        document: documentNodeSubscriptionwatchPerson,
-      );
-  @override
-  late final LegacyDeleteSingleByIdConfig<Person> baseDeleteSingleByIdConfig =
-      LegacyDeleteSingleByIdConfig(
-        document: documentNodeMutationdeletePerson,
-        varsConstructor: _deleteSingleByIdVarsConstructor,
-      );
-  @override
-  late final LegacyUpdateObjectConfig<Person> baseUpdateObjectConfig =
-      LegacyUpdateObjectConfig(
-        document: documentNodeMutationupdatePerson,
-        varsConstructor: _updatePersonVarsConstructor,
-        parserFn: db.parser.singleOrNullParser(fromJson, 'updatePersonsByPk'),
-      );
-  @override
-  late final LegacyCreateObjectConfig<Person> baseCreateObjectConfig =
-      LegacyCreateObjectConfig(
-        document: documentNodeMutationinsertPerson,
-        varsConstructor: _createPersonVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson, 'insertPersonsOne'),
-      );
-
-  PersonsDAO({required super.db}) : super(fromJson: Person.fromJson);
-
-  Json _streamSingleByIdVarsConstructor({
-    required UuidValue id,
-    int? servicesLimit = 6,
-    int? classesLimit = 6,
-    int? groupsLimit = 6,
-  }) => Variables_Subscription_watchPerson(
+  static Json _detailsVariables({
+    required String id,
+    int? servicesLimit = _membershipsShownBeforeAll,
+    int? classesLimit = _membershipsShownBeforeAll,
+    int? groupsLimit = _membershipsShownBeforeAll,
+  }) => Variables_Query_person(
     id: id,
+    familyContactsFilter: Input_FamilyContactFilterInput.fromJson({
+      'personType': {
+        'isFamilyAdmin': {'eq': true},
+      },
+      'or': [
+        {
+          'personId': {'isNil': true},
+        },
+        {
+          'personId': {'notEq': id},
+        },
+      ],
+    }),
     servicesLimit: servicesLimit,
     classesLimit: classesLimit,
     groupsLimit: groupsLimit,
   ).toJson();
 
-  Json _createPersonVarsConstructor({required Person newObject}) =>
-      PersonInsertHelper(newPerson: newObject).variables.toJson();
+  late final notificationsQueries = PersonsNotificationsQueries(db: db);
 
-  Json _updatePersonVarsConstructor({
+  @override
+  StreamAllConfig<Person> get baseStreamAllConfig => StreamAllConfig(
+    document: documentNodeQuerypersons,
+    arguments: (parameters) => ListQueryArguments.fromParameters(
+      parameters,
+      defaultOrderBy: [OrderBy(field: PersonFields().name)],
+    ),
+  );
+
+  @override
+  StreamSingleByIdConfig<Person> get baseStreamSingleByIdConfig =>
+      const StreamSingleByIdConfig(
+        document: documentNodeQueryperson,
+        varsConstructor: _detailsVariables,
+      );
+
+  @override
+  CreateObjectConfig<Person> get baseCreateObjectConfig => CreateObjectConfig(
+    document: documentNodeMutationcreatePerson,
+    varsConstructor: ({required newObject}) => Variables_Mutation_createPerson(
+      input: PersonCommandInputs(person: newObject).create,
+    ).toJson(),
+  );
+
+  @override
+  UpdateObjectConfig<Person> get baseUpdateObjectConfig => UpdateObjectConfig(
+    document: documentNodeMutationupdatePerson,
+    varsConstructor: ({required newObject}) => Variables_Mutation_updatePerson(
+      id: newObject.id,
+      input: PersonCommandInputs(person: newObject, saved: newObject).update,
+    ).toJson(),
+  );
+
+  @override
+  DeleteSingleByIdConfig<Person> get baseDeleteSingleByIdConfig =>
+      const DeleteSingleByIdConfig(document: documentNodeMutationdeletePerson);
+
+  PersonsDAO({required super.db}) : super(fromJson: Person.fromJson);
+
+  @override
+  Future<Person> createObject({required Person newObject}) async {
+    final inputs = await _commandInputsFor(newObject);
+
+    return _write(
+      documentNodeMutationcreatePerson,
+      Variables_Mutation_createPerson(input: inputs.create).toJson(),
+    );
+  }
+
+  @override
+  Future<Person?> updateObject({
     required Person newObject,
     required Person oldObject,
-  }) => PersonUpdateHelper(
-    newPerson: newObject,
-    oldPerson: oldObject,
-  ).variables.toJson();
+  }) async {
+    if (newObject == oldObject) return newObject;
 
-  Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
-      Variables_Mutation_deletePerson(personId: id).toJson();
+    final inputs = await _commandInputsFor(newObject, saved: oldObject);
+
+    return _write(
+      documentNodeMutationupdatePerson,
+      Variables_Mutation_updatePerson(
+        id: newObject.id,
+        input: inputs.update,
+      ).toJson(),
+    );
+  }
 
   @override
   Stream<Person?> streamSingleById({
     required String id,
-    int? servicesLimit = 6,
-    int? classesLimit = 6,
-    int? groupsLimit = 6,
-  }) {
-    return streamSingleByIdWithConfig(
-      id: id,
-      streamSingleByIdConfig: baseStreamSingleByIdConfig.copyWith(
-        variables: _streamSingleByIdVarsConstructor(
-          id: id.toUuid(),
-          servicesLimit: servicesLimit,
-          classesLimit: classesLimit,
-          groupsLimit: groupsLimit,
-        ),
+    int? servicesLimit = _membershipsShownBeforeAll,
+    int? classesLimit = _membershipsShownBeforeAll,
+    int? groupsLimit = _membershipsShownBeforeAll,
+  }) => streamSingleByIdWithConfig(
+    id: id,
+    streamSingleByIdConfig: baseStreamSingleByIdConfig.copyWith(
+      varsConstructor: ({required id}) => _detailsVariables(
+        id: id,
+        servicesLimit: servicesLimit,
+        classesLimit: classesLimit,
+        groupsLimit: groupsLimit,
       ),
-    );
-  }
+    ),
+  );
 
   Future<Person?> personServicesClassesGroups({required String personId}) {
-    final queryOptions = QueryOptions(
-      document: transformDocument(documentNodeQuerypersonServicesClassesGroups),
-      operationName: 'personServicesClassesGroups',
-      variables: Variables_Query_personServicesClassesGroups(
-        id: personId.toUuid(),
-      ).toJson(),
-      parserFn: db.parser.singleOrNullParser(Person.fromJson),
-    );
+    final document = transformDocument(documentNodeQuerypersonMemberships);
 
-    return graphQLClient.queryAndReturnParsed(queryOptions);
+    return graphQLClient.queryAndReturnParsedNullable(
+      QueryOptions(
+        document: document,
+        operationName: 'personMemberships',
+        variables: Variables_Query_personMemberships(id: personId).toJson(),
+        parserFn: AshResultParser(document).entity(fromJson),
+      ),
+    );
   }
 
   Future<PersonsGeolocationsResponse?> personsGeolocations({
@@ -129,103 +158,89 @@ class PersonsDAO extends LegacyFullCRUDDAO<Person>
       'At lease one type should be fetched',
     );
 
-    final queryOptions = QueryOptions(
-      document: transformDocument(documentNodeQuerypersonsGeolocations),
-      operationName: 'personsGeolocations',
-      variables: Variables_Query_personsGeolocations(
-        getAreas: getAreas,
-        getStreets: getStreets,
-        getFamilies: getFamilies,
-        getStores: getStores,
-        getPersons: getPersons,
-        areasIds: areasIds,
-        familiesIds: familiesIds,
-        storesIds: storesIds,
-        streetsIds: streetsIds,
-        personsConditions: [
-          if (personId != null)
-            Input_PersonsBoolExp(
-              id: Input_UuidComparisonExp($_eq: personId.toUuid()),
-            ),
-          if (areasIds.isNotEmpty ||
-              streetsIds.isNotEmpty ||
-              familiesIds.isNotEmpty)
-            Input_PersonsBoolExp(
-              address: Input_AddressesBoolExp(
-                $_or: [
-                  if (areasIds.isNotEmpty)
-                    Input_AddressesBoolExp(
-                      areaId: Input_UuidComparisonExp($_in: areasIds),
-                    ),
-                  if (streetsIds.isNotEmpty)
-                    Input_AddressesBoolExp(
-                      streetId: Input_UuidComparisonExp($_in: streetsIds),
-                    ),
-                  if (familiesIds.isNotEmpty)
-                    Input_AddressesBoolExp(
-                      familyId: Input_UuidComparisonExp($_in: familiesIds),
-                    ),
-                ],
-              ),
-            ),
-          if (servicesIds.isNotEmpty ||
-              classesIds.isNotEmpty ||
-              groupsIds.isNotEmpty)
-            Input_PersonsBoolExp(
-              $_or: [
-                if (servicesIds.isNotEmpty)
-                  Input_PersonsBoolExp(
-                    services: Input_PersonsServicesBoolExp(
-                      serviceId: Input_UuidComparisonExp($_in: servicesIds),
-                    ),
-                  ),
-                if (classesIds.isNotEmpty)
-                  Input_PersonsBoolExp(
-                    classes: Input_ClassesPersonsBoolExp(
-                      classId: Input_UuidComparisonExp($_in: classesIds),
-                    ),
-                  ),
-                if (groupsIds.isNotEmpty)
-                  Input_PersonsBoolExp(
-                    groups: Input_PersonsGroupsBoolExp(
-                      groupId: Input_UuidComparisonExp($_in: groupsIds),
-                    ),
-                  ),
-              ],
-            ),
-        ],
-      ).toJson(),
-      queryRequestTimeout: const Duration(seconds: 30),
-      parserFn: PersonsGeolocationsResponse.fromJson,
+    final filters = PersonsGeolocationsFilters(
+      areasIds: areasIds.map((id) => id.uuid).toList(),
+      streetsIds: streetsIds.map((id) => id.uuid).toList(),
+      familiesIds: familiesIds.map((id) => id.uuid).toList(),
+      storesIds: storesIds.map((id) => id.uuid).toList(),
+      servicesIds: servicesIds.map((id) => id.uuid).toList(),
+      classesIds: classesIds.map((id) => id.uuid).toList(),
+      groupsIds: groupsIds.map((id) => id.uuid).toList(),
+      personId: personId,
     );
 
-    return graphQLClient.queryAndReturnParsedNullable(queryOptions);
+    return graphQLClient.queryAndReturnParsedNullable(
+      QueryOptions(
+        document: transformDocument(documentNodeQuerypersonsGeolocations),
+        operationName: 'personsGeolocations',
+        variables: Variables_Query_personsGeolocations(
+          getAreas: getAreas,
+          getStreets: getStreets,
+          getFamilies: getFamilies,
+          getStores: getStores,
+          getPersons: getPersons,
+          areasFilter: Input_AreaFilterInput.fromJson(filters.areas),
+          streetsFilter: Input_StreetFilterInput.fromJson(filters.streets),
+          familiesFilter: Input_FamilyFilterInput.fromJson(filters.families),
+          storesFilter: Input_StoreFilterInput.fromJson(filters.stores),
+          personsFilter: Input_PersonFilterInput.fromJson(filters.persons),
+          first: AshPagination.maxPageSize,
+        ).toJson(),
+        queryRequestTimeout: _geolocationsTimeout,
+        parserFn: (data) => PersonsGeolocationsResponse.fromJson({
+          for (final root in const [
+            'areas',
+            'streets',
+            'families',
+            'stores',
+            'persons',
+          ])
+            if (data[root] case {'results': final List results}) root: results,
+        }),
+      ),
+    );
   }
 
   Future<Person?> getPersonAnalysis({
     required String personId,
     required PersonAnalysisOptions options,
   }) {
-    final queryOptions = QueryOptions(
-      errorPolicy: ErrorPolicy.all,
-      document: transformDocument(documentNodeQuerypersonHistoryAnalysis),
-      operationName: 'personHistoryAnalysis',
-      variables: Variables_Query_personHistoryAnalysis(
-        personId: personId.toUuid(),
-        dateFrom: options.dateRange.start,
-        dateTo: options.dateRange.end,
-        timeFrom: options.dateRange.start,
-        timeTo: options.dateRange.end,
-        confessionHistory: options.confessionAnalysis,
-        kodasHistory: options.kodasAnalysis,
-        callHistory: options.callHistoryAnalysis,
-        visitHistory: options.visitHistoryAnalysis,
-        editHistory: options.editHistoryAnalysis,
-      ).toJson(),
-      parserFn: db.parser.singleOrNullParser(Person.fromJson),
-    );
+    final DateTimeRange(:start, :end) = options.dateRange;
+    final timeRange = {
+      'time': {
+        'greaterThanOrEqual': tstzToString(start),
+        'lessThanOrEqual': tstzToString(end),
+      },
+    };
+    final dayRange = {
+      'dayId': {
+        'greaterThanOrEqual': dateToString(start),
+        'lessThanOrEqual': dateToString(end),
+      },
+    };
+    final document = transformDocument(documentNodeQuerypersonHistoryAnalysis);
 
-    return graphQLClient.queryAndReturnParsedNullable(queryOptions);
+    return graphQLClient.queryAndReturnParsedNullable(
+      QueryOptions(
+        errorPolicy: ErrorPolicy.all,
+        document: document,
+        operationName: 'personHistoryAnalysis',
+        variables: Variables_Query_personHistoryAnalysis(
+          id: personId,
+          callsFilter: Input_CallFilterInput.fromJson(timeRange),
+          visitsFilter: Input_VisitFilterInput.fromJson(timeRange),
+          editsFilter: Input_EditFilterInput.fromJson(timeRange),
+          kodasesFilter: Input_KodasFilterInput.fromJson(dayRange),
+          confessionsFilter: Input_ConfessionFilterInput.fromJson(dayRange),
+          confessionHistory: options.confessionAnalysis,
+          kodasHistory: options.kodasAnalysis,
+          callHistory: options.callHistoryAnalysis,
+          visitHistory: options.visitHistoryAnalysis,
+          editHistory: options.editHistoryAnalysis,
+        ).toJson(),
+        parserFn: AshResultParser(document).entity(fromJson),
+      ),
+    );
   }
 
   Future<Person?> updatePersonSpiritData({
@@ -233,21 +248,81 @@ class PersonsDAO extends LegacyFullCRUDDAO<Person>
     required DateTime lastConfession,
     required DateTime lastKodas,
   }) {
+    final document = transformDocument(
+      documentNodeMutationrecordPersonSpiritualDays,
+    );
+
     return graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
-        document: transformDocument(documentNodeMutationupdatePersonSpiritData),
-        operationName: 'updatePersonSpiritData',
-        variables: Variables_Mutation_updatePersonSpiritData(
-          personId: personId.toUuid(),
-          lastKodas: lastKodas,
-          lastConfession: lastConfession,
+        document: document,
+        operationName: 'recordPersonSpiritualDays',
+        variables: Variables_Mutation_recordPersonSpiritualDays(
+          id: personId,
+          input: Input_RecordPersonSpiritualDaysInput(
+            confessionDay: lastConfession,
+            kodasDay: lastKodas,
+          ),
         ).toJson(),
-        parserFn: (data) {
-          final value = data.values.whereType<Map?>().lastOrNull?['person'];
-          if (value == null) return null;
+        parserFn: AshResultParser(document).mutationResultOrNull(fromJson),
+      ),
+    );
+  }
 
-          return Person.fromJson(value.cast<String, Object?>());
-        },
+  Future<PersonCommandInputs> _commandInputsFor(
+    Person person, {
+    Person? saved,
+  }) async {
+    final withoutFamilyContacts = PersonCommandInputs(
+      person: person,
+      saved: saved,
+    );
+    final familyId = person.family?.id;
+    if (familyId == null || !withoutFamilyContacts.familyContactsWereEdited) {
+      return withoutFamilyContacts;
+    }
+
+    return PersonCommandInputs(
+      person: person,
+      saved: saved,
+      unclaimedFamilyContacts: await _unclaimedContactsOf(familyId),
+    );
+  }
+
+  Future<List<FamilyPhoneContact>> _unclaimedContactsOf(String familyId) {
+    final document = transformDocument(
+      documentNodeQueryfamilyUnclaimedContacts,
+    );
+
+    return graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: document,
+        operationName: 'familyUnclaimedContacts',
+        fetchPolicy: FetchPolicy.networkOnly,
+        variables: Variables_Query_familyUnclaimedContacts(
+          filter: Input_FamilyContactFilterInput.fromJson({
+            'familyId': {'eq': familyId},
+            'personId': {'isNil': true},
+          }),
+          first: AshPagination.maxPageSize,
+        ).toJson(),
+        parserFn: (data) => [
+          if (data['familyContacts'] case {'results': final List results})
+            for (final row in results)
+              FamilyPhoneContact.fromJson(Json.from(row as Map)),
+        ],
+      ),
+    );
+  }
+
+  Future<Person> _write(DocumentNode mutation, Json variables) {
+    final document = transformDocument(mutation);
+
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: document,
+        operationName: AshResultParser.rootFieldOf(document),
+        variables: variables,
+        parserFn: AshResultParser(document).mutationResult(fromJson),
       ),
     );
   }
