@@ -2243,6 +2243,25 @@ const fragmentDefinitionPersonDetails = FragmentDefinitionNode(
             name: NameNode(value: 'limit'),
             value: VariableNode(name: NameNode(value: 'classesLimit')),
           ),
+          ArgumentNode(
+            name: NameNode(value: 'sort'),
+            value: ListValueNode(
+              values: [
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'field'),
+                      value: EnumValueNode(name: NameNode(value: 'CLASS_NAME')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'order'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ],
         directives: [],
         selectionSet: SelectionSetNode(
@@ -2459,6 +2478,25 @@ const fragmentDefinitionPersonDetails = FragmentDefinitionNode(
           ArgumentNode(
             name: NameNode(value: 'limit'),
             value: VariableNode(name: NameNode(value: 'groupsLimit')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'sort'),
+            value: ListValueNode(
+              values: [
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'field'),
+                      value: EnumValueNode(name: NameNode(value: 'GROUP_NAME')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'order'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
         directives: [],
@@ -2768,6 +2806,27 @@ const fragmentDefinitionPersonDetails = FragmentDefinitionNode(
           ArgumentNode(
             name: NameNode(value: 'limit'),
             value: VariableNode(name: NameNode(value: 'servicesLimit')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'sort'),
+            value: ListValueNode(
+              values: [
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'field'),
+                      value: EnumValueNode(
+                        name: NameNode(value: 'SERVICE_NAME'),
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'order'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
         directives: [],
@@ -7233,7 +7292,29 @@ const fragmentDefinitionPersonMemberships = FragmentDefinitionNode(
       FieldNode(
         name: NameNode(value: 'serviceMemberships'),
         alias: null,
-        arguments: [],
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'sort'),
+            value: ListValueNode(
+              values: [
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'field'),
+                      value: EnumValueNode(
+                        name: NameNode(value: 'SERVICE_NAME'),
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'order'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
         directives: [],
         selectionSet: SelectionSetNode(
           selections: [
@@ -7278,7 +7359,27 @@ const fragmentDefinitionPersonMemberships = FragmentDefinitionNode(
       FieldNode(
         name: NameNode(value: 'classMemberships'),
         alias: null,
-        arguments: [],
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'sort'),
+            value: ListValueNode(
+              values: [
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'field'),
+                      value: EnumValueNode(name: NameNode(value: 'CLASS_NAME')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'order'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
         directives: [],
         selectionSet: SelectionSetNode(
           selections: [
@@ -7344,7 +7445,27 @@ const fragmentDefinitionPersonMemberships = FragmentDefinitionNode(
       FieldNode(
         name: NameNode(value: 'groupMemberships'),
         alias: null,
-        arguments: [],
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'sort'),
+            value: ListValueNode(
+              values: [
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'field'),
+                      value: EnumValueNode(name: NameNode(value: 'GROUP_NAME')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'order'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
         directives: [],
         selectionSet: SelectionSetNode(
           selections: [
