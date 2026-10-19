@@ -9,6 +9,7 @@ defmodule ChurchAdmin.TestDomain do
   resources do
     resource ChurchAdmin.TestDomain.EditedThing
     resource ChurchAdmin.TestDomain.ErrorProbe
+    resource ChurchAdmin.TestDomain.GuardedThing
     resource ChurchAdmin.TestDomain.HasuraSessionProbe
     resource ChurchAdmin.TestDomain.StampedNote
     resource ChurchAdmin.TestDomain.ThingMembership
