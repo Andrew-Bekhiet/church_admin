@@ -23,6 +23,30 @@ end
 config :church_admin, ChurchAdminWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT", "4100"))]
 
+{default_auth_mode, default_firebase_project_id} =
+  case config_env() do
+    :dev -> {"emulator", "church-admin-local"}
+    :test -> {"emulator", "demo-church-admin"}
+    :prod -> {"firebase", nil}
+  end
+
+auth_env = fn name, default ->
+  if config_env() == :test, do: default, else: System.get_env(name, default)
+end
+
+auth_mode =
+  case auth_env.("AUTH_MODE", default_auth_mode) do
+    "firebase" -> :firebase
+    "emulator" -> :emulator
+    other -> raise "AUTH_MODE must be firebase or emulator, got: #{inspect(other)}"
+  end
+
+config :church_admin, ChurchAdmin.Auth.TokenVerifier,
+  mode: auth_mode,
+  firebase_project_id:
+    auth_env.("FIREBASE_PROJECT_ID", default_firebase_project_id) ||
+      raise("environment variable FIREBASE_PROJECT_ID is missing")
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
@@ -56,6 +80,10 @@ if config_env() == :prod do
   host = System.get_env("PHX_HOST") || "example.com"
 
   config :church_admin, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
+
+  config :church_admin,
+         :cors_allowed_origins,
+         "CORS_ALLOWED_ORIGINS" |> System.get_env("") |> String.split(~r{\s*,\s*}, trim: true)
 
   config :church_admin, ChurchAdminWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],

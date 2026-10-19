@@ -7,6 +7,8 @@ defmodule ChurchAdmin.Application do
 
   @impl true
   def start(_type, _args) do
+    ChurchAdmin.Auth.TokenVerifier.configured!()
+
     children = [
       ChurchAdminWeb.Telemetry,
       ChurchAdmin.Repo,
@@ -20,9 +22,8 @@ defmodule ChurchAdmin.Application do
       # Start a worker by calling: ChurchAdmin.Worker.start_link(arg)
       # {ChurchAdmin.Worker, arg},
       # Start to serve requests, typically the last entry
-      ChurchAdminWeb.Endpoint,
-      {Absinthe.Subscription, ChurchAdminWeb.Endpoint},
-      AshGraphql.Subscription.Batcher
+      ChurchAdmin.Auth.GoogleSigningKeys,
+      ChurchAdminWeb.Endpoint
     ]
 
     # See https://elixir.hexdocs.pm/Supervisor.html

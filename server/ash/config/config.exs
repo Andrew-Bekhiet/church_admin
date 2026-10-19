@@ -73,6 +73,8 @@ config :spark,
 config :church_admin, ChurchAdmin.Repo, migration_source: "ash_schema_migrations"
 
 config :church_admin,
+  config_env: config_env(),
+  cors_allowed_origins: :any,
   ecto_repos: [ChurchAdmin.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true],
   ash_domains: []

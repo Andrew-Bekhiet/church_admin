@@ -1,7 +1,11 @@
 defmodule ChurchAdminWeb.Router do
   use ChurchAdminWeb, :router
 
+  @graphql_schema Module.concat(["ChurchAdminWeb.GraphqlSchema"])
+  @graphql_pipeline {ChurchAdminWeb.Graphql.Pipeline, :pipeline}
+
   pipeline :graphql do
+    plug ChurchAdminWeb.Plugs.Authenticate
     plug AshGraphql.Plug
   end
 
@@ -9,15 +13,19 @@ defmodule ChurchAdminWeb.Router do
     plug :accepts, ["json"]
   end
 
+  get "/healthz", ChurchAdminWeb.HealthController, :show
+
   scope "/gql" do
     pipe_through [:graphql]
 
-    forward "/playground", Absinthe.Plug.GraphiQL,
-      schema: Module.concat(["ChurchAdminWeb.GraphqlSchema"]),
-      socket: Module.concat(["ChurchAdminWeb.GraphqlSocket"]),
-      interface: :simple
+    if Application.compile_env(:church_admin, :dev_routes) do
+      forward "/playground", Absinthe.Plug.GraphiQL,
+        schema: @graphql_schema,
+        pipeline: @graphql_pipeline,
+        interface: :simple
+    end
 
-    forward "/", Absinthe.Plug, schema: Module.concat(["ChurchAdminWeb.GraphqlSchema"])
+    forward "/", Absinthe.Plug, schema: @graphql_schema, pipeline: @graphql_pipeline
   end
 
   scope "/api", ChurchAdminWeb do

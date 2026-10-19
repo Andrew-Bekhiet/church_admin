@@ -1,0 +1,11 @@
+schema {
+  query: RootQueryType
+}
+
+type RootQueryType {
+  """
+  Hello! This is a sample query to verify that AshGraphql has been set up correctly.
+  Remove me once you have a query of your own!
+  """
+  sayHello: String
+}
