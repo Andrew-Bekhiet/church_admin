@@ -1,6 +1,6 @@
 defmodule ChurchAdmin.Authz.Fragments.ScopedEntity do
   @moduledoc """
-  For the entities the permission view scopes (Person, Family, Service,
+  For the entities scoped by per-entity grants (Person, Family, Service,
   Class, Group, Area, Street, Store): the policy authorizer, updates limited
   to the actor's `:edit` scope before and after the change
   (`RecheckAfterUpdate`).
