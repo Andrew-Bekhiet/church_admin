@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
 
 typedef AttendanceStreak = ({int length, DateTimeRange? range});
 
@@ -65,17 +64,20 @@ class PersonMeetingAttendanceAnalysis {
     required this.attendedDays,
   });
 
-  factory PersonMeetingAttendanceAnalysis.fromQueryResult(
-    Query_attendanceAnalysis_historyMeetingRoster row,
+  factory PersonMeetingAttendanceAnalysis.fromRosterAttendanceJson(
+    Json row,
     Meeting meeting,
     List<DateTime> heldDays,
   ) {
     return PersonMeetingAttendanceAnalysis(
-      personId: row.personId?.uuid ?? '',
+      personId: row['personId'] as String,
       meeting: meeting,
-      asServant: row.asServant ?? false,
+      asServant: row['asServant'] as bool? ?? false,
       heldDays: heldDays.toSet().toList(),
-      attendedDays: row.attendanceHistory.map((e) => e.day).nonNulls.toSet(),
+      attendedDays: {
+        for (final record in row['attendanceRecords'] as List? ?? const [])
+          dateFromString((record as Map)['day']),
+      },
     );
   }
 
