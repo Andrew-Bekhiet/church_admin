@@ -2,16 +2,21 @@ defmodule ChurchAdmin.Organization.Service do
   use Ash.Resource,
     domain: ChurchAdmin.Organization,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource],
+    extensions: [AshGraphql.Resource, AshArchival.Resource],
     fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.{ScopeGrant, User}
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
-  alias ChurchAdmin.Authz.Checks.System
-  alias ChurchAdmin.Attendance.Meeting
+  alias ChurchAdmin.Attendance.{Meeting, MeetingInput}
+  alias ChurchAdmin.Authz.Checks.{HasPermission, System}
   alias ChurchAdmin.Catalog.StudyYear
+  alias ChurchAdmin.Changes.StampActor
+  alias ChurchAdmin.Errors.{Codes, ConstraintCodes}
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.Organization.{Class, Group}
+  alias ChurchAdmin.Organization.Changes.CreateDefaultMeeting
+  alias ChurchAdmin.Organization.Validations.DefaultMeetingBelongsToOwner
   alias ChurchAdmin.People.{Person, ServiceMembership}
   alias ChurchAdmin.Types.Text
 
@@ -35,6 +40,12 @@ defmodule ChurchAdmin.Organization.Service do
       get :service, :read
       list :services, :read
     end
+
+    mutations do
+      create :create_service, :create_service
+      update :update_service, :update_service
+      destroy :delete_service, :destroy
+    end
   end
 
   postgres do
@@ -44,6 +55,8 @@ defmodule ChurchAdmin.Organization.Service do
 
     identity_index_names unique_default_meeting_id: "services_default_meeting_id_key",
                          unique_name: "services_name_key"
+
+    foreign_key_names [{:classes, "classes_service_fkey"}]
 
     references do
       reference :default_meeting, on_delete: :nilify, on_update: :update
@@ -66,6 +79,12 @@ defmodule ChurchAdmin.Organization.Service do
     end
   end
 
+  archive do
+    attribute :deleted_at
+    base_filter?(true)
+    exclude_destroy_actions([:hard_destroy])
+  end
+
   actions do
     read :read do
       primary? true
@@ -76,6 +95,72 @@ defmodule ChurchAdmin.Organization.Service do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :create_service do
+      accept [:name, :study_year_from_id, :study_year_to_id, :next_service_id, :color]
+      argument :default_meeting, MeetingInput
+
+      change CreateDefaultMeeting
+      change {RecordEdit, table: "services"}
+    end
+
+    update :update_service do
+      accept [
+        :name,
+        :study_year_from_id,
+        :study_year_to_id,
+        :next_service_id,
+        :color,
+        :default_meeting_id
+      ]
+
+      require_atomic? false
+
+      change {RecordEdit, table: "services"}
+    end
+
+    update :set_default_meeting do
+      accept [:default_meeting_id]
+      require_atomic? false
+      change set_context(%{skip_scope_recheck?: true})
+    end
+
+    update :clear_default_meeting do
+      require_atomic? false
+      change set_context(%{skip_scope_recheck?: true})
+      change set_attribute(:default_meeting_id, nil)
+      change {RecordEdit, table: "services"}
+    end
+
+    destroy :destroy do
+      primary? true
+      require_atomic? false
+
+      change {StampActor, attribute: :deleted_by}
+      change {RecordEdit, table: "services"}
+    end
+
+    destroy :hard_destroy do
+      require_atomic? false
+    end
+  end
+
+  changes do
+    change {ConstraintCodes,
+            codes: %{
+              "services_name_key" => Codes.service_name_taken(),
+              "classes_service_fkey" => Codes.service_in_use(),
+              "groups_service_id_fkey" => Codes.service_in_use()
+            }},
+           on: [:create, :update, :destroy]
+  end
+
+  validations do
+    validate {DefaultMeetingBelongsToOwner,
+              owner_column: :service_id,
+              mismatch: Codes.service_default_meeting_mismatch(),
+              archived: Codes.service_default_meeting_archived()},
+             on: [:update]
   end
 
   policies do
@@ -85,6 +170,22 @@ defmodule ChurchAdmin.Organization.Service do
 
     policy action_type(:read) do
       authorize_if actor_present()
+    end
+
+    policy action(:create_service) do
+      authorize_if {HasPermission, name: "writeAllData"}
+    end
+
+    policy action(:destroy) do
+      authorize_if {HasPermission, name: "writeAllData"}
+    end
+
+    policy action(:destroy) do
+      authorize_if {HasPermission, name: "deleteData"}
+    end
+
+    policy action(:hard_destroy) do
+      forbid_if always()
     end
   end
 
