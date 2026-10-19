@@ -149,6 +149,12 @@ defmodule ChurchAdmin.Attendance.AttendanceRecord do
         )
   end
 
+  aggregates do
+    first :meeting_name, :meeting, :name, public?: true
+    first :person_name, :person, :name, public?: true
+    first :recorded_by_user_name, :recorded_by_user, :name, public?: true
+  end
+
   identities do
     identity :unique_attendance_per_day_meeting_person_and_role, [
       :day,

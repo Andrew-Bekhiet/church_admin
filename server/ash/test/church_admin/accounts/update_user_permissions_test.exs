@@ -11,7 +11,8 @@ defmodule ChurchAdmin.Accounts.UpdateUserPermissionsTest do
     {:ok, manager: manager, actor: actor_for(manager), user: Factory.user!(), service: service}
   end
 
-  defp update(user, input, actor), do: Accounts.update_user_permissions(user, input, actor: actor)
+  defp update(user, input, actor, opts \\ []),
+    do: Accounts.update_user_permissions(user, input, [actor: actor] ++ opts)
 
   defp user_edits(user) do
     Edit

@@ -61,6 +61,79 @@ defmodule ChurchAdminWeb.Graphql.AttendanceQueriesTest do
     assert world
   end
 
+  test "meetings and attendance records sort by the names they reference", %{
+    conn: conn,
+    world: world
+  } do
+    document = """
+    {
+      byService: meetings(sort: [{field: SERVICE_NAME, order: DESC}, {field: NAME}]) {
+        results { serviceName service { name } }
+      }
+      byGroup: meetings(sort: [{field: GROUP_NAME}, {field: NAME}]) {
+        results { groupName group { name } }
+      }
+      byYear: meetings(sort: [{field: STUDY_YEAR_ORDER}, {field: NAME}]) {
+        results { studyYearOrder serviceStudyYear }
+      }
+      byMeeting: attendanceRecords(sort: [{field: MEETING_NAME, order: DESC}, {field: ID}]) {
+        results { meetingName meeting { name } }
+      }
+      byPerson: attendanceRecords(sort: [{field: PERSON_NAME}, {field: ID}]) {
+        results { personName person { name } }
+      }
+      byRecorder: attendanceRecords(sort: [{field: RECORDED_BY_USER_NAME}, {field: ID}]) {
+        results { recordedByUserName recordedByUser { name } }
+      }
+    }
+    """
+
+    data = data!(run(conn, document, %{}, :read_all, world))
+
+    for {key, name_key, loaded, loaded_key} <- [
+          {"byService", "serviceName", "service", "name"},
+          {"byGroup", "groupName", "group", "name"},
+          {"byMeeting", "meetingName", "meeting", "name"},
+          {"byPerson", "personName", "person", "name"},
+          {"byRecorder", "recordedByUserName", "recordedByUser", "name"}
+        ] do
+      rows = data[key]["results"]
+      assert rows != [], key
+      assert Enum.all?(rows, &(&1[name_key] == (&1[loaded] || %{})[loaded_key])), key
+    end
+
+    names = fn key, name_key ->
+      for %{^name_key => name} <- data[key]["results"], name, do: name
+    end
+
+    assert names.("byService", "serviceName") ==
+             Enum.sort(names.("byService", "serviceName"), :desc)
+
+    assert names.("byGroup", "groupName") == Enum.sort(names.("byGroup", "groupName"))
+    assert names.("byPerson", "personName") == Enum.sort(names.("byPerson", "personName"))
+
+    years = for %{"studyYearOrder" => order} <- data["byYear"]["results"], order, do: order
+    assert years == Enum.sort(years)
+    assert Enum.all?(data["byYear"]["results"], &(&1["studyYearOrder"] == &1["serviceStudyYear"]))
+  end
+
+  test "a referenced name is null exactly where the referenced record is unreadable", %{
+    conn: conn,
+    world: world
+  } do
+    document =
+      "{ meetings { results { serviceName service { name } groupName group { name } } } }"
+
+    for kind <- AttendanceWorld.actor_kinds(), kind not in [:anonymous, :unapproved_read_all] do
+      rows = data!(run(conn, document, %{}, kind, world))["meetings"]["results"]
+
+      for row <- rows do
+        assert row["serviceName"] == (row["service"] || %{})["name"], "#{kind} service"
+        assert row["groupName"] == (row["group"] || %{})["name"], "#{kind} group"
+      end
+    end
+  end
+
   test "a meeting's roster pages by keyset", %{conn: conn, world: world} do
     variables = %{"meetingId" => world.records.m_s1.id}
 

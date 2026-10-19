@@ -24,7 +24,8 @@ defmodule ChurchAdmin.Errors.Codes do
     validation/invalid
     service/name-taken service/default-meeting-mismatch service/default-meeting-archived
     group/default-meeting-mismatch group/default-meeting-archived
-    meeting/service-study-year-mismatch
+    meeting/service-study-year-mismatch meeting/service-or-group-required
+    meeting/group-with-service-properties
     street/area-required address/street-outside-area store/admin-family-or-address-required
     attendance/already-recorded attendance/meeting-not-found attendance/meeting-archived
     attendance/audience-mismatch attendance/not-a-servant-of-meeting attendance/not-in-meeting

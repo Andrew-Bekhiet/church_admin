@@ -66,6 +66,16 @@ defmodule ChurchAdmin.DataQuality.DataCheckOverrideTest do
       end
     end
 
+    test "answers relation/not-found for a family that does not exist or the actor cannot read",
+         %{world: world} do
+      actor = actor(world, :area_read)
+
+      for family_id <- [Ash.UUID.generate(), family(world, :f_svc).id] do
+        assert {:error, error} = override_for(world, family_id, true, actor)
+        assert codes(error) == ["relation/not-found"]
+      end
+    end
+
     test "the refusal is forbidden and writes nothing", %{world: world} do
       assert {:error, error} = override(world, :f_svc, true, :service_open)
       assert codes(error) == ["forbidden"]
@@ -122,7 +132,7 @@ defmodule ChurchAdmin.DataQuality.DataCheckOverrideTest do
       assert {:error, error} =
                override_for(world, family(world, :f_misc).id, true, ActorLoader.load(user.uid))
 
-      assert codes(error) == ["forbidden"]
+      assert codes(error) == ["relation/not-found"]
     end
 
     test "a family that does not exist is refused", %{world: world} do

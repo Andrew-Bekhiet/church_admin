@@ -9,7 +9,8 @@ defmodule ChurchAdmin.Archival.HideArchived do
   The resource registers the policy authorizer itself (directly or through
   `ChurchAdmin.Authz.Fragments.ScopedEntity`).
 
-  Replaced by AshArchival once the soft-delete triggers move to Ash. A
+  AshArchival only rewrites destroys into `deleted_at` updates; reads hide
+  archived rows through this policy instead of its `base_filter?`, because a
   read-action filter or preparation would also apply inside those `exists`
   subqueries (AshSql builds them through the destination's read action).
   """

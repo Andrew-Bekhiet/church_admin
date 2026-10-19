@@ -13,12 +13,12 @@ defmodule ChurchAdmin.Accounts.CreateUserTest do
     {:ok, manager: manager, actor: actor_for(manager), service: service}
   end
 
-  defp create(actor, input) do
+  defp create(actor, input, opts \\ []) do
     name = Map.get(input, :name, "servant #{System.unique_integer([:positive])}")
 
     Accounts.create_user(
       Map.merge(%{name: name, new_person: %{name: String.trim(name), gender: false}}, input),
-      actor: actor
+      [actor: actor] ++ opts
     )
   end
 

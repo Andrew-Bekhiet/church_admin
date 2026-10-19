@@ -85,8 +85,8 @@ defmodule ChurchAdmin.Organization.Service do
 
   archive do
     attribute :deleted_at
-    base_filter?(true)
-    exclude_destroy_actions([:hard_destroy])
+    base_filter? true
+    exclude_destroy_actions [:hard_destroy]
   end
 
   actions do

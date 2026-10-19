@@ -11,6 +11,7 @@ defmodule ChurchAdmin.Attendance.Meeting do
   alias ChurchAdmin.Authz.Changes.RecheckAfterUpdate
   alias ChurchAdmin.Authz.Checks.{InScope, MeetingWriteGate, System}
   alias ChurchAdmin.Catalog.StudyYear
+  alias ChurchAdmin.Errors.{Codes, ConstraintCodes}
   alias ChurchAdmin.Organization.{Group, Service}
   alias ChurchAdmin.Types.Text
 
@@ -92,6 +93,15 @@ defmodule ChurchAdmin.Attendance.Meeting do
     end
   end
 
+  changes do
+    change {ConstraintCodes,
+            codes: %{
+              "meetings_scope_check" => Codes.meeting_service_or_group_required(),
+              "meetings_service_properties_check" => Codes.meeting_group_with_service_properties()
+            }},
+           on: :create
+  end
+
   validations do
     validate StudyYearWithinService, on: [:create, :update]
   end
@@ -152,5 +162,11 @@ defmodule ChurchAdmin.Attendance.Meeting do
       argument :from, :date, allow_nil?: false
       argument :to, :date, allow_nil?: false
     end
+  end
+
+  aggregates do
+    first :service_name, :service, :name, public?: true
+    first :group_name, :group, :name, public?: true
+    first :study_year_order, :study_year, :order, public?: true
   end
 end
