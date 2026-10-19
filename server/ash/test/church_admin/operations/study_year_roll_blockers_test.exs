@@ -141,6 +141,22 @@ defmodule ChurchAdmin.Operations.StudyYearRollBlockersTest do
       )
     end
 
+    test "current behaviour: one class relocating to a soft-deleted service reports every service routed there" do
+      destination = graded_service!(4, 6, deleted_at: deleted_at())
+      with_class = graded_service!(1, 3, next_service_id: destination.id)
+      without_class = graded_service!(1, 3, next_service_id: destination.id)
+      class!(with_class, service_study_year: 3)
+
+      assert_blocked_by(
+        for(
+          source <- [with_class, without_class],
+          do:
+            "next_service_deleted: service #{source.id} routes to soft-deleted service #{destination.id}"
+        ),
+        bystander!()
+      )
+    end
+
     test "a route to a soft-deleted service that nothing takes this year does not block" do
       destination = graded_service!(4, 6, deleted_at: deleted_at())
       source = graded_service!(1, 3, next_service_id: destination.id)
