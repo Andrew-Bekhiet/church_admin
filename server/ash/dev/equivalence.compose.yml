@@ -1,0 +1,48 @@
+name: church-admin-ash-equivalence
+
+services:
+  postgres:
+    build:
+      context: ../../postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: church-admin-ash-equivalence
+      POSTGRES_DB: church_admin
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${EQUIVALENCE_DB_PORT:-55502}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d church_admin"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+  # Master's Hasura image with its migrations skipped: the Ecto baseline has
+  # already built the schema, Hasura only applies its metadata.
+  hasura:
+    build:
+      context: ${HASURA_DIR:?set HASURA_DIR to a master checkout's server/hasura}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "${EQUIVALENCE_HASURA_PORT:-55580}:8080"
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: church-admin-ash-equivalence
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:church-admin-ash-equivalence@postgres:5432/church_admin
+      HASURA_GRAPHQL_MIGRATIONS_DIR: /no-migrations
+      HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: graphql-default
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "false"
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
+      HASURA_GRAPHQL_ENABLED_APIS: graphql,metadata
+      HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: naming_convention
+      STUDY_YEAR_ROLL_NOTIFY_URL: http://localhost:5001/notifyStudyYearRollFailure
+      STUDY_YEAR_ROLL_WEBHOOK_SECRET: church-admin-ash-equivalence
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/healthz || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 10s
+    profiles: [hasura]
