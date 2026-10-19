@@ -1,0 +1,20 @@
+query groups(
+  $filter: GroupFilterInput
+  $sort: [GroupSortInput]
+  $first: Int
+  $after: String
+) {
+  groups(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Group
+    }
+  }
+}
+
+query group($id: ID!) {
+  group(id: $id) {
+    ...GroupDetails
+  }
+}

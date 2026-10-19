@@ -157,19 +157,14 @@ class ServiceFields {
         },
       );
 
-  final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
+  final FieldMetadata<User> adminUsers = FieldMetadata<User>(
     getValue: (obj) => obj is Service ? obj.adminUsers : null,
     parentType: Service,
-    name: 'adminUsers',
-    label: 'adminUsers',
-    isCodeOnly: true,
+    name: 'admins',
+    label: 'المسؤولون',
+    isCodeOnly: false,
     isOrderable: false,
-  );
-
-  late final FieldMetadata<User> adminUsers = adminUsersRel.redirectTo(
-    AdminOnDataFields().user,
-    isExpandable: false,
-    isOrderable: false,
+    operators: {...MultiSelectOperator.values},
   );
 
   late final List<FieldMetadata<Object>> allFields = [
@@ -201,7 +196,7 @@ class ServiceFields {
     'groups': groups,
     'meetings': meetings,
     'lastEdit': lastEdit,
-    'adminUsers': adminUsers,
+    'admins': adminUsers,
   };
 }
 
@@ -249,12 +244,14 @@ Service _$ServiceFromJson(Map json) => Service(
   meetings: (json['meetings'] as List<dynamic>?)
       ?.map((e) => Meeting.fromJson(Map<String, Object?>.from(e as Map)))
       .toList(),
-  lastEdit: json['lastEdit'] == null
+  lastEdit: json['latestEdit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastEdit'] as Map),
+          Map<String, Object?>.from(json['latestEdit'] as Map),
         ),
-  adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
+  adminUsers: (json['admins'] as List<dynamic>?)
+      ?.map((e) => User.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
 );
 
 Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{
@@ -276,8 +273,8 @@ Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{
   'classes': instance.classes?.map((e) => e.toJson()).toList(),
   'groups': instance.groups?.map((e) => e.toJson()).toList(),
   'meetings': instance.meetings?.map((e) => e.toJson()).toList(),
-  'lastEdit': instance.lastEdit?.toJson(),
-  'adminUsers': adminUsersToJson(instance.adminUsers),
+  'latestEdit': instance.lastEdit?.toJson(),
+  'admins': instance.adminUsers?.map((e) => e.toJson()).toList(),
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(

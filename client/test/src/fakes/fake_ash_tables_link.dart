@@ -1,7 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
+import 'package:gql/ast.dart';
 import 'package:graphql/client.dart';
 
+import '../core/services/database/graphql_response_projector.dart';
 import 'ash_responses.dart';
 
 /// One Ash resource as [FakeAshTablesLink] serves it: rows in the server's
@@ -14,13 +16,16 @@ import 'ash_responses.dart';
 /// the command and never stored on the row; [calculations] answer the
 /// filterable calculations that take an `input`. A row of a resource without
 /// an `id` (a model that is not an [ID]) is paged by a keyset the table
-/// assigns.
+/// assigns. With [projectsSelections], an answer about this resource carries
+/// exactly the fields the document selects, so a field a document leaves out
+/// reads as missing.
 class FakeAshTable {
   final String typename;
   final String listRoot;
   final Json createdPresets;
   final Set<String> commandOnlyKeys;
   final Map<String, bool Function(Json row, Json input)> calculations;
+  final bool projectsSelections;
   final List<Json> rows = [];
 
   int _createdCount = 0;
@@ -40,6 +45,7 @@ class FakeAshTable {
     this.createdPresets = const {},
     this.commandOnlyKeys = const {},
     this.calculations = const {},
+    this.projectsSelections = false,
   }) {
     rows.forEach(add);
   }
@@ -100,7 +106,8 @@ class SentRequest {
 }
 
 /// Answers the `result` of a mutation root the tables do not derive from
-/// their typename, given the mutation's variables.
+/// their typename, given the mutation's variables. Throwing a
+/// [FakeAshRejection] answers the error the server answers for that code.
 typedef FakeAshMutation = Json? Function(Json variables);
 
 /// A domain rejection of a generic action, as AshGraphql reports it: an
@@ -115,13 +122,18 @@ class FakeAshRejection implements Exception {
 typedef FakeAshAction = Object? Function(Json variables);
 
 /// An Ash GraphQL server over [FakeAshTable]s. It applies the `filter`
-/// operators the client sends (`and or not eq notEq in isNil ilike`), sorts
-/// by `sort` and then by id as Ash does, and pages with `first`/`after`.
+/// operators the client sends (`and or not eq notEq in isNil ilike`, and a
+/// nested filter on a related row or list of rows), sorts by `sort` and then
+/// by id as Ash does, and pages with `first`/`after`. A list field of a row
+/// that takes `filter`/`sort` variables (`classes(filter: $classesFilter)`)
+/// is filtered and sorted the same way.
 /// Every request is kept in [sent]; setting [nextMutationRejectionCode] makes
 /// the next mutation fail with the error code the real server raises. A root
 /// named in [actions] is a generic action: its function answers with the root
 /// field's value or throws a [FakeAshRejection].
 class FakeAshTablesLink extends Link {
+  static const _filterOperators = {'eq', 'notEq', 'in', 'isNil', 'ilike'};
+
   final List<FakeAshTable> tables;
   final Map<String, FakeAshMutation> mutations;
   final Map<String, FakeAshAction> actions;
@@ -158,7 +170,12 @@ class FakeAshTablesLink extends Link {
     }
 
     try {
-      return Stream.value(Response(data: _answer(request), response: const {}));
+      return Stream.value(
+        Response(
+          data: _projected(request, _answer(request)),
+          response: const {},
+        ),
+      );
     } on FakeAshRejection catch (rejection) {
       return Stream.value(_rejection(rejection.code, rejection.message));
     }
@@ -170,6 +187,23 @@ class FakeAshTablesLink extends Link {
     ],
     response: const {},
   );
+
+  Json _projected(Request request, Json answer) {
+    final root = AshResultParser.rootFieldOf(request.operation.document);
+    final table = tables.firstWhereOrNull(
+      (table) => {
+        table.listRoot,
+        table.getRoot,
+        table.createRoot,
+        table.updateRoot,
+        table.deleteRoot,
+      }.contains(root),
+    );
+
+    return table?.projectsSelections ?? false
+        ? GraphQLResponseProjector(request.operation.document).respond(answer)
+        : answer;
+  }
 
   Json _answer(Request request) {
     final root = AshResultParser.rootFieldOf(request.operation.document);
@@ -200,16 +234,36 @@ class FakeAshTablesLink extends Link {
         case final table?) {
       return {
         '__typename': 'Query',
-        root: table.rows.firstWhereOrNull(
+        root: switch (table.rows.firstWhereOrNull(
           (row) => row['id'] == variables['id'],
-        ),
+        )) {
+          final row? => _withNestedLists(
+            table,
+            row,
+            _rootSelections(request.operation.document),
+            variables,
+          ),
+          null => null,
+        },
       };
     }
 
     final table = tables.singleWhere((table) => table.listRoot == root);
 
-    return {'__typename': 'Query', root: _page(table, variables)};
+    return {
+      '__typename': 'Query',
+      root: _page(table, variables, request.operation.document),
+    };
   }
+
+  List<SelectionNode> _rootSelections(DocumentNode document) =>
+      document.definitions
+          .whereType<OperationDefinitionNode>()
+          .first
+          .rootField
+          .selectionSet
+          ?.selections ??
+      const [];
 
   Json? _write(String root, Json variables) {
     final input = (variables['input'] as Map?)?.cast<String, dynamic>();
@@ -229,7 +283,7 @@ class FakeAshTablesLink extends Link {
         .deleteById(id!);
   }
 
-  Json _page(FakeAshTable table, Json variables) {
+  Json _page(FakeAshTable table, Json variables, DocumentNode document) {
     final matching = table.rows
         .where((row) => _matches(table, row, variables['filter'] as Map?))
         .toList();
@@ -240,7 +294,15 @@ class FakeAshTablesLink extends Link {
         : matching.indexWhere((row) => FakeAshTable.keysetOf(row) == after) + 1;
     final first = variables['first'] as int? ?? matching.length;
 
-    final results = matching.skip(start).take(first).toList();
+    final rowSelections = [
+      for (final field in _rootSelections(document).whereType<FieldNode>())
+        if (field.name.value == 'results') ...?field.selectionSet?.selections,
+    ];
+    final results = matching
+        .skip(start)
+        .take(first)
+        .map((row) => _withNestedLists(table, row, rowSelections, variables))
+        .toList();
 
     return AshResponses.page(
       results,
@@ -267,12 +329,74 @@ class FakeAshTablesLink extends Link {
               when value.containsKey('input') =>
             table.calculations[key]!(row, (value['input'] as Map).cast()) ==
                 value['eq'],
-          MapEntry(:final String key, :final Map value) => value.entries.every(
-            (operator) => _satisfies(row[key], operator),
+          MapEntry(:final String key, :final Map value) => _fieldMatches(
+            table,
+            row[key],
+            value,
           ),
           _ => throw UnsupportedError('Unsupported filter entry $entry'),
         },
       );
+
+  bool _fieldMatches(FakeAshTable table, Object? fieldValue, Map conditions) =>
+      switch (conditions.keys.every(_filterOperators.contains)) {
+        true => conditions.entries.every(
+          (operator) => _satisfies(fieldValue, operator),
+        ),
+        false => switch (fieldValue) {
+          final List related => related.any(
+            (relatedRow) =>
+                _matches(table, (relatedRow as Map).cast(), conditions),
+          ),
+          final Map related => _matches(table, related.cast(), conditions),
+          _ => false,
+        },
+      };
+
+  Json _withNestedLists(
+    FakeAshTable table,
+    Json row,
+    List<SelectionNode> selections,
+    Json variables,
+  ) => {
+    ...row,
+    for (final field in selections.whereType<FieldNode>())
+      if (row[field.name.value] case final List related
+          when field.arguments.isNotEmpty)
+        field.name.value: _arrangedList(
+          table,
+          related,
+          field.arguments,
+          variables,
+        ),
+  };
+
+  List<Json> _arrangedList(
+    FakeAshTable table,
+    List related,
+    List<ArgumentNode> arguments,
+    Json variables,
+  ) {
+    Object? variableOf(String argument) => switch (arguments
+        .firstWhereOrNull((node) => node.name.value == argument)
+        ?.value) {
+      VariableNode(:final name) => variables[name.value],
+      _ => null,
+    };
+
+    final arranged = [
+      for (final relatedRow in related)
+        if (_matches(
+          table,
+          (relatedRow as Map).cast(),
+          variableOf('filter') as Map?,
+        ))
+          relatedRow.cast<String, dynamic>(),
+    ];
+    mergeSort(arranged, compare: _comparator(variableOf('sort') as List?));
+
+    return arranged;
+  }
 
   bool _satisfies(Object? fieldValue, MapEntry<Object?, Object?> operator) =>
       switch (operator) {

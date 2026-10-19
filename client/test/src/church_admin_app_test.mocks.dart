@@ -1859,92 +1859,74 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
 /// See the documentation for Mockito's code generation for more information.
 class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
   @override
-  _i4.LegacyStreamAllConfig<_i4.Service> get baseStreamAllConfig =>
+  _i4.StreamAllConfig<_i4.Service> get baseStreamAllConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamAllConfig),
-        returnValue: _FakeLegacyStreamAllConfig_29<_i4.Service>(
+        returnValue: _FakeStreamAllConfig_41<_i4.Service>(
           this,
           Invocation.getter(#baseStreamAllConfig),
         ),
-        returnValueForMissingStub: _FakeLegacyStreamAllConfig_29<_i4.Service>(
+        returnValueForMissingStub: _FakeStreamAllConfig_41<_i4.Service>(
           this,
           Invocation.getter(#baseStreamAllConfig),
         ),
-      ) as _i4.LegacyStreamAllConfig<_i4.Service>);
+      ) as _i4.StreamAllConfig<_i4.Service>);
 
   @override
-  _i4.LegacyStreamCountConfig<_i4.Service> get baseStreamCountConfig =>
+  _i4.StreamSingleByIdConfig<_i4.Service> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
-        Invocation.getter(#baseStreamCountConfig),
-        returnValue: _FakeLegacyStreamCountConfig_30<_i4.Service>(
-          this,
-          Invocation.getter(#baseStreamCountConfig),
-        ),
-        returnValueForMissingStub: _FakeLegacyStreamCountConfig_30<_i4.Service>(
-          this,
-          Invocation.getter(#baseStreamCountConfig),
-        ),
-      ) as _i4.LegacyStreamCountConfig<_i4.Service>);
-
-  @override
-  _i4.LegacyStreamSingleByIdConfig<_i4.Service>
-  get baseStreamSingleByIdConfig => (super.noSuchMethod(
-    Invocation.getter(#baseStreamSingleByIdConfig),
-    returnValue: _FakeLegacyStreamSingleByIdConfig_31<_i4.Service>(
-      this,
-      Invocation.getter(#baseStreamSingleByIdConfig),
-    ),
-    returnValueForMissingStub:
-        _FakeLegacyStreamSingleByIdConfig_31<_i4.Service>(
+        Invocation.getter(#baseStreamSingleByIdConfig),
+        returnValue: _FakeStreamSingleByIdConfig_42<_i4.Service>(
           this,
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
-  ) as _i4.LegacyStreamSingleByIdConfig<_i4.Service>);
-
-  @override
-  _i4.LegacyDeleteSingleByIdConfig<_i4.Service>
-  get baseDeleteSingleByIdConfig => (super.noSuchMethod(
-    Invocation.getter(#baseDeleteSingleByIdConfig),
-    returnValue: _FakeLegacyDeleteSingleByIdConfig_37<_i4.Service>(
-      this,
-      Invocation.getter(#baseDeleteSingleByIdConfig),
-    ),
-    returnValueForMissingStub:
-        _FakeLegacyDeleteSingleByIdConfig_37<_i4.Service>(
+        returnValueForMissingStub: _FakeStreamSingleByIdConfig_42<_i4.Service>(
           this,
-          Invocation.getter(#baseDeleteSingleByIdConfig),
+          Invocation.getter(#baseStreamSingleByIdConfig),
         ),
-  ) as _i4.LegacyDeleteSingleByIdConfig<_i4.Service>);
+      ) as _i4.StreamSingleByIdConfig<_i4.Service>);
 
   @override
-  _i4.LegacyUpdateObjectConfig<_i4.Service> get baseUpdateObjectConfig =>
-      (super.noSuchMethod(
-        Invocation.getter(#baseUpdateObjectConfig),
-        returnValue: _FakeLegacyUpdateObjectConfig_38<_i4.Service>(
-          this,
-          Invocation.getter(#baseUpdateObjectConfig),
-        ),
-        returnValueForMissingStub:
-            _FakeLegacyUpdateObjectConfig_38<_i4.Service>(
-              this,
-              Invocation.getter(#baseUpdateObjectConfig),
-            ),
-      ) as _i4.LegacyUpdateObjectConfig<_i4.Service>);
-
-  @override
-  _i4.LegacyCreateObjectConfig<_i4.Service> get baseCreateObjectConfig =>
+  _i4.CreateObjectConfig<_i4.Service> get baseCreateObjectConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseCreateObjectConfig),
-        returnValue: _FakeLegacyCreateObjectConfig_39<_i4.Service>(
+        returnValue: _FakeCreateObjectConfig_43<_i4.Service>(
           this,
           Invocation.getter(#baseCreateObjectConfig),
         ),
-        returnValueForMissingStub:
-            _FakeLegacyCreateObjectConfig_39<_i4.Service>(
-              this,
-              Invocation.getter(#baseCreateObjectConfig),
-            ),
-      ) as _i4.LegacyCreateObjectConfig<_i4.Service>);
+        returnValueForMissingStub: _FakeCreateObjectConfig_43<_i4.Service>(
+          this,
+          Invocation.getter(#baseCreateObjectConfig),
+        ),
+      ) as _i4.CreateObjectConfig<_i4.Service>);
+
+  @override
+  _i4.UpdateObjectConfig<_i4.Service> get baseUpdateObjectConfig =>
+      (super.noSuchMethod(
+        Invocation.getter(#baseUpdateObjectConfig),
+        returnValue: _FakeUpdateObjectConfig_44<_i4.Service>(
+          this,
+          Invocation.getter(#baseUpdateObjectConfig),
+        ),
+        returnValueForMissingStub: _FakeUpdateObjectConfig_44<_i4.Service>(
+          this,
+          Invocation.getter(#baseUpdateObjectConfig),
+        ),
+      ) as _i4.UpdateObjectConfig<_i4.Service>);
+
+  @override
+  _i4.DeleteSingleByIdConfig<_i4.Service> get baseDeleteSingleByIdConfig =>
+      (super.noSuchMethod(
+        Invocation.getter(#baseDeleteSingleByIdConfig),
+        returnValue: _FakeDeleteSingleByIdConfig_45<_i4.Service>(
+          this,
+          Invocation.getter(#baseDeleteSingleByIdConfig),
+        ),
+        returnValueForMissingStub: _FakeDeleteSingleByIdConfig_45<_i4.Service>(
+          this,
+          Invocation.getter(#baseDeleteSingleByIdConfig),
+        ),
+      ) as _i4.DeleteSingleByIdConfig<_i4.Service>);
 
   @override
   _i4.DatabaseService get db => (super.noSuchMethod(
@@ -2041,35 +2023,6 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
   ) as _i4.PaginatableStreamBase<_i4.Service>);
 
   @override
-  _i9.Future<List<_i4.Service>> query({
-    bool? onlineFirst = false,
-    String? searchQuery,
-    List<_i4.Filter<Object>>? where,
-    List<_i4.OrderBy>? orderBy,
-    int? limit,
-  }) => (super.noSuchMethod(
-    Invocation.method(#query, [], {
-      #onlineFirst: onlineFirst,
-      #searchQuery: searchQuery,
-      #where: where,
-      #orderBy: orderBy,
-      #limit: limit,
-    }),
-    returnValue: _i9.Future<List<_i4.Service>>.value(<_i4.Service>[]),
-    returnValueForMissingStub: _i9.Future<List<_i4.Service>>.value(
-      <_i4.Service>[],
-    ),
-  ) as _i9.Future<List<_i4.Service>>);
-
-  @override
-  _i9.Stream<_i4.Service?> streamSingleById({required String? id}) =>
-      (super.noSuchMethod(
-        Invocation.method(#streamSingleById, [], {#id: id}),
-        returnValue: _i9.Stream<_i4.Service?>.empty(),
-        returnValueForMissingStub: _i9.Stream<_i4.Service?>.empty(),
-      ) as _i9.Stream<_i4.Service?>);
-
-  @override
   _i4.PaginatableStreamBase<_i4.Service> streamAllWithConfig({
     required _i4.DAOMethodTemplate<Object?>? streamAllConfig,
     _i4.LegacyStreamCountConfig<_i4.Service>? streamCountConfig,
@@ -2115,10 +2068,38 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
   ) as _i4.PaginatableStreamBase<_i4.Service>);
 
   @override
+  _i9.Future<List<_i4.Service>> query({
+    bool? onlineFirst = false,
+    String? searchQuery,
+    List<_i4.Filter<Object>>? where,
+    List<_i4.OrderBy>? orderBy,
+    int? limit,
+  }) => (super.noSuchMethod(
+    Invocation.method(#query, [], {
+      #onlineFirst: onlineFirst,
+      #searchQuery: searchQuery,
+      #where: where,
+      #orderBy: orderBy,
+      #limit: limit,
+    }),
+    returnValue: _i9.Future<List<_i4.Service>>.value(<_i4.Service>[]),
+    returnValueForMissingStub: _i9.Future<List<_i4.Service>>.value(
+      <_i4.Service>[],
+    ),
+  ) as _i9.Future<List<_i4.Service>>);
+
+  @override
+  _i9.Stream<_i4.Service?> streamSingleById({required String? id}) =>
+      (super.noSuchMethod(
+        Invocation.method(#streamSingleById, [], {#id: id}),
+        returnValue: _i9.Stream<_i4.Service?>.empty(),
+        returnValueForMissingStub: _i9.Stream<_i4.Service?>.empty(),
+      ) as _i9.Stream<_i4.Service?>);
+
+  @override
   _i9.Stream<_i4.Service?> streamSingleByIdWithConfig({
     required String? id,
-    required _i4.LegacyStreamSingleByIdConfig<_i4.Service>?
-    streamSingleByIdConfig,
+    required _i4.StreamSingleByIdConfig<_i4.Service>? streamSingleByIdConfig,
   }) => (super.noSuchMethod(
     Invocation.method(#streamSingleByIdWithConfig, [], {
       #id: id,
