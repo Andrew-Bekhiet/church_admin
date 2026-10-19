@@ -2,7 +2,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
 
 /// Builds the selection a field needs, nesting through every related object
-/// it reaches and selecting each one's key field so the cache can link it.
+/// it reaches and selecting each one's key field, and its `id` when it has
+/// one, so the cache can link it.
 class NestedSelectionBuilder extends FieldMetadataVisitor<FieldNode> {
   final List<SelectionNode> nestedSelections;
 
@@ -14,8 +15,11 @@ class NestedSelectionBuilder extends FieldMetadataVisitor<FieldNode> {
     selectionSet: switch (field.referencedObjectType) {
       final objectType? => SelectionSetNode(
         selections: [
-          if (objectType.keyField case final keyField?)
-            FieldNode(name: NameNode(value: keyField.name)),
+          for (final name in {
+            ?objectType.keyField?.name,
+            if (objectType.hasField('id')) 'id',
+          })
+            FieldNode(name: NameNode(value: name)),
           ...nestedSelections,
         ],
       ),
