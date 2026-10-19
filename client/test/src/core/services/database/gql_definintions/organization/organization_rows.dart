@@ -214,14 +214,17 @@ abstract final class OrganizationFixtures {
 class FakeOrganizationServer {
   final FakeAshTable services = FakeAshTable(
     typename: 'Service',
+    projectsSelections: true,
     listRoot: 'services',
   );
   final FakeAshTable classes = FakeAshTable(
     typename: 'Class',
+    projectsSelections: true,
     listRoot: 'classes',
   );
   final FakeAshTable groups = FakeAshTable(
     typename: 'Group',
+    projectsSelections: true,
     listRoot: 'groups',
   );
 

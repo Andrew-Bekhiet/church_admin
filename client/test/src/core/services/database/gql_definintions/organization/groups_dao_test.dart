@@ -16,6 +16,7 @@ void main() {
 
   FakeAshTable tableOf(List<Group> groups) => FakeAshTable(
     typename: 'Group',
+    projectsSelections: true,
     listRoot: 'groups',
     rows: groups.map(OrganizationRow.group),
   );
