@@ -8,6 +8,38 @@ type ExportDownloadLink {
   downloadUrl: String!
 }
 
+type ClaimedAccount {
+  uid: ID!
+}
+
+input NewPersonInput {
+  name: String!
+  gender: Boolean!
+}
+
+input AdminOnInput {
+  serviceWriteRelatedFamilies: Boolean
+  serviceStudyYear: Int
+  serviceGender: Boolean
+  serviceAllowRecordServantsAttendance: Boolean
+  serviceAllowRecordAttendance: Boolean
+  serviceAllowExport: Boolean
+  serviceAllowEdit: Boolean
+  serviceAdminOnUsers: Boolean
+  groupWriteRelatedFamilies: Boolean
+  groupAllowRecordServantsAttendance: Boolean
+  groupAllowRecordAttendance: Boolean
+  groupAllowExport: Boolean
+  groupAllowEdit: Boolean
+  groupAdminOnUsers: Boolean
+  areaAllowExport: Boolean
+  areaAllowEdit: Boolean
+  areaAdminOnUsers: Boolean
+  adminOnService: ID
+  adminOnGroup: ID
+  adminOnArea: ID
+}
+
 enum ServiceMembershipSortField {
   PERSON_ID
   SERVICE_ID
@@ -7419,6 +7451,76 @@ type UserPermission {
   user: User
 }
 
+input ApplyInvitationCodeInput {
+  code: String!
+}
+
+"The result of the :unapprove_user mutation"
+type UnapproveUserResult {
+  "The successful result of the mutation"
+  result: User
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :approve_user mutation"
+type ApproveUserResult {
+  "The successful result of the mutation"
+  result: User
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_user_permissions mutation"
+type UpdateUserPermissionsResult {
+  "The successful result of the mutation"
+  result: User
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateUserPermissionsInput {
+  permissions: [String!]
+  adminOn: [AdminOnInput!]
+}
+
+"The result of the :update_user mutation"
+type UpdateUserResult {
+  "The successful result of the mutation"
+  result: User
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  personId: ID
+}
+
+"The result of the :create_user mutation"
+type CreateUserResult {
+  "The successful result of the mutation"
+  result: User
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String
+  permissions: [String!]
+  adminOn: [AdminOnInput!]
+  personId: ID
+  newPerson: NewPersonInput
+  invitationExpiresAt: DateTime
+}
+
 enum UserSortField {
   UID
   NAME
@@ -7565,6 +7667,7 @@ input UserFilterInput {
   photoUpdatedAt: UserFilterPhotoUpdatedAt
   blurhash: UserFilterBlurhash
   authId: UserFilterAuthId
+  invitation: InvitationFilterInput
   person: PersonFilterInput
   scopeGrants: ScopeGrantFilterInput
   permissions: UserPermissionFilterInput
@@ -7584,6 +7687,7 @@ type User {
   photoUpdatedAt: DateTime
   blurhash: String
   authId: String
+  invitation: Invitation
   person: Person
   scopeGrants(
     "How to sort the records in the response"
@@ -7998,6 +8102,156 @@ type ScopeGrant {
   serviceAllowRecordServantsAttendance: Boolean
   groupAllowRecordAttendance: Boolean
   groupAllowRecordServantsAttendance: Boolean
+  user: User
+}
+
+"The result of the :update_invitation_expiry mutation"
+type UpdateInvitationExpiryResult {
+  "The successful result of the mutation"
+  result: Invitation
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateInvitationExpiryInput {
+  expiresAt: DateTime
+}
+
+"The result of the :create_invitation mutation"
+type CreateInvitationResult {
+  "The successful result of the mutation"
+  result: Invitation
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateInvitationInput {
+  userUid: ID!
+  expiresAt: DateTime
+}
+
+input InvitationFilterCode {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input InvitationFilterClaimedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input InvitationFilterExpiresAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input InvitationFilterCreatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input InvitationFilterCreatedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input InvitationFilterUserUid {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input InvitationFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input InvitationFilterInput {
+  and: [InvitationFilterInput!]
+  or: [InvitationFilterInput!]
+  not: [InvitationFilterInput!]
+  id: InvitationFilterId
+  userUid: InvitationFilterUserUid
+  createdBy: InvitationFilterCreatedBy
+  createdAt: InvitationFilterCreatedAt
+  expiresAt: InvitationFilterExpiresAt
+  claimedAt: InvitationFilterClaimedAt
+  code: InvitationFilterCode
+  creator: UserFilterInput
+  user: UserFilterInput
+}
+
+type Invitation {
+  id: ID!
+  userUid: ID!
+  createdBy: ID!
+  createdAt: DateTime!
+  expiresAt: DateTime!
+  claimedAt: DateTime
+  code: String!
+  creator: User
   user: User
 }
 
@@ -10556,6 +10810,16 @@ type RootMutationType {
   createQualification(input: CreateQualificationInput!): CreateQualificationResult
   createSchool(input: CreateSchoolInput!): CreateSchoolResult
   createTag(input: CreateTagInput!): CreateTagResult
+  createInvitation(input: CreateInvitationInput!): CreateInvitationResult
+  updateInvitationExpiry(id: ID!, input: UpdateInvitationExpiryInput): UpdateInvitationExpiryResult
+  createUser(input: CreateUserInput!): CreateUserResult
+  updateUser(id: ID!, input: UpdateUserInput): UpdateUserResult
+  updateUserPermissions(id: ID!, input: UpdateUserPermissionsInput): UpdateUserPermissionsResult
+  approveUser(id: ID!): ApproveUserResult
+  unapproveUser(id: ID!): UnapproveUserResult
+  applyInvitationCode(input: ApplyInvitationCodeInput!): ClaimedAccount!
+  tryClaimAccount: ClaimedAccount!
+  deleteMyAccount: Boolean!
   createDistrict(input: CreateDistrictInput!): CreateDistrictResult
 }
 
