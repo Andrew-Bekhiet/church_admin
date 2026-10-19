@@ -1,0 +1,99 @@
+{
+  "attributes": [
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": "initially",
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "families_families_outer_family_id_fkey",
+        "on_delete": "delete",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "public",
+        "table": "families"
+      },
+      "scale": null,
+      "size": null,
+      "source": "parent_family_id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": "initially",
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "families_families_inner_family_id_fkey",
+        "on_delete": "delete",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "public",
+        "table": "families"
+      },
+      "scale": null,
+      "size": null,
+      "source": "child_family_id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"gen_random_uuid()\")",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": true,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "rel_id",
+      "type": "uuid"
+    }
+  ],
+  "base_filter": null,
+  "check_constraints": [],
+  "create_table_options": null,
+  "custom_indexes": [],
+  "custom_statements": [],
+  "has_create_action": false,
+  "hash": "38E80976367CF7EEE5547CCA1BBF54C8AE8C1F955E40F13C0E524D379C4B9A10",
+  "identities": [],
+  "multitenancy": {
+    "attribute": null,
+    "global": null,
+    "strategy": null
+  },
+  "repo": "Elixir.ChurchAdmin.Repo",
+  "schema": null,
+  "table": "families_families",
+  "temporal": null
+}

@@ -1,0 +1,60 @@
+{
+  "attributes": [
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"gen_random_uuid()\")",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": true,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "name",
+      "type": "text"
+    }
+  ],
+  "base_filter": null,
+  "check_constraints": [],
+  "create_table_options": null,
+  "custom_indexes": [],
+  "custom_statements": [],
+  "has_create_action": false,
+  "hash": "5BA393951D0E9AE042074AD19C6F34F14CAAEFF5481D21A3B65D9D3345C9BE38",
+  "identities": [
+    {
+      "all_tenants?": false,
+      "base_filter": null,
+      "index_name": "qualifications_name_key",
+      "keys": [
+        {
+          "type": "atom",
+          "value": "name"
+        }
+      ],
+      "name": "unique_name",
+      "nils_distinct?": true,
+      "where": null
+    }
+  ],
+  "multitenancy": {
+    "attribute": null,
+    "global": null,
+    "strategy": null
+  },
+  "repo": "Elixir.ChurchAdmin.Repo",
+  "schema": null,
+  "table": "qualifications",
+  "temporal": null
+}

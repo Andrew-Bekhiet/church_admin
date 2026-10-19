@@ -1,0 +1,33 @@
+{
+  "attributes": [
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"now()\")",
+      "generated?": true,
+      "precision": null,
+      "primary_key?": true,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "day",
+      "type": "date"
+    }
+  ],
+  "base_filter": null,
+  "check_constraints": [],
+  "create_table_options": null,
+  "custom_indexes": [],
+  "custom_statements": [],
+  "has_create_action": false,
+  "hash": "3C2E84B56053E205C8D78594E55C2968ABEB23907BFEFE5875777ECBA3187993",
+  "identities": [],
+  "multitenancy": {
+    "attribute": null,
+    "global": null,
+    "strategy": null
+  },
+  "repo": "Elixir.ChurchAdmin.Repo",
+  "schema": "history",
+  "table": "attendance_days",
+  "temporal": null
+}

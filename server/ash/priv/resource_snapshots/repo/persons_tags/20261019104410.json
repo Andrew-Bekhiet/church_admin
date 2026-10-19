@@ -1,0 +1,99 @@
+{
+  "attributes": [
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "persons_tags_person_id_fkey",
+        "on_delete": "delete",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "public",
+        "table": "persons"
+      },
+      "scale": null,
+      "size": null,
+      "source": "person_id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "nil",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": false,
+      "references": {
+        "deferrable": false,
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "index?": false,
+        "index_where": null,
+        "match_tenant?": false,
+        "match_type": null,
+        "match_with": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "persons_tags_tag_id_fkey",
+        "on_delete": "restrict",
+        "on_update": "restrict",
+        "primary_key?": true,
+        "schema": "public",
+        "table": "tags"
+      },
+      "scale": null,
+      "size": null,
+      "source": "tag_id",
+      "type": "uuid"
+    },
+    {
+      "allow_nil?": false,
+      "default": "fragment(\"gen_random_uuid()\")",
+      "generated?": false,
+      "precision": null,
+      "primary_key?": true,
+      "references": null,
+      "scale": null,
+      "size": null,
+      "source": "rel_id",
+      "type": "uuid"
+    }
+  ],
+  "base_filter": null,
+  "check_constraints": [],
+  "create_table_options": null,
+  "custom_indexes": [],
+  "custom_statements": [],
+  "has_create_action": false,
+  "hash": "E89DD955ACEDD23872F9C6CF290C26DE162CB7FB34FBB881A4E1E1876634D370",
+  "identities": [],
+  "multitenancy": {
+    "attribute": null,
+    "global": null,
+    "strategy": null
+  },
+  "repo": "Elixir.ChurchAdmin.Repo",
+  "schema": null,
+  "table": "persons_tags",
+  "temporal": null
+}
