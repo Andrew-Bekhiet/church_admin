@@ -1,4 +1,9 @@
 defmodule ChurchAdmin.Calculations.FullAddressTextTest do
+  @moduledoc """
+  Expected texts are the output of `address_full_address_text` over the same
+  inputs, captured before the function was dropped.
+  """
+
   use ChurchAdmin.DataCase, async: false
 
   alias ChurchAdmin.{DataCase, Factory}
@@ -7,32 +12,32 @@ defmodule ChurchAdmin.Calculations.FullAddressTextTest do
   require Ash.Query
 
   @cases [
-    %{},
-    %{house_code: "12"},
-    %{street: "شارع النيل"},
-    %{street: "الشارع الكبير"},
-    %{street: "شارع"},
-    %{street: "   "},
-    %{substreet_name: "شارع الهرم"},
-    %{substreet_name: "الشارع"},
-    %{district: "حي المعادي"},
-    %{district: "الحي الأول"},
-    %{district: "الحى الثاني"},
-    %{district: "حى"},
-    %{special_landmark: "بجوار المترو"},
-    %{storey_number: 0},
-    %{storey_number: 3},
-    %{apartment_number: 5},
-    %{storey_number: 0, apartment_number: 1},
-    %{
-      house_code: "7أ",
-      street: "شارع الجمهورية",
-      substreet_name: "شارع السلام",
-      district: "حي الزمالك",
-      special_landmark: "أمام الكنيسة",
-      storey_number: 12,
-      apartment_number: 34
-    }
+    {%{}, ""},
+    {%{house_code: "12"}, "12"},
+    {%{street: "شارع النيل"}, "ش النيل"},
+    {%{street: "الشارع الكبير"}, "ش الكبير"},
+    {%{street: "شارع"}, ""},
+    {%{street: "   "}, ""},
+    {%{substreet_name: "شارع الهرم"}, "متفرع من الهرم"},
+    {%{substreet_name: "الشارع"}, ""},
+    {%{district: "حي المعادي"}, "حي المعادي"},
+    {%{district: "الحي الأول"}, "حي الأول"},
+    {%{district: "الحى الثاني"}, "حي الثاني"},
+    {%{district: "حى"}, ""},
+    {%{special_landmark: "بجوار المترو"}, "بجوار المترو"},
+    {%{storey_number: 0}, "الدور الأرضي"},
+    {%{storey_number: 3}, "الدور 3"},
+    {%{apartment_number: 5}, "شقة 5"},
+    {%{storey_number: 0, apartment_number: 1}, "الدور الأرضي شقة 1"},
+    {%{
+       house_code: "7أ",
+       street: "شارع الجمهورية",
+       substreet_name: "شارع السلام",
+       district: "حي الزمالك",
+       special_landmark: "أمام الكنيسة",
+       storey_number: 12,
+       apartment_number: 34
+     }, "7أ ش الجمهورية متفرع من السلام حي الزمالك أمام الكنيسة الدور 12 شقة 34"}
   ]
 
   setup do
@@ -57,43 +62,49 @@ defmodule ChurchAdmin.Calculations.FullAddressTextTest do
     Factory.address!(attributes)
   end
 
-  defp sql_text(%Address{id: id}) do
-    %{rows: [[text]]} =
-      Ecto.Adapters.SQL.query!(
-        ChurchAdmin.Repo,
-        "select public.address_full_address_text(a) from public.addresses a where a.id = $1",
-        [Ecto.UUID.dump!(id)]
-      )
-
-    text
-  end
-
-  test "the calculation reproduces the SQL function for every address" do
-    for spec <- @cases do
+  test "the calculation reads as the SQL function did for every address" do
+    for {spec, expected} <- @cases do
       address = insert_address!(spec)
 
       assert Ash.load!(address, :full_address_text, authorize?: false).full_address_text ==
-               sql_text(address),
+               expected,
              "differs for #{inspect(spec)}"
     end
   end
 
-  test "sorting by the calculation orders as the SQL function does" do
-    addresses = for spec <- @cases, do: insert_address!(spec)
+  test "sorting by the calculation orders the texts as the database sorts text" do
+    for {spec, _expected} <- @cases, do: insert_address!(spec)
 
-    %{rows: sql_order} =
+    sorted_texts =
+      Address
+      |> Ash.Query.sort(:full_address_text)
+      |> Ash.Query.load(:full_address_text)
+      |> Ash.read!(authorize?: false, page: false)
+      |> Enum.map(& &1.full_address_text)
+
+    %{rows: rows} =
       Ecto.Adapters.SQL.query!(
         ChurchAdmin.Repo,
-        "select a.id from public.addresses a order by public.address_full_address_text(a), a.id"
+        "select t from unnest($1::text[]) as t order by t",
+        [sorted_texts]
       )
 
-    ash_order =
-      Address
-      |> Ash.Query.sort(full_address_text: :asc, id: :asc)
-      |> Ash.read!(authorize?: false, page: false)
-      |> Enum.map(&Ecto.UUID.dump!(&1.id))
+    assert length(sorted_texts) == length(@cases)
+    assert sorted_texts == Enum.map(rows, fn [text] -> text end)
+  end
 
-    assert length(addresses) == length(ash_order)
-    assert ash_order == Enum.map(sql_order, fn [id] -> id end)
+  test "filtering by the calculation finds the addresses whose line contains a word" do
+    for {spec, _expected} <- @cases, do: insert_address!(spec)
+
+    texts =
+      Address
+      |> Ash.Query.filter(ilike(full_address_text, "%الزمالك%"))
+      |> Ash.Query.load(:full_address_text)
+      |> Ash.read!(authorize?: false, page: false)
+      |> Enum.map(& &1.full_address_text)
+
+    assert texts == [
+             "7أ ش الجمهورية متفرع من السلام حي الزمالك أمام الكنيسة الدور 12 شقة 34"
+           ]
   end
 end
