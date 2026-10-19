@@ -1,11 +1,3 @@
-default history.attendance_history.recorded_by
-default history.call_history.recorded_by
-default history.call_history.user_role
-default history.confession_history.recorded_by
-default history.edit_history.recorded_by
-default history.edit_history.user_role
-default history.kodas_history.recorded_by
-default history.visit_history.recorded_by
 function auth.sync_users_permissions_by_entity_id_cache()
 function auth.user_can_edit_area(areas, json)
 function auth.user_can_edit_class(classes, json)

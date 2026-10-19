@@ -34,9 +34,7 @@ defmodule ChurchAdmin.Activity.Visit do
     repo ChurchAdmin.Repo
     migration_types table: :name
 
-    migration_defaults time: ~S[fragment("now()")],
-                       recorded_by:
-                         ~S[fragment("(((current_setting('hasura.user'::text, true))::json ->> 'x-hasura-user-id'::text))::uuid")]
+    migration_defaults time: ~S[fragment("now()")]
 
     references do
       reference :user,
