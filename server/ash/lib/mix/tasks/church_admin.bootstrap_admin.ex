@@ -14,6 +14,7 @@ defmodule Mix.Tasks.ChurchAdmin.BootstrapAdmin do
   def run(args) do
     {opts, _rest} = OptionParser.parse!(args, strict: [email: :string, force: :boolean])
     email = opts[:email] || Mix.raise("--email is required")
+    Mix.Task.run("app.config")
 
     case ChurchAdmin.Release.bootstrap_admin(email, force?: Keyword.get(opts, :force, false)) do
       {:ok, user} ->
