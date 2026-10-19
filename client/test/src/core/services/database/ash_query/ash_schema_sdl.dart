@@ -14,8 +14,9 @@ class AshSchemaSdl {
 
   bool get hasPersonType => objectTypes.contains('Person');
 
-  factory AshSchemaSdl.read() =>
-      AshSchemaSdl.parse(File(path).readAsStringSync());
+  factory AshSchemaSdl.read() => AshSchemaSdl.parse(readSource());
+
+  static String readSource() => File(path).readAsStringSync();
 
   factory AshSchemaSdl.parse(String sdl) {
     final definitions = parseString(sdl).definitions;

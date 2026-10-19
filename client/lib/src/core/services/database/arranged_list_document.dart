@@ -6,7 +6,10 @@ import 'package:gql/ast.dart';
 /// (an Ash keyset page sorts on the server), each identifiable by the cache
 /// exactly like generated selections.
 class ArrangedListDocument {
-  static const _selectionBuilder = NestedSelectionBuilder();
+  static const _hasuraSelectionBuilder = NestedSelectionBuilder();
+  static const _ashSelectionBuilder = NestedSelectionBuilder(
+    selectsRecordedByInfoAsAshRelationship: true,
+  );
 
   final DocumentNode listDocument;
 
@@ -24,9 +27,12 @@ class ArrangedListDocument {
     ];
     if (selectedFields.isEmpty) return listDocument;
 
+    final selectionBuilder = isKeysetPage
+        ? _ashSelectionBuilder
+        : _hasuraSelectionBuilder;
     final selections = selectedFields
         .map(
-          (field) => transform(_selectionBuilder.visit(field), [
+          (field) => transform(selectionBuilder.visit(field), [
             const TypenameAdder(),
           ]),
         )

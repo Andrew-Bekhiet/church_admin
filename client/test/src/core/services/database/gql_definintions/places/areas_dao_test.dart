@@ -51,6 +51,35 @@ void main() {
       );
     });
 
+    test('an area listed by its last visit shows the time of that visit', () {
+      final table = FakeAshTable(
+        typename: 'Area',
+        listRoot: 'areas',
+        rows: [shubra, newCairo],
+        projectsSelections: true,
+      );
+      final backend = FakeAshBackend([table]);
+      addTearDown(backend.dispose);
+
+      final listed = fakeAsync((async) {
+        final stream = backend.db.areas.streamAll(
+          orderBy: Stream.value([OrderBy(field: AreaFields().lastVisit)]),
+        );
+        List<Area>? emitted;
+        final subscription = stream.listen((areas) => emitted = areas);
+        async.elapse(FakeAshBackend.settleTime);
+        unawaited(subscription.cancel());
+        unawaited(stream.dispose());
+
+        return emitted!;
+      });
+
+      expect(
+        listed.singleWhere((area) => area.id == shubra.id).lastVisit?.time,
+        shubra.lastVisit?.time,
+      );
+    });
+
     test('filtering by colour lists only the areas of that colour', () {
       expect(
         listedBy(
