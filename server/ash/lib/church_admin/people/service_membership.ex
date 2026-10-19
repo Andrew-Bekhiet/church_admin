@@ -7,6 +7,7 @@ defmodule ChurchAdmin.People.ServiceMembership do
 
   alias ChurchAdmin.Organization.Service
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Person
 
   graphql do
@@ -43,6 +44,8 @@ defmodule ChurchAdmin.People.ServiceMembership do
 
     create :join_service do
       accept [:person_id, :service_id]
+
+      change {RecordEdit, record_id: [{"services", :service_id}, {"persons", :person_id}]}
     end
 
     destroy :leave_service

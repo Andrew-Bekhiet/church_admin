@@ -6,7 +6,10 @@ defmodule ChurchAdmin.Places.Changes.ApplyOwnerAddress do
   address is written without authorization: the command's own policy covers
   the record it belongs to.
 
-  `owner` names the address column that holds the record's id.
+  `owner` names the address column that holds the owner's id, and
+  `owner_id` the written record's attribute that holds it (default `:id`;
+  a person writes its family's address with `owner: :family_id, owner_id:
+  :family_id`).
 
       change {ApplyOwnerAddress, owner: :store_id}
   """
@@ -16,7 +19,10 @@ defmodule ChurchAdmin.Places.Changes.ApplyOwnerAddress do
   alias ChurchAdmin.Changes.AfterActionFailure
   alias ChurchAdmin.Places.Address
 
-  @options_schema [owner: [type: :atom, required: true]]
+  @options_schema [
+    owner: [type: :atom, required: true],
+    owner_id: [type: :atom, default: :id]
+  ]
 
   @impl true
   def init(opts) do
@@ -34,7 +40,12 @@ defmodule ChurchAdmin.Places.Changes.ApplyOwnerAddress do
 
       input ->
         Ash.Changeset.after_action(changeset, fn changeset, owner ->
-          case write_address(owner.id, opts[:owner], input, context.actor) do
+          case write_address(
+                 Map.fetch!(owner, opts[:owner_id]),
+                 opts[:owner],
+                 input,
+                 context.actor
+               ) do
             {:ok, _address} -> {:ok, owner}
             {:error, error} -> AfterActionFailure.roll_back(changeset.resource, error)
           end

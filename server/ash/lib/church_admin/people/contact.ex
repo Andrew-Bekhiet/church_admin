@@ -8,6 +8,13 @@ defmodule ChurchAdmin.People.Contact do
   alias ChurchAdmin.Authz.Checks.{InScope, System}
   alias ChurchAdmin.Catalog.PersonType
   alias ChurchAdmin.People.{Family, Person}
+
+  alias ChurchAdmin.People.Contact.Changes.{
+    ClaimForSoleFamilyMember,
+    KeepOneMainPerOwner,
+    MergeIntoSameOwnerPhone
+  }
+
   alias ChurchAdmin.Types.Text
 
   graphql do
@@ -56,6 +63,33 @@ defmodule ChurchAdmin.People.Contact do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :create do
+      description "Written only by the person and family commands, which authorize the whole write."
+      accept [:person_id, :family_id, :person_type_id, :label, :phone, :is_main_phone]
+      change ClaimForSoleFamilyMember
+      change KeepOneMainPerOwner
+      change MergeIntoSameOwnerPhone
+    end
+
+    update :update do
+      description "Written only by the person and family commands, which authorize the whole write."
+      accept [:label, :phone, :is_main_phone]
+      require_atomic? false
+      change KeepOneMainPerOwner
+      change set_attribute(:updated_at, &DateTime.utc_now/0)
+    end
+
+    update :claim do
+      description "Hands an unclaimed family contact to the family's sole member of its type."
+      accept [:person_id, :family_id, :person_type_id, :is_main_phone]
+      require_atomic? false
+      change set_attribute(:updated_at, &DateTime.utc_now/0)
+    end
+
+    destroy :destroy do
+      description "Written only by the person and family commands, which authorize the whole write."
+    end
   end
 
   policies do
@@ -65,6 +99,10 @@ defmodule ChurchAdmin.People.Contact do
 
     policy action_type(:read) do
       authorize_if {InScope, entity: :contact, access: :read}
+    end
+
+    policy action_type([:create, :update, :destroy]) do
+      forbid_if always()
     end
   end
 

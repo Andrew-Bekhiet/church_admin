@@ -66,6 +66,11 @@ defmodule ChurchAdmin.People.Family do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :create_for_person do
+      description "The family `createPerson` creates for a new person given an address and no family; the person command authorizes it."
+      accept [:name]
+    end
   end
 
   policies do

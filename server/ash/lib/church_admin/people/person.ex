@@ -2,11 +2,12 @@ defmodule ChurchAdmin.People.Person do
   use Ash.Resource,
     domain: ChurchAdmin.People,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource],
+    extensions: [AshGraphql.Resource, AshArchival.Resource],
     fragments: [
       ChurchAdmin.Authz.Fragments.ScopedEntity,
       ChurchAdmin.Archival.HideArchived,
-      ChurchAdmin.Files.RecordsPhoto
+      ChurchAdmin.Files.RecordsPhoto,
+      ChurchAdmin.People.Person.Commands
     ]
 
   alias ChurchAdmin.Accounts.User
@@ -60,6 +61,7 @@ defmodule ChurchAdmin.People.Person do
     ServiceMembership
   }
 
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.Places.{Address, Store}
   alias ChurchAdmin.Types.Text
 
@@ -108,6 +110,13 @@ defmodule ChurchAdmin.People.Person do
     queries do
       get :person, :read
       list :persons, :read
+    end
+
+    mutations do
+      create :create_person, :create_person
+      update :update_person, :update_person
+      update :record_person_spiritual_days, :record_person_spiritual_days
+      destroy :delete_person, :destroy
     end
   end
 
@@ -170,6 +179,12 @@ defmodule ChurchAdmin.People.Person do
     end
   end
 
+  archive do
+    attribute :deleted_at
+    base_filter?(true)
+    exclude_destroy_actions([:hard_destroy])
+  end
+
   actions do
     read :read do
       primary? true
@@ -207,6 +222,12 @@ defmodule ChurchAdmin.People.Person do
       accept [:uid]
       require_atomic? false
     end
+  end
+
+  changes do
+    change {RecordEdit, table: "persons"},
+      on: [:create, :update, :destroy],
+      where: [negate(action_is(:record_person_spiritual_days))]
   end
 
   policies do
