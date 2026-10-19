@@ -1,7 +1,8 @@
 defmodule ChurchAdmin.Authz.Scope.Meeting do
   @moduledoc """
-  Meetings an actor administers (`:admin`: any row of the retired
-  `auth.users_admin_on_meetings` view) or may record persons' or servants'
+  Meetings an actor administers (`:admin`: the meeting's service or group is
+  among the actor's grants, whatever they allow, or the actor records all
+  persons' or servants' attendance) or may record persons' or servants'
   attendance in, relative to `ChurchAdmin.Attendance.Meeting`. A study year
   or gender left NULL on either the grant or the meeting matches.
   """

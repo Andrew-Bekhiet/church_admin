@@ -1,7 +1,7 @@
 defmodule ChurchAdmin.Authz.Fragments.HistoryRecord do
   @moduledoc """
   For history rows that point at a record by (`table`, `record_id`): one
-  private relationship per table the permission view names, which
+  private relationship per scoped entity's table, which
   `ChurchAdmin.Authz.Scope.history_record/2` walks. Relationships, not
   unrelated `exists`, because AshSql gives an unrelated `exists` the source
   resource's schema (`history.persons`).

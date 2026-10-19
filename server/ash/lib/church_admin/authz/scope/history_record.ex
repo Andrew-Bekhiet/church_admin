@@ -2,10 +2,11 @@ defmodule ChurchAdmin.Authz.Scope.HistoryRecord do
   @moduledoc """
   History rows (`table`, `record_id`) whose record the actor may read or
   edit, relative to a resource built with
-  `ChurchAdmin.Authz.Fragments.HistoryRecord`. Only the tables
-  the permission view names count; rows of any other table (e.g.
-  `users_admin_on`) are visible to `read_all?` actors alone. A `users` row
-  matches the view's per-user rows only, never its `any-user` row.
+  `ChurchAdmin.Authz.Fragments.HistoryRecord`. Only the scoped entities'
+  tables and `users` count; rows of any other table (e.g. `users_admin_on`)
+  are visible to `read_all?` actors alone. A `users` row matches only users
+  the actor holds a per-user grant on, never through the global `any-user`
+  grant.
   """
 
   import Ash.Expr
