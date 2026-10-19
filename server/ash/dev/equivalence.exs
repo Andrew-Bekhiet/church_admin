@@ -1,5 +1,5 @@
-# Compares, per user and root, the primary keys (and edit flags) master's
-# Hasura returns with role `user` against what Ash reads with that user's
+# Compares, per user and root, the primary keys (and edit flags and computed
+# values) master's Hasura returns with role `user` against what Ash reads with that user's
 # actor, on the same database. Run through dev/equivalence.sh, which builds
 # that database and Hasura; directly:
 #
@@ -13,7 +13,7 @@
 Code.require_file("equivalence_roots.exs", __DIR__)
 
 defmodule ChurchAdmin.Equivalence do
-  alias ChurchAdmin.Authz.ActorLoader
+  alias ChurchAdmin.Authz.{Actor, ActorLoader}
   alias ChurchAdmin.Equivalence.Roots
 
   def run(argv) do
@@ -29,15 +29,20 @@ defmodule ChurchAdmin.Equivalence do
 
     uids = if uids == [], do: [nil | all_uids()], else: uids
 
-    roots = Roots.roots()
-    results = for uid <- uids, root <- roots, do: compare(hasura, uid, root)
+    {admin_roots, user_roots} = Enum.split_with(Roots.roots(), &Map.get(&1, :admin, false))
+
+    results =
+      for(uid <- uids, root <- user_roots, do: compare(hasura, uid, root)) ++
+        for root <- admin_roots, do: compare(hasura, :admin, root)
+
     mismatches = Enum.flat_map(results, &elem(&1, 1))
     compared = results |> Enum.map(&elem(&1, 0)) |> Enum.sum()
 
     write_csv(Keyword.fetch!(opts, :out), mismatches)
 
     IO.puts(
-      "#{length(uids)} users x #{length(roots)} roots, #{compared} rows visible through Hasura: " <>
+      "#{length(uids)} users x #{length(user_roots)} roots and #{length(admin_roots)} admin roots, " <>
+        "#{compared} rows visible through Hasura: " <>
         "#{length(mismatches)} mismatches"
     )
 
@@ -47,7 +52,7 @@ defmodule ChurchAdmin.Equivalence do
   defp compare(hasura, uid, root) do
     {hasura_rows, entity_ids} = hasura_rows(hasura, uid, root)
     ash_rows = ash_rows(uid, root, entity_ids)
-    user = uid || "anonymous"
+    user = if uid == :admin, do: "admin", else: uid || "anonymous"
 
     missing =
       for key <- Map.keys(hasura_rows) -- Map.keys(ash_rows),
@@ -57,13 +62,28 @@ defmodule ChurchAdmin.Equivalence do
       for key <- Map.keys(ash_rows) -- Map.keys(hasura_rows),
           do: [user, root.name, "extra_in_ash", key, ""]
 
-    flags =
-      for {key, hasura_flag} <- hasura_rows,
-          Map.has_key?(ash_rows, key),
-          ash_rows[key] != hasura_flag,
-          do: [user, root.name, "flag_differs", key, "hasura=#{hasura_flag} ash=#{ash_rows[key]}"]
+    both =
+      for {key, hasura_row} <- hasura_rows,
+          ash_row = Map.get(ash_rows, key),
+          do: {key, hasura_row, ash_row}
 
-    {map_size(hasura_rows), missing ++ extra ++ flags}
+    flags =
+      for {key, {hasura_flag, _}, {ash_flag, _}} <- both,
+          ash_flag != hasura_flag,
+          do: [user, root.name, "flag_differs", key, "hasura=#{hasura_flag} ash=#{ash_flag}"]
+
+    values =
+      for {key, {_, hasura_values}, {_, ash_values}} <- both,
+          ash_values != hasura_values,
+          do: [
+            user,
+            root.name,
+            "value_differs",
+            key,
+            "hasura=#{inspect(hasura_values)} ash=#{inspect(ash_values)}"
+          ]
+
+    {map_size(hasura_rows), missing ++ extra ++ flags ++ values}
   end
 
   defp hasura_rows(_hasura, nil, _root), do: {%{}, MapSet.new()}
@@ -83,7 +103,7 @@ defmodule ChurchAdmin.Equivalence do
 
       rows =
         for entity <- page_rows, nested_row = entity[via.path], into: rows do
-          {hasura_key(nested_row, root), false}
+          {hasura_key(nested_row, root), {false, []}}
         end
 
       if length(page_rows) < page, do: {:halt, {rows, ids}}, else: {:cont, {rows, ids}}
@@ -92,7 +112,10 @@ defmodule ChurchAdmin.Equivalence do
 
   defp hasura_rows(hasura, uid, root) do
     page = Map.get(root, :page, 100_000)
-    fields = Enum.map(root.key, &elem(&1, 0)) ++ List.wrap(flag_field(root))
+
+    fields =
+      Enum.map(root.key, &elem(&1, 0)) ++ List.wrap(flag_field(root)) ++ value_fields(root)
+
     {root_field, selection, order} = hasura_selection(root, fields)
 
     rows =
@@ -103,12 +126,15 @@ defmodule ChurchAdmin.Equivalence do
 
         page_rows = hasura_query!(hasura, uid, document)
         rows = unwrap_through(page_rows, root)
-        acc = Enum.into(rows, acc, &{hasura_key(&1, root), &1[flag_field(root)] == true})
+        acc = Enum.into(rows, acc, &{hasura_key(&1, root), hasura_row_value(&1, root)})
         if length(page_rows) < page, do: {:halt, acc}, else: {:cont, acc}
       end)
 
     {rows, nil}
   end
+
+  defp hasura_row_value(row, root),
+    do: {row[flag_field(root)] == true, Enum.map(value_fields(root), &row[&1])}
 
   defp hasura_selection(%{through: {parent, relationship}}, fields),
     do: {parent, "#{relationship} { #{Enum.join(fields, " ")} }", "{id: ASC}"}
@@ -125,14 +151,7 @@ defmodule ChurchAdmin.Equivalence do
 
   defp hasura_query!(hasura, uid, document) do
     response =
-      Req.post!(hasura.url,
-        json: %{query: document},
-        headers: [
-          {"x-hasura-admin-secret", hasura.secret},
-          {"x-hasura-role", "user"},
-          {"x-hasura-user-id", uid}
-        ]
-      )
+      Req.post!(hasura.url, json: %{query: document}, headers: hasura_headers(hasura, uid))
 
     case response.body do
       %{"data" => %{"rows" => rows}} -> rows
@@ -140,16 +159,28 @@ defmodule ChurchAdmin.Equivalence do
     end
   end
 
+  defp hasura_headers(hasura, :admin), do: [{"x-hasura-admin-secret", hasura.secret}]
+
+  defp hasura_headers(hasura, uid) do
+    [
+      {"x-hasura-admin-secret", hasura.secret},
+      {"x-hasura-role", "user"},
+      {"x-hasura-user-id", uid}
+    ]
+  end
+
+  defp ash_rows(:admin, root, entity_ids), do: ash_rows(Actor.system(), root, entity_ids)
+
   defp ash_rows(uid, root, entity_ids) do
-    actor = if uid, do: ActorLoader.load(uid)
+    actor = if is_binary(uid), do: ActorLoader.load(uid), else: uid
     attributes = Enum.map(root.key, &elem(&1, 1))
 
     root.resource
-    |> Ash.Query.load(List.wrap(flag_attribute(root)))
+    |> Ash.Query.load(List.wrap(flag_attribute(root)) ++ value_attributes(root))
     |> Ash.read!(actor: actor, page: false)
     |> Enum.filter(&of_entity_hasura_showed?(&1, root, entity_ids))
     |> Map.new(fn row ->
-      {Enum.map_join(attributes, "|", &key_part(Map.fetch!(row, &1))), ash_flag(row, root)}
+      {Enum.map_join(attributes, "|", &key_part(Map.fetch!(row, &1))), ash_row_value(row, root)}
     end)
   end
 
@@ -161,6 +192,9 @@ defmodule ChurchAdmin.Equivalence do
   end
 
   defp of_entity_hasura_showed?(_row, _root, _entity_ids), do: true
+
+  defp ash_row_value(row, root),
+    do: {ash_flag(row, root), Enum.map(value_attributes(root), &Map.fetch!(row, &1))}
 
   defp ash_flag(row, %{flag: {_, attribute}}), do: Map.fetch!(row, attribute) == true
   defp ash_flag(_row, _root), do: false
@@ -185,6 +219,9 @@ defmodule ChurchAdmin.Equivalence do
 
   defp flag_attribute(%{flag: {_, attribute}}), do: attribute
   defp flag_attribute(_root), do: nil
+
+  defp value_fields(root), do: root |> Map.get(:values, []) |> Enum.map(&elem(&1, 0))
+  defp value_attributes(root), do: root |> Map.get(:values, []) |> Enum.map(&elem(&1, 1))
 
   defp all_uids do
     %{rows: rows} = ChurchAdmin.Repo.query!("select uid::text from auth.users_data order by uid")

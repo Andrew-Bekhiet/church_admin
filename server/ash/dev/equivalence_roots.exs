@@ -43,7 +43,10 @@ defmodule ChurchAdmin.Equivalence.Roots do
   # `hasura` is master's root field (graphql-default naming); `key` lists
   # Hasura's camelCase key fields and the matching Ash attributes; `page` is
   # the role's select `limit`, which caps every Hasura page; `flag` is a
-  # per-row boolean compared with Hasura's NULL read as false; `through` names a
+  # per-row boolean compared with Hasura's NULL read as false; `values` lists
+  # computed fields compared as they are ({Hasura field, Ash calculation});
+  # `admin` roots are compared once, Hasura's admin role against the system
+  # actor, for fields role `user` cannot select; `through` names a
   # resource master's Hasura serves only through a relationship
   # (`query_root_fields: []`): {parent root field, relationship field}.
   def roots do
@@ -53,6 +56,7 @@ defmodule ChurchAdmin.Equivalence.Roots do
         hasura: "persons",
         resource: Person,
         key: [{"id", :id}],
+        values: [{"birthday", :birthday}],
         flag: {"userCanEdit", :user_can_edit}
       },
       %{
@@ -70,13 +74,28 @@ defmodule ChurchAdmin.Equivalence.Roots do
         page: 100
       },
       %{
+        name: "serviceMembershipsAsAdmin",
+        hasura: "personsServices",
+        resource: ServiceMembership,
+        key: [{"personId", :person_id}, {"serviceId", :service_id}],
+        values: [{"isOutsideServiceStudyYears", :is_outside_service_study_years}],
+        admin: true
+      },
+      %{
         name: "groupMemberships",
         hasura: "personsGroups",
         resource: GroupMembership,
         key: [{"personId", :person_id}, {"groupId", :group_id}],
         page: 100
       },
-      %{name: "addresses", hasura: "addresses", resource: Address, key: [{"id", :id}], page: 100},
+      %{
+        name: "addresses",
+        hasura: "addresses",
+        resource: Address,
+        key: [{"id", :id}],
+        values: [{"fullAddressText", :full_address_text}],
+        page: 100
+      },
       %{
         name: "services",
         hasura: "services",
