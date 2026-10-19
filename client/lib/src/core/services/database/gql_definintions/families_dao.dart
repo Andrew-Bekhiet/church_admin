@@ -6,11 +6,18 @@ import 'package:graphql/client.dart';
 
 class FamiliesDAO extends FullCRUDDAO<Family>
     with DataCheckFreeDocuments<Family> {
-  static final Input_FamilyContactFilterInput _familyAdminContacts =
+  static final Input_FamilyContactFilterInput _familyAdminOrUnclaimedContacts =
       Input_FamilyContactFilterInput(
-        personType: Input_PersonTypeFilterInput(
-          isFamilyAdmin: Input_PersonTypeFilterIsFamilyAdmin(eq: true),
-        ),
+        or: [
+          Input_FamilyContactFilterInput(
+            personType: Input_PersonTypeFilterInput(
+              isFamilyAdmin: Input_PersonTypeFilterIsFamilyAdmin(eq: true),
+            ),
+          ),
+          Input_FamilyContactFilterInput(
+            personId: Input_FamilyContactFilterPersonId(isNil: true),
+          ),
+        ],
       );
 
   static final List<Input_FamilyContactSortInput> _contactsOrder = [
@@ -47,7 +54,7 @@ class FamiliesDAO extends FullCRUDDAO<Family>
         document: documentNodeQueryfamily,
         varsConstructor: ({required id}) => Variables_Query_family(
           id: id,
-          contactsFilter: _familyAdminContacts,
+          contactsFilter: _familyAdminOrUnclaimedContacts,
           contactsSort: _contactsOrder,
         ).toJson(),
       );
