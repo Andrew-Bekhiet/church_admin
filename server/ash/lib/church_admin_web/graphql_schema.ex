@@ -13,4 +13,7 @@ defmodule ChurchAdminWeb.GraphqlSchema do
 
   query do
   end
+
+  mutation do
+  end
 end
