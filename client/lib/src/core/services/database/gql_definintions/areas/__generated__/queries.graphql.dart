@@ -1,4 +1,5 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../gql/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
 
 import 'package:gql/ast.dart';
@@ -906,7 +907,7 @@ const documentNodeQueryarea = DocumentNode(
     fragmentDefinitionAreaDetails,
     fragmentDefinitionAreaWithBounds,
     fragmentDefinitionArea,
-    fragmentDefinitionPlaceLatestEdit,
-    fragmentDefinitionPlaceUser,
+    fragmentDefinitionLatestEdit,
+    fragmentDefinitionUser,
   ],
 );

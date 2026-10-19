@@ -27,7 +27,7 @@ Reference port: `gql_definintions/metadata/` (commit `refactor(data): port the m
 6. **Models**: change only `fromJson`/converters where the SDL shape differs (§5 of `client-data-layer.md`). Never rename model fields.
 7. **Delete** the folder's `.gql` and `__generated__/*.gql.dart`, except a fragment still spread by an unported `.gql` (`grep -rn '\.\.\.StudyYear\b' lib --include='*.gql'`): keep it while `grep -rn '\.\.\.<Fragment>\b' lib --include='*.gql'` still finds a use, and keep `GqlTypePolicies` entries for Hasura type names still read.
 7b. A type with no `id` in the SDL is selected without an id and added to `GqlTypePolicies` as `_embedded`. `grep` the other `.gql` files before deleting a Hasura type's policy entry.
-7c. Shared Ash fragments (`fragment User on User`) live in `gql_definintions/gql/fragments.graphql`.
+7c. Shared Ash fragments live in `gql_definintions/gql/fragments.graphql` (`User`, `Address`, `LatestEdit`, `LatestVisit`, `LatestFatherVisit`, `LatestCall`, `LatestConfession`, `LatestKodas`) and `gql_definintions/contacts/fragments.graphql` (`Contact`, `FamilyContact`): spread them, never define a local copy.
 8. **Contract**: add the queryable names to `portedEntities` in `test/src/core/services/database/ash_query/schema_contract_test.dart`. A failure lists server gaps: report them; fix only client-side untruths (the metadata port marked StudyYear's synthesized `id` `isOrderable: false`).
 
 ## Pitfalls
@@ -44,9 +44,8 @@ Reference port: `gql_definintions/metadata/` (commit `refactor(data): port the m
 - A DAO with `DataCheckFreeDocuments` needs `initGlobalProviderContainer([featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo())])` in `setUp` and `resetGlobalProviderContainer` in `tearDown`.
 - A join-row `manyToMany` field breaks the Ash path: make it a plain `List<T>`. If feature code redirects through the old `*Rel` field, hand-write it in an `extensible: true` `XFields` class under the join relationship's server name.
 - `DateTime` fixtures must be local: `LocalDateTimeConverter` returns local times.
-- Name lane-local fragments of shared types distinctly (e.g. `PlaceUser`) until the shared fragments are unified.
 - Feature tests fake DAOs with `Fake implements XDAO`; they keep compiling as long as public signatures stay.
-- A `latestEdit`/`latestVisit` object has an `id`: select it, define the fragment once per lane (e.g. `OrgLatestEdit`) and spread the lane-local user fragment inside it.
+- A `latestEdit`/`latestVisit` object has an `id`: the shared `Latest*` fragments select it.
 - A list taking `filter`/`sort` on a nested field (`classes(filter: $classesFilter)`) needs those variables declared in the query and the field directly in the operation: the fake applies them only there, not inside fragment spreads, and ignores literal arguments.
 - Opt in to `FakeAshTable(projectsSelections: true)` in a port's tests, so a field the document forgets reads as missing.
 - A sort on a relation whose type's key field is not `id` (StudyYear's `order`) must also select `id`: `NestedSelectionBuilder` does this, and the type needs an Ash `TypePolicy(keyFields: …)`.
