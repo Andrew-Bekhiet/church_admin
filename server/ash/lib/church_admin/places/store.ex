@@ -2,17 +2,24 @@ defmodule ChurchAdmin.Places.Store do
   use Ash.Resource,
     domain: ChurchAdmin.Places,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource],
+    extensions: [AshGraphql.Resource, AshArchival.Resource],
     fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
-  alias ChurchAdmin.Authz.Checks.{InScope, System}
+  alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, RelatedInScope, System}
+  alias ChurchAdmin.Changes.StampActor
+  alias ChurchAdmin.Errors.Codes
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Places.Address
   alias ChurchAdmin.Places.Calculations.IntersectsGeography
+  alias ChurchAdmin.Places.Changes.ApplyOwnerAddress
+  alias ChurchAdmin.Places.Invariants
+  alias ChurchAdmin.Places.Types.AddressInput
   alias ChurchAdmin.Types.{Geography, Text}
+  alias ChurchAdmin.Validations.{InvariantHolds, ReferencesVisible}
 
   graphql do
     type :store
@@ -22,6 +29,12 @@ defmodule ChurchAdmin.Places.Store do
     queries do
       get :store, :read
       list :stores, :read
+    end
+
+    mutations do
+      create :create_store, :create_store
+      update :update_store, :update_store
+      destroy :delete_store, :destroy
     end
   end
 
@@ -36,6 +49,12 @@ defmodule ChurchAdmin.Places.Store do
     end
   end
 
+  archive do
+    attribute :deleted_at
+    base_filter?(true)
+    exclude_destroy_actions([:hard_destroy])
+  end
+
   actions do
     read :read do
       primary? true
@@ -46,6 +65,51 @@ defmodule ChurchAdmin.Places.Store do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :create_store do
+      accept [:name, :admin_family_id, :color]
+      argument :address, AddressInput
+
+      validate {ReferencesVisible, attribute: :admin_family_id, resource: Family},
+        where: changing(:admin_family_id)
+
+      change {ApplyOwnerAddress, owner: :store_id}
+
+      change {InvariantHolds,
+              code: Codes.store_admin_family_or_address_required(),
+              fields: [:admin_family_id],
+              violations: &Invariants.store_without_admin_family_or_address/1}
+    end
+
+    update :update_store do
+      require_atomic? false
+      accept [:name, :admin_family_id, :color]
+      argument :address, AddressInput
+
+      validate {ReferencesVisible, attribute: :admin_family_id, resource: Family},
+        where: changing(:admin_family_id)
+
+      change {ApplyOwnerAddress, owner: :store_id}
+
+      change {InvariantHolds,
+              code: Codes.store_admin_family_or_address_required(),
+              fields: [:admin_family_id],
+              violations: &Invariants.store_without_admin_family_or_address/1}
+    end
+
+    destroy :destroy do
+      primary? true
+      require_atomic? false
+      change {StampActor, attribute: :deleted_by}
+    end
+
+    destroy :hard_destroy do
+      require_atomic? false
+    end
+  end
+
+  changes do
+    change {RecordEdit, table: "stores"}, on: [:create, :update, :destroy]
   end
 
   policies do
@@ -55,6 +119,27 @@ defmodule ChurchAdmin.Places.Store do
 
     policy action_type(:read) do
       authorize_if {InScope, access: :read}
+    end
+
+    policy action(:create_store) do
+      authorize_if {InScope, access: :edit}
+    end
+
+    policy action(:destroy) do
+      authorize_if {HasPermission, name: "deleteData"}
+    end
+
+    policy action(:destroy) do
+      authorize_if {InScope, access: :edit}
+    end
+
+    policy action(:destroy) do
+      authorize_if {RelatedInScope, path: :admin_family, entity: :family, access: :edit}
+      authorize_if actor_attribute_equals(:write_all?, true)
+    end
+
+    policy action(:hard_destroy) do
+      forbid_if always()
     end
   end
 

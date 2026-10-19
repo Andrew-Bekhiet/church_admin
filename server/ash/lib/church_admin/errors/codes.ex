@@ -22,6 +22,7 @@ defmodule ChurchAdmin.Errors.Codes do
     relation/not-found
     validation/invalid
     service/name-taken service/default-meeting-mismatch
+    street/area-required address/street-outside-area store/admin-family-or-address-required
     attendance/already-recorded
     user/email-taken user/name-taken user/person-already-linked user/permission-not-grantable
     user/permission-levels-inconsistent user/duplicate-scope user/email-locked

@@ -32,6 +32,7 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Renderer do
     "public.users_preferences" => ~w(uid order_by_preferences great_feast_theme dark_theme)a,
     "public.areas" => ~w(id name bounds color)a,
     "public.streets" => ~w(id name line color deleted_at deleted_by)a,
+    "public.areas_streets" => ~w(area_id street_id)a,
     "public.families" =>
       ~w(id name notes status deceased_spouse_name marriage_date church_id deleted_at deleted_by)a,
     "public.addresses" =>
@@ -64,8 +65,9 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Renderer do
   def render(header, parts),
     do: IO.iodata_to_binary(["-- ", header, "\nBEGIN;\n", parts, "COMMIT;\n"])
 
-  @spec insert(String.t(), [map()]) :: iodata()
-  def insert(table, rows), do: Sql.insert(table, Map.fetch!(@columns, table), rows)
+  @spec insert(String.t(), [map()], keyword()) :: iodata()
+  def insert(table, rows, opts \\ []),
+    do: Sql.insert(table, Map.fetch!(@columns, table), rows, opts)
 
   @spec without_trigger(String.t(), String.t(), iodata()) :: iodata()
   @doc """

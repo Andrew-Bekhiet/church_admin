@@ -65,6 +65,12 @@ defmodule ChurchAdmin.Activity.Visit do
       change ApplyVisitSubject
       change {StampActor, attribute: :recorded_by}
     end
+
+    create :record do
+      public? false
+      accept [:table, :record_id, :time, :is_father_visit]
+      change {StampActor, attribute: :recorded_by}
+    end
   end
 
   policies do
