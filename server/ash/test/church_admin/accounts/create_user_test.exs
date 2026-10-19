@@ -13,12 +13,12 @@ defmodule ChurchAdmin.Accounts.CreateUserTest do
     {:ok, manager: manager, actor: actor_for(manager), service: service}
   end
 
-  defp create(actor, input) do
+  defp create(actor, input, opts \\ []) do
     name = Map.get(input, :name, "servant #{System.unique_integer([:positive])}")
 
     Accounts.create_user(
       Map.merge(%{name: name, new_person: %{name: String.trim(name), gender: false}}, input),
-      actor: actor
+      [actor: actor] ++ opts
     )
   end
 
@@ -200,7 +200,9 @@ defmodule ChurchAdmin.Accounts.CreateUserTest do
 
       assert :ok =
                commits?(actor, fn ->
-                 create(actor, %{admin_on: [%{admin_on_service: ctx.service.id}]})
+                 create(actor, %{admin_on: [%{admin_on_service: ctx.service.id}]},
+                   return_notifications?: true
+                 )
                end)
     end
 

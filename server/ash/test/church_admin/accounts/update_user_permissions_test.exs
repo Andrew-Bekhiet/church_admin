@@ -11,7 +11,8 @@ defmodule ChurchAdmin.Accounts.UpdateUserPermissionsTest do
     {:ok, manager: manager, actor: actor_for(manager), user: Factory.user!(), service: service}
   end
 
-  defp update(user, input, actor), do: Accounts.update_user_permissions(user, input, actor: actor)
+  defp update(user, input, actor, opts \\ []),
+    do: Accounts.update_user_permissions(user, input, [actor: actor] ++ opts)
 
   defp user_edits(user) do
     Edit
@@ -66,7 +67,9 @@ defmodule ChurchAdmin.Accounts.UpdateUserPermissionsTest do
 
         assert {:error, _} =
                  commits?(ctx.actor, fn ->
-                   update(user, %{permissions: permissions}, ctx.actor)
+                   update(user, %{permissions: permissions}, ctx.actor,
+                     return_notifications?: true
+                   )
                  end)
       end
 
@@ -75,7 +78,8 @@ defmodule ChurchAdmin.Accounts.UpdateUserPermissionsTest do
                  update(
                    ctx.user,
                    %{permissions: ~w(manageAllUsers writeAllData readAllData)},
-                   ctx.actor
+                   ctx.actor,
+                   return_notifications?: true
                  )
                end)
     end
@@ -85,7 +89,9 @@ defmodule ChurchAdmin.Accounts.UpdateUserPermissionsTest do
 
       assert :ok =
                commits?(ctx.actor, fn ->
-                 update(ctx.user, %{permissions: ~w(writeAllData)}, ctx.actor)
+                 update(ctx.user, %{permissions: ~w(writeAllData)}, ctx.actor,
+                   return_notifications?: true
+                 )
                end)
     end
   end

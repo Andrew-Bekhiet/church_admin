@@ -95,7 +95,7 @@ defmodule ChurchAdmin.AccountsCase do
       ChurchAdmin.Repo.HasuraSession.set_for_transaction(ChurchAdmin.Repo, actor)
 
       result =
-        with {:ok, _result} <- fun.(),
+        with {:ok, _result} <- ok_without_notifications(fun.()),
              {:ok, _fired} <- ChurchAdmin.Repo.query("set constraints all immediate") do
           :ok
         end
@@ -108,6 +108,9 @@ defmodule ChurchAdmin.AccountsCase do
       {:error, rolled_back_by_the_command} -> {:error, rolled_back_by_the_command}
     end
   end
+
+  defp ok_without_notifications({:ok, result, _rolled_back_notifications}), do: {:ok, result}
+  defp ok_without_notifications(result), do: result
 
   defp fire_fixtures_deferred_checks! do
     ChurchAdmin.DataCase.set_system_db_session()
