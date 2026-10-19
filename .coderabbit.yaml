@@ -29,6 +29,7 @@ reviews:
     - "!**/*.gql.dart"
     - "!**/*.graphql.dart"
     - "!client/lib/src/core/graphql/schema.graphql"
+    - "!client/lib/src/core/graphql/hasura_schema.gql"
 
   labeling_instructions:
     - label: "risk: high"

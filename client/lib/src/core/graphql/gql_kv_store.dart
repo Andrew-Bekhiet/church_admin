@@ -3,8 +3,9 @@ import 'package:graphql_flutter/graphql_flutter.dart' as gql;
 
 class GqlKvStore extends gql.Store {
   /// Bumped from 'GQLCache' to abandon the old layout where all query results
-  /// were deep-merged into one giant `Query` root entry.
-  static const int _currentVersion = 2;
+  /// were deep-merged into one giant `Query` root entry, and to 3 to abandon
+  /// entries shaped by the Hasura schema.
+  static const int _currentVersion = 3;
 
   static const String storeName = 'GQLCacheV$_currentVersion';
 
