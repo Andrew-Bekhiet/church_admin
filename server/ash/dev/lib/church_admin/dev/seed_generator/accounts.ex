@@ -23,7 +23,7 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Accounts do
       admin_on: grants,
       invitations: invitations(users, actor),
       fcm_tokens: fcm_tokens(users, spec),
-      themed_uids: themed_uids(users),
+      preferences: Enum.map(users, &preferences_row/1),
       actor_uid: actor.uid
     }
   end
@@ -124,10 +124,12 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Accounts do
     end
   end
 
-  defp themed_uids(users) do
+  defp preferences_row(user) do
     %{
-      dark: for(user <- users, rem(user.index, 3) == 0, do: user.uid),
-      light: for(user <- users, rem(user.index, 3) == 1, do: user.uid)
+      uid: user.uid,
+      order_by_preferences: {:json, ChurchAdmin.Accounts.DefaultPreferences.order_by()},
+      great_feast_theme: true,
+      dark_theme: Enum.at([true, false, nil], rem(user.index, 3))
     }
   end
 end
