@@ -39,7 +39,7 @@ defmodule ChurchAdmin.Files.PhotoTest do
       assert %{op: :photo_upload, uid: uid, params: params} = claims!(link)
       assert uid == user_id(world, :read_write)
 
-      assert params == %{subject: :persons, id: person.id, content_type: "image/jpeg"}
+      assert params == %{subject: :persons, id: person.id}
     end
 
     test "the link ends in a file name clients can show", %{world: world} do
@@ -116,13 +116,19 @@ defmodule ChurchAdmin.Files.PhotoTest do
       assert AccountsCase.codes(request_upload(world, :read_write, :users, own)) == ["not_found"]
     end
 
-    test "the content type is optional", %{world: world} do
-      assert {:ok, link} =
-               Files.request_photo_upload(:areas, record(world, :a1).id, nil,
-                 actor: actor(world, :read_write)
-               )
+    test "the content type is optional and never reaches the token", %{world: world} do
+      area = record(world, :a1)
 
-      assert %{params: %{content_type: nil}} = claims!(link)
+      for content_type <- [nil, "text/html"] do
+        assert {:ok, link} =
+                 Files.request_photo_upload(:areas, area.id, content_type,
+                   actor: actor(world, :read_write)
+                 )
+
+        assert %{params: %{subject: :areas, id: id} = params} = claims!(link)
+        assert id == area.id
+        refute Map.has_key?(params, :content_type)
+      end
     end
   end
 
@@ -135,7 +141,7 @@ defmodule ChurchAdmin.Files.PhotoTest do
       assert seconds_until(link) in 295..301
 
       assert %{op: :photo_download, params: params} = claims!(link)
-      assert params == %{subject: :persons, id: person.id, content_type: "image/png"}
+      assert params == %{subject: :persons, id: person.id}
     end
 
     # Public subjects are readable by every approved user, the rest by whoever reads the record.
