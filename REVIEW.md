@@ -1,10 +1,10 @@
 # Review guide
 
-How to review a change here. Automated reviewers load it through `knowledge_base.code_guidelines` in `.coderabbit.yaml`, together with the `AGENTS.md` files. `AGENTS.md` holds the conventions. This file says what to look for and how to report it. `client/REVIEW.md`, `server/hasura/REVIEW.md`, and `server/firebase/functions/REVIEW.md` add rules for those areas.
+How to review a change here. Automated reviewers load it through `knowledge_base.code_guidelines` in `.coderabbit.yaml`, together with the `AGENTS.md` files. `AGENTS.md` holds the conventions. This file says what to look for and how to report it. `client/REVIEW.md` adds rules for the client.
 
 ## What failure looks like here
 
-church_admin is a mobile-only Arabic RTL app with about 30 real users. Hasura migrations and Cloud Functions deploy on merge, straight onto production data. Rank these failures above everything else:
+church_admin is a mobile-only Arabic RTL app with about 30 real users. Backend migrations run against production data. Rank these failures above everything else:
 
 - A user can see or change data their permissions do not cover, or loses access they should keep.
 - An account identity is taken over, split in two, or lost: through sign-up, sign-in, an invite claim, account deletion, or someone registering the same email again.
@@ -12,7 +12,7 @@ church_admin is a mobile-only Arabic RTL app with about 30 real users. Hasura mi
 - An async path writes after dispose, lets an earlier in-flight result overwrite a later choice, or drops an error nobody handles.
 - A save reports success while part of the write was lost.
 - A test passes whether or not the behaviour holds.
-- Client and server ship out of step: a renamed callable, schema drift, or a generated file left stale.
+- Client and server ship out of step: a renamed GraphQL field or mutation, schema drift, or a generated file left stale.
 
 ## Severity
 
