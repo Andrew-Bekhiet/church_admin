@@ -342,6 +342,8 @@ defmodule ChurchAdmin.People.Person do
   end
 
   calculations do
+    calculate :birthday, :string, expr(fragment("to_char(?, 'MM-DD')", birthdate)), public?: true
+
     calculate :user_can_edit, :boolean, {UserCanEdit, entity: :person},
       allow_nil?: false,
       public?: true

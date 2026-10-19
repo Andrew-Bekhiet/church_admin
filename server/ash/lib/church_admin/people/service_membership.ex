@@ -67,6 +67,23 @@ defmodule ChurchAdmin.People.ServiceMembership do
     belongs_to :service, Service, define_attribute?: false, public?: true
   end
 
+  calculations do
+    calculate :is_outside_service_study_years,
+              :boolean,
+              expr(
+                not exists(
+                  person,
+                  is_nil(study_year_id) or
+                    (is_nil(parent(service.study_year_from_id)) and
+                       is_nil(parent(service.study_year_to_id))) or
+                    (parent(service.study_year_from_id) <= study_year_id and
+                       parent(service.study_year_to_id) >= study_year_id)
+                )
+              ),
+              allow_nil?: false,
+              public?: true
+  end
+
   identities do
     identity :unique_person_id_service_id, [:person_id, :service_id]
   end
