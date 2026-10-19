@@ -136,7 +136,9 @@ defmodule ChurchAdmin.Realtime.ReplicationStreamTest do
 
     assert hobby_ids == [second, first]
 
-    versions = for %{from: from, to: to} <- earlier ++ [batch], do: {from, to}
+    versions =
+      for %{from: from, to: to, changes: [_ | _]} <- earlier ++ [batch], do: {from, to}
+
     assert Enum.all?(versions, fn {from, to} -> to > from end)
   end
 
@@ -156,7 +158,9 @@ defmodule ChurchAdmin.Realtime.ReplicationStreamTest do
     )
 
     await_reset(b, head_before)
-    assert Broadcaster.head(b) > head_before
+    new_head = Broadcaster.head(b)
+    assert new_head > head_before
+    assert_receive {:realtime_changes, %{from: ^new_head, to: ^new_head, changes: []}}
 
     hobby = insert_hobby(writer)
     await_change(%{type: "Hobby", id: hobby, op: "insert"})

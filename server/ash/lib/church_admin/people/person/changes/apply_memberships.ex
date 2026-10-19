@@ -9,14 +9,19 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyMemberships do
   update opts out of `ChurchAdmin.Authz.Changes.RecheckAfterUpdate`, which
   would run after the removals.
 
-  The links are written without authorization (the command's policy covers
-  the person); every referenced id was checked visible beforehand. Once all
-  are written, the added links must fit
+  Service and group links are written as the actor through their own
+  policies, as Hasura authorized each link: adding one the actor may not add
+  fails the command, and removing one the actor may not remove leaves it in
+  place (Hasura's `delete … where` skipped it). Tag and hobby links are
+  written without authorization; the command's policy covers the person.
+  Every referenced id was checked visible beforehand. Once all are written,
+  the added links must fit
   (`ChurchAdmin.People.Person.Invariants.added_memberships_fit/3`).
   """
 
   use Ash.Resource.Change
 
+  alias ChurchAdmin.Authz.Checks.CreatedInCommand
   alias ChurchAdmin.Authz.Scope
   alias ChurchAdmin.Changes.AfterActionFailure
   alias ChurchAdmin.People.{GroupMembership, Person, PersonHobby, PersonTag, ServiceMembership}
@@ -30,6 +35,8 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyMemberships do
     {:tags, PersonTag, :tag_id, :add_tag, :remove_tag},
     {:hobbies, PersonHobby, :hobby_id, :add_hobby, :remove_hobby}
   ]
+
+  @authorized_per_link [ServiceMembership, GroupMembership]
 
   @impl true
   def change(changeset, _opts, context) do
@@ -53,7 +60,9 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyMemberships do
           not is_nil(ids),
           do: {list, Enum.uniq(ids), current_ids(list, person.id)}
 
-    with :ok <- each(wanted, &add(&1, person, actor)),
+    created_in_command = CreatedInCommand.carried(changeset.context)
+
+    with :ok <- each(wanted, &add(&1, person, actor, created_in_command)),
          :ok <- still_editable(changeset.action_type, person, actor),
          :ok <- each(wanted, &remove(&1, person, actor)) do
       Invariants.added_memberships_fit(
@@ -87,7 +96,12 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyMemberships do
     |> Enum.map(&Map.fetch!(&1, column))
   end
 
-  defp add({{_argument, resource, column, action, _remove}, wanted, current}, person, actor) do
+  defp add(
+         {{_argument, resource, column, action, _remove}, wanted, current},
+         person,
+         actor,
+         created_in_command
+       ) do
     case wanted -- current do
       [] ->
         :ok
@@ -97,7 +111,8 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyMemberships do
         |> Enum.map(&%{:person_id => person.id, column => &1})
         |> Ash.bulk_create(resource, action,
           actor: actor,
-          authorize?: false,
+          authorize?: resource in @authorized_per_link,
+          context: created_in_command,
           return_errors?: true,
           stop_on_error?: true
         )
@@ -114,16 +129,25 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyMemberships do
         resource
         |> Ash.Query.filter(person_id == ^person.id)
         |> Ash.Query.do_filter([{column, [in: ids]}])
-        |> Ash.bulk_destroy(action, %{},
-          actor: actor,
-          authorize?: false,
-          strategy: [:stream],
-          return_errors?: true,
-          stop_on_error?: true
-        )
+        |> Ash.bulk_destroy(action, %{}, [actor: actor] ++ removal_options(resource))
         |> bulk_result()
+        |> skip_when_none_removable()
     end
   end
+
+  defp removal_options(resource) when resource in @authorized_per_link,
+    do: [
+      authorize_query?: false,
+      strategy: [:atomic],
+      return_errors?: true,
+      rollback_on_error?: false
+    ]
+
+  defp removal_options(_resource),
+    do: [authorize?: false, strategy: [:stream], return_errors?: true, stop_on_error?: true]
+
+  defp skip_when_none_removable({:error, %Ash.Error.Forbidden{}}), do: :ok
+  defp skip_when_none_removable(result), do: result
 
   defp still_editable(:update, person, actor) do
     scope = Scope.person(actor, :edit)

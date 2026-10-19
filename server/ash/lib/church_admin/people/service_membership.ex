@@ -6,7 +6,7 @@ defmodule ChurchAdmin.People.ServiceMembership do
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Organization.Service
-  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
+  alias ChurchAdmin.Authz.Checks.{CreatedInCommand, RelatedInScope, System}
   alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Person
 
@@ -62,6 +62,19 @@ defmodule ChurchAdmin.People.ServiceMembership do
 
     policy action_type(:read) do
       authorize_if {RelatedInScope, path: :service, entity: :service, access: :read}
+    end
+
+    policy action_type(:create) do
+      authorize_if {RelatedInScope, path: :person, entity: :person, access: :edit}
+      forbid_unless {CreatedInCommand, attribute: :person_id, kind: :person}
+      authorize_if {RelatedInScope, path: :service, entity: :service, access: :edit}
+    end
+
+    policy action_type(:destroy) do
+      authorize_if actor_attribute_equals(:write_all?, true)
+      forbid_unless {RelatedInScope, path: :service, entity: :service, access: :edit}
+      authorize_if {RelatedInScope, path: :person, entity: :person, access: :edit}
+      authorize_if expr(is_outside_service_study_years)
     end
   end
 

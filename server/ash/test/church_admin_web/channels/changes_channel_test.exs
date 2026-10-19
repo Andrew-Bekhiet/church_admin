@@ -3,6 +3,7 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
 
   import Phoenix.ChannelTest
 
+  alias ChurchAdmin.Factory
   alias ChurchAdmin.FirebaseTokens
   alias ChurchAdmin.Realtime.Broadcaster
   alias ChurchAdmin.Realtime.RowChange
@@ -12,14 +13,23 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
   @endpoint ChurchAdminWeb.Endpoint
   @start 1_000
 
-  setup do
+  setup tags do
+    ChurchAdmin.DataCase.setup_sandbox(tags)
     Broadcaster.reset(@start)
     Phoenix.PubSub.subscribe(ChurchAdmin.PubSub, Broadcaster.topic())
-    {:ok, socket} = connect(ChangesSocket, %{"token" => valid_token()})
+    {:ok, socket} = connect(ChangesSocket, %{"token" => approved_user_token()})
     {:ok, socket: socket}
   end
 
-  defp valid_token, do: FirebaseTokens.valid_claims() |> FirebaseTokens.unsigned()
+  defp approved_user_token(claims \\ %{}) do
+    user = Factory.user!()
+    Factory.permissions!(user, ~w(approved))
+
+    %{"x-hasura-user-id" => user.uid}
+    |> Map.merge(claims)
+    |> FirebaseTokens.valid_claims()
+    |> FirebaseTokens.unsigned()
+  end
 
   defp broadcast_hobby_change(commit_lsn) do
     row = %{"id" => Ash.UUID.generate()}
@@ -92,5 +102,59 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
 
     send(channel.channel_pid, {:realtime_changes, first})
     refute_push "changes", _payload
+  end
+
+  describe "when the replication stream restarts" do
+    @new_head 5_000
+
+    test "a joined channel is told at once, from the new head", %{socket: socket} do
+      {:ok, _reply, _channel} = join_since(socket, "1000")
+
+      :ok = Broadcaster.reset(@new_head)
+
+      assert_push "changes", %{from: "5000", to: "5000", changes: []}
+    end
+
+    test "rejoining from the last version seen asks for a full refetch", %{socket: socket} do
+      {:ok, _reply, _channel} = join_since(socket, "1000")
+      broadcast_hobby_change(1_010)
+      assert_push "changes", %{to: "1010"}
+
+      :ok = Broadcaster.reset(@new_head)
+      assert_push "changes", %{from: "5000", changes: []}
+
+      assert {:ok, %{version: "5000", complete: false}, _socket} = join_since(socket, "1010")
+    end
+
+    test "joining at the new head is complete", %{socket: socket} do
+      :ok = Broadcaster.reset(@new_head)
+
+      assert {:ok, %{version: "5000", complete: true}, _socket} = join_since(socket, "5000")
+    end
+  end
+
+  describe "the token's lifetime" do
+    test "the transport is closed when the token expires" do
+      Process.flag(:trap_exit, true)
+      expires_at = System.os_time(:second) + 2
+
+      {:ok, socket} =
+        connect(ChangesSocket, %{"token" => approved_user_token(%{"exp" => expires_at})})
+
+      {:ok, _reply, _channel} = join_since(socket, "1000")
+
+      assert_receive %Phoenix.Socket.Broadcast{event: "disconnect"}, 3_500
+    end
+
+    test "a channel joined with an expired token is refused" do
+      expires_at = System.os_time(:second) + 1
+
+      {:ok, socket} =
+        connect(ChangesSocket, %{"token" => approved_user_token(%{"exp" => expires_at})})
+
+      Process.sleep(1_100)
+
+      assert {:error, %{reason: "token_expired"}} = join_since(socket, "1000")
+    end
   end
 end
