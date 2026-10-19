@@ -38,6 +38,8 @@ defmodule ChurchAdmin.Realtime.Dependencies do
       Activity.Confession => [:person],
       Activity.Kodas => [:person],
       Attendance.AttendanceRecord => [:person],
+      Attendance.Meeting => [:service, :group],
+      ScopeGrant => [:service, :group],
       DataQuality.Override => [:family]
     }
   end

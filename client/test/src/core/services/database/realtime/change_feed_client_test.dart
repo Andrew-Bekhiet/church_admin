@@ -23,17 +23,21 @@ void main() {
     FakeAsync async, {
     JoinReply Function(String? since)? replyToJoin,
     AuthLinkCredentials? initialCredentials = signedIn,
+    void Function(FakeChangeFeedServer server)? prepareServer,
   }) {
     final server = FakeChangeFeedServer(
       replyToJoin: replyToJoin ?? alwaysReplayable,
     );
+    prepareServer?.call(server);
     final credentials = BehaviorSubject<AuthLinkCredentials?>.seeded(
       initialCredentials,
     );
     addTearDown(credentials.close);
+    final idTokens = _IdTokens();
     final client = ChangeFeedClient(
       socketUrl: Uri.parse('ws://localhost:4000/socket/websocket'),
       credentials: credentials,
+      idToken: idTokens.call,
       webSocketChannelFactory: server.connect,
     );
     final events = <ChangeFeedEvent>[];
@@ -45,6 +49,7 @@ void main() {
       server: server,
       events: events,
       credentials: credentials,
+      idTokens: idTokens,
     );
   }
 
@@ -125,32 +130,78 @@ void main() {
     });
   });
 
-  test(
-    'a reconnect rejoins from the last version with the refreshed token',
-    () {
-      fakeAsync((async) {
-        final feed = startFeed(async);
+  test('a reconnect rejoins from the last version with a fresh token', () {
+    fakeAsync((async) {
+      final feed = startFeed(async);
 
-        feed.server.push(from: 'v1', to: 'v2', changes: [personChange]);
-        async.elapse(const Duration(milliseconds: 10));
-        feed.credentials.add(
-          const AuthLinkCredentials(
-            uid: 'firebaseUid',
-            hasuraUserId: 'currentUserId',
-            idToken: 'refreshedToken',
-          ),
-        );
-        async.elapse(const Duration(milliseconds: 10));
-        unawaited(feed.server.dropConnection());
-        async.elapse(const Duration(seconds: 5));
+      feed.server.push(from: 'v1', to: 'v2', changes: [personChange]);
+      async.elapse(const Duration(milliseconds: 10));
+      unawaited(feed.server.dropConnection());
+      async.elapse(const Duration(seconds: 5));
 
-        expect(feed.server.connectedTokens, ['firstToken', 'refreshedToken']);
-        expect(feed.server.joinedSince, [null, 'v2']);
+      expect(feed.server.connectedTokens, ['token-1', 'token-2']);
+      expect(feed.server.joinedSince, [null, 'v2']);
 
-        tearDownFeed(feed);
-      });
-    },
-  );
+      tearDownFeed(feed);
+    });
+  });
+
+  test('a join refused for an expired token reconnects with a refreshed '
+      'token', () {
+    fakeAsync((async) {
+      final feed = startFeed(
+        async,
+        prepareServer: (server) => server.expiredTokens.add('token-1'),
+      );
+      async.elapse(const Duration(seconds: 5));
+
+      expect(feed.idTokens.forceRefreshes, [false, true]);
+      expect(feed.server.connectedTokens, ['token-1', 'token-2']);
+      expect(feed.events, [const ResyncRequired()]);
+
+      tearDownFeed(feed);
+    });
+  });
+
+  test('a refused connection backs off instead of retrying at once', () {
+    fakeAsync((async) {
+      final feed = startFeed(
+        async,
+        prepareServer: (server) => server.refuseConnections = true,
+      );
+      async.elapse(const Duration(minutes: 1));
+
+      expect(feed.server.connectedUris.length, inInclusiveRange(2, 8));
+      expect(feed.events, isEmpty);
+
+      tearDownFeed(feed);
+    });
+  });
+
+  test('a refused connection retries as soon as the auth state changes', () {
+    fakeAsync((async) {
+      final feed = startFeed(
+        async,
+        prepareServer: (server) => server.refuseConnections = true,
+      );
+      async.elapse(const Duration(seconds: 20));
+
+      feed.server.refuseConnections = false;
+      feed.credentials.add(
+        const AuthLinkCredentials(
+          uid: 'firebaseUid',
+          hasuraUserId: 'currentUserId',
+          idToken: 'approvedToken',
+        ),
+      );
+      async.elapse(const Duration(seconds: 2));
+
+      expect(feed.server.isConnected, isTrue);
+      expect(feed.events, [const ResyncRequired()]);
+
+      tearDownFeed(feed);
+    });
+  });
 
   test('a permission change of the current user asks for a full resync', () {
     fakeAsync((async) {
@@ -223,7 +274,7 @@ void main() {
       );
       async.elapse(const Duration(seconds: 1));
 
-      expect(feed.server.connectedTokens, ['firstToken', 'secondUserToken']);
+      expect(feed.server.connectedTokens, ['token-1', 'token-2']);
       expect(feed.server.joinedSince, [null, null]);
       expect(feed.events, [const ResyncRequired(), const ResyncRequired()]);
 
@@ -263,4 +314,17 @@ typedef _Feed = ({
   FakeChangeFeedServer server,
   List<ChangeFeedEvent> events,
   BehaviorSubject<AuthLinkCredentials?> credentials,
+  _IdTokens idTokens,
 });
+
+/// Hands out a new token on every request, as Firebase does once the
+/// previous one expires.
+class _IdTokens {
+  final List<bool> forceRefreshes = [];
+
+  Future<String?> call({bool forceRefresh = false}) async {
+    forceRefreshes.add(forceRefresh);
+
+    return 'token-${forceRefreshes.length}';
+  }
+}

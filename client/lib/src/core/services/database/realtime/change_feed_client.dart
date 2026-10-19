@@ -6,16 +6,23 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 typedef ChangeFeedIdentity = ({String uid, String? userId});
 
+typedef IdTokenFetcher = Future<String?> Function({bool forceRefresh});
+
 /// The client of the server's `changes` channel. It connects while
 /// [events] has a listener and someone is signed in, and turns the
-/// channel's versioned pushes into [ChangeFeedEvent]s.
+/// channel's versioned pushes into [ChangeFeedEvent]s. Every connect asks
+/// for a current ID token; a join refused for an expired token reconnects
+/// with a refreshed one. A refused connect backs off between attempts and
+/// retries at once when the credentials change.
 class ChangeFeedClient {
   static const topic = 'changes';
   static const changesEvent = 'changes';
+  static const tokenExpiredReason = 'token_expired';
   static const Duration defaultRejoinDelay = Duration(seconds: 5);
 
   final Uri socketUrl;
   final Stream<AuthLinkCredentials?> _credentials;
+  final IdTokenFetcher _idToken;
   final WebSocketChannel Function(Uri uri)? _webSocketChannelFactory;
   final Duration rejoinDelay;
 
@@ -23,10 +30,11 @@ class ChangeFeedClient {
       StreamController.broadcast(onListen: _start, onCancel: _stop);
 
   StreamSubscription<AuthLinkCredentials?>? _credentialsSubscription;
-  String? _latestToken;
+  bool _refreshTokenOnNextConnect = false;
 
   PhoenixSocket? _socket;
   ChangeFeedIdentity? _socketIdentity;
+  bool _socketFailedToOpen = false;
   List<StreamSubscription<Object?>> _socketSubscriptions = [];
 
   PhoenixChannel? _channel;
@@ -43,6 +51,7 @@ class ChangeFeedClient {
   ChangeFeedClient({
     required this.socketUrl,
     required this._credentials,
+    required this._idToken,
     this.rejoinDelay = defaultRejoinDelay,
     this._webSocketChannelFactory,
   });
@@ -57,7 +66,6 @@ class ChangeFeedClient {
   }
 
   void _onCredentials(AuthLinkCredentials? credentials) {
-    _latestToken = credentials?.idToken;
     final identity = switch (credentials) {
       AuthLinkCredentials(:final uid, :final hasuraUserId) => (
         uid: uid,
@@ -65,7 +73,11 @@ class ChangeFeedClient {
       ),
       null => null,
     };
-    if (_socket != null && identity == _socketIdentity) return;
+    if (_socket != null &&
+        identity == _socketIdentity &&
+        !_socketFailedToOpen) {
+      return;
+    }
 
     _disconnect();
     if (identity != _lastSeenVersionOwner) {
@@ -78,18 +90,37 @@ class ChangeFeedClient {
   void _connect(ChangeFeedIdentity identity) {
     final socket = PhoenixSocket(
       socketUrl.toString(),
-      socketOptions: PhoenixSocketOptions(
-        dynamicParams: () async => {'token': _latestToken ?? ''},
-      ),
+      socketOptions: PhoenixSocketOptions(dynamicParams: _connectParams),
       webSocketChannelFactory: _webSocketChannelFactory,
     );
     _socket = socket;
     _socketIdentity = identity;
+    _socketFailedToOpen = false;
     _socketSubscriptions = [
-      socket.openStream.listen((_) => _join()),
+      socket.openStream.listen((_) {
+        _socketFailedToOpen = false;
+        _join();
+      }),
       socket.closeStream.listen((_) => _forgetChannel(leave: false)),
+      socket.errorStream.listen((_) => _socketFailedToOpen = true),
     ];
     unawaited(socket.connect());
+  }
+
+  Future<Map<String, String>> _connectParams() async {
+    final forceRefresh = _refreshTokenOnNextConnect;
+    _refreshTokenOnNextConnect = false;
+
+    return {'token': await _idToken(forceRefresh: forceRefresh) ?? ''};
+  }
+
+  void _reconnectWithRefreshedToken() {
+    final identity = _socketIdentity;
+    _disconnect();
+    if (identity == null) return;
+
+    _refreshTokenOnNextConnect = true;
+    _connect(identity);
   }
 
   void _disconnect() {
@@ -140,6 +171,14 @@ class ChangeFeedClient {
       final pushes = [..._pushesBeforeJoinReply];
       _pushesBeforeJoinReply.clear();
       pushes.forEach(_onPush);
+
+      return;
+    }
+    if (reply case PushResponse(
+      isError: true,
+      response: {'reason': tokenExpiredReason},
+    )) {
+      _reconnectWithRefreshedToken();
 
       return;
     }

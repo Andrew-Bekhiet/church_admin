@@ -201,4 +201,70 @@ void main() {
       harness.dispose();
     });
   });
+  test('a nested type shown on an earlier page still refreshes the list '
+      'after a later page loads', () {
+    fakeAsync((async) {
+      const tagType = 'Tag';
+      final rows = rowsNamed(pageSize);
+      var windowLoads = 0;
+      final harness = LiveQueryHarness(const []);
+      final stream = KeysetPaginatedStream<AshTestItem, void>(
+        registry: harness.registry,
+        parametersStream: Stream.value(null),
+        pageSize: pageSize,
+        fetchChunk: (_, chunk) async {
+          final isWindowStart = chunk.after == null;
+          if (isWindowStart) windowLoads++;
+          final items = isWindowStart ? rows : const <AshTestItem>[];
+
+          return KeysetChunk(
+            page: KeysetPage(items: items, endKeyset: items.lastOrNull?.id),
+            data: {
+              'items': AshResponses.page([
+                for (final item in items)
+                  {
+                    ...item.toJson(),
+                    'tag': {'__typename': tagType, 'id': 'tag-${item.id}'},
+                  },
+              ]),
+            },
+          );
+        },
+      );
+      final subscription = stream.listen(null);
+      async.elapse(settleTime);
+      unawaited(stream.listenToNextPage());
+      async.elapse(settleTime);
+      final windowLoadsBeforeChange = windowLoads;
+
+      harness.announce([
+        EntityChange(type: tagType, id: 'tag-${rows.first.id}', op: 'update'),
+      ]);
+      async.elapse(settleTime);
+
+      expect(windowLoads, windowLoadsBeforeChange + 1);
+
+      unawaited(subscription.cancel());
+      unawaited(stream.dispose());
+      harness.dispose();
+    });
+  });
+
+  test('a load that fails after the list is disposed raises no error', () {
+    fakeAsync((async) {
+      final harness = LiveQueryHarness(
+        rowsNamed(3),
+        latency: const Duration(seconds: 1),
+      )..goOffline();
+      final stream = streamOver(harness);
+      final subscription = stream.listen(null, onError: (Object _) {});
+      async.elapse(const Duration(milliseconds: 100));
+
+      unawaited(subscription.cancel());
+      unawaited(stream.dispose());
+      async.elapse(settleTime);
+
+      harness.dispose();
+    });
+  });
 }

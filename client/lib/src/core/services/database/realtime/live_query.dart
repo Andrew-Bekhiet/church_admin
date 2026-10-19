@@ -16,7 +16,7 @@ class LiveQuery<T> extends Stream<T> implements LiveQueryTarget {
   final LiveQueryKind kind;
 
   @override
-  LiveQueryDependencies dependencies = LiveQueryDependencies.none;
+  LiveQueryDependencies dependencies = LiveQueryDependencies.unknown;
 
   StreamController<T>? _controller;
   ObservableQuery<T>? _query;
@@ -76,6 +76,7 @@ class LiveQuery<T> extends Stream<T> implements LiveQueryTarget {
     );
     _query = query;
     _registry.register(this);
+    if (!_registry.isOnline) _registry.markStale(this);
     _resultsSubscription = results
         .where((result) => result.isNotLoading)
         .listen(
@@ -83,8 +84,10 @@ class LiveQuery<T> extends Stream<T> implements LiveQueryTarget {
             dependencies = LiveQueryDependencies.ofResult(result.data);
             _controller?.add(result.parsedData as T);
           },
-          onError: (Object error, StackTrace stackTrace) =>
-              _controller?.addError(error, stackTrace),
+          onError: (Object error, StackTrace stackTrace) {
+            _registry.markStale(this);
+            _controller?.addError(error, stackTrace);
+          },
         );
   }
 

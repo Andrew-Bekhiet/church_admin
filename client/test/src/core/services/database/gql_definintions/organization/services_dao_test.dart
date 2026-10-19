@@ -287,6 +287,46 @@ void main() {
       expect(answered?.nextServiceId, preparatory.id);
     });
 
+    test('renaming a service as it was opened keeps its next service and '
+        'default meeting', () async {
+      const meeting = OrganizationFixtures.serviceMeeting;
+      final saved = primary.copyWith(
+        nextService: preparatory,
+        nextServiceId: preparatory.id,
+        defaultMeeting: meeting,
+        meetings: [meeting],
+      );
+      final opened = fakeAsync((async) {
+        final backend = FakeOrganizationServer(
+          services: [saved, preparatory],
+        ).backend();
+        Service? emitted;
+        final subscription = backend.db.services
+            .streamSingleById(id: saved.id)
+            .listen((service) => emitted = service);
+        async.elapse(FakeAshBackend.settleTime);
+        unawaited(subscription.cancel());
+        backend.dispose();
+
+        return emitted!;
+      });
+      final backend = FakeOrganizationServer(services: [saved]).backend();
+      addTearDown(backend.dispose);
+
+      await backend.db.services.updateObject(
+        newObject: opened.copyWith(name: 'ابتدائي وحضانة'),
+        oldObject: opened,
+      );
+
+      expect(
+        backend.server.sentTo('updateService').single.variables['input'],
+        allOf(
+          containsPair('nextServiceId', preparatory.id),
+          containsPair('defaultMeetingId', meeting.id),
+        ),
+      );
+    });
+
     test('renaming a service to a taken name is rejected with its code', () {
       final server = FakeOrganizationServer(services: [primary, preparatory]);
       final backend = server.backend();
