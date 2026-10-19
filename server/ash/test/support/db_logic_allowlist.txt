@@ -9,7 +9,6 @@ default history.edit_history.user_role
 default history.kodas_history.recorded_by
 default history.visit_history.recorded_by
 function auth.check_users_permissions_level_consistency()
-function auth.claim_invitation(text, text, text)
 function auth.enforce_admin_on_grant_level()
 function auth.enforce_permission_grant_level()
 function auth.sync_users_permissions_by_entity_id_cache()
