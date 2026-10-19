@@ -1,0 +1,3 @@
+defmodule ChurchAdmin.Repo.Migrations.Baseline.AlterTableHistoryVisitHistoryAddColumnIsFatherVisit do
+  use ChurchAdmin.Repo.BaselineMigration
+end

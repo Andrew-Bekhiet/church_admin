@@ -1,0 +1,3 @@
+defmodule ChurchAdmin.Repo.Migrations.Baseline.AlterTablePublicFamiliesAddColumnMarriageDate do
+  use ChurchAdmin.Repo.BaselineMigration
+end

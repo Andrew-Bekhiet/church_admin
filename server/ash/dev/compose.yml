@@ -1,0 +1,34 @@
+name: church-admin-ash-dev
+
+x-postgres: &postgres
+  build:
+    context: ../../postgres
+  environment:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: church-admin-ash-dev
+    POSTGRES_DB: church_admin
+    PGDATA: /var/lib/postgresql/data/pgdata
+  healthcheck:
+    test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d church_admin"]
+    interval: 2s
+    timeout: 5s
+    retries: 30
+
+services:
+  postgres:
+    <<: *postgres
+    ports:
+      - "55432:5432"
+    volumes:
+      - pgdata_dev:/var/lib/postgresql
+
+  postgres_test:
+    <<: *postgres
+    ports:
+      - "55433:5432"
+    volumes:
+      - pgdata_test:/var/lib/postgresql
+
+volumes:
+  pgdata_dev:
+  pgdata_test:

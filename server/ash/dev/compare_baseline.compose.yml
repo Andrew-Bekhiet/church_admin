@@ -1,0 +1,48 @@
+name: church-admin-ash-baseline-compare
+
+x-postgres: &postgres
+  build:
+    context: ../../postgres
+  environment:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: church-admin-ash-compare
+    POSTGRES_DB: church_admin
+    PGDATA: /var/lib/postgresql/data/pgdata
+  healthcheck:
+    test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d church_admin"]
+    interval: 2s
+    timeout: 5s
+    retries: 30
+
+services:
+  hasura_postgres:
+    <<: *postgres
+
+  hasura:
+    build:
+      context: ${HASURA_DIR:?set HASURA_DIR to a master checkout's server/hasura}
+    depends_on:
+      hasura_postgres:
+        condition: service_healthy
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: church-admin-ash-compare
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:church-admin-ash-compare@hasura_postgres:5432/church_admin
+      HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: graphql-default
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "false"
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
+      HASURA_GRAPHQL_ENABLED_APIS: graphql,metadata,pgdump,config
+      HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: naming_convention
+      STUDY_YEAR_ROLL_NOTIFY_URL: http://localhost:5001/notifyStudyYearRollFailure
+      STUDY_YEAR_ROLL_WEBHOOK_SECRET: church-admin-ash-compare
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/healthz || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 10s
+
+  ecto_postgres:
+    <<: *postgres
+    ports:
+      - "55443:5432"
