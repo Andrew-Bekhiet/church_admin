@@ -2,9 +2,12 @@ defmodule ChurchAdmin.Places.Changes.ApplyOwnerAddress do
   @moduledoc """
   Applies the command's `address` argument to the written record's one
   address: updates the address the record already has or creates it, writing
-  only the keys the argument carries. `nil` leaves the address alone. The
-  address is written without authorization: the command's own policy covers
-  the record it belongs to.
+  only the keys the argument carries. `nil` leaves the address alone. An
+  existing address is updated without authorization: the command's own policy
+  covers the record it belongs to. A new address is created under
+  `ChurchAdmin.Places.Address`'s create policy, as Hasura's address
+  insertion guard checked it: the owner was created in this command
+  (`ChurchAdmin.Authz.Checks.CreatedInCommand`) or the actor may edit it.
 
   `owner` names the address column that holds the owner's id, and
   `owner_id` the written record's attribute that holds it (default `:id`;
@@ -16,6 +19,7 @@ defmodule ChurchAdmin.Places.Changes.ApplyOwnerAddress do
 
   use Ash.Resource.Change
 
+  alias ChurchAdmin.Authz.Checks.CreatedInCommand
   alias ChurchAdmin.Changes.AfterActionFailure
   alias ChurchAdmin.Places.Address
 
@@ -44,7 +48,8 @@ defmodule ChurchAdmin.Places.Changes.ApplyOwnerAddress do
                  Map.fetch!(owner, opts[:owner_id]),
                  opts[:owner],
                  input,
-                 context.actor
+                 context.actor,
+                 CreatedInCommand.carried(changeset.context)
                ) do
             {:ok, _address} -> {:ok, owner}
             {:error, error} -> AfterActionFailure.roll_back(changeset.resource, error)
@@ -53,7 +58,7 @@ defmodule ChurchAdmin.Places.Changes.ApplyOwnerAddress do
     end
   end
 
-  defp write_address(owner_id, owner_column, input, actor) do
+  defp write_address(owner_id, owner_column, input, actor, created_in_command) do
     existing =
       Address
       |> Ash.Query.do_filter([{owner_column, owner_id}])
@@ -64,7 +69,7 @@ defmodule ChurchAdmin.Places.Changes.ApplyOwnerAddress do
         Address
         |> Ash.Changeset.for_create(:create, Map.put(input, owner_column, owner_id),
           actor: actor,
-          authorize?: false
+          context: created_in_command
         )
         |> Ash.create()
 

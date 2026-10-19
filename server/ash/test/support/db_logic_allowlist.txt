@@ -21,9 +21,7 @@ function history.check_meeting_service_study_year_rel()
 function history.edit_history_trigger()
 function history.maybe_remove_group_archived_default_meeting()
 function history.maybe_remove_service_archived_default_meeting()
-function public.check_address_insertion()
 function public.check_group_default_meeting_belongs_to_group()
-function public.check_row_insertion_permission()
 function public.check_service_default_meeting_belongs_to_service()
 function public.family_inserted_in_current_transaction(families)
 function public.person_inserted_in_current_transaction(persons)
@@ -37,13 +35,11 @@ trigger history.attendance_history.check_attendance_history_meeting
 trigger history.meetings.check_service_study_year_rel
 trigger history.meetings.maybe_remove_group_archived_default_meeting
 trigger history.meetings.maybe_remove_service_archived_default_meeting
-trigger public.addresses.check_address_insertion
 trigger public.addresses.sync_users_permissions_by_entity_id_cache
 trigger public.areas_streets.sync_users_permissions_by_entity_id_cache
 trigger public.classes.edit_history
 trigger public.classes.soft_delete_classes
 trigger public.classes.sync_users_permissions_by_entity_id_cache
-trigger public.families.check_family_insertion
 trigger public.families.remember_family_inserted_in_transaction
 trigger public.groups.check_group_default_meeting_belongs_to_group
 trigger public.groups.edit_history
@@ -55,5 +51,4 @@ trigger public.persons_services.sync_users_permissions_by_entity_id_cache
 trigger public.services.check_service_default_meeting_belongs_to_service
 trigger public.services.edit_history
 trigger public.services.soft_delete_services
-trigger public.stores.check_store_insertion
 trigger public.users_preferences.set_public_users_preferences_updated_at
