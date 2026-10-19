@@ -989,6 +989,901 @@ enum SortOrder {
   ASC_NULLS_LAST
 }
 
+enum StreetSortField {
+  ID
+  NAME
+  LINE
+  COLOR
+  PHOTO_UPDATED_AT
+  BLURHASH
+  USER_CAN_EDIT
+  WITHIN_POLYGON
+  WITHIN_DISTANCE
+}
+
+"A keyset page of :street"
+type KeysetPageOfStreet {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Street!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input StreetWithinDistanceFieldInput {
+  from: Json!
+  meters: Float!
+}
+
+input StreetFilterWithinDistance {
+  input: StreetWithinDistanceFieldInput
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input StreetWithinPolygonFieldInput {
+  polygon: Json!
+}
+
+input StreetFilterWithinPolygon {
+  input: StreetWithinPolygonFieldInput
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input StreetFilterUserCanEdit {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input StreetFilterBlurhash {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input StreetFilterPhotoUpdatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input StreetFilterColor {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input StreetFilterLine {
+  isNil: Boolean
+  eq: Json
+  notEq: Json
+  in: [Json]
+  lessThan: Json
+  greaterThan: Json
+  lessThanOrEqual: Json
+  greaterThanOrEqual: Json
+  isDistinctFrom: Json
+  isNotDistinctFrom: Json
+}
+
+input StreetFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input StreetFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input StreetFilterInput {
+  and: [StreetFilterInput!]
+  or: [StreetFilterInput!]
+  not: [StreetFilterInput!]
+  id: StreetFilterId
+  name: StreetFilterName
+  line: StreetFilterLine
+  color: StreetFilterColor
+  photoUpdatedAt: StreetFilterPhotoUpdatedAt
+  blurhash: StreetFilterBlurhash
+  addresses: AddressFilterInput
+  areaStreets: AreaStreetFilterInput
+  areas: AreaFilterInput
+  userCanEdit: StreetFilterUserCanEdit
+  withinPolygon: StreetFilterWithinPolygon
+  withinDistance: StreetFilterWithinDistance
+}
+
+input StreetSortInput {
+  order: SortOrder
+  field: StreetSortField!
+  withinPolygonInput: StreetWithinPolygonFieldInput
+  withinDistanceInput: StreetWithinDistanceFieldInput
+}
+
+type Street {
+  id: ID!
+  name: String!
+  line: Json
+  color: Int
+  photoUpdatedAt: DateTime
+  blurhash: String
+  addresses(
+    "How to sort the records in the response"
+    sort: [AddressSortInput]
+
+    "A filter to limit the results"
+    filter: AddressFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Address!]!
+  areaStreets(
+    "How to sort the records in the response"
+    sort: [AreaStreetSortInput]
+
+    "A filter to limit the results"
+    filter: AreaStreetFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [AreaStreet!]!
+  areas(
+    "How to sort the records in the response"
+    sort: [AreaSortInput]
+
+    "A filter to limit the results"
+    filter: AreaFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Area!]!
+  userCanEdit: Boolean!
+  withinPolygon(polygon: Json!): Boolean
+  withinDistance(from: Json!, meters: Float!): Boolean
+}
+
+enum StoreSortField {
+  ID
+  NAME
+  ADMIN_FAMILY_ID
+  COLOR
+  PHOTO_UPDATED_AT
+  BLURHASH
+  USER_CAN_EDIT
+  WITHIN_POLYGON
+  ADDRESS_AREA_NAME
+  ADDRESS_STREET_NAME
+  ADDRESS_DISTRICT_NAME
+}
+
+"A keyset page of :store"
+type KeysetPageOfStore {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Store!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input StoreWithinPolygonFieldInput {
+  polygon: Json!
+}
+
+input StoreFilterWithinPolygon {
+  input: StoreWithinPolygonFieldInput
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input StoreFilterUserCanEdit {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input StoreFilterAddressDistrictName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input StoreFilterAddressStreetName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input StoreFilterAddressAreaName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input StoreFilterBlurhash {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input StoreFilterPhotoUpdatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input StoreFilterColor {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input StoreFilterAdminFamilyId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input StoreFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input StoreFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input StoreFilterInput {
+  and: [StoreFilterInput!]
+  or: [StoreFilterInput!]
+  not: [StoreFilterInput!]
+  id: StoreFilterId
+  name: StoreFilterName
+  adminFamilyId: StoreFilterAdminFamilyId
+  color: StoreFilterColor
+  photoUpdatedAt: StoreFilterPhotoUpdatedAt
+  blurhash: StoreFilterBlurhash
+  adminFamily: FamilyFilterInput
+  address: AddressFilterInput
+  addressAreaName: StoreFilterAddressAreaName
+  addressStreetName: StoreFilterAddressStreetName
+  addressDistrictName: StoreFilterAddressDistrictName
+  userCanEdit: StoreFilterUserCanEdit
+  withinPolygon: StoreFilterWithinPolygon
+}
+
+input StoreSortInput {
+  order: SortOrder
+  field: StoreSortField!
+  withinPolygonInput: StoreWithinPolygonFieldInput
+}
+
+type Store {
+  id: ID!
+  name: String!
+  adminFamilyId: ID
+  color: Int
+  photoUpdatedAt: DateTime
+  blurhash: String
+  adminFamily: Family
+  address: Address
+  addressAreaName: String
+  addressStreetName: String
+  addressDistrictName: String
+  userCanEdit: Boolean!
+  withinPolygon(polygon: Json!): Boolean
+}
+
+enum DistrictSortField {
+  ID
+  NAME
+}
+
+"A keyset page of :district"
+type KeysetPageOfDistrict {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [District!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input DistrictFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input DistrictFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input DistrictFilterInput {
+  and: [DistrictFilterInput!]
+  or: [DistrictFilterInput!]
+  not: [DistrictFilterInput!]
+  id: DistrictFilterId
+  name: DistrictFilterName
+  addresses: AddressFilterInput
+}
+
+input DistrictSortInput {
+  order: SortOrder
+  field: DistrictSortField!
+}
+
+type District {
+  id: ID!
+  name: String!
+  addresses(
+    "How to sort the records in the response"
+    sort: [AddressSortInput]
+
+    "A filter to limit the results"
+    filter: AddressFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Address!]!
+}
+
+enum AreaStreetSortField {
+  AREA_ID
+  STREET_ID
+}
+
+"A keyset page of :area_street"
+type KeysetPageOfAreaStreet {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [AreaStreet!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input AreaStreetFilterStreetId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input AreaStreetFilterAreaId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input AreaStreetFilterInput {
+  and: [AreaStreetFilterInput!]
+  or: [AreaStreetFilterInput!]
+  not: [AreaStreetFilterInput!]
+  areaId: AreaStreetFilterAreaId
+  streetId: AreaStreetFilterStreetId
+  area: AreaFilterInput
+  street: StreetFilterInput
+}
+
+input AreaStreetSortInput {
+  order: SortOrder
+  field: AreaStreetSortField!
+}
+
+type AreaStreet {
+  "A unique identifier"
+  id: ID!
+
+  areaId: ID!
+
+  streetId: ID!
+
+  area: Area
+
+  street: Street
+}
+
+enum AreaSortField {
+  ID
+  NAME
+  BOUNDS
+  COLOR
+  PHOTO_UPDATED_AT
+  BLURHASH
+  USER_CAN_EDIT
+  WITHIN_POLYGON
+  CONTAINS_POINT
+}
+
+"A keyset page of :area"
+type KeysetPageOfArea {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Area!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input AreaContainsPointFieldInput {
+  point: Json!
+}
+
+input AreaFilterContainsPoint {
+  input: AreaContainsPointFieldInput
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input AreaWithinPolygonFieldInput {
+  polygon: Json!
+}
+
+input AreaFilterWithinPolygon {
+  input: AreaWithinPolygonFieldInput
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input AreaFilterUserCanEdit {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input AreaFilterBlurhash {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input AreaFilterPhotoUpdatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input AreaFilterColor {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input AreaFilterBounds {
+  isNil: Boolean
+  eq: Json
+  notEq: Json
+  in: [Json]
+  lessThan: Json
+  greaterThan: Json
+  lessThanOrEqual: Json
+  greaterThanOrEqual: Json
+  isDistinctFrom: Json
+  isNotDistinctFrom: Json
+}
+
+input AreaFilterName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input AreaFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input AreaFilterInput {
+  and: [AreaFilterInput!]
+  or: [AreaFilterInput!]
+  not: [AreaFilterInput!]
+  id: AreaFilterId
+  name: AreaFilterName
+  bounds: AreaFilterBounds
+  color: AreaFilterColor
+  photoUpdatedAt: AreaFilterPhotoUpdatedAt
+  blurhash: AreaFilterBlurhash
+  addresses: AddressFilterInput
+  areaStreets: AreaStreetFilterInput
+  streets: StreetFilterInput
+  admins: UserFilterInput
+  userCanEdit: AreaFilterUserCanEdit
+  withinPolygon: AreaFilterWithinPolygon
+  containsPoint: AreaFilterContainsPoint
+}
+
+input AreaSortInput {
+  order: SortOrder
+  field: AreaSortField!
+  withinPolygonInput: AreaWithinPolygonFieldInput
+  containsPointInput: AreaContainsPointFieldInput
+}
+
+type Area {
+  id: ID!
+  name: String!
+  bounds: Json
+  color: Int
+  photoUpdatedAt: DateTime
+  blurhash: String
+  addresses(
+    "How to sort the records in the response"
+    sort: [AddressSortInput]
+
+    "A filter to limit the results"
+    filter: AddressFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Address!]!
+  areaStreets(
+    "How to sort the records in the response"
+    sort: [AreaStreetSortInput]
+
+    "A filter to limit the results"
+    filter: AreaStreetFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [AreaStreet!]!
+  streets(
+    "How to sort the records in the response"
+    sort: [StreetSortInput]
+
+    "A filter to limit the results"
+    filter: StreetFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Street!]!
+  admins(
+    "How to sort the records in the response"
+    sort: [UserSortInput]
+
+    "A filter to limit the results"
+    filter: UserFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [User!]!
+  userCanEdit: Boolean!
+  withinPolygon(polygon: Json!): Boolean
+  containsPoint(point: Json!): Boolean
+}
+
 enum AddressSortField {
   ID
   COUNTRY_ISO_CODE
@@ -1004,6 +1899,7 @@ enum AddressSortField {
   FAMILY_ID
   STORE_ID
   HOUSE_CODE
+  WITHIN_POLYGON
 }
 
 "A keyset page of :address"
@@ -1019,6 +1915,24 @@ type KeysetPageOfAddress {
 
   "The last keyset in the results"
   endKeyset: String
+}
+
+input AddressWithinPolygonFieldInput {
+  polygon: Json!
+}
+
+input AddressFilterWithinPolygon {
+  input: AddressWithinPolygonFieldInput
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
 }
 
 input AddressFilterHouseCode {
@@ -1241,12 +2155,18 @@ input AddressFilterInput {
   familyId: AddressFilterFamilyId
   storeId: AddressFilterStoreId
   houseCode: AddressFilterHouseCode
+  area: AreaFilterInput
+  district: DistrictFilterInput
   family: FamilyFilterInput
+  store: StoreFilterInput
+  street: StreetFilterInput
+  withinPolygon: AddressFilterWithinPolygon
 }
 
 input AddressSortInput {
   order: SortOrder
   field: AddressSortField!
+  withinPolygonInput: AddressWithinPolygonFieldInput
 }
 
 type Address {
@@ -1264,7 +2184,12 @@ type Address {
   familyId: ID
   storeId: ID
   houseCode: String
+  area: Area
+  district: District
   family: Family
+  store: Store
+  street: Street
+  withinPolygon(polygon: Json!): Boolean
 }
 
 enum UserPermissionSortField {
@@ -2014,6 +2939,117 @@ type RootQueryType {
     "The number of records to return to the end. Maximum 100"
     last: Int
   ): KeysetPageOfAddress
+  area(
+    "The id of the record"
+    id: ID!
+  ): Area
+  areas(
+    "How to sort the records in the response"
+    sort: [AreaSortInput]
+
+    "A filter to limit the results"
+    filter: AreaFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfArea
+  areaStreets(
+    "How to sort the records in the response"
+    sort: [AreaStreetSortInput]
+
+    "A filter to limit the results"
+    filter: AreaStreetFilterInput
+
+    "The number of records to return from the beginning. Maximum 100"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 100"
+    last: Int
+  ): KeysetPageOfAreaStreet
+  district(
+    "The id of the record"
+    id: ID!
+  ): District
+  districts(
+    "How to sort the records in the response"
+    sort: [DistrictSortInput]
+
+    "A filter to limit the results"
+    filter: DistrictFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfDistrict
+  store(
+    "The id of the record"
+    id: ID!
+  ): Store
+  stores(
+    "How to sort the records in the response"
+    sort: [StoreSortInput]
+
+    "A filter to limit the results"
+    filter: StoreFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfStore
+  street(
+    "The id of the record"
+    id: ID!
+  ): Street
+  streets(
+    "How to sort the records in the response"
+    sort: [StreetSortInput]
+
+    "A filter to limit the results"
+    filter: StreetFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfStreet
   family(
     "The id of the record"
     id: ID!
@@ -2101,9 +3137,8 @@ type RootQueryType {
 }
 
 """
-The `Json` scalar type represents arbitrary json string data, represented as UTF-8
-character sequences. The Json type is most often used to represent a free-form
-human-readable json string.
+Arbitrary JSON. Objects and lists are passed as they are; a string must
+hold JSON text, which is decoded.
 """
 scalar Json
 
