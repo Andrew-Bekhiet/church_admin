@@ -5,7 +5,7 @@ defmodule ChurchAdmin.Places.District do
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
-  alias ChurchAdmin.Authz.Checks.{SignedIn, System}
+  alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Places.Address
   alias ChurchAdmin.Types.Text
 
@@ -44,7 +44,7 @@ defmodule ChurchAdmin.Places.District do
     end
 
     policy action_type(:read) do
-      authorize_if SignedIn
+      authorize_if actor_present()
     end
   end
 

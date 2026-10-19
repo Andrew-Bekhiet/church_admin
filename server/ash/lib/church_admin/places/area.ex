@@ -8,7 +8,7 @@ defmodule ChurchAdmin.Places.Area do
   alias ChurchAdmin.Accounts.{ScopeGrant, User}
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
-  alias ChurchAdmin.Authz.Checks.{SignedIn, System}
+  alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Places.Calculations.IntersectsGeography
   alias ChurchAdmin.Places.{Address, AreaStreet, Street}
   alias ChurchAdmin.Types.{Geography, Text}
@@ -52,7 +52,7 @@ defmodule ChurchAdmin.Places.Area do
     end
 
     policy action_type(:read) do
-      authorize_if SignedIn
+      authorize_if actor_present()
     end
   end
 
