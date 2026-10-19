@@ -5,9 +5,6 @@ on:
     paths:
       - "client/**"
       - "packages/**"
-      - "server/hasura/**"
-      - "server/postgres/**"
-      - "server/docker-compose.yml"
       - ".github/workflows/generated-code.yml"
 
   push:
@@ -15,9 +12,6 @@ on:
     paths:
       - "client/**"
       - "packages/**"
-      - "server/hasura/**"
-      - "server/postgres/**"
-      - "server/docker-compose.yml"
       - ".github/workflows/generated-code.yml"
 
   workflow_dispatch:

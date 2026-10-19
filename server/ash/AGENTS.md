@@ -16,9 +16,26 @@ The church_admin backend: Phoenix 1.8 (API only) + Ash 3, OTP app `:church_admin
 
 **Never touch the `church-admin-local` compose project or its volumes** — it holds the user's own stack.
 
-`mix church_admin.setup [--scale small|medium]` migrates to the last baseline version, loads the reference seed (`priv/repo/seeds/`), with `--scale` also the services seed and the generated file, then migrates the rest; `dev/db.sh reset` runs it with `small` for dev only (`SEED_SCALE=medium` for more); the test database is built with `MIX_ENV=test mix ecto.migrate` and holds no seed data, so tests create the rows they need through `Factory`. `mix church_admin.seed.gen --scale small|medium` writes `priv/repo/seeds/generated/<scale>.sql` and `<scale>.auth_emulator.json` (deterministic; `small` is committed, `medium` is git-ignored and rebuilt on demand). The SQL targets the baseline schema, so the generator and its tests live in `dev/lib/` (compiled in dev and test only). Every seeded account signs in with the password in `ChurchAdmin.Dev.SeedGenerator.AuthEmulator.dev_password/0`; import `<scale>.auth_emulator.json` into the Auth emulator by POSTing it to `/identitytoolkit.googleapis.com/v1/projects/<project>/accounts:batchCreate`.
+`mix church_admin.setup [--services | --scale small|medium]` migrates to the last baseline version, loads the reference seed (`priv/repo/seeds/`), with `--services` also the services seed, with `--scale` the services seed and the generated file, then migrates the rest (a database that already applied the last baseline version is only migrated, never reseeded); `dev/db.sh reset` runs it with `small` for dev only (`SEED_SCALE=medium` for more); the test database is built with `MIX_ENV=test mix ecto.migrate` and holds no seed data, so tests create the rows they need through `Factory`. `mix church_admin.seed.gen --scale small|medium` writes `priv/repo/seeds/generated/<scale>.sql` and `<scale>.auth_emulator.json` (deterministic; `small` is committed, `medium` is git-ignored and rebuilt on demand). The SQL targets the baseline schema, so the generator and its tests live in `dev/lib/` (compiled in dev and test only). Every seeded account signs in with the password in `ChurchAdmin.Dev.SeedGenerator.AuthEmulator.dev_password/0`; import `<scale>.auth_emulator.json` into the Auth emulator by POSTing it to `/identitytoolkit.googleapis.com/v1/projects/<project>/accounts:batchCreate`.
 
 `dev/compare_baseline_schema.sh` proves the Ecto baseline produces the same schema as master's Hasura migrations.
+
+## Local stack
+
+`server/docker-compose.yml` is the whole backend: `postgres` (built from `server/postgres`, volume `pgdata_ash`), `ash` (built from `server/ash/Dockerfile`, running in dev env on `localhost:8080`, `/healthz`, `/gql`, `/socket`) and `firebase-emulators` (Auth 9099, Storage 9199, Database 9000, UI 4000; no functions emulator). There is no Hasura and no Cloud Functions. The client's `API_SERVER_URL` is `http://localhost:8080`.
+
+```sh
+cp server/example.env server/.env   # set POSTGRES_PASSWORD
+docker compose -f server/docker-compose.yml --env-file server/.env up -d --build --wait
+```
+
+The `ash` container runs `mix church_admin.setup $ASH_SETUP_ARGS` and then `mix phx.server`. `setup` migrates and seeds only a database that has not applied the last baseline version yet, so restarts keep the data: `ASH_SETUP_ARGS=--services` (the default) loads the reference data and the sample services, `--scale small|medium` also the generated people (import `<scale>.auth_emulator.json` into the Auth emulator for their sign-ins). Change it only on a fresh volume (`docker compose down -v`).
+
+The first administrator is the email named to `ChurchAdmin.Release.bootstrap_admin/1`; there is no first-sign-up rule. Sign up in the app (or the Auth emulator), then `docker compose -f server/docker-compose.yml --env-file server/.env exec ash mix church_admin.bootstrap_admin --email you@example.com`. It also works before sign-up: the later sign-up claims the seeded row.
+
+The default project name is `church-admin-local`, the user's own stack; agents always pass `-p church-admin-ash-<lane>`. A stack from before the Ash backend keeps its Hasura-migrated volume `church-admin-local_pgdata`; the new stack starts a fresh `pgdata_ash`.
+
+`server/scripts/e2e-backend.sh up|down|logs|compose` is the hermetic variant for the Patrol journeys (compose project `church-admin-e2e`, override with `E2E_COMPOSE_PROJECT`, Firebase project `demo-church-admin`): fresh database, admin `admin@e2e.test` signed up through the Auth emulator and bootstrapped, then checked through `/gql` with the admin's ID token. `client/patrol_test/support/e2e_backend.dart` talks to the same `/gql` as that admin.
 
 ## Write building blocks
 

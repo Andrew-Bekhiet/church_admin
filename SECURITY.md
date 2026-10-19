@@ -16,7 +16,7 @@ Only the latest release and the `master` branch receive security fixes.
 
 ## Scope
 
-In scope: the code in this repository, including the Flutter client, Hasura metadata and migrations, and the Firebase functions and security rules.
+In scope: the code in this repository, including the Flutter client, the Ash backend (migrations and policies), and the Firebase security rules.
 
 Out of scope:
 
@@ -26,7 +26,7 @@ Out of scope:
 
 ## Deploying your own instance
 
-- **Create your own account first.** The first Firebase account to sign up on a fresh project becomes an administrator with every permission. Sign up as soon as the functions are deployed, before you share the app.
-- Keep `HASURA_GRAPHQL_ENABLE_CONSOLE=false` and `HASURA_GRAPHQL_ENABLED_APIS=graphql` in production, and use a long random `HASURA_GRAPHQL_ADMIN_SECRET`.
-- Do not expose Postgres to the internet. Hasura and the functions are the only things that need to reach it.
+- **Name your first administrator.** Signing up first grants nothing. Run `bin/church_admin eval 'ChurchAdmin.Release.bootstrap_admin("you@example.com")'` once, then sign up with that email; the account claims the seeded administrator row.
+- Leave `AUTH_MODE` unset in production: unsigned emulator tokens are accepted only in dev and test, and the app refuses to boot otherwise.
+- Do not expose Postgres to the internet. The Ash backend is the only thing that needs to reach it.
 - Restrict your Firebase API keys to your app's package name, bundle ID and web domain in the Google Cloud console, and set a billing budget alert.

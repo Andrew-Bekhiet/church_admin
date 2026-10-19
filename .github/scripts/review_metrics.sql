@@ -58,7 +58,7 @@ group by 1;
 select case
          when t.path like 'client/test/%' then 'client tests'
          when t.path like 'client/lib/%' then 'client lib'
-         when t.path like 'server/hasura/%' then 'hasura'
+         when t.path like 'server/ash/%' then 'ash'
          when t.path like '.github/%' then 'ci'
          else 'other'
        end area,

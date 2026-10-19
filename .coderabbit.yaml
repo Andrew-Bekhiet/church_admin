@@ -34,7 +34,7 @@ reviews:
   labeling_instructions:
     - label: "risk: high"
       instructions: >-
-        Apply when the PR changes anything under server/hasura/ (migrations or metadata permissions), server/firebase/functions/,
+        Apply when the PR changes anything under server/ash/priv/repo/migrations/ or server/ash/lib/church_admin/authz/,
         .github/workflows/, client/lib/src/features/auth/, or the release and signing setup (client/android/, client/ios/ build files).
         These deploy on merge or guard access to real users' data.
     - label: "risk: medium"
@@ -65,19 +65,19 @@ reviews:
       - name: Migration keeps data
         mode: warning
         instructions: >-
-          Applies only when the PR adds or changes files under server/hasura/migrations/. Pass when every up.sql is additive
+          Applies only when the PR adds or changes files under server/ash/priv/repo/migrations/. Pass when every migration is additive
           (no DROP of a populated table or column, no UPDATE or DELETE rewriting existing rows without the PR description
-          explaining why), every down.sql raises an exception before destroying rows, the directory timestamp is a full
-          millisecond Unix time, CHECK or foreign-key constraints on existing tables are added NOT VALID and validated in a
-          later migration, nothing dropped or renamed is still referenced by a trigger, function, view or seed, and down.sql
-          drops triggers before their functions. Fail otherwise and name the file and line. Pass with "not applicable" when no migration changed.
+          explaining why), down raises an exception before destroying rows, CHECK or foreign-key constraints on existing tables
+          are added NOT VALID and validated in a later migration, nothing dropped or renamed is still referenced by a trigger,
+          function, view or seed, and down drops triggers before their functions. Fail otherwise and name the file and line.
+          Fail when anything under server/ash/priv/repo/baseline/ changed. Pass with "not applicable" when no migration changed.
       - name: Permission parity
         mode: warning
         instructions: >-
-          Applies only when the PR changes server/hasura/metadata/. For each changed permission or relationship, state who gains or
-          loses select, insert, update or delete. Fail when a relationship lets a role read rows of the remote table that the
-          role's own select permission on that table would hide, or when a permission keys on auth_id instead of uid.
-          Pass with "not applicable" when no metadata changed.
+          Applies only when the PR changes policies or scopes under server/ash/lib/. For each changed policy, state who gains or
+          loses read, create, update or destroy. Fail when a relationship exposes rows of the destination resource that the
+          destination's own read policy would hide, or when a permission keys on auth_id instead of uid.
+          Pass with "not applicable" when no policy changed.
       - name: Testing evidence
         mode: warning
         instructions: >-
@@ -87,7 +87,7 @@ reviews:
       - name: Deploy order
         mode: warning
         instructions: >-
-          Applies when the PR renames or removes a Firebase callable, a Hasura root field, column or table the client reads, or a
+          Applies when the PR renames or removes a GraphQL field, column or table the client reads, or a
           GraphQL operation. Pass when the PR description says which side ships first and why old clients keep working.
           Pass with "not applicable" otherwise.
 
