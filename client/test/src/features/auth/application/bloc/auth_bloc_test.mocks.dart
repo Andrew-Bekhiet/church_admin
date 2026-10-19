@@ -190,45 +190,37 @@ class _FakeValueStream_29<T> extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
-class _FakeLegacyStreamAllConfig_30<T> extends _i1.SmartFake
-    implements _i2.LegacyStreamAllConfig<T> {
-  _FakeLegacyStreamAllConfig_30(Object parent, Invocation parentInvocation)
+class _FakeStreamAllConfig_30<T> extends _i1.SmartFake
+    implements _i2.StreamAllConfig<T> {
+  _FakeStreamAllConfig_30(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeLegacyStreamCountConfig_31<T> extends _i1.SmartFake
-    implements _i2.LegacyStreamCountConfig<T> {
-  _FakeLegacyStreamCountConfig_31(Object parent, Invocation parentInvocation)
+class _FakeStreamSingleByIdConfig_31<T> extends _i1.SmartFake
+    implements _i2.StreamSingleByIdConfig<T> {
+  _FakeStreamSingleByIdConfig_31(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeLegacyStreamSingleByIdConfig_32<T> extends _i1.SmartFake
-    implements _i2.LegacyStreamSingleByIdConfig<T> {
-  _FakeLegacyStreamSingleByIdConfig_32(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(parent, parentInvocation);
-}
-
-class _FakeDatabaseService_33 extends _i1.SmartFake
+class _FakeDatabaseService_32 extends _i1.SmartFake
     implements _i2.DatabaseService {
-  _FakeDatabaseService_33(Object parent, Invocation parentInvocation)
+  _FakeDatabaseService_32(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeUser_34 extends _i1.SmartFake implements _i2.User {
-  _FakeUser_34(Object parent, Invocation parentInvocation)
+class _FakeUser_33 extends _i1.SmartFake implements _i2.User {
+  _FakeUser_33(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeDocumentNode_35 extends _i1.SmartFake implements _i4.DocumentNode {
-  _FakeDocumentNode_35(Object parent, Invocation parentInvocation)
+class _FakeDocumentNode_34 extends _i1.SmartFake implements _i4.DocumentNode {
+  _FakeDocumentNode_34(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakePaginatableStreamBase_36<T> extends _i1.SmartFake
+class _FakePaginatableStreamBase_35<T> extends _i1.SmartFake
     implements _i2.PaginatableStreamBase<T> {
-  _FakePaginatableStreamBase_36(Object parent, Invocation parentInvocation)
+  _FakePaginatableStreamBase_35(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -967,53 +959,37 @@ class MockConnectivityService extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
   @override
-  _i2.LegacyStreamAllConfig<_i2.User> get baseStreamAllConfig =>
-      (super.noSuchMethod(
-        Invocation.getter(#baseStreamAllConfig),
-        returnValue: _FakeLegacyStreamAllConfig_30<_i2.User>(
-          this,
-          Invocation.getter(#baseStreamAllConfig),
-        ),
-        returnValueForMissingStub: _FakeLegacyStreamAllConfig_30<_i2.User>(
-          this,
-          Invocation.getter(#baseStreamAllConfig),
-        ),
-      ) as _i2.LegacyStreamAllConfig<_i2.User>);
+  _i2.StreamAllConfig<_i2.User> get baseStreamAllConfig => (super.noSuchMethod(
+    Invocation.getter(#baseStreamAllConfig),
+    returnValue: _FakeStreamAllConfig_30<_i2.User>(
+      this,
+      Invocation.getter(#baseStreamAllConfig),
+    ),
+    returnValueForMissingStub: _FakeStreamAllConfig_30<_i2.User>(
+      this,
+      Invocation.getter(#baseStreamAllConfig),
+    ),
+  ) as _i2.StreamAllConfig<_i2.User>);
 
   @override
-  _i2.LegacyStreamCountConfig<_i2.User> get baseStreamCountConfig =>
-      (super.noSuchMethod(
-        Invocation.getter(#baseStreamCountConfig),
-        returnValue: _FakeLegacyStreamCountConfig_31<_i2.User>(
-          this,
-          Invocation.getter(#baseStreamCountConfig),
-        ),
-        returnValueForMissingStub: _FakeLegacyStreamCountConfig_31<_i2.User>(
-          this,
-          Invocation.getter(#baseStreamCountConfig),
-        ),
-      ) as _i2.LegacyStreamCountConfig<_i2.User>);
-
-  @override
-  _i2.LegacyStreamSingleByIdConfig<_i2.User> get baseStreamSingleByIdConfig =>
+  _i2.StreamSingleByIdConfig<_i2.User> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamSingleByIdConfig),
-        returnValue: _FakeLegacyStreamSingleByIdConfig_32<_i2.User>(
+        returnValue: _FakeStreamSingleByIdConfig_31<_i2.User>(
           this,
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
-        returnValueForMissingStub:
-            _FakeLegacyStreamSingleByIdConfig_32<_i2.User>(
-              this,
-              Invocation.getter(#baseStreamSingleByIdConfig),
-            ),
-      ) as _i2.LegacyStreamSingleByIdConfig<_i2.User>);
+        returnValueForMissingStub: _FakeStreamSingleByIdConfig_31<_i2.User>(
+          this,
+          Invocation.getter(#baseStreamSingleByIdConfig),
+        ),
+      ) as _i2.StreamSingleByIdConfig<_i2.User>);
 
   @override
   _i2.DatabaseService get db => (super.noSuchMethod(
     Invocation.getter(#db),
-    returnValue: _FakeDatabaseService_33(this, Invocation.getter(#db)),
-    returnValueForMissingStub: _FakeDatabaseService_33(
+    returnValue: _FakeDatabaseService_32(this, Invocation.getter(#db)),
+    returnValueForMissingStub: _FakeDatabaseService_32(
       this,
       Invocation.getter(#db),
     ),
@@ -1023,9 +999,9 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
   _i2.User Function(Map<String, dynamic>) get fromJson => (super.noSuchMethod(
     Invocation.getter(#fromJson),
     returnValue: (Map<String, dynamic> json) =>
-        _FakeUser_34(this, Invocation.getter(#fromJson)),
+        _FakeUser_33(this, Invocation.getter(#fromJson)),
     returnValueForMissingStub: (Map<String, dynamic> json) =>
-        _FakeUser_34(this, Invocation.getter(#fromJson)),
+        _FakeUser_33(this, Invocation.getter(#fromJson)),
   ) as _i2.User Function(Map<String, dynamic>));
 
   @override
@@ -1081,7 +1057,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
       [document],
       {#parameters: parameters},
     ),
-    returnValue: _FakeDocumentNode_35(
+    returnValue: _FakeDocumentNode_34(
       this,
       Invocation.method(
         #transformDocument,
@@ -1089,7 +1065,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
         {#parameters: parameters},
       ),
     ),
-    returnValueForMissingStub: _FakeDocumentNode_35(
+    returnValueForMissingStub: _FakeDocumentNode_34(
       this,
       Invocation.method(
         #transformDocument,
@@ -1112,7 +1088,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
       #orderBy: orderBy,
       #secondLineField: secondLineField,
     }),
-    returnValue: _FakePaginatableStreamBase_36<_i2.User>(
+    returnValue: _FakePaginatableStreamBase_35<_i2.User>(
       this,
       Invocation.method(#streamAll, [], {
         #searchQuery: searchQuery,
@@ -1121,13 +1097,58 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
         #secondLineField: secondLineField,
       }),
     ),
-    returnValueForMissingStub: _FakePaginatableStreamBase_36<_i2.User>(
+    returnValueForMissingStub: _FakePaginatableStreamBase_35<_i2.User>(
       this,
       Invocation.method(#streamAll, [], {
         #searchQuery: searchQuery,
         #where: where,
         #orderBy: orderBy,
         #secondLineField: secondLineField,
+      }),
+    ),
+  ) as _i2.PaginatableStreamBase<_i2.User>);
+
+  @override
+  _i2.PaginatableStreamBase<_i2.User> streamAllWithConfig({
+    required _i2.DAOMethodTemplate<Object?>? streamAllConfig,
+    _i2.LegacyStreamCountConfig<_i2.User>? streamCountConfig,
+    _i5.Stream<String?>? searchQuery,
+    _i5.Stream<List<_i2.Filter<Object>>>? where,
+    _i5.Stream<List<_i2.OrderBy>>? orderBy,
+    _i5.Stream<_i2.FieldMetadata<Object>?>? secondLineField,
+    int? overrideTotalLimit,
+  }) => (super.noSuchMethod(
+    Invocation.method(#streamAllWithConfig, [], {
+      #streamAllConfig: streamAllConfig,
+      #streamCountConfig: streamCountConfig,
+      #searchQuery: searchQuery,
+      #where: where,
+      #orderBy: orderBy,
+      #secondLineField: secondLineField,
+      #overrideTotalLimit: overrideTotalLimit,
+    }),
+    returnValue: _FakePaginatableStreamBase_35<_i2.User>(
+      this,
+      Invocation.method(#streamAllWithConfig, [], {
+        #streamAllConfig: streamAllConfig,
+        #streamCountConfig: streamCountConfig,
+        #searchQuery: searchQuery,
+        #where: where,
+        #orderBy: orderBy,
+        #secondLineField: secondLineField,
+        #overrideTotalLimit: overrideTotalLimit,
+      }),
+    ),
+    returnValueForMissingStub: _FakePaginatableStreamBase_35<_i2.User>(
+      this,
+      Invocation.method(#streamAllWithConfig, [], {
+        #streamAllConfig: streamAllConfig,
+        #streamCountConfig: streamCountConfig,
+        #searchQuery: searchQuery,
+        #where: where,
+        #orderBy: orderBy,
+        #secondLineField: secondLineField,
+        #overrideTotalLimit: overrideTotalLimit,
       }),
     ),
   ) as _i2.PaginatableStreamBase<_i2.User>);
@@ -1152,54 +1173,9 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
   ) as _i5.Future<List<_i2.User>>);
 
   @override
-  _i2.PaginatableStreamBase<_i2.User> streamAllWithConfig({
-    required _i2.DAOMethodTemplate<Object?>? streamAllConfig,
-    _i2.LegacyStreamCountConfig<_i2.User>? streamCountConfig,
-    _i5.Stream<String?>? searchQuery,
-    _i5.Stream<List<_i2.Filter<Object>>>? where,
-    _i5.Stream<List<_i2.OrderBy>>? orderBy,
-    _i5.Stream<_i2.FieldMetadata<Object>?>? secondLineField,
-    int? overrideTotalLimit,
-  }) => (super.noSuchMethod(
-    Invocation.method(#streamAllWithConfig, [], {
-      #streamAllConfig: streamAllConfig,
-      #streamCountConfig: streamCountConfig,
-      #searchQuery: searchQuery,
-      #where: where,
-      #orderBy: orderBy,
-      #secondLineField: secondLineField,
-      #overrideTotalLimit: overrideTotalLimit,
-    }),
-    returnValue: _FakePaginatableStreamBase_36<_i2.User>(
-      this,
-      Invocation.method(#streamAllWithConfig, [], {
-        #streamAllConfig: streamAllConfig,
-        #streamCountConfig: streamCountConfig,
-        #searchQuery: searchQuery,
-        #where: where,
-        #orderBy: orderBy,
-        #secondLineField: secondLineField,
-        #overrideTotalLimit: overrideTotalLimit,
-      }),
-    ),
-    returnValueForMissingStub: _FakePaginatableStreamBase_36<_i2.User>(
-      this,
-      Invocation.method(#streamAllWithConfig, [], {
-        #streamAllConfig: streamAllConfig,
-        #streamCountConfig: streamCountConfig,
-        #searchQuery: searchQuery,
-        #where: where,
-        #orderBy: orderBy,
-        #secondLineField: secondLineField,
-        #overrideTotalLimit: overrideTotalLimit,
-      }),
-    ),
-  ) as _i2.PaginatableStreamBase<_i2.User>);
-
-  @override
   _i5.Stream<_i2.User?> streamSingleByIdWithConfig({
     required String? id,
-    required _i2.LegacyStreamSingleByIdConfig<_i2.User>? streamSingleByIdConfig,
+    required _i2.StreamSingleByIdConfig<_i2.User>? streamSingleByIdConfig,
   }) => (super.noSuchMethod(
     Invocation.method(#streamSingleByIdWithConfig, [], {
       #id: id,

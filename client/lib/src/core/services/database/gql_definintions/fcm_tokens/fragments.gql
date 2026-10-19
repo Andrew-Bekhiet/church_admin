@@ -1,5 +1,0 @@
-fragment FcmToken on UsersFcmTokens {
-  uid
-  token
-  createdAt
-}

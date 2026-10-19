@@ -1,65 +1,38 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/data_check_free_documents.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/accounts/__generated__/mutations.graphql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/queries.graphql.dart';
 import 'package:graphql/client.dart';
 
 class UsersDAO extends DAOBase<User>
-    with LegacyStreamableDAO<User>, DataCheckFreeDocuments<User> {
+    with KeysetStreamableDAO<User>, DataCheckFreeDocuments<User> {
   @override
-  late final LegacyStreamAllConfig<User> baseStreamAllConfig =
-      LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllUsers,
-        transformRequest: _streamAllVarsConstructor,
-      );
+  StreamAllConfig<User> get baseStreamAllConfig => StreamAllConfig(
+    document: documentNodeQueryusers,
+    arguments: (parameters) => ListQueryArguments.fromParameters(
+      parameters,
+      defaultOrderBy: [OrderBy(field: UserFields().name)],
+    ),
+  );
+
   @override
-  late final LegacyStreamCountConfig<User> baseStreamCountConfig =
-      const LegacyStreamCountConfig(
-        document: documentNodeSubscriptionwatchAuthUsersDataCount,
-      );
-  @override
-  late final LegacyStreamSingleByIdConfig<User> baseStreamSingleByIdConfig =
-      const LegacyStreamSingleByIdConfig(
-        document: documentNodeSubscriptionwatchUser,
-      );
+  StreamSingleByIdConfig<User> get baseStreamSingleByIdConfig =>
+      const StreamSingleByIdConfig(document: documentNodeQueryuser);
 
   UsersDAO({required super.db}) : super(fromJson: User.fromJson);
-
-  Json _streamAllVarsConstructor(
-    PaginatableStreamRequest<User, StreamableDAOParameters<User>?> request,
-  ) {
-    final orderBy = request.param?.orderBy;
-
-    return db.varsTransformer.transformrequestForPagination(
-      request,
-      overrideOrderBy: [
-        ...?orderBy,
-        OrderBy(field: UserFields().name),
-      ],
-    );
-  }
-
-  Json _streamSingleByIdVarsConstructor({
-    required UuidValue id,
-    bool fullData = false,
-  }) => Variables_Subscription_watchUser(uid: id, fullData: fullData).toJson();
 
   @override
   Stream<User?> streamSingleById({
     required String id,
     bool fullData = false,
-  }) {
-    return streamSingleByIdWithConfig(
-      id: id,
-      streamSingleByIdConfig: baseStreamSingleByIdConfig.copyWith(
-        variables: _streamSingleByIdVarsConstructor(
-          id: id.toUuid(),
-          fullData: fullData,
-        ),
-      ),
-    );
-  }
+  }) => streamSingleByIdWithConfig(
+    id: id,
+    streamSingleByIdConfig: baseStreamSingleByIdConfig.copyWith(
+      varsConstructor: ({required id}) =>
+          Variables_Query_user(id: id, fullData: fullData).toJson(),
+    ),
+  );
 
   /// The uid of the created user.
   Future<String> createUser(CreateUserRequest request) {
@@ -84,38 +57,27 @@ class UsersDAO extends DAOBase<User>
   Future<void> updateUser(UserUpdate update) async {
     if (!update.hasChanges) return;
 
-    final result = await graphQLClient.mutateAndReturnParsed(
+    final document = transformDocument(documentNodeMutationupdateUser);
+
+    await graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: transformDocument(documentNodeMutationupdateUser),
+        document: document,
         operationName: 'updateUser',
         variables: Variables_Mutation_updateUser(
-          uid: update.uid.toUuid(),
-          $set: Input_AuthUsersDataSetInput.fromJson({
-            if (update.name case final name?) 'name': name,
-            if (update.email case final email?)
-              'email': email.isEmpty ? null : email,
+          id: update.uid,
+          input: Input_UpdateUserInput.fromJson({
+            'name': ?update.name,
+            'email': ?update.email,
+            ...switch ((update.linkPersonId, update.unlinkPersonId)) {
+              (final linkedPersonId?, _) => {'personId': linkedPersonId},
+              (null, _?) => {'personId': null},
+              (null, null) => const <String, Object?>{},
+            },
           }),
-          updateUser: update.name != null || update.email != null,
-          linkPersonId: update.linkPersonId?.toUuid(),
-          linkPerson: update.linkPersonId != null,
-          unlinkPersonId: update.unlinkPersonId?.toUuid(),
-          unlinkPerson: update.unlinkPersonId != null,
         ).toJson(),
-        parserFn: Mutation_updateUser.fromJson,
+        parserFn: AshResultParser(document).mutationResult(fromJson),
       ),
     );
-
-    if (update.linkPersonId case final personId?
-        when result.link?.affectedRows != 1) {
-      if (update.unlinkPersonId case final unlinkedPersonId?
-          when result.unlink?.affectedRows == 1) {
-        await updateUser(
-          UserUpdate(uid: update.uid, linkPersonId: unlinkedPersonId),
-        );
-      }
-
-      throw PersonAlreadyLinkedException(personId);
-    }
   }
 
   Input_CreateUserInput _createUserInputOf(CreateUserRequest request) =>

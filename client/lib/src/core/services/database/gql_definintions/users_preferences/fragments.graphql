@@ -1,10 +1,10 @@
-fragment UserPreferences on UsersPreferences {
+fragment UserPreferences on UserPreferences {
+  id
   uid
   orderByPreferences
   secondLinePreferences
   darkTheme
   greatFeastTheme
   lastHomeMode
-  lastWhatsappMessageText
   updatedAt
 }

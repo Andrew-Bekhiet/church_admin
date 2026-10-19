@@ -9,7 +9,7 @@ class Fragment_Invitation {
     required this.createdAt,
     required this.expiresAt,
     this.claimedAt,
-    this.$__typename = 'AuthInvitations',
+    this.$__typename = 'Invitation',
   });
 
   factory Fragment_Invitation.fromJson(Map<String, dynamic> json) {
@@ -21,8 +21,8 @@ class Fragment_Invitation {
     final l$claimedAt = json['claimedAt'];
     final l$$__typename = json['__typename'];
     return Fragment_Invitation(
-      id: stringToUuid(l$id),
-      userUid: stringToUuid(l$userUid),
+      id: (l$id as String),
+      userUid: (l$userUid as String),
       code: (l$code as String),
       createdAt: tstzFromString(l$createdAt),
       expiresAt: tstzFromString(l$expiresAt),
@@ -31,9 +31,9 @@ class Fragment_Invitation {
     );
   }
 
-  final UuidValue id;
+  final String id;
 
-  final UuidValue userUid;
+  final String userUid;
 
   final String code;
 
@@ -48,9 +48,9 @@ class Fragment_Invitation {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$id = id;
-    _resultData['id'] = uuidToString(l$id);
+    _resultData['id'] = l$id;
     final l$userUid = userUid;
-    _resultData['userUid'] = uuidToString(l$userUid);
+    _resultData['userUid'] = l$userUid;
     final l$code = code;
     _resultData['code'] = l$code;
     final l$createdAt = createdAt;
@@ -148,8 +148,8 @@ abstract class CopyWith_Fragment_Invitation<TRes> {
       _CopyWithStubImpl_Fragment_Invitation;
 
   TRes call({
-    UuidValue? id,
-    UuidValue? userUid,
+    String? id,
+    String? userUid,
     String? code,
     DateTime? createdAt,
     DateTime? expiresAt,
@@ -178,10 +178,10 @@ class _CopyWithImpl_Fragment_Invitation<TRes>
     Object? $__typename = _undefined,
   }) => _then(
     Fragment_Invitation(
-      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      id: id == _undefined || id == null ? _instance.id : (id as String),
       userUid: userUid == _undefined || userUid == null
           ? _instance.userUid
-          : (userUid as UuidValue),
+          : (userUid as String),
       code: code == _undefined || code == null
           ? _instance.code
           : (code as String),
@@ -208,8 +208,8 @@ class _CopyWithStubImpl_Fragment_Invitation<TRes>
   TRes _res;
 
   call({
-    UuidValue? id,
-    UuidValue? userUid,
+    String? id,
+    String? userUid,
     String? code,
     DateTime? createdAt,
     DateTime? expiresAt,
@@ -221,10 +221,7 @@ class _CopyWithStubImpl_Fragment_Invitation<TRes>
 const fragmentDefinitionInvitation = FragmentDefinitionNode(
   name: NameNode(value: 'Invitation'),
   typeCondition: TypeConditionNode(
-    on: NamedTypeNode(
-      name: NameNode(value: 'AuthInvitations'),
-      isNonNull: false,
-    ),
+    on: NamedTypeNode(name: NameNode(value: 'Invitation'), isNonNull: false),
   ),
   directives: [],
   selectionSet: SelectionSetNode(
