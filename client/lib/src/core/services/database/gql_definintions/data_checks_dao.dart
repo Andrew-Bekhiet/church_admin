@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/data_checks/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/data_checks/__generated__/mutations.graphql.dart';
 import 'package:graphql/client.dart';
 
 class DataChecksDAO {
@@ -13,17 +13,21 @@ class DataChecksDAO {
     required String familyId,
     required bool isComplete,
   }) async {
+    const document = documentNodeMutationoverrideDataCheck;
+
     final applied = await graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
-        document: documentNodeMutationoverrideDataCheck,
+        document: document,
         operationName: 'overrideDataCheck',
         variables: Variables_Mutation_overrideDataCheck(
-          familyId: familyId.toUuid(),
-          isComplete: isComplete,
+          input: Input_OverrideDataCheckInput(
+            familyId: familyId,
+            isComplete: isComplete,
+          ),
         ).toJson(),
-        parserFn: (json) => Mutation_overrideDataCheck.fromJson(
-          json,
-        ).insertDataCheckOverridesOne,
+        parserFn: AshResultParser(document).mutationResultOrNull(
+          (override) => override,
+        ),
       ),
     );
 
@@ -31,19 +35,25 @@ class DataChecksDAO {
   }
 
   Future<bool> tryClearOverride({required String familyId}) async {
-    final deleted = await graphQLClient.mutateAndReturnParsedNullable(
-      MutationOptions(
-        document: documentNodeMutationclearDataCheckOverride,
-        operationName: 'clearDataCheckOverride',
-        variables: Variables_Mutation_clearDataCheckOverride(
-          familyId: familyId.toUuid(),
-        ).toJson(),
-        parserFn: (json) => Mutation_clearDataCheckOverride.fromJson(
-          json,
-        ).deleteDataCheckOverridesByPk,
-      ),
-    );
+    const document = documentNodeMutationclearDataCheckOverride;
 
-    return deleted != null;
+    try {
+      final cleared = await graphQLClient.mutateAndReturnParsedNullable(
+        MutationOptions(
+          document: document,
+          operationName: 'clearDataCheckOverride',
+          variables: Variables_Mutation_clearDataCheckOverride(
+            id: familyId,
+          ).toJson(),
+          parserFn: AshResultParser(document).mutationResultOrNull(
+            (override) => override,
+          ),
+        ),
+      );
+
+      return cleared != null;
+    } on BackendNotFoundException {
+      return false;
+    }
   }
 }

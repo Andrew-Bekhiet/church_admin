@@ -63,13 +63,13 @@ class DataCheckFields {
         operators: {...MultiSelectOperator.values},
       );
 
-  final FieldMetadata<String> familyId = FieldMetadata<String>(
+  final FieldMetadata<DataCheck> familyId = FieldMetadata<DataCheck>(
     getValue: (obj) => obj is DataCheck ? obj.familyId : null,
     parentType: DataCheck,
     name: 'familyId',
     label: 'العائلة',
     isCodeOnly: true,
-    operators: {...StringOperator.values},
+    operators: {...MultiSelectOperator.values},
   );
 
   late final List<FieldMetadata<Object>> allFields = [
@@ -101,14 +101,9 @@ DataCheck _$DataCheckFromJson(Map json) => DataCheck(
   isComplete: json['isComplete'] as bool? ?? false,
   familyCheck: json['familyCheck'] as bool? ?? false,
   addressCheck: json['addressCheck'] as bool? ?? false,
-  checksDetails:
-      (json['details'] as List<dynamic>?)
-          ?.map(
-            (e) =>
-                DataCheckDetail.fromJson(Map<String, Object?>.from(e as Map)),
-          )
-          .toList() ??
-      [],
+  checksDetails: json['details'] == null
+      ? const []
+      : DataCheck._detailsFromJson(json['details'] as List?),
   userOverride: json['userOverride'] == null
       ? DataCheckOverride.none
       : DataCheckOverride.fromBoolean(json['userOverride'] as bool?),
@@ -121,5 +116,5 @@ Map<String, dynamic> _$DataCheckToJson(DataCheck instance) => <String, dynamic>{
   'addressCheck': instance.addressCheck,
   'userOverride': _dataCheckOverrideToBoolean(instance.userOverride),
   'familyId': instance.familyId,
-  'details': instance.checksDetails.map((e) => e.toJson()).toList(),
+  'details': DataCheck._detailsToJson(instance.checksDetails),
 };

@@ -54,9 +54,7 @@ class _ViewFamilyState extends State<ViewFamily> {
         where: Stream.value(
           [
             Filter(
-              FamilyFields().parentsRel.redirectTo(
-                FamiliesFamiliesFields().parentFamilyId,
-              ),
+              FamilyFields().parents.redirectTo(FamilyFields().id),
               PrimitiveOperator.eq,
               widget.familyId,
             ),
@@ -81,9 +79,7 @@ class _ViewFamilyState extends State<ViewFamily> {
         where: Stream.value(
           [
             Filter(
-              FamilyFields().childrenRel.redirectTo(
-                FamiliesFamiliesFields().childFamilyId,
-              ),
+              FamilyFields().children.redirectTo(FamilyFields().id),
               PrimitiveOperator.eq,
               widget.familyId,
             ),
