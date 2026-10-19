@@ -1,61 +1,45 @@
 import 'dart:ui' show Color;
 
 import 'package:church_admin/church_admin.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'meetings_analysis_subject.freezed.dart';
+part 'meetings_analysis_subject.g.dart';
 
 /// The entity an analysis is scoped to. Its [title] and [color] label the
 /// resulting analysis, and the DAO/cubit switch on the concrete subtype to
 /// build the right query filters and resolve the classes to display.
-sealed class MeetingsAnalysisSubject {
-  String get title;
-  Color? get color;
+@Freezed(unionKey: 'type', copyWith: false)
+sealed class MeetingsAnalysisSubject with _$MeetingsAnalysisSubject {
+  String get title => switch (this) {
+    MeetingAnalysisSubject(:final meeting) => meeting.name,
+    ServiceAnalysisSubject(:final service) => service.name,
+    GroupAnalysisSubject(:final group) => group.name,
+    ClassAnalysisSubject(:final class$) => class$.name,
+  };
 
-  const MeetingsAnalysisSubject();
-}
+  Color? get color => switch (this) {
+    MeetingAnalysisSubject(:final meeting) => meeting.color,
+    ServiceAnalysisSubject(:final service) => service.color,
+    GroupAnalysisSubject(:final group) => group.color,
+    ClassAnalysisSubject(:final class$) => class$.color,
+  };
 
-final class MeetingAnalysisSubject extends MeetingsAnalysisSubject {
-  final Meeting meeting;
+  const MeetingsAnalysisSubject._();
 
-  @override
-  String get title => meeting.name;
+  const factory MeetingsAnalysisSubject.meeting(Meeting meeting) =
+      MeetingAnalysisSubject;
 
-  @override
-  Color? get color => meeting.color;
+  const factory MeetingsAnalysisSubject.service(Service service) =
+      ServiceAnalysisSubject;
 
-  const MeetingAnalysisSubject(this.meeting);
-}
+  const factory MeetingsAnalysisSubject.group(Group group) =
+      GroupAnalysisSubject;
 
-final class ServiceAnalysisSubject extends MeetingsAnalysisSubject {
-  final Service service;
+  @FreezedUnionValue('class')
+  const factory MeetingsAnalysisSubject.class$(Class class$) =
+      ClassAnalysisSubject;
 
-  @override
-  String get title => service.name;
-
-  @override
-  Color? get color => service.color;
-
-  const ServiceAnalysisSubject(this.service);
-}
-
-final class GroupAnalysisSubject extends MeetingsAnalysisSubject {
-  final Group group;
-
-  @override
-  String get title => group.name;
-
-  @override
-  Color? get color => group.color;
-
-  const GroupAnalysisSubject(this.group);
-}
-
-final class ClassAnalysisSubject extends MeetingsAnalysisSubject {
-  final Class class$;
-
-  @override
-  String get title => class$.name;
-
-  @override
-  Color? get color => class$.color;
-
-  const ClassAnalysisSubject(this.class$);
+  factory MeetingsAnalysisSubject.fromJson(Json json) =>
+      _$MeetingsAnalysisSubjectFromJson(json);
 }
