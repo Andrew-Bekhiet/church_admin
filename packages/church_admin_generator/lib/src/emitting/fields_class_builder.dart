@@ -97,6 +97,7 @@ final class FieldsClassBuilder {
           'label': literalString(metadata.label),
           'isCodeOnly': literalBool(metadata.isCodeOnly),
           if (!metadata.isOrderable) 'isOrderable': literalFalse,
+          if (metadata.isDateOnly) 'isDateOnly': literalTrue,
           if (_operators(metadata) case final operators?)
             'operators': operators,
         }).code,

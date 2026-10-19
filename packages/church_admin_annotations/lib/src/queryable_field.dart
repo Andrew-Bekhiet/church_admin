@@ -23,6 +23,10 @@ final class QueryableField {
 
   final bool usesBirthdayOperators;
 
+  /// The server keeps a calendar date here (for a history or latest record,
+  /// in the time of its records), so filters compare days, not moments.
+  final bool dateOnly;
+
   /// The metadata type when it differs from the declared type.
   final Type? type;
 
@@ -37,6 +41,7 @@ final class QueryableField {
     required String this.label,
     this.codeOnly = false,
     this.orderable = true,
+    this.dateOnly = false,
     this.graphqlName,
   }) : representsParent = false,
        usesBirthdayOperators = false,
@@ -52,19 +57,23 @@ final class QueryableField {
   }) : graphqlName = null,
        representsParent = true,
        usesBirthdayOperators = false,
+       dateOnly = false,
        type = null,
        through = null,
        select = null;
 
   /// The latest entry of a history, which cannot be ordered.
-  const QueryableField.history({required String this.label, this.graphqlName})
-    : codeOnly = false,
-      orderable = false,
-      representsParent = false,
-      usesBirthdayOperators = false,
-      type = null,
-      through = null,
-      select = null;
+  const QueryableField.history({
+    required String this.label,
+    this.dateOnly = false,
+    this.graphqlName,
+    this.type,
+  }) : codeOnly = false,
+       orderable = false,
+       representsParent = false,
+       usesBirthdayOperators = false,
+       through = null,
+       select = null;
 
   /// An aggregate over a relationship, available to code only and labelled
   /// with the field name.
@@ -75,6 +84,7 @@ final class QueryableField {
       orderable = true,
       representsParent = false,
       usesBirthdayOperators = false,
+      dateOnly = false,
       through = null,
       select = null;
 
@@ -85,6 +95,7 @@ final class QueryableField {
       orderable = true,
       representsParent = false,
       usesBirthdayOperators = true,
+      dateOnly = false,
       type = null,
       through = null,
       select = null;
@@ -98,5 +109,6 @@ final class QueryableField {
        orderable = false,
        representsParent = false,
        usesBirthdayOperators = false,
+       dateOnly = false,
        type = null;
 }
