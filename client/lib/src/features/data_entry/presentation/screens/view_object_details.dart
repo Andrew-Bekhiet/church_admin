@@ -49,9 +49,15 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
       unawaited(UserPreferencesService.I.setLastOrderByFor(key, orderBy));
     }
 
+    final showableSavedSecondLineField = switch (UserPreferencesService.I
+        .getLastSecondLineFieldFor(key)) {
+      final saved? when type.canOrderBy(saved) => saved,
+      _ => null,
+    };
+
     return ListArrangement(
       orderBy: orderBy,
-      secondLineField: UserPreferencesService.I.getLastSecondLineFieldFor(key),
+      secondLineField: showableSavedSecondLineField,
     );
   }
 

@@ -189,6 +189,36 @@ void main() {
     );
 
     test(
+      'a saved second line on a field the list can no longer show is dropped',
+      () async {
+        await preferences.setLastSecondLineFieldFor(
+          OrderByPreferenceKey(type: person),
+          fields.address.redirectTo(AddressFields().houseCode),
+        );
+
+        final controller = createController();
+
+        expect(controller.value.secondLineField, isNull);
+      },
+    );
+
+    testWidgets(
+      'the sheet opens for a list saved with a now unshowable second line',
+      (tester) async {
+        await preferences.setLastSecondLineFieldFor(
+          OrderByPreferenceKey(type: person),
+          fields.address.redirectTo(AddressFields().houseCode),
+        );
+        final controller = createController();
+
+        await openSheetFor(tester, controller);
+
+        expect(tester.takeException(), isNull);
+        expect(find.byType(ArrangementSecondLineSection), findsOneWidget);
+      },
+    );
+
+    test(
       'second lines saved for the service context do not leak into the plain list',
       () async {
         await preferences.setLastSecondLineFieldFor(
