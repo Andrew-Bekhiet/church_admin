@@ -5,20 +5,20 @@ import 'package:church_admin/src/core/services/database/gql_definintions/users/_
 import 'package:graphql/client.dart';
 
 class UsersDAO extends DAOBase<User>
-    with StreamableDAO<User>, DataCheckFreeDocuments<User> {
+    with LegacyStreamableDAO<User>, DataCheckFreeDocuments<User> {
   @override
-  late final StreamAllConfig<User> baseStreamAllConfig = StreamAllConfig(
+  late final LegacyStreamAllConfig<User> baseStreamAllConfig = LegacyStreamAllConfig(
     document: documentNodeSubscriptionwatchAllUsers,
     transformRequest: _streamAllVarsConstructor,
   );
   @override
-  late final StreamCountConfig<User> baseStreamCountConfig =
-      const StreamCountConfig(
+  late final LegacyStreamCountConfig<User> baseStreamCountConfig =
+      const LegacyStreamCountConfig(
         document: documentNodeSubscriptionwatchAuthUsersDataCount,
       );
   @override
-  late final StreamSingleByIdConfig<User> baseStreamSingleByIdConfig =
-      const StreamSingleByIdConfig(document: documentNodeSubscriptionwatchUser);
+  late final LegacyStreamSingleByIdConfig<User> baseStreamSingleByIdConfig =
+      const LegacyStreamSingleByIdConfig(document: documentNodeSubscriptionwatchUser);
 
   UsersDAO({required super.db}) : super(fromJson: User.fromJson);
 

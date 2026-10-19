@@ -2,9 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 
-mixin DeletableDAO<T extends ViewableWithID> on DAOBase<T> {
+mixin LegacyDeletableDAO<T extends ViewableWithID> on DAOBase<T> {
   @protected
-  DeleteSingleByIdConfig<T> get baseDeleteSingleByIdConfig;
+  LegacyDeleteSingleByIdConfig<T> get baseDeleteSingleByIdConfig;
 
   Future<T?> deleteById({required String id}) {
     final deleteSingleByIdConfig = baseDeleteSingleByIdConfig;

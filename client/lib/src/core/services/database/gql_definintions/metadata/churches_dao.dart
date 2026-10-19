@@ -3,17 +3,17 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/churches/__generated__/subscriptions.gql.dart';
 
 class ChurchesDAO extends DAOBase<Church>
-    with StreamableDAO<Church>, CreatableDAO<Church> {
+    with LegacyStreamableDAO<Church>, LegacyCreatableDAO<Church> {
   @override
-  StreamAllConfig<Church> get baseStreamAllConfig => const StreamAllConfig(
+  LegacyStreamAllConfig<Church> get baseStreamAllConfig => const LegacyStreamAllConfig(
     document: documentNodeSubscriptionwatchAllChurches,
   );
   @override
-  StreamSingleByIdConfig<Church> get baseStreamSingleByIdConfig =>
+  LegacyStreamSingleByIdConfig<Church> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  CreateObjectConfig<Church> get baseCreateObjectConfig => CreateObjectConfig(
+  LegacyCreateObjectConfig<Church> get baseCreateObjectConfig => LegacyCreateObjectConfig(
     document: documentNodeMutationcreateChurch,
     varsConstructor: _createChurchVarsConstructor,
     parserFn: db.parser.singleParser(fromJson),

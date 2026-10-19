@@ -3,18 +3,18 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/districts/__generated__/subscriptions.gql.dart';
 
 class DistrictsDAO extends DAOBase<District>
-    with StreamableDAO<District>, CreatableDAO<District> {
+    with LegacyStreamableDAO<District>, LegacyCreatableDAO<District> {
   @override
-  StreamAllConfig<District> get baseStreamAllConfig => const StreamAllConfig(
+  LegacyStreamAllConfig<District> get baseStreamAllConfig => const LegacyStreamAllConfig(
     document: documentNodeSubscriptionwatchAllDistricts,
   );
 
   @override
-  StreamSingleByIdConfig<District> get baseStreamSingleByIdConfig =>
+  LegacyStreamSingleByIdConfig<District> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  CreateObjectConfig<District> get baseCreateObjectConfig => CreateObjectConfig(
+  LegacyCreateObjectConfig<District> get baseCreateObjectConfig => LegacyCreateObjectConfig(
     document: documentNodeMutationcreateDistrict,
     varsConstructor: _createDistrictVarsConstructor,
     parserFn: db.parser.singleParser(fromJson, 'insertDistrictsOne'),

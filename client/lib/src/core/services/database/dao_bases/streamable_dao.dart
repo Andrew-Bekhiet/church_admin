@@ -1,32 +1,28 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:meta/meta.dart';
-import 'package:rxdart/rxdart.dart';
 
-mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
-  StreamAllConfig<T> get baseStreamAllConfig;
+/// What features read through a DAO, whichever backend base implements it.
+abstract interface class StreamableDAO<T extends ViewableWithID>
+    implements DAOBase<T> {
+  DAOMethodTemplate<Object?> get baseStreamAllConfig;
 
-  StreamCountConfig<T>? get baseStreamCountConfig => null;
-
-  @protected
-  StreamSingleByIdConfig<T> get baseStreamSingleByIdConfig;
+  LegacyStreamCountConfig<T>? get baseStreamCountConfig;
 
   PaginatableStreamBase<T> streamAll({
     Stream<String?>? searchQuery,
     Stream<List<Filter>>? where,
     Stream<List<OrderBy>>? orderBy,
     Stream<FieldMetadata?>? secondLineField,
-  }) {
-    return streamAllWithConfig(
-      streamAllConfig: baseStreamAllConfig,
-      streamCountConfig: baseStreamCountConfig,
-      searchQuery: searchQuery,
-      where: where,
-      orderBy: orderBy,
-      secondLineField: secondLineField,
-    );
-  }
+  });
+
+  PaginatableStreamBase<T> streamAllWithConfig({
+    required DAOMethodTemplate<Object?> streamAllConfig,
+    LegacyStreamCountConfig<T>? streamCountConfig,
+    Stream<String?>? searchQuery,
+    Stream<List<Filter>>? where,
+    Stream<List<OrderBy>>? orderBy,
+    Stream<FieldMetadata?>? secondLineField,
+    int? overrideTotalLimit,
+  });
 
   Future<List<T>> query({
     bool onlineFirst = false,
@@ -34,179 +30,7 @@ mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
     List<Filter>? where,
     List<OrderBy>? orderBy,
     int? limit,
-  }) async {
-    final streamAllConfig = baseStreamAllConfig;
-    final pageSize = limit ?? PaginatableStream.defaultPageSize;
-    final parameters = StreamableDAOParameters<T>(
-      search: searchQuery,
-      where: where?.whereEnabled(),
-      orderBy: orderBy?.whereEnabled(),
-    );
-    final request = PaginatableStreamRequest<T, StreamableDAOParameters<T>?>(
-      pageIndex: 0,
-      pageSize: pageSize,
-      param: parameters,
-    );
+  });
 
-    final response = await graphQLClient.queryAndReturnParsed(
-      QueryOptions(
-        document: SubscriptionToQueryConverter.convert(
-          transformDocument(streamAllConfig.document, parameters: parameters),
-        ),
-        operationName: streamAllConfig.effectiveOperationName,
-        variables: _getEffectiveStreamAllVars(streamAllConfig, request),
-        parserFn:
-            streamAllConfig.parserFn ??
-            db.parser.singleListParser(fromJson, pageSize: pageSize),
-      ),
-      onlineFirst: onlineFirst,
-    );
-
-    return response.data;
-  }
-
-  Stream<T?> streamSingleById({
-    required String id,
-  }) {
-    return streamSingleByIdWithConfig(
-      id: id,
-      streamSingleByIdConfig: baseStreamSingleByIdConfig,
-    );
-  }
-
-  PaginatableStreamBase<T> streamAllWithConfig({
-    required StreamAllConfig<T> streamAllConfig,
-    StreamCountConfig<T>? streamCountConfig,
-    Stream<String?>? searchQuery,
-    Stream<List<Filter>>? where,
-    Stream<List<OrderBy>>? orderBy,
-    Stream<FieldMetadata?>? secondLineField,
-    int? overrideTotalLimit,
-  }) {
-    final shareableParametersStream = Rx.combineLatest4(
-      searchQuery ?? Stream.value(null),
-      where ?? Stream.value(null),
-      orderBy ?? Stream.value(null),
-      secondLineField ?? Stream.value(null),
-      (search, where, orderBy, secondLineField) => StreamableDAOParameters<T>(
-        search: search,
-        where: where?.whereEnabled(),
-        orderBy: orderBy?.whereEnabled(),
-        secondLineField: switch (secondLineField) {
-          final field? when field.isEnabled => field,
-          _ => null,
-        },
-      ),
-    ).shareValue();
-
-    final Stream<int?> countStream = _getCountStream(
-      streamCountConfig,
-      shareableParametersStream,
-      overrideTotalLimit,
-    );
-
-    return PaginatableStream(
-      pageSize: overrideTotalLimit ?? PaginatableStream.defaultPageSize,
-      parametersStream: shareableParametersStream,
-      factory: (request) => _streamAllFactory(
-        streamAllConfig,
-        countStream,
-        request,
-      ),
-    );
-  }
-
-  Stream<int?> _getCountStream(
-    StreamCountConfig? streamCountConfig,
-    Stream<StreamableDAOParameters> parametersStream,
-    int? overrideTotalLimit,
-  ) {
-    if (streamCountConfig == null) return Stream.value(null).shareValue();
-
-    return parametersStream
-        .map((p) => p.where)
-        .distinct(const ListEquality<Filter>().equals)
-        .switchMap(
-          (where) => graphQLClient.subscribeAndReturnParsed(
-            streamCountConfig.operationOptions ??
-                SubscriptionOptions(
-                  document: transformDocument(streamCountConfig.document),
-                  operationName: streamCountConfig.effectiveOperationName,
-                  variables:
-                      streamCountConfig.variables ??
-                      {
-                        'where':
-                            where?.map((o) => o.queryToJson()).toList() ?? [],
-                        'limit': overrideTotalLimit,
-                      },
-                  parserFn: streamCountConfig.parserFn ?? db.parser.countParser,
-                ),
-          ),
-        );
-  }
-
-  Stream<PaginatableStreamResponse<T>> _streamAllFactory(
-    StreamAllConfig<T> streamAllConfig,
-    Stream<int?> countStream,
-    PaginatableStreamRequest<T, StreamableDAOParameters<T>?> request,
-  ) {
-    return Rx.combineLatest2(
-      graphQLClient.subscribeAndReturnParsed(
-        streamAllConfig.operationOptions ??
-            SubscriptionOptions(
-              document: transformDocument(
-                streamAllConfig.document,
-                parameters: request.param,
-              ),
-              operationName: streamAllConfig.effectiveOperationName,
-              variables: _getEffectiveStreamAllVars(streamAllConfig, request),
-              parserFn:
-                  streamAllConfig.parserFn ??
-                  db.parser.singleListParser(
-                    fromJson,
-                    pageSize: request.pageSize,
-                  ),
-            ),
-      ),
-      countStream,
-      (data, count) => PaginatableStreamResponse<T>(
-        data: data.data,
-        cursor: data.cursor,
-        totalCount: count ?? data.totalCount,
-      ),
-    );
-  }
-
-  Json _getEffectiveStreamAllVars(
-    StreamAllConfig<T> streamAllConfig,
-    PaginatableStreamRequest<T, StreamableDAOParameters<T>?> request,
-  ) {
-    return streamAllConfig.variables ??
-        streamAllConfig.transformRequest?.call(request) ??
-        db.varsTransformer.transformrequestForPagination<T>(request);
-  }
-
-  Stream<T?> streamSingleByIdWithConfig({
-    required String id,
-    required StreamSingleByIdConfig<T> streamSingleByIdConfig,
-  }) {
-    return graphQLClient
-        .subscribe(
-          streamSingleByIdConfig.operationOptions ??
-              SubscriptionOptions(
-                document: transformDocument(streamSingleByIdConfig.document),
-                operationName: streamSingleByIdConfig.effectiveOperationName,
-                variables:
-                    streamSingleByIdConfig.variables ??
-                    streamSingleByIdConfig.varsConstructor?.call(
-                      id: id.toUuid(),
-                    ) ??
-                    {},
-                parserFn:
-                    streamSingleByIdConfig.parserFn ??
-                    db.parser.singleOrNullParser(fromJson),
-              ),
-        )
-        .map((p) => p.parsedData);
-  }
+  Stream<T?> streamSingleById({required String id});
 }

@@ -4,12 +4,11 @@ import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class DeleteSingleByIdConfig<T> extends DAOMethodTemplate<T?> {
-  final DeleteSingleByIdConfigVarsConstructor? varsConstructor;
+class LegacyStreamSingleByIdConfig<T> extends DAOMethodTemplate<T?> {
+  final LegacyStreamSingleByIdConfigVarsConstructor? varsConstructor;
+  final SubscriptionOptions<T>? operationOptions;
 
-  final MutationOptions<T>? operationOptions;
-
-  const DeleteSingleByIdConfig({
+  const LegacyStreamSingleByIdConfig({
     required super.document,
     this.varsConstructor,
     this.operationOptions,
@@ -18,15 +17,15 @@ class DeleteSingleByIdConfig<T> extends DAOMethodTemplate<T?> {
     super.parserFn,
   });
 
-  DeleteSingleByIdConfig copyWith({
+  LegacyStreamSingleByIdConfig<T> copyWith({
     DocumentNode? document,
     String? operationName,
     Json? variables,
-    DeleteSingleByIdConfigVarsConstructor? varsConstructor,
-    MutationOptions<T>? operationOptions,
+    LegacyStreamSingleByIdConfigVarsConstructor? varsConstructor,
+    SubscriptionOptions<T>? operationOptions,
     T? Function(Json)? parserFn,
   }) {
-    return DeleteSingleByIdConfig(
+    return LegacyStreamSingleByIdConfig<T>(
       document: document ?? this.document,
       operationName: operationName ?? super.effectiveOperationName,
       variables: variables ?? this.variables,
@@ -37,6 +36,6 @@ class DeleteSingleByIdConfig<T> extends DAOMethodTemplate<T?> {
   }
 }
 
-typedef DeleteSingleByIdConfigVarsConstructor = Json Function({
+typedef LegacyStreamSingleByIdConfigVarsConstructor = Json Function({
   required UuidValue id,
 });

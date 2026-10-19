@@ -2,38 +2,38 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/groups/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/groups/__generated__/subscriptions.gql.dart';
 
-class GroupsDAO extends FullCRUDDAO<Group> {
+class GroupsDAO extends LegacyFullCRUDDAO<Group> {
   @override
-  late final StreamAllConfig<Group> baseStreamAllConfig = StreamAllConfig(
+  late final LegacyStreamAllConfig<Group> baseStreamAllConfig = LegacyStreamAllConfig(
     document: documentNodeSubscriptionwatchAllGroups,
     transformRequest: _streamAllVarsConstructor,
   );
   @override
-  late final StreamCountConfig<Group> baseStreamCountConfig =
-      const StreamCountConfig(
+  late final LegacyStreamCountConfig<Group> baseStreamCountConfig =
+      const LegacyStreamCountConfig(
         document: documentNodeSubscriptionwatchGroupsCount,
       );
   @override
-  late final StreamSingleByIdConfig<Group> baseStreamSingleByIdConfig =
-      StreamSingleByIdConfig(
+  late final LegacyStreamSingleByIdConfig<Group> baseStreamSingleByIdConfig =
+      LegacyStreamSingleByIdConfig(
         document: documentNodeSubscriptionwatchGroup,
         varsConstructor: _streamSingleByIdVarsConstructor,
       );
   @override
-  late final DeleteSingleByIdConfig<Group> baseDeleteSingleByIdConfig =
-      DeleteSingleByIdConfig(
+  late final LegacyDeleteSingleByIdConfig<Group> baseDeleteSingleByIdConfig =
+      LegacyDeleteSingleByIdConfig(
         document: documentNodeMutationdeleteGroup,
         varsConstructor: _deleteSingleByIdVarsConstructor,
       );
   @override
-  late final UpdateObjectConfig<Group> baseUpdateObjectConfig =
-      UpdateObjectConfig(
+  late final LegacyUpdateObjectConfig<Group> baseUpdateObjectConfig =
+      LegacyUpdateObjectConfig(
         document: documentNodeMutationupdateGroup,
         varsConstructor: _updateGroupVarsConstructor,
       );
   @override
-  late final CreateObjectConfig<Group> baseCreateObjectConfig =
-      CreateObjectConfig(
+  late final LegacyCreateObjectConfig<Group> baseCreateObjectConfig =
+      LegacyCreateObjectConfig(
         document: documentNodeMutationinsertGroup,
         varsConstructor: _createGroupVarsConstructor,
       );

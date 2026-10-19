@@ -2,39 +2,39 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/subscriptions.gql.dart';
 
-class ServicesDAO extends FullCRUDDAO<Service> {
+class ServicesDAO extends LegacyFullCRUDDAO<Service> {
   @override
-  late final StreamAllConfig<Service> baseStreamAllConfig = StreamAllConfig(
+  late final LegacyStreamAllConfig<Service> baseStreamAllConfig = LegacyStreamAllConfig(
     document: documentNodeSubscriptionwatchAllServices,
     transformRequest: _streamAllVarsConstructor,
   );
 
   @override
-  late final StreamCountConfig<Service> baseStreamCountConfig =
-      const StreamCountConfig(
+  late final LegacyStreamCountConfig<Service> baseStreamCountConfig =
+      const LegacyStreamCountConfig(
         document: documentNodeSubscriptionwatchServicesCount,
       );
   @override
-  late final StreamSingleByIdConfig<Service> baseStreamSingleByIdConfig =
-      StreamSingleByIdConfig(
+  late final LegacyStreamSingleByIdConfig<Service> baseStreamSingleByIdConfig =
+      LegacyStreamSingleByIdConfig(
         document: documentNodeSubscriptionwatchService,
         varsConstructor: _streamSingleByIdVarsConstructor,
       );
   @override
-  late final DeleteSingleByIdConfig<Service> baseDeleteSingleByIdConfig =
-      DeleteSingleByIdConfig(
+  late final LegacyDeleteSingleByIdConfig<Service> baseDeleteSingleByIdConfig =
+      LegacyDeleteSingleByIdConfig(
         document: documentNodeMutationdeleteService,
         varsConstructor: _deleteSingleByIdVarsConstructor,
       );
   @override
-  late final UpdateObjectConfig<Service> baseUpdateObjectConfig =
-      UpdateObjectConfig(
+  late final LegacyUpdateObjectConfig<Service> baseUpdateObjectConfig =
+      LegacyUpdateObjectConfig(
         document: documentNodeMutationupdateService,
         varsConstructor: _updateServiceVarsConstructor,
       );
   @override
-  late final CreateObjectConfig<Service> baseCreateObjectConfig =
-      CreateObjectConfig(
+  late final LegacyCreateObjectConfig<Service> baseCreateObjectConfig =
+      LegacyCreateObjectConfig(
         document: documentNodeMutationinsertService,
         varsConstructor: _createServiceVarsConstructor,
       );

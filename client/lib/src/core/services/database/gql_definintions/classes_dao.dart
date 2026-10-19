@@ -4,38 +4,38 @@ import 'package:church_admin/src/core/services/database/gql_definintions/classes
 import 'package:church_admin/src/core/services/database/gql_definintions/classes/__generated__/subscriptions.gql.dart';
 import 'package:graphql/client.dart';
 
-class ClassesDAO extends FullCRUDDAO<Class> {
+class ClassesDAO extends LegacyFullCRUDDAO<Class> {
   @override
-  late final StreamAllConfig<Class> baseStreamAllConfig = StreamAllConfig(
+  late final LegacyStreamAllConfig<Class> baseStreamAllConfig = LegacyStreamAllConfig(
     document: documentNodeSubscriptionwatchAllClasses,
     transformRequest: _streamAllVarsConstructor,
   );
   @override
-  late final StreamCountConfig<Class> baseStreamCountConfig =
-      const StreamCountConfig(
+  late final LegacyStreamCountConfig<Class> baseStreamCountConfig =
+      const LegacyStreamCountConfig(
         document: documentNodeSubscriptionwatchClassesCount,
       );
   @override
-  late final StreamSingleByIdConfig<Class> baseStreamSingleByIdConfig =
-      StreamSingleByIdConfig(
+  late final LegacyStreamSingleByIdConfig<Class> baseStreamSingleByIdConfig =
+      LegacyStreamSingleByIdConfig(
         document: documentNodeSubscriptionwatchClass,
         varsConstructor: _streamSingleByIdVarsConstructor,
       );
   @override
-  late final DeleteSingleByIdConfig<Class> baseDeleteSingleByIdConfig =
-      DeleteSingleByIdConfig(
+  late final LegacyDeleteSingleByIdConfig<Class> baseDeleteSingleByIdConfig =
+      LegacyDeleteSingleByIdConfig(
         document: documentNodeMutationdeleteClass,
         varsConstructor: _deleteSingleByIdVarsConstructor,
       );
   @override
-  late final UpdateObjectConfig<Class> baseUpdateObjectConfig =
-      UpdateObjectConfig(
+  late final LegacyUpdateObjectConfig<Class> baseUpdateObjectConfig =
+      LegacyUpdateObjectConfig(
         document: documentNodeMutationupdateClass,
         varsConstructor: _updateClassVarsConstructor,
       );
   @override
-  late final CreateObjectConfig<Class> baseCreateObjectConfig =
-      CreateObjectConfig(
+  late final LegacyCreateObjectConfig<Class> baseCreateObjectConfig =
+      LegacyCreateObjectConfig(
         document: documentNodeMutationinsertClass,
         varsConstructor: _createClassVarsConstructor,
       );

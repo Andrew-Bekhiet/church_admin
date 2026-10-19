@@ -2,17 +2,17 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/jobs/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/jobs/__generated__/subscriptions.gql.dart';
 
-class JobsDAO extends DAOBase<Job> with StreamableDAO<Job>, CreatableDAO<Job> {
+class JobsDAO extends DAOBase<Job> with LegacyStreamableDAO<Job>, LegacyCreatableDAO<Job> {
   @override
-  StreamAllConfig<Job> get baseStreamAllConfig => const StreamAllConfig(
+  LegacyStreamAllConfig<Job> get baseStreamAllConfig => const LegacyStreamAllConfig(
     document: documentNodeSubscriptionwatchAllJobs,
   );
   @override
-  StreamSingleByIdConfig<Job> get baseStreamSingleByIdConfig =>
+  LegacyStreamSingleByIdConfig<Job> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  CreateObjectConfig<Job> get baseCreateObjectConfig => CreateObjectConfig(
+  LegacyCreateObjectConfig<Job> get baseCreateObjectConfig => LegacyCreateObjectConfig(
     document: documentNodeMutationcreateJob,
     varsConstructor: _createJobVarsConstructor,
     parserFn: db.parser.singleParser(fromJson),

@@ -4,29 +4,31 @@ import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class UpdateObjectConfig<T> extends DAOMethodTemplate<T> {
-  final UpdateObjectConfigVarsConstructor<T>? varsConstructor;
-
+class LegacyCreateObjectConfig<T> extends DAOMethodTemplate<T> {
+  final LegacyCreateObjectConfigVarsConstructor<T>? varsConstructor;
   final MutationOptions<T>? operationOptions;
 
-  const UpdateObjectConfig({
+  @override
+  T Function(Json)? get parserFn => super.parserFn as T Function(Json)?;
+
+  const LegacyCreateObjectConfig({
     required super.document,
     this.varsConstructor,
     this.operationOptions,
     super.operationName,
     super.variables,
-    super.parserFn,
+    T Function(Json)? super.parserFn,
   });
 
-  UpdateObjectConfig<T> copyWith({
+  LegacyCreateObjectConfig<T> copyWith({
     DocumentNode? document,
     String? operationName,
     Json? variables,
-    UpdateObjectConfigVarsConstructor<T>? varsConstructor,
+    LegacyCreateObjectConfigVarsConstructor<T>? varsConstructor,
     MutationOptions<T>? operationOptions,
     T Function(Json)? parserFn,
   }) {
-    return UpdateObjectConfig<T>(
+    return LegacyCreateObjectConfig<T>(
       document: document ?? this.document,
       operationName: operationName ?? super.effectiveOperationName,
       variables: variables ?? this.variables,
@@ -37,7 +39,6 @@ class UpdateObjectConfig<T> extends DAOMethodTemplate<T> {
   }
 }
 
-typedef UpdateObjectConfigVarsConstructor<T> = Json Function({
+typedef LegacyCreateObjectConfigVarsConstructor<T> = Json Function({
   required T newObject,
-  required T oldObject,
 });

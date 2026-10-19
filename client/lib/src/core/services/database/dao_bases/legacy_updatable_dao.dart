@@ -2,9 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 
-mixin UpdatableDAO<T extends ViewableWithID> on DAOBase<T> {
+mixin LegacyUpdatableDAO<T extends ViewableWithID> on DAOBase<T> {
   @protected
-  UpdateObjectConfig<T> get baseUpdateObjectConfig;
+  LegacyUpdateObjectConfig<T> get baseUpdateObjectConfig;
 
   Future<T?> updateObject({
     required T newObject,
