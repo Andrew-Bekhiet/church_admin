@@ -63,6 +63,14 @@ defmodule ChurchAdmin.People.GroupMembership do
     policy action_type(:read) do
       authorize_if {RelatedInScope, path: :group, entity: :group, access: :read}
     end
+
+    policy action_type([:create, :destroy]) do
+      authorize_if {RelatedInScope, path: :person, entity: :person, access: :edit}
+    end
+
+    policy action_type([:create, :destroy]) do
+      authorize_if {RelatedInScope, path: :group, entity: :group, access: :edit}
+    end
   end
 
   attributes do
