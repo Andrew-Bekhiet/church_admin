@@ -1460,7 +1460,7 @@ INSERT INTO history.meetings ("id", "name", "service_id", "service_study_year", 
 ('cf37d7ea-60e9-51fe-af07-2b6fa78c11ef', 'اجتماع 12', '6b2e6b43-6331-59a9-98b3-92b6aee7ddde', 14, false, NULL, 'personsAndServants', false, false);
 UPDATE public.groups SET default_meeting_id = '93a988b7-300d-53df-9d20-54fb7a25eccf' WHERE id = 'f8b9c2f6-c325-53a4-bf45-bd88270bd2ce';
 UPDATE public.groups SET default_meeting_id = '8aa6961f-0d2d-5be8-9d49-02f357b14225' WHERE id = 'd10de4ca-2a8b-56f8-be93-5ef2a9b9b6f7';
-ALTER TABLE public.persons_services DISABLE TRIGGER check_persons_service_rel;
+DO $$ BEGIN IF EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'check_persons_service_rel' AND tgrelid = 'public.persons_services'::regclass) THEN ALTER TABLE public.persons_services DISABLE TRIGGER check_persons_service_rel; END IF; END $$;
 INSERT INTO public.persons_services ("rel_id", "person_id", "service_id") VALUES
 ('f554f202-70b8-5b38-a7ea-8d9a55216dc0', 'ecce45b3-7805-59a0-a147-e779b4fb24e0', '39ad625b-b7d1-5da2-80cb-2df8f290a651'),
 ('552eb45c-fc40-5fa7-8851-da6e068055eb', 'cc33c1e2-5828-5ba9-8aad-c2491248161f', '41c78704-9625-565d-aaa4-b96286b3a904'),
@@ -1751,7 +1751,7 @@ INSERT INTO public.persons_services ("rel_id", "person_id", "service_id") VALUES
 ('e65a1986-39c8-5fb1-a22e-15caf094cde5', 'e081e223-dac7-5082-ab1e-9c2b5867f358', '6b2e6b43-6331-59a9-98b3-92b6aee7ddde'),
 ('115fb22b-8614-5bcc-9793-174a9c51666d', 'ebc9059f-99f2-5dbd-8da9-2c3d1288754a', '39ad625b-b7d1-5da2-80cb-2df8f290a651'),
 ('a353e85e-4899-5b17-8174-38a2487e79a7', 'ebc9059f-99f2-5dbd-8da9-2c3d1288754a', '6b2e6b43-6331-59a9-98b3-92b6aee7ddde');
-ALTER TABLE public.persons_services ENABLE TRIGGER check_persons_service_rel;
+DO $$ BEGIN IF EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'check_persons_service_rel' AND tgrelid = 'public.persons_services'::regclass) THEN ALTER TABLE public.persons_services ENABLE TRIGGER check_persons_service_rel; END IF; END $$;
 INSERT INTO public.persons_groups ("rel_id", "person_id", "group_id") VALUES
 ('04b5eec4-5f0a-57c5-b51c-0425bfb6d3b0', 'cd2467cb-7bac-5210-b3b7-f37bfc34d5f3', 'a25f64b8-45b3-5a0d-9cc4-67aad2a19e01'),
 ('092ef948-1498-5222-a18e-9acd3afb13f8', '8ddc588d-c6b8-5465-9213-6d757120c467', 'f8b9c2f6-c325-53a4-bf45-bd88270bd2ce'),

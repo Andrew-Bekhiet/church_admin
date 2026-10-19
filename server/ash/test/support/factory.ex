@@ -13,9 +13,9 @@ defmodule ChurchAdmin.Factory do
   alias ChurchAdmin.Accounts.{ScopeGrant, User, UserPermission}
   alias ChurchAdmin.Activity.Edit
   alias ChurchAdmin.Attendance.Meeting
-  alias ChurchAdmin.Catalog.StudyYear
+  alias ChurchAdmin.Catalog.{Hobby, PersonType, StudyYear, Tag}
   alias ChurchAdmin.Organization.{Class, Group, Service}
-  alias ChurchAdmin.People.{Family, GroupMembership, Person, ServiceMembership}
+  alias ChurchAdmin.People.{Contact, Family, GroupMembership, Person, ServiceMembership}
   alias ChurchAdmin.Places.{Address, Area, AreaStreet, Store, Street}
 
   def user!(attrs \\ %{}), do: seed!(User, Map.merge(%{name: unique("user")}, Map.new(attrs)))
@@ -116,6 +116,16 @@ defmodule ChurchAdmin.Factory do
 
   def in_group!(%Person{id: person_id}, %Group{id: group_id}),
     do: seed!(GroupMembership, %{person_id: person_id, group_id: group_id})
+
+  def tag!(attrs \\ %{}), do: seed!(Tag, Map.merge(%{name: unique("tag")}, Map.new(attrs)))
+
+  def hobby!(attrs \\ %{}),
+    do: seed!(Hobby, Map.merge(%{name: unique("hobby")}, Map.new(attrs)))
+
+  def person_type!(attrs \\ %{}),
+    do: seed!(PersonType, Map.merge(%{name: unique("person type")}, Map.new(attrs)))
+
+  def contact!(attrs), do: seed!(Contact, Map.new(attrs))
 
   def meeting!(attrs), do: seed!(Meeting, Map.merge(%{name: unique("meeting")}, Map.new(attrs)))
 
