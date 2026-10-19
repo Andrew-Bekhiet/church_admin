@@ -409,6 +409,7 @@ input FamilyContactFilterInput {
   effectiveFamilyId: FamilyContactFilterEffectiveFamilyId
   effectivePersonTypeId: FamilyContactFilterEffectivePersonTypeId
   person: PersonFilterInput
+  personType: PersonTypeFilterInput
   family: FamilyFilterInput
   personTypeOrder: FamilyContactFilterPersonTypeOrder
 }
@@ -431,6 +432,7 @@ type FamilyContact {
   effectiveFamilyId: ID
   effectivePersonTypeId: ID
   person: Person
+  personType: PersonType
   family: Family
   personTypeOrder: Int
 }
@@ -3029,6 +3031,7 @@ input ContactFilterInput {
   updatedAt: ContactFilterUpdatedAt
   family: FamilyFilterInput
   person: PersonFilterInput
+  personType: PersonTypeFilterInput
 }
 
 input ContactSortInput {
@@ -3048,6 +3051,7 @@ type Contact {
   updatedAt: DateTime!
   family: Family
   person: Person
+  personType: PersonType
 }
 
 enum ClassMembershipSortField {
