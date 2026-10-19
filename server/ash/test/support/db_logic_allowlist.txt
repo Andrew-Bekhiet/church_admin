@@ -1,5 +1,3 @@
-cron.job study-year-roll
-cron.job study-year-roll-missed-check
 default history.attendance_history.recorded_by
 default history.call_history.recorded_by
 default history.call_history.user_role
@@ -32,15 +30,6 @@ function history.insert_person_edit_history()
 function history.maybe_remove_group_archived_default_meeting()
 function history.maybe_remove_service_archived_default_meeting()
 function history.sync_user_with_person_trigger()
-function operations.apply_study_year_roll_plan()
-function operations.cairo_now()
-function operations.current_season_year()
-function operations.find_study_year_roll_blockers()
-function operations.nayrouz_date(integer)
-function operations.plan_study_year_roll()
-function operations.run_study_year_roll(integer)
-function operations.study_year_outgrows_service(smallint, smallint)
-function operations.study_year_roll_succeeded(integer)
 function public.assert_caller_can_change_person_user_link()
 function public.check_address_insertion()
 function public.check_address_street_same_area()
@@ -67,8 +56,6 @@ function public.soft_delete_trigger()
 function public.sync_area_streets()
 function public.sync_house_code_with_legacy_house_number()
 function public.sync_street_areas()
-procedure operations.record_missed_study_year_roll(date)
-procedure operations.run_study_year_roll_when_due(date)
 trigger auth.users_admin_on.edit_history
 trigger auth.users_admin_on.enforce_admin_on_grant_level
 trigger auth.users_admin_on.sync_users_permissions_by_entity_id_cache

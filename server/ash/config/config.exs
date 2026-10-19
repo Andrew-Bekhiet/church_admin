@@ -12,7 +12,7 @@ config :ash_oban, pro?: false
 config :church_admin, Oban,
   engine: Oban.Engines.Basic,
   notifier: Oban.Notifiers.Postgres,
-  queues: [default: 10],
+  queues: [default: 10, study_year_roll: 1, notifications: 5],
   lifeline: [rescue_after: {2, :hours}],
   pruner: [max_age: {1, :day}],
   repo: ChurchAdmin.Repo,

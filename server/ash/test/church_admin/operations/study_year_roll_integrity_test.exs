@@ -4,6 +4,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollIntegrityTest do
   import ChurchAdmin.Factory
   import ChurchAdmin.Operations.StudyYearRollWorld
 
+  alias ChurchAdmin.Operations.StudyYearRoll.{Failure, Invariants}
   alias ChurchAdmin.Operations.StudyYearRollUnderTest, as: Roll
 
   @season 2026
@@ -58,8 +59,40 @@ defmodule ChurchAdmin.Operations.StudyYearRollIntegrityTest do
     end
   end
 
-  describe "invariants checked at the end of the roll" do
-    test "a person left without any container rolls back every step and records failed" do
+  describe "invariants checked on the rows the roll writes" do
+    test "an updated person left without any container fails the check, a person the roll did not update is not checked" do
+      uncontained = person!(study_year_id: 2)
+
+      assert {:error, %Failure{message: message, detail: nil}} =
+               Invariants.check(%{person_ids: [uncontained.id], service_memberships: []})
+
+      assert message == "Person must have at least one of (family, store, service, group, uid)"
+
+      assert Invariants.check(%{person_ids: [], service_memberships: []}) == :ok
+    end
+
+    test "inserted memberships outside their service's study year range fail the check, listing every violation; memberships the roll did not insert are not checked" do
+      out_of_range = graded_service!(3, 5)
+      first = pupil!(out_of_range, 1)
+      second = pupil!(out_of_range, 2)
+      inserted = [{first.id, out_of_range.id}, {second.id, out_of_range.id}]
+
+      assert {:error, %Failure{message: message, detail: detail}} =
+               Invariants.check(%{person_ids: [], service_memberships: inserted})
+
+      assert message == "Person study_year does not match service study_year_range"
+
+      assert Enum.sort(String.split(detail, "\n")) ==
+               Enum.sort(
+                 for {person_id, service_id} <- inserted,
+                     do: "person_id: #{person_id} service_id: #{service_id}"
+               )
+
+      assert Invariants.check(%{person_ids: [first.id, second.id], service_memberships: []}) ==
+               :ok
+    end
+
+    test "a pre-existing person without any container that the roll does not update does not block the roll" do
       service = graded_service!(1, 6)
       pupil = pupil!(service, 1)
       committed!()
@@ -67,18 +100,11 @@ defmodule ChurchAdmin.Operations.StudyYearRollIntegrityTest do
 
       Roll.run_when_due(nayrouz(@season))
 
-      assert study_year_of(pupil) == 1
-
-      assert Roll.runs(@season) == [
-               %{
-                 status: :failed,
-                 error: "Person must have at least one of (family, store, service, group, uid)",
-                 step_counts: nil
-               }
-             ]
+      assert study_year_of(pupil) == 2
+      assert [%{status: :succeeded}] = Roll.runs(@season)
     end
 
-    test "a membership outside its service's study year range rolls back every step and records failed" do
+    test "a pre-existing out-of-range membership of a person the roll does not move does not block the roll" do
       in_range = graded_service!(1, 6)
       out_of_range = graded_service!(3, 5)
       pupil = pupil!(in_range, 1)
@@ -87,11 +113,9 @@ defmodule ChurchAdmin.Operations.StudyYearRollIntegrityTest do
 
       Roll.run_when_due(nayrouz(@season))
 
-      assert study_year_of(pupil) == 1
+      assert study_year_of(pupil) == 2
       assert services_of(pupil) == Enum.sort([in_range.id, out_of_range.id])
-      assert [%{status: :failed, error: error, step_counts: nil}] = Roll.runs(@season)
-      assert error =~ "Person study_year does not match service study_year_range"
-      assert error =~ pupil.id
+      assert [%{status: :succeeded}] = Roll.runs(@season)
     end
   end
 
