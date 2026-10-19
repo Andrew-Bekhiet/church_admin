@@ -1,0 +1,14 @@
+query qualifications(
+  $filter: QualificationFilterInput
+  $sort: [QualificationSortInput]
+  $first: Int
+  $after: String
+) {
+  qualifications(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Qualification
+    }
+  }
+}

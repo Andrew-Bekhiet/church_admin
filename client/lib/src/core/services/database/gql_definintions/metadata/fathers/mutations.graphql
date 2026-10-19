@@ -1,0 +1,7 @@
+mutation createFather($input: CreateFatherInput!) {
+  createFather(input: $input) {
+    result {
+      ...Father
+    }
+  }
+}

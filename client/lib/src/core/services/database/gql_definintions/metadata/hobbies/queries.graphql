@@ -1,0 +1,14 @@
+query hobbies(
+  $filter: HobbyFilterInput
+  $sort: [HobbySortInput]
+  $first: Int
+  $after: String
+) {
+  hobbies(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Hobby
+    }
+  }
+}

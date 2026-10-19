@@ -7,7 +7,21 @@ import 'sample_filters.dart';
 import 'server_todo.dart';
 
 /// Each entity port adds its name here once the Ash resource serves it.
-const Set<String> portedEntities = {};
+const Set<String> portedEntities = {
+  'Church',
+  'College',
+  'District',
+  'Father',
+  'Hobby',
+  'Job',
+  'PersonState',
+  'PersonType',
+  'Qualification',
+  'School',
+  'ShammasLevel',
+  'StudyYear',
+  'Tag',
+};
 
 void main() {
   const filterTranslator = AshFilterTranslator();

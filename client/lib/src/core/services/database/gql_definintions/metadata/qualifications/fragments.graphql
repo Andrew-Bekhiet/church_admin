@@ -1,0 +1,4 @@
+fragment Qualification on Qualification {
+  id
+  name
+}

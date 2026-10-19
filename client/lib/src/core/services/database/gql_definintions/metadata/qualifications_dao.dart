@@ -1,33 +1,31 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/qualifications/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/qualifications/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/qualifications/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/qualifications/__generated__/queries.graphql.dart';
 
 class QualificationsDAO extends DAOBase<Qualification>
-    with LegacyStreamableDAO<Qualification>, LegacyCreatableDAO<Qualification> {
+    with KeysetStreamableDAO<Qualification>, CreatableDAO<Qualification> {
   @override
-  LegacyStreamAllConfig<Qualification> get baseStreamAllConfig =>
-      const LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllQualifications,
+  StreamAllConfig<Qualification> get baseStreamAllConfig =>
+      const StreamAllConfig(
+        document: documentNodeQueryqualifications,
+        arguments: ListQueryArguments.fromParameters,
       );
+
   @override
-  LegacyStreamSingleByIdConfig<Qualification> get baseStreamSingleByIdConfig =>
+  StreamSingleByIdConfig<Qualification> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  LegacyCreateObjectConfig<Qualification> get baseCreateObjectConfig =>
-      LegacyCreateObjectConfig(
+  CreateObjectConfig<Qualification> get baseCreateObjectConfig =>
+      CreateObjectConfig(
         document: documentNodeMutationcreateQualification,
-        varsConstructor: _createQualificationVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson),
+        varsConstructor: ({required newObject}) =>
+            Variables_Mutation_createQualification(
+              input: Input_CreateQualificationInput(name: newObject.name),
+            ).toJson(),
       );
 
   QualificationsDAO({
     required super.db,
   }) : super(fromJson: Qualification.fromJson);
-
-  Json _createQualificationVarsConstructor({
-    required Qualification newObject,
-  }) => {
-    'object': {'name': newObject.name},
-  };
 }

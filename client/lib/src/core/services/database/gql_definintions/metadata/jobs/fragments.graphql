@@ -1,0 +1,4 @@
+fragment Job on Job {
+  id
+  name
+}

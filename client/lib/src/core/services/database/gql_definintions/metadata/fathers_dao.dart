@@ -1,59 +1,37 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/fathers/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/fathers/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/fathers/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/fathers/__generated__/queries.graphql.dart';
 
 class FathersDAO extends DAOBase<Father>
-    with LegacyStreamableDAO<Father>, LegacyCreatableDAO<Father> {
+    with KeysetStreamableDAO<Father>, CreatableDAO<Father> {
   @override
-  LegacyStreamAllConfig<Father> get baseStreamAllConfig =>
-      const LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllFathers,
-      );
+  StreamAllConfig<Father> get baseStreamAllConfig => StreamAllConfig(
+    document: documentNodeQueryfathers,
+    arguments: (parameters) => ListQueryArguments.fromParameters(
+      parameters,
+      defaultWhere: [
+        Filter(FatherFields().isHidden, BooleanOperator.is$, false),
+      ],
+      defaultOrderBy: [OrderBy(field: FatherFields().name)],
+    ),
+  );
 
   @override
-  LegacyStreamSingleByIdConfig<Father> get baseStreamSingleByIdConfig =>
+  StreamSingleByIdConfig<Father> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  LegacyCreateObjectConfig<Father> get baseCreateObjectConfig =>
-      LegacyCreateObjectConfig(
-        document: documentNodeMutationcreateFather,
-        varsConstructor: _createFatherVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson),
-      );
+  CreateObjectConfig<Father> get baseCreateObjectConfig => CreateObjectConfig(
+    document: documentNodeMutationcreateFather,
+    varsConstructor: ({required newObject}) => Variables_Mutation_createFather(
+      input: Input_CreateFatherInput(
+        name: newObject.name,
+        churchId: newObject.churchId,
+      ),
+    ).toJson(),
+  );
 
   FathersDAO({
     required super.db,
   }) : super(fromJson: Father.fromJson);
-
-  Json _createFatherVarsConstructor({required Father newObject}) => {
-    'object': {'name': newObject.name},
-  };
-
-  @override
-  PaginatableStreamBase<Father> streamAll({
-    Stream<String?>? searchQuery,
-    Stream<List<Filter>>? where,
-    Stream<List<OrderBy>>? orderBy,
-    Stream<FieldMetadata?>? secondLineField,
-  }) {
-    return super.streamAll(
-      searchQuery: searchQuery,
-      secondLineField: secondLineField,
-      where:
-          where ??
-          Stream.value(
-            [
-              Filter(FatherFields().isHidden, BooleanOperator.is$, false),
-            ],
-          ),
-      orderBy:
-          orderBy ??
-          Stream.value(
-            [
-              OrderBy(field: FatherFields().name),
-            ],
-          ),
-    );
-  }
 }

@@ -15,16 +15,25 @@ class _MockDBGraphQLClient extends Mock implements DBGraphQLClient {}
 /// the generated selections, or the cache stores it as a link and as copied
 /// fields at once and the list can no longer be read back.
 void main() {
-  const rules = KeyFieldRules(
+  const hasuraRules = KeyFieldRules(
     exemptions: [],
     transientSuffixes: KeyFieldRules.hasuraTransientSuffixes,
     requireTypename: true,
   );
+  const ashRules = KeyFieldRules(
+    exemptions: [],
+    transientSuffixes: KeyFieldRules.ashTransientSuffixes,
+    transientPrefixes: KeyFieldRules.ashTransientPrefixes,
+    requireTypename: true,
+  );
 
-  final schema = GqlSchemaIndex.fromDocument(
+  final hasuraSchema = GqlSchemaIndex.fromDocument(
     parseString(
       File('lib/src/core/graphql/hasura_schema.gql').readAsStringSync(),
     ),
+  );
+  final ashSchema = GqlSchemaIndex.fromDocument(
+    parseString(File('lib/src/core/graphql/schema.graphql').readAsStringSync()),
   );
   final database = DatabaseService(_MockDBGraphQLClient());
   final metadata = AdvancedQueriesMetadata();
@@ -34,6 +43,10 @@ void main() {
 
     final listType = metadata.allQueryablesByType[type];
     if (listType == null) continue;
+    final (schema, rules) = switch (dao.baseStreamAllConfig) {
+      StreamAllConfig() => (ashSchema, ashRules),
+      _ => (hasuraSchema, hasuraRules),
+    };
 
     test(
       'sorting ${listType.name} by any field selects the identity of every '

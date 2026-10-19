@@ -1,0 +1,14 @@
+query schools(
+  $filter: SchoolFilterInput
+  $sort: [SchoolSortInput]
+  $first: Int
+  $after: String
+) {
+  schools(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...School
+    }
+  }
+}

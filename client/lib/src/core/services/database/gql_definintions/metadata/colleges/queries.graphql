@@ -1,0 +1,14 @@
+query colleges(
+  $filter: CollegeFilterInput
+  $sort: [CollegeSortInput]
+  $first: Int
+  $after: String
+) {
+  colleges(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...College
+    }
+  }
+}
