@@ -111,13 +111,20 @@ class KeyFieldRules {
     'MutationResponse',
   ];
 
+  /// Ash page wrappers (`KeysetPageOfChurch`) and mutation payloads
+  /// (`CreateChurchResult`) live only inside the response that carries them.
+  static const ashTransientPrefixes = ['KeysetPageOf', 'PageOf'];
+  static const ashTransientSuffixes = ['Result'];
+
   final List<KeyFieldExemption> exemptions;
   final List<String> transientSuffixes;
+  final List<String> transientPrefixes;
   final bool requireTypename;
 
   const KeyFieldRules({
     required this.exemptions,
     required this.transientSuffixes,
+    this.transientPrefixes = const [],
     this.requireTypename = false,
   });
 
@@ -169,7 +176,8 @@ class KeyFieldRules {
   }
 
   bool _isTransient(String type) =>
-      transientSuffixes.any((suffix) => type.endsWith(suffix));
+      transientSuffixes.any((suffix) => type.endsWith(suffix)) ||
+      transientPrefixes.any((prefix) => type.startsWith(prefix));
 }
 
 /// Collects the response-visible field names at a single selection level,
