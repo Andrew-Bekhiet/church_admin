@@ -15,6 +15,10 @@ defmodule ChurchAdmin.Catalog.Qualification do
       get :qualification, :read
       list :qualifications, :read
     end
+
+    mutations do
+      create :create_qualification, :create_qualification
+    end
   end
 
   postgres do
@@ -32,6 +36,13 @@ defmodule ChurchAdmin.Catalog.Qualification do
                  required?: false,
                  default_limit: 25,
                  max_page_size: 1000
+    end
+
+    create :create_qualification do
+      accept [:name]
+      upsert? true
+      upsert_identity :unique_name
+      upsert_fields [:name]
     end
   end
 

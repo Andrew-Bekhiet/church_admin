@@ -15,6 +15,10 @@ defmodule ChurchAdmin.Catalog.Job do
       get :job, :read
       list :jobs, :read
     end
+
+    mutations do
+      create :create_job, :create_job
+    end
   end
 
   postgres do
@@ -32,6 +36,13 @@ defmodule ChurchAdmin.Catalog.Job do
                  required?: false,
                  default_limit: 25,
                  max_page_size: 1000
+    end
+
+    create :create_job do
+      accept [:name]
+      upsert? true
+      upsert_identity :unique_name
+      upsert_fields [:name]
     end
   end
 

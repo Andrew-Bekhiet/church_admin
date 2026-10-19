@@ -15,6 +15,10 @@ defmodule ChurchAdmin.Catalog.Tag do
       get :tag, :read
       list :tags, :read
     end
+
+    mutations do
+      create :create_tag, :create_tag
+    end
   end
 
   postgres do
@@ -33,6 +37,13 @@ defmodule ChurchAdmin.Catalog.Tag do
                  required?: false,
                  default_limit: 25,
                  max_page_size: 1000
+    end
+
+    create :create_tag do
+      accept [:name, :color]
+      upsert? true
+      upsert_identity :unique_name
+      upsert_fields [:name]
     end
   end
 
