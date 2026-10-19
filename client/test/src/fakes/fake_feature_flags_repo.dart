@@ -8,13 +8,9 @@ class FakeFeatureFlagsRepo implements FeatureFlagsRepository {
   @override
   final bool enableDataChecks;
 
-  @override
-  final bool enablePersonNationalId;
-
   FakeFeatureFlagsRepo({
     this.enableAccountClaimingByEmail = true,
     this.enableDataChecks = true,
-    this.enablePersonNationalId = false,
   });
 
   @override
