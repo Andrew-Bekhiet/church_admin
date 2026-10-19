@@ -50,6 +50,10 @@ Reference port: `gql_definintions/metadata/` (commit `refactor(data): port the m
 - A list taking `filter`/`sort` on a nested field (`classes(filter: $classesFilter)`) needs those variables declared in the query; the fake link applies them to the nested rows.
 - Opt in to `FakeAshTable(projectsSelections: true)` in a port's tests, so a field the document forgets reads as missing.
 - A sort on a relation whose type's key field is not `id` (StudyYear's `order`) must also select `id`: `NestedSelectionBuilder` does this, and the type needs an Ash `TypePolicy(keyFields: …)`.
+- A Hasura document that ordered by a relationship loses that order: Ash sorts only on own attributes, calculations and aggregates. Sort in the model converter with single-key static comparators.
+- A server field the SDL lacks: stand it in by hand in `schema.graphql` in its own commit, regenerate, and report it. The real SDL replaces it at merge.
+- A string key that is an `ID` in the SDL (`User.uid`) uses `@QueryableField.self`.
+- A rejection test uses `isA<BackendException>()`; `forbidden`, `not_found` and `unauthenticated` have their own subclasses.
 
 ## Done
 
