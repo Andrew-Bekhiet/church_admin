@@ -24,6 +24,12 @@ defmodule ChurchAdmin.Accounts.Preferences do
 
   actions do
     defaults [:read]
+
+    create :seed_defaults do
+      description "A new user's preferences; the account commands call it."
+      accept [:uid, :order_by_preferences]
+      change set_attribute(:great_feast_theme, true)
+    end
   end
 
   attributes do
