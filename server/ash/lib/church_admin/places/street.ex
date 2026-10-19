@@ -13,7 +13,7 @@ defmodule ChurchAdmin.Places.Street do
   alias ChurchAdmin.Activity.Changes.RecordLastVisit
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
-  alias ChurchAdmin.Authz.Checks.{HasPermission, System}
+  alias ChurchAdmin.Authz.Checks.{HasPermission, Onboarded, System}
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.Errors.{Codes, ConstraintCodes}
   alias ChurchAdmin.History.Changes.RecordEdit
@@ -137,7 +137,7 @@ defmodule ChurchAdmin.Places.Street do
     end
 
     policy action_type(:read) do
-      authorize_if actor_present()
+      authorize_if Onboarded
     end
 
     policy action(:create_street) do

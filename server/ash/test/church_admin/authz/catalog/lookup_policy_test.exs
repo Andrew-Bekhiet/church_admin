@@ -52,7 +52,7 @@ defmodule ChurchAdmin.Authz.Catalog.LookupPolicyTest do
   for resource <- @lookups do
     @resource resource
 
-    test "#{inspect(resource)} is read by every authenticated actor and by no anonymous one",
+    test "#{inspect(resource)} is read by every onboarded actor and by no anonymous one",
          %{world: world} do
       row = seed_row!(@resource)
 

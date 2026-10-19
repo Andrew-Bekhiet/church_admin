@@ -131,11 +131,12 @@ defmodule ChurchAdmin.Authz.BuildingBlocksTest do
   end
 
   describe "the Lookup fragment" do
-    test "lets any authenticated actor read and only a holder of approved write" do
+    test "lets any onboarded actor read and only a holder of approved write" do
       probe = Ash.Seed.seed!(LookupProbe, %{name: "x"})
       approved = %Actor{uid: Ash.UUID.generate(), permissions: MapSet.new(["approved"])}
 
-      assert [_probe] = Ash.read!(LookupProbe, actor: %Actor{})
+      assert [_probe] = Ash.read!(LookupProbe, actor: %Actor{uid: Ash.UUID.generate()})
+      assert [] = Ash.read!(LookupProbe, actor: %Actor{})
       assert [] = Ash.read!(LookupProbe, actor: nil)
 
       assert {:ok, _} =
