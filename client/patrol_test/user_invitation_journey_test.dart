@@ -25,11 +25,11 @@ void main() {
       final verificationScreen = find.byKey(
         EmailVerificationScreenKeys.confirmEmailButtonKey,
       );
-      final existingPersonId = await E2eBackend.insertPerson(
+      final existingPersonId = await E2eBackend.createPerson(
         existingPerson,
         serviceName: serviceName,
       );
-      final replacementPersonId = await E2eBackend.insertPerson(
+      final replacementPersonId = await E2eBackend.createPerson(
         replacementPerson,
         serviceName: serviceName,
       );
