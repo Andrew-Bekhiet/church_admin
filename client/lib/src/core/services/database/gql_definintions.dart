@@ -1,8 +1,14 @@
+export 'gql_definintions/accounts/accounts_dao.dart';
 export 'gql_definintions/areas_dao.dart';
 export 'gql_definintions/classes_dao.dart';
 export 'gql_definintions/data_checks_dao.dart';
 export 'gql_definintions/families_dao.dart';
 export 'gql_definintions/fcm_tokens_dao.dart';
+export 'gql_definintions/files/app_download_link.dart';
+export 'gql_definintions/files/exports_dao.dart';
+export 'gql_definintions/files/photo_link.dart';
+export 'gql_definintions/files/photos_dao.dart';
+export 'gql_definintions/files/releases_dao.dart';
 export 'gql_definintions/groups_dao.dart';
 export 'gql_definintions/history_dao.dart';
 export 'gql_definintions/home.dart';

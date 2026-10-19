@@ -54,8 +54,11 @@ class Area extends ViewableWithIDAndImage
   final bool userCanEdit;
 
   @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('areas', id, lastUpdatedTime: photoUpdatedAt);
+  ObjectImageInfo get imageInfo => ObjectPhotoInfo(
+    Enum_PhotoSubject.AREAS,
+    id,
+    lastUpdatedTime: photoUpdatedAt,
+  );
 
   @override
   String get typeName => AdvancedQueriesMetadata().area.name;

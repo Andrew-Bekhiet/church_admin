@@ -53,8 +53,8 @@ void main() {
     await tester.pumpAndSettle();
     await harness.tapSave(tester);
 
-    expect(harness.functions.deletedPhotos, [
-      (table: 'persons', id: person.id),
+    expect(harness.photosDao.deletedPhotos, [
+      (subject: Enum_PhotoSubject.PERSONS, id: person.id),
     ]);
   });
 

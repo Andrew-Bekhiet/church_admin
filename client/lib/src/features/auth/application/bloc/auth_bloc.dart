@@ -18,7 +18,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final DatabaseService _databaseService;
   final AuthStorage _authStorage;
   final Stream<bool> _connectivityStream;
-  final FunctionsService _functionsService;
   final FeatureFlagsRepository _featureFlagsRepository;
   final AnalyticsService _analyticsService;
 
@@ -70,7 +69,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this._databaseService,
     required this._authStorage,
     required this._connectivityStream,
-    required this._functionsService,
     required this._featureFlagsRepository,
     required this._analyticsService,
     bool loadCachedUser = true,
@@ -343,7 +341,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       return;
     }
 
-    final isClaimed = await _functionsService.tryClaimAccount();
+    final isClaimed = await _databaseService.accounts.tryClaimAccount();
     _analyticsService.track(AccountClaimByEmail(isClaimed: isClaimed));
     if (!isClaimed) return;
 
@@ -357,7 +355,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(AuthLoading(previousState: state));
 
-      await _functionsService.applyInvitationCode(event.code);
+      await _databaseService.accounts.applyInvitationCode(event.code);
       await _authRepository.reload();
       await _authRepository.refreshToken();
       _analyticsService.track(

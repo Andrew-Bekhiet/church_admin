@@ -47,12 +47,12 @@ class DownloadAppScreen extends StatelessWidget {
   ) async {
     AnalyticsService.I.track(AppDownloadTap(platform));
 
-    final String url = await _showLoadingLinkDialog(
+    final link = await _showLoadingLinkDialog(
       context,
       _getAndTrackDownloadLink(platform),
     );
 
-    unawaited(LauncherService.I.launchUrl(Uri.parse(url)));
+    unawaited(LauncherService.I.launchUrl(Uri.parse(link.url)));
   }
 
   Future<String> _getAndTrackDownloadLink(DownloadPlatform platform) async {

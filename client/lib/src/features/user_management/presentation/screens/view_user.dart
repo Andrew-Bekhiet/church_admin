@@ -232,7 +232,7 @@ class _ViewUserState extends State<ViewUser> {
 
     try {
       await _awaitAndTrackOutcome(
-        FunctionsService.I.deleteMyAccount(),
+        DatabaseService.I.accounts.deleteMyAccount(),
         ({required isSuccess}) => MyAccountDelete(isSuccess: isSuccess),
       );
       AuthBloc.I.add(const SignOut(SignOutSource.accountDeletion));

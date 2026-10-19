@@ -30,7 +30,6 @@ import 'notifications_service_test.mocks.dart';
   MockSpec<AuthBloc>(),
   MockSpec<DatabaseService>(),
   MockSpec<FcmTokensDAO>(),
-  MockSpec<FunctionsService>(),
   MockSpec<InitializationService>(),
   MockSpec<NotificationsStorage>(),
   MockSpec<NotificationsSettingsStorage>(),
@@ -958,7 +957,6 @@ Future<void> _setUp() async {
     _setUpLocalNotificationsPlugin(),
     _setUpAuthBloc(),
     _setUpDatabaseService(),
-    _setUpFunctionsService(),
     _setUpStorage(),
     _setUpNotificationsService(),
     _setUpNotificationsSettingsStorage(),
@@ -979,10 +977,6 @@ Override _setUpStorage() {
   return notificationsStorageProvider.overrideWithValue(
     MockNotificationsStorage(),
   );
-}
-
-Override _setUpFunctionsService() {
-  return functionsServiceProvider.overrideWithValue(MockFunctionsService());
 }
 
 Override _setUpDatabaseService() {

@@ -29,10 +29,7 @@ final initialUserData = User(
     UserPermission.exportAllData,
   }),
   photoUpdatedAt: DateTime.now(),
-  lastEdit: LastRecordedByInfo(
-    time: DateTime.now(),
-    recordedBy: 'recordedBy',
-  ),
+  lastEdit: LastRecordedByInfo(time: DateTime.now(), recordedBy: 'recordedBy'),
 );
 
 final unclaimedAuthUser = AuthUser(
@@ -62,6 +59,7 @@ AuthUser initialAuthUser = AuthUser(
 
 late StreamController<AuthUser?> userChangesController;
 late BehaviorSubject<bool> connectivityController;
+late MockAccountsDAO _accountsDao;
 late RecordingAnalyticsProvider analytics;
 
 @GenerateNiceMocks([
@@ -71,7 +69,7 @@ late RecordingAnalyticsProvider analytics;
   MockSpec<LocalAuthService>(),
   MockSpec<ConnectivityService>(),
   MockSpec<UsersDAO>(),
-  MockSpec<FunctionsService>(),
+  MockSpec<AccountsDAO>(),
 ])
 void main() {
   group('AuthBloc =>', () {
@@ -86,9 +84,7 @@ void main() {
           await AuthStorage.I.writeUserToCache(null);
         },
         build: _createAuthBloc,
-        expect: () => [
-          isA<AuthUnauthenticated>(),
-        ],
+        expect: () => [isA<AuthUnauthenticated>()],
         verify: (bloc) {
           expect(bloc.currentUser, isNull);
           expect(bloc.currentUserData, isNull);
@@ -112,9 +108,7 @@ void main() {
       blocTest<AuthBloc, AuthState>(
         'no cached user',
         build: () => _createAuthBloc(noCachedUser: true),
-        expect: () => [
-          isA<AuthUnauthenticated>(),
-        ],
+        expect: () => [isA<AuthUnauthenticated>()],
         verify: (bloc) {
           expect(bloc.currentUser, isNull);
           expect(bloc.currentUserData, isNull);
@@ -125,21 +119,12 @@ void main() {
     group('sign in/out =>', () {
       blocTest<AuthBloc, AuthState>(
         'signing in a user whose account is already claimed raises no error',
-        setUp: () {
-          final functionsMock = globalProviderContainer.read(
-            functionsServiceProvider,
-          ) as MockFunctionsService;
-          when(functionsMock.tryClaimAccount()).thenAnswer(
-            (_) async =>
-                throw StateError('Account already exists for this user'),
-          );
-        },
+        setUp: () => when(_accountsDao.tryClaimAccount()).thenAnswer(
+          (_) async => throw StateError('Account already exists for this user'),
+        ),
         build: () => _createAuthBloc(noCachedUser: true),
         act: (bloc) => bloc.add(
-          const SignInWithEmailPassword(
-            email: 'email',
-            password: 'password',
-          ),
+          const SignInWithEmailPassword(email: 'email', password: 'password'),
         ),
         wait: const Duration(milliseconds: 100),
         errors: () => isEmpty,
@@ -157,10 +142,7 @@ void main() {
         'sign in with email and password',
         build: () => _createAuthBloc(noCachedUser: true),
         act: (bloc) => bloc.add(
-          const SignInWithEmailPassword(
-            email: 'email',
-            password: 'password',
-          ),
+          const SignInWithEmailPassword(email: 'email', password: 'password'),
         ),
         expect: () => [
           isA<AuthUnauthenticated>(),
@@ -255,10 +237,7 @@ void main() {
         },
         build: () => _createAuthBloc(noCachedUser: true),
         act: (bloc) => bloc.add(
-          const SignUpWithEmailPassword(
-            email: 'email',
-            password: 'password',
-          ),
+          const SignUpWithEmailPassword(email: 'email', password: 'password'),
         ),
         expect: () => [
           isA<AuthUnauthenticated>(),
@@ -343,10 +322,7 @@ void main() {
           await Future.delayed(Duration.zero);
           userChangesController.add(null);
         },
-        expect: () => [
-          isA<AuthAuthenticated>(),
-          isA<AuthUnauthenticated>(),
-        ],
+        expect: () => [isA<AuthAuthenticated>(), isA<AuthUnauthenticated>()],
       );
 
       blocTest<AuthBloc, AuthState>(
@@ -470,10 +446,7 @@ void main() {
 
           initialAuthUser = initialAuthUser.copyWith(
             idToken: 'stale-token',
-            claims: {
-              ...initialAuthUser.claims,
-              'exp': 0,
-            },
+            claims: {...initialAuthUser.claims, 'exp': 0},
           );
 
           await AuthStorage.I.writeAuthDataToCache(initialAuthUser);
@@ -614,10 +587,7 @@ void main() {
       blocTest<AuthBloc, AuthState>(
         'reloadUser_whenTokenCarriesNoHasuraUserId_onboardsTheInvitee',
         setUp: () async {
-          final functionsMock = globalProviderContainer.read(
-            functionsServiceProvider,
-          ) as MockFunctionsService;
-          when(functionsMock.tryClaimAccount()).thenAnswer((_) async => true);
+          when(_accountsDao.tryClaimAccount()).thenAnswer((_) async => true);
 
           await AuthStorage.I.clearAll();
           await AuthStorage.I.writeAuthDataToCache(unclaimedAuthUser);
@@ -650,12 +620,8 @@ void main() {
       blocTest<AuthBloc, AuthState>(
         'applyInvitationCode_whenApplyingFails_restoresThePreloadingState',
         setUp: () {
-          final mockFunctions = globalProviderContainer.read(
-            functionsServiceProvider,
-          ) as MockFunctionsService;
-          when(
-            mockFunctions.applyInvitationCode('INVITE-CODE'),
-          ).thenThrow(StateError('invalid invitation code'));
+          when(_accountsDao.applyInvitationCode('INVITE-CODE'))
+              .thenThrow(StateError('invalid invitation code'));
         },
         build: () => _createAuthBloc(noCachedUser: true),
         act: (bloc) async {
@@ -678,6 +644,37 @@ void main() {
         ],
       );
 
+      for (final code in const [
+        'invitation/not-claimable',
+        'account/already-claimed',
+      ]) {
+        blocTest<AuthBloc, AuthState>(
+          'applyInvitationCode_whenTheServerRejectsWith_${code}_reportsThatCode',
+          setUp: () =>
+              when(_accountsDao.applyInvitationCode('INVITE-CODE'))
+                  .thenThrow(BackendRejectedException('rejected', code: code)),
+          build: () => _createAuthBloc(noCachedUser: true),
+          act: (bloc) async {
+            await Future<void>.delayed(Duration.zero);
+            bloc.add(const ApplyInvitationCode('INVITE-CODE'));
+          },
+          wait: const Duration(milliseconds: 100),
+          expect: () => [
+            isA<AuthUnauthenticated>(),
+            isA<AuthLoading>(),
+            isA<AuthExceptionState>().having(
+              (state) => state.exception,
+              'exception',
+              isA<BackendRejectedException>().having(
+                (e) => e.code,
+                'code',
+                code,
+              ),
+            ),
+          ],
+        );
+      }
+
       blocTest<AuthBloc, AuthState>(
         'an invitee whose account is claimed by email while their code fails '
         'stays approved',
@@ -685,17 +682,13 @@ void main() {
           await AuthStorage.I.clearAll();
           await AuthStorage.I.writeAuthDataToCache(unclaimedAuthUser);
 
-          final mockFunctions = globalProviderContainer.read(
-            functionsServiceProvider,
-          ) as MockFunctionsService;
-          when(mockFunctions.applyInvitationCode('INVITE-CODE')).thenAnswer((
-            _,
-          ) async {
-            userChangesController.add(initialAuthUser);
-            await Future<void>.delayed(Duration.zero);
+          when(_accountsDao.applyInvitationCode('INVITE-CODE'))
+              .thenAnswer((_) async {
+                userChangesController.add(initialAuthUser);
+                await Future<void>.delayed(Duration.zero);
 
-            throw StateError('invitation already claimed');
-          });
+                throw StateError('invitation already claimed');
+              });
         },
         build: _createAuthBloc,
         act: (bloc) async {
@@ -742,18 +735,9 @@ Future<void> _setUp() async {
     await _setUpMockAuthRepository(),
     await _setUpMockDatabaseService(),
     await _setUpMockAuthStorage(),
-    await _setUpMockFunctionsService(),
   ];
 
   initGlobalProviderContainer(overrides);
-}
-
-Future<Override> _setUpMockFunctionsService() async {
-  final mock = MockFunctionsService();
-
-  when(mock.tryClaimAccount()).thenAnswer((_) async => false);
-
-  return functionsServiceProvider.overrideWithValue(mock);
 }
 
 Future<Override> _setUpMockConnectivity() async {
@@ -791,12 +775,10 @@ Future<Override> _setUpMockAuthStorage() async {
     passwordHash = null;
     return;
   });
-  when(
-    mock.writeAuthDataToCache(captureAny),
-  ).thenAnswer((i) async => authUser = i.positionalArguments[0]);
-  when(
-    mock.writeUserToCache(captureAny),
-  ).thenAnswer((i) async => user = i.positionalArguments[0]);
+  when(mock.writeAuthDataToCache(captureAny))
+      .thenAnswer((i) async => authUser = i.positionalArguments[0]);
+  when(mock.writeUserToCache(captureAny))
+      .thenAnswer((i) async => user = i.positionalArguments[0]);
   when(mock.writeSessionToCache(captureAny, captureAny)).thenAnswer((i) async {
     authUser = i.positionalArguments[0];
     user = i.positionalArguments[1];
@@ -818,12 +800,10 @@ Future<Override> _setUpMockAuthRepository() async {
 
   final mock = MockFirebaseAuthRepository();
 
-  when(
-    mock.signInWithEmailPassword(email: 'email', password: 'password'),
-  ).thenAnswer((_) async => controller.add(initialAuthUser));
-  when(
-    mock.signUpWithEmailPassword(email: 'email', password: 'password'),
-  ).thenAnswer((_) async => controller.add(initialAuthUser));
+  when(mock.signInWithEmailPassword(email: 'email', password: 'password'))
+      .thenAnswer((_) async => controller.add(initialAuthUser));
+  when(mock.signUpWithEmailPassword(email: 'email', password: 'password'))
+      .thenAnswer((_) async => controller.add(initialAuthUser));
 
   when(mock.signOut()).thenAnswer((_) async => controller.add(null));
   when(mock.refreshToken()).thenAnswer(
@@ -855,7 +835,10 @@ Future<Override> _setUpMockAuthRepository() async {
 Future<Override> _setUpMockDatabaseService() async {
   final mock = MockDatabaseService();
   final mockUsersDAO = MockUsersDAO();
+  final accountsDao = _accountsDao = MockAccountsDAO();
 
+  when(accountsDao.tryClaimAccount()).thenAnswer((_) async => false);
+  when(mock.accounts).thenReturn(accountsDao);
   when(mock.users).thenReturn(mockUsersDAO);
   when(
     mockUsersDAO.streamSingleById(
@@ -878,7 +861,6 @@ AuthBloc _createAuthBloc({
     authRepository: globalProviderContainer.read(authRepositoryProvider),
     databaseService: globalProviderContainer.read(databaseServiceProvider),
     authStorage: globalProviderContainer.read(authStorageProvider),
-    functionsService: globalProviderContainer.read(functionsServiceProvider),
     featureFlagsRepository: FakeFeatureFlagsRepo(
       enableAccountClaimingByEmail: enableAccountClaimingByEmail,
     ),
