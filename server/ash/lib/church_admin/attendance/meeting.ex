@@ -6,7 +6,9 @@ defmodule ChurchAdmin.Attendance.Meeting do
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Attendance.{AttendanceRecord, MeetingAudience, MeetingDay, RosterEntry}
-  alias ChurchAdmin.Authz.Checks.{InScope, System}
+  alias ChurchAdmin.Attendance.Validations.StudyYearWithinService
+  alias ChurchAdmin.Authz.Changes.RecheckAfterUpdate
+  alias ChurchAdmin.Authz.Checks.{InScope, MeetingWriteGate, System}
   alias ChurchAdmin.Catalog.StudyYear
   alias ChurchAdmin.Organization.{Group, Service}
   alias ChurchAdmin.Types.Text
@@ -19,6 +21,11 @@ defmodule ChurchAdmin.Attendance.Meeting do
     queries do
       get :meeting, :read
       list :meetings, :read
+    end
+
+    mutations do
+      create :create_meeting, :create_meeting
+      update :update_meeting, :update_meeting
     end
   end
 
@@ -45,6 +52,27 @@ defmodule ChurchAdmin.Attendance.Meeting do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :create_meeting do
+      accept [
+        :name,
+        :audience,
+        :color,
+        :is_archived,
+        :show_kodas_checkbox,
+        :service_id,
+        :service_study_year,
+        :service_gender,
+        :group_id
+      ]
+    end
+
+    update :update_meeting do
+      accept [:name, :audience, :color, :is_archived, :show_kodas_checkbox]
+      require_atomic? false
+
+      change {RecheckAfterUpdate, check: {MeetingWriteGate, []}}
+    end
   end
 
   policies do
@@ -56,6 +84,14 @@ defmodule ChurchAdmin.Attendance.Meeting do
       authorize_if actor_attribute_equals(:read_all?, true)
       authorize_if {InScope, entity: :meeting, access: :admin}
     end
+
+    policy action_type([:create, :update]) do
+      authorize_if MeetingWriteGate
+    end
+  end
+
+  validations do
+    validate StudyYearWithinService, on: [:create, :update]
   end
 
   attributes do
