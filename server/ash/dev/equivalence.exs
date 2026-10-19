@@ -13,7 +13,8 @@
 defmodule ChurchAdmin.Equivalence do
   alias ChurchAdmin.Accounts.{ScopeGrant, User, UserPermission}
   alias ChurchAdmin.Authz.ActorLoader
-  alias ChurchAdmin.People.{Family, GroupMembership, Person, ServiceMembership}
+  alias ChurchAdmin.Organization.{Class, Group, Service}
+  alias ChurchAdmin.People.{ClassMembership, Family, GroupMembership, Person, ServiceMembership}
   alias ChurchAdmin.Places.Address
 
   # `hasura` is master's root field (graphql-default naming); `key` lists
@@ -51,6 +52,33 @@ defmodule ChurchAdmin.Equivalence do
         page: 100
       },
       %{name: "addresses", hasura: "addresses", resource: Address, key: [{"id", :id}], page: 100},
+      %{
+        name: "services",
+        hasura: "services",
+        resource: Service,
+        key: [{"id", :id}],
+        flag: {"userCanEdit", :user_can_edit}
+      },
+      %{
+        name: "classes",
+        hasura: "classes",
+        resource: Class,
+        key: [{"id", :id}],
+        flag: {"userCanEdit", :user_can_edit}
+      },
+      %{
+        name: "groups",
+        hasura: "groups",
+        resource: Group,
+        key: [{"id", :id}],
+        flag: {"userCanEdit", :user_can_edit}
+      },
+      %{
+        name: "classMemberships",
+        hasura: "classesPersons",
+        resource: ClassMembership,
+        key: [{"classId", :class_id}, {"personId", :person_id}]
+      },
       %{
         name: "users",
         hasura: "authUsersData",
