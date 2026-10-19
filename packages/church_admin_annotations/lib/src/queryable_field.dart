@@ -57,12 +57,12 @@ final class QueryableField {
        select = null;
 
   /// The latest entry of a history, which cannot be ordered.
-  const QueryableField.history({required String this.label, this.type})
-    : graphqlName = null,
-      codeOnly = false,
+  const QueryableField.history({required String this.label, this.graphqlName})
+    : codeOnly = false,
       orderable = false,
       representsParent = false,
       usesBirthdayOperators = false,
+      type = null,
       through = null,
       select = null;
 
@@ -93,8 +93,8 @@ final class QueryableField {
     required Type this.through,
     this.label,
     this.select,
-  }) : graphqlName = null,
-       codeOnly = false,
+    this.graphqlName,
+  }) : codeOnly = false,
        orderable = false,
        representsParent = false,
        usesBirthdayOperators = false,
