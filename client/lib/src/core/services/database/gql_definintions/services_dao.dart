@@ -1,124 +1,118 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/queries.graphql.dart';
 
-class ServicesDAO extends LegacyFullCRUDDAO<Service> {
-  @override
-  late final LegacyStreamAllConfig<Service> baseStreamAllConfig =
-      LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllServices,
-        transformRequest: _streamAllVarsConstructor,
-      );
+class ServicesDAO extends FullCRUDDAO<Service> {
+  static final List<Json> _classesOrder = const AshSortTranslator().toSortInput(
+    [
+      OrderBy(field: ClassFields().studyYear),
+      OrderBy(field: ClassFields().serviceGender, value: OrderByValue.desc),
+    ],
+  );
 
   @override
-  late final LegacyStreamCountConfig<Service> baseStreamCountConfig =
-      const LegacyStreamCountConfig(
-        document: documentNodeSubscriptionwatchServicesCount,
-      );
+  StreamAllConfig<Service> get baseStreamAllConfig => StreamAllConfig(
+    document: documentNodeQueryservices,
+    arguments: _listArguments,
+  );
+
   @override
-  late final LegacyStreamSingleByIdConfig<Service> baseStreamSingleByIdConfig =
-      LegacyStreamSingleByIdConfig(
-        document: documentNodeSubscriptionwatchService,
-        varsConstructor: _streamSingleByIdVarsConstructor,
-      );
+  StreamSingleByIdConfig<Service> get baseStreamSingleByIdConfig =>
+      const StreamSingleByIdConfig(document: documentNodeQueryservice);
+
   @override
-  late final LegacyDeleteSingleByIdConfig<Service> baseDeleteSingleByIdConfig =
-      LegacyDeleteSingleByIdConfig(
-        document: documentNodeMutationdeleteService,
-        varsConstructor: _deleteSingleByIdVarsConstructor,
-      );
+  CreateObjectConfig<Service> get baseCreateObjectConfig => CreateObjectConfig(
+    document: documentNodeMutationcreateService,
+    varsConstructor: ({required newObject}) => Variables_Mutation_createService(
+      input: Input_CreateServiceInput(
+        name: newObject.name,
+        studyYearFromId: newObject.studyYearFromId,
+        studyYearToId: newObject.studyYearToId,
+        nextServiceId: newObject.nextServiceId,
+        color: colorToInt(newObject.color),
+        defaultMeeting: switch (newObject.defaultMeeting) {
+          final meeting? => Input_MeetingInput(
+            name: meeting.name,
+            audience: meeting.audience.name,
+            color: colorToInt(meeting.color),
+            isArchived: meeting.isArchived,
+            showKodasCheckbox: meeting.showKodasCheckbox,
+            serviceStudyYear: meeting.serviceStudyYear,
+            serviceGender: meeting.serviceGender,
+          ),
+          null => null,
+        },
+      ),
+    ).toJson(),
+  );
+
   @override
-  late final LegacyUpdateObjectConfig<Service> baseUpdateObjectConfig =
-      LegacyUpdateObjectConfig(
-        document: documentNodeMutationupdateService,
-        varsConstructor: _updateServiceVarsConstructor,
-      );
+  UpdateObjectConfig<Service> get baseUpdateObjectConfig => UpdateObjectConfig(
+    document: documentNodeMutationupdateService,
+    varsConstructor: ({required newObject}) => Variables_Mutation_updateService(
+      id: newObject.id,
+      input: Input_UpdateServiceInput.fromJson({
+        'name': newObject.name,
+        'studyYearFromId': newObject.studyYearFromId,
+        'studyYearToId': newObject.studyYearToId,
+        'nextServiceId': newObject.nextServiceId,
+        'color': colorToInt(newObject.color),
+        'defaultMeetingId': newObject.defaultMeeting?.id,
+      }),
+    ).toJson(),
+  );
+
   @override
-  late final LegacyCreateObjectConfig<Service> baseCreateObjectConfig =
-      LegacyCreateObjectConfig(
-        document: documentNodeMutationinsertService,
-        varsConstructor: _createServiceVarsConstructor,
-      );
+  DeleteSingleByIdConfig<Service> get baseDeleteSingleByIdConfig =>
+      const DeleteSingleByIdConfig(document: documentNodeMutationdeleteService);
 
   ServicesDAO({required super.db}) : super(fromJson: Service.fromJson);
 
-  Json _streamAllVarsConstructor(
-    PaginatableStreamRequest<Service, StreamableDAOParameters<Service>?>
-    request,
+  ListQueryArguments _listArguments(
+    StreamableDAOParameters<Service>? parameters,
   ) {
-    final search = request.param?.search;
-    final orderBy = request.param?.orderBy;
-    final where = request.param?.where;
-
-    final bool nameSearch = search != null && search.isNotEmpty;
-    final nameSearchExp = Input_StringComparisonExp($_ilike: '%$search%');
-
-    return {
-      'classesWhere': [
-        if (nameSearch)
-          Input_ClassesBoolExp(
-            name: nameSearchExp,
-          ),
-      ].map((e) => e.toJson()).toList(),
-      'groupsWhere': [
-        if (nameSearch)
-          Input_GroupsBoolExp(
-            name: nameSearchExp,
-          ),
-      ].map((e) => e.toJson()).toList(),
-      ...db.varsTransformer.transformrequestForPagination(
-        request,
-        overrideWhere: nameSearch
-            ? [
-                ...?where,
-                Filter(const DotField(), LogicalOperator.or, [
-                  Filter(
-                    ServiceFields().name,
-                    StringOperator.contains,
-                    search,
-                  ),
-                  Filter(
-                    ServiceFields().classes.redirectTo(ClassFields().name),
-                    StringOperator.contains,
-                    search,
-                  ),
-                  Filter(
-                    ServiceFields().groups.redirectTo(GroupFields().name),
-                    StringOperator.contains,
-                    search,
-                  ),
-                ]),
-              ]
-            : where,
-        overrideOrderBy:
-            orderBy?.toList() ??
-            [
-              OrderBy(
-                field: ServiceFields().studyYearFrom.redirectTo(
-                  StudyYearFields().order,
-                ),
-              ),
-              OrderBy(
-                field: ServiceFields().studyYearTo.redirectTo(
-                  StudyYearFields().order,
-                ),
-              ),
-            ],
+    final listing = ListQueryArguments.fromParameters(
+      StreamableDAOParameters<Service>(
+        where: parameters?.where,
+        orderBy: parameters?.orderBy,
       ),
-    };
+      defaultOrderBy: [
+        OrderBy(field: ServiceFields().studyYearFrom),
+        OrderBy(field: ServiceFields().studyYearTo),
+      ],
+    );
+
+    if (parameters?.search case final search? when search.isNotEmpty) {
+      final nameMatches = {
+        'name': {'ilike': '%$search%'},
+      };
+
+      return ListQueryArguments(
+        filter: {
+          'and': [
+            ?listing.filter,
+            {
+              'or': [
+                nameMatches,
+                {'classes': nameMatches},
+                {'groups': nameMatches},
+              ],
+            },
+          ],
+        },
+        sort: listing.sort,
+        otherVariables: {
+          'classesSort': _classesOrder,
+          'classesFilter': nameMatches,
+          'groupsFilter': nameMatches,
+        },
+      );
+    }
+
+    return ListQueryArguments(
+      filter: listing.filter,
+      sort: listing.sort,
+      otherVariables: {'classesSort': _classesOrder},
+    );
   }
-
-  Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
-      Variables_Subscription_watchService(id: id).toJson();
-
-  Json _createServiceVarsConstructor({required Service newObject}) =>
-      newObject.toInsertInput().toJson();
-
-  Json _updateServiceVarsConstructor({
-    required Service newObject,
-    required Service oldObject,
-  }) => newObject.toUpdateInput(oldObject).toJson();
-
-  Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
-      Variables_Mutation_deleteService(serviceId: id).toJson();
 }

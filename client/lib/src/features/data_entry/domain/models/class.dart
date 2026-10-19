@@ -39,7 +39,8 @@ class Class extends ViewableWithIDAndImage
 
   final String? serviceId;
 
-  @QueryableField(label: 'السنة الدراسية')
+  @JsonKey(name: 'studyYearFrom')
+  @QueryableField(label: 'السنة الدراسية', graphqlName: 'studyYearFrom')
   final StudyYear? studyYear;
 
   final int? serviceStudyYear;
@@ -52,11 +53,12 @@ class Class extends ViewableWithIDAndImage
   @QueryableField(label: 'نوع المخدومين المسؤول عنهم')
   final bool? serviceGender;
 
+  @JsonKey(name: 'latestEdit')
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
-  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  @QueryableField.manyToMany(through: AdminOnData)
+  @JsonKey(name: 'admins')
+  @QueryableField(label: 'المسؤولون', graphqlName: 'admins', orderable: false)
   final List<User>? adminUsers;
 
   @JsonKey(includeToJson: false)
@@ -105,47 +107,4 @@ class Class extends ViewableWithIDAndImage
 
   @override
   Json toJson() => _$ClassToJson(this);
-
-  Input_ClassesInsertInput toInsertInput() {
-    return Input_ClassesInsertInput(
-      name: name,
-      color: colorToInt(color),
-      serviceId: service?.id.toUuid() ?? serviceId?.toUuid(),
-      serviceStudyYear: serviceStudyYear,
-      serviceStudyYearTo: serviceStudyYearTo ?? serviceStudyYear,
-      serviceGender: serviceGender,
-    );
-  }
-
-  Input_ClassesSetInput toUpdateInput({
-    required Class oldObject,
-  }) {
-    Input_ClassesSetInput result = Input_ClassesSetInput();
-
-    if (name != oldObject.name) {
-      result = result.copyWith(name: name);
-    }
-
-    if (color != oldObject.color) {
-      result = result.copyWith(color: colorToInt(color));
-    }
-
-    if (service?.id != oldObject.service?.id) {
-      result = result.copyWith(serviceId: service?.id.toUuid());
-    }
-
-    if (serviceStudyYear != oldObject.serviceStudyYear) {
-      result = result.copyWith(serviceStudyYear: serviceStudyYear);
-    }
-
-    if (serviceStudyYearTo != oldObject.serviceStudyYearTo) {
-      result = result.copyWith(serviceStudyYearTo: serviceStudyYearTo);
-    }
-
-    if (serviceGender != oldObject.serviceGender) {
-      result = result.copyWith(serviceGender: serviceGender);
-    }
-
-    return result;
-  }
 }

@@ -77,7 +77,7 @@ class ClassFields {
   final FieldMetadata<StudyYear> studyYear = FieldMetadata<StudyYear>(
     getValue: (obj) => obj is Class ? obj.studyYear : null,
     parentType: Class,
-    name: 'studyYear',
+    name: 'studyYearFrom',
     label: 'السنة الدراسية',
     isCodeOnly: false,
     operators: {
@@ -127,19 +127,14 @@ class ClassFields {
         },
       );
 
-  final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
+  final FieldMetadata<User> adminUsers = FieldMetadata<User>(
     getValue: (obj) => obj is Class ? obj.adminUsers : null,
     parentType: Class,
-    name: 'adminUsers',
-    label: 'adminUsers',
-    isCodeOnly: true,
+    name: 'admins',
+    label: 'المسؤولون',
+    isCodeOnly: false,
     isOrderable: false,
-  );
-
-  late final FieldMetadata<User> adminUsers = adminUsersRel.redirectTo(
-    AdminOnDataFields().user,
-    isExpandable: false,
-    isOrderable: false,
+    operators: {...MultiSelectOperator.values},
   );
 
   late final List<FieldMetadata<Object>> allFields = [
@@ -161,11 +156,11 @@ class ClassFields {
     'color': color,
     'photoUpdatedAt': photoUpdatedAt,
     'service': service,
-    'studyYear': studyYear,
+    'studyYearFrom': studyYear,
     'studyYearTo': studyYearTo,
     'serviceGender': serviceGender,
     'lastEdit': lastEdit,
-    'adminUsers': adminUsers,
+    'admins': adminUsers,
   };
 }
 
@@ -187,9 +182,11 @@ Class _$ClassFromJson(Map json) => Class(
       ? null
       : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
   serviceId: json['serviceId'] as String?,
-  studyYear: json['studyYear'] == null
+  studyYear: json['studyYearFrom'] == null
       ? null
-      : StudyYear.fromJson(Map<String, Object?>.from(json['studyYear'] as Map)),
+      : StudyYear.fromJson(
+          Map<String, Object?>.from(json['studyYearFrom'] as Map),
+        ),
   serviceStudyYear: (json['serviceStudyYear'] as num?)?.toInt(),
   studyYearTo: json['studyYearTo'] == null
       ? null
@@ -198,12 +195,14 @@ Class _$ClassFromJson(Map json) => Class(
         ),
   serviceStudyYearTo: (json['serviceStudyYearTo'] as num?)?.toInt(),
   serviceGender: json['serviceGender'] as bool?,
-  lastEdit: json['lastEdit'] == null
+  lastEdit: json['latestEdit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastEdit'] as Map),
+          Map<String, Object?>.from(json['latestEdit'] as Map),
         ),
-  adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
+  adminUsers: (json['admins'] as List<dynamic>?)
+      ?.map((e) => User.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
 );
 
 Map<String, dynamic> _$ClassToJson(Class instance) => <String, dynamic>{
@@ -217,13 +216,13 @@ Map<String, dynamic> _$ClassToJson(Class instance) => <String, dynamic>{
   'blurhash': instance.blurhash,
   'service': instance.service?.toJson(),
   'serviceId': instance.serviceId,
-  'studyYear': instance.studyYear?.toJson(),
+  'studyYearFrom': instance.studyYear?.toJson(),
   'serviceStudyYear': instance.serviceStudyYear,
   'studyYearTo': instance.studyYearTo?.toJson(),
   'serviceStudyYearTo': instance.serviceStudyYearTo,
   'serviceGender': instance.serviceGender,
-  'lastEdit': instance.lastEdit?.toJson(),
-  'adminUsers': adminUsersToJson(instance.adminUsers),
+  'latestEdit': instance.lastEdit?.toJson(),
+  'admins': instance.adminUsers?.map((e) => e.toJson()).toList(),
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(
