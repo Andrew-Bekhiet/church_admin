@@ -806,7 +806,7 @@ class Input_MeetingInput {
     required String name,
     bool? isArchived,
     int? color,
-    String? audience,
+    Enum_MeetingAudience? audience,
   }) => Input_MeetingInput._({
     if (showKodasCheckbox != null) r'showKodasCheckbox': showKodasCheckbox,
     if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
@@ -845,7 +845,9 @@ class Input_MeetingInput {
     }
     if (data.containsKey('audience')) {
       final l$audience = data['audience'];
-      result$data['audience'] = (l$audience as String?);
+      result$data['audience'] = l$audience == null
+          ? null
+          : fromJson_Enum_MeetingAudience((l$audience as String));
     }
     return Input_MeetingInput._(result$data);
   }
@@ -864,7 +866,8 @@ class Input_MeetingInput {
 
   int? get color => (_$data['color'] as int?);
 
-  String? get audience => (_$data['audience'] as String?);
+  Enum_MeetingAudience? get audience =>
+      (_$data['audience'] as Enum_MeetingAudience?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -892,7 +895,9 @@ class Input_MeetingInput {
     }
     if (_$data.containsKey('audience')) {
       final l$audience = audience;
-      result$data['audience'] = l$audience;
+      result$data['audience'] = l$audience == null
+          ? null
+          : toJson_Enum_MeetingAudience(l$audience);
     }
     return result$data;
   }
@@ -1006,7 +1011,7 @@ abstract class CopyWith_Input_MeetingInput<TRes> {
     String? name,
     bool? isArchived,
     int? color,
-    String? audience,
+    Enum_MeetingAudience? audience,
   });
 }
 
@@ -1040,7 +1045,8 @@ class _CopyWithImpl_Input_MeetingInput<TRes>
       if (name != _undefined && name != null) 'name': (name as String),
       if (isArchived != _undefined) 'isArchived': (isArchived as bool?),
       if (color != _undefined) 'color': (color as int?),
-      if (audience != _undefined) 'audience': (audience as String?),
+      if (audience != _undefined)
+        'audience': (audience as Enum_MeetingAudience?),
     }),
   );
 }
@@ -1058,7 +1064,7 @@ class _CopyWithStubImpl_Input_MeetingInput<TRes>
     String? name,
     bool? isArchived,
     int? color,
-    String? audience,
+    Enum_MeetingAudience? audience,
   }) => _res;
 }
 
@@ -133444,7 +133450,7 @@ class _CopyWithStubImpl_Input_MeetingDaySortInput<TRes>
 class Input_UpdateMeetingInput {
   factory Input_UpdateMeetingInput({
     String? name,
-    String? audience,
+    Enum_MeetingAudience? audience,
     bool? isArchived,
     int? color,
     bool? showKodasCheckbox,
@@ -133466,7 +133472,9 @@ class Input_UpdateMeetingInput {
     }
     if (data.containsKey('audience')) {
       final l$audience = data['audience'];
-      result$data['audience'] = (l$audience as String?);
+      result$data['audience'] = l$audience == null
+          ? null
+          : fromJson_Enum_MeetingAudience((l$audience as String));
     }
     if (data.containsKey('isArchived')) {
       final l$isArchived = data['isArchived'];
@@ -133487,7 +133495,8 @@ class Input_UpdateMeetingInput {
 
   String? get name => (_$data['name'] as String?);
 
-  String? get audience => (_$data['audience'] as String?);
+  Enum_MeetingAudience? get audience =>
+      (_$data['audience'] as Enum_MeetingAudience?);
 
   bool? get isArchived => (_$data['isArchived'] as bool?);
 
@@ -133503,7 +133512,9 @@ class Input_UpdateMeetingInput {
     }
     if (_$data.containsKey('audience')) {
       final l$audience = audience;
-      result$data['audience'] = l$audience;
+      result$data['audience'] = l$audience == null
+          ? null
+          : toJson_Enum_MeetingAudience(l$audience);
     }
     if (_$data.containsKey('isArchived')) {
       final l$isArchived = isArchived;
@@ -133606,7 +133617,7 @@ abstract class CopyWith_Input_UpdateMeetingInput<TRes> {
 
   TRes call({
     String? name,
-    String? audience,
+    Enum_MeetingAudience? audience,
     bool? isArchived,
     int? color,
     bool? showKodasCheckbox,
@@ -133633,7 +133644,8 @@ class _CopyWithImpl_Input_UpdateMeetingInput<TRes>
     Input_UpdateMeetingInput._({
       ..._instance._$data,
       if (name != _undefined) 'name': (name as String?),
-      if (audience != _undefined) 'audience': (audience as String?),
+      if (audience != _undefined)
+        'audience': (audience as Enum_MeetingAudience?),
       if (isArchived != _undefined) 'isArchived': (isArchived as bool?),
       if (color != _undefined) 'color': (color as int?),
       if (showKodasCheckbox != _undefined)
@@ -133650,7 +133662,7 @@ class _CopyWithStubImpl_Input_UpdateMeetingInput<TRes>
 
   call({
     String? name,
-    String? audience,
+    Enum_MeetingAudience? audience,
     bool? isArchived,
     int? color,
     bool? showKodasCheckbox,
@@ -133664,7 +133676,7 @@ class Input_CreateMeetingInput {
     int? serviceStudyYear,
     bool? serviceGender,
     String? groupId,
-    String? audience,
+    Enum_MeetingAudience? audience,
     bool? isArchived,
     int? color,
     bool? showKodasCheckbox,
@@ -133704,7 +133716,9 @@ class Input_CreateMeetingInput {
     }
     if (data.containsKey('audience')) {
       final l$audience = data['audience'];
-      result$data['audience'] = (l$audience as String?);
+      result$data['audience'] = l$audience == null
+          ? null
+          : fromJson_Enum_MeetingAudience((l$audience as String));
     }
     if (data.containsKey('isArchived')) {
       final l$isArchived = data['isArchived'];
@@ -133733,7 +133747,8 @@ class Input_CreateMeetingInput {
 
   String? get groupId => (_$data['groupId'] as String?);
 
-  String? get audience => (_$data['audience'] as String?);
+  Enum_MeetingAudience? get audience =>
+      (_$data['audience'] as Enum_MeetingAudience?);
 
   bool? get isArchived => (_$data['isArchived'] as bool?);
 
@@ -133763,7 +133778,9 @@ class Input_CreateMeetingInput {
     }
     if (_$data.containsKey('audience')) {
       final l$audience = audience;
-      result$data['audience'] = l$audience;
+      result$data['audience'] = l$audience == null
+          ? null
+          : toJson_Enum_MeetingAudience(l$audience);
     }
     if (_$data.containsKey('isArchived')) {
       final l$isArchived = isArchived;
@@ -133910,7 +133927,7 @@ abstract class CopyWith_Input_CreateMeetingInput<TRes> {
     int? serviceStudyYear,
     bool? serviceGender,
     String? groupId,
-    String? audience,
+    Enum_MeetingAudience? audience,
     bool? isArchived,
     int? color,
     bool? showKodasCheckbox,
@@ -133947,7 +133964,8 @@ class _CopyWithImpl_Input_CreateMeetingInput<TRes>
       if (serviceGender != _undefined)
         'serviceGender': (serviceGender as bool?),
       if (groupId != _undefined) 'groupId': (groupId as String?),
-      if (audience != _undefined) 'audience': (audience as String?),
+      if (audience != _undefined)
+        'audience': (audience as Enum_MeetingAudience?),
       if (isArchived != _undefined) 'isArchived': (isArchived as bool?),
       if (color != _undefined) 'color': (color as int?),
       if (showKodasCheckbox != _undefined)
@@ -133968,7 +133986,7 @@ class _CopyWithStubImpl_Input_CreateMeetingInput<TRes>
     int? serviceStudyYear,
     bool? serviceGender,
     String? groupId,
-    String? audience,
+    Enum_MeetingAudience? audience,
     bool? isArchived,
     int? color,
     bool? showKodasCheckbox,
@@ -136483,15 +136501,15 @@ class _CopyWithStubImpl_Input_MeetingFilterIsArchived<TRes>
 class Input_MeetingFilterAudience {
   factory Input_MeetingFilterAudience({
     bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
+    Enum_MeetingAudience? eq,
+    Enum_MeetingAudience? notEq,
+    List<Enum_MeetingAudience>? $in,
+    Enum_MeetingAudience? lessThan,
+    Enum_MeetingAudience? greaterThan,
+    Enum_MeetingAudience? lessThanOrEqual,
+    Enum_MeetingAudience? greaterThanOrEqual,
+    Enum_MeetingAudience? isDistinctFrom,
+    Enum_MeetingAudience? isNotDistinctFrom,
   }) => Input_MeetingFilterAudience._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
@@ -136515,41 +136533,57 @@ class Input_MeetingFilterAudience {
     }
     if (data.containsKey('eq')) {
       final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as String?);
+      result$data['eq'] = l$eq == null
+          ? null
+          : fromJson_Enum_MeetingAudience((l$eq as String));
     }
     if (data.containsKey('notEq')) {
       final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as String?);
+      result$data['notEq'] = l$notEq == null
+          ? null
+          : fromJson_Enum_MeetingAudience((l$notEq as String));
     }
     if (data.containsKey('in')) {
       final l$$in = data['in'];
       result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as String))
+          ?.map((e) => fromJson_Enum_MeetingAudience((e as String)))
           .toList();
     }
     if (data.containsKey('lessThan')) {
       final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as String?);
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : fromJson_Enum_MeetingAudience((l$lessThan as String));
     }
     if (data.containsKey('greaterThan')) {
       final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as String?);
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : fromJson_Enum_MeetingAudience((l$greaterThan as String));
     }
     if (data.containsKey('lessThanOrEqual')) {
       final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : fromJson_Enum_MeetingAudience((l$lessThanOrEqual as String));
     }
     if (data.containsKey('greaterThanOrEqual')) {
       final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : fromJson_Enum_MeetingAudience((l$greaterThanOrEqual as String));
     }
     if (data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : fromJson_Enum_MeetingAudience((l$isDistinctFrom as String));
     }
     if (data.containsKey('isNotDistinctFrom')) {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : fromJson_Enum_MeetingAudience((l$isNotDistinctFrom as String));
     }
     return Input_MeetingFilterAudience._(result$data);
   }
@@ -136558,23 +136592,30 @@ class Input_MeetingFilterAudience {
 
   bool? get isNil => (_$data['isNil'] as bool?);
 
-  String? get eq => (_$data['eq'] as String?);
+  Enum_MeetingAudience? get eq => (_$data['eq'] as Enum_MeetingAudience?);
 
-  String? get notEq => (_$data['notEq'] as String?);
+  Enum_MeetingAudience? get notEq => (_$data['notEq'] as Enum_MeetingAudience?);
 
-  List<String>? get $in => (_$data['in'] as List<String>?);
+  List<Enum_MeetingAudience>? get $in =>
+      (_$data['in'] as List<Enum_MeetingAudience>?);
 
-  String? get lessThan => (_$data['lessThan'] as String?);
+  Enum_MeetingAudience? get lessThan =>
+      (_$data['lessThan'] as Enum_MeetingAudience?);
 
-  String? get greaterThan => (_$data['greaterThan'] as String?);
+  Enum_MeetingAudience? get greaterThan =>
+      (_$data['greaterThan'] as Enum_MeetingAudience?);
 
-  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+  Enum_MeetingAudience? get lessThanOrEqual =>
+      (_$data['lessThanOrEqual'] as Enum_MeetingAudience?);
 
-  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+  Enum_MeetingAudience? get greaterThanOrEqual =>
+      (_$data['greaterThanOrEqual'] as Enum_MeetingAudience?);
 
-  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+  Enum_MeetingAudience? get isDistinctFrom =>
+      (_$data['isDistinctFrom'] as Enum_MeetingAudience?);
 
-  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+  Enum_MeetingAudience? get isNotDistinctFrom =>
+      (_$data['isNotDistinctFrom'] as Enum_MeetingAudience?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -136584,39 +136625,57 @@ class Input_MeetingFilterAudience {
     }
     if (_$data.containsKey('eq')) {
       final l$eq = eq;
-      result$data['eq'] = l$eq;
+      result$data['eq'] = l$eq == null
+          ? null
+          : toJson_Enum_MeetingAudience(l$eq);
     }
     if (_$data.containsKey('notEq')) {
       final l$notEq = notEq;
-      result$data['notEq'] = l$notEq;
+      result$data['notEq'] = l$notEq == null
+          ? null
+          : toJson_Enum_MeetingAudience(l$notEq);
     }
     if (_$data.containsKey('in')) {
       final l$$in = $in;
-      result$data['in'] = l$$in?.map((e) => e).toList();
+      result$data['in'] = l$$in
+          ?.map((e) => toJson_Enum_MeetingAudience(e))
+          .toList();
     }
     if (_$data.containsKey('lessThan')) {
       final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan;
+      result$data['lessThan'] = l$lessThan == null
+          ? null
+          : toJson_Enum_MeetingAudience(l$lessThan);
     }
     if (_$data.containsKey('greaterThan')) {
       final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan;
+      result$data['greaterThan'] = l$greaterThan == null
+          ? null
+          : toJson_Enum_MeetingAudience(l$greaterThan);
     }
     if (_$data.containsKey('lessThanOrEqual')) {
       final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+          ? null
+          : toJson_Enum_MeetingAudience(l$lessThanOrEqual);
     }
     if (_$data.containsKey('greaterThanOrEqual')) {
       final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+          ? null
+          : toJson_Enum_MeetingAudience(l$greaterThanOrEqual);
     }
     if (_$data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+          ? null
+          : toJson_Enum_MeetingAudience(l$isDistinctFrom);
     }
     if (_$data.containsKey('isNotDistinctFrom')) {
       final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+          ? null
+          : toJson_Enum_MeetingAudience(l$isNotDistinctFrom);
     }
     return result$data;
   }
@@ -136777,15 +136836,15 @@ abstract class CopyWith_Input_MeetingFilterAudience<TRes> {
 
   TRes call({
     bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
+    Enum_MeetingAudience? eq,
+    Enum_MeetingAudience? notEq,
+    List<Enum_MeetingAudience>? $in,
+    Enum_MeetingAudience? lessThan,
+    Enum_MeetingAudience? greaterThan,
+    Enum_MeetingAudience? lessThanOrEqual,
+    Enum_MeetingAudience? greaterThanOrEqual,
+    Enum_MeetingAudience? isDistinctFrom,
+    Enum_MeetingAudience? isNotDistinctFrom,
   });
 }
 
@@ -136814,19 +136873,21 @@ class _CopyWithImpl_Input_MeetingFilterAudience<TRes>
     Input_MeetingFilterAudience._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as String?),
-      if (notEq != _undefined) 'notEq': (notEq as String?),
-      if ($in != _undefined) 'in': ($in as List<String>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (eq != _undefined) 'eq': (eq as Enum_MeetingAudience?),
+      if (notEq != _undefined) 'notEq': (notEq as Enum_MeetingAudience?),
+      if ($in != _undefined) 'in': ($in as List<Enum_MeetingAudience>?),
+      if (lessThan != _undefined)
+        'lessThan': (lessThan as Enum_MeetingAudience?),
+      if (greaterThan != _undefined)
+        'greaterThan': (greaterThan as Enum_MeetingAudience?),
       if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as String?),
+        'lessThanOrEqual': (lessThanOrEqual as Enum_MeetingAudience?),
       if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+        'greaterThanOrEqual': (greaterThanOrEqual as Enum_MeetingAudience?),
       if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as String?),
+        'isDistinctFrom': (isDistinctFrom as Enum_MeetingAudience?),
       if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+        'isNotDistinctFrom': (isNotDistinctFrom as Enum_MeetingAudience?),
     }),
   );
 }
@@ -136839,15 +136900,15 @@ class _CopyWithStubImpl_Input_MeetingFilterAudience<TRes>
 
   call({
     bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
+    Enum_MeetingAudience? eq,
+    Enum_MeetingAudience? notEq,
+    List<Enum_MeetingAudience>? $in,
+    Enum_MeetingAudience? lessThan,
+    Enum_MeetingAudience? greaterThan,
+    Enum_MeetingAudience? lessThanOrEqual,
+    Enum_MeetingAudience? greaterThanOrEqual,
+    Enum_MeetingAudience? isDistinctFrom,
+    Enum_MeetingAudience? isNotDistinctFrom,
   }) => _res;
 }
 
@@ -229145,6 +229206,44 @@ Enum_VisitSubject fromJson_Enum_VisitSubject(String value) {
       return Enum_VisitSubject.STREETS;
     default:
       return Enum_VisitSubject.$unknown;
+  }
+}
+
+enum Enum_MeetingAudience {
+  ONLY_PERSONS,
+  ONLY_SERVANTS,
+  PERSONS_AND_SERVANTS,
+  $unknown;
+
+  factory Enum_MeetingAudience.fromJson(String value) =>
+      fromJson_Enum_MeetingAudience(value);
+
+  String toJson() => toJson_Enum_MeetingAudience(this);
+}
+
+String toJson_Enum_MeetingAudience(Enum_MeetingAudience e) {
+  switch (e) {
+    case Enum_MeetingAudience.ONLY_PERSONS:
+      return r'ONLY_PERSONS';
+    case Enum_MeetingAudience.ONLY_SERVANTS:
+      return r'ONLY_SERVANTS';
+    case Enum_MeetingAudience.PERSONS_AND_SERVANTS:
+      return r'PERSONS_AND_SERVANTS';
+    case Enum_MeetingAudience.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_MeetingAudience fromJson_Enum_MeetingAudience(String value) {
+  switch (value) {
+    case r'ONLY_PERSONS':
+      return Enum_MeetingAudience.ONLY_PERSONS;
+    case r'ONLY_SERVANTS':
+      return Enum_MeetingAudience.ONLY_SERVANTS;
+    case r'PERSONS_AND_SERVANTS':
+      return Enum_MeetingAudience.PERSONS_AND_SERVANTS;
+    default:
+      return Enum_MeetingAudience.$unknown;
   }
 }
 

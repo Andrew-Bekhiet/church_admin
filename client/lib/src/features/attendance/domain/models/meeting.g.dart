@@ -34,16 +34,6 @@ class MeetingFields {
     operators: {...StringOperator.values},
   );
 
-  final FieldMetadata<MeetingAudience> audience =
-      FieldMetadata<MeetingAudience>(
-        getValue: (obj) => obj is Meeting ? obj.audience : null,
-        parentType: Meeting,
-        name: 'audience',
-        label: 'audience',
-        isCodeOnly: false,
-        operators: {...MultiSelectOperator.values},
-      );
-
   final FieldMetadata<bool> isArchived = FieldMetadata<bool>(
     getValue: (obj) => obj is Meeting ? obj.isArchived : null,
     parentType: Meeting,
@@ -143,7 +133,6 @@ class MeetingFields {
   late final List<FieldMetadata<Object>> allFields = [
     id,
     name,
-    audience,
     isArchived,
     showKodasCheckbox,
     color,
@@ -157,7 +146,6 @@ class MeetingFields {
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
-    'audience': audience,
     'isArchived': isArchived,
     'showKodasCheckbox': showKodasCheckbox,
     'color': color,
@@ -214,7 +202,7 @@ Map<String, dynamic> _$MeetingToJson(Meeting instance) => <String, dynamic>{
 };
 
 const _$MeetingAudienceEnumMap = {
-  MeetingAudience.onlyPersons: 'onlyPersons',
-  MeetingAudience.onlyServants: 'onlyServants',
-  MeetingAudience.personsAndServants: 'personsAndServants',
+  MeetingAudience.onlyPersons: 'ONLY_PERSONS',
+  MeetingAudience.onlyServants: 'ONLY_SERVANTS',
+  MeetingAudience.personsAndServants: 'PERSONS_AND_SERVANTS',
 };

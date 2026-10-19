@@ -5269,7 +5269,7 @@ class Query_meetingsWithDays_meetings_results implements Fragment_Meeting {
     return Query_meetingsWithDays_meetings_results(
       id: (l$id as String),
       name: (l$name as String),
-      audience: (l$audience as String),
+      audience: fromJson_Enum_MeetingAudience((l$audience as String)),
       color: (l$color as int?),
       isArchived: (l$isArchived as bool),
       showKodasCheckbox: (l$showKodasCheckbox as bool),
@@ -5303,7 +5303,7 @@ class Query_meetingsWithDays_meetings_results implements Fragment_Meeting {
 
   final String name;
 
-  final String audience;
+  final Enum_MeetingAudience audience;
 
   final int? color;
 
@@ -5336,7 +5336,7 @@ class Query_meetingsWithDays_meetings_results implements Fragment_Meeting {
     final l$name = name;
     _resultData['name'] = l$name;
     final l$audience = audience;
-    _resultData['audience'] = l$audience;
+    _resultData['audience'] = toJson_Enum_MeetingAudience(l$audience);
     final l$color = color;
     _resultData['color'] = l$color;
     final l$isArchived = isArchived;
@@ -5516,7 +5516,7 @@ abstract class CopyWith_Query_meetingsWithDays_meetings_results<TRes> {
   TRes call({
     String? id,
     String? name,
-    String? audience,
+    Enum_MeetingAudience? audience,
     int? color,
     bool? isArchived,
     bool? showKodasCheckbox,
@@ -5582,7 +5582,7 @@ class _CopyWithImpl_Query_meetingsWithDays_meetings_results<TRes>
           : (name as String),
       audience: audience == _undefined || audience == null
           ? _instance.audience
-          : (audience as String),
+          : (audience as Enum_MeetingAudience),
       color: color == _undefined ? _instance.color : (color as int?),
       isArchived: isArchived == _undefined || isArchived == null
           ? _instance.isArchived
@@ -5674,7 +5674,7 @@ class _CopyWithStubImpl_Query_meetingsWithDays_meetings_results<TRes>
   call({
     String? id,
     String? name,
-    String? audience,
+    Enum_MeetingAudience? audience,
     int? color,
     bool? isArchived,
     bool? showKodasCheckbox,

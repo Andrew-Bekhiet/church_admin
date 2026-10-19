@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-@JsonEnum()
+@JsonEnum(fieldRename: FieldRename.screamingSnake)
 enum MeetingAudience {
   onlyPersons,
   onlyServants,

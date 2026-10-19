@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/mutations.graphql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meeting_audience_graphql_value.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meeting_rows_reader.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meetings_analysis_queries.dart';
 import 'package:graphql/client.dart';
@@ -43,7 +44,7 @@ class MeetingsDAO extends DAOBase<Meeting>
     varsConstructor: ({required newObject}) => Variables_Mutation_createMeeting(
       input: Input_CreateMeetingInput(
         name: newObject.name,
-        audience: newObject.audience.name,
+        audience: newObject.audience.graphqlValue,
         color: colorToInt(newObject.color),
         isArchived: newObject.isArchived,
         showKodasCheckbox: newObject.showKodasCheckbox,
@@ -62,7 +63,9 @@ class MeetingsDAO extends DAOBase<Meeting>
       id: newObject.id,
       input: Input_UpdateMeetingInput.fromJson({
         'name': newObject.name,
-        'audience': newObject.audience.name,
+        'audience': toJson_Enum_MeetingAudience(
+          newObject.audience.graphqlValue,
+        ),
         'color': colorToInt(newObject.color),
         'isArchived': newObject.isArchived,
         'showKodasCheckbox': newObject.showKodasCheckbox,
