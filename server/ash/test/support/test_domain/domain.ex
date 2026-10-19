@@ -7,7 +7,11 @@ defmodule ChurchAdmin.TestDomain do
   use ChurchAdmin.Domain, validate_config_inclusion?: false
 
   resources do
+    resource ChurchAdmin.TestDomain.AuthzProbe
+    resource ChurchAdmin.TestDomain.AuthzProbeLink
     resource ChurchAdmin.TestDomain.ErrorProbe
+    resource ChurchAdmin.TestDomain.LookupProbe
+    resource ChurchAdmin.TestDomain.PersonChildProbe
     resource ChurchAdmin.TestDomain.HasuraSessionProbe
   end
 end

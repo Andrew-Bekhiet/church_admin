@@ -2,15 +2,24 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
   use Ash.Resource,
     domain: ChurchAdmin.Accounts,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Accounts.User
+  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.Catalog.StudyYear
   alias ChurchAdmin.Organization.{Group, Service}
   alias ChurchAdmin.Places.Area
 
   graphql do
     type :scope_grant
+
+    relationships [:user]
+
+    queries do
+      get :scope_grant, :read
+      list :scope_grants, :read
+    end
   end
 
   postgres do
@@ -34,7 +43,25 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :user, entity: :user, access: :read}
+    end
   end
 
   attributes do

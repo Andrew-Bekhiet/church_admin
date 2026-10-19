@@ -2,13 +2,21 @@ defmodule ChurchAdmin.People.GroupMembership do
   use Ash.Resource,
     domain: ChurchAdmin.People,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Organization.Group
+  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.People.Person
 
   graphql do
     type :group_membership
+
+    relationships [:person]
+
+    queries do
+      list :group_memberships, :read
+    end
   end
 
   postgres do
@@ -23,7 +31,29 @@ defmodule ChurchAdmin.People.GroupMembership do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 100
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :person, entity: :person, access: :read}
+    end
+
+    policy action_type(:read) do
+      authorize_if {RelatedInScope, path: :group, entity: :group, access: :read}
+    end
   end
 
   attributes do
