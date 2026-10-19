@@ -1,0 +1,3 @@
+defmodule ChurchAdmin.Repo.Migrations.Baseline.ConstraintUsersPermissionsAndAddFamilyStatus do
+  use ChurchAdmin.Repo.BaselineMigration
+end

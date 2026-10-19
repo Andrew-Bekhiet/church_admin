@@ -1,0 +1,3 @@
+defmodule ChurchAdmin.Repo.Migrations.Baseline.AlterTablePublicPersonsAddCheckConstraintCheckServantPropertiesConsistent do
+  use ChurchAdmin.Repo.BaselineMigration
+end

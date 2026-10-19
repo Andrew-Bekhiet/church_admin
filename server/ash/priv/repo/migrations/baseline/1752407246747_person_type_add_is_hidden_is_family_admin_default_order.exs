@@ -1,0 +1,3 @@
+defmodule ChurchAdmin.Repo.Migrations.Baseline.PersonTypeAddIsHiddenIsFamilyAdminDefaultOrder do
+  use ChurchAdmin.Repo.BaselineMigration
+end

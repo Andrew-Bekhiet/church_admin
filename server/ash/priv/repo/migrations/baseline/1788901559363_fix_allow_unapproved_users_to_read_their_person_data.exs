@@ -1,0 +1,3 @@
+defmodule ChurchAdmin.Repo.Migrations.Baseline.FixAllowUnapprovedUsersToReadTheirPersonData do
+  use ChurchAdmin.Repo.BaselineMigration
+end
