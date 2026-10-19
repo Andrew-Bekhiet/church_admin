@@ -23,7 +23,7 @@ void main() {
 
   final schema = GqlSchemaIndex.fromDocument(
     parseString(
-      File('lib/src/core/graphql/schema.graphql').readAsStringSync(),
+      File('lib/src/core/graphql/hasura_schema.gql').readAsStringSync(),
     ),
   );
   final database = DatabaseService(_MockDBGraphQLClient());

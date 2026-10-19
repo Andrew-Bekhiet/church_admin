@@ -16,7 +16,7 @@ void main() {
   );
 
   test('every keyed-type selection selects all of its key fields', () {
-    const schemaPath = 'lib/src/core/graphql/schema.graphql';
+    const schemaPath = 'lib/src/core/graphql/hasura_schema.gql';
     const operationsDir = 'lib/src/core/services/database/gql_definintions';
 
     final schema = GqlSchemaIndex.fromDocument(

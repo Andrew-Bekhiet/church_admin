@@ -1,2 +1,7 @@
-schema: "client/lib/src/core/graphql/schema.graphql"
-documents: "**/*.{graphql,gql}"
+projects:
+  hasura:
+    schema: "client/lib/src/core/graphql/hasura_schema.gql"
+    documents: "**/*.gql"
+  ash:
+    schema: "client/lib/src/core/graphql/schema.graphql"
+    documents: "**/*.graphql"

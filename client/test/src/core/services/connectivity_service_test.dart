@@ -47,10 +47,31 @@ void main() {
 
       expect(
         captured[1].first,
-        Uri.parse(
-          SecretsService.I.hasuraServer,
-        ).replace(pathSegments: ['healthz']).toString(),
+        globalProviderContainer
+            .read(apiEndpointsProvider)
+            .healthCheck
+            .toString(),
       );
+    },
+  );
+
+  test(
+    'Connectivity Service => health check => any 2xx status is connected',
+    () async {
+      when(
+        globalProviderContainer
+            .read(connectivityPluginProvider)
+            .checkConnectivity(),
+      ).thenAnswer((_) async => [ConnectivityResult.wifi]);
+      final dio = globalProviderContainer.read(dioProvider) as MockDio;
+      final unit = _getConnectivityService();
+      addTearDown(unit.dispose);
+
+      when(dio.get(any)).thenAnswer((_) async => _createMockResponse(204));
+      await expectLater(unit.isConnected(), completion(isTrue));
+
+      when(dio.get(any)).thenAnswer((_) async => _createMockResponse(404));
+      await expectLater(unit.isConnected(), completion(isFalse));
     },
   );
 
@@ -132,7 +153,7 @@ ConnectivityService _getConnectivityService() {
       connectivityPluginProvider,
     ),
     loggingService: MockLoggingService(),
-    secretsService: globalProviderContainer.read(secretsServiceProvider),
+    apiEndpoints: globalProviderContainer.read(apiEndpointsProvider),
   );
 
   return unit;
@@ -156,7 +177,7 @@ Override _setUpMockConnectivity() {
 
 Override _setUpMockSecretsRepo() {
   final mockSecrets = MockSecretsService();
-  when(mockSecrets.hasuraServer).thenReturn('https://hasura.server.mock.com/');
+  when(mockSecrets.apiServerUrl).thenReturn('https://api.server.mock.com');
 
   return secretsServiceProvider.overrideWithValue(mockSecrets);
 }

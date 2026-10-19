@@ -1,4 +1,4 @@
-import '../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../../../../graphql/__generated__/hasura_schema.gql.dart';
 import '../../classes/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
