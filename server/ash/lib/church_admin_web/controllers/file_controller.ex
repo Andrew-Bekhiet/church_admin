@@ -21,7 +21,7 @@ defmodule ChurchAdminWeb.FileController do
   alias ChurchAdmin.Errors.DomainError
   alias ChurchAdmin.Exports.{Selection, Workbook}
   alias ChurchAdmin.Files.Buckets
-  alias ChurchAdmin.Files.Photos.{Access, Upload}
+  alias ChurchAdmin.Files.Photos.{Access, ImageFormat, Upload}
   alias ChurchAdmin.Google
   alias ChurchAdminWeb.{FileToken, StreamedFile}
 
@@ -34,6 +34,8 @@ defmodule ChurchAdminWeb.FileController do
   def upload(conn, params), do: serve_token(conn, params)
 
   defp serve_token(conn, %{"token" => token}) do
+    conn = put_resp_header(conn, "x-content-type-options", "nosniff")
+
     with {:ok, claims} <- FileToken.verify(token),
          :ok <- same_user?(conn, claims) do
       serve(conn, claims)
@@ -68,13 +70,23 @@ defmodule ChurchAdminWeb.FileController do
 
     with {:ok, target} <- Access.resolve(actor, params.subject, params.id, :write),
          {:ok, bytes, conn} <- read_photo(conn),
-         :ok <- Upload.store(target, bytes, upload_content_type(conn, params)) do
+         :ok <- Upload.store(target, bytes) do
       send_resp(conn, 204, "")
     else
-      {:error, %DomainError{} = error} -> send_domain_error(conn, error)
-      {:error, :empty} -> send_error(conn, 400, "invalid", "The photo is empty")
-      {:error, :too_large} -> send_error(conn, 413, "invalid", "The photo is too large")
-      {:error, error} -> send_storage_error(conn, error)
+      {:error, %DomainError{} = error} ->
+        send_domain_error(conn, error)
+
+      {:error, :empty} ->
+        send_error(conn, 400, "invalid", "The photo is empty")
+
+      {:error, :too_large} ->
+        send_error(conn, 413, "invalid", "The photo is too large")
+
+      {:error, :not_an_image} ->
+        send_error(conn, 415, "invalid", "The file is not a supported image")
+
+      {:error, error} ->
+        send_storage_error(conn, error)
     end
   end
 
@@ -82,10 +94,12 @@ defmodule ChurchAdminWeb.FileController do
     actor = ActorLoader.load(uid)
 
     with {:ok, target} <- Access.resolve(actor, params.subject, params.id, :read),
+         {:ok, object} <- Google.Storage.metadata(Buckets.photos(), target.object),
          {:ok, chunks} <- Google.Storage.download(Buckets.photos(), target.object) do
       conn
       |> put_resp_header("cache-control", "private, max-age=300")
-      |> StreamedFile.send_chunks(chunks, params.content_type || "application/octet-stream")
+      |> put_resp_header("content-disposition", ~s(inline; filename="photo"))
+      |> StreamedFile.send_chunks(chunks, ImageFormat.servable_type(object.content_type))
     else
       {:error, %DomainError{} = error} -> send_domain_error(conn, error)
       {:error, error} -> send_storage_error(conn, error)
@@ -125,11 +139,6 @@ defmodule ChurchAdminWeb.FileController do
       {:more, _partial, _conn} -> {:error, :too_large}
     end
   end
-
-  defp upload_content_type(conn, %{content_type: nil}),
-    do: conn |> get_req_header("content-type") |> List.first("application/octet-stream")
-
-  defp upload_content_type(_conn, %{content_type: content_type}), do: content_type
 
   defp same_user?(conn, %{uid: uid}) do
     case Ash.PlugHelpers.get_actor(conn) do
