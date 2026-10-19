@@ -1,0 +1,23 @@
+mutation createFamily($input: CreateFamilyInput!) {
+  createFamily(input: $input) {
+    result {
+      ...Family
+    }
+  }
+}
+
+mutation updateFamily($id: ID!, $input: UpdateFamilyInput) {
+  updateFamily(id: $id, input: $input) {
+    result {
+      ...Family
+    }
+  }
+}
+
+mutation deleteFamily($id: ID!) {
+  deleteFamily(id: $id) {
+    result {
+      ...Family
+    }
+  }
+}
