@@ -102,7 +102,11 @@ defmodule ChurchAdmin.AccountsCase do
 
       ChurchAdmin.Repo.rollback(result)
     end)
-    |> then(fn {:error, result} -> result end)
+    |> case do
+      {:error, :ok} -> :ok
+      {:error, {:error, error}} -> {:error, error}
+      {:error, rolled_back_by_the_command} -> {:error, rolled_back_by_the_command}
+    end
   end
 
   defp fire_fixtures_deferred_checks! do

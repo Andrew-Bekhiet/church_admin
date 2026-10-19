@@ -58,6 +58,7 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
     create :create do
       primary? true
       accept @scope_fields ++ [:uid]
+      validate ChurchAdmin.Accounts.Validations.GranterCoversScope
     end
 
     destroy :destroy do

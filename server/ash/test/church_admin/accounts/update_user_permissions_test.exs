@@ -191,6 +191,28 @@ defmodule ChurchAdmin.Accounts.UpdateUserPermissionsTest do
     end
   end
 
+  describe "the codes of rejected grants" do
+    test "name the broken rule", ctx do
+      admin = service_admin!(ctx.service, edit?: true, manage_users?: true)
+      Factory.grant!(ctx.user, :service, ctx.service.id)
+      admin = actor_for(admin)
+
+      assert codes(update(ctx.user, %{permissions: ~w(readAllData)}, admin)) ==
+               ["user/permission-not-grantable"]
+
+      assert codes(
+               update(
+                 ctx.user,
+                 %{admin_on: [%{admin_on_service: ctx.service.id, service_allow_export: true}]},
+                 admin
+               )
+             ) == ["invitation/scope-not-manageable"]
+
+      assert codes(update(Factory.user!(), %{permissions: ~w(writeAllData)}, ctx.actor)) ==
+               ["user/permission-levels-inconsistent"]
+    end
+  end
+
   describe "who may change them" do
     test "not a user without edit rights on the user, nor the user itself", ctx do
       plain = user_with!(~w(approved readAllData writeAllData))

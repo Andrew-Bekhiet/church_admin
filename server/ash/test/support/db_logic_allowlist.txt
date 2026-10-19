@@ -8,9 +8,6 @@ default history.edit_history.recorded_by
 default history.edit_history.user_role
 default history.kodas_history.recorded_by
 default history.visit_history.recorded_by
-function auth.check_users_permissions_level_consistency()
-function auth.enforce_admin_on_grant_level()
-function auth.enforce_permission_grant_level()
 function auth.sync_users_permissions_by_entity_id_cache()
 function auth.user_can_edit_area(areas, json)
 function auth.user_can_edit_class(classes, json)
@@ -67,11 +64,8 @@ function public.sync_street_areas()
 procedure operations.record_missed_study_year_roll(date)
 procedure operations.run_study_year_roll_when_due(date)
 trigger auth.users_admin_on.edit_history
-trigger auth.users_admin_on.enforce_admin_on_grant_level
 trigger auth.users_admin_on.sync_users_permissions_by_entity_id_cache
 trigger auth.users_data.sync_users_permissions_by_entity_id_cache
-trigger auth.users_permissions.check_users_permissions_level_consistency
-trigger auth.users_permissions.enforce_permission_grant_level
 trigger auth.users_permissions.sync_users_permissions_by_entity_id_cache
 trigger history.attendance_history.check_attendance_history_meeting
 trigger history.call_history.insert_person_edit_history

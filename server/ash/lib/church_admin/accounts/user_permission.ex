@@ -44,6 +44,7 @@ defmodule ChurchAdmin.Accounts.UserPermission do
     create :create do
       primary? true
       accept [:uid, :permission]
+      validate ChurchAdmin.Accounts.Validations.GranterHoldsPermission
     end
 
     destroy :destroy do
