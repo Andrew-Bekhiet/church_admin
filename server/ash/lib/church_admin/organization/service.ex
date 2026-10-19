@@ -2,10 +2,13 @@ defmodule ChurchAdmin.Organization.Service do
   use Ash.Resource,
     domain: ChurchAdmin.Organization,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.{ScopeGrant, User}
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
+  alias ChurchAdmin.Authz.Calculations.UserCanEdit
+  alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Attendance.Meeting
   alias ChurchAdmin.Catalog.StudyYear
   alias ChurchAdmin.Organization.{Class, Group}
@@ -14,6 +17,20 @@ defmodule ChurchAdmin.Organization.Service do
 
   graphql do
     type :service
+
+    relationships [
+      :classes,
+      :groups,
+      :next_service,
+      :service_memberships,
+      :admins,
+      :latest_edit
+    ]
+
+    queries do
+      get :service, :read
+      list :services, :read
+    end
   end
 
   postgres do
@@ -46,7 +63,25 @@ defmodule ChurchAdmin.Organization.Service do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if actor_present()
+    end
   end
 
   attributes do
@@ -104,6 +139,11 @@ defmodule ChurchAdmin.Organization.Service do
 
     has_many :scope_grants, ScopeGrant, destination_attribute: :admin_on_service, public?: true
 
+    has_many :admins, User,
+      no_attributes?: true,
+      public?: true,
+      filter: expr(exists(scope_grants, admin_on_service == parent(parent(id))))
+
     has_one :latest_edit, LatestEdit,
       destination_attribute: :record_id,
       filter: expr(table == "services"),
@@ -113,6 +153,18 @@ defmodule ChurchAdmin.Organization.Service do
       destination_attribute: :record_id,
       filter: expr(table == "services"),
       public?: true
+  end
+
+  calculations do
+    calculate :user_can_edit, :boolean, {UserCanEdit, entity: :service},
+      allow_nil?: false,
+      public?: true
+  end
+
+  aggregates do
+    first :next_service_name, :next_service, :name, public?: true
+    first :study_year_from_order, :study_year_from, :order, public?: true
+    first :study_year_to_order, :study_year_to, :order, public?: true
   end
 
   identities do
