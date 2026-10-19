@@ -34,13 +34,16 @@ class HomeDailyTextCard extends StatelessWidget {
                 spacing: 8,
                 children: [
                   Icon(type.icon),
-                  Text(type.title, style: textTheme.titleMedium),
+                  Text(
+                    type.title,
+                    style: textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
               Text(
                 text,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
                 style: textTheme.bodyLarge,
               ),
               Align(

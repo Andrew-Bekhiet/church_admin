@@ -14,18 +14,32 @@ class HomeModeChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActionChip(
-      avatar: Icon(mode.icon),
-      label: Row(
-        mainAxisSize: MainAxisSize.min,
-        spacing: 4,
-        children: [
-          Text(mode.label),
-          const Icon(Symbols.swap_horiz, size: 18),
-        ],
+    final colorScheme = ColorScheme.of(context);
+
+    return SizedBox(
+      height: 40,
+      child: ActionChip(
+        avatar: Icon(mode.icon, color: colorScheme.onSurfaceVariant),
+        label: Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 4,
+          children: [
+            Text(mode.label),
+            Icon(
+              Symbols.swap_horiz,
+              size: 18,
+              color: colorScheme.onSurfaceVariant,
+            ),
+          ],
+        ),
+        labelStyle: TextTheme.of(context).titleSmall,
+        tooltip: 'تبديل إلى ${mode.other.label}',
+        onPressed: onPressed,
+        color: WidgetStatePropertyAll(colorScheme.surfaceContainerHigh),
+        side: BorderSide.none,
+        shape: const StadiumBorder(),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
-      tooltip: 'تبديل إلى ${mode.other.label}',
-      onPressed: onPressed,
     );
   }
 }

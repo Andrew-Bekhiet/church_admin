@@ -4,8 +4,22 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
-class HomeScreenSummary extends StatelessWidget {
+class HomeScreenSummary extends StatefulWidget {
   const HomeScreenSummary({super.key});
+
+  @override
+  State<HomeScreenSummary> createState() => _HomeScreenSummaryState();
+}
+
+class _HomeScreenSummaryState extends State<HomeScreenSummary> {
+  static const double _heroScreenHeightFraction = 0.24;
+
+  late final ScrollController _scrollController = ScrollController(
+    initialScrollOffset: _heroExpandedHeight,
+  );
+
+  double get _heroExpandedHeight =>
+      MediaQuery.sizeOf(context).height * _heroScreenHeightFraction;
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +31,25 @@ class HomeScreenSummary extends StatelessWidget {
           previous.hero != current.hero,
       builder: (context, homeState) {
         return CustomScrollView(
+          controller: _scrollController,
           slivers: [
-            SliverToBoxAdapter(
-              child: SessionReplayUnmask(
+            SliverAppBar(
+              pinned: true,
+              toolbarHeight: 0,
+              automaticallyImplyLeading: false,
+              expandedHeight: _heroExpandedHeight,
+              backgroundColor: Colors.transparent,
+              scrolledUnderElevation: 0,
+              flexibleSpace: SessionReplayUnmask(
                 child: HomeHeroImage(imageAsset: homeState.hero.imageAsset),
               ),
             ),
             const SliverToBoxAdapter(child: UpdateAvailableWidget()),
             SliverPadding(
-              padding: EdgeInsetsDirectional.only(
+              padding: const EdgeInsetsDirectional.only(
                 start: 16,
                 end: 16,
-                bottom: MediaQuery.paddingOf(context).bottom + 16,
+                bottom: 16,
               ),
               sliver: SliverList.list(
                 children: [
@@ -59,5 +80,12 @@ class HomeScreenSummary extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+
+    super.dispose();
   }
 }

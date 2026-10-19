@@ -30,7 +30,7 @@ class HomeBody extends StatelessWidget {
             final tab = tabs[i];
             final pageKey = PageStorageKey('Home => ${tab.entity} Page');
 
-            return switch ((tab, homeCubit.listControllerFor(tab))) {
+            final page = switch ((tab, homeCubit.listControllerFor(tab))) {
               (HomeTab.summary, _) => const HomeScreenSummary(),
               (
                 HomeTab.services,
@@ -71,6 +71,15 @@ class HomeBody extends StatelessWidget {
                 ),
               _ => const SizedBox.shrink(),
             };
+
+            if (tab == HomeTab.summary) return page;
+
+            return SafeArea(
+              left: false,
+              right: false,
+              bottom: false,
+              child: HomeListPage(tab: tab, child: page),
+            );
           },
         );
       },

@@ -1,96 +1,85 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/home/presentation/widgets/snowflake_animation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
-class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
+class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
+  final PageController _pageController;
+
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
-  const HomeAppBar({super.key});
+  const HomeAppBar({required this._pageController, super.key});
+
+  @override
+  State<HomeAppBar> createState() => _HomeAppBarState();
+}
+
+class _HomeAppBarState extends State<HomeAppBar> {
+  double get _firstPageScrollProgress {
+    final controller = widget._pageController;
+    final page = controller.hasClients ? controller.page : null;
+
+    return (page ?? controller.initialPage.toDouble()).clamp(0, 1).toDouble();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SessionReplayUnmask(
-      child: RepaintBoundary(
-        child: AnimatedSize(
-          duration: const Duration(milliseconds: 250),
-          alignment: Alignment.topCenter,
-          child: BlocBuilder<HomeCubit, HomeState>(
-            buildWhen: (previous, current) =>
-                previous.mode != current.mode ||
-                previous.currentTab != current.currentTab ||
-                previous.listTypeOf(previous.currentTab) !=
-                    current.listTypeOf(current.currentTab) ||
-                previous.hero != current.hero,
-            builder: (context, homeState) {
-              if (homeState.currentTab == HomeTab.summary) {
-                return const SizedBox.shrink();
-              }
-
-              final appbar = AppBar(
-                actions: [
-                  HomeModeChip(
-                    mode: homeState.mode,
-                    onPressed: () =>
-                        unawaited(context.read<HomeCubit>().switchMode()),
-                  ),
-                  if (homeState.listTypeOf(homeState.currentTab) != null)
-                    IconButton(
-                      onPressed: context.read<HomeCubit>().toggleListType,
-                      icon: const Icon(Symbols.lists),
-                    ),
-                ],
-                leading: Builder(
-                  builder: (context) => IconButton(
-                    icon: const Icon(Symbols.menu),
-                    onPressed: () => Scaffold.of(context).openDrawer(),
-                  ),
-                ),
-                titleSpacing: 0,
-                title: InkWell(
-                  onTap: () => unawaited(onSearch(context)),
-                  child: const SizedBox(
-                    height: kToolbarHeight,
-                    child: Row(
-                      children: [
-                        SizedBox(width: 8),
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Text('بحث ...'),
-                          ),
-                        ),
-                        Icon(Symbols.search),
-                        SizedBox(width: 8),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-
-              if (homeState.hero.showsSnowfall) {
-                return SnowflakeAnimation(child: appbar);
-              }
-
-              return appbar;
+      child: BlocBuilder<HomeCubit, HomeState>(
+        buildWhen: (previous, current) =>
+            previous.mode != current.mode ||
+            previous.currentTab != current.currentTab ||
+            previous.hero != current.hero,
+        builder: (context, homeState) {
+          final theme = Theme.of(context);
+          final appbar = AppBar(
+            backgroundColor: Colors.transparent,
+            scrolledUnderElevation: 0,
+            systemOverlayStyle: switch (theme.brightness) {
+              Brightness.light => SystemUiOverlayStyle.dark,
+              Brightness.dark => SystemUiOverlayStyle.light,
             },
-          ),
-        ),
+            flexibleSpace: ListenableBuilder(
+              listenable: widget._pageController,
+              builder: (context, _) => ColoredBox(
+                color:
+                    (theme.appBarTheme.backgroundColor ??
+                            theme.colorScheme.surface)
+                        .withValues(alpha: _firstPageScrollProgress),
+              ),
+            ),
+            actionsPadding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 8,
+            ),
+            actions: [
+              ListenableBuilder(
+                listenable: widget._pageController,
+                builder: (context, child) => ClipRect(
+                  child: Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    widthFactor: _firstPageScrollProgress,
+                    child: child,
+                  ),
+                ),
+                child: HomeModeChip(
+                  mode: homeState.mode,
+                  onPressed: context.read<HomeCubit>().switchMode,
+                ),
+              ),
+            ],
+            titleSpacing: 0,
+            title: const HomeSearchBar(),
+          );
+
+          if (homeState.hero.showsSnowfall) {
+            return SnowflakeAnimation(child: appbar);
+          }
+
+          return appbar;
+        },
       ),
     );
-  }
-
-  Future<void> onSearch(BuildContext context) async {
-    final searchCubit = HomeSearchCubit();
-
-    await showSearch(
-      context: context,
-      delegate: HomeSearchDelegate(searchCubit),
-    );
-    await searchCubit.close();
   }
 }

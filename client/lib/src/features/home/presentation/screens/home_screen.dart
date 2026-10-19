@@ -37,18 +37,22 @@ class _HomeScreenState extends State<HomeScreen> {
         listener: (context, state) {
           if (_pageController.hasClients &&
               _pageController.page?.round() != state.currentTabIndex) {
-            _pageController.jumpToPage(state.currentTabIndex);
+            _pageController.animateToPage(
+              state.currentTabIndex,
+              duration: kTabScrollDuration,
+              curve: Curves.easeInOutCirc,
+            );
           }
         },
         child: Scaffold(
+          extendBodyBehindAppBar: true,
           drawer: const HomeDrawer(),
-          appBar: const HomeAppBar(),
+          appBar: HomeAppBar(pageController: _pageController),
           body: HomeBody(pageController: _pageController),
           floatingActionButton: HomeFAB(pageController: _pageController),
           bottomNavigationBar: HomeBottomNavBar(
             pageController: _pageController,
           ),
-          extendBody: true,
         ),
       ),
     );

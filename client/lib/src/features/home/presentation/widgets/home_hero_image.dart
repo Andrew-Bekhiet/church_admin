@@ -1,8 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 
 class HomeHeroImage extends StatelessWidget {
-  static const double _screenHeightFraction = 0.24;
-
   final String imageAsset;
 
   const HomeHeroImage({required this.imageAsset, super.key});
@@ -10,7 +8,6 @@ class HomeHeroImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.sizeOf(context).height * _screenHeightFraction,
       decoration: ShapeDecoration(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadiusDirectional.vertical(
