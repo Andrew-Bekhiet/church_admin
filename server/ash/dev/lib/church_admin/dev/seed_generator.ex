@@ -193,7 +193,7 @@ defmodule ChurchAdmin.Dev.SeedGenerator do
       Renderer.insert("public.groups", Enum.map(data.groups, & &1.row)),
       Renderer.insert("history.meetings", Enum.map(data.meetings.meetings, & &1.row)),
       group_default_meetings(data.meetings.group_default_meetings),
-      Renderer.without_trigger(
+      Renderer.without_trigger_if_present(
         "public.persons_services",
         "check_persons_service_rel",
         Renderer.insert("public.persons_services", data.memberships.persons_services)

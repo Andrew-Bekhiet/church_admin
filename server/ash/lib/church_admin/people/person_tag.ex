@@ -7,6 +7,7 @@ defmodule ChurchAdmin.People.PersonTag do
 
   alias ChurchAdmin.Catalog.Tag
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Person
 
   graphql do
@@ -39,6 +40,14 @@ defmodule ChurchAdmin.People.PersonTag do
                  default_limit: 100,
                  max_page_size: 100
     end
+
+    create :add_tag do
+      accept [:person_id, :tag_id]
+
+      change {RecordEdit, record_id: [{"tags", :tag_id}, {"persons", :person_id}]}
+    end
+
+    destroy :remove_tag
   end
 
   policies do

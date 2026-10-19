@@ -7,6 +7,7 @@ defmodule ChurchAdmin.People.GroupMembership do
 
   alias ChurchAdmin.Organization.Group
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Person
 
   graphql do
@@ -39,6 +40,12 @@ defmodule ChurchAdmin.People.GroupMembership do
                  required?: false,
                  default_limit: 100,
                  max_page_size: 100
+    end
+
+    create :join_group do
+      accept [:person_id, :group_id]
+
+      change {RecordEdit, record_id: [{"groups", :group_id}, {"persons", :person_id}]}
     end
 
     destroy :leave_group

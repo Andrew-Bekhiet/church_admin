@@ -2,11 +2,12 @@ defmodule ChurchAdmin.People.Person do
   use Ash.Resource,
     domain: ChurchAdmin.People,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource],
+    extensions: [AshGraphql.Resource, AshArchival.Resource],
     fragments: [
       ChurchAdmin.Authz.Fragments.ScopedEntity,
       ChurchAdmin.Archival.HideArchived,
-      ChurchAdmin.Files.RecordsPhoto
+      ChurchAdmin.Files.RecordsPhoto,
+      ChurchAdmin.People.Person.Commands
     ]
 
   alias ChurchAdmin.Accounts.User
@@ -60,8 +61,15 @@ defmodule ChurchAdmin.People.Person do
     ServiceMembership
   }
 
+  alias ChurchAdmin.People.Person.Changes.SyncLinkedUser
+  alias ChurchAdmin.People.Person.Invariants
+  alias ChurchAdmin.People.Person.Validations.CallerMayRelinkUser
+
+  alias ChurchAdmin.Errors.Codes
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.Places.{Address, Store}
   alias ChurchAdmin.Types.Text
+  alias ChurchAdmin.Validations.InvariantHolds
 
   graphql do
     type :person
@@ -108,6 +116,13 @@ defmodule ChurchAdmin.People.Person do
     queries do
       get :person, :read
       list :persons, :read
+    end
+
+    mutations do
+      create :create_person, :create_person
+      update :update_person, :update_person
+      update :record_person_spiritual_days, :record_person_spiritual_days
+      destroy :delete_person, :destroy
     end
   end
 
@@ -170,6 +185,12 @@ defmodule ChurchAdmin.People.Person do
     end
   end
 
+  archive do
+    attribute :deleted_at
+    base_filter?(true)
+    exclude_destroy_actions([:hard_destroy])
+  end
+
   actions do
     read :read do
       primary? true
@@ -200,13 +221,32 @@ defmodule ChurchAdmin.People.Person do
       description "The servant person of a user an account command creates; the Person commands own every other write."
       accept [:name, :gender, :uid]
       change set_attribute(:is_servant, true)
+
+      change {InvariantHolds,
+              code: Codes.person_container_required(), violations: &Invariants.unanchored/1}
     end
 
     update :set_user do
       description "Links the person to a user, or unlinks it with a nil uid."
       accept [:uid]
       require_atomic? false
+      validate CallerMayRelinkUser, before_action?: true
+
+      change {InvariantHolds,
+              code: Codes.person_container_required(), violations: &Invariants.unanchored/1}
     end
+  end
+
+  changes do
+    change {RecordEdit, table: "persons"},
+      on: [:create, :update, :destroy],
+      where: [negate(action_is(:record_person_spiritual_days))]
+
+    change set_attribute(:is_servant, true),
+      on: [:create, :update],
+      where: [present(:uid), changing(:uid)]
+
+    change SyncLinkedUser, on: [:create, :update]
   end
 
   policies do

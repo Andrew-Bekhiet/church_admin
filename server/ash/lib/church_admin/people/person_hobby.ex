@@ -39,6 +39,12 @@ defmodule ChurchAdmin.People.PersonHobby do
                  default_limit: 100,
                  max_page_size: 100
     end
+
+    create :add_hobby do
+      accept [:person_id, :hobby_id]
+    end
+
+    destroy :remove_hobby
   end
 
   policies do
