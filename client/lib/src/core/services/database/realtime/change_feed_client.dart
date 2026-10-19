@@ -42,11 +42,10 @@ class ChangeFeedClient {
 
   ChangeFeedClient({
     required this.socketUrl,
-    required Stream<AuthLinkCredentials?> credentials,
-    WebSocketChannel Function(Uri uri)? webSocketChannelFactory,
+    required this._credentials,
     this.rejoinDelay = defaultRejoinDelay,
-  }) : _credentials = credentials,
-       _webSocketChannelFactory = webSocketChannelFactory;
+    this._webSocketChannelFactory,
+  });
 
   void _start() =>
       _credentialsSubscription ??= _credentials.listen(_onCredentials);
@@ -118,9 +117,11 @@ class ChangeFeedClient {
     _channelSubscription = channel.messages
         .where((message) => message.event.value == changesEvent)
         .listen((message) => _onPush(message.payload as Json));
-    channel.join().future.then(
-      (reply) => _onJoinReply(channel, reply),
-      onError: (_) => _rejoinLater(channel),
+    unawaited(
+      channel.join().future.then(
+        (reply) => _onJoinReply(channel, reply),
+        onError: (_) => _rejoinLater(channel),
+      ),
     );
   }
 

@@ -30,6 +30,7 @@ void main() {
     final credentials = BehaviorSubject<AuthLinkCredentials?>.seeded(
       initialCredentials,
     );
+    addTearDown(credentials.close);
     final client = ChangeFeedClient(
       socketUrl: Uri.parse('ws://localhost:4000/socket/websocket'),
       credentials: credentials,
@@ -51,7 +52,6 @@ void main() {
     _Feed feed,
   ) {
     feed.client.dispose();
-    unawaited(feed.credentials.close());
   }
 
   test('the first join asks for a full resync', () {
