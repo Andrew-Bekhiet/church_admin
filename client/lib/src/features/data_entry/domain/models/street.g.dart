@@ -9,12 +9,8 @@ part of 'street.dart';
 // QueryableFieldsGenerator
 // **************************************************************************
 
-class StreetFields {
-  factory StreetFields() => _instance;
-
-  StreetFields._();
-
-  static final StreetFields _instance = StreetFields._();
+class _StreetFields {
+  _StreetFields();
 
   final FieldMetadata<Street> id = FieldMetadata<Street>(
     getValue: (obj) => obj is Street ? obj.id : null,
@@ -74,19 +70,14 @@ class StreetFields {
     },
   );
 
-  final FieldMetadata<AreasStreets> areasRel = FieldMetadata<AreasStreets>(
+  final FieldMetadata<Area> areas = FieldMetadata<Area>(
     getValue: (obj) => obj is Street ? obj.areas : null,
     parentType: Street,
     name: 'areas',
-    label: 'areas',
-    isCodeOnly: true,
+    label: 'المناطق',
+    isCodeOnly: false,
     isOrderable: false,
-  );
-
-  late final FieldMetadata<Area> areas = areasRel.redirectTo(
-    AreasStreetsFields().area,
-    isExpandable: false,
-    isOrderable: false,
+    operators: {...MultiSelectOperator.values},
   );
 
   final FieldMetadata<LastRecordedByInfo> lastVisit =
@@ -155,16 +146,18 @@ Street _$StreetFromJson(Map json) => Street(
     const LocalDateTimeConverter().fromJson,
   ),
   blurhash: json['blurhash'] as String?,
-  areas: streetsAreasFromJson(json['areas'] as List?),
-  lastVisit: json['lastVisit'] == null
+  areas: (json['areas'] as List<dynamic>?)
+      ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
+  lastVisit: json['latestVisit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastVisit'] as Map),
+          Map<String, Object?>.from(json['latestVisit'] as Map),
         ),
-  lastEdit: json['lastEdit'] == null
+  lastEdit: json['latestEdit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastEdit'] as Map),
+          Map<String, Object?>.from(json['latestEdit'] as Map),
         ),
 );
 
@@ -178,9 +171,9 @@ Map<String, dynamic> _$StreetToJson(Street instance) => <String, dynamic>{
     const LocalDateTimeConverter().toJson,
   ),
   'blurhash': instance.blurhash,
-  'areas': streetsAreasToJson(instance.areas),
-  'lastVisit': instance.lastVisit?.toJson(),
-  'lastEdit': instance.lastEdit?.toJson(),
+  'areas': instance.areas?.map((e) => e.toJson()).toList(),
+  'latestVisit': instance.lastVisit?.toJson(),
+  'latestEdit': instance.lastEdit?.toJson(),
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(

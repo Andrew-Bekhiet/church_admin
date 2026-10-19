@@ -11,5 +11,10 @@ class AshNaming {
       '${word[0].toUpperCase()}${word.substring(1)}',
   ].join();
 
+  /// `lastEdit` is the scalar time, `latestEdit` the relationship to the
+  /// record that holds it.
+  static String latestRelationship(String lastScalar) =>
+      'latest${lastScalar.substring('last'.length)}';
+
   const AshNaming._();
 }

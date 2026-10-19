@@ -1,0 +1,48 @@
+fragment Area on Area {
+  id
+  name
+  color
+  photoUpdatedAt
+  blurhash
+  userCanEdit
+}
+
+fragment AreaWithBounds on Area {
+  ...Area
+  bounds
+}
+
+fragment AreaDetails on Area {
+  ...AreaWithBounds
+  latestEdit {
+    ...PlaceLatestEdit
+  }
+  admins {
+    ...PlaceUser
+  }
+}
+
+fragment PlaceUser on User {
+  id
+  uid
+  name
+  email
+  photoUpdatedAt
+  blurhash
+}
+
+fragment PlaceLatestEdit on LatestEdit {
+  id
+  time
+  user {
+    ...PlaceUser
+  }
+}
+
+fragment PlaceLatestVisit on LatestVisit {
+  id
+  time
+  user {
+    ...PlaceUser
+  }
+}

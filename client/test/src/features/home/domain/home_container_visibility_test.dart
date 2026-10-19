@@ -43,18 +43,14 @@ void main() {
         ],
       );
       expect(
-        visibility.streetFilters.map((filter) => filter.queryToJson()),
-        [
-          {
-            'areas': {
-              'area': {
-                'id': {
-                  '_in': ['area-id'],
-                },
-              },
+        const AshFilterTranslator().toFilterInput(visibility.streetFilters),
+        {
+          'areas': {
+            'id': {
+              'in': ['area-id'],
             },
           },
-        ],
+        },
       );
     });
 

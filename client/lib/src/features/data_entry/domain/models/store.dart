@@ -22,13 +22,14 @@ class Store extends ViewableWithIDAndImage
   @QueryableField(label: 'الاسم')
   final String name;
 
-  @QueryableField(label: 'تفاصيل العنوان')
+  @QueryableField(label: 'تفاصيل العنوان', orderable: false)
   final Address? address;
 
-  @QueryableField(label: 'العائلة')
+  @JsonKey(name: 'adminFamily')
+  @QueryableField(label: 'العائلة', graphqlName: 'adminFamily')
   final Family? family;
 
-  @JsonKey(name: 'adminFamily')
+  @JsonKey(name: 'adminFamilyId')
   final String? familyId;
 
   @override
@@ -36,6 +37,7 @@ class Store extends ViewableWithIDAndImage
   @QueryableField(label: 'اللون')
   final Color? color;
 
+  @JsonKey(name: 'latestEdit')
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
@@ -76,27 +78,17 @@ class Store extends ViewableWithIDAndImage
 
   @override
   Json toJson() => _$StoreToJson(this);
-
-  Input_StoresInsertInput toInsertInput() => Input_StoresInsertInput(
-    name: name,
-    address: address != null
-        ? Input_AddressesObjRelInsertInput(data: address!.toInsertInput())
-        : null,
-    adminFamily: familyId?.toUuid(),
-    color: colorToInt(color),
-  );
-
-  Input_StoresSetInput toUpdateInput(Store oldStore) => Input_StoresSetInput(
-    name: name != oldStore.name ? name : null,
-    adminFamily: familyId != oldStore.familyId ? familyId?.toUuid() : null,
-    color: color != oldStore.color ? colorToInt(color) : null,
-  );
 }
 
+// Extends the generated private base, which only this library can see
+// ignore: solid_lints/avoid_multiple_declarations_per_file
 class StoreFields extends _StoreFields with AddressDetailFields {
   @override
-  FieldMetadata<Point> get geolocation =>
-      address.redirectTo(AddressFields().geolocation, isExpandable: false);
+  FieldMetadata<Point> get geolocation => address.redirectTo(
+    AddressFields().geolocation,
+    isExpandable: false,
+    isOrderable: false,
+  );
 
   @override
   List<FieldMetadata<Object>> get allFields =>

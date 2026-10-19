@@ -1,63 +1,52 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/areas/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/areas/__generated__/subscriptions.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/areas/area_insert_helper.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/areas/area_update_helper.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/areas/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/areas/__generated__/queries.graphql.dart';
 
-class AreasDAO extends LegacyFullCRUDDAO<Area> {
+class AreasDAO extends FullCRUDDAO<Area> {
   @override
-  late final LegacyStreamAllConfig<Area> baseStreamAllConfig =
-      const LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllAreas,
-      );
-
-  @override
-  late final LegacyStreamCountConfig<Area> baseStreamCountConfig =
-      const LegacyStreamCountConfig(
-        document: documentNodeSubscriptionwatchAreasCount,
-      );
+  StreamAllConfig<Area> get baseStreamAllConfig => StreamAllConfig(
+    document: documentNodeQueryareas,
+    arguments: (parameters) => ListQueryArguments.fromParameters(
+      parameters,
+      defaultOrderBy: [OrderBy(field: AreaFields().name)],
+    ),
+  );
 
   @override
-  late final LegacyStreamSingleByIdConfig<Area> baseStreamSingleByIdConfig =
-      LegacyStreamSingleByIdConfig(
-        document: documentNodeSubscriptionwatchArea,
-        varsConstructor: _streamSingleByIdVarsConstructor,
-      );
+  StreamSingleByIdConfig<Area> get baseStreamSingleByIdConfig =>
+      const StreamSingleByIdConfig(document: documentNodeQueryarea);
+
   @override
-  late final LegacyDeleteSingleByIdConfig<Area> baseDeleteSingleByIdConfig =
-      LegacyDeleteSingleByIdConfig(
-        document: documentNodeMutationdeleteArea,
-        varsConstructor: _deleteSingleByIdVarsConstructor,
-      );
+  CreateObjectConfig<Area> get baseCreateObjectConfig => CreateObjectConfig(
+    document: documentNodeMutationcreateArea,
+    varsConstructor: ({required newObject}) => Variables_Mutation_createArea(
+      input: Input_CreateAreaInput(
+        name: newObject.name,
+        bounds: newObject.bounds?.asPostGISPolygon(),
+        color: colorToInt(newObject.color),
+        lastVisit: newObject.lastVisit?.time,
+      ),
+    ).toJson(),
+  );
+
   @override
-  late final LegacyUpdateObjectConfig<Area> baseUpdateObjectConfig =
-      LegacyUpdateObjectConfig(
-        document: documentNodeMutationupdateArea,
-        varsConstructor: _updateAreaVarsConstructor,
-      );
+  UpdateObjectConfig<Area> get baseUpdateObjectConfig => UpdateObjectConfig(
+    document: documentNodeMutationupdateArea,
+    varsConstructor: ({required newObject}) => Variables_Mutation_updateArea(
+      id: newObject.id,
+      input: Input_UpdateAreaInput.fromJson({
+        'name': newObject.name,
+        'bounds': newObject.bounds?.asPostGISPolygon(),
+        'color': colorToInt(newObject.color),
+        if (newObject.lastVisit case final lastVisit?)
+          'lastVisit': tstzToString(lastVisit.time),
+      }),
+    ).toJson(),
+  );
+
   @override
-  late final LegacyCreateObjectConfig<Area> baseCreateObjectConfig =
-      LegacyCreateObjectConfig(
-        document: documentNodeMutationinsertArea,
-        varsConstructor: _createAreaVarsConstructor,
-      );
+  DeleteSingleByIdConfig<Area> get baseDeleteSingleByIdConfig =>
+      const DeleteSingleByIdConfig(document: documentNodeMutationdeleteArea);
 
   AreasDAO({required super.db}) : super(fromJson: Area.fromJson);
-
-  Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
-      Variables_Subscription_watchArea(id: id).toJson();
-
-  Json _createAreaVarsConstructor({required Area newObject}) =>
-      AreaInsertHelper(newArea: newObject).variables.toJson();
-
-  Json _updateAreaVarsConstructor({
-    required Area newObject,
-    required Area oldObject,
-  }) => AreaUpdateHelper(
-    oldArea: oldObject,
-    newArea: newObject,
-  ).variables.toJson();
-
-  Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
-      Variables_Mutation_deleteArea(areaId: id).toJson();
 }

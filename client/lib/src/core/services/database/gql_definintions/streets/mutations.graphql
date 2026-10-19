@@ -1,0 +1,23 @@
+mutation createStreet($input: CreateStreetInput!) {
+  createStreet(input: $input) {
+    result {
+      ...StreetWithLine
+    }
+  }
+}
+
+mutation updateStreet($id: ID!, $input: UpdateStreetInput) {
+  updateStreet(id: $id, input: $input) {
+    result {
+      ...StreetWithLine
+    }
+  }
+}
+
+mutation deleteStreet($id: ID!) {
+  deleteStreet(id: $id) {
+    result {
+      ...Street
+    }
+  }
+}

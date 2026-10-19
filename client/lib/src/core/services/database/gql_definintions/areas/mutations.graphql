@@ -1,0 +1,23 @@
+mutation createArea($input: CreateAreaInput!) {
+  createArea(input: $input) {
+    result {
+      ...AreaWithBounds
+    }
+  }
+}
+
+mutation updateArea($id: ID!, $input: UpdateAreaInput) {
+  updateArea(id: $id, input: $input) {
+    result {
+      ...AreaWithBounds
+    }
+  }
+}
+
+mutation deleteArea($id: ID!) {
+  deleteArea(id: $id) {
+    result {
+      ...Area
+    }
+  }
+}

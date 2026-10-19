@@ -27,6 +27,15 @@ class AshFilterTranslator {
         AshOperatorValue.require<List<Filter>>(operator, value),
       ),
       StringOperator() => _string(path, operator, value as String?),
+      PrimitiveOperator.isNull || PrimitiveOperator.isNotNull
+          when _isRelatedObject(field) =>
+        const AshMultiSelectFilter().translate(
+          field,
+          operator == PrimitiveOperator.isNull
+              ? MultiSelectOperator.isEmpty
+              : MultiSelectOperator.isNotEmpty,
+          null,
+        ),
       PrimitiveOperator() => _primitive(path, operator, value),
       BooleanOperator() => _boolean(path, operator, value as bool?),
       ColorOperator() => _color(path, operator, value as Color?),
@@ -61,6 +70,12 @@ class AshFilterTranslator {
         'AshFilterTranslator cannot translate ${operator.serializationId}',
       ),
     };
+  }
+
+  bool _isRelatedObject(FieldMetadata field) {
+    final queryable = field.fieldQueryableType;
+
+    return queryable != null && !queryable.isEnum && queryable.keyField != null;
   }
 
   Json _logical(
