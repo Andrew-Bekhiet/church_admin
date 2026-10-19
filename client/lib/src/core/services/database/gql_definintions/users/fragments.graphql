@@ -17,7 +17,7 @@ fragment UserOverview on User {
 fragment UserDetails on User {
   ...UserOverview
   latestEdit {
-    ...UserLatestEdit
+    ...LatestEdit
   }
   ...UserAdminOn
   preferences {
@@ -111,47 +111,12 @@ fragment UserPerson on Person {
   photoUpdatedAt
   blurhash
   dataCheck {
-    ...UserPersonDataCheck
+    ...DataCheck
   }
   latestKodas {
-    ...UserPersonLatestKodas
+    ...LatestKodas
   }
   latestConfession {
-    ...UserPersonLatestConfession
-  }
-}
-
-fragment UserPersonDataCheck on DataCheck {
-  id
-  familyId
-  isComplete
-  completenessPercent
-  familyCheck
-  addressCheck
-  userOverride
-  details
-}
-
-fragment UserPersonLatestKodas on LatestKodas {
-  id
-  time
-  user {
-    ...User
-  }
-}
-
-fragment UserPersonLatestConfession on LatestConfession {
-  id
-  time
-  user {
-    ...User
-  }
-}
-
-fragment UserLatestEdit on LatestEdit {
-  id
-  time
-  user {
-    ...User
+    ...LatestConfession
   }
 }

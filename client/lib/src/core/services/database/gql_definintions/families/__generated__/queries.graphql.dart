@@ -1,6 +1,9 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.graphql.dart';
+import '../../contacts/__generated__/fragments.graphql.dart';
 import '../../data_checks/__generated__/fragments.graphql.dart';
+import '../../gql/__generated__/fragments.graphql.dart';
+import '../../metadata/districts/__generated__/fragments.graphql.dart';
 import '../../metadata/person_types/__generated__/fragments.graphql.dart';
 import '../../streets/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
@@ -1142,8 +1145,9 @@ const documentNodeQueryfamiliesWithAddresses = DocumentNode(
     fragmentDefinitionFamilyWithAddress,
     fragmentDefinitionFamily,
     fragmentDefinitionDataCheck,
-    fragmentDefinitionFamilyAddress,
+    fragmentDefinitionAddress,
     fragmentDefinitionArea,
+    fragmentDefinitionDistrict,
     fragmentDefinitionStreet,
   ],
 );
@@ -1766,13 +1770,14 @@ const documentNodeQueryfamily = DocumentNode(
     fragmentDefinitionFamilyWithAddress,
     fragmentDefinitionFamily,
     fragmentDefinitionDataCheck,
-    fragmentDefinitionFamilyAddress,
+    fragmentDefinitionAddress,
     fragmentDefinitionArea,
+    fragmentDefinitionDistrict,
     fragmentDefinitionStreet,
-    fragmentDefinitionFamilyLatestEdit,
-    fragmentDefinitionFamilyUser,
-    fragmentDefinitionFamilyLatestVisit,
-    fragmentDefinitionFamilyLatestFatherVisit,
+    fragmentDefinitionLatestEdit,
+    fragmentDefinitionUser,
+    fragmentDefinitionLatestVisit,
+    fragmentDefinitionLatestFatherVisit,
     fragmentDefinitionFamilyContact,
     fragmentDefinitionPersonType,
   ],
@@ -1843,9 +1848,7 @@ class Query_family_family
           : dateFromString(l$marriageDate),
       address: l$address == null
           ? null
-          : Fragment_FamilyAddress.fromJson(
-              (l$address as Map<String, dynamic>),
-            ),
+          : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
       church: l$church == null
           ? null
           : Query_family_family_church.fromJson(
@@ -1854,17 +1857,17 @@ class Query_family_family
       notes: (l$notes as String?),
       latestEdit: l$latestEdit == null
           ? null
-          : Fragment_FamilyLatestEdit.fromJson(
+          : Fragment_LatestEdit.fromJson(
               (l$latestEdit as Map<String, dynamic>),
             ),
       latestVisit: l$latestVisit == null
           ? null
-          : Fragment_FamilyLatestVisit.fromJson(
+          : Fragment_LatestVisit.fromJson(
               (l$latestVisit as Map<String, dynamic>),
             ),
       latestFatherVisit: l$latestFatherVisit == null
           ? null
-          : Fragment_FamilyLatestFatherVisit.fromJson(
+          : Fragment_LatestFatherVisit.fromJson(
               (l$latestFatherVisit as Map<String, dynamic>),
             ),
       contacts: (l$contacts as List<dynamic>)
@@ -1897,17 +1900,17 @@ class Query_family_family
 
   final DateTime? marriageDate;
 
-  final Fragment_FamilyAddress? address;
+  final Fragment_Address? address;
 
   final Query_family_family_church? church;
 
   final String? notes;
 
-  final Fragment_FamilyLatestEdit? latestEdit;
+  final Fragment_LatestEdit? latestEdit;
 
-  final Fragment_FamilyLatestVisit? latestVisit;
+  final Fragment_LatestVisit? latestVisit;
 
-  final Fragment_FamilyLatestFatherVisit? latestFatherVisit;
+  final Fragment_LatestFatherVisit? latestFatherVisit;
 
   final List<Fragment_FamilyContact> contacts;
 
@@ -2133,20 +2136,20 @@ abstract class CopyWith_Query_family_family<TRes> {
     String? status,
     String? deceasedSpouseName,
     DateTime? marriageDate,
-    Fragment_FamilyAddress? address,
+    Fragment_Address? address,
     Query_family_family_church? church,
     String? notes,
-    Fragment_FamilyLatestEdit? latestEdit,
-    Fragment_FamilyLatestVisit? latestVisit,
-    Fragment_FamilyLatestFatherVisit? latestFatherVisit,
+    Fragment_LatestEdit? latestEdit,
+    Fragment_LatestVisit? latestVisit,
+    Fragment_LatestFatherVisit? latestFatherVisit,
     List<Fragment_FamilyContact>? contacts,
   });
   CopyWith_Fragment_DataCheck<TRes> get dataCheck;
-  CopyWith_Fragment_FamilyAddress<TRes> get address;
+  CopyWith_Fragment_Address<TRes> get address;
   CopyWith_Query_family_family_church<TRes> get church;
-  CopyWith_Fragment_FamilyLatestEdit<TRes> get latestEdit;
-  CopyWith_Fragment_FamilyLatestVisit<TRes> get latestVisit;
-  CopyWith_Fragment_FamilyLatestFatherVisit<TRes> get latestFatherVisit;
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit;
+  CopyWith_Fragment_LatestVisit<TRes> get latestVisit;
+  CopyWith_Fragment_LatestFatherVisit<TRes> get latestFatherVisit;
   TRes contacts(
     Iterable<Fragment_FamilyContact> Function(
       Iterable<CopyWith_Fragment_FamilyContact<Fragment_FamilyContact>>,
@@ -2217,20 +2220,20 @@ class _CopyWithImpl_Query_family_family<TRes>
           : (marriageDate as DateTime?),
       address: address == _undefined
           ? _instance.address
-          : (address as Fragment_FamilyAddress?),
+          : (address as Fragment_Address?),
       church: church == _undefined
           ? _instance.church
           : (church as Query_family_family_church?),
       notes: notes == _undefined ? _instance.notes : (notes as String?),
       latestEdit: latestEdit == _undefined
           ? _instance.latestEdit
-          : (latestEdit as Fragment_FamilyLatestEdit?),
+          : (latestEdit as Fragment_LatestEdit?),
       latestVisit: latestVisit == _undefined
           ? _instance.latestVisit
-          : (latestVisit as Fragment_FamilyLatestVisit?),
+          : (latestVisit as Fragment_LatestVisit?),
       latestFatherVisit: latestFatherVisit == _undefined
           ? _instance.latestFatherVisit
-          : (latestFatherVisit as Fragment_FamilyLatestFatherVisit?),
+          : (latestFatherVisit as Fragment_LatestFatherVisit?),
       contacts: contacts == _undefined || contacts == null
           ? _instance.contacts
           : (contacts as List<Fragment_FamilyContact>),
@@ -2247,14 +2250,11 @@ class _CopyWithImpl_Query_family_family<TRes>
           );
   }
 
-  CopyWith_Fragment_FamilyAddress<TRes> get address {
+  CopyWith_Fragment_Address<TRes> get address {
     final local$address = _instance.address;
     return local$address == null
-        ? CopyWith_Fragment_FamilyAddress.stub(_then(_instance))
-        : CopyWith_Fragment_FamilyAddress(
-            local$address,
-            (e) => call(address: e),
-          );
+        ? CopyWith_Fragment_Address.stub(_then(_instance))
+        : CopyWith_Fragment_Address(local$address, (e) => call(address: e));
   }
 
   CopyWith_Query_family_family_church<TRes> get church {
@@ -2267,31 +2267,31 @@ class _CopyWithImpl_Query_family_family<TRes>
           );
   }
 
-  CopyWith_Fragment_FamilyLatestEdit<TRes> get latestEdit {
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit {
     final local$latestEdit = _instance.latestEdit;
     return local$latestEdit == null
-        ? CopyWith_Fragment_FamilyLatestEdit.stub(_then(_instance))
-        : CopyWith_Fragment_FamilyLatestEdit(
+        ? CopyWith_Fragment_LatestEdit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestEdit(
             local$latestEdit,
             (e) => call(latestEdit: e),
           );
   }
 
-  CopyWith_Fragment_FamilyLatestVisit<TRes> get latestVisit {
+  CopyWith_Fragment_LatestVisit<TRes> get latestVisit {
     final local$latestVisit = _instance.latestVisit;
     return local$latestVisit == null
-        ? CopyWith_Fragment_FamilyLatestVisit.stub(_then(_instance))
-        : CopyWith_Fragment_FamilyLatestVisit(
+        ? CopyWith_Fragment_LatestVisit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestVisit(
             local$latestVisit,
             (e) => call(latestVisit: e),
           );
   }
 
-  CopyWith_Fragment_FamilyLatestFatherVisit<TRes> get latestFatherVisit {
+  CopyWith_Fragment_LatestFatherVisit<TRes> get latestFatherVisit {
     final local$latestFatherVisit = _instance.latestFatherVisit;
     return local$latestFatherVisit == null
-        ? CopyWith_Fragment_FamilyLatestFatherVisit.stub(_then(_instance))
-        : CopyWith_Fragment_FamilyLatestFatherVisit(
+        ? CopyWith_Fragment_LatestFatherVisit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestFatherVisit(
             local$latestFatherVisit,
             (e) => call(latestFatherVisit: e),
           );
@@ -2329,32 +2329,32 @@ class _CopyWithStubImpl_Query_family_family<TRes>
     String? status,
     String? deceasedSpouseName,
     DateTime? marriageDate,
-    Fragment_FamilyAddress? address,
+    Fragment_Address? address,
     Query_family_family_church? church,
     String? notes,
-    Fragment_FamilyLatestEdit? latestEdit,
-    Fragment_FamilyLatestVisit? latestVisit,
-    Fragment_FamilyLatestFatherVisit? latestFatherVisit,
+    Fragment_LatestEdit? latestEdit,
+    Fragment_LatestVisit? latestVisit,
+    Fragment_LatestFatherVisit? latestFatherVisit,
     List<Fragment_FamilyContact>? contacts,
   }) => _res;
 
   CopyWith_Fragment_DataCheck<TRes> get dataCheck =>
       CopyWith_Fragment_DataCheck.stub(_res);
 
-  CopyWith_Fragment_FamilyAddress<TRes> get address =>
-      CopyWith_Fragment_FamilyAddress.stub(_res);
+  CopyWith_Fragment_Address<TRes> get address =>
+      CopyWith_Fragment_Address.stub(_res);
 
   CopyWith_Query_family_family_church<TRes> get church =>
       CopyWith_Query_family_family_church.stub(_res);
 
-  CopyWith_Fragment_FamilyLatestEdit<TRes> get latestEdit =>
-      CopyWith_Fragment_FamilyLatestEdit.stub(_res);
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit =>
+      CopyWith_Fragment_LatestEdit.stub(_res);
 
-  CopyWith_Fragment_FamilyLatestVisit<TRes> get latestVisit =>
-      CopyWith_Fragment_FamilyLatestVisit.stub(_res);
+  CopyWith_Fragment_LatestVisit<TRes> get latestVisit =>
+      CopyWith_Fragment_LatestVisit.stub(_res);
 
-  CopyWith_Fragment_FamilyLatestFatherVisit<TRes> get latestFatherVisit =>
-      CopyWith_Fragment_FamilyLatestFatherVisit.stub(_res);
+  CopyWith_Fragment_LatestFatherVisit<TRes> get latestFatherVisit =>
+      CopyWith_Fragment_LatestFatherVisit.stub(_res);
 
   contacts(_fn) => _res;
 }

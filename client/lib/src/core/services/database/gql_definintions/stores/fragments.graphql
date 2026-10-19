@@ -11,36 +11,14 @@ fragment Store on Store {
 fragment StoreDetails on Store {
   ...Store
   address {
-    ...StoreAddress
+    ...Address
   }
   latestEdit {
-    ...PlaceLatestEdit
+    ...LatestEdit
   }
   adminFamily {
     ...StoreAdminFamily
   }
-}
-
-fragment StoreAddress on Address {
-  id
-  countryIsoCode
-  area {
-    ...Area
-  }
-  district {
-    id
-    name
-  }
-  street {
-    ...Street
-  }
-  substreetName
-  fullAddressText
-  geolocation
-  houseCode
-  storeyNumber
-  apartmentNumber
-  specialLandmark
 }
 
 fragment StoreAdminFamily on Family {

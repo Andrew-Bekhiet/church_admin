@@ -1,5 +1,6 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.graphql.dart';
+import '../../gql/__generated__/fragments.graphql.dart';
 import 'fragments.graphql.dart';
 
 import 'package:gql/ast.dart';
@@ -916,8 +917,8 @@ const documentNodeQuerystreet = DocumentNode(
     fragmentDefinitionStreetWithLine,
     fragmentDefinitionStreet,
     fragmentDefinitionArea,
-    fragmentDefinitionPlaceLatestEdit,
-    fragmentDefinitionPlaceUser,
-    fragmentDefinitionPlaceLatestVisit,
+    fragmentDefinitionLatestEdit,
+    fragmentDefinitionUser,
+    fragmentDefinitionLatestVisit,
   ],
 );

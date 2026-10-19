@@ -1,3 +1,5 @@
+import '../../gql/__generated__/fragments.graphql.dart';
+
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
@@ -588,11 +590,11 @@ class Fragment_AreaDetails implements Fragment_AreaWithBounds, Fragment_Area {
       bounds: (l$bounds as Json?),
       latestEdit: l$latestEdit == null
           ? null
-          : Fragment_PlaceLatestEdit.fromJson(
+          : Fragment_LatestEdit.fromJson(
               (l$latestEdit as Map<String, dynamic>),
             ),
       admins: (l$admins as List<dynamic>)
-          .map((e) => Fragment_PlaceUser.fromJson((e as Map<String, dynamic>)))
+          .map((e) => Fragment_User.fromJson((e as Map<String, dynamic>)))
           .toList(),
     );
   }
@@ -613,9 +615,9 @@ class Fragment_AreaDetails implements Fragment_AreaWithBounds, Fragment_Area {
 
   final Json? bounds;
 
-  final Fragment_PlaceLatestEdit? latestEdit;
+  final Fragment_LatestEdit? latestEdit;
 
-  final List<Fragment_PlaceUser> admins;
+  final List<Fragment_User> admins;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -762,13 +764,13 @@ abstract class CopyWith_Fragment_AreaDetails<TRes> {
     bool? userCanEdit,
     String? $__typename,
     Json? bounds,
-    Fragment_PlaceLatestEdit? latestEdit,
-    List<Fragment_PlaceUser>? admins,
+    Fragment_LatestEdit? latestEdit,
+    List<Fragment_User>? admins,
   });
-  CopyWith_Fragment_PlaceLatestEdit<TRes> get latestEdit;
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit;
   TRes admins(
-    Iterable<Fragment_PlaceUser> Function(
-      Iterable<CopyWith_Fragment_PlaceUser<Fragment_PlaceUser>>,
+    Iterable<Fragment_User> Function(
+      Iterable<CopyWith_Fragment_User<Fragment_User>>,
     )
     _fn,
   );
@@ -817,31 +819,31 @@ class _CopyWithImpl_Fragment_AreaDetails<TRes>
       bounds: bounds == _undefined ? _instance.bounds : (bounds as Json?),
       latestEdit: latestEdit == _undefined
           ? _instance.latestEdit
-          : (latestEdit as Fragment_PlaceLatestEdit?),
+          : (latestEdit as Fragment_LatestEdit?),
       admins: admins == _undefined || admins == null
           ? _instance.admins
-          : (admins as List<Fragment_PlaceUser>),
+          : (admins as List<Fragment_User>),
     ),
   );
 
-  CopyWith_Fragment_PlaceLatestEdit<TRes> get latestEdit {
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit {
     final local$latestEdit = _instance.latestEdit;
     return local$latestEdit == null
-        ? CopyWith_Fragment_PlaceLatestEdit.stub(_then(_instance))
-        : CopyWith_Fragment_PlaceLatestEdit(
+        ? CopyWith_Fragment_LatestEdit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestEdit(
             local$latestEdit,
             (e) => call(latestEdit: e),
           );
   }
 
   TRes admins(
-    Iterable<Fragment_PlaceUser> Function(
-      Iterable<CopyWith_Fragment_PlaceUser<Fragment_PlaceUser>>,
+    Iterable<Fragment_User> Function(
+      Iterable<CopyWith_Fragment_User<Fragment_User>>,
     )
     _fn,
   ) => call(
     admins: _fn(
-      _instance.admins.map((e) => CopyWith_Fragment_PlaceUser(e, (i) => i)),
+      _instance.admins.map((e) => CopyWith_Fragment_User(e, (i) => i)),
     ).toList(),
   );
 }
@@ -861,12 +863,12 @@ class _CopyWithStubImpl_Fragment_AreaDetails<TRes>
     bool? userCanEdit,
     String? $__typename,
     Json? bounds,
-    Fragment_PlaceLatestEdit? latestEdit,
-    List<Fragment_PlaceUser>? admins,
+    Fragment_LatestEdit? latestEdit,
+    List<Fragment_User>? admins,
   }) => _res;
 
-  CopyWith_Fragment_PlaceLatestEdit<TRes> get latestEdit =>
-      CopyWith_Fragment_PlaceLatestEdit.stub(_res);
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit =>
+      CopyWith_Fragment_LatestEdit.stub(_res);
 
   admins(_fn) => _res;
 }
@@ -891,7 +893,7 @@ const fragmentDefinitionAreaDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PlaceLatestEdit'),
+              name: NameNode(value: 'LatestEdit'),
               directives: [],
             ),
             FieldNode(
@@ -912,7 +914,7 @@ const fragmentDefinitionAreaDetails = FragmentDefinitionNode(
         selectionSet: SelectionSetNode(
           selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'PlaceUser'),
+              name: NameNode(value: 'User'),
               directives: [],
             ),
             FieldNode(
@@ -940,725 +942,7 @@ const documentNodeFragmentAreaDetails = DocumentNode(
     fragmentDefinitionAreaDetails,
     fragmentDefinitionAreaWithBounds,
     fragmentDefinitionArea,
-    fragmentDefinitionPlaceLatestEdit,
-    fragmentDefinitionPlaceUser,
-  ],
-);
-
-class Fragment_PlaceUser {
-  Fragment_PlaceUser({
-    required this.id,
-    required this.uid,
-    required this.name,
-    this.email,
-    this.photoUpdatedAt,
-    this.blurhash,
-    this.$__typename = 'User',
-  });
-
-  factory Fragment_PlaceUser.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$uid = json['uid'];
-    final l$name = json['name'];
-    final l$email = json['email'];
-    final l$photoUpdatedAt = json['photoUpdatedAt'];
-    final l$blurhash = json['blurhash'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PlaceUser(
-      id: (l$id as String),
-      uid: (l$uid as String),
-      name: (l$name as String),
-      email: (l$email as String?),
-      photoUpdatedAt: l$photoUpdatedAt == null
-          ? null
-          : tstzFromString(l$photoUpdatedAt),
-      blurhash: (l$blurhash as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final String uid;
-
-  final String name;
-
-  final String? email;
-
-  final DateTime? photoUpdatedAt;
-
-  final String? blurhash;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$uid = uid;
-    _resultData['uid'] = l$uid;
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$email = email;
-    _resultData['email'] = l$email;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
-        ? null
-        : tstzToString(l$photoUpdatedAt);
-    final l$blurhash = blurhash;
-    _resultData['blurhash'] = l$blurhash;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$uid = uid;
-    final l$name = name;
-    final l$email = email;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final l$blurhash = blurhash;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$uid,
-      l$name,
-      l$email,
-      l$photoUpdatedAt,
-      l$blurhash,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PlaceUser || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$uid = uid;
-    final lOther$uid = other.uid;
-    if (l$uid != lOther$uid) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$email = email;
-    final lOther$email = other.email;
-    if (l$email != lOther$email) {
-      return false;
-    }
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final lOther$photoUpdatedAt = other.photoUpdatedAt;
-    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
-      return false;
-    }
-    final l$blurhash = blurhash;
-    final lOther$blurhash = other.blurhash;
-    if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PlaceUser on Fragment_PlaceUser {
-  CopyWith_Fragment_PlaceUser<Fragment_PlaceUser> get copyWith =>
-      CopyWith_Fragment_PlaceUser(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PlaceUser<TRes> {
-  factory CopyWith_Fragment_PlaceUser(
-    Fragment_PlaceUser instance,
-    TRes Function(Fragment_PlaceUser) then,
-  ) = _CopyWithImpl_Fragment_PlaceUser;
-
-  factory CopyWith_Fragment_PlaceUser.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PlaceUser;
-
-  TRes call({
-    String? id,
-    String? uid,
-    String? name,
-    String? email,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl_Fragment_PlaceUser<TRes>
-    implements CopyWith_Fragment_PlaceUser<TRes> {
-  _CopyWithImpl_Fragment_PlaceUser(this._instance, this._then);
-
-  final Fragment_PlaceUser _instance;
-
-  final TRes Function(Fragment_PlaceUser) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? uid = _undefined,
-    Object? name = _undefined,
-    Object? email = _undefined,
-    Object? photoUpdatedAt = _undefined,
-    Object? blurhash = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PlaceUser(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      uid: uid == _undefined || uid == null ? _instance.uid : (uid as String),
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
-      email: email == _undefined ? _instance.email : (email as String?),
-      photoUpdatedAt: photoUpdatedAt == _undefined
-          ? _instance.photoUpdatedAt
-          : (photoUpdatedAt as DateTime?),
-      blurhash: blurhash == _undefined
-          ? _instance.blurhash
-          : (blurhash as String?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-}
-
-class _CopyWithStubImpl_Fragment_PlaceUser<TRes>
-    implements CopyWith_Fragment_PlaceUser<TRes> {
-  _CopyWithStubImpl_Fragment_PlaceUser(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? uid,
-    String? name,
-    String? email,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    String? $__typename,
-  }) => _res;
-}
-
-const fragmentDefinitionPlaceUser = FragmentDefinitionNode(
-  name: NameNode(value: 'PlaceUser'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'User'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'uid'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'name'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'email'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'photoUpdatedAt'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'blurhash'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPlaceUser = DocumentNode(
-  definitions: [fragmentDefinitionPlaceUser],
-);
-
-class Fragment_PlaceLatestEdit {
-  Fragment_PlaceLatestEdit({
-    required this.id,
-    this.time,
-    this.user,
-    this.$__typename = 'LatestEdit',
-  });
-
-  factory Fragment_PlaceLatestEdit.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$time = json['time'];
-    final l$user = json['user'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PlaceLatestEdit(
-      id: (l$id as String),
-      time: l$time == null ? null : tstzFromString(l$time),
-      user: l$user == null
-          ? null
-          : Fragment_PlaceUser.fromJson((l$user as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final DateTime? time;
-
-  final Fragment_PlaceUser? user;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$time = time;
-    _resultData['time'] = l$time == null ? null : tstzToString(l$time);
-    final l$user = user;
-    _resultData['user'] = l$user?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$time = time;
-    final l$user = user;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$time, l$user, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PlaceLatestEdit ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (l$user != lOther$user) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PlaceLatestEdit
-    on Fragment_PlaceLatestEdit {
-  CopyWith_Fragment_PlaceLatestEdit<Fragment_PlaceLatestEdit> get copyWith =>
-      CopyWith_Fragment_PlaceLatestEdit(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PlaceLatestEdit<TRes> {
-  factory CopyWith_Fragment_PlaceLatestEdit(
-    Fragment_PlaceLatestEdit instance,
-    TRes Function(Fragment_PlaceLatestEdit) then,
-  ) = _CopyWithImpl_Fragment_PlaceLatestEdit;
-
-  factory CopyWith_Fragment_PlaceLatestEdit.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PlaceLatestEdit;
-
-  TRes call({
-    String? id,
-    DateTime? time,
-    Fragment_PlaceUser? user,
-    String? $__typename,
-  });
-  CopyWith_Fragment_PlaceUser<TRes> get user;
-}
-
-class _CopyWithImpl_Fragment_PlaceLatestEdit<TRes>
-    implements CopyWith_Fragment_PlaceLatestEdit<TRes> {
-  _CopyWithImpl_Fragment_PlaceLatestEdit(this._instance, this._then);
-
-  final Fragment_PlaceLatestEdit _instance;
-
-  final TRes Function(Fragment_PlaceLatestEdit) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? time = _undefined,
-    Object? user = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PlaceLatestEdit(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      time: time == _undefined ? _instance.time : (time as DateTime?),
-      user: user == _undefined ? _instance.user : (user as Fragment_PlaceUser?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  CopyWith_Fragment_PlaceUser<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Fragment_PlaceUser.stub(_then(_instance))
-        : CopyWith_Fragment_PlaceUser(local$user, (e) => call(user: e));
-  }
-}
-
-class _CopyWithStubImpl_Fragment_PlaceLatestEdit<TRes>
-    implements CopyWith_Fragment_PlaceLatestEdit<TRes> {
-  _CopyWithStubImpl_Fragment_PlaceLatestEdit(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    DateTime? time,
-    Fragment_PlaceUser? user,
-    String? $__typename,
-  }) => _res;
-
-  CopyWith_Fragment_PlaceUser<TRes> get user =>
-      CopyWith_Fragment_PlaceUser.stub(_res);
-}
-
-const fragmentDefinitionPlaceLatestEdit = FragmentDefinitionNode(
-  name: NameNode(value: 'PlaceLatestEdit'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'LatestEdit'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'time'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'user'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(
-          selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'PlaceUser'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ],
-        ),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPlaceLatestEdit = DocumentNode(
-  definitions: [fragmentDefinitionPlaceLatestEdit, fragmentDefinitionPlaceUser],
-);
-
-class Fragment_PlaceLatestVisit {
-  Fragment_PlaceLatestVisit({
-    required this.id,
-    this.time,
-    this.user,
-    this.$__typename = 'LatestVisit',
-  });
-
-  factory Fragment_PlaceLatestVisit.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$time = json['time'];
-    final l$user = json['user'];
-    final l$$__typename = json['__typename'];
-    return Fragment_PlaceLatestVisit(
-      id: (l$id as String),
-      time: l$time == null ? null : tstzFromString(l$time),
-      user: l$user == null
-          ? null
-          : Fragment_PlaceUser.fromJson((l$user as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final DateTime? time;
-
-  final Fragment_PlaceUser? user;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$time = time;
-    _resultData['time'] = l$time == null ? null : tstzToString(l$time);
-    final l$user = user;
-    _resultData['user'] = l$user?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$time = time;
-    final l$user = user;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$time, l$user, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Fragment_PlaceLatestVisit ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (l$user != lOther$user) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Fragment_PlaceLatestVisit
-    on Fragment_PlaceLatestVisit {
-  CopyWith_Fragment_PlaceLatestVisit<Fragment_PlaceLatestVisit> get copyWith =>
-      CopyWith_Fragment_PlaceLatestVisit(this, (i) => i);
-}
-
-abstract class CopyWith_Fragment_PlaceLatestVisit<TRes> {
-  factory CopyWith_Fragment_PlaceLatestVisit(
-    Fragment_PlaceLatestVisit instance,
-    TRes Function(Fragment_PlaceLatestVisit) then,
-  ) = _CopyWithImpl_Fragment_PlaceLatestVisit;
-
-  factory CopyWith_Fragment_PlaceLatestVisit.stub(TRes res) =
-      _CopyWithStubImpl_Fragment_PlaceLatestVisit;
-
-  TRes call({
-    String? id,
-    DateTime? time,
-    Fragment_PlaceUser? user,
-    String? $__typename,
-  });
-  CopyWith_Fragment_PlaceUser<TRes> get user;
-}
-
-class _CopyWithImpl_Fragment_PlaceLatestVisit<TRes>
-    implements CopyWith_Fragment_PlaceLatestVisit<TRes> {
-  _CopyWithImpl_Fragment_PlaceLatestVisit(this._instance, this._then);
-
-  final Fragment_PlaceLatestVisit _instance;
-
-  final TRes Function(Fragment_PlaceLatestVisit) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? time = _undefined,
-    Object? user = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Fragment_PlaceLatestVisit(
-      id: id == _undefined || id == null ? _instance.id : (id as String),
-      time: time == _undefined ? _instance.time : (time as DateTime?),
-      user: user == _undefined ? _instance.user : (user as Fragment_PlaceUser?),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  CopyWith_Fragment_PlaceUser<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Fragment_PlaceUser.stub(_then(_instance))
-        : CopyWith_Fragment_PlaceUser(local$user, (e) => call(user: e));
-  }
-}
-
-class _CopyWithStubImpl_Fragment_PlaceLatestVisit<TRes>
-    implements CopyWith_Fragment_PlaceLatestVisit<TRes> {
-  _CopyWithStubImpl_Fragment_PlaceLatestVisit(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    DateTime? time,
-    Fragment_PlaceUser? user,
-    String? $__typename,
-  }) => _res;
-
-  CopyWith_Fragment_PlaceUser<TRes> get user =>
-      CopyWith_Fragment_PlaceUser.stub(_res);
-}
-
-const fragmentDefinitionPlaceLatestVisit = FragmentDefinitionNode(
-  name: NameNode(value: 'PlaceLatestVisit'),
-  typeCondition: TypeConditionNode(
-    on: NamedTypeNode(name: NameNode(value: 'LatestVisit'), isNonNull: false),
-  ),
-  directives: [],
-  selectionSet: SelectionSetNode(
-    selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'time'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'user'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(
-          selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'PlaceUser'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ],
-        ),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ],
-  ),
-);
-const documentNodeFragmentPlaceLatestVisit = DocumentNode(
-  definitions: [
-    fragmentDefinitionPlaceLatestVisit,
-    fragmentDefinitionPlaceUser,
+    fragmentDefinitionLatestEdit,
+    fragmentDefinitionUser,
   ],
 );

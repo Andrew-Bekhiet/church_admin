@@ -1,5 +1,6 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.graphql.dart';
+import '../../data_checks/__generated__/fragments.graphql.dart';
 import '../../fcm_tokens/__generated__/fragments.graphql.dart';
 import '../../gql/__generated__/fragments.graphql.dart';
 import '../../invitations/__generated__/fragments.graphql.dart';
@@ -467,9 +468,9 @@ const documentNodeQueryusers = DocumentNode(
     fragmentDefinitionUser,
     fragmentDefinitionInvitation,
     fragmentDefinitionUserPerson,
-    fragmentDefinitionUserPersonDataCheck,
-    fragmentDefinitionUserPersonLatestKodas,
-    fragmentDefinitionUserPersonLatestConfession,
+    fragmentDefinitionDataCheck,
+    fragmentDefinitionLatestKodas,
+    fragmentDefinitionLatestConfession,
     fragmentDefinitionUserAdminScopes,
     fragmentDefinitionArea,
     fragmentDefinitionUserScopeService,
@@ -1830,11 +1831,11 @@ const documentNodeQueryuser = DocumentNode(
     fragmentDefinitionUser,
     fragmentDefinitionInvitation,
     fragmentDefinitionUserPerson,
-    fragmentDefinitionUserPersonDataCheck,
-    fragmentDefinitionUserPersonLatestKodas,
-    fragmentDefinitionUserPersonLatestConfession,
+    fragmentDefinitionDataCheck,
+    fragmentDefinitionLatestKodas,
+    fragmentDefinitionLatestConfession,
     fragmentDefinitionUserDetails,
-    fragmentDefinitionUserLatestEdit,
+    fragmentDefinitionLatestEdit,
     fragmentDefinitionUserAdminOn,
     fragmentDefinitionArea,
     fragmentDefinitionUserScopeService,
@@ -1916,7 +1917,7 @@ class Query_user_user
           : Fragment_UserPerson.fromJson((l$person as Map<String, dynamic>)),
       latestEdit: l$latestEdit == null
           ? null
-          : Fragment_UserLatestEdit.fromJson(
+          : Fragment_LatestEdit.fromJson(
               (l$latestEdit as Map<String, dynamic>),
             ),
       scopeGrants: (l$scopeGrants as List<dynamic>)
@@ -1963,7 +1964,7 @@ class Query_user_user
 
   final Fragment_UserPerson? person;
 
-  final Fragment_UserLatestEdit? latestEdit;
+  final Fragment_LatestEdit? latestEdit;
 
   final List<Query_user_user_scopeGrants> scopeGrants;
 
@@ -2192,7 +2193,7 @@ abstract class CopyWith_Query_user_user<TRes> {
     Fragment_Invitation? invitation,
     List<Query_user_user_permissions>? permissions,
     Fragment_UserPerson? person,
-    Fragment_UserLatestEdit? latestEdit,
+    Fragment_LatestEdit? latestEdit,
     List<Query_user_user_scopeGrants>? scopeGrants,
     Fragment_UserPreferences? preferences,
     List<Fragment_DeviceToken>? deviceTokens,
@@ -2207,7 +2208,7 @@ abstract class CopyWith_Query_user_user<TRes> {
     _fn,
   );
   CopyWith_Fragment_UserPerson<TRes> get person;
-  CopyWith_Fragment_UserLatestEdit<TRes> get latestEdit;
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit;
   TRes scopeGrants(
     Iterable<Query_user_user_scopeGrants> Function(
       Iterable<
@@ -2286,7 +2287,7 @@ class _CopyWithImpl_Query_user_user<TRes>
           : (person as Fragment_UserPerson?),
       latestEdit: latestEdit == _undefined
           ? _instance.latestEdit
-          : (latestEdit as Fragment_UserLatestEdit?),
+          : (latestEdit as Fragment_LatestEdit?),
       scopeGrants: scopeGrants == _undefined || scopeGrants == null
           ? _instance.scopeGrants
           : (scopeGrants as List<Query_user_user_scopeGrants>),
@@ -2331,11 +2332,11 @@ class _CopyWithImpl_Query_user_user<TRes>
         : CopyWith_Fragment_UserPerson(local$person, (e) => call(person: e));
   }
 
-  CopyWith_Fragment_UserLatestEdit<TRes> get latestEdit {
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit {
     final local$latestEdit = _instance.latestEdit;
     return local$latestEdit == null
-        ? CopyWith_Fragment_UserLatestEdit.stub(_then(_instance))
-        : CopyWith_Fragment_UserLatestEdit(
+        ? CopyWith_Fragment_LatestEdit.stub(_then(_instance))
+        : CopyWith_Fragment_LatestEdit(
             local$latestEdit,
             (e) => call(latestEdit: e),
           );
@@ -2399,7 +2400,7 @@ class _CopyWithStubImpl_Query_user_user<TRes>
     Fragment_Invitation? invitation,
     List<Query_user_user_permissions>? permissions,
     Fragment_UserPerson? person,
-    Fragment_UserLatestEdit? latestEdit,
+    Fragment_LatestEdit? latestEdit,
     List<Query_user_user_scopeGrants>? scopeGrants,
     Fragment_UserPreferences? preferences,
     List<Fragment_DeviceToken>? deviceTokens,
@@ -2413,8 +2414,8 @@ class _CopyWithStubImpl_Query_user_user<TRes>
   CopyWith_Fragment_UserPerson<TRes> get person =>
       CopyWith_Fragment_UserPerson.stub(_res);
 
-  CopyWith_Fragment_UserLatestEdit<TRes> get latestEdit =>
-      CopyWith_Fragment_UserLatestEdit.stub(_res);
+  CopyWith_Fragment_LatestEdit<TRes> get latestEdit =>
+      CopyWith_Fragment_LatestEdit.stub(_res);
 
   scopeGrants(_fn) => _res;
 
