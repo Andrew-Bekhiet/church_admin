@@ -8127,6 +8127,7 @@ input UserFilterInput {
   authId: UserFilterAuthId
   invitation: InvitationFilterInput
   person: PersonFilterInput
+  preferences: UserPreferencesFilterInput
   scopeGrants: ScopeGrantFilterInput
   permissions: UserPermissionFilterInput
   currentUserCanManageThisUser: UserFilterCurrentUserCanManageThisUser
@@ -8147,6 +8148,7 @@ type User {
   authId: String
   invitation: Invitation
   person: Person
+  preferences: UserPreferences
   scopeGrants(
     "How to sort the records in the response"
     sort: [ScopeGrantSortInput]
@@ -8563,6 +8565,145 @@ type ScopeGrant {
   user: User
 }
 
+"The result of the :update_my_preferences mutation"
+type UpdateMyPreferencesResult {
+  "The successful result of the mutation"
+  result: UserPreferences
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateMyPreferencesInput {
+  darkTheme: Boolean
+  greatFeastTheme: Boolean
+  lastHomeMode: String
+  orderByPreferencesPatch: Json
+  secondLinePreferencesPatch: Json
+}
+
+input UserPreferencesFilterSecondLinePreferences {
+  isNil: Boolean
+  eq: Json
+  notEq: Json
+  in: [Json!]
+  lessThan: Json
+  greaterThan: Json
+  lessThanOrEqual: Json
+  greaterThanOrEqual: Json
+  isDistinctFrom: Json
+  isNotDistinctFrom: Json
+}
+
+input UserPreferencesFilterUpdatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input UserPreferencesFilterLastHomeMode {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input UserPreferencesFilterGreatFeastTheme {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input UserPreferencesFilterDarkTheme {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input UserPreferencesFilterOrderByPreferences {
+  isNil: Boolean
+  eq: Json
+  notEq: Json
+  in: [Json!]
+  lessThan: Json
+  greaterThan: Json
+  lessThanOrEqual: Json
+  greaterThanOrEqual: Json
+  isDistinctFrom: Json
+  isNotDistinctFrom: Json
+}
+
+input UserPreferencesFilterUid {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input UserPreferencesFilterInput {
+  and: [UserPreferencesFilterInput!]
+  or: [UserPreferencesFilterInput!]
+  not: [UserPreferencesFilterInput!]
+  uid: UserPreferencesFilterUid
+  orderByPreferences: UserPreferencesFilterOrderByPreferences
+  darkTheme: UserPreferencesFilterDarkTheme
+  greatFeastTheme: UserPreferencesFilterGreatFeastTheme
+  lastHomeMode: UserPreferencesFilterLastHomeMode
+  updatedAt: UserPreferencesFilterUpdatedAt
+  secondLinePreferences: UserPreferencesFilterSecondLinePreferences
+  user: UserFilterInput
+}
+
+type UserPreferences {
+  id: ID!
+  uid: ID!
+  orderByPreferences: Json!
+  darkTheme: Boolean
+  greatFeastTheme: Boolean!
+  lastHomeMode: String
+  updatedAt: DateTime!
+  secondLinePreferences: Json!
+  user: User
+}
+
 "The result of the :update_invitation_expiry mutation"
 type UpdateInvitationExpiryResult {
   "The successful result of the mutation"
@@ -8710,6 +8851,32 @@ type Invitation {
   claimedAt: DateTime
   code: String!
   creator: User
+  user: User
+}
+
+"The result of the :register_fcm_token mutation"
+type RegisterFcmTokenResult {
+  "The successful result of the mutation"
+  result: DeviceToken
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input RegisterFcmTokenInput {
+  token: String!
+}
+
+type DeviceToken {
+  "A unique identifier"
+  id: ID!
+
+  uid: ID!
+
+  token: String!
+
+  createdAt: DateTime!
+
   user: User
 }
 
@@ -9910,6 +10077,29 @@ type Church {
   id: ID!
   name: String!
   isHidden: Boolean!
+}
+
+"The result of the :clear_data_check_override mutation"
+type ClearDataCheckOverrideResult {
+  "The record that was successfully deleted"
+  result: DataCheckOverride
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :override_data_check mutation"
+type OverrideDataCheckResult {
+  "The successful result of the mutation"
+  result: DataCheckOverride
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input OverrideDataCheckInput {
+  familyId: ID!
+  isComplete: Boolean!
 }
 
 enum DataCheckOverrideSortField {
@@ -11261,55 +11451,117 @@ type RootQueryType {
 
 type RootMutationType {
   requestPhotoUpload(subject: PhotoSubject!, id: ID!, contentType: String): PhotoLink!
+
   deletePhoto(subject: PhotoSubject!, id: ID!): Boolean!
+
   exportData(areasIds: [ID!], servicesIds: [ID!], classesIds: [ID!], groupsIds: [ID!]): ExportDownloadLink!
+
+  "Sets whether the family's data is complete, whatever the automatic check says."
+  overrideDataCheck(input: OverrideDataCheckInput!): OverrideDataCheckResult
+
+  "Gives the family's data check back to the automatic result."
+  clearDataCheckOverride(id: ID!): ClearDataCheckOverrideResult
+
   createChurch(input: CreateChurchInput!): CreateChurchResult
+
   createCollege(input: CreateCollegeInput!): CreateCollegeResult
+
   createFather(input: CreateFatherInput!): CreateFatherResult
+
   createHobby(input: CreateHobbyInput!): CreateHobbyResult
+
   createJob(input: CreateJobInput!): CreateJobResult
+
   createPersonType(input: CreatePersonTypeInput!): CreatePersonTypeResult
+
   createQualification(input: CreateQualificationInput!): CreateQualificationResult
+
   createSchool(input: CreateSchoolInput!): CreateSchoolResult
+
   createTag(input: CreateTagInput!): CreateTagResult
+
+  "Remembers the device token for the acting user; registering it again returns the stored row."
+  registerFcmToken(input: RegisterFcmTokenInput!): RegisterFcmTokenResult
+
   createInvitation(input: CreateInvitationInput!): CreateInvitationResult
+
   updateInvitationExpiry(id: ID!, input: UpdateInvitationExpiryInput): UpdateInvitationExpiryResult
+
+  "Sets the scalar preferences given and merges the patches into the maps; a null patch value removes its key."
+  updateMyPreferences(input: UpdateMyPreferencesInput): UpdateMyPreferencesResult
+
   createUser(input: CreateUserInput!): CreateUserResult
+
   updateUser(id: ID!, input: UpdateUserInput): UpdateUserResult
+
   updateUserPermissions(id: ID!, input: UpdateUserPermissionsInput): UpdateUserPermissionsResult
+
   approveUser(id: ID!): ApproveUserResult
+
   unapproveUser(id: ID!): UnapproveUserResult
+
   applyInvitationCode(input: ApplyInvitationCodeInput!): ClaimedAccount!
+
   tryClaimAccount: ClaimedAccount!
+
   deleteMyAccount: Boolean!
+
   recordCall(input: RecordCallInput!): RecordCallResult
+
   recordConfession(input: RecordConfessionInput!): RecordConfessionResult
+
   recordKodas(input: RecordKodasInput!): RecordKodasResult
+
   deleteKodas(id: ID!): DeleteKodasResult
+
   recordVisit(input: RecordVisitInput!): RecordVisitResult
+
   markAttendance(input: MarkAttendanceInput!): MarkAttendanceResult
+
   updateAttendanceTime(id: ID!, input: UpdateAttendanceTimeInput): UpdateAttendanceTimeResult
+
   unmarkAttendance(id: ID!): UnmarkAttendanceResult
+
   createMeeting(input: CreateMeetingInput!): CreateMeetingResult
+
   updateMeeting(id: ID!, input: UpdateMeetingInput): UpdateMeetingResult
+
   createArea(input: CreateAreaInput!): CreateAreaResult
+
   updateArea(id: ID!, input: UpdateAreaInput): UpdateAreaResult
+
   deleteArea(id: ID!): DeleteAreaResult
+
   createDistrict(input: CreateDistrictInput!): CreateDistrictResult
+
   createStore(input: CreateStoreInput!): CreateStoreResult
+
   updateStore(id: ID!, input: UpdateStoreInput): UpdateStoreResult
+
   deleteStore(id: ID!): DeleteStoreResult
+
   createStreet(input: CreateStreetInput!): CreateStreetResult
+
   updateStreet(id: ID!, input: UpdateStreetInput): UpdateStreetResult
+
   deleteStreet(id: ID!): DeleteStreetResult
+
   createClass(input: CreateClassInput!): CreateClassResult
+
   updateClass(id: ID!, input: UpdateClassInput): UpdateClassResult
+
   deleteClass(id: ID!): DeleteClassResult
+
   createGroup(input: CreateGroupInput!): CreateGroupResult
+
   updateGroup(id: ID!, input: UpdateGroupInput): UpdateGroupResult
+
   deleteGroup(id: ID!): DeleteGroupResult
+
   createService(input: CreateServiceInput!): CreateServiceResult
+
   updateService(id: ID!, input: UpdateServiceInput): UpdateServiceResult
+
   deleteService(id: ID!): DeleteServiceResult
 }
 
