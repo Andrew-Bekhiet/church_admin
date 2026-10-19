@@ -1,0 +1,20 @@
+query studyYears(
+  $filter: StudyYearFilterInput
+  $sort: [StudyYearSortInput]
+  $first: Int
+  $after: String
+) {
+  studyYears(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...StudyYear
+    }
+  }
+}
+
+query studyYear($id: ID!) {
+  studyYear(id: $id) {
+    ...StudyYear
+  }
+}

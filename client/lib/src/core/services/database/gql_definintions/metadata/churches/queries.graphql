@@ -1,0 +1,14 @@
+query churches(
+  $filter: ChurchFilterInput
+  $sort: [ChurchSortInput]
+  $first: Int
+  $after: String
+) {
+  churches(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Church
+    }
+  }
+}

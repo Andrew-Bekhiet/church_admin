@@ -1,16 +1,16 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_states/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_states/__generated__/queries.graphql.dart';
 
 class PersonStatesDAO extends DAOBase<PersonState>
-    with LegacyStreamableDAO<PersonState> {
+    with KeysetStreamableDAO<PersonState> {
   @override
-  LegacyStreamAllConfig<PersonState> get baseStreamAllConfig =>
-      const LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllPersonStates,
-      );
+  StreamAllConfig<PersonState> get baseStreamAllConfig => const StreamAllConfig(
+    document: documentNodeQuerypersonStates,
+    arguments: ListQueryArguments.fromParameters,
+  );
 
   @override
-  LegacyStreamSingleByIdConfig<PersonState> get baseStreamSingleByIdConfig =>
+  StreamSingleByIdConfig<PersonState> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   PersonStatesDAO({

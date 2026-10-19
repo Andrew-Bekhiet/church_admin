@@ -1,0 +1,5 @@
+fragment Hobby on Hobby {
+  id
+  name
+  color
+}

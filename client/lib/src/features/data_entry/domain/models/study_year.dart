@@ -47,6 +47,7 @@ class StudyYearFields extends _StudyYearFields {
     name: 'id',
     label: '=',
     getValue: _identity,
+    isOrderable: false,
   );
 
   @override

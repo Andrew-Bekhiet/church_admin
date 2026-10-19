@@ -1,0 +1,5 @@
+fragment StudyYear on StudyYear {
+  id
+  name
+  order
+}

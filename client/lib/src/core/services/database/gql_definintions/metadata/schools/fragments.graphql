@@ -1,0 +1,4 @@
+fragment School on School {
+  id
+  name
+}

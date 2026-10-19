@@ -1,0 +1,14 @@
+query shammasLevels(
+  $filter: ShammasLevelFilterInput
+  $sort: [ShammasLevelSortInput]
+  $first: Int
+  $after: String
+) {
+  shammasLevels(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...ShammasLevel
+    }
+  }
+}

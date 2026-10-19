@@ -1,0 +1,7 @@
+fragment PersonType on PersonType {
+  id
+  name
+  order
+  isFamilyAdmin
+  isHidden
+}

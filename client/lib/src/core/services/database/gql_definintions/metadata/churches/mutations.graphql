@@ -1,0 +1,7 @@
+mutation createChurch($input: CreateChurchInput!) {
+  createChurch(input: $input) {
+    result {
+      ...Church
+    }
+  }
+}

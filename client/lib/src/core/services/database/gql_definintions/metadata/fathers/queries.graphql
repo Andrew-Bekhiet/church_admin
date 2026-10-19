@@ -1,0 +1,14 @@
+query fathers(
+  $filter: FatherFilterInput
+  $sort: [FatherSortInput]
+  $first: Int
+  $after: String
+) {
+  fathers(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Father
+    }
+  }
+}

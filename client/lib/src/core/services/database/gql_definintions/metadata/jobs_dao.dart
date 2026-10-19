@@ -1,31 +1,28 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/jobs/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/jobs/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/jobs/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/jobs/__generated__/queries.graphql.dart';
 
 class JobsDAO extends DAOBase<Job>
-    with LegacyStreamableDAO<Job>, LegacyCreatableDAO<Job> {
+    with KeysetStreamableDAO<Job>, CreatableDAO<Job> {
   @override
-  LegacyStreamAllConfig<Job> get baseStreamAllConfig =>
-      const LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllJobs,
-      );
+  StreamAllConfig<Job> get baseStreamAllConfig => const StreamAllConfig(
+    document: documentNodeQueryjobs,
+    arguments: ListQueryArguments.fromParameters,
+  );
+
   @override
-  LegacyStreamSingleByIdConfig<Job> get baseStreamSingleByIdConfig =>
+  StreamSingleByIdConfig<Job> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  LegacyCreateObjectConfig<Job> get baseCreateObjectConfig =>
-      LegacyCreateObjectConfig(
-        document: documentNodeMutationcreateJob,
-        varsConstructor: _createJobVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson),
-      );
+  CreateObjectConfig<Job> get baseCreateObjectConfig => CreateObjectConfig(
+    document: documentNodeMutationcreateJob,
+    varsConstructor: ({required newObject}) => Variables_Mutation_createJob(
+      input: Input_CreateJobInput(name: newObject.name),
+    ).toJson(),
+  );
 
   JobsDAO({
     required super.db,
   }) : super(fromJson: Job.fromJson);
-
-  Json _createJobVarsConstructor({required Job newObject}) => {
-    'object': {'name': newObject.name},
-  };
 }

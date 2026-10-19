@@ -1,9 +1,0 @@
-mutation createFather($object: FathersInsertInput!) {
-  insertFathersOne(
-    object: $object
-    onConflict: { constraint: fathers_name_key, updateColumns: name }
-  ) {
-    id
-    name
-  }
-}

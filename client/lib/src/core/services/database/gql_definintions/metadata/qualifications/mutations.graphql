@@ -1,0 +1,7 @@
+mutation createQualification($input: CreateQualificationInput!) {
+  createQualification(input: $input) {
+    result {
+      ...Qualification
+    }
+  }
+}

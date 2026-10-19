@@ -1,5 +1,0 @@
-query getStudyYearName($order: smallint!) {
-  studyYearsByPk(order: $order) {
-    ...StudyYear
-  }
-}
