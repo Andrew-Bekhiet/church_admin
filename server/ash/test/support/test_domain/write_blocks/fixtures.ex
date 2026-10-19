@@ -45,8 +45,6 @@ defmodule ChurchAdmin.TestDomain.WriteBlockFixtures do
 
   @spec user_actor!() :: Actor.t()
   def user_actor! do
-    ChurchAdmin.DataCase.set_system_db_session()
-
     %{rows: [[uid]]} =
       Repo.query!(
         "insert into auth.users_data (name) values ($1) returning uid::text",

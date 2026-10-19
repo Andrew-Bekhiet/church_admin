@@ -63,7 +63,6 @@ defmodule ChurchAdmin.ActivityWorld do
   end
 
   def extend!(world) do
-    ChurchAdmin.DataCase.set_system_db_session()
     recorded_by = world.users.read_all.uid
 
     seed!(ActivityDay, %{day: @day_1})
@@ -121,7 +120,14 @@ defmodule ChurchAdmin.ActivityWorld do
   defp seed_record_logs!(world) do
     for {{table, id}, _target} <- world.targets do
       seed!(Visit, %{table: table, record_id: id, time: at(200), recorded_by: world.recorded_by})
-      seed!(Edit, %{table: table, record_id: id, time: at(200), recorded_by: world.recorded_by})
+
+      seed!(Edit, %{
+        table: table,
+        record_id: id,
+        time: at(200),
+        recorded_by: world.recorded_by,
+        user_role: "user"
+      })
     end
 
     m1 = world.records.m1.id
@@ -144,7 +150,14 @@ defmodule ChurchAdmin.ActivityWorld do
       recorded_by: world.recorded_by
     })
 
-    seed!(Edit, %{table: "persons", record_id: m1, time: at(250), recorded_by: world.recorded_by})
+    seed!(Edit, %{
+      table: "persons",
+      record_id: m1,
+      time: at(250),
+      recorded_by: world.recorded_by,
+      user_role: "user"
+    })
+
     world
   end
 
@@ -238,7 +251,6 @@ defmodule ChurchAdmin.ActivityWorld do
   defp users(names), do: MapSet.new(for name <- names, do: {:users, name})
 
   defp seed!(resource, attrs) do
-    ChurchAdmin.DataCase.set_system_db_session()
     Ash.Seed.seed!(resource, attrs)
   end
 end

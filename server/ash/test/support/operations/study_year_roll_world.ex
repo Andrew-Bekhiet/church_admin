@@ -2,11 +2,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollWorld do
   @moduledoc """
   Fixtures and raw-SQL readers for the study-year roll tests. Readers bypass
   Ash so soft-deleted rows read the same as live ones.
-
-  Fixtures are written inside the test's sandbox transaction, so their
-  deferred constraint triggers are still pending when the roll runs its own
-  `set constraints all immediate`. `committed!/0` fires them first, as the
-  commit that preceded the real cron transaction did.
   """
 
   import ChurchAdmin.Factory
@@ -33,20 +28,11 @@ defmodule ChurchAdmin.Operations.StudyYearRollWorld do
   end
 
   def route!(service, next_service) do
-    ChurchAdmin.DataCase.set_system_db_session()
-
     Repo.query!("update public.services set next_service_id = $2 where id = $1", [
       dump(service.id),
       next_service && dump(next_service.id)
     ])
 
-    :ok
-  end
-
-  def committed! do
-    ChurchAdmin.DataCase.set_system_db_session()
-    Repo.query!("set constraints all immediate")
-    Repo.query!("set constraints all deferred")
     :ok
   end
 

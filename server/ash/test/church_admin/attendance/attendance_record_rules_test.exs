@@ -231,8 +231,6 @@ defmodule ChurchAdmin.Attendance.AttendanceRecordRulesTest do
   end
 
   defp archive_meeting(meeting) do
-    ChurchAdmin.DataCase.set_system_db_session()
-
     ChurchAdmin.Repo.query!(
       "update history.meetings set is_archived = true where id = $1::text::uuid",
       [

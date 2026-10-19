@@ -18,14 +18,12 @@ defmodule ChurchAdmin.Operations.StudyYearRollScheduleTest do
     study_years!(1..3)
     service = graded_service!(1, 3)
     pupil!(service, 1)
-    committed!()
   end
 
   defp blocked_world do
     one_pupil_world()
     looping = service!()
     route!(looping, looping)
-    committed!()
   end
 
   defp run_id(status) do

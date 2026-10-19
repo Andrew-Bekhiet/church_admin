@@ -40,14 +40,9 @@ defmodule ChurchAdmin.RealtimeCase do
 
   def writer_options do
     ReplicationStream.connection_options()
-    |> Keyword.put(:after_connect, fn conn ->
-      Postgrex.query!(conn, "select set_config('hasura.user', $1, false)", [
-        ChurchAdmin.Repo.HasuraSession.session_for(ChurchAdmin.Authz.Actor.system())
-      ])
-    end)
   end
 
-  @doc "Runs the statements after the test, on a fresh connection with the system DB session."
+  @doc "Runs the statements after the test, on a fresh connection."
   def cleanup_sql(statements) do
     on_exit(fn ->
       {:ok, conn} = Postgrex.start_link(writer_options())

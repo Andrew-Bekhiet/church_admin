@@ -115,8 +115,6 @@ defmodule ChurchAdminWeb.Graphql.PeopleChildrenQueriesTest do
   end
 
   test "person links page at 100 rows at most", %{conn: conn, world: world} do
-    ChurchAdmin.DataCase.set_system_db_session()
-
     for index <- 1..101 do
       hobby = Ash.Seed.seed!(Hobby, %{name: "extra hobby #{index}"})
       Ash.Seed.seed!(PersonHobby, %{person_id: world.records.m1.id, hobby_id: hobby.id})

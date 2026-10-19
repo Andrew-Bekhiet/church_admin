@@ -20,8 +20,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollBlockersTest do
   end
 
   defp assert_blocked_by(expected_lines, unchanged_pupil) do
-    committed!()
-
     assert blocker_lines() == Enum.sort(expected_lines)
 
     Roll.run_when_due(nayrouz(@season))
@@ -93,7 +91,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollBlockersTest do
     test "a family keeps the pupil connected, so nothing blocks" do
       service = graded_service!(1, 3)
       pupil!(service, 3, family_id: family!().id)
-      committed!()
 
       assert Roll.blockers() == []
     end
@@ -162,7 +159,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollBlockersTest do
       source = graded_service!(1, 3, next_service_id: destination.id)
       pupil!(source, 1)
       class!(source, service_study_year: 1)
-      committed!()
 
       assert Roll.blockers() == []
     end
@@ -187,7 +183,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollBlockersTest do
       destination = graded_service!(1, 2)
       source = graded_service!(5, 6, next_service_id: destination.id)
       pupil!(source, 6)
-      committed!()
 
       assert Roll.blockers() == []
     end

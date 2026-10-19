@@ -22,7 +22,6 @@ defmodule ChurchAdmin.OrgCase do
 
   setup tags do
     ChurchAdmin.DataCase.setup_sandbox(tags)
-    ChurchAdmin.DataCase.set_system_db_session()
 
     Repo.query!(
       "insert into auth.permissions (name) values ('deleteData') on conflict do nothing"

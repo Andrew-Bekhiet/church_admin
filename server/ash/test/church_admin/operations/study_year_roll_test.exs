@@ -28,7 +28,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
     service = graded_service!(1, 3)
     class!(service, service_study_year: 1)
     pupil = pupil!(service, 1)
-    committed!()
     pupil
   end
 
@@ -130,7 +129,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
     test "a blocked roll changes nothing and records failed with the blocker detail" do
       pupil = one_pupil_world()
       looping = self_linked_service!()
-      committed!()
 
       Roll.run_when_due(nayrouz(@season))
 
@@ -148,7 +146,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
     test "a direct run that is blocked returns the failure and records nothing" do
       pupil = one_pupil_world()
       looping = self_linked_service!()
-      committed!()
 
       assert Roll.run(@season) ==
                {:error,
@@ -164,11 +161,9 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
     test "a second failure replaces the error on the season's one failed row" do
       one_pupil_world()
       first = self_linked_service!()
-      committed!()
       Roll.run_when_due(nayrouz(@season))
 
       second = self_linked_service!()
-      committed!()
       Roll.run_when_due(nayrouz(@season))
 
       assert [%{status: :failed} = failed] = Roll.runs(@season)
@@ -185,11 +180,9 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
     test "a failure does not block a later attempt the same day" do
       pupil = one_pupil_world()
       looping = self_linked_service!()
-      committed!()
       Roll.run_when_due(nayrouz(@season))
 
       route!(looping, nil)
-      committed!()
       Roll.run_when_due(nayrouz(@season))
 
       assert study_year_of(pupil) == 2
@@ -224,7 +217,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
     test "records missed next to the season's failure" do
       one_pupil_world()
       self_linked_service!()
-      committed!()
       Roll.run_when_due(nayrouz(@season))
 
       Roll.record_missed(~D[2026-09-12])
@@ -237,7 +229,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
     test "hourly failures and repeated missed checks leave one row of each" do
       one_pupil_world()
       self_linked_service!()
-      committed!()
 
       for _hour <- 1..3, do: Roll.run_when_due(nayrouz(@season))
       for _check <- 1..2, do: Roll.record_missed(~D[2026-09-12])

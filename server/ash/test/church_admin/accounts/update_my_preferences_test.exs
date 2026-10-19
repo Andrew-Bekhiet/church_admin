@@ -14,8 +14,6 @@ defmodule ChurchAdmin.Accounts.UpdateMyPreferencesTest do
   end
 
   defp seed_preferences!(user, attrs \\ %{}) do
-    ChurchAdmin.DataCase.set_system_db_session()
-
     Ash.Seed.seed!(
       Preferences,
       Map.merge(

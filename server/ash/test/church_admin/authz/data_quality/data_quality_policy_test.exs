@@ -4,8 +4,6 @@ defmodule ChurchAdmin.Authz.DataQuality.DataQualityPolicyTest do
   alias ChurchAdmin.DataQuality.{DataCheck, Override}
 
   setup %{world: world} do
-    ChurchAdmin.DataCase.set_system_db_session()
-
     families = Map.take(world.records, [:f_own, :f_svc, :f_grp, :f_area, :f_misc])
 
     for family <- [families.f_own, families.f_svc, families.f_area] do

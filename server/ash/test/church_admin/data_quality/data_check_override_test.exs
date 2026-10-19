@@ -47,8 +47,6 @@ defmodule ChurchAdmin.DataQuality.DataCheckOverrideTest do
     do: Ash.get(Override, family(world, name).id, authorize?: false)
 
   defp seed_override!(world, name, is_complete \\ true) do
-    ChurchAdmin.DataCase.set_system_db_session()
-
     Ash.Seed.seed!(Override, %{
       family_id: family(world, name).id,
       is_complete: is_complete
@@ -160,7 +158,6 @@ defmodule ChurchAdmin.DataQuality.DataCheckOverrideTest do
 
   test "the stamp survives the owner's deletion as null", %{world: world} do
     {:ok, _} = override(world, :f_svc, true, :read_write)
-    ChurchAdmin.DataCase.set_system_db_session()
 
     ChurchAdmin.Repo.query!("delete from auth.users_data where uid = $1", [
       Ecto.UUID.dump!(world.users.read_write.uid)

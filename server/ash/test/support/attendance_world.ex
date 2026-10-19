@@ -31,7 +31,7 @@ defmodule ChurchAdmin.AttendanceWorld do
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Attendance.AttendanceRecord
-  alias ChurchAdmin.{AuthzWorld, DataCase, Factory}
+  alias ChurchAdmin.{AuthzWorld, Factory}
 
   @first_day ~U[2026-03-01 10:00:00.000000Z]
   @second_day ~U[2026-03-08 10:00:00.000000Z]
@@ -80,8 +80,6 @@ defmodule ChurchAdmin.AttendanceWorld do
   end
 
   defp attendance!(meeting, person, as_servant, datetime, %User{uid: recorded_by}) do
-    DataCase.set_system_db_session()
-
     Ash.Seed.seed!(AttendanceRecord, %{
       meeting_id: meeting.id,
       person_id: person.id,

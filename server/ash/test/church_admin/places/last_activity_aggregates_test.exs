@@ -5,7 +5,7 @@ defmodule ChurchAdmin.Places.LastActivityAggregatesTest do
   alias ChurchAdmin.Organization.{Class, Group, Service}
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Places.{Area, Store, Street}
-  alias ChurchAdmin.{ActivityWorld, DataCase, Factory}
+  alias ChurchAdmin.{ActivityWorld, Factory}
 
   require Ash.Query
 
@@ -63,8 +63,6 @@ defmodule ChurchAdmin.Places.LastActivityAggregatesTest do
   end
 
   test "an area's visits are only those of table areas", %{world: world} do
-    DataCase.set_system_db_session()
-
     Ash.Seed.seed!(ChurchAdmin.Activity.Visit, %{
       table: "streets",
       record_id: world.records.a1.id,
@@ -76,7 +74,6 @@ defmodule ChurchAdmin.Places.LastActivityAggregatesTest do
   end
 
   test "services and groups sort by their default meeting's name", %{world: world} do
-    DataCase.set_system_db_session()
     %{s1: s1, g1: g1, m_s1: m_s1, m_g1: m_g1} = world.records
     Ash.Seed.update!(s1, %{default_meeting_id: m_s1.id})
     Ash.Seed.update!(g1, %{default_meeting_id: m_g1.id})
@@ -86,7 +83,6 @@ defmodule ChurchAdmin.Places.LastActivityAggregatesTest do
   end
 
   test "stores carry their admin family's name and address line", %{world: world} do
-    DataCase.set_system_db_session()
     %{store1: store1, f_own: f_own} = world.records
     Ash.Seed.update!(store1, %{admin_family_id: f_own.id})
 
@@ -97,7 +93,6 @@ defmodule ChurchAdmin.Places.LastActivityAggregatesTest do
   end
 
   test "families carry their church's name and address line", %{world: world} do
-    DataCase.set_system_db_session()
     church = Ash.Seed.seed!(ChurchAdmin.Catalog.Church, %{name: "كنيسة مارجرجس"})
     family = Ash.Seed.update!(world.records.f_own, %{church_id: church.id})
     Ash.Seed.update!(world.records.addr_own, %{house_code: "9"})

@@ -14,10 +14,9 @@ defmodule ChurchAdmin.FamilyWrites do
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Places.Store
   alias ChurchAdmin.Repo
-  alias ChurchAdmin.Repo.HasuraSession
 
   def create_family(actor, attrs) do
-    transact(actor, fn ->
+    transact(fn ->
       Family
       |> Ash.Changeset.for_create(:create_family, attrs, actor: actor)
       |> Ash.create()
@@ -25,7 +24,7 @@ defmodule ChurchAdmin.FamilyWrites do
   end
 
   def update_family(actor, id, attrs) do
-    transact(actor, fn ->
+    transact(fn ->
       Family
       |> Ash.get!(id, authorize?: false)
       |> Ash.Changeset.for_update(:update_family, attrs, actor: actor)
@@ -37,7 +36,7 @@ defmodule ChurchAdmin.FamilyWrites do
   def hard_delete_family(actor, id), do: destroy(actor, id, :hard_destroy)
 
   def create_store(actor, attrs) do
-    transact(actor, fn ->
+    transact(fn ->
       Store
       |> Ash.Changeset.for_create(:create_store, attrs, actor: actor)
       |> Ash.create()
@@ -45,7 +44,7 @@ defmodule ChurchAdmin.FamilyWrites do
   end
 
   defp destroy(actor, id, action) do
-    transact(actor, fn ->
+    transact(fn ->
       Family
       |> Ash.get!(id, authorize?: false)
       |> Ash.Changeset.for_destroy(action, %{}, actor: actor)
@@ -53,12 +52,10 @@ defmodule ChurchAdmin.FamilyWrites do
     end)
   end
 
-  defp transact(actor, fun) do
+  defp transact(fun) do
     fire_fixtures_deferred_checks!()
 
     Repo.transaction(fn ->
-      HasuraSession.set_for_transaction(Repo, actor)
-
       case fun.() do
         {:ok, record} ->
           Repo.query!("set constraints all immediate")
@@ -76,7 +73,6 @@ defmodule ChurchAdmin.FamilyWrites do
   end
 
   defp fire_fixtures_deferred_checks! do
-    ChurchAdmin.DataCase.set_system_db_session()
     Repo.query!("set constraints all immediate")
     Repo.query!("set constraints all deferred")
   end

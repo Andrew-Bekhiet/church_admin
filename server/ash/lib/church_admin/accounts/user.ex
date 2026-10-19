@@ -38,7 +38,6 @@ defmodule ChurchAdmin.Accounts.User do
   alias ChurchAdmin.Activity.LatestEdit
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, SignedInToFirebase, System}
-  alias ChurchAdmin.Changes.WriteWithAdminDbSession
   alias ChurchAdmin.Errors.{Codes, ConstraintCodes}
   alias ChurchAdmin.People.Person
   alias ChurchAdmin.Types.Text
@@ -111,7 +110,6 @@ defmodule ChurchAdmin.Accounts.User do
       validate EachScopeOnOneContainer, before_action?: true
       validate GrantsWithinActorAuthority, before_action?: true
       change CanonicalizeNameAndEmail
-      change WriteWithAdminDbSession
       change ManageGrants
       change PermissionLevelsConsistent
       change {LinkPerson, as: :system}

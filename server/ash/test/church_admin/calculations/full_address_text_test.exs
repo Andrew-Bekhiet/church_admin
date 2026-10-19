@@ -6,7 +6,7 @@ defmodule ChurchAdmin.Calculations.FullAddressTextTest do
 
   use ChurchAdmin.DataCase, async: false
 
-  alias ChurchAdmin.{DataCase, Factory}
+  alias ChurchAdmin.Factory
   alias ChurchAdmin.Places.{Address, District, Street}
 
   require Ash.Query
@@ -39,11 +39,6 @@ defmodule ChurchAdmin.Calculations.FullAddressTextTest do
        apartment_number: 34
      }, "7أ ش الجمهورية متفرع من السلام حي الزمالك أمام الكنيسة الدور 12 شقة 34"}
   ]
-
-  setup do
-    DataCase.set_system_db_session()
-    :ok
-  end
 
   defp insert_address!(spec) do
     street = spec[:street] && Ash.Seed.seed!(Street, %{name: spec.street})

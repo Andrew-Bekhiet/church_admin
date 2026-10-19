@@ -129,12 +129,12 @@ defmodule ChurchAdmin.Factory do
 
   def meeting!(attrs), do: seed!(Meeting, Map.merge(%{name: unique("meeting")}, Map.new(attrs)))
 
-  def edit_row!(table, record_id), do: seed!(Edit, %{table: table, record_id: record_id})
+  def edit_row!(table, record_id),
+    do: seed!(Edit, %{table: table, record_id: record_id, user_role: "admin"})
 
   def deleted_at, do: DateTime.utc_now()
 
   defp seed!(resource, attrs) do
-    ChurchAdmin.DataCase.set_system_db_session()
     Ash.Seed.seed!(resource, attrs)
   end
 
