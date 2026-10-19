@@ -2,10 +2,13 @@ defmodule ChurchAdmin.Organization.Class do
   use Ash.Resource,
     domain: ChurchAdmin.Organization,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
+  alias ChurchAdmin.Authz.Calculations.UserCanEdit
+  alias ChurchAdmin.Authz.Checks.{InScope, System}
   alias ChurchAdmin.Attendance.Meeting
   alias ChurchAdmin.Catalog.StudyYear
   alias ChurchAdmin.Organization.Service
@@ -14,6 +17,13 @@ defmodule ChurchAdmin.Organization.Class do
 
   graphql do
     type :class
+
+    relationships [:service, :class_memberships, :admins, :latest_edit]
+
+    queries do
+      get :class, :read
+      list :classes, :read
+    end
   end
 
   postgres do
@@ -30,7 +40,25 @@ defmodule ChurchAdmin.Organization.Class do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {InScope, access: :read}
+    end
   end
 
   attributes do
@@ -107,5 +135,30 @@ defmodule ChurchAdmin.Organization.Class do
       destination_attribute: :record_id,
       filter: expr(table == "classes"),
       public?: true
+
+    has_many :admins, User,
+      no_attributes?: true,
+      public?: true,
+      filter:
+        expr(
+          exists(
+            scope_grants,
+            admin_on_service == parent(parent(service_id)) and
+              service_study_year == parent(parent(service_study_year)) and
+              service_gender == parent(parent(service_gender))
+          )
+        )
+  end
+
+  calculations do
+    calculate :user_can_edit, :boolean, {UserCanEdit, entity: :class},
+      allow_nil?: false,
+      public?: true
+  end
+
+  aggregates do
+    first :service_name, :service, :name, public?: true
+    first :study_year_from_order, :study_year_from, :order, public?: true
+    first :study_year_to_order, :study_year_to, :order, public?: true
   end
 end

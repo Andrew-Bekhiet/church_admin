@@ -2,10 +2,13 @@ defmodule ChurchAdmin.Organization.Group do
   use Ash.Resource,
     domain: ChurchAdmin.Organization,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
 
   alias ChurchAdmin.Accounts.{ScopeGrant, User}
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
+  alias ChurchAdmin.Authz.Calculations.UserCanEdit
+  alias ChurchAdmin.Authz.Checks.{InScope, System}
   alias ChurchAdmin.Attendance.Meeting
   alias ChurchAdmin.Organization.Service
   alias ChurchAdmin.People.{GroupMembership, Person}
@@ -13,6 +16,13 @@ defmodule ChurchAdmin.Organization.Group do
 
   graphql do
     type :group
+
+    relationships [:service, :group_memberships, :admins, :latest_edit]
+
+    queries do
+      get :group, :read
+      list :groups, :read
+    end
   end
 
   postgres do
@@ -29,7 +39,25 @@ defmodule ChurchAdmin.Organization.Group do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {InScope, access: :read}
+    end
   end
 
   attributes do
@@ -70,6 +98,11 @@ defmodule ChurchAdmin.Organization.Group do
 
     has_many :scope_grants, ScopeGrant, destination_attribute: :admin_on_group, public?: true
 
+    has_many :admins, User,
+      no_attributes?: true,
+      public?: true,
+      filter: expr(exists(scope_grants, admin_on_group == parent(parent(id))))
+
     has_one :latest_edit, LatestEdit,
       destination_attribute: :record_id,
       filter: expr(table == "groups"),
@@ -79,6 +112,16 @@ defmodule ChurchAdmin.Organization.Group do
       destination_attribute: :record_id,
       filter: expr(table == "groups"),
       public?: true
+  end
+
+  calculations do
+    calculate :user_can_edit, :boolean, {UserCanEdit, entity: :group},
+      allow_nil?: false,
+      public?: true
+  end
+
+  aggregates do
+    first :service_name, :service, :name, public?: true
   end
 
   identities do
