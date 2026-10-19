@@ -55,7 +55,7 @@ void main() {
 
       expect(restored.title, extra.title);
       expect(restored.initialRangePreset, isA<PastMonthDateTimeRangePreset>());
-      expect((restored.subject as GroupAnalysisSubject).group, sampleGroup);
+      expect(restored.subject, extra.subject);
     });
 
     test('a meeting subject survives', () async {
@@ -63,7 +63,7 @@ void main() {
 
       final restored = await decodeAfterAppRestart(extra);
 
-      expect((restored.subject as MeetingAnalysisSubject).meeting, meeting);
+      expect(restored.subject, extra.subject);
     });
 
     test('a service subject survives', () async {
@@ -71,7 +71,7 @@ void main() {
 
       final restored = await decodeAfterAppRestart(extra);
 
-      expect((restored.subject as ServiceAnalysisSubject).service, service);
+      expect(restored.subject, extra.subject);
     });
 
     test('a class subject survives', () async {
@@ -79,7 +79,7 @@ void main() {
 
       final restored = await decodeAfterAppRestart(extra);
 
-      expect((restored.subject as ClassAnalysisSubject).class$, class$);
+      expect(restored.subject, extra.subject);
     });
 
     test('a custom range preset survives', () async {
