@@ -88,6 +88,16 @@ input AddressInput {
   apartmentNumber: Int
 }
 
+input MeetingInput {
+  showKodasCheckbox: Boolean
+  serviceStudyYear: Int
+  serviceGender: Boolean
+  name: String!
+  isArchived: Boolean
+  color: Int
+  audience: String
+}
+
 enum ServiceMembershipSortField {
   PERSON_ID
   SERVICE_ID
@@ -2948,6 +2958,51 @@ type MutationError {
   path: [String!]
 }
 
+"The result of the :delete_service mutation"
+type DeleteServiceResult {
+  "The record that was successfully deleted"
+  result: Service
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_service mutation"
+type UpdateServiceResult {
+  "The successful result of the mutation"
+  result: Service
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateServiceInput {
+  name: String
+  studyYearFromId: Int
+  studyYearToId: Int
+  nextServiceId: ID
+  color: Int
+  defaultMeetingId: ID
+}
+
+"The result of the :create_service mutation"
+type CreateServiceResult {
+  "The successful result of the mutation"
+  result: Service
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateServiceInput {
+  name: String!
+  studyYearFromId: Int
+  studyYearToId: Int
+  nextServiceId: ID
+  color: Int
+  defaultMeeting: MeetingInput
+}
+
 enum ServiceSortField {
   ID
   NAME
@@ -3320,6 +3375,48 @@ type Service {
   userCanEdit: Boolean!
 }
 
+"The result of the :delete_group mutation"
+type DeleteGroupResult {
+  "The record that was successfully deleted"
+  result: Group
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_group mutation"
+type UpdateGroupResult {
+  "The successful result of the mutation"
+  result: Group
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateGroupInput {
+  name: String
+  serviceId: ID
+  validity: String
+  color: Int
+  defaultMeetingId: ID
+}
+
+"The result of the :create_group mutation"
+type CreateGroupResult {
+  "The successful result of the mutation"
+  result: Group
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateGroupInput {
+  name: String!
+  serviceId: ID!
+  validity: String
+  color: Int
+}
+
 enum GroupSortField {
   ID
   NAME
@@ -3610,6 +3707,51 @@ type Group {
   defaultMeetingName: String
   lastEdit: DateTime
   userCanEdit: Boolean!
+}
+
+"The result of the :delete_class mutation"
+type DeleteClassResult {
+  "The record that was successfully deleted"
+  result: Class
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_class mutation"
+type UpdateClassResult {
+  "The successful result of the mutation"
+  result: Class
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateClassInput {
+  name: String
+  serviceId: ID
+  serviceStudyYear: Int
+  serviceGender: Boolean
+  color: Int
+  serviceStudyYearTo: Int
+}
+
+"The result of the :create_class mutation"
+type CreateClassResult {
+  "The successful result of the mutation"
+  result: Class
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateClassInput {
+  name: String!
+  serviceId: ID!
+  serviceStudyYear: Int!
+  serviceGender: Boolean
+  color: Int
+  serviceStudyYearTo: Int
 }
 
 enum ClassSortField {
@@ -5896,6 +6038,44 @@ type MeetingDay {
   meeting: Meeting
 }
 
+"The result of the :update_meeting mutation"
+type UpdateMeetingResult {
+  "The successful result of the mutation"
+  result: Meeting
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateMeetingInput {
+  name: String
+  audience: String
+  isArchived: Boolean
+  color: Int
+  showKodasCheckbox: Boolean
+}
+
+"The result of the :create_meeting mutation"
+type CreateMeetingResult {
+  "The successful result of the mutation"
+  result: Meeting
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateMeetingInput {
+  name: String!
+  serviceId: ID
+  serviceStudyYear: Int
+  serviceGender: Boolean
+  groupId: ID
+  audience: String
+  isArchived: Boolean
+  color: Int
+  showKodasCheckbox: Boolean
+}
+
 enum MeetingSortField {
   ID
   NAME
@@ -6140,6 +6320,44 @@ type Meeting {
     offset: Int
   ): [RosterEntry!]!
   heldDays(from: Date!, to: Date!): [Date!]
+}
+
+"The result of the :unmark_attendance mutation"
+type UnmarkAttendanceResult {
+  "The record that was successfully deleted"
+  result: AttendanceRecord
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_attendance_time mutation"
+type UpdateAttendanceTimeResult {
+  "The successful result of the mutation"
+  result: AttendanceRecord
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateAttendanceTimeInput {
+  datetime: DateTime
+}
+
+"The result of the :mark_attendance mutation"
+type MarkAttendanceResult {
+  "The successful result of the mutation"
+  result: AttendanceRecord
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input MarkAttendanceInput {
+  meetingId: ID!
+  personId: ID!
+  datetime: DateTime
+  asServant: Boolean
 }
 
 enum AttendanceRecordSortField {
@@ -11069,6 +11287,11 @@ type RootMutationType {
   recordKodas(input: RecordKodasInput!): RecordKodasResult
   deleteKodas(id: ID!): DeleteKodasResult
   recordVisit(input: RecordVisitInput!): RecordVisitResult
+  markAttendance(input: MarkAttendanceInput!): MarkAttendanceResult
+  updateAttendanceTime(id: ID!, input: UpdateAttendanceTimeInput): UpdateAttendanceTimeResult
+  unmarkAttendance(id: ID!): UnmarkAttendanceResult
+  createMeeting(input: CreateMeetingInput!): CreateMeetingResult
+  updateMeeting(id: ID!, input: UpdateMeetingInput): UpdateMeetingResult
   createArea(input: CreateAreaInput!): CreateAreaResult
   updateArea(id: ID!, input: UpdateAreaInput): UpdateAreaResult
   deleteArea(id: ID!): DeleteAreaResult
@@ -11079,6 +11302,15 @@ type RootMutationType {
   createStreet(input: CreateStreetInput!): CreateStreetResult
   updateStreet(id: ID!, input: UpdateStreetInput): UpdateStreetResult
   deleteStreet(id: ID!): DeleteStreetResult
+  createClass(input: CreateClassInput!): CreateClassResult
+  updateClass(id: ID!, input: UpdateClassInput): UpdateClassResult
+  deleteClass(id: ID!): DeleteClassResult
+  createGroup(input: CreateGroupInput!): CreateGroupResult
+  updateGroup(id: ID!, input: UpdateGroupInput): UpdateGroupResult
+  deleteGroup(id: ID!): DeleteGroupResult
+  createService(input: CreateServiceInput!): CreateServiceResult
+  updateService(id: ID!, input: UpdateServiceInput): UpdateServiceResult
+  deleteService(id: ID!): DeleteServiceResult
 }
 
 """

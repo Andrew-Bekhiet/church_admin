@@ -16,19 +16,13 @@ function auth.user_can_edit_service(services, json)
 function auth.user_can_edit_store(stores, json)
 function auth.user_can_edit_street(streets, json)
 function auth.user_can_edit_user(auth.users_data, json)
-function history.check_attendance_history_meeting()
-function history.check_meeting_service_study_year_rel()
 function history.edit_history_trigger()
-function history.maybe_remove_group_archived_default_meeting()
-function history.maybe_remove_service_archived_default_meeting()
 function history.sync_user_with_person_trigger()
 function public.assert_caller_can_change_person_user_link()
 function public.check_address_insertion()
-function public.check_group_default_meeting_belongs_to_group()
 function public.check_person_group_service_rel()
 function public.check_persons_service_rel()
 function public.check_row_insertion_permission()
-function public.check_service_default_meeting_belongs_to_service()
 function public.claim_contact_for_sole_family_member()
 function public.claim_family_contacts_for_sole_member()
 function public.family_inserted_in_current_transaction(families)
@@ -43,15 +37,9 @@ function public.soft_delete_trigger()
 trigger auth.users_admin_on.sync_users_permissions_by_entity_id_cache
 trigger auth.users_data.sync_users_permissions_by_entity_id_cache
 trigger auth.users_permissions.sync_users_permissions_by_entity_id_cache
-trigger history.attendance_history.check_attendance_history_meeting
-trigger history.meetings.check_service_study_year_rel
-trigger history.meetings.maybe_remove_group_archived_default_meeting
-trigger history.meetings.maybe_remove_service_archived_default_meeting
 trigger public.addresses.check_address_insertion
 trigger public.addresses.sync_users_permissions_by_entity_id_cache
 trigger public.areas_streets.sync_users_permissions_by_entity_id_cache
-trigger public.classes.edit_history
-trigger public.classes.soft_delete_classes
 trigger public.classes.sync_users_permissions_by_entity_id_cache
 trigger public.contacts.claim_contact_for_sole_family_member
 trigger public.contacts.keep_one_main_contact_per_owner
@@ -62,9 +50,6 @@ trigger public.families.edit_history
 trigger public.families.remember_family_inserted_in_transaction
 trigger public.families.soft_delete_families
 trigger public.families_families.edit_history
-trigger public.groups.check_group_default_meeting_belongs_to_group
-trigger public.groups.edit_history
-trigger public.groups.soft_delete_groups
 trigger public.persons.assert_caller_can_change_person_user_link
 trigger public.persons.check_person_insertion_permission
 trigger public.persons.claim_family_contacts_on_insert
@@ -83,8 +68,5 @@ trigger public.persons_services.check_persons_service_rel
 trigger public.persons_services.edit_history
 trigger public.persons_services.sync_users_permissions_by_entity_id_cache
 trigger public.persons_tags.edit_history
-trigger public.services.check_service_default_meeting_belongs_to_service
-trigger public.services.edit_history
-trigger public.services.soft_delete_services
 trigger public.stores.check_store_insertion
 trigger public.users_preferences.set_public_users_preferences_updated_at

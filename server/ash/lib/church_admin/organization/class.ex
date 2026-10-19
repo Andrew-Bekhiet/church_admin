@@ -2,7 +2,7 @@ defmodule ChurchAdmin.Organization.Class do
   use Ash.Resource,
     domain: ChurchAdmin.Organization,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource],
+    extensions: [AshGraphql.Resource, AshArchival.Resource],
     fragments: [
       ChurchAdmin.Authz.Fragments.ScopedEntity,
       ChurchAdmin.Archival.HideArchived,
@@ -12,9 +12,12 @@ defmodule ChurchAdmin.Organization.Class do
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
-  alias ChurchAdmin.Authz.Checks.{InScope, System}
   alias ChurchAdmin.Attendance.Meeting
+  alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, RelatedInScope, System}
   alias ChurchAdmin.Catalog.StudyYear
+  alias ChurchAdmin.Changes.StampActor
+  alias ChurchAdmin.History.Changes.RecordEdit
+  alias ChurchAdmin.Organization.Changes.DefaultStudyYearToFromYear
   alias ChurchAdmin.Organization.Service
   alias ChurchAdmin.People.{ClassMembership, Person}
   alias ChurchAdmin.Types.Text
@@ -36,6 +39,12 @@ defmodule ChurchAdmin.Organization.Class do
       get :class, :read
       list :classes, :read
     end
+
+    mutations do
+      create :create_class, :create_class
+      update :update_class, :update_class
+      destroy :delete_class, :destroy
+    end
   end
 
   postgres do
@@ -51,6 +60,12 @@ defmodule ChurchAdmin.Organization.Class do
     end
   end
 
+  archive do
+    attribute :deleted_at
+    base_filter?(true)
+    exclude_destroy_actions([:hard_destroy])
+  end
+
   actions do
     read :read do
       primary? true
@@ -60,6 +75,37 @@ defmodule ChurchAdmin.Organization.Class do
                  required?: false,
                  default_limit: 100,
                  max_page_size: 1000
+    end
+
+    create :create_class do
+      accept [:name, :color, :service_id, :service_study_year, :service_gender]
+      argument :service_study_year_to, :integer
+
+      change DefaultStudyYearToFromYear
+    end
+
+    update :update_class do
+      accept [
+        :name,
+        :color,
+        :service_id,
+        :service_study_year,
+        :service_study_year_to,
+        :service_gender
+      ]
+
+      require_atomic? false
+    end
+
+    destroy :destroy do
+      primary? true
+      require_atomic? false
+
+      change {StampActor, attribute: :deleted_by}
+    end
+
+    destroy :hard_destroy do
+      require_atomic? false
     end
 
     update :place_cohort do
@@ -73,6 +119,10 @@ defmodule ChurchAdmin.Organization.Class do
     end
   end
 
+  changes do
+    change {RecordEdit, table: "classes"}, on: [:create, :update, :destroy]
+  end
+
   policies do
     bypass System do
       authorize_if always()
@@ -80,6 +130,21 @@ defmodule ChurchAdmin.Organization.Class do
 
     policy action_type(:read) do
       authorize_if {InScope, access: :read}
+    end
+
+    policy action(:create_class) do
+      authorize_if {HasPermission, name: "writeAllData"}
+      authorize_if {RelatedInScope, path: :service, entity: :service, access: :edit}
+    end
+
+    policy action(:destroy) do
+      authorize_if {HasPermission, name: "writeAllData"}
+      authorize_if {HasPermission, name: "deleteData"}
+      authorize_if {RelatedInScope, path: :service, entity: :service, access: :edit}
+    end
+
+    policy action(:hard_destroy) do
+      forbid_if always()
     end
   end
 

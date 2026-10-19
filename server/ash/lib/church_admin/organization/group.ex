@@ -2,7 +2,7 @@ defmodule ChurchAdmin.Organization.Group do
   use Ash.Resource,
     domain: ChurchAdmin.Organization,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource],
+    extensions: [AshGraphql.Resource, AshArchival.Resource],
     fragments: [
       ChurchAdmin.Authz.Fragments.ScopedEntity,
       ChurchAdmin.Archival.HideArchived,
@@ -12,9 +12,13 @@ defmodule ChurchAdmin.Organization.Group do
   alias ChurchAdmin.Accounts.{ScopeGrant, User}
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
-  alias ChurchAdmin.Authz.Checks.{InScope, System}
   alias ChurchAdmin.Attendance.Meeting
+  alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, System}
+  alias ChurchAdmin.Changes.StampActor
+  alias ChurchAdmin.Errors.Codes
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.Organization.Service
+  alias ChurchAdmin.Organization.Validations.DefaultMeetingBelongsToOwner
   alias ChurchAdmin.People.{GroupMembership, Person}
   alias ChurchAdmin.Types.{DateRange, Text}
 
@@ -34,6 +38,12 @@ defmodule ChurchAdmin.Organization.Group do
       get :group, :read
       list :groups, :read
     end
+
+    mutations do
+      create :create_group, :create_group
+      update :update_group, :update_group
+      destroy :delete_group, :destroy
+    end
   end
 
   postgres do
@@ -49,6 +59,12 @@ defmodule ChurchAdmin.Organization.Group do
     end
   end
 
+  archive do
+    attribute :deleted_at
+    base_filter?(true)
+    exclude_destroy_actions([:hard_destroy])
+  end
+
   actions do
     read :read do
       primary? true
@@ -59,6 +75,44 @@ defmodule ChurchAdmin.Organization.Group do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :create_group do
+      accept [:name, :color, :service_id, :validity]
+    end
+
+    update :update_group do
+      accept [:name, :color, :service_id, :validity, :default_meeting_id]
+      require_atomic? false
+    end
+
+    update :clear_default_meeting do
+      require_atomic? false
+      change set_context(%{skip_scope_recheck?: true})
+      change set_attribute(:default_meeting_id, nil)
+    end
+
+    destroy :destroy do
+      primary? true
+      require_atomic? false
+
+      change {StampActor, attribute: :deleted_by}
+    end
+
+    destroy :hard_destroy do
+      require_atomic? false
+    end
+  end
+
+  changes do
+    change {RecordEdit, table: "groups"}, on: [:create, :update, :destroy]
+  end
+
+  validations do
+    validate {DefaultMeetingBelongsToOwner,
+              owner_column: :group_id,
+              mismatch: Codes.group_default_meeting_mismatch(),
+              archived: Codes.group_default_meeting_archived()},
+             on: [:update]
   end
 
   policies do
@@ -68,6 +122,22 @@ defmodule ChurchAdmin.Organization.Group do
 
     policy action_type(:read) do
       authorize_if {InScope, access: :read}
+    end
+
+    policy action(:create_group) do
+      authorize_if actor_attribute_equals(:write_all?, true)
+    end
+
+    policy action(:destroy) do
+      authorize_if {HasPermission, name: "deleteData"}
+    end
+
+    policy action(:destroy) do
+      authorize_if {InScope, access: :edit}
+    end
+
+    policy action(:hard_destroy) do
+      forbid_if always()
     end
   end
 
