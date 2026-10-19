@@ -10,10 +10,7 @@ void main() {
       .redirectTo<Object>(StreetFields().name);
 
   final fieldKinds = <String, ({FieldMetadata field, Json Function(Json) at})>{
-    'a plain field': (
-      field: AreaFields().name,
-      at: (leaf) => {'name': leaf},
-    ),
+    'a plain field': (field: AreaFields().name, at: (leaf) => {'name': leaf}),
     'a redirecting field': (
       field: streetOfPerson,
       at: (leaf) => {
@@ -22,10 +19,7 @@ void main() {
         },
       },
     ),
-    'the dot field': (
-      field: const DotField(),
-      at: (leaf) => leaf,
-    ),
+    'the dot field': (field: const DotField(), at: (leaf) => leaf),
   };
 
   Json translate(FieldMetadata field, Operator operator, Object? value) =>
@@ -194,9 +188,8 @@ void main() {
         'date is on or after': (
           operator: DateTimeOperator.isOnOrAfter,
           value: moment,
-          expected: (at) => at({
-            'greaterThanOrEqual': moment.toIso8601String(),
-          }),
+          expected: (at) =>
+              at({'greaterThanOrEqual': moment.toIso8601String()}),
         ),
         'date is before': (
           operator: DateTimeOperator.isBefore,
@@ -306,18 +299,15 @@ void main() {
     });
 
     test('a logical operator on a relationship field nests under it', () {
-      expect(
-        translate(PersonFields().address, LogicalOperator.or, [nameIsA]),
-        {
-          'address': {
-            'or': [
-              {
-                'name': {'eq': 'a'},
-              },
-            ],
-          },
+      expect(translate(PersonFields().address, LogicalOperator.or, [nameIsA]), {
+        'address': {
+          'or': [
+            {
+              'name': {'eq': 'a'},
+            },
+          ],
         },
-      );
+      });
     });
   });
 
@@ -410,23 +400,18 @@ void main() {
     });
 
     test('any of enum values sends the upper-case server enum values', () {
-      expect(
-        translate(workStatus, MultiSelectOperator.anyOf, [employed]),
-        {
-          'workStatus': {
-            'in': ['EMPLOYED'],
-          },
+      expect(translate(workStatus, MultiSelectOperator.anyOf, [employed]), {
+        'workStatus': {
+          'in': ['EMPLOYED'],
         },
-      );
+      });
     });
 
     test('multi-word enum values become SCREAMING_SNAKE', () {
       expect(
-        translate(
-          UserFields().permissions,
-          MultiSelectOperator.anyOf,
-          [manageUsersPermission],
-        ),
+        translate(UserFields().permissions, MultiSelectOperator.anyOf, [
+          manageUsersPermission,
+        ]),
         {
           'permissions': {
             'permission': {
@@ -438,14 +423,11 @@ void main() {
     });
 
     test('enum values given as plain strings are converted too', () {
-      expect(
-        translate(workStatus, MultiSelectOperator.anyOf, ['employed']),
-        {
-          'workStatus': {
-            'in': ['EMPLOYED'],
-          },
+      expect(translate(workStatus, MultiSelectOperator.anyOf, ['employed']), {
+        'workStatus': {
+          'in': ['EMPLOYED'],
         },
-      );
+      });
     });
 
     test('none of negates the membership test over the whole path', () {
@@ -502,21 +484,14 @@ void main() {
     });
 
     test('is not empty on an enum field tests the value itself', () {
-      expect(
-        translate(workStatus, MultiSelectOperator.isNotEmpty, null),
-        {
-          'workStatus': {'isNil': false},
-        },
-      );
+      expect(translate(workStatus, MultiSelectOperator.isNotEmpty, null), {
+        'workStatus': {'isNil': false},
+      });
     });
 
     test('is not empty goes through a many-to-many redirect', () {
       expect(
-        translate(
-          PersonFields().classes,
-          MultiSelectOperator.isNotEmpty,
-          null,
-        ),
+        translate(PersonFields().classes, MultiSelectOperator.isNotEmpty, null),
         {
           'classes': {
             'class': {
@@ -529,11 +504,7 @@ void main() {
 
     test('any of without a value behaves like is not empty', () {
       expect(
-        translate(
-          PersonFields().shammasLevel,
-          MultiSelectOperator.anyOf,
-          null,
-        ),
+        translate(PersonFields().shammasLevel, MultiSelectOperator.anyOf, null),
         translate(
           PersonFields().shammasLevel,
           MultiSelectOperator.isNotEmpty,
@@ -622,12 +593,9 @@ void main() {
         PersonFields().mainPhone,
       );
 
-      expect(
-        translate(userPhone, PhoneOperator.isNotEmpty, ''),
-        {
-          'person': phone({'isNil': false}),
-        },
-      );
+      expect(translate(userPhone, PhoneOperator.isNotEmpty, ''), {
+        'person': phone({'isNil': false}),
+      });
     });
   });
 
