@@ -121,6 +121,34 @@ void main() {
           );
 
           testWidgets(
+            'offers editing only once the details query has answered, with '
+            'the object it loaded rather than the one the list showed',
+            (tester) async {
+              const listed = Area(id: 'id', name: 'name');
+              final streamController = StreamController<Area?>();
+              addTearDown(streamController.close);
+              final editedObjects = <Area>[];
+
+              await _pumpWidget(
+                tester,
+                listed,
+                streamController: streamController,
+                editedObjects: editedObjects,
+              );
+              final editOfferedBeforeAnswer = find
+                  .byKey(const ValueKey('editButton'))
+                  .evaluate()
+                  .isNotEmpty;
+              streamController.add(area);
+              await tester.pump();
+              await tester.tap(find.byKey(const ValueKey('editButton')));
+
+              expect(editOfferedBeforeAnswer, isFalse);
+              expect(editedObjects, [area]);
+            },
+          );
+
+          testWidgets(
             'Deleted/Not Found',
             (tester) async {
               final streamController = StreamController<Area?>()..add(null);
@@ -191,6 +219,7 @@ Future<void> _pumpWidget(
   WidgetTester tester,
   Area area, {
   StreamController<Area?>? streamController,
+  List<Area>? editedObjects,
   Size? size,
 }) async {
   final surfaceSize = size ?? const Size(1080, 1920);
@@ -213,9 +242,10 @@ Future<void> _pumpWidget(
         objectStream: objectStreamController.stream,
         notFoundBuilder: (context) =>
             const Placeholder(key: ValueKey('notFound')),
-        editButtonBuilder: (context, person) => const Icon(
-          Symbols.edit,
-          key: ValueKey('editButton'),
+        editButtonBuilder: (context, loaded) => IconButton(
+          key: const ValueKey('editButton'),
+          icon: const Icon(Symbols.edit),
+          onPressed: () => editedObjects?.add(loaded),
         ),
         detailsBuilder: (context, person) => const SliverToBoxAdapter(
           child: Placeholder(
