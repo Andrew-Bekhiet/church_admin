@@ -56,7 +56,7 @@ defmodule ChurchAdmin.Operations.StudyYearRoll do
       [] ->
         step_counts = Apply.apply!(plan)
 
-        with :ok <- Invariants.check(plan) do
+        with :ok <- Invariants.check(Invariants.written_by(plan)) do
           step_counts = Map.new(step_counts)
           create_run!(:create_succeeded_run, season, %{step_counts: step_counts})
           {:ok, step_counts}

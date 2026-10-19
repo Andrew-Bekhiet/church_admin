@@ -1,14 +1,17 @@
 defmodule ChurchAdmin.Operations.StudyYearRoll.Invariants do
   @moduledoc """
-  The person invariants a roll must leave intact, checked as set-based
-  violation queries after the plan is applied and inside its transaction, so
-  a violation rolls every step back. They are the checks the deferred
-  `persons_container_check` and `check_persons_service_rel` triggers made at
-  the end of the roll, with the same messages:
+  The person invariants a roll must leave intact on the rows it writes,
+  checked as set-based violation queries after the plan is applied and
+  inside its transaction, so a violation rolls every step back. They are the
+  checks the deferred `persons_container_check` and `check_persons_service_rel`
+  triggers made on the roll's own writes, with the same messages:
 
-    * every person keeps a family, store, uid, service or group;
-    * every service membership of a person the roll advanced fits the
-      service's study year range (an ungraded person or service always fits).
+    * every person the roll updated keeps a family, store, uid, service or
+      group;
+    * every service membership the roll inserted fits the service's study
+      year range (an ungraded person or service always fits).
+
+  Violations among rows the roll did not write never fail it.
   """
 
   alias ChurchAdmin.Authz.Actor
@@ -17,18 +20,37 @@ defmodule ChurchAdmin.Operations.StudyYearRoll.Invariants do
 
   require Ash.Query
 
-  @spec check(Plan.t()) :: :ok | {:error, Failure.t()}
-  def check(%Plan{} = plan) do
-    with :ok <- every_person_has_a_container() do
-      memberships_fit_service_ranges(Enum.map(plan.persons, & &1.id))
+  @type written :: %{
+          person_ids: [Ecto.UUID.t()],
+          service_memberships: [{person_id :: Ecto.UUID.t(), service_id :: Ecto.UUID.t()}]
+        }
+
+  @spec written_by(Plan.t()) :: written()
+  def written_by(%Plan{} = plan) do
+    %{
+      person_ids: Enum.map(plan.persons, & &1.id),
+      service_memberships:
+        for(
+          %{action: :move} = moving <- plan.leaving,
+          do: {moving.person_id, moving.destination_service_id}
+        )
+    }
+  end
+
+  @spec check(written()) :: :ok | {:error, Failure.t()}
+  def check(%{person_ids: person_ids, service_memberships: service_memberships}) do
+    with :ok <- updated_persons_keep_a_container(person_ids) do
+      inserted_memberships_fit_service_ranges(service_memberships)
     end
   end
 
-  defp every_person_has_a_container do
+  defp updated_persons_keep_a_container([]), do: :ok
+
+  defp updated_persons_keep_a_container(person_ids) do
     uncontained? =
       Person
       |> Ash.Query.filter(
-        is_nil(family_id) and is_nil(store_id) and is_nil(uid) and
+        id in ^person_ids and is_nil(family_id) and is_nil(store_id) and is_nil(uid) and
           not exists(service_memberships, true) and not exists(group_memberships, true)
       )
       |> Ash.exists?(actor: Actor.system())
@@ -43,12 +65,16 @@ defmodule ChurchAdmin.Operations.StudyYearRoll.Invariants do
     end
   end
 
-  defp memberships_fit_service_ranges([]), do: :ok
+  defp inserted_memberships_fit_service_ranges([]), do: :ok
 
-  defp memberships_fit_service_ranges(person_ids) do
+  defp inserted_memberships_fit_service_ranges(memberships) do
+    inserted = MapSet.new(memberships)
+    {person_ids, service_ids} = Enum.unzip(memberships)
+
     ServiceMembership
     |> Ash.Query.filter(
-      person_id in ^person_ids and not is_nil(person.study_year_id) and
+      person_id in ^Enum.uniq(person_ids) and service_id in ^Enum.uniq(service_ids) and
+        not is_nil(person.study_year_id) and
         not (is_nil(service.study_year_from_id) and is_nil(service.study_year_to_id)) and
         not (not is_nil(service.study_year_from_id) and not is_nil(service.study_year_to_id) and
                service.study_year_from_id <= person.study_year_id and
@@ -56,6 +82,7 @@ defmodule ChurchAdmin.Operations.StudyYearRoll.Invariants do
     )
     |> Ash.Query.sort(person_id: :asc, service_id: :asc)
     |> Ash.read!(actor: Actor.system(), page: false)
+    |> Enum.filter(&MapSet.member?(inserted, {&1.person_id, &1.service_id}))
     |> case do
       [] ->
         :ok
