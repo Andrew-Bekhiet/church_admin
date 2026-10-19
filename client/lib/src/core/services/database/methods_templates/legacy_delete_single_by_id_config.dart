@@ -4,31 +4,29 @@ import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class CreateObjectConfig<T> extends DAOMethodTemplate<T> {
-  final CreateObjectConfigVarsConstructor<T>? varsConstructor;
+class LegacyDeleteSingleByIdConfig<T> extends DAOMethodTemplate<T?> {
+  final LegacyDeleteSingleByIdConfigVarsConstructor? varsConstructor;
+
   final MutationOptions<T>? operationOptions;
 
-  @override
-  T Function(Json)? get parserFn => super.parserFn as T Function(Json)?;
-
-  const CreateObjectConfig({
+  const LegacyDeleteSingleByIdConfig({
     required super.document,
     this.varsConstructor,
     this.operationOptions,
     super.operationName,
     super.variables,
-    T Function(Json)? super.parserFn,
+    super.parserFn,
   });
 
-  CreateObjectConfig<T> copyWith({
+  LegacyDeleteSingleByIdConfig copyWith({
     DocumentNode? document,
     String? operationName,
     Json? variables,
-    CreateObjectConfigVarsConstructor<T>? varsConstructor,
+    LegacyDeleteSingleByIdConfigVarsConstructor? varsConstructor,
     MutationOptions<T>? operationOptions,
-    T Function(Json)? parserFn,
+    T? Function(Json)? parserFn,
   }) {
-    return CreateObjectConfig<T>(
+    return LegacyDeleteSingleByIdConfig(
       document: document ?? this.document,
       operationName: operationName ?? super.effectiveOperationName,
       variables: variables ?? this.variables,
@@ -39,6 +37,6 @@ class CreateObjectConfig<T> extends DAOMethodTemplate<T> {
   }
 }
 
-typedef CreateObjectConfigVarsConstructor<T> = Json Function({
-  required T newObject,
+typedef LegacyDeleteSingleByIdConfigVarsConstructor = Json Function({
+  required UuidValue id,
 });

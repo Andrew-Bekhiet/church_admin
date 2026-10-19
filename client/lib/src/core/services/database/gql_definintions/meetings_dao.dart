@@ -5,36 +5,36 @@ import 'package:church_admin/src/core/services/database/gql_definintions/meeting
 import 'package:graphql/client.dart';
 
 class MeetingsDAO extends DAOBase<Meeting>
-    with StreamableDAO<Meeting>, CreatableDAO<Meeting>, UpdatableDAO<Meeting> {
+    with LegacyStreamableDAO<Meeting>, LegacyCreatableDAO<Meeting>, LegacyUpdatableDAO<Meeting> {
   @override
-  late final StreamAllConfig<Meeting> baseStreamAllConfig =
-      const StreamAllConfig(
+  late final LegacyStreamAllConfig<Meeting> baseStreamAllConfig =
+      const LegacyStreamAllConfig(
         document: documentNodeSubscriptionwatchAllMeetings,
       );
 
   @override
-  late final StreamSingleByIdConfig<Meeting> baseStreamSingleByIdConfig =
-      StreamSingleByIdConfig(
+  late final LegacyStreamSingleByIdConfig<Meeting> baseStreamSingleByIdConfig =
+      LegacyStreamSingleByIdConfig(
         document: documentNodeSubscriptionwatchMeeting,
         varsConstructor: _streamSingleByIdVarsConstructor,
       );
 
   @override
-  late final UpdateObjectConfig<Meeting> baseUpdateObjectConfig =
-      UpdateObjectConfig(
+  late final LegacyUpdateObjectConfig<Meeting> baseUpdateObjectConfig =
+      LegacyUpdateObjectConfig(
         document: documentNodeMutationupdateMeeting,
         varsConstructor: _updateMeetingVarsConstructor,
       );
 
   @override
-  late final CreateObjectConfig<Meeting> baseCreateObjectConfig =
-      CreateObjectConfig(
+  late final LegacyCreateObjectConfig<Meeting> baseCreateObjectConfig =
+      LegacyCreateObjectConfig(
         document: documentNodeMutationinsertMeeting,
         varsConstructor: _createMeetingVarsConstructor,
       );
 
   @override
-  StreamCountConfig<Meeting>? get baseStreamCountConfig => null;
+  LegacyStreamCountConfig<Meeting>? get baseStreamCountConfig => null;
 
   MeetingsDAO({required super.db}) : super(fromJson: Meeting.fromJson);
 
@@ -202,7 +202,7 @@ class MeetingsDAO extends DAOBase<Meeting>
     required DateTime fromDate,
     required DateTime toDate,
   }) {
-    return graphQLClient.subscribeAndReturnParsed(
+    return graphQLClient.legacySubscribeAndReturnParsed(
       SubscriptionOptions(
         document: documentNodeSubscriptionwatchAttendanceHistory,
         operationName: 'watchAttendanceHistory',
@@ -464,7 +464,7 @@ class MeetingsDAO extends DAOBase<Meeting>
     return PaginatableStream.simple(
       pageSize: limit ?? 100,
       factory: (request) {
-        return graphQLClient.subscribeAndReturnParsed(
+        return graphQLClient.legacySubscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonMeetingAttendance,
             operationName: 'personMeetingAttendance',

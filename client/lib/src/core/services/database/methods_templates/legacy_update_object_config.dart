@@ -4,11 +4,12 @@ import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class StreamSingleByIdConfig<T> extends DAOMethodTemplate<T?> {
-  final StreamSingleByIdConfigVarsConstructor? varsConstructor;
-  final SubscriptionOptions<T>? operationOptions;
+class LegacyUpdateObjectConfig<T> extends DAOMethodTemplate<T> {
+  final LegacyUpdateObjectConfigVarsConstructor<T>? varsConstructor;
 
-  const StreamSingleByIdConfig({
+  final MutationOptions<T>? operationOptions;
+
+  const LegacyUpdateObjectConfig({
     required super.document,
     this.varsConstructor,
     this.operationOptions,
@@ -17,15 +18,15 @@ class StreamSingleByIdConfig<T> extends DAOMethodTemplate<T?> {
     super.parserFn,
   });
 
-  StreamSingleByIdConfig<T> copyWith({
+  LegacyUpdateObjectConfig<T> copyWith({
     DocumentNode? document,
     String? operationName,
     Json? variables,
-    StreamSingleByIdConfigVarsConstructor? varsConstructor,
-    SubscriptionOptions<T>? operationOptions,
-    T? Function(Json)? parserFn,
+    LegacyUpdateObjectConfigVarsConstructor<T>? varsConstructor,
+    MutationOptions<T>? operationOptions,
+    T Function(Json)? parserFn,
   }) {
-    return StreamSingleByIdConfig<T>(
+    return LegacyUpdateObjectConfig<T>(
       document: document ?? this.document,
       operationName: operationName ?? super.effectiveOperationName,
       variables: variables ?? this.variables,
@@ -36,6 +37,7 @@ class StreamSingleByIdConfig<T> extends DAOMethodTemplate<T?> {
   }
 }
 
-typedef StreamSingleByIdConfigVarsConstructor = Json Function({
-  required UuidValue id,
+typedef LegacyUpdateObjectConfigVarsConstructor<T> = Json Function({
+  required T newObject,
+  required T oldObject,
 });

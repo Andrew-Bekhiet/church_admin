@@ -2,9 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 
-mixin CreatableDAO<T extends ViewableWithID> on DAOBase<T> {
+mixin LegacyCreatableDAO<T extends ViewableWithID> on DAOBase<T> {
   @protected
-  CreateObjectConfig<T> get baseCreateObjectConfig;
+  LegacyCreateObjectConfig<T> get baseCreateObjectConfig;
 
   Future<T> createObject({
     required T newObject,

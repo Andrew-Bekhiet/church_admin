@@ -43,7 +43,7 @@ class DBGraphQLClient extends GraphQLClient {
           ):
         return result;
 
-      case final exception?:
+      case final exception:
         throw BackendException.fromOperationException(exception);
     }
   }
@@ -102,17 +102,7 @@ class DBGraphQLClient extends GraphQLClient {
     return stream.map(_exceptionsMiddleware);
   }
 
-  Stream<T?> subscribeAndReturnParsedNullable<T>(
-    SubscriptionOptions<T?> options, {
-    bool? autoChangeFetchPolicy,
-  }) {
-    return subscribe(
-      options,
-      autoChangeFetchPolicy: autoChangeFetchPolicy,
-    ).map((r) => r.parsedData);
-  }
-
-  Stream<T> subscribeAndReturnParsed<T>(
+  Stream<T> legacySubscribeAndReturnParsed<T>(
     SubscriptionOptions<T> options,
   ) {
     return subscribe(options).map((r) => r.parsedData!);

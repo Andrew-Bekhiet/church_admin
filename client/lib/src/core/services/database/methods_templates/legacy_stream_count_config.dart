@@ -4,13 +4,13 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class StreamCountConfig<T> extends DAOMethodTemplate<int> {
+class LegacyStreamCountConfig<T> extends DAOMethodTemplate<int> {
   final SubscriptionOptions<int>? operationOptions;
 
   @override
   int Function(Json)? get parserFn => super.parserFn as int Function(Json)?;
 
-  const StreamCountConfig({
+  const LegacyStreamCountConfig({
     required super.document,
     this.operationOptions,
     super.operationName,
@@ -18,14 +18,14 @@ class StreamCountConfig<T> extends DAOMethodTemplate<int> {
     int Function(Json)? super.parserFn,
   });
 
-  StreamCountConfig<T> copyWith({
+  LegacyStreamCountConfig<T> copyWith({
     DocumentNode? document,
     String? operationName,
     Json? variables,
     SubscriptionOptions<int>? operationOptions,
     int Function(Json)? parserFn,
   }) {
-    return StreamCountConfig<T>(
+    return LegacyStreamCountConfig<T>(
       document: document ?? this.document,
       operationName: operationName ?? super.effectiveOperationName,
       variables: variables ?? this.variables,
