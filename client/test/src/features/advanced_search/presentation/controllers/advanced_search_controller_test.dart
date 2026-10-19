@@ -62,7 +62,7 @@ void main() {
 
           final newOrderBy = [
             OrderBy(field: PersonFields().mainPhone),
-            OrderBy(field: PersonFields().address),
+            OrderBy(field: PersonFields().birthdate),
           ];
           const newLimit = 10;
           final newType = AdvancedQueriesMetadata().area;
@@ -222,7 +222,7 @@ void main() {
               value: OrderByValue.desc,
             ),
             OrderBy(
-              field: PersonFields().address,
+              field: PersonFields().birthdate,
             ),
           ];
 

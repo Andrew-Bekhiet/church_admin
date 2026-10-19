@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.graphql.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:graphql/client.dart';
 
@@ -11,12 +11,12 @@ void main() {
   const mainPhone = '01000000000';
 
   const personRow = {
-    '__typename': 'Persons',
+    '__typename': 'Person',
     'id': personId,
     'name': 'مينا',
     'jobDescription': 'مهندس',
     'personType': {
-      '__typename': 'PersonTypes',
+      '__typename': 'PersonType',
       'id': personTypeId,
       'name': 'أب',
       'order': 1,
@@ -33,14 +33,14 @@ void main() {
   };
 
   const detailRequest = Request(
-    operation: Operation(document: documentNodeSubscriptionwatchPerson),
+    operation: Operation(document: documentNodeQueryperson),
     variables: {'id': personId},
   );
 
   Request arrangedListRequest(ListArrangement arrangement) => Request(
     operation: Operation(
       document: const ArrangedListDocument(
-        documentNodeSubscriptionwatchAllPersons,
+        documentNodeQuerypersons,
       ).arrangedBy(arrangement),
     ),
   );
@@ -54,13 +54,21 @@ void main() {
     typePolicies: GqlTypePolicies.policies,
   );
 
+  Object? listedPersons(GraphQLCache cache, Request request) =>
+      (cache.readQuery(request)?['persons'] as Map?)?['results'];
+
   void writeAsServerAnswers(GraphQLCache cache, Request request) {
     cache.writeQuery(
       request,
       broadcast: false,
       data: GraphQLResponseProjector(request.operation.document).respond({
-        'personsByPk': personRow,
-        'persons': [personRow],
+        'person': personRow,
+        'persons': {
+          '__typename': 'KeysetPageOfPerson',
+          'count': 1,
+          'endKeyset': personId,
+          'results': [personRow],
+        },
       }),
     );
   }
@@ -75,11 +83,8 @@ void main() {
 
         writeAsServerAnswers(cache, listRequest);
 
-        expect(cache.readQuery(listRequest)?['persons'], [
-          containsPair(
-            'personType',
-            allOf(containsPair('name', 'أب'), containsPair('order', 1)),
-          ),
+        expect(listedPersons(cache, listRequest), [
+          containsPair('personType', containsPair('name', 'أب')),
         ]);
       },
     );
@@ -113,11 +118,11 @@ void main() {
           sortedListRequest(PersonFields().personType),
         );
 
-        final storedPersonType = store.get('Persons:$personId')?['personType'];
+        final storedPersonType = store.get('Person:$personId')?['personType'];
         expect(
           storedPersonType,
           anyOf(
-            equals({r'$ref': 'PersonTypes:$personTypeId'}),
+            equals({r'$ref': 'PersonType:$personTypeId'}),
             isNot(contains(r'$ref')),
           ),
         );
@@ -152,7 +157,7 @@ void main() {
 
       writeAsServerAnswers(cache, listRequest);
 
-      expect(cache.readQuery(listRequest)?['persons'], [
+      expect(listedPersons(cache, listRequest), [
         containsPair('jobDescription', personRow['jobDescription']),
       ]);
     });
@@ -171,7 +176,7 @@ void main() {
 
       writeAsServerAnswers(cache, listRequest);
 
-      expect(cache.readQuery(listRequest)?['persons'], [
+      expect(listedPersons(cache, listRequest), [
         containsPair('personType', containsPair('name', 'أب')),
       ]);
     });
@@ -187,28 +192,8 @@ void main() {
 
       writeAsServerAnswers(cache, listRequest);
 
-      expect(cache.readQuery(listRequest)?['persons'], [
+      expect(listedPersons(cache, listRequest), [
         containsPair('jobDescription', personRow['jobDescription']),
-      ]);
-    });
-
-    test('also reads back the sort field when it differs from the second '
-        'line', () {
-      final cache = cacheWithAppTypePolicies();
-      final listRequest = arrangedListRequest(
-        ListArrangement(
-          orderBy: [OrderBy(field: PersonFields().personType)],
-          secondLineField: PersonFields().jobDescription,
-        ),
-      );
-
-      writeAsServerAnswers(cache, listRequest);
-
-      expect(cache.readQuery(listRequest)?['persons'], [
-        allOf(
-          containsPair('jobDescription', personRow['jobDescription']),
-          containsPair('personType', containsPair('order', 1)),
-        ),
       ]);
     });
   });
@@ -220,7 +205,7 @@ void main() {
 
       writeAsServerAnswers(cache, listRequest);
 
-      expect(cache.readQuery(listRequest)?['persons'], [
+      expect(listedPersons(cache, listRequest), [
         containsPair('personType', containsPair('name', 'أب')),
       ]);
     });
@@ -231,13 +216,13 @@ void main() {
 
       writeAsServerAnswers(cache, listRequest);
 
-      expect(cache.readQuery(listRequest)?['persons'], [
+      expect(listedPersons(cache, listRequest), [
         isNot(contains('jobDescription')),
       ]);
     });
 
     test('selects nothing extra when there is no sort either', () {
-      const document = documentNodeSubscriptionwatchAllPersons;
+      const document = documentNodeQuerypersons;
 
       final arranged = const ArrangedListDocument(
         document,

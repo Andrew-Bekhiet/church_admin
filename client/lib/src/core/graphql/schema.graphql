@@ -6811,6 +6811,8 @@ input AttendanceRecordFilterInput {
   meetingName: AttendanceRecordFilterMeetingName
   personName: AttendanceRecordFilterPersonName
   recordedByUserName: AttendanceRecordFilterRecordedByUserName
+  time: AttendanceRecordFilterDatetime
+  user: UserFilterInput
 }
 
 input AttendanceRecordSortInput {
@@ -6832,6 +6834,8 @@ type AttendanceRecord {
   meetingName: String
   personName: String
   recordedByUserName: String
+  time: DateTime
+  user: User
 }
 
 "The result of the :record_visit mutation"

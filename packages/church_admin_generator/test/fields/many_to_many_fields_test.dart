@@ -31,6 +31,22 @@ void main() {
     );
   });
 
+  test(
+    'a many-to-many relationship takes the GraphQL name of the server field',
+    () async {
+      final generated = await ModelFixture.generatedFor(
+        '@QueryableField.manyToMany(through: PersonsTags, '
+        "graphqlName: 'tagMemberships')\n"
+        'late final List<Tag> tags;',
+      );
+
+      expect(
+        generated.initializerOf('ModelFields', 'tagsRel'),
+        contains("name: 'tagMemberships'"),
+      );
+    },
+  );
+
   test('a many-to-many annotation on a single value fails the build', () async {
     final result = await ModelFixture.build(
       '@QueryableField.manyToMany(through: PersonsTags)\nlate final Tag tag;',

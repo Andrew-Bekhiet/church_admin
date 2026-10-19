@@ -1,0 +1,146 @@
+query persons(
+  $filter: PersonFilterInput
+  $sort: [PersonSortInput]
+  $first: Int
+  $after: String
+) {
+  persons(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Person
+    }
+  }
+}
+
+query person(
+  $id: ID!
+  $familyContactsFilter: FamilyContactFilterInput
+  $classesLimit: Int
+  $groupsLimit: Int
+  $servicesLimit: Int
+) {
+  person(id: $id) {
+    ...PersonDetails
+    familyContacts(
+      filter: $familyContactsFilter
+      sort: [
+        { field: PERSON_TYPE_ORDER, order: ASC }
+        { field: IS_MAIN_PHONE, order: DESC }
+        { field: CREATED_AT, order: ASC }
+      ]
+    ) {
+      ...PersonFamilyContact
+    }
+  }
+}
+
+query personMemberships($id: ID!) {
+  person(id: $id) {
+    ...PersonMemberships
+  }
+}
+
+query personHistoryAnalysis(
+  $id: ID!
+  $callsFilter: CallFilterInput
+  $visitsFilter: VisitFilterInput
+  $editsFilter: EditFilterInput
+  $kodasesFilter: KodasFilterInput
+  $confessionsFilter: ConfessionFilterInput
+  $callHistory: Boolean! = false
+  $visitHistory: Boolean! = false
+  $editHistory: Boolean! = false
+  $confessionHistory: Boolean! = false
+  $kodasHistory: Boolean! = false
+) {
+  person(id: $id) {
+    id
+    name
+    userCanEdit
+    callHistoryAggregate: calls(filter: $callsFilter)
+      @include(if: $callHistory) {
+      id
+      time
+    }
+    visitHistoryAggregate: visits(filter: $visitsFilter)
+      @include(if: $visitHistory) {
+      id
+      time
+    }
+    editHistoryAggregate: edits(filter: $editsFilter)
+      @include(if: $editHistory) {
+      time
+    }
+    kodasHistoryAggregate: kodases(filter: $kodasesFilter)
+      @include(if: $kodasHistory) {
+      id
+      time
+    }
+    confessionHistoryAggregate: confessions(filter: $confessionsFilter)
+      @include(if: $confessionHistory) {
+      id
+      time
+    }
+  }
+}
+
+query familyUnclaimedContacts($filter: FamilyContactFilterInput, $first: Int) {
+  familyContacts(filter: $filter, first: $first) {
+    results {
+      ...PersonFamilyContact
+    }
+  }
+}
+
+query personsGeolocations(
+  $getAreas: Boolean! = true
+  $getStreets: Boolean! = true
+  $getFamilies: Boolean! = true
+  $getStores: Boolean! = true
+  $getPersons: Boolean! = true
+  $areasFilter: AreaFilterInput
+  $streetsFilter: StreetFilterInput
+  $familiesFilter: FamilyFilterInput
+  $storesFilter: StoreFilterInput
+  $personsFilter: PersonFilterInput
+  $first: Int
+) {
+  areas(filter: $areasFilter, first: $first) @include(if: $getAreas) {
+    results {
+      ...AreaWithBounds
+    }
+  }
+  streets(filter: $streetsFilter, first: $first) @include(if: $getStreets) {
+    results {
+      ...StreetWithLine
+    }
+  }
+  families(filter: $familiesFilter, first: $first) @include(if: $getFamilies) {
+    results {
+      ...PersonFamily
+      address {
+        id
+        geolocation
+      }
+    }
+  }
+  stores(filter: $storesFilter, first: $first) @include(if: $getStores) {
+    results {
+      ...Store
+      address {
+        id
+        geolocation
+      }
+    }
+  }
+  persons(filter: $personsFilter, first: $first) @include(if: $getPersons) {
+    results {
+      ...PersonNoPhoto
+      address {
+        id
+        geolocation
+      }
+    }
+  }
+}

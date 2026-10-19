@@ -136,8 +136,8 @@ void main() {
     'an open RTL arrangement sheet drops disabled sort and second-line fields after a config change',
     (tester) async {
       when(() => flags.enableDataChecks).thenReturn(true);
-      final nameOrder = OrderBy(field: PersonFields().name);
-      final checkField = PersonFields().dataCheck.redirectTo(
+      final nameOrder = OrderBy(field: FamilyFields().name);
+      final checkField = FamilyFields().dataCheck.redirectTo(
         DataCheckFields().isComplete,
       );
       ListArrangement? saved;
@@ -151,7 +151,7 @@ void main() {
                   onPressed: () async =>
                       saved = await ListArrangementSheet.show(
                         context,
-                        queryableType: AdvancedQueriesMetadata().person,
+                        queryableType: AdvancedQueriesMetadata().family,
                         initialArrangement: ListArrangement(
                           orderBy: [
                             nameOrder,
