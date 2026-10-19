@@ -1,0 +1,7 @@
+mutation registerFcmToken($input: RegisterFcmTokenInput!) {
+  registerFcmToken(input: $input) {
+    result {
+      ...DeviceToken
+    }
+  }
+}

@@ -585,23 +585,18 @@ void main() {
                   .read(databaseServiceProvider)
                   .fcmTokens;
               when(
-                fcmTokens.registerToken(
-                  uid: expectedUid,
-                  token: expectedToken,
-                ),
-              ).thenAnswer((_) async => null);
+                fcmTokens.registerToken(token: expectedToken),
+              ).thenAnswer(
+                (_) async =>
+                    const FcmToken(uid: expectedUid, token: expectedToken),
+              );
 
               await expectLater(
                 unit.registerFCMTokenAndListenForChanges(),
                 completion(isTrue),
               );
 
-              verify(
-                fcmTokens.registerToken(
-                  uid: expectedUid,
-                  token: expectedToken,
-                ),
-              ).called(1);
+              verify(fcmTokens.registerToken(token: expectedToken)).called(1);
             },
           );
         },

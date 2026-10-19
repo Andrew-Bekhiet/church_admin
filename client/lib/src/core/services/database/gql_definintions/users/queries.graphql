@@ -1,0 +1,22 @@
+query users(
+  $filter: UserFilterInput
+  $sort: [UserSortInput]
+  $first: Int
+  $after: String
+) {
+  users(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...UserOverview
+      ...UserAdminScopes
+    }
+  }
+}
+
+query user($id: ID!, $fullData: Boolean = false) {
+  user(id: $id) {
+    ...UserOverview @skip(if: $fullData)
+    ...UserDetails @include(if: $fullData)
+  }
+}

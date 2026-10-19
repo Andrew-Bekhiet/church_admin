@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/users_preferences/__generated__/fragments.gql.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -17,8 +16,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   setUpAll(() {
-    registerFallbackValue(Input_UsersPreferencesSetInput());
-    registerFallbackValue(Input_UsersPreferencesAppendInput());
+    registerFallbackValue(<String, dynamic>{});
   });
 
   late MockDatabaseService databaseService;
@@ -30,11 +28,11 @@ void main() {
     final mockUserPreferencesDAO = MockUserPreferencesDAO();
     when(
       () => mockUserPreferencesDAO.updatePreferences(
-        uid: any(named: 'uid'),
-        set: any(named: 'set'),
-        append: any(named: 'append'),
+        scalars: any(named: 'scalars'),
+        orderByPatch: any(named: 'orderByPatch'),
+        secondLinePatch: any(named: 'secondLinePatch'),
       ),
-    ).thenAnswer((_) => Completer<Fragment_UserPreferences>().future);
+    ).thenAnswer((_) => Completer<UserPreferences>().future);
 
     when(
       () => databaseService.userPreferences,
@@ -135,11 +133,11 @@ void main() {
           databaseService.userPreferences as MockUserPreferencesDAO;
       when(
         () => userPreferences.updatePreferences(
-          uid: any(named: 'uid'),
-          set: any(named: 'set'),
-          append: any(named: 'append'),
+          scalars: any(named: 'scalars'),
+          orderByPatch: any(named: 'orderByPatch'),
+          secondLinePatch: any(named: 'secondLinePatch'),
         ),
-      ).thenAnswer((_) async => null);
+      ).thenAnswer((_) async => const UserPreferences(uid: 'uid'));
 
       final box = FakeSyncKVStore();
       when(() => authBloc.currentUserData).thenReturn(
@@ -161,47 +159,35 @@ void main() {
       await unit.setDarkTheme(null);
       verify(
         () => userPreferences.updatePreferences(
-          uid: 'uid',
-          append: any(named: 'append'),
-          set: any(
-            that: isA<Input_UsersPreferencesSetInput>().having(
-              (i) => i.darkTheme,
-              'darkTheme',
-              isNull,
-            ),
-            named: 'set',
+          scalars: any(
+            named: 'scalars',
+            that: containsPair('darkTheme', isNull),
           ),
+          orderByPatch: any(named: 'orderByPatch'),
+          secondLinePatch: any(named: 'secondLinePatch'),
         ),
       );
       await unit.setGreatFeastTheme(false);
       verify(
         () => userPreferences.updatePreferences(
-          uid: 'uid',
-          append: any(named: 'append'),
-          set: any(
-            that: isA<Input_UsersPreferencesSetInput>().having(
-              (i) => i.greatFeastTheme,
-              'greatFeastTheme',
-              isFalse,
-            ),
-            named: 'set',
+          scalars: any(
+            named: 'scalars',
+            that: containsPair('greatFeastTheme', isFalse),
           ),
+          orderByPatch: any(named: 'orderByPatch'),
+          secondLinePatch: any(named: 'secondLinePatch'),
         ),
       );
 
       await unit.setLastHomeMode(HomeMode.sundaySchool);
       verify(
         () => userPreferences.updatePreferences(
-          uid: 'uid',
-          append: any(named: 'append'),
-          set: any(
-            that: isA<Input_UsersPreferencesSetInput>().having(
-              (i) => i.lastHomeMode,
-              'lastHomeMode',
-              HomeMode.sundaySchool.name,
-            ),
-            named: 'set',
+          scalars: any(
+            named: 'scalars',
+            that: containsPair('lastHomeMode', HomeMode.sundaySchool.name),
           ),
+          orderByPatch: any(named: 'orderByPatch'),
+          secondLinePatch: any(named: 'secondLinePatch'),
         ),
       );
     },
@@ -357,11 +343,11 @@ void main() {
       final dao = databaseService.userPreferences as MockUserPreferencesDAO;
       when(
         () => dao.updatePreferences(
-          uid: any(named: 'uid'),
-          set: any(named: 'set'),
-          append: any(named: 'append'),
+          scalars: any(named: 'scalars'),
+          orderByPatch: any(named: 'orderByPatch'),
+          secondLinePatch: any(named: 'secondLinePatch'),
         ),
-      ).thenAnswer((_) async => null);
+      ).thenAnswer((_) async => const UserPreferences(uid: 'uid'));
 
       return dao;
     }
@@ -400,16 +386,16 @@ void main() {
         await unit.setLastSecondLineFieldFor(key, field);
         await Future<void>.delayed(Duration.zero);
 
-        final append =
+        final patch =
             verify(
                   () => dao.updatePreferences(
-                    uid: 'uid',
-                    set: any(named: 'set'),
-                    append: captureAny(named: 'append'),
+                    scalars: any(named: 'scalars'),
+                    orderByPatch: any(named: 'orderByPatch'),
+                    secondLinePatch: captureAny(named: 'secondLinePatch'),
                   ),
                 ).captured.single
-                as Input_UsersPreferencesAppendInput;
-        expect(append.secondLinePreferences, {key.storageKey: field.toJson()});
+                as Json;
+        expect(patch, {key.storageKey: field.toJson()});
         expect(box.toMap(), isEmpty);
       },
     );

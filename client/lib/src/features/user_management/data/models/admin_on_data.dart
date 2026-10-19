@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_annotations/church_admin_annotations.dart';
+import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'admin_on_data.freezed.dart';
@@ -9,6 +10,69 @@ part 'admin_on_data.g.dart';
 @Queryable(label: 'صلاحيات الإدارة على البيانات')
 @JsonSerializable()
 class AdminOnData with _$AdminOnData implements ToJson {
+  static const List<int Function(AdminOnData, AdminOnData)> _scopeOrder = [
+    _byAreaName,
+    _byServiceStudyYearFrom,
+    _byServiceStudyYearTo,
+    _byServiceStudyYear,
+    _byServiceGenderBoysFirst,
+    _byServiceName,
+    _byGroupName,
+  ];
+
+  /// The scopes of one user in the order the screens list them.
+  static List<AdminOnData>? sortedListFromJson(List<dynamic>? json) {
+    final grants = json?.map(
+      (grant) => AdminOnData.fromJson((grant as Map).cast<String, Object?>()),
+    );
+
+    return grants?.sorted(
+      (a, b) => _scopeOrder
+          .map((compare) => compare(a, b))
+          .firstWhere((result) => result != 0, orElse: () => 0),
+    );
+  }
+
+  static int _nullsLast<T extends Comparable<T>>(T? a, T? b) {
+    if (a == null || b == null) {
+      return (a == null ? 1 : 0) - (b == null ? 1 : 0);
+    }
+
+    return a.compareTo(b);
+  }
+
+  static int _byAreaName(AdminOnData a, AdminOnData b) =>
+      _nullsLast(a.area?.name, b.area?.name);
+
+  static int _byServiceStudyYearFrom(AdminOnData a, AdminOnData b) =>
+      _nullsLast(
+        a.service?.studyYearFrom?.order,
+        b.service?.studyYearFrom?.order,
+      );
+
+  static int _byServiceStudyYearTo(AdminOnData a, AdminOnData b) =>
+      _nullsLast(a.service?.studyYearTo?.order, b.service?.studyYearTo?.order);
+
+  static int _byServiceStudyYear(AdminOnData a, AdminOnData b) => _nullsLast(
+    a.serviceStudyYearData?.order,
+    b.serviceStudyYearData?.order,
+  );
+
+  static int _genderRank(bool? gender) => switch (gender) {
+    null => 0,
+    true => 1,
+    false => 2,
+  };
+
+  static int _byServiceGenderBoysFirst(AdminOnData a, AdminOnData b) =>
+      _genderRank(a.serviceGender).compareTo(_genderRank(b.serviceGender));
+
+  static int _byServiceName(AdminOnData a, AdminOnData b) =>
+      _nullsLast(a.service?.name, b.service?.name);
+
+  static int _byGroupName(AdminOnData a, AdminOnData b) =>
+      _nullsLast(a.group?.name, b.group?.name);
+
   final String permissionId;
 
   @QueryableField(label: 'المنطقة')
@@ -26,7 +90,8 @@ class AdminOnData with _$AdminOnData implements ToJson {
   @QueryableField(label: 'الخدمة')
   final Service? service;
 
-  @QueryableField(label: 'السنة الدراسية')
+  @JsonKey(name: 'studyYear')
+  @QueryableField(label: 'السنة الدراسية', graphqlName: 'studyYear')
   final StudyYear? serviceStudyYearData;
 
   @QueryableField(label: 'نوع المخدومين المسؤول عنهم')

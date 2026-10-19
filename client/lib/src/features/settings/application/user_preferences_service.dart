@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/users_preferences/__generated__/fragments.gql.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -169,8 +168,7 @@ class UserPreferencesService extends BlocObserver {
   }
 
   Future<void> _flushPending() async {
-    final uid = _authBloc.currentUserData?.uid;
-    if (uid == null) return;
+    if (_authBloc.currentUserData == null) return;
 
     final (:orderByPreferences, :secondLinePreferences, :scalarWrites) =
         _pendingWritesByKind();
@@ -181,21 +179,12 @@ class UserPreferencesService extends BlocObserver {
       return;
     }
 
-    final appendFields = Input_UsersPreferencesAppendInput(
-      orderByPreferences: orderByPreferences.isEmpty
-          ? null
-          : orderByPreferences,
-      secondLinePreferences: secondLinePreferences.isEmpty
-          ? null
-          : secondLinePreferences,
-    );
-
     try {
       final acknowledged = await _databaseService.userPreferences
           .updatePreferences(
-            uid: uid,
-            set: Input_UsersPreferencesSetInput.fromJson(scalarWrites),
-            append: appendFields,
+            scalars: scalarWrites,
+            orderByPatch: orderByPreferences,
+            secondLinePatch: secondLinePreferences,
           );
       _maybeRememberAcknowledged(acknowledged);
 
@@ -242,10 +231,7 @@ class UserPreferencesService extends BlocObserver {
     );
   }
 
-  void _maybeRememberAcknowledged(Fragment_UserPreferences? acknowledged) {
-    if (acknowledged == null) return;
-
-    final next = UserPreferences.fromJson(acknowledged.toJson());
+  void _maybeRememberAcknowledged(UserPreferences next) {
     final kept = _acknowledgedPreferences;
     final keptIsNewer =
         kept != null &&

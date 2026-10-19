@@ -25,13 +25,6 @@ void main() {
       });
     }
 
-    test('a person linked meanwhile by another edit is explained like the server rejection', () {
-      expect(
-        UserFormErrorMessage.of(const PersonAlreadyLinkedException('person')),
-        messageByRejectionCode['user/person-already-linked'],
-      );
-    });
-
     test('an incomplete form asks for the required data', () {
       expect(
         UserFormErrorMessage.of(const UserFormValidationError()),

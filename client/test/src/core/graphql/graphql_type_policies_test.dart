@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/fragments.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:graphql/client.dart';
 
@@ -101,23 +100,20 @@ void main() {
     );
 
     test('AuthUsersData normalizes under its uid, not an id', () {
-      const request = Request(
-        operation: Operation(document: documentNodeSubscriptionwatchAllUsers),
+      final request = Request(
+        operation: Operation(
+          document: gql('{ authUsersData { __typename uid name } }'),
+        ),
       );
 
-      final data = Subscription_watchAllUsers(
-        authUsersData: [
-          Subscription_watchAllUsers_authUsersData(
-            uid: stringToUuid(userUid),
-            name: 'Nabil',
-            email: 'nabil@example.com',
-            permissions: [],
-            adminOn: [],
-          ),
+      final data = {
+        '__typename': 'Query',
+        'authUsersData': [
+          {'__typename': 'AuthUsersData', 'uid': userUid, 'name': 'Nabil'},
         ],
-      );
+      };
 
-      cache.writeQuery(request, broadcast: false, data: data.toJson());
+      cache.writeQuery(request, broadcast: false, data: data);
 
       const userKey = 'AuthUsersData:{"uid":"$userUid"}';
       expect(store.get(userKey), isNotNull);

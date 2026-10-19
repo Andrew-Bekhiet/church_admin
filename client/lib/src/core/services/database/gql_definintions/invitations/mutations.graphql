@@ -1,0 +1,15 @@
+mutation createInvitation($input: CreateInvitationInput!) {
+  createInvitation(input: $input) {
+    result {
+      ...Invitation
+    }
+  }
+}
+
+mutation updateInvitationExpiry($id: ID!, $input: UpdateInvitationExpiryInput) {
+  updateInvitationExpiry(id: $id, input: $input) {
+    result {
+      ...Invitation
+    }
+  }
+}

@@ -85,7 +85,7 @@ class AdminOnDataFields {
       FieldMetadata<StudyYear>(
         getValue: (obj) => obj is AdminOnData ? obj.serviceStudyYearData : null,
         parentType: AdminOnData,
-        name: 'serviceStudyYearData',
+        name: 'studyYear',
         label: 'السنة الدراسية',
         isCodeOnly: false,
         operators: {
@@ -340,7 +340,7 @@ class AdminOnDataFields {
     'areaAllowEdit': areaAllowEdit,
     'areaAdminOnUsers': areaAdminOnUsers,
     'service': service,
-    'serviceStudyYearData': serviceStudyYearData,
+    'studyYear': serviceStudyYearData,
     'serviceGender': serviceGender,
     'serviceAllowExport': serviceAllowExport,
     'serviceAllowEdit': serviceAllowEdit,
@@ -381,11 +381,9 @@ AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
   service: json['service'] == null
       ? null
       : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
-  serviceStudyYearData: json['serviceStudyYearData'] == null
+  serviceStudyYearData: json['studyYear'] == null
       ? null
-      : StudyYear.fromJson(
-          Map<String, Object?>.from(json['serviceStudyYearData'] as Map),
-        ),
+      : StudyYear.fromJson(Map<String, Object?>.from(json['studyYear'] as Map)),
   serviceGender: json['serviceGender'] as bool?,
   serviceAllowExport: json['serviceAllowExport'] as bool?,
   serviceAllowEdit: json['serviceAllowEdit'] as bool?,
@@ -417,7 +415,7 @@ Map<String, dynamic> _$AdminOnDataToJson(AdminOnData instance) =>
       'areaAllowEdit': instance.areaAllowEdit,
       'areaAdminOnUsers': instance.areaAdminOnUsers,
       'service': instance.service?.toJson(),
-      'serviceStudyYearData': instance.serviceStudyYearData?.toJson(),
+      'studyYear': instance.serviceStudyYearData?.toJson(),
       'serviceGender': instance.serviceGender,
       'serviceAllowExport': instance.serviceAllowExport,
       'serviceAllowEdit': instance.serviceAllowEdit,
