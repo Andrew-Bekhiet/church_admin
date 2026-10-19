@@ -6,6 +6,8 @@ defmodule ChurchAdmin.Catalog.PersonType do
     fragments: [ChurchAdmin.Authz.Fragments.Lookup]
 
   alias ChurchAdmin.Authz.Checks.System
+  alias ChurchAdmin.Changes.CodeTakenIdentity
+  alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.Types.Text
 
   graphql do
@@ -14,6 +16,10 @@ defmodule ChurchAdmin.Catalog.PersonType do
     queries do
       get :person_type, :read
       list :person_types, :read
+    end
+
+    mutations do
+      create :create_person_type, :create_person_type
     end
   end
 
@@ -36,6 +42,16 @@ defmodule ChurchAdmin.Catalog.PersonType do
                  required?: false,
                  default_limit: 25,
                  max_page_size: 1000
+    end
+
+    create :create_person_type do
+      accept [:name]
+      upsert? true
+      upsert_identity :unique_name
+      upsert_fields [:name]
+      change set_attribute(:is_family_admin, false)
+      change set_attribute(:is_hidden, true)
+      change {CodeTakenIdentity, field: :order, code: Codes.person_type_order_taken()}
     end
   end
 

@@ -15,6 +15,10 @@ defmodule ChurchAdmin.Catalog.Hobby do
       get :hobby, :read
       list :hobbies, :read
     end
+
+    mutations do
+      create :create_hobby, :create_hobby
+    end
   end
 
   postgres do
@@ -33,6 +37,13 @@ defmodule ChurchAdmin.Catalog.Hobby do
                  required?: false,
                  default_limit: 25,
                  max_page_size: 1000
+    end
+
+    create :create_hobby do
+      accept [:name, :color]
+      upsert? true
+      upsert_identity :unique_name
+      upsert_fields [:name]
     end
   end
 

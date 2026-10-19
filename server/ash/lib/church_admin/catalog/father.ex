@@ -18,6 +18,10 @@ defmodule ChurchAdmin.Catalog.Father do
       get :father, :read
       list :fathers, :read
     end
+
+    mutations do
+      create :create_father, :create_father
+    end
   end
 
   postgres do
@@ -39,6 +43,14 @@ defmodule ChurchAdmin.Catalog.Father do
                  required?: false,
                  default_limit: 25,
                  max_page_size: 1000
+    end
+
+    create :create_father do
+      accept [:name, :church_id]
+      upsert? true
+      upsert_identity :unique_name
+      upsert_fields [:name]
+      change set_attribute(:is_hidden, true)
     end
   end
 

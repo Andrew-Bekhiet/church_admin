@@ -15,6 +15,10 @@ defmodule ChurchAdmin.Catalog.School do
       get :school, :read
       list :schools, :read
     end
+
+    mutations do
+      create :create_school, :create_school
+    end
   end
 
   postgres do
@@ -32,6 +36,13 @@ defmodule ChurchAdmin.Catalog.School do
                  required?: false,
                  default_limit: 25,
                  max_page_size: 1000
+    end
+
+    create :create_school do
+      accept [:name]
+      upsert? true
+      upsert_identity :unique_name
+      upsert_fields [:name]
     end
   end
 
