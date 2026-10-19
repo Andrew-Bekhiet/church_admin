@@ -2,15 +2,24 @@ defmodule ChurchAdmin.Attendance.Meeting do
   use Ash.Resource,
     domain: ChurchAdmin.Attendance,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Attendance.{AttendanceRecord, MeetingAudience, MeetingDay, RosterEntry}
+  alias ChurchAdmin.Authz.Checks.{InScope, System}
   alias ChurchAdmin.Catalog.StudyYear
   alias ChurchAdmin.Organization.{Group, Service}
   alias ChurchAdmin.Types.Text
 
   graphql do
     type :meeting
+
+    relationships [:attendance_records, :days, :roster_entries]
+
+    queries do
+      get :meeting, :read
+      list :meetings, :read
+    end
   end
 
   postgres do
@@ -27,7 +36,26 @@ defmodule ChurchAdmin.Attendance.Meeting do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if actor_attribute_equals(:read_all?, true)
+      authorize_if {InScope, entity: :meeting, access: :admin}
+    end
   end
 
   attributes do
@@ -69,5 +97,22 @@ defmodule ChurchAdmin.Attendance.Meeting do
 
     has_many :days, MeetingDay, destination_attribute: :meeting_id, public?: true
     has_many :roster_entries, RosterEntry, destination_attribute: :meeting_id, public?: true
+  end
+
+  calculations do
+    calculate :held_days,
+              {:array, :date},
+              expr(
+                fragment(
+                  "array(select distinct held.day from history.meeting_days as held where held.meeting_id = ? and held.day between ? and ? order by held.day)",
+                  id,
+                  ^arg(:from),
+                  ^arg(:to)
+                )
+              ) do
+      public? true
+      argument :from, :date, allow_nil?: false
+      argument :to, :date, allow_nil?: false
+    end
   end
 end
