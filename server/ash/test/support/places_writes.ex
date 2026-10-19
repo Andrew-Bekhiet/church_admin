@@ -9,6 +9,7 @@ defmodule ChurchAdmin.PlacesWrites do
   """
 
   alias ChurchAdmin.Errors.Codes
+  alias ChurchAdmin.Places.{Area, Store, Street}
   alias ChurchAdmin.Repo
   alias ChurchAdmin.Repo.HasuraSession
 
@@ -25,8 +26,8 @@ defmodule ChurchAdmin.PlacesWrites do
 
   def create_area(actor, attrs), do: create(actor, "areas", attrs)
   def update_area(actor, id, attrs), do: update(actor, "areas", id, attrs)
-  def delete_area(actor, id), do: delete(actor, "areas", id)
-  def hard_delete_area(actor, id), do: delete(actor, "areas", id)
+  def delete_area(actor, id), do: destroy(actor, Area, :destroy, id)
+  def hard_delete_area(actor, id), do: destroy(actor, Area, :hard_destroy, id)
 
   def create_street(actor, attrs) do
     {areas, attrs} = Map.pop(attrs, :areas, [])
@@ -54,8 +55,8 @@ defmodule ChurchAdmin.PlacesWrites do
     end)
   end
 
-  def delete_street(actor, id), do: delete(actor, "streets", id)
-  def hard_delete_street(actor, id), do: delete(actor, "streets", id)
+  def delete_street(actor, id), do: destroy(actor, Street, :destroy, id)
+  def hard_delete_street(actor, id), do: destroy(actor, Street, :hard_destroy, id)
 
   def create_store(actor, attrs) do
     {address, attrs} = Map.pop(attrs, :address)
@@ -77,8 +78,8 @@ defmodule ChurchAdmin.PlacesWrites do
     end)
   end
 
-  def delete_store(actor, id), do: delete(actor, "stores", id)
-  def hard_delete_store(actor, id), do: delete(actor, "stores", id)
+  def delete_store(actor, id), do: destroy(actor, Store, :destroy, id)
+  def hard_delete_store(actor, id), do: destroy(actor, Store, :hard_destroy, id)
 
   defp create(actor, table, attrs), do: transact(actor, fn -> insert!(table, attrs) end)
 
@@ -89,9 +90,13 @@ defmodule ChurchAdmin.PlacesWrites do
     end)
   end
 
-  defp delete(actor, table, id) do
+  defp destroy(actor, resource, action, id) do
     transact(actor, fn ->
-      Repo.query!("delete from #{table} where id = $1::text::uuid", [id])
+      resource
+      |> Ash.get!(id, authorize?: false)
+      |> Ash.Changeset.for_destroy(action, %{}, actor: actor)
+      |> Ash.destroy!()
+
       id
     end)
   end

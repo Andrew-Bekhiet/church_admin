@@ -3861,6 +3861,15 @@ type Class {
   userCanEdit: Boolean!
 }
 
+"The result of the :delete_street mutation"
+type DeleteStreetResult {
+  "The record that was successfully deleted"
+  result: Street
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
 "The result of the :update_street mutation"
 type UpdateStreetResult {
   "The successful result of the mutation"
@@ -4198,6 +4207,15 @@ type Street {
   userCanEdit: Boolean!
   withinPolygon(polygon: Json!): Boolean
   withinDistance(from: Json!, meters: Float!): Boolean
+}
+
+"The result of the :delete_store mutation"
+type DeleteStoreResult {
+  "The record that was successfully deleted"
+  result: Store
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
 }
 
 "The result of the :update_store mutation"
@@ -4720,6 +4738,15 @@ type AreaStreet {
   area: Area
 
   street: Street
+}
+
+"The result of the :delete_area mutation"
+type DeleteAreaResult {
+  "The record that was successfully deleted"
+  result: Area
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
 }
 
 "The result of the :update_area mutation"
@@ -10520,10 +10547,13 @@ type RootQueryType {
 type RootMutationType {
   createArea(input: CreateAreaInput!): CreateAreaResult
   updateArea(id: ID!, input: UpdateAreaInput): UpdateAreaResult
+  deleteArea(id: ID!): DeleteAreaResult
   createStore(input: CreateStoreInput!): CreateStoreResult
   updateStore(id: ID!, input: UpdateStoreInput): UpdateStoreResult
+  deleteStore(id: ID!): DeleteStoreResult
   createStreet(input: CreateStreetInput!): CreateStreetResult
   updateStreet(id: ID!, input: UpdateStreetInput): UpdateStreetResult
+  deleteStreet(id: ID!): DeleteStreetResult
 }
 
 """

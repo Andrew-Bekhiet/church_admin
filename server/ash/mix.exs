@@ -81,6 +81,7 @@ defmodule ChurchAdmin.MixProject do
       {:sourceror, "~> 1.8", only: [:dev, :test]},
       {:oban, "~> 2.0"},
       {:ash_oban, "~> 0.10"},
+      {:ash_archival, "~> 2.0"},
       {:ash_graphql, "~> 1.0"},
       {:ash_postgres, "~> 2.0"},
       {:ash, "~> 3.0"},
