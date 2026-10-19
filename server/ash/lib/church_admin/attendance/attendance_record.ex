@@ -16,7 +16,7 @@ defmodule ChurchAdmin.Attendance.AttendanceRecord do
   graphql do
     type :attendance_record
 
-    relationships [:meeting, :person, :recorded_by_user]
+    relationships [:meeting, :person, :recorded_by_user, :user]
 
     queries do
       list :attendance_records, :read
@@ -140,6 +140,12 @@ defmodule ChurchAdmin.Attendance.AttendanceRecord do
       define_attribute?: false,
       public?: true
 
+    belongs_to :user, User,
+      source_attribute: :recorded_by,
+      destination_attribute: :uid,
+      define_attribute?: false,
+      public?: true
+
     has_one :roster_entry, RosterEntry,
       no_attributes?: true,
       filter:
@@ -147,6 +153,10 @@ defmodule ChurchAdmin.Attendance.AttendanceRecord do
           meeting_id == parent(meeting_id) and person_id == parent(person_id) and
             as_servant == parent(as_servant)
         )
+  end
+
+  calculations do
+    calculate :time, AshPostgres.TimestamptzUsec, expr(datetime), public?: true
   end
 
   aggregates do

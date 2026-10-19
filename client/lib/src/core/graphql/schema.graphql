@@ -117,6 +117,7 @@ enum ServiceMembershipSortField {
   PERSON_ID
   SERVICE_ID
   IS_OUTSIDE_SERVICE_STUDY_YEARS
+  SERVICE_NAME
 }
 
 "A keyset page of :service_membership"
@@ -145,6 +146,24 @@ input ServiceMembershipFilterIsOutsideServiceStudyYears {
   greaterThanOrEqual: Boolean
   isDistinctFrom: Boolean
   isNotDistinctFrom: Boolean
+}
+
+input ServiceMembershipFilterServiceName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input ServiceMembershipFilterServiceId {
@@ -181,6 +200,7 @@ input ServiceMembershipFilterInput {
   serviceId: ServiceMembershipFilterServiceId
   person: PersonFilterInput
   service: ServiceFilterInput
+  serviceName: ServiceMembershipFilterServiceName
   isOutsideServiceStudyYears: ServiceMembershipFilterIsOutsideServiceStudyYears
 }
 
@@ -194,6 +214,7 @@ type ServiceMembership {
   serviceId: ID!
   person: Person
   service: Service
+  serviceName: String
   isOutsideServiceStudyYears: Boolean!
 }
 
@@ -2132,6 +2153,7 @@ type MainContact {
 enum GroupMembershipSortField {
   PERSON_ID
   GROUP_ID
+  GROUP_NAME
 }
 
 "A keyset page of :group_membership"
@@ -2147,6 +2169,24 @@ type KeysetPageOfGroupMembership {
 
   "The last keyset in the results"
   endKeyset: String
+}
+
+input GroupMembershipFilterGroupName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input GroupMembershipFilterGroupId {
@@ -2183,6 +2223,7 @@ input GroupMembershipFilterInput {
   groupId: GroupMembershipFilterGroupId
   group: GroupFilterInput
   person: PersonFilterInput
+  groupName: GroupMembershipFilterGroupName
 }
 
 input GroupMembershipSortInput {
@@ -2195,6 +2236,7 @@ type GroupMembership {
   groupId: ID!
   group: Group
   person: Person
+  groupName: String
 }
 
 enum FamilyRelationSortField {
@@ -3057,6 +3099,7 @@ type Contact {
 enum ClassMembershipSortField {
   CLASS_ID
   PERSON_ID
+  CLASS_NAME
 }
 
 "A keyset page of :class_membership"
@@ -3072,6 +3115,24 @@ type KeysetPageOfClassMembership {
 
   "The last keyset in the results"
   endKeyset: String
+}
+
+input ClassMembershipFilterClassName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input ClassMembershipFilterPersonId {
@@ -3108,6 +3169,7 @@ input ClassMembershipFilterInput {
   personId: ClassMembershipFilterPersonId
   class: ClassFilterInput
   person: PersonFilterInput
+  className: ClassMembershipFilterClassName
 }
 
 input ClassMembershipSortInput {
@@ -3126,6 +3188,8 @@ type ClassMembership {
   class: Class
 
   person: Person
+
+  className: String
 }
 
 enum SortOrder {
@@ -6629,6 +6693,7 @@ enum AttendanceRecordSortField {
   AS_SERVANT
   RECORDED_BY
   DAY
+  TIME
   MEETING_NAME
   PERSON_NAME
   RECORDED_BY_USER_NAME
@@ -6647,6 +6712,19 @@ type KeysetPageOfAttendanceRecord {
 
   "The last keyset in the results"
   endKeyset: String
+}
+
+input AttendanceRecordFilterTime {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
 }
 
 input AttendanceRecordFilterRecordedByUserName {
@@ -6808,11 +6886,11 @@ input AttendanceRecordFilterInput {
   meeting: MeetingFilterInput
   person: PersonFilterInput
   recordedByUser: UserFilterInput
+  user: UserFilterInput
   meetingName: AttendanceRecordFilterMeetingName
   personName: AttendanceRecordFilterPersonName
   recordedByUserName: AttendanceRecordFilterRecordedByUserName
-  time: AttendanceRecordFilterDatetime
-  user: UserFilterInput
+  time: AttendanceRecordFilterTime
 }
 
 input AttendanceRecordSortInput {
@@ -6831,11 +6909,11 @@ type AttendanceRecord {
   meeting: Meeting
   person: Person
   recordedByUser: User
+  user: User
   meetingName: String
   personName: String
   recordedByUserName: String
   time: DateTime
-  user: User
 }
 
 "The result of the :record_visit mutation"

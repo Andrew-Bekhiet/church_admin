@@ -309,6 +309,39 @@ defmodule ChurchAdminWeb.Graphql.AttendanceQueriesTest do
              MapSet.new(for n <- [:a_m1, :a_f2, :a_servant], do: world.records[n].id)
   end
 
+  test "an attendance record answers its time and recording user like every history record", %{
+    conn: conn,
+    world: world
+  } do
+    document = """
+    query($meetingId: ID!, $from: DateTime!, $to: DateTime!, $uid: ID!) {
+      attendanceRecords(
+        filter: {meetingId: {eq: $meetingId}, time: {greaterThanOrEqual: $from, lessThan: $to}, user: {uid: {eq: $uid}}}
+        sort: [{field: TIME, order: DESC}, {field: ID}]
+      ) {
+        results { id time datetime user { uid } recordedByUser { uid } }
+      }
+    }
+    """
+
+    variables = %{
+      "meetingId" => world.records.m_s1.id,
+      "from" => "2026-03-01T00:00:00Z",
+      "to" => "2026-03-02T00:00:00Z",
+      "uid" => world.users.read_all.uid
+    }
+
+    rows = data!(run(conn, document, variables, :service_open, world))["attendanceRecords"]["results"]
+
+    assert ids(rows) == MapSet.new(for n <- [:a_m1, :a_f2, :a_servant], do: world.records[n].id)
+    assert Enum.all?(rows, &(&1["time"] == &1["datetime"]))
+    assert Enum.all?(rows, &(&1["user"] == %{"uid" => world.users.read_all.uid}))
+    assert Enum.map(rows, & &1["time"]) == Enum.sort(Enum.map(rows, & &1["time"]), :desc)
+
+    others = put_in(variables["uid"], world.users.service_open.uid)
+    assert data!(run(conn, document, others, :service_open, world))["attendanceRecords"]["results"] == []
+  end
+
   test "meeting by id is null outside the actor's meetings", %{conn: conn, world: world} do
     document = "query($id: ID!) { meeting(id: $id) { id name } }"
 

@@ -76,6 +76,10 @@ defmodule ChurchAdmin.People.GroupMembership do
     belongs_to :person, Person, define_attribute?: false, public?: true
   end
 
+  aggregates do
+    first :group_name, :group, :name, public?: true
+  end
+
   identities do
     identity :unique_person_id_group_id, [:person_id, :group_id]
   end
