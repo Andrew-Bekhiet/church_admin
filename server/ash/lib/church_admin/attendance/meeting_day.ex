@@ -12,7 +12,7 @@ defmodule ChurchAdmin.Attendance.MeetingDay do
   graphql do
     type :meeting_day
 
-    relationships [:meeting]
+    relationships [:meeting, :study_year]
     nullable_fields [:study_year_id]
   end
 

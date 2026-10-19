@@ -6206,6 +6206,7 @@ input MeetingDayFilterInput {
   servantsCount: MeetingDayFilterServantsCount
   totalCount: MeetingDayFilterTotalCount
   meeting: MeetingFilterInput
+  studyYear: StudyYearFilterInput
 }
 
 input MeetingDaySortInput {
@@ -6232,6 +6233,8 @@ type MeetingDay {
   totalCount: Int
 
   meeting: Meeting
+
+  studyYear: StudyYear
 }
 
 "The result of the :update_meeting mutation"
@@ -6283,6 +6286,9 @@ enum MeetingSortField {
   IS_ARCHIVED
   COLOR
   SHOW_KODAS_CHECKBOX
+  SERVICE_NAME
+  GROUP_NAME
+  STUDY_YEAR_ORDER
 }
 
 "A keyset page of :meeting"
@@ -6298,6 +6304,55 @@ type KeysetPageOfMeeting {
 
   "The last keyset in the results"
   endKeyset: String
+}
+
+input MeetingFilterStudyYearOrder {
+  isNil: Boolean
+  eq: Int
+  notEq: Int
+  in: [Int]
+  lessThan: Int
+  greaterThan: Int
+  lessThanOrEqual: Int
+  greaterThanOrEqual: Int
+  isDistinctFrom: Int
+  isNotDistinctFrom: Int
+}
+
+input MeetingFilterGroupName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input MeetingFilterServiceName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input MeetingFilterShowKodasCheckbox {
@@ -6455,6 +6510,9 @@ input MeetingFilterInput {
   attendanceRecords: AttendanceRecordFilterInput
   days: MeetingDayFilterInput
   rosterEntries: RosterEntryFilterInput
+  serviceName: MeetingFilterServiceName
+  groupName: MeetingFilterGroupName
+  studyYearOrder: MeetingFilterStudyYearOrder
 }
 
 input MeetingSortInput {
@@ -6515,6 +6573,9 @@ type Meeting {
     "The number of records to skip."
     offset: Int
   ): [RosterEntry!]!
+  serviceName: String
+  groupName: String
+  studyYearOrder: Int
   heldDays(from: Date!, to: Date!): [Date!]
 }
 
@@ -6564,6 +6625,9 @@ enum AttendanceRecordSortField {
   AS_SERVANT
   RECORDED_BY
   DAY
+  MEETING_NAME
+  PERSON_NAME
+  RECORDED_BY_USER_NAME
 }
 
 "A keyset page of :attendance_record"
@@ -6579,6 +6643,60 @@ type KeysetPageOfAttendanceRecord {
 
   "The last keyset in the results"
   endKeyset: String
+}
+
+input AttendanceRecordFilterRecordedByUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input AttendanceRecordFilterPersonName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input AttendanceRecordFilterMeetingName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input AttendanceRecordFilterDay {
@@ -6686,6 +6804,9 @@ input AttendanceRecordFilterInput {
   meeting: MeetingFilterInput
   person: PersonFilterInput
   recordedByUser: UserFilterInput
+  meetingName: AttendanceRecordFilterMeetingName
+  personName: AttendanceRecordFilterPersonName
+  recordedByUserName: AttendanceRecordFilterRecordedByUserName
 }
 
 input AttendanceRecordSortInput {
@@ -6704,6 +6825,9 @@ type AttendanceRecord {
   meeting: Meeting
   person: Person
   recordedByUser: User
+  meetingName: String
+  personName: String
+  recordedByUserName: String
 }
 
 "The result of the :record_visit mutation"

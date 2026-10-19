@@ -3,6 +3,8 @@ defmodule ChurchAdminWeb.Graphql.PlacesStoreMutationsTest do
 
   import ChurchAdminWeb.PlacesMutationHelpers
 
+  require Ash.Query
+
   alias ChurchAdmin.Factory
   alias ChurchAdmin.Places.{Address, Store}
 
@@ -175,6 +177,34 @@ defmodule ChurchAdminWeb.Graphql.PlacesStoreMutationsTest do
         )
 
       assert code(other) == "not_found"
+    end
+
+    test "lets an editor move the store's address out of their own area, and not a non-editor",
+         %{conn: conn, world: world} do
+      move = %{"address" => address_input(world, :a2, :st_a2)}
+      store = world.records.store1
+
+      denied =
+        run(
+          conn,
+          @update_store,
+          %{"id" => store.id, "input" => move},
+          user(world, :area_read)
+        )
+
+      assert code(denied) in ["forbidden", "not_found"]
+
+      moved =
+        run(conn, @update_store, %{"id" => store.id, "input" => move}, user(world, :area_edit))
+
+      assert moved["errors"] == nil
+
+      assert %{area_id: area_id} =
+               Address
+               |> Ash.Query.filter(store_id == ^store.id)
+               |> Ash.read_one!(authorize?: false)
+
+      assert area_id == world.records.a2.id
     end
 
     test "changes the admin family", %{conn: conn, world: world} do

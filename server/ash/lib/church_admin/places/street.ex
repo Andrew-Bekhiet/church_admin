@@ -14,8 +14,8 @@ defmodule ChurchAdmin.Places.Street do
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Authz.Checks.{HasPermission, System}
-  alias ChurchAdmin.Changes.{InUseOnForeignKey, StampActor}
-  alias ChurchAdmin.Errors.Codes
+  alias ChurchAdmin.Changes.StampActor
+  alias ChurchAdmin.Errors.{Codes, ConstraintCodes}
   alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.Places.Calculations.{IntersectsGeography, NearGeography}
   alias ChurchAdmin.Places.Changes.{ApplyStreetAreas, SyncAreasStreets}
@@ -62,8 +62,8 @@ defmodule ChurchAdmin.Places.Street do
 
   archive do
     attribute :deleted_at
-    base_filter?(true)
-    exclude_destroy_actions([:hard_destroy])
+    base_filter? true
+    exclude_destroy_actions [:hard_destroy]
   end
 
   actions do
@@ -126,7 +126,9 @@ defmodule ChurchAdmin.Places.Street do
 
   changes do
     change {RecordEdit, table: "streets"}, on: [:create, :update, :destroy]
-    change {InUseOnForeignKey, code: Codes.street_in_use()}, on: [:destroy]
+
+    change {ConstraintCodes, codes: %{"addresses_streets_fk" => Codes.street_in_use()}},
+      on: [:destroy]
   end
 
   policies do

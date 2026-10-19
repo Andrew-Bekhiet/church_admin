@@ -6,7 +6,6 @@ defmodule ChurchAdminWeb.Graphql.AccountsReadGapsTest do
 
   setup do
     world = AuthzWorld.build!()
-    ChurchAdmin.DataCase.set_system_db_session()
     {:ok, world: world}
   end
 
