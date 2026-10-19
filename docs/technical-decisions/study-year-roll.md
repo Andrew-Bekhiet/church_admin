@@ -119,6 +119,13 @@ its own failure. The two are separated:
   procedure records `failed` with the exception message and detail (the
   blocker list lives in `detail`). That insert commits with the procedure.
 
+Since the port to Ash (ENG-266) the roll checks those two invariants itself,
+after applying the plan and inside its transaction, on the same rows the
+deferred triggers covered: the persons the roll updated and the memberships it
+inserted. Violations elsewhere never fail the roll. A failed range check's
+detail lists every violating membership (`person_id: … service_id: …`, one per
+line), where the trigger stopped at the first.
+
 Idempotency is a partial unique index on `season_year where status = 'succeeded'`.
 A failed attempt therefore does not block a retry the same day, and a successful
 one can never be repeated ([C13], [C16]).

@@ -40,6 +40,8 @@ defmodule ChurchAdmin.People.GroupMembership do
                  default_limit: 100,
                  max_page_size: 100
     end
+
+    destroy :leave_group
   end
 
   policies do

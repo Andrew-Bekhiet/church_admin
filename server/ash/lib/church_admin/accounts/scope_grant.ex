@@ -52,6 +52,10 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    update :set_service_study_year do
+      accept [:service_study_year]
+    end
   end
 
   policies do

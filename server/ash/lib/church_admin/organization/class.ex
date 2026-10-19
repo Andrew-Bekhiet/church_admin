@@ -57,6 +57,16 @@ defmodule ChurchAdmin.Organization.Class do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    update :place_cohort do
+      accept [:service_id, :service_study_year, :service_study_year_to]
+      require_atomic? false
+    end
+
+    update :retire_cohort do
+      require_atomic? false
+      change atomic_update(:deleted_at, expr(now()))
+    end
   end
 
   policies do
