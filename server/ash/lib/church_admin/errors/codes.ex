@@ -21,8 +21,11 @@ defmodule ChurchAdmin.Errors.Codes do
     contact/phone-taken contact/main-phone-taken contact/not-owned
     relation/not-found
     validation/invalid
-    service/name-taken service/default-meeting-mismatch
-    attendance/already-recorded
+    service/name-taken service/default-meeting-mismatch service/default-meeting-archived
+    group/default-meeting-mismatch group/default-meeting-archived
+    meeting/service-study-year-mismatch
+    attendance/already-recorded attendance/meeting-not-found attendance/meeting-archived
+    attendance/audience-mismatch attendance/not-a-servant-of-meeting attendance/not-in-meeting
     user/email-taken user/name-taken user/person-already-linked user/permission-not-grantable
     user/permission-levels-inconsistent user/duplicate-scope user/email-locked
     invitation/scope-required invitation/scope-not-manageable invitation/invalid-expiry
