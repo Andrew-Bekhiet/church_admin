@@ -12,6 +12,11 @@
     :phoenix
   ],
   subdirectories: ["priv/*/migrations"],
-  inputs: ["*.{ex,exs}", "{config,lib,test}/**/*.{ex,exs}", "priv/*/seeds.exs"],
+  inputs: [
+    "*.{ex,exs}",
+    "{config,lib,test}/**/*.{ex,exs}",
+    "dev/lib/**/*.{ex,exs}",
+    "priv/*/seeds.exs"
+  ],
   plugins: [Absinthe.Formatter, Spark.Formatter]
 ]

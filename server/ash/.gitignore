@@ -25,3 +25,6 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 church_admin-*.tar
 
+
+# Generated medium seed data (the small files are committed for e2e)
+/priv/repo/seeds/generated/medium.*
