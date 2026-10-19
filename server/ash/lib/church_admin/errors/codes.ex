@@ -17,6 +17,7 @@ defmodule ChurchAdmin.Errors.Codes do
 
   @domain_codes ~w(
     person/not-found person/forbidden person/user-link-not-permitted
+    person/container-required person/study-year-outside-service person/group-outside-service
     family/not-found family/forbidden family/relation-cycle
     contact/phone-taken contact/main-phone-taken contact/not-owned
     relation/not-found
