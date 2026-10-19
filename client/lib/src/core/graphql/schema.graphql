@@ -1267,6 +1267,1262 @@ type Address {
   family: Family
 }
 
+enum VisitSortField {
+  VISIT_ID
+  TABLE
+  RECORD_ID
+  TIME
+  RECORDED_BY
+  IS_FATHER_VISIT
+}
+
+"A keyset page of :visit"
+type KeysetPageOfVisit {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Visit!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input VisitFilterIsFatherVisit {
+  isNil: Boolean
+  eq: Boolean
+  notEq: Boolean
+  in: [Boolean!]
+  lessThan: Boolean
+  greaterThan: Boolean
+  lessThanOrEqual: Boolean
+  greaterThanOrEqual: Boolean
+  isDistinctFrom: Boolean
+  isNotDistinctFrom: Boolean
+}
+
+input VisitFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input VisitFilterTime {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input VisitFilterRecordId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input VisitFilterTable {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input VisitFilterVisitId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input VisitFilterInput {
+  and: [VisitFilterInput!]
+  or: [VisitFilterInput!]
+  not: [VisitFilterInput!]
+  visitId: VisitFilterVisitId
+  table: VisitFilterTable
+  recordId: VisitFilterRecordId
+  time: VisitFilterTime
+  recordedBy: VisitFilterRecordedBy
+  isFatherVisit: VisitFilterIsFatherVisit
+  user: UserFilterInput
+}
+
+input VisitSortInput {
+  order: SortOrder
+  field: VisitSortField!
+}
+
+type Visit {
+  id: ID!
+  visitId: ID!
+  table: String!
+  recordId: ID!
+  time: DateTime!
+  recordedBy: ID
+  isFatherVisit: Boolean!
+  user: User
+}
+
+enum LatestVisitSortField {
+  TABLE
+  RECORD_ID
+  TIME
+  RECORDED_BY
+  VISIT_ID
+}
+
+"A keyset page of :latest_visit"
+type KeysetPageOfLatestVisit {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [LatestVisit!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input LatestVisitFilterVisitId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestVisitFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestVisitFilterTime {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input LatestVisitFilterRecordId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestVisitFilterTable {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input LatestVisitFilterInput {
+  and: [LatestVisitFilterInput!]
+  or: [LatestVisitFilterInput!]
+  not: [LatestVisitFilterInput!]
+  table: LatestVisitFilterTable
+  recordId: LatestVisitFilterRecordId
+  time: LatestVisitFilterTime
+  recordedBy: LatestVisitFilterRecordedBy
+  visitId: LatestVisitFilterVisitId
+  user: UserFilterInput
+}
+
+input LatestVisitSortInput {
+  order: SortOrder
+  field: LatestVisitSortField!
+}
+
+type LatestVisit {
+  "A unique identifier"
+  id: ID!
+
+  table: String!
+
+  recordId: ID!
+
+  time: DateTime
+
+  recordedBy: ID
+
+  visitId: ID
+
+  user: User
+}
+
+enum LatestKodasSortField {
+  PERSON_ID
+  TIME
+  RECORDED_BY
+}
+
+"A keyset page of :latest_kodas"
+type KeysetPageOfLatestKodas {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [LatestKodas!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input LatestKodasFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestKodasFilterTime {
+  isNil: Boolean
+  eq: Date
+  notEq: Date
+  in: [Date]
+  lessThan: Date
+  greaterThan: Date
+  lessThanOrEqual: Date
+  greaterThanOrEqual: Date
+  isDistinctFrom: Date
+  isNotDistinctFrom: Date
+}
+
+input LatestKodasFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestKodasFilterInput {
+  and: [LatestKodasFilterInput!]
+  or: [LatestKodasFilterInput!]
+  not: [LatestKodasFilterInput!]
+  personId: LatestKodasFilterPersonId
+  time: LatestKodasFilterTime
+  recordedBy: LatestKodasFilterRecordedBy
+  person: PersonFilterInput
+  user: UserFilterInput
+}
+
+input LatestKodasSortInput {
+  order: SortOrder
+  field: LatestKodasSortField!
+}
+
+type LatestKodas {
+  id: ID!
+  personId: ID!
+  time: Date
+  recordedBy: ID
+  person: Person
+  user: User
+}
+
+enum LatestFatherVisitSortField {
+  TABLE
+  RECORD_ID
+  TIME
+  RECORDED_BY
+  VISIT_ID
+}
+
+"A keyset page of :latest_father_visit"
+type KeysetPageOfLatestFatherVisit {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [LatestFatherVisit!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input LatestFatherVisitFilterVisitId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestFatherVisitFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestFatherVisitFilterTime {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input LatestFatherVisitFilterRecordId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestFatherVisitFilterTable {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input LatestFatherVisitFilterInput {
+  and: [LatestFatherVisitFilterInput!]
+  or: [LatestFatherVisitFilterInput!]
+  not: [LatestFatherVisitFilterInput!]
+  table: LatestFatherVisitFilterTable
+  recordId: LatestFatherVisitFilterRecordId
+  time: LatestFatherVisitFilterTime
+  recordedBy: LatestFatherVisitFilterRecordedBy
+  visitId: LatestFatherVisitFilterVisitId
+  user: UserFilterInput
+}
+
+input LatestFatherVisitSortInput {
+  order: SortOrder
+  field: LatestFatherVisitSortField!
+}
+
+type LatestFatherVisit {
+  "A unique identifier"
+  id: ID!
+
+  table: String!
+
+  recordId: ID!
+
+  time: DateTime
+
+  recordedBy: ID
+
+  visitId: ID
+
+  user: User
+}
+
+enum LatestEditSortField {
+  TABLE
+  RECORD_ID
+  TIME
+  RECORDED_BY
+}
+
+"A keyset page of :latest_edit"
+type KeysetPageOfLatestEdit {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [LatestEdit!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input LatestEditFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestEditFilterTime {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input LatestEditFilterRecordId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestEditFilterTable {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input LatestEditFilterInput {
+  and: [LatestEditFilterInput!]
+  or: [LatestEditFilterInput!]
+  not: [LatestEditFilterInput!]
+  table: LatestEditFilterTable
+  recordId: LatestEditFilterRecordId
+  time: LatestEditFilterTime
+  recordedBy: LatestEditFilterRecordedBy
+  user: UserFilterInput
+}
+
+input LatestEditSortInput {
+  order: SortOrder
+  field: LatestEditSortField!
+}
+
+type LatestEdit {
+  "A unique identifier"
+  id: ID!
+
+  table: String!
+
+  recordId: ID!
+
+  time: DateTime
+
+  recordedBy: ID
+
+  user: User
+}
+
+enum LatestConfessionSortField {
+  PERSON_ID
+  TIME
+  RECORDED_BY
+}
+
+"A keyset page of :latest_confession"
+type KeysetPageOfLatestConfession {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [LatestConfession!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input LatestConfessionFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestConfessionFilterTime {
+  isNil: Boolean
+  eq: Date
+  notEq: Date
+  in: [Date]
+  lessThan: Date
+  greaterThan: Date
+  lessThanOrEqual: Date
+  greaterThanOrEqual: Date
+  isDistinctFrom: Date
+  isNotDistinctFrom: Date
+}
+
+input LatestConfessionFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestConfessionFilterInput {
+  and: [LatestConfessionFilterInput!]
+  or: [LatestConfessionFilterInput!]
+  not: [LatestConfessionFilterInput!]
+  personId: LatestConfessionFilterPersonId
+  time: LatestConfessionFilterTime
+  recordedBy: LatestConfessionFilterRecordedBy
+  person: PersonFilterInput
+  user: UserFilterInput
+}
+
+input LatestConfessionSortInput {
+  order: SortOrder
+  field: LatestConfessionSortField!
+}
+
+type LatestConfession {
+  id: ID!
+  personId: ID!
+  time: Date
+  recordedBy: ID
+  person: Person
+  user: User
+}
+
+enum LatestCallSortField {
+  PERSON_ID
+  TIME
+  RECORDED_BY
+}
+
+"A keyset page of :latest_call"
+type KeysetPageOfLatestCall {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [LatestCall!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input LatestCallFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestCallFilterTime {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input LatestCallFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input LatestCallFilterInput {
+  and: [LatestCallFilterInput!]
+  or: [LatestCallFilterInput!]
+  not: [LatestCallFilterInput!]
+  personId: LatestCallFilterPersonId
+  time: LatestCallFilterTime
+  recordedBy: LatestCallFilterRecordedBy
+  person: PersonFilterInput
+  user: UserFilterInput
+}
+
+input LatestCallSortInput {
+  order: SortOrder
+  field: LatestCallSortField!
+}
+
+type LatestCall {
+  id: ID!
+  personId: ID!
+  time: DateTime
+  recordedBy: ID
+  person: Person
+  user: User
+}
+
+enum KodasSortField {
+  ID
+  DAY_ID
+  PERSON_ID
+  RECORDED_BY
+  TIME
+}
+
+"A keyset page of :kodas"
+type KeysetPageOfKodas {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Kodas!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input KodasFilterTime {
+  isNil: Boolean
+  eq: Date
+  notEq: Date
+  in: [Date]
+  lessThan: Date
+  greaterThan: Date
+  lessThanOrEqual: Date
+  greaterThanOrEqual: Date
+  isDistinctFrom: Date
+  isNotDistinctFrom: Date
+}
+
+input KodasFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input KodasFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input KodasFilterDayId {
+  isNil: Boolean
+  eq: Date
+  notEq: Date
+  in: [Date!]
+  lessThan: Date
+  greaterThan: Date
+  lessThanOrEqual: Date
+  greaterThanOrEqual: Date
+  isDistinctFrom: Date
+  isNotDistinctFrom: Date
+}
+
+input KodasFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input KodasFilterInput {
+  and: [KodasFilterInput!]
+  or: [KodasFilterInput!]
+  not: [KodasFilterInput!]
+  id: KodasFilterId
+  dayId: KodasFilterDayId
+  personId: KodasFilterPersonId
+  recordedBy: KodasFilterRecordedBy
+  time: KodasFilterTime
+  day: ActivityDayFilterInput
+  person: PersonFilterInput
+  user: UserFilterInput
+}
+
+input KodasSortInput {
+  order: SortOrder
+  field: KodasSortField!
+}
+
+type Kodas {
+  id: ID!
+  dayId: Date!
+  personId: ID!
+  recordedBy: ID!
+  time: Date
+  day: ActivityDay
+  person: Person
+  user: User
+}
+
+enum EditSortField {
+  TABLE
+  RECORD_ID
+  TIME
+  RECORDED_BY
+}
+
+"A keyset page of :edit"
+type KeysetPageOfEdit {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Edit!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input EditFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input EditFilterTime {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input EditFilterRecordId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input EditFilterTable {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input EditFilterInput {
+  and: [EditFilterInput!]
+  or: [EditFilterInput!]
+  not: [EditFilterInput!]
+  table: EditFilterTable
+  recordId: EditFilterRecordId
+  time: EditFilterTime
+  recordedBy: EditFilterRecordedBy
+  user: UserFilterInput
+}
+
+input EditSortInput {
+  order: SortOrder
+  field: EditSortField!
+}
+
+type Edit {
+  table: String!
+  recordId: ID!
+  time: DateTime!
+  recordedBy: ID
+  user: User
+}
+
+enum ConfessionSortField {
+  ID
+  DAY_ID
+  PERSON_ID
+  RECORDED_BY
+  TIME
+}
+
+"A keyset page of :confession"
+type KeysetPageOfConfession {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Confession!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input ConfessionFilterTime {
+  isNil: Boolean
+  eq: Date
+  notEq: Date
+  in: [Date]
+  lessThan: Date
+  greaterThan: Date
+  lessThanOrEqual: Date
+  greaterThanOrEqual: Date
+  isDistinctFrom: Date
+  isNotDistinctFrom: Date
+}
+
+input ConfessionFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ConfessionFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ConfessionFilterDayId {
+  isNil: Boolean
+  eq: Date
+  notEq: Date
+  in: [Date!]
+  lessThan: Date
+  greaterThan: Date
+  lessThanOrEqual: Date
+  greaterThanOrEqual: Date
+  isDistinctFrom: Date
+  isNotDistinctFrom: Date
+}
+
+input ConfessionFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input ConfessionFilterInput {
+  and: [ConfessionFilterInput!]
+  or: [ConfessionFilterInput!]
+  not: [ConfessionFilterInput!]
+  id: ConfessionFilterId
+  dayId: ConfessionFilterDayId
+  personId: ConfessionFilterPersonId
+  recordedBy: ConfessionFilterRecordedBy
+  time: ConfessionFilterTime
+  day: ActivityDayFilterInput
+  person: PersonFilterInput
+  user: UserFilterInput
+}
+
+input ConfessionSortInput {
+  order: SortOrder
+  field: ConfessionSortField!
+}
+
+type Confession {
+  id: ID!
+  dayId: Date!
+  personId: ID!
+  recordedBy: ID!
+  time: Date
+  day: ActivityDay
+  person: Person
+  user: User
+}
+
+enum CallSortField {
+  TIME
+  PERSON_ID
+  RECORDED_BY
+}
+
+"A keyset page of :call"
+type KeysetPageOfCall {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [Call!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input CallFilterRecordedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input CallFilterPersonId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input CallFilterTime {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input CallFilterInput {
+  and: [CallFilterInput!]
+  or: [CallFilterInput!]
+  not: [CallFilterInput!]
+  time: CallFilterTime
+  personId: CallFilterPersonId
+  recordedBy: CallFilterRecordedBy
+  person: PersonFilterInput
+  user: UserFilterInput
+}
+
+input CallSortInput {
+  order: SortOrder
+  field: CallSortField!
+}
+
+type Call {
+  id: ID!
+  time: DateTime!
+  personId: ID!
+  recordedBy: ID
+  person: Person
+  user: User
+}
+
+enum ActivityDaySortField {
+  DAY
+}
+
+"A keyset page of :activity_day"
+type KeysetPageOfActivityDay {
+  "Total count on all pages"
+  count: Int
+
+  "The records contained in the page"
+  results: [ActivityDay!]
+
+  "The first keyset in the results"
+  startKeyset: String
+
+  "The last keyset in the results"
+  endKeyset: String
+}
+
+input ActivityDayFilterDay {
+  isNil: Boolean
+  eq: Date
+  notEq: Date
+  in: [Date!]
+  lessThan: Date
+  greaterThan: Date
+  lessThanOrEqual: Date
+  greaterThanOrEqual: Date
+  isDistinctFrom: Date
+  isNotDistinctFrom: Date
+}
+
+input ActivityDayFilterInput {
+  and: [ActivityDayFilterInput!]
+  or: [ActivityDayFilterInput!]
+  not: [ActivityDayFilterInput!]
+  day: ActivityDayFilterDay
+  confessions: ConfessionFilterInput
+  kodases: KodasFilterInput
+}
+
+input ActivityDaySortInput {
+  order: SortOrder
+  field: ActivityDaySortField!
+}
+
+type ActivityDay {
+  id: ID!
+  day: Date!
+  confessions(
+    "How to sort the records in the response"
+    sort: [ConfessionSortInput]
+
+    "A filter to limit the results"
+    filter: ConfessionFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Confession!]!
+  kodases(
+    "How to sort the records in the response"
+    sort: [KodasSortInput]
+
+    "A filter to limit the results"
+    filter: KodasFilterInput
+
+    "The number of records to return."
+    limit: Int
+
+    "The number of records to skip."
+    offset: Int
+  ): [Kodas!]!
+}
+
 enum UserPermissionSortField {
   UID
   PERMISSION
@@ -1991,6 +3247,250 @@ type RootQueryType {
     "The number of records to return to the end. Maximum 1000"
     last: Int
   ): KeysetPageOfUserPermission
+  activityDay(
+    "The id of the record"
+    id: ID!
+  ): ActivityDay
+  activityDays(
+    "How to sort the records in the response"
+    sort: [ActivityDaySortInput]
+
+    "A filter to limit the results"
+    filter: ActivityDayFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfActivityDay
+  calls(
+    "How to sort the records in the response"
+    sort: [CallSortInput]
+
+    "A filter to limit the results"
+    filter: CallFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfCall
+  confession(
+    "The id of the record"
+    id: ID!
+  ): Confession
+  confessions(
+    "How to sort the records in the response"
+    sort: [ConfessionSortInput]
+
+    "A filter to limit the results"
+    filter: ConfessionFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfConfession
+  edits(
+    "How to sort the records in the response"
+    sort: [EditSortInput]
+
+    "A filter to limit the results"
+    filter: EditFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfEdit
+  kodas(
+    "The id of the record"
+    id: ID!
+  ): Kodas
+  kodases(
+    "How to sort the records in the response"
+    sort: [KodasSortInput]
+
+    "A filter to limit the results"
+    filter: KodasFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfKodas
+  latestCalls(
+    "How to sort the records in the response"
+    sort: [LatestCallSortInput]
+
+    "A filter to limit the results"
+    filter: LatestCallFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfLatestCall
+  latestConfessions(
+    "How to sort the records in the response"
+    sort: [LatestConfessionSortInput]
+
+    "A filter to limit the results"
+    filter: LatestConfessionFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfLatestConfession
+  latestEdits(
+    "How to sort the records in the response"
+    sort: [LatestEditSortInput]
+
+    "A filter to limit the results"
+    filter: LatestEditFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfLatestEdit
+  latestFatherVisits(
+    "How to sort the records in the response"
+    sort: [LatestFatherVisitSortInput]
+
+    "A filter to limit the results"
+    filter: LatestFatherVisitFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfLatestFatherVisit
+  latestKodases(
+    "How to sort the records in the response"
+    sort: [LatestKodasSortInput]
+
+    "A filter to limit the results"
+    filter: LatestKodasFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfLatestKodas
+  latestVisits(
+    "How to sort the records in the response"
+    sort: [LatestVisitSortInput]
+
+    "A filter to limit the results"
+    filter: LatestVisitFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfLatestVisit
+  visit(
+    "The id of the record"
+    id: ID!
+  ): Visit
+  visits(
+    "How to sort the records in the response"
+    sort: [VisitSortInput]
+
+    "A filter to limit the results"
+    filter: VisitFilterInput
+
+    "The number of records to return from the beginning. Maximum 1000"
+    first: Int
+
+    "Show records before the specified keyset."
+    before: String
+
+    "Show records after the specified keyset."
+    after: String
+
+    "The number of records to return to the end. Maximum 1000"
+    last: Int
+  ): KeysetPageOfVisit
   address(
     "The id of the record"
     id: ID!
