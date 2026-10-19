@@ -5,7 +5,7 @@ defmodule ChurchAdmin.Places.AreaStreet do
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
-  alias ChurchAdmin.Authz.Checks.{SignedIn, System}
+  alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Places.{Area, Street}
 
   graphql do
@@ -46,7 +46,7 @@ defmodule ChurchAdmin.Places.AreaStreet do
     end
 
     policy action_type(:read) do
-      authorize_if SignedIn
+      authorize_if actor_present()
     end
   end
 
