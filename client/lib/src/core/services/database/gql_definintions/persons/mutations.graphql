@@ -1,0 +1,40 @@
+mutation createPerson($input: CreatePersonInput!) {
+  createPerson(input: $input) {
+    result {
+      ...Person
+    }
+  }
+}
+
+mutation updatePerson($id: ID!, $input: UpdatePersonInput) {
+  updatePerson(id: $id, input: $input) {
+    result {
+      ...Person
+    }
+  }
+}
+
+mutation deletePerson($id: ID!) {
+  deletePerson(id: $id) {
+    result {
+      ...Person
+    }
+  }
+}
+
+mutation recordPersonSpiritualDays(
+  $id: ID!
+  $input: RecordPersonSpiritualDaysInput!
+) {
+  recordPersonSpiritualDays(id: $id, input: $input) {
+    result {
+      ...Person
+      latestConfession {
+        ...PersonLatestConfession
+      }
+      latestKodas {
+        ...PersonLatestKodas
+      }
+    }
+  }
+}

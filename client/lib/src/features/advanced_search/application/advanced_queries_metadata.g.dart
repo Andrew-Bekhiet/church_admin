@@ -229,28 +229,12 @@ abstract final class _$AdvancedQueriesMetadata {
     fromJson: PersonsGroups.fromJson,
   );
 
-  final personsHobbies = QueryableType<PersonsHobbies>(
-    name: 'PersonsHobbies',
-    label: 'هوايات المخدوم',
-    fieldsMetadata: PersonsHobbiesFields().allFields,
-    fieldsMetadataByName: PersonsHobbiesFields().allFieldsByName,
-    fromJson: PersonsHobbies.fromJson,
-  );
-
   final personsServices = QueryableType<PersonsServices>(
     name: 'PersonsServices',
     label: 'خدمات المخدوم',
     fieldsMetadata: PersonsServicesFields().allFields,
     fieldsMetadataByName: PersonsServicesFields().allFieldsByName,
     fromJson: PersonsServices.fromJson,
-  );
-
-  final personsTags = QueryableType<PersonsTags>(
-    name: 'PersonsTags',
-    label: 'شارات المخدوم',
-    fieldsMetadata: PersonsTagsFields().allFields,
-    fieldsMetadataByName: PersonsTagsFields().allFieldsByName,
-    fromJson: PersonsTags.fromJson,
   );
 
   final school = QueryableType<School>(
@@ -389,9 +373,7 @@ abstract final class _$AdvancedQueriesMetadata {
     classesPersons,
     familiesFamilies,
     personsGroups,
-    personsHobbies,
     personsServices,
-    personsTags,
     school,
     service,
     shammasLevel,
@@ -433,9 +415,7 @@ abstract final class _$AdvancedQueriesMetadata {
     ClassesPersons: classesPersons,
     FamiliesFamilies: familiesFamilies,
     PersonsGroups: personsGroups,
-    PersonsHobbies: personsHobbies,
     PersonsServices: personsServices,
-    PersonsTags: personsTags,
     School: school,
     Service: service,
     ShammasLevel: shammasLevel,

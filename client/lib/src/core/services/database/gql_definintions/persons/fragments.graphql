@@ -1,0 +1,262 @@
+fragment PersonNoPhoto on Person {
+  id
+  name
+  color
+  userCanEdit
+}
+
+fragment Person on Person {
+  ...PersonNoPhoto
+  photoUpdatedAt
+  blurhash
+  dataCheck {
+    ...PersonDataCheck
+  }
+}
+
+fragment PersonDetails on Person {
+  ...Person
+  address {
+    ...PersonAddress
+  }
+  birthdate
+  classMemberships(limit: $classesLimit) {
+    id
+    class {
+      ...Class
+    }
+  }
+  church {
+    ...Church
+  }
+  contacts(
+    sort: [
+      { field: IS_MAIN_PHONE, order: DESC }
+      { field: CREATED_AT, order: ASC }
+    ]
+  ) {
+    ...PersonContact
+  }
+  college {
+    ...College
+  }
+  family {
+    ...PersonFamily
+  }
+  father {
+    ...Father
+    church {
+      ...Church
+    }
+  }
+  gender
+  groupMemberships(limit: $groupsLimit) {
+    groupId
+    group {
+      ...Group
+    }
+  }
+  isServant
+  servingChurch {
+    ...Church
+  }
+  serviceType
+  isShammas
+  workStatus
+  job {
+    ...Job
+  }
+  jobDescription
+  latestCall {
+    ...PersonLatestCall
+  }
+  latestConfession {
+    ...PersonLatestConfession
+  }
+  latestEdit {
+    ...PersonLatestEdit
+  }
+  latestKodas {
+    ...PersonLatestKodas
+  }
+  latestVisit {
+    ...PersonLatestVisit
+  }
+  notes
+  martialStatus
+  personType {
+    ...PersonType
+  }
+  qualification {
+    ...Qualification
+  }
+  school {
+    ...School
+  }
+  serviceMemberships(limit: $servicesLimit) {
+    serviceId
+    service {
+      ...ServiceWithStudyYears
+    }
+  }
+  shammasLevel {
+    ...ShammasLevel
+  }
+  state {
+    ...PersonState
+  }
+  studyYear {
+    ...StudyYear
+  }
+  hobbies(sort: [{ field: NAME, order: ASC }]) {
+    ...Hobby
+  }
+  tags(sort: [{ field: NAME, order: ASC }]) {
+    ...Tag
+  }
+  uid
+  user {
+    ...PersonUser
+  }
+}
+
+fragment PersonDataCheck on DataCheck {
+  id
+  familyId
+  isComplete
+  completenessPercent
+  familyCheck
+  addressCheck
+  userOverride
+  details
+}
+
+fragment PersonAddress on Address {
+  id
+  countryIsoCode
+  area {
+    ...Area
+  }
+  district {
+    ...District
+  }
+  street {
+    ...Street
+  }
+  substreetName
+  fullAddressText
+  geolocation
+  houseCode
+  storeyNumber
+  apartmentNumber
+  specialLandmark
+}
+
+fragment PersonContact on Contact {
+  id
+  label
+  phone
+  isMainPhone
+}
+
+fragment PersonFamilyContact on FamilyContact {
+  id
+  personId
+  label
+  phone
+  isMainPhone
+  personType {
+    ...PersonType
+  }
+}
+
+fragment PersonFamily on Family {
+  id
+  name
+  color
+  userCanEdit
+  photoUpdatedAt
+  blurhash
+  dataCheck {
+    ...PersonDataCheck
+  }
+}
+
+fragment PersonUser on User {
+  id
+  uid
+  name
+  email
+  photoUpdatedAt
+  blurhash
+}
+
+fragment PersonLatestCall on LatestCall {
+  id
+  time
+  user {
+    ...PersonUser
+  }
+}
+
+fragment PersonLatestConfession on LatestConfession {
+  id
+  time
+  user {
+    ...PersonUser
+  }
+}
+
+fragment PersonLatestEdit on LatestEdit {
+  id
+  time
+  user {
+    ...PersonUser
+  }
+}
+
+fragment PersonLatestKodas on LatestKodas {
+  id
+  time
+  user {
+    ...PersonUser
+  }
+}
+
+fragment PersonLatestVisit on LatestVisit {
+  id
+  time
+  user {
+    ...PersonUser
+  }
+}
+
+fragment PersonMemberships on Person {
+  id
+  name
+  userCanEdit
+  serviceMemberships {
+    serviceId
+    service {
+      ...ServiceWithStudyYears
+    }
+  }
+  classMemberships {
+    id
+    class {
+      ...Class
+      service {
+        ...ServiceWithStudyYears
+      }
+    }
+  }
+  groupMemberships {
+    groupId
+    group {
+      ...Group
+      service {
+        ...ServiceWithStudyYears
+      }
+    }
+  }
+}

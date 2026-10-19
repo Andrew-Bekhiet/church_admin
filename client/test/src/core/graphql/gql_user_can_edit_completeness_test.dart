@@ -15,10 +15,6 @@ void main() {
   const rules = UserCanEditRules(
     exemptions: [
       (operation: 'classesForService', field: 'classes'),
-      (operation: 'personsNames', field: 'persons'),
-      (operation: 'personHistoryAnalysis', field: 'personsByPk'),
-      (operation: 'personServicesClassesGroups', field: 'personsByPk'),
-      (operation: 'personsPhoneContacts', field: 'persons'),
       (operation: 'historyMeetingRoster', field: 'person'),
     ],
   );
