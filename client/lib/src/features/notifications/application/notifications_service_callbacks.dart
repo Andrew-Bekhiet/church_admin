@@ -144,7 +144,7 @@ class NotificationsServiceCallbacks {
   static AdvancedQuery _createAdvQueryWith({
     required String name,
     required FieldMetadata field,
-    required FieldMetadata aggField,
+    required FieldMetadata latestField,
     required DateTime value,
   }) {
     return AdvancedQuery(
@@ -170,14 +170,10 @@ class NotificationsServiceCallbacks {
       ],
       orderBy: [
         OrderBy(
-          field: aggField.redirectTo(
-            AggregateDataFields().max.redirectTo(
-              LastRecordedByInfoFields().time,
-            ),
-          ),
+          field: latestField.redirectTo(LastRecordedByInfoFields().time),
           value: OrderByValue.desc,
         ),
-        OrderBy(field: LastRecordedByInfoFields().time),
+        OrderBy(field: PersonFields().name),
       ],
     );
   }
@@ -189,7 +185,7 @@ class NotificationsServiceCallbacks {
     final query = _createAdvQueryWith(
       name: 'إشعارات القداس',
       field: PersonFields().kodasHistory,
-      aggField: PersonFields().kodasHistoryAggregate,
+      latestField: PersonFields().lastKodas,
       value: date,
     );
 
@@ -208,7 +204,7 @@ class NotificationsServiceCallbacks {
     final query = _createAdvQueryWith(
       name: 'إنذار حضور الاجتماع',
       field: PersonFields().attendanceHistory,
-      aggField: PersonFields().attendanceHistoryAggregate,
+      latestField: PersonFields().lastAttendance,
       value: DateTime.now().subtract(const Duration(days: 7)),
     );
 
@@ -229,7 +225,7 @@ class NotificationsServiceCallbacks {
     final query = _createAdvQueryWith(
       name: 'إنذار الافتقاد',
       field: PersonFields().visitHistory,
-      aggField: PersonFields().visitHistoryAggregate,
+      latestField: PersonFields().lastVisit,
       value: date,
     );
 
@@ -248,7 +244,7 @@ class NotificationsServiceCallbacks {
     final query = _createAdvQueryWith(
       name: 'إنذار الاعتراف',
       field: PersonFields().confessionHistory,
-      aggField: PersonFields().confessionHistoryAggregate,
+      latestField: PersonFields().lastConfession,
       value: DateTime.now().subtract(const Duration(days: 7)),
     );
 
