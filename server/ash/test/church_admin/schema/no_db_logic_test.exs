@@ -70,10 +70,13 @@ defmodule ChurchAdmin.Schema.NoDbLogicTest do
     missing = allowed -- live
 
     assert unexpected == [] and missing == [], """
-    The migrated database and test/support/db_logic_allowlist.txt disagree.
+    The database holds logic that test/support/db_logic_allowlist.txt does not list.
+    The allowlist is intentionally empty: the database carries data, constraints,
+    domains, indexes and plain views only, and new logic belongs in Ash (changes,
+    validations, policies, calculations), not in a trigger, a function or a
+    session-reading default.
 
-    In the database but not allowlisted (new DB logic belongs in Ash; if this
-    is a deliberate leftover, add the line):
+    In the database but not allowlisted:
     #{Enum.map_join(unexpected, "\n", &"  + #{&1}")}
 
     Allowlisted but no longer in the database (delete these lines):

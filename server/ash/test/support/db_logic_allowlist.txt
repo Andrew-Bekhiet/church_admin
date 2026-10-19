@@ -1,3 +1,0 @@
-function history.edit_history_trigger()
-function public.set_current_timestamp_updated_at()
-function public.soft_delete_trigger()
