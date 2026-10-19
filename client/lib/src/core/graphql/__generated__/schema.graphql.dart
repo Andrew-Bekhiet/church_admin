@@ -798,6 +798,360 @@ class _CopyWithStubImpl_Input_AdminOnInput<TRes>
   }) => _res;
 }
 
+class Input_AddressInput {
+  factory Input_AddressInput({
+    String? substreetName,
+    String? streetId,
+    int? storeyNumber,
+    String? specialLandmark,
+    String? houseCode,
+    Json? geolocation,
+    String? districtId,
+    String? countryIsoCode,
+    String? areaId,
+    int? apartmentNumber,
+  }) => Input_AddressInput._({
+    if (substreetName != null) r'substreetName': substreetName,
+    if (streetId != null) r'streetId': streetId,
+    if (storeyNumber != null) r'storeyNumber': storeyNumber,
+    if (specialLandmark != null) r'specialLandmark': specialLandmark,
+    if (houseCode != null) r'houseCode': houseCode,
+    if (geolocation != null) r'geolocation': geolocation,
+    if (districtId != null) r'districtId': districtId,
+    if (countryIsoCode != null) r'countryIsoCode': countryIsoCode,
+    if (areaId != null) r'areaId': areaId,
+    if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
+  });
+
+  Input_AddressInput._(this._$data);
+
+  factory Input_AddressInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('substreetName')) {
+      final l$substreetName = data['substreetName'];
+      result$data['substreetName'] = (l$substreetName as String?);
+    }
+    if (data.containsKey('streetId')) {
+      final l$streetId = data['streetId'];
+      result$data['streetId'] = (l$streetId as String?);
+    }
+    if (data.containsKey('storeyNumber')) {
+      final l$storeyNumber = data['storeyNumber'];
+      result$data['storeyNumber'] = (l$storeyNumber as int?);
+    }
+    if (data.containsKey('specialLandmark')) {
+      final l$specialLandmark = data['specialLandmark'];
+      result$data['specialLandmark'] = (l$specialLandmark as String?);
+    }
+    if (data.containsKey('houseCode')) {
+      final l$houseCode = data['houseCode'];
+      result$data['houseCode'] = (l$houseCode as String?);
+    }
+    if (data.containsKey('geolocation')) {
+      final l$geolocation = data['geolocation'];
+      result$data['geolocation'] = (l$geolocation as Json?);
+    }
+    if (data.containsKey('districtId')) {
+      final l$districtId = data['districtId'];
+      result$data['districtId'] = (l$districtId as String?);
+    }
+    if (data.containsKey('countryIsoCode')) {
+      final l$countryIsoCode = data['countryIsoCode'];
+      result$data['countryIsoCode'] = (l$countryIsoCode as String?);
+    }
+    if (data.containsKey('areaId')) {
+      final l$areaId = data['areaId'];
+      result$data['areaId'] = (l$areaId as String?);
+    }
+    if (data.containsKey('apartmentNumber')) {
+      final l$apartmentNumber = data['apartmentNumber'];
+      result$data['apartmentNumber'] = (l$apartmentNumber as int?);
+    }
+    return Input_AddressInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get substreetName => (_$data['substreetName'] as String?);
+
+  String? get streetId => (_$data['streetId'] as String?);
+
+  int? get storeyNumber => (_$data['storeyNumber'] as int?);
+
+  String? get specialLandmark => (_$data['specialLandmark'] as String?);
+
+  String? get houseCode => (_$data['houseCode'] as String?);
+
+  Json? get geolocation => (_$data['geolocation'] as Json?);
+
+  String? get districtId => (_$data['districtId'] as String?);
+
+  String? get countryIsoCode => (_$data['countryIsoCode'] as String?);
+
+  String? get areaId => (_$data['areaId'] as String?);
+
+  int? get apartmentNumber => (_$data['apartmentNumber'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('substreetName')) {
+      final l$substreetName = substreetName;
+      result$data['substreetName'] = l$substreetName;
+    }
+    if (_$data.containsKey('streetId')) {
+      final l$streetId = streetId;
+      result$data['streetId'] = l$streetId;
+    }
+    if (_$data.containsKey('storeyNumber')) {
+      final l$storeyNumber = storeyNumber;
+      result$data['storeyNumber'] = l$storeyNumber;
+    }
+    if (_$data.containsKey('specialLandmark')) {
+      final l$specialLandmark = specialLandmark;
+      result$data['specialLandmark'] = l$specialLandmark;
+    }
+    if (_$data.containsKey('houseCode')) {
+      final l$houseCode = houseCode;
+      result$data['houseCode'] = l$houseCode;
+    }
+    if (_$data.containsKey('geolocation')) {
+      final l$geolocation = geolocation;
+      result$data['geolocation'] = l$geolocation;
+    }
+    if (_$data.containsKey('districtId')) {
+      final l$districtId = districtId;
+      result$data['districtId'] = l$districtId;
+    }
+    if (_$data.containsKey('countryIsoCode')) {
+      final l$countryIsoCode = countryIsoCode;
+      result$data['countryIsoCode'] = l$countryIsoCode;
+    }
+    if (_$data.containsKey('areaId')) {
+      final l$areaId = areaId;
+      result$data['areaId'] = l$areaId;
+    }
+    if (_$data.containsKey('apartmentNumber')) {
+      final l$apartmentNumber = apartmentNumber;
+      result$data['apartmentNumber'] = l$apartmentNumber;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AddressInput<Input_AddressInput> get copyWith =>
+      CopyWith_Input_AddressInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AddressInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$substreetName = substreetName;
+    final lOther$substreetName = other.substreetName;
+    if (_$data.containsKey('substreetName') !=
+        other._$data.containsKey('substreetName')) {
+      return false;
+    }
+    if (l$substreetName != lOther$substreetName) {
+      return false;
+    }
+    final l$streetId = streetId;
+    final lOther$streetId = other.streetId;
+    if (_$data.containsKey('streetId') !=
+        other._$data.containsKey('streetId')) {
+      return false;
+    }
+    if (l$streetId != lOther$streetId) {
+      return false;
+    }
+    final l$storeyNumber = storeyNumber;
+    final lOther$storeyNumber = other.storeyNumber;
+    if (_$data.containsKey('storeyNumber') !=
+        other._$data.containsKey('storeyNumber')) {
+      return false;
+    }
+    if (l$storeyNumber != lOther$storeyNumber) {
+      return false;
+    }
+    final l$specialLandmark = specialLandmark;
+    final lOther$specialLandmark = other.specialLandmark;
+    if (_$data.containsKey('specialLandmark') !=
+        other._$data.containsKey('specialLandmark')) {
+      return false;
+    }
+    if (l$specialLandmark != lOther$specialLandmark) {
+      return false;
+    }
+    final l$houseCode = houseCode;
+    final lOther$houseCode = other.houseCode;
+    if (_$data.containsKey('houseCode') !=
+        other._$data.containsKey('houseCode')) {
+      return false;
+    }
+    if (l$houseCode != lOther$houseCode) {
+      return false;
+    }
+    final l$geolocation = geolocation;
+    final lOther$geolocation = other.geolocation;
+    if (_$data.containsKey('geolocation') !=
+        other._$data.containsKey('geolocation')) {
+      return false;
+    }
+    if (l$geolocation != lOther$geolocation) {
+      return false;
+    }
+    final l$districtId = districtId;
+    final lOther$districtId = other.districtId;
+    if (_$data.containsKey('districtId') !=
+        other._$data.containsKey('districtId')) {
+      return false;
+    }
+    if (l$districtId != lOther$districtId) {
+      return false;
+    }
+    final l$countryIsoCode = countryIsoCode;
+    final lOther$countryIsoCode = other.countryIsoCode;
+    if (_$data.containsKey('countryIsoCode') !=
+        other._$data.containsKey('countryIsoCode')) {
+      return false;
+    }
+    if (l$countryIsoCode != lOther$countryIsoCode) {
+      return false;
+    }
+    final l$areaId = areaId;
+    final lOther$areaId = other.areaId;
+    if (_$data.containsKey('areaId') != other._$data.containsKey('areaId')) {
+      return false;
+    }
+    if (l$areaId != lOther$areaId) {
+      return false;
+    }
+    final l$apartmentNumber = apartmentNumber;
+    final lOther$apartmentNumber = other.apartmentNumber;
+    if (_$data.containsKey('apartmentNumber') !=
+        other._$data.containsKey('apartmentNumber')) {
+      return false;
+    }
+    if (l$apartmentNumber != lOther$apartmentNumber) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$substreetName = substreetName;
+    final l$streetId = streetId;
+    final l$storeyNumber = storeyNumber;
+    final l$specialLandmark = specialLandmark;
+    final l$houseCode = houseCode;
+    final l$geolocation = geolocation;
+    final l$districtId = districtId;
+    final l$countryIsoCode = countryIsoCode;
+    final l$areaId = areaId;
+    final l$apartmentNumber = apartmentNumber;
+    return Object.hashAll([
+      _$data.containsKey('substreetName') ? l$substreetName : const {},
+      _$data.containsKey('streetId') ? l$streetId : const {},
+      _$data.containsKey('storeyNumber') ? l$storeyNumber : const {},
+      _$data.containsKey('specialLandmark') ? l$specialLandmark : const {},
+      _$data.containsKey('houseCode') ? l$houseCode : const {},
+      _$data.containsKey('geolocation') ? l$geolocation : const {},
+      _$data.containsKey('districtId') ? l$districtId : const {},
+      _$data.containsKey('countryIsoCode') ? l$countryIsoCode : const {},
+      _$data.containsKey('areaId') ? l$areaId : const {},
+      _$data.containsKey('apartmentNumber') ? l$apartmentNumber : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AddressInput<TRes> {
+  factory CopyWith_Input_AddressInput(
+    Input_AddressInput instance,
+    TRes Function(Input_AddressInput) then,
+  ) = _CopyWithImpl_Input_AddressInput;
+
+  factory CopyWith_Input_AddressInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_AddressInput;
+
+  TRes call({
+    String? substreetName,
+    String? streetId,
+    int? storeyNumber,
+    String? specialLandmark,
+    String? houseCode,
+    Json? geolocation,
+    String? districtId,
+    String? countryIsoCode,
+    String? areaId,
+    int? apartmentNumber,
+  });
+}
+
+class _CopyWithImpl_Input_AddressInput<TRes>
+    implements CopyWith_Input_AddressInput<TRes> {
+  _CopyWithImpl_Input_AddressInput(this._instance, this._then);
+
+  final Input_AddressInput _instance;
+
+  final TRes Function(Input_AddressInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? substreetName = _undefined,
+    Object? streetId = _undefined,
+    Object? storeyNumber = _undefined,
+    Object? specialLandmark = _undefined,
+    Object? houseCode = _undefined,
+    Object? geolocation = _undefined,
+    Object? districtId = _undefined,
+    Object? countryIsoCode = _undefined,
+    Object? areaId = _undefined,
+    Object? apartmentNumber = _undefined,
+  }) => _then(
+    Input_AddressInput._({
+      ..._instance._$data,
+      if (substreetName != _undefined)
+        'substreetName': (substreetName as String?),
+      if (streetId != _undefined) 'streetId': (streetId as String?),
+      if (storeyNumber != _undefined) 'storeyNumber': (storeyNumber as int?),
+      if (specialLandmark != _undefined)
+        'specialLandmark': (specialLandmark as String?),
+      if (houseCode != _undefined) 'houseCode': (houseCode as String?),
+      if (geolocation != _undefined) 'geolocation': (geolocation as Json?),
+      if (districtId != _undefined) 'districtId': (districtId as String?),
+      if (countryIsoCode != _undefined)
+        'countryIsoCode': (countryIsoCode as String?),
+      if (areaId != _undefined) 'areaId': (areaId as String?),
+      if (apartmentNumber != _undefined)
+        'apartmentNumber': (apartmentNumber as int?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_AddressInput<TRes>
+    implements CopyWith_Input_AddressInput<TRes> {
+  _CopyWithStubImpl_Input_AddressInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? substreetName,
+    String? streetId,
+    int? storeyNumber,
+    String? specialLandmark,
+    String? houseCode,
+    Json? geolocation,
+    String? districtId,
+    String? countryIsoCode,
+    String? areaId,
+    int? apartmentNumber,
+  }) => _res;
+}
+
 class Input_ServiceMembershipFilterIsOutsideServiceStudyYears {
   factory Input_ServiceMembershipFilterIsOutsideServiceStudyYears({
     bool? isNil,
@@ -84894,6 +85248,465 @@ class _CopyWithStubImpl_Input_ClassSortInput<TRes>
   call({Enum_SortOrder? order, Enum_ClassSortField? field}) => _res;
 }
 
+class Input_UpdateStreetInput {
+  factory Input_UpdateStreetInput({
+    String? name,
+    Json? line,
+    int? color,
+    List<String>? areas,
+    DateTime? lastVisit,
+  }) => Input_UpdateStreetInput._({
+    if (name != null) r'name': name,
+    if (line != null) r'line': line,
+    if (color != null) r'color': color,
+    if (areas != null) r'areas': areas,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+  });
+
+  Input_UpdateStreetInput._(this._$data);
+
+  factory Input_UpdateStreetInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('line')) {
+      final l$line = data['line'];
+      result$data['line'] = (l$line as Json?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('areas')) {
+      final l$areas = data['areas'];
+      result$data['areas'] = (l$areas as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzFromString(l$lastVisit);
+    }
+    return Input_UpdateStreetInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get name => (_$data['name'] as String?);
+
+  Json? get line => (_$data['line'] as Json?);
+
+  int? get color => (_$data['color'] as int?);
+
+  List<String>? get areas => (_$data['areas'] as List<String>?);
+
+  DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('line')) {
+      final l$line = line;
+      result$data['line'] = l$line;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('areas')) {
+      final l$areas = areas;
+      result$data['areas'] = l$areas?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzToString(l$lastVisit);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UpdateStreetInput<Input_UpdateStreetInput> get copyWith =>
+      CopyWith_Input_UpdateStreetInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UpdateStreetInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$line = line;
+    final lOther$line = other.line;
+    if (_$data.containsKey('line') != other._$data.containsKey('line')) {
+      return false;
+    }
+    if (l$line != lOther$line) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$areas = areas;
+    final lOther$areas = other.areas;
+    if (_$data.containsKey('areas') != other._$data.containsKey('areas')) {
+      return false;
+    }
+    if (l$areas != null && lOther$areas != null) {
+      if (l$areas.length != lOther$areas.length) {
+        return false;
+      }
+      for (int i = 0; i < l$areas.length; i++) {
+        final l$areas$entry = l$areas[i];
+        final lOther$areas$entry = lOther$areas[i];
+        if (l$areas$entry != lOther$areas$entry) {
+          return false;
+        }
+      }
+    } else if (l$areas != lOther$areas) {
+      return false;
+    }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$line = line;
+    final l$color = color;
+    final l$areas = areas;
+    final l$lastVisit = lastVisit;
+    return Object.hashAll([
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('line') ? l$line : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('areas')
+          ? l$areas == null
+                ? null
+                : Object.hashAll(l$areas.map((v) => v))
+          : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UpdateStreetInput<TRes> {
+  factory CopyWith_Input_UpdateStreetInput(
+    Input_UpdateStreetInput instance,
+    TRes Function(Input_UpdateStreetInput) then,
+  ) = _CopyWithImpl_Input_UpdateStreetInput;
+
+  factory CopyWith_Input_UpdateStreetInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UpdateStreetInput;
+
+  TRes call({
+    String? name,
+    Json? line,
+    int? color,
+    List<String>? areas,
+    DateTime? lastVisit,
+  });
+}
+
+class _CopyWithImpl_Input_UpdateStreetInput<TRes>
+    implements CopyWith_Input_UpdateStreetInput<TRes> {
+  _CopyWithImpl_Input_UpdateStreetInput(this._instance, this._then);
+
+  final Input_UpdateStreetInput _instance;
+
+  final TRes Function(Input_UpdateStreetInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? line = _undefined,
+    Object? color = _undefined,
+    Object? areas = _undefined,
+    Object? lastVisit = _undefined,
+  }) => _then(
+    Input_UpdateStreetInput._({
+      ..._instance._$data,
+      if (name != _undefined) 'name': (name as String?),
+      if (line != _undefined) 'line': (line as Json?),
+      if (color != _undefined) 'color': (color as int?),
+      if (areas != _undefined) 'areas': (areas as List<String>?),
+      if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UpdateStreetInput<TRes>
+    implements CopyWith_Input_UpdateStreetInput<TRes> {
+  _CopyWithStubImpl_Input_UpdateStreetInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    Json? line,
+    int? color,
+    List<String>? areas,
+    DateTime? lastVisit,
+  }) => _res;
+}
+
+class Input_CreateStreetInput {
+  factory Input_CreateStreetInput({
+    required String name,
+    Json? line,
+    int? color,
+    List<String>? areas,
+    DateTime? lastVisit,
+  }) => Input_CreateStreetInput._({
+    r'name': name,
+    if (line != null) r'line': line,
+    if (color != null) r'color': color,
+    if (areas != null) r'areas': areas,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+  });
+
+  Input_CreateStreetInput._(this._$data);
+
+  factory Input_CreateStreetInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    if (data.containsKey('line')) {
+      final l$line = data['line'];
+      result$data['line'] = (l$line as Json?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('areas')) {
+      final l$areas = data['areas'];
+      result$data['areas'] = (l$areas as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzFromString(l$lastVisit);
+    }
+    return Input_CreateStreetInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  Json? get line => (_$data['line'] as Json?);
+
+  int? get color => (_$data['color'] as int?);
+
+  List<String>? get areas => (_$data['areas'] as List<String>?);
+
+  DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    if (_$data.containsKey('line')) {
+      final l$line = line;
+      result$data['line'] = l$line;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('areas')) {
+      final l$areas = areas;
+      result$data['areas'] = l$areas?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzToString(l$lastVisit);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateStreetInput<Input_CreateStreetInput> get copyWith =>
+      CopyWith_Input_CreateStreetInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateStreetInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$line = line;
+    final lOther$line = other.line;
+    if (_$data.containsKey('line') != other._$data.containsKey('line')) {
+      return false;
+    }
+    if (l$line != lOther$line) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$areas = areas;
+    final lOther$areas = other.areas;
+    if (_$data.containsKey('areas') != other._$data.containsKey('areas')) {
+      return false;
+    }
+    if (l$areas != null && lOther$areas != null) {
+      if (l$areas.length != lOther$areas.length) {
+        return false;
+      }
+      for (int i = 0; i < l$areas.length; i++) {
+        final l$areas$entry = l$areas[i];
+        final lOther$areas$entry = lOther$areas[i];
+        if (l$areas$entry != lOther$areas$entry) {
+          return false;
+        }
+      }
+    } else if (l$areas != lOther$areas) {
+      return false;
+    }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$line = line;
+    final l$color = color;
+    final l$areas = areas;
+    final l$lastVisit = lastVisit;
+    return Object.hashAll([
+      l$name,
+      _$data.containsKey('line') ? l$line : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('areas')
+          ? l$areas == null
+                ? null
+                : Object.hashAll(l$areas.map((v) => v))
+          : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateStreetInput<TRes> {
+  factory CopyWith_Input_CreateStreetInput(
+    Input_CreateStreetInput instance,
+    TRes Function(Input_CreateStreetInput) then,
+  ) = _CopyWithImpl_Input_CreateStreetInput;
+
+  factory CopyWith_Input_CreateStreetInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateStreetInput;
+
+  TRes call({
+    String? name,
+    Json? line,
+    int? color,
+    List<String>? areas,
+    DateTime? lastVisit,
+  });
+}
+
+class _CopyWithImpl_Input_CreateStreetInput<TRes>
+    implements CopyWith_Input_CreateStreetInput<TRes> {
+  _CopyWithImpl_Input_CreateStreetInput(this._instance, this._then);
+
+  final Input_CreateStreetInput _instance;
+
+  final TRes Function(Input_CreateStreetInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? line = _undefined,
+    Object? color = _undefined,
+    Object? areas = _undefined,
+    Object? lastVisit = _undefined,
+  }) => _then(
+    Input_CreateStreetInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (line != _undefined) 'line': (line as Json?),
+      if (color != _undefined) 'color': (color as int?),
+      if (areas != _undefined) 'areas': (areas as List<String>?),
+      if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateStreetInput<TRes>
+    implements CopyWith_Input_CreateStreetInput<TRes> {
+  _CopyWithStubImpl_Input_CreateStreetInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    Json? line,
+    int? color,
+    List<String>? areas,
+    DateTime? lastVisit,
+  }) => _res;
+}
+
 class Input_StreetWithinDistanceFieldInput {
   factory Input_StreetWithinDistanceFieldInput({
     required Json from,
@@ -90929,6 +91742,399 @@ class _CopyWithStubImpl_Input_StreetSortInput<TRes>
 
   CopyWith_Input_StreetWithinDistanceFieldInput<TRes> get withinDistanceInput =>
       CopyWith_Input_StreetWithinDistanceFieldInput.stub(_res);
+}
+
+class Input_UpdateStoreInput {
+  factory Input_UpdateStoreInput({
+    String? name,
+    String? adminFamilyId,
+    int? color,
+    Input_AddressInput? address,
+  }) => Input_UpdateStoreInput._({
+    if (name != null) r'name': name,
+    if (adminFamilyId != null) r'adminFamilyId': adminFamilyId,
+    if (color != null) r'color': color,
+    if (address != null) r'address': address,
+  });
+
+  Input_UpdateStoreInput._(this._$data);
+
+  factory Input_UpdateStoreInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('adminFamilyId')) {
+      final l$adminFamilyId = data['adminFamilyId'];
+      result$data['adminFamilyId'] = (l$adminFamilyId as String?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('address')) {
+      final l$address = data['address'];
+      result$data['address'] = l$address == null
+          ? null
+          : Input_AddressInput.fromJson((l$address as Map<String, dynamic>));
+    }
+    return Input_UpdateStoreInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get name => (_$data['name'] as String?);
+
+  String? get adminFamilyId => (_$data['adminFamilyId'] as String?);
+
+  int? get color => (_$data['color'] as int?);
+
+  Input_AddressInput? get address => (_$data['address'] as Input_AddressInput?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('adminFamilyId')) {
+      final l$adminFamilyId = adminFamilyId;
+      result$data['adminFamilyId'] = l$adminFamilyId;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('address')) {
+      final l$address = address;
+      result$data['address'] = l$address?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UpdateStoreInput<Input_UpdateStoreInput> get copyWith =>
+      CopyWith_Input_UpdateStoreInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UpdateStoreInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$adminFamilyId = adminFamilyId;
+    final lOther$adminFamilyId = other.adminFamilyId;
+    if (_$data.containsKey('adminFamilyId') !=
+        other._$data.containsKey('adminFamilyId')) {
+      return false;
+    }
+    if (l$adminFamilyId != lOther$adminFamilyId) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
+      return false;
+    }
+    if (l$address != lOther$address) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$adminFamilyId = adminFamilyId;
+    final l$color = color;
+    final l$address = address;
+    return Object.hashAll([
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('adminFamilyId') ? l$adminFamilyId : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('address') ? l$address : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UpdateStoreInput<TRes> {
+  factory CopyWith_Input_UpdateStoreInput(
+    Input_UpdateStoreInput instance,
+    TRes Function(Input_UpdateStoreInput) then,
+  ) = _CopyWithImpl_Input_UpdateStoreInput;
+
+  factory CopyWith_Input_UpdateStoreInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UpdateStoreInput;
+
+  TRes call({
+    String? name,
+    String? adminFamilyId,
+    int? color,
+    Input_AddressInput? address,
+  });
+  CopyWith_Input_AddressInput<TRes> get address;
+}
+
+class _CopyWithImpl_Input_UpdateStoreInput<TRes>
+    implements CopyWith_Input_UpdateStoreInput<TRes> {
+  _CopyWithImpl_Input_UpdateStoreInput(this._instance, this._then);
+
+  final Input_UpdateStoreInput _instance;
+
+  final TRes Function(Input_UpdateStoreInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? adminFamilyId = _undefined,
+    Object? color = _undefined,
+    Object? address = _undefined,
+  }) => _then(
+    Input_UpdateStoreInput._({
+      ..._instance._$data,
+      if (name != _undefined) 'name': (name as String?),
+      if (adminFamilyId != _undefined)
+        'adminFamilyId': (adminFamilyId as String?),
+      if (color != _undefined) 'color': (color as int?),
+      if (address != _undefined) 'address': (address as Input_AddressInput?),
+    }),
+  );
+
+  CopyWith_Input_AddressInput<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Input_AddressInput.stub(_then(_instance))
+        : CopyWith_Input_AddressInput(local$address, (e) => call(address: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_UpdateStoreInput<TRes>
+    implements CopyWith_Input_UpdateStoreInput<TRes> {
+  _CopyWithStubImpl_Input_UpdateStoreInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? adminFamilyId,
+    int? color,
+    Input_AddressInput? address,
+  }) => _res;
+
+  CopyWith_Input_AddressInput<TRes> get address =>
+      CopyWith_Input_AddressInput.stub(_res);
+}
+
+class Input_CreateStoreInput {
+  factory Input_CreateStoreInput({
+    required String name,
+    String? adminFamilyId,
+    int? color,
+    Input_AddressInput? address,
+  }) => Input_CreateStoreInput._({
+    r'name': name,
+    if (adminFamilyId != null) r'adminFamilyId': adminFamilyId,
+    if (color != null) r'color': color,
+    if (address != null) r'address': address,
+  });
+
+  Input_CreateStoreInput._(this._$data);
+
+  factory Input_CreateStoreInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    if (data.containsKey('adminFamilyId')) {
+      final l$adminFamilyId = data['adminFamilyId'];
+      result$data['adminFamilyId'] = (l$adminFamilyId as String?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('address')) {
+      final l$address = data['address'];
+      result$data['address'] = l$address == null
+          ? null
+          : Input_AddressInput.fromJson((l$address as Map<String, dynamic>));
+    }
+    return Input_CreateStoreInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  String? get adminFamilyId => (_$data['adminFamilyId'] as String?);
+
+  int? get color => (_$data['color'] as int?);
+
+  Input_AddressInput? get address => (_$data['address'] as Input_AddressInput?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    if (_$data.containsKey('adminFamilyId')) {
+      final l$adminFamilyId = adminFamilyId;
+      result$data['adminFamilyId'] = l$adminFamilyId;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('address')) {
+      final l$address = address;
+      result$data['address'] = l$address?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateStoreInput<Input_CreateStoreInput> get copyWith =>
+      CopyWith_Input_CreateStoreInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateStoreInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$adminFamilyId = adminFamilyId;
+    final lOther$adminFamilyId = other.adminFamilyId;
+    if (_$data.containsKey('adminFamilyId') !=
+        other._$data.containsKey('adminFamilyId')) {
+      return false;
+    }
+    if (l$adminFamilyId != lOther$adminFamilyId) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
+      return false;
+    }
+    if (l$address != lOther$address) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$adminFamilyId = adminFamilyId;
+    final l$color = color;
+    final l$address = address;
+    return Object.hashAll([
+      l$name,
+      _$data.containsKey('adminFamilyId') ? l$adminFamilyId : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('address') ? l$address : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateStoreInput<TRes> {
+  factory CopyWith_Input_CreateStoreInput(
+    Input_CreateStoreInput instance,
+    TRes Function(Input_CreateStoreInput) then,
+  ) = _CopyWithImpl_Input_CreateStoreInput;
+
+  factory CopyWith_Input_CreateStoreInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateStoreInput;
+
+  TRes call({
+    String? name,
+    String? adminFamilyId,
+    int? color,
+    Input_AddressInput? address,
+  });
+  CopyWith_Input_AddressInput<TRes> get address;
+}
+
+class _CopyWithImpl_Input_CreateStoreInput<TRes>
+    implements CopyWith_Input_CreateStoreInput<TRes> {
+  _CopyWithImpl_Input_CreateStoreInput(this._instance, this._then);
+
+  final Input_CreateStoreInput _instance;
+
+  final TRes Function(Input_CreateStoreInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? adminFamilyId = _undefined,
+    Object? color = _undefined,
+    Object? address = _undefined,
+  }) => _then(
+    Input_CreateStoreInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (adminFamilyId != _undefined)
+        'adminFamilyId': (adminFamilyId as String?),
+      if (color != _undefined) 'color': (color as int?),
+      if (address != _undefined) 'address': (address as Input_AddressInput?),
+    }),
+  );
+
+  CopyWith_Input_AddressInput<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Input_AddressInput.stub(_then(_instance))
+        : CopyWith_Input_AddressInput(local$address, (e) => call(address: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_CreateStoreInput<TRes>
+    implements CopyWith_Input_CreateStoreInput<TRes> {
+  _CopyWithStubImpl_Input_CreateStoreInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? adminFamilyId,
+    int? color,
+    Input_AddressInput? address,
+  }) => _res;
+
+  CopyWith_Input_AddressInput<TRes> get address =>
+      CopyWith_Input_AddressInput.stub(_res);
 }
 
 class Input_StoreWithinPolygonFieldInput {
@@ -101502,6 +102708,359 @@ class _CopyWithStubImpl_Input_AreaStreetSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_AreaStreetSortField? field}) => _res;
+}
+
+class Input_UpdateAreaInput {
+  factory Input_UpdateAreaInput({
+    String? name,
+    Json? bounds,
+    int? color,
+    DateTime? lastVisit,
+  }) => Input_UpdateAreaInput._({
+    if (name != null) r'name': name,
+    if (bounds != null) r'bounds': bounds,
+    if (color != null) r'color': color,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+  });
+
+  Input_UpdateAreaInput._(this._$data);
+
+  factory Input_UpdateAreaInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('bounds')) {
+      final l$bounds = data['bounds'];
+      result$data['bounds'] = (l$bounds as Json?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzFromString(l$lastVisit);
+    }
+    return Input_UpdateAreaInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get name => (_$data['name'] as String?);
+
+  Json? get bounds => (_$data['bounds'] as Json?);
+
+  int? get color => (_$data['color'] as int?);
+
+  DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('bounds')) {
+      final l$bounds = bounds;
+      result$data['bounds'] = l$bounds;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzToString(l$lastVisit);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UpdateAreaInput<Input_UpdateAreaInput> get copyWith =>
+      CopyWith_Input_UpdateAreaInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UpdateAreaInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$bounds = bounds;
+    final lOther$bounds = other.bounds;
+    if (_$data.containsKey('bounds') != other._$data.containsKey('bounds')) {
+      return false;
+    }
+    if (l$bounds != lOther$bounds) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$bounds = bounds;
+    final l$color = color;
+    final l$lastVisit = lastVisit;
+    return Object.hashAll([
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('bounds') ? l$bounds : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_UpdateAreaInput<TRes> {
+  factory CopyWith_Input_UpdateAreaInput(
+    Input_UpdateAreaInput instance,
+    TRes Function(Input_UpdateAreaInput) then,
+  ) = _CopyWithImpl_Input_UpdateAreaInput;
+
+  factory CopyWith_Input_UpdateAreaInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UpdateAreaInput;
+
+  TRes call({String? name, Json? bounds, int? color, DateTime? lastVisit});
+}
+
+class _CopyWithImpl_Input_UpdateAreaInput<TRes>
+    implements CopyWith_Input_UpdateAreaInput<TRes> {
+  _CopyWithImpl_Input_UpdateAreaInput(this._instance, this._then);
+
+  final Input_UpdateAreaInput _instance;
+
+  final TRes Function(Input_UpdateAreaInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? bounds = _undefined,
+    Object? color = _undefined,
+    Object? lastVisit = _undefined,
+  }) => _then(
+    Input_UpdateAreaInput._({
+      ..._instance._$data,
+      if (name != _undefined) 'name': (name as String?),
+      if (bounds != _undefined) 'bounds': (bounds as Json?),
+      if (color != _undefined) 'color': (color as int?),
+      if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_UpdateAreaInput<TRes>
+    implements CopyWith_Input_UpdateAreaInput<TRes> {
+  _CopyWithStubImpl_Input_UpdateAreaInput(this._res);
+
+  TRes _res;
+
+  call({String? name, Json? bounds, int? color, DateTime? lastVisit}) => _res;
+}
+
+class Input_CreateAreaInput {
+  factory Input_CreateAreaInput({
+    required String name,
+    Json? bounds,
+    int? color,
+    DateTime? lastVisit,
+  }) => Input_CreateAreaInput._({
+    r'name': name,
+    if (bounds != null) r'bounds': bounds,
+    if (color != null) r'color': color,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+  });
+
+  Input_CreateAreaInput._(this._$data);
+
+  factory Input_CreateAreaInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    if (data.containsKey('bounds')) {
+      final l$bounds = data['bounds'];
+      result$data['bounds'] = (l$bounds as Json?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzFromString(l$lastVisit);
+    }
+    return Input_CreateAreaInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get name => (_$data['name'] as String);
+
+  Json? get bounds => (_$data['bounds'] as Json?);
+
+  int? get color => (_$data['color'] as int?);
+
+  DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$name = name;
+    result$data['name'] = l$name;
+    if (_$data.containsKey('bounds')) {
+      final l$bounds = bounds;
+      result$data['bounds'] = l$bounds;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzToString(l$lastVisit);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CreateAreaInput<Input_CreateAreaInput> get copyWith =>
+      CopyWith_Input_CreateAreaInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CreateAreaInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$bounds = bounds;
+    final lOther$bounds = other.bounds;
+    if (_$data.containsKey('bounds') != other._$data.containsKey('bounds')) {
+      return false;
+    }
+    if (l$bounds != lOther$bounds) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$bounds = bounds;
+    final l$color = color;
+    final l$lastVisit = lastVisit;
+    return Object.hashAll([
+      l$name,
+      _$data.containsKey('bounds') ? l$bounds : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CreateAreaInput<TRes> {
+  factory CopyWith_Input_CreateAreaInput(
+    Input_CreateAreaInput instance,
+    TRes Function(Input_CreateAreaInput) then,
+  ) = _CopyWithImpl_Input_CreateAreaInput;
+
+  factory CopyWith_Input_CreateAreaInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateAreaInput;
+
+  TRes call({String? name, Json? bounds, int? color, DateTime? lastVisit});
+}
+
+class _CopyWithImpl_Input_CreateAreaInput<TRes>
+    implements CopyWith_Input_CreateAreaInput<TRes> {
+  _CopyWithImpl_Input_CreateAreaInput(this._instance, this._then);
+
+  final Input_CreateAreaInput _instance;
+
+  final TRes Function(Input_CreateAreaInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? bounds = _undefined,
+    Object? color = _undefined,
+    Object? lastVisit = _undefined,
+  }) => _then(
+    Input_CreateAreaInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+      if (bounds != _undefined) 'bounds': (bounds as Json?),
+      if (color != _undefined) 'color': (color as int?),
+      if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CreateAreaInput<TRes>
+    implements CopyWith_Input_CreateAreaInput<TRes> {
+  _CopyWithStubImpl_Input_CreateAreaInput(this._res);
+
+  TRes _res;
+
+  call({String? name, Json? bounds, int? color, DateTime? lastVisit}) => _res;
 }
 
 class Input_AreaContainsPointFieldInput {
@@ -208227,6 +209786,107 @@ class _CopyWithStubImpl_Input_DataCheckSortInput<TRes>
   TRes _res;
 
   call({Enum_SortOrder? order, Enum_DataCheckSortField? field}) => _res;
+}
+
+enum Enum_AppPlatform {
+  ANDROID,
+  IOS,
+  $unknown;
+
+  factory Enum_AppPlatform.fromJson(String value) =>
+      fromJson_Enum_AppPlatform(value);
+
+  String toJson() => toJson_Enum_AppPlatform(this);
+}
+
+String toJson_Enum_AppPlatform(Enum_AppPlatform e) {
+  switch (e) {
+    case Enum_AppPlatform.ANDROID:
+      return r'ANDROID';
+    case Enum_AppPlatform.IOS:
+      return r'IOS';
+    case Enum_AppPlatform.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AppPlatform fromJson_Enum_AppPlatform(String value) {
+  switch (value) {
+    case r'ANDROID':
+      return Enum_AppPlatform.ANDROID;
+    case r'IOS':
+      return Enum_AppPlatform.IOS;
+    default:
+      return Enum_AppPlatform.$unknown;
+  }
+}
+
+enum Enum_PhotoSubject {
+  AREAS,
+  CLASSES,
+  FAMILIES,
+  GROUPS,
+  PERSONS,
+  SERVICES,
+  STORES,
+  STREETS,
+  USERS,
+  $unknown;
+
+  factory Enum_PhotoSubject.fromJson(String value) =>
+      fromJson_Enum_PhotoSubject(value);
+
+  String toJson() => toJson_Enum_PhotoSubject(this);
+}
+
+String toJson_Enum_PhotoSubject(Enum_PhotoSubject e) {
+  switch (e) {
+    case Enum_PhotoSubject.AREAS:
+      return r'AREAS';
+    case Enum_PhotoSubject.CLASSES:
+      return r'CLASSES';
+    case Enum_PhotoSubject.FAMILIES:
+      return r'FAMILIES';
+    case Enum_PhotoSubject.GROUPS:
+      return r'GROUPS';
+    case Enum_PhotoSubject.PERSONS:
+      return r'PERSONS';
+    case Enum_PhotoSubject.SERVICES:
+      return r'SERVICES';
+    case Enum_PhotoSubject.STORES:
+      return r'STORES';
+    case Enum_PhotoSubject.STREETS:
+      return r'STREETS';
+    case Enum_PhotoSubject.USERS:
+      return r'USERS';
+    case Enum_PhotoSubject.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_PhotoSubject fromJson_Enum_PhotoSubject(String value) {
+  switch (value) {
+    case r'AREAS':
+      return Enum_PhotoSubject.AREAS;
+    case r'CLASSES':
+      return Enum_PhotoSubject.CLASSES;
+    case r'FAMILIES':
+      return Enum_PhotoSubject.FAMILIES;
+    case r'GROUPS':
+      return Enum_PhotoSubject.GROUPS;
+    case r'PERSONS':
+      return Enum_PhotoSubject.PERSONS;
+    case r'SERVICES':
+      return Enum_PhotoSubject.SERVICES;
+    case r'STORES':
+      return Enum_PhotoSubject.STORES;
+    case r'STREETS':
+      return Enum_PhotoSubject.STREETS;
+    case r'USERS':
+      return Enum_PhotoSubject.USERS;
+    default:
+      return Enum_PhotoSubject.$unknown;
+  }
 }
 
 enum Enum_VisitSubject {
