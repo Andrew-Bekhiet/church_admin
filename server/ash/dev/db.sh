@@ -27,8 +27,8 @@ case "${1:-}" in
   reset)
     compose down --volumes
     compose up --detach --build --wait
-    (cd "$app_dir" && mix do ecto.migrate + run priv/repo/seeds.exs)
-    (cd "$app_dir" && MIX_ENV=test mix ecto.migrate)
+    (cd "$app_dir" && mix church_admin.setup --scale "${SEED_SCALE:-small}")
+    (cd "$app_dir" && MIX_ENV=test mix church_admin.setup)
     ;;
   psql)
     shift
