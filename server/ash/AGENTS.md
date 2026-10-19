@@ -16,6 +16,8 @@ The church_admin backend: Phoenix 1.8 (API only) + Ash 3, OTP app `:church_admin
 
 **Never touch the `church-admin-local` compose project or its volumes** — it holds the user's own stack.
 
+`mix church_admin.setup [--scale small|medium]` migrates to the last baseline version, loads the reference seed (`priv/repo/seeds/`), with `--scale` also the services seed and the generated file, then migrates the rest; `dev/db.sh reset` runs it with `small` for dev (`SEED_SCALE=medium` for more) and without a scale for test, which stays seed-free beyond the reference data. `mix church_admin.seed.gen --scale small|medium` writes `priv/repo/seeds/generated/<scale>.sql` and `<scale>.auth_emulator.json` (deterministic; `small` is committed, `medium` is git-ignored and rebuilt on demand). The SQL targets the baseline schema, so the generator and its tests live in `dev/lib/` (compiled in dev and test only). Every seeded account signs in with the password in `ChurchAdmin.Dev.SeedGenerator.AuthEmulator.dev_password/0`; import `<scale>.auth_emulator.json` into the Auth emulator by POSTing it to `/identitytoolkit.googleapis.com/v1/projects/<project>/accounts:batchCreate`.
+
 `dev/compare_baseline_schema.sh` proves the Ecto baseline produces the same schema as master's Hasura migrations.
 
 ## Verification
