@@ -46,7 +46,7 @@ defmodule ChurchAdmin.Accounts.User do
   graphql do
     type :user
 
-    relationships [:person, :permissions, :scope_grants, :invitation]
+    relationships [:person, :permissions, :scope_grants, :invitation, :preferences]
 
     queries do
       get :user, :read

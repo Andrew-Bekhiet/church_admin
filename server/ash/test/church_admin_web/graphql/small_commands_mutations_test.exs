@@ -80,6 +80,33 @@ defmodule ChurchAdminWeb.Graphql.SmallCommandsMutationsTest do
     end
   end
 
+  describe "User.preferences" do
+    @user_preferences """
+    query($uid: ID!) {
+      user(id: $uid) { uid preferences { uid darkTheme } }
+    }
+    """
+
+    setup %{world: world} do
+      ChurchAdmin.DataCase.set_system_db_session()
+      user = world.users.approved_plain
+      Ash.Seed.seed!(Preferences, %{uid: user.uid, dark_theme: true})
+      {:ok, user: user}
+    end
+
+    test "a user reads their own preferences through their user", %{conn: conn, user: user} do
+      assert %{"data" => %{"user" => %{"preferences" => preferences}}} =
+               run(conn, @user_preferences, user, %{"uid" => user.uid})
+
+      assert preferences == %{"uid" => user.uid, "darkTheme" => true}
+    end
+
+    test "another user's preferences stay hidden", %{conn: conn, user: user, world: world} do
+      assert %{"data" => %{"user" => %{"preferences" => nil}}} =
+               run(conn, @user_preferences, world.users.read_all, %{"uid" => user.uid})
+    end
+  end
+
   describe "registerFcmToken" do
     @document """
     mutation($input: RegisterFcmTokenInput!) {
