@@ -1,0 +1,8 @@
+_build
+deps
+cover
+doc
+tmp
+test
+.claude
+erl_crash.dump
