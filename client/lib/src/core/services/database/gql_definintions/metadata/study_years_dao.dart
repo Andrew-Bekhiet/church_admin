@@ -3,11 +3,13 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/subscriptions.gql.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-class StudyYearsDAO extends DAOBase<StudyYear> with LegacyStreamableDAO<StudyYear> {
+class StudyYearsDAO extends DAOBase<StudyYear>
+    with LegacyStreamableDAO<StudyYear> {
   @override
-  LegacyStreamAllConfig<StudyYear> get baseStreamAllConfig => const LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllStudyYears,
-  );
+  LegacyStreamAllConfig<StudyYear> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllStudyYears,
+      );
 
   @override
   LegacyStreamSingleByIdConfig<StudyYear> get baseStreamSingleByIdConfig =>

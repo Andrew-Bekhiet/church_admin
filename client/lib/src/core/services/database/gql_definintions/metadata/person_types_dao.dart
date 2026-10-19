@@ -7,9 +7,10 @@ import 'package:graphql/client.dart';
 class PersonTypesDAO extends DAOBase<PersonType>
     with LegacyStreamableDAO<PersonType>, LegacyCreatableDAO<PersonType> {
   @override
-  LegacyStreamAllConfig<PersonType> get baseStreamAllConfig => const LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllPersonTypes,
-  );
+  LegacyStreamAllConfig<PersonType> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllPersonTypes,
+      );
 
   @override
   LegacyStreamSingleByIdConfig<PersonType> get baseStreamSingleByIdConfig =>

@@ -7,10 +7,11 @@ import 'package:graphql/client.dart';
 class UsersDAO extends DAOBase<User>
     with LegacyStreamableDAO<User>, DataCheckFreeDocuments<User> {
   @override
-  late final LegacyStreamAllConfig<User> baseStreamAllConfig = LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllUsers,
-    transformRequest: _streamAllVarsConstructor,
-  );
+  late final LegacyStreamAllConfig<User> baseStreamAllConfig =
+      LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllUsers,
+        transformRequest: _streamAllVarsConstructor,
+      );
   @override
   late final LegacyStreamCountConfig<User> baseStreamCountConfig =
       const LegacyStreamCountConfig(
@@ -18,7 +19,9 @@ class UsersDAO extends DAOBase<User>
       );
   @override
   late final LegacyStreamSingleByIdConfig<User> baseStreamSingleByIdConfig =
-      const LegacyStreamSingleByIdConfig(document: documentNodeSubscriptionwatchUser);
+      const LegacyStreamSingleByIdConfig(
+        document: documentNodeSubscriptionwatchUser,
+      );
 
   UsersDAO({required super.db}) : super(fromJson: User.fromJson);
 

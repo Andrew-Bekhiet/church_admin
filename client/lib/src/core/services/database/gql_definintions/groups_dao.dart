@@ -4,10 +4,11 @@ import 'package:church_admin/src/core/services/database/gql_definintions/groups/
 
 class GroupsDAO extends LegacyFullCRUDDAO<Group> {
   @override
-  late final LegacyStreamAllConfig<Group> baseStreamAllConfig = LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllGroups,
-    transformRequest: _streamAllVarsConstructor,
-  );
+  late final LegacyStreamAllConfig<Group> baseStreamAllConfig =
+      LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllGroups,
+        transformRequest: _streamAllVarsConstructor,
+      );
   @override
   late final LegacyStreamCountConfig<Group> baseStreamCountConfig =
       const LegacyStreamCountConfig(

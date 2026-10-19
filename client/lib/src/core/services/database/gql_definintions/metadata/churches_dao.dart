@@ -5,19 +5,21 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 class ChurchesDAO extends DAOBase<Church>
     with LegacyStreamableDAO<Church>, LegacyCreatableDAO<Church> {
   @override
-  LegacyStreamAllConfig<Church> get baseStreamAllConfig => const LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllChurches,
-  );
+  LegacyStreamAllConfig<Church> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllChurches,
+      );
   @override
   LegacyStreamSingleByIdConfig<Church> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  LegacyCreateObjectConfig<Church> get baseCreateObjectConfig => LegacyCreateObjectConfig(
-    document: documentNodeMutationcreateChurch,
-    varsConstructor: _createChurchVarsConstructor,
-    parserFn: db.parser.singleParser(fromJson),
-  );
+  LegacyCreateObjectConfig<Church> get baseCreateObjectConfig =>
+      LegacyCreateObjectConfig(
+        document: documentNodeMutationcreateChurch,
+        varsConstructor: _createChurchVarsConstructor,
+        parserFn: db.parser.singleParser(fromJson),
+      );
 
   ChurchesDAO({
     required super.db,

@@ -5,19 +5,21 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 class SchoolsDAO extends DAOBase<School>
     with LegacyStreamableDAO<School>, LegacyCreatableDAO<School> {
   @override
-  LegacyStreamAllConfig<School> get baseStreamAllConfig => const LegacyStreamAllConfig(
-    document: documentNodeSubscriptionwatchAllSchools,
-  );
+  LegacyStreamAllConfig<School> get baseStreamAllConfig =>
+      const LegacyStreamAllConfig(
+        document: documentNodeSubscriptionwatchAllSchools,
+      );
   @override
   LegacyStreamSingleByIdConfig<School> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  LegacyCreateObjectConfig<School> get baseCreateObjectConfig => LegacyCreateObjectConfig(
-    document: documentNodeMutationcreateSchool,
-    varsConstructor: _createSchoolVarsConstructor,
-    parserFn: db.parser.singleParser(fromJson),
-  );
+  LegacyCreateObjectConfig<School> get baseCreateObjectConfig =>
+      LegacyCreateObjectConfig(
+        document: documentNodeMutationcreateSchool,
+        varsConstructor: _createSchoolVarsConstructor,
+        parserFn: db.parser.singleParser(fromJson),
+      );
 
   SchoolsDAO({
     required super.db,
