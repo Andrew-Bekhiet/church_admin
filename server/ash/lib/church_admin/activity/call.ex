@@ -7,6 +7,8 @@ defmodule ChurchAdmin.Activity.Call do
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Authz.Checks.System
+  alias ChurchAdmin.Changes.{StampActor, StampActorRole}
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Person
   alias ChurchAdmin.Types.Text
 
@@ -17,6 +19,10 @@ defmodule ChurchAdmin.Activity.Call do
 
     queries do
       list :calls, :read
+    end
+
+    mutations do
+      create :record_call, :record_call
     end
   end
 
@@ -46,6 +52,16 @@ defmodule ChurchAdmin.Activity.Call do
                  required?: false,
                  default_limit: 100,
                  max_page_size: 1000
+    end
+
+    create :record_call do
+      accept [:person_id, :time]
+
+      change {StampActor, attribute: :recorded_by}
+      change {StampActorRole, attribute: :user_role}
+
+      change {RecordEdit,
+              table: "persons", record_id: :person_id, recorded_by: {:attribute, :recorded_by}}
     end
   end
 
