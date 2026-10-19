@@ -15,7 +15,15 @@ class FakeChangeFeedServer {
 
   JoinReply Function(String? since) replyToJoin;
 
+  /// Refuses the socket upgrade, as the server does for an account that is
+  /// not approved.
+  bool refuseConnections = false;
+
+  /// Tokens whose joins are refused with `token_expired`.
+  final Set<String> expiredTokens = {};
+
   WebSocket? _serverSocket;
+  String? _serverSocketToken;
   String? _joinRef;
 
   bool get isConnected => _serverSocket != null;
@@ -27,8 +35,17 @@ class FakeChangeFeedServer {
 
   WebSocketChannel connect(Uri uri) {
     connectedUris.add(uri);
+    if (refuseConnections) {
+      return AdapterWebSocketChannel(
+        Future<WebSocket>.error(
+          WebSocketException('403 Forbidden: not approved'),
+        ),
+      );
+    }
+
     final (client, server) = fakes();
     _serverSocket = server;
+    _serverSocketToken = uri.queryParameters['token'];
     server.events.listen((event) {
       switch (event) {
         case TextDataReceived(:final text):
@@ -75,6 +92,18 @@ class FakeChangeFeedServer {
     switch (event) {
       case 'heartbeat':
         _reply(socket, null, ref, topic, {});
+
+      case 'phx_join' when expiredTokens.contains(_serverSocketToken):
+        _send(socket, [
+          joinRef,
+          ref,
+          topic,
+          'phx_reply',
+          {
+            'status': 'error',
+            'response': {'reason': 'token_expired'},
+          },
+        ]);
 
       case 'phx_join':
         final since = (payload as Map)['since'] as String?;

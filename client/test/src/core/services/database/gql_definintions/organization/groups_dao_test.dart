@@ -142,6 +142,40 @@ void main() {
       },
     );
 
+    test(
+      'renaming a group as it was opened keeps its default meeting',
+      () async {
+        final saved = choir.copyWith(
+          meetings: [meeting],
+          defaultMeeting: meeting,
+        );
+        final opened = fakeAsync((async) {
+          final backend = FakeOrganizationServer(groups: [saved]).backend();
+          Group? emitted;
+          final subscription = backend.db.groups
+              .streamSingleById(id: saved.id)
+              .listen((group) => emitted = group);
+          async.elapse(FakeAshBackend.settleTime);
+          unawaited(subscription.cancel());
+          backend.dispose();
+
+          return emitted!;
+        });
+        final backend = FakeOrganizationServer(groups: [saved]).backend();
+        addTearDown(backend.dispose);
+
+        await backend.db.groups.updateObject(
+          newObject: opened.copyWith(name: 'كورال الكبار'),
+          oldObject: opened,
+        );
+
+        expect(
+          backend.server.sentTo('updateGroup').single.variables['input'],
+          containsPair('defaultMeetingId', meeting.id),
+        );
+      },
+    );
+
     test('a default meeting of another group is rejected with its code', () {
       final backend = FakeOrganizationServer(groups: [choir]).backend();
       addTearDown(backend.dispose);

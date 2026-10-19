@@ -14,6 +14,7 @@ import 'ash_responses.dart';
 class FakeAshServerLink extends Link {
   final List<AshTestItem> rows;
   Duration latency;
+  bool reachable = true;
 
   int requestCount = 0;
   int maxRequestsInFlight = 0;
@@ -29,6 +30,14 @@ class FakeAshServerLink extends Link {
   @override
   Stream<Response> request(Request request, [NextLink? forward]) {
     requestCount++;
+    if (!reachable) {
+      return Stream.fromFuture(
+        Future.delayed(
+          latency,
+          () => throw const ServerException(originalException: 'unreachable'),
+        ),
+      );
+    }
     _requestsInFlight++;
     maxRequestsInFlight = math.max(maxRequestsInFlight, _requestsInFlight);
     final data = _answer(request);
@@ -156,6 +165,16 @@ class LiveQueryHarness {
 
   void announce(List<EntityChange> changes) =>
       changeFeed.add(ChangesReceived(changes));
+
+  void goOffline() {
+    server.reachable = false;
+    connectivity.add(false);
+  }
+
+  void goOnline() {
+    server.reachable = true;
+    connectivity.add(true);
+  }
 
   void dispose() {
     unawaited(changeFeed.close());

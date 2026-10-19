@@ -7,9 +7,12 @@ import 'package:rxdart/rxdart.dart';
 /// Decides which active queries a change feed event invalidates and when
 /// they refetch: each target debounces by its [LiveQueryKind], an unheard or
 /// offline target only turns stale until it is heard or online again, and
-/// at most [maxConcurrentRefetches] refetches run at once.
+/// at most [maxConcurrentRefetches] refetches run at once. The change feed
+/// stays subscribed for [changeFeedGracePeriod] after the last target
+/// leaves, so moving between screens does not reconnect it.
 class LiveQueryRegistry {
   static const maxConcurrentRefetches = 4;
+  static const changeFeedGracePeriod = Duration(seconds: 30);
 
   final Stream<ChangeFeedEvent> _changeFeedEvents;
   final ValueStream<bool> _connectivity;
@@ -20,6 +23,7 @@ class LiveQueryRegistry {
 
   StreamSubscription<ChangeFeedEvent>? _changeFeedSubscription;
   StreamSubscription<bool>? _connectivitySubscription;
+  Timer? _changeFeedRelease;
 
   bool get isOnline => _connectivity.valueOrNull ?? true;
 
@@ -33,6 +37,8 @@ class LiveQueryRegistry {
   }) : this(changeFeedEvents: const Stream.empty(), connectivity: connectivity);
 
   void register(LiveQueryTarget target) {
+    _changeFeedRelease?.cancel();
+    _changeFeedRelease = null;
     _schedules[target] = LiveQueryTargetSchedule();
     _changeFeedSubscription ??= _changeFeedEvents.listen(_onChangeFeedEvent);
     _connectivitySubscription ??= _connectivity
@@ -42,10 +48,20 @@ class LiveQueryRegistry {
   }
 
   void unregister(LiveQueryTarget target) {
-    _schedules.remove(target)?.debounce?.cancel();
+    _schedules.remove(target)?.cancelTimers();
     _refetchQueue.remove(target);
     if (_schedules.isNotEmpty) return;
 
+    _changeFeedRelease?.cancel();
+    _changeFeedRelease = Timer(changeFeedGracePeriod, _releaseChangeFeed);
+  }
+
+  /// Makes [target] refetch once it is heard and online, for a load that
+  /// could not reach the server.
+  void markStale(LiveQueryTarget target) => _schedules[target]?.stale = true;
+
+  void _releaseChangeFeed() {
+    _changeFeedRelease = null;
     unawaited(_changeFeedSubscription?.cancel());
     _changeFeedSubscription = null;
     unawaited(_connectivitySubscription?.cancel());
@@ -82,14 +98,15 @@ class LiveQueryRegistry {
 
     schedule
       ..debounce?.cancel()
-      ..debounce = Timer(target.kind.debounce, () => _onDue(target));
+      ..debounce = Timer(target.kind.debounce, () => _onDue(target))
+      ..maxWait ??= Timer(target.kind.maxWait, () => _onDue(target));
   }
 
   void _onDue(LiveQueryTarget target) {
     final schedule = _schedules[target];
     if (schedule == null) return;
 
-    schedule.debounce = null;
+    schedule.cancelTimers();
     if (!target.isListened || !isOnline) {
       schedule.stale = true;
 
@@ -153,7 +170,15 @@ class LiveQueryRegistry {
 
 class LiveQueryTargetSchedule {
   Timer? debounce;
+  Timer? maxWait;
   bool stale = false;
   bool refetching = false;
   bool refetchAgain = false;
+
+  void cancelTimers() {
+    debounce?.cancel();
+    debounce = null;
+    maxWait?.cancel();
+    maxWait = null;
+  }
 }

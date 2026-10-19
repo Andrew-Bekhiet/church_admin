@@ -124,6 +124,7 @@ final changeFeedClientProvider = Provider<ChangeFeedClient>((ref) {
   final client = ChangeFeedClient(
     socketUrl: ref.watch(apiEndpointsProvider).changeFeedSocket,
     credentials: ref.watch(authLinkCredentialsProvider),
+    idToken: ref.watch(authRepositoryProvider).idToken,
   );
   ref.onDispose(client.dispose);
 
