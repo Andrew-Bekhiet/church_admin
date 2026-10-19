@@ -107,6 +107,9 @@ class DBGraphQLClient extends GraphQLClient {
     return subscribe(options).map((r) => r.parsedData!);
   }
 
+  FetchPolicy queryFetchPolicy({required bool onlineFirst}) =>
+      onlineFirst ? _onlineFirstFetchPolicy : _currentFetchPolicy;
+
   ({ObservableQuery<T> query, Stream<QueryResult<T>> results})
   watchQueryWithConnectivityPolicy<T>(WatchQueryOptions<T> options) {
     final query = watchQuery(

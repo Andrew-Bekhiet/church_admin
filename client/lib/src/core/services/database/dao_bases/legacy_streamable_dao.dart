@@ -90,20 +90,11 @@ mixin LegacyStreamableDAO<T extends ViewableWithID> on DAOBase<T>
     Stream<FieldMetadata?>? secondLineField,
     int? overrideTotalLimit,
   }) {
-    final shareableParametersStream = Rx.combineLatest4(
-      searchQuery ?? Stream.value(null),
-      where ?? Stream.value(null),
-      orderBy ?? Stream.value(null),
-      secondLineField ?? Stream.value(null),
-      (search, where, orderBy, secondLineField) => StreamableDAOParameters<T>(
-        search: search,
-        where: where?.whereEnabled(),
-        orderBy: orderBy?.whereEnabled(),
-        secondLineField: switch (secondLineField) {
-          final field? when field.isEnabled => field,
-          _ => null,
-        },
-      ),
+    final shareableParametersStream = StreamableDAOParameters.combineLatest<T>(
+      searchQuery: searchQuery,
+      where: where,
+      orderBy: orderBy,
+      secondLineField: secondLineField,
     ).shareValue();
 
     final Stream<int?> countStream = _getCountStream(

@@ -42,9 +42,36 @@ class FakeAshServerLink extends Link {
     );
   }
 
+  AshTestItem? _mutate(String root, Json variables) {
+    if (root.startsWith('destroy')) {
+      final index = rows.indexWhere((row) => row.id == variables['id']);
+
+      return index < 0 ? null : rows.removeAt(index);
+    }
+
+    final written = AshTestItem.fromJson(
+      (variables['input'] as Map).cast<String, dynamic>(),
+    );
+    final index = rows.indexWhere((row) => row.id == written.id);
+    if (index < 0) {
+      rows.add(written);
+    } else {
+      rows[index] = written;
+    }
+
+    return written;
+  }
+
   Json _answer(Request request) {
     final root = AshResultParser.rootFieldOf(request.operation.document);
     final variables = request.variables;
+
+    if (request.isMutation) {
+      return {
+        '__typename': 'Mutation',
+        root: AshResponses.mutationResult(_mutate(root, variables)?.toJson()),
+      };
+    }
 
     if (variables['id'] case final String id) {
       return {
