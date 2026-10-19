@@ -6688,6 +6688,8 @@ input AttendanceRecordFilterInput {
   meeting: MeetingFilterInput
   person: PersonFilterInput
   recordedByUser: UserFilterInput
+  time: AttendanceRecordFilterDatetime
+  user: UserFilterInput
 }
 
 input AttendanceRecordSortInput {
@@ -6706,6 +6708,8 @@ type AttendanceRecord {
   meeting: Meeting
   person: Person
   recordedByUser: User
+  time: DateTime
+  user: User
 }
 
 "The result of the :record_visit mutation"
