@@ -2,11 +2,12 @@ defmodule ChurchAdmin.People.Family do
   use Ash.Resource,
     domain: ChurchAdmin.People,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource],
+    extensions: [AshGraphql.Resource, AshArchival.Resource],
     fragments: [
       ChurchAdmin.Authz.Fragments.ScopedEntity,
       ChurchAdmin.Archival.HideArchived,
-      ChurchAdmin.Files.RecordsPhoto
+      ChurchAdmin.Files.RecordsPhoto,
+      ChurchAdmin.People.Family.Commands
     ]
 
   alias ChurchAdmin.Accounts.User
@@ -15,6 +16,7 @@ defmodule ChurchAdmin.People.Family do
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestFatherVisit, LatestVisit, Visit}
   alias ChurchAdmin.Catalog.{Church, MaritalStatus}
   alias ChurchAdmin.DataQuality.DataCheck
+  alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.{Contact, FamilyRelation, Person, ResolvedContact}
   alias ChurchAdmin.Places.{Address, Store}
   alias ChurchAdmin.Types.Text
@@ -42,6 +44,12 @@ defmodule ChurchAdmin.People.Family do
       get :family, :read
       list :families, :read
     end
+
+    mutations do
+      create :create_family, :create_family
+      update :update_family, :update_family
+      destroy :delete_family, :destroy
+    end
   end
 
   postgres do
@@ -54,6 +62,12 @@ defmodule ChurchAdmin.People.Family do
       reference :deleted_by_user, on_delete: :restrict, on_update: :restrict
       reference :marital_status_option, on_delete: :restrict, on_update: :update
     end
+  end
+
+  archive do
+    attribute :deleted_at
+    base_filter?(true)
+    exclude_destroy_actions([:hard_destroy])
   end
 
   actions do
@@ -71,6 +85,10 @@ defmodule ChurchAdmin.People.Family do
       description "The family `createPerson` creates for a new person given an address and no family; the person command authorizes it."
       accept [:name]
     end
+  end
+
+  changes do
+    change {RecordEdit, table: "families"}, on: [:create, :update, :destroy]
   end
 
   policies do

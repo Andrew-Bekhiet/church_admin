@@ -11,8 +11,8 @@ defmodule ChurchAdmin.Authz.Checks.CreatedInCommand do
 
       context = CreatedInCommand.remember_created(changeset.context, :person, person.id)
 
-  Nothing writes the context yet; until a command does, this check never
-  matches.
+  A create action remembers its own record with
+  `change {ChurchAdmin.Authz.Changes.RememberCreated, kind: :family}`.
 
       authorize_if {ChurchAdmin.Authz.Checks.CreatedInCommand, attribute: :person_id, kind: :person}
   """

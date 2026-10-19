@@ -75,6 +75,21 @@ input AdminOnInput {
   adminOnArea: ID
 }
 
+input ContactInput {
+  phone: String!
+  label: String
+  isMainPhone: Boolean!
+  id: ID
+}
+
+input FamilyContactInput {
+  phone: String!
+  personTypeId: ID!
+  label: String
+  isMainPhone: Boolean!
+  id: ID
+}
+
 input AddressInput {
   substreetName: String
   streetId: ID
@@ -86,21 +101,6 @@ input AddressInput {
   countryIsoCode: String
   areaId: ID
   apartmentNumber: Int
-}
-
-input FamilyContactInput {
-  phone: String!
-  personTypeId: ID!
-  label: String
-  isMainPhone: Boolean!
-  id: ID
-}
-
-input ContactInput {
-  phone: String!
-  label: String
-  isMainPhone: Boolean!
-  id: ID
 }
 
 enum ServiceMembershipSortField {
@@ -2293,6 +2293,65 @@ type FamilyRelation {
   parent: Family
   childName: String
   parentName: String
+}
+
+"The result of the :delete_family mutation"
+type DeleteFamilyResult {
+  "The record that was successfully deleted"
+  result: Family
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_family mutation"
+type UpdateFamilyResult {
+  "The successful result of the mutation"
+  result: Family
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateFamilyInput {
+  name: String
+  notes: String
+  color: Int
+  status: String
+  deceasedSpouseName: String
+  marriageDate: Date
+  churchId: ID
+  address: AddressInput
+  contacts: [FamilyContactInput!]
+  parents: [ID!]
+  children: [ID!]
+  lastVisit: DateTime
+  lastFatherVisit: DateTime
+}
+
+"The result of the :create_family mutation"
+type CreateFamilyResult {
+  "The successful result of the mutation"
+  result: Family
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateFamilyInput {
+  name: String!
+  notes: String
+  color: Int
+  status: String
+  deceasedSpouseName: String
+  marriageDate: Date
+  churchId: ID
+  address: AddressInput
+  contacts: [FamilyContactInput!]
+  parents: [ID!]
+  children: [ID!]
+  lastVisit: DateTime
+  lastFatherVisit: DateTime
 }
 
 enum FamilySortField {
@@ -11216,6 +11275,9 @@ type RootMutationType {
   createStreet(input: CreateStreetInput!): CreateStreetResult
   updateStreet(id: ID!, input: UpdateStreetInput): UpdateStreetResult
   deleteStreet(id: ID!): DeleteStreetResult
+  createFamily(input: CreateFamilyInput!): CreateFamilyResult
+  updateFamily(id: ID!, input: UpdateFamilyInput): UpdateFamilyResult
+  deleteFamily(id: ID!): DeleteFamilyResult
   createPerson(input: CreatePersonInput!): CreatePersonResult
   updatePerson(id: ID!, input: UpdatePersonInput): UpdatePersonResult
   recordPersonSpiritualDays(id: ID!, input: RecordPersonSpiritualDaysInput!): RecordPersonSpiritualDaysResult

@@ -1,9 +1,12 @@
 defmodule ChurchAdmin.People.Person.Changes.ApplyFamilyContacts do
   @moduledoc """
-  Makes the unclaimed contacts of the written person's family (after the
+  Makes the unclaimed contacts of the written record's family (after the
   write) the command's `family_contacts` list, through
   `ChurchAdmin.People.Contacts.replace_unclaimed/3`; `nil` leaves them alone.
   A contact for a type with a sole live member goes to that member.
+  `argument` and `family_id` (the written record's attribute holding the
+  family's id) default to a person's; the family commands pass
+  `argument: :contacts, family_id: :id`.
 
   As Hasura allowed, the actor may write a family's unclaimed contacts when
   it may edit a live member of the family that is not a family admin, when
@@ -21,30 +24,43 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyFamilyContacts do
 
   require Ash.Query
 
+  @options_schema [
+    argument: [type: :atom, default: :family_contacts],
+    family_id: [type: :atom, default: :family_id]
+  ]
+
   @impl true
-  def change(changeset, _opts, context) do
-    case Ash.Changeset.get_argument(changeset, :family_contacts) do
+  def init(opts) do
+    case Spark.Options.validate(opts, @options_schema) do
+      {:ok, opts} -> {:ok, opts}
+      {:error, error} -> {:error, Exception.message(error)}
+    end
+  end
+
+  @impl true
+  def change(changeset, opts, context) do
+    case Ash.Changeset.get_argument(changeset, opts[:argument]) do
       nil ->
         changeset
 
       contacts ->
-        Ash.Changeset.after_action(changeset, fn changeset, person ->
-          case replace(changeset, person, contacts, context.actor) do
-            :ok -> {:ok, person}
+        Ash.Changeset.after_action(changeset, fn changeset, record ->
+          family_id = Map.fetch!(record, opts[:family_id])
+
+          case replace(changeset, family_id, contacts, opts[:argument], context.actor) do
+            :ok -> {:ok, record}
             {:error, error} -> AfterActionFailure.roll_back(changeset.resource, error)
           end
         end)
     end
   end
 
-  defp replace(_changeset, %{family_id: nil}, _contacts, _actor),
-    do:
-      {:error,
-       DomainError.exception(code: Codes.validation_invalid(), fields: [:family_contacts])}
+  defp replace(_changeset, nil, _contacts, argument, _actor),
+    do: {:error, DomainError.exception(code: Codes.validation_invalid(), fields: [argument])}
 
-  defp replace(changeset, person, contacts, actor) do
-    if may_write?(changeset, person.family_id, actor),
-      do: Contacts.replace_unclaimed(person.family_id, contacts, actor),
+  defp replace(changeset, family_id, contacts, _argument, actor) do
+    if may_write?(changeset, family_id, actor),
+      do: Contacts.replace_unclaimed(family_id, contacts, actor),
       else: {:error, Ash.Error.Forbidden.exception([])}
   end
 
