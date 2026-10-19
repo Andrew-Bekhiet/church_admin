@@ -2,13 +2,22 @@ defmodule ChurchAdmin.Catalog.College do
   use Ash.Resource,
     domain: ChurchAdmin.Catalog,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.Lookup]
 
+  alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Catalog.University
   alias ChurchAdmin.Types.Text
 
   graphql do
     type :college
+
+    relationships [:university]
+
+    queries do
+      get :college, :read
+      list :colleges, :read
+    end
   end
 
   postgres do
@@ -22,7 +31,21 @@ defmodule ChurchAdmin.Catalog.College do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 25,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
   end
 
   attributes do
@@ -37,7 +60,7 @@ defmodule ChurchAdmin.Catalog.College do
   end
 
   relationships do
-    belongs_to :university, University, define_attribute?: false
+    belongs_to :university, University, define_attribute?: false, public?: true
   end
 
   identities do

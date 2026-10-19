@@ -2,13 +2,22 @@ defmodule ChurchAdmin.Catalog.Father do
   use Ash.Resource,
     domain: ChurchAdmin.Catalog,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.Lookup]
 
+  alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.Catalog.Church
   alias ChurchAdmin.Types.Text
 
   graphql do
     type :father
+
+    relationships [:church]
+
+    queries do
+      get :father, :read
+      list :fathers, :read
+    end
   end
 
   postgres do
@@ -22,7 +31,21 @@ defmodule ChurchAdmin.Catalog.Father do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 25,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
   end
 
   attributes do
@@ -38,7 +61,7 @@ defmodule ChurchAdmin.Catalog.Father do
   end
 
   relationships do
-    belongs_to :church, Church, define_attribute?: false
+    belongs_to :church, Church, define_attribute?: false, public?: true
   end
 
   identities do
