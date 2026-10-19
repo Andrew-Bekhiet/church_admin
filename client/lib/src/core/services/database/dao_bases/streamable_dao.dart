@@ -15,7 +15,9 @@ abstract interface class StreamableDAO<T extends ViewableWithID>
   });
 
   PaginatableStreamBase<T> streamAllWithConfig({
-    required DAOMethodTemplate<Object?> streamAllConfig,
+    // Nullable because mockito's generated DAO mocks widen it to nullable;
+    // implementations narrow it to their own non-null config.
+    required DAOMethodTemplate<Object?>? streamAllConfig,
     LegacyStreamCountConfig<T>? streamCountConfig,
     Stream<String?>? searchQuery,
     Stream<List<Filter>>? where,
