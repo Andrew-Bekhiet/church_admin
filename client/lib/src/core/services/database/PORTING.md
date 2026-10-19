@@ -22,8 +22,11 @@ Reference port: `gql_definintions/metadata/` (commit `refactor(data): port the m
    - Create: `varsConstructor: ({required newObject}) => Variables_Mutation_createChurch(input: Input_CreateChurchInput(name: newObject.name)).toJson()`. Send the input's fields only; the server sets presets.
    - Extra reads: reuse the list document through `query(where:, orderBy:, limit: AshPagination.maxPageSize)` before adding a document; a single get parses with `AshResultParser(document).entity(fromJson)`.
    - Ids are `String`: drop `.toUuid()`. Keep `throw UnimplementedError()` for configs the old DAO never served.
+5b. **Non-`DAOBase` DAO** (history, logs): page with `KeysetPageQuery` inside `KeysetPaginatedStream<T, void>(registry: db.liveQueries, parametersStream: Stream.value(null), fetchChunk: …)`. An unpaginated live list is `LiveQuery<List<T>>(kind: LiveQueryKind.list, …)`. Variables come from the generated `Variables_*`/`Input_*`; operators are `eq`, not `$eq`; enums are `Enum_<T>SortField`/`Enum_SortOrder`.
 6. **Models**: change only `fromJson`/converters where the SDL shape differs (§5 of `client-data-layer.md`). Never rename model fields.
 7. **Delete** the folder's `.gql` and `__generated__/*.gql.dart`, except a fragment still spread by an unported `.gql` (`grep -rn '\.\.\.StudyYear\b' lib --include='*.gql'`): keep it, and keep `GqlTypePolicies` entries for Hasura type names still read.
+7b. A type with no `id` in the SDL is selected without an id and added to `GqlTypePolicies` as `_embedded`. `grep` the other `.gql` files before deleting a Hasura type's policy entry.
+7c. Shared Ash fragments (`fragment User on User`) live in `gql_definintions/gql/fragments.graphql`.
 8. **Contract**: add the queryable names to `portedEntities` in `test/src/core/services/database/ash_query/schema_contract_test.dart`. A failure lists server gaps: report them; fix only client-side untruths (the metadata port marked StudyYear's synthesized `id` `isOrderable: false`).
 
 ## Pitfalls
@@ -33,6 +36,10 @@ Reference port: `gql_definintions/metadata/` (commit `refactor(data): port the m
 - Lane worktrees refuse chained/looped shell commands that touch git: one plain command per call, `git -C <lane>`.
 - `check_generated_code.sh` needs a clean tree and the pinned SDK: commit, then `~/.claude/scripts/fvm-in client exec scripts/check_generated_code.sh`.
 - `sorted_list_key_field_completeness_test.dart` checks a DAO whose config is a `StreamAllConfig` against `schema.graphql` with the Ash rules (`KeysetPageOf*`, `*Result` are transient); a new `.graphql` list needs `id` on every object it selects.
+- Pass `fvm-in` an absolute client path.
+- Commands in fakes: `FakeAshBackend(tables, mutations: {...})` handlers.
+- A non-`ID` model row (no `id` field) gets a `__keyset` in its fake table.
+- `git rm` stages deletions: `git reset -q` before the first commit, and stage explicit paths.
 - Feature tests fake DAOs with `Fake implements XDAO`; they keep compiling as long as public signatures stay.
 
 ## Done
