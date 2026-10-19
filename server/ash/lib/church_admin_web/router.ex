@@ -43,5 +43,7 @@ defmodule ChurchAdminWeb.Router do
 
     get "/:token", FileController, :show
     get "/:token/:filename", FileController, :show
+    put "/:token", FileController, :upload
+    put "/:token/:filename", FileController, :upload
   end
 end

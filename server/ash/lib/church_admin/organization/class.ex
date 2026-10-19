@@ -3,7 +3,11 @@ defmodule ChurchAdmin.Organization.Class do
     domain: ChurchAdmin.Organization,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshGraphql.Resource],
-    fragments: [ChurchAdmin.Authz.Fragments.ScopedEntity, ChurchAdmin.Archival.HideArchived]
+    fragments: [
+      ChurchAdmin.Authz.Fragments.ScopedEntity,
+      ChurchAdmin.Archival.HideArchived,
+      ChurchAdmin.Files.RecordsPhoto
+    ]
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Activity.{Edit, LatestEdit}

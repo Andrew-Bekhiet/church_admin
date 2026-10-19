@@ -3,7 +3,8 @@ defmodule ChurchAdmin.Accounts.User do
     domain: ChurchAdmin.Accounts,
     data_layer: AshPostgres.DataLayer,
     authorizers: [Ash.Policy.Authorizer],
-    extensions: [AshGraphql.Resource, AshRateLimiter]
+    extensions: [AshGraphql.Resource, AshRateLimiter],
+    fragments: [ChurchAdmin.Files.RecordsPhoto]
 
   alias ChurchAdmin.Accounts.{
     Actions,
