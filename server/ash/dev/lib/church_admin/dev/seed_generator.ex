@@ -163,23 +163,13 @@ defmodule ChurchAdmin.Dev.SeedGenerator do
       Renderer.insert("public.tags", lookups.tags),
       Renderer.insert("public.person_states", lookups.person_states),
       Renderer.insert("auth.users_data", accounts.users_data),
-      Renderer.without_trigger(
+      Renderer.without_trigger_if_present(
         "auth.users_permissions",
         "check_users_permissions_level_consistency",
         Renderer.insert("auth.users_permissions", accounts.permissions)
       ),
-      Renderer.update_where_in(
-        "public.users_preferences",
-        "dark_theme = true",
-        "uid",
-        accounts.themed_uids.dark
-      ),
-      Renderer.update_where_in(
-        "public.users_preferences",
-        "dark_theme = false",
-        "uid",
-        accounts.themed_uids.light
-      ),
+      "DELETE FROM public.users_preferences;\n",
+      Renderer.insert("public.users_preferences", accounts.preferences),
       Renderer.insert("public.users_fcm_tokens", accounts.fcm_tokens),
       Renderer.insert("auth.invitations", accounts.invitations),
       Renderer.insert("public.areas", data.places.areas),

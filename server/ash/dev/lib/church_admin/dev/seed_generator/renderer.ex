@@ -29,6 +29,7 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Renderer do
       ~w(permission_id uid admin_on_service service_gender service_study_year service_allow_edit service_admin_on_users admin_on_group group_allow_edit group_admin_on_users admin_on_area area_allow_edit area_admin_on_users service_write_related_families group_write_related_families area_allow_export service_allow_export group_allow_export service_allow_record_attendance service_allow_record_servants_attendance group_allow_record_attendance group_allow_record_servants_attendance)a,
     "auth.invitations" => ~w(id user_uid created_by code)a,
     "public.users_fcm_tokens" => ~w(uid token)a,
+    "public.users_preferences" => ~w(uid order_by_preferences great_feast_theme dark_theme)a,
     "public.areas" => ~w(id name bounds color)a,
     "public.streets" => ~w(id name line color deleted_at deleted_by)a,
     "public.families" =>
@@ -67,6 +68,26 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Renderer do
   def insert(table, rows), do: Sql.insert(table, Map.fetch!(@columns, table), rows)
 
   @spec without_trigger(String.t(), String.t(), iodata()) :: iodata()
+  @doc """
+  Like `without_trigger/3`, for a trigger a later migration drops: the seed
+  loads onto the baseline, which still has it, and onto the migrated schema,
+  which does not.
+  """
+  @spec without_trigger_if_present(String.t(), String.t(), iodata()) :: iodata()
+  def without_trigger_if_present(table, trigger, statements) do
+    [
+      toggle_trigger_if_present(table, trigger, "DISABLE"),
+      statements,
+      toggle_trigger_if_present(table, trigger, "ENABLE")
+    ]
+  end
+
+  defp toggle_trigger_if_present(table, trigger, toggle) do
+    "DO $$ BEGIN IF EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = '#{trigger}' " <>
+      "AND tgrelid = '#{table}'::regclass) THEN " <>
+      "ALTER TABLE #{table} #{toggle} TRIGGER #{trigger}; END IF; END $$;\n"
+  end
+
   def without_trigger(table, trigger, statements) do
     [
       "ALTER TABLE #{table} DISABLE TRIGGER #{trigger};\n",

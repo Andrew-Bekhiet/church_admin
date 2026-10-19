@@ -24,6 +24,7 @@ defmodule ChurchAdmin.Errors.Codes do
     service/name-taken service/default-meeting-mismatch
     attendance/already-recorded
     user/email-taken user/name-taken user/person-already-linked user/permission-not-grantable
+    user/permission-levels-inconsistent user/duplicate-scope user/email-locked
     invitation/scope-required invitation/scope-not-manageable invitation/invalid-expiry
     invitation/not-claimable
     account/already-claimed account/not-claimable

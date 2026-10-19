@@ -11,6 +11,8 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
   alias ChurchAdmin.Organization.{Group, Service}
   alias ChurchAdmin.Places.Area
 
+  @scope_fields ChurchAdmin.Accounts.AdminOn.field_names()
+
   graphql do
     type :scope_grant
 
@@ -56,6 +58,16 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
     update :set_service_study_year do
       accept [:service_study_year]
     end
+
+    create :create do
+      primary? true
+      accept @scope_fields ++ [:uid]
+      validate ChurchAdmin.Accounts.Validations.GranterCoversScope
+    end
+
+    destroy :destroy do
+      primary? true
+    end
   end
 
   policies do
@@ -66,6 +78,15 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
     policy action_type(:read) do
       authorize_if {RelatedInScope, path: :user, entity: :user, access: :read}
     end
+
+    policy action_type([:create, :destroy]) do
+      authorize_if {RelatedInScope, path: :user, entity: :user, access: :edit}
+    end
+  end
+
+  changes do
+    change {ChurchAdmin.History.Changes.RecordEdit, table: "users", record_id: :uid},
+      on: [:create]
   end
 
   attributes do

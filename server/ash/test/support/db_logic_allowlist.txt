@@ -6,13 +6,6 @@ default history.edit_history.recorded_by
 default history.edit_history.user_role
 default history.kodas_history.recorded_by
 default history.visit_history.recorded_by
-function auth.check_users_permissions_level_consistency()
-function auth.claim_invitation(text, text, text)
-function auth.enforce_admin_on_grant_level()
-function auth.enforce_permission_grant_level()
-function auth.format_invitation_code(text)
-function auth.generate_invitation_code()
-function auth.prevent_email_change_after_claim()
 function auth.sync_users_permissions_by_entity_id_cache()
 function auth.user_can_edit_area(areas, json)
 function auth.user_can_edit_class(classes, json)
@@ -42,7 +35,6 @@ function public.check_store_admin_family_or_address()
 function public.check_street_has_area()
 function public.claim_contact_for_sole_family_member()
 function public.claim_family_contacts_for_sole_member()
-function public.default_order_by_preferences()
 function public.family_inserted_in_current_transaction(families)
 function public.keep_one_main_contact_per_owner()
 function public.mark_linked_person_as_servant()
@@ -50,20 +42,13 @@ function public.merge_contact_into_same_owner_phone()
 function public.person_inserted_in_current_transaction(persons)
 function public.persons_general_check()
 function public.remember_row_inserted_in_transaction()
-function public.seed_user_preferences()
 function public.set_current_timestamp_updated_at()
 function public.soft_delete_trigger()
 function public.sync_area_streets()
 function public.sync_house_code_with_legacy_house_number()
 function public.sync_street_areas()
-trigger auth.users_admin_on.edit_history
-trigger auth.users_admin_on.enforce_admin_on_grant_level
 trigger auth.users_admin_on.sync_users_permissions_by_entity_id_cache
-trigger auth.users_data.prevent_email_change_after_claim
-trigger auth.users_data.seed_user_preferences
 trigger auth.users_data.sync_users_permissions_by_entity_id_cache
-trigger auth.users_permissions.check_users_permissions_level_consistency
-trigger auth.users_permissions.enforce_permission_grant_level
 trigger auth.users_permissions.sync_users_permissions_by_entity_id_cache
 trigger history.attendance_history.check_attendance_history_meeting
 trigger history.call_history.insert_person_edit_history
