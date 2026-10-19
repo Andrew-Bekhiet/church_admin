@@ -73,8 +73,11 @@ class Service extends ViewableWithIDAndImage
   final bool userCanEdit;
 
   @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('services', id, lastUpdatedTime: photoUpdatedAt);
+  ObjectImageInfo get imageInfo => ObjectPhotoInfo(
+    Enum_PhotoSubject.SERVICES,
+    id,
+    lastUpdatedTime: photoUpdatedAt,
+  );
 
   @override
   String get typeName => AdvancedQueriesMetadata().service.name;

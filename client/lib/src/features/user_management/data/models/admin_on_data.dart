@@ -29,9 +29,8 @@ class AdminOnData with _$AdminOnData implements ToJson {
   @QueryableField(label: 'السنة الدراسية')
   final StudyYear? serviceStudyYearData;
 
-  @GenderIsMaleConverter()
   @QueryableField(label: 'نوع المخدومين المسؤول عنهم')
-  final Gender serviceGender;
+  final bool? serviceGender;
 
   @QueryableField(label: 'يمكنه تصدير بيانات الخدمة')
   final bool? serviceAllowExport;
@@ -81,13 +80,13 @@ class AdminOnData with _$AdminOnData implements ToJson {
   const AdminOnData({
     required this.permissionId,
     this.classes = const [],
-    this.serviceGender = Gender.any,
     this.area,
     this.areaAllowExport,
     this.areaAllowEdit,
     this.areaAdminOnUsers,
     this.service,
     this.serviceStudyYearData,
+    this.serviceGender,
     this.serviceAllowExport,
     this.serviceAllowEdit,
     this.serviceAllowRecordAttendance,
@@ -110,13 +109,40 @@ class AdminOnData with _$AdminOnData implements ToJson {
   @override
   Map<String, dynamic> toJson() => _$AdminOnDataToJson(this);
 
-  String describeServicePermission() =>
-      switch ((serviceStudyYearData, serviceGender)) {
-        (null, Gender.any) => '(جميع البيانات داخل الخدمة)',
-        (null, Gender.male) => '(جميع البنين في الخدمة)',
-        (null, Gender.female) => '(جميع البنات داخل الخدمة)',
-        (final studyYear?, Gender.any) => '(جميع بيانات ${studyYear.name})',
-        (final studyYear?, final gender) =>
-          '(${studyYear.name} ${gender.groupLabel})',
-      };
+  Input_AdminOnInput toCommandInput() => Input_AdminOnInput(
+    adminOnArea: area?.id,
+    areaAllowEdit: areaAllowEdit,
+    areaAllowExport: areaAllowExport,
+    areaAdminOnUsers: areaAdminOnUsers,
+    adminOnService: service?.id,
+    serviceStudyYear: serviceStudyYearData?.order,
+    serviceGender: serviceGender,
+    serviceAllowEdit: serviceAllowEdit,
+    serviceAllowExport: serviceAllowExport,
+    serviceAllowRecordAttendance: serviceAllowRecordAttendance,
+    serviceAllowRecordServantsAttendance: serviceAllowRecordServantsAttendance,
+    serviceAdminOnUsers: serviceAdminOnUsers,
+    serviceWriteRelatedFamilies: serviceWriteRelatedFamilies,
+    adminOnGroup: group?.id,
+    groupAllowEdit: groupAllowEdit,
+    groupAllowExport: groupAllowExport,
+    groupAllowRecordAttendance: groupAllowRecordAttendance,
+    groupAllowRecordServantsAttendance: groupAllowRecordServantsAttendance,
+    groupAdminOnUsers: groupAdminOnUsers,
+    groupWriteRelatedFamilies: groupWriteRelatedFamilies,
+  );
+
+  String describeServicePermission() {
+    if (serviceGender == null && serviceStudyYearData == null) {
+      return '(جميع البيانات داخل الخدمة)';
+    } else if (serviceGender != null && serviceStudyYearData == null) {
+      return serviceGender!
+          ? '(جميع البنين في الخدمة)'
+          : '(جميع البنات داخل الخدمة)';
+    } else if (serviceGender != null) {
+      return '(${serviceStudyYearData!.name}${serviceGender! ? ' بنين' : ' بنات'})';
+    } else {
+      return '(جميع بيانات ${serviceStudyYearData!.name})';
+    }
+  }
 }

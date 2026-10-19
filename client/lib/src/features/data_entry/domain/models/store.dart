@@ -53,8 +53,11 @@ class Store extends ViewableWithIDAndImage
   Point? get geolocation => address?.geolocation;
 
   @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('stores', id, lastUpdatedTime: photoUpdatedAt);
+  ObjectImageInfo get imageInfo => ObjectPhotoInfo(
+    Enum_PhotoSubject.STORES,
+    id,
+    lastUpdatedTime: photoUpdatedAt,
+  );
 
   @override
   String get typeName => AdvancedQueriesMetadata().store.name;

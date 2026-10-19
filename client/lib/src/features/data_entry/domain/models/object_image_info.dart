@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class ObjectImageInfo with Equatable {
@@ -14,7 +15,7 @@ abstract class ObjectImageInfo with Equatable {
   List<Object?> get props => [cacheKey, lastUpdatedTime];
   const ObjectImageInfo();
 
-  Future<String> getDownloadUrl();
+  Future<PhotoLink> getDownloadLink();
 
   Future<String> getUploadUrl({String? contentType});
 

@@ -20,7 +20,6 @@ class DataExportCubit extends Cubit<DataExportState> {
 
   late final StreamSubscription<String> _selectionSearchSubscription;
 
-  final FunctionsService _functionsService;
   final AuthBloc _authBloc;
   final ExportOperationsStorage _exportOperationsStorage;
   final DatabaseService _databaseService;
@@ -30,13 +29,11 @@ class DataExportCubit extends Cubit<DataExportState> {
       _authBloc.currentUserData?.permissions.exportAllData ?? false;
 
   DataExportCubit({
-    FunctionsService? functionsService,
     AuthBloc? authBloc,
     ExportOperationsStorage? exportOperationsStorage,
     DatabaseService? databaseService,
     AnalyticsService? analyticsService,
-  }) : _functionsService = functionsService ?? FunctionsService.I,
-       _authBloc = authBloc ?? AuthBloc.I,
+  }) : _authBloc = authBloc ?? AuthBloc.I,
        _exportOperationsStorage =
            exportOperationsStorage ?? ExportOperationsStorage.I,
        _databaseService = databaseService ?? DatabaseService.I,
@@ -242,7 +239,7 @@ class DataExportCubit extends Cubit<DataExportState> {
     final startedAt = clock.now();
     emit(const DataExportInProgress());
     try {
-      final downloadUrl = await _functionsService.exportData(
+      final downloadUrl = await _databaseService.exports.exportData(
         areasIds: areasIds,
         servicesIds: servicesIds,
         classesIds: classesIds,

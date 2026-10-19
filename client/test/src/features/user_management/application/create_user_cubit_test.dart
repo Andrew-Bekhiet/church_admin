@@ -7,11 +7,11 @@ import 'package:mocktail/mocktail.dart';
 import '../../../fakes/fake_logging_service.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 
-class _MockFunctionsService extends Mock implements FunctionsService {}
+class _MockUsersDAO extends Mock implements UsersDAO {}
 
 void main() {
   group('CreateUserCubit', () {
-    late _MockFunctionsService functions;
+    late _MockUsersDAO usersDao;
     late RecordingAnalyticsProvider analytics;
 
     final validDraft = UserDraft(
@@ -32,7 +32,7 @@ void main() {
 
     CreateUserCubit buildCubit({UserDraft? initial}) => CreateUserCubit(
       initial: initial ?? validDraft,
-      functions: functions,
+      usersDao: usersDao,
       analyticsService: AnalyticsService([analytics], FakeLoggingService()),
     );
 
@@ -43,13 +43,13 @@ void main() {
     });
 
     setUp(() {
-      functions = _MockFunctionsService();
+      usersDao = _MockUsersDAO();
       analytics = RecordingAnalyticsProvider();
     });
 
     blocTest<CreateUserCubit, UserFormState>(
       'a name already taken on the server is tracked as the failure kind',
-      setUp: () => when(() => functions.createUser(any())).thenThrow(
+      setUp: () => when(() => usersDao.createUser(any())).thenThrow(
         FirebaseFunctionsException(
           code: 'already-exists',
           message: 'user/name-taken',
@@ -80,7 +80,7 @@ void main() {
     blocTest<CreateUserCubit, UserFormState>(
       'a permission dropped for its missing prerequisite is not counted as granted',
       setUp: () => when(
-        () => functions.createUser(any()),
+        () => usersDao.createUser(any()),
       ).thenAnswer((_) async => 'new-uid'),
       build: () => buildCubit(
         initial: validDraft.copyWith(permissions: draftPermissions),
@@ -108,7 +108,7 @@ void main() {
     blocTest<CreateUserCubit, UserFormState>(
       'saving a complete form creates the user and reports the new uid',
       setUp: () => when(
-        () => functions.createUser(any()),
+        () => usersDao.createUser(any()),
       ).thenAnswer((_) async => 'new-uid'),
       build: buildCubit,
       act: (cubit) => cubit.save(),
@@ -121,7 +121,7 @@ void main() {
     blocTest<CreateUserCubit, UserFormState>(
       'a failed creation surfaces the error and returns to editing',
       setUp: () => when(
-        () => functions.createUser(any()),
+        () => usersDao.createUser(any()),
       ).thenThrow(Exception('boom')),
       build: buildCubit,
       act: (cubit) => cubit.save(),

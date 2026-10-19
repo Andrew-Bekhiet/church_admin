@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/edit_user_form.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -83,26 +82,12 @@ class _EditUserScreenState extends State<EditUserScreen> {
       case UserFormEditing(error: final error?):
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
-          ..showSnackBar(SnackBar(content: Text(_messageFor(error))));
+          ..showSnackBar(
+            SnackBar(content: Text(UserFormErrorMessage.of(error))),
+          );
 
       case UserFormEditing() || UserFormSaving():
         return;
     }
   }
-
-  String _messageFor(Object error) => switch (error) {
-    UserFormValidationError() => 'برجاء إكمال البيانات المطلوبة',
-    PersonAlreadyLinkedException() => 'هذا المخدوم مرتبط بحساب آخر بالفعل',
-    FirebaseFunctionsException(message: 'user/person-already-linked') =>
-      'هذا المخدوم مرتبط بحساب آخر بالفعل',
-    FirebaseFunctionsException(message: 'user/email-taken') =>
-      'البريد الإلكتروني مستخدم بحساب آخر',
-    FirebaseFunctionsException(message: 'user/name-taken') =>
-      'الاسم مستخدم بحساب آخر',
-    FirebaseFunctionsException(message: 'invitation/scope-required') =>
-      'يجب تعيين المستخدم الجديد أميناً على منطقة أو خدمة أو مجموعة',
-    FirebaseFunctionsException(message: 'invitation/scope-not-manageable') =>
-      'لا يمكنك إضافة مستخدم خارج نطاق صلاحياتك',
-    _ => error.toString(),
-  };
 }

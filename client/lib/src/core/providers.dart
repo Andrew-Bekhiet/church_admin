@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
@@ -83,6 +82,7 @@ final Provider<DatabaseService> databaseServiceProvider =
       (ref) => DatabaseService(
         ref.watch(graphQLClientProvider),
         liveQueries: ref.watch(liveQueryRegistryProvider),
+        dio: ref.watch(dioProvider),
       ),
     );
 
@@ -202,7 +202,6 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
     connectivityStream: ref
         .watch(connectivityServiceProvider)
         .connectivityStream,
-    functionsService: ref.watch(functionsServiceProvider),
     featureFlagsRepository: ref.watch(featureFlagsRepoProvider),
     analyticsService: ref.watch(analyticsServiceProvider),
   );
@@ -263,9 +262,6 @@ final userPreferencesServiceProvider = Provider<UserPreferencesService>(
 
 final firebaseAuthProvider = Provider((_) => FirebaseAuth.instance);
 final firebaseDatabaseProvider = Provider((_) => FirebaseDatabase.instance);
-final firebaseFunctionsProvider = Provider(
-  (_) => FirebaseFunctions.instanceFor(region: 'europe-west6'),
-);
 final firebaseMessagingProvider = Provider((_) => FirebaseMessaging.instance);
 final firebaseRemoteConfigProvider = Provider(
   (_) => FirebaseRemoteConfig.instance,
@@ -288,10 +284,6 @@ final dioProvider = Provider(
 
     return dio;
   },
-);
-
-final functionsServiceProvider = Provider<FunctionsService>(
-  (ref) => FunctionsService(dio: ref.watch(dioProvider)),
 );
 
 final geocoderProvider = Provider<Geocoder>(

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:dio/dio.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
@@ -35,6 +36,7 @@ class FakeAshBackend {
   });
 
   final FakeAshTablesLink server;
+  final Dio? dio;
   final StreamController<ChangeFeedEvent> _changeFeed =
       StreamController.broadcast();
   final BehaviorSubject<bool> _connectivity = BehaviorSubject.seeded(true);
@@ -52,10 +54,14 @@ class FakeAshBackend {
       changeFeedEvents: _changeFeed.stream,
       connectivity: _connectivity,
     ),
+    dio: dio,
   );
 
-  FakeAshBackend(List<FakeAshTable> tables)
-    : server = FakeAshTablesLink(tables);
+  FakeAshBackend(
+    List<FakeAshTable> tables, {
+    Map<String, FakeAshAction> actions = const {},
+    this.dio,
+  }) : server = FakeAshTablesLink(tables, actions: actions);
 
   void announce(List<EntityChange> changes) =>
       _changeFeed.add(ChangesReceived(changes));

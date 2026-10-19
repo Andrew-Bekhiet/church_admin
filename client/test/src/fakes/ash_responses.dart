@@ -40,4 +40,32 @@ abstract final class AshResponses {
     '__typename': 'MutationResult',
     'result': result,
   };
+
+  static Json photoLink(String url, DateTime expiresAt) => {
+    '__typename': 'PhotoLink',
+    'url': url,
+    'expiresAt': expiresAt.toUtc().toIso8601String(),
+  };
+
+  static Json exportDownloadLink(String downloadUrl, DateTime expiresAt) => {
+    '__typename': 'ExportDownloadLink',
+    'downloadUrl': downloadUrl,
+    'expiresAt': expiresAt.toUtc().toIso8601String(),
+  };
+
+  static Json appDownloadLink({
+    required String url,
+    required String version,
+    required DateTime expiresAt,
+  }) => {
+    '__typename': 'AppDownloadLink',
+    'url': url,
+    'version': version,
+    'expiresAt': expiresAt.toUtc().toIso8601String(),
+  };
+
+  static Json claimedAccount(String uid) => {
+    '__typename': 'ClaimedAccount',
+    'uid': uid,
+  };
 }
