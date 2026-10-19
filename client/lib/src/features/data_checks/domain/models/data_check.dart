@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
@@ -14,6 +15,17 @@ part 'data_check.g.dart';
 class DataCheck with _$DataCheck implements ID, SerializableExtra {
   static const int _percentCap = 99;
   static const int _percentFull = 100;
+
+  static List<DataCheckDetail> _detailsFromJson(List<Object?>? json) => [
+    for (final detail in json ?? const [])
+      DataCheckDetail.fromJson(
+        (jsonDecode(detail as String) as Map).cast<String, Object?>(),
+      ),
+  ];
+
+  static List<String> _detailsToJson(List<DataCheckDetail> details) => [
+    for (final detail in details) jsonEncode(detail.toJson()),
+  ];
 
   @JsonKey(defaultValue: 0)
   @QueryableField(label: 'نسبة اكتمال البيانات')
@@ -39,10 +51,14 @@ class DataCheck with _$DataCheck implements ID, SerializableExtra {
   )
   final DataCheckOverride userOverride;
 
-  @QueryableField(label: 'العائلة', codeOnly: true)
+  @QueryableField.self(label: 'العائلة', codeOnly: true)
   final String familyId;
 
-  @JsonKey(name: 'details', defaultValue: <DataCheckDetail>[])
+  @JsonKey(
+    name: 'details',
+    fromJson: _detailsFromJson,
+    toJson: _detailsToJson,
+  )
   final List<DataCheckDetail> checksDetails;
 
   @override

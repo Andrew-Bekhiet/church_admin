@@ -1,146 +1,136 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/data_check_free_documents.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/queries.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/subscriptions.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/families/family_insert_helper.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/families/family_update_helper.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/queries.graphql.dart';
 import 'package:graphql/client.dart';
-import 'package:rxdart/rxdart.dart';
 
-class FamiliesDAO extends LegacyFullCRUDDAO<Family>
+class FamiliesDAO extends FullCRUDDAO<Family>
     with DataCheckFreeDocuments<Family> {
+  static final List<Input_FamilyContactSortInput> _contactsOrder = [
+    Input_FamilyContactSortInput(
+      field: Enum_FamilyContactSortField.PERSON_TYPE_ORDER,
+      order: Enum_SortOrder.ASC,
+    ),
+    Input_FamilyContactSortInput(
+      field: Enum_FamilyContactSortField.IS_MAIN_PHONE,
+      order: Enum_SortOrder.DESC,
+    ),
+    Input_FamilyContactSortInput(
+      field: Enum_FamilyContactSortField.CREATED_AT,
+      order: Enum_SortOrder.ASC,
+    ),
+  ];
+
+  static final List<Input_FamilySortInput> _relativesOrder = [
+    Input_FamilySortInput(
+      field: Enum_FamilySortField.NAME,
+      order: Enum_SortOrder.ASC,
+    ),
+  ];
+
   @override
-  final LegacyStreamAllConfig<Family> baseStreamAllConfig =
-      const LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllFamilies,
+  StreamAllConfig<Family> get baseStreamAllConfig => StreamAllConfig(
+    document: documentNodeQueryfamilies,
+    arguments: _listArguments,
+  );
+
+  @override
+  StreamSingleByIdConfig<Family> get baseStreamSingleByIdConfig =>
+      StreamSingleByIdConfig(
+        document: documentNodeQueryfamily,
+        varsConstructor: ({required id}) => Variables_Query_family(
+          id: id,
+          contactsSort: _contactsOrder,
+        ).toJson(),
+        parserFn: _familyWithContactRoles,
       );
 
   @override
-  late final LegacyStreamCountConfig<Family> baseStreamCountConfig =
-      const LegacyStreamCountConfig(
-        document: documentNodeSubscriptionwatchFamiliesCount,
-      );
+  CreateObjectConfig<Family> get baseCreateObjectConfig => CreateObjectConfig(
+    document: documentNodeMutationcreateFamily,
+    varsConstructor: ({required newObject}) => Variables_Mutation_createFamily(
+      input: Input_CreateFamilyInput.fromJson(newObject.toCommandInput()),
+    ).toJson(),
+  );
 
   @override
-  late final LegacyStreamSingleByIdConfig<Family> baseStreamSingleByIdConfig =
-      LegacyStreamSingleByIdConfig(
-        document: documentNodeSubscriptionwatchFamily,
-        varsConstructor: _streamSingleByIdVarsConstructor,
-      );
+  UpdateObjectConfig<Family> get baseUpdateObjectConfig => UpdateObjectConfig(
+    document: documentNodeMutationupdateFamily,
+    varsConstructor: ({required newObject}) => Variables_Mutation_updateFamily(
+      id: newObject.id,
+      input: Input_UpdateFamilyInput.fromJson(newObject.toCommandInput()),
+    ).toJson(),
+  );
 
   @override
-  late final LegacyDeleteSingleByIdConfig<Family> baseDeleteSingleByIdConfig =
-      LegacyDeleteSingleByIdConfig(
-        document: documentNodeMutationdeleteFamily,
-        varsConstructor: _deleteSingleByIdVarsConstructor,
-      );
-
-  @override
-  late final LegacyUpdateObjectConfig<Family> baseUpdateObjectConfig =
-      LegacyUpdateObjectConfig(
-        document: documentNodeMutationupdateFamily,
-        varsConstructor: _updateFamilyVarsConstructor,
-      );
-
-  @override
-  late final LegacyCreateObjectConfig<Family> baseCreateObjectConfig =
-      LegacyCreateObjectConfig(
-        document: documentNodeMutationinsertFamily,
-        varsConstructor: _createFamilyVarsConstructor,
-      );
+  DeleteSingleByIdConfig<Family> get baseDeleteSingleByIdConfig =>
+      const DeleteSingleByIdConfig(document: documentNodeMutationdeleteFamily);
 
   FamiliesDAO({required super.db}) : super(fromJson: Family.fromJson);
-
-  Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
-      Variables_Subscription_watchFamily(id: id).toJson();
-
-  Json _createFamilyVarsConstructor({required Family newObject}) =>
-      FamilyInsertHelper(newFamily: newObject).variables.toJson();
-
-  Json _updateFamilyVarsConstructor({
-    required Family newObject,
-    required Family oldObject,
-  }) => FamilyUpdateHelper(
-    newFamily: newObject,
-    oldFamily: oldObject,
-  ).variables.toJson();
-
-  Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
-      Variables_Mutation_deleteFamily(familyId: id).toJson();
 
   Future<Family?> updateFamily({
     required Family newFamily,
     required Family oldFamily,
-  }) {
-    final helper = FamilyUpdateHelper(
-      newFamily: newFamily,
-      oldFamily: oldFamily,
-    );
-
-    return graphQLClient.mutateAndReturnParsedNullable(
-      MutationOptions(
-        document: transformDocument(documentNodeMutationupdateFamily),
-        operationName: 'updateFamily',
-        variables: helper.variables.toJson(),
-        parserFn: db.parser.singleOrNullParser(Family.fromJson),
-      ),
-    );
-  }
+  }) => updateObject(newObject: newFamily, oldObject: oldFamily);
 
   Future<Family?> getFamilyRelatedFamilies({required String familyId}) {
-    final queryOptions = QueryOptions(
-      document: transformDocument(documentNodeQuerygetFamilyRelatedFamilies),
-      operationName: 'getFamilyRelatedFamilies',
-      variables: Variables_Query_getFamilyRelatedFamilies(
-        familyId: familyId.toUuid(),
-      ).toJson(),
-      parserFn: db.parser.singleOrNullParser(Family.fromJson),
-    );
+    final document = transformDocument(documentNodeQueryfamilyWithRelatives);
 
-    return graphQLClient.queryAndReturnParsed(queryOptions);
+    return graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: document,
+        operationName: 'familyWithRelatives',
+        variables: Variables_Query_familyWithRelatives(
+          id: familyId,
+          relativesSort: _relativesOrder,
+        ).toJson(),
+        parserFn: AshResultParser(document).entity(fromJson),
+      ),
+    );
   }
 
   PaginatableStreamBase<Family> streamAllWithAddresses({
     Stream<String?>? searchQuery,
     Stream<List<Filter>>? where,
     Stream<List<OrderBy>>? orderBy,
-  }) {
-    final streamAllConfig = baseStreamAllConfig.copyWith(
-      document: documentNodeSubscriptionwatchAllFamiliesWithAddresses,
-      operationName: 'watchAllFamiliesWithAddresses',
-    );
+  }) => streamAllWithConfig(
+    streamAllConfig: baseStreamAllConfig.copyWith(
+      document: documentNodeQueryfamiliesWithAddresses,
+      operationName: 'familiesWithAddresses',
+    ),
+    searchQuery: searchQuery,
+    where: where,
+    orderBy: orderBy,
+  );
 
-    return PaginatableStream(
-      parametersStream: Rx.combineLatest3(
-        searchQuery ?? Stream.value(null),
-        where ?? Stream.value(null),
-        orderBy ?? Stream.value(null),
-        (search, where, orderBy) => StreamableDAOParameters<Family>(
-          search: search,
-          where: where?.whereEnabled(),
-          orderBy: orderBy?.whereEnabled(),
-        ),
-      ),
-      factory: (request) => _streamAllFactory(streamAllConfig, request),
-    );
+  ListQueryArguments _listArguments(
+    StreamableDAOParameters<Family>? parameters,
+  ) => ListQueryArguments.fromParameters(
+    parameters,
+    defaultOrderBy: [OrderBy(field: FamilyFields().name)],
+  );
+
+  Family? _familyWithContactRoles(Json data) {
+    final family = data['family'] as Map?;
+    if (family == null) return null;
+
+    final familyRoles = {
+      for (final role in _objectsOf((data['personTypes'] as Map?)?['results']))
+        if (role['isFamilyAdmin'] == true) role['id']: role,
+    };
+
+    return fromJson({
+      ...family.cast<String, dynamic>(),
+      'contacts': [
+        for (final contact in _objectsOf(family['contacts']))
+          if (familyRoles[contact['effectivePersonTypeId']] case final role?)
+            {...contact, 'personType': role},
+      ],
+    });
   }
 
-  Stream<PaginatableStreamResponse<Family>> _streamAllFactory(
-    LegacyStreamAllConfig<Family> streamAllConfig,
-    PaginatableStreamRequest<Family, StreamableDAOParameters<Family>?> request,
-  ) => graphQLClient.legacySubscribeAndReturnParsed(
-    streamAllConfig.operationOptions ??
-        SubscriptionOptions(
-          document: transformDocument(streamAllConfig.document),
-          operationName: streamAllConfig.effectiveOperationName,
-          variables:
-              streamAllConfig.variables ??
-              streamAllConfig.transformRequest?.call(request) ??
-              db.varsTransformer.transformrequestForPagination<Family>(request),
-          parserFn:
-              streamAllConfig.parserFn ??
-              db.parser.singleListParser(fromJson, pageSize: request.pageSize),
-        ),
-  );
+  Iterable<Json> _objectsOf(Object? list) => [
+    for (final object in list as List? ?? const [])
+      (object as Map).cast<String, dynamic>(),
+  ];
 }

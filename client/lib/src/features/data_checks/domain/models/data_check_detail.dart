@@ -1,10 +1,11 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'data_check_detail.g.dart';
 
 @JsonSerializable()
-class DataCheckDetail {
+class DataCheckDetail with Equatable {
   @JsonKey(unknownEnumValue: DataCheckGroup.other)
   final DataCheckGroup group;
 
@@ -12,6 +13,9 @@ class DataCheckDetail {
   final DataCheckRule check;
 
   final bool passed;
+
+  @override
+  List<Object?> get props => [group, check, passed];
 
   const DataCheckDetail({
     required this.group,
