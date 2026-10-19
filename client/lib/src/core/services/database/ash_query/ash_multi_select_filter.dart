@@ -40,6 +40,7 @@ class AshMultiSelectFilter {
     final path = AshFieldPath.forFilter(field);
     final queryable = field.fieldQueryableType;
     if (queryable == null || queryable.isEnum) return path;
+    if (field.type == LastRecordedByInfo) return path;
 
     final key = queryable.keyField;
     if (key == null) return path.append(_fallbackKeyPath);

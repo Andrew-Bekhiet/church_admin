@@ -9,6 +9,9 @@ class AshFieldPath {
 
   static List<String> _filterSegments(FieldMetadata field) => switch (field) {
     DotField() => const [],
+    RedirectingFieldMetadata(:final parentField, :final targetField)
+        when parentField.type == LastRecordedByInfo =>
+      _recordedByInfoSegments(parentField, targetField),
     RedirectingFieldMetadata(:final parentField, :final targetField) => [
       ..._filterSegments(parentField),
       ..._filterSegments(targetField),
@@ -19,6 +22,10 @@ class AshFieldPath {
 
   static List<String> _sortSegments(FieldMetadata field) => switch (field) {
     DotField() => throw UnsupportedError('The dot field cannot be ordered'),
+    RedirectingFieldMetadata(:final parentField, :final targetField)
+        when parentField.type == LastRecordedByInfo &&
+            targetField == LastRecordedByInfoFields().time =>
+      [parentField.name],
     RedirectingFieldMetadata(:final parentField, :final targetField) => [
       ..._filterSegments(parentField),
       ..._sortSegments(targetField),
@@ -29,6 +36,18 @@ class AshFieldPath {
     ],
     _ => [field.name, ..._orderingSubfieldSegments(field)],
   };
+
+  // The server keeps the time of a place's last edit or visit as a scalar
+  // named after the field, and the rest of the record under `latest<Kind>`.
+  static List<String> _recordedByInfoSegments(
+    FieldMetadata recordedField,
+    FieldMetadata inner,
+  ) => inner == LastRecordedByInfoFields().time
+      ? [recordedField.name]
+      : [
+          AshNaming.latestRelationship(recordedField.name),
+          ..._filterSegments(inner),
+        ];
 
   static List<String> _orderingSubfieldSegments(FieldMetadata field) {
     final subfields = AdvancedQueriesMetadata()
