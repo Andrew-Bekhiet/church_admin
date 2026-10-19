@@ -12,7 +12,7 @@ The church_admin backend: Phoenix 1.8 (API only) + Ash 3, OTP app `:church_admin
 
 ## Local database
 
-`dev/db.sh up|down|reset|psql` runs Postgres (built from `server/postgres`) under the compose project `church-admin-ash-dev`: dev on `localhost:55432`, test on `localhost:55433`, both with database `church_admin`. `reset` recreates both and rebuilds them from the baseline. `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` (and `TEST_DB_PORT` for tests) override the defaults.
+`dev/db.sh up|down|reset|psql` runs Postgres (built from `server/postgres`) under the compose project `church-admin-ash-dev`: dev on `localhost:55432`, test on `localhost:55433`, both with database `church_admin`. `reset` recreates both and rebuilds them from the baseline. `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` (and `TEST_DB_PORT` for tests) override the defaults. A second checkout sets `ASH_DB_PROJECT`, `DB_PORT` and `TEST_DB_PORT` (e.g. `church-admin-ash-lane2`, 55442, 55443) to get its own servers.
 
 **Never touch the `church-admin-local` compose project or its volumes** — it holds the user's own stack.
 

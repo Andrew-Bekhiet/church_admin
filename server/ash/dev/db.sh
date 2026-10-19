@@ -4,9 +4,17 @@
 # church_admin), so dev and test each get their own server.
 set -eu
 
+project="${ASH_DB_PROJECT:-church-admin-ash-dev}"
+if [ "$project" = church-admin-local ]; then
+  echo "ASH_DB_PROJECT must not be church-admin-local: that compose project is the user's own stack" >&2
+  exit 64
+fi
+export DB_PORT="${DB_PORT:-55432}"
+export TEST_DB_PORT="${TEST_DB_PORT:-55433}"
+
 app_dir="$(cd "$(dirname "$0")/.." && pwd)"
 compose() {
-  docker compose --project-name church-admin-ash-dev --file "$app_dir/dev/compose.yml" "$@"
+  docker compose --project-name "$project" --file "$app_dir/dev/compose.yml" "$@"
 }
 
 case "${1:-}" in
