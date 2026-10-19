@@ -1,11 +1,13 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-class AshTestItem with Equatable {
+class AshTestItem extends ViewableWithID with Equatable {
   static const typename = 'TestItem';
   static const pageTypename = 'KeysetPageOf$typename';
 
+  @override
   final String id;
+  @override
   final String name;
 
   @override

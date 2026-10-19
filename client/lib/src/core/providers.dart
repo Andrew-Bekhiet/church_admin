@@ -78,7 +78,10 @@ final encryptionServiceProvider = Provider<EncryptionService>(
 
 final Provider<DatabaseService> databaseServiceProvider =
     Provider<DatabaseService>(
-      (ref) => DatabaseService(ref.watch(graphQLClientProvider)),
+      (ref) => DatabaseService(
+        ref.watch(graphQLClientProvider),
+        liveQueries: ref.watch(liveQueryRegistryProvider),
+      ),
     );
 
 final graphQLClientProvider = Provider<DBGraphQLClient>(
@@ -115,6 +118,23 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
           .connectivityStream,
     );
   },
+);
+
+final changeFeedClientProvider = Provider<ChangeFeedClient>((ref) {
+  final client = ChangeFeedClient(
+    socketUrl: ref.watch(apiEndpointsProvider).changeFeedSocket,
+    credentials: ref.watch(authLinkCredentialsProvider),
+  );
+  ref.onDispose(client.dispose);
+
+  return client;
+});
+
+final liveQueryRegistryProvider = Provider<LiveQueryRegistry>(
+  (ref) => LiveQueryRegistry(
+    changeFeedEvents: ref.watch(changeFeedClientProvider).events,
+    connectivity: ref.watch(connectivityServiceProvider).connectivityStream,
+  ),
 );
 
 final authLinkCredentialsProvider = Provider<Stream<AuthLinkCredentials?>>(

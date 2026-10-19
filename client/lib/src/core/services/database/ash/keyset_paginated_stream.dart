@@ -182,27 +182,20 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     required int rows,
     required String? after,
     required FetchPolicy fetchPolicy,
-  }) async {
-    final chunks = <KeysetChunk<T>>[];
-    var remaining = rows;
-    var cursor = after;
-    while (remaining > 0) {
-      final first = math.min(remaining, maxPageSize);
-      final chunk = await _fetchChunk(
+  }) {
+    return KeysetPageQuery.fetchChained(
+      rows: rows,
+      after: after,
+      maxPageSize: maxPageSize,
+      fetchChunk: (first, after) => _fetchChunk(
         _parameters,
         KeysetChunkRequest(
           first: first,
-          after: cursor,
+          after: after,
           fetchPolicy: fetchPolicy,
         ),
-      );
-      chunks.add(chunk);
-      remaining -= chunk.page.items.length;
-      cursor = chunk.page.endKeyset;
-      if (chunk.page.items.length < first) break;
-    }
-
-    return chunks;
+      ),
+    );
   }
 
   void _emit(
