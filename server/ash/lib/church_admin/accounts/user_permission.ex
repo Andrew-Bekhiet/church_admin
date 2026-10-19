@@ -40,6 +40,15 @@ defmodule ChurchAdmin.Accounts.UserPermission do
                  default_limit: 100,
                  max_page_size: 1000
     end
+
+    create :create do
+      primary? true
+      accept [:uid, :permission]
+    end
+
+    destroy :destroy do
+      primary? true
+    end
   end
 
   policies do
@@ -49,6 +58,10 @@ defmodule ChurchAdmin.Accounts.UserPermission do
 
     policy action_type(:read) do
       authorize_if {RelatedInScope, path: :user, entity: :user, access: :read}
+    end
+
+    policy action_type([:create, :destroy]) do
+      authorize_if {RelatedInScope, path: :user, entity: :user, access: :edit}
     end
   end
 

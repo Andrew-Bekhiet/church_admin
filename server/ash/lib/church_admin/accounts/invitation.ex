@@ -2,13 +2,22 @@ defmodule ChurchAdmin.Accounts.Invitation do
   use Ash.Resource,
     domain: ChurchAdmin.Accounts,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Accounts.User
+  alias ChurchAdmin.Accounts.Validations.ExpiresWithinThirtyDays
+  alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
+  alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.Types.Text
 
   graphql do
     type :invitation
+
+    mutations do
+      create :create_invitation, :create_invitation
+      update :update_invitation_expiry, :update_invitation_expiry
+    end
   end
 
   postgres do
@@ -32,6 +41,33 @@ defmodule ChurchAdmin.Accounts.Invitation do
 
   actions do
     defaults [:read]
+
+    create :create_invitation do
+      accept [:user_uid, :expires_at]
+      change {StampActor, attribute: :created_by}
+      validate ExpiresWithinThirtyDays
+    end
+
+    update :update_invitation_expiry do
+      accept [:expires_at]
+      require_atomic? false
+      validate ExpiresWithinThirtyDays
+    end
+
+    update :mark_claimed do
+      accept []
+      change set_attribute(:claimed_at, &DateTime.utc_now/0)
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy always() do
+      authorize_if {RelatedInScope, path: :user, entity: :user, access: :edit}
+    end
   end
 
   attributes do
