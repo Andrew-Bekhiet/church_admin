@@ -96,25 +96,4 @@ class Meeting extends ViewableWithID
       groupId: group?.id.toUuid() ?? groupId?.toUuid(),
     );
   }
-
-  Input_HistoryMeetingsSetInput toUpdateInput({required Meeting oldMeeting}) {
-    Input_HistoryMeetingsSetInput result = Input_HistoryMeetingsSetInput();
-    if (name != oldMeeting.name) {
-      result = result.copyWith(name: name);
-    }
-    if (audience != oldMeeting.audience) {
-      result = result.copyWith(audience: audience.name);
-    }
-    if (color != oldMeeting.color) {
-      result = result.copyWith(color: colorToInt(color));
-    }
-    if (isArchived != oldMeeting.isArchived) {
-      result = result.copyWith(isArchived: isArchived);
-    }
-    if (showKodasCheckbox != oldMeeting.showKodasCheckbox) {
-      result = result.copyWith(showKodasCheckbox: showKodasCheckbox);
-    }
-
-    return result;
-  }
 }

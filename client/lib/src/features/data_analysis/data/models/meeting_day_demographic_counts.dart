@@ -1,4 +1,4 @@
-import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
+import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'meeting_day_demographic_counts.freezed.dart';
@@ -29,15 +29,20 @@ class MeetingDayDemographicCounts with _$MeetingDayDemographicCounts {
     this.studyYearName,
   });
 
-  factory MeetingDayDemographicCounts.fromQueryResult(
-    Query_meetingsAttendanceAnalysis_historyMeetings_days data,
-  ) => MeetingDayDemographicCounts(
-    day: data.day ?? DateTime.now(),
-    studyYearId: data.studyYearId,
-    gender: data.gender,
-    studyYearName: data.studyYear?.name,
-    personsCount: data.personsCount ?? 0,
-    servantsCount: data.servantsCount ?? 0,
-    totalCount: data.totalCount ?? 0,
-  );
+  factory MeetingDayDemographicCounts.fromMeetingDayJson(
+    Json day, {
+    required Map<int, String> studyYearNames,
+  }) {
+    final studyYearId = day['studyYearId'] as int?;
+
+    return MeetingDayDemographicCounts(
+      day: dateFromString(day['day']),
+      studyYearId: studyYearId,
+      gender: day['gender'] as bool?,
+      studyYearName: studyYearNames[studyYearId],
+      personsCount: day['personsCount'] as int? ?? 0,
+      servantsCount: day['servantsCount'] as int? ?? 0,
+      totalCount: day['totalCount'] as int? ?? 0,
+    );
+  }
 }

@@ -21,13 +21,13 @@ abstract final class GqlTypePolicies {
   static const TypePolicy _embedded = TypePolicy(keyFields: {});
 
   static const Map<String, TypePolicy> _keyedEntities = {
-    'HistoryMeetingRoster': TypePolicy(
-      keyFields: {'personId': true, 'asServant': true, 'meetingId': true},
-    ),
     'AuthUsersData': TypePolicy(keyFields: {'uid': true}),
     // Keyed by order (studyYearsByPk(order:)); their id is a nullable String
     // that is never selected.
     'StudyYears': TypePolicy(keyFields: {'order': true}),
+    // The Ash StudyYear's id is its encoded order, and list selections built
+    // from its key field (`QueryableType.keyField`) select order, not id.
+    'StudyYear': TypePolicy(keyFields: {'order': true}),
     'DataChecks': TypePolicy(keyFields: {'familyId': true}),
     'DataCheckOverrides': TypePolicy(keyFields: {'familyId': true}),
   };
@@ -45,7 +45,6 @@ abstract final class GqlTypePolicies {
     'HistoryCallHistory': _embedded,
     'HistoryVisitHistory': _embedded,
     'HistoryAttendanceDays': _embedded,
-    'HistoryMeetingDays': _embedded,
   };
 
   static const Map<String, TypePolicy> _embeddedRows = {

@@ -18,7 +18,9 @@ import 'ash_responses.dart';
 /// an `id` (a model that is not an [ID]) is paged by a keyset the table
 /// assigns. With [projectsSelections], an answer about this resource carries
 /// exactly the fields the document selects, so a field a document leaves out
-/// reads as missing.
+/// reads as missing. [nestedFilterVariables] names, per relationship field a
+/// row embeds, the query variable whose filter the document applies to that
+/// relationship, as the real server does.
 class FakeAshTable {
   final String typename;
   final String listRoot;
@@ -26,6 +28,7 @@ class FakeAshTable {
   final Set<String> commandOnlyKeys;
   final Map<String, bool Function(Json row, Json input)> calculations;
   final bool projectsSelections;
+  final Map<String, String> nestedFilterVariables;
   final List<Json> rows = [];
 
   int _createdCount = 0;
@@ -46,6 +49,7 @@ class FakeAshTable {
     this.commandOnlyKeys = const {},
     this.calculations = const {},
     this.projectsSelections = false,
+    this.nestedFilterVariables = const {},
   }) {
     rows.forEach(add);
   }
@@ -122,17 +126,28 @@ class FakeAshRejection implements Exception {
 typedef FakeAshAction = Object? Function(Json variables);
 
 /// An Ash GraphQL server over [FakeAshTable]s. It applies the `filter`
-/// operators the client sends (`and or not eq notEq in isNil ilike`, and a
-/// nested filter on a related row or list of rows), sorts by `sort` and then
-/// by id as Ash does, and pages with `first`/`after`. A list field of a row
-/// that takes `filter`/`sort` variables (`classes(filter: $classesFilter)`)
-/// is filtered and sorted the same way.
+/// operators the client sends (`and or not eq notEq in isNil ilike lessThan
+/// lessThanOrEqual greaterThan greaterThanOrEqual`, and a nested filter on a
+/// related row or list of rows), sorts by `sort` and then by id as Ash does,
+/// and pages with `first`/`after`. A list field of a row that takes
+/// `filter`/`sort` variables (`classes(filter: $classesFilter)`) is filtered
+/// and sorted the same way.
 /// Every request is kept in [sent]; setting [nextMutationRejectionCode] makes
 /// the next mutation fail with the error code the real server raises. A root
 /// named in [actions] is a generic action: its function answers with the root
 /// field's value or throws a [FakeAshRejection].
 class FakeAshTablesLink extends Link {
-  static const _filterOperators = {'eq', 'notEq', 'in', 'isNil', 'ilike'};
+  static const _filterOperators = {
+    'eq',
+    'notEq',
+    'in',
+    'isNil',
+    'ilike',
+    'lessThan',
+    'lessThanOrEqual',
+    'greaterThan',
+    'greaterThanOrEqual',
+  };
 
   final List<FakeAshTable> tables;
   final Map<String, FakeAshMutation> mutations;
@@ -298,11 +313,15 @@ class FakeAshTablesLink extends Link {
       for (final field in _rootSelections(document).whereType<FieldNode>())
         if (field.name.value == 'results') ...?field.selectionSet?.selections,
     ];
-    final results = matching
-        .skip(start)
-        .take(first)
-        .map((row) => _withNestedLists(table, row, rowSelections, variables))
-        .toList();
+    final results = [
+      for (final row in matching.skip(start).take(first))
+        _withNestedLists(
+          table,
+          _withFilteredRelationships(table, row, variables),
+          rowSelections,
+          variables,
+        ),
+    ];
 
     return AshResponses.page(
       results,
@@ -311,6 +330,26 @@ class FakeAshTablesLink extends Link {
       endKeyset: results.isEmpty ? null : FakeAshTable.keysetOf(results.last),
     );
   }
+
+  Json _withFilteredRelationships(
+    FakeAshTable table,
+    Json row,
+    Json variables,
+  ) => {
+    ...row,
+    for (final MapEntry(key: field, value: variable)
+        in table.nestedFilterVariables.entries)
+      if (row[field] case final List related)
+        field: [
+          for (final item in related)
+            if (_matches(
+              table,
+              (item as Map).cast(),
+              variables[variable] as Map?,
+            ))
+              item,
+        ],
+  };
 
   bool _matches(FakeAshTable table, Json row, Map? filter) =>
       filter == null ||
@@ -404,6 +443,14 @@ class FakeAshTablesLink extends Link {
         MapEntry(key: 'notEq', :final value) => fieldValue != value,
         MapEntry(key: 'in', :final List value) => value.contains(fieldValue),
         MapEntry(key: 'isNil', :final value) => (fieldValue == null) == value,
+        MapEntry(key: 'lessThan', :final value?) =>
+          fieldValue != null && _compareValues(fieldValue, value) < 0,
+        MapEntry(key: 'lessThanOrEqual', :final value?) =>
+          fieldValue != null && _compareValues(fieldValue, value) <= 0,
+        MapEntry(key: 'greaterThan', :final value?) =>
+          fieldValue != null && _compareValues(fieldValue, value) > 0,
+        MapEntry(key: 'greaterThanOrEqual', :final value?) =>
+          fieldValue != null && _compareValues(fieldValue, value) >= 0,
         MapEntry(key: 'ilike', :final String value) => RegExp(
           '^${value.split('%').map(RegExp.escape).join('.*')}\$',
           caseSensitive: false,

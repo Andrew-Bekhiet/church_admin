@@ -182,47 +182,4 @@ void main() {
       }
     });
   });
-
-  group('Meeting.toUpdateInput', () {
-    final original = _meeting(name: 'Old Name');
-
-    test('includes changed name', () {
-      final updated = _meeting(name: 'New Name');
-      final input = updated.toUpdateInput(oldMeeting: original);
-      expect(input.name, 'New Name');
-    });
-
-    test('includes changed audience', () {
-      final updated = _meeting(audience: MeetingAudience.personsAndServants);
-      final input = updated.toUpdateInput(oldMeeting: original);
-      expect(input.audience, 'personsAndServants');
-    });
-
-    test('includes changed color', () {
-      final withColor = _meeting(color: const Color(0xFF2196F3));
-      final input = withColor.toUpdateInput(oldMeeting: original);
-      expect(input.color, isNotNull);
-    });
-
-    test('includes archived flag when changed', () {
-      final updated = _meeting(isArchived: true);
-      final input = updated.toUpdateInput(oldMeeting: original);
-      expect(input.isArchived, isTrue);
-    });
-
-    test('includes the kodas flag when changed', () {
-      final updated = _meeting(showKodasCheckbox: false);
-      final input = updated.toUpdateInput(oldMeeting: original);
-      expect(input.showKodasCheckbox, isFalse);
-    });
-
-    test('returns empty input when nothing changed', () {
-      final input = original.toUpdateInput(oldMeeting: original);
-      expect(input.name, isNull);
-      expect(input.audience, isNull);
-      expect(input.isArchived, isNull);
-      expect(input.color, isNull);
-      expect(input.showKodasCheckbox, isNull);
-    });
-  });
 }

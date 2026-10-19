@@ -83,25 +83,25 @@ void main() {
     }
 
     const schema = '''
-      type query_root { rows: HistoryMeetingRoster, node: Node }
-      type HistoryMeetingRoster { personId: Int, asServant: Boolean, meetingId: Int, name: String }
+      type query_root { rows: AuthUsersData, node: Node }
+      type AuthUsersData { uid: String, name: String }
       type Node { name: String }
     ''';
 
     test('reports a keyed type missing a key field', () {
       final violations = run(
         schema,
-        'query q { rows { personId asServant name } }',
+        'query q { rows { name } }',
       );
       expect(violations, hasLength(1));
       expect(violations.single.kind, ViolationKind.missingKeyFields);
-      expect(violations.single.missingKeyFields, ['meetingId']);
+      expect(violations.single.missingKeyFields, ['uid']);
     });
 
     test('passes when a keyed type selects all key fields', () {
       final violations = run(
         schema,
-        'query q { rows { personId asServant meetingId } }',
+        'query q { rows { uid name } }',
       );
       expect(violations, isEmpty);
     });

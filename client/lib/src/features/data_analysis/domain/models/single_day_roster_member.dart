@@ -1,5 +1,7 @@
+import 'package:church_admin/church_admin.dart';
+
 /// A distinct roster person for a single day, as returned by the
-/// `meetingsRosterDemographics` query. Carries the class slice (study year +
+/// `rosterAttendance` query. Carries the class slice (study year +
 /// gender) the person belongs to and whether they attended that day.
 ///
 /// A person may appear in several rows (one per meeting and per servant/member
@@ -18,4 +20,13 @@ class SingleDayRosterMember {
     this.studyYearName,
     this.gender,
   });
+
+  factory SingleDayRosterMember.fromRosterAttendanceJson(Json row) =>
+      SingleDayRosterMember(
+        personId: row['personId'] as String,
+        studyYearId: row['studyYearId'] as int?,
+        studyYearName: row['studyYearName'] as String?,
+        gender: row['gender'] as bool?,
+        attended: (row['attendanceRecords'] as List? ?? const []).isNotEmpty,
+      );
 }
