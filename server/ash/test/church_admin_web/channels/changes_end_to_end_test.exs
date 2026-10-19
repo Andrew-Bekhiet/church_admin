@@ -11,11 +11,21 @@ defmodule ChurchAdminWeb.ChangesEndToEndTest do
   @moduletag broadcaster: :global
   @staleness_budget_ms 2_000
 
-  test "a commit reaches a joined client within the staleness budget", %{writer: writer} do
-    {:ok, socket} =
-      connect(ChangesSocket, %{
-        "token" => FirebaseTokens.unsigned(FirebaseTokens.valid_claims())
-      })
+  setup tags do
+    ChurchAdmin.DataCase.setup_sandbox(tags)
+    user = ChurchAdmin.Factory.user!()
+    ChurchAdmin.Factory.permissions!(user, ~w(approved))
+
+    {:ok,
+     token:
+       FirebaseTokens.unsigned(FirebaseTokens.valid_claims(%{"x-hasura-user-id" => user.uid}))}
+  end
+
+  test "a commit reaches a joined client within the staleness budget", %{
+    writer: writer,
+    token: token
+  } do
+    {:ok, socket} = connect(ChangesSocket, %{"token" => token})
 
     {:ok, %{version: version}, _socket} =
       subscribe_and_join(socket, ChangesChannel, "changes", %{"since" => nil})
