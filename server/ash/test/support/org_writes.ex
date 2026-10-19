@@ -13,7 +13,6 @@ defmodule ChurchAdmin.OrgWrites do
   alias ChurchAdmin.Attendance.{AttendanceRecord, Meeting}
   alias ChurchAdmin.Organization.{Class, Group, Service}
   alias ChurchAdmin.Repo
-  alias ChurchAdmin.Repo.HasuraSession
 
   @commands %{
     service: {Service, :create_service, :update_service, :destroy},
@@ -29,7 +28,7 @@ defmodule ChurchAdmin.OrgWrites do
   def create(actor, kind, attrs) do
     {resource, create_action, _update_action, _destroy_action} = Map.fetch!(@commands, kind)
 
-    transact(actor, fn ->
+    transact(fn ->
       resource
       |> Ash.Changeset.for_create(create_action, attrs, actor: actor)
       |> Ash.create()
@@ -41,7 +40,7 @@ defmodule ChurchAdmin.OrgWrites do
   def update(actor, kind, id, attrs) do
     {resource, _create_action, update_action, _destroy_action} = Map.fetch!(@commands, kind)
 
-    transact(actor, fn ->
+    transact(fn ->
       resource
       |> Ash.get!(id, authorize?: false)
       |> Ash.Changeset.for_update(update_action, attrs, actor: actor)
@@ -60,7 +59,7 @@ defmodule ChurchAdmin.OrgWrites do
   defp destroy(actor, kind, id, action) do
     {resource, _create_action, _update_action, _destroy_action} = Map.fetch!(@commands, kind)
 
-    transact(actor, fn ->
+    transact(fn ->
       resource
       |> Ash.get!(id, authorize?: false)
       |> Ash.Changeset.for_destroy(action, %{}, actor: actor)
@@ -76,12 +75,10 @@ defmodule ChurchAdmin.OrgWrites do
   defp id_of({:ok, record}), do: {:ok, record.id}
   defp id_of({:error, error}), do: {:error, error}
 
-  defp transact(actor, fun) do
+  defp transact(fun) do
     fire_deferred_checks!()
 
     Repo.transaction(fn ->
-      HasuraSession.set_for_transaction(Repo, actor)
-
       case fun.() do
         {:ok, id} ->
           fire_deferred_checks!()

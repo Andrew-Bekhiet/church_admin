@@ -81,40 +81,6 @@ defmodule ChurchAdmin.AccountsCase do
     end)
   end
 
-  @doc """
-  Whether `fun`'s command, run by `actor`, would commit: runs it in a
-  savepoint with the actor's database session (Ash starts no transaction of
-  its own inside one), fires the deferred constraint triggers a commit would
-  fire (the sandbox never commits), then rolls everything back. Returns `:ok`
-  or `{:error, error}`.
-  """
-  def commits?(actor, fun) do
-    fire_fixtures_deferred_checks!()
-
-    ChurchAdmin.Repo.transaction(fn ->
-      ChurchAdmin.Repo.HasuraSession.set_for_transaction(ChurchAdmin.Repo, actor)
-
-      result =
-        with {:ok, _result} <- fun.(),
-             {:ok, _fired} <- ChurchAdmin.Repo.query("set constraints all immediate") do
-          :ok
-        end
-
-      ChurchAdmin.Repo.rollback(result)
-    end)
-    |> case do
-      {:error, :ok} -> :ok
-      {:error, {:error, error}} -> {:error, error}
-      {:error, rolled_back_by_the_command} -> {:error, rolled_back_by_the_command}
-    end
-  end
-
-  defp fire_fixtures_deferred_checks! do
-    ChurchAdmin.DataCase.set_system_db_session()
-    ChurchAdmin.Repo.query!("set constraints all immediate")
-    ChurchAdmin.Repo.query!("set constraints all deferred")
-  end
-
   def google_failure, do: {500, %{"error" => %{"code" => 500, "message" => "INTERNAL"}}}
 
   @doc "The `extensions.code` values GraphQL clients would read for an action's error."

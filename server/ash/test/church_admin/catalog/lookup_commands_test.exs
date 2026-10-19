@@ -25,7 +25,6 @@ defmodule ChurchAdmin.Catalog.LookupCommandsTest do
   end
 
   defp seed_with_system_session(resource, attrs) do
-    ChurchAdmin.DataCase.set_system_db_session()
     Ash.Seed.seed!(resource, attrs)
   end
 
@@ -135,8 +134,6 @@ defmodule ChurchAdmin.Catalog.LookupCommandsTest do
 
   test "a person type whose next order is already used is reported as person-type/order-taken",
        %{world: world} do
-    ChurchAdmin.DataCase.set_system_db_session()
-
     %{rows: [[taken]]} =
       ChurchAdmin.Repo.query!("select nextval('person_types_order_seq')")
 

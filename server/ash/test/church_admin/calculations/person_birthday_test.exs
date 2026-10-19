@@ -6,7 +6,7 @@ defmodule ChurchAdmin.Calculations.PersonBirthdayTest do
 
   use ChurchAdmin.DataCase, async: false
 
-  alias ChurchAdmin.{DataCase, Factory}
+  alias ChurchAdmin.Factory
   alias ChurchAdmin.People.Person
 
   require Ash.Query
@@ -22,8 +22,6 @@ defmodule ChurchAdmin.Calculations.PersonBirthdayTest do
   ]
 
   setup do
-    DataCase.set_system_db_session()
-
     persons =
       for {birthdate, expected} <- @birthdays,
           do: {expected, Factory.person!(birthdate: birthdate)}

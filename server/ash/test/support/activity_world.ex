@@ -63,7 +63,6 @@ defmodule ChurchAdmin.ActivityWorld do
   end
 
   def extend!(world) do
-    ChurchAdmin.DataCase.set_system_db_session()
     recorded_by = world.users.read_all.uid
 
     seed!(ActivityDay, %{day: @day_1})
@@ -252,7 +251,6 @@ defmodule ChurchAdmin.ActivityWorld do
   defp users(names), do: MapSet.new(for name <- names, do: {:users, name})
 
   defp seed!(resource, attrs) do
-    ChurchAdmin.DataCase.set_system_db_session()
     Ash.Seed.seed!(resource, attrs)
   end
 end

@@ -153,7 +153,6 @@ defmodule ChurchAdmin.Authz.BuildingBlocksTest do
   describe "the PersonChild fragment" do
     test "shows rows of persons the actor reads", %{world: world} do
       hobby = Ash.Seed.seed!(ChurchAdmin.Catalog.Hobby, %{name: "chess"})
-      ChurchAdmin.DataCase.set_system_db_session()
 
       for person <- [world.records.m1, world.records.grp] do
         Ash.Seed.seed!(PersonChildProbe, %{person_id: person.id, hobby_id: hobby.id})

@@ -46,8 +46,6 @@ defmodule ChurchAdminWeb.Graphql.DataQualityQueriesTest do
   end
 
   test "data check overrides follow the same family scope", %{conn: conn, world: world} do
-    ChurchAdmin.DataCase.set_system_db_session()
-
     ChurchAdmin.Repo.query!(
       "insert into data_check_overrides (family_id, is_complete) values ($1, true)",
       [Ecto.UUID.dump!(world.records.f_own.id)]

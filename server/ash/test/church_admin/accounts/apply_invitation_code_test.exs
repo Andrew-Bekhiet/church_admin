@@ -24,8 +24,6 @@ defmodule ChurchAdmin.Accounts.ApplyInvitationCodeTest do
     do: Accounts.apply_invitation_code(code, actor: principal_actor(auth_id, email))
 
   defp expire!(invitation) do
-    ChurchAdmin.DataCase.set_system_db_session()
-
     ChurchAdmin.Repo.query!(
       "update auth.invitations set created_at = now() - interval '10 days', expires_at = now() - interval '1 day' where id = $1",
       [Ecto.UUID.dump!(invitation.id)]

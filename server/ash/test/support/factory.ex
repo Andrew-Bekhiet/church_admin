@@ -135,7 +135,6 @@ defmodule ChurchAdmin.Factory do
   def deleted_at, do: DateTime.utc_now()
 
   defp seed!(resource, attrs) do
-    ChurchAdmin.DataCase.set_system_db_session()
     Ash.Seed.seed!(resource, attrs)
   end
 

@@ -159,7 +159,6 @@ defmodule ChurchAdmin.Exports.WorkbookGoldenTest do
   end
 
   defp seed!(resource, attrs) do
-    ChurchAdmin.DataCase.set_system_db_session()
     Ash.Seed.seed!(resource, attrs)
   end
 
