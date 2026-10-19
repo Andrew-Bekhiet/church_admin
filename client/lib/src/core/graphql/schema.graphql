@@ -1,5 +1,11 @@
 schema {
+  mutation: RootMutationType
   query: RootQueryType
+}
+
+type ExportDownloadLink {
+  expiresAt: DateTime!
+  downloadUrl: String!
 }
 
 enum ServiceMembershipSortField {
@@ -10382,6 +10388,10 @@ type RootQueryType {
     "The number of records to return to the end. Maximum 100"
     last: Int
   ): KeysetPageOfServiceMembership
+}
+
+type RootMutationType {
+  exportData(areasIds: [ID!], servicesIds: [ID!], classesIds: [ID!], groupsIds: [ID!]): ExportDownloadLink!
 }
 
 """

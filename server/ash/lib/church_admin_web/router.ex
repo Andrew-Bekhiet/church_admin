@@ -14,6 +14,11 @@ defmodule ChurchAdminWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :file_download do
+    plug ChurchAdminWeb.Plugs.Authenticate
+    plug ChurchAdminWeb.Plugs.LoadActor
+  end
+
   get "/healthz", ChurchAdminWeb.HealthController, :show
 
   scope "/gql" do
@@ -31,5 +36,12 @@ defmodule ChurchAdminWeb.Router do
 
   scope "/api", ChurchAdminWeb do
     pipe_through :api
+  end
+
+  scope "/api/files", ChurchAdminWeb do
+    pipe_through :file_download
+
+    get "/:token", FileController, :show
+    get "/:token/:filename", FileController, :show
   end
 end

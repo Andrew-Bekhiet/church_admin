@@ -200,6 +200,15 @@ defmodule ChurchAdmin.Authz.Scope do
   @spec exportable?(Actor.t() | nil, entity(), [String.t()]) :: boolean()
   def exportable?(actor, entity, ids) do
     ids = Enum.uniq(ids)
+
+    ids == [] or exports_everything?(actor) or every_id_in_export_scope?(actor, entity, ids)
+  end
+
+  defp exports_everything?(nil), do: false
+  defp exports_everything?(%Actor{system?: true}), do: true
+  defp exports_everything?(%Actor{} = actor), do: global?(actor, :export)
+
+  defp every_id_in_export_scope?(actor, entity, ids) do
     scope = for_entity(entity, actor, :export)
 
     entity
