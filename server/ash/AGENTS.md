@@ -26,7 +26,7 @@ Reuse these in write actions instead of re-deriving them; each moduledoc shows i
 - `ChurchAdmin.Changes.StampActor`: sets an audit column such as `recorded_by` from the actor's uid (`change {StampActor, attribute: :recorded_by}, on: :create`).
 - `ChurchAdmin.Validations.InvariantHolds`: checks an invariant against the written state inside the transaction and fails with a domain code (`change {InvariantHolds, code: Codes.validation_invalid(), violations: &M.f/1}`).
 - `ChurchAdmin.Errors.Codes`: the client-facing error codes as functions (`Codes.user_email_taken()`); raise them through `ChurchAdmin.Errors.DomainError`.
-- `ChurchAdmin.Changes.AfterActionFailure.roll_back/2`: fail any custom `after_action` hook with it, because Ash 3.36.1 commits a single atomic update whose hook returned an error.
+- `ChurchAdmin.Changes.AfterActionFailure.roll_back/2`: fail the `after_action` hook of any change that implements `atomic/3` with it, because Ash 3.36.1 commits a single atomic update whose hook returned an error. `AtomicAfterActionGuardTest` fails for a change in `lib/` that forgets it.
 
 ## Verification
 
