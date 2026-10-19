@@ -2,14 +2,22 @@ defmodule ChurchAdmin.People.Contact do
   use Ash.Resource,
     domain: ChurchAdmin.People,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
+  alias ChurchAdmin.Authz.Checks.{InScope, System}
   alias ChurchAdmin.Catalog.PersonType
   alias ChurchAdmin.People.{Family, Person}
   alias ChurchAdmin.Types.Text
 
   graphql do
     type :contact
+
+    relationships [:person, :family]
+
+    queries do
+      list :contacts, :read
+    end
   end
 
   postgres do
@@ -39,7 +47,25 @@ defmodule ChurchAdmin.People.Contact do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if {InScope, entity: :contact, access: :read}
+    end
   end
 
   attributes do
@@ -71,6 +97,10 @@ defmodule ChurchAdmin.People.Contact do
     belongs_to :family, Family, define_attribute?: false, public?: true
     belongs_to :person, Person, define_attribute?: false, public?: true
     belongs_to :person_type, PersonType, define_attribute?: false, public?: true
+
+    has_many :family_members, Person,
+      source_attribute: :family_id,
+      destination_attribute: :family_id
   end
 
   identities do
