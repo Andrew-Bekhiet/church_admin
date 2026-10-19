@@ -54,8 +54,10 @@ class FakeAshBackend {
     ),
   );
 
-  FakeAshBackend(List<FakeAshTable> tables)
-    : server = FakeAshTablesLink(tables);
+  FakeAshBackend(
+    List<FakeAshTable> tables, {
+    Map<String, FakeAshMutation> mutations = const {},
+  }) : server = FakeAshTablesLink(tables, mutations: mutations);
 
   void announce(List<EntityChange> changes) =>
       _changeFeed.add(ChangesReceived(changes));
