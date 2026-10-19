@@ -1,0 +1,5 @@
+fragment ShammasLevel on ShammasLevel {
+  id
+  name
+  order
+}

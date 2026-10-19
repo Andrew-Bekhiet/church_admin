@@ -1,0 +1,14 @@
+query jobs(
+  $filter: JobFilterInput
+  $sort: [JobSortInput]
+  $first: Int
+  $after: String
+) {
+  jobs(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Job
+    }
+  }
+}

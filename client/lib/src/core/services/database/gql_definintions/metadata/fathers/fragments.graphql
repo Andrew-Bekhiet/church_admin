@@ -1,0 +1,6 @@
+fragment Father on Father {
+  id
+  name
+  churchId
+  isHidden
+}

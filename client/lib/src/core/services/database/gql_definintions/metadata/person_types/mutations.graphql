@@ -1,0 +1,7 @@
+mutation createPersonType($input: CreatePersonTypeInput!) {
+  createPersonType(input: $input) {
+    result {
+      ...PersonType
+    }
+  }
+}

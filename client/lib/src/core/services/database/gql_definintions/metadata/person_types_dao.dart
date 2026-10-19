@@ -1,78 +1,51 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types/__generated__/queries.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types/__generated__/subscriptions.gql.dart';
-import 'package:graphql/client.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types/__generated__/queries.graphql.dart';
 
 class PersonTypesDAO extends DAOBase<PersonType>
-    with LegacyStreamableDAO<PersonType>, LegacyCreatableDAO<PersonType> {
+    with KeysetStreamableDAO<PersonType>, CreatableDAO<PersonType> {
   @override
-  LegacyStreamAllConfig<PersonType> get baseStreamAllConfig =>
-      const LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllPersonTypes,
-      );
+  StreamAllConfig<PersonType> get baseStreamAllConfig => StreamAllConfig(
+    document: documentNodeQuerypersonTypes,
+    arguments: (parameters) => ListQueryArguments.fromParameters(
+      parameters,
+      defaultWhere: [
+        Filter(PersonTypeFields().isHidden, BooleanOperator.is$, false),
+      ],
+      defaultOrderBy: [
+        OrderBy(
+          field: PersonTypeFields().isFamilyAdmin,
+          value: OrderByValue.desc,
+        ),
+        OrderBy(field: PersonTypeFields().order),
+        OrderBy(field: PersonTypeFields().isHidden),
+      ],
+    ),
+  );
 
   @override
-  LegacyStreamSingleByIdConfig<PersonType> get baseStreamSingleByIdConfig =>
+  StreamSingleByIdConfig<PersonType> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
-  LegacyCreateObjectConfig<PersonType> get baseCreateObjectConfig =>
-      LegacyCreateObjectConfig(
+  CreateObjectConfig<PersonType> get baseCreateObjectConfig =>
+      CreateObjectConfig(
         document: documentNodeMutationcreatePersonType,
-        varsConstructor: _createPersonTypeVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson, 'insertPersonTypesOne'),
+        varsConstructor: ({required newObject}) =>
+            Variables_Mutation_createPersonType(
+              input: Input_CreatePersonTypeInput(name: newObject.name),
+            ).toJson(),
       );
 
   PersonTypesDAO({
     required super.db,
   }) : super(fromJson: PersonType.fromJson);
 
-  @override
-  PaginatableStreamBase<PersonType> streamAll({
-    Stream<String?>? searchQuery,
-    Stream<List<Filter>>? where,
-    Stream<List<OrderBy>>? orderBy,
-    Stream<FieldMetadata?>? secondLineField,
-  }) {
-    return super.streamAll(
-      searchQuery: searchQuery,
-      secondLineField: secondLineField,
-      where:
-          where ??
-          Stream.value(
-            [
-              Filter(PersonTypeFields().isHidden, BooleanOperator.is$, false),
-            ],
-          ),
-      orderBy:
-          orderBy ??
-          Stream.value(
-            [
-              OrderBy(
-                field: PersonTypeFields().isFamilyAdmin,
-                value: OrderByValue.desc,
-              ),
-              OrderBy(field: PersonTypeFields().order),
-              OrderBy(field: PersonTypeFields().isHidden),
-            ],
-          ),
-    );
-  }
-
-  Future<List<PersonType>> fetchFamilyRoles() {
-    return graphQLClient.queryAndReturnParsed(
-      QueryOptions(
-        document: documentNodeQueryfamilyRoles,
-        operationName: 'familyRoles',
-        parserFn: (data) => (data['personTypes'] as List)
-            .map((role) => PersonType.fromJson(Json.from(role as Map)))
-            .toList(),
-      ),
-    );
-  }
-
-  Json _createPersonTypeVarsConstructor({required PersonType newObject}) => {
-    'object': {'name': newObject.name},
-  };
+  Future<List<PersonType>> fetchFamilyRoles() => query(
+    where: [
+      Filter(PersonTypeFields().isFamilyAdmin, BooleanOperator.is$, true),
+    ],
+    orderBy: [OrderBy(field: PersonTypeFields().order)],
+    limit: AshPagination.maxPageSize,
+  );
 }

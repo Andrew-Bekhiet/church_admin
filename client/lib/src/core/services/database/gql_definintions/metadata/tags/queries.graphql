@@ -1,0 +1,14 @@
+query tags(
+  $filter: TagFilterInput
+  $sort: [TagSortInput]
+  $first: Int
+  $after: String
+) {
+  tags(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Tag
+    }
+  }
+}
