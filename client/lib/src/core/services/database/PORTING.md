@@ -32,6 +32,7 @@ Reference port: `gql_definintions/metadata/` (commit `refactor(data): port the m
 - A tear-off `arguments` makes the config const: write `const StreamAllConfig(...)` or `prefer_const_constructors` fires.
 - Lane worktrees refuse chained/looped shell commands that touch git: one plain command per call, `git -C <lane>`.
 - `check_generated_code.sh` needs a clean tree and the pinned SDK: commit, then `~/.claude/scripts/fvm-in client exec scripts/check_generated_code.sh`.
+- `sorted_list_key_field_completeness_test.dart` checks a DAO whose config is a `StreamAllConfig` against `schema.graphql` with the Ash rules (`KeysetPageOf*`, `*Result` are transient); a new `.graphql` list needs `id` on every object it selects.
 - Feature tests fake DAOs with `Fake implements XDAO`; they keep compiling as long as public signatures stay.
 
 ## Done
