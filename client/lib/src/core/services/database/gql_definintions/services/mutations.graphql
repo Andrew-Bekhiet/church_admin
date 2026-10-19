@@ -1,0 +1,23 @@
+mutation createService($input: CreateServiceInput!) {
+  createService(input: $input) {
+    result {
+      ...ServiceDetails
+    }
+  }
+}
+
+mutation updateService($id: ID!, $input: UpdateServiceInput) {
+  updateService(id: $id, input: $input) {
+    result {
+      ...ServiceDetails
+    }
+  }
+}
+
+mutation deleteService($id: ID!) {
+  deleteService(id: $id) {
+    result {
+      ...ServiceWithStudyYears
+    }
+  }
+}

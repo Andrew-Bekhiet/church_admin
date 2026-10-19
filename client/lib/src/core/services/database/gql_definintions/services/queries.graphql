@@ -1,0 +1,29 @@
+query services(
+  $filter: ServiceFilterInput
+  $sort: [ServiceSortInput]
+  $first: Int
+  $after: String
+  $classesFilter: ClassFilterInput
+  $classesSort: [ClassSortInput]
+  $groupsFilter: GroupFilterInput
+) {
+  services(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...ServiceWithStudyYears
+      classes(filter: $classesFilter, sort: $classesSort) {
+        ...ClassWithStudyYears
+      }
+      groups(filter: $groupsFilter) {
+        ...Group
+      }
+    }
+  }
+}
+
+query service($id: ID!) {
+  service(id: $id) {
+    ...ServiceDetails
+  }
+}
