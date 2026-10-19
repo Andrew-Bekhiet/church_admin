@@ -14,10 +14,11 @@ defmodule ChurchAdmin.Places.Street do
   alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.Places.Calculations.{IntersectsGeography, NearGeography}
-  alias ChurchAdmin.Places.Changes.ApplyStreetAreas
+  alias ChurchAdmin.Places.Changes.{ApplyStreetAreas, SyncAreasStreets}
+  alias ChurchAdmin.Places.Invariants
   alias ChurchAdmin.Places.{Address, Area, AreaStreet}
   alias ChurchAdmin.Types.{Geography, Text}
-  alias ChurchAdmin.Validations.ReferencesVisible
+  alias ChurchAdmin.Validations.{InvariantHolds, ReferencesVisible}
 
   graphql do
     type :street
@@ -78,7 +79,14 @@ defmodule ChurchAdmin.Places.Street do
       argument :last_visit, :utc_datetime_usec
 
       validate {ReferencesVisible, argument: :areas, resource: Area}
+      change {SyncAreasStreets, geography: :line}
       change ApplyStreetAreas
+
+      change {InvariantHolds,
+              code: Codes.street_area_required(),
+              fields: [:areas],
+              violations: &Invariants.street_without_area/1}
+
       change {RecordLastVisit, table: "streets"}
     end
 
@@ -89,7 +97,15 @@ defmodule ChurchAdmin.Places.Street do
       argument :last_visit, :utc_datetime_usec
 
       validate {ReferencesVisible, argument: :areas, resource: Area}
+      change {SyncAreasStreets, geography: :line}
       change ApplyStreetAreas
+
+      change {InvariantHolds,
+              code: Codes.street_area_required(),
+              fields: [:areas],
+              violations: &Invariants.street_without_area/1},
+             where: changing(:line)
+
       change {RecordLastVisit, table: "streets"}
     end
 

@@ -18,17 +18,20 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Sql do
   @spec geography(String.t()) :: raw()
   def geography(wkt), do: raw("ST_GeogFromText('SRID=4326;#{wkt}')")
 
-  @spec insert(String.t(), [atom()], [map()]) :: iodata()
-  def insert(_table, _columns, []), do: []
+  @spec insert(String.t(), [atom()], [map()], keyword()) :: iodata()
+  def insert(table, columns, rows, opts \\ [])
 
-  def insert(table, columns, rows) do
+  def insert(_table, _columns, [], _opts), do: []
+
+  def insert(table, columns, rows, opts) do
     column_list = Enum.map_join(columns, ", ", &~s("#{&1}"))
+    ending = if opts[:skip_duplicates?], do: "\nON CONFLICT DO NOTHING;\n", else: ";\n"
 
     rows
     |> Enum.chunk_every(@batch_size)
     |> Enum.map(fn batch ->
       values = Enum.map_join(batch, ",\n", &row(&1, columns))
-      ["INSERT INTO ", table, " (", column_list, ") VALUES\n", values, ";\n"]
+      ["INSERT INTO ", table, " (", column_list, ") VALUES\n", values, ending]
     end)
   end
 
