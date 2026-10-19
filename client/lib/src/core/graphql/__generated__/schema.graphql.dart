@@ -8468,6 +8468,7 @@ class Input_FamilyContactFilterInput {
     Input_FamilyContactFilterEffectiveFamilyId? effectiveFamilyId,
     Input_FamilyContactFilterEffectivePersonTypeId? effectivePersonTypeId,
     Input_PersonFilterInput? person,
+    Input_PersonTypeFilterInput? personType,
     Input_FamilyFilterInput? family,
     Input_FamilyContactFilterPersonTypeOrder? personTypeOrder,
   }) => Input_FamilyContactFilterInput._({
@@ -8487,6 +8488,7 @@ class Input_FamilyContactFilterInput {
     if (effectivePersonTypeId != null)
       r'effectivePersonTypeId': effectivePersonTypeId,
     if (person != null) r'person': person,
+    if (personType != null) r'personType': personType,
     if (family != null) r'family': family,
     if (personTypeOrder != null) r'personTypeOrder': personTypeOrder,
   });
@@ -8621,6 +8623,14 @@ class Input_FamilyContactFilterInput {
               (l$person as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('personType')) {
+      final l$personType = data['personType'];
+      result$data['personType'] = l$personType == null
+          ? null
+          : Input_PersonTypeFilterInput.fromJson(
+              (l$personType as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('family')) {
       final l$family = data['family'];
       result$data['family'] = l$family == null
@@ -8689,6 +8699,9 @@ class Input_FamilyContactFilterInput {
   Input_PersonFilterInput? get person =>
       (_$data['person'] as Input_PersonFilterInput?);
 
+  Input_PersonTypeFilterInput? get personType =>
+      (_$data['personType'] as Input_PersonTypeFilterInput?);
+
   Input_FamilyFilterInput? get family =>
       (_$data['family'] as Input_FamilyFilterInput?);
 
@@ -8756,6 +8769,10 @@ class Input_FamilyContactFilterInput {
     if (_$data.containsKey('person')) {
       final l$person = person;
       result$data['person'] = l$person?.toJson();
+    }
+    if (_$data.containsKey('personType')) {
+      final l$personType = personType;
+      result$data['personType'] = l$personType?.toJson();
     }
     if (_$data.containsKey('family')) {
       final l$family = family;
@@ -8941,6 +8958,15 @@ class Input_FamilyContactFilterInput {
     if (l$person != lOther$person) {
       return false;
     }
+    final l$personType = personType;
+    final lOther$personType = other.personType;
+    if (_$data.containsKey('personType') !=
+        other._$data.containsKey('personType')) {
+      return false;
+    }
+    if (l$personType != lOther$personType) {
+      return false;
+    }
     final l$family = family;
     final lOther$family = other.family;
     if (_$data.containsKey('family') != other._$data.containsKey('family')) {
@@ -8978,6 +9004,7 @@ class Input_FamilyContactFilterInput {
     final l$effectiveFamilyId = effectiveFamilyId;
     final l$effectivePersonTypeId = effectivePersonTypeId;
     final l$person = person;
+    final l$personType = personType;
     final l$family = family;
     final l$personTypeOrder = personTypeOrder;
     return Object.hashAll([
@@ -9010,6 +9037,7 @@ class Input_FamilyContactFilterInput {
           ? l$effectivePersonTypeId
           : const {},
       _$data.containsKey('person') ? l$person : const {},
+      _$data.containsKey('personType') ? l$personType : const {},
       _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('personTypeOrder') ? l$personTypeOrder : const {},
     ]);
@@ -9041,6 +9069,7 @@ abstract class CopyWith_Input_FamilyContactFilterInput<TRes> {
     Input_FamilyContactFilterEffectiveFamilyId? effectiveFamilyId,
     Input_FamilyContactFilterEffectivePersonTypeId? effectivePersonTypeId,
     Input_PersonFilterInput? person,
+    Input_PersonTypeFilterInput? personType,
     Input_FamilyFilterInput? family,
     Input_FamilyContactFilterPersonTypeOrder? personTypeOrder,
   });
@@ -9082,6 +9111,7 @@ abstract class CopyWith_Input_FamilyContactFilterInput<TRes> {
   CopyWith_Input_FamilyContactFilterEffectivePersonTypeId<TRes>
   get effectivePersonTypeId;
   CopyWith_Input_PersonFilterInput<TRes> get person;
+  CopyWith_Input_PersonTypeFilterInput<TRes> get personType;
   CopyWith_Input_FamilyFilterInput<TRes> get family;
   CopyWith_Input_FamilyContactFilterPersonTypeOrder<TRes> get personTypeOrder;
 }
@@ -9112,6 +9142,7 @@ class _CopyWithImpl_Input_FamilyContactFilterInput<TRes>
     Object? effectiveFamilyId = _undefined,
     Object? effectivePersonTypeId = _undefined,
     Object? person = _undefined,
+    Object? personType = _undefined,
     Object? family = _undefined,
     Object? personTypeOrder = _undefined,
   }) => _then(
@@ -9148,6 +9179,8 @@ class _CopyWithImpl_Input_FamilyContactFilterInput<TRes>
             (effectivePersonTypeId
                 as Input_FamilyContactFilterEffectivePersonTypeId?),
       if (person != _undefined) 'person': (person as Input_PersonFilterInput?),
+      if (personType != _undefined)
+        'personType': (personType as Input_PersonTypeFilterInput?),
       if (family != _undefined) 'family': (family as Input_FamilyFilterInput?),
       if (personTypeOrder != _undefined)
         'personTypeOrder':
@@ -9323,6 +9356,16 @@ class _CopyWithImpl_Input_FamilyContactFilterInput<TRes>
           );
   }
 
+  CopyWith_Input_PersonTypeFilterInput<TRes> get personType {
+    final local$personType = _instance.personType;
+    return local$personType == null
+        ? CopyWith_Input_PersonTypeFilterInput.stub(_then(_instance))
+        : CopyWith_Input_PersonTypeFilterInput(
+            local$personType,
+            (e) => call(personType: e),
+          );
+  }
+
   CopyWith_Input_FamilyFilterInput<TRes> get family {
     final local$family = _instance.family;
     return local$family == null
@@ -9368,6 +9411,7 @@ class _CopyWithStubImpl_Input_FamilyContactFilterInput<TRes>
     Input_FamilyContactFilterEffectiveFamilyId? effectiveFamilyId,
     Input_FamilyContactFilterEffectivePersonTypeId? effectivePersonTypeId,
     Input_PersonFilterInput? person,
+    Input_PersonTypeFilterInput? personType,
     Input_FamilyFilterInput? family,
     Input_FamilyContactFilterPersonTypeOrder? personTypeOrder,
   }) => _res;
@@ -9415,6 +9459,9 @@ class _CopyWithStubImpl_Input_FamilyContactFilterInput<TRes>
 
   CopyWith_Input_PersonFilterInput<TRes> get person =>
       CopyWith_Input_PersonFilterInput.stub(_res);
+
+  CopyWith_Input_PersonTypeFilterInput<TRes> get personType =>
+      CopyWith_Input_PersonTypeFilterInput.stub(_res);
 
   CopyWith_Input_FamilyFilterInput<TRes> get family =>
       CopyWith_Input_FamilyFilterInput.stub(_res);
@@ -66293,6 +66340,7 @@ class Input_ContactFilterInput {
     Input_ContactFilterUpdatedAt? updatedAt,
     Input_FamilyFilterInput? family,
     Input_PersonFilterInput? person,
+    Input_PersonTypeFilterInput? personType,
   }) => Input_ContactFilterInput._({
     if (and != null) r'and': and,
     if (or != null) r'or': or,
@@ -66308,6 +66356,7 @@ class Input_ContactFilterInput {
     if (updatedAt != null) r'updatedAt': updatedAt,
     if (family != null) r'family': family,
     if (person != null) r'person': person,
+    if (personType != null) r'personType': personType,
   });
 
   Input_ContactFilterInput._(this._$data);
@@ -66427,6 +66476,14 @@ class Input_ContactFilterInput {
               (l$person as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('personType')) {
+      final l$personType = data['personType'];
+      result$data['personType'] = l$personType == null
+          ? null
+          : Input_PersonTypeFilterInput.fromJson(
+              (l$personType as Map<String, dynamic>),
+            );
+    }
     return Input_ContactFilterInput._(result$data);
   }
 
@@ -66472,6 +66529,9 @@ class Input_ContactFilterInput {
 
   Input_PersonFilterInput? get person =>
       (_$data['person'] as Input_PersonFilterInput?);
+
+  Input_PersonTypeFilterInput? get personType =>
+      (_$data['personType'] as Input_PersonTypeFilterInput?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -66530,6 +66590,10 @@ class Input_ContactFilterInput {
     if (_$data.containsKey('person')) {
       final l$person = person;
       result$data['person'] = l$person?.toJson();
+    }
+    if (_$data.containsKey('personType')) {
+      final l$personType = personType;
+      result$data['personType'] = l$personType?.toJson();
     }
     return result$data;
   }
@@ -66697,6 +66761,15 @@ class Input_ContactFilterInput {
     if (l$person != lOther$person) {
       return false;
     }
+    final l$personType = personType;
+    final lOther$personType = other.personType;
+    if (_$data.containsKey('personType') !=
+        other._$data.containsKey('personType')) {
+      return false;
+    }
+    if (l$personType != lOther$personType) {
+      return false;
+    }
     return true;
   }
 
@@ -66716,6 +66789,7 @@ class Input_ContactFilterInput {
     final l$updatedAt = updatedAt;
     final l$family = family;
     final l$person = person;
+    final l$personType = personType;
     return Object.hashAll([
       _$data.containsKey('and')
           ? l$and == null
@@ -66743,6 +66817,7 @@ class Input_ContactFilterInput {
       _$data.containsKey('updatedAt') ? l$updatedAt : const {},
       _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('person') ? l$person : const {},
+      _$data.containsKey('personType') ? l$personType : const {},
     ]);
   }
 }
@@ -66771,6 +66846,7 @@ abstract class CopyWith_Input_ContactFilterInput<TRes> {
     Input_ContactFilterUpdatedAt? updatedAt,
     Input_FamilyFilterInput? family,
     Input_PersonFilterInput? person,
+    Input_PersonTypeFilterInput? personType,
   });
   TRes and(
     Iterable<Input_ContactFilterInput>? Function(
@@ -66801,6 +66877,7 @@ abstract class CopyWith_Input_ContactFilterInput<TRes> {
   CopyWith_Input_ContactFilterUpdatedAt<TRes> get updatedAt;
   CopyWith_Input_FamilyFilterInput<TRes> get family;
   CopyWith_Input_PersonFilterInput<TRes> get person;
+  CopyWith_Input_PersonTypeFilterInput<TRes> get personType;
 }
 
 class _CopyWithImpl_Input_ContactFilterInput<TRes>
@@ -66828,6 +66905,7 @@ class _CopyWithImpl_Input_ContactFilterInput<TRes>
     Object? updatedAt = _undefined,
     Object? family = _undefined,
     Object? person = _undefined,
+    Object? personType = _undefined,
   }) => _then(
     Input_ContactFilterInput._({
       ..._instance._$data,
@@ -66851,6 +66929,8 @@ class _CopyWithImpl_Input_ContactFilterInput<TRes>
         'updatedAt': (updatedAt as Input_ContactFilterUpdatedAt?),
       if (family != _undefined) 'family': (family as Input_FamilyFilterInput?),
       if (person != _undefined) 'person': (person as Input_PersonFilterInput?),
+      if (personType != _undefined)
+        'personType': (personType as Input_PersonTypeFilterInput?),
     }),
   );
 
@@ -66987,6 +67067,16 @@ class _CopyWithImpl_Input_ContactFilterInput<TRes>
             (e) => call(person: e),
           );
   }
+
+  CopyWith_Input_PersonTypeFilterInput<TRes> get personType {
+    final local$personType = _instance.personType;
+    return local$personType == null
+        ? CopyWith_Input_PersonTypeFilterInput.stub(_then(_instance))
+        : CopyWith_Input_PersonTypeFilterInput(
+            local$personType,
+            (e) => call(personType: e),
+          );
+  }
 }
 
 class _CopyWithStubImpl_Input_ContactFilterInput<TRes>
@@ -67010,6 +67100,7 @@ class _CopyWithStubImpl_Input_ContactFilterInput<TRes>
     Input_ContactFilterUpdatedAt? updatedAt,
     Input_FamilyFilterInput? family,
     Input_PersonFilterInput? person,
+    Input_PersonTypeFilterInput? personType,
   }) => _res;
 
   and(_fn) => _res;
@@ -67050,6 +67141,9 @@ class _CopyWithStubImpl_Input_ContactFilterInput<TRes>
 
   CopyWith_Input_PersonFilterInput<TRes> get person =>
       CopyWith_Input_PersonFilterInput.stub(_res);
+
+  CopyWith_Input_PersonTypeFilterInput<TRes> get personType =>
+      CopyWith_Input_PersonTypeFilterInput.stub(_res);
 }
 
 class Input_ContactSortInput {
