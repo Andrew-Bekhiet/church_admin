@@ -14,13 +14,16 @@ import 'ash_responses.dart';
 /// the command and never stored on the row; [calculations] answer the
 /// filterable calculations that take an `input`. A row of a resource without
 /// an `id` (a model that is not an [ID]) is paged by a keyset the table
-/// assigns.
+/// assigns. [nestedFilterVariables] names, per relationship field a row
+/// embeds, the query variable whose filter the document applies to that
+/// relationship, as the real server does.
 class FakeAshTable {
   final String typename;
   final String listRoot;
   final Json createdPresets;
   final Set<String> commandOnlyKeys;
   final Map<String, bool Function(Json row, Json input)> calculations;
+  final Map<String, String> nestedFilterVariables;
   final List<Json> rows = [];
 
   int _createdCount = 0;
@@ -40,6 +43,7 @@ class FakeAshTable {
     this.createdPresets = const {},
     this.commandOnlyKeys = const {},
     this.calculations = const {},
+    this.nestedFilterVariables = const {},
   }) {
     rows.forEach(add);
   }
@@ -104,8 +108,10 @@ class SentRequest {
 typedef FakeAshMutation = Json? Function(Json variables);
 
 /// An Ash GraphQL server over [FakeAshTable]s. It applies the `filter`
-/// operators the client sends (`and or not eq notEq in isNil ilike`), sorts
-/// by `sort` and then by id as Ash does, and pages with `first`/`after`.
+/// operators the client sends (`and or not eq notEq in isNil ilike lessThan
+/// lessThanOrEqual greaterThan greaterThanOrEqual`, and a filter nested under
+/// a relationship the row embeds), sorts by `sort` and then by id as Ash does,
+/// and pages with `first`/`after`.
 /// Every request is kept in [sent]; setting [nextMutationRejectionCode] makes
 /// the next mutation fail with the error code the real server raises.
 class FakeAshTablesLink extends Link {
@@ -214,7 +220,10 @@ class FakeAshTablesLink extends Link {
         : matching.indexWhere((row) => FakeAshTable.keysetOf(row) == after) + 1;
     final first = variables['first'] as int? ?? matching.length;
 
-    final results = matching.skip(start).take(first).toList();
+    final results = [
+      for (final row in matching.skip(start).take(first))
+        _withFilteredRelationships(table, row, variables),
+    ];
 
     return AshResponses.page(
       results,
@@ -223,6 +232,26 @@ class FakeAshTablesLink extends Link {
       endKeyset: results.isEmpty ? null : FakeAshTable.keysetOf(results.last),
     );
   }
+
+  Json _withFilteredRelationships(
+    FakeAshTable table,
+    Json row,
+    Json variables,
+  ) => {
+    ...row,
+    for (final MapEntry(key: field, value: variable)
+        in table.nestedFilterVariables.entries)
+      if (row[field] case final List related)
+        field: [
+          for (final item in related)
+            if (_matches(
+              table,
+              (item as Map).cast(),
+              variables[variable] as Map?,
+            ))
+              item,
+        ],
+  };
 
   bool _matches(FakeAshTable table, Json row, Map? filter) =>
       filter == null ||
@@ -241,6 +270,8 @@ class FakeAshTablesLink extends Link {
               when value.containsKey('input') =>
             table.calculations[key]!(row, (value['input'] as Map).cast()) ==
                 value['eq'],
+          MapEntry(:final String key, :final Map value) when row[key] is Map =>
+            _matches(table, (row[key] as Map).cast(), value),
           MapEntry(:final String key, :final Map value) => value.entries.every(
             (operator) => _satisfies(row[key], operator),
           ),
@@ -254,6 +285,14 @@ class FakeAshTablesLink extends Link {
         MapEntry(key: 'notEq', :final value) => fieldValue != value,
         MapEntry(key: 'in', :final List value) => value.contains(fieldValue),
         MapEntry(key: 'isNil', :final value) => (fieldValue == null) == value,
+        MapEntry(key: 'lessThan', :final value?) =>
+          fieldValue != null && _compareValues(fieldValue, value) < 0,
+        MapEntry(key: 'lessThanOrEqual', :final value?) =>
+          fieldValue != null && _compareValues(fieldValue, value) <= 0,
+        MapEntry(key: 'greaterThan', :final value?) =>
+          fieldValue != null && _compareValues(fieldValue, value) > 0,
+        MapEntry(key: 'greaterThanOrEqual', :final value?) =>
+          fieldValue != null && _compareValues(fieldValue, value) >= 0,
         MapEntry(key: 'ilike', :final String value) => RegExp(
           '^${value.split('%').map(RegExp.escape).join('.*')}\$',
           caseSensitive: false,
