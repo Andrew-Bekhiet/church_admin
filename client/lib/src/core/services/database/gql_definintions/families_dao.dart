@@ -6,6 +6,13 @@ import 'package:graphql/client.dart';
 
 class FamiliesDAO extends FullCRUDDAO<Family>
     with DataCheckFreeDocuments<Family> {
+  static final Input_FamilyContactFilterInput _familyAdminContacts =
+      Input_FamilyContactFilterInput(
+        personType: Input_PersonTypeFilterInput(
+          isFamilyAdmin: Input_PersonTypeFilterIsFamilyAdmin(eq: true),
+        ),
+      );
+
   static final List<Input_FamilyContactSortInput> _contactsOrder = [
     Input_FamilyContactSortInput(
       field: Enum_FamilyContactSortField.PERSON_TYPE_ORDER,
@@ -40,9 +47,9 @@ class FamiliesDAO extends FullCRUDDAO<Family>
         document: documentNodeQueryfamily,
         varsConstructor: ({required id}) => Variables_Query_family(
           id: id,
+          contactsFilter: _familyAdminContacts,
           contactsSort: _contactsOrder,
         ).toJson(),
-        parserFn: _familyWithContactRoles,
       );
 
   @override
@@ -109,28 +116,4 @@ class FamiliesDAO extends FullCRUDDAO<Family>
     parameters,
     defaultOrderBy: [OrderBy(field: FamilyFields().name)],
   );
-
-  Family? _familyWithContactRoles(Json data) {
-    final family = data['family'] as Map?;
-    if (family == null) return null;
-
-    final familyRoles = {
-      for (final role in _objectsOf((data['personTypes'] as Map?)?['results']))
-        if (role['isFamilyAdmin'] == true) role['id']: role,
-    };
-
-    return fromJson({
-      ...family.cast<String, dynamic>(),
-      'contacts': [
-        for (final contact in _objectsOf(family['contacts']))
-          if (familyRoles[contact['effectivePersonTypeId']] case final role?)
-            {...contact, 'personType': role},
-      ],
-    });
-  }
-
-  Iterable<Json> _objectsOf(Object? list) => [
-    for (final object in list as List? ?? const [])
-      (object as Map).cast<String, dynamic>(),
-  ];
 }

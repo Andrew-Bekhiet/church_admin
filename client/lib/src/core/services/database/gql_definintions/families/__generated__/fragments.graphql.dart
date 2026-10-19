@@ -1,5 +1,6 @@
 import '../../areas/__generated__/fragments.graphql.dart';
 import '../../data_checks/__generated__/fragments.graphql.dart';
+import '../../metadata/person_types/__generated__/fragments.graphql.dart';
 import '../../streets/__generated__/fragments.graphql.dart';
 
 import 'package:church_admin/src/core/graphql/scalars.dart';
@@ -2235,7 +2236,7 @@ class Fragment_FamilyContact {
     this.label,
     this.phone,
     this.isMainPhone,
-    this.effectivePersonTypeId,
+    this.personType,
     this.$__typename = 'FamilyContact',
   });
 
@@ -2245,7 +2246,7 @@ class Fragment_FamilyContact {
     final l$label = json['label'];
     final l$phone = json['phone'];
     final l$isMainPhone = json['isMainPhone'];
-    final l$effectivePersonTypeId = json['effectivePersonTypeId'];
+    final l$personType = json['personType'];
     final l$$__typename = json['__typename'];
     return Fragment_FamilyContact(
       id: (l$id as String),
@@ -2253,7 +2254,11 @@ class Fragment_FamilyContact {
       label: (l$label as String?),
       phone: (l$phone as String?),
       isMainPhone: (l$isMainPhone as bool?),
-      effectivePersonTypeId: (l$effectivePersonTypeId as String?),
+      personType: l$personType == null
+          ? null
+          : Fragment_PersonType.fromJson(
+              (l$personType as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -2268,7 +2273,7 @@ class Fragment_FamilyContact {
 
   final bool? isMainPhone;
 
-  final String? effectivePersonTypeId;
+  final Fragment_PersonType? personType;
 
   final String $__typename;
 
@@ -2284,8 +2289,8 @@ class Fragment_FamilyContact {
     _resultData['phone'] = l$phone;
     final l$isMainPhone = isMainPhone;
     _resultData['isMainPhone'] = l$isMainPhone;
-    final l$effectivePersonTypeId = effectivePersonTypeId;
-    _resultData['effectivePersonTypeId'] = l$effectivePersonTypeId;
+    final l$personType = personType;
+    _resultData['personType'] = l$personType?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -2298,7 +2303,7 @@ class Fragment_FamilyContact {
     final l$label = label;
     final l$phone = phone;
     final l$isMainPhone = isMainPhone;
-    final l$effectivePersonTypeId = effectivePersonTypeId;
+    final l$personType = personType;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -2306,7 +2311,7 @@ class Fragment_FamilyContact {
       l$label,
       l$phone,
       l$isMainPhone,
-      l$effectivePersonTypeId,
+      l$personType,
       l$$__typename,
     ]);
   }
@@ -2344,9 +2349,9 @@ class Fragment_FamilyContact {
     if (l$isMainPhone != lOther$isMainPhone) {
       return false;
     }
-    final l$effectivePersonTypeId = effectivePersonTypeId;
-    final lOther$effectivePersonTypeId = other.effectivePersonTypeId;
-    if (l$effectivePersonTypeId != lOther$effectivePersonTypeId) {
+    final l$personType = personType;
+    final lOther$personType = other.personType;
+    if (l$personType != lOther$personType) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2378,9 +2383,10 @@ abstract class CopyWith_Fragment_FamilyContact<TRes> {
     String? label,
     String? phone,
     bool? isMainPhone,
-    String? effectivePersonTypeId,
+    Fragment_PersonType? personType,
     String? $__typename,
   });
+  CopyWith_Fragment_PersonType<TRes> get personType;
 }
 
 class _CopyWithImpl_Fragment_FamilyContact<TRes>
@@ -2399,7 +2405,7 @@ class _CopyWithImpl_Fragment_FamilyContact<TRes>
     Object? label = _undefined,
     Object? phone = _undefined,
     Object? isMainPhone = _undefined,
-    Object? effectivePersonTypeId = _undefined,
+    Object? personType = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Fragment_FamilyContact(
@@ -2412,14 +2418,24 @@ class _CopyWithImpl_Fragment_FamilyContact<TRes>
       isMainPhone: isMainPhone == _undefined
           ? _instance.isMainPhone
           : (isMainPhone as bool?),
-      effectivePersonTypeId: effectivePersonTypeId == _undefined
-          ? _instance.effectivePersonTypeId
-          : (effectivePersonTypeId as String?),
+      personType: personType == _undefined
+          ? _instance.personType
+          : (personType as Fragment_PersonType?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
     ),
   );
+
+  CopyWith_Fragment_PersonType<TRes> get personType {
+    final local$personType = _instance.personType;
+    return local$personType == null
+        ? CopyWith_Fragment_PersonType.stub(_then(_instance))
+        : CopyWith_Fragment_PersonType(
+            local$personType,
+            (e) => call(personType: e),
+          );
+  }
 }
 
 class _CopyWithStubImpl_Fragment_FamilyContact<TRes>
@@ -2434,9 +2450,12 @@ class _CopyWithStubImpl_Fragment_FamilyContact<TRes>
     String? label,
     String? phone,
     bool? isMainPhone,
-    String? effectivePersonTypeId,
+    Fragment_PersonType? personType,
     String? $__typename,
   }) => _res;
+
+  CopyWith_Fragment_PersonType<TRes> get personType =>
+      CopyWith_Fragment_PersonType.stub(_res);
 }
 
 const fragmentDefinitionFamilyContact = FragmentDefinitionNode(
@@ -2483,11 +2502,25 @@ const fragmentDefinitionFamilyContact = FragmentDefinitionNode(
         selectionSet: null,
       ),
       FieldNode(
-        name: NameNode(value: 'effectivePersonTypeId'),
+        name: NameNode(value: 'personType'),
         alias: null,
         arguments: [],
         directives: [],
-        selectionSet: null,
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'PersonType'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
+        ),
       ),
       FieldNode(
         name: NameNode(value: '__typename'),
@@ -2500,7 +2533,7 @@ const fragmentDefinitionFamilyContact = FragmentDefinitionNode(
   ),
 );
 const documentNodeFragmentFamilyContact = DocumentNode(
-  definitions: [fragmentDefinitionFamilyContact],
+  definitions: [fragmentDefinitionFamilyContact, fragmentDefinitionPersonType],
 );
 
 class Fragment_FamilyUser {
