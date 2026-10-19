@@ -36,7 +36,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
   String? _endKeyset;
 
   @override
-  LiveQueryDependencies dependencies = LiveQueryDependencies.none;
+  LiveQueryDependencies dependencies = LiveQueryDependencies.unknown;
 
   @override
   LiveQueryKind get kind => LiveQueryKind.list;
@@ -146,7 +146,7 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
         keep: const [],
         fetchPolicy: FetchPolicy.cacheOnly,
       );
-    } on BackendException {
+    } on Object {
       return;
     }
   }
@@ -158,20 +158,24 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     required List<T> keep,
     FetchPolicy? fetchPolicy,
   }) async {
+    final effectivePolicy = fetchPolicy ?? _networkPolicy;
+    final isCachePreview = effectivePolicy == FetchPolicy.cacheOnly;
+    if (effectivePolicy == FetchPolicy.cacheFirst) _registry.markStale(this);
     _loading.add(true);
     try {
       final chunks = await _fetchChunks(
         rows: rows,
         after: after,
-        fetchPolicy: fetchPolicy ?? _networkPolicy,
+        fetchPolicy: effectivePolicy,
       );
       if (generation != _generation) return;
 
       _emit(keep, chunks, requestedRows: rows);
-    } on BackendException catch (error, stackTrace) {
-      if (generation != _generation || fetchPolicy == FetchPolicy.cacheOnly) {
-        rethrow;
-      }
+    } on Object catch (error, stackTrace) {
+      if (generation != _generation) return;
+      if (isCachePreview) rethrow;
+
+      _registry.markStale(this);
       _subject.addError(error, stackTrace);
     } finally {
       if (generation == _generation) _loading.add(false);
@@ -210,9 +214,12 @@ class KeysetPaginatedStream<T, P> extends PaginatableStreamBase<T>
     final fetchedRows = items.length - keep.length;
     final hasMore = fetchedRows >= requestedRows;
     _endKeyset = chunks.lastOrNull?.page.endKeyset ?? _endKeyset;
-    dependencies = LiveQueryDependencies.ofResult([
+    final loadedDependencies = LiveQueryDependencies.ofResult([
       for (final chunk in chunks) chunk.data,
     ]);
+    dependencies = keep.isEmpty
+        ? loadedDependencies
+        : dependencies.union(loadedDependencies);
     final count = chunks.lastOrNull?.page.count;
     _subject.add(
       PaginatableStreamData(
