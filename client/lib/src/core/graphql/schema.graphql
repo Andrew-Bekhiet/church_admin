@@ -8,6 +8,48 @@ type ExportDownloadLink {
   downloadUrl: String!
 }
 
+type ClaimedAccount {
+  uid: ID!
+}
+
+input NewPersonInput {
+  name: String!
+  gender: Boolean!
+}
+
+input AdminOnInput {
+  serviceWriteRelatedFamilies: Boolean
+  serviceStudyYear: Int
+  serviceGender: Boolean
+  serviceAllowRecordServantsAttendance: Boolean
+  serviceAllowRecordAttendance: Boolean
+  serviceAllowExport: Boolean
+  serviceAllowEdit: Boolean
+  serviceAdminOnUsers: Boolean
+  groupWriteRelatedFamilies: Boolean
+  groupAllowRecordServantsAttendance: Boolean
+  groupAllowRecordAttendance: Boolean
+  groupAllowExport: Boolean
+  groupAllowEdit: Boolean
+  groupAdminOnUsers: Boolean
+  areaAllowExport: Boolean
+  areaAllowEdit: Boolean
+  areaAdminOnUsers: Boolean
+  adminOnService: ID
+  adminOnGroup: ID
+  adminOnArea: ID
+}
+
+input MeetingInput {
+  showKodasCheckbox: Boolean
+  serviceStudyYear: Int
+  serviceGender: Boolean
+  name: String!
+  isArchived: Boolean
+  color: Int
+  audience: String
+}
+
 enum ServiceMembershipSortField {
   PERSON_ID
   SERVICE_ID
@@ -2868,6 +2910,51 @@ type MutationError {
   path: [String!]
 }
 
+"The result of the :delete_service mutation"
+type DeleteServiceResult {
+  "The record that was successfully deleted"
+  result: Service
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_service mutation"
+type UpdateServiceResult {
+  "The successful result of the mutation"
+  result: Service
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateServiceInput {
+  name: String
+  studyYearFromId: Int
+  studyYearToId: Int
+  nextServiceId: ID
+  color: Int
+  defaultMeetingId: ID
+}
+
+"The result of the :create_service mutation"
+type CreateServiceResult {
+  "The successful result of the mutation"
+  result: Service
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateServiceInput {
+  name: String!
+  studyYearFromId: Int
+  studyYearToId: Int
+  nextServiceId: ID
+  color: Int
+  defaultMeeting: MeetingInput
+}
+
 enum ServiceSortField {
   ID
   NAME
@@ -3240,6 +3327,48 @@ type Service {
   userCanEdit: Boolean!
 }
 
+"The result of the :delete_group mutation"
+type DeleteGroupResult {
+  "The record that was successfully deleted"
+  result: Group
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_group mutation"
+type UpdateGroupResult {
+  "The successful result of the mutation"
+  result: Group
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateGroupInput {
+  name: String
+  serviceId: ID
+  validity: String
+  color: Int
+  defaultMeetingId: ID
+}
+
+"The result of the :create_group mutation"
+type CreateGroupResult {
+  "The successful result of the mutation"
+  result: Group
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateGroupInput {
+  name: String!
+  serviceId: ID!
+  validity: String
+  color: Int
+}
+
 enum GroupSortField {
   ID
   NAME
@@ -3530,6 +3659,51 @@ type Group {
   defaultMeetingName: String
   lastEdit: DateTime
   userCanEdit: Boolean!
+}
+
+"The result of the :delete_class mutation"
+type DeleteClassResult {
+  "The record that was successfully deleted"
+  result: Class
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_class mutation"
+type UpdateClassResult {
+  "The successful result of the mutation"
+  result: Class
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateClassInput {
+  name: String
+  serviceId: ID
+  serviceStudyYear: Int
+  serviceGender: Boolean
+  color: Int
+  serviceStudyYearTo: Int
+}
+
+"The result of the :create_class mutation"
+type CreateClassResult {
+  "The successful result of the mutation"
+  result: Class
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateClassInput {
+  name: String!
+  serviceId: ID!
+  serviceStudyYear: Int!
+  serviceGender: Boolean
+  color: Int
+  serviceStudyYearTo: Int
 }
 
 enum ClassSortField {
@@ -5691,6 +5865,44 @@ type MeetingDay {
   meeting: Meeting
 }
 
+"The result of the :update_meeting mutation"
+type UpdateMeetingResult {
+  "The successful result of the mutation"
+  result: Meeting
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateMeetingInput {
+  name: String
+  audience: String
+  isArchived: Boolean
+  color: Int
+  showKodasCheckbox: Boolean
+}
+
+"The result of the :create_meeting mutation"
+type CreateMeetingResult {
+  "The successful result of the mutation"
+  result: Meeting
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateMeetingInput {
+  name: String!
+  serviceId: ID
+  serviceStudyYear: Int
+  serviceGender: Boolean
+  groupId: ID
+  audience: String
+  isArchived: Boolean
+  color: Int
+  showKodasCheckbox: Boolean
+}
+
 enum MeetingSortField {
   ID
   NAME
@@ -5935,6 +6147,44 @@ type Meeting {
     offset: Int
   ): [RosterEntry!]!
   heldDays(from: Date!, to: Date!): [Date!]
+}
+
+"The result of the :unmark_attendance mutation"
+type UnmarkAttendanceResult {
+  "The record that was successfully deleted"
+  result: AttendanceRecord
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_attendance_time mutation"
+type UpdateAttendanceTimeResult {
+  "The successful result of the mutation"
+  result: AttendanceRecord
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateAttendanceTimeInput {
+  datetime: DateTime
+}
+
+"The result of the :mark_attendance mutation"
+type MarkAttendanceResult {
+  "The successful result of the mutation"
+  result: AttendanceRecord
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input MarkAttendanceInput {
+  meetingId: ID!
+  personId: ID!
+  datetime: DateTime
+  asServant: Boolean
 }
 
 enum AttendanceRecordSortField {
@@ -7419,6 +7669,76 @@ type UserPermission {
   user: User
 }
 
+input ApplyInvitationCodeInput {
+  code: String!
+}
+
+"The result of the :unapprove_user mutation"
+type UnapproveUserResult {
+  "The successful result of the mutation"
+  result: User
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :approve_user mutation"
+type ApproveUserResult {
+  "The successful result of the mutation"
+  result: User
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :update_user_permissions mutation"
+type UpdateUserPermissionsResult {
+  "The successful result of the mutation"
+  result: User
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateUserPermissionsInput {
+  permissions: [String!]
+  adminOn: [AdminOnInput!]
+}
+
+"The result of the :update_user mutation"
+type UpdateUserResult {
+  "The successful result of the mutation"
+  result: User
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  personId: ID
+}
+
+"The result of the :create_user mutation"
+type CreateUserResult {
+  "The successful result of the mutation"
+  result: User
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String
+  permissions: [String!]
+  adminOn: [AdminOnInput!]
+  personId: ID
+  newPerson: NewPersonInput
+  invitationExpiresAt: DateTime
+}
+
 enum UserSortField {
   UID
   NAME
@@ -7565,6 +7885,7 @@ input UserFilterInput {
   photoUpdatedAt: UserFilterPhotoUpdatedAt
   blurhash: UserFilterBlurhash
   authId: UserFilterAuthId
+  invitation: InvitationFilterInput
   person: PersonFilterInput
   scopeGrants: ScopeGrantFilterInput
   permissions: UserPermissionFilterInput
@@ -7584,6 +7905,7 @@ type User {
   photoUpdatedAt: DateTime
   blurhash: String
   authId: String
+  invitation: Invitation
   person: Person
   scopeGrants(
     "How to sort the records in the response"
@@ -7998,6 +8320,156 @@ type ScopeGrant {
   serviceAllowRecordServantsAttendance: Boolean
   groupAllowRecordAttendance: Boolean
   groupAllowRecordServantsAttendance: Boolean
+  user: User
+}
+
+"The result of the :update_invitation_expiry mutation"
+type UpdateInvitationExpiryResult {
+  "The successful result of the mutation"
+  result: Invitation
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdateInvitationExpiryInput {
+  expiresAt: DateTime
+}
+
+"The result of the :create_invitation mutation"
+type CreateInvitationResult {
+  "The successful result of the mutation"
+  result: Invitation
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreateInvitationInput {
+  userUid: ID!
+  expiresAt: DateTime
+}
+
+input InvitationFilterCode {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String!]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input InvitationFilterClaimedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input InvitationFilterExpiresAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input InvitationFilterCreatedAt {
+  isNil: Boolean
+  eq: DateTime
+  notEq: DateTime
+  in: [DateTime!]
+  lessThan: DateTime
+  greaterThan: DateTime
+  lessThanOrEqual: DateTime
+  greaterThanOrEqual: DateTime
+  isDistinctFrom: DateTime
+  isNotDistinctFrom: DateTime
+}
+
+input InvitationFilterCreatedBy {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input InvitationFilterUserUid {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input InvitationFilterId {
+  isNil: Boolean
+  eq: ID
+  notEq: ID
+  in: [ID!]
+  lessThan: ID
+  greaterThan: ID
+  lessThanOrEqual: ID
+  greaterThanOrEqual: ID
+  isDistinctFrom: ID
+  isNotDistinctFrom: ID
+}
+
+input InvitationFilterInput {
+  and: [InvitationFilterInput!]
+  or: [InvitationFilterInput!]
+  not: [InvitationFilterInput!]
+  id: InvitationFilterId
+  userUid: InvitationFilterUserUid
+  createdBy: InvitationFilterCreatedBy
+  createdAt: InvitationFilterCreatedAt
+  expiresAt: InvitationFilterExpiresAt
+  claimedAt: InvitationFilterClaimedAt
+  code: InvitationFilterCode
+  creator: UserFilterInput
+  user: UserFilterInput
+}
+
+type Invitation {
+  id: ID!
+  userUid: ID!
+  createdBy: ID!
+  createdAt: DateTime!
+  expiresAt: DateTime!
+  claimedAt: DateTime
+  code: String!
+  creator: User
   user: User
 }
 
@@ -10556,7 +11028,31 @@ type RootMutationType {
   createQualification(input: CreateQualificationInput!): CreateQualificationResult
   createSchool(input: CreateSchoolInput!): CreateSchoolResult
   createTag(input: CreateTagInput!): CreateTagResult
+  createInvitation(input: CreateInvitationInput!): CreateInvitationResult
+  updateInvitationExpiry(id: ID!, input: UpdateInvitationExpiryInput): UpdateInvitationExpiryResult
+  createUser(input: CreateUserInput!): CreateUserResult
+  updateUser(id: ID!, input: UpdateUserInput): UpdateUserResult
+  updateUserPermissions(id: ID!, input: UpdateUserPermissionsInput): UpdateUserPermissionsResult
+  approveUser(id: ID!): ApproveUserResult
+  unapproveUser(id: ID!): UnapproveUserResult
+  applyInvitationCode(input: ApplyInvitationCodeInput!): ClaimedAccount!
+  tryClaimAccount: ClaimedAccount!
+  deleteMyAccount: Boolean!
+  markAttendance(input: MarkAttendanceInput!): MarkAttendanceResult
+  updateAttendanceTime(id: ID!, input: UpdateAttendanceTimeInput): UpdateAttendanceTimeResult
+  unmarkAttendance(id: ID!): UnmarkAttendanceResult
+  createMeeting(input: CreateMeetingInput!): CreateMeetingResult
+  updateMeeting(id: ID!, input: UpdateMeetingInput): UpdateMeetingResult
   createDistrict(input: CreateDistrictInput!): CreateDistrictResult
+  createClass(input: CreateClassInput!): CreateClassResult
+  updateClass(id: ID!, input: UpdateClassInput): UpdateClassResult
+  deleteClass(id: ID!): DeleteClassResult
+  createGroup(input: CreateGroupInput!): CreateGroupResult
+  updateGroup(id: ID!, input: UpdateGroupInput): UpdateGroupResult
+  deleteGroup(id: ID!): DeleteGroupResult
+  createService(input: CreateServiceInput!): CreateServiceResult
+  updateService(id: ID!, input: UpdateServiceInput): UpdateServiceResult
+  deleteService(id: ID!): DeleteServiceResult
 }
 
 """
