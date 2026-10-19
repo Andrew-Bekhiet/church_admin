@@ -55,14 +55,11 @@ class AshMultiSelectFilter {
   };
 
   List<Object> _identifiers(FieldMetadata field, List<Object> values) {
-    final queryable = field.fieldQueryableType;
-    final isEnum = queryable?.isEnum ?? false;
-    final key = queryable?.keyField;
+    final key = field.fieldQueryableType?.keyField;
 
     return values.map((value) {
       final identifier = switch (value) {
-        ViewableEnumWithID(:final id) => AshNaming.screamingSnake(id),
-        final String id when isEnum => AshNaming.screamingSnake(id),
+        ViewableEnumWithID(:final id) => id,
         final String id => id,
         _ when key != null => key.getValue(value),
         ID(:final id) => id,

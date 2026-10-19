@@ -36,15 +36,24 @@ class AshFilterTranslator {
               : MultiSelectOperator.isNotEmpty,
           null,
         ),
-      PrimitiveOperator() => _primitive(path, operator, value),
+      PrimitiveOperator() => _primitive(
+        path,
+        operator,
+        _onTheWire(field, value),
+      ),
       BooleanOperator() => _boolean(path, operator, value as bool?),
       ColorOperator() => _color(path, operator, value as Color?),
       DateTimeOperator() => path.wrap({
-        _dateComparison(operator): _isoString(
+        _dateComparison(operator): _onTheWire(
+          field,
           AshOperatorValue.require<DateTime>(operator, value),
         ),
       }),
-      DateRangeOperator() => _dateRange(
+      DateRangeOperator() when field.isDateOnly => _dayRange(
+        path,
+        AshOperatorValue.require<DateTimeRange>(operator, value),
+      ),
+      DateRangeOperator() => _momentRange(
         path,
         AshOperatorValue.require<DateTimeRange>(operator, value),
       ),
@@ -135,12 +144,12 @@ class AshFilterTranslator {
   ) => switch (operator) {
     PrimitiveOperator.isNull => path.wrap({'isNil': true}),
     PrimitiveOperator.isNotNull => path.wrap({'isNil': false}),
-    PrimitiveOperator.eq => path.wrap({'eq': _plain(value)}),
-    PrimitiveOperator.neq => path.wrap({'notEq': _plain(value)}),
-    PrimitiveOperator.lt => path.wrap({'lessThan': _plain(value)}),
-    PrimitiveOperator.lte => path.wrap({'lessThanOrEqual': _plain(value)}),
-    PrimitiveOperator.gt => path.wrap({'greaterThan': _plain(value)}),
-    PrimitiveOperator.gte => path.wrap({'greaterThanOrEqual': _plain(value)}),
+    PrimitiveOperator.eq => path.wrap({'eq': value}),
+    PrimitiveOperator.neq => path.wrap({'notEq': value}),
+    PrimitiveOperator.lt => path.wrap({'lessThan': value}),
+    PrimitiveOperator.lte => path.wrap({'lessThanOrEqual': value}),
+    PrimitiveOperator.gt => path.wrap({'greaterThan': value}),
+    PrimitiveOperator.gte => path.wrap({'greaterThanOrEqual': value}),
   };
 
   Json _boolean(AshFieldPath path, BooleanOperator operator, bool? value) {
@@ -165,12 +174,26 @@ class AshFilterTranslator {
     };
   }
 
-  Json _dateRange(AshFieldPath path, DateTimeRange range) => {
+  Json _dayRange(AshFieldPath path, DateTimeRange range) => {
     'and': [
       path.wrap({'greaterThanOrEqual': dateToString(range.start)}),
       path.wrap({'lessThanOrEqual': dateToString(range.end)}),
     ],
   };
+
+  Json _momentRange(AshFieldPath path, DateTimeRange range) {
+    final DateTime(:year, :month, :day) = range.start;
+    final firstDay = DateTime(year, month, day);
+    final end = range.end;
+    final dayAfterLast = DateTime(end.year, end.month, end.day + 1);
+
+    return {
+      'and': [
+        path.wrap({'greaterThanOrEqual': _isoString(firstDay)}),
+        path.wrap({'lessThan': _isoString(dayAfterLast)}),
+      ],
+    };
+  }
 
   String _dateComparison(DateTimeOperator operator) => switch (operator) {
     DateTimeOperator.isOn => 'eq',
@@ -180,8 +203,11 @@ class AshFilterTranslator {
     DateTimeOperator.isOnOrBefore => 'lessThanOrEqual',
   };
 
-  Object? _plain(Object? value) =>
-      value is DateTime ? _isoString(value) : value;
+  Object? _onTheWire(FieldMetadata field, Object? value) => switch (value) {
+    final DateTime day when field.isDateOnly => dateToString(day),
+    final DateTime moment => _isoString(moment),
+    _ => value,
+  };
 
   String _isoString(DateTime value) => value.toUtc().toIso8601String();
 }

@@ -30,7 +30,7 @@ class Family extends ViewableWithIDAndImage
   final MartialStatus status;
 
   @LocalDateTimeConverter()
-  @QueryableField(label: 'تاريخ الزواج')
+  @QueryableField(label: 'تاريخ الزواج', dateOnly: true)
   final DateTime? marriageDate;
 
   @QueryableField(label: 'اسم الزوج المتوفي')

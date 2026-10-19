@@ -52,6 +52,7 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
          label: label ?? targetField.label,
          isCodeOnly: targetField.isCodeOnly,
          isOrderable: isOrderable ?? targetField.isOrderable,
+         isDateOnly: parentField.isDateOnly || targetField.isDateOnly,
          type: targetField.type,
          operators: targetField.operators,
          getValue: (obj) {

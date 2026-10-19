@@ -24,6 +24,9 @@ class FieldMetadata<T extends Object> with Equatable {
   final String label;
   final bool isOrderable;
   final bool isCodeOnly;
+
+  /// The server keeps a calendar date here, not a moment.
+  final bool isDateOnly;
   final Set<Operator> operators;
   final Object? Function(Object) getValue;
 
@@ -61,6 +64,7 @@ class FieldMetadata<T extends Object> with Equatable {
     required this.getValue,
     this.isCodeOnly = false,
     this.isOrderable = true,
+    this.isDateOnly = false,
     this.operators = const {},
     this._type,
   });

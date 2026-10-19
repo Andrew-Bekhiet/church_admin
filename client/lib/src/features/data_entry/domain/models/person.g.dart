@@ -45,6 +45,7 @@ class _PersonFields {
     name: 'birthdate',
     label: 'تاريخ الميلاد',
     isCodeOnly: false,
+    isDateOnly: true,
     operators: {
       ...DateTimeOperator.values,
       ...DateRangeOperator.values,
@@ -363,6 +364,7 @@ class _PersonFields {
         name: 'lastConfessionDay',
         label: 'أخر اعتراف',
         isCodeOnly: false,
+        isDateOnly: true,
         operators: {
           ...MultiSelectOperator.values,
           PrimitiveOperator.isNull,
@@ -377,6 +379,7 @@ class _PersonFields {
         name: 'lastKodasDay',
         label: 'أخر تناول',
         isCodeOnly: false,
+        isDateOnly: true,
         operators: {
           ...MultiSelectOperator.values,
           PrimitiveOperator.isNull,
@@ -542,6 +545,7 @@ class _PersonFields {
         label: 'سجل التناول',
         isCodeOnly: false,
         isOrderable: false,
+        isDateOnly: true,
         operators: {...MultiSelectOperator.values},
       );
 
@@ -564,6 +568,7 @@ class _PersonFields {
         label: 'سجل الاعتراف',
         isCodeOnly: false,
         isOrderable: false,
+        isDateOnly: true,
         operators: {...MultiSelectOperator.values},
       );
 

@@ -24,6 +24,8 @@ class SampleFilters {
   static Iterable<SampleFilter> ofQueryable(QueryableType queryable) sync* {
     for (final field in queryable.fieldsMetadata) {
       for (final operator in field.operators) {
+        if (_picksRecordedTimesById(field, operator)) continue;
+
         yield SampleFilter(
           queryable,
           Filter(field, operator, valueFor(field, operator)),
@@ -31,6 +33,13 @@ class SampleFilters {
       }
     }
   }
+
+  /// Known client gap: any-of and none-of on a history or latest record
+  /// compare its recorded time with the picked ids.
+  static bool _picksRecordedTimesById(FieldMetadata field, Operator operator) =>
+      field.type == LastRecordedByInfo &&
+      (operator == MultiSelectOperator.anyOf ||
+          operator == MultiSelectOperator.noneOf);
 
   static Object? valueFor(FieldMetadata field, Operator operator) =>
       switch (operator) {

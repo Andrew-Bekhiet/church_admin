@@ -34,7 +34,7 @@ class Person extends ViewableWithIDAndImage
   final List<FamilyPhoneContact> familyContacts;
 
   @LocalDateTimeConverter()
-  @QueryableField(label: 'تاريخ الميلاد')
+  @QueryableField(label: 'تاريخ الميلاد', dateOnly: true)
   final DateTime? birthdate;
 
   @QueryableField.birthday(label: 'يوم وشهر الميلاد')
@@ -140,11 +140,19 @@ class Person extends ViewableWithIDAndImage
   final String? blurhash;
 
   @JsonKey(name: 'latestConfession')
-  @QueryableField(label: 'أخر اعتراف', graphqlName: 'lastConfessionDay')
+  @QueryableField(
+    label: 'أخر اعتراف',
+    graphqlName: 'lastConfessionDay',
+    dateOnly: true,
+  )
   final LastRecordedByInfo? lastConfession;
 
   @JsonKey(name: 'latestKodas')
-  @QueryableField(label: 'أخر تناول', graphqlName: 'lastKodasDay')
+  @QueryableField(
+    label: 'أخر تناول',
+    graphqlName: 'lastKodasDay',
+    dateOnly: true,
+  )
   final LastRecordedByInfo? lastKodas;
 
   @QueryableField(label: 'أخر حضور', graphqlName: 'lastAttendedAt')
@@ -211,18 +219,27 @@ class Person extends ViewableWithIDAndImage
   final String? uid;
 
   @JsonKey(name: 'kodases')
-  @QueryableField.history(label: 'سجل التناول', graphqlName: 'kodases')
+  @QueryableField.history(
+    label: 'سجل التناول',
+    graphqlName: 'kodases',
+    dateOnly: true,
+  )
   final List<LastRecordedByInfo>? kodasHistory;
 
   @JsonKey(name: 'attendanceRecords')
   @QueryableField.history(
     label: 'سجل الحضور',
     graphqlName: 'attendanceRecords',
+    type: AttendanceRecord,
   )
   final List<LastRecordedByInfo>? attendanceHistory;
 
   @JsonKey(name: 'confessions')
-  @QueryableField.history(label: 'سجل الاعتراف', graphqlName: 'confessions')
+  @QueryableField.history(
+    label: 'سجل الاعتراف',
+    graphqlName: 'confessions',
+    dateOnly: true,
+  )
   final List<LastRecordedByInfo>? confessionHistory;
 
   @JsonKey(name: 'calls')
@@ -385,10 +402,7 @@ class Person extends ViewableWithIDAndImage
   @override
   Json toJson() => _$PersonToJson(this);
 
-  bool spiritDataUpToDate({
-    Duration maxAge = maxSpiritDataAge,
-    DateTime? now,
-  }) {
+  bool spiritDataUpToDate({Duration maxAge = maxSpiritDataAge, DateTime? now}) {
     final earliestDate = (now ?? DateTime.now()).subtract(maxAge);
 
     return lastKodas != null &&
@@ -416,10 +430,8 @@ class PersonFields extends _PersonFields {
     label: 'رقم الهاتف',
   );
 
-  FieldMetadata<Area> get area => address.redirectTo(
-    AddressFields().area,
-    isExpandable: false,
-  );
+  FieldMetadata<Area> get area =>
+      address.redirectTo(AddressFields().area, isExpandable: false);
 
   FieldMetadata<Street> get street =>
       address.redirectTo(AddressFields().street, isExpandable: false);
@@ -492,9 +504,7 @@ class PersonFields extends _PersonFields {
 
   @override
   Map<String, FieldMetadata<Object>> get allFieldsByName {
-    return {
-      for (final field in allFields) field.name: field,
-    };
+    return {for (final field in allFields) field.name: field};
   }
 
   PersonFields();
