@@ -23,9 +23,6 @@ function history.maybe_remove_group_archived_default_meeting()
 function history.maybe_remove_service_archived_default_meeting()
 function public.check_group_default_meeting_belongs_to_group()
 function public.check_service_default_meeting_belongs_to_service()
-function public.family_inserted_in_current_transaction(families)
-function public.person_inserted_in_current_transaction(persons)
-function public.remember_row_inserted_in_transaction()
 function public.set_current_timestamp_updated_at()
 function public.soft_delete_trigger()
 trigger auth.users_admin_on.sync_users_permissions_by_entity_id_cache
@@ -40,11 +37,9 @@ trigger public.areas_streets.sync_users_permissions_by_entity_id_cache
 trigger public.classes.edit_history
 trigger public.classes.soft_delete_classes
 trigger public.classes.sync_users_permissions_by_entity_id_cache
-trigger public.families.remember_family_inserted_in_transaction
 trigger public.groups.check_group_default_meeting_belongs_to_group
 trigger public.groups.edit_history
 trigger public.groups.soft_delete_groups
-trigger public.persons.remember_person_inserted_in_transaction
 trigger public.persons.sync_users_permissions_by_entity_id_cache
 trigger public.persons_groups.sync_users_permissions_by_entity_id_cache
 trigger public.persons_services.sync_users_permissions_by_entity_id_cache
