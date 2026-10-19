@@ -23,8 +23,8 @@ defmodule ChurchAdminWeb.Graphql.AccountsReadGapsTest do
   defp record_edit!(table, record_id, time, recorder) do
     Ecto.Adapters.SQL.query!(
       ChurchAdmin.Repo,
-      ~s|insert into history.edit_history ("table", record_id, "time", recorded_by) values ($1, $2, $3, $4)|,
-      [table, Ecto.UUID.dump!(record_id), time, Ecto.UUID.dump!(recorder.uid)]
+      ~s|insert into history.edit_history ("table", record_id, "time", recorded_by, user_role) values ($1, $2, $3, $4, $5)|,
+      [table, Ecto.UUID.dump!(record_id), time, Ecto.UUID.dump!(recorder.uid), "admin"]
     )
   end
 
