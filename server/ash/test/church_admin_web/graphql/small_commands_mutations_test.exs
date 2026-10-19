@@ -31,7 +31,6 @@ defmodule ChurchAdminWeb.Graphql.SmallCommandsMutationsTest do
     """
 
     setup %{world: world} do
-      ChurchAdmin.DataCase.set_system_db_session()
       user = world.users.approved_plain
 
       Ash.Seed.seed!(Preferences, %{
@@ -88,7 +87,6 @@ defmodule ChurchAdminWeb.Graphql.SmallCommandsMutationsTest do
     """
 
     setup %{world: world} do
-      ChurchAdmin.DataCase.set_system_db_session()
       user = world.users.approved_plain
       Ash.Seed.seed!(Preferences, %{uid: user.uid, dark_theme: true})
       {:ok, user: user}

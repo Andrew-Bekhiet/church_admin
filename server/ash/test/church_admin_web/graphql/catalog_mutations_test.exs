@@ -85,7 +85,6 @@ defmodule ChurchAdminWeb.Graphql.CatalogMutationsTest do
 
   test "createPersonType reports a taken order as person-type/order-taken",
        %{conn: conn, world: world} do
-    ChurchAdmin.DataCase.set_system_db_session()
     %{rows: [[taken]]} = ChurchAdmin.Repo.query!("select nextval('person_types_order_seq')")
 
     ChurchAdmin.Repo.query!(

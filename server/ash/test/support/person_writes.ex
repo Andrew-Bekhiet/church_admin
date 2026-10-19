@@ -13,7 +13,6 @@ defmodule ChurchAdmin.PersonWrites do
   alias ChurchAdmin.Errors.{Codes, DomainError}
   alias ChurchAdmin.People.Person
   alias ChurchAdmin.Repo
-  alias ChurchAdmin.Repo.HasuraSession
 
   @messages %{
     "Person must have at least one of (family, store, service, group, uid)" =>
@@ -28,7 +27,7 @@ defmodule ChurchAdmin.PersonWrites do
   }
 
   def create_person(actor, attrs) do
-    transact(actor, fn ->
+    transact(fn ->
       Person
       |> Ash.Changeset.for_create(:create_person, attrs, actor: actor)
       |> Ash.create()
@@ -36,7 +35,7 @@ defmodule ChurchAdmin.PersonWrites do
   end
 
   def update_person(actor, id, attrs) do
-    transact(actor, fn ->
+    transact(fn ->
       Person
       |> Ash.get!(id, authorize?: false)
       |> Ash.Changeset.for_update(:update_person, attrs, actor: actor)
@@ -48,7 +47,7 @@ defmodule ChurchAdmin.PersonWrites do
   def hard_delete_person(actor, id), do: destroy(actor, id, :hard_destroy)
 
   defp destroy(actor, id, action) do
-    transact(actor, fn ->
+    transact(fn ->
       Person
       |> Ash.get!(id, authorize?: false)
       |> Ash.Changeset.for_destroy(action, %{}, actor: actor)
@@ -56,12 +55,10 @@ defmodule ChurchAdmin.PersonWrites do
     end)
   end
 
-  defp transact(actor, fun) do
+  defp transact(fun) do
     fire_fixtures_deferred_checks!()
 
     Repo.transaction(fn ->
-      HasuraSession.set_for_transaction(Repo, actor)
-
       case fun.() do
         {:ok, person} ->
           Repo.query!("set constraints all immediate")
@@ -81,7 +78,6 @@ defmodule ChurchAdmin.PersonWrites do
   end
 
   defp fire_fixtures_deferred_checks! do
-    ChurchAdmin.DataCase.set_system_db_session()
     Repo.query!("set constraints all immediate")
     Repo.query!("set constraints all deferred")
   end

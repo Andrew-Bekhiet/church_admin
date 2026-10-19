@@ -35,7 +35,6 @@ defmodule ChurchAdminWeb.Graphql.CatalogQueriesTest do
   end
 
   test "a lookup is filtered by isHidden and sorted by name", %{conn: conn, world: world} do
-    ChurchAdmin.DataCase.set_system_db_session()
     Ash.Seed.seed!(Church, %{name: "b shown", is_hidden: false})
     Ash.Seed.seed!(Church, %{name: "a shown", is_hidden: false})
     Ash.Seed.seed!(Church, %{name: "hidden", is_hidden: true})
@@ -49,7 +48,6 @@ defmodule ChurchAdminWeb.Graphql.CatalogQueriesTest do
   end
 
   test "person types sort by family admin first, then order", %{conn: conn, world: world} do
-    ChurchAdmin.DataCase.set_system_db_session()
     Ash.Seed.seed!(PersonType, %{name: "plain"})
     Ash.Seed.seed!(PersonType, %{name: "admin", is_family_admin: true})
 
@@ -63,7 +61,6 @@ defmodule ChurchAdminWeb.Graphql.CatalogQueriesTest do
   end
 
   test "a whole lookup list loads in one page of up to 1000", %{conn: conn, world: world} do
-    ChurchAdmin.DataCase.set_system_db_session()
     for n <- 1..30, do: Ash.Seed.seed!(Church, %{name: "church #{n}"})
 
     %{"data" => %{"churches" => page}} =

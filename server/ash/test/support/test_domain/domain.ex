@@ -12,7 +12,6 @@ defmodule ChurchAdmin.TestDomain do
     resource ChurchAdmin.TestDomain.EditedThing
     resource ChurchAdmin.TestDomain.ErrorProbe
     resource ChurchAdmin.TestDomain.GuardedThing
-    resource ChurchAdmin.TestDomain.HasuraSessionProbe
     resource ChurchAdmin.TestDomain.LookupProbe
     resource ChurchAdmin.TestDomain.PersonChildProbe
     resource ChurchAdmin.TestDomain.StampedNote

@@ -199,8 +199,6 @@ defmodule ChurchAdmin.Attendance.MeetingAndAttendanceCommandsTest do
          ctx do
       actor = actor_with(["approved"], [{:service, ctx.service.id, record_persons?: true}])
 
-      ChurchAdmin.DataCase.set_system_db_session()
-
       ChurchAdmin.Repo.query!(
         "update services set default_meeting_id = $2::text::uuid where id = $1::text::uuid",
         [ctx.service.id, ctx.meeting.id]

@@ -16,7 +16,7 @@ defmodule ChurchAdmin.PlacesWorld do
     * districts `d1` and `d2`
   """
 
-  alias ChurchAdmin.{DataCase, Factory}
+  alias ChurchAdmin.Factory
   alias ChurchAdmin.Places.{AreasStreetsSync, District, Street}
 
   @cell_size 0.02
@@ -46,7 +46,6 @@ defmodule ChurchAdmin.PlacesWorld do
     do: point({@origin_longitude + index * @cell_size + offset, @origin_latitude + offset})
 
   def extend!(world) do
-    DataCase.set_system_db_session()
     %{records: records} = world
 
     a1 = Ash.Seed.update!(records.a1, %{bounds: cell_polygon(0)})
@@ -91,8 +90,6 @@ defmodule ChurchAdmin.PlacesWorld do
   end
 
   defp street!(line, attrs \\ []) do
-    DataCase.set_system_db_session()
-
     Ash.Seed.seed!(
       Street,
       Map.merge(
@@ -103,7 +100,6 @@ defmodule ChurchAdmin.PlacesWorld do
   end
 
   defp district!(name) do
-    DataCase.set_system_db_session()
     Ash.Seed.seed!(District, %{name: name})
   end
 end

@@ -33,7 +33,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollIntegrityTest do
 
       servant = user!()
       grant!(servant, :service, staying_service.id, study_year: 1)
-      committed!()
 
       {{:ok, _counts}, written} = with_edit_history_written(fn -> Roll.run(@season) end)
 
@@ -95,7 +94,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollIntegrityTest do
     test "a pre-existing person without any container that the roll does not update does not block the roll" do
       service = graded_service!(1, 6)
       pupil = pupil!(service, 1)
-      committed!()
       person!(study_year_id: nil)
 
       Roll.run_when_due(nayrouz(@season))
@@ -108,7 +106,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollIntegrityTest do
       in_range = graded_service!(1, 6)
       out_of_range = graded_service!(3, 5)
       pupil = pupil!(in_range, 1)
-      committed!()
       in_service!(pupil, out_of_range)
 
       Roll.run_when_due(nayrouz(@season))
@@ -123,7 +120,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollIntegrityTest do
     test "a roll holds its advisory lock and blocks writers to the tables it rolls until it ends" do
       service = graded_service!(1, 6)
       pupil!(service, 1)
-      committed!()
 
       {:ok, _counts} = Roll.run(@season)
 

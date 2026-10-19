@@ -42,7 +42,6 @@ defmodule ChurchAdmin.Notifications.StudyYearRollAlertTest do
   end
 
   defp device_token!(user, token) do
-    set_system_db_session()
     Ash.Seed.seed!(DeviceToken, %{uid: user.uid, token: token})
   end
 
