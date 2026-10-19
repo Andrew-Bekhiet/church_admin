@@ -2,14 +2,22 @@ defmodule ChurchAdmin.Activity.LatestCall do
   use Ash.Resource,
     domain: ChurchAdmin.Activity,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshGraphql.Resource]
+    extensions: [AshGraphql.Resource],
+    fragments: [ChurchAdmin.Authz.Fragments.PersonChild]
 
   alias ChurchAdmin.Accounts.User
+  alias ChurchAdmin.Authz.Checks.System
   alias ChurchAdmin.People.Person
   alias ChurchAdmin.Types.Text
 
   graphql do
     type :latest_call
+
+    relationships [:person, :user]
+
+    queries do
+      list :latest_calls, :read
+    end
   end
 
   postgres do
@@ -20,7 +28,21 @@ defmodule ChurchAdmin.Activity.LatestCall do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
   end
 
   attributes do

@@ -12,6 +12,22 @@
 
 defmodule ChurchAdmin.Equivalence do
   alias ChurchAdmin.Accounts.{ScopeGrant, User, UserPermission}
+
+  alias ChurchAdmin.Activity.{
+    ActivityDay,
+    Call,
+    Confession,
+    Edit,
+    Kodas,
+    LatestCall,
+    LatestConfession,
+    LatestEdit,
+    LatestFatherVisit,
+    LatestKodas,
+    LatestVisit,
+    Visit
+  }
+
   alias ChurchAdmin.Authz.ActorLoader
   alias ChurchAdmin.Catalog
   alias ChurchAdmin.Organization.{Class, Group, Service}
@@ -126,8 +142,44 @@ defmodule ChurchAdmin.Equivalence do
         hasura: "authUsersAdminOn",
         resource: ScopeGrant,
         key: [{"permissionId", :permission_id}]
+      },
+      %{
+        name: "activityDays",
+        hasura: "historyAttendanceDays",
+        resource: ActivityDay,
+        key: [{"day", :day}]
+      },
+      %{
+        name: "confessions",
+        hasura: "historyConfessionHistory",
+        resource: Confession,
+        key: [{"id", :id}]
+      },
+      %{name: "kodases", hasura: "historyKodasHistory", resource: Kodas, key: [{"id", :id}]},
+      %{
+        name: "calls",
+        hasura: "historyCallHistory",
+        resource: Call,
+        key: [{"personId", :person_id}, {"time", :time}]
+      },
+      %{
+        name: "visits",
+        hasura: "historyVisitHistory",
+        resource: Visit,
+        key: [{"visitId", :visit_id}]
+      },
+      %{
+        name: "edits",
+        hasura: "historyEditHistory",
+        resource: Edit,
+        key: [
+          {"table", :table},
+          {"recordId", :record_id},
+          {"time", :time},
+          {"recordedBy", :recorded_by}
+        ]
       }
-    ] ++ catalog_roots()
+    ] ++ catalog_roots() ++ latest_roots()
   end
 
   defp catalog_roots do
@@ -159,6 +211,56 @@ defmodule ChurchAdmin.Equivalence do
       ]
   end
 
+  # Hasura tracks the latest-per-record views without root fields, reachable
+  # only through the entity relationships (`persons { lastCall { ... } }`), so
+  # these roots page the entity and read the nested row. Ash rows are limited
+  # to the entities Hasura showed the user, because the view can hold rows of
+  # entities the user cannot read as entities (soft-deleted persons).
+  defp latest_roots do
+    person_logs =
+      for {name, path, resource} <- [
+            {"latestCalls", "lastCall", LatestCall},
+            {"latestConfessions", "lastConfession", LatestConfession},
+            {"latestKodases", "lastKodas", LatestKodas}
+          ] do
+        %{
+          name: name,
+          hasura: "persons",
+          via: %{path: path, id_attribute: :person_id, table: nil},
+          resource: resource,
+          key: [{"personId", :person_id}]
+        }
+      end
+
+    record_logs =
+      for {entity, table, paths} <- [
+            {"persons", "persons", [{"lastEdit", LatestEdit}, {"lastVisit", LatestVisit}]},
+            {"families", "families",
+             [
+               {"lastEdit", LatestEdit},
+               {"lastVisit", LatestVisit},
+               {"lastFatherVisit", LatestFatherVisit}
+             ]},
+            {"services", "services", [{"lastEdit", LatestEdit}]},
+            {"classes", "classes", [{"lastEdit", LatestEdit}]},
+            {"groups", "groups", [{"lastEdit", LatestEdit}]},
+            {"areas", "areas", [{"lastEdit", LatestEdit}]},
+            {"streets", "streets", [{"lastEdit", LatestEdit}, {"lastVisit", LatestVisit}]},
+            {"stores", "stores", [{"lastEdit", LatestEdit}]}
+          ],
+          {path, resource} <- paths do
+        %{
+          name: "#{entity}.#{path}",
+          hasura: entity,
+          via: %{path: path, id_attribute: :record_id, table: table},
+          resource: resource,
+          key: [{"table", :table}, {"recordId", :record_id}]
+        }
+      end
+
+    person_logs ++ record_logs
+  end
+
   def run(argv) do
     {opts, uids} =
       OptionParser.parse!(argv,
@@ -187,8 +289,8 @@ defmodule ChurchAdmin.Equivalence do
   end
 
   defp compare(hasura, uid, root) do
-    hasura_rows = hasura_rows(hasura, uid, root)
-    ash_rows = ash_rows(uid, root)
+    {hasura_rows, entity_ids} = hasura_rows(hasura, uid, root)
+    ash_rows = ash_rows(uid, root, entity_ids)
     user = uid || "anonymous"
 
     missing =
@@ -208,22 +310,47 @@ defmodule ChurchAdmin.Equivalence do
     {map_size(hasura_rows), missing ++ extra ++ flags}
   end
 
-  defp hasura_rows(_hasura, nil, _root), do: %{}
+  defp hasura_rows(_hasura, nil, _root), do: {%{}, MapSet.new()}
+
+  defp hasura_rows(hasura, uid, %{via: via} = root) do
+    page = Map.get(root, :page, 100_000)
+    nested = Enum.map_join(root.key, " ", &elem(&1, 0))
+
+    Stream.iterate(0, &(&1 + page))
+    |> Enum.reduce_while({%{}, MapSet.new()}, fn offset, {rows, ids} ->
+      document =
+        "{ rows: #{root.hasura}(limit: #{page}, offset: #{offset}, orderBy: [{id: ASC}]) " <>
+          "{ id #{via.path} { #{nested} } } }"
+
+      page_rows = hasura_query!(hasura, uid, document)
+      ids = Enum.into(page_rows, ids, & &1["id"])
+
+      rows =
+        for entity <- page_rows, nested_row = entity[via.path], into: rows do
+          {hasura_key(nested_row, root), false}
+        end
+
+      if length(page_rows) < page, do: {:halt, {rows, ids}}, else: {:cont, {rows, ids}}
+    end)
+  end
 
   defp hasura_rows(hasura, uid, root) do
     page = Map.get(root, :page, 100_000)
     fields = Enum.map(root.key, &elem(&1, 0)) ++ List.wrap(flag_field(root))
     order = Enum.map_join(root.key, ", ", fn {field, _} -> "{#{field}: ASC}" end)
 
-    Stream.iterate(0, &(&1 + page))
-    |> Enum.reduce_while(%{}, fn offset, acc ->
-      document =
-        "{ rows: #{root.hasura}(limit: #{page}, offset: #{offset}, orderBy: [#{order}]) { #{Enum.join(fields, " ")} } }"
+    rows =
+      Stream.iterate(0, &(&1 + page))
+      |> Enum.reduce_while(%{}, fn offset, acc ->
+        document =
+          "{ rows: #{root.hasura}(limit: #{page}, offset: #{offset}, orderBy: [#{order}]) { #{Enum.join(fields, " ")} } }"
 
-      rows = hasura_query!(hasura, uid, document)
-      acc = Enum.into(rows, acc, &{hasura_key(&1, root), &1[flag_field(root)] == true})
-      if length(rows) < page, do: {:halt, acc}, else: {:cont, acc}
-    end)
+        rows = hasura_query!(hasura, uid, document)
+        acc = Enum.into(rows, acc, &{hasura_key(&1, root), &1[flag_field(root)] == true})
+        if length(rows) < page, do: {:halt, acc}, else: {:cont, acc}
+      end)
+
+    {rows, nil}
   end
 
   defp hasura_query!(hasura, uid, document) do
@@ -243,23 +370,45 @@ defmodule ChurchAdmin.Equivalence do
     end
   end
 
-  defp ash_rows(uid, root) do
+  defp ash_rows(uid, root, entity_ids) do
     actor = if uid, do: ActorLoader.load(uid)
     attributes = Enum.map(root.key, &elem(&1, 1))
 
     root.resource
     |> Ash.Query.load(List.wrap(flag_attribute(root)))
     |> Ash.read!(actor: actor, page: false)
+    |> Enum.filter(&of_entity_hasura_showed?(&1, root, entity_ids))
     |> Map.new(fn row ->
-      {Enum.map_join(attributes, "|", &to_string(Map.fetch!(row, &1))), ash_flag(row, root)}
+      {Enum.map_join(attributes, "|", &key_part(Map.fetch!(row, &1))), ash_flag(row, root)}
     end)
   end
+
+  defp of_entity_hasura_showed?(_row, %{via: _via}, nil), do: false
+
+  defp of_entity_hasura_showed?(row, %{via: via}, entity_ids) do
+    (is_nil(via.table) or row.table == via.table) and
+      to_string(Map.fetch!(row, via.id_attribute)) in entity_ids
+  end
+
+  defp of_entity_hasura_showed?(_row, _root, _entity_ids), do: true
 
   defp ash_flag(row, %{flag: {_, attribute}}), do: Map.fetch!(row, attribute) == true
   defp ash_flag(_row, _root), do: false
 
   defp hasura_key(row, root),
-    do: Enum.map_join(root.key, "|", fn {field, _} -> to_string(row[field]) end)
+    do: Enum.map_join(root.key, "|", fn {field, _} -> key_part(row[field]) end)
+
+  # Hasura prints timestamps as "2026-03-01T09:00:00.1+00:00", Ash as DateTime.
+  defp key_part(%DateTime{} = value), do: value |> DateTime.to_unix(:microsecond) |> to_string()
+
+  defp key_part(value) when is_binary(value) do
+    case DateTime.from_iso8601(value) do
+      {:ok, datetime, _offset} -> key_part(datetime)
+      {:error, _reason} -> value
+    end
+  end
+
+  defp key_part(value), do: to_string(value)
 
   defp flag_field(%{flag: {field, _}}), do: field
   defp flag_field(_root), do: nil

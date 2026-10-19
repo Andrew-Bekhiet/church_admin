@@ -2,12 +2,21 @@ defmodule ChurchAdmin.Activity.ActivityDay do
   use Ash.Resource,
     domain: ChurchAdmin.Activity,
     data_layer: AshPostgres.DataLayer,
+    authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Activity.{Confession, Kodas}
+  alias ChurchAdmin.Authz.Checks.System
 
   graphql do
     type :activity_day
+
+    relationships [:confessions, :kodases]
+
+    queries do
+      get :activity_day, :read
+      list :activity_days, :read
+    end
   end
 
   postgres do
@@ -18,7 +27,25 @@ defmodule ChurchAdmin.Activity.ActivityDay do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      primary? true
+
+      pagination keyset?: true,
+                 countable: true,
+                 required?: false,
+                 default_limit: 100,
+                 max_page_size: 1000
+    end
+  end
+
+  policies do
+    bypass System do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if actor_present()
+    end
   end
 
   attributes do
