@@ -31,11 +31,7 @@ defmodule ChurchAdmin.Activity.Call do
     table "call_history"
     repo ChurchAdmin.Repo
 
-    migration_defaults time: ~S[fragment("now()")],
-                       recorded_by:
-                         ~S[fragment("(((current_setting('hasura.user'::text, true))::json ->> 'x-hasura-user-id'::text))::uuid")],
-                       user_role:
-                         ~S[fragment("COALESCE(((current_setting('hasura.user'::text, true))::json ->> 'x-hasura-role'::text), 'postgres'::text)")]
+    migration_defaults time: ~S[fragment("now()")]
 
     references do
       reference :person, on_delete: :nothing, on_update: :nothing

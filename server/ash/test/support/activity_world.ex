@@ -121,7 +121,14 @@ defmodule ChurchAdmin.ActivityWorld do
   defp seed_record_logs!(world) do
     for {{table, id}, _target} <- world.targets do
       seed!(Visit, %{table: table, record_id: id, time: at(200), recorded_by: world.recorded_by})
-      seed!(Edit, %{table: table, record_id: id, time: at(200), recorded_by: world.recorded_by})
+
+      seed!(Edit, %{
+        table: table,
+        record_id: id,
+        time: at(200),
+        recorded_by: world.recorded_by,
+        user_role: "user"
+      })
     end
 
     m1 = world.records.m1.id
@@ -144,7 +151,14 @@ defmodule ChurchAdmin.ActivityWorld do
       recorded_by: world.recorded_by
     })
 
-    seed!(Edit, %{table: "persons", record_id: m1, time: at(250), recorded_by: world.recorded_by})
+    seed!(Edit, %{
+      table: "persons",
+      record_id: m1,
+      time: at(250),
+      recorded_by: world.recorded_by,
+      user_role: "user"
+    })
+
     world
   end
 
