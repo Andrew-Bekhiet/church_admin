@@ -64,4 +64,14 @@ class QueryableType<T extends Object> with Equatable {
   bool hasField(String fieldName) {
     return fieldsMetadataByName.containsKey(fieldName);
   }
+
+  FieldMetadata topLevelFieldOf(FieldMetadata field) => switch (field) {
+    RedirectingFieldMetadata(isExpandable: true, :final parentField)
+        when orderableFields.contains(parentField) =>
+      parentField,
+    _ => field,
+  };
+
+  bool canOrderBy(FieldMetadata field) =>
+      orderableFields.contains(topLevelFieldOf(field));
 }

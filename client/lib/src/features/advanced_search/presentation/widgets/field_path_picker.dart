@@ -11,12 +11,7 @@ class FieldPathPicker extends StatelessWidget {
   static FieldMetadata topLevelFieldOf(
     QueryableType queryableType,
     FieldMetadata field,
-  ) => switch (field) {
-    RedirectingFieldMetadata(isExpandable: true, :final parentField)
-        when queryableType.orderableFields.contains(parentField) =>
-      parentField,
-    _ => field,
-  };
+  ) => queryableType.topLevelFieldOf(field);
 
   const FieldPathPicker({
     required this.queryableType,
