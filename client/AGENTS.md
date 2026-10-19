@@ -4,7 +4,7 @@ Loaded when working under `client/`. `packages/AGENTS.md` points here, so the sa
 
 `client/analysis_options.yaml` is the authority. It loads solid_lints 2 as an analyzer plugin and switches several of its diagnostics off; what it enables (`member_ordering`, `avoid_multiple_declarations_per_file`, `document_ignores`, `newline_before_return`, `prefer_match_file_name`, …) is enforced by the analyzer and not restated here.
 
-Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.dart`, `**.gql.dart`, `**.graphql.dart` and `**/__generated__/**`, and `client/build.yaml` stamps every `source_gen` output with a `// ignore_for_file: type=lint` preamble. When generated output breaks a rule that matters, fix the generator rather than the output.
+Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.dart`, `**.graphql.dart` and `**/__generated__/**`, and `client/build.yaml` stamps every `source_gen` output with a `// ignore_for_file: type=lint` preamble. When generated output breaks a rule that matters, fix the generator rather than the output.
 
 ## Structure
 
@@ -84,4 +84,4 @@ No path argument: a directory argument such as `lib` silently drops every solid_
 
 **Tests**: prefer the test bundle for the full suite, from `client/`: `fvm flutter test --dart-define CI=true test/test_bundle.dart $(scripts/generate_test_bundle.sh)`. It is much faster than a bare `fvm flutter test`; see [flutter/flutter#90225](https://github.com/flutter/flutter/issues/90225).
 
-GraphQL codegen has its own sequence and gotchas: use the `graphql-codegen` skill (`.claude/skills/graphql-codegen/SKILL.md`).
+GraphQL documents are `.graphql` files compiled against the Ash SDL `lib/src/core/graphql/schema.graphql`; `scripts/regenerate_graphql.sh` rebuilds every generated file. The sequence and its gotchas are in the `graphql-codegen` skill (`.claude/skills/graphql-codegen/SKILL.md`).

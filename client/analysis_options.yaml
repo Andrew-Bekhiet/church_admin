@@ -59,7 +59,6 @@ analyzer:
     - "**.g.dart"
     - "**.freezed.dart"
     - "**.gr.dart"
-    - "**.gql.dart"
     - "**.graphql.dart"
     - "**/__generated__/**"
     - android/**

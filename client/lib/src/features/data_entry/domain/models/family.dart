@@ -123,48 +123,6 @@ class Family extends ViewableWithIDAndImage
   @override
   Json toJson() => _$FamilyToJson(this);
 
-  Input_FamiliesInsertInput toInsertInput() => Input_FamiliesInsertInput(
-    name: name,
-    address: address != null
-        ? Input_AddressesObjRelInsertInput(
-            data: address!.copyWith(family: null).toInsertInput(),
-          )
-        : null,
-    status: status.name,
-    marriageDate:
-        status == MartialStatus.widowed ||
-            status == MartialStatus.widowedWithoutChildren
-        ? null
-        : marriageDate,
-    deceasedSpouseName:
-        status == MartialStatus.widowed ||
-            status == MartialStatus.widowedWithoutChildren
-        ? deceasedSpouseName
-        : null,
-    churchId: church?.id.toUuid(),
-    notes: notes,
-    color: colorToInt(color),
-    unclaimedContacts: Input_ContactsArrRelInsertInput(
-      data: contacts.map((f) => f.toInsertInput()).toList(),
-    ),
-    visitHistory: Input_HistoryVisitHistoryArrRelInsertInput(
-      data: [
-        if (lastVisit != null)
-          Input_HistoryVisitHistoryInsertInput(
-            isFatherVisit: false,
-            table: 'families',
-            time: lastVisit!.time,
-          ),
-        if (lastFatherVisit != null)
-          Input_HistoryVisitHistoryInsertInput(
-            isFatherVisit: true,
-            table: 'families',
-            time: lastFatherVisit!.time,
-          ),
-      ],
-    ),
-  );
-
   Json toCommandInput() => {
     'name': name,
     'notes': notes,

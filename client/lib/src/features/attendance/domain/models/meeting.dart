@@ -22,8 +22,10 @@ class Meeting extends ViewableWithID
   @QueryableField(label: 'الاسم')
   final String name;
 
+  @JsonKey(defaultValue: MeetingAudience.personsAndServants)
   final MeetingAudience audience;
 
+  @JsonKey(defaultValue: false)
   @QueryableField(label: 'isArchived')
   final bool isArchived;
 
@@ -79,18 +81,4 @@ class Meeting extends ViewableWithID
 
   @override
   Json toJson() => _$MeetingToJson(this);
-
-  Input_HistoryMeetingsInsertInput toInsertInput() {
-    return Input_HistoryMeetingsInsertInput(
-      name: name,
-      audience: audience.name,
-      color: colorToInt(color),
-      isArchived: isArchived,
-      showKodasCheckbox: showKodasCheckbox,
-      serviceId: service?.id.toUuid() ?? serviceId?.toUuid(),
-      serviceStudyYear: serviceStudyYear,
-      serviceGender: serviceGender,
-      groupId: group?.id.toUuid() ?? groupId?.toUuid(),
-    );
-  }
 }

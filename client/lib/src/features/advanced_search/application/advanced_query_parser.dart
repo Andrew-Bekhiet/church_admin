@@ -16,7 +16,6 @@ class AdvancedQueryParser {
     return streamableDAO.streamAllWithConfig(
       overrideTotalLimit: enabledQuery.limit,
       streamAllConfig: streamableDAO.baseStreamAllConfig,
-      streamCountConfig: streamableDAO.baseStreamCountConfig,
       searchQuery: searchStream,
       where: Stream.value([
         Filter(

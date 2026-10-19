@@ -750,9 +750,6 @@ class _UnknownOperator implements Operator<Object?> {
   bool get acceptsValue => true;
 
   @override
-  Json queryToJson(FieldMetadata field, Object? filterValue) => {};
-
-  @override
   Object? serializeValue(Object? value) => value;
 
   @override

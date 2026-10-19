@@ -15,11 +15,6 @@ enum SpatialOperator implements Operator<Polygon> {
   const SpatialOperator();
 
   @override
-  Json queryToJson(FieldMetadata field, Polygon filterValue) {
-    return field.queryToJson({'_stIntersects': filterValue.asPostGISPolygon()});
-  }
-
-  @override
   Object serializeValue(Polygon value) {
     return value.asPostGISPolygon()!;
   }

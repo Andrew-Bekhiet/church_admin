@@ -97,16 +97,9 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
       ),
       link: Link.concat(
         loggingService.loggingLink,
-        Link.split(
-          (request) => request.isSubscription,
-          LegacyHasuraSubscriptionLink(
-            credentialsStream: ref.watch(authLinkCredentialsProvider),
-            url: graphqlUrl,
-          ),
-          AddAuthLink(
-            credentialsStream: ref.watch(authLinkCredentialsProvider),
-            url: graphqlUrl,
-          ),
+        AddAuthLink(
+          credentialsStream: ref.watch(authLinkCredentialsProvider),
+          url: graphqlUrl,
         ),
       ),
       cache: GraphQLCache(

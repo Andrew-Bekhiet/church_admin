@@ -144,42 +144,4 @@ void main() {
       expect(meeting.groupId, isNull);
     });
   });
-
-  group('Meeting.toInsertInput', () {
-    test('builds insert input with all fields', () {
-      final meeting = _meeting(
-        name: 'New Meeting',
-        audience: MeetingAudience.personsAndServants,
-        color: const Color(0xFF2196F3),
-        serviceId: 'svc-abc',
-        serviceStudyYear: 2,
-        serviceGender: false,
-      );
-      final input = meeting.toInsertInput();
-      expect(input.name, 'New Meeting');
-      expect(input.audience, 'personsAndServants');
-      expect(input.isArchived, isFalse);
-      expect(input.color, isNotNull);
-      expect(input.serviceStudyYear, 2);
-      expect(input.serviceGender, isFalse);
-    });
-
-    test('builds insert input for group meeting', () {
-      final meeting = _meeting(
-        name: 'Group Meeting',
-        groupId: 'grp-abc',
-      );
-      final input = meeting.toInsertInput();
-      expect(input.groupId, isNotNull);
-      expect(input.serviceId, isNull);
-      expect(input.color, isNull);
-    });
-
-    test('audience serialises as enum name string', () {
-      for (final aud in MeetingAudience.values) {
-        final input = _meeting(audience: aud).toInsertInput();
-        expect(input.audience, aud.name);
-      }
-    });
-  });
 }

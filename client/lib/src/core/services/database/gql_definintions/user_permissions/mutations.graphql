@@ -2,6 +2,7 @@ mutation updateUserPermissions($id: ID!, $input: UpdateUserPermissionsInput) {
   updateUserPermissions(id: $id, input: $input) {
     result {
       id
+      uid
       permissions {
         id
         permission
@@ -15,6 +16,7 @@ mutation approveUser($id: ID!) {
   approveUser(id: $id) {
     result {
       id
+      uid
       permissions {
         id
         permission
@@ -27,6 +29,7 @@ mutation unapproveUser($id: ID!) {
   unapproveUser(id: $id) {
     result {
       id
+      uid
       permissions {
         id
         permission

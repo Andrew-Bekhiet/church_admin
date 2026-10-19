@@ -44,7 +44,7 @@
       "options": {
         "cwd": "${workspaceFolder}/client"
       },
-      "command": "rm -r lib/src/core/graphql/__generated__/ && fvm dart run build_runner build && ./scripts/split_schema_graphql_dart.sh && rm -f lib/src/core/graphql/__generated__/hasura_schema.gql.dart.bak",
+      "command": "./scripts/regenerate_graphql.sh",
       "problemMatcher": []
     },
     {

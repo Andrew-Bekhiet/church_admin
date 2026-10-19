@@ -11,12 +11,20 @@ import 'gql_key_field_checker.dart';
 /// occurrence into its parent (a profiled jank source).
 void main() {
   const rules = KeyFieldRules(
-    exemptions: [],
-    transientSuffixes: KeyFieldRules.hasuraTransientSuffixes,
+    exemptions: [
+      (operation: 'appDownloadLink', field: 'appDownloadLink'),
+      (operation: 'applyInvitationCode', field: 'applyInvitationCode'),
+      (operation: 'exportData', field: 'exportData'),
+      (operation: 'photoDownloadUrl', field: 'photoDownloadUrl'),
+      (operation: 'requestPhotoUpload', field: 'requestPhotoUpload'),
+      (operation: 'tryClaimAccount', field: 'tryClaimAccount'),
+    ],
+    transientSuffixes: KeyFieldRules.ashTransientSuffixes,
+    transientPrefixes: KeyFieldRules.ashTransientPrefixes,
   );
 
   test('every keyed-type selection selects all of its key fields', () {
-    const schemaPath = 'lib/src/core/graphql/hasura_schema.gql';
+    const schemaPath = 'lib/src/core/graphql/schema.graphql';
     const operationsDir = 'lib/src/core/services/database/gql_definintions';
 
     final schema = GqlSchemaIndex.fromDocument(
@@ -83,8 +91,8 @@ void main() {
     }
 
     const schema = '''
-      type query_root { rows: AuthUsersData, node: Node }
-      type AuthUsersData { uid: String, name: String }
+      type Query { rows: User, node: Node }
+      type User { uid: String, name: String }
       type Node { name: String }
     ''';
 
@@ -115,7 +123,7 @@ void main() {
 
     test('passes an unkeyed object selection that includes id', () {
       const withId = '''
-        type query_root { node: Node }
+        type Query { node: Node }
         type Node { id: ID, name: String }
       ''';
       expect(run(withId, 'query q { node { id name } }'), isEmpty);
@@ -123,7 +131,11 @@ void main() {
   });
 }
 
-Iterable<File> _gqlFiles(String dir) => Directory(dir)
-    .listSync(recursive: true)
-    .whereType<File>()
-    .where((f) => f.path.endsWith('.gql') && !f.path.contains('__generated__'));
+Iterable<File> _gqlFiles(String dir) =>
+    Directory(dir)
+        .listSync(recursive: true)
+        .whereType<File>()
+        .where(
+          (f) =>
+              f.path.endsWith('.graphql') && !f.path.contains('__generated__'),
+        );

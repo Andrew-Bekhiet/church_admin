@@ -2,7 +2,6 @@ ignore:
   - "**.g.dart"
   - "**.freezed.dart"
   - "**.graphql.dart"
-  - "**.gql.dart"
   - "**/__generated__/**"
 coverage:
   status:

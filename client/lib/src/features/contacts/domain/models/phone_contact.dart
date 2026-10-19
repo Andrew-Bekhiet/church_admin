@@ -26,24 +26,6 @@ class PhoneContact with Equatable {
 
   Json toJson() => _$PhoneContactToJson(this);
 
-  Input_ContactsInsertInput toInsertInput() => Input_ContactsInsertInput(
-    id: id.toUuid(),
-    phone: phone,
-    label: label,
-    isMainPhone: isMainPhone,
-  );
-
-  Input_ContactsUpdates toUpdates() => Input_ContactsUpdates(
-    where: Input_ContactsBoolExp(
-      id: Input_UuidComparisonExp($_eq: id.toUuid()),
-    ),
-    $_set: Input_ContactsSetInput.fromJson({
-      'phone': phone,
-      'label': label,
-      'isMainPhone': isMainPhone,
-    }),
-  );
-
   PhoneContact copyWith({String? phone}) => PhoneContact(
     id: id,
     phone: phone ?? this.phone,

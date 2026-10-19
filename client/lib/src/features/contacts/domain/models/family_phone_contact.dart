@@ -29,17 +29,6 @@ class FamilyPhoneContact with Equatable {
     'personType': role.toJson(),
   };
 
-  Input_ContactsInsertInput toInsertInput({String? familyId}) {
-    final insert = contact.toInsertInput().copyWith(
-      personTypeId: role.id.toUuid(),
-    );
-
-    return switch (familyId) {
-      final familyId? => insert.copyWith(familyId: familyId.toUuid()),
-      null => insert,
-    };
-  }
-
   Input_FamilyContactInput toFamilyContactInput({String? serverOwnedId}) =>
       Input_FamilyContactInput.fromJson({
         'id': ?serverOwnedId,
