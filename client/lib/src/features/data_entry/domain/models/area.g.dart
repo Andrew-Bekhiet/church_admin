@@ -98,19 +98,14 @@ class _AreaFields {
         },
       );
 
-  final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
+  final FieldMetadata<User> adminUsers = FieldMetadata<User>(
     getValue: (obj) => obj is Area ? obj.adminUsers : null,
     parentType: Area,
-    name: 'adminUsers',
-    label: 'adminUsers',
-    isCodeOnly: true,
+    name: 'admins',
+    label: 'المسؤولون',
+    isCodeOnly: false,
     isOrderable: false,
-  );
-
-  late final FieldMetadata<User> adminUsers = adminUsersRel.redirectTo(
-    AdminOnDataFields().user,
-    isExpandable: false,
-    isOrderable: false,
+    operators: {...MultiSelectOperator.values},
   );
 
   late final List<FieldMetadata<Object>> allFields = [
@@ -132,7 +127,7 @@ class _AreaFields {
     'photoUpdatedAt': photoUpdatedAt,
     'lastVisit': lastVisit,
     'lastEdit': lastEdit,
-    'adminUsers': adminUsers,
+    'admins': adminUsers,
   };
 }
 
@@ -151,17 +146,19 @@ Area _$AreaFromJson(Map json) => Area(
     const LocalDateTimeConverter().fromJson,
   ),
   blurhash: json['blurhash'] as String?,
-  lastVisit: json['lastVisit'] == null
+  lastVisit: json['latestVisit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastVisit'] as Map),
+          Map<String, Object?>.from(json['latestVisit'] as Map),
         ),
-  lastEdit: json['lastEdit'] == null
+  lastEdit: json['latestEdit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastEdit'] as Map),
+          Map<String, Object?>.from(json['latestEdit'] as Map),
         ),
-  adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
+  adminUsers: (json['admins'] as List<dynamic>?)
+      ?.map((e) => User.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
 );
 
 Map<String, dynamic> _$AreaToJson(Area instance) => <String, dynamic>{
@@ -174,9 +171,9 @@ Map<String, dynamic> _$AreaToJson(Area instance) => <String, dynamic>{
     const LocalDateTimeConverter().toJson,
   ),
   'blurhash': instance.blurhash,
-  'lastVisit': instance.lastVisit?.toJson(),
-  'lastEdit': instance.lastEdit?.toJson(),
-  'adminUsers': adminUsersToJson(instance.adminUsers),
+  'latestVisit': instance.lastVisit?.toJson(),
+  'latestEdit': instance.lastEdit?.toJson(),
+  'admins': instance.adminUsers?.map((e) => e.toJson()).toList(),
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(

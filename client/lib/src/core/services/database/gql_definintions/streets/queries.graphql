@@ -1,0 +1,20 @@
+query streets(
+  $filter: StreetFilterInput
+  $sort: [StreetSortInput]
+  $first: Int
+  $after: String
+) {
+  streets(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...StreetWithLine
+    }
+  }
+}
+
+query street($id: ID!) {
+  street(id: $id) {
+    ...StreetDetails
+  }
+}

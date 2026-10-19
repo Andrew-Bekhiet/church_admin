@@ -264,9 +264,7 @@ void main() {
                     'address': {
                       'area': {
                         'streets': {
-                          'street': {
-                            'name': {'_ilike': '%name%'},
-                          },
+                          'name': {'_ilike': '%name%'},
                         },
                       },
                     },

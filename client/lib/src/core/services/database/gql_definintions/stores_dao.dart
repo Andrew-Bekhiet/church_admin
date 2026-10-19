@@ -1,78 +1,53 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/data_check_free_documents.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/subscriptions.gql.dart';
-import 'package:uuid/enums.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/queries.graphql.dart';
 
-class StoresDAO extends LegacyFullCRUDDAO<Store>
-    with DataCheckFreeDocuments<Store> {
+class StoresDAO extends FullCRUDDAO<Store> with DataCheckFreeDocuments<Store> {
   @override
-  late final LegacyStreamAllConfig<Store> baseStreamAllConfig =
-      const LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllStores,
-      );
-
-  @override
-  late final LegacyStreamCountConfig<Store> baseStreamCountConfig =
-      const LegacyStreamCountConfig(
-        document: documentNodeSubscriptionwatchStoresCount,
-      );
+  StreamAllConfig<Store> get baseStreamAllConfig => StreamAllConfig(
+    document: documentNodeQuerystores,
+    arguments: (parameters) => ListQueryArguments.fromParameters(
+      parameters,
+      defaultOrderBy: [OrderBy(field: StoreFields().name)],
+    ),
+  );
 
   @override
-  late final LegacyStreamSingleByIdConfig<Store> baseStreamSingleByIdConfig =
-      LegacyStreamSingleByIdConfig(
-        document: documentNodeSubscriptionwatchStore,
-        varsConstructor: _streamSingleByIdVarsConstructor,
-      );
+  StreamSingleByIdConfig<Store> get baseStreamSingleByIdConfig =>
+      const StreamSingleByIdConfig(document: documentNodeQuerystore);
 
   @override
-  late final LegacyDeleteSingleByIdConfig<Store> baseDeleteSingleByIdConfig =
-      LegacyDeleteSingleByIdConfig(
-        document: documentNodeMutationdeleteStore,
-        varsConstructor: _deleteSingleByIdVarsConstructor,
-      );
+  CreateObjectConfig<Store> get baseCreateObjectConfig => CreateObjectConfig(
+    document: documentNodeMutationcreateStore,
+    varsConstructor: ({required newObject}) => Variables_Mutation_createStore(
+      input: Input_CreateStoreInput(
+        name: newObject.name,
+        adminFamilyId: newObject.familyId,
+        color: colorToInt(newObject.color),
+        address: newObject.address?.toAddressInput(),
+      ),
+    ).toJson(),
+  );
 
   @override
-  late final LegacyUpdateObjectConfig<Store> baseUpdateObjectConfig =
-      LegacyUpdateObjectConfig(
-        document: documentNodeMutationupdateStore,
-        varsConstructor: _updateStoreVarsConstructor,
-        parserFn: db.parser.singleOrNullParser(fromJson, 'updateStoresByPk'),
-      );
+  UpdateObjectConfig<Store> get baseUpdateObjectConfig => UpdateObjectConfig(
+    document: documentNodeMutationupdateStore,
+    varsConstructor: ({required newObject}) => Variables_Mutation_updateStore(
+      id: newObject.id,
+      input: Input_UpdateStoreInput.fromJson({
+        'name': newObject.name,
+        'adminFamilyId': newObject.familyId,
+        'color': colorToInt(newObject.color),
+        if (newObject.address case final address?)
+          'address': address.toAddressInput().toJson(),
+      }),
+    ).toJson(),
+  );
 
   @override
-  late final LegacyCreateObjectConfig<Store> baseCreateObjectConfig =
-      LegacyCreateObjectConfig(
-        document: documentNodeMutationinsertStore,
-        varsConstructor: _createStoreVarsConstructor,
-      );
+  DeleteSingleByIdConfig<Store> get baseDeleteSingleByIdConfig =>
+      const DeleteSingleByIdConfig(document: documentNodeMutationdeleteStore);
 
   StoresDAO({required super.db}) : super(fromJson: Store.fromJson);
-
-  Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
-      Variables_Subscription_watchStore(id: id).toJson();
-
-  Json _createStoreVarsConstructor({required Store newObject}) =>
-      Variables_Mutation_insertStore(
-        newStore: newObject.toInsertInput(),
-      ).toJson();
-
-  Json _updateStoreVarsConstructor({
-    required Store newObject,
-    required Store oldObject,
-  }) {
-    final updateInput = newObject.toUpdateInput(oldObject);
-
-    return Variables_Mutation_updateStore(
-      storeId: newObject.id.toUuid(),
-      newStore: updateInput,
-      addressId: newObject.address?.id?.toUuid() ?? Namespace.nil.uuidValue,
-      newAddress: newObject.address?.toUpdateInput(oldObject.address!),
-      updateAddress: newObject.address != oldObject.address,
-      updateStore: updateInput.toJson().values.nonNulls.isNotEmpty,
-    ).toJson();
-  }
-
-  Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
-      Variables_Mutation_deleteStore(storeId: id).toJson();
 }

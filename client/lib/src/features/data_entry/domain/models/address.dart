@@ -153,6 +153,19 @@ class Address with _$Address implements ToJson {
     return textComposedFromParts;
   }
 
+  Input_AddressInput toAddressInput() => Input_AddressInput.fromJson({
+    'areaId': area?.id,
+    'streetId': street?.id,
+    'districtId': district?.id,
+    'countryIsoCode': countryIsoCode,
+    'substreetName': substreetName,
+    'geolocation': geolocation?.toPostGISJson(),
+    'storeyNumber': storeyNumber,
+    'houseCode': houseCode,
+    'apartmentNumber': apartmentNumber,
+    'specialLandmark': specialLandmark,
+  });
+
   Input_AddressesInsertInput toInsertInput() {
     return Input_AddressesInsertInput(
       countryIsoCode: countryIsoCode,

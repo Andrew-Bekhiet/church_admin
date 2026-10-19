@@ -36,12 +36,13 @@ class _StoreFields {
     name: 'address',
     label: 'تفاصيل العنوان',
     isCodeOnly: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<Family> family = FieldMetadata<Family>(
     getValue: (obj) => obj is Store ? obj.family : null,
     parentType: Store,
-    name: 'family',
+    name: 'adminFamily',
     label: 'العائلة',
     isCodeOnly: false,
     operators: {
@@ -120,7 +121,7 @@ class _StoreFields {
     'id': id,
     'name': name,
     'address': address,
-    'family': family,
+    'adminFamily': family,
     'color': color,
     'lastEdit': lastEdit,
     'photoUpdatedAt': photoUpdatedAt,
@@ -139,15 +140,15 @@ Store _$StoreFromJson(Map json) => Store(
   address: json['address'] == null
       ? null
       : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
-  family: json['family'] == null
+  family: json['adminFamily'] == null
       ? null
-      : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
-  familyId: json['adminFamily'] as String?,
+      : Family.fromJson(Map<String, Object?>.from(json['adminFamily'] as Map)),
+  familyId: json['adminFamilyId'] as String?,
   color: colorFromInt((json['color'] as num?)?.toInt()),
-  lastEdit: json['lastEdit'] == null
+  lastEdit: json['latestEdit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
-          Map<String, Object?>.from(json['lastEdit'] as Map),
+          Map<String, Object?>.from(json['latestEdit'] as Map),
         ),
   photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
     json['photoUpdatedAt'],
@@ -160,10 +161,10 @@ Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{
   'id': instance.id,
   'name': instance.name,
   'address': instance.address?.toJson(),
-  'family': instance.family?.toJson(),
-  'adminFamily': instance.familyId,
+  'adminFamily': instance.family?.toJson(),
+  'adminFamilyId': instance.familyId,
   'color': colorToInt(instance.color),
-  'lastEdit': instance.lastEdit?.toJson(),
+  'latestEdit': instance.lastEdit?.toJson(),
   'photoUpdatedAt': _$JsonConverterToJson<String, DateTime>(
     instance.photoUpdatedAt,
     const LocalDateTimeConverter().toJson,
