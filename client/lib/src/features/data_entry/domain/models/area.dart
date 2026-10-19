@@ -38,14 +38,16 @@ class Area extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
+  @JsonKey(name: 'latestVisit')
   @QueryableField(label: 'أخر افتقاد')
   final LastRecordedByInfo? lastVisit;
 
+  @JsonKey(name: 'latestEdit')
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
-  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  @QueryableField.manyToMany(through: AdminOnData)
+  @JsonKey(name: 'admins')
+  @QueryableField(label: 'المسؤولون', graphqlName: 'admins', orderable: false)
   final List<User>? adminUsers;
 
   @JsonKey(includeToJson: false)
@@ -82,19 +84,13 @@ class Area extends ViewableWithIDAndImage
 class AreaFields extends _AreaFields {
   static final AreaFields _instance = AreaFields._();
 
-  FieldMetadata<AreasStreets> get streetsRel => FieldMetadata<AreasStreets>(
+  FieldMetadata<Street> get streets => FieldMetadata<Street>(
     parentType: Area,
     name: 'streets',
     label: 'الشوارع',
-    isCodeOnly: true,
     isOrderable: false,
+    operators: {...MultiSelectOperator.values},
     getValue: (obj) => obj is Area ? [] : null,
-  );
-
-  FieldMetadata<Street> get streets => streetsRel.redirectTo(
-    AreasStreetsFields().street,
-    isExpandable: false,
-    isOrderable: false,
   );
 
   @override

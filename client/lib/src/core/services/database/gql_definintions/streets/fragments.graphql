@@ -1,0 +1,26 @@
+fragment Street on Street {
+  id
+  name
+  color
+  photoUpdatedAt
+  blurhash
+  userCanEdit
+}
+
+fragment StreetWithLine on Street {
+  ...Street
+  line
+}
+
+fragment StreetDetails on Street {
+  ...StreetWithLine
+  areas(sort: [{ field: NAME, order: ASC }]) {
+    ...Area
+  }
+  latestEdit {
+    ...PlaceLatestEdit
+  }
+  latestVisit {
+    ...PlaceLatestVisit
+  }
+}

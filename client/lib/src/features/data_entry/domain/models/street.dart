@@ -8,7 +8,7 @@ part 'street.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(label: 'الشوارع')
+@Queryable(label: 'الشوارع', extensible: true)
 class Street extends ViewableWithIDAndImage
     with _$Street
     implements SerializableExtra {
@@ -38,13 +38,14 @@ class Street extends ViewableWithIDAndImage
   @override
   final String? blurhash;
 
-  @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
-  @QueryableField.manyToMany(through: AreasStreets)
+  @QueryableField(label: 'المناطق', orderable: false)
   final List<Area>? areas;
 
+  @JsonKey(name: 'latestVisit')
   @QueryableField(label: 'أخر افتقاد')
   final LastRecordedByInfo? lastVisit;
 
+  @JsonKey(name: 'latestEdit')
   @QueryableField(label: 'أخر تحديث البيانات')
   final LastRecordedByInfo? lastEdit;
 
@@ -75,45 +76,23 @@ class Street extends ViewableWithIDAndImage
 
   @override
   Json toJson() => _$StreetToJson(this);
-
-  Input_StreetsInsertInput toInsertInput() => Input_StreetsInsertInput(
-    name: name,
-    line: line?.asPostGISLineString(),
-    color: colorToInt(color),
-    areas: Input_AreasStreetsArrRelInsertInput(
-      data:
-          areas
-              ?.map(
-                (a) => Input_AreasStreetsInsertInput(areaId: a.id.toUuid()),
-              )
-              .toList() ??
-          [],
-      onConflict: Input_AreasStreetsOnConflict(
-        constraint: Enum_AreasStreetsConstraint.areas_streets_pk,
-      ),
-    ),
-  );
-
-  Input_StreetsSetInput toUpdateInput({required Street oldStreet}) {
-    Input_StreetsSetInput result = Input_StreetsSetInput();
-
-    if (name != oldStreet.name) {
-      result = result.copyWith(name: name);
-    }
-
-    if (line != oldStreet.line) {
-      result = result.copyWith(line: line?.asPostGISLineString());
-    }
-
-    if (color != oldStreet.color) {
-      result = result.copyWith(color: colorToInt(color));
-    }
-
-    return result;
-  }
 }
 
-List<Area>? streetsAreasFromJson(List? data) =>
-    data?.map((e) => Area.fromJson(e['area'])).toList();
-List<Json>? streetsAreasToJson(List<Area>? areas) =>
-    areas?.map((e) => {'area': e.toJson()}).toList();
+// Extends the generated private base, which only this library can see
+// ignore: solid_lints/avoid_multiple_declarations_per_file
+class StreetFields extends _StreetFields {
+  static final StreetFields _instance = StreetFields._();
+
+  FieldMetadata<AreasStreets> get areasRel => FieldMetadata<AreasStreets>(
+    parentType: Street,
+    name: 'areaStreets',
+    label: 'areas',
+    isCodeOnly: true,
+    isOrderable: false,
+    getValue: (obj) => obj is Street ? obj.areas : null,
+  );
+
+  factory StreetFields() => _instance;
+
+  StreetFields._();
+}

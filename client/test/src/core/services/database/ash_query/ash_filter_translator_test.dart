@@ -362,28 +362,6 @@ void main() {
       );
     });
 
-    test(
-      'any of ids through a many-to-many redirect filters the nested key',
-      () {
-        expect(
-          translate(
-            StreetFields().areas.redirectTo(AreaFields().id),
-            MultiSelectOperator.anyOf,
-            ['a'],
-          ),
-          {
-            'areas': {
-              'area': {
-                'id': {
-                  'in': ['a'],
-                },
-              },
-            },
-          },
-        );
-      },
-    );
-
     test('any of ids on a relationship goes through its key', () {
       expect(
         translate(PersonFields().shammasLevel, MultiSelectOperator.anyOf, [
@@ -674,11 +652,9 @@ void main() {
         ),
         {
           'streets': {
-            'street': {
-              'withinDistance': {
-                'input': {'from': point.toPostGISJson(), 'meters': 250.0},
-                'eq': true,
-              },
+            'withinDistance': {
+              'input': {'from': point.toPostGISJson(), 'meters': 250.0},
+              'eq': true,
             },
           },
         },

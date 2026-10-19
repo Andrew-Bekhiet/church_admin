@@ -1,0 +1,23 @@
+mutation createStore($input: CreateStoreInput!) {
+  createStore(input: $input) {
+    result {
+      ...Store
+    }
+  }
+}
+
+mutation updateStore($id: ID!, $input: UpdateStoreInput) {
+  updateStore(id: $id, input: $input) {
+    result {
+      ...Store
+    }
+  }
+}
+
+mutation deleteStore($id: ID!) {
+  deleteStore(id: $id) {
+    result {
+      ...Store
+    }
+  }
+}
