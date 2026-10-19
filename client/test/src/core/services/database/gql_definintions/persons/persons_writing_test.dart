@@ -44,6 +44,7 @@ void main() {
 
   Json familyContactInput(FamilyPhoneContact relative, {String? id}) => {
     'phone': relative.contact.phone,
+    'label': relative.contact.label,
     'isMainPhone': relative.contact.isMainPhone,
     'personTypeId': relative.role.id,
     'id': ?id,
