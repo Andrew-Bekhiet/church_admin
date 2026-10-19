@@ -139,4 +139,23 @@ void main() {
       );
     },
   );
+
+  test('the map shows every placed person, beyond one page', () async {
+    const placed = Address(id: 'address-1', geolocation: Point(30.5, 31.25));
+    final persons = [
+      for (var index = 0; index <= AshPagination.maxPageSize; index++)
+        PersonRow(
+          Person(id: 'person-$index', name: 'شخص $index', address: placed),
+        ),
+    ];
+
+    final layers = await databaseOf(
+      persons,
+    ).persons.personsGeolocations(getPersons: true);
+
+    expect(
+      layers?.persons.map((person) => person.id).toSet(),
+      {for (final row in persons) row.person.id},
+    );
+  });
 }
