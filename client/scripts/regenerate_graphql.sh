@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Regenerates every build_runner output from scratch and re-splits the GraphQL
+# Regenerates every build_runner output from scratch and re-splits the Hasura GraphQL
 # schema, which is the only sequence that leaves the committed layout intact:
 #   1. delete lib/src/core/graphql/__generated__/ so graphql_codegen rebuilds it
 #   2. full build (never --build-filter: from a cold cache it deletes every
-#      output outside the filter and re-collapses schema.graphql.dart anyway)
-#   3. split schema.graphql.dart into the stub plus schema_partN.dart
+#      output outside the filter and re-collapses hasura_schema.gql.dart anyway)
+#   3. split hasura_schema.gql.dart into the stub plus hasura_schema_partN.dart
 #   4. drop the .bak the split leaves behind
 # Then it lists what changed under the generated dir so stray edits are visible.
 # usage: client/scripts/regenerate_graphql.sh   (any cwd)
@@ -25,7 +25,7 @@ run_dart() {
 rm -rf "$generated_dir"
 run_dart run build_runner build
 scripts/split_schema_graphql_dart.sh
-rm -f "$generated_dir/schema.graphql.dart.bak"
+rm -f "$generated_dir/hasura_schema.gql.dart.bak"
 
 echo
 echo "Changes under $generated_dir (empty means regeneration reproduced the committed files):"

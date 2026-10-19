@@ -41,7 +41,7 @@ if [ ${#filters[@]} -eq 0 ]; then
   rm -r lib/src/core/graphql/__generated__/
   dart run build_runner build
   ./scripts/split_schema_graphql_dart.sh
-  rm -f lib/src/core/graphql/__generated__/schema.graphql.dart.bak
+  rm -f lib/src/core/graphql/__generated__/hasura_schema.gql.dart.bak
   stale=$(git status --porcelain -- .)
 else
   dart run build_runner build "${filters[@]}"

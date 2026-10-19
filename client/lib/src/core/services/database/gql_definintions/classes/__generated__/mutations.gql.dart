@@ -1,4 +1,4 @@
-import '../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../../../../graphql/__generated__/hasura_schema.gql.dart';
 import 'fragments.gql.dart';
 
 import 'package:church_admin/src/core/graphql/scalars.dart';
