@@ -47,7 +47,7 @@ Reference port: `gql_definintions/metadata/` (commit `refactor(data): port the m
 - Name lane-local fragments of shared types distinctly (e.g. `PlaceUser`) until the shared fragments are unified.
 - Feature tests fake DAOs with `Fake implements XDAO`; they keep compiling as long as public signatures stay.
 - A `latestEdit`/`latestVisit` object has an `id`: select it, define the fragment once per lane (e.g. `OrgLatestEdit`) and spread the lane-local user fragment inside it.
-- A list taking `filter`/`sort` on a nested field (`classes(filter: $classesFilter)`) needs those variables declared in the query; the fake link applies them to the nested rows.
+- A list taking `filter`/`sort` on a nested field (`classes(filter: $classesFilter)`) needs those variables declared in the query and the field directly in the operation: the fake applies them only there, not inside fragment spreads, and ignores literal arguments.
 - Opt in to `FakeAshTable(projectsSelections: true)` in a port's tests, so a field the document forgets reads as missing.
 - A sort on a relation whose type's key field is not `id` (StudyYear's `order`) must also select `id`: `NestedSelectionBuilder` does this, and the type needs an Ash `TypePolicy(keyFields: …)`.
 - A Hasura document that ordered by a relationship loses that order: Ash sorts only on own attributes, calculations and aggregates. Sort in the model converter with single-key static comparators.
@@ -66,6 +66,11 @@ Reference port: `gql_definintions/metadata/` (commit `refactor(data): port the m
 - An ID-typed field (`personId`, `familyId`) uses `QueryableField.self`, not a plain column field.
 - A wire `[JsonString]` list arrives as one JSON string per element (`DataCheck.details`): decode each element in `fromJson` and encode it in `toJson`.
 - A relationship the server exposes is selected and filtered directly (`contacts(filter: {personType: {isFamilyAdmin: {eq: true}}}) { personType { ...PersonType } }`); never join it client-side from a second root.
+- Fake rows of nested objects need `__typename` (and an `id` for keyed types) or the cache drops their fields: wrap rows like `OrganizationRow._asServerObjects`, after `jsonDecode(jsonEncode(model.toJson()))`.
+- A desired-state command whose form shows only part of a list (family contacts) needs `oldObject`: override `updateObject`, send the list only when it differs from what was loaded, and merge in the server's rows the form never showed.
+- Server field names on a Queryable: `graphqlName:` on `QueryableField`, `.history` and `.manyToMany`. Renaming changes `FieldMetadata.name`, so persisted queries naming the old field stop parsing.
+- A field the server keeps as a `Date` (birthdate, a confession or kodas day) takes `dateOnly: true` on its `QueryableField` (on the history or latest record for their times); the schema contract test fails on a date sent in the wrong format.
+- A layer or analysis that reads every row uses one keyset query per root through `MeetingRowsReader`; the fake reads only `filter`/`first`/`after` and ignores `@include`, so per-root variables in a multi-root document go untested.
 
 ## Done
 
