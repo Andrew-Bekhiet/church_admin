@@ -13,11 +13,6 @@ sealed class BackendException implements Exception {
     'invalid_primary_key',
   };
 
-  final String message;
-  final String? code;
-
-  const BackendException(this.message, {this.code});
-
   static BackendException fromOperationException(OperationException exception) {
     final firstError = switch (exception) {
       OperationException(graphqlErrors: [final error, ...]) => error,
@@ -81,8 +76,13 @@ sealed class BackendException implements Exception {
     };
   }
 
+  final String message;
+  final String? code;
+
+  const BackendException(this.message, {this.code});
+
   @override
-  String toString() => '$runtimeType(code: $code, message: $message)';
+  String toString() => 'BackendException(code: $code, message: $message)';
 }
 
 class BackendForbiddenException extends BackendException {
