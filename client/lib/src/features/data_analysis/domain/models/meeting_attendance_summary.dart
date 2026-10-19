@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
 
 /// Unlike [PersonMeetingAttendanceAnalysis] this is not person-scoped: it
 /// exposes aggregate counts across the meeting's roster rather than a single
@@ -36,12 +35,17 @@ class MeetingAttendanceSummary {
     required this.demographics,
   });
 
-  factory MeetingAttendanceSummary.fromQueryResult(
-    Query_meetingsAttendanceAnalysis_historyMeetings data,
-  ) => MeetingAttendanceSummary(
-    meeting: Meeting.fromJson(data.toJson()),
-    demographics: data.days
-        .map(MeetingDayDemographicCounts.fromQueryResult)
-        .toList(),
+  factory MeetingAttendanceSummary.fromMeetingWithDaysJson(
+    Json meeting, {
+    required Map<int, String> studyYearNames,
+  }) => MeetingAttendanceSummary(
+    meeting: Meeting.fromJson(meeting),
+    demographics: [
+      for (final day in meeting['days'] as List? ?? const [])
+        MeetingDayDemographicCounts.fromMeetingDayJson(
+          (day as Map).cast(),
+          studyYearNames: studyYearNames,
+        ),
+    ],
   );
 }

@@ -9,6 +9,7 @@ import 'server_todo.dart';
 /// Each entity port adds its name here once the Ash resource serves it.
 const Set<String> portedEntities = {
   'Area',
+  'AttendanceRecord',
   'Call',
   'Church',
   'College',
@@ -19,9 +20,12 @@ const Set<String> portedEntities = {
   'Hobby',
   'Job',
   'Kodas',
+  'Meeting',
+  'MeetingDay',
   'PersonState',
   'PersonType',
   'Qualification',
+  'RosterEntry',
   'School',
   'ShammasLevel',
   'Store',

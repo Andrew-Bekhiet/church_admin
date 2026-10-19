@@ -1,0 +1,39 @@
+mutation createMeeting($input: CreateMeetingInput!) {
+  createMeeting(input: $input) {
+    result {
+      ...Meeting
+    }
+  }
+}
+
+mutation updateMeeting($id: ID!, $input: UpdateMeetingInput) {
+  updateMeeting(id: $id, input: $input) {
+    result {
+      ...Meeting
+    }
+  }
+}
+
+mutation markAttendance($input: MarkAttendanceInput!) {
+  markAttendance(input: $input) {
+    result {
+      ...AttendanceRecord
+    }
+  }
+}
+
+mutation updateAttendanceTime($id: ID!, $input: UpdateAttendanceTimeInput) {
+  updateAttendanceTime(id: $id, input: $input) {
+    result {
+      ...AttendanceRecord
+    }
+  }
+}
+
+mutation unmarkAttendance($id: ID!) {
+  unmarkAttendance(id: $id) {
+    result {
+      ...AttendanceRecord
+    }
+  }
+}

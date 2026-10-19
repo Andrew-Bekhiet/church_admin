@@ -1,157 +1,76 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/mutations.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meeting_rows_reader.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/meetings/meetings_analysis_queries.dart';
 import 'package:graphql/client.dart';
 
 class MeetingsDAO extends DAOBase<Meeting>
     with
-        LegacyStreamableDAO<Meeting>,
-        LegacyCreatableDAO<Meeting>,
-        LegacyUpdatableDAO<Meeting> {
-  @override
-  late final LegacyStreamAllConfig<Meeting> baseStreamAllConfig =
-      const LegacyStreamAllConfig(
-        document: documentNodeSubscriptionwatchAllMeetings,
-      );
+        KeysetStreamableDAO<Meeting>,
+        CreatableDAO<Meeting>,
+        UpdatableDAO<Meeting> {
+  static LastRecordedByInfo _recordedAt(Json json) {
+    final record = AttendanceRecord.fromJson(json);
 
-  @override
-  late final LegacyStreamSingleByIdConfig<Meeting> baseStreamSingleByIdConfig =
-      LegacyStreamSingleByIdConfig(
-        document: documentNodeSubscriptionwatchMeeting,
-        varsConstructor: _streamSingleByIdVarsConstructor,
-      );
-
-  @override
-  late final LegacyUpdateObjectConfig<Meeting> baseUpdateObjectConfig =
-      LegacyUpdateObjectConfig(
-        document: documentNodeMutationupdateMeeting,
-        varsConstructor: _updateMeetingVarsConstructor,
-      );
-
-  @override
-  late final LegacyCreateObjectConfig<Meeting> baseCreateObjectConfig =
-      LegacyCreateObjectConfig(
-        document: documentNodeMutationinsertMeeting,
-        varsConstructor: _createMeetingVarsConstructor,
-      );
-
-  @override
-  LegacyStreamCountConfig<Meeting>? get baseStreamCountConfig => null;
-
-  MeetingsDAO({required super.db}) : super(fromJson: Meeting.fromJson);
-
-  ({
-    List<Input_HistoryMeetingsBoolExp> where,
-    List<Input_HistoryMeetingDaysBoolExp> demographicsWhere,
-    List<Input_HistoryMeetingRosterBoolExp> rosterWhere,
-  })
-  _subjectFilters(MeetingsAnalysisSubject subject) => switch (subject) {
-    MeetingAnalysisSubject(:final meeting) => (
-      where: [
-        Input_HistoryMeetingsBoolExp(
-          id: Input_UuidComparisonExp($_eq: meeting.id.toUuid()),
-        ),
-      ],
-      demographicsWhere: const <Input_HistoryMeetingDaysBoolExp>[],
-      rosterWhere: const <Input_HistoryMeetingRosterBoolExp>[],
-    ),
-    ServiceAnalysisSubject(:final service) => (
-      where: [
-        Input_HistoryMeetingsBoolExp(
-          serviceId: Input_UuidComparisonExp($_eq: service.id.toUuid()),
-        ),
-      ],
-      demographicsWhere: const <Input_HistoryMeetingDaysBoolExp>[],
-      rosterWhere: const <Input_HistoryMeetingRosterBoolExp>[],
-    ),
-    GroupAnalysisSubject(:final group) => (
-      where: [
-        Input_HistoryMeetingsBoolExp(
-          groupId: Input_UuidComparisonExp($_eq: group.id.toUuid()),
-        ),
-      ],
-      demographicsWhere: const <Input_HistoryMeetingDaysBoolExp>[],
-      rosterWhere: const <Input_HistoryMeetingRosterBoolExp>[],
-    ),
-    ClassAnalysisSubject(:final class$) => _classFilters(class$),
-  };
-
-  // Real meetings are almost always service-wide (no serviceStudyYear/
-  // serviceGender set), so the class's study year/gender narrows the
-  // attendee demographic rows rather than the meeting selection itself.
-  ({
-    List<Input_HistoryMeetingsBoolExp> where,
-    List<Input_HistoryMeetingDaysBoolExp> demographicsWhere,
-    List<Input_HistoryMeetingRosterBoolExp> rosterWhere,
-  })
-  _classFilters(Class class$) {
-    final serviceId = class$.service?.id.toUuid() ?? class$.serviceId?.toUuid();
-    final studyYearFrom = class$.studyYearFromOrder;
-    final studyYearTo = class$.studyYearToOrder;
-    final serviceGender = class$.serviceGender;
-
-    return (
-      where: [
-        Input_HistoryMeetingsBoolExp(
-          serviceId: switch (serviceId) {
-            final serviceId? => Input_UuidComparisonExp($_eq: serviceId),
-            null => null,
-          },
-        ),
-      ],
-      demographicsWhere: [
-        Input_HistoryMeetingDaysBoolExp(
-          studyYearId: switch ((studyYearFrom, studyYearTo)) {
-            (final from?, final to?) => Input_SmallintComparisonExp(
-              $_gte: from,
-              $_lte: to,
-            ),
-            _ => null,
-          },
-          gender: switch (serviceGender) {
-            final serviceGender? => Input_BooleanComparisonExp(
-              $_eq: serviceGender,
-            ),
-            null => null,
-          },
-        ),
-      ],
-      rosterWhere: [
-        Input_HistoryMeetingRosterBoolExp(
-          studyYearId: switch ((studyYearFrom, studyYearTo)) {
-            (final from?, final to?) => Input_IntComparisonExp(
-              $_gte: from,
-              $_lte: to,
-            ),
-            _ => null,
-          },
-          gender: switch (serviceGender) {
-            final serviceGender? => Input_BooleanComparisonExp(
-              $_eq: serviceGender,
-            ),
-            null => null,
-          },
-        ),
-      ],
+    return LastRecordedByInfo(
+      time: record.datetime,
+      recordedBy: json['recordedBy'] as String?,
+      user: record.recordedByUser,
     );
   }
 
-  Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
-      Variables_Subscription_watchMeeting(id: id).toJson();
+  late final MeetingRowsReader _rows = MeetingRowsReader(graphQLClient);
 
-  Json _createMeetingVarsConstructor({required Meeting newObject}) =>
-      Variables_Mutation_insertMeeting(
-        object: newObject.toInsertInput(),
-      ).toJson();
+  late final MeetingsAnalysisQueries _analysis = MeetingsAnalysisQueries(db);
 
-  Json _updateMeetingVarsConstructor({
-    required Meeting newObject,
-    required Meeting oldObject,
-  }) => Variables_Mutation_updateMeeting(
-    id: newObject.id.toUuid(),
-    $set: newObject.toUpdateInput(oldMeeting: oldObject),
-  ).toJson();
+  @override
+  StreamAllConfig<Meeting> get baseStreamAllConfig => StreamAllConfig(
+    document: documentNodeQuerymeetings,
+    arguments: (parameters) => ListQueryArguments.fromParameters(
+      parameters,
+      defaultOrderBy: [OrderBy(field: MeetingFields().name)],
+    ),
+  );
+
+  @override
+  StreamSingleByIdConfig<Meeting> get baseStreamSingleByIdConfig =>
+      const StreamSingleByIdConfig(document: documentNodeQuerymeeting);
+
+  @override
+  CreateObjectConfig<Meeting> get baseCreateObjectConfig => CreateObjectConfig(
+    document: documentNodeMutationcreateMeeting,
+    varsConstructor: ({required newObject}) => Variables_Mutation_createMeeting(
+      input: Input_CreateMeetingInput(
+        name: newObject.name,
+        audience: newObject.audience.name,
+        color: colorToInt(newObject.color),
+        isArchived: newObject.isArchived,
+        showKodasCheckbox: newObject.showKodasCheckbox,
+        serviceId: newObject.service?.id ?? newObject.serviceId,
+        serviceStudyYear: newObject.serviceStudyYear,
+        serviceGender: newObject.serviceGender,
+        groupId: newObject.group?.id ?? newObject.groupId,
+      ),
+    ).toJson(),
+  );
+
+  @override
+  UpdateObjectConfig<Meeting> get baseUpdateObjectConfig => UpdateObjectConfig(
+    document: documentNodeMutationupdateMeeting,
+    varsConstructor: ({required newObject}) => Variables_Mutation_updateMeeting(
+      id: newObject.id,
+      input: Input_UpdateMeetingInput.fromJson({
+        'name': newObject.name,
+        'audience': newObject.audience.name,
+        'color': colorToInt(newObject.color),
+        'isArchived': newObject.isArchived,
+        'showKodasCheckbox': newObject.showKodasCheckbox,
+      }),
+    ).toJson(),
+  );
+
+  MeetingsDAO({required super.db}) : super(fromJson: Meeting.fromJson);
 
   Future<Meeting?> archiveMeeting({
     required String meetingId,
@@ -162,10 +81,12 @@ class MeetingsDAO extends DAOBase<Meeting>
         document: documentNodeMutationupdateMeeting,
         operationName: 'updateMeeting',
         variables: Variables_Mutation_updateMeeting(
-          id: meetingId.toUuid(),
-          $set: Input_HistoryMeetingsSetInput(isArchived: isArchived),
+          id: meetingId,
+          input: Input_UpdateMeetingInput(isArchived: isArchived),
         ).toJson(),
-        parserFn: db.parser.singleOrNullParser(Meeting.fromJson),
+        parserFn: AshResultParser(
+          documentNodeMutationupdateMeeting,
+        ).mutationResultOrNull(Meeting.fromJson),
       ),
     );
   }
@@ -174,30 +95,32 @@ class MeetingsDAO extends DAOBase<Meeting>
     required String meetingId,
     required bool groupByStudyYear,
     int limit = 1000,
-  }) async {
-    final orderBy = [
-      if (groupByStudyYear)
-        Input_HistoryMeetingRosterOrderBy(studyYearId: Enum_OrderBy.ASC),
-      Input_HistoryMeetingRosterOrderBy(name: Enum_OrderBy.ASC),
-      Input_HistoryMeetingRosterOrderBy(personId: Enum_OrderBy.ASC),
-    ];
-
-    final result = await graphQLClient.queryAndReturnParsed(
-      QueryOptions(
-        document: documentNodeQueryhistoryMeetingRoster,
-        operationName: 'historyMeetingRoster',
-        variables: Variables_Query_historyMeetingRoster(
-          meetingId: meetingId.toUuid(),
-          orderBy: orderBy,
-          limit: limit,
-        ).toJson(),
-        parserFn: Query_historyMeetingRoster.fromJson,
-      ),
+  }) {
+    return _rows.read(
+      document: documentNodeQueryrosterEntries,
+      fromJson: MeetingRosterEntry.fromRosterEntryJson,
+      variables: Variables_Query_rosterEntries(
+        filter: Input_RosterEntryFilterInput(
+          meetingId: Input_RosterEntryFilterMeetingId(eq: meetingId),
+        ),
+        sort: [
+          if (groupByStudyYear)
+            Input_RosterEntrySortInput(
+              field: Enum_RosterEntrySortField.STUDY_YEAR_ID,
+              order: Enum_SortOrder.ASC,
+            ),
+          Input_RosterEntrySortInput(
+            field: Enum_RosterEntrySortField.NAME,
+            order: Enum_SortOrder.ASC,
+          ),
+          Input_RosterEntrySortInput(
+            field: Enum_RosterEntrySortField.PERSON_ID,
+            order: Enum_SortOrder.ASC,
+          ),
+        ],
+      ).toJson(),
+      limit: limit,
     );
-
-    return result.historyMeetingRoster
-        .map(MeetingRosterEntry.fromQueryResult)
-        .toList();
   }
 
   Stream<List<AttendanceRecord>> streamAttendanceHistory({
@@ -205,16 +128,27 @@ class MeetingsDAO extends DAOBase<Meeting>
     required DateTime fromDate,
     required DateTime toDate,
   }) {
-    return graphQLClient.legacySubscribeAndReturnParsed(
-      SubscriptionOptions(
-        document: documentNodeSubscriptionwatchAttendanceHistory,
-        operationName: 'watchAttendanceHistory',
-        variables: Variables_Subscription_watchAttendanceHistory(
-          meetingId: meetingId.toUuid(),
-          fromDate: fromDate,
-          toDate: toDate,
+    const document = documentNodeQueryattendanceRecords;
+    final parsePage = AshResultParser(document).page(AttendanceRecord.fromJson);
+
+    return LiveQuery<List<AttendanceRecord>>(
+      client: graphQLClient,
+      registry: db.liveQueries,
+      kind: LiveQueryKind.list,
+      options: WatchQueryOptions(
+        document: document,
+        operationName: 'attendanceRecords',
+        variables: Variables_Query_attendanceRecords(
+          filter: Input_AttendanceRecordFilterInput(
+            meetingId: Input_AttendanceRecordFilterMeetingId(eq: meetingId),
+            datetime: Input_AttendanceRecordFilterDatetime(
+              greaterThanOrEqual: fromDate,
+              lessThan: toDate,
+            ),
+          ),
+          first: AshPagination.maxPageSize,
         ).toJson(),
-        parserFn: db.parser.listParser(AttendanceRecord.fromJson),
+        parserFn: (data) => parsePage(data).items,
       ),
     );
   }
@@ -230,14 +164,16 @@ class MeetingsDAO extends DAOBase<Meeting>
         document: documentNodeMutationmarkAttendance,
         operationName: 'markAttendance',
         variables: Variables_Mutation_markAttendance(
-          object: Input_HistoryAttendanceHistoryInsertInput(
-            meetingId: meetingId.toUuid(),
-            personId: personId.toUuid(),
-            asServant: asServant,
+          input: Input_MarkAttendanceInput(
+            meetingId: meetingId,
+            personId: personId,
             datetime: datetime,
+            asServant: asServant,
           ),
         ).toJson(),
-        parserFn: db.parser.singleParser(AttendanceRecord.fromJson),
+        parserFn: AshResultParser(
+          documentNodeMutationmarkAttendance,
+        ).mutationResult(AttendanceRecord.fromJson),
       ),
     );
   }
@@ -250,9 +186,11 @@ class MeetingsDAO extends DAOBase<Meeting>
         document: documentNodeMutationunmarkAttendance,
         operationName: 'unmarkAttendance',
         variables: Variables_Mutation_unmarkAttendance(
-          id: attendanceRecordId.toUuid(),
+          id: attendanceRecordId,
         ).toJson(),
-        parserFn: db.parser.singleParser(AttendanceRecord.fromJson),
+        parserFn: AshResultParser(
+          documentNodeMutationunmarkAttendance,
+        ).mutationResult(AttendanceRecord.fromJson),
       ),
     );
   }
@@ -266,196 +204,14 @@ class MeetingsDAO extends DAOBase<Meeting>
         document: documentNodeMutationupdateAttendanceTime,
         operationName: 'updateAttendanceTime',
         variables: Variables_Mutation_updateAttendanceTime(
-          id: attendanceRecordId.toUuid(),
-          datetime: datetime,
+          id: attendanceRecordId,
+          input: Input_UpdateAttendanceTimeInput(datetime: datetime),
         ).toJson(),
-        parserFn: db.parser.singleParser(AttendanceRecord.fromJson),
+        parserFn: AshResultParser(
+          documentNodeMutationupdateAttendanceTime,
+        ).mutationResult(AttendanceRecord.fromJson),
       ),
     );
-  }
-
-  Future<List<PersonMeetingAttendanceAnalysis>> getPersonAttendanceAnalysis({
-    required String personId,
-    required DateTimeRange range,
-    required List<Meeting> meetings,
-    bool? asServant,
-  }) async {
-    final meetingsById = {for (final meeting in meetings) meeting.id: meeting};
-
-    final result = await _runAttendanceAnalysis(
-      range: range,
-      where: [
-        Input_HistoryMeetingRosterBoolExp(
-          personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
-        ),
-        if (asServant != null)
-          Input_HistoryMeetingRosterBoolExp(
-            asServant: Input_BooleanComparisonExp($_eq: asServant),
-          ),
-      ],
-      meetingIds: meetings.map((e) => e.id.toUuid()).toList(),
-    );
-
-    final heldDaysByMeetingId = {
-      for (final meeting in result.historyMeetings)
-        meeting.id.uuid: meeting.days.map((d) => d.day).nonNulls.toList(),
-    };
-
-    return [
-      for (final row in result.historyMeetingRoster)
-        if (row.meetingId?.uuid case final meetingId?)
-          PersonMeetingAttendanceAnalysis.fromQueryResult(
-            row,
-            meetingsById[meetingId]!,
-            heldDaysByMeetingId[meetingId] ?? const [],
-          ),
-    ];
-  }
-
-  Future<MeetingsAttendanceAnalysis> getMeetingsAttendanceAnalysis({
-    required MeetingsAnalysisSubject subject,
-    required DateTimeRange range,
-  }) async {
-    final filters = _subjectFilters(subject);
-
-    final result = await graphQLClient.queryAndReturnParsed(
-      QueryOptions(
-        document: documentNodeQuerymeetingsAttendanceAnalysis,
-        operationName: 'meetingsAttendanceAnalysis',
-        variables: Variables_Query_meetingsAttendanceAnalysis(
-          dayFrom: range.start,
-          dayTo: range.end,
-          where: filters.where,
-          demographicsWhere: filters.demographicsWhere,
-        ).toJson(),
-        parserFn: Query_meetingsAttendanceAnalysis.fromJson,
-      ),
-    );
-
-    return MeetingsAttendanceAnalysis(
-      title: subject.title,
-      color: subject.color,
-      meetings: result.historyMeetings
-          .map(MeetingAttendanceSummary.fromQueryResult)
-          .toList(),
-    );
-  }
-
-  Future<List<SingleDayRosterMember>> getSingleDayRosterDemographics({
-    required MeetingsAnalysisSubject subject,
-    required DateTime day,
-  }) async {
-    final filters = _subjectFilters(subject);
-    final result = await graphQLClient.queryAndReturnParsed(
-      QueryOptions(
-        document: documentNodeQuerymeetingsRosterDemographics,
-        operationName: 'meetingsRosterDemographics',
-        variables: Variables_Query_meetingsRosterDemographics(
-          day: day,
-          where: filters.where,
-          rosterWhere: filters.rosterWhere,
-        ).toJson(),
-        parserFn: Query_meetingsRosterDemographics.fromJson,
-      ),
-    );
-
-    return [
-      for (final row in result.historyMeetingRoster)
-        if (row.personId?.uuid case final personId?)
-          SingleDayRosterMember(
-            personId: personId,
-            studyYearId: row.studyYearId,
-            studyYearName: row.studyYearName,
-            gender: row.gender,
-            attended: row.attendanceHistory.isNotEmpty,
-          ),
-    ];
-  }
-
-  Future<List<PersonMeetingAttendanceAnalysis>> getAttendanceAnalyses({
-    required Meeting meeting,
-    required DateTimeRange range,
-    required bool asServant,
-  }) async {
-    final result = await _runAttendanceAnalysis(
-      range: range,
-      where: [
-        Input_HistoryMeetingRosterBoolExp(
-          asServant: Input_BooleanComparisonExp($_eq: asServant),
-        ),
-      ],
-      meetingIds: [meeting.id.toUuid()],
-    );
-
-    final heldDays =
-        result.historyMeetings.singleOrNull?.days
-            .map((d) => d.day)
-            .nonNulls
-            .toList() ??
-        [];
-
-    return result.historyMeetingRoster
-        .map(
-          (row) => PersonMeetingAttendanceAnalysis.fromQueryResult(
-            row,
-            meeting,
-            heldDays,
-          ),
-        )
-        .toList();
-  }
-
-  Future<Query_attendanceAnalysis> _runAttendanceAnalysis({
-    required DateTimeRange range,
-    required List<Input_HistoryMeetingRosterBoolExp> where,
-    required List<UuidValue> meetingIds,
-  }) async {
-    return graphQLClient.queryAndReturnParsed(
-      QueryOptions(
-        document: documentNodeQueryattendanceAnalysis,
-        operationName: 'attendanceAnalysis',
-        variables: Variables_Query_attendanceAnalysis(
-          dayFrom: range.start,
-          dayTo: range.end,
-          meetingIds: meetingIds,
-          where: where,
-        ).toJson(),
-        parserFn: Query_attendanceAnalysis.fromJson,
-      ),
-    );
-  }
-
-  Future<List<Meeting>> getPersonMeetings({
-    required String personId,
-    bool? asServant,
-  }) async {
-    final where = [
-      if (asServant != null)
-        Input_HistoryMeetingRosterBoolExp(
-          asServant: Input_BooleanComparisonExp($_eq: asServant),
-        ),
-    ];
-
-    final result = await graphQLClient.queryAndReturnParsed(
-      QueryOptions(
-        document: documentNodeQuerypersonMeetings,
-        operationName: 'personMeetings',
-        variables: Variables_Query_personMeetings(
-          personId: personId.toUuid(),
-          where: where,
-        ).toJson(),
-        parserFn: Query_personMeetings.fromJson,
-      ),
-    );
-
-    final meetings = [
-      for (final row in result.historyMeetingRoster)
-        if (row.meeting case final meeting?) Meeting.fromJson(meeting.toJson()),
-    ];
-
-    return {
-      for (final meeting in meetings) meeting.id: meeting,
-    }.values.toList();
   }
 
   PaginatableStreamBase<LastRecordedByInfo> paginatePersonAttendance({
@@ -464,41 +220,68 @@ class MeetingsDAO extends DAOBase<Meeting>
     bool asServant = false,
     int? limit,
   }) {
-    return PaginatableStream.simple(
-      pageSize: limit ?? 100,
-      factory: (request) {
-        return graphQLClient.legacySubscribeAndReturnParsed(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionpersonMeetingAttendance,
-            operationName: 'personMeetingAttendance',
-            variables: Variables_Subscription_personMeetingAttendance(
-              where: [
-                Input_HistoryAttendanceHistoryBoolExp(
-                  personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
-                  meetingId: Input_UuidComparisonExp($_eq: meetingId.toUuid()),
-                  asServant: Input_BooleanComparisonExp($_eq: asServant),
-                ),
-                if (request.cursor case final cursor?)
-                  Input_HistoryAttendanceHistoryBoolExp(
-                    datetime: Input_TimestamptzComparisonExp(
-                      $_lt: cursor.time,
-                    ),
-                  ),
-              ],
-              orderBy: [
-                Input_HistoryAttendanceHistoryOrderBy(
-                  datetime: Enum_OrderBy.DESC,
-                ),
-              ],
-              limit: request.pageSize,
-            ).toJson(),
-            parserFn: db.parser.singleListParser(
-              LastRecordedByInfo.fromJson,
-              pageSize: request.pageSize,
-            ),
-          ),
-        );
-      },
+    final pageQuery = KeysetPageQuery(
+      client: graphQLClient,
+      document: documentNodeQueryattendanceRecords,
+      fromJson: _recordedAt,
+    );
+    final variables = Variables_Query_attendanceRecords(
+      filter: Input_AttendanceRecordFilterInput(
+        personId: Input_AttendanceRecordFilterPersonId(eq: personId),
+        meetingId: Input_AttendanceRecordFilterMeetingId(eq: meetingId),
+        asServant: Input_AttendanceRecordFilterAsServant(eq: asServant),
+      ),
+      sort: [
+        Input_AttendanceRecordSortInput(
+          field: Enum_AttendanceRecordSortField.DATETIME,
+          order: Enum_SortOrder.DESC,
+        ),
+      ],
+    ).toJson();
+
+    return KeysetPaginatedStream<LastRecordedByInfo, void>(
+      registry: db.liveQueries,
+      pageSize: limit ?? PaginatableStream.defaultPageSize,
+      parametersStream: Stream.value(null),
+      fetchChunk: (_, chunk) =>
+          pageQuery.fetch(variables: variables, chunk: chunk),
     );
   }
+
+  Future<List<PersonMeetingAttendanceAnalysis>> getPersonAttendanceAnalysis({
+    required String personId,
+    required DateTimeRange range,
+    required List<Meeting> meetings,
+    bool? asServant,
+  }) => _analysis.personAttendance(
+    personId: personId,
+    range: range,
+    meetings: meetings,
+    asServant: asServant,
+  );
+
+  Future<MeetingsAttendanceAnalysis> getMeetingsAttendanceAnalysis({
+    required MeetingsAnalysisSubject subject,
+    required DateTimeRange range,
+  }) => _analysis.subjectAttendance(subject: subject, range: range);
+
+  Future<List<SingleDayRosterMember>> getSingleDayRosterDemographics({
+    required MeetingsAnalysisSubject subject,
+    required DateTime day,
+  }) => _analysis.subjectRosterOnDay(subject: subject, day: day);
+
+  Future<List<PersonMeetingAttendanceAnalysis>> getAttendanceAnalyses({
+    required Meeting meeting,
+    required DateTimeRange range,
+    required bool asServant,
+  }) => _analysis.meetingAttendance(
+    meeting: meeting,
+    range: range,
+    asServant: asServant,
+  );
+
+  Future<List<Meeting>> getPersonMeetings({
+    required String personId,
+    bool? asServant,
+  }) => _analysis.personMeetings(personId: personId, asServant: asServant);
 }

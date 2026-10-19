@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'meeting_roster_entry.freezed.dart';
@@ -28,32 +27,36 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
     this.phones = const [],
   });
 
-  factory MeetingRosterEntry.fromQueryResult(
-    Query_historyMeetingRoster_historyMeetingRoster row,
-  ) {
+  factory MeetingRosterEntry.fromRosterEntryJson(Json row) {
+    final studyYearId = row['studyYearId'] as int?;
+    final photoUpdatedAt = row['photoUpdatedAt'] as String?;
     final person = Person(
-      id: row.personId?.uuid ?? '',
-      name: row.name ?? '',
-      gender: row.gender ?? false,
-      color: colorFromInt(row.color),
-      studyYearId: row.studyYearId,
-      photoUpdatedAt: row.photoUpdatedAt,
-      blurhash: row.blurhash,
-      studyYear: switch (row.studyYearId) {
+      id: row['personId'] as String,
+      name: row['name'] as String? ?? '',
+      gender: row['gender'] as bool? ?? false,
+      color: colorFromInt(row['color'] as int?),
+      studyYearId: studyYearId,
+      photoUpdatedAt: photoUpdatedAt == null
+          ? null
+          : tstzFromString(photoUpdatedAt),
+      blurhash: row['blurhash'] as String?,
+      studyYear: switch (studyYearId) {
         null => null,
         final studyYearId => StudyYear(
           order: studyYearId,
-          name: row.studyYearName ?? '',
+          name: row['studyYearName'] as String? ?? '',
         ),
       },
     );
 
     return MeetingRosterEntry(
-      asServant: row.asServant ?? false,
+      asServant: row['asServant'] as bool? ?? false,
       person: person,
       personAttendanceAnalysis: null,
       attendanceRecord: null,
-      phones: row.phones ?? const [],
+      phones: [
+        for (final phone in row['phones'] as List? ?? const []) '$phone',
+      ],
     );
   }
 }

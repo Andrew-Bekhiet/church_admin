@@ -19,14 +19,6 @@ fragment Address on Addresses {
   apartmentNumber
   specialLandmark
 }
-fragment AttendanceHistory on HistoryAttendanceHistory {
-  id
-  time: datetime
-  user: recordedByUser {
-    ...User
-  }
-}
-
 fragment VisitHistory on HistoryVisitHistory {
   time
   user {

@@ -1,0 +1,147 @@
+query meetings(
+  $filter: MeetingFilterInput
+  $sort: [MeetingSortInput]
+  $first: Int
+  $after: String
+) {
+  meetings(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Meeting
+    }
+  }
+}
+
+query meeting($id: ID!) {
+  meeting(id: $id) {
+    ...Meeting
+  }
+}
+
+query attendanceRecords(
+  $filter: AttendanceRecordFilterInput
+  $sort: [AttendanceRecordSortInput]
+  $first: Int
+  $after: String
+) {
+  attendanceRecords(
+    filter: $filter
+    sort: $sort
+    first: $first
+    after: $after
+  ) {
+    count
+    endKeyset
+    results {
+      ...AttendanceRecord
+    }
+  }
+}
+
+query rosterEntries(
+  $filter: RosterEntryFilterInput
+  $sort: [RosterEntrySortInput]
+  $first: Int
+  $after: String
+) {
+  rosterEntries(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...RosterEntry
+    }
+  }
+}
+
+query meetingsHeldDays(
+  $filter: MeetingFilterInput
+  $from: Date!
+  $to: Date!
+  $first: Int
+  $after: String
+) {
+  meetings(filter: $filter, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      id
+      heldDays(from: $from, to: $to)
+    }
+  }
+}
+
+query rosterAttendance(
+  $filter: RosterEntryFilterInput
+  $sort: [RosterEntrySortInput]
+  $attendedFilter: AttendanceRecordFilterInput
+  $first: Int
+  $after: String
+) {
+  rosterEntries(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      id
+      meetingId
+      personId
+      asServant
+      studyYearId
+      studyYearName
+      gender
+      attendanceRecords(
+        filter: $attendedFilter
+        sort: [{ field: DAY, order: ASC }]
+      ) {
+        id
+        day
+      }
+    }
+  }
+}
+
+query meetingsWithDays(
+  $filter: MeetingFilterInput
+  $sort: [MeetingSortInput]
+  $daysFilter: MeetingDayFilterInput
+  $first: Int
+  $after: String
+) {
+  meetings(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      ...Meeting
+      days(filter: $daysFilter, sort: [{ field: DAY, order: ASC }]) {
+        id
+        day
+        studyYearId
+        gender
+        personsCount
+        servantsCount
+        totalCount
+      }
+    }
+  }
+}
+
+query personMeetingEntries(
+  $filter: RosterEntryFilterInput
+  $sort: [RosterEntrySortInput]
+  $first: Int
+  $after: String
+) {
+  rosterEntries(filter: $filter, sort: $sort, first: $first, after: $after) {
+    count
+    endKeyset
+    results {
+      id
+      personId
+      asServant
+      meetingId
+      meeting {
+        ...Meeting
+      }
+    }
+  }
+}
