@@ -1,22 +1,3 @@
-function auth.sync_users_permissions_by_entity_id_cache()
-function auth.user_can_edit_area(areas, json)
-function auth.user_can_edit_class(classes, json)
-function auth.user_can_edit_family(families, json)
-function auth.user_can_edit_group(groups, json)
-function auth.user_can_edit_person(persons, json)
-function auth.user_can_edit_service(services, json)
-function auth.user_can_edit_store(stores, json)
-function auth.user_can_edit_street(streets, json)
-function auth.user_can_edit_user(auth.users_data, json)
 function history.edit_history_trigger()
 function public.set_current_timestamp_updated_at()
 function public.soft_delete_trigger()
-trigger auth.users_admin_on.sync_users_permissions_by_entity_id_cache
-trigger auth.users_data.sync_users_permissions_by_entity_id_cache
-trigger auth.users_permissions.sync_users_permissions_by_entity_id_cache
-trigger public.addresses.sync_users_permissions_by_entity_id_cache
-trigger public.areas_streets.sync_users_permissions_by_entity_id_cache
-trigger public.classes.sync_users_permissions_by_entity_id_cache
-trigger public.persons.sync_users_permissions_by_entity_id_cache
-trigger public.persons_groups.sync_users_permissions_by_entity_id_cache
-trigger public.persons_services.sync_users_permissions_by_entity_id_cache

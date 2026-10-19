@@ -13,12 +13,7 @@ defmodule ChurchAdmin.Resources.SchemaCoverageTest do
     {"public", "ash_schema_migrations"} =>
       "Ecto's migration bookkeeping table (migration_source)",
     {"public", "oban_jobs"} => "owned by Oban",
-    {"public", "oban_peers"} => "owned by Oban",
-    {"auth", "users_permissions_by_entity_id"} =>
-      "permission view, replaced by the actor and scope expressions",
-    {"auth", "users_permissions_by_entity_id_cache"} =>
-      "permission cache, replaced by the actor and scope expressions",
-    {"auth", "users_admin_on_meetings"} => "replaced by the meeting scope expression"
+    {"public", "oban_peers"} => "owned by Oban"
   }
 
   test "every column of a mapped relation is an attribute" do
