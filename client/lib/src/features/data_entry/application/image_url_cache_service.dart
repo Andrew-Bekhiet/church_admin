@@ -30,12 +30,12 @@ class ImageUrlCacheService {
   /// Returns cached url if available and its file is cached or if its not expired
   /// otherwise returns a fresh download url
   Future<String> getImageUrl(ObjectImageInfo imageObject) async {
-    final cachedImageUrl = getCachedImageUrl(imageObject);
+    final cached = _cachedEntryOf(imageObject);
 
-    if (cachedImageUrl != null &&
-        (!isUrlExpired(cachedImageUrl) ||
+    if (cached != null &&
+        (!cached.isExpired ||
             await isUrlFileCachedAndValid(imageObject.photoCacheKey))) {
-      return SynchronousFuture(cachedImageUrl);
+      return SynchronousFuture(cached.url);
     }
 
     return _getUrlAndSaveToCache(imageObject);
@@ -47,29 +47,17 @@ class ImageUrlCacheService {
   ///
   /// Returns the cached URL if it exists and is not expired, otherwise returns null.
   String? getNonExpiredCachedImageUrl(ObjectImageInfo imageObject) {
-    final cachedUrl = getCachedImageUrl(imageObject);
+    final cached = _cachedEntryOf(imageObject);
 
-    if (cachedUrl == null || isUrlExpired(cachedUrl)) {
+    if (cached == null || cached.isExpired) {
       return null;
     }
 
-    return cachedUrl;
+    return cached.url;
   }
 
-  String? getCachedImageUrl(ObjectImageInfo imageInfo) {
-    final cachedData = box.get(imageInfo.cacheKey);
-
-    if (cachedData == null) return null;
-
-    final cacheLastUpdatedTime = DateTime.parse(cachedData.split('|').first);
-    final cachedUrl = cachedData.split('|').last;
-
-    if (cacheLastUpdatedTime != imageInfo.lastUpdatedTime) {
-      return null;
-    }
-
-    return cachedUrl;
-  }
+  String? getCachedImageUrl(ObjectImageInfo imageInfo) =>
+      _cachedEntryOf(imageInfo)?.url;
 
   Future<bool> isUrlFileCachedAndValid(String cacheKey) async {
     final cacheFile = await cacheManager.getFileFromCache(cacheKey);
@@ -77,50 +65,50 @@ class ImageUrlCacheService {
     return cacheFile != null && cacheFile.validTill.isAfter(DateTime.now());
   }
 
-  bool isUrlExpired(String url) {
-    final parsedUrl = Uri.parse(url);
-    final queryParameters = parsedUrl.queryParameters;
+  Future<String> _getUrlAndSaveToCache(ObjectImageInfo imageInfo) async {
+    final link = await imageInfo.getDownloadLink();
 
-    if (queryParameters['X-Goog-Date'] == null ||
-        queryParameters['X-Goog-Expires'] == null) {
-      return true;
-    }
+    await _updateFileAndUrlCache(imageInfo, link);
 
-    final createdAt = DateTime.parse(queryParameters['X-Goog-Date']!);
-    final expiresInSeconds = int.parse(queryParameters['X-Goog-Expires']!);
-
-    final expiresAt = createdAt.add(Duration(seconds: expiresInSeconds));
-
-    return expiresAt.isBefore(DateTime.now());
+    return link.url;
   }
 
-  Future<String> _getUrlAndSaveToCache(ObjectImageInfo imageInfo) async {
-    final downloadUrl = await imageInfo.getDownloadUrl();
+  CachedImageUrl? _cachedEntryOf(ObjectImageInfo imageInfo) {
+    final cachedData = box.get(imageInfo.cacheKey);
 
-    await _updateFileAndUrlCache(imageInfo, downloadUrl);
+    if (cachedData == null) return null;
 
-    return downloadUrl;
+    final cached = CachedImageUrl.parse(cachedData);
+
+    return cached.photoUpdatedAt == imageInfo.lastUpdatedTime ? cached : null;
   }
 
   Future<void> _updateFileAndUrlCache(
     ObjectImageInfo imageInfo,
-    String url,
+    PhotoLink link,
   ) async {
     final cacheKey = imageInfo.cacheKey;
-    final updatedTime = imageInfo.lastUpdatedTime!.toIso8601String();
+    final updatedTime = imageInfo.lastUpdatedTime!;
 
     final oldCache = box.get(cacheKey);
 
-    box.put(cacheKey, '$updatedTime|$url');
+    box.put(
+      cacheKey,
+      CachedImageUrl(
+        photoUpdatedAt: updatedTime,
+        expiresAt: link.expiresAt,
+        url: link.url,
+      ).toStoredString(),
+    );
 
     if (oldCache == null) return;
 
-    final [oldUpdatedTime, _] = oldCache.split('|');
+    final oldUpdatedTime = CachedImageUrl.parse(oldCache).photoUpdatedAt;
 
     if (oldUpdatedTime == updatedTime) return;
 
     await cacheManager.removeFile(
-      ObjectImageInfo.photoCacheKeyOf(cacheKey, DateTime.parse(oldUpdatedTime)),
+      ObjectImageInfo.photoCacheKeyOf(cacheKey, oldUpdatedTime),
     );
   }
 }

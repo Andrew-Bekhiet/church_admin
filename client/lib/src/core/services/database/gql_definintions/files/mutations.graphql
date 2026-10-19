@@ -1,0 +1,30 @@
+mutation requestPhotoUpload(
+  $subject: PhotoSubject!
+  $id: ID!
+  $contentType: String
+) {
+  requestPhotoUpload(subject: $subject, id: $id, contentType: $contentType) {
+    ...PhotoLink
+  }
+}
+
+mutation deletePhoto($subject: PhotoSubject!, $id: ID!) {
+  deletePhoto(subject: $subject, id: $id)
+}
+
+mutation exportData(
+  $areasIds: [ID!]
+  $servicesIds: [ID!]
+  $classesIds: [ID!]
+  $groupsIds: [ID!]
+) {
+  exportData(
+    areasIds: $areasIds
+    servicesIds: $servicesIds
+    classesIds: $classesIds
+    groupsIds: $groupsIds
+  ) {
+    downloadUrl
+    expiresAt
+  }
+}

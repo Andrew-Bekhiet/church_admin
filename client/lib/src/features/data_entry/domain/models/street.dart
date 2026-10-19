@@ -53,8 +53,11 @@ class Street extends ViewableWithIDAndImage
   final bool userCanEdit;
 
   @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('streets', id, lastUpdatedTime: photoUpdatedAt);
+  ObjectImageInfo get imageInfo => ObjectPhotoInfo(
+    Enum_PhotoSubject.STREETS,
+    id,
+    lastUpdatedTime: photoUpdatedAt,
+  );
 
   @override
   String get typeName => AdvancedQueriesMetadata().street.name;

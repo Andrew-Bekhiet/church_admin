@@ -18,7 +18,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final DatabaseService _databaseService;
   final AuthStorage _authStorage;
   final Stream<bool> _connectivityStream;
-  final FunctionsService _functionsService;
   final FeatureFlagsRepository _featureFlagsRepository;
 
   Timer? _refreshTokenTimer;
@@ -69,7 +68,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this._databaseService,
     required this._authStorage,
     required this._connectivityStream,
-    required this._functionsService,
     required this._featureFlagsRepository,
     bool loadCachedUser = true,
   }) : super(const AuthInitial()) {
@@ -348,7 +346,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       return;
     }
 
-    if (!await _functionsService.tryClaimAccount()) return;
+    if (!await _databaseService.accounts.tryClaimAccount()) return;
 
     await _authRepository.refreshToken();
   }
@@ -360,7 +358,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(AuthLoading(previousState: state));
 
-      await _functionsService.applyInvitationCode(event.code);
+      await _databaseService.accounts.applyInvitationCode(event.code);
       await _authRepository.reload();
       await _authRepository.refreshToken();
     } catch (e, stackTrace) {

@@ -68,7 +68,7 @@ void main() {
       ],
       verify: (_) {
         verifyNever(
-          () => fixture.functionsService.exportData(
+          () => fixture.exportsDao.exportData(
             areasIds: any(named: 'areasIds'),
             servicesIds: any(named: 'servicesIds'),
             classesIds: any(named: 'classesIds'),
@@ -82,7 +82,7 @@ void main() {
       'exports selected objects and saves the downloaded file',
       setUp: () {
         when(
-          () => fixture.functionsService.exportData(
+          () => fixture.exportsDao.exportData(
             areasIds: [area.id],
             servicesIds: any(named: 'servicesIds'),
             classesIds: any(named: 'classesIds'),
@@ -128,7 +128,7 @@ void main() {
       ],
       verify: (_) {
         verify(
-          () => fixture.functionsService.exportData(
+          () => fixture.exportsDao.exportData(
             areasIds: [area.id],
             servicesIds: captureAny(named: 'servicesIds'),
             classesIds: captureAny(named: 'classesIds'),
@@ -163,7 +163,7 @@ void main() {
 
 final class _DataExportCubitFixture {
   final authBloc = MockAuthBloc();
-  final functionsService = MockFunctionsService();
+  final exportsDao = MockExportsDAO();
   final exportOperationsStorage = MockExportOperationsStorage();
   final databaseService = MockDatabaseService();
   final areasDao = MockAreasDAO();
@@ -197,6 +197,7 @@ final class _DataExportCubitFixture {
     when(() => databaseService.services).thenReturn(servicesDao);
     when(() => databaseService.classes).thenReturn(classesDao);
     when(() => databaseService.groups).thenReturn(groupsDao);
+    when(() => databaseService.exports).thenReturn(exportsDao);
 
     _stubStreamAll(areasDao.streamAll, _emptyPaginatableStream<Area>);
     _stubStreamAll(servicesDao.streamAll, _emptyPaginatableStream<Service>);
@@ -214,7 +215,6 @@ final class _DataExportCubitFixture {
   DataExportCubit createCubit() {
     return DataExportCubit(
       authBloc: authBloc,
-      functionsService: functionsService,
       exportOperationsStorage: exportOperationsStorage,
       databaseService: databaseService,
     );
@@ -241,7 +241,7 @@ void _stubStreamAll<T extends ViewableWithID>(
 
 final class MockAuthBloc extends Mock implements AuthBloc {}
 
-final class MockFunctionsService extends Mock implements FunctionsService {}
+final class MockExportsDAO extends Mock implements ExportsDAO {}
 
 final class MockExportOperationsStorage extends Mock
     implements ExportOperationsStorage {}

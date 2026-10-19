@@ -31,7 +31,6 @@ dependencies:
   church_admin_annotations:
     path: ../packages/church_admin_annotations
   clock: ^1.1.1
-  cloud_functions: ^7.0.0
   collection: ^1.17.0
   connectivity_plus: ^7.2.0
   cryptography_flutter_plus: ^3.0.0

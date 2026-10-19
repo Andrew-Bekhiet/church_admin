@@ -606,13 +606,6 @@ class MockImageUrlCacheService extends _i1.Mock
         returnValue: _i2.Future<bool>.value(false),
         returnValueForMissingStub: _i2.Future<bool>.value(false),
       ) as _i2.Future<bool>);
-
-  @override
-  bool isUrlExpired(String? url) => (super.noSuchMethod(
-    Invocation.method(#isUrlExpired, [url]),
-    returnValue: false,
-    returnValueForMissingStub: false,
-  ) as bool);
 }
 
 /// A class which mocks [UserPreferencesService].

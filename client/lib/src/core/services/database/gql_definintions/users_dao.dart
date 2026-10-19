@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/data_check_free_documents.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/accounts/__generated__/mutations.graphql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
 import 'package:graphql/client.dart';
@@ -60,6 +61,26 @@ class UsersDAO extends DAOBase<User>
     );
   }
 
+  /// The uid of the created user.
+  Future<String> createUser(CreateUserRequest request) {
+    const document = documentNodeMutationcreateUser;
+
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: document,
+        operationName: 'createUser',
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables_Mutation_createUser(
+          input: _createUserInputOf(request),
+        ).toJson(),
+        parserFn: AshResultParser(document).mutationResult(
+          (json) => json['uid'] as String,
+        ),
+      ),
+      autoChangeFetchPolicy: false,
+    );
+  }
+
   Future<void> updateUser(UserUpdate update) async {
     if (!update.hasChanges) return;
 
@@ -96,4 +117,25 @@ class UsersDAO extends DAOBase<User>
       throw PersonAlreadyLinkedException(personId);
     }
   }
+
+  Input_CreateUserInput _createUserInputOf(CreateUserRequest request) =>
+      Input_CreateUserInput(
+        name: request.name,
+        email: request.email,
+        permissions: request.permissions,
+        adminOn: request.adminOn.map((data) => data.toCommandInput()).toList(),
+        personId: switch (request.person) {
+          LinkExistingPerson(:final person) => person.id,
+          NoPersonSelected() || CreateNewPerson() => null,
+        },
+        newPerson: switch (request.person) {
+          CreateNewPerson(:final name, :final gender) => Input_NewPersonInput(
+            name: name,
+            gender: gender,
+          ),
+          NoPersonSelected() => Input_NewPersonInput(name: '', gender: true),
+          LinkExistingPerson() => null,
+        },
+        invitationExpiresAt: request.invitationExpiresAt,
+      );
 }

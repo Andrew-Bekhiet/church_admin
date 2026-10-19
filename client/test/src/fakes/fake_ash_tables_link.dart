@@ -103,19 +103,37 @@ class SentRequest {
 /// their typename, given the mutation's variables.
 typedef FakeAshMutation = Json? Function(Json variables);
 
+/// A domain rejection of a generic action, as AshGraphql reports it: an
+/// error whose `extensions.code` names the reason.
+class FakeAshRejection implements Exception {
+  final String code;
+  final String message;
+
+  const FakeAshRejection(this.code, {this.message = 'rejected'});
+}
+
+typedef FakeAshAction = Object? Function(Json variables);
+
 /// An Ash GraphQL server over [FakeAshTable]s. It applies the `filter`
 /// operators the client sends (`and or not eq notEq in isNil ilike`), sorts
 /// by `sort` and then by id as Ash does, and pages with `first`/`after`.
 /// Every request is kept in [sent]; setting [nextMutationRejectionCode] makes
-/// the next mutation fail with the error code the real server raises.
+/// the next mutation fail with the error code the real server raises. A root
+/// named in [actions] is a generic action: its function answers with the root
+/// field's value or throws a [FakeAshRejection].
 class FakeAshTablesLink extends Link {
   final List<FakeAshTable> tables;
   final Map<String, FakeAshMutation> mutations;
+  final Map<String, FakeAshAction> actions;
   final List<SentRequest> sent = [];
 
   String? nextMutationRejectionCode;
 
-  FakeAshTablesLink(this.tables, {this.mutations = const {}});
+  FakeAshTablesLink(
+    this.tables, {
+    this.mutations = const {},
+    this.actions = const {},
+  });
 
   Iterable<SentRequest> sentTo(String root) =>
       sent.where((request) => request.root == root);
@@ -136,25 +154,33 @@ class FakeAshTablesLink extends Link {
       final code = nextMutationRejectionCode!;
       nextMutationRejectionCode = null;
 
-      return Stream.value(
-        Response(
-          errors: [
-            GraphQLError(
-              message: 'rejected: $code',
-              extensions: {'code': code},
-            ),
-          ],
-          response: const {},
-        ),
-      );
+      return Stream.value(_rejection(code, 'rejected: $code'));
     }
 
-    return Stream.value(Response(data: _answer(request), response: const {}));
+    try {
+      return Stream.value(Response(data: _answer(request), response: const {}));
+    } on FakeAshRejection catch (rejection) {
+      return Stream.value(_rejection(rejection.code, rejection.message));
+    }
   }
+
+  Response _rejection(String code, String message) => Response(
+    errors: [
+      GraphQLError(message: message, extensions: {'code': code}),
+    ],
+    response: const {},
+  );
 
   Json _answer(Request request) {
     final root = AshResultParser.rootFieldOf(request.operation.document);
     final variables = request.variables;
+
+    if (actions[root] case final action?) {
+      return {
+        '__typename': request.isMutation ? 'Mutation' : 'Query',
+        root: action(variables),
+      };
+    }
 
     if (request.isMutation) {
       if (mutations[root] case final mutation?) {

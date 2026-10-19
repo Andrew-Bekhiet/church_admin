@@ -31,7 +31,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
       intent: widget.intent,
       persons: databaseService.persons,
       families: databaseService.families,
-      photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+      photoUploader: RemotePersonPhotoUploader(databaseService.photos),
       currentUser: AuthBloc.I.currentUserData,
       addressServices: AddressFormServices.backedBy(
         databaseService,
@@ -321,9 +321,8 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
 
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => DeleteConfirmationDialog(
-        objectName: _form.savedPerson?.name ?? '',
-      ),
+      builder: (context) =>
+          DeleteConfirmationDialog(objectName: _form.savedPerson?.name ?? ''),
     );
     if (confirmed != true || !mounted) return;
 

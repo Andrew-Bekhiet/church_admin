@@ -63,8 +63,11 @@ class User extends ViewableWithIDAndImage
   final bool currentUserCanManageThisUser;
 
   @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('users', id, lastUpdatedTime: photoUpdatedAt);
+  ObjectImageInfo get imageInfo => ObjectPhotoInfo(
+    Enum_PhotoSubject.USERS,
+    id,
+    lastUpdatedTime: photoUpdatedAt,
+  );
 
   @override
   String get typeName => AdvancedQueriesMetadata().user.name;
