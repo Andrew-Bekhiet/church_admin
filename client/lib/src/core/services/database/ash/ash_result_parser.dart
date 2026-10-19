@@ -8,10 +8,7 @@ class AshResultParser {
       _rootFields[document] ??= switch (document.definitions
           .whereType<OperationDefinitionNode>()
           .first
-          .selectionSet
-          .selections
-          .whereType<FieldNode>()
-          .firstWhere((field) => field.name.value != '__typename')) {
+          .rootField) {
         FieldNode(:final alias?) => alias.value,
         FieldNode(:final name) => name.value,
       };
