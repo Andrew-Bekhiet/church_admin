@@ -89,7 +89,6 @@ trigger public.addresses.check_address_insertion
 trigger public.addresses.check_address_street_same_area
 trigger public.addresses.sync_house_code_with_legacy_house_number
 trigger public.addresses.sync_users_permissions_by_entity_id_cache
-trigger public.areas.edit_history
 trigger public.areas.sync_area_streets
 trigger public.areas_streets.sync_users_permissions_by_entity_id_cache
 trigger public.classes.edit_history
@@ -130,8 +129,6 @@ trigger public.services.edit_history
 trigger public.services.soft_delete_services
 trigger public.stores.check_store_admin_family_or_address
 trigger public.stores.check_store_insertion
-trigger public.stores.edit_history
 trigger public.streets.check_street_has_area
-trigger public.streets.edit_history
 trigger public.streets.sync_street_areas
 trigger public.users_preferences.set_public_users_preferences_updated_at
