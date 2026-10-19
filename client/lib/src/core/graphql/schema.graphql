@@ -75,6 +75,16 @@ input AdminOnInput {
   adminOnArea: ID
 }
 
+input MeetingInput {
+  showKodasCheckbox: Boolean
+  serviceStudyYear: Int
+  serviceGender: Boolean
+  name: String!
+  isArchived: Boolean
+  color: Int
+  audience: String
+}
+
 input AddressInput {
   substreetName: String
   streetId: ID
@@ -88,14 +98,19 @@ input AddressInput {
   apartmentNumber: Int
 }
 
-input MeetingInput {
-  showKodasCheckbox: Boolean
-  serviceStudyYear: Int
-  serviceGender: Boolean
-  name: String!
-  isArchived: Boolean
-  color: Int
-  audience: String
+input FamilyContactInput {
+  phone: String!
+  personTypeId: ID!
+  label: String
+  isMainPhone: Boolean!
+  id: ID
+}
+
+input ContactInput {
+  phone: String!
+  label: String
+  isMainPhone: Boolean!
+  id: ID
 }
 
 enum ServiceMembershipSortField {
@@ -592,6 +607,128 @@ type PersonHobby {
   hobbyId: ID!
   person: Person
   hobbyName: String
+}
+
+"The result of the :delete_person mutation"
+type DeletePersonResult {
+  "The record that was successfully deleted"
+  result: Person
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+"The result of the :record_person_spiritual_days mutation"
+type RecordPersonSpiritualDaysResult {
+  "The successful result of the mutation"
+  result: Person
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input RecordPersonSpiritualDaysInput {
+  confessionDay: Date!
+  kodasDay: Date!
+}
+
+"The result of the :update_person mutation"
+type UpdatePersonResult {
+  "The successful result of the mutation"
+  result: Person
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input UpdatePersonInput {
+  name: String
+  birthdate: Date
+  gender: Boolean
+  isShammas: Boolean
+  shammasLevelId: ID
+  schoolId: ID
+  collegeId: ID
+  churchId: ID
+  fatherId: ID
+  isStudent: Boolean
+  jobId: ID
+  jobDescription: String
+  qualificationId: ID
+  personTypeId: ID
+  stateId: ID
+  isServant: Boolean
+  notes: String
+  uid: ID
+  familyId: ID
+  storeId: ID
+  studyYearId: Int
+  color: Int
+  workStatus: String
+  martialStatus: String
+  servingChurchId: ID
+  serviceType: String
+  services: [ID!]
+  groups: [ID!]
+  tags: [ID!]
+  hobbies: [ID!]
+  contacts: [ContactInput!]
+  familyContacts: [FamilyContactInput!]
+  address: AddressInput
+  lastConfession: Date
+  lastKodas: Date
+  lastCall: DateTime
+  lastVisit: DateTime
+}
+
+"The result of the :create_person mutation"
+type CreatePersonResult {
+  "The successful result of the mutation"
+  result: Person
+
+  "Any errors generated, if the mutation failed"
+  errors: [MutationError!]!
+}
+
+input CreatePersonInput {
+  name: String!
+  birthdate: Date
+  gender: Boolean
+  isShammas: Boolean
+  shammasLevelId: ID
+  schoolId: ID
+  collegeId: ID
+  churchId: ID
+  fatherId: ID
+  isStudent: Boolean
+  jobId: ID
+  jobDescription: String
+  qualificationId: ID
+  personTypeId: ID
+  stateId: ID
+  isServant: Boolean
+  notes: String
+  uid: ID
+  familyId: ID
+  storeId: ID
+  studyYearId: Int
+  color: Int
+  workStatus: String
+  martialStatus: String
+  servingChurchId: ID
+  serviceType: String
+  services: [ID!]
+  groups: [ID!]
+  tags: [ID!]
+  hobbies: [ID!]
+  contacts: [ContactInput!]
+  familyContacts: [FamilyContactInput!]
+  address: AddressInput
+  newFamilyName: String
+  lastConfession: Date
+  lastKodas: Date
+  lastCall: DateTime
+  lastVisit: DateTime
 }
 
 enum PersonSortField {
@@ -11563,6 +11700,14 @@ type RootMutationType {
   updateService(id: ID!, input: UpdateServiceInput): UpdateServiceResult
 
   deleteService(id: ID!): DeleteServiceResult
+
+  createPerson(input: CreatePersonInput!): CreatePersonResult
+
+  updatePerson(id: ID!, input: UpdatePersonInput): UpdatePersonResult
+
+  recordPersonSpiritualDays(id: ID!, input: RecordPersonSpiritualDaysInput!): RecordPersonSpiritualDaysResult
+
+  deletePerson(id: ID!): DeletePersonResult
 }
 
 """
