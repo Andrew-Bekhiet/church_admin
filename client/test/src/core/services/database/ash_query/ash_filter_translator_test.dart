@@ -467,11 +467,39 @@ void main() {
       });
     });
 
+    test('is not empty on a history tests the time of its records', () {
+      expect(
+        translate(
+          PersonFields().kodasHistory,
+          MultiSelectOperator.isNotEmpty,
+          null,
+        ),
+        {
+          'kodases': {
+            'time': {'isNil': false},
+          },
+        },
+      );
+    });
+
+    test('is not empty on a latest record tests its scalar time', () {
+      expect(
+        translate(
+          PersonFields().lastKodas,
+          MultiSelectOperator.isNotEmpty,
+          null,
+        ),
+        {
+          'lastKodasDay': {'isNil': false},
+        },
+      );
+    });
+
     test('is not empty goes through a many-to-many redirect', () {
       expect(
         translate(PersonFields().classes, MultiSelectOperator.isNotEmpty, null),
         {
-          'classes': {
+          'classMemberships': {
             'class': {
               'id': {'isNil': false},
             },

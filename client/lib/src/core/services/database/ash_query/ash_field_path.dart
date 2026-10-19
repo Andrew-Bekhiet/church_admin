@@ -64,6 +64,12 @@ class AshFieldPath {
 
   final List<String> segments;
 
+  /// A latest-record scalar is the recorded time itself; a history is
+  /// tested through the time of its records.
+  AshFieldPath get recordedTime => AshNaming.namesLatestScalar(segments.last)
+      ? this
+      : append(_filterSegments(LastRecordedByInfoFields().time));
+
   AshFieldPath get parent => segments.isEmpty
       ? this
       : AshFieldPath(segments.sublist(0, segments.length - 1));
