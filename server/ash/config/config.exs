@@ -70,12 +70,24 @@ config :spark,
     ]
   ]
 
-config :church_admin, ChurchAdmin.Repo, migration_source: "ash_schema_migrations"
+config :church_admin, ChurchAdmin.Repo,
+  migration_source: "ash_schema_migrations",
+  types: ChurchAdmin.PostgrexTypes
 
 config :church_admin,
   ecto_repos: [ChurchAdmin.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true],
-  ash_domains: []
+  ash_domains: [
+    ChurchAdmin.People,
+    ChurchAdmin.Organization,
+    ChurchAdmin.Places,
+    ChurchAdmin.Attendance,
+    ChurchAdmin.Activity,
+    ChurchAdmin.Accounts,
+    ChurchAdmin.Catalog,
+    ChurchAdmin.DataQuality,
+    ChurchAdmin.Operations
+  ]
 
 # Configure the endpoint
 config :church_admin, ChurchAdminWeb.Endpoint,
