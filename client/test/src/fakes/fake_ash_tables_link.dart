@@ -129,7 +129,9 @@ typedef FakeAshAction = Object? Function(Json variables);
 /// operators the client sends (`and or not eq notEq in isNil ilike lessThan
 /// lessThanOrEqual greaterThan greaterThanOrEqual`, and a nested filter on a
 /// related row or list of rows), sorts by `sort` and then by id as Ash does,
-/// and pages with `first`/`after`. A list field of a row that takes
+/// and pages with `first`/`after`, read from each list root's own arguments
+/// (variables or literals) and otherwise from the variables of the same
+/// name. A list field of a row that takes
 /// `filter`/`sort` variables (`classes(filter: $classesFilter)`) is filtered
 /// and sorted the same way.
 /// Every request is kept in [sent]; setting [nextMutationRejectionCode] makes
@@ -268,10 +270,32 @@ class FakeAshTablesLink extends Link {
 
     return _page(
       tables.singleWhere((table) => table.listRoot == root),
-      variables,
+      {
+        ...variables,
+        for (final argument in field.arguments)
+          argument.name.value: _valueOf(argument.value, variables),
+      },
       selections,
     );
   }
+
+  Object? _valueOf(ValueNode node, Json variables) => switch (node) {
+    VariableNode(:final name) => variables[name.value],
+    IntValueNode(:final value) => int.parse(value),
+    FloatValueNode(:final value) => double.parse(value),
+    StringValueNode(:final value) => value,
+    BooleanValueNode(:final value) => value,
+    EnumValueNode(:final name) => name.value,
+    NullValueNode() => null,
+    ListValueNode(:final values) => [
+      for (final value in values) _valueOf(value, variables),
+    ],
+    ObjectValueNode(:final fields) => {
+      for (final field in fields)
+        field.name.value: _valueOf(field.value, variables),
+    },
+    _ => throw UnsupportedError('Unsupported argument $node'),
+  };
 
   Iterable<FieldNode> _rootFields(DocumentNode document) => document.definitions
       .whereType<OperationDefinitionNode>()
