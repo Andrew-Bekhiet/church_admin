@@ -155,7 +155,8 @@ defmodule ChurchAdmin.Realtime.ReplicationStreamTest do
       "select pg_terminate_backend(active_pid) from pg_replication_slots where slot_name = '#{old_slot}'"
     )
 
-    await_new_head(b, head_before)
+    await_reset(b, head_before)
+    assert Broadcaster.head(b) > head_before
 
     hobby = insert_hobby(writer)
     await_change(%{type: "Hobby", id: hobby, op: "insert"})
@@ -167,20 +168,6 @@ defmodule ChurchAdmin.Realtime.ReplicationStreamTest do
       )
 
     assert new_slot != old_slot
-  end
-
-  defp await_new_head(broadcaster, old_head, attempts \\ 100) do
-    cond do
-      Broadcaster.head(broadcaster) > old_head ->
-        :ok
-
-      attempts == 0 ->
-        flunk("the stream did not reset the broadcaster after reconnecting")
-
-      true ->
-        Process.sleep(50)
-        await_new_head(broadcaster, old_head, attempts - 1)
-    end
   end
 
   defp open_transaction do
