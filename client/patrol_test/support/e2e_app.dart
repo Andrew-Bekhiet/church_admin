@@ -94,6 +94,26 @@ abstract final class E2eApp {
     await tester.waitForAbsent(loginButton);
   }
 
+  /// Signs [email] up and verifies it, which makes the app claim the
+  /// `auth.users_data` row seeded with that email, then enters home as it.
+  static Future<void> signUpClaimingSeededAccount(
+    WidgetTester tester, {
+    required String email,
+    String password = E2eBackend.password,
+  }) async {
+    final verificationScreen = find.byKey(
+      EmailVerificationScreenKeys.confirmEmailButtonKey,
+    );
+
+    await signUp(tester, email: email, password: password);
+    await tester.waitFor(verificationScreen);
+    await E2eBackend.verifyEmail(email);
+    await tester.tapOn(verificationScreen);
+    await tester.waitForAbsent(verificationScreen);
+    await completeSpiritualData(tester);
+    await enterHome(tester, password);
+  }
+
   static Future<void> applyInvitationCode(
     WidgetTester tester,
     String code,
