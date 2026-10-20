@@ -12,16 +12,11 @@ extension E2eWidgetTester on WidgetTester {
     Finder finder, {
     Duration timeout = defaultTimeout,
   }) async {
-    final deadline = DateTime.now().add(timeout);
-
-    while (finder.evaluate().isEmpty) {
-      if (DateTime.now().isAfter(deadline)) {
-        throw _timedOut(
-          'Timed out after $timeout waiting for ${finder.toString(describeSelf: true)}',
-        );
-      }
-      await pump(_pollInterval);
-    }
+    await _pollUntil(
+      () => finder.evaluate().isNotEmpty,
+      timeout: timeout,
+      waitingFor: finder.toString(describeSelf: true),
+    );
 
     return finder;
   }
@@ -29,18 +24,11 @@ extension E2eWidgetTester on WidgetTester {
   Future<void> waitForAbsent(
     Finder finder, {
     Duration timeout = defaultTimeout,
-  }) async {
-    final deadline = DateTime.now().add(timeout);
-
-    while (finder.evaluate().isNotEmpty) {
-      if (DateTime.now().isAfter(deadline)) {
-        throw _timedOut(
-          'Timed out after $timeout waiting for ${finder.toString(describeSelf: true)} to go',
-        );
-      }
-      await pump(_pollInterval);
-    }
-  }
+  }) => _pollUntil(
+    () => finder.evaluate().isEmpty,
+    timeout: timeout,
+    waitingFor: '${finder.toString(describeSelf: true)} to go',
+  );
 
   Future<void> tapOn(Finder finder, {Duration timeout = defaultTimeout}) async {
     final deadline = DateTime.now().add(timeout);
@@ -71,6 +59,21 @@ extension E2eWidgetTester on WidgetTester {
     final deadline = DateTime.now().add(duration);
 
     while (DateTime.now().isBefore(deadline)) {
+      await pump(_pollInterval);
+    }
+  }
+
+  Future<void> _pollUntil(
+    bool Function() isDone, {
+    required Duration timeout,
+    required String waitingFor,
+  }) async {
+    final deadline = DateTime.now().add(timeout);
+
+    while (!isDone()) {
+      if (DateTime.now().isAfter(deadline)) {
+        throw _timedOut('Timed out after $timeout waiting for $waitingFor');
+      }
       await pump(_pollInterval);
     }
   }
