@@ -60,11 +60,11 @@ defmodule ChurchAdminWeb.Graphql.PlacesRulesMutationsTest do
       writer = user(world, :read_write)
       move = &run(conn, @update_street, %{"id" => street.id, "input" => %{"line" => &1}}, writer)
 
-      response = move.(PlacesWorld.line([{31.223, 30.005}, {31.237, 30.005}]))
+      response = [{31.223, 30.005}, {31.237, 30.005}] |> PlacesWorld.line() |> move.()
       assert response["data"]["updateStreet"]["result"]["id"] == street.id
       assert pair_set(street) == MapSet.new([world.records.a2.id])
 
-      refused = move.(PlacesWorld.line([{40.0, 40.0}, {40.1, 40.0}]))
+      refused = [{40.0, 40.0}, {40.1, 40.0}] |> PlacesWorld.line() |> move.()
       assert code(refused) == Codes.street_area_required()
       assert pair_set(street) == MapSet.new([world.records.a2.id])
     end

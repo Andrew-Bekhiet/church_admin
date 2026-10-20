@@ -8,7 +8,7 @@ defmodule ChurchAdminWeb.Graphql.OrganizationQueriesTest do
   end
 
   defp run(conn, document, variables \\ %{}, kind, world) do
-    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users[kind]))
+    claims = world.users[kind] |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
 
     conn
     |> put_req_header("authorization", "Bearer " <> FirebaseTokens.unsigned(claims))

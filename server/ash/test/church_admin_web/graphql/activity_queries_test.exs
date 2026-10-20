@@ -8,7 +8,7 @@ defmodule ChurchAdminWeb.Graphql.ActivityQueriesTest do
   end
 
   defp run(conn, document, variables, kind, world) do
-    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users[kind]))
+    claims = world.users[kind] |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
 
     conn
     |> put_req_header("authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
@@ -54,7 +54,7 @@ defmodule ChurchAdminWeb.Graphql.ActivityQueriesTest do
     assert [%{"time" => latest, "isFatherVisit" => false, "user" => %{"id" => recorder}}] =
              data["visits"]["results"]
 
-    assert latest == DateTime.to_iso8601(ActivityWorld.at(200))
+    assert latest == 200 |> ActivityWorld.at() |> DateTime.to_iso8601()
     assert recorder == world.recorded_by
 
     assert data["confessions"]["count"] == 2
@@ -75,7 +75,7 @@ defmodule ChurchAdminWeb.Graphql.ActivityQueriesTest do
       )
 
     assert [%{"time" => older}] = rest["results"]
-    assert older == DateTime.to_iso8601(ActivityWorld.at(150))
+    assert older == 150 |> ActivityWorld.at() |> DateTime.to_iso8601()
   end
 
   test "a reader outside the person's scope sees none of the person's history",
@@ -123,9 +123,9 @@ defmodule ChurchAdminWeb.Graphql.ActivityQueriesTest do
     %{"data" => data} = run(conn, document, %{"familyId" => f_area}, :read_all, world)
 
     assert [%{"time" => visit_time}] = data["latestVisits"]["results"]
-    assert visit_time == DateTime.to_iso8601(ActivityWorld.at(200))
+    assert visit_time == 200 |> ActivityWorld.at() |> DateTime.to_iso8601()
     assert [%{"time" => father_time}] = data["latestFatherVisits"]["results"]
-    assert father_time == DateTime.to_iso8601(ActivityWorld.at(300))
+    assert father_time == 300 |> ActivityWorld.at() |> DateTime.to_iso8601()
     assert data["latestEdits"]["count"] == 1
     assert data["latestCalls"]["count"] == length(ActivityWorld.person_names())
     assert data["latestConfessions"]["count"] == length(ActivityWorld.person_names())

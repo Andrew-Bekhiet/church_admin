@@ -72,7 +72,7 @@ defmodule ChurchAdminWeb.Graphql.ClientDocumentsTest do
   setup_all do
     bodies = client_documents()
     all = Enum.join(bodies, "\n")
-    {:ok, measured: Enum.map(client_operation_names(bodies), &measure(all, &1))}
+    {:ok, measured: bodies |> client_operation_names() |> Enum.map(&measure(all, &1))}
   end
 
   describe "the documents the client sends" do
@@ -101,8 +101,9 @@ defmodule ChurchAdminWeb.Graphql.ClientDocumentsTest do
     """
 
     test "is rejected for its complexity before it runs" do
-      assert Enum.any?(
-               error_messages(@fan_out),
+      assert @fan_out
+             |> error_messages()
+             |> Enum.any?(
                &(&1 =~
                    ~r/\AOperation is too complex: complexity is \d+ and maximum is #{Pipeline.max_complexity()}\z/)
              )
@@ -139,7 +140,9 @@ defmodule ChurchAdminWeb.Graphql.ClientDocumentsTest do
       String.duplicate("a { ", Pipeline.max_depth() - 1) <>
         "id" <> String.duplicate(" }", Pipeline.max_depth() - 1)
 
-    refute Enum.any?(error_messages("{ " <> nested <> " }"), &(&1 =~ "too deep"))
+    document = "{ " <> nested <> " }"
+
+    refute document |> error_messages() |> Enum.any?(&(&1 =~ "too deep"))
   end
 
   test "introspection is exempt from the depth limit" do

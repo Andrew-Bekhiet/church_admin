@@ -71,7 +71,7 @@ defmodule ChurchAdminWeb.Graphql.UnapprovedUserQueryTest do
   end
 
   defp run(conn, document, user, variables) do
-    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
+    claims = user |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
 
     conn
     |> put_req_header("authorization", "Bearer " <> FirebaseTokens.unsigned(claims))

@@ -12,7 +12,7 @@ defmodule ChurchAdminWeb.Graphql.SmallCommandsMutationsTest do
   defp run(conn, document, user, variables) do
     conn =
       if user do
-        claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
+        claims = user |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
         put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
       else
         conn

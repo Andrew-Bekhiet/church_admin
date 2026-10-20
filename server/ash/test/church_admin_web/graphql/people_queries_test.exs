@@ -14,7 +14,9 @@ defmodule ChurchAdminWeb.Graphql.PeopleQueriesTest do
           conn
 
         kind ->
-          claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users[kind]))
+          claims =
+            world.users[kind] |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
+
           put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
       end
 
@@ -73,7 +75,7 @@ defmodule ChurchAdminWeb.Graphql.PeopleQueriesTest do
     """
 
     name = world.records.m1.name
-    pattern = "%" <> String.upcase(String.slice(name, 0, 6)) <> "%"
+    pattern = "%" <> (name |> String.slice(0, 6) |> String.upcase()) <> "%"
 
     %{"data" => %{"persons" => %{"results" => results}}} =
       run(conn, document, %{"q" => pattern}, :read_all, world)

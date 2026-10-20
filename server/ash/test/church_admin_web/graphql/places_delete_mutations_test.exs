@@ -35,7 +35,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
   end
 
   defp run(conn, document, id, user) do
-    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
+    claims = user |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
 
     conn
     |> put_req_header("authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
@@ -70,17 +70,17 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
 
       actor = ChurchAdmin.Authz.ActorLoader.load(ctx.deleter.uid)
 
-      assert Ash.read!(Area, actor: actor, page: false) |> Enum.map(& &1.id) |> Enum.member?(id) ==
+      assert Area |> Ash.read!(actor: actor, page: false) |> Enum.map(& &1.id) |> Enum.member?(id) ==
                false
 
-      assert run(ctx.conn, @delete_area, id, ctx.deleter) |> code() == "not_found"
+      assert ctx.conn |> run(@delete_area, id, ctx.deleter) |> code() == "not_found"
     end
 
     test "needs both permissions", ctx do
       id = ctx.world.records.a2.id
 
       for user <- [ctx.world.users.read_write, ctx.delete_only, ctx.world.users.approved_plain] do
-        assert run(ctx.conn, @delete_area, id, user) |> code() == "forbidden"
+        assert ctx.conn |> run(@delete_area, id, user) |> code() == "forbidden"
       end
 
       refute deleted?(Area, id)
@@ -89,12 +89,12 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
     test "an unapproved holder of writeAllData and deleteData cannot delete", ctx do
       id = ctx.world.records.a2.id
 
-      assert run(ctx.conn, @delete_area, id, ctx.unapproved_deleter) |> code() == "forbidden"
+      assert ctx.conn |> run(@delete_area, id, ctx.unapproved_deleter) |> code() == "forbidden"
       refute deleted?(Area, id)
     end
 
     test "an area editor without writeAllData cannot delete", ctx do
-      assert run(ctx.conn, @delete_area, ctx.world.records.a1.id, ctx.area_deleter) |> code() ==
+      assert ctx.conn |> run(@delete_area, ctx.world.records.a1.id, ctx.area_deleter) |> code() ==
                "forbidden"
     end
   end
@@ -113,7 +113,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
       id = ctx.world.records.st1.id
 
       for user <- [ctx.world.users.read_write, ctx.delete_only, ctx.world.users.area_edit] do
-        assert run(ctx.conn, @delete_street, id, user) |> code() == "forbidden"
+        assert ctx.conn |> run(@delete_street, id, user) |> code() == "forbidden"
       end
     end
   end
@@ -130,7 +130,8 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
 
     test "an area editor deletes a store whose admin family they can edit", ctx do
       store =
-        Factory.store!(admin_family_id: ctx.world.records.f_area.id)
+        [admin_family_id: ctx.world.records.f_area.id]
+        |> Factory.store!()
         |> tap(&Factory.address!(store_id: &1.id, area_id: ctx.world.records.a1.id))
 
       assert %{"data" => %{"deleteStore" => %{"result" => %{"id" => id}}}} =
@@ -141,7 +142,8 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
     end
 
     test "an area editor cannot delete a store that has no admin family", ctx do
-      assert run(ctx.conn, @delete_store, ctx.world.records.store1.id, ctx.area_deleter)
+      assert ctx.conn
+             |> run(@delete_store, ctx.world.records.store1.id, ctx.area_deleter)
              |> code() == "forbidden"
     end
 
@@ -149,7 +151,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
       id = ctx.world.records.store1.id
 
       for user <- [ctx.world.users.read_write, ctx.world.users.area_edit] do
-        assert run(ctx.conn, @delete_store, id, user) |> code() == "forbidden"
+        assert ctx.conn |> run(@delete_store, id, user) |> code() == "forbidden"
       end
     end
   end
@@ -166,7 +168,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
                |> Ash.Changeset.for_destroy(:hard_destroy, %{}, actor: Actor.system())
                |> Ash.destroy()
 
-      assert Ash.get(Street, id_st, authorize?: false) |> elem(0) == :error
+      assert Street |> Ash.get(id_st, authorize?: false) |> elem(0) == :error
       assert Ash.get!(Street, id, authorize?: false)
     end
 
