@@ -95,6 +95,13 @@ void main() {
       expect(listedUserIds, isNot(contains(outOfScopeUid)));
       expect(listedUserIds, isNot(contains(adminUid)));
 
+      step('the manager sees a user the admin adds to their service live');
+      final addedLaterUid = await E2eBackend.createUser(
+        'خادم أضيف لاحقا',
+        adminOnServiceId: managedServiceId,
+      );
+      await tester.waitFor(find.byKey(ValueKey(addedLaterUid)));
+
       step('the manager invites a user linked to a person in their service');
       await manager.startCreatingUser();
       await manager.fillExistingPerson(
