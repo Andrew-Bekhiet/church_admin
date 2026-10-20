@@ -151,7 +151,6 @@ void main() {
       await lists.openService(fixture.serviceId);
       await lists.expectEachTabOrder(serviceTabs);
 
-      await E2eApp.signOut(tester);
       await E2eApp.finish(tester);
     },
     timeout: const Timeout(Duration(minutes: 12)),

@@ -145,10 +145,23 @@ class ListSortRobot {
   bool _storesAll(Map<String, dynamic> stored, Map<String, dynamic> expected) =>
       expected.entries.every(
         (entry) => const DeepCollectionEquality().equals(
-          stored[entry.key],
-          entry.value,
+          _withoutDisplayNames(stored[entry.key]),
+          _withoutDisplayNames(entry.value),
         ),
       );
+
+  /// A sort written back by the app names a redirected field with its alias
+  /// and label, which the seeded defaults leave out; neither changes the sort.
+  Object? _withoutDisplayNames(Object? json) => switch (json) {
+    final Map<Object?, Object?> map => {
+      for (final MapEntry(:key, :value) in map.entries)
+        if (key != 'alias' && key != 'label') key: _withoutDisplayNames(value),
+    },
+    final List<Object?> list => [
+      for (final item in list) _withoutDisplayNames(item),
+    ],
+    _ => json,
+  };
 
   List<String>? _shownIdsOfListContaining(String id) {
     final rows = _onTopScreen(

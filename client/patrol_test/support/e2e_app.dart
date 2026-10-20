@@ -42,6 +42,8 @@ abstract final class E2eApp {
   /// The closest a single test gets to a process restart: the widget tree and
   /// every provider-held service are dropped and `main` runs again, so the
   /// relaunched app reads its state back from local storage and the backend.
+  /// The top-level `$appRouter` survives and still listens to the dropped
+  /// services, so it no longer redirects on sign-in or sign-out.
   static Future<void> relaunch(
     PatrolIntegrationTester $, {
     String password = E2eBackend.password,
