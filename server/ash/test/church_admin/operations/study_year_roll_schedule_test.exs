@@ -14,6 +14,8 @@ defmodule ChurchAdmin.Operations.StudyYearRollScheduleTest do
 
   @season 2026
 
+  setup :forget_previous_system_roll
+
   defp one_pupil_world do
     study_years!(1..3)
     service = graded_service!(1, 3)
