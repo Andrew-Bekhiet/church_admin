@@ -10,9 +10,9 @@ defmodule ChurchAdmin.Authz.Organization.GroupPolicyTest do
 
   # {actor kind, groups read, groups with userCanEdit}, from the view's group
   # branches (authz-and-reads §2.1): admin on the group, or a member reached
-  # through an area's families or stores. Service grants reach no group. The
-  # area branch counts soft-deleted members, so g_area_deleted (whose only
-  # member is a deleted person of an area family) is readable (Q8).
+  # through an area's families or stores. Service grants reach no group. Only
+  # live members count, so g_area_deleted (whose only member is a deleted
+  # person of an area family) is not readable through the area.
   @expectations [
     {:anonymous, [], []},
     {:unapproved, [], []},
@@ -26,8 +26,8 @@ defmodule ChurchAdmin.Authz.Organization.GroupPolicyTest do
     {:service_admin_users, [], []},
     {:group_read, [:g1], []},
     {:group_edit, [:g1], [:g1]},
-    {:area_read, [:g2, :g_area_deleted], []},
-    {:area_edit, [:g2, :g_area_deleted], []}
+    {:area_read, [:g2], []},
+    {:area_edit, [:g2], []}
   ]
 
   for {kind, read, editable} <- @expectations do
