@@ -7,16 +7,20 @@ defmodule ChurchAdmin.Authz.Organization.ClassCoverageTest do
 
   setup %{world: world} do
     Factory.study_year!(3)
-    world = ChurchAdmin.OrgWorld.extend(world)
-    c_y13 = Factory.class!(world.records.s1, service_study_year: 1, service_study_year_to: 3)
-    c_s2_y13 = Factory.class!(world.records.s2, service_study_year: 1, service_study_year_to: 3)
+    extended_world = ChurchAdmin.OrgWorld.extend(world)
 
-    world =
-      world
+    c_y13 =
+      Factory.class!(extended_world.records.s1, service_study_year: 1, service_study_year_to: 3)
+
+    c_s2_y13 =
+      Factory.class!(extended_world.records.s2, service_study_year: 1, service_study_year_to: 3)
+
+    world_with_classes =
+      extended_world
       |> put_in([:records, :c_y13], c_y13)
       |> put_in([:records, :c_s2_y13], c_s2_y13)
 
-    {:ok, world: world}
+    {:ok, world: world_with_classes}
   end
 
   @of_s1 [:c_y1, :c_y12_f, :c_y2_m, :c_y13]

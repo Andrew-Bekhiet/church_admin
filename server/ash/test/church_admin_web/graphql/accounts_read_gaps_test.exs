@@ -201,14 +201,15 @@ defmodule ChurchAdminWeb.Graphql.AccountsReadGapsTest do
 
     test "edits on records the reader cannot see do not count",
          %{conn: conn, world: world, recorder: recorder, times: times} do
-      response = run(conn, @edits, world, :service_open)
+      service_open_response = run(conn, @edits, world, :service_open)
 
-      assert edit_of(response, recorder)["lastEdit"] == DateTime.to_iso8601(times.m1)
-      assert edit_of(response, recorder)["latestEdit"]["table"] == "persons"
+      assert edit_of(service_open_response, recorder)["lastEdit"] == DateTime.to_iso8601(times.m1)
+      assert edit_of(service_open_response, recorder)["latestEdit"]["table"] == "persons"
 
-      response = run(conn, @edits, world, :approved_plain)
+      approved_plain_response = run(conn, @edits, world, :approved_plain)
 
-      assert %{"lastEdit" => nil, "latestEdit" => nil} = edit_of(response, recorder)
+      assert %{"lastEdit" => nil, "latestEdit" => nil} =
+               edit_of(approved_plain_response, recorder)
     end
 
     test "users filter and sort by lastEdit",
@@ -219,17 +220,17 @@ defmodule ChurchAdminWeb.Graphql.AccountsReadGapsTest do
       }
       """
 
-      response =
+      filtered_response =
         run(conn, filtered, world, :read_all, %{
           "after" => DateTime.to_iso8601(times.m1)
         })
 
-      assert [%{"uid" => uid}] = response["data"]["users"]["results"]
+      assert [%{"uid" => uid}] = filtered_response["data"]["users"]["results"]
       assert uid == recorder.uid
 
       sorted = "{ users(sort: [{field: LAST_EDIT, order: DESC_NULLS_LAST}]) { results { uid } } }"
-      response = run(conn, sorted, world, :read_all)
-      assert %{"uid" => ^uid} = hd(response["data"]["users"]["results"])
+      sorted_response = run(conn, sorted, world, :read_all)
+      assert %{"uid" => ^uid} = hd(sorted_response["data"]["users"]["results"])
     end
   end
 
@@ -252,14 +253,16 @@ defmodule ChurchAdminWeb.Graphql.AccountsReadGapsTest do
       query($name: String) { users(filter: {personName: {eq: $name}}) { results { uid } } }
       """
 
-      response = run(conn, filtered, world, :read_all, %{"name" => name})
-      assert [%{"uid" => uid}] = response["data"]["users"]["results"]
+      filtered_response = run(conn, filtered, world, :read_all, %{"name" => name})
+      assert [%{"uid" => uid}] = filtered_response["data"]["users"]["results"]
       assert uid == world.users.servant.uid
 
       sorted = "{ users(sort: [{field: PERSON_NAME, order: ASC}]) { results { personName } } }"
-      response = run(conn, sorted, world, :read_all)
+      sorted_response = run(conn, sorted, world, :read_all)
 
-      names = for %{"personName" => name} <- response["data"]["users"]["results"], name, do: name
+      names =
+        for %{"personName" => name} <- sorted_response["data"]["users"]["results"], name, do: name
+
       assert names == Enum.sort(names)
     end
   end

@@ -145,8 +145,8 @@ defmodule ChurchAdmin.Attendance.AttendanceRecordRulesTest do
       assert {:error, "attendance/not-a-servant-of-meeting"} =
                attend(ctx, meeting, servant, as_servant: true)
 
-      {user, gendered} = servant!()
-      Factory.grant!(user, :service, ctx.service.id, gender: true)
+      {gendered_user, gendered} = servant!()
+      Factory.grant!(gendered_user, :service, ctx.service.id, gender: true)
       female_meeting = Factory.meeting!(service_id: ctx.service.id, service_gender: false)
 
       assert {:error, "attendance/not-a-servant-of-meeting"} =

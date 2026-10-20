@@ -35,9 +35,13 @@ defmodule ChurchAdmin.Realtime.Pgoutput do
     do: {:commit, commit_lsn, end_lsn}
 
   def decode(<<?R, id::32, rest::binary>>) do
-    {schema, rest} = cstring(rest)
-    {table, <<_replica_identity::8, column_count::16, rest::binary>>} = cstring(rest)
-    {:relation, %{id: id, schema: schema, table: table, columns: columns(rest, column_count)}}
+    {schema, after_schema} = cstring(rest)
+
+    {table, <<_replica_identity::8, column_count::16, after_table::binary>>} =
+      cstring(after_schema)
+
+    {:relation,
+     %{id: id, schema: schema, table: table, columns: columns(after_table, column_count)}}
   end
 
   def decode(<<?I, relation_id::32, ?N, tuple::binary>>),

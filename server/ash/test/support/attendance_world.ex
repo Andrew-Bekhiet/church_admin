@@ -48,21 +48,21 @@ defmodule ChurchAdmin.AttendanceWorld do
   def actor_kinds, do: AuthzWorld.actor_kinds() ++ @extra_kinds
 
   def build! do
-    %{records: records, users: users} = AuthzWorld.build!()
+    %{records: base_records, users: base_users} = AuthzWorld.build!()
 
     extra_users = Map.new(@extra_kinds, &{&1, Factory.user!()})
     dup_person = Factory.person!(uid: extra_users.dup_servant.uid)
-    grant_extra_users!(extra_users, records)
+    grant_extra_users!(extra_users, base_records)
 
     meetings = %{
-      m_s1_f: Factory.meeting!(service_id: records.s1.id, service_gender: false),
-      m_s1_m: Factory.meeting!(service_id: records.s1.id, service_gender: true),
-      m_g2: Factory.meeting!(group_id: records.g2.id),
-      m_archived: Factory.meeting!(group_id: records.g1.id, is_archived: true)
+      m_s1_f: Factory.meeting!(service_id: base_records.s1.id, service_gender: false),
+      m_s1_m: Factory.meeting!(service_id: base_records.s1.id, service_gender: true),
+      m_g2: Factory.meeting!(group_id: base_records.g2.id),
+      m_archived: Factory.meeting!(group_id: base_records.g1.id, is_archived: true)
     }
 
-    records = records |> Map.merge(meetings) |> Map.put(:dup_servant, dup_person)
-    users = Map.merge(users, extra_users)
+    records = base_records |> Map.merge(meetings) |> Map.put(:dup_servant, dup_person)
+    users = Map.merge(base_users, extra_users)
 
     recorder = users.read_all
     record = &attendance!(&1, &2, &3, &4, recorder)

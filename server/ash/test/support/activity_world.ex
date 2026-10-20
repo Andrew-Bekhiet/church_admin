@@ -69,12 +69,14 @@ defmodule ChurchAdmin.ActivityWorld do
     seed!(ActivityDay, %{day: @day_2})
 
     c_y2 = Factory.class!(world.records.s1, service_study_year: 2)
-    world = put_in(world.records[:c_y2], c_y2)
+    world_with_class = put_in(world.records[:c_y2], c_y2)
 
-    targets = targets(world)
-    world = Map.merge(world, %{targets: targets, recorded_by: recorded_by})
+    targets = targets(world_with_class)
 
-    world
+    world_with_targets =
+      Map.merge(world_with_class, %{targets: targets, recorded_by: recorded_by})
+
+    world_with_targets
     |> seed_person_logs!()
     |> seed_record_logs!()
   end

@@ -188,18 +188,18 @@ defmodule ChurchAdmin.Accounts.UpdateUserPermissionsTest do
 
   describe "the codes of rejected grants" do
     test "name the broken rule", ctx do
-      admin = service_admin!(ctx.service, edit?: true, manage_users?: true)
+      service_admin = service_admin!(ctx.service, edit?: true, manage_users?: true)
       Factory.grant!(ctx.user, :service, ctx.service.id)
-      admin = actor_for(admin)
+      admin_actor = actor_for(service_admin)
 
-      assert codes(update(ctx.user, %{permissions: ~w(readAllData)}, admin)) ==
+      assert codes(update(ctx.user, %{permissions: ~w(readAllData)}, admin_actor)) ==
                ["user/permission-not-grantable"]
 
       assert codes(
                update(
                  ctx.user,
                  %{admin_on: [%{admin_on_service: ctx.service.id, service_allow_export: true}]},
-                 admin
+                 admin_actor
                )
              ) == ["invitation/scope-not-manageable"]
 

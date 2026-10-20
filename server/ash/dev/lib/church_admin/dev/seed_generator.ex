@@ -55,10 +55,10 @@ defmodule ChurchAdmin.Dev.SeedGenerator do
     %{families: families, stores: stores, addresses: addresses} =
       Families.build(spec, places, lookups, actor_uid)
 
-    %{persons: persons, person_tags: person_tags, person_hobbies: person_hobbies} =
+    %{persons: built_persons, person_tags: person_tags, person_hobbies: person_hobbies} =
       People.build(spec, families, stores, users, lookups, actor_uid)
 
-    memberships = Memberships.services(persons, spec)
+    memberships = Memberships.services(built_persons, spec)
     groups = Organization.groups(spec, actor_uid)
     group_memberships = Memberships.groups(groups, memberships)
 

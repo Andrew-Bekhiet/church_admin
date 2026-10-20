@@ -17,7 +17,7 @@ defmodule ChurchAdmin.Equivalence do
   alias ChurchAdmin.Equivalence.Roots
 
   def run(argv) do
-    {opts, uids} =
+    {opts, requested_uids} =
       OptionParser.parse!(argv,
         strict: [hasura_url: :string, admin_secret: :string, out: :string]
       )
@@ -27,7 +27,7 @@ defmodule ChurchAdmin.Equivalence do
       secret: Keyword.fetch!(opts, :admin_secret)
     }
 
-    uids = if uids == [], do: [nil | all_uids()], else: uids
+    uids = if requested_uids == [], do: [nil | all_uids()], else: requested_uids
 
     {admin_roots, user_roots} = Enum.split_with(Roots.roots(), &Map.get(&1, :admin, false))
 

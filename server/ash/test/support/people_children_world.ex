@@ -41,11 +41,11 @@ defmodule ChurchAdmin.PeopleChildrenWorld do
     users = Map.merge(base.users, extra_users!(s1, g1, a1))
     types = person_types!()
     persons = family_admin_persons!(base.records, types)
-    records = base.records |> Map.merge(types) |> Map.merge(persons)
+    records_without_deleted_family = base.records |> Map.merge(types) |> Map.merge(persons)
 
     f_deleted = Factory.family!(deleted_at: Factory.deleted_at())
     Factory.address!(family_id: f_deleted.id, area_id: a1.id)
-    records = Map.put(records, :f_deleted, f_deleted)
+    records = Map.put(records_without_deleted_family, :f_deleted, f_deleted)
 
     records
     |> Map.merge(contacts!(records))

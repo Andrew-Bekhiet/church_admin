@@ -197,10 +197,10 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
     test "answers street in-use while an address is on the street", ctx do
       street = ctx.world.records.st1
       Factory.address!(store_id: Factory.store!().id, street_id: street.id)
-      street = Ash.get!(Street, street.id, authorize?: false)
+      reloaded_street = Ash.get!(Street, street.id, authorize?: false)
 
       assert {:error, error} =
-               street
+               reloaded_street
                |> Ash.Changeset.for_destroy(:hard_destroy, %{}, actor: Actor.system())
                |> Ash.destroy()
 

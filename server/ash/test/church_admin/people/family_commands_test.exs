@@ -182,12 +182,12 @@ defmodule ChurchAdmin.People.FamilyCommandsTest do
       {:ok, family} =
         People.create_family(%{name: "a", marriage_date: ~D[2000-01-01]}, actor: ctx.actor)
 
-      {:ok, family} =
+      {:ok, widowed_family} =
         People.update_family(family, %{status: "widowed", deceased_spouse_name: "Fawzy"},
           actor: ctx.actor
         )
 
-      assert {family.marriage_date, family.deceased_spouse_name} == {nil, "Fawzy"}
+      assert {widowed_family.marriage_date, widowed_family.deceased_spouse_name} == {nil, "Fawzy"}
     end
 
     test "an area editor may move the family's address out of its area", ctx do
