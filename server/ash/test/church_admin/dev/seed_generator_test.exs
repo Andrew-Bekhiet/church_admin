@@ -20,9 +20,9 @@ defmodule ChurchAdmin.Dev.SeedGeneratorTest do
     output = SeedGenerator.generate(:small)
     directory = SeedGenerator.generated_directory()
 
-    assert File.read!(Path.join(directory, "small.sql")) == output.sql
+    assert directory |> Path.join("small.sql") |> File.read!() == output.sql
 
-    assert File.read!(Path.join(directory, "small.auth_emulator.json")) ==
+    assert directory |> Path.join("small.auth_emulator.json") |> File.read!() ==
              output.auth_emulator_json
   end
 
@@ -31,7 +31,8 @@ defmodule ChurchAdmin.Dev.SeedGeneratorTest do
     %{"users" => accounts} = Jason.decode!(output.auth_emulator_json)
     imported = output.users |> Enum.reject(& &1.pending?) |> Map.new(&{&1.auth_id, &1})
 
-    assert Enum.sort(Enum.map(accounts, & &1["localId"])) == Enum.sort(Map.keys(imported))
+    assert accounts |> Enum.map(& &1["localId"]) |> Enum.sort() ==
+             imported |> Map.keys() |> Enum.sort()
 
     for account <- accounts do
       user = Map.fetch!(imported, account["localId"])
@@ -48,7 +49,7 @@ defmodule ChurchAdmin.Dev.SeedGeneratorTest do
   end
 
   test "the services seed holds the ids the generator links to" do
-    seed = File.read!(ChurchAdmin.Seeds.seeds_path("1788885627898_services_seed.sql"))
+    seed = "1788885627898_services_seed.sql" |> ChurchAdmin.Seeds.seeds_path() |> File.read!()
 
     for slug <- ChurchAdmin.Dev.SeedGenerator.Ids.seed_services() do
       assert seed =~ ChurchAdmin.Dev.SeedGenerator.Ids.seed_service(slug)
