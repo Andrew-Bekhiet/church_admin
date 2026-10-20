@@ -141,6 +141,23 @@ abstract final class E2eBackend {
     return (data['authUsersData'] as List).single as Map<String, dynamic>;
   }
 
+  static Future<Map<String, dynamic>> orderByPreferencesOf(String uid) async {
+    final data = await hasuraQuery(
+      r'''
+      query OrderByPreferencesOf($uid: uuid!) {
+        usersPreferencesByPk(uid: $uid) { orderByPreferences }
+      }
+      ''',
+      variables: {'uid': uid},
+    );
+
+    return switch (data['usersPreferencesByPk']) {
+      {'orderByPreferences': final Map<String, dynamic> preferences} =>
+        preferences,
+      _ => const {},
+    };
+  }
+
   static Future<Set<String>> permissionsOf(String uid) => _columnOfUserRows(
     uid,
     table: 'authUsersPermissions',
