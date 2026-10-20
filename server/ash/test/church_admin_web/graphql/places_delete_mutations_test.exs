@@ -190,7 +190,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
                |> Ash.Changeset.for_destroy(:hard_destroy, %{}, actor: Actor.system())
                |> Ash.destroy()
 
-      assert [%{code: code, fields: [:addresses]}] = error.errors
+      assert [%{code: code, fields: [:id]}] = error.errors
       assert code == Codes.area_in_use()
     end
 
@@ -204,7 +204,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
                |> Ash.Changeset.for_destroy(:hard_destroy, %{}, actor: Actor.system())
                |> Ash.destroy()
 
-      assert [%{code: code, fields: [:addresses]}] = error.errors
+      assert [%{code: code, fields: [:id]}] = error.errors
       assert code == Codes.street_in_use()
     end
   end
