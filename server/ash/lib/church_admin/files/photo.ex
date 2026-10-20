@@ -11,6 +11,7 @@ defmodule ChurchAdmin.Files.Photo do
     extensions: [AshGraphql.Resource],
     authorizers: [Ash.Policy.Authorizer]
 
+  alias ChurchAdmin.Authz.Checks.Approved
   alias ChurchAdmin.Files.{PhotoLink, PhotoSubject}
   alias ChurchAdmin.Files.Photos.{Delete, IssueDownloadLink, IssueUploadLink}
 
@@ -52,7 +53,7 @@ defmodule ChurchAdmin.Files.Photo do
 
   policies do
     policy action([:request_photo_upload, :photo_download_url, :delete_photo]) do
-      forbid_unless actor_attribute_equals(:approved?, true)
+      forbid_unless Approved
       authorize_if always()
     end
   end

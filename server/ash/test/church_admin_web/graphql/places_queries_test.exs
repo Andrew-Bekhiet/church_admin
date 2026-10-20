@@ -168,10 +168,8 @@ defmodule ChurchAdminWeb.Graphql.PlacesQueriesTest do
     assert MapSet.new(admins, & &1["id"]) ==
              MapSet.new([world.users.area_read.uid, world.users.area_edit.uid])
 
-    %{"data" => %{"area" => %{"admins" => hidden}}} =
-      run(conn, document, %{"id" => area_id}, :unapproved, world)
-
-    assert hidden == []
+    assert %{"data" => %{"area" => nil}} =
+             run(conn, document, %{"id" => area_id}, :unapproved, world)
   end
 
   describe "geographic filters in the shape the client sends" do
@@ -243,7 +241,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesQueriesTest do
         }
       }
 
-      %{"data" => data} = run(conn, document, %{"filter" => filter}, :unapproved, world)
+      %{"data" => data} = run(conn, document, %{"filter" => filter}, :approved_plain, world)
 
       assert ids(data["areas"]) == id_set(world, [:a2])
     end

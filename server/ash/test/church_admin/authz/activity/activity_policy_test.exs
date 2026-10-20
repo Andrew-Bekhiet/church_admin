@@ -29,6 +29,7 @@ defmodule ChurchAdmin.Authz.Activity.ActivityPolicyTest do
 
   for kind <- [:anonymous | AuthzWorld.actor_kinds()] do
     @kind kind
+    @reads_days? kind not in [:anonymous, :unapproved, :unapproved_with_grants]
 
     test "#{kind} reads the activity rows of the records the permission view grants it",
          %{world: world} do
@@ -56,13 +57,14 @@ defmodule ChurchAdmin.Authz.Activity.ActivityPolicyTest do
       assert mismatches == []
     end
 
-    test "#{kind} reads attendance days only when someone is signed in", %{world: world} do
+    test "#{kind} reads attendance days only when approved", %{world: world} do
       days =
         ActivityDay
         |> Ash.read!(actor: actor(world, @kind), page: false)
         |> MapSet.new(& &1.day)
 
-      expected = if @kind == :anonymous, do: [], else: ActivityWorld.days()
+      expected = if @reads_days?, do: ActivityWorld.days(), else: []
+
       assert days == MapSet.new(expected)
     end
   end

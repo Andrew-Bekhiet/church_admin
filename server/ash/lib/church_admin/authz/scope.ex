@@ -245,9 +245,11 @@ defmodule ChurchAdmin.Authz.Scope do
   defp addressed_in_areas(area_ids),
     do: unless_empty(area_ids, fn ids -> expr(exists(address, area_id in ^ids)) end)
 
-  defp own_person(%Actor{approved?: true, uid: uid}, access)
-       when is_binary(uid) and access in [:read, :edit],
-       do: expr(not is_nil(uid) and uid == ^uid)
+  defp own_person(%Actor{uid: uid}, :read) when is_binary(uid),
+    do: expr(not is_nil(uid) and uid == ^uid)
+
+  defp own_person(%Actor{approved?: true, uid: uid}, :edit) when is_binary(uid),
+    do: expr(not is_nil(uid) and uid == ^uid)
 
   defp own_person(_actor, _access), do: false
 

@@ -37,7 +37,15 @@ defmodule ChurchAdmin.Accounts.User do
 
   alias ChurchAdmin.Activity.LatestEdit
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
-  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, InScope, SignedInToFirebase, System}
+
+  alias ChurchAdmin.Authz.Checks.{
+    Approved,
+    ApprovedWithPermission,
+    InScope,
+    SignedInToFirebase,
+    System
+  }
+
   alias ChurchAdmin.Errors.{Codes, ConstraintCodes}
   alias ChurchAdmin.People.Person
   alias ChurchAdmin.Types.Text
@@ -201,7 +209,7 @@ defmodule ChurchAdmin.Accounts.User do
     end
 
     policy action(:create_user) do
-      forbid_unless actor_attribute_equals(:approved?, true)
+      forbid_unless Approved
       authorize_if {ApprovedWithPermission, name: "manageAllUsers"}
       authorize_if {ApprovedWithPermission, name: "onboardUsers"}
     end
