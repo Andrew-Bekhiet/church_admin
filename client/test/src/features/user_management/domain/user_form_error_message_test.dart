@@ -11,6 +11,10 @@ void main() {
           'يجب تعيين المستخدم الجديد أميناً على منطقة أو خدمة أو مجموعة',
       'invitation/scope-not-manageable':
           'لا يمكنك إضافة مستخدم خارج نطاق صلاحياتك',
+      'user/permission-not-grantable': 'لا يمكنك منح صلاحية لا تملكها',
+      'user/permission-levels-inconsistent':
+          'هذه الصلاحيات تتطلب صلاحيات أخرى أساسية',
+      'user/duplicate-scope': 'هذا المستخدم أمين بالفعل على بعض هذه البيانات',
     };
 
     for (final MapEntry(key: code, value: message)
@@ -36,8 +40,8 @@ void main() {
       'a rejection without a message of its own shows the upstream error',
       () {
         const error = BackendRejectedException(
-          'permission not grantable',
-          code: 'user/permission-not-grantable',
+          'user is locked',
+          code: 'user/email-locked',
         );
 
         expect(UserFormErrorMessage.of(error), error.toString());
