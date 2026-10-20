@@ -38,6 +38,7 @@ class ChipTabBar extends StatelessWidget {
                   final selected = tabController.animation!.value.round() == i;
 
                   return ChoiceChip(
+                    key: ChipTabBarKeys.tab(i),
                     selected: selected,
                     onSelected: (_) => tabController.animateTo(i),
                     showCheckmark: false,
@@ -66,4 +67,8 @@ class ChipTabBar extends StatelessWidget {
   }
 
   final List<({String label, IconData icon})> tabs;
+}
+
+abstract final class ChipTabBarKeys {
+  static Key tab(int index) => Key('ChipTabBar.tab.$index');
 }

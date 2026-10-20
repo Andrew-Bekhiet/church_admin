@@ -10,6 +10,7 @@ class TabAwareSortButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) => IconButton(
+        key: TabAwareSortButtonKeys.button,
         visualDensity: VisualDensity.compact,
         padding: EdgeInsets.zero,
         icon: const Icon(Symbols.sort),
@@ -17,4 +18,8 @@ class TabAwareSortButton extends StatelessWidget {
       ),
     );
   }
+}
+
+abstract final class TabAwareSortButtonKeys {
+  static const button = Key('TabAwareSortButton.button');
 }

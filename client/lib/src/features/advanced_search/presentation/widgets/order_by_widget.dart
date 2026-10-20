@@ -32,6 +32,7 @@ class OrderByWidget extends StatelessWidget {
       leafTrailing: [
         Expanded(
           child: InkWell(
+            key: OrderByWidgetKeys.directionToggle,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             onTap: () => onChanged(
               orderBy.copyWith(
@@ -76,4 +77,8 @@ class OrderByWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+abstract final class OrderByWidgetKeys {
+  static const directionToggle = Key('OrderByWidget.directionToggle');
 }
