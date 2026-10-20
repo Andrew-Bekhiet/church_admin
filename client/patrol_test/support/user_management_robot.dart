@@ -167,5 +167,17 @@ class UserManagementRobot {
     await pickPerson(personId: personId, personName: personName);
     await tester.tapOn(_saveButton);
     await tester.waitForAbsent(_saveButton);
+    await tester.waitFor(
+      find.byWidgetPredicate(
+        (widget) => switch (widget) {
+          ViewableObjectWidget(
+            key: ViewUserScreenKeys.linkedPerson,
+            object: ViewableWithID(:final id),
+          ) =>
+            id == personId,
+          _ => false,
+        },
+      ),
+    );
   }
 }
