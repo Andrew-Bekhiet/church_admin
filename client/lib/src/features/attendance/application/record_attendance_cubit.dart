@@ -5,6 +5,7 @@ import 'package:church_admin/src/features/attendance/application/attendance_undo
 import 'package:church_admin/src/features/attendance/application/live_records.dart';
 import 'package:church_admin/src/features/attendance/application/scaffold_attendance_undo_presenter.dart';
 import 'package:church_admin/src/features/attendance/domain/attendance_record_rights.dart';
+import 'package:clock/clock.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart'
@@ -215,6 +216,12 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     final newDatetime = _selectedDate.replaceTimeOfDay(time);
     if (newDatetime == attendanceRecord.datetime) return;
+
+    if (newDatetime.isAfter(clock.now())) {
+      _presenter.showError('لا يمكن تسجيل الحضور في وقت لم يأت بعد');
+
+      return;
+    }
 
     await _runOptimisticAttendance(
       entry: entry,

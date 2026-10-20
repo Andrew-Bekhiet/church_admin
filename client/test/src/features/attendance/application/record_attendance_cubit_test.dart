@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/attendance/application/attendance_undo_presenter.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:material_ui/material_ui.dart' show VoidCallback;
+import 'package:material_ui/material_ui.dart' show TimeOfDay, VoidCallback;
 import 'package:mocktail/mocktail.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -406,6 +407,80 @@ void main() {
         verify: (cubit) => expect(foundIds(cubit), ['child']),
       );
     });
+
+    group('changing the attendance time on the selected day', () {
+      final recorded = _Fixture.makeRecord('p1');
+      final now = recorded.datetime.add(const Duration(hours: 2));
+
+      Future<void> changeTimeOnceAttended(
+        RecordAttendanceCubit cubit,
+        DateTime time,
+      ) async {
+        final ready = await cubit.stream
+            .whereType<RecordAttendanceLoaded>()
+            .firstWhere((s) => s.entries.firstOrNull?.attended ?? false);
+
+        await withClock(
+          Clock.fixed(now),
+          () => cubit.updateEntryAttendanceTime(
+            ready.entries.first,
+            TimeOfDay.fromDateTime(time),
+          ),
+        );
+      }
+
+      DateTime? shownTime(RecordAttendanceCubit cubit) =>
+          (cubit.state as RecordAttendanceLoaded)
+              .entries
+              .first
+              .attendance
+              ?.datetime;
+
+      setUp(() {
+        f
+          ..rosterPersons = [_Fixture.rosterPerson('p1')]
+          ..attendanceRecords = [recorded];
+        when(
+          () => f.dao.updateAttendanceTime(
+            attendanceRecordId: any(named: 'attendanceRecordId'),
+            datetime: any(named: 'datetime'),
+          ),
+        ).thenAnswer((_) async => recorded);
+      });
+
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'a time later than now keeps the recorded time',
+        build: () => f.createCubit(),
+        act: (cubit) => changeTimeOnceAttended(
+          cubit,
+          now.add(const Duration(hours: 1)),
+        ),
+        verify: (cubit) => expect(shownTime(cubit), recorded.datetime),
+      );
+
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'a time later than now tells the user it cannot be in the future',
+        build: () => f.createCubit(),
+        act: (cubit) => changeTimeOnceAttended(
+          cubit,
+          now.add(const Duration(hours: 1)),
+        ),
+        verify: (_) => expect(f.presenter.shownErrors, hasLength(1)),
+      );
+
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'a time earlier than now becomes the attendance time',
+        build: () => f.createCubit(),
+        act: (cubit) => changeTimeOnceAttended(
+          cubit,
+          now.subtract(const Duration(hours: 1)),
+        ),
+        verify: (cubit) => expect(
+          shownTime(cubit),
+          now.subtract(const Duration(hours: 1)),
+        ),
+      );
+    });
   });
 }
 
@@ -587,6 +662,8 @@ final class _MockMeetingsDAO extends Mock implements MeetingsDAO {}
 final class _MockAuthBloc extends Mock implements AuthBloc {}
 
 final class _FakePresenter implements AttendanceUndoPresenter {
+  final List<String> shownErrors = [];
+
   @override
   void showUndo({
     required String personName,
@@ -595,5 +672,5 @@ final class _FakePresenter implements AttendanceUndoPresenter {
   }) {}
 
   @override
-  void showError(String message) {}
+  void showError(String message) => shownErrors.add(message);
 }
