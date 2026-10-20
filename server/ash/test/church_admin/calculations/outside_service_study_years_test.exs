@@ -72,12 +72,11 @@ defmodule ChurchAdmin.Calculations.OutsideServiceStudyYearsTest do
   } do
     {_case, membership} = Enum.find(memberships, fn {{_, _, _, outside?}, _} -> outside? end)
 
-    Ash.Seed.update!(
-      Ash.get!(ChurchAdmin.People.Person, membership.person_id, authorize?: false),
-      %{
-        deleted_at: Factory.deleted_at()
-      }
-    )
+    ChurchAdmin.People.Person
+    |> Ash.get!(membership.person_id, authorize?: false)
+    |> Ash.Seed.update!(%{
+      deleted_at: Factory.deleted_at()
+    })
 
     assert Ash.load!(membership, :is_outside_service_study_years, authorize?: false).is_outside_service_study_years
   end
