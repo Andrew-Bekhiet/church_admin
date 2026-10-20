@@ -14,7 +14,9 @@ defmodule ChurchAdminWeb.Graphql.DataQualityQueriesTest do
           conn
 
         kind ->
-          claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users[kind]))
+          claims =
+            world.users[kind] |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
+
           put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
       end
 
