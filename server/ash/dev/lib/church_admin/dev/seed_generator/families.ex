@@ -177,13 +177,10 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Families do
     families
     |> Enum.reject(&(&1.failure == :no_address))
     |> Enum.map(fn family ->
-      address(
-        Ids.uuid("address", "family:#{family.index}"),
-        family.index,
-        family.area_index,
-        places,
-        spec
-      )
+      address_id = Ids.uuid("address", "family:#{family.index}")
+
+      address_id
+      |> address(family.index, family.area_index, places, spec)
       |> Map.merge(%{family_id: family.id, special_landmark: landmark(family)})
     end)
   end
@@ -192,13 +189,10 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Families do
     stores
     |> Enum.filter(& &1.address_only?)
     |> Enum.map(fn store ->
-      address(
-        Ids.uuid("address", "store:#{store.index}"),
-        store.index + 10_000,
-        store.area_index,
-        places,
-        spec
-      )
+      address_id = Ids.uuid("address", "store:#{store.index}")
+
+      address_id
+      |> address(store.index + 10_000, store.area_index, places, spec)
       |> Map.merge(%{store_id: store.id, special_landmark: Rng.pick(@landmarks)})
     end)
   end

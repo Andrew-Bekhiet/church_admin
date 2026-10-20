@@ -102,7 +102,7 @@ defmodule ChurchAdmin.Dev.SeedGenerator.People do
         name: if(user, do: user.name, else: family_member_name(type, male?, family)),
         birthdate: birthdate(type, study_year),
         gender: male?,
-        person_type_id: Sql.person_type(Map.fetch!(@type_names, type)),
+        person_type_id: @type_names |> Map.fetch!(type) |> Sql.person_type(),
         martial_status: martial_status(type, family.status),
         family_id: family.id,
         study_year_id: study_year,
@@ -111,7 +111,8 @@ defmodule ChurchAdmin.Dev.SeedGenerator.People do
         deleted_by: if(member.deleted?, do: deleted_by)
       }
 
-    person(attributes, adult?, study_year, lookups)
+    attributes
+    |> person(adult?, study_year, lookups)
     |> Map.merge(%{
       family_index: family.index,
       type: type,
@@ -133,7 +134,8 @@ defmodule ChurchAdmin.Dev.SeedGenerator.People do
         store_id: store.id
       }
 
-      person(attributes, true, nil, lookups)
+      attributes
+      |> person(true, nil, lookups)
       |> Map.merge(%{store_index: store.index, type: nil, male?: male?})
     end
   end
@@ -147,7 +149,8 @@ defmodule ChurchAdmin.Dev.SeedGenerator.People do
       uid: user.uid
     }
 
-    person(attributes, true, nil, lookups)
+    attributes
+    |> person(true, nil, lookups)
     |> Map.merge(%{type: nil, male?: user.male?, user_key: user.key})
   end
 
@@ -205,7 +208,8 @@ defmodule ChurchAdmin.Dev.SeedGenerator.People do
   defp finish(%{row: row} = person, number) do
     id = Ids.uuid("person", number)
 
-    Map.merge(person, %{id: id, row: Map.put(row, :id, id)})
+    person
+    |> Map.merge(%{id: id, row: Map.put(row, :id, id)})
     |> Map.put_new(:family_index, nil)
     |> Map.put_new(:store_index, nil)
     |> Map.put_new(:user_key, nil)
@@ -223,7 +227,8 @@ defmodule ChurchAdmin.Dev.SeedGenerator.People do
         true -> child_birth_years(study_year)
       end
 
-    Date.new!(Rng.int(low, high), Rng.int(1, 12), Rng.int(1, 28))
+    year = Rng.int(low, high)
+    Date.new!(year, Rng.int(1, 12), Rng.int(1, 28))
   end
 
   defp child_birth_years(nil), do: {2006, 2023}

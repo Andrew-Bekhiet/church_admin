@@ -27,6 +27,7 @@ defmodule ChurchAdmin.Dev.SeedGenerator.History do
     fridays = Attendance.fridays(@friday_weeks)
     confessions = day_person_pairs(spec.confession_history, pools, fridays, "confession")
     kodas = day_person_pairs(spec.kodas_history, pools, fridays, "kodas")
+    days = (confessions ++ kodas) |> Enum.map(& &1.day_id) |> Enum.uniq()
 
     %{
       visits: Enum.map(0..(spec.visit_history - 1), &visit(&1, pools)),
@@ -34,7 +35,7 @@ defmodule ChurchAdmin.Dev.SeedGenerator.History do
       confessions: confessions,
       kodas: kodas,
       edits: Enum.map(0..(spec.explicit_edit_history - 1), &edit(&1, pools)),
-      days: Enum.uniq(Enum.map(confessions ++ kodas, & &1.day_id))
+      days: days
     }
   end
 
@@ -44,7 +45,7 @@ defmodule ChurchAdmin.Dev.SeedGenerator.History do
     %{
       visit_id: Ids.uuid("visit", number),
       table: table,
-      record_id: Rng.pick(Map.fetch!(pools.record_ids, table)),
+      record_id: pools.record_ids |> Map.fetch!(table) |> Rng.pick(),
       time: minutes_ago(Rng.int(0, @window_minutes)),
       recorded_by: Rng.pick(pools.recorder_uids),
       is_father_visit: Rng.chance?(0.08)
@@ -65,7 +66,10 @@ defmodule ChurchAdmin.Dev.SeedGenerator.History do
   end
 
   defp day_person_pairs(count, pools, fridays, kind) do
-    Stream.repeatedly(fn -> {Rng.pick(fridays), Rng.pick(pools.record_ids["persons"])} end)
+    random_pairs =
+      Stream.repeatedly(fn -> {Rng.pick(fridays), Rng.pick(pools.record_ids["persons"])} end)
+
+    random_pairs
     |> Stream.uniq()
     |> Enum.take(count)
     |> Enum.sort_by(fn {day, person_id} -> {Date.to_gregorian_days(day), person_id} end)
@@ -85,7 +89,7 @@ defmodule ChurchAdmin.Dev.SeedGenerator.History do
 
     %{
       table: table,
-      record_id: Rng.pick(Map.fetch!(pools.record_ids, table)),
+      record_id: pools.record_ids |> Map.fetch!(table) |> Rng.pick(),
       time: minutes_ago(Rng.int(0, @window_minutes)),
       recorded_by: Rng.pick(pools.recorder_uids),
       user_role: "user",
@@ -94,7 +98,9 @@ defmodule ChurchAdmin.Dev.SeedGenerator.History do
   end
 
   defp unique_offsets(count) do
-    Stream.repeatedly(fn -> Rng.int(0, @window_minutes) end)
+    random_offsets = Stream.repeatedly(fn -> Rng.int(0, @window_minutes) end)
+
+    random_offsets
     |> Stream.uniq()
     |> Enum.take(count)
     |> Enum.sort()
