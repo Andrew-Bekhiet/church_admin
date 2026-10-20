@@ -10,6 +10,9 @@ class ViewPersonRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [id, person];
 
+  @override
+  Map<String, String> get urlParameters => {'id': id};
+
   const ViewPersonRoute({required this.id, this.person});
 
   @override

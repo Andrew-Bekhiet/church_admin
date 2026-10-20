@@ -10,6 +10,9 @@ class ViewServiceRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [id, service];
 
+  @override
+  Map<String, String> get urlParameters => {'id': id};
+
   const ViewServiceRoute({required this.id, this.service});
 
   @override

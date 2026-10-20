@@ -12,6 +12,9 @@ class EditFamilyRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [family, withChildren, withParents, withAddress];
 
+  @override
+  Map<String, String> get urlParameters => {'id': ?family?.id};
+
   const EditFamilyRoute({
     this.family,
     this.withChildren,

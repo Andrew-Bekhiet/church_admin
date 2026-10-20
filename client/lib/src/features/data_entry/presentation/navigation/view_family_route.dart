@@ -10,6 +10,9 @@ class ViewFamilyRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [id, family];
 
+  @override
+  Map<String, String> get urlParameters => {'id': id};
+
   const ViewFamilyRoute({required this.id, this.family});
 
   @override

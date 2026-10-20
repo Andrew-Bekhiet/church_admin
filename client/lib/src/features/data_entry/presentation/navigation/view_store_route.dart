@@ -10,6 +10,9 @@ class ViewStoreRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [id, store];
 
+  @override
+  Map<String, String> get urlParameters => {'id': id};
+
   const ViewStoreRoute({required this.id, this.store});
 
   @override

@@ -10,6 +10,9 @@ class EditStreetRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [street, withArea];
 
+  @override
+  Map<String, String> get urlParameters => {'id': ?street?.id};
+
   const EditStreetRoute({this.street, this.withArea});
 
   @override

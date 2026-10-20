@@ -10,6 +10,9 @@ class ViewAreaRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [id, area];
 
+  @override
+  Map<String, String> get urlParameters => {'id': id};
+
   const ViewAreaRoute({required this.id, this.area});
 
   @override

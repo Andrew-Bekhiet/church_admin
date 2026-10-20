@@ -9,6 +9,9 @@ class EditAreaRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [area];
 
+  @override
+  Map<String, String> get urlParameters => {'id': ?area?.id};
+
   const EditAreaRoute({this.area});
 
   @override

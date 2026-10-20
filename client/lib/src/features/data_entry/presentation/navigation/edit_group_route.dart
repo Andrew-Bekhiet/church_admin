@@ -10,6 +10,9 @@ class EditGroupRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [group, withService];
 
+  @override
+  Map<String, String> get urlParameters => {'id': ?group?.id};
+
   const EditGroupRoute({this.group, this.withService});
 
   @override

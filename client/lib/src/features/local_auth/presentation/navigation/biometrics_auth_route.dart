@@ -9,6 +9,9 @@ class BiometricsAuthRoute extends AppRoute {
   @override
   List<Object?> get props => [next];
 
+  @override
+  Map<String, String> get urlParameters => {'next': ?next?.path};
+
   const BiometricsAuthRoute({this.next});
 
   @override

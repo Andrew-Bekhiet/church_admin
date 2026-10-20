@@ -9,6 +9,12 @@ class EditPersonRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [intent];
 
+  @override
+  Map<String, String> get urlParameters => switch (intent) {
+    UpdatePerson(:final person) => {'id': person.id},
+    _ => const {},
+  };
+
   const EditPersonRoute({this.intent});
 
   @override

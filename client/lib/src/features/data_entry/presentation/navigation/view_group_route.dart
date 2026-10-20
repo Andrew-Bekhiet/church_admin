@@ -10,6 +10,9 @@ class ViewGroupRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [id, group];
 
+  @override
+  Map<String, String> get urlParameters => {'id': id};
+
   const ViewGroupRoute({required this.id, this.group});
 
   @override

@@ -10,6 +10,9 @@ class ViewStreetRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [id, street];
 
+  @override
+  Map<String, String> get urlParameters => {'id': id};
+
   const ViewStreetRoute({required this.id, this.street});
 
   @override

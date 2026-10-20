@@ -9,6 +9,9 @@ class EditServiceRoute extends HomeChildRoute {
   @override
   List<Object?> get props => [service];
 
+  @override
+  Map<String, String> get urlParameters => {'id': ?service?.id};
+
   const EditServiceRoute({this.service});
 
   @override
