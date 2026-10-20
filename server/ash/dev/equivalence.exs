@@ -92,8 +92,9 @@ defmodule ChurchAdmin.Equivalence do
     page = Map.get(root, :page, 100_000)
     nested = Enum.map_join(root.key, " ", &elem(&1, 0))
 
-    Stream.iterate(0, &(&1 + page))
-    |> Enum.reduce_while({%{}, MapSet.new()}, fn offset, {rows, ids} ->
+    page_offsets = Stream.iterate(0, &(&1 + page))
+
+    Enum.reduce_while(page_offsets, {%{}, MapSet.new()}, fn offset, {rows, ids} ->
       document =
         "{ rows: #{root.hasura}(limit: #{page}, offset: #{offset}, orderBy: [{id: ASC}]) " <>
           "{ id #{via.path} { #{nested} } } }"
@@ -115,10 +116,10 @@ defmodule ChurchAdmin.Equivalence do
     parent_fields = Enum.map_join(root.key, " ", &elem(&1, 0))
     child_fields = Enum.map_join(nested.key, " ", &elem(&1, 0))
     order = Enum.map_join(root.key, ", ", fn {field, _} -> "{#{field}: ASC}" end)
+    page_offsets = Stream.iterate(0, &(&1 + page))
 
     rows =
-      Stream.iterate(0, &(&1 + page))
-      |> Enum.reduce_while(%{}, fn offset, acc ->
+      Enum.reduce_while(page_offsets, %{}, fn offset, acc ->
         document =
           "{ rows: #{root.hasura}(limit: #{page}, offset: #{offset}, orderBy: [#{order}]) " <>
             "{ #{parent_fields} #{nested.field} { #{child_fields} } } }"
@@ -139,14 +140,15 @@ defmodule ChurchAdmin.Equivalence do
   defp hasura_rows(hasura, uid, root) do
     page = Map.get(root, :page, 100_000)
 
-    fields =
-      Enum.map(root.key, &elem(&1, 0)) ++ List.wrap(flag_field(root)) ++ value_fields(root)
+    key_fields = Enum.map(root.key, &elem(&1, 0))
+    flag_fields = root |> flag_field() |> List.wrap()
+    fields = key_fields ++ flag_fields ++ value_fields(root)
 
     {root_field, selection, order} = hasura_selection(root, fields)
+    page_offsets = Stream.iterate(0, &(&1 + page))
 
     rows =
-      Stream.iterate(0, &(&1 + page))
-      |> Enum.reduce_while(%{}, fn offset, acc ->
+      Enum.reduce_while(page_offsets, %{}, fn offset, acc ->
         document =
           "{ rows: #{root_field}(limit: #{page}, offset: #{offset}, orderBy: [#{order}]) { #{selection} } }"
 
@@ -159,8 +161,10 @@ defmodule ChurchAdmin.Equivalence do
     {rows, nil}
   end
 
-  defp hasura_row_value(row, root),
-    do: {row[flag_field(root)] == true, Enum.map(value_fields(root), &row[&1])}
+  defp hasura_row_value(row, root) do
+    values = root |> value_fields() |> Enum.map(&row[&1])
+    {row[flag_field(root)] == true, values}
+  end
 
   defp hasura_selection(%{through: {parent, relationship}}, fields),
     do: {parent, "#{relationship} { #{Enum.join(fields, " ")} }", "{id: ASC}"}
@@ -219,8 +223,10 @@ defmodule ChurchAdmin.Equivalence do
     actor = if is_binary(uid), do: ActorLoader.load(uid), else: uid
     attributes = Enum.map(root.key, &elem(&1, 1))
 
+    flag_attributes = root |> flag_attribute() |> List.wrap()
+
     root.resource
-    |> Ash.Query.load(List.wrap(flag_attribute(root)) ++ value_attributes(root))
+    |> Ash.Query.load(flag_attributes ++ value_attributes(root))
     |> Ash.read!(actor: actor, page: false)
     |> Enum.filter(&of_entity_hasura_showed?(&1, root, entity_ids))
     |> Map.new(fn row ->
@@ -237,8 +243,10 @@ defmodule ChurchAdmin.Equivalence do
 
   defp of_entity_hasura_showed?(_row, _root, _entity_ids), do: true
 
-  defp ash_row_value(row, root),
-    do: {ash_flag(row, root), Enum.map(value_attributes(root), &Map.fetch!(row, &1))}
+  defp ash_row_value(row, root) do
+    values = root |> value_attributes() |> Enum.map(&Map.fetch!(row, &1))
+    {ash_flag(row, root), values}
+  end
 
   defp ash_flag(row, %{flag: {_, attribute}}), do: Map.fetch!(row, attribute) == true
   defp ash_flag(_row, _root), do: false
