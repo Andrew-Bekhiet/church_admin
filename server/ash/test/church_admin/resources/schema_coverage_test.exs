@@ -35,7 +35,7 @@ defmodule ChurchAdmin.Resources.SchemaCoverageTest do
   test "every attribute maps to a column of the relation" do
     for resource <- ResourceCatalog.resources() do
       {schema, table} = ResourceCatalog.relation(resource)
-      columns = MapSet.new(columns_of(schema, table))
+      columns = schema |> columns_of(table) |> MapSet.new()
 
       phantom =
         resource
