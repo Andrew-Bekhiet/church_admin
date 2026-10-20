@@ -8,6 +8,18 @@ defmodule ChurchAdmin.Operations.StudyYearRollWorld do
 
   alias ChurchAdmin.Repo
 
+  @doc """
+  Removes the run the migrations record for the roll the previous system
+  already did, so a test can roll season 2026 itself.
+  """
+  def forget_previous_system_roll(_context) do
+    Repo.query!(
+      "delete from operations.study_year_roll_runs where season_year = 2026 and status = 'succeeded'"
+    )
+
+    :ok
+  end
+
   def nayrouz(season), do: Date.new!(season, 9, 11)
 
   def study_years!(orders \\ 1..6), do: Enum.each(orders, &study_year!/1)
