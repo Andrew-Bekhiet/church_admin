@@ -121,6 +121,36 @@ void main() {
 
     group('sign in/out =>', () {
       blocTest<AuthBloc, AuthState>(
+        'signing in a user whose account is already claimed raises no error',
+        setUp: () {
+          final functionsMock = globalProviderContainer.read(
+            functionsServiceProvider,
+          ) as MockFunctionsService;
+          when(functionsMock.tryClaimAccount()).thenAnswer(
+            (_) async =>
+                throw StateError('Account already exists for this user'),
+          );
+        },
+        build: () => _createAuthBloc(noCachedUser: true),
+        act: (bloc) => bloc.add(
+          const SignInWithEmailPassword(
+            email: 'email',
+            password: 'password',
+          ),
+        ),
+        wait: const Duration(milliseconds: 100),
+        errors: () => isEmpty,
+        verify: (bloc) => expect(
+          bloc.state,
+          isA<AuthAuthenticated>().having(
+            (s) => s.userData,
+            'userData',
+            initialUserData,
+          ),
+        ),
+      );
+
+      blocTest<AuthBloc, AuthState>(
         'sign in with email and password',
         build: () => _createAuthBloc(noCachedUser: true),
         act: (bloc) => bloc.add(
