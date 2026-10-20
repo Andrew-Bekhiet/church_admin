@@ -1,4 +1,4 @@
-FROM elixir:1.19.2-otp-28
+FROM elixir:1.20.4-otp-29
 
 ENV MIX_ENV=dev
 WORKDIR /app
