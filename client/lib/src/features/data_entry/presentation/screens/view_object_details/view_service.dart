@@ -134,6 +134,7 @@ class _ViewServiceState extends State<ViewService> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: FilledButton.icon(
+                  key: ViewServiceKeys.recordAttendanceButton,
                   style: Theme.of(context).largeFilledButtonStyle,
                   icon: const Icon(Symbols.productivity),
                   label: Text('تسجيل الحضور ل${defaultMeeting.name}'),
@@ -299,4 +300,10 @@ class _ViewServiceState extends State<ViewService> {
 
     super.dispose();
   }
+}
+
+abstract final class ViewServiceKeys {
+  static const Key recordAttendanceButton = ValueKey(
+    'View Service Record Attendance Button Key',
+  );
 }

@@ -55,6 +55,10 @@ class _AttendanceGroupedRosterState extends State<AttendanceGroupedRoster> {
                 final entry = entries[index];
 
                 return AttendancePersonCard(
+                  key: AttendancePersonCardKeys.entry(
+                    entry.person.id,
+                    asServant: entry.asServant,
+                  ),
                   entry: entry,
                   onToggle: widget.onToggle,
                   onChangeAttendanceTime: (time) =>

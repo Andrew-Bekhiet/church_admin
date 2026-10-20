@@ -89,6 +89,7 @@ class _SelectMeetingBottomSheetState extends State<SelectMeetingBottomSheet> {
                     final meeting = meetings[index];
 
                     return MeetingListTile(
+                      key: SelectMeetingBottomSheetKeys.meeting(meeting.id),
                       meeting: meeting,
                       selected: meeting.id == widget.currentMeeting.id,
                       onTap: () => Navigator.of(context).pop(meeting),
@@ -108,4 +109,9 @@ class _SelectMeetingBottomSheetState extends State<SelectMeetingBottomSheet> {
     unawaited(_meetingsStream.dispose());
     super.dispose();
   }
+}
+
+abstract final class SelectMeetingBottomSheetKeys {
+  static Key meeting(String meetingId) =>
+      ValueKey('Select Meeting Bottom Sheet $meetingId Key');
 }

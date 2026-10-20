@@ -26,6 +26,10 @@ class AttendanceFlatRoster extends StatelessWidget {
         final entry = entries[index];
 
         return AttendancePersonCard(
+          key: AttendancePersonCardKeys.entry(
+            entry.person.id,
+            asServant: entry.asServant,
+          ),
           entry: entry,
           onToggle: onToggle,
           onChangeAttendanceTime: (time) => onChangeAttendanceTime(entry, time),
