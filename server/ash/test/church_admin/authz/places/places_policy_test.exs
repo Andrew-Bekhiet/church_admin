@@ -44,10 +44,10 @@ defmodule ChurchAdmin.Authz.Places.PlacesPolicyTest do
     @areas if approved?, do: MapSet.new(@all_areas), else: MapSet.new()
     @streets if approved?, do: MapSet.new(@all_streets), else: MapSet.new()
     @districts if approved?, do: MapSet.new([:d1, :d2]), else: MapSet.new()
-    @stores MapSet.new(Map.get(@store_readers, kind, []))
-    @editable_areas MapSet.new(Map.get(@area_editors, kind, []))
-    @editable_streets MapSet.new(Map.get(@street_editors, kind, []))
-    @editable_stores MapSet.new(Map.get(@store_editors, kind, []))
+    @stores @store_readers |> Map.get(kind, []) |> MapSet.new()
+    @editable_areas @area_editors |> Map.get(kind, []) |> MapSet.new()
+    @editable_streets @street_editors |> Map.get(kind, []) |> MapSet.new()
+    @editable_stores @store_editors |> Map.get(kind, []) |> MapSet.new()
 
     test "#{kind} reads the places its scope allows", %{world: world} do
       assert visible(world, Area, @kind) == @areas

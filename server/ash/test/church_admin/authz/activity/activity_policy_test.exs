@@ -41,7 +41,8 @@ defmodule ChurchAdmin.Authz.Activity.ActivityPolicyTest do
       father_visited = MapSet.intersection(readable, MapSet.new([{:families, :f_area}]))
 
       expectations =
-        Map.new(@person_owned, &{&1, readable_persons})
+        @person_owned
+        |> Map.new(&{&1, readable_persons})
         |> Map.merge(Map.new(@record_keyed, &{&1, readable}))
         |> Map.put(LatestFatherVisit, father_visited)
 
@@ -50,8 +51,8 @@ defmodule ChurchAdmin.Authz.Activity.ActivityPolicyTest do
             actual = pointed_at(world, resource, @kind),
             actual != expected do
           {resource,
-           missing: MapSet.difference(expected, actual) |> Enum.sort(),
-           extra: MapSet.difference(actual, expected) |> Enum.sort()}
+           missing: expected |> MapSet.difference(actual) |> Enum.sort(),
+           extra: actual |> MapSet.difference(expected) |> Enum.sort()}
         end
 
       assert mismatches == []
@@ -96,7 +97,7 @@ defmodule ChurchAdmin.Authz.Activity.ActivityPolicyTest do
 
   defp readable(world, kind) do
     case ActivityWorld.readable_targets(kind) do
-      :everything -> MapSet.new(Map.values(world.targets))
+      :everything -> world.targets |> Map.values() |> MapSet.new()
       targets -> targets
     end
   end
@@ -104,7 +105,7 @@ defmodule ChurchAdmin.Authz.Activity.ActivityPolicyTest do
   defp pointed_at(world, resource, kind) do
     resource
     |> Ash.read!(actor: actor(world, kind), page: false)
-    |> Enum.flat_map(&List.wrap(target(world, &1)))
+    |> Enum.flat_map(fn record -> world |> target(record) |> List.wrap() end)
     |> MapSet.new()
   end
 
