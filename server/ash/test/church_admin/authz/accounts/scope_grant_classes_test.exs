@@ -11,7 +11,7 @@ defmodule ChurchAdmin.Authz.Accounts.ScopeGrantClassesTest do
   end
 
   # {grant holder, classes of its service grant}: the grant's service's live
-  # classes the grant covers (ServiceGrantCoverage); a class without a gender
+  # classes the grant covers (ClassCoverage); a class without a gender
   # is covered by a grant of either gender.
   # c_s2 and c_s2_y1_f (year 1 of another service) never belong to an s1 grant.
   @expectations [

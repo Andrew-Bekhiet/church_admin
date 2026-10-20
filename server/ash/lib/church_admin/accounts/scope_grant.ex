@@ -7,9 +7,8 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
 
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
-  alias ChurchAdmin.Authz.ServiceGrantCoverage
   alias ChurchAdmin.Catalog.StudyYear
-  alias ChurchAdmin.Organization.{Class, Group, Service}
+  alias ChurchAdmin.Organization.{Class, ClassCoverage, Group, Service}
   alias ChurchAdmin.Places.Area
 
   @scope_fields ChurchAdmin.Accounts.AdminOn.field_names()
@@ -162,9 +161,9 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
       public?: true,
       filter:
         expr(
-          ^ServiceGrantCoverage.covers_class(
-            ServiceGrantCoverage.through_parent(ServiceGrantCoverage.grant_row()),
-            ServiceGrantCoverage.class_row()
+          ^ClassCoverage.covers_class(
+            ClassCoverage.through_parent(ClassCoverage.scope_grant_row()),
+            ClassCoverage.class_row()
           )
         )
   end
