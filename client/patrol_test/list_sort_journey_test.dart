@@ -23,25 +23,21 @@ void main() {
       List<List<String>> reversed(List<List<String>> idsByTab) => [
         for (final ids in idsByTab) ids.reversed.toList(),
       ];
-      List<OrderBy> withFirstKeyReversed(List<OrderBy> sort) => [
-        sort.first.copyWith(value: OrderByValue.desc),
-        ...sort.skip(1),
-      ];
 
       final areaTabs = [
         fixture.streetIds,
         fixture.areaFamilyIds,
-        fixture.personIdsByName,
+        fixture.personIdsByType,
         fixture.storeIds,
       ];
       final otherAreaTabs = [fixture.otherAreaStreetIds];
       final streetTabs = [
         fixture.areaFamilyIds,
-        fixture.personIdsByName,
+        fixture.personIdsByType,
         fixture.storeIds,
       ];
       final familyTabs = [
-        fixture.personIdsByName,
+        fixture.personIdsByType,
         fixture.childFamilyIds,
         fixture.parentFamilyIds,
         fixture.storeIds,
@@ -49,52 +45,33 @@ void main() {
       final serviceTabs = [
         fixture.classIdsByStudyYear,
         fixture.groupIds,
-        fixture.personIdsByStudyYear,
+        fixture.personIdsByName,
       ];
       final otherServiceTabs = [
         fixture.otherServiceClassIdsByStudyYear,
         fixture.otherServiceGroupIds,
       ];
-      final classTabs = [fixture.personIdsByStudyYear];
-      final defaultSorts = {
-        OrderByPreferenceKey(type: metadata.street): [
-          OrderBy(field: StreetFields().name),
-        ],
-        OrderByPreferenceKey(type: metadata.family): [
-          OrderBy(field: FamilyFields().name),
-        ],
-        OrderByPreferenceKey(type: metadata.person): [
-          OrderBy(field: PersonFields().name),
-        ],
-        OrderByPreferenceKey(type: metadata.store): [
-          OrderBy(field: StoreFields().name),
-        ],
-        OrderByPreferenceKey(type: metadata.$class): [
-          OrderBy(field: ClassFields().studyYear),
-          OrderBy(field: ClassFields().name),
-        ],
-        OrderByPreferenceKey(type: metadata.group): [
-          OrderBy(field: GroupFields().name),
-        ],
-        OrderByPreferenceKey(type: metadata.person, inServiceContext: true): [
-          OrderBy(field: PersonFields().studyYear),
-          OrderBy(field: PersonFields().name),
-        ],
-      };
-      final reversedSorts = {
-        for (final MapEntry(:key, :value) in defaultSorts.entries)
-          key: withFirstKeyReversed(value),
-      };
+      final classTabs = [fixture.personIdsByName];
+      final sortedLists = [
+        for (final type in [
+          metadata.street,
+          metadata.family,
+          metadata.person,
+          metadata.store,
+          metadata.$class,
+          metadata.group,
+        ])
+          OrderByPreferenceKey(type: type),
+        OrderByPreferenceKey(type: metadata.person, inServiceContext: true),
+      ];
 
       Future<void> expectAreaScreensShow({required bool reversedOrder}) async {
         List<List<String>> shown(List<List<String>> tabs) =>
             reversedOrder ? reversed(tabs) : tabs;
 
-        await lists.showTab(0);
-        await lists.openStreetFromList(fixture.streetId);
+        await lists.openStreet(fixture.streetId);
         await lists.expectEachTabOrder(shown(streetTabs));
-        await lists.showTab(0);
-        await lists.openFamilyFromList(fixture.familyId);
+        await lists.openFamily(fixture.familyId);
         await lists.expectEachTabOrder(shown(familyTabs));
         await E2eApp.returnHome(tester, password: password);
         await lists.openArea(fixture.otherAreaId);
@@ -108,8 +85,7 @@ void main() {
         List<List<String>> shown(List<List<String>> tabs) =>
             reversedOrder ? reversed(tabs) : tabs;
 
-        await lists.showTab(0);
-        await lists.openClassFromList(fixture.classWithEveryPersonId);
+        await lists.openClass(fixture.classWithEveryPersonId);
         await lists.expectEachTabOrder(shown(classTabs));
         await E2eApp.returnHome(tester, password: password);
         await lists.openService(fixture.otherServiceId);
@@ -131,6 +107,8 @@ void main() {
       final adminUid =
           (await E2eBackend.userByEmail(E2eBackend.adminEmail))['uid']
               as String;
+      final defaultSorts = await lists.storedSorts(adminUid, sortedLists);
+      final reversedSorts = ListSortRobot.withFirstKeysReversed(defaultSorts);
 
       step('every area list starts in its default sort and is reversed');
       await lists.openArea(fixture.areaId);

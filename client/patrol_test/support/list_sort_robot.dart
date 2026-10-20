@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
@@ -12,7 +11,16 @@ import 'e2e_widget_tester.dart';
 class ListSortRobot {
   static const _storedSortTimeout = Duration(seconds: 30);
   static const _storedSortPollInterval = Duration(milliseconds: 500);
-  static const _collapseHeaderDrag = Offset(0, -600);
+
+  static Map<String, List<Object?>> withFirstKeysReversed(
+    Map<String, List<Object?>> sorts,
+  ) => {
+    for (final MapEntry(:key, :value) in sorts.entries)
+      key: [
+        {...value.first! as Map, 'value': 'desc'},
+        ...value.skip(1),
+      ],
+  };
 
   final WidgetTester tester;
 
@@ -32,35 +40,35 @@ class ListSortRobot {
     ),
   );
 
-  Future<void> openStreetFromList(String id) => _openFromList(
-    id,
+  Future<void> openStreet(String id) => _push(
+    ViewStreetRoute(id: id).location,
     find.byWidgetPredicate(
       (widget) => widget is ViewStreet && widget.streetId == id,
     ),
   );
 
-  Future<void> openFamilyFromList(String id) => _openFromList(
-    id,
+  Future<void> openFamily(String id) => _push(
+    ViewFamilyRoute(id: id).location,
     find.byWidgetPredicate(
       (widget) => widget is ViewFamily && widget.familyId == id,
     ),
   );
 
-  Future<void> openClassFromList(String id) => _openFromList(
-    id,
+  Future<void> openClass(String id) => _push(
+    ViewClassRoute(id: id).location,
     find.byWidgetPredicate(
       (widget) => widget is ViewClass && widget.classId == id,
     ),
   );
 
   Future<void> showTab(int index) async {
-    await tester.tapOn(find.byKey(ChipTabBarKeys.tab(index)));
+    await tester.tapOn(_onTopScreen(find.byKey(ChipTabBarKeys.tab(index))));
   }
 
   Future<void> reverseFirstSortKey() async {
     final sheet = find.byType(ListArrangementSheet);
 
-    await tester.tapOn(find.byKey(TabAwareSortButtonKeys.button));
+    await tester.tapOn(_onTopScreen(find.byKey(TabAwareSortButtonKeys.button)));
     await tester.tapOn(find.byKey(OrderByWidgetKeys.directionToggle));
     await tester.tapOn(find.byKey(ListArrangementSheetKeys.save));
     await tester.waitForAbsent(sheet);
@@ -100,16 +108,28 @@ class ListSortRobot {
     }
   }
 
+  /// The sort each list of [lists] has stored for the user, by storage key.
+  Future<Map<String, List<Object?>>> storedSorts(
+    String uid,
+    List<OrderByPreferenceKey> lists,
+  ) async {
+    final stored = await E2eBackend.orderByPreferencesOf(uid);
+
+    return {
+      for (final list in lists)
+        list.storageKey: switch (stored[list.storageKey]) {
+          final List<Object?> sort => sort,
+          final missing => throw TestFailure(
+            'No stored sort for ${list.storageKey}: $missing',
+          ),
+        },
+    };
+  }
+
   Future<void> expectStoredSorts(
     String uid,
-    Map<OrderByPreferenceKey, List<OrderBy>> sorts,
+    Map<String, List<Object?>> expected,
   ) async {
-    final expected = {
-      for (final MapEntry(:key, :value) in sorts.entries)
-        key.storageKey: jsonDecode(
-          jsonEncode([for (final orderBy in value) orderBy.toJson()]),
-        ),
-    };
     final deadline = DateTime.now().add(_storedSortTimeout);
     var stored = <String, dynamic>{};
 
@@ -131,10 +151,12 @@ class ListSortRobot {
       );
 
   List<String>? _shownIdsOfListContaining(String id) {
-    final rows = find.byWidgetPredicate(
-      (widget) =>
-          widget is ViewableObjectListIndexedItem &&
-          widget.items.any((item) => _idOf(item) == id),
+    final rows = _onTopScreen(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is ViewableObjectListIndexedItem &&
+            widget.items.any((item) => _idOf(item) == id),
+      ),
     );
 
     return switch (rows.evaluate().firstOrNull?.widget) {
@@ -145,21 +167,48 @@ class ListSortRobot {
     };
   }
 
+  /// While a pushed screen animates in, the screen below it is still on
+  /// stage with the same keys; the route pushed last is built last.
+  Finder _onTopScreen(Finder finder) => find.descendant(
+    of: find.byWidgetPredicate((widget) => widget is ViewObjectDetails).last,
+    matching: finder,
+  );
+
   String? _idOf(Viewable item) => item is ViewableWithID ? item.id : null;
 
   Future<void> _push(String location, Finder screen) async {
     unawaited($appRouter.push(location));
     await tester.waitFor(screen);
+    await _scrollTabsIntoView();
   }
 
-  /// List rows sit below the expanded app bar, so the header is collapsed
-  /// first; the list's off-screen prototype row is never hit-testable.
-  Future<void> _openFromList(String id, Finder screen) async {
-    await tester.drag(
-      find.byType(NestedScrollView).hitTestable().first,
-      _collapseHeaderDrag,
+  /// The tabs sit below the expanded app bar and the screen's details, out of
+  /// the built area on screens with long details. Jumping the outer scroll to
+  /// its end pins them under the app bar, past the screen's scroll snapping.
+  Future<void> _scrollTabsIntoView() async {
+    final screenBody = await tester.waitFor(
+      _onTopScreen(find.byType(NestedScrollView)),
     );
-    await tester.tapOn(tester.viewableObject(id).hitTestable());
-    await tester.waitFor(screen);
+    final outerScroll = tester
+        .state<NestedScrollViewState>(screenBody.first)
+        .outerController;
+
+    final firstTab = _onTopScreen(
+      find.byKey(ChipTabBarKeys.tab(0)),
+    ).hitTestable();
+    final deadline = DateTime.now().add(E2eWidgetTester.defaultTimeout);
+    bool isScrolledToTabs() =>
+        firstTab.evaluate().isNotEmpty &&
+        outerScroll.position.pixels == outerScroll.position.maxScrollExtent;
+
+    while (!isScrolledToTabs()) {
+      if (DateTime.now().isAfter(deadline)) {
+        throw tester.failureShowingScreen(
+          'The screen tabs never came into view',
+        );
+      }
+      outerScroll.jumpTo(outerScroll.position.maxScrollExtent);
+      await tester.pump(E2eWidgetTester.pollInterval);
+    }
   }
 }
