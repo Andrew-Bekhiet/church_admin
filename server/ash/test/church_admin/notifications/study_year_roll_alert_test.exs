@@ -74,7 +74,7 @@ defmodule ChurchAdmin.Notifications.StudyYearRollAlertTest do
 
       assert :ok = perform(run)
 
-      messages = Enum.sort_by(sent_messages(3), & &1.token)
+      messages = 3 |> sent_messages() |> Enum.sort_by(& &1.token)
       assert Enum.map(messages, & &1.token) == ["token-1", "token-2", "token-3"]
       refute_receive {:fcm_message, _}
 
@@ -189,7 +189,9 @@ defmodule ChurchAdmin.Notifications.StudyYearRollAlertTest do
 
       assert :ok = perform(run)
 
-      assert Enum.sort(Enum.map(sent_messages(2), & &1.token)) == Enum.sort([stale, "fresh"])
+      assert 2 |> sent_messages() |> Enum.map(& &1.token) |> Enum.sort() ==
+               Enum.sort([stale, "fresh"])
+
       assert tokens_in_db() == ["fresh"]
       assert %DateTime{} = notified_at(run)
     end
