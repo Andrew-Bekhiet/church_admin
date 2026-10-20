@@ -34,12 +34,9 @@ void main() {
 
       final seed = await ScopedAttendanceSeed.insert();
 
-      step('the scoped user signs up and claims the seeded account');
+      step('the scoped user signs in');
       await E2eApp.launchSignedOut($);
-      await E2eApp.signUpClaimingSeededAccount(
-        tester,
-        email: ScopedAttendanceSeed.userEmail,
-      );
+      await E2eApp.signInToHome(tester, email: seed.user.email);
 
       final robot = RecordAttendanceRobot(tester);
 
@@ -85,7 +82,7 @@ void main() {
           meetingId: seed.bothAudiencesMeetingId,
           view: servants,
         ),
-        {seed.secondaryServantId, seed.userPersonId},
+        {seed.secondaryServantId, seed.user.personId},
       );
       await robot.markPresent(seed.secondaryServantId, asServant: true);
       expect(
@@ -119,13 +116,13 @@ void main() {
           meetingId: seed.servantsOnlyMeetingId,
           view: servants,
         ),
-        {seed.secondaryServantId, seed.userPersonId},
+        {seed.secondaryServantId, seed.user.personId},
       );
       expect(robot.canSwitchAudience, isFalse);
-      await robot.markPresent(seed.userPersonId, asServant: true);
+      await robot.markPresent(seed.user.personId, asServant: true);
       expect(
         (await singleStoredAttendance(
-          seed.userPersonId,
+          seed.user.personId,
           meetingId: seed.servantsOnlyMeetingId,
         )).asServant,
         isTrue,
@@ -154,12 +151,12 @@ void main() {
           meetingId: seed.servantsRightsMeetingId,
           view: servants,
         ),
-        {seed.userPersonId},
+        {seed.user.personId},
       );
       expect(robot.canSwitchAudience, isFalse);
-      await robot.markPresent(seed.userPersonId, asServant: true);
+      await robot.markPresent(seed.user.personId, asServant: true);
       await singleStoredAttendance(
-        seed.userPersonId,
+        seed.user.personId,
         meetingId: seed.servantsRightsMeetingId,
       );
 

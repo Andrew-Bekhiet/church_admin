@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 
+import 'e2e_admin_scope.dart';
 import 'e2e_backend.dart';
-import 'seeded_service_scope.dart';
 
 /// Seeds meetings, rosters and scoped users, and reads back stored attendance.
 abstract final class AttendanceE2eBackend {
@@ -72,13 +72,12 @@ abstract final class AttendanceE2eBackend {
     return (inserted['insertPersonsOne'] as Map)['id'] as String;
   }
 
-  /// Inserts a user with a linked person and returns that person's id, the
-  /// identity attendance is recorded against.
+  /// Inserts a user who never signs in, with a linked person, and returns
+  /// that person's id, the identity attendance is recorded against.
   static Future<String> insertServantPerson(
     String name, {
-    required List<SeededServiceScope> scopes,
+    required List<E2eAdminScope> scopes,
     bool isApproved = true,
-    String? email,
   }) async {
     final inserted = await E2eBackend.hasuraQuery(
       r'''
@@ -89,14 +88,13 @@ abstract final class AttendanceE2eBackend {
       variables: {
         'object': {
           'name': name,
-          'email': ?email,
           'permissions': {
             'data': [
               if (isApproved) {'permission': 'approved'},
             ],
           },
           'adminOn': {
-            'data': [for (final scope in scopes) scope.adminOnInsertObject],
+            'data': [for (final scope in scopes) scope.adminOnInsertInput],
           },
         },
       },

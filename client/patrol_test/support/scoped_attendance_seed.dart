@@ -1,15 +1,17 @@
 import 'package:church_admin/church_admin.dart';
 
 import 'attendance_e2e_backend.dart';
+import 'e2e_admin_scope.dart';
 import 'e2e_backend.dart';
-import 'seeded_service_scope.dart';
+import 'e2e_user.dart';
+import 'e2e_users.dart';
 
 /// A user scoped to first-year boys of the secondary service (recording
 /// persons and servants), the preparatory service (recording nothing), the
 /// primary service (recording persons) and KG (recording servants), with
 /// people inside and outside each roster those scopes allow.
 class ScopedAttendanceSeed {
-  static const String userEmail = 'attendance-recorder@e2e.test';
+  static const String _userEmail = 'attendance-recorder@e2e.test';
   static const int _scopedStudyYear = 10;
   static const int _otherSecondaryStudyYear = 11;
 
@@ -39,12 +41,12 @@ class ScopedAttendanceSeed {
     );
     await AttendanceE2eBackend.insertServantPerson(
       'خادم ثانوي غير معتمد',
-      scopes: [SeededServiceScope(secondaryId)],
+      scopes: [ServiceAdminScope(secondaryId)],
       isApproved: false,
     );
     await AttendanceE2eBackend.insertServantPerson(
       'خادم اعدادي',
-      scopes: [SeededServiceScope(preparatoryId)],
+      scopes: [ServiceAdminScope(preparatoryId)],
     );
 
     return ScopedAttendanceSeed(
@@ -85,7 +87,7 @@ class ScopedAttendanceSeed {
       ),
       secondaryServantId: await AttendanceE2eBackend.insertServantPerson(
         'خادم ثانوي',
-        scopes: [SeededServiceScope(secondaryId)],
+        scopes: [ServiceAdminScope(secondaryId)],
       ),
       notRecordablePersonId: await AttendanceE2eBackend.insertServedPerson(
         'مخدوم اعدادي',
@@ -99,20 +101,20 @@ class ScopedAttendanceSeed {
         studyYear: 3,
         isMale: true,
       ),
-      userPersonId: await AttendanceE2eBackend.insertServantPerson(
-        'خادم يسجل الحضور',
-        email: userEmail,
-        scopes: [
-          SeededServiceScope(
+      user: await E2eUsers.createApprovedUser(
+        email: _userEmail,
+        name: 'خادم يسجل الحضور',
+        adminOn: [
+          ServiceAdminScope(
             secondaryId,
             studyYear: _scopedStudyYear,
-            gender: true,
-            recordsPersons: true,
-            recordsServants: true,
+            gender: AdminScopeGender.male,
+            canRecordAttendance: true,
+            canRecordServantsAttendance: true,
           ),
-          SeededServiceScope(preparatoryId),
-          SeededServiceScope(primaryId, recordsPersons: true),
-          SeededServiceScope(kgId, recordsServants: true),
+          ServiceAdminScope(preparatoryId),
+          ServiceAdminScope(primaryId, canRecordAttendance: true),
+          ServiceAdminScope(kgId, canRecordServantsAttendance: true),
         ],
       ),
     );
@@ -131,7 +133,7 @@ class ScopedAttendanceSeed {
   final String secondaryServantId;
   final String notRecordablePersonId;
   final String personsRightsPersonId;
-  final String userPersonId;
+  final E2eUser user;
 
   const ScopedAttendanceSeed({
     required this.bothAudiencesMeetingId,
@@ -146,6 +148,6 @@ class ScopedAttendanceSeed {
     required this.secondaryServantId,
     required this.notRecordablePersonId,
     required this.personsRightsPersonId,
-    required this.userPersonId,
+    required this.user,
   });
 }

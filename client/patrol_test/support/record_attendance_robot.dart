@@ -4,6 +4,7 @@ import 'package:church_admin/src/features/attendance/presentation/screens/body/r
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'e2e_app.dart';
 import 'e2e_widget_tester.dart';
 
 class RecordAttendanceRobot {
@@ -37,9 +38,10 @@ class RecordAttendanceRobot {
   const RecordAttendanceRobot(this.tester);
 
   Future<void> openServiceDefaultMeeting(String serviceId) async {
-    await tester.tapOn(find.byKey(HomeModeCardsKeys.sundaySchoolButtonKey));
-    await tester.tapOn(
-      find.byKey(HomeBottomNavBarKeys.destination(HomeTab.services)),
+    await E2eApp.openHomeTab(
+      tester,
+      mode: HomeMode.sundaySchool,
+      tab: HomeTab.services,
     );
     await tester.tapOn(tester.viewableObject(serviceId));
     await tester.tapOn(find.byKey(ViewServiceKeys.recordAttendanceButton));
