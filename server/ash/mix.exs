@@ -122,6 +122,7 @@ defmodule ChurchAdmin.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ash.setup --quiet", "test"],
       precommit: [
+        "hex.audit",
         "compile --warnings-as-errors",
         "deps.unlock --unused",
         "format",
