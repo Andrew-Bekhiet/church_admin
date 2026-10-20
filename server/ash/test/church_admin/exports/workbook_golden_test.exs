@@ -66,8 +66,8 @@ defmodule ChurchAdmin.Exports.WorkbookGoldenTest do
       geolocation: %{"type" => "Point", "coordinates" => [31.25, 30.0]}
     }
 
-    Factory.address!(Map.put(address_attrs, :family_id, family.id))
-    Factory.address!(Map.put(address_attrs, :store_id, store.id))
+    address_attrs |> Map.put(:family_id, family.id) |> Factory.address!()
+    address_attrs |> Map.put(:store_id, store.id) |> Factory.address!()
 
     father_type = seed!(PersonType, %{name: "الأب", is_family_admin: true})
     child_type = seed!(PersonType, %{name: "ابن"})
