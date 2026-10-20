@@ -69,9 +69,10 @@ defmodule ChurchAdmin.Accounts.Changes.ManageGrants do
 
   defp keyed_rows(:scope_grants, scopes, user) do
     held = Ash.load!(user, :scope_grants, authorize?: false).scope_grants
+    requested_rows = new_rows(:scope_grants, scopes)
 
     {rows, _unmatched} =
-      Enum.map_reduce(new_rows(:scope_grants, scopes), held, fn scope, unmatched ->
+      Enum.map_reduce(requested_rows, held, fn scope, unmatched ->
         case Enum.split_with(unmatched, &same_scope?(&1, scope)) do
           {[match | others], rest} ->
             {Map.put(scope, :permission_id, match.permission_id), others ++ rest}

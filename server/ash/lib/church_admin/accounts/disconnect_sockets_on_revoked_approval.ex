@@ -15,7 +15,9 @@ defmodule ChurchAdmin.Accounts.DisconnectSocketsOnRevokedApproval do
         action: %{type: :destroy},
         data: %{uid: uid, permission: "approved"}
       }) do
-    ChurchAdminWeb.Endpoint.broadcast(ChurchAdminWeb.ChangesSocket.id_for(uid), "disconnect", %{})
+    uid
+    |> ChurchAdminWeb.ChangesSocket.id_for()
+    |> ChurchAdminWeb.Endpoint.broadcast("disconnect", %{})
   end
 
   def notify(_notification), do: :ok
