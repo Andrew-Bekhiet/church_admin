@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 
 abstract final class AppRouteRedirects {
   static const int _maxRedirects = 5;
@@ -31,19 +32,17 @@ abstract final class AppRouteRedirects {
     return resolved;
   }
 
-  static List<AppRoute>? _maybeRedirectOnce(List<AppRoute> stack) {
-    if (_maybeRedirectByFeatureFlags(stack) case final redirected?) {
-      return redirected;
-    }
-
-    for (final (index, route) in stack.indexed) {
-      if (route.redirect() case final target?) {
-        return _redirectRouteAt(stack, index, target);
-      }
-    }
-
-    return null;
-  }
+  static List<AppRoute>? _maybeRedirectOnce(List<AppRoute> stack) =>
+      _maybeRedirectByFeatureFlags(stack) ??
+      stack
+          .mapIndexed(
+            (index, route) => switch (route.redirect()) {
+              final target? => _redirectRouteAt(stack, index, target),
+              null => null,
+            },
+          )
+          .nonNulls
+          .firstOrNull;
 
   static List<AppRoute>? _maybeRedirectByFeatureFlags(List<AppRoute> stack) {
     final featureFlags = FeatureFlagsRepository.I;
