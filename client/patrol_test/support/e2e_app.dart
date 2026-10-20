@@ -18,6 +18,7 @@ abstract final class E2eApp {
     HomeModeCardsKeys.churchDataButtonKey,
   );
   static const _maxUnlocksWhileLeaving = 3;
+  static const _launchTimeout = Duration(minutes: 2);
 
   static final Finder lockPasswordField = find.byKey(
     BiometricsAuthScreenKeys.passwordFieldKey,
@@ -28,20 +29,29 @@ abstract final class E2eApp {
   /// Starts the app without awaiting it: `flutter_local_notifications` asks
   /// for notification permission during initialization and waits for an
   /// answer, so the native dialog has to be dismissed while `main` is running.
+  /// On a fresh install the dialog can take longer than any fixed wait to
+  /// appear, so it is looked for until `main` returns.
   static Future<void> launchSignedOut(PatrolIntegrationTester $) async {
     final tester = $.tester;
     _testErrorWidgetBuilder = ErrorWidget.builder;
     WidgetController.hitTestWarningShouldBeFatal = true;
 
-    final launching = runZonedGuarded(app.main, _recordUncaughtAppError);
+    final launching =
+        runZonedGuarded(app.main, _recordUncaughtAppError) ?? Future.value();
+    var launched = false;
+    launching.whenComplete(() => launched = true).ignore();
+    final launchDeadline = DateTime.now().add(_launchTimeout);
 
-    if (await $.platform.mobile.isPermissionDialogVisible(
-      timeout: const Duration(seconds: 10),
-    )) {
-      await $.platform.mobile.denyPermission();
+    while (!launched) {
+      if (DateTime.now().isAfter(launchDeadline)) {
+        throw TestFailure('The app did not finish starting in $_launchTimeout');
+      }
+      if (await $.platform.mobile.isPermissionDialogVisible(
+        timeout: const Duration(seconds: 2),
+      )) {
+        await $.platform.mobile.denyPermission();
+      }
     }
-
-    await launching;
 
     if (AuthBloc.I.state is! AuthUnauthenticated) {
       AuthBloc.I.add(const SignOut());
