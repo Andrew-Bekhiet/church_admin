@@ -13,8 +13,6 @@ defmodule ChurchAdmin.People.Family.Changes.ApplyRelations do
   alias ChurchAdmin.Changes.AfterActionFailure
   alias ChurchAdmin.People.FamilyRelation
 
-  require Ash.Query
-
   @sides [
     parents: {:child_family_id, :parent_family_id},
     children: {:parent_family_id, :child_family_id}
