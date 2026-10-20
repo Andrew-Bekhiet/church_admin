@@ -97,6 +97,33 @@ abstract final class E2eApp {
     await tester.waitForAbsent(loginButton);
   }
 
+  /// Signs in an approved user, such as one from `E2eUsers.createApprovedUser`,
+  /// filling the spiritual data in only when the app asks for it.
+  static Future<void> signInToHome(
+    WidgetTester tester, {
+    required String email,
+    String password = E2eBackend.password,
+  }) async {
+    final spiritDataSaveButton = find.byKey(
+      UpdateUserSpiritDataScreenKeys.saveButton,
+    );
+
+    await signIn(tester, email: email, password: password);
+    await tester.waitFor(
+      find.byElementPredicate(
+        (element) =>
+            lockPasswordField.evaluate().contains(element) ||
+            spiritDataSaveButton.evaluate().contains(element),
+      ),
+    );
+
+    if (spiritDataSaveButton.evaluate().isNotEmpty) {
+      await completeSpiritualData(tester);
+    }
+
+    await enterHome(tester, password);
+  }
+
   static Future<void> signUp(
     WidgetTester tester, {
     required String email,
@@ -165,6 +192,15 @@ abstract final class E2eApp {
     await tester.tapOn(find.byKey(item));
   }
 
+  static Future<void> openHomeTab(
+    WidgetTester tester, {
+    required HomeMode mode,
+    required HomeTab tab,
+  }) async {
+    await tester.tapOn(find.byKey(HomeModeCardsKeys.modeKeyFor(mode)));
+    await tester.tapOn(find.byKey(HomeBottomNavBarKeys.destinationFor(tab)));
+  }
+
   static Future<void> signOut(
     WidgetTester tester, {
     String password = E2eBackend.password,
@@ -182,6 +218,9 @@ abstract final class E2eApp {
     required String password,
   }) async {
     final backButton = find.byType(BackButton);
+    final summaryTab = find.byKey(
+      HomeBottomNavBarKeys.destinationFor(HomeTab.summary),
+    );
     final deadline = DateTime.now().add(_returnHomeTimeout);
     var unlocks = 0;
     bool isHomeSettled() =>
@@ -211,6 +250,9 @@ abstract final class E2eApp {
         await tester.tap(poppedBackButton);
         await tester.waitForAbsent(poppedBackButton);
         continue;
+      }
+      if (summaryTab.hitTestable().evaluate().isNotEmpty) {
+        await tester.tap(summaryTab.hitTestable());
       }
       await tester.pump(E2eWidgetTester.pollInterval);
     }
