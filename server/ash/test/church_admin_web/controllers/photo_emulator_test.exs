@@ -52,21 +52,21 @@ defmodule ChurchAdminWeb.PhotoEmulatorTest do
 
     {:ok, upload} = Files.request_photo_upload(:persons, person.id, "image/jpeg", actor: actor)
 
-    response =
+    upload_response =
       conn |> put_req_header("content-type", "image/jpeg") |> put(path(upload), @photo)
 
-    assert response.status == 204
+    assert upload_response.status == 204
 
     recorded = Ash.get!(Person, person.id, authorize?: false)
     assert %DateTime{} = recorded.photo_updated_at
     assert String.length(recorded.blurhash) == 54
 
     {:ok, download} = Files.photo_download_url(:persons, person.id, nil, actor: actor)
-    response = get(build_conn(), path(download))
+    download_response = get(build_conn(), path(download))
 
-    assert response.status == 200
-    assert response.resp_body == @photo
-    assert get_resp_header(response, "cache-control") == ["private, max-age=300"]
+    assert download_response.status == 200
+    assert download_response.resp_body == @photo
+    assert get_resp_header(download_response, "cache-control") == ["private, max-age=300"]
 
     assert {:ok, true} = Files.delete_photo(:persons, person.id, actor: actor)
 

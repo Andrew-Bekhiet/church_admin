@@ -27,18 +27,18 @@ defmodule ChurchAdmin.People.PersonReadExtrasTest do
     } do
       %{m1: m1, f2: f2} = world.records
 
-      loaded =
+      loaded_m1 =
         read_person!(m1, [:last_confession_day, :last_kodas_day, :last_visit_at])
 
-      assert loaded.last_confession_day == ActivityWorld.day_2()
-      assert loaded.last_kodas_day == ActivityWorld.day_2()
-      assert loaded.last_visit_at == ActivityWorld.at(200)
+      assert loaded_m1.last_confession_day == ActivityWorld.day_2()
+      assert loaded_m1.last_kodas_day == ActivityWorld.day_2()
+      assert loaded_m1.last_visit_at == ActivityWorld.at(200)
 
-      loaded = read_person!(f2, [:last_confession_day, :last_visit_at, :last_call])
+      loaded_f2 = read_person!(f2, [:last_confession_day, :last_visit_at, :last_call])
 
-      assert loaded.last_confession_day == ActivityWorld.day_1()
-      assert loaded.last_visit_at == ActivityWorld.at(200)
-      assert loaded.last_call == ActivityWorld.at(2)
+      assert loaded_f2.last_confession_day == ActivityWorld.day_1()
+      assert loaded_f2.last_visit_at == ActivityWorld.at(200)
+      assert loaded_f2.last_call == ActivityWorld.at(2)
     end
 
     test "a person without history has no last dates", %{world: world} do

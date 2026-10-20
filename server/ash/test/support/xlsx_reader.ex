@@ -14,8 +14,8 @@ defmodule ChurchAdmin.XlsxReader do
 
   @spec read(binary()) :: [sheet()]
   def read(xlsx) do
-    {:ok, files} = :zip.unzip(xlsx, [:memory])
-    files = Map.new(files, fn {name, content} -> {to_string(name), content} end)
+    {:ok, entries} = :zip.unzip(xlsx, [:memory])
+    files = Map.new(entries, fn {name, content} -> {to_string(name), content} end)
     strings = shared_strings(Map.get(files, "xl/sharedStrings.xml", ""))
 
     files

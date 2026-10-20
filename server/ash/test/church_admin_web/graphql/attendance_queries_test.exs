@@ -137,8 +137,8 @@ defmodule ChurchAdminWeb.Graphql.AttendanceQueriesTest do
   test "a meeting's roster pages by keyset", %{conn: conn, world: world} do
     variables = %{"meetingId" => world.records.m_s1.id}
 
-    first = data!(run(conn, @roster, Map.put(variables, "first", 2), :service_open, world))
-    first = first["rosterEntries"]
+    first_data = data!(run(conn, @roster, Map.put(variables, "first", 2), :service_open, world))
+    first = first_data["rosterEntries"]
 
     rest =
       conn

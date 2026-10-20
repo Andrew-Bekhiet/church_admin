@@ -92,13 +92,18 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Accounts do
   defp filler_grants do
     scope = Rng.weighted([{:service, 50}, {:group, 25}, {:area, 25}])
     edit? = Rng.chance?(0.5)
-    options = [edit: edit?, export: Rng.chance?(0.2), admin_users: edit? and Rng.chance?(0.2)]
+
+    base_options = [
+      edit: edit?,
+      export: Rng.chance?(0.2),
+      admin_users: edit? and Rng.chance?(0.2)
+    ]
 
     options =
       if scope == :service and Rng.chance?(0.4) do
-        [{:gender, Rng.chance?(0.5)}, {:study_year, Rng.int(1, 6)} | options]
+        [{:gender, Rng.chance?(0.5)}, {:study_year, Rng.int(1, 6)} | base_options]
       else
-        options
+        base_options
       end
 
     [UserMatrix.grant(scope, options)]

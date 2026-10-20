@@ -9,12 +9,15 @@ defmodule ChurchAdmin.Dev.SeedGenerator.People.Linking do
 
   @spec link([map()], [map()]) :: [{map(), [map()]}]
   def link(families, users) do
-    members = Map.new(families, &{&1.index, Enum.map(&1.members, fn type -> member(type) end)})
+    members_by_family_index =
+      Map.new(families, &{&1.index, Enum.map(&1.members, fn type -> member(type) end)})
+
     candidates = for family <- families, family.live?, is_nil(family.failure), do: family.index
     family_users = Enum.filter(users, &(&1.kind.person in [:family_admin, :deleted]))
 
     {members, _used} =
-      Enum.reduce(family_users, {members, MapSet.new()}, fn user, {members, used} ->
+      Enum.reduce(family_users, {members_by_family_index, MapSet.new()}, fn user,
+                                                                            {members, used} ->
         index = Enum.find(candidates, &(&1 not in used and fits?(members[&1], user)))
         if index == nil, do: raise("no family fits the seeded user #{user.key}")
         {Map.update!(members, index, &place(&1, user)), MapSet.put(used, index)}

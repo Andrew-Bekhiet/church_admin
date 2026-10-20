@@ -78,14 +78,14 @@ defmodule ChurchAdmin.People.PersonCommandsTest do
           actor: ctx.actor
         )
 
-      person =
+      loaded_person =
         Ash.load!(person, [:services, :groups, :tags, :hobbies, :contacts], authorize?: false)
 
-      assert Enum.map(person.services, & &1.id) == [ctx.service.id]
-      assert Enum.map(person.groups, & &1.id) == [group.id]
-      assert Enum.map(person.tags, & &1.id) == [tag.id]
-      assert Enum.map(person.hobbies, & &1.id) == [hobby.id]
-      assert [%{phone: "+201000000001", is_main_phone: true}] = person.contacts
+      assert Enum.map(loaded_person.services, & &1.id) == [ctx.service.id]
+      assert Enum.map(loaded_person.groups, & &1.id) == [group.id]
+      assert Enum.map(loaded_person.tags, & &1.id) == [tag.id]
+      assert Enum.map(loaded_person.hobbies, & &1.id) == [hobby.id]
+      assert [%{phone: "+201000000001", is_main_phone: true}] = loaded_person.contacts
 
       assert [%{phone: "+201000000002", person_id: nil}] =
                rows_of(Contact, family_id: ctx.family.id)
@@ -271,15 +271,17 @@ defmodule ChurchAdmin.People.PersonCommandsTest do
 
       assert person.study_year_id == 13
 
-      {:ok, person} = People.update_person(person, %{work_status: "unemployed"}, actor: ctx.actor)
-      assert person.study_year_id == nil
+      {:ok, unemployed_person} =
+        People.update_person(person, %{work_status: "unemployed"}, actor: ctx.actor)
 
-      {:ok, person} =
-        People.update_person(person, %{work_status: "employed", job_description: "teacher"},
-          actor: ctx.actor
-        )
+      assert unemployed_person.study_year_id == nil
 
-      assert person.job_description == "teacher"
+      {:ok, employed_person} =
+        People.update_person(
+          unemployed_person,
+          %{work_status: "employed", job_description: "teacher"}, actor: ctx.actor)
+
+      assert employed_person.job_description == "teacher"
     end
   end
 

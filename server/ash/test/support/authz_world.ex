@@ -107,7 +107,7 @@ defmodule ChurchAdmin.AuthzWorld do
       mg_area_store: Factory.in_group!(persons.area_store, g2)
     }
 
-    activity = %{
+    base_activity = %{
       c_y1: Factory.class!(s1, service_study_year: 1),
       c_y12_f:
         Factory.class!(s1, service_study_year: 1, service_study_year_to: 2, service_gender: false),
@@ -119,7 +119,8 @@ defmodule ChurchAdmin.AuthzWorld do
       e_f_area: Factory.edit_row!("families", f_area.id)
     }
 
-    activity = Map.put(activity, :e_c_y1, Factory.edit_row!("classes", activity.c_y1.id))
+    activity =
+      Map.put(base_activity, :e_c_y1, Factory.edit_row!("classes", base_activity.c_y1.id))
 
     grant_permissions!(users)
     e_grant = grant_scopes!(users, s1, g1, a1)
