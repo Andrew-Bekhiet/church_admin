@@ -27,7 +27,7 @@ defmodule ChurchAdmin.Accounts.UpdateMyPreferencesTest do
     )
   end
 
-  defp update!(actor, params), do: update(actor, params) |> elem(1)
+  defp update!(actor, params), do: actor |> update(params) |> elem(1)
 
   defp update(actor, params) do
     {:ok, mine} = Accounts.my_preferences(actor: actor)
