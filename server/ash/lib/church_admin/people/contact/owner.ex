@@ -9,8 +9,6 @@ defmodule ChurchAdmin.People.Contact.Owner do
 
   alias ChurchAdmin.People.Contact
 
-  require Ash.Query
-
   @spec contacts(Ash.Changeset.t()) :: Ash.Query.t()
   def contacts(changeset) do
     person_id = Ash.Changeset.get_attribute(changeset, :person_id)
