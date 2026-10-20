@@ -8,7 +8,7 @@ import 'package:material_ui/material_ui.dart' hide Notification;
 import 'package:phone_form_field/phone_form_field.dart';
 
 class ChurchAdminApp extends StatefulWidget {
-  final RouterConfig<RouteMatchList> routerConfig;
+  final GoRouter routerConfig;
 
   const ChurchAdminApp({required this.routerConfig, super.key});
 
@@ -137,7 +137,8 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
   void _onNotificationTapped(Notification notification) {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
-        context: $appRouter.routerDelegate.navigatorKey.currentContext!,
+        context:
+            widget.routerConfig.routerDelegate.navigatorKey.currentContext!,
         builder: (context) =>
             NotificationDetailsDialog(notification: notification),
       ),
