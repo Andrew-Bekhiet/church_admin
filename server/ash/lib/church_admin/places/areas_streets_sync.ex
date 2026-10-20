@@ -17,56 +17,66 @@ defmodule ChurchAdmin.Places.AreasStreetsSync do
 
   @spec unlink_area(Ecto.UUID.t()) :: :ok
   def unlink_area(area_id) do
-    from(link in "areas_streets",
-      join: area in "areas",
-      on: area.id == link.area_id,
-      join: street in "streets",
-      on: street.id == link.street_id,
-      where: link.area_id == type(^area_id, :binary_id),
-      where: not is_nil(street.line),
-      where: is_nil(area.bounds) or not fragment("ST_DWithin(?, ?, 0)", area.bounds, street.line)
-    )
-    |> Repo.delete_all()
+    stale_links =
+      from(link in "areas_streets",
+        join: area in "areas",
+        on: area.id == link.area_id,
+        join: street in "streets",
+        on: street.id == link.street_id,
+        where: link.area_id == type(^area_id, :binary_id),
+        where: not is_nil(street.line),
+        where:
+          is_nil(area.bounds) or not fragment("ST_DWithin(?, ?, 0)", area.bounds, street.line)
+      )
+
+    Repo.delete_all(stale_links)
 
     :ok
   end
 
   @spec link_area(Ecto.UUID.t()) :: :ok
   def link_area(area_id) do
-    from(area in "areas",
-      join: street in "streets",
-      on: fragment("ST_DWithin(?, ?, 0)", area.bounds, street.line),
-      where: area.id == type(^area_id, :binary_id),
-      select: %{area_id: area.id, street_id: street.id}
-    )
-    |> insert_links()
+    new_links =
+      from(area in "areas",
+        join: street in "streets",
+        on: fragment("ST_DWithin(?, ?, 0)", area.bounds, street.line),
+        where: area.id == type(^area_id, :binary_id),
+        select: %{area_id: area.id, street_id: street.id}
+      )
+
+    insert_links(new_links)
   end
 
   @spec unlink_street(Ecto.UUID.t()) :: :ok
   def unlink_street(street_id) do
-    from(link in "areas_streets",
-      join: area in "areas",
-      on: area.id == link.area_id,
-      join: street in "streets",
-      on: street.id == link.street_id,
-      where: link.street_id == type(^street_id, :binary_id),
-      where: not is_nil(area.bounds),
-      where: is_nil(street.line) or not fragment("ST_DWithin(?, ?, 0)", area.bounds, street.line)
-    )
-    |> Repo.delete_all()
+    stale_links =
+      from(link in "areas_streets",
+        join: area in "areas",
+        on: area.id == link.area_id,
+        join: street in "streets",
+        on: street.id == link.street_id,
+        where: link.street_id == type(^street_id, :binary_id),
+        where: not is_nil(area.bounds),
+        where:
+          is_nil(street.line) or not fragment("ST_DWithin(?, ?, 0)", area.bounds, street.line)
+      )
+
+    Repo.delete_all(stale_links)
 
     :ok
   end
 
   @spec link_street(Ecto.UUID.t()) :: :ok
   def link_street(street_id) do
-    from(street in "streets",
-      join: area in "areas",
-      on: fragment("ST_DWithin(?, ?, 0)", area.bounds, street.line),
-      where: street.id == type(^street_id, :binary_id),
-      select: %{area_id: area.id, street_id: street.id}
-    )
-    |> insert_links()
+    new_links =
+      from(street in "streets",
+        join: area in "areas",
+        on: fragment("ST_DWithin(?, ?, 0)", area.bounds, street.line),
+        where: street.id == type(^street_id, :binary_id),
+        select: %{area_id: area.id, street_id: street.id}
+      )
+
+    insert_links(new_links)
   end
 
   defp insert_links(query) do
