@@ -16,7 +16,7 @@ class ManageUsersRoute extends HomeChildRoute implements ExitAwareRoute {
       return AppRoute.home;
     }
 
-    if (LocalAuthService.I.shouldAuthenticateForPath(path)) {
+    if (LocalAuthService.I.shouldAuthenticateForRoute(this)) {
       return BiometricsAuthRoute(next: this);
     }
 
@@ -24,5 +24,5 @@ class ManageUsersRoute extends HomeChildRoute implements ExitAwareRoute {
   }
 
   @override
-  void onExit() => LocalAuthService.I.revokeAuthForPath(path);
+  void onExit() => LocalAuthService.I.revokeAuthForRoute(this);
 }

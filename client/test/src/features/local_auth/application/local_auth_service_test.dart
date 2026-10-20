@@ -171,7 +171,7 @@ void main() {
         },
       );
 
-      group('Auth for path', () {
+      group('Auth for route', () {
         late LocalAuthService unit;
 
         setUp(() {
@@ -185,39 +185,57 @@ void main() {
           addTearDown(unit.dispose);
         });
 
-        test('an ungranted path requires authentication', () {
+        test('an ungranted route requires authentication', () {
           unit.resetAuthState();
 
-          expect(unit.shouldAuthenticateForPath('/test'), isTrue);
+          expect(
+            unit.shouldAuthenticateForRoute(const SettingsRoute()),
+            isTrue,
+          );
         });
 
-        test('a granted path remains accessible across repeated checks', () {
-          unit.resetAuthState(path: '/test');
+        test('a granted route remains accessible across repeated checks', () {
+          unit.resetAuthState(route: const SettingsRoute());
 
-          expect(unit.shouldAuthenticateForPath('/test'), isFalse);
-          expect(unit.shouldAuthenticateForPath('/test'), isFalse);
+          expect(
+            unit.shouldAuthenticateForRoute(const SettingsRoute()),
+            isFalse,
+          );
+          expect(
+            unit.shouldAuthenticateForRoute(const SettingsRoute()),
+            isFalse,
+          );
         });
 
-        test('granting one path leaves other paths locked', () {
-          unit.resetAuthState(path: '/test');
+        test('granting one route leaves other routes locked', () {
+          unit.resetAuthState(route: const SettingsRoute());
 
-          expect(unit.shouldAuthenticateForPath('/other'), isTrue);
+          expect(
+            unit.shouldAuthenticateForRoute(const VisitsMapRoute()),
+            isTrue,
+          );
         });
 
-        test('revoking a path requires authentication again', () {
+        test('revoking a route requires authentication again', () {
           unit
-            ..resetAuthState(path: '/test')
-            ..revokeAuthForPath('/test');
+            ..resetAuthState(route: const SettingsRoute())
+            ..revokeAuthForRoute(const SettingsRoute());
 
-          expect(unit.shouldAuthenticateForPath('/test'), isTrue);
+          expect(
+            unit.shouldAuthenticateForRoute(const SettingsRoute()),
+            isTrue,
+          );
         });
 
-        test('scheduling reauthentication preserves path grants', () {
+        test('scheduling reauthentication preserves route grants', () {
           unit
-            ..resetAuthState(path: '/test')
+            ..resetAuthState(route: const SettingsRoute())
             ..scheduleReauth();
 
-          expect(unit.shouldAuthenticateForPath('/test'), isFalse);
+          expect(
+            unit.shouldAuthenticateForRoute(const SettingsRoute()),
+            isFalse,
+          );
         });
       });
 

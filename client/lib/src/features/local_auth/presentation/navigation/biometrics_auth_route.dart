@@ -13,17 +13,16 @@ class BiometricsAuthRoute extends AppRoute {
   const BiometricsAuthRoute({this.next});
 
   @override
-  Widget build(BuildContext context) =>
-      BiometricsAuthScreen(next: next?.routeName);
+  Widget build(BuildContext context) => BiometricsAuthScreen(next: next);
 
   @override
   AppRoute? redirect() {
     final AuthBloc authBloc = AuthBloc.I;
     final LocalAuthService localAuthService = LocalAuthService.I;
-    final nextPath = next?.routeName;
-    final nextStillLocked =
-        nextPath != null &&
-        localAuthService.shouldAuthenticateForPath(nextPath);
+    final nextStillLocked = switch (next) {
+      final next? => localAuthService.shouldAuthenticateForRoute(next),
+      null => false,
+    };
 
     switch (authBloc.state.unwrapped) {
       case AuthUnauthenticated():

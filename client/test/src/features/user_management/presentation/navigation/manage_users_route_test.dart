@@ -61,7 +61,7 @@ void main() {
   test(
     'an unlocked manage users screen stays open when the router re-evaluates it',
     () {
-      localAuthService.resetAuthState(path: route.path);
+      localAuthService.resetAuthState(route: route);
       redirect();
 
       expect(redirect(), isNull);
@@ -83,7 +83,7 @@ void main() {
         AppLifecycleState.resumed,
       ].forEach(binding.handleAppLifecycleStateChanged);
 
-      localAuthService.resetAuthState(path: route.path);
+      localAuthService.resetAuthState(route: route);
       redirect();
 
       turnScreenOff();
@@ -101,7 +101,7 @@ void main() {
   test(
     'leaving manage users asks for local authentication on the next entry',
     () {
-      localAuthService.resetAuthState(path: route.path);
+      localAuthService.resetAuthState(route: route);
       redirect();
 
       route.onExit();

@@ -7,6 +7,8 @@ class _MockAuthBloc extends Mock implements AuthBloc {}
 class _MockLocalAuthService extends Mock implements LocalAuthService {}
 
 void main() {
+  setUpAll(() => registerFallbackValue(const HomeScreenRoute()));
+
   const authUser = AuthUser(
     uid: 'uid',
     email: 'email',
@@ -26,7 +28,7 @@ void main() {
       () => localAuthService.shouldAuthenticate,
     ).thenReturn(shouldAuthenticate);
     when(
-      () => localAuthService.shouldAuthenticateForPath(any()),
+      () => localAuthService.shouldAuthenticateForRoute(any()),
     ).thenReturn(false);
 
     initGlobalProviderContainer([
@@ -81,9 +83,8 @@ void main() {
         shouldAuthenticate: false,
       );
       when(
-        () => localAuthService.shouldAuthenticateForPath(
-          const SettingsRoute().path,
-        ),
+        () =>
+            localAuthService.shouldAuthenticateForRoute(const SettingsRoute()),
       ).thenReturn(true);
 
       expect(

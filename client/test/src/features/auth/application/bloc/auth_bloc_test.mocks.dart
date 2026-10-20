@@ -682,21 +682,21 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
   ) as _i7.Stream<void>);
 
   @override
-  bool shouldAuthenticateForPath(String? path) => (super.noSuchMethod(
-    Invocation.method(#shouldAuthenticateForPath, [path]),
+  bool shouldAuthenticateForRoute(_i2.AppRoute? route) => (super.noSuchMethod(
+    Invocation.method(#shouldAuthenticateForRoute, [route]),
     returnValue: false,
     returnValueForMissingStub: false,
   ) as bool);
 
   @override
-  void revokeAuthForPath(String? path) => super.noSuchMethod(
-    Invocation.method(#revokeAuthForPath, [path]),
+  void revokeAuthForRoute(_i2.AppRoute? route) => super.noSuchMethod(
+    Invocation.method(#revokeAuthForRoute, [route]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void revokeAuthForAllPaths() => super.noSuchMethod(
-    Invocation.method(#revokeAuthForAllPaths, []),
+  void revokeAuthForAllRoutes() => super.noSuchMethod(
+    Invocation.method(#revokeAuthForAllRoutes, []),
     returnValueForMissingStub: null,
   );
 
@@ -714,8 +714,8 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
   );
 
   @override
-  void resetAuthState({String? path}) => super.noSuchMethod(
-    Invocation.method(#resetAuthState, [], {#path: path}),
+  void resetAuthState({_i2.AppRoute? route}) => super.noSuchMethod(
+    Invocation.method(#resetAuthState, [], {#route: route}),
     returnValueForMissingStub: null,
   );
 
