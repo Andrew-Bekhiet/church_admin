@@ -68,11 +68,11 @@ defmodule ChurchAdmin.Google.Error do
   defp google_code(:messaging, error), do: fcm_error_code(error) || error["status"]
 
   defp fcm_error_code(error) do
-    Enum.find_value(List.wrap(error["details"]), &(is_map(&1) && &1["errorCode"]))
+    error["details"] |> List.wrap() |> Enum.find_value(&(is_map(&1) && &1["errorCode"]))
   end
 
   defp storage_reason(error) do
-    Enum.find_value(List.wrap(error["errors"]), &(is_map(&1) && &1["reason"]))
+    error["errors"] |> List.wrap() |> Enum.find_value(&(is_map(&1) && &1["reason"]))
   end
 
   defp identity_toolkit_code(%{"message" => message}) when is_binary(message) do
