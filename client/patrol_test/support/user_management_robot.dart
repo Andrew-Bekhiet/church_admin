@@ -91,9 +91,13 @@ class UserManagementRobot {
     bool managesUsers = false,
   }) async {
     final scope = find.byKey(EditUserAdminScopeWidgetKeys.scope(serviceId));
+    final servicesTabLabel = find.descendant(
+      of: find.byKey(EditAdminOnDataWidgetKeys.servicesTab),
+      matching: find.byType(Text),
+    );
 
     await tester.tapOn(find.byKey(EditAdminOnDataWidgetKeys.addScopeButton));
-    await tester.tapOn(find.byKey(EditAdminOnDataWidgetKeys.servicesTab));
+    await tester.tapOn(servicesTabLabel);
     await tester.tapOn(tester.viewableObject(serviceId));
     await tester.tapOn(
       find.byKey(EditAdminOnDataWidgetKeys.confirmScopesButton),
