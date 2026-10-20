@@ -53,7 +53,7 @@ defmodule ChurchAdmin.Exports.SheetTest do
   describe "sanitize_name/1" do
     test "replaces characters Excel forbids in sheet names and keeps 31 characters" do
       assert Sheet.sanitize_name("a:b\\c/d?e*f[g]h") == "a_b_c_d_e_f_g_h"
-      assert Sheet.sanitize_name(String.duplicate("x", 40)) == String.duplicate("x", 31)
+      assert "x" |> String.duplicate(40) |> Sheet.sanitize_name() == String.duplicate("x", 31)
     end
   end
 
