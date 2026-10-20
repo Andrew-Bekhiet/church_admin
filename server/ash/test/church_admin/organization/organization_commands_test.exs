@@ -207,24 +207,37 @@ defmodule ChurchAdmin.Organization.OrganizationCommandsTest do
       {:ok, service: service, class: Factory.class!(service, service_study_year: 1)}
     end
 
-    test "any class is deleted by a bare deleteData holder (faithful to Hasura)", ctx do
+    test "deleting needs deleteData and edit rights on the class's service", ctx do
       bare_deleter = actor_with(["deleteData"])
+      approved_deleter = actor_with(["approved", "deleteData"])
+      editor = actor_with(["approved"], [{:service, ctx.service.id, edit?: true}])
+      writer_without_delete = actor_with(["approved", "readAllData", "writeAllData"])
 
-      assert allowed?(Organization.delete_class(ctx.class, actor: bare_deleter))
+      deleting_reader =
+        actor_with(["approved", "deleteData"], [{:service, ctx.service.id, []}])
+
+      deleting_elsewhere =
+        actor_with(["approved", "deleteData"], [{:service, Factory.service!().id, edit?: true}])
+
+      deleting_editor =
+        actor_with(["approved", "deleteData"], [{:service, ctx.service.id, edit?: true}])
+
+      for actor <- [
+            bare_deleter,
+            approved_deleter,
+            editor,
+            writer_without_delete,
+            deleting_reader,
+            deleting_elsewhere
+          ] do
+        assert forbidden?(Organization.delete_class(ctx.class, actor: actor))
+      end
+
+      assert allowed?(Organization.delete_class(ctx.class, actor: deleting_editor))
     end
 
-    test "writeAllData holders and editors of the service delete it, readers do not", ctx do
-      editor = actor_with(["approved"], [{:service, ctx.service.id, edit?: true}])
-      reader = actor_with(["approved"], [{:service, ctx.service.id, []}])
-
-      assert forbidden?(Organization.delete_class(ctx.class, actor: reader))
-      assert allowed?(Organization.delete_class(ctx.class, actor: editor))
-
-      assert allowed?(
-               Organization.delete_class(Factory.class!(ctx.service, service_study_year: 1),
-                 actor: ctx.writer
-               )
-             )
+    test "a writeAllData holder with deleteData deletes any class", ctx do
+      assert allowed?(Organization.delete_class(ctx.class, actor: ctx.writer))
     end
   end
 
