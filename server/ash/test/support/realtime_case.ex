@@ -32,7 +32,7 @@ defmodule ChurchAdmin.RealtimeCase do
   defp start_broadcaster(%{broadcaster: :global}), do: {Broadcaster, Broadcaster.topic()}
 
   defp start_broadcaster(context) do
-    name = Module.concat(context.module, "Broadcaster")
+    name = {:global, {context.module, :broadcaster}}
     topic = "realtime-test:#{inspect(context.test)}"
     start_supervised!({Broadcaster, name: name, topic: topic, coalesce_ms: 50})
     {name, topic}

@@ -10,7 +10,7 @@ defmodule ChurchAdmin.Realtime.BroadcasterTest do
 
   setup context do
     topic = "realtime-test:#{inspect(context.test)}"
-    name = Module.concat(__MODULE__, "B#{System.unique_integer([:positive])}")
+    name = {:global, {__MODULE__, System.unique_integer([:positive])}}
 
     opts =
       Keyword.merge(

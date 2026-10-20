@@ -14,9 +14,18 @@ defmodule ChurchAdmin.Authz.DataQuality.DataQualityPolicyTest do
     end
 
     checks =
-      Map.new(families, fn {name, family} ->
-        {:"check_#{name}", Ash.get!(DataCheck, family.id, authorize?: false)}
-      end)
+      Map.new(
+        [
+          f_own: :check_f_own,
+          f_svc: :check_f_svc,
+          f_grp: :check_f_grp,
+          f_area: :check_f_area,
+          f_misc: :check_f_misc
+        ],
+        fn {family, name} ->
+          {name, Ash.get!(DataCheck, families[family].id, authorize?: false)}
+        end
+      )
 
     overrides =
       Map.new(

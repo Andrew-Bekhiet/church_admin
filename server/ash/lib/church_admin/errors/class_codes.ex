@@ -14,13 +14,13 @@ defmodule ChurchAdmin.Errors.ClassCodes do
 
   @spec uncovered_error_modules() :: [module()]
   def uncovered_error_modules do
-    covered = :ash_graphql |> app_modules() |> MapSet.new()
+    covered_names = :ash_graphql |> app_modules() |> MapSet.new(&Atom.to_string/1)
 
     @error_apps
     |> Enum.flat_map(&app_modules/1)
     |> Enum.filter(fn module ->
       splode_error_struct?(module) and
-        not MapSet.member?(covered, Module.concat(AshGraphql.Error, module))
+        not MapSet.member?(covered_names, graphql_error_module_name(module))
     end)
   end
 
@@ -60,6 +60,8 @@ defmodule ChurchAdmin.Errors.ClassCodes do
     Application.load(app)
     Application.spec(app, :modules) || []
   end
+
+  defp graphql_error_module_name(module), do: "#{AshGraphql.Error}.#{inspect(module)}"
 
   defp splode_error_struct?(module) do
     Code.ensure_loaded?(module) and function_exported?(module, :__struct__, 0) and

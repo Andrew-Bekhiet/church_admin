@@ -17,11 +17,13 @@ defmodule ChurchAdmin.Resources.SchemaCoverageTest do
   test "every column of a mapped relation is an attribute" do
     for resource <- ResourceCatalog.resources() do
       {schema, table} = ResourceCatalog.relation(resource)
-      attribute_columns = resource |> Ash.Resource.Info.attributes() |> MapSet.new(& &1.source)
+
+      attribute_columns =
+        resource |> Ash.Resource.Info.attributes() |> MapSet.new(&to_string(&1.source))
 
       uncovered =
         for column <- columns_of(schema, table),
-            not MapSet.member?(attribute_columns, String.to_atom(column)),
+            not MapSet.member?(attribute_columns, column),
             do: column
 
       assert uncovered == [], "#{inspect(resource)} has no attribute for #{inspect(uncovered)}"
