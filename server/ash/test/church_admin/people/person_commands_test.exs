@@ -279,7 +279,9 @@ defmodule ChurchAdmin.People.PersonCommandsTest do
       {:ok, employed_person} =
         People.update_person(
           unemployed_person,
-          %{work_status: "employed", job_description: "teacher"}, actor: ctx.actor)
+          %{work_status: "employed", job_description: "teacher"},
+          actor: ctx.actor
+        )
 
       assert employed_person.job_description == "teacher"
     end
