@@ -6,7 +6,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -30,8 +29,6 @@ const AuthUser _fakeUser = AuthUser(
 @GenerateNiceMocks([
   MockSpec<AuthBloc>(),
   MockSpec<LocalAuthService>(),
-  MockSpec<GoRouterState>(),
-  MockSpec<BuildContext>(),
 ])
 void main() {
   final authVariant = AuthenticationVariant();

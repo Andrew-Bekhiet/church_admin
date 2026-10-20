@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../../fakes/mock_image_url_cache_service.dart';
@@ -14,7 +14,9 @@ void main() {
   setUp(() {
     initGlobalProviderContainer([
       viewableObjectServiceProvider.overrideWith(
-        (ref) => ViewableObjectService(router: GoRouter(routes: [])),
+        (ref) => ViewableObjectService(
+          router: KaiselRouter<AppRoute>(initial: const HomeScreenRoute()),
+        ),
       ),
       imageUrlCacheServiceProvider.overrideWithValue(
         MockImageUrlCacheService(),

@@ -8,16 +8,9 @@ void main() {
   Future<MeetingsAnalysisExtra> decodeAfterAppRestart(
     MeetingsAnalysisExtra extra,
   ) {
-    final wire = jsonDecode(
-      jsonEncode(ChurchAdminRouterExtraCodec().encode(extra)),
-    ) as List;
+    final wire = jsonEncode(extra.toJson());
 
-    return Isolate.run(() {
-      return switch (ChurchAdminRouterExtraCodec().decode(wire)) {
-        final MeetingsAnalysisExtra extra => extra,
-        final other => throw StateError('Decoded $other'),
-      };
-    });
+    return Isolate.run(() => MeetingsAnalysisExtra.fromJson(jsonDecode(wire)));
   }
 
   MeetingsAnalysisExtra extraOf(
@@ -44,7 +37,7 @@ void main() {
   );
   const sampleGroup = Group(id: 'group-1', name: 'Group', service: service);
 
-  group('MeetingsAnalysisExtra router extra after an app restart', () {
+  group('MeetingsAnalysisExtra after a JSON round trip in a fresh isolate', () {
     test('a group subject and named range preset survive', () async {
       final extra = extraOf(
         const GroupAnalysisSubject(sampleGroup),

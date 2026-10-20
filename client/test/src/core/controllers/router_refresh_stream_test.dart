@@ -5,12 +5,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test(
-    'GoRouterRefreshStream',
+    'RouterRefreshStream',
     () async {
       final controller = StreamController.broadcast();
       addTearDown(controller.close);
 
-      final unit = TestableGoRouterRefreshStream(controller.stream);
+      final unit = TestableRouterRefreshStream(controller.stream);
       addTearDown(unit.dispose);
 
       expect(unit.notifiedTimes, 1);
@@ -31,8 +31,8 @@ void main() {
   );
 }
 
-class TestableGoRouterRefreshStream extends GoRouterRefreshStream {
-  TestableGoRouterRefreshStream(super.stream);
+class TestableRouterRefreshStream extends RouterRefreshStream {
+  TestableRouterRefreshStream(super.stream);
 
   int notifiedTimes = 0;
 

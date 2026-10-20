@@ -1,20 +1,19 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-part 'download_app_route.g.dart';
+class DownloadAppRoute extends AppRoute {
+  @override
+  String get path => '/download';
 
-@TypedGoRoute<DownloadAppRoute>(path: '/download')
-class DownloadAppRoute extends GoRouteData with $DownloadAppRoute {
   const DownloadAppRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return const DownloadAppScreen();
   }
 
   @override
-  String? redirect(BuildContext context, GoRouterState state) {
-    return const HomeScreenWebRoute().redirect(context, state);
+  AppRoute? redirect() {
+    return HomeScreenWebRoute.maybeRedirectToAccountSetup();
   }
 }

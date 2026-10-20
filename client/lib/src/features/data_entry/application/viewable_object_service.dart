@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -10,13 +10,7 @@ class ViewableObjectService {
   static ViewableObjectService get I =>
       globalProviderContainer.read(viewableObjectServiceProvider);
 
-  final GoRouter router;
-
-  NavigatorState get navigator =>
-      router.routeInformationParser.configuration.navigatorKey.currentState!;
-
-  GlobalKey<NavigatorState> get navigatorKey =>
-      router.routeInformationParser.configuration.navigatorKey;
+  final KaiselRouter<AppRoute> router;
 
   ViewableObjectService({required this.router});
 
@@ -24,74 +18,92 @@ class ViewableObjectService {
     switch (object) {
       case final Person person:
         unawaited(
-          ViewPersonRoute(
-            id: object.id,
-            $extra: person,
-          ).push(navigatorKey.currentContext!),
+          router.push(
+            ViewPersonRoute(
+              id: object.id,
+              $extra: person,
+            ),
+          ),
         );
 
       case final Service service:
         unawaited(
-          ViewServiceRoute(
-            id: object.id,
-            $extra: service,
-          ).push(navigatorKey.currentContext!),
+          router.push(
+            ViewServiceRoute(
+              id: object.id,
+              $extra: service,
+            ),
+          ),
         );
 
       case final Group group:
         unawaited(
-          ViewGroupRoute(
-            id: object.id,
-            $extra: group,
-          ).push(navigatorKey.currentContext!),
+          router.push(
+            ViewGroupRoute(
+              id: object.id,
+              $extra: group,
+            ),
+          ),
         );
 
       case final Class $class:
         unawaited(
-          ViewClassRoute(
-            id: object.id,
-            $extra: $class,
-          ).push(navigatorKey.currentContext!),
+          router.push(
+            ViewClassRoute(
+              id: object.id,
+              $extra: $class,
+            ),
+          ),
         );
 
       case final Area area:
         unawaited(
-          ViewAreaRoute(
-            id: object.id,
-            $extra: area,
-          ).push(navigatorKey.currentContext!),
+          router.push(
+            ViewAreaRoute(
+              id: object.id,
+              $extra: area,
+            ),
+          ),
         );
 
       case final Street street:
         unawaited(
-          ViewStreetRoute(
-            id: object.id,
-            $extra: street,
-          ).push(navigatorKey.currentContext!),
+          router.push(
+            ViewStreetRoute(
+              id: object.id,
+              $extra: street,
+            ),
+          ),
         );
 
       case final Family family:
         unawaited(
-          ViewFamilyRoute(
-            id: object.id,
-            $extra: family,
-          ).push(navigatorKey.currentContext!),
+          router.push(
+            ViewFamilyRoute(
+              id: object.id,
+              $extra: family,
+            ),
+          ),
         );
 
       case final Store store:
         unawaited(
-          ViewStoreRoute(
-            id: object.id,
-            $extra: store,
-          ).push(navigatorKey.currentContext!),
+          router.push(
+            ViewStoreRoute(
+              id: object.id,
+              $extra: store,
+            ),
+          ),
         );
 
       case final User user:
         unawaited(
-          ViewUserRoute(
-            uid: object.uid,
-            $extra: user,
-          ).push(navigatorKey.currentContext!),
+          router.push(
+            ViewUserRoute(
+              uid: object.uid,
+              $extra: user,
+            ),
+          ),
         );
 
       case LastRecordedByInfo _:

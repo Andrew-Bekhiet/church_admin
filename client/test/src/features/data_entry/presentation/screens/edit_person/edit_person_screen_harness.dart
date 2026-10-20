@@ -4,7 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/hobbies_dao.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types_dao.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
@@ -25,6 +25,7 @@ import '../../../../../fakes/mock_database_service.dart';
 import '../../../../../fakes/mock_image_url_cache_service.dart';
 import '../../../../../fakes/mock_user_preferences_service.dart';
 import '../../../../../fakes/mock_viewable_object_service.dart';
+import '../../../../../stub_route.dart';
 
 class FakeHobbiesDAO extends Fake implements HobbiesDAO {
   List<Hobby> hobbies = const [];
@@ -152,30 +153,23 @@ class EditPersonScreenHarness {
   }) async {
     if (membershipsLoaded) persons.respondWithSavedMemberships(null);
 
+    final editRoute = StubRoute(
+      '/edit',
+      (_) => EditPersonScreen(intent: intent),
+    );
     Widget openButtonPage(BuildContext context) => Scaffold(
       body: TextButton(
-        onPressed: () => unawaited(context.push('/edit')),
+        onPressed: () => unawaited(editRoute.push(context)),
         child: const Text('open'),
       ),
     );
 
-    final router = GoRouter(
-      routes: [
-        GoRoute(path: '/', builder: (context, _) => openButtonPage(context)),
-        GoRoute(
-          path: '/below',
-          builder: (context, _) => openButtonPage(context),
-        ),
-        GoRoute(
-          path: '/edit',
-          builder: (context, state) => EditPersonScreen(intent: intent),
-        ),
-        GoRoute(
-          path: '/view_person',
-          builder: (context, state) =>
-              Text('viewing ${state.uri.queryParameters['id']}'),
-        ),
-      ],
+    final router = KaiselRouterConfig<AppRoute>(
+      initial: StubRoute('/', openButtonPage),
+      builder: (context, route) => switch (route) {
+        ViewPersonRoute(:final id) => Text('viewing $id'),
+        _ => route.build(context),
+      },
     );
     addTearDown(router.dispose);
 
@@ -194,7 +188,7 @@ class EditPersonScreenHarness {
       ),
     );
     if (withPageBelow) {
-      unawaited(router.push<void>('/below'));
+      unawaited(router.router.push(StubRoute('/below', openButtonPage)));
       await tester.pumpAndSettle();
     }
     await tester.tap(find.text('open'));

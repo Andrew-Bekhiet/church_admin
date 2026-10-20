@@ -1,1 +1,1 @@
-export 'navigation/download_app_route.dart' hide $appRoutes;
+export 'navigation/download_app_route.dart';

@@ -1,17 +1,20 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-part 'view_area_route.g.dart';
-
-@TypedGoRoute<ViewAreaRoute>(path: '/view_area')
-class ViewAreaRoute extends GoRouteData with $ViewAreaRoute {
+class ViewAreaRoute extends HomeChildRoute {
   final String id;
   final Area? $extra;
+
+  @override
+  String get path => '/view_area';
+
+  @override
+  List<Object?> get props => [id, $extra];
+
   const ViewAreaRoute({required this.id, this.$extra});
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return ViewArea(areaId: id, area: $extra);
   }
 }

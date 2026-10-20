@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
-import 'package:go_router/go_router.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart' hide Notification;
 import 'package:phone_form_field/phone_form_field.dart';
 
 class ChurchAdminApp extends StatefulWidget {
-  final GoRouter routerConfig;
+  final KaiselRouterConfig<AppRoute> routerConfig;
 
   const ChurchAdminApp({required this.routerConfig, super.key});
 
@@ -52,8 +52,8 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
               child: kIsWeb
                   ? child ?? const SizedBox.shrink()
                   : LocalAuthLock(
-                      routerDelegate: widget.routerConfig.routerDelegate,
-                      protectedLocation: const HomeScreenRoute().location,
+                      router: widget.routerConfig.router,
+                      protectedRoute: const HomeScreenRoute(),
                       child: child ?? const SizedBox.shrink(),
                     ),
             ),
@@ -137,8 +137,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
   void _onNotificationTapped(Notification notification) {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
-        context:
-            widget.routerConfig.routerDelegate.navigatorKey.currentContext!,
+        context: widget.routerConfig.navigatorKey.currentContext!,
         builder: (context) =>
             NotificationDetailsDialog(notification: notification),
       ),

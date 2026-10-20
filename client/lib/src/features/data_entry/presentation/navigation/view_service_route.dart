@@ -1,17 +1,20 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-part 'view_service_route.g.dart';
-
-@TypedGoRoute<ViewServiceRoute>(path: '/view_service')
-class ViewServiceRoute extends GoRouteData with $ViewServiceRoute {
+class ViewServiceRoute extends HomeChildRoute {
   final String id;
   final Service? $extra;
+
+  @override
+  String get path => '/view_service';
+
+  @override
+  List<Object?> get props => [id, $extra];
+
   const ViewServiceRoute({required this.id, this.$extra});
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return ViewService(serviceId: id, service: $extra);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../../utils.dart';
@@ -15,10 +15,9 @@ void main() {
     WidgetTester tester, {
     PersonEditIntent? intent,
   }) async {
-    final router = GoRouter(
-      initialLocation: '/edit_person',
-      initialExtra: intent,
-      routes: [$editPersonRoute],
+    final router = KaiselRouterConfig<AppRoute>(
+      initial: EditPersonRoute($extra: intent),
+      builder: (context, route) => route.build(context),
     );
     addTearDown(router.dispose);
 

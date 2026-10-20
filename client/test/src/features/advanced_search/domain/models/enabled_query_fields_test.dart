@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -21,7 +21,9 @@ void main() {
     initGlobalProviderContainer([
       featureFlagsRepoProvider.overrideWithValue(flags),
       viewableObjectServiceProvider.overrideWith(
-        (ref) => ViewableObjectService(router: GoRouter(routes: [])),
+        (ref) => ViewableObjectService(
+          router: KaiselRouter<AppRoute>(initial: const HomeScreenRoute()),
+        ),
       ),
     ]);
   });

@@ -1,5 +1,5 @@
 export 'core/application.dart';
-export 'core/controllers.dart' show GoRouterRefreshStream;
+export 'core/controllers.dart' show RouterRefreshStream;
 export 'core/graphql.dart';
 export 'core/logging.dart';
 export 'core/models.dart';

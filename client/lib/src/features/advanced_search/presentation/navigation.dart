@@ -1,2 +1,1 @@
-export 'navigation/advanced_search_route.dart'
-    show $advancedSearchRoute, AdvancedSearchRoute;
+export 'navigation/advanced_search_route.dart' show AdvancedSearchRoute;

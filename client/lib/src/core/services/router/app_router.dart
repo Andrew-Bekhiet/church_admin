@@ -1,99 +1,22 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/router/report_route_changes_immediately.dart';
-import 'package:flutter/foundation.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+import 'package:collection/collection.dart';
+import 'package:kaisel/kaisel.dart';
 
-final GoRouter $appRouter = AppRouter.create();
+final KaiselRouterConfig<AppRoute> $appRouter = AppRouter.create();
 
 abstract final class AppRouter {
-  static GoRouter create() => GoRouter(
-    observers: LoggingService.I.navigatorObservers,
-    extraCodec: ChurchAdminRouterExtraCodec(),
-    refreshListenable: GoRouterRefreshStream.I,
-    redirect: (context, state) {
-      // Ignore external custom-scheme callbacks (e.g., Firebase Auth com.googleusercontent.apps)
-      // and route back to a safe in-app location instead of showing an error page.
-      final uri = state.uri;
-      if (uri.scheme.isNotEmpty &&
-          uri.scheme != 'http' &&
-          uri.scheme != 'https') {
-        return const LoginRoute().location;
-      }
+  static KaiselRouterConfig<AppRoute> create() => KaiselRouterConfig<AppRoute>(
+    initial: AppRouteRedirects.resolve([AppRoute.home]).first,
+    builder: (context, route) => route.build(context),
+    guards: const [AppRouteRedirects.guard],
+    reevaluateOn: RouterRefreshStream.I,
+    onTransition: _notifyExitedRoutes,
+    observers: () => LoggingService.I.navigatorObservers,
+  );
 
-      final featureFlags = FeatureFlagsRepository.I;
-
-      if (featureFlags.mustForceUpdate) {
-        return const ForceUpdateRoute().location;
-      }
-
-      if (featureFlags.isUnderMaintenance) {
-        return const UnderMaintenanceRoute().location;
-      }
-
-      if (state.fullPath != null &&
-          featureFlags.disabledRoutes.contains(state.fullPath)) {
-        return const OutdatedFeatureRoute().location;
-      }
-
-      return null;
-    },
-    routes: [
-      if (kIsWeb) $homeScreenWebRoute else $homeScreenRoute,
-      $forgotPasswordRoute,
-      $loginRoute,
-      $emailVerificationRoute,
-      $unapprovedUserRoute,
-      $updateUserSpiritDataRoute,
-      $biometricsAuthRoute,
-      $forceUpdateRoute,
-      $underMaintenanceRoute,
-      $outdatedFeatureRoute,
-    ],
-    errorBuilder: (context, state) {
-      // If an external callback URL slips through to the router, fail closed to login
-      // instead of rendering an error screen with the raw URL.
-      final uri = state.uri;
-      if (uri.scheme.isNotEmpty &&
-          uri.scheme != 'http' &&
-          uri.scheme != 'https') {
-        // Defer navigation to the next microtask to avoid build-time navigation
-        WidgetsBinding.instance.addPostFrameCallback(
-          (_) => context.go('/login'),
-        );
-
-        return const SizedBox.shrink();
-      }
-
-      if (kReleaseMode) {
-        unawaited(
-          LoggingService.I.error(
-            LogRecord(
-              error: state.error,
-              data: {
-                'location': state.uri.toString(),
-                'extra': state.extra.toString(),
-              },
-            ),
-          ),
-        );
-      }
-
-      return Scaffold(
-        appBar: AppBar(
-          leading: BackButton(onPressed: () => context.go('/')),
-          title: Text(
-            'حدث خطأ',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onErrorContainer,
-            ),
-          ),
-          backgroundColor: Theme.of(context).colorScheme.errorContainer,
-        ),
-        body: ErrorWidget.builder(FlutterErrorDetails(exception: state.error!)),
-      );
-    },
-  ).reportingRouteChangesImmediately();
+  static void _notifyExitedRoutes(List<AppRoute> from, List<AppRoute> to) {
+    for (final exited in from.whereNot(to.contains)) {
+      if (exited case final ExitAwareRoute exitAware) exitAware.onExit();
+    }
+  }
 }

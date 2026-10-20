@@ -426,7 +426,7 @@ void main() {
       await tester.tap(find.byType(FloatingActionButton).first);
       await tester.pumpAndSettle();
 
-      expect(harness.currentLocation, const EditAreaRoute().location);
+      expect(harness.currentLocation, const EditAreaRoute().path);
       await harness.unmount(tester);
     });
 

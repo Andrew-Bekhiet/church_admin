@@ -1,8 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:clock/clock.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -44,17 +45,9 @@ class HomeScreenHarness {
   HomeDatabaseFixture database = HomeDatabaseFixture();
   AuthState authState = const AuthUnauthenticated();
   bool isLocked = false;
-  late GoRouter router;
+  late KaiselRouterConfig<AppRoute> router;
 
-  String get currentLocation {
-    final configuration = router.routerDelegate.currentConfiguration;
-    final lastMatch = configuration.lastOrNull;
-    final matches = lastMatch is ImperativeRouteMatch
-        ? lastMatch.matches
-        : configuration;
-
-    return matches.uri.toString();
-  }
+  String get currentLocation => router.router.stack.last.routeName;
 
   Finder destinationOf(HomeTab tab) => find.descendant(
     of: find.byType(NavigationBar),
@@ -103,22 +96,21 @@ class HomeScreenHarness {
     addTearDown(tester.view.reset);
 
     _installProviders();
-    router = GoRouter(
-      routes: [
-        GoRoute(path: '/', builder: (_, _) => const HomeScreen()),
-        GoRoute(
-          path: const AdvancedSearchRoute().location,
-          builder: (_, state) {
-            advancedSearchExtras.add(state.extra);
-
-            return const Scaffold(body: Text('advanced search'));
-          },
-        ),
-        GoRoute(
-          path: const EditAreaRoute().location,
-          builder: (_, _) => const Scaffold(body: Text('edit area')),
-        ),
-      ],
+    router = KaiselRouterConfig<AppRoute>(
+      initial: const HomeScreenRoute(),
+      builder: (context, route) => switch (route) {
+        AdvancedSearchRoute() => const Scaffold(body: Text('advanced search')),
+        EditAreaRoute() => const Scaffold(body: Text('edit area')),
+        _ => route.build(context),
+      },
+      onTransition: (from, to) => advancedSearchExtras.addAll(
+        to
+            .whereNot(from.contains)
+            .whereType<AdvancedSearchRoute>()
+            .map(
+              (route) => route.$extra,
+            ),
+      ),
     );
     addTearDown(router.dispose);
 

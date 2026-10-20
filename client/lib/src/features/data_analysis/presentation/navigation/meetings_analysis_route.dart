@@ -1,17 +1,19 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-part 'meetings_analysis_route.g.dart';
-
-@TypedGoRoute<MeetingsAnalysisRoute>(path: '/meetings_analysis')
-class MeetingsAnalysisRoute extends GoRouteData with $MeetingsAnalysisRoute {
+class MeetingsAnalysisRoute extends HomeChildRoute {
   final MeetingsAnalysisExtra $extra;
+
+  @override
+  String get path => '/meetings_analysis';
+
+  @override
+  List<Object?> get props => [$extra];
 
   const MeetingsAnalysisRoute({required this.$extra});
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return MeetingsAnalysisScreen(
       title: $extra.title,
       initialRangePreset: $extra.initialRangePreset,

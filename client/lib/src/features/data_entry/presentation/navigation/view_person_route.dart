@@ -1,17 +1,20 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-part 'view_person_route.g.dart';
-
-@TypedGoRoute<ViewPersonRoute>(path: '/view_person')
-class ViewPersonRoute extends GoRouteData with $ViewPersonRoute {
+class ViewPersonRoute extends HomeChildRoute {
   final String id;
   final Person? $extra;
+
+  @override
+  String get path => '/view_person';
+
+  @override
+  List<Object?> get props => [id, $extra];
+
   const ViewPersonRoute({required this.id, this.$extra});
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return ViewPerson(personId: id, person: $extra);
   }
 }

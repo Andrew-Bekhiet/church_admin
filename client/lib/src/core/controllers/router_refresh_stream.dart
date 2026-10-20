@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 
-class GoRouterRefreshStream with ChangeNotifier {
-  static GoRouterRefreshStream get I =>
-      globalProviderContainer.read(goRouterRefreshStreamProvider);
+class RouterRefreshStream with ChangeNotifier {
+  static RouterRefreshStream get I =>
+      globalProviderContainer.read(routerRefreshStreamProvider);
 
   late final StreamSubscription<void> _listener;
 
-  GoRouterRefreshStream(Stream<void> stream) {
+  RouterRefreshStream(Stream<void> stream) {
     notifyListeners();
     _listener = stream.asBroadcastStream().listen((_) => notifyListeners());
   }

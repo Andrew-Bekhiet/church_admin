@@ -1,34 +1,28 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-part 'manage_users_route.g.dart';
+class ManageUsersRoute extends HomeChildRoute implements ExitAwareRoute {
+  @override
+  String get path => '/manage_users';
 
-@TypedGoRoute<ManageUsersRoute>(path: '/manage_users')
-class ManageUsersRoute extends GoRouteData with $ManageUsersRoute {
   const ManageUsersRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const ManageUsersScreen();
+  Widget build(BuildContext context) => const ManageUsersScreen();
 
   @override
-  String? redirect(BuildContext context, GoRouterState state) {
+  AppRoute? redirect() {
     if (!(AuthBloc.I.currentUserData?.canManageSomeUsers ?? false)) {
-      return const HomeScreenWebRoute().location;
+      return AppRoute.home;
     }
 
-    if (LocalAuthService.I.shouldAuthenticateForPath(location)) {
-      return BiometricsAuthRoute(next: location).location;
+    if (LocalAuthService.I.shouldAuthenticateForPath(path)) {
+      return BiometricsAuthRoute(next: this);
     }
 
     return null;
   }
 
   @override
-  bool onExit(BuildContext context, GoRouterState state) {
-    LocalAuthService.I.revokeAuthForPath(location);
-
-    return true;
-  }
+  void onExit() => LocalAuthService.I.revokeAuthForPath(path);
 }

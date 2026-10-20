@@ -4,16 +4,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final codec = ChurchAdminRouterExtraCodec();
-
-  PersonEditIntent roundTrip(PersonEditIntent intent) {
-    final wire = jsonDecode(jsonEncode(codec.encode(intent))) as List;
-
-    return switch (codec.decode(wire)) {
-      final PersonEditIntent intent => intent,
-      final other => throw StateError('Decoded $other'),
-    };
-  }
+  PersonEditIntent roundTrip(PersonEditIntent intent) =>
+      PersonEditIntent.fromJson(jsonDecode(jsonEncode(intent.toJson())));
 
   final studyYear = StudyYear(order: 3, name: 'Third Primary');
   const service = Service(id: 'service-1', name: 'Primary');
@@ -29,8 +21,8 @@ void main() {
     serviceGender: false,
   );
 
-  group('PersonEditIntent router extra', () {
-    test('an update intent survives the codec with its person', () {
+  group('PersonEditIntent after a JSON round trip', () {
+    test('an update intent survives JSON with its person', () {
       final person = Person(
         id: 'person-1',
         name: 'Mina',
@@ -44,11 +36,11 @@ void main() {
       expect((restored as UpdatePerson).person, person);
     });
 
-    test('a blank create intent survives the codec', () {
+    test('a blank create intent survives JSON', () {
       expect(roundTrip(const CreateBlankPerson()), isA<CreateBlankPerson>());
     });
 
-    test('each create intent survives the codec with its subject', () {
+    test('each create intent survives JSON with its subject', () {
       final restored = [
         roundTrip(const CreatePersonInFamily(family: family)),
         roundTrip(const CreatePersonOnStreet(street: street)),

@@ -1,60 +1,39 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-part 'biometrics_auth_route.g.dart';
-
-@TypedGoRoute<BiometricsAuthRoute>(path: '/biometrics_auth')
-class BiometricsAuthRoute extends GoRouteData with $BiometricsAuthRoute {
-  bool _redirectedOnce = false;
-
-  final String next;
-
-  BiometricsAuthRoute({this.next = '/'});
+class BiometricsAuthRoute extends AppRoute {
+  final AppRoute? next;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    // Workaround until https://github.com/flutter/flutter/issues/116651 is fixed
-    unawaited(_maybeForceRedirect(context));
-
-    return BiometricsAuthScreen(next: next != '/' ? next : null);
-  }
-
-  Future<void> _maybeForceRedirect(BuildContext context) async {
-    final goRouter = GoRouter.of(context);
-
-    await WidgetsBinding.instance.endOfFrame;
-    if (!context.mounted) return;
-
-    final redirectLocation = _redirectLocation();
-    if (redirectLocation != null && !_redirectedOnce) {
-      _redirectedOnce = true;
-      goRouter.go(redirectLocation);
-    }
-  }
+  String get path => '/biometrics_auth';
 
   @override
-  String? redirect(BuildContext context, GoRouterState state) {
-    return _redirectLocation();
-  }
+  List<Object?> get props => [next];
 
-  String? _redirectLocation() {
+  const BiometricsAuthRoute({this.next});
+
+  @override
+  Widget build(BuildContext context) =>
+      BiometricsAuthScreen(next: next?.routeName);
+
+  @override
+  AppRoute? redirect() {
     final AuthBloc authBloc = AuthBloc.I;
     final LocalAuthService localAuthService = LocalAuthService.I;
+    final nextPath = next?.routeName;
+    final nextStillLocked =
+        nextPath != null &&
+        localAuthService.shouldAuthenticateForPath(nextPath);
 
     switch (authBloc.state.unwrapped) {
       case AuthUnauthenticated():
-        return const LoginRoute().location;
+        return const LoginRoute();
 
-      case _
-          when localAuthService.shouldAuthenticate ||
-              (next != '/' && localAuthService.shouldAuthenticateForPath(next)):
+      case _ when localAuthService.shouldAuthenticate || nextStillLocked:
         return null;
 
       case _:
-        return next;
+        return next ?? AppRoute.home;
     }
   }
 }

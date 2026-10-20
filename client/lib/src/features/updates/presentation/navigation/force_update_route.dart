@@ -1,21 +1,19 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-part 'force_update_route.g.dart';
+class ForceUpdateRoute extends AppRoute {
+  @override
+  String get path => '/force_update';
 
-@TypedGoRoute<ForceUpdateRoute>(path: '/force_update')
-class ForceUpdateRoute extends GoRouteData with $ForceUpdateRoute {
   const ForceUpdateRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      ForceUpdateScreen();
+  Widget build(BuildContext context) => ForceUpdateScreen();
 
   @override
-  String? redirect(BuildContext context, GoRouterState state) {
+  AppRoute? redirect() {
     if (!FeatureFlagsRepository.I.mustForceUpdate) {
-      return '/';
+      return AppRoute.home;
     }
 
     return null;

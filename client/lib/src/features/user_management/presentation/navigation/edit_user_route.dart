@@ -1,16 +1,19 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-part 'edit_user_route.g.dart';
-
-@TypedGoRoute<EditUserRoute>(path: '/edit_user')
-class EditUserRoute extends GoRouteData with $EditUserRoute {
+class EditUserRoute extends HomeChildRoute {
   final UserEditIntent $extra;
+
+  @override
+  String get path => '/edit_user';
+
+  @override
+  List<Object?> get props => [$extra];
+
   const EditUserRoute({required this.$extra});
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return EditUserScreen(intent: $extra);
   }
 }

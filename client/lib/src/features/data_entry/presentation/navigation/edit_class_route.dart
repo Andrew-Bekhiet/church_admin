@@ -1,17 +1,22 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 part 'edit_class_route.g.dart';
 
-@TypedGoRoute<EditClassRoute>(path: '/edit_class')
-class EditClassRoute extends GoRouteData with $EditClassRoute {
+class EditClassRoute extends HomeChildRoute {
   final EditClassExtra? $extra;
+
+  @override
+  String get path => '/edit_class';
+
+  @override
+  List<Object?> get props => [$extra];
+
   const EditClassRoute({this.$extra});
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return EditClass(
       class$: $extra?.$class,
       withService: $extra?.service,

@@ -2,33 +2,18 @@ import 'package:church_admin/church_admin.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
 void main() {
   final binding = TestWidgetsFlutterBinding.ensureInitialized();
 
   const route = ManageUsersRoute();
-  final biometricsAuthLocation = BiometricsAuthRoute(
-    next: route.location,
-  ).location;
-
-  final routerState = GoRouterState(
-    RouteConfiguration(
-      ValueNotifier(const RoutingConfig(routes: [])),
-      navigatorKey: GlobalKey<NavigatorState>(),
-    ),
-    uri: Uri.parse(route.location),
-    matchedLocation: route.location,
-    fullPath: route.location,
-    pathParameters: const {},
-    pageKey: ValueKey(route.location),
-  );
+  const biometricsAuth = BiometricsAuthRoute(next: route);
 
   late LocalAuthService localAuthService;
   late DateTime now;
 
-  String? redirect() => route.redirect(_MockBuildContext(), routerState);
+  AppRoute? redirect() => route.redirect();
 
   setUp(() {
     now = DateTime(2026);
@@ -70,13 +55,13 @@ void main() {
   });
 
   test('entering manage users asks for local authentication', () {
-    expect(redirect(), biometricsAuthLocation);
+    expect(redirect(), biometricsAuth);
   });
 
   test(
     'an unlocked manage users screen stays open when the router re-evaluates it',
     () {
-      localAuthService.resetAuthState(path: route.location);
+      localAuthService.resetAuthState(path: route.path);
       redirect();
 
       expect(redirect(), isNull);
@@ -98,7 +83,7 @@ void main() {
         AppLifecycleState.resumed,
       ].forEach(binding.handleAppLifecycleStateChanged);
 
-      localAuthService.resetAuthState(path: route.location);
+      localAuthService.resetAuthState(path: route.path);
       redirect();
 
       turnScreenOff();
@@ -116,12 +101,12 @@ void main() {
   test(
     'leaving manage users asks for local authentication on the next entry',
     () {
-      localAuthService.resetAuthState(path: route.location);
+      localAuthService.resetAuthState(path: route.path);
       redirect();
 
-      route.onExit(_MockBuildContext(), routerState);
+      route.onExit();
 
-      expect(redirect(), biometricsAuthLocation);
+      expect(redirect(), biometricsAuth);
     },
   );
 }
@@ -132,7 +117,5 @@ final class _MockAuthRepository extends Mock implements AuthRepository {}
 
 final class _MockNotificationsService extends Mock
     implements NotificationsService {}
-
-final class _MockBuildContext extends Mock implements BuildContext {}
 
 final class _MockUserDataWiper extends Mock implements UserDataWiper {}

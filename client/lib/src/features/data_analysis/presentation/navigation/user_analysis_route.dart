@@ -1,17 +1,22 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 part 'user_analysis_route.g.dart';
 
-@TypedGoRoute<UserAnalysisRoute>(path: '/user_analysis')
-class UserAnalysisRoute extends GoRouteData with $UserAnalysisRoute {
+class UserAnalysisRoute extends HomeChildRoute {
   final UserAnalysisExtra $extra;
+
+  @override
+  String get path => '/user_analysis';
+
+  @override
+  List<Object?> get props => [$extra];
+
   const UserAnalysisRoute({required this.$extra});
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return UserAnalysisScreen(user: $extra.user);
   }
 }

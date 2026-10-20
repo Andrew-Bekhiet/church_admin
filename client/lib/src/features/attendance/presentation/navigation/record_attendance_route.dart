@@ -1,17 +1,19 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
-part 'record_attendance_route.g.dart';
-
-@TypedGoRoute<RecordAttendanceRoute>(path: '/record_attendance')
-class RecordAttendanceRoute extends GoRouteData with $RecordAttendanceRoute {
+class RecordAttendanceRoute extends HomeChildRoute {
   final Meeting $extra;
+
+  @override
+  String get path => '/record_attendance';
+
+  @override
+  List<Object?> get props => [$extra];
 
   const RecordAttendanceRoute({required this.$extra});
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return RecordAttendanceScreen(meeting: $extra);
   }
 }
