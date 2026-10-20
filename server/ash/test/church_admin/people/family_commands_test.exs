@@ -15,8 +15,6 @@ defmodule ChurchAdmin.People.FamilyCommandsTest do
   alias ChurchAdmin.People.{Contact, Family, FamilyRelation}
   alias ChurchAdmin.Places.Address
 
-  require Ash.Query
-
   setup do
     Repo.query!(
       "insert into auth.permissions (name) values ('deleteData') on conflict do nothing"

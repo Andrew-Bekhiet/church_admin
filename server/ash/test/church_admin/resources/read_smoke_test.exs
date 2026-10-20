@@ -3,8 +3,6 @@ defmodule ChurchAdmin.Resources.ReadSmokeTest do
 
   alias ChurchAdmin.ResourceCatalog
 
-  require Ash.Query
-
   for resource <- ResourceCatalog.resources() do
     test "#{inspect(resource)} reads against the baseline schema" do
       assert is_list(
