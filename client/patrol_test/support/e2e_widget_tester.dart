@@ -16,7 +16,9 @@ extension E2eWidgetTester on WidgetTester {
 
     while (finder.evaluate().isEmpty) {
       if (DateTime.now().isAfter(deadline)) {
-        throw _timedOut('Timed out after $timeout waiting for $finder');
+        throw _timedOut(
+          'Timed out after $timeout waiting for ${finder.toString(describeSelf: true)}',
+        );
       }
       await pump(_pollInterval);
     }
@@ -33,7 +35,7 @@ extension E2eWidgetTester on WidgetTester {
     while (finder.evaluate().isNotEmpty) {
       if (DateTime.now().isAfter(deadline)) {
         throw _timedOut(
-          'Timed out after $timeout waiting for $finder to go',
+          'Timed out after $timeout waiting for ${finder.toString(describeSelf: true)} to go',
         );
       }
       await pump(_pollInterval);
@@ -47,7 +49,9 @@ extension E2eWidgetTester on WidgetTester {
 
     while (tappable.evaluate().isEmpty) {
       if (DateTime.now().isAfter(deadline)) {
-        throw _timedOut('Timed out after $timeout waiting to tap $finder');
+        throw _timedOut(
+          'Timed out after $timeout waiting to tap ${finder.toString(describeSelf: true)}',
+        );
       }
       await ensureVisible(finder.first);
       await pump(_pollInterval);
