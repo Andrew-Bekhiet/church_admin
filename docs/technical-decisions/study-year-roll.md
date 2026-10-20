@@ -223,9 +223,20 @@ A late or repeat run is deliberately awkward. The operator's `run` action
 confirming no manual advancement happened in the meantime ([E2]).
 
 Since ENG-266 the roll itself refuses to advance twice in one academic year.
-The academic year starts on 11 September (Cairo): a run dated before it belongs
-to the previous year's. A season other than one already rolled is refused when
-a `succeeded` run exists for a season at or after the run date's academic year.
-Nothing is applied; `failed` is recorded for the requested season with the
-reason, so the usual alert fires. There is no override. The rule reads only
-`season_year`, so every row recorded before it keeps its meaning.
+The academic year starts on 1 September (Cairo), so an operator may roll early
+in September for the coming season: a run dated before it belongs to the
+previous year's, and a season counts as the academic year it starts. Two
+refusals follow. A season that starts after the run date's academic year is too
+early (season 2027 in October 2026). A season other than one already rolled is
+refused when a `succeeded` run exists for a season at or after the run date's
+academic year. Nothing is applied; `failed` is recorded for the requested
+season with the reason, so the usual alert fires. A repeat of a season that
+already succeeded stays `skipped_already_rolled`. There is no override. The
+rule reads only `season_year`, so every row recorded before it keeps its
+meaning.
+
+Production was rolled for season 2026 by the Hasura-era system before the Ash
+server's first run. A migration records that as a `succeeded` run for 2026
+with `step_counts = {"rolled_by_previous_system": 1}`, only when no run row for
+2026 exists, so the scheduled roll of 2026 skips and 2027 rolls from
+1 September 2027. The guard treats the row like any other `succeeded` run.

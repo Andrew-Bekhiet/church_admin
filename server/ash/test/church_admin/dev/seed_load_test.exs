@@ -149,6 +149,11 @@ defmodule ChurchAdmin.Dev.SeedLoadTest do
         Session.run!(session, File.read!(Path.join(:code.priv_dir(:church_admin), file)))
       end
 
+      Session.run!(
+        session,
+        "delete from operations.study_year_roll_runs where season_year = 2026 and status = 'succeeded'"
+      )
+
       Session.run!(session, script)
       Session.run!(session, "SET CONSTRAINTS ALL IMMEDIATE")
       fun.(session)

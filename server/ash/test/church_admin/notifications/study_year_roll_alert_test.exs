@@ -3,6 +3,7 @@ defmodule ChurchAdmin.Notifications.StudyYearRollAlertTest do
   use Oban.Testing, repo: ChurchAdmin.Repo
 
   import ChurchAdmin.Factory
+  import ChurchAdmin.Operations.StudyYearRollWorld, only: [forget_previous_system_roll: 1]
 
   alias ChurchAdmin.Accounts.DeviceToken
   alias ChurchAdmin.Authz.Actor
@@ -10,6 +11,8 @@ defmodule ChurchAdmin.Notifications.StudyYearRollAlertTest do
   alias ChurchAdmin.Google.Messaging.{Local, Message}
   alias ChurchAdmin.Notifications.StudyYearRollAlert
   alias ChurchAdmin.Operations.StudyYearRollRun
+
+  setup :forget_previous_system_roll
 
   @maintenance "maintenanceNotifications"
   @title "تنبيه صيانة"

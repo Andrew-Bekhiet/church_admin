@@ -9,6 +9,8 @@ defmodule ChurchAdmin.Operations.StudyYearRollIntegrityTest do
 
   @season 2026
 
+  setup :forget_previous_system_roll
+
   setup do
     study_years!(1..6)
     :ok

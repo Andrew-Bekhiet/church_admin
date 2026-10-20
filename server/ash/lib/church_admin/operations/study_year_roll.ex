@@ -5,9 +5,9 @@ defmodule ChurchAdmin.Operations.StudyYearRoll do
 
     * `run/2` is the atomic unit. It takes the roll's advisory lock and
       `share row exclusive` locks, skips a season that already succeeded,
-      refuses any other season once a season at or after today's academic
-      year succeeded (the academic year starts on 11 September, Cairo), aborts
-      on blockers, applies the plan, checks the person invariants and records
+      refuses a season whose academic year has not started yet and any other
+      season once a season at or after today's academic year succeeded (the
+      academic year starts on 1 September, Cairo), aborts on blockers, applies the plan, checks the person invariants and records
       `succeeded` with the counts.
     * `run_recording_refusal/2` runs it in a transaction and, when the roll
       was refused, records `failed` in a transaction of its own so the alert
@@ -34,6 +34,9 @@ defmodule ChurchAdmin.Operations.StudyYearRoll do
 
   require Ash.Query
 
+  @academic_year_first_month 9
+  @refusal_reasons [:academic_year_already_rolled, :season_not_started]
+
   @rolled_tables ~w(
     public.study_years public.services public.persons public.persons_services
     public.persons_groups public.classes auth.users_admin_on
@@ -49,7 +52,11 @@ defmodule ChurchAdmin.Operations.StudyYearRoll do
     if season_recorded?(season, ["succeeded"]) do
       {:ok, :skipped_already_rolled}
     else
-      with :ok <- ensure_academic_year_unrolled(season, today), do: roll(season)
+      academic_year = academic_year_of(today)
+
+      with :ok <- ensure_season_has_started(season, today, academic_year),
+           :ok <- ensure_academic_year_unrolled(season, academic_year),
+           do: roll(season)
     end
   end
 
@@ -67,15 +74,26 @@ defmodule ChurchAdmin.Operations.StudyYearRoll do
         end
       end)
 
-    with {:error, %Failure{reason: :academic_year_already_rolled} = refusal} <- outcome do
+    with {:error, %Failure{reason: reason} = refusal} when reason in @refusal_reasons <-
+           outcome do
       record_failure!(season, Failure.recorded_error(refusal))
       {:error, refusal}
     end
   end
 
-  defp ensure_academic_year_unrolled(season, today) do
-    academic_year = academic_year_of(today)
+  defp ensure_season_has_started(season, today, academic_year) when season > academic_year do
+    {:error,
+     Failure.exception(
+       message: "study year roll refused for season #{season}",
+       detail:
+         "season #{season} is too early: #{today} is in the academic year of #{academic_year}",
+       reason: :season_not_started
+     )}
+  end
 
+  defp ensure_season_has_started(_season, _today, _academic_year), do: :ok
+
+  defp ensure_academic_year_unrolled(season, academic_year) do
     StudyYearRollRun
     |> Ash.Query.filter(status == "succeeded" and season_year >= ^academic_year)
     |> Ash.Query.limit(1)
@@ -97,7 +115,7 @@ defmodule ChurchAdmin.Operations.StudyYearRoll do
   end
 
   defp academic_year_of(date) do
-    if Date.before?(date, nayrouz(date.year)), do: date.year - 1, else: date.year
+    if date.month >= @academic_year_first_month, do: date.year, else: date.year - 1
   end
 
   defp roll(season) do

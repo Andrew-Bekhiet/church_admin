@@ -3,7 +3,8 @@ defmodule ChurchAdmin.Operations.StudyYearRoll.Failure do
   Why a roll did not happen: a one-line `message` and, for blockers and
   invariant violations, a `detail` with one line per problem. A failed run
   records them as `message`, a newline, then `detail`. `reason` names the
-  failures a caller acts on itself (`:academic_year_already_rolled`).
+  failures a caller acts on itself (`:academic_year_already_rolled`,
+  `:season_not_started`).
   """
 
   use Splode.Error, fields: [:message, :detail, :reason], class: :invalid
