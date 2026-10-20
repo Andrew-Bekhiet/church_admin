@@ -126,7 +126,7 @@ defmodule ChurchAdmin.MixProject do
         "deps.unlock --unused",
         "format",
         "credo --strict",
-        "test"
+        "test --warnings-as-errors"
       ]
     ]
   end
