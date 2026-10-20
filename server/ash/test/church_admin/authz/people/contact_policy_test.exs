@@ -32,8 +32,10 @@ defmodule ChurchAdmin.Authz.People.ContactPolicyTest do
   @svc_member_contacts [:c_m1, :c_f2, :c_deleted, :c_adm_svc, :c_adm_deleted, :u_svc_admin]
   @svc_reader_with_servant [:c_servant | @svc_member_contacts]
 
-  # {actor kind, contacts read}
-  @contacts [
+  @archived_owner_contacts [:c_deleted, :c_adm_deleted]
+
+  # {actor kind, contacts in the person's or family's read scope}
+  @scoped_contacts [
     {:anonymous, []},
     {:unapproved, []},
     {:unapproved_with_grants, []},
@@ -71,11 +73,16 @@ defmodule ChurchAdmin.Authz.People.ContactPolicyTest do
     :export_all
   ]
 
-  @resolved_contacts Enum.map(@contacts, fn {kind, read} ->
+  @resolved_contacts Enum.map(@scoped_contacts, fn {kind, read} ->
                        if kind in @reads_deleted_admin_through_person,
                          do: {kind, read},
                          else: {kind, List.delete(read, :c_adm_deleted)}
                      end)
+
+  # The contacts a person owns are read only while that person is live.
+  @contacts Enum.map(@scoped_contacts, fn {kind, read} ->
+              {kind, read -- @archived_owner_contacts}
+            end)
 
   @main_phones [:c_m1, :c_self, :c_f2, :c_grp, :c_area_fam, :c_servant, :c_deleted]
 
@@ -121,6 +128,14 @@ defmodule ChurchAdmin.Authz.People.ContactPolicyTest do
 
     test "#{kind} reads #{length(read)} main contacts", %{world: world} do
       assert visible_ids(world, MainContact, @kind) == @read
+    end
+  end
+
+  test "no actor kind reads a contact owned by an archived person", %{world: world} do
+    for kind <- ChurchAdmin.PeopleChildrenWorld.actor_kinds() do
+      read = visible(world, Contact, kind)
+
+      assert MapSet.disjoint?(read, MapSet.new(@archived_owner_contacts)), "#{kind} read one"
     end
   end
 
