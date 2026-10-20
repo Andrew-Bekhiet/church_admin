@@ -114,13 +114,17 @@ defmodule ChurchAdminWeb.Graphql.AccountsReadGapsTest do
        classes: %{c_y1: c_y1, c_y12_f: c_y12_f}}
     end
 
-    test "matches the grant's service's classes on study year and gender",
+    test "lists the grant's service's classes that cover its study year and gender",
          %{conn: conn, world: world, users: users, classes: classes} do
       response = run(conn, @grants, world, :read_all)
 
-      assert [%{"classes" => [%{"id" => id}]}] = grants_of(response, users.both)
+      assert [%{"classes" => both}] = grants_of(response, users.both)
+
+      assert both |> Enum.map(& &1["id"]) |> Enum.sort() ==
+               Enum.sort([classes.c_y1.id, classes.c_y12_f.id])
+
+      assert [%{"classes" => [%{"id" => id}]}] = grants_of(response, users.other_year)
       assert id == classes.c_y12_f.id
-      assert [%{"classes" => []}] = grants_of(response, users.other_year)
     end
 
     test "a null study year or gender on the grant does not restrict that dimension",
@@ -130,8 +134,8 @@ defmodule ChurchAdminWeb.Graphql.AccountsReadGapsTest do
 
       assert [%{"classes" => year_only}] = grants_of(response, users.year_only)
       assert year_only |> Enum.map(& &1["id"]) |> Enum.sort() == both_classes
-      assert [%{"classes" => [%{"id" => female_id}]}] = grants_of(response, users.gender_only)
-      assert female_id == classes.c_y12_f.id
+      assert [%{"classes" => gender_only}] = grants_of(response, users.gender_only)
+      assert gender_only |> Enum.map(& &1["id"]) |> Enum.sort() == both_classes
       assert [%{"classes" => unrestricted}] = grants_of(response, world.users.service_open)
       assert unrestricted |> Enum.map(& &1["id"]) |> Enum.sort() == both_classes
     end

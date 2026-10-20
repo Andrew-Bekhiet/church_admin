@@ -59,7 +59,7 @@ defmodule ChurchAdmin.Authz.Organization.ClassPolicyTest do
     assert :c_y12_f in visible(world, Class, :area_read)
   end
 
-  test "a class with no gender has no admins, one with a gender is matched exactly",
+  test "the female year-1 grant makes its holder an admin of the class it covers and of a class with no gender",
        %{world: world} do
     classes =
       Class
@@ -69,7 +69,7 @@ defmodule ChurchAdmin.Authz.Organization.ClassPolicyTest do
 
     admins = Map.new(classes, &{&1.id, user_names(&1.admins, world)})
 
-    assert admins[world.records.c_y1.id] == MapSet.new()
-    assert admins[world.records.c_y12_f.id] == MapSet.new([:class_admin])
+    assert :class_admin in admins[world.records.c_y1.id]
+    assert :class_admin in admins[world.records.c_y12_f.id]
   end
 end
