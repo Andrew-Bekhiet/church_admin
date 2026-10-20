@@ -17,8 +17,8 @@ defmodule ChurchAdmin.Authz.Scope do
   import ChurchAdmin.Authz.Scope.Combine
 
   alias ChurchAdmin.Accounts.User
-  alias ChurchAdmin.Authz.{Actor, Grant, ServiceGrantCoverage}
-  alias ChurchAdmin.Organization.{Class, Group, Service}
+  alias ChurchAdmin.Authz.{Actor, Grant}
+  alias ChurchAdmin.Organization.{Class, ClassCoverage, Group, Service}
   alias ChurchAdmin.People.{Family, Person}
   alias ChurchAdmin.Places.{Area, Store, Street}
 
@@ -304,9 +304,9 @@ defmodule ChurchAdmin.Authz.Scope do
 
   defp class_of_restricted_grant(%Grant{} = grant, access) do
     all_of([
-      ServiceGrantCoverage.covers_class(
+      ClassCoverage.covers_class(
         %{service: grant.scope_id, study_year: grant.study_year, gender: grant.gender},
-        ServiceGrantCoverage.class_row()
+        ClassCoverage.class_row()
       ),
       if(access == :read, do: true, else: grant_covers_class(grant))
     ])

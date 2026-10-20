@@ -32,8 +32,10 @@ defmodule ChurchAdmin.Authz.People.ContactPolicyTest do
   @svc_member_contacts [:c_m1, :c_f2, :c_deleted, :c_adm_svc, :c_adm_deleted, :u_svc_admin]
   @svc_reader_with_servant [:c_servant | @svc_member_contacts]
 
-  # {actor kind, contacts read}
-  @contacts [
+  @archived_owner_contacts [:c_deleted, :c_adm_deleted]
+
+  # {actor kind, contacts in the person's or family's read scope}
+  @scoped_contacts [
     {:anonymous, []},
     {:unapproved, []},
     {:unapproved_with_grants, []},
@@ -59,25 +61,16 @@ defmodule ChurchAdmin.Authz.People.ContactPolicyTest do
     {:group_and_area, [:c_grp, :c_adm_grp, :u_grp_admin, :c_area_fam, :c_adm_area, :u_area_admin]}
   ]
 
-  # The view left-joins live persons only, so the contact of a soft-deleted
-  # family admin has no effective family: members of the family cannot reach
-  # it, only readers of the person itself (service_write_related reaches the
-  # deleted person through its family) and global readers.
-  @reads_deleted_admin_through_person [
-    :service_write_related,
-    :read_all,
-    :read_write,
-    :manage_users,
-    :export_all
-  ]
-
-  @resolved_contacts Enum.map(@contacts, fn {kind, read} ->
-                       if kind in @reads_deleted_admin_through_person,
-                         do: {kind, read},
-                         else: {kind, List.delete(read, :c_adm_deleted)}
+  @resolved_contacts Enum.map(@scoped_contacts, fn {kind, read} ->
+                       {kind, read -- @archived_owner_contacts}
                      end)
 
-  @main_phones [:c_m1, :c_self, :c_f2, :c_grp, :c_area_fam, :c_servant, :c_deleted]
+  # The contacts a person owns are read only while that person is live.
+  @contacts Enum.map(@scoped_contacts, fn {kind, read} ->
+              {kind, read -- @archived_owner_contacts}
+            end)
+
+  @main_phones [:c_m1, :c_self, :c_f2, :c_grp, :c_area_fam, :c_servant]
 
   # Main contacts follow the person alone: no family-admin branch.
   @main_contacts [
@@ -86,14 +79,14 @@ defmodule ChurchAdmin.Authz.People.ContactPolicyTest do
     {:approved_plain, [:c_self]},
     {:read_all, @main_phones},
     {:export_all, @main_phones},
-    {:service_open, [:c_m1, :c_f2, :c_deleted]},
+    {:service_open, [:c_m1, :c_f2]},
     {:service_year, [:c_m1]},
     {:service_gender, [:c_f2]},
-    {:service_write_related, [:c_m1, :c_f2, :c_deleted]},
-    {:service_record_servants, [:c_m1, :c_f2, :c_deleted, :c_servant]},
+    {:service_write_related, [:c_m1, :c_f2]},
+    {:service_record_servants, [:c_m1, :c_f2, :c_servant]},
     {:group_read, [:c_grp]},
     {:area_read, [:c_area_fam]},
-    {:service_and_group, [:c_m1, :c_f2, :c_deleted, :c_grp]},
+    {:service_and_group, [:c_m1, :c_f2, :c_grp]},
     {:group_and_area, [:c_grp, :c_area_fam]}
   ]
 
@@ -121,6 +114,17 @@ defmodule ChurchAdmin.Authz.People.ContactPolicyTest do
 
     test "#{kind} reads #{length(read)} main contacts", %{world: world} do
       assert visible_ids(world, MainContact, @kind) == @read
+    end
+  end
+
+  test "no actor kind reads a contact owned by an archived person", %{world: world} do
+    for kind <- ChurchAdmin.PeopleChildrenWorld.actor_kinds() do
+      archived = MapSet.new(@archived_owner_contacts)
+
+      for resource <- [Contact, ResolvedContact, MainContact] do
+        read = visible_ids(world, resource, kind)
+        assert MapSet.disjoint?(read, archived), "#{kind} read one through #{inspect(resource)}"
+      end
     end
   end
 

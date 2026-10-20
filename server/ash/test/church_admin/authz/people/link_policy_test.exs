@@ -4,13 +4,13 @@ defmodule ChurchAdmin.Authz.People.LinkPolicyTest do
   alias ChurchAdmin.People.{GroupMembership, ServiceMembership}
   alias ChurchAdmin.Places.Address
 
-  # A membership needs both sides readable. The view does not filter deleted
-  # persons in its service branch, so `ms_deleted` stays visible to s1 readers.
+  # A membership needs both sides readable and a live person: the rows of the
+  # soft-deleted person (`ms_deleted`, `mg_deleted`) are read by nobody.
   @service_memberships [
     {:anonymous, []},
     {:approved_plain, []},
-    {:read_all, [:ms_m1, :ms_f2, :ms_deleted]},
-    {:service_open, [:ms_m1, :ms_f2, :ms_deleted]},
+    {:read_all, [:ms_m1, :ms_f2]},
+    {:service_open, [:ms_m1, :ms_f2]},
     {:service_year, [:ms_m1]},
     {:area_read, []}
   ]
@@ -32,6 +32,11 @@ defmodule ChurchAdmin.Authz.People.LinkPolicyTest do
     {:service_open, []}
   ]
 
+  @archived_person_rows [
+    {ServiceMembership, :ms_deleted},
+    {GroupMembership, :mg_deleted}
+  ]
+
   for {resource, expectations} <- [
         {ServiceMembership, @service_memberships},
         {GroupMembership, @group_memberships},
@@ -44,6 +49,25 @@ defmodule ChurchAdmin.Authz.People.LinkPolicyTest do
 
     test "#{inspect(resource)}: #{kind} reads #{inspect(read)}", %{world: world} do
       assert visible(world, @resource, @kind) == @read
+    end
+  end
+
+  for {resource, row} <- @archived_person_rows do
+    @resource resource
+    @row row
+
+    test "#{inspect(resource)}: only the system actor reads #{row}, the row of an archived person",
+         %{world: world} do
+      system_read =
+        @resource
+        |> Ash.read!(actor: ChurchAdmin.Authz.Actor.system(), page: false)
+        |> names(world)
+
+      assert @row in system_read
+
+      for kind <- [:read_all, :service_open, :group_read, :area_read] do
+        refute @row in visible(world, @resource, kind)
+      end
     end
   end
 end

@@ -1,4 +1,4 @@
-defmodule ChurchAdmin.Authz.Organization.ServiceGrantCoverageTest do
+defmodule ChurchAdmin.Authz.Organization.ClassCoverageTest do
   use ChurchAdmin.AuthzCase, async: false
 
   alias ChurchAdmin.Accounts.ScopeGrant
