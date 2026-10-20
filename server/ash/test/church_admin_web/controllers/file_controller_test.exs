@@ -12,7 +12,7 @@ defmodule ChurchAdminWeb.FileControllerTest do
   end
 
   defp as_user(conn, user) do
-    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
+    claims = user |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
     put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
   end
 
