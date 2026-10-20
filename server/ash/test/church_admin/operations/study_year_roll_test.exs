@@ -8,6 +8,8 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
 
   @season 2026
 
+  setup :forget_previous_system_roll
+
   @no_change_counts %{
     "graduate_top_cohort_persons" => 0,
     "advance_persons_study_years" => 0,
