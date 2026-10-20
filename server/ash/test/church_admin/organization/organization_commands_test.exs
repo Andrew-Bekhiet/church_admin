@@ -72,7 +72,7 @@ defmodule ChurchAdmin.Organization.OrganizationCommandsTest do
                )
 
       assert codes(error) == ["meeting/service-study-year-mismatch"]
-      refute Ash.exists?(Ash.Query.filter(Service, name == "Rolled back"), authorize?: false)
+      refute Service |> Ash.Query.filter(name == "Rolled back") |> Ash.exists?(authorize?: false)
     end
 
     test "a taken name is service/name-taken", ctx do
@@ -326,17 +326,20 @@ defmodule ChurchAdmin.Organization.OrganizationCommandsTest do
 
     group_reader = actor_with(["approved"], [{:group, group.id, []}])
     service_reader = actor_with(["approved"], [{:service, service.id, []}])
-    visible = fn actor, resource -> resource |> Ash.read!(actor: actor, page: false) end
 
-    assert member.id in Enum.map(visible.(group_reader, ChurchAdmin.People.Person), & &1.id)
-    assert class.id in Enum.map(visible.(service_reader, Class), & &1.id)
+    visible_ids = fn actor, resource ->
+      resource |> Ash.read!(actor: actor, page: false) |> Enum.map(& &1.id)
+    end
+
+    assert member.id in visible_ids.(group_reader, ChurchAdmin.People.Person)
+    assert class.id in visible_ids.(service_reader, Class)
 
     assert :ok = Organization.delete_group(group, actor: ctx.writer)
     assert :ok = Organization.delete_service(service, actor: ctx.writer)
 
-    assert member.id in Enum.map(visible.(group_reader, ChurchAdmin.People.Person), & &1.id)
-    assert class.id in Enum.map(visible.(service_reader, Class), & &1.id)
-    refute service.id in Enum.map(visible.(service_reader, Service), & &1.id)
+    assert member.id in visible_ids.(group_reader, ChurchAdmin.People.Person)
+    assert class.id in visible_ids.(service_reader, Class)
+    refute service.id in visible_ids.(service_reader, Service)
   end
 
   test "an archived class is hidden from reads but kept", ctx do
@@ -345,7 +348,7 @@ defmodule ChurchAdmin.Organization.OrganizationCommandsTest do
 
     assert :ok = Organization.delete_class(class, actor: ctx.writer)
 
-    refute Ash.exists?(Ash.Query.filter(Class, id == ^class.id), actor: ctx.writer)
-    assert Ash.exists?(Ash.Query.filter(Class, id == ^class.id), authorize?: false)
+    refute Class |> Ash.Query.filter(id == ^class.id) |> Ash.exists?(actor: ctx.writer)
+    assert Class |> Ash.Query.filter(id == ^class.id) |> Ash.exists?(authorize?: false)
   end
 end
