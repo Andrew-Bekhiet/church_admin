@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:church_admin/src/core/services/router/refresh_from_current_route.dart';
+import 'package:church_admin/src/core/services/router/report_route_changes_immediately.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -12,6 +12,7 @@ void main() {
       final changes = ChangeNotifier();
       addTearDown(changes.dispose);
       final router = GoRouter(
+        refreshListenable: changes,
         routes: [
           GoRoute(
             path: '/',
@@ -24,7 +25,7 @@ void main() {
             ],
           ),
         ],
-      ).refreshingFromCurrentRouteOn(changes);
+      ).reportingRouteChangesImmediately();
       addTearDown(router.dispose);
       await tester.pumpWidget(MaterialApp.router(routerConfig: router));
       unawaited(router.push<void>('/details'));
@@ -47,6 +48,7 @@ void main() {
     addTearDown(changes.dispose);
     var isLocked = false;
     final router = GoRouter(
+      refreshListenable: changes,
       routes: [
         GoRoute(
           path: '/',
@@ -55,7 +57,7 @@ void main() {
         ),
         GoRoute(path: '/locked', builder: (_, _) => const Text('locked')),
       ],
-    ).refreshingFromCurrentRouteOn(changes);
+    ).reportingRouteChangesImmediately();
     addTearDown(router.dispose);
     await tester.pumpWidget(MaterialApp.router(routerConfig: router));
 
@@ -73,6 +75,7 @@ void main() {
       addTearDown(changes.dispose);
       var isUnlocked = false;
       final router = GoRouter(
+        refreshListenable: changes,
         routes: [
           GoRoute(path: '/', builder: (_, _) => const Text('home')),
           GoRoute(
@@ -92,7 +95,7 @@ void main() {
             },
           ),
         ],
-      ).refreshingFromCurrentRouteOn(changes);
+      ).reportingRouteChangesImmediately();
       addTearDown(router.dispose);
       await tester.pumpWidget(MaterialApp.router(routerConfig: router));
       unawaited(router.push<void>('/unlock'));
@@ -105,4 +108,21 @@ void main() {
       expect(find.text('protected'), findsOneWidget);
     },
   );
+
+  testWidgets('a change after the router is disposed does not reach it', (
+    tester,
+  ) async {
+    final changes = ChangeNotifier();
+    addTearDown(changes.dispose);
+    final router = GoRouter(
+      refreshListenable: changes,
+      routes: [GoRoute(path: '/', builder: (_, _) => const Text('home'))],
+    ).reportingRouteChangesImmediately();
+    await tester.pumpWidget(MaterialApp.router(routerConfig: router));
+    await tester.pumpWidget(const SizedBox.shrink());
+
+    router.dispose();
+
+    expect(changes.notifyListeners, returnsNormally);
+  });
 }

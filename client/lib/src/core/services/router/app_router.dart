@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/router/refresh_from_current_route.dart';
+import 'package:church_admin/src/core/services/router/report_route_changes_immediately.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -9,6 +9,7 @@ import 'package:material_ui/material_ui.dart';
 final GoRouter $appRouter = GoRouter(
   observers: LoggingService.I.navigatorObservers,
   extraCodec: ChurchAdminRouterExtraCodec(),
+  refreshListenable: GoRouterRefreshStream.I,
   redirect: (context, state) {
     // Ignore external custom-scheme callbacks (e.g., Firebase Auth com.googleusercontent.apps)
     // and route back to a safe in-app location instead of showing an error page.
@@ -89,4 +90,4 @@ final GoRouter $appRouter = GoRouter(
       body: ErrorWidget.builder(FlutterErrorDetails(exception: state.error!)),
     );
   },
-).refreshingFromCurrentRouteOn(GoRouterRefreshStream.I);
+).reportingRouteChangesImmediately();
