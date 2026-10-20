@@ -14,7 +14,7 @@ defmodule ChurchAdmin.People.Family.Commands do
 
   alias ChurchAdmin.Activity.Changes.RecordLastVisit
   alias ChurchAdmin.Authz.Changes.{RecheckAfterUpdate, RememberCreated}
-  alias ChurchAdmin.Authz.Checks.{HasPermission, InScope}
+  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, InScope}
   alias ChurchAdmin.Catalog.Church
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.People.{Family, FamilyContactInput}
@@ -99,11 +99,11 @@ defmodule ChurchAdmin.People.Family.Commands do
     end
 
     policy action(:destroy) do
-      authorize_if {HasPermission, name: "writeAllData"}
+      authorize_if {ApprovedWithPermission, name: "writeAllData"}
     end
 
     policy action(:destroy) do
-      authorize_if {HasPermission, name: "deleteData"}
+      authorize_if {ApprovedWithPermission, name: "deleteData"}
     end
 
     policy action(:hard_destroy) do
