@@ -60,7 +60,7 @@ defmodule ChurchAdmin.History.Changes.RecordEditTest do
     )
     |> Ash.create!()
 
-    assert Enum.sort(edits_of([group_id, person_id])) ==
+    assert [group_id, person_id] |> edits_of() |> Enum.sort() ==
              Enum.sort([
                edit_row("groups", group_id, actor.uid, "user"),
                edit_row("persons", person_id, actor.uid, "user")
@@ -106,7 +106,7 @@ defmodule ChurchAdmin.History.Changes.RecordEditTest do
     assert result.status == :success
     ids = Enum.map(result.records, & &1.id)
 
-    assert Enum.sort(edits_of(ids)) ==
+    assert ids |> edits_of() |> Enum.sort() ==
              ids |> Enum.map(&edit_row("edited_things", &1, actor.uid, "user")) |> Enum.sort()
   end
 
