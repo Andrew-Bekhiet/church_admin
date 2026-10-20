@@ -9,13 +9,13 @@ defmodule ChurchAdmin.Authz.Organization.ServicePolicyTest do
   @both [:s1, :s2]
 
   # {actor kind, services read, services with userCanEdit}. A service is
-  # readable by any signed-in user, approved or not (Hasura filters only on
-  # deleted_at); userCanEdit follows the view's service branch, which ignores
+  # readable by any approved user (Hasura also let unapproved users read
+  # it, filtering only on deleted_at); userCanEdit follows the view's service branch, which ignores
   # a grant's study year and gender (authz-and-reads §2.1, §3.3).
   @expectations [
     {:anonymous, [], []},
-    {:unapproved, @both, []},
-    {:unapproved_with_grants, @both, []},
+    {:unapproved, [], []},
+    {:unapproved_with_grants, [], []},
     {:approved_plain, @both, []},
     {:read_all, @both, []},
     {:export_all, @both, []},
@@ -72,14 +72,16 @@ defmodule ChurchAdmin.Authz.Organization.ServicePolicyTest do
              ])
   end
 
-  test "the admins an actor loads are the ones it reads as users", %{world: world} do
+  test "an unapproved grantee reads neither its service nor the service's admins", %{
+    world: world
+  } do
     service =
       Service
       |> Ash.Query.filter(id == ^world.records.s1.id)
       |> Ash.Query.load(:admins)
       |> Ash.read_one!(actor: actor(world, :unapproved_with_grants))
 
-    assert user_names(service.admins, world) == MapSet.new([:unapproved_with_grants])
+    assert service == nil
   end
 
   test "a service's classes and groups load only what the actor reads", %{world: world} do
