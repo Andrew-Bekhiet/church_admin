@@ -16,7 +16,7 @@ defmodule ChurchAdminWeb.Graphql.MembershipNameSortsTest do
   end
 
   defp run(conn, document, variables, world) do
-    claims = FirebaseTokens.valid_claims(%{"x-hasura-user-id" => world.users.read_all.uid})
+    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users.read_all))
 
     conn
     |> put_req_header("authorization", "Bearer " <> FirebaseTokens.unsigned(claims))

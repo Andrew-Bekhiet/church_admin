@@ -1,7 +1,7 @@
 defmodule ChurchAdminWeb.FileControllerTest do
   use ChurchAdminWeb.ConnCase, async: false
 
-  alias ChurchAdmin.{AuthzWorld, FirebaseTokens}
+  alias ChurchAdmin.{AuthzWorld, Factory, FirebaseTokens}
   alias ChurchAdmin.XlsxReader
   alias ChurchAdminWeb.FileToken
 
@@ -12,7 +12,7 @@ defmodule ChurchAdminWeb.FileControllerTest do
   end
 
   defp as_user(conn, user) do
-    claims = FirebaseTokens.valid_claims(%{"x-hasura-user-id" => user.uid})
+    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
     put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
   end
 
