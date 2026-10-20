@@ -6,14 +6,14 @@ defmodule ChurchAdmin.Accounts.Changes.CanonicalizeNameAndEmail do
 
   use Ash.Resource.Change
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context) do
     changeset
     |> update_if_changing(:name, &String.trim/1)
     |> update_if_changing(:email, &canonical_email/1)
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def atomic(changeset, opts, context), do: {:ok, change(changeset, opts, context)}
 
   @spec canonical_email(String.t() | nil) :: String.t() | nil

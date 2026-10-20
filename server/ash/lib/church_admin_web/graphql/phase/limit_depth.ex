@@ -12,7 +12,7 @@ defmodule ChurchAdminWeb.Graphql.Phase.LimitDepth do
   alias Absinthe.{Blueprint, Phase}
   alias Absinthe.Blueprint.Document.{Field, Fragment}
 
-  @impl true
+  @impl Absinthe.Phase
   def run(blueprint, options) do
     max_depth = Keyword.fetch!(options, :max_depth)
 

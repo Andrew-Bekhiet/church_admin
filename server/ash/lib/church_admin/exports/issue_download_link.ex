@@ -10,7 +10,7 @@ defmodule ChurchAdmin.Exports.IssueDownloadLink do
   alias ChurchAdmin.Exports.{Authorization, Selection, Workbook}
   alias ChurchAdminWeb.FileToken
 
-  @impl true
+  @impl Ash.Resource.Actions.Implementation
   def run(input, _opts, context) do
     actor = context.actor
     selection = Selection.new(input.arguments)

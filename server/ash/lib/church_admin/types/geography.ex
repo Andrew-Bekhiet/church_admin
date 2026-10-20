@@ -4,14 +4,14 @@ defmodule ChurchAdmin.Types.Geography do
 
   @srid 4326
 
-  @impl true
+  @impl Ash.Type
   def storage_type(_), do: :geography
 
   def graphql_type(_), do: :json
 
   def graphql_input_type(_), do: :json
 
-  @impl true
+  @impl Ash.Type
   def cast_input(nil, _), do: {:ok, nil}
   def cast_input(%{__struct__: _} = geo, _), do: {:ok, Geo.JSON.encode!(geo)}
   def cast_input(%{"type" => _} = geojson, _), do: normalize(geojson)
@@ -26,13 +26,13 @@ defmodule ChurchAdmin.Types.Geography do
 
   def cast_input(_, _), do: :error
 
-  @impl true
+  @impl Ash.Type
   def cast_stored(nil, _), do: {:ok, nil}
   def cast_stored(%{__struct__: _} = geo, _), do: {:ok, Geo.JSON.encode!(geo)}
   def cast_stored(%{"type" => _} = geojson, _), do: {:ok, geojson}
   def cast_stored(_, _), do: :error
 
-  @impl true
+  @impl Ash.Type
   def dump_to_native(nil, _), do: {:ok, nil}
 
   def dump_to_native(geojson, _) do
@@ -42,7 +42,7 @@ defmodule ChurchAdmin.Types.Geography do
     end
   end
 
-  @impl true
+  @impl Ash.Type
   def dump_to_embedded(value, _), do: {:ok, value}
 
   defp normalize(geojson) do

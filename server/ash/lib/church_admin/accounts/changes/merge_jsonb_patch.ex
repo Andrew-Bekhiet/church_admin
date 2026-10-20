@@ -17,7 +17,7 @@ defmodule ChurchAdmin.Accounts.Changes.MergeJsonbPatch do
     argument: [type: :atom, required: true]
   ]
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     case Spark.Options.validate(opts, @options_schema) do
       {:ok, opts} -> {:ok, opts}
@@ -25,7 +25,7 @@ defmodule ChurchAdmin.Accounts.Changes.MergeJsonbPatch do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, _context) do
     case Ash.Changeset.get_argument(changeset, opts[:argument]) do
       nil ->
@@ -42,7 +42,7 @@ defmodule ChurchAdmin.Accounts.Changes.MergeJsonbPatch do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def atomic(changeset, opts, _context) do
     attribute = opts[:attribute]
 

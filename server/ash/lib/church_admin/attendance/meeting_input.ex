@@ -17,9 +17,9 @@ defmodule ChurchAdmin.Attendance.MeetingInput do
     field :service_gender, :boolean
   end
 
-  @impl true
+  @impl AshGraphql.Type
   def graphql_type(_constraints), do: :default_meeting
 
-  @impl true
+  @impl AshGraphql.Type
   def graphql_input_type(_constraints), do: :meeting_input
 end

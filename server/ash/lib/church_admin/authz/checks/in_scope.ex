@@ -14,10 +14,10 @@ defmodule ChurchAdmin.Authz.Checks.InScope do
 
   alias ChurchAdmin.Authz.Scope
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(opts), do: "the record is in the actor's #{opts[:access]} scope"
 
-  @impl true
+  @impl Ash.Policy.FilterCheck
   def filter(actor, context, opts) do
     entity = opts[:entity] || Scope.entity_of(context.resource)
     Scope.for_entity(entity, actor, Keyword.fetch!(opts, :access))

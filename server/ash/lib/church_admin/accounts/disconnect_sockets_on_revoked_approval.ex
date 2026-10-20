@@ -10,7 +10,7 @@ defmodule ChurchAdmin.Accounts.DisconnectSocketsOnRevokedApproval do
 
   use Ash.Notifier
 
-  @impl true
+  @impl Ash.Notifier
   def notify(%Ash.Notifier.Notification{
         action: %{type: :destroy},
         data: %{uid: uid, permission: "approved"}

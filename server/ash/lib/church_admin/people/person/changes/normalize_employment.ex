@@ -16,7 +16,7 @@ defmodule ChurchAdmin.People.Person.Changes.NormalizeEmployment do
 
   @with_job ~w(employed retired)
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context) do
     changeset
     |> clear_when(not servant?(changeset), [:serving_church_id, :service_type])

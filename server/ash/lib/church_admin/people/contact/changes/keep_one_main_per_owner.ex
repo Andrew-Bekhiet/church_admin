@@ -12,7 +12,7 @@ defmodule ChurchAdmin.People.Contact.Changes.KeepOneMainPerOwner do
 
   require Ash.Query
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context) do
     Ash.Changeset.before_action(changeset, fn changeset ->
       if Ash.Changeset.get_attribute(changeset, :is_main_phone) and

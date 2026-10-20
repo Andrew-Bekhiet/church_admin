@@ -16,7 +16,7 @@ defmodule ChurchAdmin.Places.Calculations.IntersectsGeography do
 
   import Ash.Expr
 
-  @impl true
+  @impl Ash.Resource.Calculation
   def expression(opts, context) do
     geojson = context.arguments |> Map.fetch!(Keyword.fetch!(opts, :argument)) |> Jason.encode!()
     attribute = Keyword.fetch!(opts, :attribute)

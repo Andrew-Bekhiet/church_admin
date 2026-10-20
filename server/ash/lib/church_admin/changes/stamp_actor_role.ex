@@ -14,7 +14,7 @@ defmodule ChurchAdmin.Changes.StampActorRole do
 
   @options_schema [attribute: [type: :atom, required: true]]
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     case Spark.Options.validate(opts, @options_schema) do
       {:ok, opts} -> {:ok, opts}
@@ -22,7 +22,7 @@ defmodule ChurchAdmin.Changes.StampActorRole do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, context) do
     attribute = opts[:attribute]
 
@@ -48,6 +48,6 @@ defmodule ChurchAdmin.Changes.StampActorRole do
     )
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def atomic(changeset, opts, context), do: {:ok, change(changeset, opts, context)}
 end

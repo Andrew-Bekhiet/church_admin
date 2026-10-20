@@ -11,10 +11,10 @@ defmodule ChurchAdmin.Authz.Checks.SignedInToFirebase do
   alias ChurchAdmin.Auth.Principal
   alias ChurchAdmin.Authz.Actor
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(_opts), do: "the request is signed in to Firebase"
 
-  @impl true
+  @impl Ash.Policy.SimpleCheck
   def match?(%Actor{principal: %Principal{}}, _context, _opts), do: true
   def match?(_actor, _context, _opts), do: false
 end

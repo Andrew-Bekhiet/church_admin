@@ -28,7 +28,7 @@ defmodule ChurchAdmin.Places.Changes.ApplyOwnerAddress do
     owner_id: [type: :atom, default: :id]
   ]
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     case Spark.Options.validate(opts, @options_schema) do
       {:ok, opts} -> {:ok, opts}
@@ -36,7 +36,7 @@ defmodule ChurchAdmin.Places.Changes.ApplyOwnerAddress do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, context) do
     case Ash.Changeset.get_argument(changeset, :address) do
       nil ->

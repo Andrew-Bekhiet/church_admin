@@ -8,7 +8,7 @@ defmodule ChurchAdmin.Activity.Changes.ApplyVisitSubject do
 
   alias ChurchAdmin.Errors.{Codes, DomainError}
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context) do
     subject = Ash.Changeset.get_argument(changeset, :subject)
     changeset = Ash.Changeset.change_attribute(changeset, :table, Atom.to_string(subject))

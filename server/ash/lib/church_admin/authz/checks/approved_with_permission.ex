@@ -11,10 +11,10 @@ defmodule ChurchAdmin.Authz.Checks.ApprovedWithPermission do
 
   alias ChurchAdmin.Authz.Actor
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(opts), do: "the actor is approved and holds the #{opts[:name]} permission"
 
-  @impl true
+  @impl Ash.Policy.SimpleCheck
   def match?(%Actor{approved?: true} = actor, _context, opts),
     do: Actor.holds?(actor, Keyword.fetch!(opts, :name))
 

@@ -5,7 +5,7 @@ defmodule ChurchAdmin.Accounts.Changes.GenerateInvitationCode do
 
   alias ChurchAdmin.Accounts.InvitationCode
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context),
     do: Ash.Changeset.force_change_attribute(changeset, :code, InvitationCode.generate())
 end

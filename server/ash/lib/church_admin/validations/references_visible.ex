@@ -22,7 +22,7 @@ defmodule ChurchAdmin.Validations.ReferencesVisible do
     resource: [type: :atom, required: true]
   ]
 
-  @impl true
+  @impl Ash.Resource.Validation
   def init(opts) do
     with {:ok, opts} <- Spark.Options.validate(opts, @options_schema),
          true <- Keyword.has_key?(opts, :attribute) != Keyword.has_key?(opts, :argument) do
@@ -33,7 +33,7 @@ defmodule ChurchAdmin.Validations.ReferencesVisible do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Validation
   def validate(changeset, opts, context) do
     field = opts[:attribute] || opts[:argument]
 

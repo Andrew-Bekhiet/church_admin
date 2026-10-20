@@ -8,7 +8,7 @@ defmodule ChurchAdmin.Google.Storage.Http do
 
   @object_path "/storage/v1/b/{bucket}/o/{object}"
 
-  @impl true
+  @impl ChurchAdmin.Google.Storage
   def upload(bucket, name, body, options) do
     options = Keyword.validate!(options, [:content_type, :content_length])
 
@@ -29,7 +29,7 @@ defmodule ChurchAdmin.Google.Storage.Http do
     end
   end
 
-  @impl true
+  @impl ChurchAdmin.Google.Storage
   def download(bucket, name) do
     with {:ok, response} <-
            object_request(bucket, name, method: :get, params: [alt: "media"], into: :self) do
@@ -37,12 +37,12 @@ defmodule ChurchAdmin.Google.Storage.Http do
     end
   end
 
-  @impl true
+  @impl ChurchAdmin.Google.Storage
   def delete(bucket, name) do
     with {:ok, _response} <- object_request(bucket, name, method: :delete), do: :ok
   end
 
-  @impl true
+  @impl ChurchAdmin.Google.Storage
   def list(bucket, prefix, options) do
     options = Keyword.validate!(options, [:page_token])
 
@@ -64,7 +64,7 @@ defmodule ChurchAdmin.Google.Storage.Http do
     end
   end
 
-  @impl true
+  @impl ChurchAdmin.Google.Storage
   def metadata(bucket, name) do
     with {:ok, response} <- object_request(bucket, name, method: :get) do
       {:ok, Object.from_resource(response.body)}

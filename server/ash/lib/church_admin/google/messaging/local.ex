@@ -19,7 +19,7 @@ defmodule ChurchAdmin.Google.Messaging.Local do
   @spec unregistered_token(String.t()) :: String.t()
   def unregistered_token(suffix), do: @unregistered_prefix <> suffix
 
-  @impl true
+  @impl ChurchAdmin.Google.Messaging
   def send_message(%Message{} = message) do
     Logger.info("FCM message not sent (local messaging): #{inspect(message)}")
 

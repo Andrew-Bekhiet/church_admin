@@ -9,9 +9,9 @@ defmodule ChurchAdmin.Accounts.NewPerson do
     field :gender, :boolean, allow_nil?: false
   end
 
-  @impl true
+  @impl AshGraphql.Type
   def graphql_type(_constraints), do: :new_person
 
-  @impl true
+  @impl AshGraphql.Type
   def graphql_input_type(_constraints), do: :new_person_input
 end

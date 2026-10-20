@@ -33,9 +33,9 @@ defmodule ChurchAdmin.Accounts.AdminOn do
   @spec field_names() :: [atom()]
   def field_names, do: __struct__() |> Map.from_struct() |> Map.keys() |> Enum.sort()
 
-  @impl true
+  @impl AshGraphql.Type
   def graphql_type(_constraints), do: :admin_on
 
-  @impl true
+  @impl AshGraphql.Type
   def graphql_input_type(_constraints), do: :admin_on_input
 end

@@ -14,7 +14,7 @@ defmodule ChurchAdmin.Places.Calculations.FullAddressText do
 
   import Ash.Expr
 
-  @impl true
+  @impl Ash.Resource.Calculation
   def expression(_opts, _context) do
     expr(
       fragment(

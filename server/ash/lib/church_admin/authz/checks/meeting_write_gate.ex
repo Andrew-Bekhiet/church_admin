@@ -18,10 +18,10 @@ defmodule ChurchAdmin.Authz.Checks.MeetingWriteGate do
 
   alias ChurchAdmin.Authz.{Actor, Grant}
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(_opts), do: "the actor may write the meeting"
 
-  @impl true
+  @impl Ash.Policy.FilterCheck
   def filter(%Actor{approved?: true} = actor, _context, _opts) do
     any_of([
       when_held(

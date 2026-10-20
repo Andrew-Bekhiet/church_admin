@@ -12,7 +12,7 @@ defmodule ChurchAdmin.Files.Photos.Delete do
   alias ChurchAdmin.Files.Photos.{Access, Record}
   alias ChurchAdmin.Google.{Error, Storage}
 
-  @impl true
+  @impl Ash.Resource.Actions.Implementation
   def run(input, _opts, %{actor: actor}) do
     %{subject: subject, id: id} = input.arguments
 

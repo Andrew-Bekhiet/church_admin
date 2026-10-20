@@ -19,7 +19,7 @@ defmodule ChurchAdmin.Accounts.Actions.ApplyInvitationCode do
   alias ChurchAdmin.Errors.{Codes, DomainError}
   alias ChurchAdmin.Google.IdentityToolkit
 
-  @impl true
+  @impl Ash.Resource.Actions.Implementation
   def run(input, _opts, %{actor: %{principal: principal} = actor}) do
     with {:ok, code} <- InvitationCode.normalize(input.arguments.code),
          {:ok, email} <- account_email(principal),

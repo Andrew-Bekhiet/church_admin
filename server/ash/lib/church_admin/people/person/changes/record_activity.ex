@@ -23,7 +23,7 @@ defmodule ChurchAdmin.People.Person.Changes.RecordActivity do
 
   @options_schema [confession: [type: :atom], kodas: [type: :atom], call: [type: :atom]]
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     case Spark.Options.validate(opts, @options_schema) do
       {:ok, opts} -> {:ok, opts}
@@ -31,7 +31,7 @@ defmodule ChurchAdmin.People.Person.Changes.RecordActivity do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, context) do
     Ash.Changeset.after_action(changeset, fn changeset, person ->
       values =

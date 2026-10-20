@@ -13,14 +13,14 @@ defmodule ChurchAdmin.Authz.Changes.RememberCreated do
 
   alias ChurchAdmin.Authz.Checks.CreatedInCommand
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     if opts[:kind] in [:person, :family],
       do: {:ok, opts},
       else: {:error, "`kind` is :person or :family"}
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, _context) do
     Ash.Changeset.before_action(changeset, fn changeset ->
       id = Ash.Changeset.get_attribute(changeset, :id)

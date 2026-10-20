@@ -5,7 +5,7 @@ defmodule ChurchAdmin.Application do
 
   use Application
 
-  @impl true
+  @impl Application
   def start(_type, _args) do
     ChurchAdmin.Auth.TokenVerifier.configured!()
 
@@ -40,7 +40,7 @@ defmodule ChurchAdmin.Application do
 
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
-  @impl true
+  @impl Application
   def config_change(changed, _new, removed) do
     ChurchAdminWeb.Endpoint.config_change(changed, removed)
     :ok

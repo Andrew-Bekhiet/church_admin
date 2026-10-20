@@ -12,7 +12,7 @@ defmodule ChurchAdmin.Releases.IssueDownloadLink do
   alias ChurchAdmin.Releases.{AppPlatform, LatestRelease}
   alias ChurchAdminWeb.FileToken
 
-  @impl true
+  @impl Ash.Resource.Actions.Implementation
   def run(input, _opts, %{actor: actor}) do
     platform = input.arguments.platform
     bucket = Buckets.app_releases()

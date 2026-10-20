@@ -22,7 +22,7 @@ defmodule ChurchAdmin.Attendance.Validations.MeetingTakesAttendance do
   alias ChurchAdmin.Errors.{Codes, DomainError}
   alias ChurchAdmin.People.{GroupMembership, Person}
 
-  @impl true
+  @impl Ash.Resource.Validation
   def validate(changeset, _opts, _context) do
     record = %{
       person_id: Ash.Changeset.get_attribute(changeset, :person_id),
@@ -37,7 +37,7 @@ defmodule ChurchAdmin.Attendance.Validations.MeetingTakesAttendance do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Validation
   def atomic(_changeset, _opts, _context),
     do: {:not_atomic, "the meeting and the person's memberships are read from their tables"}
 

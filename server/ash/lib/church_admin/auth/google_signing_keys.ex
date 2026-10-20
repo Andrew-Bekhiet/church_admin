@@ -38,7 +38,7 @@ defmodule ChurchAdmin.Auth.GoogleSigningKeys do
     :exit, _reason -> {:error, :signing_keys_unavailable}
   end
 
-  @impl true
+  @impl GenServer
   def init(opts) do
     {:ok,
      %{
@@ -54,7 +54,7 @@ defmodule ChurchAdmin.Auth.GoogleSigningKeys do
      }}
   end
 
-  @impl true
+  @impl GenServer
   def handle_call({:fetch_key, kid}, from, state) do
     state = maybe_start_refresh(state, kid, state.now_ms.())
 
@@ -65,7 +65,7 @@ defmodule ChurchAdmin.Auth.GoogleSigningKeys do
     end
   end
 
-  @impl true
+  @impl GenServer
   def handle_info({:refreshed, pid, result}, %{refresh: %{pid: pid}} = state),
     do: {:noreply, finish_refresh(state, result)}
 

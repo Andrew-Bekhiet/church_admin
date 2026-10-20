@@ -6,7 +6,7 @@ defmodule ChurchAdmin.Accounts.Validations.EachScopeOnOneContainer do
   alias ChurchAdmin.Accounts.GrantAuthority
   alias ChurchAdmin.Errors.{Codes, DomainError}
 
-  @impl true
+  @impl Ash.Resource.Validation
   def validate(changeset, _opts, _context) do
     scopes = Ash.Changeset.get_argument(changeset, :admin_on) || []
 
@@ -21,6 +21,6 @@ defmodule ChurchAdmin.Accounts.Validations.EachScopeOnOneContainer do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Validation
   def atomic(changeset, opts, context), do: validate(changeset, opts, context)
 end

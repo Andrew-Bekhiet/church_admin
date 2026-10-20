@@ -11,7 +11,7 @@ defmodule ChurchAdmin.Auth.EmulatorTokenVerifier do
   alias ChurchAdmin.Auth.TokenVerifier
   alias ChurchAdmin.Auth.UnverifiedJwt
 
-  @impl true
+  @impl ChurchAdmin.Auth.TokenVerifier
   def verify(token, opts \\ []) do
     project_id = Keyword.get_lazy(opts, :project_id, &TokenVerifier.firebase_project_id/0)
 

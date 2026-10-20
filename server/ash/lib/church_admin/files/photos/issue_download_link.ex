@@ -11,7 +11,7 @@ defmodule ChurchAdmin.Files.Photos.IssueDownloadLink do
   alias ChurchAdmin.Files.Photos.Access
   alias ChurchAdminWeb.FileToken
 
-  @impl true
+  @impl Ash.Resource.Actions.Implementation
   def run(input, _opts, %{actor: actor}) do
     %{subject: subject, id: id} = input.arguments
 

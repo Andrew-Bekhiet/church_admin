@@ -28,7 +28,7 @@ defmodule ChurchAdmin.Accounts.Changes.LinkPerson do
   alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.People.Person
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, context) do
     Ash.Changeset.after_action(changeset, fn changeset, user ->
       case link(changeset, user, context.actor) do

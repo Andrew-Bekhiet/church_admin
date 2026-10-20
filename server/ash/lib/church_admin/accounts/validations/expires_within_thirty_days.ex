@@ -11,7 +11,7 @@ defmodule ChurchAdmin.Accounts.Validations.ExpiresWithinThirtyDays do
 
   @max_validity_seconds 30 * 24 * 60 * 60
 
-  @impl true
+  @impl Ash.Resource.Validation
   def validate(changeset, _opts, _context) do
     created_at = Ash.Changeset.get_attribute(changeset, :created_at) || DateTime.utc_now()
 

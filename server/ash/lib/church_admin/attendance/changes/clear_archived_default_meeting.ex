@@ -13,7 +13,7 @@ defmodule ChurchAdmin.Attendance.Changes.ClearArchivedDefaultMeeting do
   alias ChurchAdmin.Changes.AfterActionFailure
   alias ChurchAdmin.Organization.{Group, Service}
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, context) do
     Ash.Changeset.after_action(changeset, fn changeset, meeting ->
       case clear_defaults(meeting, context.actor) do

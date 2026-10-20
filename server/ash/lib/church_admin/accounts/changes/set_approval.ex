@@ -11,12 +11,12 @@ defmodule ChurchAdmin.Accounts.Changes.SetApproval do
   alias ChurchAdmin.Accounts.UserPermission
   alias ChurchAdmin.Changes.AfterActionFailure
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     if is_boolean(opts[:approved?]), do: {:ok, opts}, else: {:error, "`approved?` is a boolean"}
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, context) do
     Ash.Changeset.after_action(changeset, fn changeset, user ->
       case set_approval(user, opts[:approved?], context.actor) do

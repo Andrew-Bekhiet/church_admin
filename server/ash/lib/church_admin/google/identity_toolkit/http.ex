@@ -8,13 +8,13 @@ defmodule ChurchAdmin.Google.IdentityToolkit.Http do
   alias ChurchAdmin.Google.Error
   alias ChurchAdmin.Google.IdentityToolkit.Account
 
-  @impl true
+  @impl ChurchAdmin.Google.IdentityToolkit
   def lookup_by_uid(uid), do: lookup(%{localId: [uid]})
 
-  @impl true
+  @impl ChurchAdmin.Google.IdentityToolkit
   def lookup_by_email(email), do: lookup(%{email: [email]})
 
-  @impl true
+  @impl ChurchAdmin.Google.IdentityToolkit
   def update(uid, attributes) do
     attributes = Keyword.validate!(attributes, [:custom_claims, :email_verified])
 
@@ -27,7 +27,7 @@ defmodule ChurchAdmin.Google.IdentityToolkit.Http do
     with {:ok, _response} <- post("accounts:update", body), do: :ok
   end
 
-  @impl true
+  @impl ChurchAdmin.Google.IdentityToolkit
   def delete(uid) do
     with {:ok, _response} <- post("accounts:delete", %{localId: uid}), do: :ok
   end

@@ -21,7 +21,7 @@ defmodule ChurchAdmin.Accounts.Changes.PermissionLevelsConsistent do
     "writeAllData" => ["readAllData"]
   }
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context) do
     held_before = if changeset.action_type == :create, do: [], else: names(changeset.data.uid)
 

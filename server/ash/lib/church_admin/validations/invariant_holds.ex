@@ -27,7 +27,7 @@ defmodule ChurchAdmin.Validations.InvariantHolds do
     violations: [type: {:fun, 1}, required: true]
   ]
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     case Spark.Options.validate(opts, @options_schema) do
       {:ok, opts} -> {:ok, opts}
@@ -35,7 +35,7 @@ defmodule ChurchAdmin.Validations.InvariantHolds do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, _context) do
     Ash.Changeset.after_action(changeset, fn changeset, record ->
       case check([record], opts) do
@@ -45,17 +45,17 @@ defmodule ChurchAdmin.Validations.InvariantHolds do
     end)
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def atomic(changeset, opts, context), do: {:ok, change(changeset, opts, context)}
 
-  @impl true
+  @impl Ash.Resource.Change
   def batch_callbacks?(%Ash.Query{}, _opts, _context), do: false
   def batch_callbacks?(_changesets, _opts, _context), do: true
 
-  @impl true
+  @impl Ash.Resource.Change
   def batch_change(changesets, _opts, _context), do: changesets
 
-  @impl true
+  @impl Ash.Resource.Change
   def after_batch(changesets_and_results, opts, _context) do
     case check(Enum.map(changesets_and_results, &elem(&1, 1)), opts) do
       :ok -> :ok

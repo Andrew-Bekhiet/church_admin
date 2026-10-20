@@ -106,9 +106,9 @@ defmodule ChurchAdmin.TestDomain.NotRetiredCheck do
   @moduledoc false
   use Ash.Policy.FilterCheck
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(_opts), do: "the probe is not retired"
 
-  @impl true
+  @impl Ash.Policy.FilterCheck
   def filter(_actor, _context, _opts), do: expr(name != "retired")
 end

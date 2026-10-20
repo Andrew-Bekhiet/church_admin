@@ -12,7 +12,7 @@ defmodule ChurchAdmin.People.Contact.Changes.MergeIntoSameOwnerPhone do
 
   require Ash.Query
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context) do
     Ash.Changeset.before_action(changeset, &maybe_merge/1)
   end

@@ -29,7 +29,7 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyFamilyContacts do
     family_id: [type: :atom, default: :family_id]
   ]
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     case Spark.Options.validate(opts, @options_schema) do
       {:ok, opts} -> {:ok, opts}
@@ -37,7 +37,7 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyFamilyContacts do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, context) do
     case Ash.Changeset.get_argument(changeset, opts[:argument]) do
       nil ->

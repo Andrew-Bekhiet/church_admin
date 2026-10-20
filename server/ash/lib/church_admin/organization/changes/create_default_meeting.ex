@@ -11,7 +11,7 @@ defmodule ChurchAdmin.Organization.Changes.CreateDefaultMeeting do
   alias ChurchAdmin.Attendance.Meeting
   alias ChurchAdmin.Changes.AfterActionFailure
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, context) do
     case Ash.Changeset.get_argument(changeset, :default_meeting) do
       nil ->

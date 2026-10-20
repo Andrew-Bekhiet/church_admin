@@ -13,7 +13,7 @@ defmodule ChurchAdmin.Realtime.Supervisor do
 
   def start_link(opts), do: Supervisor.start_link(__MODULE__, opts, name: __MODULE__)
 
-  @impl true
+  @impl Supervisor
   def init(_opts) do
     stream =
       if Application.fetch_env!(:church_admin, ChurchAdmin.Realtime)[:start_replication_stream?],
