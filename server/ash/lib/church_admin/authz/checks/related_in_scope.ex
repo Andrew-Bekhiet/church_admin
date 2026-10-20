@@ -19,10 +19,13 @@ defmodule ChurchAdmin.Authz.Checks.RelatedInScope do
 
   @impl true
   def filter(actor, _context, opts) do
-    case Scope.for_entity(Keyword.fetch!(opts, :entity), actor, Keyword.fetch!(opts, :access)) do
+    entity = Keyword.fetch!(opts, :entity)
+    access = Keyword.fetch!(opts, :access)
+
+    case Scope.for_entity(entity, actor, access) do
       false -> false
       true -> true
-      scope -> Ash.Query.Exists.new(List.wrap(Keyword.fetch!(opts, :path)), scope)
+      scope -> opts |> Keyword.fetch!(:path) |> List.wrap() |> Ash.Query.Exists.new(scope)
     end
   end
 end
