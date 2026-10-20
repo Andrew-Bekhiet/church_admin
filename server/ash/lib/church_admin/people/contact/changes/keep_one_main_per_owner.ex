@@ -29,7 +29,7 @@ defmodule ChurchAdmin.People.Contact.Changes.KeepOneMainPerOwner do
     others =
       case changeset.action_type do
         :create -> Owner.contacts(changeset)
-        :update -> Ash.Query.filter(Owner.contacts(changeset), id != ^changeset.data.id)
+        :update -> changeset |> Owner.contacts() |> Ash.Query.filter(id != ^changeset.data.id)
       end
 
     others

@@ -62,7 +62,8 @@ defmodule ChurchAdmin.People.Contacts do
     by_id = Map.new(current, &{&1.id, &1})
     by_key = Map.new(current, &{key_of.(&1), &1})
 
-    Enum.reduce_while(inputs, {:ok, []}, fn input, {:ok, matched} ->
+    inputs
+    |> Enum.reduce_while({:ok, []}, fn input, {:ok, matched} ->
       case input[:id] do
         nil ->
           {:cont, {:ok, [{input, by_key[key_of.(input)]} | matched]}}
