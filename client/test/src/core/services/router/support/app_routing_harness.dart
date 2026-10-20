@@ -273,6 +273,9 @@ class AppRoutingHarness {
   }
 
   Future<void> _tearDown() async {
+    imageCache
+      ..clear()
+      ..clearLiveImages();
     router.dispose();
     await localAuth.dispose();
     resetGlobalProviderContainer();
