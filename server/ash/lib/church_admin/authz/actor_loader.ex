@@ -103,9 +103,9 @@ defmodule ChurchAdmin.Authz.ActorLoader do
       manage_all_users?: write_all? and held?.("manageAllUsers"),
       record_all_attendance?: read_all? and held?.("recordAllAttendance"),
       record_all_servants_attendance?: read_all? and held?.("recordAllServantsAttendance"),
-      service_grants: approved_only.(service_grants(grants)),
-      group_grants: approved_only.(group_grants(grants)),
-      area_grants: approved_only.(area_grants(grants)),
+      service_grants: grants |> service_grants() |> approved_only.(),
+      group_grants: grants |> group_grants() |> approved_only.(),
+      area_grants: grants |> area_grants() |> approved_only.(),
       managed_user_uids: approved_only.(managed),
       visible_servant_uids: approved_only.(servants)
     }
