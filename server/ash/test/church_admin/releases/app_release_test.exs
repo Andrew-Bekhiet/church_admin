@@ -88,14 +88,18 @@ defmodule ChurchAdmin.Releases.AppReleaseTest do
   end
 
   test "an iOS release without a stored content type is an octet stream", %{world: world} do
-    stub_pages(%{nil => {[Map.delete(object("app-release-v1.0.0.ipa"), "contentType")], nil}})
+    stub_pages(%{
+      nil => {["app-release-v1.0.0.ipa" |> object() |> Map.delete("contentType")], nil}
+    })
 
     assert {:ok, link} = Releases.app_download_link(:ios, actor: actor(world, :approved_plain))
     assert %{params: %{content_type: "application/octet-stream"}} = claims!(link)
   end
 
   test "an Android release without a stored content type is an APK", %{world: world} do
-    stub_pages(%{nil => {[Map.delete(object("app-release-v1.0.0.apk"), "contentType")], nil}})
+    stub_pages(%{
+      nil => {["app-release-v1.0.0.apk" |> object() |> Map.delete("contentType")], nil}
+    })
 
     assert {:ok, link} =
              Releases.app_download_link(:android, actor: actor(world, :approved_plain))
@@ -106,24 +110,24 @@ defmodule ChurchAdmin.Releases.AppReleaseTest do
   test "no release of the platform is not found", %{world: world} do
     stub_pages(%{nil => {[object("app-release-v1.0.0.ipa")], nil}})
 
-    assert AccountsCase.codes(
-             Releases.app_download_link(:android, actor: actor(world, :approved_plain))
-           ) == ["not_found"]
+    assert :android
+           |> Releases.app_download_link(actor: actor(world, :approved_plain))
+           |> AccountsCase.codes() == ["not_found"]
   end
 
   test "an unknown platform is an invalid argument", %{world: world} do
-    assert AccountsCase.codes(
-             Releases.app_download_link(:windows, actor: actor(world, :approved_plain))
-           ) == ["invalid_argument"]
+    assert :windows
+           |> Releases.app_download_link(actor: actor(world, :approved_plain))
+           |> AccountsCase.codes() == ["invalid_argument"]
   end
 
   for kind <- [:unapproved, :unapproved_with_grants, :anonymous] do
     test "#{kind} is forbidden", %{world: world} do
       two_pages()
 
-      assert AccountsCase.codes(
-               Releases.app_download_link(:android, actor: actor(world, unquote(kind)))
-             ) ==
+      assert :android
+             |> Releases.app_download_link(actor: actor(world, unquote(kind)))
+             |> AccountsCase.codes() ==
                ["forbidden"]
 
       refute_received {:list, _path, _query}
