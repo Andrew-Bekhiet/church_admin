@@ -192,7 +192,7 @@ class Person extends ViewableWithIDAndImage
   @QueryableField.history(label: 'سجل التناول')
   final List<LastRecordedByInfo>? kodasHistory;
 
-  @QueryableField.history(label: 'سجل الحضور')
+  @QueryableField.history(label: 'سجل الحضور', type: AttendanceRecord)
   final List<LastRecordedByInfo>? attendanceHistory;
 
   @QueryableField.history(label: 'سجل الاعتراف')
