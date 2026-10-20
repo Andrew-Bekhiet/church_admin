@@ -16,7 +16,7 @@ defmodule ChurchAdminWeb.Graphql.MembershipNameSortsTest do
   end
 
   defp run(conn, document, variables, world) do
-    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users.read_all))
+    claims = world.users.read_all |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
 
     conn
     |> put_req_header("authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
@@ -65,7 +65,10 @@ defmodule ChurchAdminWeb.Graphql.MembershipNameSortsTest do
 
       assert length(names) >= 2, kind
       assert names == Enum.sort(names), kind
-      assert Enum.reject(Enum.map(descending, & &1[name_key]), &is_nil/1) == Enum.reverse(names)
+
+      assert descending |> Enum.map(& &1[name_key]) |> Enum.reject(&is_nil/1) ==
+               Enum.reverse(names)
+
       assert Enum.all?(ascending, &(&1[name_key] == (&1[linked] || %{})["name"])), kind
     end
   end

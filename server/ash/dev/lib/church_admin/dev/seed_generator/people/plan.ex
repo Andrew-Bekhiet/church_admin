@@ -37,7 +37,7 @@ defmodule ChurchAdmin.Dev.SeedGenerator.People.Plan do
     removable = for family <- families, removable_children?(family), do: family.index
     if removable == [], do: raise("seed member plan cannot shrink by #{excess} more persons")
 
-    dropping = MapSet.new(Enum.take(removable, excess))
+    dropping = removable |> Enum.take(excess) |> MapSet.new()
 
     families
     |> Enum.map(fn family ->

@@ -12,18 +12,21 @@ defmodule ChurchAdmin.Changes.AtomicAfterActionGuardTest do
 
   defp atomic_change_with_unguarded_after_action?(module) do
     behaviours =
-      module.module_info(:attributes) |> Keyword.get_values(:behaviour) |> List.flatten()
+      :attributes |> module.module_info() |> Keyword.get_values(:behaviour) |> List.flatten()
 
-    source = File.read!(to_string(module.__info__(:compile)[:source]))
+    source = module |> source_path() |> File.read!()
 
     Ash.Resource.Change in behaviours and module.atomic?() and source =~ "after_action" and
       not (source =~ "AfterActionFailure.roll_back")
   end
 
+  defp source_path(module), do: to_string(module.__info__(:compile)[:source])
+
   defp app_modules_under_lib do
-    Application.spec(:church_admin, :modules)
+    :church_admin
+    |> Application.spec(:modules)
     |> Enum.filter(&Code.ensure_loaded?/1)
-    |> Enum.filter(&String.starts_with?(to_string(&1.__info__(:compile)[:source]), @lib_dir))
+    |> Enum.filter(fn module -> module |> source_path() |> String.starts_with?(@lib_dir) end)
   end
 
   test "every atomic change in lib/ rolls back a failed after_action hook" do

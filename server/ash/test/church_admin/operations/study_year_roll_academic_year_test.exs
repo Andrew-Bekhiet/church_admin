@@ -105,9 +105,10 @@ defmodule ChurchAdmin.Operations.StudyYearRollAcademicYearTest do
 
   test "the scheduled roll of the next 11 September rolls after last year's success" do
     pupil = pupil_in_first_of_four_years()
-    Roll.run_when_due(nayrouz(@season))
+    @season |> nayrouz() |> Roll.run_when_due()
 
-    Roll.run_when_due(nayrouz(@season + 1))
+    next_season = @season + 1
+    next_season |> nayrouz() |> Roll.run_when_due()
 
     assert study_year_of(pupil) == 3
   end

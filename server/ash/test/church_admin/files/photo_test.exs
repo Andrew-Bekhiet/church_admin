@@ -89,14 +89,16 @@ defmodule ChurchAdmin.Files.PhotoTest do
     end
 
     test "a missing record is not found", %{world: world} do
-      assert AccountsCase.codes(request_upload(world, :read_write, :areas, Ash.UUID.generate())) ==
+      assert world
+             |> request_upload(:read_write, :areas, Ash.UUID.generate())
+             |> AccountsCase.codes() ==
                ["not_found"]
     end
 
     test "a deleted record is not found", %{world: world} do
-      assert AccountsCase.codes(
-               request_upload(world, :read_write, :persons, record(world, :deleted).id)
-             ) == ["not_found"]
+      assert world
+             |> request_upload(:read_write, :persons, record(world, :deleted).id)
+             |> AccountsCase.codes() == ["not_found"]
     end
 
     test "users photos live on the linked person and only their own user may upload", %{
@@ -107,13 +109,17 @@ defmodule ChurchAdmin.Files.PhotoTest do
       assert {:ok, link} = request_upload(world, :approved_plain, :users, own)
       assert %{params: %{subject: :users, id: ^own}} = claims!(link)
 
-      assert AccountsCase.codes(request_upload(world, :read_write, :users, own)) == ["not_found"]
+      assert world |> request_upload(:read_write, :users, own) |> AccountsCase.codes() == [
+               "not_found"
+             ]
     end
 
     test "a user without a linked person has no photo", %{world: world} do
       own = user_id(world, :read_write)
 
-      assert AccountsCase.codes(request_upload(world, :read_write, :users, own)) == ["not_found"]
+      assert world |> request_upload(:read_write, :users, own) |> AccountsCase.codes() == [
+               "not_found"
+             ]
     end
 
     test "the content type is optional and never reaches the token", %{world: world} do
@@ -181,13 +187,13 @@ defmodule ChurchAdmin.Files.PhotoTest do
     end
 
     test "a user without a linked person has no photo", %{world: world} do
-      assert AccountsCase.codes(
-               download_url(world, :service_open, :users, user_id(world, :read_write))
-             ) == ["not_found"]
+      assert world
+             |> download_url(:service_open, :users, user_id(world, :read_write))
+             |> AccountsCase.codes() == ["not_found"]
     end
 
     test "a missing public record is not found", %{world: world} do
-      assert AccountsCase.codes(download_url(world, :read_all, :areas, Ash.UUID.generate())) ==
+      assert world |> download_url(:read_all, :areas, Ash.UUID.generate()) |> AccountsCase.codes() ==
                ["not_found"]
     end
   end
@@ -203,8 +209,9 @@ defmodule ChurchAdmin.Files.PhotoTest do
 
       person = record(world, :m1)
 
-      Ash.update!(
-        Ash.get!(ChurchAdmin.People.Person, person.id, authorize?: false),
+      ChurchAdmin.People.Person
+      |> Ash.get!(person.id, authorize?: false)
+      |> Ash.update!(
         %{photo_updated_at: ~U[2026-10-19 08:30:15.123456Z], blurhash: "blurhash"},
         action: :record_photo,
         actor: Actor.system()
@@ -256,9 +263,9 @@ defmodule ChurchAdmin.Files.PhotoTest do
     end
 
     test "is refused without the edit right", %{world: world, person: person} do
-      assert AccountsCase.codes(
-               Files.delete_photo(:persons, person.id, actor: actor(world, :read_all))
-             ) == ["not_found"]
+      assert :persons
+             |> Files.delete_photo(person.id, actor: actor(world, :read_all))
+             |> AccountsCase.codes() == ["not_found"]
 
       refute_received {:gcs, _method, _path}
     end
@@ -266,9 +273,9 @@ defmodule ChurchAdmin.Files.PhotoTest do
     test "is refused for another person's photo", %{world: world} do
       servant = record(world, :servant)
 
-      assert AccountsCase.codes(
-               Files.delete_photo(:persons, servant.id, actor: actor(world, :read_write))
-             ) == ["photo/own-photo-only"]
+      assert :persons
+             |> Files.delete_photo(servant.id, actor: actor(world, :read_write))
+             |> AccountsCase.codes() == ["photo/own-photo-only"]
 
       refute_received {:gcs, _method, _path}
     end

@@ -96,7 +96,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollWorld do
   written meanwhile, as `{table, record_id, user_role, recorded_by}` tuples.
   """
   def with_edit_history_written(fun) do
-    before = MapSet.new(ids!("select audit_id from history.edit_history", []))
+    before = "select audit_id from history.edit_history" |> ids!([]) |> MapSet.new()
     result = fun.()
 
     %{rows: rows} =

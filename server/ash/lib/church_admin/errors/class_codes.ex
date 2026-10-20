@@ -14,7 +14,7 @@ defmodule ChurchAdmin.Errors.ClassCodes do
 
   @spec uncovered_error_modules() :: [module()]
   def uncovered_error_modules do
-    covered = MapSet.new(app_modules(:ash_graphql))
+    covered = :ash_graphql |> app_modules() |> MapSet.new()
 
     @error_apps
     |> Enum.flat_map(&app_modules/1)

@@ -95,17 +95,21 @@ defmodule ChurchAdmin.Authz.ActorLoaderTest do
     test "refuses a uid that belongs to another account" do
       user = Factory.user!(%{auth_id: "firebase-owner"})
 
-      assert ActorLoader.load_for_principal(principal("firebase-intruder", user.uid)) == :error
+      assert "firebase-intruder" |> principal(user.uid) |> ActorLoader.load_for_principal() ==
+               :error
     end
 
     test "refuses a uid whose user has no account linked" do
       user = Factory.user!(%{auth_id: nil})
 
-      assert ActorLoader.load_for_principal(principal("firebase-intruder", user.uid)) == :error
+      assert "firebase-intruder" |> principal(user.uid) |> ActorLoader.load_for_principal() ==
+               :error
     end
 
     test "refuses a uid no user has" do
-      assert ActorLoader.load_for_principal(principal("firebase-owner", Ash.UUID.generate())) ==
+      assert "firebase-owner"
+             |> principal(Ash.UUID.generate())
+             |> ActorLoader.load_for_principal() ==
                :error
     end
   end

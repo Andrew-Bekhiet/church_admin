@@ -27,16 +27,17 @@ defmodule ChurchAdmin.Google.Config do
   def credentials, do: Keyword.fetch!(settings(), :credentials)
 
   @spec adapter(api()) :: module()
-  def adapter(api), do: Keyword.fetch!(api_settings(api), :adapter)
+  def adapter(api), do: api |> api_settings() |> Keyword.fetch!(:adapter)
 
   @spec base_url(api()) :: String.t()
-  def base_url(api), do: Keyword.fetch!(api_settings(api), :base_url)
+  def base_url(api), do: api |> api_settings() |> Keyword.fetch!(:base_url)
 
   @spec req_options(api()) :: keyword()
-  def req_options(api), do: Keyword.get(api_settings(api), :req_options, [])
+  def req_options(api), do: api |> api_settings() |> Keyword.get(:req_options, [])
 
   @spec local_messaging_delivery() :: :log | :test_process
-  def local_messaging_delivery, do: Keyword.get(api_settings(:messaging), :local_delivery, :log)
+  def local_messaging_delivery,
+    do: :messaging |> api_settings() |> Keyword.get(:local_delivery, :log)
 
   @spec ensure_allowed_in!(atom()) :: :ok
   def ensure_allowed_in!(environment) do

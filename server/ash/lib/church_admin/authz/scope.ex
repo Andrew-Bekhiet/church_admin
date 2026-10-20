@@ -290,16 +290,20 @@ defmodule ChurchAdmin.Authz.Scope do
   end
 
   defp members_of_related_families(actor) do
-    any_of([
-      actor.service_grants
-      |> Enum.filter(& &1.write_related_families?)
-      |> persons_in_services(),
-      unless_empty(
-        for(grant <- actor.group_grants, grant.write_related_families?, do: grant.scope_id),
-        fn ids -> expr(exists(group_memberships, group_id in ^ids)) end
-      )
-    ])
-    |> when_present(fn member -> expr(exists(family_members, is_nil(deleted_at) and ^member)) end)
+    members_in_granted_scopes =
+      any_of([
+        actor.service_grants
+        |> Enum.filter(& &1.write_related_families?)
+        |> persons_in_services(),
+        unless_empty(
+          for(grant <- actor.group_grants, grant.write_related_families?, do: grant.scope_id),
+          fn ids -> expr(exists(group_memberships, group_id in ^ids)) end
+        )
+      ])
+
+    when_present(members_in_granted_scopes, fn member ->
+      expr(exists(family_members, is_nil(deleted_at) and ^member))
+    end)
   end
 
   defp class_of_restricted_grant(%Grant{} = grant, access) do

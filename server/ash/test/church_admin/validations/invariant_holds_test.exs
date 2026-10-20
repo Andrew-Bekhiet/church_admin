@@ -22,7 +22,7 @@ defmodule ChurchAdmin.Validations.InvariantHoldsTest do
 
   test "a write that keeps the invariant succeeds" do
     assert {:ok, thing} = create_guarded("fine")
-    assert Enum.map(Ash.read!(GuardedThing), & &1.id) == [thing.id]
+    assert GuardedThing |> Ash.read!() |> Enum.map(& &1.id) == [thing.id]
   end
 
   test "a write that breaks the invariant fails with the invariant's code and rolls back" do

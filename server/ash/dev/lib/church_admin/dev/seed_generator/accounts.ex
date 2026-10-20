@@ -109,11 +109,13 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Accounts do
     |> Enum.filter(& &1.pending?)
     |> Enum.with_index(1)
     |> Enum.map(fn {user, number} ->
+      padded_number = number |> Integer.to_string() |> String.pad_leading(4, "0")
+
       %{
         id: Ids.uuid("invitation", user.key),
         user_uid: user.uid,
         created_by: actor.uid,
-        code: "SEED-PEND-" <> String.pad_leading(Integer.to_string(number), 4, "0")
+        code: "SEED-PEND-" <> padded_number
       }
     end)
   end

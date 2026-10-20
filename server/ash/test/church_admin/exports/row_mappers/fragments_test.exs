@@ -28,13 +28,13 @@ defmodule ChurchAdmin.Exports.RowMappers.FragmentsTest do
     test "has no color for none, zero or opaque black" do
       for color <- [nil, 0, 0xFF000000] do
         assert {"color", nil} =
-                 Fragments.viewable(%{id: "i", name: "n", color: color}) |> List.last()
+                 %{id: "i", name: "n", color: color} |> Fragments.viewable() |> List.last()
       end
     end
 
     test "pads small colors to eight digits before dropping alpha" do
       assert {"color", "#0000ff"} =
-               Fragments.viewable(%{id: "i", name: "n", color: 0xFF}) |> List.last()
+               %{id: "i", name: "n", color: 0xFF} |> Fragments.viewable() |> List.last()
     end
   end
 

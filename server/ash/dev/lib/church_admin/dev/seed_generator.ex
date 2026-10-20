@@ -273,7 +273,7 @@ defmodule ChurchAdmin.Dev.SeedGenerator do
       %{
         season_year: season,
         status: status,
-        recorded_at: DateTime.new!(Date.new!(season, 9, 11), ~T[06:00:00], "Etc/UTC"),
+        recorded_at: season |> Date.new!(9, 11) |> DateTime.new!(~T[06:00:00], "Etc/UTC"),
         error: if(status == "failed", do: "study year roll blocked for season #{season}"),
         step_counts: if(status == "succeeded", do: {:json, %{"persons" => spec.persons}})
       }

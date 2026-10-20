@@ -10,7 +10,7 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
 
   @bucket "church-admin-test.appspot.com"
   @release_bucket "church-admin-test-releases"
-  @photo File.read!(Path.expand("../../support/fixtures/photo.jpg", __DIR__))
+  @photo "../../support/fixtures/photo.jpg" |> Path.expand(__DIR__) |> File.read!()
   @updated "2026-10-19T08:30:15.123Z"
   @blurhash_length 54
   @svg ~S|<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><script>alert(1)</script></svg>|
@@ -20,7 +20,7 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
   end
 
   defp as_user(conn, user) do
-    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
+    claims = user |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
     put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
   end
 

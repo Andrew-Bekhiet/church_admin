@@ -16,7 +16,9 @@ defmodule ChurchAdminWeb.Graphql.PeopleChildrenQueriesTest do
           conn
 
         kind ->
-          claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users[kind]))
+          claims =
+            world.users[kind] |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
+
           put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
       end
 
@@ -40,7 +42,7 @@ defmodule ChurchAdminWeb.Graphql.PeopleChildrenQueriesTest do
     response = run(conn, document)
 
     refute Map.has_key?(response, "errors")
-    assert Enum.all?(Map.values(response["data"]), &(&1 == %{"count" => 0}))
+    assert response["data"] |> Map.values() |> Enum.all?(&(&1 == %{"count" => 0}))
   end
 
   test "family relations page with their families and sort by their names",

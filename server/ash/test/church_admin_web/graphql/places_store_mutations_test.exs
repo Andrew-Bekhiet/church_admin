@@ -97,7 +97,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesStoreMutationsTest do
       editor = user(world, :read_write)
 
       for key <- ["areaId", "streetId", "districtId"] do
-        address = Map.put(address_input(world, :a1, :st1), key, Ash.UUID.generate())
+        address = world |> address_input(:a1, :st1) |> Map.put(key, Ash.UUID.generate())
 
         response =
           run(conn, @create_store, %{"input" => %{"name" => "s", "address" => address}}, editor)

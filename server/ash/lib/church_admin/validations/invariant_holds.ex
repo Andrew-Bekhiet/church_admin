@@ -66,7 +66,9 @@ defmodule ChurchAdmin.Validations.InvariantHolds do
   defp check([], _opts), do: :ok
 
   defp check(records, opts) do
-    if Ash.exists?(opts[:violations].(records), authorize?: false) do
+    violations_query = opts[:violations].(records)
+
+    if Ash.exists?(violations_query, authorize?: false) do
       {:error, DomainError.exception(code: opts[:code], fields: opts[:fields])}
     else
       :ok

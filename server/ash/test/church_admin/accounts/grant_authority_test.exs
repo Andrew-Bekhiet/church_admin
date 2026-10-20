@@ -129,7 +129,7 @@ defmodule ChurchAdmin.Accounts.GrantAuthorityTest do
       @expected expected
 
       test name do
-        assert GrantAuthority.scope_manageable?(actor(@grants), @scope) == @expected
+        assert @grants |> actor() |> GrantAuthority.scope_manageable?(@scope) == @expected
       end
     end
 

@@ -94,6 +94,6 @@ fixtures =
   end
 
 path = Path.expand("../test/support/fixtures/pgoutput.etf", __DIR__)
-File.mkdir_p!(Path.dirname(path))
+path |> Path.dirname() |> File.mkdir_p!()
 File.write!(path, :erlang.term_to_binary(Map.delete(fixtures, :cleanup)))
 IO.puts("wrote #{map_size(fixtures) - 1} scenarios to #{path}")

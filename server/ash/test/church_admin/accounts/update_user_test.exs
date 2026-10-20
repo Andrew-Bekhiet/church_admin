@@ -15,7 +15,7 @@ defmodule ChurchAdmin.Accounts.UpdateUserTest do
   end
 
   defp family_person!(attrs \\ %{}),
-    do: Factory.person!(Map.merge(%{family_id: Factory.family!().id}, attrs))
+    do: %{family_id: Factory.family!().id} |> Map.merge(attrs) |> Factory.person!()
 
   describe "name and email" do
     test "a user manager sets them, the email canonical", ctx do

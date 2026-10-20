@@ -21,7 +21,7 @@ if System.get_env("PHX_SERVER") do
 end
 
 config :church_admin, ChurchAdminWeb.Endpoint,
-  http: [port: String.to_integer(System.get_env("PORT", "4100"))]
+  http: [port: "PORT" |> System.get_env("4100") |> String.to_integer()]
 
 {default_auth_mode, default_firebase_project_id} =
   case config_env() do
@@ -70,7 +70,10 @@ if config_env() == :dev do
   config :church_admin, ChurchAdminWeb.Endpoint, http: [ip: http_bind_ip]
 
   config :church_admin, ChurchAdmin.Files,
-    buckets: storage_buckets.(System.get_env("FIREBASE_PROJECT_ID", "church-admin-local"))
+    buckets:
+      "FIREBASE_PROJECT_ID"
+      |> System.get_env("church-admin-local")
+      |> storage_buckets.()
 
   config :church_admin, ChurchAdmin.Google.Config,
     project_id: System.get_env("FIREBASE_PROJECT_ID", "church-admin-local"),

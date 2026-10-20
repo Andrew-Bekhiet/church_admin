@@ -195,7 +195,7 @@ defmodule ChurchAdmin.People.FamilyDbLogicTest do
 
     test "a user without a write-all grant cannot create a family without an address", ctx do
       assert {:error, code} =
-               FamilyWrites.create_family(area_editor(ctx.area), %{name: "family"})
+               ctx.area |> area_editor() |> FamilyWrites.create_family(%{name: "family"})
 
       assert code == Codes.forbidden()
     end
@@ -250,7 +250,7 @@ defmodule ChurchAdmin.People.FamilyDbLogicTest do
       Factory.grant!(user, :service, service.id, edit?: true, write_related_families?: true)
       editor = ActorLoader.load(user.uid)
       family = Factory.family!()
-      Factory.in_service!(Factory.person!(family_id: family.id), service)
+      [family_id: family.id] |> Factory.person!() |> Factory.in_service!(service)
 
       assert {:ok, id} =
                FamilyWrites.update_family(editor, family.id, %{
@@ -264,7 +264,9 @@ defmodule ChurchAdmin.People.FamilyDbLogicTest do
   describe "store insertion guard" do
     test "an area editor creates a store addressed in its area", ctx do
       assert {:ok, _id} =
-               FamilyWrites.create_store(area_editor(ctx.area), %{
+               ctx.area
+               |> area_editor()
+               |> FamilyWrites.create_store(%{
                  name: "store",
                  address: address(ctx.area, ctx.street)
                })
@@ -272,7 +274,9 @@ defmodule ChurchAdmin.People.FamilyDbLogicTest do
 
     test "an area editor cannot create a store addressed elsewhere", ctx do
       assert {:error, code} =
-               FamilyWrites.create_store(area_editor(ctx.area), %{
+               ctx.area
+               |> area_editor()
+               |> FamilyWrites.create_store(%{
                  name: "store",
                  address: address(ctx.other_area, ctx.other_street)
                })

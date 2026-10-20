@@ -8,7 +8,7 @@ defmodule ChurchAdminWeb.PhotoEmulatorTest do
 
   @moduletag :emulator
 
-  @photo File.read!(Path.expand("../../support/fixtures/photo.jpg", __DIR__))
+  @photo "../../support/fixtures/photo.jpg" |> Path.expand(__DIR__) |> File.read!()
 
   setup do
     emulators = Application.fetch_env!(:church_admin, :firebase_emulators)
