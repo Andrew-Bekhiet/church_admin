@@ -72,6 +72,7 @@ defmodule ChurchAdmin.Google.ConfigTest do
   end
 
   test "the test environment's own settings pass the guard" do
-    assert Config.check_allowed_in(Application.fetch_env!(:church_admin, Config), :test) == :ok
+    assert :church_admin |> Application.fetch_env!(Config) |> Config.check_allowed_in(:test) ==
+             :ok
   end
 end
