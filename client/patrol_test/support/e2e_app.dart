@@ -19,6 +19,7 @@ abstract final class E2eApp {
   );
   static const _maxUnlocksWhileLeaving = 3;
   static const _launchTimeout = Duration(minutes: 2);
+  static const _returnHomeTimeout = Duration(minutes: 1);
 
   static final Finder lockPasswordField = find.byKey(
     BiometricsAuthScreenKeys.passwordFieldKey,
@@ -146,11 +147,31 @@ abstract final class E2eApp {
     WidgetTester tester, {
     String password = E2eBackend.password,
   }) async {
-    final backButton = find.byType(BackButton);
-    var unlocks = 0;
+    await returnHome(tester, password: password);
+    await openDrawerItem(tester, HomeDrawerKeys.signOut);
+    await tester.waitFor(loginButton);
+  }
 
-    while (true) {
-      await tester.idle();
+  /// Pops one screen at a time, waiting for each popped screen to leave the
+  /// tree before looking again, so a screen still running its exit transition
+  /// is never mistaken for one that is still open.
+  static Future<void> returnHome(
+    WidgetTester tester, {
+    required String password,
+  }) async {
+    final backButton = find.byType(BackButton);
+    final deadline = DateTime.now().add(_returnHomeTimeout);
+    var unlocks = 0;
+    bool isHomeSettled() =>
+        homeScreen.hitTestable().evaluate().isNotEmpty &&
+        backButton.evaluate().isEmpty;
+
+    while (!isHomeSettled()) {
+      if (DateTime.now().isAfter(deadline)) {
+        throw tester.failureShowingScreen(
+          'Did not get back to the home screen in $_returnHomeTimeout',
+        );
+      }
       if (lockPasswordField.evaluate().isNotEmpty) {
         if (++unlocks > _maxUnlocksWhileLeaving) {
           throw TestFailure(
@@ -160,12 +181,17 @@ abstract final class E2eApp {
         await unlock(tester, password);
         continue;
       }
-      if (backButton.evaluate().isEmpty) break;
-      await tester.tapOn(backButton);
+      if (backButton.hitTestable().evaluate().firstOrNull
+          case final tappableBackButton?) {
+        final poppedBackButton = find.byElementPredicate(
+          (element) => identical(element, tappableBackButton),
+        );
+        await tester.tap(poppedBackButton);
+        await tester.waitForAbsent(poppedBackButton);
+        continue;
+      }
+      await tester.pump(E2eWidgetTester.pollInterval);
     }
-
-    await openDrawerItem(tester, HomeDrawerKeys.signOut);
-    await tester.waitFor(loginButton);
   }
 
   /// Unmounts the app inside the test body so errors thrown while it tears

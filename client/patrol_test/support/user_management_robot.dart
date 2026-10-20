@@ -122,6 +122,7 @@ class UserManagementRobot {
     final code = await tester.waitFor(
       find.byKey(UserInvitationCodeTileKeys.code),
     );
+    await tester.waitForAbsent(_saveButton);
 
     return tester.widget<Text>(code).data ?? '';
   }

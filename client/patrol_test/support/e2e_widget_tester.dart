@@ -6,7 +6,7 @@ import 'package:material_ui/material_ui.dart';
 /// a progress indicator or a live query keeps scheduling frames.
 extension E2eWidgetTester on WidgetTester {
   static const Duration defaultTimeout = Duration(seconds: 30);
-  static const Duration _pollInterval = Duration(milliseconds: 100);
+  static const Duration pollInterval = Duration(milliseconds: 100);
 
   Future<Finder> waitFor(
     Finder finder, {
@@ -32,40 +32,34 @@ extension E2eWidgetTester on WidgetTester {
 
   Future<void> tapOn(Finder finder, {Duration timeout = defaultTimeout}) async {
     final deadline = DateTime.now().add(timeout);
-    final tappable = finder.first.hitTestable();
+    final target = finder.first;
+    final tappable = target.hitTestable();
+    await waitFor(finder, timeout: timeout);
 
-    while (true) {
-      final remaining = deadline.difference(DateTime.now());
-      await waitFor(
-        finder,
-        timeout: remaining.isNegative ? Duration.zero : remaining,
-      );
-      if (tappable.evaluate().isNotEmpty) break;
+    while (tappable.evaluate().isEmpty) {
+      if (finder.evaluate().isEmpty) {
+        throw failureShowingScreen(
+          '${finder.toString(describeSelf: true)} left the tree before it '
+          'became tappable; wait for its screen to settle before tapping',
+        );
+      }
       if (DateTime.now().isAfter(deadline)) {
-        throw _timedOut(
+        throw failureShowingScreen(
           'Timed out after $timeout waiting to tap ${finder.toString(describeSelf: true)}',
         );
       }
-      await ensureVisible(finder.first);
-      await pump(_pollInterval);
+      await ensureVisible(target);
+      await pump(pollInterval);
     }
 
     await tap(tappable);
-    await pump(_pollInterval);
+    await pump(pollInterval);
   }
 
   Future<void> typeInto(Finder finder, String text) async {
     await tapOn(finder);
     await enterText(finder.first, text);
-    await pump(_pollInterval);
-  }
-
-  Future<void> idle([Duration duration = const Duration(seconds: 1)]) async {
-    final deadline = DateTime.now().add(duration);
-
-    while (DateTime.now().isBefore(deadline)) {
-      await pump(_pollInterval);
-    }
+    await pump(pollInterval);
   }
 
   Future<void> _pollUntil(
@@ -77,13 +71,15 @@ extension E2eWidgetTester on WidgetTester {
 
     while (!isDone()) {
       if (DateTime.now().isAfter(deadline)) {
-        throw _timedOut('Timed out after $timeout waiting for $waitingFor');
+        throw failureShowingScreen(
+          'Timed out after $timeout waiting for $waitingFor',
+        );
       }
-      await pump(_pollInterval);
+      await pump(pollInterval);
     }
   }
 
-  TestFailure _timedOut(String reason) {
+  TestFailure failureShowingScreen(String reason) {
     final onScreen = find
         .byType(Text)
         .evaluate()
