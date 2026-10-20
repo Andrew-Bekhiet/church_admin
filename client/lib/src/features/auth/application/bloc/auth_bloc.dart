@@ -357,10 +357,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     ApplyInvitationCode event,
     Emitter<AuthState> emit,
   ) async {
-    final previousState = state;
-
     try {
-      emit(AuthLoading(previousState: previousState));
+      emit(AuthLoading(previousState: state));
 
       await _functionsService.applyInvitationCode(event.code);
       await _authRepository.reload();
@@ -370,7 +368,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         AuthExceptionState(
           exception: e,
           stackTrace: stackTrace,
-          previousState: previousState,
+          previousState: state.unwrapped,
         ),
       );
     }
