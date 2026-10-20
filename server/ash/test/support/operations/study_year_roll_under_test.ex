@@ -28,10 +28,12 @@ defmodule ChurchAdmin.Operations.StudyYearRollUnderTest do
   @spec record_missed(Date.t()) :: :ok
   def record_missed(%Date{} = today), do: run_action!(:record_missed, %{today: today})
 
-  @spec run(integer()) ::
+  @spec run(integer(), Date.t() | nil) ::
           {:ok, step_counts()} | {:ok, :skipped_already_rolled} | {:error, failure()}
-  def run(season) when is_integer(season) do
-    case run_action(:run, %{season: season}) do
+  def run(season, today \\ nil) when is_integer(season) do
+    today = today || Date.new!(season, 9, 11)
+
+    case run_action(:run, %{season: season, today: today}) do
       {:ok, result} ->
         {:ok, result}
 
