@@ -9,14 +9,15 @@ defmodule ChurchAdmin.Authz.Scope do
 
   Every expression is NULL-free (nullable columns are guarded), so it can be
   negated and returned as a non-null boolean. Data-dependent sets stay
-  `exists` subqueries; soft-deleted rows still count towards a scope.
+  `exists` subqueries; soft-deleted rows still count towards a scope, except
+  persons, which reach families, classes and groups only while live.
   """
 
   import Ash.Expr
   import ChurchAdmin.Authz.Scope.Combine
 
   alias ChurchAdmin.Accounts.User
-  alias ChurchAdmin.Authz.{Actor, Grant}
+  alias ChurchAdmin.Authz.{Actor, Grant, ServiceGrantCoverage}
   alias ChurchAdmin.Organization.{Class, Group, Service}
   alias ChurchAdmin.People.{Family, Person}
   alias ChurchAdmin.Places.{Area, Store, Street}
@@ -137,7 +138,7 @@ defmodule ChurchAdmin.Authz.Scope do
           do:
             actor.area_grants
             |> Grant.scope_ids()
-            |> persons_in_areas()
+            |> live_persons_in_areas()
             |> when_present(fn in_areas ->
               expr(exists(group_memberships, exists(person, ^in_areas)))
             end),
@@ -280,6 +281,12 @@ defmodule ChurchAdmin.Authz.Scope do
     end)
   end
 
+  defp live_persons_in_areas(area_ids) do
+    area_ids
+    |> persons_in_areas()
+    |> when_present(fn in_areas -> expr(is_nil(deleted_at) and ^in_areas) end)
+  end
+
   defp members_of_related_families(actor) do
     any_of([
       actor.service_grants
@@ -295,18 +302,9 @@ defmodule ChurchAdmin.Authz.Scope do
 
   defp class_of_restricted_grant(%Grant{} = grant, access) do
     all_of([
-      expr(service_id == ^grant.scope_id),
-      if(is_nil(grant.gender),
-        do: true,
-        else: expr(is_nil(service_gender) or service_gender == ^grant.gender)
-      ),
-      if(is_nil(grant.study_year),
-        do: true,
-        else:
-          expr(
-            service_study_year <= ^grant.study_year and
-              service_study_year_to >= ^grant.study_year
-          )
+      ServiceGrantCoverage.covers_class(
+        %{service: grant.scope_id, study_year: grant.study_year, gender: grant.gender},
+        ServiceGrantCoverage.class_row()
       ),
       if(access == :read, do: true, else: grant_covers_class(grant))
     ])
@@ -331,7 +329,7 @@ defmodule ChurchAdmin.Authz.Scope do
 
   defp classes_of_area_persons(area_ids) do
     area_ids
-    |> persons_in_areas()
+    |> live_persons_in_areas()
     |> when_present(fn in_areas ->
       expr(exists(persons_of_matching_year_and_gender, ^in_areas))
     end)

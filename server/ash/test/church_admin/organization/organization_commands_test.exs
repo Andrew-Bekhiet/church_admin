@@ -82,11 +82,11 @@ defmodule ChurchAdmin.Organization.OrganizationCommandsTest do
                ["service/name-taken"]
     end
 
-    test "only writeAllData holders create services, approved or not", ctx do
+    test "only approved writeAllData holders create services", ctx do
       assert allowed?(Organization.create_service(%{name: "By writer"}, actor: ctx.writer))
 
       unapproved = actor_with(["writeAllData"])
-      assert allowed?(Organization.create_service(%{name: "By unapproved"}, actor: unapproved))
+      assert forbidden?(Organization.create_service(%{name: "By unapproved"}, actor: unapproved))
 
       approved = actor_with(["approved", "readAllData"])
       assert forbidden?(Organization.create_service(%{name: "By reader"}, actor: approved))
@@ -207,24 +207,37 @@ defmodule ChurchAdmin.Organization.OrganizationCommandsTest do
       {:ok, service: service, class: Factory.class!(service, service_study_year: 1)}
     end
 
-    test "any class is deleted by a bare deleteData holder (faithful to Hasura)", ctx do
+    test "deleting needs deleteData and edit rights on the class's service", ctx do
       bare_deleter = actor_with(["deleteData"])
+      approved_deleter = actor_with(["approved", "deleteData"])
+      editor = actor_with(["approved"], [{:service, ctx.service.id, edit?: true}])
+      writer_without_delete = actor_with(["approved", "readAllData", "writeAllData"])
 
-      assert allowed?(Organization.delete_class(ctx.class, actor: bare_deleter))
+      deleting_reader =
+        actor_with(["approved", "deleteData"], [{:service, ctx.service.id, []}])
+
+      deleting_elsewhere =
+        actor_with(["approved", "deleteData"], [{:service, Factory.service!().id, edit?: true}])
+
+      deleting_editor =
+        actor_with(["approved", "deleteData"], [{:service, ctx.service.id, edit?: true}])
+
+      for actor <- [
+            bare_deleter,
+            approved_deleter,
+            editor,
+            writer_without_delete,
+            deleting_reader,
+            deleting_elsewhere
+          ] do
+        assert forbidden?(Organization.delete_class(ctx.class, actor: actor))
+      end
+
+      assert allowed?(Organization.delete_class(ctx.class, actor: deleting_editor))
     end
 
-    test "writeAllData holders and editors of the service delete it, readers do not", ctx do
-      editor = actor_with(["approved"], [{:service, ctx.service.id, edit?: true}])
-      reader = actor_with(["approved"], [{:service, ctx.service.id, []}])
-
-      assert forbidden?(Organization.delete_class(ctx.class, actor: reader))
-      assert allowed?(Organization.delete_class(ctx.class, actor: editor))
-
-      assert allowed?(
-               Organization.delete_class(Factory.class!(ctx.service, service_study_year: 1),
-                 actor: ctx.writer
-               )
-             )
+    test "a writeAllData holder with deleteData deletes any class", ctx do
+      assert allowed?(Organization.delete_class(ctx.class, actor: ctx.writer))
     end
   end
 
@@ -255,14 +268,21 @@ defmodule ChurchAdmin.Organization.OrganizationCommandsTest do
                )
     end
 
-    test "a service editor cannot create a group (faithful to Hasura)", ctx do
+    test "editors of the group's service create groups in it, readers and other services' editors do not",
+         ctx do
+      attrs = %{name: "Group", service_id: ctx.service.id}
       editor = actor_with(["approved"], [{:service, ctx.service.id, edit?: true}])
 
-      assert forbidden?(
-               Organization.create_group(%{name: "Group", service_id: ctx.service.id},
-                 actor: editor
-               )
-             )
+      year_editor =
+        actor_with(["approved"], [{:service, ctx.service.id, edit?: true, study_year: 1}])
+
+      reader = actor_with(["approved"], [{:service, ctx.service.id, []}])
+      elsewhere = actor_with(["approved"], [{:service, Factory.service!().id, edit?: true}])
+
+      assert allowed?(Organization.create_group(attrs, actor: editor))
+      assert allowed?(Organization.create_group(attrs, actor: year_editor))
+      assert forbidden?(Organization.create_group(attrs, actor: reader))
+      assert forbidden?(Organization.create_group(attrs, actor: elsewhere))
     end
   end
 

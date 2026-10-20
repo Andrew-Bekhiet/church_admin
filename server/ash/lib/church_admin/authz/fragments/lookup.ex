@@ -8,7 +8,7 @@ defmodule ChurchAdmin.Authz.Fragments.Lookup do
 
   use Spark.Dsl.Fragment, of: Ash.Resource, authorizers: [Ash.Policy.Authorizer]
 
-  alias ChurchAdmin.Authz.Checks.{HasPermission, Onboarded}
+  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, Onboarded}
 
   policies do
     policy action_type(:read) do
@@ -16,7 +16,7 @@ defmodule ChurchAdmin.Authz.Fragments.Lookup do
     end
 
     policy action_type([:create, :update, :destroy]) do
-      authorize_if {HasPermission, name: "approved"}
+      authorize_if {ApprovedWithPermission, name: "approved"}
     end
   end
 end
