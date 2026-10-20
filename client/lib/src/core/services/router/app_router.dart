@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/router/report_route_changes_immediately.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -89,4 +90,4 @@ final GoRouter $appRouter = GoRouter(
       body: ErrorWidget.builder(FlutterErrorDetails(exception: state.error!)),
     );
   },
-);
+).reportingRouteChangesImmediately();

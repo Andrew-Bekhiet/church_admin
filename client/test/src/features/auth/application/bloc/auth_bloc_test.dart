@@ -574,6 +574,41 @@ void main() {
           ),
         ],
       );
+
+      blocTest<AuthBloc, AuthState>(
+        'an invitee whose account is claimed by email while their code fails '
+        'stays approved',
+        setUp: () async {
+          await AuthStorage.I.clearAll();
+          await AuthStorage.I.writeAuthDataToCache(unclaimedAuthUser);
+
+          final mockFunctions = globalProviderContainer.read(
+            functionsServiceProvider,
+          ) as MockFunctionsService;
+          when(mockFunctions.applyInvitationCode('INVITE-CODE')).thenAnswer((
+            _,
+          ) async {
+            userChangesController.add(initialAuthUser);
+            await Future<void>.delayed(Duration.zero);
+
+            throw StateError('invitation already claimed');
+          });
+        },
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future<void>.delayed(Duration.zero);
+          bloc.add(const ApplyInvitationCode('INVITE-CODE'));
+        },
+        wait: const Duration(milliseconds: 100),
+        verify: (bloc) => expect(
+          bloc.state.unwrapped,
+          isA<AuthAuthenticated>().having(
+            (state) => state.userData,
+            'userData',
+            initialUserData,
+          ),
+        ),
+      );
     });
 
     group('loaded =>', () {

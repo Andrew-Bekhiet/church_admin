@@ -91,9 +91,13 @@ class UserManagementRobot {
     bool managesUsers = false,
   }) async {
     final scope = find.byKey(EditUserAdminScopeWidgetKeys.scope(serviceId));
+    final servicesTabLabel = find.descendant(
+      of: find.byKey(EditAdminOnDataWidgetKeys.servicesTab),
+      matching: find.byType(Text),
+    );
 
     await tester.tapOn(find.byKey(EditAdminOnDataWidgetKeys.addScopeButton));
-    await tester.tapOn(find.byKey(EditAdminOnDataWidgetKeys.servicesTab));
+    await tester.tapOn(servicesTabLabel);
     await tester.tapOn(tester.viewableObject(serviceId));
     await tester.tapOn(
       find.byKey(EditAdminOnDataWidgetKeys.confirmScopesButton),
@@ -118,6 +122,7 @@ class UserManagementRobot {
     final code = await tester.waitFor(
       find.byKey(UserInvitationCodeTileKeys.code),
     );
+    await tester.waitForAbsent(_saveButton);
 
     return tester.widget<Text>(code).data ?? '';
   }
@@ -162,5 +167,17 @@ class UserManagementRobot {
     await pickPerson(personId: personId, personName: personName);
     await tester.tapOn(_saveButton);
     await tester.waitForAbsent(_saveButton);
+    await tester.waitFor(
+      find.byWidgetPredicate(
+        (widget) => switch (widget) {
+          ViewableObjectWidget(
+            key: ViewUserScreenKeys.linkedPerson,
+            object: ViewableWithID(:final id),
+          ) =>
+            id == personId,
+          _ => false,
+        },
+      ),
+    );
   }
 }
