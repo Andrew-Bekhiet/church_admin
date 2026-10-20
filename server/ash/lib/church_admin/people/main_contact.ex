@@ -3,6 +3,7 @@ defmodule ChurchAdmin.People.MainContact do
     domain: ChurchAdmin.People,
     data_layer: AshPostgres.DataLayer,
     authorizers: [Ash.Policy.Authorizer],
+    fragments: [ChurchAdmin.Archival.HideRecordsOfArchivedPerson],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
