@@ -123,4 +123,9 @@ defmodule ChurchAdmin.Authz.OnboardingPolicyTest do
     refute Ash.can?({Export, :export_data}, never_onboarded())
     assert Ash.can?({Export, :export_data}, actor(world, :read_all))
   end
+
+  test "an onboarded, unapproved account cannot export", %{world: world} do
+    refute Ash.can?({Export, :export_data}, actor(world, :unapproved))
+    refute Ash.can?({Export, :export_data}, actor(world, :unapproved_with_grants))
+  end
 end
