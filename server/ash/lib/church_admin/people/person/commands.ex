@@ -11,7 +11,7 @@ defmodule ChurchAdmin.People.Person.Commands do
 
   alias ChurchAdmin.Activity.Changes.RecordLastVisit
   alias ChurchAdmin.Authz.Changes.RememberCreated
-  alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, RelatedInScope}
+  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, InScope, RelatedInScope}
   alias ChurchAdmin.Catalog.{Hobby, Tag}
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.Errors.Codes
@@ -169,7 +169,7 @@ defmodule ChurchAdmin.People.Person.Commands do
     end
 
     policy action(:destroy) do
-      authorize_if {HasPermission, name: "deleteData"}
+      authorize_if {ApprovedWithPermission, name: "deleteData"}
     end
 
     policy action(:destroy) do

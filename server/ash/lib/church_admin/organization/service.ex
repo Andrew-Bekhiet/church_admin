@@ -13,7 +13,7 @@ defmodule ChurchAdmin.Organization.Service do
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Attendance.{Meeting, MeetingInput}
-  alias ChurchAdmin.Authz.Checks.{HasPermission, Onboarded, System}
+  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, Onboarded, System}
   alias ChurchAdmin.Catalog.StudyYear
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.Errors.{Codes, ConstraintCodes}
@@ -179,15 +179,15 @@ defmodule ChurchAdmin.Organization.Service do
     end
 
     policy action(:create_service) do
-      authorize_if {HasPermission, name: "writeAllData"}
+      authorize_if {ApprovedWithPermission, name: "writeAllData"}
     end
 
     policy action(:destroy) do
-      authorize_if {HasPermission, name: "writeAllData"}
+      authorize_if {ApprovedWithPermission, name: "writeAllData"}
     end
 
     policy action(:destroy) do
-      authorize_if {HasPermission, name: "deleteData"}
+      authorize_if {ApprovedWithPermission, name: "deleteData"}
     end
 
     policy action(:hard_destroy) do

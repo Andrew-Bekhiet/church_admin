@@ -1,6 +1,7 @@
 defmodule ChurchAdmin.Authz.Organization.ClassPolicyTest do
   use ChurchAdmin.AuthzCase, async: false
 
+  alias ChurchAdmin.Factory
   alias ChurchAdmin.Organization.Class
 
   setup %{world: world}, do: {:ok, world: ChurchAdmin.OrgWorld.extend(world)}
@@ -13,8 +14,8 @@ defmodule ChurchAdmin.Authz.Organization.ClassPolicyTest do
   # year falls inside the class's range and genders are compatible; editing
   # needs the grant to cover the class (a female grant covers no class with an
   # unset gender, a year-1 grant only classes spanning year 1 alone).
-  # An area reaches classes through the area's persons by year and gender,
-  # whatever service the class belongs to.
+  # An area reaches classes through the area's live persons by year and
+  # gender, whatever service the class belongs to.
   @expectations [
     {:anonymous, [], []},
     {:unapproved, [], []},
@@ -34,8 +35,8 @@ defmodule ChurchAdmin.Authz.Organization.ClassPolicyTest do
     {:class_admin, [:c_y1, :c_y12_f], []},
     {:group_read, [], []},
     {:group_edit, [], []},
-    {:area_read, [:c_y1, :c_y12_f, :c_s2], []},
-    {:area_edit, [:c_y1, :c_y12_f, :c_s2], []},
+    {:area_read, [:c_y1, :c_s2], []},
+    {:area_edit, [:c_y1, :c_s2], []},
     {:servant, @of_s1, []}
   ]
 
@@ -50,26 +51,15 @@ defmodule ChurchAdmin.Authz.Organization.ClassPolicyTest do
     end
   end
 
-  test "an area reads c_y12_f only through the soft-deleted person it holds (Q8)",
-       %{world: world} do
-    in_area = world.records.a1.id
+  test "a soft-deleted person of an area reaches no class", %{world: world} do
+    refute :c_y12_f in visible(world, Class, :area_read)
 
-    live_area_matches =
-      Class
-      |> Ash.Query.filter(
-        exists(
-          persons_of_matching_year_and_gender,
-          is_nil(deleted_at) and
-            (exists(address, area_id == ^in_area) or exists(store_address, area_id == ^in_area))
-        )
-      )
-      |> Ash.read!(authorize?: false, page: false)
+    Factory.person!(family_id: world.records.f_area.id, gender: false, study_year_id: 2)
 
-    assert names(live_area_matches, world) == MapSet.new([:c_y1, :c_s2, :c_deleted])
     assert :c_y12_f in visible(world, Class, :area_read)
   end
 
-  test "a class with no gender has no admins, one with a gender is matched exactly",
+  test "the female year-1 grant makes its holder an admin of the class it covers and of a class with no gender",
        %{world: world} do
     classes =
       Class
@@ -79,7 +69,7 @@ defmodule ChurchAdmin.Authz.Organization.ClassPolicyTest do
 
     admins = Map.new(classes, &{&1.id, user_names(&1.admins, world)})
 
-    assert admins[world.records.c_y1.id] == MapSet.new()
-    assert admins[world.records.c_y12_f.id] == MapSet.new([:class_admin])
+    assert :class_admin in admins[world.records.c_y1.id]
+    assert :class_admin in admins[world.records.c_y12_f.id]
   end
 end

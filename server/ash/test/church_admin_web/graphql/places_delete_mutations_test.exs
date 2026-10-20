@@ -86,11 +86,11 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
       refute deleted?(Area, id)
     end
 
-    test "does not ask for approval", ctx do
+    test "an unapproved holder of writeAllData and deleteData cannot delete", ctx do
       id = ctx.world.records.a2.id
 
-      assert %{"data" => %{"deleteArea" => %{"result" => %{"id" => ^id}}}} =
-               run(ctx.conn, @delete_area, id, ctx.unapproved_deleter)
+      assert run(ctx.conn, @delete_area, id, ctx.unapproved_deleter) |> code() == "forbidden"
+      refute deleted?(Area, id)
     end
 
     test "an area editor without writeAllData cannot delete", ctx do

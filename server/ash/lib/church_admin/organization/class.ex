@@ -13,7 +13,8 @@ defmodule ChurchAdmin.Organization.Class do
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Attendance.Meeting
-  alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, RelatedInScope, System}
+  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, InScope, RelatedInScope, System}
+  alias ChurchAdmin.Authz.ServiceGrantCoverage
   alias ChurchAdmin.Catalog.StudyYear
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.History.Changes.RecordEdit
@@ -133,13 +134,15 @@ defmodule ChurchAdmin.Organization.Class do
     end
 
     policy action(:create_class) do
-      authorize_if {HasPermission, name: "writeAllData"}
+      authorize_if {ApprovedWithPermission, name: "writeAllData"}
       authorize_if {RelatedInScope, path: :service, entity: :service, access: :edit}
     end
 
     policy action(:destroy) do
-      authorize_if {HasPermission, name: "writeAllData"}
-      authorize_if {HasPermission, name: "deleteData"}
+      authorize_if {ApprovedWithPermission, name: "deleteData"}
+    end
+
+    policy action(:destroy) do
       authorize_if {RelatedInScope, path: :service, entity: :service, access: :edit}
     end
 
@@ -230,9 +233,12 @@ defmodule ChurchAdmin.Organization.Class do
         expr(
           exists(
             scope_grants,
-            admin_on_service == parent(parent(service_id)) and
-              service_study_year == parent(parent(service_study_year)) and
-              service_gender == parent(parent(service_gender))
+            ^ServiceGrantCoverage.covers_class(
+              ServiceGrantCoverage.grant_row(),
+              ServiceGrantCoverage.through_parent(
+                ServiceGrantCoverage.through_parent(ServiceGrantCoverage.class_row())
+              )
+            )
           )
         )
   end

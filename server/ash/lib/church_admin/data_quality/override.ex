@@ -8,8 +8,7 @@ defmodule ChurchAdmin.DataQuality.Override do
   alias ChurchAdmin.Accounts.User
   alias ChurchAdmin.Authz.Checks.{RelatedInScope, System}
   alias ChurchAdmin.Changes.StampActor
-  alias ChurchAdmin.DataQuality.Checks.OwnOrEditablePersonInFamily
-  alias ChurchAdmin.DataQuality.Validations.ActorIsNotAFamilyMember
+  alias ChurchAdmin.DataQuality.Checks.EditablePersonInFamily
   alias ChurchAdmin.People.Family
   alias ChurchAdmin.Validations.ReferencesVisible
 
@@ -55,8 +54,7 @@ defmodule ChurchAdmin.DataQuality.Override do
       upsert? true
       upsert_fields [:is_complete, :updated_by]
 
-      validate {ReferencesVisible, attribute: :family_id, resource: Family},
-        where: ActorIsNotAFamilyMember
+      validate {ReferencesVisible, attribute: :family_id, resource: Family}
 
       change {StampActor, attribute: :updated_by}
     end
@@ -77,7 +75,7 @@ defmodule ChurchAdmin.DataQuality.Override do
 
     policy action_type([:create, :destroy]) do
       authorize_if {RelatedInScope, path: :family, entity: :family, access: :edit}
-      authorize_if OwnOrEditablePersonInFamily
+      authorize_if EditablePersonInFamily
     end
   end
 

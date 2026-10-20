@@ -58,20 +58,22 @@ defmodule ChurchAdminWeb.Graphql.PlacesAreaMutationsTest do
     test "answers forbidden to everyone without writeAllData", %{conn: conn, world: world} do
       for kind <- [:area_edit, :approved_plain, :read_all, :unapproved] do
         response = run(conn, @create_area, %{"input" => %{"name" => "x"}}, user(world, kind))
-        assert code(response) == "forbidden", "#{kind} created an area"
+
+        assert %{"errors" => [%{"extensions" => %{"code" => "forbidden"}}]} = response,
+               "#{kind} created an area"
       end
 
       response = run(conn, @create_area, %{"input" => %{"name" => "x"}}, nil)
-      assert code(response) == "forbidden"
+      assert %{"errors" => [%{"extensions" => %{"code" => "forbidden"}}]} = response
     end
 
-    test "does not ask for approval: an unapproved writeAllData holder creates", %{
+    test "an unapproved writeAllData holder cannot create", %{
       conn: conn,
       unapproved_writer: writer
     } do
       response = run(conn, @create_area, %{"input" => %{"name" => "x"}}, writer)
 
-      assert %{"data" => %{"createArea" => %{"result" => %{"id" => _id}}}} = response
+      assert %{"errors" => [%{"extensions" => %{"code" => "forbidden"}}]} = response
     end
 
     test "takes no photo or audit columns", %{conn: conn, world: world} do
@@ -143,7 +145,8 @@ defmodule ChurchAdminWeb.Graphql.PlacesAreaMutationsTest do
             user(world, kind)
           )
 
-        assert code(response) == "forbidden", "#{kind} updated the area"
+        assert %{"errors" => [%{"extensions" => %{"code" => "forbidden"}}]} = response,
+               "#{kind} updated the area"
       end
     end
 

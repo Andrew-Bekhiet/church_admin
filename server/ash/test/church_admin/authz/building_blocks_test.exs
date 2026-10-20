@@ -2,7 +2,7 @@ defmodule ChurchAdmin.Authz.BuildingBlocksTest do
   use ChurchAdmin.AuthzCase, async: false
 
   alias ChurchAdmin.Authz.Actor
-  alias ChurchAdmin.Authz.Checks.{CreatedInCommand, HasPermission}
+  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, CreatedInCommand}
   alias ChurchAdmin.TestDomain.{AuthzProbe, LookupProbe, PersonChildProbe}
 
   setup do
@@ -94,13 +94,16 @@ defmodule ChurchAdmin.Authz.BuildingBlocksTest do
     end
   end
 
-  describe "HasPermission" do
-    test "matches a raw permission whether or not the user is approved" do
+  describe "ApprovedWithPermission" do
+    test "matches an approved user holding the permission, never an unapproved holder" do
+      holds = MapSet.new(["approved", "writeAllData"])
+      approved = %Actor{uid: Ash.UUID.generate(), approved?: true, permissions: holds}
       unapproved = %Actor{uid: Ash.UUID.generate(), permissions: MapSet.new(["writeAllData"])}
 
-      assert HasPermission.match?(unapproved, %{}, name: "writeAllData")
-      refute HasPermission.match?(unapproved, %{}, name: "deleteData")
-      refute HasPermission.match?(nil, %{}, name: "writeAllData")
+      assert ApprovedWithPermission.match?(approved, %{}, name: "writeAllData")
+      refute ApprovedWithPermission.match?(approved, %{}, name: "deleteData")
+      refute ApprovedWithPermission.match?(unapproved, %{}, name: "writeAllData")
+      refute ApprovedWithPermission.match?(nil, %{}, name: "writeAllData")
     end
   end
 
@@ -133,7 +136,12 @@ defmodule ChurchAdmin.Authz.BuildingBlocksTest do
   describe "the Lookup fragment" do
     test "lets any onboarded actor read and only a holder of approved write" do
       probe = Ash.Seed.seed!(LookupProbe, %{name: "x"})
-      approved = %Actor{uid: Ash.UUID.generate(), permissions: MapSet.new(["approved"])}
+
+      approved = %Actor{
+        uid: Ash.UUID.generate(),
+        approved?: true,
+        permissions: MapSet.new(["approved"])
+      }
 
       assert [_probe] = Ash.read!(LookupProbe, actor: %Actor{uid: Ash.UUID.generate()})
       assert [] = Ash.read!(LookupProbe, actor: %Actor{})
