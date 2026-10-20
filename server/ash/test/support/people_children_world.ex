@@ -18,7 +18,7 @@ defmodule ChurchAdmin.PeopleChildrenWorld do
       main phones (`persons_main_contacts` rows)
     * deleted family `f_deleted`, addressed in `a1`, and the relations
       `r1`..`r5` (parent to child) listed in `relations/0`
-    * `ph_<person>` / `pt_<person>` hobby and tag rows
+    * `{:ph, <person>}` / `{:pt, <person>}` hobby and tag rows
     * two more actor kinds: `service_and_group` and `group_and_area`
   """
 
@@ -94,19 +94,35 @@ defmodule ChurchAdmin.PeopleChildrenWorld do
   end
 
   defp contacts!(records) do
-    main_phone_owners = [:m1, :self, :f2, :grp, :area_fam, :servant, :deleted]
-    other_owners = [:adm_own, :adm_svc, :adm_deleted, :adm_grp, :adm_area, :adm_misc]
+    main_phone_contacts = [
+      m1: :c_m1,
+      self: :c_self,
+      f2: :c_f2,
+      grp: :c_grp,
+      area_fam: :c_area_fam,
+      servant: :c_servant,
+      deleted: :c_deleted
+    ]
+
+    other_contacts = [
+      adm_own: :c_adm_own,
+      adm_svc: :c_adm_svc,
+      adm_deleted: :c_adm_deleted,
+      adm_grp: :c_adm_grp,
+      adm_area: :c_adm_area,
+      adm_misc: :c_adm_misc
+    ]
 
     claimed =
-      for owner <- main_phone_owners ++ other_owners, into: %{} do
+      for {owner, name} <- main_phone_contacts ++ other_contacts, into: %{} do
         contact =
           seed!(Contact, %{
             person_id: Map.fetch!(records, owner).id,
             phone: phone(),
-            is_main_phone: owner in main_phone_owners
+            is_main_phone: Keyword.has_key?(main_phone_contacts, owner)
           })
 
-        {:"c_#{owner}", contact}
+        {name, contact}
       end
 
     unclaimed = [
@@ -169,10 +185,10 @@ defmodule ChurchAdmin.PeopleChildrenWorld do
 
           acc
           |> Map.put(
-            :"ph_#{owner}",
+            {:ph, owner},
             seed!(PersonHobby, %{person_id: person_id, hobby_id: hobby.id})
           )
-          |> Map.put(:"pt_#{owner}", seed!(PersonTag, %{person_id: person_id, tag_id: tag.id}))
+          |> Map.put({:pt, owner}, seed!(PersonTag, %{person_id: person_id, tag_id: tag.id}))
       end
 
     links |> Map.merge(hobbies) |> Map.merge(tags)

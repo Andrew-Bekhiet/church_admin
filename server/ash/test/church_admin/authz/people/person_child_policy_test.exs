@@ -61,10 +61,10 @@ defmodule ChurchAdmin.Authz.People.PersonChildPolicyTest do
     end
   end
 
-  for {resource, prefix} <- [{PersonHobby, "ph"}, {PersonTag, "pt"}],
+  for {resource, key_tag} <- [{PersonHobby, :ph}, {PersonTag, :pt}],
       {kind, persons} <- @persons_in_scope do
     @resource resource
-    @prefix prefix
+    @key_tag key_tag
     @kind kind
     @persons persons
 
@@ -75,7 +75,7 @@ defmodule ChurchAdmin.Authz.People.PersonChildPolicyTest do
           persons -> Enum.filter(ChurchAdmin.PeopleChildrenWorld.hobby_owners(), &(&1 in persons))
         end
 
-      expected = MapSet.new(owners, &:"#{@prefix}_#{&1}")
+      expected = MapSet.new(owners, &{@key_tag, &1})
 
       assert visible(world, @resource, @kind) == expected
     end
@@ -89,9 +89,9 @@ defmodule ChurchAdmin.Authz.People.PersonChildPolicyTest do
              MapSet.new([:r1, :r2, :r3, :r4, :r5])
 
     assert names(Ash.read!(PersonHobby, actor: system, page: false), world) ==
-             MapSet.new(owners, &:"ph_#{&1}")
+             MapSet.new(owners, &{:ph, &1})
 
     assert names(Ash.read!(PersonTag, actor: system, page: false), world) ==
-             MapSet.new(owners, &:"pt_#{&1}")
+             MapSet.new(owners, &{:pt, &1})
   end
 end

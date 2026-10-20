@@ -25,7 +25,9 @@
           {Credo.Check.Refactor.VariableRebinding, []},
           {Credo.Check.Warning.LeakyEnvironment, []},
           {Credo.Check.Warning.MixEnv, []},
-          {Credo.Check.Warning.UnsafeToAtom, []}
+          # Codes defines one function per literal code at compile time; the names cannot already exist as atoms.
+          {Credo.Check.Warning.UnsafeToAtom,
+           [files: %{excluded: ["lib/church_admin/errors/codes.ex"]}]}
         ],
         disabled: []
       }

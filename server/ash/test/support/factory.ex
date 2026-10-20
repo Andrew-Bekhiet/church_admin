@@ -45,24 +45,17 @@ defmodule ChurchAdmin.Factory do
   `study_year` and `gender` for services.
   """
   def grant!(%User{uid: uid}, kind, scope_id, flags \\ []) do
-    flags = Map.new(flags)
-    prefix = Atom.to_string(kind)
-
-    columns =
-      %{
-        :uid => uid,
-        :"admin_on_#{prefix}" => scope_id,
-        :"#{prefix}_allow_edit" => flags[:edit?],
-        :"#{prefix}_allow_export" => flags[:export?],
-        :"#{prefix}_admin_on_users" => flags[:manage_users?]
-      }
-      |> Map.merge(kind_columns(kind, flags))
+    columns = kind |> scope_grant_columns(scope_id, Map.new(flags)) |> Map.put(:uid, uid)
 
     seed!(ScopeGrant, columns)
   end
 
-  defp kind_columns(:service, flags) do
+  defp scope_grant_columns(:service, scope_id, flags) do
     %{
+      admin_on_service: scope_id,
+      service_allow_edit: flags[:edit?],
+      service_allow_export: flags[:export?],
+      service_admin_on_users: flags[:manage_users?],
       service_study_year: flags[:study_year],
       service_gender: flags[:gender],
       service_write_related_families: flags[:write_related_families?] || false,
@@ -71,15 +64,26 @@ defmodule ChurchAdmin.Factory do
     }
   end
 
-  defp kind_columns(:group, flags) do
+  defp scope_grant_columns(:group, scope_id, flags) do
     %{
+      admin_on_group: scope_id,
+      group_allow_edit: flags[:edit?],
+      group_allow_export: flags[:export?],
+      group_admin_on_users: flags[:manage_users?],
       group_write_related_families: flags[:write_related_families?] || false,
       group_allow_record_attendance: flags[:record_persons?],
       group_allow_record_servants_attendance: flags[:record_servants?]
     }
   end
 
-  defp kind_columns(:area, _flags), do: %{}
+  defp scope_grant_columns(:area, scope_id, flags) do
+    %{
+      admin_on_area: scope_id,
+      area_allow_edit: flags[:edit?],
+      area_allow_export: flags[:export?],
+      area_admin_on_users: flags[:manage_users?]
+    }
+  end
 
   def study_year!(order), do: seed!(StudyYear, %{order: order, name: unique("year #{order}")})
 
