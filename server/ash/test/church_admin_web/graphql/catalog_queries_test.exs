@@ -2,7 +2,7 @@ defmodule ChurchAdminWeb.Graphql.CatalogQueriesTest do
   use ChurchAdminWeb.ConnCase, async: false
 
   alias ChurchAdmin.Catalog.{Church, PersonType}
-  alias ChurchAdmin.{AuthzWorld, FirebaseTokens}
+  alias ChurchAdmin.{AuthzWorld, Factory, FirebaseTokens}
 
   setup do
     {:ok, world: AuthzWorld.build!()}
@@ -16,7 +16,7 @@ defmodule ChurchAdminWeb.Graphql.CatalogQueriesTest do
 
         world ->
           claims =
-            FirebaseTokens.valid_claims(%{"x-hasura-user-id" => world.users.unapproved.uid})
+            FirebaseTokens.valid_claims(Factory.firebase_account!(world.users.unapproved))
 
           put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
       end

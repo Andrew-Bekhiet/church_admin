@@ -1,7 +1,7 @@
 defmodule ChurchAdminWeb.Graphql.PlacesQueriesTest do
   use ChurchAdminWeb.ConnCase, async: false
 
-  alias ChurchAdmin.{AuthzWorld, FirebaseTokens, PlacesWorld}
+  alias ChurchAdmin.{AuthzWorld, Factory, FirebaseTokens, PlacesWorld}
 
   setup do
     {:ok, world: PlacesWorld.extend!(AuthzWorld.build!())}
@@ -14,7 +14,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesQueriesTest do
           conn
 
         kind ->
-          claims = FirebaseTokens.valid_claims(%{"x-hasura-user-id" => world.users[kind].uid})
+          claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users[kind]))
           put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
       end
 

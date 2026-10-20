@@ -76,4 +76,37 @@ defmodule ChurchAdmin.Authz.ActorLoaderTest do
     uid = Ash.UUID.generate()
     assert ActorLoader.load(uid) == %Actor{uid: uid}
   end
+
+  describe "load_for_principal/1" do
+    defp principal(auth_id, uid),
+      do: %ChurchAdmin.Auth.Principal{auth_id: auth_id, uid: uid, claims: %{}}
+
+    test "loads the actor when the uid belongs to the principal's account" do
+      user = Factory.user!(%{auth_id: "firebase-owner"})
+      Factory.permissions!(user, ["approved"])
+      principal = principal("firebase-owner", user.uid)
+
+      assert {:ok, %Actor{uid: uid, approved?: true, principal: ^principal}} =
+               ActorLoader.load_for_principal(principal)
+
+      assert uid == user.uid
+    end
+
+    test "refuses a uid that belongs to another account" do
+      user = Factory.user!(%{auth_id: "firebase-owner"})
+
+      assert ActorLoader.load_for_principal(principal("firebase-intruder", user.uid)) == :error
+    end
+
+    test "refuses a uid whose user has no account linked" do
+      user = Factory.user!(%{auth_id: nil})
+
+      assert ActorLoader.load_for_principal(principal("firebase-intruder", user.uid)) == :error
+    end
+
+    test "refuses a uid no user has" do
+      assert ActorLoader.load_for_principal(principal("firebase-owner", Ash.UUID.generate())) ==
+               :error
+    end
+  end
 end

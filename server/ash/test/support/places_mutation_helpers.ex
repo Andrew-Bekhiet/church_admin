@@ -39,7 +39,7 @@ defmodule ChurchAdminWeb.PlacesMutationHelpers do
   defp authorize(conn, nil), do: conn
 
   defp authorize(conn, user) do
-    claims = FirebaseTokens.valid_claims(%{"x-hasura-user-id" => user.uid})
+    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
     put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
   end
 

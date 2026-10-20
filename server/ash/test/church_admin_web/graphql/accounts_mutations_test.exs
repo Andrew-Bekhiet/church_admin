@@ -15,7 +15,7 @@ defmodule ChurchAdminWeb.Graphql.AccountsMutationsTest do
     |> json_response(200)
   end
 
-  defp as_user(user), do: %{"x-hasura-user-id" => user.uid}
+  defp as_user(user), do: Factory.firebase_account!(user)
 
   defp first_code(%{"errors" => [error | _]}), do: error["extensions"]["code"]
 

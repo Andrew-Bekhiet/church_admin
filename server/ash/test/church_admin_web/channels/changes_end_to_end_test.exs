@@ -3,6 +3,7 @@ defmodule ChurchAdminWeb.ChangesEndToEndTest do
 
   import Phoenix.ChannelTest
 
+  alias ChurchAdmin.Factory
   alias ChurchAdmin.FirebaseTokens
   alias ChurchAdminWeb.ChangesChannel
   alias ChurchAdminWeb.ChangesSocket
@@ -17,8 +18,7 @@ defmodule ChurchAdminWeb.ChangesEndToEndTest do
     ChurchAdmin.Factory.permissions!(user, ~w(approved))
 
     {:ok,
-     token:
-       FirebaseTokens.unsigned(FirebaseTokens.valid_claims(%{"x-hasura-user-id" => user.uid}))}
+     token: FirebaseTokens.unsigned(FirebaseTokens.valid_claims(Factory.firebase_account!(user)))}
   end
 
   test "a commit reaches a joined client within the staleness budget", %{

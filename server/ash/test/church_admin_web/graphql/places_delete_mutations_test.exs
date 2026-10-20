@@ -35,7 +35,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesDeleteMutationsTest do
   end
 
   defp run(conn, document, id, user) do
-    claims = FirebaseTokens.valid_claims(%{"x-hasura-user-id" => user.uid})
+    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
 
     conn
     |> put_req_header("authorization", "Bearer " <> FirebaseTokens.unsigned(claims))

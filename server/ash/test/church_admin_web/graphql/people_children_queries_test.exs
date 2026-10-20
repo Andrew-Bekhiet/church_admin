@@ -1,7 +1,7 @@
 defmodule ChurchAdminWeb.Graphql.PeopleChildrenQueriesTest do
   use ChurchAdminWeb.ConnCase, async: false
 
-  alias ChurchAdmin.{FirebaseTokens, PeopleChildrenWorld}
+  alias ChurchAdmin.{Factory, FirebaseTokens, PeopleChildrenWorld}
   alias ChurchAdmin.Catalog.Hobby
   alias ChurchAdmin.People.PersonHobby
 
@@ -16,7 +16,7 @@ defmodule ChurchAdminWeb.Graphql.PeopleChildrenQueriesTest do
           conn
 
         kind ->
-          claims = FirebaseTokens.valid_claims(%{"x-hasura-user-id" => world.users[kind].uid})
+          claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users[kind]))
           put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
       end
 

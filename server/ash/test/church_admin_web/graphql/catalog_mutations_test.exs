@@ -2,7 +2,7 @@ defmodule ChurchAdminWeb.Graphql.CatalogMutationsTest do
   use ChurchAdminWeb.ConnCase, async: false
 
   alias ChurchAdmin.Catalog.{Church, PersonType}
-  alias ChurchAdmin.{AuthzWorld, FirebaseTokens}
+  alias ChurchAdmin.{AuthzWorld, Factory, FirebaseTokens}
 
   @mutations [
     {"createChurch", "{name: \"n\"}"},
@@ -22,7 +22,7 @@ defmodule ChurchAdminWeb.Graphql.CatalogMutationsTest do
   end
 
   defp run(conn, document, user) do
-    claims = FirebaseTokens.valid_claims(%{"x-hasura-user-id" => user.uid})
+    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
 
     conn
     |> put_req_header("authorization", "Bearer " <> FirebaseTokens.unsigned(claims))

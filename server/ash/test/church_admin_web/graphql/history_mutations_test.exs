@@ -1,7 +1,7 @@
 defmodule ChurchAdminWeb.Graphql.HistoryMutationsTest do
   use ChurchAdminWeb.ConnCase, async: false
 
-  alias ChurchAdmin.{AuthzWorld, FirebaseTokens}
+  alias ChurchAdmin.{AuthzWorld, Factory, FirebaseTokens}
 
   setup do
     {:ok, world: AuthzWorld.build!()}
@@ -10,7 +10,7 @@ defmodule ChurchAdminWeb.Graphql.HistoryMutationsTest do
   defp run(conn, document, user) do
     conn =
       if user do
-        claims = FirebaseTokens.valid_claims(%{"x-hasura-user-id" => user.uid})
+        claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
         put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
       else
         conn

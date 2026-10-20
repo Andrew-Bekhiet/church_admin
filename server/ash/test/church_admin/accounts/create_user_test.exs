@@ -81,6 +81,41 @@ defmodule ChurchAdmin.Accounts.CreateUserTest do
              |> Ash.exists?(authorize?: false)
     end
 
+    test "links a person in the scope of a scoped onboarder", ctx do
+      actor = service_manager!(ctx.service)
+      person = Factory.person!(%{family_id: Factory.family!().id})
+      Factory.in_service!(person, ctx.service)
+
+      {:ok, user} =
+        create(actor, %{
+          new_person: nil,
+          person_id: person.id,
+          admin_on: [%{admin_on_service: ctx.service.id}]
+        })
+
+      assert person_of(user).id == person.id
+    end
+
+    test "refuses a person outside the actor's edit scope and keeps no user row", ctx do
+      actor = service_manager!(ctx.service)
+      outsider = Factory.person!(%{family_id: Factory.family!().id})
+
+      result =
+        create(actor, %{
+          name: "Out of reach",
+          new_person: nil,
+          person_id: outsider.id,
+          admin_on: [%{admin_on_service: ctx.service.id}]
+        })
+
+      assert codes(result) == ["user/person-already-linked"]
+      assert Ash.get!(Person, outsider.id, authorize?: false).uid == nil
+
+      refute User
+             |> Ash.Query.do_filter(expr(name == "Out of reach"))
+             |> Ash.exists?(authorize?: false)
+    end
+
     test "needs exactly one of person_id and new_person", ctx do
       assert {:error, _} = create(ctx.actor, %{new_person: nil})
 

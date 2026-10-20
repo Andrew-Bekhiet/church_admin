@@ -1,7 +1,7 @@
 defmodule ChurchAdminWeb.Graphql.DataQualityQueriesTest do
   use ChurchAdminWeb.ConnCase, async: false
 
-  alias ChurchAdmin.{AuthzWorld, FirebaseTokens}
+  alias ChurchAdmin.{AuthzWorld, Factory, FirebaseTokens}
 
   setup do
     {:ok, world: AuthzWorld.build!()}
@@ -14,7 +14,7 @@ defmodule ChurchAdminWeb.Graphql.DataQualityQueriesTest do
           conn
 
         kind ->
-          claims = FirebaseTokens.valid_claims(%{"x-hasura-user-id" => world.users[kind].uid})
+          claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users[kind]))
           put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
       end
 
