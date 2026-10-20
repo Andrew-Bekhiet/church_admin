@@ -83,7 +83,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollIntegrityTest do
 
       assert message == "Person study_year does not match service study_year_range"
 
-      assert Enum.sort(String.split(detail, "\n")) ==
+      assert detail |> String.split("\n") |> Enum.sort() ==
                Enum.sort(
                  for {person_id, service_id} <- inserted,
                      do: "person_id: #{person_id} service_id: #{service_id}"
@@ -98,7 +98,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollIntegrityTest do
       pupil = pupil!(service, 1)
       person!(study_year_id: nil)
 
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
 
       assert study_year_of(pupil) == 2
       assert [%{status: :succeeded}] = Roll.runs(@season)
@@ -110,7 +110,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollIntegrityTest do
       pupil = pupil!(in_range, 1)
       in_service!(pupil, out_of_range)
 
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
 
       assert study_year_of(pupil) == 2
       assert services_of(pupil) == Enum.sort([in_range.id, out_of_range.id])
