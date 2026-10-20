@@ -196,6 +196,9 @@ class AppRoutingHarness {
         ScreenDependencyStubs.databaseService(),
       ),
       homeCubitProvider.overrideWithValue(ScreenDependencyStubs.homeCubit()),
+      viewableObjectServiceProvider.overrideWith(
+        (_) => ViewableObjectService(router: router),
+      ),
       packageInfoPluginProvider.overrideWith(
         (_) => PackageInfo(
           appName: 'church_admin',
