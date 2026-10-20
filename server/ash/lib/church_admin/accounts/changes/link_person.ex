@@ -8,12 +8,14 @@ defmodule ChurchAdmin.Accounts.Changes.LinkPerson do
       unlinks the person linked so far, so nil only unlinks. An absent
       argument leaves the link alone.
 
-  `as: :system` links any person (`createUser` wrote with Hasura's admin
-  secret); `as: :actor` reaches only persons the actor may edit, as Hasura's
-  person update permission did. A person out of reach or already linked fails
-  with `user/person-already-linked` and rolls the whole command back. The new
-  person is written as the system actor and recorded in the edit history as
-  the acting user.
+  Only persons the actor may edit can be linked or unlinked (the system actor
+  and global writers reach every person). A person out of reach or already
+  linked fails with `user/person-already-linked` and rolls the whole command
+  back. `createUser` writes the link as the system actor, because the user it
+  just made is not yet among the users the actor's scopes manage;
+  `updateUser` writes it as the actor, so the check on the users involved
+  applies. The new person is written as the system actor and recorded in the
+  edit history as the acting user.
   """
 
   use Ash.Resource.Change
@@ -27,29 +29,20 @@ defmodule ChurchAdmin.Accounts.Changes.LinkPerson do
   alias ChurchAdmin.People.Person
 
   @impl true
-  def init(opts) do
-    if opts[:as] in [:system, :actor],
-      do: {:ok, opts},
-      else: {:error, "`as` is :system or :actor"}
-  end
-
-  @impl true
-  def change(changeset, opts, context) do
+  def change(changeset, _opts, context) do
     Ash.Changeset.after_action(changeset, fn changeset, user ->
-      writer = if opts[:as] == :system, do: Actor.system(), else: context.actor
-
-      case link(changeset, user, writer, context.actor) do
+      case link(changeset, user, context.actor) do
         :ok -> {:ok, user}
         {:error, error} -> AfterActionFailure.roll_back(changeset.resource, error)
       end
     end)
   end
 
-  defp link(changeset, user, writer, editor) do
+  defp link(changeset, user, editor) do
     with :ok <-
            create_new_person(Ash.Changeset.get_argument(changeset, :new_person), user, editor) do
       case Ash.Changeset.fetch_argument(changeset, :person_id) do
-        {:ok, person_id} -> relink(changeset.action_type, person_id, user, writer)
+        {:ok, person_id} -> relink(changeset.action_type, person_id, user, editor)
         :error -> :ok
       end
     end
@@ -72,26 +65,27 @@ defmodule ChurchAdmin.Accounts.Changes.LinkPerson do
     end
   end
 
-  defp relink(:create, person_id, user, writer), do: link_person(person_id, user, writer)
+  defp relink(:create, person_id, user, editor),
+    do: link_person(person_id, user, editor, Actor.system())
 
-  defp relink(:update, person_id, user, writer) do
-    with {:ok, _unlinked} <- set_user(expr(uid == ^user.uid), nil, writer) do
-      link_person(person_id, user, writer)
+  defp relink(:update, person_id, user, editor) do
+    with {:ok, _unlinked} <- set_user(expr(uid == ^user.uid), nil, editor, editor) do
+      link_person(person_id, user, editor, editor)
     end
   end
 
-  defp link_person(nil, _user, _writer), do: :ok
+  defp link_person(nil, _user, _editor, _writer), do: :ok
 
-  defp link_person(person_id, user, writer) do
-    case set_user(expr(id == ^person_id and is_nil(uid)), user.uid, writer) do
+  defp link_person(person_id, user, editor, writer) do
+    case set_user(expr(id == ^person_id and is_nil(uid)), user.uid, editor, writer) do
       {:ok, 1} -> :ok
       {:ok, 0} -> {:error, already_linked()}
       {:error, error} -> {:error, error}
     end
   end
 
-  defp set_user(filter, uid, writer) do
-    scope = Scope.person(writer, :edit)
+  defp set_user(filter, uid, editor, writer) do
+    scope = Scope.person(editor, :edit)
 
     Person
     |> Ash.Query.do_filter(expr(^filter and ^scope))

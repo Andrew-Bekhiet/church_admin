@@ -1,14 +1,14 @@
 defmodule ChurchAdminWeb.Graphql.OrganizationQueriesTest do
   use ChurchAdminWeb.ConnCase, async: false
 
-  alias ChurchAdmin.{AuthzWorld, FirebaseTokens, OrgWorld}
+  alias ChurchAdmin.{AuthzWorld, Factory, FirebaseTokens, OrgWorld}
 
   setup do
     {:ok, world: OrgWorld.extend(AuthzWorld.build!())}
   end
 
   defp run(conn, document, variables \\ %{}, kind, world) do
-    claims = FirebaseTokens.valid_claims(%{"x-hasura-user-id" => world.users[kind].uid})
+    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users[kind]))
 
     conn
     |> put_req_header("authorization", "Bearer " <> FirebaseTokens.unsigned(claims))

@@ -25,7 +25,7 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
     user = Factory.user!()
     Factory.permissions!(user, ~w(approved))
 
-    %{"x-hasura-user-id" => user.uid}
+    Factory.firebase_account!(user)
     |> Map.merge(claims)
     |> FirebaseTokens.valid_claims()
     |> FirebaseTokens.unsigned()

@@ -12,6 +12,7 @@ defmodule ChurchAdminWeb.Plugs.Authenticate do
 
   alias ChurchAdmin.Auth.TokenVerifier
   alias ChurchAdmin.Authz.Actor
+  alias ChurchAdminWeb.Plugs.Unauthenticated
 
   @impl true
   def init(opts), do: opts
@@ -25,27 +26,11 @@ defmodule ChurchAdminWeb.Plugs.Authenticate do
       ["Bearer " <> token] ->
         case TokenVerifier.verify(token) do
           {:ok, principal} -> Ash.PlugHelpers.set_actor(conn, Actor.for_principal(principal))
-          {:error, reason} -> reject(conn, reason)
+          {:error, reason} -> Unauthenticated.reject(conn, reason)
         end
 
       _malformed ->
-        reject(conn, :malformed_authorization_header)
+        Unauthenticated.reject(conn, :malformed_authorization_header)
     end
-  end
-
-  defp reject(conn, reason) do
-    body = %{
-      errors: [
-        %{
-          message: "unauthenticated: #{reason}",
-          extensions: %{code: "unauthenticated", short_message: "unauthenticated"}
-        }
-      ]
-    }
-
-    conn
-    |> put_resp_content_type("application/json")
-    |> send_resp(401, Jason.encode!(body))
-    |> halt()
   end
 end

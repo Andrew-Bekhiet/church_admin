@@ -2,7 +2,7 @@ defmodule ChurchAdminWeb.Graphql.SmallCommandsMutationsTest do
   use ChurchAdminWeb.ConnCase, async: false
 
   alias ChurchAdmin.Accounts.Preferences
-  alias ChurchAdmin.{AuthzWorld, FirebaseTokens}
+  alias ChurchAdmin.{AuthzWorld, Factory, FirebaseTokens}
   alias ChurchAdmin.DataQuality.Override
 
   setup do
@@ -12,7 +12,7 @@ defmodule ChurchAdminWeb.Graphql.SmallCommandsMutationsTest do
   defp run(conn, document, user, variables) do
     conn =
       if user do
-        claims = FirebaseTokens.valid_claims(%{"x-hasura-user-id" => user.uid})
+        claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
         put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
       else
         conn
