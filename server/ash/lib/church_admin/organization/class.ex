@@ -138,8 +138,10 @@ defmodule ChurchAdmin.Organization.Class do
     end
 
     policy action(:destroy) do
-      authorize_if {ApprovedWithPermission, name: "writeAllData"}
       authorize_if {ApprovedWithPermission, name: "deleteData"}
+    end
+
+    policy action(:destroy) do
       authorize_if {RelatedInScope, path: :service, entity: :service, access: :edit}
     end
 
