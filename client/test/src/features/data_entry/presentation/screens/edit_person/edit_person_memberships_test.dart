@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../../../utils.dart';
@@ -73,20 +72,17 @@ void main() {
   ) async {
     harness.services.pickableServices = const [primary];
     await harness.open(tester, UpdatePerson(person: person));
-    final memberships = find.text('لا يوجد خدمات أو مجموعات');
+    final memberships = find.byKey(PersonEditMembershipsSectionKeys.field);
     await tester.ensureVisible(memberships);
     await tester.pumpAndSettle();
 
     await tester.tap(memberships);
     await tester.pumpAndSettle();
     await tester.tap(
-      find.descendant(
-        of: find.byType(PersonServiceSelectionPage),
-        matching: find.byType(Checkbox),
-      ),
+      find.byKey(PersonServiceSelectionPageKeys.checkboxFor(primary)),
     );
     await tester.pump();
-    await tester.tap(find.byIcon(Symbols.check));
+    await tester.tap(find.byKey(PersonServiceSelectionPageKeys.confirmButton));
     await tester.pumpAndSettle();
 
     expect(find.byType(PersonServiceSelectionPage), findsNothing);
