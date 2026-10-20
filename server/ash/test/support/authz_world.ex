@@ -103,6 +103,7 @@ defmodule ChurchAdmin.AuthzWorld do
       ms_f2: Factory.in_service!(persons.f2, s1),
       ms_deleted: Factory.in_service!(persons.deleted, s1),
       mg_grp: Factory.in_group!(persons.grp, g1),
+      mg_deleted: Factory.in_group!(persons.deleted, g2),
       mg_area_store: Factory.in_group!(persons.area_store, g2)
     }
 
