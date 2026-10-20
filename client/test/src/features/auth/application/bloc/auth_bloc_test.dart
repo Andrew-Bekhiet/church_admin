@@ -545,6 +545,29 @@ void main() {
       );
 
       blocTest<AuthBloc, AuthState>(
+        'signing in to an already linked account keeps its token instead of '
+        'claiming the account again while its user data loads',
+        setUp: () {
+          final functionsMock = globalProviderContainer.read(
+            functionsServiceProvider,
+          ) as MockFunctionsService;
+          when(functionsMock.tryClaimAccount()).thenAnswer((_) async => true);
+        },
+        build: () => _createAuthBloc(noCachedUser: true),
+        act: (bloc) async {
+          await Future<void>.delayed(Duration.zero);
+          userChangesController.add(initialAuthUser);
+        },
+        wait: const Duration(milliseconds: 100),
+        verify: (bloc) => expect(
+          bloc.state.unwrapped,
+          isA<AuthAuthenticated>()
+              .having((state) => state.authUser, 'authUser', initialAuthUser)
+              .having((state) => state.userData, 'userData', initialUserData),
+        ),
+      );
+
+      blocTest<AuthBloc, AuthState>(
         'applyInvitationCode_whenApplyingFails_restoresThePreloadingState',
         setUp: () {
           final mockFunctions = globalProviderContainer.read(
