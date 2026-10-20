@@ -27,7 +27,7 @@ class HomeBottomNavBar extends StatelessWidget {
             destinations: [
               for (final tab in homeState.tabs)
                 NavigationDestination(
-                  key: HomeBottomNavBarKeys.destination(tab),
+                  key: HomeBottomNavBarKeys.destinationFor(tab),
                   icon: Icon(tab.icon),
                   selectedIcon: Icon(tab.icon, fill: 1),
                   label: tab.label,
@@ -41,6 +41,6 @@ class HomeBottomNavBar extends StatelessWidget {
 }
 
 abstract final class HomeBottomNavBarKeys {
-  static Key destination(HomeTab tab) =>
-      ValueKey('Home Bottom Nav Bar ${tab.name} Destination Key');
+  static Key destinationFor(HomeTab tab) =>
+      ValueKey('Home Bottom NavBar ${tab.name} Destination Key');
 }
