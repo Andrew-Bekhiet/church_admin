@@ -3,10 +3,15 @@ defmodule ChurchAdmin.Operations.StudyYearRoll do
   The annual study-year roll (`docs/technical-decisions/study-year-roll.md`),
   behind the generic actions of `ChurchAdmin.Operations.StudyYearRollRun`:
 
-    * `run/1` is the atomic unit, called inside the action's transaction. It
-      takes the roll's advisory lock and `share row exclusive` locks, skips a
-      season that already succeeded, aborts on blockers, applies the plan,
-      checks the person invariants and records `succeeded` with the counts.
+    * `run/2` is the atomic unit. It takes the roll's advisory lock and
+      `share row exclusive` locks, skips a season that already succeeded,
+      refuses any other season once a season at or after today's academic
+      year succeeded (the academic year starts on 11 September, Cairo), aborts
+      on blockers, applies the plan, checks the person invariants and records
+      `succeeded` with the counts.
+    * `run_recording_refusal/2` runs it in a transaction and, when the roll
+      was refused, records `failed` in a transaction of its own so the alert
+      fires.
     * `run_when_due/1` gates on 11 September in Cairo, runs the roll and,
       when it fails, records `failed` in a transaction of its own.
     * `record_missed/1` records `missed` unless the season succeeded or
@@ -34,18 +39,65 @@ defmodule ChurchAdmin.Operations.StudyYearRoll do
     public.persons_groups public.classes auth.users_admin_on
   )
 
-  @spec run(integer()) ::
+  @spec run(integer(), Date.t()) ::
           {:ok, %{String.t() => non_neg_integer()} | :skipped_already_rolled}
           | {:error, Failure.t()}
-  def run(season) do
+  def run(season, today) do
     Repo.query!("select pg_advisory_xact_lock(hashtext('operations.study_year_roll'))")
     Repo.query!("lock table #{Enum.join(@rolled_tables, ", ")} in share row exclusive mode")
 
     if season_recorded?(season, ["succeeded"]) do
       {:ok, :skipped_already_rolled}
     else
-      roll(season)
+      with :ok <- ensure_academic_year_unrolled(season, today), do: roll(season)
     end
+  end
+
+  @spec run_recording_refusal(integer(), Date.t() | nil) ::
+          {:ok, %{String.t() => non_neg_integer()} | :skipped_already_rolled}
+          | {:error, Failure.t()}
+  def run_recording_refusal(season, today) do
+    today = today || cairo_today()
+
+    outcome =
+      Repo.transaction(fn ->
+        case run(season, today) do
+          {:ok, result} -> result
+          {:error, failure} -> Repo.rollback(failure)
+        end
+      end)
+
+    with {:error, %Failure{reason: :academic_year_already_rolled} = refusal} <- outcome do
+      record_failure!(season, Failure.recorded_error(refusal))
+      {:error, refusal}
+    end
+  end
+
+  defp ensure_academic_year_unrolled(season, today) do
+    academic_year = academic_year_of(today)
+
+    StudyYearRollRun
+    |> Ash.Query.filter(status == "succeeded" and season_year >= ^academic_year)
+    |> Ash.Query.limit(1)
+    |> Ash.read_one!(actor: Actor.system())
+    |> case do
+      nil ->
+        :ok
+
+      rolled ->
+        {:error,
+         Failure.exception(
+           message: "study year roll refused for season #{season}",
+           detail:
+             "the academic year of #{academic_year} has already been rolled: " <>
+               "season #{rolled.season_year} succeeded",
+           reason: :academic_year_already_rolled
+         )}
+    end
+  end
+
+  defp academic_year_of(date) do
+    if Date.before?(date, nayrouz(date.year)), do: date.year - 1, else: date.year
   end
 
   defp roll(season) do
@@ -83,7 +135,7 @@ defmodule ChurchAdmin.Operations.StudyYearRoll do
     season = today.year
 
     if today == nayrouz(season) and not season_recorded?(season, ["succeeded"]) do
-      case run_action(:run, %{season: season}) do
+      case run_action(:run, %{season: season, today: today}) do
         {:ok, _result} -> :ok
         {:error, error} -> record_failure!(season, recorded_error(error))
       end

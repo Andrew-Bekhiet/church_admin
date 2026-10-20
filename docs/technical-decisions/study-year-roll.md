@@ -218,7 +218,14 @@ the point-in-time backup taken before the scheduled window.
 
 ## Manual and late runs
 
-A late or repeat run is deliberately awkward. `run_study_year_roll(season)`
-can be called directly by an operator, but only after confirming no manual
-advancement happened in the meantime, because nothing detects double
-advancement ([E2]).
+A late or repeat run is deliberately awkward. The operator's `run` action
+(formerly `run_study_year_roll(season)`) can be called directly, but only after
+confirming no manual advancement happened in the meantime ([E2]).
+
+Since ENG-266 the roll itself refuses to advance twice in one academic year.
+The academic year starts on 11 September (Cairo): a run dated before it belongs
+to the previous year's. A season other than one already rolled is refused when
+a `succeeded` run exists for a season at or after the run date's academic year.
+Nothing is applied; `failed` is recorded for the requested season with the
+reason, so the usual alert fires. There is no override. The rule reads only
+`season_year`, so every row recorded before it keeps its meaning.

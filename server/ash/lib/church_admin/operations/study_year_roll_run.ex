@@ -67,8 +67,12 @@ defmodule ChurchAdmin.Operations.StudyYearRollRun do
 
     action :run, :term do
       argument :season, :integer, allow_nil?: false
-      transaction? true
-      run fn input, _context -> StudyYearRoll.run(input.arguments.season) end
+      argument :today, :date
+      transaction? false
+
+      run fn input, _context ->
+        StudyYearRoll.run_recording_refusal(input.arguments.season, input.arguments[:today])
+      end
     end
 
     action :blockers, {:array, :map} do
