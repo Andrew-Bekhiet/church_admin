@@ -112,7 +112,7 @@ defmodule ChurchAdmin.Accounts.User do
       change CanonicalizeNameAndEmail
       change ManageGrants
       change PermissionLevelsConsistent
-      change {LinkPerson, as: :system}
+      change LinkPerson
       change CreateInvitation
     end
 
@@ -122,7 +122,7 @@ defmodule ChurchAdmin.Accounts.User do
       require_atomic? false
 
       change CanonicalizeNameAndEmail
-      change {LinkPerson, as: :actor}
+      change LinkPerson
     end
 
     update :update_user_permissions do
