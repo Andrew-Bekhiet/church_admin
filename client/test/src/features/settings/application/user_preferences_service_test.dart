@@ -207,6 +207,56 @@ void main() {
     },
   );
 
+  test(
+    'a sort the server acknowledged reads back before the signed-in '
+    "user's preferences catch up",
+    () async {
+      final personType = AdvancedQueriesMetadata().allQueryables.firstWhere(
+        (q) => q.name == 'Person',
+      );
+      final key = OrderByPreferenceKey(type: personType);
+      final sort = [
+        OrderBy(
+          field: personType.fieldsMetadataByName['name']!,
+          value: OrderByValue.desc,
+        ),
+      ];
+      const uid = '6f1c1b6e-0d9a-4c1e-9b1a-3c2d4e5f6a7b';
+      final dao = databaseService.userPreferences as MockUserPreferencesDAO;
+      when(
+        () => dao.updatePreferences(
+          uid: any(named: 'uid'),
+          set: any(named: 'set'),
+          append: any(named: 'append'),
+        ),
+      ).thenAnswer(
+        (_) async => Fragment_UserPreferences(
+          uid: UuidValue.fromString(uid),
+          orderByPreferences: {
+            key.storageKey: [for (final orderBy in sort) orderBy.toJson()],
+          },
+          secondLinePreferences: const {},
+          greatFeastTheme: true,
+          updatedAt: DateTime.now(),
+        ),
+      );
+      when(() => authBloc.currentUserData).thenReturn(
+        const User(
+          uid: uid,
+          name: 'name',
+          email: 'email',
+          preferences: UserPreferences(uid: uid),
+        ),
+      );
+      final unit = createUnit();
+
+      await unit.setLastOrderByFor(key, sort);
+      await Future<void>.delayed(Duration.zero);
+
+      expect(unit.getLastOrderByFor(key), sort);
+    },
+  );
+
   group('second line field', () {
     final personType = AdvancedQueriesMetadata().allQueryables.firstWhere(
       (q) => q.name == 'Person',

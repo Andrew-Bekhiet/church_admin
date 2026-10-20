@@ -25,8 +25,27 @@ class UserPreferencesService extends BlocObserver {
   final DatabaseService _databaseService;
   final AuthBloc _authBloc;
 
-  UserPreferences? get _serverPreferences =>
-      _authBloc.currentUserData?.preferences;
+  UserPreferences? _acknowledgedPreferences;
+
+  /// The signed-in user's preferences lag a write the server already
+  /// acknowledged until the next user data refresh, while the acknowledged
+  /// write is no longer pending, so the newer of the two is the server's state.
+  UserPreferences? get _serverPreferences {
+    final user = _authBloc.currentUserData;
+    final userPreferences = user?.preferences;
+    final acknowledged = _acknowledgedPreferences;
+
+    if (acknowledged == null || acknowledged.uid != user?.uid) {
+      return userPreferences;
+    }
+
+    return switch ((userPreferences?.updatedAt, acknowledged.updatedAt)) {
+      (final refreshedAt?, final acknowledgedAt?)
+          when !refreshedAt.isBefore(acknowledgedAt) =>
+        userPreferences,
+      _ => acknowledged,
+    };
+  }
 
   bool? get darkTheme {
     if (_hasQueuedWrite(_darkThemeKey)) {
@@ -173,11 +192,17 @@ class UserPreferencesService extends BlocObserver {
     );
 
     try {
-      await _databaseService.userPreferences.updatePreferences(
-        uid: uid,
-        set: Input_UsersPreferencesSetInput.fromJson(scalarWrites),
-        append: appendFields,
-      );
+      final acknowledged = await _databaseService.userPreferences
+          .updatePreferences(
+            uid: uid,
+            set: Input_UsersPreferencesSetInput.fromJson(scalarWrites),
+            append: appendFields,
+          );
+      if (acknowledged != null) {
+        _acknowledgedPreferences = UserPreferences.fromJson(
+          acknowledged.toJson(),
+        );
+      }
 
       _deleteUnchangedPendingWrites('', scalarWrites);
       _deleteUnchangedPendingWrites(_orderByKeyPrefix, orderByPreferences);
