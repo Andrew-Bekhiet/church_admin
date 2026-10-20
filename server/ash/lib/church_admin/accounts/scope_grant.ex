@@ -161,10 +161,9 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
       public?: true,
       filter:
         expr(
-          ^ClassCoverage.covers_class(
-            ClassCoverage.through_parent(ClassCoverage.scope_grant_row()),
-            ClassCoverage.class_row()
-          )
+          ^(ClassCoverage.scope_grant_row()
+            |> ClassCoverage.through_parent()
+            |> ClassCoverage.covers_class(ClassCoverage.class_row()))
         )
   end
 
