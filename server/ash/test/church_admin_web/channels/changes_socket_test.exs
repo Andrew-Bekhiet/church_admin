@@ -44,7 +44,7 @@ defmodule ChurchAdminWeb.ChangesSocketTest do
     end
 
     test "refuses a uid claim that no user has" do
-      account = Factory.firebase_account!(user_with!(~w(approved)))
+      account = ~w(approved) |> user_with!() |> Factory.firebase_account!()
       claims = %{account | "x-hasura-user-id" => Ash.UUID.generate()}
 
       assert connect(ChangesSocket, %{"token" => token_with(claims)}) == :error

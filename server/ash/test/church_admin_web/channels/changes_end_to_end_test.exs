@@ -18,7 +18,11 @@ defmodule ChurchAdminWeb.ChangesEndToEndTest do
     ChurchAdmin.Factory.permissions!(user, ~w(approved))
 
     {:ok,
-     token: FirebaseTokens.unsigned(FirebaseTokens.valid_claims(Factory.firebase_account!(user)))}
+     token:
+       user
+       |> Factory.firebase_account!()
+       |> FirebaseTokens.valid_claims()
+       |> FirebaseTokens.unsigned()}
   end
 
   test "a commit reaches a joined client within the staleness budget", %{

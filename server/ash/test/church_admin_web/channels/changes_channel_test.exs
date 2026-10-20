@@ -25,7 +25,8 @@ defmodule ChurchAdminWeb.ChangesChannelTest do
     user = Factory.user!()
     Factory.permissions!(user, ~w(approved))
 
-    Factory.firebase_account!(user)
+    user
+    |> Factory.firebase_account!()
     |> Map.merge(claims)
     |> FirebaseTokens.valid_claims()
     |> FirebaseTokens.unsigned()
