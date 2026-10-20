@@ -68,15 +68,18 @@ void main() {
 
       step('the home birthdays card lists only persons born today');
       final birthdays = HomeBirthdaysRobot(tester);
-      expect(await birthdays.namesListedOnHome(), bornToday.keys.toSet());
+      expect(
+        await birthdays.namesListedOnHome(),
+        unorderedEquals(bornToday.keys),
+      );
 
       step('tapping the card shows every person born today and no one else');
       await birthdays.openFullList();
       final listedIds = await birthdays.personIdsInFullListOnceItShows(
         bornToday.values.toSet(),
       );
-      expect(listedIds, bornToday.values.toSet());
-      expect(listedIds.intersection(notBornToday), isEmpty);
+      expect(listedIds, unorderedEquals(bornToday.values));
+      expect(listedIds.where(notBornToday.contains), isEmpty);
 
       await E2eApp.signOut(tester);
       await E2eApp.finish(tester);
