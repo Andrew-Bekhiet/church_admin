@@ -19,6 +19,7 @@ abstract final class E2eApp {
   );
   static const _maxUnlocksWhileLeaving = 3;
   static const _launchTimeout = Duration(minutes: 2);
+  static const _returnHomeTimeout = Duration(minutes: 1);
 
   static final Finder lockPasswordField = find.byKey(
     BiometricsAuthScreenKeys.passwordFieldKey,
@@ -26,16 +27,44 @@ abstract final class E2eApp {
 
   static ErrorWidgetBuilder? _testErrorWidgetBuilder;
 
+  static Future<void> launchSignedOut(PatrolIntegrationTester $) async {
+    _testErrorWidgetBuilder = ErrorWidget.builder;
+    WidgetController.hitTestWarningShouldBeFatal = true;
+    await _runMainDismissingPermissionDialog($);
+
+    if (AuthBloc.I.state is! AuthUnauthenticated) {
+      AuthBloc.I.add(const SignOut());
+    }
+
+    await $.tester.waitFor(loginButton, timeout: const Duration(minutes: 1));
+  }
+
+  /// The closest a single test gets to a process restart: the widget tree and
+  /// every provider-held service are dropped and `main` runs again, so the
+  /// relaunched app reads its state back from local storage and the backend.
+  /// The top-level `$appRouter` survives and still listens to the dropped
+  /// services, so it no longer redirects on sign-in or sign-out.
+  static Future<void> relaunch(
+    PatrolIntegrationTester $, {
+    String password = E2eBackend.password,
+  }) async {
+    await $.tester.pumpWidget(const SizedBox.shrink());
+    await SyncKVStore.flushAll();
+    // The analyzer only treats test/ and integration_test/ as test code.
+    // ignore: invalid_use_of_visible_for_testing_member
+    resetGlobalProviderContainer();
+    await _runMainDismissingPermissionDialog($);
+    await enterHome($.tester, password);
+  }
+
   /// Starts the app without awaiting it: `flutter_local_notifications` asks
   /// for notification permission during initialization and waits for an
   /// answer, so the native dialog has to be dismissed while `main` is running.
   /// On a fresh install the dialog can take longer than any fixed wait to
   /// appear, so it is looked for until `main` returns.
-  static Future<void> launchSignedOut(PatrolIntegrationTester $) async {
-    final tester = $.tester;
-    _testErrorWidgetBuilder = ErrorWidget.builder;
-    WidgetController.hitTestWarningShouldBeFatal = true;
-
+  static Future<void> _runMainDismissingPermissionDialog(
+    PatrolIntegrationTester $,
+  ) async {
     final launching =
         runZonedGuarded(app.main, _recordUncaughtAppError) ?? Future.value();
     var launched = false;
@@ -52,12 +81,6 @@ abstract final class E2eApp {
         await $.platform.mobile.denyPermission();
       }
     }
-
-    if (AuthBloc.I.state is! AuthUnauthenticated) {
-      AuthBloc.I.add(const SignOut());
-    }
-
-    await tester.waitFor(loginButton, timeout: const Duration(minutes: 1));
   }
 
   static Future<void> signIn(
@@ -72,6 +95,33 @@ abstract final class E2eApp {
     );
     await tester.tapOn(loginButton);
     await tester.waitForAbsent(loginButton);
+  }
+
+  /// Signs in an approved user, such as one from `E2eUsers.createApprovedUser`,
+  /// filling the spiritual data in only when the app asks for it.
+  static Future<void> signInToHome(
+    WidgetTester tester, {
+    required String email,
+    String password = E2eBackend.password,
+  }) async {
+    final spiritDataSaveButton = find.byKey(
+      UpdateUserSpiritDataScreenKeys.saveButton,
+    );
+
+    await signIn(tester, email: email, password: password);
+    await tester.waitFor(
+      find.byElementPredicate(
+        (element) =>
+            lockPasswordField.evaluate().contains(element) ||
+            spiritDataSaveButton.evaluate().contains(element),
+      ),
+    );
+
+    if (spiritDataSaveButton.evaluate().isNotEmpty) {
+      await completeSpiritualData(tester);
+    }
+
+    await enterHome(tester, password);
   }
 
   static Future<void> signUp(
@@ -142,15 +192,47 @@ abstract final class E2eApp {
     await tester.tapOn(find.byKey(item));
   }
 
+  static Future<void> openHomeTab(
+    WidgetTester tester, {
+    required HomeMode mode,
+    required HomeTab tab,
+  }) async {
+    await tester.tapOn(find.byKey(HomeModeCardsKeys.modeKeyFor(mode)));
+    await tester.tapOn(find.byKey(HomeBottomNavBarKeys.destinationFor(tab)));
+  }
+
   static Future<void> signOut(
     WidgetTester tester, {
     String password = E2eBackend.password,
   }) async {
-    final backButton = find.byType(BackButton);
-    var unlocks = 0;
+    await returnHome(tester, password: password);
+    await openDrawerItem(tester, HomeDrawerKeys.signOut);
+    await tester.waitFor(loginButton);
+  }
 
-    while (true) {
-      await tester.idle();
+  /// Pops one screen at a time, waiting for each popped screen to leave the
+  /// tree before looking again, so a screen still running its exit transition
+  /// is never mistaken for one that is still open.
+  static Future<void> returnHome(
+    WidgetTester tester, {
+    required String password,
+  }) async {
+    final backButton = find.byType(BackButton);
+    final summaryTab = find.byKey(
+      HomeBottomNavBarKeys.destinationFor(HomeTab.summary),
+    );
+    final deadline = DateTime.now().add(_returnHomeTimeout);
+    var unlocks = 0;
+    bool isHomeSettled() =>
+        homeScreen.hitTestable().evaluate().isNotEmpty &&
+        backButton.evaluate().isEmpty;
+
+    while (!isHomeSettled()) {
+      if (DateTime.now().isAfter(deadline)) {
+        throw tester.failureShowingScreen(
+          'Did not get back to the home screen in $_returnHomeTimeout',
+        );
+      }
       if (lockPasswordField.evaluate().isNotEmpty) {
         if (++unlocks > _maxUnlocksWhileLeaving) {
           throw TestFailure(
@@ -160,12 +242,20 @@ abstract final class E2eApp {
         await unlock(tester, password);
         continue;
       }
-      if (backButton.evaluate().isEmpty) break;
-      await tester.tapOn(backButton);
+      if (backButton.hitTestable().evaluate().firstOrNull
+          case final tappableBackButton?) {
+        final poppedBackButton = find.byElementPredicate(
+          (element) => identical(element, tappableBackButton),
+        );
+        await tester.tap(poppedBackButton);
+        await tester.waitForAbsent(poppedBackButton);
+        continue;
+      }
+      if (summaryTab.hitTestable().evaluate().isNotEmpty) {
+        await tester.tap(summaryTab.hitTestable());
+      }
+      await tester.pump(E2eWidgetTester.pollInterval);
     }
-
-    await openDrawerItem(tester, HomeDrawerKeys.signOut);
-    await tester.waitFor(loginButton);
   }
 
   /// Unmounts the app inside the test body so errors thrown while it tears
