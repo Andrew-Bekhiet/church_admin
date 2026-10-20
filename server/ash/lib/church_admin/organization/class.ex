@@ -14,12 +14,11 @@ defmodule ChurchAdmin.Organization.Class do
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Attendance.Meeting
   alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, InScope, RelatedInScope, System}
-  alias ChurchAdmin.Authz.ServiceGrantCoverage
   alias ChurchAdmin.Catalog.StudyYear
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.History.Changes.RecordEdit
   alias ChurchAdmin.Organization.Changes.DefaultStudyYearToFromYear
-  alias ChurchAdmin.Organization.Service
+  alias ChurchAdmin.Organization.{ClassCoverage, Service}
   alias ChurchAdmin.People.{ClassMembership, Person}
   alias ChurchAdmin.Types.Text
 
@@ -212,8 +211,10 @@ defmodule ChurchAdmin.Organization.Class do
       public?: true,
       filter:
         expr(
-          service_id == parent(service_id) and service_study_year == parent(service_study_year) and
-            service_gender == parent(service_gender)
+          ^ClassCoverage.covers_class(
+            ClassCoverage.meeting_row(),
+            ClassCoverage.through_parent(ClassCoverage.class_row())
+          )
         )
 
     has_one :latest_edit, LatestEdit,
@@ -233,10 +234,10 @@ defmodule ChurchAdmin.Organization.Class do
         expr(
           exists(
             scope_grants,
-            ^ServiceGrantCoverage.covers_class(
-              ServiceGrantCoverage.grant_row(),
-              ServiceGrantCoverage.through_parent(
-                ServiceGrantCoverage.through_parent(ServiceGrantCoverage.class_row())
+            ^ClassCoverage.covers_class(
+              ClassCoverage.scope_grant_row(),
+              ClassCoverage.through_parent(
+                ClassCoverage.through_parent(ClassCoverage.class_row())
               )
             )
           )

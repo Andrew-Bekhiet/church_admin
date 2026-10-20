@@ -2,7 +2,7 @@ defmodule ChurchAdmin.People.Contact do
   use Ash.Resource,
     domain: ChurchAdmin.People,
     data_layer: AshPostgres.DataLayer,
-    authorizers: [Ash.Policy.Authorizer],
+    fragments: [ChurchAdmin.Archival.HideRecordsOfArchivedPerson],
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Authz.Checks.{InScope, System}

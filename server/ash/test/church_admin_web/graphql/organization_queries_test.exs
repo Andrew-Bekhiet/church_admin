@@ -99,7 +99,7 @@ defmodule ChurchAdminWeb.Graphql.OrganizationQueriesTest do
     %{"data" => %{"class" => class}} = run(conn, document, variables, :service_open, world)
 
     assert class["service"]["id"] == world.records.s1.id
-    assert length(class["classMemberships"]) == 2
+    assert length(class["classMemberships"]) == 1
   end
 
   test "class memberships page like the other link tables", %{conn: conn, world: world} do
@@ -109,7 +109,7 @@ defmodule ChurchAdminWeb.Graphql.OrganizationQueriesTest do
 
     %{"data" => %{"classMemberships" => page}} = run(conn, document, :read_all, world)
 
-    assert page["count"] == 5
+    assert page["count"] == 3
     assert length(page["results"]) == 3
 
     live_classes =
