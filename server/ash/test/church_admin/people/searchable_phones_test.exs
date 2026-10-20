@@ -59,7 +59,7 @@ defmodule ChurchAdmin.People.SearchablePhonesTest do
     |> Ash.read!(actor: actor(world, kind), page: false)
     |> Enum.map(fn person -> {person, person.searchable_phones} end)
     |> Enum.flat_map(fn {person, contacts} ->
-      case names([person], world) |> MapSet.to_list() do
+      case [person] |> names(world) |> MapSet.to_list() do
         [name] -> [{name, MapSet.new(contacts, &Map.fetch!(contact_names, &1.id))}]
         [] -> []
       end
@@ -76,7 +76,7 @@ defmodule ChurchAdmin.People.SearchablePhonesTest do
       phones = phones_by_person(world, @kind)
 
       for {person, found} <- phones, person in @persons do
-        assert found == MapSet.intersection(candidates(person), readable_contacts),
+        assert found == person |> candidates() |> MapSet.intersection(readable_contacts),
                "#{person}: #{inspect(MapSet.to_list(found))}"
 
         assert MapSet.subset?(found, readable_contacts)
@@ -146,7 +146,7 @@ defmodule ChurchAdmin.People.SearchablePhonesTest do
 
     for kind <- ChurchAdmin.PeopleChildrenWorld.actor_kinds() do
       actor = actor(world, kind)
-      readable = Ash.read!(ResolvedContact, actor: actor, page: false) |> MapSet.new(& &1.phone)
+      readable = ResolvedContact |> Ash.read!(actor: actor, page: false) |> MapSet.new(& &1.phone)
 
       for phone <- all_phones, phone not in readable do
         found =

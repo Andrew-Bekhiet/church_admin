@@ -57,8 +57,9 @@ defmodule ChurchAdmin.People.MembershipAuthorizationTest do
       editor = actor_with([{:service, ctx.s1.id, edit?: true}])
 
       assert {:ok, _person} =
-               People.update_person(
-                 editable(ctx.person, editor),
+               ctx.person
+               |> editable(editor)
+               |> People.update_person(
                  %{name: "renamed", services: [ctx.s1.id], groups: []},
                  actor: editor
                )
@@ -77,8 +78,9 @@ defmodule ChurchAdmin.People.MembershipAuthorizationTest do
         ])
 
       assert {:ok, _person} =
-               People.update_person(
-                 editable(ctx.person, editor),
+               ctx.person
+               |> editable(editor)
+               |> People.update_person(
                  %{services: [ctx.s1.id], groups: []},
                  actor: editor
                )
@@ -94,8 +96,9 @@ defmodule ChurchAdmin.People.MembershipAuthorizationTest do
       editor = actor_with([{:service, ctx.s1.id, edit?: true}])
 
       assert {:ok, _person} =
-               People.update_person(
-                 editable(ctx.person, editor),
+               ctx.person
+               |> editable(editor)
+               |> People.update_person(
                  %{services: [ctx.s1.id, ctx.s2.id, s3.id]},
                  actor: editor
                )
@@ -113,8 +116,9 @@ defmodule ChurchAdmin.People.MembershipAuthorizationTest do
         ])
 
       assert {:ok, _person} =
-               People.update_person(
-                 editable(ctx.person, editor),
+               ctx.person
+               |> editable(editor)
+               |> People.update_person(
                  %{groups: [editable_group.id]},
                  actor: editor
                )
@@ -132,8 +136,9 @@ defmodule ChurchAdmin.People.MembershipAuthorizationTest do
         ])
 
       assert {:error, error} =
-               People.update_person(
-                 editable(ctx.person, editor),
+               ctx.person
+               |> editable(editor)
+               |> People.update_person(
                  %{name: "renamed", groups: [read_only_group.id]},
                  actor: editor
                )
