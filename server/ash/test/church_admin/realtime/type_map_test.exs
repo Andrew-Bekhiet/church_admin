@@ -75,10 +75,9 @@ defmodule ChurchAdmin.Realtime.TypeMapTest do
   test "a parent column left null emits no parent", %{type_map: type_map} do
     row = %{"id" => @row_id, "family_id" => @family_id, "store_id" => nil}
 
-    refute Enum.any?(
-             changes(type_map, {"public", "addresses"}, :insert, row),
-             &(&1.type == "Store")
-           )
+    refute type_map
+           |> changes({"public", "addresses"}, :insert, row)
+           |> Enum.any?(&(&1.type == "Store"))
   end
 
   test "an update that moves a child emits both the old and the new parent", %{type_map: type_map} do
