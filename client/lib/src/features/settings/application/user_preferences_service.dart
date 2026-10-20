@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/users_preferences/__generated__/fragments.gql.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -161,20 +162,8 @@ class UserPreferencesService extends BlocObserver {
     final uid = _authBloc.currentUserData?.uid;
     if (uid == null) return;
 
-    final orderByPreferences = <String, Object?>{};
-    final secondLinePreferences = <String, Object?>{};
-    final scalarWrites = <String, Object?>{};
-
-    for (final MapEntry(:key, :value) in _pendingWritesBox.toMap().entries) {
-      if (key.startsWith(_orderByKeyPrefix) && value is List) {
-        orderByPreferences[key.substring(_orderByKeyPrefix.length)] = value;
-      } else if (key.startsWith(_secondLineKeyPrefix)) {
-        secondLinePreferences[key.substring(_secondLineKeyPrefix.length)] =
-            _isNullQueuedValue(value) ? null : value;
-      } else {
-        scalarWrites[key] = _isNullQueuedValue(value) ? null : value;
-      }
-    }
+    final (:orderByPreferences, :secondLinePreferences, :scalarWrites) =
+        _pendingWritesByKind();
 
     if (orderByPreferences.isEmpty &&
         secondLinePreferences.isEmpty &&
@@ -198,11 +187,7 @@ class UserPreferencesService extends BlocObserver {
             set: Input_UsersPreferencesSetInput.fromJson(scalarWrites),
             append: appendFields,
           );
-      if (acknowledged != null) {
-        _acknowledgedPreferences = UserPreferences.fromJson(
-          acknowledged.toJson(),
-        );
-      }
+      _maybeRememberAcknowledged(acknowledged);
 
       _deleteUnchangedPendingWrites('', scalarWrites);
       _deleteUnchangedPendingWrites(_orderByKeyPrefix, orderByPreferences);
@@ -217,6 +202,40 @@ class UserPreferencesService extends BlocObserver {
         ),
       );
     }
+  }
+
+  ({
+    Map<String, Object?> orderByPreferences,
+    Map<String, Object?> secondLinePreferences,
+    Map<String, Object?> scalarWrites,
+  })
+  _pendingWritesByKind() {
+    final orderByPreferences = <String, Object?>{};
+    final secondLinePreferences = <String, Object?>{};
+    final scalarWrites = <String, Object?>{};
+
+    for (final MapEntry(:key, :value) in _pendingWritesBox.toMap().entries) {
+      if (key.startsWith(_orderByKeyPrefix) && value is List) {
+        orderByPreferences[key.substring(_orderByKeyPrefix.length)] = value;
+      } else if (key.startsWith(_secondLineKeyPrefix)) {
+        secondLinePreferences[key.substring(_secondLineKeyPrefix.length)] =
+            _isNullQueuedValue(value) ? null : value;
+      } else {
+        scalarWrites[key] = _isNullQueuedValue(value) ? null : value;
+      }
+    }
+
+    return (
+      orderByPreferences: orderByPreferences,
+      secondLinePreferences: secondLinePreferences,
+      scalarWrites: scalarWrites,
+    );
+  }
+
+  void _maybeRememberAcknowledged(Fragment_UserPreferences? acknowledged) {
+    if (acknowledged == null) return;
+
+    _acknowledgedPreferences = UserPreferences.fromJson(acknowledged.toJson());
   }
 
   void _deleteUnchangedPendingWrites(
