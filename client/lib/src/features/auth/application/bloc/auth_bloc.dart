@@ -153,12 +153,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
         _scheduleTokenRefresh(authUser);
 
-        final state = AuthAuthenticated(authUser: authUser, userData: userData);
-        if (!state.isApproved && authUser.emailVerified) {
+        final hasUnclaimedAccount = authUser.hasuraUserId == null;
+        if (hasUnclaimedAccount && authUser.emailVerified) {
           unawaited(_maybeClaimAccount());
         }
 
-        return state;
+        return AuthAuthenticated(authUser: authUser, userData: userData);
       },
       onError: (error, stackTrace) => AuthExceptionState(
         exception: error,
