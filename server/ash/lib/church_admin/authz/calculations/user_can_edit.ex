@@ -16,7 +16,7 @@ defmodule ChurchAdmin.Authz.Calculations.UserCanEdit do
 
   alias ChurchAdmin.Authz.{Actor, Scope}
 
-  @impl true
+  @impl Ash.Resource.Calculation
   def expression(opts, context) do
     entity = Keyword.fetch!(opts, :entity)
     scope = Scope.for_entity(entity, context.actor, :edit)

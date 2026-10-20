@@ -7,9 +7,9 @@ defmodule ChurchAdmin.Authz.Checks.OnRoster do
 
   use Ash.Policy.FilterCheck
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(_opts), do: "the person is on the meeting's roster in that role"
 
-  @impl true
+  @impl Ash.Policy.FilterCheck
   def filter(_actor, _context, _opts), do: Ash.Query.Exists.new([:roster_entry], true)
 end

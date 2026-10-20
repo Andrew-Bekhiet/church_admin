@@ -9,7 +9,7 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyOwnContacts do
   alias ChurchAdmin.Changes.AfterActionFailure
   alias ChurchAdmin.People.Contacts
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, context) do
     case Ash.Changeset.get_argument(changeset, :contacts) do
       nil ->

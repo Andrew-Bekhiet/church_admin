@@ -60,18 +60,18 @@ defmodule ChurchAdmin.RolledBackSession do
     String.to_integer(count)
   end
 
-  @impl true
+  @impl Postgrex.SimpleConnection
   def init(_args), do: {:ok, %{from: nil}}
 
-  @impl true
+  @impl Postgrex.SimpleConnection
   def handle_call({:query, sql}, from, state), do: {:query, sql, %{state | from: from}}
 
-  @impl true
+  @impl Postgrex.SimpleConnection
   def handle_result(results_or_error, state) do
     SimpleConnection.reply(state.from, results_or_error)
     {:noreply, %{state | from: nil}}
   end
 
-  @impl true
+  @impl Postgrex.SimpleConnection
   def notify(_channel, _payload, _state), do: :ok
 end

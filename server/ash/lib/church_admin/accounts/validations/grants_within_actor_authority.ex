@@ -14,7 +14,7 @@ defmodule ChurchAdmin.Accounts.Validations.GrantsWithinActorAuthority do
   alias ChurchAdmin.Authz.Actor
   alias ChurchAdmin.Errors.{Codes, DomainError}
 
-  @impl true
+  @impl Ash.Resource.Validation
   def validate(changeset, _opts, %{actor: actor}) do
     permissions = Ash.Changeset.get_argument(changeset, :permissions) || []
 

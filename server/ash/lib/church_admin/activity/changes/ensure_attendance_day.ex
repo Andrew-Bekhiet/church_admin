@@ -8,7 +8,7 @@ defmodule ChurchAdmin.Activity.Changes.EnsureAttendanceDay do
 
   alias ChurchAdmin.Activity
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, context) do
     Ash.Changeset.before_action(changeset, fn changeset ->
       day = Ash.Changeset.get_attribute(changeset, :day_id)

@@ -9,7 +9,7 @@ defmodule ChurchAdmin.Accounts.Changes.CreateInvitation do
   alias ChurchAdmin.Accounts.Invitation
   alias ChurchAdmin.Changes.AfterActionFailure
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, context) do
     case Ash.Changeset.get_argument(changeset, :invitation_expires_at) do
       nil ->

@@ -26,7 +26,7 @@ defmodule ChurchAdmin.Authz.Changes.RecheckAfterUpdate do
   alias ChurchAdmin.Authz.Checks.InScope
   alias ChurchAdmin.Changes.AfterActionFailure
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, context) do
     Ash.Changeset.after_action(changeset, fn changeset, record ->
       if (Keyword.get(opts, :skippable?, true) and skip_recheck?(changeset)) or
@@ -40,7 +40,7 @@ defmodule ChurchAdmin.Authz.Changes.RecheckAfterUpdate do
 
   defp skip_recheck?(changeset), do: Map.get(changeset.context, :skip_scope_recheck?, false)
 
-  @impl true
+  @impl Ash.Resource.Change
   def atomic(_changeset, _opts, _context),
     do: {:not_atomic, "the row is rechecked after the update, inside its transaction"}
 

@@ -13,10 +13,10 @@ defmodule ChurchAdmin.Authz.Checks.HoldsRosterGrant do
 
   alias ChurchAdmin.Authz.{Actor, Grant}
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(_opts), do: "a grant of the actor covers the roster row"
 
-  @impl true
+  @impl Ash.Policy.FilterCheck
   def filter(%Actor{} = actor, _context, _opts) do
     any_of([
       unless_empty(Grant.scope_ids(actor.group_grants), fn ids -> expr(group_id in ^ids) end),

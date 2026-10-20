@@ -9,7 +9,7 @@ defmodule ChurchAdmin.Errors.DomainError do
 
   use Splode.Error, fields: [:code, :message, fields: []], class: :invalid
 
-  @impl true
+  @impl Exception
   def message(%{message: message}) when is_binary(message), do: message
   def message(%{code: code}), do: code
 

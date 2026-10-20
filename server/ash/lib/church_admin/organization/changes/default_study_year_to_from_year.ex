@@ -6,7 +6,7 @@ defmodule ChurchAdmin.Organization.Changes.DefaultStudyYearToFromYear do
 
   use Ash.Resource.Change
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context) do
     study_year_to =
       Ash.Changeset.get_argument(changeset, :service_study_year_to) ||

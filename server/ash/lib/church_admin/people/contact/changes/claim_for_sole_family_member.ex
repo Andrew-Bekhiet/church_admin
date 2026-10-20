@@ -12,7 +12,7 @@ defmodule ChurchAdmin.People.Contact.Changes.ClaimForSoleFamilyMember do
 
   require Ash.Query
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context) do
     Ash.Changeset.before_action(changeset, &maybe_claim/1)
   end

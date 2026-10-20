@@ -11,7 +11,7 @@ defmodule ChurchAdmin.People.Family.Changes.NormalizeWidowhood do
   @widowed ["widowed", "widowedWithoutChildren"]
   @fields [:status, :marriage_date, :deceased_spouse_name]
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context) do
     if changeset.action_type == :create or
          Enum.any?(@fields, &Ash.Changeset.changing_attribute?(changeset, &1)),

@@ -22,7 +22,7 @@ defmodule ChurchAdmin.Activity.Changes.RecordLastVisit do
     is_father_visit: [type: :boolean, default: false]
   ]
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     case Spark.Options.validate(opts, @options_schema) do
       {:ok, opts} -> {:ok, opts}
@@ -30,7 +30,7 @@ defmodule ChurchAdmin.Activity.Changes.RecordLastVisit do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, context) do
     Ash.Changeset.after_action(changeset, fn changeset, record ->
       time = Ash.Changeset.get_argument(changeset, opts[:argument])

@@ -10,6 +10,6 @@ defmodule ChurchAdmin.Types.JsonbMap do
 
   def graphql_input_type(_), do: :json
 
-  @impl true
+  @impl Ash.Type
   def cast_atomic(expression, _constraints), do: {:atomic, expression}
 end

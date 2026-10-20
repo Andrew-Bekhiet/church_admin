@@ -6,7 +6,7 @@ defmodule ChurchAdmin.Accounts.Validations.GranterHoldsPermission do
   alias ChurchAdmin.Accounts.GrantAuthority
   alias ChurchAdmin.Errors.{Codes, DomainError}
 
-  @impl true
+  @impl Ash.Resource.Validation
   def validate(changeset, _opts, %{actor: actor}) do
     permission = Ash.Changeset.get_attribute(changeset, :permission)
 

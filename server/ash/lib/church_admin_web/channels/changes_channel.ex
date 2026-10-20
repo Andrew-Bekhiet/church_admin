@@ -19,7 +19,7 @@ defmodule ChurchAdminWeb.ChangesChannel do
 
   alias ChurchAdmin.Realtime.Broadcaster
 
-  @impl true
+  @impl Phoenix.Channel
   def join("changes", payload, socket) do
     case remaining_token_lifetime_ms(socket) do
       lifetime_ms when lifetime_ms > 0 ->
@@ -51,7 +51,7 @@ defmodule ChurchAdminWeb.ChangesChannel do
   defp remaining_token_lifetime_ms(%{assigns: %{token_expires_at: expires_at}}),
     do: expires_at * 1000 - System.os_time(:millisecond)
 
-  @impl true
+  @impl Phoenix.Channel
   def handle_info(:replay_backlog, socket) do
     Phoenix.PubSub.subscribe(ChurchAdmin.PubSub, Broadcaster.topic())
 

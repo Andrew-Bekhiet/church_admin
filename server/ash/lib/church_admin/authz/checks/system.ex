@@ -9,10 +9,10 @@ defmodule ChurchAdmin.Authz.Checks.System do
 
   alias ChurchAdmin.Authz.Actor
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(_opts), do: "the actor is the system"
 
-  @impl true
+  @impl Ash.Policy.SimpleCheck
   def match?(%Actor{system?: true}, _context, _opts), do: true
   def match?(_actor, _context, _opts), do: false
 end

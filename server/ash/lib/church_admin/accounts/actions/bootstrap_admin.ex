@@ -21,7 +21,7 @@ defmodule ChurchAdmin.Accounts.Actions.BootstrapAdmin do
   alias ChurchAdmin.Google.IdentityToolkit.Account
   alias ChurchAdmin.People.Person
 
-  @impl true
+  @impl Ash.Resource.Actions.Implementation
   def run(input, _opts, _context) do
     email = CanonicalizeNameAndEmail.canonical_email(input.arguments.email)
 

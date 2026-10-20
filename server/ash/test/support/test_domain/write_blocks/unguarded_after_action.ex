@@ -6,11 +6,11 @@ defmodule ChurchAdmin.TestDomain.UnguardedAfterAction do
 
   use Ash.Resource.Change
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context) do
     Ash.Changeset.after_action(changeset, fn _changeset, _record -> {:error, "failed"} end)
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def atomic(changeset, opts, context), do: {:ok, change(changeset, opts, context)}
 end

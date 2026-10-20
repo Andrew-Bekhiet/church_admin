@@ -12,7 +12,7 @@ defmodule ChurchAdmin.People.Person.Changes.CreateImplicitFamily do
   alias ChurchAdmin.Authz.Checks.CreatedInCommand
   alias ChurchAdmin.People.Family
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, context) do
     needs_family? =
       is_nil(Ash.Changeset.get_attribute(changeset, :family_id)) and

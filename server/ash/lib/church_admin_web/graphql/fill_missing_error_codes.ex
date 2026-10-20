@@ -7,7 +7,7 @@ defmodule ChurchAdminWeb.Graphql.FillMissingErrorCodes do
 
   use Absinthe.Phase
 
-  @impl true
+  @impl Absinthe.Phase
   def run(%{result: %{errors: errors} = result} = blueprint, _options) do
     code = if Map.has_key?(result, :data), do: "something_went_wrong", else: "invalid_document"
 

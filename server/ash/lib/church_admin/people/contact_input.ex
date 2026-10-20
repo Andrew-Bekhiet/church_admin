@@ -11,9 +11,9 @@ defmodule ChurchAdmin.People.ContactInput do
     field :is_main_phone, :boolean, allow_nil?: false, default: false
   end
 
-  @impl true
+  @impl AshGraphql.Type
   def graphql_type(_constraints), do: :contact_value
 
-  @impl true
+  @impl AshGraphql.Type
   def graphql_input_type(_constraints), do: :contact_input
 end

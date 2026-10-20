@@ -15,7 +15,7 @@ defmodule ChurchAdmin.Places.Calculations.NearGeography do
 
   import Ash.Expr
 
-  @impl true
+  @impl Ash.Resource.Calculation
   def expression(opts, %{arguments: %{from: from, meters: meters}}) do
     geojson = Jason.encode!(from)
     attribute_ref = opts |> Keyword.fetch!(:attribute) |> Ash.Expr.ref()

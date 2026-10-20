@@ -14,7 +14,7 @@ defmodule ChurchAdmin.People.Person.Validations.CallerMayRelinkUser do
 
   require Ash.Query
 
-  @impl true
+  @impl Ash.Resource.Validation
   def validate(changeset, _opts, context) do
     old_uid = changeset.data.uid
     new_uid = Ash.Changeset.get_attribute(changeset, :uid)

@@ -12,9 +12,9 @@ defmodule ChurchAdmin.People.FamilyContactInput do
     field :person_type_id, :uuid, allow_nil?: false
   end
 
-  @impl true
+  @impl AshGraphql.Type
   def graphql_type(_constraints), do: :family_contact_value
 
-  @impl true
+  @impl AshGraphql.Type
   def graphql_input_type(_constraints), do: :family_contact_input
 end

@@ -11,10 +11,10 @@ defmodule ChurchAdmin.Authz.Checks.Approved do
 
   alias ChurchAdmin.Authz.Actor
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(_opts), do: "the actor is approved"
 
-  @impl true
+  @impl Ash.Policy.SimpleCheck
   def match?(%Actor{approved?: approved?}, _context, _opts), do: approved?
   def match?(_actor, _context, _opts), do: false
 end

@@ -8,7 +8,7 @@ defmodule ChurchAdmin.Google.Messaging.Http do
   alias ChurchAdmin.Google.Error
   alias ChurchAdmin.Google.Messaging.Message
 
-  @impl true
+  @impl ChurchAdmin.Google.Messaging
   def send_message(%Message{} = message) do
     case Client.request(:messaging,
            method: :post,

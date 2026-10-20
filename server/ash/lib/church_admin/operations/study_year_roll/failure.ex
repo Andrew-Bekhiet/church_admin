@@ -11,7 +11,7 @@ defmodule ChurchAdmin.Operations.StudyYearRoll.Failure do
 
   @type t :: %__MODULE__{}
 
-  @impl true
+  @impl Exception
   def message(%{message: message}), do: message
 
   @spec recorded_error(t()) :: String.t()

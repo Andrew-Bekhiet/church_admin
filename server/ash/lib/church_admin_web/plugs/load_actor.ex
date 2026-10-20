@@ -13,10 +13,10 @@ defmodule ChurchAdminWeb.Plugs.LoadActor do
   alias ChurchAdmin.Authz.{Actor, ActorLoader}
   alias ChurchAdminWeb.Plugs.Unauthenticated
 
-  @impl true
+  @impl Plug
   def init(opts), do: opts
 
-  @impl true
+  @impl Plug
   def call(conn, _opts) do
     case Ash.PlugHelpers.get_actor(conn) do
       %Actor{system?: false, uid: uid, principal: principal} when is_binary(uid) ->

@@ -16,7 +16,7 @@ defmodule ChurchAdmin.People.Person.Changes.SyncLinkedUser do
 
   @shown [:name, :photo_updated_at, :blurhash]
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context) do
     Ash.Changeset.after_action(changeset, fn changeset, person ->
       case sync([person]) do
@@ -26,14 +26,14 @@ defmodule ChurchAdmin.People.Person.Changes.SyncLinkedUser do
     end)
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def batch_callbacks?(%Ash.Query{}, _opts, _context), do: false
   def batch_callbacks?(_changesets, _opts, _context), do: true
 
-  @impl true
+  @impl Ash.Resource.Change
   def batch_change(changesets, _opts, _context), do: changesets
 
-  @impl true
+  @impl Ash.Resource.Change
   def after_batch(changesets_and_results, _opts, _context) do
     case sync(Enum.map(changesets_and_results, &elem(&1, 1))) do
       :ok -> :ok

@@ -39,7 +39,7 @@ defmodule ChurchAdmin.History.Changes.RecordEdit do
     ]
   ]
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     with {:ok, opts} <- Spark.Options.validate(opts, @options_schema),
          {:ok, rows} <- rows_per_record(opts) do
@@ -67,7 +67,7 @@ defmodule ChurchAdmin.History.Changes.RecordEdit do
   @spec on_behalf_of(Actor.t()) :: map()
   def on_behalf_of(%Actor{} = actor), do: %{church_admin: %{edit_recorder: actor}}
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, context) do
     if writes_history?(changeset) do
       Ash.Changeset.after_action(changeset, fn changeset, record ->
@@ -81,17 +81,17 @@ defmodule ChurchAdmin.History.Changes.RecordEdit do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def atomic(changeset, opts, context), do: {:ok, change(changeset, opts, context)}
 
-  @impl true
+  @impl Ash.Resource.Change
   def batch_callbacks?(%Ash.Query{}, _opts, _context), do: false
   def batch_callbacks?(_changesets, _opts, _context), do: true
 
-  @impl true
+  @impl Ash.Resource.Change
   def batch_change(changesets, _opts, _context), do: changesets
 
-  @impl true
+  @impl Ash.Resource.Change
   def after_batch(changesets_and_results, opts, context) do
     changesets_and_results
     |> Enum.filter(fn {changeset, _record} -> writes_history?(changeset) end)

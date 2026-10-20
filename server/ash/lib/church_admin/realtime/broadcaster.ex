@@ -44,7 +44,7 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
   def batches_since(server \\ __MODULE__, version),
     do: GenServer.call(server, {:batches_since, version})
 
-  @impl true
+  @impl GenServer
   def init(opts) do
     {:ok,
      %{
@@ -60,7 +60,7 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
      }}
   end
 
-  @impl true
+  @impl GenServer
   def handle_call({:reset, version}, _from, state) do
     Phoenix.PubSub.broadcast(
       ChurchAdmin.PubSub,
@@ -84,7 +84,7 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
   def handle_call({:batches_since, version}, _from, state),
     do: {:reply, batches_since_version(state, version), state}
 
-  @impl true
+  @impl GenServer
   def handle_cast({:commit, commit_lsn, row_changes}, state) do
     case Enum.flat_map(row_changes, &TypeMap.changes_for(state.type_map, &1)) do
       [] -> {:noreply, state}
@@ -92,7 +92,7 @@ defmodule ChurchAdmin.Realtime.Broadcaster do
     end
   end
 
-  @impl true
+  @impl GenServer
   def handle_info({:flush, ref}, %{flush_ref: ref} = state) when ref != nil,
     do: {:noreply, flush(state)}
 

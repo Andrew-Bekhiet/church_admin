@@ -11,9 +11,9 @@ defmodule ChurchAdmin.Accounts.ClaimedAccount do
     field :uid, :uuid, allow_nil?: false
   end
 
-  @impl true
+  @impl AshGraphql.Type
   def graphql_type(_constraints), do: :claimed_account
 
-  @impl true
+  @impl AshGraphql.Type
   def graphql_input_type(_constraints), do: :claimed_account_input
 end

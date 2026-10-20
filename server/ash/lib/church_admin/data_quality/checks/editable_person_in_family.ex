@@ -12,10 +12,10 @@ defmodule ChurchAdmin.DataQuality.Checks.EditablePersonInFamily do
 
   alias ChurchAdmin.Authz.Scope
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(_opts), do: "a live person of the family is one the actor may edit"
 
-  @impl true
+  @impl Ash.Policy.FilterCheck
   def filter(actor, _context, _opts) do
     case Scope.person(actor, :edit) do
       false ->

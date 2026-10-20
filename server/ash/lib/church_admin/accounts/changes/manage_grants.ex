@@ -25,7 +25,7 @@ defmodule ChurchAdmin.Accounts.Changes.ManageGrants do
     :service_gender
   ]
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, _context) do
     changeset
     |> manage(:permissions, Ash.Changeset.get_argument(changeset, :permissions))

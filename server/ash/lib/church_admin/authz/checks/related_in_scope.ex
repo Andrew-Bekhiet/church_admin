@@ -12,12 +12,12 @@ defmodule ChurchAdmin.Authz.Checks.RelatedInScope do
 
   alias ChurchAdmin.Authz.Scope
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(opts) do
     "#{Enum.join(List.wrap(opts[:path]), ".")} is in the actor's #{opts[:access]} scope"
   end
 
-  @impl true
+  @impl Ash.Policy.FilterCheck
   def filter(actor, _context, opts) do
     entity = Keyword.fetch!(opts, :entity)
     access = Keyword.fetch!(opts, :access)

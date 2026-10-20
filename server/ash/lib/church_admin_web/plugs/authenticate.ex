@@ -14,10 +14,10 @@ defmodule ChurchAdminWeb.Plugs.Authenticate do
   alias ChurchAdmin.Authz.Actor
   alias ChurchAdminWeb.Plugs.Unauthenticated
 
-  @impl true
+  @impl Plug
   def init(opts), do: opts
 
-  @impl true
+  @impl Plug
   def call(conn, _opts) do
     case get_req_header(conn, "authorization") do
       [] ->

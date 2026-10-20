@@ -21,10 +21,10 @@ defmodule ChurchAdmin.Authz.Checks.CreatedInCommand do
 
   @type kind :: :person | :family
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(opts), do: "#{opts[:attribute]} names a #{opts[:kind]} created in this command"
 
-  @impl true
+  @impl Ash.Policy.SimpleCheck
   def match?(_actor, %{subject: %Ash.Changeset{} = changeset}, opts) do
     id = Ash.Changeset.get_attribute(changeset, Keyword.fetch!(opts, :attribute))
     not is_nil(id) and id in created_ids(changeset.context, Keyword.fetch!(opts, :kind))

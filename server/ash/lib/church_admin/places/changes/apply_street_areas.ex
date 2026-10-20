@@ -19,7 +19,7 @@ defmodule ChurchAdmin.Places.Changes.ApplyStreetAreas do
 
   require Ash.Query
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, context) do
     case Ash.Changeset.get_argument(changeset, :areas) do
       nil ->

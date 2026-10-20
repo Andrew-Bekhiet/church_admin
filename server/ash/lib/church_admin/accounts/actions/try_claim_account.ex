@@ -16,7 +16,7 @@ defmodule ChurchAdmin.Accounts.Actions.TryClaimAccount do
   alias ChurchAdmin.Google.IdentityToolkit
   alias ChurchAdmin.Google.IdentityToolkit.Account
 
-  @impl true
+  @impl Ash.Resource.Actions.Implementation
   def run(_input, _opts, %{actor: %{principal: principal} = actor}) do
     with :ok <- claiming_enabled(),
          {:ok, email} <- verified_email(principal.auth_id),

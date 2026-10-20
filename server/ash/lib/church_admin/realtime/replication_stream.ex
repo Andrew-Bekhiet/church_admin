@@ -47,12 +47,12 @@ defmodule ChurchAdmin.Realtime.ReplicationStream do
     ])
   end
 
-  @impl true
+  @impl Postgrex.ReplicationConnection
   def init(broadcaster) do
     {:ok, %{broadcaster: broadcaster, step: :disconnected, relations: %{}, row_changes: []}}
   end
 
-  @impl true
+  @impl Postgrex.ReplicationConnection
   def handle_connect(state) do
     slot = @slot_prefix <> (8 |> :crypto.strong_rand_bytes() |> Base.encode16(case: :lower))
 
@@ -60,11 +60,11 @@ defmodule ChurchAdmin.Realtime.ReplicationStream do
      %{state | step: {:creating_slot, slot}}}
   end
 
-  @impl true
+  @impl Postgrex.ReplicationConnection
   def handle_disconnect(state),
     do: {:noreply, %{state | step: :disconnected, relations: %{}, row_changes: []}}
 
-  @impl true
+  @impl Postgrex.ReplicationConnection
   def handle_result(
         [%Postgrex.Result{rows: [[slot, consistent_point | _]]}],
         %{
@@ -82,7 +82,7 @@ defmodule ChurchAdmin.Realtime.ReplicationStream do
   def handle_result(%Postgrex.Error{} = error, _state),
     do: {:disconnect, Exception.message(error)}
 
-  @impl true
+  @impl Postgrex.ReplicationConnection
   def handle_data(<<?w, _wal_start::64, _wal_end::64, _clock::64, message::binary>>, state),
     do: {:noreply, handle_message(Pgoutput.decode(message), state)}
 

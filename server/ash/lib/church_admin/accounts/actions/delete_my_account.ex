@@ -14,7 +14,7 @@ defmodule ChurchAdmin.Accounts.Actions.DeleteMyAccount do
   alias ChurchAdmin.Accounts.{ScopeGrant, User, UserPermission}
   alias ChurchAdmin.Google.{Error, IdentityToolkit}
 
-  @impl true
+  @impl Ash.Resource.Actions.Implementation
   def run(_input, _opts, %{actor: %{principal: principal} = actor}) do
     with :ok <- release(principal.auth_id, actor),
          :ok <- delete_firebase_account(principal.auth_id) do

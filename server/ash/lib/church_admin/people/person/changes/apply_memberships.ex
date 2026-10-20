@@ -38,7 +38,7 @@ defmodule ChurchAdmin.People.Person.Changes.ApplyMemberships do
 
   @authorized_per_link [ServiceMembership, GroupMembership]
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, context) do
     changeset =
       if changeset.action_type == :update,

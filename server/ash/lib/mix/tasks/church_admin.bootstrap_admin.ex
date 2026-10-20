@@ -10,7 +10,7 @@ defmodule Mix.Tasks.ChurchAdmin.BootstrapAdmin do
 
   use Mix.Task
 
-  @impl true
+  @impl Mix.Task
   def run(args) do
     {opts, _rest} = OptionParser.parse!(args, strict: [email: :string, force: :boolean])
     email = opts[:email] || Mix.raise("--email is required")

@@ -11,12 +11,12 @@ defmodule ChurchAdmin.Authz.Changes.RecordActor do
 
   alias ChurchAdmin.Authz.Actor
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, %{actor: %Actor{uid: uid}}) when is_binary(uid),
     do: Ash.Changeset.force_change_attribute(changeset, Keyword.fetch!(opts, :attribute), uid)
 
   def change(changeset, _opts, _context), do: changeset
 
-  @impl true
+  @impl Ash.Resource.Change
   def atomic(changeset, opts, context), do: {:ok, change(changeset, opts, context)}
 end

@@ -18,7 +18,7 @@ defmodule ChurchAdmin.People.Family.Changes.ApplyRelations do
     children: {:parent_family_id, :child_family_id}
   ]
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, context) do
     Ash.Changeset.after_action(changeset, fn changeset, family ->
       case apply_sides(changeset, family.id, context.actor) do

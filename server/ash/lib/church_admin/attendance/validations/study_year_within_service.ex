@@ -14,7 +14,7 @@ defmodule ChurchAdmin.Attendance.Validations.StudyYearWithinService do
   alias ChurchAdmin.Errors.{Codes, DomainError}
   alias ChurchAdmin.Organization.Service
 
-  @impl true
+  @impl Ash.Resource.Validation
   def validate(changeset, _opts, _context) do
     group_id = Ash.Changeset.get_attribute(changeset, :group_id)
     study_year = Ash.Changeset.get_attribute(changeset, :service_study_year)
@@ -31,7 +31,7 @@ defmodule ChurchAdmin.Attendance.Validations.StudyYearWithinService do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Validation
   def atomic(_changeset, _opts, _context),
     do: {:not_atomic, "the year is compared with the service's range"}
 

@@ -16,7 +16,7 @@ defmodule ChurchAdmin.People.Person.Changes.ClaimFamilyContacts do
 
   require Ash.Query
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, context) do
     Ash.Changeset.after_action(changeset, fn changeset, person ->
       with true <- membership_changed?(changeset, person),

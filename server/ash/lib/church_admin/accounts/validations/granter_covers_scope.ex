@@ -10,7 +10,7 @@ defmodule ChurchAdmin.Accounts.Validations.GranterCoversScope do
   alias ChurchAdmin.Accounts.{AdminOn, GrantAuthority}
   alias ChurchAdmin.Errors.{Codes, DomainError}
 
-  @impl true
+  @impl Ash.Resource.Validation
   def validate(changeset, _opts, %{actor: actor}) do
     scope = Map.new(AdminOn.field_names(), &{&1, Ash.Changeset.get_attribute(changeset, &1)})
 

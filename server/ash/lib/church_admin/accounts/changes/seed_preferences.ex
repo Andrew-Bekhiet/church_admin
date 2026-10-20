@@ -10,7 +10,7 @@ defmodule ChurchAdmin.Accounts.Changes.SeedPreferences do
   alias ChurchAdmin.Accounts.{DefaultPreferences, Preferences}
   alias ChurchAdmin.Changes.AfterActionFailure
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, _opts, context) do
     Ash.Changeset.after_action(changeset, fn changeset, user ->
       Preferences

@@ -21,7 +21,7 @@ defmodule ChurchAdmin.Organization.Validations.DefaultMeetingBelongsToOwner do
     archived: [type: :string, required: true]
   ]
 
-  @impl true
+  @impl Ash.Resource.Validation
   def init(opts) do
     case Spark.Options.validate(opts, @options_schema) do
       {:ok, opts} -> {:ok, opts}
@@ -29,7 +29,7 @@ defmodule ChurchAdmin.Organization.Validations.DefaultMeetingBelongsToOwner do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Validation
   def validate(changeset, opts, _context) do
     case Ash.Changeset.get_attribute(changeset, :default_meeting_id) do
       nil -> :ok
@@ -37,7 +37,7 @@ defmodule ChurchAdmin.Organization.Validations.DefaultMeetingBelongsToOwner do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Validation
   def atomic(_changeset, _opts, _context),
     do: {:not_atomic, "the default meeting is read from the meetings table"}
 

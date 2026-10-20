@@ -14,7 +14,7 @@ defmodule ChurchAdmin.Accounts.InvitationAttempts do
     use Hammer, backend: :ets, algorithm: :sliding_window
   end
 
-  @impl true
+  @impl AshRateLimiter.Backend
   def hit(key, window_ms, limit), do: Counter.hit(key, window_ms, limit)
 
   @spec key(Ash.ActionInput.t(), map()) :: String.t()

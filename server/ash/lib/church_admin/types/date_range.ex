@@ -4,26 +4,26 @@ defmodule ChurchAdmin.Types.DateRange do
 
   @range_text ~r/\A([\[(])\s*(\d{4}-\d{2}-\d{2})?\s*,\s*(\d{4}-\d{2}-\d{2})?\s*([\])])\z/
 
-  @impl true
+  @impl Ash.Type
   def storage_type(_), do: :daterange
 
   def graphql_type(_), do: :string
 
   def graphql_input_type(_), do: :string
 
-  @impl true
+  @impl Ash.Type
   def cast_input(nil, _), do: {:ok, nil}
   def cast_input(%Postgrex.Range{} = range, _), do: format(range)
   def cast_input(text, _) when is_binary(text), do: normalize(text)
   def cast_input(_, _), do: :error
 
-  @impl true
+  @impl Ash.Type
   def cast_stored(nil, _), do: {:ok, nil}
   def cast_stored(%Postgrex.Range{} = range, _), do: format(range)
   def cast_stored(text, _) when is_binary(text), do: normalize(text)
   def cast_stored(_, _), do: :error
 
-  @impl true
+  @impl Ash.Type
   def dump_to_native(nil, _), do: {:ok, nil}
 
   def dump_to_native(text, _) when is_binary(text) do
@@ -35,7 +35,7 @@ defmodule ChurchAdmin.Types.DateRange do
 
   def dump_to_native(_, _), do: :error
 
-  @impl true
+  @impl Ash.Type
   def dump_to_embedded(value, _), do: {:ok, value}
 
   defp normalize(text) do

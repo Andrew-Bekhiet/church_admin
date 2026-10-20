@@ -14,7 +14,7 @@ defmodule ChurchAdmin.Places.Changes.SyncAreasStreets do
 
   @options_schema [geography: [type: {:in, [:bounds, :line]}, required: true]]
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     case Spark.Options.validate(opts, @options_schema) do
       {:ok, opts} -> {:ok, opts}
@@ -22,7 +22,7 @@ defmodule ChurchAdmin.Places.Changes.SyncAreasStreets do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, _context) do
     geography = opts[:geography]
 

@@ -12,10 +12,10 @@ defmodule ChurchAdmin.Authz.Checks.MayRecordAttendance do
 
   alias ChurchAdmin.Authz.Scope
 
-  @impl true
+  @impl Ash.Policy.Check
   def describe(_opts), do: "the actor may record attendance in the record's meeting"
 
-  @impl true
+  @impl Ash.Policy.FilterCheck
   def filter(actor, _context, _opts) do
     any_of([
       all_of([expr(not as_servant), meeting_in_scope(actor, :record_persons)]),

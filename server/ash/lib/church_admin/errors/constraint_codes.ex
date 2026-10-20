@@ -18,7 +18,7 @@ defmodule ChurchAdmin.Errors.ConstraintCodes do
 
   alias ChurchAdmin.Errors.DomainError
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     case opts[:codes] do
       %{} = codes when map_size(codes) > 0 -> {:ok, opts}
@@ -26,14 +26,14 @@ defmodule ChurchAdmin.Errors.ConstraintCodes do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, _context) do
     Ash.Changeset.handle_errors(changeset, fn _changeset, error ->
       translate(error, opts[:codes])
     end)
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def atomic(changeset, opts, context), do: {:ok, change(changeset, opts, context)}
 
   @spec translate(term(), %{String.t() => String.t()}) :: term()

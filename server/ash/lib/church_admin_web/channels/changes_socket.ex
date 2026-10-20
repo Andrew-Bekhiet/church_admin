@@ -24,7 +24,7 @@ defmodule ChurchAdminWeb.ChangesSocket do
   @spec id_for(String.t()) :: String.t()
   def id_for(uid), do: @id_prefix <> uid
 
-  @impl true
+  @impl Phoenix.Socket
   def connect(%{"token" => token}, socket, _connect_info) when is_binary(token) do
     with {:ok, %Principal{uid: uid} = principal} when is_binary(uid) <-
            TokenVerifier.verify(token),
@@ -40,6 +40,6 @@ defmodule ChurchAdminWeb.ChangesSocket do
 
   def connect(_params, _socket, _connect_info), do: :error
 
-  @impl true
+  @impl Phoenix.Socket
   def id(%{assigns: %{actor: %Actor{uid: uid}}}), do: id_for(uid)
 end

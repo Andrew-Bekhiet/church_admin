@@ -16,7 +16,7 @@ defmodule ChurchAdmin.Changes.CodeTakenIdentity do
     code: [type: :string, required: true]
   ]
 
-  @impl true
+  @impl Ash.Resource.Change
   def init(opts) do
     case Spark.Options.validate(opts, @options_schema) do
       {:ok, opts} -> {:ok, opts}
@@ -24,7 +24,7 @@ defmodule ChurchAdmin.Changes.CodeTakenIdentity do
     end
   end
 
-  @impl true
+  @impl Ash.Resource.Change
   def change(changeset, opts, _context) do
     Ash.Changeset.handle_errors(changeset, fn _changeset, error ->
       translate(error, opts[:field], opts[:code])
