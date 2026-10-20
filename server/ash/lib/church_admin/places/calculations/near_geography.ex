@@ -18,11 +18,12 @@ defmodule ChurchAdmin.Places.Calculations.NearGeography do
   @impl true
   def expression(opts, %{arguments: %{from: from, meters: meters}}) do
     geojson = Jason.encode!(from)
+    attribute_ref = opts |> Keyword.fetch!(:attribute) |> Ash.Expr.ref()
 
     expr(
       fragment(
         "coalesce(ST_DWithin(?::geography, ST_GeomFromGeoJSON(?::text)::geography, ?::float8), false)",
-        ^Ash.Expr.ref(Keyword.fetch!(opts, :attribute)),
+        ^attribute_ref,
         ^geojson,
         ^meters
       )
