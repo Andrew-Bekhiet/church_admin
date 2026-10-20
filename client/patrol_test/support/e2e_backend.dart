@@ -98,6 +98,28 @@ abstract final class E2eBackend {
     return (inserted['insertPersonsOne'] as Map)['id'] as String;
   }
 
+  static Future<String> insertPersonBornOn(
+    String name, {
+    required DateTime birthdate,
+    required String serviceName,
+  }) async {
+    final serviceId = await serviceIdByName(serviceName);
+    final inserted = await hasuraQuery(
+      r'''
+      mutation InsertPersonBornOn($name: String!, $birthdate: date!, $serviceId: uuid!) {
+        insertPersonsOne(object: {name: $name, birthdate: $birthdate, services: {data: [{serviceId: $serviceId}]}}) { id }
+      }
+      ''',
+      variables: {
+        'name': name,
+        'birthdate': birthdate.toIso8601String().split('T').first,
+        'serviceId': serviceId,
+      },
+    );
+
+    return (inserted['insertPersonsOne'] as Map)['id'] as String;
+  }
+
   static Future<String> insertApprovedUser(
     String name, {
     required String adminOnServiceId,
