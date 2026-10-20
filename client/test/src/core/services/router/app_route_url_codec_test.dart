@@ -96,6 +96,12 @@ void main() {
 
       expect(codec.decode(address), [home, NotFoundRoute(address)]);
     });
+
+    test('whose query is not valid UTF-8 shows the not-found page', () {
+      final address = Uri.parse('/view_person?id=%FF');
+
+      expect(codec.decode(address), [home, NotFoundRoute(address)]);
+    });
   });
 
   final screensWithoutData = <AppRoute>[

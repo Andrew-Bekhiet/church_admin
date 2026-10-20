@@ -75,7 +75,13 @@ class AppRouteUrlCodec extends KaiselStackCodec<AppRoute> {
 
   @override
   List<AppRoute> decode(Uri uri) {
-    final params = uri.queryParameters;
+    final Map<String, String> params;
+    try {
+      params = uri.queryParameters;
+    } on FormatException {
+      return _reportNotFound(uri).breadcrumbs;
+    }
+
     final screen = switch (uri.path) {
       '/update_user_spirit_data' => const UpdateUserSpiritDataRoute(),
       '/biometrics_auth' => BiometricsAuthRoute(
