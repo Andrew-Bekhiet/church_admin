@@ -2,7 +2,8 @@ defmodule ChurchAdminWeb.ChangesSocket do
   @moduledoc """
   The realtime socket at `/socket`. The `token` connect param is a Firebase
   ID token, verified like the `Authorization` header of `/gql`. The socket is
-  admitted only for an onboarded account whose user is approved, with the
+  admitted only for an onboarded account, whose uid claim names the user
+  linked to its Firebase account, and whose user is approved, with the
   actor `ChurchAdmin.Authz.ActorLoader` builds for the uid, and its id is
   `changes_socket:<uid>` so
   `ChurchAdmin.Accounts.DisconnectSocketsOnRevokedApproval` can drop a user's
@@ -27,13 +28,13 @@ defmodule ChurchAdminWeb.ChangesSocket do
   def connect(%{"token" => token}, socket, _connect_info) when is_binary(token) do
     with {:ok, %Principal{uid: uid} = principal} when is_binary(uid) <-
            TokenVerifier.verify(token),
-         %Actor{approved?: true} = actor <- ActorLoader.load(uid) do
+         {:ok, %Actor{approved?: true} = actor} <- ActorLoader.load_for_principal(principal) do
       {:ok,
        socket
-       |> assign(:actor, %{actor | principal: principal})
+       |> assign(:actor, actor)
        |> assign(:token_expires_at, principal.claims["exp"])}
     else
-      _unverified_or_not_onboarded_or_not_approved -> :error
+      _unverified_or_not_onboarded_or_not_linked_or_not_approved -> :error
     end
   end
 

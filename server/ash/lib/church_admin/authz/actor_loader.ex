@@ -5,8 +5,13 @@ defmodule ChurchAdmin.Authz.ActorLoader do
   manage and the approved servants its record-servants grants let it read.
   Nothing is cached across requests, so a grant change applies on the next
   request.
+
+  `load_for_principal/1` serves requests: it also checks, in the same round
+  trip, that the uid claim names the user whose `auth_id` is the principal's
+  Firebase uid, so a claim that outlived its link loads no actor.
   """
 
+  alias ChurchAdmin.Auth.Principal
   alias ChurchAdmin.Authz.{Actor, Grant}
   alias ChurchAdmin.Repo
 
@@ -52,13 +57,30 @@ defmodule ChurchAdmin.Authz.ActorLoader do
                   and recorder.admin_on_group = attended.admin_on_group
               )
           inner join approved on approved.uid = attended.uid
-      )
+      ),
+      coalesce((select auth_id = $2::text from auth.users_data where uid = $1), false)
   """
 
   @spec load(String.t()) :: Actor.t()
   def load(uid) when is_binary(uid) do
-    %{rows: [row]} = Repo.query!(@facts_sql, [Ecto.UUID.dump!(uid)])
-    from_facts(uid, row)
+    {_account_owns_uid?, actor} = query_facts(uid, nil)
+    actor
+  end
+
+  @spec load_for_principal(Principal.t()) :: {:ok, Actor.t()} | :error
+  def load_for_principal(%Principal{uid: uid, auth_id: auth_id} = principal)
+      when is_binary(uid) and is_binary(auth_id) do
+    case query_facts(uid, auth_id) do
+      {true, actor} -> {:ok, %{actor | principal: principal}}
+      {false, _actor} -> :error
+    end
+  end
+
+  def load_for_principal(%Principal{}), do: :error
+
+  defp query_facts(uid, auth_id) do
+    %{rows: [row]} = Repo.query!(@facts_sql, [Ecto.UUID.dump!(uid), auth_id])
+    {List.last(row), from_facts(uid, Enum.drop(row, -1))}
   end
 
   defp from_facts(uid, [permissions, person_id, family_id, grants, managed, servants]) do

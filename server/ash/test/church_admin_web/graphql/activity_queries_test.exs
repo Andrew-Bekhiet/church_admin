@@ -1,14 +1,14 @@
 defmodule ChurchAdminWeb.Graphql.ActivityQueriesTest do
   use ChurchAdminWeb.ConnCase, async: false
 
-  alias ChurchAdmin.{ActivityWorld, FirebaseTokens}
+  alias ChurchAdmin.{ActivityWorld, Factory, FirebaseTokens}
 
   setup do
     {:ok, world: ActivityWorld.build!()}
   end
 
   defp run(conn, document, variables, kind, world) do
-    claims = FirebaseTokens.valid_claims(%{"x-hasura-user-id" => world.users[kind].uid})
+    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users[kind]))
 
     conn
     |> put_req_header("authorization", "Bearer " <> FirebaseTokens.unsigned(claims))

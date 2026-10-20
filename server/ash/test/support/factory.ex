@@ -20,6 +20,18 @@ defmodule ChurchAdmin.Factory do
 
   def user!(attrs \\ %{}), do: seed!(User, Map.merge(%{name: unique("user")}, Map.new(attrs)))
 
+  @doc """
+  The token claims of the Firebase account signed in as `user`: its uid claim
+  and a subject equal to the user's `auth_id`, which the row gets when it has
+  none, as claiming an account would.
+  """
+  def firebase_account!(%User{uid: uid} = user) do
+    auth_id = user.auth_id || "firebase-#{uid}"
+    if is_nil(user.auth_id), do: Ash.Seed.update!(user, %{auth_id: auth_id})
+
+    %{"sub" => auth_id, "user_id" => auth_id, "x-hasura-user-id" => uid}
+  end
+
   def permissions!(%User{uid: uid}, names), do: permissions!(uid, names)
 
   def permissions!(uid, names) do

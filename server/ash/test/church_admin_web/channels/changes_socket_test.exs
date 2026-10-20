@@ -8,7 +8,7 @@ defmodule ChurchAdminWeb.ChangesSocketTest do
 
   @endpoint ChurchAdminWeb.Endpoint
 
-  defp token_for(uid), do: token_with(%{"x-hasura-user-id" => uid})
+  defp token_for(user), do: token_with(Factory.firebase_account!(user))
 
   defp token_with(claims),
     do: claims |> FirebaseTokens.valid_claims() |> FirebaseTokens.unsigned()
@@ -17,7 +17,7 @@ defmodule ChurchAdminWeb.ChangesSocketTest do
     test "admits an approved user and assigns the loaded actor" do
       user = user_with!(~w(approved readAllData))
 
-      assert {:ok, socket} = connect(ChangesSocket, %{"token" => token_for(user.uid)})
+      assert {:ok, socket} = connect(ChangesSocket, %{"token" => token_for(user)})
       assert socket.assigns.actor.approved?
       assert socket.assigns.actor.read_all?
       assert socket.assigns.actor.principal.uid == user.uid
@@ -31,15 +31,35 @@ defmodule ChurchAdminWeb.ChangesSocketTest do
 
     test "refuses a user who is not approved" do
       user = user_with!(~w(readAllData))
-      unknown_uid = Ash.UUID.generate()
 
-      assert connect(ChangesSocket, %{"token" => token_for(user.uid)}) == :error
-      assert connect(ChangesSocket, %{"token" => token_for(unknown_uid)}) == :error
+      assert connect(ChangesSocket, %{"token" => token_for(user)}) == :error
+    end
+
+    test "refuses a uid claim that belongs to another account" do
+      user = user_with!(~w(approved readAllData))
+      other_account = Factory.firebase_account!(Factory.user!())
+      claims = %{other_account | "x-hasura-user-id" => user.uid}
+
+      assert connect(ChangesSocket, %{"token" => token_with(claims)}) == :error
+    end
+
+    test "refuses a uid claim that no user has" do
+      account = Factory.firebase_account!(user_with!(~w(approved)))
+      claims = %{account | "x-hasura-user-id" => Ash.UUID.generate()}
+
+      assert connect(ChangesSocket, %{"token" => token_with(claims)}) == :error
+    end
+
+    test "refuses a token whose subject is no user's account" do
+      user = user_with!(~w(approved))
+      claims = %{Factory.firebase_account!(user) | "sub" => "firebase-nobody"}
+
+      assert connect(ChangesSocket, %{"token" => token_with(claims)}) == :error
     end
 
     test "is keyed by the uid, so a user's sockets can be disconnected together" do
       user = user_with!(~w(approved))
-      {:ok, socket} = connect(ChangesSocket, %{"token" => token_for(user.uid)})
+      {:ok, socket} = connect(ChangesSocket, %{"token" => token_for(user)})
 
       assert ChangesSocket.id(socket) == "changes_socket:" <> user.uid
     end
