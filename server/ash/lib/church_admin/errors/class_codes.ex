@@ -18,8 +18,10 @@ defmodule ChurchAdmin.Errors.ClassCodes do
 
     @error_apps
     |> Enum.flat_map(&app_modules/1)
-    |> Enum.filter(&splode_error_struct?/1)
-    |> Enum.reject(&MapSet.member?(covered, Module.concat(AshGraphql.Error, &1)))
+    |> Enum.filter(fn module ->
+      splode_error_struct?(module) and
+        not MapSet.member?(covered, Module.concat(AshGraphql.Error, module))
+    end)
   end
 
   @spec to_error(Exception.t()) :: map()
