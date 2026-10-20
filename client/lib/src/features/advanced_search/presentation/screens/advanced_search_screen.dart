@@ -198,6 +198,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
               ],
             ),
             body: ViewableObjectList(
+              key: AdvancedSearchScreenKeys.resultsList,
               objectsController: viewableObjectListController,
               viewableObjectWidgetConfig: controller.orderBy.isNotEmpty
                   ? ViewableObjectWidgetConfig(
@@ -229,4 +230,8 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
     await viewableObjectListController.dispose();
     await searchQuery.close();
   }
+}
+
+abstract final class AdvancedSearchScreenKeys {
+  static const Key resultsList = Key('advanced_search_results_list');
 }
