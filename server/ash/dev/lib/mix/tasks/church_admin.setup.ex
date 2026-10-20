@@ -56,7 +56,8 @@ defmodule Mix.Tasks.ChurchAdmin.Setup do
   defp load_sample_data(:services), do: Seeds.load_sample_services!()
 
   defp load_sample_data(scale) do
-    unless File.exists?(Seeds.generated_path(scale)), do: SeedGenerator.write!(scale)
+    generated_file_exists? = scale |> Seeds.generated_path() |> File.exists?()
+    unless generated_file_exists?, do: SeedGenerator.write!(scale)
 
     Seeds.load_sample_services!()
     Seeds.load_generated!(scale)

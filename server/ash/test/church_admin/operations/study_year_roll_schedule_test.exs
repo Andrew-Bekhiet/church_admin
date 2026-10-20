@@ -43,7 +43,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollScheduleTest do
     test "a failed season alerts once, however many hourly attempts fail" do
       blocked_world()
 
-      for _hour <- 1..3, do: Roll.run_when_due(nayrouz(@season))
+      for _hour <- 1..3, do: @season |> nayrouz() |> Roll.run_when_due()
 
       assert alerted_run_ids() == [run_id("failed")]
     end
@@ -59,7 +59,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollScheduleTest do
     test "a successful roll does not alert" do
       one_pupil_world()
 
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
 
       assert alerted_run_ids() == []
     end

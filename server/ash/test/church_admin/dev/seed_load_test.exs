@@ -31,7 +31,9 @@ defmodule ChurchAdmin.Dev.SeedLoadTest do
 
         in_loaded_session(script, fn session ->
           pairs = Session.rows!(session, "select area_id, street_id from public.areas_streets")
-          assert Enum.sort(Enum.map(pairs, &List.to_tuple/1)) == output.expected_areas_streets
+
+          assert pairs |> Enum.map(&List.to_tuple/1) |> Enum.sort() ==
+                   output.expected_areas_streets
 
           assert Session.count!(
                    session,

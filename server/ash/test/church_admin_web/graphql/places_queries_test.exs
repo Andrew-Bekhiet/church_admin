@@ -14,7 +14,9 @@ defmodule ChurchAdminWeb.Graphql.PlacesQueriesTest do
           conn
 
         kind ->
-          claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users[kind]))
+          claims =
+            world.users[kind] |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
+
           put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
       end
 
@@ -74,7 +76,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesQueriesTest do
 
     # links stay readable after their street is soft-deleted (areas_streets filter {})
     assert MapSet.new(area["areaStreets"], & &1["streetId"]) ==
-             MapSet.put(id_set(world, [:st1, :st_a1, :st_cross]), world.records.st_gone.id)
+             world |> id_set([:st1, :st_a1, :st_cross]) |> MapSet.put(world.records.st_gone.id)
 
     assert ids(data["streets"]) == id_set(world, [:st1, :st_a1, :st_a2, :st_cross])
     assert ids(data["stores"]) == id_set(world, [:store1])
@@ -216,7 +218,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesQueriesTest do
       conn: conn,
       world: world
     } do
-      polygon = Jason.encode!(PlacesWorld.cell_polygon(1))
+      polygon = 1 |> PlacesWorld.cell_polygon() |> Jason.encode!()
 
       document = """
       { stores(filter: {address: {withinPolygon: {input: {polygon: #{inspect(polygon)}}, eq: true}}}) {

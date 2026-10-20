@@ -30,7 +30,7 @@ defmodule ChurchAdmin.Files.PhotoEditHistoryTest do
     target = Target.new(subject, record_id, resource, record_id)
     assert :ok = Record.record(target, @photo_updated_at, "blurhash")
 
-    Enum.reject(edits_of(table, record_id), &MapSet.member?(before_ids, &1.audit_id))
+    table |> edits_of(record_id) |> Enum.reject(&MapSet.member?(before_ids, &1.audit_id))
   end
 
   for {subject, resource, name, table} <- @kinds do
@@ -56,7 +56,9 @@ defmodule ChurchAdmin.Files.PhotoEditHistoryTest do
     target = Target.new(:persons, person.id, ChurchAdmin.People.Person, person.id)
     assert :ok = Record.record(target, @photo_updated_at, "blurhash")
 
-    assert Enum.reject(edits_of("users", person.uid), &MapSet.member?(before_ids, &1.audit_id)) ==
+    assert "users"
+           |> edits_of(person.uid)
+           |> Enum.reject(&MapSet.member?(before_ids, &1.audit_id)) ==
              []
   end
 end

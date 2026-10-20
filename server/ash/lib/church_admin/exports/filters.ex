@@ -63,9 +63,11 @@ defmodule ChurchAdmin.Exports.Filters do
     do: any_of([reached.areas, reached.services, reached.classes, reached.groups])
 
   defp families(selection, reached) do
+    reached_people = reached_without_areas(reached)
+
     any_of([
       unless_empty(selection.areas_ids, fn ids -> expr(exists(address, area_id in ^ids)) end)
-      | Enum.map(reached_without_areas(reached), fn person ->
+      | Enum.map(reached_people, fn person ->
           expr(exists(persons, ^live(person)))
         end)
     ])
@@ -76,18 +78,22 @@ defmodule ChurchAdmin.Exports.Filters do
   end
 
   defp streets(selection, reached) do
+    reached_people = reached_without_areas(reached)
+
     any_of([
       unless_empty(selection.areas_ids, fn ids -> expr(exists(area_streets, area_id in ^ids)) end)
-      | Enum.map(reached_without_areas(reached), fn person ->
+      | Enum.map(reached_people, fn person ->
           expr(exists(area_streets.area.addresses.family.persons, ^live(person)))
         end)
     ])
   end
 
   defp areas(selection, reached) do
+    reached_people = reached_without_areas(reached)
+
     any_of([
       unless_empty(selection.areas_ids, fn ids -> expr(id in ^ids) end)
-      | Enum.map(reached_without_areas(reached), fn person ->
+      | Enum.map(reached_people, fn person ->
           expr(exists(addresses.family.persons, ^live(person)))
         end)
     ])

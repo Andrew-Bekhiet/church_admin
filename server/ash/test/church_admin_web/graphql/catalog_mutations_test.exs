@@ -22,7 +22,7 @@ defmodule ChurchAdminWeb.Graphql.CatalogMutationsTest do
   end
 
   defp run(conn, document, user) do
-    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
+    claims = user |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
 
     conn
     |> put_req_header("authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
@@ -80,7 +80,7 @@ defmodule ChurchAdminWeb.Graphql.CatalogMutationsTest do
 
     assert %{"isHidden" => true, "isFamilyAdmin" => false, "order" => order} = result
     assert is_integer(order)
-    assert Enum.any?(Ash.read!(PersonType, authorize?: false), &(&1.name == "role"))
+    assert PersonType |> Ash.read!(authorize?: false) |> Enum.any?(&(&1.name == "role"))
   end
 
   test "createPersonType reports a taken order as person-type/order-taken",

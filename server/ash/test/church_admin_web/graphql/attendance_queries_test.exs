@@ -14,7 +14,7 @@ defmodule ChurchAdminWeb.Graphql.AttendanceQueriesTest do
   end
 
   defp run(conn, document, variables, kind, world) do
-    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(world.users[kind]))
+    claims = world.users[kind] |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
 
     conn
     |> put_req_header("authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
@@ -107,10 +107,10 @@ defmodule ChurchAdminWeb.Graphql.AttendanceQueriesTest do
     end
 
     assert names.("byService", "serviceName") ==
-             Enum.sort(names.("byService", "serviceName"), :desc)
+             "byService" |> names.("serviceName") |> Enum.sort(:desc)
 
-    assert names.("byGroup", "groupName") == Enum.sort(names.("byGroup", "groupName"))
-    assert names.("byPerson", "personName") == Enum.sort(names.("byPerson", "personName"))
+    assert names.("byGroup", "groupName") == "byGroup" |> names.("groupName") |> Enum.sort()
+    assert names.("byPerson", "personName") == "byPerson" |> names.("personName") |> Enum.sort()
 
     years = for %{"studyYearOrder" => order} <- data["byYear"]["results"], order, do: order
     assert years == Enum.sort(years)
@@ -141,7 +141,8 @@ defmodule ChurchAdminWeb.Graphql.AttendanceQueriesTest do
     first = first["rosterEntries"]
 
     rest =
-      run(conn, @roster, Map.put(variables, "after", first["endKeyset"]), :service_open, world)
+      conn
+      |> run(@roster, Map.put(variables, "after", first["endKeyset"]), :service_open, world)
       |> data!()
       |> Map.fetch!("rosterEntries")
 
@@ -337,7 +338,7 @@ defmodule ChurchAdminWeb.Graphql.AttendanceQueriesTest do
     assert ids(rows) == MapSet.new(for n <- [:a_m1, :a_f2, :a_servant], do: world.records[n].id)
     assert Enum.all?(rows, &(&1["time"] == &1["datetime"]))
     assert Enum.all?(rows, &(&1["user"] == %{"uid" => world.users.read_all.uid}))
-    assert Enum.map(rows, & &1["time"]) == Enum.sort(Enum.map(rows, & &1["time"]), :desc)
+    assert Enum.map(rows, & &1["time"]) == rows |> Enum.map(& &1["time"]) |> Enum.sort(:desc)
 
     others = put_in(variables["uid"], world.users.service_open.uid)
 

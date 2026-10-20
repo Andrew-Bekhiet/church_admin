@@ -104,7 +104,8 @@ defmodule ChurchAdmin.Operations.StudyYearRoll.Apply do
   end
 
   defp retire_classes!(classes) do
-    update!(Class, :id, Enum.map(List.wrap(classes), & &1.id), :retire_cohort, %{})
+    class_ids = classes |> List.wrap() |> Enum.map(& &1.id)
+    update!(Class, :id, class_ids, :retire_cohort, %{})
   end
 
   # A servant may hold one service scope per study year, and the unique index
@@ -157,7 +158,7 @@ defmodule ChurchAdmin.Operations.StudyYearRoll.Apply do
     length(ids)
   end
 
-  defp rel_ids(memberships), do: Enum.map(List.wrap(memberships), & &1.rel_id)
+  defp rel_ids(memberships), do: memberships |> List.wrap() |> Enum.map(& &1.rel_id)
 
   defp bulk_options(extra \\ []) do
     Keyword.merge(

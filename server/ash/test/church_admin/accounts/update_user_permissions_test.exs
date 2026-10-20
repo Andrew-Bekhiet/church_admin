@@ -140,7 +140,9 @@ defmodule ChurchAdmin.Accounts.UpdateUserPermissionsTest do
           ctx.actor
         )
 
-      assert [edit] = Enum.filter(user_edits(ctx.user), &(&1.recorded_by == ctx.manager.uid))
+      assert [edit] =
+               ctx.user |> user_edits() |> Enum.filter(&(&1.recorded_by == ctx.manager.uid))
+
       assert edit.user_role == "user"
     end
 

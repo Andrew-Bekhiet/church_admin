@@ -43,7 +43,10 @@ defmodule ChurchAdmin.Attendance.AttendanceRecordRulesTest do
   defp servant!(attrs \\ %{}) do
     user = Factory.user!()
     Factory.permissions!(user, ["approved"])
-    person = Factory.person!(Map.merge(%{uid: user.uid, family_id: Factory.family!().id}, attrs))
+
+    person =
+      %{uid: user.uid, family_id: Factory.family!().id} |> Map.merge(attrs) |> Factory.person!()
+
     {user, person}
   end
 

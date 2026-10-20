@@ -56,8 +56,11 @@ defmodule ChurchAdmin.Accounts.GrantAuthority do
   def scope_manageable?(%Actor{} = actor, scope) do
     Actor.holds?(actor, "manageAllUsers") or
       case container(scope) do
-        {:ok, kind, id} -> Enum.any?(grants(actor, kind), &covers?(&1, kind, id, scope))
-        :error -> false
+        {:ok, kind, id} ->
+          actor |> grants(kind) |> Enum.any?(&covers?(&1, kind, id, scope))
+
+        :error ->
+          false
       end
   end
 

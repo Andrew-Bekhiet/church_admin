@@ -74,7 +74,9 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Attendance do
   defp servant_ids(meeting, context) do
     context.admin_on
     |> Enum.filter(&grant_covers?(&1, meeting))
-    |> Enum.flat_map(&List.wrap(Map.get(context.person_id_by_uid, &1.uid)))
+    |> Enum.flat_map(fn grant ->
+      context.person_id_by_uid |> Map.get(grant.uid) |> List.wrap()
+    end)
     |> Enum.uniq()
     |> Enum.sort()
   end

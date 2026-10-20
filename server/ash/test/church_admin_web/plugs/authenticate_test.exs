@@ -18,7 +18,7 @@ defmodule ChurchAdminWeb.Plugs.AuthenticateTest do
   end
 
   test "a request without a token proceeds with no actor" do
-    conn = conn(:post, "/gql") |> authenticate()
+    conn = :post |> conn("/gql") |> authenticate()
 
     refute conn.halted
     assert Ash.PlugHelpers.get_actor(conn) == nil
@@ -26,7 +26,7 @@ defmodule ChurchAdminWeb.Plugs.AuthenticateTest do
 
   test "a valid token sets the actor for its principal" do
     claims = FirebaseTokens.valid_claims()
-    conn = conn(:post, "/gql") |> with_bearer(FirebaseTokens.unsigned(claims)) |> authenticate()
+    conn = :post |> conn("/gql") |> with_bearer(FirebaseTokens.unsigned(claims)) |> authenticate()
 
     refute conn.halted
 
@@ -43,7 +43,7 @@ defmodule ChurchAdminWeb.Plugs.AuthenticateTest do
       |> FirebaseTokens.valid_claims()
       |> FirebaseTokens.unsigned()
 
-    conn = conn(:post, "/gql") |> with_bearer(token) |> authenticate()
+    conn = :post |> conn("/gql") |> with_bearer(token) |> authenticate()
 
     assert conn.halted
     assert conn.status == 401
@@ -51,7 +51,7 @@ defmodule ChurchAdminWeb.Plugs.AuthenticateTest do
   end
 
   test "a malformed authorization header is rejected with 401 unauthenticated" do
-    conn = conn(:post, "/gql") |> put_req_header("authorization", "Basic abc") |> authenticate()
+    conn = :post |> conn("/gql") |> put_req_header("authorization", "Basic abc") |> authenticate()
 
     assert conn.status == 401
     assert unauthenticated_code(conn) == "unauthenticated"

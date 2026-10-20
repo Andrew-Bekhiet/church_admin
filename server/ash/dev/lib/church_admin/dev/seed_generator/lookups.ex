@@ -49,8 +49,8 @@ defmodule ChurchAdmin.Dev.SeedGenerator.Lookups do
       schools: named(:schools),
       jobs: named(:jobs),
       qualifications: named(:qualifications),
-      hobbies: Enum.map(named(:hobbies), &Map.put(&1, :color, 4_280_391_411)),
-      tags: Enum.map(named(:tags), &Map.put(&1, :color, 4_288_423_856)),
+      hobbies: :hobbies |> named() |> Enum.map(&Map.put(&1, :color, 4_280_391_411)),
+      tags: :tags |> named() |> Enum.map(&Map.put(&1, :color, 4_288_423_856)),
       person_states:
         @person_states
         |> Enum.with_index()

@@ -52,7 +52,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
       test "does nothing on #{label} Cairo" do
         pupil = one_pupil_world()
 
-        Roll.run_when_due(Date.new!(@season, 9, unquote(day)))
+        @season |> Date.new!(9, unquote(day)) |> Roll.run_when_due()
 
         assert study_year_of(pupil) == 1
         assert Roll.runs(@season) == []
@@ -62,7 +62,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
     test "rolls on 11 September Cairo and records the step counts as succeeded" do
       pupil = one_pupil_world()
 
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
 
       assert study_year_of(pupil) == 2
 
@@ -83,7 +83,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
     test "rolls the season of the year today falls in" do
       one_pupil_world()
 
-      Roll.run_when_due(nayrouz(2031))
+      2031 |> nayrouz() |> Roll.run_when_due()
 
       assert [%{status: :succeeded}] = Roll.runs(2031)
       assert Roll.runs(@season) == []
@@ -94,8 +94,8 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
     test "a second call on the same day after a success changes nothing" do
       pupil = one_pupil_world()
 
-      Roll.run_when_due(nayrouz(@season))
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
+      @season |> nayrouz() |> Roll.run_when_due()
 
       assert study_year_of(pupil) == 2
       assert [%{status: :succeeded}] = Roll.runs(@season)
@@ -103,7 +103,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
 
     test "a direct run of a rolled season is skipped" do
       pupil = one_pupil_world()
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
 
       assert Roll.run(@season) == {:ok, :skipped_already_rolled}
       assert study_year_of(pupil) == 2
@@ -123,7 +123,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
       pupil = one_pupil_world()
       looping = self_linked_service!()
 
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
 
       assert study_year_of(pupil) == 1
 
@@ -154,29 +154,27 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
     test "a second failure replaces the error on the season's one failed row" do
       one_pupil_world()
       first = self_linked_service!()
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
 
       second = self_linked_service!()
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
 
       assert [%{status: :failed} = failed] = Roll.runs(@season)
 
       assert sorted_error_lines(failed) ==
-               Enum.sort(
-                 String.split(
-                   blocked_error(@season, [cycle_blocker_line(first), cycle_blocker_line(second)]),
-                   "\n"
-                 )
-               )
+               @season
+               |> blocked_error([cycle_blocker_line(first), cycle_blocker_line(second)])
+               |> String.split("\n")
+               |> Enum.sort()
     end
 
     test "a failure does not block a later attempt the same day" do
       pupil = one_pupil_world()
       looping = self_linked_service!()
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
 
       route!(looping, nil)
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
 
       assert study_year_of(pupil) == 2
       assert [%{status: :failed}, %{status: :succeeded}] = Roll.runs(@season)
@@ -200,7 +198,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
 
     test "records nothing after a success" do
       one_pupil_world()
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
 
       Roll.record_missed(~D[2026-09-12])
 
@@ -210,7 +208,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
     test "records missed next to the season's failure" do
       one_pupil_world()
       self_linked_service!()
-      Roll.run_when_due(nayrouz(@season))
+      @season |> nayrouz() |> Roll.run_when_due()
 
       Roll.record_missed(~D[2026-09-12])
 
@@ -223,7 +221,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
       one_pupil_world()
       self_linked_service!()
 
-      for _hour <- 1..3, do: Roll.run_when_due(nayrouz(@season))
+      for _hour <- 1..3, do: @season |> nayrouz() |> Roll.run_when_due()
       for _check <- 1..2, do: Roll.record_missed(~D[2026-09-12])
 
       assert [%{status: :failed}, %{status: :missed}] = Roll.runs(@season)

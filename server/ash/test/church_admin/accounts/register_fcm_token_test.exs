@@ -38,7 +38,7 @@ defmodule ChurchAdmin.Accounts.RegisterFcmTokenTest do
     {:ok, _} = Accounts.register_fcm_token("shared", actor: ctx.actor)
     {:ok, _} = Accounts.register_fcm_token("shared", actor: actor_for(other))
 
-    assert rows("shared") |> Enum.map(& &1.uid) |> Enum.sort() ==
+    assert "shared" |> rows() |> Enum.map(& &1.uid) |> Enum.sort() ==
              Enum.sort([ctx.user.uid, other.uid])
   end
 

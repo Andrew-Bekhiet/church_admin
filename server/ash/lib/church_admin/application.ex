@@ -9,20 +9,19 @@ defmodule ChurchAdmin.Application do
   def start(_type, _args) do
     ChurchAdmin.Auth.TokenVerifier.configured!()
 
-    ChurchAdmin.Google.Config.ensure_allowed_in!(
-      Application.fetch_env!(:church_admin, :config_env)
-    )
+    :church_admin
+    |> Application.fetch_env!(:config_env)
+    |> ChurchAdmin.Google.Config.ensure_allowed_in!()
+
+    ash_domains = Application.fetch_env!(:church_admin, :ash_domains)
+    oban_options = Application.fetch_env!(:church_admin, Oban)
 
     children =
       [
         ChurchAdminWeb.Telemetry,
         ChurchAdmin.Repo,
         {DNSCluster, query: Application.get_env(:church_admin, :dns_cluster_query) || :ignore},
-        {Oban,
-         AshOban.config(
-           Application.fetch_env!(:church_admin, :ash_domains),
-           Application.fetch_env!(:church_admin, Oban)
-         )},
+        {Oban, AshOban.config(ash_domains, oban_options)},
         {Phoenix.PubSub, name: ChurchAdmin.PubSub},
         {ChurchAdmin.Accounts.InvitationAttempts.Counter, clean_period: :timer.minutes(10)},
         ChurchAdmin.Realtime.Supervisor,

@@ -34,7 +34,7 @@ defmodule ChurchAdmin.Activity.HistoryReadsTest do
 
     rest = Ash.page!(first, :next)
     refute Enum.any?(rest.results, &(&1.time in times))
-    assert Enum.max(Enum.map(rest.results, & &1.time), DateTime) <= Enum.min(times, DateTime)
+    assert rest.results |> Enum.map(& &1.time) |> Enum.max(DateTime) <= Enum.min(times, DateTime)
   end
 
   test "a record's visits are listed newest first", %{world: world} do
@@ -68,35 +68,35 @@ defmodule ChurchAdmin.Activity.HistoryReadsTest do
     f_area = world.records.f_area.id
     actor = read_all(world)
 
-    assert [call] = Ash.read!(LatestCall |> Ash.Query.filter(person_id == ^m1), actor: actor)
+    assert [call] = LatestCall |> Ash.Query.filter(person_id == ^m1) |> Ash.read!(actor: actor)
     assert call.time == ActivityWorld.at(100)
 
     assert [confession] =
-             Ash.read!(LatestConfession |> Ash.Query.filter(person_id == ^m1), actor: actor)
+             LatestConfession |> Ash.Query.filter(person_id == ^m1) |> Ash.read!(actor: actor)
 
     assert confession.time == ActivityWorld.day_2()
 
-    assert [kodas] = Ash.read!(LatestKodas |> Ash.Query.filter(person_id == ^m1), actor: actor)
+    assert [kodas] = LatestKodas |> Ash.Query.filter(person_id == ^m1) |> Ash.read!(actor: actor)
     assert kodas.time == ActivityWorld.day_2()
 
     assert [visit] =
-             Ash.read!(
-               LatestVisit |> Ash.Query.filter(table == "persons" and record_id == ^m1),
-               actor: actor
-             )
+             LatestVisit
+             |> Ash.Query.filter(table == "persons" and record_id == ^m1)
+             |> Ash.read!(actor: actor)
 
     assert visit.time == ActivityWorld.at(200)
 
     assert [family_visit] =
-             Ash.read!(
-               LatestVisit |> Ash.Query.filter(table == "families" and record_id == ^f_area),
-               actor: actor
-             )
+             LatestVisit
+             |> Ash.Query.filter(table == "families" and record_id == ^f_area)
+             |> Ash.read!(actor: actor)
 
     assert family_visit.time == ActivityWorld.at(200)
 
     assert [father_visit] =
-             Ash.read!(LatestFatherVisit |> Ash.Query.filter(record_id == ^f_area), actor: actor)
+             LatestFatherVisit
+             |> Ash.Query.filter(record_id == ^f_area)
+             |> Ash.read!(actor: actor)
 
     assert father_visit.time == ActivityWorld.at(300)
   end

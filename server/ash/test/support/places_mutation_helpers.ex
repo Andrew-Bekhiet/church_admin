@@ -39,7 +39,7 @@ defmodule ChurchAdminWeb.PlacesMutationHelpers do
   defp authorize(conn, nil), do: conn
 
   defp authorize(conn, user) do
-    claims = FirebaseTokens.valid_claims(Factory.firebase_account!(user))
+    claims = user |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
     put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
   end
 

@@ -58,18 +58,20 @@ defmodule ChurchAdmin.PersonWrites do
   defp transact(fun) do
     fire_fixtures_deferred_checks!()
 
-    Repo.transaction(fn ->
-      case fun.() do
-        {:ok, person} ->
-          Repo.query!("set constraints all immediate")
-          Repo.query!("set constraints all deferred")
-          person.id
+    transaction_result =
+      Repo.transaction(fn ->
+        case fun.() do
+          {:ok, person} ->
+            Repo.query!("set constraints all immediate")
+            Repo.query!("set constraints all deferred")
+            person.id
 
-        {:error, error} ->
-          Repo.rollback(error)
-      end
-    end)
-    |> case do
+          {:error, error} ->
+            Repo.rollback(error)
+        end
+      end)
+
+    case transaction_result do
       {:ok, id} -> {:ok, id}
       {:error, error} -> {:error, code_of(error)}
     end
@@ -83,15 +85,16 @@ defmodule ChurchAdmin.PersonWrites do
   end
 
   defp code_of(error) do
-    error
-    |> Ash.Error.to_error_class()
+    error_class = Ash.Error.to_error_class(error)
+
+    error_class
     |> leaf_errors()
     |> Enum.find_value(fn
       %DomainError{code: code} -> code
       %Ash.Error.Forbidden.Policy{} -> Codes.forbidden()
       %Ash.Error.Forbidden{} -> Codes.forbidden()
       _error -> nil
-    end) || message_code(%{message: Exception.message(Ash.Error.to_error_class(error))})
+    end) || message_code(%{message: Exception.message(error_class)})
   end
 
   defp leaf_errors(%{errors: [_ | _] = errors}), do: Enum.flat_map(errors, &leaf_errors/1)

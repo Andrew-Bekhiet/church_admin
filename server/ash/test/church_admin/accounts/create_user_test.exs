@@ -16,10 +16,9 @@ defmodule ChurchAdmin.Accounts.CreateUserTest do
   defp create(actor, input, opts \\ []) do
     name = Map.get(input, :name, "servant #{System.unique_integer([:positive])}")
 
-    Accounts.create_user(
-      Map.merge(%{name: name, new_person: %{name: String.trim(name), gender: false}}, input),
-      [actor: actor] ++ opts
-    )
+    %{name: name, new_person: %{name: String.trim(name), gender: false}}
+    |> Map.merge(input)
+    |> Accounts.create_user([actor: actor] ++ opts)
   end
 
   defp service_manager!(service, flags \\ [edit?: true, manage_users?: true]) do

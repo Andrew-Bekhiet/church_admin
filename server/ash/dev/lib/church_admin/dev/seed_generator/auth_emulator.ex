@@ -17,7 +17,11 @@ defmodule ChurchAdmin.Dev.SeedGenerator.AuthEmulator do
   @spec build([map()]) :: String.t()
   def build(users) do
     accounts = for user <- users, not user.pending?, do: account(user)
-    Jason.encode!(Jason.OrderedObject.new(users: accounts), pretty: true) <> "\n"
+
+    encoded_accounts =
+      [users: accounts] |> Jason.OrderedObject.new() |> Jason.encode!(pretty: true)
+
+    encoded_accounts <> "\n"
   end
 
   defp account(user) do
@@ -32,12 +36,12 @@ defmodule ChurchAdmin.Dev.SeedGenerator.AuthEmulator do
   end
 
   defp claims(user) do
-    Jason.encode!(
-      Jason.OrderedObject.new([
-        {"x-hasura-user-id", user.uid},
-        {"x-hasura-default-role", "user"},
-        {"x-hasura-allowed-roles", ["user"]}
-      ])
-    )
+    [
+      {"x-hasura-user-id", user.uid},
+      {"x-hasura-default-role", "user"},
+      {"x-hasura-allowed-roles", ["user"]}
+    ]
+    |> Jason.OrderedObject.new()
+    |> Jason.encode!()
   end
 end

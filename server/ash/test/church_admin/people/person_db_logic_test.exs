@@ -257,14 +257,18 @@ defmodule ChurchAdmin.People.PersonDbLogicTest do
       Factory.permissions!(plain, ~w(approved readAllData writeAllData))
       stranger = Factory.user!()
 
-      assert PersonWrites.update_person(ActorLoader.load(plain.uid), id, %{uid: stranger.uid}) ==
+      assert plain.uid
+             |> ActorLoader.load()
+             |> PersonWrites.update_person(id, %{uid: stranger.uid}) ==
                {:error, Codes.person_user_link_not_permitted()}
 
       manager = Factory.user!()
       Factory.permissions!(manager, ~w(approved readAllData writeAllData manageAllUsers))
 
       assert {:ok, ^id} =
-               PersonWrites.update_person(ActorLoader.load(manager.uid), id, %{
+               manager.uid
+               |> ActorLoader.load()
+               |> PersonWrites.update_person(id, %{
                  uid: stranger.uid
                })
     end

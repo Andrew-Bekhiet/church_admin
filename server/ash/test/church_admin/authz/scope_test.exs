@@ -81,7 +81,7 @@ defmodule ChurchAdmin.Authz.ScopeTest do
     @expected MapSet.new(expected)
 
     test "meeting(#{kind}, #{meeting_access}) matches #{inspect(expected)}", %{world: world} do
-      scope = Scope.meeting(actor(world, @kind), @meeting_access)
+      scope = world |> actor(@kind) |> Scope.meeting(@meeting_access)
       assert matching(world, Meeting, scope) == @expected
     end
   end
@@ -106,19 +106,19 @@ defmodule ChurchAdmin.Authz.ScopeTest do
     test "exportAllData exports anything; readAllData alone exports nothing", %{world: world} do
       ids = [world.records.m1.id, world.records.unlinked.id]
 
-      assert Scope.exportable?(actor(world, :export_all), :person, ids)
-      refute Scope.exportable?(actor(world, :read_all), :person, ids)
+      assert world |> actor(:export_all) |> Scope.exportable?(:person, ids)
+      refute world |> actor(:read_all) |> Scope.exportable?(:person, ids)
     end
 
     test "the global export right covers ids that do not exist, as the view's any row did", %{
       world: world
     } do
-      assert Scope.exportable?(actor(world, :export_all), :area, [Ash.UUID.generate()])
-      refute Scope.exportable?(actor(world, :area_edit), :area, [Ash.UUID.generate()])
+      assert world |> actor(:export_all) |> Scope.exportable?(:area, [Ash.UUID.generate()])
+      refute world |> actor(:area_edit) |> Scope.exportable?(:area, [Ash.UUID.generate()])
     end
 
     test "an empty request is exportable by anyone", %{world: world} do
-      assert Scope.exportable?(actor(world, :approved_plain), :service, [])
+      assert world |> actor(:approved_plain) |> Scope.exportable?(:service, [])
     end
   end
 end

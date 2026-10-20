@@ -14,7 +14,8 @@ defmodule ChurchAdminWeb.Plugs.LoadActorTest do
   defp authenticate_and_load(claims) do
     token = claims |> FirebaseTokens.valid_claims() |> FirebaseTokens.unsigned()
 
-    conn(:post, "/gql")
+    :post
+    |> conn("/gql")
     |> put_req_header("authorization", "Bearer " <> token)
     |> Authenticate.call(Authenticate.init([]))
     |> LoadActor.call(LoadActor.init([]))
@@ -76,7 +77,7 @@ defmodule ChurchAdminWeb.Plugs.LoadActorTest do
   end
 
   test "rejects a token whose subject is not the account linked to the uid" do
-    account = Factory.firebase_account!(user_with!(~w(approved)))
+    account = ~w(approved) |> user_with!() |> Factory.firebase_account!()
 
     conn = authenticate_and_load(%{account | "sub" => "firebase-someone-else"})
 

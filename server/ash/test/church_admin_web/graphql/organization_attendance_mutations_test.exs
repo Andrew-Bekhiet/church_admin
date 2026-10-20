@@ -20,7 +20,8 @@ defmodule ChurchAdminWeb.Graphql.OrganizationAttendanceMutationsTest do
 
   defp run(conn, user, document, variables \\ %{}) do
     token =
-      Factory.firebase_account!(user)
+      user
+      |> Factory.firebase_account!()
       |> FirebaseTokens.valid_claims()
       |> FirebaseTokens.unsigned()
 

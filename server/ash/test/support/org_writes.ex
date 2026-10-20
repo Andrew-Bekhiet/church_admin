@@ -78,17 +78,19 @@ defmodule ChurchAdmin.OrgWrites do
   defp transact(fun) do
     fire_deferred_checks!()
 
-    Repo.transaction(fn ->
-      case fun.() do
-        {:ok, id} ->
-          fire_deferred_checks!()
-          id
+    transaction_result =
+      Repo.transaction(fn ->
+        case fun.() do
+          {:ok, id} ->
+            fire_deferred_checks!()
+            id
 
-        {:error, error} ->
-          Repo.rollback(error)
-      end
-    end)
-    |> case do
+          {:error, error} ->
+            Repo.rollback(error)
+        end
+      end)
+
+    case transaction_result do
       {:ok, id} -> {:ok, id}
       {:error, error} -> {:error, code_of(error)}
     end

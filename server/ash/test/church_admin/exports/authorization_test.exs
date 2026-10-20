@@ -19,7 +19,7 @@ defmodule ChurchAdmin.Exports.AuthorizationTest do
   end
 
   defp authorize(world, kind, names_by_type),
-    do: Authorization.authorize(actor(world, kind), selection(world, names_by_type))
+    do: world |> actor(kind) |> Authorization.authorize(selection(world, names_by_type))
 
   defp forbidden?(result),
     do: match?({:error, %DomainError{code: "export/forbidden"}}, result)
@@ -65,13 +65,13 @@ defmodule ChurchAdmin.Exports.AuthorizationTest do
   test "an export-all user may export an id that does not exist", %{world: world} do
     selection = %Selection{areas_ids: [Ash.UUID.generate()]}
 
-    assert Authorization.authorize(actor(world, :export_all), selection) == :ok
+    assert world |> actor(:export_all) |> Authorization.authorize(selection) == :ok
   end
 
   test "nothing selected is invalid, whoever asks", %{world: world} do
     for kind <- [:export_all, :read_all, :anonymous] do
       assert {:error, %DomainError{code: "invalid"}} =
-               Workbook.build(actor(world, kind), %Selection{})
+               world |> actor(kind) |> Workbook.build(%Selection{})
     end
   end
 
@@ -96,7 +96,7 @@ defmodule ChurchAdmin.Exports.AuthorizationTest do
       assert {:ok, whole_service} = Workbook.build(everyone, selection)
 
       assert person_names(restricted) == [m1.name]
-      assert Enum.sort(person_names(whole_service)) == Enum.sort([m1.name, f2.name])
+      assert whole_service |> person_names() |> Enum.sort() == Enum.sort([m1.name, f2.name])
       refute deleted.name in person_names(whole_service)
     end
   end
