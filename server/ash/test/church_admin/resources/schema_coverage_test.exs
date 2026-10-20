@@ -3,8 +3,6 @@ defmodule ChurchAdmin.Resources.SchemaCoverageTest do
 
   alias ChurchAdmin.ResourceCatalog
 
-  @columns_without_attribute %{}
-
   @application_schemas ["public", "auth", "history", "operations"]
 
   @deliberately_unmapped %{
@@ -20,11 +18,9 @@ defmodule ChurchAdmin.Resources.SchemaCoverageTest do
     for resource <- ResourceCatalog.resources() do
       {schema, table} = ResourceCatalog.relation(resource)
       attribute_columns = resource |> Ash.Resource.Info.attributes() |> MapSet.new(& &1.source)
-      ignored = Map.get(@columns_without_attribute, {schema, table}, [])
 
       uncovered =
         for column <- columns_of(schema, table),
-            column not in ignored,
             not MapSet.member?(attribute_columns, String.to_atom(column)),
             do: column
 
