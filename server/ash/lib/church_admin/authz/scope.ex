@@ -9,7 +9,8 @@ defmodule ChurchAdmin.Authz.Scope do
 
   Every expression is NULL-free (nullable columns are guarded), so it can be
   negated and returned as a non-null boolean. Data-dependent sets stay
-  `exists` subqueries; soft-deleted rows still count towards a scope.
+  `exists` subqueries; soft-deleted rows still count towards a scope, except
+  persons, which reach families, classes and groups only while live.
   """
 
   import Ash.Expr
@@ -137,7 +138,7 @@ defmodule ChurchAdmin.Authz.Scope do
           do:
             actor.area_grants
             |> Grant.scope_ids()
-            |> persons_in_areas()
+            |> live_persons_in_areas()
             |> when_present(fn in_areas ->
               expr(exists(group_memberships, exists(person, ^in_areas)))
             end),
@@ -280,6 +281,12 @@ defmodule ChurchAdmin.Authz.Scope do
     end)
   end
 
+  defp live_persons_in_areas(area_ids) do
+    area_ids
+    |> persons_in_areas()
+    |> when_present(fn in_areas -> expr(is_nil(deleted_at) and ^in_areas) end)
+  end
+
   defp members_of_related_families(actor) do
     any_of([
       actor.service_grants
@@ -331,7 +338,7 @@ defmodule ChurchAdmin.Authz.Scope do
 
   defp classes_of_area_persons(area_ids) do
     area_ids
-    |> persons_in_areas()
+    |> live_persons_in_areas()
     |> when_present(fn in_areas ->
       expr(exists(persons_of_matching_year_and_gender, ^in_areas))
     end)

@@ -28,8 +28,8 @@ defmodule ChurchAdmin.Authz.ScopeTest do
     # a year-restricted grant edits only classes that cover exactly its year
     {:class, :read, Class, :service_year_edit, [:c_y1, :c_y12_f]},
     {:class, :edit, Class, :service_year_edit, [:c_y1]},
-    # classes of area persons by year and gender, soft-deleted persons included (Q8)
-    {:class, :read, Class, :area_read, [:c_y1, :c_y12_f]},
+    # classes of the area's live persons by year and gender
+    {:class, :read, Class, :area_read, [:c_y1]},
     {:class, :edit, Class, :area_edit, []},
     {:area, :read, Area, :area_read, [:a1]},
     {:area, :edit, Area, :area_read, []},

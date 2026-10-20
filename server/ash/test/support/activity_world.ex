@@ -216,7 +216,7 @@ defmodule ChurchAdmin.ActivityWorld do
     records(
       persons: [:area_fam, :area_deleted, :area_store],
       families: [:f_area],
-      classes: [:c_y1, :c_y12_f, :c_y2],
+      classes: [:c_y1],
       groups: [:g2],
       areas: [:a1],
       streets: [:st1],
