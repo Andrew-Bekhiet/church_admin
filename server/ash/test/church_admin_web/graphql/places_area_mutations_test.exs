@@ -135,8 +135,15 @@ defmodule ChurchAdminWeb.Graphql.PlacesAreaMutationsTest do
       assert Map.take(bounds, ["type", "coordinates"]) == PlacesWorld.cell_polygon(7)
     end
 
-    test "answers forbidden to a reader and to an unapproved editor", %{conn: conn, world: world} do
-      for kind <- [:area_read, :read_all, :unapproved_with_grants] do
+    test "answers forbidden to a reader and not-found to an unapproved editor", %{
+      conn: conn,
+      world: world
+    } do
+      for {kind, code} <- [
+            area_read: "forbidden",
+            read_all: "forbidden",
+            unapproved_with_grants: "not_found"
+          ] do
         response =
           run(
             conn,
@@ -145,7 +152,7 @@ defmodule ChurchAdminWeb.Graphql.PlacesAreaMutationsTest do
             user(world, kind)
           )
 
-        assert %{"errors" => [%{"extensions" => %{"code" => "forbidden"}}]} = response,
+        assert %{"errors" => [%{"extensions" => %{"code" => ^code}}]} = response,
                "#{kind} updated the area"
       end
     end

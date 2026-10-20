@@ -16,7 +16,7 @@ defmodule ChurchAdminWeb.Graphql.CatalogQueriesTest do
 
         world ->
           claims =
-            FirebaseTokens.valid_claims(Factory.firebase_account!(world.users.unapproved))
+            FirebaseTokens.valid_claims(Factory.firebase_account!(world.users.approved_plain))
 
           put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
       end
