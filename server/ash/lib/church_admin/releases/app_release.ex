@@ -6,6 +6,7 @@ defmodule ChurchAdmin.Releases.AppRelease do
     extensions: [AshGraphql.Resource],
     authorizers: [Ash.Policy.Authorizer]
 
+  alias ChurchAdmin.Authz.Checks.Approved
   alias ChurchAdmin.Releases.{AppDownloadLink, AppPlatform, IssueDownloadLink}
 
   graphql do
@@ -24,7 +25,7 @@ defmodule ChurchAdmin.Releases.AppRelease do
 
   policies do
     policy action(:app_download_link) do
-      forbid_unless actor_attribute_equals(:approved?, true)
+      forbid_unless Approved
       authorize_if always()
     end
   end
