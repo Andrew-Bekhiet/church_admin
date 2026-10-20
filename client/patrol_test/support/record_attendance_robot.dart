@@ -43,7 +43,14 @@ class RecordAttendanceRobot {
       mode: HomeMode.sundaySchool,
       tab: HomeTab.services,
     );
-    await tester.tapOn(tester.viewableObject(serviceId));
+    await tester.tapOn(
+      find.byWidgetPredicate(
+        (widget) => switch (widget) {
+          ViewableObjectCard(object: Service(:final id)) => id == serviceId,
+          _ => false,
+        },
+      ),
+    );
     await tester.tapOn(find.byKey(ViewServiceKeys.recordAttendanceButton));
     await tester.waitFor(find.byType(RecordAttendanceLoadedView));
   }
