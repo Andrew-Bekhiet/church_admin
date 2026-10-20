@@ -56,7 +56,8 @@ defmodule ChurchAdmin.Attendance.MeetingRulesTest do
     end
 
     test "is not checked for a group's meeting", ctx do
-      group = Factory.group!(Factory.service!(study_year_from_id: 2, study_year_to_id: 3))
+      group =
+        [study_year_from_id: 2, study_year_to_id: 3] |> Factory.service!() |> Factory.group!()
 
       assert {:ok, _id} =
                OrgWrites.create(ctx.actor, :meeting, %{name: "group", group_id: group.id})
