@@ -25,7 +25,7 @@ defmodule ChurchAdmin.Exports.Selection do
 
   @spec empty?(t()) :: boolean()
   def empty?(%__MODULE__{} = selection),
-    do: Enum.all?(entity_ids(selection), fn {_entity, ids} -> ids == [] end)
+    do: selection |> entity_ids() |> Enum.all?(fn {_entity, ids} -> ids == [] end)
 
   @doc "The selected ids per scope entity, for `ChurchAdmin.Authz.Scope.exportable?/3`."
   @spec entity_ids(t()) :: [{ChurchAdmin.Authz.Scope.entity(), [String.t()]}]
