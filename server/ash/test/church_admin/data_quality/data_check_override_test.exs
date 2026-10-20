@@ -11,7 +11,7 @@ defmodule ChurchAdmin.DataQuality.DataCheckOverrideTest do
 
   # The families whose check an actor may override or clear: global edit, a
   # family the grants reach, or a live person of the family who is the actor's
-  # own or one the actor may edit (the last branch needs no approval).
+  # own or one the actor may edit; every branch needs approval.
   @editable_families [
     {:anonymous, []},
     {:unapproved, []},
@@ -112,12 +112,13 @@ defmodule ChurchAdmin.DataQuality.DataCheckOverrideTest do
       assert {:ok, %{is_complete: true, updated_by: nil}} = stored(world, :f_svc)
     end
 
-    test "an unapproved user may override the family of their own person", %{world: world} do
+    test "an unapproved user may not override the family of their own person", %{world: world} do
       unapproved = world.users.unapproved
       Factory.person!(uid: unapproved.uid, family_id: family(world, :f_misc).id)
 
-      assert {:ok, %{is_complete: false}} = override(world, :f_misc, false, :unapproved)
-      assert {:error, _not_theirs} = override(world, :f_svc, false, :unapproved)
+      assert {:error, error} = override(world, :f_misc, false, :unapproved)
+      assert codes(error) == ["relation/not-found"]
+      assert {:error, _not_found} = stored(world, :f_misc)
     end
 
     test "a deleted own person does not count", %{world: world} do
