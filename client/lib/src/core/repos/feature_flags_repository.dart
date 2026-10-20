@@ -116,8 +116,6 @@ class FeatureFlagsRepository {
   });
 
   Future<void> initialize() async {
-    await _remoteConfig.fetchAndActivate();
-
     final advancedQueriesMetadata = AdvancedQueriesMetadata();
 
     await _remoteConfig.setDefaults({
@@ -148,6 +146,8 @@ class FeatureFlagsRepository {
         advancedQueriesMetadata.tag.name,
       ].join(','),
     });
+
+    await _remoteConfig.fetchAndActivate();
   }
 
   bool canAddCustomObjects<T>() {
