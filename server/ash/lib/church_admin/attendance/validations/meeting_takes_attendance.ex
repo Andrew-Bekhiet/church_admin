@@ -56,7 +56,7 @@ defmodule ChurchAdmin.Attendance.Validations.MeetingTakesAttendance do
         Codes.attendance_not_a_servant_of_meeting()
       )
 
-  defp check(%Meeting{group_id: group_id}, record) when not is_nil(group_id),
+  defp check(%Meeting{group_id: group_id}, record) when group_id != nil,
     do:
       require_membership(in_group?(group_id, record.person_id), Codes.attendance_not_in_meeting())
 

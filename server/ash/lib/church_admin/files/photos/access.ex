@@ -102,7 +102,7 @@ defmodule ChurchAdmin.Files.Photos.Access do
   end
 
   defp own_photo_only(%Person{uid: owner}, %Actor{uid: uid})
-       when not is_nil(owner) and owner != uid,
+       when owner != nil and owner != uid,
        do: {:error, error(Codes.photo_own_photo_only(), "You can only upload your own photo")}
 
   defp own_photo_only(_record, _actor), do: :ok
