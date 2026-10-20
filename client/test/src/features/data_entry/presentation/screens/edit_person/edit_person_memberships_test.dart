@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../../../utils.dart';
@@ -65,6 +66,31 @@ void main() {
 
     expect(find.byKey(EditPersonSaveButtonKeys.saveButton), findsOneWidget);
     expect(find.byType(CircularProgressIndicator), findsNothing);
+  });
+
+  testWidgets('a service picked on the selection page joins the memberships', (
+    tester,
+  ) async {
+    harness.services.pickableServices = const [primary];
+    await harness.open(tester, UpdatePerson(person: person));
+    final memberships = find.text('لا يوجد خدمات أو مجموعات');
+    await tester.ensureVisible(memberships);
+    await tester.pumpAndSettle();
+
+    await tester.tap(memberships);
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.descendant(
+        of: find.byType(PersonServiceSelectionPage),
+        matching: find.byType(Checkbox),
+      ),
+    );
+    await tester.pump();
+    await tester.tap(find.byIcon(Symbols.check));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(PersonServiceSelectionPage), findsNothing);
+    expect(find.text(primary.name), findsOneWidget);
   });
 
   testWidgets('the services loaded late are listed', (tester) async {
