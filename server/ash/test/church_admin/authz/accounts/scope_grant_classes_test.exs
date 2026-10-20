@@ -11,14 +11,14 @@ defmodule ChurchAdmin.Authz.Accounts.ScopeGrantClassesTest do
   end
 
   # {grant holder, classes of its service grant}: the grant's service's live
-  # classes starting at the grant's study year with the grant's gender; an
-  # unset study year or gender on the grant does not restrict that dimension.
+  # classes the grant covers (ServiceGrantCoverage); a class without a gender
+  # is covered by a grant of either gender.
   # c_s2 and c_s2_y1_f (year 1 of another service) never belong to an s1 grant.
   @expectations [
     {:service_open_edit, [:c_y1, :c_y12_f, :c_y2_m]},
     {:service_year, [:c_y1, :c_y12_f]},
-    {:service_gender, [:c_y12_f]},
-    {:class_admin, [:c_y12_f]}
+    {:service_gender, [:c_y1, :c_y12_f]},
+    {:class_admin, [:c_y1, :c_y12_f]}
   ]
 
   for {kind, classes} <- @expectations do
