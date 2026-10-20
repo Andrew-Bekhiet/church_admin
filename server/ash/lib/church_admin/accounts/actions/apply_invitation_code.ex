@@ -57,7 +57,7 @@ defmodule ChurchAdmin.Accounts.Actions.ApplyInvitationCode do
   end
 
   defp claim(%Invitation{claimed_at: claimed_at}, user, auth_id, _email, _actor)
-       when not is_nil(claimed_at) do
+       when claimed_at != nil do
     if user.auth_id == auth_id, do: {:ok, user.uid}, else: :error
   end
 

@@ -148,15 +148,15 @@ defmodule ChurchAdmin.Operations.StudyYearRoll.Plan do
   defp first_study_year(snapshot, service_id), do: Map.fetch!(snapshot.services, service_id).from
 
   defp class_action(true, next_service_id, nil, _next_study_year)
-       when not is_nil(next_service_id),
+       when next_service_id != nil,
        do: :delete
 
   defp class_action(true, next_service_id, _first, next_study_year)
-       when not is_nil(next_service_id) and not is_nil(next_study_year),
+       when next_service_id != nil and next_study_year != nil,
        do: :relocate
 
   defp class_action(false, _next_service_id, _first, next_study_year)
-       when not is_nil(next_study_year),
+       when next_study_year != nil,
        do: :advance
 
   defp class_action(_outgrows?, _next_service_id, _first, _next_study_year), do: nil

@@ -51,7 +51,7 @@ defmodule ChurchAdmin.Errors.ClassCodes do
   defp stacktrace(_error), do: []
 
   defp fields(%{fields: fields}) when is_list(fields), do: fields
-  defp fields(%{field: field}) when not is_nil(field), do: [field]
+  defp fields(%{field: field}) when field != nil, do: [field]
   defp fields(_error), do: []
 
   defp app_modules(app) do
