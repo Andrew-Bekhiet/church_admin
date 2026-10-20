@@ -161,8 +161,10 @@ defmodule ChurchAdmin.Accounts.ScopeGrant do
       public?: true,
       filter:
         expr(
-          service_gender == parent(service_gender) and
-            service_study_year == parent(service_study_year)
+          service_id == parent(admin_on_service) and
+            (is_nil(parent(service_gender)) or service_gender == parent(service_gender)) and
+            (is_nil(parent(service_study_year)) or
+               service_study_year == parent(service_study_year))
         )
   end
 
