@@ -115,6 +115,12 @@ class AppRoutingHarness {
     await settle(tester);
   }
 
+  Future<void> popScreenAsRemoteConfigChanges(WidgetTester tester) async {
+    router.routerDelegate.navigatorKey.currentState?.pop();
+    featureFlags.publishConfigChange();
+    await settle(tester);
+  }
+
   Future<void> pressSystemBack(WidgetTester tester) async {
     await tester.binding.handlePopRoute();
     await settle(tester);

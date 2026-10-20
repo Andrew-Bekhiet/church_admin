@@ -147,4 +147,17 @@ void main() {
     expect(find.byType(SettingsScreen), findsNothing);
     expect(find.byType(OutdatedFeatureScreen), findsOneWidget);
   });
+
+  testWidgets('a screen popped as remote config changes stays closed', (
+    tester,
+  ) async {
+    harness.signIn(AppRoutingHarness.approvedUser());
+    await harness.pump(tester);
+    await harness.open(tester, const SettingsRoute());
+
+    await harness.popScreenAsRemoteConfigChanges(tester);
+
+    expect(find.byType(SettingsScreen), findsNothing);
+    expect(find.byType(HomeScreen), findsOneWidget);
+  });
 }
