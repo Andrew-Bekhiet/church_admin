@@ -32,10 +32,15 @@ extension E2eWidgetTester on WidgetTester {
 
   Future<void> tapOn(Finder finder, {Duration timeout = defaultTimeout}) async {
     final deadline = DateTime.now().add(timeout);
-    await waitFor(finder, timeout: timeout);
     final tappable = finder.first.hitTestable();
 
-    while (tappable.evaluate().isEmpty) {
+    while (true) {
+      final remaining = deadline.difference(DateTime.now());
+      await waitFor(
+        finder,
+        timeout: remaining.isNegative ? Duration.zero : remaining,
+      );
+      if (tappable.evaluate().isNotEmpty) break;
       if (DateTime.now().isAfter(deadline)) {
         throw _timedOut(
           'Timed out after $timeout waiting to tap ${finder.toString(describeSelf: true)}',
