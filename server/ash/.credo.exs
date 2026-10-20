@@ -12,7 +12,20 @@
       checks: %{
         enabled: [
           {Credo.Check.Readability.NestedFunctionCalls, [min_pipeline_length: 2]},
-          {Credo.Check.Refactor.PipeChainStart, []}
+          {Credo.Check.Readability.ImplTrue, []},
+          {Credo.Check.Readability.OneArityFunctionInPipe, []},
+          {Credo.Check.Readability.SeparateAliasRequire, []},
+          {Credo.Check.Design.SkipTestWithoutComment, []},
+          {Credo.Check.Refactor.FilterReject, []},
+          {Credo.Check.Refactor.RejectFilter, []},
+          {Credo.Check.Refactor.MapMap, []},
+          {Credo.Check.Refactor.NegatedIsNil, []},
+          {Credo.Check.Refactor.PassAsyncInTestCases, []},
+          {Credo.Check.Refactor.PipeChainStart, []},
+          {Credo.Check.Refactor.VariableRebinding, []},
+          {Credo.Check.Warning.LeakyEnvironment, []},
+          {Credo.Check.Warning.MixEnv, []},
+          {Credo.Check.Warning.UnsafeToAtom, []}
         ],
         disabled: []
       }
