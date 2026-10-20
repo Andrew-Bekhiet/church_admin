@@ -3,8 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
 
+import 'support/e2e_admin_scope.dart';
 import 'support/e2e_app.dart';
 import 'support/e2e_backend.dart';
+import 'support/e2e_users.dart';
 import 'support/list_sort_fixture.dart';
 import 'support/list_sort_robot.dart';
 
@@ -94,20 +96,25 @@ void main() {
       }
 
       await fixture.seed();
-
-      step('the admin signs in');
-      await E2eApp.launchSignedOut($);
-      await E2eApp.signIn(
-        tester,
-        email: E2eBackend.adminEmail,
-        password: password,
+      final user = await E2eUsers.createApprovedUser(
+        email: 'sorting-servant@e2e.test',
+        adminOn: [
+          for (final areaId in [fixture.areaId, fixture.otherAreaId])
+            AreaAdminScope(areaId),
+          for (final serviceId in [fixture.serviceId, fixture.otherServiceId])
+            ServiceAdminScope(serviceId),
+          for (final groupId in [
+            ...fixture.groupIds,
+            ...fixture.otherServiceGroupIds,
+          ])
+            GroupAdminScope(groupId),
+        ],
       );
-      await E2eApp.completeSpiritualData(tester);
-      await E2eApp.enterHome(tester, password);
-      final adminUid =
-          (await E2eBackend.userByEmail(E2eBackend.adminEmail))['uid']
-              as String;
-      final defaultSorts = await lists.storedSorts(adminUid, sortedLists);
+
+      step('a servant with read-only area, service and group scopes signs in');
+      await E2eApp.launchSignedOut($);
+      await E2eApp.signInToHome(tester, email: user.email);
+      final defaultSorts = await lists.storedSorts(user.uid, sortedLists);
       final reversedSorts = ListSortRobot.withFirstKeysReversed(defaultSorts);
 
       step('every area list starts in its default sort and is reversed');
@@ -123,7 +130,7 @@ void main() {
 
       step('the class and other service screens follow the new sorts');
       await expectServiceScreensShow(reversedOrder: true);
-      await lists.expectStoredSorts(adminUid, reversedSorts);
+      await lists.expectStoredSorts(user.uid, reversedSorts);
 
       step(
         'after a restart the area lists are still reversed and each is '
@@ -141,7 +148,7 @@ void main() {
       await lists.openService(fixture.serviceId);
       await lists.reverseEachTab(reversed(serviceTabs));
       await expectServiceScreensShow(reversedOrder: false);
-      await lists.expectStoredSorts(adminUid, defaultSorts);
+      await lists.expectStoredSorts(user.uid, defaultSorts);
 
       step('after another restart every list keeps its default sort');
       await E2eApp.relaunch($);
