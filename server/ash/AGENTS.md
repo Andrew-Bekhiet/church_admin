@@ -51,7 +51,7 @@ Reuse these in write actions instead of re-deriving them; each moduledoc shows i
 
 ## Verification
 
-Run `mix precommit` (compile with warnings as errors, unused-lock check, format, tests) and keep it clean before reporting work done.
+Run `mix precommit` (retired-dependency audit, compile with warnings as errors, unused-lock check, format, credo, tests) and keep it clean before reporting work done.
 
 <!-- usage-rules-start -->
 <!-- usage_rules-start -->
