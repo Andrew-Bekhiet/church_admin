@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 
 abstract final class AppRouteRedirects {
@@ -15,6 +17,15 @@ abstract final class AppRouteRedirects {
       if (redirected == null) return resolved;
 
       resolved = redirected;
+    }
+
+    final redirectsStillPending = _maybeRedirectOnce(resolved) != null;
+    if (redirectsStillPending) {
+      unawaited(
+        LoggingService.I.error(
+          LogRecord(error: RedirectLoopException(resolved)),
+        ),
+      );
     }
 
     return resolved;
