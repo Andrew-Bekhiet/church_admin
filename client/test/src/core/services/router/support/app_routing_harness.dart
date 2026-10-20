@@ -208,7 +208,7 @@ class AppRoutingHarness {
       ),
       homeCubitProvider.overrideWithValue(ScreenDependencyStubs.homeCubit()),
       viewableObjectServiceProvider.overrideWith(
-        (_) => ViewableObjectService(router: router),
+        (_) => ViewableObjectService(router: router.router),
       ),
       packageInfoPluginProvider.overrideWith(
         (_) => PackageInfo(
