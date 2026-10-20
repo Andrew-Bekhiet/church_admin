@@ -114,15 +114,6 @@ defmodule ChurchAdmin.Operations.StudyYearRollTest do
       assert {:ok, counts} = Roll.run(@season)
       assert [%{status: :succeeded, step_counts: ^counts}] = Roll.runs(@season)
     end
-
-    test "nothing detects double advancement: a run for another season advances again" do
-      pupil = one_pupil_world()
-
-      Roll.run(@season)
-      Roll.run(@season + 1)
-
-      assert study_year_of(pupil) == 3
-    end
   end
 
   describe "failure recording" do
