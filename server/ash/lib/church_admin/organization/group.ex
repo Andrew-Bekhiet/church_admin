@@ -13,7 +13,7 @@ defmodule ChurchAdmin.Organization.Group do
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Attendance.Meeting
-  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, InScope, System}
+  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, InScope, RelatedInScope, System}
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.History.Changes.RecordEdit
@@ -125,7 +125,7 @@ defmodule ChurchAdmin.Organization.Group do
     end
 
     policy action(:create_group) do
-      authorize_if actor_attribute_equals(:write_all?, true)
+      authorize_if {RelatedInScope, path: :service, entity: :service, access: :edit}
     end
 
     policy action(:destroy) do

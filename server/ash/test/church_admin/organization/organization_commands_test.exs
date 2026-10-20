@@ -255,14 +255,21 @@ defmodule ChurchAdmin.Organization.OrganizationCommandsTest do
                )
     end
 
-    test "a service editor cannot create a group (faithful to Hasura)", ctx do
+    test "editors of the group's service create groups in it, readers and other services' editors do not",
+         ctx do
+      attrs = %{name: "Group", service_id: ctx.service.id}
       editor = actor_with(["approved"], [{:service, ctx.service.id, edit?: true}])
 
-      assert forbidden?(
-               Organization.create_group(%{name: "Group", service_id: ctx.service.id},
-                 actor: editor
-               )
-             )
+      year_editor =
+        actor_with(["approved"], [{:service, ctx.service.id, edit?: true, study_year: 1}])
+
+      reader = actor_with(["approved"], [{:service, ctx.service.id, []}])
+      elsewhere = actor_with(["approved"], [{:service, Factory.service!().id, edit?: true}])
+
+      assert allowed?(Organization.create_group(attrs, actor: editor))
+      assert allowed?(Organization.create_group(attrs, actor: year_editor))
+      assert forbidden?(Organization.create_group(attrs, actor: reader))
+      assert forbidden?(Organization.create_group(attrs, actor: elsewhere))
     end
   end
 
