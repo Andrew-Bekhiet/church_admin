@@ -6,14 +6,15 @@ defmodule ChurchAdmin.Authz.Places.PlacesPolicyTest do
 
   setup %{world: world}, do: {:ok, world: ChurchAdmin.PlacesWorld.extend!(world)}
 
-  @signed_in AuthzWorld.actor_kinds()
+  @unapproved [:unapproved, :unapproved_with_grants]
+  @approved AuthzWorld.actor_kinds() -- @unapproved
 
   @all_areas [:a1, :a2]
   @all_streets [:st1, :st_a1, :st_a2, :st_cross]
   @all_stores [:store1, :store2]
 
-  # Areas, streets and districts are readable by any signed-in user (Hasura
-  # filtered only soft-deleted rows); stores follow the view's store rows:
+  # Areas, streets and districts are readable by any approved user (Hasura
+  # also let unapproved users read them); stores follow the view's store rows:
   # the global read row, or an area grant through the area's addresses.
   @store_readers %{
     read_all: @all_stores,
@@ -36,13 +37,13 @@ defmodule ChurchAdmin.Authz.Places.PlacesPolicyTest do
 
   @store_editors %{read_write: @all_stores, manage_users: @all_stores, area_edit: [:store1]}
 
-  for kind <- [:anonymous | @signed_in] do
+  for kind <- [:anonymous | @unapproved ++ @approved] do
     @kind kind
-    signed_in? = kind != :anonymous
+    approved? = kind in @approved
 
-    @areas if signed_in?, do: MapSet.new(@all_areas), else: MapSet.new()
-    @streets if signed_in?, do: MapSet.new(@all_streets), else: MapSet.new()
-    @districts if signed_in?, do: MapSet.new([:d1, :d2]), else: MapSet.new()
+    @areas if approved?, do: MapSet.new(@all_areas), else: MapSet.new()
+    @streets if approved?, do: MapSet.new(@all_streets), else: MapSet.new()
+    @districts if approved?, do: MapSet.new([:d1, :d2]), else: MapSet.new()
     @stores MapSet.new(Map.get(@store_readers, kind, []))
     @editable_areas MapSet.new(Map.get(@area_editors, kind, []))
     @editable_streets MapSet.new(Map.get(@street_editors, kind, []))
@@ -62,7 +63,7 @@ defmodule ChurchAdmin.Authz.Places.PlacesPolicyTest do
     end
   end
 
-  test "area-street links are readable by any signed-in user and by nobody else", %{
+  test "area-street links are readable by any approved user and by nobody else", %{
     world: world
   } do
     %{a1: a1, st1: st1} = world.records
@@ -73,8 +74,9 @@ defmodule ChurchAdmin.Authz.Places.PlacesPolicyTest do
       |> Enum.any?(&(&1.area_id == a1.id and &1.street_id == st1.id))
     end
 
-    assert linked?.(:unapproved)
+    assert linked?.(:approved_plain)
     assert linked?.(:area_read)
+    refute linked?.(:unapproved)
     refute linked?.(:anonymous)
   end
 end

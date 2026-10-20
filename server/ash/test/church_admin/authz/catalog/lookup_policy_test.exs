@@ -52,17 +52,18 @@ defmodule ChurchAdmin.Authz.Catalog.LookupPolicyTest do
   for resource <- @lookups do
     @resource resource
 
-    test "#{inspect(resource)} is read by every onboarded actor and by no anonymous one",
+    test "#{inspect(resource)} is read by every approved actor and by no unapproved one",
          %{world: world} do
       row = seed_row!(@resource)
 
-      for kind <- [:unapproved, :approved_plain, :read_all, :service_open] do
+      for kind <- [:approved_plain, :read_all, :service_open] do
         names =
           @resource |> Ash.read!(actor: actor(world, kind), page: false) |> Enum.map(& &1.name)
 
         assert row.name in names, "#{kind} cannot read it"
       end
 
+      assert Ash.read!(@resource, actor: actor(world, :unapproved), page: false) == []
       assert Ash.read!(@resource, actor: nil, page: false) == []
 
       names = @resource |> Ash.read!(actor: Actor.system(), page: false) |> Enum.map(& &1.name)

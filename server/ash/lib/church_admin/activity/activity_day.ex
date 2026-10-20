@@ -6,7 +6,7 @@ defmodule ChurchAdmin.Activity.ActivityDay do
     extensions: [AshGraphql.Resource]
 
   alias ChurchAdmin.Activity.{Confession, Kodas}
-  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, Onboarded, System}
+  alias ChurchAdmin.Authz.Checks.{Approved, ApprovedWithPermission, System}
 
   graphql do
     type :activity_day
@@ -50,7 +50,7 @@ defmodule ChurchAdmin.Activity.ActivityDay do
     end
 
     policy action_type(:read) do
-      authorize_if Onboarded
+      authorize_if Approved
     end
 
     policy action_type(:create) do
