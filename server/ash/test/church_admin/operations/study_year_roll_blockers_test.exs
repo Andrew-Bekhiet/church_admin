@@ -24,7 +24,7 @@ defmodule ChurchAdmin.Operations.StudyYearRollBlockersTest do
   defp assert_blocked_by(expected_lines, unchanged_pupil) do
     assert blocker_lines() == Enum.sort(expected_lines)
 
-    Roll.run_when_due(nayrouz(@season))
+    @season |> nayrouz() |> Roll.run_when_due()
 
     assert [%{status: :failed, error: error, step_counts: nil}] = Roll.runs(@season)
     [message | detail_lines] = String.split(error, "\n")
