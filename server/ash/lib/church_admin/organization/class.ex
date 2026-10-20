@@ -13,7 +13,7 @@ defmodule ChurchAdmin.Organization.Class do
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Attendance.Meeting
-  alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, RelatedInScope, System}
+  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, InScope, RelatedInScope, System}
   alias ChurchAdmin.Catalog.StudyYear
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.History.Changes.RecordEdit
@@ -133,13 +133,13 @@ defmodule ChurchAdmin.Organization.Class do
     end
 
     policy action(:create_class) do
-      authorize_if {HasPermission, name: "writeAllData"}
+      authorize_if {ApprovedWithPermission, name: "writeAllData"}
       authorize_if {RelatedInScope, path: :service, entity: :service, access: :edit}
     end
 
     policy action(:destroy) do
-      authorize_if {HasPermission, name: "writeAllData"}
-      authorize_if {HasPermission, name: "deleteData"}
+      authorize_if {ApprovedWithPermission, name: "writeAllData"}
+      authorize_if {ApprovedWithPermission, name: "deleteData"}
       authorize_if {RelatedInScope, path: :service, entity: :service, access: :edit}
     end
 

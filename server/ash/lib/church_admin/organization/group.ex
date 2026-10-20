@@ -13,7 +13,7 @@ defmodule ChurchAdmin.Organization.Group do
   alias ChurchAdmin.Activity.{Edit, LatestEdit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Attendance.Meeting
-  alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, System}
+  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, InScope, System}
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.History.Changes.RecordEdit
@@ -129,7 +129,7 @@ defmodule ChurchAdmin.Organization.Group do
     end
 
     policy action(:destroy) do
-      authorize_if {HasPermission, name: "deleteData"}
+      authorize_if {ApprovedWithPermission, name: "deleteData"}
     end
 
     policy action(:destroy) do

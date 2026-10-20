@@ -82,11 +82,11 @@ defmodule ChurchAdmin.Organization.OrganizationCommandsTest do
                ["service/name-taken"]
     end
 
-    test "only writeAllData holders create services, approved or not", ctx do
+    test "only approved writeAllData holders create services", ctx do
       assert allowed?(Organization.create_service(%{name: "By writer"}, actor: ctx.writer))
 
       unapproved = actor_with(["writeAllData"])
-      assert allowed?(Organization.create_service(%{name: "By unapproved"}, actor: unapproved))
+      assert forbidden?(Organization.create_service(%{name: "By unapproved"}, actor: unapproved))
 
       approved = actor_with(["approved", "readAllData"])
       assert forbidden?(Organization.create_service(%{name: "By reader"}, actor: approved))

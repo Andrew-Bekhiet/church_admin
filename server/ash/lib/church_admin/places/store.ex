@@ -13,7 +13,7 @@ defmodule ChurchAdmin.Places.Store do
   alias ChurchAdmin.Activity.{Edit, LatestEdit, LatestVisit, Visit}
   alias ChurchAdmin.Authz.Calculations.UserCanEdit
   alias ChurchAdmin.Authz.Changes.RecheckAfterUpdate
-  alias ChurchAdmin.Authz.Checks.{HasPermission, InScope, RelatedInScope, System}
+  alias ChurchAdmin.Authz.Checks.{ApprovedWithPermission, InScope, RelatedInScope, System}
   alias ChurchAdmin.Changes.StampActor
   alias ChurchAdmin.Errors.Codes
   alias ChurchAdmin.History.Changes.RecordEdit
@@ -133,7 +133,7 @@ defmodule ChurchAdmin.Places.Store do
     end
 
     policy action(:destroy) do
-      authorize_if {HasPermission, name: "deleteData"}
+      authorize_if {ApprovedWithPermission, name: "deleteData"}
     end
 
     policy action(:destroy) do
