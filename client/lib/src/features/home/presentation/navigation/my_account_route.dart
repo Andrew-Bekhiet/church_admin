@@ -1,8 +1,10 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class MyAccountRoute extends HomeChildRoute {
+  static const String routePath = '/my_account';
+
   @override
-  String get path => '/my_account';
+  String get path => routePath;
 
   const MyAccountRoute();
 

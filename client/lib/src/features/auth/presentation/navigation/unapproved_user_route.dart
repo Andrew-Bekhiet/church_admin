@@ -1,8 +1,10 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class UnapprovedUserRoute extends AppRoute {
+  static const String routePath = '/unapproved_user';
+
   @override
-  String get path => '/unapproved_user';
+  String get path => routePath;
 
   const UnapprovedUserRoute();
 

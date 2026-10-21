@@ -1,17 +1,16 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class EditStoreRoute extends HomeChildRoute {
+  static const String routePath = '/edit_store';
+
   final Store? store;
   final Family? withFamily;
 
   @override
-  String get path => '/edit_store';
+  String get path => routePath;
 
   @override
   List<Object?> get props => [store, withFamily];
-
-  @override
-  Map<String, String> get urlParameters => {'id': ?store?.id};
 
   const EditStoreRoute({this.store, this.withFamily});
 

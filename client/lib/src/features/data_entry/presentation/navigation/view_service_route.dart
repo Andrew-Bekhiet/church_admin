@@ -1,17 +1,16 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class ViewServiceRoute extends HomeChildRoute {
+  static const String routePath = '/view_service';
+
   final String id;
   final Service? service;
 
   @override
-  String get path => '/view_service';
+  String get path => routePath;
 
   @override
   List<Object?> get props => [id, service];
-
-  @override
-  Map<String, String> get urlParameters => {'id': id};
 
   const ViewServiceRoute({required this.id, this.service});
 

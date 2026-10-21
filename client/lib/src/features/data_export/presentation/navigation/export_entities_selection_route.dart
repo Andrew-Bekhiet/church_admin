@@ -1,8 +1,10 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class ExportEntitiesSelectionRoute extends HomeChildRoute {
+  static const String routePath = '/export_entities_selection';
+
   @override
-  String get path => '/export_entities_selection';
+  String get path => routePath;
 
   const ExportEntitiesSelectionRoute();
 

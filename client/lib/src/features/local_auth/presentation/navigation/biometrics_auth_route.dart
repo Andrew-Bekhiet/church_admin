@@ -1,16 +1,15 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class BiometricsAuthRoute extends AppRoute {
+  static const String routePath = '/biometrics_auth';
+
   final AppRoute? next;
 
   @override
-  String get path => '/biometrics_auth';
+  String get path => routePath;
 
   @override
   List<Object?> get props => [next];
-
-  @override
-  Map<String, String> get urlParameters => {'next': ?next?.address.toString()};
 
   const BiometricsAuthRoute({this.next});
 

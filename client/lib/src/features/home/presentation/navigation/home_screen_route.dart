@@ -1,8 +1,10 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class HomeScreenRoute extends AppRoute {
+  static const String routePath = '/';
+
   @override
-  String get path => '/';
+  String get path => routePath;
 
   const HomeScreenRoute();
 

@@ -5,66 +5,74 @@ import 'package:flutter/foundation.dart';
 import 'package:kaisel/kaisel.dart';
 
 class AppRouteUrlCodec extends KaiselStackCodec<AppRoute> {
-  static const List<AppRoute> _screensWithoutData = [
-    LoginRoute(),
-    ForgotPasswordRoute(),
-    EmailVerificationRoute(),
-    UnapprovedUserRoute(),
-    ForceUpdateRoute(),
-    UnderMaintenanceRoute(),
-    OutdatedFeatureRoute(),
-    DownloadAppRoute(),
-    SettingsRoute(),
-    VisitsMapRoute(),
-    MyAccountRoute(),
-    ManageUsersRoute(),
-    ExportEntitiesSelectionRoute(),
-    AdvancedSearchRoute(),
-  ];
-
-  static final Map<String, AppRoute? Function(String? id)> _screenForPath = {
-    for (final screen in _screensWithoutData) screen.path: (_) => screen,
-    '/': (_) => AppRoute.home,
-    '/view_person': (id) => id == null ? null : ViewPersonRoute(id: id),
-    '/view_area': (id) => id == null ? null : ViewAreaRoute(id: id),
-    '/view_service': (id) => id == null ? null : ViewServiceRoute(id: id),
-    '/view_group': (id) => id == null ? null : ViewGroupRoute(id: id),
-    '/view_class': (id) => id == null ? null : ViewClassRoute(id: id),
-    '/view_family': (id) => id == null ? null : ViewFamilyRoute(id: id),
-    '/view_street': (id) => id == null ? null : ViewStreetRoute(id: id),
-    '/view_store': (id) => id == null ? null : ViewStoreRoute(id: id),
-    '/view_user': (id) => id == null ? null : ViewUserRoute(uid: id),
-    '/edit_person': (id) =>
-        id == null ? const EditPersonRoute() : ViewPersonRoute(id: id),
-    '/edit_area': (id) =>
-        id == null ? const EditAreaRoute() : ViewAreaRoute(id: id),
-    '/edit_service': (id) =>
-        id == null ? const EditServiceRoute() : ViewServiceRoute(id: id),
-    '/edit_group': (id) =>
-        id == null ? const EditGroupRoute() : ViewGroupRoute(id: id),
-    '/edit_class': (id) =>
-        id == null ? const EditClassRoute() : ViewClassRoute(id: id),
-    '/edit_family': (id) =>
-        id == null ? const EditFamilyRoute() : ViewFamilyRoute(id: id),
-    '/edit_street': (id) =>
-        id == null ? const EditStreetRoute() : ViewStreetRoute(id: id),
-    '/edit_store': (id) =>
-        id == null ? const EditStoreRoute() : ViewStoreRoute(id: id),
-    '/edit_user': (id) => id == null
-        ? const EditUserRoute(intent: CreateUser())
-        : ViewUserRoute(uid: id),
-    '/person_analysis': (id) =>
-        id == null ? AppRoute.home : ViewPersonRoute(id: id),
-    '/user_analysis': (id) =>
-        id == null ? AppRoute.home : ViewUserRoute(uid: id),
-    '/meetings_analysis': (_) => AppRoute.home,
-    '/record_attendance': (_) => AppRoute.home,
-  };
-
   const AppRouteUrlCodec();
 
   @override
-  Uri encode(List<AppRoute> stack) => stack.last.address;
+  Uri encode(List<AppRoute> stack) {
+    final screen = stack.last;
+
+    return switch (screen) {
+      ViewPersonRoute(:final id) ||
+      ViewAreaRoute(:final id) ||
+      ViewServiceRoute(:final id) ||
+      ViewGroupRoute(:final id) ||
+      ViewClassRoute(:final id) ||
+      ViewFamilyRoute(:final id) ||
+      ViewStreetRoute(:final id) ||
+      ViewStoreRoute(:final id) ||
+      ViewUserRoute(uid: final id) ||
+      EditPersonRoute(intent: UpdatePerson(person: ID(:final id))) ||
+      EditAreaRoute(area: ID(:final id)) ||
+      EditServiceRoute(service: ID(:final id)) ||
+      EditGroupRoute(group: ID(:final id)) ||
+      EditClassRoute(class$: ID(:final id)) ||
+      EditFamilyRoute(family: ID(:final id)) ||
+      EditStreetRoute(street: ID(:final id)) ||
+      EditStoreRoute(store: ID(:final id)) ||
+      EditUserRoute(intent: UpdateUser(user: User(uid: final id))) ||
+      PersonAnalysisRoute(person: ID(:final id)) ||
+      UserAnalysisRoute(user: User(uid: final id)) => Uri(
+        path: screen.path,
+        queryParameters: {'id': id},
+      ),
+      BiometricsAuthRoute(next: final next?) => Uri(
+        path: screen.path,
+        queryParameters: {
+          'next': encode([next]).toString(),
+        },
+      ),
+      NotFoundRoute(:final address) => address,
+      HomeScreenRoute() ||
+      HomeScreenWebRoute() ||
+      LoginRoute() ||
+      ForgotPasswordRoute() ||
+      EmailVerificationRoute() ||
+      UnapprovedUserRoute() ||
+      UpdateUserSpiritDataRoute() ||
+      BiometricsAuthRoute() ||
+      ForceUpdateRoute() ||
+      UnderMaintenanceRoute() ||
+      OutdatedFeatureRoute() ||
+      DownloadAppRoute() ||
+      SettingsRoute() ||
+      VisitsMapRoute() ||
+      MyAccountRoute() ||
+      ManageUsersRoute() ||
+      ExportEntitiesSelectionRoute() ||
+      AdvancedSearchRoute() ||
+      MeetingsAnalysisRoute() ||
+      RecordAttendanceRoute() ||
+      EditPersonRoute() ||
+      EditAreaRoute() ||
+      EditServiceRoute() ||
+      EditGroupRoute() ||
+      EditClassRoute() ||
+      EditFamilyRoute() ||
+      EditStreetRoute() ||
+      EditStoreRoute() ||
+      EditUserRoute() => Uri(path: screen.path),
+    };
+  }
 
   @override
   List<AppRoute> decode(Uri uri) {
@@ -78,15 +86,79 @@ class AppRouteUrlCodec extends KaiselStackCodec<AppRoute> {
   AppRoute? _maybeScreenAt(Uri uri) {
     final params = uri.queryParameters;
 
-    return switch (uri.path) {
-      '/update_user_spirit_data' => const UpdateUserSpiritDataRoute(),
-      '/biometrics_auth' => BiometricsAuthRoute(
+    return switch ((uri.path, params['id'])) {
+      (HomeScreenRoute.routePath, _) => AppRoute.home,
+      (LoginRoute.routePath, _) => const LoginRoute(),
+      (ForgotPasswordRoute.routePath, _) => const ForgotPasswordRoute(),
+      (EmailVerificationRoute.routePath, _) => const EmailVerificationRoute(),
+      (UnapprovedUserRoute.routePath, _) => const UnapprovedUserRoute(),
+      (ForceUpdateRoute.routePath, _) => const ForceUpdateRoute(),
+      (UnderMaintenanceRoute.routePath, _) => const UnderMaintenanceRoute(),
+      (OutdatedFeatureRoute.routePath, _) => const OutdatedFeatureRoute(),
+      (DownloadAppRoute.routePath, _) => const DownloadAppRoute(),
+      (SettingsRoute.routePath, _) => const SettingsRoute(),
+      (VisitsMapRoute.routePath, _) => const VisitsMapRoute(),
+      (MyAccountRoute.routePath, _) => const MyAccountRoute(),
+      (ManageUsersRoute.routePath, _) => const ManageUsersRoute(),
+      (ExportEntitiesSelectionRoute.routePath, _) =>
+        const ExportEntitiesSelectionRoute(),
+      (AdvancedSearchRoute.routePath, _) => const AdvancedSearchRoute(),
+      (UpdateUserSpiritDataRoute.routePath, _) =>
+        const UpdateUserSpiritDataRoute(),
+      (BiometricsAuthRoute.routePath, _) => BiometricsAuthRoute(
         next: switch (params['next']) {
           final nextAddress? => decode(Uri.parse(nextAddress)).last,
           null => null,
         },
       ),
-      final path => _screenForPath[path]?.call(params['id']),
+      (
+        ViewPersonRoute.routePath ||
+            EditPersonRoute.routePath ||
+            PersonAnalysisRoute.routePath,
+        final id?,
+      ) =>
+        ViewPersonRoute(id: id),
+      (ViewAreaRoute.routePath || EditAreaRoute.routePath, final id?) =>
+        ViewAreaRoute(id: id),
+      (ViewServiceRoute.routePath || EditServiceRoute.routePath, final id?) =>
+        ViewServiceRoute(id: id),
+      (ViewGroupRoute.routePath || EditGroupRoute.routePath, final id?) =>
+        ViewGroupRoute(id: id),
+      (ViewClassRoute.routePath || EditClassRoute.routePath, final id?) =>
+        ViewClassRoute(id: id),
+      (ViewFamilyRoute.routePath || EditFamilyRoute.routePath, final id?) =>
+        ViewFamilyRoute(id: id),
+      (ViewStreetRoute.routePath || EditStreetRoute.routePath, final id?) =>
+        ViewStreetRoute(id: id),
+      (ViewStoreRoute.routePath || EditStoreRoute.routePath, final id?) =>
+        ViewStoreRoute(id: id),
+      (
+        ViewUserRoute.routePath ||
+            EditUserRoute.routePath ||
+            UserAnalysisRoute.routePath,
+        final id?,
+      ) =>
+        ViewUserRoute(uid: id),
+      (EditPersonRoute.routePath, null) => const EditPersonRoute(),
+      (EditAreaRoute.routePath, null) => const EditAreaRoute(),
+      (EditServiceRoute.routePath, null) => const EditServiceRoute(),
+      (EditGroupRoute.routePath, null) => const EditGroupRoute(),
+      (EditClassRoute.routePath, null) => const EditClassRoute(),
+      (EditFamilyRoute.routePath, null) => const EditFamilyRoute(),
+      (EditStreetRoute.routePath, null) => const EditStreetRoute(),
+      (EditStoreRoute.routePath, null) => const EditStoreRoute(),
+      (EditUserRoute.routePath, null) => const EditUserRoute(
+        intent: CreateUser(),
+      ),
+      (
+        PersonAnalysisRoute.routePath ||
+            UserAnalysisRoute.routePath ||
+            MeetingsAnalysisRoute.routePath ||
+            RecordAttendanceRoute.routePath,
+        _,
+      ) =>
+        AppRoute.home,
+      _ => null,
     };
   }
 

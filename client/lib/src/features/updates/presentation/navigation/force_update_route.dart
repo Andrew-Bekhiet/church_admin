@@ -1,8 +1,10 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class ForceUpdateRoute extends AppRoute {
+  static const String routePath = '/force_update';
+
   @override
-  String get path => '/force_update';
+  String get path => routePath;
 
   const ForceUpdateRoute();
 

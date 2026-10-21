@@ -1,7 +1,6 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class NotFoundRoute extends HomeChildRoute {
-  @override
   final Uri address;
 
   @override

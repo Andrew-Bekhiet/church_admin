@@ -1,8 +1,10 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class LoginRoute extends AppRoute {
+  static const String routePath = '/login';
+
   @override
-  String get path => '/login';
+  String get path => routePath;
 
   const LoginRoute();
 

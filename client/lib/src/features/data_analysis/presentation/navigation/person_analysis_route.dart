@@ -1,16 +1,15 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class PersonAnalysisRoute extends HomeChildRoute {
+  static const String routePath = '/person_analysis';
+
   final Person person;
 
   @override
-  String get path => '/person_analysis';
+  String get path => routePath;
 
   @override
   List<Object?> get props => [person];
-
-  @override
-  Map<String, String> get urlParameters => {'id': person.id};
 
   const PersonAnalysisRoute({required this.person});
 

@@ -20,20 +20,20 @@ void main() {
 
     await harness.open(tester, const SettingsRoute());
 
-    expect(harness.reportedAddresses.last, const SettingsRoute().path);
+    expect(harness.reportedAddresses.last, SettingsRoute.routePath);
   });
 
   testWidgets('a link opens its screen', (tester) async {
     await harness.pump(tester);
 
-    await harness.openPlatformLink(tester, const SettingsRoute().path);
+    await harness.openPlatformLink(tester, SettingsRoute.routePath);
 
     expect(find.byType(SettingsScreen), findsOneWidget);
   });
 
   testWidgets('going back from a linked screen returns home', (tester) async {
     await harness.pump(tester);
-    await harness.openPlatformLink(tester, const SettingsRoute().path);
+    await harness.openPlatformLink(tester, SettingsRoute.routePath);
 
     await harness.pressSystemBack(tester);
 

@@ -1,8 +1,10 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class EmailVerificationRoute extends AppRoute {
+  static const String routePath = '/email_verification';
+
   @override
-  String get path => '/email_verification';
+  String get path => routePath;
 
   const EmailVerificationRoute();
 

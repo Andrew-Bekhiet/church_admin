@@ -1,19 +1,15 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class EditPersonRoute extends HomeChildRoute {
+  static const String routePath = '/edit_person';
+
   final PersonEditIntent? intent;
 
   @override
-  String get path => '/edit_person';
+  String get path => routePath;
 
   @override
   List<Object?> get props => [intent];
-
-  @override
-  Map<String, String> get urlParameters => switch (intent) {
-    UpdatePerson(:final person) => {'id': person.id},
-    _ => const {},
-  };
 
   const EditPersonRoute({this.intent});
 
