@@ -69,7 +69,9 @@ class FunctionsService {
 
       return true;
     } on FirebaseFunctionsException catch (e) {
-      if (e.code == 'unauthenticated' || e.code == 'not-found') {
+      if (e.code == 'unauthenticated' ||
+          e.code == 'not-found' ||
+          e.code == 'aborted') {
         return false;
       }
 
