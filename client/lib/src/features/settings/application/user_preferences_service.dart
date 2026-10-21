@@ -235,7 +235,18 @@ class UserPreferencesService extends BlocObserver {
   void _maybeRememberAcknowledged(Fragment_UserPreferences? acknowledged) {
     if (acknowledged == null) return;
 
-    _acknowledgedPreferences = UserPreferences.fromJson(acknowledged.toJson());
+    final next = UserPreferences.fromJson(acknowledged.toJson());
+    final kept = _acknowledgedPreferences;
+    final keptIsNewer =
+        kept != null &&
+        kept.uid == next.uid &&
+        switch ((kept.updatedAt, next.updatedAt)) {
+          (final keptAt?, final nextAt?) => nextAt.isBefore(keptAt),
+          _ => false,
+        };
+    if (keptIsNewer) return;
+
+    _acknowledgedPreferences = next;
   }
 
   void _deleteUnchangedPendingWrites(
