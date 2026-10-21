@@ -82,18 +82,22 @@ class _ExportEntitiesSelectionScreenState
                 bottom: TabBar(
                   tabs: [
                     Tab(
-                      key: ExportEntitiesSelectionScreenKeys.areasTab,
                       icon: Icon(
                         ViewableObjectService.I.getDefaultIconFor<Area>(),
                       ),
-                      text: 'المناطق',
+                      child: const Text(
+                        'المناطق',
+                        key: ExportEntitiesSelectionScreenKeys.areasTab,
+                      ),
                     ),
                     Tab(
-                      key: ExportEntitiesSelectionScreenKeys.servicesTab,
                       icon: Icon(
                         ViewableObjectService.I.getDefaultIconFor<Service>(),
                       ),
-                      text: 'الخدمات',
+                      child: const Text(
+                        'الخدمات',
+                        key: ExportEntitiesSelectionScreenKeys.servicesTab,
+                      ),
                     ),
                     Tab(
                       icon: Icon(
