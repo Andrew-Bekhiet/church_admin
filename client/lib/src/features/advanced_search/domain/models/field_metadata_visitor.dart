@@ -7,10 +7,15 @@ abstract class FieldMetadataVisitor<R> {
     final RedirectingFieldMetadata redirectingField => visitRedirectingField(
       redirectingField,
     ),
+    final PhoneSearchFieldMetadata phoneSearchField => visitPhoneSearchField(
+      phoneSearchField,
+    ),
     _ => visitField(field),
   };
 
   R visitField(FieldMetadata field);
 
   R visitRedirectingField(RedirectingFieldMetadata field);
+
+  R visitPhoneSearchField(PhoneSearchFieldMetadata field);
 }
