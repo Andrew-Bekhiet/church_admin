@@ -54,6 +54,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: DropdownButtonFormField<QueryableType>(
+                      key: AdvancedSearchScreenKeys.queryableTypeDropdown,
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       isExpanded: true,
                       initialValue: selectedQueryableType,
@@ -61,6 +62,9 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                           .where((t) => t.dao != null)
                           .map(
                             (t) => DropdownMenuItem(
+                              key: AdvancedSearchScreenKeys.queryableTypeItem(
+                                t,
+                              ),
                               alignment: Alignment.center,
                               value: t,
                               child: Text(t.label),
@@ -128,6 +132,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
               ),
               const Divider(),
               FilledButton.icon(
+                key: AdvancedSearchScreenKeys.searchButton,
                 onPressed: _execute,
                 label: const Text('ابحث'),
                 icon: const Icon(Symbols.search),
@@ -216,6 +221,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                 return BottomAppBar(
                   child: Text(
                     '$totalCount من ${controller.query.queryableType.label}',
+                    key: AdvancedSearchScreenKeys.resultsCount,
                     style: Theme.of(context).textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ),
@@ -233,5 +239,13 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
 }
 
 abstract final class AdvancedSearchScreenKeys {
+  static const Key queryableTypeDropdown = ValueKey(
+    'Advanced Search Queryable Type Dropdown Key',
+  );
+  static const Key searchButton = ValueKey('Advanced Search Button Key');
+  static const Key resultsCount = ValueKey('Advanced Search Results Count');
   static const Key resultsList = Key('advanced_search_results_list');
+
+  static Key queryableTypeItem(QueryableType type) =>
+      ValueKey('Advanced Search Queryable Type ${type.name}');
 }

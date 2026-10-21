@@ -55,6 +55,7 @@ class ValueInputWidget extends StatelessWidget {
       case FieldMetadata<int>():
       case FieldMetadata<double>():
         widget = TextFormField(
+          key: ValueInputWidgetKeys.textField,
           initialValue: value?.toString(),
           onChanged: (v) {
             if (field.type == int) {
@@ -178,4 +179,8 @@ class ValueInputWidget extends StatelessWidget {
       child: widget,
     );
   }
+}
+
+abstract final class ValueInputWidgetKeys {
+  static const Key textField = ValueKey('Value Input Text Field');
 }

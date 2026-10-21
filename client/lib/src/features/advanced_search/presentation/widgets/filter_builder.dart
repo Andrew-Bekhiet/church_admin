@@ -49,6 +49,7 @@ class FilterBuilder extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: DropdownButtonFormField<FieldMetadata<Object>>(
+                  key: FilterBuilderKeys.fieldDropdown,
                   decoration: const InputDecoration(labelText: 'بشرط'),
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   isExpanded: true,
@@ -56,6 +57,7 @@ class FilterBuilder extends StatelessWidget {
                   items: filterableFields
                       .map(
                         (f) => DropdownMenuItem(
+                          key: FilterBuilderKeys.fieldItem(f),
                           alignment: Alignment.center,
                           value: f,
                           child: Text(f.label, textAlign: TextAlign.center),
@@ -70,12 +72,14 @@ class FilterBuilder extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: DropdownButtonFormField<Operator>(
+                    key: FilterBuilderKeys.operatorDropdown,
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                     isExpanded: true,
                     initialValue: operator,
                     items: parentField.operators
                         .map(
                           (o) => DropdownMenuItem(
+                            key: FilterBuilderKeys.operatorItem(o),
                             alignment: Alignment.center,
                             value: o,
                             child: Text(o.label, textAlign: TextAlign.center),
@@ -147,4 +151,17 @@ class FilterBuilder extends StatelessWidget {
       ),
     );
   }
+}
+
+abstract final class FilterBuilderKeys {
+  static const Key fieldDropdown = ValueKey('Filter Builder Field Dropdown');
+  static const Key operatorDropdown = ValueKey(
+    'Filter Builder Operator Dropdown',
+  );
+
+  static Key fieldItem(FieldMetadata field) =>
+      ValueKey('Filter Builder Field ${field.name}');
+
+  static Key operatorItem(Operator operator) =>
+      ValueKey('Filter Builder Operator ${operator.serializationId}');
 }
