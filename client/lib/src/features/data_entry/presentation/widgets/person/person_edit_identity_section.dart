@@ -19,6 +19,7 @@ class PersonEditIdentitySection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: AdvancedTextInput<PersonEditError>(
+            key: PersonEditIdentitySectionKeys.nameField,
             field: form.name,
             translateError: PersonEditError.messageOf,
             labelText: 'الاسم',
@@ -53,4 +54,8 @@ class PersonEditIdentitySection extends StatelessWidget {
       ],
     );
   }
+}
+
+abstract final class PersonEditIdentitySectionKeys {
+  static const Key nameField = ValueKey('Person Edit Name Field Key');
 }

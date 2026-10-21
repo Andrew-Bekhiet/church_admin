@@ -34,6 +34,7 @@ class ConfirmationDialog extends StatelessWidget {
           child: Text(cancelLabel),
         ),
         FilledButton(
+          key: ConfirmationDialogKeys.confirmButton,
           style: isDestructive
               ? FilledButton.styleFrom(
                   backgroundColor: colorScheme.error,
@@ -46,4 +47,8 @@ class ConfirmationDialog extends StatelessWidget {
       ],
     );
   }
+}
+
+abstract final class ConfirmationDialogKeys {
+  static const Key confirmButton = ValueKey('Confirmation Dialog Confirm Key');
 }

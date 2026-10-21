@@ -99,4 +99,12 @@ extension E2eWidgetTester on WidgetTester {
       _ => false,
     },
   );
+
+  Finder viewableObjectCard(String id) => find.byWidgetPredicate(
+    (widget) => switch (widget) {
+      ViewableObjectCard(object: ViewableWithID(id: final objectId)) =>
+        objectId == id,
+      _ => false,
+    },
+  );
 }

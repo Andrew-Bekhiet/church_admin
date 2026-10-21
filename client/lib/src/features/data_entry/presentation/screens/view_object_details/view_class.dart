@@ -119,6 +119,7 @@ class _ViewClassState extends State<ViewClass> {
       ),
       floatingActionButtonBuilder: (context, tabController, class$) =>
           FloatingActionButton(
+            key: ViewClassKeys.addPersonButton,
             onPressed: () => EditPersonRoute(
               $extra: CreatePersonInClass(class$: class$),
             ).push(context),
@@ -138,4 +139,10 @@ class _ViewClassState extends State<ViewClass> {
 
     super.dispose();
   }
+}
+
+abstract final class ViewClassKeys {
+  static const Key addPersonButton = ValueKey(
+    'View Class Add Person Button Key',
+  );
 }

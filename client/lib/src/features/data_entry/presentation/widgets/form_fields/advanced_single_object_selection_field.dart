@@ -50,6 +50,7 @@ class AdvancedSingleObjectSelectionField<
             errorMaxLines: errorMaxLines,
             suffixIcon: clearable && selected != null && !state.readOnly
                 ? IconButton(
+                    key: AdvancedSingleObjectSelectionFieldKeys.clearButton,
                     tooltip: 'حذف القيمة',
                     onPressed: () => _change(null),
                     icon: const Icon(Symbols.delete),
@@ -121,4 +122,10 @@ class AdvancedSingleObjectSelectionField<
 
     _change(created);
   }
+}
+
+abstract final class AdvancedSingleObjectSelectionFieldKeys {
+  static const Key clearButton = ValueKey(
+    'Advanced Single Object Selection Field Clear Button Key',
+  );
 }

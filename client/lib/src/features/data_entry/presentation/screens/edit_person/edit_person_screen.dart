@@ -145,15 +145,22 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
         _progressSnackBar = null;
 
       case SavingPerson() || UploadingPhoto():
-        _progressSnackBar ??= ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            duration: const Duration(minutes: 30),
-            content: EditPersonSaveProgressMessage(
-              progress: _form.saveProgress,
-            ),
-          ),
-        );
+        _progressSnackBar ??= _replaceSnackBarsWithSaveProgress();
     }
+  }
+
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+  _replaceSnackBarsWithSaveProgress() {
+    final messenger = ScaffoldMessenger.of(context)
+      ..clearSnackBars()
+      ..removeCurrentSnackBar();
+
+    return messenger.showSnackBar(
+      SnackBar(
+        duration: const Duration(minutes: 30),
+        content: EditPersonSaveProgressMessage(progress: _form.saveProgress),
+      ),
+    );
   }
 
   Future<Point?> _chooseLocationOnMap(BuildContext context) async {

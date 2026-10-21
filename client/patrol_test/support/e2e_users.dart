@@ -98,6 +98,26 @@ abstract final class E2eUsers {
     );
   }
 
+  static Future<void> grantWritingRelatedFamiliesOnServiceScopesOf(
+    String uid,
+  ) async {
+    final granted = await E2eBackend.hasuraQuery(
+      r'''
+      mutation GrantWritingRelatedFamiliesOnServiceScopes($uid: uuid!) {
+        updateAuthUsersAdminOn(
+          where: {uid: {_eq: $uid}, adminOnService: {_isNull: false}}
+          _set: {serviceWriteRelatedFamilies: true}
+        ) { affectedRows }
+      }
+      ''',
+      variables: {'uid': uid},
+    );
+
+    if ((granted['updateAuthUsersAdminOn'] as Map)['affectedRows'] == 0) {
+      throw StateError('$uid has no service scope to grant writing on');
+    }
+  }
+
   static Future<({String uid, String personId})> _insertApprovedUserData({
     required String email,
     required String name,

@@ -79,7 +79,7 @@ void main() {
     await tester.tap(memberships);
     await tester.pumpAndSettle();
     await tester.tap(
-      find.byKey(PersonServiceSelectionPageKeys.checkboxFor(primary)),
+      find.byKey(PersonServiceSelectionPageKeys.checkboxFor(primary.id)),
     );
     await tester.pump();
     await tester.tap(find.byKey(PersonServiceSelectionPageKeys.confirmButton));

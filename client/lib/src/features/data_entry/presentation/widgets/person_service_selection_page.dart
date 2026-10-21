@@ -104,7 +104,7 @@ class _PersonServiceSelectionPageState extends State<PersonServiceSelectionPage>
                 (selection) => selection.containsKey(s.id),
               ),
               builder: (context, entryChecked) => Checkbox(
-                key: PersonServiceSelectionPageKeys.checkboxFor(s),
+                key: PersonServiceSelectionPageKeys.checkboxFor(s.id),
                 onChanged: (c) {
                   if (c ?? false) {
                     selected.add({
@@ -140,6 +140,6 @@ abstract final class PersonServiceSelectionPageKeys {
     'Person Service Selection Confirm Button Key',
   );
 
-  static Key checkboxFor(Service service) =>
-      ValueKey('Person Service Selection Checkbox ${service.id}');
+  static Key checkboxFor(String serviceId) =>
+      ValueKey('Person Service Selection Checkbox $serviceId');
 }
