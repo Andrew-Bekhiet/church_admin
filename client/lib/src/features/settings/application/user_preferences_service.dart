@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/users_preferences/__generated__/fragments.gql.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,8 +26,27 @@ class UserPreferencesService extends BlocObserver {
   final DatabaseService _databaseService;
   final AuthBloc _authBloc;
 
-  UserPreferences? get _serverPreferences =>
-      _authBloc.currentUserData?.preferences;
+  UserPreferences? _acknowledgedPreferences;
+
+  /// The signed-in user's preferences lag a write the server already
+  /// acknowledged until the next user data refresh, while the acknowledged
+  /// write is no longer pending, so the newer of the two is the server's state.
+  UserPreferences? get _serverPreferences {
+    final user = _authBloc.currentUserData;
+    final userPreferences = user?.preferences;
+    final acknowledged = _acknowledgedPreferences;
+
+    if (acknowledged == null || acknowledged.uid != user?.uid) {
+      return userPreferences;
+    }
+
+    return switch ((userPreferences?.updatedAt, acknowledged.updatedAt)) {
+      (final refreshedAt?, final acknowledgedAt?)
+          when !refreshedAt.isBefore(acknowledgedAt) =>
+        userPreferences,
+      _ => acknowledged,
+    };
+  }
 
   bool? get darkTheme {
     if (_hasQueuedWrite(_darkThemeKey)) {
@@ -142,20 +162,8 @@ class UserPreferencesService extends BlocObserver {
     final uid = _authBloc.currentUserData?.uid;
     if (uid == null) return;
 
-    final orderByPreferences = <String, Object?>{};
-    final secondLinePreferences = <String, Object?>{};
-    final scalarWrites = <String, Object?>{};
-
-    for (final MapEntry(:key, :value) in _pendingWritesBox.toMap().entries) {
-      if (key.startsWith(_orderByKeyPrefix) && value is List) {
-        orderByPreferences[key.substring(_orderByKeyPrefix.length)] = value;
-      } else if (key.startsWith(_secondLineKeyPrefix)) {
-        secondLinePreferences[key.substring(_secondLineKeyPrefix.length)] =
-            _isNullQueuedValue(value) ? null : value;
-      } else {
-        scalarWrites[key] = _isNullQueuedValue(value) ? null : value;
-      }
-    }
+    final (:orderByPreferences, :secondLinePreferences, :scalarWrites) =
+        _pendingWritesByKind();
 
     if (orderByPreferences.isEmpty &&
         secondLinePreferences.isEmpty &&
@@ -173,11 +181,13 @@ class UserPreferencesService extends BlocObserver {
     );
 
     try {
-      await _databaseService.userPreferences.updatePreferences(
-        uid: uid,
-        set: Input_UsersPreferencesSetInput.fromJson(scalarWrites),
-        append: appendFields,
-      );
+      final acknowledged = await _databaseService.userPreferences
+          .updatePreferences(
+            uid: uid,
+            set: Input_UsersPreferencesSetInput.fromJson(scalarWrites),
+            append: appendFields,
+          );
+      _maybeRememberAcknowledged(acknowledged);
 
       _deleteUnchangedPendingWrites('', scalarWrites);
       _deleteUnchangedPendingWrites(_orderByKeyPrefix, orderByPreferences);
@@ -192,6 +202,51 @@ class UserPreferencesService extends BlocObserver {
         ),
       );
     }
+  }
+
+  ({
+    Map<String, Object?> orderByPreferences,
+    Map<String, Object?> secondLinePreferences,
+    Map<String, Object?> scalarWrites,
+  })
+  _pendingWritesByKind() {
+    final orderByPreferences = <String, Object?>{};
+    final secondLinePreferences = <String, Object?>{};
+    final scalarWrites = <String, Object?>{};
+
+    for (final MapEntry(:key, :value) in _pendingWritesBox.toMap().entries) {
+      if (key.startsWith(_orderByKeyPrefix) && value is List) {
+        orderByPreferences[key.substring(_orderByKeyPrefix.length)] = value;
+      } else if (key.startsWith(_secondLineKeyPrefix)) {
+        secondLinePreferences[key.substring(_secondLineKeyPrefix.length)] =
+            _isNullQueuedValue(value) ? null : value;
+      } else {
+        scalarWrites[key] = _isNullQueuedValue(value) ? null : value;
+      }
+    }
+
+    return (
+      orderByPreferences: orderByPreferences,
+      secondLinePreferences: secondLinePreferences,
+      scalarWrites: scalarWrites,
+    );
+  }
+
+  void _maybeRememberAcknowledged(Fragment_UserPreferences? acknowledged) {
+    if (acknowledged == null) return;
+
+    final next = UserPreferences.fromJson(acknowledged.toJson());
+    final kept = _acknowledgedPreferences;
+    final keptIsNewer =
+        kept != null &&
+        kept.uid == next.uid &&
+        switch ((kept.updatedAt, next.updatedAt)) {
+          (final keptAt?, final nextAt?) => nextAt.isBefore(keptAt),
+          _ => false,
+        };
+    if (keptIsNewer) return;
+
+    _acknowledgedPreferences = next;
   }
 
   void _deleteUnchangedPendingWrites(

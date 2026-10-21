@@ -207,6 +207,131 @@ void main() {
     },
   );
 
+  test(
+    'a sort the server acknowledged reads back before the signed-in '
+    "user's preferences catch up",
+    () async {
+      final personType = AdvancedQueriesMetadata().allQueryables.firstWhere(
+        (q) => q.name == 'Person',
+      );
+      final key = OrderByPreferenceKey(type: personType);
+      final sort = [
+        OrderBy(
+          field: personType.fieldsMetadataByName['name']!,
+          value: OrderByValue.desc,
+        ),
+      ];
+      const uid = '6f1c1b6e-0d9a-4c1e-9b1a-3c2d4e5f6a7b';
+      final dao = databaseService.userPreferences as MockUserPreferencesDAO;
+      when(
+        () => dao.updatePreferences(
+          uid: any(named: 'uid'),
+          set: any(named: 'set'),
+          append: any(named: 'append'),
+        ),
+      ).thenAnswer(
+        (_) async => Fragment_UserPreferences(
+          uid: UuidValue.fromString(uid),
+          orderByPreferences: {
+            key.storageKey: [for (final orderBy in sort) orderBy.toJson()],
+          },
+          secondLinePreferences: const {},
+          greatFeastTheme: true,
+          updatedAt: DateTime.now(),
+        ),
+      );
+      when(() => authBloc.currentUserData).thenReturn(
+        const User(
+          uid: uid,
+          name: 'name',
+          email: 'email',
+          preferences: UserPreferences(uid: uid),
+        ),
+      );
+      final unit = createUnit();
+
+      await unit.setLastOrderByFor(key, sort);
+      await Future<void>.delayed(Duration.zero);
+
+      expect(unit.getLastOrderByFor(key), sort);
+    },
+  );
+
+  test(
+    'a sort whose acknowledgment arrives after a newer one still reads back',
+    () async {
+      final personType = AdvancedQueriesMetadata().allQueryables.firstWhere(
+        (q) => q.name == 'Person',
+      );
+      final nameField = personType.fieldsMetadataByName['name']!;
+      final firstKey = OrderByPreferenceKey(type: personType);
+      final secondKey = OrderByPreferenceKey(
+        type: personType,
+        inServiceContext: true,
+      );
+      final firstSort = [OrderBy(field: nameField)];
+      final secondSort = [
+        OrderBy(field: nameField, value: OrderByValue.desc),
+      ];
+      const uid = '6f1c1b6e-0d9a-4c1e-9b1a-3c2d4e5f6a7b';
+      final firstFlushedAt = DateTime.utc(2026, 10, 21, 10);
+      final secondFlushedAt = firstFlushedAt.add(const Duration(seconds: 1));
+      Fragment_UserPreferences acknowledgment(
+        Map<OrderByPreferenceKey, List<OrderBy>> sorts,
+        DateTime updatedAt,
+      ) => Fragment_UserPreferences(
+        uid: UuidValue.fromString(uid),
+        orderByPreferences: {
+          for (final MapEntry(:key, :value) in sorts.entries)
+            key.storageKey: [for (final orderBy in value) orderBy.toJson()],
+        },
+        secondLinePreferences: const {},
+        greatFeastTheme: true,
+        updatedAt: updatedAt,
+      );
+      final firstFlush = Completer<Fragment_UserPreferences>();
+      final secondFlush = Completer<Fragment_UserPreferences>();
+      final replies = [firstFlush, secondFlush].iterator;
+      final dao = databaseService.userPreferences as MockUserPreferencesDAO;
+      when(
+        () => dao.updatePreferences(
+          uid: any(named: 'uid'),
+          set: any(named: 'set'),
+          append: any(named: 'append'),
+        ),
+      ).thenAnswer((_) {
+        replies.moveNext();
+
+        return replies.current.future;
+      });
+      when(() => authBloc.currentUserData).thenReturn(
+        const User(
+          uid: uid,
+          name: 'name',
+          email: 'email',
+          preferences: UserPreferences(uid: uid),
+        ),
+      );
+      final unit = createUnit();
+
+      await unit.setLastOrderByFor(firstKey, firstSort);
+      await unit.setLastOrderByFor(secondKey, secondSort);
+      secondFlush.complete(
+        acknowledgment({
+          firstKey: firstSort,
+          secondKey: secondSort,
+        }, secondFlushedAt),
+      );
+      await Future<void>.delayed(Duration.zero);
+      firstFlush.complete(
+        acknowledgment({firstKey: firstSort}, firstFlushedAt),
+      );
+      await Future<void>.delayed(Duration.zero);
+
+      expect(unit.getLastOrderByFor(secondKey), secondSort);
+    },
+  );
+
   group('second line field', () {
     final personType = AdvancedQueriesMetadata().allQueryables.firstWhere(
       (q) => q.name == 'Person',

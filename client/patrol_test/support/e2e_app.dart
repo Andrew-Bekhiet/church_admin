@@ -27,16 +27,44 @@ abstract final class E2eApp {
 
   static ErrorWidgetBuilder? _testErrorWidgetBuilder;
 
+  static Future<void> launchSignedOut(PatrolIntegrationTester $) async {
+    _testErrorWidgetBuilder = ErrorWidget.builder;
+    WidgetController.hitTestWarningShouldBeFatal = true;
+    await _runMainDismissingPermissionDialog($);
+
+    if (AuthBloc.I.state is! AuthUnauthenticated) {
+      AuthBloc.I.add(const SignOut());
+    }
+
+    await $.tester.waitFor(loginButton, timeout: const Duration(minutes: 1));
+  }
+
+  /// The closest a single test gets to a process restart: the widget tree and
+  /// every provider-held service are dropped and `main` runs again, so the
+  /// relaunched app reads its state back from local storage and the backend.
+  /// The top-level `$appRouter` survives and still listens to the dropped
+  /// services, so it no longer redirects on sign-in or sign-out.
+  static Future<void> relaunch(
+    PatrolIntegrationTester $, {
+    String password = E2eBackend.password,
+  }) async {
+    await $.tester.pumpWidget(const SizedBox.shrink());
+    await SyncKVStore.flushAll();
+    // The analyzer only treats test/ and integration_test/ as test code.
+    // ignore: invalid_use_of_visible_for_testing_member
+    resetGlobalProviderContainer();
+    await _runMainDismissingPermissionDialog($);
+    await enterHome($.tester, password);
+  }
+
   /// Starts the app without awaiting it: `flutter_local_notifications` asks
   /// for notification permission during initialization and waits for an
   /// answer, so the native dialog has to be dismissed while `main` is running.
   /// On a fresh install the dialog can take longer than any fixed wait to
   /// appear, so it is looked for until `main` returns.
-  static Future<void> launchSignedOut(PatrolIntegrationTester $) async {
-    final tester = $.tester;
-    _testErrorWidgetBuilder = ErrorWidget.builder;
-    WidgetController.hitTestWarningShouldBeFatal = true;
-
+  static Future<void> _runMainDismissingPermissionDialog(
+    PatrolIntegrationTester $,
+  ) async {
     final launching =
         runZonedGuarded(app.main, _recordUncaughtAppError) ?? Future.value();
     var launched = false;
@@ -53,12 +81,6 @@ abstract final class E2eApp {
         await $.platform.mobile.denyPermission();
       }
     }
-
-    if (AuthBloc.I.state is! AuthUnauthenticated) {
-      AuthBloc.I.add(const SignOut());
-    }
-
-    await tester.waitFor(loginButton, timeout: const Duration(minutes: 1));
   }
 
   static Future<void> signIn(
