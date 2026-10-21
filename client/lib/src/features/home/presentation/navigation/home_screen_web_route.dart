@@ -19,7 +19,7 @@ class HomeScreenWebRoute extends AppRoute {
       case AuthAuthenticated(userData: User(person: null)):
       case AuthAuthenticated(userData: User(:final person?))
           when !person.spiritDataUpToDate():
-        return const UpdateUserSpiritDataRoute(forced: true);
+        return const UpdateUserSpiritDataRoute();
 
       case _:
         return null;

@@ -1,16 +1,15 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class UpdateUserSpiritDataRoute extends AppRoute {
-  final bool forced;
   final Person? userData;
 
   @override
   String get path => '/update_user_spirit_data';
 
   @override
-  List<Object?> get props => [forced, userData];
+  List<Object?> get props => [userData];
 
-  const UpdateUserSpiritDataRoute({this.forced = false, this.userData});
+  const UpdateUserSpiritDataRoute({this.userData});
 
   @override
   Widget build(BuildContext context) {
