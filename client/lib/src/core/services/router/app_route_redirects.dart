@@ -12,8 +12,8 @@ abstract final class AppRouteRedirects {
   ) => resolve(proposed);
 
   static List<AppRoute> resolve(List<AppRoute> stack) {
-    var resolved = stack;
-    for (var hop = 0; hop < _maxRedirects; hop++) {
+    List<AppRoute> resolved = stack;
+    for (int hop = 0; hop < _maxRedirects; hop++) {
       final redirected = _maybeRedirectOnce(resolved);
       if (redirected == null) return resolved;
 

@@ -15,7 +15,8 @@ abstract final class AppRouter {
   );
 
   static void _notifyExitedRoutes(List<AppRoute> from, List<AppRoute> to) {
-    for (final exited in from.whereNot(to.contains)) {
+    final exitedRoutes = from.whereNot(to.contains);
+    for (final exited in exitedRoutes) {
       if (exited case final ExitAwareRoute exitAware) exitAware.onExit();
     }
   }
