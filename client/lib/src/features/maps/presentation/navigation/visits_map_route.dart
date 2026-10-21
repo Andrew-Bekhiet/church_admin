@@ -1,14 +1,13 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'visits_map_route.g.dart';
+class VisitsMapRoute extends HomeChildRoute {
+  static const String routePath = '/visits_map';
 
-@TypedGoRoute<VisitsMapRoute>(path: '/visits_map')
-class VisitsMapRoute extends GoRouteData with $VisitsMapRoute {
+  @override
+  String get path => routePath;
+
   const VisitsMapRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const VisitsMapScreen();
+  Widget build(BuildContext context) => const VisitsMapScreen();
 }

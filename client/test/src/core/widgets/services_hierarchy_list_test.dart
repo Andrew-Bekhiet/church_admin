@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
@@ -16,7 +16,6 @@ import 'services_hierarchy_list_test.mocks.dart';
 @GenerateNiceMocks(
   [
     MockSpec<PaginatableStreamBase<Service>>(),
-    MockSpec<GoRouter>(),
     MockSpec<ImageUrlCacheService>(),
     MockSpec<UserPreferencesService>(),
   ],
@@ -274,7 +273,9 @@ Override _setUpUserPreferencesService() {
 
 Override _setUpCAViewableObjectService() {
   return viewableObjectServiceProvider.overrideWith(
-    (ref) => ViewableObjectService(router: MockGoRouter()),
+    (ref) => ViewableObjectService(
+      router: KaiselRouter<AppRoute>(initial: const HomeScreenRoute()),
+    ),
   );
 }
 

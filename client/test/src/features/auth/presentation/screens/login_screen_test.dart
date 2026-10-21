@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -23,8 +22,6 @@ import 'login_screen_test.mocks.dart';
   MockSpec<DatabaseService>(),
   MockSpec<UserPreferencesService>(),
   MockSpec<NotificationsService>(),
-  MockSpec<BuildContext>(),
-  MockSpec<GoRouterState>(),
   MockSpec<LoggingService>(),
   MockSpec<PackageInfo>(),
 ])
@@ -130,7 +127,7 @@ void main() {
         final overrides = [
           _setUpAuthBloc(isSignedIn: false),
           _setUpAuthStorage(),
-          _setUpGoRouterRefreshStream(),
+          _setUpRouterRefreshStream(),
           _setUpLoggingService(),
           packageInfoPluginProvider.overrideWith((_) => MockPackageInfo()),
           featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
@@ -172,10 +169,7 @@ void main() {
             initGlobalProviderContainer(overrides);
 
             expect(
-              const LoginRoute().redirect(
-                MockBuildContext(),
-                MockGoRouterState(),
-              ),
+              const LoginRoute().redirect(),
               null,
             );
           },
@@ -192,11 +186,8 @@ void main() {
             initGlobalProviderContainer(overrides);
 
             expect(
-              const LoginRoute().redirect(
-                MockBuildContext(),
-                MockGoRouterState(),
-              ),
-              const HomeScreenRoute().location,
+              const LoginRoute().redirect(),
+              const HomeScreenRoute(),
             );
           },
         );
@@ -269,9 +260,9 @@ Override _setUpNotificationsService() {
   return notificationsServiceProvider.overrideWithValue(notifications);
 }
 
-Override _setUpGoRouterRefreshStream() {
-  return goRouterRefreshStreamProvider.overrideWithValue(
-    GoRouterRefreshStream(const Stream<void>.empty()),
+Override _setUpRouterRefreshStream() {
+  return routerRefreshStreamProvider.overrideWithValue(
+    RouterRefreshStream(const Stream<void>.empty()),
   );
 }
 

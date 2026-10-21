@@ -79,4 +79,18 @@ void main() {
       expect(passwordField, findsOneWidget);
     },
   );
+
+  testWidgets('backing out of local authentication returns to home', (
+    tester,
+  ) async {
+    harness.signIn(userManager);
+    await harness.pump(tester);
+    await harness.open(tester, const ManageUsersRoute());
+
+    await harness.tapBackButton(tester);
+
+    expect(passwordField, findsNothing);
+    expect(find.byType(ManageUsersScreen), findsNothing);
+    expect(find.byType(HomeScreen), findsOneWidget);
+  });
 }

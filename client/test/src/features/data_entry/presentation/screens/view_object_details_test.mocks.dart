@@ -4,17 +4,16 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 
-import 'dart:async' as _i8;
+import 'dart:async' as _i6;
 import 'dart:io' as _i4;
 
-import 'package:bloc/bloc.dart' as _i9;
+import 'package:bloc/bloc.dart' as _i7;
 import 'package:church_admin/church_admin.dart' as _i2;
-import 'package:flutter/foundation.dart' as _i7;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart' as _i3;
-import 'package:go_router/go_router.dart' as _i5;
-import 'package:material_ui/material_ui.dart' as _i6;
+import 'package:kaisel/kaisel.dart' as _i5;
+import 'package:material_ui/material_ui.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i10;
+import 'package:mockito/src/dummies.dart' as _i8;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -49,25 +48,9 @@ class _FakeFile_2 extends _i1.SmartFake implements _i4.File {
     : super(parent, parentInvocation);
 }
 
-class _FakeGoRouter_3 extends _i1.SmartFake implements _i5.GoRouter {
-  _FakeGoRouter_3(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeNavigatorState_4 extends _i1.SmartFake
-    implements _i6.NavigatorState {
-  _FakeNavigatorState_4(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-
-  @override
-  String toString({_i7.DiagnosticLevel? minLevel = _i7.DiagnosticLevel.info}) =>
-      super.toString();
-}
-
-class _FakeGlobalKey_5<T extends _i6.State<_i6.StatefulWidget>>
-    extends _i1.SmartFake
-    implements _i6.GlobalKey<T> {
-  _FakeGlobalKey_5(Object parent, Invocation parentInvocation)
+class _FakeKaiselRouter_3<R extends _i5.KaiselRoute> extends _i1.SmartFake
+    implements _i5.KaiselRouter<R> {
+  _FakeKaiselRouter_3(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -84,25 +67,25 @@ class MockUserPreferencesService extends _i1.Mock
   ) as bool);
 
   @override
-  _i8.Future<void> setDarkTheme(bool? value) => (super.noSuchMethod(
+  _i6.Future<void> setDarkTheme(bool? value) => (super.noSuchMethod(
     Invocation.method(#setDarkTheme, [value]),
-    returnValue: _i8.Future<void>.value(),
-    returnValueForMissingStub: _i8.Future<void>.value(),
-  ) as _i8.Future<void>);
+    returnValue: _i6.Future<void>.value(),
+    returnValueForMissingStub: _i6.Future<void>.value(),
+  ) as _i6.Future<void>);
 
   @override
-  _i8.Future<void> setGreatFeastTheme(bool? value) => (super.noSuchMethod(
+  _i6.Future<void> setGreatFeastTheme(bool? value) => (super.noSuchMethod(
     Invocation.method(#setGreatFeastTheme, [value]),
-    returnValue: _i8.Future<void>.value(),
-    returnValueForMissingStub: _i8.Future<void>.value(),
-  ) as _i8.Future<void>);
+    returnValue: _i6.Future<void>.value(),
+    returnValueForMissingStub: _i6.Future<void>.value(),
+  ) as _i6.Future<void>);
 
   @override
-  _i8.Future<void> setLastHomeMode(_i2.HomeMode? value) => (super.noSuchMethod(
+  _i6.Future<void> setLastHomeMode(_i2.HomeMode? value) => (super.noSuchMethod(
     Invocation.method(#setLastHomeMode, [value]),
-    returnValue: _i8.Future<void>.value(),
-    returnValueForMissingStub: _i8.Future<void>.value(),
-  ) as _i8.Future<void>);
+    returnValue: _i6.Future<void>.value(),
+    returnValueForMissingStub: _i6.Future<void>.value(),
+  ) as _i6.Future<void>);
 
   @override
   List<_i2.OrderBy>? getLastOrderByFor(_i2.OrderByPreferenceKey? key) =>
@@ -112,14 +95,14 @@ class MockUserPreferencesService extends _i1.Mock
       ) as List<_i2.OrderBy>?);
 
   @override
-  _i8.Future<void> setLastOrderByFor(
+  _i6.Future<void> setLastOrderByFor(
     _i2.OrderByPreferenceKey? key,
     List<_i2.OrderBy>? orderBy,
   ) => (super.noSuchMethod(
     Invocation.method(#setLastOrderByFor, [key, orderBy]),
-    returnValue: _i8.Future<void>.value(),
-    returnValueForMissingStub: _i8.Future<void>.value(),
-  ) as _i8.Future<void>);
+    returnValue: _i6.Future<void>.value(),
+    returnValueForMissingStub: _i6.Future<void>.value(),
+  ) as _i6.Future<void>);
 
   @override
   _i2.FieldMetadata<Object>? getLastSecondLineFieldFor(
@@ -130,19 +113,19 @@ class MockUserPreferencesService extends _i1.Mock
   ) as _i2.FieldMetadata<Object>?);
 
   @override
-  _i8.Future<void> setLastSecondLineFieldFor(
+  _i6.Future<void> setLastSecondLineFieldFor(
     _i2.OrderByPreferenceKey? key,
     _i2.FieldMetadata<Object>? field,
   ) => (super.noSuchMethod(
     Invocation.method(#setLastSecondLineFieldFor, [key, field]),
-    returnValue: _i8.Future<void>.value(),
-    returnValueForMissingStub: _i8.Future<void>.value(),
-  ) as _i8.Future<void>);
+    returnValue: _i6.Future<void>.value(),
+    returnValueForMissingStub: _i6.Future<void>.value(),
+  ) as _i6.Future<void>);
 
   @override
   void onTransition(
-    _i9.Bloc<dynamic, dynamic>? bloc,
-    _i9.Transition<dynamic, dynamic>? transition,
+    _i7.Bloc<dynamic, dynamic>? bloc,
+    _i7.Transition<dynamic, dynamic>? transition,
   ) => super.noSuchMethod(
     Invocation.method(#onTransition, [bloc, transition]),
     returnValueForMissingStub: null,
@@ -156,20 +139,20 @@ class MockUserPreferencesService extends _i1.Mock
   ) as Map<String, dynamic>);
 
   @override
-  void onCreate(_i9.BlocBase<dynamic>? bloc) => super.noSuchMethod(
+  void onCreate(_i7.BlocBase<dynamic>? bloc) => super.noSuchMethod(
     Invocation.method(#onCreate, [bloc]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void onEvent(_i9.Bloc<dynamic, dynamic>? bloc, Object? event) =>
+  void onEvent(_i7.Bloc<dynamic, dynamic>? bloc, Object? event) =>
       super.noSuchMethod(
         Invocation.method(#onEvent, [bloc, event]),
         returnValueForMissingStub: null,
       );
 
   @override
-  void onChange(_i9.BlocBase<dynamic>? bloc, _i9.Change<dynamic>? change) =>
+  void onChange(_i7.BlocBase<dynamic>? bloc, _i7.Change<dynamic>? change) =>
       super.noSuchMethod(
         Invocation.method(#onChange, [bloc, change]),
         returnValueForMissingStub: null,
@@ -177,7 +160,7 @@ class MockUserPreferencesService extends _i1.Mock
 
   @override
   void onError(
-    _i9.BlocBase<dynamic>? bloc,
+    _i7.BlocBase<dynamic>? bloc,
     Object? error,
     StackTrace? stackTrace,
   ) => super.noSuchMethod(
@@ -187,7 +170,7 @@ class MockUserPreferencesService extends _i1.Mock
 
   @override
   void onDone(
-    _i9.Bloc<dynamic, dynamic>? bloc,
+    _i7.Bloc<dynamic, dynamic>? bloc,
     Object? event, [
     Object? error,
     StackTrace? stackTrace,
@@ -197,7 +180,7 @@ class MockUserPreferencesService extends _i1.Mock
   );
 
   @override
-  void onClose(_i9.BlocBase<dynamic>? bloc) => super.noSuchMethod(
+  void onClose(_i7.BlocBase<dynamic>? bloc) => super.noSuchMethod(
     Invocation.method(#onClose, [bloc]),
     returnValueForMissingStub: null,
   );
@@ -232,34 +215,34 @@ class MockImageUrlCacheService extends _i1.Mock
   ) as _i3.BaseCacheManager);
 
   @override
-  _i8.Future<_i4.File> getImageFile(_i2.ObjectImageInfo? imageInfo) =>
+  _i6.Future<_i4.File> getImageFile(_i2.ObjectImageInfo? imageInfo) =>
       (super.noSuchMethod(
         Invocation.method(#getImageFile, [imageInfo]),
-        returnValue: _i8.Future<_i4.File>.value(
+        returnValue: _i6.Future<_i4.File>.value(
           _FakeFile_2(this, Invocation.method(#getImageFile, [imageInfo])),
         ),
-        returnValueForMissingStub: _i8.Future<_i4.File>.value(
+        returnValueForMissingStub: _i6.Future<_i4.File>.value(
           _FakeFile_2(this, Invocation.method(#getImageFile, [imageInfo])),
         ),
-      ) as _i8.Future<_i4.File>);
+      ) as _i6.Future<_i4.File>);
 
   @override
-  _i8.Future<String> getImageUrl(_i2.ObjectImageInfo? imageObject) =>
+  _i6.Future<String> getImageUrl(_i2.ObjectImageInfo? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(#getImageUrl, [imageObject]),
-        returnValue: _i8.Future<String>.value(
-          _i10.dummyValue<String>(
+        returnValue: _i6.Future<String>.value(
+          _i8.dummyValue<String>(
             this,
             Invocation.method(#getImageUrl, [imageObject]),
           ),
         ),
-        returnValueForMissingStub: _i8.Future<String>.value(
-          _i10.dummyValue<String>(
+        returnValueForMissingStub: _i6.Future<String>.value(
+          _i8.dummyValue<String>(
             this,
             Invocation.method(#getImageUrl, [imageObject]),
           ),
         ),
-      ) as _i8.Future<String>);
+      ) as _i6.Future<String>);
 
   @override
   String? getNonExpiredCachedImageUrl(_i2.ObjectImageInfo? imageObject) =>
@@ -276,12 +259,12 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as String?);
 
   @override
-  _i8.Future<bool> isUrlFileCachedAndValid(String? cacheKey) =>
+  _i6.Future<bool> isUrlFileCachedAndValid(String? cacheKey) =>
       (super.noSuchMethod(
         Invocation.method(#isUrlFileCachedAndValid, [cacheKey]),
-        returnValue: _i8.Future<bool>.value(false),
-        returnValueForMissingStub: _i8.Future<bool>.value(false),
-      ) as _i8.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
 
   @override
   bool isUrlExpired(String? url) => (super.noSuchMethod(
@@ -297,37 +280,17 @@ class MockImageUrlCacheService extends _i1.Mock
 class MockViewableObjectService extends _i1.Mock
     implements _i2.ViewableObjectService {
   @override
-  _i5.GoRouter get router => (super.noSuchMethod(
+  _i5.KaiselRouter<_i2.AppRoute> get router => (super.noSuchMethod(
     Invocation.getter(#router),
-    returnValue: _FakeGoRouter_3(this, Invocation.getter(#router)),
-    returnValueForMissingStub: _FakeGoRouter_3(
+    returnValue: _FakeKaiselRouter_3<_i2.AppRoute>(
       this,
       Invocation.getter(#router),
     ),
-  ) as _i5.GoRouter);
-
-  @override
-  _i6.NavigatorState get navigator => (super.noSuchMethod(
-    Invocation.getter(#navigator),
-    returnValue: _FakeNavigatorState_4(this, Invocation.getter(#navigator)),
-    returnValueForMissingStub: _FakeNavigatorState_4(
+    returnValueForMissingStub: _FakeKaiselRouter_3<_i2.AppRoute>(
       this,
-      Invocation.getter(#navigator),
+      Invocation.getter(#router),
     ),
-  ) as _i6.NavigatorState);
-
-  @override
-  _i6.GlobalKey<_i6.NavigatorState> get navigatorKey => (super.noSuchMethod(
-    Invocation.getter(#navigatorKey),
-    returnValue: _FakeGlobalKey_5<_i6.NavigatorState>(
-      this,
-      Invocation.getter(#navigatorKey),
-    ),
-    returnValueForMissingStub: _FakeGlobalKey_5<_i6.NavigatorState>(
-      this,
-      Invocation.getter(#navigatorKey),
-    ),
-  ) as _i6.GlobalKey<_i6.NavigatorState>);
+  ) as _i5.KaiselRouter<_i2.AppRoute>);
 
   @override
   void onTap(_i2.Viewable? object) => super.noSuchMethod(
@@ -345,18 +308,18 @@ class MockViewableObjectService extends _i1.Mock
   ) as String?);
 
   @override
-  _i6.IconData getDefaultIconFor<T extends Object>([T? imageObject]) =>
+  _i9.IconData getDefaultIconFor<T extends Object>([T? imageObject]) =>
       (super.noSuchMethod(
         Invocation.method(#getDefaultIconFor, [imageObject]),
-        returnValue: _i10.dummyValue<_i6.IconData>(
+        returnValue: _i8.dummyValue<_i9.IconData>(
           this,
           Invocation.method(#getDefaultIconFor, [imageObject]),
         ),
-        returnValueForMissingStub: _i10.dummyValue<_i6.IconData>(
+        returnValueForMissingStub: _i8.dummyValue<_i9.IconData>(
           this,
           Invocation.method(#getDefaultIconFor, [imageObject]),
         ),
-      ) as _i6.IconData);
+      ) as _i9.IconData);
 }
 
 /// A class which mocks [AuthBloc].
@@ -378,39 +341,39 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
   ) as bool);
 
   @override
-  _i8.Stream<_i2.AuthUser?> get userStream => (super.noSuchMethod(
+  _i6.Stream<_i2.AuthUser?> get userStream => (super.noSuchMethod(
     Invocation.getter(#userStream),
-    returnValue: _i8.Stream<_i2.AuthUser?>.empty(),
-    returnValueForMissingStub: _i8.Stream<_i2.AuthUser?>.empty(),
-  ) as _i8.Stream<_i2.AuthUser?>);
+    returnValue: _i6.Stream<_i2.AuthUser?>.empty(),
+    returnValueForMissingStub: _i6.Stream<_i2.AuthUser?>.empty(),
+  ) as _i6.Stream<_i2.AuthUser?>);
 
   @override
-  _i8.Stream<_i2.User?> get userDataStream => (super.noSuchMethod(
+  _i6.Stream<_i2.User?> get userDataStream => (super.noSuchMethod(
     Invocation.getter(#userDataStream),
-    returnValue: _i8.Stream<_i2.User?>.empty(),
-    returnValueForMissingStub: _i8.Stream<_i2.User?>.empty(),
-  ) as _i8.Stream<_i2.User?>);
+    returnValue: _i6.Stream<_i2.User?>.empty(),
+    returnValueForMissingStub: _i6.Stream<_i2.User?>.empty(),
+  ) as _i6.Stream<_i2.User?>);
 
   @override
-  _i8.Stream<String?> get idTokenStream => (super.noSuchMethod(
+  _i6.Stream<String?> get idTokenStream => (super.noSuchMethod(
     Invocation.getter(#idTokenStream),
-    returnValue: _i8.Stream<String?>.empty(),
-    returnValueForMissingStub: _i8.Stream<String?>.empty(),
-  ) as _i8.Stream<String?>);
+    returnValue: _i6.Stream<String?>.empty(),
+    returnValueForMissingStub: _i6.Stream<String?>.empty(),
+  ) as _i6.Stream<String?>);
 
   @override
-  _i8.Stream<bool> get isSignedInStream => (super.noSuchMethod(
+  _i6.Stream<bool> get isSignedInStream => (super.noSuchMethod(
     Invocation.getter(#isSignedInStream),
-    returnValue: _i8.Stream<bool>.empty(),
-    returnValueForMissingStub: _i8.Stream<bool>.empty(),
-  ) as _i8.Stream<bool>);
+    returnValue: _i6.Stream<bool>.empty(),
+    returnValueForMissingStub: _i6.Stream<bool>.empty(),
+  ) as _i6.Stream<bool>);
 
   @override
-  _i8.Future<void> get loaded => (super.noSuchMethod(
+  _i6.Future<void> get loaded => (super.noSuchMethod(
     Invocation.getter(#loaded),
-    returnValue: _i8.Future<void>.value(),
-    returnValueForMissingStub: _i8.Future<void>.value(),
-  ) as _i8.Future<void>);
+    returnValue: _i6.Future<void>.value(),
+    returnValueForMissingStub: _i6.Future<void>.value(),
+  ) as _i6.Future<void>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -422,29 +385,26 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
   @override
   _i2.AuthState get state => (super.noSuchMethod(
     Invocation.getter(#state),
-    returnValue: _i10.dummyValue<_i2.AuthState>(
-      this,
-      Invocation.getter(#state),
-    ),
-    returnValueForMissingStub: _i10.dummyValue<_i2.AuthState>(
+    returnValue: _i8.dummyValue<_i2.AuthState>(this, Invocation.getter(#state)),
+    returnValueForMissingStub: _i8.dummyValue<_i2.AuthState>(
       this,
       Invocation.getter(#state),
     ),
   ) as _i2.AuthState);
 
   @override
-  _i8.Stream<_i2.AuthState> get stream => (super.noSuchMethod(
+  _i6.Stream<_i2.AuthState> get stream => (super.noSuchMethod(
     Invocation.getter(#stream),
-    returnValue: _i8.Stream<_i2.AuthState>.empty(),
-    returnValueForMissingStub: _i8.Stream<_i2.AuthState>.empty(),
-  ) as _i8.Stream<_i2.AuthState>);
+    returnValue: _i6.Stream<_i2.AuthState>.empty(),
+    returnValueForMissingStub: _i6.Stream<_i2.AuthState>.empty(),
+  ) as _i6.Stream<_i2.AuthState>);
 
   @override
-  _i8.Future<void> close() => (super.noSuchMethod(
+  _i6.Future<void> close() => (super.noSuchMethod(
     Invocation.method(#close, []),
-    returnValue: _i8.Future<void>.value(),
-    returnValueForMissingStub: _i8.Future<void>.value(),
-  ) as _i8.Future<void>);
+    returnValue: _i6.Future<void>.value(),
+    returnValueForMissingStub: _i6.Future<void>.value(),
+  ) as _i6.Future<void>);
 
   @override
   void add(_i2.AuthEvent? event) => super.noSuchMethod(
@@ -466,15 +426,15 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
 
   @override
   void on<E extends _i2.AuthEvent>(
-    _i9.EventHandler<E, _i2.AuthState>? handler, {
-    _i9.EventTransformer<E>? transformer,
+    _i7.EventHandler<E, _i2.AuthState>? handler, {
+    _i7.EventTransformer<E>? transformer,
   }) => super.noSuchMethod(
     Invocation.method(#on, [handler], {#transformer: transformer}),
     returnValueForMissingStub: null,
   );
 
   @override
-  void onTransition(_i9.Transition<_i2.AuthEvent, _i2.AuthState>? transition) =>
+  void onTransition(_i7.Transition<_i2.AuthEvent, _i2.AuthState>? transition) =>
       super.noSuchMethod(
         Invocation.method(#onTransition, [transition]),
         returnValueForMissingStub: null,
@@ -488,7 +448,7 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
       );
 
   @override
-  void onChange(_i9.Change<_i2.AuthState>? change) => super.noSuchMethod(
+  void onChange(_i7.Change<_i2.AuthState>? change) => super.noSuchMethod(
     Invocation.method(#onChange, [change]),
     returnValueForMissingStub: null,
   );

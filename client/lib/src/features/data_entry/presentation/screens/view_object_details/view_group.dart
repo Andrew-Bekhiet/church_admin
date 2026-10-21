@@ -112,7 +112,7 @@ class _ViewGroupState extends State<ViewGroup> {
                   icon: const Icon(Symbols.productivity),
                   label: Text('تسجيل الحضور ل${defaultMeeting.name}'),
                   onPressed: () => RecordAttendanceRoute(
-                    $extra: defaultMeeting,
+                    meeting: defaultMeeting,
                   ).push(context),
                 ),
               ),
@@ -122,11 +122,9 @@ class _ViewGroupState extends State<ViewGroup> {
                 label: const Text('احصائيات'),
                 onPressed: () => unawaited(
                   MeetingsAnalysisRoute(
-                    $extra: MeetingsAnalysisExtra(
-                      title: 'احصائيات ${group.name}',
-                      initialRangePreset: PastQuarterDateTimeRangePreset(),
-                      subject: GroupAnalysisSubject(group),
-                    ),
+                    title: 'احصائيات ${group.name}',
+                    initialRangePreset: PastQuarterDateTimeRangePreset(),
+                    subject: GroupAnalysisSubject(group),
                   ).push(context),
                 ),
               ),
@@ -157,7 +155,7 @@ class _ViewGroupState extends State<ViewGroup> {
       editButtonBuilder: (context, group) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditGroupRoute(
-          $extra: EditGroupExtra(group: group),
+          group: group,
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
@@ -169,7 +167,7 @@ class _ViewGroupState extends State<ViewGroup> {
       floatingActionButtonBuilder: (context, tabController, group) =>
           FloatingActionButton(
             onPressed: () => EditPersonRoute(
-              $extra: CreatePersonInGroup(group: group),
+              intent: CreatePersonInGroup(group: group),
             ).push(context),
             child: const Icon(Symbols.person_add),
           ),

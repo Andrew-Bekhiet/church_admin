@@ -1,17 +1,21 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'view_family_route.g.dart';
+class ViewFamilyRoute extends HomeChildRoute {
+  static const String routePath = '/view_family';
 
-@TypedGoRoute<ViewFamilyRoute>(path: '/view_family')
-class ViewFamilyRoute extends GoRouteData with $ViewFamilyRoute {
   final String id;
-  final Family? $extra;
-  const ViewFamilyRoute({required this.id, this.$extra});
+  final Family? family;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return ViewFamily(familyId: id, family: $extra);
+  String get path => routePath;
+
+  @override
+  List<Object?> get props => [id, family];
+
+  const ViewFamilyRoute({required this.id, this.family});
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewFamily(familyId: id, family: family);
   }
 }

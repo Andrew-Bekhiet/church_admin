@@ -211,7 +211,7 @@ class _ViewAreaState extends State<ViewArea> {
       ),
       editButtonBuilder: (context, area) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => EditAreaRoute($extra: area).push(context),
+        onPressed: () => EditAreaRoute(area: area).push(context),
         icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
@@ -242,26 +242,24 @@ class _ViewAreaState extends State<ViewArea> {
               if (newIndex == 0) {
                 unawaited(
                   EditStreetRoute(
-                    $extra: EditStreetExtra(area: area),
+                    withArea: area,
                   ).push(context),
                 );
               } else if (newIndex == 1) {
                 unawaited(
                   EditFamilyRoute(
-                    $extra: EditFamilyExtra(area: area),
+                    withAddress: Address(area: area),
                   ).push(context),
                 );
               } else if (newIndex == 2) {
                 unawaited(
                   EditPersonRoute(
-                    $extra: CreatePersonInArea(area: area),
+                    intent: CreatePersonInArea(area: area),
                   ).push(context),
                 );
               } else if (newIndex == 3) {
                 unawaited(
-                  EditStoreRoute(
-                    $extra: EditStoreExtra(area: area),
-                  ).push(context),
+                  const EditStoreRoute().push(context),
                 );
               }
             },

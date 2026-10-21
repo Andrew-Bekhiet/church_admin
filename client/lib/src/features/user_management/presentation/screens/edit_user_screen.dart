@@ -75,7 +75,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
     switch (state) {
       case UserFormSaved(:final uid):
         if (widget.intent case CreateUser()) {
-          ViewUserRoute(uid: uid).pushReplacement(context);
+          unawaited(ViewUserRoute(uid: uid).pushReplacement(context));
         } else {
           Navigator.of(context).pop();
         }

@@ -1,14 +1,13 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'settings_route.g.dart';
+class SettingsRoute extends HomeChildRoute {
+  static const String routePath = '/settings';
 
-@TypedGoRoute<SettingsRoute>(path: '/settings')
-class SettingsRoute extends GoRouteData with $SettingsRoute {
+  @override
+  String get path => routePath;
+
   const SettingsRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const SettingsScreen();
+  Widget build(BuildContext context) => const SettingsScreen();
 }

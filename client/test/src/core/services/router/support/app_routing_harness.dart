@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:material_ui/material_ui.dart' hide Notification;
 import 'package:mocktail/mocktail.dart';
@@ -27,13 +27,11 @@ class AppRoutingHarness {
   final _MockLocalAuthentication _localAuthPlugin = _MockLocalAuthentication();
 
   late LocalAuthService localAuth;
-  late GoRouter router;
+  late KaiselRouterConfig<AppRoute> router;
   bool locksOnStart = false;
+  bool withUrls = false;
+  final List<String> reportedAddresses = [];
   AuthState _authState = const AuthUnauthenticated();
-
-  BuildContext get _navigatorContext =>
-      router.routerDelegate.navigatorKey.currentContext ??
-      (throw StateError('open() needs the app pumped first'));
 
   static User approvedUser({
     Set<UserPermission> permissions = const {},
@@ -76,17 +74,31 @@ class AppRoutingHarness {
   void signOut() => _changeAuthState(const AuthUnauthenticated());
 
   Future<void> pump(WidgetTester tester) async {
+    await pumpFirstFrame(tester);
+    await settle(tester);
+  }
+
+  Future<void> pumpFirstFrame(WidgetTester tester) async {
     tester.view
       ..physicalSize = _phoneSize
       ..devicePixelRatio = _phonePixelRatio;
     addTearDown(tester.view.reset);
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
     _installProviders();
-    router = AppRouter.create();
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      SystemChannels.navigation,
+      (call) async {
+        if (call.method == 'routeInformationUpdated') {
+          reportedAddresses.add((call.arguments as Map)['uri'] as String);
+        }
+
+        return null;
+      },
+    );
+    router = AppRouter.create(withUrls: withUrls);
     addTearDown(_tearDown);
 
     await tester.pumpWidget(ChurchAdminApp(routerConfig: router));
-    await settle(tester);
   }
 
   Future<void> settle(WidgetTester tester) async {
@@ -95,8 +107,13 @@ class AppRoutingHarness {
     }
   }
 
-  Future<void> open(WidgetTester tester, GoRouteData route) async {
-    unawaited(route.push<void>(_navigatorContext));
+  Future<void> open(WidgetTester tester, AppRoute route) async {
+    unawaited(router.router.push(route));
+    await settle(tester);
+  }
+
+  Future<void> openPlatformLink(WidgetTester tester, String link) async {
+    await tester.binding.handlePushRoute(link);
     await settle(tester);
   }
 
@@ -116,7 +133,7 @@ class AppRoutingHarness {
   }
 
   Future<void> popScreenAsRemoteConfigChanges(WidgetTester tester) async {
-    router.routerDelegate.navigatorKey.currentState?.pop();
+    router.navigator?.pop();
     featureFlags.publishConfigChange();
     await settle(tester);
   }
@@ -203,7 +220,7 @@ class AppRoutingHarness {
       ),
       homeCubitProvider.overrideWithValue(ScreenDependencyStubs.homeCubit()),
       viewableObjectServiceProvider.overrideWith(
-        (_) => ViewableObjectService(router: router),
+        (_) => ViewableObjectService(router: router.router),
       ),
       packageInfoPluginProvider.overrideWith(
         (_) => PackageInfo(

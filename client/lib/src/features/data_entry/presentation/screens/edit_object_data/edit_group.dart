@@ -39,7 +39,7 @@ class _EditGroupState extends State<EditGroup> {
     _controller = EditObjectController(
       afterCreate: (object) => ViewGroupRoute(
         id: object.id,
-        $extra: object,
+        group: object,
       ).pushReplacement(context),
       onCreate: _createGroup,
       onUpdate: (oldGroup, newGroup) => DatabaseService.I.groups.updateObject(

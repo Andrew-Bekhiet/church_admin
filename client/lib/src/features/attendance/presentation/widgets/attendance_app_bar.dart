@@ -99,15 +99,13 @@ class AttendanceAppBar extends StatelessWidget {
 
     unawaited(
       MeetingsAnalysisRoute(
-        $extra: MeetingsAnalysisExtra(
-          title: 'احصائيات ${meeting.name}',
-          initialRangePreset: selectedDay == DateUtils.dateOnly(DateTime.now())
-              ? TodayDateTimeRangePreset()
-              : CustomDateTimeRangePreset(
-                  range: DateTimeRange(start: selectedDay, end: selectedDay),
-                ),
-          subject: MeetingAnalysisSubject(meeting),
-        ),
+        title: 'احصائيات ${meeting.name}',
+        initialRangePreset: selectedDay == DateUtils.dateOnly(DateTime.now())
+            ? TodayDateTimeRangePreset()
+            : CustomDateTimeRangePreset(
+                range: DateTimeRange(start: selectedDay, end: selectedDay),
+              ),
+        subject: MeetingAnalysisSubject(meeting),
       ).push(context),
     );
   }

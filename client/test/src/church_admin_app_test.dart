@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -32,8 +32,12 @@ void main() {
   tearDown(resetGlobalProviderContainer);
 
   testWidgets('the app uses the selected theme', (tester) async {
-    final goRouter = GoRouter(routes: [$homeScreenRoute]);
-    await tester.pumpWidget(ChurchAdminApp(routerConfig: goRouter));
+    final router = KaiselRouterConfig<AppRoute>(
+      initial: const HomeScreenRoute(),
+      builder: (context, route) => route.build(context),
+    );
+    addTearDown(router.dispose);
+    await tester.pumpWidget(ChurchAdminApp(routerConfig: router));
 
     expect(
       tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
@@ -59,8 +63,12 @@ void main() {
 
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
 
-    final goRouter = GoRouter(routes: [$homeScreenRoute]);
-    await tester.pumpWidget(ChurchAdminApp(routerConfig: goRouter));
+    final router = KaiselRouterConfig<AppRoute>(
+      initial: const HomeScreenRoute(),
+      builder: (context, route) => route.build(context),
+    );
+    addTearDown(router.dispose);
+    await tester.pumpWidget(ChurchAdminApp(routerConfig: router));
 
     expect(find.byType(SnackBar), findsNothing);
 
@@ -92,7 +100,7 @@ List<Override> _setUp() {
     userPreferencesServiceProvider.overrideWithValue(
       FakeUserPreferencesService(),
     ),
-    _setUpGoRouterRefreshStream(),
+    _setUpRouterRefreshStream(),
     _setUpThemingService(FakeUserPreferencesService()),
     _setUpDatabaseRepo(),
     _setUpConnectivityService(),
@@ -192,9 +200,9 @@ Override _setUpThemingService(UserPreferencesService userPreferencesService) {
   );
 }
 
-Override _setUpGoRouterRefreshStream() {
-  return goRouterRefreshStreamProvider.overrideWithValue(
-    GoRouterRefreshStream(const Stream.empty()),
+Override _setUpRouterRefreshStream() {
+  return routerRefreshStreamProvider.overrideWithValue(
+    RouterRefreshStream(const Stream.empty()),
   );
 }
 

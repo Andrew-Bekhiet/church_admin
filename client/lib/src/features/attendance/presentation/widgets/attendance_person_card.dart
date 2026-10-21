@@ -95,7 +95,7 @@ class AttendancePersonCard extends StatelessWidget {
   }
 
   void _openDetails(BuildContext context) =>
-      ViewPersonRoute(id: entry.person.id, $extra: entry.person).push(context);
+      ViewPersonRoute(id: entry.person.id, person: entry.person).push(context);
 
   Future<void> _changeAttendanceTime(BuildContext context) async {
     final attendanceDateTime = entry.attendance?.datetime;

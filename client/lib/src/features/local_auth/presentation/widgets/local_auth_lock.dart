@@ -3,18 +3,18 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LocalAuthLock extends StatefulWidget {
-  final RouterDelegate<RouteMatchList> routerDelegate;
-  final String protectedLocation;
+  final KaiselRouter<AppRoute> router;
+  final AppRoute protectedRoute;
   final Widget child;
 
   const LocalAuthLock({
-    required this.routerDelegate,
-    required this.protectedLocation,
+    required this.router,
+    required this.protectedRoute,
     required this.child,
     super.key,
   });
@@ -37,7 +37,7 @@ class _LocalAuthLockState extends State<LocalAuthLock>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    widget.routerDelegate.addListener(_updateLock);
+    widget.router.addListener(_updateLock);
     _authChangesListener = Rx.merge<Object?>([
       AuthBloc.I.isSignedInStream,
       LocalAuthService.I.refreshUIStream,
@@ -47,9 +47,9 @@ class _LocalAuthLockState extends State<LocalAuthLock>
   @override
   void didUpdateWidget(LocalAuthLock oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.routerDelegate != widget.routerDelegate) {
-      oldWidget.routerDelegate.removeListener(_updateLock);
-      widget.routerDelegate.addListener(_updateLock);
+    if (oldWidget.router != widget.router) {
+      oldWidget.router.removeListener(_updateLock);
+      widget.router.addListener(_updateLock);
     }
 
     _isLocked = _mustLock();
@@ -89,7 +89,7 @@ class _LocalAuthLockState extends State<LocalAuthLock>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    widget.routerDelegate.removeListener(_updateLock);
+    widget.router.removeListener(_updateLock);
     unawaited(_authChangesListener.cancel());
     super.dispose();
   }
@@ -111,16 +111,10 @@ class _LocalAuthLockState extends State<LocalAuthLock>
   }
 
   bool _mustLock() {
-    final isProtectedLocationOpen =
-        widget
-            .routerDelegate
-            .currentConfiguration
-            ?.matches
-            .firstOrNull
-            ?.matchedLocation ==
-        widget.protectedLocation;
+    final isProtectedRouteOpen =
+        widget.router.stack.first == widget.protectedRoute;
 
-    return isProtectedLocationOpen &&
+    return isProtectedRouteOpen &&
         AuthBloc.I.isSignedIn &&
         LocalAuthService.I.shouldAuthenticate;
   }

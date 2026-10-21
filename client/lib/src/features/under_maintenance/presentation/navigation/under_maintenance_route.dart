@@ -1,21 +1,20 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'under_maintenance_route.g.dart';
+class UnderMaintenanceRoute extends AppRoute {
+  static const String routePath = '/under_maintenance';
 
-@TypedGoRoute<UnderMaintenanceRoute>(path: '/under_maintenance')
-class UnderMaintenanceRoute extends GoRouteData with $UnderMaintenanceRoute {
+  @override
+  String get path => routePath;
+
   const UnderMaintenanceRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      UnderMaintenanceScreen();
+  Widget build(BuildContext context) => UnderMaintenanceScreen();
 
   @override
-  String? redirect(BuildContext context, GoRouterState state) {
+  AppRoute? redirect() {
     if (!FeatureFlagsRepository.I.isUnderMaintenance) {
-      return '/';
+      return AppRoute.home;
     }
 
     return null;

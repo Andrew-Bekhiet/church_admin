@@ -1,37 +1,21 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'edit_street_route.g.dart';
+class EditStreetRoute extends HomeChildRoute {
+  static const String routePath = '/edit_street';
 
-@TypedGoRoute<EditStreetRoute>(path: '/edit_street')
-class EditStreetRoute extends GoRouteData with $EditStreetRoute {
-  final EditStreetExtra? $extra;
-  const EditStreetRoute({this.$extra});
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return EditStreet(street: $extra?.street, withArea: $extra?.area);
-  }
-}
-
-@JsonSerializable()
-class EditStreetExtra extends SerializableExtra {
   final Street? street;
-  final Area? area;
+  final Area? withArea;
 
   @override
-  String get typeName => 'EditStreetExtra';
-
-  const EditStreetExtra({
-    this.street,
-    this.area,
-  });
-
-  factory EditStreetExtra.fromJson(Json json) =>
-      _$EditStreetExtraFromJson(json);
+  String get path => routePath;
 
   @override
-  Json toJson() => _$EditStreetExtraToJson(this);
+  List<Object?> get props => [street, withArea];
+
+  const EditStreetRoute({this.street, this.withArea});
+
+  @override
+  Widget build(BuildContext context) {
+    return EditStreet(street: street, withArea: withArea);
+  }
 }

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 class HomeFAB extends StatelessWidget {
@@ -39,8 +38,8 @@ class HomeFAB extends StatelessWidget {
               )
               .toList(),
           onTap: (i) {
-            if (tabs[i].createLocation case final location?) {
-              unawaited(context.push(location));
+            if (tabs[i].createRoute case final route?) {
+              unawaited(route.push(context));
             }
           },
         );

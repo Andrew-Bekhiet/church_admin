@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -52,8 +52,8 @@ void main() {
           userPreferencesService: _userPreferences(),
         ),
       ),
-      goRouterRefreshStreamProvider.overrideWithValue(
-        GoRouterRefreshStream(reauthChanges.stream),
+      routerRefreshStreamProvider.overrideWithValue(
+        RouterRefreshStream(reauthChanges.stream),
       ),
       featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
       packageInfoPluginProvider.overrideWith(
@@ -76,9 +76,11 @@ void main() {
     'a page opened from home is hidden behind the lock screen once '
     're-authentication is due',
     (tester) async {
-      final goRouter = GoRouter(
-        routes: [$homeScreenRoute, $settingsRoute],
+      final router = KaiselRouterConfig<AppRoute>(
+        initial: const HomeScreenRoute(),
+        builder: (context, route) => route.build(context),
       );
+      addTearDown(router.dispose);
       tester.view
         ..physicalSize = const Size(1170, 2532)
         ..devicePixelRatio = 3;
@@ -86,12 +88,12 @@ void main() {
       tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
       await tester.pumpWidget(
         ChurchAdminApp(
-          routerConfig: goRouter,
+          routerConfig: router,
         ),
       );
       await tester.pump();
 
-      goRouter.go(const SettingsRoute().location);
+      unawaited(router.router.push(const SettingsRoute()));
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
 

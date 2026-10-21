@@ -27,7 +27,7 @@ class PersonChurchSection extends StatelessWidget {
                   key: PersonChurchSectionKeys.linkedUserButton,
                   onPressed: () => ViewUserRoute(
                     uid: person.user!.uid,
-                    $extra: person.user,
+                    user: person.user,
                   ).push(context),
                   icon: const Icon(Symbols.manage_accounts),
                   tooltip: 'عرض بيانات الخادم',

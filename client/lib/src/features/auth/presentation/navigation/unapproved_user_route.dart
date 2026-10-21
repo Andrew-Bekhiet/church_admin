@@ -1,28 +1,28 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'unapproved_user_route.g.dart';
+class UnapprovedUserRoute extends AppRoute {
+  static const String routePath = '/unapproved_user';
 
-@TypedGoRoute<UnapprovedUserRoute>(path: '/unapproved_user')
-class UnapprovedUserRoute extends GoRouteData with $UnapprovedUserRoute {
+  @override
+  String get path => routePath;
+
   const UnapprovedUserRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return const UnapprovedUserScreen();
   }
 
   @override
-  String? redirect(BuildContext context, GoRouterState state) {
+  AppRoute? redirect() {
     final authState = AuthBloc.I.state.unwrapped;
 
     switch (authState) {
       case AuthUnauthenticated():
-        return const LoginRoute().location;
+        return const LoginRoute();
 
       case AuthAuthenticated(isApproved: true):
-        return const HomeScreenWebRoute().location;
+        return AppRoute.home;
 
       default:
         return null;

@@ -1,16 +1,15 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'my_account_route.g.dart';
+class MyAccountRoute extends HomeChildRoute {
+  static const String routePath = '/my_account';
 
-@TypedGoRoute<MyAccountRoute>(path: '/my_account')
-class MyAccountRoute extends GoRouteData with $MyAccountRoute {
+  @override
+  String get path => routePath;
+
   const MyAccountRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       bloc: AuthBloc.I,
       builder: (context, state) {

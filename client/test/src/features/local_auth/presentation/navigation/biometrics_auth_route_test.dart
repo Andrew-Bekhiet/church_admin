@@ -1,16 +1,14 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 class _MockAuthBloc extends Mock implements AuthBloc {}
 
 class _MockLocalAuthService extends Mock implements LocalAuthService {}
 
-class _MockBuildContext extends Mock implements BuildContext {}
-
 void main() {
+  setUpAll(() => registerFallbackValue(const HomeScreenRoute()));
+
   const authUser = AuthUser(
     uid: 'uid',
     email: 'email',
@@ -20,27 +18,6 @@ void main() {
   const userData = User(uid: 'uid', email: 'email', name: 'name');
 
   late _MockLocalAuthService localAuthService;
-  late GoRouter router;
-
-  setUp(() {
-    router = GoRouter(
-      routes: [
-        GoRoute(
-          path: '/',
-          builder: (context, state) => const SizedBox.shrink(),
-        ),
-      ],
-    );
-  });
-
-  GoRouterState routeState() => GoRouterState(
-    router.configuration,
-    uri: Uri(path: '/'),
-    matchedLocation: '/',
-    fullPath: '/',
-    pathParameters: const {},
-    pageKey: const ValueKey('/'),
-  );
 
   void setUpRoute(AuthState authState, {bool shouldAuthenticate = true}) {
     final authBloc = _MockAuthBloc();
@@ -51,7 +28,7 @@ void main() {
       () => localAuthService.shouldAuthenticate,
     ).thenReturn(shouldAuthenticate);
     when(
-      () => localAuthService.shouldAuthenticateForPath(any()),
+      () => localAuthService.shouldAuthenticateForRoute(any()),
     ).thenReturn(false);
 
     initGlobalProviderContainer([
@@ -61,7 +38,6 @@ void main() {
   }
 
   tearDown(() {
-    router.dispose();
     resetGlobalProviderContainer();
     resetMocktailState();
   });
@@ -69,64 +45,50 @@ void main() {
   test('signed-out users return to login', () {
     setUpRoute(const AuthUnauthenticated());
 
-    expect(
-      BiometricsAuthRoute().redirect(_MockBuildContext(), routeState()),
-      '/login',
-    );
+    expect(const BiometricsAuthRoute().redirect(), const LoginRoute());
   });
 
   test('an account requiring local auth stays on the lock screen', () {
     setUpRoute(const AuthAuthenticated(authUser: authUser, userData: userData));
 
-    expect(
-      BiometricsAuthRoute().redirect(_MockBuildContext(), routeState()),
-      isNull,
-    );
+    expect(const BiometricsAuthRoute().redirect(), isNull);
   });
 
-  test('an unlocked account continues to the requested path', () {
+  test('an unlocked account continues to the requested route', () {
     setUpRoute(
       const AuthAuthenticated(authUser: authUser, userData: userData),
       shouldAuthenticate: false,
     );
 
     expect(
-      BiometricsAuthRoute(next: '/next').redirect(
-        _MockBuildContext(),
-        routeState(),
-      ),
-      '/next',
+      const BiometricsAuthRoute(next: SettingsRoute()).redirect(),
+      const SettingsRoute(),
     );
   });
 
-  test('an unlocked account without a next path returns home', () {
+  test('an unlocked account without a next route returns home', () {
     setUpRoute(
       const AuthAuthenticated(authUser: authUser, userData: userData),
       shouldAuthenticate: false,
     );
 
-    expect(
-      BiometricsAuthRoute().redirect(_MockBuildContext(), routeState()),
-      '/',
-    );
+    expect(const BiometricsAuthRoute().redirect(), const HomeScreenRoute());
   });
 
   test(
-    'a protected next path keeps an unlocked account on the lock screen',
+    'a protected next route keeps an unlocked account on the lock screen',
     () {
       setUpRoute(
         const AuthAuthenticated(authUser: authUser, userData: userData),
         shouldAuthenticate: false,
       );
       when(
-        () => localAuthService.shouldAuthenticateForPath('/test'),
+        () =>
+            localAuthService.shouldAuthenticateForRoute(const SettingsRoute()),
       ).thenReturn(true);
 
       expect(
-        BiometricsAuthRoute(next: '/test').redirect(
-          _MockBuildContext(),
-          routeState(),
-        ),
+        const BiometricsAuthRoute(next: SettingsRoute()).redirect(),
         isNull,
       );
     },

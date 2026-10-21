@@ -322,10 +322,10 @@ final userPersistenceServiceProvider = Provider<UserPersistenceService>((ref) {
   return userPersistenceService;
 });
 
-final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>((ref) {
+final routerRefreshStreamProvider = Provider<RouterRefreshStream>((ref) {
   final authBloc = ref.watch(authBlocProvider);
 
-  final goRouterRefreshStream = GoRouterRefreshStream(
+  final routerRefreshStream = RouterRefreshStream(
     Rx.combineLatest3(
       authBloc.stream.startWith(authBloc.state),
       ref.watch(localAuthServiceProvider).refreshUIStream.startWith(null),
@@ -335,15 +335,15 @@ final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>((ref) {
     ),
   );
 
-  ref.onDispose(goRouterRefreshStream.dispose);
+  ref.onDispose(routerRefreshStream.dispose);
 
-  return goRouterRefreshStream;
+  return routerRefreshStream;
 });
 
 final viewableObjectServiceProvider = Provider<ViewableObjectService>(
   (ref) => kIsWeb
       ? throw Exception('Web version does not support viewing data')
-      : ViewableObjectService(router: $appRouter),
+      : ViewableObjectService(router: $appRouter.router),
 );
 
 final baseCacheManagerProvider = Provider<BaseCacheManager>((ref) {

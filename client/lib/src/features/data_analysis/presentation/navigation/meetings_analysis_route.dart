@@ -1,21 +1,30 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'meetings_analysis_route.g.dart';
+class MeetingsAnalysisRoute extends HomeChildRoute {
+  static const String routePath = '/meetings_analysis';
 
-@TypedGoRoute<MeetingsAnalysisRoute>(path: '/meetings_analysis')
-class MeetingsAnalysisRoute extends GoRouteData with $MeetingsAnalysisRoute {
-  final MeetingsAnalysisExtra $extra;
-
-  const MeetingsAnalysisRoute({required this.$extra});
+  final String title;
+  final DateTimeRangePreset initialRangePreset;
+  final MeetingsAnalysisSubject subject;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  String get path => routePath;
+
+  @override
+  List<Object?> get props => [title, initialRangePreset, subject];
+
+  const MeetingsAnalysisRoute({
+    required this.title,
+    required this.initialRangePreset,
+    required this.subject,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return MeetingsAnalysisScreen(
-      title: $extra.title,
-      initialRangePreset: $extra.initialRangePreset,
-      subject: $extra.subject,
+      title: title,
+      initialRangePreset: initialRangePreset,
+      subject: subject,
     );
   }
 }

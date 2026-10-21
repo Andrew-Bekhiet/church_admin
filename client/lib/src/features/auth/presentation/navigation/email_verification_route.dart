@@ -1,28 +1,28 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'email_verification_route.g.dart';
+class EmailVerificationRoute extends AppRoute {
+  static const String routePath = '/email_verification';
 
-@TypedGoRoute<EmailVerificationRoute>(path: '/email_verification')
-class EmailVerificationRoute extends GoRouteData with $EmailVerificationRoute {
+  @override
+  String get path => routePath;
+
   const EmailVerificationRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return const EmailVerificationScreen();
   }
 
   @override
-  String? redirect(BuildContext context, GoRouterState state) {
+  AppRoute? redirect() {
     final authState = AuthBloc.I.state.unwrapped;
 
     switch (authState) {
       case AuthUnauthenticated():
-        return const LoginRoute().location;
+        return const LoginRoute();
 
       case AuthAuthenticated(authUser: AuthUser(emailVerified: true)):
-        return const HomeScreenWebRoute().location;
+        return AppRoute.home;
 
       default:
         return null;

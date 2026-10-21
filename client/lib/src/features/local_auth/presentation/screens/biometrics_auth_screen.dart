@@ -6,7 +6,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 class BiometricsAuthScreen extends StatefulWidget {
-  final String? next;
+  final AppRoute? next;
 
   const BiometricsAuthScreen({this.next, super.key});
 

@@ -64,7 +64,7 @@ class _HomeScreenSummaryState extends State<HomeScreenSummary> {
                   HomeBirthdaysSection(
                     birthdays: homeState.birthdays,
                     onTap: (birthdays) => AdvancedSearchRoute(
-                      $extra: birthdays.query,
+                      initialQuery: birthdays.query,
                     ).push(context),
                   ),
                   HomeDailyTextCards(

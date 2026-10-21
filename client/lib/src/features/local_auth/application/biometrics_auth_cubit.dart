@@ -6,7 +6,7 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
   final AuthRepository _authRepository;
   final AuthStorage _authStorage;
   final EncryptionService _encryptionService;
-  final String? next;
+  final AppRoute? next;
 
   BiometricsAuthCubit({
     LocalAuthService? localAuthService,
@@ -68,7 +68,7 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     if (isClosed) return;
 
     if (authenticated) {
-      _localAuthService.resetAuthState(path: next);
+      _localAuthService.resetAuthState(route: next);
 
       return;
     }
@@ -106,7 +106,7 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
       if (isClosed) return;
 
       if (authenticated) {
-        _localAuthService.resetAuthState(path: next);
+        _localAuthService.resetAuthState(route: next);
 
         return;
       }

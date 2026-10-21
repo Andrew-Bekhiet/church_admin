@@ -57,7 +57,7 @@ class _ViewUserState extends State<ViewUser> {
                 key: ViewUserScreenKeys.linkedPerson,
                 onTap: (person) => ViewPersonRoute(
                   id: person.id,
-                  $extra: person,
+                  person: person,
                 ).push(context),
               ),
             ),
@@ -168,7 +168,7 @@ class _ViewUserState extends State<ViewUser> {
         key: ViewUserScreenKeys.editButton,
         tooltip: 'تعديل',
         onPressed: () =>
-            EditUserRoute($extra: UpdateUser(user: user)).push(context),
+            EditUserRoute(intent: UpdateUser(user: user)).push(context),
         icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
@@ -188,7 +188,7 @@ class _ViewUserState extends State<ViewUser> {
 
   Future<void> _attendanceAnalysis(User user) async {
     await UserAnalysisRoute(
-      $extra: UserAnalysisExtra(user: user),
+      user: user,
     ).push(context);
   }
 

@@ -1,16 +1,15 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'export_entities_selection_route.g.dart';
+class ExportEntitiesSelectionRoute extends HomeChildRoute {
+  static const String routePath = '/export_entities_selection';
 
-@TypedGoRoute<ExportEntitiesSelectionRoute>(path: '/export_entities_selection')
-class ExportEntitiesSelectionRoute extends GoRouteData
-    with $ExportEntitiesSelectionRoute {
+  @override
+  String get path => routePath;
+
   const ExportEntitiesSelectionRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return const ExportEntitiesSelectionScreen();
   }
 }

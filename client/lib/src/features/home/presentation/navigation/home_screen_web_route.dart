@@ -1,40 +1,41 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'home_screen_web_route.g.dart';
+class HomeScreenWebRoute extends AppRoute {
+  static const String routePath = '/';
 
-@TypedGoRoute<HomeScreenWebRoute>(path: '/')
-class HomeScreenWebRoute extends GoRouteData with $HomeScreenWebRoute {
-  const HomeScreenWebRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const DownloadAppScreen();
-
-  @override
-  String? redirect(BuildContext context, GoRouterState state) {
+  static AppRoute? maybeRedirectToAccountSetup() {
     final AuthState authState = AuthBloc.I.state.unwrapped;
 
     switch (authState) {
       case AuthUnauthenticated():
-        return const LoginRoute().location;
+        return const LoginRoute();
 
       case AuthAuthenticated(authUser: AuthUser(emailVerified: false)):
-        return const EmailVerificationRoute().location;
+        return const EmailVerificationRoute();
 
       case AuthAuthenticated(isApproved: false):
-        return const UnapprovedUserRoute().location;
+        return const UnapprovedUserRoute();
 
       // TODO(ENG-226): add a redirect to EditPersonRoute if the user has no person data
 
       case AuthAuthenticated(userData: User(person: null)):
       case AuthAuthenticated(userData: User(:final person?))
           when !person.spiritDataUpToDate():
-        return const UpdateUserSpiritDataRoute(forced: true).location;
+        return const UpdateUserSpiritDataRoute();
 
       case _:
         return null;
     }
   }
+
+  @override
+  String get path => routePath;
+
+  const HomeScreenWebRoute();
+
+  @override
+  Widget build(BuildContext context) => const DownloadAppScreen();
+
+  @override
+  AppRoute? redirect() => maybeRedirectToAccountSetup();
 }

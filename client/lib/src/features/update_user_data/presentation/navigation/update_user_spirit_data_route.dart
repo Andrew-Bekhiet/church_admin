@@ -1,36 +1,37 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'update_user_spirit_data_route.g.dart';
+class UpdateUserSpiritDataRoute extends AppRoute {
+  static const String routePath = '/update_user_spirit_data';
 
-@TypedGoRoute<UpdateUserSpiritDataRoute>(path: '/update_user_spirit_data')
-class UpdateUserSpiritDataRoute extends GoRouteData
-    with $UpdateUserSpiritDataRoute {
-  final bool forced;
-  final Person? $extra;
-
-  const UpdateUserSpiritDataRoute({this.forced = false, this.$extra});
+  final Person? userData;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return UpdateUserSpiritDataScreen(userData: $extra);
+  String get path => routePath;
+
+  @override
+  List<Object?> get props => [userData];
+
+  const UpdateUserSpiritDataRoute({this.userData});
+
+  @override
+  Widget build(BuildContext context) {
+    return UpdateUserSpiritDataScreen(userData: userData);
   }
 
   @override
-  String? redirect(BuildContext context, GoRouterState state) {
+  AppRoute? redirect() {
     final AuthBloc authBloc = AuthBloc.I;
 
     switch (authBloc.state.unwrapped) {
       case AuthUnauthenticated():
-        return const LoginRoute().location;
+        return const LoginRoute();
 
       case AuthAuthenticated(userData: User(person: null)):
-        return const EditPersonRoute().location;
+        return const EditPersonRoute();
 
       case AuthAuthenticated(userData: User(:final person?))
           when person.spiritDataUpToDate():
-        return const HomeScreenWebRoute().location;
+        return AppRoute.home;
 
       case _:
         return null;

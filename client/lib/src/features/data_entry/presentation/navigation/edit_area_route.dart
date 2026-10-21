@@ -1,16 +1,20 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'edit_area_route.g.dart';
+class EditAreaRoute extends HomeChildRoute {
+  static const String routePath = '/edit_area';
 
-@TypedGoRoute<EditAreaRoute>(path: '/edit_area')
-class EditAreaRoute extends GoRouteData with $EditAreaRoute {
-  final Area? $extra;
-  const EditAreaRoute({this.$extra});
+  final Area? area;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return EditArea(area: $extra);
+  String get path => routePath;
+
+  @override
+  List<Object?> get props => [area];
+
+  const EditAreaRoute({this.area});
+
+  @override
+  Widget build(BuildContext context) {
+    return EditArea(area: area);
   }
 }

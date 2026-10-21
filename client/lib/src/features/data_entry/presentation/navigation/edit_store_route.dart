@@ -1,35 +1,21 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'edit_store_route.g.dart';
+class EditStoreRoute extends HomeChildRoute {
+  static const String routePath = '/edit_store';
 
-@TypedGoRoute<EditStoreRoute>(path: '/edit_store')
-class EditStoreRoute extends GoRouteData with $EditStoreRoute {
-  final EditStoreExtra? $extra;
-  const EditStoreRoute({this.$extra});
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return EditStore(store: $extra?.store, withFamily: $extra?.family);
-  }
-}
-
-@JsonSerializable()
-class EditStoreExtra extends SerializableExtra {
-  final Area? area;
-  final Street? street;
   final Store? store;
-  final Family? family;
+  final Family? withFamily;
 
   @override
-  String get typeName => 'EditStoreExtra';
-
-  const EditStoreExtra({this.area, this.street, this.store, this.family});
-
-  factory EditStoreExtra.fromJson(Json json) => _$EditStoreExtraFromJson(json);
+  String get path => routePath;
 
   @override
-  Json toJson() => _$EditStoreExtraToJson(this);
+  List<Object?> get props => [store, withFamily];
+
+  const EditStoreRoute({this.store, this.withFamily});
+
+  @override
+  Widget build(BuildContext context) {
+    return EditStore(store: store, withFamily: withFamily);
+  }
 }

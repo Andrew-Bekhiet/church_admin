@@ -1,36 +1,21 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'edit_group_route.g.dart';
+class EditGroupRoute extends HomeChildRoute {
+  static const String routePath = '/edit_group';
 
-@TypedGoRoute<EditGroupRoute>(path: '/edit_group')
-class EditGroupRoute extends GoRouteData with $EditGroupRoute {
-  final EditGroupExtra? $extra;
-  const EditGroupRoute({this.$extra});
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return EditGroup(
-      group: $extra?.group,
-      withService: $extra?.service,
-    );
-  }
-}
-
-@JsonSerializable()
-class EditGroupExtra extends SerializableExtra {
   final Group? group;
-  final Service? service;
+  final Service? withService;
 
   @override
-  String get typeName => 'EditGroupExtra';
-
-  const EditGroupExtra({this.group, this.service});
-
-  factory EditGroupExtra.fromJson(Json json) => _$EditGroupExtraFromJson(json);
+  String get path => routePath;
 
   @override
-  Json toJson() => _$EditGroupExtraToJson(this);
+  List<Object?> get props => [group, withService];
+
+  const EditGroupRoute({this.group, this.withService});
+
+  @override
+  Widget build(BuildContext context) {
+    return EditGroup(group: group, withService: withService);
+  }
 }

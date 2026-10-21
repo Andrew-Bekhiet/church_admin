@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'support/app_routing_harness.dart';
 
@@ -14,6 +15,15 @@ void main() {
     ) async {
       await harness.pump(tester);
 
+      expect(find.byType(LoginScreen), findsOneWidget);
+    });
+
+    testWidgets('a signed-out user sees login from the very first frame', (
+      tester,
+    ) async {
+      await harness.pumpFirstFrame(tester);
+
+      expect(find.byType(HomeScreen), findsNothing);
       expect(find.byType(LoginScreen), findsOneWidget);
     });
 
@@ -139,7 +149,7 @@ void main() {
       'by the outdated feature screen', (tester) async {
     harness
       ..signIn(AppRoutingHarness.approvedUser())
-      ..featureFlags.disabledRoutes = {'/settings'};
+      ..featureFlags.disabledRoutes = {SettingsRoute.routePath};
     await harness.pump(tester);
 
     await harness.open(tester, const SettingsRoute());
@@ -159,5 +169,33 @@ void main() {
 
     expect(find.byType(SettingsScreen), findsNothing);
     expect(find.byType(HomeScreen), findsOneWidget);
+  });
+
+  testWidgets('leaving the outdated feature screen returns to where it was '
+      'opened from', (tester) async {
+    harness
+      ..signIn(AppRoutingHarness.approvedUser())
+      ..featureFlags.disabledRoutes = {SettingsRoute.routePath};
+    await harness.pump(tester);
+    await harness.open(tester, const SettingsRoute());
+
+    await harness.pressSystemBack(tester);
+
+    expect(find.byType(OutdatedFeatureScreen), findsNothing);
+    expect(find.byType(HomeScreen), findsOneWidget);
+  });
+
+  testWidgets('a sign-in callback link from the platform keeps a signed-in '
+      'user on home', (tester) async {
+    harness.signIn(AppRoutingHarness.approvedUser());
+    await harness.pump(tester);
+
+    await harness.openPlatformLink(
+      tester,
+      'com.googleusercontent.apps.123:/oauth2redirect?code=code',
+    );
+
+    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.byType(ErrorWidget), findsNothing);
   });
 }

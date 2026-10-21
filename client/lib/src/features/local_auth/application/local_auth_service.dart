@@ -22,7 +22,7 @@ class LocalAuthService with WidgetsBindingObserver {
   final Clock _clock;
   bool _shouldAuthenticate = false;
 
-  final Set<String> _authenticatedPaths = {};
+  final Set<AppRoute> _authenticatedRoutes = {};
 
   DateTime? _lastActiveAt;
   Completer<bool>? _localAuthCompleter;
@@ -55,7 +55,7 @@ class LocalAuthService with WidgetsBindingObserver {
        _clock = clock ?? const Clock(),
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
-    userDataWiper.register(revokeAuthForAllPaths);
+    userDataWiper.register(revokeAuthForAllRoutes);
     scheduleReauth();
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
@@ -75,19 +75,19 @@ class LocalAuthService with WidgetsBindingObserver {
        _clock = clock ?? const Clock(),
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
-    userDataWiper.register(revokeAuthForAllPaths);
+    userDataWiper.register(revokeAuthForAllRoutes);
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
     );
     WidgetsBinding.instance.addObserver(this);
   }
 
-  bool shouldAuthenticateForPath(String path) =>
-      !_authenticatedPaths.contains(path);
+  bool shouldAuthenticateForRoute(AppRoute route) =>
+      !_authenticatedRoutes.contains(route);
 
-  void revokeAuthForPath(String path) => _authenticatedPaths.remove(path);
+  void revokeAuthForRoute(AppRoute route) => _authenticatedRoutes.remove(route);
 
-  void revokeAuthForAllPaths() => _authenticatedPaths.clear();
+  void revokeAuthForAllRoutes() => _authenticatedRoutes.clear();
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -113,10 +113,10 @@ class LocalAuthService with WidgetsBindingObserver {
     }
   }
 
-  void resetAuthState({String? path}) {
+  void resetAuthState({AppRoute? route}) {
     _shouldAuthenticate = false;
     _lastActiveAt = null;
-    if (path != null) _authenticatedPaths.add(path);
+    if (route != null) _authenticatedRoutes.add(route);
 
     _refreshUI.add(null);
 

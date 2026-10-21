@@ -1,20 +1,24 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'advanced_search_route.g.dart';
+class AdvancedSearchRoute extends HomeChildRoute {
+  static const String routePath = '/advanced_search';
 
-@TypedGoRoute<AdvancedSearchRoute>(path: '/advanced_search')
-class AdvancedSearchRoute extends GoRouteData with $AdvancedSearchRoute {
-  final AdvancedQuery? $extra;
-  const AdvancedSearchRoute({this.$extra});
+  final AdvancedQuery? initialQuery;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  String get path => routePath;
+
+  @override
+  List<Object?> get props => [initialQuery];
+
+  const AdvancedSearchRoute({this.initialQuery});
+
+  @override
+  Widget build(BuildContext context) {
     return AdvancedSearchScreen(
-      key: PageStorageKey(state.uri),
-      initialQuery: $extra,
-      autoExecuteInitialQuery: $extra != null,
+      key: PageStorageKey(path),
+      initialQuery: initialQuery,
+      autoExecuteInitialQuery: initialQuery != null,
     );
   }
 }

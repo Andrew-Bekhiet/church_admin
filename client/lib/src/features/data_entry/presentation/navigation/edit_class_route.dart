@@ -1,36 +1,21 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'edit_class_route.g.dart';
+class EditClassRoute extends HomeChildRoute {
+  static const String routePath = '/edit_class';
 
-@TypedGoRoute<EditClassRoute>(path: '/edit_class')
-class EditClassRoute extends GoRouteData with $EditClassRoute {
-  final EditClassExtra? $extra;
-  const EditClassRoute({this.$extra});
+  final Class? class$;
+  final Service? withService;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return EditClass(
-      class$: $extra?.$class,
-      withService: $extra?.service,
-    );
+  String get path => routePath;
+
+  @override
+  List<Object?> get props => [class$, withService];
+
+  const EditClassRoute({this.class$, this.withService});
+
+  @override
+  Widget build(BuildContext context) {
+    return EditClass(class$: class$, withService: withService);
   }
-}
-
-@JsonSerializable()
-class EditClassExtra extends SerializableExtra {
-  final Class? $class;
-  final Service? service;
-
-  @override
-  String get typeName => 'EditClassExtra';
-
-  const EditClassExtra({this.$class, this.service});
-
-  factory EditClassExtra.fromJson(Json json) => _$EditClassExtraFromJson(json);
-
-  @override
-  Json toJson() => _$EditClassExtraToJson(this);
 }

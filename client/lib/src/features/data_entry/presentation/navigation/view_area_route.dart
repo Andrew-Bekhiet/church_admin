@@ -1,17 +1,21 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'view_area_route.g.dart';
+class ViewAreaRoute extends HomeChildRoute {
+  static const String routePath = '/view_area';
 
-@TypedGoRoute<ViewAreaRoute>(path: '/view_area')
-class ViewAreaRoute extends GoRouteData with $ViewAreaRoute {
   final String id;
-  final Area? $extra;
-  const ViewAreaRoute({required this.id, this.$extra});
+  final Area? area;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return ViewArea(areaId: id, area: $extra);
+  String get path => routePath;
+
+  @override
+  List<Object?> get props => [id, area];
+
+  const ViewAreaRoute({required this.id, this.area});
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewArea(areaId: id, area: area);
   }
 }

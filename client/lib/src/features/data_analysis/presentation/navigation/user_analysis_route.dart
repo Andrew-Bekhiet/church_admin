@@ -1,33 +1,20 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'user_analysis_route.g.dart';
+class UserAnalysisRoute extends HomeChildRoute {
+  static const String routePath = '/user_analysis';
 
-@TypedGoRoute<UserAnalysisRoute>(path: '/user_analysis')
-class UserAnalysisRoute extends GoRouteData with $UserAnalysisRoute {
-  final UserAnalysisExtra $extra;
-  const UserAnalysisRoute({required this.$extra});
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return UserAnalysisScreen(user: $extra.user);
-  }
-}
-
-@JsonSerializable()
-class UserAnalysisExtra extends SerializableExtra {
   final User user;
 
   @override
-  String get typeName => 'UserAnalysisExtra';
-
-  const UserAnalysisExtra({required this.user});
-
-  factory UserAnalysisExtra.fromJson(Json json) =>
-      _$UserAnalysisExtraFromJson(json);
+  String get path => routePath;
 
   @override
-  Json toJson() => _$UserAnalysisExtraToJson(this);
+  List<Object?> get props => [user];
+
+  const UserAnalysisRoute({required this.user});
+
+  @override
+  Widget build(BuildContext context) {
+    return UserAnalysisScreen(user: user);
+  }
 }

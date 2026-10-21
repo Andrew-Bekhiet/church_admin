@@ -25,7 +25,7 @@ void main() {
 
     test('exists exactly for the tabs that have a create location', () {
       for (final tab in HomeTab.values) {
-        expect(tab.createLabel != null, tab.createLocation != null);
+        expect(tab.createLabel != null, tab.createRoute != null);
       }
     });
   });

@@ -1,14 +1,13 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'forgot_password_route.g.dart';
+class ForgotPasswordRoute extends AppRoute {
+  static const String routePath = '/forgot_password';
 
-@TypedGoRoute<ForgotPasswordRoute>(path: '/forgot_password')
-class ForgotPasswordRoute extends GoRouteData with $ForgotPasswordRoute {
+  @override
+  String get path => routePath;
+
   const ForgotPasswordRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const ForgotPasswordScreen();
+  Widget build(BuildContext context) => const ForgotPasswordScreen();
 }

@@ -82,7 +82,7 @@ class _ViewStoreState extends State<ViewStore> {
       editButtonBuilder: (context, store) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditStoreRoute(
-          $extra: EditStoreExtra(store: store),
+          store: store,
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),

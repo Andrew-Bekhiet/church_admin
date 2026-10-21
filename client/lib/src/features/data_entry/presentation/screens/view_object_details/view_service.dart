@@ -139,7 +139,7 @@ class _ViewServiceState extends State<ViewService> {
                   icon: const Icon(Symbols.productivity),
                   label: Text('تسجيل الحضور ل${defaultMeeting.name}'),
                   onPressed: () => RecordAttendanceRoute(
-                    $extra: defaultMeeting,
+                    meeting: defaultMeeting,
                   ).push(context),
                 ),
               ),
@@ -151,11 +151,9 @@ class _ViewServiceState extends State<ViewService> {
                 label: const Text('الاحصائيات'),
                 onPressed: () => unawaited(
                   MeetingsAnalysisRoute(
-                    $extra: MeetingsAnalysisExtra(
-                      title: 'احصائيات ${service.name}',
-                      initialRangePreset: PastQuarterDateTimeRangePreset(),
-                      subject: ServiceAnalysisSubject(service),
-                    ),
+                    title: 'احصائيات ${service.name}',
+                    initialRangePreset: PastQuarterDateTimeRangePreset(),
+                    subject: ServiceAnalysisSubject(service),
                   ).push(context),
                 ),
               ),
@@ -222,7 +220,7 @@ class _ViewServiceState extends State<ViewService> {
       editButtonBuilder: (context, service) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditServiceRoute(
-          $extra: service,
+          service: service,
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
@@ -246,19 +244,19 @@ class _ViewServiceState extends State<ViewService> {
               if (newIndex == 0) {
                 unawaited(
                   EditClassRoute(
-                    $extra: EditClassExtra(service: service),
+                    withService: service,
                   ).push(context),
                 );
               } else if (newIndex == 1) {
                 unawaited(
                   EditGroupRoute(
-                    $extra: EditGroupExtra(service: service),
+                    withService: service,
                   ).push(context),
                 );
               } else if (newIndex == 2) {
                 unawaited(
                   EditPersonRoute(
-                    $extra: CreatePersonInService(service: service),
+                    intent: CreatePersonInService(service: service),
                   ).push(context),
                 );
               }

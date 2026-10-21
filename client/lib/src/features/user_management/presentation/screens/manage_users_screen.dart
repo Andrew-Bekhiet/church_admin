@@ -85,7 +85,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
               icon: const Icon(Symbols.person_add),
               label: const Text('إضافة خادم'),
               onPressed: () =>
-                  const EditUserRoute($extra: CreateUser()).push(context),
+                  const EditUserRoute(intent: CreateUser()).push(context),
             );
           },
         ),

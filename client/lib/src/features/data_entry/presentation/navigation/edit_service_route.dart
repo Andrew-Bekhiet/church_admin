@@ -1,16 +1,20 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'edit_service_route.g.dart';
+class EditServiceRoute extends HomeChildRoute {
+  static const String routePath = '/edit_service';
 
-@TypedGoRoute<EditServiceRoute>(path: '/edit_service')
-class EditServiceRoute extends GoRouteData with $EditServiceRoute {
-  final Service? $extra;
-  const EditServiceRoute({this.$extra});
+  final Service? service;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return EditService(service: $extra);
+  String get path => routePath;
+
+  @override
+  List<Object?> get props => [service];
+
+  const EditServiceRoute({this.service});
+
+  @override
+  Widget build(BuildContext context) {
+    return EditService(service: service);
   }
 }

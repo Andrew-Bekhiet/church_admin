@@ -50,7 +50,7 @@ class _EditAreaState extends State<EditArea> {
 
     _controller = EditObjectController(
       afterCreate: (object) =>
-          ViewAreaRoute(id: object.id, $extra: object).pushReplacement(context),
+          ViewAreaRoute(id: object.id, area: object).pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.areas.createObject(newObject: object),
       onUpdate: (oldArea, newArea) => DatabaseService.I.areas.updateObject(

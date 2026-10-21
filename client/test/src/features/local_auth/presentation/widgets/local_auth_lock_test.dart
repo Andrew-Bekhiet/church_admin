@@ -3,13 +3,16 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
+import 'package:kaisel/kaisel.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 void main() {
   const privateDetails = 'Private member details';
   const onboarding = 'Onboarding';
+  const home = HomeScreenRoute();
+  const details = ViewPersonRoute(id: 'person-id');
+  const onboardingRoute = LoginRoute();
 
   late bool isReauthDue;
   late StreamController<void> reauthChanges;
@@ -58,37 +61,30 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  Future<void> openApp(WidgetTester tester, {required String at}) async {
+  Future<void> openApp(
+    WidgetTester tester, {
+    required List<AppRoute> at,
+  }) async {
     tester.view
       ..physicalSize = const Size(1170, 2532)
       ..devicePixelRatio = 3;
     addTearDown(tester.view.reset);
 
-    final router = GoRouter(
-      initialLocation: at,
-      routes: [
-        GoRoute(
-          path: '/',
-          builder: (_, _) => const Scaffold(body: Text('Home')),
-          routes: [
-            GoRoute(
-              path: 'details',
-              builder: (_, _) => const Scaffold(
-                body: Column(
-                  children: [
-                    Text(privateDetails),
-                    TextField(autofocus: true),
-                  ],
-                ),
-              ),
-            ),
-          ],
+    final router = KaiselRouterConfig<AppRoute>(
+      initial: at.first,
+      builder: (context, route) => switch (route) {
+        HomeScreenRoute() => const Scaffold(body: Text('Home')),
+        ViewPersonRoute() => const Scaffold(
+          body: Column(
+            children: [
+              Text(privateDetails),
+              TextField(autofocus: true),
+            ],
+          ),
         ),
-        GoRoute(
-          path: '/onboarding',
-          builder: (_, _) => const Scaffold(body: Text(onboarding)),
-        ),
-      ],
+        LoginRoute() => const Scaffold(body: Text(onboarding)),
+        _ => route.build(context),
+      },
     );
     addTearDown(router.dispose);
 
@@ -96,12 +92,13 @@ void main() {
       MaterialApp.router(
         routerConfig: router,
         builder: (context, child) => LocalAuthLock(
-          routerDelegate: router.routerDelegate,
-          protectedLocation: '/',
+          router: router.router,
+          protectedRoute: home,
           child: child ?? const SizedBox.shrink(),
         ),
       ),
     );
+    await router.router.set(at);
     await tester.pumpAndSettle();
   }
 
@@ -112,7 +109,7 @@ void main() {
   testWidgets(
     'a page opened from home stays usable while re-authentication is not due',
     (tester) async {
-      await openApp(tester, at: '/details');
+      await openApp(tester, at: [home, details]);
 
       expect(find.text(privateDetails).hitTestable(), findsOneWidget);
       expect(lockScreen, findsNothing);
@@ -123,7 +120,7 @@ void main() {
     'a page opened from home is hidden behind the lock screen once '
     're-authentication is due',
     (tester) async {
-      await openApp(tester, at: '/details');
+      await openApp(tester, at: [home, details]);
 
       await setReauthDue(tester, due: true);
 
@@ -136,7 +133,7 @@ void main() {
     'the locked page is hidden from screen readers',
     (tester) async {
       final semantics = tester.ensureSemantics();
-      await openApp(tester, at: '/details');
+      await openApp(tester, at: [home, details]);
 
       await setReauthDue(tester, due: true);
 
@@ -148,7 +145,7 @@ void main() {
   testWidgets(
     'the keyboard of a field on the locked page closes',
     (tester) async {
-      await openApp(tester, at: '/details');
+      await openApp(tester, at: [home, details]);
 
       await setReauthDue(tester, due: true);
 
@@ -159,7 +156,7 @@ void main() {
   testWidgets(
     'screens outside home stay usable while re-authentication is due',
     (tester) async {
-      await openApp(tester, at: '/onboarding');
+      await openApp(tester, at: [onboardingRoute]);
 
       await setReauthDue(tester, due: true);
 
@@ -171,7 +168,7 @@ void main() {
   testWidgets(
     'unlocking reveals the page the user was on',
     (tester) async {
-      await openApp(tester, at: '/details');
+      await openApp(tester, at: [home, details]);
       await setReauthDue(tester, due: true);
 
       await setReauthDue(tester, due: false);
@@ -184,7 +181,7 @@ void main() {
   testWidgets(
     'signing out removes the lock',
     (tester) async {
-      await openApp(tester, at: '/details');
+      await openApp(tester, at: [home, details]);
       await setReauthDue(tester, due: true);
 
       isSignedIn = false;
@@ -208,7 +205,7 @@ void main() {
           null,
         ),
       );
-      await openApp(tester, at: '/details');
+      await openApp(tester, at: [home, details]);
       await setReauthDue(tester, due: true);
 
       await tester.binding.handlePopRoute();
@@ -222,7 +219,7 @@ void main() {
   testWidgets(
     'signing out from the lock screen asks for confirmation above the lock',
     (tester) async {
-      await openApp(tester, at: '/details');
+      await openApp(tester, at: [home, details]);
       await setReauthDue(tester, due: true);
 
       await tester.tap(find.byKey(BiometricsAuthScreenKeys.signOutButtonKey));
@@ -239,7 +236,7 @@ void main() {
     'pressing back on the sign-out confirmation dismisses it and keeps the '
     'app locked',
     (tester) async {
-      await openApp(tester, at: '/details');
+      await openApp(tester, at: [home, details]);
       await setReauthDue(tester, due: true);
       await tester.tap(find.byKey(BiometricsAuthScreenKeys.signOutButtonKey));
       await tester.pumpAndSettle();

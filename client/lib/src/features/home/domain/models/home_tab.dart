@@ -62,15 +62,14 @@ enum HomeTab {
   final Type? entity;
   final ViewableObjectListType? defaultListType;
 
-  String? get createLocation => switch (this) {
+  AppRoute? get createRoute => switch (this) {
     summary => null,
-    services => const EditServiceRoute().location,
-    sundaySchoolPersons ||
-    churchDataPersons => const EditPersonRoute().location,
-    areas => const EditAreaRoute().location,
-    streets => const EditStreetRoute().location,
-    families => const EditFamilyRoute().location,
-    stores => const EditStoreRoute().location,
+    services => const EditServiceRoute(),
+    sundaySchoolPersons || churchDataPersons => const EditPersonRoute(),
+    areas => const EditAreaRoute(),
+    streets => const EditStreetRoute(),
+    families => const EditFamilyRoute(),
+    stores => const EditStoreRoute(),
   };
 
   const HomeTab({

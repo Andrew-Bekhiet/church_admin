@@ -1,26 +1,26 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'login_route.g.dart';
+class LoginRoute extends AppRoute {
+  static const String routePath = '/login';
 
-@TypedGoRoute<LoginRoute>(path: '/login')
-class LoginRoute extends GoRouteData with $LoginRoute {
+  @override
+  String get path => routePath;
+
   const LoginRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
+  Widget build(BuildContext context) {
     return const LoginScreen();
   }
 
   @override
-  String? redirect(BuildContext context, GoRouterState state) {
+  AppRoute? redirect() {
     switch (AuthBloc.I.state.unwrapped) {
       case AuthUnauthenticated():
         return null;
 
       default:
-        return const HomeScreenWebRoute().location;
+        return AppRoute.home;
     }
   }
 }

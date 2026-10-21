@@ -1,14 +1,13 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'outdated_feature_route.g.dart';
+class OutdatedFeatureRoute extends AppRoute {
+  static const String routePath = '/outdated_feature';
 
-@TypedGoRoute<OutdatedFeatureRoute>(path: '/outdated_feature')
-class OutdatedFeatureRoute extends GoRouteData with $OutdatedFeatureRoute {
+  @override
+  String get path => routePath;
+
   const OutdatedFeatureRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const OutdatedFeatureScreen();
+  Widget build(BuildContext context) => const OutdatedFeatureScreen();
 }

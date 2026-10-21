@@ -191,7 +191,7 @@ class _ViewFamilyState extends State<ViewFamily> {
       editButtonBuilder: (context, family) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditFamilyRoute(
-          $extra: EditFamilyExtra(family: family),
+          family: family,
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
@@ -218,25 +218,25 @@ class _ViewFamilyState extends State<ViewFamily> {
               if (newIndex == 0) {
                 unawaited(
                   EditPersonRoute(
-                    $extra: CreatePersonInFamily(family: family),
+                    intent: CreatePersonInFamily(family: family),
                   ).push(context),
                 );
               } else if (newIndex == 1) {
                 unawaited(
                   EditFamilyRoute(
-                    $extra: EditFamilyExtra(parents: {family}),
+                    withParents: {family},
                   ).push(context),
                 );
               } else if (newIndex == 2) {
                 unawaited(
                   EditFamilyRoute(
-                    $extra: EditFamilyExtra(children: {family}),
+                    withChildren: {family},
                   ).push(context),
                 );
               } else if (newIndex == 3) {
                 unawaited(
                   EditStoreRoute(
-                    $extra: EditStoreExtra(family: family),
+                    withFamily: family,
                   ).push(context),
                 );
               }

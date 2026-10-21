@@ -52,7 +52,7 @@ class _EditStreetState extends State<EditStreet> {
     _controller = EditObjectController(
       afterCreate: (object) => ViewStreetRoute(
         id: object.id,
-        $extra: object,
+        street: object,
       ).pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.streets.createObject(newObject: object),

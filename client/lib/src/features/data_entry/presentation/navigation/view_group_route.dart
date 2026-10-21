@@ -1,17 +1,21 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-part 'view_group_route.g.dart';
+class ViewGroupRoute extends HomeChildRoute {
+  static const String routePath = '/view_group';
 
-@TypedGoRoute<ViewGroupRoute>(path: '/view_group')
-class ViewGroupRoute extends GoRouteData with $ViewGroupRoute {
   final String id;
-  final Group? $extra;
-  const ViewGroupRoute({required this.id, this.$extra});
+  final Group? group;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return ViewGroup(groupId: id, group: $extra);
+  String get path => routePath;
+
+  @override
+  List<Object?> get props => [id, group];
+
+  const ViewGroupRoute({required this.id, this.group});
+
+  @override
+  Widget build(BuildContext context) {
+    return ViewGroup(groupId: id, group: group);
   }
 }
