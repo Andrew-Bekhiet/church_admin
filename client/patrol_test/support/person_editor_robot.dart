@@ -92,6 +92,15 @@ class PersonEditorRobot {
     );
   }
 
+  Future<void> chooseArea({
+    required String areaId,
+    required String areaName,
+  }) => _pickIn(
+    AddressFormPlaceFieldsKeys.area,
+    objectId: areaId,
+    search: areaName,
+  );
+
   Future<void> chooseFamily({
     required String familyId,
     required String familyName,
