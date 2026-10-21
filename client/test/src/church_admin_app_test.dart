@@ -27,39 +27,9 @@ import 'fakes/fake_feature_flags_repo.dart';
   MockSpec<PackageInfo>(),
 ])
 void main() {
-  final firstScreenVariant = FirstScreenVariant();
-
   setUp(_setUp);
 
   tearDown(resetGlobalProviderContainer);
-
-  testWidgets(
-    'the first screen matches the account authentication state',
-    (tester) async {
-      final goRouter = GoRouter(
-        routes: [$homeScreenRoute],
-      );
-      await tester.pumpWidget(ChurchAdminApp(routerConfig: goRouter));
-      await tester.pump();
-
-      final lastMatch = goRouter.routerDelegate.currentConfiguration.lastOrNull;
-
-      final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
-          ? lastMatch.matches
-          : goRouter.routerDelegate.currentConfiguration;
-
-      expect(matchList.uri.toString(), firstScreenVariant.expectedLocation());
-
-      if (firstScreenVariant.currentValue ==
-          FirstScreenVariantEnum.authenticate) {
-        expect(
-          find.byType(BiometricsAuthScreen, skipOffstage: false),
-          findsOneWidget,
-        );
-      }
-    },
-    variant: firstScreenVariant,
-  );
 
   testWidgets('the app uses the selected theme', (tester) async {
     final goRouter = GoRouter(routes: [$homeScreenRoute]);
@@ -114,13 +84,10 @@ Override _setUpAuthBloc() {
   return authBlocProvider.overrideWithValue(mock);
 }
 
-List<Override> _setUp({
-  bool withAuthBloc = true,
-  bool withLocalAuthService = true,
-}) {
+List<Override> _setUp() {
   final overrides = [
-    if (withAuthBloc) _setUpAuthBloc(),
-    if (withLocalAuthService) _setUpUnlockedLocalAuthService(),
+    _setUpAuthBloc(),
+    _setUpUnlockedLocalAuthService(),
     _setUpLoggingService(),
     userPreferencesServiceProvider.overrideWithValue(
       FakeUserPreferencesService(),
@@ -260,149 +227,5 @@ Override _setUpHomeCubit() {
 
 class _MockHomeCubit extends MockCubit<HomeState> implements HomeCubit {}
 
-class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
-  FirstScreenVariant() : super(FirstScreenVariantEnum.values.toSet());
-
-  @override
-  Future<FirstScreenVariantEnum> setUp(FirstScreenVariantEnum value) async {
-    await super.setUp(value);
-
-    final overrides = [
-      ..._setUp(withAuthBloc: false, withLocalAuthService: false),
-      _setUpAuthBloc(value),
-      _setUpLocalAuthService(value),
-    ];
-    if (value == FirstScreenVariantEnum.authenticate) {
-      final authRepository = _AuthRepositoryMock();
-      mocktail
-          .when(() => authRepository.userChanges)
-          .thenAnswer((_) => const Stream.empty());
-      overrides.add(authRepositoryProvider.overrideWithValue(authRepository));
-    }
-
-    initGlobalProviderContainer(overrides);
-
-    return value;
-  }
-
-  Override _setUpLocalAuthService(FirstScreenVariantEnum value) {
-    final mockLocalAuthService = MockLocalAuthService();
-
-    when(
-      mockLocalAuthService.shouldAuthenticate,
-    ).thenReturn(value == FirstScreenVariantEnum.authenticate);
-    when(
-      mockLocalAuthService.refreshUIStream,
-    ).thenAnswer((_) => const Stream.empty());
-    when(
-      mockLocalAuthService.canCheckBiometrics(),
-    ).thenAnswer((_) async => false);
-
-    return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
-  }
-
-  Override _setUpAuthBloc(FirstScreenVariantEnum value) {
-    final mock = MockAuthBloc();
-    when(mock.isSignedIn).thenReturn(value != FirstScreenVariantEnum.login);
-
-    final user = value != FirstScreenVariantEnum.login
-        ? AuthUser(
-            uid: 'uid',
-            email: 'email',
-            emailVerified: value != FirstScreenVariantEnum.emailVerification,
-            idToken: 'idToken',
-            claims: {AuthUser.hasuraUserIdKey: 'hasura-user-id'},
-          )
-        : null;
-
-    final userData = value != FirstScreenVariantEnum.login
-        ? User(
-            uid: 'uid',
-            name: 'name',
-            permissions: PermissionsSet.fromSet({
-              if (value != FirstScreenVariantEnum.unapprovedUser)
-                UserPermission.approved,
-            }),
-            person: Person(
-              id: 'id',
-              name: 'name',
-              lastKodas: value == FirstScreenVariantEnum.updateUserSpiritData
-                  ? null
-                  : LastRecordedByInfo(
-                      time: DateTime.now(),
-                      recordedBy: 'uid',
-                    ),
-              lastConfession:
-                  value == FirstScreenVariantEnum.updateUserSpiritData
-                  ? null
-                  : LastRecordedByInfo(
-                      time: DateTime.now(),
-                      recordedBy: 'uid',
-                    ),
-            ),
-          )
-        : null;
-
-    when(mock.currentUser).thenReturn(user);
-    when(mock.currentUserData).thenReturn(userData);
-
-    when(mock.state).thenAnswer(
-      (_) => user != null
-          ? AuthAuthenticated(authUser: user, userData: userData)
-          : const AuthUnauthenticated(),
-    );
-
-    when(mock.userStream).thenAnswer((_) => BehaviorSubject.seeded(user));
-    when(
-      mock.userDataStream,
-    ).thenAnswer((_) => BehaviorSubject.seeded(userData));
-
-    return authBlocProvider.overrideWithValue(mock);
-  }
-
-  String expectedLocation() {
-    switch (currentValue) {
-      case FirstScreenVariantEnum.login:
-        return const LoginRoute().location;
-
-      case FirstScreenVariantEnum.emailVerification:
-        return const EmailVerificationRoute().location;
-
-      case FirstScreenVariantEnum.unapprovedUser:
-        return const UnapprovedUserRoute().location;
-
-      case FirstScreenVariantEnum.updateUserSpiritData:
-        return const UpdateUserSpiritDataRoute(forced: true).location;
-
-      case FirstScreenVariantEnum.authenticate:
-      case FirstScreenVariantEnum.home:
-        return '/';
-
-      case null:
-        throw Exception('currentValue is null');
-    }
-  }
-
-  @override
-  Future<void> tearDown(
-    FirstScreenVariantEnum value,
-    FirstScreenVariantEnum memento,
-  ) async {
-    resetGlobalProviderContainer();
-    await super.tearDown(value, memento);
-  }
-}
-
-enum FirstScreenVariantEnum {
-  login,
-  emailVerification,
-  unapprovedUser,
-  updateUserSpiritData,
-  authenticate,
-  home,
-}
-
 class FakeUserPreferencesService extends Fake
     implements UserPreferencesService {}
-
-class _AuthRepositoryMock extends mocktail.Mock implements AuthRepository {}

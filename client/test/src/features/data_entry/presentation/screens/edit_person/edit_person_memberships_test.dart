@@ -67,6 +67,28 @@ void main() {
     expect(find.byType(CircularProgressIndicator), findsNothing);
   });
 
+  testWidgets('a service picked on the selection page joins the memberships', (
+    tester,
+  ) async {
+    harness.services.pickableServices = const [primary];
+    await harness.open(tester, UpdatePerson(person: person));
+    final memberships = find.byKey(PersonEditMembershipsSectionKeys.field);
+    await tester.ensureVisible(memberships);
+    await tester.pumpAndSettle();
+
+    await tester.tap(memberships);
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.byKey(PersonServiceSelectionPageKeys.checkboxFor(primary)),
+    );
+    await tester.pump();
+    await tester.tap(find.byKey(PersonServiceSelectionPageKeys.confirmButton));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(PersonServiceSelectionPage), findsNothing);
+    expect(find.text(primary.name), findsOneWidget);
+  });
+
   testWidgets('the services loaded late are listed', (tester) async {
     await harness.open(
       tester,
