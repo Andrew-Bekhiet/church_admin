@@ -274,6 +274,27 @@ abstract final class E2eBackend {
     return (inserted['insertStreetsOne'] as Map)['id'] as String;
   }
 
+  static Future<String> insertStreetSharedByAreas(
+    String name, {
+    required List<String> areaIds,
+  }) async {
+    final inserted = await hasuraQuery(
+      r'''
+      mutation InsertStreetSharedByAreas($name: String!, $areas: [AreasStreetsInsertInput!]!) {
+        insertStreetsOne(object: {name: $name, areas: {data: $areas}}) { id }
+      }
+      ''',
+      variables: {
+        'name': name,
+        'areas': [
+          for (final areaId in areaIds) {'areaId': areaId},
+        ],
+      },
+    );
+
+    return (inserted['insertStreetsOne'] as Map)['id'] as String;
+  }
+
   static Future<String> insertFamilyWithMember(
     String familyName, {
     required String memberName,
