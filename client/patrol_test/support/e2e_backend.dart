@@ -98,12 +98,39 @@ abstract final class E2eBackend {
     return (inserted['insertPersonsOne'] as Map)['id'] as String;
   }
 
+  static Future<String> insertPersonInFamilyWithoutAreaOrService(
+    String name, {
+    required String familyName,
+  }) async {
+    final inserted = await hasuraQuery(
+      r'''
+      mutation InsertPersonInFamilyWithoutAreaOrService($name: String!, $familyName: String!) {
+        insertPersonsOne(object: {name: $name, family: {data: {name: $familyName}}}) { id }
+      }
+      ''',
+      variables: {'name': name, 'familyName': familyName},
+    );
+
+    return (inserted['insertPersonsOne'] as Map)['id'] as String;
+  }
+
   /// Inserts an area with one street and a family living on it, whose only
-  /// member is [residentName]; returns the area's and the resident's ids.
-  static Future<({String areaId, String residentId})> insertAreaWithResident(
+  /// member is [residentName]; returns the area's, street's and family's
+  /// names and the area's and the resident's ids.
+  static Future<
+    ({
+      String areaId,
+      String residentId,
+      String streetName,
+      String familyName,
+    })
+  >
+  insertAreaWithResident(
     String areaName, {
     required String residentName,
   }) async {
+    final streetName = 'شارع $areaName';
+    final familyName = 'عائلة $residentName';
     final street = await hasuraQuery(
       r'''
       mutation InsertStreetInNewArea($streetName: String!, $areaName: String!) {
@@ -113,7 +140,7 @@ abstract final class E2eBackend {
         }
       }
       ''',
-      variables: {'streetName': 'شارع $areaName', 'areaName': areaName},
+      variables: {'streetName': streetName, 'areaName': areaName},
     );
     final insertedStreet = street['insertStreetsOne'] as Map;
     final areaId = (insertedStreet['areas'] as List).single['areaId'] as String;
@@ -123,7 +150,7 @@ abstract final class E2eBackend {
         insertFamiliesOne(object: {name: $familyName}) { id }
       }
       ''',
-      variables: {'familyName': 'عائلة $residentName'},
+      variables: {'familyName': familyName},
     );
     final familyId = (family['insertFamiliesOne'] as Map)['id'] as String;
     final resident = await hasuraQuery(
@@ -144,6 +171,8 @@ abstract final class E2eBackend {
     return (
       areaId: areaId,
       residentId: (resident['insertPersonsOne'] as Map)['id'] as String,
+      streetName: streetName,
+      familyName: familyName,
     );
   }
 

@@ -20,6 +20,10 @@ void main() {
       const otherAreaResident = 'ساكن منطقة بلا تصدير';
       const exportableServicePerson = 'مخدوم خدمة التصدير';
       const otherServicePerson = 'مخدوم خدمة بلا تصدير';
+      const noScopeServiceName = 'خدمة اعدادي';
+      const noScopeServicePerson = 'مخدوم خدمة اعدادي';
+      const personInNoServiceOrArea = 'شخص بلا خدمة ولا منطقة';
+      const familyInNoArea = 'عائلة بلا منطقة';
       final permissionDenied = isA<FirebaseFunctionsException>().having(
         (error) => error.code,
         'code',
@@ -31,6 +35,8 @@ void main() {
       final (
         areaId: exportableAreaId,
         residentId: _,
+        streetName: exportableStreetName,
+        familyName: exportableFamilyName,
       ) = await E2eBackend.insertAreaWithResident(
         'منطقة التصدير',
         residentName: exportableAreaResident,
@@ -38,6 +44,8 @@ void main() {
       final (
         areaId: otherAreaId,
         residentId: _,
+        streetName: otherStreetName,
+        familyName: otherFamilyName,
       ) = await E2eBackend.insertAreaWithResident(
         'منطقة بلا تصدير',
         residentName: otherAreaResident,
@@ -53,6 +61,14 @@ void main() {
       await E2eBackend.insertPerson(
         otherServicePerson,
         serviceName: 'خدمة KG',
+      );
+      await E2eBackend.insertPerson(
+        noScopeServicePerson,
+        serviceName: noScopeServiceName,
+      );
+      await E2eBackend.insertPersonInFamilyWithoutAreaOrService(
+        personInNoServiceOrArea,
+        familyName: familyInNoArea,
       );
       final servant = await E2eUsers.createApprovedUser(
         email: 'scoped-exporter@e2e.test',
@@ -103,10 +119,37 @@ void main() {
       step('the export holds the exportable scopes and nothing else');
       await export.startExport();
       final workbook = await ExportedWorkbook.latestExportOf(servant.uid);
-      expect(workbook.mentions(exportableAreaResident), isTrue);
-      expect(workbook.mentions(exportableServicePerson), isTrue);
-      expect(workbook.mentions(otherAreaResident), isFalse);
-      expect(workbook.mentions(otherServicePerson), isFalse);
+      final expectedInExport = [
+        'منطقة التصدير',
+        exportableStreetName,
+        exportableFamilyName,
+        exportableAreaResident,
+        'خدمة ثانوي',
+        exportableServicePerson,
+      ];
+      expect(
+        workbook.mentionedAmong(expectedInExport),
+        expectedInExport,
+        reason: 'the export lacks data inside the exportable scopes',
+      );
+      expect(
+        workbook.mentionedAmong([
+          'منطقة بلا تصدير',
+          otherStreetName,
+          otherFamilyName,
+          otherAreaResident,
+          'خدمة KG',
+          otherServicePerson,
+          noScopeServiceName,
+          noScopeServicePerson,
+          'خدمة ابتدائي',
+          'اعداد خدام',
+          personInNoServiceOrArea,
+          familyInNoArea,
+        ]),
+        isEmpty,
+        reason: 'the export holds data outside the exportable scopes',
+      );
       await export.closeTheUnsignedDownloadLinkError();
 
       await E2eApp.signOut(tester);

@@ -64,4 +64,7 @@ class ExportedWorkbook {
   const ExportedWorkbook._(this._xmlText);
 
   bool mentions(String text) => _xmlText.contains(text);
+
+  List<String> mentionedAmong(Iterable<String> texts) =>
+      texts.where(mentions).toList();
 }
