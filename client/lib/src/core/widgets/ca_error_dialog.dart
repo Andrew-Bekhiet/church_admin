@@ -16,6 +16,7 @@ class CAErrorDialog extends StatelessWidget {
         child: AlertDialog(
           actions: [
             TextButton(
+              key: CAErrorDialogKeys.dismissButton,
               onPressed: Navigator.of(context).pop,
               child: Text(
                 'حسنًا',
@@ -53,4 +54,8 @@ class CAErrorDialog extends StatelessWidget {
       );
     }
   }
+}
+
+abstract final class CAErrorDialogKeys {
+  static const Key dismissButton = ValueKey('CA Error Dialog Dismiss Key');
 }

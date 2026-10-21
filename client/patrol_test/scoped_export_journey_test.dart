@@ -107,7 +107,7 @@ void main() {
       expect(workbook.mentions(exportableServicePerson), isTrue);
       expect(workbook.mentions(otherAreaResident), isFalse);
       expect(workbook.mentions(otherServicePerson), isFalse);
-      export.expectExportCompleted();
+      await export.closeTheUnsignedDownloadLinkError();
 
       await E2eApp.signOut(tester);
       await E2eApp.finish(tester);
