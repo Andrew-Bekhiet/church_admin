@@ -55,26 +55,45 @@ void main() {
   });
 
   group('daily texts', () {
-    testWidgets('each card shows its title and its text', (tester) async {
+    const verseText = 'a verse';
+    const verseReference = '(a book 1: 2)';
+    const sneksarDate = 'a coptic date';
+    const sneksarFirst = 'first commemoration';
+    const sneksarSecond = 'second commemoration';
+    const sayingText = 'a saying';
+    const sayingReference = '(a father)';
+
+    testWidgets('each section shows its title and its parsed text', (
+      tester,
+    ) async {
+      harness.dailyData = FakeHomeDailyDataRepository(
+        verse: '$verseText\n$verseReference',
+        sneksar: '$sneksarDate\n\n1-$sneksarFirst\n2-$sneksarSecond',
+        saying: '$sayingText\n$sayingReference',
+      );
       await harness.pump(tester);
 
-      final texts = {
-        HomeDailyDataType.verse: harness.dailyData.verse,
-        HomeDailyDataType.sneksar: harness.dailyData.sneksar,
-        HomeDailyDataType.saying: harness.dailyData.saying,
+      final expectedTexts = {
+        HomeDailyDataType.verse: [verseText, verseReference],
+        HomeDailyDataType.sneksar: [sneksarDate, sneksarFirst, sneksarSecond],
+        HomeDailyDataType.saying: [sayingText, sayingReference],
       };
-      for (final MapEntry(key: type, value: text) in texts.entries) {
-        final card = find.byKey(HomeDailyTextCardsKeys.dailyTextKeyFor(type));
-        await tester.ensureVisible(card);
+      for (final MapEntry(key: type, value: texts) in expectedTexts.entries) {
+        final section = find.byKey(
+          HomeDailyTextCardsKeys.dailyTextKeyFor(type),
+        );
+        await tester.ensureVisible(section);
 
         expect(
-          find.descendant(of: card, matching: find.text(type.title)),
+          find.descendant(of: section, matching: find.text(type.title)),
           findsOneWidget,
         );
-        expect(
-          find.descendant(of: card, matching: find.text(text)),
-          findsOneWidget,
-        );
+        for (final text in texts) {
+          expect(
+            find.descendant(of: section, matching: find.text(text)),
+            findsOneWidget,
+          );
+        }
       }
 
       await harness.unmount(tester);

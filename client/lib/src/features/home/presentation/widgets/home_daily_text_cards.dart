@@ -13,20 +13,31 @@ class HomeDailyTextCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = ColorScheme.of(context);
+
     if (dailyData case final dailyData?) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (final type in HomeDailyDataType.values)
-            SessionReplayUnmask(
-              child: HomeDailyTextCard(
-                key: HomeDailyTextCardsKeys.dailyTextKeyFor(type),
-                type: type,
-                text: dailyData.select(type),
-                onTap: () => onTap(type),
+      return Card.outlined(
+        color: colorScheme.surfaceContainerLow,
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: colorScheme.primary),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            for (final type in HomeDailyDataType.values)
+              SessionReplayUnmask(
+                child: HomeDailyTextSection(
+                  key: HomeDailyTextCardsKeys.dailyTextKeyFor(type),
+                  type: type,
+                  text: dailyData.select(type),
+                  onTap: () => onTap(type),
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       );
     }
 
