@@ -10,6 +10,8 @@ class PersonEditorRobot {
 
   Finder get _saveButton => find.byKey(EditPersonSaveButtonKeys.saveButton);
   Finder get _selectionDialog => find.byType(AlertDialog);
+  Finder get _addToShownFamilyButton =>
+      find.byKey(ViewFamilyKeys.addToCurrentTabButton);
   Finder get _addPersonToClassButton =>
       find.byKey(ViewClassKeys.addPersonButton);
 
@@ -39,8 +41,14 @@ class PersonEditorRobot {
     await tester.waitFor(_saveButton);
   }
 
+  void expectAddingToShownFamilyHidden() =>
+      expect(_addToShownFamilyButton, findsNothing);
+
+  Future<void> waitForAddingToShownFamilyAllowed() =>
+      tester.waitFor(_addToShownFamilyButton.hitTestable());
+
   Future<void> startAddingPersonToShownFamily() async {
-    await tester.tapOn(find.byKey(ViewFamilyKeys.addToCurrentTabButton));
+    await tester.tapOn(_addToShownFamilyButton);
     await tester.waitFor(_saveButton);
   }
 
