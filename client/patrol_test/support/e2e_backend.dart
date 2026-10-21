@@ -140,6 +140,143 @@ abstract final class E2eBackend {
     return (inserted['insertAuthUsersDataOne'] as Map)['uid'] as String;
   }
 
+  static Future<String> classIdByName(String className) async {
+    final data = await hasuraQuery(
+      r'''
+      query ClassByName($className: String!) {
+        classes(where: {name: {_eq: $className}}) { id }
+      }
+      ''',
+      variables: {'className': className},
+    );
+
+    return (data['classes'] as List).single['id'] as String;
+  }
+
+  static Future<String> personTypeIdByName(String personTypeName) async {
+    final data = await hasuraQuery(
+      r'''
+      query PersonTypeByName($personTypeName: String!) {
+        personTypes(where: {name: {_eq: $personTypeName}}) { id }
+      }
+      ''',
+      variables: {'personTypeName': personTypeName},
+    );
+
+    return (data['personTypes'] as List).single['id'] as String;
+  }
+
+  static Future<String> insertArea(String name) async {
+    final inserted = await hasuraQuery(
+      r'''
+      mutation InsertArea($name: String!) {
+        insertAreasOne(object: {name: $name}) { id }
+      }
+      ''',
+      variables: {'name': name},
+    );
+
+    return (inserted['insertAreasOne'] as Map)['id'] as String;
+  }
+
+  static Future<String> insertStreet(
+    String name, {
+    required String areaId,
+  }) async {
+    final inserted = await hasuraQuery(
+      r'''
+      mutation InsertStreet($name: String!, $areaId: uuid!) {
+        insertStreetsOne(object: {name: $name, areas: {data: [{areaId: $areaId}]}}) { id }
+      }
+      ''',
+      variables: {'name': name, 'areaId': areaId},
+    );
+
+    return (inserted['insertStreetsOne'] as Map)['id'] as String;
+  }
+
+  static Future<String> insertFamilyWithMember(
+    String familyName, {
+    required String memberName,
+    required String serviceId,
+    required int studyYear,
+    required bool isMale,
+  }) async {
+    final inserted = await hasuraQuery(
+      r'''
+      mutation InsertFamilyWithMember(
+        $familyName: String!
+        $memberName: String!
+        $serviceId: uuid!
+        $studyYear: smallint!
+        $gender: Boolean!
+      ) {
+        insertPersonsOne(object: {
+          name: $memberName
+          gender: $gender
+          studyYearId: $studyYear
+          workStatus: "student"
+          services: {data: [{serviceId: $serviceId}]}
+          family: {data: {name: $familyName}}
+        }) { familyId }
+      }
+      ''',
+      variables: {
+        'familyName': familyName,
+        'memberName': memberName,
+        'serviceId': serviceId,
+        'studyYear': studyYear,
+        'gender': isMale,
+      },
+    );
+
+    return (inserted['insertPersonsOne'] as Map)['familyId'] as String;
+  }
+
+  static Future<Map<String, dynamic>> personById(String id) async {
+    final data = await hasuraQuery(
+      r'''
+      query PersonById($id: uuid!) {
+        personsByPk(id: $id) {
+          familyId
+          gender
+          studyYearId
+          services { serviceId }
+          classes { classId }
+          family { address { areaId streetId } }
+        }
+      }
+      ''',
+      variables: {'id': id},
+    );
+
+    return data['personsByPk'] as Map<String, dynamic>;
+  }
+
+  static Future<List<Map<String, dynamic>>> contactsOfFamily(
+    String familyId,
+  ) async {
+    final data = await hasuraQuery(
+      r'''
+      query ContactsOfFamily($familyId: uuid!) {
+        contacts(where: {familyId: {_eq: $familyId}}) { id phone personTypeId }
+      }
+      ''',
+      variables: {'familyId': familyId},
+    );
+
+    return (data['contacts'] as List).cast<Map<String, dynamic>>();
+  }
+
+  static Future<int> familiesCount() async {
+    final data = await hasuraQuery(
+      'query FamiliesCount { familiesAggregate { aggregate { count } } }',
+    );
+
+    return ((data['familiesAggregate'] as Map)['aggregate'] as Map)['count']
+        as int;
+  }
+
   static Future<Set<String>> adminOnServicesOf(String uid) => _columnOfUserRows(
     uid,
     table: 'authUsersAdminOn',
