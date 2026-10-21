@@ -49,6 +49,7 @@ class AdvancedQueryMatrix {
               queryableType: type,
               filters: [Filter(field, operator, value)],
             ),
+            field,
           );
         }
       }
@@ -68,6 +69,7 @@ class AdvancedQueryMatrix {
             queryableType: type,
             orderBy: [OrderBy(field: field, value: OrderByValue.desc)],
           ),
+          field,
         );
       }
     }

@@ -6,8 +6,9 @@ class AdvancedQueryCase {
 
   final String description;
   final AdvancedQuery query;
+  final FieldMetadata field;
 
-  const AdvancedQueryCase(this.description, this.query);
+  const AdvancedQueryCase(this.description, this.query, this.field);
 
   /// Runs [query] the way the results screen does and returns why it failed,
   /// or null when the backend answered with results (an empty page counts).

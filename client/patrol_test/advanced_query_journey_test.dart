@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
 
+import 'support/advanced_query_known_backend_gaps.dart';
 import 'support/advanced_query_matrix.dart';
 import 'support/advanced_search_robot.dart';
 import 'support/e2e_app.dart';
@@ -54,21 +55,45 @@ void main() {
       final matrix = AdvancedQueryMatrix();
       final cases = [...matrix.filterCases, ...matrix.orderByCases];
       final failures = [...matrix.unbuildableCases];
+      final knownGapsNowPassing = <String>[];
       final started = DateTime.now();
       for (final batch in cases.slices(concurrentQueries)) {
-        final batchFailures = await Future.wait(
-          batch.map((queryCase) => queryCase.failureAgainstBackend()),
+        final outcomes = await Future.wait(
+          batch.map(
+            (queryCase) async =>
+                (queryCase, await queryCase.failureAgainstBackend()),
+          ),
         );
-        failures.addAll(batchFailures.nonNulls);
+        for (final (queryCase, failure) in outcomes) {
+          final knownGap = AdvancedQueryKnownBackendGaps.missingPieceBehind(
+            queryCase.field,
+          );
+          switch ((knownGap, failure)) {
+            case (null, final failure?):
+              failures.add(failure);
+            case (final knownGap?, null):
+              knownGapsNowPassing.add('${queryCase.description} ($knownGap)');
+            case _:
+          }
+        }
       }
       debugPrint(
         'E2E advanced query matrix: ${cases.length} queries, '
-        '${failures.length} failures in ${DateTime.now().difference(started)}',
+        '${failures.length} failures, '
+        '${knownGapsNowPassing.length} known gaps now passing '
+        'in ${DateTime.now().difference(started)}',
       );
       for (final failure in failures) {
         debugPrint('E2E broken query: $failure');
       }
       expect(failures, isEmpty, reason: failures.join('\n'));
+      expect(
+        knownGapsNowPassing,
+        isEmpty,
+        reason:
+            'remove these from AdvancedQueryKnownBackendGaps:\n'
+            '${knownGapsNowPassing.join('\n')}',
+      );
 
       await E2eApp.signOut(tester);
       await E2eApp.finish(tester);
