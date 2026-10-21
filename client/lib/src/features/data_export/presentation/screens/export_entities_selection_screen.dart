@@ -82,12 +82,14 @@ class _ExportEntitiesSelectionScreenState
                 bottom: TabBar(
                   tabs: [
                     Tab(
+                      key: ExportEntitiesSelectionScreenKeys.areasTab,
                       icon: Icon(
                         ViewableObjectService.I.getDefaultIconFor<Area>(),
                       ),
                       text: 'المناطق',
                     ),
                     Tab(
+                      key: ExportEntitiesSelectionScreenKeys.servicesTab,
                       icon: Icon(
                         ViewableObjectService.I.getDefaultIconFor<Service>(),
                       ),
@@ -148,6 +150,7 @@ class _ExportEntitiesSelectionScreenState
                 label: const Text('بدء عملية تصدير جديدة'),
               ),
               DataExportSelectingObjects() => FloatingActionButton.extended(
+                key: ExportEntitiesSelectionScreenKeys.startExportButton,
                 onPressed: _cubit.startExport,
                 icon: const Icon(Symbols.play_arrow),
                 label: const Text('بدء التصدير'),
@@ -165,4 +168,10 @@ class _ExportEntitiesSelectionScreenState
     unawaited(_cubit.close());
     super.dispose();
   }
+}
+
+abstract final class ExportEntitiesSelectionScreenKeys {
+  static const Key areasTab = ValueKey('Export Areas Tab Key');
+  static const Key servicesTab = ValueKey('Export Services Tab Key');
+  static const Key startExportButton = ValueKey('Export Start Button Key');
 }
