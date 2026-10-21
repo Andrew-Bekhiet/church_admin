@@ -47,7 +47,6 @@ void main() {
             studyYear: studyYear,
             gender: gender,
             canWriteData: true,
-            canWriteRelatedFamilies: true,
           ),
         ],
       );
@@ -146,9 +145,14 @@ void main() {
         existingFamilyContacts.single['id'] as String,
       );
 
-      step('(d) a servant who writes related families adds a sibling');
+      step('without writing related families, its family offers no adding');
       await editor.openShownPersonsFamily(existingFamilyId);
       await editor.waitForPersonListedIn<ViewFamily>(joinedId);
+      editor.expectAddingToShownFamilyHidden();
+
+      step('(d) once allowed to write related families, it adds a sibling');
+      await E2eUsers.grantWritingRelatedFamiliesOnServiceScopesOf(servant.uid);
+      await editor.waitForAddingToShownFamilyAllowed();
       await editor.startAddingPersonToShownFamily();
       await editor.fillName('أخ المخدوم');
       final siblingId = await editor.saveNewPerson();
