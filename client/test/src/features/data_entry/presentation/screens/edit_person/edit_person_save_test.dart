@@ -94,6 +94,27 @@ void main() {
     await tester.pumpAndSettle();
   });
 
+  testWidgets(
+    'the saving message goes once saved, even behind an earlier message',
+    (tester) async {
+      final gate = harness.persons.saveGate = Completer<void>();
+      await harness.open(tester, UpdatePerson(person: person));
+      ScaffoldMessenger.of(
+        tester.element(find.byType(EditPersonScreen)),
+      ).showSnackBar(const SnackBar(content: Text('رسالة سابقة')));
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 1));
+
+      await tester.tap(find.byKey(EditPersonSaveButtonKeys.saveButton));
+      await tester.pump(const Duration(milliseconds: 50));
+      gate.complete();
+      await tester.pump(const Duration(milliseconds: 50));
+      await tester.pumpAndSettle();
+
+      expect(find.text('جار الحفظ ...'), findsNothing);
+    },
+  );
+
   testWidgets('a failed save shows the error and keeps the screen', (
     tester,
   ) async {
