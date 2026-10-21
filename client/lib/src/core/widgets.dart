@@ -5,6 +5,8 @@ export 'widgets/ca_error_widget.dart';
 export 'widgets/church_admin_splash_screen.dart';
 export 'widgets/confirmation_dialog.dart';
 export 'widgets/lazy_tab_page.dart';
+export 'widgets/pinned_extent_sliver_main_axis_group.dart';
+export 'widgets/render_pinned_extent_sliver_main_axis_group.dart';
 export 'widgets/search_field.dart';
 export 'widgets/service_hierarchy_card.dart';
 export 'widgets/service_hierarchy_classes.dart';
