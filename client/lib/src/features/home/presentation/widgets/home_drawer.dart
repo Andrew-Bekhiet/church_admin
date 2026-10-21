@@ -54,7 +54,10 @@ class HomeDrawer extends StatelessWidget {
               (
                 destination: const NavigationDrawerDestination(
                   icon: Icon(Symbols.upload_file),
-                  label: Text('تصدير البيانات'),
+                  label: Text(
+                    'تصدير البيانات',
+                    key: HomeDrawerKeys.exportData,
+                  ),
                 ),
                 onTap: () => const ExportEntitiesSelectionRoute().push(context),
               ),
@@ -169,6 +172,7 @@ class HomeDrawer extends StatelessWidget {
 
 abstract final class HomeDrawerKeys {
   static const Key manageUsers = ValueKey('Home Drawer Manage Users Key');
+  static const Key exportData = ValueKey('Home Drawer Export Data Key');
   static const Key signOut = ValueKey('Home Drawer Sign Out Key');
   static const Key advancedSearch = ValueKey(
     'Home Drawer Advanced Search Key',
