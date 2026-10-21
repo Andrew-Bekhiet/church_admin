@@ -153,9 +153,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
         _scheduleTokenRefresh(authUser);
 
-        final isUnlinkedVerifiedAccount =
-            authUser.hasuraUserId == null && authUser.emailVerified;
-        if (isUnlinkedVerifiedAccount) {
+        final hasUnclaimedAccount = authUser.hasuraUserId == null;
+        if (hasUnclaimedAccount && authUser.emailVerified) {
           unawaited(_maybeClaimAccount());
         }
 

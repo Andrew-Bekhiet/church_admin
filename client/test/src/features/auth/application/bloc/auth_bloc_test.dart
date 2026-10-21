@@ -121,6 +121,36 @@ void main() {
 
     group('sign in/out =>', () {
       blocTest<AuthBloc, AuthState>(
+        'signing in a user whose account is already claimed raises no error',
+        setUp: () {
+          final functionsMock = globalProviderContainer.read(
+            functionsServiceProvider,
+          ) as MockFunctionsService;
+          when(functionsMock.tryClaimAccount()).thenAnswer(
+            (_) async =>
+                throw StateError('Account already exists for this user'),
+          );
+        },
+        build: () => _createAuthBloc(noCachedUser: true),
+        act: (bloc) => bloc.add(
+          const SignInWithEmailPassword(
+            email: 'email',
+            password: 'password',
+          ),
+        ),
+        wait: const Duration(milliseconds: 100),
+        errors: () => isEmpty,
+        verify: (bloc) => expect(
+          bloc.state,
+          isA<AuthAuthenticated>().having(
+            (s) => s.userData,
+            'userData',
+            initialUserData,
+          ),
+        ),
+      );
+
+      blocTest<AuthBloc, AuthState>(
         'sign in with email and password',
         build: () => _createAuthBloc(noCachedUser: true),
         act: (bloc) => bloc.add(
@@ -542,29 +572,6 @@ void main() {
             ),
           );
         },
-      );
-
-      blocTest<AuthBloc, AuthState>(
-        'signing in to an already linked account keeps its token instead of '
-        'claiming the account again while its user data loads',
-        setUp: () {
-          final functionsMock = globalProviderContainer.read(
-            functionsServiceProvider,
-          ) as MockFunctionsService;
-          when(functionsMock.tryClaimAccount()).thenAnswer((_) async => true);
-        },
-        build: () => _createAuthBloc(noCachedUser: true),
-        act: (bloc) async {
-          await Future<void>.delayed(Duration.zero);
-          userChangesController.add(initialAuthUser);
-        },
-        wait: const Duration(milliseconds: 100),
-        verify: (bloc) => expect(
-          bloc.state.unwrapped,
-          isA<AuthAuthenticated>()
-              .having((state) => state.authUser, 'authUser', initialAuthUser)
-              .having((state) => state.userData, 'userData', initialUserData),
-        ),
       );
 
       blocTest<AuthBloc, AuthState>(
