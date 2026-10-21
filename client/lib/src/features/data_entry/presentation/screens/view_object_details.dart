@@ -190,7 +190,14 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
               )
             : NestedScrollView(
                 controller: _scrollController,
-                headerSliverBuilder: (context, isBodyScrolled) => slivers,
+                headerSliverBuilder: (context, isBodyScrolled) => [
+                  SliverOverlapAbsorber(
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                      context,
+                    ),
+                    sliver: PinnedExtentSliverMainAxisGroup(slivers: slivers),
+                  ),
+                ],
                 body: TabBarView(
                   key: ValueKey(objectData.id),
                   children: widget.childrenTypes
