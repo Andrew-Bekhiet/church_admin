@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 export 'view_object_details/view_area.dart';
 export 'view_object_details/view_class.dart';
@@ -190,7 +191,14 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
               )
             : NestedScrollView(
                 controller: _scrollController,
-                headerSliverBuilder: (context, isBodyScrolled) => slivers,
+                headerSliverBuilder: (context, isBodyScrolled) => [
+                  SliverOverlapAbsorber(
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                      context,
+                    ),
+                    sliver: MultiSliver(children: slivers),
+                  ),
+                ],
                 body: TabBarView(
                   key: ValueKey(objectData.id),
                   children: widget.childrenTypes

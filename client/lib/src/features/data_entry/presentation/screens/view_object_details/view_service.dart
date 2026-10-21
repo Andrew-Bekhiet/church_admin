@@ -199,6 +199,8 @@ class _ViewServiceState extends State<ViewService> {
             ),
             type: ViewableObjectListType.grid3,
             scrollController: PrimaryScrollController.maybeOf(context),
+            nestedScrollOverlapHandle:
+                NestedScrollView.sliverOverlapAbsorberHandleFor(context),
             objectsController: _classesController,
           ),
         ),

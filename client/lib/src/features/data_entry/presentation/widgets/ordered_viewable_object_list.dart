@@ -18,6 +18,8 @@ class OrderedViewableObjectList<T extends Viewable> extends StatelessWidget {
       initialData: arrangementController.value,
       builder: (context, arrangementSnapshot) => ViewableObjectList(
         scrollController: PrimaryScrollController.maybeOf(context),
+        nestedScrollOverlapHandle:
+            NestedScrollView.sliverOverlapAbsorberHandleFor(context),
         viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
           secondLineField: arrangementSnapshot.data?.effectiveSecondLineField,
         ),

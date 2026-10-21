@@ -48,7 +48,7 @@ void main() {
 
       expect(find.widgetWithText(Center, 'لا يوجد بيانات'), findsNothing);
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      expect(find.byType(ListView), findsNothing);
+      expect(find.byType(CustomScrollView), findsNothing);
       expect(find.byType(ViewableObjectListItem<Person>), findsNothing);
 
       isLoading.add(false);
@@ -57,7 +57,7 @@ void main() {
 
       expect(find.widgetWithText(Center, 'لا يوجد بيانات'), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsNothing);
-      expect(find.byType(ListView), findsNothing);
+      expect(find.byType(CustomScrollView), findsNothing);
       expect(find.byType(ViewableObjectListItem<Person>), findsNothing);
 
       objectsStream.add([
@@ -68,7 +68,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(CircularProgressIndicator), findsNothing);
-      expect(find.byType(ListView), findsOneWidget);
+      expect(find.byType(CustomScrollView), findsOneWidget);
       expect(find.byType(ViewableObjectListItem<Person>), findsNWidgets(2));
 
       expect(
@@ -89,7 +89,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(CircularProgressIndicator), findsNothing);
-      expect(find.byType(ListView), findsOneWidget);
+      expect(find.byType(CustomScrollView), findsOneWidget);
       expect(find.byType(ViewableObjectListItem<Person>), findsNWidgets(3));
 
       expect(
