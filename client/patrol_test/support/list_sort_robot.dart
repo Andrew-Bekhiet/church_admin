@@ -27,35 +27,35 @@ class ListSortRobot {
   const ListSortRobot(this.tester);
 
   Future<void> openArea(String id) => _push(
-    ViewAreaRoute(id: id).location,
+    ViewAreaRoute(id: id),
     find.byWidgetPredicate(
       (widget) => widget is ViewArea && widget.areaId == id,
     ),
   );
 
   Future<void> openService(String id) => _push(
-    ViewServiceRoute(id: id).location,
+    ViewServiceRoute(id: id),
     find.byWidgetPredicate(
       (widget) => widget is ViewService && widget.serviceId == id,
     ),
   );
 
   Future<void> openStreet(String id) => _push(
-    ViewStreetRoute(id: id).location,
+    ViewStreetRoute(id: id),
     find.byWidgetPredicate(
       (widget) => widget is ViewStreet && widget.streetId == id,
     ),
   );
 
   Future<void> openFamily(String id) => _push(
-    ViewFamilyRoute(id: id).location,
+    ViewFamilyRoute(id: id),
     find.byWidgetPredicate(
       (widget) => widget is ViewFamily && widget.familyId == id,
     ),
   );
 
   Future<void> openClass(String id) => _push(
-    ViewClassRoute(id: id).location,
+    ViewClassRoute(id: id),
     find.byWidgetPredicate(
       (widget) => widget is ViewClass && widget.classId == id,
     ),
@@ -189,8 +189,8 @@ class ListSortRobot {
 
   String? _idOf(Viewable item) => item is ViewableWithID ? item.id : null;
 
-  Future<void> _push(String location, Finder screen) async {
-    unawaited($appRouter.push(location));
+  Future<void> _push(AppRoute route, Finder screen) async {
+    unawaited(route.push($appRouter.navigatorKey.currentContext!));
     await tester.waitFor(screen);
     await _scrollTabsIntoView();
   }
