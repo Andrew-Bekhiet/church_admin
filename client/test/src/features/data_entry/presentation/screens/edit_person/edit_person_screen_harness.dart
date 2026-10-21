@@ -17,6 +17,7 @@ import '../../../../../fakes/fake_logging_service.dart';
 import '../../../../../fakes/fake_person_photo_uploader.dart';
 import '../../../../../fakes/fake_person_types_dao.dart';
 import '../../../../../fakes/fake_persons_dao.dart';
+import '../../../../../fakes/fake_services_dao.dart';
 import '../../../../../fakes/fake_streets_dao.dart';
 import '../../../../../fakes/in_memory_families_dao.dart';
 import '../../../../../fakes/mock_auth_bloc.dart';
@@ -86,6 +87,7 @@ class EditPersonScreenHarness {
   final FakeFunctionsService functions = FakeFunctionsService();
   final FakeStreetsDAO streets = FakeStreetsDAO();
   final FakeAreasDAO areas = FakeAreasDAO();
+  final FakeServicesDAO services = FakeServicesDAO();
 
   User? currentUser = userWhoWritesEverything;
   bool enablePersonNationalId = false;
@@ -99,6 +101,7 @@ class EditPersonScreenHarness {
     when(() => databaseService.families).thenReturn(families);
     when(() => databaseService.areas).thenReturn(areas);
     when(() => databaseService.streets).thenReturn(streets);
+    when(() => databaseService.services).thenReturn(services);
     when(() => databaseService.metadata).thenReturn(
       FakeMetadataDAO(
         db: databaseService,
