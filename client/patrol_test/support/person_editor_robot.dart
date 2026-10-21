@@ -64,6 +64,26 @@ class PersonEditorRobot {
     );
   }
 
+  Future<void> moveToStreetOfAnotherArea({
+    required String streetId,
+    required String streetName,
+    required String areaOfStreetId,
+  }) async {
+    await tester.tapOn(
+      find.descendant(
+        of: find.byKey(AddressFormPlaceFieldsKeys.area),
+        matching: find.byKey(
+          AdvancedSingleObjectSelectionFieldKeys.clearButton,
+        ),
+      ),
+    );
+    await chooseStreet(
+      streetId: streetId,
+      streetName: streetName,
+      areaOfStreetId: areaOfStreetId,
+    );
+  }
+
   Future<void> chooseFamily({
     required String familyId,
     required String familyName,
@@ -114,6 +134,73 @@ class PersonEditorRobot {
     return tester.widget<ViewPerson>(shownPerson).personId;
   }
 
+  Future<void> openPersonListedInShownClass(String personId) async {
+    await waitForPersonListedIn<ViewClass>(personId);
+    await tester.tapOn(
+      find.descendant(
+        of: find.byType(ViewClass),
+        matching: tester.viewableObject(personId),
+      ),
+    );
+    await tester.waitFor(find.byKey(ViewPersonKeys.editButton));
+  }
+
+  Future<void> startEditingShownPerson() async {
+    await tester.tapOn(find.byKey(ViewPersonKeys.editButton));
+    await tester.waitFor(_saveButton);
+  }
+
+  Future<void> replaceService({
+    required String removedServiceId,
+    required String addedServiceId,
+  }) async {
+    await tester.tapOn(find.byKey(PersonEditMembershipsSectionKeys.field));
+    await tester.tapOn(
+      find.byKey(PersonServiceSelectionPageKeys.checkboxFor(removedServiceId)),
+    );
+    await tester.tapOn(
+      find.byKey(PersonServiceSelectionPageKeys.checkboxFor(addedServiceId)),
+    );
+    await tester.tapOn(
+      find.byKey(PersonServiceSelectionPageKeys.confirmButton),
+    );
+    await tester.waitForAbsent(find.byType(PersonServiceSelectionPage));
+  }
+
+  Future<void> saveEditedPerson() async {
+    await _tapSaveOnceMembershipsLoaded();
+    await tester.waitForAbsent(find.byType(EditPersonScreen));
+    await tester.waitFor(find.byKey(ViewPersonKeys.editButton));
+  }
+
+  Future<void> saveConfirmingMoveOutOfSight() async {
+    await _tapSaveOnceMembershipsLoaded();
+    await tester.tapOn(
+      find.descendant(
+        of: find.byType(MoveOutOfSightConfirmationDialog),
+        matching: find.byKey(ConfirmationDialogKeys.confirmButton),
+      ),
+    );
+    await tester.waitForAbsent(find.byType(EditPersonScreen));
+    await tester.waitForAbsent(find.byType(ViewPerson));
+  }
+
+  Future<void> waitForShownPersonOnStreetOf({
+    required String streetId,
+    required String areaId,
+  }) async {
+    await _revealIn<ViewPerson>(tester.viewableObjectCard(streetId));
+    await _revealIn<ViewPerson>(tester.viewableObjectCard(areaId));
+  }
+
+  Future<void> waitForPersonGoneFromShownClass(String personId) =>
+      tester.waitForAbsent(
+        find.descendant(
+          of: find.byType(ViewClass),
+          matching: tester.viewableObject(personId),
+        ),
+      );
+
   Future<void> waitForShownPersonInFamily(String familyId) =>
       _revealIn<ViewPerson>(tester.viewableObjectCard(familyId));
 
@@ -140,6 +227,18 @@ class PersonEditorRobot {
           matching: tester.viewableObject(personId),
         ),
       );
+
+  Future<void> _tapSaveOnceMembershipsLoaded() async {
+    await tester.waitFor(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is FloatingActionButton &&
+            widget.key == EditPersonSaveButtonKeys.saveButton &&
+            widget.onPressed != null,
+      ),
+    );
+    await tester.tapOn(_saveButton);
+  }
 
   Future<void> _pickIn(
     Key field, {

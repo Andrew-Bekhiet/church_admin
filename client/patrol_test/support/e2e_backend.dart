@@ -233,6 +233,53 @@ abstract final class E2eBackend {
     return (inserted['insertPersonsOne'] as Map)['familyId'] as String;
   }
 
+  static Future<String> insertPersonInFamilyOnStreet(
+    String name, {
+    required String familyName,
+    required String streetId,
+    required String areaId,
+    required String serviceId,
+    required int studyYear,
+    required bool isMale,
+  }) async {
+    final inserted = await hasuraQuery(
+      r'''
+      mutation InsertPersonInFamilyOnStreet(
+        $name: String!
+        $familyName: String!
+        $streetId: uuid!
+        $areaId: uuid!
+        $serviceId: uuid!
+        $studyYear: smallint!
+        $gender: Boolean!
+      ) {
+        insertPersonsOne(object: {
+          name: $name
+          gender: $gender
+          studyYearId: $studyYear
+          workStatus: "student"
+          services: {data: [{serviceId: $serviceId}]}
+          family: {data: {
+            name: $familyName
+            address: {data: {areaId: $areaId, streetId: $streetId}}
+          }}
+        }) { id }
+      }
+      ''',
+      variables: {
+        'name': name,
+        'familyName': familyName,
+        'streetId': streetId,
+        'areaId': areaId,
+        'serviceId': serviceId,
+        'studyYear': studyYear,
+        'gender': isMale,
+      },
+    );
+
+    return (inserted['insertPersonsOne'] as Map)['id'] as String;
+  }
+
   static Future<Map<String, dynamic>> personById(String id) async {
     final data = await hasuraQuery(
       r'''
