@@ -109,13 +109,13 @@ void main() {
         ExportEntitiesSelectionScreenKeys.areasTab,
         {exportableAreaId},
       );
-      expect(offeredAreas, isNot(contains(otherAreaId)));
+      expect(offeredAreas, unorderedEquals([exportableAreaId]));
       await export.select(exportableAreaId);
       final offeredServices = await export.offeredIdsOnceTheyInclude<Service>(
         ExportEntitiesSelectionScreenKeys.servicesTab,
         {exportableServiceId},
       );
-      expect(offeredServices, isNot(contains(otherServiceId)));
+      expect(offeredServices, unorderedEquals([exportableServiceId]));
       await export.select(exportableServiceId);
 
       step('the export holds the exportable scopes and nothing else');
