@@ -34,7 +34,7 @@
     "eslint": "^9.39.5",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.32.0",
-    "firebase-tools": "^15.33.0",
+    "firebase-tools": "^15.34.0",
     "globals": "^17.13.0",
     "typescript": "^6.0.3"
   },
