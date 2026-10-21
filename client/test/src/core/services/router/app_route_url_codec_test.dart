@@ -126,6 +126,31 @@ void main() {
       expect(codec.decode(address), [home, NotFoundRoute(address)]);
     });
 
+    test('of local authentication for an unknown screen unlocks nothing', () {
+      final address = Uri(
+        path: BiometricsAuthRoute.routePath,
+        queryParameters: {'next': '/no_such_page'},
+      );
+
+      expect(codec.decode(address), [const BiometricsAuthRoute()]);
+    });
+
+    test(
+      'of local authentication that unlocks another lock screen unlocks nothing',
+      () {
+        final address = Uri(
+          path: BiometricsAuthRoute.routePath,
+          queryParameters: {
+            'next': codec.encode([
+              const BiometricsAuthRoute(next: ManageUsersRoute()),
+            ]).toString(),
+          },
+        );
+
+        expect(codec.decode(address), [const BiometricsAuthRoute()]);
+      },
+    );
+
     test('whose query is not valid UTF-8 shows the not-found page', () {
       final address = Uri.parse('${ViewPersonRoute.routePath}?id=%FF');
 

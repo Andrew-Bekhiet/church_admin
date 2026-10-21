@@ -107,7 +107,7 @@ class AppRouteUrlCodec extends KaiselStackCodec<AppRoute> {
         const UpdateUserSpiritDataRoute(),
       (BiometricsAuthRoute.routePath, _) => BiometricsAuthRoute(
         next: switch (params['next']) {
-          final nextAddress? => decode(Uri.parse(nextAddress)).last,
+          final nextAddress? => _maybeScreenToUnlock(Uri.parse(nextAddress)),
           null => null,
         },
       ),
@@ -161,6 +161,11 @@ class AppRouteUrlCodec extends KaiselStackCodec<AppRoute> {
       _ => null,
     };
   }
+
+  AppRoute? _maybeScreenToUnlock(Uri address) =>
+      address.path == BiometricsAuthRoute.routePath
+      ? null
+      : _maybeScreenAt(address);
 
   NotFoundRoute _reportNotFound(Uri uri) {
     if (kReleaseMode) {
