@@ -40,6 +40,7 @@ void main() {
       ) = await E2eBackend.insertAreaWithResident(
         'منطقة التصدير',
         residentName: exportableAreaResident,
+        locationTag: 'الأول',
       );
       final (
         areaId: otherAreaId,
@@ -49,6 +50,7 @@ void main() {
       ) = await E2eBackend.insertAreaWithResident(
         'منطقة بلا تصدير',
         residentName: otherAreaResident,
+        locationTag: 'الثاني',
       );
       final exportableServiceId = await E2eBackend.serviceIdByName(
         'خدمة ثانوي',

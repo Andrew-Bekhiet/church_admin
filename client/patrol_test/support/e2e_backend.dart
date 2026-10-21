@@ -128,9 +128,10 @@ abstract final class E2eBackend {
   insertAreaWithResident(
     String areaName, {
     required String residentName,
+    required String locationTag,
   }) async {
-    final streetName = 'شارع $areaName';
-    final familyName = 'عائلة سكان $areaName';
+    final streetName = 'شارع $locationTag';
+    final familyName = 'عائلة $locationTag';
     final street = await hasuraQuery(
       r'''
       mutation InsertStreetInNewArea($streetName: String!, $areaName: String!) {
