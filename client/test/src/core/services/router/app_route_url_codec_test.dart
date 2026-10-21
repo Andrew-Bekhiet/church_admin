@@ -41,6 +41,20 @@ void main() {
       );
     });
 
+    test("of local authentication keeps the unlocked screen's record", () {
+      const unlocking = BiometricsAuthRoute(
+        next: ViewPersonRoute(id: 'person-id'),
+      );
+
+      expect(codec.decode(codec.encode([unlocking])), [unlocking]);
+    });
+
+    test('of the not-found page is the address that was not found', () {
+      final address = Uri.parse('/view_person?id=%FF');
+
+      expect(codec.encode(codec.decode(address)), address);
+    });
+
     test('is the top screen of the stack', () {
       expect(
         codec.encode([home, const SettingsRoute()]).toString(),

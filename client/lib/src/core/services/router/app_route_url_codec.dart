@@ -64,36 +64,30 @@ class AppRouteUrlCodec extends KaiselStackCodec<AppRoute> {
   const AppRouteUrlCodec();
 
   @override
-  Uri encode(List<AppRoute> stack) {
-    final top = stack.last;
-
-    return Uri(
-      path: top.path,
-      queryParameters: top.urlParameters.isEmpty ? null : top.urlParameters,
-    );
-  }
+  Uri encode(List<AppRoute> stack) => stack.last.address;
 
   @override
   List<AppRoute> decode(Uri uri) {
-    final Map<String, String> params;
     try {
-      params = uri.queryParameters;
+      return (_maybeScreenAt(uri) ?? _reportNotFound(uri)).breadcrumbs;
     } on FormatException {
       return _reportNotFound(uri).breadcrumbs;
     }
+  }
 
-    final screen = switch (uri.path) {
+  AppRoute? _maybeScreenAt(Uri uri) {
+    final params = uri.queryParameters;
+
+    return switch (uri.path) {
       '/update_user_spirit_data' => const UpdateUserSpiritDataRoute(),
       '/biometrics_auth' => BiometricsAuthRoute(
         next: switch (params['next']) {
-          final nextPath? => decode(Uri(path: nextPath)).last,
+          final nextAddress? => decode(Uri.parse(nextAddress)).last,
           null => null,
         },
       ),
       final path => _screenForPath[path]?.call(params['id']),
     };
-
-    return (screen ?? _reportNotFound(uri)).breadcrumbs;
   }
 
   NotFoundRoute _reportNotFound(Uri uri) {

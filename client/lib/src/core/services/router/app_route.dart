@@ -60,6 +60,11 @@ sealed class AppRoute extends KaiselRoute {
 
   Map<String, String> get urlParameters => const {};
 
+  Uri get address => Uri(
+    path: path,
+    queryParameters: urlParameters.isEmpty ? null : urlParameters,
+  );
+
   const AppRoute();
 
   Widget build(BuildContext context);

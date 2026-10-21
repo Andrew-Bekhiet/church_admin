@@ -1,6 +1,7 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class NotFoundRoute extends HomeChildRoute {
+  @override
   final Uri address;
 
   @override
@@ -8,9 +9,6 @@ class NotFoundRoute extends HomeChildRoute {
 
   @override
   List<Object?> get props => [address];
-
-  @override
-  Map<String, String> get urlParameters => address.queryParameters;
 
   const NotFoundRoute(this.address);
 
