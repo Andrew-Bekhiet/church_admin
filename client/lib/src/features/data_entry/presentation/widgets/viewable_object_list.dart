@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 
 class ViewableObjectList<T extends Viewable> extends StatefulWidget {
   final ScrollController? scrollController;
+  final SliverOverlapAbsorberHandle? nestedScrollOverlapHandle;
   final ViewableObjectListController<T> objectsController;
   final ItemBuilder<T>? itemBuilder;
   final ViewableObjectWidgetConfig<T>? viewableObjectWidgetConfig;
@@ -21,6 +22,7 @@ class ViewableObjectList<T extends Viewable> extends StatefulWidget {
     this.itemBuilder,
     this.viewableObjectWidgetConfig,
     this.scrollController,
+    this.nestedScrollOverlapHandle,
     super.key,
   });
 
@@ -85,34 +87,46 @@ class _ViewableObjectListState<T extends Viewable>
 
           final itemBuilder = _itemBuilderFor(items);
 
-          if (widget.type == ViewableObjectListType.grid ||
-              widget.type == ViewableObjectListType.grid3) {
-            return GridView.builder(
-              scrollCacheExtent: const ScrollCacheExtent.pixels(250),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: widget.type.columns,
-                crossAxisSpacing: 4,
-                mainAxisSpacing: 4,
+          return CustomScrollView(
+            scrollCacheExtent: const ScrollCacheExtent.pixels(250),
+            controller: widget.scrollController,
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            slivers: [
+              if (widget.nestedScrollOverlapHandle case final handle?)
+                SliverOverlapInjector(handle: handle),
+              SliverPadding(
+                padding: const EdgeInsets.all(2),
+                sliver: switch (widget.type) {
+                  ViewableObjectListType.grid ||
+                  ViewableObjectListType.grid3 => SliverGrid.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: widget.type.columns,
+                      crossAxisSpacing: 4,
+                      mainAxisSpacing: 4,
+                    ),
+                    itemBuilder: itemBuilder,
+                    itemCount: items.length + (items.length % 2) + 2,
+                  ),
+
+                  ViewableObjectListType.list when widget.itemsExpandable =>
+                    SliverList.builder(
+                      itemBuilder: itemBuilder,
+                      itemCount: items.length + 2,
+                    ),
+
+                  ViewableObjectListType.list =>
+                    SliverPrototypeExtentList.builder(
+                      prototypeItem: HeroMode(
+                        enabled: false,
+                        child: itemBuilder(context, 0),
+                      ),
+                      itemBuilder: itemBuilder,
+                      itemCount: items.length + 2,
+                    ),
+                },
               ),
-              padding: const EdgeInsets.all(2),
-              controller: widget.scrollController,
-              itemBuilder: itemBuilder,
-              itemCount: items.length + (items.length % 2) + 2,
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            );
-          } else {
-            return ListView.builder(
-              scrollCacheExtent: const ScrollCacheExtent.pixels(250),
-              padding: const EdgeInsets.all(2),
-              controller: widget.scrollController,
-              itemBuilder: itemBuilder,
-              itemCount: items.length + 2,
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              prototypeItem: !widget.itemsExpandable
-                  ? HeroMode(enabled: false, child: itemBuilder(context, 0))
-                  : null,
-            );
-          }
+            ],
+          );
         },
       ),
     );
