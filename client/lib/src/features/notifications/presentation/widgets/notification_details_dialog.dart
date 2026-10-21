@@ -22,7 +22,7 @@ class NotificationDetailsDialog extends StatelessWidget {
 
     final query = AdvancedQuery.fromJson(queryData);
 
-    return () => AdvancedSearchRoute($extra: query).push(context);
+    return () => AdvancedSearchRoute(initialQuery: query).push(context);
   }
 
   NotificationDetailsDialog({

@@ -194,7 +194,7 @@ class _ViewStreetState extends State<ViewStreet> {
       editButtonBuilder: (context, street) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditStreetRoute(
-          $extra: EditStreetExtra(street: street),
+          street: street,
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
@@ -224,20 +224,18 @@ class _ViewStreetState extends State<ViewStreet> {
               if (newIndex == 0) {
                 unawaited(
                   EditFamilyRoute(
-                    $extra: EditFamilyExtra(street: street),
+                    withAddress: Address(street: street),
                   ).push(context),
                 );
               } else if (newIndex == 1) {
                 unawaited(
                   EditPersonRoute(
-                    $extra: CreatePersonOnStreet(street: street),
+                    intent: CreatePersonOnStreet(street: street),
                   ).push(context),
                 );
               } else if (newIndex == 2) {
                 unawaited(
-                  EditStoreRoute(
-                    $extra: EditStoreExtra(street: street),
-                  ).push(context),
+                  const EditStoreRoute().push(context),
                 );
               }
             },

@@ -152,7 +152,7 @@ class EditPersonScreenHarness {
   }) async {
     if (membershipsLoaded) persons.respondWithSavedMemberships(null);
 
-    final editRoute = EditPersonRoute($extra: intent);
+    final editRoute = EditPersonRoute(intent: intent);
     Widget openButtonPage(BuildContext context) => Scaffold(
       body: TextButton(
         onPressed: () => unawaited(editRoute.push(context)),

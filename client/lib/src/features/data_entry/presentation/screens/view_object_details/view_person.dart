@@ -52,7 +52,7 @@ class _ViewPersonState extends State<ViewPerson> {
       editButtonBuilder: (context, person) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditPersonRoute(
-          $extra: UpdatePerson(person: person),
+          intent: UpdatePerson(person: person),
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),

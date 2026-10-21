@@ -48,7 +48,7 @@ class _EditFamilyState extends State<EditFamily> {
     _controller = EditObjectController(
       afterCreate: (object) => ViewFamilyRoute(
         id: object.id,
-        $extra: object,
+        family: object,
       ).pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.families.createObject(newObject: object),

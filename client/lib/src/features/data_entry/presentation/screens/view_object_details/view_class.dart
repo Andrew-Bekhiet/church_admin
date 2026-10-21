@@ -64,7 +64,7 @@ class _ViewClassState extends State<ViewClass> {
       editButtonBuilder: (context, $class) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditClassRoute(
-          $extra: EditClassExtra($class: $class),
+          class$: $class,
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
@@ -87,11 +87,9 @@ class _ViewClassState extends State<ViewClass> {
               label: const Text('الاحصائيات'),
               onPressed: () => unawaited(
                 MeetingsAnalysisRoute(
-                  $extra: MeetingsAnalysisExtra(
-                    title: 'احصائيات ${$class.name}',
-                    initialRangePreset: PastQuarterDateTimeRangePreset(),
-                    subject: ClassAnalysisSubject($class),
-                  ),
+                  title: 'احصائيات ${$class.name}',
+                  initialRangePreset: PastQuarterDateTimeRangePreset(),
+                  subject: ClassAnalysisSubject($class),
                 ).push(context),
               ),
             ),
@@ -120,7 +118,7 @@ class _ViewClassState extends State<ViewClass> {
       floatingActionButtonBuilder: (context, tabController, class$) =>
           FloatingActionButton(
             onPressed: () => EditPersonRoute(
-              $extra: CreatePersonInClass(class$: class$),
+              intent: CreatePersonInClass(class$: class$),
             ).push(context),
             child: const Icon(Symbols.person_add),
           ),

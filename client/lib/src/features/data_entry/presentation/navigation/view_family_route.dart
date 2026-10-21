@@ -2,18 +2,18 @@ part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class ViewFamilyRoute extends HomeChildRoute {
   final String id;
-  final Family? $extra;
+  final Family? family;
 
   @override
   String get path => '/view_family';
 
   @override
-  List<Object?> get props => [id, $extra];
+  List<Object?> get props => [id, family];
 
-  const ViewFamilyRoute({required this.id, this.$extra});
+  const ViewFamilyRoute({required this.id, this.family});
 
   @override
   Widget build(BuildContext context) {
-    return ViewFamily(familyId: id, family: $extra);
+    return ViewFamily(familyId: id, family: family);
   }
 }

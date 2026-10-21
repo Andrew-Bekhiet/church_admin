@@ -29,23 +29,23 @@ void main() {
   tearDown(() => router.dispose());
 
   final cases = <(String, Viewable, AppRoute)>[
-    ('a person', person, ViewPersonRoute(id: person.id, $extra: person)),
+    ('a person', person, ViewPersonRoute(id: person.id, person: person)),
     (
       'a service',
       service,
-      ViewServiceRoute(id: service.id, $extra: service),
+      ViewServiceRoute(id: service.id, service: service),
     ),
-    ('a group', group, ViewGroupRoute(id: group.id, $extra: group)),
-    ('a class', class$, ViewClassRoute(id: class$.id, $extra: class$)),
-    ('an area', area, ViewAreaRoute(id: area.id, $extra: area)),
-    ('a street', street, ViewStreetRoute(id: street.id, $extra: street)),
-    ('a family', family, ViewFamilyRoute(id: family.id, $extra: family)),
-    ('a store', store, ViewStoreRoute(id: store.id, $extra: store)),
-    ('a user', user, ViewUserRoute(uid: user.uid, $extra: user)),
+    ('a group', group, ViewGroupRoute(id: group.id, group: group)),
+    ('a class', class$, ViewClassRoute(id: class$.id, $class: class$)),
+    ('an area', area, ViewAreaRoute(id: area.id, area: area)),
+    ('a street', street, ViewStreetRoute(id: street.id, street: street)),
+    ('a family', family, ViewFamilyRoute(id: family.id, family: family)),
+    ('a store', store, ViewStoreRoute(id: store.id, store: store)),
+    ('a user', user, ViewUserRoute(uid: user.uid, user: user)),
     (
       'a recorded-by entry',
       LastRecordedByInfo(recordedBy: user.uid, user: user),
-      ViewUserRoute(uid: user.uid, $extra: user),
+      ViewUserRoute(uid: user.uid, user: user),
     ),
   ];
 

@@ -36,7 +36,7 @@ class _EditClassState extends State<EditClass> {
     _controller = EditObjectController(
       afterCreate: (object) => ViewClassRoute(
         id: object.id,
-        $extra: object,
+        $class: object,
       ).pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.classes.createObject(newObject: object),

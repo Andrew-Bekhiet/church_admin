@@ -1,22 +1,22 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class AdvancedSearchRoute extends HomeChildRoute {
-  final AdvancedQuery? $extra;
+  final AdvancedQuery? initialQuery;
 
   @override
   String get path => '/advanced_search';
 
   @override
-  List<Object?> get props => [$extra];
+  List<Object?> get props => [initialQuery];
 
-  const AdvancedSearchRoute({this.$extra});
+  const AdvancedSearchRoute({this.initialQuery});
 
   @override
   Widget build(BuildContext context) {
     return AdvancedSearchScreen(
       key: PageStorageKey(path),
-      initialQuery: $extra,
-      autoExecuteInitialQuery: $extra != null,
+      initialQuery: initialQuery,
+      autoExecuteInitialQuery: initialQuery != null,
     );
   }
 }

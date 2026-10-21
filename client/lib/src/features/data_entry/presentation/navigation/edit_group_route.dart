@@ -1,21 +1,19 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class EditGroupRoute extends HomeChildRoute {
-  final EditGroupExtra? $extra;
+  final Group? group;
+  final Service? withService;
 
   @override
   String get path => '/edit_group';
 
   @override
-  List<Object?> get props => [$extra];
+  List<Object?> get props => [group, withService];
 
-  const EditGroupRoute({this.$extra});
+  const EditGroupRoute({this.group, this.withService});
 
   @override
   Widget build(BuildContext context) {
-    return EditGroup(
-      group: $extra?.group,
-      withService: $extra?.service,
-    );
+    return EditGroup(group: group, withService: withService);
   }
 }

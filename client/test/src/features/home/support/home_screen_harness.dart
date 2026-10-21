@@ -108,7 +108,7 @@ class HomeScreenHarness {
             .whereNot(from.contains)
             .whereType<AdvancedSearchRoute>()
             .map(
-              (route) => route.$extra,
+              (route) => route.initialQuery,
             ),
       ),
     );

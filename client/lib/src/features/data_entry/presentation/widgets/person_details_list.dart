@@ -59,7 +59,7 @@ class PersonDetailsList extends StatelessWidget {
 
   Future<void> _analysis(BuildContext context, Person person) async {
     await PersonAnalysisRoute(
-      $extra: PersonAnalysisExtra(person: person),
+      person: person,
     ).push(context);
   }
 }

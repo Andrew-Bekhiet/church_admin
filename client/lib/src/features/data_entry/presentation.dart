@@ -1,6 +1,5 @@
 export 'presentation/edit_object_controller.dart';
 export 'presentation/list_arrangement_controller.dart';
-export 'presentation/navigation.dart';
 export 'presentation/screens.dart';
 export 'presentation/selection_controller.dart';
 export 'presentation/viewable_object_list_controller.dart';

@@ -285,7 +285,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
 
     if (_form.isCreate) {
       unawaited(
-        ViewPersonRoute(id: person.id, $extra: person).pushReplacement(context),
+        ViewPersonRoute(id: person.id, person: person).pushReplacement(context),
       );
 
       return;

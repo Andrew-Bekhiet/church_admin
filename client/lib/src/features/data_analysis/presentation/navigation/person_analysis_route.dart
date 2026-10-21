@@ -1,18 +1,18 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class PersonAnalysisRoute extends HomeChildRoute {
-  final PersonAnalysisExtra $extra;
+  final Person person;
 
   @override
   String get path => '/person_analysis';
 
   @override
-  List<Object?> get props => [$extra];
+  List<Object?> get props => [person];
 
-  const PersonAnalysisRoute({required this.$extra});
+  const PersonAnalysisRoute({required this.person});
 
   @override
   Widget build(BuildContext context) {
-    return PersonAnalysisScreen(person: $extra.person);
+    return PersonAnalysisScreen(person: person);
   }
 }

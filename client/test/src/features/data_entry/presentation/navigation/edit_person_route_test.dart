@@ -16,7 +16,7 @@ void main() {
     PersonEditIntent? intent,
   }) async {
     final router = KaiselRouterConfig<AppRoute>(
-      initial: EditPersonRoute($extra: intent),
+      initial: EditPersonRoute(intent: intent),
       builder: (context, route) => route.build(context),
     );
     addTearDown(router.dispose);

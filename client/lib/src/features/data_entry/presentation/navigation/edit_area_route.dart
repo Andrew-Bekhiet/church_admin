@@ -1,18 +1,18 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class EditAreaRoute extends HomeChildRoute {
-  final Area? $extra;
+  final Area? area;
 
   @override
   String get path => '/edit_area';
 
   @override
-  List<Object?> get props => [$extra];
+  List<Object?> get props => [area];
 
-  const EditAreaRoute({this.$extra});
+  const EditAreaRoute({this.area});
 
   @override
   Widget build(BuildContext context) {
-    return EditArea(area: $extra);
+    return EditArea(area: area);
   }
 }

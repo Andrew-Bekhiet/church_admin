@@ -21,7 +21,7 @@ class ViewableObjectService {
           router.push(
             ViewPersonRoute(
               id: object.id,
-              $extra: person,
+              person: person,
             ),
           ),
         );
@@ -31,7 +31,7 @@ class ViewableObjectService {
           router.push(
             ViewServiceRoute(
               id: object.id,
-              $extra: service,
+              service: service,
             ),
           ),
         );
@@ -41,7 +41,7 @@ class ViewableObjectService {
           router.push(
             ViewGroupRoute(
               id: object.id,
-              $extra: group,
+              group: group,
             ),
           ),
         );
@@ -51,7 +51,7 @@ class ViewableObjectService {
           router.push(
             ViewClassRoute(
               id: object.id,
-              $extra: $class,
+              $class: $class,
             ),
           ),
         );
@@ -61,7 +61,7 @@ class ViewableObjectService {
           router.push(
             ViewAreaRoute(
               id: object.id,
-              $extra: area,
+              area: area,
             ),
           ),
         );
@@ -71,7 +71,7 @@ class ViewableObjectService {
           router.push(
             ViewStreetRoute(
               id: object.id,
-              $extra: street,
+              street: street,
             ),
           ),
         );
@@ -81,7 +81,7 @@ class ViewableObjectService {
           router.push(
             ViewFamilyRoute(
               id: object.id,
-              $extra: family,
+              family: family,
             ),
           ),
         );
@@ -91,7 +91,7 @@ class ViewableObjectService {
           router.push(
             ViewStoreRoute(
               id: object.id,
-              $extra: store,
+              store: store,
             ),
           ),
         );
@@ -101,7 +101,7 @@ class ViewableObjectService {
           router.push(
             ViewUserRoute(
               uid: object.uid,
-              $extra: user,
+              user: user,
             ),
           ),
         );

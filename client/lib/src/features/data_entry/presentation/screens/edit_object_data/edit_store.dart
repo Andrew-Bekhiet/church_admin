@@ -27,7 +27,7 @@ class _EditStoreState extends State<EditStore> {
     _controller = EditObjectController(
       afterCreate: (object) => ViewStoreRoute(
         id: object.id,
-        $extra: object,
+        store: object,
       ).pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.stores.createObject(newObject: object),
