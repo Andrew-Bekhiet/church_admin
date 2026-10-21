@@ -1,8 +1,10 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class ManageUsersRoute extends HomeChildRoute implements ExitAwareRoute {
+  static const String routePath = '/manage_users';
+
   @override
-  String get path => '/manage_users';
+  String get path => routePath;
 
   const ManageUsersRoute();
 

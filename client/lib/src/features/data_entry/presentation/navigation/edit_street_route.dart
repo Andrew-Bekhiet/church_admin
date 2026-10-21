@@ -1,11 +1,13 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class EditStreetRoute extends HomeChildRoute {
+  static const String routePath = '/edit_street';
+
   final Street? street;
   final Area? withArea;
 
   @override
-  String get path => '/edit_street';
+  String get path => routePath;
 
   @override
   List<Object?> get props => [street, withArea];

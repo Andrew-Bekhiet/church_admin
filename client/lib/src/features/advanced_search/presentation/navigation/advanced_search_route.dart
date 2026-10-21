@@ -1,10 +1,12 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class AdvancedSearchRoute extends HomeChildRoute {
+  static const String routePath = '/advanced_search';
+
   final AdvancedQuery? initialQuery;
 
   @override
-  String get path => '/advanced_search';
+  String get path => routePath;
 
   @override
   List<Object?> get props => [initialQuery];

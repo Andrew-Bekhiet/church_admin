@@ -149,7 +149,7 @@ void main() {
       'by the outdated feature screen', (tester) async {
     harness
       ..signIn(AppRoutingHarness.approvedUser())
-      ..featureFlags.disabledRoutes = {'/settings'};
+      ..featureFlags.disabledRoutes = {SettingsRoute.routePath};
     await harness.pump(tester);
 
     await harness.open(tester, const SettingsRoute());
@@ -175,7 +175,7 @@ void main() {
       'opened from', (tester) async {
     harness
       ..signIn(AppRoutingHarness.approvedUser())
-      ..featureFlags.disabledRoutes = {'/settings'};
+      ..featureFlags.disabledRoutes = {SettingsRoute.routePath};
     await harness.pump(tester);
     await harness.open(tester, const SettingsRoute());
 

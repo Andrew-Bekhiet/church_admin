@@ -1,8 +1,10 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class UnderMaintenanceRoute extends AppRoute {
+  static const String routePath = '/under_maintenance';
+
   @override
-  String get path => '/under_maintenance';
+  String get path => routePath;
 
   const UnderMaintenanceRoute();
 

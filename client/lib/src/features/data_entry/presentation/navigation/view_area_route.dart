@@ -1,11 +1,13 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class ViewAreaRoute extends HomeChildRoute {
+  static const String routePath = '/view_area';
+
   final String id;
   final Area? area;
 
   @override
-  String get path => '/view_area';
+  String get path => routePath;
 
   @override
   List<Object?> get props => [id, area];

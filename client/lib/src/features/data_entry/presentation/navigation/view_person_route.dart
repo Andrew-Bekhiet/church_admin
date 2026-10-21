@@ -1,11 +1,13 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class ViewPersonRoute extends HomeChildRoute {
+  static const String routePath = '/view_person';
+
   final String id;
   final Person? person;
 
   @override
-  String get path => '/view_person';
+  String get path => routePath;
 
   @override
   List<Object?> get props => [id, person];

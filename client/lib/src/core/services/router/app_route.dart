@@ -5,6 +5,7 @@ import 'package:kaisel/kaisel.dart';
 import 'package:material_ui/material_ui.dart';
 
 part 'package:church_admin/src/core/services/router/home_child_route.dart';
+part 'package:church_admin/src/core/services/router/not_found_route.dart';
 part 'package:church_admin/src/features/advanced_search/presentation/navigation/advanced_search_route.dart';
 part 'package:church_admin/src/features/attendance/presentation/navigation/record_attendance_route.dart';
 part 'package:church_admin/src/features/auth/presentation/navigation/email_verification_route.dart';

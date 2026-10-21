@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kaisel/kaisel.dart';
 import 'package:local_auth/local_auth.dart';
@@ -29,6 +29,8 @@ class AppRoutingHarness {
   late LocalAuthService localAuth;
   late KaiselRouterConfig<AppRoute> router;
   bool locksOnStart = false;
+  bool withUrls = false;
+  final List<String> reportedAddresses = [];
   AuthState _authState = const AuthUnauthenticated();
 
   static User approvedUser({
@@ -83,7 +85,17 @@ class AppRoutingHarness {
     addTearDown(tester.view.reset);
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
     _installProviders();
-    router = AppRouter.create();
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      SystemChannels.navigation,
+      (call) async {
+        if (call.method == 'routeInformationUpdated') {
+          reportedAddresses.add((call.arguments as Map)['uri'] as String);
+        }
+
+        return null;
+      },
+    );
+    router = AppRouter.create(withUrls: withUrls);
     addTearDown(_tearDown);
 
     await tester.pumpWidget(ChurchAdminApp(routerConfig: router));

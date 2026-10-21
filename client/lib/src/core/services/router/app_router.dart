@@ -1,17 +1,21 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:kaisel/kaisel.dart';
 
 final KaiselRouterConfig<AppRoute> $appRouter = AppRouter.create();
 
 abstract final class AppRouter {
-  static KaiselRouterConfig<AppRoute> create() => KaiselRouterConfig<AppRoute>(
+  static KaiselRouterConfig<AppRoute> create({
+    bool withUrls = kIsWeb,
+  }) => KaiselRouterConfig<AppRoute>(
     initial: AppRouteRedirects.resolve([AppRoute.home]).first,
     builder: (context, route) => route.build(context),
     guards: const [AppRouteRedirects.guard],
     reevaluateOn: RouterRefreshStream.I,
     onTransition: _notifyExitedRoutes,
     observers: () => LoggingService.I.navigatorObservers,
+    codec: withUrls ? const StackToConfigCodec(AppRouteUrlCodec()) : null,
   );
 
   static void _notifyExitedRoutes(List<AppRoute> from, List<AppRoute> to) {

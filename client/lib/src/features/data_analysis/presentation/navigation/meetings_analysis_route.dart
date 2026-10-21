@@ -1,12 +1,14 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class MeetingsAnalysisRoute extends HomeChildRoute {
+  static const String routePath = '/meetings_analysis';
+
   final String title;
   final DateTimeRangePreset initialRangePreset;
   final MeetingsAnalysisSubject subject;
 
   @override
-  String get path => '/meetings_analysis';
+  String get path => routePath;
 
   @override
   List<Object?> get props => [title, initialRangePreset, subject];

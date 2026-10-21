@@ -1,11 +1,13 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class EditGroupRoute extends HomeChildRoute {
+  static const String routePath = '/edit_group';
+
   final Group? group;
   final Service? withService;
 
   @override
-  String get path => '/edit_group';
+  String get path => routePath;
 
   @override
   List<Object?> get props => [group, withService];

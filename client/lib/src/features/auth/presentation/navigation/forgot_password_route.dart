@@ -1,8 +1,10 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class ForgotPasswordRoute extends AppRoute {
+  static const String routePath = '/forgot_password';
+
   @override
-  String get path => '/forgot_password';
+  String get path => routePath;
 
   const ForgotPasswordRoute();
 

@@ -1,6 +1,8 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class HomeScreenWebRoute extends AppRoute {
+  static const String routePath = '/';
+
   static AppRoute? maybeRedirectToAccountSetup() {
     final AuthState authState = AuthBloc.I.state.unwrapped;
 
@@ -27,7 +29,7 @@ class HomeScreenWebRoute extends AppRoute {
   }
 
   @override
-  String get path => '/';
+  String get path => routePath;
 
   const HomeScreenWebRoute();
 

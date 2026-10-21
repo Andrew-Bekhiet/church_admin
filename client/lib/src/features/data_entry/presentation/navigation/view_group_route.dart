@@ -1,11 +1,13 @@
 part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class ViewGroupRoute extends HomeChildRoute {
+  static const String routePath = '/view_group';
+
   final String id;
   final Group? group;
 
   @override
-  String get path => '/view_group';
+  String get path => routePath;
 
   @override
   List<Object?> get props => [id, group];
