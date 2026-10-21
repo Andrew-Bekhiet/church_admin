@@ -1,5 +1,4 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:material_ui/material_ui.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class ViewStoreRoute extends HomeChildRoute {
   final String id;

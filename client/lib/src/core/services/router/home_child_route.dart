@@ -1,6 +1,6 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
-abstract class HomeChildRoute extends AppRoute {
+sealed class HomeChildRoute extends AppRoute {
   @override
   List<AppRoute> get breadcrumbs => [AppRoute.home, this];
 

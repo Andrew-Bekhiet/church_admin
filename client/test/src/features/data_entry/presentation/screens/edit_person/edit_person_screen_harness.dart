@@ -25,7 +25,6 @@ import '../../../../../fakes/mock_database_service.dart';
 import '../../../../../fakes/mock_image_url_cache_service.dart';
 import '../../../../../fakes/mock_user_preferences_service.dart';
 import '../../../../../fakes/mock_viewable_object_service.dart';
-import '../../../../../stub_route.dart';
 
 class FakeHobbiesDAO extends Fake implements HobbiesDAO {
   List<Hobby> hobbies = const [];
@@ -153,10 +152,7 @@ class EditPersonScreenHarness {
   }) async {
     if (membershipsLoaded) persons.respondWithSavedMemberships(null);
 
-    final editRoute = StubRoute(
-      '/edit',
-      (_) => EditPersonScreen(intent: intent),
-    );
+    final editRoute = EditPersonRoute($extra: intent);
     Widget openButtonPage(BuildContext context) => Scaffold(
       body: TextButton(
         onPressed: () => unawaited(editRoute.push(context)),
@@ -165,9 +161,10 @@ class EditPersonScreenHarness {
     );
 
     final router = KaiselRouterConfig<AppRoute>(
-      initial: StubRoute('/', openButtonPage),
+      initial: const HomeScreenRoute(),
       builder: (context, route) => switch (route) {
         ViewPersonRoute(:final id) => Text('viewing $id'),
+        HomeScreenRoute() || SettingsRoute() => openButtonPage(context),
         _ => route.build(context),
       },
     );
@@ -188,7 +185,7 @@ class EditPersonScreenHarness {
       ),
     );
     if (withPageBelow) {
-      unawaited(router.router.push(StubRoute('/below', openButtonPage)));
+      unawaited(router.router.push(const SettingsRoute()));
       await tester.pumpAndSettle();
     }
     await tester.tap(find.text('open'));

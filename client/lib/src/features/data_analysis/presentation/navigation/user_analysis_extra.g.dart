@@ -3,7 +3,7 @@
 // coverage:ignore-file
 // ignore_for_file: type=lint
 
-part of 'user_analysis_route.dart';
+part of 'user_analysis_extra.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

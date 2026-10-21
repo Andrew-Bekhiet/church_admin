@@ -1,8 +1,4 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:material_ui/material_ui.dart';
-
-part 'edit_group_route.g.dart';
+part of 'package:church_admin/src/core/services/router/app_route.dart';
 
 class EditGroupRoute extends HomeChildRoute {
   final EditGroupExtra? $extra;
@@ -22,20 +18,4 @@ class EditGroupRoute extends HomeChildRoute {
       withService: $extra?.service,
     );
   }
-}
-
-@JsonSerializable()
-class EditGroupExtra extends SerializableExtra {
-  final Group? group;
-  final Service? service;
-
-  @override
-  String get typeName => 'EditGroupExtra';
-
-  const EditGroupExtra({this.group, this.service});
-
-  factory EditGroupExtra.fromJson(Json json) => _$EditGroupExtraFromJson(json);
-
-  @override
-  Json toJson() => _$EditGroupExtraToJson(this);
 }

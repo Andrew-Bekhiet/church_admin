@@ -7,27 +7,12 @@ import 'package:kaisel/kaisel.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../stub_route.dart';
-
 void main() {
   const privateDetails = 'Private member details';
   const onboarding = 'Onboarding';
-  final home = StubRoute('/', (_) => const Scaffold(body: Text('Home')));
-  final details = StubRoute(
-    '/details',
-    (_) => const Scaffold(
-      body: Column(
-        children: [
-          Text(privateDetails),
-          TextField(autofocus: true),
-        ],
-      ),
-    ),
-  );
-  final onboardingRoute = StubRoute(
-    '/onboarding',
-    (_) => const Scaffold(body: Text(onboarding)),
-  );
+  const home = HomeScreenRoute();
+  const details = ViewPersonRoute(id: 'person-id');
+  const onboardingRoute = LoginRoute();
 
   late bool isReauthDue;
   late StreamController<void> reauthChanges;
@@ -87,7 +72,19 @@ void main() {
 
     final router = KaiselRouterConfig<AppRoute>(
       initial: at.first,
-      builder: (context, route) => route.build(context),
+      builder: (context, route) => switch (route) {
+        HomeScreenRoute() => const Scaffold(body: Text('Home')),
+        ViewPersonRoute() => const Scaffold(
+          body: Column(
+            children: [
+              Text(privateDetails),
+              TextField(autofocus: true),
+            ],
+          ),
+        ),
+        LoginRoute() => const Scaffold(body: Text(onboarding)),
+        _ => route.build(context),
+      },
     );
     addTearDown(router.dispose);
 

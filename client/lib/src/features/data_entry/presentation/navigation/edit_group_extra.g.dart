@@ -3,23 +3,23 @@
 // coverage:ignore-file
 // ignore_for_file: type=lint
 
-part of 'edit_class_route.dart';
+part of 'edit_group_extra.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-EditClassExtra _$EditClassExtraFromJson(Map json) => EditClassExtra(
-  $class: json[r'$class'] == null
+EditGroupExtra _$EditGroupExtraFromJson(Map json) => EditGroupExtra(
+  group: json['group'] == null
       ? null
-      : Class.fromJson(Map<String, Object?>.from(json[r'$class'] as Map)),
+      : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
   service: json['service'] == null
       ? null
       : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
 );
 
-Map<String, dynamic> _$EditClassExtraToJson(EditClassExtra instance) =>
+Map<String, dynamic> _$EditGroupExtraToJson(EditGroupExtra instance) =>
     <String, dynamic>{
-      r'$class': instance.$class?.toJson(),
+      'group': instance.group?.toJson(),
       'service': instance.service?.toJson(),
     };

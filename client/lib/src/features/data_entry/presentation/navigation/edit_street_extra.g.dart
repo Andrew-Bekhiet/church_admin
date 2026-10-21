@@ -3,7 +3,7 @@
 // coverage:ignore-file
 // ignore_for_file: type=lint
 
-part of 'edit_street_route.dart';
+part of 'edit_street_extra.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
