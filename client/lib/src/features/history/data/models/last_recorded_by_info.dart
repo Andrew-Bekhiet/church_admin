@@ -21,7 +21,7 @@ class LastRecordedByInfo extends ViewableWithID
   @QueryableField(label: 'بيانات الخادم')
   final User? user;
 
-  @QueryableField(label: 'زيارة أب كاهن', orderable: false)
+  @QueryableField(label: 'زيارة أب كاهن', codeOnly: true, orderable: false)
   final bool isFatherVisit;
 
   @override

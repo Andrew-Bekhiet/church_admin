@@ -554,8 +554,8 @@ class _PersonFields {
         operators: {...MultiSelectOperator.values},
       );
 
-  final FieldMetadata<LastRecordedByInfo> attendanceHistory =
-      FieldMetadata<LastRecordedByInfo>(
+  final FieldMetadata<AttendanceRecord> attendanceHistory =
+      FieldMetadata<AttendanceRecord>(
         getValue: (obj) => obj is Person ? obj.attendanceHistory : null,
         parentType: Person,
         name: 'attendanceHistory',

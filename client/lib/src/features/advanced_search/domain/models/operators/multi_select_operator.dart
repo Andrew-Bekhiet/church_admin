@@ -41,6 +41,9 @@ enum MultiSelectOperator<V extends Object> implements Operator<List<V>?> {
       final List<String> filterValue => {
         name: filterValue,
       },
+      final List<Object> filterValue
+          when keyField != null && field.referencedObjectType == null =>
+        {name: filterValue.map(keyField.getValue).toList()},
       final List<Object> filterValue when keyField != null => {
         keyField.name: {
           name: filterValue.map(keyField.getValue).toList(),

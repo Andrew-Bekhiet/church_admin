@@ -44,7 +44,7 @@ class LastRecordedByInfoFields {
     parentType: LastRecordedByInfo,
     name: 'isFatherVisit',
     label: 'زيارة أب كاهن',
-    isCodeOnly: false,
+    isCodeOnly: true,
     isOrderable: false,
     operators: {...BooleanOperator.values},
   );

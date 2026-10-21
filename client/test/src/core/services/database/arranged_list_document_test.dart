@@ -8,6 +8,7 @@ import 'graphql_response_projector.dart';
 void main() {
   const personId = '11111111-1111-1111-1111-111111111111';
   const personTypeId = '22222222-2222-2222-2222-222222222222';
+  const mainPhone = '01000000000';
 
   const personRow = {
     '__typename': 'Persons',
@@ -20,6 +21,15 @@ void main() {
       'name': 'أب',
       'order': 1,
     },
+    'contacts': [
+      {
+        '__typename': 'Contacts',
+        'id': '33333333-3333-3333-3333-333333333333',
+        'label': null,
+        'phone': mainPhone,
+        'isMainPhone': true,
+      },
+    ],
   };
 
   const detailRequest = Request(
@@ -112,6 +122,21 @@ void main() {
           ),
         );
       },
+    );
+  });
+
+  test('a persons list sorted by main phone reads back the main phone', () {
+    final cache = cacheWithAppTypePolicies();
+    final listRequest = sortedListRequest(PersonFields().mainPhone);
+
+    writeAsServerAnswers(cache, listRequest);
+
+    final persons = cache.readQuery(listRequest)!['persons'] as List;
+    expect(
+      PersonFields().mainPhone.getValue(
+        Person.fromJson(persons.single as Json),
+      ),
+      mainPhone,
     );
   });
 

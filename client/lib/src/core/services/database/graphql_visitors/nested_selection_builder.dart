@@ -24,6 +24,20 @@ class NestedSelectionBuilder extends FieldMetadataVisitor<FieldNode> {
   );
 
   @override
+  FieldNode visitPhoneSearchField(PhoneSearchFieldMetadata field) =>
+      const FieldNode(
+        name: NameNode(value: 'contacts'),
+        selectionSet: SelectionSetNode(
+          selections: [
+            FieldNode(name: NameNode(value: 'id')),
+            FieldNode(name: NameNode(value: 'label')),
+            FieldNode(name: NameNode(value: 'phone')),
+            FieldNode(name: NameNode(value: 'isMainPhone')),
+          ],
+        ),
+      );
+
+  @override
   FieldNode visitRedirectingField(RedirectingFieldMetadata field) =>
       NestedSelectionBuilder(
         nestedSelections: [visit(field.targetField)],

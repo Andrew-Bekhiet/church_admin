@@ -176,8 +176,10 @@ class MeetingFields {
 Meeting _$MeetingFromJson(Map json) => Meeting(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
-  audience: $enumDecode(_$MeetingAudienceEnumMap, json['audience']),
-  isArchived: json['isArchived'] as bool,
+  audience:
+      $enumDecodeNullable(_$MeetingAudienceEnumMap, json['audience']) ??
+      MeetingAudience.personsAndServants,
+  isArchived: json['isArchived'] as bool? ?? false,
   showKodasCheckbox: json['showKodasCheckbox'] as bool? ?? true,
   color: colorFromInt((json['color'] as num?)?.toInt()),
   serviceId: json['serviceId'] as String?,

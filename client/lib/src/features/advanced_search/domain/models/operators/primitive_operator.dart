@@ -38,6 +38,13 @@ enum PrimitiveOperator<V> implements Operator<V?> {
 
   @override
   Json queryToJson(FieldMetadata field, V? filterValue) {
+    if ((this == isNull || this == isNotNull) &&
+        field.referencedObjectType != null) {
+      final hasRelatedRow = field.queryToJson({});
+
+      return this == isNull ? {'_not': hasRelatedRow} : hasRelatedRow;
+    }
+
     if (this == isNull || this == isNotNull) {
       return field.queryToJson({'_isNull': this == isNull});
     }
