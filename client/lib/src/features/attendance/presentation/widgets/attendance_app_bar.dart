@@ -44,6 +44,7 @@ class AttendanceAppBar extends StatelessWidget {
         spacing: 10,
         children: [
           MeetingSelectorButton(
+            key: AttendanceAppBarKeys.meetingSelector,
             meeting: meeting,
             onTap: () => _switchMeeting(context, cubit),
           ),
@@ -52,6 +53,7 @@ class AttendanceAppBar extends StatelessWidget {
             spacing: 4,
             children: [
               AttendanceDateChip(
+                key: AttendanceAppBarKeys.dateChip,
                 date: selectedDate,
                 recordedDays: recordedDays,
                 indicatorColor: meeting.color,
@@ -59,6 +61,7 @@ class AttendanceAppBar extends StatelessWidget {
               ),
               if (canToggleAudience)
                 AttendanceAudienceToggle(
+                  key: AttendanceAppBarKeys.audienceToggle,
                   view: audienceView,
                   onToggle: cubit.toggleAudience,
                 ),
@@ -108,4 +111,14 @@ class AttendanceAppBar extends StatelessWidget {
       ).push(context),
     );
   }
+}
+
+abstract final class AttendanceAppBarKeys {
+  static const Key meetingSelector = ValueKey(
+    'Attendance App Bar Meeting Selector Key',
+  );
+  static const Key dateChip = ValueKey('Attendance App Bar Date Chip Key');
+  static const Key audienceToggle = ValueKey(
+    'Attendance App Bar Audience Toggle Key',
+  );
 }

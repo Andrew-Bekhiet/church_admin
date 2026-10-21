@@ -110,3 +110,8 @@ class AttendancePersonCard extends StatelessWidget {
     onChangeAttendanceTime(result);
   }
 }
+
+abstract final class AttendancePersonCardKeys {
+  static Key entry(String personId, {required bool asServant}) =>
+      ValueKey('Attendance Person Card $personId $asServant Key');
+}
