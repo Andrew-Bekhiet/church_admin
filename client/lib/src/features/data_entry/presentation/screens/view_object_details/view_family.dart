@@ -206,6 +206,7 @@ class _ViewFamilyState extends State<ViewFamily> {
       ),
       floatingActionButtonBuilder: (context, tabController, family) =>
           SwitchingFAB.fromTabController(
+            key: ViewFamilyKeys.addToCurrentTabButton,
             tabController: tabController,
             icons: const [
               Icon(Symbols.person_add),
@@ -280,3 +281,9 @@ class _ViewFamilyState extends State<ViewFamily> {
 abstract final class _ChildrenFamily {}
 
 abstract final class _ParentFamily {}
+
+abstract final class ViewFamilyKeys {
+  static const Key addToCurrentTabButton = ValueKey(
+    'View Family Add To Current Tab Button Key',
+  );
+}
