@@ -107,6 +107,10 @@ void main() {
 
       await tester.tap(find.byKey(EditPersonSaveButtonKeys.saveButton));
       await tester.pump(const Duration(milliseconds: 50));
+
+      expect(find.text('جار الحفظ ...'), findsOneWidget);
+      expect(find.text('رسالة سابقة'), findsNothing);
+
       gate.complete();
       await tester.pump(const Duration(milliseconds: 50));
       await tester.pumpAndSettle();
