@@ -198,10 +198,39 @@ void main() {
     );
   });
 
-  blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
-    'deleting removes the stored area',
-    build: cubitEditingStoredArea,
-    act: (cubit) => cubit.deleteSavedObject(),
-    verify: (_) => expect(areas.deletedIds, [storedArea.id]),
-  );
+  group('deleting', () {
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'removes the stored area',
+      build: cubitEditingStoredArea,
+      act: (cubit) => cubit.tryDeleteSavedObject(),
+      verify: (_) => expect(areas.deletedIds, [storedArea.id]),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'is refused while a save is running',
+      build: () {
+        areas.saveGate = Completer<void>();
+
+        return cubitEditingStoredArea();
+      },
+      act: (cubit) async {
+        final saving = cubit.submit();
+        await cubit.tryDeleteSavedObject();
+        areas.saveGate?.complete();
+        await saving;
+      },
+      verify: (_) => expect(areas.deletedIds, isEmpty),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'keeps a save from starting until it finishes',
+      build: cubitEditingStoredArea,
+      act: (cubit) async {
+        final deleting = cubit.tryDeleteSavedObject();
+        outcome = await cubit.submit();
+        await deleting;
+      },
+      verify: (_) => expect(outcome, isA<ObjectSaveAlreadyInProgress<Area>>()),
+    );
+  });
 }

@@ -7,6 +7,10 @@ sealed class ObjectSaveProgress extends Equatable {
   const ObjectSaveProgress();
 }
 
+final class DeletingObject extends ObjectSaveProgress {
+  const DeletingObject();
+}
+
 final class NotSavingObject extends ObjectSaveProgress {
   const NotSavingObject();
 }

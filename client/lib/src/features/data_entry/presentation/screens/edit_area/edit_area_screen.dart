@@ -30,10 +30,7 @@ class _EditAreaScreenState extends State<EditAreaScreen> {
     return EditObjectScaffold<Area>(
       form: _form,
       saveCubit: _saveCubit,
-      canDelete: switch (_form.savedObject) {
-        final saved? => _currentUser?.canDeleteObject(saved) ?? false,
-        null => false,
-      },
+      canDelete: (saved) => _currentUser?.canDeleteObject(saved) ?? false,
       detailsRouteOf: (area) => ViewAreaRoute(id: area.id, area: area),
       fields: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

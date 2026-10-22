@@ -20,7 +20,7 @@ class ObjectSaveButton extends StatelessWidget {
         key: ObjectSaveButtonKeys.saveButton,
         label: const Text('حفظ'),
         icon: switch (progress) {
-          NotSavingObject() => const Icon(Icons.save),
+          NotSavingObject() || DeletingObject() => const Icon(Icons.save),
           SavingObject() || UploadingObjectPhoto() => SizedBox.square(
             dimension: 18,
             child: CircularProgressIndicator(
@@ -31,7 +31,7 @@ class ObjectSaveButton extends StatelessWidget {
         },
         onPressed: switch (progress) {
           NotSavingObject() => onPressed,
-          SavingObject() || UploadingObjectPhoto() => null,
+          DeletingObject() || SavingObject() || UploadingObjectPhoto() => null,
         },
       ),
     );

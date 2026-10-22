@@ -53,13 +53,21 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
     }
   }
 
-  Future<void> deleteSavedObject() async {
+  Future<bool> tryDeleteSavedObject() async {
     final savedObject = _form.savedObject;
     if (savedObject == null) {
       throw StateError('Cannot delete an object that has not been created');
     }
+    if (state is! NotSavingObject) return false;
 
-    await _dao.deleteById(id: savedObject.id);
+    emit(const DeletingObject());
+    try {
+      await _dao.deleteById(id: savedObject.id);
+
+      return true;
+    } finally {
+      if (!isClosed) emit(const NotSavingObject());
+    }
   }
 
   @protected

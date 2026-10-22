@@ -13,7 +13,7 @@ class EditObjectScaffold<T extends ViewableWithIDAndImage>
 
   final ObjectFormController<T> form;
   final ObjectSaveCubit<T> saveCubit;
-  final bool canDelete;
+  final bool Function(T saved) canDelete;
   final AppRoute Function(T created) detailsRouteOf;
   final Widget fields;
   final String? nameHint;
@@ -61,11 +61,11 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
                       pinned: true,
                       expandedHeight: MediaQuery.sizeOf(context).width,
                       actions: [
-                        if (widget.canDelete)
-                          IconButton(
-                            onPressed: _delete,
-                            icon: const Icon(Symbols.delete),
-                            tooltip: 'حذف',
+                        if (_form.savedObject case final saved?
+                            when widget.canDelete(saved))
+                          ObjectDeleteButton<T>(
+                            saveCubit: widget.saveCubit,
+                            savedObject: saved,
                           ),
                       ],
                       flexibleSpace: ListenableBuilder(
@@ -128,7 +128,7 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
 
   void _showSaveProgressWhileSaving(ObjectSaveProgress progress) {
     switch (progress) {
-      case NotSavingObject():
+      case NotSavingObject() || DeletingObject():
         _progressSnackBar?.close();
         _progressSnackBar = null;
 
@@ -241,55 +241,6 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
     );
 
     if (discard ?? false) navigator.pop(result);
-  }
-
-  Future<void> _delete() async {
-    final navigator = Navigator.of(context);
-    final messenger = ScaffoldMessenger.of(context);
-    final iconColor = Theme.of(context).primaryIconTheme.color;
-
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => DeleteConfirmationDialog(
-        objectName: _form.savedObject?.name ?? '',
-      ),
-    );
-    if (confirmed != true || !mounted) return;
-
-    try {
-      await widget.saveCubit.deleteSavedObject();
-    } on Exception catch (error, stackTrace) {
-      if (!mounted) return;
-
-      await LoggingService.I.showErrorDialogAndReport(
-        context,
-        LogRecord(
-          error: error,
-          stackTrace: stackTrace,
-          data: {
-            'objectType': '$T',
-            'initialObject': _reportable(_form.savedObject),
-          },
-        ),
-      );
-
-      return;
-    }
-    if (!mounted) return;
-
-    messenger.showSnackBar(
-      SnackBar(
-        content: Row(
-          children: [
-            const Expanded(child: Text('تم الحذف بنجاح')),
-            Icon(Symbols.done, color: iconColor),
-          ],
-        ),
-      ),
-    );
-
-    navigator.pop();
-    WidgetsBinding.instance.addPostFrameCallback((_) => navigator.pop());
   }
 
   Object? _reportable(T? object) => switch (object) {

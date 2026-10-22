@@ -31,10 +31,7 @@ class _EditStreetScreenState extends State<EditStreetScreen> {
     return EditObjectScaffold<Street>(
       form: _form,
       saveCubit: _saveCubit,
-      canDelete: switch (_form.savedObject) {
-        final saved? => _currentUser?.canDeleteObject(saved) ?? false,
-        null => false,
-      },
+      canDelete: (saved) => _currentUser?.canDeleteObject(saved) ?? false,
       detailsRouteOf: (street) =>
           ViewStreetRoute(id: street.id, street: street),
       fields: Column(
