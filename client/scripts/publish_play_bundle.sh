@@ -24,8 +24,13 @@ host=https://androidpublisher.googleapis.com
 app_path=androidpublisher/v3/applications/$package_name
 
 call_android_publisher() {
-  curl --silent --show-error --fail-with-body --config - "$@" \
-    <<<"header = \"Authorization: Bearer $GOOGLE_PLAY_ACCESS_TOKEN\""
+  local response
+  if ! response=$(curl --silent --show-error --fail-with-body --config - "$@" \
+    <<<"header = \"Authorization: Bearer $GOOGLE_PLAY_ACCESS_TOKEN\""); then
+    printf '%s\n' "$response" >&2
+    return 1
+  fi
+  printf '%s\n' "$response"
 }
 
 edit_id=
@@ -40,13 +45,15 @@ discard_edit_unless_committed() {
 trap discard_edit_unless_committed EXIT
 
 echo "Creating edit for $package_name" >&2
-edit_id=$(call_android_publisher --request POST --data '' "$host/$app_path/edits" | jq -er .id)
+edit_response=$(call_android_publisher --request POST --data '' "$host/$app_path/edits")
+edit_id=$(jq -er '.id // empty' <<<"$edit_response")
 
 echo "Uploading $bundle_path" >&2
-version_code=$(call_android_publisher --request POST \
+upload_response=$(call_android_publisher --request POST \
   --header 'Content-Type: application/octet-stream' \
   --data-binary "@$bundle_path" \
-  "$host/upload/$app_path/edits/$edit_id/bundles?uploadType=media" | jq -er .versionCode)
+  "$host/upload/$app_path/edits/$edit_id/bundles?uploadType=media")
+version_code=$(jq -er '.versionCode // empty' <<<"$upload_response")
 
 echo "Releasing version code $version_code to the $track track" >&2
 call_android_publisher --request PUT \
