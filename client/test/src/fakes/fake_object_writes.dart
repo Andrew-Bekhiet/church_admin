@@ -11,6 +11,7 @@ mixin FakeObjectWrites<T extends ViewableWithID> on Fake {
   Completer<void>? saveGate;
   Completer<void>? deleteGate;
   Object? saveError;
+  bool updatesFindNothing = false;
   Object? deleteError;
 
   Future<T> createObject({required T newObject}) async {
@@ -29,7 +30,7 @@ mixin FakeObjectWrites<T extends ViewableWithID> on Fake {
     if (saveError case final error?) throw error;
     updates.add((savedObject: oldObject, editedObject: newObject));
 
-    return newObject;
+    return updatesFindNothing ? null : newObject;
   }
 
   Future<T?> deleteById({required String id}) async {

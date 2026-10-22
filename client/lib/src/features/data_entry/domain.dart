@@ -9,6 +9,7 @@ export 'domain/object_edit/edit_intent_json.dart';
 export 'domain/object_edit/object_edit_error.dart';
 export 'domain/object_edit/object_save_outcome.dart';
 export 'domain/object_edit/object_save_progress.dart';
+export 'domain/object_edit/object_update_not_saved_exception.dart';
 export 'domain/out_of_sight_after_save.dart';
 export 'domain/person_edit/memberships_load_state.dart';
 export 'domain/person_edit/person_edit_error.dart';
