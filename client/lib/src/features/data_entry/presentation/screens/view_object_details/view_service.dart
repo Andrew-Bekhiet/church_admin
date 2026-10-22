@@ -244,7 +244,7 @@ class _ViewServiceState extends State<ViewService> {
               if (newIndex == 0) {
                 unawaited(
                   EditClassRoute(
-                    withService: service,
+                    intent: CreateClassInService(service: service),
                   ).push(context),
                 );
               } else if (newIndex == 1) {

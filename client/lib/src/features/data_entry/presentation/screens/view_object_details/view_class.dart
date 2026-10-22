@@ -64,7 +64,7 @@ class _ViewClassState extends State<ViewClass> {
       editButtonBuilder: (context, $class) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditClassRoute(
-          class$: $class,
+          intent: UpdateClass(class$: $class),
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),

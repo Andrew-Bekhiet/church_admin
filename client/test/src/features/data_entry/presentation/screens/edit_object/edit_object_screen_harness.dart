@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years_dao.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kaisel/kaisel.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -8,6 +9,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../fakes/fake_areas_dao.dart';
+import '../../../../../fakes/fake_classes_dao.dart';
 import '../../../../../fakes/fake_districts_dao.dart';
 import '../../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../../fakes/fake_geocoder.dart';
@@ -18,6 +20,7 @@ import '../../../../../fakes/fake_person_types_dao.dart';
 import '../../../../../fakes/fake_services_dao.dart';
 import '../../../../../fakes/fake_stores_dao.dart';
 import '../../../../../fakes/fake_streets_dao.dart';
+import '../../../../../fakes/fake_study_years_dao.dart';
 import '../../../../../fakes/in_memory_families_dao.dart';
 import '../../../../../fakes/mock_auth_bloc.dart';
 import '../../../../../fakes/mock_database_service.dart';
@@ -28,6 +31,19 @@ import '../edit_person/edit_person_screen_harness.dart'
     show FakeHobbiesDAO, FakeMetadataDAO;
 
 class FakeFunctionsService extends Fake implements FunctionsService {}
+
+class FakeEditObjectMetadataDAO extends FakeMetadataDAO {
+  final FakeStudyYearsDAO fakeStudyYears;
+
+  FakeEditObjectMetadataDAO({
+    required super.db,
+    required super.fakePersonTypes,
+    required this.fakeStudyYears,
+  }) : super(fakeHobbies: FakeHobbiesDAO(), fakeDistricts: FakeDistrictsDAO());
+
+  @override
+  StudyYearsDAO get studyYears => fakeStudyYears;
+}
 
 class EditObjectScreenHarness {
   static const User userWhoWritesEverything = User(
@@ -47,6 +63,8 @@ class EditObjectScreenHarness {
   final FakeServicesDAO servicesDAO = FakeServicesDAO();
   final FakeGroupsDAO groupsDAO = FakeGroupsDAO();
   final FakeMeetingsDAO meetingsDAO = FakeMeetingsDAO();
+  final FakeClassesDAO classesDAO = FakeClassesDAO();
+  final FakeStudyYearsDAO studyYearsDAO = FakeStudyYearsDAO();
   final FakeLoggingService logging = FakeLoggingService();
 
   User currentUser = userWhoWritesEverything;
@@ -69,12 +87,12 @@ class EditObjectScreenHarness {
     when(() => databaseService.services).thenReturn(servicesDAO);
     when(() => databaseService.groups).thenReturn(groupsDAO);
     when(() => databaseService.meetings).thenReturn(meetingsDAO);
+    when(() => databaseService.classes).thenReturn(classesDAO);
     when(() => databaseService.metadata).thenReturn(
-      FakeMetadataDAO(
+      FakeEditObjectMetadataDAO(
         db: databaseService,
         fakePersonTypes: personTypesDAO,
-        fakeHobbies: FakeHobbiesDAO(),
-        fakeDistricts: FakeDistrictsDAO(),
+        fakeStudyYears: studyYearsDAO,
       ),
     );
 

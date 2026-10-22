@@ -1,6 +1,7 @@
 export 'domain/address/address_field_error.dart';
 export 'domain/address/address_suggestion.dart';
 export 'domain/area_edit/area_edit_intent.dart';
+export 'domain/class_edit/class_edit_intent.dart';
 export 'domain/family_edit/family_edit_intent.dart';
 export 'domain/family_edit/family_relatives_load_state.dart';
 export 'domain/group_edit/group_edit_intent.dart';
