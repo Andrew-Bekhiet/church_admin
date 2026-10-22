@@ -3,10 +3,8 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 export 'edit_object_data/edit_class.dart';
-export 'edit_object_data/edit_family.dart';
 export 'edit_object_data/edit_group.dart';
 export 'edit_object_data/edit_service.dart';
-export 'edit_object_data/edit_store.dart';
 
 class EditObjectData<T extends ViewableWithID> extends StatefulWidget {
   static bool defaultCanDelete(EditObjectController controller) =>

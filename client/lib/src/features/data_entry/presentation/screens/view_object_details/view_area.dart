@@ -249,7 +249,7 @@ class _ViewAreaState extends State<ViewArea> {
               } else if (newIndex == 1) {
                 unawaited(
                   EditFamilyRoute(
-                    withAddress: Address(area: area),
+                    intent: CreateFamilyAtAddress(address: Address(area: area)),
                   ).push(context),
                 );
               } else if (newIndex == 2) {

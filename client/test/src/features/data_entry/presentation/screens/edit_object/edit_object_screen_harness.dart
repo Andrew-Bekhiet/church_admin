@@ -8,18 +8,26 @@ import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../fakes/fake_areas_dao.dart';
+import '../../../../../fakes/fake_districts_dao.dart';
 import '../../../../../fakes/fake_feature_flags_repo.dart';
+import '../../../../../fakes/fake_geocoder.dart';
 import '../../../../../fakes/fake_logging_service.dart';
+import '../../../../../fakes/fake_person_types_dao.dart';
+import '../../../../../fakes/fake_stores_dao.dart';
 import '../../../../../fakes/fake_streets_dao.dart';
+import '../../../../../fakes/in_memory_families_dao.dart';
 import '../../../../../fakes/mock_auth_bloc.dart';
 import '../../../../../fakes/mock_database_service.dart';
 import '../../../../../fakes/mock_image_url_cache_service.dart';
 import '../../../../../fakes/mock_user_preferences_service.dart';
 import '../../../../../fakes/mock_viewable_object_service.dart';
+import '../edit_person/edit_person_screen_harness.dart'
+    show FakeHobbiesDAO, FakeMetadataDAO;
 
 class FakeFunctionsService extends Fake implements FunctionsService {}
 
 class EditObjectScreenHarness {
+  static const String discardDialogTitle = 'هل تريد تجاهل التغييرات؟';
   static const User userWhoWritesEverything = User(
     uid: 'user-id',
     name: 'مستخدم',
@@ -29,23 +37,32 @@ class EditObjectScreenHarness {
     }),
   );
 
-  final FakeAreasDAO areasDAO = FakeAreasDAO();
-  final FakeStreetsDAO streetsDAO = FakeStreetsDAO();
+  final FakeAreasDAO areas = FakeAreasDAO();
+  final FakeStreetsDAO streets = FakeStreetsDAO();
+  final InMemoryFamiliesDAO families = InMemoryFamiliesDAO();
+  final FakeStoresDAO stores = FakeStoresDAO();
+  final FakePersonTypesDAO personTypes = FakePersonTypesDAO();
   final FakeLoggingService logging = FakeLoggingService();
 
-  late KaiselRouter<AppRoute> _router;
-
   Finder get nameField => find.byKey(EditObjectScaffoldKeys.nameField);
-
-  List<AppRoute> get routeStack => _router.stack;
 
   void install() {
     final authBloc = MockAuthBloc();
     when(() => authBloc.currentUserData).thenReturn(userWhoWritesEverything);
 
     final databaseService = MockDatabaseService();
-    when(() => databaseService.areas).thenReturn(areasDAO);
-    when(() => databaseService.streets).thenReturn(streetsDAO);
+    when(() => databaseService.areas).thenReturn(areas);
+    when(() => databaseService.streets).thenReturn(streets);
+    when(() => databaseService.families).thenReturn(families);
+    when(() => databaseService.stores).thenReturn(stores);
+    when(() => databaseService.metadata).thenReturn(
+      FakeMetadataDAO(
+        db: databaseService,
+        fakePersonTypes: personTypes,
+        fakeHobbies: FakeHobbiesDAO(),
+        fakeDistricts: FakeDistrictsDAO(),
+      ),
+    );
 
     registerFallbackValue(const FunctionsObjectImageInfo('areas', 'fallback'));
     final imageUrls = MockImageUrlCacheService();
@@ -71,6 +88,7 @@ class EditObjectScreenHarness {
       viewableObjectServiceProvider.overrideWithValue(viewableObjects),
       loggingServiceProvider.overrideWithValue(logging),
       functionsServiceProvider.overrideWithValue(FakeFunctionsService()),
+      geocoderProvider.overrideWithValue(FakeGeocoder()),
     ]);
   }
 
@@ -78,18 +96,31 @@ class EditObjectScreenHarness {
     WidgetTester tester,
     AppRoute editRoute, {
     bool withPageBelow = false,
+    bool settle = true,
   }) async {
-    final routerConfig = KaiselRouterConfig<AppRoute>(
-      initial: const HomeScreenRoute(),
-      builder: (context, route) =>
-          route == editRoute ? route.build(context) : const Scaffold(),
+    Widget openButtonPage(BuildContext context) => Scaffold(
+      body: TextButton(
+        onPressed: () => unawaited(editRoute.push(context)),
+        child: const Text('open'),
+      ),
     );
-    addTearDown(routerConfig.dispose);
-    _router = routerConfig.router;
+
+    final router = KaiselRouterConfig<AppRoute>(
+      initial: const HomeScreenRoute(),
+      builder: (context, route) => switch (route) {
+        ViewAreaRoute(:final id) ||
+        ViewStreetRoute(:final id) ||
+        ViewFamilyRoute(:final id) ||
+        ViewStoreRoute(:final id) => Text('viewing $id'),
+        HomeScreenRoute() || SettingsRoute() => openButtonPage(context),
+        _ => route.build(context),
+      },
+    );
+    addTearDown(router.dispose);
 
     await tester.pumpWidget(
       MaterialApp.router(
-        routerConfig: routerConfig,
+        routerConfig: router,
         locale: const Locale('ar', 'EG'),
         supportedLocales: const [Locale('ar', 'EG')],
         localizationsDelegates: const [
@@ -101,11 +132,29 @@ class EditObjectScreenHarness {
         ),
       ),
     );
-    if (withPageBelow) unawaited(_router.push(const SettingsRoute()));
-    unawaited(_router.push(editRoute));
+    if (withPageBelow) {
+      unawaited(router.router.push(const SettingsRoute()));
+      await tester.pumpAndSettle();
+    }
+    await tester.tap(find.text('open'));
+    if (!settle) {
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 1));
+
+      return;
+    }
     await tester.pumpAndSettle();
     await tester.drag(find.byType(Scrollable).first, const Offset(0, -700));
     await tester.pumpAndSettle();
+  }
+
+  Future<void> scrollTo(WidgetTester tester, Finder finder) async {
+    await tester.scrollUntilVisible(
+      finder,
+      100,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pump();
   }
 
   Future<void> pressBack(WidgetTester tester) async {

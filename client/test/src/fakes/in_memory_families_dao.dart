@@ -1,9 +1,28 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class InMemoryFamiliesDAO extends Fake implements FamiliesDAO {
+import 'fake_object_writes.dart';
+
+class InMemoryFamiliesDAO extends Fake
+    with FakeObjectWrites<Family>
+    implements FamiliesDAO {
   final savedFamilies = <Family>[];
   List<Family> families = const [];
+  Family? relatedFamilies;
+  Completer<void>? relatedFamiliesGate;
+  Object? relatedFamiliesError;
+
+  @override
+  PaginatableStreamBase<Family> streamAll({
+    Stream<String?>? searchQuery,
+    Stream<List<Filter>>? where,
+    Stream<List<OrderBy>>? orderBy,
+    Stream<FieldMetadata?>? secondLineField,
+  }) => PaginatableStream.simple(
+    factory: (_) => Stream.value(PaginatableStreamResponse(data: families)),
+  );
 
   @override
   PaginatableStreamBase<Family> streamAllWithAddresses({
@@ -15,8 +34,12 @@ class InMemoryFamiliesDAO extends Fake implements FamiliesDAO {
   );
 
   @override
-  Future<Family?> getFamilyRelatedFamilies({required String familyId}) async =>
-      null;
+  Future<Family?> getFamilyRelatedFamilies({required String familyId}) async {
+    await relatedFamiliesGate?.future;
+    if (relatedFamiliesError case final error?) throw error;
+
+    return relatedFamilies;
+  }
 
   @override
   Future<Family?> updateFamily({
