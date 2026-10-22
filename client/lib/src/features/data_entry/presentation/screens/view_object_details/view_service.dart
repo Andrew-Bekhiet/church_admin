@@ -220,7 +220,7 @@ class _ViewServiceState extends State<ViewService> {
       editButtonBuilder: (context, service) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditServiceRoute(
-          service: service,
+          intent: UpdateService(service: service),
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
@@ -250,7 +250,7 @@ class _ViewServiceState extends State<ViewService> {
               } else if (newIndex == 1) {
                 unawaited(
                   EditGroupRoute(
-                    withService: service,
+                    intent: CreateGroupInService(service: service),
                   ).push(context),
                 );
               } else if (newIndex == 2) {

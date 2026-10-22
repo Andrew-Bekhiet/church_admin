@@ -11,8 +11,11 @@ import '../../../../../fakes/fake_areas_dao.dart';
 import '../../../../../fakes/fake_districts_dao.dart';
 import '../../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../../fakes/fake_geocoder.dart';
+import '../../../../../fakes/fake_groups_dao.dart';
 import '../../../../../fakes/fake_logging_service.dart';
+import '../../../../../fakes/fake_meetings_dao.dart';
 import '../../../../../fakes/fake_person_types_dao.dart';
+import '../../../../../fakes/fake_services_dao.dart';
 import '../../../../../fakes/fake_stores_dao.dart';
 import '../../../../../fakes/fake_streets_dao.dart';
 import '../../../../../fakes/in_memory_families_dao.dart';
@@ -41,6 +44,9 @@ class EditObjectScreenHarness {
   final InMemoryFamiliesDAO familiesDAO = InMemoryFamiliesDAO();
   final FakeStoresDAO storesDAO = FakeStoresDAO();
   final FakePersonTypesDAO personTypesDAO = FakePersonTypesDAO();
+  final FakeServicesDAO servicesDAO = FakeServicesDAO();
+  final FakeGroupsDAO groupsDAO = FakeGroupsDAO();
+  final FakeMeetingsDAO meetingsDAO = FakeMeetingsDAO();
   final FakeLoggingService logging = FakeLoggingService();
 
   User currentUser = userWhoWritesEverything;
@@ -60,6 +66,9 @@ class EditObjectScreenHarness {
     when(() => databaseService.streets).thenReturn(streetsDAO);
     when(() => databaseService.families).thenReturn(familiesDAO);
     when(() => databaseService.stores).thenReturn(storesDAO);
+    when(() => databaseService.services).thenReturn(servicesDAO);
+    when(() => databaseService.groups).thenReturn(groupsDAO);
+    when(() => databaseService.meetings).thenReturn(meetingsDAO);
     when(() => databaseService.metadata).thenReturn(
       FakeMetadataDAO(
         db: databaseService,

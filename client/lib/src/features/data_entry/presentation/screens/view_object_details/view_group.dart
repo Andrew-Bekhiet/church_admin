@@ -155,7 +155,7 @@ class _ViewGroupState extends State<ViewGroup> {
       editButtonBuilder: (context, group) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditGroupRoute(
-          group: group,
+          intent: UpdateGroup(group: group),
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
