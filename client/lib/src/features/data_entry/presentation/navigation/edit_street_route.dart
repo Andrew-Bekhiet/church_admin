@@ -3,19 +3,18 @@ part of 'package:church_admin/src/core/services/router/app_route.dart';
 class EditStreetRoute extends HomeChildRoute {
   static const String routePath = '/edit_street';
 
-  final Street? street;
-  final Area? withArea;
+  final StreetEditIntent? intent;
 
   @override
   String get path => routePath;
 
   @override
-  List<Object?> get props => [street, withArea];
+  List<Object?> get props => [intent];
 
-  const EditStreetRoute({this.street, this.withArea});
+  const EditStreetRoute({this.intent});
 
   @override
   Widget build(BuildContext context) {
-    return EditStreet(street: street, withArea: withArea);
+    return EditStreetScreen(intent: intent ?? const CreateBlankStreet());
   }
 }

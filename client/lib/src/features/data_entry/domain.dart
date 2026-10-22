@@ -16,3 +16,4 @@ export 'domain/person_edit/person_rule_violation_section.dart';
 export 'domain/person_edit/person_save_outcome.dart';
 export 'domain/person_edit/person_save_progress.dart';
 export 'domain/person_edit/photo_change.dart';
+export 'domain/street_edit/street_edit_intent.dart';

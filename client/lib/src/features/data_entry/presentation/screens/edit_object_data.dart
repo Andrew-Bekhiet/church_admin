@@ -7,7 +7,6 @@ export 'edit_object_data/edit_family.dart';
 export 'edit_object_data/edit_group.dart';
 export 'edit_object_data/edit_service.dart';
 export 'edit_object_data/edit_store.dart';
-export 'edit_object_data/edit_street.dart';
 
 class EditObjectData<T extends ViewableWithID> extends StatefulWidget {
   static bool defaultCanDelete(EditObjectController controller) =>

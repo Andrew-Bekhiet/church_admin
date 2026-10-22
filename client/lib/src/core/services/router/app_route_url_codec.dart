@@ -27,7 +27,7 @@ class AppRouteUrlCodec extends KaiselStackCodec<AppRoute> {
       EditGroupRoute(group: ID(:final id)) ||
       EditClassRoute(class$: ID(:final id)) ||
       EditFamilyRoute(family: ID(:final id)) ||
-      EditStreetRoute(street: ID(:final id)) ||
+      EditStreetRoute(intent: UpdateStreet(street: ID(:final id))) ||
       EditStoreRoute(store: ID(:final id)) ||
       EditUserRoute(intent: UpdateUser(user: User(uid: final id))) ||
       PersonAnalysisRoute(person: ID(:final id)) ||

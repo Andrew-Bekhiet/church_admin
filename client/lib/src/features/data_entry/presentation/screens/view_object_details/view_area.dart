@@ -243,7 +243,7 @@ class _ViewAreaState extends State<ViewArea> {
               if (newIndex == 0) {
                 unawaited(
                   EditStreetRoute(
-                    withArea: area,
+                    intent: CreateStreetInArea(area: area),
                   ).push(context),
                 );
               } else if (newIndex == 1) {

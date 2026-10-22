@@ -27,4 +27,5 @@ export 'application/person_edit/person_metadata_catalog.dart';
 export 'application/person_edit/person_pastoral_dates_form_controller.dart';
 export 'application/person_edit/person_work_form_controller.dart';
 export 'application/phone_number_service.dart';
+export 'application/street_edit/street_form_controller.dart';
 export 'application/viewable_object_service.dart';
