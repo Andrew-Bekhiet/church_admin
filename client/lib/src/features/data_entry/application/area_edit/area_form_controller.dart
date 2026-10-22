@@ -3,6 +3,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:uuid/uuid.dart' show Uuid;
 
 class AreaFormController extends ObjectFormController<Area> {
+  @override
+  final Area? savedObject;
+
   late final bounds = AdvancedFieldController<Polygon?, ObjectEditError>(
     initialValue: initialDraft.bounds,
   );
@@ -13,11 +16,11 @@ class AreaFormController extends ObjectFormController<Area> {
   AreaFormController({
     required AreaEditIntent intent,
     required super.currentUserId,
-  }) : super(
-         savedObject: switch (intent) {
-           UpdateArea(:final area) => area,
-           CreateArea() => null,
-         },
+  }) : savedObject = switch (intent) {
+         UpdateArea(:final area) => area,
+         CreateArea() => null,
+       },
+       super(
          initialDraft: switch (intent) {
            UpdateArea(:final area) => area,
            final CreateArea create => create.draftArea(const Uuid().v4()),

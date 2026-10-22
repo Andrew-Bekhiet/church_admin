@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -48,21 +50,30 @@ void main() {
   blocTest<ObjectSaveCubit<Family>, ObjectSaveProgress>(
     'moving a family out of sight waits for confirmation before saving',
     build: cubitMovingFamilyToMaadi,
-    act: (cubit) async => outcome = await cubit.submit(),
-    expect: () => const [SavingObject(), AwaitingObjectMoveConfirmation()],
-    verify: (_) {
-      expect(outcome, isA<ObjectNeedsMoveConfirmation<Family>>());
+    act: (cubit) async {
+      final confirmation = Completer<bool>();
+      final saving = cubit.submit(
+        confirmMoveOutOfSight: () => confirmation.future,
+      );
+      await pumpEventQueue();
       expect(families.updates, isEmpty);
+      confirmation.complete(true);
+      outcome = await saving;
     },
+    expect: () => const [
+      SavingObject(),
+      AwaitingObjectMoveConfirmation(),
+      SavingObject(),
+      NotSavingObject(),
+    ],
   );
 
   blocTest<ObjectSaveCubit<Family>, ObjectSaveProgress>(
     'a confirmed move is saved and reported as moved',
     build: cubitMovingFamilyToMaadi,
-    act: (cubit) async {
-      await cubit.submit();
-      outcome = await cubit.submit(confirmedMove: true);
-    },
+    act: (cubit) async => outcome = await cubit.submit(
+      confirmMoveOutOfSight: () async => true,
+    ),
     verify: (_) {
       expect((outcome as ObjectSaved<Family>).movedOutOfSight, isTrue);
       expect(families.updates.single.editedObject.address?.area, maadi);
@@ -70,13 +81,29 @@ void main() {
   );
 
   blocTest<ObjectSaveCubit<Family>, ObjectSaveProgress>(
-    'a declined move lets the user save again',
+    'a declined move saves nothing and lets the user save again',
     build: cubitMovingFamilyToMaadi,
-    act: (cubit) async {
-      await cubit.submit();
-      cubit.declineMove();
+    act: (cubit) async => outcome = await cubit.submit(
+      confirmMoveOutOfSight: () async => false,
+    ),
+    expect: () => const [
+      SavingObject(),
+      AwaitingObjectMoveConfirmation(),
+      NotSavingObject(),
+    ],
+    verify: (_) {
+      expect(outcome, isA<ObjectMoveOutOfSightDeclined<Family>>());
+      expect(families.updates, isEmpty);
     },
-    skip: 2,
-    expect: () => const [NotSavingObject()],
+  );
+
+  blocTest<ObjectSaveCubit<Family>, ObjectSaveProgress>(
+    'a move nobody can confirm is declined',
+    build: cubitMovingFamilyToMaadi,
+    act: (cubit) async => outcome = await cubit.submit(),
+    verify: (_) {
+      expect(outcome, isA<ObjectMoveOutOfSightDeclined<Family>>());
+      expect(families.updates, isEmpty);
+    },
   );
 }

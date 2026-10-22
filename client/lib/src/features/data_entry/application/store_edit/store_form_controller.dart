@@ -3,6 +3,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:uuid/uuid.dart' show Uuid;
 
 class StoreFormController extends ObjectFormController<Store> {
+  @override
+  final Store? savedObject;
+
   final FamiliesDAO _familiesDAO;
 
   late final AddressFormController address;
@@ -19,11 +22,11 @@ class StoreFormController extends ObjectFormController<Store> {
     required this._familiesDAO,
     required AddressFormServices addressServices,
     required super.currentUserId,
-  }) : super(
-         savedObject: switch (intent) {
-           UpdateStore(:final store) => store,
-           CreateStore() => null,
-         },
+  }) : savedObject = switch (intent) {
+         UpdateStore(:final store) => store,
+         CreateStore() => null,
+       },
+       super(
          initialDraft: switch (intent) {
            UpdateStore(:final store) => store,
            final CreateStore create => create.draftStore(const Uuid().v4()),

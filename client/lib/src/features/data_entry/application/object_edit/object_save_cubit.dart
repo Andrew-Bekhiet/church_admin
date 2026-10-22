@@ -18,16 +18,12 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
     this._outOfSight,
   }) : super(const NotSavingObject());
 
-  Future<ObjectSaveOutcome<T>> submit({bool confirmedMove = false}) async {
-    final canStart = switch (state) {
-      NotSavingObject() => true,
-      AwaitingObjectMoveConfirmation() => confirmedMove,
-      DeletingObject() || SavingObject() || UploadingObjectPhoto() => false,
-    };
-    if (!canStart) return const ObjectSaveAlreadyInProgress();
+  Future<ObjectSaveOutcome<T>> submit({
+    Future<bool> Function()? confirmMoveOutOfSight,
+  }) async {
+    if (state is! NotSavingObject) return const ObjectSaveAlreadyInProgress();
 
     emit(const SavingObject());
-    var keepAwaitingMoveConfirmation = false;
     T? attemptedObject;
     try {
       final isValid = await _form.validate();
@@ -38,11 +34,15 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
 
       final object = attemptedObject = _form.toObject();
       final movesOutOfSight = _movesOutOfSight(object);
-      if (movesOutOfSight && !confirmedMove) {
-        keepAwaitingMoveConfirmation = true;
+      if (movesOutOfSight) {
         emit(const AwaitingObjectMoveConfirmation());
+        final moveConfirmed = await confirmMoveOutOfSight?.call() ?? false;
+        if (_editorWasClosed) {
+          return const ObjectSaveAbandonedBecauseEditorClosed();
+        }
+        if (!moveConfirmed) return const ObjectMoveOutOfSightDeclined();
 
-        return const ObjectNeedsMoveConfirmation();
+        emit(const SavingObject());
       }
 
       return await _save(object, movedOutOfSight: movesOutOfSight);
@@ -57,16 +57,8 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
         attemptedObject: attemptedObject ?? _form.toObject(),
       );
     } finally {
-      if (!isClosed && !keepAwaitingMoveConfirmation) {
-        emit(const NotSavingObject());
-      }
+      if (!isClosed) emit(const NotSavingObject());
     }
-  }
-
-  void declineMove() {
-    if (state is! AwaitingObjectMoveConfirmation) return;
-
-    emit(const NotSavingObject());
   }
 
   Future<bool> tryDeleteSavedObject() async {

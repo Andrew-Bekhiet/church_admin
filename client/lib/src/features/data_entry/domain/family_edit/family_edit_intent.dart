@@ -70,10 +70,7 @@ final class CreateFamilyAtAddress extends CreateFamily {
   Family draftFamily(String id) => _draft(id, address: address);
 
   @override
-  Json toJson() => {
-    ...EditIntentJson.ofKind(kind),
-    EditIntentJson.subjectKey: address.toJson(),
-  };
+  Json toJson() => EditIntentJson.ofKind(kind, address);
 }
 
 final class CreateChildFamilyOf extends CreateFamily {

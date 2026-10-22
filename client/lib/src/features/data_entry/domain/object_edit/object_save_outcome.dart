@@ -6,8 +6,8 @@ final class InvalidObject<T> extends ObjectSaveOutcome<T> {
   const InvalidObject();
 }
 
-final class ObjectNeedsMoveConfirmation<T> extends ObjectSaveOutcome<T> {
-  const ObjectNeedsMoveConfirmation();
+final class ObjectMoveOutOfSightDeclined<T> extends ObjectSaveOutcome<T> {
+  const ObjectMoveOutOfSightDeclined();
 }
 
 final class ObjectSaved<T> extends ObjectSaveOutcome<T> {

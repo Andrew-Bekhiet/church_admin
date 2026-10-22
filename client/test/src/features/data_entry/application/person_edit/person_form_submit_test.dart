@@ -111,21 +111,41 @@ void main() {
     });
 
     test(
-      'moving the person out of sight asks for confirmation first',
+      'moving the person out of sight asks for confirmation before saving',
       () async {
         final controller = await servantMovingPersonOutOfSight();
+        var updatesWhenAsked = -1;
 
-        final outcome = await controller.submit();
+        await controller.submit(
+          confirmMoveOutOfSight: () async {
+            updatesWhenAsked = fixture.persons.updatedPeople.length;
 
-        expect(outcome, isA<NeedsMoveConfirmation>());
-        expect(fixture.persons.updatedPeople, isEmpty);
+            return true;
+          },
+        );
+
+        expect(updatesWhenAsked, 0);
       },
     );
+
+    test('a declined move saves nothing', () async {
+      final controller = await servantMovingPersonOutOfSight();
+
+      final outcome = await controller.submit(
+        confirmMoveOutOfSight: () async => false,
+      );
+
+      expect(outcome, isA<MoveOutOfSightDeclined>());
+      expect(fixture.persons.updatedPeople, isEmpty);
+      expect(controller.saveProgress.value, isA<NotSaving>());
+    });
 
     test('a confirmed move is saved and reported as moved', () async {
       final controller = await servantMovingPersonOutOfSight();
 
-      final outcome = await controller.submit(confirmedMove: true);
+      final outcome = await controller.submit(
+        confirmMoveOutOfSight: () async => true,
+      );
 
       expect(fixture.persons.updatedPeople, hasLength(1));
       expect(

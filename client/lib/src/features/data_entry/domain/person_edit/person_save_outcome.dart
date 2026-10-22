@@ -16,8 +16,8 @@ final class MembershipsNotLoadedYet extends PersonSaveOutcome {
   const MembershipsNotLoadedYet();
 }
 
-final class NeedsMoveConfirmation extends PersonSaveOutcome {
-  const NeedsMoveConfirmation();
+final class MoveOutOfSightDeclined extends PersonSaveOutcome {
+  const MoveOutOfSightDeclined();
 }
 
 final class PersonSaved extends PersonSaveOutcome {

@@ -170,23 +170,13 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
     return result?.geolocation;
   }
 
-  Future<void> _save({bool confirmedMove = false}) async {
-    final outcome = await _form.submit(confirmedMove: confirmedMove);
+  Future<void> _save() async {
+    final outcome = await _form.submit(
+      confirmMoveOutOfSight: _confirmMoveOutOfSight,
+    );
     if (!mounted) return;
 
     switch (outcome) {
-      case NeedsMoveConfirmation():
-        final confirmed = await showDialog<bool>(
-          context: context,
-          builder: (context) => const MoveOutOfSightConfirmationDialog(),
-        );
-        if (!mounted) return;
-        if (confirmed ?? false) {
-          await _save(confirmedMove: true);
-        } else {
-          _form.declineMove();
-        }
-
       case PersonSaved(:final person, :final movedOutOfSight):
         _leaveAfterSave(
           person,
@@ -252,9 +242,20 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
       case InvalidPerson():
         _focusFirstInvalidField();
 
-      case SaveAlreadyInProgress() || SaveAbandonedBecauseFormWasDisposed():
+      case MoveOutOfSightDeclined() ||
+          SaveAlreadyInProgress() ||
+          SaveAbandonedBecauseFormWasDisposed():
         return;
     }
+  }
+
+  Future<bool> _confirmMoveOutOfSight() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => const MoveOutOfSightConfirmationDialog(),
+    );
+
+    return confirmed ?? false;
   }
 
   void _focusFirstInvalidField() {

@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart' show Uuid;
 
 class FamilyFormController extends ObjectFormController<Family> {
+  Family? _savedFamily;
   final FamiliesDAO _familiesDAO;
 
   late final AddressFormController address;
@@ -54,16 +55,19 @@ class FamilyFormController extends ObjectFormController<Family> {
 
   Family get _relativesBaseline => savedObject ?? initialDraft;
 
+  @override
+  Family? get savedObject => _savedFamily;
+
   FamilyFormController({
     required FamilyEditIntent intent,
     required this._familiesDAO,
     required AddressFormServices addressServices,
     required super.currentUserId,
-  }) : super(
-         savedObject: switch (intent) {
-           UpdateFamily(:final family) => family,
-           CreateFamily() => null,
-         },
+  }) : _savedFamily = switch (intent) {
+         UpdateFamily(:final family) => family,
+         CreateFamily() => null,
+       },
+       super(
          initialDraft: switch (intent) {
            UpdateFamily(:final family) => family,
            final CreateFamily create => create.draftFamily(const Uuid().v4()),
@@ -107,7 +111,7 @@ class FamilyFormController extends ObjectFormController<Family> {
       parents: loaded.parents ?? saved.parents,
       children: loaded.children ?? saved.children,
     );
-    savedObject = withRelatives;
+    _savedFamily = withRelatives;
 
     _showLoadedRelatives(
       parents,

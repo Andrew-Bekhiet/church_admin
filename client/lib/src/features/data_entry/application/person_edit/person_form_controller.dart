@@ -186,13 +186,10 @@ class PersonFormController extends AdvancedFormController {
     return fieldsAreValid && ruleViolations.isEmpty;
   }
 
-  Future<PersonSaveOutcome> submit({bool confirmedMove = false}) async {
-    final canStart = switch (_saveProgress.value) {
-      NotSaving() => true,
-      AwaitingMoveConfirmation() => confirmedMove,
-      SavingPerson() || UploadingPhoto() => false,
-    };
-    if (!canStart) return const SaveAlreadyInProgress();
+  Future<PersonSaveOutcome> submit({
+    Future<bool> Function()? confirmMoveOutOfSight,
+  }) async {
+    if (_saveProgress.value is! NotSaving) return const SaveAlreadyInProgress();
 
     if (!isCreate) {
       switch (memberships.loadState.value) {
@@ -208,7 +205,6 @@ class PersonFormController extends AdvancedFormController {
     }
 
     _saveProgress.value = const SavingPerson();
-    var stayAwaitingMoveConfirmation = false;
     Person? submittedPerson;
     try {
       final isValid = await validate();
@@ -219,11 +215,13 @@ class PersonFormController extends AdvancedFormController {
       final initial = savedPerson;
       final movesOutOfSight =
           initial != null && _outOfSight.isMovedOutOfSight(initial, person);
-      if (movesOutOfSight && !confirmedMove) {
-        stayAwaitingMoveConfirmation = true;
+      if (movesOutOfSight) {
         _saveProgress.value = const AwaitingMoveConfirmation();
+        final moveConfirmed = await confirmMoveOutOfSight?.call() ?? false;
+        if (isDisposed) return const SaveAbandonedBecauseFormWasDisposed();
+        if (!moveConfirmed) return const MoveOutOfSightDeclined();
 
-        return const NeedsMoveConfirmation();
+        _saveProgress.value = const SavingPerson();
       }
 
       final saved = switch (initial) {
@@ -244,16 +242,8 @@ class PersonFormController extends AdvancedFormController {
         attemptedPerson: submittedPerson ?? toPerson(),
       );
     } finally {
-      if (!isDisposed && !stayAwaitingMoveConfirmation) {
-        _saveProgress.value = const NotSaving();
-      }
+      if (!isDisposed) _saveProgress.value = const NotSaving();
     }
-  }
-
-  void declineMove() {
-    if (_saveProgress.value is! AwaitingMoveConfirmation) return;
-
-    _saveProgress.value = const NotSaving();
   }
 
   Future<void> deletePerson() async {

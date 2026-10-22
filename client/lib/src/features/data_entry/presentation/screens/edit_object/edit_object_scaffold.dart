@@ -155,23 +155,13 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
     );
   }
 
-  Future<void> _save({bool confirmedMove = false}) async {
-    final outcome = await widget.saveCubit.submit(confirmedMove: confirmedMove);
+  Future<void> _save() async {
+    final outcome = await widget.saveCubit.submit(
+      confirmMoveOutOfSight: _confirmMoveOutOfSight,
+    );
     if (!mounted) return;
 
     switch (outcome) {
-      case ObjectNeedsMoveConfirmation():
-        final confirmed = await showDialog<bool>(
-          context: context,
-          builder: (context) => const MoveOutOfSightConfirmationDialog(),
-        );
-        if (!mounted) return;
-        if (confirmed ?? false) {
-          await _save(confirmedMove: true);
-        } else {
-          widget.saveCubit.declineMove();
-        }
-
       case ObjectSaved(:final object, :final movedOutOfSight):
         _leaveAfterSave(
           object,
@@ -223,10 +213,20 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
             .firstWhereOrNull((field) => field.value.isInvalid)
             ?.focus();
 
-      case ObjectSaveAlreadyInProgress() ||
+      case ObjectMoveOutOfSightDeclined() ||
+          ObjectSaveAlreadyInProgress() ||
           ObjectSaveAbandonedBecauseEditorClosed():
         return;
     }
+  }
+
+  Future<bool> _confirmMoveOutOfSight() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => const MoveOutOfSightConfirmationDialog(),
+    );
+
+    return confirmed ?? false;
   }
 
   void _leaveAfterSave(
