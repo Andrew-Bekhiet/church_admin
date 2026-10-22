@@ -1,53 +1,42 @@
 import 'package:church_admin/church_admin.dart';
 
 sealed class PersonEditIntent extends SerializableExtra {
-  static const String _kindKey = 'kind';
-  static const String _subjectKey = 'subject';
-
-  static Json _subjectJson(Object? kind, Object? subject) => switch (subject) {
-    final Map<Object?, Object?> map => Map<String, Object?>.from(map),
-    _ => throw FormatException('PersonEditIntent kind "$kind" has no subject'),
-  };
-
   @override
   String get typeName => 'PersonEditIntent';
 
   const PersonEditIntent();
 
   factory PersonEditIntent.fromJson(Json json) {
-    final kind = json[_kindKey];
-    final subject = json[_subjectKey];
+    late final subject = EditIntentJson.subjectOf(
+      json,
+      intentName: 'PersonEditIntent',
+    );
 
-    return switch (kind) {
+    return switch (json[EditIntentJson.kindKey]) {
       UpdatePerson.kind => UpdatePerson(
-        person: Person.fromJson(_subjectJson(kind, subject)),
+        person: Person.fromJson(subject),
       ),
       CreatePersonInFamily.kind => CreatePersonInFamily(
-        family: Family.fromJson(_subjectJson(kind, subject)),
+        family: Family.fromJson(subject),
       ),
       CreatePersonOnStreet.kind => CreatePersonOnStreet(
-        street: Street.fromJson(_subjectJson(kind, subject)),
+        street: Street.fromJson(subject),
       ),
       CreatePersonInArea.kind => CreatePersonInArea(
-        area: Area.fromJson(_subjectJson(kind, subject)),
+        area: Area.fromJson(subject),
       ),
       CreatePersonInService.kind => CreatePersonInService(
-        service: Service.fromJson(_subjectJson(kind, subject)),
+        service: Service.fromJson(subject),
       ),
       CreatePersonInGroup.kind => CreatePersonInGroup(
-        group: Group.fromJson(_subjectJson(kind, subject)),
+        group: Group.fromJson(subject),
       ),
       CreatePersonInClass.kind => CreatePersonInClass(
-        class$: Class.fromJson(_subjectJson(kind, subject)),
+        class$: Class.fromJson(subject),
       ),
       _ => const CreateBlankPerson(),
     };
   }
-
-  Json _toJsonOfKind(String kind, [ToJson? subject]) => {
-    _kindKey: kind,
-    if (subject != null) _subjectKey: subject.toJson(),
-  };
 }
 
 sealed class CreatePerson extends PersonEditIntent {
@@ -89,7 +78,7 @@ final class CreatePersonInArea extends CreatePerson {
   Person draftPerson(String id) => _draft(id, address: Address(area: area));
 
   @override
-  Json toJson() => _toJsonOfKind(kind, area);
+  Json toJson() => EditIntentJson.ofKind(kind, area);
 }
 
 final class CreatePersonInClass extends CreatePerson {
@@ -108,7 +97,7 @@ final class CreatePersonInClass extends CreatePerson {
   );
 
   @override
-  Json toJson() => _toJsonOfKind(kind, class$);
+  Json toJson() => EditIntentJson.ofKind(kind, class$);
 }
 
 final class CreatePersonInFamily extends CreatePerson {
@@ -122,7 +111,7 @@ final class CreatePersonInFamily extends CreatePerson {
   Person draftPerson(String id) => _draft(id, family: family);
 
   @override
-  Json toJson() => _toJsonOfKind(kind, family);
+  Json toJson() => EditIntentJson.ofKind(kind, family);
 }
 
 final class CreatePersonInGroup extends CreatePerson {
@@ -142,7 +131,7 @@ final class CreatePersonInGroup extends CreatePerson {
   );
 
   @override
-  Json toJson() => _toJsonOfKind(kind, group);
+  Json toJson() => EditIntentJson.ofKind(kind, group);
 }
 
 final class CreatePersonInService extends CreatePerson {
@@ -156,7 +145,7 @@ final class CreatePersonInService extends CreatePerson {
   Person draftPerson(String id) => _draft(id, services: [service]);
 
   @override
-  Json toJson() => _toJsonOfKind(kind, service);
+  Json toJson() => EditIntentJson.ofKind(kind, service);
 }
 
 final class CreatePersonOnStreet extends CreatePerson {
@@ -170,7 +159,7 @@ final class CreatePersonOnStreet extends CreatePerson {
   Person draftPerson(String id) => _draft(id, address: Address(street: street));
 
   @override
-  Json toJson() => _toJsonOfKind(kind, street);
+  Json toJson() => EditIntentJson.ofKind(kind, street);
 }
 
 final class CreateBlankPerson extends CreatePerson {
@@ -182,7 +171,7 @@ final class CreateBlankPerson extends CreatePerson {
   Person draftPerson(String id) => _draft(id);
 
   @override
-  Json toJson() => _toJsonOfKind(kind);
+  Json toJson() => EditIntentJson.ofKind(kind);
 }
 
 final class UpdatePerson extends PersonEditIntent {
@@ -208,5 +197,5 @@ final class UpdatePerson extends PersonEditIntent {
   const UpdatePerson({required this.person});
 
   @override
-  Json toJson() => _toJsonOfKind(kind, person);
+  Json toJson() => EditIntentJson.ofKind(kind, person);
 }

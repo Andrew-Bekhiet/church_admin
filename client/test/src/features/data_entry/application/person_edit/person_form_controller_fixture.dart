@@ -5,8 +5,8 @@ import '../../../../fakes/fake_areas_dao.dart';
 import '../../../../fakes/fake_districts_dao.dart';
 import '../../../../fakes/fake_geocoder.dart';
 import '../../../../fakes/fake_logging_service.dart';
-import '../../../../fakes/fake_person_photo_uploader.dart';
 import '../../../../fakes/fake_persons_dao.dart';
+import '../../../../fakes/fake_photo_uploader.dart';
 import '../../../../fakes/fake_streets_dao.dart';
 import '../../../../fakes/in_memory_families_dao.dart';
 
@@ -18,7 +18,7 @@ class PersonFormControllerFixture {
   static const Service kindergarten = Service(id: 'kg', name: 'حضانة');
 
   final FakePersonsDAO persons = FakePersonsDAO();
-  final FakePersonPhotoUploader photos = FakePersonPhotoUploader();
+  final FakePhotoUploader photos = FakePhotoUploader();
   final InMemoryFamiliesDAO families = InMemoryFamiliesDAO();
 
   User? currentUser = const User(

@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:image_picker/image_picker.dart' show XFile;
 
-class FakePersonPhotoUploader implements PersonPhotoUploader {
-  final List<Person> peopleWhosePhotoWasDeleted = [];
+class FakePhotoUploader implements PhotoUploader {
+  final List<IImage> objectsWhosePhotoWasDeleted = [];
   final List<XFile> uploadedPhotos = [];
 
   late final Completer<void> uploadFinished = Completer<void>();
@@ -12,13 +12,13 @@ class FakePersonPhotoUploader implements PersonPhotoUploader {
   Object? uploadError;
 
   @override
-  Future<void> deletePhotoOf(Person person) async {
-    peopleWhosePhotoWasDeleted.add(person);
+  Future<void> deletePhotoOf(IImage object) async {
+    objectsWhosePhotoWasDeleted.add(object);
   }
 
   @override
   Future<void> uploadPhotoOf(
-    Person person,
+    IImage object,
     XFile photo, {
     required void Function(double progress) onProgress,
   }) async {

@@ -9,7 +9,7 @@ import 'package:uuid/uuid.dart' show Uuid;
 class PersonFormController extends AdvancedFormController {
   final PersonEditIntent intent;
   final PersonsDAO _persons;
-  final PersonPhotoUploader _photoUploader;
+  final PhotoUploader _photoUploader;
   final User? _currentUser;
   final OutOfSightAfterSave _outOfSight;
   final Person _startingPerson;

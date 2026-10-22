@@ -1,11 +1,11 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:image_picker/image_picker.dart' show XFile;
 
-abstract interface class PersonPhotoUploader {
-  Future<void> deletePhotoOf(Person person);
+abstract interface class PhotoUploader {
+  Future<void> deletePhotoOf(IImage object);
 
   Future<void> uploadPhotoOf(
-    Person person,
+    IImage object,
     XFile photo, {
     required void Function(double progress) onProgress,
   });

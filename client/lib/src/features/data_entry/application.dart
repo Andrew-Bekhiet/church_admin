@@ -9,7 +9,8 @@ export 'application/image_picker_service.dart';
 export 'application/image_url_cache_migration.dart';
 export 'application/image_url_cache_service.dart';
 export 'application/location_parsing_service.dart';
-export 'application/person_edit/functions_person_photo_uploader.dart';
+export 'application/object_edit/functions_photo_uploader.dart';
+export 'application/object_edit/photo_uploader.dart';
 export 'application/person_edit/person_church_and_spiritual_form_controller.dart';
 export 'application/person_edit/person_form_controller.dart';
 export 'application/person_edit/person_form_section.dart';
@@ -21,7 +22,6 @@ export 'application/person_edit/person_marital_status_and_type_form_controller.d
 export 'application/person_edit/person_memberships_form_controller.dart';
 export 'application/person_edit/person_metadata_catalog.dart';
 export 'application/person_edit/person_pastoral_dates_form_controller.dart';
-export 'application/person_edit/person_photo_uploader.dart';
 export 'application/person_edit/person_work_form_controller.dart';
 export 'application/phone_number_service.dart';
 export 'application/viewable_object_service.dart';
