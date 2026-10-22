@@ -25,9 +25,7 @@ class DefaultMeetingSaveCubit<T extends ViewableWithIDAndImage>
 
     final savedMeeting = switch (meeting) {
       null => null,
-      final meeting => _createdMeeting ??= await _meetings.createObject(
-        newObject: meeting,
-      ),
+      final meeting => await _createOrReviseMeeting(meeting),
     };
     final edited = switch (savedMeeting) {
       null => object,
@@ -38,6 +36,20 @@ class DefaultMeetingSaveCubit<T extends ViewableWithIDAndImage>
     };
 
     return await update(created, edited) ??
+        (throw ObjectUpdateNotSavedException(created.id));
+  }
+
+  Future<Meeting> _createOrReviseMeeting(Meeting draft) async {
+    final created = _createdMeeting;
+    if (created == null) {
+      return _createdMeeting = await _meetings.createObject(newObject: draft);
+    }
+
+    return _createdMeeting =
+        await _meetings.updateObject(
+          newObject: draft.copyWith(id: created.id),
+          oldObject: created,
+        ) ??
         (throw ObjectUpdateNotSavedException(created.id));
   }
 }

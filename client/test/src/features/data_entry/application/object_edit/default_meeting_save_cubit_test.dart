@@ -108,6 +108,50 @@ void main() {
     );
   });
 
+  group('retrying after the meeting link failed to save', () {
+    Future<void> failLinkThenRetry(
+      DefaultMeetingSaveCubit<Service> cubit, {
+      String? renamedMeeting,
+    }) async {
+      form.name.setValue('خدمة ابتدائي');
+      services.updatesFindNothing = true;
+      await cubit.submit();
+      services.updatesFindNothing = false;
+      if (renamedMeeting != null) {
+        form.defaultMeeting?.name.setValue(renamedMeeting);
+      }
+      await cubit.submit();
+    }
+
+    blocTest<DefaultMeetingSaveCubit<Service>, ObjectSaveProgress>(
+      'links the meeting already created',
+      build: () => cubitEditing(const CreateBlankService()),
+      act: failLinkThenRetry,
+      verify: (_) {
+        expect(meetings.createdMeetings, hasLength(1));
+        expect(meetings.updatedMeetings, isEmpty);
+        expect(
+          services.updates.last.editedObject.defaultMeeting,
+          meetings.createdMeetings.single,
+        );
+      },
+    );
+
+    blocTest<DefaultMeetingSaveCubit<Service>, ObjectSaveProgress>(
+      'saves and links the meeting name changed since the failed attempt',
+      build: () => cubitEditing(const CreateBlankService()),
+      act: (cubit) => failLinkThenRetry(cubit, renamedMeeting: 'اجتماع جديد'),
+      verify: (_) {
+        expect(meetings.createdMeetings, hasLength(1));
+        expect(meetings.updatedMeetings.single.name, 'اجتماع جديد');
+        expect(
+          services.updates.last.editedObject.defaultMeeting?.name,
+          'اجتماع جديد',
+        );
+      },
+    );
+  });
+
   blocTest<DefaultMeetingSaveCubit<Service>, ObjectSaveProgress>(
     'a meeting link the server did not save is reported as a failure',
     build: () {
