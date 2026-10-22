@@ -21,6 +21,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:posthog_flutter/posthog_flutter.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -173,7 +174,10 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
 });
 
 final loggingProvidersProvider = Provider<List<LoggingProvider>>(
-  (ref) => [SentryLoggingProvider(), PostHogLoggingProvider()],
+  (ref) => [
+    SentryLoggingProvider(),
+    PostHogLoggingProvider(ref.watch(postHogClientProvider)),
+  ],
 );
 
 final loggingSettingsStoreProvider = Provider<LoggingSettingsStore>(
@@ -191,6 +195,25 @@ final loggingServiceProvider = Provider<LoggingService>(
 
     return loggingService;
   },
+);
+
+final postHogClientProvider = Provider<PostHogClient>(
+  (ref) => PostHogClient(Posthog()),
+);
+
+final analyticsProvidersProvider = Provider<List<AnalyticsProvider>>(
+  (ref) => [PostHogAnalyticsProvider(ref.watch(postHogClientProvider))],
+);
+
+final analyticsServiceProvider = Provider<AnalyticsService>(
+  (ref) => AnalyticsService(
+    ref.watch(analyticsProvidersProvider),
+    ref.watch(loggingServiceProvider),
+  ),
+);
+
+final analyticsBlocObserverProvider = Provider<AnalyticsBlocObserver>(
+  (ref) => AnalyticsBlocObserver(ref.watch(analyticsServiceProvider)),
 );
 
 final loggingBlocObserverProvider = Provider<LoggingBlocObserver>(

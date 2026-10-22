@@ -15,6 +15,7 @@ class BlocObserverInit implements Initializer {
 
     multiBlocObserver
       ..addObserver(globalProviderContainer.read(loggingBlocObserverProvider))
+      ..addObserver(globalProviderContainer.read(analyticsBlocObserverProvider))
       ..addObserver(UserPreferencesService.I)
       ..addObserver(NotificationsService.I);
   }

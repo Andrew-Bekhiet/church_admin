@@ -9,6 +9,13 @@ class RecordAttendanceRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties => {
+    'meeting_id': meeting.id,
+    'service_id': meeting.serviceId,
+    'group_id': meeting.groupId,
+  };
+
+  @override
   List<Object?> get props => [meeting];
 
   const RecordAttendanceRoute({required this.meeting});

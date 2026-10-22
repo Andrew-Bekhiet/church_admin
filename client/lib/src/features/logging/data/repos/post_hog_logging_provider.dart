@@ -3,14 +3,16 @@ import 'package:flutter/widgets.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
 
 class PostHogLoggingProvider implements LoggingProvider {
-  final Posthog _postHog = Posthog();
+  final PostHogClient _postHogClient;
 
   bool _enableLogs = false;
 
   @override
-  late final List<NavigatorObserver> navigatorObservers = [
-    PosthogObserver(),
-  ];
+  List<NavigatorObserver> get navigatorObservers => const [];
+
+  Posthog get _postHog => _postHogClient.sdk;
+
+  PostHogLoggingProvider(this._postHogClient);
 
   @override
   bool isEnabledBy(LoggingSettings settings) => settings.enablePostHog;
@@ -40,19 +42,19 @@ class PostHogLoggingProvider implements LoggingProvider {
       ..errorTrackingConfig.captureIsolateErrors = true
       ..errorTrackingConfig.inAppIncludes.add('package:church_admin');
 
-    await _postHog.setup(config);
+    await _postHogClient.setupUnlessAlreadySetUp(config);
   }
 
   @override
   Future<void> identify(LoggingUser? user) async {
     switch (user) {
       case null:
-        await _postHog.reset();
+        await _postHogClient.resetUnlessAnonymous();
 
       case final user:
-        await _postHog.identify(
+        await _postHogClient.identifyOrUpdateProperties(
           userId: user.id,
-          userProperties: _withoutNulls({
+          properties: PostHogClient.withoutNulls({
             ...user.properties,
             'email': user.email,
             'name': user.name,
@@ -63,7 +65,7 @@ class PostHogLoggingProvider implements LoggingProvider {
 
   @override
   Future<void> setGlobalContext(Json contexts) async {
-    await _register(_withoutNulls(contexts));
+    await _register(PostHogClient.withoutNulls(contexts));
   }
 
   @override
@@ -85,7 +87,7 @@ class PostHogLoggingProvider implements LoggingProvider {
   ) async {
     await _postHog.addExceptionStep(
       message,
-      properties: _withoutNulls(data ?? {}),
+      properties: PostHogClient.withoutNulls(data ?? {}),
     );
   }
 
@@ -94,7 +96,7 @@ class PostHogLoggingProvider implements LoggingProvider {
     await _postHog.captureException(
       error: record.error ?? record.message ?? 'Unknown error',
       stackTrace: record.stackTrace,
-      properties: _withoutNulls(contexts),
+      properties: PostHogClient.withoutNulls(contexts),
     );
   }
 
@@ -109,14 +111,9 @@ class PostHogLoggingProvider implements LoggingProvider {
     await _postHog.captureLog(
       body: message,
       level: level._postHogLogSeverity,
-      attributes: _withoutNulls(attributes ?? {}),
+      attributes: PostHogClient.withoutNulls(attributes ?? {}),
     );
   }
-
-  Map<String, Object> _withoutNulls(Json json) => {
-    for (final entry in json.entries)
-      if (entry.value != null) entry.key: entry.value as Object,
-  };
 }
 
 extension on LoggingLevel {

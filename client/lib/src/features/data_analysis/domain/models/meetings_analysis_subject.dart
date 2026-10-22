@@ -25,6 +25,13 @@ sealed class MeetingsAnalysisSubject with _$MeetingsAnalysisSubject {
     ClassAnalysisSubject(:final class$) => class$.color,
   };
 
+  Json get analyticsProperties => switch (this) {
+    MeetingAnalysisSubject(:final meeting) => {'meeting_id': meeting.id},
+    ServiceAnalysisSubject(:final service) => {'service_id': service.id},
+    GroupAnalysisSubject(:final group) => {'group_id': group.id},
+    ClassAnalysisSubject(:final class$) => {'class_id': class$.id},
+  };
+
   const MeetingsAnalysisSubject._();
 
   const factory MeetingsAnalysisSubject.meeting(Meeting meeting) =
