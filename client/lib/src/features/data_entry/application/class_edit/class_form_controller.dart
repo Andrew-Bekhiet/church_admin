@@ -3,6 +3,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:uuid/uuid.dart' show Uuid;
 
 class ClassFormController extends ObjectFormController<Class> {
+  @override
+  final Class? savedObject;
+
   final ServicesDAO _servicesDAO;
 
   late final gender = AdvancedFieldController<bool?, ObjectEditError>(
@@ -26,11 +29,11 @@ class ClassFormController extends ObjectFormController<Class> {
     required ClassEditIntent intent,
     required this._servicesDAO,
     required super.currentUserId,
-  }) : super(
-         savedObject: switch (intent) {
-           UpdateClass(:final class$) => class$,
-           CreateClass() => null,
-         },
+  }) : savedObject = switch (intent) {
+         UpdateClass(:final class$) => class$,
+         CreateClass() => null,
+       },
+       super(
          initialDraft: switch (intent) {
            UpdateClass(:final class$) => class$,
            final CreateClass create => create.draftClass(const Uuid().v4()),
