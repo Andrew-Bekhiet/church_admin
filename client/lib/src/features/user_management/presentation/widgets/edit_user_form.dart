@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/features/data_entry/presentation/screens/edit_object_data/permission_check_widget.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_identity_fields.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_field.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_person_link_field.dart';

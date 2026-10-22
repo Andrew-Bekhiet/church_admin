@@ -5,6 +5,7 @@ export 'application/address/address_form_services.dart';
 export 'application/address/address_place_catalog.dart';
 export 'application/address/area_of_geocoded_house.dart';
 export 'application/area_edit/area_form_controller.dart';
+export 'application/class_edit/class_form_controller.dart';
 export 'application/contacts_service.dart';
 export 'application/family_edit/family_form_controller.dart';
 export 'application/family_edit/family_relatives_cubit.dart';
