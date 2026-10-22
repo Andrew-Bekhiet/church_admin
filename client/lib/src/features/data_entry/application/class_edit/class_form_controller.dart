@@ -25,7 +25,7 @@ class ClassFormController extends ObjectFormController<Class> {
   ClassFormController({
     required ClassEditIntent intent,
     required this._servicesDAO,
-    required super.recordedByUserId,
+    required super.currentUserId,
   }) : super(
          savedObject: switch (intent) {
            UpdateClass(:final class$) => class$,
