@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -54,13 +55,17 @@ class _EditClassScreenState extends State<EditClassScreen> {
             errorMaxLines: 2,
             previewBuilder: ObjectSelectionPreview.new,
           ),
-          AdvancedStudyYearRangeField<ObjectEditError>(
-            key: EditClassScreenKeys.studyYears,
-            field: _form.studyYears,
-            label: 'السنوات الدراسية',
-            translateError: _describe,
-            studyYears: _metadata.studyYears,
-            clearable: false,
+          AdvancedFieldBuilder<Service?, ObjectEditError>(
+            field: _form.service,
+            builder: (context, _, _) =>
+                AdvancedStudyYearRangeField<ObjectEditError>(
+                  key: EditClassScreenKeys.studyYears,
+                  field: _form.studyYears,
+                  label: 'السنوات الدراسية',
+                  translateError: _describe,
+                  studyYears: _metadata.studyYears,
+                  clearable: false,
+                ),
           ),
           AdvancedColorField<ObjectEditError>(
             field: _form.color,

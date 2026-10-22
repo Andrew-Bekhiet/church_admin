@@ -119,6 +119,38 @@ void main() {
     expect(harness.classes.updates, isEmpty);
   });
 
+  testWidgets('moving a class to another service names that service years', (
+    tester,
+  ) async {
+    final preparatory = Service(
+      id: 'preparatory-id',
+      name: 'إعدادي',
+      studyYearFrom: first,
+      studyYearTo: fourth,
+    );
+    harness.services.pickableServices = [preparatory];
+    await openClass(tester, class$(from: sixth, to: seventh));
+    await saveAndSettle(tester);
+
+    await tester.tap(find.text(primary.name));
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.byWidgetPredicate(
+        (widget) => switch (widget) {
+          ViewableObjectWidget(object: Service(:final id)) =>
+            id == preparatory.id,
+          _ => false,
+        },
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      studyYearsError('السنة الدراسية يجب ان تكون بين أولى ورابعة'),
+      findsOneWidget,
+    );
+  });
+
   testWidgets('a new class without its study years is not saved', (
     tester,
   ) async {
