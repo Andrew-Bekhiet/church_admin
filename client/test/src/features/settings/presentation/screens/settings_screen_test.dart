@@ -1,19 +1,30 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../../../../material_ui_test_app.dart';
-import 'settings_screen_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<UserPreferencesService>()])
+class _MockUserPreferencesService extends Mock
+    implements UserPreferencesService {}
+
 void main() {
   group('SettingsScreen', () {
-    late MockUserPreferencesService userPreferencesService;
+    late _MockUserPreferencesService userPreferencesService;
 
     setUp(() {
-      userPreferencesService = MockUserPreferencesService();
+      userPreferencesService = _MockUserPreferencesService();
+      when(() => userPreferencesService.darkTheme).thenReturn(null);
+      when(() => userPreferencesService.greatFeastTheme).thenReturn(false);
+      when(
+        () => userPreferencesService.setDarkTheme(any()),
+      ).thenAnswer((_) async {});
+      when(
+        () => userPreferencesService.setGreatFeastTheme(any()),
+      ).thenAnswer((_) async {});
+      when(
+        () => userPreferencesService.themePreferencesStream,
+      ).thenAnswer((_) => const Stream.empty());
       initGlobalProviderContainer([
         userPreferencesServiceProvider.overrideWithValue(
           userPreferencesService,
@@ -23,15 +34,13 @@ void main() {
 
     tearDown(resetGlobalProviderContainer);
 
-    for (final (savedDarkTheme, expectedChip) in [
-      (true, 'المظهر الداكن'),
-      (false, 'المظهر الفاتح'),
-      (null, 'حسب النظام'),
-    ]) {
+    for (final savedDarkTheme in [true, false, null]) {
       testWidgets(
-        'a saved dark theme of $savedDarkTheme selects only $expectedChip',
+        'a saved dark theme of $savedDarkTheme selects only its chip',
         (tester) async {
-          when(userPreferencesService.darkTheme).thenReturn(savedDarkTheme);
+          when(
+            () => userPreferencesService.darkTheme,
+          ).thenReturn(savedDarkTheme);
           await tester.pumpWidget(
             MaterialUiTestApp.withThemeAndLocale(child: const SizedBox()),
           );
@@ -40,14 +49,16 @@ void main() {
               .push(MaterialPageRoute(builder: (_) => const SettingsScreen()));
           await tester.pumpAndSettle();
 
-          await tester.tap(find.widgetWithText(ExpansionTile, 'المظهر'));
+          await tester.tap(find.byKey(SettingsScreenKeys.appearanceTile));
           await tester.pumpAndSettle();
 
-          final selectedChips = tester
+          final selectedChipKeys = tester
               .widgetList<ChoiceChip>(find.byType(ChoiceChip))
               .where((chip) => chip.selected)
-              .map((chip) => (chip.label as Text).data);
-          expect(selectedChips, [expectedChip]);
+              .map((chip) => chip.key);
+          expect(selectedChipKeys, [
+            SettingsScreenKeys.themeChipFor(savedDarkTheme),
+          ]);
         },
       );
     }
@@ -114,7 +125,7 @@ void main() {
       await tester.tap(find.widgetWithText(ExpansionTile, 'المظهر'));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('المظهر الداكن'));
+      await tester.tap(find.byKey(SettingsScreenKeys.themeChipFor(true)));
       await tester.pumpAndSettle();
 
       await tester.tap(find.byType(FloatingActionButton));

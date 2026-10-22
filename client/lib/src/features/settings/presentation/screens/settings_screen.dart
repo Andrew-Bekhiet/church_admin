@@ -43,6 +43,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   ExpansionTile(
+                    key: SettingsScreenKeys.appearanceTile,
                     title: const Text('المظهر'),
                     subtitle: const Text('المظهر العام للبرنامج'),
                     expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -51,16 +52,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         alignment: WrapAlignment.spaceAround,
                         children: <Widget>[
                           ChoiceChip(
+                            key: SettingsScreenKeys.themeChipFor(true),
                             label: const Text('المظهر الداكن'),
                             selected: darkTheme ?? false,
                             onSelected: _onDarkThemeChanged(true),
                           ),
                           ChoiceChip(
+                            key: SettingsScreenKeys.themeChipFor(false),
                             label: const Text('المظهر الفاتح'),
                             selected: darkTheme == false,
                             onSelected: _onDarkThemeChanged(false),
                           ),
                           ChoiceChip(
+                            key: SettingsScreenKeys.themeChipFor(null),
                             label: const Text('حسب النظام'),
                             selected: darkTheme == null,
                             onSelected: _onDarkThemeChanged(null),
@@ -150,4 +154,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     navigator.pop(result);
   }
+}
+
+abstract final class SettingsScreenKeys {
+  static const Key appearanceTile = ValueKey(
+    'Settings Screen Appearance Tile Key',
+  );
+
+  static Key themeChipFor(bool? darkTheme) =>
+      ValueKey('Settings Screen Theme Chip $darkTheme Key');
 }
