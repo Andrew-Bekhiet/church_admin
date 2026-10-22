@@ -93,17 +93,47 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
             FeatureFlagsRepository.I.canAddCustomObjects<T>(),
       ),
     );
+    if (!state.mounted) return;
 
     final chosen = switch (result) {
-      NewObjectNamed<T>(:final name) => await onCreateCustom?.call(name),
+      NewObjectNamed<T>(:final name) => await _createCustomOrReportFailure(
+        state.context,
+        name,
+      ),
       ObjectSelected<T>(:final object) => object,
       null => null,
     };
+    if (!state.mounted) return;
     if (chosen is! F || chosen == null || chosen == state.value) return;
 
     state.didChange(chosen);
     onChanged?.call(chosen);
     if (nullable) focusScope.nextFocus();
+  }
+
+  Future<T?> _createCustomOrReportFailure(
+    BuildContext context,
+    String newName,
+  ) async {
+    final createCustom = onCreateCustom;
+    if (createCustom == null) return null;
+
+    try {
+      return await createCustom(newName);
+    } on Exception catch (error, stackTrace) {
+      if (context.mounted) {
+        await LoggingService.I.showErrorDialogAndReport(
+          context,
+          LogRecord(
+            error: error,
+            stackTrace: stackTrace,
+            data: {'objectType': '$T', 'newName': newName},
+          ),
+        );
+      }
+
+      return null;
+    }
   }
 
   final void Function(F?)? onSaved;

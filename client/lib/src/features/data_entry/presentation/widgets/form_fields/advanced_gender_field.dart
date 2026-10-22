@@ -43,6 +43,7 @@ class AdvancedGenderField<E extends Object> extends StatelessWidget {
                   child: Row(
                     children: [
                       Radio<bool?>(
+                        enabled: !state.readOnly,
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         value: isMale,
                       ),
