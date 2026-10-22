@@ -17,6 +17,7 @@ class _EditStreetScreenState extends State<EditStreetScreen> {
   final User? _currentUser = AuthBloc.I.currentUserData;
   late final StreetFormController _form = StreetFormController(
     intent: widget.intent,
+    areas: DatabaseService.I.areas,
     recordedByUserId: _currentUser?.uid,
   );
   late final ObjectSaveCubit<Street> _saveCubit = ObjectSaveCubit(
@@ -51,11 +52,7 @@ class _EditStreetScreenState extends State<EditStreetScreen> {
             field: _form.areas,
             label: 'المناطق',
             translateError: ObjectEditError.messageOf,
-            listController: (search) => ViewableObjectListController(
-              objectsPaginatableStream: DatabaseService.I.areas.streamAll(
-                searchQuery: search,
-              ),
-            ),
+            listController: _form.areasMatching,
             previewBuilder: (areas) => areas.isEmpty
                 ? const Text('لا توجد مناطق')
                 : Wrap(

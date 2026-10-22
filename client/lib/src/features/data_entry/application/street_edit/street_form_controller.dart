@@ -3,6 +3,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:uuid/uuid.dart' show Uuid;
 
 class StreetFormController extends ObjectFormController<Street> {
+  final AreasDAO _areas;
+
   late final line = AdvancedFieldController<Line?, ObjectEditError>(
     initialValue: startingObject.line,
   );
@@ -16,6 +18,7 @@ class StreetFormController extends ObjectFormController<Street> {
 
   StreetFormController({
     required StreetEditIntent intent,
+    required this._areas,
     required super.recordedByUserId,
   }) : super(
          savedObject: switch (intent) {
@@ -30,6 +33,11 @@ class StreetFormController extends ObjectFormController<Street> {
        ) {
     registerFields([photo, name, line, areas, lastVisit, color]);
   }
+
+  ViewableObjectListController<Area> areasMatching(Stream<String?> search) =>
+      ViewableObjectListController(
+        objectsPaginatableStream: _areas.streamAll(searchQuery: search),
+      );
 
   @override
   Street toObject() => startingObject.copyWith(

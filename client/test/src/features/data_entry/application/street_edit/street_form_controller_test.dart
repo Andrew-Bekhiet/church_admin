@@ -1,6 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../../fakes/fake_areas_dao.dart';
+
 void main() {
   const shubra = Area(id: 'shubra', name: 'شبرا');
   const maadi = Area(id: 'maadi', name: 'المعادي');
@@ -9,6 +11,7 @@ void main() {
   StreetFormController controllerFor(StreetEditIntent intent) {
     final controller = StreetFormController(
       intent: intent,
+      areas: FakeAreasDAO(),
       recordedByUserId: 'me',
     );
     addTearDown(controller.dispose);
