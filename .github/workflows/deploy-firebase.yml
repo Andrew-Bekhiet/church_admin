@@ -13,6 +13,10 @@ on:
 
 permissions: {}
 
+concurrency:
+  group: deploy-firebase-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 defaults:
   run:
     working-directory: server/firebase/functions
@@ -51,9 +55,6 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    concurrency:
-      group: deploy-firebase-production
-      cancel-in-progress: false
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
