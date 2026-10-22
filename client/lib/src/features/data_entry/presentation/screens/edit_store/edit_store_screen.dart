@@ -28,6 +28,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
     form: _form,
     dao: DatabaseService.I.stores,
     photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+    outOfSight: OutOfSightAfterSave(_currentUser),
   );
 
   @override
@@ -37,6 +38,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
       saveCubit: _saveCubit,
       canDelete: (saved) => _currentUser?.canDeleteObject(saved) ?? false,
       detailsRouteOf: (store) => ViewStoreRoute(id: store.id, store: store),
+      movedOutOfSightMessage: 'تم نقل المتجر',
       fields: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
