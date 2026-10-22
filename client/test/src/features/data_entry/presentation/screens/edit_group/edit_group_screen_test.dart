@@ -26,9 +26,12 @@ void main() {
     await harness.tapSave(tester);
     await tester.pumpAndSettle();
 
-    final created = harness.groups.createdObjects.single;
+    final created = harness.groupsDAO.createdObjects.single;
     expect(created.serviceId, service.id);
-    expect(find.text('viewing ${created.id}'), findsOneWidget);
+    expect(
+      harness.routeStack.last,
+      isA<ViewGroupRoute>().having((route) => route.id, 'id', created.id),
+    );
   });
 
   testWidgets('a group without a service shows why and is not saved', (
@@ -41,6 +44,6 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text(ObjectEditError.serviceRequired.message), findsOneWidget);
-    expect(harness.groups.createdObjects, isEmpty);
+    expect(harness.groupsDAO.createdObjects, isEmpty);
   });
 }

@@ -28,7 +28,7 @@ void main() {
     await harness.tapSave(tester);
     await tester.pumpAndSettle();
 
-    final saved = harness.services.updates.single.editedObject;
+    final saved = harness.servicesDAO.updates.single.editedObject;
     expect(
       (saved.name, saved.studyYearFrom, saved.studyYearTo),
       (
@@ -37,7 +37,7 @@ void main() {
         null,
       ),
     );
-    expect(find.text('open'), findsOneWidget);
+    expect(harness.routeStack, [const HomeScreenRoute()]);
   });
 
   testWidgets('a new service is created with the default meeting it offers', (
@@ -49,6 +49,6 @@ void main() {
     await harness.tapSave(tester);
     await tester.pumpAndSettle();
 
-    expect(harness.meetings.createdMeetings.single.name, 'اجتماع ابتدائي');
+    expect(harness.meetingsDAO.createdMeetings.single.name, 'اجتماع ابتدائي');
   });
 }

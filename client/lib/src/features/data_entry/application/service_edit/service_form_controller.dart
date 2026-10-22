@@ -18,17 +18,17 @@ class ServiceFormController extends ObjectFormController<Service>
         _ => null,
       };
 
-  final ServicesDAO _services;
+  final ServicesDAO _servicesDAO;
 
   late final DefaultMeetingFormController? defaultMeeting = isCreate
       ? DefaultMeetingFormController(ownerName: name)
       : null;
   late final nextService = AdvancedFieldController<Service?, ObjectEditError>(
-    initialValue: startingObject.nextService,
+    initialValue: initialDraft.nextService,
   );
   late final studyYears =
       AdvancedFieldController<StudyYearRange?, ObjectEditError>(
-        initialValue: switch (startingObject) {
+        initialValue: switch (initialDraft) {
           Service(studyYearFrom: null, studyYearTo: null) => null,
           Service(:final studyYearFrom, :final studyYearTo) => StudyYearRange(
             from: studyYearFrom,
@@ -40,14 +40,14 @@ class ServiceFormController extends ObjectFormController<Service>
 
   ServiceFormController({
     required ServiceEditIntent intent,
-    required this._services,
+    required this._servicesDAO,
     required super.recordedByUserId,
   }) : super(
          savedObject: switch (intent) {
            UpdateService(:final service) => service,
            CreateService() => null,
          },
-         startingObject: switch (intent) {
+         initialDraft: switch (intent) {
            UpdateService(:final service) => service,
            final CreateService create => create.draftService(
              const Uuid().v4(),
@@ -61,14 +61,14 @@ class ServiceFormController extends ObjectFormController<Service>
 
   ViewableObjectListController<Service> servicesMatching(
     Stream<String?> search,
-  ) => SearchableDaoListController.over(_services)(search);
+  ) => SearchableDaoListController.over(_servicesDAO)(search);
 
   @override
   Service toObject() {
     final range = studyYears.fieldValue;
     final next = nextService.fieldValue;
 
-    return startingObject.copyWith(
+    return initialDraft.copyWith(
       name: editedName,
       nextService: next,
       nextServiceId: next?.id,

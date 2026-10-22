@@ -9,7 +9,7 @@ void main() {
   GroupFormController controllerFor(GroupEditIntent intent) {
     final controller = GroupFormController(
       intent: intent,
-      services: FakeServicesDAO(),
+      servicesDAO: FakeServicesDAO(),
       recordedByUserId: 'me',
     );
     addTearDown(controller.dispose);

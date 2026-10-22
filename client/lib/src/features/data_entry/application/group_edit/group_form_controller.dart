@@ -4,31 +4,31 @@ import 'package:uuid/uuid.dart' show Uuid;
 
 class GroupFormController extends ObjectFormController<Group>
     implements DefaultMeetingOwner<Group> {
-  final ServicesDAO _services;
+  final ServicesDAO _servicesDAO;
 
   late final DefaultMeetingFormController? defaultMeeting = isCreate
       ? DefaultMeetingFormController(ownerName: name)
       : null;
   late final service = AdvancedFieldController<Service?, ObjectEditError>(
-    initialValue: startingObject.service,
+    initialValue: initialDraft.service,
     validator: (service) =>
         service == null ? ObjectEditError.serviceRequired : null,
   );
   late final validity =
       AdvancedFieldController<DateTimeRange?, ObjectEditError>(
-        initialValue: startingObject.validity,
+        initialValue: initialDraft.validity,
       );
 
   GroupFormController({
     required GroupEditIntent intent,
-    required this._services,
+    required this._servicesDAO,
     required super.recordedByUserId,
   }) : super(
          savedObject: switch (intent) {
            UpdateGroup(:final group) => group,
            CreateGroup() => null,
          },
-         startingObject: switch (intent) {
+         initialDraft: switch (intent) {
            UpdateGroup(:final group) => group,
            final CreateGroup create => create.draftGroup(const Uuid().v4()),
          },
@@ -40,10 +40,10 @@ class GroupFormController extends ObjectFormController<Group>
 
   ViewableObjectListController<Service> servicesMatching(
     Stream<String?> search,
-  ) => SearchableDaoListController.over(_services)(search);
+  ) => SearchableDaoListController.over(_servicesDAO)(search);
 
   @override
-  Group toObject() => startingObject.copyWith(
+  Group toObject() => initialDraft.copyWith(
     name: editedName,
     service: service.fieldValue,
     serviceId: service.fieldValue?.id,

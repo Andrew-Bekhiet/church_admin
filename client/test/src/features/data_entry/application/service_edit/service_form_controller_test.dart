@@ -10,7 +10,7 @@ void main() {
   ServiceFormController controllerFor(ServiceEditIntent intent) {
     final controller = ServiceFormController(
       intent: intent,
-      services: FakeServicesDAO(),
+      servicesDAO: FakeServicesDAO(),
       recordedByUserId: 'me',
     );
     addTearDown(controller.dispose);

@@ -19,7 +19,7 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
   final DateTime _today = DateUtils.dateOnly(DateTime.now());
   late final GroupFormController _form = GroupFormController(
     intent: widget.intent,
-    services: DatabaseService.I.services,
+    servicesDAO: DatabaseService.I.services,
     recordedByUserId: _currentUser?.uid,
   );
   late final DefaultMeetingSaveCubit<Group> _saveCubit =
@@ -28,7 +28,7 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
         dao: DatabaseService.I.groups,
         photoUploader: FunctionsPhotoUploader(FunctionsService.I),
         meetingOwner: _form,
-        meetings: DatabaseService.I.meetings,
+        meetingsDAO: DatabaseService.I.meetings,
       );
 
   @override

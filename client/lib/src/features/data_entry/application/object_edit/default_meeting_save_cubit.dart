@@ -3,14 +3,14 @@ import 'package:church_admin/church_admin.dart';
 class DefaultMeetingSaveCubit<T extends ViewableWithIDAndImage>
     extends ObjectSaveCubit<T> {
   final DefaultMeetingOwner<T> _meetingOwner;
-  final MeetingsDAO _meetings;
+  final MeetingsDAO _meetingsDAO;
 
   T? _createdOwner;
   Meeting? _createdMeeting;
 
   DefaultMeetingSaveCubit({
     required this._meetingOwner,
-    required this._meetings,
+    required this._meetingsDAO,
     required super.form,
     required super.dao,
     required super.photoUploader,
@@ -43,7 +43,9 @@ class DefaultMeetingSaveCubit<T extends ViewableWithIDAndImage>
   Future<Meeting> _createOrReviseMeeting(Meeting draft) async {
     final created = _createdMeeting;
     if (created == null) {
-      return _createdMeeting = await _meetings.createObject(newObject: draft);
+      return _createdMeeting = await _meetingsDAO.createObject(
+        newObject: draft,
+      );
     }
 
     return _reviseCreatedMeeting(created, draft.copyWith(id: created.id));
@@ -60,6 +62,6 @@ class DefaultMeetingSaveCubit<T extends ViewableWithIDAndImage>
     Meeting created,
     Meeting revised,
   ) async => _createdMeeting =
-      await _meetings.updateObject(newObject: revised, oldObject: created) ??
+      await _meetingsDAO.updateObject(newObject: revised, oldObject: created) ??
       (throw ObjectUpdateNotSavedException(created.id));
 }

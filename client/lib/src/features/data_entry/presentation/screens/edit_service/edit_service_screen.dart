@@ -19,7 +19,7 @@ class _EditServiceScreenState extends State<EditServiceScreen> {
   );
   late final ServiceFormController _form = ServiceFormController(
     intent: widget.intent,
-    services: DatabaseService.I.services,
+    servicesDAO: DatabaseService.I.services,
     recordedByUserId: _currentUser?.uid,
   );
   late final DefaultMeetingSaveCubit<Service> _saveCubit =
@@ -28,7 +28,7 @@ class _EditServiceScreenState extends State<EditServiceScreen> {
         dao: DatabaseService.I.services,
         photoUploader: FunctionsPhotoUploader(FunctionsService.I),
         meetingOwner: _form,
-        meetings: DatabaseService.I.meetings,
+        meetingsDAO: DatabaseService.I.meetings,
       );
 
   @override

@@ -15,14 +15,14 @@ void main() {
   DefaultMeetingSaveCubit<Service> cubitEditing(ServiceEditIntent intent) {
     form = ServiceFormController(
       intent: intent,
-      services: services,
+      servicesDAO: services,
       recordedByUserId: 'me',
     );
     addTearDown(form.dispose);
 
     return DefaultMeetingSaveCubit<Service>(
       meetingOwner: form,
-      meetings: meetings,
+      meetingsDAO: meetings,
       form: form,
       dao: services,
       photoUploader: FakePhotoUploader(),
