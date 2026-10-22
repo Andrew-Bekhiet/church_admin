@@ -18,6 +18,8 @@ class ServiceFormController extends ObjectFormController<Service>
         _ => null,
       };
 
+  @override
+  final Service? savedObject;
   final ServicesDAO _servicesDAO;
 
   late final DefaultMeetingFormController? defaultMeeting = isCreate
@@ -42,11 +44,11 @@ class ServiceFormController extends ObjectFormController<Service>
     required ServiceEditIntent intent,
     required this._servicesDAO,
     required super.currentUserId,
-  }) : super(
-         savedObject: switch (intent) {
-           UpdateService(:final service) => service,
-           CreateService() => null,
-         },
+  }) : savedObject = switch (intent) {
+         UpdateService(:final service) => service,
+         CreateService() => null,
+       },
+       super(
          initialDraft: switch (intent) {
            UpdateService(:final service) => service,
            final CreateService create => create.draftService(

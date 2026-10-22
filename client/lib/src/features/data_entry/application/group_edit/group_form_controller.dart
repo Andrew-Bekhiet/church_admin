@@ -4,6 +4,9 @@ import 'package:uuid/uuid.dart' show Uuid;
 
 class GroupFormController extends ObjectFormController<Group>
     implements DefaultMeetingOwner<Group> {
+  @override
+  final Group? savedObject;
+
   final ServicesDAO _servicesDAO;
 
   late final DefaultMeetingFormController? defaultMeeting = isCreate
@@ -23,11 +26,11 @@ class GroupFormController extends ObjectFormController<Group>
     required GroupEditIntent intent,
     required this._servicesDAO,
     required super.currentUserId,
-  }) : super(
-         savedObject: switch (intent) {
-           UpdateGroup(:final group) => group,
-           CreateGroup() => null,
-         },
+  }) : savedObject = switch (intent) {
+         UpdateGroup(:final group) => group,
+         CreateGroup() => null,
+       },
+       super(
          initialDraft: switch (intent) {
            UpdateGroup(:final group) => group,
            final CreateGroup create => create.draftGroup(const Uuid().v4()),
