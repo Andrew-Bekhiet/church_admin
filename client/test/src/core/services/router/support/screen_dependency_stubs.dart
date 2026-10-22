@@ -26,6 +26,9 @@ abstract final class ScreenDependencyStubs {
     final userPreferences = _MockUserPreferencesService();
     when(() => userPreferences.darkTheme).thenReturn(false);
     when(() => userPreferences.greatFeastTheme).thenReturn(false);
+    when(
+      () => userPreferences.themePreferencesStream,
+    ).thenAnswer((_) => const Stream.empty());
 
     return userPreferences;
   }
