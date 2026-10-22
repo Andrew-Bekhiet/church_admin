@@ -3,35 +3,35 @@ import 'package:church_admin/church_admin.dart';
 import 'package:uuid/uuid.dart' show Uuid;
 
 class ClassFormController extends ObjectFormController<Class> {
-  final ServicesDAO _services;
+  final ServicesDAO _servicesDAO;
 
   late final gender = AdvancedFieldController<bool?, ObjectEditError>(
-    initialValue: startingObject.serviceGender,
+    initialValue: initialDraft.serviceGender,
   );
   late final service = AdvancedFieldController<Service?, ObjectEditError>(
-    initialValue: startingObject.service,
+    initialValue: initialDraft.service,
     validator: (service) =>
         service == null ? ObjectEditError.serviceRequired : null,
   );
   late final studyYears =
       AdvancedFieldController<StudyYearRange?, ObjectEditError>(
         initialValue: StudyYearRange(
-          from: startingObject.studyYear,
-          to: startingObject.studyYearTo,
+          from: initialDraft.studyYear,
+          to: initialDraft.studyYearTo,
         ),
         validator: _invalidStudyYears,
       );
 
   ClassFormController({
     required ClassEditIntent intent,
-    required this._services,
+    required this._servicesDAO,
     required super.recordedByUserId,
   }) : super(
          savedObject: switch (intent) {
            UpdateClass(:final class$) => class$,
            CreateClass() => null,
          },
-         startingObject: switch (intent) {
+         initialDraft: switch (intent) {
            UpdateClass(:final class$) => class$,
            final CreateClass create => create.draftClass(const Uuid().v4()),
          },
@@ -43,14 +43,14 @@ class ClassFormController extends ObjectFormController<Class> {
 
   ViewableObjectListController<Service> servicesMatching(
     Stream<String?> search,
-  ) => SearchableDaoListController.over(_services)(search);
+  ) => SearchableDaoListController.over(_servicesDAO)(search);
 
   @override
   Class toObject() {
     final range = studyYears.fieldValue;
     final chosenService = service.fieldValue;
 
-    return startingObject.copyWith(
+    return initialDraft.copyWith(
       name: editedName,
       serviceGender: gender.fieldValue,
       service: chosenService,

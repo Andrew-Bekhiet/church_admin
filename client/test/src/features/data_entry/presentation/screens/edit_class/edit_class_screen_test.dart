@@ -57,7 +57,7 @@ void main() {
 
   setUp(() {
     harness = EditObjectScreenHarness()..install();
-    harness.studyYears.studyYears = [first, third, fourth, sixth];
+    harness.studyYearsDAO.studyYears = [first, third, fourth, sixth];
   });
 
   tearDown(defaultTearDown);
@@ -70,7 +70,7 @@ void main() {
     await tester.enterText(harness.nameField, 'فصل جديد');
     await saveAndSettle(tester);
 
-    final saved = harness.classes.updates.single.editedObject;
+    final saved = harness.classesDAO.updates.single.editedObject;
     expect(saved.name, 'فصل جديد');
     expect(studyYearsOf(saved), (3, 4));
   });
@@ -88,7 +88,10 @@ void main() {
     await tester.pumpAndSettle();
     await saveAndSettle(tester);
 
-    expect(studyYearsOf(harness.classes.updates.single.editedObject), (3, 4));
+    expect(studyYearsOf(harness.classesDAO.updates.single.editedObject), (
+      3,
+      4,
+    ));
   });
 
   testWidgets('a class whose study years run backwards is not saved', (
@@ -102,7 +105,7 @@ void main() {
       studyYearsError(ObjectEditError.studyYearsReversed.message),
       findsOneWidget,
     );
-    expect(harness.classes.updates, isEmpty);
+    expect(harness.classesDAO.updates, isEmpty);
   });
 
   testWidgets('a class reaching past its service study years is not saved', (
@@ -116,7 +119,7 @@ void main() {
       studyYearsError('السنة الدراسية يجب ان تكون بين أولى وسادسة'),
       findsOneWidget,
     );
-    expect(harness.classes.updates, isEmpty);
+    expect(harness.classesDAO.updates, isEmpty);
   });
 
   testWidgets('moving a class to another service names that service years', (
@@ -128,7 +131,7 @@ void main() {
       studyYearFrom: first,
       studyYearTo: fourth,
     );
-    harness.services.pickableServices = [preparatory];
+    harness.servicesDAO.pickableServices = [preparatory];
     await openClass(tester, class$(from: sixth, to: seventh));
     await saveAndSettle(tester);
 
@@ -166,7 +169,7 @@ void main() {
       studyYearsError(ObjectEditError.studyYearsRequired.message),
       findsOneWidget,
     );
-    expect(harness.classes.createdObjects, isEmpty);
+    expect(harness.classesDAO.createdObjects, isEmpty);
   });
 
   testWidgets('choosing who the class serves saves it', (tester) async {
@@ -175,6 +178,9 @@ void main() {
     await tester.tap(find.text('بنات'));
     await saveAndSettle(tester);
 
-    expect(harness.classes.updates.single.editedObject.serviceGender, isFalse);
+    expect(
+      harness.classesDAO.updates.single.editedObject.serviceGender,
+      isFalse,
+    );
   });
 }

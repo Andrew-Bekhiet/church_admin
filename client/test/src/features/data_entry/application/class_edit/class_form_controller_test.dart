@@ -28,7 +28,7 @@ void main() {
   ClassFormController controllerFor(ClassEditIntent intent) {
     final controller = ClassFormController(
       intent: intent,
-      services: FakeServicesDAO(),
+      servicesDAO: FakeServicesDAO(),
       recordedByUserId: 'me',
     );
     addTearDown(controller.dispose);

@@ -20,7 +20,7 @@ class _EditClassScreenState extends State<EditClassScreen> {
   );
   late final ClassFormController _form = ClassFormController(
     intent: widget.intent,
-    services: DatabaseService.I.services,
+    servicesDAO: DatabaseService.I.services,
     recordedByUserId: _currentUser?.uid,
   );
   late final ObjectSaveCubit<Class> _saveCubit = ObjectSaveCubit(
