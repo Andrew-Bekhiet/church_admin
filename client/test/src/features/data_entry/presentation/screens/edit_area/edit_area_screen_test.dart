@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -108,6 +110,25 @@ void main() {
 
       expect(find.text('open'), findsOneWidget);
     });
+  });
+
+  testWidgets('while deleting the message says so', (tester) async {
+    final deleteGate = harness.areas.deleteGate = Completer<void>();
+    await harness.open(
+      tester,
+      const EditAreaRoute(intent: UpdateArea(area: storedArea)),
+      withPageBelow: true,
+    );
+
+    await tester.tap(find.byTooltip('حذف'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('حذف'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(find.text('جار الحذف ...'), findsOneWidget);
+    deleteGate.complete();
+    await tester.pumpAndSettle();
   });
 
   testWidgets('confirming the deletion deletes the area and leaves its page', (

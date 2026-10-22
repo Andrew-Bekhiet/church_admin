@@ -9,6 +9,7 @@ mixin FakeObjectWrites<T extends ViewableWithID> on Fake {
   final List<String> deletedIds = [];
 
   Completer<void>? saveGate;
+  Completer<void>? deleteGate;
   Object? saveError;
   Object? deleteError;
 
@@ -32,6 +33,7 @@ mixin FakeObjectWrites<T extends ViewableWithID> on Fake {
   }
 
   Future<T?> deleteById({required String id}) async {
+    await deleteGate?.future;
     if (deleteError case final error?) throw error;
     deletedIds.add(id);
 

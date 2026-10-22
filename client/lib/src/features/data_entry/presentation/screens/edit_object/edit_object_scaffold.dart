@@ -128,11 +128,11 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
 
   void _showSaveProgressWhileSaving(ObjectSaveProgress progress) {
     switch (progress) {
-      case NotSavingObject() || DeletingObject():
+      case NotSavingObject():
         _progressSnackBar?.close();
         _progressSnackBar = null;
 
-      case SavingObject() || UploadingObjectPhoto():
+      case DeletingObject() || SavingObject() || UploadingObjectPhoto():
         _progressSnackBar ??= _replaceSnackBarsWithSaveProgress();
     }
   }
