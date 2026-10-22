@@ -211,7 +211,8 @@ class _ViewAreaState extends State<ViewArea> {
       ),
       editButtonBuilder: (context, area) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => EditAreaRoute(area: area).push(context),
+        onPressed: () =>
+            EditAreaRoute(intent: UpdateArea(area: area)).push(context),
         icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(

@@ -22,7 +22,7 @@ class AppRouteUrlCodec extends KaiselStackCodec<AppRoute> {
       ViewStoreRoute(:final id) ||
       ViewUserRoute(uid: final id) ||
       EditPersonRoute(intent: UpdatePerson(person: ID(:final id))) ||
-      EditAreaRoute(area: ID(:final id)) ||
+      EditAreaRoute(intent: UpdateArea(area: ID(:final id))) ||
       EditServiceRoute(service: ID(:final id)) ||
       EditGroupRoute(group: ID(:final id)) ||
       EditClassRoute(class$: ID(:final id)) ||

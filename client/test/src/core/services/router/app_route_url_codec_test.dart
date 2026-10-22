@@ -77,7 +77,7 @@ void main() {
     });
 
     test('an edit screen opens the page of the record being edited', () {
-      expect(reopen(const EditAreaRoute(area: area)), [
+      expect(reopen(const EditAreaRoute(intent: UpdateArea(area: area))), [
         home,
         ViewAreaRoute(id: area.id),
       ]);

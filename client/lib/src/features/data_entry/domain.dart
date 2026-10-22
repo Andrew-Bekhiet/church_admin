@@ -1,7 +1,11 @@
 export 'domain/address/address_field_error.dart';
 export 'domain/address/address_suggestion.dart';
+export 'domain/area_edit/area_edit_intent.dart';
 export 'domain/models.dart';
 export 'domain/object_edit/edit_intent_json.dart';
+export 'domain/object_edit/object_edit_error.dart';
+export 'domain/object_edit/object_save_outcome.dart';
+export 'domain/object_edit/object_save_progress.dart';
 export 'domain/out_of_sight_after_save.dart';
 export 'domain/person_edit/memberships_load_state.dart';
 export 'domain/person_edit/person_edit_error.dart';

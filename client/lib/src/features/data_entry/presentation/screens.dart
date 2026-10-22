@@ -1,3 +1,7 @@
+export 'screens/edit_area/edit_area_screen.dart';
+export 'screens/edit_object/edit_object_scaffold.dart';
+export 'screens/edit_object/object_save_button.dart';
+export 'screens/edit_object/object_save_progress_message.dart';
 export 'screens/edit_object_data.dart';
 export 'screens/edit_person/edit_person_contacts_import.dart';
 export 'screens/edit_person/edit_person_save_button.dart';

@@ -4,7 +4,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class FakeAreasDAO extends Fake implements AreasDAO {
+import 'fake_object_writes.dart';
+
+class FakeAreasDAO extends Fake
+    with FakeObjectWrites<Area>
+    implements AreasDAO {
   final areasByStreetId = <String, List<Area>>{};
   final areasAtPoint = <Point, Area>{};
   final lookupGatesByStreetId = <String, Completer<void>>{};
