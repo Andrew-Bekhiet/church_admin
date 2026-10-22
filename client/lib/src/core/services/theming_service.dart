@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:derived_colors/derived_colors.dart';
@@ -243,6 +245,8 @@ class ThemingService with WidgetsBindingObserver {
 
   final BehaviorSubject<ThemeData> _themeData;
 
+  late final StreamSubscription<ThemePreferences> _themePreferencesSubscription;
+
   Stream<ThemeData> get stream => _themeData.share();
 
   ThemeData get theme => _themeData.value;
@@ -262,6 +266,13 @@ class ThemingService with WidgetsBindingObserver {
     required ThemeData initialTheme,
   }) : _themeData = BehaviorSubject.seeded(initialTheme) {
     WidgetsBinding.instance.addObserver(this);
+    _themePreferencesSubscription = _userPreferencesService
+        .themePreferencesStream
+        .listen(
+          (_) => theme = getDefault(
+            userPreferencesService: _userPreferencesService,
+          ),
+        );
   }
 
   @override
@@ -277,6 +288,7 @@ class ThemingService with WidgetsBindingObserver {
   }
 
   Future<void> dispose() async {
+    await _themePreferencesSubscription.cancel();
     await _themeData.close();
   }
 }
