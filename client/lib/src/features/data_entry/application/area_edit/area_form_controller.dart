@@ -4,10 +4,10 @@ import 'package:uuid/uuid.dart' show Uuid;
 
 class AreaFormController extends ObjectFormController<Area> {
   late final bounds = AdvancedFieldController<Polygon?, ObjectEditError>(
-    initialValue: startingObject.bounds,
+    initialValue: initialDraft.bounds,
   );
   late final lastVisit = AdvancedFieldController<DateTime?, ObjectEditError>(
-    initialValue: startingObject.lastVisit?.time,
+    initialValue: initialDraft.lastVisit?.time,
   );
 
   AreaFormController({
@@ -18,7 +18,7 @@ class AreaFormController extends ObjectFormController<Area> {
            UpdateArea(:final area) => area,
            CreateArea() => null,
          },
-         startingObject: switch (intent) {
+         initialDraft: switch (intent) {
            UpdateArea(:final area) => area,
            final CreateArea create => create.draftArea(const Uuid().v4()),
          },
@@ -28,10 +28,10 @@ class AreaFormController extends ObjectFormController<Area> {
   }
 
   @override
-  Area toObject() => startingObject.copyWith(
+  Area toObject() => initialDraft.copyWith(
     name: editedName,
     bounds: bounds.fieldValue,
-    lastVisit: recordedByMeIfDateChanged(lastVisit, startingObject.lastVisit),
+    lastVisit: recordedByMeIfDateChanged(lastVisit, initialDraft.lastVisit),
     color: color.fieldValue,
   );
 }

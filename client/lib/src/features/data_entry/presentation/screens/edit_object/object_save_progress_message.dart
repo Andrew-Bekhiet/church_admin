@@ -14,11 +14,7 @@ class ObjectSaveProgressMessage extends StatelessWidget {
       builder: (context, progress) => Row(
         children: [
           Expanded(
-            child: Text(switch (progress) {
-              UploadingObjectPhoto() => 'جار رفع الصورة ...',
-              DeletingObject() => 'جار الحذف ...',
-              NotSavingObject() || SavingObject() => 'جار الحفظ ...',
-            }),
+            child: Text(progress.message),
           ),
           CircularProgressIndicator(
             value: switch (progress) {

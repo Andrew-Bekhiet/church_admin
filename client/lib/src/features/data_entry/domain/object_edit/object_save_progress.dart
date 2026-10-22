@@ -4,6 +4,12 @@ sealed class ObjectSaveProgress extends Equatable {
   @override
   List<Object?> get props => const [];
 
+  String get message => switch (this) {
+    UploadingObjectPhoto() => 'جار رفع الصورة ...',
+    DeletingObject() => 'جار الحذف ...',
+    NotSavingObject() || SavingObject() => 'جار الحفظ ...',
+  };
+
   const ObjectSaveProgress();
 }
 

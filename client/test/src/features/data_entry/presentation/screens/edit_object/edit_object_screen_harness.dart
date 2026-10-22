@@ -20,7 +20,6 @@ import '../../../../../fakes/mock_viewable_object_service.dart';
 class FakeFunctionsService extends Fake implements FunctionsService {}
 
 class EditObjectScreenHarness {
-  static const String discardDialogTitle = 'هل تريد تجاهل التغييرات؟';
   static const User userWhoWritesEverything = User(
     uid: 'user-id',
     name: 'مستخدم',
@@ -30,19 +29,23 @@ class EditObjectScreenHarness {
     }),
   );
 
-  final FakeAreasDAO areas = FakeAreasDAO();
-  final FakeStreetsDAO streets = FakeStreetsDAO();
+  final FakeAreasDAO areasDAO = FakeAreasDAO();
+  final FakeStreetsDAO streetsDAO = FakeStreetsDAO();
   final FakeLoggingService logging = FakeLoggingService();
 
+  late KaiselRouter<AppRoute> _router;
+
   Finder get nameField => find.byKey(EditObjectScaffoldKeys.nameField);
+
+  List<AppRoute> get routeStack => _router.stack;
 
   void install() {
     final authBloc = MockAuthBloc();
     when(() => authBloc.currentUserData).thenReturn(userWhoWritesEverything);
 
     final databaseService = MockDatabaseService();
-    when(() => databaseService.areas).thenReturn(areas);
-    when(() => databaseService.streets).thenReturn(streets);
+    when(() => databaseService.areas).thenReturn(areasDAO);
+    when(() => databaseService.streets).thenReturn(streetsDAO);
 
     registerFallbackValue(const FunctionsObjectImageInfo('areas', 'fallback'));
     final imageUrls = MockImageUrlCacheService();
@@ -76,28 +79,17 @@ class EditObjectScreenHarness {
     AppRoute editRoute, {
     bool withPageBelow = false,
   }) async {
-    Widget openButtonPage(BuildContext context) => Scaffold(
-      body: TextButton(
-        onPressed: () => unawaited(editRoute.push(context)),
-        child: const Text('open'),
-      ),
-    );
-
-    final router = KaiselRouterConfig<AppRoute>(
+    final routerConfig = KaiselRouterConfig<AppRoute>(
       initial: const HomeScreenRoute(),
-      builder: (context, route) => switch (route) {
-        ViewAreaRoute(:final id) || ViewStreetRoute(:final id) => Text(
-          'viewing $id',
-        ),
-        HomeScreenRoute() || SettingsRoute() => openButtonPage(context),
-        _ => route.build(context),
-      },
+      builder: (context, route) =>
+          route == editRoute ? route.build(context) : const Scaffold(),
     );
-    addTearDown(router.dispose);
+    addTearDown(routerConfig.dispose);
+    _router = routerConfig.router;
 
     await tester.pumpWidget(
       MaterialApp.router(
-        routerConfig: router,
+        routerConfig: routerConfig,
         locale: const Locale('ar', 'EG'),
         supportedLocales: const [Locale('ar', 'EG')],
         localizationsDelegates: const [
@@ -109,11 +101,8 @@ class EditObjectScreenHarness {
         ),
       ),
     );
-    if (withPageBelow) {
-      unawaited(router.router.push(const SettingsRoute()));
-      await tester.pumpAndSettle();
-    }
-    await tester.tap(find.text('open'));
+    if (withPageBelow) unawaited(_router.push(const SettingsRoute()));
+    unawaited(_router.push(editRoute));
     await tester.pumpAndSettle();
     await tester.drag(find.byType(Scrollable).first, const Offset(0, -700));
     await tester.pumpAndSettle();

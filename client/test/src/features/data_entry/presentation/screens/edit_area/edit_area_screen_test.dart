@@ -23,7 +23,7 @@ void main() {
     await harness.open(tester, const EditAreaRoute());
 
     expect(find.byKey(ObjectSaveButtonKeys.saveButton), findsOneWidget);
-    expect(find.byTooltip('حذف'), findsNothing);
+    expect(find.byKey(ObjectDeleteButtonKeys.deleteButton), findsNothing);
   });
 
   testWidgets('saving a new area creates it and opens its details', (
@@ -35,9 +35,12 @@ void main() {
     await harness.tapSave(tester);
     await tester.pumpAndSettle();
 
-    final created = harness.areas.createdObjects.single;
+    final created = harness.areasDAO.createdObjects.single;
     expect(created.name, 'المعادي');
-    expect(find.text('viewing ${created.id}'), findsOneWidget);
+    expect(
+      harness.routeStack.last,
+      ViewAreaRoute(id: created.id, area: created),
+    );
   });
 
   testWidgets('saving without a name shows why and saves nothing', (
@@ -49,7 +52,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text(ObjectEditError.nameRequired.message), findsOneWidget);
-    expect(harness.areas.createdObjects, isEmpty);
+    expect(harness.areasDAO.createdObjects, isEmpty);
   });
 
   testWidgets('saving an existing area goes back to the previous screen', (
@@ -64,14 +67,14 @@ void main() {
     await harness.tapSave(tester);
     await tester.pumpAndSettle();
 
-    expect(harness.areas.updates.single.editedObject.name, 'شبرا الخيمة');
-    expect(find.text('open'), findsOneWidget);
+    expect(harness.areasDAO.updates.single.editedObject.name, 'شبرا الخيمة');
+    expect(harness.routeStack, [const HomeScreenRoute()]);
   });
 
   testWidgets('a failed save reports the error and stays on the editor', (
     tester,
   ) async {
-    harness.areas.saveError = Exception('offline');
+    harness.areasDAO.saveError = Exception('offline');
     await harness.open(
       tester,
       const EditAreaRoute(intent: UpdateArea(area: storedArea)),
@@ -94,10 +97,7 @@ void main() {
       await tester.enterText(harness.nameField, 'شبرا الخيمة');
       await harness.pressBack(tester);
 
-      expect(
-        find.text(EditObjectScreenHarness.discardDialogTitle),
-        findsOneWidget,
-      );
+      expect(find.byType(DiscardChangesDialog), findsOneWidget);
     });
 
     testWidgets('without edits goes straight back', (tester) async {
@@ -108,25 +108,25 @@ void main() {
 
       await harness.pressBack(tester);
 
-      expect(find.text('open'), findsOneWidget);
+      expect(harness.routeStack, [const HomeScreenRoute()]);
     });
   });
 
   testWidgets('while deleting the message says so', (tester) async {
-    final deleteGate = harness.areas.deleteGate = Completer<void>();
+    final deleteGate = harness.areasDAO.deleteGate = Completer<void>();
     await harness.open(
       tester,
       const EditAreaRoute(intent: UpdateArea(area: storedArea)),
       withPageBelow: true,
     );
 
-    await tester.tap(find.byTooltip('حذف'));
+    await tester.tap(find.byKey(ObjectDeleteButtonKeys.deleteButton));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('حذف'));
+    await tester.tap(find.byKey(ConfirmationDialogKeys.confirmButton));
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
 
-    expect(find.text('جار الحذف ...'), findsOneWidget);
+    expect(find.text(const DeletingObject().message), findsOneWidget);
     deleteGate.complete();
     await tester.pumpAndSettle();
   });
@@ -140,12 +140,12 @@ void main() {
       withPageBelow: true,
     );
 
-    await tester.tap(find.byTooltip('حذف'));
+    await tester.tap(find.byKey(ObjectDeleteButtonKeys.deleteButton));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('حذف'));
+    await tester.tap(find.byKey(ConfirmationDialogKeys.confirmButton));
     await tester.pumpAndSettle();
 
-    expect(harness.areas.deletedIds, [storedArea.id]);
-    expect(find.text('open'), findsOneWidget);
+    expect(harness.areasDAO.deletedIds, [storedArea.id]);
+    expect(harness.routeStack, [const HomeScreenRoute()]);
   });
 }

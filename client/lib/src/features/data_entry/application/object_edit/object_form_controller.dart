@@ -6,18 +6,18 @@ import 'package:meta/meta.dart';
 abstract class ObjectFormController<T extends ViewableWithIDAndImage>
     extends AdvancedFormController {
   final T? savedObject;
-  final T startingObject;
+  final T initialDraft;
   final String? _recordedByUserId;
 
   late final photo = AdvancedFieldController<PhotoChange, ObjectEditError>(
     initialValue: const KeepPhoto(),
   );
   late final name = AdvancedTextFieldController<ObjectEditError>(
-    initialValue: startingObject.name,
+    initialValue: initialDraft.name,
     validator: filled(ObjectEditError.nameRequired),
   );
   late final color = AdvancedFieldController<Color?, ObjectEditError>(
-    initialValue: startingObject.color,
+    initialValue: initialDraft.color,
   );
 
   bool get isCreate => savedObject == null;
@@ -26,11 +26,11 @@ abstract class ObjectFormController<T extends ViewableWithIDAndImage>
 
   @protected
   String get editedName =>
-      PersonFormValues.text(startingObject.name, name.fieldValue);
+      PersonFormValues.text(initialDraft.name, name.fieldValue);
 
   ObjectFormController({
     required this.savedObject,
-    required this.startingObject,
+    required this.initialDraft,
     required this._recordedByUserId,
     required super.debugName,
   }) : super(validationMode: ValidationMode.onUserInteraction);

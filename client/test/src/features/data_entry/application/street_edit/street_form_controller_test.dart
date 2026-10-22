@@ -11,7 +11,7 @@ void main() {
   StreetFormController controllerFor(StreetEditIntent intent) {
     final controller = StreetFormController(
       intent: intent,
-      areas: FakeAreasDAO(),
+      areasDAO: FakeAreasDAO(),
       recordedByUserId: 'me',
     );
     addTearDown(controller.dispose);
@@ -49,12 +49,12 @@ void main() {
     expect(controller.toObject().areas, unorderedEquals([shubra, maadi]));
   });
 
-  test('the line drawn on the map is saved', () {
+  test('the line drawnLine on the map is saved', () {
     final controller = controllerFor(const UpdateStreet(street: storedStreet));
-    const drawn = Line([Point(30, 31), Point(30.1, 31.1)]);
+    const drawnLine = Line([Point(30, 31), Point(30.1, 31.1)]);
 
-    controller.line.setValue(drawn);
+    controller.line.setValue(drawnLine);
 
-    expect(controller.toObject().line, drawn);
+    expect(controller.toObject().line, drawnLine);
   });
 }

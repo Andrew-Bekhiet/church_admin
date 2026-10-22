@@ -3,29 +3,29 @@ import 'package:church_admin/church_admin.dart';
 import 'package:uuid/uuid.dart' show Uuid;
 
 class StreetFormController extends ObjectFormController<Street> {
-  final AreasDAO _areas;
+  final AreasDAO _areasDAO;
 
   late final line = AdvancedFieldController<Line?, ObjectEditError>(
-    initialValue: startingObject.line,
+    initialValue: initialDraft.line,
   );
   late final areas = AdvancedFieldController<Set<Area>, ObjectEditError>(
-    initialValue: startingObject.areas?.toSet() ?? const {},
+    initialValue: initialDraft.areas?.toSet() ?? const {},
     validator: (areas) => areas.isEmpty ? ObjectEditError.areaRequired : null,
   );
   late final lastVisit = AdvancedFieldController<DateTime?, ObjectEditError>(
-    initialValue: startingObject.lastVisit?.time,
+    initialValue: initialDraft.lastVisit?.time,
   );
 
   StreetFormController({
     required StreetEditIntent intent,
-    required this._areas,
+    required this._areasDAO,
     required super.recordedByUserId,
   }) : super(
          savedObject: switch (intent) {
            UpdateStreet(:final street) => street,
            CreateStreet() => null,
          },
-         startingObject: switch (intent) {
+         initialDraft: switch (intent) {
            UpdateStreet(:final street) => street,
            final CreateStreet create => create.draftStreet(const Uuid().v4()),
          },
@@ -36,15 +36,15 @@ class StreetFormController extends ObjectFormController<Street> {
 
   ViewableObjectListController<Area> areasMatching(Stream<String?> search) =>
       ViewableObjectListController(
-        objectsPaginatableStream: _areas.streamAll(searchQuery: search),
+        objectsPaginatableStream: _areasDAO.streamAll(searchQuery: search),
       );
 
   @override
-  Street toObject() => startingObject.copyWith(
+  Street toObject() => initialDraft.copyWith(
     name: editedName,
     line: line.fieldValue,
-    areas: PersonFormValues.listOf(startingObject.areas, areas.fieldValue),
-    lastVisit: recordedByMeIfDateChanged(lastVisit, startingObject.lastVisit),
+    areas: PersonFormValues.listOf(initialDraft.areas, areas.fieldValue),
+    lastVisit: recordedByMeIfDateChanged(lastVisit, initialDraft.lastVisit),
     color: color.fieldValue,
   );
 }

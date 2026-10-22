@@ -27,7 +27,7 @@ void main() {
     await harness.tapSave(tester);
     await tester.pumpAndSettle();
 
-    expect(harness.streets.createdObjects.single.areas, [shubra]);
+    expect(harness.streetsDAO.createdObjects.single.areas, [shubra]);
   });
 
   testWidgets('saving a street without an area shows why and saves nothing', (
@@ -40,6 +40,6 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text(ObjectEditError.areaRequired.message), findsOneWidget);
-    expect(harness.streets.createdObjects, isEmpty);
+    expect(harness.streetsDAO.createdObjects, isEmpty);
   });
 }

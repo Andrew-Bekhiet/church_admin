@@ -19,6 +19,7 @@ class ObjectDeleteButton<T extends ViewableWithIDAndImage>
     return BlocBuilder<ObjectSaveCubit<T>, ObjectSaveProgress>(
       bloc: saveCubit,
       builder: (context, progress) => IconButton(
+        key: ObjectDeleteButtonKeys.deleteButton,
         onPressed: switch (progress) {
           NotSavingObject() => () => _delete(context),
           DeletingObject() || SavingObject() || UploadingObjectPhoto() => null,
@@ -80,4 +81,8 @@ class ObjectDeleteButton<T extends ViewableWithIDAndImage>
     navigator.pop();
     WidgetsBinding.instance.addPostFrameCallback((_) => navigator.pop());
   }
+}
+
+abstract final class ObjectDeleteButtonKeys {
+  static const Key deleteButton = ValueKey('Object Delete Button Key');
 }
