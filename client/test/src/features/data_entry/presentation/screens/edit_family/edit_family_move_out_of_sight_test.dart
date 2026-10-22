@@ -96,7 +96,8 @@ void main() {
       harness.families.updates.single.editedObject.address?.area,
       maadi,
     );
-    expect(find.text('open'), findsOneWidget);
+    expect(find.byKey(EditObjectScreenHarness.homePageKey), findsOneWidget);
+    expect(find.byKey(EditObjectScreenHarness.pageBelowKey), findsNothing);
   });
 
   testWidgets('a confirmed move announces that the family was moved', (

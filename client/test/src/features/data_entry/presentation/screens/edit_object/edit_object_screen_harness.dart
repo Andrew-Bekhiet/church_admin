@@ -28,6 +28,8 @@ class FakeFunctionsService extends Fake implements FunctionsService {}
 
 class EditObjectScreenHarness {
   static const String discardDialogTitle = 'هل تريد تجاهل التغييرات؟';
+  static const Key homePageKey = ValueKey('home-page');
+  static const Key pageBelowKey = ValueKey('page-below');
   static const User userWhoWritesEverything = User(
     uid: 'user-id',
     name: 'مستخدم',
@@ -100,7 +102,8 @@ class EditObjectScreenHarness {
     bool withPageBelow = false,
     bool settle = true,
   }) async {
-    Widget openButtonPage(BuildContext context) => Scaffold(
+    Widget openButtonPage(BuildContext context, Key pageKey) => Scaffold(
+      key: pageKey,
       body: TextButton(
         onPressed: () => unawaited(editRoute.push(context)),
         child: const Text('open'),
@@ -114,7 +117,8 @@ class EditObjectScreenHarness {
         ViewStreetRoute(:final id) ||
         ViewFamilyRoute(:final id) ||
         ViewStoreRoute(:final id) => Text('viewing $id'),
-        HomeScreenRoute() || SettingsRoute() => openButtonPage(context),
+        HomeScreenRoute() => openButtonPage(context, homePageKey),
+        SettingsRoute() => openButtonPage(context, pageBelowKey),
         _ => route.build(context),
       },
     );
