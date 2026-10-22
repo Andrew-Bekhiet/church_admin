@@ -22,7 +22,7 @@ class GroupFormController extends ObjectFormController<Group>
   GroupFormController({
     required GroupEditIntent intent,
     required this._servicesDAO,
-    required super.recordedByUserId,
+    required super.currentUserId,
   }) : super(
          savedObject: switch (intent) {
            UpdateGroup(:final group) => group,

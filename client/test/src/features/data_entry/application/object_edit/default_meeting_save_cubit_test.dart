@@ -16,7 +16,7 @@ void main() {
     form = ServiceFormController(
       intent: intent,
       servicesDAO: services,
-      recordedByUserId: 'me',
+      currentUserId: 'me',
     );
     addTearDown(form.dispose);
 

@@ -41,7 +41,7 @@ class ServiceFormController extends ObjectFormController<Service>
   ServiceFormController({
     required ServiceEditIntent intent,
     required this._servicesDAO,
-    required super.recordedByUserId,
+    required super.currentUserId,
   }) : super(
          savedObject: switch (intent) {
            UpdateService(:final service) => service,

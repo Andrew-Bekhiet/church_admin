@@ -20,7 +20,7 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
   late final GroupFormController _form = GroupFormController(
     intent: widget.intent,
     servicesDAO: DatabaseService.I.services,
-    recordedByUserId: _currentUser?.uid,
+    currentUserId: _currentUser?.uid,
   );
   late final DefaultMeetingSaveCubit<Group> _saveCubit =
       DefaultMeetingSaveCubit(

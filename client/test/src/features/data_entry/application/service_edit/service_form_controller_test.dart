@@ -11,7 +11,7 @@ void main() {
     final controller = ServiceFormController(
       intent: intent,
       servicesDAO: FakeServicesDAO(),
-      recordedByUserId: 'me',
+      currentUserId: 'me',
     );
     addTearDown(controller.dispose);
 
