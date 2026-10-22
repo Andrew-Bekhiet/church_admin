@@ -10,6 +10,9 @@ class ViewPersonRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties => {'person_id': id};
+
+  @override
   List<Object?> get props => [id, person];
 
   const ViewPersonRoute({required this.id, this.person});
