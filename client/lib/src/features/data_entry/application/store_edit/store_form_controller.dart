@@ -3,11 +3,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:uuid/uuid.dart' show Uuid;
 
 class StoreFormController extends ObjectFormController<Store> {
-  final FamiliesDAO _families;
+  final FamiliesDAO _familiesDAO;
 
   late final AddressFormController address;
   late final family = AdvancedFieldController<Family?, ObjectEditError>(
-    initialValue: startingObject.family,
+    initialValue: initialDraft.family,
     validator: (family) =>
         family == null && address.geolocation.fieldValue == null
         ? ObjectEditError.familyOrLocationRequired
@@ -16,7 +16,7 @@ class StoreFormController extends ObjectFormController<Store> {
 
   StoreFormController({
     required StoreEditIntent intent,
-    required this._families,
+    required this._familiesDAO,
     required AddressFormServices addressServices,
     required super.recordedByUserId,
   }) : super(
@@ -24,14 +24,14 @@ class StoreFormController extends ObjectFormController<Store> {
            UpdateStore(:final store) => store,
            CreateStore() => null,
          },
-         startingObject: switch (intent) {
+         initialDraft: switch (intent) {
            UpdateStore(:final store) => store,
            final CreateStore create => create.draftStore(const Uuid().v4()),
          },
          debugName: 'store',
        ) {
     address = AddressFormController(
-      initialAddress: startingObject.address,
+      initialAddress: initialDraft.address,
       services: addressServices,
       isRequired: () => true,
     );
@@ -42,10 +42,10 @@ class StoreFormController extends ObjectFormController<Store> {
 
   ViewableObjectListController<Family> familiesMatching(
     Stream<String?> search,
-  ) => SearchableDaoListController.over(_families)(search);
+  ) => SearchableDaoListController.over(_familiesDAO)(search);
 
   @override
-  Store toObject() => startingObject.copyWith(
+  Store toObject() => initialDraft.copyWith(
     name: editedName,
     address: address.toAddress(),
     family: family.fieldValue,

@@ -22,7 +22,7 @@ void main() {
   StoreFormController controllerFor(StoreEditIntent intent) {
     final controller = StoreFormController(
       intent: intent,
-      families: InMemoryFamiliesDAO(),
+      familiesDAO: InMemoryFamiliesDAO(),
       addressServices: FakeAddressFormServices.withNothingToSuggest(),
       recordedByUserId: 'me',
     );

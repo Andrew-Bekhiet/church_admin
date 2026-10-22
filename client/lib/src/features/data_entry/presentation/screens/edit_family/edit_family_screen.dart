@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 class EditFamilyScreen extends StatefulWidget {
+  static const String movedOutOfSightMessage = 'تم نقل العائلة';
+
   final FamilyEditIntent intent;
 
   const EditFamilyScreen({required this.intent, super.key});
@@ -20,7 +22,7 @@ class _EditFamilyScreenState extends State<EditFamilyScreen> {
   );
   late final FamilyFormController _form = FamilyFormController(
     intent: widget.intent,
-    families: DatabaseService.I.families,
+    familiesDAO: DatabaseService.I.families,
     addressServices: AddressFormServices.backedBy(
       DatabaseService.I,
       geocoder: Geocoder.I,
@@ -36,12 +38,12 @@ class _EditFamilyScreenState extends State<EditFamilyScreen> {
   );
   late final FamilyRelativesCubit _relatives = FamilyRelativesCubit(
     form: _form,
-    families: DatabaseService.I.families,
+    familiesDAO: DatabaseService.I.families,
     logging: LoggingService.I,
   );
   late final PhoneContactsEditorCubit _phoneContacts = PhoneContactsEditorCubit(
     own: const [],
-    family: _form.startingObject.contacts,
+    family: _form.initialDraft.contacts,
     hasFamily: true,
     familyOnly: true,
   );
@@ -70,7 +72,7 @@ class _EditFamilyScreenState extends State<EditFamilyScreen> {
           canDelete: (saved) => _currentUser?.canDeleteObject(saved) ?? false,
           detailsRouteOf: (family) =>
               ViewFamilyRoute(id: family.id, family: family),
-          movedOutOfSightMessage: 'تم نقل العائلة',
+          movedOutOfSightMessage: EditFamilyScreen.movedOutOfSightMessage,
           hasUnsavedInput: () => _phoneContacts.hasUnsavedInput,
           fields: FamilyEditFields(
             form: _form,

@@ -27,9 +27,6 @@ import '../edit_person/edit_person_screen_harness.dart'
 class FakeFunctionsService extends Fake implements FunctionsService {}
 
 class EditObjectScreenHarness {
-  static const String discardDialogTitle = 'هل تريد تجاهل التغييرات؟';
-  static const Key homePageKey = ValueKey('home-page');
-  static const Key pageBelowKey = ValueKey('page-below');
   static const User userWhoWritesEverything = User(
     uid: 'user-id',
     name: 'مستخدم',
@@ -39,30 +36,34 @@ class EditObjectScreenHarness {
     }),
   );
 
-  final FakeAreasDAO areas = FakeAreasDAO();
-  final FakeStreetsDAO streets = FakeStreetsDAO();
-  final InMemoryFamiliesDAO families = InMemoryFamiliesDAO();
-  final FakeStoresDAO stores = FakeStoresDAO();
-  final FakePersonTypesDAO personTypes = FakePersonTypesDAO();
+  final FakeAreasDAO areasDAO = FakeAreasDAO();
+  final FakeStreetsDAO streetsDAO = FakeStreetsDAO();
+  final InMemoryFamiliesDAO familiesDAO = InMemoryFamiliesDAO();
+  final FakeStoresDAO storesDAO = FakeStoresDAO();
+  final FakePersonTypesDAO personTypesDAO = FakePersonTypesDAO();
   final FakeLoggingService logging = FakeLoggingService();
 
   User currentUser = userWhoWritesEverything;
 
+  late KaiselRouter<AppRoute> _router;
+
   Finder get nameField => find.byKey(EditObjectScaffoldKeys.nameField);
+
+  List<AppRoute> get routeStack => _router.stack;
 
   void install() {
     final authBloc = MockAuthBloc();
     when(() => authBloc.currentUserData).thenReturn(currentUser);
 
     final databaseService = MockDatabaseService();
-    when(() => databaseService.areas).thenReturn(areas);
-    when(() => databaseService.streets).thenReturn(streets);
-    when(() => databaseService.families).thenReturn(families);
-    when(() => databaseService.stores).thenReturn(stores);
+    when(() => databaseService.areas).thenReturn(areasDAO);
+    when(() => databaseService.streets).thenReturn(streetsDAO);
+    when(() => databaseService.families).thenReturn(familiesDAO);
+    when(() => databaseService.stores).thenReturn(storesDAO);
     when(() => databaseService.metadata).thenReturn(
       FakeMetadataDAO(
         db: databaseService,
-        fakePersonTypes: personTypes,
+        fakePersonTypes: personTypesDAO,
         fakeHobbies: FakeHobbiesDAO(),
         fakeDistricts: FakeDistrictsDAO(),
       ),
@@ -102,31 +103,17 @@ class EditObjectScreenHarness {
     bool withPageBelow = false,
     bool settle = true,
   }) async {
-    Widget openButtonPage(BuildContext context, Key pageKey) => Scaffold(
-      key: pageKey,
-      body: TextButton(
-        onPressed: () => unawaited(editRoute.push(context)),
-        child: const Text('open'),
-      ),
-    );
-
-    final router = KaiselRouterConfig<AppRoute>(
+    final routerConfig = KaiselRouterConfig<AppRoute>(
       initial: const HomeScreenRoute(),
-      builder: (context, route) => switch (route) {
-        ViewAreaRoute(:final id) ||
-        ViewStreetRoute(:final id) ||
-        ViewFamilyRoute(:final id) ||
-        ViewStoreRoute(:final id) => Text('viewing $id'),
-        HomeScreenRoute() => openButtonPage(context, homePageKey),
-        SettingsRoute() => openButtonPage(context, pageBelowKey),
-        _ => route.build(context),
-      },
+      builder: (context, route) =>
+          route == editRoute ? route.build(context) : const Scaffold(),
     );
-    addTearDown(router.dispose);
+    addTearDown(routerConfig.dispose);
+    _router = routerConfig.router;
 
     await tester.pumpWidget(
       MaterialApp.router(
-        routerConfig: router,
+        routerConfig: routerConfig,
         locale: const Locale('ar', 'EG'),
         supportedLocales: const [Locale('ar', 'EG')],
         localizationsDelegates: const [
@@ -138,11 +125,8 @@ class EditObjectScreenHarness {
         ),
       ),
     );
-    if (withPageBelow) {
-      unawaited(router.router.push(const SettingsRoute()));
-      await tester.pumpAndSettle();
-    }
-    await tester.tap(find.text('open'));
+    if (withPageBelow) unawaited(_router.push(const SettingsRoute()));
+    unawaited(_router.push(editRoute));
     if (!settle) {
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));

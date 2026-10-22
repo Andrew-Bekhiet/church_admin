@@ -20,7 +20,7 @@ void main() {
   FamilyFormController controllerFor(FamilyEditIntent intent) {
     final controller = FamilyFormController(
       intent: intent,
-      families: InMemoryFamiliesDAO(),
+      familiesDAO: InMemoryFamiliesDAO(),
       addressServices: FakeAddressFormServices.withNothingToSuggest(),
       recordedByUserId: 'me',
     );

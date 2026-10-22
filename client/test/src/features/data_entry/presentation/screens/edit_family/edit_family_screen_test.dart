@@ -10,7 +10,6 @@ void main() {
   const father = PersonType(id: 'father', name: 'الأب', isFamilyAdmin: true);
   const otherValidInput = '01002222222';
   const otherE164 = '+201002222222';
-  const discardDialogTitle = EditObjectScreenHarness.discardDialogTitle;
   const storedFamily = Family(
     id: 'family-id',
     name: 'أسرة',
@@ -65,9 +64,12 @@ void main() {
     await tester.enterText(harness.nameField, 'أسرة جديدة');
     await saveAndSettle(tester);
 
-    final created = harness.families.createdObjects.single;
+    final created = harness.familiesDAO.createdObjects.single;
     expect(created.address?.street, storedFamily.address?.street);
-    expect(find.text('viewing ${created.id}'), findsOneWidget);
+    expect(
+      harness.routeStack.last,
+      ViewFamilyRoute(id: created.id, family: created),
+    );
   });
 
   group("a widowed family's deceased spouse name", () {
@@ -93,7 +95,7 @@ void main() {
       await saveDeceasedSpouseName(tester, MartialStatus.widowed, '  جرجس  ');
 
       expect(
-        harness.families.updates.single.editedObject.deceasedSpouseName,
+        harness.familiesDAO.updates.single.editedObject.deceasedSpouseName,
         'جرجس',
       );
     });
@@ -106,7 +108,7 @@ void main() {
         await saveDeceasedSpouseName(tester, status, '');
 
         expect(
-          harness.families.updates.single.editedObject.deceasedSpouseName,
+          harness.familiesDAO.updates.single.editedObject.deceasedSpouseName,
           isNull,
         );
       });
@@ -115,7 +117,7 @@ void main() {
 
   group('editing before the saved relatives finish loading', () {
     testWidgets('a changed number is saved', (tester) async {
-      final gate = harness.families.relatedFamiliesGate = Completer<void>();
+      final gate = harness.familiesDAO.relatedFamiliesGate = Completer<void>();
       await openStoredFamily(tester, settle: false);
 
       await harness.scrollTo(tester, phoneField('family-saved'));
@@ -125,7 +127,7 @@ void main() {
       await saveAndSettle(tester);
 
       expect(
-        harness.families.updates.single.editedObject.contacts.map(
+        harness.familiesDAO.updates.single.editedObject.contacts.map(
           (contact) => contact.contact.phone,
         ),
         [otherE164],
@@ -133,7 +135,7 @@ void main() {
     });
 
     testWidgets('a changed name is saved', (tester) async {
-      final gate = harness.families.relatedFamiliesGate = Completer<void>();
+      final gate = harness.familiesDAO.relatedFamiliesGate = Completer<void>();
       await openStoredFamily(tester, settle: false);
 
       await harness.scrollTo(tester, harness.nameField);
@@ -142,7 +144,7 @@ void main() {
       await tester.pumpAndSettle();
       await saveAndSettle(tester);
 
-      expect(harness.families.updates.single.editedObject.name, 'اسم جديد');
+      expect(harness.familiesDAO.updates.single.editedObject.name, 'اسم جديد');
     });
   });
 
@@ -156,7 +158,7 @@ void main() {
       await tester.enterText(phoneField('family-saved'), '0100');
       await harness.pressBack(tester);
 
-      expect(find.text(discardDialogTitle), findsOneWidget);
+      expect(find.byType(DiscardChangesDialog), findsOneWidget);
     });
 
     testWidgets('after changing a number to another valid one asks to '
@@ -167,13 +169,13 @@ void main() {
       await tester.enterText(phoneField('family-saved'), otherValidInput);
       await harness.pressBack(tester);
 
-      expect(find.text(discardDialogTitle), findsOneWidget);
+      expect(find.byType(DiscardChangesDialog), findsOneWidget);
     });
 
     testWidgets('after adding an empty number row asks to discard', (
       tester,
     ) async {
-      harness.personTypes.familyRoles = const [father];
+      harness.personTypesDAO.familyRoles = const [father];
       await openStoredFamily(tester);
 
       final add = find.byKey(FamilyPhoneContactMenuButtonKeys.button);
@@ -186,21 +188,21 @@ void main() {
       await tester.pumpAndSettle();
       await harness.pressBack(tester);
 
-      expect(find.text(discardDialogTitle), findsOneWidget);
+      expect(find.byType(DiscardChangesDialog), findsOneWidget);
     });
 
     testWidgets('after the saved relatives load without edits does not ask', (
       tester,
     ) async {
-      harness.families.relatedFamilies = storedFamily.copyWith(
+      harness.familiesDAO.relatedFamilies = storedFamily.copyWith(
         parents: const [Family(id: 'parent', name: 'عائلة الأب')],
       );
       await openStoredFamily(tester);
 
       await harness.pressBack(tester);
 
-      expect(find.text(discardDialogTitle), findsNothing);
-      expect(find.text('open'), findsOneWidget);
+      expect(find.byType(DiscardChangesDialog), findsNothing);
+      expect(harness.routeStack, [const HomeScreenRoute()]);
     });
   });
 }

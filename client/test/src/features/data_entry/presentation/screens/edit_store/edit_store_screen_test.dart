@@ -47,7 +47,7 @@ void main() {
     await harness.tapSave(tester);
     await tester.pumpAndSettle();
 
-    expect(harness.stores.updates.single.editedObject.familyId, family.id);
+    expect(harness.storesDAO.updates.single.editedObject.familyId, family.id);
   });
 
   testWidgets('a store with neither a family nor a location shows why and '
@@ -70,6 +70,6 @@ void main() {
       find.text(ObjectEditError.familyOrLocationRequired.message),
       findsOneWidget,
     );
-    expect(harness.stores.updates, isEmpty);
+    expect(harness.storesDAO.updates, isEmpty);
   });
 }

@@ -8,7 +8,6 @@ import '../edit_object/edit_object_screen_harness.dart';
 void main() {
   const shubra = Area(id: 'shubra', name: 'شبرا');
   const maadi = Area(id: 'maadi', name: 'المعادي');
-  const confirmationTitle = 'لن تتمكن من رؤية البيانات بعد الحفظ';
   const family = Family(
     id: 'family-id',
     name: 'أسرة',
@@ -20,11 +19,6 @@ void main() {
   );
 
   late EditObjectScreenHarness harness;
-
-  Finder confirmationButton(String label) => find.descendant(
-    of: find.byType(AlertDialog),
-    matching: find.text(label),
-  );
 
   Future<void> moveToMaadiAndSave(WidgetTester tester) async {
     await harness.open(
@@ -55,7 +49,7 @@ void main() {
         adminOn: [AdminOnData(permissionId: 'grant', area: shubra)],
       )
       ..install();
-    harness.areas.pickableAreas = const [maadi];
+    harness.areasDAO.pickableAreas = const [maadi];
   });
 
   tearDown(defaultTearDown);
@@ -65,8 +59,8 @@ void main() {
   ) async {
     await moveToMaadiAndSave(tester);
 
-    expect(find.text(confirmationTitle), findsOneWidget);
-    expect(harness.families.updates, isEmpty);
+    expect(find.byType(MoveOutOfSightConfirmationDialog), findsOneWidget);
+    expect(harness.familiesDAO.updates, isEmpty);
   });
 
   testWidgets('declining the move keeps the editor and saves nothing', (
@@ -74,14 +68,14 @@ void main() {
   ) async {
     await moveToMaadiAndSave(tester);
 
-    await tester.tap(confirmationButton('إلغاء'));
+    await tester.tap(find.byKey(ConfirmationDialogKeys.cancelButton));
     await tester.pumpAndSettle();
 
     final saveButton = tester.widget<FloatingActionButton>(
       find.byKey(ObjectSaveButtonKeys.saveButton),
     );
     expect(saveButton.onPressed, isNotNull);
-    expect(harness.families.updates, isEmpty);
+    expect(harness.familiesDAO.updates, isEmpty);
   });
 
   testWidgets('a confirmed move is saved and leaves the family behind', (
@@ -89,15 +83,14 @@ void main() {
   ) async {
     await moveToMaadiAndSave(tester);
 
-    await tester.tap(confirmationButton('حفظ'));
+    await tester.tap(find.byKey(ConfirmationDialogKeys.confirmButton));
     await tester.pumpAndSettle();
 
     expect(
-      harness.families.updates.single.editedObject.address?.area,
+      harness.familiesDAO.updates.single.editedObject.address?.area,
       maadi,
     );
-    expect(find.byKey(EditObjectScreenHarness.homePageKey), findsOneWidget);
-    expect(find.byKey(EditObjectScreenHarness.pageBelowKey), findsNothing);
+    expect(harness.routeStack, [const HomeScreenRoute()]);
   });
 
   testWidgets('a confirmed move announces that the family was moved', (
@@ -105,10 +98,10 @@ void main() {
   ) async {
     await moveToMaadiAndSave(tester);
 
-    await tester.tap(confirmationButton('حفظ'));
+    await tester.tap(find.byKey(ConfirmationDialogKeys.confirmButton));
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
 
-    expect(find.text('تم نقل العائلة'), findsWidgets);
+    expect(find.text(EditFamilyScreen.movedOutOfSightMessage), findsWidgets);
   });
 }

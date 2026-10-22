@@ -8,7 +8,6 @@ import '../edit_object/edit_object_screen_harness.dart';
 void main() {
   const shubra = Area(id: 'shubra', name: 'شبرا');
   const maadi = Area(id: 'maadi', name: 'المعادي');
-  const confirmationTitle = 'لن تتمكن من رؤية البيانات بعد الحفظ';
   const store = Store(
     id: 'store-id',
     name: 'متجر',
@@ -22,11 +21,6 @@ void main() {
   );
 
   late EditObjectScreenHarness harness;
-
-  Finder confirmationButton(String label) => find.descendant(
-    of: find.byType(AlertDialog),
-    matching: find.text(label),
-  );
 
   Future<void> moveToMaadiAndSave(WidgetTester tester) async {
     await harness.open(
@@ -57,7 +51,7 @@ void main() {
         adminOn: [AdminOnData(permissionId: 'grant', area: shubra)],
       )
       ..install();
-    harness.areas.pickableAreas = const [maadi];
+    harness.areasDAO.pickableAreas = const [maadi];
   });
 
   tearDown(defaultTearDown);
@@ -67,8 +61,8 @@ void main() {
   ) async {
     await moveToMaadiAndSave(tester);
 
-    expect(find.text(confirmationTitle), findsOneWidget);
-    expect(harness.stores.updates, isEmpty);
+    expect(find.byType(MoveOutOfSightConfirmationDialog), findsOneWidget);
+    expect(harness.storesDAO.updates, isEmpty);
   });
 
   testWidgets('declining the move keeps the editor and saves nothing', (
@@ -76,11 +70,11 @@ void main() {
   ) async {
     await moveToMaadiAndSave(tester);
 
-    await tester.tap(confirmationButton('إلغاء'));
+    await tester.tap(find.byKey(ConfirmationDialogKeys.cancelButton));
     await tester.pumpAndSettle();
 
     expect(find.byKey(ObjectSaveButtonKeys.saveButton), findsOneWidget);
-    expect(harness.stores.updates, isEmpty);
+    expect(harness.storesDAO.updates, isEmpty);
   });
 
   testWidgets('a confirmed move is saved and leaves the store behind', (
@@ -88,12 +82,11 @@ void main() {
   ) async {
     await moveToMaadiAndSave(tester);
 
-    await tester.tap(confirmationButton('حفظ'));
+    await tester.tap(find.byKey(ConfirmationDialogKeys.confirmButton));
     await tester.pumpAndSettle();
 
-    expect(harness.stores.updates.single.editedObject.address?.area, maadi);
-    expect(find.byKey(EditObjectScreenHarness.homePageKey), findsOneWidget);
-    expect(find.byKey(EditObjectScreenHarness.pageBelowKey), findsNothing);
+    expect(harness.storesDAO.updates.single.editedObject.address?.area, maadi);
+    expect(harness.routeStack, [const HomeScreenRoute()]);
   });
 
   testWidgets('a confirmed move announces that the store was moved', (
@@ -101,10 +94,10 @@ void main() {
   ) async {
     await moveToMaadiAndSave(tester);
 
-    await tester.tap(confirmationButton('حفظ'));
+    await tester.tap(find.byKey(ConfirmationDialogKeys.confirmButton));
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
 
-    expect(find.text('تم نقل المتجر'), findsWidgets);
+    expect(find.text(EditStoreScreen.movedOutOfSightMessage), findsWidgets);
   });
 }

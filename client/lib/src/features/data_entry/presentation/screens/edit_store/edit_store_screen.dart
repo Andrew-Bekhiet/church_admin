@@ -4,6 +4,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
 class EditStoreScreen extends StatefulWidget {
+  static const String movedOutOfSightMessage = 'تم نقل المتجر';
+
   final StoreEditIntent intent;
 
   const EditStoreScreen({required this.intent, super.key});
@@ -16,7 +18,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
   final User? _currentUser = AuthBloc.I.currentUserData;
   late final StoreFormController _form = StoreFormController(
     intent: widget.intent,
-    families: DatabaseService.I.families,
+    familiesDAO: DatabaseService.I.families,
     addressServices: AddressFormServices.backedBy(
       DatabaseService.I,
       geocoder: Geocoder.I,
@@ -38,7 +40,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
       saveCubit: _saveCubit,
       canDelete: (saved) => _currentUser?.canDeleteObject(saved) ?? false,
       detailsRouteOf: (store) => ViewStoreRoute(id: store.id, store: store),
-      movedOutOfSightMessage: 'تم نقل المتجر',
+      movedOutOfSightMessage: EditStoreScreen.movedOutOfSightMessage,
       fields: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

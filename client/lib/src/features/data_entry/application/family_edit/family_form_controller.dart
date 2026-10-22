@@ -4,47 +4,47 @@ import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart' show Uuid;
 
 class FamilyFormController extends ObjectFormController<Family> {
-  final FamiliesDAO _families;
+  final FamiliesDAO _familiesDAO;
 
   late final AddressFormController address;
   late final relatives = AdvancedFormController(debugName: 'relatives');
   late final contacts =
       AdvancedFieldController<List<FamilyPhoneContact>, ObjectEditError>(
-        initialValue: startingObject.contacts,
+        initialValue: initialDraft.contacts,
       );
   late final church = AdvancedFieldController<Church?, ObjectEditError>(
-    initialValue: startingObject.church,
+    initialValue: initialDraft.church,
   );
   late final status = AdvancedFieldController<MartialStatus?, ObjectEditError>(
-    initialValue: startingObject.status,
+    initialValue: initialDraft.status,
   );
   late final deceasedSpouseName = AdvancedTextFieldController<ObjectEditError>(
-    initialValue: startingObject.deceasedSpouseName ?? '',
+    initialValue: initialDraft.deceasedSpouseName ?? '',
   );
   late final marriageDate = AdvancedFieldController<DateTime?, ObjectEditError>(
-    initialValue: startingObject.marriageDate,
+    initialValue: initialDraft.marriageDate,
   );
   late final notes = AdvancedTextFieldController<ObjectEditError>(
-    initialValue: startingObject.notes ?? '',
+    initialValue: initialDraft.notes ?? '',
   );
   late final parents = AdvancedFieldController<Set<Family>, ObjectEditError>(
-    initialValue: startingObject.parents?.toSet() ?? const {},
+    initialValue: initialDraft.parents?.toSet() ?? const {},
     validator: (parents) => _includesThisFamily(parents)
         ? ObjectEditError.familyIsItsOwnParent
         : null,
   );
   late final children = AdvancedFieldController<Set<Family>, ObjectEditError>(
-    initialValue: startingObject.children?.toSet() ?? const {},
+    initialValue: initialDraft.children?.toSet() ?? const {},
     validator: (children) => _includesThisFamily(children)
         ? ObjectEditError.familyIsItsOwnChild
         : null,
   );
   late final lastVisit = AdvancedFieldController<DateTime?, ObjectEditError>(
-    initialValue: startingObject.lastVisit?.time,
+    initialValue: initialDraft.lastVisit?.time,
   );
   late final lastFatherVisit =
       AdvancedFieldController<DateTime?, ObjectEditError>(
-        initialValue: startingObject.lastFatherVisit?.time,
+        initialValue: initialDraft.lastFatherVisit?.time,
       );
 
   bool get isWidowed => switch (status.fieldValue) {
@@ -52,11 +52,11 @@ class FamilyFormController extends ObjectFormController<Family> {
     _ => false,
   };
 
-  Family get _relativesBaseline => savedObject ?? startingObject;
+  Family get _relativesBaseline => savedObject ?? initialDraft;
 
   FamilyFormController({
     required FamilyEditIntent intent,
-    required this._families,
+    required this._familiesDAO,
     required AddressFormServices addressServices,
     required super.recordedByUserId,
   }) : super(
@@ -64,14 +64,14 @@ class FamilyFormController extends ObjectFormController<Family> {
            UpdateFamily(:final family) => family,
            CreateFamily() => null,
          },
-         startingObject: switch (intent) {
+         initialDraft: switch (intent) {
            UpdateFamily(:final family) => family,
            final CreateFamily create => create.draftFamily(const Uuid().v4()),
          },
          debugName: 'family',
        ) {
     address = AddressFormController(
-      initialAddress: startingObject.address,
+      initialAddress: initialDraft.address,
       services: addressServices,
       isRequired: () => true,
     );
@@ -95,7 +95,7 @@ class FamilyFormController extends ObjectFormController<Family> {
 
   ViewableObjectListController<Family> familiesMatching(
     Stream<String?> search,
-  ) => SearchableDaoListController.over(_families)(search);
+  ) => SearchableDaoListController.over(_familiesDAO)(search);
 
   void useLoadedRelatives(Family loaded) {
     final saved = savedObject;
@@ -127,19 +127,19 @@ class FamilyFormController extends ObjectFormController<Family> {
   }
 
   @override
-  Family toObject() => startingObject.copyWith(
+  Family toObject() => initialDraft.copyWith(
     name: editedName,
     address: address.toAddress(),
     contacts: contacts.fieldValue,
     church: church.fieldValue,
-    status: status.fieldValue ?? startingObject.status,
+    status: status.fieldValue ?? initialDraft.status,
     deceasedSpouseName: switch (deceasedSpouseName.fieldValue.trim()) {
       '' => null,
       final name => name,
     },
     marriageDate: marriageDate.fieldValue,
     notes: PersonFormValues.optionalText(
-      startingObject.notes,
+      initialDraft.notes,
       notes.fieldValue,
     ),
     color: color.fieldValue,
@@ -151,10 +151,10 @@ class FamilyFormController extends ObjectFormController<Family> {
       _relativesBaseline.children,
       children.fieldValue,
     ),
-    lastVisit: recordedByMeIfDateChanged(lastVisit, startingObject.lastVisit),
+    lastVisit: recordedByMeIfDateChanged(lastVisit, initialDraft.lastVisit),
     lastFatherVisit: recordedByMeIfDateChanged(
       lastFatherVisit,
-      startingObject.lastFatherVisit,
+      initialDraft.lastFatherVisit,
       isFatherVisit: true,
     ),
   );
@@ -186,5 +186,5 @@ class FamilyFormController extends ObjectFormController<Family> {
   );
 
   bool _includesThisFamily(Set<Family> families) =>
-      families.any((family) => family.id == startingObject.id);
+      families.any((family) => family.id == initialDraft.id);
 }

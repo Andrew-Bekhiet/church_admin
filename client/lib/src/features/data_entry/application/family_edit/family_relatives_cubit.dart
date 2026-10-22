@@ -5,12 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FamilyRelativesCubit extends Cubit<FamilyRelativesLoadState> {
   final FamilyFormController _form;
-  final FamiliesDAO _families;
+  final FamiliesDAO _familiesDAO;
   final LoggingService _logging;
 
   FamilyRelativesCubit({
     required this._form,
-    required this._families,
+    required this._familiesDAO,
     required this._logging,
   }) : super(
          _form.isCreate
@@ -23,7 +23,7 @@ class FamilyRelativesCubit extends Cubit<FamilyRelativesLoadState> {
     if (saved == null) return;
 
     try {
-      final loaded = await _families.getFamilyRelatedFamilies(
+      final loaded = await _familiesDAO.getFamilyRelatedFamilies(
         familyId: saved.id,
       );
       if (isClosed || _form.isDisposed) return;

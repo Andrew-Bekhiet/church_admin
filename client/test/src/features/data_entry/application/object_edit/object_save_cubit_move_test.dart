@@ -28,7 +28,7 @@ void main() {
   ObjectSaveCubit<Family> cubitMovingFamilyToMaadi() {
     form = FamilyFormController(
       intent: const UpdateFamily(family: storedFamily),
-      families: families,
+      familiesDAO: families,
       addressServices: FakeAddressFormServices.withNothingToSuggest(),
       recordedByUserId: shubraServant.uid,
     );

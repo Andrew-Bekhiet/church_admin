@@ -16,7 +16,7 @@ void main() {
   FamilyRelativesCubit cubitEditing(FamilyEditIntent intent) {
     form = FamilyFormController(
       intent: intent,
-      families: families,
+      familiesDAO: families,
       addressServices: FakeAddressFormServices.withNothingToSuggest(),
       recordedByUserId: 'me',
     );
@@ -24,7 +24,7 @@ void main() {
 
     return FamilyRelativesCubit(
       form: form,
-      families: families,
+      familiesDAO: families,
       logging: FakeLoggingService(),
     );
   }
