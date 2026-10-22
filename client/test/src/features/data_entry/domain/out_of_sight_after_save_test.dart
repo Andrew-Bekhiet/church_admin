@@ -292,6 +292,56 @@ void main() {
     });
   });
 
+  group('store =>', () {
+    const store = Store(
+      id: 'store',
+      name: 'متجر',
+      address: Address(area: shubra),
+    );
+
+    test('an area admin moving a store to another area loses it', () {
+      final user = userWith(
+        adminOn: [const AdminOnData(permissionId: 'a', area: shubra)],
+      );
+
+      expect(
+        hides(user, store, store.copyWith(address: const Address(area: maadi))),
+        isTrue,
+      );
+    });
+
+    test('an area admin keeps a store renamed within the area', () {
+      final user = userWith(
+        adminOn: [const AdminOnData(permissionId: 'a', area: shubra)],
+      );
+
+      expect(hides(user, store, store.copyWith(name: 'اسم جديد')), isFalse);
+    });
+
+    test('an area admin of both areas keeps a store moved between them', () {
+      final user = userWith(
+        adminOn: [
+          const AdminOnData(permissionId: 'a', area: shubra),
+          const AdminOnData(permissionId: 'b', area: maadi),
+        ],
+      );
+
+      expect(
+        hides(user, store, store.copyWith(address: const Address(area: maadi))),
+        isFalse,
+      );
+    });
+
+    test('a user with read-all-data never loses a store', () {
+      final user = userWith(permissions: {UserPermission.readAllData});
+
+      expect(
+        hides(user, store, store.copyWith(address: const Address(area: maadi))),
+        isFalse,
+      );
+    });
+  });
+
   group('person changes other than the address =>', () {
     bool hidesIgnoringAddress(User user, Person before, Person after) =>
         OutOfSightAfterSave(user).isMovedOutOfSightIgnoringAddress(

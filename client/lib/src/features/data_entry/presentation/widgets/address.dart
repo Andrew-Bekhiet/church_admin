@@ -6,6 +6,5 @@ export 'address/address_form_unit_fields.dart';
 export 'address/address_house_number_row.dart';
 export 'address/address_location_tap_field.dart';
 export 'address/address_preview.dart';
-export 'address/address_with_location_field.dart';
 export 'address/location_update_reminder_card.dart';
 export 'address/suggested_address_card.dart';

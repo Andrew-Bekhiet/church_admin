@@ -7,10 +7,16 @@ sealed class ObjectSaveProgress extends Equatable {
   String get message => switch (this) {
     UploadingObjectPhoto() => 'جار رفع الصورة ...',
     DeletingObject() => 'جار الحذف ...',
-    NotSavingObject() || SavingObject() => 'جار الحفظ ...',
+    NotSavingObject() ||
+    AwaitingObjectMoveConfirmation() ||
+    SavingObject() => 'جار الحفظ ...',
   };
 
   const ObjectSaveProgress();
+}
+
+final class AwaitingObjectMoveConfirmation extends ObjectSaveProgress {
+  const AwaitingObjectMoveConfirmation();
 }
 
 final class DeletingObject extends ObjectSaveProgress {

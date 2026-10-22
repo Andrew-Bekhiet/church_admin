@@ -1,6 +1,8 @@
 export 'domain/address/address_field_error.dart';
 export 'domain/address/address_suggestion.dart';
 export 'domain/area_edit/area_edit_intent.dart';
+export 'domain/family_edit/family_edit_intent.dart';
+export 'domain/family_edit/family_relatives_load_state.dart';
 export 'domain/models.dart';
 export 'domain/object_edit/edit_intent_json.dart';
 export 'domain/object_edit/object_edit_error.dart';
@@ -16,4 +18,5 @@ export 'domain/person_edit/person_rule_violation_section.dart';
 export 'domain/person_edit/person_save_outcome.dart';
 export 'domain/person_edit/person_save_progress.dart';
 export 'domain/person_edit/photo_change.dart';
+export 'domain/store_edit/store_edit_intent.dart';
 export 'domain/street_edit/street_edit_intent.dart';

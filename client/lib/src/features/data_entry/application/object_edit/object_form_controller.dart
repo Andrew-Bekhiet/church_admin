@@ -5,7 +5,6 @@ import 'package:meta/meta.dart';
 
 abstract class ObjectFormController<T extends ViewableWithIDAndImage>
     extends AdvancedFormController {
-  final T? savedObject;
   final T initialDraft;
   final String? _currentUserId;
 
@@ -20,6 +19,8 @@ abstract class ObjectFormController<T extends ViewableWithIDAndImage>
     initialValue: initialDraft.color,
   );
 
+  T? get savedObject;
+
   bool get isCreate => savedObject == null;
 
   bool get wasModified => value.wasModified;
@@ -29,7 +30,6 @@ abstract class ObjectFormController<T extends ViewableWithIDAndImage>
       PersonFormValues.text(initialDraft.name, name.fieldValue);
 
   ObjectFormController({
-    required this.savedObject,
     required this.initialDraft,
     required this._currentUserId,
     required super.debugName,

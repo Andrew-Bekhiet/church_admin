@@ -21,6 +21,8 @@ class OutOfSightAfterSave {
         _seesPerson(oldPerson) && !_seesPerson(newPerson),
       (final Family oldFamily, final Family newFamily) =>
         _seesFamily(oldFamily) && !_seesFamily(newFamily),
+      (final Store oldStore, final Store newStore) =>
+        _seesStore(oldStore) && !_seesStore(newStore),
       _ => false,
     };
   }
@@ -47,6 +49,8 @@ class OutOfSightAfterSave {
   bool _seesFamily(Family family) =>
       family.id == user?.person?.family?.id ||
       _isAreaAdminOn(family.address?.area);
+
+  bool _seesStore(Store store) => _isAreaAdminOn(store.address?.area);
 
   bool _isAreaAdminOn(Area? area) =>
       area != null && _grants.any((grant) => grant.area?.id == area.id);

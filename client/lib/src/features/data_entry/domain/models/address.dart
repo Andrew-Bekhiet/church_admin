@@ -9,7 +9,7 @@ part 'address.g.dart';
 @freezed
 @JsonSerializable()
 @Queryable(label: 'العنوان')
-class Address with _$Address {
+class Address with _$Address implements ToJson {
   static const int houseCodeMaxLength = 5;
 
   static String? _streetNameWithoutPrefix(String? name) =>
@@ -140,6 +140,7 @@ class Address with _$Address {
     );
   }
 
+  @override
   Json toJson() => _$AddressToJson(this);
 
   @override

@@ -13,6 +13,25 @@ class AddressFormServices {
     required this.logging,
   });
 
+  factory AddressFormServices.backedBy(
+    DatabaseService database, {
+    required Geocoder geocoder,
+    required LoggingService logging,
+  }) => AddressFormServices(
+    autofill: AddressAutofill(
+      areas: database.areas,
+      streets: database.streets,
+      districts: database.metadata.districts,
+      geocoder: geocoder,
+    ),
+    places: AddressPlaceCatalog(
+      areas: database.areas,
+      streets: database.streets,
+      districts: database.metadata.districts,
+    ),
+    logging: logging,
+  );
+
   Future<T?> logFailureOf<T>(
     String eventName,
     Future<T> Function() lookup,

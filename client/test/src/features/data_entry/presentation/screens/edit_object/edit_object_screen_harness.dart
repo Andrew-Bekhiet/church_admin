@@ -8,14 +8,21 @@ import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../fakes/fake_areas_dao.dart';
+import '../../../../../fakes/fake_districts_dao.dart';
 import '../../../../../fakes/fake_feature_flags_repo.dart';
+import '../../../../../fakes/fake_geocoder.dart';
 import '../../../../../fakes/fake_logging_service.dart';
+import '../../../../../fakes/fake_person_types_dao.dart';
+import '../../../../../fakes/fake_stores_dao.dart';
 import '../../../../../fakes/fake_streets_dao.dart';
+import '../../../../../fakes/in_memory_families_dao.dart';
 import '../../../../../fakes/mock_auth_bloc.dart';
 import '../../../../../fakes/mock_database_service.dart';
 import '../../../../../fakes/mock_image_url_cache_service.dart';
 import '../../../../../fakes/mock_user_preferences_service.dart';
 import '../../../../../fakes/mock_viewable_object_service.dart';
+import '../edit_person/edit_person_screen_harness.dart'
+    show FakeHobbiesDAO, FakeMetadataDAO;
 
 class FakeFunctionsService extends Fake implements FunctionsService {}
 
@@ -31,7 +38,12 @@ class EditObjectScreenHarness {
 
   final FakeAreasDAO areasDAO = FakeAreasDAO();
   final FakeStreetsDAO streetsDAO = FakeStreetsDAO();
+  final InMemoryFamiliesDAO familiesDAO = InMemoryFamiliesDAO();
+  final FakeStoresDAO storesDAO = FakeStoresDAO();
+  final FakePersonTypesDAO personTypesDAO = FakePersonTypesDAO();
   final FakeLoggingService logging = FakeLoggingService();
+
+  User currentUser = userWhoWritesEverything;
 
   late KaiselRouter<AppRoute> _router;
 
@@ -41,11 +53,21 @@ class EditObjectScreenHarness {
 
   void install() {
     final authBloc = MockAuthBloc();
-    when(() => authBloc.currentUserData).thenReturn(userWhoWritesEverything);
+    when(() => authBloc.currentUserData).thenReturn(currentUser);
 
     final databaseService = MockDatabaseService();
     when(() => databaseService.areas).thenReturn(areasDAO);
     when(() => databaseService.streets).thenReturn(streetsDAO);
+    when(() => databaseService.families).thenReturn(familiesDAO);
+    when(() => databaseService.stores).thenReturn(storesDAO);
+    when(() => databaseService.metadata).thenReturn(
+      FakeMetadataDAO(
+        db: databaseService,
+        fakePersonTypes: personTypesDAO,
+        fakeHobbies: FakeHobbiesDAO(),
+        fakeDistricts: FakeDistrictsDAO(),
+      ),
+    );
 
     registerFallbackValue(const FunctionsObjectImageInfo('areas', 'fallback'));
     final imageUrls = MockImageUrlCacheService();
@@ -71,6 +93,7 @@ class EditObjectScreenHarness {
       viewableObjectServiceProvider.overrideWithValue(viewableObjects),
       loggingServiceProvider.overrideWithValue(logging),
       functionsServiceProvider.overrideWithValue(FakeFunctionsService()),
+      geocoderProvider.overrideWithValue(FakeGeocoder()),
     ]);
   }
 
@@ -78,6 +101,7 @@ class EditObjectScreenHarness {
     WidgetTester tester,
     AppRoute editRoute, {
     bool withPageBelow = false,
+    bool settle = true,
   }) async {
     final routerConfig = KaiselRouterConfig<AppRoute>(
       initial: const HomeScreenRoute(),
@@ -103,9 +127,24 @@ class EditObjectScreenHarness {
     );
     if (withPageBelow) unawaited(_router.push(const SettingsRoute()));
     unawaited(_router.push(editRoute));
+    if (!settle) {
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 1));
+
+      return;
+    }
     await tester.pumpAndSettle();
     await tester.drag(find.byType(Scrollable).first, const Offset(0, -700));
     await tester.pumpAndSettle();
+  }
+
+  Future<void> scrollTo(WidgetTester tester, Finder finder) async {
+    await tester.scrollUntilVisible(
+      finder,
+      100,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pump();
   }
 
   Future<void> pressBack(WidgetTester tester) async {

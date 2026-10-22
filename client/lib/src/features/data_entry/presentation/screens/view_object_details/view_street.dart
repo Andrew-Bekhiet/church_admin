@@ -224,7 +224,9 @@ class _ViewStreetState extends State<ViewStreet> {
               if (newIndex == 0) {
                 unawaited(
                   EditFamilyRoute(
-                    withAddress: Address(street: street),
+                    intent: CreateFamilyAtAddress(
+                      address: Address(street: street),
+                    ),
                   ).push(context),
                 );
               } else if (newIndex == 1) {

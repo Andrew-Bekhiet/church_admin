@@ -17,6 +17,8 @@ class EditObjectScaffold<T extends ViewableWithIDAndImage>
   final AppRoute Function(T created) detailsRouteOf;
   final Widget fields;
   final String? nameHint;
+  final String movedOutOfSightMessage;
+  final bool Function()? hasUnsavedInput;
 
   const EditObjectScaffold({
     required this.form,
@@ -24,7 +26,9 @@ class EditObjectScaffold<T extends ViewableWithIDAndImage>
     required this.canDelete,
     required this.detailsRouteOf,
     required this.fields,
+    this.movedOutOfSightMessage = 'تم النقل',
     this.nameHint,
+    this.hasUnsavedInput,
     super.key,
   });
 
@@ -128,7 +132,7 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
 
   void _showSaveProgressWhileSaving(ObjectSaveProgress progress) {
     switch (progress) {
-      case NotSavingObject():
+      case NotSavingObject() || AwaitingObjectMoveConfirmation():
         _progressSnackBar?.close();
         _progressSnackBar = null;
 
@@ -152,15 +156,22 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
   }
 
   Future<void> _save() async {
-    final outcome = await widget.saveCubit.submit();
+    final outcome = await widget.saveCubit.submit(
+      confirmMoveOutOfSight: _confirmMoveOutOfSight,
+    );
     if (!mounted) return;
 
     switch (outcome) {
-      case ObjectSaved(:final object):
-        _leaveAfterSave(object, message: 'تم بنجاح');
+      case ObjectSaved(:final object, :final movedOutOfSight):
+        _leaveAfterSave(
+          object,
+          message: movedOutOfSight ? widget.movedOutOfSightMessage : 'تم بنجاح',
+          movedOutOfSight: movedOutOfSight,
+        );
 
       case ObjectSavedButPhotoFailed(
         :final object,
+        :final movedOutOfSight,
         :final error,
         :final stackTrace,
       ):
@@ -173,7 +184,11 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
             ),
           ),
         );
-        _leaveAfterSave(object, message: 'تم الحفظ لكن تعذر رفع الصورة');
+        _leaveAfterSave(
+          object,
+          message: 'تم الحفظ لكن تعذر رفع الصورة',
+          movedOutOfSight: movedOutOfSight,
+        );
 
       case ObjectSaveFailed(
         :final error,
@@ -198,13 +213,29 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
             .firstWhereOrNull((field) => field.value.isInvalid)
             ?.focus();
 
-      case ObjectSaveAlreadyInProgress() ||
+      case ObjectMoveOutOfSightDeclined() ||
+          ObjectSaveAlreadyInProgress() ||
           ObjectSaveAbandonedBecauseEditorClosed():
         return;
     }
   }
 
-  void _leaveAfterSave(T saved, {required String message}) {
+  Future<bool> _confirmMoveOutOfSight() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => const MoveOutOfSightConfirmationDialog(),
+    );
+
+    return confirmed ?? false;
+  }
+
+  void _leaveAfterSave(
+    T saved, {
+    required String message,
+    required bool movedOutOfSight,
+  }) {
+    final navigator = Navigator.of(context);
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
@@ -222,14 +253,17 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
       return;
     }
 
-    Navigator.of(context).pop();
+    navigator.pop();
+    if (movedOutOfSight) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => navigator.pop());
+    }
   }
 
   Future<void> _confirmExit(bool didPop, Object? result) async {
     if (didPop) return;
 
     final navigator = Navigator.of(context);
-    if (!_form.wasModified) {
+    if (!_form.wasModified && !(widget.hasUnsavedInput?.call() ?? false)) {
       navigator.pop(result);
 
       return;

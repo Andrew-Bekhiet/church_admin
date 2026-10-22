@@ -3,6 +3,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:uuid/uuid.dart' show Uuid;
 
 class StreetFormController extends ObjectFormController<Street> {
+  @override
+  final Street? savedObject;
+
   final AreasDAO _areasDAO;
 
   late final line = AdvancedFieldController<Line?, ObjectEditError>(
@@ -20,11 +23,11 @@ class StreetFormController extends ObjectFormController<Street> {
     required StreetEditIntent intent,
     required this._areasDAO,
     required super.currentUserId,
-  }) : super(
-         savedObject: switch (intent) {
-           UpdateStreet(:final street) => street,
-           CreateStreet() => null,
-         },
+  }) : savedObject = switch (intent) {
+         UpdateStreet(:final street) => street,
+         CreateStreet() => null,
+       },
+       super(
          initialDraft: switch (intent) {
            UpdateStreet(:final street) => street,
            final CreateStreet create => create.draftStreet(const Uuid().v4()),
