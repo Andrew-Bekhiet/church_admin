@@ -7,6 +7,7 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
   final ObjectFormController<T> _form;
   final FullCRUDDAO<T> _dao;
   final PhotoUploader _photoUploader;
+  final OutOfSightAfterSave? _outOfSight;
 
   bool get _editorWasClosed => isClosed || _form.isDisposed;
 
@@ -14,12 +15,19 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
     required this._form,
     required this._dao,
     required this._photoUploader,
+    this._outOfSight,
   }) : super(const NotSavingObject());
 
-  Future<ObjectSaveOutcome<T>> submit() async {
-    if (state is! NotSavingObject) return const ObjectSaveAlreadyInProgress();
+  Future<ObjectSaveOutcome<T>> submit({bool confirmedMove = false}) async {
+    final canStart = switch (state) {
+      NotSavingObject() => true,
+      AwaitingObjectMoveConfirmation() => confirmedMove,
+      DeletingObject() || SavingObject() || UploadingObjectPhoto() => false,
+    };
+    if (!canStart) return const ObjectSaveAlreadyInProgress();
 
     emit(const SavingObject());
+    var keepAwaitingMoveConfirmation = false;
     T? attemptedObject;
     try {
       final isValid = await _form.validate();
@@ -29,15 +37,15 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
       if (!isValid) return const InvalidObject();
 
       final object = attemptedObject = _form.toObject();
-      final saved = switch (_form.savedObject) {
-        null => await create(object),
-        final savedObject => await update(savedObject, object) ?? object,
-      };
-      if (_editorWasClosed) {
-        return const ObjectSaveAbandonedBecauseEditorClosed();
+      final movesOutOfSight = _movesOutOfSight(object);
+      if (movesOutOfSight && !confirmedMove) {
+        keepAwaitingMoveConfirmation = true;
+        emit(const AwaitingObjectMoveConfirmation());
+
+        return const ObjectNeedsMoveConfirmation();
       }
 
-      return await _applyPhotoChangeTo(saved);
+      return await _save(object, movedOutOfSight: movesOutOfSight);
     } on Exception catch (error, stackTrace) {
       if (_editorWasClosed) {
         return const ObjectSaveAbandonedBecauseEditorClosed();
@@ -49,8 +57,16 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
         attemptedObject: attemptedObject ?? _form.toObject(),
       );
     } finally {
-      if (!isClosed) emit(const NotSavingObject());
+      if (!isClosed && !keepAwaitingMoveConfirmation) {
+        emit(const NotSavingObject());
+      }
     }
+  }
+
+  void declineMove() {
+    if (state is! AwaitingObjectMoveConfirmation) return;
+
+    emit(const NotSavingObject());
   }
 
   Future<bool> tryDeleteSavedObject() async {
@@ -77,7 +93,33 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
   Future<T?> update(T savedObject, T editedObject) =>
       _dao.updateObject(oldObject: savedObject, newObject: editedObject);
 
-  Future<ObjectSaveOutcome<T>> _applyPhotoChangeTo(T saved) async {
+  bool _movesOutOfSight(T edited) => switch ((_outOfSight, _form.savedObject)) {
+    (final outOfSight?, final saved?) => outOfSight.isMovedOutOfSight(
+      saved,
+      edited,
+    ),
+    _ => false,
+  };
+
+  Future<ObjectSaveOutcome<T>> _save(
+    T object, {
+    required bool movedOutOfSight,
+  }) async {
+    final saved = switch (_form.savedObject) {
+      null => await create(object),
+      final savedObject => await update(savedObject, object) ?? object,
+    };
+    if (_editorWasClosed) {
+      return const ObjectSaveAbandonedBecauseEditorClosed();
+    }
+
+    return _applyPhotoChangeTo(saved, movedOutOfSight: movedOutOfSight);
+  }
+
+  Future<ObjectSaveOutcome<T>> _applyPhotoChangeTo(
+    T saved, {
+    required bool movedOutOfSight,
+  }) async {
     try {
       switch (_form.photo.fieldValue) {
         case KeepPhoto():
@@ -101,12 +143,13 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
     } on Exception catch (error, stackTrace) {
       return ObjectSavedButPhotoFailed(
         object: saved,
+        movedOutOfSight: movedOutOfSight,
         error: error,
         stackTrace: stackTrace,
       );
     }
     if (_editorWasClosed) return const ObjectSaveAbandonedBecauseEditorClosed();
 
-    return ObjectSaved(object: saved);
+    return ObjectSaved(object: saved, movedOutOfSight: movedOutOfSight);
   }
 }

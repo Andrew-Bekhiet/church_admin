@@ -22,7 +22,10 @@ class ObjectDeleteButton<T extends ViewableWithIDAndImage>
         key: ObjectDeleteButtonKeys.deleteButton,
         onPressed: switch (progress) {
           NotSavingObject() => () => _delete(context),
-          DeletingObject() || SavingObject() || UploadingObjectPhoto() => null,
+          AwaitingObjectMoveConfirmation() ||
+          DeletingObject() ||
+          SavingObject() ||
+          UploadingObjectPhoto() => null,
         },
         icon: const Icon(Symbols.delete),
         tooltip: 'حذف',

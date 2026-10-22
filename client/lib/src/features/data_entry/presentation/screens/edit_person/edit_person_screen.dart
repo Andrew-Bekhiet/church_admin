@@ -33,18 +33,9 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
       families: databaseService.families,
       photoUploader: FunctionsPhotoUploader(FunctionsService.I),
       currentUser: AuthBloc.I.currentUserData,
-      addressServices: AddressFormServices(
-        autofill: AddressAutofill(
-          areas: databaseService.areas,
-          streets: databaseService.streets,
-          districts: databaseService.metadata.districts,
-          geocoder: Geocoder.I,
-        ),
-        places: AddressPlaceCatalog(
-          areas: databaseService.areas,
-          streets: databaseService.streets,
-          districts: databaseService.metadata.districts,
-        ),
+      addressServices: AddressFormServices.backedBy(
+        databaseService,
+        geocoder: Geocoder.I,
         logging: LoggingService.I,
       ),
     );

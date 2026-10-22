@@ -19,7 +19,10 @@ class ObjectSaveProgressMessage extends StatelessWidget {
           CircularProgressIndicator(
             value: switch (progress) {
               UploadingObjectPhoto(:final progress) => progress,
-              NotSavingObject() || DeletingObject() || SavingObject() => null,
+              NotSavingObject() ||
+              AwaitingObjectMoveConfirmation() ||
+              DeletingObject() ||
+              SavingObject() => null,
             },
           ),
         ],
