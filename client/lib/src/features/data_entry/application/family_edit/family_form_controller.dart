@@ -109,12 +109,18 @@ class FamilyFormController extends ObjectFormController<Family> {
     );
     savedObject = withRelatives;
 
-    if (parentsUntouched) {
-      parents.prefill(withRelatives.parents?.toSet() ?? const {});
-    }
-    if (childrenUntouched) {
-      children.prefill(withRelatives.children?.toSet() ?? const {});
-    }
+    _showLoadedRelatives(
+      parents,
+      shown: saved.parents,
+      loaded: withRelatives.parents,
+      untouched: parentsUntouched,
+    );
+    _showLoadedRelatives(
+      children,
+      shown: saved.children,
+      loaded: withRelatives.children,
+      untouched: childrenUntouched,
+    );
     if (parentsUntouched && childrenUntouched) {
       relatives.registerFields([parents, children]);
     }
@@ -152,6 +158,24 @@ class FamilyFormController extends ObjectFormController<Family> {
       isFatherVisit: true,
     ),
   );
+
+  void _showLoadedRelatives(
+    AdvancedFieldController<Set<Family>, ObjectEditError> field, {
+    required List<Family>? shown,
+    required List<Family>? loaded,
+    required bool untouched,
+  }) {
+    if (untouched) {
+      field.prefill({...?loaded});
+
+      return;
+    }
+
+    final notShownYet = {...?loaded}.difference({...?shown});
+    if (notShownYet.isNotEmpty) {
+      field.prefill({...field.fieldValue, ...notShownYet});
+    }
+  }
 
   bool _hasRelatives(
     AdvancedFieldController<Set<Family>, ObjectEditError> field,

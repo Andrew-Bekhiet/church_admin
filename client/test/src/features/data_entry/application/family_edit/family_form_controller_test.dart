@@ -132,14 +132,22 @@ void main() {
       expect(controller.wasModified, isFalse);
     });
 
-    test('keeps relatives the user chose before the load finished', () {
+    test('adds them to relatives the user chose before the load finished', () {
       final controller = controllerOfStoredFamily();
       const chosen = Family(id: 'other', name: 'أخرى');
       controller.parents.setValue({chosen});
 
       controller.useLoadedRelatives(loaded);
 
-      expect(controller.parents.fieldValue, {chosen});
+      expect(controller.parents.fieldValue, {chosen, parent});
+    });
+
+    test('drops a relative the family no longer has from untouched fields', () {
+      final controller = controllerFor(
+        UpdateFamily(family: storedFamily.copyWith(parents: const [child])),
+      )..useLoadedRelatives(loaded);
+
+      expect(controller.parents.fieldValue, {parent});
     });
 
     test('lets a removed relative be saved as removed', () {
