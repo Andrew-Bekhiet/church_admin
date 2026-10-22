@@ -64,9 +64,14 @@ class UserPreferencesService extends BlocObserver {
     return _serverPreferences?.greatFeastTheme ?? true;
   }
 
-  Stream<({bool? darkTheme, bool greatFeastTheme})>
-  get themePreferencesStream => _authBloc.userDataStream
-      .map((_) => (darkTheme: darkTheme, greatFeastTheme: greatFeastTheme))
+  Stream<ThemePreferences> get themePreferencesStream => _authBloc
+      .userDataStream
+      .map(
+        (_) => ThemePreferences(
+          darkTheme: darkTheme,
+          greatFeastTheme: greatFeastTheme,
+        ),
+      )
       .distinct();
 
   HomeMode? get lastHomeMode {

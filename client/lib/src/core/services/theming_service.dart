@@ -245,8 +245,7 @@ class ThemingService with WidgetsBindingObserver {
 
   final BehaviorSubject<ThemeData> _themeData;
 
-  late final StreamSubscription<({bool? darkTheme, bool greatFeastTheme})>
-  _themePreferencesSubscription;
+  late final StreamSubscription<ThemePreferences> _themePreferencesSubscription;
 
   Stream<ThemeData> get stream => _themeData.share();
 

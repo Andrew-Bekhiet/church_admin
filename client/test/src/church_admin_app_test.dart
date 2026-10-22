@@ -238,6 +238,5 @@ class _MockHomeCubit extends MockCubit<HomeState> implements HomeCubit {}
 class FakeUserPreferencesService extends Fake
     implements UserPreferencesService {
   @override
-  Stream<({bool? darkTheme, bool greatFeastTheme})>
-  get themePreferencesStream => const Stream.empty();
+  Stream<ThemePreferences> get themePreferencesStream => const Stream.empty();
 }

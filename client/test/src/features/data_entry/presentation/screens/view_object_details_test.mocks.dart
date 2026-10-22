@@ -67,13 +67,12 @@ class MockUserPreferencesService extends _i1.Mock
   ) as bool);
 
   @override
-  _i6.Stream<({bool? darkTheme, bool greatFeastTheme})>
-  get themePreferencesStream => (super.noSuchMethod(
-    Invocation.getter(#themePreferencesStream),
-    returnValue: _i6.Stream<({bool? darkTheme, bool greatFeastTheme})>.empty(),
-    returnValueForMissingStub:
-        _i6.Stream<({bool? darkTheme, bool greatFeastTheme})>.empty(),
-  ) as _i6.Stream<({bool? darkTheme, bool greatFeastTheme})>);
+  _i6.Stream<_i2.ThemePreferences> get themePreferencesStream =>
+      (super.noSuchMethod(
+        Invocation.getter(#themePreferencesStream),
+        returnValue: _i6.Stream<_i2.ThemePreferences>.empty(),
+        returnValueForMissingStub: _i6.Stream<_i2.ThemePreferences>.empty(),
+      ) as _i6.Stream<_i2.ThemePreferences>);
 
   @override
   _i6.Future<void> setDarkTheme(bool? value) => (super.noSuchMethod(
