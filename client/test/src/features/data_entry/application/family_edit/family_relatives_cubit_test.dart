@@ -18,7 +18,7 @@ void main() {
       intent: intent,
       familiesDAO: families,
       addressServices: FakeAddressFormServices.withNothingToSuggest(),
-      recordedByUserId: 'me',
+      currentUserId: 'me',
     );
     addTearDown(form.dispose);
 

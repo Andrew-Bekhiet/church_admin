@@ -18,7 +18,7 @@ class StoreFormController extends ObjectFormController<Store> {
     required StoreEditIntent intent,
     required this._familiesDAO,
     required AddressFormServices addressServices,
-    required super.recordedByUserId,
+    required super.currentUserId,
   }) : super(
          savedObject: switch (intent) {
            UpdateStore(:final store) => store,

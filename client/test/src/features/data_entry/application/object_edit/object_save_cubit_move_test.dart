@@ -30,7 +30,7 @@ void main() {
       intent: const UpdateFamily(family: storedFamily),
       familiesDAO: families,
       addressServices: FakeAddressFormServices.withNothingToSuggest(),
-      recordedByUserId: shubraServant.uid,
+      currentUserId: shubraServant.uid,
     );
     addTearDown(form.dispose);
     form.address.area.setValue(maadi);

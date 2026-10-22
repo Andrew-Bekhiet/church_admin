@@ -28,7 +28,7 @@ class _EditFamilyScreenState extends State<EditFamilyScreen> {
       geocoder: Geocoder.I,
       logging: LoggingService.I,
     ),
-    recordedByUserId: _currentUser?.uid,
+    currentUserId: _currentUser?.uid,
   );
   late final ObjectSaveCubit<Family> _saveCubit = ObjectSaveCubit(
     form: _form,

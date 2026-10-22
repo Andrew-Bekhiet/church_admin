@@ -24,7 +24,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
       geocoder: Geocoder.I,
       logging: LoggingService.I,
     ),
-    recordedByUserId: _currentUser?.uid,
+    currentUserId: _currentUser?.uid,
   );
   late final ObjectSaveCubit<Store> _saveCubit = ObjectSaveCubit(
     form: _form,

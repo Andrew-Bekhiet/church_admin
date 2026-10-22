@@ -58,7 +58,7 @@ class FamilyFormController extends ObjectFormController<Family> {
     required FamilyEditIntent intent,
     required this._familiesDAO,
     required AddressFormServices addressServices,
-    required super.recordedByUserId,
+    required super.currentUserId,
   }) : super(
          savedObject: switch (intent) {
            UpdateFamily(:final family) => family,

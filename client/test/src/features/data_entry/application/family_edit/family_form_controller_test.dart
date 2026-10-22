@@ -22,7 +22,7 @@ void main() {
       intent: intent,
       familiesDAO: InMemoryFamiliesDAO(),
       addressServices: FakeAddressFormServices.withNothingToSuggest(),
-      recordedByUserId: 'me',
+      currentUserId: 'me',
     );
     addTearDown(() {
       if (!controller.isDisposed) controller.dispose();
