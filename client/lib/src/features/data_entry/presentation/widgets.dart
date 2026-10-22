@@ -3,6 +3,7 @@ export 'widgets/chip_tab_bar.dart';
 export 'widgets/chip_tab_bar_persistent_header_delegate.dart';
 export 'widgets/contact_import_dialog.dart';
 export 'widgets/copiable_property_widget.dart';
+export 'widgets/default_meeting_fields.dart';
 export 'widgets/delete_confirmation_dialog.dart';
 export 'widgets/discard_changes_dialog.dart';
 export 'widgets/family/family_edit_fields.dart';
