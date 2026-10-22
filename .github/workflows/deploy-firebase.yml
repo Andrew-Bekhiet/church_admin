@@ -11,16 +11,49 @@ on:
       - ".github/workflows/deploy-firebase.yml"
       - "server/firebase/**"
 
+permissions: {}
+
 defaults:
   run:
     working-directory: server/firebase/functions
 
 jobs:
-  deploy-firebase:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: server/firebase/functions/.nvmrc
+          cache: npm
+          cache-dependency-path: server/firebase/functions/package-lock.json
+
+      - name: Install Firebase Functions dependencies
+        run: npm ci
+
+      - name: Lint Firebase Functions
+        run: npm run lint
+
+      - name: Build Firebase Functions
+        run: npm run build
+
+  deploy:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
+    concurrency:
+      group: deploy-firebase-production
+      cancel-in-progress: false
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -47,26 +80,16 @@ jobs:
           export_environment_variables: true
 
       - name: Set Firebase project environment variables
-        if: ${{ github.event_name != 'pull_request' }}
         env:
           FUNCTIONS_PROD_ENV_FILE: ${{ secrets.FUNCTIONS_PROD_ENV_FILE }}
         run: echo "$FUNCTIONS_PROD_ENV_FILE" | base64 -d > .env
 
-      - name: Set Mock Firebase project environment variables
-        if: ${{ github.event_name == 'pull_request' }}
-        run: mv example.env.project-id .env
-
       - name: Deploy Firebase project
-        if: ${{ github.event_name != 'pull_request' }}
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
         run: |
           DEPLOY_MESSAGE="$(git log -1 --pretty=oneline)"
-          npx firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only database,functions,hosting -m "$DEPLOY_MESSAGE"
-
-      - name: Validate Firebase project
-        if: ${{ github.event_name == 'pull_request' }}
-        run: |
-          DEPLOY_MESSAGE="$(git log -1 --pretty=oneline)"
-          npx firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only database,functions,hosting -m "$DEPLOY_MESSAGE" --dry-run
+          npx firebase deploy --project "$FIREBASE_PROJECT_ID" --only database,functions,hosting -m "$DEPLOY_MESSAGE"
 
       - name: Remove Firebase project environment variables
         if: ${{ always() }}
