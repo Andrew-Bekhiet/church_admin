@@ -57,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                           ChoiceChip(
                             label: const Text('المظهر الفاتح'),
-                            selected: !(darkTheme ?? false),
+                            selected: darkTheme == false,
                             onSelected: _onDarkThemeChanged(false),
                           ),
                           ChoiceChip(
