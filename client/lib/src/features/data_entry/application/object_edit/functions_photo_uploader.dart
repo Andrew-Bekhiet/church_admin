@@ -2,22 +2,22 @@ import 'package:church_admin/church_admin.dart';
 import 'package:image_picker/image_picker.dart' show XFile;
 import 'package:mime/mime.dart';
 
-class FunctionsPersonPhotoUploader implements PersonPhotoUploader {
+class FunctionsPhotoUploader implements PhotoUploader {
   final FunctionsService _functions;
 
-  const FunctionsPersonPhotoUploader(this._functions);
+  const FunctionsPhotoUploader(this._functions);
 
   @override
-  Future<void> deletePhotoOf(Person person) => person.imageInfo.delete();
+  Future<void> deletePhotoOf(IImage object) => object.imageInfo.delete();
 
   @override
   Future<void> uploadPhotoOf(
-    Person person,
+    IImage object,
     XFile photo, {
     required void Function(double progress) onProgress,
   }) async {
     final mimeType = MimeTypeResolver().lookup(photo.path);
-    final uploadUrl = await person.imageInfo.getUploadUrl(
+    final uploadUrl = await object.imageInfo.getUploadUrl(
       contentType: mimeType,
     );
 

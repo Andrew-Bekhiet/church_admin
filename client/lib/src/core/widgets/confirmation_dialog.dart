@@ -30,6 +30,7 @@ class ConfirmationDialog extends StatelessWidget {
       },
       actions: [
         TextButton(
+          key: ConfirmationDialogKeys.cancelButton,
           onPressed: () => Navigator.of(context).pop(false),
           child: Text(cancelLabel),
         ),
@@ -50,5 +51,6 @@ class ConfirmationDialog extends StatelessWidget {
 }
 
 abstract final class ConfirmationDialogKeys {
+  static const Key cancelButton = ValueKey('Confirmation Dialog Cancel Key');
   static const Key confirmButton = ValueKey('Confirmation Dialog Confirm Key');
 }

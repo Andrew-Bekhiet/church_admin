@@ -2,7 +2,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class FakeStreetsDAO extends Fake implements StreetsDAO {
+import 'fake_object_writes.dart';
+
+class FakeStreetsDAO extends Fake
+    with FakeObjectWrites<Street>
+    implements StreetsDAO {
   List<Street> streets = const [];
   final streetsByName = <String, Street>{};
   final streetsNearPoint = <Point, List<Street>>{};

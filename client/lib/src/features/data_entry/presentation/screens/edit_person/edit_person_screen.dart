@@ -31,7 +31,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
       intent: widget.intent,
       persons: databaseService.persons,
       families: databaseService.families,
-      photoUploader: FunctionsPersonPhotoUploader(FunctionsService.I),
+      photoUploader: FunctionsPhotoUploader(FunctionsService.I),
       currentUser: AuthBloc.I.currentUserData,
       addressServices: AddressFormServices(
         autofill: AddressAutofill(

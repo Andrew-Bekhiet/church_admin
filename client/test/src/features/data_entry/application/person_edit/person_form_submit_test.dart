@@ -253,7 +253,7 @@ void main() {
       await controller.submit();
 
       expect(fixture.photos.uploadedPhotos, isEmpty);
-      expect(fixture.photos.peopleWhosePhotoWasDeleted, isEmpty);
+      expect(fixture.photos.objectsWhosePhotoWasDeleted, isEmpty);
     });
 
     test('is deleted from the saved person', () async {
@@ -262,7 +262,7 @@ void main() {
 
       final outcome = await controller.submit();
 
-      expect(fixture.photos.peopleWhosePhotoWasDeleted, [
+      expect(fixture.photos.objectsWhosePhotoWasDeleted, [
         (outcome as PersonSaved).person,
       ]);
     });

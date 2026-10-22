@@ -194,7 +194,7 @@ class _ViewStreetState extends State<ViewStreet> {
       editButtonBuilder: (context, street) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditStreetRoute(
-          street: street,
+          intent: UpdateStreet(street: street),
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),

@@ -211,7 +211,8 @@ class _ViewAreaState extends State<ViewArea> {
       ),
       editButtonBuilder: (context, area) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => EditAreaRoute(area: area).push(context),
+        onPressed: () =>
+            EditAreaRoute(intent: UpdateArea(area: area)).push(context),
         icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
@@ -242,7 +243,7 @@ class _ViewAreaState extends State<ViewArea> {
               if (newIndex == 0) {
                 unawaited(
                   EditStreetRoute(
-                    withArea: area,
+                    intent: CreateStreetInArea(area: area),
                   ).push(context),
                 );
               } else if (newIndex == 1) {
