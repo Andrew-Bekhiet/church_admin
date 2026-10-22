@@ -138,6 +138,23 @@ void main() {
     );
 
     blocTest<DefaultMeetingSaveCubit<Service>, ObjectSaveProgress>(
+      'archives the meeting when the user no longer wants it',
+      build: () => cubitEditing(const CreateBlankService()),
+      act: (cubit) async {
+        form.name.setValue('خدمة ابتدائي');
+        services.updatesFindNothing = true;
+        await cubit.submit();
+        services.updatesFindNothing = false;
+        form.defaultMeeting?.isCreated.setValue(false);
+        await cubit.submit();
+      },
+      verify: (_) {
+        expect(meetings.updatedMeetings.single.isArchived, isTrue);
+        expect(services.updates.last.editedObject.defaultMeeting, isNull);
+      },
+    );
+
+    blocTest<DefaultMeetingSaveCubit<Service>, ObjectSaveProgress>(
       'saves and links the meeting name changed since the failed attempt',
       build: () => cubitEditing(const CreateBlankService()),
       act: (cubit) => failLinkThenRetry(cubit, renamedMeeting: 'اجتماع جديد'),
