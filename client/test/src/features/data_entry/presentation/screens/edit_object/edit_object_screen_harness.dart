@@ -44,11 +44,13 @@ class EditObjectScreenHarness {
   final FakePersonTypesDAO personTypes = FakePersonTypesDAO();
   final FakeLoggingService logging = FakeLoggingService();
 
+  User currentUser = userWhoWritesEverything;
+
   Finder get nameField => find.byKey(EditObjectScaffoldKeys.nameField);
 
   void install() {
     final authBloc = MockAuthBloc();
-    when(() => authBloc.currentUserData).thenReturn(userWhoWritesEverything);
+    when(() => authBloc.currentUserData).thenReturn(currentUser);
 
     final databaseService = MockDatabaseService();
     when(() => databaseService.areas).thenReturn(areas);
