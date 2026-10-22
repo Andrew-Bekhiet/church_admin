@@ -18,7 +18,7 @@ class _EditStreetScreenState extends State<EditStreetScreen> {
   late final StreetFormController _form = StreetFormController(
     intent: widget.intent,
     areasDAO: DatabaseService.I.areas,
-    recordedByUserId: _currentUser?.uid,
+    currentUserId: _currentUser?.uid,
   );
   late final ObjectSaveCubit<Street> _saveCubit = ObjectSaveCubit(
     form: _form,

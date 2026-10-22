@@ -17,7 +17,7 @@ class _EditAreaScreenState extends State<EditAreaScreen> {
   final User? _currentUser = AuthBloc.I.currentUserData;
   late final AreaFormController _form = AreaFormController(
     intent: widget.intent,
-    recordedByUserId: _currentUser?.uid,
+    currentUserId: _currentUser?.uid,
   );
   late final ObjectSaveCubit<Area> _saveCubit = ObjectSaveCubit(
     form: _form,

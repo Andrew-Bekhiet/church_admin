@@ -19,7 +19,7 @@ class StreetFormController extends ObjectFormController<Street> {
   StreetFormController({
     required StreetEditIntent intent,
     required this._areasDAO,
-    required super.recordedByUserId,
+    required super.currentUserId,
   }) : super(
          savedObject: switch (intent) {
            UpdateStreet(:final street) => street,

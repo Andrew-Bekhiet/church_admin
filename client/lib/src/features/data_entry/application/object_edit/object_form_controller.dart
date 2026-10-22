@@ -7,7 +7,7 @@ abstract class ObjectFormController<T extends ViewableWithIDAndImage>
     extends AdvancedFormController {
   final T? savedObject;
   final T initialDraft;
-  final String? _recordedByUserId;
+  final String? _currentUserId;
 
   late final photo = AdvancedFieldController<PhotoChange, ObjectEditError>(
     initialValue: const KeepPhoto(),
@@ -31,7 +31,7 @@ abstract class ObjectFormController<T extends ViewableWithIDAndImage>
   ObjectFormController({
     required this.savedObject,
     required this.initialDraft,
-    required this._recordedByUserId,
+    required this._currentUserId,
     required super.debugName,
   }) : super(validationMode: ValidationMode.onUserInteraction);
 
@@ -45,7 +45,7 @@ abstract class ObjectFormController<T extends ViewableWithIDAndImage>
   }) => switch (field.fieldValue) {
     final date? when date != original?.time => LastRecordedByInfo(
       time: date,
-      recordedBy: _recordedByUserId,
+      recordedBy: _currentUserId,
       isFatherVisit: isFatherVisit,
     ),
     _ => original,

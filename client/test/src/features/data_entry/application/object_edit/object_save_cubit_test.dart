@@ -18,7 +18,7 @@ void main() {
   late ObjectSaveOutcome<Area> outcome;
 
   ObjectSaveCubit<Area> cubitEditing(AreaEditIntent intent) {
-    form = AreaFormController(intent: intent, recordedByUserId: 'me');
+    form = AreaFormController(intent: intent, currentUserId: 'me');
     addTearDown(() {
       if (!form.isDisposed) form.dispose();
     });

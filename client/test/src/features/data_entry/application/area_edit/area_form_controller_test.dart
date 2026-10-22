@@ -13,7 +13,7 @@ void main() {
   AreaFormController controllerFor(AreaEditIntent intent) {
     final controller = AreaFormController(
       intent: intent,
-      recordedByUserId: recorderId,
+      currentUserId: recorderId,
     );
     addTearDown(controller.dispose);
 

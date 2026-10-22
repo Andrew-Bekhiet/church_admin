@@ -12,7 +12,7 @@ class AreaFormController extends ObjectFormController<Area> {
 
   AreaFormController({
     required AreaEditIntent intent,
-    required super.recordedByUserId,
+    required super.currentUserId,
   }) : super(
          savedObject: switch (intent) {
            UpdateArea(:final area) => area,
