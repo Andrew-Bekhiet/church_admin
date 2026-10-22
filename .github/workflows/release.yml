@@ -55,6 +55,7 @@ jobs:
           fi
 
   release-mobile:
+    environment: release
     permissions:
       contents: write
       id-token: write
