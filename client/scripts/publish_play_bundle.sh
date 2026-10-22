@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# Publishes an Android App Bundle to a Google Play track through one Android Publisher edit.
-# Usage: GOOGLE_PLAY_ACCESS_TOKEN=<token> publish_play_bundle.sh [--validate-only] <package> <bundle.aab> <track>
-# With --validate-only the edit is validated and discarded instead of committed.
 set -euo pipefail
 
 usage() {
