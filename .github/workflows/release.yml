@@ -217,15 +217,27 @@ jobs:
         if: ${{ always() }}
         run: cd client && rm -f .env
 
+      - name: Authenticate with Google Play
+        id: play-auth
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093" # v3.0.0
+        with:
+          workload_identity_provider: ${{ vars.GCP_RELEASE_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_GOOGLE_PLAY_UPLOADER_SERVICE_ACCOUNT }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/androidpublisher
+          create_credentials_file: false
+          export_environment_variables: false
+
       - name: Publish to Google Play
         if: ${{ matrix.os == 'ubuntu-latest' }}
         env:
-          GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS }}
+          GOOGLE_PLAY_ACCESS_TOKEN: ${{ steps.play-auth.outputs.access_token }}
         run: |
-          cd client
-          google-play bundles publish \
-          --bundle "build/app/outputs/bundle/release/app-release.aab" \
-          --track production
+          client/scripts/publish_play_bundle.sh \
+            com.AndroidQuartz.church_admin \
+            client/build/app/outputs/bundle/release/app-release.aab \
+            production
 
       - name: Publish the app to App Store Connect
         if: ${{ matrix.os == 'macos-latest' }}
