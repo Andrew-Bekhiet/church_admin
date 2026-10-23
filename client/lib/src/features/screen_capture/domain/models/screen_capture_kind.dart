@@ -1,9 +1,11 @@
+import 'package:collection/collection.dart';
+
 enum ScreenCaptureKind {
   screenshot('screenshot'),
   screenRecording('screen_recording');
 
-  static ScreenCaptureKind byValue(String value) =>
-      values.firstWhere((kind) => kind.value == value);
+  static ScreenCaptureKind? byValueOrNull(String value) =>
+      values.firstWhereOrNull((kind) => kind.value == value);
 
   final String value;
 

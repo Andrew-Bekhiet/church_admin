@@ -332,7 +332,7 @@ final screenCaptureAttemptsRecorderProvider =
                 )
                 .receiveBroadcastStream()
                 .cast<String>()
-                .map(ScreenCaptureKind.byValue),
+                .mapNotNull(ScreenCaptureKind.byValueOrNull),
         authBloc: ref.watch(authBlocProvider),
         screenCaptureAttempts: ref
             .watch(databaseServiceProvider)
