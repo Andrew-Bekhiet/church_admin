@@ -243,6 +243,27 @@ void main() {
     expect(form.geolocation.fieldValue, pickedLocation);
   });
 
+  testWidgets('updating the location from the reminder is tracked as '
+      'accepting the reminder', (tester) async {
+    await pumpSection(
+      tester,
+      initialAddress: locatedAddress,
+      locationOnMap: pickedLocation,
+    );
+    await typeHouseCode(tester, '14');
+
+    await tester.ensureVisible(
+      find.byKey(LocationUpdateReminderCardKeys.updateLocation),
+    );
+    await tester.tap(find.byKey(LocationUpdateReminderCardKeys.updateLocation));
+    await tester.pumpAndSettle();
+
+    expect(
+      fixture.analytics.trackedEventsOf<StaleLocationReminderAccept>(),
+      hasLength(1),
+    );
+  });
+
   testWidgets('a read-only address shows no reminder for a changed place', (
     tester,
   ) async {

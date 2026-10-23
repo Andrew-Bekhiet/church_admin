@@ -141,16 +141,34 @@ void main() {
       );
     });
 
-    test('is tracked as accepted when a new location is picked', () async {
-      final controller = fixture.controllerFor(savedAddress)
-        ..area.setValue(stMinaArea);
+    test(
+      'is tracked as accepted when the location is updated from it',
+      () async {
+        final controller = fixture.controllerFor(savedAddress)
+          ..area.setValue(stMinaArea);
 
-      await controller.useLocation(houseLocation);
+        await controller.updateLocationFromStaleReminder(houseLocation);
 
-      expect(
-        fixture.analytics.trackedEventsOf<StaleLocationReminderAccept>(),
-        hasLength(1),
-      );
-    });
+        expect(
+          fixture.analytics.trackedEventsOf<StaleLocationReminderAccept>(),
+          hasLength(1),
+        );
+      },
+    );
+
+    test(
+      'is not tracked as accepted when the location is picked from the field',
+      () async {
+        final controller = fixture.controllerFor(savedAddress)
+          ..area.setValue(stMinaArea);
+
+        await controller.useLocation(houseLocation);
+
+        expect(
+          fixture.analytics.trackedEventsOf<StaleLocationReminderAccept>(),
+          isEmpty,
+        );
+      },
+    );
   });
 }
