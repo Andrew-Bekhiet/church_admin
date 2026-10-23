@@ -18,7 +18,7 @@ class EditPersonContactsImport {
     if (permissionStatus != PermissionStatus.granted &&
         permissionStatus != PermissionStatus.limited) {
       AnalyticsService.I.track(
-        const DeviceContactsImport(
+        const DeviceContactsImportAttempt(
           DeviceContactsImportOutcome.permissionDenied,
         ),
       );
@@ -28,7 +28,9 @@ class EditPersonContactsImport {
     final contact = await ContactsService.I.pickContact();
     if (contact == null) {
       AnalyticsService.I.track(
-        const DeviceContactsImport(DeviceContactsImportOutcome.pickCancelled),
+        const DeviceContactsImportAttempt(
+          DeviceContactsImportOutcome.pickCancelled,
+        ),
       );
 
       return;
@@ -44,7 +46,9 @@ class EditPersonContactsImport {
         );
     if (result == null) {
       AnalyticsService.I.track(
-        const DeviceContactsImport(DeviceContactsImportOutcome.dialogCancelled),
+        const DeviceContactsImportAttempt(
+          DeviceContactsImportOutcome.dialogCancelled,
+        ),
       );
 
       return;
@@ -52,7 +56,7 @@ class EditPersonContactsImport {
     if (!context.mounted) return;
 
     AnalyticsService.I.track(
-      DeviceContactsImport(
+      DeviceContactsImportAttempt(
         DeviceContactsImportOutcome.imported,
         importedNumberCount: result.numbers.length,
         isNameUsed: result.useContactName,
