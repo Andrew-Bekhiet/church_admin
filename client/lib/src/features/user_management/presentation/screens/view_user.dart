@@ -136,6 +136,7 @@ class _ViewUserState extends State<ViewUser> {
               if (isUserApproved) ...userInfoWidgets,
               if (user
                   case User(
+                    :final uid,
                     :final email?,
                     authId: _?,
                     :final currentUserCanManageThisUser,
@@ -144,7 +145,7 @@ class _ViewUserState extends State<ViewUser> {
                       !isMyAccount &&
                       (appUserPermissions.manageAllUsers ||
                           currentUserCanManageThisUser))
-                SendPasswordResetButton(email: email),
+                SendPasswordResetButton(userId: uid, email: email),
               if (appUserPermissions.manageAllUsers &&
                   isUserApproved &&
                   !isMyAccount)
@@ -201,6 +202,9 @@ class _ViewUserState extends State<ViewUser> {
         isDestructive: true,
       ),
     );
+    AnalyticsService.I.track(
+      AccountDeletionAnswer(step: 1, isConfirmed: dialogResult ?? false),
+    );
 
     if (dialogResult != true || !mounted) return;
 
@@ -214,13 +218,18 @@ class _ViewUserState extends State<ViewUser> {
         isDestructive: true,
       ),
     );
+    AnalyticsService.I.track(
+      AccountDeletionAnswer(step: 2, isConfirmed: dialogResult ?? false),
+    );
 
     if (dialogResult != true) return;
 
     try {
       await FunctionsService.I.deleteMyAccount();
+      AnalyticsService.I.track(const MyAccountDelete(isSuccess: true));
       AuthBloc.I.add(const SignOut(SignOutSource.accountDeletion));
     } catch (err, stkTrace) {
+      AnalyticsService.I.track(const MyAccountDelete(isSuccess: false));
       await LoggingService.I.exception(
         LogRecord(error: err, stackTrace: stkTrace),
       );
@@ -245,6 +254,7 @@ class _ViewUserState extends State<ViewUser> {
   Future<void> _approveUser(User user) async {
     try {
       await DatabaseService.I.userPermissions.approveUser(user.uid);
+      AnalyticsService.I.track(UserApprove(user.uid, isSuccess: true));
 
       if (!mounted) return;
 
@@ -255,6 +265,7 @@ class _ViewUserState extends State<ViewUser> {
         ),
       );
     } catch (err, stkTrace) {
+      AnalyticsService.I.track(UserApprove(user.uid, isSuccess: false));
       await LoggingService.I.exception(
         LogRecord(error: err, stackTrace: stkTrace),
       );
@@ -283,6 +294,7 @@ class _ViewUserState extends State<ViewUser> {
 
     try {
       await DatabaseService.I.userPermissions.unapproveUser(user.uid);
+      AnalyticsService.I.track(UserUnapprove(user.uid, isSuccess: true));
 
       if (!mounted) return;
 
@@ -293,6 +305,7 @@ class _ViewUserState extends State<ViewUser> {
         ),
       );
     } catch (err, stkTrace) {
+      AnalyticsService.I.track(UserUnapprove(user.uid, isSuccess: false));
       await LoggingService.I.exception(
         LogRecord(error: err, stackTrace: stkTrace),
       );

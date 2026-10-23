@@ -84,8 +84,12 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
               key: ManageUsersScreenKeys.addUserButton,
               icon: const Icon(Symbols.person_add),
               label: const Text('إضافة خادم'),
-              onPressed: () =>
+              onPressed: () {
+                AnalyticsService.I.track(const UserCreateTap());
+                unawaited(
                   const EditUserRoute(intent: CreateUser()).push(context),
+                );
+              },
             );
           },
         ),

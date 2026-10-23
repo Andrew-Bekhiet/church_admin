@@ -8,6 +8,7 @@ class AdminUsers extends StatelessWidget {
 
   Future<void> Function() _onTap(BuildContext context) {
     return () async {
+      AnalyticsService.I.track(AdminUsersOpen(users.length));
       await Navigator.of(context).push(
         PageRouteBuilder(
           opaque: false,
