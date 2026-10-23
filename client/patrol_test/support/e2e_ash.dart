@@ -58,8 +58,15 @@ abstract final class E2eAsh {
     String query,
     String field, {
     Map<String, dynamic> variables = const {},
+    String email = E2eBackend.adminEmail,
+    String password = E2eBackend.password,
   }) async {
-    final data = await E2eAsh.query(query, variables: variables);
+    final data = await E2eAsh.query(
+      query,
+      variables: variables,
+      email: email,
+      password: password,
+    );
 
     return (data[field] as Map)['results'] as List;
   }

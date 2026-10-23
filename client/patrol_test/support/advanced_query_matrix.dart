@@ -11,12 +11,14 @@ class AdvancedQueryMatrix {
   static const _sampleKey = '00000000-0000-4000-8000-000000000000';
   static final _sampleDate = DateTime.utc(2026, 10, 20);
   static const _samplePoint = Point(30.05, 31.23);
-  static const _sampleRow = {
+  static final _sampleRow = {
     'id': _sampleKey,
     'uid': _sampleKey,
     'order': 1,
     'name': 'e2e',
-    'audience': 'personsAndServants',
+    'audience': AshNaming.screamingSnake(
+      MeetingAudience.personsAndServants.name,
+    ),
     'isArchived': false,
     'showKodasCheckbox': false,
   };

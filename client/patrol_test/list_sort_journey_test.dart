@@ -114,7 +114,7 @@ void main() {
       step('a servant with read-only area, service and group scopes signs in');
       await E2eApp.launchSignedOut($);
       await E2eApp.signInToHome(tester, email: user.email);
-      final defaultSorts = await lists.storedSorts(user.uid, sortedLists);
+      final defaultSorts = await lists.storedSorts(user, sortedLists);
       final reversedSorts = ListSortRobot.withFirstKeysReversed(defaultSorts);
 
       step('every area list starts in its default sort and is reversed');
@@ -130,7 +130,7 @@ void main() {
 
       step('the class and other service screens follow the new sorts');
       await expectServiceScreensShow(reversedOrder: true);
-      await lists.expectStoredSorts(user.uid, reversedSorts);
+      await lists.expectStoredSorts(user, reversedSorts);
 
       step(
         'after a restart the area lists are still reversed and each is '
@@ -148,7 +148,7 @@ void main() {
       await lists.openService(fixture.serviceId);
       await lists.reverseEachTab(reversed(serviceTabs));
       await expectServiceScreensShow(reversedOrder: false);
-      await lists.expectStoredSorts(user.uid, defaultSorts);
+      await lists.expectStoredSorts(user, defaultSorts);
 
       step('after another restart every list keeps its default sort');
       await E2eApp.relaunch($);

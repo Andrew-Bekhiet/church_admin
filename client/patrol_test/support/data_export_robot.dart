@@ -42,8 +42,8 @@ class DataExportRobot {
 
   Future<void> select(String id) => tester.tapOn(tester.viewableObject(id));
 
-  /// Starts the export and waits for the function to answer, whether the app
-  /// then shows the finished export or an error.
+  /// Starts the export and waits until the app has downloaded and saved the
+  /// workbook, failing with what the app shows when the export errors instead.
   Future<void> startExport() async {
     await tester.tapOn(
       find.byKey(ExportEntitiesSelectionScreenKeys.startExportButton),
@@ -56,6 +56,10 @@ class DataExportRobot {
       ),
       timeout: _exportTimeout,
     );
+
+    if (_failed.evaluate().isNotEmpty) {
+      throw tester.failureShowingScreen('The export failed');
+    }
   }
 
   Set<String> _idsIn(ViewableObjectListController controller) => {

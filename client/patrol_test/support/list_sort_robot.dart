@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'e2e_backend.dart';
+import 'e2e_user.dart';
 import 'e2e_widget_tester.dart';
 
 class ListSortRobot {
@@ -110,10 +111,10 @@ class ListSortRobot {
 
   /// The sort each list of [lists] has stored for the user, by storage key.
   Future<Map<String, List<Object?>>> storedSorts(
-    String uid,
+    E2eUser owner,
     List<OrderByPreferenceKey> lists,
   ) async {
-    final stored = await E2eBackend.orderByPreferencesOf(uid);
+    final stored = await E2eBackend.orderByPreferencesOf(owner);
 
     return {
       for (final list in lists)
@@ -127,7 +128,7 @@ class ListSortRobot {
   }
 
   Future<void> expectStoredSorts(
-    String uid,
+    E2eUser owner,
     Map<String, List<Object?>> expected,
   ) async {
     final deadline = DateTime.now().add(_storedSortTimeout);
@@ -138,7 +139,7 @@ class ListSortRobot {
         throw TestFailure('Stored sorts $stored do not include $expected');
       }
       await Future<void>.delayed(_storedSortPollInterval);
-      stored = await E2eBackend.orderByPreferencesOf(uid);
+      stored = await E2eBackend.orderByPreferencesOf(owner);
     }
   }
 
