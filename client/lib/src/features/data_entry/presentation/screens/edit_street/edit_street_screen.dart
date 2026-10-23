@@ -23,7 +23,7 @@ class _EditStreetScreenState extends State<EditStreetScreen> {
   late final ObjectSaveCubit<Street> _saveCubit = ObjectSaveCubit(
     form: _form,
     dao: DatabaseService.I.streets,
-    photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+    photoUploader: RemotePhotoUploader(DatabaseService.I.photos),
   );
 
   @override

@@ -29,7 +29,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
   late final ObjectSaveCubit<Store> _saveCubit = ObjectSaveCubit(
     form: _form,
     dao: DatabaseService.I.stores,
-    photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+    photoUploader: RemotePhotoUploader(DatabaseService.I.photos),
     outOfSight: OutOfSightAfterSave(_currentUser),
   );
 

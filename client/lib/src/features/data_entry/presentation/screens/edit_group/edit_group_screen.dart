@@ -26,7 +26,7 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
       DefaultMeetingSaveCubit(
         form: _form,
         dao: DatabaseService.I.groups,
-        photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+        photoUploader: RemotePhotoUploader(DatabaseService.I.photos),
         meetingOwner: _form,
         meetingsDAO: DatabaseService.I.meetings,
       );

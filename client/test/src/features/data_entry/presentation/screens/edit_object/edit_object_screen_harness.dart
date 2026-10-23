@@ -28,9 +28,7 @@ import '../../../../../fakes/mock_image_url_cache_service.dart';
 import '../../../../../fakes/mock_user_preferences_service.dart';
 import '../../../../../fakes/mock_viewable_object_service.dart';
 import '../edit_person/edit_person_screen_harness.dart'
-    show FakeHobbiesDAO, FakeMetadataDAO;
-
-class FakeFunctionsService extends Fake implements FunctionsService {}
+    show FakeHobbiesDAO, FakeMetadataDAO, FakePhotosDAO;
 
 class FakeEditObjectMetadataDAO extends FakeMetadataDAO {
   final FakeStudyYearsDAO fakeStudyYears;
@@ -65,6 +63,7 @@ class EditObjectScreenHarness {
   final FakeMeetingsDAO meetingsDAO = FakeMeetingsDAO();
   final FakeClassesDAO classesDAO = FakeClassesDAO();
   final FakeStudyYearsDAO studyYearsDAO = FakeStudyYearsDAO();
+  final FakePhotosDAO photosDAO = FakePhotosDAO();
   final FakeLoggingService logging = FakeLoggingService();
 
   User currentUser = userWhoWritesEverything;
@@ -88,6 +87,7 @@ class EditObjectScreenHarness {
     when(() => databaseService.groups).thenReturn(groupsDAO);
     when(() => databaseService.meetings).thenReturn(meetingsDAO);
     when(() => databaseService.classes).thenReturn(classesDAO);
+    when(() => databaseService.photos).thenReturn(photosDAO);
     when(() => databaseService.metadata).thenReturn(
       FakeEditObjectMetadataDAO(
         db: databaseService,
@@ -96,7 +96,9 @@ class EditObjectScreenHarness {
       ),
     );
 
-    registerFallbackValue(const FunctionsObjectImageInfo('areas', 'fallback'));
+    registerFallbackValue(
+      const ObjectPhotoInfo(Enum_PhotoSubject.AREAS, 'fallback'),
+    );
     final imageUrls = MockImageUrlCacheService();
     when(
       () => imageUrls.getImageUrl(any()),
@@ -119,7 +121,6 @@ class EditObjectScreenHarness {
       userPreferencesServiceProvider.overrideWithValue(preferences),
       viewableObjectServiceProvider.overrideWithValue(viewableObjects),
       loggingServiceProvider.overrideWithValue(logging),
-      functionsServiceProvider.overrideWithValue(FakeFunctionsService()),
       geocoderProvider.overrideWithValue(FakeGeocoder()),
     ]);
   }

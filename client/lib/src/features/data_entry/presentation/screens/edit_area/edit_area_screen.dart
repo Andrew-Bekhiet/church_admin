@@ -22,7 +22,7 @@ class _EditAreaScreenState extends State<EditAreaScreen> {
   late final ObjectSaveCubit<Area> _saveCubit = ObjectSaveCubit(
     form: _form,
     dao: DatabaseService.I.areas,
-    photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+    photoUploader: RemotePhotoUploader(DatabaseService.I.photos),
   );
 
   @override

@@ -2,10 +2,10 @@ import 'package:church_admin/church_admin.dart';
 import 'package:image_picker/image_picker.dart' show XFile;
 import 'package:mime/mime.dart';
 
-class FunctionsPhotoUploader implements PhotoUploader {
-  final FunctionsService _functions;
+class RemotePhotoUploader implements PhotoUploader {
+  final PhotosDAO _photos;
 
-  const FunctionsPhotoUploader(this._functions);
+  const RemotePhotoUploader(this._photos);
 
   @override
   Future<void> deletePhotoOf(IImage object) => object.imageInfo.delete();
@@ -21,7 +21,7 @@ class FunctionsPhotoUploader implements PhotoUploader {
       contentType: mimeType,
     );
 
-    await _functions.uploadPhoto(
+    await _photos.uploadPhoto(
       url: uploadUrl,
       contentType: mimeType,
       fileStream: photo.openRead(),

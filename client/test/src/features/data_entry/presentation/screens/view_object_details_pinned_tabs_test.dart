@@ -149,7 +149,9 @@ void _setUp() {
     OrderByPreferenceKey(type: AdvancedQueriesMetadata().person),
   );
   registerFallbackValue(<OrderBy>[]);
-  registerFallbackValue(const FunctionsObjectImageInfo('persons', 'fallback'));
+  registerFallbackValue(
+    const ObjectPhotoInfo(Enum_PhotoSubject.PERSONS, 'fallback'),
+  );
 
   final preferences = MockUserPreferencesService();
   when(() => preferences.darkTheme).thenReturn(false);

@@ -26,7 +26,7 @@ class _EditClassScreenState extends State<EditClassScreen> {
   late final ObjectSaveCubit<Class> _saveCubit = ObjectSaveCubit(
     form: _form,
     dao: DatabaseService.I.classes,
-    photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+    photoUploader: RemotePhotoUploader(DatabaseService.I.photos),
   );
 
   @override
