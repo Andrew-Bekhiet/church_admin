@@ -101,7 +101,7 @@ void main() {
         'subject_type': 'service',
         'service_id': service.id,
         'range_preset': AnalysisRangePreset.custom.name,
-        'range_days': range.duration.inDays,
+        'range_duration_ms': range.duration.inMilliseconds,
         'is_single_day': false,
         'is_success': true,
       }),

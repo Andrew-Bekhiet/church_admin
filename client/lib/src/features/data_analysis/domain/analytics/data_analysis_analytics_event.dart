@@ -3,7 +3,7 @@ import 'package:church_admin/church_admin.dart';
 sealed class DataAnalysisAnalyticsEvent extends AnalyticsEvent {
   static Json rangePropertiesOf(DateTimeRangePreset preset) => {
     'range_preset': AnalysisRangePreset.of(preset).name,
-    'range_days': preset.duration.inDays,
+    'range_duration_ms': preset.duration.inMilliseconds,
   };
 
   @override
@@ -13,8 +13,10 @@ sealed class DataAnalysisAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class MeetingsAnalysisView extends DataAnalysisAnalyticsEvent {
-  final MeetingsAnalysisSubject subject;
-  final DateTimeRangePreset rangePreset;
+  final String subjectType;
+  final Json subjectProperties;
+  final Json rangeProperties;
+  final bool isSingleDay;
   final bool isSuccess;
 
   @override
@@ -22,42 +24,48 @@ final class MeetingsAnalysisView extends DataAnalysisAnalyticsEvent {
 
   @override
   Json get properties => {
-    'subject_type': switch (subject) {
-      MeetingAnalysisSubject() => 'meeting',
-      ServiceAnalysisSubject() => 'service',
-      GroupAnalysisSubject() => 'group',
-      ClassAnalysisSubject() => 'class',
-    },
-    ...subject.analyticsProperties,
-    ...DataAnalysisAnalyticsEvent.rangePropertiesOf(rangePreset),
-    'is_single_day': rangePreset.range.isSingleDay,
+    'subject_type': subjectType,
+    ...subjectProperties,
+    ...rangeProperties,
+    'is_single_day': isSingleDay,
     'is_success': isSuccess,
   };
 
-  const MeetingsAnalysisView({
-    required this.subject,
-    required this.rangePreset,
+  MeetingsAnalysisView({
+    required MeetingsAnalysisSubject subject,
+    required DateTimeRangePreset rangePreset,
     required this.isSuccess,
-  });
+  }) : subjectType = switch (subject) {
+         MeetingAnalysisSubject() => 'meeting',
+         ServiceAnalysisSubject() => 'service',
+         GroupAnalysisSubject() => 'group',
+         ClassAnalysisSubject() => 'class',
+       },
+       subjectProperties = subject.analyticsProperties,
+       rangeProperties = DataAnalysisAnalyticsEvent.rangePropertiesOf(
+         rangePreset,
+       ),
+       isSingleDay = rangePreset.range.isSingleDay;
 }
 
 final class AnalysisRangeSelect extends DataAnalysisAnalyticsEvent {
-  final DateTimeRangePreset rangePreset;
+  final Json rangeProperties;
 
   @override
   String get objectAction => 'range_select';
 
   @override
-  Json get properties => DataAnalysisAnalyticsEvent.rangePropertiesOf(
-    rangePreset,
-  );
+  Json get properties => rangeProperties;
 
-  const AnalysisRangeSelect(this.rangePreset);
+  AnalysisRangeSelect(DateTimeRangePreset rangePreset)
+    : rangeProperties = DataAnalysisAnalyticsEvent.rangePropertiesOf(
+        rangePreset,
+      );
 }
 
 final class AnalysisCustomRangePick extends DataAnalysisAnalyticsEvent {
   final bool isReopened;
-  final DateTimeRange? pickedRange;
+  final Duration? pickedDuration;
 
   @override
   String get objectAction => 'custom_range_pick';
@@ -65,14 +73,14 @@ final class AnalysisCustomRangePick extends DataAnalysisAnalyticsEvent {
   @override
   Json get properties => {
     'is_reopened': isReopened,
-    'is_cancelled': pickedRange == null,
-    'range_days': pickedRange?.duration.inDays,
+    'is_cancelled': pickedDuration == null,
+    'range_duration_ms': pickedDuration?.inMilliseconds,
   };
 
-  const AnalysisCustomRangePick({
+  AnalysisCustomRangePick({
     required this.isReopened,
-    required this.pickedRange,
-  });
+    required DateTimeRange? pickedRange,
+  }) : pickedDuration = pickedRange?.duration;
 }
 
 final class AnalysisGranularitySelect extends DataAnalysisAnalyticsEvent {
@@ -149,7 +157,11 @@ final class AnalysisLastAttendedTap extends DataAnalysisAnalyticsEvent {
   String get objectAction => 'last_attended_tap';
 
   @override
-  Json get properties => {'person_id': personId, 'meeting_id': meetingId};
+  Json get properties => {
+    'entity_type': AnalyticsEntityType.person.key,
+    AnalyticsEntityType.person.idProperty: personId,
+    'meeting_id': meetingId,
+  };
 
   const AnalysisLastAttendedTap({
     required this.personId,
