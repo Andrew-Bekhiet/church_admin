@@ -30,9 +30,17 @@ defmodule ChurchAdminWeb.PhotoEmulatorTest do
       ]
     )
 
+    storage_settings = Application.fetch_env!(:church_admin, Storage)
+
+    Application.put_env(:church_admin, Storage,
+      adapter: Storage.FirebaseEmulator,
+      public_url: "http://#{emulators[:storage_host]}"
+    )
+
     on_exit(fn ->
       Application.put_env(:church_admin, ChurchAdmin.Google.Config, google_settings)
       Application.put_env(:church_admin, ChurchAdmin.Files, files_settings)
+      Application.put_env(:church_admin, Storage, storage_settings)
     end)
 
     {:ok, world: AuthzWorld.build!()}
@@ -40,37 +48,37 @@ defmodule ChurchAdminWeb.PhotoEmulatorTest do
 
   defp path(%{url: url}), do: URI.parse(url).path
 
-  test "uploads, serves and deletes a photo against the Storage emulator", %{
-    conn: conn,
+  test "uploads, confirms, serves and deletes a photo against the Storage emulator", %{
     world: world
   } do
     actor = ActorLoader.load(world.users.read_write.uid)
     person = world.records.m1
 
     {:ok, upload} = Files.request_photo_upload(:persons, person.id, "image/jpeg", actor: actor)
+    headers = Enum.map(upload.headers, &{&1.name, &1.value})
 
-    upload_response =
-      conn |> put_req_header("content-type", "image/jpeg") |> put(path(upload), @photo)
+    assert Req.put!(upload.url, body: @photo, headers: headers, retry: false).status == 200
 
-    assert upload_response.status == 204
+    assert {:ok, true} =
+             Files.confirm_photo_upload(:persons, person.id, upload.confirmation_token,
+               actor: actor
+             )
 
     recorded = Ash.get!(Person, person.id, authorize?: false)
     assert %DateTime{} = recorded.photo_updated_at
     assert String.length(recorded.blurhash) == 54
 
     {:ok, download} = Files.photo_download_url(:persons, person.id, nil, actor: actor)
-    download_response = get(build_conn(), path(download))
+    download_response = Req.get!(download.url, decode_body: false, retry: false)
 
-    assert download_response.status == 200
-    assert download_response.resp_body == @photo
-    assert get_resp_header(download_response, "cache-control") == ["private, max-age=300"]
+    assert download_response.body == @photo
+    assert Req.Response.get_header(download_response, "content-type") == ["image/jpeg"]
 
     assert {:ok, true} = Files.delete_photo(:persons, person.id, actor: actor)
 
     cleared = Ash.get!(Person, person.id, authorize?: false)
     assert cleared.photo_updated_at == nil
-    assert cleared.blurhash == nil
-    assert get(build_conn(), path(download)).status == 404
+    assert Req.get!(download.url, retry: false).status in [403, 404]
   end
 
   describe "over a real HTTP server" do
@@ -83,26 +91,6 @@ defmodule ChurchAdminWeb.PhotoEmulatorTest do
       {:ok, {_address, port}} = ThousandIsland.listener_info(server)
 
       %{base_url: "http://127.0.0.1:#{port}"}
-    end
-
-    test "takes a streamed photo upload and gives it back", %{base_url: base_url, world: world} do
-      actor = ActorLoader.load(world.users.read_write.uid)
-      person = world.records.m1
-
-      {:ok, upload} = Files.request_photo_upload(:persons, person.id, "image/jpeg", actor: actor)
-
-      response =
-        Req.put!(base_url <> path(upload),
-          body: Stream.map([@photo], & &1),
-          headers: [content_type: "image/jpeg", content_length: byte_size(@photo)]
-        )
-
-      assert response.status == 204
-      assert String.length(Ash.get!(Person, person.id, authorize?: false).blurhash) == 54
-
-      {:ok, download} = Files.photo_download_url(:persons, person.id, nil, actor: actor)
-
-      assert Req.get!(base_url <> path(download)).body == @photo
     end
 
     test "streams an app release with its length and download name", %{

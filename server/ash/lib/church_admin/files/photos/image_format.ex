@@ -2,8 +2,7 @@ defmodule ChurchAdmin.Files.Photos.ImageFormat do
   @moduledoc """
   The image formats a photo may have. `detect/1` names the format from the
   bytes themselves, never from what a request claims; scriptable formats such
-  as SVG are not on the list. `servable_type/1` maps a stored object's content
-  type to what a download may announce.
+  as SVG are not on the list.
   """
 
   @loader_types %{
@@ -13,8 +12,6 @@ defmodule ChurchAdmin.Files.Photos.ImageFormat do
     "gifload_buffer" => "image/gif",
     "heifload_buffer" => "image/heic"
   }
-  @servable_types @loader_types |> Map.values() |> MapSet.new()
-  @opaque_type "application/octet-stream"
 
   @spec detect(binary()) :: {:ok, String.t()} | {:error, :not_an_image}
   def detect(bytes) do
@@ -27,10 +24,5 @@ defmodule ChurchAdmin.Files.Photos.ImageFormat do
     end
   rescue
     _error -> {:error, :not_an_image}
-  end
-
-  @spec servable_type(String.t() | nil) :: String.t()
-  def servable_type(stored_type) do
-    if MapSet.member?(@servable_types, stored_type), do: stored_type, else: @opaque_type
   end
 end

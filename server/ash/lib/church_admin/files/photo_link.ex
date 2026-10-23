@@ -1,5 +1,5 @@
 defmodule ChurchAdmin.Files.PhotoLink do
-  @moduledoc "Where a photo can be uploaded or fetched and until when."
+  @moduledoc "Where a photo can be fetched and until when."
 
   use Ash.Type.NewType,
     subtype_of: :map,

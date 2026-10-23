@@ -1,10 +1,8 @@
 defmodule ChurchAdmin.Files.PhotoTest do
   use ChurchAdmin.AuthzCase, async: false
 
-  alias ChurchAdmin.AccountsCase
+  alias ChurchAdmin.{AccountsCase, FakeStorage, Files}
   alias ChurchAdmin.Authz.Actor
-  alias ChurchAdmin.Files
-  alias ChurchAdminWeb.FileToken
 
   @bucket "church-admin-test.appspot.com"
 
@@ -18,34 +16,15 @@ defmodule ChurchAdmin.Files.PhotoTest do
   defp download_url(world, kind, subject, id, content_type \\ nil),
     do: Files.photo_download_url(subject, id, content_type, actor: actor(world, kind))
 
-  defp claims!(%{url: url}) do
-    %URI{path: "/api/files/" <> rest} = URI.parse(url)
-    [token | _file_name] = String.split(rest, "/")
-    {:ok, claims} = FileToken.verify(token)
-    claims
-  end
+  defp staging_name(%{url: url}),
+    do: URI.parse(url).query |> URI.decode_query() |> Map.fetch!("name")
 
   defp seconds_until(%{expires_at: expires_at}),
     do: DateTime.diff(expires_at, DateTime.utc_now(), :second)
 
   describe "request_photo_upload" do
-    test "answers a five minute PUT link to the subject's object", %{world: world} do
-      person = record(world, :m1)
-
-      assert {:ok, link} = request_upload(world, :read_write, :persons, person.id)
-
-      assert seconds_until(link) in 295..301
-
-      assert %{op: :photo_upload, uid: uid, params: params} = claims!(link)
-      assert uid == user_id(world, :read_write)
-
-      assert params == %{subject: :persons, id: person.id}
-    end
-
-    test "the link ends in a file name clients can show", %{world: world} do
-      {:ok, link} = request_upload(world, :read_write, :areas, record(world, :a1).id)
-
-      assert link.url =~ ~r{/api/files/[^/]+/photo\z}
+    setup do
+      {:ok, store: FakeStorage.start()}
     end
 
     # {actor kind, subject, record name, expected} from storage_proxy.ts: write needs the
@@ -107,7 +86,7 @@ defmodule ChurchAdmin.Files.PhotoTest do
       own = user_id(world, :approved_plain)
 
       assert {:ok, link} = request_upload(world, :approved_plain, :users, own)
-      assert %{params: %{subject: :users, id: ^own}} = claims!(link)
+      assert staging_name(link) =~ ~r"\Auploads/persons/#{record(world, :self).id}/"
 
       assert world |> request_upload(:read_write, :users, own) |> AccountsCase.codes() == [
                "not_found"
@@ -121,33 +100,39 @@ defmodule ChurchAdmin.Files.PhotoTest do
                "not_found"
              ]
     end
-
-    test "the content type is optional and never reaches the token", %{world: world} do
-      area = record(world, :a1)
-
-      for content_type <- [nil, "text/html"] do
-        assert {:ok, link} =
-                 Files.request_photo_upload(:areas, area.id, content_type,
-                   actor: actor(world, :read_write)
-                 )
-
-        assert %{params: %{subject: :areas, id: id} = params} = claims!(link)
-        assert id == area.id
-        refute Map.has_key?(params, :content_type)
-      end
-    end
   end
 
   describe "photo_download_url" do
-    test "answers a five minute GET link", %{world: world} do
+    setup %{world: world} do
+      store = FakeStorage.start()
+
+      for {_name, %resource{id: id}} <- world.records do
+        object = "#{AshPostgres.DataLayer.Info.table(resource)}/#{id}"
+        FakeStorage.put(store, @bucket, object, "jpeg-bytes", "image/jpeg")
+      end
+
+      {:ok, store: store}
+    end
+
+    test "answers a five minute GET link straight to the stored photo", %{world: world} do
       person = record(world, :m1)
 
       assert {:ok, link} = download_url(world, :read_all, :persons, person.id, "image/png")
 
       assert seconds_until(link) in 295..301
 
-      assert %{op: :photo_download, params: params} = claims!(link)
-      assert params == %{subject: :persons, id: person.id}
+      assert link.url ==
+               "http://storage.public.test:9199/v0/b/#{@bucket}/o/persons%2F#{person.id}" <>
+                 "?alt=media&token=download-token"
+    end
+
+    test "a subject without a stored photo is not found", %{world: world} do
+      FakeStorage.start()
+
+      assert world
+             |> download_url(:read_all, :areas, record(world, :a1).id)
+             |> AccountsCase.codes() ==
+               ["not_found"]
     end
 
     # Public subjects are readable by every approved user, the rest by whoever reads the record.

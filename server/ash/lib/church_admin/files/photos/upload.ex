@@ -13,6 +13,11 @@ defmodule ChurchAdmin.Files.Photos.Upload do
   alias ChurchAdmin.Files.Photos.{Blurhash, ImageFormat, Record, Target}
   alias ChurchAdmin.Files.Storage
 
+  @max_bytes 25 * 1024 * 1024
+
+  @spec max_bytes() :: pos_integer()
+  def max_bytes, do: @max_bytes
+
   @spec store(Target.t(), binary()) :: :ok | {:error, :not_an_image | term()}
   def store(%Target{} = target, bytes) do
     with {:ok, content_type} <- ImageFormat.detect(bytes),

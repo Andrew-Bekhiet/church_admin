@@ -3,7 +3,8 @@ defmodule ChurchAdmin.Files.Photos.Target do
   The photo a request names, once it is allowed: the `subject` and `id` the
   client sent, and the row that stores the photo's fields (`resource`,
   `record_id`), which for a `:users` subject is the user's linked person. The
-  object is `{table}/{record id}`, where existing objects already live.
+  object is `{table}/{record id}`, where existing objects already live; an
+  upload is staged under `uploads/{object}/` first.
   """
 
   @enforce_keys [:subject, :id, :resource, :record_id, :object]
@@ -29,4 +30,8 @@ defmodule ChurchAdmin.Files.Photos.Target do
       object: "#{table}/#{record_id}"
     }
   end
+
+  @spec new_staging_object(t()) :: String.t()
+  def new_staging_object(%__MODULE__{object: object}),
+    do: "uploads/#{object}/#{Ecto.UUID.generate()}"
 end

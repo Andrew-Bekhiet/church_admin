@@ -40,14 +40,10 @@ defmodule ChurchAdmin.Files.Storage.FirebaseEmulator do
 
     with {:ok, response} <- start_resumable_session(bucket, name, content_type),
          {:ok, session_url} <- session_url(response) do
+      public_session_url = on_public_origin(session_url)
       headers = [{"content-type", content_type}]
 
-      {:ok,
-       Link.expiring_in(
-         on_public_origin(session_url),
-         headers,
-         Keyword.fetch!(options, :expires_in)
-       )}
+      {:ok, Link.expiring_in(public_session_url, headers, Keyword.fetch!(options, :expires_in))}
     end
   end
 
@@ -130,7 +126,8 @@ defmodule ChurchAdmin.Files.Storage.FirebaseEmulator do
   defp storage_result({:error, error}), do: {:error, Error.from_google(error)}
 
   defp on_public_origin(url) do
-    %URI{scheme: scheme, host: host, port: port} = URI.parse(Storage.adapter_option(:public_url))
+    %URI{scheme: scheme, host: host, port: port} =
+      :public_url |> Storage.adapter_option() |> URI.parse()
 
     url
     |> URI.parse()
