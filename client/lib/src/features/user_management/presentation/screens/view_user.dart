@@ -225,11 +225,12 @@ class _ViewUserState extends State<ViewUser> {
     if (dialogResult != true) return;
 
     try {
-      await FunctionsService.I.deleteMyAccount();
-      AnalyticsService.I.track(const MyAccountDelete(isSuccess: true));
+      await _awaitAndTrackOutcome(
+        FunctionsService.I.deleteMyAccount(),
+        ({required isSuccess}) => MyAccountDelete(isSuccess: isSuccess),
+      );
       AuthBloc.I.add(const SignOut(SignOutSource.accountDeletion));
     } catch (err, stkTrace) {
-      AnalyticsService.I.track(const MyAccountDelete(isSuccess: false));
       await LoggingService.I.exception(
         LogRecord(error: err, stackTrace: stkTrace),
       );
@@ -253,8 +254,10 @@ class _ViewUserState extends State<ViewUser> {
 
   Future<void> _approveUser(User user) async {
     try {
-      await DatabaseService.I.userPermissions.approveUser(user.uid);
-      AnalyticsService.I.track(UserApprove(user.uid, isSuccess: true));
+      await _awaitAndTrackOutcome(
+        DatabaseService.I.userPermissions.approveUser(user.uid),
+        ({required isSuccess}) => UserApprove(user.uid, isSuccess: isSuccess),
+      );
 
       if (!mounted) return;
 
@@ -265,7 +268,6 @@ class _ViewUserState extends State<ViewUser> {
         ),
       );
     } catch (err, stkTrace) {
-      AnalyticsService.I.track(UserApprove(user.uid, isSuccess: false));
       await LoggingService.I.exception(
         LogRecord(error: err, stackTrace: stkTrace),
       );
@@ -293,8 +295,10 @@ class _ViewUserState extends State<ViewUser> {
     if (dialogResult != true || !mounted) return;
 
     try {
-      await DatabaseService.I.userPermissions.unapproveUser(user.uid);
-      AnalyticsService.I.track(UserUnapprove(user.uid, isSuccess: true));
+      await _awaitAndTrackOutcome(
+        DatabaseService.I.userPermissions.unapproveUser(user.uid),
+        ({required isSuccess}) => UserUnapprove(user.uid, isSuccess: isSuccess),
+      );
 
       if (!mounted) return;
 
@@ -305,7 +309,6 @@ class _ViewUserState extends State<ViewUser> {
         ),
       );
     } catch (err, stkTrace) {
-      AnalyticsService.I.track(UserUnapprove(user.uid, isSuccess: false));
       await LoggingService.I.exception(
         LogRecord(error: err, stackTrace: stkTrace),
       );
@@ -316,5 +319,19 @@ class _ViewUserState extends State<ViewUser> {
         'حدث خطأ أثناء إلغاء تفعيل الحساب، يرجى المحاولة لاحقا',
       );
     }
+  }
+
+  Future<void> _awaitAndTrackOutcome(
+    Future<void> operation,
+    AnalyticsEvent Function({required bool isSuccess}) eventFor,
+  ) async {
+    try {
+      await operation;
+    } catch (_) {
+      AnalyticsService.I.track(eventFor(isSuccess: false));
+      rethrow;
+    }
+
+    AnalyticsService.I.track(eventFor(isSuccess: true));
   }
 }
