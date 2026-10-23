@@ -226,12 +226,14 @@ abstract final class E2eBackend {
     return (data[rootField] as Map)['count'] as int;
   }
 
-  static Future<({String uid, String personId})> createUserWithPerson({
+  static Future<({String uid, String personId, String? invitationCode})>
+  createUserWithPerson({
     required String name,
     required Iterable<String> permissions,
     required List<Map<String, Object?>> adminOn,
     bool isMale = true,
     String? email,
+    DateTime? invitationExpiresAt,
   }) async {
     final created = await E2eAsh.createRecord('User', {
       'name': name,
@@ -239,11 +241,13 @@ abstract final class E2eBackend {
       'newPerson': {'name': name, 'gender': isMale},
       'permissions': permissions.toList(),
       'adminOn': adminOn,
-    }, selection: 'uid person { id }');
+      'invitationExpiresAt': ?invitationExpiresAt?.toUtc().toIso8601String(),
+    }, selection: 'uid person { id } invitation { code }');
 
     return (
       uid: created['uid'] as String,
       personId: (created['person'] as Map)['id'] as String,
+      invitationCode: (created['invitation'] as Map?)?['code'] as String?,
     );
   }
 

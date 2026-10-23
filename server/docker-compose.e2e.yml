@@ -6,6 +6,8 @@ services:
       start_period: 2m
 
   ash:
+    environment:
+      ACCOUNT_CLAIMING_BY_EMAIL: "false"
     healthcheck:
       start_period: 3m
 
