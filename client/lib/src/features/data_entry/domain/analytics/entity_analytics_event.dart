@@ -72,20 +72,32 @@ final class EntityShowMoreTap extends EntityAnalyticsEvent {
   const EntityShowMoreTap(this.items);
 }
 
-final class EntityChildCreateTap extends EntityAnalyticsEvent {
-  final ViewableWithID parent;
-  final AnalyticsEntityType childType;
+final class EntityRelatedCreateTap extends EntityAnalyticsEvent {
+  final ViewableWithID viewed;
+  final AnalyticsEntityType relatedType;
+  final EntityRelation relation;
 
   @override
-  String get objectAction => 'child_create_tap';
+  String get objectAction => 'related_create_tap';
 
   @override
   Json get properties => {
-    ...AnalyticsEntityType.propertiesOf(parent),
-    'child_type': childType.key,
+    ...AnalyticsEntityType.propertiesOf(viewed),
+    'related_entity_type': relatedType.key,
+    'relation': relation.name,
   };
 
-  const EntityChildCreateTap(this.parent, this.childType);
+  const EntityRelatedCreateTap(
+    this.viewed,
+    this.relatedType, {
+    required this.relation,
+  });
+
+  const EntityRelatedCreateTap.unlinkedStore(this.viewed)
+    : relatedType = AnalyticsEntityType.store,
+      relation = EntityRelation.unlinked;
 }
 
 enum CopiedEntityProperty { address, notes }
+
+enum EntityRelation { child, parent, member, owned, unlinked }

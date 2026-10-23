@@ -254,7 +254,11 @@ class _ViewServiceState extends State<ViewService> {
             onTap: (newIndex) {
               if (newIndex == 0) {
                 AnalyticsService.I.track(
-                  EntityChildCreateTap(service, AnalyticsEntityType.class$),
+                  EntityRelatedCreateTap(
+                    service,
+                    AnalyticsEntityType.class$,
+                    relation: EntityRelation.child,
+                  ),
                 );
                 unawaited(
                   EditClassRoute(
@@ -263,7 +267,11 @@ class _ViewServiceState extends State<ViewService> {
                 );
               } else if (newIndex == 1) {
                 AnalyticsService.I.track(
-                  EntityChildCreateTap(service, AnalyticsEntityType.group),
+                  EntityRelatedCreateTap(
+                    service,
+                    AnalyticsEntityType.group,
+                    relation: EntityRelation.child,
+                  ),
                 );
                 unawaited(
                   EditGroupRoute(
@@ -272,7 +280,11 @@ class _ViewServiceState extends State<ViewService> {
                 );
               } else if (newIndex == 2) {
                 AnalyticsService.I.track(
-                  EntityChildCreateTap(service, AnalyticsEntityType.person),
+                  EntityRelatedCreateTap(
+                    service,
+                    AnalyticsEntityType.person,
+                    relation: EntityRelation.member,
+                  ),
                 );
                 unawaited(
                   EditPersonRoute(

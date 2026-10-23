@@ -228,7 +228,11 @@ class _ViewStreetState extends State<ViewStreet> {
             onTap: (newIndex) {
               if (newIndex == 0) {
                 AnalyticsService.I.track(
-                  EntityChildCreateTap(street, AnalyticsEntityType.family),
+                  EntityRelatedCreateTap(
+                    street,
+                    AnalyticsEntityType.family,
+                    relation: EntityRelation.child,
+                  ),
                 );
                 unawaited(
                   EditFamilyRoute(
@@ -239,7 +243,11 @@ class _ViewStreetState extends State<ViewStreet> {
                 );
               } else if (newIndex == 1) {
                 AnalyticsService.I.track(
-                  EntityChildCreateTap(street, AnalyticsEntityType.person),
+                  EntityRelatedCreateTap(
+                    street,
+                    AnalyticsEntityType.person,
+                    relation: EntityRelation.child,
+                  ),
                 );
                 unawaited(
                   EditPersonRoute(
@@ -248,7 +256,7 @@ class _ViewStreetState extends State<ViewStreet> {
                 );
               } else if (newIndex == 2) {
                 AnalyticsService.I.track(
-                  EntityChildCreateTap(street, AnalyticsEntityType.store),
+                  EntityRelatedCreateTap.unlinkedStore(street),
                 );
                 unawaited(
                   const EditStoreRoute().push(context),
