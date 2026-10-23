@@ -31,7 +31,9 @@ class AnalyticsBlocObserver extends BlocObserver {
           :final userData,
         ),
       )
-          when currentState is! AuthAuthenticated =>
+          when currentState is! AuthAuthenticated ||
+              currentState.authUser.hasuraUserId != hasuraUserId ||
+              currentState.userData != userData =>
         AnalyticsUser(
           id: hasuraUserId,
           email: authUser.email,
