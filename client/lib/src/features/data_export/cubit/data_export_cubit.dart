@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/data_export/application/export_operations_storage.dart';
+import 'package:clock/clock.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:open_file/open_file.dart';
@@ -38,32 +39,57 @@ class DataExportCubit extends Cubit<DataExportState> {
   ViewableObjectListController<Class>? _classesController;
   ViewableObjectListController<Group>? _groupsController;
 
+  late final StreamSubscription<String> _selectionSearchSubscription;
+
   final FunctionsService _functionsService;
   final AuthBloc _authBloc;
   final ExportOperationsStorage _exportOperationsStorage;
   final DatabaseService _databaseService;
+  final AnalyticsService _analyticsService;
+
+  bool get _canExportAllData =>
+      _authBloc.currentUserData?.permissions.exportAllData ?? false;
 
   DataExportCubit({
     FunctionsService? functionsService,
     AuthBloc? authBloc,
     ExportOperationsStorage? exportOperationsStorage,
     DatabaseService? databaseService,
+    AnalyticsService? analyticsService,
   }) : _functionsService = functionsService ?? FunctionsService.I,
        _authBloc = authBloc ?? AuthBloc.I,
        _exportOperationsStorage =
            exportOperationsStorage ?? ExportOperationsStorage.I,
        _databaseService = databaseService ?? DatabaseService.I,
+       _analyticsService = analyticsService ?? AnalyticsService.I,
        super(const DataExportLoading()) {
+    _selectionSearchSubscription = searchController
+        .debounceTime(HomeSearchCubit.debounceDuration)
+        .whereNotNull()
+        .where((query) => query.isNotEmpty)
+        .distinct()
+        .listen(
+          (query) => _analyticsService.track(
+            ExportSelectionSearchSubmit(queryLength: query.length),
+          ),
+        );
     unawaited(_showSavedFilesOrStartNewExport());
   }
 
   Future<void> _showSavedFilesOrStartNewExport() async {
     final files = await _exportOperationsStorage.listSavedFiles();
 
+    _analyticsService.track(
+      ExportLandingView(
+        files.isEmpty ? ExportLanding.selection : ExportLanding.savedFiles,
+        savedFileCount: files.length,
+      ),
+    );
+
     if (files.isNotEmpty) {
       emit(DataExportListSavedFiles(files: _sortFilesByLastModified(files)));
     } else {
-      switchToSelectingObjects();
+      _showSelection();
     }
   }
 
@@ -76,7 +102,12 @@ class DataExportCubit extends Cubit<DataExportState> {
     emit(DataExportListSavedFiles(files: _sortFilesByLastModified(files)));
   }
 
-  void switchToSelectingObjects() {
+  void startNewExport() {
+    _analyticsService.track(const ExportNewExportTap());
+    _showSelection();
+  }
+
+  void _showSelection() {
     _maybeInitControllers();
     emit(
       DataExportSelectingObjects(
@@ -89,10 +120,7 @@ class DataExportCubit extends Cubit<DataExportState> {
   }
 
   void _maybeInitControllers() {
-    final canExportAllData =
-        _authBloc.currentUserData?.permissions.exportAllData ?? false;
-
-    final userAdminOnStream = canExportAllData
+    final userAdminOnStream = _canExportAllData
         ? null
         : _authBloc.userDataStream.map(
             (u) =>
@@ -234,6 +262,7 @@ class DataExportCubit extends Cubit<DataExportState> {
         servicesIds.isEmpty &&
         classesIds.isEmpty &&
         groupsIds.isEmpty) {
+      _analyticsService.track(const ExportEmptySelectionShow());
       _emitListenerState(
         const DataExportMessage('اختر عنصرًا واحدًا على الأقل للمتابعة'),
       );
@@ -241,6 +270,16 @@ class DataExportCubit extends Cubit<DataExportState> {
       return;
     }
 
+    _analyticsService.track(
+      ExportStart(
+        areaCount: areasIds.length,
+        serviceCount: servicesIds.length,
+        classCount: classesIds.length,
+        groupCount: groupsIds.length,
+        isScopedToOwn: !_canExportAllData,
+      ),
+    );
+    final startedAt = clock.now();
     emit(const DataExportInProgress());
     try {
       final downloadUrl = await _functionsService.exportData(
@@ -255,16 +294,28 @@ class DataExportCubit extends Cubit<DataExportState> {
             emit(DataExportInProgress(progress: progress)),
       );
 
+      _trackFileDownload(startedAt, isSuccess: true);
       emit(DataExportCompleted(file: file));
     } catch (e, s) {
+      _trackFileDownload(startedAt, isSuccess: false);
       unawaited(LoggingService.I.exception(LogRecord(error: e, stackTrace: s)));
       _emitListenerState(DataExportException(e));
-      switchToSelectingObjects();
+      _showSelection();
     }
   }
 
-  void openExportedFile(DataExportFile file) =>
-      unawaited(OpenFile.open(file.path));
+  void _trackFileDownload(DateTime startedAt, {required bool isSuccess}) =>
+      _analyticsService.track(
+        ExportFileDownload(
+          duration: clock.now().difference(startedAt),
+          isSuccess: isSuccess,
+        ),
+      );
+
+  void openExportedFile(DataExportFile file, ExportFileOpenSource source) {
+    _analyticsService.track(ExportFileOpen(source));
+    unawaited(OpenFile.open(file.path));
+  }
 
   void _emitListenerState(DataExportStateListener listenerState) {
     final state = this.state;
@@ -280,6 +331,7 @@ class DataExportCubit extends Cubit<DataExportState> {
         _servicesController?.dispose(),
         _classesController?.dispose(),
         _groupsController?.dispose(),
+        _selectionSearchSubscription.cancel(),
         searchController.close(),
       ].nonNulls,
     );
