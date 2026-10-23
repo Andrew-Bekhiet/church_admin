@@ -29,7 +29,7 @@ class OutdatedFeatureScreen extends StatelessWidget {
               FilledButton(
                 onPressed: () {
                   AnalyticsService.I.track(
-                    const UpdateNowTap(
+                    const UpdateInstallTap(
                       UpdatePromptSource.outdatedFeatureScreen,
                     ),
                   );

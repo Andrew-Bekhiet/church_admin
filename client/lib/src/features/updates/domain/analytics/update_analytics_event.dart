@@ -19,16 +19,16 @@ final class UpdateBannerShow extends UpdateAnalyticsEvent {
   const UpdateBannerShow({required this.hasReleaseNotes});
 }
 
-final class UpdateNowTap extends UpdateAnalyticsEvent {
+final class UpdateInstallTap extends UpdateAnalyticsEvent {
   final UpdatePromptSource source;
 
   @override
-  String get objectAction => 'update_now_tap';
+  String get objectAction => 'install_tap';
 
   @override
   Json get properties => {'source': source.name};
 
-  const UpdateNowTap(this.source);
+  const UpdateInstallTap(this.source);
 }
 
 final class ReleaseNotesTap extends UpdateAnalyticsEvent {

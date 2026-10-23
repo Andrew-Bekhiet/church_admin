@@ -44,7 +44,9 @@ class ForceUpdateScreen extends StatelessWidget {
               FilledButton(
                 onPressed: () {
                   AnalyticsService.I.track(
-                    const UpdateNowTap(UpdatePromptSource.forceUpdateScreen),
+                    const UpdateInstallTap(
+                      UpdatePromptSource.forceUpdateScreen,
+                    ),
                   );
                   unawaited(
                     _launcherService.launchUrl(_featureFlagsRepo.downloadUrl),
