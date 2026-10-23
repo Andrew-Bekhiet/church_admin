@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -40,14 +42,29 @@ class ForceUpdateScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               FilledButton(
-                onPressed: () =>
+                onPressed: () {
+                  AnalyticsService.I.track(
+                    const UpdateInstallTap(
+                      UpdatePromptSource.forceUpdateScreen,
+                    ),
+                  );
+                  unawaited(
                     _launcherService.launchUrl(_featureFlagsRepo.downloadUrl),
+                  );
+                },
                 child: const Text('تحديث الآن'),
               ),
               if (releaseNotesUrl != null)
                 FilledButton.tonal(
                   style: Theme.of(context).filledTonalButtonStyleWorkaround,
-                  onPressed: () => _launcherService.launchUrl(releaseNotesUrl),
+                  onPressed: () {
+                    AnalyticsService.I.track(
+                      const ReleaseNotesTap(
+                        UpdatePromptSource.forceUpdateScreen,
+                      ),
+                    );
+                    unawaited(_launcherService.launchUrl(releaseNotesUrl));
+                  },
                   child: const Text('ما الجديد؟'),
                 ),
             ],

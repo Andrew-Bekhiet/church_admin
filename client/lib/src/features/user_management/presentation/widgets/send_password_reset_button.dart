@@ -5,9 +5,14 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 class SendPasswordResetButton extends StatelessWidget {
+  final String userId;
   final String email;
 
-  const SendPasswordResetButton({required this.email, super.key});
+  const SendPasswordResetButton({
+    required this.userId,
+    required this.email,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +78,6 @@ class SendPasswordResetButton extends StatelessWidget {
 
     if (!(confirmed ?? false)) return;
 
-    await cubit.sendPasswordResetEmail(email);
+    await cubit.sendPasswordResetEmail(email, userId: userId);
   }
 }

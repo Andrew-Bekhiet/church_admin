@@ -83,6 +83,12 @@ class UserPersonLinkField extends StatelessWidget {
   }
 
   void _switchMode(bool createNew) {
+    AnalyticsService.I.track(
+      PersonLinkModeSwitch(
+        createNew ? PersonLinkMode.create : PersonLinkMode.link,
+      ),
+    );
+
     if (!createNew) {
       cubit.selectPerson(const NoPersonSelected());
 

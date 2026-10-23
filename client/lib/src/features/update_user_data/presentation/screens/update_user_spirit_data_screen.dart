@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:clock/clock.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -96,11 +97,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
         ),
       );
 
-      await DatabaseService.I.persons.updatePersonSpiritData(
-        personId: _userData.id,
-        lastConfession: _userData.lastConfession!.time,
-        lastKodas: _userData.lastKodas!.time,
-      );
+      await _updateSpiritDataAndTrackOutcome();
 
       if (mounted) {
         scaffoldMessenger
@@ -130,4 +127,23 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
       _isSaving = false;
     }
   }
+
+  Future<void> _updateSpiritDataAndTrackOutcome() async {
+    try {
+      await DatabaseService.I.persons.updatePersonSpiritData(
+        personId: _userData.id,
+        lastConfession: _userData.lastConfession!.time,
+        lastKodas: _userData.lastKodas!.time,
+      );
+    } on Exception {
+      _trackSave(isSuccess: false);
+      rethrow;
+    }
+
+    _trackSave(isSuccess: true);
+  }
+
+  void _trackSave({required bool isSuccess}) => AnalyticsService.I.track(
+    SpiritDataSave(_userData, savedAt: clock.now(), isSuccess: isSuccess),
+  );
 }

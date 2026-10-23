@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -25,7 +27,14 @@ class OutdatedFeatureScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               FilledButton(
-                onPressed: () => LauncherService.I.launchUrl(downloadUrl),
+                onPressed: () {
+                  AnalyticsService.I.track(
+                    const UpdateInstallTap(
+                      UpdatePromptSource.outdatedFeatureScreen,
+                    ),
+                  );
+                  unawaited(LauncherService.I.launchUrl(downloadUrl));
+                },
                 child: const Text('تحديث الآن'),
               ),
             ],

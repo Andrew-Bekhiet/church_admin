@@ -28,7 +28,7 @@ class _ManageUsersGroupedListState extends State<ManageUsersGroupedList> {
             key: ValueKey(group.key),
             group: group,
             expanded: _expandedKeys.contains(group.key),
-            onToggle: () => _toggle(group.key),
+            onToggle: () => _toggle(group),
           ),
         SliverToBoxAdapter(
           child: ManageUsersListFooter(isLoading: widget.isLoading),
@@ -37,11 +37,16 @@ class _ManageUsersGroupedListState extends State<ManageUsersGroupedList> {
     );
   }
 
-  void _toggle(String key) {
-    setState(() {
-      if (_expandedKeys.remove(key)) return;
+  void _toggle(UserAdminGroup group) {
+    final isExpanded = !_expandedKeys.contains(group.key);
+    AnalyticsService.I.track(
+      ManageUsersGroupToggle(group, isExpanded: isExpanded),
+    );
 
-      _expandedKeys.add(key);
+    setState(() {
+      if (_expandedKeys.remove(group.key)) return;
+
+      _expandedKeys.add(group.key);
     });
   }
 }

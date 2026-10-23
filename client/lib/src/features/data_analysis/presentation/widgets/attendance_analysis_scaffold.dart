@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -54,7 +56,7 @@ class _AttendanceAnalysisScaffoldState
         title: Text(widget.title),
         actions: [
           IconButton(
-            onPressed: () => setState(() => _refreshTick++),
+            onPressed: _refresh,
             icon: const Icon(Symbols.refresh),
             tooltip: 'تحديث البيانات',
           ),
@@ -91,7 +93,10 @@ class _AttendanceAnalysisScaffoldState
               ),
               PersonMeetingsError(:final error) => AttendanceAnalysisErrorView(
                 error: error,
-                onRetry: () => context.read<PersonMeetingsCubit>().load(),
+                onRetry: () {
+                  AnalyticsService.I.track(const AnalysisRetryTap());
+                  unawaited(context.read<PersonMeetingsCubit>().load());
+                },
               ),
               PersonMeetingsLoaded(:final meetings) =>
                 AttendanceAnalysisContent(
@@ -120,7 +125,15 @@ class _AttendanceAnalysisScaffoldState
     });
   }
 
+  void _refresh() {
+    AnalyticsService.I.track(const AnalysisRefreshTap());
+    setState(() => _refreshTick++);
+  }
+
   void _toggleSection(PersonAnalysisSection section, bool enabled) {
+    AnalyticsService.I.track(
+      AnalysisSectionToggle(section, isEnabled: enabled),
+    );
     setState(() => _options = section.apply(_options, enabled));
   }
 

@@ -136,6 +136,7 @@ class _ViewUserState extends State<ViewUser> {
               if (isUserApproved) ...userInfoWidgets,
               if (user
                   case User(
+                    :final uid,
                     :final email?,
                     authId: _?,
                     :final currentUserCanManageThisUser,
@@ -144,7 +145,7 @@ class _ViewUserState extends State<ViewUser> {
                       !isMyAccount &&
                       (appUserPermissions.manageAllUsers ||
                           currentUserCanManageThisUser))
-                SendPasswordResetButton(email: email),
+                SendPasswordResetButton(userId: uid, email: email),
               if (appUserPermissions.manageAllUsers &&
                   isUserApproved &&
                   !isMyAccount)
@@ -201,6 +202,12 @@ class _ViewUserState extends State<ViewUser> {
         isDestructive: true,
       ),
     );
+    AnalyticsService.I.track(
+      AccountDeletionAnswer(
+        confirmationStep: 1,
+        isConfirmed: dialogResult ?? false,
+      ),
+    );
 
     if (dialogResult != true || !mounted) return;
 
@@ -214,11 +221,20 @@ class _ViewUserState extends State<ViewUser> {
         isDestructive: true,
       ),
     );
+    AnalyticsService.I.track(
+      AccountDeletionAnswer(
+        confirmationStep: 2,
+        isConfirmed: dialogResult ?? false,
+      ),
+    );
 
     if (dialogResult != true) return;
 
     try {
-      await FunctionsService.I.deleteMyAccount();
+      await _awaitAndTrackOutcome(
+        FunctionsService.I.deleteMyAccount(),
+        ({required isSuccess}) => MyAccountDelete(isSuccess: isSuccess),
+      );
       AuthBloc.I.add(const SignOut(SignOutSource.accountDeletion));
     } catch (err, stkTrace) {
       await LoggingService.I.exception(
@@ -244,7 +260,10 @@ class _ViewUserState extends State<ViewUser> {
 
   Future<void> _approveUser(User user) async {
     try {
-      await DatabaseService.I.userPermissions.approveUser(user.uid);
+      await _awaitAndTrackOutcome(
+        DatabaseService.I.userPermissions.approveUser(user.uid),
+        ({required isSuccess}) => UserApprove(user.uid, isSuccess: isSuccess),
+      );
 
       if (!mounted) return;
 
@@ -282,7 +301,10 @@ class _ViewUserState extends State<ViewUser> {
     if (dialogResult != true || !mounted) return;
 
     try {
-      await DatabaseService.I.userPermissions.unapproveUser(user.uid);
+      await _awaitAndTrackOutcome(
+        DatabaseService.I.userPermissions.unapproveUser(user.uid),
+        ({required isSuccess}) => UserUnapprove(user.uid, isSuccess: isSuccess),
+      );
 
       if (!mounted) return;
 
@@ -303,5 +325,19 @@ class _ViewUserState extends State<ViewUser> {
         'حدث خطأ أثناء إلغاء تفعيل الحساب، يرجى المحاولة لاحقا',
       );
     }
+  }
+
+  Future<void> _awaitAndTrackOutcome(
+    Future<void> operation,
+    AnalyticsEvent Function({required bool isSuccess}) eventFor,
+  ) async {
+    try {
+      await operation;
+    } catch (_) {
+      AnalyticsService.I.track(eventFor(isSuccess: false));
+      rethrow;
+    }
+
+    AnalyticsService.I.track(eventFor(isSuccess: true));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
@@ -6,15 +7,25 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
   final AuthRepository _authRepository;
   final AuthStorage _authStorage;
   final EncryptionService _encryptionService;
+  final AnalyticsService _analyticsService;
+  final Clock _clock;
+  final DateTime _lockedAt;
   final AppRoute? next;
+
+  Duration get _lockedFor => _clock.now().difference(_lockedAt);
 
   BiometricsAuthCubit({
     LocalAuthService? localAuthService,
     AuthRepository? authRepository,
     AuthStorage? authStorage,
     EncryptionService? encryptionService,
+    AnalyticsService? analyticsService,
+    Clock? clock,
     this.next,
   }) : _localAuthService = localAuthService ?? LocalAuthService.I,
+       _analyticsService = analyticsService ?? AnalyticsService.I,
+       _clock = clock ?? const Clock(),
+       _lockedAt = (clock ?? const Clock()).now(),
        _authRepository =
            authRepository ??
            globalProviderContainer.read(authRepositoryProvider),
@@ -36,8 +47,11 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     try {
       canCheckBiometrics = await _localAuthService.canCheckBiometrics();
     } on Exception {
+      _trackLockShow(canCheckBiometrics: false);
+
       return;
     }
+    _trackLockShow(canCheckBiometrics: canCheckBiometrics);
     if (isClosed) return;
 
     emit(
@@ -48,7 +62,7 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     );
   }
 
-  Future<void> authenticateBiometrically() async {
+  Future<void> authenticateBiometrically({bool isAutoPrompted = false}) async {
     if (state is BiometricsAuthAuthenticating || isClosed) return;
 
     emit(
@@ -61,10 +75,15 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     try {
       authenticated = await _localAuthService.authenticate();
     } on Exception {
+      _trackBiometricsUnlock(UnlockOutcome.failed, isAutoPrompted);
       if (!isClosed) _emitFailure();
 
       return;
     }
+    _trackBiometricsUnlock(
+      authenticated ? UnlockOutcome.unlocked : UnlockOutcome.notAuthenticated,
+      isAutoPrompted,
+    );
     if (isClosed) return;
 
     if (authenticated) {
@@ -88,6 +107,7 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     try {
       final email = _authRepository.currentUserEmail;
       if (email == null) {
+        _trackPasswordUnlock(UnlockOutcome.failed);
         _emitFailure();
 
         return;
@@ -102,6 +122,9 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
         passwordToVerify: password,
         keyBytes: keyBytes,
         storedPasswordHash: storedPasswordHash,
+      );
+      _trackPasswordUnlock(
+        authenticated ? UnlockOutcome.unlocked : UnlockOutcome.wrongPassword,
       );
       if (isClosed) return;
 
@@ -118,6 +141,7 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
         ),
       );
     } on Exception {
+      _trackPasswordUnlock(UnlockOutcome.failed);
       if (!isClosed) _emitFailure();
     }
   }
@@ -130,6 +154,31 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
 
     _emitReady();
   }
+
+  void _trackLockShow({required bool canCheckBiometrics}) =>
+      _analyticsService.track(
+        LocalAuthLockShow(
+          canCheckBiometrics: canCheckBiometrics,
+          isProtectingRoute: next != null,
+        ),
+      );
+
+  void _trackBiometricsUnlock(UnlockOutcome outcome, bool isAutoPrompted) =>
+      _analyticsService.track(
+        BiometricsUnlockSubmit(
+          outcome: outcome,
+          isAutoPrompted: isAutoPrompted,
+          lockedFor: _lockedFor,
+        ),
+      );
+
+  void _trackPasswordUnlock(UnlockOutcome outcome) => _analyticsService.track(
+    PasswordUnlockSubmit(
+      outcome: outcome,
+      canCheckBiometrics: state.canCheckBiometrics,
+      lockedFor: _lockedFor,
+    ),
+  );
 
   void _emitReady() => emit(
     BiometricsAuthReady(

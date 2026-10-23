@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/data_export/application/export_operations_storage.dart';
@@ -6,6 +8,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
 import '../../../utils.dart';
 
 void main() {
@@ -20,6 +24,9 @@ void main() {
 
     setUp(() {
       fixture = _DataExportCubitFixture();
+      initGlobalProviderContainer([
+        loggingServiceProvider.overrideWithValue(FakeLoggingService()),
+      ]);
     });
 
     tearDown(defaultTearDown);
@@ -145,12 +152,74 @@ void main() {
     );
 
     blocTest<DataExportCubit, DataExportState>(
+      'starting an export is tracked by how many of each type were selected',
+      setUp: () => when(
+        () => fixture.functionsService.exportData(
+          areasIds: any(named: 'areasIds'),
+          servicesIds: any(named: 'servicesIds'),
+          classesIds: any(named: 'classesIds'),
+          groupsIds: any(named: 'groupsIds'),
+        ),
+      ).thenAnswer((_) => Completer<String>().future),
+      build: () => fixture.createCubit(),
+      act: (cubit) async {
+        final selectingState = await cubit.stream
+            .whereType<DataExportSelectingObjects>()
+            .first;
+
+        selectingState.areasController.selectionController.select(area);
+        unawaited(cubit.startExport());
+      },
+      verify: (_) => expect(
+        fixture.analytics.trackedEvents
+            .where((event) => event.name == 'export:export_start')
+            .single
+            .properties,
+        {
+          'area_count': 1,
+          'service_count': 0,
+          'class_count': 0,
+          'group_count': 0,
+          'is_scoped_to_own': false,
+        },
+      ),
+    );
+
+    blocTest<DataExportCubit, DataExportState>(
+      'a failed export is tracked as finishing unsuccessfully',
+      setUp: () => when(
+        () => fixture.functionsService.exportData(
+          areasIds: any(named: 'areasIds'),
+          servicesIds: any(named: 'servicesIds'),
+          classesIds: any(named: 'classesIds'),
+          groupsIds: any(named: 'groupsIds'),
+        ),
+      ).thenThrow(Exception('offline')),
+      build: () => fixture.createCubit(),
+      act: (cubit) async {
+        final selectingState = await cubit.stream
+            .whereType<DataExportSelectingObjects>()
+            .first;
+
+        selectingState.areasController.selectionController.select(area);
+        await cubit.startExport();
+      },
+      verify: (_) => expect(
+        fixture.analytics.trackedEvents
+            .where((event) => event.name == 'export:export_finish')
+            .single
+            .properties,
+        containsPair('is_success', false),
+      ),
+    );
+
+    blocTest<DataExportCubit, DataExportState>(
       'Switches between selecting objects and saved files',
       build: () => fixture.createCubit(),
       act: (cubit) async {
         await cubit.stream.whereType<DataExportSelectingObjects>().first;
         await cubit.switchToSavedFiles();
-        cubit.switchToSelectingObjects();
+        cubit.startNewExport();
       },
       expect: () => [
         isA<DataExportSelectingObjects>(),
@@ -170,6 +239,7 @@ final class _DataExportCubitFixture {
   final servicesDao = MockServicesDAO();
   final classesDao = MockClassesDAO();
   final groupsDao = MockGroupsDAO();
+  final analytics = RecordingAnalyticsProvider();
 
   List<DataExportFile> savedFiles = const [];
 
@@ -217,6 +287,7 @@ final class _DataExportCubitFixture {
       functionsService: functionsService,
       exportOperationsStorage: exportOperationsStorage,
       databaseService: databaseService,
+      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
     );
   }
 }

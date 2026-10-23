@@ -10,8 +10,12 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
   final BehaviorSubject<String?> _search = BehaviorSubject.seeded(null);
   late final PaginatableStreamBase<User> _users;
   late final StreamSubscription<List<User>> _usersSubscription;
+  late final StreamSubscription<String> _searchTrackingSubscription;
+  final AnalyticsService _analyticsService;
 
-  ManageUsersCubit({UsersDAO? usersDao}) : super(const ManageUsersState()) {
+  ManageUsersCubit({UsersDAO? usersDao, AnalyticsService? analyticsService})
+    : _analyticsService = analyticsService ?? AnalyticsService.I,
+      super(const ManageUsersState()) {
     final dao = usersDao ?? DatabaseService.I.users;
 
     _users = dao.streamAllWithConfig(
@@ -32,6 +36,19 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
       onError: (Object error) =>
           emit(state.copyWith(isLoading: false, error: error)),
     );
+
+    _searchTrackingSubscription = _search
+        .debounceTime(HomeSearchCubit.debounceDuration)
+        .whereNotNull()
+        .distinct()
+        .listen(
+          (query) => _analyticsService.track(
+            ManageUsersSearchRun(
+              queryLength: query.length,
+              preferredView: state.preferredView,
+            ),
+          ),
+        );
   }
 
   void search(String query) {
@@ -39,10 +56,14 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
     emit(state.copyWith(searchQuery: query, isLoading: true));
   }
 
-  void showGrouped() =>
-      emit(state.copyWith(preferredView: ManageUsersView.grouped));
+  void showGrouped() => _showView(ManageUsersView.grouped);
 
-  void showFlat() => emit(state.copyWith(preferredView: ManageUsersView.flat));
+  void showFlat() => _showView(ManageUsersView.flat);
+
+  void _showView(ManageUsersView view) {
+    _analyticsService.track(ManageUsersViewSwitch(view));
+    emit(state.copyWith(preferredView: view));
+  }
 
   void _loadNextPage(List<User> users) {
     emit(state.copyWith(users: users, isLoading: _users.hasMore));
@@ -53,6 +74,7 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
   @override
   Future<void> close() async {
     await _usersSubscription.cancel();
+    await _searchTrackingSubscription.cancel();
     await _users.dispose();
     await _search.close();
     await super.close();

@@ -16,6 +16,8 @@ import 'package:mockito/mockito.dart';
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
+import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
 import 'notifications_service_test.mocks.dart';
 
 @GenerateNiceMocks([
@@ -411,6 +413,10 @@ void main() {
 
               final unit = NotificationsService(
                 authBloc: MockAuthBloc(),
+                analyticsService: AnalyticsService(
+                  [RecordingAnalyticsProvider()],
+                  FakeLoggingService(),
+                ),
                 settings: MockNotificationsSettingsStorage(),
                 localNotificationsPlugin: globalProviderContainer.read(
                   localNotificationsPluginProvider,
@@ -929,6 +935,10 @@ List<Object> _callArgumentsMatchFor({
 NotificationsService _createNewUnit() {
   return NotificationsService(
     authBloc: AuthBloc.I,
+    analyticsService: AnalyticsService(
+      [RecordingAnalyticsProvider()],
+      FakeLoggingService(),
+    ),
     databaseService: globalProviderContainer.read(databaseServiceProvider),
     localNotificationsPlugin: globalProviderContainer.read(
       localNotificationsPluginProvider,

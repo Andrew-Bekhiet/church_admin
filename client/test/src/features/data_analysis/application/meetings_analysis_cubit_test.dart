@@ -3,6 +3,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
+
 class _MockMeetingsDAO extends Mock implements MeetingsDAO {}
 
 class _MockClassesDAO extends Mock implements ClassesDAO {}
@@ -11,6 +14,7 @@ void main() {
   group('MeetingsAnalysisCubit', () {
     late _MockMeetingsDAO dao;
     late _MockClassesDAO classesDao;
+    late RecordingAnalyticsProvider analytics;
 
     final singleDay = DateTimeRange(
       start: DateTime(2026, 7, 12),
@@ -47,6 +51,7 @@ void main() {
     setUp(() {
       dao = _MockMeetingsDAO();
       classesDao = _MockClassesDAO();
+      analytics = RecordingAnalyticsProvider();
     });
 
     void stubAnalysis() {
@@ -80,9 +85,42 @@ void main() {
       DateTimeRange? initialRange,
     }) => MeetingsAnalysisCubit(
       subject: subject,
-      initialRange: initialRange ?? singleDay,
+      initialRangePreset: CustomDateTimeRangePreset(
+        range: initialRange ?? singleDay,
+      ),
       dao: dao,
       classesDao: classesDao,
+      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+    );
+
+    blocTest<MeetingsAnalysisCubit, MeetingsAnalysisState>(
+      'a loaded analysis is tracked by its subject and range, not its title',
+      setUp: stubAnalysis,
+      build: () => buildCubit(initialRange: range),
+      verify: (_) => expect(analytics.trackedEvents.single.properties, {
+        'subject_type': 'service',
+        'service_id': service.id,
+        'range_preset': AnalysisRangePreset.custom.name,
+        'range_duration_ms': range.duration.inMilliseconds,
+        'is_single_day': false,
+        'is_success': true,
+      }),
+    );
+
+    blocTest<MeetingsAnalysisCubit, MeetingsAnalysisState>(
+      'an analysis that fails to load is tracked as unsuccessful',
+      setUp: () => when(
+        () => dao.getMeetingsAttendanceAnalysis(
+          subject: any(named: 'subject'),
+          range: any(named: 'range'),
+        ),
+      ).thenAnswer((_) async => throw Exception('boom')),
+      build: () => buildCubit(initialRange: range),
+      errors: () => [isA<Exception>()],
+      verify: (_) => expect(
+        analytics.trackedEvents.single.properties,
+        containsPair('is_success', false),
+      ),
     );
 
     blocTest<MeetingsAnalysisCubit, MeetingsAnalysisState>(
@@ -275,7 +313,7 @@ void main() {
       'reload re-fetches from the DAO',
       setUp: stubAnalysis,
       build: () => buildCubit(initialRange: range),
-      act: (cubit) => cubit.load(range),
+      act: (cubit) => cubit.load(CustomDateTimeRangePreset(range: range)),
       verify: (_) {
         verify(
           () => dao.getMeetingsAttendanceAnalysis(

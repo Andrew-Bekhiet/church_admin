@@ -37,7 +37,7 @@ class _MeetingsAnalysisScreenState extends State<MeetingsAnalysisScreen> {
     return BlocProvider(
       create: (_) => MeetingsAnalysisCubit(
         subject: widget.subject,
-        initialRange: _range,
+        initialRangePreset: _rangePreset,
       ),
       child: Scaffold(
         appBar: AppBar(title: Text(widget.title)),
@@ -78,7 +78,7 @@ class _MeetingsAnalysisScreenState extends State<MeetingsAnalysisScreen> {
                                   label: Text(g.label),
                                   selected: _granularity == g,
                                   onSelected: (_) =>
-                                      setState(() => _granularity = g),
+                                      _selectGranularityIfChanged(g),
                                 ),
                             ],
                           ),
@@ -100,9 +100,7 @@ class _MeetingsAnalysisScreenState extends State<MeetingsAnalysisScreen> {
                       children: [
                         Text('تعذر تحميل الاحصائيات: $error'),
                         OutlinedButton.icon(
-                          onPressed: () => unawaited(
-                            context.read<MeetingsAnalysisCubit>().load(_range),
-                          ),
+                          onPressed: () => _retry(context),
                           icon: const Icon(Icons.refresh),
                           label: const Text('إعادة المحاولة'),
                         ),
@@ -135,6 +133,25 @@ class _MeetingsAnalysisScreenState extends State<MeetingsAnalysisScreen> {
       );
     });
 
-    unawaited(context.read<MeetingsAnalysisCubit>().load(preset.range));
+    unawaited(context.read<MeetingsAnalysisCubit>().load(preset));
+  }
+
+  void _selectGranularityIfChanged(AttendanceGranularity granularity) {
+    if (granularity == _granularity) return;
+
+    AnalyticsService.I.track(
+      AnalysisGranularitySelect(
+        granularity,
+        autoGranularity: AttendanceGranularity.bestForDuration(
+          _rangePreset.duration,
+        ),
+      ),
+    );
+    setState(() => _granularity = granularity);
+  }
+
+  void _retry(BuildContext context) {
+    AnalyticsService.I.track(const AnalysisRetryTap());
+    unawaited(context.read<MeetingsAnalysisCubit>().load(_rangePreset));
   }
 }
