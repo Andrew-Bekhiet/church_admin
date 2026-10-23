@@ -207,22 +207,20 @@ void main() {
           value: OrderByValue.desc,
         ),
       ];
-      const uid = '6f1c1b6e-0d9a-4c1e-9b1a-3c2d4e5f6a7b';
+      const uid = 'uid';
       final dao = databaseService.userPreferences as MockUserPreferencesDAO;
       when(
         () => dao.updatePreferences(
-          uid: any(named: 'uid'),
-          set: any(named: 'set'),
-          append: any(named: 'append'),
+          scalars: any(named: 'scalars'),
+          orderByPatch: any(named: 'orderByPatch'),
+          secondLinePatch: any(named: 'secondLinePatch'),
         ),
       ).thenAnswer(
-        (_) async => Fragment_UserPreferences(
-          uid: UuidValue.fromString(uid),
+        (_) async => UserPreferences(
+          uid: uid,
           orderByPreferences: {
             key.storageKey: [for (final orderBy in sort) orderBy.toJson()],
           },
-          secondLinePreferences: const {},
-          greatFeastTheme: true,
           updatedAt: DateTime.now(),
         ),
       );
@@ -259,31 +257,29 @@ void main() {
       final secondSort = [
         OrderBy(field: nameField, value: OrderByValue.desc),
       ];
-      const uid = '6f1c1b6e-0d9a-4c1e-9b1a-3c2d4e5f6a7b';
+      const uid = 'uid';
       final firstFlushedAt = DateTime.utc(2026, 10, 21, 10);
       final secondFlushedAt = firstFlushedAt.add(const Duration(seconds: 1));
-      Fragment_UserPreferences acknowledgment(
+      UserPreferences acknowledgment(
         Map<OrderByPreferenceKey, List<OrderBy>> sorts,
         DateTime updatedAt,
-      ) => Fragment_UserPreferences(
-        uid: UuidValue.fromString(uid),
+      ) => UserPreferences(
+        uid: uid,
         orderByPreferences: {
           for (final MapEntry(:key, :value) in sorts.entries)
             key.storageKey: [for (final orderBy in value) orderBy.toJson()],
         },
-        secondLinePreferences: const {},
-        greatFeastTheme: true,
         updatedAt: updatedAt,
       );
-      final firstFlush = Completer<Fragment_UserPreferences>();
-      final secondFlush = Completer<Fragment_UserPreferences>();
+      final firstFlush = Completer<UserPreferences>();
+      final secondFlush = Completer<UserPreferences>();
       final replies = [firstFlush, secondFlush].iterator;
       final dao = databaseService.userPreferences as MockUserPreferencesDAO;
       when(
         () => dao.updatePreferences(
-          uid: any(named: 'uid'),
-          set: any(named: 'set'),
-          append: any(named: 'append'),
+          scalars: any(named: 'scalars'),
+          orderByPatch: any(named: 'orderByPatch'),
+          secondLinePatch: any(named: 'secondLinePatch'),
         ),
       ).thenAnswer((_) {
         replies.moveNext();
