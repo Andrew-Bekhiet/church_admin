@@ -92,14 +92,12 @@ class PersonEditorRobot {
     );
   }
 
-  Future<void> chooseArea({
-    required String areaId,
-    required String areaName,
-  }) => _pickIn(
-    AddressFormPlaceFieldsKeys.area,
-    objectId: areaId,
-    search: areaName,
-  );
+  Future<void> chooseArea({required String areaId, required String areaName}) =>
+      _pickIn(
+        AddressFormPlaceFieldsKeys.area,
+        objectId: areaId,
+        search: areaName,
+      );
 
   Future<void> chooseFamily({
     required String familyId,
@@ -196,6 +194,18 @@ class PersonEditorRobot {
     await tester.tapOn(
       find.descendant(
         of: find.byType(MoveOutOfSightConfirmationDialog),
+        matching: find.byKey(ConfirmationDialogKeys.confirmButton),
+      ),
+    );
+    await tester.waitForAbsent(find.byType(EditPersonScreen));
+    await tester.waitForAbsent(find.byType(ViewPerson));
+  }
+
+  Future<void> deleteEditedPerson() async {
+    await tester.tapOn(find.byKey(EditPersonScrollViewKeys.deleteButton));
+    await tester.tapOn(
+      find.descendant(
+        of: find.byType(DeleteConfirmationDialog),
         matching: find.byKey(ConfirmationDialogKeys.confirmButton),
       ),
     );

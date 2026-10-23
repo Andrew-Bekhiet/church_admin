@@ -77,12 +77,7 @@ abstract final class E2eBackend {
   /// member is [residentName]; returns the area's, street's and family's
   /// names and the area's and the resident's ids.
   static Future<
-    ({
-      String areaId,
-      String residentId,
-      String streetName,
-      String familyName,
-    })
+    ({String areaId, String residentId, String streetName, String familyName})
   >
   insertAreaWithResident(
     String areaName, {
@@ -196,6 +191,21 @@ abstract final class E2eBackend {
           _ => key,
         }: value,
     };
+  }
+
+  static Future<bool> personExists(String id) async {
+    final data = await E2eAsh.query(
+      r'''
+      query PersonExists($id: ID!) {
+        person(id: $id) {
+          id
+        }
+      }
+      ''',
+      variables: {'id': id},
+    );
+
+    return data['person'] != null;
   }
 
   static Future<List<Map<String, dynamic>>> contactsOfFamily(

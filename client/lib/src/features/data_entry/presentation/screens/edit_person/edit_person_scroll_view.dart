@@ -31,6 +31,7 @@ class EditPersonScrollView extends StatelessWidget {
           actions: [
             if (onDelete case final onDelete?)
               IconButton(
+                key: EditPersonScrollViewKeys.deleteButton,
                 onPressed: onDelete,
                 icon: const Icon(Symbols.delete),
                 tooltip: 'حذف',
@@ -101,4 +102,8 @@ class EditPersonScrollView extends StatelessWidget {
       ],
     );
   }
+}
+
+abstract final class EditPersonScrollViewKeys {
+  static const Key deleteButton = ValueKey('Edit Person Delete Button Key');
 }
