@@ -9,15 +9,15 @@ sealed class EntityAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class EntityPropertyCopy extends EntityAnalyticsEvent {
-  final CopiedEntityProperty property;
+  final CopiedEntityProperty copiedProperty;
 
   @override
   String get objectAction => 'property_copy';
 
   @override
-  Json get properties => {'property': property.name};
+  Json get properties => {'copied_property': copiedProperty.name};
 
-  const EntityPropertyCopy(this.property);
+  const EntityPropertyCopy(this.copiedProperty);
 }
 
 final class EntityMapShow extends EntityAnalyticsEvent {

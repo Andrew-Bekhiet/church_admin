@@ -32,7 +32,7 @@ void main() {
         await pumpEventQueue();
 
         expect(fixture.analytics.singleTrackedPropertiesOf<AddressAreaFill>(), {
-          'source': AddressAutofillSource.singleAreaStreet.name,
+          'autofill_source': AddressAutofillSource.singleAreaStreet.name,
           'street_id': mainStreet.id,
           'area_id': stMarkArea.id,
         });
@@ -69,7 +69,7 @@ void main() {
           expect(
             fixture.analytics.singleTrackedPropertiesOf<AddressAreaFill>(),
             {
-              'source': AddressAutofillSource.geocodedHouseNumber.name,
+              'autofill_source': AddressAutofillSource.geocodedHouseNumber.name,
               'street_id': mainStreet.id,
               'area_id': stMinaArea.id,
             },
@@ -91,7 +91,7 @@ void main() {
         expect(
           fixture.analytics.singleTrackedPropertiesOf<AddressLocationFill>(),
           {
-            'source': AddressAutofillSource.geocodedHouseNumber.name,
+            'autofill_source': AddressAutofillSource.geocodedHouseNumber.name,
             'street_id': mainStreet.id,
           },
         );

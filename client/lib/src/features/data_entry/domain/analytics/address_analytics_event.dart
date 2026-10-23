@@ -8,7 +8,7 @@ sealed class AddressAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class AddressAreaFill extends AddressAnalyticsEvent {
-  final AddressAutofillSource source;
+  final AddressAutofillSource autofillSource;
   final Street street;
   final Area area;
 
@@ -17,29 +17,35 @@ final class AddressAreaFill extends AddressAnalyticsEvent {
 
   @override
   Json get properties => {
-    'source': source.name,
+    'autofill_source': autofillSource.name,
     'street_id': street.id,
     'area_id': area.id,
   };
 
   const AddressAreaFill({
-    required this.source,
+    required this.autofillSource,
     required this.street,
     required this.area,
   });
 }
 
 final class AddressLocationFill extends AddressAnalyticsEvent {
-  final AddressAutofillSource source;
+  final AddressAutofillSource autofillSource;
   final Street street;
 
   @override
   String get objectAction => 'location_fill';
 
   @override
-  Json get properties => {'source': source.name, 'street_id': street.id};
+  Json get properties => {
+    'autofill_source': autofillSource.name,
+    'street_id': street.id,
+  };
 
-  const AddressLocationFill({required this.source, required this.street});
+  const AddressLocationFill({
+    required this.autofillSource,
+    required this.street,
+  });
 }
 
 final class AddressSuggestionShow extends AddressAnalyticsEvent {
