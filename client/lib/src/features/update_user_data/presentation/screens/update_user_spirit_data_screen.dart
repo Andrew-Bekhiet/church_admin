@@ -96,12 +96,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
         ),
       );
 
-      await DatabaseService.I.persons.updatePersonSpiritData(
-        personId: _userData.id,
-        lastConfession: _userData.lastConfession!.time,
-        lastKodas: _userData.lastKodas!.time,
-      );
-      _trackSave(isSuccess: true);
+      await _updateSpiritDataAndTrackOutcome();
 
       if (mounted) {
         scaffoldMessenger
@@ -113,7 +108,6 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
           );
       }
     } on Exception catch (error, stackTrace) {
-      _trackSave(isSuccess: false);
       scaffoldMessenger.hideCurrentSnackBar();
 
       if (mounted) {
@@ -131,6 +125,21 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
     } finally {
       _isSaving = false;
     }
+  }
+
+  Future<void> _updateSpiritDataAndTrackOutcome() async {
+    try {
+      await DatabaseService.I.persons.updatePersonSpiritData(
+        personId: _userData.id,
+        lastConfession: _userData.lastConfession!.time,
+        lastKodas: _userData.lastKodas!.time,
+      );
+    } on Exception {
+      _trackSave(isSuccess: false);
+      rethrow;
+    }
+
+    _trackSave(isSuccess: true);
   }
 
   void _trackSave({required bool isSuccess}) => AnalyticsService.I.track(
