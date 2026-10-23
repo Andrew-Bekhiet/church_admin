@@ -65,7 +65,7 @@ final class ManageUsersViewSwitch extends UserManagementAnalyticsEvent {
   String get objectAction => 'view_switch';
 
   @override
-  Json get properties => {'view': view.name};
+  Json get properties => {'selected_view': view.name};
 
   const ManageUsersViewSwitch(this.view);
 }
