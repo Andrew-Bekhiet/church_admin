@@ -28,7 +28,7 @@ defmodule ChurchAdminWeb.Router do
       forward "/playground", Absinthe.Plug.GraphiQL,
         schema: @graphql_schema,
         pipeline: @graphql_pipeline,
-        interface: :simple
+        interface: :playground
     end
 
     forward "/", Absinthe.Plug, schema: @graphql_schema, pipeline: @graphql_pipeline
