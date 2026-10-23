@@ -85,7 +85,8 @@ class AdminOnDataFields {
       FieldMetadata<StudyYear>(
         getValue: (obj) => obj is AdminOnData ? obj.serviceStudyYearData : null,
         parentType: AdminOnData,
-        name: 'studyYear',
+        name: 'serviceStudyYearData',
+        graphqlName: 'studyYear',
         label: 'السنة الدراسية',
         isCodeOnly: false,
         operators: {
@@ -340,7 +341,7 @@ class AdminOnDataFields {
     'areaAllowEdit': areaAllowEdit,
     'areaAdminOnUsers': areaAdminOnUsers,
     'service': service,
-    'studyYear': serviceStudyYearData,
+    'serviceStudyYearData': serviceStudyYearData,
     'serviceGender': serviceGender,
     'serviceAllowExport': serviceAllowExport,
     'serviceAllowEdit': serviceAllowEdit,

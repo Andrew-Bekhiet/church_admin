@@ -19,20 +19,53 @@ void main() {
     expect(field, contains('(obj) => obj is Model ? obj.initial : null'));
   });
 
-  test(
-    'a GraphQL name replaces the name while the Dart member is read',
-    () async {
-      final field = await ModelFixture.generatedFieldFor(
-        "@QueryableField(label: 'Class', graphqlName: 'class')\n"
-        r'late final Note class$;',
-      );
+  test('a GraphQL name is carried apart from the field name', () async {
+    final field = await ModelFixture.generatedFieldFor(
+      "@QueryableField(label: 'Kind', graphqlName: 'noteKind')\n"
+      'late final Note kind;',
+    );
 
-      expect(
-        field,
-        allOf(contains(r'obj.class$'), contains("name: 'class'")),
-      );
-    },
-  );
+    expect(
+      field,
+      allOf(contains("name: 'kind'"), contains("graphqlName: 'noteKind'")),
+    );
+  });
+
+  test('fields are looked up by their field name', () async {
+    final generated = await ModelFixture.generatedFor(
+      "@QueryableField(label: 'Kind', graphqlName: 'noteKind')\n"
+      'late final Note kind;',
+    );
+
+    expect(
+      generated.initializerOf('ModelFields', 'allFieldsByName'),
+      allOf(contains("'kind': kind"), isNot(contains('noteKind'))),
+    );
+  });
+
+  test('a field without a GraphQL name carries none', () async {
+    final field = await ModelFixture.generatedFieldFor(
+      "@QueryableField(label: 'Kind')\nlate final Note kind;",
+    );
+
+    expect(field, isNot(contains('graphqlName')));
+  });
+
+  test('a dollar that escapes a keyword is not part of the name', () async {
+    final field = await ModelFixture.generatedFieldFor(
+      "@QueryableField(label: 'Class')\n"
+      r'late final Note class$;',
+    );
+
+    expect(
+      field,
+      allOf(
+        contains(r'obj.class$'),
+        contains("name: 'class'"),
+        isNot(contains('graphqlName')),
+      ),
+    );
+  });
 
   test('a code-only field is hidden from the filter UI', () async {
     final field = await ModelFixture.generatedFieldFor(
@@ -101,7 +134,7 @@ void main() {
       'late final List<Person> visitHistory;',
     );
 
-    expect(field, contains("name: 'visits'"));
+    expect(field, contains("graphqlName: 'visits'"));
   });
 
   test('a field the server keeps as a calendar date says so', () async {

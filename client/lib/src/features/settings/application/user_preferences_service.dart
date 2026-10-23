@@ -286,7 +286,9 @@ class UserPreferencesService extends BlocObserver {
         .map((v) {
           try {
             return OrderBy.fromJson(v);
-          } catch (error) {
+          } on Object catch (error, stackTrace) {
+            _reportUnreadablePreference(error, stackTrace);
+
             return null;
           }
         })
@@ -301,10 +303,19 @@ class UserPreferencesService extends BlocObserver {
 
     try {
       return FieldMetadata.fromJson(Json.from(value));
-    } catch (error) {
+    } on Object catch (error, stackTrace) {
+      _reportUnreadablePreference(error, stackTrace);
+
       return null;
     }
   }
+
+  void _reportUnreadablePreference(Object error, StackTrace stackTrace) =>
+      unawaited(
+        LoggingService.I.exception(
+          LogRecord(error: error, stackTrace: stackTrace),
+        ),
+      );
 
   Json toJson() => _pendingWritesBox.toMap().cast<String, dynamic>();
 }

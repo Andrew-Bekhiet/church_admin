@@ -123,7 +123,8 @@ class GroupFields {
   final FieldMetadata<User> adminUsers = FieldMetadata<User>(
     getValue: (obj) => obj is Group ? obj.adminUsers : null,
     parentType: Group,
-    name: 'admins',
+    name: 'adminUsers',
+    graphqlName: 'admins',
     label: 'المسؤولون',
     isCodeOnly: false,
     isOrderable: false,
@@ -153,7 +154,7 @@ class GroupFields {
     'meetings': meetings,
     'validity': validity,
     'lastEdit': lastEdit,
-    'admins': adminUsers,
+    'adminUsers': adminUsers,
   };
 }
 

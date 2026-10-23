@@ -66,7 +66,7 @@ Reference port: `gql_definintions/metadata/` (commit `refactor(data): port the m
 - A relationship the server exposes is selected and filtered directly (`contacts(filter: {personType: {isFamilyAdmin: {eq: true}}}) { personType { ...PersonType } }`); never join it client-side from a second root.
 - Fake rows of nested objects need `__typename` (and an `id` for keyed types) or the cache drops their fields: wrap rows like `OrganizationRow._asServerObjects`, after `jsonDecode(jsonEncode(model.toJson()))`.
 - A desired-state command whose form shows only part of a list (family contacts) needs `oldObject`: override `updateObject`, send the list only when it differs from what was loaded, and merge in the server's rows the form never showed.
-- Server field names on a Queryable: `graphqlName:` on `QueryableField`, `.history` and `.manyToMany`. Renaming changes `FieldMetadata.name`, so persisted queries naming the old field stop parsing.
+- Server field names on a Queryable: `graphqlName:` on `QueryableField`, `.history` and `.manyToMany`. It becomes `FieldMetadata.graphqlName`, read only by the Ash query builders; `FieldMetadata.name` stays the Dart field name (without a trailing `$`), because saved sorts and filters store it.
 - A field the server keeps as a `Date` (birthdate, a confession or kodas day) takes `dateOnly: true` on its `QueryableField` (on the history or latest record for their times); the schema contract test fails on a date sent in the wrong format.
 - A layer or analysis that reads every row uses one keyset query per root through `KeysetRowsReader`; the fake reads only `filter`/`first`/`after` and ignores `@include`, so per-root variables in a multi-root document go untested.
 

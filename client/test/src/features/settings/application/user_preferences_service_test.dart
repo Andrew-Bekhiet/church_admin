@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../fakes/fake_box.dart';
+import '../../../fakes/fake_logging_service.dart';
 
 class MockUserPreferencesDAO extends Mock implements UserPreferencesDAO {}
 
@@ -21,6 +22,7 @@ void main() {
 
   late MockDatabaseService databaseService;
   late MockAuthBloc authBloc;
+  late FakeLoggingService loggingService;
 
   setUp(() {
     databaseService = MockDatabaseService();
@@ -41,8 +43,11 @@ void main() {
     authBloc = MockAuthBloc();
     when(() => authBloc.currentUserData).thenReturn(null);
 
+    loggingService = FakeLoggingService();
+
     initGlobalProviderContainer([
       authBlocProvider.overrideWithValue(authBloc),
+      loggingServiceProvider.overrideWithValue(loggingService),
     ]);
   });
 
@@ -313,6 +318,93 @@ void main() {
       expect(unit.getLastOrderByFor(secondKey), secondSort);
     },
   );
+
+  group('preferences stored before the field names were renamed', () {
+    final classType = AdvancedQueriesMetadata().allQueryables.firstWhere(
+      (q) => q.name == 'Class',
+    );
+    final key = OrderByPreferenceKey(type: classType);
+    final studyYearJson = {
+      'name': 'studyYear',
+      'parentQueryableType': 'Class',
+    };
+    final unknownFieldJson = {
+      'name': 'noSuchField',
+      'parentQueryableType': 'Class',
+    };
+
+    void signInWith({
+      Json orderByPreferences = const {},
+      Json secondLinePreferences = const {},
+    }) {
+      when(() => authBloc.currentUserData).thenReturn(
+        User(
+          uid: 'uid',
+          name: 'name',
+          email: 'email',
+          preferences: UserPreferences(
+            uid: 'uid',
+            orderByPreferences: orderByPreferences,
+            secondLinePreferences: secondLinePreferences,
+          ),
+        ),
+      );
+    }
+
+    test('a stored class sort by study year reads back as that field', () {
+      signInWith(
+        orderByPreferences: {
+          key.storageKey: [
+            {'field': studyYearJson, 'value': 'asc'},
+          ],
+        },
+      );
+
+      expect(createUnit().getLastOrderByFor(key), [
+        OrderBy(field: ClassFields().studyYear),
+      ]);
+    });
+
+    test('a stored second line by study year reads back as that field', () {
+      signInWith(secondLinePreferences: {key.storageKey: studyYearJson});
+
+      expect(
+        createUnit().getLastSecondLineFieldFor(key),
+        ClassFields().studyYear,
+      );
+    });
+
+    test(
+      'a stored sort entry naming no field is reported and the others '
+      'still read back',
+      () {
+        signInWith(
+          orderByPreferences: {
+            key.storageKey: [
+              {'field': unknownFieldJson, 'value': 'asc'},
+              {'field': studyYearJson, 'value': 'desc'},
+            ],
+          },
+        );
+
+        final sort = createUnit().getLastOrderByFor(key);
+
+        expect(sort, [
+          OrderBy(field: ClassFields().studyYear, value: OrderByValue.desc),
+        ]);
+        expect(loggingService.reportedExceptions, hasLength(1));
+      },
+    );
+
+    test('a stored second line naming no field is reported', () {
+      signInWith(secondLinePreferences: {key.storageKey: unknownFieldJson});
+
+      final field = createUnit().getLastSecondLineFieldFor(key);
+
+      expect(field, isNull);
+      expect(loggingService.reportedExceptions, hasLength(1));
+    });
+  });
 
   group('second line field', () {
     final personType = AdvancedQueriesMetadata().allQueryables.firstWhere(

@@ -101,7 +101,8 @@ class _AreaFields {
   final FieldMetadata<User> adminUsers = FieldMetadata<User>(
     getValue: (obj) => obj is Area ? obj.adminUsers : null,
     parentType: Area,
-    name: 'admins',
+    name: 'adminUsers',
+    graphqlName: 'admins',
     label: 'المسؤولون',
     isCodeOnly: false,
     isOrderable: false,
@@ -127,7 +128,7 @@ class _AreaFields {
     'photoUpdatedAt': photoUpdatedAt,
     'lastVisit': lastVisit,
     'lastEdit': lastEdit,
-    'admins': adminUsers,
+    'adminUsers': adminUsers,
   };
 }
 

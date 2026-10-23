@@ -3,6 +3,7 @@ import 'package:church_admin_generator/src/model/operator_family.dart';
 final class FieldMetadataSpec {
   final String typeName;
   final String label;
+  final String? graphqlName;
   final bool isCodeOnly;
   final bool isOrderable;
   final bool isDateOnly;
@@ -17,5 +18,6 @@ final class FieldMetadataSpec {
     this.isCodeOnly = false,
     this.isOrderable = true,
     this.isDateOnly = false,
+    this.graphqlName,
   });
 }

@@ -17,7 +17,7 @@ class AshFieldPath {
       ..._filterSegments(targetField),
     ],
     PhoneSearchFieldMetadata() => _searchablePhone,
-    _ => [field.name],
+    _ => [field.graphqlName],
   };
 
   static List<String> _sortSegments(FieldMetadata field) => switch (field) {
@@ -25,16 +25,16 @@ class AshFieldPath {
     RedirectingFieldMetadata(:final parentField, :final targetField)
         when parentField.type == LastRecordedByInfo &&
             targetField == LastRecordedByInfoFields().time =>
-      [parentField.name],
+      [parentField.graphqlName],
     RedirectingFieldMetadata(:final parentField, :final targetField) => [
       ..._filterSegments(parentField),
       ..._sortSegments(targetField),
     ],
     PhoneSearchFieldMetadata() => _mainPhone,
-    FieldMetadata(:final name) when _unexpandedKeyFieldNames.contains(name) => [
-      name,
-    ],
-    _ => [field.name, ..._orderingSubfieldSegments(field)],
+    FieldMetadata(:final graphqlName)
+        when _unexpandedKeyFieldNames.contains(graphqlName) =>
+      [graphqlName],
+    _ => [field.graphqlName, ..._orderingSubfieldSegments(field)],
   };
 
   // The server keeps the time of a place's last edit or visit as a scalar
@@ -43,11 +43,13 @@ class AshFieldPath {
   static List<String> _recordedByInfoSegments(
     FieldMetadata recordedField,
     FieldMetadata inner,
-  ) => switch (AshNaming.namesLatestScalar(recordedField.name)) {
-    false => [recordedField.name, ..._filterSegments(inner)],
-    true when inner == LastRecordedByInfoFields().time => [recordedField.name],
+  ) => switch (AshNaming.namesLatestScalar(recordedField.graphqlName)) {
+    false => [recordedField.graphqlName, ..._filterSegments(inner)],
+    true when inner == LastRecordedByInfoFields().time => [
+      recordedField.graphqlName,
+    ],
     true => [
-      AshNaming.latestRelationship(recordedField.name),
+      AshNaming.latestRelationship(recordedField.graphqlName),
       ..._filterSegments(inner),
     ],
   };

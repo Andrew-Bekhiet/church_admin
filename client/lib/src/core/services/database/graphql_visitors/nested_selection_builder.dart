@@ -22,7 +22,7 @@ class NestedSelectionBuilder extends FieldMetadataVisitor<FieldNode> {
   /// On Ash `lastEdit` is the scalar time and `latestEdit` the record, which
   /// is the key the ported models read.
   FieldNode _ashRecordedByInfoRelationship(FieldMetadata field) => FieldNode(
-    name: NameNode(value: AshNaming.latestRelationship(field.name)),
+    name: NameNode(value: AshNaming.latestRelationship(field.graphqlName)),
     selectionSet: SelectionSetNode(
       selections: [
         const FieldNode(name: NameNode(value: 'id')),
@@ -33,12 +33,12 @@ class NestedSelectionBuilder extends FieldMetadataVisitor<FieldNode> {
   );
 
   FieldNode _fieldWithObjectSelection(FieldMetadata field) => FieldNode(
-    name: NameNode(value: field.name),
+    name: NameNode(value: field.graphqlName),
     selectionSet: switch (field.referencedObjectType) {
       final objectType? => SelectionSetNode(
         selections: [
           for (final name in {
-            ?objectType.keyField?.name,
+            ?objectType.keyField?.graphqlName,
             if (objectType.hasField('id')) 'id',
           })
             FieldNode(name: NameNode(value: name)),

@@ -77,7 +77,8 @@ class ClassFields {
   final FieldMetadata<StudyYear> studyYear = FieldMetadata<StudyYear>(
     getValue: (obj) => obj is Class ? obj.studyYear : null,
     parentType: Class,
-    name: 'studyYearFrom',
+    name: 'studyYear',
+    graphqlName: 'studyYearFrom',
     label: 'السنة الدراسية',
     isCodeOnly: false,
     operators: {
@@ -130,7 +131,8 @@ class ClassFields {
   final FieldMetadata<User> adminUsers = FieldMetadata<User>(
     getValue: (obj) => obj is Class ? obj.adminUsers : null,
     parentType: Class,
-    name: 'admins',
+    name: 'adminUsers',
+    graphqlName: 'admins',
     label: 'المسؤولون',
     isCodeOnly: false,
     isOrderable: false,
@@ -156,11 +158,11 @@ class ClassFields {
     'color': color,
     'photoUpdatedAt': photoUpdatedAt,
     'service': service,
-    'studyYearFrom': studyYear,
+    'studyYear': studyYear,
     'studyYearTo': studyYearTo,
     'serviceGender': serviceGender,
     'lastEdit': lastEdit,
-    'admins': adminUsers,
+    'adminUsers': adminUsers,
   };
 }
 

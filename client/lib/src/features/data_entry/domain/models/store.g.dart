@@ -42,7 +42,8 @@ class _StoreFields {
   final FieldMetadata<Family> family = FieldMetadata<Family>(
     getValue: (obj) => obj is Store ? obj.family : null,
     parentType: Store,
-    name: 'adminFamily',
+    name: 'family',
+    graphqlName: 'adminFamily',
     label: 'العائلة',
     isCodeOnly: false,
     operators: {
@@ -121,7 +122,7 @@ class _StoreFields {
     'id': id,
     'name': name,
     'address': address,
-    'adminFamily': family,
+    'family': family,
     'color': color,
     'lastEdit': lastEdit,
     'photoUpdatedAt': photoUpdatedAt,
