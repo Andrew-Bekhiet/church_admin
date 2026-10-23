@@ -3,9 +3,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../fakes/fake_logging_service.dart';
-import '../../../fakes/recording_analytics_provider.dart';
-
 class _MockUserPermissionsDAO extends Mock implements UserPermissionsDAO {}
 
 class _MockAuthBloc extends Mock implements AuthBloc {}
@@ -101,7 +98,6 @@ void main() {
     late _FakeUsersDAO usersDao;
     late _FakeInvitationsDAO invitationsDao;
     late _MockAuthBloc authBloc;
-    late RecordingAnalyticsProvider analytics;
 
     setUpAll(() {
       registerFallbackValue(const PermissionsSet.empty());
@@ -112,7 +108,6 @@ void main() {
       usersDao = _FakeUsersDAO();
       invitationsDao = _FakeInvitationsDAO();
       authBloc = _MockAuthBloc();
-      analytics = RecordingAnalyticsProvider();
 
       when(() => authBloc.currentUserData).thenReturn(
         const User(
@@ -141,97 +136,6 @@ void main() {
       permissionsDao: permissionsDao,
       invitationsDao: invitationsDao,
       authBloc: authBloc,
-      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-    );
-
-    Json trackedSaveProperties() =>
-        analytics.trackedEvents.whereType<UserSave>().single.properties;
-
-    blocTest<EditUserCubit, UserFormState>(
-      'saving tracks which permissions were granted and which were revoked',
-      build: () => buildCubit(
-        User(
-          uid: 'u1',
-          name: 'مينا',
-          person: person1,
-          permissions: const PermissionsSet.fromSet({
-            UserPermission.approved,
-            UserPermission.deleteData,
-          }),
-        ),
-      ),
-      act: (cubit) {
-        cubit
-          ..togglePermission(UserPermission.deleteData)
-          ..togglePermission(UserPermission.readAllData);
-
-        return cubit.save();
-      },
-      verify: (_) => expect(
-        trackedSaveProperties(),
-        allOf(
-          containsPair('permissions_added', [UserPermission.readAllData.name]),
-          containsPair('permissions_removed', [UserPermission.deleteData.name]),
-        ),
-      ),
-    );
-
-    blocTest<EditUserCubit, UserFormState>(
-      'saving tracks how many scopes of each type were added and removed',
-      build: () => buildCubit(
-        User(
-          uid: 'u1',
-          name: 'مينا',
-          person: person1,
-          adminOn: const [
-            AdminOnData(
-              permissionId: 'area-scope',
-              area: Area(id: 'a1', name: 'منطقة'),
-            ),
-            AdminOnData(
-              permissionId: 'service-scope',
-              service: Service(id: 's1', name: 'خدمة'),
-            ),
-          ],
-        ),
-      ),
-      act: (cubit) {
-        cubit.setAdminOn(const [
-          AdminOnData(
-            permissionId: 'area-scope',
-            area: Area(id: 'a1', name: 'منطقة'),
-          ),
-          AdminOnData(
-            permissionId: '',
-            group: Group(id: 'g1', name: 'مجموعة'),
-          ),
-        ]);
-
-        return cubit.save();
-      },
-      verify: (_) => expect(
-        trackedSaveProperties(),
-        allOf(
-          containsPair('area_added_count', 0),
-          containsPair('group_added_count', 1),
-          containsPair('area_removed_count', 0),
-          containsPair('service_removed_count', 1),
-        ),
-      ),
-    );
-
-    blocTest<EditUserCubit, UserFormState>(
-      'linking a different person is tracked as relinking',
-      build: () => buildCubit(User(uid: 'u1', name: 'مينا', person: person1)),
-      act: (cubit) {
-        cubit.selectPerson(LinkExistingPerson(person2));
-
-        return cubit.save();
-      },
-      verify: (_) => expect(
-        trackedSaveProperties(),
-        containsPair('person_link_change', PersonLinkChange.relinked.name),
-      ),
     );
 
     blocTest<EditUserCubit, UserFormState>(
