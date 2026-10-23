@@ -10,6 +10,3 @@ create table if not exists operations.screen_capture_attempts (
     constraint screen_capture_attempts_capture_kind_check
     check (capture_kind in ('screenshot', 'screen_recording'))
 );
-
-create index if not exists screen_capture_attempts_uid_recorded_at
-on operations.screen_capture_attempts ("uid", recorded_at desc);
