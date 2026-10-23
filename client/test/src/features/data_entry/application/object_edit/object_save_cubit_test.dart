@@ -320,5 +320,22 @@ void main() {
         },
       ),
     );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'a failed delete of an area is tracked as unsuccessful',
+      build: () {
+        areas.deleteError = Exception('offline');
+
+        return cubitEditingStoredArea();
+      },
+      act: (cubit) =>
+          cubit.tryDeleteSavedObject().catchError((Object _) => false),
+      verify: (_) =>
+          expect(analytics.singleTrackedPropertiesOf<ObjectDelete>(), {
+            'entity_type': AnalyticsEntityType.area.key,
+            'area_id': storedArea.id,
+            'is_success': false,
+          }),
+    );
   });
 }

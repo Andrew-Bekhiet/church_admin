@@ -81,6 +81,53 @@ void main() {
     );
   });
 
+  test(
+    'a failed delete of a stored person is tracked as unsuccessful',
+    () async {
+      final controller = await fixture.controllerOfLoadedUpdate(storedPerson);
+      fixture.persons.deleteError = Exception('offline');
+
+      await controller.deletePerson().catchError((Object _) {});
+
+      expect(fixture.analytics.singleTrackedPropertiesOf<ObjectDelete>(), {
+        'entity_type': AnalyticsEntityType.person.key,
+        'person_id': storedPerson.id,
+        'is_success': false,
+      });
+    },
+  );
+
+  group('a declined move out of sight', () {
+    test('is tracked as showing the warning for that person', () async {
+      final controller = await fixture.controllerOfServantMovingOutOfSight(
+        storedPerson,
+      );
+
+      await controller.submit(confirmMoveOutOfSight: () async => false);
+
+      expect(
+        fixture.analytics.singleTrackedPropertiesOf<OutOfSightWarningShow>(),
+        {
+          'entity_type': AnalyticsEntityType.person.key,
+          'person_id': storedPerson.id,
+        },
+      );
+    });
+
+    test('is tracked as answering the warning with no', () async {
+      final controller = await fixture.controllerOfServantMovingOutOfSight(
+        storedPerson,
+      );
+
+      await controller.submit(confirmMoveOutOfSight: () async => false);
+
+      expect(
+        fixture.analytics.singleTrackedPropertiesOf<OutOfSightWarningAnswer>(),
+        containsPair('is_confirmed', false),
+      );
+    });
+  });
+
   group('choosing a family', () {
     const maadiAddress = Address(area: PersonFormControllerFixture.maadi);
 
