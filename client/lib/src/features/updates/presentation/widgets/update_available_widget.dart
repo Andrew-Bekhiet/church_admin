@@ -6,41 +6,39 @@ import 'package:material_ui/material_ui.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:rxdart/rxdart.dart';
 
-class UpdateAvailableWidget extends StatefulWidget {
+class UpdateAvailableWidget extends StatelessWidget {
+  static final Expando<Set<Version>> _bannerShownVersionsByFeatureFlags =
+      Expando();
+
   const UpdateAvailableWidget({super.key});
 
   @override
-  State<UpdateAvailableWidget> createState() => _UpdateAvailableWidgetState();
-}
-
-class _UpdateAvailableWidgetState extends State<UpdateAvailableWidget> {
-  final FeatureFlagsRepository _featureFlagRepo = FeatureFlagsRepository.I;
-
-  late final Stream<bool> _isUpdateAvailable = _featureFlagRepo.onConfigChanged
-      .startWith(null)
-      .map(
-        (_) =>
-            _featureFlagRepo.latestVersion >
-            Version.parse(
-              globalProviderContainer
-                  .read(packageInfoPluginProvider)
-                  .requireValue
-                  .version,
-            ),
-      )
-      .distinct()
-      .doOnData(_maybeTrackBannerShow);
-
-  @override
   Widget build(BuildContext context) {
+    final featureFlagRepo = FeatureFlagsRepository.I;
     final launcherService = LauncherService.I;
-    final releaseNotesUrl = _featureFlagRepo.releaseNotesUrl;
+    final packageInfo = globalProviderContainer
+        .read(packageInfoPluginProvider)
+        .requireValue;
+
+    final releaseNotesUrl = featureFlagRepo.releaseNotesUrl;
 
     final themeData = Theme.of(context);
 
     return SessionReplayUnmask(
       child: StreamBuilder(
-        stream: _isUpdateAvailable,
+        stream: featureFlagRepo.onConfigChanged
+            .startWith(null)
+            .map(
+              (e) =>
+                  featureFlagRepo.latestVersion >
+                  Version.parse(packageInfo.version),
+            )
+            .doOnData(
+              (isUpdateAvailable) => _maybeTrackFirstBannerShowOfVersion(
+                featureFlagRepo,
+                isUpdateAvailable: isUpdateAvailable,
+              ),
+            ),
         builder: (context, snapshot) {
           return AnimatedSize(
             duration: const Duration(milliseconds: 200),
@@ -63,7 +61,7 @@ class _UpdateAvailableWidgetState extends State<UpdateAvailableWidget> {
                           );
                           unawaited(
                             launcherService.launchUrl(
-                              _featureFlagRepo.downloadUrl,
+                              featureFlagRepo.downloadUrl,
                             ),
                           );
                         },
@@ -91,12 +89,19 @@ class _UpdateAvailableWidgetState extends State<UpdateAvailableWidget> {
     );
   }
 
-  void _maybeTrackBannerShow(bool isUpdateAvailable) {
+  void _maybeTrackFirstBannerShowOfVersion(
+    FeatureFlagsRepository featureFlagRepo, {
+    required bool isUpdateAvailable,
+  }) {
     if (!isUpdateAvailable) return;
+
+    final shownVersions =
+        _bannerShownVersionsByFeatureFlags[featureFlagRepo] ??= {};
+    if (!shownVersions.add(featureFlagRepo.latestVersion)) return;
 
     AnalyticsService.I.track(
       UpdateBannerShow(
-        hasReleaseNotes: _featureFlagRepo.releaseNotesUrl != null,
+        hasReleaseNotes: featureFlagRepo.releaseNotesUrl != null,
       ),
     );
   }
