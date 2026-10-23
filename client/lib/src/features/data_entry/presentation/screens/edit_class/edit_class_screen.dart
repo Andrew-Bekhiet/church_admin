@@ -17,6 +17,7 @@ class _EditClassScreenState extends State<EditClassScreen> {
   final User? _currentUser = AuthBloc.I.currentUserData;
   final PersonMetadataCatalog _metadata = PersonMetadataCatalog(
     DatabaseService.I.metadata,
+    AnalyticsService.I,
   );
   late final ClassFormController _form = ClassFormController(
     intent: widget.intent,
@@ -27,6 +28,7 @@ class _EditClassScreenState extends State<EditClassScreen> {
     form: _form,
     dao: DatabaseService.I.classes,
     photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+    analyticsService: AnalyticsService.I,
   );
 
   @override

@@ -23,6 +23,7 @@ class _EditAreaScreenState extends State<EditAreaScreen> {
     form: _form,
     dao: DatabaseService.I.areas,
     photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+    analyticsService: AnalyticsService.I,
   );
 
   @override

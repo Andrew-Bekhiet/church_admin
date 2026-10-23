@@ -6,17 +6,20 @@ class AddressFormServices {
   final AddressAutofill autofill;
   final AddressPlaceCatalog places;
   final LoggingService logging;
+  final AnalyticsService analytics;
 
   const AddressFormServices({
     required this.autofill,
     required this.places,
     required this.logging,
+    required this.analytics,
   });
 
   factory AddressFormServices.backedBy(
     DatabaseService database, {
     required Geocoder geocoder,
     required LoggingService logging,
+    required AnalyticsService analytics,
   }) => AddressFormServices(
     autofill: AddressAutofill(
       areas: database.areas,
@@ -30,6 +33,7 @@ class AddressFormServices {
       districts: database.metadata.districts,
     ),
     logging: logging,
+    analytics: analytics,
   );
 
   Future<T?> logFailureOf<T>(

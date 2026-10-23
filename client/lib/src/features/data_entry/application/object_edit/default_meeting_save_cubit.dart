@@ -8,12 +8,23 @@ class DefaultMeetingSaveCubit<T extends ViewableWithIDAndImage>
   T? _createdOwner;
   Meeting? _createdMeeting;
 
+  @override
+  bool? get isDefaultMeetingCreated => switch ((
+    _createdOwner,
+    _createdMeeting,
+  )) {
+    (null, _) => null,
+    (_, Meeting(isArchived: false)) => true,
+    _ => false,
+  };
+
   DefaultMeetingSaveCubit({
     required this._meetingOwner,
     required this._meetingsDAO,
     required super.form,
     required super.dao,
     required super.photoUploader,
+    required super.analyticsService,
   });
 
   @override

@@ -19,6 +19,7 @@ class _EditFamilyScreenState extends State<EditFamilyScreen> {
   final User? _currentUser = AuthBloc.I.currentUserData;
   final PersonMetadataCatalog _metadata = PersonMetadataCatalog(
     DatabaseService.I.metadata,
+    AnalyticsService.I,
   );
   late final FamilyFormController _form = FamilyFormController(
     intent: widget.intent,
@@ -27,6 +28,7 @@ class _EditFamilyScreenState extends State<EditFamilyScreen> {
       DatabaseService.I,
       geocoder: Geocoder.I,
       logging: LoggingService.I,
+      analytics: AnalyticsService.I,
     ),
     currentUserId: _currentUser?.uid,
   );
@@ -34,6 +36,7 @@ class _EditFamilyScreenState extends State<EditFamilyScreen> {
     form: _form,
     dao: DatabaseService.I.families,
     photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+    analyticsService: AnalyticsService.I,
     outOfSight: OutOfSightAfterSave(_currentUser),
   );
   late final FamilyRelativesCubit _relatives = FamilyRelativesCubit(

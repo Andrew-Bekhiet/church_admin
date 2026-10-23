@@ -9,6 +9,7 @@ import '../../../../fakes/fake_persons_dao.dart';
 import '../../../../fakes/fake_photo_uploader.dart';
 import '../../../../fakes/fake_streets_dao.dart';
 import '../../../../fakes/in_memory_families_dao.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 
 class PersonFormControllerFixture {
   static const Area shubra = Area(id: 'shubra', name: 'شبرا');
@@ -20,6 +21,7 @@ class PersonFormControllerFixture {
   final FakePersonsDAO persons = FakePersonsDAO();
   final FakePhotoUploader photos = FakePhotoUploader();
   final InMemoryFamiliesDAO families = InMemoryFamiliesDAO();
+  final RecordingAnalyticsProvider analytics = RecordingAnalyticsProvider();
 
   User? currentUser = const User(
     uid: 'me',
@@ -36,6 +38,7 @@ class PersonFormControllerFixture {
       families: families,
       photoUploader: photos,
       currentUser: currentUser,
+      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
       addressServices: AddressFormServices(
         autofill: AddressAutofill(
           areas: areas,
@@ -49,6 +52,7 @@ class PersonFormControllerFixture {
           districts: districts,
         ),
         logging: FakeLoggingService(),
+        analytics: AnalyticsService([analytics], FakeLoggingService()),
       ),
     );
     addTearDown(() {

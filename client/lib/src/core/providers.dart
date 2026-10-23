@@ -428,6 +428,7 @@ final imagePickerServiceProvider = Provider<ImagePickerService>(
   (ref) => ImagePickerService(
     imagePicker: ref.watch(imagePickerPluginProvider),
     imageCropper: ref.watch(imageCropperPluginProvider),
+    analyticsService: ref.watch(analyticsServiceProvider),
   ),
 );
 

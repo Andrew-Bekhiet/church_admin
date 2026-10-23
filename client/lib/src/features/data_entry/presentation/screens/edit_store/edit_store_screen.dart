@@ -23,6 +23,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
       DatabaseService.I,
       geocoder: Geocoder.I,
       logging: LoggingService.I,
+      analytics: AnalyticsService.I,
     ),
     currentUserId: _currentUser?.uid,
   );
@@ -30,6 +31,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
     form: _form,
     dao: DatabaseService.I.stores,
     photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+    analyticsService: AnalyticsService.I,
     outOfSight: OutOfSightAfterSave(_currentUser),
   );
 

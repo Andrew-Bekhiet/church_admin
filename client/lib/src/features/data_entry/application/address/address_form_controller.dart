@@ -22,6 +22,7 @@ class AddressFormController extends AdvancedFormController {
   String? _lastTypedHouseCode;
   Timer? _houseNumberGeocodingDebounce;
   int _baselineGeneration = 0;
+  bool _wasStaleLocationReminderShown = false;
 
   late final district = AdvancedFieldController<District?, AddressFieldError>(
     initialValue: _baselineAddress.district,
@@ -71,6 +72,9 @@ class AddressFormController extends AdvancedFormController {
 
   bool get _isReadOnly => street.value.readOnly;
 
+  bool get _isStaleLocationReminderShown =>
+      !_isReadOnly && hasPlaceChangedWithStaleLocation;
+
   bool get hasPlaceChangedWithStaleLocation {
     final locationIsStillTheSavedOne =
         _baselineAddress.geolocation != null &&
@@ -101,6 +105,9 @@ class AddressFormController extends AdvancedFormController {
       specialLandmark,
       geolocation,
     ]);
+    staleLocationInputsChanged.addListener(
+      _maybeTrackStaleLocationReminderShow,
+    );
   }
 
   Address toAddress() => _baselineAddress.copyWith(
@@ -171,6 +178,9 @@ class AddressFormController extends AdvancedFormController {
   Future<void> useLocation(Point newLocation) async {
     if (isDisposed || _isReadOnly) return;
 
+    if (_isStaleLocationReminderShown) {
+      _services.analytics.track(const StaleLocationReminderAccept());
+    }
     geolocation.setValue(newLocation);
     _suggestion.value = const NoAddressSuggestion();
 
@@ -191,15 +201,21 @@ class AddressFormController extends AdvancedFormController {
     final hasAnythingToSuggest =
         suggested.area != null || suggested.toString().trim().isNotEmpty;
 
-    _suggestion.value = hasAnythingToSuggest
-        ? AddressSuggested(suggested)
-        : const NoAddressSuggestion();
+    if (!hasAnythingToSuggest) {
+      _suggestion.value = const NoAddressSuggestion();
+
+      return;
+    }
+
+    _suggestion.value = AddressSuggested(suggested);
+    _services.analytics.track(AddressSuggestionShow(suggested));
   }
 
   void useSuggestedAddress() {
     if (_isReadOnly) return;
 
     if (_suggestion.value case AddressSuggested(:final address)) {
+      _services.analytics.track(AddressSuggestionAccept(address));
       if (address.area case final suggestedArea?) area.setValue(suggestedArea);
       if (address.street case final suggestedStreet?) {
         street.setValue(suggestedStreet);
@@ -222,8 +238,10 @@ class AddressFormController extends AdvancedFormController {
     _suggestion.value = const NoAddressSuggestion();
   }
 
-  void confirmAddressNotStale() =>
-      _addressConfirmedNotStale.value = toAddress();
+  void confirmAddressNotStale() {
+    _services.analytics.track(const StaleLocationReminderDismiss());
+    _addressConfirmedNotStale.value = toAddress();
+  }
 
   ViewableObjectListController<District> districtListController(
     Stream<String?> search,
@@ -237,8 +255,12 @@ class AddressFormController extends AdvancedFormController {
     Stream<String?> search,
   ) => _services.places.areasMatching(search, ofStreet: street.fieldValue);
 
-  Future<District> createDistrictNamed(String name) =>
-      _services.places.createDistrictNamed(name);
+  Future<District> createDistrictNamed(String name) async {
+    final created = await _services.places.createDistrictNamed(name);
+    _services.analytics.track(DistrictCreate(created));
+
+    return created;
+  }
 
   Future<void> _fillAreaOf(Street chosen) async {
     final areaWhenLookupStarted = area.fieldValue;
@@ -261,9 +283,17 @@ class AddressFormController extends AdvancedFormController {
     switch (areasOfStreet) {
       case [final onlyArea]:
         area.prefill(onlyArea);
+        _services.analytics.track(
+          AddressAreaFill(
+            source: AddressAutofillSource.singleAreaStreet,
+            street: chosen,
+            area: onlyArea,
+          ),
+        );
 
       case [_, _, ...]:
         await _fillAreaOfGeocodedHouse(
+          chosen,
           areasOfStreet,
           areaWhenLookupStarted,
           generationWhenLookupStarted,
@@ -292,6 +322,7 @@ class AddressFormController extends AdvancedFormController {
     }
 
     await _fillAreaOfGeocodedHouse(
+      typedStreet,
       areasOfStreet,
       areaWhenLookupStarted,
       generationWhenLookupStarted,
@@ -299,6 +330,7 @@ class AddressFormController extends AdvancedFormController {
   }
 
   Future<void> _fillAreaOfGeocodedHouse(
+    Street geocodedStreet,
     List<Area> areasOfStreet,
     Area? areaWhenLookupStarted,
     int generationWhenLookupStarted,
@@ -326,13 +358,40 @@ class AddressFormController extends AdvancedFormController {
 
     if (!areaWasChosenMeanwhile && !userChoseAreaOfStreet) {
       area.prefill(geocodedHouse.area);
+      _services.analytics.track(
+        AddressAreaFill(
+          source: AddressAutofillSource.geocodedHouseNumber,
+          street: geocodedStreet,
+          area: geocodedHouse.area,
+        ),
+      );
     }
+    final wasUnlocated = geolocation.fieldValue == null;
     geolocation.prefill(geolocation.fieldValue ?? geocodedHouse.location);
+    if (wasUnlocated) {
+      _services.analytics.track(
+        AddressLocationFill(
+          source: AddressAutofillSource.geocodedHouseNumber,
+          street: geocodedStreet,
+        ),
+      );
+    }
+  }
+
+  void _maybeTrackStaleLocationReminderShow() {
+    final isShown = _isStaleLocationReminderShown;
+    if (isShown && !_wasStaleLocationReminderShown) {
+      _services.analytics.track(const StaleLocationReminderShow());
+    }
+    _wasStaleLocationReminderShown = isShown;
   }
 
   @override
   void dispose() {
     _houseNumberGeocodingDebounce?.cancel();
+    staleLocationInputsChanged.removeListener(
+      _maybeTrackStaleLocationReminderShow,
+    );
     _suggestion.dispose();
     _addressConfirmedNotStale.dispose();
     super.dispose();
