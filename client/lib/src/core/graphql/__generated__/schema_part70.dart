@@ -1,6 +1,77 @@
 // Part 70 of the schema
 part of "schema.graphql.dart";
 
+String toJson_Enum_TagsConstraint(Enum_TagsConstraint e) {
+  switch (e) {
+    case Enum_TagsConstraint.tags_name_key:
+      return r'tags_name_key';
+    case Enum_TagsConstraint.tags_pkey:
+      return r'tags_pkey';
+    case Enum_TagsConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_TagsConstraint fromJson_Enum_TagsConstraint(String value) {
+  switch (value) {
+    case r'tags_name_key':
+      return Enum_TagsConstraint.tags_name_key;
+    case r'tags_pkey':
+      return Enum_TagsConstraint.tags_pkey;
+    default:
+      return Enum_TagsConstraint.$unknown;
+  }
+}
+
+enum Enum_TagsSelectColumn {
+  color,
+  id,
+  name,
+  $unknown;
+
+  factory Enum_TagsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_TagsSelectColumn(value);
+
+  String toJson() => toJson_Enum_TagsSelectColumn(this);
+}
+
+String toJson_Enum_TagsSelectColumn(Enum_TagsSelectColumn e) {
+  switch (e) {
+    case Enum_TagsSelectColumn.color:
+      return r'color';
+    case Enum_TagsSelectColumn.id:
+      return r'id';
+    case Enum_TagsSelectColumn.name:
+      return r'name';
+    case Enum_TagsSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_TagsSelectColumn fromJson_Enum_TagsSelectColumn(String value) {
+  switch (value) {
+    case r'color':
+      return Enum_TagsSelectColumn.color;
+    case r'id':
+      return Enum_TagsSelectColumn.id;
+    case r'name':
+      return Enum_TagsSelectColumn.name;
+    default:
+      return Enum_TagsSelectColumn.$unknown;
+  }
+}
+
+enum Enum_TagsUpdateColumn {
+  color,
+  name,
+  $unknown;
+
+  factory Enum_TagsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_TagsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_TagsUpdateColumn(this);
+}
+
 String toJson_Enum_TagsUpdateColumn(Enum_TagsUpdateColumn e) {
   switch (e) {
     case Enum_TagsUpdateColumn.color:

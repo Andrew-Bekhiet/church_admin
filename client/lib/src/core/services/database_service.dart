@@ -37,6 +37,7 @@ class DatabaseService {
   late final userPreferences = UserPreferencesDAO(db: this);
   late final dataChecks = DataChecksDAO(db: this);
   late final fcmTokens = FcmTokensDAO(db: this);
+  late final screenCaptureAttempts = ScreenCaptureAttemptsDAO(db: this);
 
   late final metadata = MetadataDAO(db: this);
 

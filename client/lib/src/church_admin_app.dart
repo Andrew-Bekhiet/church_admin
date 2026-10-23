@@ -20,6 +20,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
     with WidgetsBindingObserver {
   late final StreamSubscription<bool> _connectivityListener;
   late final StreamSubscription<Notification> _notificationsListener;
+  StreamSubscription<void>? _screenCaptureAttemptsRecording;
 
   @override
   void initState() {
@@ -31,6 +32,10 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
         .listen(_onConnectivityChanged);
     _notificationsListener = NotificationsService.I.onNotificationTapStream
         .listen(_onNotificationTapped);
+    if (CurrentPlatformService.I.isIOS) {
+      _screenCaptureAttemptsRecording = ScreenCaptureAttemptsRecorder.I
+          .recordAttemptsWhileSignedIn();
+    }
   }
 
   @override
@@ -149,6 +154,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
     WidgetsBinding.instance.removeObserver(this);
     unawaited(_connectivityListener.cancel());
     unawaited(_notificationsListener.cancel());
+    unawaited(_screenCaptureAttemptsRecording?.cancel());
 
     globalProviderContainer.dispose();
 

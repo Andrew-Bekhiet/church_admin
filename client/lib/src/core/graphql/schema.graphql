@@ -5024,6 +5024,34 @@ input NameComparisonExp {
   _nin: [name!]
 }
 
+input OperationsScreenCaptureAttemptsBoolExp {
+  _and: [OperationsScreenCaptureAttemptsBoolExp!]
+  _not: OperationsScreenCaptureAttemptsBoolExp
+  _or: [OperationsScreenCaptureAttemptsBoolExp!]
+}
+
+enum OperationsScreenCaptureAttemptsConstraint {
+  screen_capture_attempts_pkey
+}
+
+input OperationsScreenCaptureAttemptsInsertInput {
+  captureKind: String
+}
+
+type OperationsScreenCaptureAttemptsMutationResponse {
+  affectedRows: Int!
+}
+
+input OperationsScreenCaptureAttemptsOnConflict {
+  constraint: OperationsScreenCaptureAttemptsConstraint!
+  updateColumns: [OperationsScreenCaptureAttemptsUpdateColumn!]! = []
+  where: OperationsScreenCaptureAttemptsBoolExp
+}
+
+enum OperationsScreenCaptureAttemptsUpdateColumn {
+  _PLACEHOLDER
+}
+
 enum OrderBy {
   ASC
   ASC_NULLS_FIRST
@@ -8216,6 +8244,7 @@ type mutation_root {
   insertHobbiesOne(object: HobbiesInsertInput!, onConflict: HobbiesOnConflict): Hobbies
   insertJobs(objects: [JobsInsertInput!]!, onConflict: JobsOnConflict): JobsMutationResponse
   insertJobsOne(object: JobsInsertInput!, onConflict: JobsOnConflict): Jobs
+  insertOperationsScreenCaptureAttempts(objects: [OperationsScreenCaptureAttemptsInsertInput!]!, onConflict: OperationsScreenCaptureAttemptsOnConflict): OperationsScreenCaptureAttemptsMutationResponse
   insertPersonStates(objects: [PersonStatesInsertInput!]!, onConflict: PersonStatesOnConflict): PersonStatesMutationResponse
   insertPersonStatesOne(object: PersonStatesInsertInput!, onConflict: PersonStatesOnConflict): PersonStates
   insertPersonTypes(objects: [PersonTypesInsertInput!]!, onConflict: PersonTypesOnConflict): PersonTypesMutationResponse
