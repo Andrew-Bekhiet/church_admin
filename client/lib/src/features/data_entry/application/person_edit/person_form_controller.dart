@@ -13,6 +13,8 @@ class PersonFormController extends AdvancedFormController {
   final User? _currentUser;
   final OutOfSightAfterSave _outOfSight;
   final Person _startingPerson;
+  final AnalyticsService _analyticsService;
+  final Stopwatch _sinceFormOpened = Stopwatch()..start();
 
   final ValueNotifier<PersonSaveProgress> _saveProgress = ValueNotifier(
     const NotSaving(),
@@ -73,6 +75,14 @@ class PersonFormController extends AdvancedFormController {
       const NoServiceOrGroupToKeepPersonEditable(),
   };
 
+  PersonSaveOutcome? get _membershipsBlockingSave => isCreate
+      ? null
+      : switch (memberships.loadState.value) {
+          MembershipsLoaded() => null,
+          MembershipsLoading() => const MembershipsNotLoadedYet(),
+          MembershipsLoadFailed() => const MembershipsFailedToLoad(),
+        };
+
   bool get _nothingPlacesThePerson =>
       household.hasNoAddress &&
       household.family.fieldValue == null &&
@@ -118,6 +128,7 @@ class PersonFormController extends AdvancedFormController {
     required AddressFormServices addressServices,
     required this._photoUploader,
     required this._currentUser,
+    required this._analyticsService,
   }) : _outOfSight = OutOfSightAfterSave(_currentUser),
        _startingPerson = switch (intent) {
          UpdatePerson(:final personWithRelationIds) => personWithRelationIds,
@@ -138,6 +149,7 @@ class PersonFormController extends AdvancedFormController {
       isCreate: isCreate,
       persons: _persons,
       currentUser: _currentUser,
+      analyticsService: _analyticsService,
     );
 
     registerFields([photo, color]);
@@ -196,20 +208,33 @@ class PersonFormController extends AdvancedFormController {
   Future<PersonSaveOutcome> submit({
     Future<bool> Function()? confirmMoveOutOfSight,
   }) async {
-    if (_saveProgress.value is! NotSaving) return const SaveAlreadyInProgress();
+    final outcome = await _submitOnce(
+      confirmMoveOutOfSight: confirmMoveOutOfSight,
+    );
+    _maybeTrackSaveAttempt(outcome);
 
-    if (!isCreate) {
-      switch (memberships.loadState.value) {
-        case MembershipsLoaded():
-          break;
+    return outcome;
+  }
 
-        case MembershipsLoading():
-          return const MembershipsNotLoadedYet();
-
-        case MembershipsLoadFailed():
-          return const MembershipsFailedToLoad();
-      }
+  Future<void> deletePerson() async {
+    if (isCreate) {
+      throw StateError('Cannot delete a person that has not been created');
     }
+
+    try {
+      await _persons.deleteById(id: _startingPerson.id);
+      _analyticsService.track(ObjectDelete(_startingPerson, isSuccess: true));
+    } on Object {
+      _analyticsService.track(ObjectDelete(_startingPerson, isSuccess: false));
+      rethrow;
+    }
+  }
+
+  Future<PersonSaveOutcome> _submitOnce({
+    Future<bool> Function()? confirmMoveOutOfSight,
+  }) async {
+    if (_saveProgress.value is! NotSaving) return const SaveAlreadyInProgress();
+    if (_membershipsBlockingSave case final blocked?) return blocked;
 
     _saveProgress.value = const SavingPerson();
     Person? submittedPerson;
@@ -223,12 +248,11 @@ class PersonFormController extends AdvancedFormController {
       final movesOutOfSight =
           initial != null && _outOfSight.isMovedOutOfSight(initial, person);
       if (movesOutOfSight) {
-        _saveProgress.value = const AwaitingMoveConfirmation();
-        final moveConfirmed = await confirmMoveOutOfSight?.call() ?? false;
-        if (isDisposed) return const SaveAbandonedBecauseFormWasDisposed();
-        if (!moveConfirmed) return const MoveOutOfSightDeclined();
-
-        _saveProgress.value = const SavingPerson();
+        final unconfirmedMove = await _outcomeIfMoveIsNotConfirmed(
+          person,
+          confirmMoveOutOfSight,
+        );
+        if (unconfirmedMove != null) return unconfirmedMove;
       }
 
       final saved = switch (initial) {
@@ -253,12 +277,23 @@ class PersonFormController extends AdvancedFormController {
     }
   }
 
-  Future<void> deletePerson() async {
-    if (isCreate) {
-      throw StateError('Cannot delete a person that has not been created');
-    }
+  Future<PersonSaveOutcome?> _outcomeIfMoveIsNotConfirmed(
+    Person person,
+    Future<bool> Function()? confirmMoveOutOfSight,
+  ) async {
+    _saveProgress.value = const AwaitingMoveConfirmation();
+    _analyticsService.track(OutOfSightWarningShow(person));
+    final moveConfirmed = await confirmMoveOutOfSight?.call() ?? false;
+    if (isDisposed) return const SaveAbandonedBecauseFormWasDisposed();
 
-    await _persons.deleteById(id: _startingPerson.id);
+    _analyticsService.track(
+      OutOfSightWarningAnswer(person, isConfirmed: moveConfirmed),
+    );
+    if (!moveConfirmed) return const MoveOutOfSightDeclined();
+
+    _saveProgress.value = const SavingPerson();
+
+    return null;
   }
 
   Future<PersonSaveOutcome> _applyPhotoChangeTo(
@@ -296,6 +331,21 @@ class PersonFormController extends AdvancedFormController {
     if (isDisposed) return const SaveAbandonedBecauseFormWasDisposed();
 
     return PersonSaved(person: saved, movedOutOfSight: movedOutOfSight);
+  }
+
+  void _maybeTrackSaveAttempt(PersonSaveOutcome outcome) {
+    final result = ObjectSaveResult.ofPersonOutcome(outcome);
+    if (result == null) return;
+
+    _analyticsService.track(
+      ObjectSave(
+        entity: _startingPerson,
+        isCreate: isCreate,
+        result: result,
+        sinceFormOpened: _sinceFormOpened.elapsed,
+        ruleViolations: isDisposed ? null : _shownViolations.value,
+      ),
+    );
   }
 
   void _clearShammasWhenFemale(bool isMale) {

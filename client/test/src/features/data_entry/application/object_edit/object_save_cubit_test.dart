@@ -6,7 +6,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:image_picker/image_picker.dart' show XFile;
 
 import '../../../../fakes/fake_areas_dao.dart';
+import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/fake_photo_uploader.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 
 void main() {
   const storedArea = Area(id: 'shubra', name: 'شبرا');
@@ -14,6 +16,7 @@ void main() {
 
   late FakeAreasDAO areas;
   late FakePhotoUploader photos;
+  late RecordingAnalyticsProvider analytics;
   late AreaFormController form;
   late ObjectSaveOutcome<Area> outcome;
 
@@ -27,6 +30,7 @@ void main() {
       form: form,
       dao: areas,
       photoUploader: photos,
+      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
     );
   }
 
@@ -36,6 +40,7 @@ void main() {
   setUp(() {
     areas = FakeAreasDAO();
     photos = FakePhotoUploader();
+    analytics = RecordingAnalyticsProvider();
   });
 
   blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
@@ -231,6 +236,92 @@ void main() {
         await deleting;
       },
       verify: (_) => expect(outcome, isA<ObjectSaveAlreadyInProgress<Area>>()),
+    );
+  });
+
+  group('tracking', () {
+    Json trackedSave() =>
+        analytics.trackedEvents.whereType<ObjectSave>().single.properties;
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'a created area is tracked as a saved creation of that area',
+      build: () => cubitEditing(const CreateBlankArea()),
+      act: (cubit) async {
+        form.name.setValue('المعادي');
+        await cubit.submit();
+      },
+      verify: (_) => expect(
+        trackedSave(),
+        allOf(
+          containsPair('entity_type', AnalyticsEntityType.area.key),
+          containsPair('area_id', areas.createdObjects.single.id),
+          containsPair('is_create', true),
+          containsPair('outcome', ObjectSaveResult.saved.name),
+        ),
+      ),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'a save whose photo failed to upload is tracked as saved without it',
+      build: () {
+        photos
+          ..uploadError = Exception('upload failed')
+          ..uploadFinished.complete();
+
+        return cubitEditingStoredArea();
+      },
+      act: (cubit) async {
+        form.photo.setValue(ReplacePhoto(newPhoto));
+        await cubit.submit();
+      },
+      verify: (_) => expect(
+        trackedSave(),
+        allOf(
+          containsPair('is_create', false),
+          containsPair('outcome', ObjectSaveResult.savedButPhotoFailed.name),
+        ),
+      ),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'an invalid form is tracked as an invalid save',
+      build: () => cubitEditing(const CreateBlankArea()),
+      act: (cubit) => cubit.submit(),
+      verify: (_) => expect(
+        trackedSave(),
+        containsPair('outcome', ObjectSaveResult.invalid.name),
+      ),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'a refused second save is not tracked as another attempt',
+      build: () {
+        areas.saveGate = Completer<void>();
+
+        return cubitEditingStoredArea();
+      },
+      act: (cubit) async {
+        final saving = cubit.submit();
+        await cubit.submit();
+        areas.saveGate?.complete();
+        await saving;
+      },
+      verify: (_) =>
+          expect(analytics.trackedEvents.whereType<ObjectSave>(), hasLength(1)),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'a deleted area is tracked as a successful delete of that area',
+      build: cubitEditingStoredArea,
+      act: (cubit) => cubit.tryDeleteSavedObject(),
+      verify: (_) => expect(
+        analytics.trackedEvents.whereType<ObjectDelete>().single.properties,
+        {
+          'entity_type': AnalyticsEntityType.area.key,
+          'area_id': storedArea.id,
+          'is_success': true,
+        },
+      ),
     );
   });
 }

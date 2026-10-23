@@ -5,8 +5,10 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fakes/fake_address_form_services.dart';
+import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/fake_photo_uploader.dart';
 import '../../../../fakes/in_memory_families_dao.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 
 void main() {
   const shubra = Area(id: 'shubra', name: 'شبرا');
@@ -26,6 +28,7 @@ void main() {
   late InMemoryFamiliesDAO families;
   late FamilyFormController form;
   late ObjectSaveOutcome<Family> outcome;
+  late RecordingAnalyticsProvider analytics;
 
   ObjectSaveCubit<Family> cubitMovingFamilyToMaadi() {
     form = FamilyFormController(
@@ -41,11 +44,15 @@ void main() {
       form: form,
       dao: families,
       photoUploader: FakePhotoUploader(),
+      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
       outOfSight: const OutOfSightAfterSave(shubraServant),
     );
   }
 
-  setUp(() => families = InMemoryFamiliesDAO());
+  setUp(() {
+    families = InMemoryFamiliesDAO();
+    analytics = RecordingAnalyticsProvider();
+  });
 
   blocTest<ObjectSaveCubit<Family>, ObjectSaveProgress>(
     'moving a family out of sight waits for confirmation before saving',
@@ -105,5 +112,30 @@ void main() {
       expect(outcome, isA<ObjectMoveOutOfSightDeclined<Family>>());
       expect(families.updates, isEmpty);
     },
+  );
+
+  blocTest<ObjectSaveCubit<Family>, ObjectSaveProgress>(
+    'a declined move is tracked as a shown warning answered with no',
+    build: cubitMovingFamilyToMaadi,
+    act: (cubit) => cubit.submit(confirmMoveOutOfSight: () async => false),
+    verify: (_) => expect(
+      analytics.trackedEvents.whereType<FormAnalyticsEvent>().map(
+        (event) => [event.name, event.properties],
+      ),
+      [
+        [
+          'form:out_of_sight_warning_show',
+          {'entity_type': 'family', 'family_id': storedFamily.id},
+        ],
+        [
+          'form:out_of_sight_warning_answer',
+          {
+            'entity_type': 'family',
+            'family_id': storedFamily.id,
+            'is_confirmed': false,
+          },
+        ],
+      ],
+    ),
   );
 }

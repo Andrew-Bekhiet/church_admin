@@ -16,6 +16,7 @@ class _EditServiceScreenState extends State<EditServiceScreen> {
   final User? _currentUser = AuthBloc.I.currentUserData;
   final PersonMetadataCatalog _metadata = PersonMetadataCatalog(
     DatabaseService.I.metadata,
+    AnalyticsService.I,
   );
   late final ServiceFormController _form = ServiceFormController(
     intent: widget.intent,
@@ -27,6 +28,7 @@ class _EditServiceScreenState extends State<EditServiceScreen> {
         form: _form,
         dao: DatabaseService.I.services,
         photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+        analyticsService: AnalyticsService.I,
         meetingOwner: _form,
         meetingsDAO: DatabaseService.I.meetings,
       );

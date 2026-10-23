@@ -2,15 +2,18 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/fake_meetings_dao.dart';
 import '../../../../fakes/fake_photo_uploader.dart';
 import '../../../../fakes/fake_services_dao.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 
 void main() {
   late FakeServicesDAO services;
   late FakeMeetingsDAO meetings;
   late ServiceFormController form;
   late ObjectSaveOutcome<Service> outcome;
+  late RecordingAnalyticsProvider analytics;
 
   DefaultMeetingSaveCubit<Service> cubitEditing(ServiceEditIntent intent) {
     form = ServiceFormController(
@@ -26,12 +29,14 @@ void main() {
       form: form,
       dao: services,
       photoUploader: FakePhotoUploader(),
+      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
     );
   }
 
   setUp(() {
     services = FakeServicesDAO();
     meetings = FakeMeetingsDAO();
+    analytics = RecordingAnalyticsProvider();
   });
 
   blocTest<DefaultMeetingSaveCubit<Service>, ObjectSaveProgress>(
@@ -182,4 +187,38 @@ void main() {
     },
     verify: (_) => expect(outcome, isA<ObjectSaveFailed<Service>>()),
   );
+
+  group('tracking', () {
+    Json trackedSave() =>
+        analytics.trackedEvents.whereType<ObjectSave>().single.properties;
+
+    blocTest<DefaultMeetingSaveCubit<Service>, ObjectSaveProgress>(
+      'a new service saved with its meeting is tracked as creating it',
+      build: () => cubitEditing(const CreateBlankService()),
+      act: (cubit) {
+        form.name.setValue('خدمة ابتدائي');
+
+        return cubit.submit();
+      },
+      verify: (_) => expect(
+        trackedSave(),
+        containsPair('is_default_meeting_created', true),
+      ),
+    );
+
+    blocTest<DefaultMeetingSaveCubit<Service>, ObjectSaveProgress>(
+      'a new service whose user opted out is tracked as creating no meeting',
+      build: () => cubitEditing(const CreateBlankService()),
+      act: (cubit) {
+        form.name.setValue('خدمة ابتدائي');
+        form.defaultMeeting?.isCreated.setValue(false);
+
+        return cubit.submit();
+      },
+      verify: (_) => expect(
+        trackedSave(),
+        containsPair('is_default_meeting_created', false),
+      ),
+    );
+  });
 }

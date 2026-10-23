@@ -18,7 +18,10 @@ class EditPersonScreen extends StatefulWidget {
 
 class _EditPersonScreenState extends State<EditPersonScreen> {
   late final PersonFormController _form;
-  final _metadata = PersonMetadataCatalog(DatabaseService.I.metadata);
+  final _metadata = PersonMetadataCatalog(
+    DatabaseService.I.metadata,
+    AnalyticsService.I,
+  );
   late final FamilyRolesCubit _familyRoles;
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? _progressSnackBar;
 
@@ -32,10 +35,12 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
       families: databaseService.families,
       photoUploader: FunctionsPhotoUploader(FunctionsService.I),
       currentUser: AuthBloc.I.currentUserData,
+      analyticsService: AnalyticsService.I,
       addressServices: AddressFormServices.backedBy(
         databaseService,
         geocoder: Geocoder.I,
         logging: LoggingService.I,
+        analytics: AnalyticsService.I,
       ),
     );
     _familyRoles = FamilyRolesCubit(DatabaseService.I.metadata.personTypes);

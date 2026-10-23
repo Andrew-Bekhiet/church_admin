@@ -24,6 +24,7 @@ class _EditStreetScreenState extends State<EditStreetScreen> {
     form: _form,
     dao: DatabaseService.I.streets,
     photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+    analyticsService: AnalyticsService.I,
   );
 
   @override
