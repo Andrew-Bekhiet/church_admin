@@ -51,6 +51,7 @@ void main() {
       build: () => cubitFor(incomplete),
       act: (cubit) => cubit.choose(DataCheckOverride.markedComplete),
       verify: (_) => expect(analytics.trackedEvents.single.properties, {
+        'entity_type': AnalyticsEntityType.family.key,
         'family_id': incomplete.familyId,
         'from_override': DataCheckOverride.none.name,
         'to_override': DataCheckOverride.markedComplete.name,

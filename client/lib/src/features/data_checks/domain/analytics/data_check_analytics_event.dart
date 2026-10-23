@@ -1,6 +1,11 @@
 import 'package:church_admin/church_admin.dart';
 
 sealed class DataCheckAnalyticsEvent extends AnalyticsEvent {
+  static Json familyPropertiesOf(String familyId) => {
+    'entity_type': AnalyticsEntityType.family.key,
+    AnalyticsEntityType.family.idProperty: familyId,
+  };
+
   @override
   String get category => 'data_check';
 
@@ -8,31 +13,46 @@ sealed class DataCheckAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class DataCheckReportOpen extends DataCheckAnalyticsEvent {
-  final DataCheck dataCheck;
+  final String familyId;
+  final int completenessPercent;
+  final int passedCheckCount;
+  final int totalCheckCount;
+  final bool isComplete;
+  final DataCheckOverride overrideChoice;
+  final List<String> failingRules;
 
   @override
   String get objectAction => 'report_open';
 
   @override
   Json get properties => {
-    'family_id': dataCheck.familyId,
-    'completeness_percent': dataCheck.completenessPercent,
-    'passed_check_count': dataCheck.passedChecksCount,
-    'total_check_count': dataCheck.totalChecksCount,
-    'is_complete': dataCheck.isComplete,
-    'override': dataCheck.userOverride.name,
-    'failing_rules': [
-      for (final detail in dataCheck.checksDetails)
-        if (!detail.passed) detail.check.name,
-    ],
+    ...DataCheckAnalyticsEvent.familyPropertiesOf(familyId),
+    'completeness_percent': completenessPercent,
+    'passed_check_count': passedCheckCount,
+    'total_check_count': totalCheckCount,
+    'is_complete': isComplete,
+    'override_choice': overrideChoice.name,
+    'failing_rules': failingRules,
   };
 
-  const DataCheckReportOpen(this.dataCheck);
+  DataCheckReportOpen(DataCheck dataCheck)
+    : familyId = dataCheck.familyId,
+      completenessPercent = dataCheck.completenessPercent,
+      passedCheckCount = dataCheck.passedChecksCount,
+      totalCheckCount = dataCheck.totalChecksCount,
+      isComplete = dataCheck.isComplete,
+      overrideChoice = dataCheck.userOverride,
+      failingRules = [
+        for (final detail in dataCheck.checksDetails)
+          if (!detail.passed) detail.check.name,
+      ];
 }
 
 final class DataCheckOverrideSelect extends DataCheckAnalyticsEvent {
-  final DataCheck dataCheck;
-  final DataCheckOverride selected;
+  final String familyId;
+  final DataCheckOverride fromOverride;
+  final DataCheckOverride toOverride;
+  final bool isAutomaticallyComplete;
   final DataCheckOverrideError? failure;
 
   @override
@@ -40,17 +60,20 @@ final class DataCheckOverrideSelect extends DataCheckAnalyticsEvent {
 
   @override
   Json get properties => {
-    'family_id': dataCheck.familyId,
-    'from_override': dataCheck.userOverride.name,
-    'to_override': selected.name,
-    'is_automatically_complete': dataCheck.automaticVerdict,
+    ...DataCheckAnalyticsEvent.familyPropertiesOf(familyId),
+    'from_override': fromOverride.name,
+    'to_override': toOverride.name,
+    'is_automatically_complete': isAutomaticallyComplete,
     'is_success': failure == null,
     'failure_kind': failure?.name ?? 'none',
   };
 
-  const DataCheckOverrideSelect({
-    required this.dataCheck,
-    required this.selected,
+  DataCheckOverrideSelect({
+    required DataCheck dataCheck,
+    required DataCheckOverride selected,
     this.failure,
-  });
+  }) : familyId = dataCheck.familyId,
+       fromOverride = dataCheck.userOverride,
+       toOverride = selected,
+       isAutomaticallyComplete = dataCheck.automaticVerdict;
 }
