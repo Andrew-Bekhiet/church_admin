@@ -10,6 +10,8 @@ import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 
 import '../../../../fakes/fake_feature_flags_repo.dart';
+import '../../../../fakes/fake_logging_service.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 import '../../../../utils.dart';
 import 'auth_bloc_test.mocks.dart';
 
@@ -60,6 +62,7 @@ AuthUser initialAuthUser = AuthUser(
 
 late StreamController<AuthUser?> userChangesController;
 late BehaviorSubject<bool> connectivityController;
+late RecordingAnalyticsProvider analytics;
 
 @GenerateNiceMocks([
   MockSpec<AuthStorage>(),
@@ -189,6 +192,29 @@ void main() {
       );
 
       blocTest<AuthBloc, AuthState>(
+        'a failed sign in is tracked with why it failed',
+        setUp: () {
+          final mockRepo = globalProviderContainer.read(
+            authRepositoryProvider,
+          ) as MockFirebaseAuthRepository;
+          when(
+            mockRepo.signInWithEmailPassword(
+              email: 'email',
+              password: 'wrong',
+            ),
+          ).thenThrow(const IncorrectCredentialsException(null, null));
+        },
+        build: () => _createAuthBloc(noCachedUser: true),
+        act: (bloc) => bloc.add(
+          const SignInWithEmailPassword(email: 'email', password: 'wrong'),
+        ),
+        verify: (_) => expect(
+          analytics.trackedEvents.single.properties,
+          {'is_success': false, 'failure_kind': 'incorrect_credentials'},
+        ),
+      );
+
+      blocTest<AuthBloc, AuthState>(
         'sign up with email and password',
         setUp: () {
           final oldUser = initialAuthUser;
@@ -242,7 +268,7 @@ void main() {
         build: _createAuthBloc,
         act: (bloc) async {
           await Future.delayed(Duration.zero);
-          bloc.add(const SignOut());
+          bloc.add(const SignOut(SignOutSource.signOutButton));
         },
         expect: () => [
           isA<AuthAuthenticated>()
@@ -259,6 +285,22 @@ void main() {
             globalProviderContainer.read(authRepositoryProvider).signOut(),
           );
         },
+      );
+      blocTest<AuthBloc, AuthState>(
+        'signing out is tracked with where it was asked from',
+        setUp: () async {
+          await AuthStorage.I.writeAuthDataToCache(initialAuthUser);
+          await AuthStorage.I.writeUserToCache(initialUserData);
+        },
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          bloc.add(const SignOut(SignOutSource.lockScreen));
+        },
+        verify: (_) => expect(
+          analytics.trackedEvents.whereType<SignOutRequest>().single.source,
+          SignOutSource.lockScreen,
+        ),
       );
     });
 
@@ -662,6 +704,8 @@ void main() {
 }
 
 Future<void> _setUp() async {
+  analytics = RecordingAnalyticsProvider();
+
   final overrides = [
     await _setUpMockConnectivity(),
     await _setUpMockAuthRepository(),
@@ -807,6 +851,7 @@ AuthBloc _createAuthBloc({
     featureFlagsRepository: FakeFeatureFlagsRepo(
       enableAccountClaimingByEmail: enableAccountClaimingByEmail,
     ),
+    analyticsService: AnalyticsService([analytics], FakeLoggingService()),
     loadCachedUser: !noCachedUser,
   );
 }

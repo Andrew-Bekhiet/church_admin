@@ -167,6 +167,7 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
         .connectivityStream,
     functionsService: ref.watch(functionsServiceProvider),
     featureFlagsRepository: ref.watch(featureFlagsRepoProvider),
+    analyticsService: ref.watch(analyticsServiceProvider),
   );
 
   ref.onDispose(authBloc.close);
@@ -541,6 +542,7 @@ final homeCubitProvider = Provider<HomeCubit>(
       authRepository: ref.watch(authRepositoryProvider),
       localAuthService: ref.watch(localAuthServiceProvider),
       userPersistenceService: ref.watch(userPersistenceServiceProvider),
+      analyticsService: ref.watch(analyticsServiceProvider),
     );
     ref.onDispose(homeCubit.close);
 

@@ -69,8 +69,10 @@ class HomeDailyTextSheet extends StatelessWidget {
                   children: [
                     FilledButton.tonalIcon(
                       key: HomeDailyTextSheetKeys.shareButtonKey,
-                      onPressed: () =>
-                          unawaited(ShareService.I.shareText(text)),
+                      onPressed: () {
+                        AnalyticsService.I.track(DailyTextShare(type));
+                        unawaited(ShareService.I.shareText(text));
+                      },
                       icon: const Icon(Symbols.share),
                       label: const Text('مشاركة'),
                     ),

@@ -19,11 +19,19 @@ class HomeBottomNavBar extends StatelessWidget {
           return NavigationBar(
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             selectedIndex: homeState.currentTabIndex,
-            onDestinationSelected: (index) => pageController.animateToPage(
-              index,
-              duration: kTabScrollDuration,
-              curve: Curves.easeInOutCirc,
-            ),
+            onDestinationSelected: (index) {
+              AnalyticsService.I.track(
+                HomeTabSelect(
+                  homeState.tabs[index],
+                  method: HomeTabSelectMethod.tap,
+                ),
+              );
+              pageController.animateToPage(
+                index,
+                duration: kTabScrollDuration,
+                curve: Curves.easeInOutCirc,
+              );
+            },
             destinations: [
               for (final tab in homeState.tabs)
                 NavigationDestination(
