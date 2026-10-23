@@ -85,7 +85,8 @@ config :church_admin, ChurchAdmin.Google.Config,
   messaging: [adapter: ChurchAdmin.Google.Messaging.Http, base_url: "https://fcm.googleapis.com"]
 
 config :church_admin, ChurchAdmin.Files.Storage,
-  adapter: ChurchAdmin.Files.Storage.GoogleCloudStorage
+  adapter: ChurchAdmin.Files.Storage.GoogleCloudStorage,
+  signer: :iam_sign_blob
 
 config :church_admin,
   config_env: config_env(),

@@ -13,7 +13,8 @@ defmodule ChurchAdmin.Google.Credentials do
   @scopes [
     "https://www.googleapis.com/auth/identitytoolkit",
     "https://www.googleapis.com/auth/devstorage.read_write",
-    "https://www.googleapis.com/auth/firebase.messaging"
+    "https://www.googleapis.com/auth/firebase.messaging",
+    "https://www.googleapis.com/auth/iam"
   ]
 
   @spec child_specs(t()) :: [{module(), keyword()}]

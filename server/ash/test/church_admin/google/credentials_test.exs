@@ -27,7 +27,8 @@ defmodule ChurchAdmin.Google.CredentialsTest do
       %{credentials: credentials, test_pid: self()}
     end
 
-    test "fetches a Goth token carrying the Identity Toolkit, Storage and FCM scopes", context do
+    test "fetches a Goth token carrying the Identity Toolkit, Storage, FCM and IAM scopes",
+         context do
       token_endpoint = fn request ->
         assertion = URI.decode_query(request[:body])["assertion"]
         %JOSE.JWT{fields: claims} = JOSE.JWT.peek_payload(assertion)
@@ -56,7 +57,8 @@ defmodule ChurchAdmin.Google.CredentialsTest do
       assert String.split(scope) == [
                "https://www.googleapis.com/auth/identitytoolkit",
                "https://www.googleapis.com/auth/devstorage.read_write",
-               "https://www.googleapis.com/auth/firebase.messaging"
+               "https://www.googleapis.com/auth/firebase.messaging",
+               "https://www.googleapis.com/auth/iam"
              ]
     end
 

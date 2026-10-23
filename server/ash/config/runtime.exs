@@ -152,6 +152,23 @@ if config_env() == :prod do
     project_id: firebase_project_id,
     credentials: {:service_account, google_service_account}
 
+  gcs_url_signer =
+    case System.get_env("GCS_URL_SIGNER", "iam_sign_blob") do
+      "iam_sign_blob" ->
+        :iam_sign_blob
+
+      "service_account_key" ->
+        :service_account_key
+
+      other ->
+        raise "GCS_URL_SIGNER must be iam_sign_blob or service_account_key, got: #{inspect(other)}"
+    end
+
+  config :church_admin, ChurchAdmin.Files.Storage,
+    adapter: ChurchAdmin.Files.Storage.GoogleCloudStorage,
+    signer: gcs_url_signer,
+    signing_service_account: System.get_env("GCS_SIGNING_SERVICE_ACCOUNT")
+
   host = System.get_env("PHX_HOST") || "example.com"
 
   config :church_admin, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
