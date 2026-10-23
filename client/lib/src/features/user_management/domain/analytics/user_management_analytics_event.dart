@@ -31,12 +31,12 @@ sealed class UserManagementAnalyticsEvent extends AnalyticsEvent {
   const UserManagementAnalyticsEvent();
 }
 
-final class ManageUsersSearchSubmit extends UserManagementAnalyticsEvent {
+final class ManageUsersSearchRun extends UserManagementAnalyticsEvent {
   final int queryLength;
   final ManageUsersView preferredView;
 
   @override
-  String get objectAction => 'search_submit';
+  String get objectAction => 'search_run';
 
   @override
   Json get properties => {
@@ -44,7 +44,7 @@ final class ManageUsersSearchSubmit extends UserManagementAnalyticsEvent {
     'preferred_view': preferredView.name,
   };
 
-  const ManageUsersSearchSubmit({
+  const ManageUsersSearchRun({
     required this.queryLength,
     required this.preferredView,
   });
