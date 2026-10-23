@@ -225,9 +225,19 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
   }
 
   void _focusFirstInvalidField() {
-    _form.value.allFields
-        .firstWhereOrNull((field) => field.value.isInvalid)
-        ?.focus();
+    final invalidFields = _form.value.allFields
+        .where((field) => field.value.isInvalid)
+        .toList();
+    final firstInvalidField = invalidFields.firstOrNull;
+    if (firstInvalidField == null) return;
+
+    firstInvalidField.focus();
+    AnalyticsService.I.track(
+      FirstInvalidFieldFocus(
+        _form.toPerson(),
+        invalidFieldCount: invalidFields.length,
+      ),
+    );
   }
 
   void _leaveAfterSave(
@@ -268,6 +278,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
     await DiscardChangesDialog.popAfterConfirmingDiscard(
       context,
       wasModified: _form.wasModified,
+      editedEntity: _form.toPerson,
       result: result,
     );
   }

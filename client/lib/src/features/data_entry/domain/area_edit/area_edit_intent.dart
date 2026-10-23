@@ -4,6 +4,14 @@ sealed class AreaEditIntent extends SerializableExtra {
   @override
   String get typeName => 'AreaEditIntent';
 
+  Json get analyticsProperties => switch (this) {
+    CreateBlankArea() => {'intent_kind': CreateBlankArea.kind},
+    UpdateArea(:final area) => {
+      'intent_kind': UpdateArea.kind,
+      'area_id': area.id,
+    },
+  };
+
   const AreaEditIntent();
 
   factory AreaEditIntent.fromJson(Json json) =>

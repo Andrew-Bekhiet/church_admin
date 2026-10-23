@@ -52,7 +52,12 @@ class AdvancedSingleObjectSelectionField<
                 ? IconButton(
                     key: AdvancedSingleObjectSelectionFieldKeys.clearButton,
                     tooltip: 'حذف القيمة',
-                    onPressed: () => _change(null),
+                    onPressed: () {
+                      AnalyticsService.I.track(
+                        const PickerValueClear(PickerFieldKind.singleObject),
+                      );
+                      _change(null);
+                    },
                     icon: const Icon(Symbols.delete),
                   )
                 : null,

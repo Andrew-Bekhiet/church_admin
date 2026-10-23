@@ -80,19 +80,6 @@ final class OutOfSightWarningAnswer extends FormAnalyticsEvent {
   const OutOfSightWarningAnswer(this.entity, {required this.isConfirmed});
 }
 
-final class PrefilledCreateOpen extends FormAnalyticsEvent {
-  final AnalyticsEntityType entityType;
-  final Json intentProperties;
-
-  @override
-  String get objectAction => 'prefilled_create_open';
-
-  @override
-  Json get properties => {'entity_type': entityType.key, ...intentProperties};
-
-  const PrefilledCreateOpen(this.entityType, this.intentProperties);
-}
-
 final class DefaultMeetingOptOutToggle extends FormAnalyticsEvent {
   final bool isCreated;
 

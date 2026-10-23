@@ -9,6 +9,10 @@ class EditGroupRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties =>
+      (intent ?? const CreateBlankGroup()).analyticsProperties;
+
+  @override
   List<Object?> get props => [intent];
 
   const EditGroupRoute({this.intent});
