@@ -73,15 +73,15 @@ class _AttendanceGroupedRosterState extends State<AttendanceGroupedRoster> {
     );
   }
 
-  void _toggleSection(int? key, int sectionSize) {
+  void _toggleSection(int? key, int sectionPersonCount) {
     if (key == null) return;
 
     final isCollapsed = !_collapsedKeys.contains(key);
     context.read<RecordAttendanceCubit>().trackForCurrentMeeting(
-      (meeting) => AttendanceSectionCollapse(
+      (meeting) => AttendanceSectionToggle(
         meeting,
         isCollapsed: isCollapsed,
-        sectionSize: sectionSize,
+        sectionPersonCount: sectionPersonCount,
       ),
     );
     setState(() {

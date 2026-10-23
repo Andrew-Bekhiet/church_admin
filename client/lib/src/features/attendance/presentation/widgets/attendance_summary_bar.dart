@@ -8,15 +8,14 @@ class AttendanceSummaryBar extends StatelessWidget {
   final int absentCount;
   final int totalCount;
   final AttendancePresenceFilter filter;
-  final void Function(AttendancePresenceFilter filter, {required bool isReset})
-  onFilterChanged;
+  final ValueChanged<AttendancePresenceFilter> onFilterTapped;
 
   const AttendanceSummaryBar({
     required this.presentCount,
     required this.absentCount,
     required this.totalCount,
     required this.filter,
-    required this.onFilterChanged,
+    required this.onFilterTapped,
     super.key,
   });
 
@@ -41,7 +40,7 @@ class AttendanceSummaryBar extends StatelessWidget {
                   label: AttendancePresenceFilter.present.label,
                   count: presentCount,
                   selected: filter == AttendancePresenceFilter.present,
-                  onTap: () => _onSegmentTap(AttendancePresenceFilter.present),
+                  onTap: () => onFilterTapped(AttendancePresenceFilter.present),
                 ),
               ),
               VerticalDivider(
@@ -55,7 +54,7 @@ class AttendanceSummaryBar extends StatelessWidget {
                   label: AttendancePresenceFilter.absent.label,
                   count: absentCount,
                   selected: filter == AttendancePresenceFilter.absent,
-                  onTap: () => _onSegmentTap(AttendancePresenceFilter.absent),
+                  onTap: () => onFilterTapped(AttendancePresenceFilter.absent),
                 ),
               ),
               VerticalDivider(
@@ -69,22 +68,13 @@ class AttendanceSummaryBar extends StatelessWidget {
                   label: AttendancePresenceFilter.all.label,
                   count: totalCount,
                   selected: filter == AttendancePresenceFilter.all,
-                  onTap: () => _onSegmentTap(AttendancePresenceFilter.all),
+                  onTap: () => onFilterTapped(AttendancePresenceFilter.all),
                 ),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  void _onSegmentTap(AttendancePresenceFilter tapped) {
-    final isReset = filter == tapped;
-
-    onFilterChanged(
-      isReset ? AttendancePresenceFilter.all : tapped,
-      isReset: isReset,
     );
   }
 }

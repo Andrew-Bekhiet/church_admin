@@ -92,7 +92,7 @@ class _RecordAttendanceLoadedViewState
                       absentCount: state.absentCount ?? 0,
                       totalCount: state.eligibleCount ?? 0,
                       filter: state.presenceFilter,
-                      onFilterChanged: cubit.changePresenceFilter,
+                      onFilterTapped: cubit.togglePresenceFilter,
                     ),
                     switch (state.rosterStatus) {
                       RosterStatus.loading => const SliverFillRemaining(
@@ -102,7 +102,9 @@ class _RecordAttendanceLoadedViewState
                       RosterStatus.error => SliverFillRemaining(
                         child: AttendanceErrorView(
                           message: 'تعذر تحميل قائمة الحضور',
-                          onRetry: cubit.retry,
+                          onRetry: () => cubit
+                            ..trackForCurrentMeeting(AttendanceRetry.new)
+                            ..retry(),
                         ),
                       ),
 

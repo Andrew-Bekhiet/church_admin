@@ -2,17 +2,32 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/attendance/application/attendance_undo_presenter.dart';
+import 'package:fake_async/fake_async.dart';
 import 'package:material_ui/material_ui.dart' show VoidCallback;
 import 'package:mocktail/mocktail.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../fakes/fake_logging_service.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 
 final class RecordAttendanceFixture {
+  static Future<RecordAttendanceLoaded> readyRoster(
+    RecordAttendanceCubit cubit,
+  ) => cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
+    (s) => s.rosterStatus == RosterStatus.ready,
+  );
+
+  static Future<RecordAttendanceLoaded> attendedRoster(
+    RecordAttendanceCubit cubit,
+  ) => cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
+    (s) => s.entries.firstOrNull?.attended ?? false,
+  );
+
   final dao = MockMeetingsDAO();
   final authBloc = MockAuthBloc();
   final presenter = FakeAttendanceUndoPresenter();
   final analytics = RecordingAnalyticsProvider();
+  final fakeTime = FakeAsync();
 
   final attendanceController =
       StreamController<List<AttendanceRecord>>.broadcast();
@@ -72,13 +87,11 @@ final class RecordAttendanceFixture {
         fromDate: any(named: 'fromDate'),
         toDate: any(named: 'toDate'),
       ),
-    ).thenAnswer((_) async* {
-      if (attendanceRecords.isNotEmpty) {
-        yield attendanceRecords;
-      }
-
-      yield* attendanceController.stream;
-    });
+    ).thenAnswer(
+      (_) => attendanceRecords.isEmpty
+          ? attendanceController.stream
+          : attendanceController.stream.startWith(attendanceRecords),
+    );
 
     when(
       () => dao.markAttendance(
@@ -112,6 +125,20 @@ final class RecordAttendanceFixture {
     presenter: presenter,
     analyticsService: AnalyticsService([analytics], FakeLoggingService()),
   );
+
+  void typeSearchUntilSettled(
+    RecordAttendanceCubit cubit,
+    List<String> keystrokes,
+  ) => fakeTime.run((time) {
+    keystrokes.forEach(cubit.onSearch);
+    time.elapse(RecordAttendanceCubit.searchDebounce);
+  });
+
+  Iterable<String> get trackedNames =>
+      analytics.trackedEvents.map((event) => event.name);
+
+  Json trackedPropertiesOf<T extends AnalyticsEvent>() =>
+      analytics.trackedEvents.whereType<T>().single.properties;
 
   Future<void> dispose() => Future.wait([
     attendanceController.close(),
@@ -189,13 +216,16 @@ final class MockAuthBloc extends Mock implements AuthBloc {}
 
 final class FakeAttendanceUndoPresenter implements AttendanceUndoPresenter {
   final List<String> shownErrors = [];
+  final List<VoidCallback> _undos = [];
 
   @override
   void showUndo({
     required String personName,
     required AttendanceUndoableChange change,
     required VoidCallback onUndo,
-  }) {}
+  }) => _undos.add(onUndo);
+
+  void undoLast() => _undos.last();
 
   @override
   void showError(String message) => shownErrors.add(message);
