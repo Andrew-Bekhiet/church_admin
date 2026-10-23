@@ -26,8 +26,16 @@ defmodule ChurchAdmin.Google.EmulatorTest do
       |> Keyword.put(:storage, base_url: "http://#{emulators[:storage_host]}")
     )
 
+    stubbed_storage = Application.fetch_env!(:church_admin, Storage)
+
+    Application.put_env(:church_admin, Storage,
+      adapter: Storage.FirebaseEmulator,
+      public_url: "http://#{emulators[:storage_host]}"
+    )
+
     on_exit(fn ->
       Application.put_env(:church_admin, ChurchAdmin.Google.Config, stubbed_settings)
+      Application.put_env(:church_admin, Storage, stubbed_storage)
     end)
 
     %{emulators: emulators}
@@ -97,6 +105,29 @@ defmodule ChurchAdmin.Google.EmulatorTest do
       assert Storage.delete(bucket, name) == :ok
       assert {:error, %Storage.Error{reason: :not_found}} = Storage.metadata(bucket, name)
       assert {:error, %Storage.Error{reason: :not_found}} = Storage.delete(bucket, name)
+    end
+
+    test "takes bytes through an upload link and gives them back through a download link", %{
+      emulators: emulators
+    } do
+      bucket = "#{emulators[:project_id]}.appspot.com"
+      name = "emulator-test-#{System.unique_integer([:positive])}/linked"
+
+      assert {:ok, upload} =
+               Storage.upload_link(bucket, name, content_type: "image/png", expires_in: 300)
+
+      assert Req.put!(upload.url, body: "png-bytes", headers: upload.headers, retry: false).status ==
+               200
+
+      assert {:ok, %Object{size: 9, content_type: "image/png"}} = Storage.metadata(bucket, name)
+
+      assert {:ok, download} = Storage.download_link(bucket, name, expires_in: 300)
+      assert Req.get!(download.url, decode_body: false, retry: false).body == "png-bytes"
+
+      tokenless = download.url |> URI.parse() |> Map.put(:query, "alt=media") |> URI.to_string()
+      assert Req.get!(tokenless, retry: false).status == 403
+
+      Storage.delete(bucket, name)
     end
   end
 end

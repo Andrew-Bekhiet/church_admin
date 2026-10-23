@@ -18,6 +18,10 @@ config :church_admin, ChurchAdmin.Google.Config,
     req_options: [plug: {Req.Test, ChurchAdmin.Google.Messaging}, retry: false]
   ]
 
+config :church_admin, ChurchAdmin.Files.Storage,
+  adapter: ChurchAdmin.Files.Storage.FirebaseEmulator,
+  public_url: "http://storage.public.test:9199"
+
 config :gcs_signed_url, :req_options, plug: {Req.Test, GcsSignedUrl.SignBlob.HTTP}, retry: false
 
 config :church_admin, ChurchAdmin.Realtime, start_replication_stream?: false

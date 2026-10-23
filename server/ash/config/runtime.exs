@@ -97,6 +97,10 @@ if config_env() == :dev do
       base_url: "http://#{System.get_env("FIREBASE_STORAGE_EMULATOR_HOST", "localhost:9199")}"
     ],
     messaging: [adapter: ChurchAdmin.Google.Messaging.Local, local_delivery: :log]
+
+  config :church_admin, ChurchAdmin.Files.Storage,
+    adapter: ChurchAdmin.Files.Storage.FirebaseEmulator,
+    public_url: System.get_env("FIREBASE_STORAGE_EMULATOR_PUBLIC_URL", "http://localhost:9199")
 end
 
 if config_env() == :test do
