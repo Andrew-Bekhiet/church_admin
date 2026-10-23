@@ -22,7 +22,7 @@ void main() {
 
   ScreenCaptureAttemptsRecorder recorderOver(Link link) {
     return ScreenCaptureAttemptsRecorder(
-      attempts: attempts.stream,
+      attemptEventsStream: attempts.stream,
       authBloc: authBloc,
       screenCaptureAttempts: ScreenCaptureAttemptsDAO(
         db: DatabaseService(
