@@ -42,7 +42,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
               ),
               OutlinedButton.icon(
                 onPressed: stagingMapOptions != widget.mapOptions
-                    ? () => widget.apply(stagingMapOptions)
+                    ? _apply
                     : null,
                 icon: const Icon(Symbols.done),
                 label: const Text('تطبيق'),
@@ -114,16 +114,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
                           stagingMapOptions.layers.length == 1 &&
                               stagingMapOptions.layers.single == e
                           ? null
-                          : (v) => setState(
-                              () => stagingMapOptions = stagingMapOptions
-                                  .copyWith(
-                                    layers: v ?? false
-                                        ? stagingMapOptions.layers.union({e})
-                                        : stagingMapOptions.layers.difference({
-                                            e,
-                                          }),
-                                  ),
-                            ),
+                          : (v) => _toggleLayer(e, isEnabled: v ?? false),
                     ),
                   )
                   .toList(),
@@ -134,11 +125,28 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     );
   }
 
+  void _apply() {
+    AnalyticsService.I.track(MapsOptionsApply(stagingMapOptions));
+    widget.apply(stagingMapOptions);
+  }
+
+  void _toggleLayer(GeoMapLayer layer, {required bool isEnabled}) {
+    AnalyticsService.I.track(MapsLayerToggle(layer, isEnabled: isEnabled));
+    setState(
+      () => stagingMapOptions = stagingMapOptions.copyWith(
+        layers: isEnabled
+            ? stagingMapOptions.layers.union({layer})
+            : stagingMapOptions.layers.difference({layer}),
+      ),
+    );
+  }
+
   Future<void> _selectGroups() async {
     final rslt = await _select<Group>(
       stream: DatabaseService.I.groups.streamAll(),
       selected: stagingMapOptions.selectedGroups.toList(),
       title: 'اختيار المجموعات',
+      entityType: MapsEntityType.group,
     );
 
     if (rslt != null && mounted) {
@@ -155,6 +163,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.classes.streamAll(),
       selected: stagingMapOptions.selectedClasses.toList(),
       title: 'اختيار الفصول',
+      entityType: MapsEntityType.schoolClass,
     );
 
     if (rslt != null && mounted) {
@@ -171,6 +180,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.services.streamAll(),
       selected: stagingMapOptions.selectedServices.toList(),
       title: 'اختيار الخدمات',
+      entityType: MapsEntityType.service,
     );
 
     if (rslt != null && mounted) {
@@ -187,6 +197,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.stores.streamAll(),
       selected: stagingMapOptions.selectedStores.toList(),
       title: 'اختيار المتاجر',
+      entityType: MapsEntityType.store,
     );
 
     if (rslt != null && mounted) {
@@ -203,6 +214,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.families.streamAll(),
       selected: stagingMapOptions.selectedFamilies.toList(),
       title: 'اختيار العائلات',
+      entityType: MapsEntityType.family,
     );
 
     if (rslt != null && mounted) {
@@ -219,6 +231,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.streets.streamAll(),
       selected: stagingMapOptions.selectedStreets.toList(),
       title: 'اختيار الشوارع',
+      entityType: MapsEntityType.street,
     );
 
     if (rslt != null && mounted) {
@@ -235,6 +248,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.areas.streamAll(),
       selected: stagingMapOptions.selectedAreas.toList(),
       title: 'اختيار المناطق',
+      entityType: MapsEntityType.area,
     );
 
     if (rslt != null && mounted) {
@@ -250,12 +264,17 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     required PaginatableStreamBase<T> stream,
     required List<T> selected,
     required String title,
+    required MapsEntityType entityType,
   }) async {
     final search = BehaviorSubject<String?>.seeded(null);
+    var isSelectAllUsed = false;
+    var isSearchUsed = false;
 
     final controller = ViewableObjectListController<T>(
       objectsPaginatableStream: stream,
-      filterStream: search.map((s) => s ?? ''),
+      filterStream: search
+          .map((s) => s ?? '')
+          .doOnData((s) => isSearchUsed = isSearchUsed || s.isNotEmpty),
     )..selectionController.selectAll(selected);
 
     final rslt = await Navigator.of(context).push(
@@ -269,9 +288,12 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
             actions: [
               IconButton(
                 icon: const Icon(Symbols.select_all),
-                onPressed: () => controller.selectionController.selectAll(
-                  controller.currentFilteredObjectsOrNull ?? [],
-                ),
+                onPressed: () {
+                  isSelectAllUsed = true;
+                  controller.selectionController.selectAll(
+                    controller.currentFilteredObjectsOrNull ?? [],
+                  );
+                },
                 tooltip: 'تحديد الكل',
               ),
               IconButton(
@@ -292,6 +314,17 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     );
 
     if (rslt == true) {
+      final selection = controller.selectionController.currentValue
+          ?.whereType<T>()
+          .toList();
+      AnalyticsService.I.track(
+        MapsDataSelect(
+          entityType,
+          selectedCount: selection?.length ?? 0,
+          isSelectAllUsed: isSelectAllUsed,
+          isSearchUsed: isSearchUsed,
+        ),
+      );
       unawaited(
         controller.dispose().then((_) async {
           if (search.isClosed) return;
@@ -300,9 +333,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
         }),
       );
 
-      return controller.selectionController.currentValue
-          ?.whereType<T>()
-          .toList();
+      return selection;
     }
     await controller.dispose().then((_) async {
       if (search.isClosed) return;
