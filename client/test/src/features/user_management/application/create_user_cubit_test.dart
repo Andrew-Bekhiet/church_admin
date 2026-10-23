@@ -1,13 +1,18 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
 
 class _MockFunctionsService extends Mock implements FunctionsService {}
 
 void main() {
   group('CreateUserCubit', () {
     late _MockFunctionsService functions;
+    late RecordingAnalyticsProvider analytics;
 
     final validDraft = UserDraft(
       name: 'مينا',
@@ -28,7 +33,34 @@ void main() {
 
     setUp(() {
       functions = _MockFunctionsService();
+      analytics = RecordingAnalyticsProvider();
     });
+
+    blocTest<CreateUserCubit, UserFormState>(
+      'a name already taken on the server is tracked as the failure kind',
+      setUp: () => when(() => functions.createUser(any())).thenThrow(
+        FirebaseFunctionsException(
+          code: 'already-exists',
+          message: 'user/name-taken',
+        ),
+      ),
+      build: () => CreateUserCubit(
+        initial: validDraft,
+        functions: functions,
+        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+      ),
+      act: (cubit) => cubit.save(),
+      verify: (_) => expect(analytics.trackedEvents.single.properties, {
+        'is_success': false,
+        'failure_kind': 'name_taken',
+        'permission_count': 0,
+        'area_count': 0,
+        'service_count': 0,
+        'group_count': 0,
+        'has_invitation': false,
+        'person_link_mode': PersonLinkMode.link.name,
+      }),
+    );
 
     blocTest<CreateUserCubit, UserFormState>(
       'saving an incomplete form reports a validation error and stays editable',
