@@ -155,7 +155,7 @@ class PersonContactSection extends StatelessWidget {
   ) async {
     if (!(await Permission.contacts.request()).isGranted) {
       AnalyticsService.I.track(
-        DeviceContactCreate(
+        DeviceContactCreateAttempt(
           person,
           outcome: DeviceContactCreateOutcome.permissionDenied,
         ),
@@ -192,7 +192,7 @@ class PersonContactSection extends StatelessWidget {
 
     if (dialogResult != true) {
       AnalyticsService.I.track(
-        DeviceContactCreate(
+        DeviceContactCreateAttempt(
           person,
           outcome: DeviceContactCreateOutcome.cancelled,
         ),
@@ -213,7 +213,7 @@ class PersonContactSection extends StatelessWidget {
       );
     } on Exception {
       AnalyticsService.I.track(
-        DeviceContactCreate(
+        DeviceContactCreateAttempt(
           person,
           outcome: DeviceContactCreateOutcome.failed,
           hasPhoto: hasPhoto,
@@ -222,7 +222,7 @@ class PersonContactSection extends StatelessWidget {
       rethrow;
     }
     AnalyticsService.I.track(
-      DeviceContactCreate(
+      DeviceContactCreateAttempt(
         person,
         outcome: DeviceContactCreateOutcome.created,
         hasPhoto: hasPhoto,

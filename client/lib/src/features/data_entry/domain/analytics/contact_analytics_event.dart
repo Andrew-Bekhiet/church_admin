@@ -61,13 +61,13 @@ final class CallDateRecordAnswer extends ContactAnalyticsEvent {
   const CallDateRecordAnswer(this.owner, {required this.isAccepted});
 }
 
-final class DeviceContactCreate extends ContactAnalyticsEvent {
+final class DeviceContactCreateAttempt extends ContactAnalyticsEvent {
   final ViewableWithID owner;
   final DeviceContactCreateOutcome outcome;
   final bool hasPhoto;
 
   @override
-  String get objectAction => 'device_contact_create';
+  String get objectAction => 'device_contact_create_attempt';
 
   @override
   Json get properties => {
@@ -76,7 +76,7 @@ final class DeviceContactCreate extends ContactAnalyticsEvent {
     'has_photo': hasPhoto,
   };
 
-  const DeviceContactCreate(
+  const DeviceContactCreateAttempt(
     this.owner, {
     required this.outcome,
     this.hasPhoto = false,
@@ -131,13 +131,13 @@ final class NumberCopy extends ContactAnalyticsEvent {
   const NumberCopy(this.owner, {required this.isFamilyNumber});
 }
 
-final class DeviceContactsImport extends ContactAnalyticsEvent {
+final class DeviceContactsImportAttempt extends ContactAnalyticsEvent {
   final DeviceContactsImportOutcome outcome;
   final int importedNumberCount;
   final bool isNameUsed;
 
   @override
-  String get objectAction => 'device_contacts_import';
+  String get objectAction => 'device_contacts_import_attempt';
 
   @override
   Json get properties => {
@@ -146,7 +146,7 @@ final class DeviceContactsImport extends ContactAnalyticsEvent {
     'is_name_used': isNameUsed,
   };
 
-  const DeviceContactsImport(
+  const DeviceContactsImportAttempt(
     this.outcome, {
     this.importedNumberCount = 0,
     this.isNameUsed = false,

@@ -21,18 +21,32 @@ void main() {
       await fixture.addOwnNumberToDeviceContacts(tester);
 
       expect(
-        fixture.analytics.trackedEventsOf<DeviceContactCreate>(),
+        fixture.analytics.trackedEventsOf<DeviceContactCreateAttempt>(),
         isEmpty,
       );
     },
   );
+
+  testWidgets('a declined device contact is tracked as an attempt, not as a '
+      'creation', (tester) async {
+    await fixture.pumpSection(tester);
+
+    await tester.tap(find.byTooltip('اضافة الى جهات الاتصال'));
+    await tester.pumpAndSettle();
+    await tester.tapAt(Offset.zero);
+    await tester.pumpAndSettle();
+
+    expect(fixture.analytics.trackedEvents.map((event) => event.name), [
+      'contact:device_contact_create_attempt',
+    ]);
+  });
 
   testWidgets('an inserted device contact is tracked as created without a '
       'photo for a person who has none', (tester) async {
     await fixture.addOwnNumberToDeviceContacts(tester);
 
     expect(
-      fixture.analytics.singleTrackedPropertiesOf<DeviceContactCreate>(),
+      fixture.analytics.singleTrackedPropertiesOf<DeviceContactCreateAttempt>(),
       {
         'entity_type': AnalyticsEntityType.person.key,
         'person_id': fixture.person.id,
@@ -50,7 +64,7 @@ void main() {
     await fixture.addOwnNumberToDeviceContacts(tester);
 
     expect(
-      fixture.analytics.trackedEventsOf<DeviceContactCreate>().map(
+      fixture.analytics.trackedEventsOf<DeviceContactCreateAttempt>().map(
         (event) => event.properties['outcome'],
       ),
       [DeviceContactCreateOutcome.failed.name],
