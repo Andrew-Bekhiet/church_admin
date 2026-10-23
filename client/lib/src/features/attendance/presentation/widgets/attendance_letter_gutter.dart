@@ -1,3 +1,5 @@
+import 'package:church_admin/church_admin.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 
 class AttendanceLetterGutter extends StatelessWidget {
@@ -23,7 +25,10 @@ class AttendanceLetterGutter extends StatelessWidget {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTapDown: (details) => _selectAt(details.localPosition.dy),
+        onTapUp: (_) => _trackUse(context, AttendanceLetterGutterGesture.tap),
         onVerticalDragUpdate: (details) => _selectAt(details.localPosition.dy),
+        onVerticalDragEnd: (_) =>
+            _trackUse(context, AttendanceLetterGutterGesture.drag),
         child: SizedBox(
           width: kGutterWidth,
           child: Column(
@@ -49,6 +54,11 @@ class AttendanceLetterGutter extends StatelessWidget {
       ),
     );
   }
+
+  void _trackUse(BuildContext context, AttendanceLetterGutterGesture gesture) =>
+      context.read<RecordAttendanceCubit>().trackForCurrentMeeting(
+        (meeting) => AttendanceLetterGutterUse(meeting, gesture),
+      );
 
   void _selectAt(double dy) {
     if (letters.isEmpty) return;

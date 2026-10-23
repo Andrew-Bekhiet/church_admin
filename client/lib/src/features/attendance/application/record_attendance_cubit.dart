@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/attendance/application/attendance_undo_presenter.dart';
 import 'package:church_admin/src/features/attendance/application/live_records.dart';
+import 'package:church_admin/src/features/attendance/application/optimistic_attendance_outcome.dart';
 import 'package:church_admin/src/features/attendance/application/scaffold_attendance_undo_presenter.dart';
 import 'package:church_admin/src/features/attendance/domain/attendance_record_rights.dart';
 import 'package:clock/clock.dart';
@@ -21,6 +22,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   final MeetingsDAO _dao;
   final AuthBloc _authBloc;
   final AttendanceUndoPresenter _presenter;
+  final AnalyticsService _analyticsService;
 
   final BehaviorSubject<String?> _searchSubject = BehaviorSubject.seeded(null);
   StreamSubscription<String?>? _searchSub;
@@ -65,15 +67,26 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       _meeting.audience == MeetingAudience.personsAndServants &&
       _recordAttendanceRights.canToggleAudience;
 
+  AttendanceRosterSettings get _rosterSettings => AttendanceRosterSettings(
+    audienceView: _audienceView,
+    sort: _sort,
+    presenceFilter: _presenceFilter,
+    grouping: _grouping,
+    isSearchActive: _searchQuery.isNotEmpty,
+    isToday: DateUtils.isSameDay(_selectedDate, clock.now()),
+  );
+
   RecordAttendanceCubit({
     required this._meeting,
     DateTime? initialDate,
     MeetingsDAO? dao,
     AuthBloc? authBloc,
     AttendanceUndoPresenter? presenter,
+    AnalyticsService? analyticsService,
   }) : _dao = dao ?? DatabaseService.I.meetings,
        _authBloc = authBloc ?? AuthBloc.I,
        _presenter = presenter ?? const ScaffoldAttendanceUndoPresenter(),
+       _analyticsService = analyticsService ?? AnalyticsService.I,
        _selectedDate = DateUtils.dateOnly(initialDate ?? DateTime.now()),
        super(const RecordAttendanceLoading()) {
     _forceSwitchMeeting(_meeting);
@@ -83,14 +96,24 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         .map((query) => query?.trim().toLowerCase() ?? '')
         .distinct((a, b) => a == b)
         .doOnData((query) => _searchQuery = query)
-        .listen((_) => _emitLoaded());
+        .listen((query) {
+          _emitLoaded();
+          _maybeTrackSearch(query);
+        });
   }
 
   int indexForLetter(String letter) => _gutterIndex[letter] ?? -1;
 
+  void trackForCurrentMeeting(
+    AttendanceAnalyticsEvent Function(Meeting meeting) eventFor,
+  ) => _analyticsService.track(eventFor(_meeting));
+
   void switchMeeting(Meeting meeting) {
     if (meeting.id == _meeting.id) return;
 
+    _analyticsService.track(
+      AttendanceMeetingSwitch(meeting, fromMeetingId: _meeting.id),
+    );
     _forceSwitchMeeting(meeting);
   }
 
@@ -111,6 +134,13 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     final dayOnly = DateUtils.dateOnly(date);
     if (dayOnly == _selectedDate) return;
 
+    _analyticsService.track(
+      AttendanceDateChange(
+        _meeting,
+        day: dayOnly,
+        hasRecordsOnDay: _recordedDays.contains(dayOnly),
+      ),
+    );
     _selectedDate = dayOnly;
     _liveAttendance.reset();
     _personsAttendanceAnalyses = const {};
@@ -122,14 +152,34 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     if (!_canToggleAudience) return;
 
     _audienceView = _audienceView.toggled;
+    _analyticsService.track(
+      AttendanceAudienceViewToggle(_meeting, _audienceView),
+    );
     _personsAttendanceAnalyses = const {};
     _emitLoaded();
     unawaited(_loadAttendanceAnalyses());
   }
 
-  void changePresenceFilter(AttendancePresenceFilter filter) {
+  void changePresenceFilter(
+    AttendancePresenceFilter filter, {
+    bool isReset = false,
+  }) {
     if (_presenceFilter == filter) return;
 
+    if (state case RecordAttendanceLoaded(
+      :final presentCount,
+      :final eligibleCount,
+    )) {
+      _analyticsService.track(
+        AttendancePresenceFilterChange(
+          _meeting,
+          filter: filter,
+          isReset: isReset,
+          presentCount: presentCount,
+          eligibleCount: eligibleCount,
+        ),
+      );
+    }
     _presenceFilter = filter;
     _emitLoaded();
   }
@@ -137,6 +187,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   void changeGrouping(AttendanceGrouping grouping) {
     if (_grouping == grouping) return;
 
+    _analyticsService.track(AttendanceGroupingToggle(_meeting, grouping));
     _grouping = grouping;
     _emitLoaded();
   }
@@ -144,6 +195,13 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   void changeSorting(AttendanceSorting sort) {
     if (_sort == sort) return;
 
+    final isSameSortType =
+        AttendanceSortType.of(sort) == AttendanceSortType.of(_sort);
+    _analyticsService.track(
+      isSameSortType
+          ? AttendanceSortReverse(_meeting, sort)
+          : AttendanceSortChange(_meeting, sort),
+    );
     _sort = sort;
     _emitLoaded();
   }
@@ -151,6 +209,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   void changeStreakWindow(int days) {
     if (_streakWindowDays == days) return;
 
+    _analyticsService.track(AttendanceStreakWindowChange(_meeting, days));
     _streakWindowDays = days;
     _personsAttendanceAnalyses = const {};
     _emitLoaded();
@@ -159,9 +218,13 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
   void onSearch(String? query) => _searchSubject.sink.add(query);
 
-  void retry() => unawaited(_restartSession());
+  void retry() {
+    _analyticsService.track(AttendanceRetry(_meeting));
+    unawaited(_restartSession());
+  }
 
-  Future<void> toggleAttendance(MeetingRosterEntry entry) {
+  Future<void> toggleAttendance(MeetingRosterEntry entry) async {
+    final meeting = _meeting;
     final personId = entry.person.id;
     final effectiveAttendanceRecord = _liveAttendance.effectiveRecord((
       personId,
@@ -170,7 +233,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     final newIsPresent = effectiveAttendanceRecord == null;
     final attendanceTime = _selectedDate.replaceTime(DateTime.now());
 
-    return _runOptimisticAttendance(
+    final outcome = await _runOptimisticAttendance(
       entry: entry,
       optimisticTime: newIsPresent ? attendanceTime : null,
       action: () async {
@@ -182,20 +245,22 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
             datetime: attendanceTime,
           );
 
-          _presenter.showUndo(
-            personName: entry.person.name,
-            change: AttendanceUndoableChange.markedPresent,
-            onUndo: () => _dao.unmarkAttendance(attendanceRecordId: record.id),
+          _showTrackedUndo(
+            meeting,
+            entry,
+            AttendanceUndoableChange.markedPresent,
+            () => _dao.unmarkAttendance(attendanceRecordId: record.id),
           );
         } else if (entry.attendance?.id case final attendanceRecordId?) {
           final record = await _dao.unmarkAttendance(
             attendanceRecordId: attendanceRecordId,
           );
 
-          _presenter.showUndo(
-            personName: entry.person.name,
-            change: AttendanceUndoableChange.markedAbsent,
-            onUndo: () => _dao.markAttendance(
+          _showTrackedUndo(
+            meeting,
+            entry,
+            AttendanceUndoableChange.markedAbsent,
+            () => _dao.markAttendance(
               meetingId: record.meetingId,
               personId: record.personId,
               datetime: record.datetime,
@@ -204,6 +269,19 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
           );
         }
       },
+    );
+    if (outcome == OptimisticAttendanceOutcome.skippedWhilePending) return;
+
+    _analyticsService.track(
+      AttendancePersonMark(
+        meeting,
+        personId: personId,
+        newState: newIsPresent
+            ? AttendanceMarkState.present
+            : AttendanceMarkState.absent,
+        rosterSettings: _rosterSettings,
+        isSuccess: outcome == OptimisticAttendanceOutcome.saved,
+      ),
     );
   }
 
@@ -217,30 +295,80 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     final newDatetime = _selectedDate.replaceTimeOfDay(time);
     if (newDatetime == attendanceRecord.datetime) return;
 
-    if (newDatetime.isAfter(clock.now())) {
+    final isRejectedFuture = newDatetime.isAfter(clock.now());
+    if (isRejectedFuture) {
       _presenter.showError('لا يمكن تسجيل الحضور في وقت لم يأت بعد');
-
-      return;
     }
 
-    await _runOptimisticAttendance(
-      entry: entry,
-      optimisticTime: newDatetime,
-      action: () => _dao.updateAttendanceTime(
-        attendanceRecordId: attendanceRecord.id,
-        datetime: newDatetime,
+    final outcome = isRejectedFuture
+        ? OptimisticAttendanceOutcome.failed
+        : await _runOptimisticAttendance(
+            entry: entry,
+            optimisticTime: newDatetime,
+            action: () => _dao.updateAttendanceTime(
+              attendanceRecordId: attendanceRecord.id,
+              datetime: newDatetime,
+            ),
+          );
+    if (outcome == OptimisticAttendanceOutcome.skippedWhilePending) return;
+
+    _analyticsService.track(
+      AttendanceTimeEdit(
+        _meeting,
+        personId: entry.person.id,
+        minutesShifted: newDatetime
+            .difference(attendanceRecord.datetime)
+            .inMinutes,
+        isRejectedFuture: isRejectedFuture,
+        isSuccess: outcome == OptimisticAttendanceOutcome.saved,
       ),
     );
   }
 
-  Future<void> _runOptimisticAttendance({
+  void _showTrackedUndo(
+    Meeting meeting,
+    MeetingRosterEntry entry,
+    AttendanceUndoableChange change,
+    Future<void> Function() undo,
+  ) => _presenter.showUndo(
+    personName: entry.person.name,
+    change: change,
+    onUndo: () {
+      _analyticsService.track(
+        AttendanceUndo(
+          meeting,
+          personId: entry.person.id,
+          undoneChange: change,
+        ),
+      );
+      unawaited(undo());
+    },
+  );
+
+  void _maybeTrackSearch(String query) {
+    if (query.isEmpty) return;
+
+    if (state case RecordAttendanceLoaded(:final entries)) {
+      _analyticsService.track(
+        AttendanceSearchSubmit(
+          _meeting,
+          query: query,
+          resultCount: entries.length,
+        ),
+      );
+    }
+  }
+
+  Future<OptimisticAttendanceOutcome> _runOptimisticAttendance({
     required MeetingRosterEntry entry,
     required DateTime? optimisticTime,
     required Future<void> Function() action,
   }) async {
     final personId = entry.person.id;
     final key = (personId, _asServant);
-    if (_liveAttendance.isPending(key)) return;
+    if (_liveAttendance.isPending(key)) {
+      return OptimisticAttendanceOutcome.skippedWhilePending;
+    }
 
     _liveAttendance.beginOptimistic(key, switch (optimisticTime) {
       null => null,
@@ -259,6 +387,8 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     try {
       await action();
+
+      return OptimisticAttendanceOutcome.saved;
     } catch (error, stackTrace) {
       _liveAttendance.rollbackOptimistic(key);
 
@@ -269,6 +399,8 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       );
 
       if (!isClosed) _presenter.showError('تعذر حفظ الحضور، حاول مرة أخرى');
+
+      return OptimisticAttendanceOutcome.failed;
     } finally {
       _liveAttendance.endInFlight(key);
       _emitLoaded();

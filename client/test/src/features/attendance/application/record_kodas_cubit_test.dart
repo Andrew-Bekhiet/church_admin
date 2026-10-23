@@ -8,6 +8,8 @@ import 'package:material_ui/material_ui.dart' show VoidCallback;
 import 'package:mocktail/mocktail.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
 import '../../../utils.dart';
 
 void main() {
@@ -361,6 +363,10 @@ final class _Fixture {
     historyDao: historyDao,
     meetingsDao: meetingsDao,
     presenter: presenter,
+    analyticsService: AnalyticsService(
+      [RecordingAnalyticsProvider()],
+      FakeLoggingService(),
+    ),
   );
 
   Future<void> settle() => pumpEventQueue();

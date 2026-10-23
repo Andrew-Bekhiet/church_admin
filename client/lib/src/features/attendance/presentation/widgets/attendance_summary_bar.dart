@@ -8,7 +8,8 @@ class AttendanceSummaryBar extends StatelessWidget {
   final int absentCount;
   final int totalCount;
   final AttendancePresenceFilter filter;
-  final ValueChanged<AttendancePresenceFilter> onFilterChanged;
+  final void Function(AttendancePresenceFilter filter, {required bool isReset})
+  onFilterChanged;
 
   const AttendanceSummaryBar({
     required this.presentCount,
@@ -78,6 +79,12 @@ class AttendanceSummaryBar extends StatelessWidget {
     );
   }
 
-  void _onSegmentTap(AttendancePresenceFilter tapped) =>
-      onFilterChanged(filter == tapped ? AttendancePresenceFilter.all : tapped);
+  void _onSegmentTap(AttendancePresenceFilter tapped) {
+    final isReset = filter == tapped;
+
+    onFilterChanged(
+      isReset ? AttendancePresenceFilter.all : tapped,
+      isReset: isReset,
+    );
+  }
 }
