@@ -14,9 +14,6 @@ void main() {
 
   setUp(() => fixture = PersonFormControllerFixture());
 
-  Json trackedSave() =>
-      fixture.analytics.trackedEvents.whereType<ObjectSave>().single.properties;
-
   test('a created person is tracked as a saved creation of them', () async {
     final controller = fixture.controllerFor(
       const CreatePersonInFamily(
@@ -28,7 +25,7 @@ void main() {
     await controller.submit();
 
     expect(
-      trackedSave(),
+      fixture.analytics.singleTrackedPropertiesOf<ObjectSave>(),
       allOf(
         containsPair('entity_type', AnalyticsEntityType.person.key),
         containsPair('person_id', fixture.persons.createdPeople.single.id),
@@ -47,7 +44,7 @@ void main() {
       await controller.submit();
 
       expect(
-        trackedSave(),
+        fixture.analytics.singleTrackedPropertiesOf<ObjectSave>(),
         allOf(
           containsPair('outcome', ObjectSaveResult.invalid.name),
           containsPair('rule_violations', [
@@ -64,7 +61,7 @@ void main() {
     await controller.submit();
 
     expect(
-      trackedSave(),
+      fixture.analytics.singleTrackedPropertiesOf<ObjectSave>(),
       containsPair('outcome', ObjectSaveResult.membershipsNotLoadedYet.name),
     );
   });
@@ -75,10 +72,7 @@ void main() {
     await controller.deletePerson();
 
     expect(
-      fixture.analytics.trackedEvents
-          .whereType<ObjectDelete>()
-          .single
-          .properties,
+      fixture.analytics.singleTrackedPropertiesOf<ObjectDelete>(),
       {
         'entity_type': AnalyticsEntityType.person.key,
         'person_id': storedPerson.id,

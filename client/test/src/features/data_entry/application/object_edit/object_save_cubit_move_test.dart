@@ -119,7 +119,7 @@ void main() {
     build: cubitMovingFamilyToMaadi,
     act: (cubit) => cubit.submit(confirmMoveOutOfSight: () async => false),
     verify: (_) => expect(
-      analytics.trackedEvents.whereType<FormAnalyticsEvent>().map(
+      analytics.trackedEventsOf<FormAnalyticsEvent>().map(
         (event) => [event.name, event.properties],
       ),
       [
