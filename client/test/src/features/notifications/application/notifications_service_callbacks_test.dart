@@ -9,6 +9,8 @@ import 'package:material_ui/material_ui.dart' hide Notification;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
 import 'notifications_service_callbacks_test.mocks.dart';
 
 @GenerateNiceMocks([
@@ -65,6 +67,68 @@ void main() {
               expectedNotification,
             ),
           ]);
+        },
+      );
+
+      test(
+        'tapping a local notification is tracked as opening it',
+        () async {
+          final notification = Notification(
+            id: 'id1234',
+            title: 'title',
+            body: 'body',
+            sentTime: DateTime.now(),
+            senderUID: 's',
+          );
+          when(
+            NotificationsStorage.I.readNotification(notification.id),
+          ).thenAnswer((_) async => notification);
+
+          await NotificationsServiceCallbacks.onForegroundNotificationTap(
+            NotificationResponse(
+              notificationResponseType:
+                  NotificationResponseType.selectedNotification,
+              payload: notification.id,
+            ),
+          );
+
+          expect(
+            (AnalyticsService.I.providers.single as RecordingAnalyticsProvider)
+                .trackedEvents,
+            [
+              isA<AnalyticsEvent>()
+                  .having(
+                    (event) => event.name,
+                    'name',
+                    'notification:notification_open',
+                  )
+                  .having((event) => event.properties, 'properties', {
+                    'source': NotificationOpenSource.localTap.name,
+                    'notification_type': notification.type.name,
+                    'has_image': false,
+                    'has_query': false,
+                  }),
+            ],
+          );
+        },
+      );
+
+      test(
+        'a reminder is tracked with how many persons it found',
+        () async {
+          await NotificationsServiceCallbacks.showKodasNotification();
+
+          expect(
+            (AnalyticsService.I.providers.single as RecordingAnalyticsProvider)
+                .trackedEvents
+                .single
+                .properties,
+            {
+              'reminder_type': LocalNotificationType.kodas.name,
+              'person_count': expectedPersons.length,
+              'is_skipped_empty': false,
+            },
+          );
         },
       );
 
@@ -235,6 +299,9 @@ void _setUp() {
     _setUpMockNotificationsStorage(),
     _setUpMockNotificationsService(),
     _setUpMockDatabaseService(),
+    analyticsServiceProvider.overrideWithValue(
+      AnalyticsService([RecordingAnalyticsProvider()], FakeLoggingService()),
+    ),
   ];
 
   initGlobalProviderContainer(overrides);
