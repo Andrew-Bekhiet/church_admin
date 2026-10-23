@@ -400,6 +400,74 @@ Enum_JobsUpdateColumn fromJson_Enum_JobsUpdateColumn(String value) {
   }
 }
 
+enum Enum_OperationsScreenCaptureAttemptsConstraint {
+  screen_capture_attempts_pkey,
+  $unknown;
+
+  factory Enum_OperationsScreenCaptureAttemptsConstraint.fromJson(
+    String value,
+  ) => fromJson_Enum_OperationsScreenCaptureAttemptsConstraint(value);
+
+  String toJson() =>
+      toJson_Enum_OperationsScreenCaptureAttemptsConstraint(this);
+}
+
+String toJson_Enum_OperationsScreenCaptureAttemptsConstraint(
+  Enum_OperationsScreenCaptureAttemptsConstraint e,
+) {
+  switch (e) {
+    case Enum_OperationsScreenCaptureAttemptsConstraint
+        .screen_capture_attempts_pkey:
+      return r'screen_capture_attempts_pkey';
+    case Enum_OperationsScreenCaptureAttemptsConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_OperationsScreenCaptureAttemptsConstraint
+fromJson_Enum_OperationsScreenCaptureAttemptsConstraint(String value) {
+  switch (value) {
+    case r'screen_capture_attempts_pkey':
+      return Enum_OperationsScreenCaptureAttemptsConstraint
+          .screen_capture_attempts_pkey;
+    default:
+      return Enum_OperationsScreenCaptureAttemptsConstraint.$unknown;
+  }
+}
+
+enum Enum_OperationsScreenCaptureAttemptsUpdateColumn {
+  $_PLACEHOLDER,
+  $unknown;
+
+  factory Enum_OperationsScreenCaptureAttemptsUpdateColumn.fromJson(
+    String value,
+  ) => fromJson_Enum_OperationsScreenCaptureAttemptsUpdateColumn(value);
+
+  String toJson() =>
+      toJson_Enum_OperationsScreenCaptureAttemptsUpdateColumn(this);
+}
+
+String toJson_Enum_OperationsScreenCaptureAttemptsUpdateColumn(
+  Enum_OperationsScreenCaptureAttemptsUpdateColumn e,
+) {
+  switch (e) {
+    case Enum_OperationsScreenCaptureAttemptsUpdateColumn.$_PLACEHOLDER:
+      return r'_PLACEHOLDER';
+    case Enum_OperationsScreenCaptureAttemptsUpdateColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_OperationsScreenCaptureAttemptsUpdateColumn
+fromJson_Enum_OperationsScreenCaptureAttemptsUpdateColumn(String value) {
+  switch (value) {
+    case r'_PLACEHOLDER':
+      return Enum_OperationsScreenCaptureAttemptsUpdateColumn.$_PLACEHOLDER;
+    default:
+      return Enum_OperationsScreenCaptureAttemptsUpdateColumn.$unknown;
+  }
+}
+
 enum Enum_OrderBy {
   ASC,
   ASC_NULLS_FIRST,
@@ -2458,75 +2526,4 @@ enum Enum_TagsConstraint {
       fromJson_Enum_TagsConstraint(value);
 
   String toJson() => toJson_Enum_TagsConstraint(this);
-}
-
-String toJson_Enum_TagsConstraint(Enum_TagsConstraint e) {
-  switch (e) {
-    case Enum_TagsConstraint.tags_name_key:
-      return r'tags_name_key';
-    case Enum_TagsConstraint.tags_pkey:
-      return r'tags_pkey';
-    case Enum_TagsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_TagsConstraint fromJson_Enum_TagsConstraint(String value) {
-  switch (value) {
-    case r'tags_name_key':
-      return Enum_TagsConstraint.tags_name_key;
-    case r'tags_pkey':
-      return Enum_TagsConstraint.tags_pkey;
-    default:
-      return Enum_TagsConstraint.$unknown;
-  }
-}
-
-enum Enum_TagsSelectColumn {
-  color,
-  id,
-  name,
-  $unknown;
-
-  factory Enum_TagsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_TagsSelectColumn(value);
-
-  String toJson() => toJson_Enum_TagsSelectColumn(this);
-}
-
-String toJson_Enum_TagsSelectColumn(Enum_TagsSelectColumn e) {
-  switch (e) {
-    case Enum_TagsSelectColumn.color:
-      return r'color';
-    case Enum_TagsSelectColumn.id:
-      return r'id';
-    case Enum_TagsSelectColumn.name:
-      return r'name';
-    case Enum_TagsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_TagsSelectColumn fromJson_Enum_TagsSelectColumn(String value) {
-  switch (value) {
-    case r'color':
-      return Enum_TagsSelectColumn.color;
-    case r'id':
-      return Enum_TagsSelectColumn.id;
-    case r'name':
-      return Enum_TagsSelectColumn.name;
-    default:
-      return Enum_TagsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_TagsUpdateColumn {
-  color,
-  name,
-  $unknown;
-
-  factory Enum_TagsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_TagsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_TagsUpdateColumn(this);
 }

@@ -10,6 +10,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart' show EventChannel;
 import 'package:flutter/widgets.dart' hide Notification;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart'
     hide FileSystem;
@@ -321,6 +322,24 @@ final userPersistenceServiceProvider = Provider<UserPersistenceService>((ref) {
 
   return userPersistenceService;
 });
+
+final screenCaptureAttemptsRecorderProvider =
+    Provider<ScreenCaptureAttemptsRecorder>(
+      (ref) => ScreenCaptureAttemptsRecorder(
+        attempts:
+            const EventChannel(
+                  ScreenCaptureAttemptsRecorder.platformChannelName,
+                )
+                .receiveBroadcastStream()
+                .cast<String>()
+                .map(ScreenCaptureKind.byValue),
+        authBloc: ref.watch(authBlocProvider),
+        screenCaptureAttempts: ref
+            .watch(databaseServiceProvider)
+            .screenCaptureAttempts,
+        logging: ref.watch(loggingServiceProvider),
+      ),
+    );
 
 final routerRefreshStreamProvider = Provider<RouterRefreshStream>((ref) {
   final authBloc = ref.watch(authBlocProvider);

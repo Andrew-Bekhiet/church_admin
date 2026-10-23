@@ -11,6 +11,7 @@ export 'gql_definintions/meetings_dao.dart';
 export 'gql_definintions/metadata/districts_dao.dart';
 export 'gql_definintions/metadata_dao.dart';
 export 'gql_definintions/persons_dao.dart';
+export 'gql_definintions/screen_capture_attempts_dao.dart';
 export 'gql_definintions/services_dao.dart';
 export 'gql_definintions/stores_dao.dart';
 export 'gql_definintions/streets_dao.dart';
