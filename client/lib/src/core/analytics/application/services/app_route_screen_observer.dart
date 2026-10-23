@@ -24,7 +24,8 @@ class AppRouteScreenObserver extends NavigatorObserver {
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPop(route, previousRoute);
 
-    _maybeTrackScreen(previousRoute);
+    final poppedAppScreen = route.settings.arguments is AppRoute;
+    if (poppedAppScreen) _maybeTrackScreen(previousRoute);
   }
 
   void _maybeTrackScreen(Route<dynamic>? route) {

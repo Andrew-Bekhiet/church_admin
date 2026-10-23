@@ -38,12 +38,28 @@ void main() {
     });
 
     test('popping back tracks the screen that is revealed again', () async {
-      final previous = TestPages.showing(const ViewFamilyRoute(id: 'family-1'));
+      const family = ViewFamilyRoute(id: 'family-1');
 
-      observer.didPop(TestPages.showing(const SettingsRoute()), previous);
+      observer.didPop(
+        TestPages.showing(const SettingsRoute()),
+        TestPages.showing(family),
+      );
       await pumpEventQueue();
 
       expect(provider.trackedScreens.single.name, ViewFamilyRoute.routePath);
+      expect(provider.trackedScreens.single.properties, {
+        'family_id': family.id,
+      });
+    });
+
+    test('closing a dialog does not track the screen below again', () async {
+      observer.didPop(
+        TestPages.showing(null),
+        TestPages.showing(const ViewFamilyRoute(id: 'family-1')),
+      );
+      await pumpEventQueue();
+
+      expect(provider.trackedScreens, isEmpty);
     });
 
     test('a route that is not an app screen is not tracked', () async {
