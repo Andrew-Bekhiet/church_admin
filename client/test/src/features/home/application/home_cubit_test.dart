@@ -377,6 +377,17 @@ void main() {
         expect(cubit.state.currentTab, HomeTab.services);
       },
     );
+
+    blocTest<HomeCubit, HomeState>(
+      'of the mode already active is not tracked as a mode switch',
+      build: () => fixture.buildCubit(),
+      act: (cubit) => cubit.openFirstTabOf(cubit.state.mode),
+      wait: Duration.zero,
+      verify: (_) => expect(
+        fixture.analytics.trackedEvents.whereType<HomeModeSwitch>(),
+        isEmpty,
+      ),
+    );
   });
 
   group('list type', () {
