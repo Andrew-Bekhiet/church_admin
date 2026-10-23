@@ -6,6 +6,7 @@ class AccountsDAO {
   static const _nothingToClaimCodes = {
     'unauthenticated',
     'account/not-claimable',
+    'account/already-claimed',
   };
 
   final DatabaseService _db;

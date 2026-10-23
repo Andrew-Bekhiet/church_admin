@@ -22,34 +22,17 @@ void main() {
       expect(await backend.db.accounts.tryClaimAccount(), isTrue);
     });
 
-    for (final code in ['unauthenticated', 'account/not-claimable']) {
+    for (final code in [
+      'unauthenticated',
+      'account/not-claimable',
+      'account/already-claimed',
+    ]) {
       test('"$code" means there is nothing to claim', () async {
         serving('tryClaimAccount', (_) => throw FakeAshRejection(code));
 
         expect(await backend.db.accounts.tryClaimAccount(), isFalse);
       });
     }
-
-    test(
-      'an account claimed by someone else is rejected with its code',
-      () async {
-        serving(
-          'tryClaimAccount',
-          (_) => throw const FakeAshRejection('account/already-claimed'),
-        );
-
-        await expectLater(
-          backend.db.accounts.tryClaimAccount(),
-          throwsA(
-            isA<BackendRejectedException>().having(
-              (e) => e.code,
-              'code',
-              'account/already-claimed',
-            ),
-          ),
-        );
-      },
-    );
 
     test('rate limiting is reported with its code', () async {
       serving(
