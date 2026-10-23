@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'e2e_ash.dart';
+import 'e2e_user.dart';
 
 /// Talks to the hermetic backend started by `server/scripts/e2e-backend.sh`.
 abstract final class E2eBackend {
@@ -295,7 +296,9 @@ abstract final class E2eBackend {
     return users.single as Map<String, dynamic>;
   }
 
-  static Future<Map<String, dynamic>> orderByPreferencesOf(String uid) async {
+  static Future<Map<String, dynamic>> orderByPreferencesOf(
+    E2eUser owner,
+  ) async {
     final users = await E2eAsh.pageResults(
       r'''
       query OrderByPreferencesOf($uid: ID!) {
@@ -305,7 +308,9 @@ abstract final class E2eBackend {
       }
       ''',
       'users',
-      variables: {'uid': uid},
+      variables: {'uid': owner.uid},
+      email: owner.email,
+      password: owner.password,
     );
 
     return switch (users.single) {
