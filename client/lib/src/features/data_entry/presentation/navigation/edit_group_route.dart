@@ -9,6 +9,19 @@ class EditGroupRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties => switch (intent ?? const CreateBlankGroup()) {
+    CreateGroupInService(:final service) => {
+      'intent_kind': CreateGroupInService.kind,
+      'service_id': service.id,
+    },
+    CreateBlankGroup() => {'intent_kind': CreateBlankGroup.kind},
+    UpdateGroup(:final group) => {
+      'intent_kind': UpdateGroup.kind,
+      'group_id': group.id,
+    },
+  };
+
+  @override
   List<Object?> get props => [intent];
 
   const EditGroupRoute({this.intent});

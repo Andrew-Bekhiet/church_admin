@@ -1,0 +1,127 @@
+import 'package:church_admin/church_admin.dart';
+
+sealed class AddressAnalyticsEvent extends AnalyticsEvent {
+  @override
+  String get category => 'address';
+
+  const AddressAnalyticsEvent();
+}
+
+final class AddressAreaFill extends AddressAnalyticsEvent {
+  final AddressAutofillSource autofillSource;
+  final String streetId;
+  final String areaId;
+
+  @override
+  String get objectAction => 'area_fill';
+
+  @override
+  Json get properties => {
+    'autofill_source': autofillSource.name,
+    AnalyticsEntityType.street.idProperty: streetId,
+    AnalyticsEntityType.area.idProperty: areaId,
+  };
+
+  AddressAreaFill({
+    required this.autofillSource,
+    required Street street,
+    required Area area,
+  }) : streetId = street.id,
+       areaId = area.id;
+}
+
+final class AddressLocationFill extends AddressAnalyticsEvent {
+  final AddressAutofillSource autofillSource;
+  final String streetId;
+
+  @override
+  String get objectAction => 'location_fill';
+
+  @override
+  Json get properties => {
+    'autofill_source': autofillSource.name,
+    AnalyticsEntityType.street.idProperty: streetId,
+  };
+
+  AddressLocationFill({required this.autofillSource, required Street street})
+    : streetId = street.id;
+}
+
+sealed class AddressSuggestionAnalyticsEvent extends AddressAnalyticsEvent {
+  final bool hasArea;
+  final bool hasStreet;
+  final bool hasDistrict;
+
+  @override
+  Json get properties => {
+    'has_area': hasArea,
+    'has_street': hasStreet,
+    'has_district': hasDistrict,
+  };
+
+  AddressSuggestionAnalyticsEvent(Address suggested)
+    : hasArea = suggested.area != null,
+      hasStreet = suggested.street != null,
+      hasDistrict = suggested.district != null;
+}
+
+final class AddressSuggestionShow extends AddressSuggestionAnalyticsEvent {
+  @override
+  String get objectAction => 'suggestion_show';
+
+  AddressSuggestionShow(super.suggested);
+}
+
+final class AddressSuggestionAccept extends AddressSuggestionAnalyticsEvent {
+  @override
+  String get objectAction => 'suggestion_accept';
+
+  AddressSuggestionAccept(super.suggested);
+}
+
+final class StaleLocationReminderShow extends AddressAnalyticsEvent {
+  @override
+  String get objectAction => 'stale_location_reminder_show';
+
+  const StaleLocationReminderShow();
+}
+
+final class StaleLocationReminderAccept extends AddressAnalyticsEvent {
+  @override
+  String get objectAction => 'stale_location_reminder_accept';
+
+  const StaleLocationReminderAccept();
+}
+
+final class StaleLocationReminderDismiss extends AddressAnalyticsEvent {
+  @override
+  String get objectAction => 'stale_location_reminder_dismiss';
+
+  const StaleLocationReminderDismiss();
+}
+
+final class DistrictCreate extends AddressAnalyticsEvent {
+  final String districtId;
+
+  @override
+  String get objectAction => 'district_create';
+
+  @override
+  Json get properties => {'district_id': districtId};
+
+  DistrictCreate(District district) : districtId = district.id;
+}
+
+final class FamilyAddressFill extends AddressAnalyticsEvent {
+  final String familyId;
+
+  @override
+  String get objectAction => 'family_address_fill';
+
+  @override
+  Json get properties => {AnalyticsEntityType.family.idProperty: familyId};
+
+  FamilyAddressFill(Family family) : familyId = family.id;
+}
+
+enum AddressAutofillSource { singleAreaStreet, geocodedHouseNumber }

@@ -9,6 +9,16 @@ class EditServiceRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties =>
+      switch (intent ?? const CreateBlankService()) {
+        CreateBlankService() => {'intent_kind': CreateBlankService.kind},
+        UpdateService(:final service) => {
+          'intent_kind': UpdateService.kind,
+          'service_id': service.id,
+        },
+      };
+
+  @override
   List<Object?> get props => [intent];
 
   const EditServiceRoute({this.intent});

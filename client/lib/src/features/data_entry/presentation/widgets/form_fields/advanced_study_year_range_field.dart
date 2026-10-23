@@ -40,7 +40,12 @@ class AdvancedStudyYearRangeField<E extends Object> extends StatelessWidget {
             suffixIcon: clearable && hasAnyYear && !state.readOnly
                 ? IconButton(
                     tooltip: 'حذف القيمة',
-                    onPressed: () => field.setValue(null),
+                    onPressed: () {
+                      AnalyticsService.I.track(
+                        const PickerValueClear(PickerFieldKind.studyYearRange),
+                      );
+                      field.setValue(null);
+                    },
                     icon: const Icon(Symbols.delete),
                   )
                 : null,

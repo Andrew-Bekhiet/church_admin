@@ -18,7 +18,10 @@ class EditPersonScreen extends StatefulWidget {
 
 class _EditPersonScreenState extends State<EditPersonScreen> {
   late final PersonFormController _form;
-  final _metadata = PersonMetadataCatalog(DatabaseService.I.metadata);
+  final _metadata = PersonMetadataCatalog(
+    DatabaseService.I.metadata,
+    AnalyticsService.I,
+  );
   late final PhoneContactsEditorCubit _phoneContacts;
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? _progressSnackBar;
   String? _familyIdLastSeenByPhoneContacts;
@@ -33,10 +36,12 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
       families: databaseService.families,
       photoUploader: FunctionsPhotoUploader(FunctionsService.I),
       currentUser: AuthBloc.I.currentUserData,
+      analyticsService: AnalyticsService.I,
       addressServices: AddressFormServices.backedBy(
         databaseService,
         geocoder: Geocoder.I,
         logging: LoggingService.I,
+        analytics: AnalyticsService.I,
       ),
     );
     final savedPerson = _form.savedPerson;
@@ -259,9 +264,19 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
   }
 
   void _focusFirstInvalidField() {
-    _form.value.allFields
-        .firstWhereOrNull((field) => field.value.isInvalid)
-        ?.focus();
+    final invalidFields = _form.value.allFields
+        .where((field) => field.value.isInvalid)
+        .toList();
+    final firstInvalidField = invalidFields.firstOrNull;
+    if (firstInvalidField == null) return;
+
+    firstInvalidField.focus();
+    AnalyticsService.I.track(
+      FirstInvalidFieldFocus(
+        _form.toPerson(),
+        invalidFieldCount: invalidFields.length,
+      ),
+    );
   }
 
   void _leaveAfterSave(
@@ -306,12 +321,18 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
       return;
     }
 
+    final editedPerson = _form.toPerson();
+    AnalyticsService.I.track(DiscardPromptShow(editedPerson));
     final discard = await showDialog<bool>(
       context: context,
       builder: (context) => const DiscardChangesDialog(),
     );
+    final isDiscarded = discard ?? false;
+    AnalyticsService.I.track(
+      DiscardPromptAnswer(editedPerson, isDiscarded: isDiscarded),
+    );
 
-    if (discard ?? false) navigator.pop(result);
+    if (isDiscarded) navigator.pop(result);
   }
 
   Future<void> _delete() async {

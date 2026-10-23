@@ -27,37 +27,40 @@ class ImageObjectWidget extends StatelessWidget {
     required IconData defaultIcon,
     required Widget imagePlaceholder,
   }) {
-    return () => Navigator.of(context).push(
-      PageRouteBuilder(
-        opaque: false,
-        barrierDismissible: true,
-        barrierColor: Colors.black45,
-        pageBuilder: (context, _, _) => Dialog(
-          backgroundColor: Colors.transparent,
-          surfaceTintColor: Colors.transparent,
-          child: Hero(
-            transitionOnUserGestures: true,
-            tag: heroTag ?? imageObject,
-            child: PhotoView.customChild(
-              backgroundDecoration: const BoxDecoration(
-                color: Colors.transparent,
-              ),
-              tightMode: true,
-              childSize: constraints.smallest,
-              child: ImageObjectFromUrl(
-                cacheKey: cacheKey,
-                defaultIcon: defaultIcon,
-                imageUrl: downloadUrlOrCache,
-                maxHeight: constraints.maxHeight,
-                fullQuality: true,
-                hasBlurhash: hasBlurhash,
-                imagePlaceholder: imagePlaceholder,
+    return () {
+      AnalyticsService.I.track(PhotoFullscreenOpen(imageObject));
+      Navigator.of(context).push(
+        PageRouteBuilder(
+          opaque: false,
+          barrierDismissible: true,
+          barrierColor: Colors.black45,
+          pageBuilder: (context, _, _) => Dialog(
+            backgroundColor: Colors.transparent,
+            surfaceTintColor: Colors.transparent,
+            child: Hero(
+              transitionOnUserGestures: true,
+              tag: heroTag ?? imageObject,
+              child: PhotoView.customChild(
+                backgroundDecoration: const BoxDecoration(
+                  color: Colors.transparent,
+                ),
+                tightMode: true,
+                childSize: constraints.smallest,
+                child: ImageObjectFromUrl(
+                  cacheKey: cacheKey,
+                  defaultIcon: defaultIcon,
+                  imageUrl: downloadUrlOrCache,
+                  maxHeight: constraints.maxHeight,
+                  fullQuality: true,
+                  hasBlurhash: hasBlurhash,
+                  imagePlaceholder: imagePlaceholder,
+                ),
               ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    };
   }
 
   ImageObjectWidget(

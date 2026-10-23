@@ -8,6 +8,7 @@ class PersonMembershipsFormController extends AdvancedFormController
     implements PersonFormSection {
   final PersonsDAO _persons;
   final User? _currentUser;
+  final AnalyticsService _analyticsService;
   final ValueNotifier<MembershipsLoadState> _loadState;
   late final ValueListenable<MembershipsLoadState> loadState = _loadState;
 
@@ -32,6 +33,7 @@ class PersonMembershipsFormController extends AdvancedFormController
     required bool isCreate,
     required this._persons,
     required this._currentUser,
+    required this._analyticsService,
   }) : _loadedPerson = startingPerson,
        _savedMemberships = isCreate
            ? const PersonMemberships(services: {}, groups: {})
@@ -78,8 +80,14 @@ class PersonMembershipsFormController extends AdvancedFormController
     _loadState.value = MembershipsLoaded(classes: _loadedPerson.classes);
   }
 
-  void selectServices(Set<Service> services) =>
-      memberships.setValue(PersonMemberships.withAllGroupsOf(services));
+  void selectServices(Set<Service> services) {
+    final selection = PersonMemberships.withAllGroupsOf(services);
+    final isSelectionChanged = selection != memberships.fieldValue;
+    memberships.setValue(selection);
+    if (isSelectionChanged) {
+      _analyticsService.track(MembershipServiceSelect(selection));
+    }
+  }
 
   @override
   Person editedVersionOf(Person person) {

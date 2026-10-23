@@ -6,6 +6,7 @@ typedef MetadataListController<T extends ViewableWithID> =
 
 class PersonMetadataCatalog {
   final MetadataDAO _metadata;
+  final AnalyticsService _analyticsService;
 
   MetadataListController<StudyYear> get studyYears =>
       SearchableDaoListController.over(_metadata.studyYears);
@@ -43,43 +44,78 @@ class PersonMetadataCatalog {
   MetadataListController<PersonType> get personTypes =>
       SearchableDaoListController.over(_metadata.personTypes);
 
-  const PersonMetadataCatalog(this._metadata);
+  const PersonMetadataCatalog(this._metadata, this._analyticsService);
 
-  Future<College> createCollege(String name) => _metadata.colleges.createObject(
-    newObject: College(id: const Uuid().v4(), name: name),
+  Future<College> createCollege(String name) => _trackOnceCreated(
+    PickerObjectType.college,
+    _metadata.colleges.createObject(
+      newObject: College(id: const Uuid().v4(), name: name),
+    ),
   );
 
-  Future<School> createSchool(String name) => _metadata.schools.createObject(
-    newObject: School(id: const Uuid().v4(), name: name),
+  Future<School> createSchool(String name) => _trackOnceCreated(
+    PickerObjectType.school,
+    _metadata.schools.createObject(
+      newObject: School(id: const Uuid().v4(), name: name),
+    ),
   );
 
-  Future<Qualification> createQualification(String name) =>
-      _metadata.qualifications.createObject(
-        newObject: Qualification(id: const Uuid().v4(), name: name),
-      );
-
-  Future<Job> createJob(String name) => _metadata.jobs.createObject(
-    newObject: Job(id: const Uuid().v4(), name: name),
+  Future<Qualification> createQualification(String name) => _trackOnceCreated(
+    PickerObjectType.qualification,
+    _metadata.qualifications.createObject(
+      newObject: Qualification(id: const Uuid().v4(), name: name),
+    ),
   );
 
-  Future<Church> createChurch(String name) => _metadata.churches.createObject(
-    newObject: Church(id: const Uuid().v4(), name: name),
+  Future<Job> createJob(String name) => _trackOnceCreated(
+    PickerObjectType.job,
+    _metadata.jobs.createObject(
+      newObject: Job(id: const Uuid().v4(), name: name),
+    ),
   );
 
-  Future<Father> createFather(String name) => _metadata.fathers.createObject(
-    newObject: Father(id: const Uuid().v4(), name: name),
+  Future<Church> createChurch(String name) => _trackOnceCreated(
+    PickerObjectType.church,
+    _metadata.churches.createObject(
+      newObject: Church(id: const Uuid().v4(), name: name),
+    ),
   );
 
-  Future<Hobby> createHobby(String name) => _metadata.hobbies.createObject(
-    newObject: Hobby(id: const Uuid().v4(), name: name),
+  Future<Father> createFather(String name) => _trackOnceCreated(
+    PickerObjectType.father,
+    _metadata.fathers.createObject(
+      newObject: Father(id: const Uuid().v4(), name: name),
+    ),
   );
 
-  Future<Tag> createTag(String name) => _metadata.tags.createObject(
-    newObject: Tag(id: const Uuid().v4(), name: name),
+  Future<Hobby> createHobby(String name) => _trackOnceCreated(
+    PickerObjectType.hobby,
+    _metadata.hobbies.createObject(
+      newObject: Hobby(id: const Uuid().v4(), name: name),
+    ),
   );
 
-  Future<PersonType> createPersonType(String name) =>
-      _metadata.personTypes.createObject(
-        newObject: PersonType(id: const Uuid().v4(), name: name),
-      );
+  Future<Tag> createTag(String name) => _trackOnceCreated(
+    PickerObjectType.tag,
+    _metadata.tags.createObject(
+      newObject: Tag(id: const Uuid().v4(), name: name),
+    ),
+  );
+
+  Future<PersonType> createPersonType(String name) => _trackOnceCreated(
+    PickerObjectType.personType,
+    _metadata.personTypes.createObject(
+      newObject: PersonType(id: const Uuid().v4(), name: name),
+    ),
+  );
+
+  Future<T> _trackOnceCreated<T>(
+    PickerObjectType pickerObjectType,
+    Future<T> creation,
+  ) async {
+    final created = await creation;
+    _analyticsService.track(PickerCustomItemCreate(pickerObjectType));
+
+    return created;
+  }
 }

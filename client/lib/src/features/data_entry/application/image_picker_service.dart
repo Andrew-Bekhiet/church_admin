@@ -17,10 +17,12 @@ class ImagePickerService {
 
   final ImagePicker _imagePicker;
   final ImageCropper _imageCropper;
+  final AnalyticsService _analyticsService;
 
   ImagePickerService({
     required this._imagePicker,
     required this._imageCropper,
+    required this._analyticsService,
   });
 
   /// Shows a Modal Bottom Sheet to select [ImageSource]
@@ -122,7 +124,10 @@ class ImagePickerService {
                         ),
                       );
 
-                      if (rslt == true) navigator.pop(deleteImage);
+                      if (rslt != true) return;
+
+                      _analyticsService.track(const PhotoDeleteChoose());
+                      navigator.pop(deleteImage);
                     },
                     color: primary,
                     icon: const Icon(Symbols.delete),
@@ -151,6 +156,10 @@ class ImagePickerService {
 
       if (cameraPermission != PermissionStatus.granted &&
           cameraPermission != PermissionStatus.limited) {
+        _analyticsService.track(
+          PhotoPickAttempt(source, PhotoPickOutcome.cameraPermissionDenied),
+        );
+
         return null;
       }
     }
@@ -160,7 +169,13 @@ class ImagePickerService {
       requestFullMetadata: false,
     );
 
-    if (image == null) return null;
+    if (image == null) {
+      _analyticsService.track(
+        PhotoPickAttempt(source, PhotoPickOutcome.pickCancelled),
+      );
+
+      return null;
+    }
 
     final croppedFile = await _imageCropper.cropImage(
       sourcePath: image.path,
@@ -184,7 +199,15 @@ class ImagePickerService {
       ],
     );
 
-    if (croppedFile == null) return null;
+    if (croppedFile == null) {
+      _analyticsService.track(
+        PhotoPickAttempt(source, PhotoPickOutcome.cropCancelled),
+      );
+
+      return null;
+    }
+
+    _analyticsService.track(PhotoPickAttempt(source, PhotoPickOutcome.picked));
 
     return XFile(croppedFile.path);
   }

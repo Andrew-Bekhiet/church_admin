@@ -9,6 +9,7 @@ import '../../../../fakes/fake_persons_dao.dart';
 import '../../../../fakes/fake_photo_uploader.dart';
 import '../../../../fakes/fake_streets_dao.dart';
 import '../../../../fakes/in_memory_families_dao.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 
 class PersonFormControllerFixture {
   static const Area shubra = Area(id: 'shubra', name: 'شبرا');
@@ -16,10 +17,16 @@ class PersonFormControllerFixture {
   static const Street nileStreet = Street(id: 'nile', name: 'شارع النيل');
   static const Service primary = Service(id: 'primary', name: 'ابتدائي');
   static const Service kindergarten = Service(id: 'kg', name: 'حضانة');
+  static const Service primaryServedByMe = Service(
+    id: 'primary',
+    name: 'ابتدائي',
+    userCanEdit: true,
+  );
 
   final FakePersonsDAO persons = FakePersonsDAO();
   final FakePhotoUploader photos = FakePhotoUploader();
   final InMemoryFamiliesDAO families = InMemoryFamiliesDAO();
+  final RecordingAnalyticsProvider analytics = RecordingAnalyticsProvider();
 
   User? currentUser = const User(
     uid: 'me',
@@ -36,6 +43,7 @@ class PersonFormControllerFixture {
       families: families,
       photoUploader: photos,
       currentUser: currentUser,
+      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
       addressServices: AddressFormServices(
         autofill: AddressAutofill(
           areas: areas,
@@ -49,6 +57,7 @@ class PersonFormControllerFixture {
           districts: districts,
         ),
         logging: FakeLoggingService(),
+        analytics: AnalyticsService([analytics], FakeLoggingService()),
       ),
     );
     addTearDown(() {
@@ -68,6 +77,22 @@ class PersonFormControllerFixture {
     final controller = controllerOfUpdate(person);
     persons.respondWithSavedMemberships(saved);
     await pumpEventQueue();
+
+    return controller;
+  }
+
+  Future<PersonFormController> controllerOfServantMovingOutOfSight(
+    Person stored,
+  ) async {
+    currentUser = const User(
+      uid: 'me',
+      name: 'خادم',
+      adminOn: [AdminOnData(permissionId: 'grant', service: primaryServedByMe)],
+    );
+    final controller = await controllerOfLoadedUpdate(
+      stored.copyWith(services: const [primaryServedByMe]),
+    );
+    controller.memberships.selectServices({kindergarten});
 
     return controller;
   }

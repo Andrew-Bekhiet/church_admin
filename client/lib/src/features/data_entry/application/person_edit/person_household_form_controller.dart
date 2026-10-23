@@ -6,6 +6,7 @@ class PersonHouseholdFormController extends AdvancedFormController
   final Person _startingPerson;
   final bool isCreate;
   final FamiliesDAO _families;
+  final AnalyticsService _analyticsService;
 
   Address? _addressCarriedByPerson;
   Family? _familyBeforeLatestChange;
@@ -50,6 +51,7 @@ class PersonHouseholdFormController extends AdvancedFormController
     required this._families,
     required AddressFormServices addressServices,
   }) : _startingPerson = startingPerson,
+       _analyticsService = addressServices.analytics,
        _addressCarriedByPerson = startingPerson.address,
        _familyBeforeLatestChange = startingPerson.family,
        super(debugName: 'household') {
@@ -91,8 +93,13 @@ class PersonHouseholdFormController extends AdvancedFormController
     };
     _familyBeforeLatestChange = chosen;
 
+    final shownAddressBeforeChange = address.toAddress();
     address.loadAsNewBaseline(chosen?.address ?? _addressCarriedByPerson);
     _updateAddressEditability();
+    if (chosen case Family(address: final familyAddress?)
+        when familyAddress != shownAddressBeforeChange) {
+      _analyticsService.track(FamilyAddressFill(chosen));
+    }
   }
 
   void _updateAddressEditability() =>

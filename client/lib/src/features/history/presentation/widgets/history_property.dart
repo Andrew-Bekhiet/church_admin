@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -66,13 +68,20 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   final bool showTime;
   final DateTime? value;
   final ViewableObjectListController<T> Function() getHistoryListController;
+  final TrackedHistory? trackedAs;
 
-  void Function() _onHistoryTap(BuildContext context) =>
-      () => showHistoryDialog<T>(
+  void Function() _onHistoryTap(BuildContext context) => () {
+    if (trackedAs case final history?) {
+      AnalyticsService.I.track(HistoryDialogOpen(history));
+    }
+    unawaited(
+      showHistoryDialog<T>(
         context,
         getHistoryListController,
         showTime: showTime,
-      );
+      ),
+    );
+  };
 
   DateFormat get dateFormat => _dateFormat(showTime: showTime);
   const HistoryProperty({
@@ -81,6 +90,7 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
     this.showTime = true,
     this.onRecordNow,
     this.value,
+    this.trackedAs,
     super.key,
   });
 
@@ -115,7 +125,12 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                onPressed: onRecordNow,
+                onPressed: () {
+                  if (trackedAs case final history?) {
+                    AnalyticsService.I.track(HistoryRecordNowTap(history));
+                  }
+                  onRecordNow?.call();
+                },
                 icon: const Icon(Symbols.task_alt),
                 label: const Text('تحديث الآن'),
               ),
