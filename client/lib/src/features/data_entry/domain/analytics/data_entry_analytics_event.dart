@@ -7,7 +7,7 @@ sealed class DataEntryAnalyticsEvent extends AnalyticsEvent {
   const DataEntryAnalyticsEvent();
 }
 
-final class ObjectSave extends DataEntryAnalyticsEvent {
+final class ObjectSaveAttempt extends DataEntryAnalyticsEvent {
   final ViewableWithID entity;
   final bool isCreate;
   final ObjectSaveResult result;
@@ -16,7 +16,7 @@ final class ObjectSave extends DataEntryAnalyticsEvent {
   final bool? isDefaultMeetingCreated;
 
   @override
-  String get objectAction => 'object_save';
+  String get objectAction => 'object_save_attempt';
 
   @override
   Json get properties => {
@@ -33,7 +33,7 @@ final class ObjectSave extends DataEntryAnalyticsEvent {
       'is_default_meeting_created': isCreated,
   };
 
-  const ObjectSave({
+  const ObjectSaveAttempt({
     required this.entity,
     required this.isCreate,
     required this.result,

@@ -19,11 +19,7 @@ class FamilyDetailsList extends StatelessWidget {
           family: family.contacts,
           onCall: (n, {required isFamilyNumber}) {
             AnalyticsService.I.track(
-              ContactNumberCall(
-                family,
-                isFamilyNumber: isFamilyNumber,
-                choice: ContactCallChoice.unprompted,
-              ),
+              ContactDialerOpen(family, isFamilyNumber: isFamilyNumber),
             );
             unawaited(
               LauncherService.I.launchCall(

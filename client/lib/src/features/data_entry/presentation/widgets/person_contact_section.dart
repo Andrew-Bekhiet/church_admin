@@ -106,13 +106,13 @@ class PersonContactSection extends StatelessWidget {
     );
 
     AnalyticsService.I.track(
-      ContactNumberCall(
+      ContactCallPromptAnswer(
         person,
         isFamilyNumber: isFamilyNumber,
         choice: switch (doMakeCallResult) {
-          true => ContactCallChoice.call,
-          false => ContactCallChoice.dialerOnly,
-          _ => ContactCallChoice.cancel,
+          true => ContactCallPromptChoice.call,
+          false => ContactCallPromptChoice.dialerOnly,
+          _ => ContactCallPromptChoice.cancel,
         },
       ),
     );

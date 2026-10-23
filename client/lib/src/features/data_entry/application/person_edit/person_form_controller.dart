@@ -338,7 +338,7 @@ class PersonFormController extends AdvancedFormController {
     if (result == null) return;
 
     _analyticsService.track(
-      ObjectSave(
+      ObjectSaveAttempt(
         entity: _startingPerson,
         isCreate: isCreate,
         result: result,

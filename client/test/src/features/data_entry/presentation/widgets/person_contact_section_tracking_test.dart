@@ -56,4 +56,18 @@ void main() {
       [DeviceContactCreateOutcome.failed.name],
     );
   });
+
+  testWidgets('dismissing the call prompt is tracked as answering it with '
+      'cancel', (tester) async {
+    await fixture.pumpSection(tester);
+
+    await tester.tap(find.byTooltip('اجراء مكالمة'));
+    await tester.pumpAndSettle();
+    await tester.tapAt(Offset.zero);
+    await tester.pumpAndSettle();
+
+    expect(fixture.analytics.trackedEvents.map((event) => event.name), [
+      'contact:call_prompt_answer',
+    ]);
+  });
 }

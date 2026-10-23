@@ -52,16 +52,18 @@ class PersonContactSectionFixture {
   static TestDefaultBinaryMessenger get _messenger =>
       TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
 
-  Future<void> addOwnNumberToDeviceContacts(WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialUiTestApp.withThemeAndLocale(
-        child: Scaffold(
-          body: SingleChildScrollView(
-            child: PersonContactSection(person: person),
-          ),
+  Future<void> pumpSection(WidgetTester tester) => tester.pumpWidget(
+    MaterialUiTestApp.withThemeAndLocale(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: PersonContactSection(person: person),
         ),
       ),
-    );
+    ),
+  );
+
+  Future<void> addOwnNumberToDeviceContacts(WidgetTester tester) async {
+    await pumpSection(tester);
     await runZonedGuarded(
       () => tester.tap(find.byTooltip('اضافة الى جهات الاتصال')),
       (error, _) => uncaughtErrors.add(error),
