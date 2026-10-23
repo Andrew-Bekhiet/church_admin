@@ -218,5 +218,6 @@ defmodule ChurchAdmin.Places.Store do
     first :address_full_address_text, :address, :full_address_text, public?: true
     first :admin_family_name, :admin_family, :name, public?: true
     first :last_edit, :latest_edit, :time, public?: true
+    first :last_edit_user_name, [:latest_edit, :user], :name, public?: true
   end
 end

@@ -205,6 +205,7 @@ defmodule ChurchAdmin.Organization.Group do
     first :service_name, :service, :name, public?: true
     first :default_meeting_name, :default_meeting, :name, public?: true
     first :last_edit, :latest_edit, :time, public?: true
+    first :last_edit_user_name, [:latest_edit, :user], :name, public?: true
   end
 
   identities do

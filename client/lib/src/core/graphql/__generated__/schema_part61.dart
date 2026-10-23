@@ -1,98 +1,294 @@
 // Part 61 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_LatestCallSortInput<TRes> {
-  factory CopyWith_Input_LatestCallSortInput(
-    Input_LatestCallSortInput instance,
-    TRes Function(Input_LatestCallSortInput) then,
-  ) = _CopyWithImpl_Input_LatestCallSortInput;
+abstract class CopyWith_Input_LatestKodasFilterInput<TRes> {
+  factory CopyWith_Input_LatestKodasFilterInput(
+    Input_LatestKodasFilterInput instance,
+    TRes Function(Input_LatestKodasFilterInput) then,
+  ) = _CopyWithImpl_Input_LatestKodasFilterInput;
 
-  factory CopyWith_Input_LatestCallSortInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_LatestCallSortInput;
+  factory CopyWith_Input_LatestKodasFilterInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_LatestKodasFilterInput;
 
-  TRes call({Enum_SortOrder? order, Enum_LatestCallSortField? field});
+  TRes call({
+    List<Input_LatestKodasFilterInput>? and,
+    List<Input_LatestKodasFilterInput>? or,
+    List<Input_LatestKodasFilterInput>? not,
+    Input_LatestKodasFilterPersonId? personId,
+    Input_LatestKodasFilterTime? time,
+    Input_LatestKodasFilterRecordedBy? recordedBy,
+    Input_PersonFilterInput? person,
+    Input_UserFilterInput? user,
+  });
+  TRes and(
+    Iterable<Input_LatestKodasFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_LatestKodasFilterInput<Input_LatestKodasFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  TRes or(
+    Iterable<Input_LatestKodasFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_LatestKodasFilterInput<Input_LatestKodasFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  TRes not(
+    Iterable<Input_LatestKodasFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_LatestKodasFilterInput<Input_LatestKodasFilterInput>
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_LatestKodasFilterPersonId<TRes> get personId;
+  CopyWith_Input_LatestKodasFilterTime<TRes> get time;
+  CopyWith_Input_LatestKodasFilterRecordedBy<TRes> get recordedBy;
+  CopyWith_Input_PersonFilterInput<TRes> get person;
+  CopyWith_Input_UserFilterInput<TRes> get user;
 }
 
-class _CopyWithImpl_Input_LatestCallSortInput<TRes>
-    implements CopyWith_Input_LatestCallSortInput<TRes> {
-  _CopyWithImpl_Input_LatestCallSortInput(this._instance, this._then);
+class _CopyWithImpl_Input_LatestKodasFilterInput<TRes>
+    implements CopyWith_Input_LatestKodasFilterInput<TRes> {
+  _CopyWithImpl_Input_LatestKodasFilterInput(this._instance, this._then);
 
-  final Input_LatestCallSortInput _instance;
+  final Input_LatestKodasFilterInput _instance;
 
-  final TRes Function(Input_LatestCallSortInput) _then;
+  final TRes Function(Input_LatestKodasFilterInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? order = _undefined, Object? field = _undefined}) => _then(
-    Input_LatestCallSortInput._({
+  TRes call({
+    Object? and = _undefined,
+    Object? or = _undefined,
+    Object? not = _undefined,
+    Object? personId = _undefined,
+    Object? time = _undefined,
+    Object? recordedBy = _undefined,
+    Object? person = _undefined,
+    Object? user = _undefined,
+  }) => _then(
+    Input_LatestKodasFilterInput._({
       ..._instance._$data,
-      if (order != _undefined) 'order': (order as Enum_SortOrder?),
-      if (field != _undefined && field != null)
-        'field': (field as Enum_LatestCallSortField),
+      if (and != _undefined)
+        'and': (and as List<Input_LatestKodasFilterInput>?),
+      if (or != _undefined) 'or': (or as List<Input_LatestKodasFilterInput>?),
+      if (not != _undefined)
+        'not': (not as List<Input_LatestKodasFilterInput>?),
+      if (personId != _undefined)
+        'personId': (personId as Input_LatestKodasFilterPersonId?),
+      if (time != _undefined) 'time': (time as Input_LatestKodasFilterTime?),
+      if (recordedBy != _undefined)
+        'recordedBy': (recordedBy as Input_LatestKodasFilterRecordedBy?),
+      if (person != _undefined) 'person': (person as Input_PersonFilterInput?),
+      if (user != _undefined) 'user': (user as Input_UserFilterInput?),
     }),
   );
+
+  TRes and(
+    Iterable<Input_LatestKodasFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_LatestKodasFilterInput<Input_LatestKodasFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    and: _fn(
+      _instance.and?.map(
+        (e) => CopyWith_Input_LatestKodasFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  TRes or(
+    Iterable<Input_LatestKodasFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_LatestKodasFilterInput<Input_LatestKodasFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    or: _fn(
+      _instance.or?.map(
+        (e) => CopyWith_Input_LatestKodasFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  TRes not(
+    Iterable<Input_LatestKodasFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_LatestKodasFilterInput<Input_LatestKodasFilterInput>
+      >?,
+    )
+    _fn,
+  ) => call(
+    not: _fn(
+      _instance.not?.map(
+        (e) => CopyWith_Input_LatestKodasFilterInput(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_LatestKodasFilterPersonId<TRes> get personId {
+    final local$personId = _instance.personId;
+    return local$personId == null
+        ? CopyWith_Input_LatestKodasFilterPersonId.stub(_then(_instance))
+        : CopyWith_Input_LatestKodasFilterPersonId(
+            local$personId,
+            (e) => call(personId: e),
+          );
+  }
+
+  CopyWith_Input_LatestKodasFilterTime<TRes> get time {
+    final local$time = _instance.time;
+    return local$time == null
+        ? CopyWith_Input_LatestKodasFilterTime.stub(_then(_instance))
+        : CopyWith_Input_LatestKodasFilterTime(
+            local$time,
+            (e) => call(time: e),
+          );
+  }
+
+  CopyWith_Input_LatestKodasFilterRecordedBy<TRes> get recordedBy {
+    final local$recordedBy = _instance.recordedBy;
+    return local$recordedBy == null
+        ? CopyWith_Input_LatestKodasFilterRecordedBy.stub(_then(_instance))
+        : CopyWith_Input_LatestKodasFilterRecordedBy(
+            local$recordedBy,
+            (e) => call(recordedBy: e),
+          );
+  }
+
+  CopyWith_Input_PersonFilterInput<TRes> get person {
+    final local$person = _instance.person;
+    return local$person == null
+        ? CopyWith_Input_PersonFilterInput.stub(_then(_instance))
+        : CopyWith_Input_PersonFilterInput(
+            local$person,
+            (e) => call(person: e),
+          );
+  }
+
+  CopyWith_Input_UserFilterInput<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_UserFilterInput.stub(_then(_instance))
+        : CopyWith_Input_UserFilterInput(local$user, (e) => call(user: e));
+  }
 }
 
-class _CopyWithStubImpl_Input_LatestCallSortInput<TRes>
-    implements CopyWith_Input_LatestCallSortInput<TRes> {
-  _CopyWithStubImpl_Input_LatestCallSortInput(this._res);
+class _CopyWithStubImpl_Input_LatestKodasFilterInput<TRes>
+    implements CopyWith_Input_LatestKodasFilterInput<TRes> {
+  _CopyWithStubImpl_Input_LatestKodasFilterInput(this._res);
 
   TRes _res;
 
-  call({Enum_SortOrder? order, Enum_LatestCallSortField? field}) => _res;
+  call({
+    List<Input_LatestKodasFilterInput>? and,
+    List<Input_LatestKodasFilterInput>? or,
+    List<Input_LatestKodasFilterInput>? not,
+    Input_LatestKodasFilterPersonId? personId,
+    Input_LatestKodasFilterTime? time,
+    Input_LatestKodasFilterRecordedBy? recordedBy,
+    Input_PersonFilterInput? person,
+    Input_UserFilterInput? user,
+  }) => _res;
+
+  and(_fn) => _res;
+
+  or(_fn) => _res;
+
+  not(_fn) => _res;
+
+  CopyWith_Input_LatestKodasFilterPersonId<TRes> get personId =>
+      CopyWith_Input_LatestKodasFilterPersonId.stub(_res);
+
+  CopyWith_Input_LatestKodasFilterTime<TRes> get time =>
+      CopyWith_Input_LatestKodasFilterTime.stub(_res);
+
+  CopyWith_Input_LatestKodasFilterRecordedBy<TRes> get recordedBy =>
+      CopyWith_Input_LatestKodasFilterRecordedBy.stub(_res);
+
+  CopyWith_Input_PersonFilterInput<TRes> get person =>
+      CopyWith_Input_PersonFilterInput.stub(_res);
+
+  CopyWith_Input_UserFilterInput<TRes> get user =>
+      CopyWith_Input_UserFilterInput.stub(_res);
 }
 
-class Input_RecordKodasInput {
-  factory Input_RecordKodasInput({
-    required String personId,
-    required DateTime day,
-  }) => Input_RecordKodasInput._({r'personId': personId, r'day': day});
+class Input_LatestKodasSortInput {
+  factory Input_LatestKodasSortInput({
+    Enum_SortOrder? order,
+    required Enum_LatestKodasSortField field,
+  }) => Input_LatestKodasSortInput._({
+    if (order != null) r'order': order,
+    r'field': field,
+  });
 
-  Input_RecordKodasInput._(this._$data);
+  Input_LatestKodasSortInput._(this._$data);
 
-  factory Input_RecordKodasInput.fromJson(Map<String, dynamic> data) {
+  factory Input_LatestKodasSortInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    final l$personId = data['personId'];
-    result$data['personId'] = (l$personId as String);
-    final l$day = data['day'];
-    result$data['day'] = dateFromString(l$day);
-    return Input_RecordKodasInput._(result$data);
+    if (data.containsKey('order')) {
+      final l$order = data['order'];
+      result$data['order'] = l$order == null
+          ? null
+          : fromJson_Enum_SortOrder((l$order as String));
+    }
+    final l$field = data['field'];
+    result$data['field'] = fromJson_Enum_LatestKodasSortField(
+      (l$field as String),
+    );
+    return Input_LatestKodasSortInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  String get personId => (_$data['personId'] as String);
+  Enum_SortOrder? get order => (_$data['order'] as Enum_SortOrder?);
 
-  DateTime get day => (_$data['day'] as DateTime);
+  Enum_LatestKodasSortField get field =>
+      (_$data['field'] as Enum_LatestKodasSortField);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    final l$personId = personId;
-    result$data['personId'] = l$personId;
-    final l$day = day;
-    result$data['day'] = dateToString(l$day);
+    if (_$data.containsKey('order')) {
+      final l$order = order;
+      result$data['order'] = l$order == null
+          ? null
+          : toJson_Enum_SortOrder(l$order);
+    }
+    final l$field = field;
+    result$data['field'] = toJson_Enum_LatestKodasSortField(l$field);
     return result$data;
   }
 
-  CopyWith_Input_RecordKodasInput<Input_RecordKodasInput> get copyWith =>
-      CopyWith_Input_RecordKodasInput(this, (i) => i);
+  CopyWith_Input_LatestKodasSortInput<Input_LatestKodasSortInput>
+  get copyWith => CopyWith_Input_LatestKodasSortInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_RecordKodasInput || runtimeType != other.runtimeType) {
+    if (other is! Input_LatestKodasSortInput ||
+        runtimeType != other.runtimeType) {
       return false;
     }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (l$personId != lOther$personId) {
+    final l$order = order;
+    final lOther$order = other.order;
+    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
       return false;
     }
-    final l$day = day;
-    final lOther$day = other.day;
-    if (l$day != lOther$day) {
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$field = field;
+    final lOther$field = other.field;
+    if (l$field != lOther$field) {
       return false;
     }
     return true;
@@ -100,66 +296,69 @@ class Input_RecordKodasInput {
 
   @override
   int get hashCode {
-    final l$personId = personId;
-    final l$day = day;
-    return Object.hashAll([l$personId, l$day]);
+    final l$order = order;
+    final l$field = field;
+    return Object.hashAll([
+      _$data.containsKey('order') ? l$order : const {},
+      l$field,
+    ]);
   }
 }
 
-abstract class CopyWith_Input_RecordKodasInput<TRes> {
-  factory CopyWith_Input_RecordKodasInput(
-    Input_RecordKodasInput instance,
-    TRes Function(Input_RecordKodasInput) then,
-  ) = _CopyWithImpl_Input_RecordKodasInput;
+abstract class CopyWith_Input_LatestKodasSortInput<TRes> {
+  factory CopyWith_Input_LatestKodasSortInput(
+    Input_LatestKodasSortInput instance,
+    TRes Function(Input_LatestKodasSortInput) then,
+  ) = _CopyWithImpl_Input_LatestKodasSortInput;
 
-  factory CopyWith_Input_RecordKodasInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_RecordKodasInput;
+  factory CopyWith_Input_LatestKodasSortInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_LatestKodasSortInput;
 
-  TRes call({String? personId, DateTime? day});
+  TRes call({Enum_SortOrder? order, Enum_LatestKodasSortField? field});
 }
 
-class _CopyWithImpl_Input_RecordKodasInput<TRes>
-    implements CopyWith_Input_RecordKodasInput<TRes> {
-  _CopyWithImpl_Input_RecordKodasInput(this._instance, this._then);
+class _CopyWithImpl_Input_LatestKodasSortInput<TRes>
+    implements CopyWith_Input_LatestKodasSortInput<TRes> {
+  _CopyWithImpl_Input_LatestKodasSortInput(this._instance, this._then);
 
-  final Input_RecordKodasInput _instance;
+  final Input_LatestKodasSortInput _instance;
 
-  final TRes Function(Input_RecordKodasInput) _then;
+  final TRes Function(Input_LatestKodasSortInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? personId = _undefined, Object? day = _undefined}) => _then(
-    Input_RecordKodasInput._({
+  TRes call({Object? order = _undefined, Object? field = _undefined}) => _then(
+    Input_LatestKodasSortInput._({
       ..._instance._$data,
-      if (personId != _undefined && personId != null)
-        'personId': (personId as String),
-      if (day != _undefined && day != null) 'day': (day as DateTime),
+      if (order != _undefined) 'order': (order as Enum_SortOrder?),
+      if (field != _undefined && field != null)
+        'field': (field as Enum_LatestKodasSortField),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_RecordKodasInput<TRes>
-    implements CopyWith_Input_RecordKodasInput<TRes> {
-  _CopyWithStubImpl_Input_RecordKodasInput(this._res);
+class _CopyWithStubImpl_Input_LatestKodasSortInput<TRes>
+    implements CopyWith_Input_LatestKodasSortInput<TRes> {
+  _CopyWithStubImpl_Input_LatestKodasSortInput(this._res);
 
   TRes _res;
 
-  call({String? personId, DateTime? day}) => _res;
+  call({Enum_SortOrder? order, Enum_LatestKodasSortField? field}) => _res;
 }
 
-class Input_KodasFilterTime {
-  factory Input_KodasFilterTime({
+class Input_LatestFatherVisitFilterVisitId {
+  factory Input_LatestFatherVisitFilterVisitId({
     bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime?>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
-  }) => Input_KodasFilterTime._({
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_LatestFatherVisitFilterVisitId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -172,9 +371,11 @@ class Input_KodasFilterTime {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_KodasFilterTime._(this._$data);
+  Input_LatestFatherVisitFilterVisitId._(this._$data);
 
-  factory Input_KodasFilterTime.fromJson(Map<String, dynamic> data) {
+  factory Input_LatestFatherVisitFilterVisitId.fromJson(
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -182,55 +383,812 @@ class Input_KodasFilterTime {
     }
     if (data.containsKey('eq')) {
       final l$eq = data['eq'];
-      result$data['eq'] = l$eq == null ? null : dateFromString(l$eq);
+      result$data['eq'] = (l$eq as String?);
     }
     if (data.containsKey('notEq')) {
       final l$notEq = data['notEq'];
-      result$data['notEq'] = l$notEq == null ? null : dateFromString(l$notEq);
+      result$data['notEq'] = (l$notEq as String?);
     }
     if (data.containsKey('in')) {
       final l$$in = data['in'];
       result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => e == null ? null : dateFromString(e))
+          ?.map((e) => (e as String?))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    return Input_LatestFatherVisitFilterVisitId._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String?>? get $in => (_$data['in'] as List<String?>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_LatestFatherVisitFilterVisitId<
+    Input_LatestFatherVisitFilterVisitId
+  >
+  get copyWith => CopyWith_Input_LatestFatherVisitFilterVisitId(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_LatestFatherVisitFilterVisitId ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_LatestFatherVisitFilterVisitId<TRes> {
+  factory CopyWith_Input_LatestFatherVisitFilterVisitId(
+    Input_LatestFatherVisitFilterVisitId instance,
+    TRes Function(Input_LatestFatherVisitFilterVisitId) then,
+  ) = _CopyWithImpl_Input_LatestFatherVisitFilterVisitId;
+
+  factory CopyWith_Input_LatestFatherVisitFilterVisitId.stub(TRes res) =
+      _CopyWithStubImpl_Input_LatestFatherVisitFilterVisitId;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_LatestFatherVisitFilterVisitId<TRes>
+    implements CopyWith_Input_LatestFatherVisitFilterVisitId<TRes> {
+  _CopyWithImpl_Input_LatestFatherVisitFilterVisitId(
+    this._instance,
+    this._then,
+  );
+
+  final Input_LatestFatherVisitFilterVisitId _instance;
+
+  final TRes Function(Input_LatestFatherVisitFilterVisitId) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_LatestFatherVisitFilterVisitId._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_LatestFatherVisitFilterVisitId<TRes>
+    implements CopyWith_Input_LatestFatherVisitFilterVisitId<TRes> {
+  _CopyWithStubImpl_Input_LatestFatherVisitFilterVisitId(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_LatestFatherVisitFilterRecordedBy {
+  factory Input_LatestFatherVisitFilterRecordedBy({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_LatestFatherVisitFilterRecordedBy._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_LatestFatherVisitFilterRecordedBy._(this._$data);
+
+  factory Input_LatestFatherVisitFilterRecordedBy.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    return Input_LatestFatherVisitFilterRecordedBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String?>? get $in => (_$data['in'] as List<String?>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_LatestFatherVisitFilterRecordedBy<
+    Input_LatestFatherVisitFilterRecordedBy
+  >
+  get copyWith =>
+      CopyWith_Input_LatestFatherVisitFilterRecordedBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_LatestFatherVisitFilterRecordedBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_LatestFatherVisitFilterRecordedBy<TRes> {
+  factory CopyWith_Input_LatestFatherVisitFilterRecordedBy(
+    Input_LatestFatherVisitFilterRecordedBy instance,
+    TRes Function(Input_LatestFatherVisitFilterRecordedBy) then,
+  ) = _CopyWithImpl_Input_LatestFatherVisitFilterRecordedBy;
+
+  factory CopyWith_Input_LatestFatherVisitFilterRecordedBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_LatestFatherVisitFilterRecordedBy;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_LatestFatherVisitFilterRecordedBy<TRes>
+    implements CopyWith_Input_LatestFatherVisitFilterRecordedBy<TRes> {
+  _CopyWithImpl_Input_LatestFatherVisitFilterRecordedBy(
+    this._instance,
+    this._then,
+  );
+
+  final Input_LatestFatherVisitFilterRecordedBy _instance;
+
+  final TRes Function(Input_LatestFatherVisitFilterRecordedBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_LatestFatherVisitFilterRecordedBy._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_LatestFatherVisitFilterRecordedBy<TRes>
+    implements CopyWith_Input_LatestFatherVisitFilterRecordedBy<TRes> {
+  _CopyWithStubImpl_Input_LatestFatherVisitFilterRecordedBy(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_LatestFatherVisitFilterTime {
+  factory Input_LatestFatherVisitFilterTime({
+    bool? isNil,
+    DateTime? eq,
+    DateTime? notEq,
+    List<DateTime?>? $in,
+    DateTime? lessThan,
+    DateTime? greaterThan,
+    DateTime? lessThanOrEqual,
+    DateTime? greaterThanOrEqual,
+    DateTime? isDistinctFrom,
+    DateTime? isNotDistinctFrom,
+  }) => Input_LatestFatherVisitFilterTime._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_LatestFatherVisitFilterTime._(this._$data);
+
+  factory Input_LatestFatherVisitFilterTime.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = l$eq == null ? null : tstzFromString(l$eq);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = l$notEq == null ? null : tstzFromString(l$notEq);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => e == null ? null : tstzFromString(e))
           .toList();
     }
     if (data.containsKey('lessThan')) {
       final l$lessThan = data['lessThan'];
       result$data['lessThan'] = l$lessThan == null
           ? null
-          : dateFromString(l$lessThan);
+          : tstzFromString(l$lessThan);
     }
     if (data.containsKey('greaterThan')) {
       final l$greaterThan = data['greaterThan'];
       result$data['greaterThan'] = l$greaterThan == null
           ? null
-          : dateFromString(l$greaterThan);
+          : tstzFromString(l$greaterThan);
     }
     if (data.containsKey('lessThanOrEqual')) {
       final l$lessThanOrEqual = data['lessThanOrEqual'];
       result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
           ? null
-          : dateFromString(l$lessThanOrEqual);
+          : tstzFromString(l$lessThanOrEqual);
     }
     if (data.containsKey('greaterThanOrEqual')) {
       final l$greaterThanOrEqual = data['greaterThanOrEqual'];
       result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
           ? null
-          : dateFromString(l$greaterThanOrEqual);
+          : tstzFromString(l$greaterThanOrEqual);
     }
     if (data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = data['isDistinctFrom'];
       result$data['isDistinctFrom'] = l$isDistinctFrom == null
           ? null
-          : dateFromString(l$isDistinctFrom);
+          : tstzFromString(l$isDistinctFrom);
     }
     if (data.containsKey('isNotDistinctFrom')) {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
       result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
           ? null
-          : dateFromString(l$isNotDistinctFrom);
+          : tstzFromString(l$isNotDistinctFrom);
     }
-    return Input_KodasFilterTime._(result$data);
+    return Input_LatestFatherVisitFilterTime._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -264,66 +1222,67 @@ class Input_KodasFilterTime {
     }
     if (_$data.containsKey('eq')) {
       final l$eq = eq;
-      result$data['eq'] = l$eq == null ? null : dateToString(l$eq);
+      result$data['eq'] = l$eq == null ? null : tstzToString(l$eq);
     }
     if (_$data.containsKey('notEq')) {
       final l$notEq = notEq;
-      result$data['notEq'] = l$notEq == null ? null : dateToString(l$notEq);
+      result$data['notEq'] = l$notEq == null ? null : tstzToString(l$notEq);
     }
     if (_$data.containsKey('in')) {
       final l$$in = $in;
       result$data['in'] = l$$in
-          ?.map((e) => e == null ? null : dateToString(e))
+          ?.map((e) => e == null ? null : tstzToString(e))
           .toList();
     }
     if (_$data.containsKey('lessThan')) {
       final l$lessThan = lessThan;
       result$data['lessThan'] = l$lessThan == null
           ? null
-          : dateToString(l$lessThan);
+          : tstzToString(l$lessThan);
     }
     if (_$data.containsKey('greaterThan')) {
       final l$greaterThan = greaterThan;
       result$data['greaterThan'] = l$greaterThan == null
           ? null
-          : dateToString(l$greaterThan);
+          : tstzToString(l$greaterThan);
     }
     if (_$data.containsKey('lessThanOrEqual')) {
       final l$lessThanOrEqual = lessThanOrEqual;
       result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
           ? null
-          : dateToString(l$lessThanOrEqual);
+          : tstzToString(l$lessThanOrEqual);
     }
     if (_$data.containsKey('greaterThanOrEqual')) {
       final l$greaterThanOrEqual = greaterThanOrEqual;
       result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
           ? null
-          : dateToString(l$greaterThanOrEqual);
+          : tstzToString(l$greaterThanOrEqual);
     }
     if (_$data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = isDistinctFrom;
       result$data['isDistinctFrom'] = l$isDistinctFrom == null
           ? null
-          : dateToString(l$isDistinctFrom);
+          : tstzToString(l$isDistinctFrom);
     }
     if (_$data.containsKey('isNotDistinctFrom')) {
       final l$isNotDistinctFrom = isNotDistinctFrom;
       result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
           ? null
-          : dateToString(l$isNotDistinctFrom);
+          : tstzToString(l$isNotDistinctFrom);
     }
     return result$data;
   }
 
-  CopyWith_Input_KodasFilterTime<Input_KodasFilterTime> get copyWith =>
-      CopyWith_Input_KodasFilterTime(this, (i) => i);
+  CopyWith_Input_LatestFatherVisitFilterTime<Input_LatestFatherVisitFilterTime>
+  get copyWith => CopyWith_Input_LatestFatherVisitFilterTime(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_KodasFilterTime || runtimeType != other.runtimeType) {
+    if (other is! Input_LatestFatherVisitFilterTime ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$isNil = isNil;
@@ -459,14 +1418,14 @@ class Input_KodasFilterTime {
   }
 }
 
-abstract class CopyWith_Input_KodasFilterTime<TRes> {
-  factory CopyWith_Input_KodasFilterTime(
-    Input_KodasFilterTime instance,
-    TRes Function(Input_KodasFilterTime) then,
-  ) = _CopyWithImpl_Input_KodasFilterTime;
+abstract class CopyWith_Input_LatestFatherVisitFilterTime<TRes> {
+  factory CopyWith_Input_LatestFatherVisitFilterTime(
+    Input_LatestFatherVisitFilterTime instance,
+    TRes Function(Input_LatestFatherVisitFilterTime) then,
+  ) = _CopyWithImpl_Input_LatestFatherVisitFilterTime;
 
-  factory CopyWith_Input_KodasFilterTime.stub(TRes res) =
-      _CopyWithStubImpl_Input_KodasFilterTime;
+  factory CopyWith_Input_LatestFatherVisitFilterTime.stub(TRes res) =
+      _CopyWithStubImpl_Input_LatestFatherVisitFilterTime;
 
   TRes call({
     bool? isNil,
@@ -482,13 +1441,13 @@ abstract class CopyWith_Input_KodasFilterTime<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_KodasFilterTime<TRes>
-    implements CopyWith_Input_KodasFilterTime<TRes> {
-  _CopyWithImpl_Input_KodasFilterTime(this._instance, this._then);
+class _CopyWithImpl_Input_LatestFatherVisitFilterTime<TRes>
+    implements CopyWith_Input_LatestFatherVisitFilterTime<TRes> {
+  _CopyWithImpl_Input_LatestFatherVisitFilterTime(this._instance, this._then);
 
-  final Input_KodasFilterTime _instance;
+  final Input_LatestFatherVisitFilterTime _instance;
 
-  final TRes Function(Input_KodasFilterTime) _then;
+  final TRes Function(Input_LatestFatherVisitFilterTime) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -504,7 +1463,7 @@ class _CopyWithImpl_Input_KodasFilterTime<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_KodasFilterTime._({
+    Input_LatestFatherVisitFilterTime._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as DateTime?),
@@ -524,9 +1483,9 @@ class _CopyWithImpl_Input_KodasFilterTime<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_KodasFilterTime<TRes>
-    implements CopyWith_Input_KodasFilterTime<TRes> {
-  _CopyWithStubImpl_Input_KodasFilterTime(this._res);
+class _CopyWithStubImpl_Input_LatestFatherVisitFilterTime<TRes>
+    implements CopyWith_Input_LatestFatherVisitFilterTime<TRes> {
+  _CopyWithStubImpl_Input_LatestFatherVisitFilterTime(this._res);
 
   TRes _res;
 
@@ -544,8 +1503,8 @@ class _CopyWithStubImpl_Input_KodasFilterTime<TRes>
   }) => _res;
 }
 
-class Input_KodasFilterRecordedBy {
-  factory Input_KodasFilterRecordedBy({
+class Input_LatestFatherVisitFilterRecordId {
+  factory Input_LatestFatherVisitFilterRecordId({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -556,7 +1515,7 @@ class Input_KodasFilterRecordedBy {
     String? greaterThanOrEqual,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
-  }) => Input_KodasFilterRecordedBy._({
+  }) => Input_LatestFatherVisitFilterRecordId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -569,9 +1528,11 @@ class Input_KodasFilterRecordedBy {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_KodasFilterRecordedBy._(this._$data);
+  Input_LatestFatherVisitFilterRecordId._(this._$data);
 
-  factory Input_KodasFilterRecordedBy.fromJson(Map<String, dynamic> data) {
+  factory Input_LatestFatherVisitFilterRecordId.fromJson(
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -615,7 +1576,7 @@ class Input_KodasFilterRecordedBy {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
       result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_KodasFilterRecordedBy._(result$data);
+    return Input_LatestFatherVisitFilterRecordId._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -685,15 +1646,18 @@ class Input_KodasFilterRecordedBy {
     return result$data;
   }
 
-  CopyWith_Input_KodasFilterRecordedBy<Input_KodasFilterRecordedBy>
-  get copyWith => CopyWith_Input_KodasFilterRecordedBy(this, (i) => i);
+  CopyWith_Input_LatestFatherVisitFilterRecordId<
+    Input_LatestFatherVisitFilterRecordId
+  >
+  get copyWith =>
+      CopyWith_Input_LatestFatherVisitFilterRecordId(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_KodasFilterRecordedBy ||
+    if (other is! Input_LatestFatherVisitFilterRecordId ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -830,14 +1794,14 @@ class Input_KodasFilterRecordedBy {
   }
 }
 
-abstract class CopyWith_Input_KodasFilterRecordedBy<TRes> {
-  factory CopyWith_Input_KodasFilterRecordedBy(
-    Input_KodasFilterRecordedBy instance,
-    TRes Function(Input_KodasFilterRecordedBy) then,
-  ) = _CopyWithImpl_Input_KodasFilterRecordedBy;
+abstract class CopyWith_Input_LatestFatherVisitFilterRecordId<TRes> {
+  factory CopyWith_Input_LatestFatherVisitFilterRecordId(
+    Input_LatestFatherVisitFilterRecordId instance,
+    TRes Function(Input_LatestFatherVisitFilterRecordId) then,
+  ) = _CopyWithImpl_Input_LatestFatherVisitFilterRecordId;
 
-  factory CopyWith_Input_KodasFilterRecordedBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_KodasFilterRecordedBy;
+  factory CopyWith_Input_LatestFatherVisitFilterRecordId.stub(TRes res) =
+      _CopyWithStubImpl_Input_LatestFatherVisitFilterRecordId;
 
   TRes call({
     bool? isNil,
@@ -853,13 +1817,16 @@ abstract class CopyWith_Input_KodasFilterRecordedBy<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_KodasFilterRecordedBy<TRes>
-    implements CopyWith_Input_KodasFilterRecordedBy<TRes> {
-  _CopyWithImpl_Input_KodasFilterRecordedBy(this._instance, this._then);
+class _CopyWithImpl_Input_LatestFatherVisitFilterRecordId<TRes>
+    implements CopyWith_Input_LatestFatherVisitFilterRecordId<TRes> {
+  _CopyWithImpl_Input_LatestFatherVisitFilterRecordId(
+    this._instance,
+    this._then,
+  );
 
-  final Input_KodasFilterRecordedBy _instance;
+  final Input_LatestFatherVisitFilterRecordId _instance;
 
-  final TRes Function(Input_KodasFilterRecordedBy) _then;
+  final TRes Function(Input_LatestFatherVisitFilterRecordId) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -875,7 +1842,7 @@ class _CopyWithImpl_Input_KodasFilterRecordedBy<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_KodasFilterRecordedBy._({
+    Input_LatestFatherVisitFilterRecordId._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as String?),
@@ -895,9 +1862,9 @@ class _CopyWithImpl_Input_KodasFilterRecordedBy<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_KodasFilterRecordedBy<TRes>
-    implements CopyWith_Input_KodasFilterRecordedBy<TRes> {
-  _CopyWithStubImpl_Input_KodasFilterRecordedBy(this._res);
+class _CopyWithStubImpl_Input_LatestFatherVisitFilterRecordId<TRes>
+    implements CopyWith_Input_LatestFatherVisitFilterRecordId<TRes> {
+  _CopyWithStubImpl_Input_LatestFatherVisitFilterRecordId(this._res);
 
   TRes _res;
 
@@ -915,8 +1882,8 @@ class _CopyWithStubImpl_Input_KodasFilterRecordedBy<TRes>
   }) => _res;
 }
 
-class Input_KodasFilterPersonId {
-  factory Input_KodasFilterPersonId({
+class Input_LatestFatherVisitFilterTable {
+  factory Input_LatestFatherVisitFilterTable({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -925,9 +1892,14 @@ class Input_KodasFilterPersonId {
     String? greaterThan,
     String? lessThanOrEqual,
     String? greaterThanOrEqual,
+    String? contains,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
-  }) => Input_KodasFilterPersonId._({
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  }) => Input_LatestFatherVisitFilterTable._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -936,13 +1908,20 @@ class Input_KodasFilterPersonId {
     if (greaterThan != null) r'greaterThan': greaterThan,
     if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
     if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (contains != null) r'contains': contains,
     if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+    if (stringEndsWith != null) r'stringEndsWith': stringEndsWith,
+    if (stringStartsWith != null) r'stringStartsWith': stringStartsWith,
+    if (like != null) r'like': like,
+    if (ilike != null) r'ilike': ilike,
   });
 
-  Input_KodasFilterPersonId._(this._$data);
+  Input_LatestFatherVisitFilterTable._(this._$data);
 
-  factory Input_KodasFilterPersonId.fromJson(Map<String, dynamic> data) {
+  factory Input_LatestFatherVisitFilterTable.fromJson(
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -978,6 +1957,10 @@ class Input_KodasFilterPersonId {
       final l$greaterThanOrEqual = data['greaterThanOrEqual'];
       result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
     }
+    if (data.containsKey('contains')) {
+      final l$contains = data['contains'];
+      result$data['contains'] = (l$contains as String?);
+    }
     if (data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = data['isDistinctFrom'];
       result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
@@ -986,7 +1969,23 @@ class Input_KodasFilterPersonId {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
       result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_KodasFilterPersonId._(result$data);
+    if (data.containsKey('stringEndsWith')) {
+      final l$stringEndsWith = data['stringEndsWith'];
+      result$data['stringEndsWith'] = (l$stringEndsWith as String?);
+    }
+    if (data.containsKey('stringStartsWith')) {
+      final l$stringStartsWith = data['stringStartsWith'];
+      result$data['stringStartsWith'] = (l$stringStartsWith as String?);
+    }
+    if (data.containsKey('like')) {
+      final l$like = data['like'];
+      result$data['like'] = (l$like as String?);
+    }
+    if (data.containsKey('ilike')) {
+      final l$ilike = data['ilike'];
+      result$data['ilike'] = (l$ilike as String?);
+    }
+    return Input_LatestFatherVisitFilterTable._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -1007,9 +2006,19 @@ class Input_KodasFilterPersonId {
 
   String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
 
+  String? get contains => (_$data['contains'] as String?);
+
   String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
 
   String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  String? get stringEndsWith => (_$data['stringEndsWith'] as String?);
+
+  String? get stringStartsWith => (_$data['stringStartsWith'] as String?);
+
+  String? get like => (_$data['like'] as String?);
+
+  String? get ilike => (_$data['ilike'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1045,6 +2054,10 @@ class Input_KodasFilterPersonId {
       final l$greaterThanOrEqual = greaterThanOrEqual;
       result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
     }
+    if (_$data.containsKey('contains')) {
+      final l$contains = contains;
+      result$data['contains'] = l$contains;
+    }
     if (_$data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = isDistinctFrom;
       result$data['isDistinctFrom'] = l$isDistinctFrom;
@@ -1053,18 +2066,36 @@ class Input_KodasFilterPersonId {
       final l$isNotDistinctFrom = isNotDistinctFrom;
       result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
     }
+    if (_$data.containsKey('stringEndsWith')) {
+      final l$stringEndsWith = stringEndsWith;
+      result$data['stringEndsWith'] = l$stringEndsWith;
+    }
+    if (_$data.containsKey('stringStartsWith')) {
+      final l$stringStartsWith = stringStartsWith;
+      result$data['stringStartsWith'] = l$stringStartsWith;
+    }
+    if (_$data.containsKey('like')) {
+      final l$like = like;
+      result$data['like'] = l$like;
+    }
+    if (_$data.containsKey('ilike')) {
+      final l$ilike = ilike;
+      result$data['ilike'] = l$ilike;
+    }
     return result$data;
   }
 
-  CopyWith_Input_KodasFilterPersonId<Input_KodasFilterPersonId> get copyWith =>
-      CopyWith_Input_KodasFilterPersonId(this, (i) => i);
+  CopyWith_Input_LatestFatherVisitFilterTable<
+    Input_LatestFatherVisitFilterTable
+  >
+  get copyWith => CopyWith_Input_LatestFatherVisitFilterTable(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_KodasFilterPersonId ||
+    if (other is! Input_LatestFatherVisitFilterTable ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1147,6 +2178,15 @@ class Input_KodasFilterPersonId {
     if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
       return false;
     }
+    final l$contains = contains;
+    final lOther$contains = other.contains;
+    if (_$data.containsKey('contains') !=
+        other._$data.containsKey('contains')) {
+      return false;
+    }
+    if (l$contains != lOther$contains) {
+      return false;
+    }
     final l$isDistinctFrom = isDistinctFrom;
     final lOther$isDistinctFrom = other.isDistinctFrom;
     if (_$data.containsKey('isDistinctFrom') !=
@@ -1165,6 +2205,40 @@ class Input_KodasFilterPersonId {
     if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
       return false;
     }
+    final l$stringEndsWith = stringEndsWith;
+    final lOther$stringEndsWith = other.stringEndsWith;
+    if (_$data.containsKey('stringEndsWith') !=
+        other._$data.containsKey('stringEndsWith')) {
+      return false;
+    }
+    if (l$stringEndsWith != lOther$stringEndsWith) {
+      return false;
+    }
+    final l$stringStartsWith = stringStartsWith;
+    final lOther$stringStartsWith = other.stringStartsWith;
+    if (_$data.containsKey('stringStartsWith') !=
+        other._$data.containsKey('stringStartsWith')) {
+      return false;
+    }
+    if (l$stringStartsWith != lOther$stringStartsWith) {
+      return false;
+    }
+    final l$like = like;
+    final lOther$like = other.like;
+    if (_$data.containsKey('like') != other._$data.containsKey('like')) {
+      return false;
+    }
+    if (l$like != lOther$like) {
+      return false;
+    }
+    final l$ilike = ilike;
+    final lOther$ilike = other.ilike;
+    if (_$data.containsKey('ilike') != other._$data.containsKey('ilike')) {
+      return false;
+    }
+    if (l$ilike != lOther$ilike) {
+      return false;
+    }
     return true;
   }
 
@@ -1178,8 +2252,13 @@ class Input_KodasFilterPersonId {
     final l$greaterThan = greaterThan;
     final l$lessThanOrEqual = lessThanOrEqual;
     final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$contains = contains;
     final l$isDistinctFrom = isDistinctFrom;
     final l$isNotDistinctFrom = isNotDistinctFrom;
+    final l$stringEndsWith = stringEndsWith;
+    final l$stringStartsWith = stringStartsWith;
+    final l$like = like;
+    final l$ilike = ilike;
     return Object.hashAll([
       _$data.containsKey('isNil') ? l$isNil : const {},
       _$data.containsKey('eq') ? l$eq : const {},
@@ -1195,20 +2274,25 @@ class Input_KodasFilterPersonId {
       _$data.containsKey('greaterThanOrEqual')
           ? l$greaterThanOrEqual
           : const {},
+      _$data.containsKey('contains') ? l$contains : const {},
       _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
       _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+      _$data.containsKey('stringEndsWith') ? l$stringEndsWith : const {},
+      _$data.containsKey('stringStartsWith') ? l$stringStartsWith : const {},
+      _$data.containsKey('like') ? l$like : const {},
+      _$data.containsKey('ilike') ? l$ilike : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Input_KodasFilterPersonId<TRes> {
-  factory CopyWith_Input_KodasFilterPersonId(
-    Input_KodasFilterPersonId instance,
-    TRes Function(Input_KodasFilterPersonId) then,
-  ) = _CopyWithImpl_Input_KodasFilterPersonId;
+abstract class CopyWith_Input_LatestFatherVisitFilterTable<TRes> {
+  factory CopyWith_Input_LatestFatherVisitFilterTable(
+    Input_LatestFatherVisitFilterTable instance,
+    TRes Function(Input_LatestFatherVisitFilterTable) then,
+  ) = _CopyWithImpl_Input_LatestFatherVisitFilterTable;
 
-  factory CopyWith_Input_KodasFilterPersonId.stub(TRes res) =
-      _CopyWithStubImpl_Input_KodasFilterPersonId;
+  factory CopyWith_Input_LatestFatherVisitFilterTable.stub(TRes res) =
+      _CopyWithStubImpl_Input_LatestFatherVisitFilterTable;
 
   TRes call({
     bool? isNil,
@@ -1219,18 +2303,23 @@ abstract class CopyWith_Input_KodasFilterPersonId<TRes> {
     String? greaterThan,
     String? lessThanOrEqual,
     String? greaterThanOrEqual,
+    String? contains,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
   });
 }
 
-class _CopyWithImpl_Input_KodasFilterPersonId<TRes>
-    implements CopyWith_Input_KodasFilterPersonId<TRes> {
-  _CopyWithImpl_Input_KodasFilterPersonId(this._instance, this._then);
+class _CopyWithImpl_Input_LatestFatherVisitFilterTable<TRes>
+    implements CopyWith_Input_LatestFatherVisitFilterTable<TRes> {
+  _CopyWithImpl_Input_LatestFatherVisitFilterTable(this._instance, this._then);
 
-  final Input_KodasFilterPersonId _instance;
+  final Input_LatestFatherVisitFilterTable _instance;
 
-  final TRes Function(Input_KodasFilterPersonId) _then;
+  final TRes Function(Input_LatestFatherVisitFilterTable) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1243,10 +2332,15 @@ class _CopyWithImpl_Input_KodasFilterPersonId<TRes>
     Object? greaterThan = _undefined,
     Object? lessThanOrEqual = _undefined,
     Object? greaterThanOrEqual = _undefined,
+    Object? contains = _undefined,
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
+    Object? stringEndsWith = _undefined,
+    Object? stringStartsWith = _undefined,
+    Object? like = _undefined,
+    Object? ilike = _undefined,
   }) => _then(
-    Input_KodasFilterPersonId._({
+    Input_LatestFatherVisitFilterTable._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as String?),
@@ -1258,17 +2352,24 @@ class _CopyWithImpl_Input_KodasFilterPersonId<TRes>
         'lessThanOrEqual': (lessThanOrEqual as String?),
       if (greaterThanOrEqual != _undefined)
         'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (contains != _undefined) 'contains': (contains as String?),
       if (isDistinctFrom != _undefined)
         'isDistinctFrom': (isDistinctFrom as String?),
       if (isNotDistinctFrom != _undefined)
         'isNotDistinctFrom': (isNotDistinctFrom as String?),
+      if (stringEndsWith != _undefined)
+        'stringEndsWith': (stringEndsWith as String?),
+      if (stringStartsWith != _undefined)
+        'stringStartsWith': (stringStartsWith as String?),
+      if (like != _undefined) 'like': (like as String?),
+      if (ilike != _undefined) 'ilike': (ilike as String?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_KodasFilterPersonId<TRes>
-    implements CopyWith_Input_KodasFilterPersonId<TRes> {
-  _CopyWithStubImpl_Input_KodasFilterPersonId(this._res);
+class _CopyWithStubImpl_Input_LatestFatherVisitFilterTable<TRes>
+    implements CopyWith_Input_LatestFatherVisitFilterTable<TRes> {
+  _CopyWithStubImpl_Input_LatestFatherVisitFilterTable(this._res);
 
   TRes _res;
 
@@ -1281,812 +2382,52 @@ class _CopyWithStubImpl_Input_KodasFilterPersonId<TRes>
     String? greaterThan,
     String? lessThanOrEqual,
     String? greaterThanOrEqual,
+    String? contains,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
   }) => _res;
 }
 
-class Input_KodasFilterDayId {
-  factory Input_KodasFilterDayId({
-    bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
-  }) => Input_KodasFilterDayId._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-  });
-
-  Input_KodasFilterDayId._(this._$data);
-
-  factory Input_KodasFilterDayId.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = l$eq == null ? null : dateFromString(l$eq);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = l$notEq == null ? null : dateFromString(l$notEq);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => dateFromString(e))
-          .toList();
-    }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = l$lessThan == null
-          ? null
-          : dateFromString(l$lessThan);
-    }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = l$greaterThan == null
-          ? null
-          : dateFromString(l$greaterThan);
-    }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
-          ? null
-          : dateFromString(l$lessThanOrEqual);
-    }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
-          ? null
-          : dateFromString(l$greaterThanOrEqual);
-    }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = l$isDistinctFrom == null
-          ? null
-          : dateFromString(l$isDistinctFrom);
-    }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
-          ? null
-          : dateFromString(l$isNotDistinctFrom);
-    }
-    return Input_KodasFilterDayId._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get isNil => (_$data['isNil'] as bool?);
-
-  DateTime? get eq => (_$data['eq'] as DateTime?);
-
-  DateTime? get notEq => (_$data['notEq'] as DateTime?);
-
-  List<DateTime>? get $in => (_$data['in'] as List<DateTime>?);
-
-  DateTime? get lessThan => (_$data['lessThan'] as DateTime?);
-
-  DateTime? get greaterThan => (_$data['greaterThan'] as DateTime?);
-
-  DateTime? get lessThanOrEqual => (_$data['lessThanOrEqual'] as DateTime?);
-
-  DateTime? get greaterThanOrEqual =>
-      (_$data['greaterThanOrEqual'] as DateTime?);
-
-  DateTime? get isDistinctFrom => (_$data['isDistinctFrom'] as DateTime?);
-
-  DateTime? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as DateTime?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
-    }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq == null ? null : dateToString(l$eq);
-    }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq == null ? null : dateToString(l$notEq);
-    }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in?.map((e) => dateToString(e)).toList();
-    }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan == null
-          ? null
-          : dateToString(l$lessThan);
-    }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan == null
-          ? null
-          : dateToString(l$greaterThan);
-    }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
-          ? null
-          : dateToString(l$lessThanOrEqual);
-    }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
-          ? null
-          : dateToString(l$greaterThanOrEqual);
-    }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom == null
-          ? null
-          : dateToString(l$isDistinctFrom);
-    }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
-          ? null
-          : dateToString(l$isNotDistinctFrom);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_KodasFilterDayId<Input_KodasFilterDayId> get copyWith =>
-      CopyWith_Input_KodasFilterDayId(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_KodasFilterDayId || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
-      return false;
-    }
-    if (l$isNil != lOther$isNil) {
-      return false;
-    }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
-      return false;
-    }
-    if (l$eq != lOther$eq) {
-      return false;
-    }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
-      return false;
-    }
-    if (l$notEq != lOther$notEq) {
-      return false;
-    }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$in != lOther$$in) {
-      return false;
-    }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
-      return false;
-    }
-    if (l$lessThan != lOther$lessThan) {
-      return false;
-    }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
-      return false;
-    }
-    if (l$greaterThan != lOther$greaterThan) {
-      return false;
-    }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
-      return false;
-    }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
-      return false;
-    }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
-      return false;
-    }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
-      return false;
-    }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
-      return false;
-    }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
-      return false;
-    }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
-      return false;
-    }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
-                ? null
-                : Object.hashAll(l$$in.map((v) => v))
-          : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
-          : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_KodasFilterDayId<TRes> {
-  factory CopyWith_Input_KodasFilterDayId(
-    Input_KodasFilterDayId instance,
-    TRes Function(Input_KodasFilterDayId) then,
-  ) = _CopyWithImpl_Input_KodasFilterDayId;
-
-  factory CopyWith_Input_KodasFilterDayId.stub(TRes res) =
-      _CopyWithStubImpl_Input_KodasFilterDayId;
-
-  TRes call({
-    bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
-  });
-}
-
-class _CopyWithImpl_Input_KodasFilterDayId<TRes>
-    implements CopyWith_Input_KodasFilterDayId<TRes> {
-  _CopyWithImpl_Input_KodasFilterDayId(this._instance, this._then);
-
-  final Input_KodasFilterDayId _instance;
-
-  final TRes Function(Input_KodasFilterDayId) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
-  }) => _then(
-    Input_KodasFilterDayId._({
-      ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as DateTime?),
-      if (notEq != _undefined) 'notEq': (notEq as DateTime?),
-      if ($in != _undefined) 'in': ($in as List<DateTime>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as DateTime?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as DateTime?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as DateTime?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as DateTime?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as DateTime?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as DateTime?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_KodasFilterDayId<TRes>
-    implements CopyWith_Input_KodasFilterDayId<TRes> {
-  _CopyWithStubImpl_Input_KodasFilterDayId(this._res);
-
-  TRes _res;
-
-  call({
-    bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
-  }) => _res;
-}
-
-class Input_KodasFilterId {
-  factory Input_KodasFilterId({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  }) => Input_KodasFilterId._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-  });
-
-  Input_KodasFilterId._(this._$data);
-
-  factory Input_KodasFilterId.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as String?);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as String?);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as String))
-          .toList();
-    }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as String?);
-    }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as String?);
-    }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
-    }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
-    }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
-    }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
-    }
-    return Input_KodasFilterId._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get isNil => (_$data['isNil'] as bool?);
-
-  String? get eq => (_$data['eq'] as String?);
-
-  String? get notEq => (_$data['notEq'] as String?);
-
-  List<String>? get $in => (_$data['in'] as List<String>?);
-
-  String? get lessThan => (_$data['lessThan'] as String?);
-
-  String? get greaterThan => (_$data['greaterThan'] as String?);
-
-  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
-
-  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
-
-  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
-
-  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
-    }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq;
-    }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq;
-    }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan;
-    }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan;
-    }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
-    }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
-    }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom;
-    }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_KodasFilterId<Input_KodasFilterId> get copyWith =>
-      CopyWith_Input_KodasFilterId(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_KodasFilterId || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
-      return false;
-    }
-    if (l$isNil != lOther$isNil) {
-      return false;
-    }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
-      return false;
-    }
-    if (l$eq != lOther$eq) {
-      return false;
-    }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
-      return false;
-    }
-    if (l$notEq != lOther$notEq) {
-      return false;
-    }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$in != lOther$$in) {
-      return false;
-    }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
-      return false;
-    }
-    if (l$lessThan != lOther$lessThan) {
-      return false;
-    }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
-      return false;
-    }
-    if (l$greaterThan != lOther$greaterThan) {
-      return false;
-    }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
-      return false;
-    }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
-      return false;
-    }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
-      return false;
-    }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
-      return false;
-    }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
-      return false;
-    }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
-      return false;
-    }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
-      return false;
-    }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
-                ? null
-                : Object.hashAll(l$$in.map((v) => v))
-          : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
-          : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_KodasFilterId<TRes> {
-  factory CopyWith_Input_KodasFilterId(
-    Input_KodasFilterId instance,
-    TRes Function(Input_KodasFilterId) then,
-  ) = _CopyWithImpl_Input_KodasFilterId;
-
-  factory CopyWith_Input_KodasFilterId.stub(TRes res) =
-      _CopyWithStubImpl_Input_KodasFilterId;
-
-  TRes call({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  });
-}
-
-class _CopyWithImpl_Input_KodasFilterId<TRes>
-    implements CopyWith_Input_KodasFilterId<TRes> {
-  _CopyWithImpl_Input_KodasFilterId(this._instance, this._then);
-
-  final Input_KodasFilterId _instance;
-
-  final TRes Function(Input_KodasFilterId) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
-  }) => _then(
-    Input_KodasFilterId._({
-      ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as String?),
-      if (notEq != _undefined) 'notEq': (notEq as String?),
-      if ($in != _undefined) 'in': ($in as List<String>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as String?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as String?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as String?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as String?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_KodasFilterId<TRes>
-    implements CopyWith_Input_KodasFilterId<TRes> {
-  _CopyWithStubImpl_Input_KodasFilterId(this._res);
-
-  TRes _res;
-
-  call({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  }) => _res;
-}
-
-class Input_KodasFilterInput {
-  factory Input_KodasFilterInput({
-    List<Input_KodasFilterInput>? and,
-    List<Input_KodasFilterInput>? or,
-    List<Input_KodasFilterInput>? not,
-    Input_KodasFilterId? id,
-    Input_KodasFilterDayId? dayId,
-    Input_KodasFilterPersonId? personId,
-    Input_KodasFilterRecordedBy? recordedBy,
-    Input_KodasFilterTime? time,
-    Input_ActivityDayFilterInput? day,
-    Input_PersonFilterInput? person,
+class Input_LatestFatherVisitFilterInput {
+  factory Input_LatestFatherVisitFilterInput({
+    List<Input_LatestFatherVisitFilterInput>? and,
+    List<Input_LatestFatherVisitFilterInput>? or,
+    List<Input_LatestFatherVisitFilterInput>? not,
+    Input_LatestFatherVisitFilterTable? table,
+    Input_LatestFatherVisitFilterRecordId? recordId,
+    Input_LatestFatherVisitFilterTime? time,
+    Input_LatestFatherVisitFilterRecordedBy? recordedBy,
+    Input_LatestFatherVisitFilterVisitId? visitId,
     Input_UserFilterInput? user,
-  }) => Input_KodasFilterInput._({
+  }) => Input_LatestFatherVisitFilterInput._({
     if (and != null) r'and': and,
     if (or != null) r'or': or,
     if (not != null) r'not': not,
-    if (id != null) r'id': id,
-    if (dayId != null) r'dayId': dayId,
-    if (personId != null) r'personId': personId,
-    if (recordedBy != null) r'recordedBy': recordedBy,
+    if (table != null) r'table': table,
+    if (recordId != null) r'recordId': recordId,
     if (time != null) r'time': time,
-    if (day != null) r'day': day,
-    if (person != null) r'person': person,
+    if (recordedBy != null) r'recordedBy': recordedBy,
+    if (visitId != null) r'visitId': visitId,
     if (user != null) r'user': user,
   });
 
-  Input_KodasFilterInput._(this._$data);
+  Input_LatestFatherVisitFilterInput._(this._$data);
 
-  factory Input_KodasFilterInput.fromJson(Map<String, dynamic> data) {
+  factory Input_LatestFatherVisitFilterInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('and')) {
       final l$and = data['and'];
       result$data['and'] = (l$and as List<dynamic>?)
           ?.map(
-            (e) => Input_KodasFilterInput.fromJson((e as Map<String, dynamic>)),
+            (e) => Input_LatestFatherVisitFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList();
     }
@@ -2094,7 +2435,9 @@ class Input_KodasFilterInput {
       final l$or = data['or'];
       result$data['or'] = (l$or as List<dynamic>?)
           ?.map(
-            (e) => Input_KodasFilterInput.fromJson((e as Map<String, dynamic>)),
+            (e) => Input_LatestFatherVisitFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList();
     }
@@ -2102,58 +2445,50 @@ class Input_KodasFilterInput {
       final l$not = data['not'];
       result$data['not'] = (l$not as List<dynamic>?)
           ?.map(
-            (e) => Input_KodasFilterInput.fromJson((e as Map<String, dynamic>)),
+            (e) => Input_LatestFatherVisitFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList();
     }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] = l$table == null
           ? null
-          : Input_KodasFilterId.fromJson((l$id as Map<String, dynamic>));
-    }
-    if (data.containsKey('dayId')) {
-      final l$dayId = data['dayId'];
-      result$data['dayId'] = l$dayId == null
-          ? null
-          : Input_KodasFilterDayId.fromJson((l$dayId as Map<String, dynamic>));
-    }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
-          ? null
-          : Input_KodasFilterPersonId.fromJson(
-              (l$personId as Map<String, dynamic>),
+          : Input_LatestFatherVisitFilterTable.fromJson(
+              (l$table as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('recordedBy')) {
-      final l$recordedBy = data['recordedBy'];
-      result$data['recordedBy'] = l$recordedBy == null
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] = l$recordId == null
           ? null
-          : Input_KodasFilterRecordedBy.fromJson(
-              (l$recordedBy as Map<String, dynamic>),
+          : Input_LatestFatherVisitFilterRecordId.fromJson(
+              (l$recordId as Map<String, dynamic>),
             );
     }
     if (data.containsKey('time')) {
       final l$time = data['time'];
       result$data['time'] = l$time == null
           ? null
-          : Input_KodasFilterTime.fromJson((l$time as Map<String, dynamic>));
-    }
-    if (data.containsKey('day')) {
-      final l$day = data['day'];
-      result$data['day'] = l$day == null
-          ? null
-          : Input_ActivityDayFilterInput.fromJson(
-              (l$day as Map<String, dynamic>),
+          : Input_LatestFatherVisitFilterTime.fromJson(
+              (l$time as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
+    if (data.containsKey('recordedBy')) {
+      final l$recordedBy = data['recordedBy'];
+      result$data['recordedBy'] = l$recordedBy == null
           ? null
-          : Input_PersonFilterInput.fromJson(
-              (l$person as Map<String, dynamic>),
+          : Input_LatestFatherVisitFilterRecordedBy.fromJson(
+              (l$recordedBy as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] = l$visitId == null
+          ? null
+          : Input_LatestFatherVisitFilterVisitId.fromJson(
+              (l$visitId as Map<String, dynamic>),
             );
     }
     if (data.containsKey('user')) {
@@ -2162,38 +2497,34 @@ class Input_KodasFilterInput {
           ? null
           : Input_UserFilterInput.fromJson((l$user as Map<String, dynamic>));
     }
-    return Input_KodasFilterInput._(result$data);
+    return Input_LatestFatherVisitFilterInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input_KodasFilterInput>? get and =>
-      (_$data['and'] as List<Input_KodasFilterInput>?);
+  List<Input_LatestFatherVisitFilterInput>? get and =>
+      (_$data['and'] as List<Input_LatestFatherVisitFilterInput>?);
 
-  List<Input_KodasFilterInput>? get or =>
-      (_$data['or'] as List<Input_KodasFilterInput>?);
+  List<Input_LatestFatherVisitFilterInput>? get or =>
+      (_$data['or'] as List<Input_LatestFatherVisitFilterInput>?);
 
-  List<Input_KodasFilterInput>? get not =>
-      (_$data['not'] as List<Input_KodasFilterInput>?);
+  List<Input_LatestFatherVisitFilterInput>? get not =>
+      (_$data['not'] as List<Input_LatestFatherVisitFilterInput>?);
 
-  Input_KodasFilterId? get id => (_$data['id'] as Input_KodasFilterId?);
+  Input_LatestFatherVisitFilterTable? get table =>
+      (_$data['table'] as Input_LatestFatherVisitFilterTable?);
 
-  Input_KodasFilterDayId? get dayId =>
-      (_$data['dayId'] as Input_KodasFilterDayId?);
+  Input_LatestFatherVisitFilterRecordId? get recordId =>
+      (_$data['recordId'] as Input_LatestFatherVisitFilterRecordId?);
 
-  Input_KodasFilterPersonId? get personId =>
-      (_$data['personId'] as Input_KodasFilterPersonId?);
+  Input_LatestFatherVisitFilterTime? get time =>
+      (_$data['time'] as Input_LatestFatherVisitFilterTime?);
 
-  Input_KodasFilterRecordedBy? get recordedBy =>
-      (_$data['recordedBy'] as Input_KodasFilterRecordedBy?);
+  Input_LatestFatherVisitFilterRecordedBy? get recordedBy =>
+      (_$data['recordedBy'] as Input_LatestFatherVisitFilterRecordedBy?);
 
-  Input_KodasFilterTime? get time => (_$data['time'] as Input_KodasFilterTime?);
-
-  Input_ActivityDayFilterInput? get day =>
-      (_$data['day'] as Input_ActivityDayFilterInput?);
-
-  Input_PersonFilterInput? get person =>
-      (_$data['person'] as Input_PersonFilterInput?);
+  Input_LatestFatherVisitFilterVisitId? get visitId =>
+      (_$data['visitId'] as Input_LatestFatherVisitFilterVisitId?);
 
   Input_UserFilterInput? get user => (_$data['user'] as Input_UserFilterInput?);
 
@@ -2211,33 +2542,25 @@ class Input_KodasFilterInput {
       final l$not = not;
       result$data['not'] = l$not?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id?.toJson();
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] = l$table?.toJson();
     }
-    if (_$data.containsKey('dayId')) {
-      final l$dayId = dayId;
-      result$data['dayId'] = l$dayId?.toJson();
-    }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] = l$personId?.toJson();
-    }
-    if (_$data.containsKey('recordedBy')) {
-      final l$recordedBy = recordedBy;
-      result$data['recordedBy'] = l$recordedBy?.toJson();
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] = l$recordId?.toJson();
     }
     if (_$data.containsKey('time')) {
       final l$time = time;
       result$data['time'] = l$time?.toJson();
     }
-    if (_$data.containsKey('day')) {
-      final l$day = day;
-      result$data['day'] = l$day?.toJson();
+    if (_$data.containsKey('recordedBy')) {
+      final l$recordedBy = recordedBy;
+      result$data['recordedBy'] = l$recordedBy?.toJson();
     }
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] = l$visitId?.toJson();
     }
     if (_$data.containsKey('user')) {
       final l$user = user;
@@ -2246,15 +2569,18 @@ class Input_KodasFilterInput {
     return result$data;
   }
 
-  CopyWith_Input_KodasFilterInput<Input_KodasFilterInput> get copyWith =>
-      CopyWith_Input_KodasFilterInput(this, (i) => i);
+  CopyWith_Input_LatestFatherVisitFilterInput<
+    Input_LatestFatherVisitFilterInput
+  >
+  get copyWith => CopyWith_Input_LatestFatherVisitFilterInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_KodasFilterInput || runtimeType != other.runtimeType) {
+    if (other is! Input_LatestFatherVisitFilterInput ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$and = and;
@@ -2314,29 +2640,29 @@ class Input_KodasFilterInput {
     } else if (l$not != lOther$not) {
       return false;
     }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
       return false;
     }
-    if (l$id != lOther$id) {
+    if (l$table != lOther$table) {
       return false;
     }
-    final l$dayId = dayId;
-    final lOther$dayId = other.dayId;
-    if (_$data.containsKey('dayId') != other._$data.containsKey('dayId')) {
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
       return false;
     }
-    if (l$dayId != lOther$dayId) {
+    if (l$recordId != lOther$recordId) {
       return false;
     }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
+    final l$time = time;
+    final lOther$time = other.time;
+    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
       return false;
     }
-    if (l$personId != lOther$personId) {
+    if (l$time != lOther$time) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -2348,28 +2674,12 @@ class Input_KodasFilterInput {
     if (l$recordedBy != lOther$recordedBy) {
       return false;
     }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
       return false;
     }
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$day = day;
-    final lOther$day = other.day;
-    if (_$data.containsKey('day') != other._$data.containsKey('day')) {
-      return false;
-    }
-    if (l$day != lOther$day) {
-      return false;
-    }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
-      return false;
-    }
-    if (l$person != lOther$person) {
+    if (l$visitId != lOther$visitId) {
       return false;
     }
     final l$user = user;
@@ -2388,13 +2698,11 @@ class Input_KodasFilterInput {
     final l$and = and;
     final l$or = or;
     final l$not = not;
-    final l$id = id;
-    final l$dayId = dayId;
-    final l$personId = personId;
-    final l$recordedBy = recordedBy;
+    final l$table = table;
+    final l$recordId = recordId;
     final l$time = time;
-    final l$day = day;
-    final l$person = person;
+    final l$recordedBy = recordedBy;
+    final l$visitId = visitId;
     final l$user = user;
     return Object.hashAll([
       _$data.containsKey('and')
@@ -2412,336 +2720,12 @@ class Input_KodasFilterInput {
                 ? null
                 : Object.hashAll(l$not.map((v) => v))
           : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('dayId') ? l$dayId : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
-      _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('time') ? l$time : const {},
-      _$data.containsKey('day') ? l$day : const {},
-      _$data.containsKey('person') ? l$person : const {},
+      _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
       _$data.containsKey('user') ? l$user : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_KodasFilterInput<TRes> {
-  factory CopyWith_Input_KodasFilterInput(
-    Input_KodasFilterInput instance,
-    TRes Function(Input_KodasFilterInput) then,
-  ) = _CopyWithImpl_Input_KodasFilterInput;
-
-  factory CopyWith_Input_KodasFilterInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_KodasFilterInput;
-
-  TRes call({
-    List<Input_KodasFilterInput>? and,
-    List<Input_KodasFilterInput>? or,
-    List<Input_KodasFilterInput>? not,
-    Input_KodasFilterId? id,
-    Input_KodasFilterDayId? dayId,
-    Input_KodasFilterPersonId? personId,
-    Input_KodasFilterRecordedBy? recordedBy,
-    Input_KodasFilterTime? time,
-    Input_ActivityDayFilterInput? day,
-    Input_PersonFilterInput? person,
-    Input_UserFilterInput? user,
-  });
-  TRes and(
-    Iterable<Input_KodasFilterInput>? Function(
-      Iterable<CopyWith_Input_KodasFilterInput<Input_KodasFilterInput>>?,
-    )
-    _fn,
-  );
-  TRes or(
-    Iterable<Input_KodasFilterInput>? Function(
-      Iterable<CopyWith_Input_KodasFilterInput<Input_KodasFilterInput>>?,
-    )
-    _fn,
-  );
-  TRes not(
-    Iterable<Input_KodasFilterInput>? Function(
-      Iterable<CopyWith_Input_KodasFilterInput<Input_KodasFilterInput>>?,
-    )
-    _fn,
-  );
-  CopyWith_Input_KodasFilterId<TRes> get id;
-  CopyWith_Input_KodasFilterDayId<TRes> get dayId;
-  CopyWith_Input_KodasFilterPersonId<TRes> get personId;
-  CopyWith_Input_KodasFilterRecordedBy<TRes> get recordedBy;
-  CopyWith_Input_KodasFilterTime<TRes> get time;
-  CopyWith_Input_ActivityDayFilterInput<TRes> get day;
-  CopyWith_Input_PersonFilterInput<TRes> get person;
-  CopyWith_Input_UserFilterInput<TRes> get user;
-}
-
-class _CopyWithImpl_Input_KodasFilterInput<TRes>
-    implements CopyWith_Input_KodasFilterInput<TRes> {
-  _CopyWithImpl_Input_KodasFilterInput(this._instance, this._then);
-
-  final Input_KodasFilterInput _instance;
-
-  final TRes Function(Input_KodasFilterInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? and = _undefined,
-    Object? or = _undefined,
-    Object? not = _undefined,
-    Object? id = _undefined,
-    Object? dayId = _undefined,
-    Object? personId = _undefined,
-    Object? recordedBy = _undefined,
-    Object? time = _undefined,
-    Object? day = _undefined,
-    Object? person = _undefined,
-    Object? user = _undefined,
-  }) => _then(
-    Input_KodasFilterInput._({
-      ..._instance._$data,
-      if (and != _undefined) 'and': (and as List<Input_KodasFilterInput>?),
-      if (or != _undefined) 'or': (or as List<Input_KodasFilterInput>?),
-      if (not != _undefined) 'not': (not as List<Input_KodasFilterInput>?),
-      if (id != _undefined) 'id': (id as Input_KodasFilterId?),
-      if (dayId != _undefined) 'dayId': (dayId as Input_KodasFilterDayId?),
-      if (personId != _undefined)
-        'personId': (personId as Input_KodasFilterPersonId?),
-      if (recordedBy != _undefined)
-        'recordedBy': (recordedBy as Input_KodasFilterRecordedBy?),
-      if (time != _undefined) 'time': (time as Input_KodasFilterTime?),
-      if (day != _undefined) 'day': (day as Input_ActivityDayFilterInput?),
-      if (person != _undefined) 'person': (person as Input_PersonFilterInput?),
-      if (user != _undefined) 'user': (user as Input_UserFilterInput?),
-    }),
-  );
-
-  TRes and(
-    Iterable<Input_KodasFilterInput>? Function(
-      Iterable<CopyWith_Input_KodasFilterInput<Input_KodasFilterInput>>?,
-    )
-    _fn,
-  ) => call(
-    and: _fn(
-      _instance.and?.map((e) => CopyWith_Input_KodasFilterInput(e, (i) => i)),
-    )?.toList(),
-  );
-
-  TRes or(
-    Iterable<Input_KodasFilterInput>? Function(
-      Iterable<CopyWith_Input_KodasFilterInput<Input_KodasFilterInput>>?,
-    )
-    _fn,
-  ) => call(
-    or: _fn(
-      _instance.or?.map((e) => CopyWith_Input_KodasFilterInput(e, (i) => i)),
-    )?.toList(),
-  );
-
-  TRes not(
-    Iterable<Input_KodasFilterInput>? Function(
-      Iterable<CopyWith_Input_KodasFilterInput<Input_KodasFilterInput>>?,
-    )
-    _fn,
-  ) => call(
-    not: _fn(
-      _instance.not?.map((e) => CopyWith_Input_KodasFilterInput(e, (i) => i)),
-    )?.toList(),
-  );
-
-  CopyWith_Input_KodasFilterId<TRes> get id {
-    final local$id = _instance.id;
-    return local$id == null
-        ? CopyWith_Input_KodasFilterId.stub(_then(_instance))
-        : CopyWith_Input_KodasFilterId(local$id, (e) => call(id: e));
-  }
-
-  CopyWith_Input_KodasFilterDayId<TRes> get dayId {
-    final local$dayId = _instance.dayId;
-    return local$dayId == null
-        ? CopyWith_Input_KodasFilterDayId.stub(_then(_instance))
-        : CopyWith_Input_KodasFilterDayId(local$dayId, (e) => call(dayId: e));
-  }
-
-  CopyWith_Input_KodasFilterPersonId<TRes> get personId {
-    final local$personId = _instance.personId;
-    return local$personId == null
-        ? CopyWith_Input_KodasFilterPersonId.stub(_then(_instance))
-        : CopyWith_Input_KodasFilterPersonId(
-            local$personId,
-            (e) => call(personId: e),
-          );
-  }
-
-  CopyWith_Input_KodasFilterRecordedBy<TRes> get recordedBy {
-    final local$recordedBy = _instance.recordedBy;
-    return local$recordedBy == null
-        ? CopyWith_Input_KodasFilterRecordedBy.stub(_then(_instance))
-        : CopyWith_Input_KodasFilterRecordedBy(
-            local$recordedBy,
-            (e) => call(recordedBy: e),
-          );
-  }
-
-  CopyWith_Input_KodasFilterTime<TRes> get time {
-    final local$time = _instance.time;
-    return local$time == null
-        ? CopyWith_Input_KodasFilterTime.stub(_then(_instance))
-        : CopyWith_Input_KodasFilterTime(local$time, (e) => call(time: e));
-  }
-
-  CopyWith_Input_ActivityDayFilterInput<TRes> get day {
-    final local$day = _instance.day;
-    return local$day == null
-        ? CopyWith_Input_ActivityDayFilterInput.stub(_then(_instance))
-        : CopyWith_Input_ActivityDayFilterInput(local$day, (e) => call(day: e));
-  }
-
-  CopyWith_Input_PersonFilterInput<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonFilterInput.stub(_then(_instance))
-        : CopyWith_Input_PersonFilterInput(
-            local$person,
-            (e) => call(person: e),
-          );
-  }
-
-  CopyWith_Input_UserFilterInput<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Input_UserFilterInput.stub(_then(_instance))
-        : CopyWith_Input_UserFilterInput(local$user, (e) => call(user: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_KodasFilterInput<TRes>
-    implements CopyWith_Input_KodasFilterInput<TRes> {
-  _CopyWithStubImpl_Input_KodasFilterInput(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_KodasFilterInput>? and,
-    List<Input_KodasFilterInput>? or,
-    List<Input_KodasFilterInput>? not,
-    Input_KodasFilterId? id,
-    Input_KodasFilterDayId? dayId,
-    Input_KodasFilterPersonId? personId,
-    Input_KodasFilterRecordedBy? recordedBy,
-    Input_KodasFilterTime? time,
-    Input_ActivityDayFilterInput? day,
-    Input_PersonFilterInput? person,
-    Input_UserFilterInput? user,
-  }) => _res;
-
-  and(_fn) => _res;
-
-  or(_fn) => _res;
-
-  not(_fn) => _res;
-
-  CopyWith_Input_KodasFilterId<TRes> get id =>
-      CopyWith_Input_KodasFilterId.stub(_res);
-
-  CopyWith_Input_KodasFilterDayId<TRes> get dayId =>
-      CopyWith_Input_KodasFilterDayId.stub(_res);
-
-  CopyWith_Input_KodasFilterPersonId<TRes> get personId =>
-      CopyWith_Input_KodasFilterPersonId.stub(_res);
-
-  CopyWith_Input_KodasFilterRecordedBy<TRes> get recordedBy =>
-      CopyWith_Input_KodasFilterRecordedBy.stub(_res);
-
-  CopyWith_Input_KodasFilterTime<TRes> get time =>
-      CopyWith_Input_KodasFilterTime.stub(_res);
-
-  CopyWith_Input_ActivityDayFilterInput<TRes> get day =>
-      CopyWith_Input_ActivityDayFilterInput.stub(_res);
-
-  CopyWith_Input_PersonFilterInput<TRes> get person =>
-      CopyWith_Input_PersonFilterInput.stub(_res);
-
-  CopyWith_Input_UserFilterInput<TRes> get user =>
-      CopyWith_Input_UserFilterInput.stub(_res);
-}
-
-class Input_KodasSortInput {
-  factory Input_KodasSortInput({
-    Enum_SortOrder? order,
-    required Enum_KodasSortField field,
-  }) => Input_KodasSortInput._({
-    if (order != null) r'order': order,
-    r'field': field,
-  });
-
-  Input_KodasSortInput._(this._$data);
-
-  factory Input_KodasSortInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('order')) {
-      final l$order = data['order'];
-      result$data['order'] = l$order == null
-          ? null
-          : fromJson_Enum_SortOrder((l$order as String));
-    }
-    final l$field = data['field'];
-    result$data['field'] = fromJson_Enum_KodasSortField((l$field as String));
-    return Input_KodasSortInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_SortOrder? get order => (_$data['order'] as Enum_SortOrder?);
-
-  Enum_KodasSortField get field => (_$data['field'] as Enum_KodasSortField);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('order')) {
-      final l$order = order;
-      result$data['order'] = l$order == null
-          ? null
-          : toJson_Enum_SortOrder(l$order);
-    }
-    final l$field = field;
-    result$data['field'] = toJson_Enum_KodasSortField(l$field);
-    return result$data;
-  }
-
-  CopyWith_Input_KodasSortInput<Input_KodasSortInput> get copyWith =>
-      CopyWith_Input_KodasSortInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_KodasSortInput || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
-      return false;
-    }
-    if (l$order != lOther$order) {
-      return false;
-    }
-    final l$field = field;
-    final lOther$field = other.field;
-    if (l$field != lOther$field) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$order = order;
-    final l$field = field;
-    return Object.hashAll([
-      _$data.containsKey('order') ? l$order : const {},
-      l$field,
     ]);
   }
 }

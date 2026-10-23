@@ -793,12 +793,17 @@ enum PersonSortField {
   BIRTHDAY
   USER_CAN_EDIT
   LAST_CONFESSION_DAY
+  LAST_CONFESSION_DAY_USER_NAME
   LAST_KODAS_DAY
+  LAST_KODAS_DAY_USER_NAME
   LAST_ATTENDED_AT
   LAST_VISIT_AT
+  LAST_VISIT_AT_USER_NAME
   MAIN_PHONE
   LAST_EDIT
+  LAST_EDIT_USER_NAME
   LAST_CALL
+  LAST_CALL_USER_NAME
   FAMILY_NAME
   USER_NAME
   STORE_NAME
@@ -1174,6 +1179,24 @@ input PersonFilterFamilyName {
   ilike: String
 }
 
+input PersonFilterLastCallUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
 input PersonFilterLastCall {
   isNil: Boolean
   eq: DateTime
@@ -1185,6 +1208,24 @@ input PersonFilterLastCall {
   greaterThanOrEqual: DateTime
   isDistinctFrom: DateTime
   isNotDistinctFrom: DateTime
+}
+
+input PersonFilterLastEditUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input PersonFilterLastEdit {
@@ -1201,6 +1242,24 @@ input PersonFilterLastEdit {
 }
 
 input PersonFilterMainPhone {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input PersonFilterLastVisitAtUserName {
   isNil: Boolean
   eq: String
   notEq: String
@@ -1244,6 +1303,24 @@ input PersonFilterLastAttendedAt {
   isNotDistinctFrom: DateTime
 }
 
+input PersonFilterLastKodasDayUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
 input PersonFilterLastKodasDay {
   isNil: Boolean
   eq: Date
@@ -1255,6 +1332,24 @@ input PersonFilterLastKodasDay {
   greaterThanOrEqual: Date
   isDistinctFrom: Date
   isNotDistinctFrom: Date
+}
+
+input PersonFilterLastConfessionDayUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input PersonFilterLastConfessionDay {
@@ -1752,12 +1847,17 @@ input PersonFilterInput {
   hobbies: HobbyFilterInput
   tags: TagFilterInput
   lastConfessionDay: PersonFilterLastConfessionDay
+  lastConfessionDayUserName: PersonFilterLastConfessionDayUserName
   lastKodasDay: PersonFilterLastKodasDay
+  lastKodasDayUserName: PersonFilterLastKodasDayUserName
   lastAttendedAt: PersonFilterLastAttendedAt
   lastVisitAt: PersonFilterLastVisitAt
+  lastVisitAtUserName: PersonFilterLastVisitAtUserName
   mainPhone: PersonFilterMainPhone
   lastEdit: PersonFilterLastEdit
+  lastEditUserName: PersonFilterLastEditUserName
   lastCall: PersonFilterLastCall
+  lastCallUserName: PersonFilterLastCallUserName
   familyName: PersonFilterFamilyName
   userName: PersonFilterUserName
   storeName: PersonFilterStoreName
@@ -2020,12 +2120,17 @@ type Person {
     offset: Int
   ): [Tag!]!
   lastConfessionDay: Date
+  lastConfessionDayUserName: String
   lastKodasDay: Date
+  lastKodasDayUserName: String
   lastAttendedAt: DateTime
   lastVisitAt: DateTime
+  lastVisitAtUserName: String
   mainPhone: String
   lastEdit: DateTime
+  lastEditUserName: String
   lastCall: DateTime
+  lastCallUserName: String
   familyName: String
   userName: String
   storeName: String
@@ -2427,8 +2532,11 @@ enum FamilySortField {
   CHURCH_ID
   USER_CAN_EDIT
   LAST_EDIT
+  LAST_EDIT_USER_NAME
   LAST_VISIT
+  LAST_VISIT_USER_NAME
   LAST_FATHER_VISIT
+  LAST_FATHER_VISIT_USER_NAME
   CHURCH_NAME
   ADDRESS_AREA_NAME
   ADDRESS_STREET_NAME
@@ -2554,6 +2662,24 @@ input FamilyFilterChurchName {
   ilike: String
 }
 
+input FamilyFilterLastFatherVisitUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
 input FamilyFilterLastFatherVisit {
   isNil: Boolean
   eq: DateTime
@@ -2567,6 +2693,24 @@ input FamilyFilterLastFatherVisit {
   isNotDistinctFrom: DateTime
 }
 
+input FamilyFilterLastVisitUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
 input FamilyFilterLastVisit {
   isNil: Boolean
   eq: DateTime
@@ -2578,6 +2722,24 @@ input FamilyFilterLastVisit {
   greaterThanOrEqual: DateTime
   isDistinctFrom: DateTime
   isNotDistinctFrom: DateTime
+}
+
+input FamilyFilterLastEditUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input FamilyFilterLastEdit {
@@ -2776,8 +2938,11 @@ input FamilyFilterInput {
   unclaimedContacts: ContactFilterInput
   persons: PersonFilterInput
   lastEdit: FamilyFilterLastEdit
+  lastEditUserName: FamilyFilterLastEditUserName
   lastVisit: FamilyFilterLastVisit
+  lastVisitUserName: FamilyFilterLastVisitUserName
   lastFatherVisit: FamilyFilterLastFatherVisit
+  lastFatherVisitUserName: FamilyFilterLastFatherVisitUserName
   churchName: FamilyFilterChurchName
   addressAreaName: FamilyFilterAddressAreaName
   addressStreetName: FamilyFilterAddressStreetName
@@ -2900,8 +3065,11 @@ type Family {
     offset: Int
   ): [Person!]!
   lastEdit: DateTime
+  lastEditUserName: String
   lastVisit: DateTime
+  lastVisitUserName: String
   lastFatherVisit: DateTime
+  lastFatherVisitUserName: String
   churchName: String
   addressAreaName: String
   addressStreetName: String
@@ -3287,6 +3455,7 @@ enum ServiceSortField {
   NEXT_SERVICE_NAME
   DEFAULT_MEETING_NAME
   LAST_EDIT
+  LAST_EDIT_USER_NAME
   STUDY_YEAR_FROM_ORDER
   STUDY_YEAR_TO_ORDER
 }
@@ -3343,6 +3512,24 @@ input ServiceFilterStudyYearFromOrder {
   greaterThanOrEqual: Int
   isDistinctFrom: Int
   isNotDistinctFrom: Int
+}
+
+input ServiceFilterLastEditUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input ServiceFilterLastEdit {
@@ -3547,6 +3734,7 @@ input ServiceFilterInput {
   nextServiceName: ServiceFilterNextServiceName
   defaultMeetingName: ServiceFilterDefaultMeetingName
   lastEdit: ServiceFilterLastEdit
+  lastEditUserName: ServiceFilterLastEditUserName
   studyYearFromOrder: ServiceFilterStudyYearFromOrder
   studyYearToOrder: ServiceFilterStudyYearToOrder
   userCanEdit: ServiceFilterUserCanEdit
@@ -3640,6 +3828,7 @@ type Service {
   nextServiceName: String
   defaultMeetingName: String
   lastEdit: DateTime
+  lastEditUserName: String
   studyYearFromOrder: Int
   studyYearToOrder: Int
   userCanEdit: Boolean!
@@ -3700,6 +3889,7 @@ enum GroupSortField {
   SERVICE_NAME
   DEFAULT_MEETING_NAME
   LAST_EDIT
+  LAST_EDIT_USER_NAME
 }
 
 "A keyset page of :group"
@@ -3728,6 +3918,24 @@ input GroupFilterUserCanEdit {
   greaterThanOrEqual: Boolean
   isDistinctFrom: Boolean
   isNotDistinctFrom: Boolean
+}
+
+input GroupFilterLastEditUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input GroupFilterLastEdit {
@@ -3914,6 +4122,7 @@ input GroupFilterInput {
   serviceName: GroupFilterServiceName
   defaultMeetingName: GroupFilterDefaultMeetingName
   lastEdit: GroupFilterLastEdit
+  lastEditUserName: GroupFilterLastEditUserName
   userCanEdit: GroupFilterUserCanEdit
 }
 
@@ -3976,6 +4185,7 @@ type Group {
   serviceName: String
   defaultMeetingName: String
   lastEdit: DateTime
+  lastEditUserName: String
   userCanEdit: Boolean!
 }
 
@@ -4037,6 +4247,7 @@ enum ClassSortField {
   USER_CAN_EDIT
   SERVICE_NAME
   LAST_EDIT
+  LAST_EDIT_USER_NAME
   STUDY_YEAR_FROM_ORDER
   STUDY_YEAR_TO_ORDER
 }
@@ -4093,6 +4304,24 @@ input ClassFilterStudyYearFromOrder {
   greaterThanOrEqual: Int
   isDistinctFrom: Int
   isNotDistinctFrom: Int
+}
+
+input ClassFilterLastEditUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input ClassFilterLastEdit {
@@ -4275,6 +4504,7 @@ input ClassFilterInput {
   admins: UserFilterInput
   serviceName: ClassFilterServiceName
   lastEdit: ClassFilterLastEdit
+  lastEditUserName: ClassFilterLastEditUserName
   studyYearFromOrder: ClassFilterStudyYearFromOrder
   studyYearToOrder: ClassFilterStudyYearToOrder
   userCanEdit: ClassFilterUserCanEdit
@@ -4340,6 +4570,7 @@ type Class {
   ): [User!]!
   serviceName: String
   lastEdit: DateTime
+  lastEditUserName: String
   studyYearFromOrder: Int
   studyYearToOrder: Int
   userCanEdit: Boolean!
@@ -4399,7 +4630,9 @@ enum StreetSortField {
   WITHIN_POLYGON
   WITHIN_DISTANCE
   LAST_EDIT
+  LAST_EDIT_USER_NAME
   LAST_VISIT
+  LAST_VISIT_USER_NAME
 }
 
 "A keyset page of :street"
@@ -4467,6 +4700,24 @@ input StreetFilterUserCanEdit {
   isNotDistinctFrom: Boolean
 }
 
+input StreetFilterLastVisitUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
 input StreetFilterLastVisit {
   isNil: Boolean
   eq: DateTime
@@ -4478,6 +4729,24 @@ input StreetFilterLastVisit {
   greaterThanOrEqual: DateTime
   isDistinctFrom: DateTime
   isNotDistinctFrom: DateTime
+}
+
+input StreetFilterLastEditUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input StreetFilterLastEdit {
@@ -4599,7 +4868,9 @@ input StreetFilterInput {
   latestVisit: LatestVisitFilterInput
   visits: VisitFilterInput
   lastEdit: StreetFilterLastEdit
+  lastEditUserName: StreetFilterLastEditUserName
   lastVisit: StreetFilterLastVisit
+  lastVisitUserName: StreetFilterLastVisitUserName
   userCanEdit: StreetFilterUserCanEdit
   withinPolygon: StreetFilterWithinPolygon
   withinDistance: StreetFilterWithinDistance
@@ -4687,7 +4958,9 @@ type Street {
     offset: Int
   ): [Visit!]!
   lastEdit: DateTime
+  lastEditUserName: String
   lastVisit: DateTime
+  lastVisitUserName: String
   userCanEdit: Boolean!
   withinPolygon(polygon: Json!): Boolean
   withinDistance(from: Json!, meters: Float!): Boolean
@@ -4749,6 +5022,7 @@ enum StoreSortField {
   ADDRESS_FULL_ADDRESS_TEXT
   ADMIN_FAMILY_NAME
   LAST_EDIT
+  LAST_EDIT_USER_NAME
 }
 
 "A keyset page of :store"
@@ -4795,6 +5069,24 @@ input StoreFilterUserCanEdit {
   greaterThanOrEqual: Boolean
   isDistinctFrom: Boolean
   isNotDistinctFrom: Boolean
+}
+
+input StoreFilterLastEditUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input StoreFilterLastEdit {
@@ -5010,6 +5302,7 @@ input StoreFilterInput {
   addressFullAddressText: StoreFilterAddressFullAddressText
   adminFamilyName: StoreFilterAdminFamilyName
   lastEdit: StoreFilterLastEdit
+  lastEditUserName: StoreFilterLastEditUserName
   userCanEdit: StoreFilterUserCanEdit
   withinPolygon: StoreFilterWithinPolygon
 }
@@ -5063,6 +5356,7 @@ type Store {
   addressFullAddressText: String
   adminFamilyName: String
   lastEdit: DateTime
+  lastEditUserName: String
   userCanEdit: Boolean!
   withinPolygon(polygon: Json!): Boolean
 }
@@ -5289,7 +5583,9 @@ enum AreaSortField {
   WITHIN_POLYGON
   CONTAINS_POINT
   LAST_EDIT
+  LAST_EDIT_USER_NAME
   LAST_VISIT
+  LAST_VISIT_USER_NAME
 }
 
 "A keyset page of :area"
@@ -5356,6 +5652,24 @@ input AreaFilterUserCanEdit {
   isNotDistinctFrom: Boolean
 }
 
+input AreaFilterLastVisitUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
 input AreaFilterLastVisit {
   isNil: Boolean
   eq: DateTime
@@ -5367,6 +5681,24 @@ input AreaFilterLastVisit {
   greaterThanOrEqual: DateTime
   isDistinctFrom: DateTime
   isNotDistinctFrom: DateTime
+}
+
+input AreaFilterLastEditUserName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
 }
 
 input AreaFilterLastEdit {
@@ -5489,7 +5821,9 @@ input AreaFilterInput {
   latestVisit: LatestVisitFilterInput
   visits: VisitFilterInput
   lastEdit: AreaFilterLastEdit
+  lastEditUserName: AreaFilterLastEditUserName
   lastVisit: AreaFilterLastVisit
+  lastVisitUserName: AreaFilterLastVisitUserName
   userCanEdit: AreaFilterUserCanEdit
   withinPolygon: AreaFilterWithinPolygon
   containsPoint: AreaFilterContainsPoint
@@ -5590,7 +5924,9 @@ type Area {
     offset: Int
   ): [Visit!]!
   lastEdit: DateTime
+  lastEditUserName: String
   lastVisit: DateTime
+  lastVisitUserName: String
   userCanEdit: Boolean!
   withinPolygon(polygon: Json!): Boolean
   containsPoint(point: Json!): Boolean
@@ -8400,6 +8736,7 @@ enum UserSortField {
   AUTH_ID
   CURRENT_USER_CAN_MANAGE_THIS_USER
   LAST_EDIT
+  LAST_EDIT_USER_NAME
   PERSON_NAME
 }
 
@@ -8432,6 +8769,24 @@ input UserFilterCurrentUserCanManageThisUser {
 }
 
 input UserFilterPersonName {
+  isNil: Boolean
+  eq: String
+  notEq: String
+  in: [String]
+  lessThan: String
+  greaterThan: String
+  lessThanOrEqual: String
+  greaterThanOrEqual: String
+  contains: String
+  isDistinctFrom: String
+  isNotDistinctFrom: String
+  stringEndsWith: String
+  stringStartsWith: String
+  like: String
+  ilike: String
+}
+
+input UserFilterLastEditUserName {
   isNil: Boolean
   eq: String
   notEq: String
@@ -8578,6 +8933,7 @@ input UserFilterInput {
   deviceTokens: DeviceTokenFilterInput
   permissions: UserPermissionFilterInput
   lastEdit: UserFilterLastEdit
+  lastEditUserName: UserFilterLastEditUserName
   personName: UserFilterPersonName
   currentUserCanManageThisUser: UserFilterCurrentUserCanManageThisUser
 }
@@ -8639,6 +8995,7 @@ type User {
     offset: Int
   ): [UserPermission!]!
   lastEdit: DateTime
+  lastEditUserName: String
   personName: String
   currentUserCanManageThisUser: Boolean!
 }

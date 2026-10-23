@@ -454,14 +454,19 @@ defmodule ChurchAdmin.People.Person do
 
   aggregates do
     max :last_confession_day, :confessions, :day_id, public?: true
+    first :last_confession_day_user_name, [:latest_confession, :user], :name, public?: true
     max :last_kodas_day, :kodases, :day_id, public?: true
+    first :last_kodas_day_user_name, [:latest_kodas, :user], :name, public?: true
     max :last_attended_at, :attendance_records, :datetime, public?: true
     max :last_visit_at, :visits, :time, public?: true
+    first :last_visit_at_user_name, [:latest_visit, :user], :name, public?: true
 
     first :main_phone, :contacts, :phone, filter: expr(is_main_phone), public?: true
 
     first :last_edit, :latest_edit, :time, public?: true
+    first :last_edit_user_name, [:latest_edit, :user], :name, public?: true
     first :last_call, :latest_call, :time, public?: true
+    first :last_call_user_name, [:latest_call, :user], :name, public?: true
     first :family_name, :family, :name, public?: true
     first :user_name, :user, :name, public?: true
     first :store_name, :store, :name, public?: true

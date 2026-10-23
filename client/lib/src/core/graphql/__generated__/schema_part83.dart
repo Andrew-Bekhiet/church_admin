@@ -1,149 +1,60 @@
 // Part 83 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_CollegeSortInput<TRes> {
-  factory CopyWith_Input_CollegeSortInput(
-    Input_CollegeSortInput instance,
-    TRes Function(Input_CollegeSortInput) then,
-  ) = _CopyWithImpl_Input_CollegeSortInput;
+abstract class CopyWith_Input_PersonTypeSortInput<TRes> {
+  factory CopyWith_Input_PersonTypeSortInput(
+    Input_PersonTypeSortInput instance,
+    TRes Function(Input_PersonTypeSortInput) then,
+  ) = _CopyWithImpl_Input_PersonTypeSortInput;
 
-  factory CopyWith_Input_CollegeSortInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_CollegeSortInput;
+  factory CopyWith_Input_PersonTypeSortInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonTypeSortInput;
 
-  TRes call({Enum_SortOrder? order, Enum_CollegeSortField? field});
+  TRes call({Enum_SortOrder? order, Enum_PersonTypeSortField? field});
 }
 
-class _CopyWithImpl_Input_CollegeSortInput<TRes>
-    implements CopyWith_Input_CollegeSortInput<TRes> {
-  _CopyWithImpl_Input_CollegeSortInput(this._instance, this._then);
+class _CopyWithImpl_Input_PersonTypeSortInput<TRes>
+    implements CopyWith_Input_PersonTypeSortInput<TRes> {
+  _CopyWithImpl_Input_PersonTypeSortInput(this._instance, this._then);
 
-  final Input_CollegeSortInput _instance;
+  final Input_PersonTypeSortInput _instance;
 
-  final TRes Function(Input_CollegeSortInput) _then;
+  final TRes Function(Input_PersonTypeSortInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? order = _undefined, Object? field = _undefined}) => _then(
-    Input_CollegeSortInput._({
+    Input_PersonTypeSortInput._({
       ..._instance._$data,
       if (order != _undefined) 'order': (order as Enum_SortOrder?),
       if (field != _undefined && field != null)
-        'field': (field as Enum_CollegeSortField),
+        'field': (field as Enum_PersonTypeSortField),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_CollegeSortInput<TRes>
-    implements CopyWith_Input_CollegeSortInput<TRes> {
-  _CopyWithStubImpl_Input_CollegeSortInput(this._res);
+class _CopyWithStubImpl_Input_PersonTypeSortInput<TRes>
+    implements CopyWith_Input_PersonTypeSortInput<TRes> {
+  _CopyWithStubImpl_Input_PersonTypeSortInput(this._res);
 
   TRes _res;
 
-  call({Enum_SortOrder? order, Enum_CollegeSortField? field}) => _res;
+  call({Enum_SortOrder? order, Enum_PersonTypeSortField? field}) => _res;
 }
 
-class Input_CreateChurchInput {
-  factory Input_CreateChurchInput({required String name}) =>
-      Input_CreateChurchInput._({r'name': name});
-
-  Input_CreateChurchInput._(this._$data);
-
-  factory Input_CreateChurchInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$name = data['name'];
-    result$data['name'] = (l$name as String);
-    return Input_CreateChurchInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String get name => (_$data['name'] as String);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$name = name;
-    result$data['name'] = l$name;
-    return result$data;
-  }
-
-  CopyWith_Input_CreateChurchInput<Input_CreateChurchInput> get copyWith =>
-      CopyWith_Input_CreateChurchInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_CreateChurchInput || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    return Object.hashAll([l$name]);
-  }
-}
-
-abstract class CopyWith_Input_CreateChurchInput<TRes> {
-  factory CopyWith_Input_CreateChurchInput(
-    Input_CreateChurchInput instance,
-    TRes Function(Input_CreateChurchInput) then,
-  ) = _CopyWithImpl_Input_CreateChurchInput;
-
-  factory CopyWith_Input_CreateChurchInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_CreateChurchInput;
-
-  TRes call({String? name});
-}
-
-class _CopyWithImpl_Input_CreateChurchInput<TRes>
-    implements CopyWith_Input_CreateChurchInput<TRes> {
-  _CopyWithImpl_Input_CreateChurchInput(this._instance, this._then);
-
-  final Input_CreateChurchInput _instance;
-
-  final TRes Function(Input_CreateChurchInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? name = _undefined}) => _then(
-    Input_CreateChurchInput._({
-      ..._instance._$data,
-      if (name != _undefined && name != null) 'name': (name as String),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_CreateChurchInput<TRes>
-    implements CopyWith_Input_CreateChurchInput<TRes> {
-  _CopyWithStubImpl_Input_CreateChurchInput(this._res);
-
-  TRes _res;
-
-  call({String? name}) => _res;
-}
-
-class Input_ChurchFilterIsHidden {
-  factory Input_ChurchFilterIsHidden({
+class Input_PersonStateFilterColor {
+  factory Input_PersonStateFilterColor({
     bool? isNil,
-    bool? eq,
-    bool? notEq,
-    List<bool>? $in,
-    bool? lessThan,
-    bool? greaterThan,
-    bool? lessThanOrEqual,
-    bool? greaterThanOrEqual,
-    bool? isDistinctFrom,
-    bool? isNotDistinctFrom,
-  }) => Input_ChurchFilterIsHidden._({
+    int? eq,
+    int? notEq,
+    List<int>? $in,
+    int? lessThan,
+    int? greaterThan,
+    int? lessThanOrEqual,
+    int? greaterThanOrEqual,
+    int? isDistinctFrom,
+    int? isNotDistinctFrom,
+  }) => Input_PersonStateFilterColor._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -156,9 +67,9 @@ class Input_ChurchFilterIsHidden {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_ChurchFilterIsHidden._(this._$data);
+  Input_PersonStateFilterColor._(this._$data);
 
-  factory Input_ChurchFilterIsHidden.fromJson(Map<String, dynamic> data) {
+  factory Input_PersonStateFilterColor.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -166,66 +77,66 @@ class Input_ChurchFilterIsHidden {
     }
     if (data.containsKey('eq')) {
       final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as bool?);
+      result$data['eq'] = (l$eq as int?);
     }
     if (data.containsKey('notEq')) {
       final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as bool?);
+      result$data['notEq'] = (l$notEq as int?);
     }
     if (data.containsKey('in')) {
       final l$$in = data['in'];
       result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as bool))
+          ?.map((e) => (e as int))
           .toList();
     }
     if (data.containsKey('lessThan')) {
       final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as bool?);
+      result$data['lessThan'] = (l$lessThan as int?);
     }
     if (data.containsKey('greaterThan')) {
       final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as bool?);
+      result$data['greaterThan'] = (l$greaterThan as int?);
     }
     if (data.containsKey('lessThanOrEqual')) {
       final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as bool?);
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as int?);
     }
     if (data.containsKey('greaterThanOrEqual')) {
       final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as bool?);
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as int?);
     }
     if (data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as bool?);
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as int?);
     }
     if (data.containsKey('isNotDistinctFrom')) {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as bool?);
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as int?);
     }
-    return Input_ChurchFilterIsHidden._(result$data);
+    return Input_PersonStateFilterColor._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   bool? get isNil => (_$data['isNil'] as bool?);
 
-  bool? get eq => (_$data['eq'] as bool?);
+  int? get eq => (_$data['eq'] as int?);
 
-  bool? get notEq => (_$data['notEq'] as bool?);
+  int? get notEq => (_$data['notEq'] as int?);
 
-  List<bool>? get $in => (_$data['in'] as List<bool>?);
+  List<int>? get $in => (_$data['in'] as List<int>?);
 
-  bool? get lessThan => (_$data['lessThan'] as bool?);
+  int? get lessThan => (_$data['lessThan'] as int?);
 
-  bool? get greaterThan => (_$data['greaterThan'] as bool?);
+  int? get greaterThan => (_$data['greaterThan'] as int?);
 
-  bool? get lessThanOrEqual => (_$data['lessThanOrEqual'] as bool?);
+  int? get lessThanOrEqual => (_$data['lessThanOrEqual'] as int?);
 
-  bool? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as bool?);
+  int? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as int?);
 
-  bool? get isDistinctFrom => (_$data['isDistinctFrom'] as bool?);
+  int? get isDistinctFrom => (_$data['isDistinctFrom'] as int?);
 
-  bool? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as bool?);
+  int? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as int?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -272,15 +183,15 @@ class Input_ChurchFilterIsHidden {
     return result$data;
   }
 
-  CopyWith_Input_ChurchFilterIsHidden<Input_ChurchFilterIsHidden>
-  get copyWith => CopyWith_Input_ChurchFilterIsHidden(this, (i) => i);
+  CopyWith_Input_PersonStateFilterColor<Input_PersonStateFilterColor>
+  get copyWith => CopyWith_Input_PersonStateFilterColor(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_ChurchFilterIsHidden ||
+    if (other is! Input_PersonStateFilterColor ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -417,36 +328,36 @@ class Input_ChurchFilterIsHidden {
   }
 }
 
-abstract class CopyWith_Input_ChurchFilterIsHidden<TRes> {
-  factory CopyWith_Input_ChurchFilterIsHidden(
-    Input_ChurchFilterIsHidden instance,
-    TRes Function(Input_ChurchFilterIsHidden) then,
-  ) = _CopyWithImpl_Input_ChurchFilterIsHidden;
+abstract class CopyWith_Input_PersonStateFilterColor<TRes> {
+  factory CopyWith_Input_PersonStateFilterColor(
+    Input_PersonStateFilterColor instance,
+    TRes Function(Input_PersonStateFilterColor) then,
+  ) = _CopyWithImpl_Input_PersonStateFilterColor;
 
-  factory CopyWith_Input_ChurchFilterIsHidden.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchFilterIsHidden;
+  factory CopyWith_Input_PersonStateFilterColor.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonStateFilterColor;
 
   TRes call({
     bool? isNil,
-    bool? eq,
-    bool? notEq,
-    List<bool>? $in,
-    bool? lessThan,
-    bool? greaterThan,
-    bool? lessThanOrEqual,
-    bool? greaterThanOrEqual,
-    bool? isDistinctFrom,
-    bool? isNotDistinctFrom,
+    int? eq,
+    int? notEq,
+    List<int>? $in,
+    int? lessThan,
+    int? greaterThan,
+    int? lessThanOrEqual,
+    int? greaterThanOrEqual,
+    int? isDistinctFrom,
+    int? isNotDistinctFrom,
   });
 }
 
-class _CopyWithImpl_Input_ChurchFilterIsHidden<TRes>
-    implements CopyWith_Input_ChurchFilterIsHidden<TRes> {
-  _CopyWithImpl_Input_ChurchFilterIsHidden(this._instance, this._then);
+class _CopyWithImpl_Input_PersonStateFilterColor<TRes>
+    implements CopyWith_Input_PersonStateFilterColor<TRes> {
+  _CopyWithImpl_Input_PersonStateFilterColor(this._instance, this._then);
 
-  final Input_ChurchFilterIsHidden _instance;
+  final Input_PersonStateFilterColor _instance;
 
-  final TRes Function(Input_ChurchFilterIsHidden) _then;
+  final TRes Function(Input_PersonStateFilterColor) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -462,48 +373,48 @@ class _CopyWithImpl_Input_ChurchFilterIsHidden<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_ChurchFilterIsHidden._({
+    Input_PersonStateFilterColor._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as bool?),
-      if (notEq != _undefined) 'notEq': (notEq as bool?),
-      if ($in != _undefined) 'in': ($in as List<bool>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as bool?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as bool?),
+      if (eq != _undefined) 'eq': (eq as int?),
+      if (notEq != _undefined) 'notEq': (notEq as int?),
+      if ($in != _undefined) 'in': ($in as List<int>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as int?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as int?),
       if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as bool?),
+        'lessThanOrEqual': (lessThanOrEqual as int?),
       if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as bool?),
+        'greaterThanOrEqual': (greaterThanOrEqual as int?),
       if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as bool?),
+        'isDistinctFrom': (isDistinctFrom as int?),
       if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as bool?),
+        'isNotDistinctFrom': (isNotDistinctFrom as int?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_ChurchFilterIsHidden<TRes>
-    implements CopyWith_Input_ChurchFilterIsHidden<TRes> {
-  _CopyWithStubImpl_Input_ChurchFilterIsHidden(this._res);
+class _CopyWithStubImpl_Input_PersonStateFilterColor<TRes>
+    implements CopyWith_Input_PersonStateFilterColor<TRes> {
+  _CopyWithStubImpl_Input_PersonStateFilterColor(this._res);
 
   TRes _res;
 
   call({
     bool? isNil,
-    bool? eq,
-    bool? notEq,
-    List<bool>? $in,
-    bool? lessThan,
-    bool? greaterThan,
-    bool? lessThanOrEqual,
-    bool? greaterThanOrEqual,
-    bool? isDistinctFrom,
-    bool? isNotDistinctFrom,
+    int? eq,
+    int? notEq,
+    List<int>? $in,
+    int? lessThan,
+    int? greaterThan,
+    int? lessThanOrEqual,
+    int? greaterThanOrEqual,
+    int? isDistinctFrom,
+    int? isNotDistinctFrom,
   }) => _res;
 }
 
-class Input_ChurchFilterName {
-  factory Input_ChurchFilterName({
+class Input_PersonStateFilterName {
+  factory Input_PersonStateFilterName({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -519,7 +430,7 @@ class Input_ChurchFilterName {
     String? stringStartsWith,
     String? like,
     String? ilike,
-  }) => Input_ChurchFilterName._({
+  }) => Input_PersonStateFilterName._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -537,9 +448,9 @@ class Input_ChurchFilterName {
     if (ilike != null) r'ilike': ilike,
   });
 
-  Input_ChurchFilterName._(this._$data);
+  Input_PersonStateFilterName._(this._$data);
 
-  factory Input_ChurchFilterName.fromJson(Map<String, dynamic> data) {
+  factory Input_PersonStateFilterName.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -603,7 +514,7 @@ class Input_ChurchFilterName {
       final l$ilike = data['ilike'];
       result$data['ilike'] = (l$ilike as String?);
     }
-    return Input_ChurchFilterName._(result$data);
+    return Input_PersonStateFilterName._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -703,15 +614,16 @@ class Input_ChurchFilterName {
     return result$data;
   }
 
-  CopyWith_Input_ChurchFilterName<Input_ChurchFilterName> get copyWith =>
-      CopyWith_Input_ChurchFilterName(this, (i) => i);
+  CopyWith_Input_PersonStateFilterName<Input_PersonStateFilterName>
+  get copyWith => CopyWith_Input_PersonStateFilterName(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_ChurchFilterName || runtimeType != other.runtimeType) {
+    if (other is! Input_PersonStateFilterName ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$isNil = isNil;
@@ -900,14 +812,14 @@ class Input_ChurchFilterName {
   }
 }
 
-abstract class CopyWith_Input_ChurchFilterName<TRes> {
-  factory CopyWith_Input_ChurchFilterName(
-    Input_ChurchFilterName instance,
-    TRes Function(Input_ChurchFilterName) then,
-  ) = _CopyWithImpl_Input_ChurchFilterName;
+abstract class CopyWith_Input_PersonStateFilterName<TRes> {
+  factory CopyWith_Input_PersonStateFilterName(
+    Input_PersonStateFilterName instance,
+    TRes Function(Input_PersonStateFilterName) then,
+  ) = _CopyWithImpl_Input_PersonStateFilterName;
 
-  factory CopyWith_Input_ChurchFilterName.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchFilterName;
+  factory CopyWith_Input_PersonStateFilterName.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonStateFilterName;
 
   TRes call({
     bool? isNil,
@@ -928,13 +840,13 @@ abstract class CopyWith_Input_ChurchFilterName<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_ChurchFilterName<TRes>
-    implements CopyWith_Input_ChurchFilterName<TRes> {
-  _CopyWithImpl_Input_ChurchFilterName(this._instance, this._then);
+class _CopyWithImpl_Input_PersonStateFilterName<TRes>
+    implements CopyWith_Input_PersonStateFilterName<TRes> {
+  _CopyWithImpl_Input_PersonStateFilterName(this._instance, this._then);
 
-  final Input_ChurchFilterName _instance;
+  final Input_PersonStateFilterName _instance;
 
-  final TRes Function(Input_ChurchFilterName) _then;
+  final TRes Function(Input_PersonStateFilterName) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -955,7 +867,7 @@ class _CopyWithImpl_Input_ChurchFilterName<TRes>
     Object? like = _undefined,
     Object? ilike = _undefined,
   }) => _then(
-    Input_ChurchFilterName._({
+    Input_PersonStateFilterName._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as String?),
@@ -982,9 +894,9 @@ class _CopyWithImpl_Input_ChurchFilterName<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_ChurchFilterName<TRes>
-    implements CopyWith_Input_ChurchFilterName<TRes> {
-  _CopyWithStubImpl_Input_ChurchFilterName(this._res);
+class _CopyWithStubImpl_Input_PersonStateFilterName<TRes>
+    implements CopyWith_Input_PersonStateFilterName<TRes> {
+  _CopyWithStubImpl_Input_PersonStateFilterName(this._res);
 
   TRes _res;
 
@@ -1007,8 +919,8 @@ class _CopyWithStubImpl_Input_ChurchFilterName<TRes>
   }) => _res;
 }
 
-class Input_ChurchFilterId {
-  factory Input_ChurchFilterId({
+class Input_PersonStateFilterId {
+  factory Input_PersonStateFilterId({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -1019,7 +931,7 @@ class Input_ChurchFilterId {
     String? greaterThanOrEqual,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
-  }) => Input_ChurchFilterId._({
+  }) => Input_PersonStateFilterId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -1032,9 +944,9 @@ class Input_ChurchFilterId {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_ChurchFilterId._(this._$data);
+  Input_PersonStateFilterId._(this._$data);
 
-  factory Input_ChurchFilterId.fromJson(Map<String, dynamic> data) {
+  factory Input_PersonStateFilterId.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -1078,7 +990,7 @@ class Input_ChurchFilterId {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
       result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_ChurchFilterId._(result$data);
+    return Input_PersonStateFilterId._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -1148,15 +1060,16 @@ class Input_ChurchFilterId {
     return result$data;
   }
 
-  CopyWith_Input_ChurchFilterId<Input_ChurchFilterId> get copyWith =>
-      CopyWith_Input_ChurchFilterId(this, (i) => i);
+  CopyWith_Input_PersonStateFilterId<Input_PersonStateFilterId> get copyWith =>
+      CopyWith_Input_PersonStateFilterId(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_ChurchFilterId || runtimeType != other.runtimeType) {
+    if (other is! Input_PersonStateFilterId ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$isNil = isNil;
@@ -1292,14 +1205,14 @@ class Input_ChurchFilterId {
   }
 }
 
-abstract class CopyWith_Input_ChurchFilterId<TRes> {
-  factory CopyWith_Input_ChurchFilterId(
-    Input_ChurchFilterId instance,
-    TRes Function(Input_ChurchFilterId) then,
-  ) = _CopyWithImpl_Input_ChurchFilterId;
+abstract class CopyWith_Input_PersonStateFilterId<TRes> {
+  factory CopyWith_Input_PersonStateFilterId(
+    Input_PersonStateFilterId instance,
+    TRes Function(Input_PersonStateFilterId) then,
+  ) = _CopyWithImpl_Input_PersonStateFilterId;
 
-  factory CopyWith_Input_ChurchFilterId.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchFilterId;
+  factory CopyWith_Input_PersonStateFilterId.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonStateFilterId;
 
   TRes call({
     bool? isNil,
@@ -1315,13 +1228,13 @@ abstract class CopyWith_Input_ChurchFilterId<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_ChurchFilterId<TRes>
-    implements CopyWith_Input_ChurchFilterId<TRes> {
-  _CopyWithImpl_Input_ChurchFilterId(this._instance, this._then);
+class _CopyWithImpl_Input_PersonStateFilterId<TRes>
+    implements CopyWith_Input_PersonStateFilterId<TRes> {
+  _CopyWithImpl_Input_PersonStateFilterId(this._instance, this._then);
 
-  final Input_ChurchFilterId _instance;
+  final Input_PersonStateFilterId _instance;
 
-  final TRes Function(Input_ChurchFilterId) _then;
+  final TRes Function(Input_PersonStateFilterId) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1337,7 +1250,7 @@ class _CopyWithImpl_Input_ChurchFilterId<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_ChurchFilterId._({
+    Input_PersonStateFilterId._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as String?),
@@ -1357,9 +1270,9 @@ class _CopyWithImpl_Input_ChurchFilterId<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_ChurchFilterId<TRes>
-    implements CopyWith_Input_ChurchFilterId<TRes> {
-  _CopyWithStubImpl_Input_ChurchFilterId(this._res);
+class _CopyWithStubImpl_Input_PersonStateFilterId<TRes>
+    implements CopyWith_Input_PersonStateFilterId<TRes> {
+  _CopyWithStubImpl_Input_PersonStateFilterId(this._res);
 
   TRes _res;
 
@@ -1377,33 +1290,34 @@ class _CopyWithStubImpl_Input_ChurchFilterId<TRes>
   }) => _res;
 }
 
-class Input_ChurchFilterInput {
-  factory Input_ChurchFilterInput({
-    List<Input_ChurchFilterInput>? and,
-    List<Input_ChurchFilterInput>? or,
-    List<Input_ChurchFilterInput>? not,
-    Input_ChurchFilterId? id,
-    Input_ChurchFilterName? name,
-    Input_ChurchFilterIsHidden? isHidden,
-  }) => Input_ChurchFilterInput._({
+class Input_PersonStateFilterInput {
+  factory Input_PersonStateFilterInput({
+    List<Input_PersonStateFilterInput>? and,
+    List<Input_PersonStateFilterInput>? or,
+    List<Input_PersonStateFilterInput>? not,
+    Input_PersonStateFilterId? id,
+    Input_PersonStateFilterName? name,
+    Input_PersonStateFilterColor? color,
+  }) => Input_PersonStateFilterInput._({
     if (and != null) r'and': and,
     if (or != null) r'or': or,
     if (not != null) r'not': not,
     if (id != null) r'id': id,
     if (name != null) r'name': name,
-    if (isHidden != null) r'isHidden': isHidden,
+    if (color != null) r'color': color,
   });
 
-  Input_ChurchFilterInput._(this._$data);
+  Input_PersonStateFilterInput._(this._$data);
 
-  factory Input_ChurchFilterInput.fromJson(Map<String, dynamic> data) {
+  factory Input_PersonStateFilterInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('and')) {
       final l$and = data['and'];
       result$data['and'] = (l$and as List<dynamic>?)
           ?.map(
-            (e) =>
-                Input_ChurchFilterInput.fromJson((e as Map<String, dynamic>)),
+            (e) => Input_PersonStateFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList();
     }
@@ -1411,8 +1325,9 @@ class Input_ChurchFilterInput {
       final l$or = data['or'];
       result$data['or'] = (l$or as List<dynamic>?)
           ?.map(
-            (e) =>
-                Input_ChurchFilterInput.fromJson((e as Map<String, dynamic>)),
+            (e) => Input_PersonStateFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList();
     }
@@ -1420,8 +1335,9 @@ class Input_ChurchFilterInput {
       final l$not = data['not'];
       result$data['not'] = (l$not as List<dynamic>?)
           ?.map(
-            (e) =>
-                Input_ChurchFilterInput.fromJson((e as Map<String, dynamic>)),
+            (e) => Input_PersonStateFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList();
     }
@@ -1429,43 +1345,46 @@ class Input_ChurchFilterInput {
       final l$id = data['id'];
       result$data['id'] = l$id == null
           ? null
-          : Input_ChurchFilterId.fromJson((l$id as Map<String, dynamic>));
+          : Input_PersonStateFilterId.fromJson((l$id as Map<String, dynamic>));
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = l$name == null
           ? null
-          : Input_ChurchFilterName.fromJson((l$name as Map<String, dynamic>));
-    }
-    if (data.containsKey('isHidden')) {
-      final l$isHidden = data['isHidden'];
-      result$data['isHidden'] = l$isHidden == null
-          ? null
-          : Input_ChurchFilterIsHidden.fromJson(
-              (l$isHidden as Map<String, dynamic>),
+          : Input_PersonStateFilterName.fromJson(
+              (l$name as Map<String, dynamic>),
             );
     }
-    return Input_ChurchFilterInput._(result$data);
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : Input_PersonStateFilterColor.fromJson(
+              (l$color as Map<String, dynamic>),
+            );
+    }
+    return Input_PersonStateFilterInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input_ChurchFilterInput>? get and =>
-      (_$data['and'] as List<Input_ChurchFilterInput>?);
+  List<Input_PersonStateFilterInput>? get and =>
+      (_$data['and'] as List<Input_PersonStateFilterInput>?);
 
-  List<Input_ChurchFilterInput>? get or =>
-      (_$data['or'] as List<Input_ChurchFilterInput>?);
+  List<Input_PersonStateFilterInput>? get or =>
+      (_$data['or'] as List<Input_PersonStateFilterInput>?);
 
-  List<Input_ChurchFilterInput>? get not =>
-      (_$data['not'] as List<Input_ChurchFilterInput>?);
+  List<Input_PersonStateFilterInput>? get not =>
+      (_$data['not'] as List<Input_PersonStateFilterInput>?);
 
-  Input_ChurchFilterId? get id => (_$data['id'] as Input_ChurchFilterId?);
+  Input_PersonStateFilterId? get id =>
+      (_$data['id'] as Input_PersonStateFilterId?);
 
-  Input_ChurchFilterName? get name =>
-      (_$data['name'] as Input_ChurchFilterName?);
+  Input_PersonStateFilterName? get name =>
+      (_$data['name'] as Input_PersonStateFilterName?);
 
-  Input_ChurchFilterIsHidden? get isHidden =>
-      (_$data['isHidden'] as Input_ChurchFilterIsHidden?);
+  Input_PersonStateFilterColor? get color =>
+      (_$data['color'] as Input_PersonStateFilterColor?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1489,22 +1408,23 @@ class Input_ChurchFilterInput {
       final l$name = name;
       result$data['name'] = l$name?.toJson();
     }
-    if (_$data.containsKey('isHidden')) {
-      final l$isHidden = isHidden;
-      result$data['isHidden'] = l$isHidden?.toJson();
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color?.toJson();
     }
     return result$data;
   }
 
-  CopyWith_Input_ChurchFilterInput<Input_ChurchFilterInput> get copyWith =>
-      CopyWith_Input_ChurchFilterInput(this, (i) => i);
+  CopyWith_Input_PersonStateFilterInput<Input_PersonStateFilterInput>
+  get copyWith => CopyWith_Input_PersonStateFilterInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_ChurchFilterInput || runtimeType != other.runtimeType) {
+    if (other is! Input_PersonStateFilterInput ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$and = and;
@@ -1580,13 +1500,12 @@ class Input_ChurchFilterInput {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$isHidden = isHidden;
-    final lOther$isHidden = other.isHidden;
-    if (_$data.containsKey('isHidden') !=
-        other._$data.containsKey('isHidden')) {
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
       return false;
     }
-    if (l$isHidden != lOther$isHidden) {
+    if (l$color != lOther$color) {
       return false;
     }
     return true;
@@ -1599,7 +1518,7 @@ class Input_ChurchFilterInput {
     final l$not = not;
     final l$id = id;
     final l$name = name;
-    final l$isHidden = isHidden;
+    final l$color = color;
     return Object.hashAll([
       _$data.containsKey('and')
           ? l$and == null
@@ -1618,58 +1537,64 @@ class Input_ChurchFilterInput {
           : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('isHidden') ? l$isHidden : const {},
+      _$data.containsKey('color') ? l$color : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Input_ChurchFilterInput<TRes> {
-  factory CopyWith_Input_ChurchFilterInput(
-    Input_ChurchFilterInput instance,
-    TRes Function(Input_ChurchFilterInput) then,
-  ) = _CopyWithImpl_Input_ChurchFilterInput;
+abstract class CopyWith_Input_PersonStateFilterInput<TRes> {
+  factory CopyWith_Input_PersonStateFilterInput(
+    Input_PersonStateFilterInput instance,
+    TRes Function(Input_PersonStateFilterInput) then,
+  ) = _CopyWithImpl_Input_PersonStateFilterInput;
 
-  factory CopyWith_Input_ChurchFilterInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchFilterInput;
+  factory CopyWith_Input_PersonStateFilterInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonStateFilterInput;
 
   TRes call({
-    List<Input_ChurchFilterInput>? and,
-    List<Input_ChurchFilterInput>? or,
-    List<Input_ChurchFilterInput>? not,
-    Input_ChurchFilterId? id,
-    Input_ChurchFilterName? name,
-    Input_ChurchFilterIsHidden? isHidden,
+    List<Input_PersonStateFilterInput>? and,
+    List<Input_PersonStateFilterInput>? or,
+    List<Input_PersonStateFilterInput>? not,
+    Input_PersonStateFilterId? id,
+    Input_PersonStateFilterName? name,
+    Input_PersonStateFilterColor? color,
   });
   TRes and(
-    Iterable<Input_ChurchFilterInput>? Function(
-      Iterable<CopyWith_Input_ChurchFilterInput<Input_ChurchFilterInput>>?,
+    Iterable<Input_PersonStateFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_PersonStateFilterInput<Input_PersonStateFilterInput>
+      >?,
     )
     _fn,
   );
   TRes or(
-    Iterable<Input_ChurchFilterInput>? Function(
-      Iterable<CopyWith_Input_ChurchFilterInput<Input_ChurchFilterInput>>?,
+    Iterable<Input_PersonStateFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_PersonStateFilterInput<Input_PersonStateFilterInput>
+      >?,
     )
     _fn,
   );
   TRes not(
-    Iterable<Input_ChurchFilterInput>? Function(
-      Iterable<CopyWith_Input_ChurchFilterInput<Input_ChurchFilterInput>>?,
+    Iterable<Input_PersonStateFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_PersonStateFilterInput<Input_PersonStateFilterInput>
+      >?,
     )
     _fn,
   );
-  CopyWith_Input_ChurchFilterId<TRes> get id;
-  CopyWith_Input_ChurchFilterName<TRes> get name;
-  CopyWith_Input_ChurchFilterIsHidden<TRes> get isHidden;
+  CopyWith_Input_PersonStateFilterId<TRes> get id;
+  CopyWith_Input_PersonStateFilterName<TRes> get name;
+  CopyWith_Input_PersonStateFilterColor<TRes> get color;
 }
 
-class _CopyWithImpl_Input_ChurchFilterInput<TRes>
-    implements CopyWith_Input_ChurchFilterInput<TRes> {
-  _CopyWithImpl_Input_ChurchFilterInput(this._instance, this._then);
+class _CopyWithImpl_Input_PersonStateFilterInput<TRes>
+    implements CopyWith_Input_PersonStateFilterInput<TRes> {
+  _CopyWithImpl_Input_PersonStateFilterInput(this._instance, this._then);
 
-  final Input_ChurchFilterInput _instance;
+  final Input_PersonStateFilterInput _instance;
 
-  final TRes Function(Input_ChurchFilterInput) _then;
+  final TRes Function(Input_PersonStateFilterInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1679,91 +1604,108 @@ class _CopyWithImpl_Input_ChurchFilterInput<TRes>
     Object? not = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
-    Object? isHidden = _undefined,
+    Object? color = _undefined,
   }) => _then(
-    Input_ChurchFilterInput._({
+    Input_PersonStateFilterInput._({
       ..._instance._$data,
-      if (and != _undefined) 'and': (and as List<Input_ChurchFilterInput>?),
-      if (or != _undefined) 'or': (or as List<Input_ChurchFilterInput>?),
-      if (not != _undefined) 'not': (not as List<Input_ChurchFilterInput>?),
-      if (id != _undefined) 'id': (id as Input_ChurchFilterId?),
-      if (name != _undefined) 'name': (name as Input_ChurchFilterName?),
-      if (isHidden != _undefined)
-        'isHidden': (isHidden as Input_ChurchFilterIsHidden?),
+      if (and != _undefined)
+        'and': (and as List<Input_PersonStateFilterInput>?),
+      if (or != _undefined) 'or': (or as List<Input_PersonStateFilterInput>?),
+      if (not != _undefined)
+        'not': (not as List<Input_PersonStateFilterInput>?),
+      if (id != _undefined) 'id': (id as Input_PersonStateFilterId?),
+      if (name != _undefined) 'name': (name as Input_PersonStateFilterName?),
+      if (color != _undefined)
+        'color': (color as Input_PersonStateFilterColor?),
     }),
   );
 
   TRes and(
-    Iterable<Input_ChurchFilterInput>? Function(
-      Iterable<CopyWith_Input_ChurchFilterInput<Input_ChurchFilterInput>>?,
+    Iterable<Input_PersonStateFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_PersonStateFilterInput<Input_PersonStateFilterInput>
+      >?,
     )
     _fn,
   ) => call(
     and: _fn(
-      _instance.and?.map((e) => CopyWith_Input_ChurchFilterInput(e, (i) => i)),
+      _instance.and?.map(
+        (e) => CopyWith_Input_PersonStateFilterInput(e, (i) => i),
+      ),
     )?.toList(),
   );
 
   TRes or(
-    Iterable<Input_ChurchFilterInput>? Function(
-      Iterable<CopyWith_Input_ChurchFilterInput<Input_ChurchFilterInput>>?,
+    Iterable<Input_PersonStateFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_PersonStateFilterInput<Input_PersonStateFilterInput>
+      >?,
     )
     _fn,
   ) => call(
     or: _fn(
-      _instance.or?.map((e) => CopyWith_Input_ChurchFilterInput(e, (i) => i)),
+      _instance.or?.map(
+        (e) => CopyWith_Input_PersonStateFilterInput(e, (i) => i),
+      ),
     )?.toList(),
   );
 
   TRes not(
-    Iterable<Input_ChurchFilterInput>? Function(
-      Iterable<CopyWith_Input_ChurchFilterInput<Input_ChurchFilterInput>>?,
+    Iterable<Input_PersonStateFilterInput>? Function(
+      Iterable<
+        CopyWith_Input_PersonStateFilterInput<Input_PersonStateFilterInput>
+      >?,
     )
     _fn,
   ) => call(
     not: _fn(
-      _instance.not?.map((e) => CopyWith_Input_ChurchFilterInput(e, (i) => i)),
+      _instance.not?.map(
+        (e) => CopyWith_Input_PersonStateFilterInput(e, (i) => i),
+      ),
     )?.toList(),
   );
 
-  CopyWith_Input_ChurchFilterId<TRes> get id {
+  CopyWith_Input_PersonStateFilterId<TRes> get id {
     final local$id = _instance.id;
     return local$id == null
-        ? CopyWith_Input_ChurchFilterId.stub(_then(_instance))
-        : CopyWith_Input_ChurchFilterId(local$id, (e) => call(id: e));
+        ? CopyWith_Input_PersonStateFilterId.stub(_then(_instance))
+        : CopyWith_Input_PersonStateFilterId(local$id, (e) => call(id: e));
   }
 
-  CopyWith_Input_ChurchFilterName<TRes> get name {
+  CopyWith_Input_PersonStateFilterName<TRes> get name {
     final local$name = _instance.name;
     return local$name == null
-        ? CopyWith_Input_ChurchFilterName.stub(_then(_instance))
-        : CopyWith_Input_ChurchFilterName(local$name, (e) => call(name: e));
+        ? CopyWith_Input_PersonStateFilterName.stub(_then(_instance))
+        : CopyWith_Input_PersonStateFilterName(
+            local$name,
+            (e) => call(name: e),
+          );
   }
 
-  CopyWith_Input_ChurchFilterIsHidden<TRes> get isHidden {
-    final local$isHidden = _instance.isHidden;
-    return local$isHidden == null
-        ? CopyWith_Input_ChurchFilterIsHidden.stub(_then(_instance))
-        : CopyWith_Input_ChurchFilterIsHidden(
-            local$isHidden,
-            (e) => call(isHidden: e),
+  CopyWith_Input_PersonStateFilterColor<TRes> get color {
+    final local$color = _instance.color;
+    return local$color == null
+        ? CopyWith_Input_PersonStateFilterColor.stub(_then(_instance))
+        : CopyWith_Input_PersonStateFilterColor(
+            local$color,
+            (e) => call(color: e),
           );
   }
 }
 
-class _CopyWithStubImpl_Input_ChurchFilterInput<TRes>
-    implements CopyWith_Input_ChurchFilterInput<TRes> {
-  _CopyWithStubImpl_Input_ChurchFilterInput(this._res);
+class _CopyWithStubImpl_Input_PersonStateFilterInput<TRes>
+    implements CopyWith_Input_PersonStateFilterInput<TRes> {
+  _CopyWithStubImpl_Input_PersonStateFilterInput(this._res);
 
   TRes _res;
 
   call({
-    List<Input_ChurchFilterInput>? and,
-    List<Input_ChurchFilterInput>? or,
-    List<Input_ChurchFilterInput>? not,
-    Input_ChurchFilterId? id,
-    Input_ChurchFilterName? name,
-    Input_ChurchFilterIsHidden? isHidden,
+    List<Input_PersonStateFilterInput>? and,
+    List<Input_PersonStateFilterInput>? or,
+    List<Input_PersonStateFilterInput>? not,
+    Input_PersonStateFilterId? id,
+    Input_PersonStateFilterName? name,
+    Input_PersonStateFilterColor? color,
   }) => _res;
 
   and(_fn) => _res;
@@ -1772,28 +1714,28 @@ class _CopyWithStubImpl_Input_ChurchFilterInput<TRes>
 
   not(_fn) => _res;
 
-  CopyWith_Input_ChurchFilterId<TRes> get id =>
-      CopyWith_Input_ChurchFilterId.stub(_res);
+  CopyWith_Input_PersonStateFilterId<TRes> get id =>
+      CopyWith_Input_PersonStateFilterId.stub(_res);
 
-  CopyWith_Input_ChurchFilterName<TRes> get name =>
-      CopyWith_Input_ChurchFilterName.stub(_res);
+  CopyWith_Input_PersonStateFilterName<TRes> get name =>
+      CopyWith_Input_PersonStateFilterName.stub(_res);
 
-  CopyWith_Input_ChurchFilterIsHidden<TRes> get isHidden =>
-      CopyWith_Input_ChurchFilterIsHidden.stub(_res);
+  CopyWith_Input_PersonStateFilterColor<TRes> get color =>
+      CopyWith_Input_PersonStateFilterColor.stub(_res);
 }
 
-class Input_ChurchSortInput {
-  factory Input_ChurchSortInput({
+class Input_PersonStateSortInput {
+  factory Input_PersonStateSortInput({
     Enum_SortOrder? order,
-    required Enum_ChurchSortField field,
-  }) => Input_ChurchSortInput._({
+    required Enum_PersonStateSortField field,
+  }) => Input_PersonStateSortInput._({
     if (order != null) r'order': order,
     r'field': field,
   });
 
-  Input_ChurchSortInput._(this._$data);
+  Input_PersonStateSortInput._(this._$data);
 
-  factory Input_ChurchSortInput.fromJson(Map<String, dynamic> data) {
+  factory Input_PersonStateSortInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('order')) {
       final l$order = data['order'];
@@ -1802,15 +1744,18 @@ class Input_ChurchSortInput {
           : fromJson_Enum_SortOrder((l$order as String));
     }
     final l$field = data['field'];
-    result$data['field'] = fromJson_Enum_ChurchSortField((l$field as String));
-    return Input_ChurchSortInput._(result$data);
+    result$data['field'] = fromJson_Enum_PersonStateSortField(
+      (l$field as String),
+    );
+    return Input_PersonStateSortInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   Enum_SortOrder? get order => (_$data['order'] as Enum_SortOrder?);
 
-  Enum_ChurchSortField get field => (_$data['field'] as Enum_ChurchSortField);
+  Enum_PersonStateSortField get field =>
+      (_$data['field'] as Enum_PersonStateSortField);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1821,19 +1766,20 @@ class Input_ChurchSortInput {
           : toJson_Enum_SortOrder(l$order);
     }
     final l$field = field;
-    result$data['field'] = toJson_Enum_ChurchSortField(l$field);
+    result$data['field'] = toJson_Enum_PersonStateSortField(l$field);
     return result$data;
   }
 
-  CopyWith_Input_ChurchSortInput<Input_ChurchSortInput> get copyWith =>
-      CopyWith_Input_ChurchSortInput(this, (i) => i);
+  CopyWith_Input_PersonStateSortInput<Input_PersonStateSortInput>
+  get copyWith => CopyWith_Input_PersonStateSortInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_ChurchSortInput || runtimeType != other.runtimeType) {
+    if (other is! Input_PersonStateSortInput ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$order = order;
@@ -1863,102 +1809,85 @@ class Input_ChurchSortInput {
   }
 }
 
-abstract class CopyWith_Input_ChurchSortInput<TRes> {
-  factory CopyWith_Input_ChurchSortInput(
-    Input_ChurchSortInput instance,
-    TRes Function(Input_ChurchSortInput) then,
-  ) = _CopyWithImpl_Input_ChurchSortInput;
+abstract class CopyWith_Input_PersonStateSortInput<TRes> {
+  factory CopyWith_Input_PersonStateSortInput(
+    Input_PersonStateSortInput instance,
+    TRes Function(Input_PersonStateSortInput) then,
+  ) = _CopyWithImpl_Input_PersonStateSortInput;
 
-  factory CopyWith_Input_ChurchSortInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchSortInput;
+  factory CopyWith_Input_PersonStateSortInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonStateSortInput;
 
-  TRes call({Enum_SortOrder? order, Enum_ChurchSortField? field});
+  TRes call({Enum_SortOrder? order, Enum_PersonStateSortField? field});
 }
 
-class _CopyWithImpl_Input_ChurchSortInput<TRes>
-    implements CopyWith_Input_ChurchSortInput<TRes> {
-  _CopyWithImpl_Input_ChurchSortInput(this._instance, this._then);
+class _CopyWithImpl_Input_PersonStateSortInput<TRes>
+    implements CopyWith_Input_PersonStateSortInput<TRes> {
+  _CopyWithImpl_Input_PersonStateSortInput(this._instance, this._then);
 
-  final Input_ChurchSortInput _instance;
+  final Input_PersonStateSortInput _instance;
 
-  final TRes Function(Input_ChurchSortInput) _then;
+  final TRes Function(Input_PersonStateSortInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? order = _undefined, Object? field = _undefined}) => _then(
-    Input_ChurchSortInput._({
+    Input_PersonStateSortInput._({
       ..._instance._$data,
       if (order != _undefined) 'order': (order as Enum_SortOrder?),
       if (field != _undefined && field != null)
-        'field': (field as Enum_ChurchSortField),
+        'field': (field as Enum_PersonStateSortField),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_ChurchSortInput<TRes>
-    implements CopyWith_Input_ChurchSortInput<TRes> {
-  _CopyWithStubImpl_Input_ChurchSortInput(this._res);
+class _CopyWithStubImpl_Input_PersonStateSortInput<TRes>
+    implements CopyWith_Input_PersonStateSortInput<TRes> {
+  _CopyWithStubImpl_Input_PersonStateSortInput(this._res);
 
   TRes _res;
 
-  call({Enum_SortOrder? order, Enum_ChurchSortField? field}) => _res;
+  call({Enum_SortOrder? order, Enum_PersonStateSortField? field}) => _res;
 }
 
-class Input_OverrideDataCheckInput {
-  factory Input_OverrideDataCheckInput({
-    required String familyId,
-    required bool isComplete,
-  }) => Input_OverrideDataCheckInput._({
-    r'familyId': familyId,
-    r'isComplete': isComplete,
-  });
+class Input_CreateJobInput {
+  factory Input_CreateJobInput({required String name}) =>
+      Input_CreateJobInput._({r'name': name});
 
-  Input_OverrideDataCheckInput._(this._$data);
+  Input_CreateJobInput._(this._$data);
 
-  factory Input_OverrideDataCheckInput.fromJson(Map<String, dynamic> data) {
+  factory Input_CreateJobInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    final l$familyId = data['familyId'];
-    result$data['familyId'] = (l$familyId as String);
-    final l$isComplete = data['isComplete'];
-    result$data['isComplete'] = (l$isComplete as bool);
-    return Input_OverrideDataCheckInput._(result$data);
+    final l$name = data['name'];
+    result$data['name'] = (l$name as String);
+    return Input_CreateJobInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  String get familyId => (_$data['familyId'] as String);
-
-  bool get isComplete => (_$data['isComplete'] as bool);
+  String get name => (_$data['name'] as String);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    final l$familyId = familyId;
-    result$data['familyId'] = l$familyId;
-    final l$isComplete = isComplete;
-    result$data['isComplete'] = l$isComplete;
+    final l$name = name;
+    result$data['name'] = l$name;
     return result$data;
   }
 
-  CopyWith_Input_OverrideDataCheckInput<Input_OverrideDataCheckInput>
-  get copyWith => CopyWith_Input_OverrideDataCheckInput(this, (i) => i);
+  CopyWith_Input_CreateJobInput<Input_CreateJobInput> get copyWith =>
+      CopyWith_Input_CreateJobInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_OverrideDataCheckInput ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_CreateJobInput || runtimeType != other.runtimeType) {
       return false;
     }
-    final l$familyId = familyId;
-    final lOther$familyId = other.familyId;
-    if (l$familyId != lOther$familyId) {
-      return false;
-    }
-    final l$isComplete = isComplete;
-    final lOther$isComplete = other.isComplete;
-    if (l$isComplete != lOther$isComplete) {
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
       return false;
     }
     return true;
@@ -1966,68 +1895,68 @@ class Input_OverrideDataCheckInput {
 
   @override
   int get hashCode {
-    final l$familyId = familyId;
-    final l$isComplete = isComplete;
-    return Object.hashAll([l$familyId, l$isComplete]);
+    final l$name = name;
+    return Object.hashAll([l$name]);
   }
 }
 
-abstract class CopyWith_Input_OverrideDataCheckInput<TRes> {
-  factory CopyWith_Input_OverrideDataCheckInput(
-    Input_OverrideDataCheckInput instance,
-    TRes Function(Input_OverrideDataCheckInput) then,
-  ) = _CopyWithImpl_Input_OverrideDataCheckInput;
+abstract class CopyWith_Input_CreateJobInput<TRes> {
+  factory CopyWith_Input_CreateJobInput(
+    Input_CreateJobInput instance,
+    TRes Function(Input_CreateJobInput) then,
+  ) = _CopyWithImpl_Input_CreateJobInput;
 
-  factory CopyWith_Input_OverrideDataCheckInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_OverrideDataCheckInput;
+  factory CopyWith_Input_CreateJobInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CreateJobInput;
 
-  TRes call({String? familyId, bool? isComplete});
+  TRes call({String? name});
 }
 
-class _CopyWithImpl_Input_OverrideDataCheckInput<TRes>
-    implements CopyWith_Input_OverrideDataCheckInput<TRes> {
-  _CopyWithImpl_Input_OverrideDataCheckInput(this._instance, this._then);
+class _CopyWithImpl_Input_CreateJobInput<TRes>
+    implements CopyWith_Input_CreateJobInput<TRes> {
+  _CopyWithImpl_Input_CreateJobInput(this._instance, this._then);
 
-  final Input_OverrideDataCheckInput _instance;
+  final Input_CreateJobInput _instance;
 
-  final TRes Function(Input_OverrideDataCheckInput) _then;
+  final TRes Function(Input_CreateJobInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? familyId = _undefined, Object? isComplete = _undefined}) =>
-      _then(
-        Input_OverrideDataCheckInput._({
-          ..._instance._$data,
-          if (familyId != _undefined && familyId != null)
-            'familyId': (familyId as String),
-          if (isComplete != _undefined && isComplete != null)
-            'isComplete': (isComplete as bool),
-        }),
-      );
+  TRes call({Object? name = _undefined}) => _then(
+    Input_CreateJobInput._({
+      ..._instance._$data,
+      if (name != _undefined && name != null) 'name': (name as String),
+    }),
+  );
 }
 
-class _CopyWithStubImpl_Input_OverrideDataCheckInput<TRes>
-    implements CopyWith_Input_OverrideDataCheckInput<TRes> {
-  _CopyWithStubImpl_Input_OverrideDataCheckInput(this._res);
+class _CopyWithStubImpl_Input_CreateJobInput<TRes>
+    implements CopyWith_Input_CreateJobInput<TRes> {
+  _CopyWithStubImpl_Input_CreateJobInput(this._res);
 
   TRes _res;
 
-  call({String? familyId, bool? isComplete}) => _res;
+  call({String? name}) => _res;
 }
 
-class Input_DataCheckOverrideFilterUpdatedBy {
-  factory Input_DataCheckOverrideFilterUpdatedBy({
+class Input_JobFilterName {
+  factory Input_JobFilterName({
     bool? isNil,
     String? eq,
     String? notEq,
-    List<String?>? $in,
+    List<String>? $in,
     String? lessThan,
     String? greaterThan,
     String? lessThanOrEqual,
     String? greaterThanOrEqual,
+    String? contains,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
-  }) => Input_DataCheckOverrideFilterUpdatedBy._({
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  }) => Input_JobFilterName._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -2036,15 +1965,18 @@ class Input_DataCheckOverrideFilterUpdatedBy {
     if (greaterThan != null) r'greaterThan': greaterThan,
     if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
     if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (contains != null) r'contains': contains,
     if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+    if (stringEndsWith != null) r'stringEndsWith': stringEndsWith,
+    if (stringStartsWith != null) r'stringStartsWith': stringStartsWith,
+    if (like != null) r'like': like,
+    if (ilike != null) r'ilike': ilike,
   });
 
-  Input_DataCheckOverrideFilterUpdatedBy._(this._$data);
+  Input_JobFilterName._(this._$data);
 
-  factory Input_DataCheckOverrideFilterUpdatedBy.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Input_JobFilterName.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -2061,7 +1993,7 @@ class Input_DataCheckOverrideFilterUpdatedBy {
     if (data.containsKey('in')) {
       final l$$in = data['in'];
       result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as String?))
+          ?.map((e) => (e as String))
           .toList();
     }
     if (data.containsKey('lessThan')) {
@@ -2080,6 +2012,10 @@ class Input_DataCheckOverrideFilterUpdatedBy {
       final l$greaterThanOrEqual = data['greaterThanOrEqual'];
       result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
     }
+    if (data.containsKey('contains')) {
+      final l$contains = data['contains'];
+      result$data['contains'] = (l$contains as String?);
+    }
     if (data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = data['isDistinctFrom'];
       result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
@@ -2088,7 +2024,23 @@ class Input_DataCheckOverrideFilterUpdatedBy {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
       result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_DataCheckOverrideFilterUpdatedBy._(result$data);
+    if (data.containsKey('stringEndsWith')) {
+      final l$stringEndsWith = data['stringEndsWith'];
+      result$data['stringEndsWith'] = (l$stringEndsWith as String?);
+    }
+    if (data.containsKey('stringStartsWith')) {
+      final l$stringStartsWith = data['stringStartsWith'];
+      result$data['stringStartsWith'] = (l$stringStartsWith as String?);
+    }
+    if (data.containsKey('like')) {
+      final l$like = data['like'];
+      result$data['like'] = (l$like as String?);
+    }
+    if (data.containsKey('ilike')) {
+      final l$ilike = data['ilike'];
+      result$data['ilike'] = (l$ilike as String?);
+    }
+    return Input_JobFilterName._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -2099,7 +2051,7 @@ class Input_DataCheckOverrideFilterUpdatedBy {
 
   String? get notEq => (_$data['notEq'] as String?);
 
-  List<String?>? get $in => (_$data['in'] as List<String?>?);
+  List<String>? get $in => (_$data['in'] as List<String>?);
 
   String? get lessThan => (_$data['lessThan'] as String?);
 
@@ -2109,9 +2061,19 @@ class Input_DataCheckOverrideFilterUpdatedBy {
 
   String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
 
+  String? get contains => (_$data['contains'] as String?);
+
   String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
 
   String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  String? get stringEndsWith => (_$data['stringEndsWith'] as String?);
+
+  String? get stringStartsWith => (_$data['stringStartsWith'] as String?);
+
+  String? get like => (_$data['like'] as String?);
+
+  String? get ilike => (_$data['ilike'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -2147,6 +2109,10 @@ class Input_DataCheckOverrideFilterUpdatedBy {
       final l$greaterThanOrEqual = greaterThanOrEqual;
       result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
     }
+    if (_$data.containsKey('contains')) {
+      final l$contains = contains;
+      result$data['contains'] = l$contains;
+    }
     if (_$data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = isDistinctFrom;
       result$data['isDistinctFrom'] = l$isDistinctFrom;
@@ -2155,22 +2121,34 @@ class Input_DataCheckOverrideFilterUpdatedBy {
       final l$isNotDistinctFrom = isNotDistinctFrom;
       result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
     }
+    if (_$data.containsKey('stringEndsWith')) {
+      final l$stringEndsWith = stringEndsWith;
+      result$data['stringEndsWith'] = l$stringEndsWith;
+    }
+    if (_$data.containsKey('stringStartsWith')) {
+      final l$stringStartsWith = stringStartsWith;
+      result$data['stringStartsWith'] = l$stringStartsWith;
+    }
+    if (_$data.containsKey('like')) {
+      final l$like = like;
+      result$data['like'] = l$like;
+    }
+    if (_$data.containsKey('ilike')) {
+      final l$ilike = ilike;
+      result$data['ilike'] = l$ilike;
+    }
     return result$data;
   }
 
-  CopyWith_Input_DataCheckOverrideFilterUpdatedBy<
-    Input_DataCheckOverrideFilterUpdatedBy
-  >
-  get copyWith =>
-      CopyWith_Input_DataCheckOverrideFilterUpdatedBy(this, (i) => i);
+  CopyWith_Input_JobFilterName<Input_JobFilterName> get copyWith =>
+      CopyWith_Input_JobFilterName(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_DataCheckOverrideFilterUpdatedBy ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_JobFilterName || runtimeType != other.runtimeType) {
       return false;
     }
     final l$isNil = isNil;
@@ -2252,6 +2230,15 @@ class Input_DataCheckOverrideFilterUpdatedBy {
     if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
       return false;
     }
+    final l$contains = contains;
+    final lOther$contains = other.contains;
+    if (_$data.containsKey('contains') !=
+        other._$data.containsKey('contains')) {
+      return false;
+    }
+    if (l$contains != lOther$contains) {
+      return false;
+    }
     final l$isDistinctFrom = isDistinctFrom;
     final lOther$isDistinctFrom = other.isDistinctFrom;
     if (_$data.containsKey('isDistinctFrom') !=
@@ -2270,6 +2257,40 @@ class Input_DataCheckOverrideFilterUpdatedBy {
     if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
       return false;
     }
+    final l$stringEndsWith = stringEndsWith;
+    final lOther$stringEndsWith = other.stringEndsWith;
+    if (_$data.containsKey('stringEndsWith') !=
+        other._$data.containsKey('stringEndsWith')) {
+      return false;
+    }
+    if (l$stringEndsWith != lOther$stringEndsWith) {
+      return false;
+    }
+    final l$stringStartsWith = stringStartsWith;
+    final lOther$stringStartsWith = other.stringStartsWith;
+    if (_$data.containsKey('stringStartsWith') !=
+        other._$data.containsKey('stringStartsWith')) {
+      return false;
+    }
+    if (l$stringStartsWith != lOther$stringStartsWith) {
+      return false;
+    }
+    final l$like = like;
+    final lOther$like = other.like;
+    if (_$data.containsKey('like') != other._$data.containsKey('like')) {
+      return false;
+    }
+    if (l$like != lOther$like) {
+      return false;
+    }
+    final l$ilike = ilike;
+    final lOther$ilike = other.ilike;
+    if (_$data.containsKey('ilike') != other._$data.containsKey('ilike')) {
+      return false;
+    }
+    if (l$ilike != lOther$ilike) {
+      return false;
+    }
     return true;
   }
 
@@ -2283,8 +2304,13 @@ class Input_DataCheckOverrideFilterUpdatedBy {
     final l$greaterThan = greaterThan;
     final l$lessThanOrEqual = lessThanOrEqual;
     final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$contains = contains;
     final l$isDistinctFrom = isDistinctFrom;
     final l$isNotDistinctFrom = isNotDistinctFrom;
+    final l$stringEndsWith = stringEndsWith;
+    final l$stringStartsWith = stringStartsWith;
+    final l$like = like;
+    final l$ilike = ilike;
     return Object.hashAll([
       _$data.containsKey('isNil') ? l$isNil : const {},
       _$data.containsKey('eq') ? l$eq : const {},
@@ -2300,45 +2326,52 @@ class Input_DataCheckOverrideFilterUpdatedBy {
       _$data.containsKey('greaterThanOrEqual')
           ? l$greaterThanOrEqual
           : const {},
+      _$data.containsKey('contains') ? l$contains : const {},
       _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
       _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+      _$data.containsKey('stringEndsWith') ? l$stringEndsWith : const {},
+      _$data.containsKey('stringStartsWith') ? l$stringStartsWith : const {},
+      _$data.containsKey('like') ? l$like : const {},
+      _$data.containsKey('ilike') ? l$ilike : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Input_DataCheckOverrideFilterUpdatedBy<TRes> {
-  factory CopyWith_Input_DataCheckOverrideFilterUpdatedBy(
-    Input_DataCheckOverrideFilterUpdatedBy instance,
-    TRes Function(Input_DataCheckOverrideFilterUpdatedBy) then,
-  ) = _CopyWithImpl_Input_DataCheckOverrideFilterUpdatedBy;
+abstract class CopyWith_Input_JobFilterName<TRes> {
+  factory CopyWith_Input_JobFilterName(
+    Input_JobFilterName instance,
+    TRes Function(Input_JobFilterName) then,
+  ) = _CopyWithImpl_Input_JobFilterName;
 
-  factory CopyWith_Input_DataCheckOverrideFilterUpdatedBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_DataCheckOverrideFilterUpdatedBy;
+  factory CopyWith_Input_JobFilterName.stub(TRes res) =
+      _CopyWithStubImpl_Input_JobFilterName;
 
   TRes call({
     bool? isNil,
     String? eq,
     String? notEq,
-    List<String?>? $in,
+    List<String>? $in,
     String? lessThan,
     String? greaterThan,
     String? lessThanOrEqual,
     String? greaterThanOrEqual,
+    String? contains,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
   });
 }
 
-class _CopyWithImpl_Input_DataCheckOverrideFilterUpdatedBy<TRes>
-    implements CopyWith_Input_DataCheckOverrideFilterUpdatedBy<TRes> {
-  _CopyWithImpl_Input_DataCheckOverrideFilterUpdatedBy(
-    this._instance,
-    this._then,
-  );
+class _CopyWithImpl_Input_JobFilterName<TRes>
+    implements CopyWith_Input_JobFilterName<TRes> {
+  _CopyWithImpl_Input_JobFilterName(this._instance, this._then);
 
-  final Input_DataCheckOverrideFilterUpdatedBy _instance;
+  final Input_JobFilterName _instance;
 
-  final TRes Function(Input_DataCheckOverrideFilterUpdatedBy) _then;
+  final TRes Function(Input_JobFilterName) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2351,32 +2384,44 @@ class _CopyWithImpl_Input_DataCheckOverrideFilterUpdatedBy<TRes>
     Object? greaterThan = _undefined,
     Object? lessThanOrEqual = _undefined,
     Object? greaterThanOrEqual = _undefined,
+    Object? contains = _undefined,
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
+    Object? stringEndsWith = _undefined,
+    Object? stringStartsWith = _undefined,
+    Object? like = _undefined,
+    Object? ilike = _undefined,
   }) => _then(
-    Input_DataCheckOverrideFilterUpdatedBy._({
+    Input_JobFilterName._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as String?),
       if (notEq != _undefined) 'notEq': (notEq as String?),
-      if ($in != _undefined) 'in': ($in as List<String?>?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
       if (lessThan != _undefined) 'lessThan': (lessThan as String?),
       if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
       if (lessThanOrEqual != _undefined)
         'lessThanOrEqual': (lessThanOrEqual as String?),
       if (greaterThanOrEqual != _undefined)
         'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (contains != _undefined) 'contains': (contains as String?),
       if (isDistinctFrom != _undefined)
         'isDistinctFrom': (isDistinctFrom as String?),
       if (isNotDistinctFrom != _undefined)
         'isNotDistinctFrom': (isNotDistinctFrom as String?),
+      if (stringEndsWith != _undefined)
+        'stringEndsWith': (stringEndsWith as String?),
+      if (stringStartsWith != _undefined)
+        'stringStartsWith': (stringStartsWith as String?),
+      if (like != _undefined) 'like': (like as String?),
+      if (ilike != _undefined) 'ilike': (ilike as String?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_DataCheckOverrideFilterUpdatedBy<TRes>
-    implements CopyWith_Input_DataCheckOverrideFilterUpdatedBy<TRes> {
-  _CopyWithStubImpl_Input_DataCheckOverrideFilterUpdatedBy(this._res);
+class _CopyWithStubImpl_Input_JobFilterName<TRes>
+    implements CopyWith_Input_JobFilterName<TRes> {
+  _CopyWithStubImpl_Input_JobFilterName(this._res);
 
   TRes _res;
 
@@ -2384,29 +2429,34 @@ class _CopyWithStubImpl_Input_DataCheckOverrideFilterUpdatedBy<TRes>
     bool? isNil,
     String? eq,
     String? notEq,
-    List<String?>? $in,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  }) => _res;
+}
+
+class Input_JobFilterId {
+  factory Input_JobFilterId({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
     String? lessThan,
     String? greaterThan,
     String? lessThanOrEqual,
     String? greaterThanOrEqual,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
-  }) => _res;
-}
-
-class Input_DataCheckOverrideFilterIsComplete {
-  factory Input_DataCheckOverrideFilterIsComplete({
-    bool? isNil,
-    bool? eq,
-    bool? notEq,
-    List<bool>? $in,
-    bool? lessThan,
-    bool? greaterThan,
-    bool? lessThanOrEqual,
-    bool? greaterThanOrEqual,
-    bool? isDistinctFrom,
-    bool? isNotDistinctFrom,
-  }) => Input_DataCheckOverrideFilterIsComplete._({
+  }) => Input_JobFilterId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -2419,11 +2469,9 @@ class Input_DataCheckOverrideFilterIsComplete {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_DataCheckOverrideFilterIsComplete._(this._$data);
+  Input_JobFilterId._(this._$data);
 
-  factory Input_DataCheckOverrideFilterIsComplete.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Input_JobFilterId.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -2431,66 +2479,66 @@ class Input_DataCheckOverrideFilterIsComplete {
     }
     if (data.containsKey('eq')) {
       final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as bool?);
+      result$data['eq'] = (l$eq as String?);
     }
     if (data.containsKey('notEq')) {
       final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as bool?);
+      result$data['notEq'] = (l$notEq as String?);
     }
     if (data.containsKey('in')) {
       final l$$in = data['in'];
       result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as bool))
+          ?.map((e) => (e as String))
           .toList();
     }
     if (data.containsKey('lessThan')) {
       final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as bool?);
+      result$data['lessThan'] = (l$lessThan as String?);
     }
     if (data.containsKey('greaterThan')) {
       final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as bool?);
+      result$data['greaterThan'] = (l$greaterThan as String?);
     }
     if (data.containsKey('lessThanOrEqual')) {
       final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as bool?);
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
     }
     if (data.containsKey('greaterThanOrEqual')) {
       final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as bool?);
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
     }
     if (data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as bool?);
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
     }
     if (data.containsKey('isNotDistinctFrom')) {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as bool?);
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_DataCheckOverrideFilterIsComplete._(result$data);
+    return Input_JobFilterId._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   bool? get isNil => (_$data['isNil'] as bool?);
 
-  bool? get eq => (_$data['eq'] as bool?);
+  String? get eq => (_$data['eq'] as String?);
 
-  bool? get notEq => (_$data['notEq'] as bool?);
+  String? get notEq => (_$data['notEq'] as String?);
 
-  List<bool>? get $in => (_$data['in'] as List<bool>?);
+  List<String>? get $in => (_$data['in'] as List<String>?);
 
-  bool? get lessThan => (_$data['lessThan'] as bool?);
+  String? get lessThan => (_$data['lessThan'] as String?);
 
-  bool? get greaterThan => (_$data['greaterThan'] as bool?);
+  String? get greaterThan => (_$data['greaterThan'] as String?);
 
-  bool? get lessThanOrEqual => (_$data['lessThanOrEqual'] as bool?);
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
 
-  bool? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as bool?);
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
 
-  bool? get isDistinctFrom => (_$data['isDistinctFrom'] as bool?);
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
 
-  bool? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as bool?);
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -2537,19 +2585,15 @@ class Input_DataCheckOverrideFilterIsComplete {
     return result$data;
   }
 
-  CopyWith_Input_DataCheckOverrideFilterIsComplete<
-    Input_DataCheckOverrideFilterIsComplete
-  >
-  get copyWith =>
-      CopyWith_Input_DataCheckOverrideFilterIsComplete(this, (i) => i);
+  CopyWith_Input_JobFilterId<Input_JobFilterId> get copyWith =>
+      CopyWith_Input_JobFilterId(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_DataCheckOverrideFilterIsComplete ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_JobFilterId || runtimeType != other.runtimeType) {
       return false;
     }
     final l$isNil = isNil;

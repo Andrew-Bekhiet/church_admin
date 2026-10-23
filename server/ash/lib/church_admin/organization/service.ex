@@ -276,6 +276,7 @@ defmodule ChurchAdmin.Organization.Service do
     first :next_service_name, :next_service, :name, public?: true
     first :default_meeting_name, :default_meeting, :name, public?: true
     first :last_edit, :latest_edit, :time, public?: true
+    first :last_edit_user_name, [:latest_edit, :user], :name, public?: true
     first :study_year_from_order, :study_year_from, :order, public?: true
     first :study_year_to_order, :study_year_to, :order, public?: true
   end

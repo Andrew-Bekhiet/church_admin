@@ -303,6 +303,7 @@ defmodule ChurchAdmin.Accounts.User do
 
   aggregates do
     max :last_edit, :latest_edit, :time, public?: true
+    first :last_edit_user_name, [:latest_edit, :user], :name, public?: true
     first :person_name, :person, :name, public?: true
   end
 

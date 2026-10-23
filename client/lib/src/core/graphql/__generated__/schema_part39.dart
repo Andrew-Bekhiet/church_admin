@@ -1,804 +1,14 @@
 // Part 39 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_StoreFilterBlurhash<TRes> {
-  factory CopyWith_Input_StoreFilterBlurhash(
-    Input_StoreFilterBlurhash instance,
-    TRes Function(Input_StoreFilterBlurhash) then,
-  ) = _CopyWithImpl_Input_StoreFilterBlurhash;
+abstract class CopyWith_Input_StreetFilterColor<TRes> {
+  factory CopyWith_Input_StreetFilterColor(
+    Input_StreetFilterColor instance,
+    TRes Function(Input_StreetFilterColor) then,
+  ) = _CopyWithImpl_Input_StreetFilterColor;
 
-  factory CopyWith_Input_StoreFilterBlurhash.stub(TRes res) =
-      _CopyWithStubImpl_Input_StoreFilterBlurhash;
-
-  TRes call({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? contains,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-    String? stringEndsWith,
-    String? stringStartsWith,
-    String? like,
-    String? ilike,
-  });
-}
-
-class _CopyWithImpl_Input_StoreFilterBlurhash<TRes>
-    implements CopyWith_Input_StoreFilterBlurhash<TRes> {
-  _CopyWithImpl_Input_StoreFilterBlurhash(this._instance, this._then);
-
-  final Input_StoreFilterBlurhash _instance;
-
-  final TRes Function(Input_StoreFilterBlurhash) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? contains = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
-    Object? stringEndsWith = _undefined,
-    Object? stringStartsWith = _undefined,
-    Object? like = _undefined,
-    Object? ilike = _undefined,
-  }) => _then(
-    Input_StoreFilterBlurhash._({
-      ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as String?),
-      if (notEq != _undefined) 'notEq': (notEq as String?),
-      if ($in != _undefined) 'in': ($in as List<String?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as String?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as String?),
-      if (contains != _undefined) 'contains': (contains as String?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as String?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as String?),
-      if (stringEndsWith != _undefined)
-        'stringEndsWith': (stringEndsWith as String?),
-      if (stringStartsWith != _undefined)
-        'stringStartsWith': (stringStartsWith as String?),
-      if (like != _undefined) 'like': (like as String?),
-      if (ilike != _undefined) 'ilike': (ilike as String?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_StoreFilterBlurhash<TRes>
-    implements CopyWith_Input_StoreFilterBlurhash<TRes> {
-  _CopyWithStubImpl_Input_StoreFilterBlurhash(this._res);
-
-  TRes _res;
-
-  call({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? contains,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-    String? stringEndsWith,
-    String? stringStartsWith,
-    String? like,
-    String? ilike,
-  }) => _res;
-}
-
-class Input_StoreFilterPhotoUpdatedAt {
-  factory Input_StoreFilterPhotoUpdatedAt({
-    bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime?>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
-  }) => Input_StoreFilterPhotoUpdatedAt._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-  });
-
-  Input_StoreFilterPhotoUpdatedAt._(this._$data);
-
-  factory Input_StoreFilterPhotoUpdatedAt.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = l$eq == null ? null : tstzFromString(l$eq);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = l$notEq == null ? null : tstzFromString(l$notEq);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => e == null ? null : tstzFromString(e))
-          .toList();
-    }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = l$lessThan == null
-          ? null
-          : tstzFromString(l$lessThan);
-    }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = l$greaterThan == null
-          ? null
-          : tstzFromString(l$greaterThan);
-    }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
-          ? null
-          : tstzFromString(l$lessThanOrEqual);
-    }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
-          ? null
-          : tstzFromString(l$greaterThanOrEqual);
-    }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = l$isDistinctFrom == null
-          ? null
-          : tstzFromString(l$isDistinctFrom);
-    }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
-          ? null
-          : tstzFromString(l$isNotDistinctFrom);
-    }
-    return Input_StoreFilterPhotoUpdatedAt._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get isNil => (_$data['isNil'] as bool?);
-
-  DateTime? get eq => (_$data['eq'] as DateTime?);
-
-  DateTime? get notEq => (_$data['notEq'] as DateTime?);
-
-  List<DateTime?>? get $in => (_$data['in'] as List<DateTime?>?);
-
-  DateTime? get lessThan => (_$data['lessThan'] as DateTime?);
-
-  DateTime? get greaterThan => (_$data['greaterThan'] as DateTime?);
-
-  DateTime? get lessThanOrEqual => (_$data['lessThanOrEqual'] as DateTime?);
-
-  DateTime? get greaterThanOrEqual =>
-      (_$data['greaterThanOrEqual'] as DateTime?);
-
-  DateTime? get isDistinctFrom => (_$data['isDistinctFrom'] as DateTime?);
-
-  DateTime? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as DateTime?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
-    }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq == null ? null : tstzToString(l$eq);
-    }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq == null ? null : tstzToString(l$notEq);
-    }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in
-          ?.map((e) => e == null ? null : tstzToString(e))
-          .toList();
-    }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan == null
-          ? null
-          : tstzToString(l$lessThan);
-    }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan == null
-          ? null
-          : tstzToString(l$greaterThan);
-    }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
-          ? null
-          : tstzToString(l$lessThanOrEqual);
-    }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
-          ? null
-          : tstzToString(l$greaterThanOrEqual);
-    }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom == null
-          ? null
-          : tstzToString(l$isDistinctFrom);
-    }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
-          ? null
-          : tstzToString(l$isNotDistinctFrom);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_StoreFilterPhotoUpdatedAt<Input_StoreFilterPhotoUpdatedAt>
-  get copyWith => CopyWith_Input_StoreFilterPhotoUpdatedAt(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_StoreFilterPhotoUpdatedAt ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
-      return false;
-    }
-    if (l$isNil != lOther$isNil) {
-      return false;
-    }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
-      return false;
-    }
-    if (l$eq != lOther$eq) {
-      return false;
-    }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
-      return false;
-    }
-    if (l$notEq != lOther$notEq) {
-      return false;
-    }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$in != lOther$$in) {
-      return false;
-    }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
-      return false;
-    }
-    if (l$lessThan != lOther$lessThan) {
-      return false;
-    }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
-      return false;
-    }
-    if (l$greaterThan != lOther$greaterThan) {
-      return false;
-    }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
-      return false;
-    }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
-      return false;
-    }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
-      return false;
-    }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
-      return false;
-    }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
-      return false;
-    }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
-      return false;
-    }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
-      return false;
-    }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
-                ? null
-                : Object.hashAll(l$$in.map((v) => v))
-          : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
-          : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_StoreFilterPhotoUpdatedAt<TRes> {
-  factory CopyWith_Input_StoreFilterPhotoUpdatedAt(
-    Input_StoreFilterPhotoUpdatedAt instance,
-    TRes Function(Input_StoreFilterPhotoUpdatedAt) then,
-  ) = _CopyWithImpl_Input_StoreFilterPhotoUpdatedAt;
-
-  factory CopyWith_Input_StoreFilterPhotoUpdatedAt.stub(TRes res) =
-      _CopyWithStubImpl_Input_StoreFilterPhotoUpdatedAt;
-
-  TRes call({
-    bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime?>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
-  });
-}
-
-class _CopyWithImpl_Input_StoreFilterPhotoUpdatedAt<TRes>
-    implements CopyWith_Input_StoreFilterPhotoUpdatedAt<TRes> {
-  _CopyWithImpl_Input_StoreFilterPhotoUpdatedAt(this._instance, this._then);
-
-  final Input_StoreFilterPhotoUpdatedAt _instance;
-
-  final TRes Function(Input_StoreFilterPhotoUpdatedAt) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
-  }) => _then(
-    Input_StoreFilterPhotoUpdatedAt._({
-      ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as DateTime?),
-      if (notEq != _undefined) 'notEq': (notEq as DateTime?),
-      if ($in != _undefined) 'in': ($in as List<DateTime?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as DateTime?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as DateTime?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as DateTime?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as DateTime?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as DateTime?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as DateTime?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_StoreFilterPhotoUpdatedAt<TRes>
-    implements CopyWith_Input_StoreFilterPhotoUpdatedAt<TRes> {
-  _CopyWithStubImpl_Input_StoreFilterPhotoUpdatedAt(this._res);
-
-  TRes _res;
-
-  call({
-    bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime?>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
-  }) => _res;
-}
-
-class Input_StoreFilterColor {
-  factory Input_StoreFilterColor({
-    bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int?>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
-  }) => Input_StoreFilterColor._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-  });
-
-  Input_StoreFilterColor._(this._$data);
-
-  factory Input_StoreFilterColor.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as int?);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as int?);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as int?))
-          .toList();
-    }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as int?);
-    }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as int?);
-    }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as int?);
-    }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as int?);
-    }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as int?);
-    }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as int?);
-    }
-    return Input_StoreFilterColor._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get isNil => (_$data['isNil'] as bool?);
-
-  int? get eq => (_$data['eq'] as int?);
-
-  int? get notEq => (_$data['notEq'] as int?);
-
-  List<int?>? get $in => (_$data['in'] as List<int?>?);
-
-  int? get lessThan => (_$data['lessThan'] as int?);
-
-  int? get greaterThan => (_$data['greaterThan'] as int?);
-
-  int? get lessThanOrEqual => (_$data['lessThanOrEqual'] as int?);
-
-  int? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as int?);
-
-  int? get isDistinctFrom => (_$data['isDistinctFrom'] as int?);
-
-  int? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as int?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
-    }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq;
-    }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq;
-    }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan;
-    }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan;
-    }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
-    }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
-    }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom;
-    }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_StoreFilterColor<Input_StoreFilterColor> get copyWith =>
-      CopyWith_Input_StoreFilterColor(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_StoreFilterColor || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
-      return false;
-    }
-    if (l$isNil != lOther$isNil) {
-      return false;
-    }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
-      return false;
-    }
-    if (l$eq != lOther$eq) {
-      return false;
-    }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
-      return false;
-    }
-    if (l$notEq != lOther$notEq) {
-      return false;
-    }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$in != lOther$$in) {
-      return false;
-    }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
-      return false;
-    }
-    if (l$lessThan != lOther$lessThan) {
-      return false;
-    }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
-      return false;
-    }
-    if (l$greaterThan != lOther$greaterThan) {
-      return false;
-    }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
-      return false;
-    }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
-      return false;
-    }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
-      return false;
-    }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
-      return false;
-    }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
-      return false;
-    }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
-      return false;
-    }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
-      return false;
-    }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
-                ? null
-                : Object.hashAll(l$$in.map((v) => v))
-          : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
-          : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_StoreFilterColor<TRes> {
-  factory CopyWith_Input_StoreFilterColor(
-    Input_StoreFilterColor instance,
-    TRes Function(Input_StoreFilterColor) then,
-  ) = _CopyWithImpl_Input_StoreFilterColor;
-
-  factory CopyWith_Input_StoreFilterColor.stub(TRes res) =
-      _CopyWithStubImpl_Input_StoreFilterColor;
+  factory CopyWith_Input_StreetFilterColor.stub(TRes res) =
+      _CopyWithStubImpl_Input_StreetFilterColor;
 
   TRes call({
     bool? isNil,
@@ -814,13 +24,13 @@ abstract class CopyWith_Input_StoreFilterColor<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_StoreFilterColor<TRes>
-    implements CopyWith_Input_StoreFilterColor<TRes> {
-  _CopyWithImpl_Input_StoreFilterColor(this._instance, this._then);
+class _CopyWithImpl_Input_StreetFilterColor<TRes>
+    implements CopyWith_Input_StreetFilterColor<TRes> {
+  _CopyWithImpl_Input_StreetFilterColor(this._instance, this._then);
 
-  final Input_StoreFilterColor _instance;
+  final Input_StreetFilterColor _instance;
 
-  final TRes Function(Input_StoreFilterColor) _then;
+  final TRes Function(Input_StreetFilterColor) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -836,7 +46,7 @@ class _CopyWithImpl_Input_StoreFilterColor<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_StoreFilterColor._({
+    Input_StreetFilterColor._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as int?),
@@ -856,9 +66,9 @@ class _CopyWithImpl_Input_StoreFilterColor<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_StoreFilterColor<TRes>
-    implements CopyWith_Input_StoreFilterColor<TRes> {
-  _CopyWithStubImpl_Input_StoreFilterColor(this._res);
+class _CopyWithStubImpl_Input_StreetFilterColor<TRes>
+    implements CopyWith_Input_StreetFilterColor<TRes> {
+  _CopyWithStubImpl_Input_StreetFilterColor(this._res);
 
   TRes _res;
 
@@ -876,19 +86,19 @@ class _CopyWithStubImpl_Input_StoreFilterColor<TRes>
   }) => _res;
 }
 
-class Input_StoreFilterAdminFamilyId {
-  factory Input_StoreFilterAdminFamilyId({
+class Input_StreetFilterLine {
+  factory Input_StreetFilterLine({
     bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  }) => Input_StoreFilterAdminFamilyId._({
+    Json? eq,
+    Json? notEq,
+    List<Json?>? $in,
+    Json? lessThan,
+    Json? greaterThan,
+    Json? lessThanOrEqual,
+    Json? greaterThanOrEqual,
+    Json? isDistinctFrom,
+    Json? isNotDistinctFrom,
+  }) => Input_StreetFilterLine._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -901,9 +111,9 @@ class Input_StoreFilterAdminFamilyId {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_StoreFilterAdminFamilyId._(this._$data);
+  Input_StreetFilterLine._(this._$data);
 
-  factory Input_StoreFilterAdminFamilyId.fromJson(Map<String, dynamic> data) {
+  factory Input_StreetFilterLine.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -911,66 +121,66 @@ class Input_StoreFilterAdminFamilyId {
     }
     if (data.containsKey('eq')) {
       final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as String?);
+      result$data['eq'] = (l$eq as Json?);
     }
     if (data.containsKey('notEq')) {
       final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as String?);
+      result$data['notEq'] = (l$notEq as Json?);
     }
     if (data.containsKey('in')) {
       final l$$in = data['in'];
       result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as String?))
+          ?.map((e) => (e as Json?))
           .toList();
     }
     if (data.containsKey('lessThan')) {
       final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as String?);
+      result$data['lessThan'] = (l$lessThan as Json?);
     }
     if (data.containsKey('greaterThan')) {
       final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as String?);
+      result$data['greaterThan'] = (l$greaterThan as Json?);
     }
     if (data.containsKey('lessThanOrEqual')) {
       final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as Json?);
     }
     if (data.containsKey('greaterThanOrEqual')) {
       final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as Json?);
     }
     if (data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as Json?);
     }
     if (data.containsKey('isNotDistinctFrom')) {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as Json?);
     }
-    return Input_StoreFilterAdminFamilyId._(result$data);
+    return Input_StreetFilterLine._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   bool? get isNil => (_$data['isNil'] as bool?);
 
-  String? get eq => (_$data['eq'] as String?);
+  Json? get eq => (_$data['eq'] as Json?);
 
-  String? get notEq => (_$data['notEq'] as String?);
+  Json? get notEq => (_$data['notEq'] as Json?);
 
-  List<String?>? get $in => (_$data['in'] as List<String?>?);
+  List<Json?>? get $in => (_$data['in'] as List<Json?>?);
 
-  String? get lessThan => (_$data['lessThan'] as String?);
+  Json? get lessThan => (_$data['lessThan'] as Json?);
 
-  String? get greaterThan => (_$data['greaterThan'] as String?);
+  Json? get greaterThan => (_$data['greaterThan'] as Json?);
 
-  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+  Json? get lessThanOrEqual => (_$data['lessThanOrEqual'] as Json?);
 
-  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+  Json? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as Json?);
 
-  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+  Json? get isDistinctFrom => (_$data['isDistinctFrom'] as Json?);
 
-  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+  Json? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as Json?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1017,16 +227,15 @@ class Input_StoreFilterAdminFamilyId {
     return result$data;
   }
 
-  CopyWith_Input_StoreFilterAdminFamilyId<Input_StoreFilterAdminFamilyId>
-  get copyWith => CopyWith_Input_StoreFilterAdminFamilyId(this, (i) => i);
+  CopyWith_Input_StreetFilterLine<Input_StreetFilterLine> get copyWith =>
+      CopyWith_Input_StreetFilterLine(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_StoreFilterAdminFamilyId ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StreetFilterLine || runtimeType != other.runtimeType) {
       return false;
     }
     final l$isNil = isNil;
@@ -1162,36 +371,36 @@ class Input_StoreFilterAdminFamilyId {
   }
 }
 
-abstract class CopyWith_Input_StoreFilterAdminFamilyId<TRes> {
-  factory CopyWith_Input_StoreFilterAdminFamilyId(
-    Input_StoreFilterAdminFamilyId instance,
-    TRes Function(Input_StoreFilterAdminFamilyId) then,
-  ) = _CopyWithImpl_Input_StoreFilterAdminFamilyId;
+abstract class CopyWith_Input_StreetFilterLine<TRes> {
+  factory CopyWith_Input_StreetFilterLine(
+    Input_StreetFilterLine instance,
+    TRes Function(Input_StreetFilterLine) then,
+  ) = _CopyWithImpl_Input_StreetFilterLine;
 
-  factory CopyWith_Input_StoreFilterAdminFamilyId.stub(TRes res) =
-      _CopyWithStubImpl_Input_StoreFilterAdminFamilyId;
+  factory CopyWith_Input_StreetFilterLine.stub(TRes res) =
+      _CopyWithStubImpl_Input_StreetFilterLine;
 
   TRes call({
     bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
+    Json? eq,
+    Json? notEq,
+    List<Json?>? $in,
+    Json? lessThan,
+    Json? greaterThan,
+    Json? lessThanOrEqual,
+    Json? greaterThanOrEqual,
+    Json? isDistinctFrom,
+    Json? isNotDistinctFrom,
   });
 }
 
-class _CopyWithImpl_Input_StoreFilterAdminFamilyId<TRes>
-    implements CopyWith_Input_StoreFilterAdminFamilyId<TRes> {
-  _CopyWithImpl_Input_StoreFilterAdminFamilyId(this._instance, this._then);
+class _CopyWithImpl_Input_StreetFilterLine<TRes>
+    implements CopyWith_Input_StreetFilterLine<TRes> {
+  _CopyWithImpl_Input_StreetFilterLine(this._instance, this._then);
 
-  final Input_StoreFilterAdminFamilyId _instance;
+  final Input_StreetFilterLine _instance;
 
-  final TRes Function(Input_StoreFilterAdminFamilyId) _then;
+  final TRes Function(Input_StreetFilterLine) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1207,48 +416,48 @@ class _CopyWithImpl_Input_StoreFilterAdminFamilyId<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_StoreFilterAdminFamilyId._({
+    Input_StreetFilterLine._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as String?),
-      if (notEq != _undefined) 'notEq': (notEq as String?),
-      if ($in != _undefined) 'in': ($in as List<String?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (eq != _undefined) 'eq': (eq as Json?),
+      if (notEq != _undefined) 'notEq': (notEq as Json?),
+      if ($in != _undefined) 'in': ($in as List<Json?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as Json?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as Json?),
       if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as String?),
+        'lessThanOrEqual': (lessThanOrEqual as Json?),
       if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+        'greaterThanOrEqual': (greaterThanOrEqual as Json?),
       if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as String?),
+        'isDistinctFrom': (isDistinctFrom as Json?),
       if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+        'isNotDistinctFrom': (isNotDistinctFrom as Json?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_StoreFilterAdminFamilyId<TRes>
-    implements CopyWith_Input_StoreFilterAdminFamilyId<TRes> {
-  _CopyWithStubImpl_Input_StoreFilterAdminFamilyId(this._res);
+class _CopyWithStubImpl_Input_StreetFilterLine<TRes>
+    implements CopyWith_Input_StreetFilterLine<TRes> {
+  _CopyWithStubImpl_Input_StreetFilterLine(this._res);
 
   TRes _res;
 
   call({
     bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
+    Json? eq,
+    Json? notEq,
+    List<Json?>? $in,
+    Json? lessThan,
+    Json? greaterThan,
+    Json? lessThanOrEqual,
+    Json? greaterThanOrEqual,
+    Json? isDistinctFrom,
+    Json? isNotDistinctFrom,
   }) => _res;
 }
 
-class Input_StoreFilterName {
-  factory Input_StoreFilterName({
+class Input_StreetFilterName {
+  factory Input_StreetFilterName({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -1264,7 +473,7 @@ class Input_StoreFilterName {
     String? stringStartsWith,
     String? like,
     String? ilike,
-  }) => Input_StoreFilterName._({
+  }) => Input_StreetFilterName._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -1282,9 +491,9 @@ class Input_StoreFilterName {
     if (ilike != null) r'ilike': ilike,
   });
 
-  Input_StoreFilterName._(this._$data);
+  Input_StreetFilterName._(this._$data);
 
-  factory Input_StoreFilterName.fromJson(Map<String, dynamic> data) {
+  factory Input_StreetFilterName.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -1348,7 +557,7 @@ class Input_StoreFilterName {
       final l$ilike = data['ilike'];
       result$data['ilike'] = (l$ilike as String?);
     }
-    return Input_StoreFilterName._(result$data);
+    return Input_StreetFilterName._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -1448,15 +657,15 @@ class Input_StoreFilterName {
     return result$data;
   }
 
-  CopyWith_Input_StoreFilterName<Input_StoreFilterName> get copyWith =>
-      CopyWith_Input_StoreFilterName(this, (i) => i);
+  CopyWith_Input_StreetFilterName<Input_StreetFilterName> get copyWith =>
+      CopyWith_Input_StreetFilterName(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_StoreFilterName || runtimeType != other.runtimeType) {
+    if (other is! Input_StreetFilterName || runtimeType != other.runtimeType) {
       return false;
     }
     final l$isNil = isNil;
@@ -1645,14 +854,14 @@ class Input_StoreFilterName {
   }
 }
 
-abstract class CopyWith_Input_StoreFilterName<TRes> {
-  factory CopyWith_Input_StoreFilterName(
-    Input_StoreFilterName instance,
-    TRes Function(Input_StoreFilterName) then,
-  ) = _CopyWithImpl_Input_StoreFilterName;
+abstract class CopyWith_Input_StreetFilterName<TRes> {
+  factory CopyWith_Input_StreetFilterName(
+    Input_StreetFilterName instance,
+    TRes Function(Input_StreetFilterName) then,
+  ) = _CopyWithImpl_Input_StreetFilterName;
 
-  factory CopyWith_Input_StoreFilterName.stub(TRes res) =
-      _CopyWithStubImpl_Input_StoreFilterName;
+  factory CopyWith_Input_StreetFilterName.stub(TRes res) =
+      _CopyWithStubImpl_Input_StreetFilterName;
 
   TRes call({
     bool? isNil,
@@ -1673,13 +882,13 @@ abstract class CopyWith_Input_StoreFilterName<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_StoreFilterName<TRes>
-    implements CopyWith_Input_StoreFilterName<TRes> {
-  _CopyWithImpl_Input_StoreFilterName(this._instance, this._then);
+class _CopyWithImpl_Input_StreetFilterName<TRes>
+    implements CopyWith_Input_StreetFilterName<TRes> {
+  _CopyWithImpl_Input_StreetFilterName(this._instance, this._then);
 
-  final Input_StoreFilterName _instance;
+  final Input_StreetFilterName _instance;
 
-  final TRes Function(Input_StoreFilterName) _then;
+  final TRes Function(Input_StreetFilterName) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1700,7 +909,7 @@ class _CopyWithImpl_Input_StoreFilterName<TRes>
     Object? like = _undefined,
     Object? ilike = _undefined,
   }) => _then(
-    Input_StoreFilterName._({
+    Input_StreetFilterName._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as String?),
@@ -1727,9 +936,9 @@ class _CopyWithImpl_Input_StoreFilterName<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_StoreFilterName<TRes>
-    implements CopyWith_Input_StoreFilterName<TRes> {
-  _CopyWithStubImpl_Input_StoreFilterName(this._res);
+class _CopyWithStubImpl_Input_StreetFilterName<TRes>
+    implements CopyWith_Input_StreetFilterName<TRes> {
+  _CopyWithStubImpl_Input_StreetFilterName(this._res);
 
   TRes _res;
 
@@ -1752,8 +961,8 @@ class _CopyWithStubImpl_Input_StoreFilterName<TRes>
   }) => _res;
 }
 
-class Input_StoreFilterId {
-  factory Input_StoreFilterId({
+class Input_StreetFilterId {
+  factory Input_StreetFilterId({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -1764,7 +973,7 @@ class Input_StoreFilterId {
     String? greaterThanOrEqual,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
-  }) => Input_StoreFilterId._({
+  }) => Input_StreetFilterId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -1777,9 +986,9 @@ class Input_StoreFilterId {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_StoreFilterId._(this._$data);
+  Input_StreetFilterId._(this._$data);
 
-  factory Input_StoreFilterId.fromJson(Map<String, dynamic> data) {
+  factory Input_StreetFilterId.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -1823,7 +1032,7 @@ class Input_StoreFilterId {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
       result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_StoreFilterId._(result$data);
+    return Input_StreetFilterId._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -1893,15 +1102,15 @@ class Input_StoreFilterId {
     return result$data;
   }
 
-  CopyWith_Input_StoreFilterId<Input_StoreFilterId> get copyWith =>
-      CopyWith_Input_StoreFilterId(this, (i) => i);
+  CopyWith_Input_StreetFilterId<Input_StreetFilterId> get copyWith =>
+      CopyWith_Input_StreetFilterId(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_StoreFilterId || runtimeType != other.runtimeType) {
+    if (other is! Input_StreetFilterId || runtimeType != other.runtimeType) {
       return false;
     }
     final l$isNil = isNil;
@@ -2037,14 +1246,14 @@ class Input_StoreFilterId {
   }
 }
 
-abstract class CopyWith_Input_StoreFilterId<TRes> {
-  factory CopyWith_Input_StoreFilterId(
-    Input_StoreFilterId instance,
-    TRes Function(Input_StoreFilterId) then,
-  ) = _CopyWithImpl_Input_StoreFilterId;
+abstract class CopyWith_Input_StreetFilterId<TRes> {
+  factory CopyWith_Input_StreetFilterId(
+    Input_StreetFilterId instance,
+    TRes Function(Input_StreetFilterId) then,
+  ) = _CopyWithImpl_Input_StreetFilterId;
 
-  factory CopyWith_Input_StoreFilterId.stub(TRes res) =
-      _CopyWithStubImpl_Input_StoreFilterId;
+  factory CopyWith_Input_StreetFilterId.stub(TRes res) =
+      _CopyWithStubImpl_Input_StreetFilterId;
 
   TRes call({
     bool? isNil,
@@ -2060,13 +1269,13 @@ abstract class CopyWith_Input_StoreFilterId<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_StoreFilterId<TRes>
-    implements CopyWith_Input_StoreFilterId<TRes> {
-  _CopyWithImpl_Input_StoreFilterId(this._instance, this._then);
+class _CopyWithImpl_Input_StreetFilterId<TRes>
+    implements CopyWith_Input_StreetFilterId<TRes> {
+  _CopyWithImpl_Input_StreetFilterId(this._instance, this._then);
 
-  final Input_StoreFilterId _instance;
+  final Input_StreetFilterId _instance;
 
-  final TRes Function(Input_StoreFilterId) _then;
+  final TRes Function(Input_StreetFilterId) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2082,7 +1291,7 @@ class _CopyWithImpl_Input_StoreFilterId<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_StoreFilterId._({
+    Input_StreetFilterId._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as String?),
@@ -2102,9 +1311,9 @@ class _CopyWithImpl_Input_StoreFilterId<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_StoreFilterId<TRes>
-    implements CopyWith_Input_StoreFilterId<TRes> {
-  _CopyWithStubImpl_Input_StoreFilterId(this._res);
+class _CopyWithStubImpl_Input_StreetFilterId<TRes>
+    implements CopyWith_Input_StreetFilterId<TRes> {
+  _CopyWithStubImpl_Input_StreetFilterId(this._res);
 
   TRes _res;
 
@@ -2122,68 +1331,67 @@ class _CopyWithStubImpl_Input_StoreFilterId<TRes>
   }) => _res;
 }
 
-class Input_StoreFilterInput {
-  factory Input_StoreFilterInput({
-    List<Input_StoreFilterInput>? and,
-    List<Input_StoreFilterInput>? or,
-    List<Input_StoreFilterInput>? not,
-    Input_StoreFilterId? id,
-    Input_StoreFilterName? name,
-    Input_StoreFilterAdminFamilyId? adminFamilyId,
-    Input_StoreFilterColor? color,
-    Input_StoreFilterPhotoUpdatedAt? photoUpdatedAt,
-    Input_StoreFilterBlurhash? blurhash,
-    Input_FamilyFilterInput? adminFamily,
-    Input_AddressFilterInput? address,
+class Input_StreetFilterInput {
+  factory Input_StreetFilterInput({
+    List<Input_StreetFilterInput>? and,
+    List<Input_StreetFilterInput>? or,
+    List<Input_StreetFilterInput>? not,
+    Input_StreetFilterId? id,
+    Input_StreetFilterName? name,
+    Input_StreetFilterLine? line,
+    Input_StreetFilterColor? color,
+    Input_StreetFilterPhotoUpdatedAt? photoUpdatedAt,
+    Input_StreetFilterBlurhash? blurhash,
+    Input_AddressFilterInput? addresses,
+    Input_AreaStreetFilterInput? areaStreets,
+    Input_AreaFilterInput? areas,
     Input_LatestEditFilterInput? latestEdit,
     Input_EditFilterInput? edits,
     Input_LatestVisitFilterInput? latestVisit,
     Input_VisitFilterInput? visits,
-    Input_StoreFilterAddressAreaName? addressAreaName,
-    Input_StoreFilterAddressStreetName? addressStreetName,
-    Input_StoreFilterAddressDistrictName? addressDistrictName,
-    Input_StoreFilterAddressFullAddressText? addressFullAddressText,
-    Input_StoreFilterAdminFamilyName? adminFamilyName,
-    Input_StoreFilterLastEdit? lastEdit,
-    Input_StoreFilterUserCanEdit? userCanEdit,
-    Input_StoreFilterWithinPolygon? withinPolygon,
-  }) => Input_StoreFilterInput._({
+    Input_StreetFilterLastEdit? lastEdit,
+    Input_StreetFilterLastEditUserName? lastEditUserName,
+    Input_StreetFilterLastVisit? lastVisit,
+    Input_StreetFilterLastVisitUserName? lastVisitUserName,
+    Input_StreetFilterUserCanEdit? userCanEdit,
+    Input_StreetFilterWithinPolygon? withinPolygon,
+    Input_StreetFilterWithinDistance? withinDistance,
+  }) => Input_StreetFilterInput._({
     if (and != null) r'and': and,
     if (or != null) r'or': or,
     if (not != null) r'not': not,
     if (id != null) r'id': id,
     if (name != null) r'name': name,
-    if (adminFamilyId != null) r'adminFamilyId': adminFamilyId,
+    if (line != null) r'line': line,
     if (color != null) r'color': color,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
     if (blurhash != null) r'blurhash': blurhash,
-    if (adminFamily != null) r'adminFamily': adminFamily,
-    if (address != null) r'address': address,
+    if (addresses != null) r'addresses': addresses,
+    if (areaStreets != null) r'areaStreets': areaStreets,
+    if (areas != null) r'areas': areas,
     if (latestEdit != null) r'latestEdit': latestEdit,
     if (edits != null) r'edits': edits,
     if (latestVisit != null) r'latestVisit': latestVisit,
     if (visits != null) r'visits': visits,
-    if (addressAreaName != null) r'addressAreaName': addressAreaName,
-    if (addressStreetName != null) r'addressStreetName': addressStreetName,
-    if (addressDistrictName != null)
-      r'addressDistrictName': addressDistrictName,
-    if (addressFullAddressText != null)
-      r'addressFullAddressText': addressFullAddressText,
-    if (adminFamilyName != null) r'adminFamilyName': adminFamilyName,
     if (lastEdit != null) r'lastEdit': lastEdit,
+    if (lastEditUserName != null) r'lastEditUserName': lastEditUserName,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+    if (lastVisitUserName != null) r'lastVisitUserName': lastVisitUserName,
     if (userCanEdit != null) r'userCanEdit': userCanEdit,
     if (withinPolygon != null) r'withinPolygon': withinPolygon,
+    if (withinDistance != null) r'withinDistance': withinDistance,
   });
 
-  Input_StoreFilterInput._(this._$data);
+  Input_StreetFilterInput._(this._$data);
 
-  factory Input_StoreFilterInput.fromJson(Map<String, dynamic> data) {
+  factory Input_StreetFilterInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('and')) {
       final l$and = data['and'];
       result$data['and'] = (l$and as List<dynamic>?)
           ?.map(
-            (e) => Input_StoreFilterInput.fromJson((e as Map<String, dynamic>)),
+            (e) =>
+                Input_StreetFilterInput.fromJson((e as Map<String, dynamic>)),
           )
           .toList();
     }
@@ -2191,7 +1399,8 @@ class Input_StoreFilterInput {
       final l$or = data['or'];
       result$data['or'] = (l$or as List<dynamic>?)
           ?.map(
-            (e) => Input_StoreFilterInput.fromJson((e as Map<String, dynamic>)),
+            (e) =>
+                Input_StreetFilterInput.fromJson((e as Map<String, dynamic>)),
           )
           .toList();
     }
@@ -2199,7 +1408,8 @@ class Input_StoreFilterInput {
       final l$not = data['not'];
       result$data['not'] = (l$not as List<dynamic>?)
           ?.map(
-            (e) => Input_StoreFilterInput.fromJson((e as Map<String, dynamic>)),
+            (e) =>
+                Input_StreetFilterInput.fromJson((e as Map<String, dynamic>)),
           )
           .toList();
     }
@@ -2207,33 +1417,31 @@ class Input_StoreFilterInput {
       final l$id = data['id'];
       result$data['id'] = l$id == null
           ? null
-          : Input_StoreFilterId.fromJson((l$id as Map<String, dynamic>));
+          : Input_StreetFilterId.fromJson((l$id as Map<String, dynamic>));
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = l$name == null
           ? null
-          : Input_StoreFilterName.fromJson((l$name as Map<String, dynamic>));
+          : Input_StreetFilterName.fromJson((l$name as Map<String, dynamic>));
     }
-    if (data.containsKey('adminFamilyId')) {
-      final l$adminFamilyId = data['adminFamilyId'];
-      result$data['adminFamilyId'] = l$adminFamilyId == null
+    if (data.containsKey('line')) {
+      final l$line = data['line'];
+      result$data['line'] = l$line == null
           ? null
-          : Input_StoreFilterAdminFamilyId.fromJson(
-              (l$adminFamilyId as Map<String, dynamic>),
-            );
+          : Input_StreetFilterLine.fromJson((l$line as Map<String, dynamic>));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = l$color == null
           ? null
-          : Input_StoreFilterColor.fromJson((l$color as Map<String, dynamic>));
+          : Input_StreetFilterColor.fromJson((l$color as Map<String, dynamic>));
     }
     if (data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = data['photoUpdatedAt'];
       result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
           ? null
-          : Input_StoreFilterPhotoUpdatedAt.fromJson(
+          : Input_StreetFilterPhotoUpdatedAt.fromJson(
               (l$photoUpdatedAt as Map<String, dynamic>),
             );
     }
@@ -2241,25 +1449,31 @@ class Input_StoreFilterInput {
       final l$blurhash = data['blurhash'];
       result$data['blurhash'] = l$blurhash == null
           ? null
-          : Input_StoreFilterBlurhash.fromJson(
+          : Input_StreetFilterBlurhash.fromJson(
               (l$blurhash as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('adminFamily')) {
-      final l$adminFamily = data['adminFamily'];
-      result$data['adminFamily'] = l$adminFamily == null
-          ? null
-          : Input_FamilyFilterInput.fromJson(
-              (l$adminFamily as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('address')) {
-      final l$address = data['address'];
-      result$data['address'] = l$address == null
+    if (data.containsKey('addresses')) {
+      final l$addresses = data['addresses'];
+      result$data['addresses'] = l$addresses == null
           ? null
           : Input_AddressFilterInput.fromJson(
-              (l$address as Map<String, dynamic>),
+              (l$addresses as Map<String, dynamic>),
             );
+    }
+    if (data.containsKey('areaStreets')) {
+      final l$areaStreets = data['areaStreets'];
+      result$data['areaStreets'] = l$areaStreets == null
+          ? null
+          : Input_AreaStreetFilterInput.fromJson(
+              (l$areaStreets as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('areas')) {
+      final l$areas = data['areas'];
+      result$data['areas'] = l$areas == null
+          ? null
+          : Input_AreaFilterInput.fromJson((l$areas as Map<String, dynamic>));
     }
     if (data.containsKey('latestEdit')) {
       final l$latestEdit = data['latestEdit'];
@@ -2289,59 +1503,43 @@ class Input_StoreFilterInput {
           ? null
           : Input_VisitFilterInput.fromJson((l$visits as Map<String, dynamic>));
     }
-    if (data.containsKey('addressAreaName')) {
-      final l$addressAreaName = data['addressAreaName'];
-      result$data['addressAreaName'] = l$addressAreaName == null
-          ? null
-          : Input_StoreFilterAddressAreaName.fromJson(
-              (l$addressAreaName as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('addressStreetName')) {
-      final l$addressStreetName = data['addressStreetName'];
-      result$data['addressStreetName'] = l$addressStreetName == null
-          ? null
-          : Input_StoreFilterAddressStreetName.fromJson(
-              (l$addressStreetName as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('addressDistrictName')) {
-      final l$addressDistrictName = data['addressDistrictName'];
-      result$data['addressDistrictName'] = l$addressDistrictName == null
-          ? null
-          : Input_StoreFilterAddressDistrictName.fromJson(
-              (l$addressDistrictName as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('addressFullAddressText')) {
-      final l$addressFullAddressText = data['addressFullAddressText'];
-      result$data['addressFullAddressText'] = l$addressFullAddressText == null
-          ? null
-          : Input_StoreFilterAddressFullAddressText.fromJson(
-              (l$addressFullAddressText as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('adminFamilyName')) {
-      final l$adminFamilyName = data['adminFamilyName'];
-      result$data['adminFamilyName'] = l$adminFamilyName == null
-          ? null
-          : Input_StoreFilterAdminFamilyName.fromJson(
-              (l$adminFamilyName as Map<String, dynamic>),
-            );
-    }
     if (data.containsKey('lastEdit')) {
       final l$lastEdit = data['lastEdit'];
       result$data['lastEdit'] = l$lastEdit == null
           ? null
-          : Input_StoreFilterLastEdit.fromJson(
+          : Input_StreetFilterLastEdit.fromJson(
               (l$lastEdit as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('lastEditUserName')) {
+      final l$lastEditUserName = data['lastEditUserName'];
+      result$data['lastEditUserName'] = l$lastEditUserName == null
+          ? null
+          : Input_StreetFilterLastEditUserName.fromJson(
+              (l$lastEditUserName as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : Input_StreetFilterLastVisit.fromJson(
+              (l$lastVisit as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('lastVisitUserName')) {
+      final l$lastVisitUserName = data['lastVisitUserName'];
+      result$data['lastVisitUserName'] = l$lastVisitUserName == null
+          ? null
+          : Input_StreetFilterLastVisitUserName.fromJson(
+              (l$lastVisitUserName as Map<String, dynamic>),
             );
     }
     if (data.containsKey('userCanEdit')) {
       final l$userCanEdit = data['userCanEdit'];
       result$data['userCanEdit'] = l$userCanEdit == null
           ? null
-          : Input_StoreFilterUserCanEdit.fromJson(
+          : Input_StreetFilterUserCanEdit.fromJson(
               (l$userCanEdit as Map<String, dynamic>),
             );
     }
@@ -2349,45 +1547,57 @@ class Input_StoreFilterInput {
       final l$withinPolygon = data['withinPolygon'];
       result$data['withinPolygon'] = l$withinPolygon == null
           ? null
-          : Input_StoreFilterWithinPolygon.fromJson(
+          : Input_StreetFilterWithinPolygon.fromJson(
               (l$withinPolygon as Map<String, dynamic>),
             );
     }
-    return Input_StoreFilterInput._(result$data);
+    if (data.containsKey('withinDistance')) {
+      final l$withinDistance = data['withinDistance'];
+      result$data['withinDistance'] = l$withinDistance == null
+          ? null
+          : Input_StreetFilterWithinDistance.fromJson(
+              (l$withinDistance as Map<String, dynamic>),
+            );
+    }
+    return Input_StreetFilterInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input_StoreFilterInput>? get and =>
-      (_$data['and'] as List<Input_StoreFilterInput>?);
+  List<Input_StreetFilterInput>? get and =>
+      (_$data['and'] as List<Input_StreetFilterInput>?);
 
-  List<Input_StoreFilterInput>? get or =>
-      (_$data['or'] as List<Input_StoreFilterInput>?);
+  List<Input_StreetFilterInput>? get or =>
+      (_$data['or'] as List<Input_StreetFilterInput>?);
 
-  List<Input_StoreFilterInput>? get not =>
-      (_$data['not'] as List<Input_StoreFilterInput>?);
+  List<Input_StreetFilterInput>? get not =>
+      (_$data['not'] as List<Input_StreetFilterInput>?);
 
-  Input_StoreFilterId? get id => (_$data['id'] as Input_StoreFilterId?);
+  Input_StreetFilterId? get id => (_$data['id'] as Input_StreetFilterId?);
 
-  Input_StoreFilterName? get name => (_$data['name'] as Input_StoreFilterName?);
+  Input_StreetFilterName? get name =>
+      (_$data['name'] as Input_StreetFilterName?);
 
-  Input_StoreFilterAdminFamilyId? get adminFamilyId =>
-      (_$data['adminFamilyId'] as Input_StoreFilterAdminFamilyId?);
+  Input_StreetFilterLine? get line =>
+      (_$data['line'] as Input_StreetFilterLine?);
 
-  Input_StoreFilterColor? get color =>
-      (_$data['color'] as Input_StoreFilterColor?);
+  Input_StreetFilterColor? get color =>
+      (_$data['color'] as Input_StreetFilterColor?);
 
-  Input_StoreFilterPhotoUpdatedAt? get photoUpdatedAt =>
-      (_$data['photoUpdatedAt'] as Input_StoreFilterPhotoUpdatedAt?);
+  Input_StreetFilterPhotoUpdatedAt? get photoUpdatedAt =>
+      (_$data['photoUpdatedAt'] as Input_StreetFilterPhotoUpdatedAt?);
 
-  Input_StoreFilterBlurhash? get blurhash =>
-      (_$data['blurhash'] as Input_StoreFilterBlurhash?);
+  Input_StreetFilterBlurhash? get blurhash =>
+      (_$data['blurhash'] as Input_StreetFilterBlurhash?);
 
-  Input_FamilyFilterInput? get adminFamily =>
-      (_$data['adminFamily'] as Input_FamilyFilterInput?);
+  Input_AddressFilterInput? get addresses =>
+      (_$data['addresses'] as Input_AddressFilterInput?);
 
-  Input_AddressFilterInput? get address =>
-      (_$data['address'] as Input_AddressFilterInput?);
+  Input_AreaStreetFilterInput? get areaStreets =>
+      (_$data['areaStreets'] as Input_AreaStreetFilterInput?);
+
+  Input_AreaFilterInput? get areas =>
+      (_$data['areas'] as Input_AreaFilterInput?);
 
   Input_LatestEditFilterInput? get latestEdit =>
       (_$data['latestEdit'] as Input_LatestEditFilterInput?);
@@ -2401,30 +1611,26 @@ class Input_StoreFilterInput {
   Input_VisitFilterInput? get visits =>
       (_$data['visits'] as Input_VisitFilterInput?);
 
-  Input_StoreFilterAddressAreaName? get addressAreaName =>
-      (_$data['addressAreaName'] as Input_StoreFilterAddressAreaName?);
+  Input_StreetFilterLastEdit? get lastEdit =>
+      (_$data['lastEdit'] as Input_StreetFilterLastEdit?);
 
-  Input_StoreFilterAddressStreetName? get addressStreetName =>
-      (_$data['addressStreetName'] as Input_StoreFilterAddressStreetName?);
+  Input_StreetFilterLastEditUserName? get lastEditUserName =>
+      (_$data['lastEditUserName'] as Input_StreetFilterLastEditUserName?);
 
-  Input_StoreFilterAddressDistrictName? get addressDistrictName =>
-      (_$data['addressDistrictName'] as Input_StoreFilterAddressDistrictName?);
+  Input_StreetFilterLastVisit? get lastVisit =>
+      (_$data['lastVisit'] as Input_StreetFilterLastVisit?);
 
-  Input_StoreFilterAddressFullAddressText? get addressFullAddressText =>
-      (_$data['addressFullAddressText']
-          as Input_StoreFilterAddressFullAddressText?);
+  Input_StreetFilterLastVisitUserName? get lastVisitUserName =>
+      (_$data['lastVisitUserName'] as Input_StreetFilterLastVisitUserName?);
 
-  Input_StoreFilterAdminFamilyName? get adminFamilyName =>
-      (_$data['adminFamilyName'] as Input_StoreFilterAdminFamilyName?);
+  Input_StreetFilterUserCanEdit? get userCanEdit =>
+      (_$data['userCanEdit'] as Input_StreetFilterUserCanEdit?);
 
-  Input_StoreFilterLastEdit? get lastEdit =>
-      (_$data['lastEdit'] as Input_StoreFilterLastEdit?);
+  Input_StreetFilterWithinPolygon? get withinPolygon =>
+      (_$data['withinPolygon'] as Input_StreetFilterWithinPolygon?);
 
-  Input_StoreFilterUserCanEdit? get userCanEdit =>
-      (_$data['userCanEdit'] as Input_StoreFilterUserCanEdit?);
-
-  Input_StoreFilterWithinPolygon? get withinPolygon =>
-      (_$data['withinPolygon'] as Input_StoreFilterWithinPolygon?);
+  Input_StreetFilterWithinDistance? get withinDistance =>
+      (_$data['withinDistance'] as Input_StreetFilterWithinDistance?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -2448,9 +1654,9 @@ class Input_StoreFilterInput {
       final l$name = name;
       result$data['name'] = l$name?.toJson();
     }
-    if (_$data.containsKey('adminFamilyId')) {
-      final l$adminFamilyId = adminFamilyId;
-      result$data['adminFamilyId'] = l$adminFamilyId?.toJson();
+    if (_$data.containsKey('line')) {
+      final l$line = line;
+      result$data['line'] = l$line?.toJson();
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -2464,13 +1670,17 @@ class Input_StoreFilterInput {
       final l$blurhash = blurhash;
       result$data['blurhash'] = l$blurhash?.toJson();
     }
-    if (_$data.containsKey('adminFamily')) {
-      final l$adminFamily = adminFamily;
-      result$data['adminFamily'] = l$adminFamily?.toJson();
+    if (_$data.containsKey('addresses')) {
+      final l$addresses = addresses;
+      result$data['addresses'] = l$addresses?.toJson();
     }
-    if (_$data.containsKey('address')) {
-      final l$address = address;
-      result$data['address'] = l$address?.toJson();
+    if (_$data.containsKey('areaStreets')) {
+      final l$areaStreets = areaStreets;
+      result$data['areaStreets'] = l$areaStreets?.toJson();
+    }
+    if (_$data.containsKey('areas')) {
+      final l$areas = areas;
+      result$data['areas'] = l$areas?.toJson();
     }
     if (_$data.containsKey('latestEdit')) {
       final l$latestEdit = latestEdit;
@@ -2488,30 +1698,21 @@ class Input_StoreFilterInput {
       final l$visits = visits;
       result$data['visits'] = l$visits?.toJson();
     }
-    if (_$data.containsKey('addressAreaName')) {
-      final l$addressAreaName = addressAreaName;
-      result$data['addressAreaName'] = l$addressAreaName?.toJson();
-    }
-    if (_$data.containsKey('addressStreetName')) {
-      final l$addressStreetName = addressStreetName;
-      result$data['addressStreetName'] = l$addressStreetName?.toJson();
-    }
-    if (_$data.containsKey('addressDistrictName')) {
-      final l$addressDistrictName = addressDistrictName;
-      result$data['addressDistrictName'] = l$addressDistrictName?.toJson();
-    }
-    if (_$data.containsKey('addressFullAddressText')) {
-      final l$addressFullAddressText = addressFullAddressText;
-      result$data['addressFullAddressText'] = l$addressFullAddressText
-          ?.toJson();
-    }
-    if (_$data.containsKey('adminFamilyName')) {
-      final l$adminFamilyName = adminFamilyName;
-      result$data['adminFamilyName'] = l$adminFamilyName?.toJson();
-    }
     if (_$data.containsKey('lastEdit')) {
       final l$lastEdit = lastEdit;
       result$data['lastEdit'] = l$lastEdit?.toJson();
+    }
+    if (_$data.containsKey('lastEditUserName')) {
+      final l$lastEditUserName = lastEditUserName;
+      result$data['lastEditUserName'] = l$lastEditUserName?.toJson();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit?.toJson();
+    }
+    if (_$data.containsKey('lastVisitUserName')) {
+      final l$lastVisitUserName = lastVisitUserName;
+      result$data['lastVisitUserName'] = l$lastVisitUserName?.toJson();
     }
     if (_$data.containsKey('userCanEdit')) {
       final l$userCanEdit = userCanEdit;
@@ -2521,18 +1722,22 @@ class Input_StoreFilterInput {
       final l$withinPolygon = withinPolygon;
       result$data['withinPolygon'] = l$withinPolygon?.toJson();
     }
+    if (_$data.containsKey('withinDistance')) {
+      final l$withinDistance = withinDistance;
+      result$data['withinDistance'] = l$withinDistance?.toJson();
+    }
     return result$data;
   }
 
-  CopyWith_Input_StoreFilterInput<Input_StoreFilterInput> get copyWith =>
-      CopyWith_Input_StoreFilterInput(this, (i) => i);
+  CopyWith_Input_StreetFilterInput<Input_StreetFilterInput> get copyWith =>
+      CopyWith_Input_StreetFilterInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_StoreFilterInput || runtimeType != other.runtimeType) {
+    if (other is! Input_StreetFilterInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$and = and;
@@ -2608,13 +1813,12 @@ class Input_StoreFilterInput {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$adminFamilyId = adminFamilyId;
-    final lOther$adminFamilyId = other.adminFamilyId;
-    if (_$data.containsKey('adminFamilyId') !=
-        other._$data.containsKey('adminFamilyId')) {
+    final l$line = line;
+    final lOther$line = other.line;
+    if (_$data.containsKey('line') != other._$data.containsKey('line')) {
       return false;
     }
-    if (l$adminFamilyId != lOther$adminFamilyId) {
+    if (l$line != lOther$line) {
       return false;
     }
     final l$color = color;
@@ -2643,21 +1847,30 @@ class Input_StoreFilterInput {
     if (l$blurhash != lOther$blurhash) {
       return false;
     }
-    final l$adminFamily = adminFamily;
-    final lOther$adminFamily = other.adminFamily;
-    if (_$data.containsKey('adminFamily') !=
-        other._$data.containsKey('adminFamily')) {
+    final l$addresses = addresses;
+    final lOther$addresses = other.addresses;
+    if (_$data.containsKey('addresses') !=
+        other._$data.containsKey('addresses')) {
       return false;
     }
-    if (l$adminFamily != lOther$adminFamily) {
+    if (l$addresses != lOther$addresses) {
       return false;
     }
-    final l$address = address;
-    final lOther$address = other.address;
-    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
+    final l$areaStreets = areaStreets;
+    final lOther$areaStreets = other.areaStreets;
+    if (_$data.containsKey('areaStreets') !=
+        other._$data.containsKey('areaStreets')) {
       return false;
     }
-    if (l$address != lOther$address) {
+    if (l$areaStreets != lOther$areaStreets) {
+      return false;
+    }
+    final l$areas = areas;
+    final lOther$areas = other.areas;
+    if (_$data.containsKey('areas') != other._$data.containsKey('areas')) {
+      return false;
+    }
+    if (l$areas != lOther$areas) {
       return false;
     }
     final l$latestEdit = latestEdit;
@@ -2694,51 +1907,6 @@ class Input_StoreFilterInput {
     if (l$visits != lOther$visits) {
       return false;
     }
-    final l$addressAreaName = addressAreaName;
-    final lOther$addressAreaName = other.addressAreaName;
-    if (_$data.containsKey('addressAreaName') !=
-        other._$data.containsKey('addressAreaName')) {
-      return false;
-    }
-    if (l$addressAreaName != lOther$addressAreaName) {
-      return false;
-    }
-    final l$addressStreetName = addressStreetName;
-    final lOther$addressStreetName = other.addressStreetName;
-    if (_$data.containsKey('addressStreetName') !=
-        other._$data.containsKey('addressStreetName')) {
-      return false;
-    }
-    if (l$addressStreetName != lOther$addressStreetName) {
-      return false;
-    }
-    final l$addressDistrictName = addressDistrictName;
-    final lOther$addressDistrictName = other.addressDistrictName;
-    if (_$data.containsKey('addressDistrictName') !=
-        other._$data.containsKey('addressDistrictName')) {
-      return false;
-    }
-    if (l$addressDistrictName != lOther$addressDistrictName) {
-      return false;
-    }
-    final l$addressFullAddressText = addressFullAddressText;
-    final lOther$addressFullAddressText = other.addressFullAddressText;
-    if (_$data.containsKey('addressFullAddressText') !=
-        other._$data.containsKey('addressFullAddressText')) {
-      return false;
-    }
-    if (l$addressFullAddressText != lOther$addressFullAddressText) {
-      return false;
-    }
-    final l$adminFamilyName = adminFamilyName;
-    final lOther$adminFamilyName = other.adminFamilyName;
-    if (_$data.containsKey('adminFamilyName') !=
-        other._$data.containsKey('adminFamilyName')) {
-      return false;
-    }
-    if (l$adminFamilyName != lOther$adminFamilyName) {
-      return false;
-    }
     final l$lastEdit = lastEdit;
     final lOther$lastEdit = other.lastEdit;
     if (_$data.containsKey('lastEdit') !=
@@ -2746,6 +1914,33 @@ class Input_StoreFilterInput {
       return false;
     }
     if (l$lastEdit != lOther$lastEdit) {
+      return false;
+    }
+    final l$lastEditUserName = lastEditUserName;
+    final lOther$lastEditUserName = other.lastEditUserName;
+    if (_$data.containsKey('lastEditUserName') !=
+        other._$data.containsKey('lastEditUserName')) {
+      return false;
+    }
+    if (l$lastEditUserName != lOther$lastEditUserName) {
+      return false;
+    }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    final l$lastVisitUserName = lastVisitUserName;
+    final lOther$lastVisitUserName = other.lastVisitUserName;
+    if (_$data.containsKey('lastVisitUserName') !=
+        other._$data.containsKey('lastVisitUserName')) {
+      return false;
+    }
+    if (l$lastVisitUserName != lOther$lastVisitUserName) {
       return false;
     }
     final l$userCanEdit = userCanEdit;
@@ -2766,6 +1961,15 @@ class Input_StoreFilterInput {
     if (l$withinPolygon != lOther$withinPolygon) {
       return false;
     }
+    final l$withinDistance = withinDistance;
+    final lOther$withinDistance = other.withinDistance;
+    if (_$data.containsKey('withinDistance') !=
+        other._$data.containsKey('withinDistance')) {
+      return false;
+    }
+    if (l$withinDistance != lOther$withinDistance) {
+      return false;
+    }
     return true;
   }
 
@@ -2776,24 +1980,24 @@ class Input_StoreFilterInput {
     final l$not = not;
     final l$id = id;
     final l$name = name;
-    final l$adminFamilyId = adminFamilyId;
+    final l$line = line;
     final l$color = color;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
-    final l$adminFamily = adminFamily;
-    final l$address = address;
+    final l$addresses = addresses;
+    final l$areaStreets = areaStreets;
+    final l$areas = areas;
     final l$latestEdit = latestEdit;
     final l$edits = edits;
     final l$latestVisit = latestVisit;
     final l$visits = visits;
-    final l$addressAreaName = addressAreaName;
-    final l$addressStreetName = addressStreetName;
-    final l$addressDistrictName = addressDistrictName;
-    final l$addressFullAddressText = addressFullAddressText;
-    final l$adminFamilyName = adminFamilyName;
     final l$lastEdit = lastEdit;
+    final l$lastEditUserName = lastEditUserName;
+    final l$lastVisit = lastVisit;
+    final l$lastVisitUserName = lastVisitUserName;
     final l$userCanEdit = userCanEdit;
     final l$withinPolygon = withinPolygon;
+    final l$withinDistance = withinDistance;
     return Object.hashAll([
       _$data.containsKey('and')
           ? l$and == null
@@ -2812,28 +2016,630 @@ class Input_StoreFilterInput {
           : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('adminFamilyId') ? l$adminFamilyId : const {},
+      _$data.containsKey('line') ? l$line : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
-      _$data.containsKey('adminFamily') ? l$adminFamily : const {},
-      _$data.containsKey('address') ? l$address : const {},
+      _$data.containsKey('addresses') ? l$addresses : const {},
+      _$data.containsKey('areaStreets') ? l$areaStreets : const {},
+      _$data.containsKey('areas') ? l$areas : const {},
       _$data.containsKey('latestEdit') ? l$latestEdit : const {},
       _$data.containsKey('edits') ? l$edits : const {},
       _$data.containsKey('latestVisit') ? l$latestVisit : const {},
       _$data.containsKey('visits') ? l$visits : const {},
-      _$data.containsKey('addressAreaName') ? l$addressAreaName : const {},
-      _$data.containsKey('addressStreetName') ? l$addressStreetName : const {},
-      _$data.containsKey('addressDistrictName')
-          ? l$addressDistrictName
-          : const {},
-      _$data.containsKey('addressFullAddressText')
-          ? l$addressFullAddressText
-          : const {},
-      _$data.containsKey('adminFamilyName') ? l$adminFamilyName : const {},
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('lastEditUserName') ? l$lastEditUserName : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
+      _$data.containsKey('lastVisitUserName') ? l$lastVisitUserName : const {},
       _$data.containsKey('userCanEdit') ? l$userCanEdit : const {},
       _$data.containsKey('withinPolygon') ? l$withinPolygon : const {},
+      _$data.containsKey('withinDistance') ? l$withinDistance : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_StreetFilterInput<TRes> {
+  factory CopyWith_Input_StreetFilterInput(
+    Input_StreetFilterInput instance,
+    TRes Function(Input_StreetFilterInput) then,
+  ) = _CopyWithImpl_Input_StreetFilterInput;
+
+  factory CopyWith_Input_StreetFilterInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_StreetFilterInput;
+
+  TRes call({
+    List<Input_StreetFilterInput>? and,
+    List<Input_StreetFilterInput>? or,
+    List<Input_StreetFilterInput>? not,
+    Input_StreetFilterId? id,
+    Input_StreetFilterName? name,
+    Input_StreetFilterLine? line,
+    Input_StreetFilterColor? color,
+    Input_StreetFilterPhotoUpdatedAt? photoUpdatedAt,
+    Input_StreetFilterBlurhash? blurhash,
+    Input_AddressFilterInput? addresses,
+    Input_AreaStreetFilterInput? areaStreets,
+    Input_AreaFilterInput? areas,
+    Input_LatestEditFilterInput? latestEdit,
+    Input_EditFilterInput? edits,
+    Input_LatestVisitFilterInput? latestVisit,
+    Input_VisitFilterInput? visits,
+    Input_StreetFilterLastEdit? lastEdit,
+    Input_StreetFilterLastEditUserName? lastEditUserName,
+    Input_StreetFilterLastVisit? lastVisit,
+    Input_StreetFilterLastVisitUserName? lastVisitUserName,
+    Input_StreetFilterUserCanEdit? userCanEdit,
+    Input_StreetFilterWithinPolygon? withinPolygon,
+    Input_StreetFilterWithinDistance? withinDistance,
+  });
+  TRes and(
+    Iterable<Input_StreetFilterInput>? Function(
+      Iterable<CopyWith_Input_StreetFilterInput<Input_StreetFilterInput>>?,
+    )
+    _fn,
+  );
+  TRes or(
+    Iterable<Input_StreetFilterInput>? Function(
+      Iterable<CopyWith_Input_StreetFilterInput<Input_StreetFilterInput>>?,
+    )
+    _fn,
+  );
+  TRes not(
+    Iterable<Input_StreetFilterInput>? Function(
+      Iterable<CopyWith_Input_StreetFilterInput<Input_StreetFilterInput>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_StreetFilterId<TRes> get id;
+  CopyWith_Input_StreetFilterName<TRes> get name;
+  CopyWith_Input_StreetFilterLine<TRes> get line;
+  CopyWith_Input_StreetFilterColor<TRes> get color;
+  CopyWith_Input_StreetFilterPhotoUpdatedAt<TRes> get photoUpdatedAt;
+  CopyWith_Input_StreetFilterBlurhash<TRes> get blurhash;
+  CopyWith_Input_AddressFilterInput<TRes> get addresses;
+  CopyWith_Input_AreaStreetFilterInput<TRes> get areaStreets;
+  CopyWith_Input_AreaFilterInput<TRes> get areas;
+  CopyWith_Input_LatestEditFilterInput<TRes> get latestEdit;
+  CopyWith_Input_EditFilterInput<TRes> get edits;
+  CopyWith_Input_LatestVisitFilterInput<TRes> get latestVisit;
+  CopyWith_Input_VisitFilterInput<TRes> get visits;
+  CopyWith_Input_StreetFilterLastEdit<TRes> get lastEdit;
+  CopyWith_Input_StreetFilterLastEditUserName<TRes> get lastEditUserName;
+  CopyWith_Input_StreetFilterLastVisit<TRes> get lastVisit;
+  CopyWith_Input_StreetFilterLastVisitUserName<TRes> get lastVisitUserName;
+  CopyWith_Input_StreetFilterUserCanEdit<TRes> get userCanEdit;
+  CopyWith_Input_StreetFilterWithinPolygon<TRes> get withinPolygon;
+  CopyWith_Input_StreetFilterWithinDistance<TRes> get withinDistance;
+}
+
+class _CopyWithImpl_Input_StreetFilterInput<TRes>
+    implements CopyWith_Input_StreetFilterInput<TRes> {
+  _CopyWithImpl_Input_StreetFilterInput(this._instance, this._then);
+
+  final Input_StreetFilterInput _instance;
+
+  final TRes Function(Input_StreetFilterInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? and = _undefined,
+    Object? or = _undefined,
+    Object? not = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? line = _undefined,
+    Object? color = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? addresses = _undefined,
+    Object? areaStreets = _undefined,
+    Object? areas = _undefined,
+    Object? latestEdit = _undefined,
+    Object? edits = _undefined,
+    Object? latestVisit = _undefined,
+    Object? visits = _undefined,
+    Object? lastEdit = _undefined,
+    Object? lastEditUserName = _undefined,
+    Object? lastVisit = _undefined,
+    Object? lastVisitUserName = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? withinPolygon = _undefined,
+    Object? withinDistance = _undefined,
+  }) => _then(
+    Input_StreetFilterInput._({
+      ..._instance._$data,
+      if (and != _undefined) 'and': (and as List<Input_StreetFilterInput>?),
+      if (or != _undefined) 'or': (or as List<Input_StreetFilterInput>?),
+      if (not != _undefined) 'not': (not as List<Input_StreetFilterInput>?),
+      if (id != _undefined) 'id': (id as Input_StreetFilterId?),
+      if (name != _undefined) 'name': (name as Input_StreetFilterName?),
+      if (line != _undefined) 'line': (line as Input_StreetFilterLine?),
+      if (color != _undefined) 'color': (color as Input_StreetFilterColor?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as Input_StreetFilterPhotoUpdatedAt?),
+      if (blurhash != _undefined)
+        'blurhash': (blurhash as Input_StreetFilterBlurhash?),
+      if (addresses != _undefined)
+        'addresses': (addresses as Input_AddressFilterInput?),
+      if (areaStreets != _undefined)
+        'areaStreets': (areaStreets as Input_AreaStreetFilterInput?),
+      if (areas != _undefined) 'areas': (areas as Input_AreaFilterInput?),
+      if (latestEdit != _undefined)
+        'latestEdit': (latestEdit as Input_LatestEditFilterInput?),
+      if (edits != _undefined) 'edits': (edits as Input_EditFilterInput?),
+      if (latestVisit != _undefined)
+        'latestVisit': (latestVisit as Input_LatestVisitFilterInput?),
+      if (visits != _undefined) 'visits': (visits as Input_VisitFilterInput?),
+      if (lastEdit != _undefined)
+        'lastEdit': (lastEdit as Input_StreetFilterLastEdit?),
+      if (lastEditUserName != _undefined)
+        'lastEditUserName':
+            (lastEditUserName as Input_StreetFilterLastEditUserName?),
+      if (lastVisit != _undefined)
+        'lastVisit': (lastVisit as Input_StreetFilterLastVisit?),
+      if (lastVisitUserName != _undefined)
+        'lastVisitUserName':
+            (lastVisitUserName as Input_StreetFilterLastVisitUserName?),
+      if (userCanEdit != _undefined)
+        'userCanEdit': (userCanEdit as Input_StreetFilterUserCanEdit?),
+      if (withinPolygon != _undefined)
+        'withinPolygon': (withinPolygon as Input_StreetFilterWithinPolygon?),
+      if (withinDistance != _undefined)
+        'withinDistance': (withinDistance as Input_StreetFilterWithinDistance?),
+    }),
+  );
+
+  TRes and(
+    Iterable<Input_StreetFilterInput>? Function(
+      Iterable<CopyWith_Input_StreetFilterInput<Input_StreetFilterInput>>?,
+    )
+    _fn,
+  ) => call(
+    and: _fn(
+      _instance.and?.map((e) => CopyWith_Input_StreetFilterInput(e, (i) => i)),
+    )?.toList(),
+  );
+
+  TRes or(
+    Iterable<Input_StreetFilterInput>? Function(
+      Iterable<CopyWith_Input_StreetFilterInput<Input_StreetFilterInput>>?,
+    )
+    _fn,
+  ) => call(
+    or: _fn(
+      _instance.or?.map((e) => CopyWith_Input_StreetFilterInput(e, (i) => i)),
+    )?.toList(),
+  );
+
+  TRes not(
+    Iterable<Input_StreetFilterInput>? Function(
+      Iterable<CopyWith_Input_StreetFilterInput<Input_StreetFilterInput>>?,
+    )
+    _fn,
+  ) => call(
+    not: _fn(
+      _instance.not?.map((e) => CopyWith_Input_StreetFilterInput(e, (i) => i)),
+    )?.toList(),
+  );
+
+  CopyWith_Input_StreetFilterId<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_StreetFilterId.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterId(local$id, (e) => call(id: e));
+  }
+
+  CopyWith_Input_StreetFilterName<TRes> get name {
+    final local$name = _instance.name;
+    return local$name == null
+        ? CopyWith_Input_StreetFilterName.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterName(local$name, (e) => call(name: e));
+  }
+
+  CopyWith_Input_StreetFilterLine<TRes> get line {
+    final local$line = _instance.line;
+    return local$line == null
+        ? CopyWith_Input_StreetFilterLine.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterLine(local$line, (e) => call(line: e));
+  }
+
+  CopyWith_Input_StreetFilterColor<TRes> get color {
+    final local$color = _instance.color;
+    return local$color == null
+        ? CopyWith_Input_StreetFilterColor.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterColor(local$color, (e) => call(color: e));
+  }
+
+  CopyWith_Input_StreetFilterPhotoUpdatedAt<TRes> get photoUpdatedAt {
+    final local$photoUpdatedAt = _instance.photoUpdatedAt;
+    return local$photoUpdatedAt == null
+        ? CopyWith_Input_StreetFilterPhotoUpdatedAt.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterPhotoUpdatedAt(
+            local$photoUpdatedAt,
+            (e) => call(photoUpdatedAt: e),
+          );
+  }
+
+  CopyWith_Input_StreetFilterBlurhash<TRes> get blurhash {
+    final local$blurhash = _instance.blurhash;
+    return local$blurhash == null
+        ? CopyWith_Input_StreetFilterBlurhash.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterBlurhash(
+            local$blurhash,
+            (e) => call(blurhash: e),
+          );
+  }
+
+  CopyWith_Input_AddressFilterInput<TRes> get addresses {
+    final local$addresses = _instance.addresses;
+    return local$addresses == null
+        ? CopyWith_Input_AddressFilterInput.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterInput(
+            local$addresses,
+            (e) => call(addresses: e),
+          );
+  }
+
+  CopyWith_Input_AreaStreetFilterInput<TRes> get areaStreets {
+    final local$areaStreets = _instance.areaStreets;
+    return local$areaStreets == null
+        ? CopyWith_Input_AreaStreetFilterInput.stub(_then(_instance))
+        : CopyWith_Input_AreaStreetFilterInput(
+            local$areaStreets,
+            (e) => call(areaStreets: e),
+          );
+  }
+
+  CopyWith_Input_AreaFilterInput<TRes> get areas {
+    final local$areas = _instance.areas;
+    return local$areas == null
+        ? CopyWith_Input_AreaFilterInput.stub(_then(_instance))
+        : CopyWith_Input_AreaFilterInput(local$areas, (e) => call(areas: e));
+  }
+
+  CopyWith_Input_LatestEditFilterInput<TRes> get latestEdit {
+    final local$latestEdit = _instance.latestEdit;
+    return local$latestEdit == null
+        ? CopyWith_Input_LatestEditFilterInput.stub(_then(_instance))
+        : CopyWith_Input_LatestEditFilterInput(
+            local$latestEdit,
+            (e) => call(latestEdit: e),
+          );
+  }
+
+  CopyWith_Input_EditFilterInput<TRes> get edits {
+    final local$edits = _instance.edits;
+    return local$edits == null
+        ? CopyWith_Input_EditFilterInput.stub(_then(_instance))
+        : CopyWith_Input_EditFilterInput(local$edits, (e) => call(edits: e));
+  }
+
+  CopyWith_Input_LatestVisitFilterInput<TRes> get latestVisit {
+    final local$latestVisit = _instance.latestVisit;
+    return local$latestVisit == null
+        ? CopyWith_Input_LatestVisitFilterInput.stub(_then(_instance))
+        : CopyWith_Input_LatestVisitFilterInput(
+            local$latestVisit,
+            (e) => call(latestVisit: e),
+          );
+  }
+
+  CopyWith_Input_VisitFilterInput<TRes> get visits {
+    final local$visits = _instance.visits;
+    return local$visits == null
+        ? CopyWith_Input_VisitFilterInput.stub(_then(_instance))
+        : CopyWith_Input_VisitFilterInput(local$visits, (e) => call(visits: e));
+  }
+
+  CopyWith_Input_StreetFilterLastEdit<TRes> get lastEdit {
+    final local$lastEdit = _instance.lastEdit;
+    return local$lastEdit == null
+        ? CopyWith_Input_StreetFilterLastEdit.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterLastEdit(
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
+  }
+
+  CopyWith_Input_StreetFilterLastEditUserName<TRes> get lastEditUserName {
+    final local$lastEditUserName = _instance.lastEditUserName;
+    return local$lastEditUserName == null
+        ? CopyWith_Input_StreetFilterLastEditUserName.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterLastEditUserName(
+            local$lastEditUserName,
+            (e) => call(lastEditUserName: e),
+          );
+  }
+
+  CopyWith_Input_StreetFilterLastVisit<TRes> get lastVisit {
+    final local$lastVisit = _instance.lastVisit;
+    return local$lastVisit == null
+        ? CopyWith_Input_StreetFilterLastVisit.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterLastVisit(
+            local$lastVisit,
+            (e) => call(lastVisit: e),
+          );
+  }
+
+  CopyWith_Input_StreetFilterLastVisitUserName<TRes> get lastVisitUserName {
+    final local$lastVisitUserName = _instance.lastVisitUserName;
+    return local$lastVisitUserName == null
+        ? CopyWith_Input_StreetFilterLastVisitUserName.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterLastVisitUserName(
+            local$lastVisitUserName,
+            (e) => call(lastVisitUserName: e),
+          );
+  }
+
+  CopyWith_Input_StreetFilterUserCanEdit<TRes> get userCanEdit {
+    final local$userCanEdit = _instance.userCanEdit;
+    return local$userCanEdit == null
+        ? CopyWith_Input_StreetFilterUserCanEdit.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterUserCanEdit(
+            local$userCanEdit,
+            (e) => call(userCanEdit: e),
+          );
+  }
+
+  CopyWith_Input_StreetFilterWithinPolygon<TRes> get withinPolygon {
+    final local$withinPolygon = _instance.withinPolygon;
+    return local$withinPolygon == null
+        ? CopyWith_Input_StreetFilterWithinPolygon.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterWithinPolygon(
+            local$withinPolygon,
+            (e) => call(withinPolygon: e),
+          );
+  }
+
+  CopyWith_Input_StreetFilterWithinDistance<TRes> get withinDistance {
+    final local$withinDistance = _instance.withinDistance;
+    return local$withinDistance == null
+        ? CopyWith_Input_StreetFilterWithinDistance.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterWithinDistance(
+            local$withinDistance,
+            (e) => call(withinDistance: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_StreetFilterInput<TRes>
+    implements CopyWith_Input_StreetFilterInput<TRes> {
+  _CopyWithStubImpl_Input_StreetFilterInput(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_StreetFilterInput>? and,
+    List<Input_StreetFilterInput>? or,
+    List<Input_StreetFilterInput>? not,
+    Input_StreetFilterId? id,
+    Input_StreetFilterName? name,
+    Input_StreetFilterLine? line,
+    Input_StreetFilterColor? color,
+    Input_StreetFilterPhotoUpdatedAt? photoUpdatedAt,
+    Input_StreetFilterBlurhash? blurhash,
+    Input_AddressFilterInput? addresses,
+    Input_AreaStreetFilterInput? areaStreets,
+    Input_AreaFilterInput? areas,
+    Input_LatestEditFilterInput? latestEdit,
+    Input_EditFilterInput? edits,
+    Input_LatestVisitFilterInput? latestVisit,
+    Input_VisitFilterInput? visits,
+    Input_StreetFilterLastEdit? lastEdit,
+    Input_StreetFilterLastEditUserName? lastEditUserName,
+    Input_StreetFilterLastVisit? lastVisit,
+    Input_StreetFilterLastVisitUserName? lastVisitUserName,
+    Input_StreetFilterUserCanEdit? userCanEdit,
+    Input_StreetFilterWithinPolygon? withinPolygon,
+    Input_StreetFilterWithinDistance? withinDistance,
+  }) => _res;
+
+  and(_fn) => _res;
+
+  or(_fn) => _res;
+
+  not(_fn) => _res;
+
+  CopyWith_Input_StreetFilterId<TRes> get id =>
+      CopyWith_Input_StreetFilterId.stub(_res);
+
+  CopyWith_Input_StreetFilterName<TRes> get name =>
+      CopyWith_Input_StreetFilterName.stub(_res);
+
+  CopyWith_Input_StreetFilterLine<TRes> get line =>
+      CopyWith_Input_StreetFilterLine.stub(_res);
+
+  CopyWith_Input_StreetFilterColor<TRes> get color =>
+      CopyWith_Input_StreetFilterColor.stub(_res);
+
+  CopyWith_Input_StreetFilterPhotoUpdatedAt<TRes> get photoUpdatedAt =>
+      CopyWith_Input_StreetFilterPhotoUpdatedAt.stub(_res);
+
+  CopyWith_Input_StreetFilterBlurhash<TRes> get blurhash =>
+      CopyWith_Input_StreetFilterBlurhash.stub(_res);
+
+  CopyWith_Input_AddressFilterInput<TRes> get addresses =>
+      CopyWith_Input_AddressFilterInput.stub(_res);
+
+  CopyWith_Input_AreaStreetFilterInput<TRes> get areaStreets =>
+      CopyWith_Input_AreaStreetFilterInput.stub(_res);
+
+  CopyWith_Input_AreaFilterInput<TRes> get areas =>
+      CopyWith_Input_AreaFilterInput.stub(_res);
+
+  CopyWith_Input_LatestEditFilterInput<TRes> get latestEdit =>
+      CopyWith_Input_LatestEditFilterInput.stub(_res);
+
+  CopyWith_Input_EditFilterInput<TRes> get edits =>
+      CopyWith_Input_EditFilterInput.stub(_res);
+
+  CopyWith_Input_LatestVisitFilterInput<TRes> get latestVisit =>
+      CopyWith_Input_LatestVisitFilterInput.stub(_res);
+
+  CopyWith_Input_VisitFilterInput<TRes> get visits =>
+      CopyWith_Input_VisitFilterInput.stub(_res);
+
+  CopyWith_Input_StreetFilterLastEdit<TRes> get lastEdit =>
+      CopyWith_Input_StreetFilterLastEdit.stub(_res);
+
+  CopyWith_Input_StreetFilterLastEditUserName<TRes> get lastEditUserName =>
+      CopyWith_Input_StreetFilterLastEditUserName.stub(_res);
+
+  CopyWith_Input_StreetFilterLastVisit<TRes> get lastVisit =>
+      CopyWith_Input_StreetFilterLastVisit.stub(_res);
+
+  CopyWith_Input_StreetFilterLastVisitUserName<TRes> get lastVisitUserName =>
+      CopyWith_Input_StreetFilterLastVisitUserName.stub(_res);
+
+  CopyWith_Input_StreetFilterUserCanEdit<TRes> get userCanEdit =>
+      CopyWith_Input_StreetFilterUserCanEdit.stub(_res);
+
+  CopyWith_Input_StreetFilterWithinPolygon<TRes> get withinPolygon =>
+      CopyWith_Input_StreetFilterWithinPolygon.stub(_res);
+
+  CopyWith_Input_StreetFilterWithinDistance<TRes> get withinDistance =>
+      CopyWith_Input_StreetFilterWithinDistance.stub(_res);
+}
+
+class Input_StreetSortInput {
+  factory Input_StreetSortInput({
+    Enum_SortOrder? order,
+    required Enum_StreetSortField field,
+    Input_StreetWithinPolygonFieldInput? withinPolygonInput,
+    Input_StreetWithinDistanceFieldInput? withinDistanceInput,
+  }) => Input_StreetSortInput._({
+    if (order != null) r'order': order,
+    r'field': field,
+    if (withinPolygonInput != null) r'withinPolygonInput': withinPolygonInput,
+    if (withinDistanceInput != null)
+      r'withinDistanceInput': withinDistanceInput,
+  });
+
+  Input_StreetSortInput._(this._$data);
+
+  factory Input_StreetSortInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('order')) {
+      final l$order = data['order'];
+      result$data['order'] = l$order == null
+          ? null
+          : fromJson_Enum_SortOrder((l$order as String));
+    }
+    final l$field = data['field'];
+    result$data['field'] = fromJson_Enum_StreetSortField((l$field as String));
+    if (data.containsKey('withinPolygonInput')) {
+      final l$withinPolygonInput = data['withinPolygonInput'];
+      result$data['withinPolygonInput'] = l$withinPolygonInput == null
+          ? null
+          : Input_StreetWithinPolygonFieldInput.fromJson(
+              (l$withinPolygonInput as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('withinDistanceInput')) {
+      final l$withinDistanceInput = data['withinDistanceInput'];
+      result$data['withinDistanceInput'] = l$withinDistanceInput == null
+          ? null
+          : Input_StreetWithinDistanceFieldInput.fromJson(
+              (l$withinDistanceInput as Map<String, dynamic>),
+            );
+    }
+    return Input_StreetSortInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_SortOrder? get order => (_$data['order'] as Enum_SortOrder?);
+
+  Enum_StreetSortField get field => (_$data['field'] as Enum_StreetSortField);
+
+  Input_StreetWithinPolygonFieldInput? get withinPolygonInput =>
+      (_$data['withinPolygonInput'] as Input_StreetWithinPolygonFieldInput?);
+
+  Input_StreetWithinDistanceFieldInput? get withinDistanceInput =>
+      (_$data['withinDistanceInput'] as Input_StreetWithinDistanceFieldInput?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('order')) {
+      final l$order = order;
+      result$data['order'] = l$order == null
+          ? null
+          : toJson_Enum_SortOrder(l$order);
+    }
+    final l$field = field;
+    result$data['field'] = toJson_Enum_StreetSortField(l$field);
+    if (_$data.containsKey('withinPolygonInput')) {
+      final l$withinPolygonInput = withinPolygonInput;
+      result$data['withinPolygonInput'] = l$withinPolygonInput?.toJson();
+    }
+    if (_$data.containsKey('withinDistanceInput')) {
+      final l$withinDistanceInput = withinDistanceInput;
+      result$data['withinDistanceInput'] = l$withinDistanceInput?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_StreetSortInput<Input_StreetSortInput> get copyWith =>
+      CopyWith_Input_StreetSortInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_StreetSortInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
+      return false;
+    }
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$field = field;
+    final lOther$field = other.field;
+    if (l$field != lOther$field) {
+      return false;
+    }
+    final l$withinPolygonInput = withinPolygonInput;
+    final lOther$withinPolygonInput = other.withinPolygonInput;
+    if (_$data.containsKey('withinPolygonInput') !=
+        other._$data.containsKey('withinPolygonInput')) {
+      return false;
+    }
+    if (l$withinPolygonInput != lOther$withinPolygonInput) {
+      return false;
+    }
+    final l$withinDistanceInput = withinDistanceInput;
+    final lOther$withinDistanceInput = other.withinDistanceInput;
+    if (_$data.containsKey('withinDistanceInput') !=
+        other._$data.containsKey('withinDistanceInput')) {
+      return false;
+    }
+    if (l$withinDistanceInput != lOther$withinDistanceInput) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$order = order;
+    final l$field = field;
+    final l$withinPolygonInput = withinPolygonInput;
+    final l$withinDistanceInput = withinDistanceInput;
+    return Object.hashAll([
+      _$data.containsKey('order') ? l$order : const {},
+      l$field,
+      _$data.containsKey('withinPolygonInput')
+          ? l$withinPolygonInput
+          : const {},
+      _$data.containsKey('withinDistanceInput')
+          ? l$withinDistanceInput
+          : const {},
     ]);
   }
 }
