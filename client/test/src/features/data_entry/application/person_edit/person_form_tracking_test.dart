@@ -80,4 +80,41 @@ void main() {
       },
     );
   });
+
+  group('choosing a family', () {
+    const maadiAddress = Address(area: PersonFormControllerFixture.maadi);
+
+    test('with an address is tracked as filling the address from it', () {
+      const maadiFamily = Family(id: 'm', name: 'عائلة', address: maadiAddress);
+      final controller = fixture.controllerFor(const CreateBlankPerson());
+
+      controller.household.family.setValue(maadiFamily);
+
+      expect(fixture.analytics.singleTrackedPropertiesOf<FamilyAddressFill>(), {
+        'family_id': maadiFamily.id,
+      });
+    });
+
+    test('without an address is not tracked as filling the address', () {
+      final controller = fixture.controllerFor(const CreateBlankPerson());
+
+      controller.household.family.setValue(const Family(id: 'f', name: 'ع'));
+
+      expect(fixture.analytics.trackedEventsOf<FamilyAddressFill>(), isEmpty);
+    });
+
+    test('whose address the form already shows is not tracked', () {
+      final controller = fixture.controllerFor(
+        const CreatePersonInFamily(
+          family: Family(id: 'f', name: 'عائلة', address: maadiAddress),
+        ),
+      );
+
+      controller.household.family.setValue(
+        const Family(id: 'm', name: 'عائلة', address: maadiAddress),
+      );
+
+      expect(fixture.analytics.trackedEventsOf<FamilyAddressFill>(), isEmpty);
+    });
+  });
 }

@@ -114,10 +114,7 @@ final class FamilyAddressFill extends AddressAnalyticsEvent {
   String get objectAction => 'family_address_fill';
 
   @override
-  Json get properties => {
-    'family_id': family.id,
-    'has_address': family.address != null,
-  };
+  Json get properties => {'family_id': family.id};
 
   const FamilyAddressFill(this.family);
 }
