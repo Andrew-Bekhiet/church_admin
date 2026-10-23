@@ -66,6 +66,14 @@ class MeetingsFilterChip extends StatelessWidget {
 
     await picked.close();
 
-    if (applied != null) onChanged(applied);
+    if (applied == null) return;
+
+    AnalyticsService.I.track(
+      AnalysisMeetingsFilterApply(
+        selectedMeetingCount: applied.length,
+        totalMeetingCount: meetings.length,
+      ),
+    );
+    onChanged(applied);
   }
 }

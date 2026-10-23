@@ -37,11 +37,15 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
           // the currently-selected custom preset re-open the date picker.
           if (selectedPreset == null ||
               selectedPreset is CustomDateTimeRangePreset) {
-            await _pickCustomRange(context);
+            await _pickCustomRange(
+              context,
+              isReopened: selectedPreset is CustomDateTimeRangePreset,
+            );
 
             return;
           }
 
+          AnalyticsService.I.track(AnalysisRangeSelect(selectedPreset));
           onChanged(selectedPreset);
         },
         dropdownMenuEntries: [
@@ -71,7 +75,10 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
     );
   }
 
-  Future<void> _pickCustomRange(BuildContext context) async {
+  Future<void> _pickCustomRange(
+    BuildContext context, {
+    required bool isReopened,
+  }) async {
     final rslt = await showCalendarDatePicker2Dialog(
       context: context,
       dialogSize: Size(MediaQuery.widthOf(context) - 16, 410),
@@ -82,15 +89,20 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
       ),
       value: [_range.start, _range.end],
     );
-    if (rslt == null || rslt.nonNulls.length < 2) return;
-
-    onChanged(
-      CustomDateTimeRangePreset(
-        range: DateTimeRange(
-          start: rslt.nonNulls.min,
-          end: rslt.nonNulls.max,
-        ),
+    final pickedRange = switch (rslt?.nonNulls.toList()) {
+      final picked? when picked.length >= 2 => DateTimeRange(
+        start: picked.min,
+        end: picked.max,
       ),
+      _ => null,
+    };
+
+    AnalyticsService.I.track(
+      AnalysisCustomRangePick(isReopened: isReopened, pickedRange: pickedRange),
     );
+
+    if (pickedRange == null) return;
+
+    onChanged(CustomDateTimeRangePreset(range: pickedRange));
   }
 }
