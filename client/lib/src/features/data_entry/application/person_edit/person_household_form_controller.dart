@@ -93,9 +93,13 @@ class PersonHouseholdFormController extends AdvancedFormController
     };
     _familyBeforeLatestChange = chosen;
 
+    final shownAddressBeforeChange = address.toAddress();
     address.loadAsNewBaseline(chosen?.address ?? _addressCarriedByPerson);
     _updateAddressEditability();
-    if (chosen != null) _analyticsService.track(FamilyAddressFill(chosen));
+    if (chosen case Family(address: final familyAddress?)
+        when familyAddress != shownAddressBeforeChange) {
+      _analyticsService.track(FamilyAddressFill(chosen));
+    }
   }
 
   void _updateAddressEditability() =>
