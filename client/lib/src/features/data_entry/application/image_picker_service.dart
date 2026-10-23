@@ -126,7 +126,7 @@ class ImagePickerService {
 
                       if (rslt != true) return;
 
-                      _analyticsService.track(const PhotoDelete());
+                      _analyticsService.track(const PhotoDeleteChoose());
                       navigator.pop(deleteImage);
                     },
                     color: primary,
@@ -157,7 +157,7 @@ class ImagePickerService {
       if (cameraPermission != PermissionStatus.granted &&
           cameraPermission != PermissionStatus.limited) {
         _analyticsService.track(
-          PhotoPick(source, PhotoPickOutcome.cameraPermissionDenied),
+          PhotoPickAttempt(source, PhotoPickOutcome.cameraPermissionDenied),
         );
 
         return null;
@@ -171,7 +171,7 @@ class ImagePickerService {
 
     if (image == null) {
       _analyticsService.track(
-        PhotoPick(source, PhotoPickOutcome.pickCancelled),
+        PhotoPickAttempt(source, PhotoPickOutcome.pickCancelled),
       );
 
       return null;
@@ -201,13 +201,13 @@ class ImagePickerService {
 
     if (croppedFile == null) {
       _analyticsService.track(
-        PhotoPick(source, PhotoPickOutcome.cropCancelled),
+        PhotoPickAttempt(source, PhotoPickOutcome.cropCancelled),
       );
 
       return null;
     }
 
-    _analyticsService.track(PhotoPick(source, PhotoPickOutcome.picked));
+    _analyticsService.track(PhotoPickAttempt(source, PhotoPickOutcome.picked));
 
     return XFile(croppedFile.path);
   }
