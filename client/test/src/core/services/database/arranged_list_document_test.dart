@@ -136,7 +136,7 @@ void main() {
 
     writeAsServerAnswers(cache, listRequest);
 
-    final persons = cache.readQuery(listRequest)!['persons'] as List;
+    final persons = listedPersons(cache, listRequest) as List;
     expect(
       PersonFields().mainPhone.getValue(
         Person.fromJson(persons.single as Json),
