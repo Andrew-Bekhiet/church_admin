@@ -70,7 +70,7 @@ class DataExportCubit extends Cubit<DataExportState> {
         .distinct()
         .listen(
           (query) => _analyticsService.track(
-            ExportSelectionSearchSubmit(queryLength: query.length),
+            ExportSelectionSearchRun(queryLength: query.length),
           ),
         );
     unawaited(_showSavedFilesOrStartNewExport());
@@ -80,8 +80,10 @@ class DataExportCubit extends Cubit<DataExportState> {
     final files = await _exportOperationsStorage.listSavedFiles();
 
     _analyticsService.track(
-      ExportLandingView(
-        files.isEmpty ? ExportLanding.selection : ExportLanding.savedFiles,
+      ExportLandingShow(
+        files.isEmpty
+            ? ExportLandingView.selection
+            : ExportLandingView.savedFiles,
         savedFileCount: files.length,
       ),
     );
@@ -294,19 +296,19 @@ class DataExportCubit extends Cubit<DataExportState> {
             emit(DataExportInProgress(progress: progress)),
       );
 
-      _trackFileDownload(startedAt, isSuccess: true);
+      _trackExportFinish(startedAt, isSuccess: true);
       emit(DataExportCompleted(file: file));
     } catch (e, s) {
-      _trackFileDownload(startedAt, isSuccess: false);
+      _trackExportFinish(startedAt, isSuccess: false);
       unawaited(LoggingService.I.exception(LogRecord(error: e, stackTrace: s)));
       _emitListenerState(DataExportException(e));
       _showSelection();
     }
   }
 
-  void _trackFileDownload(DateTime startedAt, {required bool isSuccess}) =>
+  void _trackExportFinish(DateTime startedAt, {required bool isSuccess}) =>
       _analyticsService.track(
-        ExportFileDownload(
+        ExportFinish(
           duration: clock.now().difference(startedAt),
           isSuccess: isSuccess,
         ),

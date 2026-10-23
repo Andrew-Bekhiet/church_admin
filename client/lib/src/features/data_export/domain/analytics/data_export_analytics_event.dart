@@ -7,20 +7,20 @@ sealed class DataExportAnalyticsEvent extends AnalyticsEvent {
   const DataExportAnalyticsEvent();
 }
 
-final class ExportLandingView extends DataExportAnalyticsEvent {
-  final ExportLanding landing;
+final class ExportLandingShow extends DataExportAnalyticsEvent {
+  final ExportLandingView landingView;
   final int savedFileCount;
 
   @override
-  String get objectAction => 'landing_view';
+  String get objectAction => 'landing_show';
 
   @override
   Json get properties => {
-    'landing': landing.name,
+    'landing_view': landingView.name,
     'saved_file_count': savedFileCount,
   };
 
-  const ExportLandingView(this.landing, {required this.savedFileCount});
+  const ExportLandingShow(this.landingView, {required this.savedFileCount});
 }
 
 final class ExportNewExportTap extends DataExportAnalyticsEvent {
@@ -30,16 +30,16 @@ final class ExportNewExportTap extends DataExportAnalyticsEvent {
   const ExportNewExportTap();
 }
 
-final class ExportSelectionSearchSubmit extends DataExportAnalyticsEvent {
+final class ExportSelectionSearchRun extends DataExportAnalyticsEvent {
   final int queryLength;
 
   @override
-  String get objectAction => 'selection_search_submit';
+  String get objectAction => 'selection_search_run';
 
   @override
   Json get properties => {'query_length': queryLength};
 
-  const ExportSelectionSearchSubmit({required this.queryLength});
+  const ExportSelectionSearchRun({required this.queryLength});
 }
 
 final class ExportEmptySelectionShow extends DataExportAnalyticsEvent {
@@ -57,7 +57,7 @@ final class ExportStart extends DataExportAnalyticsEvent {
   final bool isScopedToOwn;
 
   @override
-  String get objectAction => 'start';
+  String get objectAction => 'export_start';
 
   @override
   Json get properties => {
@@ -77,20 +77,20 @@ final class ExportStart extends DataExportAnalyticsEvent {
   });
 }
 
-final class ExportFileDownload extends DataExportAnalyticsEvent {
+final class ExportFinish extends DataExportAnalyticsEvent {
   final Duration duration;
   final bool isSuccess;
 
   @override
-  String get objectAction => 'file_download';
+  String get objectAction => 'export_finish';
 
   @override
   Json get properties => {
     'is_success': isSuccess,
-    'duration_seconds': duration.inSeconds,
+    'duration_ms': duration.inMilliseconds,
   };
 
-  const ExportFileDownload({required this.duration, required this.isSuccess});
+  const ExportFinish({required this.duration, required this.isSuccess});
 }
 
 final class ExportFileOpen extends DataExportAnalyticsEvent {
@@ -105,6 +105,6 @@ final class ExportFileOpen extends DataExportAnalyticsEvent {
   const ExportFileOpen(this.source);
 }
 
-enum ExportLanding { savedFiles, selection }
+enum ExportLandingView { savedFiles, selection }
 
 enum ExportFileOpenSource { completedScreen, savedList }

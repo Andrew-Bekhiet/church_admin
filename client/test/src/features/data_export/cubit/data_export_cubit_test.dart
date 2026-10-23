@@ -172,7 +172,7 @@ void main() {
       },
       verify: (_) => expect(
         fixture.analytics.trackedEvents
-            .whereType<ExportStart>()
+            .where((event) => event.name == 'export:export_start')
             .single
             .properties,
         {
@@ -186,7 +186,7 @@ void main() {
     );
 
     blocTest<DataExportCubit, DataExportState>(
-      'a failed export is tracked as an unsuccessful download',
+      'a failed export is tracked as finishing unsuccessfully',
       setUp: () => when(
         () => fixture.functionsService.exportData(
           areasIds: any(named: 'areasIds'),
@@ -206,7 +206,7 @@ void main() {
       },
       verify: (_) => expect(
         fixture.analytics.trackedEvents
-            .whereType<ExportFileDownload>()
+            .where((event) => event.name == 'export:export_finish')
             .single
             .properties,
         containsPair('is_success', false),
