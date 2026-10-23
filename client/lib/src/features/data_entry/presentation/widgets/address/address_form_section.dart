@@ -55,7 +55,7 @@ class AddressFormSection extends StatelessWidget {
                 ),
                 onTap: state.readOnly
                     ? null
-                    : () => _chooseLocationOnMap(context),
+                    : () => _chooseLocationOnMap(context, form.useLocation),
                 child: location == null ? null : const Text('تم تحديد الموقع'),
               );
             },
@@ -79,8 +79,12 @@ class AddressFormSection extends StatelessWidget {
               builder: (context, _) => LocationUpdateReminderCard(
                 isShown:
                     !state.readOnly && form.hasPlaceChangedWithStaleLocation,
-                onUpdateLocation: () =>
-                    unawaited(_chooseLocationOnMap(context)),
+                onUpdateLocation: () => unawaited(
+                  _chooseLocationOnMap(
+                    context,
+                    form.updateLocationFromStaleReminder,
+                  ),
+                ),
                 onKeepLocation: form.confirmAddressNotStale,
               ),
             ),
@@ -94,10 +98,13 @@ class AddressFormSection extends StatelessWidget {
     );
   }
 
-  Future<void> _chooseLocationOnMap(BuildContext context) async {
+  Future<void> _chooseLocationOnMap(
+    BuildContext context,
+    Future<void> Function(Point location) useChosenLocation,
+  ) async {
     final location = await onChooseLocationOnMap(context);
 
-    if (location != null) unawaited(form.useLocation(location));
+    if (location != null) unawaited(useChosenLocation(location));
   }
 }
 

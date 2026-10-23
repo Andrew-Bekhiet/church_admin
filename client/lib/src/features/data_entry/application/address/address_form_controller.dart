@@ -178,9 +178,6 @@ class AddressFormController extends AdvancedFormController {
   Future<void> useLocation(Point newLocation) async {
     if (isDisposed || _isReadOnly) return;
 
-    if (_isStaleLocationReminderShown) {
-      _services.analytics.track(const StaleLocationReminderAccept());
-    }
     geolocation.setValue(newLocation);
     _suggestion.value = const NoAddressSuggestion();
 
@@ -209,6 +206,13 @@ class AddressFormController extends AdvancedFormController {
 
     _suggestion.value = AddressSuggested(suggested);
     _services.analytics.track(AddressSuggestionShow(suggested));
+  }
+
+  Future<void> updateLocationFromStaleReminder(Point newLocation) async {
+    if (_isStaleLocationReminderShown) {
+      _services.analytics.track(const StaleLocationReminderAccept());
+    }
+    await useLocation(newLocation);
   }
 
   void useSuggestedAddress() {
