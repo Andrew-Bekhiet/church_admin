@@ -124,7 +124,10 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
   );
 
   void changeLabel(String key, PhoneContactLabel label) {
-    _analyticsService.track(ContactsPhoneLabelChange(label));
+    final relabeled = state.drafts.firstWhereOrNull((d) => d.key == key);
+    if (relabeled != null && relabeled.label != label) {
+      _analyticsService.track(ContactsPhoneLabelChange(label));
+    }
     _updateDraft(
       key,
       (draft) => draft.copyWith(
