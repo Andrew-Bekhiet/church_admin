@@ -61,9 +61,7 @@ void main() {
         );
         for (final (queryCase, failure) in outcomes) {
           final knownGap =
-              AdvancedQueryKnownBackendGaps.missingPieceBehindFilter(
-                queryCase,
-              );
+              AdvancedQueryKnownBackendGaps.missingPieceBehindQuery(queryCase);
           switch ((knownGap, failure)) {
             case (null, final failure?):
               failures.add(failure);
