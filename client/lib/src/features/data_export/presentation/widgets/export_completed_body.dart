@@ -41,6 +41,7 @@ class ExportCompletedBody extends StatelessWidget {
               label: const Text('فتح الملف'),
             ),
             OutlinedButton(
+              key: ExportCompletedBodyKeys.backToSavedFilesButton,
               onPressed: onDismiss,
               child: const Text('العودة لقائمة الملفات المحفوظة'),
             ),
@@ -49,4 +50,10 @@ class ExportCompletedBody extends StatelessWidget {
       ),
     );
   }
+}
+
+abstract final class ExportCompletedBodyKeys {
+  static const Key backToSavedFilesButton = ValueKey(
+    'Export Back To Saved Files Button Key',
+  );
 }

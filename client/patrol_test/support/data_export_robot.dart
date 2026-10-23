@@ -62,6 +62,13 @@ class DataExportRobot {
     }
   }
 
+  Future<void> backToSavedFiles() async {
+    await tester.tapOn(
+      find.byKey(ExportCompletedBodyKeys.backToSavedFilesButton),
+    );
+    await tester.waitFor(find.byType(BackButton));
+  }
+
   Set<String> _idsIn(ViewableObjectListController controller) => {
     for (final object in controller.currentFilteredObjectsOrNull ?? const [])
       if (object case ViewableWithID(:final id)) id,

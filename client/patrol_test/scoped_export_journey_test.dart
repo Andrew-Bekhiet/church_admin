@@ -152,6 +152,7 @@ void main() {
         reason: 'the export holds data outside the exportable scopes',
       );
 
+      await export.backToSavedFiles();
       await E2eApp.signOut(tester);
       await E2eApp.finish(tester);
     },
