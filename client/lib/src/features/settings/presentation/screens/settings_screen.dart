@@ -107,6 +107,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _applyThemeChange() async {
+    AnalyticsService.I.track(
+      ThemeApply(darkTheme: darkTheme, isGreatFeastTheme: greatFeastTheme),
+    );
     await userPreferencesService.setDarkTheme(darkTheme);
     await userPreferencesService.setGreatFeastTheme(greatFeastTheme);
 
@@ -138,6 +141,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final navigator = Navigator.of(context);
 
     if (_needsSaving) {
+      AnalyticsService.I.track(const UnsavedChangesPromptShow());
       final confirmExit = await showDialog<bool>(
         context: context,
         builder: (context) => const ConfirmationDialog(
@@ -149,7 +153,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       );
 
-      if (!(confirmExit ?? false)) return;
+      final isDiscarded = confirmExit ?? false;
+      AnalyticsService.I.track(
+        UnsavedChangesPromptAnswer(isDiscarded: isDiscarded),
+      );
+
+      if (!isDiscarded) return;
     }
 
     navigator.pop(result);
