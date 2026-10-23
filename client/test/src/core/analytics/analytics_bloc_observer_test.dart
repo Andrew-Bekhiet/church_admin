@@ -77,7 +77,9 @@ void main() {
           userData: User(
             uid: authUser.uid,
             name: 'name',
-            permissions: PermissionsSet.fromSet({UserPermission.approved}),
+            permissions: const PermissionsSet.fromSet({
+              UserPermission.approved,
+            }),
           ),
         );
 
