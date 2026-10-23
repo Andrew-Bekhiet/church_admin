@@ -8,6 +8,12 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
+typedef _DrawerEntry = ({
+  NavigationDrawerDestination destination,
+  HomeDrawerDestination? analyticsDestination,
+  VoidCallback onTap,
+});
+
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
 
@@ -21,100 +27,92 @@ class HomeDrawer extends StatelessWidget {
           previous.canManageUsers != current.canManageUsers ||
           previous.account != current.account,
       builder: (context, state) {
-        final destinations =
-            <
-              ({
-                NavigationDrawerDestination destination,
-                HomeDrawerDestination? analyticsDestination,
-                VoidCallback onTap,
-              })
-            >[
-              (
-                destination: NavigationDrawerDestination(
-                  icon: Icon(state.mode.other.icon),
-                  label: Text('تبديل إلى ${state.mode.other.label}'),
-                ),
-                analyticsDestination: null,
-                onTap: () => unawaited(
-                  homeCubit.switchMode(HomeModeSwitchEntry.drawer),
+        final destinations = <_DrawerEntry>[
+          (
+            destination: NavigationDrawerDestination(
+              icon: Icon(state.mode.other.icon),
+              label: Text('تبديل إلى ${state.mode.other.label}'),
+            ),
+            analyticsDestination: null,
+            onTap: () => unawaited(
+              homeCubit.switchMode(HomeModeSwitchEntry.drawer),
+            ),
+          ),
+          if (state.canManageUsers)
+            (
+              destination: const NavigationDrawerDestination(
+                icon: Icon(Symbols.manage_accounts),
+                label: Text(
+                  'إدارة الخدام',
+                  key: HomeDrawerKeys.manageUsers,
                 ),
               ),
-              if (state.canManageUsers)
-                (
-                  destination: const NavigationDrawerDestination(
-                    icon: Icon(Symbols.manage_accounts),
-                    label: Text(
-                      'إدارة الخدام',
-                      key: HomeDrawerKeys.manageUsers,
-                    ),
-                  ),
-                  analyticsDestination: HomeDrawerDestination.manageUsers,
-                  onTap: () => const ManageUsersRoute().push(context),
-                ),
-              (
-                destination: const NavigationDrawerDestination(
-                  icon: Icon(Symbols.search),
-                  label: Text(
-                    'البحث المتقدم',
-                    key: HomeDrawerKeys.advancedSearch,
-                  ),
-                ),
-                analyticsDestination: HomeDrawerDestination.advancedSearch,
-                onTap: () => const AdvancedSearchRoute().push(context),
+              analyticsDestination: HomeDrawerDestination.manageUsers,
+              onTap: () => const ManageUsersRoute().push(context),
+            ),
+          (
+            destination: const NavigationDrawerDestination(
+              icon: Icon(Symbols.search),
+              label: Text(
+                'البحث المتقدم',
+                key: HomeDrawerKeys.advancedSearch,
               ),
-              (
-                destination: const NavigationDrawerDestination(
-                  icon: Icon(Symbols.upload_file),
-                  label: Text(
-                    'تصدير البيانات',
-                    key: HomeDrawerKeys.exportData,
-                  ),
-                ),
-                analyticsDestination: HomeDrawerDestination.exportData,
-                onTap: () => const ExportEntitiesSelectionRoute().push(context),
+            ),
+            analyticsDestination: HomeDrawerDestination.advancedSearch,
+            onTap: () => const AdvancedSearchRoute().push(context),
+          ),
+          (
+            destination: const NavigationDrawerDestination(
+              icon: Icon(Symbols.upload_file),
+              label: Text(
+                'تصدير البيانات',
+                key: HomeDrawerKeys.exportData,
               ),
-              (
-                destination: const NavigationDrawerDestination(
-                  icon: Icon(Symbols.map),
-                  label: Text('خريطة الافتقاد'),
-                ),
-                analyticsDestination: HomeDrawerDestination.visitsMap,
-                onTap: () => const VisitsMapRoute().push(context),
+            ),
+            analyticsDestination: HomeDrawerDestination.exportData,
+            onTap: () => const ExportEntitiesSelectionRoute().push(context),
+          ),
+          (
+            destination: const NavigationDrawerDestination(
+              icon: Icon(Symbols.map),
+              label: Text('خريطة الافتقاد'),
+            ),
+            analyticsDestination: HomeDrawerDestination.visitsMap,
+            onTap: () => const VisitsMapRoute().push(context),
+          ),
+          (
+            destination: const NavigationDrawerDestination(
+              icon: Icon(Symbols.settings),
+              label: Text('الإعدادات'),
+            ),
+            analyticsDestination: HomeDrawerDestination.settings,
+            onTap: () => const SettingsRoute().push(context),
+          ),
+          if (kDebugMode)
+            (
+              destination: const NavigationDrawerDestination(
+                icon: Icon(Symbols.developer_mode),
+                label: Text('gql cache'),
               ),
-              (
-                destination: const NavigationDrawerDestination(
-                  icon: Icon(Symbols.settings),
-                  label: Text('الإعدادات'),
-                ),
-                analyticsDestination: HomeDrawerDestination.settings,
-                onTap: () => const SettingsRoute().push(context),
-              ),
-              if (kDebugMode)
-                (
-                  destination: const NavigationDrawerDestination(
-                    icon: Icon(Symbols.developer_mode),
-                    label: Text('gql cache'),
-                  ),
-                  analyticsDestination: null,
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        final gqlClient = globalProviderContainer.read(
-                          graphQLClientProvider,
-                        );
+              analyticsDestination: null,
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    final gqlClient = globalProviderContainer.read(
+                      graphQLClientProvider,
+                    );
 
-                        return GraphqlCacheInspector(
-                          title: 'GraphQL Cache',
-                          data: (gqlClient.cache.store as HiveStore).box
-                              .toMap(),
-                          getCacheData:
-                              (gqlClient.cache.store as HiveStore).box.toMap,
-                        );
-                      },
-                    ),
-                  ),
+                    return GraphqlCacheInspector(
+                      title: 'GraphQL Cache',
+                      data: (gqlClient.cache.store as HiveStore).box.toMap(),
+                      getCacheData:
+                          (gqlClient.cache.store as HiveStore).box.toMap,
+                    );
+                  },
                 ),
-            ];
+              ),
+            ),
+        ];
 
         return Drawer(
           child: SafeArea(
