@@ -71,6 +71,25 @@ void main() {
     );
   });
 
+  test(
+    'a capture while signed in is stored even if the user signs out before an '
+    'earlier write finishes',
+    () async {
+      final link = _HeldGraphQLLink({
+        'insertOperationsScreenCaptureAttempts': {'affectedRows': 1},
+      });
+      recording = recorderOver(link).recordAttemptsWhileSignedIn();
+
+      await captureScreen(ScreenCaptureKind.screenshot);
+      await captureScreen(ScreenCaptureKind.screenRecording);
+      when(() => authBloc.currentUserData).thenReturn(null);
+      link.release.complete();
+      await pumpEventQueue();
+
+      expect(link.requests, hasLength(2));
+    },
+  );
+
   test('a screenshot while signed out is not stored', () async {
     when(() => authBloc.currentUserData).thenReturn(null);
     final link = RecordingGraphQLLink(const {});
@@ -94,4 +113,21 @@ void main() {
       expect(logging.reportedErrors, hasLength(2));
     },
   );
+}
+
+class _HeldGraphQLLink extends Link {
+  final List<Request> requests = [];
+  final Map<String, dynamic> data;
+  final Completer<void> release = Completer();
+
+  _HeldGraphQLLink(this.data);
+
+  @override
+  Stream<Response> request(Request request, [NextLink? forward]) {
+    requests.add(request);
+
+    return Stream.fromFuture(
+      release.future.then((_) => Response(data: data, response: const {})),
+    );
+  }
 }
