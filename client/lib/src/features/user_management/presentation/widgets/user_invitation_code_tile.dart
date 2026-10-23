@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart' hide TextDirection;
@@ -55,18 +57,27 @@ class UserInvitationCodeTile extends StatelessWidget {
             IconButton(
               icon: const Icon(Symbols.share),
               tooltip: 'مشاركة',
-              onPressed: () => ShareService.I.shareText(
-                'كود الدعوة للانضمام إلى تطبيق خدمة الكنيسة: '
-                '${invitation.code}\n'
-                'صالح حتى '
-                '${dateFormat.format(invitation.expiresAt)}',
-              ),
+              onPressed: () {
+                AnalyticsService.I.track(const InvitationCodeShare());
+                unawaited(
+                  ShareService.I.shareText(
+                    'كود الدعوة للانضمام إلى تطبيق خدمة الكنيسة: '
+                    '${invitation.code}\n'
+                    'صالح حتى '
+                    '${dateFormat.format(invitation.expiresAt)}',
+                  ),
+                );
+              },
             ),
           IconButton(
             icon: const Icon(Symbols.content_copy),
             tooltip: 'نسخ',
-            onPressed: () =>
+            onPressed: () {
+              AnalyticsService.I.track(const InvitationCodeCopy());
+              unawaited(
                 Clipboard.setData(ClipboardData(text: invitation.code)),
+              );
+            },
           ),
         ],
       ),
