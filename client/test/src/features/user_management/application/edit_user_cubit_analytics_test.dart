@@ -91,8 +91,8 @@ void main() {
       verify: (_) => expect(
         trackedSaveProperties(),
         allOf(
-          containsPair('permissions_added', [UserPermission.readAllData.name]),
-          containsPair('permissions_removed', [UserPermission.deleteData.name]),
+          containsPair('added_permissions', [UserPermission.readAllData.name]),
+          containsPair('removed_permissions', [UserPermission.deleteData.name]),
         ),
       ),
     );
@@ -133,10 +133,23 @@ void main() {
       verify: (_) => expect(
         trackedSaveProperties(),
         allOf(
-          containsPair('area_added_count', 0),
-          containsPair('group_added_count', 1),
-          containsPair('area_removed_count', 0),
-          containsPair('service_removed_count', 1),
+          containsPair('added_area_count', 0),
+          containsPair('added_group_count', 1),
+          containsPair('removed_area_count', 0),
+          containsPair('removed_service_count', 1),
+        ),
+      ),
+    );
+
+    blocTest<EditUserCubit, UserFormState>(
+      'saving is tracked against the edited user',
+      build: () => buildCubit(User(uid: 'u1', name: 'مينا', person: person1)),
+      act: (cubit) => cubit.save(),
+      verify: (_) => expect(
+        trackedSaveProperties(),
+        allOf(
+          containsPair('entity_type', AnalyticsEntityType.user.key),
+          containsPair(AnalyticsEntityType.user.idProperty, 'u1'),
         ),
       ),
     );
