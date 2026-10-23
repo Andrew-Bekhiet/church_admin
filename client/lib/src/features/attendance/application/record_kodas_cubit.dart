@@ -11,6 +11,7 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
   final HistoryDAO _historyDao;
   final MeetingsDAO _meetingsDao;
   final AttendanceUndoPresenter _presenter;
+  final AnalyticsService _analyticsService;
 
   final Map<String, bool> _savedShowKodasByMeetingId = {};
 
@@ -33,9 +34,11 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     HistoryDAO? historyDao,
     MeetingsDAO? meetingsDao,
     AttendanceUndoPresenter? presenter,
+    AnalyticsService? analyticsService,
   }) : _historyDao = historyDao ?? DatabaseService.I.history,
        _meetingsDao = meetingsDao ?? DatabaseService.I.meetings,
        _presenter = presenter ?? const ScaffoldAttendanceUndoPresenter(),
+       _analyticsService = analyticsService ?? AnalyticsService.I,
        super(const RecordKodasHidden());
 
   void follow({required Meeting meeting, required DateTime day}) {
@@ -54,6 +57,7 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     final meeting = _meeting;
     if (meeting == null || visible == _isVisible) return;
 
+    _analyticsService.track(KodasColumnToggle(meeting, isVisible: visible));
     final previous = meeting.copyWith(showKodasCheckbox: _isVisible);
     _savedShowKodasByMeetingId[meeting.id] = visible;
     _restartSession();
@@ -76,8 +80,10 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
 
   Future<void> toggleKodas(Person person) async {
     final day = _day;
+    final meeting = _meeting;
     final personId = person.id;
     if (day == null ||
+        meeting == null ||
         state is! RecordKodasReady ||
         _liveKodasRecords.isPending(personId)) {
       return;
@@ -93,6 +99,7 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     );
     _emitReady();
 
+    var isSaved = false;
     try {
       if (existing == null) {
         final recorded = await _historyDao.recordKodas(
@@ -100,20 +107,36 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
           day: day,
         );
 
+        isSaved = recorded != null;
         if (recorded != null) {
           _presenter.showUndo(
             personName: person.name,
             change: AttendanceUndoableChange.kodasRecorded,
-            onUndo: () => _historyDao.deleteKodas(kodasRecordId: recorded.id),
+            onUndo: () {
+              _trackUndo(
+                meeting,
+                personId,
+                AttendanceUndoableChange.kodasRecorded,
+              );
+              unawaited(_historyDao.deleteKodas(kodasRecordId: recorded.id));
+            },
           );
         }
       } else {
         await _historyDao.deleteKodas(kodasRecordId: existing.id);
+        isSaved = true;
 
         _presenter.showUndo(
           personName: person.name,
           change: AttendanceUndoableChange.kodasRemoved,
-          onUndo: () => _historyDao.recordKodas(personId: personId, day: day),
+          onUndo: () {
+            _trackUndo(
+              meeting,
+              personId,
+              AttendanceUndoableChange.kodasRemoved,
+            );
+            unawaited(_historyDao.recordKodas(personId: personId, day: day));
+          },
         );
       }
     } catch (error, stackTrace) {
@@ -123,12 +146,28 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
       _liveKodasRecords.rollbackOptimistic(personId);
       _presenter.showError('تعذر حفظ التناول، حاول مرة أخرى');
     } finally {
+      _analyticsService.track(
+        KodasPersonMark(
+          meeting,
+          personId: personId,
+          isRecorded: existing == null,
+          isSuccess: isSaved,
+        ),
+      );
       if (sessionId == _sessionId) {
         _liveKodasRecords.settle(personId);
         _emitReady();
       }
     }
   }
+
+  void _trackUndo(
+    Meeting meeting,
+    String personId,
+    AttendanceUndoableChange undoneChange,
+  ) => _analyticsService.track(
+    KodasUndo(meeting, personId: personId, undoneChange: undoneChange),
+  );
 
   void _restartSession() {
     _sessionId++;
