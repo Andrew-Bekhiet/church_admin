@@ -17,6 +17,7 @@ export * from "./auth/triggers";
 export * from "./auth/try_claim_account";
 export * from "./download_app";
 export * from "./export/export";
+export * from "./notify_screen_capture_attempt";
 export * from "./notify_study_year_roll_failure";
 export * from "./register_fcm_token";
 export * from "./storage_proxy";

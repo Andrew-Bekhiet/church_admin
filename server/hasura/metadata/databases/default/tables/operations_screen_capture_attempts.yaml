@@ -1,0 +1,25 @@
+table:
+  name: screen_capture_attempts
+  schema: operations
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        uid: x-hasura-User-Id
+      columns:
+        - capture_kind
+event_triggers:
+  - name: notify_screen_capture_attempt
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 15
+      num_retries: 3
+      timeout_sec: 60
+    webhook: '{{SCREEN_CAPTURE_NOTIFY_URL}}'
+    headers:
+      - name: X-Screen-Capture-Secret
+        value_from_env: SCREEN_CAPTURE_WEBHOOK_SECRET

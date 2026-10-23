@@ -85,6 +85,8 @@ services:
       HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: ${HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL:-1000}
       STUDY_YEAR_ROLL_NOTIFY_URL: ${STUDY_YEAR_ROLL_NOTIFY_URL:-http://firebase-emulators:5001/church-admin-local/europe-west6/notifyStudyYearRollFailure}
       STUDY_YEAR_ROLL_WEBHOOK_SECRET: ${STUDY_YEAR_ROLL_WEBHOOK_SECRET:-local-dev-webhook-secret}
+      SCREEN_CAPTURE_NOTIFY_URL: ${SCREEN_CAPTURE_NOTIFY_URL:-http://firebase-emulators:5001/church-admin-local/europe-west6/notifyScreenCaptureAttempt}
+      SCREEN_CAPTURE_WEBHOOK_SECRET: ${SCREEN_CAPTURE_WEBHOOK_SECRET:-local-dev-webhook-secret}
     ports:
       - "${HASURA_PORT:-8080}:8080"
     healthcheck:

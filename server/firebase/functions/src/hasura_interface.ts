@@ -570,6 +570,22 @@ export async function getFcmTokensForPermission(
   return [...new Set(users.flatMap((u) => u.fcmTokens.map((t) => t.token)))];
 }
 
+export async function getUserName(uid: string): Promise<string | null> {
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+            query getUserName($uid: uuid!) {
+              authUsersDataByPk(uid: $uid) {
+                name
+              }
+            }
+          `,
+    variables: { uid },
+    operationName: "getUserName",
+  });
+
+  return dataOrThrow(hasura_response)["authUsersDataByPk"]?.["name"] ?? null;
+}
+
 export async function updatePhotoTime(
   table: PhotoTable,
   id: string,
