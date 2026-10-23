@@ -144,7 +144,9 @@ sealed class PhoneContactsFormController extends AdvancedFormController {
     PhoneContactFormController contact,
     PhoneContactLabel label,
   ) {
-    _analyticsService.track(ContactsPhoneLabelChange(label));
+    if (contact.label.fieldValue != label) {
+      _analyticsService.track(ContactsPhoneLabelChange(label));
+    }
     contact.label.setValue(label);
     contact.isMainPhone.setValue(
       label is FreePhoneContactLabel && contact.isMainPhone.fieldValue,
