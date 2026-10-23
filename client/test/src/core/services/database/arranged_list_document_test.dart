@@ -136,13 +136,13 @@ void main() {
 
     writeAsServerAnswers(cache, listRequest);
 
-    final persons = listedPersons(cache, listRequest) as List;
-    expect(
-      PersonFields().mainPhone.getValue(
-        Person.fromJson(persons.single as Json),
+    expect(listedPersons(cache, listRequest), [
+      isA<Json>().having(
+        (row) => PersonFields().mainPhone.getValue(Person.fromJson(row)),
+        'main phone',
+        mainPhone,
       ),
-      mainPhone,
-    );
+    ]);
   });
 
   group('a persons list with a chosen second line', () {
