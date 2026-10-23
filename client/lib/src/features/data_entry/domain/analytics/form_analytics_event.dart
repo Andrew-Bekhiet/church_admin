@@ -81,15 +81,17 @@ final class OutOfSightWarningAnswer extends FormAnalyticsEvent {
 }
 
 final class DefaultMeetingOptOutToggle extends FormAnalyticsEvent {
-  final bool isCreated;
+  final bool isDefaultMeetingCreated;
 
   @override
   String get objectAction => 'default_meeting_opt_out_toggle';
 
   @override
-  Json get properties => {'is_default_meeting_created': isCreated};
+  Json get properties => {
+    'is_default_meeting_created': isDefaultMeetingCreated,
+  };
 
-  const DefaultMeetingOptOutToggle({required this.isCreated});
+  const DefaultMeetingOptOutToggle({required this.isDefaultMeetingCreated});
 }
 
 final class MembershipServiceSelect extends FormAnalyticsEvent {

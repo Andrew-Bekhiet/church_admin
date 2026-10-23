@@ -10,8 +10,8 @@ sealed class DataEntryAnalyticsEvent extends AnalyticsEvent {
 final class ObjectSaveAttempt extends DataEntryAnalyticsEvent {
   final ViewableWithID entity;
   final bool isCreate;
-  final ObjectSaveResult result;
-  final Duration sinceFormOpened;
+  final ObjectSaveResult outcome;
+  final Duration formOpenDuration;
   final Set<PersonRuleViolation>? ruleViolations;
   final bool? isDefaultMeetingCreated;
 
@@ -22,8 +22,8 @@ final class ObjectSaveAttempt extends DataEntryAnalyticsEvent {
   Json get properties => {
     ...AnalyticsEntityType.propertiesOf(entity),
     'is_create': isCreate,
-    'outcome': result.name,
-    'duration_ms': sinceFormOpened.inMilliseconds,
+    'outcome': outcome.name,
+    'form_open_duration_ms': formOpenDuration.inMilliseconds,
     if (ruleViolations case final violations?)
       'rule_violations': [
         for (final violation in violations)
@@ -36,8 +36,8 @@ final class ObjectSaveAttempt extends DataEntryAnalyticsEvent {
   const ObjectSaveAttempt({
     required this.entity,
     required this.isCreate,
-    required this.result,
-    required this.sinceFormOpened,
+    required this.outcome,
+    required this.formOpenDuration,
     this.ruleViolations,
     this.isDefaultMeetingCreated,
   });
