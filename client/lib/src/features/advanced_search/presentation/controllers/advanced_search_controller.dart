@@ -5,11 +5,14 @@ import 'package:collection/collection.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AdvancedSearchController {
-  static const Duration _resultsSearchDebounce = Duration(milliseconds: 500);
+  static const Duration typingSettleDuration = Duration(milliseconds: 500);
 
   final AnalyticsService _analyticsService;
 
   late final StreamSubscription<void> _configSubscription;
+
+  final PublishSubject<AnalyticsEvent?> _typedEdits = PublishSubject();
+  late final StreamSubscription<AnalyticsEvent> _typedEditsTracking;
 
   final BehaviorSubject<AdvancedQuery> _query = BehaviorSubject.seeded(
     AdvancedQuery(
@@ -58,6 +61,10 @@ class AdvancedSearchController {
     _configSubscription = FeatureFlagsRepository.I.onConfigChanged.listen(
       (_) => changeQuery(query),
     );
+    _typedEditsTracking = _typedEdits
+        .debounceTime(typingSettleDuration)
+        .whereNotNull()
+        .listen(_analyticsService.track);
   }
 
   void trackOpen({
@@ -78,13 +85,12 @@ class AdvancedSearchController {
 
   StreamSubscription<String> trackResultsSearchesIn(Stream<String?> searches) =>
       searches
+          .debounceTime(typingSettleDuration)
           .whereType<String>()
           .where((search) => search.isNotEmpty)
-          .debounceTime(_resultsSearchDebounce)
-          .distinct()
           .listen(
             (search) => _analyticsService.track(
-              AdvancedSearchResultsSearch(queryLength: search.length),
+              AdvancedSearchResultsSearchRun(queryLength: search.length),
             ),
           );
 
@@ -101,12 +107,14 @@ class AdvancedSearchController {
         ? defaultField
         : queryableType.orderableFields.firstOrNull;
 
-    _analyticsService.track(
-      AdvancedSearchQueryableTypeChange(
-        from: selectedQueryableType,
-        to: queryableType,
-      ),
-    );
+    if (queryableType != selectedQueryableType) {
+      _analyticsService.track(
+        AdvancedSearchQueryableTypeChange(
+          from: selectedQueryableType,
+          to: queryableType,
+        ),
+      );
+    }
     changeQuery(
       AdvancedQuery(
         name: query.name,
@@ -130,10 +138,7 @@ class AdvancedSearchController {
       _checkFilterType(filter);
     }
 
-    if (AdvancedSearchFilterEdit.eventForSingleEdit(filters, newFilters)
-        case final event?) {
-      _analyticsService.track(event);
-    }
+    _maybeTrackFilterEdit(filters, newFilters);
     changeQuery(query.copyWith(filters: newFilters));
   }
 
@@ -169,14 +174,13 @@ class AdvancedSearchController {
   }
 
   void changeLimit(int? limit) {
-    switch ((this.limit, limit)) {
-      case (null, final newLimit?):
-        _analyticsService.track(AdvancedSearchLimitSet(newLimit));
-      case (_?, null):
-        _analyticsService.track(const AdvancedSearchLimitClear());
-      default:
-    }
+    _maybeTrackLimitChange(this.limit, limit);
     changeQuery(query.copyWith(limit: limit));
+  }
+
+  void clearLimit() {
+    _analyticsService.track(const AdvancedSearchLimitClear());
+    changeQuery(query.copyWith(limit: null));
   }
 
   void changeOrderBy(List<OrderBy> orderBy) =>
@@ -216,7 +220,30 @@ class AdvancedSearchController {
     changeOrderBy(orderBy.whereIndexed((i, e) => i != index).toList());
   }
 
+  void _maybeTrackFilterEdit(List<Filter> previous, List<Filter> next) {
+    final event = AdvancedSearchFilterEdit.eventForSingleEdit(previous, next);
+    if (event is AdvancedSearchFilterValueSet && event.isFreeText) {
+      _typedEdits.add(event);
+    } else if (event != null) {
+      _analyticsService.track(event);
+    }
+  }
+
+  void _maybeTrackLimitChange(int? previous, int? next) {
+    switch ((previous, next)) {
+      case (null, final added?):
+        _analyticsService.track(AdvancedSearchLimitSet(added));
+      case (final previous?, final typed?) when typed != previous:
+        _typedEdits.add(AdvancedSearchLimitChange(typed));
+      case (_?, null):
+        _typedEdits.add(null);
+      default:
+    }
+  }
+
   Future<void> dispose() async {
+    await _typedEditsTracking.cancel();
+    await _typedEdits.close();
     await _configSubscription.cancel();
     await _query.close();
   }

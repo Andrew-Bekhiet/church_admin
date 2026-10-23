@@ -69,16 +69,7 @@ abstract final class AdvancedSearchFilterEdit {
         filterCount: filterCount,
       );
     }
-    if (_isStillTyping(before.value, after.value)) return null;
 
     return AdvancedSearchFilterValueSet(after, filterCount: filterCount);
   }
-
-  static bool _isStillTyping(Object? before, Object? after) =>
-      switch ((before, after)) {
-        (final String before, final String after) =>
-          before.isNotEmpty && after.isNotEmpty,
-        (num(), num()) => true,
-        _ => false,
-      };
 }

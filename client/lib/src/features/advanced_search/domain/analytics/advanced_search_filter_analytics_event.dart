@@ -9,35 +9,31 @@ sealed class AdvancedSearchFilterAnalyticsEvent extends AnalyticsEvent {
     _ => [field.name],
   };
 
-  final Filter filter;
+  final List<String> fieldPath;
+  final String operatorId;
   final int filterCount;
 
   @override
   String get category => 'advanced_search';
 
   @override
-  Json get properties {
-    final fieldPath = fieldPathOf(filter.field);
+  Json get properties => {
+    'field_name': fieldPath.join('.'),
+    'nested_depth': fieldPath.length - 1,
+    'operator_id': operatorId,
+    'filter_count': filterCount,
+  };
 
-    return {
-      'field_name': fieldPath.join('.'),
-      'nested_depth': fieldPath.length - 1,
-      'operator': filter.operator.serializationId,
-      'filter_count': filterCount,
-    };
-  }
-
-  const AdvancedSearchFilterAnalyticsEvent(
-    this.filter, {
-    required this.filterCount,
-  });
+  AdvancedSearchFilterAnalyticsEvent(Filter filter, {required this.filterCount})
+    : fieldPath = fieldPathOf(filter.field),
+      operatorId = filter.operator.serializationId;
 }
 
 final class AdvancedSearchFilterAdd extends AdvancedSearchFilterAnalyticsEvent {
   @override
   String get objectAction => 'filter_add';
 
-  const AdvancedSearchFilterAdd(super.filter, {required super.filterCount});
+  AdvancedSearchFilterAdd(super.filter, {required super.filterCount});
 }
 
 final class AdvancedSearchFilterRemove
@@ -45,7 +41,7 @@ final class AdvancedSearchFilterRemove
   @override
   String get objectAction => 'filter_remove';
 
-  const AdvancedSearchFilterRemove(super.filter, {required super.filterCount});
+  AdvancedSearchFilterRemove(super.filter, {required super.filterCount});
 }
 
 final class AdvancedSearchFilterFieldChange
@@ -53,10 +49,7 @@ final class AdvancedSearchFilterFieldChange
   @override
   String get objectAction => 'filter_field_change';
 
-  const AdvancedSearchFilterFieldChange(
-    super.filter, {
-    required super.filterCount,
-  });
+  AdvancedSearchFilterFieldChange(super.filter, {required super.filterCount});
 }
 
 final class AdvancedSearchFilterOperatorChange
@@ -64,7 +57,7 @@ final class AdvancedSearchFilterOperatorChange
   @override
   String get objectAction => 'filter_operator_change';
 
-  const AdvancedSearchFilterOperatorChange(
+  AdvancedSearchFilterOperatorChange(
     super.filter, {
     required super.filterCount,
   });
@@ -72,44 +65,53 @@ final class AdvancedSearchFilterOperatorChange
 
 final class AdvancedSearchFilterValueSet
     extends AdvancedSearchFilterAnalyticsEvent {
+  static bool isFreeTextOperator(Operator operator) =>
+      operator is StringOperator || operator is PhoneOperator;
+
+  static int _valueCountOf(Object? value) => switch (value) {
+    null || '' => 0,
+    final List<Object?> values => values.length,
+    _ => 1,
+  };
+
+  final int valueCount;
+  final bool isFreeText;
+  final bool? isAnyDay;
+
   @override
   String get objectAction => 'filter_value_set';
 
   @override
   Json get properties => {
     ...super.properties,
-    'operator_family': filter.operator.serializationId.split('.').first,
-    'value_count': switch (filter.value) {
-      null || '' => 0,
-      final List<Object?> values => values.length,
-      _ => 1,
-    },
-    if (filter.operator case BirthdayOperator())
-      'is_any_day': filter.value.toString().endsWith('-%'),
+    'operator_family': operatorId.split('.').first,
+    'value_count': valueCount,
+    'is_free_text': isFreeText,
+    'is_any_day': ?isAnyDay,
   };
 
-  const AdvancedSearchFilterValueSet(
-    super.filter, {
-    required super.filterCount,
-  });
+  AdvancedSearchFilterValueSet(super.filter, {required super.filterCount})
+    : valueCount = _valueCountOf(filter.value),
+      isFreeText = isFreeTextOperator(filter.operator),
+      isAnyDay = switch (filter.operator) {
+        BirthdayOperator() => filter.value.toString().endsWith('-%'),
+        _ => null,
+      };
 }
 
 final class AdvancedSearchPolygonFilterDraw
     extends AdvancedSearchFilterAnalyticsEvent {
-  final Polygon polygon;
+  final int pointCount;
 
   @override
   String get objectAction => 'polygon_filter_draw';
 
   @override
-  Json get properties => {
-    ...super.properties,
-    'point_count': polygon.coordinates.length,
-  };
+  Json get properties => {...super.properties, 'point_count': pointCount};
 
-  const AdvancedSearchPolygonFilterDraw(
+  AdvancedSearchPolygonFilterDraw(
     super.filter,
-    this.polygon, {
+    Polygon polygon, {
     required super.filterCount,
-  });
+  }) : pointCount = polygon.coordinates.length;
 }
