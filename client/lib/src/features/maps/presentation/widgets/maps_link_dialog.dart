@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
 class MapsLinkDialog extends StatefulWidget {
-  const MapsLinkDialog({super.key});
+  final ValueChanged<LocationLinkInputKind>? onClipboardLinkShow;
+
+  const MapsLinkDialog({this.onClipboardLinkShow, super.key});
 
   @override
   State<MapsLinkDialog> createState() => _MapsLinkDialogState();
@@ -14,6 +16,16 @@ class MapsLinkDialog extends StatefulWidget {
 abstract final class MapsLinkDialogKeys {
   static const linkField = Key('MapsLinkDialog.linkField');
   static const submit = Key('MapsLinkDialog.submit');
+}
+
+class MapsLinkDialogResult {
+  final String link;
+  final bool isPrefilledFromClipboard;
+
+  const MapsLinkDialogResult({
+    required this.link,
+    required this.isPrefilledFromClipboard,
+  });
 }
 
 class _MapsLinkDialogState extends State<MapsLinkDialog> {
@@ -42,7 +54,7 @@ class _MapsLinkDialogState extends State<MapsLinkDialog> {
 
           setState(() => _pastedFromClipboard = false);
         },
-        onSubmitted: Navigator.of(context).pop,
+        onSubmitted: (_) => _submit(),
         decoration: InputDecoration(
           hintText: 'رابط خرائط أو Plus Code',
           helperText: _pastedFromClipboard
@@ -58,7 +70,7 @@ class _MapsLinkDialogState extends State<MapsLinkDialog> {
         ),
         FilledButton(
           key: MapsLinkDialogKeys.submit,
-          onPressed: () => Navigator.of(context).pop(_controller.text),
+          onPressed: _submit,
           child: const Text('تحديد الموقع'),
         ),
       ],
@@ -71,6 +83,13 @@ class _MapsLinkDialogState extends State<MapsLinkDialog> {
     super.dispose();
   }
 
+  void _submit() => Navigator.of(context).pop(
+    MapsLinkDialogResult(
+      link: _controller.text,
+      isPrefilledFromClipboard: _pastedFromClipboard,
+    ),
+  );
+
   Future<void> _maybePasteLinkFromClipboard() async {
     if (!await Clipboard.hasStrings()) return;
 
@@ -82,6 +101,7 @@ class _MapsLinkDialogState extends State<MapsLinkDialog> {
       return;
     }
 
+    widget.onClipboardLinkShow?.call(LocationLinkInputKind.of(text));
     setState(() {
       _pastedFromClipboard = true;
       _controller.value = TextEditingValue(

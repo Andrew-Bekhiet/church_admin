@@ -32,6 +32,7 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
 
   Point? _focusedLocation;
   Alignment? _fabAlignment;
+  bool _hasUserLocation = false;
 
   late final BehaviorSubject<GeomapOptions> _mapOptions =
       BehaviorSubject.seeded(widget.initialGeomapOptions);
@@ -51,9 +52,12 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () => setState(() {
-              return;
-            }),
+            onPressed: () {
+              AnalyticsService.I.track(const MapsRefreshTap());
+              setState(() {
+                return;
+              });
+            },
             icon: const Icon(Symbols.refresh),
             tooltip: 'تحديث البيانات',
           ),
@@ -84,6 +88,8 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
               child: DataGeomap(
                 initialPerson: widget.initialPerson,
                 geomapOptionsStream: _mapOptions,
+                onUserLocationChanged: (position) =>
+                    _hasUserLocation = position != null,
                 onTapLocation: (location) =>
                     setState(() => _focusedLocation = location),
               ),
@@ -93,7 +99,10 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
                 alignment: _fabAlignment,
                 moveByChildHeight: -0.5,
                 child: RepaintBoundary(
-                  child: GeomapFAB(focusedLocation: _focusedLocation!),
+                  child: GeomapFAB(
+                    focusedLocation: _focusedLocation!,
+                    hasUserLocation: _hasUserLocation,
+                  ),
                 ),
               ),
           ],
