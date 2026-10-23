@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 
 class EditUserCubit extends UserFormCubit {
+  final User _userBeforeEditing;
   User _persistedUser;
   final UsersDAO _usersDao;
   final UserPermissionsDAO _permissionsDao;
@@ -14,7 +15,9 @@ class EditUserCubit extends UserFormCubit {
     UserPermissionsDAO? permissionsDao,
     InvitationsDAO? invitationsDao,
     AuthBloc? authBloc,
-  }) : _persistedUser = user,
+    super.analyticsService,
+  }) : _userBeforeEditing = user,
+       _persistedUser = user,
        _usersDao = usersDao ?? DatabaseService.I.users,
        _permissionsDao = permissionsDao ?? DatabaseService.I.userPermissions,
        _invitationsDao = invitationsDao ?? DatabaseService.I.invitations,
@@ -57,6 +60,11 @@ class EditUserCubit extends UserFormCubit {
 
     return _persistedUser.uid;
   }
+
+  @override
+  @protected
+  AnalyticsEvent saveEventOf(UserDraft draft, {Object? failure}) =>
+      UserSave(_userBeforeEditing, draft, failure: failure);
 
   List<AdminOnData> _restrictAdminOnToCallerScopes(
     List<AdminOnData> newAdminOn,

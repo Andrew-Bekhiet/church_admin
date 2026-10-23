@@ -1,3 +1,4 @@
+export 'domain/analytics.dart';
 export 'domain/create_user_request.dart';
 export 'domain/invitation_choice.dart';
 export 'domain/person_already_linked_exception.dart';
