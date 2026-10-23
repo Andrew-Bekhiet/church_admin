@@ -1,12 +1,6 @@
-import 'package:church_admin/church_admin.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
 
 class PostHogClient {
-  static Map<String, Object> withoutNulls(Json json) => {
-    for (final entry in json.entries)
-      if (entry.value != null) entry.key: entry.value as Object,
-  };
-
   final Posthog sdk;
 
   Future<void>? _setup;

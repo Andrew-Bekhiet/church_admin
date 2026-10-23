@@ -38,7 +38,7 @@ class PostHogAnalyticsProvider implements AnalyticsProvider {
       case final user:
         await _postHogClient.identifyOrUpdateProperties(
           userId: user.id,
-          properties: PostHogClient.withoutNulls(user.properties),
+          properties: user.properties.nonNullPairs,
         );
     }
   }
@@ -47,7 +47,7 @@ class PostHogAnalyticsProvider implements AnalyticsProvider {
   Future<void> track(AnalyticsEvent event) async {
     await _postHog.capture(
       eventName: event.name,
-      properties: PostHogClient.withoutNulls(event.properties),
+      properties: event.properties.nonNullPairs,
     );
   }
 
@@ -55,7 +55,7 @@ class PostHogAnalyticsProvider implements AnalyticsProvider {
   Future<void> trackScreen(String screenName, Json properties) async {
     await _postHog.screen(
       screenName: screenName,
-      properties: PostHogClient.withoutNulls(properties),
+      properties: properties.nonNullPairs,
     );
   }
 }
