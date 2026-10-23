@@ -43,16 +43,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordConfirmationController = TextEditingController();
 
   late final _termsOfServiceRecognizer = TapGestureRecognizer()
-    ..onTap = () => _openLegalDocument(
-      LegalDocument.termsOfService,
-      'https://church-data-admin.firebaseapp.com/terms-of-service/',
-    );
+    ..onTap = () => _openLegalDocument(LegalDocument.termsOfService);
 
   late final _privacyPolicyRecognizer = TapGestureRecognizer()
-    ..onTap = () => _openLegalDocument(
-      LegalDocument.privacyPolicy,
-      'https://church-data-admin.firebaseapp.com/privacy-policy/',
-    );
+    ..onTap = () => _openLegalDocument(LegalDocument.privacyPolicy);
 
   @override
   Widget build(BuildContext context) {
@@ -138,10 +132,10 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<void> _openLegalDocument(LegalDocument document, String url) {
+  Future<void> _openLegalDocument(LegalDocument document) {
     AnalyticsService.I.track(LegalDocumentOpen(document));
 
-    return LauncherService.I.launchUrl(Uri.parse(url));
+    return LauncherService.I.launchUrl(Uri.parse(document.url));
   }
 
   void _toggleMode() {

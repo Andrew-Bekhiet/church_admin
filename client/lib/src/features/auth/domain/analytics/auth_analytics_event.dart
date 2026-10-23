@@ -158,4 +158,11 @@ enum SignOutSource {
 
 enum LoginScreenMode { login, signUp }
 
-enum LegalDocument { termsOfService, privacyPolicy }
+enum LegalDocument {
+  termsOfService('https://church-data-admin.firebaseapp.com/terms-of-service/'),
+  privacyPolicy('https://church-data-admin.firebaseapp.com/privacy-policy/');
+
+  final String url;
+
+  const LegalDocument(this.url);
+}
