@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../fakes/fake_logging_service.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 import '../../../../material_ui_test_app.dart';
 
 class _MockUserPreferencesService extends Mock
@@ -11,9 +13,11 @@ class _MockUserPreferencesService extends Mock
 void main() {
   group('SettingsScreen', () {
     late _MockUserPreferencesService userPreferencesService;
+    late RecordingAnalyticsProvider analytics;
 
     setUp(() {
       userPreferencesService = _MockUserPreferencesService();
+      analytics = RecordingAnalyticsProvider();
       when(() => userPreferencesService.darkTheme).thenReturn(null);
       when(() => userPreferencesService.greatFeastTheme).thenReturn(false);
       when(
@@ -28,6 +32,9 @@ void main() {
       initGlobalProviderContainer([
         userPreferencesServiceProvider.overrideWithValue(
           userPreferencesService,
+        ),
+        analyticsServiceProvider.overrideWithValue(
+          AnalyticsService([analytics], FakeLoggingService()),
         ),
       ]);
     });
@@ -134,6 +141,23 @@ void main() {
       expect(find.byType(AlertDialog), findsNothing);
       expect(find.byType(SettingsScreen), findsOneWidget);
       expect(find.text('تم حفظ التغييرات'), findsOneWidget);
+    });
+
+    testWidgets('saving without changing the theme tracks no theme change', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialUiTestApp.withThemeAndLocale(child: const SizedBox()),
+      );
+      tester
+          .firstState<NavigatorState>(find.byType(Navigator))
+          .push(MaterialPageRoute(builder: (_) => const SettingsScreen()));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(FloatingActionButton));
+      await tester.pumpAndSettle();
+
+      expect(analytics.trackedEvents.whereType<ThemeApply>(), isEmpty);
     });
   });
 }

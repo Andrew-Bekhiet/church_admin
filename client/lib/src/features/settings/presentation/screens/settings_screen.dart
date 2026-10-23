@@ -107,11 +107,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _applyThemeChange() async {
-    AnalyticsService.I.track(
-      ThemeApply(darkTheme: darkTheme, isGreatFeastTheme: greatFeastTheme),
-    );
+    final isThemeChanged =
+        darkTheme != userPreferencesService.darkTheme ||
+        greatFeastTheme != userPreferencesService.greatFeastTheme;
+
     await userPreferencesService.setDarkTheme(darkTheme);
     await userPreferencesService.setGreatFeastTheme(greatFeastTheme);
+
+    if (isThemeChanged) {
+      AnalyticsService.I.track(
+        ThemeApply(
+          themeChoice: ThemeChoice.of(darkTheme),
+          isGreatFeastTheme: greatFeastTheme,
+        ),
+      );
+    }
 
     ThemingService.I.switchTheme(
       darkTheme ??
