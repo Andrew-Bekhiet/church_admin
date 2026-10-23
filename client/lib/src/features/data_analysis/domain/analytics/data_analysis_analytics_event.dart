@@ -41,7 +41,12 @@ final class MeetingsAnalysisView extends DataAnalysisAnalyticsEvent {
          GroupAnalysisSubject() => 'group',
          ClassAnalysisSubject() => 'class',
        },
-       subjectProperties = subject.analyticsProperties,
+       subjectProperties = switch (subject) {
+         MeetingAnalysisSubject(:final meeting) => {'meeting_id': meeting.id},
+         ServiceAnalysisSubject(:final service) => {'service_id': service.id},
+         GroupAnalysisSubject(:final group) => {'group_id': group.id},
+         ClassAnalysisSubject(:final class$) => {'class_id': class$.id},
+       },
        rangeProperties = DataAnalysisAnalyticsEvent.rangePropertiesOf(
          rangePreset,
        ),
