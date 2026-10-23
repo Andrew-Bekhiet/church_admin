@@ -1,6 +1,141 @@
 // Part 46 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_PersonsGroupsMaxOrderBy<TRes> {
+  factory CopyWith_Input_PersonsGroupsMaxOrderBy(
+    Input_PersonsGroupsMaxOrderBy instance,
+    TRes Function(Input_PersonsGroupsMaxOrderBy) then,
+  ) = _CopyWithImpl_Input_PersonsGroupsMaxOrderBy;
+
+  factory CopyWith_Input_PersonsGroupsMaxOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonsGroupsMaxOrderBy;
+
+  TRes call({Enum_OrderBy? groupId, Enum_OrderBy? personId});
+}
+
+class _CopyWithImpl_Input_PersonsGroupsMaxOrderBy<TRes>
+    implements CopyWith_Input_PersonsGroupsMaxOrderBy<TRes> {
+  _CopyWithImpl_Input_PersonsGroupsMaxOrderBy(this._instance, this._then);
+
+  final Input_PersonsGroupsMaxOrderBy _instance;
+
+  final TRes Function(Input_PersonsGroupsMaxOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? groupId = _undefined, Object? personId = _undefined}) =>
+      _then(
+        Input_PersonsGroupsMaxOrderBy._({
+          ..._instance._$data,
+          if (groupId != _undefined) 'groupId': (groupId as Enum_OrderBy?),
+          if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
+        }),
+      );
+}
+
+class _CopyWithStubImpl_Input_PersonsGroupsMaxOrderBy<TRes>
+    implements CopyWith_Input_PersonsGroupsMaxOrderBy<TRes> {
+  _CopyWithStubImpl_Input_PersonsGroupsMaxOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? groupId, Enum_OrderBy? personId}) => _res;
+}
+
+class Input_PersonsGroupsMinOrderBy {
+  factory Input_PersonsGroupsMinOrderBy({
+    Enum_OrderBy? groupId,
+    Enum_OrderBy? personId,
+  }) => Input_PersonsGroupsMinOrderBy._({
+    if (groupId != null) r'groupId': groupId,
+    if (personId != null) r'personId': personId,
+  });
+
+  Input_PersonsGroupsMinOrderBy._(this._$data);
+
+  factory Input_PersonsGroupsMinOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('groupId')) {
+      final l$groupId = data['groupId'];
+      result$data['groupId'] = l$groupId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$groupId as String));
+    }
+    if (data.containsKey('personId')) {
+      final l$personId = data['personId'];
+      result$data['personId'] = l$personId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$personId as String));
+    }
+    return Input_PersonsGroupsMinOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('groupId')) {
+      final l$groupId = groupId;
+      result$data['groupId'] = l$groupId == null
+          ? null
+          : toJson_Enum_OrderBy(l$groupId);
+    }
+    if (_$data.containsKey('personId')) {
+      final l$personId = personId;
+      result$data['personId'] = l$personId == null
+          ? null
+          : toJson_Enum_OrderBy(l$personId);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_PersonsGroupsMinOrderBy<Input_PersonsGroupsMinOrderBy>
+  get copyWith => CopyWith_Input_PersonsGroupsMinOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonsGroupsMinOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$groupId = groupId;
+    final lOther$groupId = other.groupId;
+    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
+      return false;
+    }
+    if (l$groupId != lOther$groupId) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (_$data.containsKey('personId') !=
+        other._$data.containsKey('personId')) {
+      return false;
+    }
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$groupId = groupId;
+    final l$personId = personId;
+    return Object.hashAll([
+      _$data.containsKey('groupId') ? l$groupId : const {},
+      _$data.containsKey('personId') ? l$personId : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_PersonsGroupsMinOrderBy<TRes> {
   factory CopyWith_Input_PersonsGroupsMinOrderBy(
     Input_PersonsGroupsMinOrderBy instance,
@@ -2468,178 +2603,6 @@ class Input_PersonsHobbiesOrderBy {
       _$data.containsKey('hobbyId') ? l$hobbyId : const {},
       _$data.containsKey('person') ? l$person : const {},
       _$data.containsKey('personId') ? l$personId : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_PersonsHobbiesOrderBy<TRes> {
-  factory CopyWith_Input_PersonsHobbiesOrderBy(
-    Input_PersonsHobbiesOrderBy instance,
-    TRes Function(Input_PersonsHobbiesOrderBy) then,
-  ) = _CopyWithImpl_Input_PersonsHobbiesOrderBy;
-
-  factory CopyWith_Input_PersonsHobbiesOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonsHobbiesOrderBy;
-
-  TRes call({
-    Input_HobbiesOrderBy? hobby,
-    Enum_OrderBy? hobbyId,
-    Input_PersonsOrderBy? person,
-    Enum_OrderBy? personId,
-  });
-  CopyWith_Input_HobbiesOrderBy<TRes> get hobby;
-  CopyWith_Input_PersonsOrderBy<TRes> get person;
-}
-
-class _CopyWithImpl_Input_PersonsHobbiesOrderBy<TRes>
-    implements CopyWith_Input_PersonsHobbiesOrderBy<TRes> {
-  _CopyWithImpl_Input_PersonsHobbiesOrderBy(this._instance, this._then);
-
-  final Input_PersonsHobbiesOrderBy _instance;
-
-  final TRes Function(Input_PersonsHobbiesOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? hobby = _undefined,
-    Object? hobbyId = _undefined,
-    Object? person = _undefined,
-    Object? personId = _undefined,
-  }) => _then(
-    Input_PersonsHobbiesOrderBy._({
-      ..._instance._$data,
-      if (hobby != _undefined) 'hobby': (hobby as Input_HobbiesOrderBy?),
-      if (hobbyId != _undefined) 'hobbyId': (hobbyId as Enum_OrderBy?),
-      if (person != _undefined) 'person': (person as Input_PersonsOrderBy?),
-      if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
-    }),
-  );
-
-  CopyWith_Input_HobbiesOrderBy<TRes> get hobby {
-    final local$hobby = _instance.hobby;
-    return local$hobby == null
-        ? CopyWith_Input_HobbiesOrderBy.stub(_then(_instance))
-        : CopyWith_Input_HobbiesOrderBy(local$hobby, (e) => call(hobby: e));
-  }
-
-  CopyWith_Input_PersonsOrderBy<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsOrderBy.stub(_then(_instance))
-        : CopyWith_Input_PersonsOrderBy(local$person, (e) => call(person: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_PersonsHobbiesOrderBy<TRes>
-    implements CopyWith_Input_PersonsHobbiesOrderBy<TRes> {
-  _CopyWithStubImpl_Input_PersonsHobbiesOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Input_HobbiesOrderBy? hobby,
-    Enum_OrderBy? hobbyId,
-    Input_PersonsOrderBy? person,
-    Enum_OrderBy? personId,
-  }) => _res;
-
-  CopyWith_Input_HobbiesOrderBy<TRes> get hobby =>
-      CopyWith_Input_HobbiesOrderBy.stub(_res);
-
-  CopyWith_Input_PersonsOrderBy<TRes> get person =>
-      CopyWith_Input_PersonsOrderBy.stub(_res);
-}
-
-class Input_PersonsHobbiesStreamCursorInput {
-  factory Input_PersonsHobbiesStreamCursorInput({
-    required Input_PersonsHobbiesStreamCursorValueInput initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => Input_PersonsHobbiesStreamCursorInput._({
-    r'initialValue': initialValue,
-    if (ordering != null) r'ordering': ordering,
-  });
-
-  Input_PersonsHobbiesStreamCursorInput._(this._$data);
-
-  factory Input_PersonsHobbiesStreamCursorInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$initialValue = data['initialValue'];
-    result$data['initialValue'] =
-        Input_PersonsHobbiesStreamCursorValueInput.fromJson(
-          (l$initialValue as Map<String, dynamic>),
-        );
-    if (data.containsKey('ordering')) {
-      final l$ordering = data['ordering'];
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : fromJson_Enum_CursorOrdering((l$ordering as String));
-    }
-    return Input_PersonsHobbiesStreamCursorInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_PersonsHobbiesStreamCursorValueInput get initialValue =>
-      (_$data['initialValue'] as Input_PersonsHobbiesStreamCursorValueInput);
-
-  Enum_CursorOrdering? get ordering =>
-      (_$data['ordering'] as Enum_CursorOrdering?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$initialValue = initialValue;
-    result$data['initialValue'] = l$initialValue.toJson();
-    if (_$data.containsKey('ordering')) {
-      final l$ordering = ordering;
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : toJson_Enum_CursorOrdering(l$ordering);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_PersonsHobbiesStreamCursorInput<
-    Input_PersonsHobbiesStreamCursorInput
-  >
-  get copyWith =>
-      CopyWith_Input_PersonsHobbiesStreamCursorInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_PersonsHobbiesStreamCursorInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$initialValue = initialValue;
-    final lOther$initialValue = other.initialValue;
-    if (l$initialValue != lOther$initialValue) {
-      return false;
-    }
-    final l$ordering = ordering;
-    final lOther$ordering = other.ordering;
-    if (_$data.containsKey('ordering') !=
-        other._$data.containsKey('ordering')) {
-      return false;
-    }
-    if (l$ordering != lOther$ordering) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$initialValue = initialValue;
-    final l$ordering = ordering;
-    return Object.hashAll([
-      l$initialValue,
-      _$data.containsKey('ordering') ? l$ordering : const {},
     ]);
   }
 }
