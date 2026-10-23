@@ -8,17 +8,20 @@ import 'e2e_ash.dart';
 import 'e2e_backend.dart';
 import 'e2e_user.dart';
 
-/// Creates users the way inviting and claiming would leave them, without
-/// going through sign-up, email verification and claiming in the app.
+/// Creates users the way inviting and applying the invitation code would
+/// leave them, without going through sign-up, email verification and the
+/// invitation code form in the app.
 abstract final class E2eUsers {
+  static const _invitationLifetime = Duration(days: 7);
+
   static final Uri _authEmulatorApi = Uri.http(
     'localhost:9099',
     '/identitytoolkit.googleapis.com/v1',
   );
 
   /// Seeds an approved user with a new linked person, then creates its
-  /// email-verified Firebase account and has the backend claim the user for
-  /// that account, as `tryClaimAccount` does on sign-in.
+  /// email-verified Firebase account that applies the user's invitation code,
+  /// since the hermetic stack does not claim users by email.
   static Future<E2eUser> createApprovedUser({
     required String email,
     String password = E2eBackend.password,
@@ -36,7 +39,11 @@ abstract final class E2eUsers {
         ...permission.requires,
       ],
     };
-    final (:uid, :personId) = await E2eBackend.createUserWithPerson(
+    final (
+      :uid,
+      :personId,
+      :invitationCode,
+    ) = await E2eBackend.createUserWithPerson(
       name: name ?? canonicalEmail,
       email: canonicalEmail,
       permissions: [
@@ -44,6 +51,7 @@ abstract final class E2eUsers {
       ],
       adminOn: [for (final scope in adminOn) scope.adminOnInput],
       isMale: isMale,
+      invitationExpiresAt: DateTime.now().add(_invitationLifetime),
     );
 
     if (spiritDataUpToDate) {
@@ -52,7 +60,16 @@ abstract final class E2eUsers {
 
     final authId = await _signUpFirebaseAccount(canonicalEmail, password);
     await _verifyEmail(authId);
-    await _claimAccount(canonicalEmail, password, expectedUid: uid);
+    if (invitationCode == null) {
+      throw StateError('Creating $canonicalEmail returned no invitation code');
+    }
+
+    await _applyInvitationCode(
+      invitationCode,
+      email: canonicalEmail,
+      password: password,
+      expectedUid: uid,
+    );
 
     return E2eUser(
       uid: uid,
@@ -184,18 +201,26 @@ abstract final class E2eUsers {
     body: {'localId': authId, 'emailVerified': true},
   );
 
-  static Future<void> _claimAccount(
-    String email,
-    String password, {
+  static Future<void> _applyInvitationCode(
+    String code, {
+    required String email,
+    required String password,
     required String expectedUid,
   }) async {
-    final claimed = await E2eAsh.query(
-      'mutation ClaimAccount { tryClaimAccount { uid } }',
+    final applied = await E2eAsh.query(
+      r'''
+      mutation ApplyInvitationCode($input: ApplyInvitationCodeInput!) {
+        applyInvitationCode(input: $input) { uid }
+      }
+      ''',
+      variables: {
+        'input': {'code': code},
+      },
       email: email,
       password: password,
     );
 
-    if ((claimed['tryClaimAccount'] as Map)['uid'] != expectedUid) {
+    if ((applied['applyInvitationCode'] as Map)['uid'] != expectedUid) {
       throw StateError('$email claimed another user than $expectedUid');
     }
   }
