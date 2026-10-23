@@ -101,6 +101,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
         lastConfession: _userData.lastConfession!.time,
         lastKodas: _userData.lastKodas!.time,
       );
+      _trackSave(isSuccess: true);
 
       if (mounted) {
         scaffoldMessenger
@@ -112,6 +113,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
           );
       }
     } on Exception catch (error, stackTrace) {
+      _trackSave(isSuccess: false);
       scaffoldMessenger.hideCurrentSnackBar();
 
       if (mounted) {
@@ -130,4 +132,8 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
       _isSaving = false;
     }
   }
+
+  void _trackSave({required bool isSuccess}) => AnalyticsService.I.track(
+    SpiritDataSave(_userData, savedAt: DateTime.now(), isSuccess: isSuccess),
+  );
 }
