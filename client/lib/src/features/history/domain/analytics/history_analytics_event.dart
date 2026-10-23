@@ -8,7 +8,7 @@ sealed class HistoryAnalyticsEvent extends AnalyticsEvent {
 
   @override
   Json get properties => {
-    'kind': history.kind.name,
+    'history_kind': history.kind.name,
     ...AnalyticsEntityType.propertiesOf(history.owner),
   };
 

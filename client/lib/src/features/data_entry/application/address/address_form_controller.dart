@@ -369,7 +369,7 @@ class AddressFormController extends AdvancedFormController {
     if (wasUnlocated) {
       _services.analytics.track(
         AddressLocationFill(
-          source: AddressAutofillSource.geocodedHouseNumber,
+          autofillSource: AddressAutofillSource.geocodedHouseNumber,
           street: geocodedStreet,
         ),
       );
@@ -386,7 +386,7 @@ class AddressFormController extends AdvancedFormController {
     if (area.fieldValue == areaBeforeFill) return;
 
     _services.analytics.track(
-      AddressAreaFill(source: source, street: street, area: filled),
+      AddressAreaFill(autofillSource: source, street: street, area: filled),
     );
   }
 
