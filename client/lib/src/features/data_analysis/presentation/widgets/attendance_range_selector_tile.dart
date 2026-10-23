@@ -45,7 +45,10 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
             return;
           }
 
-          AnalyticsService.I.track(AnalysisRangeSelect(selectedPreset));
+          final isPresetChanged = selectedPreset != preset;
+          if (isPresetChanged) {
+            AnalyticsService.I.track(AnalysisRangeSelect(selectedPreset));
+          }
           onChanged(selectedPreset);
         },
         dropdownMenuEntries: [
