@@ -1,36 +1,36 @@
 // Part 27 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_ServiceFilterUserCanEdit<TRes> {
-  factory CopyWith_Input_ServiceFilterUserCanEdit(
-    Input_ServiceFilterUserCanEdit instance,
-    TRes Function(Input_ServiceFilterUserCanEdit) then,
-  ) = _CopyWithImpl_Input_ServiceFilterUserCanEdit;
+abstract class CopyWith_Input_ContactFilterFamilyId<TRes> {
+  factory CopyWith_Input_ContactFilterFamilyId(
+    Input_ContactFilterFamilyId instance,
+    TRes Function(Input_ContactFilterFamilyId) then,
+  ) = _CopyWithImpl_Input_ContactFilterFamilyId;
 
-  factory CopyWith_Input_ServiceFilterUserCanEdit.stub(TRes res) =
-      _CopyWithStubImpl_Input_ServiceFilterUserCanEdit;
+  factory CopyWith_Input_ContactFilterFamilyId.stub(TRes res) =
+      _CopyWithStubImpl_Input_ContactFilterFamilyId;
 
   TRes call({
     bool? isNil,
-    bool? eq,
-    bool? notEq,
-    List<bool>? $in,
-    bool? lessThan,
-    bool? greaterThan,
-    bool? lessThanOrEqual,
-    bool? greaterThanOrEqual,
-    bool? isDistinctFrom,
-    bool? isNotDistinctFrom,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
   });
 }
 
-class _CopyWithImpl_Input_ServiceFilterUserCanEdit<TRes>
-    implements CopyWith_Input_ServiceFilterUserCanEdit<TRes> {
-  _CopyWithImpl_Input_ServiceFilterUserCanEdit(this._instance, this._then);
+class _CopyWithImpl_Input_ContactFilterFamilyId<TRes>
+    implements CopyWith_Input_ContactFilterFamilyId<TRes> {
+  _CopyWithImpl_Input_ContactFilterFamilyId(this._instance, this._then);
 
-  final Input_ServiceFilterUserCanEdit _instance;
+  final Input_ContactFilterFamilyId _instance;
 
-  final TRes Function(Input_ServiceFilterUserCanEdit) _then;
+  final TRes Function(Input_ContactFilterFamilyId) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -46,59 +46,59 @@ class _CopyWithImpl_Input_ServiceFilterUserCanEdit<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_ServiceFilterUserCanEdit._({
+    Input_ContactFilterFamilyId._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as bool?),
-      if (notEq != _undefined) 'notEq': (notEq as bool?),
-      if ($in != _undefined) 'in': ($in as List<bool>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as bool?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
       if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as bool?),
+        'lessThanOrEqual': (lessThanOrEqual as String?),
       if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as bool?),
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
       if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as bool?),
+        'isDistinctFrom': (isDistinctFrom as String?),
       if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as bool?),
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_ServiceFilterUserCanEdit<TRes>
-    implements CopyWith_Input_ServiceFilterUserCanEdit<TRes> {
-  _CopyWithStubImpl_Input_ServiceFilterUserCanEdit(this._res);
+class _CopyWithStubImpl_Input_ContactFilterFamilyId<TRes>
+    implements CopyWith_Input_ContactFilterFamilyId<TRes> {
+  _CopyWithStubImpl_Input_ContactFilterFamilyId(this._res);
 
   TRes _res;
 
   call({
     bool? isNil,
-    bool? eq,
-    bool? notEq,
-    List<bool>? $in,
-    bool? lessThan,
-    bool? greaterThan,
-    bool? lessThanOrEqual,
-    bool? greaterThanOrEqual,
-    bool? isDistinctFrom,
-    bool? isNotDistinctFrom,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
   }) => _res;
 }
 
-class Input_ServiceFilterStudyYearToOrder {
-  factory Input_ServiceFilterStudyYearToOrder({
+class Input_ContactFilterPersonId {
+  factory Input_ContactFilterPersonId({
     bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int?>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
-  }) => Input_ServiceFilterStudyYearToOrder._({
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_ContactFilterPersonId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -111,11 +111,9 @@ class Input_ServiceFilterStudyYearToOrder {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_ServiceFilterStudyYearToOrder._(this._$data);
+  Input_ContactFilterPersonId._(this._$data);
 
-  factory Input_ServiceFilterStudyYearToOrder.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Input_ContactFilterPersonId.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -123,66 +121,66 @@ class Input_ServiceFilterStudyYearToOrder {
     }
     if (data.containsKey('eq')) {
       final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as int?);
+      result$data['eq'] = (l$eq as String?);
     }
     if (data.containsKey('notEq')) {
       final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as int?);
+      result$data['notEq'] = (l$notEq as String?);
     }
     if (data.containsKey('in')) {
       final l$$in = data['in'];
       result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as int?))
+          ?.map((e) => (e as String?))
           .toList();
     }
     if (data.containsKey('lessThan')) {
       final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as int?);
+      result$data['lessThan'] = (l$lessThan as String?);
     }
     if (data.containsKey('greaterThan')) {
       final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as int?);
+      result$data['greaterThan'] = (l$greaterThan as String?);
     }
     if (data.containsKey('lessThanOrEqual')) {
       final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as int?);
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
     }
     if (data.containsKey('greaterThanOrEqual')) {
       final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as int?);
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
     }
     if (data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as int?);
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
     }
     if (data.containsKey('isNotDistinctFrom')) {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as int?);
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_ServiceFilterStudyYearToOrder._(result$data);
+    return Input_ContactFilterPersonId._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   bool? get isNil => (_$data['isNil'] as bool?);
 
-  int? get eq => (_$data['eq'] as int?);
+  String? get eq => (_$data['eq'] as String?);
 
-  int? get notEq => (_$data['notEq'] as int?);
+  String? get notEq => (_$data['notEq'] as String?);
 
-  List<int?>? get $in => (_$data['in'] as List<int?>?);
+  List<String?>? get $in => (_$data['in'] as List<String?>?);
 
-  int? get lessThan => (_$data['lessThan'] as int?);
+  String? get lessThan => (_$data['lessThan'] as String?);
 
-  int? get greaterThan => (_$data['greaterThan'] as int?);
+  String? get greaterThan => (_$data['greaterThan'] as String?);
 
-  int? get lessThanOrEqual => (_$data['lessThanOrEqual'] as int?);
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
 
-  int? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as int?);
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
 
-  int? get isDistinctFrom => (_$data['isDistinctFrom'] as int?);
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
 
-  int? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as int?);
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -229,17 +227,15 @@ class Input_ServiceFilterStudyYearToOrder {
     return result$data;
   }
 
-  CopyWith_Input_ServiceFilterStudyYearToOrder<
-    Input_ServiceFilterStudyYearToOrder
-  >
-  get copyWith => CopyWith_Input_ServiceFilterStudyYearToOrder(this, (i) => i);
+  CopyWith_Input_ContactFilterPersonId<Input_ContactFilterPersonId>
+  get copyWith => CopyWith_Input_ContactFilterPersonId(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_ServiceFilterStudyYearToOrder ||
+    if (other is! Input_ContactFilterPersonId ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -376,36 +372,36 @@ class Input_ServiceFilterStudyYearToOrder {
   }
 }
 
-abstract class CopyWith_Input_ServiceFilterStudyYearToOrder<TRes> {
-  factory CopyWith_Input_ServiceFilterStudyYearToOrder(
-    Input_ServiceFilterStudyYearToOrder instance,
-    TRes Function(Input_ServiceFilterStudyYearToOrder) then,
-  ) = _CopyWithImpl_Input_ServiceFilterStudyYearToOrder;
+abstract class CopyWith_Input_ContactFilterPersonId<TRes> {
+  factory CopyWith_Input_ContactFilterPersonId(
+    Input_ContactFilterPersonId instance,
+    TRes Function(Input_ContactFilterPersonId) then,
+  ) = _CopyWithImpl_Input_ContactFilterPersonId;
 
-  factory CopyWith_Input_ServiceFilterStudyYearToOrder.stub(TRes res) =
-      _CopyWithStubImpl_Input_ServiceFilterStudyYearToOrder;
+  factory CopyWith_Input_ContactFilterPersonId.stub(TRes res) =
+      _CopyWithStubImpl_Input_ContactFilterPersonId;
 
   TRes call({
     bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int?>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
   });
 }
 
-class _CopyWithImpl_Input_ServiceFilterStudyYearToOrder<TRes>
-    implements CopyWith_Input_ServiceFilterStudyYearToOrder<TRes> {
-  _CopyWithImpl_Input_ServiceFilterStudyYearToOrder(this._instance, this._then);
+class _CopyWithImpl_Input_ContactFilterPersonId<TRes>
+    implements CopyWith_Input_ContactFilterPersonId<TRes> {
+  _CopyWithImpl_Input_ContactFilterPersonId(this._instance, this._then);
 
-  final Input_ServiceFilterStudyYearToOrder _instance;
+  final Input_ContactFilterPersonId _instance;
 
-  final TRes Function(Input_ServiceFilterStudyYearToOrder) _then;
+  final TRes Function(Input_ContactFilterPersonId) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -421,59 +417,59 @@ class _CopyWithImpl_Input_ServiceFilterStudyYearToOrder<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_ServiceFilterStudyYearToOrder._({
+    Input_ContactFilterPersonId._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as int?),
-      if (notEq != _undefined) 'notEq': (notEq as int?),
-      if ($in != _undefined) 'in': ($in as List<int?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as int?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as int?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
       if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as int?),
+        'lessThanOrEqual': (lessThanOrEqual as String?),
       if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as int?),
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
       if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as int?),
+        'isDistinctFrom': (isDistinctFrom as String?),
       if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as int?),
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_ServiceFilterStudyYearToOrder<TRes>
-    implements CopyWith_Input_ServiceFilterStudyYearToOrder<TRes> {
-  _CopyWithStubImpl_Input_ServiceFilterStudyYearToOrder(this._res);
+class _CopyWithStubImpl_Input_ContactFilterPersonId<TRes>
+    implements CopyWith_Input_ContactFilterPersonId<TRes> {
+  _CopyWithStubImpl_Input_ContactFilterPersonId(this._res);
 
   TRes _res;
 
   call({
     bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int?>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
   }) => _res;
 }
 
-class Input_ServiceFilterStudyYearFromOrder {
-  factory Input_ServiceFilterStudyYearFromOrder({
+class Input_ContactFilterId {
+  factory Input_ContactFilterId({
     bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int?>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
-  }) => Input_ServiceFilterStudyYearFromOrder._({
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_ContactFilterId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -486,11 +482,9 @@ class Input_ServiceFilterStudyYearFromOrder {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_ServiceFilterStudyYearFromOrder._(this._$data);
+  Input_ContactFilterId._(this._$data);
 
-  factory Input_ServiceFilterStudyYearFromOrder.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Input_ContactFilterId.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -498,66 +492,66 @@ class Input_ServiceFilterStudyYearFromOrder {
     }
     if (data.containsKey('eq')) {
       final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as int?);
+      result$data['eq'] = (l$eq as String?);
     }
     if (data.containsKey('notEq')) {
       final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as int?);
+      result$data['notEq'] = (l$notEq as String?);
     }
     if (data.containsKey('in')) {
       final l$$in = data['in'];
       result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as int?))
+          ?.map((e) => (e as String))
           .toList();
     }
     if (data.containsKey('lessThan')) {
       final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as int?);
+      result$data['lessThan'] = (l$lessThan as String?);
     }
     if (data.containsKey('greaterThan')) {
       final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as int?);
+      result$data['greaterThan'] = (l$greaterThan as String?);
     }
     if (data.containsKey('lessThanOrEqual')) {
       final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as int?);
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
     }
     if (data.containsKey('greaterThanOrEqual')) {
       final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as int?);
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
     }
     if (data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as int?);
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
     }
     if (data.containsKey('isNotDistinctFrom')) {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as int?);
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_ServiceFilterStudyYearFromOrder._(result$data);
+    return Input_ContactFilterId._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   bool? get isNil => (_$data['isNil'] as bool?);
 
-  int? get eq => (_$data['eq'] as int?);
+  String? get eq => (_$data['eq'] as String?);
 
-  int? get notEq => (_$data['notEq'] as int?);
+  String? get notEq => (_$data['notEq'] as String?);
 
-  List<int?>? get $in => (_$data['in'] as List<int?>?);
+  List<String>? get $in => (_$data['in'] as List<String>?);
 
-  int? get lessThan => (_$data['lessThan'] as int?);
+  String? get lessThan => (_$data['lessThan'] as String?);
 
-  int? get greaterThan => (_$data['greaterThan'] as int?);
+  String? get greaterThan => (_$data['greaterThan'] as String?);
 
-  int? get lessThanOrEqual => (_$data['lessThanOrEqual'] as int?);
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
 
-  int? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as int?);
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
 
-  int? get isDistinctFrom => (_$data['isDistinctFrom'] as int?);
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
 
-  int? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as int?);
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -604,19 +598,15 @@ class Input_ServiceFilterStudyYearFromOrder {
     return result$data;
   }
 
-  CopyWith_Input_ServiceFilterStudyYearFromOrder<
-    Input_ServiceFilterStudyYearFromOrder
-  >
-  get copyWith =>
-      CopyWith_Input_ServiceFilterStudyYearFromOrder(this, (i) => i);
+  CopyWith_Input_ContactFilterId<Input_ContactFilterId> get copyWith =>
+      CopyWith_Input_ContactFilterId(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_ServiceFilterStudyYearFromOrder ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_ContactFilterId || runtimeType != other.runtimeType) {
       return false;
     }
     final l$isNil = isNil;
@@ -752,39 +742,36 @@ class Input_ServiceFilterStudyYearFromOrder {
   }
 }
 
-abstract class CopyWith_Input_ServiceFilterStudyYearFromOrder<TRes> {
-  factory CopyWith_Input_ServiceFilterStudyYearFromOrder(
-    Input_ServiceFilterStudyYearFromOrder instance,
-    TRes Function(Input_ServiceFilterStudyYearFromOrder) then,
-  ) = _CopyWithImpl_Input_ServiceFilterStudyYearFromOrder;
+abstract class CopyWith_Input_ContactFilterId<TRes> {
+  factory CopyWith_Input_ContactFilterId(
+    Input_ContactFilterId instance,
+    TRes Function(Input_ContactFilterId) then,
+  ) = _CopyWithImpl_Input_ContactFilterId;
 
-  factory CopyWith_Input_ServiceFilterStudyYearFromOrder.stub(TRes res) =
-      _CopyWithStubImpl_Input_ServiceFilterStudyYearFromOrder;
+  factory CopyWith_Input_ContactFilterId.stub(TRes res) =
+      _CopyWithStubImpl_Input_ContactFilterId;
 
   TRes call({
     bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int?>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
   });
 }
 
-class _CopyWithImpl_Input_ServiceFilterStudyYearFromOrder<TRes>
-    implements CopyWith_Input_ServiceFilterStudyYearFromOrder<TRes> {
-  _CopyWithImpl_Input_ServiceFilterStudyYearFromOrder(
-    this._instance,
-    this._then,
-  );
+class _CopyWithImpl_Input_ContactFilterId<TRes>
+    implements CopyWith_Input_ContactFilterId<TRes> {
+  _CopyWithImpl_Input_ContactFilterId(this._instance, this._then);
 
-  final Input_ServiceFilterStudyYearFromOrder _instance;
+  final Input_ContactFilterId _instance;
 
-  final TRes Function(Input_ServiceFilterStudyYearFromOrder) _then;
+  final TRes Function(Input_ContactFilterId) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -800,321 +787,490 @@ class _CopyWithImpl_Input_ServiceFilterStudyYearFromOrder<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_ServiceFilterStudyYearFromOrder._({
+    Input_ContactFilterId._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as int?),
-      if (notEq != _undefined) 'notEq': (notEq as int?),
-      if ($in != _undefined) 'in': ($in as List<int?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as int?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as int?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
       if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as int?),
+        'lessThanOrEqual': (lessThanOrEqual as String?),
       if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as int?),
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
       if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as int?),
+        'isDistinctFrom': (isDistinctFrom as String?),
       if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as int?),
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_ServiceFilterStudyYearFromOrder<TRes>
-    implements CopyWith_Input_ServiceFilterStudyYearFromOrder<TRes> {
-  _CopyWithStubImpl_Input_ServiceFilterStudyYearFromOrder(this._res);
+class _CopyWithStubImpl_Input_ContactFilterId<TRes>
+    implements CopyWith_Input_ContactFilterId<TRes> {
+  _CopyWithStubImpl_Input_ContactFilterId(this._res);
 
   TRes _res;
 
   call({
     bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int?>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
   }) => _res;
 }
 
-class Input_ServiceFilterLastEdit {
-  factory Input_ServiceFilterLastEdit({
-    bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime?>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
-  }) => Input_ServiceFilterLastEdit._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+class Input_ContactFilterInput {
+  factory Input_ContactFilterInput({
+    List<Input_ContactFilterInput>? and,
+    List<Input_ContactFilterInput>? or,
+    List<Input_ContactFilterInput>? not,
+    Input_ContactFilterId? id,
+    Input_ContactFilterPersonId? personId,
+    Input_ContactFilterFamilyId? familyId,
+    Input_ContactFilterPersonTypeId? personTypeId,
+    Input_ContactFilterLabel? label,
+    Input_ContactFilterPhone? phone,
+    Input_ContactFilterIsMainPhone? isMainPhone,
+    Input_ContactFilterCreatedAt? createdAt,
+    Input_ContactFilterUpdatedAt? updatedAt,
+    Input_FamilyFilterInput? family,
+    Input_PersonFilterInput? person,
+    Input_PersonTypeFilterInput? personType,
+  }) => Input_ContactFilterInput._({
+    if (and != null) r'and': and,
+    if (or != null) r'or': or,
+    if (not != null) r'not': not,
+    if (id != null) r'id': id,
+    if (personId != null) r'personId': personId,
+    if (familyId != null) r'familyId': familyId,
+    if (personTypeId != null) r'personTypeId': personTypeId,
+    if (label != null) r'label': label,
+    if (phone != null) r'phone': phone,
+    if (isMainPhone != null) r'isMainPhone': isMainPhone,
+    if (createdAt != null) r'createdAt': createdAt,
+    if (updatedAt != null) r'updatedAt': updatedAt,
+    if (family != null) r'family': family,
+    if (person != null) r'person': person,
+    if (personType != null) r'personType': personType,
   });
 
-  Input_ServiceFilterLastEdit._(this._$data);
+  Input_ContactFilterInput._(this._$data);
 
-  factory Input_ServiceFilterLastEdit.fromJson(Map<String, dynamic> data) {
+  factory Input_ContactFilterInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = l$eq == null ? null : tstzFromString(l$eq);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = l$notEq == null ? null : tstzFromString(l$notEq);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => e == null ? null : tstzFromString(e))
+    if (data.containsKey('and')) {
+      final l$and = data['and'];
+      result$data['and'] = (l$and as List<dynamic>?)
+          ?.map(
+            (e) =>
+                Input_ContactFilterInput.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = l$lessThan == null
-          ? null
-          : tstzFromString(l$lessThan);
+    if (data.containsKey('or')) {
+      final l$or = data['or'];
+      result$data['or'] = (l$or as List<dynamic>?)
+          ?.map(
+            (e) =>
+                Input_ContactFilterInput.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
     }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = l$greaterThan == null
-          ? null
-          : tstzFromString(l$greaterThan);
+    if (data.containsKey('not')) {
+      final l$not = data['not'];
+      result$data['not'] = (l$not as List<dynamic>?)
+          ?.map(
+            (e) =>
+                Input_ContactFilterInput.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
     }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
           ? null
-          : tstzFromString(l$lessThanOrEqual);
+          : Input_ContactFilterId.fromJson((l$id as Map<String, dynamic>));
     }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
+    if (data.containsKey('personId')) {
+      final l$personId = data['personId'];
+      result$data['personId'] = l$personId == null
           ? null
-          : tstzFromString(l$greaterThanOrEqual);
+          : Input_ContactFilterPersonId.fromJson(
+              (l$personId as Map<String, dynamic>),
+            );
     }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = l$isDistinctFrom == null
+    if (data.containsKey('familyId')) {
+      final l$familyId = data['familyId'];
+      result$data['familyId'] = l$familyId == null
           ? null
-          : tstzFromString(l$isDistinctFrom);
+          : Input_ContactFilterFamilyId.fromJson(
+              (l$familyId as Map<String, dynamic>),
+            );
     }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
+    if (data.containsKey('personTypeId')) {
+      final l$personTypeId = data['personTypeId'];
+      result$data['personTypeId'] = l$personTypeId == null
           ? null
-          : tstzFromString(l$isNotDistinctFrom);
+          : Input_ContactFilterPersonTypeId.fromJson(
+              (l$personTypeId as Map<String, dynamic>),
+            );
     }
-    return Input_ServiceFilterLastEdit._(result$data);
+    if (data.containsKey('label')) {
+      final l$label = data['label'];
+      result$data['label'] = l$label == null
+          ? null
+          : Input_ContactFilterLabel.fromJson(
+              (l$label as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('phone')) {
+      final l$phone = data['phone'];
+      result$data['phone'] = l$phone == null
+          ? null
+          : Input_ContactFilterPhone.fromJson(
+              (l$phone as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('isMainPhone')) {
+      final l$isMainPhone = data['isMainPhone'];
+      result$data['isMainPhone'] = l$isMainPhone == null
+          ? null
+          : Input_ContactFilterIsMainPhone.fromJson(
+              (l$isMainPhone as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = l$createdAt == null
+          ? null
+          : Input_ContactFilterCreatedAt.fromJson(
+              (l$createdAt as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = l$updatedAt == null
+          ? null
+          : Input_ContactFilterUpdatedAt.fromJson(
+              (l$updatedAt as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('family')) {
+      final l$family = data['family'];
+      result$data['family'] = l$family == null
+          ? null
+          : Input_FamilyFilterInput.fromJson(
+              (l$family as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('person')) {
+      final l$person = data['person'];
+      result$data['person'] = l$person == null
+          ? null
+          : Input_PersonFilterInput.fromJson(
+              (l$person as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('personType')) {
+      final l$personType = data['personType'];
+      result$data['personType'] = l$personType == null
+          ? null
+          : Input_PersonTypeFilterInput.fromJson(
+              (l$personType as Map<String, dynamic>),
+            );
+    }
+    return Input_ContactFilterInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  bool? get isNil => (_$data['isNil'] as bool?);
+  List<Input_ContactFilterInput>? get and =>
+      (_$data['and'] as List<Input_ContactFilterInput>?);
 
-  DateTime? get eq => (_$data['eq'] as DateTime?);
+  List<Input_ContactFilterInput>? get or =>
+      (_$data['or'] as List<Input_ContactFilterInput>?);
 
-  DateTime? get notEq => (_$data['notEq'] as DateTime?);
+  List<Input_ContactFilterInput>? get not =>
+      (_$data['not'] as List<Input_ContactFilterInput>?);
 
-  List<DateTime?>? get $in => (_$data['in'] as List<DateTime?>?);
+  Input_ContactFilterId? get id => (_$data['id'] as Input_ContactFilterId?);
 
-  DateTime? get lessThan => (_$data['lessThan'] as DateTime?);
+  Input_ContactFilterPersonId? get personId =>
+      (_$data['personId'] as Input_ContactFilterPersonId?);
 
-  DateTime? get greaterThan => (_$data['greaterThan'] as DateTime?);
+  Input_ContactFilterFamilyId? get familyId =>
+      (_$data['familyId'] as Input_ContactFilterFamilyId?);
 
-  DateTime? get lessThanOrEqual => (_$data['lessThanOrEqual'] as DateTime?);
+  Input_ContactFilterPersonTypeId? get personTypeId =>
+      (_$data['personTypeId'] as Input_ContactFilterPersonTypeId?);
 
-  DateTime? get greaterThanOrEqual =>
-      (_$data['greaterThanOrEqual'] as DateTime?);
+  Input_ContactFilterLabel? get label =>
+      (_$data['label'] as Input_ContactFilterLabel?);
 
-  DateTime? get isDistinctFrom => (_$data['isDistinctFrom'] as DateTime?);
+  Input_ContactFilterPhone? get phone =>
+      (_$data['phone'] as Input_ContactFilterPhone?);
 
-  DateTime? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as DateTime?);
+  Input_ContactFilterIsMainPhone? get isMainPhone =>
+      (_$data['isMainPhone'] as Input_ContactFilterIsMainPhone?);
+
+  Input_ContactFilterCreatedAt? get createdAt =>
+      (_$data['createdAt'] as Input_ContactFilterCreatedAt?);
+
+  Input_ContactFilterUpdatedAt? get updatedAt =>
+      (_$data['updatedAt'] as Input_ContactFilterUpdatedAt?);
+
+  Input_FamilyFilterInput? get family =>
+      (_$data['family'] as Input_FamilyFilterInput?);
+
+  Input_PersonFilterInput? get person =>
+      (_$data['person'] as Input_PersonFilterInput?);
+
+  Input_PersonTypeFilterInput? get personType =>
+      (_$data['personType'] as Input_PersonTypeFilterInput?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
+    if (_$data.containsKey('and')) {
+      final l$and = and;
+      result$data['and'] = l$and?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq == null ? null : tstzToString(l$eq);
+    if (_$data.containsKey('or')) {
+      final l$or = or;
+      result$data['or'] = l$or?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq == null ? null : tstzToString(l$notEq);
+    if (_$data.containsKey('not')) {
+      final l$not = not;
+      result$data['not'] = l$not?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in
-          ?.map((e) => e == null ? null : tstzToString(e))
-          .toList();
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
     }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan == null
-          ? null
-          : tstzToString(l$lessThan);
+    if (_$data.containsKey('personId')) {
+      final l$personId = personId;
+      result$data['personId'] = l$personId?.toJson();
     }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan == null
-          ? null
-          : tstzToString(l$greaterThan);
+    if (_$data.containsKey('familyId')) {
+      final l$familyId = familyId;
+      result$data['familyId'] = l$familyId?.toJson();
     }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
-          ? null
-          : tstzToString(l$lessThanOrEqual);
+    if (_$data.containsKey('personTypeId')) {
+      final l$personTypeId = personTypeId;
+      result$data['personTypeId'] = l$personTypeId?.toJson();
     }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
-          ? null
-          : tstzToString(l$greaterThanOrEqual);
+    if (_$data.containsKey('label')) {
+      final l$label = label;
+      result$data['label'] = l$label?.toJson();
     }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom == null
-          ? null
-          : tstzToString(l$isDistinctFrom);
+    if (_$data.containsKey('phone')) {
+      final l$phone = phone;
+      result$data['phone'] = l$phone?.toJson();
     }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
-          ? null
-          : tstzToString(l$isNotDistinctFrom);
+    if (_$data.containsKey('isMainPhone')) {
+      final l$isMainPhone = isMainPhone;
+      result$data['isMainPhone'] = l$isMainPhone?.toJson();
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toJson();
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt?.toJson();
+    }
+    if (_$data.containsKey('family')) {
+      final l$family = family;
+      result$data['family'] = l$family?.toJson();
+    }
+    if (_$data.containsKey('person')) {
+      final l$person = person;
+      result$data['person'] = l$person?.toJson();
+    }
+    if (_$data.containsKey('personType')) {
+      final l$personType = personType;
+      result$data['personType'] = l$personType?.toJson();
     }
     return result$data;
   }
 
-  CopyWith_Input_ServiceFilterLastEdit<Input_ServiceFilterLastEdit>
-  get copyWith => CopyWith_Input_ServiceFilterLastEdit(this, (i) => i);
+  CopyWith_Input_ContactFilterInput<Input_ContactFilterInput> get copyWith =>
+      CopyWith_Input_ContactFilterInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_ServiceFilterLastEdit ||
+    if (other is! Input_ContactFilterInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+    final l$and = and;
+    final lOther$and = other.and;
+    if (_$data.containsKey('and') != other._$data.containsKey('and')) {
       return false;
     }
-    if (l$isNil != lOther$isNil) {
-      return false;
-    }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
-      return false;
-    }
-    if (l$eq != lOther$eq) {
-      return false;
-    }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
-      return false;
-    }
-    if (l$notEq != lOther$notEq) {
-      return false;
-    }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
+    if (l$and != null && lOther$and != null) {
+      if (l$and.length != lOther$and.length) {
         return false;
       }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
+      for (int i = 0; i < l$and.length; i++) {
+        final l$and$entry = l$and[i];
+        final lOther$and$entry = lOther$and[i];
+        if (l$and$entry != lOther$and$entry) {
           return false;
         }
       }
-    } else if (l$$in != lOther$$in) {
+    } else if (l$and != lOther$and) {
       return false;
     }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
+    final l$or = or;
+    final lOther$or = other.or;
+    if (_$data.containsKey('or') != other._$data.containsKey('or')) {
       return false;
     }
-    if (l$lessThan != lOther$lessThan) {
+    if (l$or != null && lOther$or != null) {
+      if (l$or.length != lOther$or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$or.length; i++) {
+        final l$or$entry = l$or[i];
+        final lOther$or$entry = lOther$or[i];
+        if (l$or$entry != lOther$or$entry) {
+          return false;
+        }
+      }
+    } else if (l$or != lOther$or) {
       return false;
     }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
+    final l$not = not;
+    final lOther$not = other.not;
+    if (_$data.containsKey('not') != other._$data.containsKey('not')) {
       return false;
     }
-    if (l$greaterThan != lOther$greaterThan) {
+    if (l$not != null && lOther$not != null) {
+      if (l$not.length != lOther$not.length) {
+        return false;
+      }
+      for (int i = 0; i < l$not.length; i++) {
+        final l$not$entry = l$not[i];
+        final lOther$not$entry = lOther$not[i];
+        if (l$not$entry != lOther$not$entry) {
+          return false;
+        }
+      }
+    } else if (l$not != lOther$not) {
       return false;
     }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
       return false;
     }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+    if (l$id != lOther$id) {
       return false;
     }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (_$data.containsKey('personId') !=
+        other._$data.containsKey('personId')) {
       return false;
     }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+    if (l$personId != lOther$personId) {
       return false;
     }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
+    final l$familyId = familyId;
+    final lOther$familyId = other.familyId;
+    if (_$data.containsKey('familyId') !=
+        other._$data.containsKey('familyId')) {
       return false;
     }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+    if (l$familyId != lOther$familyId) {
       return false;
     }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
+    final l$personTypeId = personTypeId;
+    final lOther$personTypeId = other.personTypeId;
+    if (_$data.containsKey('personTypeId') !=
+        other._$data.containsKey('personTypeId')) {
       return false;
     }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+    if (l$personTypeId != lOther$personTypeId) {
+      return false;
+    }
+    final l$label = label;
+    final lOther$label = other.label;
+    if (_$data.containsKey('label') != other._$data.containsKey('label')) {
+      return false;
+    }
+    if (l$label != lOther$label) {
+      return false;
+    }
+    final l$phone = phone;
+    final lOther$phone = other.phone;
+    if (_$data.containsKey('phone') != other._$data.containsKey('phone')) {
+      return false;
+    }
+    if (l$phone != lOther$phone) {
+      return false;
+    }
+    final l$isMainPhone = isMainPhone;
+    final lOther$isMainPhone = other.isMainPhone;
+    if (_$data.containsKey('isMainPhone') !=
+        other._$data.containsKey('isMainPhone')) {
+      return false;
+    }
+    if (l$isMainPhone != lOther$isMainPhone) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$family = family;
+    final lOther$family = other.family;
+    if (_$data.containsKey('family') != other._$data.containsKey('family')) {
+      return false;
+    }
+    if (l$family != lOther$family) {
+      return false;
+    }
+    final l$person = person;
+    final lOther$person = other.person;
+    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
+      return false;
+    }
+    if (l$person != lOther$person) {
+      return false;
+    }
+    final l$personType = personType;
+    final lOther$personType = other.personType;
+    if (_$data.containsKey('personType') !=
+        other._$data.containsKey('personType')) {
+      return false;
+    }
+    if (l$personType != lOther$personType) {
       return false;
     }
     return true;
@@ -1122,124 +1278,501 @@ class Input_ServiceFilterLastEdit {
 
   @override
   int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final l$and = and;
+    final l$or = or;
+    final l$not = not;
+    final l$id = id;
+    final l$personId = personId;
+    final l$familyId = familyId;
+    final l$personTypeId = personTypeId;
+    final l$label = label;
+    final l$phone = phone;
+    final l$isMainPhone = isMainPhone;
+    final l$createdAt = createdAt;
+    final l$updatedAt = updatedAt;
+    final l$family = family;
+    final l$person = person;
+    final l$personType = personType;
     return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
+      _$data.containsKey('and')
+          ? l$and == null
                 ? null
-                : Object.hashAll(l$$in.map((v) => v))
+                : Object.hashAll(l$and.map((v) => v))
           : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
+      _$data.containsKey('or')
+          ? l$or == null
+                ? null
+                : Object.hashAll(l$or.map((v) => v))
           : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+      _$data.containsKey('not')
+          ? l$not == null
+                ? null
+                : Object.hashAll(l$not.map((v) => v))
+          : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('familyId') ? l$familyId : const {},
+      _$data.containsKey('personTypeId') ? l$personTypeId : const {},
+      _$data.containsKey('label') ? l$label : const {},
+      _$data.containsKey('phone') ? l$phone : const {},
+      _$data.containsKey('isMainPhone') ? l$isMainPhone : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+      _$data.containsKey('family') ? l$family : const {},
+      _$data.containsKey('person') ? l$person : const {},
+      _$data.containsKey('personType') ? l$personType : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Input_ServiceFilterLastEdit<TRes> {
-  factory CopyWith_Input_ServiceFilterLastEdit(
-    Input_ServiceFilterLastEdit instance,
-    TRes Function(Input_ServiceFilterLastEdit) then,
-  ) = _CopyWithImpl_Input_ServiceFilterLastEdit;
+abstract class CopyWith_Input_ContactFilterInput<TRes> {
+  factory CopyWith_Input_ContactFilterInput(
+    Input_ContactFilterInput instance,
+    TRes Function(Input_ContactFilterInput) then,
+  ) = _CopyWithImpl_Input_ContactFilterInput;
 
-  factory CopyWith_Input_ServiceFilterLastEdit.stub(TRes res) =
-      _CopyWithStubImpl_Input_ServiceFilterLastEdit;
+  factory CopyWith_Input_ContactFilterInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_ContactFilterInput;
 
   TRes call({
-    bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime?>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
+    List<Input_ContactFilterInput>? and,
+    List<Input_ContactFilterInput>? or,
+    List<Input_ContactFilterInput>? not,
+    Input_ContactFilterId? id,
+    Input_ContactFilterPersonId? personId,
+    Input_ContactFilterFamilyId? familyId,
+    Input_ContactFilterPersonTypeId? personTypeId,
+    Input_ContactFilterLabel? label,
+    Input_ContactFilterPhone? phone,
+    Input_ContactFilterIsMainPhone? isMainPhone,
+    Input_ContactFilterCreatedAt? createdAt,
+    Input_ContactFilterUpdatedAt? updatedAt,
+    Input_FamilyFilterInput? family,
+    Input_PersonFilterInput? person,
+    Input_PersonTypeFilterInput? personType,
   });
+  TRes and(
+    Iterable<Input_ContactFilterInput>? Function(
+      Iterable<CopyWith_Input_ContactFilterInput<Input_ContactFilterInput>>?,
+    )
+    _fn,
+  );
+  TRes or(
+    Iterable<Input_ContactFilterInput>? Function(
+      Iterable<CopyWith_Input_ContactFilterInput<Input_ContactFilterInput>>?,
+    )
+    _fn,
+  );
+  TRes not(
+    Iterable<Input_ContactFilterInput>? Function(
+      Iterable<CopyWith_Input_ContactFilterInput<Input_ContactFilterInput>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_ContactFilterId<TRes> get id;
+  CopyWith_Input_ContactFilterPersonId<TRes> get personId;
+  CopyWith_Input_ContactFilterFamilyId<TRes> get familyId;
+  CopyWith_Input_ContactFilterPersonTypeId<TRes> get personTypeId;
+  CopyWith_Input_ContactFilterLabel<TRes> get label;
+  CopyWith_Input_ContactFilterPhone<TRes> get phone;
+  CopyWith_Input_ContactFilterIsMainPhone<TRes> get isMainPhone;
+  CopyWith_Input_ContactFilterCreatedAt<TRes> get createdAt;
+  CopyWith_Input_ContactFilterUpdatedAt<TRes> get updatedAt;
+  CopyWith_Input_FamilyFilterInput<TRes> get family;
+  CopyWith_Input_PersonFilterInput<TRes> get person;
+  CopyWith_Input_PersonTypeFilterInput<TRes> get personType;
 }
 
-class _CopyWithImpl_Input_ServiceFilterLastEdit<TRes>
-    implements CopyWith_Input_ServiceFilterLastEdit<TRes> {
-  _CopyWithImpl_Input_ServiceFilterLastEdit(this._instance, this._then);
+class _CopyWithImpl_Input_ContactFilterInput<TRes>
+    implements CopyWith_Input_ContactFilterInput<TRes> {
+  _CopyWithImpl_Input_ContactFilterInput(this._instance, this._then);
 
-  final Input_ServiceFilterLastEdit _instance;
+  final Input_ContactFilterInput _instance;
 
-  final TRes Function(Input_ServiceFilterLastEdit) _then;
+  final TRes Function(Input_ContactFilterInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
+    Object? and = _undefined,
+    Object? or = _undefined,
+    Object? not = _undefined,
+    Object? id = _undefined,
+    Object? personId = _undefined,
+    Object? familyId = _undefined,
+    Object? personTypeId = _undefined,
+    Object? label = _undefined,
+    Object? phone = _undefined,
+    Object? isMainPhone = _undefined,
+    Object? createdAt = _undefined,
+    Object? updatedAt = _undefined,
+    Object? family = _undefined,
+    Object? person = _undefined,
+    Object? personType = _undefined,
   }) => _then(
-    Input_ServiceFilterLastEdit._({
+    Input_ContactFilterInput._({
       ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as DateTime?),
-      if (notEq != _undefined) 'notEq': (notEq as DateTime?),
-      if ($in != _undefined) 'in': ($in as List<DateTime?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as DateTime?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as DateTime?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as DateTime?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as DateTime?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as DateTime?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as DateTime?),
+      if (and != _undefined) 'and': (and as List<Input_ContactFilterInput>?),
+      if (or != _undefined) 'or': (or as List<Input_ContactFilterInput>?),
+      if (not != _undefined) 'not': (not as List<Input_ContactFilterInput>?),
+      if (id != _undefined) 'id': (id as Input_ContactFilterId?),
+      if (personId != _undefined)
+        'personId': (personId as Input_ContactFilterPersonId?),
+      if (familyId != _undefined)
+        'familyId': (familyId as Input_ContactFilterFamilyId?),
+      if (personTypeId != _undefined)
+        'personTypeId': (personTypeId as Input_ContactFilterPersonTypeId?),
+      if (label != _undefined) 'label': (label as Input_ContactFilterLabel?),
+      if (phone != _undefined) 'phone': (phone as Input_ContactFilterPhone?),
+      if (isMainPhone != _undefined)
+        'isMainPhone': (isMainPhone as Input_ContactFilterIsMainPhone?),
+      if (createdAt != _undefined)
+        'createdAt': (createdAt as Input_ContactFilterCreatedAt?),
+      if (updatedAt != _undefined)
+        'updatedAt': (updatedAt as Input_ContactFilterUpdatedAt?),
+      if (family != _undefined) 'family': (family as Input_FamilyFilterInput?),
+      if (person != _undefined) 'person': (person as Input_PersonFilterInput?),
+      if (personType != _undefined)
+        'personType': (personType as Input_PersonTypeFilterInput?),
     }),
   );
+
+  TRes and(
+    Iterable<Input_ContactFilterInput>? Function(
+      Iterable<CopyWith_Input_ContactFilterInput<Input_ContactFilterInput>>?,
+    )
+    _fn,
+  ) => call(
+    and: _fn(
+      _instance.and?.map((e) => CopyWith_Input_ContactFilterInput(e, (i) => i)),
+    )?.toList(),
+  );
+
+  TRes or(
+    Iterable<Input_ContactFilterInput>? Function(
+      Iterable<CopyWith_Input_ContactFilterInput<Input_ContactFilterInput>>?,
+    )
+    _fn,
+  ) => call(
+    or: _fn(
+      _instance.or?.map((e) => CopyWith_Input_ContactFilterInput(e, (i) => i)),
+    )?.toList(),
+  );
+
+  TRes not(
+    Iterable<Input_ContactFilterInput>? Function(
+      Iterable<CopyWith_Input_ContactFilterInput<Input_ContactFilterInput>>?,
+    )
+    _fn,
+  ) => call(
+    not: _fn(
+      _instance.not?.map((e) => CopyWith_Input_ContactFilterInput(e, (i) => i)),
+    )?.toList(),
+  );
+
+  CopyWith_Input_ContactFilterId<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_ContactFilterId.stub(_then(_instance))
+        : CopyWith_Input_ContactFilterId(local$id, (e) => call(id: e));
+  }
+
+  CopyWith_Input_ContactFilterPersonId<TRes> get personId {
+    final local$personId = _instance.personId;
+    return local$personId == null
+        ? CopyWith_Input_ContactFilterPersonId.stub(_then(_instance))
+        : CopyWith_Input_ContactFilterPersonId(
+            local$personId,
+            (e) => call(personId: e),
+          );
+  }
+
+  CopyWith_Input_ContactFilterFamilyId<TRes> get familyId {
+    final local$familyId = _instance.familyId;
+    return local$familyId == null
+        ? CopyWith_Input_ContactFilterFamilyId.stub(_then(_instance))
+        : CopyWith_Input_ContactFilterFamilyId(
+            local$familyId,
+            (e) => call(familyId: e),
+          );
+  }
+
+  CopyWith_Input_ContactFilterPersonTypeId<TRes> get personTypeId {
+    final local$personTypeId = _instance.personTypeId;
+    return local$personTypeId == null
+        ? CopyWith_Input_ContactFilterPersonTypeId.stub(_then(_instance))
+        : CopyWith_Input_ContactFilterPersonTypeId(
+            local$personTypeId,
+            (e) => call(personTypeId: e),
+          );
+  }
+
+  CopyWith_Input_ContactFilterLabel<TRes> get label {
+    final local$label = _instance.label;
+    return local$label == null
+        ? CopyWith_Input_ContactFilterLabel.stub(_then(_instance))
+        : CopyWith_Input_ContactFilterLabel(local$label, (e) => call(label: e));
+  }
+
+  CopyWith_Input_ContactFilterPhone<TRes> get phone {
+    final local$phone = _instance.phone;
+    return local$phone == null
+        ? CopyWith_Input_ContactFilterPhone.stub(_then(_instance))
+        : CopyWith_Input_ContactFilterPhone(local$phone, (e) => call(phone: e));
+  }
+
+  CopyWith_Input_ContactFilterIsMainPhone<TRes> get isMainPhone {
+    final local$isMainPhone = _instance.isMainPhone;
+    return local$isMainPhone == null
+        ? CopyWith_Input_ContactFilterIsMainPhone.stub(_then(_instance))
+        : CopyWith_Input_ContactFilterIsMainPhone(
+            local$isMainPhone,
+            (e) => call(isMainPhone: e),
+          );
+  }
+
+  CopyWith_Input_ContactFilterCreatedAt<TRes> get createdAt {
+    final local$createdAt = _instance.createdAt;
+    return local$createdAt == null
+        ? CopyWith_Input_ContactFilterCreatedAt.stub(_then(_instance))
+        : CopyWith_Input_ContactFilterCreatedAt(
+            local$createdAt,
+            (e) => call(createdAt: e),
+          );
+  }
+
+  CopyWith_Input_ContactFilterUpdatedAt<TRes> get updatedAt {
+    final local$updatedAt = _instance.updatedAt;
+    return local$updatedAt == null
+        ? CopyWith_Input_ContactFilterUpdatedAt.stub(_then(_instance))
+        : CopyWith_Input_ContactFilterUpdatedAt(
+            local$updatedAt,
+            (e) => call(updatedAt: e),
+          );
+  }
+
+  CopyWith_Input_FamilyFilterInput<TRes> get family {
+    final local$family = _instance.family;
+    return local$family == null
+        ? CopyWith_Input_FamilyFilterInput.stub(_then(_instance))
+        : CopyWith_Input_FamilyFilterInput(
+            local$family,
+            (e) => call(family: e),
+          );
+  }
+
+  CopyWith_Input_PersonFilterInput<TRes> get person {
+    final local$person = _instance.person;
+    return local$person == null
+        ? CopyWith_Input_PersonFilterInput.stub(_then(_instance))
+        : CopyWith_Input_PersonFilterInput(
+            local$person,
+            (e) => call(person: e),
+          );
+  }
+
+  CopyWith_Input_PersonTypeFilterInput<TRes> get personType {
+    final local$personType = _instance.personType;
+    return local$personType == null
+        ? CopyWith_Input_PersonTypeFilterInput.stub(_then(_instance))
+        : CopyWith_Input_PersonTypeFilterInput(
+            local$personType,
+            (e) => call(personType: e),
+          );
+  }
 }
 
-class _CopyWithStubImpl_Input_ServiceFilterLastEdit<TRes>
-    implements CopyWith_Input_ServiceFilterLastEdit<TRes> {
-  _CopyWithStubImpl_Input_ServiceFilterLastEdit(this._res);
+class _CopyWithStubImpl_Input_ContactFilterInput<TRes>
+    implements CopyWith_Input_ContactFilterInput<TRes> {
+  _CopyWithStubImpl_Input_ContactFilterInput(this._res);
 
   TRes _res;
 
   call({
-    bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime?>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
+    List<Input_ContactFilterInput>? and,
+    List<Input_ContactFilterInput>? or,
+    List<Input_ContactFilterInput>? not,
+    Input_ContactFilterId? id,
+    Input_ContactFilterPersonId? personId,
+    Input_ContactFilterFamilyId? familyId,
+    Input_ContactFilterPersonTypeId? personTypeId,
+    Input_ContactFilterLabel? label,
+    Input_ContactFilterPhone? phone,
+    Input_ContactFilterIsMainPhone? isMainPhone,
+    Input_ContactFilterCreatedAt? createdAt,
+    Input_ContactFilterUpdatedAt? updatedAt,
+    Input_FamilyFilterInput? family,
+    Input_PersonFilterInput? person,
+    Input_PersonTypeFilterInput? personType,
   }) => _res;
+
+  and(_fn) => _res;
+
+  or(_fn) => _res;
+
+  not(_fn) => _res;
+
+  CopyWith_Input_ContactFilterId<TRes> get id =>
+      CopyWith_Input_ContactFilterId.stub(_res);
+
+  CopyWith_Input_ContactFilterPersonId<TRes> get personId =>
+      CopyWith_Input_ContactFilterPersonId.stub(_res);
+
+  CopyWith_Input_ContactFilterFamilyId<TRes> get familyId =>
+      CopyWith_Input_ContactFilterFamilyId.stub(_res);
+
+  CopyWith_Input_ContactFilterPersonTypeId<TRes> get personTypeId =>
+      CopyWith_Input_ContactFilterPersonTypeId.stub(_res);
+
+  CopyWith_Input_ContactFilterLabel<TRes> get label =>
+      CopyWith_Input_ContactFilterLabel.stub(_res);
+
+  CopyWith_Input_ContactFilterPhone<TRes> get phone =>
+      CopyWith_Input_ContactFilterPhone.stub(_res);
+
+  CopyWith_Input_ContactFilterIsMainPhone<TRes> get isMainPhone =>
+      CopyWith_Input_ContactFilterIsMainPhone.stub(_res);
+
+  CopyWith_Input_ContactFilterCreatedAt<TRes> get createdAt =>
+      CopyWith_Input_ContactFilterCreatedAt.stub(_res);
+
+  CopyWith_Input_ContactFilterUpdatedAt<TRes> get updatedAt =>
+      CopyWith_Input_ContactFilterUpdatedAt.stub(_res);
+
+  CopyWith_Input_FamilyFilterInput<TRes> get family =>
+      CopyWith_Input_FamilyFilterInput.stub(_res);
+
+  CopyWith_Input_PersonFilterInput<TRes> get person =>
+      CopyWith_Input_PersonFilterInput.stub(_res);
+
+  CopyWith_Input_PersonTypeFilterInput<TRes> get personType =>
+      CopyWith_Input_PersonTypeFilterInput.stub(_res);
 }
 
-class Input_ServiceFilterDefaultMeetingName {
-  factory Input_ServiceFilterDefaultMeetingName({
+class Input_ContactSortInput {
+  factory Input_ContactSortInput({
+    Enum_SortOrder? order,
+    required Enum_ContactSortField field,
+  }) => Input_ContactSortInput._({
+    if (order != null) r'order': order,
+    r'field': field,
+  });
+
+  Input_ContactSortInput._(this._$data);
+
+  factory Input_ContactSortInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('order')) {
+      final l$order = data['order'];
+      result$data['order'] = l$order == null
+          ? null
+          : fromJson_Enum_SortOrder((l$order as String));
+    }
+    final l$field = data['field'];
+    result$data['field'] = fromJson_Enum_ContactSortField((l$field as String));
+    return Input_ContactSortInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_SortOrder? get order => (_$data['order'] as Enum_SortOrder?);
+
+  Enum_ContactSortField get field => (_$data['field'] as Enum_ContactSortField);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('order')) {
+      final l$order = order;
+      result$data['order'] = l$order == null
+          ? null
+          : toJson_Enum_SortOrder(l$order);
+    }
+    final l$field = field;
+    result$data['field'] = toJson_Enum_ContactSortField(l$field);
+    return result$data;
+  }
+
+  CopyWith_Input_ContactSortInput<Input_ContactSortInput> get copyWith =>
+      CopyWith_Input_ContactSortInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_ContactSortInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
+      return false;
+    }
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$field = field;
+    final lOther$field = other.field;
+    if (l$field != lOther$field) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$order = order;
+    final l$field = field;
+    return Object.hashAll([
+      _$data.containsKey('order') ? l$order : const {},
+      l$field,
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_ContactSortInput<TRes> {
+  factory CopyWith_Input_ContactSortInput(
+    Input_ContactSortInput instance,
+    TRes Function(Input_ContactSortInput) then,
+  ) = _CopyWithImpl_Input_ContactSortInput;
+
+  factory CopyWith_Input_ContactSortInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_ContactSortInput;
+
+  TRes call({Enum_SortOrder? order, Enum_ContactSortField? field});
+}
+
+class _CopyWithImpl_Input_ContactSortInput<TRes>
+    implements CopyWith_Input_ContactSortInput<TRes> {
+  _CopyWithImpl_Input_ContactSortInput(this._instance, this._then);
+
+  final Input_ContactSortInput _instance;
+
+  final TRes Function(Input_ContactSortInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? order = _undefined, Object? field = _undefined}) => _then(
+    Input_ContactSortInput._({
+      ..._instance._$data,
+      if (order != _undefined) 'order': (order as Enum_SortOrder?),
+      if (field != _undefined && field != null)
+        'field': (field as Enum_ContactSortField),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_ContactSortInput<TRes>
+    implements CopyWith_Input_ContactSortInput<TRes> {
+  _CopyWithStubImpl_Input_ContactSortInput(this._res);
+
+  TRes _res;
+
+  call({Enum_SortOrder? order, Enum_ContactSortField? field}) => _res;
+}
+
+class Input_ClassMembershipFilterClassName {
+  factory Input_ClassMembershipFilterClassName({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -1255,7 +1788,7 @@ class Input_ServiceFilterDefaultMeetingName {
     String? stringStartsWith,
     String? like,
     String? ilike,
-  }) => Input_ServiceFilterDefaultMeetingName._({
+  }) => Input_ClassMembershipFilterClassName._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -1273,9 +1806,9 @@ class Input_ServiceFilterDefaultMeetingName {
     if (ilike != null) r'ilike': ilike,
   });
 
-  Input_ServiceFilterDefaultMeetingName._(this._$data);
+  Input_ClassMembershipFilterClassName._(this._$data);
 
-  factory Input_ServiceFilterDefaultMeetingName.fromJson(
+  factory Input_ClassMembershipFilterClassName.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
@@ -1341,7 +1874,7 @@ class Input_ServiceFilterDefaultMeetingName {
       final l$ilike = data['ilike'];
       result$data['ilike'] = (l$ilike as String?);
     }
-    return Input_ServiceFilterDefaultMeetingName._(result$data);
+    return Input_ClassMembershipFilterClassName._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -1441,18 +1974,17 @@ class Input_ServiceFilterDefaultMeetingName {
     return result$data;
   }
 
-  CopyWith_Input_ServiceFilterDefaultMeetingName<
-    Input_ServiceFilterDefaultMeetingName
+  CopyWith_Input_ClassMembershipFilterClassName<
+    Input_ClassMembershipFilterClassName
   >
-  get copyWith =>
-      CopyWith_Input_ServiceFilterDefaultMeetingName(this, (i) => i);
+  get copyWith => CopyWith_Input_ClassMembershipFilterClassName(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_ServiceFilterDefaultMeetingName ||
+    if (other is! Input_ClassMembershipFilterClassName ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1642,14 +2174,14 @@ class Input_ServiceFilterDefaultMeetingName {
   }
 }
 
-abstract class CopyWith_Input_ServiceFilterDefaultMeetingName<TRes> {
-  factory CopyWith_Input_ServiceFilterDefaultMeetingName(
-    Input_ServiceFilterDefaultMeetingName instance,
-    TRes Function(Input_ServiceFilterDefaultMeetingName) then,
-  ) = _CopyWithImpl_Input_ServiceFilterDefaultMeetingName;
+abstract class CopyWith_Input_ClassMembershipFilterClassName<TRes> {
+  factory CopyWith_Input_ClassMembershipFilterClassName(
+    Input_ClassMembershipFilterClassName instance,
+    TRes Function(Input_ClassMembershipFilterClassName) then,
+  ) = _CopyWithImpl_Input_ClassMembershipFilterClassName;
 
-  factory CopyWith_Input_ServiceFilterDefaultMeetingName.stub(TRes res) =
-      _CopyWithStubImpl_Input_ServiceFilterDefaultMeetingName;
+  factory CopyWith_Input_ClassMembershipFilterClassName.stub(TRes res) =
+      _CopyWithStubImpl_Input_ClassMembershipFilterClassName;
 
   TRes call({
     bool? isNil,
@@ -1670,16 +2202,16 @@ abstract class CopyWith_Input_ServiceFilterDefaultMeetingName<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_ServiceFilterDefaultMeetingName<TRes>
-    implements CopyWith_Input_ServiceFilterDefaultMeetingName<TRes> {
-  _CopyWithImpl_Input_ServiceFilterDefaultMeetingName(
+class _CopyWithImpl_Input_ClassMembershipFilterClassName<TRes>
+    implements CopyWith_Input_ClassMembershipFilterClassName<TRes> {
+  _CopyWithImpl_Input_ClassMembershipFilterClassName(
     this._instance,
     this._then,
   );
 
-  final Input_ServiceFilterDefaultMeetingName _instance;
+  final Input_ClassMembershipFilterClassName _instance;
 
-  final TRes Function(Input_ServiceFilterDefaultMeetingName) _then;
+  final TRes Function(Input_ClassMembershipFilterClassName) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1700,7 +2232,7 @@ class _CopyWithImpl_Input_ServiceFilterDefaultMeetingName<TRes>
     Object? like = _undefined,
     Object? ilike = _undefined,
   }) => _then(
-    Input_ServiceFilterDefaultMeetingName._({
+    Input_ClassMembershipFilterClassName._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as String?),
@@ -1727,9 +2259,9 @@ class _CopyWithImpl_Input_ServiceFilterDefaultMeetingName<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_ServiceFilterDefaultMeetingName<TRes>
-    implements CopyWith_Input_ServiceFilterDefaultMeetingName<TRes> {
-  _CopyWithStubImpl_Input_ServiceFilterDefaultMeetingName(this._res);
+class _CopyWithStubImpl_Input_ClassMembershipFilterClassName<TRes>
+    implements CopyWith_Input_ClassMembershipFilterClassName<TRes> {
+  _CopyWithStubImpl_Input_ClassMembershipFilterClassName(this._res);
 
   TRes _res;
 
@@ -1752,24 +2284,19 @@ class _CopyWithStubImpl_Input_ServiceFilterDefaultMeetingName<TRes>
   }) => _res;
 }
 
-class Input_ServiceFilterNextServiceName {
-  factory Input_ServiceFilterNextServiceName({
+class Input_ClassMembershipFilterPersonId {
+  factory Input_ClassMembershipFilterPersonId({
     bool? isNil,
     String? eq,
     String? notEq,
-    List<String?>? $in,
+    List<String>? $in,
     String? lessThan,
     String? greaterThan,
     String? lessThanOrEqual,
     String? greaterThanOrEqual,
-    String? contains,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
-    String? stringEndsWith,
-    String? stringStartsWith,
-    String? like,
-    String? ilike,
-  }) => Input_ServiceFilterNextServiceName._({
+  }) => Input_ClassMembershipFilterPersonId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -1778,18 +2305,13 @@ class Input_ServiceFilterNextServiceName {
     if (greaterThan != null) r'greaterThan': greaterThan,
     if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
     if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (contains != null) r'contains': contains,
     if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-    if (stringEndsWith != null) r'stringEndsWith': stringEndsWith,
-    if (stringStartsWith != null) r'stringStartsWith': stringStartsWith,
-    if (like != null) r'like': like,
-    if (ilike != null) r'ilike': ilike,
   });
 
-  Input_ServiceFilterNextServiceName._(this._$data);
+  Input_ClassMembershipFilterPersonId._(this._$data);
 
-  factory Input_ServiceFilterNextServiceName.fromJson(
+  factory Input_ClassMembershipFilterPersonId.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
@@ -1808,507 +2330,7 @@ class Input_ServiceFilterNextServiceName {
     if (data.containsKey('in')) {
       final l$$in = data['in'];
       result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as String?))
-          .toList();
-    }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as String?);
-    }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as String?);
-    }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
-    }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
-    }
-    if (data.containsKey('contains')) {
-      final l$contains = data['contains'];
-      result$data['contains'] = (l$contains as String?);
-    }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
-    }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
-    }
-    if (data.containsKey('stringEndsWith')) {
-      final l$stringEndsWith = data['stringEndsWith'];
-      result$data['stringEndsWith'] = (l$stringEndsWith as String?);
-    }
-    if (data.containsKey('stringStartsWith')) {
-      final l$stringStartsWith = data['stringStartsWith'];
-      result$data['stringStartsWith'] = (l$stringStartsWith as String?);
-    }
-    if (data.containsKey('like')) {
-      final l$like = data['like'];
-      result$data['like'] = (l$like as String?);
-    }
-    if (data.containsKey('ilike')) {
-      final l$ilike = data['ilike'];
-      result$data['ilike'] = (l$ilike as String?);
-    }
-    return Input_ServiceFilterNextServiceName._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get isNil => (_$data['isNil'] as bool?);
-
-  String? get eq => (_$data['eq'] as String?);
-
-  String? get notEq => (_$data['notEq'] as String?);
-
-  List<String?>? get $in => (_$data['in'] as List<String?>?);
-
-  String? get lessThan => (_$data['lessThan'] as String?);
-
-  String? get greaterThan => (_$data['greaterThan'] as String?);
-
-  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
-
-  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
-
-  String? get contains => (_$data['contains'] as String?);
-
-  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
-
-  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
-
-  String? get stringEndsWith => (_$data['stringEndsWith'] as String?);
-
-  String? get stringStartsWith => (_$data['stringStartsWith'] as String?);
-
-  String? get like => (_$data['like'] as String?);
-
-  String? get ilike => (_$data['ilike'] as String?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
-    }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq;
-    }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq;
-    }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan;
-    }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan;
-    }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
-    }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
-    }
-    if (_$data.containsKey('contains')) {
-      final l$contains = contains;
-      result$data['contains'] = l$contains;
-    }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom;
-    }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
-    }
-    if (_$data.containsKey('stringEndsWith')) {
-      final l$stringEndsWith = stringEndsWith;
-      result$data['stringEndsWith'] = l$stringEndsWith;
-    }
-    if (_$data.containsKey('stringStartsWith')) {
-      final l$stringStartsWith = stringStartsWith;
-      result$data['stringStartsWith'] = l$stringStartsWith;
-    }
-    if (_$data.containsKey('like')) {
-      final l$like = like;
-      result$data['like'] = l$like;
-    }
-    if (_$data.containsKey('ilike')) {
-      final l$ilike = ilike;
-      result$data['ilike'] = l$ilike;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ServiceFilterNextServiceName<
-    Input_ServiceFilterNextServiceName
-  >
-  get copyWith => CopyWith_Input_ServiceFilterNextServiceName(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ServiceFilterNextServiceName ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
-      return false;
-    }
-    if (l$isNil != lOther$isNil) {
-      return false;
-    }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
-      return false;
-    }
-    if (l$eq != lOther$eq) {
-      return false;
-    }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
-      return false;
-    }
-    if (l$notEq != lOther$notEq) {
-      return false;
-    }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$in != lOther$$in) {
-      return false;
-    }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
-      return false;
-    }
-    if (l$lessThan != lOther$lessThan) {
-      return false;
-    }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
-      return false;
-    }
-    if (l$greaterThan != lOther$greaterThan) {
-      return false;
-    }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
-      return false;
-    }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
-      return false;
-    }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
-      return false;
-    }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
-      return false;
-    }
-    final l$contains = contains;
-    final lOther$contains = other.contains;
-    if (_$data.containsKey('contains') !=
-        other._$data.containsKey('contains')) {
-      return false;
-    }
-    if (l$contains != lOther$contains) {
-      return false;
-    }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
-      return false;
-    }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
-      return false;
-    }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
-      return false;
-    }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
-      return false;
-    }
-    final l$stringEndsWith = stringEndsWith;
-    final lOther$stringEndsWith = other.stringEndsWith;
-    if (_$data.containsKey('stringEndsWith') !=
-        other._$data.containsKey('stringEndsWith')) {
-      return false;
-    }
-    if (l$stringEndsWith != lOther$stringEndsWith) {
-      return false;
-    }
-    final l$stringStartsWith = stringStartsWith;
-    final lOther$stringStartsWith = other.stringStartsWith;
-    if (_$data.containsKey('stringStartsWith') !=
-        other._$data.containsKey('stringStartsWith')) {
-      return false;
-    }
-    if (l$stringStartsWith != lOther$stringStartsWith) {
-      return false;
-    }
-    final l$like = like;
-    final lOther$like = other.like;
-    if (_$data.containsKey('like') != other._$data.containsKey('like')) {
-      return false;
-    }
-    if (l$like != lOther$like) {
-      return false;
-    }
-    final l$ilike = ilike;
-    final lOther$ilike = other.ilike;
-    if (_$data.containsKey('ilike') != other._$data.containsKey('ilike')) {
-      return false;
-    }
-    if (l$ilike != lOther$ilike) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$contains = contains;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final l$stringEndsWith = stringEndsWith;
-    final l$stringStartsWith = stringStartsWith;
-    final l$like = like;
-    final l$ilike = ilike;
-    return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
-                ? null
-                : Object.hashAll(l$$in.map((v) => v))
-          : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
-          : const {},
-      _$data.containsKey('contains') ? l$contains : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-      _$data.containsKey('stringEndsWith') ? l$stringEndsWith : const {},
-      _$data.containsKey('stringStartsWith') ? l$stringStartsWith : const {},
-      _$data.containsKey('like') ? l$like : const {},
-      _$data.containsKey('ilike') ? l$ilike : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ServiceFilterNextServiceName<TRes> {
-  factory CopyWith_Input_ServiceFilterNextServiceName(
-    Input_ServiceFilterNextServiceName instance,
-    TRes Function(Input_ServiceFilterNextServiceName) then,
-  ) = _CopyWithImpl_Input_ServiceFilterNextServiceName;
-
-  factory CopyWith_Input_ServiceFilterNextServiceName.stub(TRes res) =
-      _CopyWithStubImpl_Input_ServiceFilterNextServiceName;
-
-  TRes call({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? contains,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-    String? stringEndsWith,
-    String? stringStartsWith,
-    String? like,
-    String? ilike,
-  });
-}
-
-class _CopyWithImpl_Input_ServiceFilterNextServiceName<TRes>
-    implements CopyWith_Input_ServiceFilterNextServiceName<TRes> {
-  _CopyWithImpl_Input_ServiceFilterNextServiceName(this._instance, this._then);
-
-  final Input_ServiceFilterNextServiceName _instance;
-
-  final TRes Function(Input_ServiceFilterNextServiceName) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? contains = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
-    Object? stringEndsWith = _undefined,
-    Object? stringStartsWith = _undefined,
-    Object? like = _undefined,
-    Object? ilike = _undefined,
-  }) => _then(
-    Input_ServiceFilterNextServiceName._({
-      ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as String?),
-      if (notEq != _undefined) 'notEq': (notEq as String?),
-      if ($in != _undefined) 'in': ($in as List<String?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as String?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as String?),
-      if (contains != _undefined) 'contains': (contains as String?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as String?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as String?),
-      if (stringEndsWith != _undefined)
-        'stringEndsWith': (stringEndsWith as String?),
-      if (stringStartsWith != _undefined)
-        'stringStartsWith': (stringStartsWith as String?),
-      if (like != _undefined) 'like': (like as String?),
-      if (ilike != _undefined) 'ilike': (ilike as String?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_ServiceFilterNextServiceName<TRes>
-    implements CopyWith_Input_ServiceFilterNextServiceName<TRes> {
-  _CopyWithStubImpl_Input_ServiceFilterNextServiceName(this._res);
-
-  TRes _res;
-
-  call({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? contains,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-    String? stringEndsWith,
-    String? stringStartsWith,
-    String? like,
-    String? ilike,
-  }) => _res;
-}
-
-class Input_ServiceFilterDefaultMeetingId {
-  factory Input_ServiceFilterDefaultMeetingId({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  }) => Input_ServiceFilterDefaultMeetingId._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-  });
-
-  Input_ServiceFilterDefaultMeetingId._(this._$data);
-
-  factory Input_ServiceFilterDefaultMeetingId.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as String?);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as String?);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as String?))
+          ?.map((e) => (e as String))
           .toList();
     }
     if (data.containsKey('lessThan')) {
@@ -2335,7 +2357,7 @@ class Input_ServiceFilterDefaultMeetingId {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
       result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_ServiceFilterDefaultMeetingId._(result$data);
+    return Input_ClassMembershipFilterPersonId._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -2346,7 +2368,7 @@ class Input_ServiceFilterDefaultMeetingId {
 
   String? get notEq => (_$data['notEq'] as String?);
 
-  List<String?>? get $in => (_$data['in'] as List<String?>?);
+  List<String>? get $in => (_$data['in'] as List<String>?);
 
   String? get lessThan => (_$data['lessThan'] as String?);
 
@@ -2405,17 +2427,17 @@ class Input_ServiceFilterDefaultMeetingId {
     return result$data;
   }
 
-  CopyWith_Input_ServiceFilterDefaultMeetingId<
-    Input_ServiceFilterDefaultMeetingId
+  CopyWith_Input_ClassMembershipFilterPersonId<
+    Input_ClassMembershipFilterPersonId
   >
-  get copyWith => CopyWith_Input_ServiceFilterDefaultMeetingId(this, (i) => i);
+  get copyWith => CopyWith_Input_ClassMembershipFilterPersonId(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_ServiceFilterDefaultMeetingId ||
+    if (other is! Input_ClassMembershipFilterPersonId ||
         runtimeType != other.runtimeType) {
       return false;
     }

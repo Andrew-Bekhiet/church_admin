@@ -230,6 +230,8 @@ defmodule ChurchAdmin.Places.Street do
 
   aggregates do
     first :last_edit, :latest_edit, :time, public?: true
+    first :last_edit_user_name, [:latest_edit, :user], :name, public?: true
     first :last_visit, :latest_visit, :time, public?: true
+    first :last_visit_user_name, [:latest_visit, :user], :name, public?: true
   end
 end

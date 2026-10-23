@@ -1,36 +1,36 @@
 // Part 14 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_PersonFilterStateId<TRes> {
-  factory CopyWith_Input_PersonFilterStateId(
-    Input_PersonFilterStateId instance,
-    TRes Function(Input_PersonFilterStateId) then,
-  ) = _CopyWithImpl_Input_PersonFilterStateId;
+abstract class CopyWith_Input_PersonFilterColor<TRes> {
+  factory CopyWith_Input_PersonFilterColor(
+    Input_PersonFilterColor instance,
+    TRes Function(Input_PersonFilterColor) then,
+  ) = _CopyWithImpl_Input_PersonFilterColor;
 
-  factory CopyWith_Input_PersonFilterStateId.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonFilterStateId;
+  factory CopyWith_Input_PersonFilterColor.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonFilterColor;
 
   TRes call({
     bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
+    int? eq,
+    int? notEq,
+    List<int?>? $in,
+    int? lessThan,
+    int? greaterThan,
+    int? lessThanOrEqual,
+    int? greaterThanOrEqual,
+    int? isDistinctFrom,
+    int? isNotDistinctFrom,
   });
 }
 
-class _CopyWithImpl_Input_PersonFilterStateId<TRes>
-    implements CopyWith_Input_PersonFilterStateId<TRes> {
-  _CopyWithImpl_Input_PersonFilterStateId(this._instance, this._then);
+class _CopyWithImpl_Input_PersonFilterColor<TRes>
+    implements CopyWith_Input_PersonFilterColor<TRes> {
+  _CopyWithImpl_Input_PersonFilterColor(this._instance, this._then);
 
-  final Input_PersonFilterStateId _instance;
+  final Input_PersonFilterColor _instance;
 
-  final TRes Function(Input_PersonFilterStateId) _then;
+  final TRes Function(Input_PersonFilterColor) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -46,59 +46,59 @@ class _CopyWithImpl_Input_PersonFilterStateId<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_PersonFilterStateId._({
+    Input_PersonFilterColor._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as String?),
-      if (notEq != _undefined) 'notEq': (notEq as String?),
-      if ($in != _undefined) 'in': ($in as List<String?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (eq != _undefined) 'eq': (eq as int?),
+      if (notEq != _undefined) 'notEq': (notEq as int?),
+      if ($in != _undefined) 'in': ($in as List<int?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as int?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as int?),
       if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as String?),
+        'lessThanOrEqual': (lessThanOrEqual as int?),
       if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+        'greaterThanOrEqual': (greaterThanOrEqual as int?),
       if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as String?),
+        'isDistinctFrom': (isDistinctFrom as int?),
       if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+        'isNotDistinctFrom': (isNotDistinctFrom as int?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_PersonFilterStateId<TRes>
-    implements CopyWith_Input_PersonFilterStateId<TRes> {
-  _CopyWithStubImpl_Input_PersonFilterStateId(this._res);
+class _CopyWithStubImpl_Input_PersonFilterColor<TRes>
+    implements CopyWith_Input_PersonFilterColor<TRes> {
+  _CopyWithStubImpl_Input_PersonFilterColor(this._res);
 
   TRes _res;
 
   call({
     bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
+    int? eq,
+    int? notEq,
+    List<int?>? $in,
+    int? lessThan,
+    int? greaterThan,
+    int? lessThanOrEqual,
+    int? greaterThanOrEqual,
+    int? isDistinctFrom,
+    int? isNotDistinctFrom,
   }) => _res;
 }
 
-class Input_PersonFilterPersonTypeId {
-  factory Input_PersonFilterPersonTypeId({
+class Input_PersonFilterStudyYearId {
+  factory Input_PersonFilterStudyYearId({
     bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  }) => Input_PersonFilterPersonTypeId._({
+    int? eq,
+    int? notEq,
+    List<int?>? $in,
+    int? lessThan,
+    int? greaterThan,
+    int? lessThanOrEqual,
+    int? greaterThanOrEqual,
+    int? isDistinctFrom,
+    int? isNotDistinctFrom,
+  }) => Input_PersonFilterStudyYearId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -111,9 +111,9 @@ class Input_PersonFilterPersonTypeId {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_PersonFilterPersonTypeId._(this._$data);
+  Input_PersonFilterStudyYearId._(this._$data);
 
-  factory Input_PersonFilterPersonTypeId.fromJson(Map<String, dynamic> data) {
+  factory Input_PersonFilterStudyYearId.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -121,66 +121,66 @@ class Input_PersonFilterPersonTypeId {
     }
     if (data.containsKey('eq')) {
       final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as String?);
+      result$data['eq'] = (l$eq as int?);
     }
     if (data.containsKey('notEq')) {
       final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as String?);
+      result$data['notEq'] = (l$notEq as int?);
     }
     if (data.containsKey('in')) {
       final l$$in = data['in'];
       result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as String?))
+          ?.map((e) => (e as int?))
           .toList();
     }
     if (data.containsKey('lessThan')) {
       final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as String?);
+      result$data['lessThan'] = (l$lessThan as int?);
     }
     if (data.containsKey('greaterThan')) {
       final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as String?);
+      result$data['greaterThan'] = (l$greaterThan as int?);
     }
     if (data.containsKey('lessThanOrEqual')) {
       final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as int?);
     }
     if (data.containsKey('greaterThanOrEqual')) {
       final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as int?);
     }
     if (data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as int?);
     }
     if (data.containsKey('isNotDistinctFrom')) {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as int?);
     }
-    return Input_PersonFilterPersonTypeId._(result$data);
+    return Input_PersonFilterStudyYearId._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   bool? get isNil => (_$data['isNil'] as bool?);
 
-  String? get eq => (_$data['eq'] as String?);
+  int? get eq => (_$data['eq'] as int?);
 
-  String? get notEq => (_$data['notEq'] as String?);
+  int? get notEq => (_$data['notEq'] as int?);
 
-  List<String?>? get $in => (_$data['in'] as List<String?>?);
+  List<int?>? get $in => (_$data['in'] as List<int?>?);
 
-  String? get lessThan => (_$data['lessThan'] as String?);
+  int? get lessThan => (_$data['lessThan'] as int?);
 
-  String? get greaterThan => (_$data['greaterThan'] as String?);
+  int? get greaterThan => (_$data['greaterThan'] as int?);
 
-  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+  int? get lessThanOrEqual => (_$data['lessThanOrEqual'] as int?);
 
-  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+  int? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as int?);
 
-  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+  int? get isDistinctFrom => (_$data['isDistinctFrom'] as int?);
 
-  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+  int? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as int?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -227,15 +227,15 @@ class Input_PersonFilterPersonTypeId {
     return result$data;
   }
 
-  CopyWith_Input_PersonFilterPersonTypeId<Input_PersonFilterPersonTypeId>
-  get copyWith => CopyWith_Input_PersonFilterPersonTypeId(this, (i) => i);
+  CopyWith_Input_PersonFilterStudyYearId<Input_PersonFilterStudyYearId>
+  get copyWith => CopyWith_Input_PersonFilterStudyYearId(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_PersonFilterPersonTypeId ||
+    if (other is! Input_PersonFilterStudyYearId ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -372,36 +372,36 @@ class Input_PersonFilterPersonTypeId {
   }
 }
 
-abstract class CopyWith_Input_PersonFilterPersonTypeId<TRes> {
-  factory CopyWith_Input_PersonFilterPersonTypeId(
-    Input_PersonFilterPersonTypeId instance,
-    TRes Function(Input_PersonFilterPersonTypeId) then,
-  ) = _CopyWithImpl_Input_PersonFilterPersonTypeId;
+abstract class CopyWith_Input_PersonFilterStudyYearId<TRes> {
+  factory CopyWith_Input_PersonFilterStudyYearId(
+    Input_PersonFilterStudyYearId instance,
+    TRes Function(Input_PersonFilterStudyYearId) then,
+  ) = _CopyWithImpl_Input_PersonFilterStudyYearId;
 
-  factory CopyWith_Input_PersonFilterPersonTypeId.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonFilterPersonTypeId;
+  factory CopyWith_Input_PersonFilterStudyYearId.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonFilterStudyYearId;
 
   TRes call({
     bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
+    int? eq,
+    int? notEq,
+    List<int?>? $in,
+    int? lessThan,
+    int? greaterThan,
+    int? lessThanOrEqual,
+    int? greaterThanOrEqual,
+    int? isDistinctFrom,
+    int? isNotDistinctFrom,
   });
 }
 
-class _CopyWithImpl_Input_PersonFilterPersonTypeId<TRes>
-    implements CopyWith_Input_PersonFilterPersonTypeId<TRes> {
-  _CopyWithImpl_Input_PersonFilterPersonTypeId(this._instance, this._then);
+class _CopyWithImpl_Input_PersonFilterStudyYearId<TRes>
+    implements CopyWith_Input_PersonFilterStudyYearId<TRes> {
+  _CopyWithImpl_Input_PersonFilterStudyYearId(this._instance, this._then);
 
-  final Input_PersonFilterPersonTypeId _instance;
+  final Input_PersonFilterStudyYearId _instance;
 
-  final TRes Function(Input_PersonFilterPersonTypeId) _then;
+  final TRes Function(Input_PersonFilterStudyYearId) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -417,48 +417,48 @@ class _CopyWithImpl_Input_PersonFilterPersonTypeId<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_PersonFilterPersonTypeId._({
+    Input_PersonFilterStudyYearId._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as String?),
-      if (notEq != _undefined) 'notEq': (notEq as String?),
-      if ($in != _undefined) 'in': ($in as List<String?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (eq != _undefined) 'eq': (eq as int?),
+      if (notEq != _undefined) 'notEq': (notEq as int?),
+      if ($in != _undefined) 'in': ($in as List<int?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as int?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as int?),
       if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as String?),
+        'lessThanOrEqual': (lessThanOrEqual as int?),
       if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+        'greaterThanOrEqual': (greaterThanOrEqual as int?),
       if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as String?),
+        'isDistinctFrom': (isDistinctFrom as int?),
       if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+        'isNotDistinctFrom': (isNotDistinctFrom as int?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_PersonFilterPersonTypeId<TRes>
-    implements CopyWith_Input_PersonFilterPersonTypeId<TRes> {
-  _CopyWithStubImpl_Input_PersonFilterPersonTypeId(this._res);
+class _CopyWithStubImpl_Input_PersonFilterStudyYearId<TRes>
+    implements CopyWith_Input_PersonFilterStudyYearId<TRes> {
+  _CopyWithStubImpl_Input_PersonFilterStudyYearId(this._res);
 
   TRes _res;
 
   call({
     bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
+    int? eq,
+    int? notEq,
+    List<int?>? $in,
+    int? lessThan,
+    int? greaterThan,
+    int? lessThanOrEqual,
+    int? greaterThanOrEqual,
+    int? isDistinctFrom,
+    int? isNotDistinctFrom,
   }) => _res;
 }
 
-class Input_PersonFilterQualificationId {
-  factory Input_PersonFilterQualificationId({
+class Input_PersonFilterStoreId {
+  factory Input_PersonFilterStoreId({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -469,7 +469,7 @@ class Input_PersonFilterQualificationId {
     String? greaterThanOrEqual,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
-  }) => Input_PersonFilterQualificationId._({
+  }) => Input_PersonFilterStoreId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -482,11 +482,9 @@ class Input_PersonFilterQualificationId {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_PersonFilterQualificationId._(this._$data);
+  Input_PersonFilterStoreId._(this._$data);
 
-  factory Input_PersonFilterQualificationId.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Input_PersonFilterStoreId.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -530,7 +528,7 @@ class Input_PersonFilterQualificationId {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
       result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_PersonFilterQualificationId._(result$data);
+    return Input_PersonFilterStoreId._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -600,15 +598,15 @@ class Input_PersonFilterQualificationId {
     return result$data;
   }
 
-  CopyWith_Input_PersonFilterQualificationId<Input_PersonFilterQualificationId>
-  get copyWith => CopyWith_Input_PersonFilterQualificationId(this, (i) => i);
+  CopyWith_Input_PersonFilterStoreId<Input_PersonFilterStoreId> get copyWith =>
+      CopyWith_Input_PersonFilterStoreId(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_PersonFilterQualificationId ||
+    if (other is! Input_PersonFilterStoreId ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -745,14 +743,14 @@ class Input_PersonFilterQualificationId {
   }
 }
 
-abstract class CopyWith_Input_PersonFilterQualificationId<TRes> {
-  factory CopyWith_Input_PersonFilterQualificationId(
-    Input_PersonFilterQualificationId instance,
-    TRes Function(Input_PersonFilterQualificationId) then,
-  ) = _CopyWithImpl_Input_PersonFilterQualificationId;
+abstract class CopyWith_Input_PersonFilterStoreId<TRes> {
+  factory CopyWith_Input_PersonFilterStoreId(
+    Input_PersonFilterStoreId instance,
+    TRes Function(Input_PersonFilterStoreId) then,
+  ) = _CopyWithImpl_Input_PersonFilterStoreId;
 
-  factory CopyWith_Input_PersonFilterQualificationId.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonFilterQualificationId;
+  factory CopyWith_Input_PersonFilterStoreId.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonFilterStoreId;
 
   TRes call({
     bool? isNil,
@@ -768,13 +766,13 @@ abstract class CopyWith_Input_PersonFilterQualificationId<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_PersonFilterQualificationId<TRes>
-    implements CopyWith_Input_PersonFilterQualificationId<TRes> {
-  _CopyWithImpl_Input_PersonFilterQualificationId(this._instance, this._then);
+class _CopyWithImpl_Input_PersonFilterStoreId<TRes>
+    implements CopyWith_Input_PersonFilterStoreId<TRes> {
+  _CopyWithImpl_Input_PersonFilterStoreId(this._instance, this._then);
 
-  final Input_PersonFilterQualificationId _instance;
+  final Input_PersonFilterStoreId _instance;
 
-  final TRes Function(Input_PersonFilterQualificationId) _then;
+  final TRes Function(Input_PersonFilterStoreId) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -790,7 +788,7 @@ class _CopyWithImpl_Input_PersonFilterQualificationId<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_PersonFilterQualificationId._({
+    Input_PersonFilterStoreId._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as String?),
@@ -810,9 +808,9 @@ class _CopyWithImpl_Input_PersonFilterQualificationId<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_PersonFilterQualificationId<TRes>
-    implements CopyWith_Input_PersonFilterQualificationId<TRes> {
-  _CopyWithStubImpl_Input_PersonFilterQualificationId(this._res);
+class _CopyWithStubImpl_Input_PersonFilterStoreId<TRes>
+    implements CopyWith_Input_PersonFilterStoreId<TRes> {
+  _CopyWithStubImpl_Input_PersonFilterStoreId(this._res);
 
   TRes _res;
 
@@ -830,8 +828,749 @@ class _CopyWithStubImpl_Input_PersonFilterQualificationId<TRes>
   }) => _res;
 }
 
-class Input_PersonFilterJobDescription {
-  factory Input_PersonFilterJobDescription({
+class Input_PersonFilterFamilyId {
+  factory Input_PersonFilterFamilyId({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_PersonFilterFamilyId._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_PersonFilterFamilyId._(this._$data);
+
+  factory Input_PersonFilterFamilyId.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    return Input_PersonFilterFamilyId._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String?>? get $in => (_$data['in'] as List<String?>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_PersonFilterFamilyId<Input_PersonFilterFamilyId>
+  get copyWith => CopyWith_Input_PersonFilterFamilyId(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonFilterFamilyId ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_PersonFilterFamilyId<TRes> {
+  factory CopyWith_Input_PersonFilterFamilyId(
+    Input_PersonFilterFamilyId instance,
+    TRes Function(Input_PersonFilterFamilyId) then,
+  ) = _CopyWithImpl_Input_PersonFilterFamilyId;
+
+  factory CopyWith_Input_PersonFilterFamilyId.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonFilterFamilyId;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_PersonFilterFamilyId<TRes>
+    implements CopyWith_Input_PersonFilterFamilyId<TRes> {
+  _CopyWithImpl_Input_PersonFilterFamilyId(this._instance, this._then);
+
+  final Input_PersonFilterFamilyId _instance;
+
+  final TRes Function(Input_PersonFilterFamilyId) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_PersonFilterFamilyId._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_PersonFilterFamilyId<TRes>
+    implements CopyWith_Input_PersonFilterFamilyId<TRes> {
+  _CopyWithStubImpl_Input_PersonFilterFamilyId(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_PersonFilterUid {
+  factory Input_PersonFilterUid({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_PersonFilterUid._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_PersonFilterUid._(this._$data);
+
+  factory Input_PersonFilterUid.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    return Input_PersonFilterUid._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String?>? get $in => (_$data['in'] as List<String?>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_PersonFilterUid<Input_PersonFilterUid> get copyWith =>
+      CopyWith_Input_PersonFilterUid(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_PersonFilterUid || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_PersonFilterUid<TRes> {
+  factory CopyWith_Input_PersonFilterUid(
+    Input_PersonFilterUid instance,
+    TRes Function(Input_PersonFilterUid) then,
+  ) = _CopyWithImpl_Input_PersonFilterUid;
+
+  factory CopyWith_Input_PersonFilterUid.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonFilterUid;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_PersonFilterUid<TRes>
+    implements CopyWith_Input_PersonFilterUid<TRes> {
+  _CopyWithImpl_Input_PersonFilterUid(this._instance, this._then);
+
+  final Input_PersonFilterUid _instance;
+
+  final TRes Function(Input_PersonFilterUid) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_PersonFilterUid._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_PersonFilterUid<TRes>
+    implements CopyWith_Input_PersonFilterUid<TRes> {
+  _CopyWithStubImpl_Input_PersonFilterUid(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_PersonFilterNotes {
+  factory Input_PersonFilterNotes({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -847,7 +1586,7 @@ class Input_PersonFilterJobDescription {
     String? stringStartsWith,
     String? like,
     String? ilike,
-  }) => Input_PersonFilterJobDescription._({
+  }) => Input_PersonFilterNotes._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -865,9 +1604,9 @@ class Input_PersonFilterJobDescription {
     if (ilike != null) r'ilike': ilike,
   });
 
-  Input_PersonFilterJobDescription._(this._$data);
+  Input_PersonFilterNotes._(this._$data);
 
-  factory Input_PersonFilterJobDescription.fromJson(Map<String, dynamic> data) {
+  factory Input_PersonFilterNotes.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -931,7 +1670,7 @@ class Input_PersonFilterJobDescription {
       final l$ilike = data['ilike'];
       result$data['ilike'] = (l$ilike as String?);
     }
-    return Input_PersonFilterJobDescription._(result$data);
+    return Input_PersonFilterNotes._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -1031,16 +1770,15 @@ class Input_PersonFilterJobDescription {
     return result$data;
   }
 
-  CopyWith_Input_PersonFilterJobDescription<Input_PersonFilterJobDescription>
-  get copyWith => CopyWith_Input_PersonFilterJobDescription(this, (i) => i);
+  CopyWith_Input_PersonFilterNotes<Input_PersonFilterNotes> get copyWith =>
+      CopyWith_Input_PersonFilterNotes(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_PersonFilterJobDescription ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_PersonFilterNotes || runtimeType != other.runtimeType) {
       return false;
     }
     final l$isNil = isNil;
@@ -1229,14 +1967,14 @@ class Input_PersonFilterJobDescription {
   }
 }
 
-abstract class CopyWith_Input_PersonFilterJobDescription<TRes> {
-  factory CopyWith_Input_PersonFilterJobDescription(
-    Input_PersonFilterJobDescription instance,
-    TRes Function(Input_PersonFilterJobDescription) then,
-  ) = _CopyWithImpl_Input_PersonFilterJobDescription;
+abstract class CopyWith_Input_PersonFilterNotes<TRes> {
+  factory CopyWith_Input_PersonFilterNotes(
+    Input_PersonFilterNotes instance,
+    TRes Function(Input_PersonFilterNotes) then,
+  ) = _CopyWithImpl_Input_PersonFilterNotes;
 
-  factory CopyWith_Input_PersonFilterJobDescription.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonFilterJobDescription;
+  factory CopyWith_Input_PersonFilterNotes.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonFilterNotes;
 
   TRes call({
     bool? isNil,
@@ -1257,13 +1995,13 @@ abstract class CopyWith_Input_PersonFilterJobDescription<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_PersonFilterJobDescription<TRes>
-    implements CopyWith_Input_PersonFilterJobDescription<TRes> {
-  _CopyWithImpl_Input_PersonFilterJobDescription(this._instance, this._then);
+class _CopyWithImpl_Input_PersonFilterNotes<TRes>
+    implements CopyWith_Input_PersonFilterNotes<TRes> {
+  _CopyWithImpl_Input_PersonFilterNotes(this._instance, this._then);
 
-  final Input_PersonFilterJobDescription _instance;
+  final Input_PersonFilterNotes _instance;
 
-  final TRes Function(Input_PersonFilterJobDescription) _then;
+  final TRes Function(Input_PersonFilterNotes) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1284,7 +2022,7 @@ class _CopyWithImpl_Input_PersonFilterJobDescription<TRes>
     Object? like = _undefined,
     Object? ilike = _undefined,
   }) => _then(
-    Input_PersonFilterJobDescription._({
+    Input_PersonFilterNotes._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as String?),
@@ -1311,9 +2049,9 @@ class _CopyWithImpl_Input_PersonFilterJobDescription<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_PersonFilterJobDescription<TRes>
-    implements CopyWith_Input_PersonFilterJobDescription<TRes> {
-  _CopyWithStubImpl_Input_PersonFilterJobDescription(this._res);
+class _CopyWithStubImpl_Input_PersonFilterNotes<TRes>
+    implements CopyWith_Input_PersonFilterNotes<TRes> {
+  _CopyWithStubImpl_Input_PersonFilterNotes(this._res);
 
   TRes _res;
 
@@ -1336,389 +2074,19 @@ class _CopyWithStubImpl_Input_PersonFilterJobDescription<TRes>
   }) => _res;
 }
 
-class Input_PersonFilterJobId {
-  factory Input_PersonFilterJobId({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  }) => Input_PersonFilterJobId._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-  });
-
-  Input_PersonFilterJobId._(this._$data);
-
-  factory Input_PersonFilterJobId.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as String?);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as String?);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as String?))
-          .toList();
-    }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as String?);
-    }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as String?);
-    }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
-    }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
-    }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
-    }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
-    }
-    return Input_PersonFilterJobId._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get isNil => (_$data['isNil'] as bool?);
-
-  String? get eq => (_$data['eq'] as String?);
-
-  String? get notEq => (_$data['notEq'] as String?);
-
-  List<String?>? get $in => (_$data['in'] as List<String?>?);
-
-  String? get lessThan => (_$data['lessThan'] as String?);
-
-  String? get greaterThan => (_$data['greaterThan'] as String?);
-
-  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
-
-  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
-
-  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
-
-  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
-    }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq;
-    }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq;
-    }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan;
-    }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan;
-    }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
-    }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
-    }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom;
-    }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_PersonFilterJobId<Input_PersonFilterJobId> get copyWith =>
-      CopyWith_Input_PersonFilterJobId(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_PersonFilterJobId || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
-      return false;
-    }
-    if (l$isNil != lOther$isNil) {
-      return false;
-    }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
-      return false;
-    }
-    if (l$eq != lOther$eq) {
-      return false;
-    }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
-      return false;
-    }
-    if (l$notEq != lOther$notEq) {
-      return false;
-    }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$in != lOther$$in) {
-      return false;
-    }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
-      return false;
-    }
-    if (l$lessThan != lOther$lessThan) {
-      return false;
-    }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
-      return false;
-    }
-    if (l$greaterThan != lOther$greaterThan) {
-      return false;
-    }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
-      return false;
-    }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
-      return false;
-    }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
-      return false;
-    }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
-      return false;
-    }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
-      return false;
-    }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
-      return false;
-    }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
-      return false;
-    }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
-                ? null
-                : Object.hashAll(l$$in.map((v) => v))
-          : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
-          : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_PersonFilterJobId<TRes> {
-  factory CopyWith_Input_PersonFilterJobId(
-    Input_PersonFilterJobId instance,
-    TRes Function(Input_PersonFilterJobId) then,
-  ) = _CopyWithImpl_Input_PersonFilterJobId;
-
-  factory CopyWith_Input_PersonFilterJobId.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonFilterJobId;
-
-  TRes call({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  });
-}
-
-class _CopyWithImpl_Input_PersonFilterJobId<TRes>
-    implements CopyWith_Input_PersonFilterJobId<TRes> {
-  _CopyWithImpl_Input_PersonFilterJobId(this._instance, this._then);
-
-  final Input_PersonFilterJobId _instance;
-
-  final TRes Function(Input_PersonFilterJobId) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
-  }) => _then(
-    Input_PersonFilterJobId._({
-      ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as String?),
-      if (notEq != _undefined) 'notEq': (notEq as String?),
-      if ($in != _undefined) 'in': ($in as List<String?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as String?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as String?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as String?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as String?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_PersonFilterJobId<TRes>
-    implements CopyWith_Input_PersonFilterJobId<TRes> {
-  _CopyWithStubImpl_Input_PersonFilterJobId(this._res);
-
-  TRes _res;
-
-  call({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  }) => _res;
-}
-
-class Input_PersonFilterIsStudent {
-  factory Input_PersonFilterIsStudent({
+class Input_PersonFilterIsServant {
+  factory Input_PersonFilterIsServant({
     bool? isNil,
     bool? eq,
     bool? notEq,
-    List<bool?>? $in,
+    List<bool>? $in,
     bool? lessThan,
     bool? greaterThan,
     bool? lessThanOrEqual,
     bool? greaterThanOrEqual,
     bool? isDistinctFrom,
     bool? isNotDistinctFrom,
-  }) => Input_PersonFilterIsStudent._({
+  }) => Input_PersonFilterIsServant._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -1731,9 +2099,9 @@ class Input_PersonFilterIsStudent {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_PersonFilterIsStudent._(this._$data);
+  Input_PersonFilterIsServant._(this._$data);
 
-  factory Input_PersonFilterIsStudent.fromJson(Map<String, dynamic> data) {
+  factory Input_PersonFilterIsServant.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -1750,7 +2118,7 @@ class Input_PersonFilterIsStudent {
     if (data.containsKey('in')) {
       final l$$in = data['in'];
       result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as bool?))
+          ?.map((e) => (e as bool))
           .toList();
     }
     if (data.containsKey('lessThan')) {
@@ -1777,7 +2145,7 @@ class Input_PersonFilterIsStudent {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
       result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as bool?);
     }
-    return Input_PersonFilterIsStudent._(result$data);
+    return Input_PersonFilterIsServant._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -1788,7 +2156,7 @@ class Input_PersonFilterIsStudent {
 
   bool? get notEq => (_$data['notEq'] as bool?);
 
-  List<bool?>? get $in => (_$data['in'] as List<bool?>?);
+  List<bool>? get $in => (_$data['in'] as List<bool>?);
 
   bool? get lessThan => (_$data['lessThan'] as bool?);
 
@@ -1847,15 +2215,15 @@ class Input_PersonFilterIsStudent {
     return result$data;
   }
 
-  CopyWith_Input_PersonFilterIsStudent<Input_PersonFilterIsStudent>
-  get copyWith => CopyWith_Input_PersonFilterIsStudent(this, (i) => i);
+  CopyWith_Input_PersonFilterIsServant<Input_PersonFilterIsServant>
+  get copyWith => CopyWith_Input_PersonFilterIsServant(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_PersonFilterIsStudent ||
+    if (other is! Input_PersonFilterIsServant ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1992,20 +2360,20 @@ class Input_PersonFilterIsStudent {
   }
 }
 
-abstract class CopyWith_Input_PersonFilterIsStudent<TRes> {
-  factory CopyWith_Input_PersonFilterIsStudent(
-    Input_PersonFilterIsStudent instance,
-    TRes Function(Input_PersonFilterIsStudent) then,
-  ) = _CopyWithImpl_Input_PersonFilterIsStudent;
+abstract class CopyWith_Input_PersonFilterIsServant<TRes> {
+  factory CopyWith_Input_PersonFilterIsServant(
+    Input_PersonFilterIsServant instance,
+    TRes Function(Input_PersonFilterIsServant) then,
+  ) = _CopyWithImpl_Input_PersonFilterIsServant;
 
-  factory CopyWith_Input_PersonFilterIsStudent.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonFilterIsStudent;
+  factory CopyWith_Input_PersonFilterIsServant.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonFilterIsServant;
 
   TRes call({
     bool? isNil,
     bool? eq,
     bool? notEq,
-    List<bool?>? $in,
+    List<bool>? $in,
     bool? lessThan,
     bool? greaterThan,
     bool? lessThanOrEqual,
@@ -2015,13 +2383,13 @@ abstract class CopyWith_Input_PersonFilterIsStudent<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_PersonFilterIsStudent<TRes>
-    implements CopyWith_Input_PersonFilterIsStudent<TRes> {
-  _CopyWithImpl_Input_PersonFilterIsStudent(this._instance, this._then);
+class _CopyWithImpl_Input_PersonFilterIsServant<TRes>
+    implements CopyWith_Input_PersonFilterIsServant<TRes> {
+  _CopyWithImpl_Input_PersonFilterIsServant(this._instance, this._then);
 
-  final Input_PersonFilterIsStudent _instance;
+  final Input_PersonFilterIsServant _instance;
 
-  final TRes Function(Input_PersonFilterIsStudent) _then;
+  final TRes Function(Input_PersonFilterIsServant) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2037,12 +2405,12 @@ class _CopyWithImpl_Input_PersonFilterIsStudent<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_PersonFilterIsStudent._({
+    Input_PersonFilterIsServant._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as bool?),
       if (notEq != _undefined) 'notEq': (notEq as bool?),
-      if ($in != _undefined) 'in': ($in as List<bool?>?),
+      if ($in != _undefined) 'in': ($in as List<bool>?),
       if (lessThan != _undefined) 'lessThan': (lessThan as bool?),
       if (greaterThan != _undefined) 'greaterThan': (greaterThan as bool?),
       if (lessThanOrEqual != _undefined)
@@ -2057,9 +2425,9 @@ class _CopyWithImpl_Input_PersonFilterIsStudent<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_PersonFilterIsStudent<TRes>
-    implements CopyWith_Input_PersonFilterIsStudent<TRes> {
-  _CopyWithStubImpl_Input_PersonFilterIsStudent(this._res);
+class _CopyWithStubImpl_Input_PersonFilterIsServant<TRes>
+    implements CopyWith_Input_PersonFilterIsServant<TRes> {
+  _CopyWithStubImpl_Input_PersonFilterIsServant(this._res);
 
   TRes _res;
 
@@ -2067,7 +2435,7 @@ class _CopyWithStubImpl_Input_PersonFilterIsStudent<TRes>
     bool? isNil,
     bool? eq,
     bool? notEq,
-    List<bool?>? $in,
+    List<bool>? $in,
     bool? lessThan,
     bool? greaterThan,
     bool? lessThanOrEqual,
@@ -2077,8 +2445,8 @@ class _CopyWithStubImpl_Input_PersonFilterIsStudent<TRes>
   }) => _res;
 }
 
-class Input_PersonFilterFatherId {
-  factory Input_PersonFilterFatherId({
+class Input_PersonFilterStateId {
+  factory Input_PersonFilterStateId({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -2089,7 +2457,7 @@ class Input_PersonFilterFatherId {
     String? greaterThanOrEqual,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
-  }) => Input_PersonFilterFatherId._({
+  }) => Input_PersonFilterStateId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -2102,9 +2470,9 @@ class Input_PersonFilterFatherId {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_PersonFilterFatherId._(this._$data);
+  Input_PersonFilterStateId._(this._$data);
 
-  factory Input_PersonFilterFatherId.fromJson(Map<String, dynamic> data) {
+  factory Input_PersonFilterStateId.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -2148,7 +2516,7 @@ class Input_PersonFilterFatherId {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
       result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_PersonFilterFatherId._(result$data);
+    return Input_PersonFilterStateId._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -2218,386 +2586,15 @@ class Input_PersonFilterFatherId {
     return result$data;
   }
 
-  CopyWith_Input_PersonFilterFatherId<Input_PersonFilterFatherId>
-  get copyWith => CopyWith_Input_PersonFilterFatherId(this, (i) => i);
+  CopyWith_Input_PersonFilterStateId<Input_PersonFilterStateId> get copyWith =>
+      CopyWith_Input_PersonFilterStateId(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_PersonFilterFatherId ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
-      return false;
-    }
-    if (l$isNil != lOther$isNil) {
-      return false;
-    }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
-      return false;
-    }
-    if (l$eq != lOther$eq) {
-      return false;
-    }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
-      return false;
-    }
-    if (l$notEq != lOther$notEq) {
-      return false;
-    }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$in != lOther$$in) {
-      return false;
-    }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
-      return false;
-    }
-    if (l$lessThan != lOther$lessThan) {
-      return false;
-    }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
-      return false;
-    }
-    if (l$greaterThan != lOther$greaterThan) {
-      return false;
-    }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
-      return false;
-    }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
-      return false;
-    }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
-      return false;
-    }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
-      return false;
-    }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
-      return false;
-    }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
-      return false;
-    }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
-      return false;
-    }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
-                ? null
-                : Object.hashAll(l$$in.map((v) => v))
-          : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
-          : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_PersonFilterFatherId<TRes> {
-  factory CopyWith_Input_PersonFilterFatherId(
-    Input_PersonFilterFatherId instance,
-    TRes Function(Input_PersonFilterFatherId) then,
-  ) = _CopyWithImpl_Input_PersonFilterFatherId;
-
-  factory CopyWith_Input_PersonFilterFatherId.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonFilterFatherId;
-
-  TRes call({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  });
-}
-
-class _CopyWithImpl_Input_PersonFilterFatherId<TRes>
-    implements CopyWith_Input_PersonFilterFatherId<TRes> {
-  _CopyWithImpl_Input_PersonFilterFatherId(this._instance, this._then);
-
-  final Input_PersonFilterFatherId _instance;
-
-  final TRes Function(Input_PersonFilterFatherId) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
-  }) => _then(
-    Input_PersonFilterFatherId._({
-      ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as String?),
-      if (notEq != _undefined) 'notEq': (notEq as String?),
-      if ($in != _undefined) 'in': ($in as List<String?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as String?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as String?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as String?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as String?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_PersonFilterFatherId<TRes>
-    implements CopyWith_Input_PersonFilterFatherId<TRes> {
-  _CopyWithStubImpl_Input_PersonFilterFatherId(this._res);
-
-  TRes _res;
-
-  call({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  }) => _res;
-}
-
-class Input_PersonFilterChurchId {
-  factory Input_PersonFilterChurchId({
-    bool? isNil,
-    String? eq,
-    String? notEq,
-    List<String?>? $in,
-    String? lessThan,
-    String? greaterThan,
-    String? lessThanOrEqual,
-    String? greaterThanOrEqual,
-    String? isDistinctFrom,
-    String? isNotDistinctFrom,
-  }) => Input_PersonFilterChurchId._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-  });
-
-  Input_PersonFilterChurchId._(this._$data);
-
-  factory Input_PersonFilterChurchId.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as String?);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as String?);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as String?))
-          .toList();
-    }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as String?);
-    }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as String?);
-    }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
-    }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
-    }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
-    }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
-    }
-    return Input_PersonFilterChurchId._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get isNil => (_$data['isNil'] as bool?);
-
-  String? get eq => (_$data['eq'] as String?);
-
-  String? get notEq => (_$data['notEq'] as String?);
-
-  List<String?>? get $in => (_$data['in'] as List<String?>?);
-
-  String? get lessThan => (_$data['lessThan'] as String?);
-
-  String? get greaterThan => (_$data['greaterThan'] as String?);
-
-  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
-
-  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
-
-  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
-
-  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
-    }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq;
-    }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq;
-    }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan;
-    }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan;
-    }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
-    }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
-    }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom;
-    }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_PersonFilterChurchId<Input_PersonFilterChurchId>
-  get copyWith => CopyWith_Input_PersonFilterChurchId(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_PersonFilterChurchId ||
+    if (other is! Input_PersonFilterStateId ||
         runtimeType != other.runtimeType) {
       return false;
     }

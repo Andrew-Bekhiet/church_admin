@@ -1,71 +1,462 @@
 // Part 20 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_FamilyRelationFilterInput<TRes> {
-  factory CopyWith_Input_FamilyRelationFilterInput(
-    Input_FamilyRelationFilterInput instance,
-    TRes Function(Input_FamilyRelationFilterInput) then,
-  ) = _CopyWithImpl_Input_FamilyRelationFilterInput;
+abstract class CopyWith_Input_GroupMembershipFilterPersonId<TRes> {
+  factory CopyWith_Input_GroupMembershipFilterPersonId(
+    Input_GroupMembershipFilterPersonId instance,
+    TRes Function(Input_GroupMembershipFilterPersonId) then,
+  ) = _CopyWithImpl_Input_GroupMembershipFilterPersonId;
 
-  factory CopyWith_Input_FamilyRelationFilterInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_FamilyRelationFilterInput;
+  factory CopyWith_Input_GroupMembershipFilterPersonId.stub(TRes res) =
+      _CopyWithStubImpl_Input_GroupMembershipFilterPersonId;
 
   TRes call({
-    List<Input_FamilyRelationFilterInput>? and,
-    List<Input_FamilyRelationFilterInput>? or,
-    List<Input_FamilyRelationFilterInput>? not,
-    Input_FamilyRelationFilterParentFamilyId? parentFamilyId,
-    Input_FamilyRelationFilterChildFamilyId? childFamilyId,
-    Input_FamilyFilterInput? child,
-    Input_FamilyFilterInput? parent,
-    Input_FamilyRelationFilterChildName? childName,
-    Input_FamilyRelationFilterParentName? parentName,
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_GroupMembershipFilterPersonId<TRes>
+    implements CopyWith_Input_GroupMembershipFilterPersonId<TRes> {
+  _CopyWithImpl_Input_GroupMembershipFilterPersonId(this._instance, this._then);
+
+  final Input_GroupMembershipFilterPersonId _instance;
+
+  final TRes Function(Input_GroupMembershipFilterPersonId) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_GroupMembershipFilterPersonId._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_GroupMembershipFilterPersonId<TRes>
+    implements CopyWith_Input_GroupMembershipFilterPersonId<TRes> {
+  _CopyWithStubImpl_Input_GroupMembershipFilterPersonId(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_GroupMembershipFilterInput {
+  factory Input_GroupMembershipFilterInput({
+    List<Input_GroupMembershipFilterInput>? and,
+    List<Input_GroupMembershipFilterInput>? or,
+    List<Input_GroupMembershipFilterInput>? not,
+    Input_GroupMembershipFilterPersonId? personId,
+    Input_GroupMembershipFilterGroupId? groupId,
+    Input_GroupFilterInput? group,
+    Input_PersonFilterInput? person,
+    Input_GroupMembershipFilterGroupName? groupName,
+  }) => Input_GroupMembershipFilterInput._({
+    if (and != null) r'and': and,
+    if (or != null) r'or': or,
+    if (not != null) r'not': not,
+    if (personId != null) r'personId': personId,
+    if (groupId != null) r'groupId': groupId,
+    if (group != null) r'group': group,
+    if (person != null) r'person': person,
+    if (groupName != null) r'groupName': groupName,
+  });
+
+  Input_GroupMembershipFilterInput._(this._$data);
+
+  factory Input_GroupMembershipFilterInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('and')) {
+      final l$and = data['and'];
+      result$data['and'] = (l$and as List<dynamic>?)
+          ?.map(
+            (e) => Input_GroupMembershipFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('or')) {
+      final l$or = data['or'];
+      result$data['or'] = (l$or as List<dynamic>?)
+          ?.map(
+            (e) => Input_GroupMembershipFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('not')) {
+      final l$not = data['not'];
+      result$data['not'] = (l$not as List<dynamic>?)
+          ?.map(
+            (e) => Input_GroupMembershipFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('personId')) {
+      final l$personId = data['personId'];
+      result$data['personId'] = l$personId == null
+          ? null
+          : Input_GroupMembershipFilterPersonId.fromJson(
+              (l$personId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('groupId')) {
+      final l$groupId = data['groupId'];
+      result$data['groupId'] = l$groupId == null
+          ? null
+          : Input_GroupMembershipFilterGroupId.fromJson(
+              (l$groupId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('group')) {
+      final l$group = data['group'];
+      result$data['group'] = l$group == null
+          ? null
+          : Input_GroupFilterInput.fromJson((l$group as Map<String, dynamic>));
+    }
+    if (data.containsKey('person')) {
+      final l$person = data['person'];
+      result$data['person'] = l$person == null
+          ? null
+          : Input_PersonFilterInput.fromJson(
+              (l$person as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('groupName')) {
+      final l$groupName = data['groupName'];
+      result$data['groupName'] = l$groupName == null
+          ? null
+          : Input_GroupMembershipFilterGroupName.fromJson(
+              (l$groupName as Map<String, dynamic>),
+            );
+    }
+    return Input_GroupMembershipFilterInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_GroupMembershipFilterInput>? get and =>
+      (_$data['and'] as List<Input_GroupMembershipFilterInput>?);
+
+  List<Input_GroupMembershipFilterInput>? get or =>
+      (_$data['or'] as List<Input_GroupMembershipFilterInput>?);
+
+  List<Input_GroupMembershipFilterInput>? get not =>
+      (_$data['not'] as List<Input_GroupMembershipFilterInput>?);
+
+  Input_GroupMembershipFilterPersonId? get personId =>
+      (_$data['personId'] as Input_GroupMembershipFilterPersonId?);
+
+  Input_GroupMembershipFilterGroupId? get groupId =>
+      (_$data['groupId'] as Input_GroupMembershipFilterGroupId?);
+
+  Input_GroupFilterInput? get group =>
+      (_$data['group'] as Input_GroupFilterInput?);
+
+  Input_PersonFilterInput? get person =>
+      (_$data['person'] as Input_PersonFilterInput?);
+
+  Input_GroupMembershipFilterGroupName? get groupName =>
+      (_$data['groupName'] as Input_GroupMembershipFilterGroupName?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('and')) {
+      final l$and = and;
+      result$data['and'] = l$and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('or')) {
+      final l$or = or;
+      result$data['or'] = l$or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('not')) {
+      final l$not = not;
+      result$data['not'] = l$not?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('personId')) {
+      final l$personId = personId;
+      result$data['personId'] = l$personId?.toJson();
+    }
+    if (_$data.containsKey('groupId')) {
+      final l$groupId = groupId;
+      result$data['groupId'] = l$groupId?.toJson();
+    }
+    if (_$data.containsKey('group')) {
+      final l$group = group;
+      result$data['group'] = l$group?.toJson();
+    }
+    if (_$data.containsKey('person')) {
+      final l$person = person;
+      result$data['person'] = l$person?.toJson();
+    }
+    if (_$data.containsKey('groupName')) {
+      final l$groupName = groupName;
+      result$data['groupName'] = l$groupName?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_GroupMembershipFilterInput<Input_GroupMembershipFilterInput>
+  get copyWith => CopyWith_Input_GroupMembershipFilterInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_GroupMembershipFilterInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$and = and;
+    final lOther$and = other.and;
+    if (_$data.containsKey('and') != other._$data.containsKey('and')) {
+      return false;
+    }
+    if (l$and != null && lOther$and != null) {
+      if (l$and.length != lOther$and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$and.length; i++) {
+        final l$and$entry = l$and[i];
+        final lOther$and$entry = lOther$and[i];
+        if (l$and$entry != lOther$and$entry) {
+          return false;
+        }
+      }
+    } else if (l$and != lOther$and) {
+      return false;
+    }
+    final l$or = or;
+    final lOther$or = other.or;
+    if (_$data.containsKey('or') != other._$data.containsKey('or')) {
+      return false;
+    }
+    if (l$or != null && lOther$or != null) {
+      if (l$or.length != lOther$or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$or.length; i++) {
+        final l$or$entry = l$or[i];
+        final lOther$or$entry = lOther$or[i];
+        if (l$or$entry != lOther$or$entry) {
+          return false;
+        }
+      }
+    } else if (l$or != lOther$or) {
+      return false;
+    }
+    final l$not = not;
+    final lOther$not = other.not;
+    if (_$data.containsKey('not') != other._$data.containsKey('not')) {
+      return false;
+    }
+    if (l$not != null && lOther$not != null) {
+      if (l$not.length != lOther$not.length) {
+        return false;
+      }
+      for (int i = 0; i < l$not.length; i++) {
+        final l$not$entry = l$not[i];
+        final lOther$not$entry = lOther$not[i];
+        if (l$not$entry != lOther$not$entry) {
+          return false;
+        }
+      }
+    } else if (l$not != lOther$not) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (_$data.containsKey('personId') !=
+        other._$data.containsKey('personId')) {
+      return false;
+    }
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$groupId = groupId;
+    final lOther$groupId = other.groupId;
+    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
+      return false;
+    }
+    if (l$groupId != lOther$groupId) {
+      return false;
+    }
+    final l$group = group;
+    final lOther$group = other.group;
+    if (_$data.containsKey('group') != other._$data.containsKey('group')) {
+      return false;
+    }
+    if (l$group != lOther$group) {
+      return false;
+    }
+    final l$person = person;
+    final lOther$person = other.person;
+    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
+      return false;
+    }
+    if (l$person != lOther$person) {
+      return false;
+    }
+    final l$groupName = groupName;
+    final lOther$groupName = other.groupName;
+    if (_$data.containsKey('groupName') !=
+        other._$data.containsKey('groupName')) {
+      return false;
+    }
+    if (l$groupName != lOther$groupName) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$and = and;
+    final l$or = or;
+    final l$not = not;
+    final l$personId = personId;
+    final l$groupId = groupId;
+    final l$group = group;
+    final l$person = person;
+    final l$groupName = groupName;
+    return Object.hashAll([
+      _$data.containsKey('and')
+          ? l$and == null
+                ? null
+                : Object.hashAll(l$and.map((v) => v))
+          : const {},
+      _$data.containsKey('or')
+          ? l$or == null
+                ? null
+                : Object.hashAll(l$or.map((v) => v))
+          : const {},
+      _$data.containsKey('not')
+          ? l$not == null
+                ? null
+                : Object.hashAll(l$not.map((v) => v))
+          : const {},
+      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('groupId') ? l$groupId : const {},
+      _$data.containsKey('group') ? l$group : const {},
+      _$data.containsKey('person') ? l$person : const {},
+      _$data.containsKey('groupName') ? l$groupName : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_GroupMembershipFilterInput<TRes> {
+  factory CopyWith_Input_GroupMembershipFilterInput(
+    Input_GroupMembershipFilterInput instance,
+    TRes Function(Input_GroupMembershipFilterInput) then,
+  ) = _CopyWithImpl_Input_GroupMembershipFilterInput;
+
+  factory CopyWith_Input_GroupMembershipFilterInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_GroupMembershipFilterInput;
+
+  TRes call({
+    List<Input_GroupMembershipFilterInput>? and,
+    List<Input_GroupMembershipFilterInput>? or,
+    List<Input_GroupMembershipFilterInput>? not,
+    Input_GroupMembershipFilterPersonId? personId,
+    Input_GroupMembershipFilterGroupId? groupId,
+    Input_GroupFilterInput? group,
+    Input_PersonFilterInput? person,
+    Input_GroupMembershipFilterGroupName? groupName,
   });
   TRes and(
-    Iterable<Input_FamilyRelationFilterInput>? Function(
+    Iterable<Input_GroupMembershipFilterInput>? Function(
       Iterable<
-        CopyWith_Input_FamilyRelationFilterInput<
-          Input_FamilyRelationFilterInput
+        CopyWith_Input_GroupMembershipFilterInput<
+          Input_GroupMembershipFilterInput
         >
       >?,
     )
     _fn,
   );
   TRes or(
-    Iterable<Input_FamilyRelationFilterInput>? Function(
+    Iterable<Input_GroupMembershipFilterInput>? Function(
       Iterable<
-        CopyWith_Input_FamilyRelationFilterInput<
-          Input_FamilyRelationFilterInput
+        CopyWith_Input_GroupMembershipFilterInput<
+          Input_GroupMembershipFilterInput
         >
       >?,
     )
     _fn,
   );
   TRes not(
-    Iterable<Input_FamilyRelationFilterInput>? Function(
+    Iterable<Input_GroupMembershipFilterInput>? Function(
       Iterable<
-        CopyWith_Input_FamilyRelationFilterInput<
-          Input_FamilyRelationFilterInput
+        CopyWith_Input_GroupMembershipFilterInput<
+          Input_GroupMembershipFilterInput
         >
       >?,
     )
     _fn,
   );
-  CopyWith_Input_FamilyRelationFilterParentFamilyId<TRes> get parentFamilyId;
-  CopyWith_Input_FamilyRelationFilterChildFamilyId<TRes> get childFamilyId;
-  CopyWith_Input_FamilyFilterInput<TRes> get child;
-  CopyWith_Input_FamilyFilterInput<TRes> get parent;
-  CopyWith_Input_FamilyRelationFilterChildName<TRes> get childName;
-  CopyWith_Input_FamilyRelationFilterParentName<TRes> get parentName;
+  CopyWith_Input_GroupMembershipFilterPersonId<TRes> get personId;
+  CopyWith_Input_GroupMembershipFilterGroupId<TRes> get groupId;
+  CopyWith_Input_GroupFilterInput<TRes> get group;
+  CopyWith_Input_PersonFilterInput<TRes> get person;
+  CopyWith_Input_GroupMembershipFilterGroupName<TRes> get groupName;
 }
 
-class _CopyWithImpl_Input_FamilyRelationFilterInput<TRes>
-    implements CopyWith_Input_FamilyRelationFilterInput<TRes> {
-  _CopyWithImpl_Input_FamilyRelationFilterInput(this._instance, this._then);
+class _CopyWithImpl_Input_GroupMembershipFilterInput<TRes>
+    implements CopyWith_Input_GroupMembershipFilterInput<TRes> {
+  _CopyWithImpl_Input_GroupMembershipFilterInput(this._instance, this._then);
 
-  final Input_FamilyRelationFilterInput _instance;
+  final Input_GroupMembershipFilterInput _instance;
 
-  final TRes Function(Input_FamilyRelationFilterInput) _then;
+  final TRes Function(Input_GroupMembershipFilterInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -73,41 +464,36 @@ class _CopyWithImpl_Input_FamilyRelationFilterInput<TRes>
     Object? and = _undefined,
     Object? or = _undefined,
     Object? not = _undefined,
-    Object? parentFamilyId = _undefined,
-    Object? childFamilyId = _undefined,
-    Object? child = _undefined,
-    Object? parent = _undefined,
-    Object? childName = _undefined,
-    Object? parentName = _undefined,
+    Object? personId = _undefined,
+    Object? groupId = _undefined,
+    Object? group = _undefined,
+    Object? person = _undefined,
+    Object? groupName = _undefined,
   }) => _then(
-    Input_FamilyRelationFilterInput._({
+    Input_GroupMembershipFilterInput._({
       ..._instance._$data,
       if (and != _undefined)
-        'and': (and as List<Input_FamilyRelationFilterInput>?),
+        'and': (and as List<Input_GroupMembershipFilterInput>?),
       if (or != _undefined)
-        'or': (or as List<Input_FamilyRelationFilterInput>?),
+        'or': (or as List<Input_GroupMembershipFilterInput>?),
       if (not != _undefined)
-        'not': (not as List<Input_FamilyRelationFilterInput>?),
-      if (parentFamilyId != _undefined)
-        'parentFamilyId':
-            (parentFamilyId as Input_FamilyRelationFilterParentFamilyId?),
-      if (childFamilyId != _undefined)
-        'childFamilyId':
-            (childFamilyId as Input_FamilyRelationFilterChildFamilyId?),
-      if (child != _undefined) 'child': (child as Input_FamilyFilterInput?),
-      if (parent != _undefined) 'parent': (parent as Input_FamilyFilterInput?),
-      if (childName != _undefined)
-        'childName': (childName as Input_FamilyRelationFilterChildName?),
-      if (parentName != _undefined)
-        'parentName': (parentName as Input_FamilyRelationFilterParentName?),
+        'not': (not as List<Input_GroupMembershipFilterInput>?),
+      if (personId != _undefined)
+        'personId': (personId as Input_GroupMembershipFilterPersonId?),
+      if (groupId != _undefined)
+        'groupId': (groupId as Input_GroupMembershipFilterGroupId?),
+      if (group != _undefined) 'group': (group as Input_GroupFilterInput?),
+      if (person != _undefined) 'person': (person as Input_PersonFilterInput?),
+      if (groupName != _undefined)
+        'groupName': (groupName as Input_GroupMembershipFilterGroupName?),
     }),
   );
 
   TRes and(
-    Iterable<Input_FamilyRelationFilterInput>? Function(
+    Iterable<Input_GroupMembershipFilterInput>? Function(
       Iterable<
-        CopyWith_Input_FamilyRelationFilterInput<
-          Input_FamilyRelationFilterInput
+        CopyWith_Input_GroupMembershipFilterInput<
+          Input_GroupMembershipFilterInput
         >
       >?,
     )
@@ -115,16 +501,16 @@ class _CopyWithImpl_Input_FamilyRelationFilterInput<TRes>
   ) => call(
     and: _fn(
       _instance.and?.map(
-        (e) => CopyWith_Input_FamilyRelationFilterInput(e, (i) => i),
+        (e) => CopyWith_Input_GroupMembershipFilterInput(e, (i) => i),
       ),
     )?.toList(),
   );
 
   TRes or(
-    Iterable<Input_FamilyRelationFilterInput>? Function(
+    Iterable<Input_GroupMembershipFilterInput>? Function(
       Iterable<
-        CopyWith_Input_FamilyRelationFilterInput<
-          Input_FamilyRelationFilterInput
+        CopyWith_Input_GroupMembershipFilterInput<
+          Input_GroupMembershipFilterInput
         >
       >?,
     )
@@ -132,16 +518,16 @@ class _CopyWithImpl_Input_FamilyRelationFilterInput<TRes>
   ) => call(
     or: _fn(
       _instance.or?.map(
-        (e) => CopyWith_Input_FamilyRelationFilterInput(e, (i) => i),
+        (e) => CopyWith_Input_GroupMembershipFilterInput(e, (i) => i),
       ),
     )?.toList(),
   );
 
   TRes not(
-    Iterable<Input_FamilyRelationFilterInput>? Function(
+    Iterable<Input_GroupMembershipFilterInput>? Function(
       Iterable<
-        CopyWith_Input_FamilyRelationFilterInput<
-          Input_FamilyRelationFilterInput
+        CopyWith_Input_GroupMembershipFilterInput<
+          Input_GroupMembershipFilterInput
         >
       >?,
     )
@@ -149,89 +535,74 @@ class _CopyWithImpl_Input_FamilyRelationFilterInput<TRes>
   ) => call(
     not: _fn(
       _instance.not?.map(
-        (e) => CopyWith_Input_FamilyRelationFilterInput(e, (i) => i),
+        (e) => CopyWith_Input_GroupMembershipFilterInput(e, (i) => i),
       ),
     )?.toList(),
   );
 
-  CopyWith_Input_FamilyRelationFilterParentFamilyId<TRes> get parentFamilyId {
-    final local$parentFamilyId = _instance.parentFamilyId;
-    return local$parentFamilyId == null
-        ? CopyWith_Input_FamilyRelationFilterParentFamilyId.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_FamilyRelationFilterParentFamilyId(
-            local$parentFamilyId,
-            (e) => call(parentFamilyId: e),
+  CopyWith_Input_GroupMembershipFilterPersonId<TRes> get personId {
+    final local$personId = _instance.personId;
+    return local$personId == null
+        ? CopyWith_Input_GroupMembershipFilterPersonId.stub(_then(_instance))
+        : CopyWith_Input_GroupMembershipFilterPersonId(
+            local$personId,
+            (e) => call(personId: e),
           );
   }
 
-  CopyWith_Input_FamilyRelationFilterChildFamilyId<TRes> get childFamilyId {
-    final local$childFamilyId = _instance.childFamilyId;
-    return local$childFamilyId == null
-        ? CopyWith_Input_FamilyRelationFilterChildFamilyId.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_FamilyRelationFilterChildFamilyId(
-            local$childFamilyId,
-            (e) => call(childFamilyId: e),
+  CopyWith_Input_GroupMembershipFilterGroupId<TRes> get groupId {
+    final local$groupId = _instance.groupId;
+    return local$groupId == null
+        ? CopyWith_Input_GroupMembershipFilterGroupId.stub(_then(_instance))
+        : CopyWith_Input_GroupMembershipFilterGroupId(
+            local$groupId,
+            (e) => call(groupId: e),
           );
   }
 
-  CopyWith_Input_FamilyFilterInput<TRes> get child {
-    final local$child = _instance.child;
-    return local$child == null
-        ? CopyWith_Input_FamilyFilterInput.stub(_then(_instance))
-        : CopyWith_Input_FamilyFilterInput(local$child, (e) => call(child: e));
+  CopyWith_Input_GroupFilterInput<TRes> get group {
+    final local$group = _instance.group;
+    return local$group == null
+        ? CopyWith_Input_GroupFilterInput.stub(_then(_instance))
+        : CopyWith_Input_GroupFilterInput(local$group, (e) => call(group: e));
   }
 
-  CopyWith_Input_FamilyFilterInput<TRes> get parent {
-    final local$parent = _instance.parent;
-    return local$parent == null
-        ? CopyWith_Input_FamilyFilterInput.stub(_then(_instance))
-        : CopyWith_Input_FamilyFilterInput(
-            local$parent,
-            (e) => call(parent: e),
+  CopyWith_Input_PersonFilterInput<TRes> get person {
+    final local$person = _instance.person;
+    return local$person == null
+        ? CopyWith_Input_PersonFilterInput.stub(_then(_instance))
+        : CopyWith_Input_PersonFilterInput(
+            local$person,
+            (e) => call(person: e),
           );
   }
 
-  CopyWith_Input_FamilyRelationFilterChildName<TRes> get childName {
-    final local$childName = _instance.childName;
-    return local$childName == null
-        ? CopyWith_Input_FamilyRelationFilterChildName.stub(_then(_instance))
-        : CopyWith_Input_FamilyRelationFilterChildName(
-            local$childName,
-            (e) => call(childName: e),
-          );
-  }
-
-  CopyWith_Input_FamilyRelationFilterParentName<TRes> get parentName {
-    final local$parentName = _instance.parentName;
-    return local$parentName == null
-        ? CopyWith_Input_FamilyRelationFilterParentName.stub(_then(_instance))
-        : CopyWith_Input_FamilyRelationFilterParentName(
-            local$parentName,
-            (e) => call(parentName: e),
+  CopyWith_Input_GroupMembershipFilterGroupName<TRes> get groupName {
+    final local$groupName = _instance.groupName;
+    return local$groupName == null
+        ? CopyWith_Input_GroupMembershipFilterGroupName.stub(_then(_instance))
+        : CopyWith_Input_GroupMembershipFilterGroupName(
+            local$groupName,
+            (e) => call(groupName: e),
           );
   }
 }
 
-class _CopyWithStubImpl_Input_FamilyRelationFilterInput<TRes>
-    implements CopyWith_Input_FamilyRelationFilterInput<TRes> {
-  _CopyWithStubImpl_Input_FamilyRelationFilterInput(this._res);
+class _CopyWithStubImpl_Input_GroupMembershipFilterInput<TRes>
+    implements CopyWith_Input_GroupMembershipFilterInput<TRes> {
+  _CopyWithStubImpl_Input_GroupMembershipFilterInput(this._res);
 
   TRes _res;
 
   call({
-    List<Input_FamilyRelationFilterInput>? and,
-    List<Input_FamilyRelationFilterInput>? or,
-    List<Input_FamilyRelationFilterInput>? not,
-    Input_FamilyRelationFilterParentFamilyId? parentFamilyId,
-    Input_FamilyRelationFilterChildFamilyId? childFamilyId,
-    Input_FamilyFilterInput? child,
-    Input_FamilyFilterInput? parent,
-    Input_FamilyRelationFilterChildName? childName,
-    Input_FamilyRelationFilterParentName? parentName,
+    List<Input_GroupMembershipFilterInput>? and,
+    List<Input_GroupMembershipFilterInput>? or,
+    List<Input_GroupMembershipFilterInput>? not,
+    Input_GroupMembershipFilterPersonId? personId,
+    Input_GroupMembershipFilterGroupId? groupId,
+    Input_GroupFilterInput? group,
+    Input_PersonFilterInput? person,
+    Input_GroupMembershipFilterGroupName? groupName,
   }) => _res;
 
   and(_fn) => _res;
@@ -240,37 +611,34 @@ class _CopyWithStubImpl_Input_FamilyRelationFilterInput<TRes>
 
   not(_fn) => _res;
 
-  CopyWith_Input_FamilyRelationFilterParentFamilyId<TRes> get parentFamilyId =>
-      CopyWith_Input_FamilyRelationFilterParentFamilyId.stub(_res);
+  CopyWith_Input_GroupMembershipFilterPersonId<TRes> get personId =>
+      CopyWith_Input_GroupMembershipFilterPersonId.stub(_res);
 
-  CopyWith_Input_FamilyRelationFilterChildFamilyId<TRes> get childFamilyId =>
-      CopyWith_Input_FamilyRelationFilterChildFamilyId.stub(_res);
+  CopyWith_Input_GroupMembershipFilterGroupId<TRes> get groupId =>
+      CopyWith_Input_GroupMembershipFilterGroupId.stub(_res);
 
-  CopyWith_Input_FamilyFilterInput<TRes> get child =>
-      CopyWith_Input_FamilyFilterInput.stub(_res);
+  CopyWith_Input_GroupFilterInput<TRes> get group =>
+      CopyWith_Input_GroupFilterInput.stub(_res);
 
-  CopyWith_Input_FamilyFilterInput<TRes> get parent =>
-      CopyWith_Input_FamilyFilterInput.stub(_res);
+  CopyWith_Input_PersonFilterInput<TRes> get person =>
+      CopyWith_Input_PersonFilterInput.stub(_res);
 
-  CopyWith_Input_FamilyRelationFilterChildName<TRes> get childName =>
-      CopyWith_Input_FamilyRelationFilterChildName.stub(_res);
-
-  CopyWith_Input_FamilyRelationFilterParentName<TRes> get parentName =>
-      CopyWith_Input_FamilyRelationFilterParentName.stub(_res);
+  CopyWith_Input_GroupMembershipFilterGroupName<TRes> get groupName =>
+      CopyWith_Input_GroupMembershipFilterGroupName.stub(_res);
 }
 
-class Input_FamilyRelationSortInput {
-  factory Input_FamilyRelationSortInput({
+class Input_GroupMembershipSortInput {
+  factory Input_GroupMembershipSortInput({
     Enum_SortOrder? order,
-    required Enum_FamilyRelationSortField field,
-  }) => Input_FamilyRelationSortInput._({
+    required Enum_GroupMembershipSortField field,
+  }) => Input_GroupMembershipSortInput._({
     if (order != null) r'order': order,
     r'field': field,
   });
 
-  Input_FamilyRelationSortInput._(this._$data);
+  Input_GroupMembershipSortInput._(this._$data);
 
-  factory Input_FamilyRelationSortInput.fromJson(Map<String, dynamic> data) {
+  factory Input_GroupMembershipSortInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('order')) {
       final l$order = data['order'];
@@ -279,18 +647,18 @@ class Input_FamilyRelationSortInput {
           : fromJson_Enum_SortOrder((l$order as String));
     }
     final l$field = data['field'];
-    result$data['field'] = fromJson_Enum_FamilyRelationSortField(
+    result$data['field'] = fromJson_Enum_GroupMembershipSortField(
       (l$field as String),
     );
-    return Input_FamilyRelationSortInput._(result$data);
+    return Input_GroupMembershipSortInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   Enum_SortOrder? get order => (_$data['order'] as Enum_SortOrder?);
 
-  Enum_FamilyRelationSortField get field =>
-      (_$data['field'] as Enum_FamilyRelationSortField);
+  Enum_GroupMembershipSortField get field =>
+      (_$data['field'] as Enum_GroupMembershipSortField);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -301,19 +669,19 @@ class Input_FamilyRelationSortInput {
           : toJson_Enum_SortOrder(l$order);
     }
     final l$field = field;
-    result$data['field'] = toJson_Enum_FamilyRelationSortField(l$field);
+    result$data['field'] = toJson_Enum_GroupMembershipSortField(l$field);
     return result$data;
   }
 
-  CopyWith_Input_FamilyRelationSortInput<Input_FamilyRelationSortInput>
-  get copyWith => CopyWith_Input_FamilyRelationSortInput(this, (i) => i);
+  CopyWith_Input_GroupMembershipSortInput<Input_GroupMembershipSortInput>
+  get copyWith => CopyWith_Input_GroupMembershipSortInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_FamilyRelationSortInput ||
+    if (other is! Input_GroupMembershipSortInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -344,1479 +712,49 @@ class Input_FamilyRelationSortInput {
   }
 }
 
-abstract class CopyWith_Input_FamilyRelationSortInput<TRes> {
-  factory CopyWith_Input_FamilyRelationSortInput(
-    Input_FamilyRelationSortInput instance,
-    TRes Function(Input_FamilyRelationSortInput) then,
-  ) = _CopyWithImpl_Input_FamilyRelationSortInput;
+abstract class CopyWith_Input_GroupMembershipSortInput<TRes> {
+  factory CopyWith_Input_GroupMembershipSortInput(
+    Input_GroupMembershipSortInput instance,
+    TRes Function(Input_GroupMembershipSortInput) then,
+  ) = _CopyWithImpl_Input_GroupMembershipSortInput;
 
-  factory CopyWith_Input_FamilyRelationSortInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_FamilyRelationSortInput;
+  factory CopyWith_Input_GroupMembershipSortInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_GroupMembershipSortInput;
 
-  TRes call({Enum_SortOrder? order, Enum_FamilyRelationSortField? field});
+  TRes call({Enum_SortOrder? order, Enum_GroupMembershipSortField? field});
 }
 
-class _CopyWithImpl_Input_FamilyRelationSortInput<TRes>
-    implements CopyWith_Input_FamilyRelationSortInput<TRes> {
-  _CopyWithImpl_Input_FamilyRelationSortInput(this._instance, this._then);
+class _CopyWithImpl_Input_GroupMembershipSortInput<TRes>
+    implements CopyWith_Input_GroupMembershipSortInput<TRes> {
+  _CopyWithImpl_Input_GroupMembershipSortInput(this._instance, this._then);
 
-  final Input_FamilyRelationSortInput _instance;
+  final Input_GroupMembershipSortInput _instance;
 
-  final TRes Function(Input_FamilyRelationSortInput) _then;
+  final TRes Function(Input_GroupMembershipSortInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? order = _undefined, Object? field = _undefined}) => _then(
-    Input_FamilyRelationSortInput._({
+    Input_GroupMembershipSortInput._({
       ..._instance._$data,
       if (order != _undefined) 'order': (order as Enum_SortOrder?),
       if (field != _undefined && field != null)
-        'field': (field as Enum_FamilyRelationSortField),
+        'field': (field as Enum_GroupMembershipSortField),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_FamilyRelationSortInput<TRes>
-    implements CopyWith_Input_FamilyRelationSortInput<TRes> {
-  _CopyWithStubImpl_Input_FamilyRelationSortInput(this._res);
+class _CopyWithStubImpl_Input_GroupMembershipSortInput<TRes>
+    implements CopyWith_Input_GroupMembershipSortInput<TRes> {
+  _CopyWithStubImpl_Input_GroupMembershipSortInput(this._res);
 
   TRes _res;
 
-  call({Enum_SortOrder? order, Enum_FamilyRelationSortField? field}) => _res;
+  call({Enum_SortOrder? order, Enum_GroupMembershipSortField? field}) => _res;
 }
 
-class Input_UpdateFamilyInput {
-  factory Input_UpdateFamilyInput({
-    String? name,
-    String? notes,
-    int? color,
-    String? status,
-    String? deceasedSpouseName,
-    DateTime? marriageDate,
-    String? churchId,
-    Input_AddressInput? address,
-    List<Input_FamilyContactInput>? contacts,
-    List<String>? parents,
-    List<String>? children,
-    DateTime? lastVisit,
-    DateTime? lastFatherVisit,
-  }) => Input_UpdateFamilyInput._({
-    if (name != null) r'name': name,
-    if (notes != null) r'notes': notes,
-    if (color != null) r'color': color,
-    if (status != null) r'status': status,
-    if (deceasedSpouseName != null) r'deceasedSpouseName': deceasedSpouseName,
-    if (marriageDate != null) r'marriageDate': marriageDate,
-    if (churchId != null) r'churchId': churchId,
-    if (address != null) r'address': address,
-    if (contacts != null) r'contacts': contacts,
-    if (parents != null) r'parents': parents,
-    if (children != null) r'children': children,
-    if (lastVisit != null) r'lastVisit': lastVisit,
-    if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
-  });
-
-  Input_UpdateFamilyInput._(this._$data);
-
-  factory Input_UpdateFamilyInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    if (data.containsKey('notes')) {
-      final l$notes = data['notes'];
-      result$data['notes'] = (l$notes as String?);
-    }
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('status')) {
-      final l$status = data['status'];
-      result$data['status'] = (l$status as String?);
-    }
-    if (data.containsKey('deceasedSpouseName')) {
-      final l$deceasedSpouseName = data['deceasedSpouseName'];
-      result$data['deceasedSpouseName'] = (l$deceasedSpouseName as String?);
-    }
-    if (data.containsKey('marriageDate')) {
-      final l$marriageDate = data['marriageDate'];
-      result$data['marriageDate'] = l$marriageDate == null
-          ? null
-          : dateFromString(l$marriageDate);
-    }
-    if (data.containsKey('churchId')) {
-      final l$churchId = data['churchId'];
-      result$data['churchId'] = (l$churchId as String?);
-    }
-    if (data.containsKey('address')) {
-      final l$address = data['address'];
-      result$data['address'] = l$address == null
-          ? null
-          : Input_AddressInput.fromJson((l$address as Map<String, dynamic>));
-    }
-    if (data.containsKey('contacts')) {
-      final l$contacts = data['contacts'];
-      result$data['contacts'] = (l$contacts as List<dynamic>?)
-          ?.map(
-            (e) =>
-                Input_FamilyContactInput.fromJson((e as Map<String, dynamic>)),
-          )
-          .toList();
-    }
-    if (data.containsKey('parents')) {
-      final l$parents = data['parents'];
-      result$data['parents'] = (l$parents as List<dynamic>?)
-          ?.map((e) => (e as String))
-          .toList();
-    }
-    if (data.containsKey('children')) {
-      final l$children = data['children'];
-      result$data['children'] = (l$children as List<dynamic>?)
-          ?.map((e) => (e as String))
-          .toList();
-    }
-    if (data.containsKey('lastVisit')) {
-      final l$lastVisit = data['lastVisit'];
-      result$data['lastVisit'] = l$lastVisit == null
-          ? null
-          : tstzFromString(l$lastVisit);
-    }
-    if (data.containsKey('lastFatherVisit')) {
-      final l$lastFatherVisit = data['lastFatherVisit'];
-      result$data['lastFatherVisit'] = l$lastFatherVisit == null
-          ? null
-          : tstzFromString(l$lastFatherVisit);
-    }
-    return Input_UpdateFamilyInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String? get name => (_$data['name'] as String?);
-
-  String? get notes => (_$data['notes'] as String?);
-
-  int? get color => (_$data['color'] as int?);
-
-  String? get status => (_$data['status'] as String?);
-
-  String? get deceasedSpouseName => (_$data['deceasedSpouseName'] as String?);
-
-  DateTime? get marriageDate => (_$data['marriageDate'] as DateTime?);
-
-  String? get churchId => (_$data['churchId'] as String?);
-
-  Input_AddressInput? get address => (_$data['address'] as Input_AddressInput?);
-
-  List<Input_FamilyContactInput>? get contacts =>
-      (_$data['contacts'] as List<Input_FamilyContactInput>?);
-
-  List<String>? get parents => (_$data['parents'] as List<String>?);
-
-  List<String>? get children => (_$data['children'] as List<String>?);
-
-  DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
-
-  DateTime? get lastFatherVisit => (_$data['lastFatherVisit'] as DateTime?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('notes')) {
-      final l$notes = notes;
-      result$data['notes'] = l$notes;
-    }
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('status')) {
-      final l$status = status;
-      result$data['status'] = l$status;
-    }
-    if (_$data.containsKey('deceasedSpouseName')) {
-      final l$deceasedSpouseName = deceasedSpouseName;
-      result$data['deceasedSpouseName'] = l$deceasedSpouseName;
-    }
-    if (_$data.containsKey('marriageDate')) {
-      final l$marriageDate = marriageDate;
-      result$data['marriageDate'] = l$marriageDate == null
-          ? null
-          : dateToString(l$marriageDate);
-    }
-    if (_$data.containsKey('churchId')) {
-      final l$churchId = churchId;
-      result$data['churchId'] = l$churchId;
-    }
-    if (_$data.containsKey('address')) {
-      final l$address = address;
-      result$data['address'] = l$address?.toJson();
-    }
-    if (_$data.containsKey('contacts')) {
-      final l$contacts = contacts;
-      result$data['contacts'] = l$contacts?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('parents')) {
-      final l$parents = parents;
-      result$data['parents'] = l$parents?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('children')) {
-      final l$children = children;
-      result$data['children'] = l$children?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('lastVisit')) {
-      final l$lastVisit = lastVisit;
-      result$data['lastVisit'] = l$lastVisit == null
-          ? null
-          : tstzToString(l$lastVisit);
-    }
-    if (_$data.containsKey('lastFatherVisit')) {
-      final l$lastFatherVisit = lastFatherVisit;
-      result$data['lastFatherVisit'] = l$lastFatherVisit == null
-          ? null
-          : tstzToString(l$lastFatherVisit);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_UpdateFamilyInput<Input_UpdateFamilyInput> get copyWith =>
-      CopyWith_Input_UpdateFamilyInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_UpdateFamilyInput || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$notes = notes;
-    final lOther$notes = other.notes;
-    if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
-      return false;
-    }
-    if (l$notes != lOther$notes) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$status = status;
-    final lOther$status = other.status;
-    if (_$data.containsKey('status') != other._$data.containsKey('status')) {
-      return false;
-    }
-    if (l$status != lOther$status) {
-      return false;
-    }
-    final l$deceasedSpouseName = deceasedSpouseName;
-    final lOther$deceasedSpouseName = other.deceasedSpouseName;
-    if (_$data.containsKey('deceasedSpouseName') !=
-        other._$data.containsKey('deceasedSpouseName')) {
-      return false;
-    }
-    if (l$deceasedSpouseName != lOther$deceasedSpouseName) {
-      return false;
-    }
-    final l$marriageDate = marriageDate;
-    final lOther$marriageDate = other.marriageDate;
-    if (_$data.containsKey('marriageDate') !=
-        other._$data.containsKey('marriageDate')) {
-      return false;
-    }
-    if (l$marriageDate != lOther$marriageDate) {
-      return false;
-    }
-    final l$churchId = churchId;
-    final lOther$churchId = other.churchId;
-    if (_$data.containsKey('churchId') !=
-        other._$data.containsKey('churchId')) {
-      return false;
-    }
-    if (l$churchId != lOther$churchId) {
-      return false;
-    }
-    final l$address = address;
-    final lOther$address = other.address;
-    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
-      return false;
-    }
-    if (l$address != lOther$address) {
-      return false;
-    }
-    final l$contacts = contacts;
-    final lOther$contacts = other.contacts;
-    if (_$data.containsKey('contacts') !=
-        other._$data.containsKey('contacts')) {
-      return false;
-    }
-    if (l$contacts != null && lOther$contacts != null) {
-      if (l$contacts.length != lOther$contacts.length) {
-        return false;
-      }
-      for (int i = 0; i < l$contacts.length; i++) {
-        final l$contacts$entry = l$contacts[i];
-        final lOther$contacts$entry = lOther$contacts[i];
-        if (l$contacts$entry != lOther$contacts$entry) {
-          return false;
-        }
-      }
-    } else if (l$contacts != lOther$contacts) {
-      return false;
-    }
-    final l$parents = parents;
-    final lOther$parents = other.parents;
-    if (_$data.containsKey('parents') != other._$data.containsKey('parents')) {
-      return false;
-    }
-    if (l$parents != null && lOther$parents != null) {
-      if (l$parents.length != lOther$parents.length) {
-        return false;
-      }
-      for (int i = 0; i < l$parents.length; i++) {
-        final l$parents$entry = l$parents[i];
-        final lOther$parents$entry = lOther$parents[i];
-        if (l$parents$entry != lOther$parents$entry) {
-          return false;
-        }
-      }
-    } else if (l$parents != lOther$parents) {
-      return false;
-    }
-    final l$children = children;
-    final lOther$children = other.children;
-    if (_$data.containsKey('children') !=
-        other._$data.containsKey('children')) {
-      return false;
-    }
-    if (l$children != null && lOther$children != null) {
-      if (l$children.length != lOther$children.length) {
-        return false;
-      }
-      for (int i = 0; i < l$children.length; i++) {
-        final l$children$entry = l$children[i];
-        final lOther$children$entry = lOther$children[i];
-        if (l$children$entry != lOther$children$entry) {
-          return false;
-        }
-      }
-    } else if (l$children != lOther$children) {
-      return false;
-    }
-    final l$lastVisit = lastVisit;
-    final lOther$lastVisit = other.lastVisit;
-    if (_$data.containsKey('lastVisit') !=
-        other._$data.containsKey('lastVisit')) {
-      return false;
-    }
-    if (l$lastVisit != lOther$lastVisit) {
-      return false;
-    }
-    final l$lastFatherVisit = lastFatherVisit;
-    final lOther$lastFatherVisit = other.lastFatherVisit;
-    if (_$data.containsKey('lastFatherVisit') !=
-        other._$data.containsKey('lastFatherVisit')) {
-      return false;
-    }
-    if (l$lastFatherVisit != lOther$lastFatherVisit) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$notes = notes;
-    final l$color = color;
-    final l$status = status;
-    final l$deceasedSpouseName = deceasedSpouseName;
-    final l$marriageDate = marriageDate;
-    final l$churchId = churchId;
-    final l$address = address;
-    final l$contacts = contacts;
-    final l$parents = parents;
-    final l$children = children;
-    final l$lastVisit = lastVisit;
-    final l$lastFatherVisit = lastFatherVisit;
-    return Object.hashAll([
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('notes') ? l$notes : const {},
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('status') ? l$status : const {},
-      _$data.containsKey('deceasedSpouseName')
-          ? l$deceasedSpouseName
-          : const {},
-      _$data.containsKey('marriageDate') ? l$marriageDate : const {},
-      _$data.containsKey('churchId') ? l$churchId : const {},
-      _$data.containsKey('address') ? l$address : const {},
-      _$data.containsKey('contacts')
-          ? l$contacts == null
-                ? null
-                : Object.hashAll(l$contacts.map((v) => v))
-          : const {},
-      _$data.containsKey('parents')
-          ? l$parents == null
-                ? null
-                : Object.hashAll(l$parents.map((v) => v))
-          : const {},
-      _$data.containsKey('children')
-          ? l$children == null
-                ? null
-                : Object.hashAll(l$children.map((v) => v))
-          : const {},
-      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
-      _$data.containsKey('lastFatherVisit') ? l$lastFatherVisit : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_UpdateFamilyInput<TRes> {
-  factory CopyWith_Input_UpdateFamilyInput(
-    Input_UpdateFamilyInput instance,
-    TRes Function(Input_UpdateFamilyInput) then,
-  ) = _CopyWithImpl_Input_UpdateFamilyInput;
-
-  factory CopyWith_Input_UpdateFamilyInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_UpdateFamilyInput;
-
-  TRes call({
-    String? name,
-    String? notes,
-    int? color,
-    String? status,
-    String? deceasedSpouseName,
-    DateTime? marriageDate,
-    String? churchId,
-    Input_AddressInput? address,
-    List<Input_FamilyContactInput>? contacts,
-    List<String>? parents,
-    List<String>? children,
-    DateTime? lastVisit,
-    DateTime? lastFatherVisit,
-  });
-  CopyWith_Input_AddressInput<TRes> get address;
-  TRes contacts(
-    Iterable<Input_FamilyContactInput>? Function(
-      Iterable<CopyWith_Input_FamilyContactInput<Input_FamilyContactInput>>?,
-    )
-    _fn,
-  );
-}
-
-class _CopyWithImpl_Input_UpdateFamilyInput<TRes>
-    implements CopyWith_Input_UpdateFamilyInput<TRes> {
-  _CopyWithImpl_Input_UpdateFamilyInput(this._instance, this._then);
-
-  final Input_UpdateFamilyInput _instance;
-
-  final TRes Function(Input_UpdateFamilyInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? name = _undefined,
-    Object? notes = _undefined,
-    Object? color = _undefined,
-    Object? status = _undefined,
-    Object? deceasedSpouseName = _undefined,
-    Object? marriageDate = _undefined,
-    Object? churchId = _undefined,
-    Object? address = _undefined,
-    Object? contacts = _undefined,
-    Object? parents = _undefined,
-    Object? children = _undefined,
-    Object? lastVisit = _undefined,
-    Object? lastFatherVisit = _undefined,
-  }) => _then(
-    Input_UpdateFamilyInput._({
-      ..._instance._$data,
-      if (name != _undefined) 'name': (name as String?),
-      if (notes != _undefined) 'notes': (notes as String?),
-      if (color != _undefined) 'color': (color as int?),
-      if (status != _undefined) 'status': (status as String?),
-      if (deceasedSpouseName != _undefined)
-        'deceasedSpouseName': (deceasedSpouseName as String?),
-      if (marriageDate != _undefined)
-        'marriageDate': (marriageDate as DateTime?),
-      if (churchId != _undefined) 'churchId': (churchId as String?),
-      if (address != _undefined) 'address': (address as Input_AddressInput?),
-      if (contacts != _undefined)
-        'contacts': (contacts as List<Input_FamilyContactInput>?),
-      if (parents != _undefined) 'parents': (parents as List<String>?),
-      if (children != _undefined) 'children': (children as List<String>?),
-      if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
-      if (lastFatherVisit != _undefined)
-        'lastFatherVisit': (lastFatherVisit as DateTime?),
-    }),
-  );
-
-  CopyWith_Input_AddressInput<TRes> get address {
-    final local$address = _instance.address;
-    return local$address == null
-        ? CopyWith_Input_AddressInput.stub(_then(_instance))
-        : CopyWith_Input_AddressInput(local$address, (e) => call(address: e));
-  }
-
-  TRes contacts(
-    Iterable<Input_FamilyContactInput>? Function(
-      Iterable<CopyWith_Input_FamilyContactInput<Input_FamilyContactInput>>?,
-    )
-    _fn,
-  ) => call(
-    contacts: _fn(
-      _instance.contacts?.map(
-        (e) => CopyWith_Input_FamilyContactInput(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-}
-
-class _CopyWithStubImpl_Input_UpdateFamilyInput<TRes>
-    implements CopyWith_Input_UpdateFamilyInput<TRes> {
-  _CopyWithStubImpl_Input_UpdateFamilyInput(this._res);
-
-  TRes _res;
-
-  call({
-    String? name,
-    String? notes,
-    int? color,
-    String? status,
-    String? deceasedSpouseName,
-    DateTime? marriageDate,
-    String? churchId,
-    Input_AddressInput? address,
-    List<Input_FamilyContactInput>? contacts,
-    List<String>? parents,
-    List<String>? children,
-    DateTime? lastVisit,
-    DateTime? lastFatherVisit,
-  }) => _res;
-
-  CopyWith_Input_AddressInput<TRes> get address =>
-      CopyWith_Input_AddressInput.stub(_res);
-
-  contacts(_fn) => _res;
-}
-
-class Input_CreateFamilyInput {
-  factory Input_CreateFamilyInput({
-    required String name,
-    String? notes,
-    int? color,
-    String? status,
-    String? deceasedSpouseName,
-    DateTime? marriageDate,
-    String? churchId,
-    Input_AddressInput? address,
-    List<Input_FamilyContactInput>? contacts,
-    List<String>? parents,
-    List<String>? children,
-    DateTime? lastVisit,
-    DateTime? lastFatherVisit,
-  }) => Input_CreateFamilyInput._({
-    r'name': name,
-    if (notes != null) r'notes': notes,
-    if (color != null) r'color': color,
-    if (status != null) r'status': status,
-    if (deceasedSpouseName != null) r'deceasedSpouseName': deceasedSpouseName,
-    if (marriageDate != null) r'marriageDate': marriageDate,
-    if (churchId != null) r'churchId': churchId,
-    if (address != null) r'address': address,
-    if (contacts != null) r'contacts': contacts,
-    if (parents != null) r'parents': parents,
-    if (children != null) r'children': children,
-    if (lastVisit != null) r'lastVisit': lastVisit,
-    if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
-  });
-
-  Input_CreateFamilyInput._(this._$data);
-
-  factory Input_CreateFamilyInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$name = data['name'];
-    result$data['name'] = (l$name as String);
-    if (data.containsKey('notes')) {
-      final l$notes = data['notes'];
-      result$data['notes'] = (l$notes as String?);
-    }
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('status')) {
-      final l$status = data['status'];
-      result$data['status'] = (l$status as String?);
-    }
-    if (data.containsKey('deceasedSpouseName')) {
-      final l$deceasedSpouseName = data['deceasedSpouseName'];
-      result$data['deceasedSpouseName'] = (l$deceasedSpouseName as String?);
-    }
-    if (data.containsKey('marriageDate')) {
-      final l$marriageDate = data['marriageDate'];
-      result$data['marriageDate'] = l$marriageDate == null
-          ? null
-          : dateFromString(l$marriageDate);
-    }
-    if (data.containsKey('churchId')) {
-      final l$churchId = data['churchId'];
-      result$data['churchId'] = (l$churchId as String?);
-    }
-    if (data.containsKey('address')) {
-      final l$address = data['address'];
-      result$data['address'] = l$address == null
-          ? null
-          : Input_AddressInput.fromJson((l$address as Map<String, dynamic>));
-    }
-    if (data.containsKey('contacts')) {
-      final l$contacts = data['contacts'];
-      result$data['contacts'] = (l$contacts as List<dynamic>?)
-          ?.map(
-            (e) =>
-                Input_FamilyContactInput.fromJson((e as Map<String, dynamic>)),
-          )
-          .toList();
-    }
-    if (data.containsKey('parents')) {
-      final l$parents = data['parents'];
-      result$data['parents'] = (l$parents as List<dynamic>?)
-          ?.map((e) => (e as String))
-          .toList();
-    }
-    if (data.containsKey('children')) {
-      final l$children = data['children'];
-      result$data['children'] = (l$children as List<dynamic>?)
-          ?.map((e) => (e as String))
-          .toList();
-    }
-    if (data.containsKey('lastVisit')) {
-      final l$lastVisit = data['lastVisit'];
-      result$data['lastVisit'] = l$lastVisit == null
-          ? null
-          : tstzFromString(l$lastVisit);
-    }
-    if (data.containsKey('lastFatherVisit')) {
-      final l$lastFatherVisit = data['lastFatherVisit'];
-      result$data['lastFatherVisit'] = l$lastFatherVisit == null
-          ? null
-          : tstzFromString(l$lastFatherVisit);
-    }
-    return Input_CreateFamilyInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String get name => (_$data['name'] as String);
-
-  String? get notes => (_$data['notes'] as String?);
-
-  int? get color => (_$data['color'] as int?);
-
-  String? get status => (_$data['status'] as String?);
-
-  String? get deceasedSpouseName => (_$data['deceasedSpouseName'] as String?);
-
-  DateTime? get marriageDate => (_$data['marriageDate'] as DateTime?);
-
-  String? get churchId => (_$data['churchId'] as String?);
-
-  Input_AddressInput? get address => (_$data['address'] as Input_AddressInput?);
-
-  List<Input_FamilyContactInput>? get contacts =>
-      (_$data['contacts'] as List<Input_FamilyContactInput>?);
-
-  List<String>? get parents => (_$data['parents'] as List<String>?);
-
-  List<String>? get children => (_$data['children'] as List<String>?);
-
-  DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
-
-  DateTime? get lastFatherVisit => (_$data['lastFatherVisit'] as DateTime?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$name = name;
-    result$data['name'] = l$name;
-    if (_$data.containsKey('notes')) {
-      final l$notes = notes;
-      result$data['notes'] = l$notes;
-    }
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('status')) {
-      final l$status = status;
-      result$data['status'] = l$status;
-    }
-    if (_$data.containsKey('deceasedSpouseName')) {
-      final l$deceasedSpouseName = deceasedSpouseName;
-      result$data['deceasedSpouseName'] = l$deceasedSpouseName;
-    }
-    if (_$data.containsKey('marriageDate')) {
-      final l$marriageDate = marriageDate;
-      result$data['marriageDate'] = l$marriageDate == null
-          ? null
-          : dateToString(l$marriageDate);
-    }
-    if (_$data.containsKey('churchId')) {
-      final l$churchId = churchId;
-      result$data['churchId'] = l$churchId;
-    }
-    if (_$data.containsKey('address')) {
-      final l$address = address;
-      result$data['address'] = l$address?.toJson();
-    }
-    if (_$data.containsKey('contacts')) {
-      final l$contacts = contacts;
-      result$data['contacts'] = l$contacts?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('parents')) {
-      final l$parents = parents;
-      result$data['parents'] = l$parents?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('children')) {
-      final l$children = children;
-      result$data['children'] = l$children?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('lastVisit')) {
-      final l$lastVisit = lastVisit;
-      result$data['lastVisit'] = l$lastVisit == null
-          ? null
-          : tstzToString(l$lastVisit);
-    }
-    if (_$data.containsKey('lastFatherVisit')) {
-      final l$lastFatherVisit = lastFatherVisit;
-      result$data['lastFatherVisit'] = l$lastFatherVisit == null
-          ? null
-          : tstzToString(l$lastFatherVisit);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_CreateFamilyInput<Input_CreateFamilyInput> get copyWith =>
-      CopyWith_Input_CreateFamilyInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_CreateFamilyInput || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$notes = notes;
-    final lOther$notes = other.notes;
-    if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
-      return false;
-    }
-    if (l$notes != lOther$notes) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$status = status;
-    final lOther$status = other.status;
-    if (_$data.containsKey('status') != other._$data.containsKey('status')) {
-      return false;
-    }
-    if (l$status != lOther$status) {
-      return false;
-    }
-    final l$deceasedSpouseName = deceasedSpouseName;
-    final lOther$deceasedSpouseName = other.deceasedSpouseName;
-    if (_$data.containsKey('deceasedSpouseName') !=
-        other._$data.containsKey('deceasedSpouseName')) {
-      return false;
-    }
-    if (l$deceasedSpouseName != lOther$deceasedSpouseName) {
-      return false;
-    }
-    final l$marriageDate = marriageDate;
-    final lOther$marriageDate = other.marriageDate;
-    if (_$data.containsKey('marriageDate') !=
-        other._$data.containsKey('marriageDate')) {
-      return false;
-    }
-    if (l$marriageDate != lOther$marriageDate) {
-      return false;
-    }
-    final l$churchId = churchId;
-    final lOther$churchId = other.churchId;
-    if (_$data.containsKey('churchId') !=
-        other._$data.containsKey('churchId')) {
-      return false;
-    }
-    if (l$churchId != lOther$churchId) {
-      return false;
-    }
-    final l$address = address;
-    final lOther$address = other.address;
-    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
-      return false;
-    }
-    if (l$address != lOther$address) {
-      return false;
-    }
-    final l$contacts = contacts;
-    final lOther$contacts = other.contacts;
-    if (_$data.containsKey('contacts') !=
-        other._$data.containsKey('contacts')) {
-      return false;
-    }
-    if (l$contacts != null && lOther$contacts != null) {
-      if (l$contacts.length != lOther$contacts.length) {
-        return false;
-      }
-      for (int i = 0; i < l$contacts.length; i++) {
-        final l$contacts$entry = l$contacts[i];
-        final lOther$contacts$entry = lOther$contacts[i];
-        if (l$contacts$entry != lOther$contacts$entry) {
-          return false;
-        }
-      }
-    } else if (l$contacts != lOther$contacts) {
-      return false;
-    }
-    final l$parents = parents;
-    final lOther$parents = other.parents;
-    if (_$data.containsKey('parents') != other._$data.containsKey('parents')) {
-      return false;
-    }
-    if (l$parents != null && lOther$parents != null) {
-      if (l$parents.length != lOther$parents.length) {
-        return false;
-      }
-      for (int i = 0; i < l$parents.length; i++) {
-        final l$parents$entry = l$parents[i];
-        final lOther$parents$entry = lOther$parents[i];
-        if (l$parents$entry != lOther$parents$entry) {
-          return false;
-        }
-      }
-    } else if (l$parents != lOther$parents) {
-      return false;
-    }
-    final l$children = children;
-    final lOther$children = other.children;
-    if (_$data.containsKey('children') !=
-        other._$data.containsKey('children')) {
-      return false;
-    }
-    if (l$children != null && lOther$children != null) {
-      if (l$children.length != lOther$children.length) {
-        return false;
-      }
-      for (int i = 0; i < l$children.length; i++) {
-        final l$children$entry = l$children[i];
-        final lOther$children$entry = lOther$children[i];
-        if (l$children$entry != lOther$children$entry) {
-          return false;
-        }
-      }
-    } else if (l$children != lOther$children) {
-      return false;
-    }
-    final l$lastVisit = lastVisit;
-    final lOther$lastVisit = other.lastVisit;
-    if (_$data.containsKey('lastVisit') !=
-        other._$data.containsKey('lastVisit')) {
-      return false;
-    }
-    if (l$lastVisit != lOther$lastVisit) {
-      return false;
-    }
-    final l$lastFatherVisit = lastFatherVisit;
-    final lOther$lastFatherVisit = other.lastFatherVisit;
-    if (_$data.containsKey('lastFatherVisit') !=
-        other._$data.containsKey('lastFatherVisit')) {
-      return false;
-    }
-    if (l$lastFatherVisit != lOther$lastFatherVisit) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$notes = notes;
-    final l$color = color;
-    final l$status = status;
-    final l$deceasedSpouseName = deceasedSpouseName;
-    final l$marriageDate = marriageDate;
-    final l$churchId = churchId;
-    final l$address = address;
-    final l$contacts = contacts;
-    final l$parents = parents;
-    final l$children = children;
-    final l$lastVisit = lastVisit;
-    final l$lastFatherVisit = lastFatherVisit;
-    return Object.hashAll([
-      l$name,
-      _$data.containsKey('notes') ? l$notes : const {},
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('status') ? l$status : const {},
-      _$data.containsKey('deceasedSpouseName')
-          ? l$deceasedSpouseName
-          : const {},
-      _$data.containsKey('marriageDate') ? l$marriageDate : const {},
-      _$data.containsKey('churchId') ? l$churchId : const {},
-      _$data.containsKey('address') ? l$address : const {},
-      _$data.containsKey('contacts')
-          ? l$contacts == null
-                ? null
-                : Object.hashAll(l$contacts.map((v) => v))
-          : const {},
-      _$data.containsKey('parents')
-          ? l$parents == null
-                ? null
-                : Object.hashAll(l$parents.map((v) => v))
-          : const {},
-      _$data.containsKey('children')
-          ? l$children == null
-                ? null
-                : Object.hashAll(l$children.map((v) => v))
-          : const {},
-      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
-      _$data.containsKey('lastFatherVisit') ? l$lastFatherVisit : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_CreateFamilyInput<TRes> {
-  factory CopyWith_Input_CreateFamilyInput(
-    Input_CreateFamilyInput instance,
-    TRes Function(Input_CreateFamilyInput) then,
-  ) = _CopyWithImpl_Input_CreateFamilyInput;
-
-  factory CopyWith_Input_CreateFamilyInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_CreateFamilyInput;
-
-  TRes call({
-    String? name,
-    String? notes,
-    int? color,
-    String? status,
-    String? deceasedSpouseName,
-    DateTime? marriageDate,
-    String? churchId,
-    Input_AddressInput? address,
-    List<Input_FamilyContactInput>? contacts,
-    List<String>? parents,
-    List<String>? children,
-    DateTime? lastVisit,
-    DateTime? lastFatherVisit,
-  });
-  CopyWith_Input_AddressInput<TRes> get address;
-  TRes contacts(
-    Iterable<Input_FamilyContactInput>? Function(
-      Iterable<CopyWith_Input_FamilyContactInput<Input_FamilyContactInput>>?,
-    )
-    _fn,
-  );
-}
-
-class _CopyWithImpl_Input_CreateFamilyInput<TRes>
-    implements CopyWith_Input_CreateFamilyInput<TRes> {
-  _CopyWithImpl_Input_CreateFamilyInput(this._instance, this._then);
-
-  final Input_CreateFamilyInput _instance;
-
-  final TRes Function(Input_CreateFamilyInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? name = _undefined,
-    Object? notes = _undefined,
-    Object? color = _undefined,
-    Object? status = _undefined,
-    Object? deceasedSpouseName = _undefined,
-    Object? marriageDate = _undefined,
-    Object? churchId = _undefined,
-    Object? address = _undefined,
-    Object? contacts = _undefined,
-    Object? parents = _undefined,
-    Object? children = _undefined,
-    Object? lastVisit = _undefined,
-    Object? lastFatherVisit = _undefined,
-  }) => _then(
-    Input_CreateFamilyInput._({
-      ..._instance._$data,
-      if (name != _undefined && name != null) 'name': (name as String),
-      if (notes != _undefined) 'notes': (notes as String?),
-      if (color != _undefined) 'color': (color as int?),
-      if (status != _undefined) 'status': (status as String?),
-      if (deceasedSpouseName != _undefined)
-        'deceasedSpouseName': (deceasedSpouseName as String?),
-      if (marriageDate != _undefined)
-        'marriageDate': (marriageDate as DateTime?),
-      if (churchId != _undefined) 'churchId': (churchId as String?),
-      if (address != _undefined) 'address': (address as Input_AddressInput?),
-      if (contacts != _undefined)
-        'contacts': (contacts as List<Input_FamilyContactInput>?),
-      if (parents != _undefined) 'parents': (parents as List<String>?),
-      if (children != _undefined) 'children': (children as List<String>?),
-      if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
-      if (lastFatherVisit != _undefined)
-        'lastFatherVisit': (lastFatherVisit as DateTime?),
-    }),
-  );
-
-  CopyWith_Input_AddressInput<TRes> get address {
-    final local$address = _instance.address;
-    return local$address == null
-        ? CopyWith_Input_AddressInput.stub(_then(_instance))
-        : CopyWith_Input_AddressInput(local$address, (e) => call(address: e));
-  }
-
-  TRes contacts(
-    Iterable<Input_FamilyContactInput>? Function(
-      Iterable<CopyWith_Input_FamilyContactInput<Input_FamilyContactInput>>?,
-    )
-    _fn,
-  ) => call(
-    contacts: _fn(
-      _instance.contacts?.map(
-        (e) => CopyWith_Input_FamilyContactInput(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-}
-
-class _CopyWithStubImpl_Input_CreateFamilyInput<TRes>
-    implements CopyWith_Input_CreateFamilyInput<TRes> {
-  _CopyWithStubImpl_Input_CreateFamilyInput(this._res);
-
-  TRes _res;
-
-  call({
-    String? name,
-    String? notes,
-    int? color,
-    String? status,
-    String? deceasedSpouseName,
-    DateTime? marriageDate,
-    String? churchId,
-    Input_AddressInput? address,
-    List<Input_FamilyContactInput>? contacts,
-    List<String>? parents,
-    List<String>? children,
-    DateTime? lastVisit,
-    DateTime? lastFatherVisit,
-  }) => _res;
-
-  CopyWith_Input_AddressInput<TRes> get address =>
-      CopyWith_Input_AddressInput.stub(_res);
-
-  contacts(_fn) => _res;
-}
-
-class Input_FamilyFilterUserCanEdit {
-  factory Input_FamilyFilterUserCanEdit({
-    bool? isNil,
-    bool? eq,
-    bool? notEq,
-    List<bool>? $in,
-    bool? lessThan,
-    bool? greaterThan,
-    bool? lessThanOrEqual,
-    bool? greaterThanOrEqual,
-    bool? isDistinctFrom,
-    bool? isNotDistinctFrom,
-  }) => Input_FamilyFilterUserCanEdit._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-  });
-
-  Input_FamilyFilterUserCanEdit._(this._$data);
-
-  factory Input_FamilyFilterUserCanEdit.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as bool?);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as bool?);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as bool))
-          .toList();
-    }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as bool?);
-    }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as bool?);
-    }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as bool?);
-    }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as bool?);
-    }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as bool?);
-    }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as bool?);
-    }
-    return Input_FamilyFilterUserCanEdit._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get isNil => (_$data['isNil'] as bool?);
-
-  bool? get eq => (_$data['eq'] as bool?);
-
-  bool? get notEq => (_$data['notEq'] as bool?);
-
-  List<bool>? get $in => (_$data['in'] as List<bool>?);
-
-  bool? get lessThan => (_$data['lessThan'] as bool?);
-
-  bool? get greaterThan => (_$data['greaterThan'] as bool?);
-
-  bool? get lessThanOrEqual => (_$data['lessThanOrEqual'] as bool?);
-
-  bool? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as bool?);
-
-  bool? get isDistinctFrom => (_$data['isDistinctFrom'] as bool?);
-
-  bool? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as bool?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
-    }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq;
-    }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq;
-    }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan;
-    }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan;
-    }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
-    }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
-    }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom;
-    }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_FamilyFilterUserCanEdit<Input_FamilyFilterUserCanEdit>
-  get copyWith => CopyWith_Input_FamilyFilterUserCanEdit(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_FamilyFilterUserCanEdit ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
-      return false;
-    }
-    if (l$isNil != lOther$isNil) {
-      return false;
-    }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
-      return false;
-    }
-    if (l$eq != lOther$eq) {
-      return false;
-    }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
-      return false;
-    }
-    if (l$notEq != lOther$notEq) {
-      return false;
-    }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$in != lOther$$in) {
-      return false;
-    }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
-      return false;
-    }
-    if (l$lessThan != lOther$lessThan) {
-      return false;
-    }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
-      return false;
-    }
-    if (l$greaterThan != lOther$greaterThan) {
-      return false;
-    }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
-      return false;
-    }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
-      return false;
-    }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
-      return false;
-    }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
-      return false;
-    }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
-      return false;
-    }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
-      return false;
-    }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
-      return false;
-    }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
-                ? null
-                : Object.hashAll(l$$in.map((v) => v))
-          : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
-          : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_FamilyFilterUserCanEdit<TRes> {
-  factory CopyWith_Input_FamilyFilterUserCanEdit(
-    Input_FamilyFilterUserCanEdit instance,
-    TRes Function(Input_FamilyFilterUserCanEdit) then,
-  ) = _CopyWithImpl_Input_FamilyFilterUserCanEdit;
-
-  factory CopyWith_Input_FamilyFilterUserCanEdit.stub(TRes res) =
-      _CopyWithStubImpl_Input_FamilyFilterUserCanEdit;
-
-  TRes call({
-    bool? isNil,
-    bool? eq,
-    bool? notEq,
-    List<bool>? $in,
-    bool? lessThan,
-    bool? greaterThan,
-    bool? lessThanOrEqual,
-    bool? greaterThanOrEqual,
-    bool? isDistinctFrom,
-    bool? isNotDistinctFrom,
-  });
-}
-
-class _CopyWithImpl_Input_FamilyFilterUserCanEdit<TRes>
-    implements CopyWith_Input_FamilyFilterUserCanEdit<TRes> {
-  _CopyWithImpl_Input_FamilyFilterUserCanEdit(this._instance, this._then);
-
-  final Input_FamilyFilterUserCanEdit _instance;
-
-  final TRes Function(Input_FamilyFilterUserCanEdit) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
-  }) => _then(
-    Input_FamilyFilterUserCanEdit._({
-      ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as bool?),
-      if (notEq != _undefined) 'notEq': (notEq as bool?),
-      if ($in != _undefined) 'in': ($in as List<bool>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as bool?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as bool?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as bool?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as bool?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as bool?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as bool?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_FamilyFilterUserCanEdit<TRes>
-    implements CopyWith_Input_FamilyFilterUserCanEdit<TRes> {
-  _CopyWithStubImpl_Input_FamilyFilterUserCanEdit(this._res);
-
-  TRes _res;
-
-  call({
-    bool? isNil,
-    bool? eq,
-    bool? notEq,
-    List<bool>? $in,
-    bool? lessThan,
-    bool? greaterThan,
-    bool? lessThanOrEqual,
-    bool? greaterThanOrEqual,
-    bool? isDistinctFrom,
-    bool? isNotDistinctFrom,
-  }) => _res;
-}
-
-class Input_FamilyFilterAddressFullAddressText {
-  factory Input_FamilyFilterAddressFullAddressText({
+class Input_FamilyRelationFilterParentName {
+  factory Input_FamilyRelationFilterParentName({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -1832,7 +770,7 @@ class Input_FamilyFilterAddressFullAddressText {
     String? stringStartsWith,
     String? like,
     String? ilike,
-  }) => Input_FamilyFilterAddressFullAddressText._({
+  }) => Input_FamilyRelationFilterParentName._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -1850,9 +788,9 @@ class Input_FamilyFilterAddressFullAddressText {
     if (ilike != null) r'ilike': ilike,
   });
 
-  Input_FamilyFilterAddressFullAddressText._(this._$data);
+  Input_FamilyRelationFilterParentName._(this._$data);
 
-  factory Input_FamilyFilterAddressFullAddressText.fromJson(
+  factory Input_FamilyRelationFilterParentName.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
@@ -1918,7 +856,7 @@ class Input_FamilyFilterAddressFullAddressText {
       final l$ilike = data['ilike'];
       result$data['ilike'] = (l$ilike as String?);
     }
-    return Input_FamilyFilterAddressFullAddressText._(result$data);
+    return Input_FamilyRelationFilterParentName._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -2018,18 +956,17 @@ class Input_FamilyFilterAddressFullAddressText {
     return result$data;
   }
 
-  CopyWith_Input_FamilyFilterAddressFullAddressText<
-    Input_FamilyFilterAddressFullAddressText
+  CopyWith_Input_FamilyRelationFilterParentName<
+    Input_FamilyRelationFilterParentName
   >
-  get copyWith =>
-      CopyWith_Input_FamilyFilterAddressFullAddressText(this, (i) => i);
+  get copyWith => CopyWith_Input_FamilyRelationFilterParentName(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_FamilyFilterAddressFullAddressText ||
+    if (other is! Input_FamilyRelationFilterParentName ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2219,14 +1156,14 @@ class Input_FamilyFilterAddressFullAddressText {
   }
 }
 
-abstract class CopyWith_Input_FamilyFilterAddressFullAddressText<TRes> {
-  factory CopyWith_Input_FamilyFilterAddressFullAddressText(
-    Input_FamilyFilterAddressFullAddressText instance,
-    TRes Function(Input_FamilyFilterAddressFullAddressText) then,
-  ) = _CopyWithImpl_Input_FamilyFilterAddressFullAddressText;
+abstract class CopyWith_Input_FamilyRelationFilterParentName<TRes> {
+  factory CopyWith_Input_FamilyRelationFilterParentName(
+    Input_FamilyRelationFilterParentName instance,
+    TRes Function(Input_FamilyRelationFilterParentName) then,
+  ) = _CopyWithImpl_Input_FamilyRelationFilterParentName;
 
-  factory CopyWith_Input_FamilyFilterAddressFullAddressText.stub(TRes res) =
-      _CopyWithStubImpl_Input_FamilyFilterAddressFullAddressText;
+  factory CopyWith_Input_FamilyRelationFilterParentName.stub(TRes res) =
+      _CopyWithStubImpl_Input_FamilyRelationFilterParentName;
 
   TRes call({
     bool? isNil,
@@ -2247,16 +1184,16 @@ abstract class CopyWith_Input_FamilyFilterAddressFullAddressText<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_FamilyFilterAddressFullAddressText<TRes>
-    implements CopyWith_Input_FamilyFilterAddressFullAddressText<TRes> {
-  _CopyWithImpl_Input_FamilyFilterAddressFullAddressText(
+class _CopyWithImpl_Input_FamilyRelationFilterParentName<TRes>
+    implements CopyWith_Input_FamilyRelationFilterParentName<TRes> {
+  _CopyWithImpl_Input_FamilyRelationFilterParentName(
     this._instance,
     this._then,
   );
 
-  final Input_FamilyFilterAddressFullAddressText _instance;
+  final Input_FamilyRelationFilterParentName _instance;
 
-  final TRes Function(Input_FamilyFilterAddressFullAddressText) _then;
+  final TRes Function(Input_FamilyRelationFilterParentName) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2277,7 +1214,7 @@ class _CopyWithImpl_Input_FamilyFilterAddressFullAddressText<TRes>
     Object? like = _undefined,
     Object? ilike = _undefined,
   }) => _then(
-    Input_FamilyFilterAddressFullAddressText._({
+    Input_FamilyRelationFilterParentName._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as String?),
@@ -2304,9 +1241,9 @@ class _CopyWithImpl_Input_FamilyFilterAddressFullAddressText<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_FamilyFilterAddressFullAddressText<TRes>
-    implements CopyWith_Input_FamilyFilterAddressFullAddressText<TRes> {
-  _CopyWithStubImpl_Input_FamilyFilterAddressFullAddressText(this._res);
+class _CopyWithStubImpl_Input_FamilyRelationFilterParentName<TRes>
+    implements CopyWith_Input_FamilyRelationFilterParentName<TRes> {
+  _CopyWithStubImpl_Input_FamilyRelationFilterParentName(this._res);
 
   TRes _res;
 
@@ -2329,8 +1266,8 @@ class _CopyWithStubImpl_Input_FamilyFilterAddressFullAddressText<TRes>
   }) => _res;
 }
 
-class Input_FamilyFilterAddressDistrictName {
-  factory Input_FamilyFilterAddressDistrictName({
+class Input_FamilyRelationFilterChildName {
+  factory Input_FamilyRelationFilterChildName({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -2346,7 +1283,7 @@ class Input_FamilyFilterAddressDistrictName {
     String? stringStartsWith,
     String? like,
     String? ilike,
-  }) => Input_FamilyFilterAddressDistrictName._({
+  }) => Input_FamilyRelationFilterChildName._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -2364,9 +1301,9 @@ class Input_FamilyFilterAddressDistrictName {
     if (ilike != null) r'ilike': ilike,
   });
 
-  Input_FamilyFilterAddressDistrictName._(this._$data);
+  Input_FamilyRelationFilterChildName._(this._$data);
 
-  factory Input_FamilyFilterAddressDistrictName.fromJson(
+  factory Input_FamilyRelationFilterChildName.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
@@ -2432,7 +1369,7 @@ class Input_FamilyFilterAddressDistrictName {
       final l$ilike = data['ilike'];
       result$data['ilike'] = (l$ilike as String?);
     }
-    return Input_FamilyFilterAddressDistrictName._(result$data);
+    return Input_FamilyRelationFilterChildName._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -2532,18 +1469,17 @@ class Input_FamilyFilterAddressDistrictName {
     return result$data;
   }
 
-  CopyWith_Input_FamilyFilterAddressDistrictName<
-    Input_FamilyFilterAddressDistrictName
+  CopyWith_Input_FamilyRelationFilterChildName<
+    Input_FamilyRelationFilterChildName
   >
-  get copyWith =>
-      CopyWith_Input_FamilyFilterAddressDistrictName(this, (i) => i);
+  get copyWith => CopyWith_Input_FamilyRelationFilterChildName(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_FamilyFilterAddressDistrictName ||
+    if (other is! Input_FamilyRelationFilterChildName ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2729,6 +1665,1208 @@ class Input_FamilyFilterAddressDistrictName {
       _$data.containsKey('stringStartsWith') ? l$stringStartsWith : const {},
       _$data.containsKey('like') ? l$like : const {},
       _$data.containsKey('ilike') ? l$ilike : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_FamilyRelationFilterChildName<TRes> {
+  factory CopyWith_Input_FamilyRelationFilterChildName(
+    Input_FamilyRelationFilterChildName instance,
+    TRes Function(Input_FamilyRelationFilterChildName) then,
+  ) = _CopyWithImpl_Input_FamilyRelationFilterChildName;
+
+  factory CopyWith_Input_FamilyRelationFilterChildName.stub(TRes res) =
+      _CopyWithStubImpl_Input_FamilyRelationFilterChildName;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  });
+}
+
+class _CopyWithImpl_Input_FamilyRelationFilterChildName<TRes>
+    implements CopyWith_Input_FamilyRelationFilterChildName<TRes> {
+  _CopyWithImpl_Input_FamilyRelationFilterChildName(this._instance, this._then);
+
+  final Input_FamilyRelationFilterChildName _instance;
+
+  final TRes Function(Input_FamilyRelationFilterChildName) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? contains = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+    Object? stringEndsWith = _undefined,
+    Object? stringStartsWith = _undefined,
+    Object? like = _undefined,
+    Object? ilike = _undefined,
+  }) => _then(
+    Input_FamilyRelationFilterChildName._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (contains != _undefined) 'contains': (contains as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+      if (stringEndsWith != _undefined)
+        'stringEndsWith': (stringEndsWith as String?),
+      if (stringStartsWith != _undefined)
+        'stringStartsWith': (stringStartsWith as String?),
+      if (like != _undefined) 'like': (like as String?),
+      if (ilike != _undefined) 'ilike': (ilike as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_FamilyRelationFilterChildName<TRes>
+    implements CopyWith_Input_FamilyRelationFilterChildName<TRes> {
+  _CopyWithStubImpl_Input_FamilyRelationFilterChildName(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  }) => _res;
+}
+
+class Input_FamilyRelationFilterChildFamilyId {
+  factory Input_FamilyRelationFilterChildFamilyId({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_FamilyRelationFilterChildFamilyId._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_FamilyRelationFilterChildFamilyId._(this._$data);
+
+  factory Input_FamilyRelationFilterChildFamilyId.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    return Input_FamilyRelationFilterChildFamilyId._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String>? get $in => (_$data['in'] as List<String>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FamilyRelationFilterChildFamilyId<
+    Input_FamilyRelationFilterChildFamilyId
+  >
+  get copyWith =>
+      CopyWith_Input_FamilyRelationFilterChildFamilyId(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FamilyRelationFilterChildFamilyId ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_FamilyRelationFilterChildFamilyId<TRes> {
+  factory CopyWith_Input_FamilyRelationFilterChildFamilyId(
+    Input_FamilyRelationFilterChildFamilyId instance,
+    TRes Function(Input_FamilyRelationFilterChildFamilyId) then,
+  ) = _CopyWithImpl_Input_FamilyRelationFilterChildFamilyId;
+
+  factory CopyWith_Input_FamilyRelationFilterChildFamilyId.stub(TRes res) =
+      _CopyWithStubImpl_Input_FamilyRelationFilterChildFamilyId;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_FamilyRelationFilterChildFamilyId<TRes>
+    implements CopyWith_Input_FamilyRelationFilterChildFamilyId<TRes> {
+  _CopyWithImpl_Input_FamilyRelationFilterChildFamilyId(
+    this._instance,
+    this._then,
+  );
+
+  final Input_FamilyRelationFilterChildFamilyId _instance;
+
+  final TRes Function(Input_FamilyRelationFilterChildFamilyId) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_FamilyRelationFilterChildFamilyId._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_FamilyRelationFilterChildFamilyId<TRes>
+    implements CopyWith_Input_FamilyRelationFilterChildFamilyId<TRes> {
+  _CopyWithStubImpl_Input_FamilyRelationFilterChildFamilyId(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_FamilyRelationFilterParentFamilyId {
+  factory Input_FamilyRelationFilterParentFamilyId({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_FamilyRelationFilterParentFamilyId._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+  });
+
+  Input_FamilyRelationFilterParentFamilyId._(this._$data);
+
+  factory Input_FamilyRelationFilterParentFamilyId.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    return Input_FamilyRelationFilterParentFamilyId._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String>? get $in => (_$data['in'] as List<String>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FamilyRelationFilterParentFamilyId<
+    Input_FamilyRelationFilterParentFamilyId
+  >
+  get copyWith =>
+      CopyWith_Input_FamilyRelationFilterParentFamilyId(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FamilyRelationFilterParentFamilyId ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_FamilyRelationFilterParentFamilyId<TRes> {
+  factory CopyWith_Input_FamilyRelationFilterParentFamilyId(
+    Input_FamilyRelationFilterParentFamilyId instance,
+    TRes Function(Input_FamilyRelationFilterParentFamilyId) then,
+  ) = _CopyWithImpl_Input_FamilyRelationFilterParentFamilyId;
+
+  factory CopyWith_Input_FamilyRelationFilterParentFamilyId.stub(TRes res) =
+      _CopyWithStubImpl_Input_FamilyRelationFilterParentFamilyId;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_FamilyRelationFilterParentFamilyId<TRes>
+    implements CopyWith_Input_FamilyRelationFilterParentFamilyId<TRes> {
+  _CopyWithImpl_Input_FamilyRelationFilterParentFamilyId(
+    this._instance,
+    this._then,
+  );
+
+  final Input_FamilyRelationFilterParentFamilyId _instance;
+
+  final TRes Function(Input_FamilyRelationFilterParentFamilyId) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_FamilyRelationFilterParentFamilyId._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_FamilyRelationFilterParentFamilyId<TRes>
+    implements CopyWith_Input_FamilyRelationFilterParentFamilyId<TRes> {
+  _CopyWithStubImpl_Input_FamilyRelationFilterParentFamilyId(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_FamilyRelationFilterInput {
+  factory Input_FamilyRelationFilterInput({
+    List<Input_FamilyRelationFilterInput>? and,
+    List<Input_FamilyRelationFilterInput>? or,
+    List<Input_FamilyRelationFilterInput>? not,
+    Input_FamilyRelationFilterParentFamilyId? parentFamilyId,
+    Input_FamilyRelationFilterChildFamilyId? childFamilyId,
+    Input_FamilyFilterInput? child,
+    Input_FamilyFilterInput? parent,
+    Input_FamilyRelationFilterChildName? childName,
+    Input_FamilyRelationFilterParentName? parentName,
+  }) => Input_FamilyRelationFilterInput._({
+    if (and != null) r'and': and,
+    if (or != null) r'or': or,
+    if (not != null) r'not': not,
+    if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+    if (childFamilyId != null) r'childFamilyId': childFamilyId,
+    if (child != null) r'child': child,
+    if (parent != null) r'parent': parent,
+    if (childName != null) r'childName': childName,
+    if (parentName != null) r'parentName': parentName,
+  });
+
+  Input_FamilyRelationFilterInput._(this._$data);
+
+  factory Input_FamilyRelationFilterInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('and')) {
+      final l$and = data['and'];
+      result$data['and'] = (l$and as List<dynamic>?)
+          ?.map(
+            (e) => Input_FamilyRelationFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('or')) {
+      final l$or = data['or'];
+      result$data['or'] = (l$or as List<dynamic>?)
+          ?.map(
+            (e) => Input_FamilyRelationFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('not')) {
+      final l$not = data['not'];
+      result$data['not'] = (l$not as List<dynamic>?)
+          ?.map(
+            (e) => Input_FamilyRelationFilterInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = data['parentFamilyId'];
+      result$data['parentFamilyId'] = l$parentFamilyId == null
+          ? null
+          : Input_FamilyRelationFilterParentFamilyId.fromJson(
+              (l$parentFamilyId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('childFamilyId')) {
+      final l$childFamilyId = data['childFamilyId'];
+      result$data['childFamilyId'] = l$childFamilyId == null
+          ? null
+          : Input_FamilyRelationFilterChildFamilyId.fromJson(
+              (l$childFamilyId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('child')) {
+      final l$child = data['child'];
+      result$data['child'] = l$child == null
+          ? null
+          : Input_FamilyFilterInput.fromJson((l$child as Map<String, dynamic>));
+    }
+    if (data.containsKey('parent')) {
+      final l$parent = data['parent'];
+      result$data['parent'] = l$parent == null
+          ? null
+          : Input_FamilyFilterInput.fromJson(
+              (l$parent as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('childName')) {
+      final l$childName = data['childName'];
+      result$data['childName'] = l$childName == null
+          ? null
+          : Input_FamilyRelationFilterChildName.fromJson(
+              (l$childName as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('parentName')) {
+      final l$parentName = data['parentName'];
+      result$data['parentName'] = l$parentName == null
+          ? null
+          : Input_FamilyRelationFilterParentName.fromJson(
+              (l$parentName as Map<String, dynamic>),
+            );
+    }
+    return Input_FamilyRelationFilterInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_FamilyRelationFilterInput>? get and =>
+      (_$data['and'] as List<Input_FamilyRelationFilterInput>?);
+
+  List<Input_FamilyRelationFilterInput>? get or =>
+      (_$data['or'] as List<Input_FamilyRelationFilterInput>?);
+
+  List<Input_FamilyRelationFilterInput>? get not =>
+      (_$data['not'] as List<Input_FamilyRelationFilterInput>?);
+
+  Input_FamilyRelationFilterParentFamilyId? get parentFamilyId =>
+      (_$data['parentFamilyId'] as Input_FamilyRelationFilterParentFamilyId?);
+
+  Input_FamilyRelationFilterChildFamilyId? get childFamilyId =>
+      (_$data['childFamilyId'] as Input_FamilyRelationFilterChildFamilyId?);
+
+  Input_FamilyFilterInput? get child =>
+      (_$data['child'] as Input_FamilyFilterInput?);
+
+  Input_FamilyFilterInput? get parent =>
+      (_$data['parent'] as Input_FamilyFilterInput?);
+
+  Input_FamilyRelationFilterChildName? get childName =>
+      (_$data['childName'] as Input_FamilyRelationFilterChildName?);
+
+  Input_FamilyRelationFilterParentName? get parentName =>
+      (_$data['parentName'] as Input_FamilyRelationFilterParentName?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('and')) {
+      final l$and = and;
+      result$data['and'] = l$and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('or')) {
+      final l$or = or;
+      result$data['or'] = l$or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('not')) {
+      final l$not = not;
+      result$data['not'] = l$not?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('parentFamilyId')) {
+      final l$parentFamilyId = parentFamilyId;
+      result$data['parentFamilyId'] = l$parentFamilyId?.toJson();
+    }
+    if (_$data.containsKey('childFamilyId')) {
+      final l$childFamilyId = childFamilyId;
+      result$data['childFamilyId'] = l$childFamilyId?.toJson();
+    }
+    if (_$data.containsKey('child')) {
+      final l$child = child;
+      result$data['child'] = l$child?.toJson();
+    }
+    if (_$data.containsKey('parent')) {
+      final l$parent = parent;
+      result$data['parent'] = l$parent?.toJson();
+    }
+    if (_$data.containsKey('childName')) {
+      final l$childName = childName;
+      result$data['childName'] = l$childName?.toJson();
+    }
+    if (_$data.containsKey('parentName')) {
+      final l$parentName = parentName;
+      result$data['parentName'] = l$parentName?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FamilyRelationFilterInput<Input_FamilyRelationFilterInput>
+  get copyWith => CopyWith_Input_FamilyRelationFilterInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FamilyRelationFilterInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$and = and;
+    final lOther$and = other.and;
+    if (_$data.containsKey('and') != other._$data.containsKey('and')) {
+      return false;
+    }
+    if (l$and != null && lOther$and != null) {
+      if (l$and.length != lOther$and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$and.length; i++) {
+        final l$and$entry = l$and[i];
+        final lOther$and$entry = lOther$and[i];
+        if (l$and$entry != lOther$and$entry) {
+          return false;
+        }
+      }
+    } else if (l$and != lOther$and) {
+      return false;
+    }
+    final l$or = or;
+    final lOther$or = other.or;
+    if (_$data.containsKey('or') != other._$data.containsKey('or')) {
+      return false;
+    }
+    if (l$or != null && lOther$or != null) {
+      if (l$or.length != lOther$or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$or.length; i++) {
+        final l$or$entry = l$or[i];
+        final lOther$or$entry = lOther$or[i];
+        if (l$or$entry != lOther$or$entry) {
+          return false;
+        }
+      }
+    } else if (l$or != lOther$or) {
+      return false;
+    }
+    final l$not = not;
+    final lOther$not = other.not;
+    if (_$data.containsKey('not') != other._$data.containsKey('not')) {
+      return false;
+    }
+    if (l$not != null && lOther$not != null) {
+      if (l$not.length != lOther$not.length) {
+        return false;
+      }
+      for (int i = 0; i < l$not.length; i++) {
+        final l$not$entry = l$not[i];
+        final lOther$not$entry = lOther$not[i];
+        if (l$not$entry != lOther$not$entry) {
+          return false;
+        }
+      }
+    } else if (l$not != lOther$not) {
+      return false;
+    }
+    final l$parentFamilyId = parentFamilyId;
+    final lOther$parentFamilyId = other.parentFamilyId;
+    if (_$data.containsKey('parentFamilyId') !=
+        other._$data.containsKey('parentFamilyId')) {
+      return false;
+    }
+    if (l$parentFamilyId != lOther$parentFamilyId) {
+      return false;
+    }
+    final l$childFamilyId = childFamilyId;
+    final lOther$childFamilyId = other.childFamilyId;
+    if (_$data.containsKey('childFamilyId') !=
+        other._$data.containsKey('childFamilyId')) {
+      return false;
+    }
+    if (l$childFamilyId != lOther$childFamilyId) {
+      return false;
+    }
+    final l$child = child;
+    final lOther$child = other.child;
+    if (_$data.containsKey('child') != other._$data.containsKey('child')) {
+      return false;
+    }
+    if (l$child != lOther$child) {
+      return false;
+    }
+    final l$parent = parent;
+    final lOther$parent = other.parent;
+    if (_$data.containsKey('parent') != other._$data.containsKey('parent')) {
+      return false;
+    }
+    if (l$parent != lOther$parent) {
+      return false;
+    }
+    final l$childName = childName;
+    final lOther$childName = other.childName;
+    if (_$data.containsKey('childName') !=
+        other._$data.containsKey('childName')) {
+      return false;
+    }
+    if (l$childName != lOther$childName) {
+      return false;
+    }
+    final l$parentName = parentName;
+    final lOther$parentName = other.parentName;
+    if (_$data.containsKey('parentName') !=
+        other._$data.containsKey('parentName')) {
+      return false;
+    }
+    if (l$parentName != lOther$parentName) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$and = and;
+    final l$or = or;
+    final l$not = not;
+    final l$parentFamilyId = parentFamilyId;
+    final l$childFamilyId = childFamilyId;
+    final l$child = child;
+    final l$parent = parent;
+    final l$childName = childName;
+    final l$parentName = parentName;
+    return Object.hashAll([
+      _$data.containsKey('and')
+          ? l$and == null
+                ? null
+                : Object.hashAll(l$and.map((v) => v))
+          : const {},
+      _$data.containsKey('or')
+          ? l$or == null
+                ? null
+                : Object.hashAll(l$or.map((v) => v))
+          : const {},
+      _$data.containsKey('not')
+          ? l$not == null
+                ? null
+                : Object.hashAll(l$not.map((v) => v))
+          : const {},
+      _$data.containsKey('parentFamilyId') ? l$parentFamilyId : const {},
+      _$data.containsKey('childFamilyId') ? l$childFamilyId : const {},
+      _$data.containsKey('child') ? l$child : const {},
+      _$data.containsKey('parent') ? l$parent : const {},
+      _$data.containsKey('childName') ? l$childName : const {},
+      _$data.containsKey('parentName') ? l$parentName : const {},
     ]);
   }
 }

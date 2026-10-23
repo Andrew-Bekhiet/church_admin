@@ -88,3 +88,6 @@ part "schema_part84.dart";
 part "schema_part85.dart";
 part "schema_part86.dart";
 part "schema_part87.dart";
+part "schema_part88.dart";
+part "schema_part89.dart";
+part "schema_part90.dart";

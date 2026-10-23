@@ -1,36 +1,36 @@
 // Part 49 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_MeetingDayFilterServantsCount<TRes> {
-  factory CopyWith_Input_MeetingDayFilterServantsCount(
-    Input_MeetingDayFilterServantsCount instance,
-    TRes Function(Input_MeetingDayFilterServantsCount) then,
-  ) = _CopyWithImpl_Input_MeetingDayFilterServantsCount;
+abstract class CopyWith_Input_AddressFilterAreaId<TRes> {
+  factory CopyWith_Input_AddressFilterAreaId(
+    Input_AddressFilterAreaId instance,
+    TRes Function(Input_AddressFilterAreaId) then,
+  ) = _CopyWithImpl_Input_AddressFilterAreaId;
 
-  factory CopyWith_Input_MeetingDayFilterServantsCount.stub(TRes res) =
-      _CopyWithStubImpl_Input_MeetingDayFilterServantsCount;
+  factory CopyWith_Input_AddressFilterAreaId.stub(TRes res) =
+      _CopyWithStubImpl_Input_AddressFilterAreaId;
 
   TRes call({
     bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int?>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
   });
 }
 
-class _CopyWithImpl_Input_MeetingDayFilterServantsCount<TRes>
-    implements CopyWith_Input_MeetingDayFilterServantsCount<TRes> {
-  _CopyWithImpl_Input_MeetingDayFilterServantsCount(this._instance, this._then);
+class _CopyWithImpl_Input_AddressFilterAreaId<TRes>
+    implements CopyWith_Input_AddressFilterAreaId<TRes> {
+  _CopyWithImpl_Input_AddressFilterAreaId(this._instance, this._then);
 
-  final Input_MeetingDayFilterServantsCount _instance;
+  final Input_AddressFilterAreaId _instance;
 
-  final TRes Function(Input_MeetingDayFilterServantsCount) _then;
+  final TRes Function(Input_AddressFilterAreaId) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -46,59 +46,59 @@ class _CopyWithImpl_Input_MeetingDayFilterServantsCount<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_MeetingDayFilterServantsCount._({
+    Input_AddressFilterAreaId._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as int?),
-      if (notEq != _undefined) 'notEq': (notEq as int?),
-      if ($in != _undefined) 'in': ($in as List<int?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as int?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as int?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
       if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as int?),
+        'lessThanOrEqual': (lessThanOrEqual as String?),
       if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as int?),
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
       if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as int?),
+        'isDistinctFrom': (isDistinctFrom as String?),
       if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as int?),
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_MeetingDayFilterServantsCount<TRes>
-    implements CopyWith_Input_MeetingDayFilterServantsCount<TRes> {
-  _CopyWithStubImpl_Input_MeetingDayFilterServantsCount(this._res);
+class _CopyWithStubImpl_Input_AddressFilterAreaId<TRes>
+    implements CopyWith_Input_AddressFilterAreaId<TRes> {
+  _CopyWithStubImpl_Input_AddressFilterAreaId(this._res);
 
   TRes _res;
 
   call({
     bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int?>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
   }) => _res;
 }
 
-class Input_MeetingDayFilterPersonsCount {
-  factory Input_MeetingDayFilterPersonsCount({
+class Input_AddressFilterDistrictId {
+  factory Input_AddressFilterDistrictId({
     bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int?>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
-  }) => Input_MeetingDayFilterPersonsCount._({
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => Input_AddressFilterDistrictId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -111,9 +111,390 @@ class Input_MeetingDayFilterPersonsCount {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_MeetingDayFilterPersonsCount._(this._$data);
+  Input_AddressFilterDistrictId._(this._$data);
 
-  factory Input_MeetingDayFilterPersonsCount.fromJson(
+  factory Input_AddressFilterDistrictId.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('isNil')) {
+      final l$isNil = data['isNil'];
+      result$data['isNil'] = (l$isNil as bool?);
+    }
+    if (data.containsKey('eq')) {
+      final l$eq = data['eq'];
+      result$data['eq'] = (l$eq as String?);
+    }
+    if (data.containsKey('notEq')) {
+      final l$notEq = data['notEq'];
+      result$data['notEq'] = (l$notEq as String?);
+    }
+    if (data.containsKey('in')) {
+      final l$$in = data['in'];
+      result$data['in'] = (l$$in as List<dynamic>?)
+          ?.map((e) => (e as String?))
+          .toList();
+    }
+    if (data.containsKey('lessThan')) {
+      final l$lessThan = data['lessThan'];
+      result$data['lessThan'] = (l$lessThan as String?);
+    }
+    if (data.containsKey('greaterThan')) {
+      final l$greaterThan = data['greaterThan'];
+      result$data['greaterThan'] = (l$greaterThan as String?);
+    }
+    if (data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = data['lessThanOrEqual'];
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
+    }
+    if (data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = data['isDistinctFrom'];
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
+    }
+    if (data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
+    }
+    return Input_AddressFilterDistrictId._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get isNil => (_$data['isNil'] as bool?);
+
+  String? get eq => (_$data['eq'] as String?);
+
+  String? get notEq => (_$data['notEq'] as String?);
+
+  List<String?>? get $in => (_$data['in'] as List<String?>?);
+
+  String? get lessThan => (_$data['lessThan'] as String?);
+
+  String? get greaterThan => (_$data['greaterThan'] as String?);
+
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
+
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
+
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isNil')) {
+      final l$isNil = isNil;
+      result$data['isNil'] = l$isNil;
+    }
+    if (_$data.containsKey('eq')) {
+      final l$eq = eq;
+      result$data['eq'] = l$eq;
+    }
+    if (_$data.containsKey('notEq')) {
+      final l$notEq = notEq;
+      result$data['notEq'] = l$notEq;
+    }
+    if (_$data.containsKey('in')) {
+      final l$$in = $in;
+      result$data['in'] = l$$in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('lessThan')) {
+      final l$lessThan = lessThan;
+      result$data['lessThan'] = l$lessThan;
+    }
+    if (_$data.containsKey('greaterThan')) {
+      final l$greaterThan = greaterThan;
+      result$data['greaterThan'] = l$greaterThan;
+    }
+    if (_$data.containsKey('lessThanOrEqual')) {
+      final l$lessThanOrEqual = lessThanOrEqual;
+      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
+    }
+    if (_$data.containsKey('greaterThanOrEqual')) {
+      final l$greaterThanOrEqual = greaterThanOrEqual;
+      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    }
+    if (_$data.containsKey('isDistinctFrom')) {
+      final l$isDistinctFrom = isDistinctFrom;
+      result$data['isDistinctFrom'] = l$isDistinctFrom;
+    }
+    if (_$data.containsKey('isNotDistinctFrom')) {
+      final l$isNotDistinctFrom = isNotDistinctFrom;
+      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AddressFilterDistrictId<Input_AddressFilterDistrictId>
+  get copyWith => CopyWith_Input_AddressFilterDistrictId(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AddressFilterDistrictId ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isNil = isNil;
+    final lOther$isNil = other.isNil;
+    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+      return false;
+    }
+    if (l$isNil != lOther$isNil) {
+      return false;
+    }
+    final l$eq = eq;
+    final lOther$eq = other.eq;
+    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+      return false;
+    }
+    if (l$eq != lOther$eq) {
+      return false;
+    }
+    final l$notEq = notEq;
+    final lOther$notEq = other.notEq;
+    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+      return false;
+    }
+    if (l$notEq != lOther$notEq) {
+      return false;
+    }
+    final l$$in = $in;
+    final lOther$$in = other.$in;
+    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
+      return false;
+    }
+    if (l$$in != null && lOther$$in != null) {
+      if (l$$in.length != lOther$$in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$in.length; i++) {
+        final l$$in$entry = l$$in[i];
+        final lOther$$in$entry = lOther$$in[i];
+        if (l$$in$entry != lOther$$in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$in != lOther$$in) {
+      return false;
+    }
+    final l$lessThan = lessThan;
+    final lOther$lessThan = other.lessThan;
+    if (_$data.containsKey('lessThan') !=
+        other._$data.containsKey('lessThan')) {
+      return false;
+    }
+    if (l$lessThan != lOther$lessThan) {
+      return false;
+    }
+    final l$greaterThan = greaterThan;
+    final lOther$greaterThan = other.greaterThan;
+    if (_$data.containsKey('greaterThan') !=
+        other._$data.containsKey('greaterThan')) {
+      return false;
+    }
+    if (l$greaterThan != lOther$greaterThan) {
+      return false;
+    }
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final lOther$lessThanOrEqual = other.lessThanOrEqual;
+    if (_$data.containsKey('lessThanOrEqual') !=
+        other._$data.containsKey('lessThanOrEqual')) {
+      return false;
+    }
+    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
+      return false;
+    }
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
+    if (_$data.containsKey('greaterThanOrEqual') !=
+        other._$data.containsKey('greaterThanOrEqual')) {
+      return false;
+    }
+    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+      return false;
+    }
+    final l$isDistinctFrom = isDistinctFrom;
+    final lOther$isDistinctFrom = other.isDistinctFrom;
+    if (_$data.containsKey('isDistinctFrom') !=
+        other._$data.containsKey('isDistinctFrom')) {
+      return false;
+    }
+    if (l$isDistinctFrom != lOther$isDistinctFrom) {
+      return false;
+    }
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
+    if (_$data.containsKey('isNotDistinctFrom') !=
+        other._$data.containsKey('isNotDistinctFrom')) {
+      return false;
+    }
+    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$isNil = isNil;
+    final l$eq = eq;
+    final l$notEq = notEq;
+    final l$$in = $in;
+    final l$lessThan = lessThan;
+    final l$greaterThan = greaterThan;
+    final l$lessThanOrEqual = lessThanOrEqual;
+    final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$isDistinctFrom = isDistinctFrom;
+    final l$isNotDistinctFrom = isNotDistinctFrom;
+    return Object.hashAll([
+      _$data.containsKey('isNil') ? l$isNil : const {},
+      _$data.containsKey('eq') ? l$eq : const {},
+      _$data.containsKey('notEq') ? l$notEq : const {},
+      _$data.containsKey('in')
+          ? l$$in == null
+                ? null
+                : Object.hashAll(l$$in.map((v) => v))
+          : const {},
+      _$data.containsKey('lessThan') ? l$lessThan : const {},
+      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
+      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
+      _$data.containsKey('greaterThanOrEqual')
+          ? l$greaterThanOrEqual
+          : const {},
+      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
+      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AddressFilterDistrictId<TRes> {
+  factory CopyWith_Input_AddressFilterDistrictId(
+    Input_AddressFilterDistrictId instance,
+    TRes Function(Input_AddressFilterDistrictId) then,
+  ) = _CopyWithImpl_Input_AddressFilterDistrictId;
+
+  factory CopyWith_Input_AddressFilterDistrictId.stub(TRes res) =
+      _CopyWithStubImpl_Input_AddressFilterDistrictId;
+
+  TRes call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  });
+}
+
+class _CopyWithImpl_Input_AddressFilterDistrictId<TRes>
+    implements CopyWith_Input_AddressFilterDistrictId<TRes> {
+  _CopyWithImpl_Input_AddressFilterDistrictId(this._instance, this._then);
+
+  final Input_AddressFilterDistrictId _instance;
+
+  final TRes Function(Input_AddressFilterDistrictId) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isNil = _undefined,
+    Object? eq = _undefined,
+    Object? notEq = _undefined,
+    Object? $in = _undefined,
+    Object? lessThan = _undefined,
+    Object? greaterThan = _undefined,
+    Object? lessThanOrEqual = _undefined,
+    Object? greaterThanOrEqual = _undefined,
+    Object? isDistinctFrom = _undefined,
+    Object? isNotDistinctFrom = _undefined,
+  }) => _then(
+    Input_AddressFilterDistrictId._({
+      ..._instance._$data,
+      if (isNil != _undefined) 'isNil': (isNil as bool?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String?>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
+      if (lessThanOrEqual != _undefined)
+        'lessThanOrEqual': (lessThanOrEqual as String?),
+      if (greaterThanOrEqual != _undefined)
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (isDistinctFrom != _undefined)
+        'isDistinctFrom': (isDistinctFrom as String?),
+      if (isNotDistinctFrom != _undefined)
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_AddressFilterDistrictId<TRes>
+    implements CopyWith_Input_AddressFilterDistrictId<TRes> {
+  _CopyWithStubImpl_Input_AddressFilterDistrictId(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String?>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+  }) => _res;
+}
+
+class Input_AddressFilterCountryIsoCode {
+  factory Input_AddressFilterCountryIsoCode({
+    bool? isNil,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
+  }) => Input_AddressFilterCountryIsoCode._({
+    if (isNil != null) r'isNil': isNil,
+    if (eq != null) r'eq': eq,
+    if (notEq != null) r'notEq': notEq,
+    if ($in != null) r'in': $in,
+    if (lessThan != null) r'lessThan': lessThan,
+    if (greaterThan != null) r'greaterThan': greaterThan,
+    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
+    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
+    if (contains != null) r'contains': contains,
+    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
+    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
+    if (stringEndsWith != null) r'stringEndsWith': stringEndsWith,
+    if (stringStartsWith != null) r'stringStartsWith': stringStartsWith,
+    if (like != null) r'like': like,
+    if (ilike != null) r'ilike': ilike,
+  });
+
+  Input_AddressFilterCountryIsoCode._(this._$data);
+
+  factory Input_AddressFilterCountryIsoCode.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
@@ -123,66 +504,96 @@ class Input_MeetingDayFilterPersonsCount {
     }
     if (data.containsKey('eq')) {
       final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as int?);
+      result$data['eq'] = (l$eq as String?);
     }
     if (data.containsKey('notEq')) {
       final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as int?);
+      result$data['notEq'] = (l$notEq as String?);
     }
     if (data.containsKey('in')) {
       final l$$in = data['in'];
       result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as int?))
+          ?.map((e) => (e as String))
           .toList();
     }
     if (data.containsKey('lessThan')) {
       final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as int?);
+      result$data['lessThan'] = (l$lessThan as String?);
     }
     if (data.containsKey('greaterThan')) {
       final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as int?);
+      result$data['greaterThan'] = (l$greaterThan as String?);
     }
     if (data.containsKey('lessThanOrEqual')) {
       final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as int?);
+      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as String?);
     }
     if (data.containsKey('greaterThanOrEqual')) {
       final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as int?);
+      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as String?);
+    }
+    if (data.containsKey('contains')) {
+      final l$contains = data['contains'];
+      result$data['contains'] = (l$contains as String?);
     }
     if (data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as int?);
+      result$data['isDistinctFrom'] = (l$isDistinctFrom as String?);
     }
     if (data.containsKey('isNotDistinctFrom')) {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as int?);
+      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_MeetingDayFilterPersonsCount._(result$data);
+    if (data.containsKey('stringEndsWith')) {
+      final l$stringEndsWith = data['stringEndsWith'];
+      result$data['stringEndsWith'] = (l$stringEndsWith as String?);
+    }
+    if (data.containsKey('stringStartsWith')) {
+      final l$stringStartsWith = data['stringStartsWith'];
+      result$data['stringStartsWith'] = (l$stringStartsWith as String?);
+    }
+    if (data.containsKey('like')) {
+      final l$like = data['like'];
+      result$data['like'] = (l$like as String?);
+    }
+    if (data.containsKey('ilike')) {
+      final l$ilike = data['ilike'];
+      result$data['ilike'] = (l$ilike as String?);
+    }
+    return Input_AddressFilterCountryIsoCode._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   bool? get isNil => (_$data['isNil'] as bool?);
 
-  int? get eq => (_$data['eq'] as int?);
+  String? get eq => (_$data['eq'] as String?);
 
-  int? get notEq => (_$data['notEq'] as int?);
+  String? get notEq => (_$data['notEq'] as String?);
 
-  List<int?>? get $in => (_$data['in'] as List<int?>?);
+  List<String>? get $in => (_$data['in'] as List<String>?);
 
-  int? get lessThan => (_$data['lessThan'] as int?);
+  String? get lessThan => (_$data['lessThan'] as String?);
 
-  int? get greaterThan => (_$data['greaterThan'] as int?);
+  String? get greaterThan => (_$data['greaterThan'] as String?);
 
-  int? get lessThanOrEqual => (_$data['lessThanOrEqual'] as int?);
+  String? get lessThanOrEqual => (_$data['lessThanOrEqual'] as String?);
 
-  int? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as int?);
+  String? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as String?);
 
-  int? get isDistinctFrom => (_$data['isDistinctFrom'] as int?);
+  String? get contains => (_$data['contains'] as String?);
 
-  int? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as int?);
+  String? get isDistinctFrom => (_$data['isDistinctFrom'] as String?);
+
+  String? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as String?);
+
+  String? get stringEndsWith => (_$data['stringEndsWith'] as String?);
+
+  String? get stringStartsWith => (_$data['stringStartsWith'] as String?);
+
+  String? get like => (_$data['like'] as String?);
+
+  String? get ilike => (_$data['ilike'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -218,378 +629,9 @@ class Input_MeetingDayFilterPersonsCount {
       final l$greaterThanOrEqual = greaterThanOrEqual;
       result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
     }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom;
-    }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_MeetingDayFilterPersonsCount<
-    Input_MeetingDayFilterPersonsCount
-  >
-  get copyWith => CopyWith_Input_MeetingDayFilterPersonsCount(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_MeetingDayFilterPersonsCount ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
-      return false;
-    }
-    if (l$isNil != lOther$isNil) {
-      return false;
-    }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
-      return false;
-    }
-    if (l$eq != lOther$eq) {
-      return false;
-    }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
-      return false;
-    }
-    if (l$notEq != lOther$notEq) {
-      return false;
-    }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$in != lOther$$in) {
-      return false;
-    }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
-      return false;
-    }
-    if (l$lessThan != lOther$lessThan) {
-      return false;
-    }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
-      return false;
-    }
-    if (l$greaterThan != lOther$greaterThan) {
-      return false;
-    }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
-      return false;
-    }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
-      return false;
-    }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
-      return false;
-    }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
-      return false;
-    }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
-      return false;
-    }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
-      return false;
-    }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
-      return false;
-    }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
-                ? null
-                : Object.hashAll(l$$in.map((v) => v))
-          : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
-          : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_MeetingDayFilterPersonsCount<TRes> {
-  factory CopyWith_Input_MeetingDayFilterPersonsCount(
-    Input_MeetingDayFilterPersonsCount instance,
-    TRes Function(Input_MeetingDayFilterPersonsCount) then,
-  ) = _CopyWithImpl_Input_MeetingDayFilterPersonsCount;
-
-  factory CopyWith_Input_MeetingDayFilterPersonsCount.stub(TRes res) =
-      _CopyWithStubImpl_Input_MeetingDayFilterPersonsCount;
-
-  TRes call({
-    bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int?>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
-  });
-}
-
-class _CopyWithImpl_Input_MeetingDayFilterPersonsCount<TRes>
-    implements CopyWith_Input_MeetingDayFilterPersonsCount<TRes> {
-  _CopyWithImpl_Input_MeetingDayFilterPersonsCount(this._instance, this._then);
-
-  final Input_MeetingDayFilterPersonsCount _instance;
-
-  final TRes Function(Input_MeetingDayFilterPersonsCount) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
-  }) => _then(
-    Input_MeetingDayFilterPersonsCount._({
-      ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as int?),
-      if (notEq != _undefined) 'notEq': (notEq as int?),
-      if ($in != _undefined) 'in': ($in as List<int?>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as int?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as int?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as int?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as int?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as int?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as int?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_MeetingDayFilterPersonsCount<TRes>
-    implements CopyWith_Input_MeetingDayFilterPersonsCount<TRes> {
-  _CopyWithStubImpl_Input_MeetingDayFilterPersonsCount(this._res);
-
-  TRes _res;
-
-  call({
-    bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int?>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
-  }) => _res;
-}
-
-class Input_MeetingDayFilterGender {
-  factory Input_MeetingDayFilterGender({
-    bool? isNil,
-    bool? eq,
-    bool? notEq,
-    List<bool>? $in,
-    bool? lessThan,
-    bool? greaterThan,
-    bool? lessThanOrEqual,
-    bool? greaterThanOrEqual,
-    bool? isDistinctFrom,
-    bool? isNotDistinctFrom,
-  }) => Input_MeetingDayFilterGender._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-  });
-
-  Input_MeetingDayFilterGender._(this._$data);
-
-  factory Input_MeetingDayFilterGender.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as bool?);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as bool?);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as bool))
-          .toList();
-    }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as bool?);
-    }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as bool?);
-    }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as bool?);
-    }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as bool?);
-    }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as bool?);
-    }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as bool?);
-    }
-    return Input_MeetingDayFilterGender._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get isNil => (_$data['isNil'] as bool?);
-
-  bool? get eq => (_$data['eq'] as bool?);
-
-  bool? get notEq => (_$data['notEq'] as bool?);
-
-  List<bool>? get $in => (_$data['in'] as List<bool>?);
-
-  bool? get lessThan => (_$data['lessThan'] as bool?);
-
-  bool? get greaterThan => (_$data['greaterThan'] as bool?);
-
-  bool? get lessThanOrEqual => (_$data['lessThanOrEqual'] as bool?);
-
-  bool? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as bool?);
-
-  bool? get isDistinctFrom => (_$data['isDistinctFrom'] as bool?);
-
-  bool? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as bool?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
-    }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq;
-    }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq;
-    }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan;
-    }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan;
-    }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
-    }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
+    if (_$data.containsKey('contains')) {
+      final l$contains = contains;
+      result$data['contains'] = l$contains;
     }
     if (_$data.containsKey('isDistinctFrom')) {
       final l$isDistinctFrom = isDistinctFrom;
@@ -599,18 +641,34 @@ class Input_MeetingDayFilterGender {
       final l$isNotDistinctFrom = isNotDistinctFrom;
       result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
     }
+    if (_$data.containsKey('stringEndsWith')) {
+      final l$stringEndsWith = stringEndsWith;
+      result$data['stringEndsWith'] = l$stringEndsWith;
+    }
+    if (_$data.containsKey('stringStartsWith')) {
+      final l$stringStartsWith = stringStartsWith;
+      result$data['stringStartsWith'] = l$stringStartsWith;
+    }
+    if (_$data.containsKey('like')) {
+      final l$like = like;
+      result$data['like'] = l$like;
+    }
+    if (_$data.containsKey('ilike')) {
+      final l$ilike = ilike;
+      result$data['ilike'] = l$ilike;
+    }
     return result$data;
   }
 
-  CopyWith_Input_MeetingDayFilterGender<Input_MeetingDayFilterGender>
-  get copyWith => CopyWith_Input_MeetingDayFilterGender(this, (i) => i);
+  CopyWith_Input_AddressFilterCountryIsoCode<Input_AddressFilterCountryIsoCode>
+  get copyWith => CopyWith_Input_AddressFilterCountryIsoCode(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_MeetingDayFilterGender ||
+    if (other is! Input_AddressFilterCountryIsoCode ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -693,377 +751,13 @@ class Input_MeetingDayFilterGender {
     if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
       return false;
     }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
+    final l$contains = contains;
+    final lOther$contains = other.contains;
+    if (_$data.containsKey('contains') !=
+        other._$data.containsKey('contains')) {
       return false;
     }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
-      return false;
-    }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
-      return false;
-    }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
-                ? null
-                : Object.hashAll(l$$in.map((v) => v))
-          : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
-          : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_MeetingDayFilterGender<TRes> {
-  factory CopyWith_Input_MeetingDayFilterGender(
-    Input_MeetingDayFilterGender instance,
-    TRes Function(Input_MeetingDayFilterGender) then,
-  ) = _CopyWithImpl_Input_MeetingDayFilterGender;
-
-  factory CopyWith_Input_MeetingDayFilterGender.stub(TRes res) =
-      _CopyWithStubImpl_Input_MeetingDayFilterGender;
-
-  TRes call({
-    bool? isNil,
-    bool? eq,
-    bool? notEq,
-    List<bool>? $in,
-    bool? lessThan,
-    bool? greaterThan,
-    bool? lessThanOrEqual,
-    bool? greaterThanOrEqual,
-    bool? isDistinctFrom,
-    bool? isNotDistinctFrom,
-  });
-}
-
-class _CopyWithImpl_Input_MeetingDayFilterGender<TRes>
-    implements CopyWith_Input_MeetingDayFilterGender<TRes> {
-  _CopyWithImpl_Input_MeetingDayFilterGender(this._instance, this._then);
-
-  final Input_MeetingDayFilterGender _instance;
-
-  final TRes Function(Input_MeetingDayFilterGender) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
-  }) => _then(
-    Input_MeetingDayFilterGender._({
-      ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as bool?),
-      if (notEq != _undefined) 'notEq': (notEq as bool?),
-      if ($in != _undefined) 'in': ($in as List<bool>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as bool?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as bool?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as bool?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as bool?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as bool?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as bool?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_MeetingDayFilterGender<TRes>
-    implements CopyWith_Input_MeetingDayFilterGender<TRes> {
-  _CopyWithStubImpl_Input_MeetingDayFilterGender(this._res);
-
-  TRes _res;
-
-  call({
-    bool? isNil,
-    bool? eq,
-    bool? notEq,
-    List<bool>? $in,
-    bool? lessThan,
-    bool? greaterThan,
-    bool? lessThanOrEqual,
-    bool? greaterThanOrEqual,
-    bool? isDistinctFrom,
-    bool? isNotDistinctFrom,
-  }) => _res;
-}
-
-class Input_MeetingDayFilterStudyYearId {
-  factory Input_MeetingDayFilterStudyYearId({
-    bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
-  }) => Input_MeetingDayFilterStudyYearId._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-  });
-
-  Input_MeetingDayFilterStudyYearId._(this._$data);
-
-  factory Input_MeetingDayFilterStudyYearId.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = (l$eq as int?);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = (l$notEq as int?);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => (e as int))
-          .toList();
-    }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = (l$lessThan as int?);
-    }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = (l$greaterThan as int?);
-    }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = (l$lessThanOrEqual as int?);
-    }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = (l$greaterThanOrEqual as int?);
-    }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = (l$isDistinctFrom as int?);
-    }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as int?);
-    }
-    return Input_MeetingDayFilterStudyYearId._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get isNil => (_$data['isNil'] as bool?);
-
-  int? get eq => (_$data['eq'] as int?);
-
-  int? get notEq => (_$data['notEq'] as int?);
-
-  List<int>? get $in => (_$data['in'] as List<int>?);
-
-  int? get lessThan => (_$data['lessThan'] as int?);
-
-  int? get greaterThan => (_$data['greaterThan'] as int?);
-
-  int? get lessThanOrEqual => (_$data['lessThanOrEqual'] as int?);
-
-  int? get greaterThanOrEqual => (_$data['greaterThanOrEqual'] as int?);
-
-  int? get isDistinctFrom => (_$data['isDistinctFrom'] as int?);
-
-  int? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as int?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
-    }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq;
-    }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq;
-    }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan;
-    }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan;
-    }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual;
-    }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual;
-    }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom;
-    }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_MeetingDayFilterStudyYearId<Input_MeetingDayFilterStudyYearId>
-  get copyWith => CopyWith_Input_MeetingDayFilterStudyYearId(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_MeetingDayFilterStudyYearId ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
-      return false;
-    }
-    if (l$isNil != lOther$isNil) {
-      return false;
-    }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
-      return false;
-    }
-    if (l$eq != lOther$eq) {
-      return false;
-    }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
-      return false;
-    }
-    if (l$notEq != lOther$notEq) {
-      return false;
-    }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$in != lOther$$in) {
-      return false;
-    }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
-      return false;
-    }
-    if (l$lessThan != lOther$lessThan) {
-      return false;
-    }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
-      return false;
-    }
-    if (l$greaterThan != lOther$greaterThan) {
-      return false;
-    }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
-      return false;
-    }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
-      return false;
-    }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
-      return false;
-    }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
+    if (l$contains != lOther$contains) {
       return false;
     }
     final l$isDistinctFrom = isDistinctFrom;
@@ -1084,400 +778,38 @@ class Input_MeetingDayFilterStudyYearId {
     if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
       return false;
     }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$isNil = isNil;
-    final l$eq = eq;
-    final l$notEq = notEq;
-    final l$$in = $in;
-    final l$lessThan = lessThan;
-    final l$greaterThan = greaterThan;
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final l$isDistinctFrom = isDistinctFrom;
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    return Object.hashAll([
-      _$data.containsKey('isNil') ? l$isNil : const {},
-      _$data.containsKey('eq') ? l$eq : const {},
-      _$data.containsKey('notEq') ? l$notEq : const {},
-      _$data.containsKey('in')
-          ? l$$in == null
-                ? null
-                : Object.hashAll(l$$in.map((v) => v))
-          : const {},
-      _$data.containsKey('lessThan') ? l$lessThan : const {},
-      _$data.containsKey('greaterThan') ? l$greaterThan : const {},
-      _$data.containsKey('lessThanOrEqual') ? l$lessThanOrEqual : const {},
-      _$data.containsKey('greaterThanOrEqual')
-          ? l$greaterThanOrEqual
-          : const {},
-      _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
-      _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_MeetingDayFilterStudyYearId<TRes> {
-  factory CopyWith_Input_MeetingDayFilterStudyYearId(
-    Input_MeetingDayFilterStudyYearId instance,
-    TRes Function(Input_MeetingDayFilterStudyYearId) then,
-  ) = _CopyWithImpl_Input_MeetingDayFilterStudyYearId;
-
-  factory CopyWith_Input_MeetingDayFilterStudyYearId.stub(TRes res) =
-      _CopyWithStubImpl_Input_MeetingDayFilterStudyYearId;
-
-  TRes call({
-    bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
-  });
-}
-
-class _CopyWithImpl_Input_MeetingDayFilterStudyYearId<TRes>
-    implements CopyWith_Input_MeetingDayFilterStudyYearId<TRes> {
-  _CopyWithImpl_Input_MeetingDayFilterStudyYearId(this._instance, this._then);
-
-  final Input_MeetingDayFilterStudyYearId _instance;
-
-  final TRes Function(Input_MeetingDayFilterStudyYearId) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? isNil = _undefined,
-    Object? eq = _undefined,
-    Object? notEq = _undefined,
-    Object? $in = _undefined,
-    Object? lessThan = _undefined,
-    Object? greaterThan = _undefined,
-    Object? lessThanOrEqual = _undefined,
-    Object? greaterThanOrEqual = _undefined,
-    Object? isDistinctFrom = _undefined,
-    Object? isNotDistinctFrom = _undefined,
-  }) => _then(
-    Input_MeetingDayFilterStudyYearId._({
-      ..._instance._$data,
-      if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as int?),
-      if (notEq != _undefined) 'notEq': (notEq as int?),
-      if ($in != _undefined) 'in': ($in as List<int>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as int?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as int?),
-      if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as int?),
-      if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as int?),
-      if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as int?),
-      if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as int?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_MeetingDayFilterStudyYearId<TRes>
-    implements CopyWith_Input_MeetingDayFilterStudyYearId<TRes> {
-  _CopyWithStubImpl_Input_MeetingDayFilterStudyYearId(this._res);
-
-  TRes _res;
-
-  call({
-    bool? isNil,
-    int? eq,
-    int? notEq,
-    List<int>? $in,
-    int? lessThan,
-    int? greaterThan,
-    int? lessThanOrEqual,
-    int? greaterThanOrEqual,
-    int? isDistinctFrom,
-    int? isNotDistinctFrom,
-  }) => _res;
-}
-
-class Input_MeetingDayFilterDay {
-  factory Input_MeetingDayFilterDay({
-    bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
-  }) => Input_MeetingDayFilterDay._({
-    if (isNil != null) r'isNil': isNil,
-    if (eq != null) r'eq': eq,
-    if (notEq != null) r'notEq': notEq,
-    if ($in != null) r'in': $in,
-    if (lessThan != null) r'lessThan': lessThan,
-    if (greaterThan != null) r'greaterThan': greaterThan,
-    if (lessThanOrEqual != null) r'lessThanOrEqual': lessThanOrEqual,
-    if (greaterThanOrEqual != null) r'greaterThanOrEqual': greaterThanOrEqual,
-    if (isDistinctFrom != null) r'isDistinctFrom': isDistinctFrom,
-    if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
-  });
-
-  Input_MeetingDayFilterDay._(this._$data);
-
-  factory Input_MeetingDayFilterDay.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('isNil')) {
-      final l$isNil = data['isNil'];
-      result$data['isNil'] = (l$isNil as bool?);
-    }
-    if (data.containsKey('eq')) {
-      final l$eq = data['eq'];
-      result$data['eq'] = l$eq == null ? null : dateFromString(l$eq);
-    }
-    if (data.containsKey('notEq')) {
-      final l$notEq = data['notEq'];
-      result$data['notEq'] = l$notEq == null ? null : dateFromString(l$notEq);
-    }
-    if (data.containsKey('in')) {
-      final l$$in = data['in'];
-      result$data['in'] = (l$$in as List<dynamic>?)
-          ?.map((e) => dateFromString(e))
-          .toList();
-    }
-    if (data.containsKey('lessThan')) {
-      final l$lessThan = data['lessThan'];
-      result$data['lessThan'] = l$lessThan == null
-          ? null
-          : dateFromString(l$lessThan);
-    }
-    if (data.containsKey('greaterThan')) {
-      final l$greaterThan = data['greaterThan'];
-      result$data['greaterThan'] = l$greaterThan == null
-          ? null
-          : dateFromString(l$greaterThan);
-    }
-    if (data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = data['lessThanOrEqual'];
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
-          ? null
-          : dateFromString(l$lessThanOrEqual);
-    }
-    if (data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = data['greaterThanOrEqual'];
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
-          ? null
-          : dateFromString(l$greaterThanOrEqual);
-    }
-    if (data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = data['isDistinctFrom'];
-      result$data['isDistinctFrom'] = l$isDistinctFrom == null
-          ? null
-          : dateFromString(l$isDistinctFrom);
-    }
-    if (data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = data['isNotDistinctFrom'];
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
-          ? null
-          : dateFromString(l$isNotDistinctFrom);
-    }
-    return Input_MeetingDayFilterDay._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get isNil => (_$data['isNil'] as bool?);
-
-  DateTime? get eq => (_$data['eq'] as DateTime?);
-
-  DateTime? get notEq => (_$data['notEq'] as DateTime?);
-
-  List<DateTime>? get $in => (_$data['in'] as List<DateTime>?);
-
-  DateTime? get lessThan => (_$data['lessThan'] as DateTime?);
-
-  DateTime? get greaterThan => (_$data['greaterThan'] as DateTime?);
-
-  DateTime? get lessThanOrEqual => (_$data['lessThanOrEqual'] as DateTime?);
-
-  DateTime? get greaterThanOrEqual =>
-      (_$data['greaterThanOrEqual'] as DateTime?);
-
-  DateTime? get isDistinctFrom => (_$data['isDistinctFrom'] as DateTime?);
-
-  DateTime? get isNotDistinctFrom => (_$data['isNotDistinctFrom'] as DateTime?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('isNil')) {
-      final l$isNil = isNil;
-      result$data['isNil'] = l$isNil;
-    }
-    if (_$data.containsKey('eq')) {
-      final l$eq = eq;
-      result$data['eq'] = l$eq == null ? null : dateToString(l$eq);
-    }
-    if (_$data.containsKey('notEq')) {
-      final l$notEq = notEq;
-      result$data['notEq'] = l$notEq == null ? null : dateToString(l$notEq);
-    }
-    if (_$data.containsKey('in')) {
-      final l$$in = $in;
-      result$data['in'] = l$$in?.map((e) => dateToString(e)).toList();
-    }
-    if (_$data.containsKey('lessThan')) {
-      final l$lessThan = lessThan;
-      result$data['lessThan'] = l$lessThan == null
-          ? null
-          : dateToString(l$lessThan);
-    }
-    if (_$data.containsKey('greaterThan')) {
-      final l$greaterThan = greaterThan;
-      result$data['greaterThan'] = l$greaterThan == null
-          ? null
-          : dateToString(l$greaterThan);
-    }
-    if (_$data.containsKey('lessThanOrEqual')) {
-      final l$lessThanOrEqual = lessThanOrEqual;
-      result$data['lessThanOrEqual'] = l$lessThanOrEqual == null
-          ? null
-          : dateToString(l$lessThanOrEqual);
-    }
-    if (_$data.containsKey('greaterThanOrEqual')) {
-      final l$greaterThanOrEqual = greaterThanOrEqual;
-      result$data['greaterThanOrEqual'] = l$greaterThanOrEqual == null
-          ? null
-          : dateToString(l$greaterThanOrEqual);
-    }
-    if (_$data.containsKey('isDistinctFrom')) {
-      final l$isDistinctFrom = isDistinctFrom;
-      result$data['isDistinctFrom'] = l$isDistinctFrom == null
-          ? null
-          : dateToString(l$isDistinctFrom);
-    }
-    if (_$data.containsKey('isNotDistinctFrom')) {
-      final l$isNotDistinctFrom = isNotDistinctFrom;
-      result$data['isNotDistinctFrom'] = l$isNotDistinctFrom == null
-          ? null
-          : dateToString(l$isNotDistinctFrom);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_MeetingDayFilterDay<Input_MeetingDayFilterDay> get copyWith =>
-      CopyWith_Input_MeetingDayFilterDay(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_MeetingDayFilterDay ||
-        runtimeType != other.runtimeType) {
+    final l$stringEndsWith = stringEndsWith;
+    final lOther$stringEndsWith = other.stringEndsWith;
+    if (_$data.containsKey('stringEndsWith') !=
+        other._$data.containsKey('stringEndsWith')) {
       return false;
     }
-    final l$isNil = isNil;
-    final lOther$isNil = other.isNil;
-    if (_$data.containsKey('isNil') != other._$data.containsKey('isNil')) {
+    if (l$stringEndsWith != lOther$stringEndsWith) {
       return false;
     }
-    if (l$isNil != lOther$isNil) {
+    final l$stringStartsWith = stringStartsWith;
+    final lOther$stringStartsWith = other.stringStartsWith;
+    if (_$data.containsKey('stringStartsWith') !=
+        other._$data.containsKey('stringStartsWith')) {
       return false;
     }
-    final l$eq = eq;
-    final lOther$eq = other.eq;
-    if (_$data.containsKey('eq') != other._$data.containsKey('eq')) {
+    if (l$stringStartsWith != lOther$stringStartsWith) {
       return false;
     }
-    if (l$eq != lOther$eq) {
+    final l$like = like;
+    final lOther$like = other.like;
+    if (_$data.containsKey('like') != other._$data.containsKey('like')) {
       return false;
     }
-    final l$notEq = notEq;
-    final lOther$notEq = other.notEq;
-    if (_$data.containsKey('notEq') != other._$data.containsKey('notEq')) {
+    if (l$like != lOther$like) {
       return false;
     }
-    if (l$notEq != lOther$notEq) {
+    final l$ilike = ilike;
+    final lOther$ilike = other.ilike;
+    if (_$data.containsKey('ilike') != other._$data.containsKey('ilike')) {
       return false;
     }
-    final l$$in = $in;
-    final lOther$$in = other.$in;
-    if (_$data.containsKey('in') != other._$data.containsKey('in')) {
-      return false;
-    }
-    if (l$$in != null && lOther$$in != null) {
-      if (l$$in.length != lOther$$in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$in.length; i++) {
-        final l$$in$entry = l$$in[i];
-        final lOther$$in$entry = lOther$$in[i];
-        if (l$$in$entry != lOther$$in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$in != lOther$$in) {
-      return false;
-    }
-    final l$lessThan = lessThan;
-    final lOther$lessThan = other.lessThan;
-    if (_$data.containsKey('lessThan') !=
-        other._$data.containsKey('lessThan')) {
-      return false;
-    }
-    if (l$lessThan != lOther$lessThan) {
-      return false;
-    }
-    final l$greaterThan = greaterThan;
-    final lOther$greaterThan = other.greaterThan;
-    if (_$data.containsKey('greaterThan') !=
-        other._$data.containsKey('greaterThan')) {
-      return false;
-    }
-    if (l$greaterThan != lOther$greaterThan) {
-      return false;
-    }
-    final l$lessThanOrEqual = lessThanOrEqual;
-    final lOther$lessThanOrEqual = other.lessThanOrEqual;
-    if (_$data.containsKey('lessThanOrEqual') !=
-        other._$data.containsKey('lessThanOrEqual')) {
-      return false;
-    }
-    if (l$lessThanOrEqual != lOther$lessThanOrEqual) {
-      return false;
-    }
-    final l$greaterThanOrEqual = greaterThanOrEqual;
-    final lOther$greaterThanOrEqual = other.greaterThanOrEqual;
-    if (_$data.containsKey('greaterThanOrEqual') !=
-        other._$data.containsKey('greaterThanOrEqual')) {
-      return false;
-    }
-    if (l$greaterThanOrEqual != lOther$greaterThanOrEqual) {
-      return false;
-    }
-    final l$isDistinctFrom = isDistinctFrom;
-    final lOther$isDistinctFrom = other.isDistinctFrom;
-    if (_$data.containsKey('isDistinctFrom') !=
-        other._$data.containsKey('isDistinctFrom')) {
-      return false;
-    }
-    if (l$isDistinctFrom != lOther$isDistinctFrom) {
-      return false;
-    }
-    final l$isNotDistinctFrom = isNotDistinctFrom;
-    final lOther$isNotDistinctFrom = other.isNotDistinctFrom;
-    if (_$data.containsKey('isNotDistinctFrom') !=
-        other._$data.containsKey('isNotDistinctFrom')) {
-      return false;
-    }
-    if (l$isNotDistinctFrom != lOther$isNotDistinctFrom) {
+    if (l$ilike != lOther$ilike) {
       return false;
     }
     return true;
@@ -1493,8 +825,13 @@ class Input_MeetingDayFilterDay {
     final l$greaterThan = greaterThan;
     final l$lessThanOrEqual = lessThanOrEqual;
     final l$greaterThanOrEqual = greaterThanOrEqual;
+    final l$contains = contains;
     final l$isDistinctFrom = isDistinctFrom;
     final l$isNotDistinctFrom = isNotDistinctFrom;
+    final l$stringEndsWith = stringEndsWith;
+    final l$stringStartsWith = stringStartsWith;
+    final l$like = like;
+    final l$ilike = ilike;
     return Object.hashAll([
       _$data.containsKey('isNil') ? l$isNil : const {},
       _$data.containsKey('eq') ? l$eq : const {},
@@ -1510,42 +847,52 @@ class Input_MeetingDayFilterDay {
       _$data.containsKey('greaterThanOrEqual')
           ? l$greaterThanOrEqual
           : const {},
+      _$data.containsKey('contains') ? l$contains : const {},
       _$data.containsKey('isDistinctFrom') ? l$isDistinctFrom : const {},
       _$data.containsKey('isNotDistinctFrom') ? l$isNotDistinctFrom : const {},
+      _$data.containsKey('stringEndsWith') ? l$stringEndsWith : const {},
+      _$data.containsKey('stringStartsWith') ? l$stringStartsWith : const {},
+      _$data.containsKey('like') ? l$like : const {},
+      _$data.containsKey('ilike') ? l$ilike : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Input_MeetingDayFilterDay<TRes> {
-  factory CopyWith_Input_MeetingDayFilterDay(
-    Input_MeetingDayFilterDay instance,
-    TRes Function(Input_MeetingDayFilterDay) then,
-  ) = _CopyWithImpl_Input_MeetingDayFilterDay;
+abstract class CopyWith_Input_AddressFilterCountryIsoCode<TRes> {
+  factory CopyWith_Input_AddressFilterCountryIsoCode(
+    Input_AddressFilterCountryIsoCode instance,
+    TRes Function(Input_AddressFilterCountryIsoCode) then,
+  ) = _CopyWithImpl_Input_AddressFilterCountryIsoCode;
 
-  factory CopyWith_Input_MeetingDayFilterDay.stub(TRes res) =
-      _CopyWithStubImpl_Input_MeetingDayFilterDay;
+  factory CopyWith_Input_AddressFilterCountryIsoCode.stub(TRes res) =
+      _CopyWithStubImpl_Input_AddressFilterCountryIsoCode;
 
   TRes call({
     bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
   });
 }
 
-class _CopyWithImpl_Input_MeetingDayFilterDay<TRes>
-    implements CopyWith_Input_MeetingDayFilterDay<TRes> {
-  _CopyWithImpl_Input_MeetingDayFilterDay(this._instance, this._then);
+class _CopyWithImpl_Input_AddressFilterCountryIsoCode<TRes>
+    implements CopyWith_Input_AddressFilterCountryIsoCode<TRes> {
+  _CopyWithImpl_Input_AddressFilterCountryIsoCode(this._instance, this._then);
 
-  final Input_MeetingDayFilterDay _instance;
+  final Input_AddressFilterCountryIsoCode _instance;
 
-  final TRes Function(Input_MeetingDayFilterDay) _then;
+  final TRes Function(Input_AddressFilterCountryIsoCode) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1558,51 +905,68 @@ class _CopyWithImpl_Input_MeetingDayFilterDay<TRes>
     Object? greaterThan = _undefined,
     Object? lessThanOrEqual = _undefined,
     Object? greaterThanOrEqual = _undefined,
+    Object? contains = _undefined,
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
+    Object? stringEndsWith = _undefined,
+    Object? stringStartsWith = _undefined,
+    Object? like = _undefined,
+    Object? ilike = _undefined,
   }) => _then(
-    Input_MeetingDayFilterDay._({
+    Input_AddressFilterCountryIsoCode._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
-      if (eq != _undefined) 'eq': (eq as DateTime?),
-      if (notEq != _undefined) 'notEq': (notEq as DateTime?),
-      if ($in != _undefined) 'in': ($in as List<DateTime>?),
-      if (lessThan != _undefined) 'lessThan': (lessThan as DateTime?),
-      if (greaterThan != _undefined) 'greaterThan': (greaterThan as DateTime?),
+      if (eq != _undefined) 'eq': (eq as String?),
+      if (notEq != _undefined) 'notEq': (notEq as String?),
+      if ($in != _undefined) 'in': ($in as List<String>?),
+      if (lessThan != _undefined) 'lessThan': (lessThan as String?),
+      if (greaterThan != _undefined) 'greaterThan': (greaterThan as String?),
       if (lessThanOrEqual != _undefined)
-        'lessThanOrEqual': (lessThanOrEqual as DateTime?),
+        'lessThanOrEqual': (lessThanOrEqual as String?),
       if (greaterThanOrEqual != _undefined)
-        'greaterThanOrEqual': (greaterThanOrEqual as DateTime?),
+        'greaterThanOrEqual': (greaterThanOrEqual as String?),
+      if (contains != _undefined) 'contains': (contains as String?),
       if (isDistinctFrom != _undefined)
-        'isDistinctFrom': (isDistinctFrom as DateTime?),
+        'isDistinctFrom': (isDistinctFrom as String?),
       if (isNotDistinctFrom != _undefined)
-        'isNotDistinctFrom': (isNotDistinctFrom as DateTime?),
+        'isNotDistinctFrom': (isNotDistinctFrom as String?),
+      if (stringEndsWith != _undefined)
+        'stringEndsWith': (stringEndsWith as String?),
+      if (stringStartsWith != _undefined)
+        'stringStartsWith': (stringStartsWith as String?),
+      if (like != _undefined) 'like': (like as String?),
+      if (ilike != _undefined) 'ilike': (ilike as String?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_MeetingDayFilterDay<TRes>
-    implements CopyWith_Input_MeetingDayFilterDay<TRes> {
-  _CopyWithStubImpl_Input_MeetingDayFilterDay(this._res);
+class _CopyWithStubImpl_Input_AddressFilterCountryIsoCode<TRes>
+    implements CopyWith_Input_AddressFilterCountryIsoCode<TRes> {
+  _CopyWithStubImpl_Input_AddressFilterCountryIsoCode(this._res);
 
   TRes _res;
 
   call({
     bool? isNil,
-    DateTime? eq,
-    DateTime? notEq,
-    List<DateTime>? $in,
-    DateTime? lessThan,
-    DateTime? greaterThan,
-    DateTime? lessThanOrEqual,
-    DateTime? greaterThanOrEqual,
-    DateTime? isDistinctFrom,
-    DateTime? isNotDistinctFrom,
+    String? eq,
+    String? notEq,
+    List<String>? $in,
+    String? lessThan,
+    String? greaterThan,
+    String? lessThanOrEqual,
+    String? greaterThanOrEqual,
+    String? contains,
+    String? isDistinctFrom,
+    String? isNotDistinctFrom,
+    String? stringEndsWith,
+    String? stringStartsWith,
+    String? like,
+    String? ilike,
   }) => _res;
 }
 
-class Input_MeetingDayFilterMeetingId {
-  factory Input_MeetingDayFilterMeetingId({
+class Input_AddressFilterId {
+  factory Input_AddressFilterId({
     bool? isNil,
     String? eq,
     String? notEq,
@@ -1613,7 +977,7 @@ class Input_MeetingDayFilterMeetingId {
     String? greaterThanOrEqual,
     String? isDistinctFrom,
     String? isNotDistinctFrom,
-  }) => Input_MeetingDayFilterMeetingId._({
+  }) => Input_AddressFilterId._({
     if (isNil != null) r'isNil': isNil,
     if (eq != null) r'eq': eq,
     if (notEq != null) r'notEq': notEq,
@@ -1626,9 +990,9 @@ class Input_MeetingDayFilterMeetingId {
     if (isNotDistinctFrom != null) r'isNotDistinctFrom': isNotDistinctFrom,
   });
 
-  Input_MeetingDayFilterMeetingId._(this._$data);
+  Input_AddressFilterId._(this._$data);
 
-  factory Input_MeetingDayFilterMeetingId.fromJson(Map<String, dynamic> data) {
+  factory Input_AddressFilterId.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('isNil')) {
       final l$isNil = data['isNil'];
@@ -1672,7 +1036,7 @@ class Input_MeetingDayFilterMeetingId {
       final l$isNotDistinctFrom = data['isNotDistinctFrom'];
       result$data['isNotDistinctFrom'] = (l$isNotDistinctFrom as String?);
     }
-    return Input_MeetingDayFilterMeetingId._(result$data);
+    return Input_AddressFilterId._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -1742,16 +1106,15 @@ class Input_MeetingDayFilterMeetingId {
     return result$data;
   }
 
-  CopyWith_Input_MeetingDayFilterMeetingId<Input_MeetingDayFilterMeetingId>
-  get copyWith => CopyWith_Input_MeetingDayFilterMeetingId(this, (i) => i);
+  CopyWith_Input_AddressFilterId<Input_AddressFilterId> get copyWith =>
+      CopyWith_Input_AddressFilterId(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_MeetingDayFilterMeetingId ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_AddressFilterId || runtimeType != other.runtimeType) {
       return false;
     }
     final l$isNil = isNil;
@@ -1887,14 +1250,14 @@ class Input_MeetingDayFilterMeetingId {
   }
 }
 
-abstract class CopyWith_Input_MeetingDayFilterMeetingId<TRes> {
-  factory CopyWith_Input_MeetingDayFilterMeetingId(
-    Input_MeetingDayFilterMeetingId instance,
-    TRes Function(Input_MeetingDayFilterMeetingId) then,
-  ) = _CopyWithImpl_Input_MeetingDayFilterMeetingId;
+abstract class CopyWith_Input_AddressFilterId<TRes> {
+  factory CopyWith_Input_AddressFilterId(
+    Input_AddressFilterId instance,
+    TRes Function(Input_AddressFilterId) then,
+  ) = _CopyWithImpl_Input_AddressFilterId;
 
-  factory CopyWith_Input_MeetingDayFilterMeetingId.stub(TRes res) =
-      _CopyWithStubImpl_Input_MeetingDayFilterMeetingId;
+  factory CopyWith_Input_AddressFilterId.stub(TRes res) =
+      _CopyWithStubImpl_Input_AddressFilterId;
 
   TRes call({
     bool? isNil,
@@ -1910,13 +1273,13 @@ abstract class CopyWith_Input_MeetingDayFilterMeetingId<TRes> {
   });
 }
 
-class _CopyWithImpl_Input_MeetingDayFilterMeetingId<TRes>
-    implements CopyWith_Input_MeetingDayFilterMeetingId<TRes> {
-  _CopyWithImpl_Input_MeetingDayFilterMeetingId(this._instance, this._then);
+class _CopyWithImpl_Input_AddressFilterId<TRes>
+    implements CopyWith_Input_AddressFilterId<TRes> {
+  _CopyWithImpl_Input_AddressFilterId(this._instance, this._then);
 
-  final Input_MeetingDayFilterMeetingId _instance;
+  final Input_AddressFilterId _instance;
 
-  final TRes Function(Input_MeetingDayFilterMeetingId) _then;
+  final TRes Function(Input_AddressFilterId) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -1932,7 +1295,7 @@ class _CopyWithImpl_Input_MeetingDayFilterMeetingId<TRes>
     Object? isDistinctFrom = _undefined,
     Object? isNotDistinctFrom = _undefined,
   }) => _then(
-    Input_MeetingDayFilterMeetingId._({
+    Input_AddressFilterId._({
       ..._instance._$data,
       if (isNil != _undefined) 'isNil': (isNil as bool?),
       if (eq != _undefined) 'eq': (eq as String?),
@@ -1952,9 +1315,9 @@ class _CopyWithImpl_Input_MeetingDayFilterMeetingId<TRes>
   );
 }
 
-class _CopyWithStubImpl_Input_MeetingDayFilterMeetingId<TRes>
-    implements CopyWith_Input_MeetingDayFilterMeetingId<TRes> {
-  _CopyWithStubImpl_Input_MeetingDayFilterMeetingId(this._res);
+class _CopyWithStubImpl_Input_AddressFilterId<TRes>
+    implements CopyWith_Input_AddressFilterId<TRes> {
+  _CopyWithStubImpl_Input_AddressFilterId(this._res);
 
   TRes _res;
 
@@ -1972,46 +1335,69 @@ class _CopyWithStubImpl_Input_MeetingDayFilterMeetingId<TRes>
   }) => _res;
 }
 
-class Input_MeetingDayFilterInput {
-  factory Input_MeetingDayFilterInput({
-    List<Input_MeetingDayFilterInput>? and,
-    List<Input_MeetingDayFilterInput>? or,
-    List<Input_MeetingDayFilterInput>? not,
-    Input_MeetingDayFilterMeetingId? meetingId,
-    Input_MeetingDayFilterDay? day,
-    Input_MeetingDayFilterStudyYearId? studyYearId,
-    Input_MeetingDayFilterGender? gender,
-    Input_MeetingDayFilterPersonsCount? personsCount,
-    Input_MeetingDayFilterServantsCount? servantsCount,
-    Input_MeetingDayFilterTotalCount? totalCount,
-    Input_MeetingFilterInput? meeting,
-    Input_StudyYearFilterInput? studyYear,
-  }) => Input_MeetingDayFilterInput._({
+class Input_AddressFilterInput {
+  factory Input_AddressFilterInput({
+    List<Input_AddressFilterInput>? and,
+    List<Input_AddressFilterInput>? or,
+    List<Input_AddressFilterInput>? not,
+    Input_AddressFilterId? id,
+    Input_AddressFilterCountryIsoCode? countryIsoCode,
+    Input_AddressFilterDistrictId? districtId,
+    Input_AddressFilterAreaId? areaId,
+    Input_AddressFilterStreetId? streetId,
+    Input_AddressFilterSubstreetName? substreetName,
+    Input_AddressFilterGeolocation? geolocation,
+    Input_AddressFilterStoreyNumber? storeyNumber,
+    Input_AddressFilterHouseNumber? houseNumber,
+    Input_AddressFilterApartmentNumber? apartmentNumber,
+    Input_AddressFilterSpecialLandmark? specialLandmark,
+    Input_AddressFilterFamilyId? familyId,
+    Input_AddressFilterStoreId? storeId,
+    Input_AddressFilterHouseCode? houseCode,
+    Input_AreaFilterInput? area,
+    Input_DistrictFilterInput? district,
+    Input_FamilyFilterInput? family,
+    Input_StoreFilterInput? store,
+    Input_StreetFilterInput? street,
+    Input_AddressFilterFullAddressText? fullAddressText,
+    Input_AddressFilterWithinPolygon? withinPolygon,
+  }) => Input_AddressFilterInput._({
     if (and != null) r'and': and,
     if (or != null) r'or': or,
     if (not != null) r'not': not,
-    if (meetingId != null) r'meetingId': meetingId,
-    if (day != null) r'day': day,
-    if (studyYearId != null) r'studyYearId': studyYearId,
-    if (gender != null) r'gender': gender,
-    if (personsCount != null) r'personsCount': personsCount,
-    if (servantsCount != null) r'servantsCount': servantsCount,
-    if (totalCount != null) r'totalCount': totalCount,
-    if (meeting != null) r'meeting': meeting,
-    if (studyYear != null) r'studyYear': studyYear,
+    if (id != null) r'id': id,
+    if (countryIsoCode != null) r'countryIsoCode': countryIsoCode,
+    if (districtId != null) r'districtId': districtId,
+    if (areaId != null) r'areaId': areaId,
+    if (streetId != null) r'streetId': streetId,
+    if (substreetName != null) r'substreetName': substreetName,
+    if (geolocation != null) r'geolocation': geolocation,
+    if (storeyNumber != null) r'storeyNumber': storeyNumber,
+    if (houseNumber != null) r'houseNumber': houseNumber,
+    if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
+    if (specialLandmark != null) r'specialLandmark': specialLandmark,
+    if (familyId != null) r'familyId': familyId,
+    if (storeId != null) r'storeId': storeId,
+    if (houseCode != null) r'houseCode': houseCode,
+    if (area != null) r'area': area,
+    if (district != null) r'district': district,
+    if (family != null) r'family': family,
+    if (store != null) r'store': store,
+    if (street != null) r'street': street,
+    if (fullAddressText != null) r'fullAddressText': fullAddressText,
+    if (withinPolygon != null) r'withinPolygon': withinPolygon,
   });
 
-  Input_MeetingDayFilterInput._(this._$data);
+  Input_AddressFilterInput._(this._$data);
 
-  factory Input_MeetingDayFilterInput.fromJson(Map<String, dynamic> data) {
+  factory Input_AddressFilterInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('and')) {
       final l$and = data['and'];
       result$data['and'] = (l$and as List<dynamic>?)
           ?.map(
-            (e) => Input_MeetingDayFilterInput.fromJson(
-              (e as Map<String, dynamic>),
-            ),
+            (e) =>
+                Input_AddressFilterInput.fromJson((e as Map<String, dynamic>)),
           )
           .toList();
     }
@@ -2019,9 +1405,8 @@ class Input_MeetingDayFilterInput {
       final l$or = data['or'];
       result$data['or'] = (l$or as List<dynamic>?)
           ?.map(
-            (e) => Input_MeetingDayFilterInput.fromJson(
-              (e as Map<String, dynamic>),
-            ),
+            (e) =>
+                Input_AddressFilterInput.fromJson((e as Map<String, dynamic>)),
           )
           .toList();
     }
@@ -2029,122 +1414,247 @@ class Input_MeetingDayFilterInput {
       final l$not = data['not'];
       result$data['not'] = (l$not as List<dynamic>?)
           ?.map(
-            (e) => Input_MeetingDayFilterInput.fromJson(
-              (e as Map<String, dynamic>),
-            ),
+            (e) =>
+                Input_AddressFilterInput.fromJson((e as Map<String, dynamic>)),
           )
           .toList();
     }
-    if (data.containsKey('meetingId')) {
-      final l$meetingId = data['meetingId'];
-      result$data['meetingId'] = l$meetingId == null
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
           ? null
-          : Input_MeetingDayFilterMeetingId.fromJson(
-              (l$meetingId as Map<String, dynamic>),
+          : Input_AddressFilterId.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('countryIsoCode')) {
+      final l$countryIsoCode = data['countryIsoCode'];
+      result$data['countryIsoCode'] = l$countryIsoCode == null
+          ? null
+          : Input_AddressFilterCountryIsoCode.fromJson(
+              (l$countryIsoCode as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('day')) {
-      final l$day = data['day'];
-      result$data['day'] = l$day == null
+    if (data.containsKey('districtId')) {
+      final l$districtId = data['districtId'];
+      result$data['districtId'] = l$districtId == null
           ? null
-          : Input_MeetingDayFilterDay.fromJson((l$day as Map<String, dynamic>));
-    }
-    if (data.containsKey('studyYearId')) {
-      final l$studyYearId = data['studyYearId'];
-      result$data['studyYearId'] = l$studyYearId == null
-          ? null
-          : Input_MeetingDayFilterStudyYearId.fromJson(
-              (l$studyYearId as Map<String, dynamic>),
+          : Input_AddressFilterDistrictId.fromJson(
+              (l$districtId as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('gender')) {
-      final l$gender = data['gender'];
-      result$data['gender'] = l$gender == null
+    if (data.containsKey('areaId')) {
+      final l$areaId = data['areaId'];
+      result$data['areaId'] = l$areaId == null
           ? null
-          : Input_MeetingDayFilterGender.fromJson(
-              (l$gender as Map<String, dynamic>),
+          : Input_AddressFilterAreaId.fromJson(
+              (l$areaId as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('personsCount')) {
-      final l$personsCount = data['personsCount'];
-      result$data['personsCount'] = l$personsCount == null
+    if (data.containsKey('streetId')) {
+      final l$streetId = data['streetId'];
+      result$data['streetId'] = l$streetId == null
           ? null
-          : Input_MeetingDayFilterPersonsCount.fromJson(
-              (l$personsCount as Map<String, dynamic>),
+          : Input_AddressFilterStreetId.fromJson(
+              (l$streetId as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('servantsCount')) {
-      final l$servantsCount = data['servantsCount'];
-      result$data['servantsCount'] = l$servantsCount == null
+    if (data.containsKey('substreetName')) {
+      final l$substreetName = data['substreetName'];
+      result$data['substreetName'] = l$substreetName == null
           ? null
-          : Input_MeetingDayFilterServantsCount.fromJson(
-              (l$servantsCount as Map<String, dynamic>),
+          : Input_AddressFilterSubstreetName.fromJson(
+              (l$substreetName as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('totalCount')) {
-      final l$totalCount = data['totalCount'];
-      result$data['totalCount'] = l$totalCount == null
+    if (data.containsKey('geolocation')) {
+      final l$geolocation = data['geolocation'];
+      result$data['geolocation'] = l$geolocation == null
           ? null
-          : Input_MeetingDayFilterTotalCount.fromJson(
-              (l$totalCount as Map<String, dynamic>),
+          : Input_AddressFilterGeolocation.fromJson(
+              (l$geolocation as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('meeting')) {
-      final l$meeting = data['meeting'];
-      result$data['meeting'] = l$meeting == null
+    if (data.containsKey('storeyNumber')) {
+      final l$storeyNumber = data['storeyNumber'];
+      result$data['storeyNumber'] = l$storeyNumber == null
           ? null
-          : Input_MeetingFilterInput.fromJson(
-              (l$meeting as Map<String, dynamic>),
+          : Input_AddressFilterStoreyNumber.fromJson(
+              (l$storeyNumber as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('studyYear')) {
-      final l$studyYear = data['studyYear'];
-      result$data['studyYear'] = l$studyYear == null
+    if (data.containsKey('houseNumber')) {
+      final l$houseNumber = data['houseNumber'];
+      result$data['houseNumber'] = l$houseNumber == null
           ? null
-          : Input_StudyYearFilterInput.fromJson(
-              (l$studyYear as Map<String, dynamic>),
+          : Input_AddressFilterHouseNumber.fromJson(
+              (l$houseNumber as Map<String, dynamic>),
             );
     }
-    return Input_MeetingDayFilterInput._(result$data);
+    if (data.containsKey('apartmentNumber')) {
+      final l$apartmentNumber = data['apartmentNumber'];
+      result$data['apartmentNumber'] = l$apartmentNumber == null
+          ? null
+          : Input_AddressFilterApartmentNumber.fromJson(
+              (l$apartmentNumber as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('specialLandmark')) {
+      final l$specialLandmark = data['specialLandmark'];
+      result$data['specialLandmark'] = l$specialLandmark == null
+          ? null
+          : Input_AddressFilterSpecialLandmark.fromJson(
+              (l$specialLandmark as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('familyId')) {
+      final l$familyId = data['familyId'];
+      result$data['familyId'] = l$familyId == null
+          ? null
+          : Input_AddressFilterFamilyId.fromJson(
+              (l$familyId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('storeId')) {
+      final l$storeId = data['storeId'];
+      result$data['storeId'] = l$storeId == null
+          ? null
+          : Input_AddressFilterStoreId.fromJson(
+              (l$storeId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('houseCode')) {
+      final l$houseCode = data['houseCode'];
+      result$data['houseCode'] = l$houseCode == null
+          ? null
+          : Input_AddressFilterHouseCode.fromJson(
+              (l$houseCode as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('area')) {
+      final l$area = data['area'];
+      result$data['area'] = l$area == null
+          ? null
+          : Input_AreaFilterInput.fromJson((l$area as Map<String, dynamic>));
+    }
+    if (data.containsKey('district')) {
+      final l$district = data['district'];
+      result$data['district'] = l$district == null
+          ? null
+          : Input_DistrictFilterInput.fromJson(
+              (l$district as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('family')) {
+      final l$family = data['family'];
+      result$data['family'] = l$family == null
+          ? null
+          : Input_FamilyFilterInput.fromJson(
+              (l$family as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('store')) {
+      final l$store = data['store'];
+      result$data['store'] = l$store == null
+          ? null
+          : Input_StoreFilterInput.fromJson((l$store as Map<String, dynamic>));
+    }
+    if (data.containsKey('street')) {
+      final l$street = data['street'];
+      result$data['street'] = l$street == null
+          ? null
+          : Input_StreetFilterInput.fromJson(
+              (l$street as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('fullAddressText')) {
+      final l$fullAddressText = data['fullAddressText'];
+      result$data['fullAddressText'] = l$fullAddressText == null
+          ? null
+          : Input_AddressFilterFullAddressText.fromJson(
+              (l$fullAddressText as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('withinPolygon')) {
+      final l$withinPolygon = data['withinPolygon'];
+      result$data['withinPolygon'] = l$withinPolygon == null
+          ? null
+          : Input_AddressFilterWithinPolygon.fromJson(
+              (l$withinPolygon as Map<String, dynamic>),
+            );
+    }
+    return Input_AddressFilterInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input_MeetingDayFilterInput>? get and =>
-      (_$data['and'] as List<Input_MeetingDayFilterInput>?);
+  List<Input_AddressFilterInput>? get and =>
+      (_$data['and'] as List<Input_AddressFilterInput>?);
 
-  List<Input_MeetingDayFilterInput>? get or =>
-      (_$data['or'] as List<Input_MeetingDayFilterInput>?);
+  List<Input_AddressFilterInput>? get or =>
+      (_$data['or'] as List<Input_AddressFilterInput>?);
 
-  List<Input_MeetingDayFilterInput>? get not =>
-      (_$data['not'] as List<Input_MeetingDayFilterInput>?);
+  List<Input_AddressFilterInput>? get not =>
+      (_$data['not'] as List<Input_AddressFilterInput>?);
 
-  Input_MeetingDayFilterMeetingId? get meetingId =>
-      (_$data['meetingId'] as Input_MeetingDayFilterMeetingId?);
+  Input_AddressFilterId? get id => (_$data['id'] as Input_AddressFilterId?);
 
-  Input_MeetingDayFilterDay? get day =>
-      (_$data['day'] as Input_MeetingDayFilterDay?);
+  Input_AddressFilterCountryIsoCode? get countryIsoCode =>
+      (_$data['countryIsoCode'] as Input_AddressFilterCountryIsoCode?);
 
-  Input_MeetingDayFilterStudyYearId? get studyYearId =>
-      (_$data['studyYearId'] as Input_MeetingDayFilterStudyYearId?);
+  Input_AddressFilterDistrictId? get districtId =>
+      (_$data['districtId'] as Input_AddressFilterDistrictId?);
 
-  Input_MeetingDayFilterGender? get gender =>
-      (_$data['gender'] as Input_MeetingDayFilterGender?);
+  Input_AddressFilterAreaId? get areaId =>
+      (_$data['areaId'] as Input_AddressFilterAreaId?);
 
-  Input_MeetingDayFilterPersonsCount? get personsCount =>
-      (_$data['personsCount'] as Input_MeetingDayFilterPersonsCount?);
+  Input_AddressFilterStreetId? get streetId =>
+      (_$data['streetId'] as Input_AddressFilterStreetId?);
 
-  Input_MeetingDayFilterServantsCount? get servantsCount =>
-      (_$data['servantsCount'] as Input_MeetingDayFilterServantsCount?);
+  Input_AddressFilterSubstreetName? get substreetName =>
+      (_$data['substreetName'] as Input_AddressFilterSubstreetName?);
 
-  Input_MeetingDayFilterTotalCount? get totalCount =>
-      (_$data['totalCount'] as Input_MeetingDayFilterTotalCount?);
+  Input_AddressFilterGeolocation? get geolocation =>
+      (_$data['geolocation'] as Input_AddressFilterGeolocation?);
 
-  Input_MeetingFilterInput? get meeting =>
-      (_$data['meeting'] as Input_MeetingFilterInput?);
+  Input_AddressFilterStoreyNumber? get storeyNumber =>
+      (_$data['storeyNumber'] as Input_AddressFilterStoreyNumber?);
 
-  Input_StudyYearFilterInput? get studyYear =>
-      (_$data['studyYear'] as Input_StudyYearFilterInput?);
+  Input_AddressFilterHouseNumber? get houseNumber =>
+      (_$data['houseNumber'] as Input_AddressFilterHouseNumber?);
+
+  Input_AddressFilterApartmentNumber? get apartmentNumber =>
+      (_$data['apartmentNumber'] as Input_AddressFilterApartmentNumber?);
+
+  Input_AddressFilterSpecialLandmark? get specialLandmark =>
+      (_$data['specialLandmark'] as Input_AddressFilterSpecialLandmark?);
+
+  Input_AddressFilterFamilyId? get familyId =>
+      (_$data['familyId'] as Input_AddressFilterFamilyId?);
+
+  Input_AddressFilterStoreId? get storeId =>
+      (_$data['storeId'] as Input_AddressFilterStoreId?);
+
+  Input_AddressFilterHouseCode? get houseCode =>
+      (_$data['houseCode'] as Input_AddressFilterHouseCode?);
+
+  Input_AreaFilterInput? get area => (_$data['area'] as Input_AreaFilterInput?);
+
+  Input_DistrictFilterInput? get district =>
+      (_$data['district'] as Input_DistrictFilterInput?);
+
+  Input_FamilyFilterInput? get family =>
+      (_$data['family'] as Input_FamilyFilterInput?);
+
+  Input_StoreFilterInput? get store =>
+      (_$data['store'] as Input_StoreFilterInput?);
+
+  Input_StreetFilterInput? get street =>
+      (_$data['street'] as Input_StreetFilterInput?);
+
+  Input_AddressFilterFullAddressText? get fullAddressText =>
+      (_$data['fullAddressText'] as Input_AddressFilterFullAddressText?);
+
+  Input_AddressFilterWithinPolygon? get withinPolygon =>
+      (_$data['withinPolygon'] as Input_AddressFilterWithinPolygon?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -2160,54 +1670,102 @@ class Input_MeetingDayFilterInput {
       final l$not = not;
       result$data['not'] = l$not?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('meetingId')) {
-      final l$meetingId = meetingId;
-      result$data['meetingId'] = l$meetingId?.toJson();
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
     }
-    if (_$data.containsKey('day')) {
-      final l$day = day;
-      result$data['day'] = l$day?.toJson();
+    if (_$data.containsKey('countryIsoCode')) {
+      final l$countryIsoCode = countryIsoCode;
+      result$data['countryIsoCode'] = l$countryIsoCode?.toJson();
     }
-    if (_$data.containsKey('studyYearId')) {
-      final l$studyYearId = studyYearId;
-      result$data['studyYearId'] = l$studyYearId?.toJson();
+    if (_$data.containsKey('districtId')) {
+      final l$districtId = districtId;
+      result$data['districtId'] = l$districtId?.toJson();
     }
-    if (_$data.containsKey('gender')) {
-      final l$gender = gender;
-      result$data['gender'] = l$gender?.toJson();
+    if (_$data.containsKey('areaId')) {
+      final l$areaId = areaId;
+      result$data['areaId'] = l$areaId?.toJson();
     }
-    if (_$data.containsKey('personsCount')) {
-      final l$personsCount = personsCount;
-      result$data['personsCount'] = l$personsCount?.toJson();
+    if (_$data.containsKey('streetId')) {
+      final l$streetId = streetId;
+      result$data['streetId'] = l$streetId?.toJson();
     }
-    if (_$data.containsKey('servantsCount')) {
-      final l$servantsCount = servantsCount;
-      result$data['servantsCount'] = l$servantsCount?.toJson();
+    if (_$data.containsKey('substreetName')) {
+      final l$substreetName = substreetName;
+      result$data['substreetName'] = l$substreetName?.toJson();
     }
-    if (_$data.containsKey('totalCount')) {
-      final l$totalCount = totalCount;
-      result$data['totalCount'] = l$totalCount?.toJson();
+    if (_$data.containsKey('geolocation')) {
+      final l$geolocation = geolocation;
+      result$data['geolocation'] = l$geolocation?.toJson();
     }
-    if (_$data.containsKey('meeting')) {
-      final l$meeting = meeting;
-      result$data['meeting'] = l$meeting?.toJson();
+    if (_$data.containsKey('storeyNumber')) {
+      final l$storeyNumber = storeyNumber;
+      result$data['storeyNumber'] = l$storeyNumber?.toJson();
     }
-    if (_$data.containsKey('studyYear')) {
-      final l$studyYear = studyYear;
-      result$data['studyYear'] = l$studyYear?.toJson();
+    if (_$data.containsKey('houseNumber')) {
+      final l$houseNumber = houseNumber;
+      result$data['houseNumber'] = l$houseNumber?.toJson();
+    }
+    if (_$data.containsKey('apartmentNumber')) {
+      final l$apartmentNumber = apartmentNumber;
+      result$data['apartmentNumber'] = l$apartmentNumber?.toJson();
+    }
+    if (_$data.containsKey('specialLandmark')) {
+      final l$specialLandmark = specialLandmark;
+      result$data['specialLandmark'] = l$specialLandmark?.toJson();
+    }
+    if (_$data.containsKey('familyId')) {
+      final l$familyId = familyId;
+      result$data['familyId'] = l$familyId?.toJson();
+    }
+    if (_$data.containsKey('storeId')) {
+      final l$storeId = storeId;
+      result$data['storeId'] = l$storeId?.toJson();
+    }
+    if (_$data.containsKey('houseCode')) {
+      final l$houseCode = houseCode;
+      result$data['houseCode'] = l$houseCode?.toJson();
+    }
+    if (_$data.containsKey('area')) {
+      final l$area = area;
+      result$data['area'] = l$area?.toJson();
+    }
+    if (_$data.containsKey('district')) {
+      final l$district = district;
+      result$data['district'] = l$district?.toJson();
+    }
+    if (_$data.containsKey('family')) {
+      final l$family = family;
+      result$data['family'] = l$family?.toJson();
+    }
+    if (_$data.containsKey('store')) {
+      final l$store = store;
+      result$data['store'] = l$store?.toJson();
+    }
+    if (_$data.containsKey('street')) {
+      final l$street = street;
+      result$data['street'] = l$street?.toJson();
+    }
+    if (_$data.containsKey('fullAddressText')) {
+      final l$fullAddressText = fullAddressText;
+      result$data['fullAddressText'] = l$fullAddressText?.toJson();
+    }
+    if (_$data.containsKey('withinPolygon')) {
+      final l$withinPolygon = withinPolygon;
+      result$data['withinPolygon'] = l$withinPolygon?.toJson();
     }
     return result$data;
   }
 
-  CopyWith_Input_MeetingDayFilterInput<Input_MeetingDayFilterInput>
-  get copyWith => CopyWith_Input_MeetingDayFilterInput(this, (i) => i);
+  CopyWith_Input_AddressFilterInput<Input_AddressFilterInput> get copyWith =>
+      CopyWith_Input_AddressFilterInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_MeetingDayFilterInput ||
+    if (other is! Input_AddressFilterInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2268,82 +1826,186 @@ class Input_MeetingDayFilterInput {
     } else if (l$not != lOther$not) {
       return false;
     }
-    final l$meetingId = meetingId;
-    final lOther$meetingId = other.meetingId;
-    if (_$data.containsKey('meetingId') !=
-        other._$data.containsKey('meetingId')) {
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
       return false;
     }
-    if (l$meetingId != lOther$meetingId) {
+    if (l$id != lOther$id) {
       return false;
     }
-    final l$day = day;
-    final lOther$day = other.day;
-    if (_$data.containsKey('day') != other._$data.containsKey('day')) {
+    final l$countryIsoCode = countryIsoCode;
+    final lOther$countryIsoCode = other.countryIsoCode;
+    if (_$data.containsKey('countryIsoCode') !=
+        other._$data.containsKey('countryIsoCode')) {
       return false;
     }
-    if (l$day != lOther$day) {
+    if (l$countryIsoCode != lOther$countryIsoCode) {
       return false;
     }
-    final l$studyYearId = studyYearId;
-    final lOther$studyYearId = other.studyYearId;
-    if (_$data.containsKey('studyYearId') !=
-        other._$data.containsKey('studyYearId')) {
+    final l$districtId = districtId;
+    final lOther$districtId = other.districtId;
+    if (_$data.containsKey('districtId') !=
+        other._$data.containsKey('districtId')) {
       return false;
     }
-    if (l$studyYearId != lOther$studyYearId) {
+    if (l$districtId != lOther$districtId) {
       return false;
     }
-    final l$gender = gender;
-    final lOther$gender = other.gender;
-    if (_$data.containsKey('gender') != other._$data.containsKey('gender')) {
+    final l$areaId = areaId;
+    final lOther$areaId = other.areaId;
+    if (_$data.containsKey('areaId') != other._$data.containsKey('areaId')) {
       return false;
     }
-    if (l$gender != lOther$gender) {
+    if (l$areaId != lOther$areaId) {
       return false;
     }
-    final l$personsCount = personsCount;
-    final lOther$personsCount = other.personsCount;
-    if (_$data.containsKey('personsCount') !=
-        other._$data.containsKey('personsCount')) {
+    final l$streetId = streetId;
+    final lOther$streetId = other.streetId;
+    if (_$data.containsKey('streetId') !=
+        other._$data.containsKey('streetId')) {
       return false;
     }
-    if (l$personsCount != lOther$personsCount) {
+    if (l$streetId != lOther$streetId) {
       return false;
     }
-    final l$servantsCount = servantsCount;
-    final lOther$servantsCount = other.servantsCount;
-    if (_$data.containsKey('servantsCount') !=
-        other._$data.containsKey('servantsCount')) {
+    final l$substreetName = substreetName;
+    final lOther$substreetName = other.substreetName;
+    if (_$data.containsKey('substreetName') !=
+        other._$data.containsKey('substreetName')) {
       return false;
     }
-    if (l$servantsCount != lOther$servantsCount) {
+    if (l$substreetName != lOther$substreetName) {
       return false;
     }
-    final l$totalCount = totalCount;
-    final lOther$totalCount = other.totalCount;
-    if (_$data.containsKey('totalCount') !=
-        other._$data.containsKey('totalCount')) {
+    final l$geolocation = geolocation;
+    final lOther$geolocation = other.geolocation;
+    if (_$data.containsKey('geolocation') !=
+        other._$data.containsKey('geolocation')) {
       return false;
     }
-    if (l$totalCount != lOther$totalCount) {
+    if (l$geolocation != lOther$geolocation) {
       return false;
     }
-    final l$meeting = meeting;
-    final lOther$meeting = other.meeting;
-    if (_$data.containsKey('meeting') != other._$data.containsKey('meeting')) {
+    final l$storeyNumber = storeyNumber;
+    final lOther$storeyNumber = other.storeyNumber;
+    if (_$data.containsKey('storeyNumber') !=
+        other._$data.containsKey('storeyNumber')) {
       return false;
     }
-    if (l$meeting != lOther$meeting) {
+    if (l$storeyNumber != lOther$storeyNumber) {
       return false;
     }
-    final l$studyYear = studyYear;
-    final lOther$studyYear = other.studyYear;
-    if (_$data.containsKey('studyYear') !=
-        other._$data.containsKey('studyYear')) {
+    final l$houseNumber = houseNumber;
+    final lOther$houseNumber = other.houseNumber;
+    if (_$data.containsKey('houseNumber') !=
+        other._$data.containsKey('houseNumber')) {
       return false;
     }
-    if (l$studyYear != lOther$studyYear) {
+    if (l$houseNumber != lOther$houseNumber) {
+      return false;
+    }
+    final l$apartmentNumber = apartmentNumber;
+    final lOther$apartmentNumber = other.apartmentNumber;
+    if (_$data.containsKey('apartmentNumber') !=
+        other._$data.containsKey('apartmentNumber')) {
+      return false;
+    }
+    if (l$apartmentNumber != lOther$apartmentNumber) {
+      return false;
+    }
+    final l$specialLandmark = specialLandmark;
+    final lOther$specialLandmark = other.specialLandmark;
+    if (_$data.containsKey('specialLandmark') !=
+        other._$data.containsKey('specialLandmark')) {
+      return false;
+    }
+    if (l$specialLandmark != lOther$specialLandmark) {
+      return false;
+    }
+    final l$familyId = familyId;
+    final lOther$familyId = other.familyId;
+    if (_$data.containsKey('familyId') !=
+        other._$data.containsKey('familyId')) {
+      return false;
+    }
+    if (l$familyId != lOther$familyId) {
+      return false;
+    }
+    final l$storeId = storeId;
+    final lOther$storeId = other.storeId;
+    if (_$data.containsKey('storeId') != other._$data.containsKey('storeId')) {
+      return false;
+    }
+    if (l$storeId != lOther$storeId) {
+      return false;
+    }
+    final l$houseCode = houseCode;
+    final lOther$houseCode = other.houseCode;
+    if (_$data.containsKey('houseCode') !=
+        other._$data.containsKey('houseCode')) {
+      return false;
+    }
+    if (l$houseCode != lOther$houseCode) {
+      return false;
+    }
+    final l$area = area;
+    final lOther$area = other.area;
+    if (_$data.containsKey('area') != other._$data.containsKey('area')) {
+      return false;
+    }
+    if (l$area != lOther$area) {
+      return false;
+    }
+    final l$district = district;
+    final lOther$district = other.district;
+    if (_$data.containsKey('district') !=
+        other._$data.containsKey('district')) {
+      return false;
+    }
+    if (l$district != lOther$district) {
+      return false;
+    }
+    final l$family = family;
+    final lOther$family = other.family;
+    if (_$data.containsKey('family') != other._$data.containsKey('family')) {
+      return false;
+    }
+    if (l$family != lOther$family) {
+      return false;
+    }
+    final l$store = store;
+    final lOther$store = other.store;
+    if (_$data.containsKey('store') != other._$data.containsKey('store')) {
+      return false;
+    }
+    if (l$store != lOther$store) {
+      return false;
+    }
+    final l$street = street;
+    final lOther$street = other.street;
+    if (_$data.containsKey('street') != other._$data.containsKey('street')) {
+      return false;
+    }
+    if (l$street != lOther$street) {
+      return false;
+    }
+    final l$fullAddressText = fullAddressText;
+    final lOther$fullAddressText = other.fullAddressText;
+    if (_$data.containsKey('fullAddressText') !=
+        other._$data.containsKey('fullAddressText')) {
+      return false;
+    }
+    if (l$fullAddressText != lOther$fullAddressText) {
+      return false;
+    }
+    final l$withinPolygon = withinPolygon;
+    final lOther$withinPolygon = other.withinPolygon;
+    if (_$data.containsKey('withinPolygon') !=
+        other._$data.containsKey('withinPolygon')) {
+      return false;
+    }
+    if (l$withinPolygon != lOther$withinPolygon) {
       return false;
     }
     return true;
@@ -2354,15 +2016,27 @@ class Input_MeetingDayFilterInput {
     final l$and = and;
     final l$or = or;
     final l$not = not;
-    final l$meetingId = meetingId;
-    final l$day = day;
-    final l$studyYearId = studyYearId;
-    final l$gender = gender;
-    final l$personsCount = personsCount;
-    final l$servantsCount = servantsCount;
-    final l$totalCount = totalCount;
-    final l$meeting = meeting;
-    final l$studyYear = studyYear;
+    final l$id = id;
+    final l$countryIsoCode = countryIsoCode;
+    final l$districtId = districtId;
+    final l$areaId = areaId;
+    final l$streetId = streetId;
+    final l$substreetName = substreetName;
+    final l$geolocation = geolocation;
+    final l$storeyNumber = storeyNumber;
+    final l$houseNumber = houseNumber;
+    final l$apartmentNumber = apartmentNumber;
+    final l$specialLandmark = specialLandmark;
+    final l$familyId = familyId;
+    final l$storeId = storeId;
+    final l$houseCode = houseCode;
+    final l$area = area;
+    final l$district = district;
+    final l$family = family;
+    final l$store = store;
+    final l$street = street;
+    final l$fullAddressText = fullAddressText;
+    final l$withinPolygon = withinPolygon;
     return Object.hashAll([
       _$data.containsKey('and')
           ? l$and == null
@@ -2379,84 +2053,114 @@ class Input_MeetingDayFilterInput {
                 ? null
                 : Object.hashAll(l$not.map((v) => v))
           : const {},
-      _$data.containsKey('meetingId') ? l$meetingId : const {},
-      _$data.containsKey('day') ? l$day : const {},
-      _$data.containsKey('studyYearId') ? l$studyYearId : const {},
-      _$data.containsKey('gender') ? l$gender : const {},
-      _$data.containsKey('personsCount') ? l$personsCount : const {},
-      _$data.containsKey('servantsCount') ? l$servantsCount : const {},
-      _$data.containsKey('totalCount') ? l$totalCount : const {},
-      _$data.containsKey('meeting') ? l$meeting : const {},
-      _$data.containsKey('studyYear') ? l$studyYear : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('countryIsoCode') ? l$countryIsoCode : const {},
+      _$data.containsKey('districtId') ? l$districtId : const {},
+      _$data.containsKey('areaId') ? l$areaId : const {},
+      _$data.containsKey('streetId') ? l$streetId : const {},
+      _$data.containsKey('substreetName') ? l$substreetName : const {},
+      _$data.containsKey('geolocation') ? l$geolocation : const {},
+      _$data.containsKey('storeyNumber') ? l$storeyNumber : const {},
+      _$data.containsKey('houseNumber') ? l$houseNumber : const {},
+      _$data.containsKey('apartmentNumber') ? l$apartmentNumber : const {},
+      _$data.containsKey('specialLandmark') ? l$specialLandmark : const {},
+      _$data.containsKey('familyId') ? l$familyId : const {},
+      _$data.containsKey('storeId') ? l$storeId : const {},
+      _$data.containsKey('houseCode') ? l$houseCode : const {},
+      _$data.containsKey('area') ? l$area : const {},
+      _$data.containsKey('district') ? l$district : const {},
+      _$data.containsKey('family') ? l$family : const {},
+      _$data.containsKey('store') ? l$store : const {},
+      _$data.containsKey('street') ? l$street : const {},
+      _$data.containsKey('fullAddressText') ? l$fullAddressText : const {},
+      _$data.containsKey('withinPolygon') ? l$withinPolygon : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Input_MeetingDayFilterInput<TRes> {
-  factory CopyWith_Input_MeetingDayFilterInput(
-    Input_MeetingDayFilterInput instance,
-    TRes Function(Input_MeetingDayFilterInput) then,
-  ) = _CopyWithImpl_Input_MeetingDayFilterInput;
+abstract class CopyWith_Input_AddressFilterInput<TRes> {
+  factory CopyWith_Input_AddressFilterInput(
+    Input_AddressFilterInput instance,
+    TRes Function(Input_AddressFilterInput) then,
+  ) = _CopyWithImpl_Input_AddressFilterInput;
 
-  factory CopyWith_Input_MeetingDayFilterInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_MeetingDayFilterInput;
+  factory CopyWith_Input_AddressFilterInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_AddressFilterInput;
 
   TRes call({
-    List<Input_MeetingDayFilterInput>? and,
-    List<Input_MeetingDayFilterInput>? or,
-    List<Input_MeetingDayFilterInput>? not,
-    Input_MeetingDayFilterMeetingId? meetingId,
-    Input_MeetingDayFilterDay? day,
-    Input_MeetingDayFilterStudyYearId? studyYearId,
-    Input_MeetingDayFilterGender? gender,
-    Input_MeetingDayFilterPersonsCount? personsCount,
-    Input_MeetingDayFilterServantsCount? servantsCount,
-    Input_MeetingDayFilterTotalCount? totalCount,
-    Input_MeetingFilterInput? meeting,
-    Input_StudyYearFilterInput? studyYear,
+    List<Input_AddressFilterInput>? and,
+    List<Input_AddressFilterInput>? or,
+    List<Input_AddressFilterInput>? not,
+    Input_AddressFilterId? id,
+    Input_AddressFilterCountryIsoCode? countryIsoCode,
+    Input_AddressFilterDistrictId? districtId,
+    Input_AddressFilterAreaId? areaId,
+    Input_AddressFilterStreetId? streetId,
+    Input_AddressFilterSubstreetName? substreetName,
+    Input_AddressFilterGeolocation? geolocation,
+    Input_AddressFilterStoreyNumber? storeyNumber,
+    Input_AddressFilterHouseNumber? houseNumber,
+    Input_AddressFilterApartmentNumber? apartmentNumber,
+    Input_AddressFilterSpecialLandmark? specialLandmark,
+    Input_AddressFilterFamilyId? familyId,
+    Input_AddressFilterStoreId? storeId,
+    Input_AddressFilterHouseCode? houseCode,
+    Input_AreaFilterInput? area,
+    Input_DistrictFilterInput? district,
+    Input_FamilyFilterInput? family,
+    Input_StoreFilterInput? store,
+    Input_StreetFilterInput? street,
+    Input_AddressFilterFullAddressText? fullAddressText,
+    Input_AddressFilterWithinPolygon? withinPolygon,
   });
   TRes and(
-    Iterable<Input_MeetingDayFilterInput>? Function(
-      Iterable<
-        CopyWith_Input_MeetingDayFilterInput<Input_MeetingDayFilterInput>
-      >?,
+    Iterable<Input_AddressFilterInput>? Function(
+      Iterable<CopyWith_Input_AddressFilterInput<Input_AddressFilterInput>>?,
     )
     _fn,
   );
   TRes or(
-    Iterable<Input_MeetingDayFilterInput>? Function(
-      Iterable<
-        CopyWith_Input_MeetingDayFilterInput<Input_MeetingDayFilterInput>
-      >?,
+    Iterable<Input_AddressFilterInput>? Function(
+      Iterable<CopyWith_Input_AddressFilterInput<Input_AddressFilterInput>>?,
     )
     _fn,
   );
   TRes not(
-    Iterable<Input_MeetingDayFilterInput>? Function(
-      Iterable<
-        CopyWith_Input_MeetingDayFilterInput<Input_MeetingDayFilterInput>
-      >?,
+    Iterable<Input_AddressFilterInput>? Function(
+      Iterable<CopyWith_Input_AddressFilterInput<Input_AddressFilterInput>>?,
     )
     _fn,
   );
-  CopyWith_Input_MeetingDayFilterMeetingId<TRes> get meetingId;
-  CopyWith_Input_MeetingDayFilterDay<TRes> get day;
-  CopyWith_Input_MeetingDayFilterStudyYearId<TRes> get studyYearId;
-  CopyWith_Input_MeetingDayFilterGender<TRes> get gender;
-  CopyWith_Input_MeetingDayFilterPersonsCount<TRes> get personsCount;
-  CopyWith_Input_MeetingDayFilterServantsCount<TRes> get servantsCount;
-  CopyWith_Input_MeetingDayFilterTotalCount<TRes> get totalCount;
-  CopyWith_Input_MeetingFilterInput<TRes> get meeting;
-  CopyWith_Input_StudyYearFilterInput<TRes> get studyYear;
+  CopyWith_Input_AddressFilterId<TRes> get id;
+  CopyWith_Input_AddressFilterCountryIsoCode<TRes> get countryIsoCode;
+  CopyWith_Input_AddressFilterDistrictId<TRes> get districtId;
+  CopyWith_Input_AddressFilterAreaId<TRes> get areaId;
+  CopyWith_Input_AddressFilterStreetId<TRes> get streetId;
+  CopyWith_Input_AddressFilterSubstreetName<TRes> get substreetName;
+  CopyWith_Input_AddressFilterGeolocation<TRes> get geolocation;
+  CopyWith_Input_AddressFilterStoreyNumber<TRes> get storeyNumber;
+  CopyWith_Input_AddressFilterHouseNumber<TRes> get houseNumber;
+  CopyWith_Input_AddressFilterApartmentNumber<TRes> get apartmentNumber;
+  CopyWith_Input_AddressFilterSpecialLandmark<TRes> get specialLandmark;
+  CopyWith_Input_AddressFilterFamilyId<TRes> get familyId;
+  CopyWith_Input_AddressFilterStoreId<TRes> get storeId;
+  CopyWith_Input_AddressFilterHouseCode<TRes> get houseCode;
+  CopyWith_Input_AreaFilterInput<TRes> get area;
+  CopyWith_Input_DistrictFilterInput<TRes> get district;
+  CopyWith_Input_FamilyFilterInput<TRes> get family;
+  CopyWith_Input_StoreFilterInput<TRes> get store;
+  CopyWith_Input_StreetFilterInput<TRes> get street;
+  CopyWith_Input_AddressFilterFullAddressText<TRes> get fullAddressText;
+  CopyWith_Input_AddressFilterWithinPolygon<TRes> get withinPolygon;
 }
 
-class _CopyWithImpl_Input_MeetingDayFilterInput<TRes>
-    implements CopyWith_Input_MeetingDayFilterInput<TRes> {
-  _CopyWithImpl_Input_MeetingDayFilterInput(this._instance, this._then);
+class _CopyWithImpl_Input_AddressFilterInput<TRes>
+    implements CopyWith_Input_AddressFilterInput<TRes> {
+  _CopyWithImpl_Input_AddressFilterInput(this._instance, this._then);
 
-  final Input_MeetingDayFilterInput _instance;
+  final Input_AddressFilterInput _instance;
 
-  final TRes Function(Input_MeetingDayFilterInput) _then;
+  final TRes Function(Input_AddressFilterInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -2464,194 +2168,343 @@ class _CopyWithImpl_Input_MeetingDayFilterInput<TRes>
     Object? and = _undefined,
     Object? or = _undefined,
     Object? not = _undefined,
-    Object? meetingId = _undefined,
-    Object? day = _undefined,
-    Object? studyYearId = _undefined,
-    Object? gender = _undefined,
-    Object? personsCount = _undefined,
-    Object? servantsCount = _undefined,
-    Object? totalCount = _undefined,
-    Object? meeting = _undefined,
-    Object? studyYear = _undefined,
+    Object? id = _undefined,
+    Object? countryIsoCode = _undefined,
+    Object? districtId = _undefined,
+    Object? areaId = _undefined,
+    Object? streetId = _undefined,
+    Object? substreetName = _undefined,
+    Object? geolocation = _undefined,
+    Object? storeyNumber = _undefined,
+    Object? houseNumber = _undefined,
+    Object? apartmentNumber = _undefined,
+    Object? specialLandmark = _undefined,
+    Object? familyId = _undefined,
+    Object? storeId = _undefined,
+    Object? houseCode = _undefined,
+    Object? area = _undefined,
+    Object? district = _undefined,
+    Object? family = _undefined,
+    Object? store = _undefined,
+    Object? street = _undefined,
+    Object? fullAddressText = _undefined,
+    Object? withinPolygon = _undefined,
   }) => _then(
-    Input_MeetingDayFilterInput._({
+    Input_AddressFilterInput._({
       ..._instance._$data,
-      if (and != _undefined) 'and': (and as List<Input_MeetingDayFilterInput>?),
-      if (or != _undefined) 'or': (or as List<Input_MeetingDayFilterInput>?),
-      if (not != _undefined) 'not': (not as List<Input_MeetingDayFilterInput>?),
-      if (meetingId != _undefined)
-        'meetingId': (meetingId as Input_MeetingDayFilterMeetingId?),
-      if (day != _undefined) 'day': (day as Input_MeetingDayFilterDay?),
-      if (studyYearId != _undefined)
-        'studyYearId': (studyYearId as Input_MeetingDayFilterStudyYearId?),
-      if (gender != _undefined)
-        'gender': (gender as Input_MeetingDayFilterGender?),
-      if (personsCount != _undefined)
-        'personsCount': (personsCount as Input_MeetingDayFilterPersonsCount?),
-      if (servantsCount != _undefined)
-        'servantsCount':
-            (servantsCount as Input_MeetingDayFilterServantsCount?),
-      if (totalCount != _undefined)
-        'totalCount': (totalCount as Input_MeetingDayFilterTotalCount?),
-      if (meeting != _undefined)
-        'meeting': (meeting as Input_MeetingFilterInput?),
-      if (studyYear != _undefined)
-        'studyYear': (studyYear as Input_StudyYearFilterInput?),
+      if (and != _undefined) 'and': (and as List<Input_AddressFilterInput>?),
+      if (or != _undefined) 'or': (or as List<Input_AddressFilterInput>?),
+      if (not != _undefined) 'not': (not as List<Input_AddressFilterInput>?),
+      if (id != _undefined) 'id': (id as Input_AddressFilterId?),
+      if (countryIsoCode != _undefined)
+        'countryIsoCode':
+            (countryIsoCode as Input_AddressFilterCountryIsoCode?),
+      if (districtId != _undefined)
+        'districtId': (districtId as Input_AddressFilterDistrictId?),
+      if (areaId != _undefined)
+        'areaId': (areaId as Input_AddressFilterAreaId?),
+      if (streetId != _undefined)
+        'streetId': (streetId as Input_AddressFilterStreetId?),
+      if (substreetName != _undefined)
+        'substreetName': (substreetName as Input_AddressFilterSubstreetName?),
+      if (geolocation != _undefined)
+        'geolocation': (geolocation as Input_AddressFilterGeolocation?),
+      if (storeyNumber != _undefined)
+        'storeyNumber': (storeyNumber as Input_AddressFilterStoreyNumber?),
+      if (houseNumber != _undefined)
+        'houseNumber': (houseNumber as Input_AddressFilterHouseNumber?),
+      if (apartmentNumber != _undefined)
+        'apartmentNumber':
+            (apartmentNumber as Input_AddressFilterApartmentNumber?),
+      if (specialLandmark != _undefined)
+        'specialLandmark':
+            (specialLandmark as Input_AddressFilterSpecialLandmark?),
+      if (familyId != _undefined)
+        'familyId': (familyId as Input_AddressFilterFamilyId?),
+      if (storeId != _undefined)
+        'storeId': (storeId as Input_AddressFilterStoreId?),
+      if (houseCode != _undefined)
+        'houseCode': (houseCode as Input_AddressFilterHouseCode?),
+      if (area != _undefined) 'area': (area as Input_AreaFilterInput?),
+      if (district != _undefined)
+        'district': (district as Input_DistrictFilterInput?),
+      if (family != _undefined) 'family': (family as Input_FamilyFilterInput?),
+      if (store != _undefined) 'store': (store as Input_StoreFilterInput?),
+      if (street != _undefined) 'street': (street as Input_StreetFilterInput?),
+      if (fullAddressText != _undefined)
+        'fullAddressText':
+            (fullAddressText as Input_AddressFilterFullAddressText?),
+      if (withinPolygon != _undefined)
+        'withinPolygon': (withinPolygon as Input_AddressFilterWithinPolygon?),
     }),
   );
 
   TRes and(
-    Iterable<Input_MeetingDayFilterInput>? Function(
-      Iterable<
-        CopyWith_Input_MeetingDayFilterInput<Input_MeetingDayFilterInput>
-      >?,
+    Iterable<Input_AddressFilterInput>? Function(
+      Iterable<CopyWith_Input_AddressFilterInput<Input_AddressFilterInput>>?,
     )
     _fn,
   ) => call(
     and: _fn(
-      _instance.and?.map(
-        (e) => CopyWith_Input_MeetingDayFilterInput(e, (i) => i),
-      ),
+      _instance.and?.map((e) => CopyWith_Input_AddressFilterInput(e, (i) => i)),
     )?.toList(),
   );
 
   TRes or(
-    Iterable<Input_MeetingDayFilterInput>? Function(
-      Iterable<
-        CopyWith_Input_MeetingDayFilterInput<Input_MeetingDayFilterInput>
-      >?,
+    Iterable<Input_AddressFilterInput>? Function(
+      Iterable<CopyWith_Input_AddressFilterInput<Input_AddressFilterInput>>?,
     )
     _fn,
   ) => call(
     or: _fn(
-      _instance.or?.map(
-        (e) => CopyWith_Input_MeetingDayFilterInput(e, (i) => i),
-      ),
+      _instance.or?.map((e) => CopyWith_Input_AddressFilterInput(e, (i) => i)),
     )?.toList(),
   );
 
   TRes not(
-    Iterable<Input_MeetingDayFilterInput>? Function(
-      Iterable<
-        CopyWith_Input_MeetingDayFilterInput<Input_MeetingDayFilterInput>
-      >?,
+    Iterable<Input_AddressFilterInput>? Function(
+      Iterable<CopyWith_Input_AddressFilterInput<Input_AddressFilterInput>>?,
     )
     _fn,
   ) => call(
     not: _fn(
-      _instance.not?.map(
-        (e) => CopyWith_Input_MeetingDayFilterInput(e, (i) => i),
-      ),
+      _instance.not?.map((e) => CopyWith_Input_AddressFilterInput(e, (i) => i)),
     )?.toList(),
   );
 
-  CopyWith_Input_MeetingDayFilterMeetingId<TRes> get meetingId {
-    final local$meetingId = _instance.meetingId;
-    return local$meetingId == null
-        ? CopyWith_Input_MeetingDayFilterMeetingId.stub(_then(_instance))
-        : CopyWith_Input_MeetingDayFilterMeetingId(
-            local$meetingId,
-            (e) => call(meetingId: e),
+  CopyWith_Input_AddressFilterId<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_AddressFilterId.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterId(local$id, (e) => call(id: e));
+  }
+
+  CopyWith_Input_AddressFilterCountryIsoCode<TRes> get countryIsoCode {
+    final local$countryIsoCode = _instance.countryIsoCode;
+    return local$countryIsoCode == null
+        ? CopyWith_Input_AddressFilterCountryIsoCode.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterCountryIsoCode(
+            local$countryIsoCode,
+            (e) => call(countryIsoCode: e),
           );
   }
 
-  CopyWith_Input_MeetingDayFilterDay<TRes> get day {
-    final local$day = _instance.day;
-    return local$day == null
-        ? CopyWith_Input_MeetingDayFilterDay.stub(_then(_instance))
-        : CopyWith_Input_MeetingDayFilterDay(local$day, (e) => call(day: e));
-  }
-
-  CopyWith_Input_MeetingDayFilterStudyYearId<TRes> get studyYearId {
-    final local$studyYearId = _instance.studyYearId;
-    return local$studyYearId == null
-        ? CopyWith_Input_MeetingDayFilterStudyYearId.stub(_then(_instance))
-        : CopyWith_Input_MeetingDayFilterStudyYearId(
-            local$studyYearId,
-            (e) => call(studyYearId: e),
+  CopyWith_Input_AddressFilterDistrictId<TRes> get districtId {
+    final local$districtId = _instance.districtId;
+    return local$districtId == null
+        ? CopyWith_Input_AddressFilterDistrictId.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterDistrictId(
+            local$districtId,
+            (e) => call(districtId: e),
           );
   }
 
-  CopyWith_Input_MeetingDayFilterGender<TRes> get gender {
-    final local$gender = _instance.gender;
-    return local$gender == null
-        ? CopyWith_Input_MeetingDayFilterGender.stub(_then(_instance))
-        : CopyWith_Input_MeetingDayFilterGender(
-            local$gender,
-            (e) => call(gender: e),
+  CopyWith_Input_AddressFilterAreaId<TRes> get areaId {
+    final local$areaId = _instance.areaId;
+    return local$areaId == null
+        ? CopyWith_Input_AddressFilterAreaId.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterAreaId(
+            local$areaId,
+            (e) => call(areaId: e),
           );
   }
 
-  CopyWith_Input_MeetingDayFilterPersonsCount<TRes> get personsCount {
-    final local$personsCount = _instance.personsCount;
-    return local$personsCount == null
-        ? CopyWith_Input_MeetingDayFilterPersonsCount.stub(_then(_instance))
-        : CopyWith_Input_MeetingDayFilterPersonsCount(
-            local$personsCount,
-            (e) => call(personsCount: e),
+  CopyWith_Input_AddressFilterStreetId<TRes> get streetId {
+    final local$streetId = _instance.streetId;
+    return local$streetId == null
+        ? CopyWith_Input_AddressFilterStreetId.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterStreetId(
+            local$streetId,
+            (e) => call(streetId: e),
           );
   }
 
-  CopyWith_Input_MeetingDayFilterServantsCount<TRes> get servantsCount {
-    final local$servantsCount = _instance.servantsCount;
-    return local$servantsCount == null
-        ? CopyWith_Input_MeetingDayFilterServantsCount.stub(_then(_instance))
-        : CopyWith_Input_MeetingDayFilterServantsCount(
-            local$servantsCount,
-            (e) => call(servantsCount: e),
+  CopyWith_Input_AddressFilterSubstreetName<TRes> get substreetName {
+    final local$substreetName = _instance.substreetName;
+    return local$substreetName == null
+        ? CopyWith_Input_AddressFilterSubstreetName.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterSubstreetName(
+            local$substreetName,
+            (e) => call(substreetName: e),
           );
   }
 
-  CopyWith_Input_MeetingDayFilterTotalCount<TRes> get totalCount {
-    final local$totalCount = _instance.totalCount;
-    return local$totalCount == null
-        ? CopyWith_Input_MeetingDayFilterTotalCount.stub(_then(_instance))
-        : CopyWith_Input_MeetingDayFilterTotalCount(
-            local$totalCount,
-            (e) => call(totalCount: e),
+  CopyWith_Input_AddressFilterGeolocation<TRes> get geolocation {
+    final local$geolocation = _instance.geolocation;
+    return local$geolocation == null
+        ? CopyWith_Input_AddressFilterGeolocation.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterGeolocation(
+            local$geolocation,
+            (e) => call(geolocation: e),
           );
   }
 
-  CopyWith_Input_MeetingFilterInput<TRes> get meeting {
-    final local$meeting = _instance.meeting;
-    return local$meeting == null
-        ? CopyWith_Input_MeetingFilterInput.stub(_then(_instance))
-        : CopyWith_Input_MeetingFilterInput(
-            local$meeting,
-            (e) => call(meeting: e),
+  CopyWith_Input_AddressFilterStoreyNumber<TRes> get storeyNumber {
+    final local$storeyNumber = _instance.storeyNumber;
+    return local$storeyNumber == null
+        ? CopyWith_Input_AddressFilterStoreyNumber.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterStoreyNumber(
+            local$storeyNumber,
+            (e) => call(storeyNumber: e),
           );
   }
 
-  CopyWith_Input_StudyYearFilterInput<TRes> get studyYear {
-    final local$studyYear = _instance.studyYear;
-    return local$studyYear == null
-        ? CopyWith_Input_StudyYearFilterInput.stub(_then(_instance))
-        : CopyWith_Input_StudyYearFilterInput(
-            local$studyYear,
-            (e) => call(studyYear: e),
+  CopyWith_Input_AddressFilterHouseNumber<TRes> get houseNumber {
+    final local$houseNumber = _instance.houseNumber;
+    return local$houseNumber == null
+        ? CopyWith_Input_AddressFilterHouseNumber.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterHouseNumber(
+            local$houseNumber,
+            (e) => call(houseNumber: e),
+          );
+  }
+
+  CopyWith_Input_AddressFilterApartmentNumber<TRes> get apartmentNumber {
+    final local$apartmentNumber = _instance.apartmentNumber;
+    return local$apartmentNumber == null
+        ? CopyWith_Input_AddressFilterApartmentNumber.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterApartmentNumber(
+            local$apartmentNumber,
+            (e) => call(apartmentNumber: e),
+          );
+  }
+
+  CopyWith_Input_AddressFilterSpecialLandmark<TRes> get specialLandmark {
+    final local$specialLandmark = _instance.specialLandmark;
+    return local$specialLandmark == null
+        ? CopyWith_Input_AddressFilterSpecialLandmark.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterSpecialLandmark(
+            local$specialLandmark,
+            (e) => call(specialLandmark: e),
+          );
+  }
+
+  CopyWith_Input_AddressFilterFamilyId<TRes> get familyId {
+    final local$familyId = _instance.familyId;
+    return local$familyId == null
+        ? CopyWith_Input_AddressFilterFamilyId.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterFamilyId(
+            local$familyId,
+            (e) => call(familyId: e),
+          );
+  }
+
+  CopyWith_Input_AddressFilterStoreId<TRes> get storeId {
+    final local$storeId = _instance.storeId;
+    return local$storeId == null
+        ? CopyWith_Input_AddressFilterStoreId.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterStoreId(
+            local$storeId,
+            (e) => call(storeId: e),
+          );
+  }
+
+  CopyWith_Input_AddressFilterHouseCode<TRes> get houseCode {
+    final local$houseCode = _instance.houseCode;
+    return local$houseCode == null
+        ? CopyWith_Input_AddressFilterHouseCode.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterHouseCode(
+            local$houseCode,
+            (e) => call(houseCode: e),
+          );
+  }
+
+  CopyWith_Input_AreaFilterInput<TRes> get area {
+    final local$area = _instance.area;
+    return local$area == null
+        ? CopyWith_Input_AreaFilterInput.stub(_then(_instance))
+        : CopyWith_Input_AreaFilterInput(local$area, (e) => call(area: e));
+  }
+
+  CopyWith_Input_DistrictFilterInput<TRes> get district {
+    final local$district = _instance.district;
+    return local$district == null
+        ? CopyWith_Input_DistrictFilterInput.stub(_then(_instance))
+        : CopyWith_Input_DistrictFilterInput(
+            local$district,
+            (e) => call(district: e),
+          );
+  }
+
+  CopyWith_Input_FamilyFilterInput<TRes> get family {
+    final local$family = _instance.family;
+    return local$family == null
+        ? CopyWith_Input_FamilyFilterInput.stub(_then(_instance))
+        : CopyWith_Input_FamilyFilterInput(
+            local$family,
+            (e) => call(family: e),
+          );
+  }
+
+  CopyWith_Input_StoreFilterInput<TRes> get store {
+    final local$store = _instance.store;
+    return local$store == null
+        ? CopyWith_Input_StoreFilterInput.stub(_then(_instance))
+        : CopyWith_Input_StoreFilterInput(local$store, (e) => call(store: e));
+  }
+
+  CopyWith_Input_StreetFilterInput<TRes> get street {
+    final local$street = _instance.street;
+    return local$street == null
+        ? CopyWith_Input_StreetFilterInput.stub(_then(_instance))
+        : CopyWith_Input_StreetFilterInput(
+            local$street,
+            (e) => call(street: e),
+          );
+  }
+
+  CopyWith_Input_AddressFilterFullAddressText<TRes> get fullAddressText {
+    final local$fullAddressText = _instance.fullAddressText;
+    return local$fullAddressText == null
+        ? CopyWith_Input_AddressFilterFullAddressText.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterFullAddressText(
+            local$fullAddressText,
+            (e) => call(fullAddressText: e),
+          );
+  }
+
+  CopyWith_Input_AddressFilterWithinPolygon<TRes> get withinPolygon {
+    final local$withinPolygon = _instance.withinPolygon;
+    return local$withinPolygon == null
+        ? CopyWith_Input_AddressFilterWithinPolygon.stub(_then(_instance))
+        : CopyWith_Input_AddressFilterWithinPolygon(
+            local$withinPolygon,
+            (e) => call(withinPolygon: e),
           );
   }
 }
 
-class _CopyWithStubImpl_Input_MeetingDayFilterInput<TRes>
-    implements CopyWith_Input_MeetingDayFilterInput<TRes> {
-  _CopyWithStubImpl_Input_MeetingDayFilterInput(this._res);
+class _CopyWithStubImpl_Input_AddressFilterInput<TRes>
+    implements CopyWith_Input_AddressFilterInput<TRes> {
+  _CopyWithStubImpl_Input_AddressFilterInput(this._res);
 
   TRes _res;
 
   call({
-    List<Input_MeetingDayFilterInput>? and,
-    List<Input_MeetingDayFilterInput>? or,
-    List<Input_MeetingDayFilterInput>? not,
-    Input_MeetingDayFilterMeetingId? meetingId,
-    Input_MeetingDayFilterDay? day,
-    Input_MeetingDayFilterStudyYearId? studyYearId,
-    Input_MeetingDayFilterGender? gender,
-    Input_MeetingDayFilterPersonsCount? personsCount,
-    Input_MeetingDayFilterServantsCount? servantsCount,
-    Input_MeetingDayFilterTotalCount? totalCount,
-    Input_MeetingFilterInput? meeting,
-    Input_StudyYearFilterInput? studyYear,
+    List<Input_AddressFilterInput>? and,
+    List<Input_AddressFilterInput>? or,
+    List<Input_AddressFilterInput>? not,
+    Input_AddressFilterId? id,
+    Input_AddressFilterCountryIsoCode? countryIsoCode,
+    Input_AddressFilterDistrictId? districtId,
+    Input_AddressFilterAreaId? areaId,
+    Input_AddressFilterStreetId? streetId,
+    Input_AddressFilterSubstreetName? substreetName,
+    Input_AddressFilterGeolocation? geolocation,
+    Input_AddressFilterStoreyNumber? storeyNumber,
+    Input_AddressFilterHouseNumber? houseNumber,
+    Input_AddressFilterApartmentNumber? apartmentNumber,
+    Input_AddressFilterSpecialLandmark? specialLandmark,
+    Input_AddressFilterFamilyId? familyId,
+    Input_AddressFilterStoreId? storeId,
+    Input_AddressFilterHouseCode? houseCode,
+    Input_AreaFilterInput? area,
+    Input_DistrictFilterInput? district,
+    Input_FamilyFilterInput? family,
+    Input_StoreFilterInput? store,
+    Input_StreetFilterInput? street,
+    Input_AddressFilterFullAddressText? fullAddressText,
+    Input_AddressFilterWithinPolygon? withinPolygon,
   }) => _res;
 
   and(_fn) => _res;
@@ -2660,46 +2513,84 @@ class _CopyWithStubImpl_Input_MeetingDayFilterInput<TRes>
 
   not(_fn) => _res;
 
-  CopyWith_Input_MeetingDayFilterMeetingId<TRes> get meetingId =>
-      CopyWith_Input_MeetingDayFilterMeetingId.stub(_res);
+  CopyWith_Input_AddressFilterId<TRes> get id =>
+      CopyWith_Input_AddressFilterId.stub(_res);
 
-  CopyWith_Input_MeetingDayFilterDay<TRes> get day =>
-      CopyWith_Input_MeetingDayFilterDay.stub(_res);
+  CopyWith_Input_AddressFilterCountryIsoCode<TRes> get countryIsoCode =>
+      CopyWith_Input_AddressFilterCountryIsoCode.stub(_res);
 
-  CopyWith_Input_MeetingDayFilterStudyYearId<TRes> get studyYearId =>
-      CopyWith_Input_MeetingDayFilterStudyYearId.stub(_res);
+  CopyWith_Input_AddressFilterDistrictId<TRes> get districtId =>
+      CopyWith_Input_AddressFilterDistrictId.stub(_res);
 
-  CopyWith_Input_MeetingDayFilterGender<TRes> get gender =>
-      CopyWith_Input_MeetingDayFilterGender.stub(_res);
+  CopyWith_Input_AddressFilterAreaId<TRes> get areaId =>
+      CopyWith_Input_AddressFilterAreaId.stub(_res);
 
-  CopyWith_Input_MeetingDayFilterPersonsCount<TRes> get personsCount =>
-      CopyWith_Input_MeetingDayFilterPersonsCount.stub(_res);
+  CopyWith_Input_AddressFilterStreetId<TRes> get streetId =>
+      CopyWith_Input_AddressFilterStreetId.stub(_res);
 
-  CopyWith_Input_MeetingDayFilterServantsCount<TRes> get servantsCount =>
-      CopyWith_Input_MeetingDayFilterServantsCount.stub(_res);
+  CopyWith_Input_AddressFilterSubstreetName<TRes> get substreetName =>
+      CopyWith_Input_AddressFilterSubstreetName.stub(_res);
 
-  CopyWith_Input_MeetingDayFilterTotalCount<TRes> get totalCount =>
-      CopyWith_Input_MeetingDayFilterTotalCount.stub(_res);
+  CopyWith_Input_AddressFilterGeolocation<TRes> get geolocation =>
+      CopyWith_Input_AddressFilterGeolocation.stub(_res);
 
-  CopyWith_Input_MeetingFilterInput<TRes> get meeting =>
-      CopyWith_Input_MeetingFilterInput.stub(_res);
+  CopyWith_Input_AddressFilterStoreyNumber<TRes> get storeyNumber =>
+      CopyWith_Input_AddressFilterStoreyNumber.stub(_res);
 
-  CopyWith_Input_StudyYearFilterInput<TRes> get studyYear =>
-      CopyWith_Input_StudyYearFilterInput.stub(_res);
+  CopyWith_Input_AddressFilterHouseNumber<TRes> get houseNumber =>
+      CopyWith_Input_AddressFilterHouseNumber.stub(_res);
+
+  CopyWith_Input_AddressFilterApartmentNumber<TRes> get apartmentNumber =>
+      CopyWith_Input_AddressFilterApartmentNumber.stub(_res);
+
+  CopyWith_Input_AddressFilterSpecialLandmark<TRes> get specialLandmark =>
+      CopyWith_Input_AddressFilterSpecialLandmark.stub(_res);
+
+  CopyWith_Input_AddressFilterFamilyId<TRes> get familyId =>
+      CopyWith_Input_AddressFilterFamilyId.stub(_res);
+
+  CopyWith_Input_AddressFilterStoreId<TRes> get storeId =>
+      CopyWith_Input_AddressFilterStoreId.stub(_res);
+
+  CopyWith_Input_AddressFilterHouseCode<TRes> get houseCode =>
+      CopyWith_Input_AddressFilterHouseCode.stub(_res);
+
+  CopyWith_Input_AreaFilterInput<TRes> get area =>
+      CopyWith_Input_AreaFilterInput.stub(_res);
+
+  CopyWith_Input_DistrictFilterInput<TRes> get district =>
+      CopyWith_Input_DistrictFilterInput.stub(_res);
+
+  CopyWith_Input_FamilyFilterInput<TRes> get family =>
+      CopyWith_Input_FamilyFilterInput.stub(_res);
+
+  CopyWith_Input_StoreFilterInput<TRes> get store =>
+      CopyWith_Input_StoreFilterInput.stub(_res);
+
+  CopyWith_Input_StreetFilterInput<TRes> get street =>
+      CopyWith_Input_StreetFilterInput.stub(_res);
+
+  CopyWith_Input_AddressFilterFullAddressText<TRes> get fullAddressText =>
+      CopyWith_Input_AddressFilterFullAddressText.stub(_res);
+
+  CopyWith_Input_AddressFilterWithinPolygon<TRes> get withinPolygon =>
+      CopyWith_Input_AddressFilterWithinPolygon.stub(_res);
 }
 
-class Input_MeetingDaySortInput {
-  factory Input_MeetingDaySortInput({
+class Input_AddressSortInput {
+  factory Input_AddressSortInput({
     Enum_SortOrder? order,
-    required Enum_MeetingDaySortField field,
-  }) => Input_MeetingDaySortInput._({
+    required Enum_AddressSortField field,
+    Input_AddressWithinPolygonFieldInput? withinPolygonInput,
+  }) => Input_AddressSortInput._({
     if (order != null) r'order': order,
     r'field': field,
+    if (withinPolygonInput != null) r'withinPolygonInput': withinPolygonInput,
   });
 
-  Input_MeetingDaySortInput._(this._$data);
+  Input_AddressSortInput._(this._$data);
 
-  factory Input_MeetingDaySortInput.fromJson(Map<String, dynamic> data) {
+  factory Input_AddressSortInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('order')) {
       final l$order = data['order'];
@@ -2708,18 +2599,26 @@ class Input_MeetingDaySortInput {
           : fromJson_Enum_SortOrder((l$order as String));
     }
     final l$field = data['field'];
-    result$data['field'] = fromJson_Enum_MeetingDaySortField(
-      (l$field as String),
-    );
-    return Input_MeetingDaySortInput._(result$data);
+    result$data['field'] = fromJson_Enum_AddressSortField((l$field as String));
+    if (data.containsKey('withinPolygonInput')) {
+      final l$withinPolygonInput = data['withinPolygonInput'];
+      result$data['withinPolygonInput'] = l$withinPolygonInput == null
+          ? null
+          : Input_AddressWithinPolygonFieldInput.fromJson(
+              (l$withinPolygonInput as Map<String, dynamic>),
+            );
+    }
+    return Input_AddressSortInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   Enum_SortOrder? get order => (_$data['order'] as Enum_SortOrder?);
 
-  Enum_MeetingDaySortField get field =>
-      (_$data['field'] as Enum_MeetingDaySortField);
+  Enum_AddressSortField get field => (_$data['field'] as Enum_AddressSortField);
+
+  Input_AddressWithinPolygonFieldInput? get withinPolygonInput =>
+      (_$data['withinPolygonInput'] as Input_AddressWithinPolygonFieldInput?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -2730,20 +2629,23 @@ class Input_MeetingDaySortInput {
           : toJson_Enum_SortOrder(l$order);
     }
     final l$field = field;
-    result$data['field'] = toJson_Enum_MeetingDaySortField(l$field);
+    result$data['field'] = toJson_Enum_AddressSortField(l$field);
+    if (_$data.containsKey('withinPolygonInput')) {
+      final l$withinPolygonInput = withinPolygonInput;
+      result$data['withinPolygonInput'] = l$withinPolygonInput?.toJson();
+    }
     return result$data;
   }
 
-  CopyWith_Input_MeetingDaySortInput<Input_MeetingDaySortInput> get copyWith =>
-      CopyWith_Input_MeetingDaySortInput(this, (i) => i);
+  CopyWith_Input_AddressSortInput<Input_AddressSortInput> get copyWith =>
+      CopyWith_Input_AddressSortInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_MeetingDaySortInput ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_AddressSortInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$order = order;
@@ -2759,6 +2661,15 @@ class Input_MeetingDaySortInput {
     if (l$field != lOther$field) {
       return false;
     }
+    final l$withinPolygonInput = withinPolygonInput;
+    final lOther$withinPolygonInput = other.withinPolygonInput;
+    if (_$data.containsKey('withinPolygonInput') !=
+        other._$data.containsKey('withinPolygonInput')) {
+      return false;
+    }
+    if (l$withinPolygonInput != lOther$withinPolygonInput) {
+      return false;
+    }
     return true;
   }
 
@@ -2766,9 +2677,13 @@ class Input_MeetingDaySortInput {
   int get hashCode {
     final l$order = order;
     final l$field = field;
+    final l$withinPolygonInput = withinPolygonInput;
     return Object.hashAll([
       _$data.containsKey('order') ? l$order : const {},
       l$field,
+      _$data.containsKey('withinPolygonInput')
+          ? l$withinPolygonInput
+          : const {},
     ]);
   }
 }
