@@ -6,11 +6,13 @@ import 'package:uuid/uuid.dart' show Uuid;
 class FamilyFormController extends ObjectFormController<Family> {
   Family? _savedFamily;
   final FamiliesDAO _familiesDAO;
+  final AnalyticsService _analyticsService;
 
   late final AddressFormController address;
   late final relatives = AdvancedFormController(debugName: 'relatives');
   late final phones = FamilyPhoneContactsFormController(
     saved: initialDraft.contacts,
+    analyticsService: _analyticsService,
   );
   late final church = AdvancedFieldController<Church?, ObjectEditError>(
     initialValue: initialDraft.church,
@@ -60,6 +62,7 @@ class FamilyFormController extends ObjectFormController<Family> {
   FamilyFormController({
     required FamilyEditIntent intent,
     required this._familiesDAO,
+    required this._analyticsService,
     required AddressFormServices addressServices,
     required super.currentUserId,
   }) : _savedFamily = switch (intent) {

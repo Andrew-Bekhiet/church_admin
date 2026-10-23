@@ -34,6 +34,7 @@ void main() {
     form = FamilyFormController(
       intent: const UpdateFamily(family: storedFamily),
       familiesDAO: families,
+      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
       addressServices: FakeAddressFormServices.withNothingToSuggest(),
       currentUserId: shubraServant.uid,
     );

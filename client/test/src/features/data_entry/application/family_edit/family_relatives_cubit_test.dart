@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../../../fakes/fake_address_form_services.dart';
 import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/in_memory_families_dao.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 
 void main() {
   const parent = Family(id: 'parent', name: 'عائلة الأب');
@@ -17,6 +18,9 @@ void main() {
     form = FamilyFormController(
       intent: intent,
       familiesDAO: families,
+      analyticsService: AnalyticsService([
+        RecordingAnalyticsProvider(),
+      ], FakeLoggingService()),
       addressServices: FakeAddressFormServices.withNothingToSuggest(),
       currentUserId: 'me',
     );

@@ -2,6 +2,9 @@ import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
+
 void main() {
   const father = PersonType(id: 'father', name: 'الأب', isFamilyAdmin: true);
   const mother = PersonType(id: 'mother', name: 'الأم', isFamilyAdmin: true);
@@ -33,6 +36,7 @@ void main() {
 
   var nextKey = 0;
   var canHaveFamilyNumbers = true;
+  late RecordingAnalyticsProvider analytics;
 
   PersonPhoneContactsFormController formFor({
     List<PhoneContact> own = const [ownMain, ownWork],
@@ -41,6 +45,7 @@ void main() {
     final form = PersonPhoneContactsFormController(
       own: own,
       family: family,
+      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
       canHaveFamilyNumbers: () => canHaveFamilyNumbers,
       newKey: () => newKeyAt(nextKey++),
     )..setValidationMode(ValidationMode.onUserInteraction);
@@ -57,6 +62,7 @@ void main() {
   setUp(() {
     nextKey = 0;
     canHaveFamilyNumbers = true;
+    analytics = RecordingAnalyticsProvider();
   });
 
   test("the person's own numbers are listed before their family's", () {
