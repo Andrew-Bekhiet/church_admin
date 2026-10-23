@@ -14,6 +14,18 @@ void main() {
   const linkUrl = 'https://api.example.com/api/files/token/photo';
   final expiresAt = DateTime.utc(2030, 5, 1, 12).toLocal();
   final link = PhotoLink(url: linkUrl, expiresAt: expiresAt);
+  const uploadUrl = 'https://storage.example.com/uploads/persons/person-1/x';
+  const uploadHeaders = {
+    'content-type': 'image/png',
+    'x-goog-content-length-range': '0,26214400',
+  };
+  const confirmationToken = 'confirmation-token';
+  final uploadLink = PhotoUploadLink(
+    url: uploadUrl,
+    expiresAt: expiresAt,
+    headers: uploadHeaders,
+    confirmationToken: confirmationToken,
+  );
 
   late FakeAshBackend backend;
 
@@ -36,7 +48,12 @@ void main() {
           'requestPhotoUpload': (variables) {
             asked = variables;
 
-            return AshResponses.photoLink(linkUrl, expiresAt);
+            return AshResponses.photoUploadLink(
+              url: uploadUrl,
+              expiresAt: expiresAt,
+              headers: uploadHeaders,
+              confirmationToken: confirmationToken,
+            );
           },
         });
 
@@ -46,7 +63,7 @@ void main() {
           contentType: 'image/png',
         );
 
-        expect(answered, link);
+        expect(answered, uploadLink);
         expect(asked, {
           'subject': Enum_PhotoSubject.PERSONS.toJson(),
           'id': personId,
@@ -200,26 +217,84 @@ void main() {
     });
 
     test(
-      'an upload puts the file to the link with its content type and length',
+      'an upload puts the file to the link with the headers it names',
       () async {
         final adapter = RecordingHttpClientAdapter();
         serving({}, dio: Dio()..httpClientAdapter = adapter);
         const file = [1, 2, 3];
 
         await backend.db.photos.uploadPhoto(
-          url: linkUrl,
+          link: uploadLink,
           fileStream: Stream.value(file),
-          contentType: 'image/png',
           fileLength: file.length,
         );
 
         final upload = adapter.requests.single;
         expect(upload.method, 'PUT');
-        expect(upload.uri, Uri.parse(linkUrl));
+        expect(upload.uri, Uri.parse(uploadUrl));
         expect(upload.headers['content-length'], file.length);
-        expect(upload.headers['content-type'], contains('image/png'));
+        for (final MapEntry(:key, :value) in uploadHeaders.entries) {
+          expect(upload.headers[key], value);
+        }
         expect(upload.body, file);
       },
     );
+
+    test('an upload carries no authorization', () async {
+      final adapter = RecordingHttpClientAdapter();
+      serving({}, dio: Dio()..httpClientAdapter = adapter);
+
+      await backend.db.photos.uploadPhoto(
+        link: uploadLink,
+        fileStream: Stream.value(const [1]),
+        fileLength: 1,
+      );
+
+      expect(
+        adapter.requests.single.headers.keys.map((name) => name.toLowerCase()),
+        isNot(contains('authorization')),
+      );
+    });
+
+    test(
+      'confirming an upload presents the subject, id and confirmation token',
+      () async {
+        Json? asked;
+        serving({
+          'confirmPhotoUpload': (variables) {
+            asked = variables;
+
+            return true;
+          },
+        });
+
+        await backend.db.photos.confirmPhotoUpload(
+          subject: Enum_PhotoSubject.PERSONS,
+          id: personId,
+          confirmationToken: confirmationToken,
+        );
+
+        expect(asked, {
+          'subject': Enum_PhotoSubject.PERSONS.toJson(),
+          'id': personId,
+          'confirmationToken': confirmationToken,
+        });
+      },
+    );
+
+    test('a refused confirmation surfaces the backend rejection', () async {
+      serving({
+        'confirmPhotoUpload': (_) => throw const FakeAshRejection('invalid'),
+      });
+
+      await expectLater(
+        backend.db.photos.confirmPhotoUpload(
+          subject: Enum_PhotoSubject.PERSONS,
+          id: personId,
+          confirmationToken: confirmationToken,
+        ),
+        throwsA(isA<BackendInvalidInputException>()),
+      );
+    });
   });
 }

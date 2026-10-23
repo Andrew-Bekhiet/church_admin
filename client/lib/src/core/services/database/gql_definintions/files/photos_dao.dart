@@ -33,7 +33,7 @@ class PhotosDAO {
         );
   }
 
-  Future<PhotoLink> requestPhotoUpload({
+  Future<PhotoUploadLink> requestPhotoUpload({
     required Enum_PhotoSubject subject,
     required String id,
     String? contentType,
@@ -50,7 +50,31 @@ class PhotosDAO {
           id: id,
           contentType: contentType,
         ).toJson(),
-        parserFn: AshResultParser(document).actionResult(_photoLinkOf),
+        parserFn: AshResultParser(document).actionResult(_photoUploadLinkOf),
+      ),
+      autoChangeFetchPolicy: false,
+    );
+  }
+
+  Future<void> confirmPhotoUpload({
+    required Enum_PhotoSubject subject,
+    required String id,
+    required String confirmationToken,
+  }) async {
+    const document = documentNodeMutationconfirmPhotoUpload;
+
+    await graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: document,
+        operationName: 'confirmPhotoUpload',
+        fetchPolicy: FetchPolicy.noCache,
+        variables: Variables_Mutation_confirmPhotoUpload(
+          subject: subject,
+          id: id,
+          confirmationToken: confirmationToken,
+        ).toJson(),
+        parserFn: AshResultParser(document)
+            .actionResult((value) => value == true),
       ),
       autoChangeFetchPolicy: false,
     );
@@ -79,18 +103,16 @@ class PhotosDAO {
   }
 
   Future<Response> uploadPhoto({
-    required String url,
+    required PhotoUploadLink link,
     required Stream<List<int>> fileStream,
-    String? contentType,
-    int? fileLength,
+    required int fileLength,
     void Function(int, int)? onSendProgress,
   }) {
     return _dio.put(
-      url,
+      link.url,
       data: fileStream,
       options: Options(
-        contentType: contentType,
-        headers: {'content-length': ?fileLength},
+        headers: {...link.headers, 'content-length': fileLength},
       ),
       onSendProgress: onSendProgress,
     );
@@ -122,5 +144,10 @@ class PhotosDAO {
   PhotoLink _photoLinkOf(Object? value) => switch (value) {
     final Json json => PhotoLink.fromJson(json),
     _ => throw StateError('A photo link was expected, got $value'),
+  };
+
+  PhotoUploadLink _photoUploadLinkOf(Object? value) => switch (value) {
+    final Json json => PhotoUploadLink.fromJson(json),
+    _ => throw StateError('A photo upload link was expected, got $value'),
   };
 }

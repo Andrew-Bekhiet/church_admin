@@ -17,7 +17,9 @@ abstract class ObjectImageInfo with Equatable {
 
   Future<PhotoLink> getDownloadLink();
 
-  Future<String> getUploadUrl({String? contentType});
+  Future<PhotoUploadLink> requestUploadLink({required String contentType});
+
+  Future<void> confirmUpload(PhotoUploadLink link);
 
   Future<void> delete();
 }

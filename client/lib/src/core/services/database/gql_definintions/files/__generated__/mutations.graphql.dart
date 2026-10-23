@@ -162,14 +162,14 @@ class Mutation_requestPhotoUpload {
     final l$requestPhotoUpload = json['requestPhotoUpload'];
     final l$$__typename = json['__typename'];
     return Mutation_requestPhotoUpload(
-      requestPhotoUpload: Fragment_PhotoLink.fromJson(
+      requestPhotoUpload: Fragment_PhotoUploadLink.fromJson(
         (l$requestPhotoUpload as Map<String, dynamic>),
       ),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Fragment_PhotoLink requestPhotoUpload;
+  final Fragment_PhotoUploadLink requestPhotoUpload;
 
   final String $__typename;
 
@@ -227,8 +227,11 @@ abstract class CopyWith_Mutation_requestPhotoUpload<TRes> {
   factory CopyWith_Mutation_requestPhotoUpload.stub(TRes res) =
       _CopyWithStubImpl_Mutation_requestPhotoUpload;
 
-  TRes call({Fragment_PhotoLink? requestPhotoUpload, String? $__typename});
-  CopyWith_Fragment_PhotoLink<TRes> get requestPhotoUpload;
+  TRes call({
+    Fragment_PhotoUploadLink? requestPhotoUpload,
+    String? $__typename,
+  });
+  CopyWith_Fragment_PhotoUploadLink<TRes> get requestPhotoUpload;
 }
 
 class _CopyWithImpl_Mutation_requestPhotoUpload<TRes>
@@ -249,16 +252,16 @@ class _CopyWithImpl_Mutation_requestPhotoUpload<TRes>
       requestPhotoUpload:
           requestPhotoUpload == _undefined || requestPhotoUpload == null
           ? _instance.requestPhotoUpload
-          : (requestPhotoUpload as Fragment_PhotoLink),
+          : (requestPhotoUpload as Fragment_PhotoUploadLink),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
     ),
   );
 
-  CopyWith_Fragment_PhotoLink<TRes> get requestPhotoUpload {
+  CopyWith_Fragment_PhotoUploadLink<TRes> get requestPhotoUpload {
     final local$requestPhotoUpload = _instance.requestPhotoUpload;
-    return CopyWith_Fragment_PhotoLink(
+    return CopyWith_Fragment_PhotoUploadLink(
       local$requestPhotoUpload,
       (e) => call(requestPhotoUpload: e),
     );
@@ -271,10 +274,11 @@ class _CopyWithStubImpl_Mutation_requestPhotoUpload<TRes>
 
   TRes _res;
 
-  call({Fragment_PhotoLink? requestPhotoUpload, String? $__typename}) => _res;
+  call({Fragment_PhotoUploadLink? requestPhotoUpload, String? $__typename}) =>
+      _res;
 
-  CopyWith_Fragment_PhotoLink<TRes> get requestPhotoUpload =>
-      CopyWith_Fragment_PhotoLink.stub(_res);
+  CopyWith_Fragment_PhotoUploadLink<TRes> get requestPhotoUpload =>
+      CopyWith_Fragment_PhotoUploadLink.stub(_res);
 }
 
 const documentNodeMutationrequestPhotoUpload = DocumentNode(
@@ -332,7 +336,7 @@ const documentNodeMutationrequestPhotoUpload = DocumentNode(
             selectionSet: SelectionSetNode(
               selections: [
                 FragmentSpreadNode(
-                  name: NameNode(value: 'PhotoLink'),
+                  name: NameNode(value: 'PhotoUploadLink'),
                   directives: [],
                 ),
                 FieldNode(
@@ -355,7 +359,324 @@ const documentNodeMutationrequestPhotoUpload = DocumentNode(
         ],
       ),
     ),
-    fragmentDefinitionPhotoLink,
+    fragmentDefinitionPhotoUploadLink,
+  ],
+);
+
+class Variables_Mutation_confirmPhotoUpload {
+  factory Variables_Mutation_confirmPhotoUpload({
+    required Enum_PhotoSubject subject,
+    required String id,
+    required String confirmationToken,
+  }) => Variables_Mutation_confirmPhotoUpload._({
+    r'subject': subject,
+    r'id': id,
+    r'confirmationToken': confirmationToken,
+  });
+
+  Variables_Mutation_confirmPhotoUpload._(this._$data);
+
+  factory Variables_Mutation_confirmPhotoUpload.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$subject = data['subject'];
+    result$data['subject'] = fromJson_Enum_PhotoSubject((l$subject as String));
+    final l$id = data['id'];
+    result$data['id'] = (l$id as String);
+    final l$confirmationToken = data['confirmationToken'];
+    result$data['confirmationToken'] = (l$confirmationToken as String);
+    return Variables_Mutation_confirmPhotoUpload._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_PhotoSubject get subject => (_$data['subject'] as Enum_PhotoSubject);
+
+  String get id => (_$data['id'] as String);
+
+  String get confirmationToken => (_$data['confirmationToken'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$subject = subject;
+    result$data['subject'] = toJson_Enum_PhotoSubject(l$subject);
+    final l$id = id;
+    result$data['id'] = l$id;
+    final l$confirmationToken = confirmationToken;
+    result$data['confirmationToken'] = l$confirmationToken;
+    return result$data;
+  }
+
+  CopyWith_Variables_Mutation_confirmPhotoUpload<
+    Variables_Mutation_confirmPhotoUpload
+  >
+  get copyWith =>
+      CopyWith_Variables_Mutation_confirmPhotoUpload(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Mutation_confirmPhotoUpload ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$subject = subject;
+    final lOther$subject = other.subject;
+    if (l$subject != lOther$subject) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$confirmationToken = confirmationToken;
+    final lOther$confirmationToken = other.confirmationToken;
+    if (l$confirmationToken != lOther$confirmationToken) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$subject = subject;
+    final l$id = id;
+    final l$confirmationToken = confirmationToken;
+    return Object.hashAll([l$subject, l$id, l$confirmationToken]);
+  }
+}
+
+abstract class CopyWith_Variables_Mutation_confirmPhotoUpload<TRes> {
+  factory CopyWith_Variables_Mutation_confirmPhotoUpload(
+    Variables_Mutation_confirmPhotoUpload instance,
+    TRes Function(Variables_Mutation_confirmPhotoUpload) then,
+  ) = _CopyWithImpl_Variables_Mutation_confirmPhotoUpload;
+
+  factory CopyWith_Variables_Mutation_confirmPhotoUpload.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_confirmPhotoUpload;
+
+  TRes call({
+    Enum_PhotoSubject? subject,
+    String? id,
+    String? confirmationToken,
+  });
+}
+
+class _CopyWithImpl_Variables_Mutation_confirmPhotoUpload<TRes>
+    implements CopyWith_Variables_Mutation_confirmPhotoUpload<TRes> {
+  _CopyWithImpl_Variables_Mutation_confirmPhotoUpload(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Mutation_confirmPhotoUpload _instance;
+
+  final TRes Function(Variables_Mutation_confirmPhotoUpload) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? subject = _undefined,
+    Object? id = _undefined,
+    Object? confirmationToken = _undefined,
+  }) => _then(
+    Variables_Mutation_confirmPhotoUpload._({
+      ..._instance._$data,
+      if (subject != _undefined && subject != null)
+        'subject': (subject as Enum_PhotoSubject),
+      if (id != _undefined && id != null) 'id': (id as String),
+      if (confirmationToken != _undefined && confirmationToken != null)
+        'confirmationToken': (confirmationToken as String),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Variables_Mutation_confirmPhotoUpload<TRes>
+    implements CopyWith_Variables_Mutation_confirmPhotoUpload<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_confirmPhotoUpload(this._res);
+
+  TRes _res;
+
+  call({Enum_PhotoSubject? subject, String? id, String? confirmationToken}) =>
+      _res;
+}
+
+class Mutation_confirmPhotoUpload {
+  Mutation_confirmPhotoUpload({
+    required this.confirmPhotoUpload,
+    this.$__typename = 'RootMutationType',
+  });
+
+  factory Mutation_confirmPhotoUpload.fromJson(Map<String, dynamic> json) {
+    final l$confirmPhotoUpload = json['confirmPhotoUpload'];
+    final l$$__typename = json['__typename'];
+    return Mutation_confirmPhotoUpload(
+      confirmPhotoUpload: (l$confirmPhotoUpload as bool),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final bool confirmPhotoUpload;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$confirmPhotoUpload = confirmPhotoUpload;
+    _resultData['confirmPhotoUpload'] = l$confirmPhotoUpload;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$confirmPhotoUpload = confirmPhotoUpload;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$confirmPhotoUpload, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_confirmPhotoUpload ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$confirmPhotoUpload = confirmPhotoUpload;
+    final lOther$confirmPhotoUpload = other.confirmPhotoUpload;
+    if (l$confirmPhotoUpload != lOther$confirmPhotoUpload) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_confirmPhotoUpload
+    on Mutation_confirmPhotoUpload {
+  CopyWith_Mutation_confirmPhotoUpload<Mutation_confirmPhotoUpload>
+  get copyWith => CopyWith_Mutation_confirmPhotoUpload(this, (i) => i);
+}
+
+abstract class CopyWith_Mutation_confirmPhotoUpload<TRes> {
+  factory CopyWith_Mutation_confirmPhotoUpload(
+    Mutation_confirmPhotoUpload instance,
+    TRes Function(Mutation_confirmPhotoUpload) then,
+  ) = _CopyWithImpl_Mutation_confirmPhotoUpload;
+
+  factory CopyWith_Mutation_confirmPhotoUpload.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_confirmPhotoUpload;
+
+  TRes call({bool? confirmPhotoUpload, String? $__typename});
+}
+
+class _CopyWithImpl_Mutation_confirmPhotoUpload<TRes>
+    implements CopyWith_Mutation_confirmPhotoUpload<TRes> {
+  _CopyWithImpl_Mutation_confirmPhotoUpload(this._instance, this._then);
+
+  final Mutation_confirmPhotoUpload _instance;
+
+  final TRes Function(Mutation_confirmPhotoUpload) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? confirmPhotoUpload = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation_confirmPhotoUpload(
+      confirmPhotoUpload:
+          confirmPhotoUpload == _undefined || confirmPhotoUpload == null
+          ? _instance.confirmPhotoUpload
+          : (confirmPhotoUpload as bool),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Mutation_confirmPhotoUpload<TRes>
+    implements CopyWith_Mutation_confirmPhotoUpload<TRes> {
+  _CopyWithStubImpl_Mutation_confirmPhotoUpload(this._res);
+
+  TRes _res;
+
+  call({bool? confirmPhotoUpload, String? $__typename}) => _res;
+}
+
+const documentNodeMutationconfirmPhotoUpload = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'confirmPhotoUpload'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'subject')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'PhotoSubject'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'id')),
+          type: NamedTypeNode(name: NameNode(value: 'ID'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'confirmationToken')),
+          type: NamedTypeNode(name: NameNode(value: 'String'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'confirmPhotoUpload'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'subject'),
+                value: VariableNode(name: NameNode(value: 'subject')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'id')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'confirmationToken'),
+                value: VariableNode(name: NameNode(value: 'confirmationToken')),
+              ),
+            ],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
   ],
 );
 

@@ -10,6 +10,12 @@ void main() {
   const info = ObjectPhotoInfo(subject, id);
   const linkUrl = 'https://api.example.com/api/files/token/photo';
   final expiresAt = DateTime.utc(2030, 5, 1, 12).toLocal();
+  final uploadLink = PhotoUploadLink(
+    url: 'https://storage.example.com/uploads/persons/person-1/x',
+    expiresAt: expiresAt,
+    headers: const {'content-type': 'image/png'},
+    confirmationToken: 'confirmation-token',
+  );
 
   late List<Json> asked;
 
@@ -18,12 +24,26 @@ void main() {
     final backend = FakeAshBackend(
       [],
       actions: {
-        for (final action in ['photoDownloadUrl', 'requestPhotoUpload'])
-          action: (variables) {
-            asked.add(variables);
+        'photoDownloadUrl': (variables) {
+          asked.add(variables);
 
-            return AshResponses.photoLink(linkUrl, expiresAt);
-          },
+          return AshResponses.photoLink(linkUrl, expiresAt);
+        },
+        'requestPhotoUpload': (variables) {
+          asked.add(variables);
+
+          return AshResponses.photoUploadLink(
+            url: uploadLink.url,
+            expiresAt: expiresAt,
+            headers: uploadLink.headers,
+            confirmationToken: uploadLink.confirmationToken,
+          );
+        },
+        'confirmPhotoUpload': (variables) {
+          asked.add(variables);
+
+          return true;
+        },
         'deletePhoto': (variables) {
           asked.add(variables);
 
@@ -67,11 +87,14 @@ void main() {
     );
 
     test(
-      'the upload url is requested for the content type being uploaded',
+      'the upload link is the one the server issues for the content type',
       () async {
         serveLinks();
 
-        expect(await info.getUploadUrl(contentType: 'image/png'), linkUrl);
+        expect(
+          await info.requestUploadLink(contentType: 'image/png'),
+          uploadLink,
+        );
         expect(asked.single, {
           'subject': subject.toJson(),
           'id': id,
@@ -79,6 +102,18 @@ void main() {
         });
       },
     );
+
+    test('confirming an upload presents the token of its link', () async {
+      serveLinks();
+
+      await info.confirmUpload(uploadLink);
+
+      expect(asked.single, {
+        'subject': subject.toJson(),
+        'id': id,
+        'confirmationToken': uploadLink.confirmationToken,
+      });
+    });
 
     test('deleting asks the server to delete the photo', () async {
       serveLinks();

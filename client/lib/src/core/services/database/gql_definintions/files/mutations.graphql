@@ -4,8 +4,20 @@ mutation requestPhotoUpload(
   $contentType: String
 ) {
   requestPhotoUpload(subject: $subject, id: $id, contentType: $contentType) {
-    ...PhotoLink
+    ...PhotoUploadLink
   }
+}
+
+mutation confirmPhotoUpload(
+  $subject: PhotoSubject!
+  $id: ID!
+  $confirmationToken: String!
+) {
+  confirmPhotoUpload(
+    subject: $subject
+    id: $id
+    confirmationToken: $confirmationToken
+  )
 }
 
 mutation deletePhoto($subject: PhotoSubject!, $id: ID!) {

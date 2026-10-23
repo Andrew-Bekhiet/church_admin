@@ -47,6 +47,22 @@ abstract final class AshResponses {
     'expiresAt': expiresAt.toUtc().toIso8601String(),
   };
 
+  static Json photoUploadLink({
+    required String url,
+    required DateTime expiresAt,
+    required Map<String, String> headers,
+    required String confirmationToken,
+  }) => {
+    '__typename': 'PhotoUploadLink',
+    'url': url,
+    'expiresAt': expiresAt.toUtc().toIso8601String(),
+    'headers': [
+      for (final MapEntry(:key, :value) in headers.entries)
+        {'__typename': 'HttpHeader', 'name': key, 'value': value},
+    ],
+    'confirmationToken': confirmationToken,
+  };
+
   static Json exportDownloadLink(String downloadUrl, DateTime expiresAt) => {
     '__typename': 'ExportDownloadLink',
     'downloadUrl': downloadUrl,

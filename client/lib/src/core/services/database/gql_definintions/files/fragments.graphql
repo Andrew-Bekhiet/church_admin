@@ -2,3 +2,13 @@ fragment PhotoLink on PhotoLink {
   url
   expiresAt
 }
+
+fragment PhotoUploadLink on PhotoUploadLink {
+  url
+  expiresAt
+  headers {
+    name
+    value
+  }
+  confirmationToken
+}

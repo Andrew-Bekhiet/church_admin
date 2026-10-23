@@ -16,17 +16,19 @@ class RemotePhotoUploader implements PhotoUploader {
     XFile photo, {
     required void Function(double progress) onProgress,
   }) async {
-    final mimeType = MimeTypeResolver().lookup(photo.path);
-    final uploadUrl = await object.imageInfo.getUploadUrl(
+    final mimeType =
+        MimeTypeResolver().lookup(photo.path) ??
+        (throw PhotoContentTypeUnknownException(photo.path));
+    final link = await object.imageInfo.requestUploadLink(
       contentType: mimeType,
     );
 
     await _photos.uploadPhoto(
-      url: uploadUrl,
-      contentType: mimeType,
+      link: link,
       fileStream: photo.openRead(),
       fileLength: await photo.length(),
       onSendProgress: (sent, total) => onProgress(sent / total),
     );
+    await object.imageInfo.confirmUpload(link);
   }
 }

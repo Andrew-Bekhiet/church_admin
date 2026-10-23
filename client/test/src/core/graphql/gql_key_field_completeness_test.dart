@@ -16,6 +16,7 @@ void main() {
       (operation: 'applyInvitationCode', field: 'applyInvitationCode'),
       (operation: 'exportData', field: 'exportData'),
       (operation: 'photoDownloadUrl', field: 'photoDownloadUrl'),
+      (operation: 'requestPhotoUpload', field: 'headers'),
       (operation: 'requestPhotoUpload', field: 'requestPhotoUpload'),
       (operation: 'tryClaimAccount', field: 'tryClaimAccount'),
     ],

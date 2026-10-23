@@ -18,6 +18,7 @@ class RecordedHttpRequest {
 
 class RecordingHttpClientAdapter implements HttpClientAdapter {
   final List<RecordedHttpRequest> requests = [];
+  int statusCode = 200;
 
   @override
   Future<ResponseBody> fetch(
@@ -41,7 +42,7 @@ class RecordingHttpClientAdapter implements HttpClientAdapter {
       ),
     );
 
-    return ResponseBody.fromString('', 200);
+    return ResponseBody.fromString('', statusCode);
   }
 
   @override

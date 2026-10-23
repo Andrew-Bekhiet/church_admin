@@ -24,15 +24,20 @@ class ObjectPhotoInfo extends ObjectImageInfo {
       DatabaseService.I.photos.photoDownloadUrl(subject: _subject, id: _id);
 
   @override
-  Future<String> getUploadUrl({String? contentType}) async {
-    final link = await DatabaseService.I.photos.requestPhotoUpload(
-      subject: _subject,
-      id: _id,
-      contentType: contentType,
-    );
+  Future<PhotoUploadLink> requestUploadLink({required String contentType}) =>
+      DatabaseService.I.photos.requestPhotoUpload(
+        subject: _subject,
+        id: _id,
+        contentType: contentType,
+      );
 
-    return link.url;
-  }
+  @override
+  Future<void> confirmUpload(PhotoUploadLink link) =>
+      DatabaseService.I.photos.confirmPhotoUpload(
+        subject: _subject,
+        id: _id,
+        confirmationToken: link.confirmationToken,
+      );
 
   @override
   Future<void> delete() =>
