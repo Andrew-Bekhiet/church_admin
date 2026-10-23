@@ -139,7 +139,7 @@ final class DeviceContactsImport extends ContactAnalyticsEvent {
 
 enum ContactCallChoice { call, dialerOnly, cancel, unprompted }
 
-enum DeviceContactCreateOutcome { permissionDenied, cancelled, created }
+enum DeviceContactCreateOutcome { permissionDenied, cancelled, created, failed }
 
 enum DeviceContactsImportOutcome {
   permissionDenied,
