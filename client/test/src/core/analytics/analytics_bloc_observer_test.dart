@@ -15,7 +15,7 @@ void main() {
       idToken: 'token',
       claims: {AuthUser.hasuraUserIdKey: 'hasura-user-1'},
     );
-    const signedIn = AuthAuthenticated(authUser: authUser, userData: null);
+    const signedIn = AuthAuthenticated(authUser: authUser);
 
     late RecordingAnalyticsProvider provider;
     late AnalyticsBlocObserver observer;
