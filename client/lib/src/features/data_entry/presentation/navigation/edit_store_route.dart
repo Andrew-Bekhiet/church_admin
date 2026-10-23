@@ -9,8 +9,17 @@ class EditStoreRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
-  Json get analyticsProperties =>
-      (intent ?? const CreateBlankStore()).analyticsProperties;
+  Json get analyticsProperties => switch (intent ?? const CreateBlankStore()) {
+    CreateStoreOfFamily(:final family) => {
+      'intent_kind': CreateStoreOfFamily.kind,
+      'family_id': family.id,
+    },
+    CreateBlankStore() => {'intent_kind': CreateBlankStore.kind},
+    UpdateStore(:final store) => {
+      'intent_kind': UpdateStore.kind,
+      'store_id': store.id,
+    },
+  };
 
   @override
   List<Object?> get props => [intent];

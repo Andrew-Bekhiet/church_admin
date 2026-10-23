@@ -4,18 +4,6 @@ sealed class StreetEditIntent extends SerializableExtra {
   @override
   String get typeName => 'StreetEditIntent';
 
-  Json get analyticsProperties => switch (this) {
-    CreateStreetInArea(:final area) => {
-      'intent_kind': CreateStreetInArea.kind,
-      'area_id': area.id,
-    },
-    CreateBlankStreet() => {'intent_kind': CreateBlankStreet.kind},
-    UpdateStreet(:final street) => {
-      'intent_kind': UpdateStreet.kind,
-      'street_id': street.id,
-    },
-  };
-
   const StreetEditIntent();
 
   factory StreetEditIntent.fromJson(Json json) {

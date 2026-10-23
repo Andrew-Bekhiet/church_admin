@@ -4,18 +4,6 @@ sealed class StoreEditIntent extends SerializableExtra {
   @override
   String get typeName => 'StoreEditIntent';
 
-  Json get analyticsProperties => switch (this) {
-    CreateStoreOfFamily(:final family) => {
-      'intent_kind': CreateStoreOfFamily.kind,
-      'family_id': family.id,
-    },
-    CreateBlankStore() => {'intent_kind': CreateBlankStore.kind},
-    UpdateStore(:final store) => {
-      'intent_kind': UpdateStore.kind,
-      'store_id': store.id,
-    },
-  };
-
   const StoreEditIntent();
 
   factory StoreEditIntent.fromJson(Json json) {
