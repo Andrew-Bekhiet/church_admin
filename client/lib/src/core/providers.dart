@@ -326,7 +326,7 @@ final userPersistenceServiceProvider = Provider<UserPersistenceService>((ref) {
 final screenCaptureAttemptsRecorderProvider =
     Provider<ScreenCaptureAttemptsRecorder>(
       (ref) => ScreenCaptureAttemptsRecorder(
-        attempts:
+        attemptEventsStream:
             const EventChannel(
                   ScreenCaptureAttemptsRecorder.platformChannelName,
                 )
