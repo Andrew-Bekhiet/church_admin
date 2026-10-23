@@ -134,11 +134,11 @@ class PersonContactSection extends StatelessWidget {
       ),
     );
 
-    final isCallDateRecorded = recordLastCall == true;
+    final isRecordingAccepted = recordLastCall == true;
     AnalyticsService.I.track(
-      CallDateRecordAnswer(person, isAccepted: isCallDateRecorded),
+      CallDateRecordAnswer(person, isRecordingAccepted: isRecordingAccepted),
     );
-    if (!isCallDateRecorded) return;
+    if (!isRecordingAccepted) return;
 
     await DatabaseService.I.history.updatePersonLastCall(
       personId: person.id,

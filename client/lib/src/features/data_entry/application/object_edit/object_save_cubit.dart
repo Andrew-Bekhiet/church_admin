@@ -118,8 +118,8 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
       ObjectSaveAttempt(
         entity: _form.savedObject ?? _form.initialDraft,
         isCreate: _form.isCreate,
-        result: result,
-        sinceFormOpened: _sinceFormOpened.elapsed,
+        outcome: result,
+        formOpenDuration: _sinceFormOpened.elapsed,
         isDefaultMeetingCreated: isDefaultMeetingCreated,
       ),
     );

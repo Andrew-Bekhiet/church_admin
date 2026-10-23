@@ -334,8 +334,8 @@ class PersonFormController extends AdvancedFormController {
       ObjectSaveAttempt(
         entity: _startingPerson,
         isCreate: isCreate,
-        result: result,
-        sinceFormOpened: _sinceFormOpened.elapsed,
+        outcome: result,
+        formOpenDuration: _sinceFormOpened.elapsed,
         ruleViolations: isDisposed ? null : _shownViolations.value,
       ),
     );

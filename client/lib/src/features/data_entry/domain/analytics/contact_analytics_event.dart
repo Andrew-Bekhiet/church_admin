@@ -47,7 +47,7 @@ final class ContactDialerOpen extends ContactAnalyticsEvent {
 
 final class CallDateRecordAnswer extends ContactAnalyticsEvent {
   final ViewableWithID owner;
-  final bool isAccepted;
+  final bool isRecordingAccepted;
 
   @override
   String get objectAction => 'call_date_record_answer';
@@ -55,10 +55,13 @@ final class CallDateRecordAnswer extends ContactAnalyticsEvent {
   @override
   Json get properties => {
     ...AnalyticsEntityType.propertiesOf(owner),
-    'is_accepted': isAccepted,
+    'is_recording_accepted': isRecordingAccepted,
   };
 
-  const CallDateRecordAnswer(this.owner, {required this.isAccepted});
+  const CallDateRecordAnswer(
+    this.owner, {
+    required this.isRecordingAccepted,
+  });
 }
 
 final class DeviceContactCreateAttempt extends ContactAnalyticsEvent {
@@ -142,7 +145,7 @@ final class DeviceContactsImportAttempt extends ContactAnalyticsEvent {
   @override
   Json get properties => {
     'outcome': outcome.name,
-    'numbers_imported_count': importedNumberCount,
+    'imported_number_count': importedNumberCount,
     'is_name_used': isNameUsed,
   };
 

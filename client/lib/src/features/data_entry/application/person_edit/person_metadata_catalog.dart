@@ -46,75 +46,75 @@ class PersonMetadataCatalog {
 
   const PersonMetadataCatalog(this._metadata, this._analyticsService);
 
-  Future<College> createCollege(String name) => _trackedCreation(
+  Future<College> createCollege(String name) => _trackOnceCreated(
     PickerObjectType.college,
     _metadata.colleges.createObject(
       newObject: College(id: const Uuid().v4(), name: name),
     ),
   );
 
-  Future<School> createSchool(String name) => _trackedCreation(
+  Future<School> createSchool(String name) => _trackOnceCreated(
     PickerObjectType.school,
     _metadata.schools.createObject(
       newObject: School(id: const Uuid().v4(), name: name),
     ),
   );
 
-  Future<Qualification> createQualification(String name) => _trackedCreation(
+  Future<Qualification> createQualification(String name) => _trackOnceCreated(
     PickerObjectType.qualification,
     _metadata.qualifications.createObject(
       newObject: Qualification(id: const Uuid().v4(), name: name),
     ),
   );
 
-  Future<Job> createJob(String name) => _trackedCreation(
+  Future<Job> createJob(String name) => _trackOnceCreated(
     PickerObjectType.job,
     _metadata.jobs.createObject(
       newObject: Job(id: const Uuid().v4(), name: name),
     ),
   );
 
-  Future<Church> createChurch(String name) => _trackedCreation(
+  Future<Church> createChurch(String name) => _trackOnceCreated(
     PickerObjectType.church,
     _metadata.churches.createObject(
       newObject: Church(id: const Uuid().v4(), name: name),
     ),
   );
 
-  Future<Father> createFather(String name) => _trackedCreation(
+  Future<Father> createFather(String name) => _trackOnceCreated(
     PickerObjectType.father,
     _metadata.fathers.createObject(
       newObject: Father(id: const Uuid().v4(), name: name),
     ),
   );
 
-  Future<Hobby> createHobby(String name) => _trackedCreation(
+  Future<Hobby> createHobby(String name) => _trackOnceCreated(
     PickerObjectType.hobby,
     _metadata.hobbies.createObject(
       newObject: Hobby(id: const Uuid().v4(), name: name),
     ),
   );
 
-  Future<Tag> createTag(String name) => _trackedCreation(
+  Future<Tag> createTag(String name) => _trackOnceCreated(
     PickerObjectType.tag,
     _metadata.tags.createObject(
       newObject: Tag(id: const Uuid().v4(), name: name),
     ),
   );
 
-  Future<PersonType> createPersonType(String name) => _trackedCreation(
+  Future<PersonType> createPersonType(String name) => _trackOnceCreated(
     PickerObjectType.personType,
     _metadata.personTypes.createObject(
       newObject: PersonType(id: const Uuid().v4(), name: name),
     ),
   );
 
-  Future<T> _trackedCreation<T>(
-    PickerObjectType objectType,
+  Future<T> _trackOnceCreated<T>(
+    PickerObjectType pickerObjectType,
     Future<T> creation,
   ) async {
     final created = await creation;
-    _analyticsService.track(PickerCustomItemCreate(objectType));
+    _analyticsService.track(PickerCustomItemCreate(pickerObjectType));
 
     return created;
   }
