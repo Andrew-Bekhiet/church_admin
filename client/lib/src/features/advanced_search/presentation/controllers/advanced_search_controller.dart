@@ -5,6 +5,10 @@ import 'package:collection/collection.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AdvancedSearchController {
+  static const Duration _resultsSearchDebounce = Duration(milliseconds: 500);
+
+  final AnalyticsService _analyticsService;
+
   late final StreamSubscription<void> _configSubscription;
 
   final BehaviorSubject<AdvancedQuery> _query = BehaviorSubject.seeded(
@@ -49,11 +53,40 @@ class AdvancedSearchController {
 
   List<OrderBy> get orderBy => _query.value.orderBy;
 
-  AdvancedSearchController() {
+  AdvancedSearchController({AnalyticsService? analyticsService})
+    : _analyticsService = analyticsService ?? AnalyticsService.I {
     _configSubscription = FeatureFlagsRepository.I.onConfigChanged.listen(
       (_) => changeQuery(query),
     );
   }
+
+  void trackOpen({
+    required bool hasInitialQuery,
+    required bool isAutoExecuted,
+  }) => _analyticsService.track(
+    AdvancedSearchOpen(
+      hasInitialQuery: hasInitialQuery,
+      isAutoExecuted: isAutoExecuted,
+    ),
+  );
+
+  void trackQuerySubmit({required bool isAutoExecuted}) => _analyticsService
+      .track(AdvancedSearchQuerySubmit(query, isAutoExecuted: isAutoExecuted));
+
+  void trackQueryShare() =>
+      _analyticsService.track(AdvancedSearchQueryShare(query));
+
+  StreamSubscription<String> trackResultsSearchesIn(Stream<String?> searches) =>
+      searches
+          .whereType<String>()
+          .where((search) => search.isNotEmpty)
+          .debounceTime(_resultsSearchDebounce)
+          .distinct()
+          .listen(
+            (search) => _analyticsService.track(
+              AdvancedSearchResultsSearch(queryLength: search.length),
+            ),
+          );
 
   void changeQuery(AdvancedQuery value) =>
       _query.add(value.withEnabledFields());
@@ -68,6 +101,12 @@ class AdvancedSearchController {
         ? defaultField
         : queryableType.orderableFields.firstOrNull;
 
+    _analyticsService.track(
+      AdvancedSearchQueryableTypeChange(
+        from: selectedQueryableType,
+        to: queryableType,
+      ),
+    );
     changeQuery(
       AdvancedQuery(
         name: query.name,
@@ -91,6 +130,10 @@ class AdvancedSearchController {
       _checkFilterType(filter);
     }
 
+    if (AdvancedSearchFilterEdit.eventForSingleEdit(filters, newFilters)
+        case final event?) {
+      _analyticsService.track(event);
+    }
     changeQuery(query.copyWith(filters: newFilters));
   }
 
@@ -125,16 +168,38 @@ class AdvancedSearchController {
     changeFilters(filters.whereIndexed((i, e) => i != index).toList());
   }
 
-  void changeLimit(int? limit) => changeQuery(query.copyWith(limit: limit));
+  void changeLimit(int? limit) {
+    switch ((this.limit, limit)) {
+      case (null, final newLimit?):
+        _analyticsService.track(AdvancedSearchLimitSet(newLimit));
+      case (_?, null):
+        _analyticsService.track(const AdvancedSearchLimitClear());
+      default:
+    }
+    changeQuery(query.copyWith(limit: limit));
+  }
 
   void changeOrderBy(List<OrderBy> orderBy) =>
       changeQuery(query.copyWith(orderBy: orderBy));
 
   void addOrderBy(OrderBy newOrderBy) {
+    _analyticsService.track(
+      AdvancedSearchOrderByAdd(newOrderBy, orderCount: orderBy.length + 1),
+    );
     changeOrderBy([...orderBy, newOrderBy]);
   }
 
   void replaceOrderBy(int index, OrderBy newOrderBy) {
+    final isSameField =
+        orderBy.elementAtOrNull(index)?.field == newOrderBy.field;
+    _analyticsService.track(
+      isSameField
+          ? AdvancedSearchOrderByDirectionToggle(
+              newOrderBy,
+              orderCount: orderBy.length,
+            )
+          : AdvancedSearchOrderByChange(newOrderBy, orderCount: orderBy.length),
+    );
     changeOrderBy(
       orderBy
           .mapIndexed(
@@ -145,6 +210,9 @@ class AdvancedSearchController {
   }
 
   void removeOrderByAt(int index) {
+    _analyticsService.track(
+      AdvancedSearchOrderByRemove(orderCount: orderBy.length - 1),
+    );
     changeOrderBy(orderBy.whereIndexed((i, e) => i != index).toList());
   }
 
