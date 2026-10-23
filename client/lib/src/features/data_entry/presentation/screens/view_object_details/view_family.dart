@@ -217,7 +217,11 @@ class _ViewFamilyState extends State<ViewFamily> {
             onTap: (newIndex) {
               if (newIndex == 0) {
                 AnalyticsService.I.track(
-                  EntityChildCreateTap(family, AnalyticsEntityType.person),
+                  EntityRelatedCreateTap(
+                    family,
+                    AnalyticsEntityType.person,
+                    relation: EntityRelation.member,
+                  ),
                 );
                 unawaited(
                   EditPersonRoute(
@@ -226,7 +230,11 @@ class _ViewFamilyState extends State<ViewFamily> {
                 );
               } else if (newIndex == 1) {
                 AnalyticsService.I.track(
-                  EntityChildCreateTap(family, AnalyticsEntityType.family),
+                  EntityRelatedCreateTap(
+                    family,
+                    AnalyticsEntityType.family,
+                    relation: EntityRelation.child,
+                  ),
                 );
                 unawaited(
                   EditFamilyRoute(
@@ -235,7 +243,11 @@ class _ViewFamilyState extends State<ViewFamily> {
                 );
               } else if (newIndex == 2) {
                 AnalyticsService.I.track(
-                  EntityChildCreateTap(family, AnalyticsEntityType.family),
+                  EntityRelatedCreateTap(
+                    family,
+                    AnalyticsEntityType.family,
+                    relation: EntityRelation.parent,
+                  ),
                 );
                 unawaited(
                   EditFamilyRoute(
@@ -244,7 +256,11 @@ class _ViewFamilyState extends State<ViewFamily> {
                 );
               } else if (newIndex == 3) {
                 AnalyticsService.I.track(
-                  EntityChildCreateTap(family, AnalyticsEntityType.store),
+                  EntityRelatedCreateTap(
+                    family,
+                    AnalyticsEntityType.store,
+                    relation: EntityRelation.owned,
+                  ),
                 );
                 unawaited(
                   EditStoreRoute(

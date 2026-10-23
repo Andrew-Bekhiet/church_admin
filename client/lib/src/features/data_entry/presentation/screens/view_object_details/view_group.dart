@@ -177,7 +177,11 @@ class _ViewGroupState extends State<ViewGroup> {
           FloatingActionButton(
             onPressed: () {
               AnalyticsService.I.track(
-                EntityChildCreateTap(group, AnalyticsEntityType.person),
+                EntityRelatedCreateTap(
+                  group,
+                  AnalyticsEntityType.person,
+                  relation: EntityRelation.member,
+                ),
               );
               unawaited(
                 EditPersonRoute(

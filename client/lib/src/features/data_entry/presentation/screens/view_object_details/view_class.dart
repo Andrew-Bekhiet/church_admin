@@ -124,7 +124,11 @@ class _ViewClassState extends State<ViewClass> {
             key: ViewClassKeys.addPersonButton,
             onPressed: () {
               AnalyticsService.I.track(
-                EntityChildCreateTap(class$, AnalyticsEntityType.person),
+                EntityRelatedCreateTap(
+                  class$,
+                  AnalyticsEntityType.person,
+                  relation: EntityRelation.member,
+                ),
               );
               unawaited(
                 EditPersonRoute(
