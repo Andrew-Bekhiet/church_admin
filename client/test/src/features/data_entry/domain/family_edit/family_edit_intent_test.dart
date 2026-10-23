@@ -66,4 +66,16 @@ void main() {
       );
     });
   });
+
+  group('FamilyEditIntent analytics properties', () {
+    test('a create at an address names only the places it has', () {
+      expect(
+        const CreateFamilyAtAddress(address: address).analyticsProperties,
+        {
+          'intent_kind': CreateFamilyAtAddress.kind,
+          'area_id': address.area?.id,
+        },
+      );
+    });
+  });
 }

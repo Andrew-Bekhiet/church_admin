@@ -4,10 +4,12 @@ import 'package:material_ui/material_ui.dart';
 class AdvancedCheckboxTile<E extends Object> extends StatelessWidget {
   final AdvancedBooleanFieldController<E> field;
   final String title;
+  final ValueChanged<bool>? onChanged;
 
   const AdvancedCheckboxTile({
     required this.field,
     required this.title,
+    this.onChanged,
     super.key,
   });
 
@@ -21,7 +23,11 @@ class AdvancedCheckboxTile<E extends Object> extends StatelessWidget {
         focusNode: field.focusNode,
         onChanged: state.readOnly
             ? null
-            : (checked) => field.setValue(checked ?? false),
+            : (checked) {
+                final isChecked = checked ?? false;
+                field.setValue(isChecked);
+                onChanged?.call(isChecked);
+              },
       ),
     );
   }

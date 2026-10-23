@@ -32,7 +32,12 @@ class AdvancedColorField<E extends Object> extends StatelessWidget {
             suffixIcon: color != null && !state.readOnly
                 ? IconButton(
                     tooltip: 'حذف اللون',
-                    onPressed: () => field.setValue(null),
+                    onPressed: () {
+                      AnalyticsService.I.track(
+                        const PickerValueClear(PickerFieldKind.color),
+                      );
+                      field.setValue(null);
+                    },
                     icon: const Icon(Symbols.delete),
                   )
                 : null,

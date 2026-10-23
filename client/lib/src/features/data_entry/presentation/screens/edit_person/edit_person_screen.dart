@@ -264,9 +264,19 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
   }
 
   void _focusFirstInvalidField() {
-    _form.value.allFields
-        .firstWhereOrNull((field) => field.value.isInvalid)
-        ?.focus();
+    final invalidFields = _form.value.allFields
+        .where((field) => field.value.isInvalid)
+        .toList();
+    final firstInvalidField = invalidFields.firstOrNull;
+    if (firstInvalidField == null) return;
+
+    firstInvalidField.focus();
+    AnalyticsService.I.track(
+      FirstInvalidFieldFocus(
+        _form.toPerson(),
+        invalidFieldCount: invalidFields.length,
+      ),
+    );
   }
 
   void _leaveAfterSave(
@@ -311,12 +321,18 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
       return;
     }
 
+    final editedPerson = _form.toPerson();
+    AnalyticsService.I.track(DiscardPromptShow(editedPerson));
     final discard = await showDialog<bool>(
       context: context,
       builder: (context) => const DiscardChangesDialog(),
     );
+    final isDiscarded = discard ?? false;
+    AnalyticsService.I.track(
+      DiscardPromptAnswer(editedPerson, isDiscarded: isDiscarded),
+    );
 
-    if (discard ?? false) navigator.pop(result);
+    if (isDiscarded) navigator.pop(result);
   }
 
   Future<void> _delete() async {

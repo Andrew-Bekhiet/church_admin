@@ -17,10 +17,23 @@ class EditPersonContactsImport {
     final permissionStatus = await Permission.contacts.request();
     if (permissionStatus != PermissionStatus.granted &&
         permissionStatus != PermissionStatus.limited) {
+      AnalyticsService.I.track(
+        const DeviceContactsImport(
+          DeviceContactsImportOutcome.permissionDenied,
+        ),
+      );
+
       return;
     }
     final contact = await ContactsService.I.pickContact();
-    if (contact == null || !context.mounted) return;
+    if (contact == null) {
+      AnalyticsService.I.track(
+        const DeviceContactsImport(DeviceContactsImportOutcome.pickCancelled),
+      );
+
+      return;
+    }
+    if (!context.mounted) return;
 
     final result =
         await showDialog<
@@ -29,8 +42,22 @@ class EditPersonContactsImport {
           context: context,
           builder: (context) => ContactImportDialog(contact: contact),
         );
-    if (result == null || !context.mounted) return;
+    if (result == null) {
+      AnalyticsService.I.track(
+        const DeviceContactsImport(DeviceContactsImportOutcome.dialogCancelled),
+      );
 
+      return;
+    }
+    if (!context.mounted) return;
+
+    AnalyticsService.I.track(
+      DeviceContactsImport(
+        DeviceContactsImportOutcome.imported,
+        importedNumberCount: result.numbers.length,
+        isNameUsed: result.useContactName,
+      ),
+    );
     _phoneContacts.importNumbers(result.numbers);
     if (result.useContactName) _name.setValue(contact.displayName ?? '');
   }

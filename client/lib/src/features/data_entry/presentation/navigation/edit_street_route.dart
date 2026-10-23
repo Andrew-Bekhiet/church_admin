@@ -9,6 +9,10 @@ class EditStreetRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties =>
+      (intent ?? const CreateBlankStreet()).analyticsProperties;
+
+  @override
   List<Object?> get props => [intent];
 
   const EditStreetRoute({this.intent});

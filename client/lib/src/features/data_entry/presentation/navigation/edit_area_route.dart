@@ -9,6 +9,10 @@ class EditAreaRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties =>
+      (intent ?? const CreateBlankArea()).analyticsProperties;
+
+  @override
   List<Object?> get props => [intent];
 
   const EditAreaRoute({this.intent});

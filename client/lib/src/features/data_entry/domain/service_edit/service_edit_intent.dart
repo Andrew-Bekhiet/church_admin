@@ -4,6 +4,14 @@ sealed class ServiceEditIntent extends SerializableExtra {
   @override
   String get typeName => 'ServiceEditIntent';
 
+  Json get analyticsProperties => switch (this) {
+    CreateBlankService() => {'intent_kind': CreateBlankService.kind},
+    UpdateService(:final service) => {
+      'intent_kind': UpdateService.kind,
+      'service_id': service.id,
+    },
+  };
+
   const ServiceEditIntent();
 
   factory ServiceEditIntent.fromJson(Json json) =>

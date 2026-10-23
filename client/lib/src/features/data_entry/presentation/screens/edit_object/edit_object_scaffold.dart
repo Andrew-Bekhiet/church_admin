@@ -42,6 +42,8 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
 
   ObjectFormController<T> get _form => widget.form;
 
+  T get _editedEntity => _form.savedObject ?? _form.initialDraft;
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<ObjectSaveCubit<T>, ObjectSaveProgress>(
@@ -209,9 +211,7 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
         );
 
       case InvalidObject():
-        _form.value.allFields
-            .firstWhereOrNull((field) => field.value.isInvalid)
-            ?.focus();
+        _focusFirstInvalidField();
 
       case ObjectMoveOutOfSightDeclined() ||
           ObjectSaveAlreadyInProgress() ||
@@ -227,6 +227,22 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
     );
 
     return confirmed ?? false;
+  }
+
+  void _focusFirstInvalidField() {
+    final invalidFields = _form.value.allFields
+        .where((field) => field.value.isInvalid)
+        .toList();
+    final firstInvalidField = invalidFields.firstOrNull;
+    if (firstInvalidField == null) return;
+
+    firstInvalidField.focus();
+    AnalyticsService.I.track(
+      FirstInvalidFieldFocus(
+        _editedEntity,
+        invalidFieldCount: invalidFields.length,
+      ),
+    );
   }
 
   void _leaveAfterSave(
@@ -269,12 +285,17 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
       return;
     }
 
+    AnalyticsService.I.track(DiscardPromptShow(_editedEntity));
     final discard = await showDialog<bool>(
       context: context,
       builder: (context) => const DiscardChangesDialog(),
     );
+    final isDiscarded = discard ?? false;
+    AnalyticsService.I.track(
+      DiscardPromptAnswer(_editedEntity, isDiscarded: isDiscarded),
+    );
 
-    if (discard ?? false) navigator.pop(result);
+    if (isDiscarded) navigator.pop(result);
   }
 
   Object? _reportable(T? object) => switch (object) {

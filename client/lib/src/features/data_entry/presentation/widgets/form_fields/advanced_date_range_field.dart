@@ -44,7 +44,12 @@ class AdvancedDateRangeField<E extends Object> extends StatelessWidget {
             suffixIcon: range != null && !state.readOnly
                 ? IconButton(
                     tooltip: 'حذف التاريخ',
-                    onPressed: () => field.setValue(null),
+                    onPressed: () {
+                      AnalyticsService.I.track(
+                        const PickerValueClear(PickerFieldKind.dateRange),
+                      );
+                      field.setValue(null);
+                    },
                     icon: const Icon(Symbols.delete),
                   )
                 : null,
