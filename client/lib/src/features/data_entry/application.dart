@@ -1,3 +1,4 @@
+export 'application/address/address_area_autofiller.dart';
 export 'application/address/address_autofill.dart';
 export 'application/address/address_field_validators.dart';
 export 'application/address/address_form_controller.dart';

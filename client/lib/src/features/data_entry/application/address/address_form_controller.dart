@@ -61,6 +61,12 @@ class AddressFormController extends AdvancedFormController {
     initialValue: _baselineAddress.geolocation,
   );
 
+  late final _areaAutofiller = AddressAreaAutofiller(
+    form: this,
+    services: _services,
+    currentBaselineGeneration: () => _baselineGeneration,
+  );
+
   late final Listenable staleLocationInputsChanged = Listenable.merge([
     onValuesChanged,
     _addressConfirmedNotStale,
@@ -158,7 +164,7 @@ class AddressFormController extends AdvancedFormController {
     _houseNumberGeocodingDebounce?.cancel();
     street.setValue(chosen);
 
-    if (chosen != null) unawaited(_fillAreaOf(chosen));
+    if (chosen != null) unawaited(_areaAutofiller.fillAreaOf(chosen));
   }
 
   void houseCodeTyped(String text) {
@@ -171,7 +177,7 @@ class AddressFormController extends AdvancedFormController {
 
     _houseNumberGeocodingDebounce = Timer(
       houseNumberGeocodingDebounce,
-      () => unawaited(_fillAreaOfTypedHouse()),
+      () => unawaited(_areaAutofiller.fillAreaOfTypedHouse()),
     );
   }
 
@@ -264,130 +270,6 @@ class AddressFormController extends AdvancedFormController {
     _services.analytics.track(DistrictCreate(created));
 
     return created;
-  }
-
-  Future<void> _fillAreaOf(Street chosen) async {
-    final areaWhenLookupStarted = area.fieldValue;
-    final generationWhenLookupStarted = _baselineGeneration;
-    final areasOfStreet = await _services.logFailureOf(
-      'lookupAreasOfStreet',
-      () => _services.autofill.areasOf(chosen),
-    );
-
-    final streetWasReplacedMeanwhile = street.fieldValue != chosen;
-    final areaWasChosenMeanwhile = area.fieldValue != areaWhenLookupStarted;
-    if (isDisposed ||
-        generationWhenLookupStarted != _baselineGeneration ||
-        streetWasReplacedMeanwhile ||
-        areaWasChosenMeanwhile ||
-        areasOfStreet == null) {
-      return;
-    }
-
-    switch (areasOfStreet) {
-      case [final onlyArea]:
-        _prefillAreaThenTrackIfChanged(
-          onlyArea,
-          source: AddressAutofillSource.singleAreaStreet,
-          street: chosen,
-        );
-
-      case [_, _, ...]:
-        await _fillAreaOfGeocodedHouse(
-          chosen,
-          areasOfStreet,
-          areaWhenLookupStarted,
-          generationWhenLookupStarted,
-        );
-    }
-  }
-
-  Future<void> _fillAreaOfTypedHouse() async {
-    final typedStreet = street.fieldValue;
-    if (typedStreet == null) return;
-
-    final areaWhenLookupStarted = area.fieldValue;
-    final generationWhenLookupStarted = _baselineGeneration;
-    final areasOfStreet = await _services.logFailureOf(
-      'lookupAreasOfStreet',
-      () => _services.autofill.areasOf(typedStreet),
-    );
-
-    final streetWasReplacedMeanwhile = street.fieldValue != typedStreet;
-    if (isDisposed ||
-        generationWhenLookupStarted != _baselineGeneration ||
-        streetWasReplacedMeanwhile ||
-        areasOfStreet == null ||
-        areasOfStreet.length < 2) {
-      return;
-    }
-
-    await _fillAreaOfGeocodedHouse(
-      typedStreet,
-      areasOfStreet,
-      areaWhenLookupStarted,
-      generationWhenLookupStarted,
-    );
-  }
-
-  Future<void> _fillAreaOfGeocodedHouse(
-    Street geocodedStreet,
-    List<Area> areasOfStreet,
-    Area? areaWhenLookupStarted,
-    int generationWhenLookupStarted,
-  ) async {
-    final geocodedAddress = toAddress();
-    final geocodedHouse = await _services.logFailureOf(
-      'geocodeHouse',
-      () => _services.autofill.maybeAreaOfGeocodedHouse(geocodedAddress),
-    );
-
-    final houseWasChangedMeanwhile =
-        street.fieldValue != geocodedAddress.street ||
-        _nullIfEmpty(houseCode.fieldValue.trim()) != geocodedAddress.houseCode;
-    if (isDisposed ||
-        generationWhenLookupStarted != _baselineGeneration ||
-        houseWasChangedMeanwhile ||
-        geocodedHouse == null) {
-      return;
-    }
-
-    final areaWasChosenMeanwhile = area.fieldValue != areaWhenLookupStarted;
-    final userChoseAreaOfStreet = areasOfStreet.any(
-      (areaOfStreet) => areaOfStreet.id == area.fieldValue?.id,
-    );
-
-    if (!areaWasChosenMeanwhile && !userChoseAreaOfStreet) {
-      _prefillAreaThenTrackIfChanged(
-        geocodedHouse.area,
-        source: AddressAutofillSource.geocodedHouseNumber,
-        street: geocodedStreet,
-      );
-    }
-    final wasUnlocated = geolocation.fieldValue == null;
-    geolocation.prefill(geolocation.fieldValue ?? geocodedHouse.location);
-    if (wasUnlocated) {
-      _services.analytics.track(
-        AddressLocationFill(
-          autofillSource: AddressAutofillSource.geocodedHouseNumber,
-          street: geocodedStreet,
-        ),
-      );
-    }
-  }
-
-  void _prefillAreaThenTrackIfChanged(
-    Area filled, {
-    required AddressAutofillSource source,
-    required Street street,
-  }) {
-    final areaBeforeFill = area.fieldValue;
-    area.prefill(filled);
-    if (area.fieldValue == areaBeforeFill) return;
-
-    _services.analytics.track(
-      AddressAreaFill(autofillSource: source, street: street, area: filled),
-    );
   }
 
   void _maybeTrackStaleLocationReminderShow() {
