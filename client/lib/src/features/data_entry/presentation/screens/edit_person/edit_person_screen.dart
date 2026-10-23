@@ -33,7 +33,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
       intent: widget.intent,
       persons: databaseService.persons,
       families: databaseService.families,
-      photoUploader: RemotePersonPhotoUploader(databaseService.photos),
+      photoUploader: RemotePhotoUploader(databaseService.photos),
       currentUser: AuthBloc.I.currentUserData,
       analyticsService: AnalyticsService.I,
       addressServices: AddressFormServices.backedBy(

@@ -27,8 +27,8 @@ class _EditServiceScreenState extends State<EditServiceScreen> {
       DefaultMeetingSaveCubit(
         form: _form,
         dao: DatabaseService.I.services,
-        photoUploader: FunctionsPhotoUploader(FunctionsService.I),
-        analyticsService: AnalyticsService.I,
+        photoUploader: RemotePhotoUploader(DatabaseService.I.photos),
+    analyticsService: AnalyticsService.I,
         meetingOwner: _form,
         meetingsDAO: DatabaseService.I.meetings,
       );

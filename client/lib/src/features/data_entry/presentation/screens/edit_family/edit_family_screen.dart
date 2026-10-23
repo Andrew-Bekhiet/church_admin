@@ -36,7 +36,7 @@ class _EditFamilyScreenState extends State<EditFamilyScreen> {
   late final ObjectSaveCubit<Family> _saveCubit = ObjectSaveCubit(
     form: _form,
     dao: DatabaseService.I.families,
-    photoUploader: FunctionsPhotoUploader(FunctionsService.I),
+    photoUploader: RemotePhotoUploader(DatabaseService.I.photos),
     analyticsService: AnalyticsService.I,
     outOfSight: OutOfSightAfterSave(_currentUser),
   );
