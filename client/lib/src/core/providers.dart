@@ -286,6 +286,7 @@ final notificationsServiceProvider = Provider<NotificationsService>((ref) {
     localNotificationsPlugin: ref.watch(localNotificationsPluginProvider),
     firebaseMessaging: ref.watch(firebaseMessagingProvider),
     authBloc: ref.watch(authBlocProvider),
+    analyticsService: ref.watch(analyticsServiceProvider),
     databaseService: ref.watch(databaseServiceProvider),
     storage: ref.watch(notificationsStorageProvider),
     onForegroundMessageStream: FirebaseMessaging.onMessage,
