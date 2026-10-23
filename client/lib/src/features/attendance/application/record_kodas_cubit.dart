@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/attendance/application/attendance_undo_presenter.dart';
 import 'package:church_admin/src/features/attendance/application/live_records.dart';
 import 'package:church_admin/src/features/attendance/application/scaffold_attendance_undo_presenter.dart';
+import 'package:church_admin/src/features/attendance/application/undo_tracking_attendance_presenter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart' show DateUtils;
 
@@ -57,7 +58,6 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     final meeting = _meeting;
     if (meeting == null || visible == _isVisible) return;
 
-    _analyticsService.track(KodasColumnToggle(meeting, isVisible: visible));
     final previous = meeting.copyWith(showKodasCheckbox: _isVisible);
     _savedShowKodasByMeetingId[meeting.id] = visible;
     _restartSession();
@@ -68,7 +68,10 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
         oldObject: previous,
       );
       if (saved == null) throw const KodasChangeRejectedException();
+
+      _trackColumnToggle(meeting, isVisible: visible, isSuccess: true);
     } catch (error, stackTrace) {
+      _trackColumnToggle(meeting, isVisible: visible, isSuccess: false);
       _logError(error, stackTrace);
       if (isClosed) return;
 
@@ -99,6 +102,12 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     );
     _emitReady();
 
+    final presenter = UndoTrackingAttendancePresenter(
+      _presenter,
+      (undoneChange) => _analyticsService.track(
+        KodasUndo(meeting, personId: personId, undoneChange: undoneChange),
+      ),
+    );
     var isSaved = false;
     try {
       if (existing == null) {
@@ -109,34 +118,20 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
 
         isSaved = recorded != null;
         if (recorded != null) {
-          _presenter.showUndo(
+          presenter.showUndo(
             personName: person.name,
             change: AttendanceUndoableChange.kodasRecorded,
-            onUndo: () {
-              _trackUndo(
-                meeting,
-                personId,
-                AttendanceUndoableChange.kodasRecorded,
-              );
-              unawaited(_historyDao.deleteKodas(kodasRecordId: recorded.id));
-            },
+            onUndo: () => _historyDao.deleteKodas(kodasRecordId: recorded.id),
           );
         }
       } else {
         await _historyDao.deleteKodas(kodasRecordId: existing.id);
         isSaved = true;
 
-        _presenter.showUndo(
+        presenter.showUndo(
           personName: person.name,
           change: AttendanceUndoableChange.kodasRemoved,
-          onUndo: () {
-            _trackUndo(
-              meeting,
-              personId,
-              AttendanceUndoableChange.kodasRemoved,
-            );
-            unawaited(_historyDao.recordKodas(personId: personId, day: day));
-          },
+          onUndo: () => _historyDao.recordKodas(personId: personId, day: day),
         );
       }
     } catch (error, stackTrace) {
@@ -161,12 +156,12 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     }
   }
 
-  void _trackUndo(
-    Meeting meeting,
-    String personId,
-    AttendanceUndoableChange undoneChange,
-  ) => _analyticsService.track(
-    KodasUndo(meeting, personId: personId, undoneChange: undoneChange),
+  void _trackColumnToggle(
+    Meeting meeting, {
+    required bool isVisible,
+    required bool isSuccess,
+  }) => _analyticsService.track(
+    KodasColumnToggle(meeting, isVisible: isVisible, isSuccess: isSuccess),
   );
 
   void _restartSession() {
