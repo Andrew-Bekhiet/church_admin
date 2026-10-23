@@ -8,8 +8,22 @@ sealed class UpdateUserDataAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class SpiritDataSave extends UpdateUserDataAnalyticsEvent {
-  final Person person;
-  final DateTime savedAt;
+  static SpiritDataRecency? recencyBetween(
+    DateTime? recordedAt,
+    DateTime savedAt,
+  ) {
+    if (recordedAt == null) return null;
+
+    return switch (savedAt.difference(recordedAt).inDays) {
+      <= 7 => SpiritDataRecency.withinWeek,
+      <= 30 => SpiritDataRecency.withinMonth,
+      <= 60 => SpiritDataRecency.withinTwoMonths,
+      _ => SpiritDataRecency.older,
+    };
+  }
+
+  final SpiritDataRecency? communionRecency;
+  final SpiritDataRecency? confessionRecency;
   final bool isSuccess;
 
   @override
@@ -17,20 +31,26 @@ final class SpiritDataSave extends UpdateUserDataAnalyticsEvent {
 
   @override
   Json get properties => {
-    'person_id': person.id,
-    'days_since_communion': _daysSince(person.lastKodas),
-    'days_since_confession': _daysSince(person.lastConfession),
+    'communion_recency': communionRecency?.key,
+    'confession_recency': confessionRecency?.key,
     'is_success': isSuccess,
   };
 
-  const SpiritDataSave(
-    this.person, {
-    required this.savedAt,
+  SpiritDataSave(
+    Person person, {
+    required DateTime savedAt,
     required this.isSuccess,
-  });
+  }) : communionRecency = recencyBetween(person.lastKodas?.time, savedAt),
+       confessionRecency = recencyBetween(person.lastConfession?.time, savedAt);
+}
 
-  int? _daysSince(LastRecordedByInfo? recorded) => switch (recorded?.time) {
-    final time? => savedAt.difference(time).inDays,
-    null => null,
-  };
+enum SpiritDataRecency {
+  withinWeek('within_week'),
+  withinMonth('within_month'),
+  withinTwoMonths('within_two_months'),
+  older('older');
+
+  final String key;
+
+  const SpiritDataRecency(this.key);
 }
