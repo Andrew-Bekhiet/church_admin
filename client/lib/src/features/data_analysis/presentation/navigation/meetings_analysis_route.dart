@@ -13,7 +13,12 @@ class MeetingsAnalysisRoute extends HomeChildRoute {
   @override
   Json get analyticsProperties => {
     'range_days': initialRangePreset.duration.inDays,
-    ...subject.analyticsProperties,
+    ...switch (subject) {
+      MeetingAnalysisSubject(:final meeting) => {'meeting_id': meeting.id},
+      ServiceAnalysisSubject(:final service) => {'service_id': service.id},
+      GroupAnalysisSubject(:final group) => {'group_id': group.id},
+      ClassAnalysisSubject(:final class$) => {'class_id': class$.id},
+    },
   };
 
   @override
