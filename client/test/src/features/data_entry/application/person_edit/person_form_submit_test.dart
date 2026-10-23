@@ -11,7 +11,6 @@ void main() {
   const nileStreet = PersonFormControllerFixture.nileStreet;
   const shubraAddress = Address(area: shubra, street: nileStreet);
   const kindergarten = PersonFormControllerFixture.kindergarten;
-  const primary = Service(id: 'primary', name: 'ابتدائي', userCanEdit: true);
   final storedPerson = Person(
     id: 'p',
     name: 'مينا',
@@ -30,20 +29,6 @@ void main() {
       ),
     );
     controller.identity.name.setValue('مينا');
-
-    return controller;
-  }
-
-  Future<PersonFormController> servantMovingPersonOutOfSight() async {
-    fixture.currentUser = const User(
-      uid: 'me',
-      name: 'خادم',
-      adminOn: [AdminOnData(permissionId: 'grant', service: primary)],
-    );
-    final controller = await fixture.controllerOfLoadedUpdate(
-      storedPerson.copyWith(services: const [primary]),
-    );
-    controller.memberships.selectServices({kindergarten});
 
     return controller;
   }
@@ -113,7 +98,9 @@ void main() {
     test(
       'moving the person out of sight asks for confirmation before saving',
       () async {
-        final controller = await servantMovingPersonOutOfSight();
+        final controller = await fixture.controllerOfServantMovingOutOfSight(
+          storedPerson,
+        );
         var updatesWhenAsked = -1;
 
         await controller.submit(
@@ -129,7 +116,9 @@ void main() {
     );
 
     test('a declined move saves nothing', () async {
-      final controller = await servantMovingPersonOutOfSight();
+      final controller = await fixture.controllerOfServantMovingOutOfSight(
+        storedPerson,
+      );
 
       final outcome = await controller.submit(
         confirmMoveOutOfSight: () async => false,
@@ -141,7 +130,9 @@ void main() {
     });
 
     test('a confirmed move is saved and reported as moved', () async {
-      final controller = await servantMovingPersonOutOfSight();
+      final controller = await fixture.controllerOfServantMovingOutOfSight(
+        storedPerson,
+      );
 
       final outcome = await controller.submit(
         confirmMoveOutOfSight: () async => true,

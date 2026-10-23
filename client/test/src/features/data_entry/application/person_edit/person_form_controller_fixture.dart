@@ -17,6 +17,11 @@ class PersonFormControllerFixture {
   static const Street nileStreet = Street(id: 'nile', name: 'شارع النيل');
   static const Service primary = Service(id: 'primary', name: 'ابتدائي');
   static const Service kindergarten = Service(id: 'kg', name: 'حضانة');
+  static const Service primaryServedByMe = Service(
+    id: 'primary',
+    name: 'ابتدائي',
+    userCanEdit: true,
+  );
 
   final FakePersonsDAO persons = FakePersonsDAO();
   final FakePhotoUploader photos = FakePhotoUploader();
@@ -72,6 +77,22 @@ class PersonFormControllerFixture {
     final controller = controllerOfUpdate(person);
     persons.respondWithSavedMemberships(saved);
     await pumpEventQueue();
+
+    return controller;
+  }
+
+  Future<PersonFormController> controllerOfServantMovingOutOfSight(
+    Person stored,
+  ) async {
+    currentUser = const User(
+      uid: 'me',
+      name: 'خادم',
+      adminOn: [AdminOnData(permissionId: 'grant', service: primaryServedByMe)],
+    );
+    final controller = await controllerOfLoadedUpdate(
+      stored.copyWith(services: const [primaryServedByMe]),
+    );
+    controller.memberships.selectServices({kindergarten});
 
     return controller;
   }
