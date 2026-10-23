@@ -71,6 +71,7 @@ postgres_user="$(env_value POSTGRES_USER postgres)"
 postgres_password="$(env_value POSTGRES_PASSWORD '')"
 project_id="$(env_value FIREBASE_PROJECT_ID church-admin-local)"
 ash_port="$(env_value ASH_PORT 8080)"
+database="$(env_value DB_NAME church_admin)"
 [ -n "$postgres_password" ] || { echo "POSTGRES_PASSWORD is not set in $env_file" >&2; exit 1; }
 
 compose() {
@@ -83,7 +84,7 @@ compose() {
 }
 
 psql_in_database() {
-  compose exec -T postgres psql --no-psqlrc --username "$postgres_user" --dbname church_admin \
+  compose exec -T postgres psql --no-psqlrc --username "$postgres_user" --dbname "$database" \
     --set ON_ERROR_STOP=1 --tuples-only --no-align "$@"
 }
 
@@ -177,7 +178,7 @@ if [ "$reset" = true ]; then
   reset_database
 elif [ "$(applied_migration_count)" -gt 0 ]; then
   cat >&2 <<MESSAGE
-The church_admin database in project $compose_project already holds data.
+The $database database in project $compose_project already holds data.
 Run again with --reset to rebuild it from production (this drops the local data).
 MESSAGE
   exit 1
@@ -190,7 +191,7 @@ clear_rows_inserted_by_baseline
 
 import_arguments=(--remote-host "$remote_host" --remote-password "$remote_password")
 [ "${#remote_options[@]}" -eq 0 ] || import_arguments+=("${remote_options[@]}")
-import_arguments+=(--local-password "$postgres_password" --local-user "$postgres_user")
+import_arguments+=(--local-password "$postgres_password" --local-user "$postgres_user" --local-db "$database")
 for schema in "${schemas[@]}"; do
   import_arguments+=(--schema "$schema")
 done

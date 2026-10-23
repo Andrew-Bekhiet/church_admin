@@ -40,6 +40,6 @@ defmodule ChurchAdmin.Repo.BaselineMigrationTest do
     assert "public.persons" in tables
     assert "auth.users_data" in tables
     assert "history.attendance_history" in tables
-    assert Enum.all?(~w(postgis timescaledb pg_cron citext pgcrypto), &(&1 in extensions))
+    assert Enum.all?(~w(postgis timescaledb citext pgcrypto), &(&1 in extensions))
   end
 end

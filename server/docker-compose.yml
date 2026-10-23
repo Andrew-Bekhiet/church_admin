@@ -7,8 +7,15 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in server/.env}
-      POSTGRES_DB: church_admin
+      POSTGRES_DB: ${DB_NAME:-church_admin}
       PGDATA: /var/lib/postgresql/data/pgdata
+    command:
+      [
+        "-c",
+        "config_file=/etc/postgresql/postgresql.conf",
+        "-c",
+        "cron.database_name=${DB_NAME:-church_admin}",
+      ]
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
@@ -17,7 +24,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "pg_isready -h 127.0.0.1 -U ${POSTGRES_USER:-postgres} -d church_admin",
+          "pg_isready -h 127.0.0.1 -U ${POSTGRES_USER:-postgres} -d ${DB_NAME:-church_admin}",
         ]
       interval: 5s
       timeout: 5s
@@ -37,7 +44,7 @@ services:
       DB_PORT: "5432"
       DB_USER: ${POSTGRES_USER:-postgres}
       DB_PASSWORD: ${POSTGRES_PASSWORD}
-      DB_NAME: church_admin
+      DB_NAME: ${DB_NAME:-church_admin}
       PORT: "4100"
       PUBLIC_URL: "http://localhost:${ASH_PORT:-8080}"
       AUTH_MODE: emulator

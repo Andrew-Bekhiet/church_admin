@@ -29,7 +29,10 @@ defmodule ChurchAdmin.Repo.SqlScript do
   ]
 
   @spec execute_file!(Ecto.Repo.t(), Path.t()) :: :ok
-  def execute_file!(repo, path) do
+  def execute_file!(repo, path), do: execute!(repo, File.read!(path), path)
+
+  @spec execute!(Ecto.Repo.t(), String.t(), String.t()) :: :ok
+  def execute!(repo, sql, label) do
     connection_options =
       repo.config()
       |> Keyword.take(@connection_option_keys)
@@ -38,9 +41,9 @@ defmodule ChurchAdmin.Repo.SqlScript do
     {:ok, connection} = SimpleConnection.start_link(__MODULE__, [], connection_options)
 
     try do
-      case SimpleConnection.call(connection, {:query, File.read!(path)}, :infinity) do
+      case SimpleConnection.call(connection, {:query, sql}, :infinity) do
         %Postgrex.Error{} = error ->
-          raise RuntimeError, "#{path} failed: #{Exception.message(error)}"
+          raise RuntimeError, "#{label} failed: #{Exception.message(error)}"
 
         results when is_list(results) ->
           :ok

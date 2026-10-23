@@ -5,6 +5,8 @@ defmodule ChurchAdmin.Repo.BaselineMigration do
   basename of the migration file that `use`s this module. The Ecto version is
   therefore the Hasura version, so a database Hasura already migrated can be
   marked as migrated by copying `hdb_catalog.schema_migrations` versions.
+  `ChurchAdmin.Repo.BaselineDatabaseName` adapts the few statements that name
+  the database, so the folders replay into a database of any name.
 
   Baseline migrations are irreversible: they define only `up/0`.
   """
@@ -22,6 +24,18 @@ defmodule ChurchAdmin.Repo.BaselineMigration do
     |> Enum.sort()
   end
 
+  @spec run!(Ecto.Repo.t(), String.t()) :: :ok
+  def run!(repo, folder) do
+    path = Path.join(folder_path(folder), "up.sql")
+    database = Keyword.fetch!(repo.config(), :database)
+
+    ChurchAdmin.Repo.SqlScript.execute!(
+      repo,
+      ChurchAdmin.Repo.BaselineDatabaseName.adapt(folder, File.read!(path), database),
+      path
+    )
+  end
+
   @spec version(String.t()) :: pos_integer()
   def version(folder) do
     {version, "_" <> _name} = Integer.parse(folder)
@@ -34,12 +48,7 @@ defmodule ChurchAdmin.Repo.BaselineMigration do
     quote do
       use Ecto.Migration
 
-      def up do
-        ChurchAdmin.Repo.SqlScript.execute_file!(
-          repo(),
-          Path.join(ChurchAdmin.Repo.BaselineMigration.folder_path(unquote(folder)), "up.sql")
-        )
-      end
+      def up, do: ChurchAdmin.Repo.BaselineMigration.run!(repo(), unquote(folder))
     end
   end
 end

@@ -1,13 +1,20 @@
 x-postgres: &postgres
   build:
     context: ../../postgres
-  environment:
+  environment: &postgres-environment
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: church-admin-ash-dev
-    POSTGRES_DB: church_admin
+    POSTGRES_DB: ${DB_NAME:-church_admin}
     PGDATA: /var/lib/postgresql/data/pgdata
+  command:
+    [
+      "-c",
+      "config_file=/etc/postgresql/postgresql.conf",
+      "-c",
+      "cron.database_name=${DB_NAME:-church_admin}",
+    ]
   healthcheck:
-    test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d church_admin"]
+    test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d ${DB_NAME:-church_admin}"]
     interval: 2s
     timeout: 5s
     retries: 30
@@ -22,6 +29,21 @@ services:
 
   postgres_test:
     <<: *postgres
+    environment:
+      <<: *postgres-environment
+      POSTGRES_DB: ${TEST_DB_NAME:-church_admin}
+    command:
+      [
+        "-c",
+        "config_file=/etc/postgresql/postgresql.conf",
+        "-c",
+        "cron.database_name=${TEST_DB_NAME:-church_admin}",
+      ]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d ${TEST_DB_NAME:-church_admin}"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
     ports:
       - "${TEST_DB_PORT:-55433}:5432"
     volumes:

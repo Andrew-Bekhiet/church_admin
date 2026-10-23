@@ -26,7 +26,7 @@ config :church_admin, ChurchAdmin.Repo,
   password: System.get_env("DB_PASSWORD", "church-admin-ash-dev"),
   hostname: System.get_env("DB_HOST", "localhost"),
   port: "TEST_DB_PORT" |> System.get_env("55433") |> String.to_integer(),
-  database: System.get_env("DB_NAME", "church_admin"),
+  database: System.get_env("TEST_DB_NAME", "church_admin"),
   force_drop: true,
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2

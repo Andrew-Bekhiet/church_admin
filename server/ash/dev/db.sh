@@ -1,7 +1,6 @@
 #!/bin/sh
-# Every database built from the baseline must be named church_admin (the init
-# migration alters that database by name and pg_cron's cron.database_name is
-# church_admin), so dev and test each get their own server.
+# Dev and test each get their own server; DB_NAME and TEST_DB_NAME name their
+# databases (church_admin, the production name, by default).
 set -eu
 
 project="${ASH_DB_PROJECT:-church-admin-ash-dev}"
@@ -11,6 +10,8 @@ if [ "$project" = church-admin-local ]; then
 fi
 export DB_PORT="${DB_PORT:-55432}"
 export TEST_DB_PORT="${TEST_DB_PORT:-55433}"
+export DB_NAME="${DB_NAME:-church_admin}"
+export TEST_DB_NAME="${TEST_DB_NAME:-church_admin}"
 
 app_dir="$(cd "$(dirname "$0")/.." && pwd)"
 compose() {
@@ -32,11 +33,11 @@ case "${1:-}" in
     ;;
   psql)
     shift
-    compose exec postgres psql --username postgres --dbname church_admin "$@"
+    compose exec postgres psql --username postgres --dbname "$DB_NAME" "$@"
     ;;
   psql-test)
     shift
-    compose exec postgres_test psql --username postgres --dbname church_admin "$@"
+    compose exec postgres_test psql --username postgres --dbname "$TEST_DB_NAME" "$@"
     ;;
   *)
     echo "usage: $0 up|down|reset|psql|psql-test [psql args]" >&2
