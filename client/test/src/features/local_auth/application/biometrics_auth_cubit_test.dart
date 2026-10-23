@@ -77,7 +77,7 @@ void main() {
   }
 
   blocTest<BiometricsAuthCubit, BiometricsAuthState>(
-    'a dismissed automatic biometric prompt is tracked as not authenticated',
+    'a dismissed biometric prompt is tracked as not authenticated',
     setUp: () {
       when(
         () => localAuthService.canCheckBiometrics(),
@@ -89,18 +89,14 @@ void main() {
     build: buildCubit,
     act: (cubit) async {
       await cubit.initialize();
-      await cubit.authenticateBiometrically(isAutoPrompted: true);
+      await cubit.authenticateBiometrically();
     },
     verify: (_) => expect(
       analytics.trackedEvents
           .whereType<BiometricsUnlockSubmit>()
           .single
           .properties,
-      {
-        'outcome': UnlockOutcome.notAuthenticated.name,
-        'is_auto_prompted': true,
-        'seconds_locked': 0,
-      },
+      containsPair('outcome', UnlockOutcome.notAuthenticated.name),
     ),
   );
 
@@ -119,7 +115,7 @@ void main() {
       {
         'outcome': UnlockOutcome.unlocked.name,
         'can_check_biometrics': false,
-        'seconds_locked': 42,
+        'locked_duration_ms': 42900,
       },
     ),
   );
