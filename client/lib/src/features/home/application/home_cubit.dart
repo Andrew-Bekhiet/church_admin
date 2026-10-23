@@ -100,9 +100,12 @@ class HomeCubit extends Cubit<HomeState> {
     int tabIndex,
     HomeModeSwitchEntry entry,
   ) async {
-    _analyticsService.track(
-      HomeModeSwitch(from: state.mode, to: mode, entry: entry),
-    );
+    final modeChanges = state.mode != mode;
+    if (modeChanges) {
+      _analyticsService.track(
+        HomeModeSwitch(from: state.mode, to: mode, entry: entry),
+      );
+    }
     await _userPreferencesService.setLastHomeMode(mode);
 
     if (isClosed) return;
