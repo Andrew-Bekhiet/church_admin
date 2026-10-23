@@ -41,6 +41,14 @@ enum UserPermission implements LabeledEnum {
   recoverDeleted(
     label: 'استرجاع المحذوفات',
     icon: Symbols.restore_from_trash,
+  ),
+  maintenanceNotifications(
+    label: 'استلام إشعارات الصيانة',
+    icon: Symbols.build,
+  ),
+  screenCaptureNotifications(
+    label: 'استلام إشعارات تصوير الشاشة',
+    icon: Symbols.screenshot_monitor,
   );
 
   static UserPermission byName(String value) => values.byName(value);
