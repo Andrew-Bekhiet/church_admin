@@ -136,6 +136,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
               AdvancedSearchLimitField(
                 limitStream: controller.limitStream,
                 onChangeLimit: _onChangeLimit,
+                onClearLimit: controller.clearLimit,
               ),
               const Divider(),
               FilledButton.icon(

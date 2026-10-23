@@ -28,39 +28,45 @@ final class AdvancedSearchOpen extends AdvancedSearchQueryAnalyticsEvent {
 
 final class AdvancedSearchQueryableTypeChange
     extends AdvancedSearchQueryAnalyticsEvent {
-  final QueryableType from;
-  final QueryableType to;
+  final String fromQueryableType;
+  final String toQueryableType;
 
   @override
   String get objectAction => 'queryable_type_change';
 
   @override
-  Json get properties => {'from_type': from.name, 'type': to.name};
+  Json get properties => {
+    'from_queryable_type': fromQueryableType,
+    'to_queryable_type': toQueryableType,
+  };
 
-  const AdvancedSearchQueryableTypeChange({
-    required this.from,
-    required this.to,
-  });
+  AdvancedSearchQueryableTypeChange({
+    required QueryableType from,
+    required QueryableType to,
+  }) : fromQueryableType = from.name,
+       toQueryableType = to.name;
 }
 
 sealed class AdvancedSearchOrderByAnalyticsEvent
     extends AdvancedSearchQueryAnalyticsEvent {
-  final OrderBy orderBy;
+  final String fieldName;
+  final OrderByValue sortDirection;
   final int orderCount;
 
   @override
   Json get properties => {
-    'field_name': AdvancedSearchFilterAnalyticsEvent.fieldPathOf(
-      orderBy.field,
-    ).join('.'),
-    'direction': orderBy.value.name,
+    'field_name': fieldName,
+    'sort_direction': sortDirection.name,
     'order_count': orderCount,
   };
 
-  const AdvancedSearchOrderByAnalyticsEvent(
-    this.orderBy, {
+  AdvancedSearchOrderByAnalyticsEvent(
+    OrderBy orderBy, {
     required this.orderCount,
-  });
+  }) : fieldName = AdvancedSearchFilterAnalyticsEvent.fieldPathOf(
+         orderBy.field,
+       ).join('.'),
+       sortDirection = orderBy.value;
 }
 
 final class AdvancedSearchOrderByAdd
@@ -68,7 +74,7 @@ final class AdvancedSearchOrderByAdd
   @override
   String get objectAction => 'order_by_add';
 
-  const AdvancedSearchOrderByAdd(super.orderBy, {required super.orderCount});
+  AdvancedSearchOrderByAdd(super.orderBy, {required super.orderCount});
 }
 
 final class AdvancedSearchOrderByChange
@@ -76,7 +82,7 @@ final class AdvancedSearchOrderByChange
   @override
   String get objectAction => 'order_by_change';
 
-  const AdvancedSearchOrderByChange(super.orderBy, {required super.orderCount});
+  AdvancedSearchOrderByChange(super.orderBy, {required super.orderCount});
 }
 
 final class AdvancedSearchOrderByDirectionToggle
@@ -84,7 +90,7 @@ final class AdvancedSearchOrderByDirectionToggle
   @override
   String get objectAction => 'order_by_direction_toggle';
 
-  const AdvancedSearchOrderByDirectionToggle(
+  AdvancedSearchOrderByDirectionToggle(
     super.orderBy, {
     required super.orderCount,
   });
@@ -104,15 +110,28 @@ final class AdvancedSearchOrderByRemove
 }
 
 final class AdvancedSearchLimitSet extends AdvancedSearchQueryAnalyticsEvent {
-  final int limit;
+  final int limitValue;
 
   @override
   String get objectAction => 'limit_set';
 
   @override
-  Json get properties => {'limit': limit};
+  Json get properties => {'limit_value': limitValue};
 
-  const AdvancedSearchLimitSet(this.limit);
+  const AdvancedSearchLimitSet(this.limitValue);
+}
+
+final class AdvancedSearchLimitChange
+    extends AdvancedSearchQueryAnalyticsEvent {
+  final int limitValue;
+
+  @override
+  String get objectAction => 'limit_change';
+
+  @override
+  Json get properties => {'limit_value': limitValue};
+
+  const AdvancedSearchLimitChange(this.limitValue);
 }
 
 final class AdvancedSearchLimitClear extends AdvancedSearchQueryAnalyticsEvent {
@@ -124,25 +143,38 @@ final class AdvancedSearchLimitClear extends AdvancedSearchQueryAnalyticsEvent {
 
 sealed class AdvancedSearchQueryRunAnalyticsEvent
     extends AdvancedSearchQueryAnalyticsEvent {
-  final AdvancedQuery query;
+  final String queryableType;
+  final LogicalOperator logicalOperator;
+  final List<String> fieldNames;
+  final List<String> operatorIds;
+  final int orderCount;
+  final bool hasLimit;
 
   @override
   Json get properties => {
-    'type': query.queryableType.name,
-    'logical_operator': query.logicalOperator.name,
-    'filter_count': query.filters.length,
-    'field_names': [
-      for (final filter in query.filters)
-        AdvancedSearchFilterAnalyticsEvent.fieldPathOf(filter.field).join('.'),
-    ],
-    'operator_ids': [
-      for (final filter in query.filters) filter.operator.serializationId,
-    ],
-    'order_count': query.orderBy.length,
-    'has_limit': query.limit != null,
+    'queryable_type': queryableType,
+    'logical_operator': logicalOperator.name,
+    'filter_count': fieldNames.length,
+    'field_names': fieldNames,
+    'operator_ids': operatorIds,
+    'order_count': orderCount,
+    'has_limit': hasLimit,
   };
 
-  const AdvancedSearchQueryRunAnalyticsEvent(this.query);
+  AdvancedSearchQueryRunAnalyticsEvent(AdvancedQuery query)
+    : queryableType = query.queryableType.name,
+      logicalOperator = query.logicalOperator,
+      fieldNames = [
+        for (final filter in query.filters)
+          AdvancedSearchFilterAnalyticsEvent.fieldPathOf(
+            filter.field,
+          ).join('.'),
+      ],
+      operatorIds = [
+        for (final filter in query.filters) filter.operator.serializationId,
+      ],
+      orderCount = query.orderBy.length,
+      hasLimit = query.limit != null;
 }
 
 final class AdvancedSearchQuerySubmit
@@ -158,7 +190,7 @@ final class AdvancedSearchQuerySubmit
     'is_auto_executed': isAutoExecuted,
   };
 
-  const AdvancedSearchQuerySubmit(
+  AdvancedSearchQuerySubmit(
     super.query, {
     required this.isAutoExecuted,
   });
@@ -169,18 +201,18 @@ final class AdvancedSearchQueryShare
   @override
   String get objectAction => 'query_share';
 
-  const AdvancedSearchQueryShare(super.query);
+  AdvancedSearchQueryShare(super.query);
 }
 
-final class AdvancedSearchResultsSearch
+final class AdvancedSearchResultsSearchRun
     extends AdvancedSearchQueryAnalyticsEvent {
   final int queryLength;
 
   @override
-  String get objectAction => 'results_search';
+  String get objectAction => 'results_search_run';
 
   @override
   Json get properties => {'query_length': queryLength};
 
-  const AdvancedSearchResultsSearch({required this.queryLength});
+  const AdvancedSearchResultsSearchRun({required this.queryLength});
 }

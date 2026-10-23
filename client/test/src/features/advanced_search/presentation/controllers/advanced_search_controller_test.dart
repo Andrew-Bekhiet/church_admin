@@ -2,8 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fakes/fake_feature_flags_repo.dart';
-import '../../../../fakes/fake_logging_service.dart';
-import '../../../../fakes/recording_analytics_provider.dart';
+import '../../support/advanced_search_analytics_fixture.dart';
 
 void main() {
   setUp(
@@ -19,12 +18,7 @@ void main() {
       test(
         'Initial state and structure',
         () {
-          final unit = AdvancedSearchController(
-            analyticsService: AnalyticsService(
-              [RecordingAnalyticsProvider()],
-              FakeLoggingService(),
-            ),
-          );
+          final unit = AdvancedSearchAnalyticsFixture().createController();
           addTearDown(unit.dispose);
 
           final expectedQuery = AdvancedQuery(
@@ -82,12 +76,7 @@ void main() {
             logicalOperator: LogicalOperator.or,
           );
 
-          final unit = AdvancedSearchController(
-            analyticsService: AnalyticsService(
-              [RecordingAnalyticsProvider()],
-              FakeLoggingService(),
-            ),
-          );
+          final unit = AdvancedSearchAnalyticsFixture().createController();
           addTearDown(unit.dispose);
 
           expect(
@@ -166,12 +155,7 @@ void main() {
             ),
           ];
 
-          final unit = AdvancedSearchController(
-            analyticsService: AnalyticsService(
-              [RecordingAnalyticsProvider()],
-              FakeLoggingService(),
-            ),
-          );
+          final unit = AdvancedSearchAnalyticsFixture().createController();
           addTearDown(unit.dispose);
 
           expect(
@@ -211,12 +195,7 @@ void main() {
             ),
           ];
 
-          final unit = AdvancedSearchController(
-            analyticsService: AnalyticsService(
-              [RecordingAnalyticsProvider()],
-              FakeLoggingService(),
-            ),
-          );
+          final unit = AdvancedSearchAnalyticsFixture().createController();
           addTearDown(unit.dispose);
 
           expect(
@@ -247,12 +226,7 @@ void main() {
             ),
           ];
 
-          final unit = AdvancedSearchController(
-            analyticsService: AnalyticsService(
-              [RecordingAnalyticsProvider()],
-              FakeLoggingService(),
-            ),
-          );
+          final unit = AdvancedSearchAnalyticsFixture().createController();
           addTearDown(unit.dispose);
 
           expect(
