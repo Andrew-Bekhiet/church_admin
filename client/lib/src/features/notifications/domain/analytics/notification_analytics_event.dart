@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 sealed class NotificationAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -37,21 +38,21 @@ final class NotificationSearchResultsOpen extends NotificationAnalyticsEvent {
   const NotificationSearchResultsOpen(this.notification);
 }
 
-final class NotificationPermissionAnswer extends NotificationAnalyticsEvent {
-  final String permissionStatus;
+final class NotificationPermissionRequest extends NotificationAnalyticsEvent {
+  final PermissionStatus previousPermissionStatus;
   final bool isGranted;
 
   @override
-  String get objectAction => 'permission_answer';
+  String get objectAction => 'permission_request';
 
   @override
   Json get properties => {
-    'permission_status': permissionStatus,
+    'previous_permission_status': previousPermissionStatus.name,
     'is_granted': isGranted,
   };
 
-  const NotificationPermissionAnswer({
-    required this.permissionStatus,
+  const NotificationPermissionRequest({
+    required this.previousPermissionStatus,
     required this.isGranted,
   });
 }
