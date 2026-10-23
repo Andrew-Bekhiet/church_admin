@@ -189,9 +189,6 @@ void main() {
   );
 
   group('tracking', () {
-    Json trackedSave() =>
-        analytics.trackedEvents.whereType<ObjectSave>().single.properties;
-
     blocTest<DefaultMeetingSaveCubit<Service>, ObjectSaveProgress>(
       'a new service saved with its meeting is tracked as creating it',
       build: () => cubitEditing(const CreateBlankService()),
@@ -201,7 +198,7 @@ void main() {
         return cubit.submit();
       },
       verify: (_) => expect(
-        trackedSave(),
+        analytics.singleTrackedPropertiesOf<ObjectSave>(),
         containsPair('is_default_meeting_created', true),
       ),
     );
@@ -216,7 +213,7 @@ void main() {
         return cubit.submit();
       },
       verify: (_) => expect(
-        trackedSave(),
+        analytics.singleTrackedPropertiesOf<ObjectSave>(),
         containsPair('is_default_meeting_created', false),
       ),
     );

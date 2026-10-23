@@ -240,9 +240,6 @@ void main() {
   });
 
   group('tracking', () {
-    Json trackedSave() =>
-        analytics.trackedEvents.whereType<ObjectSave>().single.properties;
-
     blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
       'a created area is tracked as a saved creation of that area',
       build: () => cubitEditing(const CreateBlankArea()),
@@ -251,7 +248,7 @@ void main() {
         await cubit.submit();
       },
       verify: (_) => expect(
-        trackedSave(),
+        analytics.singleTrackedPropertiesOf<ObjectSave>(),
         allOf(
           containsPair('entity_type', AnalyticsEntityType.area.key),
           containsPair('area_id', areas.createdObjects.single.id),
@@ -275,7 +272,7 @@ void main() {
         await cubit.submit();
       },
       verify: (_) => expect(
-        trackedSave(),
+        analytics.singleTrackedPropertiesOf<ObjectSave>(),
         allOf(
           containsPair('is_create', false),
           containsPair('outcome', ObjectSaveResult.savedButPhotoFailed.name),
@@ -288,7 +285,7 @@ void main() {
       build: () => cubitEditing(const CreateBlankArea()),
       act: (cubit) => cubit.submit(),
       verify: (_) => expect(
-        trackedSave(),
+        analytics.singleTrackedPropertiesOf<ObjectSave>(),
         containsPair('outcome', ObjectSaveResult.invalid.name),
       ),
     );
@@ -307,7 +304,7 @@ void main() {
         await saving;
       },
       verify: (_) =>
-          expect(analytics.trackedEvents.whereType<ObjectSave>(), hasLength(1)),
+          expect(analytics.trackedEventsOf<ObjectSave>(), hasLength(1)),
     );
 
     blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
@@ -315,7 +312,7 @@ void main() {
       build: cubitEditingStoredArea,
       act: (cubit) => cubit.tryDeleteSavedObject(),
       verify: (_) => expect(
-        analytics.trackedEvents.whereType<ObjectDelete>().single.properties,
+        analytics.singleTrackedPropertiesOf<ObjectDelete>(),
         {
           'entity_type': AnalyticsEntityType.area.key,
           'area_id': storedArea.id,

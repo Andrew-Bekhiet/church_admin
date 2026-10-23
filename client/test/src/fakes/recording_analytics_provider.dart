@@ -18,6 +18,12 @@ class RecordingAnalyticsProvider implements AnalyticsProvider {
   @override
   List<NavigatorObserver> get navigatorObservers => const [];
 
+  Iterable<E> trackedEventsOf<E extends AnalyticsEvent>() =>
+      trackedEvents.whereType<E>();
+
+  Json singleTrackedPropertiesOf<E extends AnalyticsEvent>() =>
+      trackedEventsOf<E>().single.properties;
+
   @override
   Future<void> initialize() async {}
 
