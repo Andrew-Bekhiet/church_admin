@@ -1,19 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 
 sealed class UserFormAnalyticsEvent extends AnalyticsEvent {
-  static Json scopePropertiesOf(UserAdminScope scope) => switch (scope.object) {
-    Area(:final id) => {'scope_type': AdminScopeType.area.name, 'area_id': id},
-    Service(:final id) => {
-      'scope_type': AdminScopeType.service.name,
-      'service_id': id,
-    },
-    Group(:final id) => {
-      'scope_type': AdminScopeType.group.name,
-      'group_id': id,
-    },
-    _ => const {},
-  };
-
   @override
   String get category => 'user_management';
 
@@ -45,12 +32,12 @@ final class AdminScopesApply extends UserFormAnalyticsEvent {
 
   @override
   Json get properties => {
-    'area_added_count': addedAreaCount,
-    'area_removed_count': removedAreaCount,
-    'service_added_count': addedServiceCount,
-    'service_removed_count': removedServiceCount,
-    'group_added_count': addedGroupCount,
-    'group_removed_count': removedGroupCount,
+    'added_area_count': addedAreaCount,
+    'removed_area_count': removedAreaCount,
+    'added_service_count': addedServiceCount,
+    'removed_service_count': removedServiceCount,
+    'added_group_count': addedGroupCount,
+    'removed_group_count': removedGroupCount,
   };
 
   const AdminScopesApply({
@@ -64,31 +51,33 @@ final class AdminScopesApply extends UserFormAnalyticsEvent {
 }
 
 final class ServiceScopeCopy extends UserFormAnalyticsEvent {
-  final UserAdminScope scope;
+  final Json scopeProperties;
 
   @override
   String get objectAction => 'service_scope_copy';
 
   @override
-  Json get properties => UserFormAnalyticsEvent.scopePropertiesOf(scope);
+  Json get properties => scopeProperties;
 
-  const ServiceScopeCopy(this.scope);
+  ServiceScopeCopy(UserAdminScope scope)
+    : scopeProperties = AnalyticsEntityType.propertiesOf(scope.object);
 }
 
 final class AdminScopeDelete extends UserFormAnalyticsEvent {
-  final UserAdminScope scope;
+  final Json scopeProperties;
 
   @override
   String get objectAction => 'scope_delete';
 
   @override
-  Json get properties => UserFormAnalyticsEvent.scopePropertiesOf(scope);
+  Json get properties => scopeProperties;
 
-  const AdminScopeDelete(this.scope);
+  AdminScopeDelete(UserAdminScope scope)
+    : scopeProperties = AnalyticsEntityType.propertiesOf(scope.object);
 }
 
 final class AdminScopePermissionToggle extends UserFormAnalyticsEvent {
-  final UserAdminScope scope;
+  final Json scopeProperties;
   final AdminScopePermission permission;
   final bool isEnabled;
 
@@ -97,16 +86,16 @@ final class AdminScopePermissionToggle extends UserFormAnalyticsEvent {
 
   @override
   Json get properties => {
-    ...UserFormAnalyticsEvent.scopePropertiesOf(scope),
+    ...scopeProperties,
     'permission': permission.name,
     'is_enabled': isEnabled,
   };
 
-  const AdminScopePermissionToggle(
-    this.scope,
+  AdminScopePermissionToggle(
+    UserAdminScope scope,
     this.permission, {
     required this.isEnabled,
-  });
+  }) : scopeProperties = AnalyticsEntityType.propertiesOf(scope.object);
 }
 
 final class InvitationToggle extends UserFormAnalyticsEvent {
@@ -128,7 +117,9 @@ final class InvitationExpiryChange extends UserFormAnalyticsEvent {
   String get objectAction => 'invitation_expiry_change';
 
   @override
-  Json get properties => {'validity_days': validity.inDays};
+  Json get properties => {
+    'validity_duration_ms': validity.inMilliseconds,
+  };
 
   const InvitationExpiryChange(this.validity);
 }

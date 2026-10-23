@@ -18,11 +18,19 @@ sealed class UserManagementAnalyticsEvent extends AnalyticsEvent {
     _ => 'unknown',
   };
 
-  static Json scopeCountsOf(Iterable<AdminOnData> adminOn, String suffix) => {
+  static Json scopeCountsOf(
+    Iterable<AdminOnData> adminOn, {
+    String prefix = '',
+  }) => {
     for (final type in AdminScopeType.values)
-      '${type.name}_$suffix': adminOn
+      '$prefix${type.name}_count': adminOn
           .where((scope) => AdminScopeType.of(scope) == type)
           .length,
+  };
+
+  static Json userPropertiesOf(String userId) => {
+    'entity_type': AnalyticsEntityType.user.key,
+    AnalyticsEntityType.user.idProperty: userId,
   };
 
   @override
@@ -63,25 +71,26 @@ final class ManageUsersViewSwitch extends UserManagementAnalyticsEvent {
 }
 
 final class ManageUsersGroupToggle extends UserManagementAnalyticsEvent {
-  final UserAdminGroup group;
+  final UserAdminGroupKind groupKind;
   final bool isExpanded;
+  final int userCount;
+  final Json scopeProperties;
 
   @override
   String get objectAction => 'group_toggle';
 
   @override
   Json get properties => {
-    'group_kind': group.kind.name,
+    'group_kind': groupKind.name,
     'is_expanded': isExpanded,
-    'user_count': group.userCount,
-    ...switch (group.scope) {
-      Area(:final id) => {'area_id': id},
-      Service(:final id) => {'service_id': id},
-      _ => const {},
-    },
+    'user_count': userCount,
+    ...scopeProperties,
   };
 
-  const ManageUsersGroupToggle(this.group, {required this.isExpanded});
+  ManageUsersGroupToggle(UserAdminGroup group, {required this.isExpanded})
+    : groupKind = group.kind,
+      userCount = group.userCount,
+      scopeProperties = AnalyticsEntityType.propertiesOf(group.scope);
 }
 
 final class UserCreateTap extends UserManagementAnalyticsEvent {
@@ -92,68 +101,92 @@ final class UserCreateTap extends UserManagementAnalyticsEvent {
 }
 
 final class UserCreate extends UserManagementAnalyticsEvent {
-  final UserDraft draft;
-  final Object? failure;
+  final bool isSuccess;
+  final String failureKind;
+  final int permissionCount;
+  final Json scopeCounts;
+  final bool hasInvitation;
+  final PersonLinkMode personLinkMode;
 
   @override
   String get objectAction => 'user_create';
 
   @override
   Json get properties => {
-    'is_success': failure == null,
-    'failure_kind': UserManagementAnalyticsEvent.failureKindOf(failure),
-    'permission_count': draft.permissions.length,
-    ...UserManagementAnalyticsEvent.scopeCountsOf(draft.adminOn, 'count'),
-    'has_invitation': draft.invitation is InvitationRequest,
-    'person_link_mode': PersonLinkMode.of(draft.person).name,
+    'is_success': isSuccess,
+    'failure_kind': failureKind,
+    'permission_count': permissionCount,
+    ...scopeCounts,
+    'has_invitation': hasInvitation,
+    'person_link_mode': personLinkMode.name,
   };
 
-  const UserCreate(this.draft, {this.failure});
+  UserCreate(UserDraft draft, {Object? failure})
+    : isSuccess = failure == null,
+      failureKind = UserManagementAnalyticsEvent.failureKindOf(failure),
+      permissionCount = draft.permissions.length,
+      scopeCounts = UserManagementAnalyticsEvent.scopeCountsOf(draft.adminOn),
+      hasInvitation = draft.invitation is InvitationRequest,
+      personLinkMode = PersonLinkMode.of(draft.person);
 }
 
 final class UserSave extends UserManagementAnalyticsEvent {
-  final User user;
-  final UserDraft draft;
-  final Object? failure;
+  final String userId;
+  final bool isSuccess;
+  final String failureKind;
+  final List<String> addedPermissions;
+  final List<String> removedPermissions;
+  final Json addedScopeCounts;
+  final Json removedScopeCounts;
+  final PersonLinkChange personLinkChange;
 
   @override
   String get objectAction => 'user_save';
 
   @override
-  Json get properties {
-    final newPermissions = draft.permissions.validated();
-    final keptScopeIds = draft.adminOn.map((scope) => scope.permissionId);
+  Json get properties => {
+    ...UserManagementAnalyticsEvent.userPropertiesOf(userId),
+    'is_success': isSuccess,
+    'failure_kind': failureKind,
+    'added_permissions': addedPermissions,
+    'removed_permissions': removedPermissions,
+    ...addedScopeCounts,
+    ...removedScopeCounts,
+    'person_link_change': personLinkChange.name,
+  };
 
-    return {
-      'user_id': user.uid,
-      'is_success': failure == null,
-      'failure_kind': UserManagementAnalyticsEvent.failureKindOf(failure),
-      'permissions_added': [
-        for (final permission in newPermissions.difference(user.permissions))
+  UserSave(User user, UserDraft draft, {Object? failure})
+    : userId = user.uid,
+      isSuccess = failure == null,
+      failureKind = UserManagementAnalyticsEvent.failureKindOf(failure),
+      addedPermissions = [
+        for (final permission in draft.permissions.validated().difference(
+          user.permissions,
+        ))
           permission.name,
       ],
-      'permissions_removed': [
-        for (final permission in user.permissions.difference(newPermissions))
+      removedPermissions = [
+        for (final permission in user.permissions.difference(
+          draft.permissions.validated(),
+        ))
           permission.name,
       ],
-      ...UserManagementAnalyticsEvent.scopeCountsOf(
+      addedScopeCounts = UserManagementAnalyticsEvent.scopeCountsOf(
         draft.adminOn.where((scope) => scope.permissionId.isEmpty),
-        'added_count',
+        prefix: 'added_',
       ),
-      ...UserManagementAnalyticsEvent.scopeCountsOf(
+      removedScopeCounts = UserManagementAnalyticsEvent.scopeCountsOf(
         [...?user.adminOn].where(
-          (scope) => !keptScopeIds.contains(scope.permissionId),
+          (scope) => !draft.adminOn
+              .map((kept) => kept.permissionId)
+              .contains(scope.permissionId),
         ),
-        'removed_count',
+        prefix: 'removed_',
       ),
-      'person_link_change': PersonLinkChange.between(
+      personLinkChange = PersonLinkChange.between(
         user.person?.id,
         draft.person,
-      ).name,
-    };
-  }
-
-  const UserSave(this.user, this.draft, {this.failure});
+      );
 }
 
 final class UserApprove extends UserManagementAnalyticsEvent {
@@ -164,7 +197,10 @@ final class UserApprove extends UserManagementAnalyticsEvent {
   String get objectAction => 'user_approve';
 
   @override
-  Json get properties => {'user_id': userId, 'is_success': isSuccess};
+  Json get properties => {
+    ...UserManagementAnalyticsEvent.userPropertiesOf(userId),
+    'is_success': isSuccess,
+  };
 
   const UserApprove(this.userId, {required this.isSuccess});
 }
@@ -177,7 +213,10 @@ final class UserUnapprove extends UserManagementAnalyticsEvent {
   String get objectAction => 'user_unapprove';
 
   @override
-  Json get properties => {'user_id': userId, 'is_success': isSuccess};
+  Json get properties => {
+    ...UserManagementAnalyticsEvent.userPropertiesOf(userId),
+    'is_success': isSuccess,
+  };
 
   const UserUnapprove(this.userId, {required this.isSuccess});
 }
@@ -190,22 +229,31 @@ final class UserPasswordResetSend extends UserManagementAnalyticsEvent {
   String get objectAction => 'password_reset_send';
 
   @override
-  Json get properties => {'user_id': userId, 'is_success': isSuccess};
+  Json get properties => {
+    ...UserManagementAnalyticsEvent.userPropertiesOf(userId),
+    'is_success': isSuccess,
+  };
 
   const UserPasswordResetSend(this.userId, {required this.isSuccess});
 }
 
 final class AccountDeletionAnswer extends UserManagementAnalyticsEvent {
-  final int step;
+  final int confirmationStep;
   final bool isConfirmed;
 
   @override
   String get objectAction => 'account_deletion_answer';
 
   @override
-  Json get properties => {'step': step, 'is_confirmed': isConfirmed};
+  Json get properties => {
+    'confirmation_step': confirmationStep,
+    'is_confirmed': isConfirmed,
+  };
 
-  const AccountDeletionAnswer({required this.step, required this.isConfirmed});
+  const AccountDeletionAnswer({
+    required this.confirmationStep,
+    required this.isConfirmed,
+  });
 }
 
 final class MyAccountDelete extends UserManagementAnalyticsEvent {

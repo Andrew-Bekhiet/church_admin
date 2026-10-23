@@ -203,7 +203,10 @@ class _ViewUserState extends State<ViewUser> {
       ),
     );
     AnalyticsService.I.track(
-      AccountDeletionAnswer(step: 1, isConfirmed: dialogResult ?? false),
+      AccountDeletionAnswer(
+        confirmationStep: 1,
+        isConfirmed: dialogResult ?? false,
+      ),
     );
 
     if (dialogResult != true || !mounted) return;
@@ -219,7 +222,10 @@ class _ViewUserState extends State<ViewUser> {
       ),
     );
     AnalyticsService.I.track(
-      AccountDeletionAnswer(step: 2, isConfirmed: dialogResult ?? false),
+      AccountDeletionAnswer(
+        confirmationStep: 2,
+        isConfirmed: dialogResult ?? false,
+      ),
     );
 
     if (dialogResult != true) return;
