@@ -82,7 +82,7 @@ class PersonCommandInputs {
     hobbies: person.hobbies?.map((h) => h.id).toList(),
     contacts: _contacts,
     familyContacts: _familyContacts,
-    address: person.address?.toAddressInput(),
+    address: person.family == null ? person.address?.toAddressInput() : null,
     lastConfession: person.lastConfession?.time,
     lastKodas: person.lastKodas?.time,
     lastCall: person.lastCall?.time,
