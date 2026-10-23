@@ -198,7 +198,7 @@ void main() {
         return cubit.submit();
       },
       verify: (_) => expect(
-        analytics.singleTrackedPropertiesOf<ObjectSave>(),
+        analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
         containsPair('is_default_meeting_created', true),
       ),
     );
@@ -213,7 +213,7 @@ void main() {
         return cubit.submit();
       },
       verify: (_) => expect(
-        analytics.singleTrackedPropertiesOf<ObjectSave>(),
+        analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
         containsPair('is_default_meeting_created', false),
       ),
     );

@@ -248,7 +248,7 @@ void main() {
         await cubit.submit();
       },
       verify: (_) => expect(
-        analytics.singleTrackedPropertiesOf<ObjectSave>(),
+        analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
         allOf(
           containsPair('entity_type', AnalyticsEntityType.area.key),
           containsPair('area_id', areas.createdObjects.single.id),
@@ -272,7 +272,7 @@ void main() {
         await cubit.submit();
       },
       verify: (_) => expect(
-        analytics.singleTrackedPropertiesOf<ObjectSave>(),
+        analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
         allOf(
           containsPair('is_create', false),
           containsPair('outcome', ObjectSaveResult.savedButPhotoFailed.name),
@@ -285,8 +285,18 @@ void main() {
       build: () => cubitEditing(const CreateBlankArea()),
       act: (cubit) => cubit.submit(),
       verify: (_) => expect(
-        analytics.singleTrackedPropertiesOf<ObjectSave>(),
+        analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
         containsPair('outcome', ObjectSaveResult.invalid.name),
+      ),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'an invalid form is tracked as a save attempt, not as a save',
+      build: () => cubitEditing(const CreateBlankArea()),
+      act: (cubit) => cubit.submit(),
+      verify: (_) => expect(
+        analytics.trackedEvents.map((event) => event.name),
+        ['data_entry:object_save_attempt'],
       ),
     );
 
@@ -304,7 +314,7 @@ void main() {
         await saving;
       },
       verify: (_) =>
-          expect(analytics.trackedEventsOf<ObjectSave>(), hasLength(1)),
+          expect(analytics.trackedEventsOf<ObjectSaveAttempt>(), hasLength(1)),
     );
 
     blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(

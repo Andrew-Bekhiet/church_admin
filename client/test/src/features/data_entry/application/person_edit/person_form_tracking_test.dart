@@ -25,7 +25,7 @@ void main() {
     await controller.submit();
 
     expect(
-      fixture.analytics.singleTrackedPropertiesOf<ObjectSave>(),
+      fixture.analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
       allOf(
         containsPair('entity_type', AnalyticsEntityType.person.key),
         containsPair('person_id', fixture.persons.createdPeople.single.id),
@@ -44,7 +44,7 @@ void main() {
       await controller.submit();
 
       expect(
-        fixture.analytics.singleTrackedPropertiesOf<ObjectSave>(),
+        fixture.analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
         allOf(
           containsPair('outcome', ObjectSaveResult.invalid.name),
           containsPair('rule_violations', [
@@ -61,7 +61,7 @@ void main() {
     await controller.submit();
 
     expect(
-      fixture.analytics.singleTrackedPropertiesOf<ObjectSave>(),
+      fixture.analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
       containsPair('outcome', ObjectSaveResult.membershipsNotLoadedYet.name),
     );
   });

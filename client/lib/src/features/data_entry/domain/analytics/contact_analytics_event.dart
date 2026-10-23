@@ -7,26 +7,42 @@ sealed class ContactAnalyticsEvent extends AnalyticsEvent {
   const ContactAnalyticsEvent();
 }
 
-final class ContactNumberCall extends ContactAnalyticsEvent {
+final class ContactCallPromptAnswer extends ContactAnalyticsEvent {
   final ViewableWithID owner;
   final bool isFamilyNumber;
-  final ContactCallChoice choice;
+  final ContactCallPromptChoice choice;
 
   @override
-  String get objectAction => 'number_call';
+  String get objectAction => 'call_prompt_answer';
 
   @override
   Json get properties => {
     ...AnalyticsEntityType.propertiesOf(owner),
     'is_family_number': isFamilyNumber,
-    'choice': choice.name,
+    'call_prompt_choice': choice.name,
   };
 
-  const ContactNumberCall(
+  const ContactCallPromptAnswer(
     this.owner, {
     required this.isFamilyNumber,
     required this.choice,
   });
+}
+
+final class ContactDialerOpen extends ContactAnalyticsEvent {
+  final ViewableWithID owner;
+  final bool isFamilyNumber;
+
+  @override
+  String get objectAction => 'dialer_open';
+
+  @override
+  Json get properties => {
+    ...AnalyticsEntityType.propertiesOf(owner),
+    'is_family_number': isFamilyNumber,
+  };
+
+  const ContactDialerOpen(this.owner, {required this.isFamilyNumber});
 }
 
 final class CallDateRecordAnswer extends ContactAnalyticsEvent {
@@ -137,7 +153,7 @@ final class DeviceContactsImport extends ContactAnalyticsEvent {
   });
 }
 
-enum ContactCallChoice { call, dialerOnly, cancel, unprompted }
+enum ContactCallPromptChoice { call, dialerOnly, cancel }
 
 enum DeviceContactCreateOutcome { permissionDenied, cancelled, created, failed }
 
