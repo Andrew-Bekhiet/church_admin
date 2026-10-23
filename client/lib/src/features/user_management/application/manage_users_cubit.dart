@@ -43,7 +43,7 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
         .distinct()
         .listen(
           (query) => _analyticsService.track(
-            ManageUsersSearchSubmit(
+            ManageUsersSearchRun(
               queryLength: query.length,
               preferredView: state.preferredView,
             ),
