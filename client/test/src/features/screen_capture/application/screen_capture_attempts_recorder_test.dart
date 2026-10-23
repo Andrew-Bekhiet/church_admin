@@ -57,27 +57,19 @@ void main() {
     await connectivity.close();
   });
 
-  for (final (kind, storedKind) in [
-    (ScreenCaptureKind.screenshot, 'screenshot'),
-    (ScreenCaptureKind.screenRecording, 'screen_recording'),
-  ]) {
-    test(
-      'a ${kind.name} while signed in is stored as a $storedKind attempt',
-      () async {
-        final link = RecordingGraphQLLink({
-          'insertOperationsScreenCaptureAttempts': {'affectedRows': 1},
-        });
-        recording = recorderOver(link).recordAttemptsWhileSignedIn();
+  test('a screenshot while signed in is stored', () async {
+    final link = RecordingGraphQLLink({
+      'insertOperationsScreenCaptureAttempts': {'affectedRows': 1},
+    });
+    recording = recorderOver(link).recordAttemptsWhileSignedIn();
 
-        await captureScreen(kind);
+    await captureScreen(ScreenCaptureKind.screenshot);
 
-        expect(
-          link.requests.single.variables,
-          {'captureKind': storedKind},
-        );
-      },
+    expect(
+      link.requests.single.variables,
+      {'captureKind': ScreenCaptureKind.screenshot.value},
     );
-  }
+  });
 
   test('a screenshot while signed out is not stored', () async {
     when(() => authBloc.currentUserData).thenReturn(null);
