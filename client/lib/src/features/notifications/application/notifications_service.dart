@@ -333,33 +333,30 @@ class NotificationsService extends BlocObserver {
   Future<bool> requestNotificationsPermission() async {
     final notificationPermissionStatus = await Permission.notification
         .request();
-    final isGranted = await _isFcmPermissionGrantedAfter(
-      notificationPermissionStatus,
-    );
+    if (notificationPermissionStatus == PermissionStatus.granted ||
+        notificationPermissionStatus == PermissionStatus.limited) {
+      final fcmPermission = await _firebaseMessaging.requestPermission();
+
+      return fcmPermission.authorizationStatus ==
+              AuthorizationStatus.authorized ||
+          fcmPermission.authorizationStatus == AuthorizationStatus.provisional;
+    }
+
+    return false;
+  }
+
+  Future<bool> _requestAndTrackNotificationsPermission() async {
+    final previousPermissionStatus = await Permission.notification.status;
+    final isGranted = await requestNotificationsPermission();
 
     _analyticsService.track(
-      NotificationPermissionAnswer(
-        permissionStatus: notificationPermissionStatus.name,
+      NotificationPermissionRequest(
+        previousPermissionStatus: previousPermissionStatus,
         isGranted: isGranted,
       ),
     );
 
     return isGranted;
-  }
-
-  Future<bool> _isFcmPermissionGrantedAfter(
-    PermissionStatus notificationPermissionStatus,
-  ) async {
-    if (notificationPermissionStatus != PermissionStatus.granted &&
-        notificationPermissionStatus != PermissionStatus.limited) {
-      return false;
-    }
-
-    final fcmPermission = await _firebaseMessaging.requestPermission();
-
-    return fcmPermission.authorizationStatus ==
-            AuthorizationStatus.authorized ||
-        fcmPermission.authorizationStatus == AuthorizationStatus.provisional;
   }
 
   @override
@@ -375,7 +372,7 @@ class NotificationsService extends BlocObserver {
 
     if (currentState is! AuthAuthenticated &&
         nextState is AuthAuthenticated &&
-        await requestNotificationsPermission()) {
+        await _requestAndTrackNotificationsPermission()) {
       if (currentState is! AuthInitial) {
         await scheduleDefaultNotifications();
       }
