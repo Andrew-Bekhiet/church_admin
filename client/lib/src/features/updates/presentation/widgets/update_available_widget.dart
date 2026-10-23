@@ -57,7 +57,7 @@ class UpdateAvailableWidget extends StatelessWidget {
                       FilledButton(
                         onPressed: () {
                           AnalyticsService.I.track(
-                            const UpdateNowTap(UpdatePromptSource.banner),
+                            const UpdateInstallTap(UpdatePromptSource.banner),
                           );
                           unawaited(
                             launcherService.launchUrl(
