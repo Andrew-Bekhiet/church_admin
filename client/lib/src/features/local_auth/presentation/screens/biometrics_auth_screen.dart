@@ -150,7 +150,7 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
 
     if (!confirmed || !mounted) return;
 
-    AuthBloc.I.add(const SignOut(SignOutSource.lockScreen));
+    AuthBloc.I.add(const SignOut(SignOutSource.biometricsLockScreen));
   }
 
   @override

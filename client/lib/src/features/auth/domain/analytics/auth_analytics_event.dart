@@ -151,7 +151,7 @@ final class LegalDocumentOpen extends AuthAnalyticsEvent {
 enum SignOutSource {
   signOutButton,
   homeDrawer,
-  lockScreen,
+  biometricsLockScreen,
   accountDeletion,
   sessionRevoked,
 }
