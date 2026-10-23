@@ -124,8 +124,11 @@ class _ExportEntitiesSelectionScreenState
               DataExportListSavedFiles(:final files) =>
                 ExportListSavedFilesBody(
                   files: files,
-                  onTap: _cubit.openExportedFile,
-                  onNewExport: _cubit.switchToSelectingObjects,
+                  onTap: (file) => _cubit.openExportedFile(
+                    file,
+                    ExportFileOpenSource.savedList,
+                  ),
+                  onNewExport: _cubit.startNewExport,
                 ),
               DataExportSelectingObjects(
                 :final areasController,
@@ -143,13 +146,16 @@ class _ExportEntitiesSelectionScreenState
                 progress: progress,
               ),
               DataExportCompleted(:final file) => ExportCompletedBody(
-                onDownload: () => _cubit.openExportedFile(file),
+                onDownload: () => _cubit.openExportedFile(
+                  file,
+                  ExportFileOpenSource.completedScreen,
+                ),
                 onDismiss: _cubit.switchToSavedFiles,
               ),
             },
             floatingActionButton: switch (state) {
               DataExportListSavedFiles() => FloatingActionButton.extended(
-                onPressed: _cubit.switchToSelectingObjects,
+                onPressed: _cubit.startNewExport,
                 icon: const Icon(Symbols.upload),
                 label: const Text('بدء عملية تصدير جديدة'),
               ),
