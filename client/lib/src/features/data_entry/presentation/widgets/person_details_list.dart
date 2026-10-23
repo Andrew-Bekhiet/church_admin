@@ -39,6 +39,7 @@ class PersonDetailsList extends StatelessWidget {
         CopiablePropertyWidget(
           'ملاحظات',
           person.notes,
+          copiedProperty: CopiedEntityProperty.notes,
           showErrorIfEmpty: false,
         ),
         const Divider(thickness: 1),
@@ -58,6 +59,7 @@ class PersonDetailsList extends StatelessWidget {
   }
 
   Future<void> _analysis(BuildContext context, Person person) async {
+    AnalyticsService.I.track(EntityStatisticsOpen(person));
     await PersonAnalysisRoute(
       person: person,
     ).push(context);

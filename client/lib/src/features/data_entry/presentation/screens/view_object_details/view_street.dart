@@ -148,15 +148,18 @@ class _ViewStreetState extends State<ViewStreet> {
                 style: Theme.of(context).filledTonalButtonStyleWorkaround,
                 label: const Text('الموقع على الخريطة'),
                 icon: const Icon(Symbols.map),
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ViewGeodataMap(
-                      initialGeomapOptions: GeomapOptions(
-                        selectedStreets: {street},
+                onPressed: () {
+                  AnalyticsService.I.track(EntityMapShow(street));
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ViewGeodataMap(
+                        initialGeomapOptions: GeomapOptions(
+                          selectedStreets: {street},
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ),
           ListTile(
@@ -169,6 +172,7 @@ class _ViewStreetState extends State<ViewStreet> {
           ),
           HistoryProperty(
             name: 'أخر افتقاد',
+            trackedAs: TrackedHistory(HistoryKind.visit, street),
             value: street.lastVisit?.time,
             getHistoryListController: () => ViewableObjectListController(
               objectsPaginatableStream: DatabaseService.I.history
@@ -181,6 +185,7 @@ class _ViewStreetState extends State<ViewStreet> {
           ),
           HistoryProperty(
             name: 'أخر تحديث للبيانات',
+            trackedAs: TrackedHistory(HistoryKind.edit, street),
             value: street.lastEdit?.time,
             getHistoryListController: () => ViewableObjectListController(
               objectsPaginatableStream: DatabaseService.I.history
@@ -222,6 +227,9 @@ class _ViewStreetState extends State<ViewStreet> {
             ],
             onTap: (newIndex) {
               if (newIndex == 0) {
+                AnalyticsService.I.track(
+                  EntityChildCreateTap(street, AnalyticsEntityType.family),
+                );
                 unawaited(
                   EditFamilyRoute(
                     intent: CreateFamilyAtAddress(
@@ -230,12 +238,18 @@ class _ViewStreetState extends State<ViewStreet> {
                   ).push(context),
                 );
               } else if (newIndex == 1) {
+                AnalyticsService.I.track(
+                  EntityChildCreateTap(street, AnalyticsEntityType.person),
+                );
                 unawaited(
                   EditPersonRoute(
                     intent: CreatePersonOnStreet(street: street),
                   ).push(context),
                 );
               } else if (newIndex == 2) {
+                AnalyticsService.I.track(
+                  EntityChildCreateTap(street, AnalyticsEntityType.store),
+                );
                 unawaited(
                   const EditStoreRoute().push(context),
                 );

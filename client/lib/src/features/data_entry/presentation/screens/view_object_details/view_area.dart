@@ -170,19 +170,23 @@ class _ViewAreaState extends State<ViewArea> {
               child: FilledButton.icon(
                 label: const Text('الموقع على الخريطة'),
                 icon: const Icon(Symbols.map),
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ViewGeodataMap(
-                      initialGeomapOptions: GeomapOptions(
-                        selectedAreas: {area},
+                onPressed: () {
+                  AnalyticsService.I.track(EntityMapShow(area));
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ViewGeodataMap(
+                        initialGeomapOptions: GeomapOptions(
+                          selectedAreas: {area},
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ),
           HistoryProperty(
             name: 'أخر افتقاد',
+            trackedAs: TrackedHistory(HistoryKind.visit, area),
             value: area.lastVisit?.time,
             getHistoryListController: () => ViewableObjectListController(
               objectsPaginatableStream: DatabaseService.I.history
@@ -193,6 +197,7 @@ class _ViewAreaState extends State<ViewArea> {
           ),
           HistoryProperty(
             name: 'أخر تحديث للبيانات',
+            trackedAs: TrackedHistory(HistoryKind.edit, area),
             value: area.lastEdit?.time,
             getHistoryListController: () => ViewableObjectListController(
               objectsPaginatableStream: DatabaseService.I.history
@@ -241,24 +246,36 @@ class _ViewAreaState extends State<ViewArea> {
             ],
             onTap: (newIndex) {
               if (newIndex == 0) {
+                AnalyticsService.I.track(
+                  EntityChildCreateTap(area, AnalyticsEntityType.street),
+                );
                 unawaited(
                   EditStreetRoute(
                     intent: CreateStreetInArea(area: area),
                   ).push(context),
                 );
               } else if (newIndex == 1) {
+                AnalyticsService.I.track(
+                  EntityChildCreateTap(area, AnalyticsEntityType.family),
+                );
                 unawaited(
                   EditFamilyRoute(
                     intent: CreateFamilyAtAddress(address: Address(area: area)),
                   ).push(context),
                 );
               } else if (newIndex == 2) {
+                AnalyticsService.I.track(
+                  EntityChildCreateTap(area, AnalyticsEntityType.person),
+                );
                 unawaited(
                   EditPersonRoute(
                     intent: CreatePersonInArea(area: area),
                   ).push(context),
                 );
               } else if (newIndex == 3) {
+                AnalyticsService.I.track(
+                  EntityChildCreateTap(area, AnalyticsEntityType.store),
+                );
                 unawaited(
                   const EditStoreRoute().push(context),
                 );

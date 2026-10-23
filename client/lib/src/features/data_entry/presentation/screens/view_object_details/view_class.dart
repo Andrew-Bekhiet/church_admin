@@ -72,6 +72,7 @@ class _ViewClassState extends State<ViewClass> {
         delegate: SliverChildListDelegate([
           HistoryProperty(
             name: 'أخر تحديث للبيانات',
+            trackedAs: TrackedHistory(HistoryKind.edit, $class),
             value: $class.lastEdit?.time,
             getHistoryListController: () => ViewableObjectListController(
               objectsPaginatableStream: DatabaseService.I.history
@@ -85,13 +86,16 @@ class _ViewClassState extends State<ViewClass> {
               style: Theme.of(context).largeFilledButtonStyle,
               icon: const Icon(Symbols.query_stats),
               label: const Text('الاحصائيات'),
-              onPressed: () => unawaited(
-                MeetingsAnalysisRoute(
-                  title: 'احصائيات ${$class.name}',
-                  initialRangePreset: PastQuarterDateTimeRangePreset(),
-                  subject: ClassAnalysisSubject($class),
-                ).push(context),
-              ),
+              onPressed: () {
+                AnalyticsService.I.track(EntityStatisticsOpen($class));
+                unawaited(
+                  MeetingsAnalysisRoute(
+                    title: 'احصائيات ${$class.name}',
+                    initialRangePreset: PastQuarterDateTimeRangePreset(),
+                    subject: ClassAnalysisSubject($class),
+                  ).push(context),
+                );
+              },
             ),
           ),
         ]),
@@ -118,9 +122,16 @@ class _ViewClassState extends State<ViewClass> {
       floatingActionButtonBuilder: (context, tabController, class$) =>
           FloatingActionButton(
             key: ViewClassKeys.addPersonButton,
-            onPressed: () => EditPersonRoute(
-              intent: CreatePersonInClass(class$: class$),
-            ).push(context),
+            onPressed: () {
+              AnalyticsService.I.track(
+                EntityChildCreateTap(class$, AnalyticsEntityType.person),
+              );
+              unawaited(
+                EditPersonRoute(
+                  intent: CreatePersonInClass(class$: class$),
+                ).push(context),
+              );
+            },
             child: const Icon(Symbols.person_add),
           ),
     );

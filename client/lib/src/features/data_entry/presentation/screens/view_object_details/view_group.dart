@@ -111,26 +111,35 @@ class _ViewGroupState extends State<ViewGroup> {
                   style: Theme.of(context).largeFilledButtonStyle,
                   icon: const Icon(Symbols.productivity),
                   label: Text('تسجيل الحضور ل${defaultMeeting.name}'),
-                  onPressed: () => RecordAttendanceRoute(
-                    meeting: defaultMeeting,
-                  ).push(context),
+                  onPressed: () {
+                    AnalyticsService.I.track(EntityAttendanceRecordOpen(group));
+                    unawaited(
+                      RecordAttendanceRoute(
+                        meeting: defaultMeeting,
+                      ).push(context),
+                    );
+                  },
                 ),
               ),
             ListTile(
               title: FilledButton.icon(
                 icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
-                onPressed: () => unawaited(
-                  MeetingsAnalysisRoute(
-                    title: 'احصائيات ${group.name}',
-                    initialRangePreset: PastQuarterDateTimeRangePreset(),
-                    subject: GroupAnalysisSubject(group),
-                  ).push(context),
-                ),
+                onPressed: () {
+                  AnalyticsService.I.track(EntityStatisticsOpen(group));
+                  unawaited(
+                    MeetingsAnalysisRoute(
+                      title: 'احصائيات ${group.name}',
+                      initialRangePreset: PastQuarterDateTimeRangePreset(),
+                      subject: GroupAnalysisSubject(group),
+                    ).push(context),
+                  );
+                },
               ),
             ),
             HistoryProperty(
               name: 'أخر تحديث للبيانات',
+              trackedAs: TrackedHistory(HistoryKind.edit, group),
               value: group.lastEdit?.time,
               getHistoryListController: () => ViewableObjectListController(
                 objectsPaginatableStream: DatabaseService.I.history
@@ -166,9 +175,16 @@ class _ViewGroupState extends State<ViewGroup> {
       ),
       floatingActionButtonBuilder: (context, tabController, group) =>
           FloatingActionButton(
-            onPressed: () => EditPersonRoute(
-              intent: CreatePersonInGroup(group: group),
-            ).push(context),
+            onPressed: () {
+              AnalyticsService.I.track(
+                EntityChildCreateTap(group, AnalyticsEntityType.person),
+              );
+              unawaited(
+                EditPersonRoute(
+                  intent: CreatePersonInGroup(group: group),
+                ).push(context),
+              );
+            },
             child: const Icon(Symbols.person_add),
           ),
     );
