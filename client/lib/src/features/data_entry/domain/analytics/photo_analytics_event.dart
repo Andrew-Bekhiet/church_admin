@@ -31,15 +31,16 @@ final class PhotoDeleteChoose extends PhotoAnalyticsEvent {
 }
 
 final class PhotoFullscreenOpen extends PhotoAnalyticsEvent {
-  final Object entity;
+  final Json entityProperties;
 
   @override
   String get objectAction => 'fullscreen_open';
 
   @override
-  Json get properties => AnalyticsEntityType.propertiesOf(entity);
+  Json get properties => entityProperties;
 
-  const PhotoFullscreenOpen(this.entity);
+  PhotoFullscreenOpen(Object entity)
+    : entityProperties = AnalyticsEntityType.propertiesOf(entity);
 }
 
 enum PhotoPickOutcome {

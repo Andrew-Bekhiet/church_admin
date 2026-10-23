@@ -20,60 +20,57 @@ final class EntityPropertyCopy extends EntityAnalyticsEvent {
   const EntityPropertyCopy(this.copiedProperty);
 }
 
-final class EntityMapShow extends EntityAnalyticsEvent {
-  final ViewableWithID entity;
+sealed class SingleEntityAnalyticsEvent extends EntityAnalyticsEvent {
+  final Json entityProperties;
 
+  @override
+  Json get properties => entityProperties;
+
+  SingleEntityAnalyticsEvent(ViewableWithID entity)
+    : entityProperties = AnalyticsEntityType.propertiesOf(entity);
+}
+
+final class EntityMapShow extends SingleEntityAnalyticsEvent {
   @override
   String get objectAction => 'map_show';
 
-  @override
-  Json get properties => AnalyticsEntityType.propertiesOf(entity);
-
-  const EntityMapShow(this.entity);
+  EntityMapShow(super.entity);
 }
 
-final class EntityAttendanceRecordOpen extends EntityAnalyticsEvent {
-  final ViewableWithID entity;
-
+final class EntityAttendanceRecordOpen extends SingleEntityAnalyticsEvent {
   @override
   String get objectAction => 'attendance_record_open';
 
-  @override
-  Json get properties => AnalyticsEntityType.propertiesOf(entity);
-
-  const EntityAttendanceRecordOpen(this.entity);
+  EntityAttendanceRecordOpen(super.entity);
 }
 
-final class EntityStatisticsOpen extends EntityAnalyticsEvent {
-  final ViewableWithID entity;
-
+final class EntityStatisticsOpen extends SingleEntityAnalyticsEvent {
   @override
   String get objectAction => 'statistics_open';
 
-  @override
-  Json get properties => AnalyticsEntityType.propertiesOf(entity);
-
-  const EntityStatisticsOpen(this.entity);
+  EntityStatisticsOpen(super.entity);
 }
 
 final class EntityShowMoreTap extends EntityAnalyticsEvent {
-  final List<Object> items;
+  final AnalyticsEntityType? entityType;
+  final int itemCount;
 
   @override
   String get objectAction => 'show_more_tap';
 
   @override
   Json get properties => {
-    if (AnalyticsEntityType.of(items.firstOrNull) case final type?)
-      'entity_type': type.key,
-    'item_count': items.length,
+    if (entityType case final type?) 'entity_type': type.key,
+    'item_count': itemCount,
   };
 
-  const EntityShowMoreTap(this.items);
+  EntityShowMoreTap(List<Object> items)
+    : entityType = AnalyticsEntityType.of(items.firstOrNull),
+      itemCount = items.length;
 }
 
 final class EntityRelatedCreateTap extends EntityAnalyticsEvent {
-  final ViewableWithID viewed;
+  final Json viewedEntityProperties;
   final AnalyticsEntityType relatedType;
   final EntityRelation relation;
 
@@ -82,19 +79,20 @@ final class EntityRelatedCreateTap extends EntityAnalyticsEvent {
 
   @override
   Json get properties => {
-    ...AnalyticsEntityType.propertiesOf(viewed),
+    ...viewedEntityProperties,
     'related_entity_type': relatedType.key,
     'relation': relation.name,
   };
 
-  const EntityRelatedCreateTap(
-    this.viewed,
+  EntityRelatedCreateTap(
+    ViewableWithID viewed,
     this.relatedType, {
     required this.relation,
-  });
+  }) : viewedEntityProperties = AnalyticsEntityType.propertiesOf(viewed);
 
-  const EntityRelatedCreateTap.unlinkedStore(this.viewed)
-    : relatedType = AnalyticsEntityType.store,
+  EntityRelatedCreateTap.unlinkedStore(ViewableWithID viewed)
+    : viewedEntityProperties = AnalyticsEntityType.propertiesOf(viewed),
+      relatedType = AnalyticsEntityType.store,
       relation = EntityRelation.unlinked;
 }
 

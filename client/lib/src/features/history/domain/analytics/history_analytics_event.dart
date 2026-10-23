@@ -1,30 +1,33 @@
 import 'package:church_admin/church_admin.dart';
 
 sealed class HistoryAnalyticsEvent extends AnalyticsEvent {
-  final TrackedHistory history;
+  final HistoryKind historyKind;
+  final Json ownerProperties;
 
   @override
   String get category => 'history';
 
   @override
   Json get properties => {
-    'history_kind': history.kind.name,
-    ...AnalyticsEntityType.propertiesOf(history.owner),
+    'history_kind': historyKind.name,
+    ...ownerProperties,
   };
 
-  const HistoryAnalyticsEvent(this.history);
+  HistoryAnalyticsEvent(TrackedHistory history)
+    : historyKind = history.kind,
+      ownerProperties = AnalyticsEntityType.propertiesOf(history.owner);
 }
 
 final class HistoryRecordNowTap extends HistoryAnalyticsEvent {
   @override
   String get objectAction => 'record_now_tap';
 
-  const HistoryRecordNowTap(super.history);
+  HistoryRecordNowTap(super.history);
 }
 
 final class HistoryDialogOpen extends HistoryAnalyticsEvent {
   @override
   String get objectAction => 'dialog_open';
 
-  const HistoryDialogOpen(super.history);
+  HistoryDialogOpen(super.history);
 }

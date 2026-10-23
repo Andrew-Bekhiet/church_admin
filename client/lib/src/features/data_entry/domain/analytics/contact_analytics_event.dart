@@ -7,9 +7,23 @@ sealed class ContactAnalyticsEvent extends AnalyticsEvent {
   const ContactAnalyticsEvent();
 }
 
-final class ContactCallPromptAnswer extends ContactAnalyticsEvent {
-  final ViewableWithID owner;
+sealed class ContactNumberAnalyticsEvent extends ContactAnalyticsEvent {
+  final Json ownerProperties;
   final bool isFamilyNumber;
+
+  @override
+  Json get properties => {
+    ...ownerProperties,
+    'is_family_number': isFamilyNumber,
+  };
+
+  ContactNumberAnalyticsEvent(
+    ViewableWithID owner, {
+    required this.isFamilyNumber,
+  }) : ownerProperties = AnalyticsEntityType.propertiesOf(owner);
+}
+
+final class ContactCallPromptAnswer extends ContactNumberAnalyticsEvent {
   final ContactCallPromptChoice choice;
 
   @override
@@ -17,36 +31,47 @@ final class ContactCallPromptAnswer extends ContactAnalyticsEvent {
 
   @override
   Json get properties => {
-    ...AnalyticsEntityType.propertiesOf(owner),
-    'is_family_number': isFamilyNumber,
+    ...super.properties,
     'call_prompt_choice': choice.name,
   };
 
-  const ContactCallPromptAnswer(
-    this.owner, {
-    required this.isFamilyNumber,
+  ContactCallPromptAnswer(
+    super.owner, {
     required this.choice,
+    required super.isFamilyNumber,
   });
 }
 
-final class ContactDialerOpen extends ContactAnalyticsEvent {
-  final ViewableWithID owner;
-  final bool isFamilyNumber;
-
+final class ContactDialerOpen extends ContactNumberAnalyticsEvent {
   @override
   String get objectAction => 'dialer_open';
 
-  @override
-  Json get properties => {
-    ...AnalyticsEntityType.propertiesOf(owner),
-    'is_family_number': isFamilyNumber,
-  };
+  ContactDialerOpen(super.owner, {required super.isFamilyNumber});
+}
 
-  const ContactDialerOpen(this.owner, {required this.isFamilyNumber});
+final class WhatsappChatOpen extends ContactNumberAnalyticsEvent {
+  @override
+  String get objectAction => 'whatsapp_open';
+
+  WhatsappChatOpen(super.owner, {required super.isFamilyNumber});
+}
+
+final class SmsChatOpen extends ContactNumberAnalyticsEvent {
+  @override
+  String get objectAction => 'sms_open';
+
+  SmsChatOpen(super.owner, {required super.isFamilyNumber});
+}
+
+final class NumberCopy extends ContactNumberAnalyticsEvent {
+  @override
+  String get objectAction => 'number_copy';
+
+  NumberCopy(super.owner, {required super.isFamilyNumber});
 }
 
 final class CallDateRecordAnswer extends ContactAnalyticsEvent {
-  final ViewableWithID owner;
+  final Json ownerProperties;
   final bool isRecordingAccepted;
 
   @override
@@ -54,18 +79,18 @@ final class CallDateRecordAnswer extends ContactAnalyticsEvent {
 
   @override
   Json get properties => {
-    ...AnalyticsEntityType.propertiesOf(owner),
+    ...ownerProperties,
     'is_recording_accepted': isRecordingAccepted,
   };
 
-  const CallDateRecordAnswer(
-    this.owner, {
+  CallDateRecordAnswer(
+    ViewableWithID owner, {
     required this.isRecordingAccepted,
-  });
+  }) : ownerProperties = AnalyticsEntityType.propertiesOf(owner);
 }
 
 final class DeviceContactCreateAttempt extends ContactAnalyticsEvent {
-  final ViewableWithID owner;
+  final Json ownerProperties;
   final DeviceContactCreateOutcome outcome;
   final bool hasPhoto;
 
@@ -74,64 +99,16 @@ final class DeviceContactCreateAttempt extends ContactAnalyticsEvent {
 
   @override
   Json get properties => {
-    ...AnalyticsEntityType.propertiesOf(owner),
+    ...ownerProperties,
     'outcome': outcome.name,
     'has_photo': hasPhoto,
   };
 
-  const DeviceContactCreateAttempt(
-    this.owner, {
+  DeviceContactCreateAttempt(
+    ViewableWithID owner, {
     required this.outcome,
     this.hasPhoto = false,
-  });
-}
-
-final class WhatsappChatOpen extends ContactAnalyticsEvent {
-  final ViewableWithID owner;
-  final bool isFamilyNumber;
-
-  @override
-  String get objectAction => 'whatsapp_open';
-
-  @override
-  Json get properties => {
-    ...AnalyticsEntityType.propertiesOf(owner),
-    'is_family_number': isFamilyNumber,
-  };
-
-  const WhatsappChatOpen(this.owner, {required this.isFamilyNumber});
-}
-
-final class SmsChatOpen extends ContactAnalyticsEvent {
-  final ViewableWithID owner;
-  final bool isFamilyNumber;
-
-  @override
-  String get objectAction => 'sms_open';
-
-  @override
-  Json get properties => {
-    ...AnalyticsEntityType.propertiesOf(owner),
-    'is_family_number': isFamilyNumber,
-  };
-
-  const SmsChatOpen(this.owner, {required this.isFamilyNumber});
-}
-
-final class NumberCopy extends ContactAnalyticsEvent {
-  final ViewableWithID owner;
-  final bool isFamilyNumber;
-
-  @override
-  String get objectAction => 'number_copy';
-
-  @override
-  Json get properties => {
-    ...AnalyticsEntityType.propertiesOf(owner),
-    'is_family_number': isFamilyNumber,
-  };
-
-  const NumberCopy(this.owner, {required this.isFamilyNumber});
+  }) : ownerProperties = AnalyticsEntityType.propertiesOf(owner);
 }
 
 final class DeviceContactsImportAttempt extends ContactAnalyticsEvent {

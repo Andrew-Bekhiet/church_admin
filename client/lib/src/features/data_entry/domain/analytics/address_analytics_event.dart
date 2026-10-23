@@ -9,8 +9,8 @@ sealed class AddressAnalyticsEvent extends AnalyticsEvent {
 
 final class AddressAreaFill extends AddressAnalyticsEvent {
   final AddressAutofillSource autofillSource;
-  final Street street;
-  final Area area;
+  final String streetId;
+  final String areaId;
 
   @override
   String get objectAction => 'area_fill';
@@ -18,20 +18,21 @@ final class AddressAreaFill extends AddressAnalyticsEvent {
   @override
   Json get properties => {
     'autofill_source': autofillSource.name,
-    'street_id': street.id,
-    'area_id': area.id,
+    AnalyticsEntityType.street.idProperty: streetId,
+    AnalyticsEntityType.area.idProperty: areaId,
   };
 
-  const AddressAreaFill({
+  AddressAreaFill({
     required this.autofillSource,
-    required this.street,
-    required this.area,
-  });
+    required Street street,
+    required Area area,
+  }) : streetId = street.id,
+       areaId = area.id;
 }
 
 final class AddressLocationFill extends AddressAnalyticsEvent {
   final AddressAutofillSource autofillSource;
-  final Street street;
+  final String streetId;
 
   @override
   String get objectAction => 'location_fill';
@@ -39,45 +40,43 @@ final class AddressLocationFill extends AddressAnalyticsEvent {
   @override
   Json get properties => {
     'autofill_source': autofillSource.name,
-    'street_id': street.id,
+    AnalyticsEntityType.street.idProperty: streetId,
   };
 
-  const AddressLocationFill({
-    required this.autofillSource,
-    required this.street,
-  });
+  AddressLocationFill({required this.autofillSource, required Street street})
+    : streetId = street.id;
 }
 
-final class AddressSuggestionShow extends AddressAnalyticsEvent {
-  final Address suggested;
+sealed class AddressSuggestionAnalyticsEvent extends AddressAnalyticsEvent {
+  final bool hasArea;
+  final bool hasStreet;
+  final bool hasDistrict;
 
+  @override
+  Json get properties => {
+    'has_area': hasArea,
+    'has_street': hasStreet,
+    'has_district': hasDistrict,
+  };
+
+  AddressSuggestionAnalyticsEvent(Address suggested)
+    : hasArea = suggested.area != null,
+      hasStreet = suggested.street != null,
+      hasDistrict = suggested.district != null;
+}
+
+final class AddressSuggestionShow extends AddressSuggestionAnalyticsEvent {
   @override
   String get objectAction => 'suggestion_show';
 
-  @override
-  Json get properties => {
-    'has_area': suggested.area != null,
-    'has_street': suggested.street != null,
-    'has_district': suggested.district != null,
-  };
-
-  const AddressSuggestionShow(this.suggested);
+  AddressSuggestionShow(super.suggested);
 }
 
-final class AddressSuggestionAccept extends AddressAnalyticsEvent {
-  final Address suggested;
-
+final class AddressSuggestionAccept extends AddressSuggestionAnalyticsEvent {
   @override
   String get objectAction => 'suggestion_accept';
 
-  @override
-  Json get properties => {
-    'has_area': suggested.area != null,
-    'has_street': suggested.street != null,
-    'has_district': suggested.district != null,
-  };
-
-  const AddressSuggestionAccept(this.suggested);
+  AddressSuggestionAccept(super.suggested);
 }
 
 final class StaleLocationReminderShow extends AddressAnalyticsEvent {
@@ -102,27 +101,27 @@ final class StaleLocationReminderDismiss extends AddressAnalyticsEvent {
 }
 
 final class DistrictCreate extends AddressAnalyticsEvent {
-  final District district;
+  final String districtId;
 
   @override
   String get objectAction => 'district_create';
 
   @override
-  Json get properties => {'district_id': district.id};
+  Json get properties => {'district_id': districtId};
 
-  const DistrictCreate(this.district);
+  DistrictCreate(District district) : districtId = district.id;
 }
 
 final class FamilyAddressFill extends AddressAnalyticsEvent {
-  final Family family;
+  final String familyId;
 
   @override
   String get objectAction => 'family_address_fill';
 
   @override
-  Json get properties => {'family_id': family.id};
+  Json get properties => {AnalyticsEntityType.family.idProperty: familyId};
 
-  const FamilyAddressFill(this.family);
+  FamilyAddressFill(Family family) : familyId = family.id;
 }
 
 enum AddressAutofillSource { singleAreaStreet, geocodedHouseNumber }
