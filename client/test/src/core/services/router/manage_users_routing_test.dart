@@ -93,4 +93,22 @@ void main() {
     expect(find.byType(ManageUsersScreen), findsNothing);
     expect(find.byType(HomeScreen), findsOneWidget);
   });
+
+  testWidgets(
+    'user management popped as the signed-in user changes stays closed',
+    (tester) async {
+      harness.signIn(userManager);
+      await harness.pump(tester);
+      await harness.open(tester, const ManageUsersRoute());
+      await harness.unlockWithPassword(tester);
+
+      harness.router.navigator?.pop();
+      harness.signIn(userManager);
+      await harness.settle(tester);
+
+      expect(find.byType(ManageUsersScreen), findsNothing);
+      expect(passwordField, findsNothing);
+      expect(find.byType(HomeScreen), findsOneWidget);
+    },
+  );
 }
