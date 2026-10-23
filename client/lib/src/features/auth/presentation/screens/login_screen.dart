@@ -43,18 +43,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordConfirmationController = TextEditingController();
 
   late final _termsOfServiceRecognizer = TapGestureRecognizer()
-    ..onTap = () => LauncherService.I.launchUrl(
-      Uri.parse(
-        'https://church-data-admin.firebaseapp.com/terms-of-service/',
-      ),
-    );
+    ..onTap = () => _openLegalDocument(LegalDocument.termsOfService);
 
   late final _privacyPolicyRecognizer = TapGestureRecognizer()
-    ..onTap = () => LauncherService.I.launchUrl(
-      Uri.parse(
-        'https://church-data-admin.firebaseapp.com/privacy-policy/',
-      ),
-    );
+    ..onTap = () => _openLegalDocument(LegalDocument.privacyPolicy);
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SessionReplayUnmask(
                     child: AuthModeSwitch(
                       isLogin: _isLogin,
-                      onToggle: () => setState(() => _isLogin = !_isLogin),
+                      onToggle: _toggleMode,
                     ),
                   ),
                   const SizedBox(height: 50),
@@ -137,6 +129,21 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         );
       },
+    );
+  }
+
+  Future<void> _openLegalDocument(LegalDocument document) {
+    AnalyticsService.I.track(LegalDocumentOpen(document));
+
+    return LauncherService.I.launchUrl(Uri.parse(document.url));
+  }
+
+  void _toggleMode() {
+    setState(() => _isLogin = !_isLogin);
+    AnalyticsService.I.track(
+      LoginModeSwitch(
+        _isLogin ? LoginScreenMode.login : LoginScreenMode.signUp,
+      ),
     );
   }
 

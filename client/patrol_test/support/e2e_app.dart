@@ -33,7 +33,7 @@ abstract final class E2eApp {
     await _runMainDismissingPermissionDialog($);
 
     if (AuthBloc.I.state is! AuthUnauthenticated) {
-      AuthBloc.I.add(const SignOut());
+      AuthBloc.I.add(const SignOut(SignOutSource.signOutButton));
     }
 
     await $.tester.waitFor(loginButton, timeout: const Duration(minutes: 1));

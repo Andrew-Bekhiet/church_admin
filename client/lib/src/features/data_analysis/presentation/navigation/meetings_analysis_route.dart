@@ -11,6 +11,17 @@ class MeetingsAnalysisRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties => {
+    'range_days': initialRangePreset.duration.inDays,
+    ...switch (subject) {
+      MeetingAnalysisSubject(:final meeting) => {'meeting_id': meeting.id},
+      ServiceAnalysisSubject(:final service) => {'service_id': service.id},
+      GroupAnalysisSubject(:final group) => {'group_id': group.id},
+      ClassAnalysisSubject(:final class$) => {'class_id': class$.id},
+    },
+  };
+
+  @override
   List<Object?> get props => [title, initialRangePreset, subject];
 
   const MeetingsAnalysisRoute({

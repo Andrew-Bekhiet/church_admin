@@ -58,6 +58,8 @@ sealed class AppRoute extends KaiselRoute {
 
   List<AppRoute> get breadcrumbs => [this];
 
+  Json get analyticsProperties => const {};
+
   const AppRoute();
 
   Widget build(BuildContext context);

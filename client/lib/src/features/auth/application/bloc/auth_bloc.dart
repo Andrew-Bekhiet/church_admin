@@ -20,6 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final Stream<bool> _connectivityStream;
   final FunctionsService _functionsService;
   final FeatureFlagsRepository _featureFlagsRepository;
+  final AnalyticsService _analyticsService;
 
   Timer? _refreshTokenTimer;
 
@@ -71,6 +72,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this._connectivityStream,
     required this._functionsService,
     required this._featureFlagsRepository,
+    required this._analyticsService,
     bool loadCachedUser = true,
   }) : super(const AuthInitial()) {
     on<ListenToSubscriptions>(
@@ -198,7 +200,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } catch (e, stackTrace) {
       switch (e) {
         case SessionRevokedException():
-          add(const SignOut());
+          add(const SignOut(SignOutSource.sessionRevoked));
 
         case AuthNetworkException() || StateError():
           return;
@@ -242,14 +244,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
 
       await _authStorage.saveUserPasswordHash(event.email, event.password);
+      _analyticsService.track(const SignInSubmit());
     } catch (e, stackTrace) {
-      emit(
-        AuthExceptionState(
-          exception: e,
-          stackTrace: stackTrace,
-          previousState: state,
-        ),
-      );
+      _analyticsService.track(SignInSubmit(failure: e));
+      _emitFailure(emit, e, stackTrace);
     }
   }
 
@@ -267,14 +265,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       await _authStorage.saveUserPasswordHash(event.email, event.password);
       await _authRepository.sendEmailVerification();
+      _analyticsService.track(const SignUpSubmit());
     } catch (e, stackTrace) {
-      emit(
-        AuthExceptionState(
-          exception: e,
-          stackTrace: stackTrace,
-          previousState: state,
-        ),
-      );
+      _analyticsService.track(SignUpSubmit(failure: e));
+      _emitFailure(emit, e, stackTrace);
     }
   }
 
@@ -288,16 +282,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading(previousState: previousState));
 
       await _authRepository.sendPasswordResetEmail(email: event.email);
+      _analyticsService.track(const PasswordResetSend());
 
       emit(previousState);
     } catch (e, stackTrace) {
-      emit(
-        AuthExceptionState(
-          exception: e,
-          stackTrace: stackTrace,
-          previousState: state,
-        ),
-      );
+      _analyticsService.track(PasswordResetSend(failure: e));
+      _emitFailure(emit, e, stackTrace);
     }
   }
 
@@ -308,17 +298,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(AuthLoading(previousState: state));
 
+      _analyticsService.track(SignOutRequest(event.source));
       await _authRepository.signOut();
 
       emit(const AuthUnauthenticated());
     } catch (e, stackTrace) {
-      emit(
-        AuthExceptionState(
-          exception: e,
-          stackTrace: stackTrace,
-          previousState: state,
-        ),
-      );
+      _emitFailure(emit, e, stackTrace);
     }
   }
 
@@ -331,15 +316,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading(previousState: previousState));
       await _authRepository.reload();
 
-      if (!(currentUser?.emailVerified ?? false)) emit(previousState);
+      final isVerified = currentUser?.emailVerified ?? false;
+      _analyticsService.track(EmailVerificationCheck(isVerified: isVerified));
+      if (!isVerified) emit(previousState);
     } catch (e, stackTrace) {
-      emit(
-        AuthExceptionState(
-          exception: e,
-          stackTrace: stackTrace,
-          previousState: state,
-        ),
-      );
+      _emitFailure(emit, e, stackTrace);
     }
   }
 
@@ -348,7 +329,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       return;
     }
 
-    if (!await _functionsService.tryClaimAccount()) return;
+    final isClaimed = await _functionsService.tryClaimAccount();
+    _analyticsService.track(AccountClaimByEmail(isClaimed: isClaimed));
+    if (!isClaimed) return;
 
     await _authRepository.refreshToken();
   }
@@ -363,7 +346,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await _functionsService.applyInvitationCode(event.code);
       await _authRepository.reload();
       await _authRepository.refreshToken();
+      _analyticsService.track(const InvitationCodeApply());
     } catch (e, stackTrace) {
+      _analyticsService.track(InvitationCodeApply(failure: e));
       emit(
         AuthExceptionState(
           exception: e,
@@ -383,18 +368,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading(previousState: previousState));
 
       await _authRepository.sendEmailVerification();
+      _analyticsService.track(const EmailVerificationResend());
 
       emit(previousState);
     } catch (e, stackTrace) {
-      emit(
-        AuthExceptionState(
-          exception: e,
-          stackTrace: stackTrace,
-          previousState: state,
-        ),
-      );
+      _emitFailure(emit, e, stackTrace);
     }
   }
+
+  void _emitFailure(
+    Emitter<AuthState> emit,
+    Object error,
+    StackTrace stackTrace,
+  ) => emit(
+    AuthExceptionState(
+      exception: error,
+      stackTrace: stackTrace,
+      previousState: state,
+    ),
+  );
 
   @override
   Future<void> close() async {

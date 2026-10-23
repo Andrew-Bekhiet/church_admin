@@ -17,6 +17,7 @@ class InitializationService {
   Set<Initializer> get steps => const {
     WebNavigationInit(),
     LoggingInit(),
+    AnalyticsInit(),
     PackageInfoInit(),
     DeviceInfoInit(),
     SembastInit(),

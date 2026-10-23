@@ -10,6 +10,9 @@ class ViewFamilyRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties => {'family_id': id};
+
+  @override
   List<Object?> get props => [id, family];
 
   const ViewFamilyRoute({required this.id, this.family});

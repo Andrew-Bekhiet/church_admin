@@ -1,6 +1,7 @@
 export 'utils/color_argb_value.dart';
 export 'utils/date_time_extensions.dart';
 export 'utils/globals.dart';
+export 'utils/json_non_null_pairs.dart';
 export 'utils/list_max_frequency_or_null.dart';
 export 'utils/liturgy_season.dart';
 export 'utils/operation_definition_node_first_selection_node.dart';

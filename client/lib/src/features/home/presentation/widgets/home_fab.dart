@@ -38,7 +38,9 @@ class HomeFAB extends StatelessWidget {
               )
               .toList(),
           onTap: (i) {
-            if (tabs[i].createRoute case final route?) {
+            final tab = tabs[i];
+            if (tab.createRoute case final route?) {
+              AnalyticsService.I.track(HomeCreateTap(tab));
               unawaited(route.push(context));
             }
           },

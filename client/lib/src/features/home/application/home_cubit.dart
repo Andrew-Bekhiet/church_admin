@@ -36,6 +36,7 @@ class HomeCubit extends Cubit<HomeState> {
   final UserPersistenceService _userPersistenceService;
   final DatabaseService _databaseService;
   final Stream<User?> _userStream;
+  final AnalyticsService _analyticsService;
 
   late final HomeListControllers _listControllers = HomeListControllers(
     databaseService: _databaseService,
@@ -52,6 +53,7 @@ class HomeCubit extends Cubit<HomeState> {
     required this._authRepository,
     required this._localAuthService,
     required this._userPersistenceService,
+    required this._analyticsService,
   }) : _userStream = userDataStream.shareReplay(maxSize: 1),
        super(
          _initialState(
@@ -78,17 +80,32 @@ class HomeCubit extends Cubit<HomeState> {
     _followCurrentTabTotal();
   }
 
-  Future<void> changeMode(HomeMode mode) {
+  Future<void> changeMode(HomeMode mode, HomeModeSwitchEntry entry) {
     final sameEntityIndex = mode.tabs.indexWhere(
       (tab) => tab.entity == state.currentTab.entity,
     );
 
-    return _enterMode(mode, sameEntityIndex == -1 ? 1 : sameEntityIndex);
+    return _enterMode(
+      mode,
+      sameEntityIndex == -1 ? 1 : sameEntityIndex,
+      entry,
+    );
   }
 
-  Future<void> openFirstTabOf(HomeMode mode) => _enterMode(mode, 1);
+  Future<void> openFirstTabOf(HomeMode mode) =>
+      _enterMode(mode, 1, HomeModeSwitchEntry.summaryCard);
 
-  Future<void> _enterMode(HomeMode mode, int tabIndex) async {
+  Future<void> _enterMode(
+    HomeMode mode,
+    int tabIndex,
+    HomeModeSwitchEntry entry,
+  ) async {
+    final modeChanges = state.mode != mode;
+    if (modeChanges) {
+      _analyticsService.track(
+        HomeModeSwitch(from: state.mode, to: mode, entry: entry),
+      );
+    }
     await _userPreferencesService.setLastHomeMode(mode);
 
     if (isClosed) return;
@@ -104,10 +121,13 @@ class HomeCubit extends Cubit<HomeState> {
     _followCurrentTabTotal();
   }
 
-  Future<void> switchMode() => changeMode(switch (state.mode) {
-    HomeMode.sundaySchool => HomeMode.churchData,
-    HomeMode.churchData => HomeMode.sundaySchool,
-  });
+  Future<void> switchMode(HomeModeSwitchEntry entry) => changeMode(
+    switch (state.mode) {
+      HomeMode.sundaySchool => HomeMode.churchData,
+      HomeMode.churchData => HomeMode.sundaySchool,
+    },
+    entry,
+  );
 
   void toggleListType() {
     final currentListType = state.listTypeOf(state.currentTab);
@@ -120,6 +140,7 @@ class HomeCubit extends Cubit<HomeState> {
       ViewableObjectListType.grid3 => ViewableObjectListType.list,
     };
 
+    _analyticsService.track(HomeListTypeToggle(state.currentTab, newListType));
     emit(
       state.copyWith(
         listTypes: {...state.listTypes, state.currentTab: newListType},
@@ -128,6 +149,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void showAnotherDailyText(HomeDailyDataType type) {
+    _analyticsService.track(DailyTextRefresh(type));
     final newText = switch (type) {
       HomeDailyDataType.verse => _homeDailyDataRepository.getVerse(
         forceRefresh: true,
@@ -147,6 +169,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> signOut() async {
+    _analyticsService.track(const SignOutRequest(SignOutSource.homeDrawer));
     _localAuthService.scheduleReauth();
     await _authRepository.signOut();
   }

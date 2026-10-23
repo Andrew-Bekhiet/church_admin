@@ -9,6 +9,9 @@ class UserAnalysisRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties => {'user_id': user.uid};
+
+  @override
   List<Object?> get props => [user];
 
   const UserAnalysisRoute({required this.user});

@@ -10,6 +10,9 @@ class ViewStreetRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
+  Json get analyticsProperties => {'street_id': id};
+
+  @override
   List<Object?> get props => [id, street];
 
   const ViewStreetRoute({required this.id, this.street});

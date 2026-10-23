@@ -1,5 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 
+import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
+
 import 'fake_auth_repository.dart';
 import 'fake_home_daily_data_repository.dart';
 import 'fake_local_auth_service.dart';
@@ -14,6 +17,7 @@ class HomeCubitFixture {
   final Stream<User?> userDataStream;
   final FakeAuthRepository authRepository = FakeAuthRepository();
   final FakeLocalAuthService localAuthService = FakeLocalAuthService();
+  final RecordingAnalyticsProvider analytics = RecordingAnalyticsProvider();
 
   HomeCubitFixture({
     HomeMode? lastHomeMode = HomeMode.sundaySchool,
@@ -35,5 +39,6 @@ class HomeCubitFixture {
     authRepository: authRepository,
     localAuthService: localAuthService,
     userPersistenceService: RecordingUserPersistenceService(),
+    analyticsService: AnalyticsService([analytics], FakeLoggingService()),
   );
 }
