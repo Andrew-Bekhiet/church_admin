@@ -1,8 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 
 sealed class AuthAnalyticsEvent extends AnalyticsEvent {
-  static String failureKindOf(Object? error) => switch (error) {
-    null => 'none',
+  static String failureKindOf(Object error) => switch (error) {
     IncorrectCredentialsException() => 'incorrect_credentials',
     EmailAlreadyInUseException() => 'email_already_in_use',
     WeakPasswordException() => 'weak_password',
@@ -27,7 +26,8 @@ final class SignInSubmit extends AuthAnalyticsEvent {
   @override
   Json get properties => {
     'is_success': failure == null,
-    'failure_kind': AuthAnalyticsEvent.failureKindOf(failure),
+    if (failure case final Object failure)
+      'failure_kind': AuthAnalyticsEvent.failureKindOf(failure),
   };
 
   const SignInSubmit({this.failure});
@@ -42,7 +42,8 @@ final class SignUpSubmit extends AuthAnalyticsEvent {
   @override
   Json get properties => {
     'is_success': failure == null,
-    'failure_kind': AuthAnalyticsEvent.failureKindOf(failure),
+    if (failure case final Object failure)
+      'failure_kind': AuthAnalyticsEvent.failureKindOf(failure),
   };
 
   const SignUpSubmit({this.failure});
@@ -69,7 +70,8 @@ final class PasswordResetSend extends AuthAnalyticsEvent {
   @override
   Json get properties => {
     'is_success': failure == null,
-    'failure_kind': AuthAnalyticsEvent.failureKindOf(failure),
+    if (failure case final Object failure)
+      'failure_kind': AuthAnalyticsEvent.failureKindOf(failure),
   };
 
   const PasswordResetSend({this.failure});
@@ -103,7 +105,8 @@ final class InvitationCodeApply extends AuthAnalyticsEvent {
   @override
   Json get properties => {
     'is_success': failure == null,
-    'failure_kind': AuthAnalyticsEvent.failureKindOf(failure),
+    if (failure case final Object failure)
+      'failure_kind': AuthAnalyticsEvent.failureKindOf(failure),
   };
 
   const InvitationCodeApply({this.failure});
