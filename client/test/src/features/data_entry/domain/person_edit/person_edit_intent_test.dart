@@ -183,22 +183,4 @@ void main() {
       expect(person.gender, isFalse);
     });
   });
-
-  group('PersonEditIntent analytics properties', () {
-    test('a create in an area names its kind and the area', () {
-      expect(const CreatePersonInArea(area: area).analyticsProperties, {
-        'intent_kind': CreatePersonInArea.kind,
-        'area_id': area.id,
-      });
-    });
-
-    test('an update names the person it edits', () {
-      final person = Person(id: 'person-1', name: 'Mina');
-
-      expect(UpdatePerson(person: person).analyticsProperties, {
-        'intent_kind': UpdatePerson.kind,
-        'person_id': person.id,
-      });
-    });
-  });
 }

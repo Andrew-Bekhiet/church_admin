@@ -4,38 +4,6 @@ sealed class PersonEditIntent extends SerializableExtra {
   @override
   String get typeName => 'PersonEditIntent';
 
-  Json get analyticsProperties => switch (this) {
-    CreatePersonInArea(:final area) => {
-      'intent_kind': CreatePersonInArea.kind,
-      'area_id': area.id,
-    },
-    CreatePersonInClass(:final class$) => {
-      'intent_kind': CreatePersonInClass.kind,
-      'class_id': class$.id,
-    },
-    CreatePersonInFamily(:final family) => {
-      'intent_kind': CreatePersonInFamily.kind,
-      'family_id': family.id,
-    },
-    CreatePersonInGroup(:final group) => {
-      'intent_kind': CreatePersonInGroup.kind,
-      'group_id': group.id,
-    },
-    CreatePersonInService(:final service) => {
-      'intent_kind': CreatePersonInService.kind,
-      'service_id': service.id,
-    },
-    CreatePersonOnStreet(:final street) => {
-      'intent_kind': CreatePersonOnStreet.kind,
-      'street_id': street.id,
-    },
-    CreateBlankPerson() => {'intent_kind': CreateBlankPerson.kind},
-    UpdatePerson(:final person) => {
-      'intent_kind': UpdatePerson.kind,
-      'person_id': person.id,
-    },
-  };
-
   const PersonEditIntent();
 
   factory PersonEditIntent.fromJson(Json json) {

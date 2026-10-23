@@ -4,18 +4,6 @@ sealed class GroupEditIntent extends SerializableExtra {
   @override
   String get typeName => 'GroupEditIntent';
 
-  Json get analyticsProperties => switch (this) {
-    CreateGroupInService(:final service) => {
-      'intent_kind': CreateGroupInService.kind,
-      'service_id': service.id,
-    },
-    CreateBlankGroup() => {'intent_kind': CreateBlankGroup.kind},
-    UpdateGroup(:final group) => {
-      'intent_kind': UpdateGroup.kind,
-      'group_id': group.id,
-    },
-  };
-
   const GroupEditIntent();
 
   factory GroupEditIntent.fromJson(Json json) {

@@ -4,18 +4,6 @@ sealed class ClassEditIntent extends SerializableExtra {
   @override
   String get typeName => 'ClassEditIntent';
 
-  Json get analyticsProperties => switch (this) {
-    CreateClassInService(:final service) => {
-      'intent_kind': CreateClassInService.kind,
-      'service_id': service.id,
-    },
-    CreateBlankClass() => {'intent_kind': CreateBlankClass.kind},
-    UpdateClass(:final class$) => {
-      'intent_kind': UpdateClass.kind,
-      'class_id': class$.id,
-    },
-  };
-
   const ClassEditIntent();
 
   factory ClassEditIntent.fromJson(Json json) {

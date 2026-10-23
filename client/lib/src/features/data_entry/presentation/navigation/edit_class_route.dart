@@ -9,8 +9,17 @@ class EditClassRoute extends HomeChildRoute {
   String get path => routePath;
 
   @override
-  Json get analyticsProperties =>
-      (intent ?? const CreateBlankClass()).analyticsProperties;
+  Json get analyticsProperties => switch (intent ?? const CreateBlankClass()) {
+    CreateClassInService(:final service) => {
+      'intent_kind': CreateClassInService.kind,
+      'service_id': service.id,
+    },
+    CreateBlankClass() => {'intent_kind': CreateBlankClass.kind},
+    UpdateClass(:final class$) => {
+      'intent_kind': UpdateClass.kind,
+      'class_id': class$.id,
+    },
+  };
 
   @override
   List<Object?> get props => [intent];
