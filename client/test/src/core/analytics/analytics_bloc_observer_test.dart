@@ -68,5 +68,60 @@ void main() {
 
       expect(provider.identifiedUsers, isEmpty);
     });
+
+    test(
+      'user data arriving after sign-in identifies the user again',
+      () async {
+        final signedInWithUserData = AuthAuthenticated(
+          authUser: authUser,
+          userData: User(
+            uid: authUser.uid,
+            name: 'name',
+            permissions: PermissionsSet.fromSet({UserPermission.approved}),
+          ),
+        );
+
+        observer.onTransition(
+          MockAuthBloc(),
+          Transition<AuthEvent, AuthState>(
+            currentState: signedIn,
+            event: const ReloadUser(),
+            nextState: signedInWithUserData,
+          ),
+        );
+        await pumpEventQueue();
+
+        expect(
+          provider.identifiedUsers.single?.permissions,
+          [UserPermission.approved.name],
+        );
+      },
+    );
+
+    test('claiming an account mid-session identifies the user', () async {
+      const signedInUnclaimed = AuthAuthenticated(
+        authUser: AuthUser(
+          uid: 'firebase-uid',
+          email: 'servant@example.com',
+          emailVerified: true,
+          idToken: 'token',
+        ),
+      );
+
+      observer.onTransition(
+        MockAuthBloc(),
+        const Transition<AuthEvent, AuthState>(
+          currentState: signedInUnclaimed,
+          event: ReloadUser(),
+          nextState: signedIn,
+        ),
+      );
+      await pumpEventQueue();
+
+      expect(
+        provider.identifiedUsers.single?.id,
+        authUser.hasuraUserId,
+      );
+    });
   });
 }
