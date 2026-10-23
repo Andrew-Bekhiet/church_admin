@@ -8,6 +8,7 @@ import 'package:uuid/uuid.dart';
 class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
   final PhoneNumberService _phones;
   final String Function() _newKey;
+  final AnalyticsService _analyticsService;
 
   Map<String, FamilyPhoneContact> _savedFamilyById;
   late final List<PhoneContactDraft> _initialDrafts;
@@ -25,8 +26,10 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
     Future<List<PersonType>> Function()? fetchFamilyRoles,
     PhoneNumberService? phones,
     String Function()? newKey,
+    AnalyticsService? analyticsService,
   }) : _phones = phones ?? const PhoneNumberService(),
        _newKey = newKey ?? const Uuid().v4,
+       _analyticsService = analyticsService ?? AnalyticsService.I,
        _savedFamilyById = {for (final f in family) f.contact.id: f},
        super(
          const PhoneContactsEditorState(
@@ -82,19 +85,24 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
   void changeFamilyAvailability({required bool hasFamily}) =>
       _emit(hasFamily: hasFamily);
 
-  void add(PhoneContactLabel label) => _emit(
-    drafts: [
-      ...state.drafts,
-      PhoneContactDraft(
-        key: _newKey(),
-        input: '',
-        label: label,
-        isMainPhone:
-            label is FreePhoneContactLabel &&
-            state.drafts.none((d) => d.isMainPhone),
-      ),
-    ],
-  );
+  void add(PhoneContactLabel label) {
+    final isAutoMain =
+        label is FreePhoneContactLabel &&
+        state.drafts.none((d) => d.isMainPhone);
+
+    _analyticsService.track(ContactsPhoneAdd(label, isAutoMain: isAutoMain));
+    _emit(
+      drafts: [
+        ...state.drafts,
+        PhoneContactDraft(
+          key: _newKey(),
+          input: '',
+          label: label,
+          isMainPhone: isAutoMain,
+        ),
+      ],
+    );
+  }
 
   void importNumbers(Iterable<({String label, String number})> numbers) =>
       _emit(
@@ -115,13 +123,16 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
     (draft) => draft.withInput(input, phone: _phones.toE164(input)),
   );
 
-  void changeLabel(String key, PhoneContactLabel label) => _updateDraft(
-    key,
-    (draft) => draft.copyWith(
-      label: label,
-      isMainPhone: label is FreePhoneContactLabel && draft.isMainPhone,
-    ),
-  );
+  void changeLabel(String key, PhoneContactLabel label) {
+    _analyticsService.track(ContactsPhoneLabelChange(label));
+    _updateDraft(
+      key,
+      (draft) => draft.copyWith(
+        label: label,
+        isMainPhone: label is FreePhoneContactLabel && draft.isMainPhone,
+      ),
+    );
+  }
 
   void toggleMain(String key) {
     final toggled = state.drafts.firstWhereOrNull((d) => d.key == key);
@@ -129,6 +140,7 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
 
     final becomesMain = !toggled.isMainPhone;
 
+    _analyticsService.track(ContactsMainPhoneToggle(isMain: becomesMain));
     _emit(
       drafts: [
         for (final draft in state.drafts)
@@ -140,8 +152,13 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
     );
   }
 
-  void remove(String key) =>
-      _emit(drafts: state.drafts.whereNot((d) => d.key == key).toList());
+  void remove(String key) {
+    if (state.drafts.firstWhereOrNull((d) => d.key == key)
+        case final removed?) {
+      _analyticsService.track(ContactsPhoneRemove(removed.label));
+    }
+    _emit(drafts: state.drafts.whereNot((d) => d.key == key).toList());
+  }
 
   PhoneContactDraft _familyDraftOf(FamilyPhoneContact relative) =>
       PhoneContactDraft.ofFamily(
