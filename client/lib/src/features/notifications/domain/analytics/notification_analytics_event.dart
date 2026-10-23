@@ -9,33 +9,39 @@ sealed class NotificationAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class NotificationOpen extends NotificationAnalyticsEvent {
-  final Notification notification;
   final NotificationOpenSource source;
+  final NotificationType notificationType;
+  final bool hasImage;
+  final bool hasQuery;
 
   @override
-  String get objectAction => 'open';
+  String get objectAction => 'notification_open';
 
   @override
   Json get properties => {
     'source': source.name,
-    'notification_type': notification.type.name,
-    'has_image': notification.imageURL != null,
-    'has_query': notification.additionalData?['query'] != null,
+    'notification_type': notificationType.name,
+    'has_image': hasImage,
+    'has_query': hasQuery,
   };
 
-  const NotificationOpen(this.notification, {required this.source});
+  NotificationOpen(Notification notification, {required this.source})
+    : notificationType = notification.type,
+      hasImage = notification.imageURL != null,
+      hasQuery = notification.additionalData?['query'] != null;
 }
 
 final class NotificationSearchResultsOpen extends NotificationAnalyticsEvent {
-  final Notification notification;
+  final NotificationType notificationType;
 
   @override
   String get objectAction => 'search_results_open';
 
   @override
-  Json get properties => {'notification_type': notification.type.name};
+  Json get properties => {'notification_type': notificationType.name};
 
-  const NotificationSearchResultsOpen(this.notification);
+  NotificationSearchResultsOpen(Notification notification)
+    : notificationType = notification.type;
 }
 
 final class NotificationPermissionRequest extends NotificationAnalyticsEvent {
