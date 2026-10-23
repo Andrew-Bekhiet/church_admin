@@ -59,7 +59,7 @@ class HomeSearchCubit extends Cubit<HomeSearchState> {
     };
 
     _analyticsService.track(
-      HomeSearchSubmit(
+      HomeSearchRun(
         queryLength: query.length,
         outcome: outcome,
         sections: sections,

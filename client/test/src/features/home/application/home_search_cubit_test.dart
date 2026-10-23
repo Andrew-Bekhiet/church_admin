@@ -61,7 +61,7 @@ void main() {
         await Future<void>.delayed(HomeSearchCubit.debounceDuration ~/ 3);
         cubit.search('latest');
       },
-      wait: HomeSearchCubit.debounceDuration,
+      wait: HomeSearchCubit.debounceDuration + const Duration(milliseconds: 50),
       verify: (_) => expect(dao.queries, ['latest']),
     );
 

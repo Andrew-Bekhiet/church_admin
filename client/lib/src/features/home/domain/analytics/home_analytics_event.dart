@@ -56,13 +56,13 @@ final class HomeListTypeToggle extends HomeAnalyticsEvent {
   const HomeListTypeToggle(this.tab, this.listType);
 }
 
-final class HomeSearchSubmit extends HomeAnalyticsEvent {
+final class HomeSearchRun extends HomeAnalyticsEvent {
   final int queryLength;
   final HomeSearchOutcome outcome;
   final List<HomeSearchSection> sections;
 
   @override
-  String get objectAction => 'search_submit';
+  String get objectAction => 'search_run';
 
   @override
   Json get properties => {
@@ -72,7 +72,7 @@ final class HomeSearchSubmit extends HomeAnalyticsEvent {
     'result_count': sections.map((section) => section.items.length).sum,
   };
 
-  const HomeSearchSubmit({
+  const HomeSearchRun({
     required this.queryLength,
     required this.outcome,
     this.sections = const [],
