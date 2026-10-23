@@ -219,7 +219,7 @@ class _ViewUserState extends State<ViewUser> {
 
     try {
       await FunctionsService.I.deleteMyAccount();
-      AuthBloc.I.add(const SignOut());
+      AuthBloc.I.add(const SignOut(SignOutSource.accountDeletion));
     } catch (err, stkTrace) {
       await LoggingService.I.exception(
         LogRecord(error: err, stackTrace: stkTrace),

@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class AuthEvent extends Equatable {
@@ -48,9 +49,12 @@ final class SignUpWithEmailPassword extends AuthEvent {
 }
 
 final class SignOut extends AuthEvent {
+  final SignOutSource source;
+
   @override
-  List<Object?> get props => [];
-  const SignOut();
+  List<Object?> get props => [source];
+
+  const SignOut(this.source);
 }
 
 final class ReloadUser extends AuthEvent {

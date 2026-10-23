@@ -22,13 +22,22 @@ class HomeDrawer extends StatelessWidget {
           previous.account != current.account,
       builder: (context, state) {
         final destinations =
-            <({NavigationDrawerDestination destination, VoidCallback onTap})>[
+            <
+              ({
+                NavigationDrawerDestination destination,
+                HomeDrawerDestination? analyticsDestination,
+                VoidCallback onTap,
+              })
+            >[
               (
                 destination: NavigationDrawerDestination(
                   icon: Icon(state.mode.other.icon),
                   label: Text('تبديل إلى ${state.mode.other.label}'),
                 ),
-                onTap: () => unawaited(homeCubit.switchMode()),
+                analyticsDestination: null,
+                onTap: () => unawaited(
+                  homeCubit.switchMode(HomeModeSwitchEntry.drawer),
+                ),
               ),
               if (state.canManageUsers)
                 (
@@ -39,6 +48,7 @@ class HomeDrawer extends StatelessWidget {
                       key: HomeDrawerKeys.manageUsers,
                     ),
                   ),
+                  analyticsDestination: HomeDrawerDestination.manageUsers,
                   onTap: () => const ManageUsersRoute().push(context),
                 ),
               (
@@ -49,6 +59,7 @@ class HomeDrawer extends StatelessWidget {
                     key: HomeDrawerKeys.advancedSearch,
                   ),
                 ),
+                analyticsDestination: HomeDrawerDestination.advancedSearch,
                 onTap: () => const AdvancedSearchRoute().push(context),
               ),
               (
@@ -59,6 +70,7 @@ class HomeDrawer extends StatelessWidget {
                     key: HomeDrawerKeys.exportData,
                   ),
                 ),
+                analyticsDestination: HomeDrawerDestination.exportData,
                 onTap: () => const ExportEntitiesSelectionRoute().push(context),
               ),
               (
@@ -66,6 +78,7 @@ class HomeDrawer extends StatelessWidget {
                   icon: Icon(Symbols.map),
                   label: Text('خريطة الافتقاد'),
                 ),
+                analyticsDestination: HomeDrawerDestination.visitsMap,
                 onTap: () => const VisitsMapRoute().push(context),
               ),
               (
@@ -73,6 +86,7 @@ class HomeDrawer extends StatelessWidget {
                   icon: Icon(Symbols.settings),
                   label: Text('الإعدادات'),
                 ),
+                analyticsDestination: HomeDrawerDestination.settings,
                 onTap: () => const SettingsRoute().push(context),
               ),
               if (kDebugMode)
@@ -81,6 +95,7 @@ class HomeDrawer extends StatelessWidget {
                     icon: Icon(Symbols.developer_mode),
                     label: Text('gql cache'),
                   ),
+                  analyticsDestination: null,
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
@@ -119,6 +134,11 @@ class HomeDrawer extends StatelessWidget {
                     title: const SessionReplayUnmask(child: Text('حسابي')),
                     onTap: () {
                       Scaffold.of(context).openEndDrawer();
+                      AnalyticsService.I.track(
+                        const DrawerDestinationOpen(
+                          HomeDrawerDestination.myAccount,
+                        ),
+                      );
                       unawaited(const MyAccountRoute().push(context));
                     },
                   ),
@@ -128,7 +148,14 @@ class HomeDrawer extends StatelessWidget {
                       onDestinationSelected: (i) {
                         Scaffold.of(context).openEndDrawer();
 
-                        destinations[i].onTap();
+                        final destination = destinations[i];
+                        if (destination.analyticsDestination
+                            case final analyticsDestination?) {
+                          AnalyticsService.I.track(
+                            DrawerDestinationOpen(analyticsDestination),
+                          );
+                        }
+                        destination.onTap();
                       },
                       children: destinations
                           .map((entry) => entry.destination)
@@ -145,6 +172,11 @@ class HomeDrawer extends StatelessWidget {
                         title: const Text('حول'),
                         onTap: () {
                           Scaffold.of(context).openEndDrawer();
+                          AnalyticsService.I.track(
+                            const DrawerDestinationOpen(
+                              HomeDrawerDestination.about,
+                            ),
+                          );
                           unawaited(AboutAppService.I.showAboutDialog(context));
                         },
                       ),

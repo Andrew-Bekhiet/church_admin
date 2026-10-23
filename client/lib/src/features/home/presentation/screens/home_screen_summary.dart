@@ -63,15 +63,23 @@ class _HomeScreenSummaryState extends State<HomeScreenSummary> {
                   const HomeSectionHeader(title: 'اليوم'),
                   HomeBirthdaysSection(
                     birthdays: homeState.birthdays,
-                    onTap: (birthdays) => AdvancedSearchRoute(
-                      initialQuery: birthdays.query,
-                    ).push(context),
+                    onTap: (birthdays) {
+                      AnalyticsService.I.track(
+                        BirthdaysCardTap(birthdays.names.length),
+                      );
+                      unawaited(
+                        AdvancedSearchRoute(
+                          initialQuery: birthdays.query,
+                        ).push(context),
+                      );
+                    },
                   ),
                   HomeDailyTextCards(
                     dailyData: homeState.dailyData,
-                    onTap: (type) => unawaited(
-                      HomeDailyTextSheet.show(context, type),
-                    ),
+                    onTap: (type) {
+                      AnalyticsService.I.track(DailyTextOpen(type));
+                      unawaited(HomeDailyTextSheet.show(context, type));
+                    },
                   ),
                 ],
               ),

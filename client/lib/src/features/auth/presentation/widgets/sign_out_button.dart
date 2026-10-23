@@ -8,7 +8,8 @@ class SignOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
-      onPressed: () => AuthBloc.I.add(const SignOut()),
+      onPressed: () =>
+          AuthBloc.I.add(const SignOut(SignOutSource.signOutButton)),
       icon: const Icon(Symbols.logout),
       label: const Text('تسجيل الخروج'),
     );
