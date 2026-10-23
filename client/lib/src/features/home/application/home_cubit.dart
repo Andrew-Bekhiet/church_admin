@@ -146,7 +146,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void showAnotherDailyText(HomeDailyDataType type) {
-    _analyticsService.track(DailyTextAnother(type));
+    _analyticsService.track(DailyTextRefresh(type));
     final newText = switch (type) {
       HomeDailyDataType.verse => _homeDailyDataRepository.getVerse(
         forceRefresh: true,

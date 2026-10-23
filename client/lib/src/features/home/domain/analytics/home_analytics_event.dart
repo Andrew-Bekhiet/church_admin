@@ -127,16 +127,16 @@ final class DailyTextShare extends HomeAnalyticsEvent {
   const DailyTextShare(this.type);
 }
 
-final class DailyTextAnother extends HomeAnalyticsEvent {
+final class DailyTextRefresh extends HomeAnalyticsEvent {
   final HomeDailyDataType type;
 
   @override
-  String get objectAction => 'daily_text_another';
+  String get objectAction => 'daily_text_refresh';
 
   @override
   Json get properties => {'type': type.name};
 
-  const DailyTextAnother(this.type);
+  const DailyTextRefresh(this.type);
 }
 
 final class DrawerDestinationOpen extends HomeAnalyticsEvent {
