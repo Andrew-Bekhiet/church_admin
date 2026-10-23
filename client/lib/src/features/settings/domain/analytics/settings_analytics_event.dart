@@ -8,7 +8,7 @@ sealed class SettingsAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class ThemeApply extends SettingsAnalyticsEvent {
-  final bool? darkTheme;
+  final ThemeChoice themeChoice;
   final bool isGreatFeastTheme;
 
   @override
@@ -16,11 +16,14 @@ final class ThemeApply extends SettingsAnalyticsEvent {
 
   @override
   Json get properties => {
-    'theme_choice': ThemeChoice.of(darkTheme).name,
+    'theme_choice': themeChoice.name,
     'is_great_feast_theme': isGreatFeastTheme,
   };
 
-  const ThemeApply({required this.darkTheme, required this.isGreatFeastTheme});
+  const ThemeApply({
+    required this.themeChoice,
+    required this.isGreatFeastTheme,
+  });
 }
 
 final class UnsavedChangesPromptShow extends SettingsAnalyticsEvent {
