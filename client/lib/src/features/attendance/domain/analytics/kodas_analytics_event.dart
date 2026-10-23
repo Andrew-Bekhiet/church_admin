@@ -1,27 +1,37 @@
 import 'package:church_admin/church_admin.dart';
 
 sealed class KodasAnalyticsEvent extends AnalyticsEvent {
-  final Meeting meeting;
+  final Json meetingProperties;
 
   @override
   String get category => 'kodas';
 
   @override
-  Json get properties => AttendanceAnalyticsEvent.meetingPropertiesOf(meeting);
+  Json get properties => meetingProperties;
 
-  const KodasAnalyticsEvent(this.meeting);
+  KodasAnalyticsEvent(Meeting meeting)
+    : meetingProperties = AttendanceAnalyticsEvent.meetingPropertiesOf(meeting);
 }
 
 final class KodasColumnToggle extends KodasAnalyticsEvent {
   final bool isVisible;
+  final bool isSuccess;
 
   @override
   String get objectAction => 'column_toggle';
 
   @override
-  Json get properties => {...super.properties, 'is_visible': isVisible};
+  Json get properties => {
+    ...super.properties,
+    'is_visible': isVisible,
+    'is_success': isSuccess,
+  };
 
-  const KodasColumnToggle(super.meeting, {required this.isVisible});
+  KodasColumnToggle(
+    super.meeting, {
+    required this.isVisible,
+    required this.isSuccess,
+  });
 }
 
 final class KodasPersonMark extends KodasAnalyticsEvent {
@@ -40,7 +50,7 @@ final class KodasPersonMark extends KodasAnalyticsEvent {
     'is_success': isSuccess,
   };
 
-  const KodasPersonMark(
+  KodasPersonMark(
     super.meeting, {
     required this.personId,
     required this.isRecorded,
@@ -62,7 +72,7 @@ final class KodasUndo extends KodasAnalyticsEvent {
     'undone_change': undoneChange.name,
   };
 
-  const KodasUndo(
+  KodasUndo(
     super.meeting, {
     required this.personId,
     required this.undoneChange,
