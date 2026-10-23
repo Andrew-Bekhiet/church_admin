@@ -58,14 +58,6 @@ class DataExportRobot {
     );
   }
 
-  /// The demo Firebase project has no service account to sign the
-  /// download link with, so the function fails after saving the workbook and
-  /// the app shows an error instead of the finished export.
-  Future<void> closeTheUnsignedDownloadLinkError() async {
-    await tester.tapOn(find.byKey(CAErrorDialogKeys.dismissButton));
-    await tester.waitForAbsent(_failed);
-  }
-
   Set<String> _idsIn(ViewableObjectListController controller) => {
     for (final object in controller.currentFilteredObjectsOrNull ?? const [])
       if (object case ViewableWithID(:final id)) id,

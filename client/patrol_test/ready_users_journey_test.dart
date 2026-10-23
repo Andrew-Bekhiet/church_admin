@@ -17,11 +17,11 @@ void main() {
 
       void step(String description) => debugPrint('E2E STEP: $description');
 
-      final servedPersonId = await E2eBackend.insertPerson(
+      final servedPersonId = await E2eBackend.createPerson(
         'مخدوم في خدمة الخادم',
         serviceName: 'خدمة ثانوي',
       );
-      final otherServicePersonId = await E2eBackend.insertPerson(
+      final otherServicePersonId = await E2eBackend.createPerson(
         'مخدوم في خدمة أخرى',
         serviceName: 'خدمة KG',
       );

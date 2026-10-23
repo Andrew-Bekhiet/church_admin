@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:http/http.dart' as http;
 
 import 'e2e_admin_scope.dart';
+import 'e2e_ash.dart';
 import 'e2e_backend.dart';
 import 'e2e_user.dart';
 
@@ -15,9 +16,9 @@ abstract final class E2eUsers {
     '/identitytoolkit.googleapis.com/v1',
   );
 
-  /// Seeds an approved `auth.users_data` row with a new linked person, then
-  /// creates its email-verified Firebase account carrying the Hasura claims
-  /// and links the row to it, as `tryClaimAccount` does.
+  /// Seeds an approved user with a new linked person, then creates its
+  /// email-verified Firebase account and has the backend claim the user for
+  /// that account, as `tryClaimAccount` does on sign-in.
   static Future<E2eUser> createApprovedUser({
     required String email,
     String password = E2eBackend.password,
@@ -28,21 +29,30 @@ abstract final class E2eUsers {
     String? name,
   }) async {
     final canonicalEmail = email.trim().toLowerCase();
-    final (:uid, :personId) = await _insertApprovedUserData(
-      email: canonicalEmail,
+    final grantedPermissions = {
+      UserPermission.approved,
+      for (final permission in permissions) ...[
+        permission,
+        ...permission.requires,
+      ],
+    };
+    final (:uid, :personId) = await E2eBackend.createUserWithPerson(
       name: name ?? canonicalEmail,
-      permissions: permissions,
-      adminOn: adminOn,
+      email: canonicalEmail,
+      permissions: [
+        for (final permission in grantedPermissions) permission.name,
+      ],
+      adminOn: [for (final scope in adminOn) scope.adminOnInput],
       isMale: isMale,
     );
 
     if (spiritDataUpToDate) {
-      await recordUpToDateSpiritData(personId: personId, recordedBy: uid);
+      await recordUpToDateSpiritData(personId: personId);
     }
 
     final authId = await _signUpFirebaseAccount(canonicalEmail, password);
-    await _verifyEmailAndSetHasuraClaims(authId, hasuraUid: uid);
-    await _linkAuthAccount(uid, authId: authId);
+    await _verifyEmail(authId);
+    await _claimAccount(canonicalEmail, password, expectedUid: uid);
 
     return E2eUser(
       uid: uid,
@@ -57,31 +67,22 @@ abstract final class E2eUsers {
   /// `UpdateUserSpiritDataScreen` on the user linked to [personId].
   static Future<void> recordUpToDateSpiritData({
     required String personId,
-    required String recordedBy,
   }) async {
     final today = DateTime.now().toIso8601String().substring(0, 10);
 
-    await E2eBackend.hasuraQuery(
+    await E2eAsh.mutation(
       r'''
-      mutation RecordUpToDateSpiritData($personId: uuid!, $recordedBy: uuid!, $today: date!) {
-        insertHistoryAttendanceDaysOne(
-          object: {day: $today}
-          onConflict: {constraint: attendance_days_pkey, updateColumns: day}
-        ) { day }
-        insertHistoryConfessionHistoryOne(
-          object: {personId: $personId, dayId: $today, recordedBy: $recordedBy}
-          onConflict: {constraint: confession_history_day_id_person_id_key}
-        ) { id }
-        insertHistoryKodasHistoryOne(
-          object: {personId: $personId, dayId: $today, recordedBy: $recordedBy}
-          onConflict: {constraint: kodas_history_day_id_person_id_key}
-        ) { id }
+      mutation RecordUpToDateSpiritData($personId: ID!, $input: RecordPersonSpiritualDaysInput!) {
+        recordPersonSpiritualDays(id: $personId, input: $input) {
+          result { id }
+          errors { code message fields }
+        }
       }
       ''',
+      field: 'recordPersonSpiritualDays',
       variables: {
         'personId': personId,
-        'recordedBy': recordedBy,
-        'today': today,
+        'input': {'confessionDay': today, 'kodasDay': today},
       },
     );
   }
@@ -90,85 +91,77 @@ abstract final class E2eUsers {
   /// `UpdateUserSpiritDataScreen` on their next sign-in.
   static Future<void> recordUpToDateSpiritDataOf(String email) async {
     final user = await E2eBackend.userByEmail(email);
-    final uid = user['uid'] as String;
 
     await recordUpToDateSpiritData(
       personId: (user['person'] as Map)['id'] as String,
-      recordedBy: uid,
     );
   }
 
   static Future<void> grantWritingRelatedFamiliesOnServiceScopesOf(
     String uid,
   ) async {
-    final granted = await E2eBackend.hasuraQuery(
+    final scopeGrants = await E2eAsh.pageResults(
       r'''
-      mutation GrantWritingRelatedFamiliesOnServiceScopes($uid: uuid!) {
-        updateAuthUsersAdminOn(
-          where: {uid: {_eq: $uid}, adminOnService: {_isNull: false}}
-          _set: {serviceWriteRelatedFamilies: true}
-        ) { affectedRows }
-      }
-      ''',
-      variables: {'uid': uid},
-    );
-
-    if ((granted['updateAuthUsersAdminOn'] as Map)['affectedRows'] == 0) {
-      throw StateError('$uid has no service scope to grant writing on');
-    }
-  }
-
-  static Future<({String uid, String personId})> _insertApprovedUserData({
-    required String email,
-    required String name,
-    required Set<UserPermission> permissions,
-    required List<E2eAdminScope> adminOn,
-    required bool isMale,
-  }) async {
-    final grantedPermissions = {
-      UserPermission.approved,
-      for (final permission in permissions) ...[
-        permission,
-        ...permission.requires,
-      ],
-    };
-    final inserted = await E2eBackend.hasuraQuery(
-      r'''
-      mutation InsertApprovedUserData(
-        $email: String!
-        $name: String!
-        $isMale: Boolean!
-        $permissions: [AuthUsersPermissionsInsertInput!]!
-        $adminOn: [AuthUsersAdminOnInsertInput!]!
-      ) {
-        insertAuthUsersDataOne(object: {
-          email: $email
-          name: $name
-          permissions: {data: $permissions}
-          adminOn: {data: $adminOn}
-          person: {data: {name: $name, gender: $isMale, isServant: true}}
-        }) {
-          uid
-          person { id }
+      query ScopeGrantsToRewrite($uid: ID!) {
+        scopeGrants(filter: {uid: {eq: $uid}}) {
+          results {
+            adminOnService
+            serviceGender
+            serviceStudyYear
+            serviceAllowEdit
+            serviceAllowExport
+            serviceAllowRecordAttendance
+            serviceAllowRecordServantsAttendance
+            serviceAdminOnUsers
+            adminOnGroup
+            groupAllowEdit
+            groupAllowExport
+            groupAllowRecordAttendance
+            groupAllowRecordServantsAttendance
+            groupWriteRelatedFamilies
+            groupAdminOnUsers
+            adminOnArea
+            areaAllowEdit
+            areaAllowExport
+            areaAdminOnUsers
+          }
         }
       }
       ''',
-      variables: {
-        'email': email,
-        'name': name,
-        'isMale': isMale,
-        'permissions': [
-          for (final permission in grantedPermissions)
-            {'permission': permission.name},
-        ],
-        'adminOn': [for (final scope in adminOn) scope.adminOnInsertInput],
-      },
+      'scopeGrants',
+      variables: {'uid': uid},
     );
-    final user = inserted['insertAuthUsersDataOne'] as Map<String, dynamic>;
+    final grantsOnServices = scopeGrants.where(
+      (grant) => (grant as Map)['adminOnService'] != null,
+    );
 
-    return (
-      uid: user['uid'] as String,
-      personId: (user['person'] as Map)['id'] as String,
+    if (grantsOnServices.isEmpty) {
+      throw StateError('$uid has no service scope to grant writing on');
+    }
+
+    await E2eAsh.mutation(
+      r'''
+      mutation GrantWritingRelatedFamiliesOnServiceScopes($uid: ID!, $input: UpdateUserPermissionsInput) {
+        updateUserPermissions(id: $uid, input: $input) {
+          result { uid }
+          errors { code message fields }
+        }
+      }
+      ''',
+      field: 'updateUserPermissions',
+      variables: {
+        'uid': uid,
+        'input': {
+          'adminOn': [
+            for (final grant in scopeGrants)
+              {
+                ...grant as Map<String, dynamic>,
+                if (grant['adminOnService'] != null)
+                  'serviceWriteRelatedFamilies': true,
+              },
+          ],
+        },
+      },
     );
   }
 
@@ -185,41 +178,25 @@ abstract final class E2eUsers {
     return signedUp['localId'] as String;
   }
 
-  static Future<void> _verifyEmailAndSetHasuraClaims(
-    String authId, {
-    required String hasuraUid,
-  }) => _postToAuthEmulator(
+  static Future<void> _verifyEmail(String authId) => _postToAuthEmulator(
     'projects/${E2eBackend.projectId}/accounts:update',
     headers: {'authorization': 'Bearer owner'},
-    body: {
-      'localId': authId,
-      'emailVerified': true,
-      'customAttributes': jsonEncode({
-        'x-hasura-user-id': hasuraUid,
-        'x-hasura-default-role': 'user',
-        'x-hasura-allowed-roles': ['user'],
-      }),
-    },
+    body: {'localId': authId, 'emailVerified': true},
   );
 
-  static Future<void> _linkAuthAccount(
-    String uid, {
-    required String authId,
+  static Future<void> _claimAccount(
+    String email,
+    String password, {
+    required String expectedUid,
   }) async {
-    final linked = await E2eBackend.hasuraQuery(
-      r'''
-      mutation LinkAuthAccount($uid: uuid!, $authId: String!) {
-        updateAuthUsersData(
-          where: {uid: {_eq: $uid}, authId: {_isNull: true}}
-          _set: {authId: $authId}
-        ) { affectedRows }
-      }
-      ''',
-      variables: {'uid': uid, 'authId': authId},
+    final claimed = await E2eAsh.query(
+      'mutation ClaimAccount { tryClaimAccount { uid } }',
+      email: email,
+      password: password,
     );
 
-    if ((linked['updateAuthUsersData'] as Map)['affectedRows'] != 1) {
-      throw StateError('Could not link $uid to Firebase account $authId');
+    if ((claimed['tryClaimAccount'] as Map)['uid'] != expectedUid) {
+      throw StateError('$email claimed another user than $expectedUid');
     }
   }
 

@@ -20,12 +20,7 @@ void main() {
 
       void step(String description) => debugPrint('E2E STEP: $description');
 
-      final servicesCount =
-          ((await E2eBackend.hasuraQuery(
-                    '{ servicesAggregate { aggregate { count } } }',
-                  ))['servicesAggregate']
-                  as Map)['aggregate']['count']
-              as int;
+      final servicesCount = await E2eBackend.servicesCount();
 
       step('admin signs in');
       await E2eUsers.recordUpToDateSpiritDataOf(E2eBackend.adminEmail);

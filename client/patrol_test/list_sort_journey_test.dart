@@ -18,6 +18,7 @@ void main() {
       final tester = $.tester;
       const password = E2eBackend.password;
       final fixture = ListSortFixture();
+      await fixture.seed();
       final lists = ListSortRobot(tester);
       final metadata = AdvancedQueriesMetadata();
 
@@ -95,7 +96,6 @@ void main() {
         await E2eApp.returnHome(tester, password: password);
       }
 
-      await fixture.seed();
       final user = await E2eUsers.createApprovedUser(
         email: 'sorting-servant@e2e.test',
         adminOn: [

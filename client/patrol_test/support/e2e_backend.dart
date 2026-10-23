@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import 'e2e_ash.dart';
+
 /// Talks to the hermetic backend started by `server/scripts/e2e-backend.sh`.
 abstract final class E2eBackend {
   static const projectId = 'demo-church-admin';
@@ -9,7 +11,6 @@ abstract final class E2eBackend {
   static const password = 'Harness_Passw0rd';
 
   static final Uri _authEmulator = Uri.http('localhost:9099');
-  static final Uri _ash = Uri.http('localhost:8080', '/gql');
   static const _verificationEmailTimeout = Duration(seconds: 30);
   static const _pollInterval = Duration(milliseconds: 500);
 
@@ -46,133 +47,218 @@ abstract final class E2eBackend {
     }
   }
 
-  static Future<String> _adminIdToken() async {
-    final response = await http.post(
-      _authEmulator.replace(
-        path: '/identitytoolkit.googleapis.com/v1/accounts:signInWithPassword',
-        queryParameters: {'key': 'e2e'},
-      ),
-      headers: {'content-type': 'application/json'},
-      body: jsonEncode({
-        'email': adminEmail,
-        'password': password,
-        'returnSecureToken': true,
-      }),
-    );
+  static Future<String> serviceIdByName(String serviceName) =>
+      E2eAsh.idByName('services', serviceName);
 
-    if (response.statusCode != 200) {
-      throw StateError('Signing in $adminEmail failed: ${response.body}');
-    }
+  static Future<String> classIdByName(String className) =>
+      E2eAsh.idByName('classes', className);
 
-    return jsonDecode(response.body)['idToken'] as String;
-  }
-
-  static Future<Map<String, dynamic>> ashQuery(
-    String query, {
-    Map<String, dynamic> variables = const {},
-  }) async {
-    final response = await http.post(
-      _ash,
-      headers: {
-        'content-type': 'application/json',
-        'authorization': 'Bearer ${await _adminIdToken()}',
-      },
-      body: jsonEncode({'query': query, 'variables': variables}),
-    );
-    final body = jsonDecode(response.body) as Map<String, dynamic>;
-
-    if (body['errors'] case final errors?) {
-      throw StateError('Ash query failed: $errors');
-    }
-
-    return body['data'] as Map<String, dynamic>;
-  }
-
-  static Future<Map<String, dynamic>> _ashMutation(
-    String mutation, {
-    required String field,
-    required Map<String, dynamic> input,
-  }) async {
-    final data = await ashQuery(mutation, variables: {'input': input});
-    final payload = data[field] as Map<String, dynamic>;
-
-    if ((payload['errors'] as List).isNotEmpty) {
-      throw StateError('Ash $field failed: ${payload['errors']}');
-    }
-
-    return payload['result'] as Map<String, dynamic>;
-  }
-
-  static Future<List<dynamic>> _ashPageResults(
-    String query,
-    String field, {
-    required Map<String, dynamic> variables,
-  }) async {
-    final data = await ashQuery(query, variables: variables);
-
-    return (data[field] as Map)['results'] as List;
-  }
-
-  static Future<String> serviceIdByName(String serviceName) async {
-    final services = await _ashPageResults(
-      r'''
-      query ServiceByName($serviceName: String!) {
-        services(filter: {name: {eq: $serviceName}}) { results { id } }
-      }
-      ''',
-      'services',
-      variables: {'serviceName': serviceName},
-    );
-
-    return (services.single as Map)['id'] as String;
-  }
+  static Future<String> personTypeIdByName(String personTypeName) =>
+      E2eAsh.idByName('personTypes', personTypeName);
 
   static Future<String> createPerson(
     String name, {
     required String serviceName,
+  }) async => E2eAsh.createRecordId('Person', {
+    'name': name,
+    'services': [await serviceIdByName(serviceName)],
+  });
+
+  static Future<String> insertPersonInFamilyWithoutAreaOrService(
+    String name, {
+    required String familyName,
+  }) async => E2eAsh.createRecordId('Person', {
+    'name': name,
+    'familyId': await E2eAsh.createRecordId('Family', {'name': familyName}),
+  });
+
+  /// Inserts an area with one street and a family living on it, whose only
+  /// member is [residentName]; returns the area's, street's and family's
+  /// names and the area's and the resident's ids.
+  static Future<
+    ({
+      String areaId,
+      String residentId,
+      String streetName,
+      String familyName,
+    })
+  >
+  insertAreaWithResident(
+    String areaName, {
+    required String residentName,
+    required String locationTag,
   }) async {
-    final created = await _ashMutation(
+    final streetName = 'شارع $locationTag';
+    final familyName = 'عائلة $locationTag';
+    final areaId = await insertArea(areaName);
+    final streetId = await insertStreet(streetName, areaId: areaId);
+    final familyId = await E2eAsh.createRecordId('Family', {
+      'name': familyName,
+      'address': {'areaId': areaId, 'streetId': streetId},
+    });
+
+    return (
+      areaId: areaId,
+      residentId: await E2eAsh.createRecordId('Person', {
+        'name': residentName,
+        'familyId': familyId,
+      }),
+      streetName: streetName,
+      familyName: familyName,
+    );
+  }
+
+  static Future<String> insertPersonBornOn(
+    String name, {
+    required DateTime birthdate,
+    required String serviceName,
+  }) async => E2eAsh.createRecordId('Person', {
+    'name': name,
+    'birthdate': birthdate.toIso8601String().split('T').first,
+    'services': [await serviceIdByName(serviceName)],
+  });
+
+  static Future<String> insertArea(String name) =>
+      E2eAsh.createRecordId('Area', {'name': name});
+
+  static Future<String> insertStreet(String name, {required String areaId}) =>
+      insertStreetSharedByAreas(name, areaIds: [areaId]);
+
+  static Future<String> insertStreetSharedByAreas(
+    String name, {
+    required List<String> areaIds,
+  }) => E2eAsh.createRecordId('Street', {'name': name, 'areas': areaIds});
+
+  static Future<String> insertFamilyWithMember(
+    String familyName, {
+    required String memberName,
+    required String serviceId,
+    required int studyYear,
+    required bool isMale,
+  }) async {
+    final familyId = await E2eAsh.createRecordId('Family', {
+      'name': familyName,
+    });
+    await E2eAsh.createRecordId('Person', {
+      'name': memberName,
+      'gender': isMale,
+      'studyYearId': studyYear,
+      'workStatus': 'student',
+      'services': [serviceId],
+      'familyId': familyId,
+    });
+
+    return familyId;
+  }
+
+  static Future<String> insertPersonInFamilyOnStreet(
+    String name, {
+    required String familyName,
+    required String streetId,
+    required String areaId,
+    required String serviceId,
+    required int studyYear,
+    required bool isMale,
+  }) => E2eAsh.createRecordId('Person', {
+    'name': name,
+    'gender': isMale,
+    'studyYearId': studyYear,
+    'workStatus': 'student',
+    'services': [serviceId],
+    'newFamilyName': familyName,
+    'address': {'areaId': areaId, 'streetId': streetId},
+  });
+
+  static Future<Map<String, dynamic>> personById(String id) async {
+    final data = await E2eAsh.query(
       r'''
-      mutation CreatePerson($input: CreatePersonInput!) {
-        createPerson(input: $input) { result { id } errors { code message fields } }
+      query PersonById($id: ID!) {
+        person(id: $id) {
+          familyId
+          gender
+          studyYearId
+          serviceMemberships { serviceId }
+          classMemberships { classId }
+          family { address { areaId streetId } }
+        }
       }
       ''',
-      field: 'createPerson',
-      input: {
-        'name': name,
-        'services': [await serviceIdByName(serviceName)],
-      },
+      variables: {'id': id},
     );
 
-    return created['id'] as String;
+    return {
+      for (final MapEntry(:key, :value)
+          in (data['person'] as Map<String, dynamic>).entries)
+        switch (key) {
+          'serviceMemberships' => 'services',
+          'classMemberships' => 'classes',
+          _ => key,
+        }: value,
+    };
+  }
+
+  static Future<List<Map<String, dynamic>>> contactsOfFamily(
+    String familyId,
+  ) async {
+    final contacts = await E2eAsh.pageResults(
+      r'''
+      query ContactsOfFamily($familyId: ID!) {
+        contacts(filter: {familyId: {eq: $familyId}}) {
+          results { id phone personTypeId }
+        }
+      }
+      ''',
+      'contacts',
+      variables: {'familyId': familyId},
+    );
+
+    return contacts.cast<Map<String, dynamic>>();
+  }
+
+  static Future<int> familiesCount() => _countOf('families');
+
+  static Future<int> servicesCount() => _countOf('services');
+
+  static Future<int> _countOf(String rootField) async {
+    final data = await E2eAsh.query('query CountOf { $rootField { count } }');
+
+    return (data[rootField] as Map)['count'] as int;
+  }
+
+  static Future<({String uid, String personId})> createUserWithPerson({
+    required String name,
+    required Iterable<String> permissions,
+    required List<Map<String, Object?>> adminOn,
+    bool isMale = true,
+    String? email,
+  }) async {
+    final created = await E2eAsh.createRecord('User', {
+      'name': name,
+      'email': ?email,
+      'newPerson': {'name': name, 'gender': isMale},
+      'permissions': permissions.toList(),
+      'adminOn': adminOn,
+    }, selection: 'uid person { id }');
+
+    return (
+      uid: created['uid'] as String,
+      personId: (created['person'] as Map)['id'] as String,
+    );
   }
 
   static Future<String> createUser(
     String name, {
     required String adminOnServiceId,
-  }) async {
-    final created = await _ashMutation(
-      r'''
-      mutation CreateUser($input: CreateUserInput!) {
-        createUser(input: $input) { result { uid } errors { code message fields } }
-      }
-      ''',
-      field: 'createUser',
-      input: {
-        'name': name,
-        'newPerson': {'name': name, 'gender': true},
-        'permissions': ['approved'],
-        'adminOn': [
-          {'adminOnService': adminOnServiceId},
-        ],
-      },
-    );
-
-    return created['uid'] as String;
-  }
+  }) async => (await createUserWithPerson(
+    name: name,
+    permissions: ['approved'],
+    adminOn: [
+      {'adminOnService': adminOnServiceId},
+    ],
+  )).uid;
 
   static Future<Set<String>> adminOnServicesOf(String uid) async {
-    final scopeGrants = await _ashPageResults(
+    final scopeGrants = await E2eAsh.pageResults(
       r'''
       query ScopeGrantsOf($uid: ID!) {
         scopeGrants(filter: {uid: {eq: $uid}}) { results { adminOnService } }
@@ -190,7 +276,7 @@ abstract final class E2eBackend {
   }
 
   static Future<Map<String, dynamic>> userByEmail(String email) async {
-    final users = await _ashPageResults(
+    final users = await E2eAsh.pageResults(
       r'''
       query UserByEmail($email: String!) {
         users(filter: {email: {eq: $email}}) {
@@ -209,8 +295,32 @@ abstract final class E2eBackend {
     return users.single as Map<String, dynamic>;
   }
 
+  static Future<Map<String, dynamic>> orderByPreferencesOf(String uid) async {
+    final users = await E2eAsh.pageResults(
+      r'''
+      query OrderByPreferencesOf($uid: ID!) {
+        users(filter: {uid: {eq: $uid}}) {
+          results { preferences { orderByPreferences } }
+        }
+      }
+      ''',
+      'users',
+      variables: {'uid': uid},
+    );
+
+    return switch (users.single) {
+      {
+        'preferences': {
+          'orderByPreferences': final Map<String, dynamic> preferences,
+        },
+      } =>
+        preferences,
+      _ => const {},
+    };
+  }
+
   static Future<Set<String>> permissionsOf(String uid) async {
-    final permissions = await _ashPageResults(
+    final permissions = await E2eAsh.pageResults(
       r'''
       query PermissionsOf($uid: ID!) {
         userPermissions(filter: {uid: {eq: $uid}}) { results { permission } }
