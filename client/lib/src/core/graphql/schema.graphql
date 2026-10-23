@@ -44,6 +44,18 @@ type PhotoLink {
   expiresAt: DateTime!
 }
 
+type HttpHeader {
+  value: String!
+  name: String!
+}
+
+type PhotoUploadLink {
+  url: String!
+  headers: [HttpHeader!]!
+  expiresAt: DateTime!
+  confirmationToken: String!
+}
+
 type ExportDownloadLink {
   expiresAt: DateTime!
   downloadUrl: String!
@@ -12359,7 +12371,9 @@ type RootQueryType {
 }
 
 type RootMutationType {
-  requestPhotoUpload(subject: PhotoSubject!, id: ID!, contentType: String): PhotoLink!
+  requestPhotoUpload(subject: PhotoSubject!, id: ID!, contentType: String): PhotoUploadLink!
+
+  confirmPhotoUpload(subject: PhotoSubject!, id: ID!, confirmationToken: String!): Boolean!
 
   deletePhoto(subject: PhotoSubject!, id: ID!): Boolean!
 
