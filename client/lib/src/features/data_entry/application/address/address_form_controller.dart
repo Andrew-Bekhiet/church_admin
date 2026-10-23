@@ -282,13 +282,10 @@ class AddressFormController extends AdvancedFormController {
 
     switch (areasOfStreet) {
       case [final onlyArea]:
-        area.prefill(onlyArea);
-        _services.analytics.track(
-          AddressAreaFill(
-            source: AddressAutofillSource.singleAreaStreet,
-            street: chosen,
-            area: onlyArea,
-          ),
+        _prefillAreaThenTrackIfChanged(
+          onlyArea,
+          source: AddressAutofillSource.singleAreaStreet,
+          street: chosen,
         );
 
       case [_, _, ...]:
@@ -357,13 +354,10 @@ class AddressFormController extends AdvancedFormController {
     );
 
     if (!areaWasChosenMeanwhile && !userChoseAreaOfStreet) {
-      area.prefill(geocodedHouse.area);
-      _services.analytics.track(
-        AddressAreaFill(
-          source: AddressAutofillSource.geocodedHouseNumber,
-          street: geocodedStreet,
-          area: geocodedHouse.area,
-        ),
+      _prefillAreaThenTrackIfChanged(
+        geocodedHouse.area,
+        source: AddressAutofillSource.geocodedHouseNumber,
+        street: geocodedStreet,
       );
     }
     final wasUnlocated = geolocation.fieldValue == null;
@@ -376,6 +370,20 @@ class AddressFormController extends AdvancedFormController {
         ),
       );
     }
+  }
+
+  void _prefillAreaThenTrackIfChanged(
+    Area filled, {
+    required AddressAutofillSource source,
+    required Street street,
+  }) {
+    final areaBeforeFill = area.fieldValue;
+    area.prefill(filled);
+    if (area.fieldValue == areaBeforeFill) return;
+
+    _services.analytics.track(
+      AddressAreaFill(source: source, street: street, area: filled),
+    );
   }
 
   void _maybeTrackStaleLocationReminderShow() {

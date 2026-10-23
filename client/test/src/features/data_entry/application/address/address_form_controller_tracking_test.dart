@@ -40,6 +40,19 @@ void main() {
     );
 
     test(
+      'from a street whose one area the form already holds is not tracked',
+      () async {
+        fixture.areas.areasByStreetId[mainStreet.id] = const [stMarkArea];
+        fixture
+            .controllerFor(const Address(area: stMarkArea))
+            .chooseStreet(mainStreet);
+        await pumpEventQueue();
+
+        expect(fixture.analytics.trackedEventsOf<AddressAreaFill>(), isEmpty);
+      },
+    );
+
+    test(
       'from a typed house number is tracked as coming from the geocoded house',
       () {
         fakeAsync((async) {
