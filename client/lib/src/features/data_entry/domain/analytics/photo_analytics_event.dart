@@ -7,24 +7,27 @@ sealed class PhotoAnalyticsEvent extends AnalyticsEvent {
   const PhotoAnalyticsEvent();
 }
 
-final class PhotoPick extends PhotoAnalyticsEvent {
-  final ImageSource source;
+final class PhotoPickAttempt extends PhotoAnalyticsEvent {
+  final ImageSource imageSource;
   final PhotoPickOutcome outcome;
 
   @override
-  String get objectAction => 'pick';
+  String get objectAction => 'pick_attempt';
 
   @override
-  Json get properties => {'source': source.name, 'outcome': outcome.name};
+  Json get properties => {
+    'image_source': imageSource.name,
+    'outcome': outcome.name,
+  };
 
-  const PhotoPick(this.source, this.outcome);
+  const PhotoPickAttempt(this.imageSource, this.outcome);
 }
 
-final class PhotoDelete extends PhotoAnalyticsEvent {
+final class PhotoDeleteChoose extends PhotoAnalyticsEvent {
   @override
-  String get objectAction => 'delete';
+  String get objectAction => 'delete_choose';
 
-  const PhotoDelete();
+  const PhotoDeleteChoose();
 }
 
 final class PhotoFullscreenOpen extends PhotoAnalyticsEvent {
