@@ -9,15 +9,16 @@ sealed class AttendanceAnalyticsEvent extends AnalyticsEvent {
     if (meeting.groupId case final groupId?) 'group_id': groupId,
   };
 
-  final Meeting meeting;
+  final Json meetingProperties;
 
   @override
   String get category => 'attendance';
 
   @override
-  Json get properties => meetingPropertiesOf(meeting);
+  Json get properties => meetingProperties;
 
-  const AttendanceAnalyticsEvent(this.meeting);
+  AttendanceAnalyticsEvent(Meeting meeting)
+    : meetingProperties = meetingPropertiesOf(meeting);
 }
 
 final class AttendancePersonMark extends AttendanceAnalyticsEvent {
@@ -38,7 +39,7 @@ final class AttendancePersonMark extends AttendanceAnalyticsEvent {
     'is_success': isSuccess,
   };
 
-  const AttendancePersonMark(
+  AttendancePersonMark(
     super.meeting, {
     required this.personId,
     required this.newState,
@@ -61,7 +62,7 @@ final class AttendanceUndo extends AttendanceAnalyticsEvent {
     'undone_change': undoneChange.name,
   };
 
-  const AttendanceUndo(
+  AttendanceUndo(
     super.meeting, {
     required this.personId,
     required this.undoneChange,
@@ -80,31 +81,18 @@ final class AttendanceMeetingSwitch extends AttendanceAnalyticsEvent {
     'from_meeting_id': fromMeetingId,
   };
 
-  const AttendanceMeetingSwitch(super.meeting, {required this.fromMeetingId});
+  AttendanceMeetingSwitch(super.meeting, {required this.fromMeetingId});
 }
 
 final class AttendanceMeetingSelectorDismiss extends AttendanceAnalyticsEvent {
   @override
   String get objectAction => 'meeting_selector_dismiss';
 
-  const AttendanceMeetingSelectorDismiss(super.meeting);
+  AttendanceMeetingSelectorDismiss(super.meeting);
 }
 
 final class AttendanceDateChange extends AttendanceAnalyticsEvent {
-  final DateTime day;
-  final bool hasRecordsOnDay;
-
-  @override
-  String get objectAction => 'date_change';
-
-  @override
-  Json get properties => {
-    ...super.properties,
-    'days_from_today': _daysFromToday,
-    'has_records_on_day': hasRecordsOnDay,
-  };
-
-  int get _daysFromToday {
+  static int _daysFromTodayOf(DateTime day) {
     final today = DateUtils.dateOnly(clock.now());
 
     return DateTime.utc(
@@ -114,11 +102,24 @@ final class AttendanceDateChange extends AttendanceAnalyticsEvent {
     ).difference(DateTime.utc(today.year, today.month, today.day)).inDays;
   }
 
-  const AttendanceDateChange(
+  final int daysFromToday;
+  final bool hasRecordsOnDay;
+
+  @override
+  String get objectAction => 'date_change';
+
+  @override
+  Json get properties => {
+    ...super.properties,
+    'days_from_today': daysFromToday,
+    'has_records_on_day': hasRecordsOnDay,
+  };
+
+  AttendanceDateChange(
     super.meeting, {
-    required this.day,
+    required DateTime day,
     required this.hasRecordsOnDay,
-  });
+  }) : daysFromToday = _daysFromTodayOf(day);
 }
 
 final class AttendanceAudienceViewToggle extends AttendanceAnalyticsEvent {
@@ -128,13 +129,16 @@ final class AttendanceAudienceViewToggle extends AttendanceAnalyticsEvent {
   String get objectAction => 'audience_toggle';
 
   @override
-  Json get properties => {...super.properties, 'audience': audienceView.name};
+  Json get properties => {
+    ...super.properties,
+    'audience_view': audienceView.name,
+  };
 
-  const AttendanceAudienceViewToggle(super.meeting, this.audienceView);
+  AttendanceAudienceViewToggle(super.meeting, this.audienceView);
 }
 
 final class AttendancePresenceFilterChange extends AttendanceAnalyticsEvent {
-  final AttendancePresenceFilter filter;
+  final AttendancePresenceFilter presenceFilter;
   final bool isReset;
   final int? presentCount;
   final int? eligibleCount;
@@ -145,68 +149,77 @@ final class AttendancePresenceFilterChange extends AttendanceAnalyticsEvent {
   @override
   Json get properties => {
     ...super.properties,
-    'filter': filter.name,
+    'presence_filter': presenceFilter.name,
     'is_reset': isReset,
     'present_count': presentCount,
     'eligible_count': eligibleCount,
   };
 
-  const AttendancePresenceFilterChange(
+  AttendancePresenceFilterChange(
     super.meeting, {
-    required this.filter,
+    required this.presenceFilter,
     required this.isReset,
     required this.presentCount,
     required this.eligibleCount,
   });
 }
 
-final class AttendanceSearchSubmit extends AttendanceAnalyticsEvent {
-  final String query;
+final class AttendanceSearchRun extends AttendanceAnalyticsEvent {
+  static final RegExp _phoneNumberShape = RegExp(r'^\+?\d+$');
+
+  final int queryLength;
+  final bool isPhoneQuery;
   final int resultCount;
 
   @override
-  String get objectAction => 'search_submit';
+  String get objectAction => 'search_run';
 
   @override
   Json get properties => {
     ...super.properties,
-    'query_length': query.length,
-    'is_phone_query': PhoneNumberFormat.normalizeForSearch(query).isNotEmpty,
+    'query_length': queryLength,
+    'is_phone_query': isPhoneQuery,
     'result_count': resultCount,
   };
 
-  const AttendanceSearchSubmit(
+  AttendanceSearchRun(
     super.meeting, {
-    required this.query,
+    required String query,
     required this.resultCount,
-  });
+  }) : queryLength = query.length,
+       isPhoneQuery = _phoneNumberShape.hasMatch(
+         PhoneNumberFormat.withoutSeparators(query),
+       );
 }
 
 sealed class AttendanceSortingAnalyticsEvent extends AttendanceAnalyticsEvent {
-  final AttendanceSorting sort;
+  final AttendanceSortType sortType;
+  final SortingDirection sortDirection;
 
   @override
   Json get properties => {
     ...super.properties,
-    'sort_type': AttendanceSortType.of(sort).name,
-    'direction': sort.direction.name,
+    'sort_type': sortType.name,
+    'sort_direction': sortDirection.name,
   };
 
-  const AttendanceSortingAnalyticsEvent(super.meeting, this.sort);
+  AttendanceSortingAnalyticsEvent(super.meeting, AttendanceSorting sort)
+    : sortType = AttendanceSortType.of(sort),
+      sortDirection = sort.direction;
 }
 
 final class AttendanceSortChange extends AttendanceSortingAnalyticsEvent {
   @override
   String get objectAction => 'sort_change';
 
-  const AttendanceSortChange(super.meeting, super.sort);
+  AttendanceSortChange(super.meeting, super.sort);
 }
 
 final class AttendanceSortReverse extends AttendanceSortingAnalyticsEvent {
   @override
   String get objectAction => 'sort_reverse';
 
-  const AttendanceSortReverse(super.meeting, super.sort);
+  AttendanceSortReverse(super.meeting, super.sort);
 }
 
 final class AttendanceGroupingToggle extends AttendanceAnalyticsEvent {
@@ -218,45 +231,48 @@ final class AttendanceGroupingToggle extends AttendanceAnalyticsEvent {
   @override
   Json get properties => {...super.properties, 'grouping': grouping.name};
 
-  const AttendanceGroupingToggle(super.meeting, this.grouping);
+  AttendanceGroupingToggle(super.meeting, this.grouping);
 }
 
-final class AttendanceSectionCollapse extends AttendanceAnalyticsEvent {
+final class AttendanceSectionToggle extends AttendanceAnalyticsEvent {
   final bool isCollapsed;
-  final int sectionSize;
+  final int sectionPersonCount;
 
   @override
-  String get objectAction => 'section_collapse';
+  String get objectAction => 'section_toggle';
 
   @override
   Json get properties => {
     ...super.properties,
     'is_collapsed': isCollapsed,
-    'section_size': sectionSize,
+    'section_person_count': sectionPersonCount,
   };
 
-  const AttendanceSectionCollapse(
+  AttendanceSectionToggle(
     super.meeting, {
     required this.isCollapsed,
-    required this.sectionSize,
+    required this.sectionPersonCount,
   });
 }
 
 final class AttendanceStreakWindowChange extends AttendanceAnalyticsEvent {
-  final int days;
+  final int streakWindowDays;
 
   @override
   String get objectAction => 'streak_window_change';
 
   @override
-  Json get properties => {...super.properties, 'days': days};
+  Json get properties => {
+    ...super.properties,
+    'streak_window_days': streakWindowDays,
+  };
 
-  const AttendanceStreakWindowChange(super.meeting, this.days);
+  AttendanceStreakWindowChange(super.meeting, this.streakWindowDays);
 }
 
 final class AttendanceTimeEdit extends AttendanceAnalyticsEvent {
   final String personId;
-  final int minutesShifted;
+  final int shiftDurationMs;
   final bool isRejectedFuture;
   final bool isSuccess;
 
@@ -267,18 +283,18 @@ final class AttendanceTimeEdit extends AttendanceAnalyticsEvent {
   Json get properties => {
     ...super.properties,
     'person_id': personId,
-    'minutes_shifted': minutesShifted,
+    'shift_duration_ms': shiftDurationMs,
     'is_rejected_future': isRejectedFuture,
     'is_success': isSuccess,
   };
 
-  const AttendanceTimeEdit(
+  AttendanceTimeEdit(
     super.meeting, {
     required this.personId,
-    required this.minutesShifted,
+    required Duration shift,
     required this.isRejectedFuture,
     required this.isSuccess,
-  });
+  }) : shiftDurationMs = shift.inMilliseconds;
 }
 
 final class AttendancePersonProfileOpen extends AttendanceAnalyticsEvent {
@@ -290,38 +306,44 @@ final class AttendancePersonProfileOpen extends AttendanceAnalyticsEvent {
   @override
   Json get properties => {...super.properties, 'person_id': personId};
 
-  const AttendancePersonProfileOpen(super.meeting, {required this.personId});
+  AttendancePersonProfileOpen(super.meeting, {required this.personId});
 }
 
 final class AttendanceLetterGutterUse extends AttendanceAnalyticsEvent {
-  final AttendanceLetterGutterGesture gesture;
+  final AttendanceLetterGutterGesture gutterGesture;
 
   @override
   String get objectAction => 'letter_gutter_use';
 
   @override
-  Json get properties => {...super.properties, 'gesture': gesture.name};
+  Json get properties => {
+    ...super.properties,
+    'gutter_gesture': gutterGesture.name,
+  };
 
-  const AttendanceLetterGutterUse(super.meeting, this.gesture);
+  AttendanceLetterGutterUse(super.meeting, this.gutterGesture);
 }
 
 final class AttendanceAnalysisOpen extends AttendanceAnalyticsEvent {
-  final AttendanceAnalysisPreset preset;
+  final AttendanceAnalysisPreset rangePreset;
 
   @override
   String get objectAction => 'analysis_open';
 
   @override
-  Json get properties => {...super.properties, 'preset': preset.name};
+  Json get properties => {
+    ...super.properties,
+    'range_preset': rangePreset.name,
+  };
 
-  const AttendanceAnalysisOpen(super.meeting, this.preset);
+  AttendanceAnalysisOpen(super.meeting, this.rangePreset);
 }
 
 final class AttendanceRetry extends AttendanceAnalyticsEvent {
   @override
   String get objectAction => 'retry';
 
-  const AttendanceRetry(super.meeting);
+  AttendanceRetry(super.meeting);
 }
 
 enum AttendanceMarkState { present, absent }
