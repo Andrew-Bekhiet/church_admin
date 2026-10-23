@@ -1,5 +1,5 @@
-defmodule ChurchAdmin.Google.Storage.Object do
-  @moduledoc "The parts of a GCS object resource church_admin reads."
+defmodule ChurchAdmin.Files.Storage.Object do
+  @moduledoc "The parts of a stored object church_admin reads, built from a GCS JSON API object resource."
 
   @type t :: %__MODULE__{
           name: String.t(),

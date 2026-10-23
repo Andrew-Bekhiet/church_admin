@@ -10,7 +10,7 @@ config :church_admin, ChurchAdmin.Google.Config,
   ],
   storage: [
     base_url: "http://storage.test",
-    req_options: [plug: {Req.Test, ChurchAdmin.Google.Storage}, retry: false]
+    req_options: [plug: {Req.Test, ChurchAdmin.Files.Storage}, retry: false]
   ],
   messaging: [
     adapter: ChurchAdmin.Google.Messaging.Local,

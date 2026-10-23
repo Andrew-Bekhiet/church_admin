@@ -5,8 +5,8 @@ defmodule ChurchAdmin.Releases.LatestRelease do
   (compared number by number), across all pages of the listing.
   """
 
-  alias ChurchAdmin.Google.Storage
-  alias ChurchAdmin.Google.Storage.Object
+  alias ChurchAdmin.Files.Storage
+  alias ChurchAdmin.Files.Storage.Object
   alias ChurchAdmin.Releases.AppPlatform
 
   @prefix "app-release-v"

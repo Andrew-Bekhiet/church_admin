@@ -20,7 +20,7 @@ defmodule ChurchAdmin.Releases.AppReleaseTest do
   defp stub_pages(pages) do
     test = self()
 
-    Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
+    Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
       send(test, {:list, conn.request_path, conn.query_params})
       page_token = conn.query_params["pageToken"]
       {items, next} = Map.fetch!(pages, page_token)
@@ -135,7 +135,7 @@ defmodule ChurchAdmin.Releases.AppReleaseTest do
   end
 
   test "a storage failure is an error, not a link", %{world: world} do
-    Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
+    Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
       conn |> Plug.Conn.put_status(500) |> Req.Test.json(%{"error" => %{"code" => 500}})
     end)
 

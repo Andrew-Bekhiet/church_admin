@@ -2,11 +2,11 @@ defmodule ChurchAdmin.Google.EmulatorTest do
   use ExUnit.Case, async: false
 
   alias ChurchAdmin.Accounts.Claims
+  alias ChurchAdmin.Files.Storage
+  alias ChurchAdmin.Files.Storage.Object
   alias ChurchAdmin.Google.Error
   alias ChurchAdmin.Google.IdentityToolkit
   alias ChurchAdmin.Google.IdentityToolkit.Account
-  alias ChurchAdmin.Google.Storage
-  alias ChurchAdmin.Google.Storage.Object
 
   @moduletag :emulator
 
@@ -23,10 +23,7 @@ defmodule ChurchAdmin.Google.EmulatorTest do
         adapter: IdentityToolkit.Http,
         base_url: "http://#{emulators[:auth_host]}/identitytoolkit.googleapis.com"
       )
-      |> Keyword.put(:storage,
-        adapter: Storage.Http,
-        base_url: "http://#{emulators[:storage_host]}"
-      )
+      |> Keyword.put(:storage, base_url: "http://#{emulators[:storage_host]}")
     )
 
     on_exit(fn ->
@@ -98,8 +95,8 @@ defmodule ChurchAdmin.Google.EmulatorTest do
       assert Enum.join(stream) == "jpeg-bytes"
 
       assert Storage.delete(bucket, name) == :ok
-      assert {:error, %Error{reason: :not_found}} = Storage.metadata(bucket, name)
-      assert {:error, %Error{reason: :not_found}} = Storage.delete(bucket, name)
+      assert {:error, %Storage.Error{reason: :not_found}} = Storage.metadata(bucket, name)
+      assert {:error, %Storage.Error{reason: :not_found}} = Storage.delete(bucket, name)
     end
   end
 end

@@ -22,7 +22,7 @@ defmodule ChurchAdminWeb.FileController do
   alias ChurchAdmin.Exports.{Selection, Workbook}
   alias ChurchAdmin.Files.Buckets
   alias ChurchAdmin.Files.Photos.{Access, ImageFormat, Upload}
-  alias ChurchAdmin.Google
+  alias ChurchAdmin.Files.Storage
   alias ChurchAdminWeb.{FileToken, StreamedFile}
 
   @max_photo_bytes 25 * 1024 * 1024
@@ -94,8 +94,8 @@ defmodule ChurchAdminWeb.FileController do
     actor = ActorLoader.load(uid)
 
     with {:ok, target} <- Access.resolve(actor, params.subject, params.id, :read),
-         {:ok, object} <- Google.Storage.metadata(Buckets.photos(), target.object),
-         {:ok, chunks} <- Google.Storage.download(Buckets.photos(), target.object) do
+         {:ok, object} <- Storage.metadata(Buckets.photos(), target.object),
+         {:ok, chunks} <- Storage.download(Buckets.photos(), target.object) do
       conn
       |> put_resp_header("cache-control", "private, max-age=300")
       |> put_resp_header("content-disposition", ~s(inline; filename="photo"))
@@ -118,7 +118,7 @@ defmodule ChurchAdminWeb.FileController do
     do: send_error(conn, 405, "invalid", "This link does not take #{conn.method} requests")
 
   defp stream_app_release(conn, params) do
-    case Google.Storage.download(params.bucket, params.object) do
+    case Storage.download(params.bucket, params.object) do
       {:ok, chunks} ->
         conn
         |> put_resp_header(
@@ -154,10 +154,10 @@ defmodule ChurchAdminWeb.FileController do
   defp send_domain_error(conn, %DomainError{} = error),
     do: send_error(conn, 403, error.code, Exception.message(error))
 
-  defp send_storage_error(conn, %Google.Error{reason: :not_found}),
+  defp send_storage_error(conn, %Storage.Error{reason: :not_found}),
     do: send_error(conn, 404, "not_found", "The file was not found")
 
-  defp send_storage_error(conn, %Google.Error{} = error) do
+  defp send_storage_error(conn, %Storage.Error{} = error) do
     Logger.error("storage failed: #{inspect(error)}")
     send_error(conn, 502, "storage_unavailable", "The file storage failed")
   end

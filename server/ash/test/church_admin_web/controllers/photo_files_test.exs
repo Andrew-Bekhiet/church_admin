@@ -41,7 +41,7 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
   defp stub_upload do
     test = self()
 
-    Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
+    Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
       send(
         test,
         {:gcs_upload, conn.method, conn.request_path, conn.query_params,
@@ -186,7 +186,7 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
     end
 
     test "answers 502 and records nothing when storage fails", %{conn: conn, world: world} do
-      Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
+      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
         conn |> Plug.Conn.put_status(500) |> Req.Test.json(%{"error" => %{"code" => 500}})
       end)
 
@@ -272,7 +272,7 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
     defp stub_stored_photo(stored_type) do
       test = self()
 
-      Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
+      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
         send(test, {:gcs_download, conn.request_path, conn.query_params})
 
         case conn.query_params do
@@ -361,7 +361,7 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
     end
 
     test "answers 404 for a missing object", %{conn: conn, world: world} do
-      Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
+      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
         conn
         |> Plug.Conn.put_status(404)
         |> Req.Test.json(%{"error" => %{"code" => 404, "errors" => [%{"reason" => "notFound"}]}})
@@ -373,7 +373,7 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
     end
 
     test "re-checks the read right when the file is fetched", %{conn: conn, world: world} do
-      Req.Test.stub(ChurchAdmin.Google.Storage, fn conn -> Plug.Conn.send_resp(conn, 200, "x") end)
+      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn -> Plug.Conn.send_resp(conn, 200, "x") end)
 
       token = download_token(world.users.service_open, :persons, world.records.grp)
 
@@ -414,7 +414,7 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
     test "streams the file with its type, length and download name", %{conn: conn, world: world} do
       test = self()
 
-      Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
+      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
         send(test, {:gcs_download, conn.request_path})
         Plug.Conn.send_resp(conn, 200, "apk-bytes")
       end)
@@ -438,13 +438,13 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
     end
 
     test "is refused once the user is no longer approved", %{conn: conn, world: world} do
-      Req.Test.stub(ChurchAdmin.Google.Storage, fn conn -> Plug.Conn.send_resp(conn, 200, "x") end)
+      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn -> Plug.Conn.send_resp(conn, 200, "x") end)
 
       assert get(conn, ~p"/api/files/#{app_token(world.users.unapproved)}").status == 403
     end
 
     test "lives twenty minutes", %{conn: conn, world: world} do
-      Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
+      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
         Plug.Conn.send_resp(conn, 200, "apk-bytes")
       end)
 
@@ -463,7 +463,7 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
       do: conn |> as_user(user) |> post("/gql", %{"query" => document}) |> json_response(200)
 
     test "requestPhotoUpload, photoDownloadUrl and deletePhoto", %{conn: conn, world: world} do
-      Req.Test.stub(ChurchAdmin.Google.Storage, fn conn -> Plug.Conn.send_resp(conn, 204, "") end)
+      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn -> Plug.Conn.send_resp(conn, 204, "") end)
       id = world.records.m1.id
       user = world.users.read_write
 
@@ -498,7 +498,7 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
     end
 
     test "appDownloadLink", %{conn: conn, world: world} do
-      Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
+      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
         Req.Test.json(conn, %{
           "items" => [
             %{"name" => "app-release-v1.0.0.apk", "bucket" => @release_bucket, "size" => "3"}

@@ -81,8 +81,11 @@ config :church_admin, ChurchAdmin.Google.Config,
     adapter: ChurchAdmin.Google.IdentityToolkit.Http,
     base_url: "https://identitytoolkit.googleapis.com"
   ],
-  storage: [adapter: ChurchAdmin.Google.Storage.Http, base_url: "https://storage.googleapis.com"],
+  storage: [base_url: "https://storage.googleapis.com"],
   messaging: [adapter: ChurchAdmin.Google.Messaging.Http, base_url: "https://fcm.googleapis.com"]
+
+config :church_admin, ChurchAdmin.Files.Storage,
+  adapter: ChurchAdmin.Files.Storage.GoogleCloudStorage
 
 config :church_admin,
   config_env: config_env(),

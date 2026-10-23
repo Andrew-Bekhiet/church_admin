@@ -1,13 +1,12 @@
-defmodule ChurchAdmin.Google.Storage do
+defmodule ChurchAdmin.Files.Storage do
   @moduledoc """
-  Cloud Storage objects through the GCS JSON API. The adapter comes from
-  `ChurchAdmin.Google.Config`. The stream `download/2` returns must be consumed
-  by the process that called it.
+  Object storage, whatever the provider. The adapter and its options come from
+  `config :church_admin, ChurchAdmin.Files.Storage, adapter: module, ...`;
+  callers go through this module and never name an adapter. The stream
+  `download/2` returns must be consumed by the process that called it.
   """
 
-  alias ChurchAdmin.Google.Config
-  alias ChurchAdmin.Google.Error
-  alias ChurchAdmin.Google.Storage.Object
+  alias ChurchAdmin.Files.Storage.{Error, Object}
 
   @type body :: iodata() | Enumerable.t()
   @type upload_option :: {:content_type, String.t()} | {:content_length, non_neg_integer()}
@@ -40,5 +39,12 @@ defmodule ChurchAdmin.Google.Storage do
   @spec metadata(String.t(), String.t()) :: {:ok, Object.t()} | {:error, Error.t()}
   def metadata(bucket, name), do: adapter().metadata(bucket, name)
 
-  defp adapter, do: Config.adapter(:storage)
+  @doc "The adapter's own setting `key` from the storage config, or `default`."
+  @spec adapter_option(atom(), term()) :: term()
+  def adapter_option(key, default \\ nil), do: Keyword.get(settings(), key, default)
+
+  @spec settings() :: keyword()
+  def settings, do: Application.get_env(:church_admin, __MODULE__, [])
+
+  defp adapter, do: Keyword.fetch!(settings(), :adapter)
 end

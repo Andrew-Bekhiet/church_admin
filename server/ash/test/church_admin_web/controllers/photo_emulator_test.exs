@@ -3,7 +3,7 @@ defmodule ChurchAdminWeb.PhotoEmulatorTest do
 
   alias ChurchAdmin.{AuthzWorld, Files}
   alias ChurchAdmin.Authz.ActorLoader
-  alias ChurchAdmin.Google.Storage
+  alias ChurchAdmin.Files.Storage
   alias ChurchAdmin.People.Person
 
   @moduletag :emulator
@@ -18,10 +18,7 @@ defmodule ChurchAdminWeb.PhotoEmulatorTest do
     Application.put_env(
       :church_admin,
       ChurchAdmin.Google.Config,
-      Keyword.put(google_settings, :storage,
-        adapter: Storage.Http,
-        base_url: "http://#{emulators[:storage_host]}"
-      )
+      Keyword.put(google_settings, :storage, base_url: "http://#{emulators[:storage_host]}")
     )
 
     Application.put_env(

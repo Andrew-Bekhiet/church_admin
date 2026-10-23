@@ -11,7 +11,7 @@ defmodule ChurchAdmin.Files.Photos.Upload do
 
   alias ChurchAdmin.Files.Buckets
   alias ChurchAdmin.Files.Photos.{Blurhash, ImageFormat, Record, Target}
-  alias ChurchAdmin.Google.Storage
+  alias ChurchAdmin.Files.Storage
 
   @spec store(Target.t(), binary()) :: :ok | {:error, :not_an_image | term()}
   def store(%Target{} = target, bytes) do

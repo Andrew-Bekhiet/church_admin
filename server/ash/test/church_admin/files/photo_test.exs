@@ -202,7 +202,7 @@ defmodule ChurchAdmin.Files.PhotoTest do
     setup %{world: world} do
       test = self()
 
-      Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
+      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
         send(test, {:gcs, conn.method, conn.request_path})
         Plug.Conn.send_resp(conn, 204, "")
       end)
@@ -233,7 +233,7 @@ defmodule ChurchAdmin.Files.PhotoTest do
     end
 
     test "clears the fields when the object is already gone", %{world: world, person: person} do
-      Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
+      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
         conn
         |> Plug.Conn.put_status(404)
         |> Req.Test.json(%{"error" => %{"code" => 404, "errors" => [%{"reason" => "notFound"}]}})
@@ -247,7 +247,7 @@ defmodule ChurchAdmin.Files.PhotoTest do
     end
 
     test "keeps the fields when the storage call fails", %{world: world, person: person} do
-      Req.Test.stub(ChurchAdmin.Google.Storage, fn conn ->
+      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
         conn
         |> Plug.Conn.put_status(500)
         |> Req.Test.json(%{

@@ -10,7 +10,8 @@ defmodule ChurchAdmin.Files.Photos.Delete do
 
   alias ChurchAdmin.Files.Buckets
   alias ChurchAdmin.Files.Photos.{Access, Record}
-  alias ChurchAdmin.Google.{Error, Storage}
+  alias ChurchAdmin.Files.Storage
+  alias ChurchAdmin.Files.Storage.Error
 
   @impl Ash.Resource.Actions.Implementation
   def run(input, _opts, %{actor: actor}) do

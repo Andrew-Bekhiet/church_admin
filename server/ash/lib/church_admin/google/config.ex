@@ -5,11 +5,12 @@ defmodule ChurchAdmin.Google.Config do
       project_id: "church-data-admin",
       credentials: {:service_account, %{...}} | :emulator_owner,
       identity_toolkit: [adapter: module, base_url: url, req_options: keyword],
-      storage: [adapter: module, base_url: url, req_options: keyword],
+      storage: [base_url: url, req_options: keyword],
       messaging: [adapter: module, base_url: url, req_options: keyword, local_delivery: :log | :test_process]
 
-  The emulators (`Bearer owner`, plain-http or non-Google base URLs, local FCM)
-  are only allowed in dev and test; `ensure_allowed_in!/1` refuses to boot otherwise.
+  The emulators (`Bearer owner`, plain-http or non-Google base URLs, local FCM,
+  the `ChurchAdmin.Files.Storage` emulator adapter) are only allowed in dev and
+  test; `ensure_allowed_in!/1` refuses to boot otherwise.
   """
 
   alias ChurchAdmin.Google.Credentials
@@ -26,7 +27,7 @@ defmodule ChurchAdmin.Google.Config do
   @spec credentials() :: credentials()
   def credentials, do: Keyword.fetch!(settings(), :credentials)
 
-  @spec adapter(api()) :: module()
+  @spec adapter(:identity_toolkit | :messaging) :: module()
   def adapter(api), do: api |> api_settings() |> Keyword.fetch!(:adapter)
 
   @spec base_url(api()) :: String.t()
@@ -41,18 +42,19 @@ defmodule ChurchAdmin.Google.Config do
 
   @spec ensure_allowed_in!(atom()) :: :ok
   def ensure_allowed_in!(environment) do
-    case check_allowed_in(settings(), environment) do
+    case check_allowed_in(settings(), ChurchAdmin.Files.Storage.settings(), environment) do
       :ok -> :ok
       {:error, message} -> raise ArgumentError, message
     end
   end
 
-  @spec check_allowed_in(keyword(), atom()) :: :ok | {:error, String.t()}
-  def check_allowed_in(_settings, environment) when environment in @emulator_environments,
-    do: :ok
+  @spec check_allowed_in(keyword(), keyword(), atom()) :: :ok | {:error, String.t()}
+  def check_allowed_in(_settings, _file_storage_settings, environment)
+      when environment in @emulator_environments,
+      do: :ok
 
-  def check_allowed_in(settings, environment) do
-    case emulator_only_settings(settings) do
+  def check_allowed_in(settings, file_storage_settings, environment) do
+    case emulator_only_settings(settings) ++ file_storage_problems(file_storage_settings) do
       [] ->
         :ok
 
@@ -66,6 +68,19 @@ defmodule ChurchAdmin.Google.Config do
   defp emulator_only_settings(settings) do
     credentials_problems(Keyword.get(settings, :credentials)) ++
       Enum.flat_map(@apis, &api_problems(&1, Keyword.get(settings, &1, [])))
+  end
+
+  defp file_storage_problems(file_storage_settings) do
+    case Keyword.get(file_storage_settings, :adapter) do
+      nil ->
+        ["file storage names no adapter"]
+
+      ChurchAdmin.Files.Storage.FirebaseEmulator ->
+        ["file storage uses Files.Storage.FirebaseEmulator, which only the emulator serves"]
+
+      _adapter ->
+        []
+    end
   end
 
   defp credentials_problems({:service_account, %{}}), do: []

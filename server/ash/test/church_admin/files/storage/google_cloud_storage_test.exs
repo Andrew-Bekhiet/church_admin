@@ -1,9 +1,7 @@
-defmodule ChurchAdmin.Google.StorageTest do
+defmodule ChurchAdmin.Files.Storage.GoogleCloudStorageTest do
   use ExUnit.Case, async: true
 
-  alias ChurchAdmin.Google.Error
-  alias ChurchAdmin.Google.Storage
-  alias ChurchAdmin.Google.Storage.Object
+  alias ChurchAdmin.Files.Storage.{Error, GoogleCloudStorage, Object}
 
   @bucket "church-admin-test.appspot.com"
   @object_name "persons/2b7c8f9e-1d1a-4c55-9a8e-3f0f2f6c1a11"
@@ -27,7 +25,7 @@ defmodule ChurchAdmin.Google.StorageTest do
     updated_at: ~U[2026-10-19 08:30:15.123Z]
   }
 
-  defp stub(fun), do: Req.Test.stub(Storage, fun)
+  defp stub(fun), do: Req.Test.stub(ChurchAdmin.Files.Storage, fun)
 
   defp gcs_error(conn, status, reason) do
     conn
@@ -54,7 +52,9 @@ defmodule ChurchAdmin.Google.StorageTest do
         Req.Test.json(conn, @object_resource)
       end)
 
-      assert Storage.upload(@bucket, @object_name, "jpeg-bytes", content_type: "image/jpeg") ==
+      assert GoogleCloudStorage.upload(@bucket, @object_name, "jpeg-bytes",
+               content_type: "image/jpeg"
+             ) ==
                {:ok, @object}
     end
 
@@ -66,7 +66,10 @@ defmodule ChurchAdmin.Google.StorageTest do
       end)
 
       assert {:ok, @object} =
-               Storage.upload(@bucket, @object_name, Stream.map(["jpeg-", "bytes"], & &1),
+               GoogleCloudStorage.upload(
+                 @bucket,
+                 @object_name,
+                 Stream.map(["jpeg-", "bytes"], & &1),
                  content_type: "image/jpeg",
                  content_length: 10
                )
@@ -75,8 +78,10 @@ defmodule ChurchAdmin.Google.StorageTest do
     test "maps a forbidden upload without raising" do
       stub(&gcs_error(&1, 403, "forbidden"))
 
-      assert {:error, %Error{api: :storage, reason: :forbidden, status: 403, code: "forbidden"}} =
-               Storage.upload(@bucket, @object_name, "jpeg-bytes", content_type: "image/jpeg")
+      assert {:error, %Error{reason: :forbidden, status: 403, code: "forbidden"}} =
+               GoogleCloudStorage.upload(@bucket, @object_name, "jpeg-bytes",
+                 content_type: "image/jpeg"
+               )
     end
   end
 
@@ -93,7 +98,7 @@ defmodule ChurchAdmin.Google.StorageTest do
         |> Plug.Conn.send_resp(200, "jpeg-bytes")
       end)
 
-      assert {:ok, stream} = Storage.download(@bucket, @object_name)
+      assert {:ok, stream} = GoogleCloudStorage.download(@bucket, @object_name)
       assert Enum.join(stream) == "jpeg-bytes"
     end
 
@@ -101,7 +106,7 @@ defmodule ChurchAdmin.Google.StorageTest do
       stub(&gcs_error(&1, 404, "notFound"))
 
       assert {:error, %Error{reason: :not_found, status: 404, code: "notFound"}} =
-               Storage.download(@bucket, @object_name)
+               GoogleCloudStorage.download(@bucket, @object_name)
     end
   end
 
@@ -114,13 +119,14 @@ defmodule ChurchAdmin.Google.StorageTest do
         Plug.Conn.send_resp(conn, 204, "")
       end)
 
-      assert Storage.delete(@bucket, @object_name) == :ok
+      assert GoogleCloudStorage.delete(@bucket, @object_name) == :ok
     end
 
     test "maps a missing object to not found" do
       stub(&gcs_error(&1, 404, "notFound"))
 
-      assert {:error, %Error{reason: :not_found}} = Storage.delete(@bucket, @object_name)
+      assert {:error, %Error{reason: :not_found}} =
+               GoogleCloudStorage.delete(@bucket, @object_name)
     end
   end
 
@@ -139,7 +145,7 @@ defmodule ChurchAdmin.Google.StorageTest do
         })
       end)
 
-      assert Storage.list(@bucket, "app-release-v", page_token: "page-2") ==
+      assert GoogleCloudStorage.list(@bucket, "app-release-v", page_token: "page-2") ==
                {:ok, %{objects: [@object], next_page_token: "page-3"}}
     end
 
@@ -149,13 +155,15 @@ defmodule ChurchAdmin.Google.StorageTest do
         Req.Test.json(conn, %{"kind" => "storage#objects"})
       end)
 
-      assert Storage.list(@bucket, "exports/") == {:ok, %{objects: [], next_page_token: nil}}
+      assert GoogleCloudStorage.list(@bucket, "exports/", []) ==
+               {:ok, %{objects: [], next_page_token: nil}}
     end
 
     test "maps a server error without raising" do
       stub(&gcs_error(&1, 500, "backendError"))
 
-      assert {:error, %Error{reason: :server_error, status: 500}} = Storage.list(@bucket, "x")
+      assert {:error, %Error{reason: :server_error, status: 500}} =
+               GoogleCloudStorage.list(@bucket, "x", [])
     end
   end
 
@@ -169,13 +177,14 @@ defmodule ChurchAdmin.Google.StorageTest do
         Req.Test.json(conn, @object_resource)
       end)
 
-      assert Storage.metadata(@bucket, @object_name) == {:ok, @object}
+      assert GoogleCloudStorage.metadata(@bucket, @object_name) == {:ok, @object}
     end
 
     test "maps a missing object to not found" do
       stub(&gcs_error(&1, 404, "notFound"))
 
-      assert {:error, %Error{reason: :not_found}} = Storage.metadata(@bucket, @object_name)
+      assert {:error, %Error{reason: :not_found}} =
+               GoogleCloudStorage.metadata(@bucket, @object_name)
     end
   end
 end
