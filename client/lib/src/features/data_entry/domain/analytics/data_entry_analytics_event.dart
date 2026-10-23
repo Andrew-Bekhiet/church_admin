@@ -8,11 +8,11 @@ sealed class DataEntryAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class ObjectSaveAttempt extends DataEntryAnalyticsEvent {
-  final ViewableWithID entity;
+  final Json entityProperties;
   final bool isCreate;
   final ObjectSaveResult outcome;
   final Duration formOpenDuration;
-  final Set<PersonRuleViolation>? ruleViolations;
+  final List<PersonRuleViolationKind>? ruleViolationKinds;
   final bool? isDefaultMeetingCreated;
 
   @override
@@ -20,43 +20,41 @@ final class ObjectSaveAttempt extends DataEntryAnalyticsEvent {
 
   @override
   Json get properties => {
-    ...AnalyticsEntityType.propertiesOf(entity),
+    ...entityProperties,
     'is_create': isCreate,
     'outcome': outcome.name,
     'form_open_duration_ms': formOpenDuration.inMilliseconds,
-    if (ruleViolations case final violations?)
-      'rule_violations': [
-        for (final violation in violations)
-          PersonRuleViolationKind.of(violation).name,
-      ],
+    if (ruleViolationKinds case final kinds?)
+      'rule_violations': [for (final kind in kinds) kind.name],
     if (isDefaultMeetingCreated case final isCreated?)
       'is_default_meeting_created': isCreated,
   };
 
-  const ObjectSaveAttempt({
-    required this.entity,
+  ObjectSaveAttempt({
+    required ViewableWithID entity,
     required this.isCreate,
     required this.outcome,
     required this.formOpenDuration,
-    this.ruleViolations,
+    Set<PersonRuleViolation>? ruleViolations,
     this.isDefaultMeetingCreated,
-  });
+  }) : entityProperties = AnalyticsEntityType.propertiesOf(entity),
+       ruleViolationKinds = ruleViolations
+           ?.map(PersonRuleViolationKind.of)
+           .toList(growable: false);
 }
 
 final class ObjectDelete extends DataEntryAnalyticsEvent {
-  final ViewableWithID entity;
+  final Json entityProperties;
   final bool isSuccess;
 
   @override
   String get objectAction => 'object_delete';
 
   @override
-  Json get properties => {
-    ...AnalyticsEntityType.propertiesOf(entity),
-    'is_success': isSuccess,
-  };
+  Json get properties => {...entityProperties, 'is_success': isSuccess};
 
-  const ObjectDelete(this.entity, {required this.isSuccess});
+  ObjectDelete(ViewableWithID entity, {required this.isSuccess})
+    : entityProperties = AnalyticsEntityType.propertiesOf(entity);
 }
 
 enum PersonRuleViolationKind {
