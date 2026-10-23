@@ -82,8 +82,11 @@ class PersonMembershipsFormController extends AdvancedFormController
 
   void selectServices(Set<Service> services) {
     final selection = PersonMemberships.withAllGroupsOf(services);
+    final isSelectionChanged = selection != memberships.fieldValue;
     memberships.setValue(selection);
-    _analyticsService.track(MembershipServiceSelect(selection));
+    if (isSelectionChanged) {
+      _analyticsService.track(MembershipServiceSelect(selection));
+    }
   }
 
   @override

@@ -164,4 +164,17 @@ void main() {
       expect(fixture.analytics.trackedEventsOf<FamilyAddressFill>(), isEmpty);
     });
   });
+
+  test('choosing the services already selected is not tracked again', () {
+    final controller = fixture.controllerFor(const CreateBlankPerson());
+
+    controller.memberships
+      ..selectServices({PersonFormControllerFixture.kindergarten})
+      ..selectServices({PersonFormControllerFixture.kindergarten});
+
+    expect(
+      fixture.analytics.trackedEventsOf<MembershipServiceSelect>(),
+      hasLength(1),
+    );
+  });
 }
