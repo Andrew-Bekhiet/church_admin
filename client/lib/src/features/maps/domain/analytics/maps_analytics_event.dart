@@ -2,27 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 sealed class MapsAnalyticsEvent extends AnalyticsEvent {
-  static Json entityPropertiesOf(Object object) => switch (object) {
-    Area(:final id) => {'entity_type': MapsEntityType.area.name, 'area_id': id},
-    Street(:final id) => {
-      'entity_type': MapsEntityType.street.name,
-      'street_id': id,
-    },
-    Family(:final id) => {
-      'entity_type': MapsEntityType.family.name,
-      'family_id': id,
-    },
-    Store(:final id) => {
-      'entity_type': MapsEntityType.store.name,
-      'store_id': id,
-    },
-    Person(:final id) => {
-      'entity_type': MapsEntityType.person.name,
-      'person_id': id,
-    },
-    _ => {'entity_type': MapsEntityType.other.name},
-  };
-
   @override
   String get category => 'maps';
 
@@ -30,28 +9,27 @@ sealed class MapsAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class MapsOptionsApply extends MapsAnalyticsEvent {
-  final GeomapOptions options;
+  @override
+  final Json properties;
 
   @override
   String get objectAction => 'options_apply';
 
-  @override
-  Json get properties => {
-    'layers': [for (final layer in options.layers) layer.name],
-    'selected_area_count': options.selectedAreas.length,
-    'selected_street_count': options.selectedStreets.length,
-    'selected_family_count': options.selectedFamilies.length,
-    'selected_store_count': options.selectedStores.length,
-    'selected_service_count': options.selectedServices.length,
-    'selected_class_count': options.selectedClasses.length,
-    'selected_group_count': options.selectedGroups.length,
-  };
-
-  const MapsOptionsApply(this.options);
+  MapsOptionsApply(GeomapOptions options)
+    : properties = {
+        'layers': [for (final layer in options.layers) layer.name],
+        'selected_area_count': options.selectedAreas.length,
+        'selected_street_count': options.selectedStreets.length,
+        'selected_family_count': options.selectedFamilies.length,
+        'selected_store_count': options.selectedStores.length,
+        'selected_service_count': options.selectedServices.length,
+        'selected_class_count': options.selectedClasses.length,
+        'selected_group_count': options.selectedGroups.length,
+      };
 }
 
 final class MapsDataSelect extends MapsAnalyticsEvent {
-  final MapsEntityType entityType;
+  final AnalyticsEntityType entityType;
   final int selectedCount;
   final bool isSelectAllUsed;
   final bool isSearchUsed;
@@ -61,7 +39,7 @@ final class MapsDataSelect extends MapsAnalyticsEvent {
 
   @override
   Json get properties => {
-    'entity_type': entityType.name,
+    'entity_type': entityType.key,
     'selected_count': selectedCount,
     'is_select_all_used': isSelectAllUsed,
     'is_search_used': isSearchUsed,
@@ -89,27 +67,25 @@ final class MapsLayerToggle extends MapsAnalyticsEvent {
 }
 
 final class MapsMarkerTap extends MapsAnalyticsEvent {
-  final Object object;
+  @override
+  final Json properties;
 
   @override
   String get objectAction => 'marker_tap';
 
-  @override
-  Json get properties => MapsAnalyticsEvent.entityPropertiesOf(object);
-
-  const MapsMarkerTap(this.object);
+  MapsMarkerTap(Object entity)
+    : properties = AnalyticsEntityType.propertiesOf(entity);
 }
 
 final class MapsMarkerDetailsOpen extends MapsAnalyticsEvent {
-  final Object object;
+  @override
+  final Json properties;
 
   @override
   String get objectAction => 'marker_details_open';
 
-  @override
-  Json get properties => MapsAnalyticsEvent.entityPropertiesOf(object);
-
-  const MapsMarkerDetailsOpen(this.object);
+  MapsMarkerDetailsOpen(Object entity)
+    : properties = AnalyticsEntityType.propertiesOf(entity);
 }
 
 final class MapsExternalNavigationStart extends MapsAnalyticsEvent {
@@ -131,33 +107,21 @@ final class MapsRefreshTap extends MapsAnalyticsEvent {
   const MapsRefreshTap();
 }
 
-final class MapsLocationPermissionResult extends MapsAnalyticsEvent {
-  final PermissionStatus status;
+final class MapsLocationPermissionCheck extends MapsAnalyticsEvent {
+  final PermissionStatus permissionStatus;
   final bool isLocationServiceEnabled;
 
   @override
-  String get objectAction => 'location_permission_result';
+  String get objectAction => 'location_permission_check';
 
   @override
   Json get properties => {
-    'status': status.name,
+    'permission_status': permissionStatus.name,
     'is_location_service_enabled': isLocationServiceEnabled,
   };
 
-  const MapsLocationPermissionResult(
-    this.status, {
+  const MapsLocationPermissionCheck(
+    this.permissionStatus, {
     required this.isLocationServiceEnabled,
   });
-}
-
-enum MapsEntityType {
-  area,
-  street,
-  family,
-  store,
-  person,
-  service,
-  schoolClass,
-  group,
-  other,
 }

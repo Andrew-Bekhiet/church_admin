@@ -241,7 +241,7 @@ class DataGeomapState extends State<DataGeomap> {
     final isLocationServiceEnabled =
         await Geolocator.isLocationServiceEnabled();
     AnalyticsService.I.track(
-      MapsLocationPermissionResult(
+      MapsLocationPermissionCheck(
         permissionStatus,
         isLocationServiceEnabled: isLocationServiceEnabled,
       ),
