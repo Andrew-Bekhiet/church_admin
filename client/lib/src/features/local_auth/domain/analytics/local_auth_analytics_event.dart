@@ -38,7 +38,7 @@ final class BiometricsUnlockSubmit extends LocalAuthAnalyticsEvent {
   Json get properties => {
     'outcome': outcome.name,
     'is_auto_prompted': isAutoPrompted,
-    'seconds_locked': lockedFor.inSeconds,
+    'locked_duration_ms': lockedFor.inMilliseconds,
   };
 
   const BiometricsUnlockSubmit({
@@ -60,7 +60,7 @@ final class PasswordUnlockSubmit extends LocalAuthAnalyticsEvent {
   Json get properties => {
     'outcome': outcome.name,
     'can_check_biometrics': canCheckBiometrics,
-    'seconds_locked': lockedFor.inSeconds,
+    'locked_duration_ms': lockedFor.inMilliseconds,
   };
 
   const PasswordUnlockSubmit({
