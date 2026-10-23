@@ -26,7 +26,7 @@ defmodule ChurchAdmin.Repo.BaselineMigration do
 
   @spec run!(Ecto.Repo.t(), String.t()) :: :ok
   def run!(repo, folder) do
-    path = Path.join(folder_path(folder), "up.sql")
+    path = folder |> folder_path() |> Path.join("up.sql")
     database = Keyword.fetch!(repo.config(), :database)
 
     ChurchAdmin.Repo.SqlScript.execute!(
