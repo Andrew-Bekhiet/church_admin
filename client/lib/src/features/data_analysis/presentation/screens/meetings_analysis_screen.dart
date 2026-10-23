@@ -77,7 +77,8 @@ class _MeetingsAnalysisScreenState extends State<MeetingsAnalysisScreen> {
                                   shape: const StadiumBorder(),
                                   label: Text(g.label),
                                   selected: _granularity == g,
-                                  onSelected: (_) => _selectGranularity(g),
+                                  onSelected: (_) =>
+                                      _selectGranularityIfChanged(g),
                                 ),
                             ],
                           ),
@@ -135,7 +136,9 @@ class _MeetingsAnalysisScreenState extends State<MeetingsAnalysisScreen> {
     unawaited(context.read<MeetingsAnalysisCubit>().load(preset));
   }
 
-  void _selectGranularity(AttendanceGranularity granularity) {
+  void _selectGranularityIfChanged(AttendanceGranularity granularity) {
+    if (granularity == _granularity) return;
+
     AnalyticsService.I.track(
       AnalysisGranularitySelect(
         granularity,
