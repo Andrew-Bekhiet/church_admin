@@ -2,7 +2,6 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
   use ChurchAdminWeb.ConnCase, async: false
 
   alias ChurchAdmin.{AuthzWorld, FakeStorage, Factory, FirebaseTokens}
-  alias ChurchAdminWeb.FileToken
 
   @bucket "church-admin-test.appspot.com"
   @release_bucket "church-admin-test-releases"
@@ -15,68 +14,6 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
   defp as_user(conn, user) do
     claims = user |> Factory.firebase_account!() |> FirebaseTokens.valid_claims()
     put_req_header(conn, "authorization", "Bearer " <> FirebaseTokens.unsigned(claims))
-  end
-
-  describe "GET /api/files/:token for an app release" do
-    defp app_token(user, opts \\ []) do
-      params = %{
-        bucket: @release_bucket,
-        object: "app-release-v1.10.0.apk",
-        version: "1.10.0",
-        extension: "apk",
-        size: byte_size("apk-bytes"),
-        content_type: "application/vnd.android.package-archive"
-      }
-
-      {token, _expires_at} = FileToken.issue(:app_download, user.uid, params, opts)
-      token
-    end
-
-    test "streams the file with its type, length and download name", %{conn: conn, world: world} do
-      test = self()
-
-      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
-        send(test, {:gcs_download, conn.request_path})
-        Plug.Conn.send_resp(conn, 200, "apk-bytes")
-      end)
-
-      response = get(conn, ~p"/api/files/#{app_token(world.users.approved_plain)}")
-
-      assert response.status == 200
-      assert response.resp_body == "apk-bytes"
-
-      assert get_resp_header(response, "content-type") == [
-               "application/vnd.android.package-archive"
-             ]
-
-      assert get_resp_header(response, "content-length") == ["9"]
-
-      assert get_resp_header(response, "content-disposition") ==
-               [~s(attachment; filename="church-admin-v1.10.0.apk")]
-
-      assert_received {:gcs_download, "/storage/v1/b/" <> rest}
-      assert rest == "#{@release_bucket}/o/app-release-v1.10.0.apk"
-    end
-
-    test "is refused once the user is no longer approved", %{conn: conn, world: world} do
-      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn -> Plug.Conn.send_resp(conn, 200, "x") end)
-
-      assert get(conn, ~p"/api/files/#{app_token(world.users.unapproved)}").status == 403
-    end
-
-    test "lives twenty minutes", %{conn: conn, world: world} do
-      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
-        Plug.Conn.send_resp(conn, 200, "apk-bytes")
-      end)
-
-      user = world.users.approved_plain
-
-      fresh = app_token(user, signed_at: System.system_time(:second) - 19 * 60)
-      stale = app_token(user, signed_at: System.system_time(:second) - 21 * 60)
-
-      assert get(conn, ~p"/api/files/#{fresh}").status == 200
-      assert get(conn, ~p"/api/files/#{stale}").status == 401
-    end
   end
 
   describe "the GraphQL surface" do
@@ -169,20 +106,23 @@ defmodule ChurchAdminWeb.PhotoFilesTest do
     end
 
     test "appDownloadLink", %{conn: conn, world: world} do
-      Req.Test.stub(ChurchAdmin.Files.Storage, fn conn ->
-        Req.Test.json(conn, %{
-          "items" => [
-            %{"name" => "app-release-v1.0.0.apk", "bucket" => @release_bucket, "size" => "3"}
-          ]
-        })
-      end)
+      store = FakeStorage.start()
+
+      FakeStorage.put(
+        store,
+        @release_bucket,
+        "app-release-v1.0.0.apk",
+        "apk",
+        "application/vnd.android.package-archive"
+      )
 
       assert %{"data" => %{"appDownloadLink" => link}} =
                gql(conn, world.users.approved_plain, """
                query { appDownloadLink(platform: ANDROID) { url expiresAt version } }
                """)
 
-      assert %{"version" => "1.0.0", "url" => "http" <> _} = link
+      assert %{"version" => "1.0.0", "url" => url} = link
+      assert url =~ "/v0/b/#{@release_bucket}/o/app-release-v1.0.0.apk?alt=media&token="
     end
 
     test "appDownloadLink refuses an unapproved user", %{conn: conn, world: world} do

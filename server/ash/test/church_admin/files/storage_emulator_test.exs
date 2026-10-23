@@ -1,5 +1,5 @@
-defmodule ChurchAdminWeb.PhotoEmulatorTest do
-  use ChurchAdminWeb.ConnCase, async: false
+defmodule ChurchAdmin.Files.StorageEmulatorTest do
+  use ChurchAdmin.DataCase, async: false
 
   alias ChurchAdmin.{AuthzWorld, Files}
   alias ChurchAdmin.Authz.ActorLoader
@@ -46,8 +46,6 @@ defmodule ChurchAdminWeb.PhotoEmulatorTest do
     {:ok, world: AuthzWorld.build!()}
   end
 
-  defp path(%{url: url}), do: URI.parse(url).path
-
   test "uploads, confirms, serves and deletes a photo against the Storage emulator", %{
     world: world
   } do
@@ -81,45 +79,23 @@ defmodule ChurchAdminWeb.PhotoEmulatorTest do
     assert Req.get!(download.url, retry: false).status in [403, 404]
   end
 
-  describe "over a real HTTP server" do
-    setup do
-      server =
-        start_supervised!(
-          {Bandit, plug: ChurchAdminWeb.Endpoint, scheme: :http, port: 0, ip: :loopback}
-        )
+  test "links an app release straight to its bytes in the emulator", %{world: world} do
+    bucket =
+      "#{Application.fetch_env!(:church_admin, :firebase_emulators)[:project_id]}.appspot.com"
 
-      {:ok, {_address, port}} = ThousandIsland.listener_info(server)
+    apk = :binary.copy("apk", 50_000)
 
-      %{base_url: "http://127.0.0.1:#{port}"}
-    end
+    {:ok, _object} =
+      Storage.upload(bucket, "app-release-v3.4.5.apk", apk,
+        content_type: "application/vnd.android.package-archive"
+      )
 
-    test "streams an app release with its length and download name", %{
-      base_url: base_url,
-      world: world
-    } do
-      bucket =
-        "#{Application.fetch_env!(:church_admin, :firebase_emulators)[:project_id]}.appspot.com"
+    actor = ActorLoader.load(world.users.approved_plain.uid)
+    {:ok, link} = ChurchAdmin.Releases.app_download_link(:android, actor: actor)
+    assert link.version == "3.4.5"
 
-      apk = :binary.copy("apk", 50_000)
+    assert Req.get!(link.url, decode_body: false, retry: false).body == apk
 
-      {:ok, _object} =
-        Storage.upload(bucket, "app-release-v3.4.5.apk", apk,
-          content_type: "application/vnd.android.package-archive"
-        )
-
-      actor = ActorLoader.load(world.users.approved_plain.uid)
-      {:ok, link} = ChurchAdmin.Releases.app_download_link(:android, actor: actor)
-      assert link.version == "3.4.5"
-
-      response = Req.get!(base_url <> path(link), decode_body: false)
-
-      assert response.body == apk
-      assert Req.Response.get_header(response, "content-length") == ["#{byte_size(apk)}"]
-
-      assert Req.Response.get_header(response, "content-disposition") ==
-               [~s(attachment; filename="church-admin-v3.4.5.apk")]
-
-      Storage.delete(bucket, "app-release-v3.4.5.apk")
-    end
+    Storage.delete(bucket, "app-release-v3.4.5.apk")
   end
 end

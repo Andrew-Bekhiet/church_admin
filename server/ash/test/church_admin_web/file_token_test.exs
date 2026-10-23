@@ -42,7 +42,7 @@ defmodule ChurchAdminWeb.FileTokenTest do
     end
   end
 
-  for {op, minutes} <- [export: 10, app_download: 20] do
+  for {op, minutes} <- [export: 10] do
     test "a #{op} token lasts #{minutes} minutes" do
       {fresh, expires_at} =
         FileToken.issue(unquote(op), @uid, %{},

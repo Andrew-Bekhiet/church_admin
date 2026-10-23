@@ -1,7 +1,7 @@
 defmodule ChurchAdminWeb.FileToken do
   @moduledoc """
   The short-lived token in a `/api/files/:token` URL. It is signed, names the
-  operation (`:export` or `:app_download`),
+  operation (`:export`),
   the user it was issued to and the operation's parameters, and expires after
   the window its operation allows. Each operation adds its window to
   `@max_age_seconds` and its clause to `ChurchAdminWeb.FileController`.
@@ -9,11 +9,10 @@ defmodule ChurchAdminWeb.FileToken do
 
   @salt "church_admin file download"
   @max_age_seconds %{
-    export: 10 * 60,
-    app_download: 20 * 60
+    export: 10 * 60
   }
 
-  @type op :: :export | :app_download
+  @type op :: :export
   @type claims :: %{op: op(), uid: String.t(), params: map()}
 
   @spec issue(op(), String.t(), map(), signed_at: integer()) :: {String.t(), DateTime.t()}

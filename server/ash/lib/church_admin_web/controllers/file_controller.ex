@@ -14,13 +14,10 @@ defmodule ChurchAdminWeb.FileController do
 
   use ChurchAdminWeb, :controller
 
-  require Logger
-
   alias ChurchAdmin.Authz.{Actor, ActorLoader}
   alias ChurchAdmin.Errors.DomainError
   alias ChurchAdmin.Exports.{Selection, Workbook}
-  alias ChurchAdmin.Files.Storage
-  alias ChurchAdminWeb.{FileToken, StreamedFile}
+  alias ChurchAdminWeb.FileToken
 
   @xlsx_content_type "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
@@ -35,7 +32,7 @@ defmodule ChurchAdminWeb.FileController do
     end
   end
 
-  defp serve(%{method: "GET"} = conn, %{op: :export, uid: uid, params: params}) do
+  defp serve(conn, %{op: :export, uid: uid, params: params}) do
     actor = ActorLoader.load(uid)
 
     case Workbook.build(actor, Selection.new(params)) do
@@ -56,46 +53,12 @@ defmodule ChurchAdminWeb.FileController do
     end
   end
 
-  defp serve(%{method: "GET"} = conn, %{op: :app_download, uid: uid, params: params}) do
-    if ActorLoader.load(uid).approved? do
-      stream_app_release(conn, params)
-    else
-      send_error(conn, 403, "forbidden", "forbidden")
-    end
-  end
-
-  defp serve(conn, _claims),
-    do: send_error(conn, 405, "invalid", "This link does not take #{conn.method} requests")
-
-  defp stream_app_release(conn, params) do
-    case Storage.download(params.bucket, params.object) do
-      {:ok, chunks} ->
-        conn
-        |> put_resp_header(
-          "content-disposition",
-          ~s(attachment; filename="church-admin-v#{params.version}.#{params.extension}")
-        )
-        |> StreamedFile.send_chunks(chunks, params.content_type, params.size)
-
-      {:error, error} ->
-        send_storage_error(conn, error)
-    end
-  end
-
   defp same_user?(conn, %{uid: uid}) do
     case Ash.PlugHelpers.get_actor(conn) do
       nil -> :ok
       %Actor{uid: ^uid} -> :ok
       %Actor{} -> {:error, :another_user}
     end
-  end
-
-  defp send_storage_error(conn, %Storage.Error{reason: :not_found}),
-    do: send_error(conn, 404, "not_found", "The file was not found")
-
-  defp send_storage_error(conn, %Storage.Error{} = error) do
-    Logger.error("storage failed: #{inspect(error)}")
-    send_error(conn, 502, "storage_unavailable", "The file storage failed")
   end
 
   defp send_error(conn, status, code, message) do

@@ -80,6 +80,17 @@ defmodule ChurchAdmin.FakeStorage do
     end
   end
 
+  defp respond(conn, "GET", ["storage", "v1", "b", bucket, "o"], query, store, _failing) do
+    prefix = Map.get(query, "prefix", "")
+
+    items =
+      for name <- names(store, bucket), String.starts_with?(name, prefix) do
+        resource(bucket, name, get(store, bucket, name))
+      end
+
+    Req.Test.json(conn, %{"kind" => "storage#objects", "items" => items})
+  end
+
   defp respond(conn, method, ["storage", "v1", "b", bucket, "o", name], query, store, _failing) do
     case {method, get(store, bucket, name), query} do
       {_method, nil, _query} ->

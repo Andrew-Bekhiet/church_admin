@@ -2,10 +2,47 @@ defmodule ChurchAdmin.Releases.AppReleaseTest do
   use ChurchAdmin.AuthzCase, async: false
 
   alias ChurchAdmin.AccountsCase
+  alias ChurchAdmin.Files.Storage
   alias ChurchAdmin.Releases
-  alias ChurchAdminWeb.FileToken
 
   @bucket "church-admin-test-releases"
+
+  setup do
+    google_settings = Application.fetch_env!(:church_admin, ChurchAdmin.Google.Config)
+    storage_settings = Application.fetch_env!(:church_admin, Storage)
+    {_kind, pem} = {:rsa, 2048} |> JOSE.JWK.generate_key() |> JOSE.JWK.to_pem()
+
+    service_account = %{
+      "client_email" => "signer@test.iam.gserviceaccount.com",
+      "private_key" => pem
+    }
+
+    credentials = {:service_account, service_account}
+
+    Application.put_env(
+      :church_admin,
+      ChurchAdmin.Google.Config,
+      Keyword.put(google_settings, :credentials, credentials)
+    )
+
+    token_endpoint = fn _request ->
+      body = %{"access_token" => "token", "token_type" => "Bearer", "expires_in" => 3600}
+      {:ok, %{status: 200, headers: [], body: Jason.encode!(body)}}
+    end
+
+    [{Goth, goth_options}] = ChurchAdmin.Google.Credentials.child_specs(credentials)
+    start_supervised!({Goth, Keyword.put(goth_options, :http_client, token_endpoint)})
+
+    Application.put_env(:church_admin, Storage,
+      adapter: Storage.GoogleCloudStorage,
+      signer: :service_account_key
+    )
+
+    on_exit(fn ->
+      Application.put_env(:church_admin, ChurchAdmin.Google.Config, google_settings)
+      Application.put_env(:church_admin, Storage, storage_settings)
+    end)
+  end
 
   defp object(name, size \\ 1000, content_type \\ "application/octet-stream") do
     %{
@@ -47,10 +84,9 @@ defmodule ChurchAdmin.Releases.AppReleaseTest do
     })
   end
 
-  defp claims!(%{url: url}) do
-    %URI{path: "/api/files/" <> rest} = URI.parse(url)
-    {:ok, claims} = rest |> String.split("/") |> hd() |> FileToken.verify()
-    claims
+  defp signed!(%{url: url}) do
+    %URI{host: "storage.googleapis.com", path: path, query: query} = URI.parse(url)
+    {path, URI.decode_query(query)}
   end
 
   test "picks the highest semantic version across pages", %{world: world} do
@@ -63,18 +99,14 @@ defmodule ChurchAdmin.Releases.AppReleaseTest do
     assert_received {:list, _path, %{"prefix" => "app-release-v", "pageToken" => "page-2"}}
 
     assert DateTime.diff(link.expires_at, DateTime.utc_now(), :second) in 1195..1201
-    assert link.url =~ ~r{/api/files/[^/]+/church-admin-v1\.10\.0\.apk\z}
 
-    assert %{op: :app_download, params: params} = claims!(link)
+    assert {"/#{@bucket}/app-release-v1.10.0.apk", query} = signed!(link)
+    assert query["X-Goog-Expires"] == "1200"
 
-    assert params == %{
-             bucket: @bucket,
-             object: "app-release-v1.10.0.apk",
-             version: "1.10.0",
-             extension: "apk",
-             size: 2048,
-             content_type: "application/vnd.android.package-archive"
-           }
+    assert query["response-content-disposition"] ==
+             ~s(attachment; filename="church-admin-v1.10.0.apk")
+
+    assert query["response-content-type"] == "application/vnd.android.package-archive"
   end
 
   test "iOS picks the highest .ipa", %{world: world} do
@@ -83,8 +115,10 @@ defmodule ChurchAdmin.Releases.AppReleaseTest do
     assert {:ok, %{version: "2.0.0"} = link} =
              Releases.app_download_link(:ios, actor: actor(world, :approved_plain))
 
-    assert %{params: %{object: "app-release-v2.0.0.ipa", size: 5000}} = claims!(link)
-    assert link.url =~ ~r{/church-admin-v2\.0\.0\.ipa\z}
+    assert {"/#{@bucket}/app-release-v2.0.0.ipa", query} = signed!(link)
+
+    assert query["response-content-disposition"] ==
+             ~s(attachment; filename="church-admin-v2.0.0.ipa")
   end
 
   test "an iOS release without a stored content type is an octet stream", %{world: world} do
@@ -93,7 +127,7 @@ defmodule ChurchAdmin.Releases.AppReleaseTest do
     })
 
     assert {:ok, link} = Releases.app_download_link(:ios, actor: actor(world, :approved_plain))
-    assert %{params: %{content_type: "application/octet-stream"}} = claims!(link)
+    assert {_path, %{"response-content-type" => "application/octet-stream"}} = signed!(link)
   end
 
   test "an Android release without a stored content type is an APK", %{world: world} do
@@ -104,7 +138,8 @@ defmodule ChurchAdmin.Releases.AppReleaseTest do
     assert {:ok, link} =
              Releases.app_download_link(:android, actor: actor(world, :approved_plain))
 
-    assert %{params: %{content_type: "application/vnd.android.package-archive"}} = claims!(link)
+    assert {_path, %{"response-content-type" => "application/vnd.android.package-archive"}} =
+             signed!(link)
   end
 
   test "no release of the platform is not found", %{world: world} do
