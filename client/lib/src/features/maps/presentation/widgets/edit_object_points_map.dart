@@ -23,6 +23,7 @@ class EditObjectPointsMap<T extends ViewableWithID> extends StatefulWidget {
   final List<Point>? Function(T) getObjectPoints;
   final T Function(List<Point>, T) onModify;
   final bool closedShape;
+  final bool isPointsSaveTracked;
 
   const EditObjectPointsMap({
     required this.geomapOptions,
@@ -32,6 +33,7 @@ class EditObjectPointsMap<T extends ViewableWithID> extends StatefulWidget {
     required this.getObjectPoints,
     required this.onModify,
     this.closedShape = false,
+    this.isPointsSaveTracked = true,
     super.key,
   });
 
@@ -58,9 +60,9 @@ class _EditObjectPointsMap<T extends ViewableWithID>
   late final BehaviorSubject<GeomapOptions> _mapOptionsStream =
       BehaviorSubject.seeded(widget.geomapOptions);
 
-  int _pointsAdded = 0;
-  int _pointsRemoved = 0;
-  int _midpointsInserted = 0;
+  int _addedPointCount = 0;
+  int _removedPointCount = 0;
+  int _insertedMidpointCount = 0;
 
   List<DragMarker> Function(int i, Point p) _createMarkerFromPoint(
     double markerSize,
@@ -95,7 +97,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
           resultObject.value,
         ),
         onLongPress: (_) {
-          _pointsRemoved++;
+          _removedPointCount++;
           resultObject.value = widget.onModify(
             points.where((e) => e != p).toList(),
             resultObject.value,
@@ -116,7 +118,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
           icon: Symbols.add_circle_outline,
         ),
         onDragStart: (_, newPoint) {
-          _midpointsInserted++;
+          _insertedMidpointCount++;
           resultObject.value = widget.onModify(
             [
               ...points
@@ -210,7 +212,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
           ],
           createMapOptions: (center) => MapOptions(
             onTap: (_, latlng) {
-              _pointsAdded++;
+              _addedPointCount++;
               resultObject.value = widget.onModify(
                 [
                   ...widget.getObjectPoints(resultObject.value) ?? [],
@@ -232,15 +234,17 @@ class _EditObjectPointsMap<T extends ViewableWithID>
   }
 
   void _save() {
-    AnalyticsService.I.track(
-      LocationPointsSave(
-        resultObject.value,
-        pointsAdded: _pointsAdded,
-        pointsRemoved: _pointsRemoved,
-        midpointsInserted: _midpointsInserted,
-        isClosedShape: widget.closedShape,
-      ),
-    );
+    if (widget.isPointsSaveTracked) {
+      AnalyticsService.I.track(
+        LocationPointsSave(
+          resultObject.value,
+          addedPointCount: _addedPointCount,
+          removedPointCount: _removedPointCount,
+          insertedMidpointCount: _insertedMidpointCount,
+          isClosedShape: widget.closedShape,
+        ),
+      );
+    }
     widget.onSaved(resultObject.value);
   }
 

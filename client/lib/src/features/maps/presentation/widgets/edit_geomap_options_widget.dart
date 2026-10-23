@@ -146,7 +146,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.groups.streamAll(),
       selected: stagingMapOptions.selectedGroups.toList(),
       title: 'اختيار المجموعات',
-      entityType: MapsEntityType.group,
+      entityType: AnalyticsEntityType.group,
     );
 
     if (rslt != null && mounted) {
@@ -163,7 +163,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.classes.streamAll(),
       selected: stagingMapOptions.selectedClasses.toList(),
       title: 'اختيار الفصول',
-      entityType: MapsEntityType.schoolClass,
+      entityType: AnalyticsEntityType.class$,
     );
 
     if (rslt != null && mounted) {
@@ -180,7 +180,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.services.streamAll(),
       selected: stagingMapOptions.selectedServices.toList(),
       title: 'اختيار الخدمات',
-      entityType: MapsEntityType.service,
+      entityType: AnalyticsEntityType.service,
     );
 
     if (rslt != null && mounted) {
@@ -197,7 +197,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.stores.streamAll(),
       selected: stagingMapOptions.selectedStores.toList(),
       title: 'اختيار المتاجر',
-      entityType: MapsEntityType.store,
+      entityType: AnalyticsEntityType.store,
     );
 
     if (rslt != null && mounted) {
@@ -214,7 +214,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.families.streamAll(),
       selected: stagingMapOptions.selectedFamilies.toList(),
       title: 'اختيار العائلات',
-      entityType: MapsEntityType.family,
+      entityType: AnalyticsEntityType.family,
     );
 
     if (rslt != null && mounted) {
@@ -231,7 +231,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.streets.streamAll(),
       selected: stagingMapOptions.selectedStreets.toList(),
       title: 'اختيار الشوارع',
-      entityType: MapsEntityType.street,
+      entityType: AnalyticsEntityType.street,
     );
 
     if (rslt != null && mounted) {
@@ -248,7 +248,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       stream: DatabaseService.I.areas.streamAll(),
       selected: stagingMapOptions.selectedAreas.toList(),
       title: 'اختيار المناطق',
-      entityType: MapsEntityType.area,
+      entityType: AnalyticsEntityType.area,
     );
 
     if (rslt != null && mounted) {
@@ -264,7 +264,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     required PaginatableStreamBase<T> stream,
     required List<T> selected,
     required String title,
-    required MapsEntityType entityType,
+    required AnalyticsEntityType entityType,
   }) async {
     final search = BehaviorSubject<String?>.seeded(null);
     var isSelectAllUsed = false;

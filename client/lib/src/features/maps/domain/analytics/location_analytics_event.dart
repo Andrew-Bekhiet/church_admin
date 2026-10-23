@@ -1,27 +1,28 @@
 import 'package:church_admin/church_admin.dart';
 
 sealed class LocationAnalyticsEvent extends AnalyticsEvent {
-  final Object entity;
+  final Json entityProperties;
 
   @override
   String get category => 'location';
 
   @override
-  Json get properties => MapsAnalyticsEvent.entityPropertiesOf(entity);
+  Json get properties => entityProperties;
 
-  const LocationAnalyticsEvent(this.entity);
+  LocationAnalyticsEvent(Object entity)
+    : entityProperties = AnalyticsEntityType.propertiesOf(entity);
 }
 
 final class LocationSet extends LocationAnalyticsEvent {
-  final LocationSetMethod method;
+  final LocationSetMethod setMethod;
 
   @override
   String get objectAction => 'set';
 
   @override
-  Json get properties => {...super.properties, 'method': method.name};
+  Json get properties => {...super.properties, 'set_method': setMethod.name};
 
-  const LocationSet(super.entity, this.method);
+  LocationSet(super.entity, this.setMethod);
 }
 
 final class LocationLinkParse extends LocationAnalyticsEvent {
@@ -40,7 +41,7 @@ final class LocationLinkParse extends LocationAnalyticsEvent {
     'is_success': isSuccess,
   };
 
-  const LocationLinkParse(
+  LocationLinkParse(
     super.entity, {
     required this.inputKind,
     required this.isPrefilledFromClipboard,
@@ -57,11 +58,11 @@ final class LocationClipboardLinkShow extends LocationAnalyticsEvent {
   @override
   Json get properties => {...super.properties, 'input_kind': inputKind.name};
 
-  const LocationClipboardLinkShow(super.entity, this.inputKind);
+  LocationClipboardLinkShow(super.entity, this.inputKind);
 }
 
 final class LocationSave extends LocationAnalyticsEvent {
-  final LocationSetMethod? lastMethod;
+  final LocationSetMethod? lastSetMethod;
 
   @override
   String get objectAction => 'save';
@@ -69,17 +70,17 @@ final class LocationSave extends LocationAnalyticsEvent {
   @override
   Json get properties => {
     ...super.properties,
-    'method': lastMethod?.name,
-    'is_changed': lastMethod != null,
+    'last_set_method': lastSetMethod?.name,
+    'is_changed': lastSetMethod != null,
   };
 
-  const LocationSave(super.entity, {required this.lastMethod});
+  LocationSave(super.entity, {required this.lastSetMethod});
 }
 
 final class LocationPointsSave extends LocationAnalyticsEvent {
-  final int pointsAdded;
-  final int pointsRemoved;
-  final int midpointsInserted;
+  final int addedPointCount;
+  final int removedPointCount;
+  final int insertedMidpointCount;
   final bool isClosedShape;
 
   @override
@@ -88,17 +89,17 @@ final class LocationPointsSave extends LocationAnalyticsEvent {
   @override
   Json get properties => {
     ...super.properties,
-    'points_added': pointsAdded,
-    'points_removed': pointsRemoved,
-    'midpoints_inserted': midpointsInserted,
+    'added_point_count': addedPointCount,
+    'removed_point_count': removedPointCount,
+    'inserted_midpoint_count': insertedMidpointCount,
     'is_closed_shape': isClosedShape,
   };
 
-  const LocationPointsSave(
+  LocationPointsSave(
     super.entity, {
-    required this.pointsAdded,
-    required this.pointsRemoved,
-    required this.midpointsInserted,
+    required this.addedPointCount,
+    required this.removedPointCount,
+    required this.insertedMidpointCount,
     required this.isClosedShape,
   });
 }
