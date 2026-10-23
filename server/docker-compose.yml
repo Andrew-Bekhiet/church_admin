@@ -39,6 +39,7 @@ services:
       DB_PASSWORD: ${POSTGRES_PASSWORD}
       DB_NAME: church_admin
       PORT: "4100"
+      PUBLIC_URL: "http://localhost:${ASH_PORT:-8080}"
       AUTH_MODE: emulator
       FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID:-church-admin-local}
       FIREBASE_AUTH_EMULATOR_HOST: firebase-emulators:9099

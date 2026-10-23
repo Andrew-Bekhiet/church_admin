@@ -29,6 +29,8 @@ cp server/example.env server/.env   # set POSTGRES_PASSWORD
 docker compose -f server/docker-compose.yml --env-file server/.env up -d --build --wait
 ```
 
+The compose file sets `PUBLIC_URL` to `http://localhost:$ASH_PORT`, the origin clients reach the published port on; dev-env runtime config turns it into the endpoint's `url`, so export and photo download links point at it instead of the container's own port 4100. Prod ignores it and builds links from `PHX_HOST`.
+
 The `ash` container runs `mix church_admin.setup $ASH_SETUP_ARGS` and then `mix phx.server`. `setup` migrates and seeds only a database that has not applied the last baseline version yet, so restarts keep the data: `ASH_SETUP_ARGS=--services` (the default) loads the reference data and the sample services, `--scale small|medium` also the generated people (import `<scale>.auth_emulator.json` into the Auth emulator for their sign-ins). Change it only on a fresh volume (`docker compose down -v`).
 
 The first administrator is the email named to `ChurchAdmin.Release.bootstrap_admin/1`; there is no first-sign-up rule. Sign up in the app (or the Auth emulator), then `docker compose -f server/docker-compose.yml --env-file server/.env exec ash mix church_admin.bootstrap_admin --email you@example.com`. It also works before sign-up: the later sign-up claims the seeded row.

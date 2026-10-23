@@ -69,6 +69,17 @@ if config_env() == :dev do
 
   config :church_admin, ChurchAdminWeb.Endpoint, http: [ip: http_bind_ip]
 
+  if public_url = System.get_env("PUBLIC_URL") do
+    %URI{scheme: scheme, host: public_host, port: public_port} = URI.parse(public_url)
+
+    if is_nil(scheme) or is_nil(public_host) do
+      raise "PUBLIC_URL must be a full origin such as http://localhost:8080, got: #{inspect(public_url)}"
+    end
+
+    config :church_admin, ChurchAdminWeb.Endpoint,
+      url: [scheme: scheme, host: public_host, port: public_port]
+  end
+
   config :church_admin, ChurchAdmin.Files,
     buckets:
       "FIREBASE_PROJECT_ID"
