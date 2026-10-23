@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
@@ -22,7 +23,10 @@ class NotificationDetailsDialog extends StatelessWidget {
 
     final query = AdvancedQuery.fromJson(queryData);
 
-    return () => AdvancedSearchRoute(initialQuery: query).push(context);
+    return () {
+      AnalyticsService.I.track(NotificationSearchResultsOpen(notification));
+      unawaited(AdvancedSearchRoute(initialQuery: query).push(context));
+    };
   }
 
   NotificationDetailsDialog({

@@ -79,6 +79,7 @@ class NotificationsService extends BlocObserver {
 
   final AuthBloc _authBloc;
   final DatabaseService _databaseService;
+  final AnalyticsService _analyticsService;
 
   final BehaviorSubject<bool> _isPausedSubject = BehaviorSubject.seeded(true);
 
@@ -94,7 +95,15 @@ class NotificationsService extends BlocObserver {
           .asStream()
           .switchMap(
             (initial) async* {
-              if (initial != null) yield initial;
+              if (initial != null) {
+                _analyticsService.track(
+                  NotificationOpen(
+                    initial,
+                    source: NotificationOpenSource.coldStart,
+                  ),
+                );
+                yield initial;
+              }
 
               yield* _foregroundNotificationsStreamController.stream;
             },
@@ -112,6 +121,7 @@ class NotificationsService extends BlocObserver {
     required Stream<RemoteMessage> onForegroundMessageStream,
     required Stream<RemoteMessage> onMessageOpenedAppStream,
     required this._authBloc,
+    required this._analyticsService,
     DatabaseService? databaseService,
     NotificationsStorage? storage,
     NotificationsSettingsStorage? settings,
@@ -126,6 +136,14 @@ class NotificationsService extends BlocObserver {
 
     _onMessageOpenedAppSubscription = onMessageOpenedAppStream
         .map(Notification.fromRemoteMessage)
+        .doOnData(
+          (notification) => _analyticsService.track(
+            NotificationOpen(
+              notification,
+              source: NotificationOpenSource.fcmOpenedApp,
+            ),
+          ),
+        )
         .listen(addForegroundNotificationTap);
   }
 
@@ -315,16 +333,33 @@ class NotificationsService extends BlocObserver {
   Future<bool> requestNotificationsPermission() async {
     final notificationPermissionStatus = await Permission.notification
         .request();
-    if (notificationPermissionStatus == PermissionStatus.granted ||
-        notificationPermissionStatus == PermissionStatus.limited) {
-      final fcmPermission = await _firebaseMessaging.requestPermission();
+    final isGranted = await _isFcmPermissionGrantedAfter(
+      notificationPermissionStatus,
+    );
 
-      return fcmPermission.authorizationStatus ==
-              AuthorizationStatus.authorized ||
-          fcmPermission.authorizationStatus == AuthorizationStatus.provisional;
+    _analyticsService.track(
+      NotificationPermissionAnswer(
+        permissionStatus: notificationPermissionStatus.name,
+        isGranted: isGranted,
+      ),
+    );
+
+    return isGranted;
+  }
+
+  Future<bool> _isFcmPermissionGrantedAfter(
+    PermissionStatus notificationPermissionStatus,
+  ) async {
+    if (notificationPermissionStatus != PermissionStatus.granted &&
+        notificationPermissionStatus != PermissionStatus.limited) {
+      return false;
     }
 
-    return false;
+    final fcmPermission = await _firebaseMessaging.requestPermission();
+
+    return fcmPermission.authorizationStatus ==
+            AuthorizationStatus.authorized ||
+        fcmPermission.authorizationStatus == AuthorizationStatus.provisional;
   }
 
   @override

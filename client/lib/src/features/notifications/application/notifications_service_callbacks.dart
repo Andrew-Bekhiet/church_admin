@@ -52,6 +52,9 @@ class NotificationsServiceCallbacks {
 
     if (notification == null) return;
 
+    AnalyticsService.I.track(
+      NotificationOpen(notification, source: NotificationOpenSource.localTap),
+    );
     NotificationsService.I.addForegroundNotificationTap(notification);
   }
 
@@ -74,7 +77,16 @@ class NotificationsServiceCallbacks {
         .createPaginatableStream(query)
         .first;
 
-    if (persons.isNotEmpty || !kReleaseMode) {
+    final isSkippedEmpty = persons.isEmpty && kReleaseMode;
+    AnalyticsService.I.track(
+      NotificationReminderFire(
+        reminderType: type.name,
+        personCount: persons.length,
+        isSkippedEmpty: isSkippedEmpty,
+      ),
+    );
+
+    if (!isSkippedEmpty) {
       final notification = makeNotificationWith(
         persons: persons,
         title: title,
