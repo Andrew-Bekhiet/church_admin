@@ -74,7 +74,7 @@ defmodule ChurchAdmin.Accounts.Invitation do
     attribute :id, :uuid,
       primary_key?: true,
       allow_nil?: false,
-      default: &Ash.UUID.generate/0,
+      default: &Ash.UUIDv7.generate/0,
       public?: true
 
     attribute :user_uid, :uuid, allow_nil?: false, public?: true

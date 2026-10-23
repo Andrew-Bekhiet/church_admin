@@ -145,7 +145,7 @@ defmodule ChurchAdmin.Organization.Group do
     attribute :id, :uuid,
       primary_key?: true,
       allow_nil?: false,
-      default: &Ash.UUID.generate/0,
+      default: &Ash.UUIDv7.generate/0,
       public?: true
 
     attribute :name, Text, allow_nil?: false, public?: true

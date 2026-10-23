@@ -8,6 +8,7 @@ The church_admin backend: Phoenix 1.8 (API only) + Ash 3, OTP app `:church_admin
 - **Generators first.** Create and change code with `mix ash.gen.*`, `mix igniter.install` and `mix ash.codegen <name>` (which writes the Ecto migration and resource snapshot) before writing boilerplate by hand. Review every generated migration.
 - **Tests first.** Write the ExUnit test against the real schema, watch it fail, then make it pass.
 - **Schema.** `priv/repo/baseline/<hasura version>_<name>/up.sql` is the frozen Hasura-era schema; each folder is applied by its own Ecto migration in `priv/repo/migrations/` with the folder's version. Never edit the baseline. Every later schema change is a new Ecto migration.
+- **Ids are UUIDv7.** A uuid primary key the app generates defaults to `&Ash.UUIDv7.generate/0` (`UuidV7PrimaryKeysTest` fails otherwise); the columns stay `uuid`, so existing v4 rows keep working. The database defaults (`gen_random_uuid()`) move to Postgres 18's native `uuidv7()` when the server is upgraded.
 - Before using an Ash package feature, read its skill in `.claude/skills/` or its usage rules below.
 
 ## Local database

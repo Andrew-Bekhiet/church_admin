@@ -58,7 +58,11 @@ defmodule ChurchAdmin.People.PersonHobby do
   end
 
   attributes do
-    attribute :rel_id, :uuid, primary_key?: true, allow_nil?: false, default: &Ash.UUID.generate/0
+    attribute :rel_id, :uuid,
+      primary_key?: true,
+      allow_nil?: false,
+      default: &Ash.UUIDv7.generate/0
+
     attribute :person_id, :uuid, allow_nil?: false, public?: true
     attribute :hobby_id, :uuid, allow_nil?: false, public?: true
   end

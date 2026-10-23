@@ -89,7 +89,11 @@ defmodule ChurchAdmin.People.FamilyRelation do
   attributes do
     attribute :parent_family_id, :uuid, allow_nil?: false, public?: true
     attribute :child_family_id, :uuid, allow_nil?: false, public?: true
-    attribute :rel_id, :uuid, primary_key?: true, allow_nil?: false, default: &Ash.UUID.generate/0
+
+    attribute :rel_id, :uuid,
+      primary_key?: true,
+      allow_nil?: false,
+      default: &Ash.UUIDv7.generate/0
   end
 
   relationships do

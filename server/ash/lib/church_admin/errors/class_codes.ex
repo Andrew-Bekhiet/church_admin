@@ -31,7 +31,7 @@ defmodule ChurchAdmin.Errors.ClassCodes do
     do: error_map(error, "invalid", message_without_bread_crumbs(error))
 
   def to_error(error) do
-    error_id = Ash.UUID.generate()
+    error_id = Ash.UUIDv7.generate()
     Logger.error("#{error_id}: #{Exception.format(:error, error, stacktrace(error))}")
     error_map(error, "something_went_wrong", "Something went wrong. Error id: #{error_id}")
   end

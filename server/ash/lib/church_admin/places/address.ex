@@ -141,7 +141,7 @@ defmodule ChurchAdmin.Places.Address do
     attribute :id, :uuid,
       primary_key?: true,
       allow_nil?: false,
-      default: &Ash.UUID.generate/0,
+      default: &Ash.UUIDv7.generate/0,
       public?: true
 
     attribute :country_iso_code, Text, allow_nil?: false, default: "EG", public?: true
