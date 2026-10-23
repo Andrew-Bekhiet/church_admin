@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:clock/clock.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -143,6 +144,6 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
   }
 
   void _trackSave({required bool isSuccess}) => AnalyticsService.I.track(
-    SpiritDataSave(_userData, savedAt: DateTime.now(), isSuccess: isSuccess),
+    SpiritDataSave(_userData, savedAt: clock.now(), isSuccess: isSuccess),
   );
 }
