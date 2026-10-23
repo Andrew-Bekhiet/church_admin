@@ -8,6 +8,8 @@ import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PersonContactSection extends StatelessWidget {
+  static const int _maxDeviceContactPhotoBytes = 100 * 1024 * 1024;
+
   final Person person;
 
   const PersonContactSection({required this.person, super.key});
@@ -199,25 +201,43 @@ class PersonContactSection extends StatelessWidget {
       return;
     }
 
-    final imageFile = person.hasImage
-        ? await ImageUrlCacheService.I.getImageFile(person.imageInfo)
-        : null;
-
+    final photo = await _maybeReadDeviceContactPhotoOf(person);
+    final hasPhoto = photo != null;
+    try {
+      await ContactsService.I.insertContact(
+        contacts.Contact(
+          name: contacts.Name(first: nameController.text),
+          photo: photo,
+          phones: [contacts.Phone(number: phone)],
+        ),
+      );
+    } on Exception {
+      AnalyticsService.I.track(
+        DeviceContactCreate(
+          person,
+          outcome: DeviceContactCreateOutcome.failed,
+          hasPhoto: hasPhoto,
+        ),
+      );
+      rethrow;
+    }
     AnalyticsService.I.track(
       DeviceContactCreate(
         person,
         outcome: DeviceContactCreateOutcome.created,
-        hasPhoto: imageFile != null,
+        hasPhoto: hasPhoto,
       ),
     );
-    await ContactsService.I.insertContact(
-      contacts.Contact(
-        name: contacts.Name(first: nameController.text),
-        photo: imageFile != null && imageFile.lengthSync() <= 100 * 1024 * 1024
-            ? contacts.Photo(fullSize: await imageFile.readAsBytes())
-            : null,
-        phones: [contacts.Phone(number: phone)],
-      ),
+  }
+
+  Future<contacts.Photo?> _maybeReadDeviceContactPhotoOf(Person person) async {
+    if (!person.hasImage) return null;
+
+    final imageFile = await ImageUrlCacheService.I.getImageFile(
+      person.imageInfo,
     );
+    if (imageFile.lengthSync() > _maxDeviceContactPhotoBytes) return null;
+
+    return contacts.Photo(fullSize: await imageFile.readAsBytes());
   }
 }
