@@ -216,24 +216,36 @@ class _ViewFamilyState extends State<ViewFamily> {
             ],
             onTap: (newIndex) {
               if (newIndex == 0) {
+                AnalyticsService.I.track(
+                  EntityChildCreateTap(family, AnalyticsEntityType.person),
+                );
                 unawaited(
                   EditPersonRoute(
                     intent: CreatePersonInFamily(family: family),
                   ).push(context),
                 );
               } else if (newIndex == 1) {
+                AnalyticsService.I.track(
+                  EntityChildCreateTap(family, AnalyticsEntityType.family),
+                );
                 unawaited(
                   EditFamilyRoute(
                     intent: CreateChildFamilyOf(parent: family),
                   ).push(context),
                 );
               } else if (newIndex == 2) {
+                AnalyticsService.I.track(
+                  EntityChildCreateTap(family, AnalyticsEntityType.family),
+                );
                 unawaited(
                   EditFamilyRoute(
                     intent: CreateParentFamilyOf(child: family),
                   ).push(context),
                 );
               } else if (newIndex == 3) {
+                AnalyticsService.I.track(
+                  EntityChildCreateTap(family, AnalyticsEntityType.store),
+                );
                 unawaited(
                   EditStoreRoute(
                     intent: CreateStoreOfFamily(family: family),

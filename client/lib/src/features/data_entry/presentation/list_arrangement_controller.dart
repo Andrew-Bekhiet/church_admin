@@ -43,6 +43,7 @@ class ListArrangementController {
     );
     if (editedArrangement == null) return;
 
+    AnalyticsService.I.track(ListArrangementSave(type, editedArrangement));
     _arrangementSubject.add(editedArrangement);
     unawaited(
       ViewObjectDetails.saveLastArrangementFor(

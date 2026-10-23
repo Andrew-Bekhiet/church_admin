@@ -95,6 +95,7 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
     if (effectiveOnLongPress != null) {
       effectiveOnLongPress(item);
     } else if (!selectionController.isSelecting) {
+      AnalyticsService.I.track(ListMultiSelectOpen(item));
       selectionController.toggle(item);
     } else {
       selectionController.clear();

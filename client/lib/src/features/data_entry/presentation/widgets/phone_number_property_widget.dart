@@ -10,10 +10,14 @@ class PhoneNumberPropertyWidget extends StatelessWidget {
   final String propName;
   final String value;
   final void Function(String) phoneCall;
+  final ViewableWithID owner;
+  final bool isFamilyNumber;
   const PhoneNumberPropertyWidget(
     this.propName,
     this.value,
     this.phoneCall, {
+    required this.owner,
+    required this.isFamilyNumber,
     this.showErrorIfEmpty = true,
     this.addToContacts,
     super.key,
@@ -43,9 +47,16 @@ class PhoneNumberPropertyWidget extends StatelessWidget {
               AssetImage('assets/whatsapp.png'),
             ),
             tooltip: 'ارسال رسالة (واتساب)',
-            onPressed: () => LauncherService.I.launchWhatsappChat(
-              PhoneNumberService.I.formatInternational(value),
-            ),
+            onPressed: () {
+              AnalyticsService.I.track(
+                WhatsappChatOpen(owner, isFamilyNumber: isFamilyNumber),
+              );
+              unawaited(
+                LauncherService.I.launchWhatsappChat(
+                  PhoneNumberService.I.formatInternational(value),
+                ),
+              );
+            },
           ),
           PopupMenuButton(
             itemBuilder: (context) => const [
@@ -60,12 +71,18 @@ class PhoneNumberPropertyWidget extends StatelessWidget {
             ],
             onSelected: (v) {
               if (v == 'SMS') {
+                AnalyticsService.I.track(
+                  SmsChatOpen(owner, isFamilyNumber: isFamilyNumber),
+                );
                 unawaited(
                   LauncherService.I.launchSMSChat(
                     PhoneNumberService.I.formatInternational(value),
                   ),
                 );
               } else if (v == 'Copy') {
+                AnalyticsService.I.track(
+                  NumberCopy(owner, isFamilyNumber: isFamilyNumber),
+                );
                 unawaited(Clipboard.setData(ClipboardData(text: value)));
               }
             },

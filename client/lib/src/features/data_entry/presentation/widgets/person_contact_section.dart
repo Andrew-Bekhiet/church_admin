@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as contacts;
 import 'package:intl/intl.dart';
@@ -22,26 +24,32 @@ class PersonContactSection extends StatelessWidget {
             subtitle: Text(person.nationalId?.toString() ?? ''),
           ),
         PhoneBookCard(
+          owner: person,
           own: person.contacts,
           family: person.visibleFamilyContacts,
-          onCall: (n) => _phoneCall(context, n),
+          onCall: (n, {required isFamilyNumber}) =>
+              _phoneCall(context, n, isFamilyNumber: isFamilyNumber),
           onAddToContacts: (n) => _contactAdd(context, n, person),
         ),
         CopiablePropertyWidget(
           'العنوان والموقع',
           person.address?.toString(),
+          copiedProperty: CopiedEntityProperty.address,
           additionalOptions: [
             if (person.geolocation != null)
               IconButton(
                 icon: const Icon(Symbols.location_pin),
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ViewGeodataMap(
-                      initialPerson: person,
-                      initialGeomapOptions: GeomapOptions(),
+                onPressed: () {
+                  AnalyticsService.I.track(EntityMapShow(person));
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ViewGeodataMap(
+                        initialPerson: person,
+                        initialGeomapOptions: GeomapOptions(),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
                 tooltip: 'إظهار على الخريطة',
               ),
           ],
@@ -70,7 +78,11 @@ class PersonContactSection extends StatelessWidget {
     );
   }
 
-  Future<void> _phoneCall(BuildContext context, String? number) async {
+  Future<void> _phoneCall(
+    BuildContext context,
+    String? number, {
+    required bool isFamilyNumber,
+  }) async {
     final doMakeCallResult = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -91,6 +103,17 @@ class PersonContactSection extends StatelessWidget {
       ),
     );
 
+    AnalyticsService.I.track(
+      ContactNumberCall(
+        person,
+        isFamilyNumber: isFamilyNumber,
+        choice: switch (doMakeCallResult) {
+          true => ContactCallChoice.call,
+          false => ContactCallChoice.dialerOnly,
+          _ => ContactCallChoice.cancel,
+        },
+      ),
+    );
     if (doMakeCallResult == null) return;
 
     if (doMakeCallResult) await Permission.phone.request();
@@ -109,7 +132,11 @@ class PersonContactSection extends StatelessWidget {
       ),
     );
 
-    if (recordLastCall != true) return;
+    final isCallDateRecorded = recordLastCall == true;
+    AnalyticsService.I.track(
+      CallDateRecordAnswer(person, isAccepted: isCallDateRecorded),
+    );
+    if (!isCallDateRecorded) return;
 
     await DatabaseService.I.history.updatePersonLastCall(
       personId: person.id,
@@ -124,7 +151,16 @@ class PersonContactSection extends StatelessWidget {
     String phone,
     Person person,
   ) async {
-    if (!(await Permission.contacts.request()).isGranted) return;
+    if (!(await Permission.contacts.request()).isGranted) {
+      AnalyticsService.I.track(
+        DeviceContactCreate(
+          person,
+          outcome: DeviceContactCreateOutcome.permissionDenied,
+        ),
+      );
+
+      return;
+    }
 
     final nameController = TextEditingController(text: person.name);
 
@@ -152,12 +188,28 @@ class PersonContactSection extends StatelessWidget {
       ),
     );
 
-    if (dialogResult != true) return;
+    if (dialogResult != true) {
+      AnalyticsService.I.track(
+        DeviceContactCreate(
+          person,
+          outcome: DeviceContactCreateOutcome.cancelled,
+        ),
+      );
+
+      return;
+    }
 
     final imageFile = person.hasImage
         ? await ImageUrlCacheService.I.getImageFile(person.imageInfo)
         : null;
 
+    AnalyticsService.I.track(
+      DeviceContactCreate(
+        person,
+        outcome: DeviceContactCreateOutcome.created,
+        hasPhoto: imageFile != null,
+      ),
+    );
     await ContactsService.I.insertContact(
       contacts.Contact(
         name: contacts.Name(first: nameController.text),
