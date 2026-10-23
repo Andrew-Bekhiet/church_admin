@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ScreenCaptureAttemptsRecorder {
   static ScreenCaptureAttemptsRecorder get I =>
@@ -24,7 +25,10 @@ class ScreenCaptureAttemptsRecorder {
   StreamSubscription<void> recordAttemptsWhileSignedIn() {
     return _attemptEventsStream
         .where((_) => _authBloc.currentUserData != null)
-        .asyncMap(_screenCaptureAttempts.recordAttempt)
+        .flatMap(
+          (kind) =>
+              Stream.fromFuture(_screenCaptureAttempts.recordAttempt(kind)),
+        )
         .listen(null, onError: _reportUnrecordedAttempt);
   }
 
