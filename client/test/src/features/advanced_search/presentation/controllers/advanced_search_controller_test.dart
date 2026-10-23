@@ -2,6 +2,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fakes/fake_feature_flags_repo.dart';
+import '../../../../fakes/fake_logging_service.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 
 void main() {
   setUp(
@@ -17,7 +19,12 @@ void main() {
       test(
         'Initial state and structure',
         () {
-          final unit = AdvancedSearchController();
+          final unit = AdvancedSearchController(
+            analyticsService: AnalyticsService(
+              [RecordingAnalyticsProvider()],
+              FakeLoggingService(),
+            ),
+          );
           addTearDown(unit.dispose);
 
           final expectedQuery = AdvancedQuery(
@@ -75,7 +82,12 @@ void main() {
             logicalOperator: LogicalOperator.or,
           );
 
-          final unit = AdvancedSearchController();
+          final unit = AdvancedSearchController(
+            analyticsService: AnalyticsService(
+              [RecordingAnalyticsProvider()],
+              FakeLoggingService(),
+            ),
+          );
           addTearDown(unit.dispose);
 
           expect(
@@ -154,7 +166,12 @@ void main() {
             ),
           ];
 
-          final unit = AdvancedSearchController();
+          final unit = AdvancedSearchController(
+            analyticsService: AnalyticsService(
+              [RecordingAnalyticsProvider()],
+              FakeLoggingService(),
+            ),
+          );
           addTearDown(unit.dispose);
 
           expect(
@@ -194,7 +211,12 @@ void main() {
             ),
           ];
 
-          final unit = AdvancedSearchController();
+          final unit = AdvancedSearchController(
+            analyticsService: AnalyticsService(
+              [RecordingAnalyticsProvider()],
+              FakeLoggingService(),
+            ),
+          );
           addTearDown(unit.dispose);
 
           expect(
@@ -225,7 +247,12 @@ void main() {
             ),
           ];
 
-          final unit = AdvancedSearchController();
+          final unit = AdvancedSearchController(
+            analyticsService: AnalyticsService(
+              [RecordingAnalyticsProvider()],
+              FakeLoggingService(),
+            ),
+          );
           addTearDown(unit.dispose);
 
           expect(
