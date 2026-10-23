@@ -1,9 +1,14 @@
 import 'dart:convert';
 
+import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
 
 class _MockAuthRepository extends Mock implements AuthRepository {}
 
@@ -39,8 +44,12 @@ void main() {
   late _LocalAuthService localAuthService;
   late _MockAuthRepository authRepository;
   late _MockAuthStorage authStorage;
+  late RecordingAnalyticsProvider analytics;
+  late DateTime now;
 
   setUp(() {
+    analytics = RecordingAnalyticsProvider();
+    now = DateTime(2026, 10, 23, 9);
     localAuthService = _LocalAuthService();
     authRepository = _MockAuthRepository();
     authStorage = _MockAuthStorage();
@@ -50,18 +59,83 @@ void main() {
     ).thenAnswer((_) async => 'correct:user@example.com');
   });
 
+  BiometricsAuthCubit buildCubit({AppRoute? next}) => BiometricsAuthCubit(
+    localAuthService: localAuthService,
+    authRepository: authRepository,
+    authStorage: authStorage,
+    encryptionService: _PasswordEncryptionService(),
+    analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+    clock: Clock(() => now),
+    next: next,
+  );
+
   BiometricsAuthCubit createCubit({AppRoute? next}) {
-    final cubit = BiometricsAuthCubit(
-      localAuthService: localAuthService,
-      authRepository: authRepository,
-      authStorage: authStorage,
-      encryptionService: _PasswordEncryptionService(),
-      next: next,
-    );
+    final cubit = buildCubit(next: next);
     addTearDown(cubit.close);
 
     return cubit;
   }
+
+  blocTest<BiometricsAuthCubit, BiometricsAuthState>(
+    'a dismissed automatic biometric prompt is tracked as not authenticated',
+    setUp: () {
+      when(
+        () => localAuthService.canCheckBiometrics(),
+      ).thenAnswer((_) async => true);
+      when(
+        () => localAuthService.authenticate(),
+      ).thenAnswer((_) async => false);
+    },
+    build: buildCubit,
+    act: (cubit) async {
+      await cubit.initialize();
+      await cubit.authenticateBiometrically(isAutoPrompted: true);
+    },
+    verify: (_) => expect(
+      analytics.trackedEvents
+          .whereType<BiometricsUnlockSubmit>()
+          .single
+          .properties,
+      {
+        'outcome': UnlockOutcome.notAuthenticated.name,
+        'is_auto_prompted': true,
+        'seconds_locked': 0,
+      },
+    ),
+  );
+
+  blocTest<BiometricsAuthCubit, BiometricsAuthState>(
+    'unlocking with the password is tracked with how long the app stayed locked',
+    build: buildCubit,
+    act: (cubit) async {
+      now = now.add(const Duration(seconds: 42, milliseconds: 900));
+      await cubit.submitPassword('correct');
+    },
+    verify: (_) => expect(
+      analytics.trackedEvents
+          .whereType<PasswordUnlockSubmit>()
+          .single
+          .properties,
+      {
+        'outcome': UnlockOutcome.unlocked.name,
+        'can_check_biometrics': false,
+        'seconds_locked': 42,
+      },
+    ),
+  );
+
+  blocTest<BiometricsAuthCubit, BiometricsAuthState>(
+    'a wrong password is tracked as such',
+    build: buildCubit,
+    act: (cubit) => cubit.submitPassword('wrong'),
+    verify: (_) => expect(
+      analytics.trackedEvents
+          .whereType<PasswordUnlockSubmit>()
+          .single
+          .properties,
+      containsPair('outcome', UnlockOutcome.wrongPassword.name),
+    ),
+  );
 
   test('available biometrics remain offered after a canceled prompt', () async {
     when(

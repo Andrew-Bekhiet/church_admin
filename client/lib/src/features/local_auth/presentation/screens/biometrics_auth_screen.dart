@@ -35,7 +35,7 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
       _cubit.initialize().then((_) async {
         if (!_cubit.state.canCheckBiometrics) return;
 
-        await _cubit.authenticateBiometrically();
+        await _cubit.authenticateBiometrically(isAutoPrompted: true);
       }),
     );
   }
