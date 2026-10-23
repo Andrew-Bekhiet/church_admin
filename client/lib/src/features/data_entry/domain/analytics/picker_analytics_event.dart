@@ -8,15 +8,15 @@ sealed class PickerAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class PickerCustomItemCreate extends PickerAnalyticsEvent {
-  final PickerObjectType objectType;
+  final PickerObjectType pickerObjectType;
 
   @override
   String get objectAction => 'custom_item_create';
 
   @override
-  Json get properties => {'object_type': objectType.name};
+  Json get properties => {'picker_object_type': pickerObjectType.name};
 
-  const PickerCustomItemCreate(this.objectType);
+  const PickerCustomItemCreate(this.pickerObjectType);
 }
 
 final class PickerValueClear extends PickerAnalyticsEvent {
