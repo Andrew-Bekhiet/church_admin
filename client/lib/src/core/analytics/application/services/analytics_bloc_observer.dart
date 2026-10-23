@@ -27,7 +27,7 @@ class AnalyticsBlocObserver extends BlocObserver {
       (
         _,
         AuthAuthenticated(
-          authUser: AuthUser(:final hasuraUserId?) && final authUser,
+          authUser: AuthUser(:final hasuraUserId?),
           :final userData,
         ),
       )
@@ -36,8 +36,6 @@ class AnalyticsBlocObserver extends BlocObserver {
               currentState.userData != userData =>
         AnalyticsUser(
           id: hasuraUserId,
-          email: authUser.email,
-          name: userData?.name,
           permissions: [...?userData?.permissions.map((p) => p.name)],
           adminOn: [...?userData?.adminOn?.map((a) => a.toJson())],
         ),
