@@ -295,11 +295,11 @@ void main() {
         build: _createAuthBloc,
         act: (bloc) async {
           await Future.delayed(Duration.zero);
-          bloc.add(const SignOut(SignOutSource.lockScreen));
+          bloc.add(const SignOut(SignOutSource.biometricsLockScreen));
         },
         verify: (_) => expect(
           analytics.trackedEvents.whereType<SignOutRequest>().single.source,
-          SignOutSource.lockScreen,
+          SignOutSource.biometricsLockScreen,
         ),
       );
     });
