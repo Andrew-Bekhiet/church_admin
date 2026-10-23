@@ -10,13 +10,17 @@ class DataCheckReportDialog extends StatelessWidget {
     BuildContext context, {
     required DataCheck dataCheck,
     required bool canOverride,
-  }) => showDialog<void>(
-    context: context,
-    builder: (_) => BlocProvider(
-      create: (_) => DataCheckOverrideCubit(dataCheck: dataCheck),
-      child: DataCheckReportDialog(canOverride: canOverride),
-    ),
-  );
+  }) {
+    AnalyticsService.I.track(DataCheckReportOpen(dataCheck));
+
+    return showDialog<void>(
+      context: context,
+      builder: (_) => BlocProvider(
+        create: (_) => DataCheckOverrideCubit(dataCheck: dataCheck),
+        child: DataCheckReportDialog(canOverride: canOverride),
+      ),
+    );
+  }
 
   final bool canOverride;
 
