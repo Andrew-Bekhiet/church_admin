@@ -9,7 +9,7 @@ sealed class ListAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class ListArrangementSave extends ListAnalyticsEvent {
-  final QueryableType objectType;
+  final QueryableType queryableType;
   final ListArrangement arrangement;
 
   @override
@@ -17,7 +17,7 @@ final class ListArrangementSave extends ListAnalyticsEvent {
 
   @override
   Json get properties => {
-    'object_type': objectType.name,
+    'queryable_type': queryableType.name,
     'sort_field_count': arrangement.orderBy.length,
     if (arrangement.orderBy.firstOrNull case final primarySort?) ...{
       'sort_field': primarySort.field.name,
@@ -26,7 +26,7 @@ final class ListArrangementSave extends ListAnalyticsEvent {
     'has_second_line': arrangement.secondLineField != null,
   };
 
-  const ListArrangementSave(this.objectType, this.arrangement);
+  const ListArrangementSave(this.queryableType, this.arrangement);
 }
 
 final class ListMultiSelectOpen extends ListAnalyticsEvent {
@@ -38,7 +38,7 @@ final class ListMultiSelectOpen extends ListAnalyticsEvent {
   @override
   Json get properties => {
     if (AnalyticsEntityType.of(firstSelected) case final type?)
-      'object_type': type.key,
+      'entity_type': type.key,
   };
 
   const ListMultiSelectOpen(this.firstSelected);

@@ -65,7 +65,7 @@ final class EntityShowMoreTap extends EntityAnalyticsEvent {
   @override
   Json get properties => {
     if (AnalyticsEntityType.of(items.firstOrNull) case final type?)
-      'object_type': type.key,
+      'entity_type': type.key,
     'item_count': items.length,
   };
 
