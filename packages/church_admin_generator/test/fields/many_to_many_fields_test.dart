@@ -32,7 +32,7 @@ void main() {
   });
 
   test(
-    'a many-to-many relationship takes the GraphQL name of the server field',
+    'a many-to-many relationship carries the GraphQL name of the server field',
     () async {
       final generated = await ModelFixture.generatedFor(
         '@QueryableField.manyToMany(through: PersonsTags, '
@@ -42,7 +42,10 @@ void main() {
 
       expect(
         generated.initializerOf('ModelFields', 'tagsRel'),
-        contains("name: 'tagMemberships'"),
+        allOf(
+          contains("name: 'tags'"),
+          contains("graphqlName: 'tagMemberships'"),
+        ),
       );
     },
   );

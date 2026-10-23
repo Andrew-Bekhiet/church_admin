@@ -60,7 +60,8 @@ class _UserFields {
   final FieldMetadata<AdminOnData> adminOn = FieldMetadata<AdminOnData>(
     getValue: (obj) => obj is User ? obj.adminOn : null,
     parentType: User,
-    name: 'scopeGrants',
+    name: 'adminOn',
+    graphqlName: 'scopeGrants',
     label: 'مسؤول عن',
     isCodeOnly: false,
     isOrderable: false,
@@ -136,7 +137,7 @@ class _UserFields {
     'name': name,
     'email': email,
     'photoUpdatedAt': photoUpdatedAt,
-    'scopeGrants': adminOn,
+    'adminOn': adminOn,
     'permissions': permissions,
     'lastEdit': lastEdit,
     'person': person,

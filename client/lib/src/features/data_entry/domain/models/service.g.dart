@@ -160,7 +160,8 @@ class ServiceFields {
   final FieldMetadata<User> adminUsers = FieldMetadata<User>(
     getValue: (obj) => obj is Service ? obj.adminUsers : null,
     parentType: Service,
-    name: 'admins',
+    name: 'adminUsers',
+    graphqlName: 'admins',
     label: 'المسؤولون',
     isCodeOnly: false,
     isOrderable: false,
@@ -196,7 +197,7 @@ class ServiceFields {
     'groups': groups,
     'meetings': meetings,
     'lastEdit': lastEdit,
-    'admins': adminUsers,
+    'adminUsers': adminUsers,
   };
 }
 

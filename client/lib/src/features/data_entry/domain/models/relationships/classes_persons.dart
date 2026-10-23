@@ -9,7 +9,7 @@ part 'classes_persons.g.dart';
 class ClassesPersons {
   @QueryableField(label: 'بيانات المخدوم')
   final Person person;
-  @QueryableField(label: 'الفصل', graphqlName: 'class')
+  @QueryableField(label: 'الفصل')
   final Class class$;
   @QueryableField(label: 'personId')
   final String personId;

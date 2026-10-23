@@ -16,6 +16,10 @@ final class QueryableFieldCollector extends SimpleElementVisitor2<void> {
   static String _nonNullableDisplayName(DartType type) =>
       type.getDisplayString().replaceAll('?', '');
 
+  static String _fieldNameOf(String memberName) => memberName.endsWith(r'$')
+      ? memberName.substring(0, memberName.length - 1)
+      : memberName;
+
   final InterfaceType _parentType;
   final List<QueryableField> _fields = [];
 
@@ -38,7 +42,7 @@ final class QueryableFieldCollector extends SimpleElementVisitor2<void> {
     QueryableFieldAnnotation annotation,
   ) {
     final memberName = element.displayName;
-    final name = annotation.graphqlName ?? memberName;
+    final name = _fieldNameOf(memberName);
 
     if (annotation.representsParent) {
       return DirectField(
@@ -95,6 +99,7 @@ final class QueryableFieldCollector extends SimpleElementVisitor2<void> {
       through: FieldMetadataSpec(
         typeName: _nonNullableDisplayName(through),
         label: name,
+        graphqlName: _graphqlNameOf(annotation, name),
         operatorFamily: through.accept(const OperatorFamilyVisitor()),
         isNullable: false,
         isCodeOnly: true,
@@ -108,6 +113,9 @@ final class QueryableFieldCollector extends SimpleElementVisitor2<void> {
     );
   }
 
+  String? _graphqlNameOf(QueryableFieldAnnotation annotation, String name) =>
+      annotation.graphqlName == name ? null : annotation.graphqlName;
+
   FieldMetadataSpec _metadata(
     QueryableFieldAnnotation annotation,
     DartType type, {
@@ -116,6 +124,7 @@ final class QueryableFieldCollector extends SimpleElementVisitor2<void> {
   }) => FieldMetadataSpec(
     typeName: _nonNullableDisplayName(annotation.type ?? type),
     label: annotation.label ?? name,
+    graphqlName: _graphqlNameOf(annotation, name),
     isCodeOnly: annotation.isCodeOnly,
     isOrderable: annotation.isOrderable && !isCollection,
     isDateOnly: annotation.isDateOnly,

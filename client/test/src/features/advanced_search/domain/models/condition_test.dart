@@ -86,4 +86,24 @@ void main() {
       );
     },
   );
+
+  test(
+    'a saved filter on a field the Ash server names differently reads back '
+    'as the same field',
+    () {
+      final saved = {
+        'field': {'name': 'studyYear', 'parentQueryableType': 'Class'},
+        'operator': PrimitiveOperator.isNull.serializationId,
+        'value': null,
+      };
+
+      final unit = Filter.fromJson(saved);
+
+      expect(
+        unit,
+        Filter<Object>(ClassFields().studyYear, PrimitiveOperator.isNull, null),
+      );
+      expect(unit.toJson(), saved);
+    },
+  );
 }

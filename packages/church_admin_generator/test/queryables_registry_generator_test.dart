@@ -132,15 +132,14 @@ class Registry {}
   );
 
   test(
-    'a key field is named by its GraphQL name and registered by its Dart '
-    'member',
+    'a key field is named by its field name, not its GraphQL name',
     () async {
       final registration = await registrationOfNote(
         'class Note {\n'
         "  @QueryableField(label: 'Code', graphqlName: 'note_code')\n"
         '  late final String code;\n'
         '}',
-        options: ", keyField: 'note_code'",
+        options: ", keyField: 'code'",
       );
 
       expect(registration, contains('keyField: NoteFields().code'));

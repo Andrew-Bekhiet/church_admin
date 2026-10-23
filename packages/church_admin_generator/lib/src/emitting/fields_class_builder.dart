@@ -94,6 +94,8 @@ final class FieldsClassBuilder {
           'getValue': getValue,
           'parentType': refer(parentType),
           'name': literalString(name),
+          if (metadata.graphqlName case final graphqlName?)
+            'graphqlName': literalString(graphqlName),
           'label': literalString(metadata.label),
           'isCodeOnly': literalBool(metadata.isCodeOnly),
           if (!metadata.isOrderable) 'isOrderable': literalFalse,

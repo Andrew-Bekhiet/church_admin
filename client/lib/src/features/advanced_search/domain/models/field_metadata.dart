@@ -20,7 +20,10 @@ class FieldMetadata<T extends Object> with Equatable {
 
   final Type? _type;
   final Type parentType;
+
+  /// Saved sorts and filters store it, so it stays the Dart field name.
   final String name;
+  final String graphqlName;
   final String label;
   final bool isOrderable;
   final bool isCodeOnly;
@@ -66,8 +69,9 @@ class FieldMetadata<T extends Object> with Equatable {
     this.isOrderable = true,
     this.isDateOnly = false,
     this.operators = const {},
+    String? graphqlName,
     this._type,
-  });
+  }) : graphqlName = graphqlName ?? name;
 
   Json toJson() {
     return {
