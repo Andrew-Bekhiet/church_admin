@@ -2,6 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../fakes/fake_logging_service.dart';
+import '../../../fakes/recording_analytics_provider.dart';
 import '../../../utils.dart';
 
 void main() {
@@ -40,6 +42,10 @@ void main() {
     hasFamily: hasFamily,
     fetchFamilyRoles: () async => [father, mother],
     newKey: () => 'new-${nextKey++}',
+    analyticsService: AnalyticsService(
+      [RecordingAnalyticsProvider()],
+      FakeLoggingService(),
+    ),
   );
 
   setUp(() => nextKey = 0);

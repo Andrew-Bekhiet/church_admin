@@ -238,7 +238,15 @@ class DataGeomapState extends State<DataGeomap> {
     if (!widget.showUserLocation) return null;
 
     final permissionStatus = await Permission.locationWhenInUse.request();
-    if (await Geolocator.isLocationServiceEnabled() &&
+    final isLocationServiceEnabled =
+        await Geolocator.isLocationServiceEnabled();
+    AnalyticsService.I.track(
+      MapsLocationPermissionCheck(
+        permissionStatus,
+        isLocationServiceEnabled: isLocationServiceEnabled,
+      ),
+    );
+    if (isLocationServiceEnabled &&
         (permissionStatus == PermissionStatus.granted ||
             permissionStatus == PermissionStatus.limited)) {
       return Geolocator.getCurrentPosition();

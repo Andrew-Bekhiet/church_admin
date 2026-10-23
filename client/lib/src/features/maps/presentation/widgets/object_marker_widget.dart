@@ -62,6 +62,7 @@ class ObjectMarkerWidget extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
+        AnalyticsService.I.track(MapsMarkerTap(object));
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -72,7 +73,10 @@ class ObjectMarkerWidget extends StatelessWidget {
                 : null,
             action: SnackBarAction(
               label: 'فتح',
-              onPressed: () => ViewableObjectService.I.onTap(object),
+              onPressed: () {
+                AnalyticsService.I.track(MapsMarkerDetailsOpen(object));
+                ViewableObjectService.I.onTap(object);
+              },
             ),
           ),
         );

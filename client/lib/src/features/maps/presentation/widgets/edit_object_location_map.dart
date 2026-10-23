@@ -42,6 +42,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
   final BehaviorSubject<Position?> _userLocationSubject =
       BehaviorSubject.seeded(null);
   Point? _mapCenter;
+  LocationSetMethod? _lastSetMethod;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () => widget.onSaved(resultObject.value),
+            onPressed: _save,
             icon: const Icon(Symbols.save),
             tooltip: 'حفظ',
           ),
@@ -59,20 +60,16 @@ class _EditObjectLocationMap<T extends ViewableWithID>
           userLocation: widget.showSetToCurrentLocation
               ? _userLocationSubject
               : null,
-          onUseCurrentLocation: (position) =>
-              resultObject.value = widget.copyWithNewLocation(
-                resultObject.value,
-                Point(position.latitude, position.longitude),
-              ),
+          onUseCurrentLocation: (position) => _setLocation(
+            Point(position.latitude, position.longitude),
+            LocationSetMethod.current,
+          ),
           onPickFromMapsLink: () async {
             final location = await _getLocationFromGMapsLinkWithProgress();
 
             if (location == null) return;
 
-            resultObject.value = widget.copyWithNewLocation(
-              resultObject.value,
-              location,
-            );
+            _setLocation(location, LocationSetMethod.link);
           },
         ),
       ),
@@ -123,12 +120,10 @@ class _EditObjectLocationMap<T extends ViewableWithID>
             ),
           ],
           createMapOptions: (center) => MapOptions(
-            onTap: (pos, point) {
-              resultObject.value = widget.copyWithNewLocation(
-                resultObject.value,
-                Point(point.latitude, point.longitude),
-              );
-            },
+            onTap: (pos, point) => _setLocation(
+              Point(point.latitude, point.longitude),
+              LocationSetMethod.tap,
+            ),
             maxZoom: 18,
             initialZoom: 14,
             interactionOptions: const InteractionOptions(
@@ -157,15 +152,36 @@ class _EditObjectLocationMap<T extends ViewableWithID>
     super.dispose();
   }
 
+  void _setLocation(Point location, LocationSetMethod method) {
+    _lastSetMethod = method;
+    AnalyticsService.I.track(LocationSet(resultObject.value, method));
+    resultObject.value = widget.copyWithNewLocation(
+      resultObject.value,
+      location,
+    );
+  }
+
+  void _save() {
+    AnalyticsService.I.track(
+      LocationSave(resultObject.value, lastSetMethod: _lastSetMethod),
+    );
+    widget.onSaved(resultObject.value);
+  }
+
   Future<Point?> _getLocationFromGMapsLinkWithProgress() async {
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
-    final result = await showDialog<String?>(
+    final dialogResult = await showDialog<MapsLinkDialogResult>(
       context: context,
-      builder: (context) => const MapsLinkDialog(),
+      builder: (context) => MapsLinkDialog(
+        onClipboardLinkShow: (inputKind) => AnalyticsService.I.track(
+          LocationClipboardLinkShow(resultObject.value, inputKind),
+        ),
+      ),
     );
 
-    if (result == null) return null;
+    if (dialogResult == null) return null;
+    final result = dialogResult.link;
 
     scaffoldMessenger.showSnackBar(
       const SnackBar(
@@ -186,6 +202,14 @@ class _EditObjectLocationMap<T extends ViewableWithID>
         : null;
 
     scaffoldMessenger.hideCurrentSnackBar();
+    AnalyticsService.I.track(
+      LocationLinkParse(
+        resultObject.value,
+        inputKind: LocationLinkInputKind.of(result),
+        isPrefilledFromClipboard: dialogResult.isPrefilledFromClipboard,
+        isSuccess: locationResult != null,
+      ),
+    );
 
     if (locationResult == null) {
       scaffoldMessenger.showSnackBar(

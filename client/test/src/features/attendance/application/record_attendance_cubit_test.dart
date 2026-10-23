@@ -1,30 +1,30 @@
-import 'dart:async';
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/features/attendance/application/attendance_undo_presenter.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:material_ui/material_ui.dart' show TimeOfDay, VoidCallback;
+import 'package:material_ui/material_ui.dart' show TimeOfDay;
 import 'package:mocktail/mocktail.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../utils.dart';
+import '../support/record_attendance_fixture.dart';
 
 void main() {
   group('RecordAttendanceCubit', () {
-    late _Fixture f;
+    late RecordAttendanceFixture f;
 
     setUpAll(() {
-      registerFallbackValue(_Fixture.makeMeeting());
-      registerFallbackValue(MeetingAnalysisSubject(_Fixture.makeMeeting()));
+      registerFallbackValue(RecordAttendanceFixture.makeMeeting());
+      registerFallbackValue(
+        MeetingAnalysisSubject(RecordAttendanceFixture.makeMeeting()),
+      );
       registerFallbackValue(
         DateTimeRange(start: DateTime(2026), end: DateTime(2026)),
       );
     });
 
     setUp(() {
-      f = _Fixture();
+      f = RecordAttendanceFixture();
       addTearDown(f.dispose);
     });
     tearDown(defaultTearDown);
@@ -46,8 +46,8 @@ void main() {
         'entries reflect live attendance subscription once records arrive',
         setUp: () {
           f
-            ..rosterPersons = [_Fixture.rosterPerson('p1')]
-            ..attendanceRecords = [_Fixture.makeRecord('p1')];
+            ..rosterPersons = [RecordAttendanceFixture.rosterPerson('p1')]
+            ..attendanceRecords = [RecordAttendanceFixture.makeRecord('p1')];
         },
         build: () => f.createCubit(),
         expect: () => [
@@ -70,8 +70,11 @@ void main() {
         'mark: server confirm clears optimistic entry, real id shown',
         setUp: () {
           f
-            ..rosterPersons = [_Fixture.rosterPerson('p1')]
-            ..markAttendanceRecord = _Fixture.makeRecord('p1', id: 'server-id');
+            ..rosterPersons = [RecordAttendanceFixture.rosterPerson('p1')]
+            ..markAttendanceRecord = RecordAttendanceFixture.makeRecord(
+              'p1',
+              id: 'server-id',
+            );
         },
         build: () => f.createCubit(),
         act: (cubit) async {
@@ -89,7 +92,7 @@ void main() {
 
           await cubit.toggleAttendance(ready.entries.first);
           f.attendanceController.add([
-            _Fixture.makeRecord('p1', id: 'server-id'),
+            RecordAttendanceFixture.makeRecord('p1', id: 'server-id'),
           ]);
 
           await confirmed;
@@ -105,9 +108,9 @@ void main() {
         'unmark: server empty-list confirm clears optimistic absence',
         setUp: () {
           f
-            ..rosterPersons = [_Fixture.rosterPerson('p1')]
-            ..attendanceRecords = [_Fixture.makeRecord('p1')]
-            ..unmarkAttendanceRecord = _Fixture.makeRecord('p1');
+            ..rosterPersons = [RecordAttendanceFixture.rosterPerson('p1')]
+            ..attendanceRecords = [RecordAttendanceFixture.makeRecord('p1')]
+            ..unmarkAttendanceRecord = RecordAttendanceFixture.makeRecord('p1');
         },
         build: () => f.createCubit(),
         act: (cubit) async {
@@ -168,10 +171,10 @@ void main() {
         'does NOT re-call getMeetingRoster or re-subscribe attendance',
         setUp: () {
           f
-            ..meeting = _Fixture.makeMeeting(
+            ..meeting = RecordAttendanceFixture.makeMeeting(
               audience: MeetingAudience.personsAndServants,
             )
-            ..user = _Fixture.userWithBothRecordRights();
+            ..user = RecordAttendanceFixture.userWithBothRecordRights();
         },
         build: () => f.createCubit(),
         act: (cubit) async {
@@ -253,7 +256,9 @@ void main() {
       blocTest<RecordAttendanceCubit, RecordAttendanceState>(
         'rapid switchMeeting applies only the latest roster',
         setUp: () {
-          f.rosterPersons = [_Fixture.rosterPerson('p-original')];
+          f.rosterPersons = [
+            RecordAttendanceFixture.rosterPerson('p-original'),
+          ];
         },
         build: () => f.createCubit(),
         act: (cubit) async {
@@ -266,22 +271,30 @@ void main() {
               meetingId: 'meeting-2',
               groupByStudyYear: any(named: 'groupByStudyYear'),
             ),
-          ).thenAnswer((_) async => [_Fixture.rosterPerson('p-m2')]);
+          ).thenAnswer(
+            (_) async => [RecordAttendanceFixture.rosterPerson('p-m2')],
+          );
 
           when(
             () => f.dao.getMeetingRoster(
               meetingId: 'meeting-3',
               groupByStudyYear: any(named: 'groupByStudyYear'),
             ),
-          ).thenAnswer((_) async => [_Fixture.rosterPerson('p-m3')]);
+          ).thenAnswer(
+            (_) async => [RecordAttendanceFixture.rosterPerson('p-m3')],
+          );
 
           final settled = cubit.stream
               .whereType<RecordAttendanceLoaded>()
               .firstWhere((s) => s.rosterStatus == RosterStatus.ready);
 
           cubit
-            ..switchMeeting(_Fixture.makeMeeting(id: 'meeting-2'))
-            ..switchMeeting(_Fixture.makeMeeting(id: 'meeting-3'));
+            ..switchMeeting(
+              RecordAttendanceFixture.makeMeeting(id: 'meeting-2'),
+            )
+            ..switchMeeting(
+              RecordAttendanceFixture.makeMeeting(id: 'meeting-3'),
+            );
           await settled;
         },
         verify: (cubit) {
@@ -301,11 +314,11 @@ void main() {
           f
             ..rosterPersons = List.generate(
               10,
-              (index) => _Fixture.rosterPerson('p${index + 1}'),
+              (index) => RecordAttendanceFixture.rosterPerson('p${index + 1}'),
             )
             ..attendanceRecords = List.generate(
               3,
-              (index) => _Fixture.makeRecord('p${index + 1}'),
+              (index) => RecordAttendanceFixture.makeRecord('p${index + 1}'),
             );
         },
         build: () => f.createCubit(),
@@ -341,8 +354,8 @@ void main() {
         'marking attendance adds selectedDate to recordedDays',
         setUp: () {
           f
-            ..rosterPersons = [_Fixture.rosterPerson('p1')]
-            ..markAttendanceRecord = _Fixture.makeRecord('p1');
+            ..rosterPersons = [RecordAttendanceFixture.rosterPerson('p1')]
+            ..markAttendanceRecord = RecordAttendanceFixture.makeRecord('p1');
         },
         build: () => f.createCubit(),
         act: (cubit) async {
@@ -381,11 +394,11 @@ void main() {
               .toList();
 
       void arrangeRoster() => f.rosterPersons = [
-        _Fixture.rosterPersonWithPhones('child', [
+        RecordAttendanceFixture.rosterPersonWithPhones('child', [
           '+201001234567',
           '+201227654321',
         ]),
-        _Fixture.rosterPersonWithPhones('stranger', [
+        RecordAttendanceFixture.rosterPersonWithPhones('stranger', [
           '+201111111111',
           '+201555555555',
         ]),
@@ -409,7 +422,7 @@ void main() {
     });
 
     group('changing the attendance time on the selected day', () {
-      final recorded = _Fixture.makeRecord('p1');
+      final recorded = RecordAttendanceFixture.makeRecord('p1');
       final now = recorded.datetime.add(const Duration(hours: 2));
 
       Future<void> changeTimeOnceAttended(
@@ -438,7 +451,7 @@ void main() {
 
       setUp(() {
         f
-          ..rosterPersons = [_Fixture.rosterPerson('p1')]
+          ..rosterPersons = [RecordAttendanceFixture.rosterPerson('p1')]
           ..attendanceRecords = [recorded];
         when(
           () => f.dao.updateAttendanceTime(
@@ -482,195 +495,4 @@ void main() {
       );
     });
   });
-}
-
-final class _Fixture {
-  final dao = _MockMeetingsDAO();
-  final authBloc = _MockAuthBloc();
-  final presenter = _FakePresenter();
-
-  final attendanceController =
-      StreamController<List<AttendanceRecord>>.broadcast();
-  final presentCountController = StreamController<int?>.broadcast();
-  final eligibleCountController = StreamController<int?>.broadcast();
-
-  Meeting meeting = _Fixture.makeMeeting();
-  User? user = _Fixture.userWithPersonsOnlyRecordRights();
-
-  List<MeetingRosterEntry> rosterPersons = [];
-  List<AttendanceRecord> attendanceRecords = [];
-  Set<DateTime> recordedDays = const {};
-  AttendanceRecord? markAttendanceRecord;
-  AttendanceRecord? unmarkAttendanceRecord;
-
-  _Fixture() {
-    when(() => authBloc.currentUserData).thenAnswer((_) => user);
-
-    when(
-      () => dao.getMeetingsAttendanceAnalysis(
-        subject: any(named: 'subject'),
-        range: any(named: 'range'),
-      ),
-    ).thenAnswer(
-      (_) async => MeetingsAttendanceAnalysis(
-        title: meeting.name,
-        meetings: recordedDays.isEmpty
-            ? const []
-            : [
-                MeetingAttendanceSummary(
-                  meeting: meeting,
-                  demographics: recordedDays
-                      .map(
-                        (d) => MeetingDayDemographicCounts(
-                          day: d,
-                          personsCount: 1,
-                          servantsCount: 0,
-                          totalCount: 1,
-                        ),
-                      )
-                      .toList(),
-                ),
-              ],
-      ),
-    );
-
-    when(
-      () => dao.getMeetingRoster(
-        meetingId: any(named: 'meetingId'),
-        groupByStudyYear: any(named: 'groupByStudyYear'),
-      ),
-    ).thenAnswer((_) async => rosterPersons);
-
-    when(
-      () => dao.streamAttendanceHistory(
-        meetingId: any(named: 'meetingId'),
-        fromDate: any(named: 'fromDate'),
-        toDate: any(named: 'toDate'),
-      ),
-    ).thenAnswer((_) async* {
-      if (attendanceRecords.isNotEmpty) {
-        yield attendanceRecords;
-      }
-
-      yield* attendanceController.stream;
-    });
-
-    when(
-      () => dao.markAttendance(
-        meetingId: any(named: 'meetingId'),
-        personId: any(named: 'personId'),
-        datetime: any(named: 'datetime'),
-        asServant: any(named: 'asServant'),
-      ),
-    ).thenAnswer((_) async => markAttendanceRecord!);
-
-    when(
-      () => dao.unmarkAttendance(
-        attendanceRecordId: any(named: 'attendanceRecordId'),
-      ),
-    ).thenAnswer((_) async => unmarkAttendanceRecord!);
-
-    when(
-      () => dao.getAttendanceAnalyses(
-        meeting: any(named: 'meeting'),
-        range: any(named: 'range'),
-        asServant: any(named: 'asServant'),
-      ),
-    ).thenAnswer((_) async => const []);
-  }
-
-  RecordAttendanceCubit createCubit() => RecordAttendanceCubit(
-    meeting: meeting,
-    initialDate: DateTime(2026, 7, 2),
-    dao: dao,
-    authBloc: authBloc,
-    presenter: presenter,
-  );
-
-  Future<void> dispose() => Future.wait([
-    attendanceController.close(),
-    presentCountController.close(),
-    eligibleCountController.close(),
-  ]);
-
-  static Meeting makeMeeting({
-    String id = 'meeting-1',
-    MeetingAudience audience = MeetingAudience.onlyPersons,
-  }) => Meeting(
-    id: id,
-    name: 'Test Meeting',
-    audience: audience,
-    isArchived: false,
-    serviceId: 'service-1',
-  );
-
-  static MeetingRosterEntry rosterPerson(String personId) => MeetingRosterEntry(
-    asServant: false,
-    person: Person(id: personId, name: 'Person $personId'),
-    attendanceRecord: null,
-    personAttendanceAnalysis: null,
-  );
-
-  static MeetingRosterEntry rosterPersonWithPhones(
-    String personId,
-    List<String> phones,
-  ) => MeetingRosterEntry(
-    asServant: false,
-    person: Person(id: personId, name: 'Person $personId'),
-    attendanceRecord: null,
-    personAttendanceAnalysis: null,
-    phones: phones,
-  );
-
-  static AttendanceRecord makeRecord(String personId, {String id = 'att-1'}) =>
-      AttendanceRecord(
-        id: id,
-        meetingId: 'meeting-1',
-        personId: personId,
-        datetime: DateTime(2026, 7, 2, 10),
-        asServant: false,
-      );
-
-  static User userWithPersonsOnlyRecordRights() => User(
-    uid: 'uid',
-    name: 'User',
-    person: Person(id: 'person-uid', name: 'User'),
-    permissions: const PermissionsSet.fromSet({
-      UserPermission.readAllData,
-      UserPermission.recordAllAttendance,
-    }),
-    photoUpdatedAt: DateTime(2026),
-    lastEdit: LastRecordedByInfo(time: DateTime(2026), recordedBy: 'system'),
-  );
-
-  static User userWithBothRecordRights() => User(
-    uid: 'uid',
-    name: 'User',
-    person: Person(id: 'person-uid', name: 'User'),
-    permissions: const PermissionsSet.fromSet({
-      UserPermission.readAllData,
-      UserPermission.recordAllAttendance,
-      UserPermission.recordAllServantsAttendance,
-    }),
-    photoUpdatedAt: DateTime(2026),
-    lastEdit: LastRecordedByInfo(time: DateTime(2026), recordedBy: 'system'),
-  );
-}
-
-final class _MockMeetingsDAO extends Mock implements MeetingsDAO {}
-
-final class _MockAuthBloc extends Mock implements AuthBloc {}
-
-final class _FakePresenter implements AttendanceUndoPresenter {
-  final List<String> shownErrors = [];
-
-  @override
-  void showUndo({
-    required String personName,
-    required AttendanceUndoableChange change,
-    required VoidCallback onUndo,
-  }) {}
-
-  @override
-  void showError(String message) => shownErrors.add(message);
 }

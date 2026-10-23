@@ -23,6 +23,7 @@ class EditObjectPointsMap<T extends ViewableWithID> extends StatefulWidget {
   final List<Point>? Function(T) getObjectPoints;
   final T Function(List<Point>, T) onModify;
   final bool closedShape;
+  final bool isPointsSaveTracked;
 
   const EditObjectPointsMap({
     required this.geomapOptions,
@@ -32,6 +33,7 @@ class EditObjectPointsMap<T extends ViewableWithID> extends StatefulWidget {
     required this.getObjectPoints,
     required this.onModify,
     this.closedShape = false,
+    this.isPointsSaveTracked = true,
     super.key,
   });
 
@@ -57,6 +59,10 @@ class _EditObjectPointsMap<T extends ViewableWithID>
 
   late final BehaviorSubject<GeomapOptions> _mapOptionsStream =
       BehaviorSubject.seeded(widget.geomapOptions);
+
+  int _addedPointCount = 0;
+  int _removedPointCount = 0;
+  int _insertedMidpointCount = 0;
 
   List<DragMarker> Function(int i, Point p) _createMarkerFromPoint(
     double markerSize,
@@ -91,6 +97,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
           resultObject.value,
         ),
         onLongPress: (_) {
+          _removedPointCount++;
           resultObject.value = widget.onModify(
             points.where((e) => e != p).toList(),
             resultObject.value,
@@ -110,24 +117,27 @@ class _EditObjectPointsMap<T extends ViewableWithID>
           color: resultObject.value.color,
           icon: Symbols.add_circle_outline,
         ),
-        onDragStart: (_, newPoint) => resultObject.value = widget.onModify(
-          [
-            ...points
-                .mapIndexed(
-                  (i2, e) => i == i2
-                      ? [
-                          p,
-                          Point(
-                            newPoint.latitude,
-                            newPoint.longitude,
-                          ),
-                        ]
-                      : [e],
-                )
-                .expand((p) => p),
-          ],
-          resultObject.value,
-        ),
+        onDragStart: (_, newPoint) {
+          _insertedMidpointCount++;
+          resultObject.value = widget.onModify(
+            [
+              ...points
+                  .mapIndexed(
+                    (i2, e) => i == i2
+                        ? [
+                            p,
+                            Point(
+                              newPoint.latitude,
+                              newPoint.longitude,
+                            ),
+                          ]
+                        : [e],
+                  )
+                  .expand((p) => p),
+            ],
+            resultObject.value,
+          );
+        },
         onDragUpdate: (_, newPoint) => resultObject.value = widget.onModify(
           [
             ...points.mapIndexed(
@@ -151,7 +161,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () => widget.onSaved(resultObject.value),
+            onPressed: _save,
             icon: const Icon(Symbols.save),
             tooltip: 'حفظ',
           ),
@@ -202,6 +212,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
           ],
           createMapOptions: (center) => MapOptions(
             onTap: (_, latlng) {
+              _addedPointCount++;
               resultObject.value = widget.onModify(
                 [
                   ...widget.getObjectPoints(resultObject.value) ?? [],
@@ -220,6 +231,21 @@ class _EditObjectPointsMap<T extends ViewableWithID>
         ),
       ),
     );
+  }
+
+  void _save() {
+    if (widget.isPointsSaveTracked) {
+      AnalyticsService.I.track(
+        LocationPointsSave(
+          resultObject.value,
+          addedPointCount: _addedPointCount,
+          removedPointCount: _removedPointCount,
+          insertedMidpointCount: _insertedMidpointCount,
+          isClosedShape: widget.closedShape,
+        ),
+      );
+    }
+    widget.onSaved(resultObject.value);
   }
 
   @override

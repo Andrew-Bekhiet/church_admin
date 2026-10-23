@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
@@ -45,7 +46,7 @@ class _AttendanceGroupedRosterState extends State<AttendanceGroupedRoster> {
                 absentCount: entries.length - presentCount,
                 totalCount: entries.length,
                 collapsed: collapsed,
-                onTap: () => _toggleSection(key),
+                onTap: () => _toggleSection(key, entries.length),
               ),
             ),
             SliverFixedExtentList.builder(
@@ -72,9 +73,17 @@ class _AttendanceGroupedRosterState extends State<AttendanceGroupedRoster> {
     );
   }
 
-  void _toggleSection(int? key) {
+  void _toggleSection(int? key, int sectionPersonCount) {
     if (key == null) return;
 
+    final isCollapsed = !_collapsedKeys.contains(key);
+    context.read<RecordAttendanceCubit>().trackForCurrentMeeting(
+      (meeting) => AttendanceSectionToggle(
+        meeting,
+        isCollapsed: isCollapsed,
+        sectionPersonCount: sectionPersonCount,
+      ),
+    );
     setState(() {
       if (_collapsedKeys.remove(key)) return;
 

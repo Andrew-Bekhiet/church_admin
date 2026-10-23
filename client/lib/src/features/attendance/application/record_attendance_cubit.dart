@@ -15,12 +15,13 @@ import 'package:rxdart/rxdart.dart';
 class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   static const int defaultStreakWindowDays = 60;
 
-  static const Duration _searchDebounce = Duration(milliseconds: 300);
+  static const Duration searchDebounce = Duration(milliseconds: 300);
   static const AttendanceNameAlphabet _alphabet = AttendanceNameAlphabet();
 
   final MeetingsDAO _dao;
   final AuthBloc _authBloc;
   final AttendanceUndoPresenter _presenter;
+  final RecordAttendanceAnalytics _analytics;
 
   final BehaviorSubject<String?> _searchSubject = BehaviorSubject.seeded(null);
   StreamSubscription<String?>? _searchSub;
@@ -71,15 +72,17 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     MeetingsDAO? dao,
     AuthBloc? authBloc,
     AttendanceUndoPresenter? presenter,
+    AnalyticsService? analyticsService,
   }) : _dao = dao ?? DatabaseService.I.meetings,
        _authBloc = authBloc ?? AuthBloc.I,
        _presenter = presenter ?? const ScaffoldAttendanceUndoPresenter(),
+       _analytics = RecordAttendanceAnalytics(analyticsService),
        _selectedDate = DateUtils.dateOnly(initialDate ?? DateTime.now()),
        super(const RecordAttendanceLoading()) {
     _forceSwitchMeeting(_meeting);
 
     _searchSub = _searchSubject
-        .debounceTime(_searchDebounce)
+        .debounceTime(searchDebounce)
         .map((query) => query?.trim().toLowerCase() ?? '')
         .distinct((a, b) => a == b)
         .doOnData((query) => _searchQuery = query)
@@ -87,6 +90,10 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   }
 
   int indexForLetter(String letter) => _gutterIndex[letter] ?? -1;
+
+  void trackForCurrentMeeting(
+    AttendanceAnalyticsEvent Function(Meeting meeting) eventFor,
+  ) => _analytics.track(eventFor(_meeting));
 
   void switchMeeting(Meeting meeting) {
     if (meeting.id == _meeting.id) return;
@@ -111,6 +118,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     final dayOnly = DateUtils.dateOnly(date);
     if (dayOnly == _selectedDate) return;
 
+    _analytics.maybeTrackDateChange(state, dayOnly);
     _selectedDate = dayOnly;
     _liveAttendance.reset();
     _personsAttendanceAnalyses = const {};
@@ -127,9 +135,12 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     unawaited(_loadAttendanceAnalyses());
   }
 
-  void changePresenceFilter(AttendancePresenceFilter filter) {
+  void togglePresenceFilter(AttendancePresenceFilter tapped) {
+    final isReset = tapped == _presenceFilter;
+    final filter = isReset ? AttendancePresenceFilter.all : tapped;
     if (_presenceFilter == filter) return;
 
+    _analytics.maybeTrackPresenceFilterChange(state, filter, isReset: isReset);
     _presenceFilter = filter;
     _emitLoaded();
   }
@@ -162,6 +173,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   void retry() => unawaited(_restartSession());
 
   Future<void> toggleAttendance(MeetingRosterEntry entry) {
+    final presenter = _analytics.withUndoTracking(_presenter, _meeting, entry);
     final personId = entry.person.id;
     final effectiveAttendanceRecord = _liveAttendance.effectiveRecord((
       personId,
@@ -173,6 +185,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     return _runOptimisticAttendance(
       entry: entry,
       optimisticTime: newIsPresent ? attendanceTime : null,
+      trackOutcome: _analytics.markTrackerIfLoaded(state, entry, newIsPresent),
       action: () async {
         if (newIsPresent) {
           final record = await _dao.markAttendance(
@@ -182,7 +195,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
             datetime: attendanceTime,
           );
 
-          _presenter.showUndo(
+          presenter.showUndo(
             personName: entry.person.name,
             change: AttendanceUndoableChange.markedPresent,
             onUndo: () => _dao.unmarkAttendance(attendanceRecordId: record.id),
@@ -192,7 +205,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
             attendanceRecordId: attendanceRecordId,
           );
 
-          _presenter.showUndo(
+          presenter.showUndo(
             personName: entry.person.name,
             change: AttendanceUndoableChange.markedAbsent,
             onUndo: () => _dao.markAttendance(
@@ -211,14 +224,15 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     MeetingRosterEntry entry,
     TimeOfDay time,
   ) async {
-    final attendanceRecord = entry.attendance;
-    if (attendanceRecord == null) return;
+    final record = entry.attendance;
+    if (record == null) return;
 
     final newDatetime = _selectedDate.replaceTimeOfDay(time);
-    if (newDatetime == attendanceRecord.datetime) return;
+    if (newDatetime == record.datetime) return;
 
     if (newDatetime.isAfter(clock.now())) {
       _presenter.showError('لا يمكن تسجيل الحضور في وقت لم يأت بعد');
+      _analytics.trackRejectedTimeEdit(_meeting, record, newDatetime);
 
       return;
     }
@@ -226,8 +240,9 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     await _runOptimisticAttendance(
       entry: entry,
       optimisticTime: newDatetime,
+      trackOutcome: _analytics.timeEditTracker(_meeting, record, newDatetime),
       action: () => _dao.updateAttendanceTime(
-        attendanceRecordId: attendanceRecord.id,
+        attendanceRecordId: record.id,
         datetime: newDatetime,
       ),
     );
@@ -236,6 +251,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   Future<void> _runOptimisticAttendance({
     required MeetingRosterEntry entry,
     required DateTime? optimisticTime,
+    required void Function({required bool isSaved})? trackOutcome,
     required Future<void> Function() action,
   }) async {
     final personId = entry.person.id;
@@ -259,14 +275,11 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     try {
       await action();
+      trackOutcome?.call(isSaved: true);
     } catch (error, stackTrace) {
+      trackOutcome?.call(isSaved: false);
       _liveAttendance.rollbackOptimistic(key);
-
-      unawaited(
-        LoggingService.I.exception(
-          LogRecord(error: error, stackTrace: stackTrace),
-        ),
-      );
+      _logError(error, stackTrace);
 
       if (!isClosed) _presenter.showError('تعذر حفظ الحضور، حاول مرة أخرى');
     } finally {
@@ -306,15 +319,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       _recordedDays = merged;
       _emitLoaded();
     } catch (error, stackTrace) {
-      unawaited(
-        LoggingService.I.exception(
-          LogRecord(
-            moduleName: '$RecordAttendanceCubit',
-            error: error,
-            stackTrace: stackTrace,
-          ),
-        ),
-      );
+      _logError(error, stackTrace);
     }
   }
 
@@ -340,15 +345,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       };
       _emitLoaded();
     } catch (error, stackTrace) {
-      unawaited(
-        LoggingService.I.exception(
-          LogRecord(
-            moduleName: '$RecordAttendanceCubit',
-            error: error,
-            stackTrace: stackTrace,
-          ),
-        ),
-      );
+      _logError(error, stackTrace);
 
       if (requestId != _trackRequestId || isClosed) return;
 
@@ -400,15 +397,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   }
 
   void _onRosterError(Object error, StackTrace stackTrace) {
-    unawaited(
-      LoggingService.I.exception(
-        LogRecord(
-          moduleName: '$RecordAttendanceCubit',
-          error: error,
-          stackTrace: stackTrace,
-        ),
-      ),
-    );
+    _logError(error, stackTrace);
     if (isClosed) return;
 
     _rosterStatus = RosterStatus.error;
@@ -447,25 +436,25 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       _gutterIndex.keys.toList(),
     );
 
-    emit(
-      RecordAttendanceLoaded(
-        meeting: _meeting,
-        selectedDate: _selectedDate,
-        audienceView: _audienceView,
-        canToggleAudience: _canToggleAudience,
-        presenceFilter: _presenceFilter,
-        grouping: _grouping,
-        sort: _sort,
-        rosterStatus: _rosterStatus,
-        searchQuery: _searchQuery,
-        recordedDays: _recordedDays,
-        entries: sorted,
-        gutterLetters: sortedGutterLetters,
-        streakWindowDays: _streakWindowDays,
-        presentCount: allEligibleEntries.where((e) => e.attended).length,
-        eligibleCount: allEligibleEntries.length,
-      ),
+    final loaded = RecordAttendanceLoaded(
+      meeting: _meeting,
+      selectedDate: _selectedDate,
+      audienceView: _audienceView,
+      canToggleAudience: _canToggleAudience,
+      presenceFilter: _presenceFilter,
+      grouping: _grouping,
+      sort: _sort,
+      rosterStatus: _rosterStatus,
+      searchQuery: _searchQuery,
+      recordedDays: _recordedDays,
+      entries: sorted,
+      gutterLetters: sortedGutterLetters,
+      streakWindowDays: _streakWindowDays,
+      presentCount: allEligibleEntries.where((e) => e.attended).length,
+      eligibleCount: allEligibleEntries.length,
     );
+    _analytics.maybeTrackRosterChange(state, loaded);
+    emit(loaded);
   }
 
   MeetingRosterEntry _withLiveAttendance(MeetingRosterEntry entry) {
@@ -487,6 +476,16 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         phoneFragment.isNotEmpty &&
             entry.phones.any((phone) => phone.contains(phoneFragment));
   }
+
+  void _logError(Object error, StackTrace stackTrace) => unawaited(
+    LoggingService.I.exception(
+      LogRecord(
+        moduleName: '$RecordAttendanceCubit',
+        error: error,
+        stackTrace: stackTrace,
+      ),
+    ),
+  );
 
   @override
   Future<void> close() async {

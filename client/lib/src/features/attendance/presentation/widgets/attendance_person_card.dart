@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' hide TextDirection;
@@ -94,8 +96,15 @@ class AttendancePersonCard extends StatelessWidget {
     const AttendanceMarkedNotification().dispatch(context);
   }
 
-  void _openDetails(BuildContext context) =>
-      ViewPersonRoute(id: entry.person.id, person: entry.person).push(context);
+  void _openDetails(BuildContext context) {
+    context.read<RecordAttendanceCubit>().trackForCurrentMeeting(
+      (meeting) =>
+          AttendancePersonProfileOpen(meeting, personId: entry.person.id),
+    );
+    unawaited(
+      ViewPersonRoute(id: entry.person.id, person: entry.person).push(context),
+    );
+  }
 
   Future<void> _changeAttendanceTime(BuildContext context) async {
     final attendanceDateTime = entry.attendance?.datetime;
