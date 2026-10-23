@@ -50,7 +50,7 @@ void main() {
             birthdate: birthdate,
             serviceName: serviceName,
           ),
-        await E2eBackend.insertPerson(
+        await E2eBackend.createPerson(
           'بدون تاريخ ميلاد',
           serviceName: serviceName,
         ),

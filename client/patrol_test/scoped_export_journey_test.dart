@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
@@ -24,10 +23,10 @@ void main() {
       const noScopeServicePerson = 'مخدوم خدمة اعدادي';
       const personInNoServiceOrArea = 'شخص بلا خدمة ولا منطقة';
       const familyInNoArea = 'عائلة بلا منطقة';
-      final permissionDenied = isA<FirebaseFunctionsException>().having(
+      final exportForbidden = isA<BackendRejectedException>().having(
         (error) => error.code,
         'code',
-        'permission-denied',
+        'export/forbidden',
       );
 
       void step(String description) => debugPrint('E2E STEP: $description');
@@ -56,15 +55,15 @@ void main() {
         'خدمة ثانوي',
       );
       final otherServiceId = await E2eBackend.serviceIdByName('خدمة KG');
-      await E2eBackend.insertPerson(
+      await E2eBackend.createPerson(
         exportableServicePerson,
         serviceName: 'خدمة ثانوي',
       );
-      await E2eBackend.insertPerson(
+      await E2eBackend.createPerson(
         otherServicePerson,
         serviceName: 'خدمة KG',
       );
-      await E2eBackend.insertPerson(
+      await E2eBackend.createPerson(
         noScopeServicePerson,
         serviceName: noScopeServiceName,
       );
@@ -86,20 +85,20 @@ void main() {
       await E2eApp.launchSignedOut($);
       await E2eApp.signInToHome(tester, email: servant.email);
 
-      step('the export function refuses the scopes without export');
+      step('the backend refuses the scopes without export');
       await expectLater(
-        FunctionsService.I.exportData(areasIds: [otherAreaId]),
-        throwsA(permissionDenied),
+        DatabaseService.I.exports.exportData(areasIds: [otherAreaId]),
+        throwsA(exportForbidden),
       );
       await expectLater(
-        FunctionsService.I.exportData(servicesIds: [otherServiceId]),
-        throwsA(permissionDenied),
+        DatabaseService.I.exports.exportData(servicesIds: [otherServiceId]),
+        throwsA(exportForbidden),
       );
       await expectLater(
-        FunctionsService.I.exportData(
+        DatabaseService.I.exports.exportData(
           areasIds: [exportableAreaId, otherAreaId],
         ),
-        throwsA(permissionDenied),
+        throwsA(exportForbidden),
       );
 
       step('the export screen offers only the scopes with export');
@@ -120,7 +119,7 @@ void main() {
 
       step('the export holds the exportable scopes and nothing else');
       await export.startExport();
-      final workbook = await ExportedWorkbook.latestExportOf(servant.uid);
+      final workbook = await ExportedWorkbook.latestSavedByTheApp();
       final expectedInExport = [
         'منطقة التصدير',
         exportableStreetName,
@@ -152,7 +151,6 @@ void main() {
         isEmpty,
         reason: 'the export holds data outside the exportable scopes',
       );
-      await export.closeTheUnsignedDownloadLinkError();
 
       await E2eApp.signOut(tester);
       await E2eApp.finish(tester);

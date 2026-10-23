@@ -5,7 +5,7 @@ sealed class E2eAdminScope {
   final bool canExportData;
   final bool canManageUsers;
 
-  Map<String, Object?> get adminOnInsertInput;
+  Map<String, Object?> get adminOnInput;
 
   const E2eAdminScope({
     required this.canWriteData,
@@ -21,7 +21,7 @@ final class AreaAdminScope extends E2eAdminScope {
   final String areaId;
 
   @override
-  Map<String, Object?> get adminOnInsertInput => {
+  Map<String, Object?> get adminOnInput => {
     'adminOnArea': areaId,
     'areaAllowEdit': canWriteData,
     'areaAllowExport': canExportData,
@@ -50,7 +50,7 @@ final class ServiceAdminScope extends E2eAdminScope {
   final bool canRecordServantsAttendance;
 
   @override
-  Map<String, Object?> get adminOnInsertInput => {
+  Map<String, Object?> get adminOnInput => {
     'adminOnService': serviceId,
     'serviceStudyYear': studyYear,
     'serviceGender': gender?.isMale,
@@ -82,7 +82,7 @@ final class GroupAdminScope extends E2eAdminScope {
   final bool canRecordServantsAttendance;
 
   @override
-  Map<String, Object?> get adminOnInsertInput => {
+  Map<String, Object?> get adminOnInput => {
     'adminOnGroup': groupId,
     'groupAllowEdit': canWriteData,
     'groupAllowExport': canExportData,
