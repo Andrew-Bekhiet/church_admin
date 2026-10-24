@@ -3,6 +3,7 @@ import {
   github,
   group,
   image,
+  preserve,
   project,
   service,
   volume,
@@ -52,6 +53,23 @@ export default defineRailway((ctx) => {
       },
       sleepApplication: true,
     },
+    env: {
+      HASURA_GRAPHQL_ADMIN_SECRET: preserve(),
+      HASURA_GRAPHQL_DATABASE_URL: preserve(),
+      HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: preserve(),
+      HASURA_GRAPHQL_DEV_MODE: preserve(),
+      HASURA_GRAPHQL_ENABLED_APIS: preserve(),
+      HASURA_GRAPHQL_ENABLE_CONSOLE: preserve(),
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: preserve(),
+      HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: preserve(),
+      HASURA_GRAPHQL_JWT_SECRET: preserve(),
+      HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: preserve(),
+      HASURA_GRAPHQL_LOG_LEVEL: preserve(),
+      HASURA_GRAPHQL_SERVER_PORT: preserve(),
+      PORT: preserve(),
+      STUDY_YEAR_ROLL_NOTIFY_URL: preserve(),
+      STUDY_YEAR_ROLL_WEBHOOK_SECRET: preserve(),
+    },
   });
 
   const postgresDb = service("church-admin-db-eu", {
@@ -70,6 +88,18 @@ export default defineRailway((ctx) => {
       sleepApplication: true,
     },
     volumeMounts: { "/var/lib": postgresVolume },
+    env: {
+      DATABASE_PRIVATE_URL: preserve(),
+      NO_TS_TUNE: preserve(),
+      PGDATA: preserve(),
+      PGPASSWORD: preserve(),
+      PGUSER: preserve(),
+      POSTGRES_DB: preserve(),
+      POSTGRES_PASSWORD: preserve(),
+      POSTGRES_USER: preserve(),
+      RAILWAY_RUN_UID: preserve(),
+      SSL_CERT_DAYS: preserve(),
+    },
   });
 
   const tailscaleForwarder = service("Tailscale Forwarder", {
@@ -91,6 +121,13 @@ export default defineRailway((ctx) => {
     replicas: { "europe-west4": 1 },
     networking: { privateNetworkEndpoint: "tailscale-forwarder" },
     volumeMounts: { "/data": tailscaleForwarderVolume },
+    env: {
+      CONNECTION_MAPPING_01: preserve(),
+      TS_AUTHKEY: preserve(),
+      TS_EPHEMERAL: preserve(),
+      TS_HOSTNAME: preserve(),
+      TS_STATE_DIR: preserve(),
+    },
   });
 
   const backupCRON = service("Backup CRON", {
@@ -114,6 +151,20 @@ export default defineRailway((ctx) => {
       restartPolicyType: "NEVER",
     },
     networking: { privateNetworkEndpoint: "backup-cron" },
+    env: {
+      AWS_ACCESS_KEY_ID: preserve(),
+      AWS_S3_BUCKET: preserve(),
+      AWS_S3_ENDPOINT: preserve(),
+      AWS_S3_REGION: preserve(),
+      AWS_SECRET_ACCESS_KEY: preserve(),
+      BACKUP_CRON_SCHEDULE: preserve(),
+      BACKUP_DATABASE_URL: preserve(),
+      BACKUP_OPTIONS: preserve(),
+      ENABLE_ALPINE_PRIVATE_NETWORKING: preserve(),
+      NODE_VERSION: preserve(),
+      PG_VERSION: preserve(),
+      SINGLE_SHOT_MODE: preserve(),
+    },
   });
   const backend = group("backend", [hasura, postgresDb]);
 
