@@ -19,20 +19,20 @@ export default defineRailway((ctx) => {
   const tailscaleForwarderVolume = volume("tailscale-forwarder-volume", {
     alerts: { usage: { "100": {}, "80": {}, "95": {} } },
     allowOnlineResize: true,
-    region: "europe-west4",
+    region: "europe-west4-drams3a",
     sizeMB: 5000,
   });
   const postgresVolume = volume("power-volume", {
     alerts: { usage: { "100": {}, "80": {}, "95": {} } },
     allowOnlineResize: true,
-    region: "europe-west4",
+    region: "europe-west4-drams3a",
     sizeMB: 5900,
   });
 
   const hasura = service("burly-lunchroom", {
     source: github("Andrew-Bekhiet/church_admin", {
       branch: "master",
-      checkSuites: false,
+      checkSuites: true,
       rootDirectory: "/server/hasura",
     }),
     build: {
@@ -42,7 +42,7 @@ export default defineRailway((ctx) => {
     },
     healthcheck: "/healthz",
     healthcheckTimeout: 180,
-    replicas: { "europe-west4": 1 },
+    replicas: { "europe-west4-drams3a": 1 },
     deploy: {
       limitOverride: {
         containers: {
@@ -75,14 +75,14 @@ export default defineRailway((ctx) => {
   const postgresDb = service("church-admin-db-eu", {
     source: github("Andrew-Bekhiet/church_admin", {
       branch: "master",
-      checkSuites: false,
+      checkSuites: true,
       rootDirectory: "/server/postgres",
     }),
     build: {
       builder: "DOCKERFILE",
       dockerfilePath: "/server/postgres/Dockerfile",
     },
-    replicas: { "europe-west4": 1 },
+    replicas: { "europe-west4-drams3a": 1 },
     deploy: {
       limitOverride: { containers: { cpu: 4 } },
       sleepApplication: true,
@@ -118,7 +118,7 @@ export default defineRailway((ctx) => {
       },
     }),
     build: { builder: "RAILPACK" },
-    replicas: { "europe-west4": 1 },
+    replicas: { "europe-west4-drams3a": 1 },
     networking: { privateNetworkEndpoint: "tailscale-forwarder" },
     volumeMounts: { "/data": tailscaleForwarderVolume },
     env: {
@@ -138,13 +138,13 @@ export default defineRailway((ctx) => {
         "https://github.com/railwayapp-templates/postgres-s3-backups",
     }),
     build: { builder: "NIXPACKS" },
-    replicas: { "europe-west4": 1 },
+    replicas: { "europe-west4-drams3a": 1 },
     deploy: {
       cronSchedule: "0 3 * * 0",
       limitOverride: {
         containers: {
           cpu: 2,
-          diskBytes: 10_000_000,
+          diskBytes: 2_000_000_000,
           memoryBytes: 3_000_000_000,
         },
       },
