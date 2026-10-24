@@ -1,6 +1,10 @@
 import { defineRailway, github, group, image, project, service, volume } from "railway/iac";
 
-export default defineRailway(() => {
+export default defineRailway((ctx) => {
+  if (!ctx.isEnvironment("production")) {
+    throw new Error(`.railway/railway.ts describes production only; "${ctx.environment}" is a Railway PR environment and stays Railway-managed.`);
+  }
+
   const tailscaleForwarderVolume = volume("tailscale-forwarder-volume", { alerts: { usage: { "100": {}, "80": {}, "95": {} } }, allowOnlineResize: true, region: "europe-west4-drams3a", sizeMB: 5000 });
   const powerVolume = volume("power-volume", { alerts: { usage: { "100": {}, "80": {}, "95": {} } }, allowOnlineResize: true, region: "europe-west4-drams3a", sizeMB: 5900 });
   const burlyLunchroom = service("burly-lunchroom", {
