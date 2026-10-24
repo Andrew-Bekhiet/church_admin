@@ -93,7 +93,6 @@ export default defineRailway((ctx) => {
     env: {
       DATABASE_PRIVATE_URL:
         "postgresql://${{POSTGRES_USER}}:${{POSTGRES_PASSWORD}}@${{RAILWAY_PRIVATE_DOMAIN}}:${{shared.POSTGRES_PORT}}/${{POSTGRES_DB}}",
-      NO_TS_TUNE: "true",
       PGDATA: "/var/lib/pgdata",
       PGPASSWORD: "${{POSTGRES_PASSWORD}}",
       PGUSER: "${{POSTGRES_USER}}",
@@ -101,7 +100,6 @@ export default defineRailway((ctx) => {
       POSTGRES_PASSWORD: "${{shared.POSTGRES_PASSWORD}}",
       POSTGRES_USER: "${{shared.POSTGRES_USER}}",
       RAILWAY_RUN_UID: "0",
-      SSL_CERT_DAYS: preserve(),
     },
   });
 
@@ -161,12 +159,10 @@ export default defineRailway((ctx) => {
       AWS_S3_ENDPOINT: preserve(),
       AWS_S3_REGION: preserve(),
       AWS_SECRET_ACCESS_KEY: preserve(),
-      BACKUP_CRON_SCHEDULE: "0 3 * * 0",
       BACKUP_DATABASE_URL:
         "postgresql://${{shared.POSTGRES_USER}}:${{shared.POSTGRES_PASSWORD_URL_ENCODED}}@[${{church-admin-db-eu.RAILWAY_SERVICE_NAME}}]:${{shared.POSTGRES_PORT}}/${{shared.POSTGRES_DB}}",
       BACKUP_OPTIONS:
         "-O -c --if-exists --quote-all-identifiers --lock-wait-timeout=30000",
-      ENABLE_ALPINE_PRIVATE_NETWORKING: "true",
       NODE_VERSION: "22",
       PG_VERSION: "17",
       SINGLE_SHOT_MODE: "true",
