@@ -1,0 +1,8 @@
+{
+  "name": "church-admin-railway",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "railway": "3.16.0"
+  }
+}
