@@ -43,14 +43,14 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+
       - name: Mask log values
         env:
           LOG_MASK_VALUES: ${{ secrets.LOG_MASK_VALUES }}
         run: while IFS= read -r v; do if [ -n "$v" ]; then echo "::add-mask::$v"; fi; done <<< "$LOG_MASK_VALUES"
-
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 1
 
       - name: Free up disk space
         if: ${{ matrix.os == 'ubuntu-latest' }}
