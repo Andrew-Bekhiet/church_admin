@@ -10,6 +10,7 @@ class PhoneNumberService {
 
   bool validate(String phone) => PhoneNumber.parse(
     phone,
+    callerCountry: IsoCode.EG,
     destinationCountry:
         PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
         ? IsoCode.EG
@@ -18,6 +19,7 @@ class PhoneNumberService {
 
   String format(String phone) => PhoneNumber.parse(
     phone,
+    callerCountry: IsoCode.EG,
     destinationCountry:
         PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
         ? IsoCode.EG
@@ -26,6 +28,7 @@ class PhoneNumberService {
 
   String formatInternational(String phone) => PhoneNumber.parse(
     phone,
+    callerCountry: IsoCode.EG,
     destinationCountry:
         PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
         ? IsoCode.EG
@@ -50,6 +53,7 @@ class PhoneNumberService {
 
   PhoneNumber _parse(String phone) => PhoneNumber.parse(
     phone,
+    callerCountry: IsoCode.EG,
     destinationCountry:
         PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
         ? IsoCode.EG

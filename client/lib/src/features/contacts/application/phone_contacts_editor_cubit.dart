@@ -37,6 +37,7 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
            errors: {},
            ownContacts: [],
            familyContacts: [],
+           errorsAreShown: false,
          ),
        ) {
     _emit(
@@ -140,6 +141,12 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
     );
   }
 
+  bool validate() {
+    _emit(errorsAreShown: true);
+
+    return state.errors.isEmpty;
+  }
+
   void remove(String key) =>
       _emit(drafts: state.drafts.whereNot((d) => d.key == key).toList());
 
@@ -164,6 +171,7 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
     List<PersonType>? familyRoles,
     bool? hasFamily,
     bool? familyOnly,
+    bool? errorsAreShown,
   }) {
     final effectiveDrafts = drafts ?? state.drafts;
     final effectiveHasFamily = hasFamily ?? state.hasFamily;
@@ -174,6 +182,7 @@ class PhoneContactsEditorCubit extends Cubit<PhoneContactsEditorState> {
         familyRoles: familyRoles ?? state.familyRoles,
         hasFamily: effectiveHasFamily,
         familyOnly: familyOnly ?? state.familyOnly,
+        errorsAreShown: errorsAreShown ?? state.errorsAreShown,
         errors: _errorsOf(effectiveDrafts, hasFamily: effectiveHasFamily),
         ownContacts: [
           for (final draft in effectiveDrafts)

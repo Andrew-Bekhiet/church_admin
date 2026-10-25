@@ -27,6 +27,7 @@ defaults:
 
 jobs:
   patch-mobile:
+    environment: release
     permissions:
       contents: write
 
