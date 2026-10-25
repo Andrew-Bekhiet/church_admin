@@ -55,7 +55,8 @@ export default defineRailway((ctx) => {
     },
     env: {
       HASURA_GRAPHQL_ADMIN_SECRET: preserve(),
-      HASURA_GRAPHQL_DATABASE_URL: "${{church-admin-db-eu.DATABASE_PRIVATE_URL}}",
+      HASURA_GRAPHQL_DATABASE_URL:
+        "${{church-admin-db-eu.DATABASE_PRIVATE_URL}}",
       HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: "graphql-default",
       HASURA_GRAPHQL_DEV_MODE: "false",
       HASURA_GRAPHQL_ENABLED_APIS: "metadata,graphql",
@@ -71,6 +72,9 @@ export default defineRailway((ctx) => {
       STUDY_YEAR_ROLL_NOTIFY_URL:
         "https://europe-west6-${{shared.FIREBASE_PROJECT_ID}}.cloudfunctions.net/notifyStudyYearRollFailure",
       STUDY_YEAR_ROLL_WEBHOOK_SECRET: preserve(),
+      SCREEN_CAPTURE_NOTIFY_URL:
+        "https://europe-west6-${{shared.FIREBASE_PROJECT_ID}}.cloudfunctions.net/notifyScreenCaptureAttempt",
+      SCREEN_CAPTURE_WEBHOOK_SECRET: preserve(),
     },
   });
 
