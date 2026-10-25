@@ -74,6 +74,7 @@ class _EditFamilyScreenState extends State<EditFamilyScreen> {
               ViewFamilyRoute(id: family.id, family: family),
           movedOutOfSightMessage: EditFamilyScreen.movedOutOfSightMessage,
           hasUnsavedInput: () => _phoneContacts.hasUnsavedInput,
+          validateInputOutsideForm: _phoneContacts.validate,
           fields: FamilyEditFields(
             form: _form,
             metadata: _metadata,

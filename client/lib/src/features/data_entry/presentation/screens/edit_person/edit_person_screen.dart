@@ -171,6 +171,8 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
   }
 
   Future<void> _save() async {
+    if (!_phoneContacts.validate()) return;
+
     final outcome = await _form.submit(
       confirmMoveOutOfSight: _confirmMoveOutOfSight,
     );

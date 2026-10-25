@@ -9,6 +9,7 @@ final class PhoneContactsEditorState with Equatable {
   final Map<String, PhoneContactDraftError> errors;
   final List<PhoneContact> ownContacts;
   final List<FamilyPhoneContact> familyContacts;
+  final bool errorsAreShown;
 
   @override
   List<Object?> get props => [
@@ -19,6 +20,7 @@ final class PhoneContactsEditorState with Equatable {
     errors,
     ownContacts,
     familyContacts,
+    errorsAreShown,
   ];
 
   const PhoneContactsEditorState({
@@ -29,5 +31,6 @@ final class PhoneContactsEditorState with Equatable {
     required this.errors,
     required this.ownContacts,
     required this.familyContacts,
+    required this.errorsAreShown,
   });
 }

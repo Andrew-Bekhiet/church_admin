@@ -21,8 +21,6 @@ void main() {
     label: 'عمل',
   );
 
-  final formKey = GlobalKey<FormState>();
-
   tearDown(defaultTearDown);
 
   Future<PhoneContactsEditorCubit> pumpEditor(
@@ -45,13 +43,10 @@ void main() {
       MaterialUiTestApp.withThemeAndLocale(
         child: Scaffold(
           body: SingleChildScrollView(
-            child: Form(
-              key: formKey,
-              child: BlocProvider.value(
-                value: cubit,
-                child: PhoneContactsEditor(
-                  onImportFromContacts: onImportFromContacts,
-                ),
+            child: BlocProvider.value(
+              value: cubit,
+              child: PhoneContactsEditor(
+                onImportFromContacts: onImportFromContacts,
               ),
             ),
           ),
@@ -148,6 +143,22 @@ void main() {
   testWidgets('a number that is not a phone number fails validation', (
     tester,
   ) async {
+    final cubit = await pumpEditor(tester);
+
+    await tester.enterText(
+      find.byKey(PhoneContactDraftFieldKeys.phoneField('own-work')),
+      '0100',
+    );
+    await tester.pump();
+    cubit.validate();
+    await tester.pump();
+
+    expect(find.text('برجاء ادخال رقم هاتف صالح'), findsOneWidget);
+  });
+
+  testWidgets('a number still being typed shows no error before validation', (
+    tester,
+  ) async {
     await pumpEditor(tester);
 
     await tester.enterText(
@@ -155,9 +166,10 @@ void main() {
       '0100',
     );
     await tester.pump();
-    formKey.currentState?.validate();
-    await tester.pump();
 
-    expect(find.text('برجاء ادخال رقم هاتف صالح'), findsOneWidget);
+    expect(
+      find.text(PhoneContactDraftError.invalidPhone.message),
+      findsNothing,
+    );
   });
 }
