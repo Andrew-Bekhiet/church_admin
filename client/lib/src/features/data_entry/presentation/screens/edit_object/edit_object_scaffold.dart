@@ -19,6 +19,7 @@ class EditObjectScaffold<T extends ViewableWithIDAndImage>
   final String? nameHint;
   final String movedOutOfSightMessage;
   final bool Function()? hasUnsavedInput;
+  final bool Function()? validateInputOutsideForm;
 
   const EditObjectScaffold({
     required this.form,
@@ -29,6 +30,7 @@ class EditObjectScaffold<T extends ViewableWithIDAndImage>
     this.movedOutOfSightMessage = 'تم النقل',
     this.nameHint,
     this.hasUnsavedInput,
+    this.validateInputOutsideForm,
     super.key,
   });
 
@@ -156,6 +158,8 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
   }
 
   Future<void> _save() async {
+    if (!(widget.validateInputOutsideForm?.call() ?? true)) return;
+
     final outcome = await widget.saveCubit.submit(
       confirmMoveOutOfSight: _confirmMoveOutOfSight,
     );

@@ -54,7 +54,9 @@ class PhoneContactDraftField extends StatelessWidget {
           autofillHints: const [AutofillHints.telephoneNumber],
           textInputAction: TextInputAction.next,
           onChanged: (value) => cubit.changeInput(draft.key, value),
-          validator: (_) => cubit.state.errors[draft.key]?.message,
+          forceErrorText: cubit.state.errorsAreShown
+              ? cubit.state.errors[draft.key]?.message
+              : null,
         ),
       ],
     );

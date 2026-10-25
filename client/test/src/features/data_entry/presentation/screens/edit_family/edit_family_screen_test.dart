@@ -115,6 +115,30 @@ void main() {
     }
   });
 
+  group('an invalid number', () {
+    Future<void> typeIncompleteNumberAndSave(WidgetTester tester) async {
+      await openStoredFamily(tester);
+      await harness.scrollTo(tester, phoneField('family-saved'));
+      await tester.enterText(phoneField('family-saved'), '0100');
+      await saveAndSettle(tester);
+    }
+
+    testWidgets('is not saved', (tester) async {
+      await typeIncompleteNumberAndSave(tester);
+
+      expect(harness.familiesDAO.updates, isEmpty);
+    });
+
+    testWidgets('says why', (tester) async {
+      await typeIncompleteNumberAndSave(tester);
+
+      expect(
+        find.text(PhoneContactDraftError.invalidPhone.message),
+        findsOneWidget,
+      );
+    });
+  });
+
   group('editing before the saved relatives finish loading', () {
     testWidgets('a changed number is saved', (tester) async {
       final gate = harness.familiesDAO.relatedFamiliesGate = Completer<void>();

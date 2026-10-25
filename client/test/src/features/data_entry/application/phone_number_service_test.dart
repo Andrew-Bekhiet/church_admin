@@ -56,8 +56,17 @@ void main() {
       expect(unit.toE164('010 0123 4567'), '+201001234567');
     });
 
+    test('an Egyptian number starting with 011 is stored in E.164', () {
+      expect(unit.toE164('0111 234 5678'), '+201112345678');
+    });
+
     test('an international number keeps its country code', () {
       expect(unit.toE164('+966 50 123 4567'), '+966501234567');
+    });
+
+    test('an international number dialled from Egypt with 00 keeps its '
+        'country code', () {
+      expect(unit.toE164('00966501234567'), '+966501234567');
     });
 
     test('an invalid number cannot be stored', () {
