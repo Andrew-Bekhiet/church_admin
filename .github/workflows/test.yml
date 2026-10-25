@@ -3,32 +3,28 @@ name: Test and Coverage
 on:
   pull_request:
     paths:
-      - "client/**/*.dart"
-      - "client/**/*.gql"
-      - "client/**/*.graphql"
+      - "client/lib/**"
       - "client/test/**"
       - "client/assets/**"
       - "client/dart_test.yaml"
       - "client/pubspec.*"
       - "client/.fvmrc"
       - "client/scripts/generate_test_bundle.sh"
-      - "packages/**/*.dart"
+      - "packages/*/lib/**"
       - "packages/*/pubspec.*"
       - ".github/workflows/test.yml"
 
   push:
     branches: [master]
     paths:
-      - "client/**/*.dart"
-      - "client/**/*.gql"
-      - "client/**/*.graphql"
+      - "client/lib/**"
       - "client/test/**"
       - "client/assets/**"
       - "client/dart_test.yaml"
       - "client/pubspec.*"
       - "client/.fvmrc"
       - "client/scripts/generate_test_bundle.sh"
-      - "packages/**/*.dart"
+      - "packages/*/lib/**"
       - "packages/*/pubspec.*"
       - ".github/workflows/test.yml"
 
