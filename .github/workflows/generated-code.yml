@@ -3,8 +3,19 @@ name: Check generated code matches committed files
 on:
   pull_request:
     paths:
-      - "client/**"
-      - "packages/**"
+      - "client/lib/**"
+      - "client/test/**/*.dart"
+      - "client/build.yaml"
+      - "client/pubspec.*"
+      - "client/.fvmrc"
+      - "client/scripts/check_generated_code.sh"
+      - "client/scripts/check_graphql_schema.sh"
+      - "client/scripts/fetch_graphql_schema.sh"
+      - "client/scripts/graphql_schema.cjs"
+      - "client/scripts/split_schema_graphql_dart.sh"
+      - "packages/*/lib/**"
+      - "packages/*/build.yaml"
+      - "packages/*/pubspec.*"
       - "server/hasura/**"
       - "server/postgres/**"
       - "server/docker-compose.yml"
@@ -13,8 +24,19 @@ on:
   push:
     branches: [master]
     paths:
-      - "client/**"
-      - "packages/**"
+      - "client/lib/**"
+      - "client/test/**/*.dart"
+      - "client/build.yaml"
+      - "client/pubspec.*"
+      - "client/.fvmrc"
+      - "client/scripts/check_generated_code.sh"
+      - "client/scripts/check_graphql_schema.sh"
+      - "client/scripts/fetch_graphql_schema.sh"
+      - "client/scripts/graphql_schema.cjs"
+      - "client/scripts/split_schema_graphql_dart.sh"
+      - "packages/*/lib/**"
+      - "packages/*/build.yaml"
+      - "packages/*/pubspec.*"
       - "server/hasura/**"
       - "server/postgres/**"
       - "server/docker-compose.yml"
