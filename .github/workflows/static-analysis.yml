@@ -3,15 +3,25 @@ name: Static analysis
 on:
   pull_request:
     paths:
-      - "client/**"
-      - "packages/**"
+      - "client/**/*.dart"
+      - "client/**/analysis_options.yaml"
+      - "client/pubspec.*"
+      - "client/.fvmrc"
+      - "packages/**/*.dart"
+      - "packages/**/analysis_options.yaml"
+      - "packages/*/pubspec.*"
       - ".github/workflows/static-analysis.yml"
 
   push:
     branches: [master]
     paths:
-      - "client/**"
-      - "packages/**"
+      - "client/**/*.dart"
+      - "client/**/analysis_options.yaml"
+      - "client/pubspec.*"
+      - "client/.fvmrc"
+      - "packages/**/*.dart"
+      - "packages/**/analysis_options.yaml"
+      - "packages/*/pubspec.*"
       - ".github/workflows/static-analysis.yml"
 
   workflow_dispatch:
