@@ -9,10 +9,11 @@ class FamilyFormController extends ObjectFormController<Family> {
 
   late final AddressFormController address;
   late final relatives = AdvancedFormController(debugName: 'relatives');
-  late final contacts =
-      AdvancedFieldController<List<FamilyPhoneContact>, ObjectEditError>(
-        initialValue: initialDraft.contacts,
-      );
+  late final phones = PhoneContactsFormController(
+    own: const [],
+    family: initialDraft.contacts,
+    familyOnly: true,
+  );
   late final church = AdvancedFieldController<Church?, ObjectEditError>(
     initialValue: initialDraft.church,
   );
@@ -82,7 +83,6 @@ class FamilyFormController extends ObjectFormController<Family> {
     registerFields([
       photo,
       name,
-      contacts,
       church,
       status,
       deceasedSpouseName,
@@ -94,6 +94,7 @@ class FamilyFormController extends ObjectFormController<Family> {
     ]);
     relatives.registerFields([parents, children]);
     addSubform(address);
+    addSubform(phones);
     addSubform(relatives);
   }
 
@@ -134,7 +135,7 @@ class FamilyFormController extends ObjectFormController<Family> {
   Family toObject() => initialDraft.copyWith(
     name: editedName,
     address: address.toAddress(),
-    contacts: contacts.fieldValue,
+    contacts: phones.familyContacts,
     church: church.fieldValue,
     status: status.fieldValue ?? initialDraft.status,
     deceasedSpouseName: switch (deceasedSpouseName.fieldValue.trim()) {

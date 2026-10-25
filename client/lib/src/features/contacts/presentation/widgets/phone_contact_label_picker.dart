@@ -5,17 +5,19 @@ import 'package:material_ui/material_ui.dart';
 
 class PhoneContactLabelPicker extends StatelessWidget {
   final PhoneContactLabel label;
+  final bool familyOnly;
   final ValueChanged<PhoneContactLabel> onChanged;
 
   const PhoneContactLabelPicker({
     required this.label,
+    required this.familyOnly,
     required this.onChanged,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<PhoneContactsEditorCubit>().state;
+    final familyRoles = context.watch<FamilyRolesCubit>().state;
 
     Future<void> pickCustomName() async {
       final name = await showDialog<Object?>(
@@ -33,21 +35,21 @@ class PhoneContactLabelPicker extends StatelessWidget {
 
     return MenuAnchor(
       menuChildren: [
-        if (!state.familyOnly)
+        if (!familyOnly)
           MenuItemButton(
             key: PhoneContactLabelPickerKeys.plainItem,
             leadingIcon: const Icon(Symbols.call),
             onPressed: () => onChanged(const FreePhoneContactLabel(null)),
             child: const Text('رقم الهاتف'),
           ),
-        for (final role in state.familyRoles)
+        for (final role in familyRoles)
           MenuItemButton(
             key: PhoneContactLabelPickerKeys.roleItem(role.id),
             leadingIcon: const Icon(Symbols.family_restroom),
             onPressed: () => onChanged(RolePhoneContactLabel(role)),
             child: Text(RolePhoneContactLabel(role).text),
           ),
-        if (!state.familyOnly)
+        if (!familyOnly)
           MenuItemButton(
             key: PhoneContactLabelPickerKeys.customItem,
             leadingIcon: const Icon(Symbols.edit),

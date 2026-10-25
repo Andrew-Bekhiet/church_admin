@@ -3,7 +3,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
 
-class PhoneContactsFormController extends AdvancedFormController {
+class PhoneContactsFormController extends AdvancedFormController
+    implements PersonFormSection {
   static bool _always() => true;
 
   final bool familyOnly;
@@ -68,12 +69,17 @@ class PhoneContactsFormController extends AdvancedFormController {
             input: phones.toDisplay(contact.phone),
             label: FreePhoneContactLabel(contact.label),
             isMainPhone: contact.isMainPhone,
+            storedPhone: contact.phone,
           ),
         ...family.map(_followedFamilyRowOf),
       ],
     );
     registerFields([rows]);
   }
+
+  @override
+  Person editedVersionOf(Person person) =>
+      person.copyWith(contacts: ownContacts, familyContacts: familyContacts);
 
   void add(PhoneContactLabel label) => rows.setValue([
     ...rows.fieldValue,
@@ -155,6 +161,7 @@ class PhoneContactsFormController extends AdvancedFormController {
       label: RolePhoneContactLabel(saved.role),
       isMainPhone: false,
       savedRelative: saved,
+      storedPhone: saved.contact.phone,
     );
   }
 
@@ -164,6 +171,7 @@ class PhoneContactsFormController extends AdvancedFormController {
     required PhoneContactLabel label,
     required bool isMainPhone,
     FamilyPhoneContact? savedRelative,
+    String? storedPhone,
   }) {
     final row = PhoneContactRowFormController(
       key: key,
@@ -174,6 +182,7 @@ class PhoneContactsFormController extends AdvancedFormController {
       isDuplicate: _isDuplicate,
       canHaveFamilyNumbers: _canHaveFamilyNumbers,
       savedRelative: savedRelative,
+      storedPhone: storedPhone,
     );
     addSubform(row);
 

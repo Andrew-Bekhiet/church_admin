@@ -16,6 +16,7 @@ void main() {
     phone: '+201002222222',
     label: 'عمل',
   );
+  const legacyNumber = PhoneContact(id: 'legacy', phone: '0100');
   const fatherNumber = FamilyPhoneContact(
     contact: PhoneContact(
       id: 'father-number',
@@ -118,6 +119,28 @@ void main() {
 
     expect(workRow.phone.error, PhoneContactError.invalidPhone);
   });
+
+  test(
+    'an untouched stored number that no longer parses is handed back unchanged and is valid',
+    () async {
+      final form = formFor(own: [legacyNumber], family: []);
+
+      expect(await form.validate(), isTrue);
+      expect(form.ownContacts, [legacyNumber]);
+    },
+  );
+
+  test(
+    'editing a stored number that no longer parses validates the new text',
+    () {
+      final form = formFor(own: [legacyNumber], family: []);
+      final legacyRow = rowOf(form, legacyNumber.id);
+
+      legacyRow.phone.setValue('12');
+
+      expect(legacyRow.phone.error, PhoneContactError.invalidPhone);
+    },
+  );
 
   test('an empty new number is left out instead of being invalid', () async {
     final form = formFor()..add(const FreePhoneContactLabel(null));

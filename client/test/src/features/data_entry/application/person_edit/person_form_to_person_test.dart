@@ -225,14 +225,17 @@ void main() {
   });
 
   group('phone contacts', () {
-    test('are the latest ones handed over by the screen', () {
+    test('are the ones in the phone contacts form', () {
       final controller = fixture.controllerOfUpdate(fullPerson);
-      const own = [PhoneContact(id: 'new', phone: '0111')];
+      const phone = '+201112345678';
 
-      controller.phoneContactsChanged(own: own, family: const []);
+      controller.phones.add(const FreePhoneContactLabel(null));
+      controller.phones.rows.fieldValue.last.phone.setValue(phone);
 
-      expect(controller.toPerson().contacts, own);
-      expect(controller.toPerson().familyContacts, isEmpty);
+      expect(controller.toPerson().contacts.map((contact) => contact.phone), [
+        ...fullPerson.contacts.map((contact) => contact.phone),
+        phone,
+      ]);
     });
   });
 

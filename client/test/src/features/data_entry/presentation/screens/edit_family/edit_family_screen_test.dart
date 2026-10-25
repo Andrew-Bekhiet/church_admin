@@ -29,7 +29,7 @@ void main() {
   late EditObjectScreenHarness harness;
 
   Finder phoneField(String draftKey) =>
-      find.byKey(PhoneContactDraftFieldKeys.phoneField(draftKey));
+      find.byKey(PhoneContactRowFieldKeys.phoneField(draftKey));
 
   Future<void> openStoredFamily(
     WidgetTester tester, {
@@ -133,7 +133,7 @@ void main() {
       await typeIncompleteNumberAndSave(tester);
 
       expect(
-        find.text(PhoneContactDraftError.invalidPhone.message),
+        find.text(PhoneContactError.invalidPhone.message),
         findsOneWidget,
       );
     });

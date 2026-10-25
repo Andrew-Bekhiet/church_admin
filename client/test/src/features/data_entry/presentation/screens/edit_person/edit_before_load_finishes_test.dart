@@ -21,7 +21,7 @@ void main() {
   late EditPersonScreenHarness harness;
 
   Finder phoneField(String draftKey) =>
-      find.byKey(PhoneContactDraftFieldKeys.phoneField(draftKey));
+      find.byKey(PhoneContactRowFieldKeys.phoneField(draftKey));
 
   Future<void> openBeforeLoad(WidgetTester tester) => harness.open(
     tester,

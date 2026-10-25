@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart';
 class PhoneContactRowFormController extends AdvancedFormController {
   final String key;
   final FamilyPhoneContact? savedRelative;
+  final String? storedPhone;
 
   final PhoneNumberService _phones;
   final bool Function(PhoneContactRowFormController) _isDuplicate;
@@ -17,7 +18,11 @@ class PhoneContactRowFormController extends AdvancedFormController {
   final AdvancedFieldController<PhoneContactLabel, PhoneContactError> label;
   final AdvancedBooleanFieldController<PhoneContactError> isMainPhone;
 
-  String? get e164 => _phones.toE164(phone.fieldValue);
+  String? get e164 =>
+      _isUntouchedStoredNumber ? storedPhone : _phones.toE164(phone.fieldValue);
+
+  bool get _isUntouchedStoredNumber =>
+      storedPhone != null && phone.fieldValue == _initialInput;
 
   bool get canBeMain => label.fieldValue is FreePhoneContactLabel;
 
@@ -35,6 +40,7 @@ class PhoneContactRowFormController extends AdvancedFormController {
     required this._isDuplicate,
     required this._canHaveFamilyNumbers,
     this.savedRelative,
+    this.storedPhone,
   }) : label = AdvancedFieldController(initialValue: initialLabel),
        isMainPhone = AdvancedBooleanFieldController(
          initialValue: initialIsMainPhone,
@@ -48,7 +54,7 @@ class PhoneContactRowFormController extends AdvancedFormController {
 
   PhoneContactError? _phoneError(String input) {
     if (input.trim().isEmpty) return null;
-    if (_phones.toE164(input) == null) return PhoneContactError.invalidPhone;
+    if (e164 == null) return PhoneContactError.invalidPhone;
     if (label.fieldValue is RolePhoneContactLabel && !_canHaveFamilyNumbers()) {
       return PhoneContactError.roleNeedsFamily;
     }

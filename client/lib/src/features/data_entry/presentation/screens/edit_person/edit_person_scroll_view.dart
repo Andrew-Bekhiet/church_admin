@@ -60,6 +60,7 @@ class EditPersonScrollView extends StatelessWidget {
                   children: [
                     PersonEditIdentitySection(
                       form: form.identity,
+                      phones: form.phones,
                       onImportFromContacts: onImportFromContacts,
                     ),
                     PersonEditHouseholdSection(

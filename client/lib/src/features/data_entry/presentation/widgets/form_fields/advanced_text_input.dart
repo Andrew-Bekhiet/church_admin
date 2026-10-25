@@ -8,6 +8,8 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
   final String? labelText;
   final Widget? label;
   final String? hintText;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final TextInputAction textInputAction;
   final TextCapitalization textCapitalization;
@@ -28,6 +30,8 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
     this.labelText,
     this.label,
     this.hintText,
+    this.prefixIcon,
+    this.suffixIcon,
     this.keyboardType,
     this.autofillHints,
     this.inputFormatters,
@@ -62,6 +66,8 @@ class AdvancedTextInput<E extends Object> extends StatelessWidget {
             labelText: labelText,
             label: label,
             hintText: hintText,
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
             counterText: counterText,
             errorMaxLines: errorMaxLines,
             errorText: error == null ? null : translateError(error),

@@ -4,14 +4,18 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 class FamilyPhoneContactMenuButton extends StatelessWidget {
+  final PhoneContactsFormController form;
   final String label;
 
-  const FamilyPhoneContactMenuButton({required this.label, super.key});
+  const FamilyPhoneContactMenuButton({
+    required this.form,
+    required this.label,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<PhoneContactsEditorCubit>();
-    final familyRoles = cubit.state.familyRoles;
+    final familyRoles = context.watch<FamilyRolesCubit>().state;
 
     return MenuAnchor(
       menuChildren: [
@@ -19,7 +23,7 @@ class FamilyPhoneContactMenuButton extends StatelessWidget {
           MenuItemButton(
             key: FamilyPhoneContactMenuButtonKeys.roleItem(role.id),
             leadingIcon: const Icon(Symbols.family_restroom),
-            onPressed: () => cubit.add(RolePhoneContactLabel(role)),
+            onPressed: () => form.add(RolePhoneContactLabel(role)),
             child: Text(RolePhoneContactLabel(role).text),
           ),
       ],

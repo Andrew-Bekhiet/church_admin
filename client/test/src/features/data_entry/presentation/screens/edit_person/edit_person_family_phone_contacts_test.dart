@@ -26,7 +26,7 @@ void main() {
   late EditPersonScreenHarness harness;
 
   Finder motherNumberField() => find.byKey(
-    PhoneContactDraftFieldKeys.phoneField(motherNumber.contact.id),
+    PhoneContactRowFieldKeys.phoneField(motherNumber.contact.id),
   );
 
   Finder familyItem(String id) => find.byWidgetPredicate(

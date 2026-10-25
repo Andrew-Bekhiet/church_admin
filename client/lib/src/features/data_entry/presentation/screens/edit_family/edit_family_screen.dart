@@ -41,45 +41,35 @@ class _EditFamilyScreenState extends State<EditFamilyScreen> {
     familiesDAO: DatabaseService.I.families,
     logging: LoggingService.I,
   );
-  late final PhoneContactsEditorCubit _phoneContacts = PhoneContactsEditorCubit(
-    own: const [],
-    family: _form.initialDraft.contacts,
-    hasFamily: true,
-    familyOnly: true,
+  late final FamilyRolesCubit _familyRoles = FamilyRolesCubit(
+    DatabaseService.I.metadata.personTypes,
   );
 
   @override
   void initState() {
     super.initState();
     unawaited(_relatives.loadSavedRelatives());
+    unawaited(_familyRoles.load());
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider.value(value: _phoneContacts),
+        BlocProvider.value(value: _familyRoles),
         BlocProvider.value(value: _relatives),
       ],
-      child: BlocListener<PhoneContactsEditorCubit, PhoneContactsEditorState>(
-        listenWhen: (previous, current) =>
-            previous.familyContacts != current.familyContacts,
-        listener: (context, state) =>
-            _form.contacts.setValue(state.familyContacts),
-        child: EditObjectScaffold<Family>(
+      child: EditObjectScaffold<Family>(
+        form: _form,
+        saveCubit: _saveCubit,
+        canDelete: (saved) => _currentUser?.canDeleteObject(saved) ?? false,
+        detailsRouteOf: (family) =>
+            ViewFamilyRoute(id: family.id, family: family),
+        movedOutOfSightMessage: EditFamilyScreen.movedOutOfSightMessage,
+        fields: FamilyEditFields(
           form: _form,
-          saveCubit: _saveCubit,
-          canDelete: (saved) => _currentUser?.canDeleteObject(saved) ?? false,
-          detailsRouteOf: (family) =>
-              ViewFamilyRoute(id: family.id, family: family),
-          movedOutOfSightMessage: EditFamilyScreen.movedOutOfSightMessage,
-          hasUnsavedInput: () => _phoneContacts.hasUnsavedInput,
-          validateInputOutsideForm: _phoneContacts.validate,
-          fields: FamilyEditFields(
-            form: _form,
-            metadata: _metadata,
-            onChooseLocationOnMap: _chooseLocationOnMap,
-          ),
+          metadata: _metadata,
+          onChooseLocationOnMap: _chooseLocationOnMap,
         ),
       ),
     );
@@ -105,7 +95,7 @@ class _EditFamilyScreenState extends State<EditFamilyScreen> {
 
   @override
   void dispose() {
-    unawaited(_phoneContacts.close());
+    unawaited(_familyRoles.close());
     unawaited(_relatives.close());
     unawaited(_saveCubit.close());
     _form.dispose();

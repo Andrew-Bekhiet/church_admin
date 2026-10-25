@@ -3,10 +3,12 @@ import 'package:material_ui/material_ui.dart';
 
 class PersonEditIdentitySection extends StatelessWidget {
   final PersonIdentityFormController form;
+  final PhoneContactsFormController phones;
   final VoidCallback onImportFromContacts;
 
   const PersonEditIdentitySection({
     required this.form,
+    required this.phones,
     required this.onImportFromContacts,
     super.key,
   });
@@ -40,6 +42,7 @@ class PersonEditIdentitySection extends StatelessWidget {
             ),
           ),
         PhoneContactsEditor(
+          form: phones,
           onImportFromContacts:
               CurrentPlatformService.I.isAndroid ||
                   CurrentPlatformService.I.isIOS

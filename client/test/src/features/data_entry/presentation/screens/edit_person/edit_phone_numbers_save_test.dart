@@ -24,8 +24,8 @@ void main() {
     await tester.pumpAndSettle();
     await tester.enterText(
       find.descendant(
-        of: find.byType(PhoneContactDraftField),
-        matching: find.byType(TextFormField),
+        of: find.byType(PhoneContactRowField),
+        matching: find.byType(TextField),
       ),
       typed,
     );
@@ -59,7 +59,7 @@ void main() {
       await addNumberAndSave(tester, '0100');
 
       expect(
-        find.text(PhoneContactDraftError.invalidPhone.message),
+        find.text(PhoneContactError.invalidPhone.message),
         findsOneWidget,
       );
     });

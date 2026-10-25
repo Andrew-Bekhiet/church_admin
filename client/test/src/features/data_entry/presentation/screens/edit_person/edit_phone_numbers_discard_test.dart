@@ -21,7 +21,7 @@ void main() {
   late EditPersonScreenHarness harness;
 
   Finder phoneField(String draftKey) =>
-      find.byKey(PhoneContactDraftFieldKeys.phoneField(draftKey));
+      find.byKey(PhoneContactRowFieldKeys.phoneField(draftKey));
 
   setUp(() {
     harness = EditPersonScreenHarness()..install();
@@ -108,7 +108,7 @@ void main() {
   ) async {
     await openPerson(tester);
 
-    final remove = find.byKey(PhoneContactDraftFieldKeys.removeButton('saved'));
+    final remove = find.byKey(PhoneContactRowFieldKeys.removeButton('saved'));
     await harness.scrollTo(tester, remove);
     await tester.tap(remove);
     await tester.pumpAndSettle();

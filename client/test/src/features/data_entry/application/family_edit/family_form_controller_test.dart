@@ -99,16 +99,18 @@ void main() {
 
   test('the phone numbers from the contacts editor are saved', () {
     final controller = controllerOfStoredFamily();
-    const contacts = [
-      FamilyPhoneContact(
-        contact: PhoneContact(id: 'c', phone: '+201001111111'),
-        role: PersonType(id: 'father', name: 'الأب'),
+    const father = PersonType(id: 'father', name: 'الأب');
+    const phone = '+201001111111';
+
+    controller.phones.add(const RolePhoneContactLabel(father));
+    controller.phones.rows.fieldValue.single.phone.setValue(phone);
+
+    expect(
+      controller.toObject().contacts.map(
+        (contact) => (contact.contact.phone, contact.role),
       ),
-    ];
-
-    controller.contacts.setValue(contacts);
-
-    expect(controller.toObject().contacts, contacts);
+      [(phone, father)],
+    );
   });
 
   group('loading the saved relatives', () {

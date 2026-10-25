@@ -1,8 +1,10 @@
+import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../../fakes/fake_person_types_dao.dart';
 import '../../../material_ui_test_app.dart';
 import '../../../utils.dart';
 
@@ -23,29 +25,33 @@ void main() {
 
   tearDown(defaultTearDown);
 
-  Future<PhoneContactsEditorCubit> pumpEditor(
+  Future<PhoneContactsFormController> pumpEditor(
     WidgetTester tester, {
     List<PhoneContact> own = const [ownMain, ownWork],
     bool familyOnly = false,
     VoidCallback? onImportFromContacts,
   }) async {
-    final cubit = PhoneContactsEditorCubit(
+    final form = PhoneContactsFormController(
       own: own,
       family: const [],
-      hasFamily: true,
       familyOnly: familyOnly,
-      fetchFamilyRoles: () async => [father, mother],
       newKey: () => 'new',
+    )..setValidationMode(ValidationMode.onUserInteraction);
+    addTearDown(form.dispose);
+    final familyRoles = FamilyRolesCubit(
+      FakePersonTypesDAO()..familyRoles = [father, mother],
     );
-    addTearDown(cubit.close);
+    addTearDown(familyRoles.close);
+    await familyRoles.load();
 
     await tester.pumpWidget(
       MaterialUiTestApp.withThemeAndLocale(
         child: Scaffold(
           body: SingleChildScrollView(
             child: BlocProvider.value(
-              value: cubit,
+              value: familyRoles,
               child: PhoneContactsEditor(
+                form: form,
                 onImportFromContacts: onImportFromContacts,
               ),
             ),
@@ -55,11 +61,11 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    return cubit;
+    return form;
   }
 
   bool isMain(WidgetTester tester, String key) => tester
-      .widget<FilterChip>(find.byKey(PhoneContactDraftFieldKeys.mainChip(key)))
+      .widget<FilterChip>(find.byKey(PhoneContactRowFieldKeys.mainChip(key)))
       .selected;
 
   testWidgets('choosing another number as main moves the أساسي chip', (
@@ -68,7 +74,7 @@ void main() {
     await pumpEditor(tester);
 
     await tester.tap(
-      find.byKey(PhoneContactDraftFieldKeys.mainChip('own-work')),
+      find.byKey(PhoneContactRowFieldKeys.mainChip('own-work')),
     );
     await tester.pump();
 
@@ -84,7 +90,7 @@ void main() {
   testWidgets("a father's number can be added straight from the family menu", (
     tester,
   ) async {
-    final cubit = await pumpEditor(tester, own: []);
+    final form = await pumpEditor(tester, own: []);
 
     await tester.tap(find.byKey(FamilyPhoneContactMenuButtonKeys.button));
     await tester.pumpAndSettle();
@@ -94,7 +100,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      cubit.state.drafts.single.label,
+      form.rows.fieldValue.single.label.fieldValue,
       const RolePhoneContactLabel(father),
     );
   });
@@ -105,7 +111,7 @@ void main() {
     await pumpEditor(tester);
 
     await tester.tap(
-      find.byKey(PhoneContactDraftFieldKeys.labelPicker('own-work')),
+      find.byKey(PhoneContactRowFieldKeys.labelPicker('own-work')),
     );
     await tester.pumpAndSettle();
     await tester.tap(
@@ -114,7 +120,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      find.byKey(PhoneContactDraftFieldKeys.mainChip('own-work')),
+      find.byKey(PhoneContactRowFieldKeys.mainChip('own-work')),
       findsNothing,
     );
   });
@@ -143,33 +149,35 @@ void main() {
   testWidgets('a number that is not a phone number fails validation', (
     tester,
   ) async {
-    final cubit = await pumpEditor(tester);
+    final form = await pumpEditor(tester);
 
     await tester.enterText(
-      find.byKey(PhoneContactDraftFieldKeys.phoneField('own-work')),
+      find.byKey(PhoneContactRowFieldKeys.phoneField('own-work')),
       '0100',
     );
-    await tester.pump();
-    cubit.validate();
+    await form.validate();
     await tester.pump();
 
-    expect(find.text('برجاء ادخال رقم هاتف صالح'), findsOneWidget);
+    expect(find.text(PhoneContactError.invalidPhone.message), findsOneWidget);
   });
 
-  testWidgets('a number still being typed shows no error before validation', (
+  testWidgets('an untouched saved number shows no error', (tester) async {
+    await pumpEditor(tester);
+
+    expect(find.text(PhoneContactError.invalidPhone.message), findsNothing);
+  });
+
+  testWidgets('a number that is not a phone number shows why while typed', (
     tester,
   ) async {
     await pumpEditor(tester);
 
     await tester.enterText(
-      find.byKey(PhoneContactDraftFieldKeys.phoneField('own-work')),
+      find.byKey(PhoneContactRowFieldKeys.phoneField('own-work')),
       '0100',
     );
     await tester.pump();
 
-    expect(
-      find.text(PhoneContactDraftError.invalidPhone.message),
-      findsNothing,
-    );
+    expect(find.text(PhoneContactError.invalidPhone.message), findsOneWidget);
   });
 }

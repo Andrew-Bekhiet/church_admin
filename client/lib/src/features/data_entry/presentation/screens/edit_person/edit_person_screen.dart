@@ -19,9 +19,8 @@ class EditPersonScreen extends StatefulWidget {
 class _EditPersonScreenState extends State<EditPersonScreen> {
   late final PersonFormController _form;
   final _metadata = PersonMetadataCatalog(DatabaseService.I.metadata);
-  late final PhoneContactsEditorCubit _phoneContacts;
+  late final FamilyRolesCubit _familyRoles;
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? _progressSnackBar;
-  String? _familyIdLastSeenByPhoneContacts;
 
   @override
   void initState() {
@@ -39,20 +38,10 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
         logging: LoggingService.I,
       ),
     );
-    final savedPerson = _form.savedPerson;
-    _phoneContacts = PhoneContactsEditorCubit(
-      own: savedPerson?.contacts ?? const [],
-      family: savedPerson?.visibleFamilyContacts ?? const [],
-      hasFamily: _form.household.canHaveFamilyNumbers,
-      fetchFamilyRoles: switch (savedPerson?.personType) {
-        PersonType(isFamilyAdmin: true) => () async => const [],
-        _ => null,
-      },
-    );
-    _familyIdLastSeenByPhoneContacts = _form.household.family.fieldValue?.id;
-    _form.household.onValuesChanged.addListener(
-      _followHouseholdInPhoneContacts,
-    );
+    _familyRoles = FamilyRolesCubit(DatabaseService.I.metadata.personTypes);
+    if (_form.savedPerson?.personType?.isFamilyAdmin != true) {
+      unawaited(_familyRoles.load());
+    }
     _form.saveProgress.addListener(_showSaveProgressWhileSaving);
   }
 
@@ -61,71 +50,43 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
     final intent = widget.intent;
 
     return BlocProvider.value(
-      value: _phoneContacts,
-      child: BlocListener<PhoneContactsEditorCubit, PhoneContactsEditorState>(
-        listenWhen: (previous, current) =>
-            previous.ownContacts != current.ownContacts ||
-            previous.familyContacts != current.familyContacts,
-        listener: (context, state) => _form.phoneContactsChanged(
-          own: state.ownContacts,
-          family: state.familyContacts,
-        ),
-        child:
-            ValueListenableBuilder<AdvancedFieldState<Color?, PersonEditError>>(
-              valueListenable: _form.color,
-              builder: (context, color, child) => Theme(
-                data: ThemingService.getDefault(seedOverride: color.value),
-                child: child!,
-              ),
-              child: PopScope(
-                canPop: false,
-                onPopInvokedWithResult: _confirmExit,
-                child: Scaffold(
-                  body: EditPersonScrollView(
-                    form: _form,
-                    metadata: _metadata,
-                    onImportFromContacts: () => unawaited(
-                      EditPersonContactsImport(
-                        phoneContacts: _phoneContacts,
-                        name: _form.identity.name,
-                      ).run(context),
-                    ),
-                    onChooseLocationOnMap: _chooseLocationOnMap,
-                    onDelete: switch (intent) {
-                      UpdatePerson(:final person)
-                          when person.user?.email == null =>
-                        _delete,
-                      _ => null,
-                    },
+      value: _familyRoles,
+      child:
+          ValueListenableBuilder<AdvancedFieldState<Color?, PersonEditError>>(
+            valueListenable: _form.color,
+            builder: (context, color, child) => Theme(
+              data: ThemingService.getDefault(seedOverride: color.value),
+              child: child!,
+            ),
+            child: PopScope(
+              canPop: false,
+              onPopInvokedWithResult: _confirmExit,
+              child: Scaffold(
+                body: EditPersonScrollView(
+                  form: _form,
+                  metadata: _metadata,
+                  onImportFromContacts: () => unawaited(
+                    EditPersonContactsImport(
+                      phoneContacts: _form.phones,
+                      name: _form.identity.name,
+                    ).run(context),
                   ),
-                  floatingActionButton: EditPersonSaveButton(
-                    progress: _form.saveProgress,
-                    membershipsLoadState: _form.memberships.loadState,
-                    onPressed: _save,
-                  ),
+                  onChooseLocationOnMap: _chooseLocationOnMap,
+                  onDelete: switch (intent) {
+                    UpdatePerson(:final person)
+                        when person.user?.email == null =>
+                      _delete,
+                    _ => null,
+                  },
+                ),
+                floatingActionButton: EditPersonSaveButton(
+                  progress: _form.saveProgress,
+                  membershipsLoadState: _form.memberships.loadState,
+                  onPressed: _save,
                 ),
               ),
             ),
-      ),
-    );
-  }
-
-  void _followHouseholdInPhoneContacts() {
-    final household = _form.household;
-    final familyId = household.family.fieldValue?.id;
-
-    if (familyId == _familyIdLastSeenByPhoneContacts) {
-      _phoneContacts.changeFamilyAvailability(
-        hasFamily: household.canHaveFamilyNumbers,
-      );
-
-      return;
-    }
-
-    _familyIdLastSeenByPhoneContacts = familyId;
-    _phoneContacts.changeFamily(
-      saved: household.savedFamilyContacts,
-      hasFamily: household.canHaveFamilyNumbers,
+          ),
     );
   }
 
@@ -171,8 +132,6 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
   }
 
   Future<void> _save() async {
-    if (!_phoneContacts.validate()) return;
-
     final outcome = await _form.submit(
       confirmMoveOutOfSight: _confirmMoveOutOfSight,
     );
@@ -301,19 +260,11 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
   Future<void> _confirmExit(bool didPop, Object? result) async {
     if (didPop) return;
 
-    final navigator = Navigator.of(context);
-    if (!_form.wasModified && !_phoneContacts.hasUnsavedInput) {
-      navigator.pop(result);
-
-      return;
-    }
-
-    final discard = await showDialog<bool>(
-      context: context,
-      builder: (context) => const DiscardChangesDialog(),
+    await DiscardChangesDialog.popAfterConfirmingDiscard(
+      context,
+      wasModified: _form.wasModified,
+      result: result,
     );
-
-    if (discard ?? false) navigator.pop(result);
   }
 
   Future<void> _delete() async {
@@ -370,11 +321,8 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
   void dispose() {
     _progressSnackBar?.close();
     _form.saveProgress.removeListener(_showSaveProgressWhileSaving);
-    _form.household.onValuesChanged.removeListener(
-      _followHouseholdInPhoneContacts,
-    );
     _form.dispose();
-    unawaited(_phoneContacts.close());
+    unawaited(_familyRoles.close());
     super.dispose();
   }
 }
