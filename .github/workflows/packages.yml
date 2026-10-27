@@ -6,6 +6,7 @@ on:
       - "packages/**"
       - "client/.fvmrc"
       - ".github/workflows/packages.yml"
+      - ".github/actions/setup-flutter/**"
 
   push:
     branches: [master]
@@ -13,6 +14,7 @@ on:
       - "packages/**"
       - "client/.fvmrc"
       - ".github/workflows/packages.yml"
+      - ".github/actions/setup-flutter/**"
 
   workflow_dispatch:
 
@@ -66,12 +68,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Flutter
-        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
-        with:
-          cache: true
-          flutter-version-file: client/.fvmrc
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
-          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+        uses: ./.github/actions/setup-flutter
 
       - name: Install dependencies (standalone resolution, newest analyzer the constraints allow)
         run: dart pub get

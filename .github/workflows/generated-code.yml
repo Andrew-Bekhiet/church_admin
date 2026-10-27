@@ -20,6 +20,7 @@ on:
       - "server/postgres/**"
       - "server/docker-compose.yml"
       - ".github/workflows/generated-code.yml"
+      - ".github/actions/setup-flutter/**"
 
   push:
     branches: [master]
@@ -41,6 +42,7 @@ on:
       - "server/postgres/**"
       - "server/docker-compose.yml"
       - ".github/workflows/generated-code.yml"
+      - ".github/actions/setup-flutter/**"
 
   workflow_dispatch:
 
@@ -64,12 +66,7 @@ jobs:
         run: client/scripts/check_graphql_schema.sh
 
       - name: Setup Flutter
-        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
-        with:
-          cache: true
-          flutter-version-file: client/.fvmrc
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
-          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+        uses: ./.github/actions/setup-flutter
 
       - name: Install client dependencies
         run: flutter pub get --directory client
