@@ -61,6 +61,8 @@ jobs:
         run: flutter pub get
 
       - name: 🧪 Run tests with coverage
+        env:
+          TZ: Africa/Cairo
         run: flutter test --coverage --reporter=expanded --file-reporter "json:test-results.json" --dart-define CI=true test/test_bundle.dart $(scripts/generate_test_bundle.sh)
 
       - name: ☁️ Upload test results
