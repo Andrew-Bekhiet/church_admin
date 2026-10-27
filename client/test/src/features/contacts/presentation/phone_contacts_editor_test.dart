@@ -67,10 +67,6 @@ void main() {
     return form;
   }
 
-  bool isMain(WidgetTester tester, String key) => tester
-      .widget<FilterChip>(find.byKey(PhoneContactFieldKeys.mainChip(key)))
-      .selected;
-
   testWidgets('choosing another number as main moves the أساسي chip', (
     tester,
   ) async {
@@ -82,11 +78,20 @@ void main() {
     await tester.pump();
 
     expect(
-      (isMain(tester, ownWork.id), isMain(tester, ownMain.id)),
-      (
-        true,
-        false,
-      ),
+      tester
+          .widget<FilterChip>(
+            find.byKey(PhoneContactFieldKeys.mainChip(ownWork.id)),
+          )
+          .selected,
+      isTrue,
+    );
+    expect(
+      tester
+          .widget<FilterChip>(
+            find.byKey(PhoneContactFieldKeys.mainChip(ownMain.id)),
+          )
+          .selected,
+      isFalse,
     );
   });
 
