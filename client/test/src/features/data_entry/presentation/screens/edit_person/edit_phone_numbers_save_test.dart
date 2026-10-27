@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:material_ui/material_ui.dart';
 
 import '../../../../../utils.dart';
 import 'edit_person_screen_harness.dart';
@@ -22,11 +21,11 @@ void main() {
     await harness.scrollTo(tester, add);
     await tester.tap(add);
     await tester.pumpAndSettle();
+    final row = tester.widget<PhoneContactRowField>(
+      find.byType(PhoneContactRowField),
+    );
     await tester.enterText(
-      find.descendant(
-        of: find.byType(PhoneContactRowField),
-        matching: find.byType(TextField),
-      ),
+      find.byKey(PhoneContactRowFieldKeys.phoneField(row.row.key)),
       typed,
     );
     await harness.tapSave(tester);

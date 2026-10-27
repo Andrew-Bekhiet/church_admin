@@ -136,8 +136,9 @@ class PersonEditorRobot {
     await tester.tapOn(
       find.byKey(FamilyPhoneContactMenuButtonKeys.roleItem(roleId)),
     );
+    final row = tester.widget<PhoneContactRowField>(rowOfRole);
     await tester.typeInto(
-      find.descendant(of: rowOfRole, matching: find.byType(TextField)),
+      find.byKey(PhoneContactRowFieldKeys.phoneField(row.row.key)),
       phone,
     );
   }
