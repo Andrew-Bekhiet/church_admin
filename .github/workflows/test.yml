@@ -13,6 +13,7 @@ on:
       - "packages/*/lib/**"
       - "packages/*/pubspec.*"
       - ".github/workflows/test.yml"
+      - ".github/actions/setup-flutter/**"
 
   push:
     branches: [master]
@@ -27,6 +28,7 @@ on:
       - "packages/*/lib/**"
       - "packages/*/pubspec.*"
       - ".github/workflows/test.yml"
+      - ".github/actions/setup-flutter/**"
 
   workflow_dispatch:
 
@@ -47,33 +49,28 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 2
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
-        with:
-          cache: true
-          flutter-version-file: client/.fvmrc
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
-          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+      - name: 💙 Setup Flutter
+        uses: ./.github/actions/setup-flutter
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: flutter pub get
 
-      - name: Run tests with coverage
+      - name: 🧪 Run tests with coverage
         run: flutter test --coverage --reporter=expanded --file-reporter "json:test-results.json" --dart-define CI=true test/test_bundle.dart $(scripts/generate_test_bundle.sh)
 
-      - name: Upload test results
+      - name: ☁️ Upload test results
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           path: client/test-results.json
           archive: false
 
-      - name: Report test results
+      - name: 📊 Report test results
         uses: dorny/test-reporter@cc52f364a405169afe07bb00dab3d375b451229d # v3.2.0
         if: always()
         with:
@@ -81,7 +78,7 @@ jobs:
           path: client/test-results.json
           reporter: flutter-json
 
-      - name: Upload coverage to Codecov
+      - name: ☁️ Upload coverage to Codecov
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           directory: client

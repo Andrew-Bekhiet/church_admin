@@ -11,6 +11,7 @@ on:
       - "packages/**/analysis_options.yaml"
       - "packages/*/pubspec.*"
       - ".github/workflows/static-analysis.yml"
+      - ".github/actions/setup-flutter/**"
 
   push:
     branches: [master]
@@ -23,6 +24,7 @@ on:
       - "packages/**/analysis_options.yaml"
       - "packages/*/pubspec.*"
       - ".github/workflows/static-analysis.yml"
+      - ".github/actions/setup-flutter/**"
 
   workflow_dispatch:
 
@@ -50,26 +52,21 @@ jobs:
         working-directory: ${{ matrix.project }}
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
-        with:
-          cache: true
-          flutter-version-file: client/.fvmrc
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
-          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+      - name: 💙 Setup Flutter
+        uses: ./.github/actions/setup-flutter
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: flutter pub get
 
-      - name: Check formatting
+      - name: 🎨 Check formatting
         run: dart format --set-exit-if-changed . || { git diff; exit 1; }
 
-      - name: Restore analyzer cache
+      - name: ♻️ Restore analyzer cache
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.dartServer
@@ -78,10 +75,10 @@ jobs:
             dart-server-${{ runner.os }}-${{ matrix.project }}-${{ hashFiles('client/.fvmrc', format('{0}/pubspec.*', matrix.project)) }}-
             dart-server-${{ runner.os }}-${{ matrix.project }}-
 
-      - name: Analyze code
+      - name: 🔍 Analyze code
         run: dart analyze --fatal-infos
 
-      - name: Save analyzer cache
+      - name: 💾 Save analyzer cache
         if: ${{ github.event_name != 'pull_request' }}
         uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:

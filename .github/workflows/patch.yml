@@ -26,34 +26,25 @@ defaults:
     working-directory: client
 
 jobs:
-  patch-mobile:
+  patch-android:
+    if: ${{ github.event_name == 'push' || inputs.android }}
+    runs-on: ubuntu-latest
     environment: release
     permissions:
       contents: write
 
-    if: ${{ github.event_name == 'push' || (github.event.inputs.android == 'true' || github.event.inputs.ios == 'true') }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-        exclude:
-          # Skip Ubuntu (Android) if only iOS is requested
-          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.android == 'false' && 'ubuntu-latest' }}
-          # Skip macOS (iOS) if only Android is requested
-          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ios == 'false' && 'macos-latest' }}
-    runs-on: ${{ matrix.os }}
-
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: 📥 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 1
 
-      - name: Mask log values
+      - name: 🙈 Mask log values
         env:
           LOG_MASK_VALUES: ${{ secrets.LOG_MASK_VALUES }}
         run: while IFS= read -r v; do if [ -n "$v" ]; then echo "::add-mask::$v"; fi; done <<< "$LOG_MASK_VALUES"
 
-      - name: Free up disk space
-        if: ${{ matrix.os == 'ubuntu-latest' }}
+      - name: 🧹 Free up disk space
         run: |
           # Space usage before cleanup
           df -h /
@@ -68,31 +59,80 @@ jobs:
           # Verify gains
           df -h /
 
-      - name: Get Flutter
-        id: flutter-action
-        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
+      - name: 🛠️ Prepare Shorebird build
+        uses: ./.github/actions/prepare-shorebird-build
+
+      - name: ☕ Set Up Java
+        uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
         with:
-          cache: true
-          flutter-version-file: client/.fvmrc
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
-          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+          cache: "gradle"
+          distribution: "temurin"
+          java-version: "17"
 
-      - name: Install dependencies
-        run: flutter pub get
+      - name: 🔓 Decode and save android secrets
+        env:
+          ANDROID_SIGNING_KEY: ${{ secrets.ANDROID_SIGNING_KEY }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          ANDROID_KEYSTORE_PROPERTIES: ${{ secrets.ANDROID_KEYSTORE_PROPERTIES }}
+        run: |
+          echo $ANDROID_SIGNING_KEY | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/key.keystore
+          echo $GOOGLE_SERVICES_JSON | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/google-services.json
+          echo $ANDROID_KEYSTORE_PROPERTIES | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/releaseKey.properties
 
-      - name: Run new builder
-        run: rm -r lib/src/core/graphql/__generated__/; dart run build_runner build && ./scripts/split_schema_graphql_dart.sh
+      - name: 🔓 Decode app production environment
+        env:
+          APP_PROD_ENV_FILE: ${{ secrets.APP_PROD_ENV_FILE }}
+        run: echo "$APP_PROD_ENV_FILE" | base64 -d > .env
 
-      - name: Install Codemagic CLI tools
-        if: ${{ matrix.os == 'macos-latest' }}
+      - name: 🏷️ Resolve release version to patch
+        id: release-version
+        env:
+          BASE_VERSION: ${{ inputs.base_version }}
+        run: echo "version=${BASE_VERSION:-${GITHUB_REF_NAME#v}}" >> "$GITHUB_OUTPUT"
+
+      - name: 🚀 Shorebird Patch Android
+        uses: shorebirdtech/shorebird-patch@deb179c67708c6b0caf7582eac41361c8d51948a # main
+        env:
+          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+        with:
+          platform: android
+          working-directory: client
+          release-version: ${{ steps.release-version.outputs.version }}
+          args: --allow-asset-diffs
+            --dart-define-from-file=.env
+
+      - name: 🗑️ Delete app production environment
+        if: ${{ always() }}
+        run: rm -f .env
+
+  patch-ios:
+    if: ${{ github.event_name == 'push' || inputs.ios }}
+    runs-on: macos-latest
+    environment: release
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+
+      - name: 🙈 Mask log values
+        env:
+          LOG_MASK_VALUES: ${{ secrets.LOG_MASK_VALUES }}
+        run: while IFS= read -r v; do if [ -n "$v" ]; then echo "::add-mask::$v"; fi; done <<< "$LOG_MASK_VALUES"
+
+      - name: 🛠️ Prepare Shorebird build
+        uses: ./.github/actions/prepare-shorebird-build
+
+      - name: 📦 Install Codemagic CLI tools
         run: pip install codemagic-cli-tools
 
-      - name: Set up keychain
-        if: ${{ matrix.os == 'macos-latest' }}
+      - name: 🔐 Set up keychain
         run: keychain initialize
 
-      - name: Fetch signing files
-        if: ${{ matrix.os == 'macos-latest' }}
+      - name: 🔏 Fetch signing files
         env:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
@@ -104,72 +144,31 @@ jobs:
           app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) \
           --type IOS_APP_STORE \
           --create
-      - name: Set up signing certificate
-        if: ${{ matrix.os == 'macos-latest' }}
+
+      - name: 🔏 Set up signing certificate
         run: keychain add-certificates
-      - name: Set up code signing settings on Xcode project
-        if: ${{ matrix.os == 'macos-latest' }}
+
+      - name: 🔏 Set up code signing settings on Xcode project
         run: xcode-project use-profiles
 
-      - name: 🐦 Setup Shorebird
-        uses: shorebirdtech/setup-shorebird@1866dd9f55da8f25608b70bdde6e095c06f1dc01 # main
-        with:
-          cache: true
-
-      - name: Set Up Java
-        uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        with:
-          cache: "gradle"
-          distribution: "temurin"
-          java-version: "17"
-
-      - name: Set Up latest stable Xcode version
-        if: ${{ matrix.os == 'macos-latest' }}
+      - name: 🍎 Set Up latest stable Xcode version
         uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1
         with:
           xcode-version: latest-stable
 
-      - name: Populate the Flutter tool's cache of binary artifacts
-        run: flutter precache
-
-      - name: Decode and save android secrets
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        env:
-          ANDROID_SIGNING_KEY: ${{ secrets.ANDROID_SIGNING_KEY }}
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-          ANDROID_KEYSTORE_PROPERTIES: ${{ secrets.ANDROID_KEYSTORE_PROPERTIES }}
-        run: |
-          echo $ANDROID_SIGNING_KEY | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/key.keystore
-          echo $GOOGLE_SERVICES_JSON | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/google-services.json
-          echo $ANDROID_KEYSTORE_PROPERTIES | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/releaseKey.properties
-
-      - name: Decode app production environment
+      - name: 🔓 Decode app production environment
         env:
           APP_PROD_ENV_FILE: ${{ secrets.APP_PROD_ENV_FILE }}
         run: echo "$APP_PROD_ENV_FILE" | base64 -d > .env
 
-      - name: Resolve release version to patch
+      - name: 🏷️ Resolve release version to patch
         id: release-version
         env:
           BASE_VERSION: ${{ inputs.base_version }}
         run: echo "version=${BASE_VERSION:-${GITHUB_REF_NAME#v}}" >> "$GITHUB_OUTPUT"
 
-      - name: 🚀 Shorebird Patch Android
-        uses: shorebirdtech/shorebird-patch@deb179c67708c6b0caf7582eac41361c8d51948a # main
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        env:
-          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
-        with:
-          platform: android
-          working-directory: client
-          release-version: ${{ steps.release-version.outputs.version }}
-          args: --allow-asset-diffs
-            --dart-define-from-file=.env
-
       - name: 🚀 Shorebird Patch iOS
         uses: shorebirdtech/shorebird-patch@deb179c67708c6b0caf7582eac41361c8d51948a # main
-        if: ${{ matrix.os == 'macos-latest' }}
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
         with:
@@ -180,6 +179,6 @@ jobs:
             --allow-asset-diffs
             --dart-define-from-file=.env
 
-      - name: Delete app production environment
+      - name: 🗑️ Delete app production environment
         if: ${{ always() }}
         run: rm -f .env
