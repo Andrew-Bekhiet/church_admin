@@ -29,7 +29,7 @@ class PhoneContactField extends StatelessWidget {
                 child: PhoneContactLabelPicker(
                   key: PhoneContactFieldKeys.labelPicker(contact.key),
                   label: label.value,
-                  familyOnly: form.familyOnly,
+                  form: form,
                   onChanged: (label) => form.changeLabel(contact, label),
                 ),
               ),

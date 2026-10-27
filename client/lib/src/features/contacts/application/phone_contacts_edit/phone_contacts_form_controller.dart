@@ -5,7 +5,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
 
-class PhoneContactsFormController extends AdvancedFormController {
+sealed class PhoneContactsFormController extends AdvancedFormController {
   static bool _always() => true;
 
   final PhoneNumberService _phones;
@@ -21,36 +21,42 @@ class PhoneContactsFormController extends AdvancedFormController {
   >
   contacts;
 
-  bool get familyOnly => false;
-
   List<PhoneContact> get ownContacts => [
     for (final contact in contacts.fieldValue)
-      if (contact.e164 case final phone?)
-        if (contact.label.fieldValue case FreePhoneContactLabel(:final text))
-          PhoneContact(
-            id: contact.key,
-            phone: phone,
-            label: (text?.trim().isEmpty ?? true) ? null : text?.trim(),
-            isMainPhone: contact.isMainPhone.fieldValue,
-          ),
+      if (contact case PhoneContactFormController(
+        e164: final phone?,
+        label: AdvancedFieldController(
+          fieldValue: FreePhoneContactLabel(:final text),
+        ),
+      ))
+        PhoneContact(
+          id: contact.key,
+          phone: phone,
+          label: (text?.trim().isEmpty ?? true) ? null : text?.trim(),
+          isMainPhone: contact.isMainPhone.fieldValue,
+        ),
   ];
 
   List<FamilyPhoneContact> get familyContacts => [
     for (final contact in contacts.fieldValue)
-      if (contact.e164 case final phone?)
-        if (contact.label.fieldValue case RolePhoneContactLabel(:final role))
-          switch (contact.savedRelative) {
-            final saved? when saved.role.id == role.id => saved.copyWith(
-              contact: saved.contact.copyWith(phone: phone),
-            ),
-            _ => FamilyPhoneContact(
-              contact: PhoneContact(id: contact.key, phone: phone),
-              role: role,
-            ),
-          },
+      if (contact case PhoneContactFormController(
+        e164: final phone?,
+        label: AdvancedFieldController(
+          fieldValue: RolePhoneContactLabel(:final role),
+        ),
+      ))
+        switch (contact.savedRelative) {
+          final saved? when saved.role.id == role.id => saved.copyWith(
+            contact: saved.contact.copyWith(phone: phone),
+          ),
+          _ => FamilyPhoneContact(
+            contact: PhoneContact(id: contact.key, phone: phone),
+            role: role,
+          ),
+        },
   ];
 
-  PhoneContactsFormController({
+  PhoneContactsFormController._({
     required List<PhoneContact> own,
     required List<FamilyPhoneContact> family,
     PhoneNumberService phones = const PhoneNumberService(),
@@ -231,4 +237,22 @@ class PhoneContactsFormController extends AdvancedFormController {
     onValuesChanged.removeListener(_recheckContactsEditedOrShowingAnError);
     super.dispose();
   }
+}
+
+class PersonPhoneContactsFormController extends PhoneContactsFormController {
+  PersonPhoneContactsFormController({
+    required super.own,
+    required super.family,
+    super.phones,
+    super.canHaveFamilyNumbers,
+    super.newKey,
+  }) : super._();
+}
+
+class FamilyPhoneContactsFormController extends PhoneContactsFormController {
+  FamilyPhoneContactsFormController({
+    required List<FamilyPhoneContact> saved,
+    super.phones,
+    super.newKey,
+  }) : super._(own: const [], family: saved);
 }

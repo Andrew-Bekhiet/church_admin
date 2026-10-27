@@ -34,11 +34,11 @@ void main() {
   var nextKey = 0;
   var canHaveFamilyNumbers = true;
 
-  PhoneContactsFormController formFor({
+  PersonPhoneContactsFormController formFor({
     List<PhoneContact> own = const [ownMain, ownWork],
     List<FamilyPhoneContact> family = const [fatherNumber],
   }) {
-    final form = PhoneContactsFormController(
+    final form = PersonPhoneContactsFormController(
       own: own,
       family: family,
       canHaveFamilyNumbers: () => canHaveFamilyNumbers,

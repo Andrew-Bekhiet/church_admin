@@ -28,13 +28,13 @@ void main() {
   Future<PhoneContactsFormController> pumpEditor(
     WidgetTester tester, {
     List<PhoneContact> own = const [ownMain, ownWork],
-    bool familyOnly = false,
+    bool forFamily = false,
     VoidCallback? onImportFromContacts,
   }) async {
     final form =
-        (familyOnly
+        (forFamily
               ? FamilyPhoneContactsFormController(saved: const [])
-              : PhoneContactsFormController(
+              : PersonPhoneContactsFormController(
                   own: own,
                   family: const [],
                   newKey: () => 'new',
@@ -145,7 +145,7 @@ void main() {
   });
 
   testWidgets('a family editor only offers family roles', (tester) async {
-    await pumpEditor(tester, own: [], familyOnly: true);
+    await pumpEditor(tester, own: [], forFamily: true);
 
     expect(find.byKey(PhoneContactsEditorKeys.addButton), findsNothing);
     expect(

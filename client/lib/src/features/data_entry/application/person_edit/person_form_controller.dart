@@ -171,10 +171,16 @@ class PersonFormController extends AdvancedFormController {
     if (!isCreate) unawaited(memberships.loadSavedMemberships());
   }
 
-  Person toPerson() => value.subforms.whereType<PersonFormSection>().fold(
-    _startingPerson.copyWith(color: color.fieldValue),
-    (person, section) => section.editedVersionOf(person),
-  );
+  Person toPerson() => value.subforms
+      .whereType<PersonFormSection>()
+      .fold(
+        _startingPerson.copyWith(color: color.fieldValue),
+        (person, section) => section.editedVersionOf(person),
+      )
+      .copyWith(
+        contacts: phones.ownContacts,
+        familyContacts: phones.familyContacts,
+      );
 
   @override
   Future<bool> validate() async {

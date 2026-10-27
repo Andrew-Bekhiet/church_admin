@@ -42,6 +42,16 @@ void main() {
     contacts: const [PhoneContact(id: 'phone', phone: '0100')],
   );
 
+  const father = PersonType(id: 'father', name: 'الأب', isFamilyAdmin: true);
+  const fatherNumber = FamilyPhoneContact(
+    contact: PhoneContact(id: 'father-number', phone: '+201003333333'),
+    role: father,
+    personId: 'the-father',
+  );
+  final personWithFamilyNumber = fullPerson.copyWith(
+    familyContacts: const [fatherNumber],
+  );
+
   late PersonFormControllerFixture fixture;
 
   setUp(() => fixture = PersonFormControllerFixture());
@@ -235,6 +245,26 @@ void main() {
       expect(controller.toPerson().contacts.map((contact) => contact.phone), [
         ...fullPerson.contacts.map((contact) => contact.phone),
         phone,
+      ]);
+    });
+
+    test('keep only the own numbers left in the form', () {
+      final controller = fixture.controllerOfUpdate(personWithFamilyNumber);
+
+      controller.phones.remove(controller.phones.contacts.fieldValue.first);
+
+      expect(controller.toPerson().contacts, isEmpty);
+    });
+
+    test('give the family numbers as edited in the form', () {
+      final controller = fixture.controllerOfUpdate(personWithFamilyNumber);
+
+      controller.phones.contacts.fieldValue.last.phone.setValue('01007777777');
+
+      expect(controller.toPerson().familyContacts, [
+        fatherNumber.copyWith(
+          contact: fatherNumber.contact.copyWith(phone: '+201007777777'),
+        ),
       ]);
     });
   });

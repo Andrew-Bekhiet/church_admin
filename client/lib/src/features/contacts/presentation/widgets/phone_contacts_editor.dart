@@ -37,16 +37,22 @@ class PhoneContactsEditor extends StatelessWidget {
                 children: [
                   Icon(Symbols.contact_phone, color: theme.colorScheme.primary),
                   Text(
-                    form.familyOnly ? 'أرقام الأسرة' : 'أرقام الهاتف',
+                    switch (form) {
+                      PersonPhoneContactsFormController() => 'أرقام الهاتف',
+                      FamilyPhoneContactsFormController() => 'أرقام الأسرة',
+                    },
                     style: theme.textTheme.titleMedium,
                   ),
                 ],
               ),
               if (contacts.value.isEmpty)
                 Text(
-                  form.familyOnly
-                      ? 'أضف أرقام الأب والأم وباقي مسؤولي الأسرة'
-                      : 'أضف رقم الشخص وأرقام والديه',
+                  switch (form) {
+                    PersonPhoneContactsFormController() =>
+                      'أضف رقم الشخص وأرقام والديه',
+                    FamilyPhoneContactsFormController() =>
+                      'أضف أرقام الأب والأم وباقي مسؤولي الأسرة',
+                  },
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,
                   ),
@@ -57,10 +63,8 @@ class PhoneContactsEditor extends StatelessWidget {
                   contact: contact,
                   form: form,
                 ),
-              if (form.familyOnly)
-                FamilyPhoneContactMenuButton(form: form, label: 'إضافة رقم')
-              else
-                Row(
+              switch (form) {
+                PersonPhoneContactsFormController() => Row(
                   spacing: 8,
                   children: [
                     Expanded(
@@ -81,6 +85,9 @@ class PhoneContactsEditor extends StatelessWidget {
                     ),
                   ],
                 ),
+                FamilyPhoneContactsFormController() =>
+                  FamilyPhoneContactMenuButton(form: form, label: 'إضافة رقم'),
+              },
               if (onImportFromContacts != null)
                 OutlinedButton.icon(
                   key: PhoneContactsEditorKeys.importButton,
