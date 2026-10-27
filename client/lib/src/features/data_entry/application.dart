@@ -8,6 +8,7 @@ export 'application/area_edit/area_form_controller.dart';
 export 'application/class_edit/class_form_controller.dart';
 export 'application/contacts_service.dart';
 export 'application/family_edit/family_form_controller.dart';
+export 'application/family_edit/family_phone_contacts_form_controller.dart';
 export 'application/family_edit/family_relatives_cubit.dart';
 export 'application/group_edit/group_form_controller.dart';
 export 'application/image_picker_service.dart';
@@ -32,6 +33,7 @@ export 'application/person_edit/person_marital_status_and_type_form_controller.d
 export 'application/person_edit/person_memberships_form_controller.dart';
 export 'application/person_edit/person_metadata_catalog.dart';
 export 'application/person_edit/person_pastoral_dates_form_controller.dart';
+export 'application/person_edit/person_phone_contacts_form_controller.dart';
 export 'application/person_edit/person_work_form_controller.dart';
 export 'application/phone_number_service.dart';
 export 'application/service_edit/service_form_controller.dart';

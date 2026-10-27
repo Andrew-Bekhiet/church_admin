@@ -1,13 +1,12 @@
+import 'dart:async';
+
 import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
 
-class PhoneContactsFormController extends AdvancedFormController
-    implements PersonFormSection {
+class PhoneContactsFormController extends AdvancedFormController {
   static bool _always() => true;
-
-  final bool familyOnly;
 
   final PhoneNumberService _phones;
   final String Function() _newKey;
@@ -21,6 +20,8 @@ class PhoneContactsFormController extends AdvancedFormController
     PhoneContactError
   >
   rows;
+
+  bool get familyOnly => false;
 
   List<PhoneContact> get ownContacts => [
     for (final row in rows.fieldValue)
@@ -52,7 +53,6 @@ class PhoneContactsFormController extends AdvancedFormController
   PhoneContactsFormController({
     required List<PhoneContact> own,
     required List<FamilyPhoneContact> family,
-    this.familyOnly = false,
     PhoneNumberService phones = const PhoneNumberService(),
     bool Function()? canHaveFamilyNumbers,
     String Function()? newKey,
@@ -75,11 +75,8 @@ class PhoneContactsFormController extends AdvancedFormController
       ],
     );
     registerFields([rows]);
+    onValuesChanged.addListener(_recheckRowsEditedOrShowingAnError);
   }
-
-  @override
-  Person editedVersionOf(Person person) =>
-      person.copyWith(contacts: ownContacts, familyContacts: familyContacts);
 
   void add(PhoneContactLabel label) => rows.setValue([
     ...rows.fieldValue,
@@ -106,8 +103,10 @@ class PhoneContactsFormController extends AdvancedFormController
       ]);
 
   void remove(PhoneContactRowFormController row) {
-    removeSubform(row);
     rows.setValue(rows.fieldValue.whereNot((other) => other == row).toList());
+    removeSubform(row);
+    _familyRowsById.removeWhere((_, cached) => cached == row);
+    row.dispose();
   }
 
   void toggleMain(PhoneContactRowFormController row) {
@@ -128,20 +127,31 @@ class PhoneContactsFormController extends AdvancedFormController
     row.isMainPhone.setValue(
       label is FreePhoneContactLabel && row.isMainPhone.fieldValue,
     );
+    _validateIfFilledIn(row);
   }
 
+  void revalidateAfterFamilyAvailabilityChanged() =>
+      _recheckRowsEditedOrShowingAnError();
+
   void followFamily({required List<FamilyPhoneContact> saved}) {
-    final dropped =
-        rows.fieldValue
-            .where((row) => _followedFamilyKeys.contains(row.key))
-            .toList()
-          ..forEach(removeSubform);
+    final cachedBefore = _familyRowsById.values.toList();
+    final dropped = rows.fieldValue
+        .where((row) => _followedFamilyKeys.contains(row.key))
+        .toList();
     _followedFamilyKeys = {for (final f in saved) f.contact.id};
+    final followed = saved.map(_followedFamilyRowOf).toList();
+    final cachedNow = _familyRowsById.values.toSet();
+    final replaced = cachedBefore.whereNot(cachedNow.contains);
 
     rows.prefill([
       ...rows.fieldValue.whereNot(dropped.contains),
-      ...saved.map(_followedFamilyRowOf),
+      ...followed,
     ]);
+
+    final detached = [...dropped, ...replaced].whereNot(followed.contains);
+    detached.toList()
+      ..forEach(removeSubform)
+      ..whereNot(cachedNow.contains).forEach((row) => row.dispose());
   }
 
   PhoneContactRowFormController _followedFamilyRowOf(
@@ -195,5 +205,25 @@ class PhoneContactsFormController extends AdvancedFormController
     );
 
     return firstWithSameNumber != null && firstWithSameNumber != row;
+  }
+
+  void _recheckRowsEditedOrShowingAnError() {
+    for (final row in rows.fieldValue) {
+      if (row.phone.error == null && !row.value.wasModified) continue;
+
+      _validateIfFilledIn(row);
+    }
+  }
+
+  void _validateIfFilledIn(PhoneContactRowFormController row) {
+    if (row.phone.fieldValue.trim().isEmpty) return;
+
+    unawaited(row.phone.validate());
+  }
+
+  @override
+  void dispose() {
+    onValuesChanged.removeListener(_recheckRowsEditedOrShowingAnError);
+    super.dispose();
   }
 }

@@ -24,6 +24,7 @@ class PersonFormController extends AdvancedFormController {
       _shownViolations;
 
   bool _violationsAreShown = false;
+  bool _familyNumbersWereAllowed = false;
 
   late final photo = AdvancedFieldController<PhotoChange, PersonEditError>(
     initialValue: const KeepPhoto(),
@@ -32,7 +33,7 @@ class PersonFormController extends AdvancedFormController {
     initialValue: _startingPerson.color,
   );
   late final identity = PersonIdentityFormController(person: _startingPerson);
-  late final phones = PhoneContactsFormController(
+  late final phones = PersonPhoneContactsFormController(
     own: _startingPerson.contacts,
     family: _startingPerson.visibleFamilyContacts,
     canHaveFamilyNumbers: () => household.canHaveFamilyNumbers,
@@ -160,7 +161,10 @@ class PersonFormController extends AdvancedFormController {
       (family) => family?.id,
       (_) => phones.followFamily(saved: household.savedFamilyContacts),
     );
-    household.onValuesChanged.addListener(_revalidatePhonesOnHouseholdChange);
+    _familyNumbersWereAllowed = household.canHaveFamilyNumbers;
+    household.onValuesChanged.addListener(
+      _revalidatePhonesWhenFamilyNumbersBecomeAllowedOrNot,
+    );
     onValuesChanged.addListener(_showRuleViolationsIfAlreadyShown);
     memberships.loadState.addListener(_showRuleViolationsIfAlreadyShown);
 
@@ -294,7 +298,13 @@ class PersonFormController extends AdvancedFormController {
     churchAndSpiritual.isShammas.prefill(false);
   }
 
-  void _revalidatePhonesOnHouseholdChange() => phones.revalidateSync();
+  void _revalidatePhonesWhenFamilyNumbersBecomeAllowedOrNot() {
+    final familyNumbersAreAllowed = household.canHaveFamilyNumbers;
+    if (familyNumbersAreAllowed == _familyNumbersWereAllowed) return;
+
+    _familyNumbersWereAllowed = familyNumbersAreAllowed;
+    phones.revalidateAfterFamilyAvailabilityChanged();
+  }
 
   void _showRuleViolationsIfAlreadyShown() {
     if (!_violationsAreShown || isDisposed) return;
@@ -311,7 +321,7 @@ class PersonFormController extends AdvancedFormController {
   @override
   void dispose() {
     household.onValuesChanged.removeListener(
-      _revalidatePhonesOnHouseholdChange,
+      _revalidatePhonesWhenFamilyNumbersBecomeAllowedOrNot,
     );
     _saveProgress.dispose();
     _shownViolations.dispose();

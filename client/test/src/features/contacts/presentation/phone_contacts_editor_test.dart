@@ -31,12 +31,15 @@ void main() {
     bool familyOnly = false,
     VoidCallback? onImportFromContacts,
   }) async {
-    final form = PhoneContactsFormController(
-      own: own,
-      family: const [],
-      familyOnly: familyOnly,
-      newKey: () => 'new',
-    )..setValidationMode(ValidationMode.onUserInteraction);
+    final form =
+        (familyOnly
+              ? FamilyPhoneContactsFormController(saved: const [])
+              : PhoneContactsFormController(
+                  own: own,
+                  family: const [],
+                  newKey: () => 'new',
+                ))
+          ..setValidationMode(ValidationMode.onUserInteraction);
     addTearDown(form.dispose);
     final familyRoles = FamilyRolesCubit(
       FakePersonTypesDAO()..familyRoles = [father, mother],

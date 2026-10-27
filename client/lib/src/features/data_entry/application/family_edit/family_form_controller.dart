@@ -9,10 +9,8 @@ class FamilyFormController extends ObjectFormController<Family> {
 
   late final AddressFormController address;
   late final relatives = AdvancedFormController(debugName: 'relatives');
-  late final phones = PhoneContactsFormController(
-    own: const [],
-    family: initialDraft.contacts,
-    familyOnly: true,
+  late final phones = FamilyPhoneContactsFormController(
+    saved: initialDraft.contacts,
   );
   late final church = AdvancedFieldController<Church?, ObjectEditError>(
     initialValue: initialDraft.church,

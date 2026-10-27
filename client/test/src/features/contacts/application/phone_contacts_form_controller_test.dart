@@ -190,6 +190,59 @@ void main() {
     expect(form.value.validationErrors, isEmpty);
   });
 
+  test('removing a duplicate clears the error on its twin', () async {
+    final form = formFor(own: [ownMain], family: [])
+      ..importNumbers([(label: 'موبايل', number: '01001111111')]);
+    await form.validate();
+    final twin = rowOf(form, 'new-0');
+    expect(twin.phone.error, PhoneContactError.duplicatePhone);
+
+    form.remove(rowOf(form, ownMain.id));
+
+    expect(twin.phone.error, isNull);
+  });
+
+  test(
+    'choosing a family clears the role error on a number shown before',
+    () async {
+      canHaveFamilyNumbers = false;
+      final form = formFor(own: [], family: [fatherNumber]);
+      await form.validate();
+      final familyRow = rowOf(form, fatherNumber.contact.id);
+      expect(familyRow.phone.error, PhoneContactError.roleNeedsFamily);
+
+      canHaveFamilyNumbers = true;
+      form.revalidateAfterFamilyAvailabilityChanged();
+
+      expect(familyRow.phone.error, isNull);
+    },
+  );
+
+  test(
+    'relabelling a stored number to a role without a family shows the error '
+    'at once',
+    () {
+      canHaveFamilyNumbers = false;
+      final form = formFor();
+      final workRow = rowOf(form, ownWork.id);
+
+      form.changeLabel(workRow, const RolePhoneContactLabel(father));
+
+      expect(workRow.phone.error, PhoneContactError.roleNeedsFamily);
+    },
+  );
+
+  test('a blank new number shows no error', () {
+    canHaveFamilyNumbers = false;
+    final form = formFor(own: [], family: [])
+      ..add(const FreePhoneContactLabel(null));
+    final blankRow = rowOf(form, 'new-0');
+
+    form.changeLabel(blankRow, const RolePhoneContactLabel(father));
+
+    expect(blankRow.phone.error, isNull);
+  });
+
   test('a new role number is handed back for that role', () {
     final form = formFor(own: [], family: [])
       ..add(const RolePhoneContactLabel(mother));
@@ -243,6 +296,20 @@ void main() {
 
     expect(form.familyContacts, [fatherNumber]);
   });
+
+  test(
+    'returning to a family after removing one of its numbers shows the saved '
+    'number again',
+    () {
+      final form = formFor(own: [], family: [fatherNumber]);
+      form.remove(rowOf(form, fatherNumber.contact.id));
+      form
+        ..followFamily(saved: const [])
+        ..followFamily(saved: const [fatherNumber]);
+
+      expect(form.familyContacts, [fatherNumber]);
+    },
+  );
 
   test('numbers imported from a device contact keep their labels', () {
     final form = formFor()

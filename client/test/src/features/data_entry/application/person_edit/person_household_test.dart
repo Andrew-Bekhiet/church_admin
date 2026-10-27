@@ -17,6 +17,7 @@ void main() {
     area: PersonFormControllerFixture.shubra,
     houseCode: '4',
   );
+  const father = PersonType(id: 'father', name: 'أب');
   const startingFamily = Family(
     id: 'starting',
     name: 'عائلة شبرا',
@@ -186,6 +187,22 @@ void main() {
       controller.household.family.setValue(otherFamily);
 
       expect(controller.household.canHaveFamilyNumbers, isTrue);
+    });
+  });
+
+  group('a family number typed before there is a family', () {
+    test('stops being an error once a family is chosen', () {
+      final controller = fixture.controllerOfUpdate(
+        Person(id: 'p', name: 'مينا', address: personAddress),
+      );
+      controller.phones.add(const RolePhoneContactLabel(father));
+      final number = controller.phones.rows.fieldValue.single.phone
+        ..setValue('01003333333');
+      expect(number.error, PhoneContactError.roleNeedsFamily);
+
+      controller.household.family.setValue(otherFamily);
+
+      expect(number.error, isNull);
     });
   });
 
