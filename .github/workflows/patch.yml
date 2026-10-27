@@ -34,14 +34,17 @@ jobs:
       contents: write
 
     steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+
       - name: 🙈 Mask log values
         env:
           LOG_MASK_VALUES: ${{ secrets.LOG_MASK_VALUES }}
-        working-directory: .
         run: while IFS= read -r v; do if [ -n "$v" ]; then echo "::add-mask::$v"; fi; done <<< "$LOG_MASK_VALUES"
 
       - name: 🧹 Free up disk space
-        working-directory: .
         run: |
           # Space usage before cleanup
           df -h /
@@ -55,11 +58,6 @@ jobs:
 
           # Verify gains
           df -h /
-
-      - name: 📥 Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 1
 
       - name: 🛠️ Prepare Shorebird build
         uses: ./.github/actions/prepare-shorebird-build
@@ -115,16 +113,15 @@ jobs:
       contents: write
 
     steps:
-      - name: 🙈 Mask log values
-        env:
-          LOG_MASK_VALUES: ${{ secrets.LOG_MASK_VALUES }}
-        working-directory: .
-        run: while IFS= read -r v; do if [ -n "$v" ]; then echo "::add-mask::$v"; fi; done <<< "$LOG_MASK_VALUES"
-
       - name: 📥 Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 1
+
+      - name: 🙈 Mask log values
+        env:
+          LOG_MASK_VALUES: ${{ secrets.LOG_MASK_VALUES }}
+        run: while IFS= read -r v; do if [ -n "$v" ]; then echo "::add-mask::$v"; fi; done <<< "$LOG_MASK_VALUES"
 
       - name: 🛠️ Prepare Shorebird build
         uses: ./.github/actions/prepare-shorebird-build
