@@ -21,16 +21,20 @@ on:
         default: true
         type: boolean
 
+defaults:
+  run:
+    working-directory: client
+
 jobs:
   validate-tag:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.get-version.outputs.version }}
-      is-valid: ${{ steps.validate.outputs.is-valid }}
 
     steps:
       - name: Get version from tag
         id: get-version
+        working-directory: .
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             VERSION="${{ github.event.inputs.tag }}"
@@ -42,44 +46,36 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Validate semantic version
-        id: validate
+        working-directory: .
         run: |
           VERSION="${{ steps.get-version.outputs.version }}"
           if [[ $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "is-valid=true" >> $GITHUB_OUTPUT
             echo "✅ Valid semantic version: $VERSION"
           else
-            echo "is-valid=false" >> $GITHUB_OUTPUT
             echo "❌ Invalid semantic version: $VERSION"
             exit 1
           fi
 
-  release-mobile:
+  release-android:
+    needs: [validate-tag]
+    if: ${{ github.event_name == 'push' || inputs.android }}
+    runs-on: ubuntu-latest
     environment: release
     permissions:
       contents: write
       id-token: write
-
-    needs: [validate-tag]
-    if: ${{ always() && (needs.validate-tag.result == 'success') && (github.event_name == 'push' || (github.event.inputs.android == 'true' || github.event.inputs.ios == 'true')) }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-        exclude:
-          # Skip Ubuntu (Android) if only iOS is requested
-          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.android == 'false' && 'ubuntu-latest' }}
-          # Skip macOS (iOS) if only Android is requested
-          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ios == 'false' && 'macos-latest' }}
-    runs-on: ${{ matrix.os }}
+    env:
+      VERSION: ${{ needs.validate-tag.outputs.version }}
 
     steps:
       - name: Mask log values
         env:
           LOG_MASK_VALUES: ${{ secrets.LOG_MASK_VALUES }}
+        working-directory: .
         run: while IFS= read -r v; do if [ -n "$v" ]; then echo "::add-mask::$v"; fi; done <<< "$LOG_MASK_VALUES"
 
       - name: Free up disk space
-        if: ${{ matrix.os == 'ubuntu-latest' }}
+        working-directory: .
         run: |
           # Space usage before cleanup
           df -h /
@@ -94,82 +90,28 @@ jobs:
           # Verify gains
           df -h /
 
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 1
 
-      - name: Get Flutter
-        id: flutter-action
-        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
-        with:
-          cache: true
-          flutter-version-file: client/.fvmrc
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
-          cache-key: "flutter:os:-:channel:-:version:-:arch:"
-
-      - name: Install dependencies
-        run: cd client && flutter pub get
-
-      - name: Run new builder
-        run: cd client && rm -r lib/src/core/graphql/__generated__/; dart run build_runner build && ./scripts/split_schema_graphql_dart.sh
-
-      - name: Install Codemagic CLI tools
-        run: pip install codemagic-cli-tools
-
-      - name: Set up keychain
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: keychain initialize
-
-      - name: Fetch signing files
-        if: ${{ matrix.os == 'macos-latest' }}
-        env:
-          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-          APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
-          APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
-          CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
-          APP_STORE_APPLE_ID: ${{ secrets.APP_STORE_APPLE_ID }}
-        run: |
-          cd client/ios
-          app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) \
-          --type IOS_APP_STORE \
-          --create
-      - name: Set up signing certificate
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: keychain add-certificates
-      - name: Set up code signing settings on Xcode project
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: xcode-project use-profiles --export-options-plist=${{ runner.temp }}/export_options.plist
-
-      - name: 🐦 Setup Shorebird
-        uses: shorebirdtech/setup-shorebird@1866dd9f55da8f25608b70bdde6e095c06f1dc01 # main
-        with:
-          cache: true
+      - name: Prepare Shorebird build
+        id: prepare
+        uses: ./.github/actions/prepare-shorebird-build
 
       - name: Set Up Java
         uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
-        if: ${{ matrix.os == 'ubuntu-latest' }}
         with:
           cache: "gradle"
           distribution: "temurin"
           java-version: "17"
 
-      - name: Set Up latest stable Xcode version
-        if: ${{ matrix.os == 'macos-latest' }}
-        uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1
-        with:
-          xcode-version: latest-stable
-
-      - name: Populate the Flutter tool's cache of binary artifacts
-        run: flutter precache
-
       - name: Decode and save android secrets
-        if: ${{ matrix.os == 'ubuntu-latest' }}
         env:
           ANDROID_SIGNING_KEY: ${{ secrets.ANDROID_SIGNING_KEY }}
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
           ANDROID_KEYSTORE_PROPERTIES: ${{ secrets.ANDROID_KEYSTORE_PROPERTIES }}
         run: |
-          cd client
           echo $ANDROID_SIGNING_KEY | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/key.keystore
           echo $GOOGLE_SERVICES_JSON | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/google-services.json
           echo $ANDROID_KEYSTORE_PROPERTIES | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/releaseKey.properties
@@ -177,50 +119,25 @@ jobs:
       - name: Decode app production environment
         env:
           APP_PROD_ENV_FILE: ${{ secrets.APP_PROD_ENV_FILE }}
-        run: cd client && echo "$APP_PROD_ENV_FILE" | base64 -d > .env
+        run: echo "$APP_PROD_ENV_FILE" | base64 -d > .env
 
       - name: 🚀 Shorebird Release
-        if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: shorebirdtech/shorebird-release@296fa218e6bcd85833bfdde57a13515a30638a0e # main
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
         with:
           working-directory: client
           platform: android
-          flutter-version: ${{ steps.flutter-action.outputs.VERSION }}
+          flutter-version: ${{ steps.prepare.outputs.flutter-version }}
           args: --artifact=apk
-            --dart-define-from-file=.env
-
-      - name: Get version from tag
-        id: version
-        run: |
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            VERSION="${{ github.event.inputs.tag }}"
-          else
-            VERSION="${GITHUB_REF#refs/tags/}"
-          fi
-          VERSION=${VERSION#v}
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-      - name: 🚀 Shorebird Release
-        if: ${{ matrix.os == 'macos-latest' }}
-        uses: shorebirdtech/shorebird-release@296fa218e6bcd85833bfdde57a13515a30638a0e # main
-        env:
-          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
-        with:
-          working-directory: client
-          platform: ios
-          flutter-version: ${{ steps.flutter-action.outputs.VERSION }}
-          args: --build-name ${{ steps.version.outputs.version }}
-            --export-options-plist=${{ runner.temp }}/export_options.plist
             --dart-define-from-file=.env
 
       - name: Delete app production environment
         if: ${{ always() }}
-        run: cd client && rm -f .env
+        run: rm -f .env
 
       - name: Authenticate with Google Play
         id: play-auth
-        if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093" # v3.0.0
         with:
           workload_identity_provider: ${{ secrets.GCP_RELEASE_WORKLOAD_IDENTITY_PROVIDER }}
@@ -231,38 +148,16 @@ jobs:
           export_environment_variables: false
 
       - name: Publish to Google Play
-        if: ${{ matrix.os == 'ubuntu-latest' }}
         env:
           GOOGLE_PLAY_ACCESS_TOKEN: ${{ steps.play-auth.outputs.access_token }}
         run: |
-          client/scripts/publish_play_bundle.sh \
+          scripts/publish_play_bundle.sh \
             com.AndroidQuartz.church_admin \
-            client/build/app/outputs/bundle/release/app-release.aab \
+            build/app/outputs/bundle/release/app-release.aab \
             production
 
-      - name: Publish the app to App Store Connect
-        if: ${{ matrix.os == 'macos-latest' }}
-        env:
-          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-          APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
-          APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
-          CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
-          APP_STORE_APPLE_ID: ${{ secrets.APP_STORE_APPLE_ID }}
-        run: |
-          cd client
-          app-store-connect publish --path "$(find $(pwd) -name "*.ipa")"
-
       - name: Add version to APK filename
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: |
-          cd client
-          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk
-
-      - name: Add version to ipa filename
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: |
-          cd client
-          mv build/ios/ipa/churchAdmin.ipa build/ios/ipa/app-release-v${{ steps.version.outputs.version }}.ipa
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app-release-v$VERSION.apk
 
       - name: Authenticate with Google Cloud
         uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093" # v3.0.0
@@ -272,22 +167,115 @@ jobs:
 
       - name: Upload APK to Google Cloud Storage
         uses: "google-github-actions/upload-cloud-storage@6397bd7208e18d13ba2619ee21b9873edc94427a" # v3.0.0
-        if: ${{ matrix.os == 'ubuntu-latest' }}
         with:
-          path: "client/build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk"
-          destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
-
-      - name: Upload ipa to Google Cloud Storage
-        uses: "google-github-actions/upload-cloud-storage@6397bd7208e18d13ba2619ee21b9873edc94427a" # v3.0.0
-        if: ${{ matrix.os == 'macos-latest' }}
-        with:
-          path: "client/build/ios/ipa/app-release-v${{ steps.version.outputs.version }}.ipa"
+          path: "client/build/app/outputs/flutter-apk/app-release-v${{ env.VERSION }}.apk"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
       - name: Create release
-        if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: v${{ steps.version.outputs.version }}
+          tag: v${{ env.VERSION }}
           generateReleaseNotes: true
+
+  release-ios:
+    needs: [validate-tag]
+    if: ${{ github.event_name == 'push' || inputs.ios }}
+    runs-on: macos-latest
+    environment: release
+    permissions:
+      contents: write
+      id-token: write
+    env:
+      VERSION: ${{ needs.validate-tag.outputs.version }}
+
+    steps:
+      - name: Mask log values
+        env:
+          LOG_MASK_VALUES: ${{ secrets.LOG_MASK_VALUES }}
+        working-directory: .
+        run: while IFS= read -r v; do if [ -n "$v" ]; then echo "::add-mask::$v"; fi; done <<< "$LOG_MASK_VALUES"
+
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+
+      - name: Prepare Shorebird build
+        id: prepare
+        uses: ./.github/actions/prepare-shorebird-build
+
+      - name: Install Codemagic CLI tools
+        run: pip install codemagic-cli-tools
+
+      - name: Set up keychain
+        run: keychain initialize
+
+      - name: Fetch signing files
+        env:
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
+          APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+          CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
+          APP_STORE_APPLE_ID: ${{ secrets.APP_STORE_APPLE_ID }}
+        run: |
+          cd ios
+          app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) \
+          --type IOS_APP_STORE \
+          --create
+
+      - name: Set up signing certificate
+        run: keychain add-certificates
+
+      - name: Set up code signing settings on Xcode project
+        run: xcode-project use-profiles --export-options-plist=${{ runner.temp }}/export_options.plist
+
+      - name: Set Up latest stable Xcode version
+        uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Decode app production environment
+        env:
+          APP_PROD_ENV_FILE: ${{ secrets.APP_PROD_ENV_FILE }}
+        run: echo "$APP_PROD_ENV_FILE" | base64 -d > .env
+
+      - name: 🚀 Shorebird Release
+        uses: shorebirdtech/shorebird-release@296fa218e6bcd85833bfdde57a13515a30638a0e # main
+        env:
+          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+        with:
+          working-directory: client
+          platform: ios
+          flutter-version: ${{ steps.prepare.outputs.flutter-version }}
+          args: --build-name ${{ env.VERSION }}
+            --export-options-plist=${{ runner.temp }}/export_options.plist
+            --dart-define-from-file=.env
+
+      - name: Delete app production environment
+        if: ${{ always() }}
+        run: rm -f .env
+
+      - name: Publish the app to App Store Connect
+        env:
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
+          APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+          CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
+          APP_STORE_APPLE_ID: ${{ secrets.APP_STORE_APPLE_ID }}
+        run: app-store-connect publish --path "$(find $(pwd) -name "*.ipa")"
+
+      - name: Add version to ipa filename
+        run: mv build/ios/ipa/churchAdmin.ipa build/ios/ipa/app-release-v$VERSION.ipa
+
+      - name: Authenticate with Google Cloud
+        uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093" # v3.0.0
+        with:
+          workload_identity_provider: ${{ secrets.GCP_RELEASE_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_APP_RELEASE_UPLOADER_SERVICE_ACCOUNT }}
+
+      - name: Upload ipa to Google Cloud Storage
+        uses: "google-github-actions/upload-cloud-storage@6397bd7208e18d13ba2619ee21b9873edc94427a" # v3.0.0
+        with:
+          path: "client/build/ios/ipa/app-release-v${{ env.VERSION }}.ipa"
+          destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"

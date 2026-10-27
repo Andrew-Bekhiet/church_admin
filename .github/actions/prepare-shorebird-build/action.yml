@@ -1,0 +1,33 @@
+name: Prepare Shorebird build
+description: Sets up Flutter and Shorebird, installs client dependencies, regenerates build_runner outputs and precaches Flutter's binary artifacts.
+
+outputs:
+  flutter-version:
+    description: The installed Flutter version.
+    value: ${{ steps.setup-flutter.outputs.version }}
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Flutter
+      id: setup-flutter
+      uses: ./.github/actions/setup-flutter
+
+    - name: Install dependencies
+      shell: bash
+      working-directory: client
+      run: flutter pub get
+
+    - name: Run new builder
+      shell: bash
+      working-directory: client
+      run: rm -r lib/src/core/graphql/__generated__/; dart run build_runner build && ./scripts/split_schema_graphql_dart.sh
+
+    - name: 🐦 Setup Shorebird
+      uses: shorebirdtech/setup-shorebird@1866dd9f55da8f25608b70bdde6e095c06f1dc01 # main
+      with:
+        cache: true
+
+    - name: Populate the Flutter tool's cache of binary artifacts
+      shell: bash
+      run: flutter precache
