@@ -1,13 +1,13 @@
 import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
 
-class PhoneContactRowFormController extends AdvancedFormController {
+class PhoneContactFormController extends AdvancedFormController {
   final String key;
   final FamilyPhoneContact? savedRelative;
   final String? storedPhone;
 
   final PhoneNumberService _phones;
-  final bool Function(PhoneContactRowFormController) _isDuplicate;
+  final bool Function(PhoneContactFormController) _isDuplicate;
   final bool Function() _canHaveFamilyNumbers;
   final String _initialInput;
 
@@ -31,7 +31,7 @@ class PhoneContactRowFormController extends AdvancedFormController {
     RolePhoneContactLabel(:final role) => role.id,
   };
 
-  PhoneContactRowFormController({
+  PhoneContactFormController({
     required this.key,
     required this._initialInput,
     required PhoneContactLabel initialLabel,
@@ -49,7 +49,7 @@ class PhoneContactRowFormController extends AdvancedFormController {
     registerFields([phone, label, isMainPhone]);
   }
 
-  bool isSameNumberAs(PhoneContactRowFormController other) =>
+  bool isSameNumberAs(PhoneContactFormController other) =>
       e164 == other.e164 && _roleId == other._roleId;
 
   PhoneContactError? _phoneError(String input) {

@@ -21,7 +21,7 @@ void main() {
   late EditPersonScreenHarness harness;
 
   Finder phoneField(String draftKey) =>
-      find.byKey(PhoneContactRowFieldKeys.phoneField(draftKey));
+      find.byKey(PhoneContactFieldKeys.phoneField(draftKey));
 
   setUp(() {
     harness = EditPersonScreenHarness()..install();
@@ -61,7 +61,7 @@ void main() {
     expect(find.text(discardDialogTitle), findsOneWidget);
   });
 
-  testWidgets('leaving after adding an empty number row asks to discard', (
+  testWidgets('leaving after adding an empty phone contact asks to discard', (
     tester,
   ) async {
     await openPerson(tester);
@@ -78,7 +78,7 @@ void main() {
   });
 
   testWidgets(
-    'leaving after typing an incomplete number into a new row asks to discard',
+    'leaving after typing an incomplete number into a new phone contact asks to discard',
     (tester) async {
       await openPerson(tester);
 
@@ -108,7 +108,7 @@ void main() {
   ) async {
     await openPerson(tester);
 
-    final remove = find.byKey(PhoneContactRowFieldKeys.removeButton('saved'));
+    final remove = find.byKey(PhoneContactFieldKeys.removeButton('saved'));
     await harness.scrollTo(tester, remove);
     await tester.tap(remove);
     await tester.pumpAndSettle();

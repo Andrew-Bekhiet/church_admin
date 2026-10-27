@@ -3,12 +3,12 @@ import 'package:church_admin/church_admin.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
-class PhoneContactRowField extends StatelessWidget {
-  final PhoneContactRowFormController row;
+class PhoneContactField extends StatelessWidget {
+  final PhoneContactFormController contact;
   final PhoneContactsFormController form;
 
-  const PhoneContactRowField({
-    required this.row,
+  const PhoneContactField({
+    required this.contact,
     required this.form,
     super.key,
   });
@@ -20,44 +20,44 @@ class PhoneContactRowField extends StatelessWidget {
       spacing: 4,
       children: [
         AdvancedFieldBuilder<PhoneContactLabel, PhoneContactError>(
-          field: row.label,
+          field: contact.label,
           builder: (context, label, _) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             spacing: 8,
             children: [
               Flexible(
                 child: PhoneContactLabelPicker(
-                  key: PhoneContactRowFieldKeys.labelPicker(row.key),
+                  key: PhoneContactFieldKeys.labelPicker(contact.key),
                   label: label.value,
                   familyOnly: form.familyOnly,
-                  onChanged: (label) => form.changeLabel(row, label),
+                  onChanged: (label) => form.changeLabel(contact, label),
                 ),
               ),
-              if (row.canBeMain)
+              if (contact.canBeMain)
                 AdvancedFieldBuilder<bool, PhoneContactError>(
-                  field: row.isMainPhone,
+                  field: contact.isMainPhone,
                   builder: (context, isMainPhone, _) => FilterChip(
-                    key: PhoneContactRowFieldKeys.mainChip(row.key),
+                    key: PhoneContactFieldKeys.mainChip(contact.key),
                     avatar: isMainPhone.value ? null : const Icon(Symbols.star),
                     label: const Text('أساسي'),
                     selected: isMainPhone.value,
-                    onSelected: (_) => form.toggleMain(row),
+                    onSelected: (_) => form.toggleMain(contact),
                   ),
                 ),
             ],
           ),
         ),
         AdvancedTextInput<PhoneContactError>(
-          key: PhoneContactRowFieldKeys.phoneField(row.key),
-          field: row.phone,
+          key: PhoneContactFieldKeys.phoneField(contact.key),
+          field: contact.phone,
           translateError: (error) => error.message,
           hintText: 'مثال: 01234...',
           prefixIcon: const Icon(Symbols.call),
           suffixIcon: IconButton(
-            key: PhoneContactRowFieldKeys.removeButton(row.key),
+            key: PhoneContactFieldKeys.removeButton(contact.key),
             tooltip: 'حذف الرقم',
             icon: const Icon(Symbols.delete),
-            onPressed: () => form.remove(row),
+            onPressed: () => form.remove(contact),
           ),
           keyboardType: TextInputType.phone,
           autofillHints: const [AutofillHints.telephoneNumber],
@@ -67,13 +67,13 @@ class PhoneContactRowField extends StatelessWidget {
   }
 }
 
-abstract final class PhoneContactRowFieldKeys {
-  static Key phoneField(String rowKey) =>
-      Key('phone_contacts_editor_phone_$rowKey');
-  static Key labelPicker(String rowKey) =>
-      Key('phone_contacts_editor_label_$rowKey');
-  static Key mainChip(String rowKey) =>
-      Key('phone_contacts_editor_main_$rowKey');
-  static Key removeButton(String rowKey) =>
-      Key('phone_contacts_editor_remove_$rowKey');
+abstract final class PhoneContactFieldKeys {
+  static Key phoneField(String contactKey) =>
+      Key('phone_contacts_editor_phone_$contactKey');
+  static Key labelPicker(String contactKey) =>
+      Key('phone_contacts_editor_label_$contactKey');
+  static Key mainChip(String contactKey) =>
+      Key('phone_contacts_editor_main_$contactKey');
+  static Key removeButton(String contactKey) =>
+      Key('phone_contacts_editor_remove_$contactKey');
 }

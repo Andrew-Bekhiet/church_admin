@@ -114,9 +114,9 @@ class PersonEditorRobot {
     required String roleId,
     required String phone,
   }) async {
-    final rowOfRole = find.byWidgetPredicate(
+    final contactOfRole = find.byWidgetPredicate(
       (widget) => switch (widget) {
-        PhoneContactRowField(:final row) => switch (row.label.fieldValue) {
+        PhoneContactField(:final contact) => switch (contact.label.fieldValue) {
           RolePhoneContactLabel(:final role) => role.id == roleId,
           _ => false,
         },
@@ -136,9 +136,9 @@ class PersonEditorRobot {
     await tester.tapOn(
       find.byKey(FamilyPhoneContactMenuButtonKeys.roleItem(roleId)),
     );
-    final row = tester.widget<PhoneContactRowField>(rowOfRole);
+    final contact = tester.widget<PhoneContactField>(contactOfRole);
     await tester.typeInto(
-      find.byKey(PhoneContactRowFieldKeys.phoneField(row.row.key)),
+      find.byKey(PhoneContactFieldKeys.phoneField(contact.contact.key)),
       phone,
     );
   }

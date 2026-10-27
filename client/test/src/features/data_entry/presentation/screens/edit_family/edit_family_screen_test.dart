@@ -29,7 +29,7 @@ void main() {
   late EditObjectScreenHarness harness;
 
   Finder phoneField(String draftKey) =>
-      find.byKey(PhoneContactRowFieldKeys.phoneField(draftKey));
+      find.byKey(PhoneContactFieldKeys.phoneField(draftKey));
 
   Future<void> openStoredFamily(
     WidgetTester tester, {
@@ -196,7 +196,7 @@ void main() {
       expect(find.byType(DiscardChangesDialog), findsOneWidget);
     });
 
-    testWidgets('after adding an empty number row asks to discard', (
+    testWidgets('after adding an empty phone contact asks to discard', (
       tester,
     ) async {
       harness.personTypesDAO.familyRoles = const [father];

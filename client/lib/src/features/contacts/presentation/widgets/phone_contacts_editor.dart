@@ -18,11 +18,11 @@ class PhoneContactsEditor extends StatelessWidget {
     final theme = Theme.of(context);
 
     return AdvancedFieldBuilder<
-      List<PhoneContactRowFormController>,
+      List<PhoneContactFormController>,
       PhoneContactError
     >(
-      field: form.rows,
-      builder: (context, rows, _) => Card.filled(
+      field: form.contacts,
+      builder: (context, contacts, _) => Card.filled(
         margin: const EdgeInsets.symmetric(vertical: 8),
         color: theme.colorScheme.surfaceContainerHigh,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -42,7 +42,7 @@ class PhoneContactsEditor extends StatelessWidget {
                   ),
                 ],
               ),
-              if (rows.value.isEmpty)
+              if (contacts.value.isEmpty)
                 Text(
                   form.familyOnly
                       ? 'أضف أرقام الأب والأم وباقي مسؤولي الأسرة'
@@ -51,10 +51,10 @@ class PhoneContactsEditor extends StatelessWidget {
                     color: theme.colorScheme.onSurfaceVariant,
                   ),
                 ),
-              for (final row in rows.value)
-                PhoneContactRowField(
-                  key: ValueKey(row.key),
-                  row: row,
+              for (final contact in contacts.value)
+                PhoneContactField(
+                  key: ValueKey(contact.key),
+                  contact: contact,
                   form: form,
                 ),
               if (form.familyOnly)

@@ -21,11 +21,11 @@ void main() {
     await harness.scrollTo(tester, add);
     await tester.tap(add);
     await tester.pumpAndSettle();
-    final row = tester.widget<PhoneContactRowField>(
-      find.byType(PhoneContactRowField),
+    final contact = tester.widget<PhoneContactField>(
+      find.byType(PhoneContactField),
     );
     await tester.enterText(
-      find.byKey(PhoneContactRowFieldKeys.phoneField(row.row.key)),
+      find.byKey(PhoneContactFieldKeys.phoneField(contact.contact.key)),
       typed,
     );
     await harness.tapSave(tester);

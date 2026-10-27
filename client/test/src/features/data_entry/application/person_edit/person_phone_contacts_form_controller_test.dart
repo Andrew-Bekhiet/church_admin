@@ -33,14 +33,14 @@ void main() {
 
   test('a person gets the own numbers left in the form', () {
     final form = formFor();
-    form.remove(form.rows.fieldValue.first);
+    form.remove(form.contacts.fieldValue.first);
 
     expect(form.editedVersionOf(person).contacts, isEmpty);
   });
 
   test('a person gets the family numbers as edited in the form', () {
     final form = formFor();
-    form.rows.fieldValue.last.phone.setValue('01007777777');
+    form.contacts.fieldValue.last.phone.setValue('01007777777');
 
     expect(form.editedVersionOf(person).familyContacts, [
       fatherNumber.copyWith(

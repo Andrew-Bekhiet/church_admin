@@ -68,7 +68,7 @@ void main() {
   }
 
   bool isMain(WidgetTester tester, String key) => tester
-      .widget<FilterChip>(find.byKey(PhoneContactRowFieldKeys.mainChip(key)))
+      .widget<FilterChip>(find.byKey(PhoneContactFieldKeys.mainChip(key)))
       .selected;
 
   testWidgets('choosing another number as main moves the أساسي chip', (
@@ -77,7 +77,7 @@ void main() {
     await pumpEditor(tester);
 
     await tester.tap(
-      find.byKey(PhoneContactRowFieldKeys.mainChip('own-work')),
+      find.byKey(PhoneContactFieldKeys.mainChip('own-work')),
     );
     await tester.pump();
 
@@ -103,7 +103,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      form.rows.fieldValue.single.label.fieldValue,
+      form.contacts.fieldValue.single.label.fieldValue,
       const RolePhoneContactLabel(father),
     );
   });
@@ -114,7 +114,7 @@ void main() {
     await pumpEditor(tester);
 
     await tester.tap(
-      find.byKey(PhoneContactRowFieldKeys.labelPicker('own-work')),
+      find.byKey(PhoneContactFieldKeys.labelPicker('own-work')),
     );
     await tester.pumpAndSettle();
     await tester.tap(
@@ -123,7 +123,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(
-      find.byKey(PhoneContactRowFieldKeys.mainChip('own-work')),
+      find.byKey(PhoneContactFieldKeys.mainChip('own-work')),
       findsNothing,
     );
   });
@@ -155,7 +155,7 @@ void main() {
     final form = await pumpEditor(tester);
 
     await tester.enterText(
-      find.byKey(PhoneContactRowFieldKeys.phoneField('own-work')),
+      find.byKey(PhoneContactFieldKeys.phoneField('own-work')),
       '0100',
     );
     await form.validate();
@@ -176,7 +176,7 @@ void main() {
     await pumpEditor(tester);
 
     await tester.enterText(
-      find.byKey(PhoneContactRowFieldKeys.phoneField('own-work')),
+      find.byKey(PhoneContactFieldKeys.phoneField('own-work')),
       '0100',
     );
     await tester.pump();

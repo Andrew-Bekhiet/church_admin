@@ -45,10 +45,10 @@ void main() {
     return form;
   }
 
-  PhoneContactRowFormController rowOf(
+  PhoneContactFormController contactOf(
     PhoneContactsFormController form,
     String key,
-  ) => form.rows.fieldValue.firstWhere((row) => row.key == key);
+  ) => form.contacts.fieldValue.firstWhere((contact) => contact.key == key);
 
   setUp(() {
     nextKey = 0;
@@ -58,11 +58,16 @@ void main() {
   test("the person's own numbers are listed before their family's", () {
     final form = formFor();
 
-    expect(form.rows.fieldValue.map((row) => (row.key, row.label.fieldValue)), [
-      ('own-main', const FreePhoneContactLabel(null)),
-      ('own-work', const FreePhoneContactLabel('عمل')),
-      ('father-number', const RolePhoneContactLabel(father)),
-    ]);
+    expect(
+      form.contacts.fieldValue.map(
+        (contact) => (contact.key, contact.label.fieldValue),
+      ),
+      [
+        ('own-main', const FreePhoneContactLabel(null)),
+        ('own-work', const FreePhoneContactLabel('عمل')),
+        ('father-number', const RolePhoneContactLabel(father)),
+      ],
+    );
   });
 
   test('untouched numbers are handed back unchanged', () {
@@ -76,13 +81,13 @@ void main() {
     final form = formFor(own: [], family: [])
       ..add(const FreePhoneContactLabel(null));
 
-    expect(form.rows.fieldValue.single.isMainPhone.fieldValue, isTrue);
+    expect(form.contacts.fieldValue.single.isMainPhone.fieldValue, isTrue);
   });
 
   test('marking a number as main unmarks the previous main', () {
     final form = formFor();
 
-    form.toggleMain(rowOf(form, 'own-work'));
+    form.toggleMain(contactOf(form, 'own-work'));
 
     expect(
       form.ownContacts.map((contact) => (contact.id, contact.isMainPhone)),
@@ -95,29 +100,29 @@ void main() {
 
   test('a family number cannot be marked as main', () {
     final form = formFor();
-    final familyRow = rowOf(form, 'father-number');
+    final familyContact = contactOf(form, 'father-number');
 
-    form.toggleMain(familyRow);
+    form.toggleMain(familyContact);
 
-    expect(familyRow.isMainPhone.fieldValue, isFalse);
+    expect(familyContact.isMainPhone.fieldValue, isFalse);
   });
 
   test('labelling the main number with a role unmarks it', () {
     final form = formFor();
-    final mainRow = rowOf(form, 'own-main');
+    final mainContact = contactOf(form, 'own-main');
 
-    form.changeLabel(mainRow, const RolePhoneContactLabel(mother));
+    form.changeLabel(mainContact, const RolePhoneContactLabel(mother));
 
-    expect(mainRow.isMainPhone.fieldValue, isFalse);
+    expect(mainContact.isMainPhone.fieldValue, isFalse);
   });
 
   test('a typed number that is not a phone number is invalid', () {
     final form = formFor();
-    final workRow = rowOf(form, 'own-work');
+    final workContact = contactOf(form, 'own-work');
 
-    workRow.phone.setValue('12');
+    workContact.phone.setValue('12');
 
-    expect(workRow.phone.error, PhoneContactError.invalidPhone);
+    expect(workContact.phone.error, PhoneContactError.invalidPhone);
   });
 
   test(
@@ -134,11 +139,11 @@ void main() {
     'editing a stored number that no longer parses validates the new text',
     () {
       final form = formFor(own: [legacyNumber], family: []);
-      final legacyRow = rowOf(form, legacyNumber.id);
+      final legacyContact = contactOf(form, legacyNumber.id);
 
-      legacyRow.phone.setValue('12');
+      legacyContact.phone.setValue('12');
 
-      expect(legacyRow.phone.error, PhoneContactError.invalidPhone);
+      expect(legacyContact.phone.error, PhoneContactError.invalidPhone);
     },
   );
 
@@ -153,36 +158,36 @@ void main() {
   test('a typed local number is handed back in E.164', () {
     final form = formFor();
 
-    rowOf(form, 'own-work').phone.setValue('01004444444');
+    contactOf(form, 'own-work').phone.setValue('01004444444');
 
     expect(form.ownContacts.last.phone, '+201004444444');
   });
 
   test('the same number twice on the person is a duplicate', () {
     final form = formFor()..add(const FreePhoneContactLabel(null));
-    final addedRow = rowOf(form, 'new-0');
+    final addedContact = contactOf(form, 'new-0');
 
-    addedRow.phone.setValue('01001111111');
+    addedContact.phone.setValue('01001111111');
 
-    expect(addedRow.phone.error, PhoneContactError.duplicatePhone);
+    expect(addedContact.phone.error, PhoneContactError.duplicatePhone);
   });
 
   test('a role number needs somewhere for the family to come from', () {
     canHaveFamilyNumbers = false;
     final form = formFor(own: [], family: [])
       ..add(const RolePhoneContactLabel(father));
-    final addedRow = rowOf(form, 'new-0');
+    final addedContact = contactOf(form, 'new-0');
 
-    addedRow.phone.setValue('01003333333');
+    addedContact.phone.setValue('01003333333');
 
-    expect(addedRow.phone.error, PhoneContactError.roleNeedsFamily);
+    expect(addedContact.phone.error, PhoneContactError.roleNeedsFamily);
   });
 
   test('choosing a family makes the role numbers valid', () {
     canHaveFamilyNumbers = false;
     final form = formFor(own: [], family: [])
       ..add(const RolePhoneContactLabel(father));
-    rowOf(form, 'new-0').phone.setValue('01003333333');
+    contactOf(form, 'new-0').phone.setValue('01003333333');
 
     canHaveFamilyNumbers = true;
     form.revalidateSync();
@@ -194,10 +199,10 @@ void main() {
     final form = formFor(own: [ownMain], family: [])
       ..importNumbers([(label: 'موبايل', number: '01001111111')]);
     await form.validate();
-    final twin = rowOf(form, 'new-0');
+    final twin = contactOf(form, 'new-0');
     expect(twin.phone.error, PhoneContactError.duplicatePhone);
 
-    form.remove(rowOf(form, ownMain.id));
+    form.remove(contactOf(form, ownMain.id));
 
     expect(twin.phone.error, isNull);
   });
@@ -208,13 +213,13 @@ void main() {
       canHaveFamilyNumbers = false;
       final form = formFor(own: [], family: [fatherNumber]);
       await form.validate();
-      final familyRow = rowOf(form, fatherNumber.contact.id);
-      expect(familyRow.phone.error, PhoneContactError.roleNeedsFamily);
+      final familyContact = contactOf(form, fatherNumber.contact.id);
+      expect(familyContact.phone.error, PhoneContactError.roleNeedsFamily);
 
       canHaveFamilyNumbers = true;
       form.revalidateAfterFamilyAvailabilityChanged();
 
-      expect(familyRow.phone.error, isNull);
+      expect(familyContact.phone.error, isNull);
     },
   );
 
@@ -224,11 +229,11 @@ void main() {
     () {
       canHaveFamilyNumbers = false;
       final form = formFor();
-      final workRow = rowOf(form, ownWork.id);
+      final workContact = contactOf(form, ownWork.id);
 
-      form.changeLabel(workRow, const RolePhoneContactLabel(father));
+      form.changeLabel(workContact, const RolePhoneContactLabel(father));
 
-      expect(workRow.phone.error, PhoneContactError.roleNeedsFamily);
+      expect(workContact.phone.error, PhoneContactError.roleNeedsFamily);
     },
   );
 
@@ -236,18 +241,18 @@ void main() {
     canHaveFamilyNumbers = false;
     final form = formFor(own: [], family: [])
       ..add(const FreePhoneContactLabel(null));
-    final blankRow = rowOf(form, 'new-0');
+    final blankContact = contactOf(form, 'new-0');
 
-    form.changeLabel(blankRow, const RolePhoneContactLabel(father));
+    form.changeLabel(blankContact, const RolePhoneContactLabel(father));
 
-    expect(blankRow.phone.error, isNull);
+    expect(blankContact.phone.error, isNull);
   });
 
   test('a new role number is handed back for that role', () {
     final form = formFor(own: [], family: [])
       ..add(const RolePhoneContactLabel(mother));
 
-    rowOf(form, 'new-0').phone.setValue('01005555555');
+    contactOf(form, 'new-0').phone.setValue('01005555555');
 
     expect(form.familyContacts, const [
       FamilyPhoneContact(
@@ -263,7 +268,7 @@ void main() {
     () {
       final form = formFor();
 
-      rowOf(form, 'father-number').phone.setValue('01007777777');
+      contactOf(form, 'father-number').phone.setValue('01007777777');
 
       expect(form.familyContacts, [
         fatherNumber.copyWith(
@@ -281,7 +286,7 @@ void main() {
         ..add(const RolePhoneContactLabel(mother))
         ..followFamily(saved: const []);
 
-      expect(form.rows.fieldValue.map((row) => row.key), [
+      expect(form.contacts.fieldValue.map((contact) => contact.key), [
         'own-main',
         'own-work',
         'new-0',
@@ -302,7 +307,7 @@ void main() {
     'number again',
     () {
       final form = formFor(own: [], family: [fatherNumber]);
-      form.remove(rowOf(form, fatherNumber.contact.id));
+      form.remove(contactOf(form, fatherNumber.contact.id));
       form
         ..followFamily(saved: const [])
         ..followFamily(saved: const [fatherNumber]);
@@ -328,7 +333,7 @@ void main() {
   test('removing a number leaves it out of what is handed back', () {
     final form = formFor();
 
-    form.remove(rowOf(form, 'own-work'));
+    form.remove(contactOf(form, 'own-work'));
 
     expect(form.ownContacts, [ownMain]);
   });
@@ -339,16 +344,16 @@ void main() {
     expect(form.value.wasModified, isFalse);
   });
 
-  test('adding a row makes the form modified', () {
+  test('adding a phone contact makes the form modified', () {
     final form = formFor()..add(const FreePhoneContactLabel(null));
 
     expect(form.value.wasModified, isTrue);
   });
 
-  test('removing the added row again leaves it unmodified', () {
+  test('removing the added phone contact again leaves it unmodified', () {
     final form = formFor()..add(const FreePhoneContactLabel(null));
 
-    form.remove(rowOf(form, 'new-0'));
+    form.remove(contactOf(form, 'new-0'));
 
     expect(form.value.wasModified, isFalse);
   });
@@ -356,7 +361,7 @@ void main() {
   test('typing into a saved number makes the form modified', () {
     final form = formFor();
 
-    rowOf(form, 'own-work').phone.setValue('01004444444');
+    contactOf(form, 'own-work').phone.setValue('01004444444');
 
     expect(form.value.wasModified, isTrue);
   });

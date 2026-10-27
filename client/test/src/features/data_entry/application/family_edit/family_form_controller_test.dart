@@ -103,7 +103,7 @@ void main() {
     const phone = '+201001111111';
 
     controller.phones.add(const RolePhoneContactLabel(father));
-    controller.phones.rows.fieldValue.single.phone.setValue(phone);
+    controller.phones.contacts.fieldValue.single.phone.setValue(phone);
 
     expect(
       controller.toObject().contacts.map(

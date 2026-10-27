@@ -196,7 +196,7 @@ void main() {
         Person(id: 'p', name: 'مينا', address: personAddress),
       );
       controller.phones.add(const RolePhoneContactLabel(father));
-      final number = controller.phones.rows.fieldValue.single.phone
+      final number = controller.phones.contacts.fieldValue.single.phone
         ..setValue('01003333333');
       expect(number.error, PhoneContactError.roleNeedsFamily);
 

@@ -230,7 +230,7 @@ void main() {
       const phone = '+201112345678';
 
       controller.phones.add(const FreePhoneContactLabel(null));
-      controller.phones.rows.fieldValue.last.phone.setValue(phone);
+      controller.phones.contacts.fieldValue.last.phone.setValue(phone);
 
       expect(controller.toPerson().contacts.map((contact) => contact.phone), [
         ...fullPerson.contacts.map((contact) => contact.phone),

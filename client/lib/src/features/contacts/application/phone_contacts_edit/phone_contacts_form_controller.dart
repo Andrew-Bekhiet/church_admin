@@ -11,40 +11,40 @@ class PhoneContactsFormController extends AdvancedFormController {
   final PhoneNumberService _phones;
   final String Function() _newKey;
   final bool Function() _canHaveFamilyNumbers;
-  final Map<String, PhoneContactRowFormController> _familyRowsById = {};
+  final Map<String, PhoneContactFormController> _familyContactsById = {};
 
   Set<String> _followedFamilyKeys;
 
   late final AdvancedFieldController<
-    List<PhoneContactRowFormController>,
+    List<PhoneContactFormController>,
     PhoneContactError
   >
-  rows;
+  contacts;
 
   bool get familyOnly => false;
 
   List<PhoneContact> get ownContacts => [
-    for (final row in rows.fieldValue)
-      if (row.e164 case final phone?)
-        if (row.label.fieldValue case FreePhoneContactLabel(:final text))
+    for (final contact in contacts.fieldValue)
+      if (contact.e164 case final phone?)
+        if (contact.label.fieldValue case FreePhoneContactLabel(:final text))
           PhoneContact(
-            id: row.key,
+            id: contact.key,
             phone: phone,
             label: (text?.trim().isEmpty ?? true) ? null : text?.trim(),
-            isMainPhone: row.isMainPhone.fieldValue,
+            isMainPhone: contact.isMainPhone.fieldValue,
           ),
   ];
 
   List<FamilyPhoneContact> get familyContacts => [
-    for (final row in rows.fieldValue)
-      if (row.e164 case final phone?)
-        if (row.label.fieldValue case RolePhoneContactLabel(:final role))
-          switch (row.savedRelative) {
+    for (final contact in contacts.fieldValue)
+      if (contact.e164 case final phone?)
+        if (contact.label.fieldValue case RolePhoneContactLabel(:final role))
+          switch (contact.savedRelative) {
             final saved? when saved.role.id == role.id => saved.copyWith(
               contact: saved.contact.copyWith(phone: phone),
             ),
             _ => FamilyPhoneContact(
-              contact: PhoneContact(id: row.key, phone: phone),
+              contact: PhoneContact(id: contact.key, phone: phone),
               role: role,
             ),
           },
@@ -61,40 +61,40 @@ class PhoneContactsFormController extends AdvancedFormController {
        _canHaveFamilyNumbers = canHaveFamilyNumbers ?? _always,
        _followedFamilyKeys = {for (final f in family) f.contact.id},
        super(debugName: 'phones', validateAll: true) {
-    rows = AdvancedFieldController(
+    contacts = AdvancedFieldController(
       initialValue: [
         for (final contact in own)
-          _attachedRow(
+          _attachedContact(
             key: contact.id,
             input: phones.toDisplay(contact.phone),
             label: FreePhoneContactLabel(contact.label),
             isMainPhone: contact.isMainPhone,
             storedPhone: contact.phone,
           ),
-        ...family.map(_followedFamilyRowOf),
+        ...family.map(_followedFamilyContactOf),
       ],
     );
-    registerFields([rows]);
-    onValuesChanged.addListener(_recheckRowsEditedOrShowingAnError);
+    registerFields([contacts]);
+    onValuesChanged.addListener(_recheckContactsEditedOrShowingAnError);
   }
 
-  void add(PhoneContactLabel label) => rows.setValue([
-    ...rows.fieldValue,
-    _attachedRow(
+  void add(PhoneContactLabel label) => contacts.setValue([
+    ...contacts.fieldValue,
+    _attachedContact(
       key: _newKey(),
       input: '',
       label: label,
       isMainPhone:
           label is FreePhoneContactLabel &&
-          rows.fieldValue.none((row) => row.isMainPhone.fieldValue),
+          contacts.fieldValue.none((contact) => contact.isMainPhone.fieldValue),
     ),
   ]);
 
   void importNumbers(Iterable<({String label, String number})> numbers) =>
-      rows.setValue([
-        ...rows.fieldValue,
+      contacts.setValue([
+        ...contacts.fieldValue,
         for (final number in numbers)
-          _attachedRow(
+          _attachedContact(
             key: _newKey(),
             input: number.number,
             label: FreePhoneContactLabel(number.label),
@@ -102,62 +102,67 @@ class PhoneContactsFormController extends AdvancedFormController {
           ),
       ]);
 
-  void remove(PhoneContactRowFormController row) {
-    rows.setValue(rows.fieldValue.whereNot((other) => other == row).toList());
-    removeSubform(row);
-    _familyRowsById.removeWhere((_, cached) => cached == row);
-    row.dispose();
+  void remove(PhoneContactFormController contact) {
+    contacts.setValue(
+      contacts.fieldValue.whereNot((other) => other == contact).toList(),
+    );
+    removeSubform(contact);
+    _familyContactsById.removeWhere((_, cached) => cached == contact);
+    contact.dispose();
   }
 
-  void toggleMain(PhoneContactRowFormController row) {
-    if (!row.canBeMain) return;
+  void toggleMain(PhoneContactFormController contact) {
+    if (!contact.canBeMain) return;
 
-    final becomesMain = !row.isMainPhone.fieldValue;
-    for (final other in rows.fieldValue) {
+    final becomesMain = !contact.isMainPhone.fieldValue;
+    for (final other in contacts.fieldValue) {
       other.isMainPhone.setValue(
-        other == row
+        other == contact
             ? becomesMain
             : other.isMainPhone.fieldValue && !becomesMain,
       );
     }
   }
 
-  void changeLabel(PhoneContactRowFormController row, PhoneContactLabel label) {
-    row.label.setValue(label);
-    row.isMainPhone.setValue(
-      label is FreePhoneContactLabel && row.isMainPhone.fieldValue,
+  void changeLabel(
+    PhoneContactFormController contact,
+    PhoneContactLabel label,
+  ) {
+    contact.label.setValue(label);
+    contact.isMainPhone.setValue(
+      label is FreePhoneContactLabel && contact.isMainPhone.fieldValue,
     );
-    _validateIfFilledIn(row);
+    _validateIfFilledIn(contact);
   }
 
   void revalidateAfterFamilyAvailabilityChanged() =>
-      _recheckRowsEditedOrShowingAnError();
+      _recheckContactsEditedOrShowingAnError();
 
   void followFamily({required List<FamilyPhoneContact> saved}) {
-    final cachedBefore = _familyRowsById.values.toList();
-    final dropped = rows.fieldValue
-        .where((row) => _followedFamilyKeys.contains(row.key))
+    final cachedBefore = _familyContactsById.values.toList();
+    final dropped = contacts.fieldValue
+        .where((contact) => _followedFamilyKeys.contains(contact.key))
         .toList();
     _followedFamilyKeys = {for (final f in saved) f.contact.id};
-    final followed = saved.map(_followedFamilyRowOf).toList();
-    final cachedNow = _familyRowsById.values.toSet();
+    final followed = saved.map(_followedFamilyContactOf).toList();
+    final cachedNow = _familyContactsById.values.toSet();
     final replaced = cachedBefore.whereNot(cachedNow.contains);
 
-    rows.prefill([
-      ...rows.fieldValue.whereNot(dropped.contains),
+    contacts.prefill([
+      ...contacts.fieldValue.whereNot(dropped.contains),
       ...followed,
     ]);
 
     final detached = [...dropped, ...replaced].whereNot(followed.contains);
     detached.toList()
       ..forEach(removeSubform)
-      ..whereNot(cachedNow.contains).forEach((row) => row.dispose());
+      ..whereNot(cachedNow.contains).forEach((contact) => contact.dispose());
   }
 
-  PhoneContactRowFormController _followedFamilyRowOf(
+  PhoneContactFormController _followedFamilyContactOf(
     FamilyPhoneContact saved,
   ) {
-    final cached = _familyRowsById[saved.contact.id];
+    final cached = _familyContactsById[saved.contact.id];
     if (cached != null && cached.savedRelative == saved) {
       cached.resetAll();
       addSubform(cached);
@@ -165,7 +170,7 @@ class PhoneContactsFormController extends AdvancedFormController {
       return cached;
     }
 
-    return _familyRowsById[saved.contact.id] = _attachedRow(
+    return _familyContactsById[saved.contact.id] = _attachedContact(
       key: saved.contact.id,
       input: _phones.toDisplay(saved.contact.phone),
       label: RolePhoneContactLabel(saved.role),
@@ -175,7 +180,7 @@ class PhoneContactsFormController extends AdvancedFormController {
     );
   }
 
-  PhoneContactRowFormController _attachedRow({
+  PhoneContactFormController _attachedContact({
     required String key,
     required String input,
     required PhoneContactLabel label,
@@ -183,7 +188,7 @@ class PhoneContactsFormController extends AdvancedFormController {
     FamilyPhoneContact? savedRelative,
     String? storedPhone,
   }) {
-    final row = PhoneContactRowFormController(
+    final contact = PhoneContactFormController(
       key: key,
       initialInput: input,
       initialLabel: label,
@@ -194,36 +199,36 @@ class PhoneContactsFormController extends AdvancedFormController {
       savedRelative: savedRelative,
       storedPhone: storedPhone,
     );
-    addSubform(row);
+    addSubform(contact);
 
-    return row;
+    return contact;
   }
 
-  bool _isDuplicate(PhoneContactRowFormController row) {
-    final firstWithSameNumber = rows.fieldValue.firstWhereOrNull(
-      row.isSameNumberAs,
+  bool _isDuplicate(PhoneContactFormController contact) {
+    final firstWithSameNumber = contacts.fieldValue.firstWhereOrNull(
+      contact.isSameNumberAs,
     );
 
-    return firstWithSameNumber != null && firstWithSameNumber != row;
+    return firstWithSameNumber != null && firstWithSameNumber != contact;
   }
 
-  void _recheckRowsEditedOrShowingAnError() {
-    for (final row in rows.fieldValue) {
-      if (row.phone.error == null && !row.value.wasModified) continue;
+  void _recheckContactsEditedOrShowingAnError() {
+    for (final contact in contacts.fieldValue) {
+      if (contact.phone.error == null && !contact.value.wasModified) continue;
 
-      _validateIfFilledIn(row);
+      _validateIfFilledIn(contact);
     }
   }
 
-  void _validateIfFilledIn(PhoneContactRowFormController row) {
-    if (row.phone.fieldValue.trim().isEmpty) return;
+  void _validateIfFilledIn(PhoneContactFormController contact) {
+    if (contact.phone.fieldValue.trim().isEmpty) return;
 
-    unawaited(row.phone.validate());
+    unawaited(contact.phone.validate());
   }
 
   @override
   void dispose() {
-    onValuesChanged.removeListener(_recheckRowsEditedOrShowingAnError);
+    onValuesChanged.removeListener(_recheckContactsEditedOrShowingAnError);
     super.dispose();
   }
 }
