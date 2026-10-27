@@ -77,12 +77,12 @@ void main() {
     await pumpEditor(tester);
 
     await tester.tap(
-      find.byKey(PhoneContactFieldKeys.mainChip('own-work')),
+      find.byKey(PhoneContactFieldKeys.mainChip(ownWork.id)),
     );
     await tester.pump();
 
     expect(
-      (isMain(tester, 'own-work'), isMain(tester, 'own-main')),
+      (isMain(tester, ownWork.id), isMain(tester, ownMain.id)),
       (
         true,
         false,
@@ -98,7 +98,7 @@ void main() {
     await tester.tap(find.byKey(FamilyPhoneContactMenuButtonKeys.button));
     await tester.pumpAndSettle();
     await tester.tap(
-      find.byKey(FamilyPhoneContactMenuButtonKeys.roleItem('father')),
+      find.byKey(FamilyPhoneContactMenuButtonKeys.roleItem(father.id)),
     );
     await tester.pumpAndSettle();
 
@@ -114,16 +114,16 @@ void main() {
     await pumpEditor(tester);
 
     await tester.tap(
-      find.byKey(PhoneContactFieldKeys.labelPicker('own-work')),
+      find.byKey(PhoneContactFieldKeys.labelPicker(ownWork.id)),
     );
     await tester.pumpAndSettle();
     await tester.tap(
-      find.byKey(PhoneContactLabelPickerKeys.roleItem('mother')),
+      find.byKey(PhoneContactLabelPickerKeys.roleItem(mother.id)),
     );
     await tester.pumpAndSettle();
 
     expect(
-      find.byKey(PhoneContactFieldKeys.mainChip('own-work')),
+      find.byKey(PhoneContactFieldKeys.mainChip(ownWork.id)),
       findsNothing,
     );
   });
@@ -155,7 +155,7 @@ void main() {
     final form = await pumpEditor(tester);
 
     await tester.enterText(
-      find.byKey(PhoneContactFieldKeys.phoneField('own-work')),
+      find.byKey(PhoneContactFieldKeys.phoneField(ownWork.id)),
       '0100',
     );
     await form.validate();
@@ -176,7 +176,7 @@ void main() {
     await pumpEditor(tester);
 
     await tester.enterText(
-      find.byKey(PhoneContactFieldKeys.phoneField('own-work')),
+      find.byKey(PhoneContactFieldKeys.phoneField(ownWork.id)),
       '0100',
     );
     await tester.pump();

@@ -160,7 +160,7 @@ void main() {
       controller.work.job.setValue(newJob);
 
       expect(controller.toPerson().job, newJob);
-      expect(controller.toPerson().jobId, 'new-job');
+      expect(controller.toPerson().jobId, newJob.id);
     });
 
     test('carry the study year order as its id', () {

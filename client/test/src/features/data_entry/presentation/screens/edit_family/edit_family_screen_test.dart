@@ -27,6 +27,7 @@ void main() {
   );
 
   late EditObjectScreenHarness harness;
+  final savedContactId = storedFamily.contacts.single.contact.id;
 
   Finder phoneField(String draftKey) =>
       find.byKey(PhoneContactFieldKeys.phoneField(draftKey));
@@ -118,8 +119,8 @@ void main() {
   group('an invalid number', () {
     Future<void> typeIncompleteNumberAndSave(WidgetTester tester) async {
       await openStoredFamily(tester);
-      await harness.scrollTo(tester, phoneField('family-saved'));
-      await tester.enterText(phoneField('family-saved'), '0100');
+      await harness.scrollTo(tester, phoneField(savedContactId));
+      await tester.enterText(phoneField(savedContactId), '0100');
       await saveAndSettle(tester);
     }
 
@@ -144,8 +145,8 @@ void main() {
       final gate = harness.familiesDAO.relatedFamiliesGate = Completer<void>();
       await openStoredFamily(tester, settle: false);
 
-      await harness.scrollTo(tester, phoneField('family-saved'));
-      await tester.enterText(phoneField('family-saved'), otherValidInput);
+      await harness.scrollTo(tester, phoneField(savedContactId));
+      await tester.enterText(phoneField(savedContactId), otherValidInput);
       gate.complete();
       await tester.pumpAndSettle();
       await saveAndSettle(tester);
@@ -178,8 +179,8 @@ void main() {
     ) async {
       await openStoredFamily(tester);
 
-      await harness.scrollTo(tester, phoneField('family-saved'));
-      await tester.enterText(phoneField('family-saved'), '0100');
+      await harness.scrollTo(tester, phoneField(savedContactId));
+      await tester.enterText(phoneField(savedContactId), '0100');
       await harness.pressBack(tester);
 
       expect(find.byType(DiscardChangesDialog), findsOneWidget);
@@ -189,8 +190,8 @@ void main() {
         'discard', (tester) async {
       await openStoredFamily(tester);
 
-      await harness.scrollTo(tester, phoneField('family-saved'));
-      await tester.enterText(phoneField('family-saved'), otherValidInput);
+      await harness.scrollTo(tester, phoneField(savedContactId));
+      await tester.enterText(phoneField(savedContactId), otherValidInput);
       await harness.pressBack(tester);
 
       expect(find.byType(DiscardChangesDialog), findsOneWidget);

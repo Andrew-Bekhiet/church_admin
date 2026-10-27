@@ -27,6 +27,10 @@ void main() {
     personId: 'the-father',
   );
 
+  String newKeyAt(int index) => 'new-$index';
+
+  const importedLabel = 'موبايل';
+
   var nextKey = 0;
   var canHaveFamilyNumbers = true;
 
@@ -38,7 +42,7 @@ void main() {
       own: own,
       family: family,
       canHaveFamilyNumbers: () => canHaveFamilyNumbers,
-      newKey: () => 'new-${nextKey++}',
+      newKey: () => newKeyAt(nextKey++),
     )..setValidationMode(ValidationMode.onUserInteraction);
     addTearDown(form.dispose);
 
@@ -63,9 +67,9 @@ void main() {
         (contact) => (contact.key, contact.label.fieldValue),
       ),
       [
-        ('own-main', const FreePhoneContactLabel(null)),
-        ('own-work', const FreePhoneContactLabel('عمل')),
-        ('father-number', const RolePhoneContactLabel(father)),
+        (ownMain.id, FreePhoneContactLabel(ownMain.label)),
+        (ownWork.id, FreePhoneContactLabel(ownWork.label)),
+        (fatherNumber.contact.id, RolePhoneContactLabel(fatherNumber.role)),
       ],
     );
   });
@@ -87,20 +91,20 @@ void main() {
   test('marking a number as main unmarks the previous main', () {
     final form = formFor();
 
-    form.toggleMain(contactOf(form, 'own-work'));
+    form.toggleMain(contactOf(form, ownWork.id));
 
     expect(
       form.ownContacts.map((contact) => (contact.id, contact.isMainPhone)),
       [
-        ('own-main', false),
-        ('own-work', true),
+        (ownMain.id, false),
+        (ownWork.id, true),
       ],
     );
   });
 
   test('a family number cannot be marked as main', () {
     final form = formFor();
-    final familyContact = contactOf(form, 'father-number');
+    final familyContact = contactOf(form, fatherNumber.contact.id);
 
     form.toggleMain(familyContact);
 
@@ -109,7 +113,7 @@ void main() {
 
   test('labelling the main number with a role unmarks it', () {
     final form = formFor();
-    final mainContact = contactOf(form, 'own-main');
+    final mainContact = contactOf(form, ownMain.id);
 
     form.changeLabel(mainContact, const RolePhoneContactLabel(mother));
 
@@ -118,7 +122,7 @@ void main() {
 
   test('a typed number that is not a phone number is invalid', () {
     final form = formFor();
-    final workContact = contactOf(form, 'own-work');
+    final workContact = contactOf(form, ownWork.id);
 
     workContact.phone.setValue('12');
 
@@ -158,14 +162,14 @@ void main() {
   test('a typed local number is handed back in E.164', () {
     final form = formFor();
 
-    contactOf(form, 'own-work').phone.setValue('01004444444');
+    contactOf(form, ownWork.id).phone.setValue('01004444444');
 
     expect(form.ownContacts.last.phone, '+201004444444');
   });
 
   test('the same number twice on the person is a duplicate', () {
     final form = formFor()..add(const FreePhoneContactLabel(null));
-    final addedContact = contactOf(form, 'new-0');
+    final addedContact = contactOf(form, newKeyAt(0));
 
     addedContact.phone.setValue('01001111111');
 
@@ -176,7 +180,7 @@ void main() {
     canHaveFamilyNumbers = false;
     final form = formFor(own: [], family: [])
       ..add(const RolePhoneContactLabel(father));
-    final addedContact = contactOf(form, 'new-0');
+    final addedContact = contactOf(form, newKeyAt(0));
 
     addedContact.phone.setValue('01003333333');
 
@@ -187,7 +191,7 @@ void main() {
     canHaveFamilyNumbers = false;
     final form = formFor(own: [], family: [])
       ..add(const RolePhoneContactLabel(father));
-    contactOf(form, 'new-0').phone.setValue('01003333333');
+    contactOf(form, newKeyAt(0)).phone.setValue('01003333333');
 
     canHaveFamilyNumbers = true;
     form.revalidateSync();
@@ -197,9 +201,9 @@ void main() {
 
   test('removing a duplicate clears the error on its twin', () async {
     final form = formFor(own: [ownMain], family: [])
-      ..importNumbers([(label: 'موبايل', number: '01001111111')]);
+      ..importNumbers([(label: importedLabel, number: '01001111111')]);
     await form.validate();
-    final twin = contactOf(form, 'new-0');
+    final twin = contactOf(form, newKeyAt(0));
     expect(twin.phone.error, PhoneContactError.duplicatePhone);
 
     form.remove(contactOf(form, ownMain.id));
@@ -241,7 +245,7 @@ void main() {
     canHaveFamilyNumbers = false;
     final form = formFor(own: [], family: [])
       ..add(const FreePhoneContactLabel(null));
-    final blankContact = contactOf(form, 'new-0');
+    final blankContact = contactOf(form, newKeyAt(0));
 
     form.changeLabel(blankContact, const RolePhoneContactLabel(father));
 
@@ -252,11 +256,11 @@ void main() {
     final form = formFor(own: [], family: [])
       ..add(const RolePhoneContactLabel(mother));
 
-    contactOf(form, 'new-0').phone.setValue('01005555555');
+    contactOf(form, newKeyAt(0)).phone.setValue('01005555555');
 
-    expect(form.familyContacts, const [
+    expect(form.familyContacts, [
       FamilyPhoneContact(
-        contact: PhoneContact(id: 'new-0', phone: '+201005555555'),
+        contact: PhoneContact(id: newKeyAt(0), phone: '+201005555555'),
         role: mother,
       ),
     ]);
@@ -268,7 +272,7 @@ void main() {
     () {
       final form = formFor();
 
-      contactOf(form, 'father-number').phone.setValue('01007777777');
+      contactOf(form, fatherNumber.contact.id).phone.setValue('01007777777');
 
       expect(form.familyContacts, [
         fatherNumber.copyWith(
@@ -287,9 +291,9 @@ void main() {
         ..followFamily(saved: const []);
 
       expect(form.contacts.fieldValue.map((contact) => contact.key), [
-        'own-main',
-        'own-work',
-        'new-0',
+        ownMain.id,
+        ownWork.id,
+        newKeyAt(0),
       ]);
     },
   );
@@ -318,14 +322,14 @@ void main() {
 
   test('numbers imported from a device contact keep their labels', () {
     final form = formFor()
-      ..importNumbers([(label: 'موبايل', number: '01007777777')]);
+      ..importNumbers([(label: importedLabel, number: '01007777777')]);
 
     expect(
       form.ownContacts.last,
-      const PhoneContact(
-        id: 'new-0',
+      PhoneContact(
+        id: newKeyAt(0),
         phone: '+201007777777',
-        label: 'موبايل',
+        label: importedLabel,
       ),
     );
   });
@@ -333,7 +337,7 @@ void main() {
   test('removing a number leaves it out of what is handed back', () {
     final form = formFor();
 
-    form.remove(contactOf(form, 'own-work'));
+    form.remove(contactOf(form, ownWork.id));
 
     expect(form.ownContacts, [ownMain]);
   });
@@ -353,7 +357,7 @@ void main() {
   test('removing the added phone contact again leaves it unmodified', () {
     final form = formFor()..add(const FreePhoneContactLabel(null));
 
-    form.remove(contactOf(form, 'new-0'));
+    form.remove(contactOf(form, newKeyAt(0)));
 
     expect(form.value.wasModified, isFalse);
   });
@@ -361,7 +365,7 @@ void main() {
   test('typing into a saved number makes the form modified', () {
     final form = formFor();
 
-    contactOf(form, 'own-work').phone.setValue('01004444444');
+    contactOf(form, ownWork.id).phone.setValue('01004444444');
 
     expect(form.value.wasModified, isTrue);
   });

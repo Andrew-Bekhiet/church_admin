@@ -42,8 +42,8 @@ void main() {
       'to discard', (tester) async {
     await openPerson(tester);
 
-    await harness.scrollTo(tester, phoneField('saved'));
-    await tester.enterText(phoneField('saved'), otherValidInput);
+    await harness.scrollTo(tester, phoneField(savedNumber.id));
+    await tester.enterText(phoneField(savedNumber.id), otherValidInput);
     await harness.pressBack(tester);
 
     expect(find.text(discardDialogTitle), findsOneWidget);
@@ -54,8 +54,8 @@ void main() {
   ) async {
     await openPerson(tester);
 
-    await harness.scrollTo(tester, phoneField('saved'));
-    await tester.enterText(phoneField('saved'), incompleteInput);
+    await harness.scrollTo(tester, phoneField(savedNumber.id));
+    await tester.enterText(phoneField(savedNumber.id), incompleteInput);
     await harness.pressBack(tester);
 
     expect(find.text(discardDialogTitle), findsOneWidget);
@@ -92,7 +92,7 @@ void main() {
         (widget) => switch (widget.key) {
           ValueKey<String>(:final value) =>
             value.startsWith('phone_contacts_editor_phone_') &&
-                !value.endsWith('_saved'),
+                !value.endsWith('_${savedNumber.id}'),
           _ => false,
         },
       );
@@ -108,7 +108,9 @@ void main() {
   ) async {
     await openPerson(tester);
 
-    final remove = find.byKey(PhoneContactFieldKeys.removeButton('saved'));
+    final remove = find.byKey(
+      PhoneContactFieldKeys.removeButton(savedNumber.id),
+    );
     await harness.scrollTo(tester, remove);
     await tester.tap(remove);
     await tester.pumpAndSettle();
@@ -122,12 +124,12 @@ void main() {
     await openPerson(tester, membershipsLoaded: false);
 
     await tester.scrollUntilVisible(
-      phoneField('saved'),
+      phoneField(savedNumber.id),
       100,
       scrollable: find.byType(Scrollable).first,
     );
     await tester.pump();
-    await tester.enterText(phoneField('saved'), otherValidInput);
+    await tester.enterText(phoneField(savedNumber.id), otherValidInput);
     harness.persons.respondWithSavedMemberships(null);
     await tester.pumpAndSettle();
     await harness.pressBack(tester);
@@ -140,9 +142,9 @@ void main() {
   ) async {
     await openPerson(tester);
 
-    await harness.scrollTo(tester, phoneField('saved'));
-    await tester.enterText(phoneField('saved'), otherValidInput);
-    await tester.enterText(phoneField('saved'), savedInput);
+    await harness.scrollTo(tester, phoneField(savedNumber.id));
+    await tester.enterText(phoneField(savedNumber.id), otherValidInput);
+    await tester.enterText(phoneField(savedNumber.id), savedInput);
     await harness.pressBack(tester);
 
     expect(find.text(discardDialogTitle), findsNothing);
