@@ -88,14 +88,11 @@ void main() {
       );
       await tester.tap(find.byKey(PhoneContactsEditorKeys.addButton));
       await tester.pumpAndSettle();
-      final newField = find.byWidgetPredicate(
-        (widget) => switch (widget.key) {
-          ValueKey<String>(:final value) =>
-            value.startsWith('phone_contacts_editor_phone_') &&
-                !value.endsWith('_${savedNumber.id}'),
-          _ => false,
-        },
-      );
+      final newContact = tester
+          .widgetList<PhoneContactField>(find.byType(PhoneContactField))
+          .singleWhere((field) => field.contact.key != savedNumber.id)
+          .contact;
+      final newField = phoneField(newContact.key);
       await tester.enterText(newField, incompleteInput);
       await harness.pressBack(tester);
 

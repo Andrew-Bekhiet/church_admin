@@ -72,6 +72,14 @@ void main() {
     test('an invalid number cannot be stored', () {
       expect(unit.toE164('0100'), isNull);
     });
+
+    test('a blank number cannot be stored', () {
+      expect(unit.toE164(''), isNull);
+    });
+
+    test('text with no digits cannot be stored', () {
+      expect(unit.toE164('abc'), isNull);
+    });
   });
 
   group('showing a stored number', () {
