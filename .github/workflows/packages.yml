@@ -32,13 +32,13 @@ jobs:
       packages: ${{ steps.find.outputs.packages }}
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           sparse-checkout: packages
 
-      - name: List packages that have a test directory
+      - name: 📋 List packages that have a test directory
         id: find
         run: |
           set -o pipefail
@@ -62,16 +62,16 @@ jobs:
         working-directory: packages/${{ matrix.package }}
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
-      - name: Setup Flutter
+      - name: 💙 Setup Flutter
         uses: ./.github/actions/setup-flutter
 
-      - name: Install dependencies (standalone resolution, newest analyzer the constraints allow)
+      - name: 📦 Install dependencies (standalone resolution, newest analyzer the constraints allow)
         run: dart pub get
 
-      - name: Run tests
+      - name: 🧪 Run tests
         run: dart test

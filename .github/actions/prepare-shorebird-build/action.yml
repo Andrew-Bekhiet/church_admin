@@ -9,16 +9,16 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Setup Flutter
+    - name: 💙 Setup Flutter
       id: setup-flutter
       uses: ./.github/actions/setup-flutter
 
-    - name: Install dependencies
+    - name: 📦 Install dependencies
       shell: bash
       working-directory: client
       run: flutter pub get
 
-    - name: Run new builder
+    - name: ⚙️ Run new builder
       shell: bash
       working-directory: client
       run: rm -r lib/src/core/graphql/__generated__/; dart run build_runner build && ./scripts/split_schema_graphql_dart.sh
@@ -28,6 +28,6 @@ runs:
       with:
         cache: true
 
-    - name: Populate the Flutter tool's cache of binary artifacts
+    - name: 📦 Populate the Flutter tool's cache of binary artifacts
       shell: bash
       run: flutter precache

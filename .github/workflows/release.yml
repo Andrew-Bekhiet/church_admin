@@ -32,7 +32,7 @@ jobs:
       version: ${{ steps.get-version.outputs.version }}
 
     steps:
-      - name: Get version from tag
+      - name: 🏷️ Get version from tag
         id: get-version
         working-directory: .
         run: |
@@ -45,7 +45,7 @@ jobs:
           VERSION=${VERSION#v}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Validate semantic version
+      - name: ✅ Validate semantic version
         working-directory: .
         run: |
           VERSION="${{ steps.get-version.outputs.version }}"
@@ -68,13 +68,13 @@ jobs:
       VERSION: ${{ needs.validate-tag.outputs.version }}
 
     steps:
-      - name: Mask log values
+      - name: 🙈 Mask log values
         env:
           LOG_MASK_VALUES: ${{ secrets.LOG_MASK_VALUES }}
         working-directory: .
         run: while IFS= read -r v; do if [ -n "$v" ]; then echo "::add-mask::$v"; fi; done <<< "$LOG_MASK_VALUES"
 
-      - name: Free up disk space
+      - name: 🧹 Free up disk space
         working-directory: .
         run: |
           # Space usage before cleanup
@@ -90,23 +90,23 @@ jobs:
           # Verify gains
           df -h /
 
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 1
 
-      - name: Prepare Shorebird build
+      - name: 🛠️ Prepare Shorebird build
         id: prepare
         uses: ./.github/actions/prepare-shorebird-build
 
-      - name: Set Up Java
+      - name: ☕ Set Up Java
         uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
         with:
           cache: "gradle"
           distribution: "temurin"
           java-version: "17"
 
-      - name: Decode and save android secrets
+      - name: 🔓 Decode and save android secrets
         env:
           ANDROID_SIGNING_KEY: ${{ secrets.ANDROID_SIGNING_KEY }}
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
@@ -116,7 +116,7 @@ jobs:
           echo $GOOGLE_SERVICES_JSON | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/google-services.json
           echo $ANDROID_KEYSTORE_PROPERTIES | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/releaseKey.properties
 
-      - name: Decode app production environment
+      - name: 🔓 Decode app production environment
         env:
           APP_PROD_ENV_FILE: ${{ secrets.APP_PROD_ENV_FILE }}
         run: echo "$APP_PROD_ENV_FILE" | base64 -d > .env
@@ -132,11 +132,11 @@ jobs:
           args: --artifact=apk
             --dart-define-from-file=.env
 
-      - name: Delete app production environment
+      - name: 🗑️ Delete app production environment
         if: ${{ always() }}
         run: rm -f .env
 
-      - name: Authenticate with Google Play
+      - name: 🔑 Authenticate with Google Play
         id: play-auth
         uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093" # v3.0.0
         with:
@@ -147,7 +147,7 @@ jobs:
           create_credentials_file: false
           export_environment_variables: false
 
-      - name: Publish to Google Play
+      - name: 📤 Publish to Google Play
         env:
           GOOGLE_PLAY_ACCESS_TOKEN: ${{ steps.play-auth.outputs.access_token }}
         run: |
@@ -156,22 +156,22 @@ jobs:
             build/app/outputs/bundle/release/app-release.aab \
             production
 
-      - name: Add version to APK filename
+      - name: 🏷️ Add version to APK filename
         run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app-release-v$VERSION.apk
 
-      - name: Authenticate with Google Cloud
+      - name: 🔑 Authenticate with Google Cloud
         uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093" # v3.0.0
         with:
           workload_identity_provider: ${{ secrets.GCP_RELEASE_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_APP_RELEASE_UPLOADER_SERVICE_ACCOUNT }}
 
-      - name: Upload APK to Google Cloud Storage
+      - name: ☁️ Upload APK to Google Cloud Storage
         uses: "google-github-actions/upload-cloud-storage@6397bd7208e18d13ba2619ee21b9873edc94427a" # v3.0.0
         with:
           path: "client/build/app/outputs/flutter-apk/app-release-v${{ env.VERSION }}.apk"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
-      - name: Create release
+      - name: 🎉 Create release
         uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -190,28 +190,28 @@ jobs:
       VERSION: ${{ needs.validate-tag.outputs.version }}
 
     steps:
-      - name: Mask log values
+      - name: 🙈 Mask log values
         env:
           LOG_MASK_VALUES: ${{ secrets.LOG_MASK_VALUES }}
         working-directory: .
         run: while IFS= read -r v; do if [ -n "$v" ]; then echo "::add-mask::$v"; fi; done <<< "$LOG_MASK_VALUES"
 
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 1
 
-      - name: Prepare Shorebird build
+      - name: 🛠️ Prepare Shorebird build
         id: prepare
         uses: ./.github/actions/prepare-shorebird-build
 
-      - name: Install Codemagic CLI tools
+      - name: 📦 Install Codemagic CLI tools
         run: pip install codemagic-cli-tools
 
-      - name: Set up keychain
+      - name: 🔐 Set up keychain
         run: keychain initialize
 
-      - name: Fetch signing files
+      - name: 🔏 Fetch signing files
         env:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
@@ -224,18 +224,18 @@ jobs:
           --type IOS_APP_STORE \
           --create
 
-      - name: Set up signing certificate
+      - name: 🔏 Set up signing certificate
         run: keychain add-certificates
 
-      - name: Set up code signing settings on Xcode project
+      - name: 🔏 Set up code signing settings on Xcode project
         run: xcode-project use-profiles --export-options-plist=${{ runner.temp }}/export_options.plist
 
-      - name: Set Up latest stable Xcode version
+      - name: 🍎 Set Up latest stable Xcode version
         uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1
         with:
           xcode-version: latest-stable
 
-      - name: Decode app production environment
+      - name: 🔓 Decode app production environment
         env:
           APP_PROD_ENV_FILE: ${{ secrets.APP_PROD_ENV_FILE }}
         run: echo "$APP_PROD_ENV_FILE" | base64 -d > .env
@@ -252,11 +252,11 @@ jobs:
             --export-options-plist=${{ runner.temp }}/export_options.plist
             --dart-define-from-file=.env
 
-      - name: Delete app production environment
+      - name: 🗑️ Delete app production environment
         if: ${{ always() }}
         run: rm -f .env
 
-      - name: Publish the app to App Store Connect
+      - name: 📤 Publish the app to App Store Connect
         env:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
@@ -265,16 +265,16 @@ jobs:
           APP_STORE_APPLE_ID: ${{ secrets.APP_STORE_APPLE_ID }}
         run: app-store-connect publish --path "$(find $(pwd) -name "*.ipa")"
 
-      - name: Add version to ipa filename
+      - name: 🏷️ Add version to ipa filename
         run: mv build/ios/ipa/churchAdmin.ipa build/ios/ipa/app-release-v$VERSION.ipa
 
-      - name: Authenticate with Google Cloud
+      - name: 🔑 Authenticate with Google Cloud
         uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093" # v3.0.0
         with:
           workload_identity_provider: ${{ secrets.GCP_RELEASE_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_APP_RELEASE_UPLOADER_SERVICE_ACCOUNT }}
 
-      - name: Upload ipa to Google Cloud Storage
+      - name: ☁️ Upload ipa to Google Cloud Storage
         uses: "google-github-actions/upload-cloud-storage@6397bd7208e18d13ba2619ee21b9873edc94427a" # v3.0.0
         with:
           path: "client/build/ios/ipa/app-release-v${{ env.VERSION }}.ipa"

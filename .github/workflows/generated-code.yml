@@ -57,19 +57,19 @@ jobs:
       contents: read
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 2
 
-      - name: Check client schema.graphql matches the Hasura schema built from this commit's migrations and metadata
+      - name: 🔍 Check client schema.graphql matches the Hasura schema built from this commit's migrations and metadata
         run: client/scripts/check_graphql_schema.sh
 
-      - name: Setup Flutter
+      - name: 💙 Setup Flutter
         uses: ./.github/actions/setup-flutter
 
-      - name: Install client dependencies
+      - name: 📦 Install client dependencies
         run: flutter pub get --directory client
 
-      - name: Check committed build_runner outputs match a fresh build (changed files on PRs, everything on master)
+      - name: 🔍 Check committed build_runner outputs match a fresh build (changed files on PRs, everything on master)
         run: client/scripts/check_generated_code.sh ${{ github.event_name == 'pull_request' && 'HEAD^1' || '' }}
