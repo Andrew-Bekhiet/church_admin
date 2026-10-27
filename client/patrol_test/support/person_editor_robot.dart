@@ -114,12 +114,12 @@ class PersonEditorRobot {
     required String roleId,
     required String phone,
   }) async {
-    final draftOfRole = find.byWidgetPredicate(
+    final contactOfRole = find.byWidgetPredicate(
       (widget) => switch (widget) {
-        PhoneContactDraftField(
-          draft: PhoneContactDraft(label: RolePhoneContactLabel(:final role)),
-        ) =>
-          role.id == roleId,
+        PhoneContactField(:final contact) => switch (contact.label.fieldValue) {
+          RolePhoneContactLabel(:final role) => role.id == roleId,
+          _ => false,
+        },
         _ => false,
       },
     );
@@ -136,8 +136,9 @@ class PersonEditorRobot {
     await tester.tapOn(
       find.byKey(FamilyPhoneContactMenuButtonKeys.roleItem(roleId)),
     );
+    final contact = tester.widget<PhoneContactField>(contactOfRole);
     await tester.typeInto(
-      find.descendant(of: draftOfRole, matching: find.byType(TextFormField)),
+      find.byKey(PhoneContactFieldKeys.phoneField(contact.contact.key)),
       phone,
     );
   }

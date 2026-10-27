@@ -1,20 +1,28 @@
+import 'package:advanced_forms/advanced_forms.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
 class PhoneContactsEditor extends StatelessWidget {
+  final PhoneContactsFormController form;
   final VoidCallback? onImportFromContacts;
 
-  const PhoneContactsEditor({this.onImportFromContacts, super.key});
+  const PhoneContactsEditor({
+    required this.form,
+    this.onImportFromContacts,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<PhoneContactsEditorCubit>();
     final theme = Theme.of(context);
 
-    return BlocBuilder<PhoneContactsEditorCubit, PhoneContactsEditorState>(
-      builder: (context, state) => Card.filled(
+    return AdvancedFieldBuilder<
+      List<PhoneContactFormController>,
+      PhoneContactError
+    >(
+      field: form.contacts,
+      builder: (context, contacts, _) => Card.filled(
         margin: const EdgeInsets.symmetric(vertical: 8),
         color: theme.colorScheme.surfaceContainerHigh,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -29,26 +37,34 @@ class PhoneContactsEditor extends StatelessWidget {
                 children: [
                   Icon(Symbols.contact_phone, color: theme.colorScheme.primary),
                   Text(
-                    state.familyOnly ? 'أرقام الأسرة' : 'أرقام الهاتف',
+                    switch (form) {
+                      PersonPhoneContactsFormController() => 'أرقام الهاتف',
+                      FamilyPhoneContactsFormController() => 'أرقام الأسرة',
+                    },
                     style: theme.textTheme.titleMedium,
                   ),
                 ],
               ),
-              if (state.drafts.isEmpty)
+              if (contacts.value.isEmpty)
                 Text(
-                  state.familyOnly
-                      ? 'أضف أرقام الأب والأم وباقي مسؤولي الأسرة'
-                      : 'أضف رقم الشخص وأرقام والديه',
+                  switch (form) {
+                    PersonPhoneContactsFormController() =>
+                      'أضف رقم الشخص وأرقام والديه',
+                    FamilyPhoneContactsFormController() =>
+                      'أضف أرقام الأب والأم وباقي مسؤولي الأسرة',
+                  },
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,
                   ),
                 ),
-              for (final draft in state.drafts)
-                PhoneContactDraftField(key: ValueKey(draft.key), draft: draft),
-              if (state.familyOnly)
-                const FamilyPhoneContactMenuButton(label: 'إضافة رقم')
-              else
-                Row(
+              for (final contact in contacts.value)
+                PhoneContactField(
+                  key: ValueKey(contact.key),
+                  contact: contact,
+                  form: form,
+                ),
+              switch (form) {
+                PersonPhoneContactsFormController() => Row(
                   spacing: 8,
                   children: [
                     Expanded(
@@ -58,14 +74,20 @@ class PhoneContactsEditor extends StatelessWidget {
                         icon: const Icon(Symbols.add),
                         label: const Text('رقم جديد'),
                         onPressed: () =>
-                            cubit.add(const FreePhoneContactLabel(null)),
+                            form.add(const FreePhoneContactLabel(null)),
                       ),
                     ),
-                    const Expanded(
-                      child: FamilyPhoneContactMenuButton(label: 'رقم للأسرة'),
+                    Expanded(
+                      child: FamilyPhoneContactMenuButton(
+                        form: form,
+                        label: 'رقم للأسرة',
+                      ),
                     ),
                   ],
                 ),
+                FamilyPhoneContactsFormController() =>
+                  FamilyPhoneContactMenuButton(form: form, label: 'إضافة رقم'),
+              },
               if (onImportFromContacts != null)
                 OutlinedButton.icon(
                   key: PhoneContactsEditorKeys.importButton,

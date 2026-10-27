@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  const familyId = 'the-family';
   const fatherNumber = FamilyPhoneContact(
     contact: PhoneContact(id: 'father-number', phone: '+201003333333'),
     role: PersonType(id: 'father', name: 'الأب', isFamilyAdmin: true),
@@ -13,11 +14,11 @@ void main() {
   });
 
   test('a number added to an existing family names that family', () {
-    final familyId = 'the-family'.toUuid();
+    final familyUuid = familyId.toUuid();
 
     expect(
-      fatherNumber.toInsertInput(familyId: 'the-family').toJson(),
-      containsPair('familyId', familyId.toString()),
+      fatherNumber.toInsertInput(familyId: familyId).toJson(),
+      containsPair('familyId', familyUuid.toString()),
     );
   });
 }

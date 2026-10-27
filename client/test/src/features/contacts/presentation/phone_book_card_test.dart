@@ -45,7 +45,7 @@ void main() {
 
     expect(
       find.descendant(
-        of: find.byKey(PhoneBookCardKeys.contact('own-main')),
+        of: find.byKey(PhoneBookCardKeys.contact(ownMain.id)),
         matching: find.text('رقم الهاتف (أساسي)'),
       ),
       findsOneWidget,
@@ -57,7 +57,7 @@ void main() {
 
     expect(
       find.descendant(
-        of: find.byKey(PhoneBookCardKeys.contact('own-work')),
+        of: find.byKey(PhoneBookCardKeys.contact(ownWork.id)),
         matching: find.text('01002222222'),
       ),
       findsOneWidget,
@@ -71,8 +71,8 @@ void main() {
 
     expect(
       find.descendant(
-        of: find.byKey(PhoneBookCardKeys.contact('father-number')),
-        matching: find.text('رقم الهاتف (الأب)'),
+        of: find.byKey(PhoneBookCardKeys.contact(fatherNumber.contact.id)),
+        matching: find.text(fatherNumber.roleLabel),
       ),
       findsOneWidget,
     );

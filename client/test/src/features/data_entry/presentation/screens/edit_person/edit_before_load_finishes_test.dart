@@ -21,7 +21,7 @@ void main() {
   late EditPersonScreenHarness harness;
 
   Finder phoneField(String draftKey) =>
-      find.byKey(PhoneContactDraftFieldKeys.phoneField(draftKey));
+      find.byKey(PhoneContactFieldKeys.phoneField(draftKey));
 
   Future<void> openBeforeLoad(WidgetTester tester) => harness.open(
     tester,
@@ -59,12 +59,12 @@ void main() {
     await openBeforeLoad(tester);
 
     await tester.scrollUntilVisible(
-      phoneField('saved'),
+      phoneField(savedNumber.id),
       100,
       scrollable: find.byType(Scrollable).first,
     );
     await tester.pump();
-    await tester.enterText(phoneField('saved'), otherNumber);
+    await tester.enterText(phoneField(savedNumber.id), otherNumber);
     await finishLoadingAndSave(tester);
 
     expect(

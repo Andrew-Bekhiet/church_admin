@@ -4,7 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class EditPersonContactsImport {
-  final PhoneContactsEditorCubit _phoneContacts;
+  final PhoneContactsFormController _phoneContacts;
   final AdvancedTextFieldController<PersonEditError> _name;
 
   const EditPersonContactsImport({

@@ -42,6 +42,16 @@ void main() {
     contacts: const [PhoneContact(id: 'phone', phone: '0100')],
   );
 
+  const father = PersonType(id: 'father', name: 'الأب', isFamilyAdmin: true);
+  const fatherNumber = FamilyPhoneContact(
+    contact: PhoneContact(id: 'father-number', phone: '+201003333333'),
+    role: father,
+    personId: 'the-father',
+  );
+  final personWithFamilyNumber = fullPerson.copyWith(
+    familyContacts: const [fatherNumber],
+  );
+
   late PersonFormControllerFixture fixture;
 
   setUp(() => fixture = PersonFormControllerFixture());
@@ -160,7 +170,7 @@ void main() {
       controller.work.job.setValue(newJob);
 
       expect(controller.toPerson().job, newJob);
-      expect(controller.toPerson().jobId, 'new-job');
+      expect(controller.toPerson().jobId, newJob.id);
     });
 
     test('carry the study year order as its id', () {
@@ -225,14 +235,37 @@ void main() {
   });
 
   group('phone contacts', () {
-    test('are the latest ones handed over by the screen', () {
+    test('are the ones in the phone contacts form', () {
       final controller = fixture.controllerOfUpdate(fullPerson);
-      const own = [PhoneContact(id: 'new', phone: '0111')];
+      const phone = '+201112345678';
 
-      controller.phoneContactsChanged(own: own, family: const []);
+      controller.phones.add(const FreePhoneContactLabel(null));
+      controller.phones.contacts.fieldValue.last.phone.setValue(phone);
 
-      expect(controller.toPerson().contacts, own);
-      expect(controller.toPerson().familyContacts, isEmpty);
+      expect(controller.toPerson().contacts.map((contact) => contact.phone), [
+        ...fullPerson.contacts.map((contact) => contact.phone),
+        phone,
+      ]);
+    });
+
+    test('keep only the own numbers left in the form', () {
+      final controller = fixture.controllerOfUpdate(personWithFamilyNumber);
+
+      controller.phones.remove(controller.phones.contacts.fieldValue.first);
+
+      expect(controller.toPerson().contacts, isEmpty);
+    });
+
+    test('give the family numbers as edited in the form', () {
+      final controller = fixture.controllerOfUpdate(personWithFamilyNumber);
+
+      controller.phones.contacts.fieldValue.last.phone.setValue('01007777777');
+
+      expect(controller.toPerson().familyContacts, [
+        fatherNumber.copyWith(
+          contact: fatherNumber.contact.copyWith(phone: '+201007777777'),
+        ),
+      ]);
     });
   });
 

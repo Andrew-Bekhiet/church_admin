@@ -38,7 +38,7 @@ void main() {
 
   Future<void> openOwnNumberLabelPicker(WidgetTester tester) async {
     final labelPicker = find.byKey(
-      PhoneContactDraftFieldKeys.labelPicker(ownNumber.id),
+      PhoneContactFieldKeys.labelPicker(ownNumber.id),
     );
     await tester.ensureVisible(labelPicker);
     await tester.pumpAndSettle();
@@ -60,7 +60,7 @@ void main() {
 
     expect(
       find.byKey(
-        PhoneContactDraftFieldKeys.phoneField(motherNumber.contact.id),
+        PhoneContactFieldKeys.phoneField(motherNumber.contact.id),
       ),
       findsNothing,
     );
@@ -86,7 +86,7 @@ void main() {
 
     expect(
       find.byKey(
-        PhoneContactDraftFieldKeys.phoneField(motherNumber.contact.id),
+        PhoneContactFieldKeys.phoneField(motherNumber.contact.id),
       ),
       findsOneWidget,
     );

@@ -24,9 +24,7 @@ class PersonFormController extends AdvancedFormController {
       _shownViolations;
 
   bool _violationsAreShown = false;
-  late List<PhoneContact> _ownContacts = _startingPerson.contacts;
-  late List<FamilyPhoneContact> _familyContacts =
-      _startingPerson.familyContacts;
+  bool _familyNumbersWereAllowed = false;
 
   late final photo = AdvancedFieldController<PhotoChange, PersonEditError>(
     initialValue: const KeepPhoto(),
@@ -35,6 +33,11 @@ class PersonFormController extends AdvancedFormController {
     initialValue: _startingPerson.color,
   );
   late final identity = PersonIdentityFormController(person: _startingPerson);
+  late final phones = PersonPhoneContactsFormController(
+    own: _startingPerson.contacts,
+    family: _startingPerson.visibleFamilyContacts,
+    canHaveFamilyNumbers: () => household.canHaveFamilyNumbers,
+  );
   late final PersonHouseholdFormController household;
   late final PersonMembershipsFormController memberships;
   late final work = PersonWorkFormController(person: _startingPerson);
@@ -139,6 +142,7 @@ class PersonFormController extends AdvancedFormController {
 
     registerFields([photo, color]);
     addSubform(identity);
+    addSubform(phones);
     addSubform(household);
     addSubform(memberships);
     addSubform(work);
@@ -152,28 +156,31 @@ class PersonFormController extends AdvancedFormController {
       (isMale) => isMale,
       _clearShammasWhenFemale,
     );
+    addRelation(
+      household.family,
+      (family) => family?.id,
+      (_) => phones.followFamily(saved: household.savedFamilyContacts),
+    );
+    _familyNumbersWereAllowed = household.canHaveFamilyNumbers;
+    household.onValuesChanged.addListener(
+      _revalidatePhonesWhenFamilyNumbersBecomeAllowedOrNot,
+    );
     onValuesChanged.addListener(_showRuleViolationsIfAlreadyShown);
     memberships.loadState.addListener(_showRuleViolationsIfAlreadyShown);
 
     if (!isCreate) unawaited(memberships.loadSavedMemberships());
   }
 
-  void phoneContactsChanged({
-    required List<PhoneContact> own,
-    required List<FamilyPhoneContact> family,
-  }) {
-    _ownContacts = own;
-    _familyContacts = family;
-  }
-
-  Person toPerson() => value.subforms.whereType<PersonFormSection>().fold(
-    _startingPerson.copyWith(
-      contacts: _ownContacts,
-      familyContacts: _familyContacts,
-      color: color.fieldValue,
-    ),
-    (person, section) => section.editedVersionOf(person),
-  );
+  Person toPerson() => value.subforms
+      .whereType<PersonFormSection>()
+      .fold(
+        _startingPerson.copyWith(color: color.fieldValue),
+        (person, section) => section.editedVersionOf(person),
+      )
+      .copyWith(
+        contacts: phones.ownContacts,
+        familyContacts: phones.familyContacts,
+      );
 
   @override
   Future<bool> validate() async {
@@ -297,6 +304,14 @@ class PersonFormController extends AdvancedFormController {
     churchAndSpiritual.isShammas.prefill(false);
   }
 
+  void _revalidatePhonesWhenFamilyNumbersBecomeAllowedOrNot() {
+    final familyNumbersAreAllowed = household.canHaveFamilyNumbers;
+    if (familyNumbersAreAllowed == _familyNumbersWereAllowed) return;
+
+    _familyNumbersWereAllowed = familyNumbersAreAllowed;
+    phones.revalidateAfterFamilyAvailabilityChanged();
+  }
+
   void _showRuleViolationsIfAlreadyShown() {
     if (!_violationsAreShown || isDisposed) return;
 
@@ -311,6 +326,9 @@ class PersonFormController extends AdvancedFormController {
 
   @override
   void dispose() {
+    household.onValuesChanged.removeListener(
+      _revalidatePhonesWhenFamilyNumbersBecomeAllowedOrNot,
+    );
     _saveProgress.dispose();
     _shownViolations.dispose();
     super.dispose();

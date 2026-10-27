@@ -23,7 +23,7 @@ class FamilyEditFields extends StatelessWidget {
           form: form.address,
           onChooseLocationOnMap: onChooseLocationOnMap,
         ),
-        const PhoneContactsEditor(),
+        PhoneContactsEditor(form: form.phones),
         AdvancedSingleObjectSelectionField<Church, ObjectEditError>(
           field: form.church,
           label: 'الكنيسة',

@@ -21,7 +21,7 @@ void main() {
   late EditPersonScreenHarness harness;
 
   Finder phoneField(String draftKey) =>
-      find.byKey(PhoneContactDraftFieldKeys.phoneField(draftKey));
+      find.byKey(PhoneContactFieldKeys.phoneField(draftKey));
 
   setUp(() {
     harness = EditPersonScreenHarness()..install();
@@ -42,8 +42,8 @@ void main() {
       'to discard', (tester) async {
     await openPerson(tester);
 
-    await harness.scrollTo(tester, phoneField('saved'));
-    await tester.enterText(phoneField('saved'), otherValidInput);
+    await harness.scrollTo(tester, phoneField(savedNumber.id));
+    await tester.enterText(phoneField(savedNumber.id), otherValidInput);
     await harness.pressBack(tester);
 
     expect(find.text(discardDialogTitle), findsOneWidget);
@@ -54,14 +54,14 @@ void main() {
   ) async {
     await openPerson(tester);
 
-    await harness.scrollTo(tester, phoneField('saved'));
-    await tester.enterText(phoneField('saved'), incompleteInput);
+    await harness.scrollTo(tester, phoneField(savedNumber.id));
+    await tester.enterText(phoneField(savedNumber.id), incompleteInput);
     await harness.pressBack(tester);
 
     expect(find.text(discardDialogTitle), findsOneWidget);
   });
 
-  testWidgets('leaving after adding an empty number row asks to discard', (
+  testWidgets('leaving after adding an empty phone contact asks to discard', (
     tester,
   ) async {
     await openPerson(tester);
@@ -78,7 +78,7 @@ void main() {
   });
 
   testWidgets(
-    'leaving after typing an incomplete number into a new row asks to discard',
+    'leaving after typing an incomplete number into a new phone contact asks to discard',
     (tester) async {
       await openPerson(tester);
 
@@ -88,14 +88,11 @@ void main() {
       );
       await tester.tap(find.byKey(PhoneContactsEditorKeys.addButton));
       await tester.pumpAndSettle();
-      final newField = find.byWidgetPredicate(
-        (widget) => switch (widget.key) {
-          ValueKey<String>(:final value) =>
-            value.startsWith('phone_contacts_editor_phone_') &&
-                !value.endsWith('_saved'),
-          _ => false,
-        },
-      );
+      final newContact = tester
+          .widgetList<PhoneContactField>(find.byType(PhoneContactField))
+          .singleWhere((field) => field.contact.key != savedNumber.id)
+          .contact;
+      final newField = phoneField(newContact.key);
       await tester.enterText(newField, incompleteInput);
       await harness.pressBack(tester);
 
@@ -108,7 +105,9 @@ void main() {
   ) async {
     await openPerson(tester);
 
-    final remove = find.byKey(PhoneContactDraftFieldKeys.removeButton('saved'));
+    final remove = find.byKey(
+      PhoneContactFieldKeys.removeButton(savedNumber.id),
+    );
     await harness.scrollTo(tester, remove);
     await tester.tap(remove);
     await tester.pumpAndSettle();
@@ -122,12 +121,12 @@ void main() {
     await openPerson(tester, membershipsLoaded: false);
 
     await tester.scrollUntilVisible(
-      phoneField('saved'),
+      phoneField(savedNumber.id),
       100,
       scrollable: find.byType(Scrollable).first,
     );
     await tester.pump();
-    await tester.enterText(phoneField('saved'), otherValidInput);
+    await tester.enterText(phoneField(savedNumber.id), otherValidInput);
     harness.persons.respondWithSavedMemberships(null);
     await tester.pumpAndSettle();
     await harness.pressBack(tester);
@@ -140,9 +139,9 @@ void main() {
   ) async {
     await openPerson(tester);
 
-    await harness.scrollTo(tester, phoneField('saved'));
-    await tester.enterText(phoneField('saved'), otherValidInput);
-    await tester.enterText(phoneField('saved'), savedInput);
+    await harness.scrollTo(tester, phoneField(savedNumber.id));
+    await tester.enterText(phoneField(savedNumber.id), otherValidInput);
+    await tester.enterText(phoneField(savedNumber.id), savedInput);
     await harness.pressBack(tester);
 
     expect(find.text(discardDialogTitle), findsNothing);

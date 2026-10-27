@@ -18,8 +18,6 @@ class EditObjectScaffold<T extends ViewableWithIDAndImage>
   final Widget fields;
   final String? nameHint;
   final String movedOutOfSightMessage;
-  final bool Function()? hasUnsavedInput;
-  final bool Function()? validateInputOutsideForm;
 
   const EditObjectScaffold({
     required this.form,
@@ -29,8 +27,6 @@ class EditObjectScaffold<T extends ViewableWithIDAndImage>
     required this.fields,
     this.movedOutOfSightMessage = 'تم النقل',
     this.nameHint,
-    this.hasUnsavedInput,
-    this.validateInputOutsideForm,
     super.key,
   });
 
@@ -158,8 +154,6 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
   }
 
   Future<void> _save() async {
-    if (!(widget.validateInputOutsideForm?.call() ?? true)) return;
-
     final outcome = await widget.saveCubit.submit(
       confirmMoveOutOfSight: _confirmMoveOutOfSight,
     );
@@ -266,19 +260,11 @@ class _EditObjectScaffoldState<T extends ViewableWithIDAndImage>
   Future<void> _confirmExit(bool didPop, Object? result) async {
     if (didPop) return;
 
-    final navigator = Navigator.of(context);
-    if (!_form.wasModified && !(widget.hasUnsavedInput?.call() ?? false)) {
-      navigator.pop(result);
-
-      return;
-    }
-
-    final discard = await showDialog<bool>(
-      context: context,
-      builder: (context) => const DiscardChangesDialog(),
+    await DiscardChangesDialog.popAfterConfirmingDiscard(
+      context,
+      wasModified: _form.wasModified,
+      result: result,
     );
-
-    if (discard ?? false) navigator.pop(result);
   }
 
   Object? _reportable(T? object) => switch (object) {

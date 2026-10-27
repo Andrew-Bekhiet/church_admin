@@ -59,8 +59,8 @@ void main() {
 
   test('removing a number deletes it', () {
     expect(changesTo(own: [ownMain], family: []).deletedIds, [
-      'own-work',
-      'father-number',
+      ownWork.id,
+      fatherNumber.contact.id,
     ]);
   });
 
@@ -92,7 +92,7 @@ void main() {
     expect(
       changesTo(family: [asMother]),
       PhoneContactChanges(
-        deletedIds: const ['father-number'],
+        deletedIds: [fatherNumber.contact.id],
         familyInserts: [asMother],
       ),
     );
@@ -103,8 +103,8 @@ void main() {
 
     expect(
       changesTo(own: [ownMain], family: [fatherNumber, asFather]),
-      const PhoneContactChanges(
-        deletedIds: ['own-work'],
+      PhoneContactChanges(
+        deletedIds: [ownWork.id],
         familyInserts: [asFather],
       ),
     );
@@ -114,7 +114,7 @@ void main() {
     expect(
       changesTo(own: [ownMain, ownWork, fatherNumber.contact], family: []),
       PhoneContactChanges(
-        deletedIds: const ['father-number'],
+        deletedIds: [fatherNumber.contact.id],
         ownInserts: [fatherNumber.contact],
       ),
     );
