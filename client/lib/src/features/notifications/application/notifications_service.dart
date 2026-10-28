@@ -346,14 +346,10 @@ class NotificationsService extends BlocObserver {
   }
 
   Future<bool> _requestAndTrackNotificationsPermission() async {
-    final previousPermissionStatus = await Permission.notification.status;
     final isGranted = await requestNotificationsPermission();
 
     _analyticsService.track(
-      NotificationPermissionRequest(
-        previousPermissionStatus: previousPermissionStatus,
-        isGranted: isGranted,
-      ),
+      NotificationPermissionRequest(isGranted: isGranted),
     );
 
     return isGranted;

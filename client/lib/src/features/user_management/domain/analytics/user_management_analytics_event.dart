@@ -142,8 +142,6 @@ final class UserCreate extends UserSaveAttemptEvent {
 
 final class UserSave extends UserSaveAttemptEvent {
   final String userId;
-  final Set<UserPermission> addedPermissions;
-  final Set<UserPermission> removedPermissions;
   final List<AdminOnData> addedScopes;
   final List<AdminOnData> removedScopes;
   final PersonLinkChange personLinkChange;
@@ -155,12 +153,6 @@ final class UserSave extends UserSaveAttemptEvent {
   Json get properties => {
     ...super.properties,
     ...UserManagementAnalyticsEvent.userPropertiesOf(userId),
-    'added_permissions': [
-      for (final permission in addedPermissions) permission.name,
-    ],
-    'removed_permissions': [
-      for (final permission in removedPermissions) permission.name,
-    ],
     ...UserManagementAnalyticsEvent.scopeCountsOf(
       addedScopes,
       prefix: 'added_',
@@ -174,12 +166,6 @@ final class UserSave extends UserSaveAttemptEvent {
 
   UserSave(User user, UserDraft draft, super.outcome)
     : userId = user.uid,
-      addedPermissions = draft.permissions.validated().difference(
-        user.permissions,
-      ),
-      removedPermissions = user.permissions.difference(
-        draft.permissions.validated(),
-      ),
       addedScopes = draft.adminOn
           .where((scope) => scope.permissionId.isEmpty)
           .toList(),

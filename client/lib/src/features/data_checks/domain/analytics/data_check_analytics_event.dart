@@ -21,11 +21,7 @@ sealed class DataCheckFamilyEvent extends DataCheckAnalyticsEvent {
 
 final class DataCheckReportOpen extends DataCheckFamilyEvent {
   final int completenessPercent;
-  final int passedCheckCount;
-  final int totalCheckCount;
   final bool isComplete;
-  final DataCheckOverride overrideChoice;
-  final List<String> failingRules;
 
   @override
   String get objectAction => 'report_open';
@@ -34,23 +30,12 @@ final class DataCheckReportOpen extends DataCheckFamilyEvent {
   Json get properties => {
     ...super.properties,
     'completeness_percent': completenessPercent,
-    'passed_check_count': passedCheckCount,
-    'total_check_count': totalCheckCount,
     'is_complete': isComplete,
-    'override_choice': overrideChoice.name,
-    'failing_rules': failingRules,
   };
 
   DataCheckReportOpen(DataCheck dataCheck)
     : completenessPercent = dataCheck.completenessPercent,
-      passedCheckCount = dataCheck.passedChecksCount,
-      totalCheckCount = dataCheck.totalChecksCount,
       isComplete = dataCheck.isComplete,
-      overrideChoice = dataCheck.userOverride,
-      failingRules = [
-        for (final detail in dataCheck.checksDetails)
-          if (!detail.passed) detail.check.name,
-      ],
       super(dataCheck.familyId);
 }
 

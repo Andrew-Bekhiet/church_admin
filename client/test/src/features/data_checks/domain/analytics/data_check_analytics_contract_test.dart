@@ -17,19 +17,6 @@ void main() {
           DataCheck(
             familyId: familyId,
             completenessPercent: completenessPercent,
-            userOverride: DataCheckOverride.markedIncomplete,
-            checksDetails: const [
-              DataCheckDetail(
-                group: DataCheckGroup.family,
-                check: DataCheckRule.hasFamilyAdmin,
-                passed: true,
-              ),
-              DataCheckDetail(
-                group: DataCheckGroup.address,
-                check: DataCheckRule.hasAddress,
-                passed: false,
-              ),
-            ],
           ),
         ),
         'data_check:report_open',
@@ -37,11 +24,7 @@ void main() {
           'entity_type': 'family',
           'family_id': familyId,
           'completeness_percent': completenessPercent,
-          'passed_check_count': 1,
-          'total_check_count': 2,
           'is_complete': false,
-          'override_choice': 'markedIncomplete',
-          'failing_rules': ['hasAddress'],
         },
       ),
       (

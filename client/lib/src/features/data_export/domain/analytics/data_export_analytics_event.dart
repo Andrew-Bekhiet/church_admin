@@ -38,7 +38,6 @@ final class ExportStart extends DataExportAnalyticsEvent {
   final int serviceCount;
   final int classCount;
   final int groupCount;
-  final bool isScopedToOwn;
 
   @override
   String get objectAction => 'export_start';
@@ -49,7 +48,6 @@ final class ExportStart extends DataExportAnalyticsEvent {
     'service_count': serviceCount,
     'class_count': classCount,
     'group_count': groupCount,
-    'is_scoped_to_own': isScopedToOwn,
   };
 
   const ExportStart({
@@ -57,7 +55,6 @@ final class ExportStart extends DataExportAnalyticsEvent {
     required this.serviceCount,
     required this.classCount,
     required this.groupCount,
-    required this.isScopedToOwn,
   });
 }
 

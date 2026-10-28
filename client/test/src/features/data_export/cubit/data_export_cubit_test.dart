@@ -178,8 +178,7 @@ void main() {
             .having((event) => event.areaCount, 'areaCount', 1)
             .having((event) => event.serviceCount, 'serviceCount', 0)
             .having((event) => event.classCount, 'classCount', 0)
-            .having((event) => event.groupCount, 'groupCount', 0)
-            .having((event) => event.isScopedToOwn, 'isScopedToOwn', false),
+            .having((event) => event.groupCount, 'groupCount', 0),
       ),
     );
 

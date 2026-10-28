@@ -105,19 +105,17 @@ void main() {
     });
 
     test(
-      'the permission request is tracked with the status before prompting',
+      'the permission request is tracked with whether it was granted',
       () async {
         await unit.onTransition(authBloc, signIn);
 
         expect(
           analytics.trackedEventsOf<NotificationPermissionRequest>().single,
-          isA<NotificationPermissionRequest>()
-              .having(
-                (event) => event.previousPermissionStatus,
-                'previousPermissionStatus',
-                PermissionStatus.denied,
-              )
-              .having((event) => event.isGranted, 'isGranted', true),
+          isA<NotificationPermissionRequest>().having(
+            (event) => event.isGranted,
+            'isGranted',
+            true,
+          ),
         );
       },
     );

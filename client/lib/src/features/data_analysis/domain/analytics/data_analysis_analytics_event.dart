@@ -53,7 +53,6 @@ final class MeetingsAnalysisView extends AnalysisRangeEvent {
       },
     },
     ...super.properties,
-    'is_single_day': rangePreset.range.isSingleDay,
     'is_success': isSuccess,
   };
 
@@ -72,19 +71,15 @@ final class AnalysisRangeSelect extends AnalysisRangeEvent {
 }
 
 final class AnalysisCustomRangePick extends DataAnalysisAnalyticsEvent {
-  final bool isReopened;
   final CustomRangePickOutcome outcome;
 
   @override
   String get objectAction => 'custom_range_pick';
 
   @override
-  Json get properties => {'is_reopened': isReopened, ...outcome.properties};
+  Json get properties => outcome.properties;
 
-  const AnalysisCustomRangePick({
-    required this.isReopened,
-    required this.outcome,
-  });
+  const AnalysisCustomRangePick(this.outcome);
 }
 
 final class AnalysisGranularitySelect extends DataAnalysisAnalyticsEvent {
@@ -98,7 +93,6 @@ final class AnalysisGranularitySelect extends DataAnalysisAnalyticsEvent {
   Json get properties => {
     'granularity': granularity.name,
     'auto_granularity': autoGranularity.name,
-    'is_override': granularity != autoGranularity,
   };
 
   const AnalysisGranularitySelect(

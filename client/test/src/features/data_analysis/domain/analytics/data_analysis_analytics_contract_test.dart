@@ -17,12 +17,16 @@ void main() {
       start: DateTime.utc(2026, 10),
       end: DateTime.utc(2026, 10, 8),
     );
+    final today = TodayDateTimeRangePreset();
+    final pastMonth = PastMonthDateTimeRangePreset();
+    final pastQuarter = PastQuarterDateTimeRangePreset();
+    final pastYear = PastYearDateTimeRangePreset();
 
     final contracts = <(AnalyticsEvent, String, Json)>[
       (
         MeetingsAnalysisView(
           subject: const MeetingsAnalysisSubject.meeting(meeting),
-          rangePreset: TodayDateTimeRangePreset(),
+          rangePreset: today,
           isSuccess: true,
         ),
         'analysis:meetings_view',
@@ -30,24 +34,22 @@ void main() {
           'subject_type': 'meeting',
           'meeting_id': meeting.id,
           'range_preset': 'today',
-          'range_duration_ms': 86400000,
-          'is_single_day': true,
+          'range_duration_ms': today.duration.inMilliseconds,
           'is_success': true,
         },
       ),
       (
-        AnalysisRangeSelect(PastMonthDateTimeRangePreset()),
+        AnalysisRangeSelect(pastMonth),
         'analysis:range_select',
-        {'range_preset': 'pastMonth', 'range_duration_ms': 2592000000},
+        {
+          'range_preset': 'pastMonth',
+          'range_duration_ms': pastMonth.duration.inMilliseconds,
+        },
       ),
       (
-        AnalysisCustomRangePick(
-          isReopened: true,
-          outcome: CustomRangePicked(week),
-        ),
+        AnalysisCustomRangePick(CustomRangePicked(week)),
         'analysis:custom_range_pick',
         {
-          'is_reopened': true,
           'is_cancelled': false,
           'range_duration_ms': week.duration.inMilliseconds,
         },
@@ -58,11 +60,7 @@ void main() {
           autoGranularity: AttendanceGranularity.day,
         ),
         'analysis:granularity_select',
-        {
-          'granularity': 'week',
-          'auto_granularity': 'day',
-          'is_override': true,
-        },
+        {'granularity': 'week', 'auto_granularity': 'day'},
       ),
       (const AnalysisRetryTap(), 'analysis:retry_tap', {}),
       (const AnalysisRefreshTap(), 'analysis:refresh_tap', {}),
@@ -111,15 +109,14 @@ void main() {
         'a service viewed over the past quarter reports its subject and range',
         MeetingsAnalysisView(
           subject: const MeetingsAnalysisSubject.service(service),
-          rangePreset: PastQuarterDateTimeRangePreset(),
+          rangePreset: pastQuarter,
           isSuccess: false,
         ),
         {
           'subject_type': 'service',
           'service_id': service.id,
           'range_preset': 'pastQuarter',
-          'range_duration_ms': 7776000000,
-          'is_single_day': false,
+          'range_duration_ms': pastQuarter.duration.inMilliseconds,
           'is_success': false,
         },
       ),
@@ -127,15 +124,14 @@ void main() {
         'a group viewed over the past year reports its subject and range',
         MeetingsAnalysisView(
           subject: const MeetingsAnalysisSubject.group(group),
-          rangePreset: PastYearDateTimeRangePreset(),
+          rangePreset: pastYear,
           isSuccess: true,
         ),
         {
           'subject_type': 'group',
           'group_id': group.id,
           'range_preset': 'pastYear',
-          'range_duration_ms': 31536000000,
-          'is_single_day': false,
+          'range_duration_ms': pastYear.duration.inMilliseconds,
           'is_success': true,
         },
       ),
@@ -151,33 +147,13 @@ void main() {
           'class_id': classGroup.id,
           'range_preset': 'custom',
           'range_duration_ms': week.duration.inMilliseconds,
-          'is_single_day': false,
           'is_success': true,
         },
       ),
       (
         'dismissing the custom range picker reports a cancelled pick',
-        const AnalysisCustomRangePick(
-          isReopened: false,
-          outcome: CustomRangePickCancelled(),
-        ),
-        {
-          'is_reopened': false,
-          'is_cancelled': true,
-          'range_duration_ms': null,
-        },
-      ),
-      (
-        'picking the automatic granularity is not an override',
-        const AnalysisGranularitySelect(
-          AttendanceGranularity.month,
-          autoGranularity: AttendanceGranularity.month,
-        ),
-        {
-          'granularity': 'month',
-          'auto_granularity': 'month',
-          'is_override': false,
-        },
+        const AnalysisCustomRangePick(CustomRangePickCancelled()),
+        {'is_cancelled': true, 'range_duration_ms': null},
       ),
     ];
 

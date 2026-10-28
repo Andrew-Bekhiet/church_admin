@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   group('notification analytics contract', () {
@@ -37,12 +36,9 @@ void main() {
         {'notification_type': 'manualPushRemote'},
       ),
       (
-        const NotificationPermissionRequest(
-          previousPermissionStatus: PermissionStatus.denied,
-          isGranted: true,
-        ),
+        const NotificationPermissionRequest(isGranted: true),
         'notification:permission_request',
-        {'previous_permission_status': 'denied', 'is_granted': true},
+        {'is_granted': true},
       ),
       (
         const NotificationReminderFire(

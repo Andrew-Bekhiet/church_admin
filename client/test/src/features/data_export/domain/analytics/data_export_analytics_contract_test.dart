@@ -10,7 +10,6 @@ void main() {
       serviceCount: 2,
       classCount: 3,
       groupCount: 4,
-      isScopedToOwn: true,
     );
 
     final contracts = <(AnalyticsEvent, String, Json)>[
@@ -29,7 +28,6 @@ void main() {
           'service_count': exportStart.serviceCount,
           'class_count': exportStart.classCount,
           'group_count': exportStart.groupCount,
-          'is_scoped_to_own': exportStart.isScopedToOwn,
         },
       ),
       (

@@ -269,7 +269,6 @@ class DataExportCubit extends Cubit<DataExportState> {
         serviceCount: servicesIds.length,
         classCount: classesIds.length,
         groupCount: groupsIds.length,
-        isScopedToOwn: !_canExportAllData,
       ),
     );
     final startedAt = clock.now();

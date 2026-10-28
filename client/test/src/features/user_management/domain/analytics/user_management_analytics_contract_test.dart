@@ -114,8 +114,6 @@ void main() {
           'user_id': savedUser.uid,
           'is_success': true,
           'failure_kind': 'none',
-          'added_permissions': ['readAllData'],
-          'removed_permissions': ['deleteData'],
           'added_area_count': 0,
           'added_service_count': 0,
           'added_group_count': 1,

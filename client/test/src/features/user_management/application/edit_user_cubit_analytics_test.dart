@@ -79,23 +79,11 @@ void main() {
     );
 
     Matcher savedUserWith({
-      Set<UserPermission>? addedPermissions,
-      Set<UserPermission>? removedPermissions,
       List<AdminOnData>? addedScopes,
       List<AdminOnData>? removedScopes,
       PersonLinkChange? personLinkChange,
     }) => isA<UserSave>()
         .having((event) => event.userId, 'userId', editedUser.uid)
-        .having(
-          (event) => event.addedPermissions,
-          'addedPermissions',
-          addedPermissions ?? isEmpty,
-        )
-        .having(
-          (event) => event.removedPermissions,
-          'removedPermissions',
-          removedPermissions ?? isEmpty,
-        )
         .having(
           (event) => event.addedScopes,
           'addedScopes',
@@ -111,32 +99,6 @@ void main() {
           'personLinkChange',
           personLinkChange ?? PersonLinkChange.unchanged,
         );
-
-    blocTest<EditUserCubit, UserFormState>(
-      'saving tracks which permissions were granted and which were revoked',
-      build: () => buildCubit(
-        editedUser.copyWith(
-          permissions: const PermissionsSet.fromSet({
-            UserPermission.approved,
-            UserPermission.deleteData,
-          }),
-        ),
-      ),
-      act: (cubit) {
-        cubit
-          ..togglePermission(UserPermission.deleteData)
-          ..togglePermission(UserPermission.readAllData);
-
-        return cubit.save();
-      },
-      verify: (_) => expect(
-        analytics.trackedEventsOf<UserSave>().single,
-        savedUserWith(
-          addedPermissions: {UserPermission.readAllData},
-          removedPermissions: {UserPermission.deleteData},
-        ),
-      ),
-    );
 
     blocTest<EditUserCubit, UserFormState>(
       'saving tracks which scopes were added and which were removed',

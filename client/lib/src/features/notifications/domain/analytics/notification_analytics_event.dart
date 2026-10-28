@@ -46,22 +46,15 @@ final class NotificationSearchResultsOpen extends NotificationContentEvent {
 }
 
 final class NotificationPermissionRequest extends NotificationAnalyticsEvent {
-  final PermissionStatus previousPermissionStatus;
   final bool isGranted;
 
   @override
   String get objectAction => 'permission_request';
 
   @override
-  Json get properties => {
-    'previous_permission_status': previousPermissionStatus.name,
-    'is_granted': isGranted,
-  };
+  Json get properties => {'is_granted': isGranted};
 
-  const NotificationPermissionRequest({
-    required this.previousPermissionStatus,
-    required this.isGranted,
-  });
+  const NotificationPermissionRequest({required this.isGranted});
 }
 
 final class NotificationReminderFire extends NotificationAnalyticsEvent {

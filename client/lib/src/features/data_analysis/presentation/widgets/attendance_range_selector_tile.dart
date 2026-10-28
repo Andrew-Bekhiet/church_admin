@@ -37,10 +37,7 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
           // the currently-selected custom preset re-open the date picker.
           if (selectedPreset == null ||
               selectedPreset is CustomDateTimeRangePreset) {
-            await _pickCustomRange(
-              context,
-              isReopened: selectedPreset is CustomDateTimeRangePreset,
-            );
+            await _pickCustomRange(context);
 
             return;
           }
@@ -81,10 +78,7 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
     AnalyticsService.I.track(AnalysisRangeSelect(selectedPreset));
   }
 
-  Future<void> _pickCustomRange(
-    BuildContext context, {
-    required bool isReopened,
-  }) async {
+  Future<void> _pickCustomRange(BuildContext context) async {
     final rslt = await showCalendarDatePicker2Dialog(
       context: context,
       dialogSize: Size(MediaQuery.widthOf(context) - 16, 410),
@@ -102,9 +96,7 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
       _ => const CustomRangePickCancelled(),
     };
 
-    AnalyticsService.I.track(
-      AnalysisCustomRangePick(isReopened: isReopened, outcome: outcome),
-    );
+    AnalyticsService.I.track(AnalysisCustomRangePick(outcome));
 
     if (outcome case CustomRangePicked(:final range)) {
       onChanged(CustomDateTimeRangePreset(range: range));
