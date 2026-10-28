@@ -49,24 +49,20 @@ void main() {
         const Address(area: area, street: street, district: district),
       ),
       name: 'address:suggestion_show',
-      properties: {'has_area': true, 'has_street': true, 'has_district': true},
+      properties: {
+        'suggested_address_parts': ['area', 'district', 'street'],
+      },
     ),
     (
       event: AddressSuggestionShow(const Address()),
       name: 'address:suggestion_show',
-      properties: {
-        'has_area': false,
-        'has_street': false,
-        'has_district': false,
-      },
+      properties: {'suggested_address_parts': <String>[]},
     ),
     (
       event: AddressSuggestionAccept(const Address(street: street)),
       name: 'address:suggestion_accept',
       properties: {
-        'has_area': false,
-        'has_street': true,
-        'has_district': false,
+        'suggested_address_parts': ['street'],
       },
     ),
     (

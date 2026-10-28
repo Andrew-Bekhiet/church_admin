@@ -118,10 +118,11 @@ void main() {
       await fixture.controllerFor().useLocation(houseLocation);
 
       expect(fixture.analytics.trackedEventsOf<AddressSuggestionShow>(), [
-        isA<AddressSuggestionShow>()
-            .having((event) => event.hasArea, 'hasArea', true)
-            .having((event) => event.hasStreet, 'hasStreet', false)
-            .having((event) => event.hasDistrict, 'hasDistrict', false),
+        isA<AddressSuggestionShow>().having(
+          (event) => event.suggestedAddressParts,
+          'suggestedAddressParts',
+          [SuggestedAddressPart.area],
+        ),
       ]);
     });
 

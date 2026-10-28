@@ -54,22 +54,24 @@ final class AddressLocationFill extends AddressAutofillAnalyticsEvent {
     : streetId = street.id;
 }
 
+enum SuggestedAddressPart { area, district, street }
+
 sealed class AddressSuggestionAnalyticsEvent extends AddressAnalyticsEvent {
-  final bool hasArea;
-  final bool hasStreet;
-  final bool hasDistrict;
+  final List<SuggestedAddressPart> suggestedAddressParts;
 
   @override
   Json get properties => {
-    'has_area': hasArea,
-    'has_street': hasStreet,
-    'has_district': hasDistrict,
+    'suggested_address_parts': [
+      for (final part in suggestedAddressParts) part.name,
+    ],
   };
 
   AddressSuggestionAnalyticsEvent(Address suggested)
-    : hasArea = suggested.area != null,
-      hasStreet = suggested.street != null,
-      hasDistrict = suggested.district != null;
+    : suggestedAddressParts = [
+        if (suggested.area != null) SuggestedAddressPart.area,
+        if (suggested.district != null) SuggestedAddressPart.district,
+        if (suggested.street != null) SuggestedAddressPart.street,
+      ];
 }
 
 final class AddressSuggestionShow extends AddressSuggestionAnalyticsEvent {
