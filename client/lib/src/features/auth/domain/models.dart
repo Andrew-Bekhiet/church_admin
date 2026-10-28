@@ -1,3 +1,4 @@
+export 'models/auth_attempt_outcome.dart';
 export 'models/auth_exception.dart';
 export 'models/auth_user.dart';
 export 'models/legal_document.dart';

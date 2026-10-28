@@ -18,28 +18,27 @@ sealed class AuthAnalyticsEvent extends AnalyticsEvent {
   const AuthAnalyticsEvent();
 }
 
-final class SignInSubmit extends AuthAnalyticsEvent {
+sealed class AuthAttemptEvent extends AuthAnalyticsEvent {
   final AuthAttemptOutcome outcome;
 
+  @override
+  Json get properties => outcome.properties;
+
+  const AuthAttemptEvent(this.outcome);
+}
+
+final class SignInSubmit extends AuthAttemptEvent {
   @override
   String get objectAction => 'sign_in_submit';
 
-  @override
-  Json get properties => outcome.properties;
-
-  const SignInSubmit(this.outcome);
+  const SignInSubmit(super.outcome);
 }
 
-final class SignUpSubmit extends AuthAnalyticsEvent {
-  final AuthAttemptOutcome outcome;
-
+final class SignUpSubmit extends AuthAttemptEvent {
   @override
   String get objectAction => 'sign_up_submit';
 
-  @override
-  Json get properties => outcome.properties;
-
-  const SignUpSubmit(this.outcome);
+  const SignUpSubmit(super.outcome);
 }
 
 final class LoginModeSwitch extends AuthAnalyticsEvent {
@@ -54,16 +53,11 @@ final class LoginModeSwitch extends AuthAnalyticsEvent {
   const LoginModeSwitch(this.targetMode);
 }
 
-final class PasswordResetSend extends AuthAnalyticsEvent {
-  final AuthAttemptOutcome outcome;
-
+final class PasswordResetSend extends AuthAttemptEvent {
   @override
   String get objectAction => 'password_reset_send';
 
-  @override
-  Json get properties => outcome.properties;
-
-  const PasswordResetSend(this.outcome);
+  const PasswordResetSend(super.outcome);
 }
 
 final class EmailVerificationCheck extends AuthAnalyticsEvent {
@@ -85,16 +79,11 @@ final class EmailVerificationResend extends AuthAnalyticsEvent {
   const EmailVerificationResend();
 }
 
-final class InvitationCodeApply extends AuthAnalyticsEvent {
-  final AuthAttemptOutcome outcome;
-
+final class InvitationCodeApply extends AuthAttemptEvent {
   @override
   String get objectAction => 'invitation_code_apply';
 
-  @override
-  Json get properties => outcome.properties;
-
-  const InvitationCodeApply(this.outcome);
+  const InvitationCodeApply(super.outcome);
 }
 
 final class AccountClaimByEmail extends AuthAnalyticsEvent {
@@ -131,26 +120,4 @@ final class LegalDocumentOpen extends AuthAnalyticsEvent {
   Json get properties => {'document': document.name};
 
   const LegalDocumentOpen(this.document);
-}
-
-sealed class AuthAttemptOutcome {
-  Json get properties;
-
-  const AuthAttemptOutcome();
-}
-
-final class AuthAttemptSucceeded extends AuthAttemptOutcome {
-  @override
-  Json get properties => const {'is_success': true};
-
-  const AuthAttemptSucceeded();
-}
-
-final class AuthAttemptFailed extends AuthAttemptOutcome {
-  final String kind;
-
-  @override
-  Json get properties => {'is_success': false, 'failure_kind': kind};
-
-  const AuthAttemptFailed(this.kind);
 }
