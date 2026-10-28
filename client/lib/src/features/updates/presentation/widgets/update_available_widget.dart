@@ -20,8 +20,6 @@ class UpdateAvailableWidget extends StatelessWidget {
         .read(packageInfoPluginProvider)
         .requireValue;
 
-    final releaseNotesUrl = featureFlagRepo.releaseNotesUrl;
-
     final themeData = Theme.of(context);
 
     return SessionReplayUnmask(
@@ -41,6 +39,8 @@ class UpdateAvailableWidget extends StatelessWidget {
               ),
             ),
         builder: (context, snapshot) {
+          final releaseNotesUrl = featureFlagRepo.releaseNotesUrl;
+
           return AnimatedSize(
             duration: const Duration(milliseconds: 200),
             child: snapshot.data ?? false

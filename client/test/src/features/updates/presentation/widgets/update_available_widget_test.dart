@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
@@ -11,6 +13,23 @@ import '../../../../fakes/recording_analytics_provider.dart';
 class _NewerVersionFeatureFlagsRepo extends FakeFeatureFlagsRepo {
   @override
   Version get latestVersion => _latestVersion;
+}
+
+class _ChangingFeatureFlagsRepo extends FakeFeatureFlagsRepo {
+  final Stream<void> configChanges;
+  Version latest = Version(1, 0, 0);
+  Uri? releaseNotes;
+
+  _ChangingFeatureFlagsRepo(this.configChanges);
+
+  @override
+  Version get latestVersion => latest;
+
+  @override
+  Uri? get releaseNotesUrl => releaseNotes;
+
+  @override
+  Stream<void> get onConfigChanged => configChanges;
 }
 
 const installedVersion = '1.0.0';
@@ -65,6 +84,49 @@ void main() {
               _latestVersion.toString(),
             ),
       ]);
+    },
+  );
+
+  testWidgets(
+    'the banner show reports release notes exactly when the button is shown',
+    (tester) async {
+      final configChanges = StreamController<void>.broadcast();
+      addTearDown(configChanges.close);
+      final repo = _ChangingFeatureFlagsRepo(configChanges.stream);
+      initGlobalProviderContainer([
+        featureFlagsRepoProvider.overrideWithValue(repo),
+        packageInfoPluginProvider.overrideWith(
+          (_) => PackageInfo(
+            appName: 'church_admin',
+            packageName: 'church_admin',
+            version: installedVersion,
+            buildNumber: '1',
+          ),
+        ),
+        analyticsServiceProvider.overrideWithValue(
+          AnalyticsService([analytics], FakeLoggingService()),
+        ),
+      ]);
+      await tester.pumpWidget(
+        const MaterialApp(home: Scaffold(body: UpdateAvailableWidget())),
+      );
+      await tester.pumpAndSettle();
+
+      repo
+        ..latest = _latestVersion
+        ..releaseNotes = Uri.parse('https://example.com/release-notes');
+      configChanges.add(null);
+      await tester.pumpAndSettle();
+
+      expect(
+        analytics.trackedEventsOf<UpdateBannerShow>().single,
+        isA<UpdateBannerShow>().having(
+          (e) => e.hasReleaseNotes,
+          'hasReleaseNotes',
+          find.text('ما الجديد؟').evaluate().isNotEmpty,
+        ),
+      );
+      expect(find.text('ما الجديد؟'), findsOneWidget);
     },
   );
 }
