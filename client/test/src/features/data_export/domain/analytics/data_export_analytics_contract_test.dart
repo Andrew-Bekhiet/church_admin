@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('data export analytics contract', () {
-    const savedFileCount = 2;
     const searchQueryLength = 3;
     const exportDuration = Duration(seconds: 5);
     const exportStart = ExportStart(
@@ -15,16 +14,6 @@ void main() {
     );
 
     final contracts = <(AnalyticsEvent, String, Json)>[
-      (
-        const ExportSavedFilesLandingShow(savedFileCount: savedFileCount),
-        'export:landing_show',
-        {'landing_view': 'savedFiles', 'saved_file_count': savedFileCount},
-      ),
-      (
-        const ExportSelectionLandingShow(),
-        'export:landing_show',
-        {'landing_view': 'selection', 'saved_file_count': 0},
-      ),
       (const ExportNewExportTap(), 'export:new_export_tap', {}),
       (
         const ExportSelectionSearchRun(queryLength: searchQueryLength),

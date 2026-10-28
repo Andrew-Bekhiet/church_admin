@@ -79,12 +79,6 @@ class DataExportCubit extends Cubit<DataExportState> {
   Future<void> _showSavedFilesOrStartNewExport() async {
     final files = await _exportOperationsStorage.listSavedFiles();
 
-    _analyticsService.track(
-      files.isEmpty
-          ? const ExportSelectionLandingShow()
-          : ExportSavedFilesLandingShow(savedFileCount: files.length),
-    );
-
     if (files.isNotEmpty) {
       emit(DataExportListSavedFiles(files: _sortFilesByLastModified(files)));
     } else {
