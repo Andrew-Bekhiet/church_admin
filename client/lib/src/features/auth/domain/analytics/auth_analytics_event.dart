@@ -159,6 +159,7 @@ enum SignOutSource {
 enum LoginScreenMode { login, signUp }
 
 enum LegalDocument {
+  // TODO: to be extracted to dart defines
   termsOfService('https://church-data-admin.firebaseapp.com/terms-of-service/'),
   privacyPolicy('https://church-data-admin.firebaseapp.com/privacy-policy/');
 
