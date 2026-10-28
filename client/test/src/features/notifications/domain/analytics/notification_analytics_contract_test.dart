@@ -15,6 +15,8 @@ void main() {
       additionalData: const {'query': '{}'},
     );
 
+    const reminderPersonCount = 4;
+
     final contracts = <(AnalyticsEvent, String, Json)>[
       (
         NotificationOpen(
@@ -45,13 +47,13 @@ void main() {
       (
         const NotificationReminderFire(
           reminderType: 'kodas',
-          personCount: 4,
+          personCount: reminderPersonCount,
           isSkippedEmpty: false,
         ),
         'notification:reminder_fire',
         {
           'reminder_type': 'kodas',
-          'person_count': 4,
+          'person_count': reminderPersonCount,
           'is_skipped_empty': false,
         },
       ),

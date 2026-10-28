@@ -3,8 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('data check analytics contract', () {
+    const familyId = 'f1';
+    const completenessPercent = 50;
     final automaticallyComplete = DataCheck(
-      familyId: 'f1',
+      familyId: familyId,
       familyCheck: true,
       addressCheck: true,
     );
@@ -13,8 +15,8 @@ void main() {
       (
         DataCheckReportOpen(
           DataCheck(
-            familyId: 'f1',
-            completenessPercent: 50,
+            familyId: familyId,
+            completenessPercent: completenessPercent,
             userOverride: DataCheckOverride.markedIncomplete,
             checksDetails: const [
               DataCheckDetail(
@@ -33,8 +35,8 @@ void main() {
         'data_check:report_open',
         {
           'entity_type': 'family',
-          'family_id': 'f1',
-          'completeness_percent': 50,
+          'family_id': familyId,
+          'completeness_percent': completenessPercent,
           'passed_check_count': 1,
           'total_check_count': 2,
           'is_complete': false,
@@ -51,7 +53,7 @@ void main() {
         'data_check:override_select',
         {
           'entity_type': 'family',
-          'family_id': 'f1',
+          'family_id': familyId,
           'from_override': 'none',
           'to_override': 'markedComplete',
           'is_automatically_complete': true,

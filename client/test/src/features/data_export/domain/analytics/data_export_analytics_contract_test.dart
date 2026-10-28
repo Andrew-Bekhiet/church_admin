@@ -3,48 +3,53 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('data export analytics contract', () {
-    const contracts = <(AnalyticsEvent, String, Json)>[
+    const savedFileCount = 2;
+    const searchQueryLength = 3;
+    const exportDuration = Duration(seconds: 5);
+    const exportStart = ExportStart(
+      areaCount: 1,
+      serviceCount: 2,
+      classCount: 3,
+      groupCount: 4,
+      isScopedToOwn: true,
+    );
+
+    final contracts = <(AnalyticsEvent, String, Json)>[
       (
-        ExportSavedFilesLandingShow(savedFileCount: 2),
+        const ExportSavedFilesLandingShow(savedFileCount: savedFileCount),
         'export:landing_show',
-        {'landing_view': 'savedFiles', 'saved_file_count': 2},
+        {'landing_view': 'savedFiles', 'saved_file_count': savedFileCount},
       ),
       (
-        ExportSelectionLandingShow(),
+        const ExportSelectionLandingShow(),
         'export:landing_show',
         {'landing_view': 'selection', 'saved_file_count': 0},
       ),
-      (ExportNewExportTap(), 'export:new_export_tap', {}),
+      (const ExportNewExportTap(), 'export:new_export_tap', {}),
       (
-        ExportSelectionSearchRun(queryLength: 3),
+        const ExportSelectionSearchRun(queryLength: searchQueryLength),
         'export:selection_search_run',
-        {'query_length': 3},
+        {'query_length': searchQueryLength},
       ),
-      (ExportEmptySelectionShow(), 'export:empty_selection_show', {}),
+      (const ExportEmptySelectionShow(), 'export:empty_selection_show', {}),
       (
-        ExportStart(
-          areaCount: 1,
-          serviceCount: 2,
-          classCount: 3,
-          groupCount: 4,
-          isScopedToOwn: true,
-        ),
+        exportStart,
         'export:export_start',
         {
-          'area_count': 1,
-          'service_count': 2,
-          'class_count': 3,
-          'group_count': 4,
-          'is_scoped_to_own': true,
+          'area_count': exportStart.areaCount,
+          'service_count': exportStart.serviceCount,
+          'class_count': exportStart.classCount,
+          'group_count': exportStart.groupCount,
+          'is_scoped_to_own': exportStart.isScopedToOwn,
         },
       ),
       (
-        ExportFinish(duration: Duration(seconds: 5), isSuccess: true),
+        const ExportFinish(duration: exportDuration, isSuccess: true),
         'export:export_finish',
-        {'is_success': true, 'duration_ms': 5000},
+        {'is_success': true, 'duration_ms': exportDuration.inMilliseconds},
       ),
       (
-        ExportFileOpen(ExportFileOpenSource.savedList),
+        const ExportFileOpen(ExportFileOpenSource.savedList),
         'export:file_open',
         {'source': 'savedList'},
       ),

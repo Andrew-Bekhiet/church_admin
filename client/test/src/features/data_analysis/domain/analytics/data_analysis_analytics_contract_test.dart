@@ -9,6 +9,10 @@ void main() {
       audience: MeetingAudience.personsAndServants,
       isArchived: false,
     );
+    const service = Service(id: 's1', name: 'خدمة');
+    const group = Group(id: 'g1', name: 'مجموعة');
+    const classGroup = Class(id: 'c1', name: 'فصل');
+    const personId = 'p1';
     final week = DateTimeRange(
       start: DateTime.utc(2026, 10),
       end: DateTime.utc(2026, 10, 8),
@@ -24,7 +28,7 @@ void main() {
         'analysis:meetings_view',
         {
           'subject_type': 'meeting',
-          'meeting_id': 'm1',
+          'meeting_id': meeting.id,
           'range_preset': 'today',
           'range_duration_ms': 86400000,
           'is_single_day': true,
@@ -45,7 +49,7 @@ void main() {
         {
           'is_reopened': true,
           'is_cancelled': false,
-          'range_duration_ms': 604800000,
+          'range_duration_ms': week.duration.inMilliseconds,
         },
       ),
       (
@@ -79,9 +83,16 @@ void main() {
         {'section': 'confession', 'is_enabled': false},
       ),
       (
-        const AnalysisLastAttendedTap(personId: 'p1', meetingId: 'm1'),
+        AnalysisLastAttendedTap(
+          personId: personId,
+          meetingId: meeting.id,
+        ),
         'analysis:last_attended_tap',
-        {'entity_type': 'person', 'person_id': 'p1', 'meeting_id': 'm1'},
+        {
+          'entity_type': 'person',
+          'person_id': personId,
+          'meeting_id': meeting.id,
+        },
       ),
     ];
 
@@ -100,15 +111,13 @@ void main() {
       (
         'a service viewed over the past quarter reports its subject and range',
         MeetingsAnalysisView(
-          subject: const MeetingsAnalysisSubject.service(
-            Service(id: 's1', name: 'خدمة'),
-          ),
+          subject: const MeetingsAnalysisSubject.service(service),
           rangePreset: PastQuarterDateTimeRangePreset(),
           isSuccess: false,
         ),
         {
           'subject_type': 'service',
-          'service_id': 's1',
+          'service_id': service.id,
           'range_preset': 'pastQuarter',
           'range_duration_ms': 7776000000,
           'is_single_day': false,
@@ -118,15 +127,13 @@ void main() {
       (
         'a group viewed over the past year reports its subject and range',
         MeetingsAnalysisView(
-          subject: const MeetingsAnalysisSubject.group(
-            Group(id: 'g1', name: 'مجموعة'),
-          ),
+          subject: const MeetingsAnalysisSubject.group(group),
           rangePreset: PastYearDateTimeRangePreset(),
           isSuccess: true,
         ),
         {
           'subject_type': 'group',
-          'group_id': 'g1',
+          'group_id': group.id,
           'range_preset': 'pastYear',
           'range_duration_ms': 31536000000,
           'is_single_day': false,
@@ -136,17 +143,15 @@ void main() {
       (
         'a class viewed over a custom range reports its subject and range',
         MeetingsAnalysisView(
-          subject: const MeetingsAnalysisSubject.class$(
-            Class(id: 'c1', name: 'فصل'),
-          ),
+          subject: const MeetingsAnalysisSubject.class$(classGroup),
           rangePreset: CustomDateTimeRangePreset(range: week),
           isSuccess: true,
         ),
         {
           'subject_type': 'class',
-          'class_id': 'c1',
+          'class_id': classGroup.id,
           'range_preset': 'custom',
-          'range_duration_ms': 604800000,
+          'range_duration_ms': week.duration.inMilliseconds,
           'is_single_day': false,
           'is_success': true,
         },

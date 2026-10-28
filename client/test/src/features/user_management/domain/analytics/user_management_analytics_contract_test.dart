@@ -84,7 +84,7 @@ void main() {
           'is_expanded': true,
           'user_count': 2,
           'entity_type': 'service',
-          'service_id': 's1',
+          'service_id': service.id,
         },
       ),
       (
@@ -111,7 +111,7 @@ void main() {
         'user_management:user_save',
         {
           'entity_type': 'user',
-          'user_id': 'u1',
+          'user_id': savedUser.uid,
           'is_success': true,
           'failure_kind': 'none',
           'added_permissions': ['readAllData'],
@@ -126,19 +126,19 @@ void main() {
         },
       ),
       (
-        const UserApprove('u1', isSuccess: true),
+        UserApprove(savedUser.uid, isSuccess: true),
         'user_management:user_approve',
-        {'entity_type': 'user', 'user_id': 'u1', 'is_success': true},
+        {'entity_type': 'user', 'user_id': savedUser.uid, 'is_success': true},
       ),
       (
-        const UserUnapprove('u1', isSuccess: false),
+        UserUnapprove(savedUser.uid, isSuccess: false),
         'user_management:user_unapprove',
-        {'entity_type': 'user', 'user_id': 'u1', 'is_success': false},
+        {'entity_type': 'user', 'user_id': savedUser.uid, 'is_success': false},
       ),
       (
-        const UserPasswordResetSend('u1', isSuccess: true),
+        UserPasswordResetSend(savedUser.uid, isSuccess: true),
         'user_management:password_reset_send',
-        {'entity_type': 'user', 'user_id': 'u1', 'is_success': true},
+        {'entity_type': 'user', 'user_id': savedUser.uid, 'is_success': true},
       ),
       (
         const AccountDeletionAnswer(confirmationStep: 2, isConfirmed: false),
@@ -187,7 +187,7 @@ void main() {
         UserCreate(
           draft,
           UserManagementAnalyticsEvent.failedOutcomeOf(
-            const PersonAlreadyLinkedException('p1'),
+            PersonAlreadyLinkedException(linkedPerson.id),
           ),
         ),
         containsPair('failure_kind', 'person_already_linked'),

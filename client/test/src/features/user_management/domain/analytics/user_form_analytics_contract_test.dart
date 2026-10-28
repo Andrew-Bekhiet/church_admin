@@ -3,20 +3,32 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('user form analytics contract', () {
+    const area = Area(id: 'a1', name: 'منطقة');
+    const service = Service(id: 's1', name: 'خدمة');
+    const group = Group(id: 'g1', name: 'مجموعة');
+    const scopesApply = AdminScopesApply(
+      addedAreaCount: 1,
+      removedAreaCount: 2,
+      addedServiceCount: 3,
+      removedServiceCount: 4,
+      addedGroupCount: 5,
+      removedGroupCount: 6,
+    );
+    const validity = Duration(days: 3);
     final areaScope = UserAdminScope(
-      object: const Area(id: 'a1', name: 'منطقة'),
+      object: area,
       canManageUsers: false,
       canWriteData: true,
       canExportData: false,
     );
     final serviceScope = UserAdminScope(
-      object: const Service(id: 's1', name: 'خدمة'),
+      object: service,
       canManageUsers: false,
       canWriteData: true,
       canExportData: false,
     );
     final groupScope = UserAdminScope(
-      object: const Group(id: 'g1', name: 'مجموعة'),
+      object: group,
       canManageUsers: false,
       canWriteData: true,
       canExportData: false,
@@ -29,33 +41,26 @@ void main() {
         {'person_link_mode': 'create'},
       ),
       (
-        const AdminScopesApply(
-          addedAreaCount: 1,
-          removedAreaCount: 2,
-          addedServiceCount: 3,
-          removedServiceCount: 4,
-          addedGroupCount: 5,
-          removedGroupCount: 6,
-        ),
+        scopesApply,
         'user_management:scopes_apply',
         {
-          'added_area_count': 1,
-          'removed_area_count': 2,
-          'added_service_count': 3,
-          'removed_service_count': 4,
-          'added_group_count': 5,
-          'removed_group_count': 6,
+          'added_area_count': scopesApply.addedAreaCount,
+          'removed_area_count': scopesApply.removedAreaCount,
+          'added_service_count': scopesApply.addedServiceCount,
+          'removed_service_count': scopesApply.removedServiceCount,
+          'added_group_count': scopesApply.addedGroupCount,
+          'removed_group_count': scopesApply.removedGroupCount,
         },
       ),
       (
         ServiceScopeCopy(serviceScope),
         'user_management:service_scope_copy',
-        {'entity_type': 'service', 'service_id': 's1'},
+        {'entity_type': 'service', 'service_id': service.id},
       ),
       (
         AdminScopeDelete(areaScope),
         'user_management:scope_delete',
-        {'entity_type': 'area', 'area_id': 'a1'},
+        {'entity_type': 'area', 'area_id': area.id},
       ),
       (
         AdminScopePermissionToggle(
@@ -66,7 +71,7 @@ void main() {
         'user_management:scope_permission_toggle',
         {
           'entity_type': 'group',
-          'group_id': 'g1',
+          'group_id': group.id,
           'permission': 'recordServantsAttendance',
           'is_enabled': true,
         },
@@ -77,9 +82,9 @@ void main() {
         {'is_enabled': false},
       ),
       (
-        const InvitationExpiryChange(Duration(days: 3)),
+        const InvitationExpiryChange(validity),
         'user_management:invitation_expiry_change',
-        {'validity_duration_ms': 259200000},
+        {'validity_duration_ms': validity.inMilliseconds},
       ),
       (
         const InvitationCodeShare(),
