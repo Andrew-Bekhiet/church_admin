@@ -1,4 +1,4 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class DataExportAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -104,7 +104,3 @@ final class ExportFileOpen extends DataExportAnalyticsEvent {
 
   const ExportFileOpen(this.source);
 }
-
-enum ExportLandingView { savedFiles, selection }
-
-enum ExportFileOpenSource { completedScreen, savedList }

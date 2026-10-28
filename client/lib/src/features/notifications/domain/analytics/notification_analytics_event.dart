@@ -1,5 +1,4 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:permission_handler/permission_handler.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class NotificationAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -84,5 +83,3 @@ final class NotificationReminderFire extends NotificationAnalyticsEvent {
     required this.isSkippedEmpty,
   });
 }
-
-enum NotificationOpenSource { coldStart, fcmOpenedApp, localTap }

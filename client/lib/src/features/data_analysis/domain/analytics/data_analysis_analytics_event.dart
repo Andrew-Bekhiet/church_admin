@@ -1,4 +1,4 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class DataAnalysisAnalyticsEvent extends AnalyticsEvent {
   static Json rangePropertiesOf(DateTimeRangePreset preset) => {

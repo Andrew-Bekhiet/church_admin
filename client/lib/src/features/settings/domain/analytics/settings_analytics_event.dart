@@ -1,4 +1,4 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class SettingsAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -43,16 +43,4 @@ final class UnsavedChangesPromptAnswer extends SettingsAnalyticsEvent {
   Json get properties => {'is_discarded': isDiscarded};
 
   const UnsavedChangesPromptAnswer({required this.isDiscarded});
-}
-
-enum ThemeChoice {
-  dark,
-  light,
-  system;
-
-  static ThemeChoice of(bool? darkTheme) => switch (darkTheme) {
-    true => dark,
-    false => light,
-    null => system,
-  };
 }

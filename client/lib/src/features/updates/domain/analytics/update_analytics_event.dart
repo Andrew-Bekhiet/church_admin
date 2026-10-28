@@ -1,4 +1,4 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class UpdateAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -42,5 +42,3 @@ final class ReleaseNotesTap extends UpdateAnalyticsEvent {
 
   const ReleaseNotesTap(this.source);
 }
-
-enum UpdatePromptSource { banner, forceUpdateScreen, outdatedFeatureScreen }

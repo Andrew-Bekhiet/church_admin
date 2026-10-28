@@ -1,4 +1,4 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class UserFormAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -136,13 +136,4 @@ final class InvitationCodeCopy extends UserFormAnalyticsEvent {
   String get objectAction => 'invitation_code_copy';
 
   const InvitationCodeCopy();
-}
-
-enum AdminScopePermission {
-  manageUsers,
-  writeData,
-  recordAttendance,
-  recordServantsAttendance,
-  exportData,
-  writeRelatedFamilies,
 }

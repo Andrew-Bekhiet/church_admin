@@ -1,4 +1,4 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class DownloadAppAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -31,5 +31,3 @@ final class AppDownloadLinkFetchFinish extends DownloadAppAnalyticsEvent {
 
   const AppDownloadLinkFetchFinish(this.platform, {required this.isSuccess});
 }
-
-enum DownloadPlatform { android, ios }

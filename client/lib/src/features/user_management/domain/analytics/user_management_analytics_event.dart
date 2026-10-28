@@ -1,5 +1,4 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:cloud_functions/cloud_functions.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class UserManagementAnalyticsEvent extends AnalyticsEvent {
   static String failureKindOf(Object? error) => switch (error) {
@@ -290,18 +289,6 @@ enum AdminScopeType {
     AdminOnData(service: _?) => service,
     AdminOnData(group: _?) => group,
     _ => null,
-  };
-}
-
-enum PersonLinkMode {
-  link,
-  create,
-  none;
-
-  static PersonLinkMode of(PersonLink person) => switch (person) {
-    LinkExistingPerson() => link,
-    CreateNewPerson() => create,
-    NoPersonSelected() => none,
   };
 }
 

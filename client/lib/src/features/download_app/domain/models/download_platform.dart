@@ -1,0 +1,1 @@
+enum DownloadPlatform { android, ios }

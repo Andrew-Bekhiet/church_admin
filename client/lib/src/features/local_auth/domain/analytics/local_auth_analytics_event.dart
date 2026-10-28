@@ -1,4 +1,4 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class LocalAuthAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -69,5 +69,3 @@ final class PasswordUnlockSubmit extends LocalAuthAnalyticsEvent {
     required this.lockedFor,
   });
 }
-
-enum UnlockOutcome { unlocked, notAuthenticated, wrongPassword, failed }
