@@ -238,15 +238,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(AuthLoading(previousState: state));
 
-      await _authRepository.signInWithEmailPassword(
-        email: event.email,
-        password: event.password,
-      );
+      try {
+        await _authRepository.signInWithEmailPassword(
+          email: event.email,
+          password: event.password,
+        );
+      } catch (e) {
+        _analyticsService.track(
+          SignInSubmit(AuthAnalyticsEvent.failedOutcomeOf(e)),
+        );
+        rethrow;
+      }
+      _analyticsService.track(const SignInSubmit(AuthAttemptSucceeded()));
 
       await _authStorage.saveUserPasswordHash(event.email, event.password);
-      _analyticsService.track(const SignInSubmit());
     } catch (e, stackTrace) {
-      _analyticsService.track(SignInSubmit(failure: e));
       _emitFailure(emit, e, stackTrace);
     }
   }
@@ -258,16 +264,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(AuthLoading(previousState: state));
 
-      await _authRepository.signUpWithEmailPassword(
-        email: event.email,
-        password: event.password,
-      );
+      try {
+        await _authRepository.signUpWithEmailPassword(
+          email: event.email,
+          password: event.password,
+        );
+      } catch (e) {
+        _analyticsService.track(
+          SignUpSubmit(AuthAnalyticsEvent.failedOutcomeOf(e)),
+        );
+        rethrow;
+      }
+      _analyticsService.track(const SignUpSubmit(AuthAttemptSucceeded()));
 
       await _authStorage.saveUserPasswordHash(event.email, event.password);
       await _authRepository.sendEmailVerification();
-      _analyticsService.track(const SignUpSubmit());
     } catch (e, stackTrace) {
-      _analyticsService.track(SignUpSubmit(failure: e));
       _emitFailure(emit, e, stackTrace);
     }
   }
@@ -282,11 +294,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading(previousState: previousState));
 
       await _authRepository.sendPasswordResetEmail(email: event.email);
-      _analyticsService.track(const PasswordResetSend());
+      _analyticsService.track(const PasswordResetSend(AuthAttemptSucceeded()));
 
       emit(previousState);
     } catch (e, stackTrace) {
-      _analyticsService.track(PasswordResetSend(failure: e));
+      _analyticsService.track(
+        PasswordResetSend(AuthAnalyticsEvent.failedOutcomeOf(e)),
+      );
       _emitFailure(emit, e, stackTrace);
     }
   }
@@ -346,9 +360,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await _functionsService.applyInvitationCode(event.code);
       await _authRepository.reload();
       await _authRepository.refreshToken();
-      _analyticsService.track(const InvitationCodeApply());
+      _analyticsService.track(
+        const InvitationCodeApply(AuthAttemptSucceeded()),
+      );
     } catch (e, stackTrace) {
-      _analyticsService.track(InvitationCodeApply(failure: e));
+      _analyticsService.track(
+        InvitationCodeApply(AuthAnalyticsEvent.failedOutcomeOf(e)),
+      );
       emit(
         AuthExceptionState(
           exception: e,

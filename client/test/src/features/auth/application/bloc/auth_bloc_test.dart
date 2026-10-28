@@ -209,8 +209,39 @@ void main() {
           const SignInWithEmailPassword(email: 'email', password: 'wrong'),
         ),
         verify: (_) => expect(
-          analytics.trackedEvents.single.properties,
-          {'is_success': false, 'failure_kind': 'incorrect_credentials'},
+          analytics.trackedEvents.single,
+          isA<SignInSubmit>().having(
+            (event) => event.outcome,
+            'outcome',
+            isA<AuthAttemptFailed>().having(
+              (failed) => failed.kind,
+              'kind',
+              AuthAnalyticsEvent.failedOutcomeOf(
+                const IncorrectCredentialsException(null, null),
+              ).kind,
+            ),
+          ),
+        ),
+      );
+
+      blocTest<AuthBloc, AuthState>(
+        'a sign in that succeeds is tracked as succeeded even when saving '
+        'the password hash fails afterwards',
+        setUp: () {
+          when(
+            AuthStorage.I.saveUserPasswordHash('email', 'password'),
+          ).thenThrow(StateError('keychain unavailable'));
+        },
+        build: () => _createAuthBloc(noCachedUser: true),
+        act: (bloc) => bloc.add(
+          const SignInWithEmailPassword(
+            email: 'email',
+            password: 'password',
+          ),
+        ),
+        verify: (_) => expect(
+          analytics.trackedEvents.whereType<SignInSubmit>().single.outcome,
+          isA<AuthAttemptSucceeded>(),
         ),
       );
 

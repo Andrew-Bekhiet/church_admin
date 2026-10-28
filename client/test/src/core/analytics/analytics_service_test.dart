@@ -11,7 +11,7 @@ void main() {
       final second = RecordingAnalyticsProvider();
       final service = AnalyticsService([first, second], FakeLoggingService());
 
-      const event = SignInSubmit();
+      const event = SignInSubmit(AuthAttemptSucceeded());
       service.track(event);
 
       expect(first.trackedEvents, [event]);
@@ -26,7 +26,7 @@ void main() {
         FakeLoggingService(),
       );
 
-      const event = SignInSubmit();
+      const event = SignInSubmit(AuthAttemptSucceeded());
       service.track(event);
       await pumpEventQueue();
 

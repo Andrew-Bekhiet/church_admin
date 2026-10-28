@@ -1,17 +1,16 @@
-// false positives
-// ignore_for_file: solid_lints/avoid_duplicate_code
 part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class AuthAnalyticsEvent extends AnalyticsEvent {
-  static String failureKindOf(Object error) => switch (error) {
-    IncorrectCredentialsException() => 'incorrect_credentials',
-    EmailAlreadyInUseException() => 'email_already_in_use',
-    WeakPasswordException() => 'weak_password',
-    TooManyAttemptsException() => 'too_many_attempts',
-    AuthNetworkException() => 'network',
-    SessionRevokedException() => 'session_revoked',
-    _ => 'unknown',
-  };
+  static AuthAttemptFailed failedOutcomeOf(Object error) =>
+      AuthAttemptFailed(switch (error) {
+        IncorrectCredentialsException() => 'incorrect_credentials',
+        EmailAlreadyInUseException() => 'email_already_in_use',
+        WeakPasswordException() => 'weak_password',
+        TooManyAttemptsException() => 'too_many_attempts',
+        AuthNetworkException() => 'network',
+        SessionRevokedException() => 'session_revoked',
+        _ => 'unknown',
+      });
 
   @override
   String get category => 'auth';
@@ -20,35 +19,27 @@ sealed class AuthAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class SignInSubmit extends AuthAnalyticsEvent {
-  final Object? failure;
+  final AuthAttemptOutcome outcome;
 
   @override
   String get objectAction => 'sign_in_submit';
 
   @override
-  Json get properties => {
-    'is_success': failure == null,
-    if (failure case final Object failure)
-      'failure_kind': AuthAnalyticsEvent.failureKindOf(failure),
-  };
+  Json get properties => outcome.properties;
 
-  const SignInSubmit({this.failure});
+  const SignInSubmit(this.outcome);
 }
 
 final class SignUpSubmit extends AuthAnalyticsEvent {
-  final Object? failure;
+  final AuthAttemptOutcome outcome;
 
   @override
   String get objectAction => 'sign_up_submit';
 
   @override
-  Json get properties => {
-    'is_success': failure == null,
-    if (failure case final Object failure)
-      'failure_kind': AuthAnalyticsEvent.failureKindOf(failure),
-  };
+  Json get properties => outcome.properties;
 
-  const SignUpSubmit({this.failure});
+  const SignUpSubmit(this.outcome);
 }
 
 final class LoginModeSwitch extends AuthAnalyticsEvent {
@@ -64,19 +55,15 @@ final class LoginModeSwitch extends AuthAnalyticsEvent {
 }
 
 final class PasswordResetSend extends AuthAnalyticsEvent {
-  final Object? failure;
+  final AuthAttemptOutcome outcome;
 
   @override
   String get objectAction => 'password_reset_send';
 
   @override
-  Json get properties => {
-    'is_success': failure == null,
-    if (failure case final Object failure)
-      'failure_kind': AuthAnalyticsEvent.failureKindOf(failure),
-  };
+  Json get properties => outcome.properties;
 
-  const PasswordResetSend({this.failure});
+  const PasswordResetSend(this.outcome);
 }
 
 final class EmailVerificationCheck extends AuthAnalyticsEvent {
@@ -99,19 +86,15 @@ final class EmailVerificationResend extends AuthAnalyticsEvent {
 }
 
 final class InvitationCodeApply extends AuthAnalyticsEvent {
-  final Object? failure;
+  final AuthAttemptOutcome outcome;
 
   @override
   String get objectAction => 'invitation_code_apply';
 
   @override
-  Json get properties => {
-    'is_success': failure == null,
-    if (failure case final Object failure)
-      'failure_kind': AuthAnalyticsEvent.failureKindOf(failure),
-  };
+  Json get properties => outcome.properties;
 
-  const InvitationCodeApply({this.failure});
+  const InvitationCodeApply(this.outcome);
 }
 
 final class AccountClaimByEmail extends AuthAnalyticsEvent {
@@ -150,22 +133,24 @@ final class LegalDocumentOpen extends AuthAnalyticsEvent {
   const LegalDocumentOpen(this.document);
 }
 
-enum SignOutSource {
-  signOutButton,
-  homeDrawer,
-  biometricsLockScreen,
-  accountDeletion,
-  sessionRevoked,
+sealed class AuthAttemptOutcome {
+  Json get properties;
+
+  const AuthAttemptOutcome();
 }
 
-enum LoginScreenMode { login, signUp }
+final class AuthAttemptSucceeded extends AuthAttemptOutcome {
+  @override
+  Json get properties => const {'is_success': true};
 
-enum LegalDocument {
-  // TODO: to be extracted to dart defines
-  termsOfService('https://church-data-admin.firebaseapp.com/terms-of-service/'),
-  privacyPolicy('https://church-data-admin.firebaseapp.com/privacy-policy/');
+  const AuthAttemptSucceeded();
+}
 
-  final String url;
+final class AuthAttemptFailed extends AuthAttemptOutcome {
+  final String kind;
 
-  const LegalDocument(this.url);
+  @override
+  Json get properties => {'is_success': false, 'failure_kind': kind};
+
+  const AuthAttemptFailed(this.kind);
 }

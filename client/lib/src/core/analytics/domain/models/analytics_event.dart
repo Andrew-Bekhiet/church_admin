@@ -1,5 +1,3 @@
-// false positives
-// ignore_for_file: solid_lints/avoid_duplicate_code
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 
