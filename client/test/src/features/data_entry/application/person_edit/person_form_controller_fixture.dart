@@ -27,6 +27,9 @@ class PersonFormControllerFixture {
   final FakePhotoUploader photos = FakePhotoUploader();
   final InMemoryFamiliesDAO families = InMemoryFamiliesDAO();
   final RecordingAnalyticsProvider analytics = RecordingAnalyticsProvider();
+  late final AnalyticsService analyticsService = AnalyticsService([
+    analytics,
+  ], FakeLoggingService());
 
   User? currentUser = const User(
     uid: 'me',
@@ -43,7 +46,7 @@ class PersonFormControllerFixture {
       families: families,
       photoUploader: photos,
       currentUser: currentUser,
-      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+      analyticsService: analyticsService,
       addressServices: AddressFormServices(
         autofill: AddressAutofill(
           areas: areas,
@@ -57,7 +60,7 @@ class PersonFormControllerFixture {
           districts: districts,
         ),
         logging: FakeLoggingService(),
-        analytics: AnalyticsService([analytics], FakeLoggingService()),
+        analytics: analyticsService,
       ),
     );
     addTearDown(() {

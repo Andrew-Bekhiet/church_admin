@@ -26,47 +26,47 @@ void main() {
     (
       event: EntityMapShow(person),
       name: 'entity:map_show',
-      properties: {'entity_type': 'person', 'person_id': 'person-1'},
+      properties: {'entity_type': 'person', 'person_id': person.id},
     ),
     (
       event: EntityMapShow(family),
       name: 'entity:map_show',
-      properties: {'entity_type': 'family', 'family_id': 'family-1'},
+      properties: {'entity_type': 'family', 'family_id': family.id},
     ),
     (
       event: EntityMapShow(area),
       name: 'entity:map_show',
-      properties: {'entity_type': 'area', 'area_id': 'area-1'},
+      properties: {'entity_type': 'area', 'area_id': area.id},
     ),
     (
       event: EntityMapShow(street),
       name: 'entity:map_show',
-      properties: {'entity_type': 'street', 'street_id': 'street-1'},
+      properties: {'entity_type': 'street', 'street_id': street.id},
     ),
     (
       event: EntityMapShow(store),
       name: 'entity:map_show',
-      properties: {'entity_type': 'store', 'store_id': 'store-1'},
+      properties: {'entity_type': 'store', 'store_id': store.id},
     ),
     (
       event: EntityAttendanceRecordOpen(service),
       name: 'entity:attendance_record_open',
-      properties: {'entity_type': 'service', 'service_id': 'service-1'},
+      properties: {'entity_type': 'service', 'service_id': service.id},
     ),
     (
       event: EntityAttendanceRecordOpen(group),
       name: 'entity:attendance_record_open',
-      properties: {'entity_type': 'group', 'group_id': 'group-1'},
+      properties: {'entity_type': 'group', 'group_id': group.id},
     ),
     (
       event: EntityStatisticsOpen(schoolClass),
       name: 'entity:statistics_open',
-      properties: {'entity_type': 'class', 'class_id': 'class-1'},
+      properties: {'entity_type': 'class', 'class_id': schoolClass.id},
     ),
     (
       event: EntityStatisticsOpen(user),
       name: 'entity:statistics_open',
-      properties: {'entity_type': 'user', 'user_id': 'user-1'},
+      properties: {'entity_type': 'user', 'user_id': user.uid},
     ),
     (
       event: EntityStatisticsOpen(const District(id: 'district-1', name: 'حي')),
@@ -97,7 +97,7 @@ void main() {
       name: 'entity:related_create_tap',
       properties: {
         'entity_type': 'family',
-        'family_id': 'family-1',
+        'family_id': family.id,
         'related_entity_type': 'person',
         'relation': 'member',
       },
@@ -107,7 +107,7 @@ void main() {
       name: 'entity:related_create_tap',
       properties: {
         'entity_type': 'area',
-        'area_id': 'area-1',
+        'area_id': area.id,
         'related_entity_type': 'store',
         'relation': 'unlinked',
       },

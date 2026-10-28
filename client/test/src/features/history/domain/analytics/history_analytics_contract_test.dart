@@ -19,7 +19,7 @@ void main() {
         properties: {
           'history_kind': sent,
           'entity_type': 'person',
-          'person_id': 'person-1',
+          'person_id': person.id,
         },
       ),
     (
@@ -30,7 +30,7 @@ void main() {
       properties: {
         'history_kind': 'visit',
         'entity_type': 'family',
-        'family_id': 'family-1',
+        'family_id': family.id,
       },
     ),
     (
@@ -39,7 +39,7 @@ void main() {
       properties: {
         'history_kind': 'edit',
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
       },
     ),
   ];

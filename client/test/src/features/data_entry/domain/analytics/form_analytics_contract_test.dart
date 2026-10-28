@@ -14,35 +14,35 @@ void main() {
       name: 'form:first_invalid_field_focus',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'invalid_field_count': 2,
       },
     ),
     (
       event: DiscardPromptShow(service),
       name: 'form:discard_prompt_show',
-      properties: {'entity_type': 'service', 'service_id': 'service-1'},
+      properties: {'entity_type': 'service', 'service_id': service.id},
     ),
     (
       event: DiscardPromptAnswer(person, isDiscarded: true),
       name: 'form:discard_prompt_answer',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'is_discarded': true,
       },
     ),
     (
       event: OutOfSightWarningShow(group),
       name: 'form:out_of_sight_warning_show',
-      properties: {'entity_type': 'group', 'group_id': 'group-1'},
+      properties: {'entity_type': 'group', 'group_id': group.id},
     ),
     (
       event: OutOfSightWarningAnswer(person, isConfirmed: false),
       name: 'form:out_of_sight_warning_answer',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'is_confirmed': false,
       },
     ),
@@ -62,7 +62,7 @@ void main() {
       properties: {
         'service_count': 1,
         'auto_selected_group_count': 2,
-        'service_id': 'service-1',
+        'service_id': service.id,
       },
     ),
     (

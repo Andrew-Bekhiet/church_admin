@@ -16,8 +16,8 @@ void main() {
       name: 'address:area_fill',
       properties: {
         'autofill_source': 'singleAreaStreet',
-        'street_id': 'street-1',
-        'area_id': 'area-1',
+        'street_id': street.id,
+        'area_id': area.id,
       },
     ),
     (
@@ -29,8 +29,8 @@ void main() {
       name: 'address:area_fill',
       properties: {
         'autofill_source': 'geocodedHouseNumber',
-        'street_id': 'street-1',
-        'area_id': 'area-1',
+        'street_id': street.id,
+        'area_id': area.id,
       },
     ),
     (
@@ -41,7 +41,7 @@ void main() {
       name: 'address:location_fill',
       properties: {
         'autofill_source': 'geocodedHouseNumber',
-        'street_id': 'street-1',
+        'street_id': street.id,
       },
     ),
     (
@@ -87,7 +87,7 @@ void main() {
     (
       event: DistrictCreate(district),
       name: 'address:district_create',
-      properties: {'district_id': 'district-1'},
+      properties: {'district_id': district.id},
     ),
     (
       event: FamilyAddressFill(const Family(id: 'family-1', name: 'عائلة')),

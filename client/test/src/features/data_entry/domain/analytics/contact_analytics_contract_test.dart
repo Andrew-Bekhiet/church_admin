@@ -15,7 +15,7 @@ void main() {
       name: 'contact:call_prompt_answer',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'is_family_number': false,
         'call_prompt_choice': 'call',
       },
@@ -29,7 +29,7 @@ void main() {
       name: 'contact:call_prompt_answer',
       properties: {
         'entity_type': 'family',
-        'family_id': 'family-1',
+        'family_id': family.id,
         'is_family_number': true,
         'call_prompt_choice': 'dialerOnly',
       },
@@ -43,7 +43,7 @@ void main() {
       name: 'contact:call_prompt_answer',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'is_family_number': false,
         'call_prompt_choice': 'cancel',
       },
@@ -53,7 +53,7 @@ void main() {
       name: 'contact:dialer_open',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'is_family_number': true,
       },
     ),
@@ -62,7 +62,7 @@ void main() {
       name: 'contact:whatsapp_open',
       properties: {
         'entity_type': 'family',
-        'family_id': 'family-1',
+        'family_id': family.id,
         'is_family_number': true,
       },
     ),
@@ -71,7 +71,7 @@ void main() {
       name: 'contact:sms_open',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'is_family_number': false,
       },
     ),
@@ -80,7 +80,7 @@ void main() {
       name: 'contact:number_copy',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'is_family_number': false,
       },
     ),
@@ -89,7 +89,7 @@ void main() {
       name: 'contact:call_date_record_answer',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'is_recording_accepted': true,
       },
     ),
@@ -102,7 +102,7 @@ void main() {
       name: 'contact:device_contact_create_attempt',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'outcome': 'created',
         'has_photo': true,
       },
@@ -115,7 +115,7 @@ void main() {
       name: 'contact:device_contact_create_attempt',
       properties: {
         'entity_type': 'family',
-        'family_id': 'family-1',
+        'family_id': family.id,
         'outcome': 'permissionDenied',
         'has_photo': false,
       },
@@ -128,7 +128,7 @@ void main() {
       name: 'contact:device_contact_create_attempt',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'outcome': 'cancelled',
         'has_photo': false,
       },
@@ -141,7 +141,7 @@ void main() {
       name: 'contact:device_contact_create_attempt',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'outcome': 'failed',
         'has_photo': false,
       },
