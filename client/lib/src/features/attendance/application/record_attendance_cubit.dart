@@ -185,7 +185,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     return _runOptimisticAttendance(
       entry: entry,
       optimisticTime: newIsPresent ? attendanceTime : null,
-      trackOutcome: _analytics.markTrackerIfLoaded(state, entry, newIsPresent),
+      tracking: _analytics.markTracking(state, entry, newIsPresent),
       action: () async {
         if (newIsPresent) {
           final record = await _dao.markAttendance(
@@ -240,7 +240,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     await _runOptimisticAttendance(
       entry: entry,
       optimisticTime: newDatetime,
-      trackOutcome: _analytics.timeEditTracker(_meeting, record, newDatetime),
+      tracking: _analytics.timeEditTracking(_meeting, record, newDatetime),
       action: () => _dao.updateAttendanceTime(
         attendanceRecordId: record.id,
         datetime: newDatetime,
@@ -251,7 +251,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   Future<void> _runOptimisticAttendance({
     required MeetingRosterEntry entry,
     required DateTime? optimisticTime,
-    required void Function({required bool isSaved})? trackOutcome,
+    required AttendanceSaveTracking tracking,
     required Future<void> Function() action,
   }) async {
     final personId = entry.person.id;
@@ -275,9 +275,9 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     try {
       await action();
-      trackOutcome?.call(isSaved: true);
+      tracking.trackOutcome(isSaved: true);
     } catch (error, stackTrace) {
-      trackOutcome?.call(isSaved: false);
+      tracking.trackOutcome(isSaved: false);
       _liveAttendance.rollbackOptimistic(key);
       _logError(error, stackTrace);
 

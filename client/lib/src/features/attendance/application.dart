@@ -2,6 +2,7 @@ export 'application/attendance_grouping.dart';
 export 'application/attendance_name_alphabet.dart';
 export 'application/attendance_presence_filter.dart';
 export 'application/attendance_roster_audience_view.dart';
+export 'application/attendance_save_tracking.dart';
 export 'application/attendance_sorting.dart';
 export 'application/attendance_undoable_change.dart';
 export 'application/record_attendance_analytics.dart';

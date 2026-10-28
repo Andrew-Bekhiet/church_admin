@@ -1,1 +1,0 @@
-enum AttendanceAnalysisPreset { today, custom }

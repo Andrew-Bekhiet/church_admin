@@ -259,8 +259,7 @@ void main() {
               standaloneMeeting,
               personId: 'person-3',
               shift: const Duration(minutes: -15),
-              isRejectedFuture: false,
-              isSuccess: true,
+              outcome: AttendanceTimeEditOutcome.saved,
             ),
             'attendance:time_edit',
             {
@@ -290,7 +289,12 @@ void main() {
           (
             AttendanceAnalysisOpen(
               standaloneMeeting,
-              AttendanceAnalysisPreset.custom,
+              CustomDateTimeRangePreset(
+                range: DateTimeRange(
+                  start: DateTime(2026, 10, 5),
+                  end: DateTime(2026, 10, 5),
+                ),
+              ),
             ),
             'attendance:analysis_open',
             {'meeting_id': 'meeting-3', 'range_preset': 'custom'},

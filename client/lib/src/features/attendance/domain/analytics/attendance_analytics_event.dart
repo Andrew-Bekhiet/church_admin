@@ -1,22 +1,10 @@
 part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
-sealed class AttendanceAnalyticsEvent extends AnalyticsEvent {
-  static Json meetingPropertiesOf(Meeting meeting) => {
-    'meeting_id': meeting.id,
-    if (meeting.serviceId case final serviceId?) 'service_id': serviceId,
-    if (meeting.groupId case final groupId?) 'group_id': groupId,
-  };
-
-  final Json meetingProperties;
-
+sealed class AttendanceAnalyticsEvent extends MeetingAnalyticsEvent {
   @override
   String get category => 'attendance';
 
-  @override
-  Json get properties => meetingProperties;
-
-  AttendanceAnalyticsEvent(Meeting meeting)
-    : meetingProperties = meetingPropertiesOf(meeting);
+  AttendanceAnalyticsEvent(super.meeting);
 }
 
 final class AttendancePersonMark extends AttendanceAnalyticsEvent {
@@ -191,18 +179,27 @@ final class AttendanceSearchRun extends AttendanceAnalyticsEvent {
 }
 
 sealed class AttendanceSortingAnalyticsEvent extends AttendanceAnalyticsEvent {
-  final AttendanceSortType sortType;
+  static String sortTypeOf(AttendanceSorting sort) => switch (sort) {
+    AttendanceSortingByName() => 'name',
+    AttendanceSortingByTime() => 'attendanceTime',
+    AttendanceSortingByStreak() => 'streak',
+    AttendanceSortingByLastAttendanceTime() => 'lastAttendanceTime',
+    AttendanceSortingByStudyYear() => 'studyYear',
+    _ => 'id',
+  };
+
+  final String sortType;
   final SortingDirection sortDirection;
 
   @override
   Json get properties => {
     ...super.properties,
-    'sort_type': sortType.name,
+    'sort_type': sortType,
     'sort_direction': sortDirection.name,
   };
 
   AttendanceSortingAnalyticsEvent(super.meeting, AttendanceSorting sort)
-    : sortType = AttendanceSortType.of(sort),
+    : sortType = sortTypeOf(sort),
       sortDirection = sort.direction;
 }
 
@@ -271,8 +268,7 @@ final class AttendanceStreakWindowChange extends AttendanceAnalyticsEvent {
 final class AttendanceTimeEdit extends AttendanceAnalyticsEvent {
   final String personId;
   final int shiftDurationMs;
-  final bool isRejectedFuture;
-  final bool isSuccess;
+  final AttendanceTimeEditOutcome outcome;
 
   @override
   String get objectAction => 'time_edit';
@@ -282,16 +278,15 @@ final class AttendanceTimeEdit extends AttendanceAnalyticsEvent {
     ...super.properties,
     'person_id': personId,
     'shift_duration_ms': shiftDurationMs,
-    'is_rejected_future': isRejectedFuture,
-    'is_success': isSuccess,
+    'is_rejected_future': outcome == AttendanceTimeEditOutcome.rejectedAsFuture,
+    'is_success': outcome == AttendanceTimeEditOutcome.saved,
   };
 
   AttendanceTimeEdit(
     super.meeting, {
     required this.personId,
     required Duration shift,
-    required this.isRejectedFuture,
-    required this.isSuccess,
+    required this.outcome,
   }) : shiftDurationMs = shift.inMilliseconds;
 }
 
@@ -323,7 +318,7 @@ final class AttendanceLetterGutterUse extends AttendanceAnalyticsEvent {
 }
 
 final class AttendanceAnalysisOpen extends AttendanceAnalyticsEvent {
-  final AttendanceAnalysisPreset rangePreset;
+  final DateTimeRangePreset rangePreset;
 
   @override
   String get objectAction => 'analysis_open';
@@ -331,7 +326,10 @@ final class AttendanceAnalysisOpen extends AttendanceAnalyticsEvent {
   @override
   Json get properties => {
     ...super.properties,
-    'range_preset': rangePreset.name,
+    'range_preset': switch (rangePreset) {
+      TodayDateTimeRangePreset() => 'today',
+      _ => 'custom',
+    },
   };
 
   AttendanceAnalysisOpen(super.meeting, this.rangePreset);

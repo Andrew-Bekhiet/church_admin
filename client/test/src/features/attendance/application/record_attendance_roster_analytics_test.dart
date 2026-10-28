@@ -71,7 +71,7 @@ void main() {
       verify: (_) => expect(f.trackedPropertiesOf<AttendanceSortReverse>(), {
         'meeting_id': f.meeting.id,
         'service_id': f.meeting.serviceId,
-        'sort_type': AttendanceSortType.name.name,
+        'sort_type': 'name',
         'sort_direction': SortingDirection.descending.name,
       }),
     );
@@ -85,7 +85,7 @@ void main() {
       },
       verify: (_) => expect(
         f.trackedPropertiesOf<AttendanceSortChange>()['sort_type'],
-        AttendanceSortType.attendanceTime.name,
+        'attendanceTime',
       ),
     );
 

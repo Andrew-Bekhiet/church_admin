@@ -59,7 +59,7 @@ void main() {
         'service_id': f.meeting.serviceId,
         'is_as_servant': false,
         'is_today': true,
-        'sort_type': AttendanceSortType.name.name,
+        'sort_type': 'name',
         'sort_direction': SortingDirection.ascending.name,
         'presence_filter': AttendancePresenceFilter.all.name,
         'is_search_active': false,
@@ -90,7 +90,7 @@ void main() {
       },
       verify: (_) => expect(
         f.trackedPropertiesOf<AttendancePersonMark>()['sort_type'],
-        AttendanceSortType.name.name,
+        'name',
       ),
     );
 

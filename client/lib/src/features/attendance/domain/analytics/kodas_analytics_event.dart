@@ -1,16 +1,10 @@
 part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
-sealed class KodasAnalyticsEvent extends AnalyticsEvent {
-  final Json meetingProperties;
-
+sealed class KodasAnalyticsEvent extends MeetingAnalyticsEvent {
   @override
   String get category => 'kodas';
 
-  @override
-  Json get properties => meetingProperties;
-
-  KodasAnalyticsEvent(Meeting meeting)
-    : meetingProperties = AttendanceAnalyticsEvent.meetingPropertiesOf(meeting);
+  KodasAnalyticsEvent(super.meeting);
 }
 
 final class KodasColumnToggle extends KodasAnalyticsEvent {

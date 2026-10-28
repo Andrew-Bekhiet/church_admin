@@ -102,24 +102,19 @@ class AttendanceAppBar extends StatelessWidget {
 
   void _openAnalysis(BuildContext context, RecordAttendanceCubit cubit) {
     final selectedDay = DateUtils.dateOnly(selectedDate);
-    final isTodaySelected = selectedDay == DateUtils.dateOnly(DateTime.now());
+    final rangePreset = selectedDay == DateUtils.dateOnly(DateTime.now())
+        ? TodayDateTimeRangePreset()
+        : CustomDateTimeRangePreset(
+            range: DateTimeRange(start: selectedDay, end: selectedDay),
+          );
 
     cubit.trackForCurrentMeeting(
-      (meeting) => AttendanceAnalysisOpen(
-        meeting,
-        isTodaySelected
-            ? AttendanceAnalysisPreset.today
-            : AttendanceAnalysisPreset.custom,
-      ),
+      (meeting) => AttendanceAnalysisOpen(meeting, rangePreset),
     );
     unawaited(
       MeetingsAnalysisRoute(
         title: 'احصائيات ${meeting.name}',
-        initialRangePreset: isTodaySelected
-            ? TodayDateTimeRangePreset()
-            : CustomDateTimeRangePreset(
-                range: DateTimeRange(start: selectedDay, end: selectedDay),
-              ),
+        initialRangePreset: rangePreset,
         subject: MeetingAnalysisSubject(meeting),
       ).push(context),
     );

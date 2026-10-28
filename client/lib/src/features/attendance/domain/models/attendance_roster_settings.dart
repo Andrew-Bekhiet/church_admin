@@ -5,7 +5,7 @@ import 'package:material_ui/material_ui.dart' show DateUtils;
 class AttendanceRosterSettings {
   final bool isAsServant;
   final bool isToday;
-  final AttendanceSortType sortType;
+  final String sortType;
   final SortingDirection sortDirection;
   final AttendancePresenceFilter presenceFilter;
   final bool isSearchActive;
@@ -14,7 +14,7 @@ class AttendanceRosterSettings {
   Json get properties => {
     'is_as_servant': isAsServant,
     'is_today': isToday,
-    'sort_type': sortType.name,
+    'sort_type': sortType,
     'sort_direction': sortDirection.name,
     'presence_filter': presenceFilter.name,
     'is_search_active': isSearchActive,
@@ -24,7 +24,7 @@ class AttendanceRosterSettings {
   AttendanceRosterSettings.of(RecordAttendanceLoaded roster)
     : isAsServant = roster.audienceView.asServant,
       isToday = DateUtils.isSameDay(roster.selectedDate, clock.now()),
-      sortType = AttendanceSortType.of(roster.sort),
+      sortType = AttendanceSortingAnalyticsEvent.sortTypeOf(roster.sort),
       sortDirection = roster.sort.direction,
       presenceFilter = roster.presenceFilter,
       isSearchActive = roster.searchQuery?.isNotEmpty ?? false,

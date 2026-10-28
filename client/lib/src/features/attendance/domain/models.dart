@@ -1,9 +1,8 @@
-export 'models/attendance_analysis_preset.dart';
 export 'models/attendance_letter_gutter_gesture.dart';
 export 'models/attendance_mark_state.dart';
 export 'models/attendance_record.dart';
 export 'models/attendance_roster_settings.dart';
-export 'models/attendance_sort_type.dart';
+export 'models/attendance_time_edit_outcome.dart';
 export 'models/kodas_record.dart';
 export 'models/meeting.dart';
 export 'models/meeting_audience.dart';

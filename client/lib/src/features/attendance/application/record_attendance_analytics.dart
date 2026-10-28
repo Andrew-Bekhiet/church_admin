@@ -43,7 +43,9 @@ class RecordAttendanceAnalytics {
     Meeting meeting,
     AttendanceSorting previous,
     AttendanceSorting next,
-  ) => AttendanceSortType.of(previous) == AttendanceSortType.of(next)
+  ) =>
+      AttendanceSortingAnalyticsEvent.sortTypeOf(previous) ==
+          AttendanceSortingAnalyticsEvent.sortTypeOf(next)
       ? AttendanceSortReverse(meeting, next)
       : AttendanceSortChange(meeting, next);
 
@@ -58,24 +60,21 @@ class RecordAttendanceAnalytics {
     RecordAttendanceState previous,
     RecordAttendanceLoaded next,
   ) {
-    if (previous case final RecordAttendanceLoaded previous) {
-      _rosterChangesBetween(previous, next).forEach(track);
-    }
+    if (previous is! RecordAttendanceLoaded) return;
+
+    _rosterChangesBetween(previous, next).forEach(track);
   }
 
   void maybeTrackDateChange(RecordAttendanceState roster, DateTime day) {
-    if (roster case RecordAttendanceLoaded(
-      :final meeting,
-      :final recordedDays,
-    )) {
-      track(
-        AttendanceDateChange(
-          meeting,
-          day: day,
-          hasRecordsOnDay: recordedDays.contains(day),
-        ),
-      );
-    }
+    if (roster is! RecordAttendanceLoaded) return;
+
+    track(
+      AttendanceDateChange(
+        roster.meeting,
+        day: day,
+        hasRecordsOnDay: roster.recordedDays.contains(day),
+      ),
+    );
   }
 
   void maybeTrackPresenceFilterChange(
@@ -83,21 +82,17 @@ class RecordAttendanceAnalytics {
     AttendancePresenceFilter presenceFilter, {
     required bool isReset,
   }) {
-    if (roster case RecordAttendanceLoaded(
-      :final meeting,
-      :final presentCount,
-      :final eligibleCount,
-    )) {
-      track(
-        AttendancePresenceFilterChange(
-          meeting,
-          presenceFilter: presenceFilter,
-          isReset: isReset,
-          presentCount: presentCount,
-          eligibleCount: eligibleCount,
-        ),
-      );
-    }
+    if (roster is! RecordAttendanceLoaded) return;
+
+    track(
+      AttendancePresenceFilterChange(
+        roster.meeting,
+        presenceFilter: presenceFilter,
+        isReset: isReset,
+        presentCount: roster.presentCount,
+        eligibleCount: roster.eligibleCount,
+      ),
+    );
   }
 
   AttendanceUndoPresenter withUndoTracking(
@@ -115,25 +110,29 @@ class RecordAttendanceAnalytics {
     ),
   );
 
-  void Function({required bool isSaved})? markTrackerIfLoaded(
+  AttendanceSaveTracking markTracking(
     RecordAttendanceState rosterAtMark,
     MeetingRosterEntry entry,
     bool isMarkedPresent,
   ) {
-    if (rosterAtMark is! RecordAttendanceLoaded) return null;
+    if (rosterAtMark is! RecordAttendanceLoaded) {
+      return const UntrackedAttendanceSave();
+    }
 
     final rosterSettings = AttendanceRosterSettings.of(rosterAtMark);
     final newState = isMarkedPresent
         ? AttendanceMarkState.present
         : AttendanceMarkState.absent;
 
-    return ({required isSaved}) => track(
-      AttendancePersonMark(
-        rosterAtMark.meeting,
-        personId: entry.person.id,
-        newState: newState,
-        rosterSettings: rosterSettings,
-        isSuccess: isSaved,
+    return TrackedAttendanceSave(
+      ({required isSaved}) => track(
+        AttendancePersonMark(
+          rosterAtMark.meeting,
+          personId: entry.person.id,
+          newState: newState,
+          rosterSettings: rosterSettings,
+          isSuccess: isSaved,
+        ),
       ),
     );
   }
@@ -147,23 +146,24 @@ class RecordAttendanceAnalytics {
       meeting,
       personId: editedRecord.personId,
       shift: newDatetime.difference(editedRecord.datetime),
-      isRejectedFuture: true,
-      isSuccess: false,
+      outcome: AttendanceTimeEditOutcome.rejectedAsFuture,
     ),
   );
 
-  void Function({required bool isSaved}) timeEditTracker(
+  AttendanceSaveTracking timeEditTracking(
     Meeting meeting,
     AttendanceRecord editedRecord,
     DateTime newDatetime,
-  ) =>
-      ({required isSaved}) => track(
-        AttendanceTimeEdit(
-          meeting,
-          personId: editedRecord.personId,
-          shift: newDatetime.difference(editedRecord.datetime),
-          isRejectedFuture: false,
-          isSuccess: isSaved,
-        ),
-      );
+  ) => TrackedAttendanceSave(
+    ({required isSaved}) => track(
+      AttendanceTimeEdit(
+        meeting,
+        personId: editedRecord.personId,
+        shift: newDatetime.difference(editedRecord.datetime),
+        outcome: isSaved
+            ? AttendanceTimeEditOutcome.saved
+            : AttendanceTimeEditOutcome.failed,
+      ),
+    ),
+  );
 }

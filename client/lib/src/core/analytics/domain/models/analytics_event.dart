@@ -6,6 +6,7 @@ import 'package:permission_handler/permission_handler.dart'
 
 part 'package:church_admin/src/features/attendance/domain/analytics/attendance_analytics_event.dart';
 part 'package:church_admin/src/features/attendance/domain/analytics/kodas_analytics_event.dart';
+part 'package:church_admin/src/features/attendance/domain/analytics/meeting_analytics_event.dart';
 part 'package:church_admin/src/features/auth/domain/analytics/auth_analytics_event.dart';
 part 'package:church_admin/src/features/contacts/domain/analytics/phone_contacts_editor_analytics_event.dart';
 part 'package:church_admin/src/features/data_entry/domain/analytics/address_analytics_event.dart';
