@@ -97,14 +97,17 @@ void main() {
       'a loaded analysis is tracked by its subject and range, not its title',
       setUp: stubAnalysis,
       build: () => buildCubit(initialRange: range),
-      verify: (_) => expect(analytics.trackedEvents.single.properties, {
-        'subject_type': 'service',
-        'service_id': service.id,
-        'range_preset': AnalysisRangePreset.custom.name,
-        'range_duration_ms': range.duration.inMilliseconds,
-        'is_single_day': false,
-        'is_success': true,
-      }),
+      verify: (_) => expect(
+        analytics.trackedEventsOf<MeetingsAnalysisView>().single,
+        isA<MeetingsAnalysisView>()
+            .having((event) => event.subject, 'subject', serviceSubject)
+            .having(
+              (event) => event.rangePreset,
+              'rangePreset',
+              CustomDateTimeRangePreset(range: range),
+            )
+            .having((event) => event.isSuccess, 'isSuccess', true),
+      ),
     );
 
     blocTest<MeetingsAnalysisCubit, MeetingsAnalysisState>(
@@ -118,8 +121,12 @@ void main() {
       build: () => buildCubit(initialRange: range),
       errors: () => [isA<Exception>()],
       verify: (_) => expect(
-        analytics.trackedEvents.single.properties,
-        containsPair('is_success', false),
+        analytics.trackedEventsOf<MeetingsAnalysisView>().single,
+        isA<MeetingsAnalysisView>().having(
+          (event) => event.isSuccess,
+          'isSuccess',
+          false,
+        ),
       ),
     );
 

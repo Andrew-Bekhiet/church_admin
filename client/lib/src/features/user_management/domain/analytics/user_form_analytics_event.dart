@@ -8,15 +8,20 @@ sealed class UserFormAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class PersonLinkModeSwitch extends UserFormAnalyticsEvent {
-  final PersonLinkMode mode;
+  final PersonLink target;
 
   @override
   String get objectAction => 'person_link_mode_switch';
 
   @override
-  Json get properties => {'person_link_mode': mode.name};
+  Json get properties => {
+    'person_link_mode': switch (target) {
+      CreateNewPerson() => 'create',
+      LinkExistingPerson() || NoPersonSelected() => 'link',
+    },
+  };
 
-  const PersonLinkModeSwitch(this.mode);
+  const PersonLinkModeSwitch(this.target);
 }
 
 final class AdminScopesApply extends UserFormAnalyticsEvent {

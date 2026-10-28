@@ -2,7 +2,13 @@ part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.d
 
 sealed class DataAnalysisAnalyticsEvent extends AnalyticsEvent {
   static Json rangePropertiesOf(DateTimeRangePreset preset) => {
-    'range_preset': AnalysisRangePreset.of(preset).name,
+    'range_preset': switch (preset) {
+      TodayDateTimeRangePreset() => 'today',
+      PastMonthDateTimeRangePreset() => 'pastMonth',
+      PastQuarterDateTimeRangePreset() => 'pastQuarter',
+      PastYearDateTimeRangePreset() => 'pastYear',
+      CustomDateTimeRangePreset() => 'custom',
+    },
     'range_duration_ms': preset.duration.inMilliseconds,
   };
 
@@ -13,10 +19,8 @@ sealed class DataAnalysisAnalyticsEvent extends AnalyticsEvent {
 }
 
 final class MeetingsAnalysisView extends DataAnalysisAnalyticsEvent {
-  final String subjectType;
-  final Json subjectProperties;
-  final Json rangeProperties;
-  final bool isSingleDay;
+  final MeetingsAnalysisSubject subject;
+  final DateTimeRangePreset rangePreset;
   final bool isSuccess;
 
   @override
@@ -24,48 +28,48 @@ final class MeetingsAnalysisView extends DataAnalysisAnalyticsEvent {
 
   @override
   Json get properties => {
-    'subject_type': subjectType,
-    ...subjectProperties,
-    ...rangeProperties,
-    'is_single_day': isSingleDay,
+    ...switch (subject) {
+      MeetingAnalysisSubject(:final meeting) => {
+        'subject_type': 'meeting',
+        'meeting_id': meeting.id,
+      },
+      ServiceAnalysisSubject(:final service) => {
+        'subject_type': 'service',
+        'service_id': service.id,
+      },
+      GroupAnalysisSubject(:final group) => {
+        'subject_type': 'group',
+        'group_id': group.id,
+      },
+      ClassAnalysisSubject(:final class$) => {
+        'subject_type': 'class',
+        'class_id': class$.id,
+      },
+    },
+    ...DataAnalysisAnalyticsEvent.rangePropertiesOf(rangePreset),
+    'is_single_day': rangePreset.range.isSingleDay,
     'is_success': isSuccess,
   };
 
-  MeetingsAnalysisView({
-    required MeetingsAnalysisSubject subject,
-    required DateTimeRangePreset rangePreset,
+  const MeetingsAnalysisView({
+    required this.subject,
+    required this.rangePreset,
     required this.isSuccess,
-  }) : subjectType = switch (subject) {
-         MeetingAnalysisSubject() => 'meeting',
-         ServiceAnalysisSubject() => 'service',
-         GroupAnalysisSubject() => 'group',
-         ClassAnalysisSubject() => 'class',
-       },
-       subjectProperties = switch (subject) {
-         MeetingAnalysisSubject(:final meeting) => {'meeting_id': meeting.id},
-         ServiceAnalysisSubject(:final service) => {'service_id': service.id},
-         GroupAnalysisSubject(:final group) => {'group_id': group.id},
-         ClassAnalysisSubject(:final class$) => {'class_id': class$.id},
-       },
-       rangeProperties = DataAnalysisAnalyticsEvent.rangePropertiesOf(
-         rangePreset,
-       ),
-       isSingleDay = rangePreset.range.isSingleDay;
+  });
 }
 
 final class AnalysisRangeSelect extends DataAnalysisAnalyticsEvent {
-  final Json rangeProperties;
+  final DateTimeRangePreset rangePreset;
 
   @override
   String get objectAction => 'range_select';
 
   @override
-  Json get properties => rangeProperties;
+  Json get properties => DataAnalysisAnalyticsEvent.rangePropertiesOf(
+    rangePreset,
+  );
 
-  AnalysisRangeSelect(DateTimeRangePreset rangePreset)
-    : rangeProperties = DataAnalysisAnalyticsEvent.rangePropertiesOf(
-        rangePreset,
-      );
+  const AnalysisRangeSelect(this.rangePreset);
 }
 
 final class AnalysisCustomRangePick extends DataAnalysisAnalyticsEvent {
@@ -168,20 +172,4 @@ final class AnalysisLastAttendedTap extends DataAnalysisAnalyticsEvent {
     required this.personId,
     required this.meetingId,
   });
-}
-
-enum AnalysisRangePreset {
-  today,
-  pastMonth,
-  pastQuarter,
-  pastYear,
-  custom;
-
-  static AnalysisRangePreset of(DateTimeRangePreset preset) => switch (preset) {
-    TodayDateTimeRangePreset() => today,
-    PastMonthDateTimeRangePreset() => pastMonth,
-    PastQuarterDateTimeRangePreset() => pastQuarter,
-    PastYearDateTimeRangePreset() => pastYear,
-    CustomDateTimeRangePreset() => custom,
-  };
 }

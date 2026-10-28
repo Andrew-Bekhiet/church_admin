@@ -24,7 +24,7 @@ void main() {
 
     final contracts = <(AnalyticsEvent, String, Json)>[
       (
-        const PersonLinkModeSwitch(PersonLinkMode.create),
+        const PersonLinkModeSwitch(CreateNewPerson(name: '', gender: true)),
         'user_management:person_link_mode_switch',
         {'person_link_mode': 'create'},
       ),

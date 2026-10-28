@@ -30,6 +30,12 @@ void main() {
       UserPermission.exportAllData,
     });
 
+    CreateUserCubit buildCubit({UserDraft? initial}) => CreateUserCubit(
+      initial: initial ?? validDraft,
+      functions: functions,
+      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+    );
+
     setUpAll(() {
       registerFallbackValue(
         CreateUserRequest.fromDraft(const UserDraft.empty()),
@@ -49,22 +55,26 @@ void main() {
           message: 'user/name-taken',
         ),
       ),
-      build: () => CreateUserCubit(
-        initial: validDraft,
-        functions: functions,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      ),
+      build: buildCubit,
       act: (cubit) => cubit.save(),
-      verify: (_) => expect(analytics.trackedEvents.single.properties, {
-        'is_success': false,
-        'failure_kind': 'name_taken',
-        'permission_count': 0,
-        'area_count': 0,
-        'service_count': 0,
-        'group_count': 0,
-        'has_invitation': false,
-        'person_link_mode': PersonLinkMode.link.name,
-      }),
+      verify: (_) => expect(
+        analytics.trackedEventsOf<UserCreate>().single,
+        isA<UserCreate>()
+            .having(
+              (event) => event.outcome,
+              'outcome',
+              isA<AttemptFailed>().having(
+                (outcome) => outcome.kind,
+                'kind',
+                'name_taken',
+              ),
+            )
+            .having(
+              (event) => event.personLink,
+              'personLink',
+              validDraft.person,
+            ),
+      ),
     );
 
     blocTest<CreateUserCubit, UserFormState>(
@@ -72,10 +82,8 @@ void main() {
       setUp: () => when(
         () => functions.createUser(any()),
       ).thenAnswer((_) async => 'new-uid'),
-      build: () => CreateUserCubit(
+      build: () => buildCubit(
         initial: validDraft.copyWith(permissions: draftPermissions),
-        functions: functions,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
       ),
       act: (cubit) => cubit.save(),
       verify: (_) => expect(
@@ -86,10 +94,7 @@ void main() {
 
     blocTest<CreateUserCubit, UserFormState>(
       'saving an incomplete form reports a validation error and stays editable',
-      build: () => CreateUserCubit(
-        initial: const UserDraft.empty(),
-        functions: functions,
-      ),
+      build: () => buildCubit(initial: const UserDraft.empty()),
       act: (cubit) => cubit.save(),
       expect: () => [
         isA<UserFormEditing>().having(
@@ -105,7 +110,7 @@ void main() {
       setUp: () => when(
         () => functions.createUser(any()),
       ).thenAnswer((_) async => 'new-uid'),
-      build: () => CreateUserCubit(initial: validDraft, functions: functions),
+      build: buildCubit,
       act: (cubit) => cubit.save(),
       expect: () => [
         isA<UserFormSaving>(),
@@ -118,7 +123,7 @@ void main() {
       setUp: () => when(
         () => functions.createUser(any()),
       ).thenThrow(Exception('boom')),
-      build: () => CreateUserCubit(initial: validDraft, functions: functions),
+      build: buildCubit,
       act: (cubit) => cubit.save(),
       expect: () => [
         isA<UserFormSaving>(),
@@ -132,7 +137,7 @@ void main() {
 
     blocTest<CreateUserCubit, UserFormState>(
       'the email is stored trimmed and lowercased',
-      build: () => CreateUserCubit(initial: validDraft, functions: functions),
+      build: buildCubit,
       act: (cubit) => cubit.setEmail('  Mina@Example.COM  '),
       expect: () => [
         isA<UserFormEditing>().having(
@@ -145,10 +150,7 @@ void main() {
 
     blocTest<CreateUserCubit, UserFormState>(
       'selecting an existing person gives the user that person name',
-      build: () => CreateUserCubit(
-        initial: const UserDraft.empty(),
-        functions: functions,
-      ),
+      build: () => buildCubit(initial: const UserDraft.empty()),
       act: (cubit) => cubit.selectPerson(
         LinkExistingPerson(Person(id: 'p2', name: 'كيرلس')),
       ),
@@ -159,11 +161,10 @@ void main() {
 
     blocTest<CreateUserCubit, UserFormState>(
       'when creating a new person the user name names the person too',
-      build: () => CreateUserCubit(
+      build: () => buildCubit(
         initial: const UserDraft.empty().copyWith(
           person: const CreateNewPerson(name: '', gender: true),
         ),
-        functions: functions,
       ),
       act: (cubit) => cubit.setName('يوسف'),
       expect: () => [

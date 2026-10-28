@@ -7,8 +7,8 @@ sealed class DataExportAnalyticsEvent extends AnalyticsEvent {
   const DataExportAnalyticsEvent();
 }
 
-final class ExportLandingShow extends DataExportAnalyticsEvent {
-  final ExportLandingView landingView;
+sealed class ExportLandingShow extends DataExportAnalyticsEvent {
+  final String landingView;
   final int savedFileCount;
 
   @override
@@ -16,11 +16,20 @@ final class ExportLandingShow extends DataExportAnalyticsEvent {
 
   @override
   Json get properties => {
-    'landing_view': landingView.name,
+    'landing_view': landingView,
     'saved_file_count': savedFileCount,
   };
 
   const ExportLandingShow(this.landingView, {required this.savedFileCount});
+}
+
+final class ExportSavedFilesLandingShow extends ExportLandingShow {
+  const ExportSavedFilesLandingShow({required super.savedFileCount})
+    : super('savedFiles');
+}
+
+final class ExportSelectionLandingShow extends ExportLandingShow {
+  const ExportSelectionLandingShow() : super('selection', savedFileCount: 0);
 }
 
 final class ExportNewExportTap extends DataExportAnalyticsEvent {

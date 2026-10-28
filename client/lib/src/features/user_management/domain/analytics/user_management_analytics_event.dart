@@ -115,7 +115,7 @@ final class UserCreate extends UserSaveAttemptEvent {
   final int permissionCount;
   final Json scopeCounts;
   final bool hasInvitation;
-  final PersonLinkMode personLinkMode;
+  final PersonLink personLink;
 
   @override
   String get objectAction => 'user_create';
@@ -126,14 +126,18 @@ final class UserCreate extends UserSaveAttemptEvent {
     'permission_count': permissionCount,
     ...scopeCounts,
     'has_invitation': hasInvitation,
-    'person_link_mode': personLinkMode.name,
+    'person_link_mode': switch (personLink) {
+      LinkExistingPerson() => 'link',
+      CreateNewPerson() => 'create',
+      NoPersonSelected() => 'none',
+    },
   };
 
   UserCreate(UserDraft draft, super.outcome)
     : permissionCount = draft.permissions.validated().length,
       scopeCounts = UserManagementAnalyticsEvent.scopeCountsOf(draft.adminOn),
       hasInvitation = draft.invitation is InvitationRequest,
-      personLinkMode = PersonLinkMode.of(draft.person);
+      personLink = draft.person;
 }
 
 final class UserSave extends UserSaveAttemptEvent {

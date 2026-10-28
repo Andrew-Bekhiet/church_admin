@@ -5,9 +5,14 @@ void main() {
   group('data export analytics contract', () {
     const contracts = <(AnalyticsEvent, String, Json)>[
       (
-        ExportLandingShow(ExportLandingView.savedFiles, savedFileCount: 2),
+        ExportSavedFilesLandingShow(savedFileCount: 2),
         'export:landing_show',
         {'landing_view': 'savedFiles', 'saved_file_count': 2},
+      ),
+      (
+        ExportSelectionLandingShow(),
+        'export:landing_show',
+        {'landing_view': 'selection', 'saved_file_count': 0},
       ),
       (ExportNewExportTap(), 'export:new_export_tap', {}),
       (
