@@ -2,9 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../fakes/fake_logging_service.dart';
-import '../../fakes/mock_auth_bloc.dart';
-import '../../fakes/recording_analytics_provider.dart';
+import '../../../../fakes/fake_logging_service.dart';
+import '../../../../fakes/mock_auth_bloc.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 
 void main() {
   group('AnalyticsBlocObserver', () {
