@@ -19,8 +19,21 @@ class _FakeInvitationsDAO extends Fake implements InvitationsDAO {}
 
 void main() {
   group('EditUserCubit analytics', () {
+    const areaScope = AdminOnData(
+      permissionId: 'area-scope',
+      area: Area(id: 'a1', name: 'منطقة'),
+    );
+    const serviceScope = AdminOnData(
+      permissionId: 'service-scope',
+      service: Service(id: 's1', name: 'خدمة'),
+    );
+    const newGroupScope = AdminOnData(
+      permissionId: '',
+      group: Group(id: 'g1', name: 'مجموعة'),
+    );
     final person1 = Person(id: 'p1', name: 'مينا');
     final person2 = Person(id: 'p2', name: 'مريم', gender: false);
+    final editedUser = User(uid: 'u1', name: 'مينا', person: person1);
 
     late _MockUserPermissionsDAO permissionsDao;
     late _MockAuthBloc authBloc;
@@ -65,16 +78,44 @@ void main() {
       analyticsService: AnalyticsService([analytics], FakeLoggingService()),
     );
 
-    Json trackedSaveProperties() =>
-        analytics.trackedEvents.whereType<UserSave>().single.properties;
+    Matcher savedUserWith({
+      Set<UserPermission>? addedPermissions,
+      Set<UserPermission>? removedPermissions,
+      List<AdminOnData>? addedScopes,
+      List<AdminOnData>? removedScopes,
+      PersonLinkChange? personLinkChange,
+    }) => isA<UserSave>()
+        .having((event) => event.userId, 'userId', editedUser.uid)
+        .having(
+          (event) => event.addedPermissions,
+          'addedPermissions',
+          addedPermissions ?? isEmpty,
+        )
+        .having(
+          (event) => event.removedPermissions,
+          'removedPermissions',
+          removedPermissions ?? isEmpty,
+        )
+        .having(
+          (event) => event.addedScopes,
+          'addedScopes',
+          addedScopes ?? isEmpty,
+        )
+        .having(
+          (event) => event.removedScopes,
+          'removedScopes',
+          removedScopes ?? isEmpty,
+        )
+        .having(
+          (event) => event.personLinkChange,
+          'personLinkChange',
+          personLinkChange ?? PersonLinkChange.unchanged,
+        );
 
     blocTest<EditUserCubit, UserFormState>(
       'saving tracks which permissions were granted and which were revoked',
       build: () => buildCubit(
-        User(
-          uid: 'u1',
-          name: 'مينا',
-          person: person1,
+        editedUser.copyWith(
           permissions: const PermissionsSet.fromSet({
             UserPermission.approved,
             UserPermission.deleteData,
@@ -89,82 +130,54 @@ void main() {
         return cubit.save();
       },
       verify: (_) => expect(
-        trackedSaveProperties(),
-        allOf(
-          containsPair('added_permissions', [UserPermission.readAllData.name]),
-          containsPair('removed_permissions', [UserPermission.deleteData.name]),
+        analytics.trackedEventsOf<UserSave>().single,
+        savedUserWith(
+          addedPermissions: {UserPermission.readAllData},
+          removedPermissions: {UserPermission.deleteData},
         ),
       ),
     );
 
     blocTest<EditUserCubit, UserFormState>(
-      'saving tracks how many scopes of each type were added and removed',
+      'saving tracks which scopes were added and which were removed',
       build: () => buildCubit(
-        User(
-          uid: 'u1',
-          name: 'مينا',
-          person: person1,
-          adminOn: const [
-            AdminOnData(
-              permissionId: 'area-scope',
-              area: Area(id: 'a1', name: 'منطقة'),
-            ),
-            AdminOnData(
-              permissionId: 'service-scope',
-              service: Service(id: 's1', name: 'خدمة'),
-            ),
-          ],
-        ),
+        editedUser.copyWith(adminOn: const [areaScope, serviceScope]),
       ),
       act: (cubit) {
-        cubit.setAdminOn(const [
-          AdminOnData(
-            permissionId: 'area-scope',
-            area: Area(id: 'a1', name: 'منطقة'),
-          ),
-          AdminOnData(
-            permissionId: '',
-            group: Group(id: 'g1', name: 'مجموعة'),
-          ),
-        ]);
+        cubit.setAdminOn(const [areaScope, newGroupScope]);
 
         return cubit.save();
       },
       verify: (_) => expect(
-        trackedSaveProperties(),
-        allOf(
-          containsPair('added_area_count', 0),
-          containsPair('added_group_count', 1),
-          containsPair('removed_area_count', 0),
-          containsPair('removed_service_count', 1),
+        analytics.trackedEventsOf<UserSave>().single,
+        savedUserWith(
+          addedScopes: [newGroupScope],
+          removedScopes: [serviceScope],
         ),
       ),
     );
 
     blocTest<EditUserCubit, UserFormState>(
       'saving is tracked against the edited user',
-      build: () => buildCubit(User(uid: 'u1', name: 'مينا', person: person1)),
+      build: () => buildCubit(editedUser),
       act: (cubit) => cubit.save(),
       verify: (_) => expect(
-        trackedSaveProperties(),
-        allOf(
-          containsPair('entity_type', AnalyticsEntityType.user.key),
-          containsPair(AnalyticsEntityType.user.idProperty, 'u1'),
-        ),
+        analytics.trackedEventsOf<UserSave>().single,
+        savedUserWith(),
       ),
     );
 
     blocTest<EditUserCubit, UserFormState>(
       'linking a different person is tracked as relinking',
-      build: () => buildCubit(User(uid: 'u1', name: 'مينا', person: person1)),
+      build: () => buildCubit(editedUser),
       act: (cubit) {
         cubit.selectPerson(LinkExistingPerson(person2));
 
         return cubit.save();
       },
       verify: (_) => expect(
-        trackedSaveProperties(),
-        containsPair('person_link_change', PersonLinkChange.relinked.name),
+        analytics.trackedEventsOf<UserSave>().single,
+        savedUserWith(personLinkChange: PersonLinkChange.relinked),
       ),
     );
   });

@@ -113,7 +113,7 @@ final class UserCreateTap extends UserManagementAnalyticsEvent {
 
 final class UserCreate extends UserSaveAttemptEvent {
   final int permissionCount;
-  final Json scopeCounts;
+  final List<AdminOnData> adminOn;
   final bool hasInvitation;
   final PersonLink personLink;
 
@@ -124,7 +124,7 @@ final class UserCreate extends UserSaveAttemptEvent {
   Json get properties => {
     ...super.properties,
     'permission_count': permissionCount,
-    ...scopeCounts,
+    ...UserManagementAnalyticsEvent.scopeCountsOf(adminOn),
     'has_invitation': hasInvitation,
     'person_link_mode': switch (personLink) {
       LinkExistingPerson() => 'link',
@@ -135,17 +135,17 @@ final class UserCreate extends UserSaveAttemptEvent {
 
   UserCreate(UserDraft draft, super.outcome)
     : permissionCount = draft.permissions.validated().length,
-      scopeCounts = UserManagementAnalyticsEvent.scopeCountsOf(draft.adminOn),
+      adminOn = draft.adminOn,
       hasInvitation = draft.invitation is InvitationRequest,
       personLink = draft.person;
 }
 
 final class UserSave extends UserSaveAttemptEvent {
   final String userId;
-  final List<String> addedPermissions;
-  final List<String> removedPermissions;
-  final Json addedScopeCounts;
-  final Json removedScopeCounts;
+  final Set<UserPermission> addedPermissions;
+  final Set<UserPermission> removedPermissions;
+  final List<AdminOnData> addedScopes;
+  final List<AdminOnData> removedScopes;
   final PersonLinkChange personLinkChange;
 
   @override
@@ -155,39 +155,44 @@ final class UserSave extends UserSaveAttemptEvent {
   Json get properties => {
     ...super.properties,
     ...UserManagementAnalyticsEvent.userPropertiesOf(userId),
-    'added_permissions': addedPermissions,
-    'removed_permissions': removedPermissions,
-    ...addedScopeCounts,
-    ...removedScopeCounts,
+    'added_permissions': [
+      for (final permission in addedPermissions) permission.name,
+    ],
+    'removed_permissions': [
+      for (final permission in removedPermissions) permission.name,
+    ],
+    ...UserManagementAnalyticsEvent.scopeCountsOf(
+      addedScopes,
+      prefix: 'added_',
+    ),
+    ...UserManagementAnalyticsEvent.scopeCountsOf(
+      removedScopes,
+      prefix: 'removed_',
+    ),
     'person_link_change': personLinkChange.name,
   };
 
   UserSave(User user, UserDraft draft, super.outcome)
     : userId = user.uid,
-      addedPermissions = [
-        for (final permission in draft.permissions.validated().difference(
-          user.permissions,
-        ))
-          permission.name,
-      ],
-      removedPermissions = [
-        for (final permission in user.permissions.difference(
-          draft.permissions.validated(),
-        ))
-          permission.name,
-      ],
-      addedScopeCounts = UserManagementAnalyticsEvent.scopeCountsOf(
-        draft.adminOn.where((scope) => scope.permissionId.isEmpty),
-        prefix: 'added_',
+      addedPermissions = draft.permissions.validated().difference(
+        user.permissions,
       ),
-      removedScopeCounts = UserManagementAnalyticsEvent.scopeCountsOf(
-        [...?user.adminOn].where(
-          (scope) => !draft.adminOn
-              .map((kept) => kept.permissionId)
-              .contains(scope.permissionId),
-        ),
-        prefix: 'removed_',
+      removedPermissions = user.permissions.difference(
+        draft.permissions.validated(),
       ),
+      addedScopes = draft.adminOn
+          .where((scope) => scope.permissionId.isEmpty)
+          .toList(),
+      removedScopes =
+          [
+                ...?user.adminOn,
+              ]
+              .where(
+                (scope) => !draft.adminOn
+                    .map((kept) => kept.permissionId)
+                    .contains(scope.permissionId),
+              )
+              .toList(),
       personLinkChange = PersonLinkChange.between(
         user.person?.id,
         draft.person,

@@ -173,17 +173,13 @@ void main() {
         unawaited(cubit.startExport());
       },
       verify: (_) => expect(
-        fixture.analytics.trackedEvents
-            .where((event) => event.name == 'export:export_start')
-            .single
-            .properties,
-        {
-          'area_count': 1,
-          'service_count': 0,
-          'class_count': 0,
-          'group_count': 0,
-          'is_scoped_to_own': false,
-        },
+        fixture.analytics.trackedEventsOf<ExportStart>().single,
+        isA<ExportStart>()
+            .having((event) => event.areaCount, 'areaCount', 1)
+            .having((event) => event.serviceCount, 'serviceCount', 0)
+            .having((event) => event.classCount, 'classCount', 0)
+            .having((event) => event.groupCount, 'groupCount', 0)
+            .having((event) => event.isScopedToOwn, 'isScopedToOwn', false),
       ),
     );
 
@@ -207,11 +203,12 @@ void main() {
         await cubit.startExport();
       },
       verify: (_) => expect(
-        fixture.analytics.trackedEvents
-            .where((event) => event.name == 'export:export_finish')
-            .single
-            .properties,
-        containsPair('is_success', false),
+        fixture.analytics.trackedEventsOf<ExportFinish>().single,
+        isA<ExportFinish>().having(
+          (event) => event.isSuccess,
+          'isSuccess',
+          false,
+        ),
       ),
     );
 

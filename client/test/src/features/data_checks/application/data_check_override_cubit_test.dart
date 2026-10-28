@@ -50,15 +50,31 @@ void main() {
       ).thenAnswer((_) async => true),
       build: () => cubitFor(incomplete),
       act: (cubit) => cubit.choose(DataCheckOverride.markedComplete),
-      verify: (_) => expect(analytics.trackedEvents.single.properties, {
-        'entity_type': AnalyticsEntityType.family.key,
-        'family_id': incomplete.familyId,
-        'from_override': DataCheckOverride.none.name,
-        'to_override': DataCheckOverride.markedComplete.name,
-        'is_automatically_complete': incomplete.automaticVerdict,
-        'is_success': true,
-        'failure_kind': 'none',
-      }),
+      verify: (_) => expect(
+        analytics.trackedEventsOf<DataCheckOverrideSelect>().single,
+        isA<DataCheckOverrideSelect>()
+            .having((event) => event.familyId, 'familyId', incomplete.familyId)
+            .having(
+              (event) => event.fromOverride,
+              'fromOverride',
+              incomplete.userOverride,
+            )
+            .having(
+              (event) => event.toOverride,
+              'toOverride',
+              DataCheckOverride.markedComplete,
+            )
+            .having(
+              (event) => event.isAutomaticallyComplete,
+              'isAutomaticallyComplete',
+              incomplete.automaticVerdict,
+            )
+            .having(
+              (event) => event.outcome,
+              'outcome',
+              isA<AttemptSucceeded>(),
+            ),
+      ),
     );
 
     blocTest<DataCheckOverrideCubit, DataCheckOverrideState>(
@@ -69,10 +85,15 @@ void main() {
       build: () => cubitFor(incomplete),
       act: (cubit) => cubit.choose(DataCheckOverride.markedComplete),
       verify: (_) => expect(
-        analytics.trackedEvents.single.properties,
-        containsPair(
-          'failure_kind',
-          DataCheckOverrideError.notPermitted.name,
+        analytics.trackedEventsOf<DataCheckOverrideSelect>().single,
+        isA<DataCheckOverrideSelect>().having(
+          (event) => event.outcome,
+          'outcome',
+          isA<AttemptFailed>().having(
+            (outcome) => outcome.kind,
+            'kind',
+            DataCheckOverrideError.notPermitted.name,
+          ),
         ),
       ),
     );

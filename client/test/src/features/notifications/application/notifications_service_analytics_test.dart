@@ -101,10 +101,7 @@ void main() {
     test('signing in tracks one notification permission request', () async {
       await unit.onTransition(authBloc, signIn);
 
-      expect(
-        analytics.trackedEvents.map((event) => event.name),
-        ['notification:permission_request'],
-      );
+      expect(analytics.trackedEvents, [isA<NotificationPermissionRequest>()]);
     });
 
     test(
@@ -112,10 +109,16 @@ void main() {
       () async {
         await unit.onTransition(authBloc, signIn);
 
-        expect(analytics.trackedEvents.single.properties, {
-          'previous_permission_status': PermissionStatus.denied.name,
-          'is_granted': true,
-        });
+        expect(
+          analytics.trackedEventsOf<NotificationPermissionRequest>().single,
+          isA<NotificationPermissionRequest>()
+              .having(
+                (event) => event.previousPermissionStatus,
+                'previousPermissionStatus',
+                PermissionStatus.denied,
+              )
+              .having((event) => event.isGranted, 'isGranted', true),
+        );
       },
     );
   });

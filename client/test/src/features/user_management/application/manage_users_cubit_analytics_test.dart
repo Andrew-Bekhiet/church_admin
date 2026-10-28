@@ -52,13 +52,11 @@ void main() {
       act: (cubit) => cubit.search(searchQuery),
       wait: HomeSearchCubit.debounceDuration * 2,
       verify: (_) => expect(analytics.trackedEvents, [
-        isA<AnalyticsEvent>()
-            .having((event) => event.name, 'name', 'user_management:search_run')
-            .having(
-              (event) => event.properties,
-              'properties',
-              containsPair('query_length', searchQuery.length),
-            ),
+        isA<ManageUsersSearchRun>().having(
+          (event) => event.queryLength,
+          'queryLength',
+          searchQuery.length,
+        ),
       ]),
     );
 

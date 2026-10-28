@@ -5,59 +5,51 @@ void main() {
   group('SpiritDataSave', () {
     final savedAt = DateTime(2026, 10, 23);
 
+    Person personLastRecordedDaysBeforeSaving({
+      int? kodasDays,
+      int? confessionDays,
+    }) => Person(
+      id: 'p1',
+      name: 'مينا',
+      lastKodas: kodasDays == null
+          ? null
+          : LastRecordedByInfo(
+              time: savedAt.subtract(Duration(days: kodasDays)),
+            ),
+      lastConfession: confessionDays == null
+          ? null
+          : LastRecordedByInfo(
+              time: savedAt.subtract(Duration(days: confessionDays)),
+            ),
+    );
+
+    SpiritDataSave saveOf(Person person) =>
+        SpiritDataSave(person, savedAt: savedAt, isSuccess: true);
+
     test(
       'reports how recent communion and confession were in coarse buckets only',
       () {
-        final person = Person(
-          id: 'p1',
-          name: 'مينا',
-          lastKodas: LastRecordedByInfo(
-            time: savedAt.subtract(const Duration(days: 3)),
-          ),
-          lastConfession: LastRecordedByInfo(
-            time: savedAt.subtract(const Duration(days: 45)),
-          ),
+        final event = saveOf(
+          personLastRecordedDaysBeforeSaving(kodasDays: 3, confessionDays: 45),
         );
 
-        expect(
-          SpiritDataSave(person, savedAt: savedAt, isSuccess: true).properties,
-          {
-            'communion_recency': 'within_week',
-            'confession_recency': 'within_two_months',
-            'is_success': true,
-          },
-        );
+        expect(event.communionRecency, SpiritDataRecency.withinWeek);
+        expect(event.confessionRecency, SpiritDataRecency.withinTwoMonths);
       },
     );
 
     test('a communion three weeks before saving is within the month', () {
-      final person = Person(
-        id: 'p1',
-        name: 'مينا',
-        lastKodas: LastRecordedByInfo(
-          time: savedAt.subtract(const Duration(days: 21)),
-        ),
-      );
+      final event = saveOf(personLastRecordedDaysBeforeSaving(kodasDays: 21));
 
-      expect(
-        SpiritDataSave(person, savedAt: savedAt, isSuccess: true).properties,
-        containsPair('communion_recency', 'within_month'),
-      );
+      expect(event.communionRecency, SpiritDataRecency.withinMonth);
     });
 
     test('a confession over two months before saving is older', () {
-      final person = Person(
-        id: 'p1',
-        name: 'مينا',
-        lastConfession: LastRecordedByInfo(
-          time: savedAt.subtract(const Duration(days: 61)),
-        ),
+      final event = saveOf(
+        personLastRecordedDaysBeforeSaving(confessionDays: 61),
       );
 
-      expect(
-        SpiritDataSave(person, savedAt: savedAt, isSuccess: true).properties,
-        containsPair('confession_recency', 'older'),
-      );
+      expect(event.confessionRecency, SpiritDataRecency.older);
     });
   });
 }

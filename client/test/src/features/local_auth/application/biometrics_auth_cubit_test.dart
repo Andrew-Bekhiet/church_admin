@@ -46,6 +46,7 @@ void main() {
   late _MockAuthStorage authStorage;
   late RecordingAnalyticsProvider analytics;
   late DateTime now;
+  const lockedFor = Duration(seconds: 42, milliseconds: 900);
 
   setUp(() {
     analytics = RecordingAnalyticsProvider();
@@ -92,11 +93,12 @@ void main() {
       await cubit.authenticateBiometrically();
     },
     verify: (_) => expect(
-      analytics.trackedEvents
-          .whereType<BiometricsUnlockSubmit>()
-          .single
-          .properties,
-      containsPair('outcome', UnlockOutcome.notAuthenticated.name),
+      analytics.trackedEventsOf<BiometricsUnlockSubmit>().single,
+      isA<BiometricsUnlockSubmit>().having(
+        (event) => event.outcome,
+        'outcome',
+        UnlockOutcome.notAuthenticated,
+      ),
     ),
   );
 
@@ -104,19 +106,19 @@ void main() {
     'unlocking with the password is tracked with how long the app stayed locked',
     build: buildCubit,
     act: (cubit) async {
-      now = now.add(const Duration(seconds: 42, milliseconds: 900));
+      now = now.add(lockedFor);
       await cubit.submitPassword('correct');
     },
     verify: (_) => expect(
-      analytics.trackedEvents
-          .whereType<PasswordUnlockSubmit>()
-          .single
-          .properties,
-      {
-        'outcome': UnlockOutcome.unlocked.name,
-        'can_check_biometrics': false,
-        'locked_duration_ms': 42900,
-      },
+      analytics.trackedEventsOf<PasswordUnlockSubmit>().single,
+      isA<PasswordUnlockSubmit>()
+          .having((event) => event.outcome, 'outcome', UnlockOutcome.unlocked)
+          .having(
+            (event) => event.canCheckBiometrics,
+            'canCheckBiometrics',
+            false,
+          )
+          .having((event) => event.lockedFor, 'lockedFor', lockedFor),
     ),
   );
 
@@ -125,11 +127,12 @@ void main() {
     build: buildCubit,
     act: (cubit) => cubit.submitPassword('wrong'),
     verify: (_) => expect(
-      analytics.trackedEvents
-          .whereType<PasswordUnlockSubmit>()
-          .single
-          .properties,
-      containsPair('outcome', UnlockOutcome.wrongPassword.name),
+      analytics.trackedEventsOf<PasswordUnlockSubmit>().single,
+      isA<PasswordUnlockSubmit>().having(
+        (event) => event.outcome,
+        'outcome',
+        UnlockOutcome.wrongPassword,
+      ),
     ),
   );
 

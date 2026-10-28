@@ -53,10 +53,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(
-        analytics.trackedEvents.map((event) => event.name),
-        ['update:banner_show'],
-      );
+      expect(analytics.trackedEvents, [isA<UpdateBannerShow>()]);
     },
   );
 }

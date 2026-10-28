@@ -22,6 +22,8 @@ import 'notifications_service_callbacks_test.mocks.dart';
   MockSpec<AdvancedQueryParser>(),
   MockSpec<PaginatableStreamBase>(),
 ])
+late RecordingAnalyticsProvider analytics;
+
 void main() {
   group(
     'NotificationsServiceCallbacks =>',
@@ -92,24 +94,21 @@ void main() {
             ),
           );
 
-          expect(
-            (AnalyticsService.I.providers.single as RecordingAnalyticsProvider)
-                .trackedEvents,
-            [
-              isA<AnalyticsEvent>()
-                  .having(
-                    (event) => event.name,
-                    'name',
-                    'notification:notification_open',
-                  )
-                  .having((event) => event.properties, 'properties', {
-                    'source': NotificationOpenSource.localTap.name,
-                    'notification_type': notification.type.name,
-                    'has_image': false,
-                    'has_query': false,
-                  }),
-            ],
-          );
+          expect(analytics.trackedEvents, [
+            isA<NotificationOpen>()
+                .having(
+                  (event) => event.source,
+                  'source',
+                  NotificationOpenSource.localTap,
+                )
+                .having(
+                  (event) => event.notificationType,
+                  'notificationType',
+                  notification.type,
+                )
+                .having((event) => event.hasImage, 'hasImage', false)
+                .having((event) => event.hasQuery, 'hasQuery', false),
+          ]);
         },
       );
 
@@ -119,15 +118,23 @@ void main() {
           await NotificationsServiceCallbacks.showKodasNotification();
 
           expect(
-            (AnalyticsService.I.providers.single as RecordingAnalyticsProvider)
-                .trackedEvents
-                .single
-                .properties,
-            {
-              'reminder_type': LocalNotificationType.kodas.name,
-              'person_count': expectedPersons.length,
-              'is_skipped_empty': false,
-            },
+            analytics.trackedEventsOf<NotificationReminderFire>().single,
+            isA<NotificationReminderFire>()
+                .having(
+                  (event) => event.reminderType,
+                  'reminderType',
+                  LocalNotificationType.kodas.name,
+                )
+                .having(
+                  (event) => event.personCount,
+                  'personCount',
+                  expectedPersons.length,
+                )
+                .having(
+                  (event) => event.isSkippedEmpty,
+                  'isSkippedEmpty',
+                  false,
+                ),
           );
         },
       );
@@ -293,6 +300,7 @@ Matcher matchExpectedNotification(Notification expectedNotification) =>
     );
 
 void _setUp() {
+  analytics = RecordingAnalyticsProvider();
   final overrides = [
     _setUpMockInitializationService(),
     _setUpMockAuthBloc(),
@@ -300,7 +308,7 @@ void _setUp() {
     _setUpMockNotificationsService(),
     _setUpMockDatabaseService(),
     analyticsServiceProvider.overrideWithValue(
-      AnalyticsService([RecordingAnalyticsProvider()], FakeLoggingService()),
+      AnalyticsService([analytics], FakeLoggingService()),
     ),
   ];
 
