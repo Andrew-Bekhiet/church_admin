@@ -16,6 +16,22 @@ void main() {
   const limit = 100;
   const typedLimit = 50;
   const resultsSearchText = 'ab';
+  const otherBirthday = '05-12';
+  const triangle = Polygon([
+    Point(30, 31),
+    Point(30.1, 31),
+    Point(30, 31.1),
+  ]);
+  final birthdayFilter = Filter(
+    PersonFields().birthday,
+    BirthdayOperator.equals,
+    '01-01',
+  );
+  final insideFilter = Filter(
+    PersonFields().address.redirectTo(AddressFields().geolocation),
+    SpatialOperator.intersects,
+    '',
+  );
 
   setUp(() {
     initGlobalProviderContainer([
@@ -28,51 +44,57 @@ void main() {
   tearDown(resetGlobalProviderContainer);
 
   group('Advanced search controller analytics =>', () {
-    test('adding a condition is tracked with its field and the new count', () {
+    test('adding a condition is tracked as one edit', () {
       unit.addFilter(phoneFilter);
 
-      expect(f.analytics.trackedEventsOf<AdvancedSearchFilterAdd>(), [
-        isA<AdvancedSearchFilterAdd>()
-            .having(
-              (event) => event.fieldPath,
-              'fieldPath',
-              [PersonFields().mainPhone.name],
-            )
-            .having(
-              (event) => event.operatorId,
-              'operatorId',
-              PhoneOperator.eq.serializationId,
-            )
-            .having((event) => event.filterCount, 'filterCount', 2),
-      ]);
+      expect(f.queryEditCount, 1);
     });
 
-    test('removing a condition is tracked as a removal', () {
+    test('removing a condition is tracked as one edit', () {
       unit.removeFilterAt(0);
 
-      expect(f.analytics.trackedEvents, [isA<AdvancedSearchFilterRemove>()]);
+      expect(f.queryEditCount, 1);
     });
 
-    test(
-      'picking another field for a condition is tracked as a field change',
-      () {
-        unit.replaceFilter(0, phoneFilter);
+    test('picking another field for a condition is tracked as one edit', () {
+      unit.replaceFilter(0, phoneFilter);
 
-        expect(f.analytics.trackedEvents, [
-          isA<AdvancedSearchFilterFieldChange>(),
-        ]);
-      },
-    );
+      expect(f.queryEditCount, 1);
+    });
 
-    test('picking another operator is tracked as an operator change', () {
+    test('picking another operator is tracked as one edit', () {
       unit.replaceFilter(0, nameFilter.copyWith(operator: StringOperator.eq));
 
-      expect(f.analytics.trackedEvents, [
-        isA<AdvancedSearchFilterOperatorChange>(),
-      ]);
+      expect(f.queryEditCount, 1);
     });
 
-    test('a typed text value is tracked once it settles, without the text', () {
+    test('picking a non-text value is tracked at once', () {
+      unit
+        ..changeQuery(
+          AdvancedQuery(
+            queryableType: AdvancedQueriesMetadata().person,
+            filters: [birthdayFilter],
+          ),
+        )
+        ..replaceFilter(0, birthdayFilter.copyWith(value: otherBirthday));
+
+      expect(f.queryEditCount, 1);
+    });
+
+    test('drawing a polygon is tracked as one edit', () {
+      unit
+        ..changeQuery(
+          AdvancedQuery(
+            queryableType: AdvancedQueriesMetadata().person,
+            filters: [insideFilter],
+          ),
+        )
+        ..replaceFilter(0, insideFilter.copyWith(value: triangle));
+
+      expect(f.queryEditCount, 1);
+    });
+
+    test('a typed text value is tracked as one edit once it settles', () {
       f.typeUntilSettled(
         (controller, _) => controller
           ..replaceFilter(0, nameFilter.copyWith(value: 'm'))
@@ -80,28 +102,108 @@ void main() {
           ..replaceFilter(0, nameFilter.copyWith(value: 'min')),
       );
 
-      expect(f.analytics.trackedEventsOf<AdvancedSearchFilterValueSet>(), [
-        isA<AdvancedSearchFilterValueSet>()
-            .having(
-              (event) => event.fieldPath,
-              'fieldPath',
-              [PersonFields().name.name],
-            )
-            .having(
-              (event) => event.operatorId,
-              'operatorId',
-              StringOperator.contains.serializationId,
-            )
-            .having((event) => event.filterCount, 'filterCount', 1)
-            .having((event) => event.valueCount, 'valueCount', 1)
-            .having((event) => event.isFreeText, 'isFreeText', isTrue),
-      ]);
+      expect(f.queryEditCount, 1);
     });
 
     test('a text value still being typed is not tracked', () {
       unit.replaceFilter(0, nameFilter.copyWith(value: 'm'));
 
       expect(f.analytics.trackedEvents, isEmpty);
+    });
+
+    test('putting back the same conditions is not tracked', () {
+      unit.changeFilters(unit.filters);
+
+      expect(f.analytics.trackedEvents, isEmpty);
+    });
+
+    test('choosing another result type is tracked as one edit', () {
+      unit.changeSelectedQueryableType(AdvancedQueriesMetadata().family);
+
+      expect(f.queryEditCount, 1);
+    });
+
+    test('choosing the current result type again is not tracked', () {
+      unit.changeSelectedQueryableType(AdvancedQueriesMetadata().person);
+
+      expect(f.analytics.trackedEvents, isEmpty);
+    });
+
+    test('adding a limit is tracked as one edit', () {
+      unit.changeLimit(limit);
+
+      expect(f.queryEditCount, 1);
+    });
+
+    test('a typed limit is tracked once as the value it settles on', () {
+      f.typeUntilSettled(
+        (controller, _) => controller
+          ..changeLimit(limit)
+          ..changeLimit(5)
+          ..changeLimit(typedLimit),
+      );
+
+      expect(f.queryEditCount, 2);
+    });
+
+    test('deleting the typed limit digits is not tracked as an edit', () {
+      f.typeUntilSettled(
+        (controller, _) => controller
+          ..changeLimit(limit)
+          ..changeLimit(1)
+          ..changeLimit(null),
+      );
+
+      expect(f.queryEditCount, 1);
+    });
+
+    test('pressing clear on the limit is tracked as one edit', () {
+      unit
+        ..changeLimit(limit)
+        ..clearLimit();
+
+      expect(f.queryEditCount, 2);
+    });
+
+    test('a limit digit typed just before pressing clear is not tracked', () {
+      f.typeUntilSettled(
+        (controller, _) => controller
+          ..changeLimit(limit)
+          ..changeLimit(5)
+          ..clearLimit(),
+      );
+
+      expect(f.queryEditCount, 2);
+    });
+
+    test('adding a sort is tracked as one edit', () {
+      unit.addOrderBy(byPhone);
+
+      expect(f.queryEditCount, 1);
+    });
+
+    test('re-sorting the same field is tracked as one edit', () {
+      unit.replaceOrderBy(0, byName.copyWith(value: OrderByValue.desc));
+
+      expect(f.queryEditCount, 1);
+    });
+
+    test('picking the sort a condition already has is not tracked', () {
+      unit.replaceOrderBy(0, byName);
+
+      expect(f.analytics.trackedEvents, isEmpty);
+    });
+
+    test('sorting by another field is tracked as one edit', () {
+      unit.replaceOrderBy(0, byPhone);
+
+      expect(f.queryEditCount, 1);
+    });
+
+    test('removing a sort is tracked as one edit', () {
+      unit.removeOrderByAt(0);
+
+      expect(f.queryEditCount, 1);
     });
 
     test('a search is tracked by its shape, never its values', () {
@@ -111,7 +213,7 @@ void main() {
             queryableType: AdvancedQueriesMetadata().person,
             filters: [
               nameFilter.copyWith(value: 'mina'),
-              phoneFilter,
+              insideFilter.copyWith(value: triangle),
             ],
             orderBy: [byName],
             limit: limit,
@@ -134,160 +236,71 @@ void main() {
             .having(
               (event) => event.fieldNames,
               'fieldNames',
-              [PersonFields().name.name, PersonFields().mainPhone.name],
+              [PersonFields().name.name, 'address.geolocation'],
             )
             .having(
               (event) => event.operatorIds,
               'operatorIds',
               [
                 StringOperator.contains.serializationId,
-                PhoneOperator.eq.serializationId,
+                SpatialOperator.intersects.serializationId,
               ],
             )
             .having((event) => event.orderCount, 'orderCount', 1)
             .having((event) => event.hasLimit, 'hasLimit', isTrue)
+            .having((event) => event.limitValue, 'limitValue', limit)
+            .having((event) => event.maxNestedDepth, 'maxNestedDepth', 1)
+            .having((event) => event.hasPolygonFilter, 'hasPolygonFilter', true)
+            .having((event) => event.filterEditCount, 'filterEditCount', 0)
             .having((event) => event.isAutoExecuted, 'isAutoExecuted', isTrue),
       ]);
     });
 
-    test('choosing another result type is tracked from and to', () {
-      unit.changeSelectedQueryableType(AdvancedQueriesMetadata().family);
+    test('a search without a limit or polygon says so', () {
+      unit.trackQuerySubmit(isAutoExecuted: false);
 
-      expect(f.analytics.trackedEventsOf<AdvancedSearchQueryableTypeChange>(), [
-        isA<AdvancedSearchQueryableTypeChange>()
+      expect(f.analytics.trackedEventsOf<AdvancedSearchQuerySubmit>(), [
+        isA<AdvancedSearchQuerySubmit>()
+            .having((event) => event.limitValue, 'limitValue', isNull)
+            .having((event) => event.maxNestedDepth, 'maxNestedDepth', 0)
             .having(
-              (event) => event.fromQueryableType,
-              'fromQueryableType',
-              AdvancedQueriesMetadata().person.name,
-            )
-            .having(
-              (event) => event.toQueryableType,
-              'toQueryableType',
-              AdvancedQueriesMetadata().family.name,
+              (event) => event.hasPolygonFilter,
+              'hasPolygonFilter',
+              false,
             ),
       ]);
     });
 
-    test('choosing the current result type again is not tracked', () {
-      unit.changeSelectedQueryableType(AdvancedQueriesMetadata().person);
-
-      expect(f.analytics.trackedEvents, isEmpty);
-    });
-
-    test('adding a limit is tracked with its value', () {
-      unit.changeLimit(limit);
-
-      expect(f.analytics.trackedEventsOf<AdvancedSearchLimitSet>(), [
-        isA<AdvancedSearchLimitSet>().having(
-          (event) => event.limitValue,
-          'limitValue',
-          limit,
-        ),
-      ]);
-    });
-
-    test('a typed limit is tracked once as the value it settles on', () {
-      f.typeUntilSettled(
-        (controller, _) => controller
-          ..changeLimit(limit)
-          ..changeLimit(5)
-          ..changeLimit(typedLimit),
-      );
-
-      expect(f.analytics.trackedEventsOf<AdvancedSearchLimitChange>(), [
-        isA<AdvancedSearchLimitChange>().having(
-          (event) => event.limitValue,
-          'limitValue',
-          typedLimit,
-        ),
-      ]);
-    });
-
-    test('deleting the typed limit digits is not tracked as a clear', () {
-      f.typeUntilSettled(
-        (controller, _) => controller
-          ..changeLimit(limit)
-          ..changeLimit(1)
-          ..changeLimit(null),
-      );
-
-      expect(f.analytics.trackedEvents, [isA<AdvancedSearchLimitSet>()]);
-    });
-
-    test('pressing clear on the limit is tracked as a clear', () {
+    test('a search counts the edits made since the screen opened', () {
       unit
-        ..changeLimit(limit)
-        ..clearLimit();
+        ..addFilter(phoneFilter)
+        ..removeFilterAt(1)
+        ..trackQuerySubmit(isAutoExecuted: false);
+
+      expect(f.analytics.trackedEventsOf<AdvancedSearchQuerySubmit>(), [
+        isA<AdvancedSearchQuerySubmit>().having(
+          (event) => event.filterEditCount,
+          'filterEditCount',
+          2,
+        ),
+      ]);
+    });
+
+    test('a search counts only the edits made since the previous search', () {
+      unit
+        ..addFilter(phoneFilter)
+        ..trackQuerySubmit(isAutoExecuted: false)
+        ..addOrderBy(byPhone)
+        ..trackQuerySubmit(isAutoExecuted: false);
 
       expect(
-        f.analytics.trackedEvents.last,
-        isA<AdvancedSearchLimitClear>(),
-      );
-    });
-
-    test('a limit digit typed just before pressing clear is not tracked', () {
-      f.typeUntilSettled(
-        (controller, _) => controller
-          ..changeLimit(limit)
-          ..changeLimit(5)
-          ..clearLimit(),
-      );
-
-      expect(f.analytics.trackedEvents, [
-        isA<AdvancedSearchLimitSet>(),
-        isA<AdvancedSearchLimitClear>(),
-      ]);
-    });
-
-    test('adding a sort is tracked with its direction and the new count', () {
-      unit.addOrderBy(byPhone);
-
-      expect(f.analytics.trackedEventsOf<AdvancedSearchOrderByAdd>(), [
-        isA<AdvancedSearchOrderByAdd>()
-            .having(
-              (event) => event.fieldName,
-              'fieldName',
-              PersonFields().mainPhone.name,
-            )
-            .having(
-              (event) => event.sortDirection,
-              'sortDirection',
-              byPhone.value,
-            )
-            .having((event) => event.orderCount, 'orderCount', 2),
-      ]);
-    });
-
-    test('re-sorting the same field is tracked as a direction toggle', () {
-      unit.replaceOrderBy(0, byName.copyWith(value: OrderByValue.desc));
-
-      expect(f.analytics.trackedEvents, [
-        isA<AdvancedSearchOrderByDirectionToggle>(),
-      ]);
-    });
-
-    test('picking the sort a condition already has is not tracked', () {
-      unit.replaceOrderBy(0, byName);
-
-      expect(f.analytics.trackedEvents, isEmpty);
-    });
-
-    test('sorting by another field is tracked as a sort change', () {
-      unit.replaceOrderBy(0, byPhone);
-
-      expect(f.analytics.trackedEvents, [isA<AdvancedSearchOrderByChange>()]);
-    });
-
-    test('removing a sort is tracked with the remaining count', () {
-      unit.removeOrderByAt(0);
-
-      expect(f.analytics.trackedEventsOf<AdvancedSearchOrderByRemove>(), [
-        isA<AdvancedSearchOrderByRemove>().having(
-          (event) => event.orderCount,
-          'orderCount',
-          0,
+        f.analytics.trackedEventsOf<AdvancedSearchQuerySubmit>().last,
+        isA<AdvancedSearchQuerySubmit>().having(
+          (event) => event.filterEditCount,
+          'filterEditCount',
+          1,
         ),
-      ]);
+      );
     });
 
     test('a results search cleared before it settles is not tracked', () {

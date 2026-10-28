@@ -11,8 +11,9 @@ class AdvancedSearchController {
 
   late final StreamSubscription<void> _configSubscription;
 
-  final PublishSubject<AnalyticsEvent?> _typedEdits = PublishSubject();
-  late final StreamSubscription<AnalyticsEvent> _typedEditsTracking;
+  Timer? _typedEditSettling;
+
+  int _queryEditCount = 0;
 
   final BehaviorSubject<AdvancedQuery> _query = BehaviorSubject.seeded(
     AdvancedQuery(
@@ -61,10 +62,6 @@ class AdvancedSearchController {
     _configSubscription = FeatureFlagsRepository.I.onConfigChanged.listen(
       (_) => changeQuery(query),
     );
-    _typedEditsTracking = _typedEdits
-        .debounceTime(typingSettleDuration)
-        .whereNotNull()
-        .listen(_analyticsService.track);
   }
 
   void trackOpen({
@@ -77,8 +74,16 @@ class AdvancedSearchController {
     ),
   );
 
-  void trackQuerySubmit({required bool isAutoExecuted}) => _analyticsService
-      .track(AdvancedSearchQuerySubmit(query, isAutoExecuted: isAutoExecuted));
+  void trackQuerySubmit({required bool isAutoExecuted}) {
+    _analyticsService.track(
+      AdvancedSearchQuerySubmit(
+        query,
+        isAutoExecuted: isAutoExecuted,
+        filterEditCount: _queryEditCount,
+      ),
+    );
+    _queryEditCount = 0;
+  }
 
   void trackQueryShare() =>
       _analyticsService.track(AdvancedSearchQueryShare(query));
@@ -172,8 +177,8 @@ class AdvancedSearchController {
   }
 
   void clearLimit() {
-    _typedEdits.add(null);
-    _analyticsService.track(const AdvancedSearchLimitClear());
+    _dropTypedEdit();
+    _trackQueryEdit();
     changeQuery(query.copyWith(limit: null));
   }
 
@@ -181,9 +186,7 @@ class AdvancedSearchController {
       changeQuery(query.copyWith(orderBy: orderBy));
 
   void addOrderBy(OrderBy newOrderBy) {
-    _analyticsService.track(
-      AdvancedSearchOrderByAdd(newOrderBy, orderCount: orderBy.length + 1),
-    );
+    _trackQueryEdit();
     changeOrderBy([...orderBy, newOrderBy]);
   }
 
@@ -199,61 +202,78 @@ class AdvancedSearchController {
   }
 
   void removeOrderByAt(int index) {
-    _analyticsService.track(
-      AdvancedSearchOrderByRemove(orderCount: orderBy.length - 1),
-    );
+    _trackQueryEdit();
     changeOrderBy(orderBy.whereIndexed((i, e) => i != index).toList());
   }
+
+  void _trackQueryEdit() {
+    _queryEditCount++;
+    _analyticsService.track(const AdvancedSearchQueryEdit());
+  }
+
+  void _trackQueryEditOnceTypingSettles() {
+    _typedEditSettling?.cancel();
+    _typedEditSettling = Timer(typingSettleDuration, _trackQueryEdit);
+  }
+
+  void _dropTypedEdit() => _typedEditSettling?.cancel();
 
   void _maybeTrackQueryableTypeChange(QueryableType next) {
     if (next == selectedQueryableType) return;
 
-    _analyticsService.track(
-      AdvancedSearchQueryableTypeChange(from: selectedQueryableType, to: next),
-    );
+    _trackQueryEdit();
   }
 
   void _maybeTrackOrderByReplacement(int index, OrderBy replacement) {
-    final replaced = orderBy.elementAtOrNull(index);
-    if (replaced == replacement) return;
+    if (orderBy.elementAtOrNull(index) == replacement) return;
 
-    _analyticsService.track(
-      replaced?.field == replacement.field
-          ? AdvancedSearchOrderByDirectionToggle(
-              replacement,
-              orderCount: orderBy.length,
-            )
-          : AdvancedSearchOrderByChange(
-              replacement,
-              orderCount: orderBy.length,
-            ),
-    );
+    _trackQueryEdit();
   }
 
   void _maybeTrackFilterEdit(List<Filter> previous, List<Filter> next) {
-    final event = AdvancedSearchFilterEdit.eventForSingleEdit(previous, next);
-    if (event is AdvancedSearchFilterValueSet && event.isFreeText) {
-      _typedEdits.add(event);
-    } else if (event != null) {
-      _analyticsService.track(event);
+    if (const ListEquality<Filter>().equals(previous, next)) return;
+
+    if (_isTypedValueEdit(previous, next)) {
+      _trackQueryEditOnceTypingSettles();
+
+      return;
     }
+
+    _trackQueryEdit();
+  }
+
+  bool _isTypedValueEdit(List<Filter> previous, List<Filter> next) {
+    if (previous.length != next.length) return false;
+
+    final changedFilters = [
+      for (final (i, filter) in previous.indexed)
+        if (filter != next[i]) (filter, next[i]),
+    ];
+
+    return switch (changedFilters) {
+      [(final before, final after)] =>
+        before.field == after.field &&
+            before.operator == after.operator &&
+            (after.operator is StringOperator ||
+                after.operator is PhoneOperator),
+      _ => false,
+    };
   }
 
   void _maybeTrackLimitChange(int? previous, int? next) {
     switch ((previous, next)) {
-      case (null, final added?):
-        _analyticsService.track(AdvancedSearchLimitSet(added));
+      case (null, _?):
+        _trackQueryEdit();
       case (final previous?, final typed?) when typed != previous:
-        _typedEdits.add(AdvancedSearchLimitChange(typed));
+        _trackQueryEditOnceTypingSettles();
       case (_?, null):
-        _typedEdits.add(null);
+        _dropTypedEdit();
       default:
     }
   }
 
   Future<void> dispose() async {
-    await _typedEditsTracking.cancel();
-    await _typedEdits.close();
+    _dropTypedEdit();
     await _configSubscription.cancel();
     await _query.close();
   }

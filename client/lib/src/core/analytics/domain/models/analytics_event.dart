@@ -22,7 +22,6 @@ part 'package:church_admin/src/features/home/domain/analytics/home_analytics_eve
 part 'package:church_admin/src/features/maps/domain/analytics/location_analytics_event.dart';
 part 'package:church_admin/src/features/maps/domain/analytics/maps_analytics_event.dart';
 part 'package:church_admin/src/features/advanced_search/domain/analytics/advanced_search_analytics_event.dart';
-part 'package:church_admin/src/features/advanced_search/domain/analytics/advanced_search_filter_analytics_event.dart';
 part 'package:church_admin/src/features/advanced_search/domain/analytics/advanced_search_query_analytics_event.dart';
 
 sealed class AnalyticsEvent {

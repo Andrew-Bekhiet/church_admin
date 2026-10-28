@@ -2,14 +2,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const noOrders = 0;
-  const oneFilter = 1;
-  const oneOrder = 1;
-  const twoFilters = 2;
-  const twoOrders = 2;
-  const threeFilters = 3;
+  const filterEditCount = 3;
   const limit = 50;
-  const changedLimit = 120;
   const resultsSearchLength = 4;
   final nameContains = Filter(
     PersonFields().name,
@@ -40,149 +34,6 @@ void main() {
     for (final (event, expectedName, expectedProperties)
         in <(AnalyticsEvent, String, Json)>[
           (
-            AdvancedSearchFilterAdd(nameContains, filterCount: twoFilters),
-            'advanced_search:filter_add',
-            {
-              'field_name': 'name',
-              'nested_depth': 0,
-              'operator_id': 'StringOperator.contains',
-              'filter_count': twoFilters,
-            },
-          ),
-          (
-            AdvancedSearchFilterRemove(
-              addressAreaAnyOf,
-              filterCount: oneFilter,
-            ),
-            'advanced_search:filter_remove',
-            {
-              'field_name': 'address.area',
-              'nested_depth': 1,
-              'operator_id': 'MultiSelectOperator._in',
-              'filter_count': oneFilter,
-            },
-          ),
-          (
-            AdvancedSearchFilterFieldChange(
-              nameContains,
-              filterCount: threeFilters,
-            ),
-            'advanced_search:filter_field_change',
-            {
-              'field_name': 'name',
-              'nested_depth': 0,
-              'operator_id': 'StringOperator.contains',
-              'filter_count': threeFilters,
-            },
-          ),
-          (
-            AdvancedSearchFilterOperatorChange(
-              Filter(PersonFields().name, StringOperator.isEmpty, null),
-              filterCount: oneFilter,
-            ),
-            'advanced_search:filter_operator_change',
-            {
-              'field_name': 'name',
-              'nested_depth': 0,
-              'operator_id': 'StringOperator.isEmpty',
-              'filter_count': oneFilter,
-            },
-          ),
-          (
-            AdvancedSearchFilterValueSet(nameContains, filterCount: oneFilter),
-            'advanced_search:filter_value_set',
-            {
-              'field_name': 'name',
-              'nested_depth': 0,
-              'operator_id': 'StringOperator.contains',
-              'filter_count': oneFilter,
-              'operator_family': 'StringOperator',
-              'value_count': 1,
-              'is_free_text': true,
-            },
-          ),
-          (
-            AdvancedSearchFilterValueSet(
-              addressAreaAnyOf,
-              filterCount: twoFilters,
-            ),
-            'advanced_search:filter_value_set',
-            {
-              'field_name': 'address.area',
-              'nested_depth': 1,
-              'operator_id': 'MultiSelectOperator._in',
-              'filter_count': twoFilters,
-              'operator_family': 'MultiSelectOperator',
-              'value_count': 2,
-              'is_free_text': false,
-            },
-          ),
-          (
-            AdvancedSearchFilterValueSet(
-              Filter(PersonFields().mainPhone, PhoneOperator.eq, ''),
-              filterCount: oneFilter,
-            ),
-            'advanced_search:filter_value_set',
-            {
-              'field_name': 'mainPhone',
-              'nested_depth': 0,
-              'operator_id': 'PhoneOperator.eq',
-              'filter_count': oneFilter,
-              'operator_family': 'PhoneOperator',
-              'value_count': 0,
-              'is_free_text': true,
-            },
-          ),
-          (
-            AdvancedSearchFilterValueSet(
-              Filter(PersonFields().birthday, BirthdayOperator.equals, '05-%'),
-              filterCount: oneFilter,
-            ),
-            'advanced_search:filter_value_set',
-            {
-              'field_name': 'birthday',
-              'nested_depth': 0,
-              'operator_id': 'BirthdayOperator.equals',
-              'filter_count': oneFilter,
-              'operator_family': 'BirthdayOperator',
-              'value_count': 1,
-              'is_free_text': false,
-              'is_any_day': true,
-            },
-          ),
-          (
-            AdvancedSearchFilterValueSet(
-              Filter(PersonFields().birthday, BirthdayOperator.equals, '05-12'),
-              filterCount: oneFilter,
-            ),
-            'advanced_search:filter_value_set',
-            {
-              'field_name': 'birthday',
-              'nested_depth': 0,
-              'operator_id': 'BirthdayOperator.equals',
-              'filter_count': oneFilter,
-              'operator_family': 'BirthdayOperator',
-              'value_count': 1,
-              'is_free_text': false,
-              'is_any_day': false,
-            },
-          ),
-          (
-            AdvancedSearchPolygonFilterDraw(
-              addressInside,
-              triangle,
-              filterCount: oneFilter,
-            ),
-            'advanced_search:polygon_filter_draw',
-            {
-              'field_name': 'address.geolocation',
-              'nested_depth': 1,
-              'operator_id': 'SpatialOperator.intersects',
-              'filter_count': oneFilter,
-              'point_count': 3,
-            },
-          ),
-          (
             const AdvancedSearchOpen(
               hasInitialQuery: true,
               isAutoExecuted: false,
@@ -191,90 +42,61 @@ void main() {
             {'has_initial_query': true, 'is_auto_executed': false},
           ),
           (
-            AdvancedSearchQueryableTypeChange(
-              from: AdvancedQueriesMetadata().person,
-              to: AdvancedQueriesMetadata().family,
-            ),
-            'advanced_search:queryable_type_change',
-            {'from_queryable_type': 'Person', 'to_queryable_type': 'Family'},
-          ),
-          (
-            AdvancedSearchOrderByAdd(byNameDescending, orderCount: oneOrder),
-            'advanced_search:order_by_add',
-            {
-              'field_name': 'name',
-              'sort_direction': 'desc',
-              'order_count': oneOrder,
-            },
-          ),
-          (
-            AdvancedSearchOrderByChange(
-              OrderBy(field: PersonFields().birthday),
-              orderCount: twoOrders,
-            ),
-            'advanced_search:order_by_change',
-            {
-              'field_name': 'birthday',
-              'sort_direction': 'asc',
-              'order_count': twoOrders,
-            },
-          ),
-          (
-            AdvancedSearchOrderByDirectionToggle(
-              byNameDescending,
-              orderCount: oneOrder,
-            ),
-            'advanced_search:order_by_direction_toggle',
-            {
-              'field_name': 'name',
-              'sort_direction': 'desc',
-              'order_count': oneOrder,
-            },
-          ),
-          (
-            const AdvancedSearchOrderByRemove(orderCount: noOrders),
-            'advanced_search:order_by_remove',
-            {'order_count': noOrders},
-          ),
-          (
-            const AdvancedSearchLimitSet(limit),
-            'advanced_search:limit_set',
-            {'limit_value': limit},
-          ),
-          (
-            const AdvancedSearchLimitChange(changedLimit),
-            'advanced_search:limit_change',
-            {'limit_value': changedLimit},
-          ),
-          (
-            const AdvancedSearchLimitClear(),
-            'advanced_search:limit_clear',
+            const AdvancedSearchQueryEdit(),
+            'advanced_search:query_edit',
             {},
           ),
           (
             AdvancedSearchQuerySubmit(
               AdvancedQuery(
                 queryableType: AdvancedQueriesMetadata().person,
-                filters: [nameContains, addressAreaAnyOf],
+                filters: [nameContains, addressAreaAnyOf, addressInside],
                 logicalOperator: LogicalOperator.or,
                 orderBy: [byNameDescending],
                 limit: limit,
               ),
               isAutoExecuted: true,
+              filterEditCount: filterEditCount,
             ),
             'advanced_search:query_submit',
             {
               'queryable_type': 'Person',
               'logical_operator': 'or',
-              'filter_count': 2,
-              'field_names': ['name', 'address.area'],
+              'filter_count': 3,
+              'field_names': ['name', 'address.area', 'address.geolocation'],
               'operator_ids': [
                 'StringOperator.contains',
                 'MultiSelectOperator._in',
+                'SpatialOperator.intersects',
               ],
               'order_count': 1,
               'has_limit': true,
               'is_auto_executed': true,
+              'filter_edit_count': filterEditCount,
+              'max_nested_depth': 1,
+              'has_polygon_filter': true,
+              'limit_value': limit,
+            },
+          ),
+          (
+            AdvancedSearchQuerySubmit(
+              AdvancedQuery(queryableType: AdvancedQueriesMetadata().family),
+              isAutoExecuted: false,
+              filterEditCount: 0,
+            ),
+            'advanced_search:query_submit',
+            {
+              'queryable_type': 'Family',
+              'logical_operator': 'and',
+              'filter_count': 0,
+              'field_names': <String>[],
+              'operator_ids': <String>[],
+              'order_count': 0,
+              'has_limit': false,
+              'is_auto_executed': false,
+              'filter_edit_count': 0,
+              'max_nested_depth': 0,
+              'has_polygon_filter': false,
             },
           ),
           (

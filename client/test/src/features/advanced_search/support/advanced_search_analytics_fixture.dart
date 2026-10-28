@@ -9,6 +9,9 @@ import '../../../fakes/recording_analytics_provider.dart';
 final class AdvancedSearchAnalyticsFixture {
   final analytics = RecordingAnalyticsProvider();
 
+  int get queryEditCount =>
+      analytics.trackedEventsOf<AdvancedSearchQueryEdit>().length;
+
   AdvancedSearchController createController() => AdvancedSearchController(
     analyticsService: AnalyticsService([analytics], FakeLoggingService()),
   );

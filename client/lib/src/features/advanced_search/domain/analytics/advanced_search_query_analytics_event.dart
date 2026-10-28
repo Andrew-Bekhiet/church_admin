@@ -24,124 +24,23 @@ final class AdvancedSearchOpen extends AdvancedSearchQueryAnalyticsEvent {
   });
 }
 
-final class AdvancedSearchQueryableTypeChange
-    extends AdvancedSearchQueryAnalyticsEvent {
-  final String fromQueryableType;
-  final String toQueryableType;
-
+final class AdvancedSearchQueryEdit extends AdvancedSearchQueryAnalyticsEvent {
   @override
-  String get objectAction => 'queryable_type_change';
+  String get objectAction => 'query_edit';
 
-  @override
-  Json get properties => {
-    'from_queryable_type': fromQueryableType,
-    'to_queryable_type': toQueryableType,
-  };
-
-  AdvancedSearchQueryableTypeChange({
-    required QueryableType from,
-    required QueryableType to,
-  }) : fromQueryableType = from.name,
-       toQueryableType = to.name;
-}
-
-sealed class AdvancedSearchOrderByAnalyticsEvent
-    extends AdvancedSearchQueryAnalyticsEvent {
-  final String fieldName;
-  final OrderByValue sortDirection;
-  final int orderCount;
-
-  @override
-  Json get properties => {
-    'field_name': fieldName,
-    'sort_direction': sortDirection.name,
-    'order_count': orderCount,
-  };
-
-  AdvancedSearchOrderByAnalyticsEvent(
-    OrderBy orderBy, {
-    required this.orderCount,
-  }) : fieldName = AdvancedSearchFilterAnalyticsEvent.fieldPathOf(
-         orderBy.field,
-       ).join('.'),
-       sortDirection = orderBy.value;
-}
-
-final class AdvancedSearchOrderByAdd
-    extends AdvancedSearchOrderByAnalyticsEvent {
-  @override
-  String get objectAction => 'order_by_add';
-
-  AdvancedSearchOrderByAdd(super.orderBy, {required super.orderCount});
-}
-
-final class AdvancedSearchOrderByChange
-    extends AdvancedSearchOrderByAnalyticsEvent {
-  @override
-  String get objectAction => 'order_by_change';
-
-  AdvancedSearchOrderByChange(super.orderBy, {required super.orderCount});
-}
-
-final class AdvancedSearchOrderByDirectionToggle
-    extends AdvancedSearchOrderByAnalyticsEvent {
-  @override
-  String get objectAction => 'order_by_direction_toggle';
-
-  AdvancedSearchOrderByDirectionToggle(
-    super.orderBy, {
-    required super.orderCount,
-  });
-}
-
-final class AdvancedSearchOrderByRemove
-    extends AdvancedSearchQueryAnalyticsEvent {
-  final int orderCount;
-
-  @override
-  String get objectAction => 'order_by_remove';
-
-  @override
-  Json get properties => {'order_count': orderCount};
-
-  const AdvancedSearchOrderByRemove({required this.orderCount});
-}
-
-sealed class AdvancedSearchLimitValueAnalyticsEvent
-    extends AdvancedSearchQueryAnalyticsEvent {
-  final int limitValue;
-
-  @override
-  Json get properties => {'limit_value': limitValue};
-
-  const AdvancedSearchLimitValueAnalyticsEvent(this.limitValue);
-}
-
-final class AdvancedSearchLimitSet
-    extends AdvancedSearchLimitValueAnalyticsEvent {
-  @override
-  String get objectAction => 'limit_set';
-
-  const AdvancedSearchLimitSet(super.limitValue);
-}
-
-final class AdvancedSearchLimitChange
-    extends AdvancedSearchLimitValueAnalyticsEvent {
-  @override
-  String get objectAction => 'limit_change';
-
-  const AdvancedSearchLimitChange(super.limitValue);
-}
-
-final class AdvancedSearchLimitClear extends AdvancedSearchQueryAnalyticsEvent {
-  @override
-  String get objectAction => 'limit_clear';
-
-  const AdvancedSearchLimitClear();
+  const AdvancedSearchQueryEdit();
 }
 
 sealed class AdvancedSearchQueryRunAnalyticsEvent
     extends AdvancedSearchQueryAnalyticsEvent {
+  static List<String> fieldPathOf(FieldMetadata field) => switch (field) {
+    RedirectingFieldMetadata(:final parentField, :final targetField) => [
+      ...fieldPathOf(parentField),
+      ...fieldPathOf(targetField),
+    ],
+    _ => [field.name],
+  };
+
   final String queryableType;
   final LogicalOperator logicalOperator;
   final List<String> fieldNames;
@@ -164,10 +63,7 @@ sealed class AdvancedSearchQueryRunAnalyticsEvent
     : queryableType = query.queryableType.name,
       logicalOperator = query.logicalOperator,
       fieldNames = [
-        for (final filter in query.filters)
-          AdvancedSearchFilterAnalyticsEvent.fieldPathOf(
-            filter.field,
-          ).join('.'),
+        for (final filter in query.filters) fieldPathOf(filter.field).join('.'),
       ],
       operatorIds = [
         for (final filter in query.filters) filter.operator.serializationId,
@@ -179,6 +75,10 @@ sealed class AdvancedSearchQueryRunAnalyticsEvent
 final class AdvancedSearchQuerySubmit
     extends AdvancedSearchQueryRunAnalyticsEvent {
   final bool isAutoExecuted;
+  final int filterEditCount;
+  final int maxNestedDepth;
+  final bool hasPolygonFilter;
+  final int? limitValue;
 
   @override
   String get objectAction => 'query_submit';
@@ -187,12 +87,28 @@ final class AdvancedSearchQuerySubmit
   Json get properties => {
     ...super.properties,
     'is_auto_executed': isAutoExecuted,
+    'filter_edit_count': filterEditCount,
+    'max_nested_depth': maxNestedDepth,
+    'has_polygon_filter': hasPolygonFilter,
+    'limit_value': ?limitValue,
   };
 
   AdvancedSearchQuerySubmit(
     super.query, {
     required this.isAutoExecuted,
-  });
+    required this.filterEditCount,
+  }) : maxNestedDepth = [
+         0,
+         for (final filter in query.filters)
+           AdvancedSearchQueryRunAnalyticsEvent.fieldPathOf(
+                 filter.field,
+               ).length -
+               1,
+       ].max,
+       hasPolygonFilter = query.filters.any(
+         (filter) => filter.value is Polygon,
+       ),
+       limitValue = query.limit;
 }
 
 final class AdvancedSearchQueryShare
