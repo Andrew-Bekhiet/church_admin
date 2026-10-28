@@ -77,21 +77,131 @@ void main() {
     ]);
   });
 
-  testWidgets('dismissing the call prompt is tracked as answering it with '
-      'cancel', (tester) async {
+  testWidgets('dismissing the call prompt finishes the phone call with cancel '
+      'and no recording answer', (tester) async {
     await fixture.pumpSection(tester);
 
-    await tester.tap(find.byTooltip('اجراء مكالمة'));
+    await fixture.tapCall(tester);
+    await tester.tapAt(Offset.zero);
+    await tester.pumpAndSettle();
+
+    expect(fixture.analytics.trackedEvents, [
+      isA<PhoneCallFinish>()
+          .having(
+            (event) => event.ownerProperties,
+            'ownerProperties',
+            AnalyticsEntityType.propertiesOf(fixture.person),
+          )
+          .having((event) => event.isFamilyNumber, 'isFamilyNumber', false)
+          .having(
+            (event) => event.callPromptChoice,
+            'callPromptChoice',
+            ContactCallPromptChoice.cancel,
+          )
+          .having(
+            (event) => event.isRecordingAccepted,
+            'isRecordingAccepted',
+            isNull,
+          ),
+    ]);
+  });
+
+  testWidgets('choosing the dialer only finishes the phone call without '
+      'asking to record it', (tester) async {
+    await fixture.pumpSection(tester);
+
+    await fixture.tapCall(tester);
+    await tester.tap(find.text('نسخ في لوحة الاتصال فقط'));
+    await tester.pumpAndSettle();
+
+    expect(fixture.analytics.trackedEvents, [
+      isA<PhoneCallFinish>()
+          .having(
+            (event) => event.callPromptChoice,
+            'callPromptChoice',
+            ContactCallPromptChoice.dialerOnly,
+          )
+          .having(
+            (event) => event.isRecordingAccepted,
+            'isRecordingAccepted',
+            isNull,
+          ),
+    ]);
+  });
+
+  testWidgets('recording the call date finishes the phone call as accepted', (
+    tester,
+  ) async {
+    await fixture.pumpSection(tester);
+
+    await fixture.tapCall(tester);
+    await tester.tap(find.text('اجراء مكالمة الأن'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('تسجيل'));
+    await tester.pumpAndSettle();
+
+    expect(fixture.analytics.trackedEvents, [
+      isA<PhoneCallFinish>()
+          .having(
+            (event) => event.callPromptChoice,
+            'callPromptChoice',
+            ContactCallPromptChoice.call,
+          )
+          .having(
+            (event) => event.isRecordingAccepted,
+            'isRecordingAccepted',
+            true,
+          ),
+    ]);
+  });
+
+  testWidgets('skipping the call date finishes the phone call as not '
+      'accepted', (tester) async {
+    await fixture.pumpSection(tester);
+
+    await fixture.tapCall(tester);
+    await tester.tap(find.text('اجراء مكالمة الأن'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('تخطي'));
+    await tester.pumpAndSettle();
+
+    expect(fixture.analytics.trackedEvents, [
+      isA<PhoneCallFinish>()
+          .having(
+            (event) => event.callPromptChoice,
+            'callPromptChoice',
+            ContactCallPromptChoice.call,
+          )
+          .having(
+            (event) => event.isRecordingAccepted,
+            'isRecordingAccepted',
+            false,
+          ),
+    ]);
+  });
+
+  testWidgets('backing out of the call date prompt finishes the phone call as '
+      'not accepted', (tester) async {
+    await fixture.pumpSection(tester);
+
+    await fixture.tapCall(tester);
+    await tester.tap(find.text('اجراء مكالمة الأن'));
     await tester.pumpAndSettle();
     await tester.tapAt(Offset.zero);
     await tester.pumpAndSettle();
 
     expect(fixture.analytics.trackedEvents, [
-      isA<ContactCallPromptAnswer>().having(
-        (event) => event.choice,
-        'choice',
-        ContactCallPromptChoice.cancel,
-      ),
+      isA<PhoneCallFinish>()
+          .having(
+            (event) => event.callPromptChoice,
+            'callPromptChoice',
+            ContactCallPromptChoice.call,
+          )
+          .having(
+            (event) => event.isRecordingAccepted,
+            'isRecordingAccepted',
+            false,
+          ),
     ]);
   });
 }

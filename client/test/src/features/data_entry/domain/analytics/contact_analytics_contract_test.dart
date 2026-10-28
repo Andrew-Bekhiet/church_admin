@@ -7,45 +7,51 @@ void main() {
 
   final contracts = <({AnalyticsEvent event, String name, Json properties})>[
     (
-      event: ContactCallPromptAnswer(
+      event: PhoneCallFinish(
         person,
-        choice: ContactCallPromptChoice.call,
+        callPromptChoice: ContactCallPromptChoice.call,
+        isRecordingAccepted: true,
         isFamilyNumber: false,
       ),
-      name: 'contact:call_prompt_answer',
+      name: 'contact:phone_call_finish',
       properties: {
         'entity_type': 'person',
         'person_id': person.id,
         'is_family_number': false,
         'call_prompt_choice': 'call',
+        'is_recording_accepted': true,
       },
     ),
     (
-      event: ContactCallPromptAnswer(
+      event: PhoneCallFinish(
         family,
-        choice: ContactCallPromptChoice.dialerOnly,
+        callPromptChoice: ContactCallPromptChoice.dialerOnly,
+        isRecordingAccepted: null,
         isFamilyNumber: true,
       ),
-      name: 'contact:call_prompt_answer',
+      name: 'contact:phone_call_finish',
       properties: {
         'entity_type': 'family',
         'family_id': family.id,
         'is_family_number': true,
         'call_prompt_choice': 'dialerOnly',
+        'is_recording_accepted': null,
       },
     ),
     (
-      event: ContactCallPromptAnswer(
+      event: PhoneCallFinish(
         person,
-        choice: ContactCallPromptChoice.cancel,
+        callPromptChoice: ContactCallPromptChoice.cancel,
+        isRecordingAccepted: null,
         isFamilyNumber: false,
       ),
-      name: 'contact:call_prompt_answer',
+      name: 'contact:phone_call_finish',
       properties: {
         'entity_type': 'person',
         'person_id': person.id,
         'is_family_number': false,
         'call_prompt_choice': 'cancel',
+        'is_recording_accepted': null,
       },
     ),
     (
@@ -82,15 +88,6 @@ void main() {
         'entity_type': 'person',
         'person_id': person.id,
         'is_family_number': false,
-      },
-    ),
-    (
-      event: CallDateRecordAnswer(person, isRecordingAccepted: true),
-      name: 'contact:call_date_record_answer',
-      properties: {
-        'entity_type': 'person',
-        'person_id': person.id,
-        'is_recording_accepted': true,
       },
     ),
     (

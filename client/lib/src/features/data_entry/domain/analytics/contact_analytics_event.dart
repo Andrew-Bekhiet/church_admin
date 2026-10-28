@@ -23,21 +23,24 @@ sealed class ContactNumberAnalyticsEvent extends ContactAnalyticsEvent {
   }) : ownerProperties = AnalyticsEntityType.propertiesOf(owner);
 }
 
-final class ContactCallPromptAnswer extends ContactNumberAnalyticsEvent {
-  final ContactCallPromptChoice choice;
+final class PhoneCallFinish extends ContactNumberAnalyticsEvent {
+  final ContactCallPromptChoice callPromptChoice;
+  final bool? isRecordingAccepted;
 
   @override
-  String get objectAction => 'call_prompt_answer';
+  String get objectAction => 'phone_call_finish';
 
   @override
   Json get properties => {
     ...super.properties,
-    'call_prompt_choice': choice.name,
+    'call_prompt_choice': callPromptChoice.name,
+    'is_recording_accepted': isRecordingAccepted,
   };
 
-  ContactCallPromptAnswer(
+  PhoneCallFinish(
     super.owner, {
-    required this.choice,
+    required this.callPromptChoice,
+    required this.isRecordingAccepted,
     required super.isFamilyNumber,
   });
 }
@@ -68,25 +71,6 @@ final class NumberCopy extends ContactNumberAnalyticsEvent {
   String get objectAction => 'number_copy';
 
   NumberCopy(super.owner, {required super.isFamilyNumber});
-}
-
-final class CallDateRecordAnswer extends ContactAnalyticsEvent {
-  final Json ownerProperties;
-  final bool isRecordingAccepted;
-
-  @override
-  String get objectAction => 'call_date_record_answer';
-
-  @override
-  Json get properties => {
-    ...ownerProperties,
-    'is_recording_accepted': isRecordingAccepted,
-  };
-
-  CallDateRecordAnswer(
-    ViewableWithID owner, {
-    required this.isRecordingAccepted,
-  }) : ownerProperties = AnalyticsEntityType.propertiesOf(owner);
 }
 
 final class DeviceContactCreateAttempt extends ContactAnalyticsEvent {

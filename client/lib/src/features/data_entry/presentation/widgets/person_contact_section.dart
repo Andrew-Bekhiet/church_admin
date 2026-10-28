@@ -106,26 +106,50 @@ class PersonContactSection extends StatelessWidget {
         ],
       ),
     );
+    final callPromptChoice = switch (doMakeCallResult) {
+      true => ContactCallPromptChoice.call,
+      false => ContactCallPromptChoice.dialerOnly,
+      _ => ContactCallPromptChoice.cancel,
+    };
+
+    final isRecordingAccepted = await _maybeLaunchCallAndAskToRecordIt(
+      context,
+      number,
+      callPromptChoice,
+    );
 
     AnalyticsService.I.track(
-      ContactCallPromptAnswer(
+      PhoneCallFinish(
         person,
         isFamilyNumber: isFamilyNumber,
-        choice: switch (doMakeCallResult) {
-          true => ContactCallPromptChoice.call,
-          false => ContactCallPromptChoice.dialerOnly,
-          _ => ContactCallPromptChoice.cancel,
-        },
+        callPromptChoice: callPromptChoice,
+        isRecordingAccepted: isRecordingAccepted,
       ),
     );
-    if (doMakeCallResult == null) return;
+    if (isRecordingAccepted != true) return;
 
-    if (doMakeCallResult) await Permission.phone.request();
+    await DatabaseService.I.history.updatePersonLastCall(
+      personId: person.id,
+      lastCall: DateTime.now(),
+    );
+
+    scaffoldMessenger.showSnackBar(const SnackBar(content: Text('تم بنجاح')));
+  }
+
+  Future<bool?> _maybeLaunchCallAndAskToRecordIt(
+    BuildContext context,
+    String? number,
+    ContactCallPromptChoice callPromptChoice,
+  ) async {
+    if (callPromptChoice == ContactCallPromptChoice.cancel) return null;
+
+    final isCallingNow = callPromptChoice == ContactCallPromptChoice.call;
+    if (isCallingNow) await Permission.phone.request();
     await LauncherService.I.launchCall(
       PhoneNumberService.I.formatInternational(number!),
     );
 
-    if (!doMakeCallResult || !context.mounted) return;
+    if (!isCallingNow || !context.mounted) return null;
 
     final recordLastCall = await showDialog(
       context: context,
@@ -136,18 +160,7 @@ class PersonContactSection extends StatelessWidget {
       ),
     );
 
-    final isRecordingAccepted = recordLastCall == true;
-    AnalyticsService.I.track(
-      CallDateRecordAnswer(person, isRecordingAccepted: isRecordingAccepted),
-    );
-    if (!isRecordingAccepted) return;
-
-    await DatabaseService.I.history.updatePersonLastCall(
-      personId: person.id,
-      lastCall: DateTime.now(),
-    );
-
-    scaffoldMessenger.showSnackBar(const SnackBar(content: Text('تم بنجاح')));
+    return recordLastCall == true;
   }
 
   Future<void> _contactAdd(

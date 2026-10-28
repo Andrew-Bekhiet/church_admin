@@ -3,11 +3,15 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../fakes/fake_contacts_service.dart';
+import '../../../../fakes/fake_launcher_service.dart';
 import '../../../../fakes/fake_logging_service.dart';
+import '../../../../fakes/mock_database_service.dart';
+import '../../../../fakes/mock_history_dao.dart';
 import '../../../../fakes/mock_image_url_cache_service.dart';
 import '../../../../fakes/recording_analytics_provider.dart';
 import '../../../../material_ui_test_app.dart';
@@ -31,7 +35,19 @@ class PersonContactSectionFixture {
   );
 
   PersonContactSectionFixture() {
+    final history = MockHistoryDAO();
+    when(
+      () => history.updatePersonLastCall(
+        personId: any(named: 'personId'),
+        lastCall: any(named: 'lastCall'),
+      ),
+    ).thenAnswer((_) async => null);
+    final database = MockDatabaseService();
+    when(() => database.history).thenReturn(history);
+
     initGlobalProviderContainer([
+      databaseServiceProvider.overrideWithValue(database),
+      launcherServiceProvider.overrideWithValue(FakeLauncherService()),
       analyticsServiceProvider.overrideWithValue(
         AnalyticsService([analytics], FakeLoggingService()),
       ),
@@ -44,6 +60,7 @@ class PersonContactSectionFixture {
       _permissions,
       (call) async => {
         Permission.contacts.value: PermissionStatus.granted.index,
+        Permission.phone.value: PermissionStatus.granted.index,
       },
     );
     addTearDown(() => _messenger.setMockMethodCallHandler(_permissions, null));
@@ -54,13 +71,21 @@ class PersonContactSectionFixture {
 
   Future<void> pumpSection(WidgetTester tester) => tester.pumpWidget(
     MaterialUiTestApp.withThemeAndLocale(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: PersonContactSection(person: person),
+      child: ScaffoldMessenger(
+        key: scaffoldMessengerKey,
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: PersonContactSection(person: person),
+          ),
         ),
       ),
     ),
   );
+
+  Future<void> tapCall(WidgetTester tester) async {
+    await tester.tap(find.byTooltip('اجراء مكالمة'));
+    await tester.pumpAndSettle();
+  }
 
   Future<void> addOwnNumberToDeviceContacts(WidgetTester tester) async {
     await pumpSection(tester);
