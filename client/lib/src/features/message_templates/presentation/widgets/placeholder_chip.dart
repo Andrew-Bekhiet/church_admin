@@ -12,14 +12,14 @@ class PlaceholderChip extends StatelessWidget {
     return DecoratedBox(
       decoration: ShapeDecoration(
         shape: const StadiumBorder(),
-        color: theme.colorScheme.secondaryContainer,
+        color: theme.colorScheme.primaryContainer,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
         child: Text(
           label,
           style: theme.textTheme.labelLarge?.copyWith(
-            color: theme.colorScheme.onSecondaryContainer,
+            color: theme.colorScheme.onPrimaryContainer,
           ),
         ),
       ),
