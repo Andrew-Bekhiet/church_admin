@@ -7,13 +7,14 @@ void main() {
   final failure = StateError('offline');
   const stackTrace = StackTrace.empty;
 
+  const formOpenDuration = Duration(seconds: 12, milliseconds: 345);
   final contracts = <({AnalyticsEvent event, String name, Json properties})>[
     (
       event: PersonSaveAttempt(
         entity: person,
         isCreate: true,
         outcome: PersonSaved(person: person, movedOutOfSight: false),
-        formOpenDuration: const Duration(seconds: 12, milliseconds: 345),
+        formOpenDuration: formOpenDuration,
         shownRuleViolations: const {},
       ),
       name: 'data_entry:object_save_attempt',
@@ -22,7 +23,7 @@ void main() {
         'person_id': person.id,
         'is_create': true,
         'outcome': 'saved',
-        'form_open_duration_ms': 12345,
+        'form_open_duration_seconds': formOpenDuration.inSeconds,
         'rule_violations': <String>[],
       },
     ),
@@ -31,7 +32,7 @@ void main() {
         entity: person,
         isCreate: false,
         outcome: const InvalidPerson(),
-        formOpenDuration: const Duration(milliseconds: 800),
+        formOpenDuration: formOpenDuration,
         shownRuleViolations: const {
           NothingPlacesThePerson(),
           AddressChangeBlockedByMove(),
@@ -45,7 +46,7 @@ void main() {
         'person_id': person.id,
         'is_create': false,
         'outcome': 'invalid',
-        'form_open_duration_ms': 800,
+        'form_open_duration_seconds': formOpenDuration.inSeconds,
         'rule_violations': [
           'nothingPlacesThePerson',
           'addressChangeBlockedByMove',
@@ -73,7 +74,7 @@ void main() {
         'service_id': service.id,
         'is_create': true,
         'outcome': 'savedButPhotoFailed',
-        'form_open_duration_ms': 0,
+        'form_open_duration_seconds': Duration.zero.inSeconds,
         'is_default_meeting_created': true,
       },
     ),

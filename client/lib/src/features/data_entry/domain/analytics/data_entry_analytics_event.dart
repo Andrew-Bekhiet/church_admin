@@ -22,7 +22,7 @@ sealed class ObjectSaveAttempt extends DataEntryAnalyticsEvent {
     ...entityProperties,
     'is_create': isCreate,
     'outcome': outcomeName,
-    'form_open_duration_ms': formOpenDuration.inMilliseconds,
+    'form_open_duration_seconds': formOpenDuration.inSeconds,
   };
 
   ObjectSaveAttempt({
