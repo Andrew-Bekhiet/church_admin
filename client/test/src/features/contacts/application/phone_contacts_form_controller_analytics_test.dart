@@ -17,6 +17,9 @@ void main() {
     label: 'عمل',
   );
 
+  const roleLabel = RolePhoneContactLabel(father);
+  const homeLabel = FreePhoneContactLabel('بيت');
+
   late RecordingAnalyticsProvider analytics;
   late PersonPhoneContactsFormController form;
 
@@ -35,33 +38,26 @@ void main() {
   });
 
   test('adding a role number is tracked by its role, not its number', () {
-    form.add(const RolePhoneContactLabel(father));
+    form.add(roleLabel);
 
     expect(
       analytics.trackedEventsOf<ContactsPhoneAdd>().single,
       isA<ContactsPhoneAdd>()
-          .having(
-            (event) => event.labelKind,
-            'labelKind',
-            PhoneContactLabelKind.role,
-          )
-          .having((event) => event.roleId, 'roleId', father.id)
+          .having((event) => event.label, 'label', roleLabel)
           .having((event) => event.isAutoMain, 'isAutoMain', false),
     );
   });
 
   test('relabeling a number is tracked by the label kind, not its text', () {
-    form.changeLabel(contactOf(ownWork), const FreePhoneContactLabel('بيت'));
+    form.changeLabel(contactOf(ownWork), homeLabel);
 
     expect(
       analytics.trackedEventsOf<ContactsPhoneLabelChange>().single,
-      isA<ContactsPhoneLabelChange>()
-          .having(
-            (event) => event.labelKind,
-            'labelKind',
-            PhoneContactLabelKind.free,
-          )
-          .having((event) => event.roleId, 'roleId', isNull),
+      isA<ContactsPhoneLabelChange>().having(
+        (event) => event.label,
+        'label',
+        homeLabel,
+      ),
     );
   });
 
@@ -93,9 +89,9 @@ void main() {
     expect(
       analytics.trackedEventsOf<ContactsPhoneRemove>().single,
       isA<ContactsPhoneRemove>().having(
-        (event) => event.labelKind,
-        'labelKind',
-        PhoneContactLabelKind.free,
+        (event) => event.label,
+        'label',
+        FreePhoneContactLabel(ownWork.label),
       ),
     );
   });

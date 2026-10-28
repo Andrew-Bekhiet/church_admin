@@ -9,21 +9,18 @@ sealed class PhoneContactsEditorAnalyticsEvent extends AnalyticsEvent {
 
 sealed class PhoneContactLabelAnalyticsEvent
     extends PhoneContactsEditorAnalyticsEvent {
-  final PhoneContactLabelKind labelKind;
-  final String? roleId;
+  final PhoneContactLabel label;
 
   @override
-  Json get properties => {'label_kind': labelKind.name, 'role_id': ?roleId};
+  Json get properties => switch (label) {
+    FreePhoneContactLabel() => {'label_kind': 'free'},
+    RolePhoneContactLabel(:final role) => {
+      'label_kind': 'role',
+      'role_id': role.id,
+    },
+  };
 
-  PhoneContactLabelAnalyticsEvent(PhoneContactLabel label)
-    : labelKind = switch (label) {
-        FreePhoneContactLabel() => PhoneContactLabelKind.free,
-        RolePhoneContactLabel() => PhoneContactLabelKind.role,
-      },
-      roleId = switch (label) {
-        FreePhoneContactLabel() => null,
-        RolePhoneContactLabel(:final role) => role.id,
-      };
+  const PhoneContactLabelAnalyticsEvent(this.label);
 }
 
 final class ContactsPhoneAdd extends PhoneContactLabelAnalyticsEvent {
@@ -35,14 +32,14 @@ final class ContactsPhoneAdd extends PhoneContactLabelAnalyticsEvent {
   @override
   Json get properties => {...super.properties, 'is_auto_main': isAutoMain};
 
-  ContactsPhoneAdd(super.label, {required this.isAutoMain});
+  const ContactsPhoneAdd(super.label, {required this.isAutoMain});
 }
 
 final class ContactsPhoneLabelChange extends PhoneContactLabelAnalyticsEvent {
   @override
   String get objectAction => 'phone_label_change';
 
-  ContactsPhoneLabelChange(super.label);
+  const ContactsPhoneLabelChange(super.label);
 }
 
 final class ContactsMainPhoneToggle extends PhoneContactsEditorAnalyticsEvent {
@@ -61,7 +58,5 @@ final class ContactsPhoneRemove extends PhoneContactLabelAnalyticsEvent {
   @override
   String get objectAction => 'phone_remove';
 
-  ContactsPhoneRemove(super.label);
+  const ContactsPhoneRemove(super.label);
 }
-
-enum PhoneContactLabelKind { free, role }

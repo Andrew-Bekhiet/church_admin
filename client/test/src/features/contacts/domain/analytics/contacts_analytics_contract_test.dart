@@ -11,17 +11,17 @@ void main() {
     for (final (event, expectedName, expectedProperties)
         in <(AnalyticsEvent, String, Json)>[
           (
-            ContactsPhoneAdd(father, isAutoMain: true),
+            const ContactsPhoneAdd(father, isAutoMain: true),
             'contacts:phone_add',
             {'label_kind': 'role', 'role_id': 'father', 'is_auto_main': true},
           ),
           (
-            ContactsPhoneAdd(work, isAutoMain: false),
+            const ContactsPhoneAdd(work, isAutoMain: false),
             'contacts:phone_add',
             {'label_kind': 'free', 'is_auto_main': false},
           ),
           (
-            ContactsPhoneLabelChange(father),
+            const ContactsPhoneLabelChange(father),
             'contacts:phone_label_change',
             {'label_kind': 'role', 'role_id': 'father'},
           ),
@@ -31,7 +31,7 @@ void main() {
             {'is_main': true},
           ),
           (
-            ContactsPhoneRemove(work),
+            const ContactsPhoneRemove(work),
             'contacts:phone_remove',
             {'label_kind': 'free'},
           ),
