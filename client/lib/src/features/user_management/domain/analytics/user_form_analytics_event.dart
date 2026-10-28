@@ -120,7 +120,7 @@ final class InvitationExpiryChange extends UserFormAnalyticsEvent {
 
   @override
   Json get properties => {
-    'validity_duration_ms': validity.inMilliseconds,
+    'validity_days': validity.inDays,
   };
 
   const InvitationExpiryChange(this.validity);

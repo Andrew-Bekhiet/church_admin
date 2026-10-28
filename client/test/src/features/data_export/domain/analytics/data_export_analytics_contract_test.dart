@@ -33,7 +33,7 @@ void main() {
       (
         const ExportFinish(duration: exportDuration, isSuccess: true),
         'export:export_finish',
-        {'is_success': true, 'duration_ms': exportDuration.inMilliseconds},
+        {'is_success': true, 'duration_seconds': exportDuration.inSeconds},
       ),
       (
         const ExportFileOpen(ExportFileOpenSource.savedList),

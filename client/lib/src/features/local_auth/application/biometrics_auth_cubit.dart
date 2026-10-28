@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:clock/clock.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
@@ -8,11 +7,7 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
   final AuthStorage _authStorage;
   final EncryptionService _encryptionService;
   final AnalyticsService _analyticsService;
-  final Clock _clock;
-  final DateTime _lockedAt;
   final AppRoute? next;
-
-  Duration get _lockedFor => _clock.now().difference(_lockedAt);
 
   BiometricsAuthCubit({
     LocalAuthService? localAuthService,
@@ -20,12 +15,9 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     AuthStorage? authStorage,
     EncryptionService? encryptionService,
     AnalyticsService? analyticsService,
-    Clock? clock,
     this.next,
   }) : _localAuthService = localAuthService ?? LocalAuthService.I,
        _analyticsService = analyticsService ?? AnalyticsService.I,
-       _clock = clock ?? const Clock(),
-       _lockedAt = (clock ?? const Clock()).now(),
        _authRepository =
            authRepository ??
            globalProviderContainer.read(authRepositoryProvider),
@@ -168,7 +160,6 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
         BiometricsUnlockSubmit(
           outcome: outcome,
           isAutoPrompted: isAutoPrompted,
-          lockedFor: _lockedFor,
         ),
       );
 
@@ -176,7 +167,6 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     PasswordUnlockSubmit(
       outcome: outcome,
       canCheckBiometrics: state.canCheckBiometrics,
-      lockedFor: _lockedFor,
     ),
   );
 

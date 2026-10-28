@@ -34,7 +34,7 @@ void main() {
           'subject_type': 'meeting',
           'meeting_id': meeting.id,
           'range_preset': 'today',
-          'range_duration_ms': today.duration.inMilliseconds,
+          'range_days': today.duration.inDays,
           'is_success': true,
         },
       ),
@@ -43,7 +43,7 @@ void main() {
         'analysis:range_select',
         {
           'range_preset': 'pastMonth',
-          'range_duration_ms': pastMonth.duration.inMilliseconds,
+          'range_days': pastMonth.duration.inDays,
         },
       ),
       (
@@ -51,7 +51,7 @@ void main() {
         'analysis:custom_range_pick',
         {
           'is_cancelled': false,
-          'range_duration_ms': week.duration.inMilliseconds,
+          'range_days': week.duration.inDays,
         },
       ),
       (
@@ -116,7 +116,7 @@ void main() {
           'subject_type': 'service',
           'service_id': service.id,
           'range_preset': 'pastQuarter',
-          'range_duration_ms': pastQuarter.duration.inMilliseconds,
+          'range_days': pastQuarter.duration.inDays,
           'is_success': false,
         },
       ),
@@ -131,7 +131,7 @@ void main() {
           'subject_type': 'group',
           'group_id': group.id,
           'range_preset': 'pastYear',
-          'range_duration_ms': pastYear.duration.inMilliseconds,
+          'range_days': pastYear.duration.inDays,
           'is_success': true,
         },
       ),
@@ -146,14 +146,14 @@ void main() {
           'subject_type': 'class',
           'class_id': classGroup.id,
           'range_preset': 'custom',
-          'range_duration_ms': week.duration.inMilliseconds,
+          'range_days': week.duration.inDays,
           'is_success': true,
         },
       ),
       (
         'dismissing the custom range picker reports a cancelled pick',
         const AnalysisCustomRangePick(CustomRangePickCancelled()),
-        {'is_cancelled': true, 'range_duration_ms': null},
+        {'is_cancelled': true, 'range_days': null},
       ),
     ];
 

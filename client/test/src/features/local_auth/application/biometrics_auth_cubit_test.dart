@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:clock/clock.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -45,12 +44,9 @@ void main() {
   late _MockAuthRepository authRepository;
   late _MockAuthStorage authStorage;
   late RecordingAnalyticsProvider analytics;
-  late DateTime now;
-  const lockedFor = Duration(seconds: 42, milliseconds: 900);
 
   setUp(() {
     analytics = RecordingAnalyticsProvider();
-    now = DateTime(2026, 10, 23, 9);
     localAuthService = _LocalAuthService();
     authRepository = _MockAuthRepository();
     authStorage = _MockAuthStorage();
@@ -66,7 +62,6 @@ void main() {
     authStorage: authStorage,
     encryptionService: _PasswordEncryptionService(),
     analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-    clock: Clock(() => now),
     next: next,
   );
 
@@ -103,12 +98,9 @@ void main() {
   );
 
   blocTest<BiometricsAuthCubit, BiometricsAuthState>(
-    'unlocking with the password is tracked with how long the app stayed locked',
+    'unlocking with the password is tracked as unlocked',
     build: buildCubit,
-    act: (cubit) async {
-      now = now.add(lockedFor);
-      await cubit.submitPassword('correct');
-    },
+    act: (cubit) => cubit.submitPassword('correct'),
     verify: (_) => expect(
       analytics.trackedEventsOf<PasswordUnlockSubmit>().single,
       isA<PasswordUnlockSubmit>()
@@ -117,8 +109,7 @@ void main() {
             (event) => event.canCheckBiometrics,
             'canCheckBiometrics',
             false,
-          )
-          .having((event) => event.lockedFor, 'lockedFor', lockedFor),
+          ),
     ),
   );
 

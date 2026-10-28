@@ -68,7 +68,7 @@ final class ExportFinish extends DataExportAnalyticsEvent {
   @override
   Json get properties => {
     'is_success': isSuccess,
-    'duration_ms': duration.inMilliseconds,
+    'duration_seconds': duration.inSeconds,
   };
 
   const ExportFinish({required this.duration, required this.isSuccess});

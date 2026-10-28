@@ -28,15 +28,11 @@ final class LocalAuthLockShow extends LocalAuthAnalyticsEvent {
 
 sealed class UnlockSubmit extends LocalAuthAnalyticsEvent {
   final UnlockOutcome outcome;
-  final Duration lockedFor;
 
   @override
-  Json get properties => {
-    'outcome': outcome.name,
-    'locked_duration_ms': lockedFor.inMilliseconds,
-  };
+  Json get properties => {'outcome': outcome.name};
 
-  const UnlockSubmit({required this.outcome, required this.lockedFor});
+  const UnlockSubmit({required this.outcome});
 }
 
 final class BiometricsUnlockSubmit extends UnlockSubmit {
@@ -54,7 +50,6 @@ final class BiometricsUnlockSubmit extends UnlockSubmit {
   const BiometricsUnlockSubmit({
     required this.isAutoPrompted,
     required super.outcome,
-    required super.lockedFor,
   });
 }
 
@@ -73,6 +68,5 @@ final class PasswordUnlockSubmit extends UnlockSubmit {
   const PasswordUnlockSubmit({
     required this.canCheckBiometrics,
     required super.outcome,
-    required super.lockedFor,
   });
 }

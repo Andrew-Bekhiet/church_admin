@@ -84,7 +84,7 @@ void main() {
       (
         const InvitationExpiryChange(validity),
         'user_management:invitation_expiry_change',
-        {'validity_duration_ms': validity.inMilliseconds},
+        {'validity_days': validity.inDays},
       ),
       (
         const InvitationCodeShare(),
