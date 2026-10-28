@@ -19,7 +19,7 @@ sealed class AnalysisRangeEvent extends DataAnalysisAnalyticsEvent {
       PastYearDateTimeRangePreset() => 'pastYear',
       CustomDateTimeRangePreset() => 'custom',
     },
-    'range_days': rangePreset.duration.inDays,
+    'range_days': rangePreset.range.inclusiveCalendarDays,
   };
 
   const AnalysisRangeEvent(this.rangePreset);

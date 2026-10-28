@@ -12,7 +12,7 @@ final class CustomRangePicked extends CustomRangePickOutcome {
   @override
   Json get properties => {
     'is_cancelled': false,
-    'range_days': range.duration.inDays,
+    'range_days': range.inclusiveCalendarDays,
   };
 
   const CustomRangePicked(this.range);

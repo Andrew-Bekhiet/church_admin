@@ -88,7 +88,7 @@ class UserInvitationField extends StatelessWidget {
     if (picked == current) return;
 
     AnalyticsService.I.track(
-      InvitationExpiryChange(picked.difference(validFrom)),
+      InvitationExpiryChange(validFrom: validFrom, expiresAt: picked),
     );
   }
 }

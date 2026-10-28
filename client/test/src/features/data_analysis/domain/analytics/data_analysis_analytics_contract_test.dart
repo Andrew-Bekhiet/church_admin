@@ -14,8 +14,8 @@ void main() {
     const classGroup = Class(id: 'c1', name: 'فصل');
     const personId = 'p1';
     final week = DateTimeRange(
-      start: DateTime.utc(2026, 10),
-      end: DateTime.utc(2026, 10, 8),
+      start: DateTime(2026, 10),
+      end: DateTime(2026, 10, 8),
     );
     final today = TodayDateTimeRangePreset();
     final pastMonth = PastMonthDateTimeRangePreset();
@@ -34,7 +34,7 @@ void main() {
           'subject_type': 'meeting',
           'meeting_id': meeting.id,
           'range_preset': 'today',
-          'range_days': today.duration.inDays,
+          'range_days': today.range.inclusiveCalendarDays,
           'is_success': true,
         },
       ),
@@ -43,7 +43,7 @@ void main() {
         'analysis:range_select',
         {
           'range_preset': 'pastMonth',
-          'range_days': pastMonth.duration.inDays,
+          'range_days': pastMonth.range.inclusiveCalendarDays,
         },
       ),
       (
@@ -51,7 +51,7 @@ void main() {
         'analysis:custom_range_pick',
         {
           'is_cancelled': false,
-          'range_days': week.duration.inDays,
+          'range_days': week.inclusiveCalendarDays,
         },
       ),
       (
@@ -116,7 +116,7 @@ void main() {
           'subject_type': 'service',
           'service_id': service.id,
           'range_preset': 'pastQuarter',
-          'range_days': pastQuarter.duration.inDays,
+          'range_days': pastQuarter.range.inclusiveCalendarDays,
           'is_success': false,
         },
       ),
@@ -131,7 +131,7 @@ void main() {
           'subject_type': 'group',
           'group_id': group.id,
           'range_preset': 'pastYear',
-          'range_days': pastYear.duration.inDays,
+          'range_days': pastYear.range.inclusiveCalendarDays,
           'is_success': true,
         },
       ),
@@ -146,7 +146,7 @@ void main() {
           'subject_type': 'class',
           'class_id': classGroup.id,
           'range_preset': 'custom',
-          'range_days': week.duration.inDays,
+          'range_days': week.inclusiveCalendarDays,
           'is_success': true,
         },
       ),

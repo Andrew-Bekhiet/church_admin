@@ -11,7 +11,8 @@ void main() {
       addedGroupCount: 5,
       removedGroupCount: 6,
     );
-    const validity = Duration(days: 3);
+    final validFrom = DateTime(2026, 10, 1, 18, 30);
+    final expiresAt = DateTime(2026, 10, 4, 9);
     final contracts = <(AnalyticsEvent, String, Json)>[
       (
         const PersonLinkModeSwitch(CreateNewPerson(name: '', gender: true)),
@@ -36,9 +37,9 @@ void main() {
         {'is_enabled': false},
       ),
       (
-        const InvitationExpiryChange(validity),
+        InvitationExpiryChange(validFrom: validFrom, expiresAt: expiresAt),
         'user_management:invitation_expiry_change',
-        {'validity_days': validity.inDays},
+        {'validity_days': validFrom.calendarDaysUntil(expiresAt)},
       ),
       (
         const InvitationCodeShare(),

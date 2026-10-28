@@ -68,17 +68,21 @@ final class InvitationToggle extends UserFormAnalyticsEvent {
 }
 
 final class InvitationExpiryChange extends UserFormAnalyticsEvent {
-  final Duration validity;
+  final DateTime validFrom;
+  final DateTime expiresAt;
 
   @override
   String get objectAction => 'invitation_expiry_change';
 
   @override
   Json get properties => {
-    'validity_days': validity.inDays,
+    'validity_days': validFrom.calendarDaysUntil(expiresAt),
   };
 
-  const InvitationExpiryChange(this.validity);
+  const InvitationExpiryChange({
+    required this.validFrom,
+    required this.expiresAt,
+  });
 }
 
 final class InvitationCodeShare extends UserFormAnalyticsEvent {
