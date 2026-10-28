@@ -2,6 +2,15 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  const noOrders = 0;
+  const oneFilter = 1;
+  const oneOrder = 1;
+  const twoFilters = 2;
+  const twoOrders = 2;
+  const threeFilters = 3;
+  const limit = 50;
+  const changedLimit = 120;
+  const resultsSearchLength = 4;
   final nameContains = Filter(
     PersonFields().name,
     StringOperator.contains,
@@ -31,69 +40,78 @@ void main() {
     for (final (event, expectedName, expectedProperties)
         in <(AnalyticsEvent, String, Json)>[
           (
-            AdvancedSearchFilterAdd(nameContains, filterCount: 2),
+            AdvancedSearchFilterAdd(nameContains, filterCount: twoFilters),
             'advanced_search:filter_add',
             {
               'field_name': 'name',
               'nested_depth': 0,
               'operator_id': 'StringOperator.contains',
-              'filter_count': 2,
+              'filter_count': twoFilters,
             },
           ),
           (
-            AdvancedSearchFilterRemove(addressAreaAnyOf, filterCount: 1),
+            AdvancedSearchFilterRemove(
+              addressAreaAnyOf,
+              filterCount: oneFilter,
+            ),
             'advanced_search:filter_remove',
             {
               'field_name': 'address.area',
               'nested_depth': 1,
               'operator_id': 'MultiSelectOperator._in',
-              'filter_count': 1,
+              'filter_count': oneFilter,
             },
           ),
           (
-            AdvancedSearchFilterFieldChange(nameContains, filterCount: 3),
+            AdvancedSearchFilterFieldChange(
+              nameContains,
+              filterCount: threeFilters,
+            ),
             'advanced_search:filter_field_change',
             {
               'field_name': 'name',
               'nested_depth': 0,
               'operator_id': 'StringOperator.contains',
-              'filter_count': 3,
+              'filter_count': threeFilters,
             },
           ),
           (
             AdvancedSearchFilterOperatorChange(
               Filter(PersonFields().name, StringOperator.isEmpty, null),
-              filterCount: 1,
+              filterCount: oneFilter,
             ),
             'advanced_search:filter_operator_change',
             {
               'field_name': 'name',
               'nested_depth': 0,
               'operator_id': 'StringOperator.isEmpty',
-              'filter_count': 1,
+              'filter_count': oneFilter,
             },
           ),
           (
-            AdvancedSearchFilterValueSet(nameContains, filterCount: 1),
+            AdvancedSearchFilterValueSet(nameContains, filterCount: oneFilter),
             'advanced_search:filter_value_set',
             {
               'field_name': 'name',
               'nested_depth': 0,
               'operator_id': 'StringOperator.contains',
-              'filter_count': 1,
+              'filter_count': oneFilter,
               'operator_family': 'StringOperator',
               'value_count': 1,
               'is_free_text': true,
             },
           ),
           (
-            AdvancedSearchFilterValueSet(addressAreaAnyOf, filterCount: 2),
+            AdvancedSearchFilterValueSet(
+              addressAreaAnyOf,
+              filterCount: twoFilters,
+            ),
             'advanced_search:filter_value_set',
             {
               'field_name': 'address.area',
               'nested_depth': 1,
               'operator_id': 'MultiSelectOperator._in',
-              'filter_count': 2,
+              'filter_count': twoFilters,
               'operator_family': 'MultiSelectOperator',
               'value_count': 2,
               'is_free_text': false,
@@ -102,14 +120,14 @@ void main() {
           (
             AdvancedSearchFilterValueSet(
               Filter(PersonFields().mainPhone, PhoneOperator.eq, ''),
-              filterCount: 1,
+              filterCount: oneFilter,
             ),
             'advanced_search:filter_value_set',
             {
               'field_name': 'mainPhone',
               'nested_depth': 0,
               'operator_id': 'PhoneOperator.eq',
-              'filter_count': 1,
+              'filter_count': oneFilter,
               'operator_family': 'PhoneOperator',
               'value_count': 0,
               'is_free_text': true,
@@ -118,14 +136,14 @@ void main() {
           (
             AdvancedSearchFilterValueSet(
               Filter(PersonFields().birthday, BirthdayOperator.equals, '05-%'),
-              filterCount: 1,
+              filterCount: oneFilter,
             ),
             'advanced_search:filter_value_set',
             {
               'field_name': 'birthday',
               'nested_depth': 0,
               'operator_id': 'BirthdayOperator.equals',
-              'filter_count': 1,
+              'filter_count': oneFilter,
               'operator_family': 'BirthdayOperator',
               'value_count': 1,
               'is_free_text': false,
@@ -135,14 +153,14 @@ void main() {
           (
             AdvancedSearchFilterValueSet(
               Filter(PersonFields().birthday, BirthdayOperator.equals, '05-12'),
-              filterCount: 1,
+              filterCount: oneFilter,
             ),
             'advanced_search:filter_value_set',
             {
               'field_name': 'birthday',
               'nested_depth': 0,
               'operator_id': 'BirthdayOperator.equals',
-              'filter_count': 1,
+              'filter_count': oneFilter,
               'operator_family': 'BirthdayOperator',
               'value_count': 1,
               'is_free_text': false,
@@ -153,14 +171,14 @@ void main() {
             AdvancedSearchPolygonFilterDraw(
               addressInside,
               triangle,
-              filterCount: 1,
+              filterCount: oneFilter,
             ),
             'advanced_search:polygon_filter_draw',
             {
               'field_name': 'address.geolocation',
               'nested_depth': 1,
               'operator_id': 'SpatialOperator.intersects',
-              'filter_count': 1,
+              'filter_count': oneFilter,
               'point_count': 3,
             },
           ),
@@ -181,44 +199,52 @@ void main() {
             {'from_queryable_type': 'Person', 'to_queryable_type': 'Family'},
           ),
           (
-            AdvancedSearchOrderByAdd(byNameDescending, orderCount: 1),
+            AdvancedSearchOrderByAdd(byNameDescending, orderCount: oneOrder),
             'advanced_search:order_by_add',
-            {'field_name': 'name', 'sort_direction': 'desc', 'order_count': 1},
+            {
+              'field_name': 'name',
+              'sort_direction': 'desc',
+              'order_count': oneOrder,
+            },
           ),
           (
             AdvancedSearchOrderByChange(
               OrderBy(field: PersonFields().birthday),
-              orderCount: 2,
+              orderCount: twoOrders,
             ),
             'advanced_search:order_by_change',
             {
               'field_name': 'birthday',
               'sort_direction': 'asc',
-              'order_count': 2,
+              'order_count': twoOrders,
             },
           ),
           (
             AdvancedSearchOrderByDirectionToggle(
               byNameDescending,
-              orderCount: 1,
+              orderCount: oneOrder,
             ),
             'advanced_search:order_by_direction_toggle',
-            {'field_name': 'name', 'sort_direction': 'desc', 'order_count': 1},
+            {
+              'field_name': 'name',
+              'sort_direction': 'desc',
+              'order_count': oneOrder,
+            },
           ),
           (
-            const AdvancedSearchOrderByRemove(orderCount: 0),
+            const AdvancedSearchOrderByRemove(orderCount: noOrders),
             'advanced_search:order_by_remove',
-            {'order_count': 0},
+            {'order_count': noOrders},
           ),
           (
-            const AdvancedSearchLimitSet(50),
+            const AdvancedSearchLimitSet(limit),
             'advanced_search:limit_set',
-            {'limit_value': 50},
+            {'limit_value': limit},
           ),
           (
-            const AdvancedSearchLimitChange(120),
+            const AdvancedSearchLimitChange(changedLimit),
             'advanced_search:limit_change',
-            {'limit_value': 120},
+            {'limit_value': changedLimit},
           ),
           (
             const AdvancedSearchLimitClear(),
@@ -232,7 +258,7 @@ void main() {
                 filters: [nameContains, addressAreaAnyOf],
                 logicalOperator: LogicalOperator.or,
                 orderBy: [byNameDescending],
-                limit: 50,
+                limit: limit,
               ),
               isAutoExecuted: true,
             ),
@@ -267,9 +293,11 @@ void main() {
             },
           ),
           (
-            const AdvancedSearchResultsSearchRun(queryLength: 4),
+            const AdvancedSearchResultsSearchRun(
+              queryLength: resultsSearchLength,
+            ),
             'advanced_search:results_search_run',
-            {'query_length': 4},
+            {'query_length': resultsSearchLength},
           ),
         ]) {
       test('$expectedName sends $expectedProperties', () {

@@ -2,22 +2,29 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  const serviceMeetingId = 'meeting-1';
+  const serviceId = 'service-1';
+  const groupMeetingId = 'meeting-2';
+  const groupId = 'group-1';
+  const standaloneMeetingId = 'meeting-3';
+  const person5Id = 'person-5';
+  const person6Id = 'person-6';
   const serviceMeeting = Meeting(
-    id: 'meeting-1',
+    id: serviceMeetingId,
     name: 'اجتماع الخدمة',
     audience: MeetingAudience.onlyPersons,
     isArchived: false,
-    serviceId: 'service-1',
+    serviceId: serviceId,
   );
   const groupMeeting = Meeting(
-    id: 'meeting-2',
+    id: groupMeetingId,
     name: 'اجتماع المجموعة',
     audience: MeetingAudience.personsAndServants,
     isArchived: false,
-    groupId: 'group-1',
+    groupId: groupId,
   );
   const standaloneMeeting = Meeting(
-    id: 'meeting-3',
+    id: standaloneMeetingId,
     name: 'اجتماع عام',
     audience: MeetingAudience.onlyServants,
     isArchived: false,
@@ -34,8 +41,8 @@ void main() {
             ),
             'kodas:column_toggle',
             {
-              'meeting_id': 'meeting-1',
-              'service_id': 'service-1',
+              'meeting_id': serviceMeetingId,
+              'service_id': serviceId,
               'is_visible': false,
               'is_success': true,
             },
@@ -43,15 +50,15 @@ void main() {
           (
             KodasPersonMark(
               groupMeeting,
-              personId: 'person-5',
+              personId: person5Id,
               isRecorded: true,
               isSuccess: false,
             ),
             'kodas:person_mark',
             {
-              'meeting_id': 'meeting-2',
-              'group_id': 'group-1',
-              'person_id': 'person-5',
+              'meeting_id': groupMeetingId,
+              'group_id': groupId,
+              'person_id': person5Id,
               'is_recorded': true,
               'is_success': false,
             },
@@ -59,13 +66,13 @@ void main() {
           (
             KodasUndo(
               standaloneMeeting,
-              personId: 'person-6',
+              personId: person6Id,
               undoneChange: AttendanceUndoableChange.kodasRecorded,
             ),
             'kodas:undo',
             {
-              'meeting_id': 'meeting-3',
-              'person_id': 'person-6',
+              'meeting_id': standaloneMeetingId,
+              'person_id': person6Id,
               'undone_change': 'kodasRecorded',
             },
           ),

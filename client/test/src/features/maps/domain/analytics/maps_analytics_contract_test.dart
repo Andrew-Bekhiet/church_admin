@@ -3,8 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() {
-  final person = Person(id: 'person-1', name: 'مينا');
-  const family = Family(id: 'family-1', name: 'عائلة مينا');
+  const personId = 'person-1';
+  const familyId = 'family-1';
+  const areaId = 'area-1';
+  final person = Person(id: personId, name: 'مينا');
+  const family = Family(id: familyId, name: 'عائلة مينا');
 
   group('Maps and location analytics contract =>', () {
     for (final (event, expectedName, expectedProperties)
@@ -14,7 +17,7 @@ void main() {
               GeomapOptions(
                 layers: const {GeoMapLayer.areas, GeoMapLayer.stores},
                 selectedAreas: {
-                  const Area(id: 'area-1', name: 'منطقة'),
+                  const Area(id: areaId, name: 'منطقة'),
                   const Area(id: 'area-2', name: 'منطقة 2'),
                 },
                 selectedStreets: {const Street(id: 'street-1', name: 'شارع')},
@@ -62,7 +65,7 @@ void main() {
           (
             MapsMarkerTap(family),
             'maps:marker_tap',
-            {'entity_type': 'family', 'family_id': 'family-1'},
+            {'entity_type': 'family', 'family_id': familyId},
           ),
           (
             MapsMarkerTap('not an entity'),
@@ -72,7 +75,7 @@ void main() {
           (
             MapsMarkerDetailsOpen(person),
             'maps:marker_details_open',
-            {'entity_type': 'person', 'person_id': 'person-1'},
+            {'entity_type': 'person', 'person_id': personId},
           ),
           (
             const MapsExternalNavigationStart(hasUserLocation: true),
@@ -96,7 +99,7 @@ void main() {
             'location:set',
             {
               'entity_type': 'person',
-              'person_id': 'person-1',
+              'person_id': personId,
               'set_method': 'current',
             },
           ),
@@ -110,7 +113,7 @@ void main() {
             'location:link_parse',
             {
               'entity_type': 'family',
-              'family_id': 'family-1',
+              'family_id': familyId,
               'input_kind': 'shortPlusCode',
               'is_prefilled_from_clipboard': true,
               'is_success': false,
@@ -121,7 +124,7 @@ void main() {
             'location:clipboard_link_show',
             {
               'entity_type': 'person',
-              'person_id': 'person-1',
+              'person_id': personId,
               'input_kind': 'shortLink',
             },
           ),
@@ -130,7 +133,7 @@ void main() {
             'location:save',
             {
               'entity_type': 'person',
-              'person_id': 'person-1',
+              'person_id': personId,
               'last_set_method': 'link',
               'is_changed': true,
             },
@@ -140,14 +143,14 @@ void main() {
             'location:save',
             {
               'entity_type': 'family',
-              'family_id': 'family-1',
+              'family_id': familyId,
               'last_set_method': null,
               'is_changed': false,
             },
           ),
           (
             LocationPointsSave(
-              const Area(id: 'area-1', name: 'منطقة'),
+              const Area(id: areaId, name: 'منطقة'),
               addedPointCount: 4,
               removedPointCount: 1,
               insertedMidpointCount: 2,
@@ -156,7 +159,7 @@ void main() {
             'location:points_save',
             {
               'entity_type': 'area',
-              'area_id': 'area-1',
+              'area_id': areaId,
               'added_point_count': 4,
               'removed_point_count': 1,
               'inserted_midpoint_count': 2,

@@ -2,8 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  const fatherId = 'father';
   const father = RolePhoneContactLabel(
-    PersonType(id: 'father', name: 'الأب', isFamilyAdmin: true),
+    PersonType(id: fatherId, name: 'الأب', isFamilyAdmin: true),
   );
   const work = FreePhoneContactLabel('عمل');
 
@@ -13,7 +14,7 @@ void main() {
           (
             const ContactsPhoneAdd(father, isAutoMain: true),
             'contacts:phone_add',
-            {'label_kind': 'role', 'role_id': 'father', 'is_auto_main': true},
+            {'label_kind': 'role', 'role_id': fatherId, 'is_auto_main': true},
           ),
           (
             const ContactsPhoneAdd(work, isAutoMain: false),
@@ -23,7 +24,7 @@ void main() {
           (
             const ContactsPhoneLabelChange(father),
             'contacts:phone_label_change',
-            {'label_kind': 'role', 'role_id': 'father'},
+            {'label_kind': 'role', 'role_id': fatherId},
           ),
           (
             const ContactsMainPhoneToggle(isMain: true),

@@ -3,23 +3,32 @@ import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  const serviceMeetingId = 'meeting-1';
+  const serviceId = 'service-1';
+  const groupMeetingId = 'meeting-2';
+  const groupId = 'group-1';
+  const standaloneMeetingId = 'meeting-3';
+  const person1Id = 'person-1';
+  const person2Id = 'person-2';
+  const person3Id = 'person-3';
+  const person4Id = 'person-4';
   final today = Clock.fixed(DateTime(2026, 10, 23, 9));
   const serviceMeeting = Meeting(
-    id: 'meeting-1',
+    id: serviceMeetingId,
     name: 'اجتماع الخدمة',
     audience: MeetingAudience.onlyPersons,
     isArchived: false,
-    serviceId: 'service-1',
+    serviceId: serviceId,
   );
   const groupMeeting = Meeting(
-    id: 'meeting-2',
+    id: groupMeetingId,
     name: 'اجتماع المجموعة',
     audience: MeetingAudience.personsAndServants,
     isArchived: false,
-    groupId: 'group-1',
+    groupId: groupId,
   );
   const standaloneMeeting = Meeting(
-    id: 'meeting-3',
+    id: standaloneMeetingId,
     name: 'اجتماع عام',
     audience: MeetingAudience.onlyServants,
     isArchived: false,
@@ -52,15 +61,15 @@ void main() {
           (
             AttendancePersonMark(
               serviceMeeting,
-              personId: 'person-1',
+              personId: person1Id,
               newState: AttendanceMarkState.present,
               rosterSettings: servantsRosterSettings,
               isSuccess: true,
             ),
             'attendance:person_mark',
             {
-              'meeting_id': 'meeting-1',
-              'service_id': 'service-1',
+              'meeting_id': serviceMeetingId,
+              'service_id': serviceId,
               'is_as_servant': true,
               'is_today': true,
               'sort_type': 'attendanceTime',
@@ -68,7 +77,7 @@ void main() {
               'presence_filter': 'absent',
               'is_search_active': true,
               'grouping': 'studyYear',
-              'person_id': 'person-1',
+              'person_id': person1Id,
               'new_state': 'present',
               'is_success': true,
             },
@@ -76,29 +85,32 @@ void main() {
           (
             AttendanceUndo(
               groupMeeting,
-              personId: 'person-2',
+              personId: person2Id,
               undoneChange: AttendanceUndoableChange.markedAbsent,
             ),
             'attendance:undo',
             {
-              'meeting_id': 'meeting-2',
-              'group_id': 'group-1',
-              'person_id': 'person-2',
+              'meeting_id': groupMeetingId,
+              'group_id': groupId,
+              'person_id': person2Id,
               'undone_change': 'markedAbsent',
             },
           ),
           (
             AttendanceMeetingSwitch(
               standaloneMeeting,
-              fromMeetingId: 'meeting-1',
+              fromMeetingId: serviceMeetingId,
             ),
             'attendance:meeting_switch',
-            {'meeting_id': 'meeting-3', 'from_meeting_id': 'meeting-1'},
+            {
+              'meeting_id': standaloneMeetingId,
+              'from_meeting_id': serviceMeetingId,
+            },
           ),
           (
             AttendanceMeetingSelectorDismiss(standaloneMeeting),
             'attendance:meeting_selector_dismiss',
-            {'meeting_id': 'meeting-3'},
+            {'meeting_id': standaloneMeetingId},
           ),
           (
             withClock(
@@ -111,7 +123,7 @@ void main() {
             ),
             'attendance:date_change',
             {
-              'meeting_id': 'meeting-3',
+              'meeting_id': standaloneMeetingId,
               'days_from_today': -3,
               'has_records_on_day': true,
             },
@@ -122,7 +134,7 @@ void main() {
               AttendanceRosterAudienceView.persons,
             ),
             'attendance:audience_toggle',
-            {'meeting_id': 'meeting-3', 'audience_view': 'persons'},
+            {'meeting_id': standaloneMeetingId, 'audience_view': 'persons'},
           ),
           (
             AttendancePresenceFilterChange(
@@ -134,7 +146,7 @@ void main() {
             ),
             'attendance:presence_filter_change',
             {
-              'meeting_id': 'meeting-3',
+              'meeting_id': standaloneMeetingId,
               'presence_filter': 'present',
               'is_reset': false,
               'present_count': 4,
@@ -149,7 +161,7 @@ void main() {
             ),
             'attendance:search_run',
             {
-              'meeting_id': 'meeting-3',
+              'meeting_id': standaloneMeetingId,
               'query_length': 11,
               'is_phone_query': true,
               'result_count': 1,
@@ -163,7 +175,7 @@ void main() {
             ),
             'attendance:search_run',
             {
-              'meeting_id': 'meeting-3',
+              'meeting_id': standaloneMeetingId,
               'query_length': 4,
               'is_phone_query': false,
               'result_count': 5,
@@ -173,7 +185,7 @@ void main() {
             AttendanceSortChange(standaloneMeeting, AttendanceSorting.byName()),
             'attendance:sort_change',
             {
-              'meeting_id': 'meeting-3',
+              'meeting_id': standaloneMeetingId,
               'sort_type': 'name',
               'sort_direction': 'ascending',
             },
@@ -185,7 +197,7 @@ void main() {
             ),
             'attendance:sort_change',
             {
-              'meeting_id': 'meeting-3',
+              'meeting_id': standaloneMeetingId,
               'sort_type': 'lastAttendanceTime',
               'sort_direction': 'ascending',
             },
@@ -199,7 +211,7 @@ void main() {
             ),
             'attendance:sort_change',
             {
-              'meeting_id': 'meeting-3',
+              'meeting_id': standaloneMeetingId,
               'sort_type': 'studyYear',
               'sort_direction': 'ascending',
             },
@@ -211,7 +223,7 @@ void main() {
             ),
             'attendance:sort_reverse',
             {
-              'meeting_id': 'meeting-3',
+              'meeting_id': standaloneMeetingId,
               'sort_type': 'streak',
               'sort_direction': 'descending',
             },
@@ -223,7 +235,7 @@ void main() {
             ),
             'attendance:sort_reverse',
             {
-              'meeting_id': 'meeting-3',
+              'meeting_id': standaloneMeetingId,
               'sort_type': 'id',
               'sort_direction': 'ascending',
             },
@@ -234,7 +246,7 @@ void main() {
               AttendanceGrouping.none,
             ),
             'attendance:grouping_toggle',
-            {'meeting_id': 'meeting-3', 'grouping': 'none'},
+            {'meeting_id': standaloneMeetingId, 'grouping': 'none'},
           ),
           (
             AttendanceSectionToggle(
@@ -244,7 +256,7 @@ void main() {
             ),
             'attendance:section_toggle',
             {
-              'meeting_id': 'meeting-3',
+              'meeting_id': standaloneMeetingId,
               'is_collapsed': true,
               'section_person_count': 12,
             },
@@ -252,19 +264,19 @@ void main() {
           (
             AttendanceStreakWindowChange(standaloneMeeting, 56),
             'attendance:streak_window_change',
-            {'meeting_id': 'meeting-3', 'streak_window_days': 56},
+            {'meeting_id': standaloneMeetingId, 'streak_window_days': 56},
           ),
           (
             AttendanceTimeEdit(
               standaloneMeeting,
-              personId: 'person-3',
+              personId: person3Id,
               shift: const Duration(minutes: -15),
               outcome: AttendanceTimeEditOutcome.saved,
             ),
             'attendance:time_edit',
             {
-              'meeting_id': 'meeting-3',
-              'person_id': 'person-3',
+              'meeting_id': standaloneMeetingId,
+              'person_id': person3Id,
               'shift_duration_ms': -900000,
               'is_rejected_future': false,
               'is_success': true,
@@ -273,10 +285,10 @@ void main() {
           (
             AttendancePersonProfileOpen(
               standaloneMeeting,
-              personId: 'person-4',
+              personId: person4Id,
             ),
             'attendance:person_profile_open',
-            {'meeting_id': 'meeting-3', 'person_id': 'person-4'},
+            {'meeting_id': standaloneMeetingId, 'person_id': person4Id},
           ),
           (
             AttendanceLetterGutterUse(
@@ -284,7 +296,7 @@ void main() {
               AttendanceLetterGutterGesture.drag,
             ),
             'attendance:letter_gutter_use',
-            {'meeting_id': 'meeting-3', 'gutter_gesture': 'drag'},
+            {'meeting_id': standaloneMeetingId, 'gutter_gesture': 'drag'},
           ),
           (
             AttendanceAnalysisOpen(
@@ -297,12 +309,12 @@ void main() {
               ),
             ),
             'attendance:analysis_open',
-            {'meeting_id': 'meeting-3', 'range_preset': 'custom'},
+            {'meeting_id': standaloneMeetingId, 'range_preset': 'custom'},
           ),
           (
             AttendanceRetry(standaloneMeeting),
             'attendance:retry',
-            {'meeting_id': 'meeting-3'},
+            {'meeting_id': standaloneMeetingId},
           ),
         ]) {
       test('$expectedName sends $expectedProperties', () {
