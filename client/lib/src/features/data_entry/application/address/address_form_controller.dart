@@ -215,9 +215,7 @@ class AddressFormController extends AdvancedFormController {
   }
 
   Future<void> updateLocationFromStaleReminder(Point newLocation) async {
-    if (_isStaleLocationReminderShown) {
-      _services.analytics.track(const StaleLocationReminderAccept());
-    }
+    _maybeTrackStaleLocationReminderAccept();
     await useLocation(newLocation);
   }
 
@@ -270,6 +268,12 @@ class AddressFormController extends AdvancedFormController {
     _services.analytics.track(DistrictCreate(created));
 
     return created;
+  }
+
+  void _maybeTrackStaleLocationReminderAccept() {
+    if (!_isStaleLocationReminderShown) return;
+
+    _services.analytics.track(const StaleLocationReminderAccept());
   }
 
   void _maybeTrackStaleLocationReminderShow() {
