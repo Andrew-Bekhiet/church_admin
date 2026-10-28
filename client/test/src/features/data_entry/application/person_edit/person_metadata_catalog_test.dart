@@ -97,68 +97,67 @@ void main() {
         ({
           String item,
           Future<ViewableWithID> Function(PersonMetadataCatalog) create,
-          String sent,
+          PickerObjectType type,
         })
       >[
         (
           item: 'college',
           create: (catalog) => catalog.createCollege('هندسة'),
-          sent: 'college',
+          type: PickerObjectType.college,
         ),
         (
           item: 'school',
           create: (catalog) => catalog.createSchool('مدرسة'),
-          sent: 'school',
+          type: PickerObjectType.school,
         ),
         (
           item: 'qualification',
           create: (catalog) => catalog.createQualification('بكالوريوس'),
-          sent: 'qualification',
+          type: PickerObjectType.qualification,
         ),
         (
           item: 'job',
           create: (catalog) => catalog.createJob('مهندس'),
-          sent: 'job',
+          type: PickerObjectType.job,
         ),
         (
           item: 'church',
           create: (catalog) => catalog.createChurch('كنيسة'),
-          sent: 'church',
+          type: PickerObjectType.church,
         ),
         (
           item: 'father',
           create: (catalog) => catalog.createFather('أبونا'),
-          sent: 'father',
+          type: PickerObjectType.father,
         ),
         (
           item: 'hobby',
           create: (catalog) => catalog.createHobby('رسم'),
-          sent: 'hobby',
+          type: PickerObjectType.hobby,
         ),
         (
           item: 'tag',
           create: (catalog) => catalog.createTag('وسم'),
-          sent: 'tag',
+          type: PickerObjectType.tag,
         ),
         (
           item: 'person type',
           create: (catalog) => catalog.createPersonType('خادم'),
-          sent: 'personType',
+          type: PickerObjectType.personType,
         ),
       ];
 
-  for (final (:item, :create, :sent) in creations) {
-    test('creating a $item tracks a custom $sent picker item', () async {
+  for (final (:item, :create, :type) in creations) {
+    test('creating a $item tracks a custom ${type.name} picker item', () async {
       await create(catalog);
 
-      expect(
-        analytics.trackedEventsOf<PickerCustomItemCreate>().map(
-          (event) => event.properties,
+      expect(analytics.trackedEventsOf<PickerCustomItemCreate>(), [
+        isA<PickerCustomItemCreate>().having(
+          (event) => event.pickerObjectType,
+          'pickerObjectType',
+          type,
         ),
-        [
-          {'picker_object_type': sent},
-        ],
-      );
+      ]);
     });
   }
 

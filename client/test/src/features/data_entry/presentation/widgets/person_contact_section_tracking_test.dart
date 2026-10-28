@@ -36,8 +36,8 @@ void main() {
     await tester.tapAt(Offset.zero);
     await tester.pumpAndSettle();
 
-    expect(fixture.analytics.trackedEvents.map((event) => event.name), [
-      'contact:device_contact_create_attempt',
+    expect(fixture.analytics.trackedEvents, [
+      isA<DeviceContactCreateAttempt>(),
     ]);
   });
 
@@ -45,15 +45,20 @@ void main() {
       'photo for a person who has none', (tester) async {
     await fixture.addOwnNumberToDeviceContacts(tester);
 
-    expect(
-      fixture.analytics.singleTrackedPropertiesOf<DeviceContactCreateAttempt>(),
-      {
-        'entity_type': AnalyticsEntityType.person.key,
-        'person_id': fixture.person.id,
-        'outcome': DeviceContactCreateOutcome.created.name,
-        'has_photo': false,
-      },
-    );
+    expect(fixture.analytics.trackedEventsOf<DeviceContactCreateAttempt>(), [
+      isA<DeviceContactCreateAttempt>()
+          .having(
+            (event) => event.ownerProperties,
+            'ownerProperties',
+            AnalyticsEntityType.propertiesOf(fixture.person),
+          )
+          .having(
+            (event) => event.outcome,
+            'outcome',
+            DeviceContactCreateOutcome.created,
+          )
+          .having((event) => event.hasPhoto, 'hasPhoto', false),
+    ]);
   });
 
   testWidgets('a device contact whose insert fails is tracked as failed', (
@@ -63,12 +68,13 @@ void main() {
 
     await fixture.addOwnNumberToDeviceContacts(tester);
 
-    expect(
-      fixture.analytics.trackedEventsOf<DeviceContactCreateAttempt>().map(
-        (event) => event.properties['outcome'],
+    expect(fixture.analytics.trackedEventsOf<DeviceContactCreateAttempt>(), [
+      isA<DeviceContactCreateAttempt>().having(
+        (event) => event.outcome,
+        'outcome',
+        DeviceContactCreateOutcome.failed,
       ),
-      [DeviceContactCreateOutcome.failed.name],
-    );
+    ]);
   });
 
   testWidgets('dismissing the call prompt is tracked as answering it with '
@@ -80,8 +86,12 @@ void main() {
     await tester.tapAt(Offset.zero);
     await tester.pumpAndSettle();
 
-    expect(fixture.analytics.trackedEvents.map((event) => event.name), [
-      'contact:call_prompt_answer',
+    expect(fixture.analytics.trackedEvents, [
+      isA<ContactCallPromptAnswer>().having(
+        (event) => event.choice,
+        'choice',
+        ContactCallPromptChoice.cancel,
+      ),
     ]);
   });
 }

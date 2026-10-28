@@ -118,24 +118,19 @@ void main() {
     'a declined move is tracked as a shown warning answered with no',
     build: cubitMovingFamilyToMaadi,
     act: (cubit) => cubit.submit(confirmMoveOutOfSight: () async => false),
-    verify: (_) => expect(
-      analytics.trackedEventsOf<FormAnalyticsEvent>().map(
-        (event) => [event.name, event.properties],
+    verify: (_) => expect(analytics.trackedEventsOf<FormAnalyticsEvent>(), [
+      isA<OutOfSightWarningShow>().having(
+        (event) => event.entityProperties,
+        'entityProperties',
+        AnalyticsEntityType.propertiesOf(storedFamily),
       ),
-      [
-        [
-          'form:out_of_sight_warning_show',
-          {'entity_type': 'family', 'family_id': storedFamily.id},
-        ],
-        [
-          'form:out_of_sight_warning_answer',
-          {
-            'entity_type': 'family',
-            'family_id': storedFamily.id,
-            'is_confirmed': false,
-          },
-        ],
-      ],
-    ),
+      isA<OutOfSightWarningAnswer>()
+          .having(
+            (event) => event.entityProperties,
+            'entityProperties',
+            AnalyticsEntityType.propertiesOf(storedFamily),
+          )
+          .having((event) => event.isConfirmed, 'isConfirmed', false),
+    ]),
   );
 }

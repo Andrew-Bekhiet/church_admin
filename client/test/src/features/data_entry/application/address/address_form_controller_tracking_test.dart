@@ -15,6 +15,15 @@ void main() {
 
   late AddressFormControllerFixture fixture;
 
+  Matcher areaFillOf(
+    AddressAutofillSource source, {
+    required Street street,
+    required Area area,
+  }) => isA<AddressAreaFill>()
+      .having((event) => event.autofillSource, 'autofillSource', source)
+      .having((event) => event.streetId, 'streetId', street.id)
+      .having((event) => event.areaId, 'areaId', area.id);
+
   setUp(() {
     fixture = AddressFormControllerFixture();
     fixture.geocoder.locationOfEveryAddress = houseLocation;
@@ -31,11 +40,13 @@ void main() {
         fixture.controllerFor().chooseStreet(mainStreet);
         await pumpEventQueue();
 
-        expect(fixture.analytics.singleTrackedPropertiesOf<AddressAreaFill>(), {
-          'autofill_source': AddressAutofillSource.singleAreaStreet.name,
-          'street_id': mainStreet.id,
-          'area_id': stMarkArea.id,
-        });
+        expect(fixture.analytics.trackedEventsOf<AddressAreaFill>(), [
+          areaFillOf(
+            AddressAutofillSource.singleAreaStreet,
+            street: mainStreet,
+            area: stMarkArea,
+          ),
+        ]);
       },
     );
 
@@ -66,14 +77,13 @@ void main() {
             ..elapse(typingPause)
             ..flushMicrotasks();
 
-          expect(
-            fixture.analytics.singleTrackedPropertiesOf<AddressAreaFill>(),
-            {
-              'autofill_source': AddressAutofillSource.geocodedHouseNumber.name,
-              'street_id': mainStreet.id,
-              'area_id': stMinaArea.id,
-            },
-          );
+          expect(fixture.analytics.trackedEventsOf<AddressAreaFill>(), [
+            areaFillOf(
+              AddressAutofillSource.geocodedHouseNumber,
+              street: mainStreet,
+              area: stMinaArea,
+            ),
+          ]);
         });
       },
     );
@@ -88,13 +98,15 @@ void main() {
             .chooseStreet(mainStreet);
         await pumpEventQueue();
 
-        expect(
-          fixture.analytics.singleTrackedPropertiesOf<AddressLocationFill>(),
-          {
-            'autofill_source': AddressAutofillSource.geocodedHouseNumber.name,
-            'street_id': mainStreet.id,
-          },
-        );
+        expect(fixture.analytics.trackedEventsOf<AddressLocationFill>(), [
+          isA<AddressLocationFill>()
+              .having(
+                (event) => event.autofillSource,
+                'autofillSource',
+                AddressAutofillSource.geocodedHouseNumber,
+              )
+              .having((event) => event.streetId, 'streetId', mainStreet.id),
+        ]);
       },
     );
   });
@@ -105,14 +117,12 @@ void main() {
 
       await fixture.controllerFor().useLocation(houseLocation);
 
-      expect(
-        fixture.analytics.singleTrackedPropertiesOf<AddressSuggestionShow>(),
-        {
-          'has_area': true,
-          'has_street': false,
-          'has_district': false,
-        },
-      );
+      expect(fixture.analytics.trackedEventsOf<AddressSuggestionShow>(), [
+        isA<AddressSuggestionShow>()
+            .having((event) => event.hasArea, 'hasArea', true)
+            .having((event) => event.hasStreet, 'hasStreet', false)
+            .having((event) => event.hasDistrict, 'hasDistrict', false),
+      ]);
     });
 
     test('is tracked as accepted when used', () async {

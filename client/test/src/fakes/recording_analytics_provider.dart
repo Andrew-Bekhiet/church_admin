@@ -21,9 +21,6 @@ class RecordingAnalyticsProvider implements AnalyticsProvider {
   Iterable<E> trackedEventsOf<E extends AnalyticsEvent>() =>
       trackedEvents.whereType<E>();
 
-  Json singleTrackedPropertiesOf<E extends AnalyticsEvent>() =>
-      trackedEventsOf<E>().single.properties;
-
   @override
   Future<void> initialize() async {}
 
