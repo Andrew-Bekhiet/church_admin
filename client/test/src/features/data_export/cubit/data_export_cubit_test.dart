@@ -17,6 +17,8 @@ void main() {
     late _DataExportCubitFixture fixture;
     const downloadUrl = 'https://example.com/export.xlsx';
     const area = Area(id: 'area-id', name: 'Area');
+    const searchQuery = 'Mary';
+    final searchSettleDuration = HomeSearchCubit.debounceDuration * 1.5;
     final exportedFile = DataExportFile(
       path: '/exports/export.xlsx',
       lastModified: DateTime.now(),
@@ -210,6 +212,34 @@ void main() {
             .single
             .properties,
         containsPair('is_success', false),
+      ),
+    );
+
+    blocTest<DataExportCubit, DataExportState>(
+      'searching the same query again after clearing the field is tracked again',
+      build: () => fixture.createCubit(),
+      act: (cubit) async {
+        await cubit.stream.whereType<DataExportSelectingObjects>().first;
+
+        for (final query in [searchQuery, '', searchQuery]) {
+          cubit.searchController.add(query);
+          await Future<void>.delayed(searchSettleDuration);
+        }
+      },
+      verify: (_) => expect(
+        fixture.analytics.trackedEventsOf<ExportSelectionSearchRun>(),
+        [
+          isA<ExportSelectionSearchRun>().having(
+            (event) => event.queryLength,
+            'queryLength',
+            searchQuery.length,
+          ),
+          isA<ExportSelectionSearchRun>().having(
+            (event) => event.queryLength,
+            'queryLength',
+            searchQuery.length,
+          ),
+        ],
       ),
     );
 

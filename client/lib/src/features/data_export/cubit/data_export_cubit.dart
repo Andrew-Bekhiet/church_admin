@@ -66,8 +66,8 @@ class DataExportCubit extends Cubit<DataExportState> {
     _selectionSearchSubscription = searchController
         .debounceTime(HomeSearchCubit.debounceDuration)
         .whereNotNull()
-        .where((query) => query.isNotEmpty)
         .distinct()
+        .where((query) => query.isNotEmpty)
         .listen(
           (query) => _analyticsService.track(
             ExportSelectionSearchRun(queryLength: query.length),
