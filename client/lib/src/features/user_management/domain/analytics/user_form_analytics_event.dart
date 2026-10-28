@@ -55,34 +55,31 @@ final class AdminScopesApply extends UserFormAnalyticsEvent {
   });
 }
 
-final class ServiceScopeCopy extends UserFormAnalyticsEvent {
+sealed class AdminScopeEvent extends UserFormAnalyticsEvent {
   final Json scopeProperties;
 
+  @override
+  Json get properties => scopeProperties;
+
+  AdminScopeEvent(UserAdminScope scope)
+    : scopeProperties = AnalyticsEntityType.propertiesOf(scope.object);
+}
+
+final class ServiceScopeCopy extends AdminScopeEvent {
   @override
   String get objectAction => 'service_scope_copy';
 
-  @override
-  Json get properties => scopeProperties;
-
-  ServiceScopeCopy(UserAdminScope scope)
-    : scopeProperties = AnalyticsEntityType.propertiesOf(scope.object);
+  ServiceScopeCopy(super.scope);
 }
 
-final class AdminScopeDelete extends UserFormAnalyticsEvent {
-  final Json scopeProperties;
-
+final class AdminScopeDelete extends AdminScopeEvent {
   @override
   String get objectAction => 'scope_delete';
 
-  @override
-  Json get properties => scopeProperties;
-
-  AdminScopeDelete(UserAdminScope scope)
-    : scopeProperties = AnalyticsEntityType.propertiesOf(scope.object);
+  AdminScopeDelete(super.scope);
 }
 
-final class AdminScopePermissionToggle extends UserFormAnalyticsEvent {
-  final Json scopeProperties;
+final class AdminScopePermissionToggle extends AdminScopeEvent {
   final AdminScopePermission permission;
   final bool isEnabled;
 
@@ -91,16 +88,16 @@ final class AdminScopePermissionToggle extends UserFormAnalyticsEvent {
 
   @override
   Json get properties => {
-    ...scopeProperties,
+    ...super.properties,
     'permission': permission.name,
     'is_enabled': isEnabled,
   };
 
   AdminScopePermissionToggle(
-    UserAdminScope scope,
+    super.scope,
     this.permission, {
     required this.isEnabled,
-  }) : scopeProperties = AnalyticsEntityType.propertiesOf(scope.object);
+  });
 }
 
 final class InvitationToggle extends UserFormAnalyticsEvent {

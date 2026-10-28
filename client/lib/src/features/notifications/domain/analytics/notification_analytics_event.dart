@@ -7,9 +7,18 @@ sealed class NotificationAnalyticsEvent extends AnalyticsEvent {
   const NotificationAnalyticsEvent();
 }
 
-final class NotificationOpen extends NotificationAnalyticsEvent {
-  final NotificationOpenSource source;
+sealed class NotificationContentEvent extends NotificationAnalyticsEvent {
   final NotificationType notificationType;
+
+  @override
+  Json get properties => {'notification_type': notificationType.name};
+
+  NotificationContentEvent(Notification notification)
+    : notificationType = notification.type;
+}
+
+final class NotificationOpen extends NotificationContentEvent {
+  final NotificationOpenSource source;
   final bool hasImage;
   final bool hasQuery;
 
@@ -18,29 +27,22 @@ final class NotificationOpen extends NotificationAnalyticsEvent {
 
   @override
   Json get properties => {
+    ...super.properties,
     'source': source.name,
-    'notification_type': notificationType.name,
     'has_image': hasImage,
     'has_query': hasQuery,
   };
 
-  NotificationOpen(Notification notification, {required this.source})
-    : notificationType = notification.type,
-      hasImage = notification.imageURL != null,
+  NotificationOpen(super.notification, {required this.source})
+    : hasImage = notification.imageURL != null,
       hasQuery = notification.additionalData?['query'] != null;
 }
 
-final class NotificationSearchResultsOpen extends NotificationAnalyticsEvent {
-  final NotificationType notificationType;
-
+final class NotificationSearchResultsOpen extends NotificationContentEvent {
   @override
   String get objectAction => 'search_results_open';
 
-  @override
-  Json get properties => {'notification_type': notificationType.name};
-
-  NotificationSearchResultsOpen(Notification notification)
-    : notificationType = notification.type;
+  NotificationSearchResultsOpen(super.notification);
 }
 
 final class NotificationPermissionRequest extends NotificationAnalyticsEvent {

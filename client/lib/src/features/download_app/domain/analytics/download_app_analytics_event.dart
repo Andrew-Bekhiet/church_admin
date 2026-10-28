@@ -7,27 +7,30 @@ sealed class DownloadAppAnalyticsEvent extends AnalyticsEvent {
   const DownloadAppAnalyticsEvent();
 }
 
-final class AppDownloadTap extends DownloadAppAnalyticsEvent {
+sealed class AppDownloadEvent extends DownloadAppAnalyticsEvent {
   final DownloadPlatform platform;
-
-  @override
-  String get objectAction => 'download_tap';
 
   @override
   Json get properties => {'platform': platform.name};
 
-  const AppDownloadTap(this.platform);
+  const AppDownloadEvent(this.platform);
 }
 
-final class AppDownloadLinkFetchFinish extends DownloadAppAnalyticsEvent {
-  final DownloadPlatform platform;
+final class AppDownloadTap extends AppDownloadEvent {
+  @override
+  String get objectAction => 'download_tap';
+
+  const AppDownloadTap(super.platform);
+}
+
+final class AppDownloadLinkFetchFinish extends AppDownloadEvent {
   final bool isSuccess;
 
   @override
   String get objectAction => 'link_fetch_finish';
 
   @override
-  Json get properties => {'platform': platform.name, 'is_success': isSuccess};
+  Json get properties => {...super.properties, 'is_success': isSuccess};
 
-  const AppDownloadLinkFetchFinish(this.platform, {required this.isSuccess});
+  const AppDownloadLinkFetchFinish(super.platform, {required this.isSuccess});
 }

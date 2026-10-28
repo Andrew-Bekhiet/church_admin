@@ -26,46 +26,53 @@ final class LocalAuthLockShow extends LocalAuthAnalyticsEvent {
   });
 }
 
-final class BiometricsUnlockSubmit extends LocalAuthAnalyticsEvent {
+sealed class UnlockSubmit extends LocalAuthAnalyticsEvent {
   final UnlockOutcome outcome;
-  final bool isAutoPrompted;
   final Duration lockedFor;
+
+  @override
+  Json get properties => {
+    'outcome': outcome.name,
+    'locked_duration_ms': lockedFor.inMilliseconds,
+  };
+
+  const UnlockSubmit({required this.outcome, required this.lockedFor});
+}
+
+final class BiometricsUnlockSubmit extends UnlockSubmit {
+  final bool isAutoPrompted;
 
   @override
   String get objectAction => 'biometrics_unlock_submit';
 
   @override
   Json get properties => {
-    'outcome': outcome.name,
+    ...super.properties,
     'is_auto_prompted': isAutoPrompted,
-    'locked_duration_ms': lockedFor.inMilliseconds,
   };
 
   const BiometricsUnlockSubmit({
-    required this.outcome,
     required this.isAutoPrompted,
-    required this.lockedFor,
+    required super.outcome,
+    required super.lockedFor,
   });
 }
 
-final class PasswordUnlockSubmit extends LocalAuthAnalyticsEvent {
-  final UnlockOutcome outcome;
+final class PasswordUnlockSubmit extends UnlockSubmit {
   final bool canCheckBiometrics;
-  final Duration lockedFor;
 
   @override
   String get objectAction => 'password_unlock_submit';
 
   @override
   Json get properties => {
-    'outcome': outcome.name,
+    ...super.properties,
     'can_check_biometrics': canCheckBiometrics,
-    'locked_duration_ms': lockedFor.inMilliseconds,
   };
 
   const PasswordUnlockSubmit({
-    required this.outcome,
     required this.canCheckBiometrics,
-    required this.lockedFor,
+    required super.outcome,
+    required super.lockedFor,
   });
 }

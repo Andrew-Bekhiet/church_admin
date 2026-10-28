@@ -194,52 +194,38 @@ final class UserSave extends UserSaveAttemptEvent {
       );
 }
 
-final class UserApprove extends UserManagementAnalyticsEvent {
+sealed class UserAccountActionEvent extends UserManagementAnalyticsEvent {
   final String userId;
   final bool isSuccess;
 
+  @override
+  Json get properties => {
+    ...UserManagementAnalyticsEvent.userPropertiesOf(userId),
+    'is_success': isSuccess,
+  };
+
+  const UserAccountActionEvent(this.userId, {required this.isSuccess});
+}
+
+final class UserApprove extends UserAccountActionEvent {
   @override
   String get objectAction => 'user_approve';
 
-  @override
-  Json get properties => {
-    ...UserManagementAnalyticsEvent.userPropertiesOf(userId),
-    'is_success': isSuccess,
-  };
-
-  const UserApprove(this.userId, {required this.isSuccess});
+  const UserApprove(super.userId, {required super.isSuccess});
 }
 
-final class UserUnapprove extends UserManagementAnalyticsEvent {
-  final String userId;
-  final bool isSuccess;
-
+final class UserUnapprove extends UserAccountActionEvent {
   @override
   String get objectAction => 'user_unapprove';
 
-  @override
-  Json get properties => {
-    ...UserManagementAnalyticsEvent.userPropertiesOf(userId),
-    'is_success': isSuccess,
-  };
-
-  const UserUnapprove(this.userId, {required this.isSuccess});
+  const UserUnapprove(super.userId, {required super.isSuccess});
 }
 
-final class UserPasswordResetSend extends UserManagementAnalyticsEvent {
-  final String userId;
-  final bool isSuccess;
-
+final class UserPasswordResetSend extends UserAccountActionEvent {
   @override
   String get objectAction => 'password_reset_send';
 
-  @override
-  Json get properties => {
-    ...UserManagementAnalyticsEvent.userPropertiesOf(userId),
-    'is_success': isSuccess,
-  };
-
-  const UserPasswordResetSend(this.userId, {required this.isSuccess});
+  const UserPasswordResetSend(super.userId, {required super.isSuccess});
 }
 
 final class AccountDeletionAnswer extends UserManagementAnalyticsEvent {

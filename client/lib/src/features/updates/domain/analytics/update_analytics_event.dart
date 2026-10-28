@@ -19,26 +19,25 @@ final class UpdateBannerShow extends UpdateAnalyticsEvent {
   const UpdateBannerShow({required this.hasReleaseNotes});
 }
 
-final class UpdateInstallTap extends UpdateAnalyticsEvent {
+sealed class UpdatePromptTap extends UpdateAnalyticsEvent {
   final UpdatePromptSource source;
 
+  @override
+  Json get properties => {'source': source.name};
+
+  const UpdatePromptTap(this.source);
+}
+
+final class UpdateInstallTap extends UpdatePromptTap {
   @override
   String get objectAction => 'install_tap';
 
-  @override
-  Json get properties => {'source': source.name};
-
-  const UpdateInstallTap(this.source);
+  const UpdateInstallTap(super.source);
 }
 
-final class ReleaseNotesTap extends UpdateAnalyticsEvent {
-  final UpdatePromptSource source;
-
+final class ReleaseNotesTap extends UpdatePromptTap {
   @override
   String get objectAction => 'release_notes_tap';
 
-  @override
-  Json get properties => {'source': source.name};
-
-  const ReleaseNotesTap(this.source);
+  const ReleaseNotesTap(super.source);
 }

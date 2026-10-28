@@ -1,26 +1,32 @@
 part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class DataAnalysisAnalyticsEvent extends AnalyticsEvent {
-  static Json rangePropertiesOf(DateTimeRangePreset preset) => {
-    'range_preset': switch (preset) {
-      TodayDateTimeRangePreset() => 'today',
-      PastMonthDateTimeRangePreset() => 'pastMonth',
-      PastQuarterDateTimeRangePreset() => 'pastQuarter',
-      PastYearDateTimeRangePreset() => 'pastYear',
-      CustomDateTimeRangePreset() => 'custom',
-    },
-    'range_duration_ms': preset.duration.inMilliseconds,
-  };
-
   @override
   String get category => 'analysis';
 
   const DataAnalysisAnalyticsEvent();
 }
 
-final class MeetingsAnalysisView extends DataAnalysisAnalyticsEvent {
-  final MeetingsAnalysisSubject subject;
+sealed class AnalysisRangeEvent extends DataAnalysisAnalyticsEvent {
   final DateTimeRangePreset rangePreset;
+
+  @override
+  Json get properties => {
+    'range_preset': switch (rangePreset) {
+      TodayDateTimeRangePreset() => 'today',
+      PastMonthDateTimeRangePreset() => 'pastMonth',
+      PastQuarterDateTimeRangePreset() => 'pastQuarter',
+      PastYearDateTimeRangePreset() => 'pastYear',
+      CustomDateTimeRangePreset() => 'custom',
+    },
+    'range_duration_ms': rangePreset.duration.inMilliseconds,
+  };
+
+  const AnalysisRangeEvent(this.rangePreset);
+}
+
+final class MeetingsAnalysisView extends AnalysisRangeEvent {
+  final MeetingsAnalysisSubject subject;
   final bool isSuccess;
 
   @override
@@ -46,30 +52,23 @@ final class MeetingsAnalysisView extends DataAnalysisAnalyticsEvent {
         'class_id': class$.id,
       },
     },
-    ...DataAnalysisAnalyticsEvent.rangePropertiesOf(rangePreset),
+    ...super.properties,
     'is_single_day': rangePreset.range.isSingleDay,
     'is_success': isSuccess,
   };
 
   const MeetingsAnalysisView({
     required this.subject,
-    required this.rangePreset,
+    required DateTimeRangePreset rangePreset,
     required this.isSuccess,
-  });
+  }) : super(rangePreset);
 }
 
-final class AnalysisRangeSelect extends DataAnalysisAnalyticsEvent {
-  final DateTimeRangePreset rangePreset;
-
+final class AnalysisRangeSelect extends AnalysisRangeEvent {
   @override
   String get objectAction => 'range_select';
 
-  @override
-  Json get properties => DataAnalysisAnalyticsEvent.rangePropertiesOf(
-    rangePreset,
-  );
-
-  const AnalysisRangeSelect(this.rangePreset);
+  const AnalysisRangeSelect(super.rangePreset);
 }
 
 final class AnalysisCustomRangePick extends DataAnalysisAnalyticsEvent {
