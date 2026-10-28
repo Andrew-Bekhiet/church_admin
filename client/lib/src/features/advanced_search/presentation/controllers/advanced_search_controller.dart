@@ -179,6 +179,7 @@ class AdvancedSearchController {
   }
 
   void clearLimit() {
+    _typedEdits.add(null);
     _analyticsService.track(const AdvancedSearchLimitClear());
     changeQuery(query.copyWith(limit: null));
   }

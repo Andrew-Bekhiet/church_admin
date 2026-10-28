@@ -169,6 +169,20 @@ void main() {
       expect(f.trackedNames.last, 'advanced_search:limit_clear');
     });
 
+    test('a limit digit typed just before pressing clear is not tracked', () {
+      f.typeUntilSettled(
+        (controller, _) => controller
+          ..changeLimit(100)
+          ..changeLimit(5)
+          ..clearLimit(),
+      );
+
+      expect(f.trackedNames, [
+        'advanced_search:limit_set',
+        'advanced_search:limit_clear',
+      ]);
+    });
+
     test('adding a sort is tracked with its direction and the new count', () {
       unit.addOrderBy(OrderBy(field: PersonFields().mainPhone));
 
