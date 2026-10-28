@@ -20,14 +20,14 @@ class HomeBottomNavBar extends StatelessWidget {
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             selectedIndex: homeState.currentTabIndex,
             onDestinationSelected: (index) {
-              if (index != homeState.currentTabIndex) {
-                AnalyticsService.I.track(
-                  HomeTabSelect(
-                    homeState.tabs[index],
-                    method: HomeTabSelectMethod.tap,
-                  ),
-                );
-              }
+              if (index == homeState.currentTabIndex) return;
+
+              AnalyticsService.I.track(
+                HomeTabSelect(
+                  homeState.tabs[index],
+                  method: HomeTabSelectMethod.tap,
+                ),
+              );
               pageController.animateToPage(
                 index,
                 duration: kTabScrollDuration,
