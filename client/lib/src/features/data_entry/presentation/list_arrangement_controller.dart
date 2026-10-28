@@ -43,7 +43,7 @@ class ListArrangementController {
     );
     if (editedArrangement == null) return;
 
-    AnalyticsService.I.track(ListArrangementSave(type, editedArrangement));
+    _maybeTrackArrangementSave(editedArrangement);
     _arrangementSubject.add(editedArrangement);
     unawaited(
       ViewObjectDetails.saveLastArrangementFor(
@@ -52,6 +52,12 @@ class ListArrangementController {
         inServiceContext: inServiceContext,
       ),
     );
+  }
+
+  void _maybeTrackArrangementSave(ListArrangement editedArrangement) {
+    if (editedArrangement == value) return;
+
+    AnalyticsService.I.track(ListArrangementSave(type, editedArrangement));
   }
 
   void dispose() {
