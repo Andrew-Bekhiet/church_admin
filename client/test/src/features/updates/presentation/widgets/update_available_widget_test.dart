@@ -10,8 +10,11 @@ import '../../../../fakes/recording_analytics_provider.dart';
 
 class _NewerVersionFeatureFlagsRepo extends FakeFeatureFlagsRepo {
   @override
-  Version get latestVersion => Version(2, 0, 0);
+  Version get latestVersion => _latestVersion;
 }
+
+const installedVersion = '1.0.0';
+final _latestVersion = Version(2, 0, 0);
 
 void main() {
   late RecordingAnalyticsProvider analytics;
@@ -26,7 +29,7 @@ void main() {
         (_) => PackageInfo(
           appName: 'church_admin',
           packageName: 'church_admin',
-          version: '1.0.0',
+          version: installedVersion,
           buildNumber: '1',
         ),
       ),
@@ -53,7 +56,15 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(analytics.trackedEvents, [isA<UpdateBannerShow>()]);
+      expect(analytics.trackedEvents, [
+        isA<UpdateBannerShow>()
+            .having((e) => e.currentVersion, 'currentVersion', installedVersion)
+            .having(
+              (e) => e.latestVersion,
+              'latestVersion',
+              _latestVersion.toString(),
+            ),
+      ]);
     },
   );
 }

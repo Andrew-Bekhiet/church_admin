@@ -36,6 +36,7 @@ class UpdateAvailableWidget extends StatelessWidget {
             .doOnData(
               (isUpdateAvailable) => _maybeTrackFirstBannerShowOfVersion(
                 featureFlagRepo,
+                currentVersion: packageInfo.version,
                 isUpdateAvailable: isUpdateAvailable,
               ),
             ),
@@ -57,7 +58,12 @@ class UpdateAvailableWidget extends StatelessWidget {
                       FilledButton(
                         onPressed: () {
                           AnalyticsService.I.track(
-                            const UpdateInstallTap(UpdatePromptSource.banner),
+                            UpdateInstallTap(
+                              UpdatePromptSource.banner,
+                              currentVersion: packageInfo.version,
+                              latestVersion: featureFlagRepo.latestVersion
+                                  .toString(),
+                            ),
                           );
                           unawaited(
                             launcherService.launchUrl(
@@ -72,7 +78,12 @@ class UpdateAvailableWidget extends StatelessWidget {
                           style: themeData.filledTonalButtonStyleWorkaround,
                           onPressed: () {
                             AnalyticsService.I.track(
-                              const ReleaseNotesTap(UpdatePromptSource.banner),
+                              ReleaseNotesTap(
+                                UpdatePromptSource.banner,
+                                currentVersion: packageInfo.version,
+                                latestVersion: featureFlagRepo.latestVersion
+                                    .toString(),
+                              ),
                             );
                             unawaited(
                               launcherService.launchUrl(releaseNotesUrl),
@@ -91,6 +102,7 @@ class UpdateAvailableWidget extends StatelessWidget {
 
   void _maybeTrackFirstBannerShowOfVersion(
     FeatureFlagsRepository featureFlagRepo, {
+    required String currentVersion,
     required bool isUpdateAvailable,
   }) {
     if (!isUpdateAvailable) return;
@@ -102,6 +114,8 @@ class UpdateAvailableWidget extends StatelessWidget {
     AnalyticsService.I.track(
       UpdateBannerShow(
         hasReleaseNotes: featureFlagRepo.releaseNotesUrl != null,
+        currentVersion: currentVersion,
+        latestVersion: featureFlagRepo.latestVersion.toString(),
       ),
     );
   }

@@ -8,7 +8,13 @@ class OutdatedFeatureScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final downloadUrl = FeatureFlagsRepository.I.downloadUrl;
+    final featureFlagsRepo = FeatureFlagsRepository.I;
+    final downloadUrl = featureFlagsRepo.downloadUrl;
+    final currentVersion = globalProviderContainer
+        .read(packageInfoPluginProvider)
+        .requireValue
+        .version;
+    final latestVersion = featureFlagsRepo.latestVersion.toString();
 
     return SessionReplayUnmask(
       child: Scaffold(
@@ -29,8 +35,10 @@ class OutdatedFeatureScreen extends StatelessWidget {
               FilledButton(
                 onPressed: () {
                   AnalyticsService.I.track(
-                    const UpdateInstallTap(
+                    UpdateInstallTap(
                       UpdatePromptSource.outdatedFeatureScreen,
+                      currentVersion: currentVersion,
+                      latestVersion: latestVersion,
                     ),
                   );
                   unawaited(LauncherService.I.launchUrl(downloadUrl));

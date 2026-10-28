@@ -16,6 +16,11 @@ class ForceUpdateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentVersion = globalProviderContainer
+        .read(packageInfoPluginProvider)
+        .requireValue
+        .version;
+    final latestVersion = _featureFlagsRepo.latestVersion.toString();
     final releaseNotesUrl = _featureFlagsRepo.releaseNotesUrl;
 
     final forceUpdateMessage = _featureFlagsRepo.forceUpdateMessage;
@@ -44,8 +49,10 @@ class ForceUpdateScreen extends StatelessWidget {
               FilledButton(
                 onPressed: () {
                   AnalyticsService.I.track(
-                    const UpdateInstallTap(
+                    UpdateInstallTap(
                       UpdatePromptSource.forceUpdateScreen,
+                      currentVersion: currentVersion,
+                      latestVersion: latestVersion,
                     ),
                   );
                   unawaited(
@@ -59,8 +66,10 @@ class ForceUpdateScreen extends StatelessWidget {
                   style: Theme.of(context).filledTonalButtonStyleWorkaround,
                   onPressed: () {
                     AnalyticsService.I.track(
-                      const ReleaseNotesTap(
+                      ReleaseNotesTap(
                         UpdatePromptSource.forceUpdateScreen,
+                        currentVersion: currentVersion,
+                        latestVersion: latestVersion,
                       ),
                     );
                     unawaited(_launcherService.launchUrl(releaseNotesUrl));
