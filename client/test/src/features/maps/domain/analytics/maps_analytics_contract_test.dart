@@ -96,7 +96,7 @@ void main() {
           ),
           (
             LocationSet(person, LocationSetMethod.current),
-            'location:set',
+            'maps:location_set',
             {
               'entity_type': 'person',
               'person_id': personId,
@@ -110,7 +110,7 @@ void main() {
               isPrefilledFromClipboard: true,
               isSuccess: false,
             ),
-            'location:link_parse',
+            'maps:location_link_parse',
             {
               'entity_type': 'family',
               'family_id': familyId,
@@ -121,7 +121,7 @@ void main() {
           ),
           (
             LocationClipboardLinkShow(person, LocationLinkInputKind.shortLink),
-            'location:clipboard_link_show',
+            'maps:location_clipboard_link_show',
             {
               'entity_type': 'person',
               'person_id': personId,
@@ -130,7 +130,7 @@ void main() {
           ),
           (
             LocationSaveWithChange(person, LocationSetMethod.link),
-            'location:save',
+            'maps:location_save',
             {
               'entity_type': 'person',
               'person_id': personId,
@@ -140,7 +140,7 @@ void main() {
           ),
           (
             LocationSaveWithoutChange(family),
-            'location:save',
+            'maps:location_save',
             {
               'entity_type': 'family',
               'family_id': familyId,
@@ -151,18 +151,12 @@ void main() {
           (
             LocationPointsSave(
               const Area(id: areaId, name: 'منطقة'),
-              addedPointCount: 4,
-              removedPointCount: 1,
-              insertedMidpointCount: 2,
               isClosedShape: true,
             ),
-            'location:points_save',
+            'maps:points_save',
             {
               'entity_type': 'area',
               'area_id': areaId,
-              'added_point_count': 4,
-              'removed_point_count': 1,
-              'inserted_midpoint_count': 2,
               'is_closed_shape': true,
             },
           ),

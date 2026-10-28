@@ -60,10 +60,6 @@ class _EditObjectPointsMap<T extends ViewableWithID>
   late final BehaviorSubject<GeomapOptions> _mapOptionsStream =
       BehaviorSubject.seeded(widget.geomapOptions);
 
-  int _addedPointCount = 0;
-  int _removedPointCount = 0;
-  int _insertedMidpointCount = 0;
-
   List<DragMarker> Function(int i, Point p) _createMarkerFromPoint(
     double markerSize,
     List<Point> points,
@@ -96,13 +92,10 @@ class _EditObjectPointsMap<T extends ViewableWithID>
           ],
           resultObject.value,
         ),
-        onLongPress: (_) {
-          _removedPointCount++;
-          resultObject.value = widget.onModify(
-            points.where((e) => e != p).toList(),
-            resultObject.value,
-          );
-        },
+        onLongPress: (_) => resultObject.value = widget.onModify(
+          points.where((e) => e != p).toList(),
+          resultObject.value,
+        ),
       ),
       DragMarker(
         point: LatLng(
@@ -118,7 +111,6 @@ class _EditObjectPointsMap<T extends ViewableWithID>
           icon: Symbols.add_circle_outline,
         ),
         onDragStart: (_, newPoint) {
-          _insertedMidpointCount++;
           resultObject.value = widget.onModify(
             [
               ...points
@@ -212,7 +204,6 @@ class _EditObjectPointsMap<T extends ViewableWithID>
           ],
           createMapOptions: (center) => MapOptions(
             onTap: (_, latlng) {
-              _addedPointCount++;
               resultObject.value = widget.onModify(
                 [
                   ...widget.getObjectPoints(resultObject.value) ?? [],
@@ -238,9 +229,6 @@ class _EditObjectPointsMap<T extends ViewableWithID>
       AnalyticsService.I.track(
         LocationPointsSave(
           resultObject.value,
-          addedPointCount: _addedPointCount,
-          removedPointCount: _removedPointCount,
-          insertedMidpointCount: _insertedMidpointCount,
           isClosedShape: widget.closedShape,
         ),
       );
