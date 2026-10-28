@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../fakes/fake_contacts_service.dart';

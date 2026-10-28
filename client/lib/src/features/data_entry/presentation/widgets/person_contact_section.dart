@@ -112,11 +112,11 @@ class PersonContactSection extends StatelessWidget {
       _ => ContactCallPromptChoice.cancel,
     };
 
-    final isRecordingAccepted = await _maybeLaunchCallAndAskToRecordIt(
-      context,
-      number,
-      callPromptChoice,
-    );
+    await _maybeLaunchCall(number, callPromptChoice);
+    final isRecordingAccepted =
+        callPromptChoice == ContactCallPromptChoice.call && context.mounted
+        ? await _askToRecordCallDate(context)
+        : null;
 
     AnalyticsService.I.track(
       PhoneCallFinish(
@@ -136,21 +136,21 @@ class PersonContactSection extends StatelessWidget {
     scaffoldMessenger.showSnackBar(const SnackBar(content: Text('تم بنجاح')));
   }
 
-  Future<bool?> _maybeLaunchCallAndAskToRecordIt(
-    BuildContext context,
+  Future<void> _maybeLaunchCall(
     String? number,
     ContactCallPromptChoice callPromptChoice,
   ) async {
-    if (callPromptChoice == ContactCallPromptChoice.cancel) return null;
+    if (callPromptChoice == ContactCallPromptChoice.cancel) return;
 
-    final isCallingNow = callPromptChoice == ContactCallPromptChoice.call;
-    if (isCallingNow) await Permission.phone.request();
+    if (callPromptChoice == ContactCallPromptChoice.call) {
+      await Permission.phone.request();
+    }
     await LauncherService.I.launchCall(
       PhoneNumberService.I.formatInternational(number!),
     );
+  }
 
-    if (!isCallingNow || !context.mounted) return null;
-
+  Future<bool> _askToRecordCallDate(BuildContext context) async {
     final recordLastCall = await showDialog(
       context: context,
       builder: (context) => const ConfirmationDialog(
