@@ -123,7 +123,7 @@ class PersonMeetingAttendanceCard extends StatelessWidget {
                       : null,
                   onTap: () {
                     AnalyticsService.I.track(
-                      AnalysisLastAttendedTap(
+                      AnalysisPersonLastAttendedTap(
                         personId: personId,
                         meetingId: analysis.meeting.id,
                       ),

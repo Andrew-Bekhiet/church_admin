@@ -153,21 +153,20 @@ final class AnalysisSectionToggle extends DataAnalysisAnalyticsEvent {
   const AnalysisSectionToggle(this.section, {required this.isEnabled});
 }
 
-final class AnalysisLastAttendedTap extends DataAnalysisAnalyticsEvent {
+final class AnalysisPersonLastAttendedTap extends DataAnalysisAnalyticsEvent {
   final String personId;
   final String meetingId;
 
   @override
-  String get objectAction => 'last_attended_tap';
+  String get objectAction => 'person_last_attended_tap';
 
   @override
   Json get properties => {
-    'entity_type': AnalyticsEntityType.person.key,
     AnalyticsEntityType.person.idProperty: personId,
     'meeting_id': meetingId,
   };
 
-  const AnalysisLastAttendedTap({
+  const AnalysisPersonLastAttendedTap({
     required this.personId,
     required this.meetingId,
   });

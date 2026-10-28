@@ -83,13 +83,12 @@ void main() {
         {'section': 'confession', 'is_enabled': false},
       ),
       (
-        AnalysisLastAttendedTap(
+        AnalysisPersonLastAttendedTap(
           personId: personId,
           meetingId: meeting.id,
         ),
-        'analysis:last_attended_tap',
+        'analysis:person_last_attended_tap',
         {
-          'entity_type': 'person',
           'person_id': personId,
           'meeting_id': meeting.id,
         },
