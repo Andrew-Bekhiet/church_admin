@@ -15,7 +15,6 @@ void main() {
         isCreate: true,
         outcome: PersonSaved(person: person, movedOutOfSight: false),
         formOpenDuration: formOpenDuration,
-        shownRuleViolations: const {},
       ),
       name: 'data_entry:object_save_attempt',
       properties: {
@@ -24,35 +23,6 @@ void main() {
         'is_create': true,
         'outcome': 'saved',
         'form_open_duration_seconds': formOpenDuration.inSeconds,
-        'rule_violations': <String>[],
-      },
-    ),
-    (
-      event: PersonSaveAttempt(
-        entity: person,
-        isCreate: false,
-        outcome: const InvalidPerson(),
-        formOpenDuration: formOpenDuration,
-        shownRuleViolations: const {
-          NothingPlacesThePerson(),
-          AddressChangeBlockedByMove(),
-          ServicesOutsideStudyYear(),
-          NoServiceOrGroupToKeepPersonEditable(),
-        },
-      ),
-      name: 'data_entry:object_save_attempt',
-      properties: {
-        'entity_type': 'person',
-        'person_id': person.id,
-        'is_create': false,
-        'outcome': 'invalid',
-        'form_open_duration_seconds': formOpenDuration.inSeconds,
-        'rule_violations': [
-          'nothingPlacesThePerson',
-          'addressChangeBlockedByMove',
-          'servicesOutsideStudyYear',
-          'noServiceOrGroupToKeepPersonEditable',
-        ],
       },
     ),
     (
@@ -133,7 +103,6 @@ void main() {
         isCreate: true,
         outcome: outcome,
         formOpenDuration: Duration.zero,
-        shownRuleViolations: const {},
       );
 
       expect(attempt.properties, containsPair('outcome', sent));

@@ -34,7 +34,6 @@ sealed class ObjectSaveAttempt extends DataEntryAnalyticsEvent {
 
 final class PersonSaveAttempt extends ObjectSaveAttempt {
   final PersonSaveOutcome outcome;
-  final Set<PersonRuleViolation> shownRuleViolations;
 
   @override
   String get outcomeName => switch (outcome) {
@@ -49,24 +48,8 @@ final class PersonSaveAttempt extends ObjectSaveAttempt {
     SaveAlreadyInProgress() => 'alreadyInProgress',
   };
 
-  @override
-  Json get properties => {
-    ...super.properties,
-    'rule_violations': [
-      for (final violation in shownRuleViolations)
-        switch (violation) {
-          NothingPlacesThePerson() => 'nothingPlacesThePerson',
-          AddressChangeBlockedByMove() => 'addressChangeBlockedByMove',
-          ServicesOutsideStudyYear() => 'servicesOutsideStudyYear',
-          NoServiceOrGroupToKeepPersonEditable() =>
-            'noServiceOrGroupToKeepPersonEditable',
-        },
-    ],
-  };
-
   PersonSaveAttempt({
     required this.outcome,
-    required this.shownRuleViolations,
     required super.entity,
     required super.isCreate,
     required super.formOpenDuration,

@@ -342,7 +342,6 @@ class PersonFormController extends AdvancedFormController {
         isCreate: isCreate,
         formOpenDuration: _sinceFormOpened.elapsed,
         outcome: outcome,
-        shownRuleViolations: isDisposed ? const {} : _shownViolations.value,
       ),
     );
   }

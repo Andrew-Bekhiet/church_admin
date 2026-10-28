@@ -38,25 +38,20 @@ void main() {
     ]);
   });
 
-  test(
-    'a save blocked by the person rules is tracked with the broken rules',
-    () async {
-      final controller = fixture.controllerFor(const CreateBlankPerson());
-      controller.identity.name.setValue('مينا');
+  test('a save blocked by the person rules is tracked as invalid', () async {
+    final controller = fixture.controllerFor(const CreateBlankPerson());
+    controller.identity.name.setValue('مينا');
 
-      await controller.submit();
+    await controller.submit();
 
-      expect(fixture.analytics.trackedEventsOf<ObjectSaveAttempt>(), [
-        isA<PersonSaveAttempt>()
-            .having((event) => event.outcome, 'outcome', isA<InvalidPerson>())
-            .having(
-              (event) => event.shownRuleViolations,
-              'shownRuleViolations',
-              [isA<NothingPlacesThePerson>()],
-            ),
-      ]);
-    },
-  );
+    expect(fixture.analytics.trackedEventsOf<ObjectSaveAttempt>(), [
+      isA<PersonSaveAttempt>().having(
+        (event) => event.outcome,
+        'outcome',
+        isA<InvalidPerson>(),
+      ),
+    ]);
+  });
 
   test('a save before the memberships load is tracked as waiting', () async {
     final controller = fixture.controllerOfUpdate(storedPerson);
