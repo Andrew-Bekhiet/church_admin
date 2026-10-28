@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesLoggingSettingsStore implements LoggingSettingsStore {
   static const String _enableSentryKey = 'logging.enableSentry';
-  static const String _enablePostHogKey = 'logging.enablePostHog';
   static const String _enablePostHogLogsKey = 'logging.enablePostHogLogs';
   static const String _sessionReplaySampleRateKey =
       'logging.sessionReplaySampleRate';
@@ -15,7 +14,6 @@ class SharedPreferencesLoggingSettingsStore implements LoggingSettingsStore {
 
       return LoggingSettings.fromJson({
         'enableSentry': prefs.getBool(_enableSentryKey),
-        'enablePostHog': prefs.getBool(_enablePostHogKey),
         'enablePostHogLogs': prefs.getBool(_enablePostHogLogsKey),
         'sessionReplaySampleRate': prefs.getDouble(_sessionReplaySampleRateKey),
       });
@@ -30,7 +28,6 @@ class SharedPreferencesLoggingSettingsStore implements LoggingSettingsStore {
 
     await Future.wait([
       prefs.setBool(_enableSentryKey, settings.enableSentry),
-      prefs.setBool(_enablePostHogKey, settings.enablePostHog),
       prefs.setBool(_enablePostHogLogsKey, settings.enablePostHogLogs),
       prefs.setDouble(
         _sessionReplaySampleRateKey,

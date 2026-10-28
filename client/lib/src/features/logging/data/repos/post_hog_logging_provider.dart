@@ -15,7 +15,7 @@ class PostHogLoggingProvider implements LoggingProvider {
   PostHogLoggingProvider(this._postHogClient);
 
   @override
-  bool isEnabledBy(LoggingSettings settings) => settings.enablePostHog;
+  bool isEnabledBy(LoggingSettings settings) => true;
 
   @override
   Future<void> initialize(LoggingSettings settings) async {
