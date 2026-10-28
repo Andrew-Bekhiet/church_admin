@@ -1,4 +1,4 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class AddressAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -123,5 +123,3 @@ final class FamilyAddressFill extends AddressAnalyticsEvent {
 
   FamilyAddressFill(Family family) : familyId = family.id;
 }
-
-enum AddressAutofillSource { singleAreaStreet, geocodedHouseNumber }

@@ -1,4 +1,4 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class ContactAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -131,15 +131,4 @@ final class DeviceContactsImportAttempt extends ContactAnalyticsEvent {
     this.importedNumberCount = 0,
     this.isNameUsed = false,
   });
-}
-
-enum ContactCallPromptChoice { call, dialerOnly, cancel }
-
-enum DeviceContactCreateOutcome { permissionDenied, cancelled, created, failed }
-
-enum DeviceContactsImportOutcome {
-  permissionDenied,
-  pickCancelled,
-  dialogCancelled,
-  imported,
 }

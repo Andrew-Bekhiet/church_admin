@@ -1,4 +1,4 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class PhotoAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -41,11 +41,4 @@ final class PhotoFullscreenOpen extends PhotoAnalyticsEvent {
 
   PhotoFullscreenOpen(Object entity)
     : entityProperties = AnalyticsEntityType.propertiesOf(entity);
-}
-
-enum PhotoPickOutcome {
-  picked,
-  cameraPermissionDenied,
-  pickCancelled,
-  cropCancelled,
 }

@@ -1,5 +1,4 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class EntityAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -95,7 +94,3 @@ final class EntityRelatedCreateTap extends EntityAnalyticsEvent {
       relatedType = AnalyticsEntityType.store,
       relation = EntityRelation.unlinked;
 }
-
-enum CopiedEntityProperty { address, notes }
-
-enum EntityRelation { child, parent, member, owned, unlinked }

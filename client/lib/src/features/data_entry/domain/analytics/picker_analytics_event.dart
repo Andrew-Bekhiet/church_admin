@@ -1,4 +1,4 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class PickerAnalyticsEvent extends AnalyticsEvent {
   @override
@@ -29,25 +29,4 @@ final class PickerValueClear extends PickerAnalyticsEvent {
   Json get properties => {'field_kind': fieldKind.name};
 
   const PickerValueClear(this.fieldKind);
-}
-
-enum PickerObjectType {
-  college,
-  school,
-  qualification,
-  job,
-  church,
-  father,
-  hobby,
-  tag,
-  personType,
-}
-
-enum PickerFieldKind {
-  date,
-  dateRange,
-  studyYearRange,
-  color,
-  singleObject,
-  multiObject,
 }
