@@ -1,14 +1,20 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/rendering.dart' show ScrollDirection;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 
-class HomeBody extends StatelessWidget {
+class HomeBody extends StatefulWidget {
   final PageController pageController;
 
   const HomeBody({required this.pageController, super.key});
+
+  @override
+  State<HomeBody> createState() => _HomeBodyState();
+}
+
+class _HomeBodyState extends State<HomeBody> {
+  int? _pageWhereUserDragBegan;
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +27,14 @@ class HomeBody extends StatelessWidget {
       builder: (context, homeState) {
         final tabs = homeState.tabs;
 
-        return NotificationListener<UserScrollNotification>(
+        return NotificationListener<ScrollNotification>(
           onNotification: (notification) {
             _maybeTrackSwipedTab(notification, tabs);
 
             return false;
           },
           child: PageView.builder(
-            controller: pageController,
+            controller: widget.pageController,
             itemCount: tabs.length,
             allowImplicitScrolling: true,
             padEnds: false,
@@ -96,19 +102,33 @@ class HomeBody extends StatelessWidget {
   }
 
   void _maybeTrackSwipedTab(
-    UserScrollNotification notification,
+    ScrollNotification notification,
     List<HomeTab> tabs,
   ) {
-    final isSettledPage =
-        notification.direction == ScrollDirection.idle &&
-        notification.depth == 0;
-
-    if (!isSettledPage) return;
+    if (notification.depth != 0) return;
 
     if (notification.metrics case PageMetrics(:final page?)) {
-      AnalyticsService.I.track(
-        HomeTabSelect(tabs[page.round()], method: HomeTabSelectMethod.swipe),
-      );
+      final currentPage = page.round();
+
+      switch (notification) {
+        case ScrollStartNotification(dragDetails: != null):
+          _pageWhereUserDragBegan = currentPage;
+
+        case ScrollEndNotification():
+          final pageWhereDragBegan = _pageWhereUserDragBegan;
+          _pageWhereUserDragBegan = null;
+
+          if (pageWhereDragBegan != null && pageWhereDragBegan != currentPage) {
+            AnalyticsService.I.track(
+              HomeTabSelect(
+                tabs[currentPage],
+                method: HomeTabSelectMethod.swipe,
+              ),
+            );
+          }
+
+        default:
+      }
     }
   }
 }
