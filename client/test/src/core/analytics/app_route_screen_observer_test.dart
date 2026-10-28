@@ -13,7 +13,10 @@ abstract final class TestPages {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   group('AppRouteScreenObserver', () {
+    const person = ViewPersonRoute(id: 'person-1');
     late RecordingAnalyticsProvider provider;
     late AppRouteScreenObserver observer;
 
@@ -25,16 +28,40 @@ void main() {
     });
 
     test('pushing a screen tracks its path with its own entity id', () async {
-      observer.didPush(
-        TestPages.showing(const ViewPersonRoute(id: 'person-1')),
-        null,
-      );
+      observer.didPush(TestPages.showing(person), null);
       await pumpEventQueue();
 
       expect(provider.trackedScreens.single.name, ViewPersonRoute.routePath);
       expect(provider.trackedScreens.single.properties, {
-        'person_id': 'person-1',
+        'person_id': person.id,
       });
+    });
+
+    for (final state in [
+      AppLifecycleState.paused,
+      AppLifecycleState.inactive,
+    ]) {
+      test(
+        'a screen pushed while the app is ${state.name} is not tracked',
+        () async {
+          observer
+            ..didChangeAppLifecycleState(state)
+            ..didPush(TestPages.showing(person), null);
+          await pumpEventQueue();
+
+          expect(provider.trackedScreens, isEmpty);
+        },
+      );
+    }
+
+    test('a screen pushed after the app resumes is tracked', () async {
+      observer
+        ..didChangeAppLifecycleState(AppLifecycleState.paused)
+        ..didChangeAppLifecycleState(AppLifecycleState.resumed)
+        ..didPush(TestPages.showing(person), null);
+      await pumpEventQueue();
+
+      expect(provider.trackedScreens.single.name, ViewPersonRoute.routePath);
     });
 
     test('popping back tracks the screen that is revealed again', () async {

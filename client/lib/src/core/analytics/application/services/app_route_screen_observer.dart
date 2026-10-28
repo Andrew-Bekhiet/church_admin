@@ -1,10 +1,21 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/widgets.dart';
 
-class AppRouteScreenObserver extends NavigatorObserver {
+class AppRouteScreenObserver extends NavigatorObserver
+    with WidgetsBindingObserver {
   final AnalyticsService analyticsService;
 
-  AppRouteScreenObserver(this.analyticsService);
+  AppLifecycleState? _appLifecycleState;
+
+  AppRouteScreenObserver(this.analyticsService) {
+    WidgetsBinding.instance.addObserver(this);
+    _appLifecycleState = WidgetsBinding.instance.lifecycleState;
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    _appLifecycleState = state;
+  }
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
@@ -29,6 +40,11 @@ class AppRouteScreenObserver extends NavigatorObserver {
   }
 
   void _maybeTrackScreen(Route<dynamic>? route) {
+    final isForeground =
+        _appLifecycleState == null ||
+        _appLifecycleState == AppLifecycleState.resumed;
+    if (!isForeground) return;
+
     if (route?.settings.arguments case final AppRoute appRoute) {
       analyticsService.trackScreen(
         appRoute.path,
