@@ -33,7 +33,10 @@ class DataCheckOverrideCubit extends Cubit<DataCheckOverrideState> {
       DataCheckOverrideSelect(
         dataCheck: previous,
         selected: override,
-        failure: failure,
+        outcome: switch (failure) {
+          null => const AttemptSucceeded(),
+          final error => AttemptFailed(error.name),
+        },
       ),
     );
     if (isClosed) return;

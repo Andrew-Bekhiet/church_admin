@@ -18,6 +18,6 @@ class CreateUserCubit extends UserFormCubit {
 
   @override
   @protected
-  AnalyticsEvent saveEventOf(UserDraft draft, {Object? failure}) =>
-      UserCreate(draft, failure: failure);
+  UserSaveAttemptEvent saveEventOf(UserDraft draft, AttemptOutcome outcome) =>
+      UserCreate(draft, outcome);
 }

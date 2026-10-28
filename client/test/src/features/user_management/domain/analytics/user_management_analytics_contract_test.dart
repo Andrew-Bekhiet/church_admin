@@ -93,7 +93,7 @@ void main() {
         {},
       ),
       (
-        UserCreate(draft),
+        UserCreate(draft, const AttemptSucceeded()),
         'user_management:user_create',
         {
           'is_success': true,
@@ -107,7 +107,7 @@ void main() {
         },
       ),
       (
-        UserSave(savedUser, savedDraft),
+        UserSave(savedUser, savedDraft, const AttemptSucceeded()),
         'user_management:user_save',
         {
           'entity_type': 'user',
@@ -171,7 +171,12 @@ void main() {
     final mappings = <(String, AnalyticsEvent, Matcher)>[
       (
         'a failed creation reports it was not successful',
-        UserCreate(draft, failure: const UserFormValidationError()),
+        UserCreate(
+          draft,
+          UserManagementAnalyticsEvent.failedOutcomeOf(
+            const UserFormValidationError(),
+          ),
+        ),
         allOf(
           containsPair('is_success', false),
           containsPair('failure_kind', 'validation'),
@@ -179,16 +184,23 @@ void main() {
       ),
       (
         'a person linked elsewhere fails as person_already_linked',
-        UserCreate(draft, failure: const PersonAlreadyLinkedException('p1')),
+        UserCreate(
+          draft,
+          UserManagementAnalyticsEvent.failedOutcomeOf(
+            const PersonAlreadyLinkedException('p1'),
+          ),
+        ),
         containsPair('failure_kind', 'person_already_linked'),
       ),
       (
         'a server-side person link conflict fails as person_already_linked',
         UserCreate(
           draft,
-          failure: FirebaseFunctionsException(
-            code: 'already-exists',
-            message: 'user/person-already-linked',
+          UserManagementAnalyticsEvent.failedOutcomeOf(
+            FirebaseFunctionsException(
+              code: 'already-exists',
+              message: 'user/person-already-linked',
+            ),
           ),
         ),
         containsPair('failure_kind', 'person_already_linked'),
@@ -197,9 +209,11 @@ void main() {
         'a taken email fails as email_taken',
         UserCreate(
           draft,
-          failure: FirebaseFunctionsException(
-            code: 'already-exists',
-            message: 'user/email-taken',
+          UserManagementAnalyticsEvent.failedOutcomeOf(
+            FirebaseFunctionsException(
+              code: 'already-exists',
+              message: 'user/email-taken',
+            ),
           ),
         ),
         containsPair('failure_kind', 'email_taken'),
@@ -208,9 +222,11 @@ void main() {
         'a taken name fails as name_taken',
         UserCreate(
           draft,
-          failure: FirebaseFunctionsException(
-            code: 'already-exists',
-            message: 'user/name-taken',
+          UserManagementAnalyticsEvent.failedOutcomeOf(
+            FirebaseFunctionsException(
+              code: 'already-exists',
+              message: 'user/name-taken',
+            ),
           ),
         ),
         containsPair('failure_kind', 'name_taken'),
@@ -219,9 +235,11 @@ void main() {
         'an invitation without a scope fails as scope_required',
         UserCreate(
           draft,
-          failure: FirebaseFunctionsException(
-            code: 'failed-precondition',
-            message: 'invitation/scope-required',
+          UserManagementAnalyticsEvent.failedOutcomeOf(
+            FirebaseFunctionsException(
+              code: 'failed-precondition',
+              message: 'invitation/scope-required',
+            ),
           ),
         ),
         containsPair('failure_kind', 'scope_required'),
@@ -230,32 +248,44 @@ void main() {
         'an invitation on an unmanageable scope fails as scope_not_manageable',
         UserCreate(
           draft,
-          failure: FirebaseFunctionsException(
-            code: 'permission-denied',
-            message: 'invitation/scope-not-manageable',
+          UserManagementAnalyticsEvent.failedOutcomeOf(
+            FirebaseFunctionsException(
+              code: 'permission-denied',
+              message: 'invitation/scope-not-manageable',
+            ),
           ),
         ),
         containsPair('failure_kind', 'scope_not_manageable'),
       ),
       (
         'an unrecognised failure fails as unknown',
-        UserCreate(draft, failure: StateError('offline')),
+        UserCreate(
+          draft,
+          UserManagementAnalyticsEvent.failedOutcomeOf(StateError('offline')),
+        ),
         containsPair('failure_kind', 'unknown'),
       ),
       (
         'creating a user for an existing person reports the link mode',
-        UserCreate(draft.copyWith(person: LinkExistingPerson(linkedPerson))),
+        UserCreate(
+          draft.copyWith(person: LinkExistingPerson(linkedPerson)),
+          const AttemptSucceeded(),
+        ),
         containsPair('person_link_mode', 'link'),
       ),
       (
         'creating a user without a person reports no link mode',
-        UserCreate(draft.copyWith(person: const NoPersonSelected())),
+        UserCreate(
+          draft.copyWith(person: const NoPersonSelected()),
+          const AttemptSucceeded(),
+        ),
         containsPair('person_link_mode', 'none'),
       ),
       (
         'a scope without an area, service or group is not counted',
         UserCreate(
           draft.copyWith(adminOn: const [AdminOnData(permissionId: '')]),
+          const AttemptSucceeded(),
         ),
         allOf(
           containsPair('area_count', 0),
@@ -270,6 +300,7 @@ void main() {
           UserDraft.fromUser(
             unlinkedUser,
           ).copyWith(person: LinkExistingPerson(otherPerson)),
+          const AttemptSucceeded(),
         ),
         containsPair('person_link_change', 'linked'),
       ),
@@ -278,6 +309,7 @@ void main() {
         UserSave(
           savedUser,
           savedDraft.copyWith(person: const NoPersonSelected()),
+          const AttemptSucceeded(),
         ),
         containsPair('person_link_change', 'unlinked'),
       ),
@@ -288,12 +320,17 @@ void main() {
           savedDraft.copyWith(
             person: const CreateNewPerson(name: 'جديد', gender: true),
           ),
+          const AttemptSucceeded(),
         ),
         containsPair('person_link_change', 'unlinked'),
       ),
       (
         'keeping the linked person reports unchanged',
-        UserSave(savedUser, UserDraft.fromUser(savedUser)),
+        UserSave(
+          savedUser,
+          UserDraft.fromUser(savedUser),
+          const AttemptSucceeded(),
+        ),
         containsPair('person_link_change', 'unchanged'),
       ),
       (
@@ -301,7 +338,9 @@ void main() {
         UserSave(
           savedUser,
           savedDraft,
-          failure: const UserFormValidationError(),
+          UserManagementAnalyticsEvent.failedOutcomeOf(
+            const UserFormValidationError(),
+          ),
         ),
         allOf(
           containsPair('is_success', false),

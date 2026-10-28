@@ -70,22 +70,18 @@ final class AnalysisRangeSelect extends DataAnalysisAnalyticsEvent {
 
 final class AnalysisCustomRangePick extends DataAnalysisAnalyticsEvent {
   final bool isReopened;
-  final Duration? pickedDuration;
+  final CustomRangePickOutcome outcome;
 
   @override
   String get objectAction => 'custom_range_pick';
 
   @override
-  Json get properties => {
-    'is_reopened': isReopened,
-    'is_cancelled': pickedDuration == null,
-    'range_duration_ms': pickedDuration?.inMilliseconds,
-  };
+  Json get properties => {'is_reopened': isReopened, ...outcome.properties};
 
-  AnalysisCustomRangePick({
+  const AnalysisCustomRangePick({
     required this.isReopened,
-    required DateTimeRange? pickedRange,
-  }) : pickedDuration = pickedRange?.duration;
+    required this.outcome,
+  });
 }
 
 final class AnalysisGranularitySelect extends DataAnalysisAnalyticsEvent {

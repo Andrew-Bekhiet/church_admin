@@ -37,7 +37,10 @@ void main() {
         {'range_preset': 'pastMonth', 'range_duration_ms': 2592000000},
       ),
       (
-        AnalysisCustomRangePick(isReopened: true, pickedRange: week),
+        AnalysisCustomRangePick(
+          isReopened: true,
+          outcome: CustomRangePicked(week),
+        ),
         'analysis:custom_range_pick',
         {
           'is_reopened': true,
@@ -150,7 +153,10 @@ void main() {
       ),
       (
         'dismissing the custom range picker reports a cancelled pick',
-        AnalysisCustomRangePick(isReopened: false, pickedRange: null),
+        const AnalysisCustomRangePick(
+          isReopened: false,
+          outcome: CustomRangePickCancelled(),
+        ),
         {
           'is_reopened': false,
           'is_cancelled': true,

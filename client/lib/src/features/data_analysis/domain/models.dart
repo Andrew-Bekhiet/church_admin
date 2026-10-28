@@ -1,5 +1,6 @@
 export 'models/attendance_granularity.dart';
 export 'models/class_attendance_rate.dart';
+export 'models/custom_range_pick_outcome.dart';
 export 'models/date_time_range_preset.dart';
 export 'models/demographic_breakdown_entry.dart';
 export 'models/meeting_attendance_summary.dart';

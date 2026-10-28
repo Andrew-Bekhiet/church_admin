@@ -63,8 +63,8 @@ class EditUserCubit extends UserFormCubit {
 
   @override
   @protected
-  AnalyticsEvent saveEventOf(UserDraft draft, {Object? failure}) =>
-      UserSave(_userBeforeEditing, draft, failure: failure);
+  UserSaveAttemptEvent saveEventOf(UserDraft draft, AttemptOutcome outcome) =>
+      UserSave(_userBeforeEditing, draft, outcome);
 
   List<AdminOnData> _restrictAdminOnToCallerScopes(
     List<AdminOnData> newAdminOn,

@@ -1,21 +1,24 @@
 part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class UserManagementAnalyticsEvent extends AnalyticsEvent {
-  static String failureKindOf(Object? error) => switch (error) {
-    null => 'none',
-    UserFormValidationError() => 'validation',
-    PersonAlreadyLinkedException() ||
-    FirebaseFunctionsException(
-      message: 'user/person-already-linked',
-    ) => 'person_already_linked',
-    FirebaseFunctionsException(message: 'user/email-taken') => 'email_taken',
-    FirebaseFunctionsException(message: 'user/name-taken') => 'name_taken',
-    FirebaseFunctionsException(message: 'invitation/scope-required') =>
-      'scope_required',
-    FirebaseFunctionsException(message: 'invitation/scope-not-manageable') =>
-      'scope_not_manageable',
-    _ => 'unknown',
-  };
+  static AttemptFailed failedOutcomeOf(Object error) => AttemptFailed(
+    switch (error) {
+      UserFormValidationError() => 'validation',
+      PersonAlreadyLinkedException() ||
+      FirebaseFunctionsException(
+        message: 'user/person-already-linked',
+      ) => 'person_already_linked',
+      FirebaseFunctionsException(message: 'user/email-taken') => 'email_taken',
+      FirebaseFunctionsException(message: 'user/name-taken') => 'name_taken',
+      FirebaseFunctionsException(message: 'invitation/scope-required') =>
+        'scope_required',
+      FirebaseFunctionsException(
+        message: 'invitation/scope-not-manageable',
+      ) =>
+        'scope_not_manageable',
+      _ => 'unknown',
+    },
+  );
 
   static Json scopeCountsOf(
     Iterable<AdminOnData> adminOn, {
@@ -36,6 +39,15 @@ sealed class UserManagementAnalyticsEvent extends AnalyticsEvent {
   String get category => 'user_management';
 
   const UserManagementAnalyticsEvent();
+}
+
+sealed class UserSaveAttemptEvent extends UserManagementAnalyticsEvent {
+  final AttemptOutcome outcome;
+
+  @override
+  Json get properties => outcome.properties;
+
+  const UserSaveAttemptEvent(this.outcome);
 }
 
 final class ManageUsersSearchRun extends UserManagementAnalyticsEvent {
@@ -99,9 +111,7 @@ final class UserCreateTap extends UserManagementAnalyticsEvent {
   const UserCreateTap();
 }
 
-final class UserCreate extends UserManagementAnalyticsEvent {
-  final bool isSuccess;
-  final String failureKind;
+final class UserCreate extends UserSaveAttemptEvent {
   final int permissionCount;
   final Json scopeCounts;
   final bool hasInvitation;
@@ -112,27 +122,22 @@ final class UserCreate extends UserManagementAnalyticsEvent {
 
   @override
   Json get properties => {
-    'is_success': isSuccess,
-    'failure_kind': failureKind,
+    ...super.properties,
     'permission_count': permissionCount,
     ...scopeCounts,
     'has_invitation': hasInvitation,
     'person_link_mode': personLinkMode.name,
   };
 
-  UserCreate(UserDraft draft, {Object? failure})
-    : isSuccess = failure == null,
-      failureKind = UserManagementAnalyticsEvent.failureKindOf(failure),
-      permissionCount = draft.permissions.validated().length,
+  UserCreate(UserDraft draft, super.outcome)
+    : permissionCount = draft.permissions.validated().length,
       scopeCounts = UserManagementAnalyticsEvent.scopeCountsOf(draft.adminOn),
       hasInvitation = draft.invitation is InvitationRequest,
       personLinkMode = PersonLinkMode.of(draft.person);
 }
 
-final class UserSave extends UserManagementAnalyticsEvent {
+final class UserSave extends UserSaveAttemptEvent {
   final String userId;
-  final bool isSuccess;
-  final String failureKind;
   final List<String> addedPermissions;
   final List<String> removedPermissions;
   final Json addedScopeCounts;
@@ -144,9 +149,8 @@ final class UserSave extends UserManagementAnalyticsEvent {
 
   @override
   Json get properties => {
+    ...super.properties,
     ...UserManagementAnalyticsEvent.userPropertiesOf(userId),
-    'is_success': isSuccess,
-    'failure_kind': failureKind,
     'added_permissions': addedPermissions,
     'removed_permissions': removedPermissions,
     ...addedScopeCounts,
@@ -154,10 +158,8 @@ final class UserSave extends UserManagementAnalyticsEvent {
     'person_link_change': personLinkChange.name,
   };
 
-  UserSave(User user, UserDraft draft, {Object? failure})
+  UserSave(User user, UserDraft draft, super.outcome)
     : userId = user.uid,
-      isSuccess = failure == null,
-      failureKind = UserManagementAnalyticsEvent.failureKindOf(failure),
       addedPermissions = [
         for (final permission in draft.permissions.validated().difference(
           user.permissions,

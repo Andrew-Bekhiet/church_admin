@@ -92,20 +92,19 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
       ),
       value: [_range.start, _range.end],
     );
-    final pickedRange = switch (rslt?.nonNulls.toList()) {
-      final picked? when picked.length >= 2 => DateTimeRange(
-        start: picked.min,
-        end: picked.max,
+    final outcome = switch (rslt?.nonNulls.toList()) {
+      final picked? when picked.length >= 2 => CustomRangePicked(
+        DateTimeRange(start: picked.min, end: picked.max),
       ),
-      _ => null,
+      _ => const CustomRangePickCancelled(),
     };
 
     AnalyticsService.I.track(
-      AnalysisCustomRangePick(isReopened: isReopened, pickedRange: pickedRange),
+      AnalysisCustomRangePick(isReopened: isReopened, outcome: outcome),
     );
 
-    if (pickedRange == null) return;
-
-    onChanged(CustomDateTimeRangePreset(range: pickedRange));
+    if (outcome case CustomRangePicked(:final range)) {
+      onChanged(CustomDateTimeRangePreset(range: range));
+    }
   }
 }

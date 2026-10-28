@@ -53,7 +53,7 @@ final class DataCheckOverrideSelect extends DataCheckAnalyticsEvent {
   final DataCheckOverride fromOverride;
   final DataCheckOverride toOverride;
   final bool isAutomaticallyComplete;
-  final DataCheckOverrideError? failure;
+  final AttemptOutcome outcome;
 
   @override
   String get objectAction => 'override_select';
@@ -64,14 +64,13 @@ final class DataCheckOverrideSelect extends DataCheckAnalyticsEvent {
     'from_override': fromOverride.name,
     'to_override': toOverride.name,
     'is_automatically_complete': isAutomaticallyComplete,
-    'is_success': failure == null,
-    'failure_kind': failure?.name ?? 'none',
+    ...outcome.properties,
   };
 
   DataCheckOverrideSelect({
     required DataCheck dataCheck,
     required DataCheckOverride selected,
-    this.failure,
+    required this.outcome,
   }) : familyId = dataCheck.familyId,
        fromOverride = dataCheck.userOverride,
        toOverride = selected,

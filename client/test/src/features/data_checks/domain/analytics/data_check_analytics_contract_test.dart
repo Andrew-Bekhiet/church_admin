@@ -46,6 +46,7 @@ void main() {
         DataCheckOverrideSelect(
           dataCheck: automaticallyComplete,
           selected: DataCheckOverride.markedComplete,
+          outcome: const AttemptSucceeded(),
         ),
         'data_check:override_select',
         {
@@ -72,7 +73,7 @@ void main() {
         DataCheckOverrideSelect(
           dataCheck: automaticallyComplete,
           selected: DataCheckOverride.markedIncomplete,
-          failure: DataCheckOverrideError.notPermitted,
+          outcome: AttemptFailed(DataCheckOverrideError.notPermitted.name),
         ).properties,
         allOf(
           containsPair('is_success', false),

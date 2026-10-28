@@ -64,7 +64,12 @@ abstract class UserFormCubit extends Cubit<UserFormState> {
     final draft = state.draft;
     if (!draft.isValid) {
       const validationError = UserFormValidationError();
-      _analyticsService.track(saveEventOf(draft, failure: validationError));
+      _analyticsService.track(
+        saveEventOf(
+          draft,
+          UserManagementAnalyticsEvent.failedOutcomeOf(validationError),
+        ),
+      );
       emit(UserFormEditing(draft, error: validationError));
 
       return;
@@ -75,10 +80,12 @@ abstract class UserFormCubit extends Cubit<UserFormState> {
     try {
       final uid = await persist(draft);
 
-      _analyticsService.track(saveEventOf(draft));
+      _analyticsService.track(saveEventOf(draft, const AttemptSucceeded()));
       emit(UserFormSaved(draft, uid));
     } catch (e) {
-      _analyticsService.track(saveEventOf(draft, failure: e));
+      _analyticsService.track(
+        saveEventOf(draft, UserManagementAnalyticsEvent.failedOutcomeOf(e)),
+      );
       emit(UserFormEditing(draft, error: e));
     }
   }
@@ -93,5 +100,5 @@ abstract class UserFormCubit extends Cubit<UserFormState> {
   Future<String> persist(UserDraft draft);
 
   @protected
-  AnalyticsEvent saveEventOf(UserDraft draft, {Object? failure});
+  UserSaveAttemptEvent saveEventOf(UserDraft draft, AttemptOutcome outcome);
 }
