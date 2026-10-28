@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   const personId = 'person-1';
@@ -63,16 +62,6 @@ void main() {
             {'layer': 'persons', 'is_enabled': false},
           ),
           (
-            MapsMarkerTap(family),
-            'maps:marker_tap',
-            {'entity_type': 'family', 'family_id': familyId},
-          ),
-          (
-            MapsMarkerTap('not an entity'),
-            'maps:marker_tap',
-            {},
-          ),
-          (
             MapsMarkerDetailsOpen(person),
             'maps:marker_details_open',
             {'entity_type': 'person', 'person_id': personId},
@@ -83,17 +72,6 @@ void main() {
             {'has_user_location': true},
           ),
           (const MapsRefreshTap(), 'maps:refresh_tap', {}),
-          (
-            const MapsLocationPermissionCheck(
-              PermissionStatus.permanentlyDenied,
-              isLocationServiceEnabled: false,
-            ),
-            'maps:location_permission_check',
-            {
-              'permission_status': 'permanentlyDenied',
-              'is_location_service_enabled': false,
-            },
-          ),
           (
             LocationSet(person, LocationSetMethod.current),
             'maps:location_set',

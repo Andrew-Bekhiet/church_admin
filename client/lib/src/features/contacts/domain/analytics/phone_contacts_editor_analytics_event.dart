@@ -41,22 +41,3 @@ final class ContactsPhoneLabelChange extends PhoneContactLabelAnalyticsEvent {
 
   const ContactsPhoneLabelChange(super.label);
 }
-
-final class ContactsMainPhoneToggle extends PhoneContactsEditorAnalyticsEvent {
-  final bool isMain;
-
-  @override
-  String get objectAction => 'main_phone_toggle';
-
-  @override
-  Json get properties => {'is_main': isMain};
-
-  const ContactsMainPhoneToggle({required this.isMain});
-}
-
-final class ContactsPhoneRemove extends PhoneContactLabelAnalyticsEvent {
-  @override
-  String get objectAction => 'phone_remove';
-
-  const ContactsPhoneRemove(super.label);
-}

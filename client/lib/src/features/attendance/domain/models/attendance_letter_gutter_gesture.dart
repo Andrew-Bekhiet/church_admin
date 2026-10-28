@@ -1,1 +1,0 @@
-enum AttendanceLetterGutterGesture { tap, drag }

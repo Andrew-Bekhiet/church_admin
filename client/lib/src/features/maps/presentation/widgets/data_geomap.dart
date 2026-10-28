@@ -240,12 +240,6 @@ class DataGeomapState extends State<DataGeomap> {
     final permissionStatus = await Permission.locationWhenInUse.request();
     final isLocationServiceEnabled =
         await Geolocator.isLocationServiceEnabled();
-    AnalyticsService.I.track(
-      MapsLocationPermissionCheck(
-        permissionStatus,
-        isLocationServiceEnabled: isLocationServiceEnabled,
-      ),
-    );
     if (isLocationServiceEnabled &&
         (permissionStatus == PermissionStatus.granted ||
             permissionStatus == PermissionStatus.limited)) {

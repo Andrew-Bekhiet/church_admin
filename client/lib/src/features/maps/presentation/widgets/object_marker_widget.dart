@@ -62,7 +62,6 @@ class ObjectMarkerWidget extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        AnalyticsService.I.track(MapsMarkerTap(object));
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

@@ -288,14 +288,6 @@ void main() {
             {'meeting_id': standaloneMeetingId, 'person_id': person4Id},
           ),
           (
-            AttendanceLetterGutterUse(
-              standaloneMeeting,
-              AttendanceLetterGutterGesture.drag,
-            ),
-            'attendance:letter_gutter_use',
-            {'meeting_id': standaloneMeetingId, 'gutter_gesture': 'drag'},
-          ),
-          (
             AttendanceAnalysisOpen(
               standaloneMeeting,
               CustomDateTimeRangePreset(

@@ -26,16 +26,6 @@ void main() {
             'contacts:phone_label_change',
             {'label_kind': 'role', 'role_id': fatherId},
           ),
-          (
-            const ContactsMainPhoneToggle(isMain: true),
-            'contacts:main_phone_toggle',
-            {'is_main': true},
-          ),
-          (
-            const ContactsPhoneRemove(work),
-            'contacts:phone_remove',
-            {'label_kind': 'free'},
-          ),
         ]) {
       test('$expectedName sends $expectedProperties', () {
         expect(

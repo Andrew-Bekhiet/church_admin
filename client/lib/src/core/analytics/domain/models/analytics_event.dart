@@ -1,7 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
-import 'package:permission_handler/permission_handler.dart'
-    show PermissionStatus;
 
 part 'package:church_admin/src/features/attendance/domain/analytics/attendance_analytics_event.dart';
 part 'package:church_admin/src/features/attendance/domain/analytics/kodas_analytics_event.dart';

@@ -1,4 +1,3 @@
-export 'models/attendance_letter_gutter_gesture.dart';
 export 'models/attendance_mark_state.dart';
 export 'models/attendance_record.dart';
 export 'models/attendance_roster_settings.dart';

@@ -65,26 +65,15 @@ final class MapsLayerToggle extends MapsAnalyticsEvent {
   const MapsLayerToggle(this.layer, {required this.isEnabled});
 }
 
-sealed class MapsMarkerAnalyticsEvent extends MapsAnalyticsEvent {
+final class MapsMarkerDetailsOpen extends MapsAnalyticsEvent {
   @override
   final Json properties;
 
-  MapsMarkerAnalyticsEvent(Object entity)
-    : properties = AnalyticsEntityType.propertiesOf(entity);
-}
-
-final class MapsMarkerTap extends MapsMarkerAnalyticsEvent {
-  @override
-  String get objectAction => 'marker_tap';
-
-  MapsMarkerTap(super.entity);
-}
-
-final class MapsMarkerDetailsOpen extends MapsMarkerAnalyticsEvent {
   @override
   String get objectAction => 'marker_details_open';
 
-  MapsMarkerDetailsOpen(super.entity);
+  MapsMarkerDetailsOpen(Object entity)
+    : properties = AnalyticsEntityType.propertiesOf(entity);
 }
 
 final class MapsExternalNavigationStart extends MapsAnalyticsEvent {
@@ -104,23 +93,4 @@ final class MapsRefreshTap extends MapsAnalyticsEvent {
   String get objectAction => 'refresh_tap';
 
   const MapsRefreshTap();
-}
-
-final class MapsLocationPermissionCheck extends MapsAnalyticsEvent {
-  final PermissionStatus permissionStatus;
-  final bool isLocationServiceEnabled;
-
-  @override
-  String get objectAction => 'location_permission_check';
-
-  @override
-  Json get properties => {
-    'permission_status': permissionStatus.name,
-    'is_location_service_enabled': isLocationServiceEnabled,
-  };
-
-  const MapsLocationPermissionCheck(
-    this.permissionStatus, {
-    required this.isLocationServiceEnabled,
-  });
 }

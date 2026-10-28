@@ -289,21 +289,6 @@ final class AttendancePersonProfileOpen extends AttendanceAnalyticsEvent {
   AttendancePersonProfileOpen(super.meeting, {required this.personId});
 }
 
-final class AttendanceLetterGutterUse extends AttendanceAnalyticsEvent {
-  final AttendanceLetterGutterGesture gutterGesture;
-
-  @override
-  String get objectAction => 'letter_gutter_use';
-
-  @override
-  Json get properties => {
-    ...super.properties,
-    'gutter_gesture': gutterGesture.name,
-  };
-
-  AttendanceLetterGutterUse(super.meeting, this.gutterGesture);
-}
-
 final class AttendanceAnalysisOpen extends AttendanceAnalyticsEvent {
   final DateTimeRangePreset rangePreset;
 

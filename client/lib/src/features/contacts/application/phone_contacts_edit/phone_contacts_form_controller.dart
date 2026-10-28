@@ -116,7 +116,6 @@ sealed class PhoneContactsFormController extends AdvancedFormController {
       ]);
 
   void remove(PhoneContactFormController contact) {
-    _analyticsService.track(ContactsPhoneRemove(contact.label.fieldValue));
     contacts.setValue(
       contacts.fieldValue.whereNot((other) => other == contact).toList(),
     );
@@ -129,7 +128,6 @@ sealed class PhoneContactsFormController extends AdvancedFormController {
     if (!contact.canBeMain) return;
 
     final becomesMain = !contact.isMainPhone.fieldValue;
-    _analyticsService.track(ContactsMainPhoneToggle(isMain: becomesMain));
     for (final other in contacts.fieldValue) {
       other.isMainPhone.setValue(
         other == contact

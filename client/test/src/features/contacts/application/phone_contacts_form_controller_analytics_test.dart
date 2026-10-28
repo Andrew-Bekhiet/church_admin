@@ -69,30 +69,4 @@ void main() {
 
     expect(analytics.trackedEvents, isEmpty);
   });
-
-  test('making another number the main one is tracked as becoming main', () {
-    form.toggleMain(contactOf(ownWork));
-
-    expect(
-      analytics.trackedEventsOf<ContactsMainPhoneToggle>().single,
-      isA<ContactsMainPhoneToggle>().having(
-        (event) => event.isMain,
-        'isMain',
-        true,
-      ),
-    );
-  });
-
-  test('removing a number is tracked by its label kind', () {
-    form.remove(contactOf(ownWork));
-
-    expect(
-      analytics.trackedEventsOf<ContactsPhoneRemove>().single,
-      isA<ContactsPhoneRemove>().having(
-        (event) => event.label,
-        'label',
-        FreePhoneContactLabel(ownWork.label),
-      ),
-    );
-  });
 }
