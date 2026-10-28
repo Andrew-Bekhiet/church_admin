@@ -154,7 +154,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final navigator = Navigator.of(context);
 
     if (_needsSaving) {
-      AnalyticsService.I.track(const UnsavedChangesPromptShow());
       final confirmExit = await showDialog<bool>(
         context: context,
         builder: (context) => const ConfirmationDialog(

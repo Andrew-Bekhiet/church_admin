@@ -36,15 +36,10 @@ class EditAdminOnDataWidget extends StatelessWidget {
                     (index, userAdminScope) => EditUserAdminScopeWidget(
                       userAdminScope: userAdminScope,
                       onDuplicate: userAdminScope.object is Service
-                          ? () {
-                              AnalyticsService.I.track(
-                                ServiceScopeCopy(userAdminScope),
-                              );
-                              onAdminOnChanged([
-                                ...adminOn,
-                                userAdminScope.toAdminOnData(permissionId: ''),
-                              ]);
-                            }
+                          ? () => onAdminOnChanged([
+                              ...adminOn,
+                              userAdminScope.toAdminOnData(permissionId: ''),
+                            ])
                           : null,
                       onChanged: (newUserAdminScope) => onAdminOnChanged(
                         adminOn
@@ -57,14 +52,9 @@ class EditAdminOnDataWidget extends StatelessWidget {
                             )
                             .toList(),
                       ),
-                      onDelete: () {
-                        AnalyticsService.I.track(
-                          AdminScopeDelete(userAdminScope),
-                        );
-                        onAdminOnChanged(
-                          adminOn.whereIndexed((i, a) => i != index).toList(),
-                        );
-                      },
+                      onDelete: () => onAdminOnChanged(
+                        adminOn.whereIndexed((i, a) => i != index).toList(),
+                      ),
                     ),
                   )
                   .toList(),

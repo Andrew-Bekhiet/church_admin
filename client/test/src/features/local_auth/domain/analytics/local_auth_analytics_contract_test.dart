@@ -5,14 +5,6 @@ void main() {
   group('local auth analytics contract', () {
     final contracts = <(AnalyticsEvent, String, Json)>[
       (
-        const LocalAuthLockShow(
-          canCheckBiometrics: true,
-          isProtectingRoute: false,
-        ),
-        'local_auth:lock_show',
-        {'can_check_biometrics': true, 'is_protecting_route': false},
-      ),
-      (
         const BiometricsUnlockSubmit(
           outcome: UnlockOutcome.notAuthenticated,
           isAutoPrompted: true,

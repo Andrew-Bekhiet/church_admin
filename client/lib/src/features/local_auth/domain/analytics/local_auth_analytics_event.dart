@@ -7,25 +7,6 @@ sealed class LocalAuthAnalyticsEvent extends AnalyticsEvent {
   const LocalAuthAnalyticsEvent();
 }
 
-final class LocalAuthLockShow extends LocalAuthAnalyticsEvent {
-  final bool canCheckBiometrics;
-  final bool isProtectingRoute;
-
-  @override
-  String get objectAction => 'lock_show';
-
-  @override
-  Json get properties => {
-    'can_check_biometrics': canCheckBiometrics,
-    'is_protecting_route': isProtectingRoute,
-  };
-
-  const LocalAuthLockShow({
-    required this.canCheckBiometrics,
-    required this.isProtectingRoute,
-  });
-}
-
 sealed class UnlockSubmit extends LocalAuthAnalyticsEvent {
   final UnlockOutcome outcome;
 

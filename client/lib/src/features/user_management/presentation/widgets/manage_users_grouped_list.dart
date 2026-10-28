@@ -38,11 +38,6 @@ class _ManageUsersGroupedListState extends State<ManageUsersGroupedList> {
   }
 
   void _toggle(UserAdminGroup group) {
-    final isExpanded = !_expandedKeys.contains(group.key);
-    AnalyticsService.I.track(
-      ManageUsersGroupToggle(group, isExpanded: isExpanded),
-    );
-
     setState(() {
       if (_expandedKeys.remove(group.key)) return;
 

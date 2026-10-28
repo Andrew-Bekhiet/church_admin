@@ -28,11 +28,8 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
             'السماح بإضافة وتعديل وحذف المستخدمين في نفس ال$objectLabel',
           ),
           value: userAdminScope.canManageUsers,
-          onChanged: (value) => _toggle(
-            AdminScopePermission.manageUsers,
-            value,
-            userAdminScope.copyWith(canManageUsers: value),
-          ),
+          onChanged: (value) =>
+              onChanged(userAdminScope.copyWith(canManageUsers: value)),
         ),
         CheckboxListTile(
           key: AdminScopePermissionCheckboxesKeys.writeDataCheckbox,
@@ -41,11 +38,8 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
           title: const Text('تعديل البيانات'),
           subtitle: Text('السماح بتعديل جميع البيانات داخل ال$objectLabel'),
           value: userAdminScope.canWriteData,
-          onChanged: (value) => _toggle(
-            AdminScopePermission.writeData,
-            value,
-            userAdminScope.copyWith(canWriteData: value),
-          ),
+          onChanged: (value) =>
+              onChanged(userAdminScope.copyWith(canWriteData: value)),
         ),
         if (userAdminScope.object case Service() || Group())
           CheckboxListTile(
@@ -56,11 +50,8 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
               'السماح بتسجيل الحضور لجميع المخدومين في ال$objectLabel',
             ),
             value: userAdminScope.canRecordAttendance,
-            onChanged: (value) => _toggle(
-              AdminScopePermission.recordAttendance,
-              value,
-              userAdminScope.copyWith(canRecordAttendance: value),
-            ),
+            onChanged: (value) =>
+                onChanged(userAdminScope.copyWith(canRecordAttendance: value)),
           ),
         if (userAdminScope.object case Service() || Group())
           CheckboxListTile(
@@ -71,9 +62,7 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
               'السماح بتسجيل الحضور لجميع الخدام في ال$objectLabel',
             ),
             value: userAdminScope.canRecordServantsAttendance,
-            onChanged: (value) => _toggle(
-              AdminScopePermission.recordServantsAttendance,
-              value,
+            onChanged: (value) => onChanged(
               userAdminScope.copyWith(canRecordServantsAttendance: value),
             ),
           ),
@@ -83,11 +72,8 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
           title: const Text('تصدير البيانات'),
           subtitle: Text('السماح بتصدير جميع البيانات داخل ال$objectLabel'),
           value: userAdminScope.canExportData,
-          onChanged: (value) => _toggle(
-            AdminScopePermission.exportData,
-            value,
-            userAdminScope.copyWith(canExportData: value),
-          ),
+          onChanged: (value) =>
+              onChanged(userAdminScope.copyWith(canExportData: value)),
         ),
         if (userAdminScope.object case Service() || Group())
           CheckboxListTile(
@@ -100,29 +86,12 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
               'السماح برؤية وتعديل جميع أفراد عائلات المخدومين في ال$objectLabel',
             ),
             value: userAdminScope.canWriteRelatedFamilies,
-            onChanged: (value) => _toggle(
-              AdminScopePermission.writeRelatedFamilies,
-              value,
+            onChanged: (value) => onChanged(
               userAdminScope.copyWith(canWriteRelatedFamilies: value),
             ),
           ),
       ],
     );
-  }
-
-  void _toggle(
-    AdminScopePermission permission,
-    bool? value,
-    UserAdminScope changedScope,
-  ) {
-    AnalyticsService.I.track(
-      AdminScopePermissionToggle(
-        userAdminScope,
-        permission,
-        isEnabled: value ?? false,
-      ),
-    );
-    onChanged(changedScope);
   }
 }
 

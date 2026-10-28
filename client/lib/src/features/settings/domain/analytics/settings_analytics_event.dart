@@ -26,13 +26,6 @@ final class ThemeApply extends SettingsAnalyticsEvent {
   });
 }
 
-final class UnsavedChangesPromptShow extends SettingsAnalyticsEvent {
-  @override
-  String get objectAction => 'unsaved_changes_prompt_show';
-
-  const UnsavedChangesPromptShow();
-}
-
 final class UnsavedChangesPromptAnswer extends SettingsAnalyticsEvent {
   final bool isDiscarded;
 

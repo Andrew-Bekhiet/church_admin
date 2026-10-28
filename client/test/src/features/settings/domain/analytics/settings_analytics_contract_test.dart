@@ -10,11 +10,6 @@ void main() {
         {'theme_choice': 'dark', 'is_great_feast_theme': true},
       ),
       (
-        UnsavedChangesPromptShow(),
-        'settings:unsaved_changes_prompt_show',
-        {},
-      ),
-      (
         UnsavedChangesPromptAnswer(isDiscarded: true),
         'settings:unsaved_changes_prompt_answer',
         {'is_discarded': true},

@@ -39,11 +39,8 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     try {
       canCheckBiometrics = await _localAuthService.canCheckBiometrics();
     } on Exception {
-      _trackLockShow(canCheckBiometrics: false);
-
       return;
     }
-    _trackLockShow(canCheckBiometrics: canCheckBiometrics);
     if (isClosed) return;
 
     emit(
@@ -146,14 +143,6 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
 
     _emitReady();
   }
-
-  void _trackLockShow({required bool canCheckBiometrics}) =>
-      _analyticsService.track(
-        LocalAuthLockShow(
-          canCheckBiometrics: canCheckBiometrics,
-          isProtectingRoute: next != null,
-        ),
-      );
 
   void _trackBiometricsUnlock(UnlockOutcome outcome, bool isAutoPrompted) =>
       _analyticsService.track(

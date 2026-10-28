@@ -68,26 +68,6 @@ void main() {
         {'selected_view': 'flat'},
       ),
       (
-        ManageUsersGroupToggle(
-          UserAdminGroup(
-            kind: UserAdminGroupKind.service,
-            scope: service,
-            subgroups: [
-              UserAdminSubgroup(users: [savedUser, unlinkedUser]),
-            ],
-          ),
-          isExpanded: true,
-        ),
-        'user_management:group_toggle',
-        {
-          'group_kind': 'service',
-          'is_expanded': true,
-          'user_count': 2,
-          'entity_type': 'service',
-          'service_id': service.id,
-        },
-      ),
-      (
         const UserCreateTap(),
         'user_management:user_create_tap',
         {},

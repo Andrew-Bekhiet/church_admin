@@ -81,29 +81,6 @@ final class ManageUsersViewSwitch extends UserManagementAnalyticsEvent {
   const ManageUsersViewSwitch(this.view);
 }
 
-final class ManageUsersGroupToggle extends UserManagementAnalyticsEvent {
-  final UserAdminGroupKind groupKind;
-  final bool isExpanded;
-  final int userCount;
-  final Json scopeProperties;
-
-  @override
-  String get objectAction => 'group_toggle';
-
-  @override
-  Json get properties => {
-    'group_kind': groupKind.name,
-    'is_expanded': isExpanded,
-    'user_count': userCount,
-    ...scopeProperties,
-  };
-
-  ManageUsersGroupToggle(UserAdminGroup group, {required this.isExpanded})
-    : groupKind = group.kind,
-      userCount = group.userCount,
-      scopeProperties = AnalyticsEntityType.propertiesOf(group.scope);
-}
-
 final class UserCreateTap extends UserManagementAnalyticsEvent {
   @override
   String get objectAction => 'user_create_tap';
