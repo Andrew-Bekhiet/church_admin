@@ -18,7 +18,6 @@ class DiscardChangesDialog extends StatelessWidget {
     }
 
     final entity = editedEntity();
-    AnalyticsService.I.track(DiscardPromptShow(entity));
     final discard = await showDialog<bool>(
       context: context,
       builder: (context) => const DiscardChangesDialog(),

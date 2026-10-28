@@ -32,13 +32,6 @@ final class FirstInvalidFieldFocus extends FormEntityAnalyticsEvent {
   FirstInvalidFieldFocus(super.entity, {required this.invalidFieldCount});
 }
 
-final class DiscardPromptShow extends FormEntityAnalyticsEvent {
-  @override
-  String get objectAction => 'discard_prompt_show';
-
-  DiscardPromptShow(super.entity);
-}
-
 final class DiscardPromptAnswer extends FormEntityAnalyticsEvent {
   final bool isDiscarded;
 

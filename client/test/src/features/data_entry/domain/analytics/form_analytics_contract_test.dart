@@ -18,11 +18,6 @@ void main() {
       },
     ),
     (
-      event: DiscardPromptShow(service),
-      name: 'form:discard_prompt_show',
-      properties: {'entity_type': 'service', 'service_id': service.id},
-    ),
-    (
       event: DiscardPromptAnswer(person, isDiscarded: true),
       name: 'form:discard_prompt_answer',
       properties: {
