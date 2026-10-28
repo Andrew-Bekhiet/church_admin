@@ -9,15 +9,9 @@ import '../../../fakes/recording_analytics_provider.dart';
 final class AdvancedSearchAnalyticsFixture {
   final analytics = RecordingAnalyticsProvider();
 
-  Iterable<String> get trackedNames =>
-      analytics.trackedEvents.map((event) => event.name);
-
   AdvancedSearchController createController() => AdvancedSearchController(
     analyticsService: AnalyticsService([analytics], FakeLoggingService()),
   );
-
-  Json trackedPropertiesOf<T extends AnalyticsEvent>() =>
-      analytics.trackedEvents.whereType<T>().single.properties;
 
   void typeUntilSettled(
     void Function(AdvancedSearchController controller, FakeAsync time) typing,

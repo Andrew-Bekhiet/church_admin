@@ -29,8 +29,12 @@ void main() {
         AdvancedSearchFilterEdit.eventForSingleEdit(
           [birthday],
           [birthday.copyWith(value: '05-%')],
-        )?.properties,
-        containsPair('is_any_day', true),
+        ),
+        isA<AdvancedSearchFilterValueSet>().having(
+          (event) => event.isAnyDay,
+          'isAnyDay',
+          isTrue,
+        ),
       );
     });
 
