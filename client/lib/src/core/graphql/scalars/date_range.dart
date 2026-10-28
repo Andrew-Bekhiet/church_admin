@@ -14,10 +14,10 @@ DateTimeRange? dateRangeFromString(dynamic data) {
   );
 
   if (stringData.first.startsWith('(')) {
-    start = start.add(const Duration(days: 1));
+    start = DateTime(start.year, start.month, start.day + 1);
   }
   if (stringData[1].endsWith(')')) {
-    end = end.subtract(const Duration(days: 1));
+    end = DateTime(end.year, end.month, end.day - 1);
   }
 
   return DateTimeRange(start: start, end: end);
