@@ -10,6 +10,7 @@ void main() {
   group('RecordKodasCubit analytics', () {
     final sunday = DateTime(2026, 9, 27);
     final liturgy = RecordKodasFixture.meeting(id: 'liturgy');
+    final liturgyProperties = {'meeting_id': liturgy.id};
     final mina = Person(id: 'mina', name: 'Mina');
 
     late RecordKodasFixture f;
@@ -30,12 +31,17 @@ void main() {
         await f.settle();
         await cubit.toggleKodas(mina);
       },
-      verify: (_) => expect(f.trackedPropertiesOf<KodasPersonMark>(), {
-        'meeting_id': liturgy.id,
-        'person_id': mina.id,
-        'is_recorded': true,
-        'is_success': true,
-      }),
+      verify: (_) => expect(f.analytics.trackedEventsOf<KodasPersonMark>(), [
+        isA<KodasPersonMark>()
+            .having(
+              (event) => event.meetingProperties,
+              'meetingProperties',
+              liturgyProperties,
+            )
+            .having((event) => event.personId, 'personId', mina.id)
+            .having((event) => event.isRecorded, 'isRecorded', isTrue)
+            .having((event) => event.isSuccess, 'isSuccess', isTrue),
+      ]),
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
@@ -47,10 +53,13 @@ void main() {
         await f.settle();
         await cubit.toggleKodas(mina);
       },
-      verify: (_) => expect(
-        f.trackedPropertiesOf<KodasPersonMark>()['is_success'],
-        isFalse,
-      ),
+      verify: (_) => expect(f.analytics.trackedEventsOf<KodasPersonMark>(), [
+        isA<KodasPersonMark>().having(
+          (event) => event.isSuccess,
+          'isSuccess',
+          isFalse,
+        ),
+      ]),
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
@@ -62,11 +71,20 @@ void main() {
         await cubit.toggleKodas(mina);
         f.presenter.undoLast();
       },
-      verify: (_) => expect(f.trackedPropertiesOf<KodasUndo>(), {
-        'meeting_id': liturgy.id,
-        'person_id': mina.id,
-        'undone_change': AttendanceUndoableChange.kodasRecorded.name,
-      }),
+      verify: (_) => expect(f.analytics.trackedEventsOf<KodasUndo>(), [
+        isA<KodasUndo>()
+            .having(
+              (event) => event.meetingProperties,
+              'meetingProperties',
+              liturgyProperties,
+            )
+            .having((event) => event.personId, 'personId', mina.id)
+            .having(
+              (event) => event.undoneChange,
+              'undoneChange',
+              AttendanceUndoableChange.kodasRecorded,
+            ),
+      ]),
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
@@ -76,11 +94,16 @@ void main() {
         cubit.follow(meeting: liturgy, day: sunday);
         await cubit.changeVisibility(visible: false);
       },
-      verify: (_) => expect(f.trackedPropertiesOf<KodasColumnToggle>(), {
-        'meeting_id': liturgy.id,
-        'is_visible': false,
-        'is_success': true,
-      }),
+      verify: (_) => expect(f.analytics.trackedEventsOf<KodasColumnToggle>(), [
+        isA<KodasColumnToggle>()
+            .having(
+              (event) => event.meetingProperties,
+              'meetingProperties',
+              liturgyProperties,
+            )
+            .having((event) => event.isVisible, 'isVisible', isFalse)
+            .having((event) => event.isSuccess, 'isSuccess', isTrue),
+      ]),
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
@@ -91,10 +114,13 @@ void main() {
         cubit.follow(meeting: liturgy, day: sunday);
         await cubit.changeVisibility(visible: false);
       },
-      verify: (_) => expect(
-        f.trackedPropertiesOf<KodasColumnToggle>()['is_success'],
-        isFalse,
-      ),
+      verify: (_) => expect(f.analytics.trackedEventsOf<KodasColumnToggle>(), [
+        isA<KodasColumnToggle>().having(
+          (event) => event.isSuccess,
+          'isSuccess',
+          isFalse,
+        ),
+      ]),
     );
   });
 }

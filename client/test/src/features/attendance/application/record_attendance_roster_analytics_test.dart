@@ -8,7 +8,14 @@ import '../support/record_attendance_fixture.dart';
 
 void main() {
   group('RecordAttendanceCubit roster analytics', () {
-    final otherMeeting = RecordAttendanceFixture.makeMeeting(id: 'meeting-2');
+    const phoneQuery = '0100';
+    const nameSortType = 'name';
+    const attendanceTimeSortType = 'attendanceTime';
+    const nameQuery = 'mina';
+    final otherMeeting = RecordAttendanceFixture.makeMeeting(
+      id: RecordAttendanceFixture.otherMeetingId,
+    );
+    const personId = 'p1';
     late RecordAttendanceFixture f;
 
     setUpAll(() {
@@ -21,42 +28,60 @@ void main() {
       );
     });
 
+    RecordAttendanceCubit buildSearchCubit() =>
+        f.fakeTime.run((_) => f.createCubit());
+
     setUp(() {
       f = RecordAttendanceFixture()
-        ..rosterPersons = [RecordAttendanceFixture.rosterPerson('p1')];
+        ..rosterPersons = [RecordAttendanceFixture.rosterPerson(personId)];
       addTearDown(f.dispose);
     });
     tearDown(defaultTearDown);
 
     blocTest<RecordAttendanceCubit, RecordAttendanceState>(
       'a settled roster search is tracked by its length and phone shape',
-      build: () => f.fakeTime.run((_) => f.createCubit()),
-      act: (cubit) => f.typeSearchUntilSettled(cubit, ['0100']),
-      verify: (_) => expect(f.trackedPropertiesOf<AttendanceSearchRun>(), {
-        'meeting_id': f.meeting.id,
-        'service_id': f.meeting.serviceId,
-        'query_length': '0100'.length,
-        'is_phone_query': true,
-        'result_count': 0,
-      }),
+      build: buildSearchCubit,
+      act: (cubit) => f.typeSearchUntilSettled(cubit, [phoneQuery]),
+      verify: (_) =>
+          expect(f.analytics.trackedEventsOf<AttendanceSearchRun>(), [
+            isA<AttendanceSearchRun>()
+                .having(
+                  (event) => event.meetingProperties,
+                  'meetingProperties',
+                  f.meetingProperties,
+                )
+                .having(
+                  (event) => event.queryLength,
+                  'queryLength',
+                  phoneQuery.length,
+                )
+                .having((event) => event.isPhoneQuery, 'isPhoneQuery', isTrue)
+                .having((event) => event.resultCount, 'resultCount', 0),
+          ]),
     );
 
     blocTest<RecordAttendanceCubit, RecordAttendanceState>(
       'a roster search by name is not tracked as a phone search',
-      build: () => f.fakeTime.run((_) => f.createCubit()),
-      act: (cubit) => f.typeSearchUntilSettled(cubit, ['mina']),
+      build: buildSearchCubit,
+      act: (cubit) => f.typeSearchUntilSettled(cubit, [nameQuery]),
       verify: (_) => expect(
-        f.trackedPropertiesOf<AttendanceSearchRun>()['is_phone_query'],
-        isFalse,
+        f.analytics.trackedEventsOf<AttendanceSearchRun>(),
+        [
+          isA<AttendanceSearchRun>().having(
+            (event) => event.isPhoneQuery,
+            'isPhoneQuery',
+            isFalse,
+          ),
+        ],
       ),
     );
 
     blocTest<RecordAttendanceCubit, RecordAttendanceState>(
       'a roster search is not tracked while it is still being typed',
-      build: () => f.fakeTime.run((_) => f.createCubit()),
+      build: buildSearchCubit,
       act: (cubit) => f.typeSearchUntilSettled(cubit, ['m', 'mi']),
       verify: (_) => expect(
-        f.trackedNames.where((name) => name == 'attendance:search_run'),
+        f.analytics.trackedEventsOf<AttendanceSearchRun>(),
         hasLength(1),
       ),
     );
@@ -68,12 +93,21 @@ void main() {
         await RecordAttendanceFixture.readyRoster(cubit);
         cubit.changeSorting(AttendanceSorting.byName().withReversedDirection());
       },
-      verify: (_) => expect(f.trackedPropertiesOf<AttendanceSortReverse>(), {
-        'meeting_id': f.meeting.id,
-        'service_id': f.meeting.serviceId,
-        'sort_type': 'name',
-        'sort_direction': SortingDirection.descending.name,
-      }),
+      verify: (_) =>
+          expect(f.analytics.trackedEventsOf<AttendanceSortReverse>(), [
+            isA<AttendanceSortReverse>()
+                .having(
+                  (event) => event.meetingProperties,
+                  'meetingProperties',
+                  f.meetingProperties,
+                )
+                .having((event) => event.sortType, 'sortType', nameSortType)
+                .having(
+                  (event) => event.sortDirection,
+                  'sortDirection',
+                  SortingDirection.descending,
+                ),
+          ]),
     );
 
     blocTest<RecordAttendanceCubit, RecordAttendanceState>(
@@ -84,8 +118,14 @@ void main() {
         cubit.changeSorting(AttendanceSorting.byAttendanceTime());
       },
       verify: (_) => expect(
-        f.trackedPropertiesOf<AttendanceSortChange>()['sort_type'],
-        'attendanceTime',
+        f.analytics.trackedEventsOf<AttendanceSortChange>(),
+        [
+          isA<AttendanceSortChange>().having(
+            (event) => event.sortType,
+            'sortType',
+            attendanceTimeSortType,
+          ),
+        ],
       ),
     );
 
@@ -99,9 +139,9 @@ void main() {
           ..togglePresenceFilter(AttendancePresenceFilter.absent);
       },
       verify: (_) => expect(
-        f.analytics.trackedEvents
-            .whereType<AttendancePresenceFilterChange>()
-            .map((event) => event.properties['is_reset']),
+        f.analytics.trackedEventsOf<AttendancePresenceFilterChange>().map(
+          (event) => event.isReset,
+        ),
         [false, true],
       ),
     );
@@ -124,7 +164,13 @@ void main() {
         cubit.switchMeeting(otherMeeting);
         await RecordAttendanceFixture.readyRoster(cubit);
       },
-      verify: (_) => expect(f.trackedNames, ['attendance:meeting_switch']),
+      verify: (_) => expect(f.analytics.trackedEvents, [
+        isA<AttendanceMeetingSwitch>().having(
+          (event) => event.fromMeetingId,
+          'fromMeetingId',
+          f.meeting.id,
+        ),
+      ]),
     );
 
     blocTest<RecordAttendanceCubit, RecordAttendanceState>(
@@ -135,8 +181,14 @@ void main() {
         cubit.changeGrouping(AttendanceGrouping.none);
       },
       verify: (_) => expect(
-        f.trackedPropertiesOf<AttendanceGroupingToggle>()['grouping'],
-        AttendanceGrouping.none.name,
+        f.analytics.trackedEventsOf<AttendanceGroupingToggle>(),
+        [
+          isA<AttendanceGroupingToggle>().having(
+            (event) => event.grouping,
+            'grouping',
+            AttendanceGrouping.none,
+          ),
+        ],
       ),
     );
   });

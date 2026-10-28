@@ -12,9 +12,13 @@ import '../support/record_attendance_fixture.dart';
 
 void main() {
   group('RecordAttendanceCubit mark analytics', () {
-    final recorded = RecordAttendanceFixture.makeRecord('p1');
+    const personId = 'p1';
+    final recorded = RecordAttendanceFixture.makeRecord(personId);
+    const nameSortType = 'name';
     final now = recorded.datetime.add(const Duration(hours: 2));
-    final otherMeeting = RecordAttendanceFixture.makeMeeting(id: 'meeting-2');
+    final otherMeeting = RecordAttendanceFixture.makeMeeting(
+      id: RecordAttendanceFixture.otherMeetingId,
+    );
     late RecordAttendanceFixture f;
     late Completer<AttendanceRecord> serverWrite;
 
@@ -30,7 +34,7 @@ void main() {
 
     setUp(() {
       f = RecordAttendanceFixture()
-        ..rosterPersons = [RecordAttendanceFixture.rosterPerson('p1')]
+        ..rosterPersons = [RecordAttendanceFixture.rosterPerson(personId)]
         ..markAttendanceRecord = recorded
         ..unmarkAttendanceRecord = recorded;
       serverWrite = Completer();
@@ -54,20 +58,58 @@ void main() {
           () => cubit.toggleAttendance(ready.entries.single),
         );
       },
-      verify: (_) => expect(f.trackedPropertiesOf<AttendancePersonMark>(), {
-        'meeting_id': f.meeting.id,
-        'service_id': f.meeting.serviceId,
-        'is_as_servant': false,
-        'is_today': true,
-        'sort_type': 'name',
-        'sort_direction': SortingDirection.ascending.name,
-        'presence_filter': AttendancePresenceFilter.all.name,
-        'is_search_active': false,
-        'grouping': AttendanceGrouping.studyYear.name,
-        'person_id': 'p1',
-        'new_state': AttendanceMarkState.present.name,
-        'is_success': true,
-      }),
+      verify: (_) =>
+          expect(f.analytics.trackedEventsOf<AttendancePersonMark>(), [
+            isA<AttendancePersonMark>()
+                .having(
+                  (event) => event.meetingProperties,
+                  'meetingProperties',
+                  f.meetingProperties,
+                )
+                .having((event) => event.personId, 'personId', personId)
+                .having(
+                  (event) => event.newState,
+                  'newState',
+                  AttendanceMarkState.present,
+                )
+                .having((event) => event.isSuccess, 'isSuccess', isTrue)
+                .having(
+                  (event) => event.rosterSettings,
+                  'rosterSettings',
+                  isA<AttendanceRosterSettings>()
+                      .having(
+                        (settings) => settings.isAsServant,
+                        'isAsServant',
+                        isFalse,
+                      )
+                      .having((settings) => settings.isToday, 'isToday', isTrue)
+                      .having(
+                        (settings) => settings.sortType,
+                        'sortType',
+                        nameSortType,
+                      )
+                      .having(
+                        (settings) => settings.sortDirection,
+                        'sortDirection',
+                        SortingDirection.ascending,
+                      )
+                      .having(
+                        (settings) => settings.presenceFilter,
+                        'presenceFilter',
+                        AttendancePresenceFilter.all,
+                      )
+                      .having(
+                        (settings) => settings.isSearchActive,
+                        'isSearchActive',
+                        isFalse,
+                      )
+                      .having(
+                        (settings) => settings.grouping,
+                        'grouping',
+                        AttendanceGrouping.studyYear,
+                      ),
+                ),
+          ]),
     );
 
     blocTest<RecordAttendanceCubit, RecordAttendanceState>(
@@ -89,8 +131,14 @@ void main() {
         await marking;
       },
       verify: (_) => expect(
-        f.trackedPropertiesOf<AttendancePersonMark>()['sort_type'],
-        'name',
+        f.analytics.trackedEventsOf<AttendancePersonMark>(),
+        [
+          isA<AttendancePersonMark>().having(
+            (event) => event.rosterSettings.sortType,
+            'sortType',
+            nameSortType,
+          ),
+        ],
       ),
     );
 
@@ -109,8 +157,14 @@ void main() {
         (await RecordAttendanceFixture.readyRoster(cubit)).entries.single,
       ),
       verify: (_) => expect(
-        f.trackedPropertiesOf<AttendancePersonMark>()['is_success'],
-        isFalse,
+        f.analytics.trackedEventsOf<AttendancePersonMark>(),
+        [
+          isA<AttendancePersonMark>().having(
+            (event) => event.isSuccess,
+            'isSuccess',
+            isFalse,
+          ),
+        ],
       ),
     );
 
@@ -122,12 +176,20 @@ void main() {
         await cubit.toggleAttendance(ready.entries.single);
         f.presenter.undoLast();
       },
-      verify: (_) => expect(f.trackedPropertiesOf<AttendanceUndo>(), {
-        'meeting_id': f.meeting.id,
-        'service_id': f.meeting.serviceId,
-        'person_id': 'p1',
-        'undone_change': AttendanceUndoableChange.markedPresent.name,
-      }),
+      verify: (_) => expect(f.analytics.trackedEventsOf<AttendanceUndo>(), [
+        isA<AttendanceUndo>()
+            .having(
+              (event) => event.meetingProperties,
+              'meetingProperties',
+              f.meetingProperties,
+            )
+            .having((event) => event.personId, 'personId', personId)
+            .having(
+              (event) => event.undoneChange,
+              'undoneChange',
+              AttendanceUndoableChange.markedPresent,
+            ),
+      ]),
     );
 
     blocTest<RecordAttendanceCubit, RecordAttendanceState>(
@@ -145,14 +207,25 @@ void main() {
           ),
         );
       },
-      verify: (_) => expect(f.trackedPropertiesOf<AttendanceTimeEdit>(), {
-        'meeting_id': f.meeting.id,
-        'service_id': f.meeting.serviceId,
-        'person_id': 'p1',
-        'shift_duration_ms': const Duration(hours: 2).inMilliseconds,
-        'is_rejected_future': false,
-        'is_success': true,
-      }),
+      verify: (_) => expect(f.analytics.trackedEventsOf<AttendanceTimeEdit>(), [
+        isA<AttendanceTimeEdit>()
+            .having(
+              (event) => event.meetingProperties,
+              'meetingProperties',
+              f.meetingProperties,
+            )
+            .having((event) => event.personId, 'personId', personId)
+            .having(
+              (event) => event.shiftDurationMs,
+              'shiftDurationMs',
+              const Duration(hours: 2).inMilliseconds,
+            )
+            .having(
+              (event) => event.outcome,
+              'outcome',
+              AttendanceTimeEditOutcome.saved,
+            ),
+      ]),
     );
 
     blocTest<RecordAttendanceCubit, RecordAttendanceState>(
@@ -170,8 +243,14 @@ void main() {
         );
       },
       verify: (_) => expect(
-        f.trackedPropertiesOf<AttendanceTimeEdit>(),
-        containsPair('is_rejected_future', true),
+        f.analytics.trackedEventsOf<AttendanceTimeEdit>(),
+        [
+          isA<AttendanceTimeEdit>().having(
+            (event) => event.outcome,
+            'outcome',
+            AttendanceTimeEditOutcome.rejectedAsFuture,
+          ),
+        ],
       ),
     );
 
@@ -193,8 +272,14 @@ void main() {
         await editing;
       },
       verify: (_) => expect(
-        f.trackedPropertiesOf<AttendanceTimeEdit>()['meeting_id'],
-        f.meeting.id,
+        f.analytics.trackedEventsOf<AttendanceTimeEdit>(),
+        [
+          isA<AttendanceTimeEdit>().having(
+            (event) => event.meetingProperties,
+            'meetingProperties',
+            f.meetingProperties,
+          ),
+        ],
       ),
     );
   });

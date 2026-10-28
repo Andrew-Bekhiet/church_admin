@@ -11,6 +11,10 @@ import '../../../fakes/fake_logging_service.dart';
 import '../../../fakes/recording_analytics_provider.dart';
 
 final class RecordAttendanceFixture {
+  static const String meetingId = 'meeting-1';
+  static const String otherMeetingId = 'meeting-2';
+  static const String serviceId = 'service-1';
+
   static Future<RecordAttendanceLoaded> readyRoster(
     RecordAttendanceCubit cubit,
   ) => cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
@@ -134,11 +138,10 @@ final class RecordAttendanceFixture {
     time.elapse(RecordAttendanceCubit.searchDebounce);
   });
 
-  Iterable<String> get trackedNames =>
-      analytics.trackedEvents.map((event) => event.name);
-
-  Json trackedPropertiesOf<T extends AnalyticsEvent>() =>
-      analytics.trackedEvents.whereType<T>().single.properties;
+  Json get meetingProperties => {
+    'meeting_id': meeting.id,
+    'service_id': meeting.serviceId,
+  };
 
   Future<void> dispose() => Future.wait([
     attendanceController.close(),
@@ -147,14 +150,14 @@ final class RecordAttendanceFixture {
   ]);
 
   static Meeting makeMeeting({
-    String id = 'meeting-1',
+    String id = meetingId,
     MeetingAudience audience = MeetingAudience.onlyPersons,
   }) => Meeting(
     id: id,
     name: 'Test Meeting',
     audience: audience,
     isArchived: false,
-    serviceId: 'service-1',
+    serviceId: serviceId,
   );
 
   static MeetingRosterEntry rosterPerson(String personId) => MeetingRosterEntry(
@@ -178,7 +181,7 @@ final class RecordAttendanceFixture {
   static AttendanceRecord makeRecord(String personId, {String id = 'att-1'}) =>
       AttendanceRecord(
         id: id,
-        meetingId: 'meeting-1',
+        meetingId: meetingId,
         personId: personId,
         datetime: DateTime(2026, 7, 2, 10),
         asServant: false,

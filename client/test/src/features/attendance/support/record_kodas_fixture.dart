@@ -79,9 +79,6 @@ final class RecordKodasFixture {
 
   Future<void> settle() => pumpEventQueue();
 
-  Json trackedPropertiesOf<T extends AnalyticsEvent>() =>
-      analytics.trackedEvents.whereType<T>().single.properties;
-
   Future<void> dispose() => server.close();
 }
 
