@@ -1,5 +1,4 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class HomeAnalyticsEvent extends AnalyticsEvent {
   @override

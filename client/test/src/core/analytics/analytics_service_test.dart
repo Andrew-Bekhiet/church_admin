@@ -4,28 +4,14 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../fakes/fake_logging_service.dart';
 import '../../fakes/recording_analytics_provider.dart';
 
-class SampleEvent extends AnalyticsEvent {
-  @override
-  String get category => 'sample';
-
-  @override
-  String get objectAction => 'thing_do';
-
-  const SampleEvent();
-}
-
 void main() {
   group('AnalyticsService', () {
-    test('an event is named by its category and object action', () {
-      expect(const SampleEvent().name, 'sample:thing_do');
-    });
-
     test('a tracked event reaches every provider', () {
       final first = RecordingAnalyticsProvider();
       final second = RecordingAnalyticsProvider();
       final service = AnalyticsService([first, second], FakeLoggingService());
 
-      const event = SampleEvent();
+      const event = SignInSubmit();
       service.track(event);
 
       expect(first.trackedEvents, [event]);
@@ -40,7 +26,7 @@ void main() {
         FakeLoggingService(),
       );
 
-      const event = SampleEvent();
+      const event = SignInSubmit();
       service.track(event);
       await pumpEventQueue();
 

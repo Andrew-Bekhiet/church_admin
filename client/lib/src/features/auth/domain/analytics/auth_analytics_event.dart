@@ -1,4 +1,6 @@
-import 'package:church_admin/church_admin.dart';
+// false positives
+// ignore_for_file: solid_lints/avoid_duplicate_code
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class AuthAnalyticsEvent extends AnalyticsEvent {
   static String failureKindOf(Object error) => switch (error) {
