@@ -27,7 +27,6 @@ part 'package:church_admin/src/features/maps/domain/analytics/location_analytics
 part 'package:church_admin/src/features/maps/domain/analytics/maps_analytics_event.dart';
 part 'package:church_admin/src/features/notifications/domain/analytics/notification_analytics_event.dart';
 part 'package:church_admin/src/features/settings/domain/analytics/settings_analytics_event.dart';
-part 'package:church_admin/src/features/update_user_data/domain/analytics/update_user_data_analytics_event.dart';
 part 'package:church_admin/src/features/updates/domain/analytics/update_analytics_event.dart';
 part 'package:church_admin/src/features/user_management/domain/analytics/user_form_analytics_event.dart';
 part 'package:church_admin/src/features/user_management/domain/analytics/user_management_analytics_event.dart';
