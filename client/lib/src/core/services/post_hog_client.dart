@@ -30,16 +30,33 @@ class PostHogClient {
       return;
     }
 
+    final previousUserId = _identifiedUserId;
+    final wasAnonymous = _isAnonymous;
     _identifiedUserId = userId;
     _isAnonymous = false;
-    await sdk.identify(userId: userId, userProperties: properties);
+
+    try {
+      await sdk.identify(userId: userId, userProperties: properties);
+    } catch (_) {
+      _identifiedUserId = previousUserId;
+      _isAnonymous = wasAnonymous;
+      rethrow;
+    }
   }
 
   Future<void> resetUnlessAnonymous() async {
     if (_isAnonymous) return;
 
+    final previousUserId = _identifiedUserId;
     _identifiedUserId = null;
     _isAnonymous = true;
-    await sdk.reset();
+
+    try {
+      await sdk.reset();
+    } catch (_) {
+      _identifiedUserId = previousUserId;
+      _isAnonymous = false;
+      rethrow;
+    }
   }
 }

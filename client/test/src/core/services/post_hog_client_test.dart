@@ -98,5 +98,39 @@ void main() {
 
       expect(sdk.identifiedUserIds, [firstUserId, firstUserId]);
     });
+
+    test('a failed identify is retried as a full identify', () async {
+      sdk.identifyFailure = StateError('identify failed');
+
+      await expectLater(
+        client.identifyOrUpdateProperties(userId: firstUserId, properties: {}),
+        throwsA(sdk.identifyFailure),
+      );
+      sdk.identifyFailure = null;
+      await client.identifyOrUpdateProperties(
+        userId: firstUserId,
+        properties: {},
+      );
+
+      expect(sdk.identifiedUserIds, [firstUserId]);
+      expect(sdk.personPropertyUpdates, isEmpty);
+    });
+
+    test('a failed reset is retried by the next sign-out', () async {
+      await client.identifyOrUpdateProperties(
+        userId: firstUserId,
+        properties: {},
+      );
+      sdk.resetFailure = StateError('reset failed');
+
+      await expectLater(
+        client.resetUnlessAnonymous(),
+        throwsA(sdk.resetFailure),
+      );
+      sdk.resetFailure = null;
+      await client.resetUnlessAnonymous();
+
+      expect(sdk.resetCount, 1);
+    });
   });
 }

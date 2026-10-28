@@ -7,6 +7,8 @@ class RecordingPosthog extends Fake implements Posthog {
   final List<Map<String, Object>?> personPropertyUpdates = [];
   int resetCount = 0;
   Object? setupFailure;
+  Object? identifyFailure;
+  Object? resetFailure;
 
   @override
   Future<void> setup(PostHogConfig config) async {
@@ -19,7 +21,10 @@ class RecordingPosthog extends Fake implements Posthog {
     required String userId,
     Map<String, Object>? userProperties,
     Map<String, Object>? userPropertiesSetOnce,
-  }) async => identifiedUserIds.add(userId);
+  }) async {
+    if (identifyFailure case final failure?) throw failure;
+    identifiedUserIds.add(userId);
+  }
 
   @override
   Future<void> setPersonProperties({
@@ -28,5 +33,8 @@ class RecordingPosthog extends Fake implements Posthog {
   }) async => personPropertyUpdates.add(userPropertiesToSet);
 
   @override
-  Future<void> reset() async => resetCount++;
+  Future<void> reset() async {
+    if (resetFailure case final failure?) throw failure;
+    resetCount++;
+  }
 }
