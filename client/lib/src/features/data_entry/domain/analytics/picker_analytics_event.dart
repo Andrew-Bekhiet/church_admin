@@ -18,15 +18,3 @@ final class PickerCustomItemCreate extends PickerAnalyticsEvent {
 
   const PickerCustomItemCreate(this.pickerObjectType);
 }
-
-final class PickerValueClear extends PickerAnalyticsEvent {
-  final PickerFieldKind fieldKind;
-
-  @override
-  String get objectAction => 'value_clear';
-
-  @override
-  Json get properties => {'field_kind': fieldKind.name};
-
-  const PickerValueClear(this.fieldKind);
-}

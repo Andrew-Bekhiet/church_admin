@@ -23,13 +23,6 @@ final class PhotoPickAttempt extends PhotoAnalyticsEvent {
   const PhotoPickAttempt(this.imageSource, this.outcome);
 }
 
-final class PhotoDeleteChoose extends PhotoAnalyticsEvent {
-  @override
-  String get objectAction => 'delete_choose';
-
-  const PhotoDeleteChoose();
-}
-
 final class PhotoFullscreenOpen extends PhotoAnalyticsEvent {
   final Json entityProperties;
 

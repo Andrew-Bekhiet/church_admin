@@ -126,7 +126,6 @@ class ImagePickerService {
 
                       if (rslt != true) return;
 
-                      _analyticsService.track(const PhotoDeleteChoose());
                       navigator.pop(deleteImage);
                     },
                     color: primary,

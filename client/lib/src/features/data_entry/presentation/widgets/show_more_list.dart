@@ -24,7 +24,6 @@ class ShowMoreList<T extends Viewable> extends StatelessWidget {
               onExpansionChanged: (expanded) {
                 if (!expanded) return;
 
-                AnalyticsService.I.track(EntityShowMoreTap(items));
                 onLoadAll?.call();
               },
               title: const Text('اظهار المزيد'),

@@ -50,24 +50,6 @@ final class EntityStatisticsOpen extends SingleEntityAnalyticsEvent {
   EntityStatisticsOpen(super.entity);
 }
 
-final class EntityShowMoreTap extends EntityAnalyticsEvent {
-  final AnalyticsEntityType? entityType;
-  final int itemCount;
-
-  @override
-  String get objectAction => 'show_more_tap';
-
-  @override
-  Json get properties => {
-    if (entityType case final type?) 'entity_type': type.key,
-    'item_count': itemCount,
-  };
-
-  EntityShowMoreTap(List<Object> items)
-    : entityType = AnalyticsEntityType.of(items.firstOrNull),
-      itemCount = items.length;
-}
-
 final class EntityRelatedCreateTap extends EntityAnalyticsEvent {
   final Json viewedEntityProperties;
   final AnalyticsEntityType relatedType;

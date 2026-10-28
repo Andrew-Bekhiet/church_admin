@@ -74,21 +74,6 @@ void main() {
       properties: {},
     ),
     (
-      event: EntityShowMoreTap([person, person, person]),
-      name: 'entity:show_more_tap',
-      properties: {'entity_type': 'person', 'item_count': 3},
-    ),
-    (
-      event: EntityShowMoreTap(['not an entity']),
-      name: 'entity:show_more_tap',
-      properties: {'item_count': 1},
-    ),
-    (
-      event: EntityShowMoreTap([]),
-      name: 'entity:show_more_tap',
-      properties: {'item_count': 0},
-    ),
-    (
       event: EntityRelatedCreateTap(
         family,
         AnalyticsEntityType.person,

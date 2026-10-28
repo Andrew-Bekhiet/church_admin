@@ -38,16 +38,6 @@ void main() {
         'has_second_line': false,
       },
     ),
-    (
-      event: ListMultiSelectOpen(const Family(id: 'family-1', name: 'عائلة')),
-      name: 'list:multi_select_open',
-      properties: {'entity_type': 'family'},
-    ),
-    (
-      event: ListMultiSelectOpen('not an entity'),
-      name: 'list:multi_select_open',
-      properties: {},
-    ),
     for (final (type, sent) in [
       (PickerObjectType.college, 'college'),
       (PickerObjectType.school, 'school'),
@@ -64,19 +54,6 @@ void main() {
         name: 'picker:custom_item_create',
         properties: {'picker_object_type': sent},
       ),
-    for (final (kind, sent) in [
-      (PickerFieldKind.date, 'date'),
-      (PickerFieldKind.dateRange, 'dateRange'),
-      (PickerFieldKind.studyYearRange, 'studyYearRange'),
-      (PickerFieldKind.color, 'color'),
-      (PickerFieldKind.singleObject, 'singleObject'),
-      (PickerFieldKind.multiObject, 'multiObject'),
-    ])
-      (
-        event: PickerValueClear(kind),
-        name: 'picker:value_clear',
-        properties: {'field_kind': sent},
-      ),
     (
       event: const PhotoPickAttempt(
         ImageSource.camera,
@@ -92,11 +69,6 @@ void main() {
       ),
       name: 'photo:pick_attempt',
       properties: {'image_source': 'gallery', 'outcome': 'cropCancelled'},
-    ),
-    (
-      event: const PhotoDeleteChoose(),
-      name: 'photo:delete_choose',
-      properties: {},
     ),
     (
       event: PhotoFullscreenOpen(const Area(id: 'area-1', name: 'شبرا')),

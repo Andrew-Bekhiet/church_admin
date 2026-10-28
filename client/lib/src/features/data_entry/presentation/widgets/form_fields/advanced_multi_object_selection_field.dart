@@ -42,12 +42,7 @@ class AdvancedMultiObjectSelectionField<T extends Viewable, E extends Object>
             suffixIcon: selected.isNotEmpty && !state.readOnly
                 ? IconButton(
                     tooltip: 'حذف القيمة',
-                    onPressed: () {
-                      AnalyticsService.I.track(
-                        const PickerValueClear(PickerFieldKind.multiObject),
-                      );
-                      field.setValue(<T>{});
-                    },
+                    onPressed: () => field.setValue(<T>{}),
                     icon: const Icon(Symbols.delete),
                   )
                 : null,

@@ -28,7 +28,6 @@ export 'models/person.dart';
 export 'models/person_state.dart';
 export 'models/person_type.dart';
 export 'models/photo_pick_outcome.dart';
-export 'models/picker_field_kind.dart';
 export 'models/picker_object_type.dart';
 export 'models/qualification.dart';
 export 'models/relationships.dart';
