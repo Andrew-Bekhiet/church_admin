@@ -31,7 +31,7 @@ final class AdvancedSearchQueryEdit extends AdvancedSearchQueryAnalyticsEvent {
   const AdvancedSearchQueryEdit();
 }
 
-sealed class AdvancedSearchQueryRunAnalyticsEvent
+final class AdvancedSearchQuerySubmit
     extends AdvancedSearchQueryAnalyticsEvent {
   static List<String> fieldPathOf(FieldMetadata field) => switch (field) {
     RedirectingFieldMetadata(:final parentField, :final targetField) => [
@@ -47,6 +47,12 @@ sealed class AdvancedSearchQueryRunAnalyticsEvent
   final List<String> operatorIds;
   final int orderCount;
   final bool hasLimit;
+  final bool isAutoExecuted;
+  final bool hasPolygonFilter;
+  final int? limitValue;
+
+  @override
+  String get objectAction => 'query_submit';
 
   @override
   Json get properties => {
@@ -57,66 +63,36 @@ sealed class AdvancedSearchQueryRunAnalyticsEvent
     'operator_ids': operatorIds,
     'order_count': orderCount,
     'has_limit': hasLimit,
-  };
-
-  AdvancedSearchQueryRunAnalyticsEvent(AdvancedQuery query)
-    : queryableType = query.queryableType.name,
-      logicalOperator = query.logicalOperator,
-      fieldNames = [
-        for (final filter in query.filters) fieldPathOf(filter.field).join('.'),
-      ],
-      operatorIds = [
-        for (final filter in query.filters) filter.operator.serializationId,
-      ],
-      orderCount = query.orderBy.length,
-      hasLimit = query.limit != null;
-}
-
-final class AdvancedSearchQuerySubmit
-    extends AdvancedSearchQueryRunAnalyticsEvent {
-  final bool isAutoExecuted;
-  final int filterEditCount;
-  final int maxNestedDepth;
-  final bool hasPolygonFilter;
-  final int? limitValue;
-
-  @override
-  String get objectAction => 'query_submit';
-
-  @override
-  Json get properties => {
-    ...super.properties,
     'is_auto_executed': isAutoExecuted,
-    'filter_edit_count': filterEditCount,
-    'max_nested_depth': maxNestedDepth,
     'has_polygon_filter': hasPolygonFilter,
     'limit_value': ?limitValue,
   };
 
   AdvancedSearchQuerySubmit(
-    super.query, {
+    AdvancedQuery query, {
     required this.isAutoExecuted,
-    required this.filterEditCount,
-  }) : maxNestedDepth = [
-         0,
+  }) : queryableType = query.queryableType.name,
+       logicalOperator = query.logicalOperator,
+       fieldNames = [
          for (final filter in query.filters)
-           AdvancedSearchQueryRunAnalyticsEvent.fieldPathOf(
-                 filter.field,
-               ).length -
-               1,
-       ].max,
+           fieldPathOf(filter.field).join('.'),
+       ],
+       operatorIds = [
+         for (final filter in query.filters) filter.operator.serializationId,
+       ],
+       orderCount = query.orderBy.length,
+       hasLimit = query.limit != null,
        hasPolygonFilter = query.filters.any(
          (filter) => filter.value is Polygon,
        ),
        limitValue = query.limit;
 }
 
-final class AdvancedSearchQueryShare
-    extends AdvancedSearchQueryRunAnalyticsEvent {
+final class AdvancedSearchQueryShare extends AdvancedSearchQueryAnalyticsEvent {
   @override
   String get objectAction => 'query_share';
 
-  AdvancedSearchQueryShare(super.query);
+  const AdvancedSearchQueryShare();
 }
 
 final class AdvancedSearchResultsSearchRun

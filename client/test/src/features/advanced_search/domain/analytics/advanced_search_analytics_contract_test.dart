@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const filterEditCount = 3;
   const limit = 50;
   const resultsSearchLength = 4;
   final nameContains = Filter(
@@ -56,7 +55,6 @@ void main() {
                 limit: limit,
               ),
               isAutoExecuted: true,
-              filterEditCount: filterEditCount,
             ),
             'advanced_search:query_submit',
             {
@@ -72,8 +70,6 @@ void main() {
               'order_count': 1,
               'has_limit': true,
               'is_auto_executed': true,
-              'filter_edit_count': filterEditCount,
-              'max_nested_depth': 1,
               'has_polygon_filter': true,
               'limit_value': limit,
             },
@@ -82,7 +78,6 @@ void main() {
             AdvancedSearchQuerySubmit(
               AdvancedQuery(queryableType: AdvancedQueriesMetadata().family),
               isAutoExecuted: false,
-              filterEditCount: 0,
             ),
             'advanced_search:query_submit',
             {
@@ -94,25 +89,13 @@ void main() {
               'order_count': 0,
               'has_limit': false,
               'is_auto_executed': false,
-              'filter_edit_count': 0,
-              'max_nested_depth': 0,
               'has_polygon_filter': false,
             },
           ),
           (
-            AdvancedSearchQueryShare(
-              AdvancedQuery(queryableType: AdvancedQueriesMetadata().family),
-            ),
+            const AdvancedSearchQueryShare(),
             'advanced_search:query_share',
-            {
-              'queryable_type': 'Family',
-              'logical_operator': 'and',
-              'filter_count': 0,
-              'field_names': <String>[],
-              'operator_ids': <String>[],
-              'order_count': 0,
-              'has_limit': false,
-            },
+            {},
           ),
           (
             const AdvancedSearchResultsSearchRun(

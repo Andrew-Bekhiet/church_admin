@@ -13,8 +13,6 @@ class AdvancedSearchController {
 
   Timer? _typedEditSettling;
 
-  int _queryEditCount = 0;
-
   final BehaviorSubject<AdvancedQuery> _query = BehaviorSubject.seeded(
     AdvancedQuery(
       queryableType: AdvancedQueriesMetadata().person,
@@ -74,19 +72,13 @@ class AdvancedSearchController {
     ),
   );
 
-  void trackQuerySubmit({required bool isAutoExecuted}) {
-    _analyticsService.track(
-      AdvancedSearchQuerySubmit(
-        query,
-        isAutoExecuted: isAutoExecuted,
-        filterEditCount: _queryEditCount,
-      ),
-    );
-    _queryEditCount = 0;
-  }
+  void trackQuerySubmit({required bool isAutoExecuted}) =>
+      _analyticsService.track(
+        AdvancedSearchQuerySubmit(query, isAutoExecuted: isAutoExecuted),
+      );
 
   void trackQueryShare() =>
-      _analyticsService.track(AdvancedSearchQueryShare(query));
+      _analyticsService.track(const AdvancedSearchQueryShare());
 
   StreamSubscription<String> trackResultsSearchesIn(Stream<String?> searches) =>
       searches
@@ -207,7 +199,6 @@ class AdvancedSearchController {
   }
 
   void _trackQueryEdit() {
-    _queryEditCount++;
     _analyticsService.track(const AdvancedSearchQueryEdit());
   }
 

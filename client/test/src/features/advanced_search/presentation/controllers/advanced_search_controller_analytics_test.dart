@@ -249,9 +249,7 @@ void main() {
             .having((event) => event.orderCount, 'orderCount', 1)
             .having((event) => event.hasLimit, 'hasLimit', isTrue)
             .having((event) => event.limitValue, 'limitValue', limit)
-            .having((event) => event.maxNestedDepth, 'maxNestedDepth', 1)
             .having((event) => event.hasPolygonFilter, 'hasPolygonFilter', true)
-            .having((event) => event.filterEditCount, 'filterEditCount', 0)
             .having((event) => event.isAutoExecuted, 'isAutoExecuted', isTrue),
       ]);
     });
@@ -262,45 +260,12 @@ void main() {
       expect(f.analytics.trackedEventsOf<AdvancedSearchQuerySubmit>(), [
         isA<AdvancedSearchQuerySubmit>()
             .having((event) => event.limitValue, 'limitValue', isNull)
-            .having((event) => event.maxNestedDepth, 'maxNestedDepth', 0)
             .having(
               (event) => event.hasPolygonFilter,
               'hasPolygonFilter',
               false,
             ),
       ]);
-    });
-
-    test('a search counts the edits made since the screen opened', () {
-      unit
-        ..addFilter(phoneFilter)
-        ..removeFilterAt(1)
-        ..trackQuerySubmit(isAutoExecuted: false);
-
-      expect(f.analytics.trackedEventsOf<AdvancedSearchQuerySubmit>(), [
-        isA<AdvancedSearchQuerySubmit>().having(
-          (event) => event.filterEditCount,
-          'filterEditCount',
-          2,
-        ),
-      ]);
-    });
-
-    test('a search counts only the edits made since the previous search', () {
-      unit
-        ..addFilter(phoneFilter)
-        ..trackQuerySubmit(isAutoExecuted: false)
-        ..addOrderBy(byPhone)
-        ..trackQuerySubmit(isAutoExecuted: false);
-
-      expect(
-        f.analytics.trackedEventsOf<AdvancedSearchQuerySubmit>().last,
-        isA<AdvancedSearchQuerySubmit>().having(
-          (event) => event.filterEditCount,
-          'filterEditCount',
-          1,
-        ),
-      );
     });
 
     test('a results search cleared before it settles is not tracked', () {
