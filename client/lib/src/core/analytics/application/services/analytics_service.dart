@@ -41,14 +41,26 @@ class AnalyticsService {
       try {
         await action(provider);
       } catch (e, stackTrace) {
-        await _loggingService.exception(
-          LogRecord(
-            moduleName: provider.runtimeType.toString(),
-            error: e,
-            stackTrace: stackTrace,
-          ),
-        );
+        await _tryReportProviderFailure(provider, e, stackTrace);
       }
     }),
   );
+
+  Future<void> _tryReportProviderFailure(
+    AnalyticsProvider provider,
+    Object error,
+    StackTrace stackTrace,
+  ) async {
+    try {
+      await _loggingService.exception(
+        LogRecord(
+          moduleName: provider.runtimeType.toString(),
+          error: error,
+          stackTrace: stackTrace,
+        ),
+      );
+    } on Object {
+      return;
+    }
+  }
 }
