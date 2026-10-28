@@ -68,34 +68,33 @@ class LoggingBlocObserver extends BlocObserver {
       return;
     }
 
-    final nextState = transition.nextState.unwrapped;
-    final currentState = transition.currentState.unwrapped;
+    switch (AuthIdentityChange.between(
+      transition.currentState,
+      transition.nextState,
+    )) {
+      case AuthIdentityIdentified(
+        :final hasuraUserId,
+        :final authUser,
+        :final userData,
+      ):
+        await loggingService.identify(
+          LoggingUser(
+            id: hasuraUserId,
+            firebaseUid: authUser.uid,
+            emailVerified: authUser.emailVerified,
+            claims: authUser.filteredClaims,
+            permissions: [...?userData?.permissions.map((p) => p.name)],
+            adminOn: [...?userData?.adminOn?.map((a) => a.toJson())],
+            email: authUser.email,
+            name: userData?.name,
+          ),
+        );
 
-    final loggingUser = switch ((currentState, nextState)) {
-      (
-        _,
-        AuthAuthenticated(
-          authUser: AuthUser(:final hasuraUserId?) && final authUser,
-          :final userData,
-        ),
-      )
-          when currentState is! AuthAuthenticated =>
-        LoggingUser(
-          id: hasuraUserId,
-          firebaseUid: authUser.uid,
-          emailVerified: authUser.emailVerified,
-          claims: authUser.filteredClaims,
-          permissions: [...?userData?.permissions.map((p) => p.name)],
-          adminOn: [...?userData?.adminOn?.map((a) => a.toJson())],
-          email: authUser.email,
-          name: userData?.name,
-        ),
-      (AuthAuthenticated(), _) when nextState is! AuthAuthenticated => null,
-      _ => false,
-    };
+      case AuthIdentityForgotten():
+        await loggingService.identify(null);
 
-    if (loggingUser is LoggingUser?) {
-      await loggingService.identify(loggingUser);
+      case AuthIdentityUnchanged():
+        return;
     }
   }
 }

@@ -38,7 +38,12 @@ void main() {
       );
       await pumpEventQueue();
 
-      expect(provider.identifiedUsers.single?.id, 'hasura-user-1');
+      expect(
+        provider.identifiedUsers.single,
+        isA<AnalyticsUser>()
+            .having((u) => u.id, 'id', authUser.hasuraUserId)
+            .having((u) => u.email, 'email', authUser.email),
+      );
     });
 
     test('signing out forgets the identified user', () async {

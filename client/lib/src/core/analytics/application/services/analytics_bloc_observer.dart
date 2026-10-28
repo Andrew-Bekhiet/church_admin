@@ -20,31 +20,30 @@ class AnalyticsBlocObserver extends BlocObserver {
       return;
     }
 
-    final nextState = transition.nextState.unwrapped;
-    final currentState = transition.currentState.unwrapped;
+    switch (AuthIdentityChange.between(
+      transition.currentState,
+      transition.nextState,
+    )) {
+      case AuthIdentityIdentified(
+        :final hasuraUserId,
+        :final authUser,
+        :final userData,
+      ):
+        await analyticsService.identify(
+          AnalyticsUser(
+            id: hasuraUserId,
+            email: authUser.email,
+            name: userData?.name,
+            permissions: [...?userData?.permissions.map((p) => p.name)],
+            adminOn: [...?userData?.adminOn?.map((a) => a.toJson())],
+          ),
+        );
 
-    final analyticsUser = switch ((currentState, nextState)) {
-      (
-        _,
-        AuthAuthenticated(
-          authUser: AuthUser(:final hasuraUserId?),
-          :final userData,
-        ),
-      )
-          when currentState is! AuthAuthenticated ||
-              currentState.authUser.hasuraUserId != hasuraUserId ||
-              currentState.userData != userData =>
-        AnalyticsUser(
-          id: hasuraUserId,
-          permissions: [...?userData?.permissions.map((p) => p.name)],
-          adminOn: [...?userData?.adminOn?.map((a) => a.toJson())],
-        ),
-      (AuthAuthenticated(), _) when nextState is! AuthAuthenticated => null,
-      _ => false,
-    };
+      case AuthIdentityForgotten():
+        await analyticsService.identify(null);
 
-    if (analyticsUser is AnalyticsUser?) {
-      await analyticsService.identify(analyticsUser);
+      case AuthIdentityUnchanged():
+        return;
     }
   }
 }
