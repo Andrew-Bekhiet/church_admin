@@ -38,6 +38,16 @@ void main() {
         'has_second_line': false,
       },
     ),
+    (
+      event: ListMultiSelectOpen(const Family(id: 'family-1', name: 'عائلة')),
+      name: 'list:multi_select_open',
+      properties: {'entity_type': 'family'},
+    ),
+    (
+      event: ListMultiSelectOpen('not an entity'),
+      name: 'list:multi_select_open',
+      properties: {},
+    ),
     for (final (type, sent) in [
       (PickerObjectType.college, 'college'),
       (PickerObjectType.school, 'school'),
