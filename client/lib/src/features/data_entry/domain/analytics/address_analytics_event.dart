@@ -114,18 +114,6 @@ final class StaleLocationReminderDismiss
   const StaleLocationReminderDismiss();
 }
 
-final class DistrictCreate extends AddressAnalyticsEvent {
-  final String districtId;
-
-  @override
-  String get objectAction => 'district_create';
-
-  @override
-  Json get properties => {'district_id': districtId};
-
-  DistrictCreate(District district) : districtId = district.id;
-}
-
 final class FamilyAddressFill extends AddressAnalyticsEvent {
   final String familyId;
 

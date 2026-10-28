@@ -264,10 +264,7 @@ class AddressFormController extends AdvancedFormController {
   ) => _services.places.areasMatching(search, ofStreet: street.fieldValue);
 
   Future<District> createDistrictNamed(String name) async {
-    final created = await _services.places.createDistrictNamed(name);
-    _services.analytics.track(DistrictCreate(created));
-
-    return created;
+    return _services.places.createDistrictNamed(name);
   }
 
   void _maybeTrackStaleLocationReminderAccept() {

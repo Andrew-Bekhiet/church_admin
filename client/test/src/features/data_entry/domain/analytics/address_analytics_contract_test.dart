@@ -85,11 +85,6 @@ void main() {
       properties: {},
     ),
     (
-      event: DistrictCreate(district),
-      name: 'address:district_create',
-      properties: {'district_id': district.id},
-    ),
-    (
       event: FamilyAddressFill(const Family(id: 'family-1', name: 'عائلة')),
       name: 'address:family_address_fill',
       properties: {'family_id': 'family-1'},
