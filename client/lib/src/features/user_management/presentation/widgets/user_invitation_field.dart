@@ -39,8 +39,10 @@ class UserInvitationField extends StatelessWidget {
               firstDate: DateTime.now().add(const Duration(days: 1)),
               lastDate: InvitationRequest.maxExpiry(DateTime.now()),
               onExpiryChanged: (picked) {
-                AnalyticsService.I.track(
-                  InvitationExpiryChange(picked.difference(DateTime.now())),
+                _maybeTrackExpiryChange(
+                  picked: picked,
+                  current: expiresAt,
+                  validFrom: DateTime.now(),
                 );
                 cubit.setInvitation(InvitationRequest(picked));
               },
@@ -63,8 +65,10 @@ class UserInvitationField extends StatelessWidget {
                 : invitation.createdAt.add(const Duration(days: 1)),
             lastDate: InvitationRequest.maxExpiry(invitation.createdAt),
             onExpiryChanged: (picked) {
-              AnalyticsService.I.track(
-                InvitationExpiryChange(picked.difference(invitation.createdAt)),
+              _maybeTrackExpiryChange(
+                picked: picked,
+                current: invitation.expiresAt,
+                validFrom: invitation.createdAt,
               );
               cubit.setInvitation(
                 ExistingInvitation(invitation.copyWith(expiresAt: picked)),
@@ -74,5 +78,17 @@ class UserInvitationField extends StatelessWidget {
         ],
       ),
     };
+  }
+
+  void _maybeTrackExpiryChange({
+    required DateTime picked,
+    required DateTime current,
+    required DateTime validFrom,
+  }) {
+    if (picked == current) return;
+
+    AnalyticsService.I.track(
+      InvitationExpiryChange(picked.difference(validFrom)),
+    );
   }
 }

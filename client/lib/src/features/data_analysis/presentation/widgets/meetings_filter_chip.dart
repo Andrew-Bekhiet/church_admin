@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/foundation.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rxdart/rxdart.dart';
@@ -68,12 +69,18 @@ class MeetingsFilterChip extends StatelessWidget {
 
     if (applied == null) return;
 
+    _maybeTrackFilterApply(applied);
+    onChanged(applied);
+  }
+
+  void _maybeTrackFilterApply(List<Meeting> applied) {
+    if (setEquals(applied.toSet(), selected.toSet())) return;
+
     AnalyticsService.I.track(
       AnalysisMeetingsFilterApply(
         selectedMeetingCount: applied.length,
         totalMeetingCount: meetings.length,
       ),
     );
-    onChanged(applied);
   }
 }

@@ -45,10 +45,7 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
             return;
           }
 
-          final isPresetChanged = selectedPreset != preset;
-          if (isPresetChanged) {
-            AnalyticsService.I.track(AnalysisRangeSelect(selectedPreset));
-          }
+          _maybeTrackRangeSelect(selectedPreset);
           onChanged(selectedPreset);
         },
         dropdownMenuEntries: [
@@ -76,6 +73,12 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _maybeTrackRangeSelect(DateTimeRangePreset selectedPreset) {
+    if (selectedPreset == preset) return;
+
+    AnalyticsService.I.track(AnalysisRangeSelect(selectedPreset));
   }
 
   Future<void> _pickCustomRange(
