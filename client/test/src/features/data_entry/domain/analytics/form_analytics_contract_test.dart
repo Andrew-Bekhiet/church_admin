@@ -6,7 +6,6 @@ void main() {
   const service = Service(id: 'service-1', name: 'خدمة');
   const otherService = Service(id: 'service-2', name: 'خدمة أخرى');
   const group = Group(id: 'group-1', name: 'مجموعة');
-  const otherGroup = Group(id: 'group-2', name: 'مجموعة أخرى');
 
   final contracts = <({AnalyticsEvent event, String name, Json properties})>[
     (
@@ -48,15 +47,11 @@ void main() {
     ),
     (
       event: MembershipServiceSelect(
-        PersonMemberships(
-          services: {service},
-          groups: {group, otherGroup},
-        ),
+        PersonMemberships(services: {service}, groups: {}),
       ),
       name: 'form:membership_service_select',
       properties: {
         'service_count': 1,
-        'auto_selected_group_count': 2,
         'service_id': service.id,
       },
     ),
@@ -64,18 +59,18 @@ void main() {
       event: MembershipServiceSelect(
         PersonMemberships(
           services: {service, otherService},
-          groups: {group},
+          groups: {},
         ),
       ),
       name: 'form:membership_service_select',
-      properties: {'service_count': 2, 'auto_selected_group_count': 1},
+      properties: {'service_count': 2},
     ),
     (
       event: MembershipServiceSelect(
         const PersonMemberships(services: {}, groups: {}),
       ),
       name: 'form:membership_service_select',
-      properties: {'service_count': 0, 'auto_selected_group_count': 0},
+      properties: {'service_count': 0},
     ),
   ];
 

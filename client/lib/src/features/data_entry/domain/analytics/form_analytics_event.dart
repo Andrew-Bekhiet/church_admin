@@ -72,7 +72,6 @@ final class OutOfSightWarningAnswer extends FormEntityAnalyticsEvent {
 
 final class MembershipServiceSelect extends FormAnalyticsEvent {
   final int serviceCount;
-  final int autoSelectedGroupCount;
   final String? singleServiceId;
 
   @override
@@ -81,13 +80,11 @@ final class MembershipServiceSelect extends FormAnalyticsEvent {
   @override
   Json get properties => {
     'service_count': serviceCount,
-    'auto_selected_group_count': autoSelectedGroupCount,
     if (singleServiceId case final serviceId?)
       AnalyticsEntityType.service.idProperty: serviceId,
   };
 
   MembershipServiceSelect(PersonMemberships selection)
     : serviceCount = selection.services.length,
-      autoSelectedGroupCount = selection.groups.length,
       singleServiceId = selection.services.singleOrNull?.id;
 }
