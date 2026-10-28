@@ -42,19 +42,9 @@ void main() {
             },
           ),
           (
-            const MapsDataSelect(
-              AnalyticsEntityType.class$,
-              selectedCount: 3,
-              isSelectAllUsed: true,
-              isSearchUsed: false,
-            ),
+            const MapsDataSelect(AnalyticsEntityType.class$, selectedCount: 3),
             'maps:data_select',
-            {
-              'entity_type': 'class',
-              'selected_count': 3,
-              'is_select_all_used': true,
-              'is_search_used': false,
-            },
+            {'entity_type': 'class', 'selected_count': 3},
           ),
           (
             const MapsLayerToggle(GeoMapLayer.persons, isEnabled: false),

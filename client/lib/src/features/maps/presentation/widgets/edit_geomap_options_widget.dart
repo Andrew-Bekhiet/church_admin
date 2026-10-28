@@ -267,14 +267,10 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     required AnalyticsEntityType entityType,
   }) async {
     final search = BehaviorSubject<String?>.seeded(null);
-    var isSelectAllUsed = false;
-    var isSearchUsed = false;
 
     final controller = ViewableObjectListController<T>(
       objectsPaginatableStream: stream,
-      filterStream: search
-          .map((s) => s ?? '')
-          .doOnData((s) => isSearchUsed = isSearchUsed || s.isNotEmpty),
+      filterStream: search.map((s) => s ?? ''),
     )..selectionController.selectAll(selected);
 
     final rslt = await Navigator.of(context).push(
@@ -289,7 +285,6 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
               IconButton(
                 icon: const Icon(Symbols.select_all),
                 onPressed: () {
-                  isSelectAllUsed = true;
                   controller.selectionController.selectAll(
                     controller.currentFilteredObjectsOrNull ?? [],
                   );
@@ -318,12 +313,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
           ?.whereType<T>()
           .toList();
       AnalyticsService.I.track(
-        MapsDataSelect(
-          entityType,
-          selectedCount: selection?.length ?? 0,
-          isSelectAllUsed: isSelectAllUsed,
-          isSearchUsed: isSearchUsed,
-        ),
+        MapsDataSelect(entityType, selectedCount: selection?.length ?? 0),
       );
       unawaited(
         controller.dispose().then((_) async {

@@ -30,8 +30,6 @@ final class MapsOptionsApply extends MapsAnalyticsEvent {
 final class MapsDataSelect extends MapsAnalyticsEvent {
   final AnalyticsEntityType entityType;
   final int selectedCount;
-  final bool isSelectAllUsed;
-  final bool isSearchUsed;
 
   @override
   String get objectAction => 'data_select';
@@ -40,16 +38,9 @@ final class MapsDataSelect extends MapsAnalyticsEvent {
   Json get properties => {
     'entity_type': entityType.key,
     'selected_count': selectedCount,
-    'is_select_all_used': isSelectAllUsed,
-    'is_search_used': isSearchUsed,
   };
 
-  const MapsDataSelect(
-    this.entityType, {
-    required this.selectedCount,
-    required this.isSelectAllUsed,
-    required this.isSearchUsed,
-  });
+  const MapsDataSelect(this.entityType, {required this.selectedCount});
 }
 
 final class MapsLayerToggle extends MapsAnalyticsEvent {
