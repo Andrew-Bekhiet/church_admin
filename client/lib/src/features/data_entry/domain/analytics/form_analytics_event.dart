@@ -70,20 +70,6 @@ final class OutOfSightWarningAnswer extends FormEntityAnalyticsEvent {
   OutOfSightWarningAnswer(super.entity, {required this.isConfirmed});
 }
 
-final class DefaultMeetingOptOutToggle extends FormAnalyticsEvent {
-  final bool isDefaultMeetingCreated;
-
-  @override
-  String get objectAction => 'default_meeting_opt_out_toggle';
-
-  @override
-  Json get properties => {
-    'is_default_meeting_created': isDefaultMeetingCreated,
-  };
-
-  const DefaultMeetingOptOutToggle({required this.isDefaultMeetingCreated});
-}
-
 final class MembershipServiceSelect extends FormAnalyticsEvent {
   final int serviceCount;
   final int autoSelectedGroupCount;

@@ -16,9 +16,6 @@ class DefaultMeetingFields extends StatelessWidget {
           key: DefaultMeetingFieldsKeys.isCreated,
           field: form.isCreated,
           title: 'إنشاء اجتماع افتراضي',
-          onChanged: (isCreated) => AnalyticsService.I.track(
-            DefaultMeetingOptOutToggle(isDefaultMeetingCreated: isCreated),
-          ),
         ),
         ListenableBuilder(
           listenable: form.isCreated,

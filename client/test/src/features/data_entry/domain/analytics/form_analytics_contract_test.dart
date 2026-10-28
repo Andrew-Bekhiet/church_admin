@@ -47,11 +47,6 @@ void main() {
       },
     ),
     (
-      event: const DefaultMeetingOptOutToggle(isDefaultMeetingCreated: false),
-      name: 'form:default_meeting_opt_out_toggle',
-      properties: {'is_default_meeting_created': false},
-    ),
-    (
       event: MembershipServiceSelect(
         PersonMemberships(
           services: {service},
