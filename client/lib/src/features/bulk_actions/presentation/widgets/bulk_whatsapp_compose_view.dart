@@ -1,0 +1,74 @@
+import 'package:church_admin/church_admin.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_ui/material_ui.dart';
+
+class BulkWhatsappComposeView extends StatelessWidget {
+  final BulkWhatsappComposing state;
+  final PlaceholderTextEditingController templateController;
+
+  const BulkWhatsappComposeView({
+    required this.state,
+    required this.templateController,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final previewRecipient = state.reachable.firstOrNull;
+    final reachableCount = state.reachable.length;
+    final withoutPhoneCount = state.withoutPhone.length;
+
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        MessageTemplateField(controller: templateController),
+        if (previewRecipient != null)
+          Card(
+            margin: const EdgeInsets.symmetric(vertical: 16),
+            child: ListTile(
+              title: Text('معاينة: ${previewRecipient.person.name}'),
+              subtitle: ListenableBuilder(
+                listenable: templateController,
+                builder: (context, _) => Text(
+                  templateController.template.renderFor(
+                    previewRecipient.person,
+                  ),
+                  key: BulkWhatsappComposeViewKeys.preview,
+                ),
+              ),
+            ),
+          ),
+        Text(
+          'سيتم فتح محادثة مع $reachableCount من ${state.recipients.length}',
+          style: theme.textTheme.titleMedium,
+        ),
+        if (withoutPhoneCount > 0)
+          Text(
+            '$withoutPhoneCount بدون رقم هاتف',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.error,
+            ),
+          ),
+        AutoAdvanceCheckboxTile(value: state.autoAdvance),
+        FilledButton.icon(
+          key: BulkWhatsappComposeViewKeys.startButton,
+          style: theme.largeFilledButtonStyle,
+          icon: const Icon(Symbols.send),
+          label: const Text('ابدأ'),
+          onPressed: reachableCount > 0
+              ? () => context.read<BulkWhatsappMessageCubit>().start(
+                  templateController.template,
+                )
+              : null,
+        ),
+      ],
+    );
+  }
+}
+
+abstract final class BulkWhatsappComposeViewKeys {
+  static const Key preview = ValueKey('Bulk Whatsapp Preview Key');
+  static const Key startButton = ValueKey('Bulk Whatsapp Start Key');
+}
