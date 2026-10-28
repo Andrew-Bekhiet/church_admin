@@ -116,18 +116,6 @@ void main() {
               'is_changed': false,
             },
           ),
-          (
-            LocationPointsSave(
-              const Area(id: areaId, name: 'منطقة'),
-              isClosedShape: true,
-            ),
-            'maps:points_save',
-            {
-              'entity_type': 'area',
-              'area_id': areaId,
-              'is_closed_shape': true,
-            },
-          ),
         ]) {
       test('$expectedName sends $expectedProperties', () {
         expect(

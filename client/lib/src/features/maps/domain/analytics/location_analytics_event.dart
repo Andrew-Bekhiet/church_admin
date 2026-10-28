@@ -88,18 +88,3 @@ final class LocationSaveWithoutChange extends LocationSave {
 
   LocationSaveWithoutChange(super.entity);
 }
-
-final class LocationPointsSave extends LocationAnalyticsEvent {
-  final bool isClosedShape;
-
-  @override
-  String get objectAction => 'points_save';
-
-  @override
-  Json get properties => {
-    ...super.properties,
-    'is_closed_shape': isClosedShape,
-  };
-
-  LocationPointsSave(super.entity, {required this.isClosedShape});
-}
