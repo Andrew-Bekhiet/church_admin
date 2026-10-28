@@ -44,14 +44,9 @@ void main() {
         const NotificationReminderFire(
           reminderType: 'kodas',
           personCount: reminderPersonCount,
-          isSkippedEmpty: false,
         ),
         'notification:reminder_fire',
-        {
-          'reminder_type': 'kodas',
-          'person_count': reminderPersonCount,
-          'is_skipped_empty': false,
-        },
+        {'reminder_type': 'kodas', 'person_count': reminderPersonCount},
       ),
     ];
 

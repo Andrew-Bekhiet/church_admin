@@ -129,12 +129,36 @@ void main() {
                   (event) => event.personCount,
                   'personCount',
                   expectedPersons.length,
-                )
-                .having(
-                  (event) => event.isSkippedEmpty,
-                  'isSkippedEmpty',
-                  false,
                 ),
+          );
+        },
+      );
+
+      test(
+        'an empty reminder that is skipped tracks nothing',
+        () async {
+          _stubReminderPersons(const []);
+
+          await _showReminder(skipEmptyReminder: true);
+
+          expect(analytics.trackedEvents, isEmpty);
+        },
+      );
+
+      test(
+        'an empty reminder that is still shown is tracked',
+        () async {
+          _stubReminderPersons(const []);
+
+          await _showReminder(skipEmptyReminder: false);
+
+          expect(
+            analytics.trackedEventsOf<NotificationReminderFire>().single,
+            isA<NotificationReminderFire>().having(
+              (event) => event.personCount,
+              'personCount',
+              0,
+            ),
           );
         },
       );
@@ -276,6 +300,27 @@ Future<void> _testNotificationMethod({
     contains(type.name),
   );
 }
+
+void _stubReminderPersons(List<Person> persons) {
+  final stream = MockPaginatableStreamBase<Person>();
+  when(stream.first).thenAnswer((_) async => persons);
+  final advancedQueryParser =
+      DatabaseService.I.advancedQueryParser as MockAdvancedQueryParser;
+  when(
+    advancedQueryParser.createPaginatableStream(any),
+  ).thenAnswer((_) => stream);
+}
+
+Future<void> _showReminder({required bool skipEmptyReminder}) =>
+    NotificationsServiceCallbacks.showNotification(
+      channelId: 'Kodas',
+      channelName: 'إشعارات القداس',
+      channelDescription: 'إشعارات القداس',
+      title: 'إشعارات القداس',
+      type: LocalNotificationType.kodas,
+      query: AdvancedQuery(queryableType: AdvancedQueriesMetadata().person),
+      skipEmptyReminder: skipEmptyReminder,
+    );
 
 Matcher matchExpectedNotificationDetails(NotificationDetails expected) =>
     predicate<NotificationDetails>(

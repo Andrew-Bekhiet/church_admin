@@ -66,6 +66,7 @@ class NotificationsServiceCallbacks {
     required String title,
     required LocalNotificationType type,
     required AdvancedQuery query,
+    bool skipEmptyReminder = kReleaseMode,
   }) async {
     await InitializationService.I.initialize();
 
@@ -77,42 +78,40 @@ class NotificationsServiceCallbacks {
         .createPaginatableStream(query)
         .first;
 
-    final isSkippedEmpty = persons.isEmpty && kReleaseMode;
+    if (persons.isEmpty && skipEmptyReminder) return;
+
     AnalyticsService.I.track(
       NotificationReminderFire(
         reminderType: type.name,
         personCount: persons.length,
-        isSkippedEmpty: isSkippedEmpty,
       ),
     );
 
-    if (!isSkippedEmpty) {
-      final notification = makeNotificationWith(
-        persons: persons,
-        title: title,
-        additionalData: {
-          'query': query.toJson(),
-        },
-      );
+    final notification = makeNotificationWith(
+      persons: persons,
+      title: title,
+      additionalData: {
+        'query': query.toJson(),
+      },
+    );
 
-      await NotificationsStorage.I.writeNotification(notification);
+    await NotificationsStorage.I.writeNotification(notification);
 
-      await NotificationsService.I.notify(
-        notification,
-        id: type.index,
-        notificationDetails: NotificationDetails(
-          android: androidNotificationDetailsFor(
-            channelId,
-            channelName,
-            channelDescription: channelDescription,
-            body: notification.body,
-            icon: type == LocalNotificationType.birthday
-                ? 'birthday'
-                : 'warning_notification',
-          ),
+    await NotificationsService.I.notify(
+      notification,
+      id: type.index,
+      notificationDetails: NotificationDetails(
+        android: androidNotificationDetailsFor(
+          channelId,
+          channelName,
+          channelDescription: channelDescription,
+          body: notification.body,
+          icon: type == LocalNotificationType.birthday
+              ? 'birthday'
+              : 'warning_notification',
         ),
-      );
-    }
+      ),
+    );
   }
 
   @visibleForTesting

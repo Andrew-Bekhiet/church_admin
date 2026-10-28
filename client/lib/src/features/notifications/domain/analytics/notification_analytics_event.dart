@@ -60,7 +60,6 @@ final class NotificationPermissionRequest extends NotificationAnalyticsEvent {
 final class NotificationReminderFire extends NotificationAnalyticsEvent {
   final String reminderType;
   final int personCount;
-  final bool isSkippedEmpty;
 
   @override
   String get objectAction => 'reminder_fire';
@@ -69,12 +68,10 @@ final class NotificationReminderFire extends NotificationAnalyticsEvent {
   Json get properties => {
     'reminder_type': reminderType,
     'person_count': personCount,
-    'is_skipped_empty': isSkippedEmpty,
   };
 
   const NotificationReminderFire({
     required this.reminderType,
     required this.personCount,
-    required this.isSkippedEmpty,
   });
 }
