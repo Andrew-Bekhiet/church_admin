@@ -135,30 +135,18 @@ void main() {
       );
 
       test(
-        'an empty reminder that is skipped tracks nothing',
+        'an empty reminder shows nothing and tracks nothing',
         () async {
           _stubReminderPersons(const []);
 
-          await _showReminder(skipEmptyReminder: true);
+          await _showReminder();
 
           expect(analytics.trackedEvents, isEmpty);
-        },
-      );
-
-      test(
-        'an empty reminder that is still shown is tracked',
-        () async {
-          _stubReminderPersons(const []);
-
-          await _showReminder(skipEmptyReminder: false);
-
-          expect(
-            analytics.trackedEventsOf<NotificationReminderFire>().single,
-            isA<NotificationReminderFire>().having(
-              (event) => event.personCount,
-              'personCount',
-              0,
-            ),
+          verifyNever(
+            (NotificationsStorage.I as MockNotificationsStorage)
+                .writeNotification(
+                  argThat(predicate<Notification>((_) => true)),
+                ),
           );
         },
       );
@@ -311,16 +299,14 @@ void _stubReminderPersons(List<Person> persons) {
   ).thenAnswer((_) => stream);
 }
 
-Future<void> _showReminder({required bool skipEmptyReminder}) =>
-    NotificationsServiceCallbacks.showNotification(
-      channelId: 'Kodas',
-      channelName: 'إشعارات القداس',
-      channelDescription: 'إشعارات القداس',
-      title: 'إشعارات القداس',
-      type: LocalNotificationType.kodas,
-      query: AdvancedQuery(queryableType: AdvancedQueriesMetadata().person),
-      skipEmptyReminder: skipEmptyReminder,
-    );
+Future<void> _showReminder() => NotificationsServiceCallbacks.showNotification(
+  channelId: 'Kodas',
+  channelName: 'إشعارات القداس',
+  channelDescription: 'إشعارات القداس',
+  title: 'إشعارات القداس',
+  type: LocalNotificationType.kodas,
+  query: AdvancedQuery(queryableType: AdvancedQueriesMetadata().person),
+);
 
 Matcher matchExpectedNotificationDetails(NotificationDetails expected) =>
     predicate<NotificationDetails>(

@@ -66,7 +66,6 @@ class NotificationsServiceCallbacks {
     required String title,
     required LocalNotificationType type,
     required AdvancedQuery query,
-    bool skipEmptyReminder = kReleaseMode,
   }) async {
     await InitializationService.I.initialize();
 
@@ -78,7 +77,7 @@ class NotificationsServiceCallbacks {
         .createPaginatableStream(query)
         .first;
 
-    if (persons.isEmpty && skipEmptyReminder) return;
+    if (persons.isEmpty) return;
 
     AnalyticsService.I.track(
       NotificationReminderFire(
