@@ -7,8 +7,16 @@ sealed class AddressAnalyticsEvent extends AnalyticsEvent {
   const AddressAnalyticsEvent();
 }
 
-final class AddressAreaFill extends AddressAnalyticsEvent {
+sealed class AddressAutofillAnalyticsEvent extends AddressAnalyticsEvent {
   final AddressAutofillSource autofillSource;
+
+  @override
+  Json get properties => {'autofill_source': autofillSource.name};
+
+  const AddressAutofillAnalyticsEvent({required this.autofillSource});
+}
+
+final class AddressAreaFill extends AddressAutofillAnalyticsEvent {
   final String streetId;
   final String areaId;
 
@@ -17,21 +25,20 @@ final class AddressAreaFill extends AddressAnalyticsEvent {
 
   @override
   Json get properties => {
-    'autofill_source': autofillSource.name,
+    ...super.properties,
     AnalyticsEntityType.street.idProperty: streetId,
     AnalyticsEntityType.area.idProperty: areaId,
   };
 
   AddressAreaFill({
-    required this.autofillSource,
     required Street street,
     required Area area,
+    required super.autofillSource,
   }) : streetId = street.id,
        areaId = area.id;
 }
 
-final class AddressLocationFill extends AddressAnalyticsEvent {
-  final AddressAutofillSource autofillSource;
+final class AddressLocationFill extends AddressAutofillAnalyticsEvent {
   final String streetId;
 
   @override
@@ -39,11 +46,11 @@ final class AddressLocationFill extends AddressAnalyticsEvent {
 
   @override
   Json get properties => {
-    'autofill_source': autofillSource.name,
+    ...super.properties,
     AnalyticsEntityType.street.idProperty: streetId,
   };
 
-  AddressLocationFill({required this.autofillSource, required Street street})
+  AddressLocationFill({required Street street, required super.autofillSource})
     : streetId = street.id;
 }
 
@@ -79,21 +86,28 @@ final class AddressSuggestionAccept extends AddressSuggestionAnalyticsEvent {
   AddressSuggestionAccept(super.suggested);
 }
 
-final class StaleLocationReminderShow extends AddressAnalyticsEvent {
+sealed class StaleLocationReminderAnalyticsEvent extends AddressAnalyticsEvent {
+  const StaleLocationReminderAnalyticsEvent();
+}
+
+final class StaleLocationReminderShow
+    extends StaleLocationReminderAnalyticsEvent {
   @override
   String get objectAction => 'stale_location_reminder_show';
 
   const StaleLocationReminderShow();
 }
 
-final class StaleLocationReminderAccept extends AddressAnalyticsEvent {
+final class StaleLocationReminderAccept
+    extends StaleLocationReminderAnalyticsEvent {
   @override
   String get objectAction => 'stale_location_reminder_accept';
 
   const StaleLocationReminderAccept();
 }
 
-final class StaleLocationReminderDismiss extends AddressAnalyticsEvent {
+final class StaleLocationReminderDismiss
+    extends StaleLocationReminderAnalyticsEvent {
   @override
   String get objectAction => 'stale_location_reminder_dismiss';
 
