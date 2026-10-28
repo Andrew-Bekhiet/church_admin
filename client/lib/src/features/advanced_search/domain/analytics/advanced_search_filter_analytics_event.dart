@@ -1,6 +1,7 @@
 part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
-sealed class AdvancedSearchFilterAnalyticsEvent extends AnalyticsEvent {
+sealed class AdvancedSearchFilterAnalyticsEvent
+    extends AdvancedSearchAnalyticsEvent {
   static List<String> fieldPathOf(FieldMetadata field) => switch (field) {
     RedirectingFieldMetadata(:final parentField, :final targetField) => [
       ...fieldPathOf(parentField),
@@ -12,9 +13,6 @@ sealed class AdvancedSearchFilterAnalyticsEvent extends AnalyticsEvent {
   final List<String> fieldPath;
   final String operatorId;
   final int filterCount;
-
-  @override
-  String get category => 'advanced_search';
 
   @override
   Json get properties => {

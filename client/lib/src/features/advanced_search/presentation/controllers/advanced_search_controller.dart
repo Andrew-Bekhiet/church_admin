@@ -107,14 +107,7 @@ class AdvancedSearchController {
         ? defaultField
         : queryableType.orderableFields.firstOrNull;
 
-    if (queryableType != selectedQueryableType) {
-      _analyticsService.track(
-        AdvancedSearchQueryableTypeChange(
-          from: selectedQueryableType,
-          to: queryableType,
-        ),
-      );
-    }
+    _maybeTrackQueryableTypeChange(queryableType);
     changeQuery(
       AdvancedQuery(
         name: query.name,
@@ -195,16 +188,7 @@ class AdvancedSearchController {
   }
 
   void replaceOrderBy(int index, OrderBy newOrderBy) {
-    final isSameField =
-        orderBy.elementAtOrNull(index)?.field == newOrderBy.field;
-    _analyticsService.track(
-      isSameField
-          ? AdvancedSearchOrderByDirectionToggle(
-              newOrderBy,
-              orderCount: orderBy.length,
-            )
-          : AdvancedSearchOrderByChange(newOrderBy, orderCount: orderBy.length),
-    );
+    _maybeTrackOrderByReplacement(index, newOrderBy);
     changeOrderBy(
       orderBy
           .mapIndexed(
@@ -219,6 +203,31 @@ class AdvancedSearchController {
       AdvancedSearchOrderByRemove(orderCount: orderBy.length - 1),
     );
     changeOrderBy(orderBy.whereIndexed((i, e) => i != index).toList());
+  }
+
+  void _maybeTrackQueryableTypeChange(QueryableType next) {
+    if (next == selectedQueryableType) return;
+
+    _analyticsService.track(
+      AdvancedSearchQueryableTypeChange(from: selectedQueryableType, to: next),
+    );
+  }
+
+  void _maybeTrackOrderByReplacement(int index, OrderBy replacement) {
+    final replaced = orderBy.elementAtOrNull(index);
+    if (replaced == replacement) return;
+
+    _analyticsService.track(
+      replaced?.field == replacement.field
+          ? AdvancedSearchOrderByDirectionToggle(
+              replacement,
+              orderCount: orderBy.length,
+            )
+          : AdvancedSearchOrderByChange(
+              replacement,
+              orderCount: orderBy.length,
+            ),
+    );
   }
 
   void _maybeTrackFilterEdit(List<Filter> previous, List<Filter> next) {

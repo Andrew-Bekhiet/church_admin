@@ -1,9 +1,7 @@
 part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
-sealed class AdvancedSearchQueryAnalyticsEvent extends AnalyticsEvent {
-  @override
-  String get category => 'advanced_search';
-
+sealed class AdvancedSearchQueryAnalyticsEvent
+    extends AdvancedSearchAnalyticsEvent {
   const AdvancedSearchQueryAnalyticsEvent();
 }
 
@@ -109,29 +107,30 @@ final class AdvancedSearchOrderByRemove
   const AdvancedSearchOrderByRemove({required this.orderCount});
 }
 
-final class AdvancedSearchLimitSet extends AdvancedSearchQueryAnalyticsEvent {
-  final int limitValue;
-
-  @override
-  String get objectAction => 'limit_set';
-
-  @override
-  Json get properties => {'limit_value': limitValue};
-
-  const AdvancedSearchLimitSet(this.limitValue);
-}
-
-final class AdvancedSearchLimitChange
+sealed class AdvancedSearchLimitValueAnalyticsEvent
     extends AdvancedSearchQueryAnalyticsEvent {
   final int limitValue;
 
   @override
-  String get objectAction => 'limit_change';
-
-  @override
   Json get properties => {'limit_value': limitValue};
 
-  const AdvancedSearchLimitChange(this.limitValue);
+  const AdvancedSearchLimitValueAnalyticsEvent(this.limitValue);
+}
+
+final class AdvancedSearchLimitSet
+    extends AdvancedSearchLimitValueAnalyticsEvent {
+  @override
+  String get objectAction => 'limit_set';
+
+  const AdvancedSearchLimitSet(super.limitValue);
+}
+
+final class AdvancedSearchLimitChange
+    extends AdvancedSearchLimitValueAnalyticsEvent {
+  @override
+  String get objectAction => 'limit_change';
+
+  const AdvancedSearchLimitChange(super.limitValue);
 }
 
 final class AdvancedSearchLimitClear extends AdvancedSearchQueryAnalyticsEvent {
