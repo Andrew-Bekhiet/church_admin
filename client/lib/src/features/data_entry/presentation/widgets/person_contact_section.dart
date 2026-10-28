@@ -87,7 +87,7 @@ class PersonContactSection extends StatelessWidget {
     String? number, {
     required bool isFamilyNumber,
   }) async {
-    final doMakeCallResult = await showDialog(
+    final dialogChoice = await showDialog<ContactCallPromptChoice>(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('هل تريد اجراء مكالمة الأن'),
@@ -95,22 +95,20 @@ class PersonContactSection extends StatelessWidget {
           FilledButton.icon(
             icon: const Icon(Symbols.call),
             label: const Text('اجراء مكالمة الأن'),
-            onPressed: () => Navigator.of(context).pop(true),
+            onPressed: () =>
+                Navigator.of(context).pop(ContactCallPromptChoice.call),
           ),
           FilledButton.tonalIcon(
             style: Theme.of(context).filledTonalButtonStyleWorkaround,
             icon: const Icon(Symbols.dialpad),
             label: const Text('نسخ في لوحة الاتصال فقط'),
-            onPressed: () => Navigator.of(context).pop(false),
+            onPressed: () =>
+                Navigator.of(context).pop(ContactCallPromptChoice.dialerOnly),
           ),
         ],
       ),
     );
-    final callPromptChoice = switch (doMakeCallResult) {
-      true => ContactCallPromptChoice.call,
-      false => ContactCallPromptChoice.dialerOnly,
-      _ => ContactCallPromptChoice.cancel,
-    };
+    final callPromptChoice = dialogChoice ?? ContactCallPromptChoice.cancel;
 
     await _maybeLaunchCall(number, callPromptChoice);
     final isRecordingAccepted =
