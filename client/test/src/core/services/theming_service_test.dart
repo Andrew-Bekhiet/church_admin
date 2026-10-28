@@ -44,7 +44,7 @@ void main() {
         email: 'email',
         preferences: UserPreferences(
           uid: 'uid',
-          darkTheme: true,
+          themeChoice: ThemeChoice.dark,
           greatFeastTheme: false,
         ),
       );

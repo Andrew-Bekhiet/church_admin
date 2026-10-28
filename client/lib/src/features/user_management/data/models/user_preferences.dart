@@ -16,7 +16,9 @@ class UserPreferences with _$UserPreferences implements ToJson {
   @JsonKey(defaultValue: <String, dynamic>{})
   final Json secondLinePreferences;
 
-  final bool? darkTheme;
+  @JsonKey(name: 'darkTheme')
+  @StoredDarkThemeConverter()
+  final ThemeChoice themeChoice;
 
   @JsonKey(defaultValue: true)
   final bool greatFeastTheme;
@@ -30,8 +32,8 @@ class UserPreferences with _$UserPreferences implements ToJson {
     required this.uid,
     this.orderByPreferences = const {},
     this.secondLinePreferences = const {},
+    this.themeChoice = ThemeChoice.system,
     this.greatFeastTheme = true,
-    this.darkTheme,
     this.lastHomeMode,
     this.updatedAt,
   });

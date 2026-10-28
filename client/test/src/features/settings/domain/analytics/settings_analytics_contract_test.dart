@@ -26,20 +26,5 @@ void main() {
         expect(event.properties, expectedProperties);
       });
     }
-
-    const themeChoices = <(bool?, String)>[
-      (true, 'dark'),
-      (false, 'light'),
-      (null, 'system'),
-    ];
-
-    for (final (darkTheme, expectedChoice) in themeChoices) {
-      test(
-        'a dark theme setting of $darkTheme is the $expectedChoice theme',
-        () {
-          expect(ThemeChoice.of(darkTheme).name, expectedChoice);
-        },
-      );
-    }
   });
 }

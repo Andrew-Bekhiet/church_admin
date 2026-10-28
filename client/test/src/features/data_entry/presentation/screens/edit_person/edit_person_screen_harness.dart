@@ -120,7 +120,7 @@ class EditPersonScreenHarness {
     ).thenAnswer((_) => Completer<String>().future);
 
     final preferences = MockUserPreferencesService();
-    when(() => preferences.darkTheme).thenReturn(false);
+    when(() => preferences.themeChoice).thenReturn(ThemeChoice.light);
     when(() => preferences.greatFeastTheme).thenReturn(false);
 
     final viewableObjects = MockViewableObjectService();

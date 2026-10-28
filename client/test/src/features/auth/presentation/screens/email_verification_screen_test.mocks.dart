@@ -692,6 +692,13 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
 class MockUserPreferencesService extends _i1.Mock
     implements _i3.UserPreferencesService {
   @override
+  _i3.ThemeChoice get themeChoice => (super.noSuchMethod(
+    Invocation.getter(#themeChoice),
+    returnValue: _i3.ThemeChoice.dark,
+    returnValueForMissingStub: _i3.ThemeChoice.dark,
+  ) as _i3.ThemeChoice);
+
+  @override
   bool get greatFeastTheme => (super.noSuchMethod(
     Invocation.getter(#greatFeastTheme),
     returnValue: false,
@@ -707,11 +714,12 @@ class MockUserPreferencesService extends _i1.Mock
       ) as _i6.Stream<_i3.ThemePreferences>);
 
   @override
-  _i6.Future<void> setDarkTheme(bool? value) => (super.noSuchMethod(
-    Invocation.method(#setDarkTheme, [value]),
-    returnValue: _i6.Future<void>.value(),
-    returnValueForMissingStub: _i6.Future<void>.value(),
-  ) as _i6.Future<void>);
+  _i6.Future<void> setThemeChoice(_i3.ThemeChoice? value) =>
+      (super.noSuchMethod(
+        Invocation.method(#setThemeChoice, [value]),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
   _i6.Future<void> setGreatFeastTheme(bool? value) => (super.noSuchMethod(

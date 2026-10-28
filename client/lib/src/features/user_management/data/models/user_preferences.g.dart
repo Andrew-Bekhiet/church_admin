@@ -21,8 +21,10 @@ UserPreferences _$UserPreferencesFromJson(Map json) => UserPreferences(
         (k, e) => MapEntry(k as String, e),
       ) ??
       {},
+  themeChoice: json['darkTheme'] == null
+      ? ThemeChoice.system
+      : const StoredDarkThemeConverter().fromJson(json['darkTheme'] as bool?),
   greatFeastTheme: json['greatFeastTheme'] as bool? ?? true,
-  darkTheme: json['darkTheme'] as bool?,
   lastHomeMode: $enumDecodeNullable(_$HomeModeEnumMap, json['lastHomeMode']),
   updatedAt: _$JsonConverterFromJson<String, DateTime>(
     json['updatedAt'],
@@ -30,19 +32,20 @@ UserPreferences _$UserPreferencesFromJson(Map json) => UserPreferences(
   ),
 );
 
-Map<String, dynamic> _$UserPreferencesToJson(UserPreferences instance) =>
-    <String, dynamic>{
-      'uid': instance.uid,
-      'orderByPreferences': instance.orderByPreferences,
-      'secondLinePreferences': instance.secondLinePreferences,
-      'darkTheme': instance.darkTheme,
-      'greatFeastTheme': instance.greatFeastTheme,
-      'lastHomeMode': _$HomeModeEnumMap[instance.lastHomeMode],
-      'updatedAt': _$JsonConverterToJson<String, DateTime>(
-        instance.updatedAt,
-        const LocalDateTimeConverter().toJson,
-      ),
-    };
+Map<String, dynamic> _$UserPreferencesToJson(
+  UserPreferences instance,
+) => <String, dynamic>{
+  'uid': instance.uid,
+  'orderByPreferences': instance.orderByPreferences,
+  'secondLinePreferences': instance.secondLinePreferences,
+  'darkTheme': const StoredDarkThemeConverter().toJson(instance.themeChoice),
+  'greatFeastTheme': instance.greatFeastTheme,
+  'lastHomeMode': _$HomeModeEnumMap[instance.lastHomeMode],
+  'updatedAt': _$JsonConverterToJson<String, DateTime>(
+    instance.updatedAt,
+    const LocalDateTimeConverter().toJson,
+  ),
+};
 
 const _$HomeModeEnumMap = {
   HomeMode.sundaySchool: 'sundaySchool',

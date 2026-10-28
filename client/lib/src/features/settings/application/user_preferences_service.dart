@@ -48,12 +48,14 @@ class UserPreferencesService extends BlocObserver {
     };
   }
 
-  bool? get darkTheme {
+  ThemeChoice get themeChoice {
     if (_hasQueuedWrite(_darkThemeKey)) {
-      return _readQueuedWrite(_darkThemeKey) as bool?;
+      return ThemeChoice.fromStoredDarkTheme(
+        _readQueuedWrite(_darkThemeKey) as bool?,
+      );
     }
 
-    return _serverPreferences?.darkTheme;
+    return _serverPreferences?.themeChoice ?? ThemeChoice.system;
   }
 
   bool get greatFeastTheme {
@@ -68,7 +70,7 @@ class UserPreferencesService extends BlocObserver {
       .userDataStream
       .map(
         (_) => ThemePreferences(
-          darkTheme: darkTheme,
+          themeChoice: themeChoice,
           greatFeastTheme: greatFeastTheme,
         ),
       )
@@ -90,8 +92,8 @@ class UserPreferencesService extends BlocObserver {
     required this._authBloc,
   }) : _pendingWritesBox = box;
 
-  Future<void> setDarkTheme(bool? value) async {
-    _queueWrite(_darkThemeKey, value);
+  Future<void> setThemeChoice(ThemeChoice value) async {
+    _queueWrite(_darkThemeKey, value.storedDarkTheme);
     unawaited(_flushPending());
   }
 

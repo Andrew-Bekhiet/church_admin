@@ -59,29 +59,72 @@ void main() {
   }
 
   test(
-    'UserPreferencesService => darkTheme Subject: unset '
-    'Scenario: read Result: null',
+    'UserPreferencesService => themeChoice Subject: unset '
+    'Scenario: read Result: system',
     () {
-      expect(createUnit().darkTheme, isNull);
+      expect(createUnit().themeChoice, ThemeChoice.system);
     },
   );
 
   test(
-    'UserPreferencesService => darkTheme Subject: set true/false/null '
+    'UserPreferencesService => themeChoice Subject: set every choice '
     'Scenario: queue writes Result: getter reflects queued values',
     () async {
       final unit = createUnit();
 
-      await unit.setDarkTheme(true);
-      expect(unit.darkTheme, isTrue);
-
-      await unit.setDarkTheme(false);
-      expect(unit.darkTheme, isFalse);
-
-      await unit.setDarkTheme(null);
-      expect(unit.darkTheme, isNull);
+      for (final themeChoice in ThemeChoice.values) {
+        await unit.setThemeChoice(themeChoice);
+        expect(unit.themeChoice, themeChoice);
+      }
     },
   );
+
+  group('a theme stored before ThemeChoice existed', () {
+    for (final themeChoice in ThemeChoice.values) {
+      final storedDarkTheme = switch (themeChoice) {
+        ThemeChoice.dark => true,
+        ThemeChoice.light => false,
+        ThemeChoice.system => null,
+      };
+
+      test('queued as $storedDarkTheme loads as $themeChoice', () {
+        final box = FakeSyncKVStore<Object?>()
+          ..put(
+            'darkTheme',
+            storedDarkTheme ?? const <String, bool>{'pendingNull': true},
+          );
+
+        expect(createUnit(box: box).themeChoice, themeChoice);
+      });
+
+      test('on the server as $storedDarkTheme loads as $themeChoice', () {
+        when(() => authBloc.currentUserData).thenReturn(
+          User(
+            uid: 'uid',
+            name: 'name',
+            email: 'email',
+            preferences: UserPreferences.fromJson({
+              'uid': 'uid',
+              'darkTheme': storedDarkTheme,
+            }),
+          ),
+        );
+
+        expect(createUnit().themeChoice, themeChoice);
+      });
+
+      test('is still written as $storedDarkTheme for $themeChoice', () async {
+        final box = FakeSyncKVStore<Object?>();
+
+        await createUnit(box: box).setThemeChoice(themeChoice);
+
+        expect(
+          box.get('darkTheme'),
+          storedDarkTheme ?? const <String, bool>{'pendingNull': true},
+        );
+      });
+    }
+  });
 
   test(
     'UserPreferencesService => greatFeastTheme Subject: unset '
@@ -106,7 +149,7 @@ void main() {
   );
 
   test(
-    'UserPreferencesService => darkTheme: local null overrides server',
+    'UserPreferencesService => themeChoice: local system overrides server',
     () async {
       final box = FakeSyncKVStore();
       when(() => authBloc.currentUserData).thenReturn(
@@ -116,15 +159,15 @@ void main() {
           email: 'email',
           preferences: UserPreferences(
             uid: 'uid',
-            darkTheme: true,
+            themeChoice: ThemeChoice.dark,
           ),
         ),
       );
 
       final unit = createUnit(box: box);
-      await unit.setDarkTheme(null);
+      await unit.setThemeChoice(ThemeChoice.system);
 
-      expect(unit.darkTheme, isNull);
+      expect(unit.themeChoice, ThemeChoice.system);
     },
   );
 
@@ -149,7 +192,7 @@ void main() {
           email: 'email',
           preferences: UserPreferences(
             uid: 'uid',
-            darkTheme: true,
+            themeChoice: ThemeChoice.dark,
             greatFeastTheme: false,
             lastHomeMode: HomeMode.churchData,
           ),
@@ -158,7 +201,7 @@ void main() {
 
       final unit = createUnit(box: box);
 
-      await unit.setDarkTheme(null);
+      await unit.setThemeChoice(ThemeChoice.system);
       verify(
         () => userPreferences.updatePreferences(
           uid: 'uid',
