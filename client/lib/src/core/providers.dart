@@ -175,13 +175,6 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
   return authBloc;
 });
 
-final loggingProvidersProvider = Provider<List<LoggingProvider>>(
-  (ref) => [
-    SentryLoggingProvider(),
-    PostHogLoggingProvider(ref.watch(postHogClientProvider)),
-  ],
-);
-
 final loggingSettingsStoreProvider = Provider<LoggingSettingsStore>(
   (ref) => SharedPreferencesLoggingSettingsStore(),
 );
@@ -189,7 +182,10 @@ final loggingSettingsStoreProvider = Provider<LoggingSettingsStore>(
 final loggingServiceProvider = Provider<LoggingService>(
   (ref) {
     final loggingService = LoggingService(
-      ref.watch(loggingProvidersProvider),
+      [
+        SentryLoggingProvider(),
+        PostHogLoggingProvider(ref.watch(postHogClientProvider)),
+      ],
       ref.watch(loggingSettingsStoreProvider),
     );
 
@@ -203,13 +199,9 @@ final postHogClientProvider = Provider<PostHogClient>(
   (ref) => PostHogClient(Posthog()),
 );
 
-final analyticsProvidersProvider = Provider<List<AnalyticsProvider>>(
-  (ref) => [PostHogAnalyticsProvider(ref.watch(postHogClientProvider))],
-);
-
 final analyticsServiceProvider = Provider<AnalyticsService>(
   (ref) => AnalyticsService(
-    ref.watch(analyticsProvidersProvider),
+    [PostHogAnalyticsProvider(ref.watch(postHogClientProvider))],
     ref.watch(loggingServiceProvider),
   ),
 );
