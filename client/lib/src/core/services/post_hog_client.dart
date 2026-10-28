@@ -4,6 +4,7 @@ class PostHogClient {
   final Posthog sdk;
 
   Future<void>? _setup;
+  Future<void> _lastIdentityOperation = Future.value();
   String? _identifiedUserId;
   bool _isAnonymous = false;
 
@@ -21,6 +22,26 @@ class PostHogClient {
   }
 
   Future<void> identifyOrUpdateProperties({
+    required String userId,
+    required Map<String, Object> properties,
+  }) => _enqueueIdentityOperation(
+    () => _applyIdentifyOrUpdateProperties(
+      userId: userId,
+      properties: properties,
+    ),
+  );
+
+  Future<void> resetUnlessAnonymous() =>
+      _enqueueIdentityOperation(_applyResetUnlessAnonymous);
+
+  Future<void> _enqueueIdentityOperation(Future<void> Function() operation) {
+    final result = _lastIdentityOperation.then((_) => operation());
+    _lastIdentityOperation = result.catchError((_) => null);
+
+    return result;
+  }
+
+  Future<void> _applyIdentifyOrUpdateProperties({
     required String userId,
     required Map<String, Object> properties,
   }) async {
@@ -44,7 +65,7 @@ class PostHogClient {
     }
   }
 
-  Future<void> resetUnlessAnonymous() async {
+  Future<void> _applyResetUnlessAnonymous() async {
     if (_isAnonymous) return;
 
     final previousUserId = _identifiedUserId;

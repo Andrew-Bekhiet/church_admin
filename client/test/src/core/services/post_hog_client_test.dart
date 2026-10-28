@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
@@ -114,6 +116,7 @@ void main() {
 
       expect(sdk.identifiedUserIds, [firstUserId]);
       expect(sdk.personPropertyUpdates, isEmpty);
+      expect(sdk.currentUserId, firstUserId);
     });
 
     test('a failed reset is retried by the next sign-out', () async {
@@ -131,6 +134,42 @@ void main() {
       await client.resetUnlessAnonymous();
 
       expect(sdk.resetCount, 1);
+      expect(sdk.currentUserId, isNull);
     });
+
+    test(
+      'an identify that fails after a later identify started does not undo the later one',
+      () async {
+        final failure = StateError('identify failed');
+        final hold = Completer<void>();
+        sdk.nextIdentifyHold = hold;
+
+        final failingIdentify = expectLater(
+          client.identifyOrUpdateProperties(
+            userId: firstUserId,
+            properties: {},
+          ),
+          throwsA(failure),
+        );
+        final laterIdentify = client.identifyOrUpdateProperties(
+          userId: secondUserId,
+          properties: {},
+        );
+        await pumpEventQueue();
+        hold.completeError(failure);
+        await failingIdentify;
+        await laterIdentify;
+        await client.identifyOrUpdateProperties(
+          userId: secondUserId,
+          properties: {'adminOn': 'b'},
+        );
+
+        expect(sdk.identifiedUserIds, [secondUserId]);
+        expect(sdk.personPropertyUpdates, [
+          {'adminOn': 'b'},
+        ]);
+        expect(sdk.currentUserId, secondUserId);
+      },
+    );
   });
 }
