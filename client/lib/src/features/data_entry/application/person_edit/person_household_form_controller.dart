@@ -96,10 +96,10 @@ class PersonHouseholdFormController extends AdvancedFormController
     final shownAddressBeforeChange = address.toAddress();
     address.loadAsNewBaseline(chosen?.address ?? _addressCarriedByPerson);
     _updateAddressEditability();
-    _maybeTrackFamilyAddressFill(chosen, shownAddressBeforeChange);
+    _maybeTrackPersonAddressFromFamilyFill(chosen, shownAddressBeforeChange);
   }
 
-  void _maybeTrackFamilyAddressFill(
+  void _maybeTrackPersonAddressFromFamilyFill(
     Family? chosen,
     Address shownAddressBeforeChange,
   ) {
@@ -110,7 +110,7 @@ class PersonHouseholdFormController extends AdvancedFormController
       return;
     }
 
-    _analyticsService.track(FamilyAddressFill(chosen));
+    _analyticsService.track(PersonAddressFromFamilyFill(chosen));
   }
 
   void _updateAddressEditability() =>

@@ -114,14 +114,14 @@ final class StaleLocationReminderDismiss
   const StaleLocationReminderDismiss();
 }
 
-final class FamilyAddressFill extends AddressAnalyticsEvent {
+final class PersonAddressFromFamilyFill extends AddressAnalyticsEvent {
   final String familyId;
 
   @override
-  String get objectAction => 'family_address_fill';
+  String get objectAction => 'person_address_from_family_fill';
 
   @override
   Json get properties => {AnalyticsEntityType.family.idProperty: familyId};
 
-  FamilyAddressFill(Family family) : familyId = family.id;
+  PersonAddressFromFamilyFill(Family family) : familyId = family.id;
 }

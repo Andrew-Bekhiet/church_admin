@@ -151,8 +151,8 @@ void main() {
 
       controller.household.family.setValue(maadiFamily);
 
-      expect(fixture.analytics.trackedEventsOf<FamilyAddressFill>(), [
-        isA<FamilyAddressFill>().having(
+      expect(fixture.analytics.trackedEventsOf<PersonAddressFromFamilyFill>(), [
+        isA<PersonAddressFromFamilyFill>().having(
           (event) => event.familyId,
           'familyId',
           maadiFamily.id,
@@ -165,7 +165,10 @@ void main() {
 
       controller.household.family.setValue(const Family(id: 'f', name: 'ع'));
 
-      expect(fixture.analytics.trackedEventsOf<FamilyAddressFill>(), isEmpty);
+      expect(
+        fixture.analytics.trackedEventsOf<PersonAddressFromFamilyFill>(),
+        isEmpty,
+      );
     });
 
     test('whose address the form already shows is not tracked', () {
@@ -179,7 +182,10 @@ void main() {
         const Family(id: 'm', name: 'عائلة', address: maadiAddress),
       );
 
-      expect(fixture.analytics.trackedEventsOf<FamilyAddressFill>(), isEmpty);
+      expect(
+        fixture.analytics.trackedEventsOf<PersonAddressFromFamilyFill>(),
+        isEmpty,
+      );
     });
   });
 

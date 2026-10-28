@@ -85,8 +85,10 @@ void main() {
       properties: {},
     ),
     (
-      event: FamilyAddressFill(const Family(id: 'family-1', name: 'عائلة')),
-      name: 'address:family_address_fill',
+      event: PersonAddressFromFamilyFill(
+        const Family(id: 'family-1', name: 'عائلة'),
+      ),
+      name: 'address:person_address_from_family_fill',
       properties: {'family_id': 'family-1'},
     ),
   ];
