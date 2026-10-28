@@ -123,7 +123,7 @@ final class UserCreate extends UserManagementAnalyticsEvent {
   UserCreate(UserDraft draft, {Object? failure})
     : isSuccess = failure == null,
       failureKind = UserManagementAnalyticsEvent.failureKindOf(failure),
-      permissionCount = draft.permissions.length,
+      permissionCount = draft.permissions.validated().length,
       scopeCounts = UserManagementAnalyticsEvent.scopeCountsOf(draft.adminOn),
       hasInvitation = draft.invitation is InvitationRequest,
       personLinkMode = PersonLinkMode.of(draft.person);

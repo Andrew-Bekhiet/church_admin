@@ -25,6 +25,11 @@ void main() {
       invitation: const NoInvitation(),
     );
 
+    const draftPermissions = PermissionsSet.fromSet({
+      UserPermission.approved,
+      UserPermission.exportAllData,
+    });
+
     setUpAll(() {
       registerFallbackValue(
         CreateUserRequest.fromDraft(const UserDraft.empty()),
@@ -60,6 +65,23 @@ void main() {
         'has_invitation': false,
         'person_link_mode': PersonLinkMode.link.name,
       }),
+    );
+
+    blocTest<CreateUserCubit, UserFormState>(
+      'a permission dropped for its missing prerequisite is not counted as granted',
+      setUp: () => when(
+        () => functions.createUser(any()),
+      ).thenAnswer((_) async => 'new-uid'),
+      build: () => CreateUserCubit(
+        initial: validDraft.copyWith(permissions: draftPermissions),
+        functions: functions,
+        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+      ),
+      act: (cubit) => cubit.save(),
+      verify: (_) => expect(
+        analytics.trackedEventsOf<UserCreate>().single.permissionCount,
+        draftPermissions.validated().length,
+      ),
     );
 
     blocTest<CreateUserCubit, UserFormState>(
