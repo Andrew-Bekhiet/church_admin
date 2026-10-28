@@ -57,25 +57,32 @@ final class HomeListTypeToggle extends HomeAnalyticsEvent {
 
 final class HomeSearchRun extends HomeAnalyticsEvent {
   final int queryLength;
-  final HomeSearchOutcome outcome;
-  final List<HomeSearchSection> sections;
+  final HomeSearchSettled state;
 
   @override
   String get objectAction => 'search_run';
 
   @override
-  Json get properties => {
-    'query_length': queryLength,
-    'outcome': outcome.name,
-    'section_count': sections.length,
-    'result_count': sections.map((section) => section.items.length).sum,
-  };
+  Json get properties {
+    final sections = switch (state) {
+      HomeSearchFound(:final sections) => sections,
+      HomeSearchNothingFound() ||
+      HomeSearchFailed() => const <HomeSearchSection>[],
+    };
 
-  const HomeSearchRun({
-    required this.queryLength,
-    required this.outcome,
-    this.sections = const [],
-  });
+    return {
+      'query_length': queryLength,
+      'outcome': switch (state) {
+        HomeSearchFound() => 'found',
+        HomeSearchNothingFound() => 'nothingFound',
+        HomeSearchFailed() => 'failed',
+      },
+      'section_count': sections.length,
+      'result_count': sections.map((section) => section.items.length).sum,
+    };
+  }
+
+  const HomeSearchRun({required this.queryLength, required this.state});
 }
 
 final class HomeCreateTap extends HomeAnalyticsEvent {
@@ -153,8 +160,6 @@ final class DrawerDestinationOpen extends HomeAnalyticsEvent {
 enum HomeTabSelectMethod { tap, swipe }
 
 enum HomeModeSwitchEntry { appBarChip, drawer, summaryCard }
-
-enum HomeSearchOutcome { found, nothingFound, failed }
 
 enum HomeDrawerDestination {
   manageUsers,

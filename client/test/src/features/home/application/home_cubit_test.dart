@@ -91,12 +91,15 @@ void main() {
       build: () => fixture.buildCubit(),
       act: (cubit) => cubit.switchMode(HomeModeSwitchEntry.appBarChip),
       verify: (_) => expect(
-        fixture.analytics.trackedEvents.single.properties,
-        {
-          'from_mode': HomeMode.sundaySchool.name,
-          'to_mode': HomeMode.churchData.name,
-          'entry': HomeModeSwitchEntry.appBarChip.name,
-        },
+        fixture.analytics.trackedEvents.single,
+        isA<HomeModeSwitch>()
+            .having((event) => event.from, 'from', HomeMode.sundaySchool)
+            .having((event) => event.to, 'to', HomeMode.churchData)
+            .having(
+              (event) => event.entry,
+              'entry',
+              HomeModeSwitchEntry.appBarChip,
+            ),
       ),
     );
 

@@ -11,6 +11,7 @@ import '../support/fake_home_dao.dart';
 void main() {
   const family = Family(id: '1', name: 'family');
   const area = Area(id: '2', name: 'area');
+  const query = 'anyone';
 
   late FakeHomeDao dao;
   late RecordingAnalyticsProvider analytics;
@@ -20,13 +21,15 @@ void main() {
     analytics = RecordingAnalyticsProvider();
   });
 
+  HomeSearchCubit buildCubit() => HomeSearchCubit(
+    homeDao: dao,
+    analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+  );
+
   group('HomeSearchCubit', () {
     blocTest<HomeSearchCubit, HomeSearchState>(
       'an empty query is idle and never reaches the DAO',
-      build: () => HomeSearchCubit(
-        homeDao: dao,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      ),
+      build: buildCubit,
       act: (cubit) => cubit.search(''),
       wait: HomeSearchCubit.debounceDuration,
       expect: () => [isA<HomeSearchIdle>()],
@@ -35,10 +38,7 @@ void main() {
 
     blocTest<HomeSearchCubit, HomeSearchState>(
       'clearing the query goes back to idle',
-      build: () => HomeSearchCubit(
-        homeDao: dao,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      ),
+      build: buildCubit,
       act: (cubit) async {
         cubit.search('typed');
         await Future<void>.delayed(
@@ -52,10 +52,7 @@ void main() {
 
     blocTest<HomeSearchCubit, HomeSearchState>(
       'typing quickly searches once with the latest query after the debounce',
-      build: () => HomeSearchCubit(
-        homeDao: dao,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      ),
+      build: buildCubit,
       act: (cubit) async {
         cubit.search('first');
         await Future<void>.delayed(HomeSearchCubit.debounceDuration ~/ 3);
@@ -71,11 +68,8 @@ void main() {
         families: [family],
         areas: [area],
       ),
-      build: () => HomeSearchCubit(
-        homeDao: dao,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      ),
-      act: (cubit) => cubit.search('anyone'),
+      build: buildCubit,
+      act: (cubit) => cubit.search(query),
       wait: HomeSearchCubit.debounceDuration,
       expect: () => [
         isA<HomeSearchLoading>(),
@@ -93,26 +87,28 @@ void main() {
         families: [family],
         areas: [area],
       ),
-      build: () => HomeSearchCubit(
-        homeDao: dao,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      ),
-      act: (cubit) => cubit.search('anyone'),
+      build: buildCubit,
+      act: (cubit) => cubit.search(query),
       wait: HomeSearchCubit.debounceDuration,
-      verify: (_) => expect(analytics.trackedEvents.single.properties, {
-        'query_length': 'anyone'.length,
-        'outcome': HomeSearchOutcome.found.name,
-        'section_count': 2,
-        'result_count': 2,
-      }),
+      verify: (_) => expect(
+        analytics.trackedEvents.single,
+        isA<HomeSearchRun>()
+            .having((event) => event.queryLength, 'queryLength', query.length)
+            .having(
+              (event) => event.state,
+              'state',
+              isA<HomeSearchFound>().having(
+                (found) => found.sections.length,
+                'section count',
+                dao.results.sections.length,
+              ),
+            ),
+      ),
     );
 
     blocTest<HomeSearchCubit, HomeSearchState>(
       'a query without results is nothing found',
-      build: () => HomeSearchCubit(
-        homeDao: dao,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      ),
+      build: buildCubit,
       act: (cubit) => cubit.search('nobody'),
       wait: HomeSearchCubit.debounceDuration,
       expect: () => [
@@ -124,11 +120,8 @@ void main() {
     blocTest<HomeSearchCubit, HomeSearchState>(
       'a DAO error is failed',
       setUp: () => dao.error = StateError('offline'),
-      build: () => HomeSearchCubit(
-        homeDao: dao,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      ),
-      act: (cubit) => cubit.search('anyone'),
+      build: buildCubit,
+      act: (cubit) => cubit.search(query),
       wait: HomeSearchCubit.debounceDuration,
       expect: () => [
         isA<HomeSearchLoading>(),
@@ -142,10 +135,7 @@ void main() {
 
     blocTest<HomeSearchCubit, HomeSearchState>(
       'repeating the same query does not search again',
-      build: () => HomeSearchCubit(
-        homeDao: dao,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      ),
+      build: buildCubit,
       act: (cubit) async {
         cubit.search('same');
         await Future<void>.delayed(
@@ -160,10 +150,7 @@ void main() {
     blocTest<HomeSearchCubit, HomeSearchState>(
       'retyping a query right after clearing it still searches',
       setUp: () => dao.results = const HomeSearchResults(families: [family]),
-      build: () => HomeSearchCubit(
-        homeDao: dao,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      ),
+      build: buildCubit,
       act: (cubit) async {
         cubit.search('a');
         await Future<void>.delayed(
@@ -180,10 +167,7 @@ void main() {
     blocTest<HomeSearchCubit, HomeSearchState>(
       'clearing the query while a search is in flight ends idle',
       setUp: () => dao.gate = Completer(),
-      build: () => HomeSearchCubit(
-        homeDao: dao,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      ),
+      build: buildCubit,
       act: (cubit) async {
         cubit.search('slow');
         await Future<void>.delayed(
@@ -200,10 +184,7 @@ void main() {
     blocTest<HomeSearchCubit, HomeSearchState>(
       'clearing the query goes idle without waiting for the pending search',
       setUp: () => dao.gate = Completer(),
-      build: () => HomeSearchCubit(
-        homeDao: dao,
-        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-      ),
+      build: buildCubit,
       act: (cubit) async {
         cubit.search('slow');
         await Future<void>.delayed(

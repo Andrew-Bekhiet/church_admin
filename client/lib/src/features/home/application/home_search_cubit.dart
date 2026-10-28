@@ -35,7 +35,7 @@ class HomeSearchCubit extends Cubit<HomeSearchState> {
     if (query.isEmpty) return Stream.value(const HomeSearchIdle());
 
     return Stream.fromFuture(Future.sync(() => _homeDao.searchAll(query)))
-        .map<HomeSearchState>(
+        .map<HomeSearchSettled>(
           (results) => switch (results.sections) {
             [] => const HomeSearchNothingFound(),
             final sections => HomeSearchFound(sections),
@@ -44,26 +44,18 @@ class HomeSearchCubit extends Cubit<HomeSearchState> {
         .doOnData((state) => _trackSearch(query, state))
         .onErrorReturnWith((error, stackTrace) {
           addError(error, stackTrace);
-          _trackSearch(query, HomeSearchFailed(error));
+          final failed = HomeSearchFailed(error);
+          _trackSearch(query, failed);
 
-          return HomeSearchFailed(error);
+          return failed;
         })
+        .cast<HomeSearchState>()
         .startWith(const HomeSearchLoading());
   }
 
-  void _trackSearch(String query, HomeSearchState state) {
-    final (outcome, sections) = switch (state) {
-      HomeSearchFound(:final sections) => (HomeSearchOutcome.found, sections),
-      HomeSearchFailed() => (HomeSearchOutcome.failed, <HomeSearchSection>[]),
-      _ => (HomeSearchOutcome.nothingFound, <HomeSearchSection>[]),
-    };
-
+  void _trackSearch(String query, HomeSearchSettled state) {
     _analyticsService.track(
-      HomeSearchRun(
-        queryLength: query.length,
-        outcome: outcome,
-        sections: sections,
-      ),
+      HomeSearchRun(queryLength: query.length, state: state),
     );
   }
 
