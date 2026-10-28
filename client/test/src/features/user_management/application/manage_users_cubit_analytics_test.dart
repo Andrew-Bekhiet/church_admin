@@ -61,6 +61,24 @@ void main() {
     );
 
     blocTest<ManageUsersCubit, ManageUsersState>(
+      'repeating a search after clearing it is tracked again',
+      build: buildCubit,
+      act: (cubit) async {
+        final settle = HomeSearchCubit.debounceDuration * 2;
+        cubit.search(searchQuery);
+        await Future<void>.delayed(settle);
+        cubit.search('');
+        await Future<void>.delayed(settle);
+        cubit.search(searchQuery);
+      },
+      wait: HomeSearchCubit.debounceDuration * 2,
+      verify: (_) => expect(
+        analytics.trackedEventsOf<ManageUsersSearchRun>(),
+        hasLength(2),
+      ),
+    );
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
       'clearing the search is not tracked as running a search',
       build: buildCubit,
       act: (cubit) => cubit.search(''),

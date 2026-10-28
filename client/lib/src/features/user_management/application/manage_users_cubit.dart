@@ -39,8 +39,8 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
 
     _searchTrackingSubscription = _search
         .debounceTime(HomeSearchCubit.debounceDuration)
-        .whereNotNull()
         .distinct()
+        .whereNotNull()
         .listen(
           (query) => _analyticsService.track(
             ManageUsersSearchRun(
