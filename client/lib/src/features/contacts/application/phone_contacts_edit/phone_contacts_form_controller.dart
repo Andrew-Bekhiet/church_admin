@@ -60,12 +60,11 @@ sealed class PhoneContactsFormController extends AdvancedFormController {
   PhoneContactsFormController._({
     required List<PhoneContact> own,
     required List<FamilyPhoneContact> family,
-    required AnalyticsService analyticsService,
+    required this._analyticsService,
     PhoneNumberService phones = const PhoneNumberService(),
     bool Function()? canHaveFamilyNumbers,
     String Function()? newKey,
   }) : _phones = phones,
-       _analyticsService = analyticsService,
        _newKey = newKey ?? const Uuid().v4,
        _canHaveFamilyNumbers = canHaveFamilyNumbers ?? _always,
        _followedFamilyKeys = {for (final f in family) f.contact.id},

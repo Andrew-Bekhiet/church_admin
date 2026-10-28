@@ -1,4 +1,4 @@
-import 'package:church_admin/church_admin.dart';
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class LocationAnalyticsEvent extends AnalyticsEvent {
   final Json entityProperties;
@@ -103,5 +103,3 @@ final class LocationPointsSave extends LocationAnalyticsEvent {
     required this.isClosedShape,
   });
 }
-
-enum LocationSetMethod { tap, current, link }

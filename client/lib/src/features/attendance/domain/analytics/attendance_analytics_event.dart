@@ -1,6 +1,4 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:clock/clock.dart';
-import 'package:material_ui/material_ui.dart' show DateUtils;
+part of 'package:church_admin/src/core/analytics/domain/models/analytics_event.dart';
 
 sealed class AttendanceAnalyticsEvent extends AnalyticsEvent {
   static Json meetingPropertiesOf(Meeting meeting) => {
@@ -93,7 +91,7 @@ final class AttendanceMeetingSelectorDismiss extends AttendanceAnalyticsEvent {
 
 final class AttendanceDateChange extends AttendanceAnalyticsEvent {
   static int _daysFromTodayOf(DateTime day) {
-    final today = DateUtils.dateOnly(clock.now());
+    final today = clock.now();
 
     return DateTime.utc(
       day.year,
@@ -345,9 +343,3 @@ final class AttendanceRetry extends AttendanceAnalyticsEvent {
 
   AttendanceRetry(super.meeting);
 }
-
-enum AttendanceMarkState { present, absent }
-
-enum AttendanceLetterGutterGesture { tap, drag }
-
-enum AttendanceAnalysisPreset { today, custom }
