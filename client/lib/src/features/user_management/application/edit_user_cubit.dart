@@ -64,7 +64,13 @@ class EditUserCubit extends UserFormCubit {
   @override
   @protected
   UserSaveAttemptEvent saveEventOf(UserDraft draft, AttemptOutcome outcome) =>
-      UserSave(_userBeforeEditing, draft, outcome);
+      UserSave(
+        _userBeforeEditing,
+        outcome is AttemptSucceeded
+            ? draft.copyWith(adminOn: _persistedUser.adminOn ?? [])
+            : draft,
+        outcome,
+      );
 
   List<AdminOnData> _restrictAdminOnToCallerScopes(
     List<AdminOnData> newAdminOn,

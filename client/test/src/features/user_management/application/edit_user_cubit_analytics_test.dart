@@ -120,6 +120,36 @@ void main() {
     );
 
     blocTest<EditUserCubit, UserFormState>(
+      'saving tracks the scopes that were stored, not the ones the caller '
+      'could not manage',
+      setUp: () => when(() => authBloc.currentUserData).thenReturn(
+        const User(
+          uid: 'area-manager',
+          name: 'مسؤول',
+          adminOn: [
+            AdminOnData(
+              permissionId: 'caller-scope',
+              area: Area(id: 'a1', name: 'منطقة'),
+              areaAdminOnUsers: true,
+            ),
+          ],
+        ),
+      ),
+      build: () => buildCubit(
+        editedUser.copyWith(adminOn: const [areaScope, serviceScope]),
+      ),
+      act: (cubit) {
+        cubit.setAdminOn(const [areaScope, newGroupScope]);
+
+        return cubit.save();
+      },
+      verify: (_) => expect(
+        analytics.trackedEventsOf<UserSave>().single,
+        savedUserWith(),
+      ),
+    );
+
+    blocTest<EditUserCubit, UserFormState>(
       'saving is tracked against the edited user',
       build: () => buildCubit(editedUser),
       act: (cubit) => cubit.save(),
