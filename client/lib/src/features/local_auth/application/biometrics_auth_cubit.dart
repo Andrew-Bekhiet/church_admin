@@ -64,16 +64,19 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
     try {
       authenticated = await _localAuthService.authenticate();
     } on Exception {
+      if (isClosed) return;
+
       _trackBiometricsUnlock(UnlockOutcome.failed, isAutoPrompted);
-      if (!isClosed) _emitFailure();
+      _emitFailure();
 
       return;
     }
+    if (isClosed) return;
+
     _trackBiometricsUnlock(
       authenticated ? UnlockOutcome.unlocked : UnlockOutcome.notAuthenticated,
       isAutoPrompted,
     );
-    if (isClosed) return;
 
     if (authenticated) {
       _localAuthService.resetAuthState(route: next);
@@ -112,10 +115,11 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
         keyBytes: keyBytes,
         storedPasswordHash: storedPasswordHash,
       );
+      if (isClosed) return;
+
       _trackPasswordUnlock(
         authenticated ? UnlockOutcome.unlocked : UnlockOutcome.wrongPassword,
       );
-      if (isClosed) return;
 
       if (authenticated) {
         _localAuthService.resetAuthState(route: next);
@@ -130,8 +134,10 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
         ),
       );
     } on Exception {
+      if (isClosed) return;
+
       _trackPasswordUnlock(UnlockOutcome.failed);
-      if (!isClosed) _emitFailure();
+      _emitFailure();
     }
   }
 

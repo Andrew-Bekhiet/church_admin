@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
@@ -222,5 +223,63 @@ void main() {
 
     expect(cubit.state, isA<BiometricsAuthFailure>());
     expect(localAuthService.isLocked, isTrue);
+  });
+
+  test('a biometric prompt finishing after close is not tracked', () async {
+    final prompt = Completer<bool>();
+    when(() => localAuthService.authenticate())
+        .thenAnswer((_) => prompt.future);
+    final cubit = buildCubit();
+
+    final attempt = cubit.authenticateBiometrically();
+    await cubit.close();
+    prompt.complete(true);
+    await attempt;
+
+    expect(analytics.trackedEventsOf<BiometricsUnlockSubmit>(), isEmpty);
+  });
+
+  test('a failed biometric prompt after close is not tracked', () async {
+    final prompt = Completer<bool>();
+    when(() => localAuthService.authenticate())
+        .thenAnswer((_) => prompt.future);
+    final cubit = buildCubit();
+
+    final attempt = cubit.authenticateBiometrically();
+    await cubit.close();
+    prompt.completeError(PlatformException(code: 'unavailable'));
+    await attempt;
+
+    expect(analytics.trackedEventsOf<BiometricsUnlockSubmit>(), isEmpty);
+  });
+
+  test('a password check finishing after close is not tracked', () async {
+    final passwordHash = Completer<String?>();
+    when(
+      () => authStorage.getPasswordHash(),
+    ).thenAnswer((_) => passwordHash.future);
+    final cubit = buildCubit();
+
+    final attempt = cubit.submitPassword('correct');
+    await cubit.close();
+    passwordHash.complete('correct:user@example.com');
+    await attempt;
+
+    expect(analytics.trackedEventsOf<PasswordUnlockSubmit>(), isEmpty);
+  });
+
+  test('a failed password check after close is not tracked', () async {
+    final passwordHash = Completer<String?>();
+    when(
+      () => authStorage.getPasswordHash(),
+    ).thenAnswer((_) => passwordHash.future);
+    final cubit = buildCubit();
+
+    final attempt = cubit.submitPassword('correct');
+    await cubit.close();
+    passwordHash.completeError(PlatformException(code: 'unavailable'));
+    await attempt;
+
+    expect(analytics.trackedEventsOf<PasswordUnlockSubmit>(), isEmpty);
   });
 }
