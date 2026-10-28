@@ -8,16 +8,6 @@ class DefaultMeetingSaveCubit<T extends ViewableWithIDAndImage>
   T? _createdOwner;
   Meeting? _createdMeeting;
 
-  @override
-  bool? get isDefaultMeetingCreated => switch ((
-    _createdOwner,
-    _createdMeeting,
-  )) {
-    (null, _) => null,
-    (_, Meeting(isArchived: false)) => true,
-    _ => false,
-  };
-
   DefaultMeetingSaveCubit({
     required this._meetingOwner,
     required this._meetingsDAO,
@@ -26,6 +16,28 @@ class DefaultMeetingSaveCubit<T extends ViewableWithIDAndImage>
     required super.photoUploader,
     required super.analyticsService,
   });
+
+  @override
+  ObjectSaveAttempt saveAttemptOf(
+    ObjectSaveOutcome<T> outcome, {
+    required ViewableWithID entity,
+    required bool isCreate,
+    required Duration formOpenDuration,
+  }) => switch ((_createdOwner, _createdMeeting)) {
+    (null, _) => super.saveAttemptOf(
+      outcome,
+      entity: entity,
+      isCreate: isCreate,
+      formOpenDuration: formOpenDuration,
+    ),
+    (_, final meeting) => DefaultMeetingObjectSaveAttempt(
+      entity: entity,
+      isCreate: isCreate,
+      formOpenDuration: formOpenDuration,
+      outcome: outcome,
+      isDefaultMeetingCreated: meeting != null && !meeting.isArchived,
+    ),
+  };
 
   @override
   Future<T> create(T object) async {

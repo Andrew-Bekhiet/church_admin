@@ -11,9 +11,6 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
   final AnalyticsService _analyticsService;
   final Stopwatch _sinceFormOpened = Stopwatch()..start();
 
-  @protected
-  bool? get isDefaultMeetingCreated => null;
-
   bool get _editorWasClosed => isClosed || _form.isDisposed;
 
   ObjectSaveCubit({
@@ -34,6 +31,19 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
 
     return outcome;
   }
+
+  @protected
+  ObjectSaveAttempt saveAttemptOf(
+    ObjectSaveOutcome<T> outcome, {
+    required ViewableWithID entity,
+    required bool isCreate,
+    required Duration formOpenDuration,
+  }) => PlainObjectSaveAttempt(
+    entity: entity,
+    isCreate: isCreate,
+    formOpenDuration: formOpenDuration,
+    outcome: outcome,
+  );
 
   Future<bool> tryDeleteSavedObject() async {
     final savedObject = _form.savedObject;
@@ -111,16 +121,14 @@ class ObjectSaveCubit<T extends ViewableWithIDAndImage>
   }
 
   void _maybeTrackSaveAttempt(ObjectSaveOutcome<T> outcome) {
-    final result = ObjectSaveResult.ofObjectOutcome(outcome);
-    if (result == null) return;
+    if (outcome is ObjectSaveAlreadyInProgress<T>) return;
 
     _analyticsService.track(
-      ObjectSaveAttempt(
+      saveAttemptOf(
+        outcome,
         entity: _form.savedObject ?? _form.initialDraft,
         isCreate: _form.isCreate,
-        outcome: result,
         formOpenDuration: _sinceFormOpened.elapsed,
-        isDefaultMeetingCreated: isDefaultMeetingCreated,
       ),
     );
   }

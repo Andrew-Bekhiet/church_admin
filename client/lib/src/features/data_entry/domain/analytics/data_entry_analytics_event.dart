@@ -7,13 +7,12 @@ sealed class DataEntryAnalyticsEvent extends AnalyticsEvent {
   const DataEntryAnalyticsEvent();
 }
 
-final class ObjectSaveAttempt extends DataEntryAnalyticsEvent {
+sealed class ObjectSaveAttempt extends DataEntryAnalyticsEvent {
   final Json entityProperties;
   final bool isCreate;
-  final ObjectSaveResult outcome;
   final Duration formOpenDuration;
-  final List<PersonRuleViolationKind>? ruleViolationKinds;
-  final bool? isDefaultMeetingCreated;
+
+  String get outcomeName;
 
   @override
   String get objectAction => 'object_save_attempt';
@@ -22,25 +21,96 @@ final class ObjectSaveAttempt extends DataEntryAnalyticsEvent {
   Json get properties => {
     ...entityProperties,
     'is_create': isCreate,
-    'outcome': outcome.name,
+    'outcome': outcomeName,
     'form_open_duration_ms': formOpenDuration.inMilliseconds,
-    if (ruleViolationKinds case final kinds?)
-      'rule_violations': [for (final kind in kinds) kind.name],
-    if (isDefaultMeetingCreated case final isCreated?)
-      'is_default_meeting_created': isCreated,
   };
 
   ObjectSaveAttempt({
     required ViewableWithID entity,
     required this.isCreate,
-    required this.outcome,
     required this.formOpenDuration,
-    Set<PersonRuleViolation>? ruleViolations,
-    this.isDefaultMeetingCreated,
-  }) : entityProperties = AnalyticsEntityType.propertiesOf(entity),
-       ruleViolationKinds = ruleViolations
-           ?.map(PersonRuleViolationKind.of)
-           .toList(growable: false);
+  }) : entityProperties = AnalyticsEntityType.propertiesOf(entity);
+}
+
+final class PersonSaveAttempt extends ObjectSaveAttempt {
+  final PersonSaveOutcome outcome;
+  final Set<PersonRuleViolation> shownRuleViolations;
+
+  @override
+  String get outcomeName => switch (outcome) {
+    PersonSaved() => 'saved',
+    PersonSavedButPhotoFailed() => 'savedButPhotoFailed',
+    PersonSaveFailed() => 'failed',
+    InvalidPerson() => 'invalid',
+    MoveOutOfSightDeclined() => 'moveOutOfSightDeclined',
+    MembershipsNotLoadedYet() => 'membershipsNotLoadedYet',
+    MembershipsFailedToLoad() => 'membershipsFailedToLoad',
+    SaveAbandonedBecauseFormWasDisposed() => 'abandoned',
+    SaveAlreadyInProgress() => 'alreadyInProgress',
+  };
+
+  @override
+  Json get properties => {
+    ...super.properties,
+    'rule_violations': [
+      for (final violation in shownRuleViolations)
+        switch (violation) {
+          NothingPlacesThePerson() => 'nothingPlacesThePerson',
+          AddressChangeBlockedByMove() => 'addressChangeBlockedByMove',
+          ServicesOutsideStudyYear() => 'servicesOutsideStudyYear',
+          NoServiceOrGroupToKeepPersonEditable() =>
+            'noServiceOrGroupToKeepPersonEditable',
+        },
+    ],
+  };
+
+  PersonSaveAttempt({
+    required this.outcome,
+    required this.shownRuleViolations,
+    required super.entity,
+    required super.isCreate,
+    required super.formOpenDuration,
+  });
+}
+
+final class PlainObjectSaveAttempt extends ObjectSaveAttempt {
+  final ObjectSaveOutcome<Object?> outcome;
+
+  @override
+  String get outcomeName => switch (outcome) {
+    ObjectSaved() => 'saved',
+    ObjectSavedButPhotoFailed() => 'savedButPhotoFailed',
+    ObjectSaveFailed() => 'failed',
+    InvalidObject() => 'invalid',
+    ObjectMoveOutOfSightDeclined() => 'moveOutOfSightDeclined',
+    ObjectSaveAbandonedBecauseEditorClosed() => 'abandoned',
+    ObjectSaveAlreadyInProgress() => 'alreadyInProgress',
+  };
+
+  PlainObjectSaveAttempt({
+    required this.outcome,
+    required super.entity,
+    required super.isCreate,
+    required super.formOpenDuration,
+  });
+}
+
+final class DefaultMeetingObjectSaveAttempt extends PlainObjectSaveAttempt {
+  final bool isDefaultMeetingCreated;
+
+  @override
+  Json get properties => {
+    ...super.properties,
+    'is_default_meeting_created': isDefaultMeetingCreated,
+  };
+
+  DefaultMeetingObjectSaveAttempt({
+    required this.isDefaultMeetingCreated,
+    required super.entity,
+    required super.isCreate,
+    required super.formOpenDuration,
+    required super.outcome,
+  });
 }
 
 final class ObjectDelete extends DataEntryAnalyticsEvent {
@@ -55,20 +125,4 @@ final class ObjectDelete extends DataEntryAnalyticsEvent {
 
   ObjectDelete(ViewableWithID entity, {required this.isSuccess})
     : entityProperties = AnalyticsEntityType.propertiesOf(entity);
-}
-
-enum PersonRuleViolationKind {
-  nothingPlacesThePerson,
-  addressChangeBlockedByMove,
-  servicesOutsideStudyYear,
-  noServiceOrGroupToKeepPersonEditable;
-
-  static PersonRuleViolationKind of(PersonRuleViolation violation) =>
-      switch (violation) {
-        NothingPlacesThePerson() => nothingPlacesThePerson,
-        AddressChangeBlockedByMove() => addressChangeBlockedByMove,
-        ServicesOutsideStudyYear() => servicesOutsideStudyYear,
-        NoServiceOrGroupToKeepPersonEditable() =>
-          noServiceOrGroupToKeepPersonEditable,
-      };
 }

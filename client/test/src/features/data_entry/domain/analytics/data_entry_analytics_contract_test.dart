@@ -9,28 +9,30 @@ void main() {
 
   final contracts = <({AnalyticsEvent event, String name, Json properties})>[
     (
-      event: ObjectSaveAttempt(
+      event: PersonSaveAttempt(
         entity: person,
         isCreate: true,
-        outcome: ObjectSaveResult.saved,
+        outcome: PersonSaved(person: person, movedOutOfSight: false),
         formOpenDuration: const Duration(seconds: 12, milliseconds: 345),
+        shownRuleViolations: const {},
       ),
       name: 'data_entry:object_save_attempt',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'is_create': true,
         'outcome': 'saved',
         'form_open_duration_ms': 12345,
+        'rule_violations': <String>[],
       },
     ),
     (
-      event: ObjectSaveAttempt(
+      event: PersonSaveAttempt(
         entity: person,
         isCreate: false,
-        outcome: ObjectSaveResult.invalid,
+        outcome: const InvalidPerson(),
         formOpenDuration: const Duration(milliseconds: 800),
-        ruleViolations: const {
+        shownRuleViolations: const {
           NothingPlacesThePerson(),
           AddressChangeBlockedByMove(),
           ServicesOutsideStudyYear(),
@@ -40,7 +42,7 @@ void main() {
       name: 'data_entry:object_save_attempt',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'is_create': false,
         'outcome': 'invalid',
         'form_open_duration_ms': 800,
@@ -53,17 +55,22 @@ void main() {
       },
     ),
     (
-      event: ObjectSaveAttempt(
+      event: DefaultMeetingObjectSaveAttempt(
         entity: service,
         isCreate: true,
-        outcome: ObjectSaveResult.savedButPhotoFailed,
+        outcome: ObjectSavedButPhotoFailed(
+          object: service,
+          movedOutOfSight: false,
+          error: failure,
+          stackTrace: stackTrace,
+        ),
         formOpenDuration: Duration.zero,
         isDefaultMeetingCreated: true,
       ),
       name: 'data_entry:object_save_attempt',
       properties: {
         'entity_type': 'service',
-        'service_id': 'service-1',
+        'service_id': service.id,
         'is_create': true,
         'outcome': 'savedButPhotoFailed',
         'form_open_duration_ms': 0,
@@ -75,7 +82,7 @@ void main() {
       name: 'data_entry:object_delete',
       properties: {
         'entity_type': 'person',
-        'person_id': 'person-1',
+        'person_id': person.id,
         'is_success': false,
       },
     ),
@@ -88,7 +95,7 @@ void main() {
     });
   }
 
-  final personOutcomes = <({PersonSaveOutcome outcome, String? sent})>[
+  final personOutcomes = <({PersonSaveOutcome outcome, String sent})>[
     (
       outcome: PersonSaved(person: person, movedOutOfSight: false),
       sent: 'saved',
@@ -115,17 +122,24 @@ void main() {
     (outcome: const MembershipsNotLoadedYet(), sent: 'membershipsNotLoadedYet'),
     (outcome: const MembershipsFailedToLoad(), sent: 'membershipsFailedToLoad'),
     (outcome: const SaveAbandonedBecauseFormWasDisposed(), sent: 'abandoned'),
-    (outcome: const SaveAlreadyInProgress(), sent: null),
+    (outcome: const SaveAlreadyInProgress(), sent: 'alreadyInProgress'),
   ];
 
   for (final (:outcome, :sent) in personOutcomes) {
-    test('a person save ending in ${outcome.runtimeType} sends '
-        '${sent ?? 'no save attempt'}', () {
-      expect(ObjectSaveResult.ofPersonOutcome(outcome)?.name, sent);
+    test('a person save ending in ${outcome.runtimeType} sends $sent', () {
+      final attempt = PersonSaveAttempt(
+        entity: person,
+        isCreate: true,
+        outcome: outcome,
+        formOpenDuration: Duration.zero,
+        shownRuleViolations: const {},
+      );
+
+      expect(attempt.properties, containsPair('outcome', sent));
     });
   }
 
-  final objectOutcomes = <({ObjectSaveOutcome<Service> outcome, String? sent})>[
+  final objectOutcomes = <({ObjectSaveOutcome<Service> outcome, String sent})>[
     (
       outcome: const ObjectSaved(object: service, movedOutOfSight: false),
       sent: 'saved',
@@ -156,13 +170,19 @@ void main() {
       outcome: const ObjectSaveAbandonedBecauseEditorClosed(),
       sent: 'abandoned',
     ),
-    (outcome: const ObjectSaveAlreadyInProgress(), sent: null),
+    (outcome: const ObjectSaveAlreadyInProgress(), sent: 'alreadyInProgress'),
   ];
 
   for (final (:outcome, :sent) in objectOutcomes) {
-    test('an object save ending in ${outcome.runtimeType} sends '
-        '${sent ?? 'no save attempt'}', () {
-      expect(ObjectSaveResult.ofObjectOutcome(outcome)?.name, sent);
+    test('an object save ending in ${outcome.runtimeType} sends $sent', () {
+      final attempt = PlainObjectSaveAttempt(
+        entity: service,
+        isCreate: true,
+        outcome: outcome,
+        formOpenDuration: Duration.zero,
+      );
+
+      expect(attempt.properties, containsPair('outcome', sent));
     });
   }
 }

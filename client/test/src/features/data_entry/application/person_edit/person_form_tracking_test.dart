@@ -24,15 +24,18 @@ void main() {
 
     await controller.submit();
 
-    expect(
-      fixture.analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
-      allOf(
-        containsPair('entity_type', AnalyticsEntityType.person.key),
-        containsPair('person_id', fixture.persons.createdPeople.single.id),
-        containsPair('is_create', true),
-        containsPair('outcome', ObjectSaveResult.saved.name),
-      ),
-    );
+    expect(fixture.analytics.trackedEventsOf<ObjectSaveAttempt>(), [
+      isA<PersonSaveAttempt>()
+          .having(
+            (event) => event.entityProperties,
+            'entityProperties',
+            AnalyticsEntityType.propertiesOf(
+              fixture.persons.createdPeople.single,
+            ),
+          )
+          .having((event) => event.isCreate, 'isCreate', true)
+          .having((event) => event.outcome, 'outcome', isA<PersonSaved>()),
+    ]);
   });
 
   test(
@@ -43,15 +46,15 @@ void main() {
 
       await controller.submit();
 
-      expect(
-        fixture.analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
-        allOf(
-          containsPair('outcome', ObjectSaveResult.invalid.name),
-          containsPair('rule_violations', [
-            PersonRuleViolationKind.nothingPlacesThePerson.name,
-          ]),
-        ),
-      );
+      expect(fixture.analytics.trackedEventsOf<ObjectSaveAttempt>(), [
+        isA<PersonSaveAttempt>()
+            .having((event) => event.outcome, 'outcome', isA<InvalidPerson>())
+            .having(
+              (event) => event.shownRuleViolations,
+              'shownRuleViolations',
+              [isA<NothingPlacesThePerson>()],
+            ),
+      ]);
     },
   );
 
@@ -60,10 +63,13 @@ void main() {
 
     await controller.submit();
 
-    expect(
-      fixture.analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
-      containsPair('outcome', ObjectSaveResult.membershipsNotLoadedYet.name),
-    );
+    expect(fixture.analytics.trackedEventsOf<ObjectSaveAttempt>(), [
+      isA<PersonSaveAttempt>().having(
+        (event) => event.outcome,
+        'outcome',
+        isA<MembershipsNotLoadedYet>(),
+      ),
+    ]);
   });
 
   test('deleting a stored person is tracked as a successful delete', () async {
@@ -71,14 +77,15 @@ void main() {
 
     await controller.deletePerson();
 
-    expect(
-      fixture.analytics.singleTrackedPropertiesOf<ObjectDelete>(),
-      {
-        'entity_type': AnalyticsEntityType.person.key,
-        'person_id': storedPerson.id,
-        'is_success': true,
-      },
-    );
+    expect(fixture.analytics.trackedEventsOf<ObjectDelete>(), [
+      isA<ObjectDelete>()
+          .having(
+            (event) => event.entityProperties,
+            'entityProperties',
+            AnalyticsEntityType.propertiesOf(storedPerson),
+          )
+          .having((event) => event.isSuccess, 'isSuccess', true),
+    ]);
   });
 
   test(
@@ -89,11 +96,15 @@ void main() {
 
       await controller.deletePerson().catchError((Object _) {});
 
-      expect(fixture.analytics.singleTrackedPropertiesOf<ObjectDelete>(), {
-        'entity_type': AnalyticsEntityType.person.key,
-        'person_id': storedPerson.id,
-        'is_success': false,
-      });
+      expect(fixture.analytics.trackedEventsOf<ObjectDelete>(), [
+        isA<ObjectDelete>()
+            .having(
+              (event) => event.entityProperties,
+              'entityProperties',
+              AnalyticsEntityType.propertiesOf(storedPerson),
+            )
+            .having((event) => event.isSuccess, 'isSuccess', false),
+      ]);
     },
   );
 
@@ -105,13 +116,13 @@ void main() {
 
       await controller.submit(confirmMoveOutOfSight: () async => false);
 
-      expect(
-        fixture.analytics.singleTrackedPropertiesOf<OutOfSightWarningShow>(),
-        {
-          'entity_type': AnalyticsEntityType.person.key,
-          'person_id': storedPerson.id,
-        },
-      );
+      expect(fixture.analytics.trackedEventsOf<OutOfSightWarningShow>(), [
+        isA<OutOfSightWarningShow>().having(
+          (event) => event.entityProperties,
+          'entityProperties',
+          AnalyticsEntityType.propertiesOf(storedPerson),
+        ),
+      ]);
     });
 
     test('is tracked as answering the warning with no', () async {
@@ -121,10 +132,13 @@ void main() {
 
       await controller.submit(confirmMoveOutOfSight: () async => false);
 
-      expect(
-        fixture.analytics.singleTrackedPropertiesOf<OutOfSightWarningAnswer>(),
-        containsPair('is_confirmed', false),
-      );
+      expect(fixture.analytics.trackedEventsOf<OutOfSightWarningAnswer>(), [
+        isA<OutOfSightWarningAnswer>().having(
+          (event) => event.isConfirmed,
+          'isConfirmed',
+          false,
+        ),
+      ]);
     });
   });
 
@@ -137,9 +151,13 @@ void main() {
 
       controller.household.family.setValue(maadiFamily);
 
-      expect(fixture.analytics.singleTrackedPropertiesOf<FamilyAddressFill>(), {
-        'family_id': maadiFamily.id,
-      });
+      expect(fixture.analytics.trackedEventsOf<FamilyAddressFill>(), [
+        isA<FamilyAddressFill>().having(
+          (event) => event.familyId,
+          'familyId',
+          maadiFamily.id,
+        ),
+      ]);
     });
 
     test('without an address is not tracked as filling the address', () {

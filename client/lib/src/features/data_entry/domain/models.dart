@@ -24,7 +24,6 @@ export 'models/job.dart';
 export 'models/labeled_enum.dart';
 export 'models/martial_status.dart';
 export 'models/object_image_info.dart';
-export 'models/object_save_result.dart';
 export 'models/person.dart';
 export 'models/person_state.dart';
 export 'models/person_type.dart';

@@ -334,16 +334,15 @@ class PersonFormController extends AdvancedFormController {
   }
 
   void _maybeTrackSaveAttempt(PersonSaveOutcome outcome) {
-    final result = ObjectSaveResult.ofPersonOutcome(outcome);
-    if (result == null) return;
+    if (outcome is SaveAlreadyInProgress) return;
 
     _analyticsService.track(
-      ObjectSaveAttempt(
+      PersonSaveAttempt(
         entity: _startingPerson,
         isCreate: isCreate,
-        outcome: result,
         formOpenDuration: _sinceFormOpened.elapsed,
-        ruleViolations: isDisposed ? null : _shownViolations.value,
+        outcome: outcome,
+        shownRuleViolations: isDisposed ? const {} : _shownViolations.value,
       ),
     );
   }

@@ -247,15 +247,16 @@ void main() {
         form.name.setValue('المعادي');
         await cubit.submit();
       },
-      verify: (_) => expect(
-        analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
-        allOf(
-          containsPair('entity_type', AnalyticsEntityType.area.key),
-          containsPair('area_id', areas.createdObjects.single.id),
-          containsPair('is_create', true),
-          containsPair('outcome', ObjectSaveResult.saved.name),
-        ),
-      ),
+      verify: (_) => expect(analytics.trackedEventsOf<ObjectSaveAttempt>(), [
+        isA<PlainObjectSaveAttempt>()
+            .having(
+              (event) => event.entityProperties,
+              'entityProperties',
+              AnalyticsEntityType.propertiesOf(areas.createdObjects.single),
+            )
+            .having((event) => event.isCreate, 'isCreate', true)
+            .having((event) => event.outcome, 'outcome', isA<ObjectSaved>()),
+      ]),
     );
 
     blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
@@ -271,33 +272,36 @@ void main() {
         form.photo.setValue(ReplacePhoto(newPhoto));
         await cubit.submit();
       },
-      verify: (_) => expect(
-        analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
-        allOf(
-          containsPair('is_create', false),
-          containsPair('outcome', ObjectSaveResult.savedButPhotoFailed.name),
-        ),
-      ),
+      verify: (_) => expect(analytics.trackedEventsOf<ObjectSaveAttempt>(), [
+        isA<PlainObjectSaveAttempt>()
+            .having((event) => event.isCreate, 'isCreate', false)
+            .having(
+              (event) => event.outcome,
+              'outcome',
+              isA<ObjectSavedButPhotoFailed>(),
+            ),
+      ]),
     );
 
     blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
       'an invalid form is tracked as an invalid save',
       build: () => cubitEditing(const CreateBlankArea()),
       act: (cubit) => cubit.submit(),
-      verify: (_) => expect(
-        analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
-        containsPair('outcome', ObjectSaveResult.invalid.name),
-      ),
+      verify: (_) => expect(analytics.trackedEventsOf<ObjectSaveAttempt>(), [
+        isA<PlainObjectSaveAttempt>().having(
+          (event) => event.outcome,
+          'outcome',
+          isA<InvalidObject>(),
+        ),
+      ]),
     );
 
     blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
       'an invalid form is tracked as a save attempt, not as a save',
       build: () => cubitEditing(const CreateBlankArea()),
       act: (cubit) => cubit.submit(),
-      verify: (_) => expect(
-        analytics.trackedEvents.map((event) => event.name),
-        ['data_entry:object_save_attempt'],
-      ),
+      verify: (_) =>
+          expect(analytics.trackedEvents, [isA<ObjectSaveAttempt>()]),
     );
 
     blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
@@ -321,14 +325,15 @@ void main() {
       'a deleted area is tracked as a successful delete of that area',
       build: cubitEditingStoredArea,
       act: (cubit) => cubit.tryDeleteSavedObject(),
-      verify: (_) => expect(
-        analytics.singleTrackedPropertiesOf<ObjectDelete>(),
-        {
-          'entity_type': AnalyticsEntityType.area.key,
-          'area_id': storedArea.id,
-          'is_success': true,
-        },
-      ),
+      verify: (_) => expect(analytics.trackedEventsOf<ObjectDelete>(), [
+        isA<ObjectDelete>()
+            .having(
+              (event) => event.entityProperties,
+              'entityProperties',
+              AnalyticsEntityType.propertiesOf(storedArea),
+            )
+            .having((event) => event.isSuccess, 'isSuccess', true),
+      ]),
     );
 
     blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
@@ -340,12 +345,15 @@ void main() {
       },
       act: (cubit) =>
           cubit.tryDeleteSavedObject().catchError((Object _) => false),
-      verify: (_) =>
-          expect(analytics.singleTrackedPropertiesOf<ObjectDelete>(), {
-            'entity_type': AnalyticsEntityType.area.key,
-            'area_id': storedArea.id,
-            'is_success': false,
-          }),
+      verify: (_) => expect(analytics.trackedEventsOf<ObjectDelete>(), [
+        isA<ObjectDelete>()
+            .having(
+              (event) => event.entityProperties,
+              'entityProperties',
+              AnalyticsEntityType.propertiesOf(storedArea),
+            )
+            .having((event) => event.isSuccess, 'isSuccess', false),
+      ]),
     );
   });
 }

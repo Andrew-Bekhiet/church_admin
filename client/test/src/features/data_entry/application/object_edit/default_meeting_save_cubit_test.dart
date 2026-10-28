@@ -197,10 +197,13 @@ void main() {
 
         return cubit.submit();
       },
-      verify: (_) => expect(
-        analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
-        containsPair('is_default_meeting_created', true),
-      ),
+      verify: (_) => expect(analytics.trackedEventsOf<ObjectSaveAttempt>(), [
+        isA<DefaultMeetingObjectSaveAttempt>().having(
+          (event) => event.isDefaultMeetingCreated,
+          'isDefaultMeetingCreated',
+          true,
+        ),
+      ]),
     );
 
     blocTest<DefaultMeetingSaveCubit<Service>, ObjectSaveProgress>(
@@ -212,10 +215,13 @@ void main() {
 
         return cubit.submit();
       },
-      verify: (_) => expect(
-        analytics.singleTrackedPropertiesOf<ObjectSaveAttempt>(),
-        containsPair('is_default_meeting_created', false),
-      ),
+      verify: (_) => expect(analytics.trackedEventsOf<ObjectSaveAttempt>(), [
+        isA<DefaultMeetingObjectSaveAttempt>().having(
+          (event) => event.isDefaultMeetingCreated,
+          'isDefaultMeetingCreated',
+          false,
+        ),
+      ]),
     );
   });
 }
