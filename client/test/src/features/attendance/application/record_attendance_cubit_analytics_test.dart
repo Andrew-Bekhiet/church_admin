@@ -193,7 +193,7 @@ void main() {
     );
 
     blocTest<RecordAttendanceCubit, RecordAttendanceState>(
-      'an attendance time edit is tracked by how far it moved the time',
+      'an attendance time edit is tracked with its outcome',
       setUp: () => f.attendanceRecords = [recorded],
       build: () => f.createCubit(),
       act: (cubit) async {
@@ -215,11 +215,6 @@ void main() {
               f.meetingProperties,
             )
             .having((event) => event.personId, 'personId', personId)
-            .having(
-              (event) => event.shiftDurationMs,
-              'shiftDurationMs',
-              const Duration(hours: 2).inMilliseconds,
-            )
             .having(
               (event) => event.outcome,
               'outcome',

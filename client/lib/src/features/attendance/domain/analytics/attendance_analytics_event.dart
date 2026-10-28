@@ -78,17 +78,7 @@ final class AttendanceMeetingSelectorDismiss extends AttendanceAnalyticsEvent {
 }
 
 final class AttendanceDateChange extends AttendanceAnalyticsEvent {
-  static int _daysFromTodayOf(DateTime day) {
-    final today = clock.now();
-
-    return DateTime.utc(
-      day.year,
-      day.month,
-      day.day,
-    ).difference(DateTime.utc(today.year, today.month, today.day)).inDays;
-  }
-
-  final int daysFromToday;
+  final String date;
   final bool hasRecordsOnDay;
 
   @override
@@ -97,7 +87,7 @@ final class AttendanceDateChange extends AttendanceAnalyticsEvent {
   @override
   Json get properties => {
     ...super.properties,
-    'days_from_today': daysFromToday,
+    'date': date,
     'has_records_on_day': hasRecordsOnDay,
   };
 
@@ -105,7 +95,7 @@ final class AttendanceDateChange extends AttendanceAnalyticsEvent {
     super.meeting, {
     required DateTime day,
     required this.hasRecordsOnDay,
-  }) : daysFromToday = _daysFromTodayOf(day);
+  }) : date = day.toIso8601String().split('T').first;
 }
 
 final class AttendanceAudienceViewToggle extends AttendanceAnalyticsEvent {
@@ -267,7 +257,6 @@ final class AttendanceStreakWindowChange extends AttendanceAnalyticsEvent {
 
 final class AttendanceTimeEdit extends AttendanceAnalyticsEvent {
   final String personId;
-  final int shiftDurationMs;
   final AttendanceTimeEditOutcome outcome;
 
   @override
@@ -277,7 +266,6 @@ final class AttendanceTimeEdit extends AttendanceAnalyticsEvent {
   Json get properties => {
     ...super.properties,
     'person_id': personId,
-    'shift_duration_ms': shiftDurationMs,
     'is_rejected_future': outcome == AttendanceTimeEditOutcome.rejectedAsFuture,
     'is_success': outcome == AttendanceTimeEditOutcome.saved,
   };
@@ -285,9 +273,8 @@ final class AttendanceTimeEdit extends AttendanceAnalyticsEvent {
   AttendanceTimeEdit(
     super.meeting, {
     required this.personId,
-    required Duration shift,
     required this.outcome,
-  }) : shiftDurationMs = shift.inMilliseconds;
+  });
 }
 
 final class AttendancePersonProfileOpen extends AttendanceAnalyticsEvent {

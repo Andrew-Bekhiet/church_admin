@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:clock/clock.dart';
 import 'package:collection/collection.dart';
 import 'package:permission_handler/permission_handler.dart'
     show PermissionStatus;

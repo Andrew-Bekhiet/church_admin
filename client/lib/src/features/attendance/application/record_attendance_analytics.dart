@@ -140,12 +140,10 @@ class RecordAttendanceAnalytics {
   void trackRejectedTimeEdit(
     Meeting meeting,
     AttendanceRecord editedRecord,
-    DateTime newDatetime,
   ) => track(
     AttendanceTimeEdit(
       meeting,
       personId: editedRecord.personId,
-      shift: newDatetime.difference(editedRecord.datetime),
       outcome: AttendanceTimeEditOutcome.rejectedAsFuture,
     ),
   );
@@ -153,13 +151,11 @@ class RecordAttendanceAnalytics {
   AttendanceSaveTracking timeEditTracking(
     Meeting meeting,
     AttendanceRecord editedRecord,
-    DateTime newDatetime,
   ) => TrackedAttendanceSave(
     ({required isSaved}) => track(
       AttendanceTimeEdit(
         meeting,
         personId: editedRecord.personId,
-        shift: newDatetime.difference(editedRecord.datetime),
         outcome: isSaved
             ? AttendanceTimeEditOutcome.saved
             : AttendanceTimeEditOutcome.failed,

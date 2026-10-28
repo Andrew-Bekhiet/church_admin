@@ -12,6 +12,8 @@ void main() {
   const person2Id = 'person-2';
   const person3Id = 'person-3';
   const person4Id = 'person-4';
+  final changedDay = DateTime(2026, 10, 7);
+  const changedDayIso = '2026-10-07';
   final today = Clock.fixed(DateTime(2026, 10, 23, 9));
   const serviceMeeting = Meeting(
     id: serviceMeetingId,
@@ -113,18 +115,15 @@ void main() {
             {'meeting_id': standaloneMeetingId},
           ),
           (
-            withClock(
-              today,
-              () => AttendanceDateChange(
-                standaloneMeeting,
-                day: DateTime(2026, 10, 20),
-                hasRecordsOnDay: true,
-              ),
+            AttendanceDateChange(
+              standaloneMeeting,
+              day: changedDay,
+              hasRecordsOnDay: true,
             ),
             'attendance:date_change',
             {
               'meeting_id': standaloneMeetingId,
-              'days_from_today': -3,
+              'date': changedDayIso,
               'has_records_on_day': true,
             },
           ),
@@ -270,14 +269,12 @@ void main() {
             AttendanceTimeEdit(
               standaloneMeeting,
               personId: person3Id,
-              shift: const Duration(minutes: -15),
               outcome: AttendanceTimeEditOutcome.saved,
             ),
             'attendance:time_edit',
             {
               'meeting_id': standaloneMeetingId,
               'person_id': person3Id,
-              'shift_duration_ms': -900000,
               'is_rejected_future': false,
               'is_success': true,
             },

@@ -232,7 +232,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     if (newDatetime.isAfter(clock.now())) {
       _presenter.showError('لا يمكن تسجيل الحضور في وقت لم يأت بعد');
-      _analytics.trackRejectedTimeEdit(_meeting, record, newDatetime);
+      _analytics.trackRejectedTimeEdit(_meeting, record);
 
       return;
     }
@@ -240,7 +240,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     await _runOptimisticAttendance(
       entry: entry,
       optimisticTime: newDatetime,
-      tracking: _analytics.timeEditTracking(_meeting, record, newDatetime),
+      tracking: _analytics.timeEditTracking(_meeting, record),
       action: () => _dao.updateAttendanceTime(
         attendanceRecordId: record.id,
         datetime: newDatetime,
