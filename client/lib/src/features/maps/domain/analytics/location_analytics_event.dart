@@ -61,20 +61,35 @@ final class LocationClipboardLinkShow extends LocationAnalyticsEvent {
   LocationClipboardLinkShow(super.entity, this.inputKind);
 }
 
-final class LocationSave extends LocationAnalyticsEvent {
-  final LocationSetMethod? lastSetMethod;
-
+sealed class LocationSave extends LocationAnalyticsEvent {
   @override
   String get objectAction => 'save';
+
+  LocationSave(super.entity);
+}
+
+final class LocationSaveWithChange extends LocationSave {
+  final LocationSetMethod lastSetMethod;
 
   @override
   Json get properties => {
     ...super.properties,
-    'last_set_method': lastSetMethod?.name,
-    'is_changed': lastSetMethod != null,
+    'last_set_method': lastSetMethod.name,
+    'is_changed': true,
   };
 
-  LocationSave(super.entity, {required this.lastSetMethod});
+  LocationSaveWithChange(super.entity, this.lastSetMethod);
+}
+
+final class LocationSaveWithoutChange extends LocationSave {
+  @override
+  Json get properties => {
+    ...super.properties,
+    'last_set_method': null,
+    'is_changed': false,
+  };
+
+  LocationSaveWithoutChange(super.entity);
 }
 
 final class LocationPointsSave extends LocationAnalyticsEvent {

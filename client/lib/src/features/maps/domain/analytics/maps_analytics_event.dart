@@ -65,26 +65,26 @@ final class MapsLayerToggle extends MapsAnalyticsEvent {
   const MapsLayerToggle(this.layer, {required this.isEnabled});
 }
 
-final class MapsMarkerTap extends MapsAnalyticsEvent {
+sealed class MapsMarkerAnalyticsEvent extends MapsAnalyticsEvent {
   @override
   final Json properties;
 
-  @override
-  String get objectAction => 'marker_tap';
-
-  MapsMarkerTap(Object entity)
+  MapsMarkerAnalyticsEvent(Object entity)
     : properties = AnalyticsEntityType.propertiesOf(entity);
 }
 
-final class MapsMarkerDetailsOpen extends MapsAnalyticsEvent {
+final class MapsMarkerTap extends MapsMarkerAnalyticsEvent {
   @override
-  final Json properties;
+  String get objectAction => 'marker_tap';
 
+  MapsMarkerTap(super.entity);
+}
+
+final class MapsMarkerDetailsOpen extends MapsMarkerAnalyticsEvent {
   @override
   String get objectAction => 'marker_details_open';
 
-  MapsMarkerDetailsOpen(Object entity)
-    : properties = AnalyticsEntityType.propertiesOf(entity);
+  MapsMarkerDetailsOpen(super.entity);
 }
 
 final class MapsExternalNavigationStart extends MapsAnalyticsEvent {

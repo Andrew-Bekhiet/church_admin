@@ -38,7 +38,7 @@ class SelectPolygon extends StatelessWidget {
                     resultArea.copyWith(bounds: Polygon(newCoords)),
                 onSaved: Navigator.of(context).pop,
                 closedShape: true,
-                isPointsSaveTracked: false,
+                pointsSaveTracking: const UntrackedPointsSave(),
                 geomapOptions: GeomapOptions(
                   layers: const {GeoMapLayer.areas},
                   selectedAreas: {initialArea},

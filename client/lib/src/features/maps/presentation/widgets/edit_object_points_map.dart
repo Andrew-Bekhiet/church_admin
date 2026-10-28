@@ -23,7 +23,7 @@ class EditObjectPointsMap<T extends ViewableWithID> extends StatefulWidget {
   final List<Point>? Function(T) getObjectPoints;
   final T Function(List<Point>, T) onModify;
   final bool closedShape;
-  final bool isPointsSaveTracked;
+  final PointsSaveTracking pointsSaveTracking;
 
   const EditObjectPointsMap({
     required this.geomapOptions,
@@ -33,7 +33,7 @@ class EditObjectPointsMap<T extends ViewableWithID> extends StatefulWidget {
     required this.getObjectPoints,
     required this.onModify,
     this.closedShape = false,
-    this.isPointsSaveTracked = true,
+    this.pointsSaveTracking = const TrackedPointsSave(),
     super.key,
   });
 
@@ -234,7 +234,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
   }
 
   void _save() {
-    if (widget.isPointsSaveTracked) {
+    if (widget.pointsSaveTracking is TrackedPointsSave) {
       AnalyticsService.I.track(
         LocationPointsSave(
           resultObject.value,

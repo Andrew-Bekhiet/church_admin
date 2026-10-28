@@ -126,7 +126,7 @@ void main() {
             },
           ),
           (
-            LocationSave(person, lastSetMethod: LocationSetMethod.link),
+            LocationSaveWithChange(person, LocationSetMethod.link),
             'location:save',
             {
               'entity_type': 'person',
@@ -136,7 +136,7 @@ void main() {
             },
           ),
           (
-            LocationSave(family, lastSetMethod: null),
+            LocationSaveWithoutChange(family),
             'location:save',
             {
               'entity_type': 'family',

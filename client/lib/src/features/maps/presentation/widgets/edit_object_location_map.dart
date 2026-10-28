@@ -163,7 +163,13 @@ class _EditObjectLocationMap<T extends ViewableWithID>
 
   void _save() {
     AnalyticsService.I.track(
-      LocationSave(resultObject.value, lastSetMethod: _lastSetMethod),
+      switch (_lastSetMethod) {
+        final lastSetMethod? => LocationSaveWithChange(
+          resultObject.value,
+          lastSetMethod,
+        ),
+        null => LocationSaveWithoutChange(resultObject.value),
+      },
     );
     widget.onSaved(resultObject.value);
   }
