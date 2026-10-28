@@ -6,6 +6,9 @@ import '../../fakes/recording_posthog.dart';
 
 void main() {
   group('PostHogClient', () {
+    const firstUserId = 'user-1';
+    const secondUserId = 'user-2';
+
     late RecordingPosthog sdk;
     late PostHogClient client;
 
@@ -23,19 +26,34 @@ void main() {
       expect(sdk.setups, [same(loggingConfig)]);
     });
 
+    test('a failed setup is retried by the next caller', () async {
+      final config = PostHogConfig('token');
+      sdk.setupFailure = StateError('setup failed');
+
+      await expectLater(
+        client.setupUnlessAlreadySetUp(config),
+        throwsA(sdk.setupFailure),
+      );
+      sdk.setupFailure = null;
+      await client.setupUnlessAlreadySetUp(config);
+      await client.setupUnlessAlreadySetUp(config);
+
+      expect(sdk.setups, [same(config), same(config)]);
+    });
+
     test(
       'identifying the same user again only updates their properties',
       () async {
         await client.identifyOrUpdateProperties(
-          userId: 'user-1',
+          userId: firstUserId,
           properties: {'permissions': 'a'},
         );
         await client.identifyOrUpdateProperties(
-          userId: 'user-1',
+          userId: firstUserId,
           properties: {'adminOn': 'b'},
         );
 
-        expect(sdk.identifiedUserIds, ['user-1']);
+        expect(sdk.identifiedUserIds, [firstUserId]);
         expect(sdk.personPropertyUpdates, [
           {'adminOn': 'b'},
         ]);
@@ -43,14 +61,23 @@ void main() {
     );
 
     test('a different user is identified anew', () async {
-      await client.identifyOrUpdateProperties(userId: 'user-1', properties: {});
-      await client.identifyOrUpdateProperties(userId: 'user-2', properties: {});
+      await client.identifyOrUpdateProperties(
+        userId: firstUserId,
+        properties: {},
+      );
+      await client.identifyOrUpdateProperties(
+        userId: secondUserId,
+        properties: {},
+      );
 
-      expect(sdk.identifiedUserIds, ['user-1', 'user-2']);
+      expect(sdk.identifiedUserIds, [firstUserId, secondUserId]);
     });
 
     test('signing out twice resets the SDK once', () async {
-      await client.identifyOrUpdateProperties(userId: 'user-1', properties: {});
+      await client.identifyOrUpdateProperties(
+        userId: firstUserId,
+        properties: {},
+      );
 
       await client.resetUnlessAnonymous();
       await client.resetUnlessAnonymous();
@@ -59,11 +86,17 @@ void main() {
     });
 
     test('the same user is identified again after a reset', () async {
-      await client.identifyOrUpdateProperties(userId: 'user-1', properties: {});
+      await client.identifyOrUpdateProperties(
+        userId: firstUserId,
+        properties: {},
+      );
       await client.resetUnlessAnonymous();
-      await client.identifyOrUpdateProperties(userId: 'user-1', properties: {});
+      await client.identifyOrUpdateProperties(
+        userId: firstUserId,
+        properties: {},
+      );
 
-      expect(sdk.identifiedUserIds, ['user-1', 'user-1']);
+      expect(sdk.identifiedUserIds, [firstUserId, firstUserId]);
     });
   });
 }

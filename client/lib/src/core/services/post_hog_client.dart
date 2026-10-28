@@ -9,8 +9,16 @@ class PostHogClient {
 
   PostHogClient(this.sdk);
 
-  Future<void> setupUnlessAlreadySetUp(PostHogConfig config) =>
-      _setup ??= sdk.setup(config);
+  Future<void> setupUnlessAlreadySetUp(PostHogConfig config) async {
+    final setup = _setup ??= sdk.setup(config);
+
+    try {
+      await setup;
+    } catch (_) {
+      if (identical(_setup, setup)) _setup = null;
+      rethrow;
+    }
+  }
 
   Future<void> identifyOrUpdateProperties({
     required String userId,

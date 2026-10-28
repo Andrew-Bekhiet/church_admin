@@ -6,9 +6,13 @@ class RecordingPosthog extends Fake implements Posthog {
   final List<String> identifiedUserIds = [];
   final List<Map<String, Object>?> personPropertyUpdates = [];
   int resetCount = 0;
+  Object? setupFailure;
 
   @override
-  Future<void> setup(PostHogConfig config) async => setups.add(config);
+  Future<void> setup(PostHogConfig config) async {
+    setups.add(config);
+    if (setupFailure case final failure?) throw failure;
+  }
 
   @override
   Future<void> identify({
