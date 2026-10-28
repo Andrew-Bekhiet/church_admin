@@ -20,14 +20,7 @@ class HomeBottomNavBar extends StatelessWidget {
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             selectedIndex: homeState.currentTabIndex,
             onDestinationSelected: (index) {
-              if (index == homeState.currentTabIndex) return;
-
-              AnalyticsService.I.track(
-                HomeTabSelect(
-                  homeState.tabs[index],
-                  method: HomeTabSelectMethod.tap,
-                ),
-              );
+              _maybeTrackTabTap(homeState, index);
               pageController.animateToPage(
                 index,
                 duration: kTabScrollDuration,
@@ -46,6 +39,14 @@ class HomeBottomNavBar extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  void _maybeTrackTabTap(HomeState homeState, int index) {
+    if (index == homeState.currentTabIndex) return;
+
+    AnalyticsService.I.track(
+      HomeTabSelect(homeState.tabs[index], method: HomeTabSelectMethod.tap),
     );
   }
 }

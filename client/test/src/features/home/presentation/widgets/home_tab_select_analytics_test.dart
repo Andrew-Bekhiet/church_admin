@@ -84,5 +84,26 @@ void main() {
       );
       await harness.unmount(tester);
     });
+
+    testWidgets('tapping the selected destination mid-animation cancels back '
+        'to it and tracks only the first tap', (tester) async {
+      await harness.pump(tester);
+
+      await tester.tap(
+        find.byKey(HomeBottomNavBarKeys.destinationFor(secondTab)),
+      );
+      await tester.pump(kTabScrollDuration ~/ 4);
+      await tester.tap(
+        find.byKey(HomeBottomNavBarKeys.destinationFor(firstTab)),
+      );
+      await tester.pumpAndSettle();
+
+      expect(harness.selectedIndexOf(tester), tabs.indexOf(firstTab));
+      expect(
+        tabSelects(),
+        [isTabSelect(secondTab, HomeTabSelectMethod.tap)],
+      );
+      await harness.unmount(tester);
+    });
   });
 }
