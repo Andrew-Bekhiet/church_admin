@@ -39,7 +39,9 @@ class PersonDetailsList extends StatelessWidget {
         CopiablePropertyWidget(
           'ملاحظات',
           person.notes,
-          copiedProperty: CopiedEntityProperty.notes,
+          onCopied: () => AnalyticsService.I.track(
+            const EntityPropertyCopy(CopiedEntityProperty.notes),
+          ),
           showErrorIfEmpty: false,
         ),
         const Divider(thickness: 1),

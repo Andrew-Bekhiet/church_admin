@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:church_admin/church_admin.dart';
 import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
@@ -10,13 +9,13 @@ class CopiablePropertyWidget extends StatelessWidget {
   final String? value;
   final bool showErrorIfEmpty;
   final List<Widget>? additionalOptions;
-  final CopiedEntityProperty? copiedProperty;
+  final VoidCallback? onCopied;
   const CopiablePropertyWidget(
     this.propName,
     this.value, {
     this.showErrorIfEmpty = true,
     this.additionalOptions,
-    this.copiedProperty,
+    this.onCopied,
     super.key,
   });
 
@@ -28,9 +27,7 @@ class CopiablePropertyWidget extends StatelessWidget {
         icon: const Icon(Symbols.content_copy),
         tooltip: 'نسخ',
         onPressed: () {
-          if (copiedProperty case final property?) {
-            AnalyticsService.I.track(EntityPropertyCopy(property));
-          }
+          onCopied?.call();
           unawaited(Clipboard.setData(ClipboardData(text: value!)));
         },
       );

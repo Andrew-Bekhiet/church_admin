@@ -68,12 +68,10 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   final bool showTime;
   final DateTime? value;
   final ViewableObjectListController<T> Function() getHistoryListController;
-  final TrackedHistory? trackedAs;
+  final HistoryTracking trackedAs;
 
   void Function() _onHistoryTap(BuildContext context) => () {
-    if (trackedAs case final history?) {
-      AnalyticsService.I.track(HistoryDialogOpen(history));
-    }
+    _maybeTrack(HistoryDialogOpen.new);
     unawaited(
       showHistoryDialog<T>(
         context,
@@ -83,14 +81,21 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
     );
   };
 
+  void _maybeTrack(AnalyticsEvent Function(TrackedHistory) eventOf) {
+    final tracking = trackedAs;
+    if (tracking is! TrackedHistory) return;
+
+    AnalyticsService.I.track(eventOf(tracking));
+  }
+
   DateFormat get dateFormat => _dateFormat(showTime: showTime);
   const HistoryProperty({
     required this.name,
     required this.getHistoryListController,
     this.showTime = true,
+    this.trackedAs = const UntrackedHistory(),
     this.onRecordNow,
     this.value,
-    this.trackedAs,
     super.key,
   });
 
@@ -126,9 +131,7 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  if (trackedAs case final history?) {
-                    AnalyticsService.I.track(HistoryRecordNowTap(history));
-                  }
+                  _maybeTrack(HistoryRecordNowTap.new);
                   onRecordNow?.call();
                 },
                 icon: const Icon(Symbols.task_alt),

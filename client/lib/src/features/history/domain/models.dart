@@ -1,1 +1,2 @@
-export 'models/tracked_history.dart';
+export 'models/history_kind.dart';
+export 'models/history_tracking.dart';

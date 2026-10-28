@@ -91,7 +91,9 @@ class _ViewStoreState extends State<ViewStore> {
           CopiablePropertyWidget(
             'العنوان والموقع',
             store.address?.toString(),
-            copiedProperty: CopiedEntityProperty.address,
+            onCopied: () => AnalyticsService.I.track(
+              const EntityPropertyCopy(CopiedEntityProperty.address),
+            ),
             additionalOptions: [
               if (store.geolocation != null)
                 IconButton(

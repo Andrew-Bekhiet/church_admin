@@ -31,7 +31,9 @@ class FamilyDetailsList extends StatelessWidget {
         CopiablePropertyWidget(
           'العنوان والموقع',
           family.address?.toString(),
-          copiedProperty: CopiedEntityProperty.address,
+          onCopied: () => AnalyticsService.I.track(
+            const EntityPropertyCopy(CopiedEntityProperty.address),
+          ),
           additionalOptions: [
             if (family.geolocation != null)
               IconButton(
@@ -73,7 +75,9 @@ class FamilyDetailsList extends StatelessWidget {
         CopiablePropertyWidget(
           'ملاحظات',
           family.notes,
-          copiedProperty: CopiedEntityProperty.notes,
+          onCopied: () => AnalyticsService.I.track(
+            const EntityPropertyCopy(CopiedEntityProperty.notes),
+          ),
           showErrorIfEmpty: false,
         ),
         ListTile(

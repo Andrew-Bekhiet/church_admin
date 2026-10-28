@@ -36,7 +36,9 @@ class PersonContactSection extends StatelessWidget {
         CopiablePropertyWidget(
           'العنوان والموقع',
           person.address?.toString(),
-          copiedProperty: CopiedEntityProperty.address,
+          onCopied: () => AnalyticsService.I.track(
+            const EntityPropertyCopy(CopiedEntityProperty.address),
+          ),
           additionalOptions: [
             if (person.geolocation != null)
               IconButton(
