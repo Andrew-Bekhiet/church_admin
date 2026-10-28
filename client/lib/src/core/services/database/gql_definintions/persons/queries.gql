@@ -236,3 +236,23 @@ query personServicesClassesGroups($id: uuid!) {
     }
   }
 }
+
+query personsPhoneContacts($ids: [uuid!]!) {
+  persons(where: { id: { _in: $ids } }) {
+    id
+    name
+    contacts(orderBy: [{ isMainPhone: DESC }, { createdAt: ASC }]) {
+      ...PhoneContact
+    }
+    familyContacts(
+      where: { personType: { isFamilyAdmin: { _eq: true } } }
+      orderBy: [
+        { personType: { order: ASC } }
+        { isMainPhone: DESC }
+        { createdAt: ASC }
+      ]
+    ) {
+      ...FamilyPhoneContact
+    }
+  }
+}

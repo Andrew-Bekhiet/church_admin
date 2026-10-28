@@ -1208,6 +1208,15 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
   ) as _i9.Future<_i4.Person?>);
 
   @override
+  _i9.Future<List<_i4.Person>?> personsPhoneContacts({
+    required Iterable<String>? personsIds,
+  }) => (super.noSuchMethod(
+    Invocation.method(#personsPhoneContacts, [], {#personsIds: personsIds}),
+    returnValue: _i9.Future<List<_i4.Person>?>.value(),
+    returnValueForMissingStub: _i9.Future<List<_i4.Person>?>.value(),
+  ) as _i9.Future<List<_i4.Person>?>);
+
+  @override
   _i9.Future<_i4.PersonsGeolocationsResponse?> personsGeolocations({
     List<_i4.UuidValue>? areasIds = const [],
     List<_i4.UuidValue>? streetsIds = const [],

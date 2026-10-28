@@ -42,6 +42,20 @@ class FakePersonsDAO extends Fake implements PersonsDAO {
     return newObject;
   }
 
+  List<Person> personsWithPhoneContacts = const [];
+  Object? phoneContactsError;
+
+  @override
+  Future<List<Person>?> personsPhoneContacts({
+    required Iterable<String> personsIds,
+  }) async {
+    if (phoneContactsError case final error?) throw error;
+
+    return personsWithPhoneContacts
+        .where((person) => personsIds.contains(person.id))
+        .toList();
+  }
+
   @override
   Future<Person?> deleteById({required String id}) async {
     await deleteGate?.future;
