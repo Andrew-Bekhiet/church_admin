@@ -25,18 +25,31 @@ class BulkWhatsappComposeView extends StatelessWidget {
       children: [
         MessageTemplateField(controller: templateController),
         if (previewRecipient != null)
-          Card(
+          Card.filled(
+            color: theme.colorScheme.surfaceContainerHigh,
             margin: const EdgeInsets.symmetric(vertical: 16),
-            child: ListTile(
-              title: Text('معاينة: ${previewRecipient.person.name}'),
-              subtitle: ListenableBuilder(
-                listenable: templateController,
-                builder: (context, _) => Text(
-                  templateController.template.renderFor(
-                    previewRecipient.person,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: 8,
+                children: [
+                  Text(
+                    'معاينة: ${previewRecipient.person.name}',
+                    style: theme.textTheme.titleMedium,
                   ),
-                  key: BulkWhatsappComposeViewKeys.preview,
-                ),
+                  MessageBubble(
+                    child: ListenableBuilder(
+                      listenable: templateController,
+                      builder: (context, _) => Text(
+                        templateController.template.renderFor(
+                          previewRecipient.person,
+                        ),
+                        key: BulkWhatsappComposeViewKeys.preview,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

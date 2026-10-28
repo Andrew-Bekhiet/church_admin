@@ -26,7 +26,8 @@ class BulkWhatsappQueueView extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         LinearProgressIndicator(value: state.currentPosition / reachableCount),
-        Card(
+        Card.filled(
+          color: theme.colorScheme.surfaceContainerHigh,
           margin: const EdgeInsets.symmetric(vertical: 16),
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -39,27 +40,33 @@ class BulkWhatsappQueueView extends StatelessWidget {
                   key: BulkWhatsappQueueViewKeys.currentName,
                   style: theme.textTheme.titleLarge,
                 ),
-                DropdownButtonFormField<PhoneContact>(
-                  key: ValueKey(current.person.id),
-                  initialValue: current.selectedPhone,
-                  isExpanded: true,
-                  decoration: const InputDecoration(labelText: 'رقم الهاتف'),
-                  items: [
-                    for (final phone in current.phones)
-                      DropdownMenuItem(
-                        value: phone,
-                        child: Text(
-                          [?phone.label, phone.phone].join(' - '),
-                          textDirection: TextDirection.ltr,
+                if (current.phones.length > 1)
+                  DropdownButtonFormField<PhoneContact>(
+                    key: ValueKey(current.person.id),
+                    initialValue: current.selectedPhone,
+                    isExpanded: true,
+                    decoration: const InputDecoration(labelText: 'رقم الهاتف'),
+                    items: [
+                      for (final phone in current.phones)
+                        DropdownMenuItem(
+                          value: phone,
+                          child: Text(
+                            phone.labelledPhone,
+                            textDirection: TextDirection.ltr,
+                          ),
                         ),
-                      ),
-                  ],
-                  onChanged: current.phones.length > 1
-                      ? (phone) =>
-                            phone != null ? cubit.selectPhone(phone) : null
-                      : null,
-                ),
-                Text(state.currentMessage),
+                    ],
+                    onChanged: (phone) =>
+                        phone != null ? cubit.selectPhone(phone) : null,
+                  )
+                else if (current.selectedPhone case final phone?)
+                  Text(
+                    phone.labelledPhone,
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.end,
+                    style: theme.textTheme.bodyLarge,
+                  ),
+                MessageBubble(child: Text(state.currentMessage)),
               ],
             ),
           ),

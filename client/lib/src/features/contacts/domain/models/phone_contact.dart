@@ -12,6 +12,8 @@ class PhoneContact with Equatable {
   @JsonKey(defaultValue: false)
   final bool isMainPhone;
 
+  String get labelledPhone => [?label, phone].join(' - ');
+
   @override
   List<Object?> get props => [id, phone, label, isMainPhone];
 
