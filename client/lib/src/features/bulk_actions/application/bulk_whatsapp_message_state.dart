@@ -1,0 +1,116 @@
+import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
+import 'package:equatable/equatable.dart';
+
+sealed class BulkWhatsappMessageState with Equatable {
+  @override
+  List<Object?> get props => [];
+
+  const BulkWhatsappMessageState();
+}
+
+final class BulkWhatsappLoading extends BulkWhatsappMessageState {
+  const BulkWhatsappLoading();
+}
+
+final class BulkWhatsappLoadFailure extends BulkWhatsappMessageState {
+  final Object error;
+
+  @override
+  List<Object?> get props => [error];
+
+  const BulkWhatsappLoadFailure(this.error);
+}
+
+sealed class BulkWhatsappRun extends BulkWhatsappMessageState {
+  final List<WhatsappRecipient> recipients;
+
+  Iterable<WhatsappRecipient> get reachable =>
+      recipients.where((recipient) => recipient.hasPhone);
+
+  Iterable<WhatsappRecipient> get withoutPhone =>
+      recipients.whereNot((recipient) => recipient.hasPhone);
+
+  @override
+  List<Object?> get props => [recipients];
+
+  const BulkWhatsappRun({required this.recipients});
+
+  int countOf(WhatsappRecipientStatus status) =>
+      reachable.where((recipient) => recipient.status == status).length;
+}
+
+final class BulkWhatsappComposing extends BulkWhatsappRun {
+  final bool autoAdvance;
+
+  @override
+  List<Object?> get props => [...super.props, autoAdvance];
+
+  const BulkWhatsappComposing({
+    required super.recipients,
+    this.autoAdvance = false,
+  });
+}
+
+final class BulkWhatsappSending extends BulkWhatsappRun {
+  final MessageTemplate template;
+  final int currentIndex;
+  final bool autoAdvance;
+  final bool isAwaitingReturn;
+  final bool hasOpenFailed;
+
+  WhatsappRecipient get current => recipients[currentIndex];
+
+  String get currentMessage => template.renderFor(current.person);
+
+  int get currentPosition => recipients
+      .take(currentIndex + 1)
+      .where((recipient) => recipient.hasPhone)
+      .length;
+
+  @override
+  List<Object?> get props => [
+    ...super.props,
+    template,
+    currentIndex,
+    autoAdvance,
+    isAwaitingReturn,
+    hasOpenFailed,
+  ];
+
+  const BulkWhatsappSending({
+    required this.template,
+    required this.currentIndex,
+    required super.recipients,
+    this.autoAdvance = false,
+    this.isAwaitingReturn = false,
+    this.hasOpenFailed = false,
+  });
+
+  BulkWhatsappSending copyWith({
+    List<WhatsappRecipient>? recipients,
+    int? currentIndex,
+    bool? autoAdvance,
+    bool? isAwaitingReturn,
+    bool? hasOpenFailed,
+  }) => BulkWhatsappSending(
+    recipients: recipients ?? this.recipients,
+    template: template,
+    currentIndex: currentIndex ?? this.currentIndex,
+    autoAdvance: autoAdvance ?? this.autoAdvance,
+    isAwaitingReturn: isAwaitingReturn ?? this.isAwaitingReturn,
+    hasOpenFailed: hasOpenFailed ?? this.hasOpenFailed,
+  );
+}
+
+final class BulkWhatsappFinished extends BulkWhatsappRun {
+  final bool isStopped;
+
+  @override
+  List<Object?> get props => [...super.props, isStopped];
+
+  const BulkWhatsappFinished({
+    required super.recipients,
+    this.isStopped = false,
+  });
+}
