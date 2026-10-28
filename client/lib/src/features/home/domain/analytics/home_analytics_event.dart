@@ -164,5 +164,4 @@ enum HomeDrawerDestination {
   visitsMap,
   settings,
   about,
-  signOut,
 }
