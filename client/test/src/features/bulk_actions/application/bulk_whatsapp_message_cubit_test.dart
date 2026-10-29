@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -144,6 +146,121 @@ void main() {
     act: (cubit) => cubit.openCurrentChat(),
     verify: (_) =>
         expect(launcher.openedWhatsappChats, [chatWith(mark, markPhone)]),
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    'closing while the phones load ends quietly',
+    build: () {
+      personsDAO.phoneContactsGate = Completer();
+
+      return buildCubit();
+    },
+    act: (cubit) async {
+      final loading = cubit.load();
+      await cubit.close();
+      personsDAO.phoneContactsGate?.complete();
+      await loading;
+    },
+    expect: () => [const BulkWhatsappLoading()],
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    'closing while a failing phone load is pending ends quietly',
+    build: () {
+      personsDAO
+        ..phoneContactsGate = Completer()
+        ..phoneContactsError = Exception('offline');
+
+      return buildCubit();
+    },
+    act: (cubit) async {
+      final loading = cubit.load();
+      await cubit.close();
+      personsDAO.phoneContactsGate?.complete();
+      await loading;
+    },
+    expect: () => [const BulkWhatsappLoading()],
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    'a second tap while WhatsApp is opening does not open the chat again',
+    build: () {
+      launcher.whatsappGate = Completer();
+
+      return buildCubit();
+    },
+    seed: () => sendingTo(0),
+    act: (cubit) async {
+      final opening = cubit.openCurrentChat();
+      await cubit.openCurrentChat();
+      launcher.whatsappGate?.complete();
+      await opening;
+    },
+    verify: (_) =>
+        expect(launcher.openedWhatsappChats, [chatWith(mark, markPhone)]),
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    'skipping while WhatsApp is opening keeps the next person current',
+    build: () {
+      launcher.whatsappGate = Completer();
+
+      return buildCubit();
+    },
+    seed: () => sendingTo(0),
+    act: (cubit) async {
+      final opening = cubit.openCurrentChat();
+      cubit.skipCurrent();
+      launcher.whatsappGate?.complete();
+      await opening;
+    },
+    verify: (cubit) {
+      final state = cubit.state as BulkWhatsappSending;
+      expect(state.current.person.id, mina.id);
+      expect(state.isAwaitingReturn, isFalse);
+      expect(state.recipients.first.status, WhatsappRecipientStatus.skipped);
+    },
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    'stopping while WhatsApp is opening keeps the run finished',
+    build: () {
+      launcher.whatsappGate = Completer();
+
+      return buildCubit();
+    },
+    seed: () => sendingTo(0),
+    act: (cubit) async {
+      final opening = cubit.openCurrentChat();
+      cubit.stop();
+      launcher.whatsappGate?.complete();
+      await opening;
+    },
+    verify: (cubit) => expect(cubit.state, isA<BulkWhatsappFinished>()),
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    'a chat opened by a stopped run does not count in the next run',
+    build: () {
+      launcher.whatsappGate = Completer();
+
+      return buildCubit();
+    },
+    seed: () => sendingTo(0),
+    act: (cubit) async {
+      final opening = cubit.openCurrentChat();
+      cubit.stop();
+      await cubit.load();
+      cubit.start(template);
+      launcher.whatsappGate?.complete();
+      await opening;
+    },
+    verify: (cubit) {
+      final state = cubit.state as BulkWhatsappSending;
+      expect(state.current.person.id, mark.id);
+      expect(state.current.status, WhatsappRecipientStatus.pending);
+      expect(state.isAwaitingReturn, isFalse);
+    },
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(

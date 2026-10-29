@@ -23,6 +23,9 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   final PhoneNumberService _phoneNumberService;
   final AnalyticsService _analyticsService;
 
+  int _runId = 0;
+  bool _isOpeningChat = false;
+
   BulkWhatsappMessageCubit({
     required this._persons,
     required this._personsDAO,
@@ -38,6 +41,8 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
       final fetched = await _personsDAO.personsPhoneContacts(
         personsIds: _persons.map((person) => person.id),
       );
+      if (isClosed) return;
+
       final fetchedById = {
         for (final person in fetched ?? const <Person>[]) person.id: person,
       };
@@ -53,6 +58,8 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
         ),
       );
     } on Exception catch (error) {
+      if (isClosed) return;
+
       emit(BulkWhatsappLoadFailure(error));
     }
   }
@@ -72,6 +79,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
 
   void start(MessageTemplate template) {
     if (state case final BulkWhatsappComposing composing) {
+      _runId++;
       _showNextReachableAfter(
         -1,
         BulkWhatsappSending(
@@ -98,30 +106,32 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   }
 
   Future<void> openCurrentChat() async {
+    if (_isOpeningChat) return;
+
     if (state
         case BulkWhatsappSending(
               current: WhatsappRecipient(:final selectedPhone?),
             ) &&
             final sending) {
-      final isOpened = await _launcherService.launchWhatsappChat(
-        _phoneNumberService.formatInternational(selectedPhone.phone),
-        text: sending.currentMessage,
-      );
+      final openedRunId = _runId;
+      final bool isOpened;
 
-      emit(
-        isOpened
-            ? sending.copyWith(
-                recipients: _withCurrent(
-                  sending,
-                  sending.current.copyWith(
-                    status: WhatsappRecipientStatus.opened,
-                  ),
-                ),
-                isAwaitingReturn: true,
-                hasOpenFailed: false,
-              )
-            : sending.copyWith(hasOpenFailed: true),
-      );
+      _isOpeningChat = true;
+      try {
+        isOpened = await _launcherService.launchWhatsappChat(
+          _phoneNumberService.formatInternational(selectedPhone.phone),
+          text: sending.currentMessage,
+        );
+      } finally {
+        _isOpeningChat = false;
+      }
+
+      if (isClosed || openedRunId != _runId) return;
+
+      if (state case final BulkWhatsappSending latest
+          when latest.currentIndex == sending.currentIndex) {
+        _recordChatOpening(latest, isOpened: isOpened);
+      }
     }
   }
 
@@ -155,6 +165,22 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
       _finish(sending, isStopped: true);
     }
   }
+
+  void _recordChatOpening(
+    BulkWhatsappSending sending, {
+    required bool isOpened,
+  }) => emit(
+    isOpened
+        ? sending.copyWith(
+            recipients: _withCurrent(
+              sending,
+              sending.current.copyWith(status: WhatsappRecipientStatus.opened),
+            ),
+            isAwaitingReturn: true,
+            hasOpenFailed: false,
+          )
+        : sending.copyWith(hasOpenFailed: true),
+  );
 
   List<WhatsappRecipient> _withCurrent(
     BulkWhatsappSending sending,

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 
 class OpenedWhatsappChat {
@@ -21,6 +23,7 @@ class FakeLauncherService extends LauncherService {
   final List<OpenedWhatsappChat> openedWhatsappChats = [];
 
   bool canOpenWhatsapp = true;
+  Completer<void>? whatsappGate;
 
   @override
   Future<bool> launchCall(String fomattedPhone) async => true;
@@ -30,6 +33,7 @@ class FakeLauncherService extends LauncherService {
     if (!canOpenWhatsapp) return false;
 
     openedWhatsappChats.add(OpenedWhatsappChat(fomattedPhone, text));
+    await whatsappGate?.future;
 
     return true;
   }
