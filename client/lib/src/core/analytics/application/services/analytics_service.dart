@@ -23,8 +23,8 @@ class AnalyticsService {
   AnalyticsService(
     this.providers,
     this._loggingService, {
-    bool Function() isAnalyticsEnabled = _alwaysEnabled,
-  }) : _isAnalyticsEnabled = isAnalyticsEnabled;
+    this._isAnalyticsEnabled = _alwaysEnabled,
+  });
 
   Future<void> initialize() =>
       _forEachProvider((provider) => provider.initialize());

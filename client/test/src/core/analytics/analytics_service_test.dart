@@ -71,8 +71,8 @@ void main() {
         service
           ..track(const SignInSubmit(AuthAttemptSucceeded()))
           ..trackScreen('home');
-        await service.identify(null);
         await pumpEventQueue();
+        await service.identify(null);
 
         expect(provider.trackedEvents, isEmpty);
         expect(provider.trackedScreens, isEmpty);
