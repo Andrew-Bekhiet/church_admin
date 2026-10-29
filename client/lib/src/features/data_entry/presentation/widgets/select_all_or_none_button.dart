@@ -7,6 +7,8 @@ class SelectAllOrNoneButton extends StatelessWidget {
   final ListSelectionCubit selection;
   final ViewableObjectListController list;
 
+  List<Viewable> get _loaded => list.currentFilteredObjectsOrNull ?? const [];
+
   const SelectAllOrNoneButton({
     required this.selection,
     required this.list,
@@ -30,6 +32,4 @@ class SelectAllOrNoneButton extends StatelessWidget {
             ),
     );
   }
-
-  List<Viewable> get _loaded => list.currentFilteredObjectsOrNull ?? const [];
 }
