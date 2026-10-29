@@ -14,7 +14,7 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   final AnalyticsService _analyticsService;
 
   int _runId = 0;
-  bool _isOpeningChat = false;
+  ({int runId, int index})? _chatBeingOpened;
 
   BulkWhatsappMessageCubit({
     required this._persons,
@@ -41,8 +41,9 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
         BulkWhatsappComposing(
           recipients: _persons
               .map(
-                (person) =>
-                    WhatsappRecipient.of(fetchedById[person.id] ?? person),
+                (person) => WhatsappRecipient.of(
+                  _withFetchedContacts(person, fetchedById[person.id]),
+                ),
               )
               .toList(),
         ),
@@ -96,30 +97,31 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
   }
 
   Future<void> openCurrentChat() async {
-    if (_isOpeningChat) return;
-
     if (state
         case BulkWhatsappSending(
               current: WhatsappRecipient(:final selectedPhone?),
             ) &&
             final sending) {
-      final openedRunId = _runId;
+      final chat = (runId: _runId, index: sending.currentIndex);
+      if (_chatBeingOpened == chat) return;
+
       final bool isOpened;
 
-      _isOpeningChat = true;
+      _chatBeingOpened = chat;
       try {
         isOpened = await _tryOpenWhatsappChat(
           selectedPhone,
           sending.currentMessage,
         );
       } finally {
-        _isOpeningChat = false;
+        if (_chatBeingOpened == chat) _chatBeingOpened = null;
       }
 
-      if (isClosed || openedRunId != _runId) return;
+      if (isClosed || chat.runId != _runId) return;
 
       if (state case final BulkWhatsappSending latest
-          when latest.currentIndex == sending.currentIndex) {
+          when latest.currentIndex == chat.index &&
+              latest.current.selectedPhone == selectedPhone) {
         _recordChatOpening(latest, isOpened: isOpened);
       }
     }
@@ -155,6 +157,14 @@ class BulkWhatsappMessageCubit extends Cubit<BulkWhatsappMessageState> {
       _finish(sending, isStopped: true);
     }
   }
+
+  Person _withFetchedContacts(Person selected, Person? fetched) =>
+      fetched == null
+      ? selected
+      : selected.copyWith(
+          contacts: fetched.contacts,
+          familyContacts: fetched.familyContacts,
+        );
 
   Future<bool> _tryOpenWhatsappChat(
     PhoneContact phone,

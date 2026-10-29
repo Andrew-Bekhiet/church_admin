@@ -54,13 +54,14 @@ void main() {
     ];
   });
 
-  BulkWhatsappMessageCubit buildCubit() => BulkWhatsappMessageCubit(
-    persons: {mina, mark, peter},
-    personsDAO: personsDAO,
-    launcherService: launcher,
-    phoneNumberService: phoneNumbers,
-    analyticsService: AnalyticsService([analytics], FakeLoggingService()),
-  );
+  BulkWhatsappMessageCubit buildCubit({Set<Person>? persons}) =>
+      BulkWhatsappMessageCubit(
+        persons: persons ?? {mina, mark, peter},
+        personsDAO: personsDAO,
+        launcherService: launcher,
+        phoneNumberService: phoneNumbers,
+        analyticsService: AnalyticsService([analytics], FakeLoggingService()),
+      );
 
   BulkWhatsappSending sendingTo(int currentIndex, {bool autoAdvance = false}) =>
       BulkWhatsappSending(
@@ -96,6 +97,20 @@ void main() {
       ),
       [minaPhone, markPhone, null],
     ),
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    "loading keeps the selected persons' other details",
+    build: () => buildCubit(
+      persons: {mina.copyWith(birthdate: DateTime(2000, 1, 2))},
+    ),
+    act: (cubit) => cubit.load(),
+    verify: (cubit) {
+      final person =
+          (cubit.state as BulkWhatsappComposing).recipients.single.person;
+      expect(person.birthdate, DateTime(2000, 1, 2));
+      expect(person.contacts, [minaPhone, minaOtherPhone]);
+    },
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
@@ -236,6 +251,49 @@ void main() {
       expect(state.isAwaitingReturn, isFalse);
       expect(state.recipients.first.status, WhatsappRecipientStatus.skipped);
     },
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    'choosing another phone while WhatsApp is opening leaves it unopened',
+    build: () {
+      launcher.whatsappGate = Completer();
+
+      return buildCubit();
+    },
+    seed: () => sendingTo(1),
+    act: (cubit) async {
+      final opening = cubit.openCurrentChat();
+      cubit.selectPhone(minaOtherPhone);
+      launcher.whatsappGate?.complete();
+      await opening;
+    },
+    verify: (cubit) {
+      final state = cubit.state as BulkWhatsappSending;
+      expect(state.current.status, WhatsappRecipientStatus.pending);
+      expect(state.isAwaitingReturn, isFalse);
+    },
+  );
+
+  blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
+    "skipping while WhatsApp is opening lets the next person's chat open",
+    build: () {
+      launcher.whatsappGate = Completer();
+
+      return buildCubit();
+    },
+    seed: () => sendingTo(0),
+    act: (cubit) async {
+      final opening = cubit.openCurrentChat();
+      cubit.skipCurrent();
+      final openingNext = cubit.openCurrentChat();
+      launcher.whatsappGate?.complete();
+      await opening;
+      await openingNext;
+    },
+    verify: (_) => expect(launcher.openedWhatsappChats, [
+      chatWith(mark, markPhone),
+      chatWith(mina, minaPhone),
+    ]),
   );
 
   blocTest<BulkWhatsappMessageCubit, BulkWhatsappMessageState>(
