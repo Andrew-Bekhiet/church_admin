@@ -13,7 +13,7 @@ final class BulkActionInvoke extends BulkActionAnalyticsEvent {
   final int selectedCount;
 
   @override
-  String get objectAction => 'open';
+  String get objectAction => 'invoke';
 
   @override
   Json get properties => {

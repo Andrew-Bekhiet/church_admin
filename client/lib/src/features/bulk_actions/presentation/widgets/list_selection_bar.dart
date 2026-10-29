@@ -41,7 +41,10 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
             icon: const Icon(Symbols.close),
             onPressed: selection.endUnlessAlwaysActive,
           ),
-          title: Text('${state.selected.length} محدد'),
+          title: Text(
+            '${state.selected.length} محدد',
+            key: ListSelectionBarKeys.selectedCount,
+          ),
           actions: [
             StreamBuilder<List<Viewable>>(
               initialData: list.currentFilteredObjectsOrNull,
@@ -54,7 +57,7 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
                   key: ListSelectionBarKeys.selectAllButton,
                   areAllShownItemsSelected: state.areAllSelected(shownItems),
                   onSelectAll: () => selection.selectAll(shownItems),
-                  onSelectNone: selection.selectNone,
+                  onSelectNone: () => selection.deselectAll(shownItems),
                 );
               },
             ),
@@ -62,6 +65,7 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
               state.selected,
             ))
               IconButton(
+                key: ListSelectionBarKeys.actionButtonFor(action),
                 tooltip: action.label,
                 icon: action.icon,
                 onPressed: () => _runAction(context, action, state),
@@ -82,7 +86,20 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
     );
 
     AnalyticsService.I.track(BulkActionInvoke(action.key, applicableItems));
-    unawaited(action.run(context, applicableItems));
+    unawaited(
+      action
+          .run(context, applicableItems)
+          .catchError(
+            (Object error, StackTrace stackTrace) => LoggingService.I.error(
+              LogRecord(
+                message: 'Bulk action ${action.key} failed',
+                moduleName: '$ListSelectionBar',
+                error: error,
+                stackTrace: stackTrace,
+              ),
+            ),
+          ),
+    );
   }
 }
 
@@ -92,4 +109,10 @@ abstract final class ListSelectionBarKeys {
   static const Key selectAllButton = ValueKey(
     'List Selection Bar Select All Key',
   );
+  static const Key selectedCount = ValueKey(
+    'List Selection Bar Selected Count Key',
+  );
+
+  static Key actionButtonFor(BulkAction action) =>
+      ValueKey('List Selection Bar Action Key ${action.key}');
 }

@@ -14,10 +14,10 @@ class ListSelectionHost extends StatefulWidget {
   const ListSelectionHost({required this.child, super.key});
 
   static ListSelectionHostState? maybeOf(BuildContext context) =>
-      context.getInheritedWidgetOfExactType<_ListSelectionHostScope>()?.host;
+      context.getInheritedWidgetOfExactType<ListSelectionHostScope>()?.host;
 
   static ActiveListSelection? maybeActiveOf(BuildContext context) => context
-      .dependOnInheritedWidgetOfExactType<_ListSelectionHostScope>()
+      .dependOnInheritedWidgetOfExactType<ListSelectionHostScope>()
       ?.active;
 
   @override
@@ -57,7 +57,7 @@ class ListSelectionHostState extends State<ListSelectionHost> {
 
   @override
   Widget build(BuildContext context) =>
-      _ListSelectionHostScope(host: this, active: _active, child: widget.child);
+      ListSelectionHostScope(host: this, active: _active, child: widget.child);
 
   @override
   void dispose() {
@@ -66,17 +66,17 @@ class ListSelectionHostState extends State<ListSelectionHost> {
   }
 }
 
-class _ListSelectionHostScope extends InheritedWidget {
+class ListSelectionHostScope extends InheritedWidget {
   final ListSelectionHostState host;
   final ActiveListSelection? active;
 
-  const _ListSelectionHostScope({
+  const ListSelectionHostScope({
     required this.host,
     required this.active,
     required super.child,
   });
 
   @override
-  bool updateShouldNotify(_ListSelectionHostScope oldWidget) =>
+  bool updateShouldNotify(ListSelectionHostScope oldWidget) =>
       active != oldWidget.active;
 }

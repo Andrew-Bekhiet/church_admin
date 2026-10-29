@@ -28,7 +28,10 @@ class ShowNamesBulkAction extends BulkAction<Person> {
       showDialog<void>(
         context: context,
         builder: (context) => AlertDialog(
-          content: Text(selected.map((p) => p.name).join('، ')),
+          content: Text(
+            selected.map((p) => p.name).join('، '),
+            key: SelectionAwareAppBarTestKeys.shownNames,
+          ),
         ),
       );
 }
@@ -58,6 +61,8 @@ class TabsHeaderDelegate extends SliverPersistentHeaderDelegate {
 
 abstract final class SelectionAwareAppBarTestKeys {
   static const Key tabsHeader = ValueKey('selection-aware-tabs-header');
+  static const Key screenTitle = ValueKey('selection-aware-screen-title');
+  static const Key shownNames = ValueKey('selection-aware-shown-names');
 
   static Key itemFor(String id) => ValueKey('selection-aware-item-$id');
 }
@@ -119,7 +124,12 @@ void main() {
         onLongPress: () => config?.onLongPress?.call(item),
       ),
     );
-    final screenAppBar = AppBar(title: const Text(screenTitle));
+    final screenAppBar = AppBar(
+      title: const Text(
+        screenTitle,
+        key: SelectionAwareAppBarTestKeys.screenTitle,
+      ),
+    );
 
     await tester.pumpWidget(
       MaterialApp(
@@ -130,7 +140,10 @@ void main() {
                     slivers: [
                       const SliverAppBar(
                         pinned: true,
-                        title: Text(screenTitle),
+                        title: Text(
+                          screenTitle,
+                          key: SelectionAwareAppBarTestKeys.screenTitle,
+                        ),
                       ),
                       const SliverPersistentHeader(
                         pinned: true,
@@ -152,6 +165,13 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  String? selectedCount(WidgetTester tester) =>
+      tester.widget<Text>(find.byKey(ListSelectionBarKeys.selectedCount)).data;
+
+  String? shownNames(WidgetTester tester) => tester
+      .widget<Text>(find.byKey(SelectionAwareAppBarTestKeys.shownNames))
+      .data;
+
   void testScreen(
     String description,
     Future<void> Function(WidgetTester tester) body,
@@ -168,7 +188,10 @@ void main() {
   ) async {
     await pumpScreenListing(tester, persons);
 
-    expect(find.text(screenTitle), findsOneWidget);
+    expect(
+      find.byKey(SelectionAwareAppBarTestKeys.screenTitle),
+      findsOneWidget,
+    );
     expect(find.byKey(ListSelectionBarKeys.bar), findsNothing);
   });
 
@@ -186,14 +209,11 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.text(screenTitle), findsNothing);
       expect(
-        find.descendant(
-          of: find.byKey(ListSelectionBarKeys.bar),
-          matching: find.text('2 محدد'),
-        ),
-        findsOneWidget,
+        find.byKey(SelectionAwareAppBarTestKeys.screenTitle),
+        findsNothing,
       );
+      expect(selectedCount(tester), '2 محدد');
     },
   );
 
@@ -214,14 +234,11 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byKey(SelectionAwareAppBarTestKeys.tabsHeader), findsNothing);
+      expect(selectedCount(tester), '1 محدد');
       expect(
-        find.descendant(
-          of: find.byKey(ListSelectionBarKeys.bar),
-          matching: find.text('1 محدد'),
-        ),
+        find.byKey(SelectionAwareAppBarTestKeys.screenTitle),
         findsOneWidget,
       );
-      expect(find.text(screenTitle), findsOneWidget);
     },
   );
 
@@ -251,7 +268,10 @@ void main() {
     await tester.tap(find.byKey(ListSelectionBarKeys.closeButton));
     await tester.pumpAndSettle();
 
-    expect(find.text(screenTitle), findsOneWidget);
+    expect(
+      find.byKey(SelectionAwareAppBarTestKeys.screenTitle),
+      findsOneWidget,
+    );
     expect(find.byKey(ListSelectionBarKeys.bar), findsNothing);
     expect(
       tester.widget<ListTile>(
@@ -292,6 +312,27 @@ void main() {
     expect(selection.state.selected, isEmpty);
   });
 
+  testScreen('select none keeps the selected items a search hides', (
+    tester,
+  ) async {
+    final search = BehaviorSubject<String?>.seeded(null);
+    addTearDown(search.close);
+    await pumpScreenListing(tester, persons, search: search);
+
+    await tester.longPress(
+      find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[0].id)),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(ListSelectionBarKeys.selectAllButton));
+    await tester.pumpAndSettle();
+    search.add(persons[0].name);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(ListSelectionBarKeys.selectAllButton));
+    await tester.pumpAndSettle();
+
+    expect(selection.state.selected, unorderedEquals(persons.skip(1)));
+  });
+
   testScreen('select all selects the items a search newly shows', (
     tester,
   ) async {
@@ -322,16 +363,14 @@ void main() {
       find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[2].id)),
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.byTooltip(const ShowNamesBulkAction().label));
+    await tester.tap(
+      find.byKey(
+        ListSelectionBarKeys.actionButtonFor(const ShowNamesBulkAction()),
+      ),
+    );
     await tester.pumpAndSettle();
 
-    expect(
-      find.descendant(
-        of: find.byType(AlertDialog),
-        matching: find.text('مينا، بيتر'),
-      ),
-      findsOneWidget,
-    );
+    expect(shownNames(tester), 'مينا، بيتر');
   });
 
   testScreen('a bulk action gets the selected items in list order', (
@@ -347,16 +386,14 @@ void main() {
       find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[0].id)),
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.byTooltip(const ShowNamesBulkAction().label));
+    await tester.tap(
+      find.byKey(
+        ListSelectionBarKeys.actionButtonFor(const ShowNamesBulkAction()),
+      ),
+    );
     await tester.pumpAndSettle();
 
-    expect(
-      find.descendant(
-        of: find.byType(AlertDialog),
-        matching: find.text('مينا، بيتر'),
-      ),
-      findsOneWidget,
-    );
+    expect(shownNames(tester), 'مينا، بيتر');
   });
 
   testScreen(
@@ -368,18 +405,32 @@ void main() {
         Person(id: persons[0].id, name: 'اسم قديم'),
       );
       await tester.pumpAndSettle();
-      await tester.tap(find.byTooltip(const ShowNamesBulkAction().label));
+      await tester.tap(
+        find.byKey(
+          ListSelectionBarKeys.actionButtonFor(const ShowNamesBulkAction()),
+        ),
+      );
       await tester.pumpAndSettle();
 
-      expect(
-        find.descendant(
-          of: find.byType(AlertDialog),
-          matching: find.text(persons[0].name),
-        ),
-        findsOneWidget,
-      );
+      expect(shownNames(tester), persons[0].name);
     },
   );
+
+  testScreen('starting a selection with a long-press tracks it', (
+    tester,
+  ) async {
+    await pumpScreenListing(tester, persons);
+
+    await tester.longPress(
+      find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[0].id)),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      analytics.trackedEventsOf<ListMultiSelectOpen>().map((e) => e.name),
+      ['list:multi_select_open'],
+    );
+  });
 
   testScreen('running a bulk action tracks which action ran on how many', (
     tester,
@@ -390,7 +441,11 @@ void main() {
       find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[0].id)),
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.byTooltip(const ShowNamesBulkAction().label));
+    await tester.tap(
+      find.byKey(
+        ListSelectionBarKeys.actionButtonFor(const ShowNamesBulkAction()),
+      ),
+    );
     await tester.pumpAndSettle();
 
     expect(
@@ -398,6 +453,10 @@ void main() {
       [
         {'action': 'show_names', 'entity_type': 'person', 'selected_count': 1},
       ],
+    );
+    expect(
+      analytics.trackedEventsOf<BulkActionInvoke>().map((e) => e.name),
+      ['bulk_action:invoke'],
     );
   });
 
@@ -412,7 +471,9 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(
-        find.byTooltip(const ShowNamesBulkAction().label),
+        find.byKey(
+          ListSelectionBarKeys.actionButtonFor(const ShowNamesBulkAction()),
+        ),
         findsOneWidget,
       );
     },
@@ -432,16 +493,14 @@ void main() {
       find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[1].id)),
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.byTooltip(const ShowNamesBulkAction().label));
+    await tester.tap(
+      find.byKey(
+        ListSelectionBarKeys.actionButtonFor(const ShowNamesBulkAction()),
+      ),
+    );
     await tester.pumpAndSettle();
 
-    expect(
-      find.descendant(
-        of: find.byType(AlertDialog),
-        matching: find.text(persons[1].name),
-      ),
-      findsOneWidget,
-    );
+    expect(shownNames(tester), persons[1].name);
     expect(
       analytics.trackedEventsOf<BulkActionInvoke>().single.properties,
       containsPair('selected_count', 1),
@@ -461,7 +520,12 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(ListSelectionBarKeys.bar), findsOneWidget);
-    expect(find.byTooltip(const ShowNamesBulkAction().label), findsNothing);
+    expect(
+      find.byKey(
+        ListSelectionBarKeys.actionButtonFor(const ShowNamesBulkAction()),
+      ),
+      findsNothing,
+    );
   });
 
   testWidgets('starting a selection in a second list ends the first', (
@@ -495,7 +559,12 @@ void main() {
         home: ListSelectionHost(
           child: Scaffold(
             appBar: SelectionAwareAppBar(
-              child: AppBar(title: const Text(screenTitle)),
+              child: AppBar(
+                title: const Text(
+                  screenTitle,
+                  key: SelectionAwareAppBarTestKeys.screenTitle,
+                ),
+              ),
             ),
             body: Column(
               children: [
@@ -536,7 +605,7 @@ void main() {
 
     expect(firstSelection.state, const ListSelectionInactive());
     expect(secondSelection.state, isA<ListSelectionActive>());
-    expect(find.text('1 محدد'), findsOneWidget);
+    expect(selectedCount(tester), '1 محدد');
 
     await tester.pumpWidget(const SizedBox.shrink());
     for (final selection in [firstSelection, secondSelection]) {
@@ -558,7 +627,12 @@ void main() {
       home: ListSelectionHost(
         child: Scaffold(
           appBar: SelectionAwareAppBar(
-            child: AppBar(title: const Text(screenTitle)),
+            child: AppBar(
+              title: const Text(
+                screenTitle,
+                key: SelectionAwareAppBarTestKeys.screenTitle,
+              ),
+            ),
           ),
           body: body,
         ),
@@ -587,7 +661,10 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(ListSelectionBarKeys.bar), findsNothing);
-    expect(find.text(screenTitle), findsOneWidget);
+    expect(
+      find.byKey(SelectionAwareAppBarTestKeys.screenTitle),
+      findsOneWidget,
+    );
 
     await tester.pumpWidget(const SizedBox.shrink());
     unawaited(list.dispose());
