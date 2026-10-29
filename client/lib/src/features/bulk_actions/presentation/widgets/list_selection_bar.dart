@@ -43,10 +43,20 @@ class ListSelectionBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           title: Text('${state.selected.length} محدد'),
           actions: [
-            SelectAllOrNoneButton(
-              key: ListSelectionBarKeys.selectAllButton,
-              selection: selection,
-              list: list,
+            StreamBuilder<List<Viewable>>(
+              initialData: list.currentFilteredObjectsOrNull,
+              stream: list.filteredObjectsStream,
+              builder: (context, shownItemsSnapshot) {
+                final shownItems =
+                    shownItemsSnapshot.data ?? const <Viewable>[];
+
+                return SelectAllOrNoneButton(
+                  key: ListSelectionBarKeys.selectAllButton,
+                  areAllShownItemsSelected: state.areAllSelected(shownItems),
+                  onSelectAll: () => selection.selectAll(shownItems),
+                  onSelectNone: selection.selectNone,
+                );
+              },
             ),
             for (final action in BulkActionsRegistry.I.actionsApplicableToAnyOf(
               state.selected,

@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/mock_viewable_object_service.dart';
@@ -95,12 +96,14 @@ void main() {
     WidgetTester tester,
     List<T> items, {
     bool hasPinnedTabsHeader = false,
+    Stream<String?>? search,
   }) async {
     selection = ListSelectionCubit();
     final typedListController = ViewableObjectListController<T>(
       objectsPaginatableStream: PaginatableStream.simple(
         factory: (_) => Stream.value(PaginatableStreamResponse(data: items)),
       ),
+      filterStream: search,
     );
     listController = typedListController;
 
@@ -287,6 +290,25 @@ void main() {
 
     expect(selection.state, isA<ListSelectionActive>());
     expect(selection.state.selected, isEmpty);
+  });
+
+  testScreen('select all selects the items a search newly shows', (
+    tester,
+  ) async {
+    final search = BehaviorSubject<String?>.seeded(persons[0].name);
+    addTearDown(search.close);
+    await pumpScreenListing(tester, persons, search: search);
+
+    await tester.longPress(
+      find.byKey(SelectionAwareAppBarTestKeys.itemFor(persons[0].id)),
+    );
+    await tester.pumpAndSettle();
+    search.add(null);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(ListSelectionBarKeys.selectAllButton));
+    await tester.pumpAndSettle();
+
+    expect(selection.state.selected, unorderedEquals(persons));
   });
 
   testScreen('a bulk action runs on the selected items', (tester) async {
