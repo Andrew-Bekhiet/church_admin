@@ -75,7 +75,7 @@ void main() {
 
     expect(
       tester.widget<Text>(find.byKey(BulkWhatsappComposeViewKeys.preview)).data,
-      'كل سنة وانت طيب يا ${mark.name} 🎂',
+      'كل سنة وانت طيب يا ${mina.name} 🎂',
     );
   });
 
@@ -90,7 +90,7 @@ void main() {
 
     expect(
       tester.widget<Text>(find.byKey(BulkWhatsappComposeViewKeys.preview)).data,
-      'اهلا ${mark.name}',
+      'اهلا ${mina.name}',
     );
   });
 
@@ -113,7 +113,7 @@ void main() {
       tester
           .widget<Text>(find.byKey(BulkWhatsappQueueViewKeys.currentName))
           .data,
-      mina.name,
+      mark.name,
     );
   });
 
