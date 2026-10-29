@@ -15,10 +15,7 @@ sealed class ListSelectionState with Equatable {
   bool areAllSelected(Iterable<Viewable> items) =>
       items.isNotEmpty && items.every(selected.contains);
 
-  bool? maybeIsSelected(Viewable item) => switch (this) {
-    ListSelectionInactive() => null,
-    ListSelectionActive(:final selected) => selected.contains(item),
-  };
+  bool? maybeIsSelected(Viewable item);
 }
 
 final class ListSelectionInactive extends ListSelectionState {
@@ -26,6 +23,9 @@ final class ListSelectionInactive extends ListSelectionState {
   Set<Viewable> get selected => const {};
 
   const ListSelectionInactive();
+
+  @override
+  bool? maybeIsSelected(Viewable item) => null;
 }
 
 final class ListSelectionActive extends ListSelectionState {
@@ -34,6 +34,9 @@ final class ListSelectionActive extends ListSelectionState {
 
   ListSelectionActive(Iterable<Viewable> items)
     : selected = EqualitySet.from(_byId, items);
+
+  @override
+  bool maybeIsSelected(Viewable item) => selected.contains(item);
 
   ListSelectionActive including(Iterable<Viewable> items) =>
       ListSelectionActive([...selected, ...items]);
