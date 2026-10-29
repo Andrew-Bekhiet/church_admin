@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_ui/material_ui.dart';
@@ -7,11 +9,13 @@ class CopiablePropertyWidget extends StatelessWidget {
   final String? value;
   final bool showErrorIfEmpty;
   final List<Widget>? additionalOptions;
+  final VoidCallback? onCopied;
   const CopiablePropertyWidget(
     this.propName,
     this.value, {
     this.showErrorIfEmpty = true,
     this.additionalOptions,
+    this.onCopied,
     super.key,
   });
 
@@ -22,7 +26,10 @@ class CopiablePropertyWidget extends StatelessWidget {
       copyOrError = IconButton(
         icon: const Icon(Symbols.content_copy),
         tooltip: 'نسخ',
-        onPressed: () => Clipboard.setData(ClipboardData(text: value!)),
+        onPressed: () {
+          onCopied?.call();
+          unawaited(Clipboard.setData(ClipboardData(text: value!)));
+        },
       );
     } else if (showErrorIfEmpty) {
       copyOrError = const Tooltip(

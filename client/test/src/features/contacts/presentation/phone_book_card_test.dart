@@ -34,7 +34,12 @@ void main() {
     MaterialUiTestApp.withThemeAndLocale(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: PhoneBookCard(own: own, family: family, onCall: (_) {}),
+          child: PhoneBookCard(
+            owner: Person(id: 'owner', name: 'مالك'),
+            own: own,
+            family: family,
+            onCall: (_, {required isFamilyNumber}) {},
+          ),
         ),
       ),
     ),

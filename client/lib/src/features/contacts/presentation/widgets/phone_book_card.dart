@@ -5,10 +5,12 @@ import 'package:material_ui/material_ui.dart';
 class PhoneBookCard extends StatelessWidget {
   final List<PhoneContact> own;
   final List<FamilyPhoneContact> family;
-  final void Function(String phone) onCall;
+  final ViewableWithID owner;
+  final void Function(String phone, {required bool isFamilyNumber}) onCall;
   final void Function(String phone)? onAddToContacts;
 
   const PhoneBookCard({
+    required this.owner,
     required this.onCall,
     this.own = const [],
     this.family = const [],
@@ -52,7 +54,9 @@ class PhoneBookCard extends StatelessWidget {
                   if (contact.isMainPhone) '(أساسي)',
                 ].join(' '),
                 phones.toDisplay(contact.phone),
-                onCall,
+                (phone) => onCall(phone, isFamilyNumber: false),
+                owner: owner,
+                isFamilyNumber: false,
                 addToContacts: onAddToContacts,
               ),
             if (own.isNotEmpty && family.isNotEmpty) const Divider(),
@@ -71,7 +75,9 @@ class PhoneBookCard extends StatelessWidget {
                 key: PhoneBookCardKeys.contact(relative.contact.id),
                 relative.roleLabel,
                 phones.toDisplay(relative.contact.phone),
-                onCall,
+                (phone) => onCall(phone, isFamilyNumber: true),
+                owner: owner,
+                isFamilyNumber: true,
                 addToContacts: onAddToContacts,
               ),
           ],

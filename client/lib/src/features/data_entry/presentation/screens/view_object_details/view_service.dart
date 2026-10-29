@@ -120,6 +120,7 @@ class _ViewServiceState extends State<ViewService> {
           [
             HistoryProperty(
               name: 'أخر تحديث للبيانات',
+              trackedAs: TrackedHistory(HistoryKind.edit, service),
               value: service.lastEdit?.time,
               getHistoryListController: () => ViewableObjectListController(
                 objectsPaginatableStream: DatabaseService.I.history
@@ -138,9 +139,16 @@ class _ViewServiceState extends State<ViewService> {
                   style: Theme.of(context).largeFilledButtonStyle,
                   icon: const Icon(Symbols.productivity),
                   label: Text('تسجيل الحضور ل${defaultMeeting.name}'),
-                  onPressed: () => RecordAttendanceRoute(
-                    meeting: defaultMeeting,
-                  ).push(context),
+                  onPressed: () {
+                    AnalyticsService.I.track(
+                      EntityAttendanceRecordOpen(service),
+                    );
+                    unawaited(
+                      RecordAttendanceRoute(
+                        meeting: defaultMeeting,
+                      ).push(context),
+                    );
+                  },
                 ),
               ),
             Padding(
@@ -149,13 +157,16 @@ class _ViewServiceState extends State<ViewService> {
                 style: Theme.of(context).largeFilledButtonStyle,
                 icon: const Icon(Symbols.query_stats),
                 label: const Text('الاحصائيات'),
-                onPressed: () => unawaited(
-                  MeetingsAnalysisRoute(
-                    title: 'احصائيات ${service.name}',
-                    initialRangePreset: PastQuarterDateTimeRangePreset(),
-                    subject: ServiceAnalysisSubject(service),
-                  ).push(context),
-                ),
+                onPressed: () {
+                  AnalyticsService.I.track(EntityStatisticsOpen(service));
+                  unawaited(
+                    MeetingsAnalysisRoute(
+                      title: 'احصائيات ${service.name}',
+                      initialRangePreset: PastQuarterDateTimeRangePreset(),
+                      subject: ServiceAnalysisSubject(service),
+                    ).push(context),
+                  );
+                },
               ),
             ),
           ],
@@ -242,18 +253,39 @@ class _ViewServiceState extends State<ViewService> {
             ],
             onTap: (newIndex) {
               if (newIndex == 0) {
+                AnalyticsService.I.track(
+                  EntityRelatedCreateTap(
+                    service,
+                    AnalyticsEntityType.class$,
+                    relation: EntityRelation.child,
+                  ),
+                );
                 unawaited(
                   EditClassRoute(
                     intent: CreateClassInService(service: service),
                   ).push(context),
                 );
               } else if (newIndex == 1) {
+                AnalyticsService.I.track(
+                  EntityRelatedCreateTap(
+                    service,
+                    AnalyticsEntityType.group,
+                    relation: EntityRelation.child,
+                  ),
+                );
                 unawaited(
                   EditGroupRoute(
                     intent: CreateGroupInService(service: service),
                   ).push(context),
                 );
               } else if (newIndex == 2) {
+                AnalyticsService.I.track(
+                  EntityRelatedCreateTap(
+                    service,
+                    AnalyticsEntityType.person,
+                    relation: EntityRelation.member,
+                  ),
+                );
                 unawaited(
                   EditPersonRoute(
                     intent: CreatePersonInService(service: service),

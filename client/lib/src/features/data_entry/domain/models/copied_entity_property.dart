@@ -1,0 +1,1 @@
+enum CopiedEntityProperty { address, notes }

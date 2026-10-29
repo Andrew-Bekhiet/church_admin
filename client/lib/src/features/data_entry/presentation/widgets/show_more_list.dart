@@ -21,9 +21,11 @@ class ShowMoreList<T extends Viewable> extends StatelessWidget {
           if (items.length >= visibleItemsLimit + 1 &&
               item == items[visibleItemsLimit])
             ExpansionTile(
-              onExpansionChanged: onLoadAll != null
-                  ? (expanded) => expanded ? onLoadAll!() : null
-                  : null,
+              onExpansionChanged: (expanded) {
+                if (!expanded) return;
+
+                onLoadAll?.call();
+              },
               title: const Text('اظهار المزيد'),
               children: [
                 ViewableObjectCard(item),

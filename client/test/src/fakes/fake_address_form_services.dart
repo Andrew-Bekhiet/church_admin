@@ -5,6 +5,7 @@ import 'fake_districts_dao.dart';
 import 'fake_geocoder.dart';
 import 'fake_logging_service.dart';
 import 'fake_streets_dao.dart';
+import 'recording_analytics_provider.dart';
 
 abstract final class FakeAddressFormServices {
   static AddressFormServices withNothingToSuggest() {
@@ -25,6 +26,10 @@ abstract final class FakeAddressFormServices {
         districts: districts,
       ),
       logging: FakeLoggingService(),
+      analytics: AnalyticsService(
+        [RecordingAnalyticsProvider()],
+        FakeLoggingService(),
+      ),
     );
   }
 }

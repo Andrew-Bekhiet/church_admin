@@ -18,7 +18,10 @@ class EditPersonScreen extends StatefulWidget {
 
 class _EditPersonScreenState extends State<EditPersonScreen> {
   late final PersonFormController _form;
-  final _metadata = PersonMetadataCatalog(DatabaseService.I.metadata);
+  final _metadata = PersonMetadataCatalog(
+    DatabaseService.I.metadata,
+    AnalyticsService.I,
+  );
   late final FamilyRolesCubit _familyRoles;
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? _progressSnackBar;
 
@@ -32,10 +35,12 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
       families: databaseService.families,
       photoUploader: FunctionsPhotoUploader(FunctionsService.I),
       currentUser: AuthBloc.I.currentUserData,
+      analyticsService: AnalyticsService.I,
       addressServices: AddressFormServices.backedBy(
         databaseService,
         geocoder: Geocoder.I,
         logging: LoggingService.I,
+        analytics: AnalyticsService.I,
       ),
     );
     _familyRoles = FamilyRolesCubit(DatabaseService.I.metadata.personTypes);
@@ -220,9 +225,19 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
   }
 
   void _focusFirstInvalidField() {
-    _form.value.allFields
-        .firstWhereOrNull((field) => field.value.isInvalid)
-        ?.focus();
+    final invalidFields = _form.value.allFields
+        .where((field) => field.value.isInvalid)
+        .toList();
+    final firstInvalidField = invalidFields.firstOrNull;
+    if (firstInvalidField == null) return;
+
+    firstInvalidField.focus();
+    AnalyticsService.I.track(
+      FirstInvalidFieldFocus(
+        _form.toPerson(),
+        invalidFieldCount: invalidFields.length,
+      ),
+    );
   }
 
   void _leaveAfterSave(
@@ -263,6 +278,7 @@ class _EditPersonScreenState extends State<EditPersonScreen> {
     await DiscardChangesDialog.popAfterConfirmingDiscard(
       context,
       wasModified: _form.wasModified,
+      editedEntity: _form.toPerson,
       result: result,
     );
   }

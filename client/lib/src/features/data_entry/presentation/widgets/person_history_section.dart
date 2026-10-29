@@ -12,6 +12,7 @@ class PersonHistorySection extends StatelessWidget {
       children: [
         HistoryProperty(
           name: 'أخر تناول',
+          trackedAs: TrackedHistory(HistoryKind.kodas, person),
           value: person.lastKodas?.time,
           showTime: false,
           getHistoryListController: () => ViewableObjectListController(
@@ -27,6 +28,7 @@ class PersonHistorySection extends StatelessWidget {
         ),
         HistoryProperty(
           name: 'أخر اعتراف',
+          trackedAs: TrackedHistory(HistoryKind.confession, person),
           value: person.lastConfession?.time,
           showTime: false,
           getHistoryListController: () => ViewableObjectListController(
@@ -42,6 +44,7 @@ class PersonHistorySection extends StatelessWidget {
         const Divider(thickness: 1),
         HistoryProperty(
           name: 'أخر افتقاد',
+          trackedAs: TrackedHistory(HistoryKind.visit, person),
           value: person.lastVisit?.time,
           getHistoryListController: () => ViewableObjectListController(
             objectsPaginatableStream: DatabaseService.I.history
@@ -56,6 +59,7 @@ class PersonHistorySection extends StatelessWidget {
         ),
         HistoryProperty(
           name: 'أخر مكالمة',
+          trackedAs: TrackedHistory(HistoryKind.call, person),
           value: person.lastCall?.time,
           getHistoryListController: () => ViewableObjectListController(
             objectsPaginatableStream: DatabaseService.I.history
@@ -70,6 +74,7 @@ class PersonHistorySection extends StatelessWidget {
         ),
         HistoryProperty(
           name: 'أخر تحديث للبيانات',
+          trackedAs: TrackedHistory(HistoryKind.edit, person),
           value: person.lastEdit?.time,
           getHistoryListController: () => ViewableObjectListController(
             objectsPaginatableStream: DatabaseService.I.history

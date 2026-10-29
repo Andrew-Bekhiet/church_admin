@@ -6,12 +6,14 @@ import '../../../../fakes/fake_districts_dao.dart';
 import '../../../../fakes/fake_geocoder.dart';
 import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/fake_streets_dao.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 
 class AddressFormControllerFixture {
   final FakeGeocoder geocoder = FakeGeocoder();
   final FakeAreasDAO areas = FakeAreasDAO();
   final FakeStreetsDAO streets = FakeStreetsDAO();
   final FakeDistrictsDAO districts = FakeDistrictsDAO();
+  final RecordingAnalyticsProvider analytics = RecordingAnalyticsProvider();
 
   bool required = false;
 
@@ -32,6 +34,7 @@ class AddressFormControllerFixture {
           districts: districts,
         ),
         logging: FakeLoggingService(),
+        analytics: AnalyticsService([analytics], FakeLoggingService()),
       ),
     );
     addTearDown(() {

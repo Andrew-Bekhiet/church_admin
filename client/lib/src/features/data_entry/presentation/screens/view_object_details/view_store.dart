@@ -91,19 +91,25 @@ class _ViewStoreState extends State<ViewStore> {
           CopiablePropertyWidget(
             'العنوان والموقع',
             store.address?.toString(),
+            onCopied: () => AnalyticsService.I.track(
+              const EntityPropertyCopy(CopiedEntityProperty.address),
+            ),
             additionalOptions: [
               if (store.geolocation != null)
                 IconButton(
                   icon: const Icon(Symbols.map),
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ViewGeodataMap(
-                        initialGeomapOptions: GeomapOptions(
-                          selectedStores: {store},
+                  onPressed: () {
+                    AnalyticsService.I.track(EntityMapShow(store));
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ViewGeodataMap(
+                          initialGeomapOptions: GeomapOptions(
+                            selectedStores: {store},
+                          ),
                         ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                   tooltip: 'إظهار على الخريطة',
                 ),
             ],
@@ -131,6 +137,7 @@ class _ViewStoreState extends State<ViewStore> {
           ),
           HistoryProperty(
             name: 'أخر تحديث للبيانات',
+            trackedAs: TrackedHistory(HistoryKind.edit, store),
             value: store.lastEdit?.time,
             getHistoryListController: () => ViewableObjectListController(
               objectsPaginatableStream: DatabaseService.I.history

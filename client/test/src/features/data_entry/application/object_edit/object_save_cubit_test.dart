@@ -6,7 +6,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:image_picker/image_picker.dart' show XFile;
 
 import '../../../../fakes/fake_areas_dao.dart';
+import '../../../../fakes/fake_logging_service.dart';
 import '../../../../fakes/fake_photo_uploader.dart';
+import '../../../../fakes/recording_analytics_provider.dart';
 
 void main() {
   const storedArea = Area(id: 'shubra', name: 'شبرا');
@@ -14,6 +16,7 @@ void main() {
 
   late FakeAreasDAO areas;
   late FakePhotoUploader photos;
+  late RecordingAnalyticsProvider analytics;
   late AreaFormController form;
   late ObjectSaveOutcome<Area> outcome;
 
@@ -27,6 +30,7 @@ void main() {
       form: form,
       dao: areas,
       photoUploader: photos,
+      analyticsService: AnalyticsService([analytics], FakeLoggingService()),
     );
   }
 
@@ -36,6 +40,7 @@ void main() {
   setUp(() {
     areas = FakeAreasDAO();
     photos = FakePhotoUploader();
+    analytics = RecordingAnalyticsProvider();
   });
 
   blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
@@ -231,6 +236,124 @@ void main() {
         await deleting;
       },
       verify: (_) => expect(outcome, isA<ObjectSaveAlreadyInProgress<Area>>()),
+    );
+  });
+
+  group('tracking', () {
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'a created area is tracked as a saved creation of that area',
+      build: () => cubitEditing(const CreateBlankArea()),
+      act: (cubit) async {
+        form.name.setValue('المعادي');
+        await cubit.submit();
+      },
+      verify: (_) => expect(analytics.trackedEventsOf<ObjectSaveAttempt>(), [
+        isA<PlainObjectSaveAttempt>()
+            .having(
+              (event) => event.entityProperties,
+              'entityProperties',
+              AnalyticsEntityType.propertiesOf(areas.createdObjects.single),
+            )
+            .having((event) => event.isCreate, 'isCreate', true)
+            .having((event) => event.outcome, 'outcome', isA<ObjectSaved>()),
+      ]),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'a save whose photo failed to upload is tracked as saved without it',
+      build: () {
+        photos
+          ..uploadError = Exception('upload failed')
+          ..uploadFinished.complete();
+
+        return cubitEditingStoredArea();
+      },
+      act: (cubit) async {
+        form.photo.setValue(ReplacePhoto(newPhoto));
+        await cubit.submit();
+      },
+      verify: (_) => expect(analytics.trackedEventsOf<ObjectSaveAttempt>(), [
+        isA<PlainObjectSaveAttempt>()
+            .having((event) => event.isCreate, 'isCreate', false)
+            .having(
+              (event) => event.outcome,
+              'outcome',
+              isA<ObjectSavedButPhotoFailed>(),
+            ),
+      ]),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'an invalid form is tracked as an invalid save',
+      build: () => cubitEditing(const CreateBlankArea()),
+      act: (cubit) => cubit.submit(),
+      verify: (_) => expect(analytics.trackedEventsOf<ObjectSaveAttempt>(), [
+        isA<PlainObjectSaveAttempt>().having(
+          (event) => event.outcome,
+          'outcome',
+          isA<InvalidObject>(),
+        ),
+      ]),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'an invalid form is tracked as a save attempt, not as a save',
+      build: () => cubitEditing(const CreateBlankArea()),
+      act: (cubit) => cubit.submit(),
+      verify: (_) =>
+          expect(analytics.trackedEvents, [isA<ObjectSaveAttempt>()]),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'a refused second save is not tracked as another attempt',
+      build: () {
+        areas.saveGate = Completer<void>();
+
+        return cubitEditingStoredArea();
+      },
+      act: (cubit) async {
+        final saving = cubit.submit();
+        await cubit.submit();
+        areas.saveGate?.complete();
+        await saving;
+      },
+      verify: (_) =>
+          expect(analytics.trackedEventsOf<ObjectSaveAttempt>(), hasLength(1)),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'a deleted area is tracked as a successful delete of that area',
+      build: cubitEditingStoredArea,
+      act: (cubit) => cubit.tryDeleteSavedObject(),
+      verify: (_) => expect(analytics.trackedEventsOf<ObjectDelete>(), [
+        isA<ObjectDelete>()
+            .having(
+              (event) => event.entityProperties,
+              'entityProperties',
+              AnalyticsEntityType.propertiesOf(storedArea),
+            )
+            .having((event) => event.isSuccess, 'isSuccess', true),
+      ]),
+    );
+
+    blocTest<ObjectSaveCubit<Area>, ObjectSaveProgress>(
+      'a failed delete of an area is tracked as unsuccessful',
+      build: () {
+        areas.deleteError = Exception('offline');
+
+        return cubitEditingStoredArea();
+      },
+      act: (cubit) =>
+          cubit.tryDeleteSavedObject().catchError((Object _) => false),
+      verify: (_) => expect(analytics.trackedEventsOf<ObjectDelete>(), [
+        isA<ObjectDelete>()
+            .having(
+              (event) => event.entityProperties,
+              'entityProperties',
+              AnalyticsEntityType.propertiesOf(storedArea),
+            )
+            .having((event) => event.isSuccess, 'isSuccess', false),
+      ]),
     );
   });
 }

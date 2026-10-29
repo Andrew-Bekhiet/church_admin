@@ -7,6 +7,7 @@ class DiscardChangesDialog extends StatelessWidget {
   static Future<void> popAfterConfirmingDiscard(
     BuildContext context, {
     required bool wasModified,
+    required ViewableWithID Function() editedEntity,
     required Object? result,
   }) async {
     final navigator = Navigator.of(context);
@@ -16,12 +17,17 @@ class DiscardChangesDialog extends StatelessWidget {
       return;
     }
 
+    final entity = editedEntity();
     final discard = await showDialog<bool>(
       context: context,
       builder: (context) => const DiscardChangesDialog(),
     );
+    final isDiscarded = discard ?? false;
+    AnalyticsService.I.track(
+      DiscardPromptAnswer(entity, isDiscarded: isDiscarded),
+    );
 
-    if (discard ?? false) navigator.pop(result);
+    if (isDiscarded) navigator.pop(result);
   }
 
   @override
